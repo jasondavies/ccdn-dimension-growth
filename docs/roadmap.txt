@@ -92,6 +92,11 @@ Discharge AffineCurveBound without unproved hypotheses.
 
 Pierce integration
 ------------------
+The current 18/61 candidate needs the n=3 case, degrees 2 through 24, uniformly
+in the polynomial coefficients after an integral lattice-basis substitution.
+The Cauchy--Schwarz lattice-weight improvement is being formalized separately
+in pierce-length-bound. It does not remove the external counting obligation.
+
 Only after the full input required by the application has an unconditional
 proof and passes its axiom audit should pierce-length-bound acquire a pinned
 dependency on this repository. This repository does not resolve the separate

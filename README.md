@@ -15,8 +15,10 @@ N_aff(X, B) ≤ C(n) d³ B^(1/d) (log B + d).
 ```
 
 The constant is independent of the curve's coefficients. The project was started to supply
-the external counting theorem needed by the proposed `13/44 + ε` Pierce-length bound.
-It is not yet a usable dependency for that conclusion.
+the external counting theorem needed by the proposed `13/44 + ε` and `18/61 + ε`
+Pierce-length bounds. The latter needs ambient dimension three and degrees 2 through 24,
+uniformly after rational changes to integral lattice coordinates. This project is not
+yet a usable dependency for either conclusion.
 
 ## Build and audit
 
