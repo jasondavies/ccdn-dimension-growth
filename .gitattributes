@@ -1,0 +1,2 @@
+# Unified-diff context lines can consist of one space.
+vendor/bombieri-vaaler/*.patch -whitespace

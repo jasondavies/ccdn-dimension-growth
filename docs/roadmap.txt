@@ -1,0 +1,98 @@
+CCDN THEOREM 3: FORMAL PROOF ROADMAP
+=================================
+
+Target: N_aff(X,B) <= C(n) d^3 B^(1/d) (log B + d), uniformly in X,
+for n >= 2, integral affine curves over Q of degree d >= 1, and real B >= 1.
+
+The target remains unproved. Ordinary hypotheses on intermediate lemmas do not
+discharge these obligations. No external counting result is accepted as an axiom.
+
+Representation
+--------------
+Integer boxes use floor(B), with a proved equivalence to |x_i| <= B.
+PlaneCurveBound uses irreducible rational bivariate polynomials and totalDegree.
+AffineCurveBound uses prime ideals and eventual linear growth of the filtered
+coordinate ring. HasAffineCurveDegree I d means dim(F_M(Q[x]/I)) = d*M+c for all
+sufficiently large M. Each F_M is proved finite-dimensional and the slope is
+proved unique. The standard geometric correspondence and the principal-plane
+Hilbert-function formula still need Lean proofs.
+
+Completed prerequisite: Bombieri--Vaaler (CCDN Theorem 3.3.4)
+---------------------------------------------------------
+ArithmeticHeights.BombieriVaaler contains the small integer kernel vector theorem,
+including the gcd of maximal minors. Its 25-module dependency is vendored from
+rwst/Subspace-Theorems at 09835cb23557ae5ae0cf55a9c4ab9055f5d60338.
+It has been rebuilt on Lean/Mathlib 4.35.0. Axioms.lean audits its exported
+declarations and their transitive axiom dependencies.
+
+Completed assembly steps
+------------------------
+1. A nonzero integer coefficient vector on distinct monomials gives a nonzero
+   polynomial, with the expected degree and coefficient bounds.
+2. Evaluation-matrix kernel vectors give vanishing polynomials. Rational row
+   span transports vanishing from selected rows to the larger point set.
+3. Bombieri--Vaaler produces a small vanishing polynomial when the selected
+   evaluation rows are independent and fewer than the available monomials.
+4. A nonzero integer multiple has a leading coefficient at least as large in
+   absolute value as the factor's. The explicit strict determinant threshold
+   therefore implies nondivisibility. The threshold is NOT proved for curves.
+5. The archimedean bound |det(A*A^T)| <= s! (N*H^2)^s and monomial bounds
+   supply the upper-bound side of the determinant argument.
+6. Cauchy--Binet yields determinant divisibility from weighted factorizations
+   over any commutative ring. Repeated weights give an exponent at least
+   s^2/(2*mu)-s. For univariate integer polynomial evaluations in one residue
+   class the determinant and gcd of maximal minors are divisible by
+   p^(s*(s-1)/2). Constructing the requisite factorization from a curve's local
+   ring, and proving the geometric multiplicity bound, remain unfinished.
+7. The real inequalities eliminating coefficient height, absorbing additive
+   errors, specializing degrees 2..24, and absorbing logs are proved.
+8. Distinct prime-power divisibilities combine into a product divisor and
+   the associated logarithmic lower bound. The analytic prime-sum estimates
+   and control of bad reduction have not been proved.
+
+Next major milestone: global determinant lower bound (Proposition 3.2.6)
+------------------------------------------------------------------------
+A. Local algebra and multiplicity: Section 2, especially Lemma 2.4 and
+   Corollary 2.5. Construct the local-ring filtrations and establish the
+   p-adic determinant valuation from their graded dimensions.
+B. Aggregate residue classes (Proposition 2.6). Prove the convexity estimate
+   preserving the leading constant in the determinant exponent.
+C. Bound point counts with multiplicity over finite fields (Lemma 2.7).
+   For the plane-curve route only n=1 in the projective hypersurface argument
+   is needed, but this still requires nontrivial finite-field geometry.
+D. Bound bad primes using effective irreducibility/Noether forms (Section 3.2),
+   including Ruppert's theorem as used in Theorem 3.2.2. Prove the required
+   weighted prime-sum estimates rather than assuming them.
+E. Combine the local divisibility exponents into a lower bound for the gcd
+   of all maximal evaluation minors, retaining coefficient and degree control.
+
+Then: projective auxiliary-polynomial degree (Theorem 3.1.1)
+----------------------------------------------------------
+Prove independent-row selection and the exact Hilbert-function count for
+homogeneous polynomials modulo a principal ideal. Combine the lower bound
+with the checked small-polynomial and nondivisibility steps. Establish the
+coefficient-position reduction and controlled integer changes of coordinates.
+This route must also handle irreducible but not absolutely irreducible inputs.
+
+Then: affine plane counting (Proposition 4.2.1, Corollary 4.2.4)
+-------------------------------------------------------------
+Prove the primitive normalization, homogenization and scaling/prime selection
+arguments, including the cases of a zero constant term and small box radius.
+Prove the sharp intersection bound needed to turn an auxiliary polynomial
+into a point count. Apply the already checked coefficient-height elimination.
+Discharge PlaneCurveBound without unproved hypotheses.
+
+Then: arbitrary ambient dimension (Proposition 4.3.1)
+---------------------------------------------------
+Construct controlled integral projections preserving degree and birationality,
+bound their exceptional fibers, and formalize the non-geometrically-integral
+case. Relate the geometric degree to the target's filtered-coordinate-ring
+definition. Track the constants so they depend only on ambient dimension.
+Discharge AffineCurveBound without unproved hypotheses.
+
+Pierce integration
+------------------
+Only after the full input required by the application has an unconditional
+proof and passes its axiom audit should pierce-length-bound acquire a pinned
+dependency on this repository. This repository does not resolve the separate
+Pierce resultant, geometry, or exceptional-pattern counting obligations.

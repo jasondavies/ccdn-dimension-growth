@@ -1,0 +1,9 @@
+Affine Curve Counting
+
+This project contains work from rwst/Subspace-Theorems, by Ralf Stephan,
+licensed under Apache-2.0. The vendored transitive dependency of
+ArithmeticHeights.BombieriVaaler comes from commit
+09835cb23557ae5ae0cf55a9c4ab9055f5d60338.
+Original copyright and license notices are retained in all source files.
+Two compatibility changes for Lean/Mathlib 4.35 are recorded in
+vendor/bombieri-vaaler/lean-4.35.patch and upstream.json.
