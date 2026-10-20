@@ -2,6 +2,7 @@ module
 
 public import CCDN.TopFormDimensionGrowthAllDegrees
 public import CCDN.ProjectiveHypersurfaceDimensionGrowth
+public import CCDN.PolynomialPredicates
 
 /-! Full CCDN affine hypersurface dimension growth and its projective
 hypersurface consequence, in every degree at least five. Rational
@@ -17,8 +18,7 @@ open MvPolynomial
 theorem rational_top_form_hypersurface_dimension_growth (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (n + 3)) ℚ,
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopFormRat f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus f) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 9 * n) * B ^ (n + 1) := by
@@ -53,8 +53,8 @@ theorem absolute_projective_hypersurface_dimension_growth (n : ℕ) :
   obtain ⟨C, hC, hbound⟩ := rational_top_form_hypersurface_dimension_growth n
   refine ⟨C, hC, ?_⟩
   intro f hhom hir hd B hB
-  have htop : Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f)) := by
+  have htop : HasAbsIrreducibleTopFormRat f := by
+    dsimp only [HasAbsIrreducibleTopFormRat]
     rwa [homogeneousComponent_eq_self hhom]
   exact (Nat.cast_le.mpr (projective_count_le_affine_cone_count f hhom B)).trans
     (hbound f htop hd B hB)

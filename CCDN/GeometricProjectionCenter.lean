@@ -2,6 +2,7 @@ module
 
 public import CCDN.IndependentBirationalProjection
 public import CCDN.HomogeneousProjectionNoBasePoint
+public import CCDN.PolynomialPredicates
 
 /-! Actual rational projection centers of the required dimension, disjoint
 from the variety over extension fields and inducing finite birational maps.
@@ -21,7 +22,7 @@ lemma integerLinearForm_aeval_extension {L : Type*} [Field L] [Algebra ℚ L]
 theorem homogeneous_integer_projection_center_disjoint
     {L : Type*} [Field L] [Algebra ℚ L] [Infinite L] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (b : Fin m → Fin (n + 1) → ℤ)
     (hint : (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral)
     (x : Projectivization L (Fin (n + 1) → L))
@@ -41,7 +42,7 @@ theorem exists_geometric_birational_projection_center
     (m n : ℕ) (hmn : m + 2 ≤ n)
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
     [(I.map (map (algebraMap ℚ L))).IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ (b : Fin (m + 2) → Fin (n + 1) → ℤ)

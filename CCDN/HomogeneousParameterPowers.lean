@@ -2,6 +2,7 @@ module
 
 public import CCDN.InfinityParameterReduction
 public import Mathlib.RingTheory.Ideal.Operations
+public import CCDN.PolynomialPredicates
 
 /-! Hyperplanes with no common nonzero cone point yield balanced
 coordinate-power reductions over their original coefficient field. -/
@@ -14,7 +15,7 @@ open MvPolynomial
 theorem homogeneous_parameter_power_reduction
     {K σ τ : Type*} [Field K] [Fintype τ]
     (I : Ideal (MvPolynomial σ K))
-    (hI : ∀ f ∈ I, ∀ M, homogeneousComponent M f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : τ → MvPolynomial σ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (j : σ) (N : ℕ) (hN : 0 < N)
     (hpow : X j ^ N ∈ I ⊔ Ideal.span (Set.range a)) :
@@ -50,7 +51,7 @@ theorem exists_homogeneous_parameter_power_reductions
     {K L σ τ : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L]
     [Fintype σ] [Fintype τ]
     (I : Ideal (MvPolynomial σ K))
-    (hI : ∀ f ∈ I, ∀ M, homogeneousComponent M f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : τ → MvPolynomial σ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hzero : ∀ z ∈ MvPolynomial.zeroLocus L (I ⊔ Ideal.span (Set.range a)), z = 0) :
     ∃ N : ℕ, 0 < N ∧ ∀ j : σ, ∃ s : τ → MvPolynomial σ K,

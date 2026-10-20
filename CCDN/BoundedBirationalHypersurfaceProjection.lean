@@ -5,6 +5,7 @@ public import CCDN.LinearParameterPrimitive
 public import CCDN.HomogeneousFiniteProjectionDegree
 public import CCDN.HomogeneousProjectionEquation
 public import CCDN.HilbertProjectionDegree
+public import CCDN.PolynomialPredicates
 
 /-! An actual bounded integer linear finite birational projection of a
 homogeneous prime quotient to a hypersurface of exactly the same degree. -/
@@ -26,7 +27,7 @@ produces a homogeneous irreducible equation of exactly the original degree.
 No normalization, image equation, conductor or birationality is supplied. -/
 theorem exists_bounded_birational_hypersurface_projection
     (m k : ℕ) (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ b : Fin (m + 2) → Fin (m + 1 + k) → ℤ,
@@ -118,7 +119,7 @@ ambient number of variables. -/
 theorem exists_bounded_birational_hypersurface_projection_of_le
     (m n : ℕ) (hmn : m + 1 ≤ n)
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ b : Fin (m + 2) → Fin n → ℤ,

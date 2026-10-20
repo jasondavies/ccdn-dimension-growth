@@ -2,6 +2,7 @@ module
 
 public import CCDN.GridHypersurfaceLowerBound
 public import CCDN.DegreeDependenceNumerics
+public import CCDN.PolynomialPredicates
 
 /-! Obstructions to improving the degree factors in dimension growth.
 The lower bounds here come from explicitly constructed hypersurfaces with
@@ -16,8 +17,7 @@ open MvPolynomial Filter Asymptotics
 theorem affine_hypersurface_factor_lower_bound {n : ℕ} (hn : 3 ≤ n)
     {g : ℕ → ℝ} {C : ℝ}
     (hbound : ∀ f : MvPolynomial (Fin n) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * g f.totalDegree * B ^ (n - 2))
@@ -35,8 +35,7 @@ theorem affine_hypersurface_factor_lower_bound {n : ℕ} (hn : 3 ≤ n)
 theorem affine_hypersurface_factor_not_isLittleO {n : ℕ} (hn : 3 ≤ n)
     {g : ℕ → ℝ} {C : ℝ} (hC : 0 < C)
     (hbound : ∀ f : MvPolynomial (Fin n) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * g f.totalDegree * B ^ (n - 2)) :
@@ -133,8 +132,7 @@ the highest-degree homogeneous part. -/
 theorem affine_hypersurface_degree_exponent_ge_two {n : ℕ} (hn : 3 ≤ n)
     {e C : ℝ} (hC : 0 < C)
     (hbound : ∀ f : MvPolynomial (Fin n) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ e * B ^ (n - 2)) :

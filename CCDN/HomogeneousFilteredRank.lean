@@ -2,6 +2,7 @@ module
 
 public import CCDN.ProjectiveSection
 public import CCDN.FilteredHilbertPolynomial
+public import CCDN.PolynomialPredicates
 
 /-! For an actual homogeneous ideal, the filtered Hilbert function is the
 successive sum of its graded pieces. This is proved by splitting off the
@@ -56,7 +57,7 @@ theorem filteredCoordinateSpace_succ_eq_sup_homogeneous
 theorem filteredCoordinateSpace_disjoint_next_homogeneous
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) (N : ℕ) :
+    (hI : IsHomogeneousIdeal I) (N : ℕ) :
     Disjoint (filteredCoordinateSpace I N) (homogeneousCoordinateSpace I (N + 1)) := by
   rw [Submodule.disjoint_def]
   rintro x ⟨f, hf, rfl⟩ ⟨g, hg, he⟩
@@ -76,7 +77,7 @@ theorem filteredCoordinateSpace_disjoint_next_homogeneous
 theorem filteredCoordinateSpace_finrank_succ
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) (N : ℕ) :
+    (hI : IsHomogeneousIdeal I) (N : ℕ) :
     Module.finrank K (filteredCoordinateSpace I (N + 1)) =
       Module.finrank K (filteredCoordinateSpace I N) + projectiveHilbertFunction I (N + 1) := by
   have hh := Submodule.finrank_sup_add_finrank_inf_eq

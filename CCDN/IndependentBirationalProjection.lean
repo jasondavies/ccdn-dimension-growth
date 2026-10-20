@@ -1,6 +1,7 @@
 module
 
 public import CCDN.IndependentProjectionRows
+public import CCDN.PolynomialPredicates
 
 /-! The bounded homogeneous birational projection can always be chosen
 with independent ambient rows, including degree one. If its primitive row
@@ -18,7 +19,7 @@ m+2 independent rows. All original bounds and normalization data remain. -/
 theorem exists_independent_bounded_birational_hypersurface_projection
     (m n : ℕ) (hmn : m + 2 ≤ n)
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ b : Fin (m + 2) → Fin n → ℤ,

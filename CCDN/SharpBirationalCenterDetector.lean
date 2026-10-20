@@ -1,6 +1,7 @@
 module
 
 public import CCDN.SharpCenterResultantDetector
+public import CCDN.PolynomialPredicates
 
 /-! Sharp resultant detectors for base-field centers, with geometric
 disjointness and the actual base-field birationality conclusion. -/
@@ -28,7 +29,7 @@ theorem exists_sharp_birational_center_detector
     {K : Type*} [Field K] [CharZero K] {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2) :

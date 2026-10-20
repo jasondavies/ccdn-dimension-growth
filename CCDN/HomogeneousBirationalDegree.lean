@@ -3,6 +3,7 @@ module
 public import CCDN.HomogeneousFilteredProjection
 public import CCDN.HilbertPolynomialComparison
 public import CCDN.CoordinatePowerGeneration
+public import CCDN.PolynomialPredicates
 
 /-! A homogeneous linear projection with a nonzero conductor preserves
 Hilbert multiplicity. The conductor shifts the filtration by a fixed amount,
@@ -16,7 +17,7 @@ open MvPolynomial
 theorem conductor_filtered_finrank_le
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : σ → MvPolynomial τ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (c : MvPolynomial τ K) (hc : (Ideal.Quotient.mk I) c ≠ 0)
     (hconductor : ∀ x : MvPolynomial τ K ⧸ I, ∃ p : MvPolynomial σ K,
@@ -102,7 +103,7 @@ theorem homogeneous_projection_leadingCoeff_eq
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     [LinearOrder σ] [LinearOrder τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : σ → MvPolynomial τ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hd : (filteredHilbertPolynomial (RingHom.ker (projectionCoordinateMap I a))).natDegree =
       (filteredHilbertPolynomial I).natDegree)

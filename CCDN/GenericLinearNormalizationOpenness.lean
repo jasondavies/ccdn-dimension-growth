@@ -3,6 +3,7 @@ module
 public import CCDN.GenericHomogeneousGeneration
 public import CCDN.HomogeneousParameterCertificates
 public import CCDN.HomogeneousPrimeComponents
+public import CCDN.PolynomialPredicates
 
 /-! Finiteness of homogeneous linear parameters at one actual coefficient
 specialization implies finiteness at algebraically independent coefficients.
@@ -19,7 +20,7 @@ coordinate, since the family may have arbitrary polynomial coefficients. -/
 theorem generic_linear_projection_integral_of_specialization
     {K L σ τ : Type*} [Field K] [Field L] [Algebra K L] [Fintype τ] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hI : ∀ f ∈ I, ∀ k, homogeneousComponent k f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : τ → MvPolynomial (Fin (n + 1)) (MvPolynomial σ K))
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (c : σ → K)

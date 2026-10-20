@@ -5,6 +5,7 @@ public import CCDN.CoordinatePowerGeneration
 public import CCDN.LinearProjectionFiltration
 public import Mathlib.RingTheory.Finiteness.Basic
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+public import CCDN.PolynomialPredicates
 
 /-! Balanced coordinate-power reductions give an actual finite module
 over the polynomial algebra of the parameters, hence an integral projection. -/
@@ -102,7 +103,7 @@ theorem integral_projection_of_homogeneous_origin_fiber
     {K L σ τ : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L]
     [Fintype σ] [Fintype τ]
     (I : Ideal (MvPolynomial σ K))
-    (hI : ∀ f ∈ I, ∀ M, homogeneousComponent M f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : τ → MvPolynomial σ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hzero : ∀ z ∈ MvPolynomial.zeroLocus L (I ⊔ Ideal.span (Set.range a)), z = 0) :
     (projectionCoordinateMap I a).IsIntegral := by

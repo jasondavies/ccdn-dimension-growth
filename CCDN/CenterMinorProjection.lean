@@ -3,6 +3,7 @@ module
 public import CCDN.FiniteRowMinor
 public import CCDN.ChowLinearSpecialization
 public import Mathlib.Data.Fin.Embedding
+public import CCDN.PolynomialPredicates
 
 /-! The literal center projection from Section 5: its coordinates are the
 maximal minors obtained by adjoining the point as the first row of a center
@@ -104,7 +105,7 @@ whenever the center rows span a projective plane disjoint from that source. -/
 theorem centerMinorProjection_integral_of_disjoint
     {K : Type*} [Field K] [IsAlgClosed K] {r n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
     (hcenter : ∀ p ∈ projectiveIdealZeroLocus J,
       p.rep ∉ Submodule.span K (Set.range A.row)) :

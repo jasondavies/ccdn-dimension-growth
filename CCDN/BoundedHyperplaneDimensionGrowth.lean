@@ -2,6 +2,7 @@ module
 
 public import CCDN.IntegerGoodHyperplaneSlices
 public import CCDN.HyperplaneSliceCoordinates
+public import CCDN.PolynomialPredicates
 
 /-! A reusable bounded-hyperplane induction from surfaces to affine
 hypersurfaces in every higher dimension. The threshold and initial
@@ -18,15 +19,13 @@ the degree and one power of the box radius. -/
 theorem top_form_hypersurface_count_of_surface_bound (t e : ℕ) (ht : 1 ≤ t)
     (hbase : ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       t ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ e * B) (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (3 + n)) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       t ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (e + 9 * n) * B ^ (n + 1) := by
@@ -44,8 +43,7 @@ theorem top_form_hypersurface_count_of_surface_bound (t e : ℕ) (ht : 1 ≤ t)
     let indexEquiv : Fin (3 + n + 1) ≃ Option (Fin (3 + n)) := finSuccEquiv' 0
     let F := rename indexEquiv f
     have hFdegree : F.totalDegree = f.totalDegree := totalDegree_renameEquiv indexEquiv f
-    have hFir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent F.totalDegree F)) := integer_top_irreducible_rename indexEquiv f hir
+    have hFir : HasAbsIrreducibleTopForm F := integer_top_irreducible_rename indexEquiv f hir
     obtain ⟨D, a, g, hD, hDb, hab, hg⟩ :=
       exists_bounded_good_integer_hyperplane_slices F hFir
         (by rw [hFdegree]; omega)

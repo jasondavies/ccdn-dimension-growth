@@ -2,6 +2,7 @@ module
 
 public import CCDN.SmallDegreeSurfaceCurveCount
 public import CCDN.SurfaceDegreeOneCount
+public import CCDN.PolynomialPredicates
 
 /-! The retained part of the small-degree surface cover. Actual lines and
 nonlinear prime curves are counted together, using their common degree
@@ -28,8 +29,7 @@ theorem surface_curve_number_weight {d : ℕ} (hd : 5 ≤ d) {B : ℝ} (hB : 1 �
 theorem retained_surface_curve_union_bound :
     ∃ C : ℝ, 0 < C ∧
       ∀ (f : MvPolynomial (Fin 3) ℤ),
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       5 ≤ f.totalDegree →
       ∀ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ) (A D B : ℝ),

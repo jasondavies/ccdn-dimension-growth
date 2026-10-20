@@ -4,6 +4,7 @@ public import CCDN.HomogeneousProjectionNoBasePoint
 public import CCDN.BalancedParameterFiniteness
 public import CCDN.HomogeneousEvaluation
 public import Mathlib.FieldTheory.AlgebraicClosure
+public import CCDN.PolynomialPredicates
 
 /-! Actual homogeneous finite parameters give certificates for every
 monomial in one positive homogeneous degree. Extracting homogeneous
@@ -17,7 +18,7 @@ open MvPolynomial
 theorem integral_homogeneous_parameters_full_degree
     {K τ : Type*} [Field K] [Fintype τ] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hI : ∀ f ∈ I, ∀ k, homogeneousComponent k f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : τ → MvPolynomial (Fin (n + 1)) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral) :
     ∃ D : ℕ, 0 < D ∧ ∀ f : MvPolynomial (Fin (n + 1)) K,
@@ -63,7 +64,7 @@ theorem integral_homogeneous_parameters_full_degree
 theorem homogeneous_parameter_certificate
     {K τ : Type*} [Field K] [Fintype τ] {n D : ℕ} (hD : 0 < D)
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hI : ∀ f ∈ I, ∀ k, homogeneousComponent k f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : τ → MvPolynomial (Fin (n + 1)) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous D)
     (hmem : f ∈ I ⊔ Ideal.span (Set.range a)) :

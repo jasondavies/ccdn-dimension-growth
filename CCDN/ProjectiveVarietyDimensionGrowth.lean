@@ -2,6 +2,7 @@ module
 
 public import CCDN.ProjectiveProjectionGrowth
 public import CCDN.LinearNormalizationFiberCount
+public import CCDN.PolynomialPredicates
 
 /-! Dimension growth for actual homogeneous prime ideals of positive
 projective dimension. Normalization, primitive projection, exact image degree,
@@ -18,7 +19,7 @@ the coordinate ring and contain no supplied projection or counting theorem. -/
 theorem projective_variety_dimension_growth (m k : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (m + k + 2)) ℚ), I.IsPrime →
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) →
+      IsHomogeneousIdeal I →
       ∀ d : ℕ, 5 ≤ d →
       (filteredHilbertPolynomial I).natDegree = m + 2 →
       (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 2).factorial →

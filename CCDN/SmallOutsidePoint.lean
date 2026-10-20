@@ -5,6 +5,7 @@ public import CCDN.GridPointInterpolation
 public import CCDN.IntegerPolynomialAvoidance
 public import CCDN.ProjectiveIntegerHeight
 public import CCDN.ProjectiveSection
+public import CCDN.PolynomialPredicates
 
 /-! CCDN Corollary 4.1.2: actual integer points outside a proper irreducible
 affine variety, with coordinates bounded by its Hilbert degree, and the
@@ -123,7 +124,7 @@ theorem exists_small_integer_point_outside_prime_ideal
 
 lemma homogeneous_ideal_eval_zero {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (hproper : I ≠ ⊤)
-    (hhom : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hhom : IsHomogeneousIdeal I)
     (f : MvPolynomial σ K) (hf : f ∈ I) : eval (0 : σ → K) f = 0 := by
   have hcI : C (f.coeff 0) ∈ I := by
     simpa only [homogeneousComponent_zero] using hhom f hf 0
@@ -142,7 +143,7 @@ projective nonmembership over that field occur in the conclusion. -/
 theorem exists_small_projective_integer_representative_outside
     {K : Type*} [Field K] [CharZero K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
-    (hhom : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hhom : IsHomogeneousIdeal I)
     (d : ℕ)
     (hcodim : (filteredHilbertPolynomial I).natDegree < n + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff =
@@ -178,7 +179,7 @@ theorem exists_small_projective_integer_representative_outside
 homogeneous prime ideals, using the actual projective height. -/
 theorem exists_small_rational_projective_point_outside_prime_ideal
     {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
-    (hhom : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hhom : IsHomogeneousIdeal I)
     (d : ℕ)
     (hcodim : (filteredHilbertPolynomial I).natDegree < n + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff =

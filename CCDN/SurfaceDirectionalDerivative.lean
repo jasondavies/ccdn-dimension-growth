@@ -7,6 +7,7 @@ public import CCDN.PlaneSingularities
 public import CCDN.AffineLineLeading
 public import CCDN.TopFormIrreducibility
 public import CCDN.SurfaceLineDirections
+public import CCDN.PolynomialPredicates
 
 /-! Directional derivatives of surfaces with absolutely irreducible top form. -/
 
@@ -212,8 +213,7 @@ theorem top_irreducible_directionalDerivative_ne_zero
 
 theorem surface_directionalDerivative_ne_zero
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f))) (hd : 2 ≤ f.totalDegree)
+    (hir : HasAbsIrreducibleTopForm f) (hd : 2 ≤ f.totalDegree)
     (v : Fin 3 → ℚ) (hv : v ≠ 0) :
     directionalDerivative v (map (Int.castRingHom ℚ) f) ≠ 0 := by
   apply top_irreducible_directionalDerivative_ne_zero (algebraMap ℚ (AlgebraicClosure ℚ))

@@ -2,6 +2,7 @@ module
 
 public import CCDN.TopFormSurfaceComponents
 public import CCDN.SurfaceNonlinearCount
+public import CCDN.PolynomialPredicates
 
 /-! For an actual auxiliary section of a surface of degree at least sixteen,
 all nonlinear components together contribute O(d^18 B) bounded integer points.
@@ -18,8 +19,7 @@ constant precedes the surface equation, its coefficients, and the box radius. -/
 theorem top_form_surface_nonlinear_count :
     ∃ A : ℝ, 0 < A ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       16 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       ∃ S : Finset (Ideal (CoordinatePolynomial 3)),
         ∃ δ : Ideal (CoordinatePolynomial 3) → ℕ,

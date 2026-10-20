@@ -2,6 +2,7 @@ module
 
 public import CCDN.CenterNoetherForms
 public import CCDN.CenterChowCriterion
+public import CCDN.PolynomialPredicates
 
 /-! A finite detector on actual Plücker coordinates, constructed from the
 source variety. It detects nonzero irreducible Chow restrictions, forces
@@ -19,7 +20,7 @@ For D at least two the homogeneous detector degree is exactly D(D^2-1). -/
 theorem exists_geometric_center_chow_detector
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hr : r + 2 ≤ n + 2) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)

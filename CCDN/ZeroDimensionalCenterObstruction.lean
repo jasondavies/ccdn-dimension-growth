@@ -1,6 +1,7 @@
 module
 
 public import CCDN.OriginProjectivePoint
+public import CCDN.PolynomialPredicates
 
 /-! The strict degree bound in the literal CCDN Lemma 5.2 fails at
 dimension zero and degree one. A point in P² is a geometrically integral
@@ -54,7 +55,7 @@ condition fails the asserted defining-equation bound. For point centers
 in P², the Plucker coordinates are the original projective coordinates. -/
 theorem zero_dimensional_center_degree_bound_obstruction :
     ∃ I : Ideal (CoordinatePolynomial 3), I.IsPrime ∧
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) ∧
+      IsHomogeneousIdeal I ∧
       (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime ∧
       (filteredHilbertPolynomial I).natDegree = 1 ∧
       (filteredHilbertPolynomial I).leadingCoeff = 1 ∧
@@ -79,7 +80,7 @@ theorem zero_dimensional_center_degree_bound_obstruction :
 the Plucker embedding, without identifying its coordinate index with Fin 3. -/
 theorem zero_dimensional_plucker_degree_bound_obstruction :
     ∃ I : Ideal (CoordinatePolynomial 3), I.IsPrime ∧
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) ∧
+      IsHomogeneousIdeal I ∧
       (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime ∧
       (filteredHilbertPolynomial I).natDegree = 1 ∧
       (filteredHilbertPolynomial I).leadingCoeff = 1 ∧

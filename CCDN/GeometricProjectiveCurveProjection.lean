@@ -4,6 +4,7 @@ public import CCDN.GeometricCurveCountReduction
 public import CCDN.HomogeneousCurveHilbert
 public import CCDN.HilbertCoordinateIndependence
 public import CCDN.ProjectivePermutation
+public import CCDN.PolynomialPredicates
 
 /-! Choosing a proper coordinate chart internally closes the geometric
 projective-curve projection statement, uniformly for all heights. The
@@ -68,7 +69,7 @@ theorem exists_geometric_projective_curve_projection
     {L : Type*} [Field L] [Algebra ℚ L] {n d : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]
     [(I.map (map (algebraMap ℚ L))).IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (hd : 0 < d) (hdim : (filteredHilbertPolynomial I).natDegree = 2)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / 2) :
     ∃ (e : Equiv.Perm (Fin (n + 1))) (k₀ k₁ : ℕ) (f : MvPolynomial (Fin 2) ℚ),

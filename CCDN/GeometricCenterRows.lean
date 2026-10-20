@@ -2,6 +2,7 @@ module
 
 public import CCDN.GeometricProjectionCenter
 public import CCDN.ChowProjectionBaseChange
+public import CCDN.PolynomialPredicates
 
 /-! Actual rational row matrices for the constructed geometric projection
 center. The rows form a basis of the kernel, and their scalar extension
@@ -49,7 +50,7 @@ theorem exists_geometric_center_row_witness
     (m n : ℕ) (hmn : m + 2 ≤ n)
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
     [(I.map (map (algebraMap ℚ L))).IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ (b : Fin (m + 2) → Fin (n + 1) → ℤ)

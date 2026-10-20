@@ -4,6 +4,7 @@ public import CCDN.SurfaceSmallCurveCover
 public import CCDN.SurfaceRetainedCurveCount
 public import CCDN.SurfaceResidueLinearCount
 public import CCDN.SurfaceCoefficientReduction
+public import CCDN.PolynomialPredicates
 
 /-! A coefficient-uniform linear bound for primitive affine surface
 polynomials of each fixed degree at least five. The argument constructs
@@ -20,8 +21,7 @@ radius. Absolute irreducibility is required only of the leading form. -/
 theorem primitive_surface_fixed_degree_linear_bound (d : ℕ) (hd : 5 ≤ d) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ, PrimitiveIntegerPolynomial f →
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       f.totalDegree = d → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤ C * B := by
   let K := surfaceCoefficientLogConstant d

@@ -3,6 +3,7 @@ module
 public import CCDN.RationalSurfaceSalbergerCover
 public import CCDN.ProjectiveClosureDegree
 public import CCDN.HomogeneousChartIrreducible
+public import CCDN.PolynomialPredicates
 
 /-! Salberger's surface cover on the standard projective affine chart.
 Every returned curve is an actual homogeneous geometrically prime ideal;
@@ -40,7 +41,7 @@ theorem projective_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
       ∃ (S : Finset (Ideal (CoordinatePolynomial 4)))
         (δ : Ideal (CoordinatePolynomial 4) → ℕ),
         (∀ J ∈ S, J.IsPrime ∧
-          (∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J) ∧
+          IsHomogeneousIdeal J ∧
           (J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime ∧
           F ∈ J ∧ X 0 ∉ J ∧ 0 < δ J ∧ HasProjectiveCurveDegree J (δ J) ∧ δ J ≤ d ^ 2) ∧
         (S.card : ℝ) ≤ C * (B ^ (1 / Real.sqrt (d : ℝ)) * Real.log B + 1) ∧

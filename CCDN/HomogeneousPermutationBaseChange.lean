@@ -2,6 +2,7 @@ module
 
 public import CCDN.ProjectiveIncidencePermutation
 public import CCDN.ProjectiveChartScalarExtension
+public import CCDN.PolynomialPredicates
 
 /-! Homogeneous ideals and coordinate permutations commute with scalar
 extension, so choosing a nonempty chart preserves geometric primeness. -/
@@ -14,7 +15,7 @@ open MvPolynomial
 theorem homogeneous_ideal_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (J : Ideal (MvPolynomial (Fin n) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J) :
+    (hJ : IsHomogeneousIdeal J) :
     ∀ f ∈ J.map (map (algebraMap K L)), ∀ M,
       homogeneousComponent M f ∈ J.map (map (algebraMap K L)) := by
   intro f hf M

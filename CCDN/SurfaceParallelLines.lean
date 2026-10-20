@@ -4,6 +4,7 @@ public import CCDN.SurfaceTransversePlane
 public import CCDN.IntegralAffineLine
 public import CCDN.Bezout
 public import CCDN.SurfaceDirectionalDerivative
+public import CCDN.PolynomialPredicates
 
 /-! A transverse plane injects distinct parallel lines on a surface into
 the common zeros of two proper plane equations. The second equation will
@@ -108,8 +109,7 @@ distinct lines in any prescribed nonzero rational direction. The directional
 derivative and the transverse plane are constructed inside the proof. -/
 theorem surface_parallel_lines_card_le
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f)))
+    (hir : HasAbsIrreducibleTopForm f)
     (hd : 2 ≤ f.totalDegree)
     (v : RatPoint 3) (hv : v ≠ 0)
     (S : Finset (Set (RatPoint 3)))

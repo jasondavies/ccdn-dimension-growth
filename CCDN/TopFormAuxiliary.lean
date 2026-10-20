@@ -2,6 +2,7 @@ module
 
 public import CCDN.TopFormAuxiliaryEstimate
 public import CCDN.TopFormBadPrimes
+public import CCDN.PolynomialPredicates
 
 /-! A coefficient-uniform auxiliary for an affine hypersurface with absolutely
 irreducible leading form. This is the dimension-general form of CCDN (4-3-1). -/
@@ -23,8 +24,7 @@ lemma topFormAuxiliaryConstant_pos (n : ℕ) : 0 < topFormAuxiliaryConstant n :=
 
 theorem primitive_top_form_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f)))
+    (hir : HasAbsIrreducibleTopForm f)
     {B : ℝ} (hB : 1 ≤ B) :
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
       (g.totalDegree : ℝ) ≤ topFormAuxiliaryConstant n *
@@ -63,8 +63,7 @@ homogeneous component is absolutely irreducible. Integer content is removed
 inside the proof; the final constant depends only on ambient dimension. -/
 theorem top_form_auxiliary_rational {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f)))
+    (hir : HasAbsIrreducibleTopForm f)
     {B : ℝ} (hB : 1 ≤ B) :
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧
       ¬ map (Int.castRingHom ℚ) f ∣ map (Int.castRingHom ℚ) g ∧
@@ -89,8 +88,7 @@ theorem top_form_auxiliary_rational {n : ℕ}
 /-- The integer-divisibility version of the rationally proper auxiliary. -/
 theorem top_form_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f)))
+    (hir : HasAbsIrreducibleTopForm f)
     {B : ℝ} (hB : 1 ≤ B) :
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
       (g.totalDegree : ℝ) ≤ topFormAuxiliaryConstant n *

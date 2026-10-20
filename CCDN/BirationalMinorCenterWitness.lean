@@ -3,6 +3,7 @@ module
 public import CCDN.GeometricCenterRows
 public import CCDN.FixedCoordinateCenterRows
 public import CCDN.MatrixProjectionFields
+public import CCDN.PolynomialPredicates
 
 /-! Constructed good centers for the literal maximal-minor projection.
 Equal kernels transfer both integrality and the actual generated function
@@ -18,7 +19,7 @@ theorem exists_birational_minor_center
     (m n : ℕ) (hmn : m + 2 ≤ n)
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
     [(I.map (map (algebraMap ℚ L))).IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ (A : Matrix (Fin (n - m - 1)) (Fin (n + 1)) ℚ) (s : ℕ)

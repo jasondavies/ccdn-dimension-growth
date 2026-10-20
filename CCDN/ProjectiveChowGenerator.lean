@@ -2,6 +2,7 @@ module
 
 public import CCDN.ProjectiveChowEquation
 public import CCDN.ProjectiveClosureRecovery
+public import CCDN.PolynomialPredicates
 
 /-! An irreducible equation with the exact projective incidence criterion
 is a generator of the actual chart incidence ideal. This lets degree
@@ -31,7 +32,7 @@ theorem chowIncidenceIdeal_eq_span_of_projective_equation
 theorem chowIncidenceIdeal_chart_eq_span_of_projective_equation
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hX : X 0 ∉ J)
     (F : MvPolynomial (Fin r × Fin (n + 1)) K) (hF : Irreducible F)
     (hzero : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus r J) :

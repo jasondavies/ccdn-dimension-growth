@@ -2,6 +2,7 @@ module
 
 public import CCDN.IdealScalarDescent
 public import Mathlib.RingTheory.GradedAlgebra.Radical
+public import CCDN.PolynomialPredicates
 
 /-! Homogeneity survives coefficient extension and passage to actual
 minimal-prime components. The latter uses the prime homogeneous core. -/
@@ -23,7 +24,7 @@ lemma coefficientLinearPolynomial_homogeneousComponent
 theorem scalar_extension_ideal_homogeneous
     {k K : Type*} [Field k] [Field K] [Algebra k K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) k))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) :
+    (hI : IsHomogeneousIdeal I) :
     ∀ f ∈ I.map (map (algebraMap k K)), ∀ N,
       homogeneousComponent N f ∈ I.map (map (algebraMap k K)) := by
   intro f hf N
@@ -36,9 +37,9 @@ theorem scalar_extension_ideal_homogeneous
 theorem minimal_prime_ideal_homogeneous
     {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (P : Ideal (MvPolynomial σ K)) (hP : P ∈ I.minimalPrimes) :
-    ∀ f ∈ P, ∀ N, homogeneousComponent N f ∈ P := by
+    IsHomogeneousIdeal P := by
   classical
   let := MvPolynomial.gradedAlgebra (σ := σ) (R := K)
   let G := homogeneousSubmodule σ K

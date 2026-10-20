@@ -1,6 +1,7 @@
 module
 
 public import CCDN.ProjectiveVarietyDimensionGrowth
+public import CCDN.PolynomialPredicates
 
 /-! Constants uniform in the ambient projective space. A finite maximum
 over dimensions and codimensions removes all dependence on the variety. -/
@@ -29,7 +30,7 @@ theorem projective_variety_dimension_growth_uniform_indices (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ m k : ℕ, m + k + 1 = n →
       ∀ I : Ideal (MvPolynomial (Fin (m + k + 2)) ℚ), I.IsPrime →
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) →
+      IsHomogeneousIdeal I →
       ∀ d : ℕ, 5 ≤ d →
       (filteredHilbertPolynomial I).natDegree = m + 2 →
       (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 2).factorial →
@@ -70,7 +71,7 @@ projective space. The height exponent is the actual projective dimension. -/
 theorem projective_variety_dimension_growth_uniform (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) →
+      IsHomogeneousIdeal I →
       2 ≤ (filteredHilbertPolynomial I).natDegree →
       ∀ d : ℕ, 5 ≤ d →
       (filteredHilbertPolynomial I).leadingCoeff =

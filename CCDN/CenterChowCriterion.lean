@@ -2,6 +2,7 @@ module
 
 public import CCDN.UniversalCenterChowRestriction
 public import CCDN.ChowProjectionCriterion
+public import CCDN.PolynomialPredicates
 
 /-! The actual Chow restriction for centers represented by independent rows.
 A source equation and its universal Plücker coefficient family are constructed
@@ -20,7 +21,7 @@ Neither an image equation, a chart, nor an equality of zero loci is supplied. -/
 theorem exists_center_chow_restriction
     {K : Type*} [Field K] [IsAlgClosed K] {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hr : r + 2 ≤ n + 2) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)

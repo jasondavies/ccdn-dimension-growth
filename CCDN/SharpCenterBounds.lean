@@ -1,6 +1,7 @@
 module
 
 public import CCDN.ZeroDimensionalGoodCenter
+public import CCDN.PolynomialPredicates
 
 /-! Numerical bounds for the row-resultant good-center detector. Its degree
 D(2d-1) is strictly smaller than D^2 in positive projective dimension; the
@@ -48,7 +49,7 @@ lemma geometric_projective_multiplicity_boundary
     {K : Type*} [Field K] [CharZero K] {n m d : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (MvPolynomial.map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, MvPolynomial.homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     1 ≤ m ∨ d = 1 := by

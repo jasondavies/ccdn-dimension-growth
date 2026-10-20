@@ -2,6 +2,7 @@ module
 
 public import CCDN.LinearProjectionFiltration
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import CCDN.PolynomialPredicates
 
 /-! A linear homogeneous projection of a homogeneous quotient is strict
 for the total-degree filtration: any image element of bounded degree has a
@@ -65,7 +66,7 @@ on an ideal; it suffices for strictness of the projection filtration. -/
 theorem homogeneous_projection_filtered_lift
     {K σ τ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial τ K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : σ → MvPolynomial τ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (p : MvPolynomial σ K) (N : ℕ)
     (hp : projectionCoordinateMap I a p ∈ filteredCoordinateSpace I N) :

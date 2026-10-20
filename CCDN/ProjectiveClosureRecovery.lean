@@ -1,6 +1,7 @@
 module
 
 public import CCDN.ProjectiveClosureHilbertPolynomial
+public import CCDN.PolynomialPredicates
 
 /-! A nonempty standard chart recovers its actual homogeneous prime ideal
 by projective closure. Its affine Hilbert dimension and multiplicity follow
@@ -30,7 +31,7 @@ lemma homogeneous_mem_projectiveChartIdeal_iff
 theorem projectiveClosureIdeal_chartIdeal_eq
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (hX : X 0 ∉ I) :
     projectiveClosureIdeal (projectiveChartIdeal I) = I := by
   classical
@@ -47,7 +48,7 @@ theorem projectiveClosureIdeal_chartIdeal_eq
 theorem projectiveChartIdeal_hilbertPolynomial_parameters
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (hX : X 0 ∉ I) (m d : ℕ)
     (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :

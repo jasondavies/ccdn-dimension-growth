@@ -3,6 +3,7 @@ module
 public import CCDN.BirationalCenterExtensionWitness
 public import CCDN.BirationalCenterPluckerTopology
 public import CCDN.SharpCenterBounds
+public import CCDN.PolynomialPredicates
 
 /-! Sharp homogeneous equations for the complement of the actual good-center
 locus in Pluecker coordinates, including coefficient-field extension. -/
@@ -74,7 +75,7 @@ theorem exists_sharp_birational_center_plucker_equations
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2) :
@@ -110,7 +111,7 @@ theorem exists_dense_open_sharp_projective_center_plucker_equations
     (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     letI : (J.map (map (algebraMap ℚ L))).IsPrime :=

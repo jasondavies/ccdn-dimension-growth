@@ -2,6 +2,7 @@ module
 
 public import CCDN.CenterSubspaceQuotient
 public import CCDN.BirationalCenterDensity
+public import CCDN.PolynomialPredicates
 
 /-! The actual birational-center condition depends only on the row span.
 It therefore defines a dense open set of actual center subspaces with the
@@ -88,7 +89,7 @@ theorem birationalCenterSubspaceLocus_isOpen
     {K : Type*} [Field K] [CharZero K] {n m r s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2)
@@ -102,7 +103,7 @@ theorem birationalCenterSubspaceLocus_dense_open
     {n m s : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :

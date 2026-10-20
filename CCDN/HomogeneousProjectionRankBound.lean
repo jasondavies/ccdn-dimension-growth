@@ -3,6 +3,7 @@ module
 public import CCDN.ProjectionImageFractionField
 public import CCDN.HomogeneousNormalizationRank
 public import CCDN.LinearNormalizationInfinite
+public import CCDN.PolynomialPredicates
 
 /-! A finite homogeneous linear projection has function-field degree at most
 the quotient of source and image multiplicities. A finite independent linear
@@ -22,7 +23,7 @@ theorem homogeneous_projection_functionField_rank_bound
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
     [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
     [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : Fin s → MvPolynomial (Fin n) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
     (d e : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)

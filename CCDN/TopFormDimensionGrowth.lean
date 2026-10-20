@@ -2,6 +2,7 @@ module
 
 public import CCDN.TopFormSurfaceCount
 public import CCDN.BoundedHyperplaneDimensionGrowth
+public import CCDN.PolynomialPredicates
 
 /-! Large-degree affine dimension growth in every ambient dimension at
 least three. The surface estimate supplies degree exponent eighteen;
@@ -16,8 +17,7 @@ open MvPolynomial
 theorem top_form_hypersurface_count_large_degree_add (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (3 + n)) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       16 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 9 * n) * B ^ (n + 1) := by
@@ -32,8 +32,7 @@ is supplied by the caller. -/
 theorem top_form_hypersurface_count_large_degree (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (n + 3)) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       16 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 9 * n) * B ^ (n + 1) := by

@@ -2,6 +2,7 @@ module
 
 public import CCDN.GeometricCenterNoetherForms
 public import CCDN.ChowRestrictionBirational
+public import CCDN.PolynomialPredicates
 
 /-! Actual good centers are detected by a finite family of homogeneous
 polynomials in maximal minors. The degree comes from the proved Noether-form
@@ -19,7 +20,7 @@ theorem exists_birational_center_detector
     {K : Type*} [Field K] [CharZero K] {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2) :

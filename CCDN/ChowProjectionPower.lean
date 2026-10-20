@@ -3,6 +3,7 @@ module
 public import CCDN.ChowLinearSpecialization
 public import CCDN.ChowPolynomialPower
 public import CCDN.IntegralProjectionHilbert
+public import CCDN.PolynomialPredicates
 
 /-! The geometric power criterion for the actual restriction of a Chow
 incidence equation along a linear projection. Meeting the center forces the
@@ -50,7 +51,7 @@ its disjoint center, rather than supplied as an equality of zero loci. -/
 theorem chowLinearSubstitution_same_zeros_as_image
     {K : Type*} [Field K] [IsAlgClosed K] {n s r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
     (hcenter : ∀ p ∈ projectiveIdealZeroLocus J, A *ᵥ p.rep ≠ 0)
     (F : MvPolynomial (Fin r × Fin (n + 1)) K)
@@ -69,7 +70,7 @@ supplied. The absence of a degree formula is intentional at this stage. -/
 theorem exists_chow_projection_power_with_charts
     {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hX : X 0 ∉ J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)

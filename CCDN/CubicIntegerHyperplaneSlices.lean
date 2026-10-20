@@ -2,6 +2,7 @@ module
 
 public import CCDN.CubicGoodHyperplane
 public import CCDN.IntegerGoodHyperplaneSlices
+public import CCDN.PolynomialPredicates
 
 /-! Integer equations for every parallel level of a good hyperplane whose
 normal has cubic degree height. -/
@@ -13,8 +14,7 @@ open MvPolynomial
 
 theorem exists_cubic_good_integer_hyperplane_slices {n : ℕ}
     (f : MvPolynomial (Option (Fin (3 + n))) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f))) (hd : 2 ≤ f.totalDegree) :
+    (hir : HasAbsIrreducibleTopForm f) (hd : 2 ≤ f.totalDegree) :
     ∃ (D : ℤ) (a : Fin (3 + n) → ℤ) (g : ℤ → MvPolynomial (Fin (3 + n)) ℤ),
       D ≠ 0 ∧ |D| ≤ (f.totalDegree ^ 3 : ℕ) ∧
       (∀ i, |a i| ≤ (f.totalDegree ^ 3 : ℕ)) ∧

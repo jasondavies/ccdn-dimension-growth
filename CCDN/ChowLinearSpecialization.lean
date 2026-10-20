@@ -5,6 +5,7 @@ public import CCDN.IntegralProjectionImage
 public import CCDN.HomogeneousProjectionNoBasePoint
 public import CCDN.HomogeneousProjectionEquation
 public import CCDN.BalancedParameterFiniteness
+public import CCDN.PolynomialPredicates
 
 /-! Linear pullback of hyperplane tuples and actual image incidence under a
 projection with center disjoint from the source. Integrality and lifting of
@@ -73,7 +74,7 @@ def chowProjectionImageIdeal {K : Type*} [Field K] {n s : ℕ}
 
 lemma chowProjectionImageIdeal_homogeneous {K : Type*} [Field K] {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) :
     ∀ f ∈ chowProjectionImageIdeal J A, ∀ M,
       homogeneousComponent M f ∈ chowProjectionImageIdeal J A :=
@@ -84,7 +85,7 @@ not an extra finiteness hypothesis. -/
 theorem chow_projection_integral_of_center_disjoint
     {K : Type*} [Field K] [IsAlgClosed K] {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
     (hcenter : ∀ p ∈ projectiveIdealZeroLocus J, A *ᵥ p.rep ≠ 0) :
     (projectionCoordinateMap J (chowProjectionForms A)).IsIntegral := by
@@ -140,7 +141,7 @@ integrality and point lifting are proved from that assumption. -/
 theorem chow_projection_incidence_iff
     {K : Type*} [Field K] [IsAlgClosed K] {n s r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
     (hcenter : ∀ p ∈ projectiveIdealZeroLocus J, A *ᵥ p.rep ≠ 0)
     (U : Fin r × Fin (s + 1) → K) :

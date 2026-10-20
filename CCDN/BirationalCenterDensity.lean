@@ -1,6 +1,7 @@
 module
 
 public import CCDN.BirationalCenterLocus
+public import CCDN.PolynomialPredicates
 
 /-! The complete geometrically disjoint birational-center locus is Zariski
 open. For a rational geometric projective variety in the stated ambient
@@ -16,7 +17,7 @@ theorem birationalMatrixCenterLocus_isOpen
     {K : Type*} [Field K] [CharZero K] {n m r s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2)
@@ -49,7 +50,7 @@ theorem birationalMatrixCenterLocus_dense
     {n m s : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :
@@ -75,7 +76,7 @@ theorem birationalMatrixCenterLocus_dense_open
     {n m s : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :

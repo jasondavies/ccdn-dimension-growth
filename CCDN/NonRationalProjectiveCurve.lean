@@ -4,6 +4,7 @@ public import CCDN.HomogeneousCurveHilbert
 public import CCDN.HomogeneousPrimeComponents
 public import CCDN.ProjectiveCoefficientExtension
 public import CCDN.TopFormIrreducibility
+public import CCDN.PolynomialPredicates
 
 /-! Height-independent quadratic-degree bounds for the projective curve
 cases of CCDN 4.1.5. Homogeneous separators and all scalar-extension point
@@ -29,7 +30,7 @@ lemma exists_homogeneous_component_not_mem
 theorem non_rational_projective_curve_count_le_degree_sq
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = 2)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / 2)
     (hundef : ¬ ∃ J : Ideal (CoordinatePolynomial (n + 1)),
@@ -49,7 +50,7 @@ theorem non_rational_projective_curve_count_le_degree_sq
   have hpoly : filteredHilbertPolynomial J = filteredHilbertPolynomial I :=
     filteredHilbertPolynomial_coefficientEquiv I γ.toRingEquiv
   have hJdim : (filteredHilbertPolynomial J).natDegree = 2 := by rwa [hpoly]
-  have hJhom : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J := by
+  have hJhom : IsHomogeneousIdeal J := by
     intro f hf N
     rw [hJmap] at hf ⊢
     obtain ⟨g, hg, rfl⟩ := (Ideal.mem_map_iff_of_surjective
@@ -92,7 +93,7 @@ theorem non_rational_projective_curve_count_le_degree_sq
 theorem nonabsolute_projective_curve_count_le_degree_sq
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n : ℕ} (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = 2)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / 2)
     (hred : ¬ (I.map (map (algebraMap ℚ K))).IsPrime) (B : ℝ) :

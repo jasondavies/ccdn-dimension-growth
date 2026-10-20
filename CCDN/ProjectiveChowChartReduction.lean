@@ -2,6 +2,7 @@ module
 
 public import CCDN.ProjectiveChowGenerator
 public import CCDN.ProjectiveChowWithoutChart
+public import CCDN.PolynomialPredicates
 
 /-! Any projective Chow equation can be moved to a nonempty affine chart
 without changing its block degrees or total degree. The chart has the
@@ -15,7 +16,7 @@ open MvPolynomial
 theorem projective_chow_chart_reduction
     {K : Type*} [Field K] [IsAlgClosed K] {m n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (hF : Irreducible F)

@@ -1,6 +1,7 @@
 module
 
 public import CCDN.NonRationalProjectiveCount
+public import CCDN.PolynomialPredicates
 
 /-! Rational projective points embed injectively after a coefficient-field
 extension. Homogeneous ideal equations remain zero on every representative. -/
@@ -59,7 +60,7 @@ theorem projectiveCoefficientExtension_injective
 
 lemma homogeneous_ideal_eval_smul
     {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (v : σ → K) (hv : ∀ f ∈ I, eval v f = 0)
     (a : K) (f : MvPolynomial σ K) (hf : f ∈ I) :
     eval (a • v) f = 0 := by
@@ -74,7 +75,7 @@ lemma homogeneous_ideal_eval_smul
 theorem projectiveCoefficientExtension_mem_ideal
     {K : Type*} [Field K] [Algebra ℚ K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (x : ProjectivePoint n) (hx : x ∈ rationalProjectiveIdealZeroLocusOver I) :
     projectiveCoefficientExtension ℚ K (Fin (n + 1)) x ∈ projectiveIdealZeroLocus I := by
   intro v hv he f hf

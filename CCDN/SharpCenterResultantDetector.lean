@@ -4,6 +4,7 @@ public import CCDN.CenterResultantBaseChange
 public import CCDN.ChowRowResultantCriterion
 public import CCDN.ClosedFieldChowBirationalCriterion
 public import CCDN.BirationalCenterDetector
+public import CCDN.PolynomialPredicates
 
 /-! Sharp-degree resultant detectors defined over the source field and
 valid on all centers over an algebraically closed extension. -/
@@ -18,7 +19,7 @@ theorem exists_sharp_center_resultant_forms
     {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2) :
@@ -79,7 +80,7 @@ theorem exists_geometric_sharp_center_detector
     {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2) :

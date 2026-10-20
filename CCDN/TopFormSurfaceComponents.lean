@@ -2,6 +2,7 @@ module
 
 public import CCDN.TopFormAuxiliary
 public import CCDN.CompleteIntersectionDegreeBudget
+public import CCDN.PolynomialPredicates
 
 /-! The uniform surface auxiliary gives an actual finite curve cover of
 all bounded integer zeros, with total curve degree O(d^(9/2) B^(1/sqrt d)). -/
@@ -17,8 +18,7 @@ cover is exact on the auxiliary section and covers every original integer
 zero in the specified box. -/
 theorem top_form_surface_curve_components
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f)))
+    (hir : HasAbsIrreducibleTopForm f)
     {B : ℝ} (hB : 1 ≤ B) :
     ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧
       ¬ map (Int.castRingHom ℚ) f ∣ map (Int.castRingHom ℚ) g ∧

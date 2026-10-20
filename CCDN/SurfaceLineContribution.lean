@@ -4,6 +4,7 @@ public import CCDN.SurfaceLineDirections
 public import CCDN.SurfaceDirectionSum
 public import CCDN.SurfaceNonlinearCount
 public import CCDN.SurfaceParallelLines
+public import CCDN.PolynomialPredicates
 
 /-! Finite families of actual rational affine lines on a surface. Grouping
 lines by their projective direction combines the primitive spacing bound
@@ -40,8 +41,7 @@ parallel-line theorem can supply its only remaining input. -/
 theorem surface_line_contribution_of_parallel_bound :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       3 ≤ f.totalDegree →
       ∀ (B : ℝ), 0 ≤ B →
       ∀ s : Finset (Set (RatPoint 3)),
@@ -136,8 +136,7 @@ surface, its degree, the radius and the family of lines. -/
 theorem surface_line_contribution :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       3 ≤ f.totalDegree →
       ∀ (B : ℝ), 0 ≤ B →
       ∀ s : Finset (Set (RatPoint 3)),

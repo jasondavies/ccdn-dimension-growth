@@ -3,6 +3,7 @@ module
 public import CCDN.ProjectiveIncidenceClosed
 public import CCDN.ChowIncidenceForm
 public import CCDN.ProjectiveClosureRecovery
+public import CCDN.PolynomialPredicates
 
 /-! The constructed irreducible multihomogeneous incidence equation has the
 actual projective intersection criterion. The criterion also holds over an
@@ -79,7 +80,7 @@ polynomial; the chart and Chow generator are constructed internally. -/
 theorem exists_homogeneous_prime_projective_chow_equation
     {K : Type*} [Field K] [IsAlgClosed K] {n m d : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hX : X 0 ∉ J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :

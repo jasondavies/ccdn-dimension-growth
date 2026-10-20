@@ -3,6 +3,7 @@ module
 public import CCDN.ProjectiveVarietyUniformGrowth
 public import CCDN.ZeroDimensionalProjectiveCount
 public import CCDN.EmptyProjectiveHilbertDimension
+public import CCDN.PolynomialPredicates
 
 /-! CCDN Theorem 1 in the homogeneous-coordinate-ideal formulation:
 uniform projective dimension growth for every rational prime projective
@@ -21,7 +22,7 @@ projective space. Rational irreducibility suffices. -/
 theorem projective_dimension_growth (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) →
+      IsHomogeneousIdeal I →
       ∀ d : ℕ, 5 ≤ d →
       (filteredHilbertPolynomial I).leadingCoeff =
         (d : ℚ) / (filteredHilbertPolynomial I).natDegree.factorial →

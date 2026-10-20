@@ -2,6 +2,7 @@ module
 
 public import CCDN.BirationalCenterNonvanishing
 public import CCDN.ZeroColumnMinorSpecialization
+public import CCDN.PolynomialPredicates
 
 /-! Bounded integer good centers from the constructed Chow--Noether
 condition. The cubic detector bound is used explicitly; this is distinct
@@ -33,7 +34,7 @@ theorem exists_bounded_integer_birational_center
     {n m : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ (s : ℕ) (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2)))

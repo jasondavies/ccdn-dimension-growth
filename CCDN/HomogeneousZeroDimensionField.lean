@@ -3,6 +3,7 @@ module
 public import CCDN.ProjectionImageFractionField
 public import CCDN.ZeroDimensionalPrimeDescent
 public import CCDN.SmallOutsidePoint
+public import CCDN.PolynomialPredicates
 
 /-! A homogeneous prime ideal of Hilbert dimension zero is the origin.
 Its function field therefore has no extension beyond the coefficient field. -/
@@ -18,7 +19,7 @@ theorem homogeneous_zero_dimension_projectionImageField_eq_top
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
     [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
     [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (hdim : (filteredHilbertPolynomial I).natDegree = 0)
     (a : σ → MvPolynomial (Fin n) K) :
     projectionImageField (F := F) I a = ⊤ := by

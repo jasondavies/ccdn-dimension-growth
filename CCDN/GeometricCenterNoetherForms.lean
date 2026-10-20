@@ -3,6 +3,7 @@ module
 public import CCDN.CenterChowDetector
 public import CCDN.ChowProjectionBaseChange
 public import CCDN.GeometricProjectiveChow
+public import CCDN.PolynomialPredicates
 
 /-! The geometric center detector is defined over the original field.
 Its evaluations on rational center matrices detect the actual restrictions
@@ -17,7 +18,7 @@ theorem exists_geometric_center_noether_forms
     {K : Type*} [Field K] [CharZero K] {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hr : r + 2 ≤ n + 2) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (s : ℕ)

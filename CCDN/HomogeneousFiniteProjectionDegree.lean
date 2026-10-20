@@ -6,6 +6,7 @@ public import CCDN.FiniteBirationalConductor
 public import CCDN.IntegralProjectionHilbert
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Finiteness.Prod
+public import CCDN.PolynomialPredicates
 
 /-! A homogeneous finite birational linear projection preserves the
 actual Hilbert multiplicity. Both the conductor and the dimension equality
@@ -23,7 +24,7 @@ theorem homogeneous_finite_birational_projection_leadingCoeff_eq
     [Algebra (MvPolynomial τ K ⧸ I) F]
     [IsScalarTower K (MvPolynomial τ K ⧸ I) F]
     [IsFractionRing (MvPolynomial τ K ⧸ I) F]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : σ → MvPolynomial τ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
     (hfield : IntermediateField.adjoin K

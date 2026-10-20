@@ -2,6 +2,7 @@ module
 
 public import CCDN.CenterResultantForms
 public import CCDN.BlockResultantIrreducibility
+public import CCDN.PolynomialPredicates
 
 /-! The selected-row derivative resultant detects irreducibility of an actual
 Chow restriction. A nonzero restriction is a power of the constructed image
@@ -15,7 +16,7 @@ open MvPolynomial Matrix
 theorem chowRowResultant_ne_zero_iff_irreducible
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)

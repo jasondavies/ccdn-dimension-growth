@@ -3,6 +3,7 @@ module
 public import CCDN.GridTopFormConstruction
 public import CCDN.GridAffineLowerBound
 public import CCDN.GridProjectiveLowerBound
+public import CCDN.PolynomialPredicates
 
 /-! Actual integer hypersurfaces with absolutely irreducible top forms and
 large affine and projective point counts. These constructions apply to the
@@ -17,8 +18,7 @@ lemma exists_integer_topform_grid_equation (s : Finset ℤ) (d n : ℕ)
     (hd : 1 ≤ d) (hn : 3 ≤ n) (hs : s.card ≤ d - 1) :
     ∃ f : MvPolynomial (Fin n) ℤ,
       f.totalDegree = d ∧
-        Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-          (homogeneousComponent f.totalDegree f)) ∧
+        HasAbsIrreducibleTopForm f ∧
         ∀ z : IntPoint n, (∀ j, z j ∈ s) → eval z f = 0 := by
   let i : Fin 3 → Fin n := Fin.castLE hn
   have hi : Function.Injective i := Fin.castLE_injective hn
@@ -28,7 +28,8 @@ lemma exists_integer_topform_grid_equation (s : Finset ℤ) (d n : ℕ)
   have hgdeg : g.totalDegree = d := gridTopFormEquation_totalDegree s hd hs
   refine ⟨rename i g, ?_, ?_, ?_⟩
   · rw [totalDegree_rename_of_leftInverse i r hr, hgdeg]
-  · rw [totalDegree_rename_of_leftInverse i r hr, ← rename_homogeneousComponent, map_rename]
+  · dsimp only [HasAbsIrreducibleTopForm]
+    rw [totalDegree_rename_of_leftInverse i r hr, ← rename_homogeneousComponent, map_rename]
     exact irreducible_rename_of_injective i hi _ (gridTopFormEquation_absolute_top s hd hs)
   · intro z hz
     rw [eval_rename]
@@ -36,8 +37,7 @@ lemma exists_integer_topform_grid_equation (s : Finset ℤ) (d n : ℕ)
 
 lemma integer_absolute_top_rational_model {n d : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hd : f.totalDegree = d)
-    (htop : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f))) :
+    (htop : HasAbsIrreducibleTopForm f) :
     (map (Int.castRingHom ℚ) f).totalDegree = d ∧
       Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (map (Int.castRingHom ℚ) f)) := by
   refine ⟨?_, ?_⟩
@@ -80,8 +80,7 @@ closure simultaneously has at least dB^(n−1)/8 projective points. -/
 theorem exists_topform_hypersurface_lower_bounds (d n : ℕ) (hd : 4 ≤ d) (hn : 3 ≤ n) :
     ∃ f : MvPolynomial (Fin n) ℤ, ∃ B : ℕ,
       1 ≤ B ∧ B ≤ d ∧ d ≤ 8 * B ∧ f.totalDegree = d ∧
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) ∧
+      HasAbsIrreducibleTopForm f ∧
       Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (map (Int.castRingHom ℚ) f)) ∧
       ((d : ℝ) ^ 2 / 64) * (B : ℝ) ^ (n - 2) ≤
         (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ∧

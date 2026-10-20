@@ -2,6 +2,7 @@ module
 
 public import CCDN.ProjectiveVarietyDimensionGrowth
 public import CCDN.ProjectivePlaneLinearCount
+public import CCDN.PolynomialPredicates
 
 /-! The plane curve estimate gives a smaller degree exponent for curves
 specified by their actual filtered Hilbert polynomial. The construction of
@@ -15,7 +16,7 @@ open MvPolynomial
 theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) →
+      IsHomogeneousIdeal I →
       ∀ d : ℕ, 5 ≤ d →
       (filteredHilbertPolynomial I).natDegree = 2 →
       (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / 2 →

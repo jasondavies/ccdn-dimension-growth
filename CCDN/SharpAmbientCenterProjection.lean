@@ -1,6 +1,7 @@
 module
 
 public import CCDN.SharpGoodCenterProjection
+public import CCDN.PolynomialPredicates
 
 /-! The full ambient height quantifier of CCDN Lemma 5.1. The constructed
 finite birational complementary projection has the required height bound
@@ -49,7 +50,7 @@ theorem exists_sharp_ambient_birational_projection
     {n m : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ (M : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℤ) (D : ℤ)

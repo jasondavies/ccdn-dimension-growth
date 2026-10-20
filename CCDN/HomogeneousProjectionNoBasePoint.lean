@@ -4,6 +4,7 @@ public import CCDN.IntegralProjectionSpecialization
 public import CCDN.ProjectiveChartDegree
 public import CCDN.ProjectiveCoefficientExtension
 public import Mathlib.Algebra.Polynomial.Roots
+public import CCDN.PolynomialPredicates
 
 /-! An integral homogeneous linear projection has no nonzero geometric
 point in its kernel. This proves disjointness from its actual projective
@@ -18,7 +19,7 @@ open MvPolynomial
 lemma homogeneous_ideal_aeval_smul
     {K L σ : Type*} [Field K] [Field L] [Algebra K L]
     (I : Ideal (MvPolynomial σ K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (x : σ → L) (hx : ∀ f ∈ I, aeval x f = 0)
     (t : L) (f : MvPolynomial σ K) (hf : f ∈ I) :
     aeval (t • x) f = 0 := by
@@ -33,7 +34,7 @@ lemma homogeneous_ideal_aeval_smul
 theorem homogeneous_integral_projection_zero_fiber
     {K L σ τ : Type*} [Field K] [Field L] [Algebra K L] [Infinite L]
     (I : Ideal (MvPolynomial σ K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : τ → MvPolynomial σ K) (ha : ∀ j, (a j).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
     (x : σ → L) (hx : ∀ f ∈ I, aeval x f = 0)
@@ -60,7 +61,7 @@ theorem homogeneous_integral_projection_zero_fiber
 theorem homogeneous_integral_projection_geometric_no_base_point
     {K L : Type*} [Field K] [Field L] [Algebra K L] [Infinite L] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : Fin m → MvPolynomial (Fin (n + 1)) K)
     (ha : ∀ j, (a j).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)

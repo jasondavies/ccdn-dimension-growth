@@ -1,6 +1,7 @@
 module
 
 public import CCDN.ChowRestrictionBirational
+public import CCDN.PolynomialPredicates
 
 /-! The actual Chow restriction and function-field birationality criterion
 over an algebraically closed field, allowing arbitrary geometric centers. -/
@@ -13,7 +14,7 @@ open MvPolynomial Matrix
 theorem chow_restriction_irreducible_iff_birational_over_closed_field
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)

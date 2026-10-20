@@ -3,6 +3,7 @@ module
 public import CCDN.BoundedGoodHyperplane
 public import CCDN.IntegerHyperplaneSlices
 public import CCDN.Plane
+public import CCDN.PolynomialPredicates
 
 /-! Coordinate transport between the graph-hyperplane construction and
 the actual finite integral-point count. -/
@@ -22,8 +23,7 @@ lemma goodHyperplaneHeight_le {d : ℕ} (hd : 1 ≤ d) :
 
 lemma integer_top_irreducible_rename {σ τ : Type*} (e : σ ≃ τ)
     (f : MvPolynomial σ ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent f.totalDegree f))) :
+    (hir : HasAbsIrreducibleTopForm f) :
     Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
       (homogeneousComponent (rename e f).totalDegree (rename e f))) := by
   rw [show (rename e f).totalDegree = f.totalDegree from totalDegree_renameEquiv e f,

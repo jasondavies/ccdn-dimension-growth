@@ -3,6 +3,7 @@ module
 public import CCDN.IncidenceDeterminantCertificate
 public import CCDN.IrrelevantPowerCertificate
 public import CCDN.ProjectiveChowIncidence
+public import CCDN.PolynomialPredicates
 
 /-! Closedness of the actual projective hyperplane incidence image, proved by
 finite homogeneous coefficient matrices. Empty fibers produce a determinant
@@ -16,7 +17,7 @@ open MvPolynomial
 
 lemma projectiveChowIncidenceLocus_iff_cone {K : Type*} [Field K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (U : Fin r × Fin (n + 1) → K) :
     U ∈ projectiveChowIncidenceLocus r J ↔
       ∃ x : Fin (n + 1) → K, x ≠ 0 ∧ (∀ f ∈ J, eval x f = 0) ∧
@@ -46,7 +47,7 @@ separator which is normalized to one there. -/
 theorem exists_polynomial_separator_of_not_projective_incidence
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (U : Fin r × Fin (n + 1) → K) (hU : U ∉ projectiveChowIncidenceLocus r J) :
     ∃ D : MvPolynomial (Fin r × Fin (n + 1)) K,
       eval U D = 1 ∧ D ∈ vanishingIdeal K (projectiveChowIncidenceLocus r J) := by
@@ -82,7 +83,7 @@ is represented by an actual nonzero intersection vector. -/
 theorem projectiveChowIncidenceLocus_zeroLocus_vanishingIdeal
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J) :
+    (hJ : IsHomogeneousIdeal J) :
     MvPolynomial.zeroLocus K (vanishingIdeal K (projectiveChowIncidenceLocus r J)) =
       projectiveChowIncidenceLocus r J := by
   ext U

@@ -2,6 +2,7 @@ module
 
 public import CCDN.SharpBoundedBirationalCenter
 public import CCDN.BirationalComplementProjection
+public import CCDN.PolynomialPredicates
 
 /-! Unconditional bounded complementary projections at the height exponent
 of CCDN Section 5.1. The row-resultant detector constructs quadratic bounded
@@ -20,7 +21,7 @@ theorem exists_sharp_bounded_birational_projective_projection
     {n m : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ (M : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℤ) (D : ℤ)

@@ -5,6 +5,7 @@ public import CCDN.HomogeneousFiniteProjectionDegree
 public import CCDN.HomogeneousProjectionEquation
 public import CCDN.HilbertProjectionDegree
 public import CCDN.HomogeneousIntegralRelation
+public import CCDN.PolynomialPredicates
 
 /-! Primitive augmentation of an actual finite homogeneous normalization
 produces an irreducible equation whose degree in the new variable is exactly
@@ -23,7 +24,7 @@ theorem exists_homogeneous_normalization_primitive_equation
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
     [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
     [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : Fin (m + 1) → MvPolynomial (Fin n) K)
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (hi : Function.Injective (projectionCoordinateMap I a))

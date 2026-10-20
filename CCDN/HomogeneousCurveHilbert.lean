@@ -1,6 +1,7 @@
 module
 
 public import CCDN.HomogeneousFilteredRank
+public import CCDN.PolynomialPredicates
 
 /-! A quadratic Hilbert polynomial of a homogeneous affine cone gives the
 actual linear projective Hilbert function, with exactly the same degree. -/
@@ -28,7 +29,7 @@ lemma quadratic_polynomial_successive_difference
 theorem projectiveCurveDegree_of_filteredHilbertPolynomial
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = 2)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / 2) :
     HasProjectiveCurveDegree I d := by

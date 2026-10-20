@@ -3,6 +3,7 @@ module
 public import CCDN.BoundedDegreeNormalizationFiber
 public import CCDN.ProjectiveLinearCountTransfer
 public import CCDN.BirationalProjectionHeight
+public import CCDN.PolynomialPredicates
 
 /-! The exact degree factor in the projective projection count.
 An actual finite birational integer projection preserves the Hilbert degree,
@@ -19,7 +20,7 @@ depending only on ambient dimension. -/
 theorem exists_sharp_projective_projection
     (m n : ℕ) (hmn : m ≤ n)
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hd : 1 ≤ d)
     (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :

@@ -3,6 +3,7 @@ module
 public import CCDN.SharpBirationalCenterDetector
 public import CCDN.GeometricIdealPrimality
 public import CCDN.BirationalCenterLocus
+public import CCDN.PolynomialPredicates
 
 /-! Sharp equations over the source field detect actual birational centers
 in every coefficient-field extension, including their geometric disjointness. -/
@@ -29,7 +30,7 @@ theorem exists_sharp_extended_birational_center_detector
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2) :

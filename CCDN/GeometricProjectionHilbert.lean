@@ -4,6 +4,7 @@ public import CCDN.ChowProjectionBaseChange
 public import CCDN.ProjectionScalarExtension
 public import CCDN.HilbertScalarExtension
 public import CCDN.HomogeneousPermutationBaseChange
+public import CCDN.PolynomialPredicates
 
 /-! The actual matrix image commutes with coefficient extension and has
 the same Hilbert polynomial after extension. Geometric center avoidance
@@ -42,7 +43,7 @@ theorem chowProjectionImageIdeal_hilbertPolynomial_scalar_extension
 theorem projection_integral_of_geometric_center_disjoint
     {K L : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L] {n s : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
     (hcenter : ∀ p ∈ projectiveIdealZeroLocus (I.map (map (algebraMap K L))),
       (A.map (algebraMap K L)) *ᵥ p.rep ≠ 0) :

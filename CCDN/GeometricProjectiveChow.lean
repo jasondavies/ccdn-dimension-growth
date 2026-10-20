@@ -2,6 +2,7 @@ module
 
 public import CCDN.ProjectiveChowWithoutChart
 public import CCDN.HomogeneousPermutationBaseChange
+public import CCDN.PolynomialPredicates
 
 /-! A geometrically integral homogeneous prime ideal has an incidence equation
 defined over its original coefficient field, without a prescribed chart. -/
@@ -15,7 +16,7 @@ theorem exists_geometric_projective_chow_without_chart
     {K L : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L] {n m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ),
       Irreducible F ∧ Irreducible (map (algebraMap K L) F) ∧

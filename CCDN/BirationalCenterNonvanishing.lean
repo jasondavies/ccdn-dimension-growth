@@ -3,6 +3,7 @@ module
 public import CCDN.BirationalCenterDetector
 public import CCDN.BirationalMinorCenterWitness
 public import CCDN.ProjectiveClosureHilbertPolynomial
+public import CCDN.PolynomialPredicates
 
 /-! Nonzero good-center detector polynomials with constructed rational
 witnesses. The fixed-coordinate version constructs its witness inside the
@@ -17,7 +18,7 @@ theorem exists_nonzero_birational_center_detector
     {n m : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ (s : ℕ) (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2)))

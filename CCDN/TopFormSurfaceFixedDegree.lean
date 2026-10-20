@@ -1,6 +1,7 @@
 module
 
 public import CCDN.PrimitiveSurfaceFixedDegree
+public import CCDN.PolynomialPredicates
 
 /-! Removing integer content from the fixed-degree surface estimate.
 The resulting constant is uniform in all integer coefficients. -/
@@ -16,8 +17,7 @@ irreducible. No primitivity, auxiliary, or curve-cover premise remains. -/
 theorem top_form_surface_fixed_degree_linear_bound (d : ℕ) (hd : 5 ≤ d) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       f.totalDegree = d → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤ C * B := by
   obtain ⟨C, hC, hbound⟩ := primitive_surface_fixed_degree_linear_bound d hd

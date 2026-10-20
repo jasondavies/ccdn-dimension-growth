@@ -3,6 +3,7 @@ module
 public import CCDN.IntegerMinorProjectiveHeight
 public import CCDN.SharpBoundedBirationalCenter
 public import CCDN.FixedCoordinatePluckerTopology
+public import CCDN.PolynomialPredicates
 
 /-! Bounded rational good centers in the intrinsic Plücker height. The
 center, its good-locus membership and its height bound are constructed
@@ -37,7 +38,7 @@ theorem exists_birational_center_plucker_height
     {n m s : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :

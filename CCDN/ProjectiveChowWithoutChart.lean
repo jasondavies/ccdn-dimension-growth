@@ -6,6 +6,7 @@ public import CCDN.ProjectiveChowEquation
 public import CCDN.ProjectiveIncidencePermutation
 public import CCDN.OriginProjectivePoint
 public import CCDN.WeightedHomogeneousTransform
+public import CCDN.PolynomialPredicates
 
 /-! A positive-dimensional affine cone has a nonempty coordinate chart.
 The projective incidence equation is constructed without a prescribed chart. -/
@@ -18,7 +19,7 @@ open MvPolynomial
 theorem exists_projective_chow_equation_without_chart
     {K : Type*} [Field K] [IsAlgClosed K] {n m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ),
       Irreducible F ∧ (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧

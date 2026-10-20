@@ -3,6 +3,7 @@ module
 public import CCDN.ProjectiveDimensionGrowth
 public import CCDN.ProjectiveHilbertCurveGrowth
 public import CCDN.ProperHilbertDimension
+public import CCDN.PolynomialPredicates
 
 /-! A cubic degree exponent for general projective dimension growth.
 This is an independent consequence of the constructed projections and the
@@ -34,7 +35,7 @@ theorem projective_variety_dimension_growth_cubic_indices (n : ℕ) (hn : 3 ≤ 
     ∃ C : ℝ, 0 < C ∧
       ∀ m k : ℕ, m + k + 1 = n → 1 ≤ k →
       ∀ I : Ideal (MvPolynomial (Fin (m + k + 2)) ℚ), I.IsPrime →
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) →
+      IsHomogeneousIdeal I →
       ∀ d : ℕ, 5 ≤ d →
       (filteredHilbertPolynomial I).natDegree = m + 2 →
       (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 2).factorial →
@@ -72,7 +73,7 @@ theorem projective_variety_dimension_growth_cubic_indices (n : ℕ) (hn : 3 ≤ 
 theorem projective_variety_dimension_growth_cubic_positive (n : ℕ) (hn : 2 ≤ n) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) →
+      IsHomogeneousIdeal I →
       2 ≤ (filteredHilbertPolynomial I).natDegree →
       ∀ d : ℕ, 5 ≤ d →
       (filteredHilbertPolynomial I).leadingCoeff =
@@ -123,7 +124,7 @@ No projection, fiber bound or geometric auxiliary is assumed. -/
 theorem projective_dimension_growth_cubic (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) →
+      IsHomogeneousIdeal I →
       ∀ d : ℕ, 5 ≤ d →
       (filteredHilbertPolynomial I).leadingCoeff =
         (d : ℚ) / (filteredHilbertPolynomial I).natDegree.factorial →
@@ -133,7 +134,7 @@ theorem projective_dimension_growth_cubic (n : ℕ) :
           B ^ ((filteredHilbertPolynomial I).natDegree - 1) := by
   have hpositive : ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →
-      (∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I) →
+      IsHomogeneousIdeal I →
       2 ≤ (filteredHilbertPolynomial I).natDegree →
       ∀ d : ℕ, 5 ≤ d →
       (filteredHilbertPolynomial I).leadingCoeff =

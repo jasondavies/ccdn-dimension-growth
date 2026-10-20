@@ -4,6 +4,7 @@ public import CCDN.GeometricProjectionHilbert
 public import CCDN.ProjectiveChowExactDegree
 public import CCDN.HomogeneousProjectionBirational
 public import CCDN.ChowProjectionCriterion
+public import CCDN.PolynomialPredicates
 
 /-! A disjoint projection center gives an irreducible Chow restriction
 exactly when its actual coordinate-field extension is birational. Source
@@ -18,7 +19,7 @@ theorem geometric_chow_restriction_irreducible_iff_birational
     {K : Type*} [Field K] [CharZero K] {n s m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 2)) K)) [I.IsPrime]
     [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)

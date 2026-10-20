@@ -3,6 +3,7 @@ module
 public import CCDN.HomogeneousProjectionRankBound
 public import CCDN.HomogeneousZeroDimensionField
 public import CCDN.HomogeneousFiniteProjectionDegree
+public import CCDN.PolynomialPredicates
 
 /-! A finite homogeneous linear projection preserves the actual Hilbert
 multiplicity if and only if its projected coordinates generate the source
@@ -22,7 +23,7 @@ theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
     [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
     [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : Fin s → MvPolynomial (Fin n) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
     (heq : (filteredHilbertPolynomial (RingHom.ker (projectionCoordinateMap I a))).leadingCoeff =
@@ -52,7 +53,7 @@ theorem homogeneous_finite_projection_leadingCoeff_eq_iff_birational
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
     [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
     [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : Fin s → MvPolynomial (Fin n) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral) :
     (filteredHilbertPolynomial (RingHom.ker (projectionCoordinateMap I a))).leadingCoeff =

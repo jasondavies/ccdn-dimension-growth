@@ -3,6 +3,7 @@ module
 public import CCDN.TopFormSurfaceFixedDegree
 public import CCDN.TopFormSurfaceCount
 public import CCDN.BoundedHyperplaneDimensionGrowth
+public import CCDN.PolynomialPredicates
 
 /-! Full affine hypersurface dimension growth in degrees at least five.
 The finitely many small surface degrees are absorbed in one constant;
@@ -16,8 +17,7 @@ open MvPolynomial
 theorem top_form_surface_dimension_growth :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ 18 * B := by
@@ -60,8 +60,7 @@ degree exponent is 18 + 9n in n+3 variables. -/
 theorem top_form_hypersurface_dimension_growth (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (n + 3)) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 9 * n) * B ^ (n + 1) := by

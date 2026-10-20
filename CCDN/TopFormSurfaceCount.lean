@@ -2,6 +2,7 @@ module
 
 public import CCDN.TopFormSurfaceNonlinear
 public import CCDN.SurfaceDegreeOneCount
+public import CCDN.PolynomialPredicates
 
 /-! The corrected large-degree surface bound. The auxiliary section's
 nonlinear curves and its actual degree-one components together account
@@ -18,8 +19,7 @@ chosen before the integer polynomial and the real box radius. -/
 theorem top_form_surface_count :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       16 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ 18 * B := by

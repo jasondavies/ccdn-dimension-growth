@@ -3,6 +3,7 @@ module
 public import CCDN.HomogeneousFilteredProjection
 public import CCDN.PlaneRelationSpace
 public import CCDN.HypersurfaceGoodDirection
+public import CCDN.PolynomialPredicates
 
 /-! The actual principal equation of the image of a homogeneous linear
 projection is homogeneous. -/
@@ -15,7 +16,7 @@ open MvPolynomial
 theorem projection_kernel_homogeneousComponent_mem
     {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial τ K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : σ → MvPolynomial τ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (p : MvPolynomial σ K) (hp : p ∈ RingHom.ker (projectionCoordinateMap I a)) (N : ℕ) :
     homogeneousComponent N p ∈ RingHom.ker (projectionCoordinateMap I a) := by
@@ -29,7 +30,7 @@ theorem projection_kernel_homogeneousComponent_mem
 theorem principal_generator_isHomogeneous
     {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (f : MvPolynomial σ K) (hf : f ≠ 0) (hgen : I = Ideal.span {f}) :
     f.IsHomogeneous f.totalDegree := by
   have hmem : f ∈ I := by rw [hgen]; exact Ideal.subset_span (Set.mem_singleton f)
@@ -50,7 +51,7 @@ theorem principal_generator_isHomogeneous
 theorem homogeneous_projection_equation
     {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial τ K))
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : σ → MvPolynomial τ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (f : MvPolynomial σ K) (hf : f ≠ 0)
     (hgen : RingHom.ker (projectionCoordinateMap I a) = Ideal.span {f}) :

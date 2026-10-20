@@ -1,6 +1,7 @@
 module
 
 public import CCDN.HomogeneousHilbert
+public import CCDN.PolynomialPredicates
 
 /-! Homogeneous certificates for membership in an ideal together with finitely
 many linear equations. These retain the degree needed for a finite coefficient
@@ -29,7 +30,7 @@ lemma incidenceLinearForm_eval {K : Type*} [CommSemiring K] {n r : ℕ}
 an expression whose multipliers have exactly the preceding degree. -/
 theorem homogeneous_incidence_relation {K : Type*} [Field K] {n r t : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (U : Fin r × Fin (n + 1) → K)
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous (t + 1))
     (hmem : f ∈ J ⊔ Ideal.span (Set.range (incidenceLinearForm U))) :

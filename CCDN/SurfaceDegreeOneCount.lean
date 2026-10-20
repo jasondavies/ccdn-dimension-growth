@@ -2,6 +2,7 @@ module
 
 public import CCDN.DegreeOneComponentLines
 public import CCDN.SurfaceLineContribution
+public import CCDN.PolynomialPredicates
 
 /-! The proved line contribution applies to actual degree-one prime
 components, with the original number of components as the additive cost. -/
@@ -14,8 +15,7 @@ open MvPolynomial
 theorem surface_degree_one_component_contribution :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       3 ≤ f.totalDegree → ∀ B : ℝ, 0 ≤ B →
       ∀ S : Finset (Ideal (CoordinatePolynomial 3)),
       (∀ P ∈ S, P.IsPrime ∧ P.height = 2 ∧ HasAffineCurveDegree P 1) →

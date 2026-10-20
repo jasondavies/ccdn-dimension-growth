@@ -2,6 +2,7 @@ module
 
 public import CCDN.SharpCenterExtensionDetector
 public import CCDN.BirationalMinorCenterWitness
+public import CCDN.PolynomialPredicates
 
 /-! Constructed rational centers remain actual geometrically disjoint
 birational centers after arbitrary extension of the coefficient field. -/
@@ -15,7 +16,7 @@ lemma homogeneous_matrix_projection_birational_scalar_extension
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
     (hint : (projectionCoordinateMap J (chowProjectionForms A)).IsIntegral)
     (hintL : (projectionCoordinateMap (J.map (map (algebraMap K L)))
@@ -52,7 +53,7 @@ theorem exists_birational_center_matrix_over_extension
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
     [(J.map (map (algebraMap ℚ L))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :

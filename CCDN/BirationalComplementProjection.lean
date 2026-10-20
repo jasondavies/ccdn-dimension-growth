@@ -2,6 +2,7 @@ module
 
 public import CCDN.BoundedCenterProjectionAllRows
 public import CCDN.BoundedBirationalCenter
+public import CCDN.PolynomialPredicates
 
 /-! Actual complementary projections retain the geometric and degree
 properties of the minor projection with the same center. This interface
@@ -43,7 +44,7 @@ structure BirationalComplementProjection {r n : ℕ}
 
 lemma integral_matrix_projection_no_base_point {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) ℚ)
     (hint : (projectionCoordinateMap J (chowProjectionForms A)).IsIntegral)
     (x : ProjectivePoint n) (hx : x ∈ projectiveIdealZeroLocus J) : A *ᵥ x.rep ≠ 0 := by
@@ -62,7 +63,7 @@ this construction unchanged. -/
 theorem exists_bounded_birational_complement_of_minor_projection
     {r n s : ℕ} (J : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (M : Matrix (Fin r) (Fin (n + 1)) ℤ)
     (hM : LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row)
     (T : ℕ) (hb : ∀ i j, |M i j| ≤ (T : ℤ))

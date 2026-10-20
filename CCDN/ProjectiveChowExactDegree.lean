@@ -4,6 +4,7 @@ public import CCDN.ChowExactDegree
 public import CCDN.ProjectiveChowChartReduction
 public import CCDN.GeometricProjectiveChow
 public import CCDN.GeometricIdealPrimality
+public import CCDN.PolynomialPredicates
 
 /-! The constructed projective Chow equation has degree exactly d in every
 hyperplane block, where d is the actual Hilbert multiplicity. This includes
@@ -17,7 +18,7 @@ open MvPolynomial
 theorem projective_chow_row_degree_eq_multiplicity
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K] {m n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (hF : Irreducible F)
@@ -35,7 +36,7 @@ theorem projective_chow_row_degree_eq_multiplicity
 theorem projective_chow_totalDegree_eq_multiplicity
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K] {m n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (hF : Irreducible F)
@@ -49,7 +50,7 @@ theorem projective_chow_totalDegree_eq_multiplicity
 theorem exists_projective_chow_exact_degree
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K] {m n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K,
@@ -66,7 +67,7 @@ theorem exists_geometric_projective_chow_exact_degree
     {m n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K,

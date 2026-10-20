@@ -1,6 +1,7 @@
 module
 
 public import CCDN.CenterMinorProjection
+public import CCDN.PolynomialPredicates
 
 /-! Enumerating the actual maximal-minor coordinates turns the source's
 Plücker projection into a matrix with exactly the center as its kernel.
@@ -88,7 +89,7 @@ criterion; source and image are connected by the constructed minors. -/
 theorem center_minor_projection_incidence_iff
     {K : Type*} [Field K] [IsAlgClosed K] {r n s q : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
     (hcenter : ∀ p ∈ projectiveIdealZeroLocus J,

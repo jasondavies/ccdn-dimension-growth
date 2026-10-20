@@ -2,6 +2,7 @@ module
 
 public import CCDN.CubicHyperplaneDimensionGrowth
 public import CCDN.TopFormDimensionGrowthAllDegrees
+public import CCDN.PolynomialPredicates
 
 /-! The corrected affine degree exponent in CCDN Remark 4.3.8.
 In N=n+3 variables the exponent is 18+3n=3N+9, using the corrected
@@ -18,8 +19,7 @@ degree exponent is 18 + 3n in n+3 variables. -/
 theorem top_form_hypersurface_dimension_growth_cubic (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (n + 3)) ℤ,
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopForm f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) := by
@@ -32,8 +32,7 @@ theorem top_form_hypersurface_dimension_growth_cubic (n : ℕ) :
 theorem rational_top_form_hypersurface_dimension_growth_cubic (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (n + 3)) ℚ,
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ))
-        (homogeneousComponent f.totalDegree f)) →
+      HasAbsIrreducibleTopFormRat f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus f) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) := by

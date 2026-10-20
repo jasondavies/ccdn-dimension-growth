@@ -1,6 +1,7 @@
 module
 
 public import CCDN.HomogeneousNormalizationEquation
+public import CCDN.PolynomialPredicates
 
 /-! The field degree of an actual homogeneous finite linear normalization
 is exactly the Hilbert multiplicity. The equation, monicity up to a unit,
@@ -38,7 +39,7 @@ theorem homogeneous_normalization_functionField_finrank
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
     [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
     [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
-    (hI : ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I)
+    (hI : IsHomogeneousIdeal I)
     (a : Fin (m + 1) → MvPolynomial (Fin n) K)
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (hi : Function.Injective (projectionCoordinateMap I a))

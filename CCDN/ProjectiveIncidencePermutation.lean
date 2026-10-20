@@ -3,6 +3,7 @@ module
 public import CCDN.ProjectiveIncidenceClosed
 public import CCDN.ProjectivePermutation
 public import CCDN.FilteredHilbertEquiv
+public import CCDN.PolynomialPredicates
 
 /-! Coordinate permutations transport the actual homogeneous ideal and
 projective hyperplane incidence, without choosing projective representatives. -/
@@ -15,7 +16,7 @@ open MvPolynomial
 theorem projectivePermutedIdeal_homogeneous
     {K : Type*} [Field K] {n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (e : Equiv.Perm (Fin (n + 1))) :
     ∀ f ∈ projectivePermutedIdeal J e, ∀ M,
       homogeneousComponent M f ∈ projectivePermutedIdeal J e := by
@@ -58,7 +59,7 @@ def chowColumnPermutation {r s : ℕ} (e : Equiv.Perm (Fin s)) :
 theorem projectiveChowIncidenceLocus_permuted
     {K : Type*} [Field K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (e : Equiv.Perm (Fin (n + 1))) (U : Fin r × Fin (n + 1) → K) :
     U ∘ chowColumnPermutation e ∈ projectiveChowIncidenceLocus r (projectivePermutedIdeal J e) ↔
       U ∈ projectiveChowIncidenceLocus r J := by

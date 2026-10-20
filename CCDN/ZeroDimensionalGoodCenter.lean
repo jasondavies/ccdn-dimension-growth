@@ -2,6 +2,7 @@ module
 
 public import CCDN.CubicGoodCenterProjection
 public import CCDN.ZeroDimensionalGeometricPoint
+public import CCDN.PolynomialPredicates
 
 /-! The degree-one boundary of the bounded-center construction. A
 geometrically integral zero-dimensional projective source has degree one.
@@ -17,7 +18,7 @@ theorem geometric_projective_dimension_zero_multiplicity_one
     {K : Type*} [Field K] [CharZero K] {n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ)) : d = 1 := by
   classical
@@ -54,7 +55,7 @@ theorem exists_zero_dimensional_zero_one_center_projection
     {n : ℕ} (hn : 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : ∀ f ∈ J, ∀ N, homogeneousComponent N f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = 1) :
     ∃ (M : Matrix (Fin n) (Fin (n + 2)) ℤ) (D : ℤ)
       (P : Matrix (Fin (n + 2)) (Fin (n + 2)) ℤ),

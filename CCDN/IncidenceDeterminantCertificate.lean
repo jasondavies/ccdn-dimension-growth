@@ -3,6 +3,7 @@ module
 public import CCDN.HomogeneousIncidenceRelations
 public import CCDN.HomogeneousEvaluation
 public import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
+public import CCDN.PolynomialPredicates
 
 /-! A polynomial determinant separates an empty homogeneous linear incidence
 fiber from every tuple with a nonzero common zero. Its construction uses actual
@@ -56,7 +57,7 @@ lemma homogeneous_monomial_values_ne_zero {K : Type*} [Field K] {n M : ℕ}
 polynomial which is nonzero at the chosen tuple and zero at every incident tuple. -/
 theorem exists_incidence_determinant_certificate {K : Type*} [Field K] {n r t : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (U : Fin r × Fin (n + 1) → K)
     (hmem : ∀ e : Fin ((n + (t + 1)).choose (t + 1)),
       monomial (homogeneousMonomials n (t + 1) e) 1 ∈

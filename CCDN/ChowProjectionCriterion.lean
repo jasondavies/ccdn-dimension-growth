@@ -4,6 +4,7 @@ public import CCDN.ChowProjectionPower
 public import CCDN.ProjectiveChowWithoutChart
 public import CCDN.ChowTotalDegree
 public import CCDN.WeightedHomogeneousEvaluation
+public import CCDN.PolynomialPredicates
 
 /-! Projection restrictions without chosen charts. A disjoint center preserves
 every block degree of the source equation; its restriction is a scalar power
@@ -42,7 +43,7 @@ theorem chowLinearSubstitution_totalDegree_of_ne_zero
 theorem chowLinearSubstitution_ne_zero_iff_center_disjoint
     {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
@@ -70,7 +71,7 @@ actual source and matrix. No source or image chart is part of the hypotheses. -/
 theorem exists_chow_projection_power
     {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : ∀ f ∈ J, ∀ M, homogeneousComponent M f ∈ J)
+    (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
     (hcenter : ∀ p ∈ projectiveIdealZeroLocus J, A *ᵥ p.rep ≠ 0) :
