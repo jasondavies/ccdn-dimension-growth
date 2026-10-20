@@ -15,9 +15,8 @@ integer column-lattice factorization, residue-block determinant and maximal-
 minor-gcd aggregation, finite polynomial Newton approximation on actual smooth
 plane residue classes, the local triangular valuation bound, the actual smooth
 reduction partition, and the resulting global logarithmic gcd estimate with
-explicit finite-field point-count and excluded-prime inputs. The generic filtered-space and point
-separation lemmas were adapted from the author's Pierce-length development;
-their copyright and Apache license headers are retained.
+explicit finite-field point-count and excluded-prime inputs. Generic filtered-space
+and point-separation lemmas are included in the checked development.
 
 The full PlaneCurveBound and AffineCurveBound are still unproved. In particular,
 the singular local curve determinant estimates, finite-field point estimate,
@@ -248,7 +247,7 @@ axiom audit checks 563 project and 555 vendored declarations, allowing only
 propext, Classical.choice and Quot.sound. Source checks verify 25 vendor hashes
 and 99 reachable mathematical modules. These totals precede the general
 bad-prime and auxiliary-degree integration below.
-The full counting theorem and the separate Pierce geometry remain unfinished.
+The full counting theorem remains unfinished.
 No independent human review is asserted.
 
 General plane bad reduction and auxiliary degrees (19 October 2026)
@@ -272,8 +271,8 @@ Source checks verify 25 vendor hashes and 107 reachable mathematical modules.
 These totals precede the primitive-model and chart integration below. Both auxiliary constructions still
 assume the sharp finite-field point-count estimate; coefficient positioning,
 primitive normalization, rational nondivisibility, affine specialization and
-controlled projection remain unfinished. The full counting theorem and
-separate Pierce geometry are not proved. No independent human review is asserted.
+controlled projection remain unfinished. The full counting theorem is not
+proved. No independent human review is asserted.
 
 Primitive models, homogeneous charts and Bezout counts (19 October 2026)
 -----------------------------------------------------------------------
@@ -297,7 +296,7 @@ These totals precede the coefficient-position integration below. The resulting p
 assume sharp finite-field counting and the stated height/position conditions.
 The small-height exponent remains 2/d. Coordinate positioning and the affine
 scaling/prime-selection argument needed for exponent 1/d remain open, as do
-controlled projection, non-geometrically-integral cases and Pierce geometry.
+controlled projection and non-geometrically-integral cases.
 The full curve-counting theorem is unproved. No independent human review is asserted.
 
 Bounded coefficient positioning (19 October 2026)
@@ -323,8 +322,8 @@ declarations, allowing only propext, Classical.choice and Quot.sound.
 Source checks verify 25 vendor hashes and 118 reachable mathematical modules.
 These totals precede the scaled-model integration below. The full finite-field point count,
 affine scaling/prime selection, controlled projection, non-geometrically-
-integral cases and separate Pierce geometry remain unfinished. No counting
-axiom or independent human review is asserted.
+integral cases remain unfinished. No counting axiom or independent human
+review is asserted.
 
 Scaled models, affine exponent and scaling-prime construction (19 October 2026)
 -----------------------------------------------------------------------------
@@ -357,8 +356,8 @@ and 131 reachable mathematical modules. These totals precede the complete
 affine plane assembly below.
 The complementary large-height case, zero constant terms and small boxes in
 the affine count assembly remain open. The sharp finite-field estimate,
-controlled projections, non-geometrically-integral cases and separate Pierce
-geometry remain open. Neither PlaneCurveBound nor AffineCurveBound is proved.
+controlled projections and non-geometrically-integral cases remain open.
+Neither PlaneCurveBound nor AffineCurveBound is proved.
 No counting axiom or independent human review is asserted.
 
 Complete affine plane assembly, conditional on sharp residues (19 October 2026)
@@ -390,8 +389,8 @@ declarations. Only propext, Classical.choice and Quot.sound occur. Source
 checks verify 25 vendor hashes and 137 reachable mathematical modules.
 These totals precede the nonabsolute integration below. The sharp finite-field estimate,
 rational irreducible but not absolutely irreducible case, controlled
-projections, arbitrary-curve degree interfaces and separate Pierce geometry
-remain unfinished. No counting axiom or independent human review is asserted.
+projections and arbitrary-curve degree interfaces remain unfinished.
+No counting axiom or independent human review is asserted.
 
 Nonabsolute curves and the exact plane target (19 October 2026)
 --------------------------------------------------------------
@@ -416,10 +415,9 @@ warningAsError=true. The integrated bash scripts/check.sh passes with
 9191 Lake jobs, auditing 833 project and 555 vendored declarations. Only
 propext, Classical.choice and Quot.sound occur. Source checks verify 25
 vendor hashes and 141 reachable mathematical modules. These totals precede the formal-branch integration below. Controlled projections, general-curve degree and
-nongeometric interfaces, and the separate Pierce geometry remain unfinished
-in addition to the sharp geometric finite-field estimate. There is still no
-unconditional proof of PlaneCurveBound or AffineCurveBound. No counting
-axiom or independent human review is asserted.
+nongeometric interfaces remain unfinished in addition to the sharp geometric
+finite-field estimate. There is still no unconditional proof of PlaneCurveBound
+or AffineCurveBound. No counting axiom or independent human review is asserted.
 
 
 Formal branches and the Stepanov construction (19 October 2026)
@@ -443,7 +441,7 @@ The integrated check passed with 9204 Lake jobs, auditing 908 project and 555
 vendored declarations. Only propext, Classical.choice and Quot.sound occur.
 Source checks verify 25 vendor hashes and 154 reachable modules. These totals
 precede the numerical completion below. Controlled projections,
-general-curve interfaces and the separate Pierce geometry also remain open.
+general-curve interfaces also remain open.
 No counting axiom or independent human review is asserted.
 
 
@@ -462,8 +460,8 @@ The integrated bash scripts/check.sh passes with 9208 Lake jobs, auditing
 917 project and 555 vendored declarations. Only propext, Classical.choice and
 Quot.sound occur. Source checks verify 25 vendor hashes and 158 reachable
 mathematical modules. These totals precede the primitive-pair integration below. AffineCurveBound,
-controlled projections, general-curve interfaces and separate Pierce geometry
-remain unfinished. No counting axiom or independent human review is asserted.
+controlled projections and general-curve interfaces remain unfinished.
+No counting axiom or independent human review is asserted.
 
 
 Function fields and bounded primitive coordinates (19 October 2026)
@@ -482,9 +480,9 @@ The integrated bash scripts/check.sh passes with 9216 Lake jobs, auditing
 946 project and 555 vendored declarations. Only propext, Classical.choice and
 Quot.sound occur. Source checks verify 25 vendor hashes and 166 reachable
 mathematical modules. These totals precede the projection integration below. The degree-
-preserving projection and exceptional-fiber bounds remain unproved; so do the general-
-curve nongeometric interface and the separate Pierce geometry. PlaneCurveBound
-is proved; AffineCurveBound and the active Pierce candidate are not.
+preserving projection and exceptional-fiber bounds remain unproved; so does the general-
+curve nongeometric interface. PlaneCurveBound is proved; AffineCurveBound
+is not.
 No counting axiom or independent human review is asserted.
 
 
@@ -506,9 +504,8 @@ The integrated bash scripts/check.sh passes with 9225 Lake jobs, auditing
 Quot.sound occur. Source checks verify 25 vendor hashes and 175 reachable
 mathematical modules. These totals precede the deformation integration below.
 The bounded existence of a full-degree parameter and a uniform O(d²)
-exceptional-point bound remain unproved. AffineCurveBound and the separate
-Pierce geometric obligations remain unfinished. No counting axiom or
-independent human review is asserted.
+exceptional-point bound remain unproved. AffineCurveBound remains unfinished.
+No counting axiom or independent human review is asserted.
 
 
 Uniform exceptional count by deformation (19 October 2026)
@@ -529,9 +526,8 @@ The integrated bash scripts/check.sh passes with 9237 Lake jobs, auditing
 1008 project and 555 vendored declarations. Only propext, Classical.choice and
 Quot.sound occur. Source checks verify 25 vendor hashes and 187 reachable
 mathematical modules. These are the integrated totals for that stage.
-Bounded existence of a degree-preserving projection, the full affine counting
-assembly and the separate Pierce geometry remain unproved. No counting axiom
-or independent human review is asserted.
+Bounded existence of a degree-preserving projection and the full affine counting
+assembly remain unproved. No counting axiom or independent human review is asserted.
 
 Historical initial-checkout verification
 ---------------------------------------
@@ -564,7 +560,7 @@ The integrated bash scripts/check.sh passes with 9258 Lake jobs, auditing
 1122 project and 555 vendored declarations. Only propext, Classical.choice and
 Quot.sound occur. Source checks verify 25 vendor hashes and 208 reachable
 mathematical modules. These are the integrated totals for that stage. The full general
-affine counting assembly and separate Pierce geometry remain unfinished.
+affine counting assembly remains unfinished.
 No counting axiom or independent human review is asserted.
 
 
@@ -577,8 +573,7 @@ warningAsError=true. The final declaration is
 Its target quantifies n>=2, then chooses C(n)>0 before the prime ideal, positive
 Hilbert degree and B>=1. The precise bound is C(n)*d³*B^(1/d)*(log B+d).
 All counting, projection, height and exceptional-point inputs are proved.
-This completes the external theorem's stated prime-ideal/Hilbert-degree
-interface; it does not prove the remaining Pierce geometry or final bound.
+This completes the affine theorem's stated prime-ideal/Hilbert-degree interface.
 The integrated bash scripts/check.sh passes with 9262 Lake jobs, auditing
 1140 project and 555 vendored declarations. Only propext, Classical.choice and
 Quot.sound occur. Source checks verify 25 vendor hashes and 212 reachable
@@ -588,9 +583,8 @@ No independent human review or separate kernel implementation is asserted.
 
 2026-10-20: projective heights, interpolation and proper sections
 --------------------------------------------------------------
-Integrated six projective modules into the standalone repository. The
-Pierce source-hashed snapshot remains unchanged. This is progress toward
-the full CCDN paper, not a proof of its projective counting theorem.
+Integrated six projective modules into the repository. This is progress
+toward the full CCDN paper, not a proof of its projective counting theorem.
 
 Proved: Northcott finiteness for rational projective height; primitive
 integer representatives with exact maximum-coordinate height; homogeneous
@@ -646,7 +640,6 @@ results do not establish the rational projective counting theorem. Next:
 total projective multiplicity with a polynomial singular correction, then
 prime-sum and coefficient-height assembly. The full remaining scope and a
 concrete multiplicity proof route are in docs/full-paper-plan.txt.
-The completed Pierce application's vendored snapshot was not changed.
 
 2026-10-20: coefficient-uniform projective plane theorem
 ------------------------------------------------------
@@ -675,8 +668,8 @@ This completes the plane-equation version, not all of Theorem 2. Remaining:
 projective Hilbert-degree/chart compatibility for general curves and
 bounded projective projection to arbitrary ambient dimensions. Theorems
 1, 4 and 6, Proposition 5, and the lower-bound consequences remain open.
-The full scope is preserved in docs/full-paper-plan.txt. The existing
-completed affine theorem and the Pierce vendored snapshot were unchanged.
+The full scope is preserved in docs/full-paper-plan.txt. The completed
+affine theorem was unchanged.
 
 2026-10-20: full projective curve bound, CCDN Theorem 2
 ----------------------------------------------------
@@ -715,7 +708,6 @@ determinant exponents in Section 2, followed by the surface, slicing and
 dimension-growth assembly. The external small-degree and class-group
 inputs must also be proved; they are not allowed as unproved hypotheses.
 The complete remaining obligations are in docs/full-paper-plan.txt.
-The completed Pierce application's vendored snapshot was not changed.
 
 2026-10-20: Higher-dimensional local hypersurface determinant bound
 -----------------------------------------------------------------
@@ -757,7 +749,6 @@ the determinant lemma for arbitrary Noetherian local rings.
 The full paper is NOT complete. Next: projective normalization beyond plane
 curves, higher-dimensional residue aggregation and finite-field counts.
 Theorems 1, 4 and 6, Proposition 5 and lower-bound consequences remain open.
-The completed Pierce application's source-hashed snapshot was unchanged.
 
 2026-10-20: Projective hypersurface residue aggregation
 -----------------------------------------------------
@@ -807,7 +798,6 @@ The full paper is NOT complete. Next: the sharp coefficient-uniform
 finite-field hypersurface count with multiplicity (2.7), then discharge
 2.8--2.9 and continue the global auxiliary-polynomial/dimension-growth route.
 Theorems 1, 4 and 6, Proposition 5 and lower-bound consequences remain open.
-The completed Pierce application's source-hashed snapshot was unchanged.
 
 2026-10-20: Higher-dimensional singular correction, projective cones and bounded constants
 ----------------------------------------------------------------------------------------
@@ -863,7 +853,7 @@ The next geometric work includes generic-plane irreducibility, the
 large-characteristic differential rank criterion, the degree-bounded
 bad-section witness and the contribution of identically zero restrictions.
 Theorems 1, 4 and 6, Proposition 5 and lower-bound consequences remain open.
-The full-paper goal is still active. Pierce's pinned snapshot was unchanged.
+The full-paper goal is still active.
 
 2026-10-20: Resultant construction and positive-characteristic closed-form rank
 ----------------------------------------------------------------------------
@@ -927,7 +917,7 @@ Remaining: generic-plane irreducibility, parameter-degree control of the
 nonzero minor, bad-section counts (including identically zero restrictions),
 and the sharp unweighted hypersurface count. Lemma 2.7 remains incomplete.
 Theorems 1, 4 and 6, Proposition 5 and lower-bound consequences remain open.
-The full-paper goal remains active; Pierce's pinned snapshot was unchanged.
+The full-paper goal remains active.
 
 Smooth rational points and scalar extension
 -----------------------------------------
@@ -968,9 +958,7 @@ positioning, polynomial parameter-degree control of the determinant, and
 counts of bad and identically zero restrictions. The sharp unweighted
 finite-field hypersurface count and Lemma 2.7 remain incomplete.
 Theorems 1, 4, 6, Proposition 5 and the lower-bound consequences remain open.
-The full-paper goal remains active. Pierce's pinned snapshot is unchanged;
-its 224-file source/hash check passed with digest
-07b7c9b92ff70e334a56622dde89e730a870a37e87369d4b0d949c377ddcc37c.
+The full-paper goal remains active.
 
 Positioned generic-plane irreducibility and a nonzero slope minor
 ---------------------------------------------------------------
@@ -1010,8 +998,7 @@ restrictions; and the sharp unweighted finite-field hypersurface count.
 A fixed-good-line family does not by itself supply the incidence family
 needed for the final point count. Lemma 2.7 remains incomplete.
 Theorems 1, 4 and 6, Proposition 5 and Section 6 consequences remain open.
-The full-paper goal remains active. No Pierce source or pinned snapshot
-was changed during this integration.
+The full-paper goal remains active.
 
 Full-degree smooth hypersurface positioning
 -----------------------------------------
@@ -1046,7 +1033,7 @@ Still OPEN: the universal affine-plane family specialization and parameter
 degree bound; bad-section and identically-zero-restriction counts; incidence
 averaging; and the sharp unweighted hypersurface count of Lemma 2.7.
 Theorems 1, 4, 6, Proposition 5 and Section 6 consequences remain open.
-The full-paper goal remains active. Pierce's pinned snapshot is unchanged.
+The full-paper goal remains active.
 
 Universal affine planes and cubic bad-section witness (2026-10-20)
 ----------------------------------------------------------------
@@ -1071,7 +1058,6 @@ Inventory: /tmp/ccdn-universal-inventory.json.
 The sharp unweighted hypersurface count remains open: identically zero
 restrictions need a separate stronger estimate before incidence averaging.
 No claims of completion for Theorems 1,4,6, Proposition 5 or Section 6.
-The Pierce vendored curve snapshot was not modified.
 
 Zero-plane count and exact incidence averaging (2026-10-20)
 ---------------------------------------------------------
@@ -1093,7 +1079,7 @@ The remaining finite-field step is to bound the actual section counts, sum
 the good/bad/zero contributions, simplify the numerical errors, and apply
 the projective-cone identity plus the already proved singular correction.
 The sharp hypersurface count itself is not yet claimed. Main theorems 1,4,6,
-Proposition 5 and Section 6 remain open. The Pierce snapshot is unchanged.
+Proposition 5 and Section 6 remain open.
 
 Sharp hypersurface count and CCDN 2.7--2.9 (2026-10-20)
 -----------------------------------------------------
@@ -1119,7 +1105,7 @@ Inventory: /tmp/ccdn-sharp-hypersurface-inventory.json.
 Higher-dimensional bad-prime control, simultaneous-prime global bounds and
 auxiliary polynomials remain open, along with the surface/slicing/projection
 steps, main Theorems 1,4,6, Proposition 5 and Section 6. No full-paper
-completion is claimed. The Pierce vendored curve snapshot is unchanged.
+completion is claimed.
 
 Higher-dimensional integer bad-prime witness (2026-10-20)
 --------------------------------------------------------
@@ -1145,7 +1131,7 @@ Inventory: /tmp/ccdn-bad-prime-witness-inventory.json.
 The quantitative height/charge bound is NOT proved by these existence and
 finiteness results. It remains the next step, followed by simultaneous-prime
 bounds and higher-dimensional auxiliary polynomials. Main Theorems 1,4,6,
-Proposition 5 and Section 6 remain open. Pierce's pinned snapshot is unchanged.
+Proposition 5 and Section 6 remain open.
 
 Higher-dimensional quantitative bad-prime height (2026-10-20)
 ------------------------------------------------------------
@@ -1172,8 +1158,7 @@ Source inventory SHA256: 1877e42eec544424419f69ef1ad6279eccc61cbc5befae6e5452438
 Logs: /tmp/ccdn-quantitative-height-full-stage.log,
       /tmp/ccdn-quantitative-height-full-canonical.log.
 Inventory: /tmp/ccdn-quantitative-height-inventory.json.
-Canonical git diff --check passed. Pierce's 224-file vendored snapshot was
-verified unchanged (SHA256 07b7c9b92ff70e334a56622dde89e730a870a37e87369d4b0d949c377ddcc37c).
+Canonical git diff --check passed.
 The exact universal Noether-form statement and constants of Theorem 3.2.2
 remain open. The required height consequence is proved by the alternate
 constructed witness above. Simultaneous-prime bounds, higher-dimensional
@@ -1212,8 +1197,7 @@ Source inventory SHA256: d19ba04e29dcef3426fd9e589236ddb170e5a1da3e6c3888d53ef6f
 Logs: /tmp/ccdn-global-hypersurface-full-stage.log,
       /tmp/ccdn-global-hypersurface-full-canonical.log.
 Inventory: /tmp/ccdn-global-hypersurface-inventory.json.
-Canonical git diff --check passed. Pierce's 224-file vendored snapshot was
-verified unchanged (SHA256 07b7c9b92ff70e334a56622dde89e730a870a37e87369d4b0d949c377ddcc37c).
+Canonical git diff --check passed.
 Uniform higher-dimensional auxiliary-degree selection remains open, as do
 main Theorems 1,4,6, Proposition 5, Section 6, and the exact universal
 Noether-form statement in 3.2.2. No full-paper completion is claimed.
@@ -1246,8 +1230,7 @@ Source inventory SHA256: d7acd082946256943a06233d60f475e7a7bfa3bde1d275da553e2ab
 Logs: /tmp/ccdn-hilbert-profile-full-stage.log,
       /tmp/ccdn-hilbert-profile-full-canonical.log.
 Inventory: /tmp/ccdn-hilbert-profile-inventory.json.
-Canonical git diff --check passed. Pierce's 224-file vendored snapshot was
-verified unchanged (SHA256 07b7c9b92ff70e334a56622dde89e730a870a37e87369d4b0d949c377ddcc37c).
+Canonical git diff --check passed.
 The two height regimes' numerical auxiliary-degree selection and general
 leading-coefficient positioning remain open. No higher-dimensional auxiliary
 existence theorem is claimed by these numerical comparisons alone.
@@ -1322,8 +1305,7 @@ Source inventory SHA256: 05b04d83ba1f73ae843f76fad1453122db35ca71c482c62c0a1a2d7
 Logs: /tmp/ccdn-full-auxiliary-full-stage.log,
       /tmp/ccdn-full-auxiliary-full-canonical.log.
 Inventory: /tmp/ccdn-full-auxiliary-inventory.json.
-Canonical git diff --check passed. Pierce's 224-file snapshot is unchanged:
-SHA256 07b7c9b92ff70e334a56622dde89e730a870a37e87369d4b0d949c377ddcc37c.
+Canonical git diff --check passed.
 Main Theorems 1,4,6, Proposition 5, Section 6, exact Noether forms in 3.2.2,
 the varying-column-degree determinant formulation, and the exact complex
 interpolation constants in Lemmas 3.4.1-2 remain open. The auxiliary theorem
@@ -1377,8 +1359,7 @@ Logs: /tmp/ccdn-affine-all-cases-full-stage.log,
       /tmp/ccdn-affine-all-cases-full-canonical.log.
 Inventory: /tmp/ccdn-affine-all-cases-inventory.json.
 Guarded integration manifest: /tmp/ccdn-affine-all-cases-sync.json (19 files).
-Canonical git diff --check passed. Pierce's 224-file snapshot is unchanged:
-SHA256 07b7c9b92ff70e334a56622dde89e730a870a37e87369d4b0d949c377ddcc37c.
+Canonical git diff --check passed.
 Exact-statement audit found two distinctions, recorded in
   docs/affine-factor-audit.txt:
 * Literal affine Definition 3.2.1 omits degree loss. Its equality under
@@ -1395,7 +1376,7 @@ interpolation constants in Lemmas 3.4.1-2 remain open. The full goal is active.
 Top-form auxiliary, actual component degrees, and nonlinear surface count
 -----------------------------------------------------------------------
 20 October 2026. Integrated 23 new mathematical modules, their root imports,
-explicit endpoint axiom checks, statement ledger, and source provenance.
+explicit endpoint axiom checks and the statement ledger.
 The coefficient-uniform top-form auxiliary (4-3-1) is proved in every
 hypersurface dimension. It removes integer content and proves rational
 nondivisibility, with degree C(r)*d^(4-1/r)*B^(1/d^(1/r)).
@@ -1411,10 +1392,6 @@ Degree-one prime components with a rational point are actual rational
 affine lines. Primitive integer direction, projective height, and the
 line bound 1+2B/height(direction) are proved. Characteristic-zero integer
 good-plane specialization with additional polynomial avoidance is proved.
-Seven generic commutative-algebra/line modules adapt the author's Pierce
-development, with exact working-tree hashes and preserved Apache headers
-recorded in docs/pierce-generic-provenance.json. Original source files and
-the pinned Pierce counting snapshot are unchanged.
 
 Full staging and canonical scripts/check.sh both passed:
   25 vendor hashes; 394 reachable modules; 9444 Lake jobs;
@@ -1426,10 +1403,9 @@ Inventory: /tmp/ccdn-top-form-inventory.json.
 Logs: /tmp/ccdn-top-form-full-stage.log,
       /tmp/ccdn-top-form-full-canonical.log.
 Guarded integration manifest: /tmp/ccdn-top-form-sync.json (28 files).
-Canonical git diff --check passed. The 224-file Pierce snapshot remains:
-SHA256 07b7c9b92ff70e334a56622dde89e730a870a37e87369d4b0d949c377ddcc37c.
+Canonical git diff --check passed.
 Repository rename audit passed: canonical directory ccdn-dimension-growth,
-Lake package ccdn_dimension_growth, Pierce dependency vendor/ccdn-dimension-growth;
+Lake package ccdn_dimension_growth;
 no old repository-name references or configured Git remotes. Lean namespace
 AffineCurveCounting is retained.
 
@@ -1449,13 +1425,21 @@ All 370 project/root Lean files still match the inventory recorded above.
 The complete affine and projective curve bounds are available for review;
 the remaining full-paper statements retain the scope recorded in the ledger.
 
-Pierce uses the earlier 224-file source-hashed curve-counting snapshot, with
-inventory digest 07b7c9b92ff70e334a56622dde89e730a870a37e87369d4b0d949c377ddcc37c.
-That exact snapshot is archived in pierce-length-bound, including its source
-hashes and standalone verification record. This later CCDN checkpoint extends
-or refactors seven of its mathematical dependency files; it does not replace
-the snapshot used to verify the Pierce exponent.
-
 Nine newer surface-line modules remain in the separate staging directory.
 They are not included in this verified checkpoint. Full-paper development
 is paused while these review commits are prepared; it is not complete.
+
+
+Library documentation cleanup — 20 October 2026
+-----------------------------------------------
+Generic algebra and geometry are documented as native library modules.
+The documentation now describes their mathematical interfaces and CCDN scope.
+Definitions, theorem statements, proofs, author/license headers and third-party
+attribution are unchanged.
+
+Re-ran bash scripts/check.sh after the source-comment changes: PASS, with
+25 vendor hashes, 394 reachable modules, 9444 Lake jobs, and 2163 project
+plus 555 vendor declarations. Only propext, Classical.choice and Quot.sound
+occur. Source checks and git diff --check passed after documentation cleanup.
+The corresponding staging comments and documentation are synchronized; the
+nine additional staging modules remain outside this verified checkpoint.

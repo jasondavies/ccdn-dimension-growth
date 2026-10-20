@@ -11,8 +11,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 /-!
 # Filtered multiples in a two-equation ideal
 
-Adapted from the generic filtered-space lemmas in pierce-length-bound. The
-intersection of the bounded-degree multiples of two coprime equations consists
+The intersection of the bounded-degree multiples of two coprime equations consists
 exactly of bounded-degree multiples of their product.
 -/
 

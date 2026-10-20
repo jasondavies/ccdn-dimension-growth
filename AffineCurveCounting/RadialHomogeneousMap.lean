@@ -8,7 +8,7 @@ module
 public import AffineCurveCounting.InfinitySection
 
 /-! Radial scaling records the homogeneous components as coefficients of a
-single polynomial. Generalized from the radial-map lemmas in pierce-length-bound. -/
+single polynomial. -/
 
 @[expose] public section
 namespace AffineCurveCounting

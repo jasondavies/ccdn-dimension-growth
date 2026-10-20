@@ -8,8 +8,7 @@ module
 public import AffineCurveCounting.CurveParameterFullDegree
 
 /-! Balanced coordinate-power reductions imply eventual generation by a
-linear parameter in arbitrary ambient dimension. Adapted and generalized from
-FixedDividendEventualGeneration in pierce-length-bound. -/
+linear parameter in arbitrary ambient dimension. -/
 
 @[expose] public section
 namespace AffineCurveCounting

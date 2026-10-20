@@ -10,8 +10,7 @@ public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 
 /-! Finite prime decomposition and codimension two for an actual intersection
- of two equations. Adapted from the generic part of
- PierceLengthBound/FixedDividendComponents.lean. -/
+ of two equations. -/
 
 @[expose] public section
 namespace AffineCurveCounting

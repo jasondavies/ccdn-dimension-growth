@@ -672,9 +672,6 @@ only propext, Classical.choice and Quot.sound are allowed. Match theorem
 statements to the paper, including constants chosen before coefficients,
 real radii, all requested degrees, and all ambient dimensions.
 
-The completed Pierce application uses a pinned copy of the affine theorem.
-Keep that snapshot unchanged while extending this standalone repository.
-
 Auxiliary degree selection milestone
 -----------------------------------
 AuxiliaryRatioEstimates and AuxiliaryLargeHeightRatios handle the normalized

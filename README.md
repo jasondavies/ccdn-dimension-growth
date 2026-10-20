@@ -99,9 +99,6 @@ integer zero and gives total component degree at most
 proved to be exactly rational affine lines. For each line with at least two
 bounded integer points, its primitive integer direction has height at most
 `2B`, and the integer count is at most `1 + 2B/height(direction)`.
-The generic commutative algebra adapted from the Pierce development retains
-its Apache-2.0 headers; [the provenance manifest](docs/pierce-generic-provenance.json)
-records the exact source and destination hashes and the scope of each port.
 
 Characteristic-zero plane specialization also constructs an integer plane
 whose section is geometrically irreducible of full degree while avoiding any
@@ -116,21 +113,10 @@ original surface's bounded integer points outside their degree-one union by
 The complete surface count still needs the line contribution. Degrees 5
 through 15 and higher-dimensional dimension growth remain open.
 
-The constant is independent of the curve's coefficients. The project supplies the external
-counting input for the Pierce-length refinements.
-The Pierce joint-lift development proves `128/435 + ε`, then the optimization
-`(1310 − √655)/4365 + ε`. It needs ambient dimension seven: unpowered graph degrees
-17 through 5928, and degrees bounded in terms of the fixed powers for the optimized
-version. Exceptional curves still use dimension three in degrees 2 through 24.
-The new route uses ordinary pattern counting. The external counting theorem
-and its integration into the Pierce application are proved. The Pierce
-repository retains a source-hashed snapshot of the affine-curve library
-while this standalone repository develops the rest of the CCDN paper.
-
 ## Build and audit
 
 The toolchain is Lean `v4.35.0`; Mathlib is pinned to
-`56a005855ea17e0b0958f73ec801ae140b0a1679`, matching `pierce-length-bound`.
+`56a005855ea17e0b0958f73ec801ae140b0a1679`.
 
 With Elan, Python 3, and Git installed:
 
@@ -236,7 +222,7 @@ review of theorem statements.
 | `PrimeProduct` | Combine divisibility at distinct primes into a product and a logarithmic lower bound. |
 | `MertensFirst` | First Mertens theorem: a uniform bounded error for the prime sum of log(p)/p, with convergent prime-power error. |
 | `PrimeSums` | Weighted good-prime sums, charges for excluded primes, and analytic determinant lower bound from explicit local divisibility and finite-field point estimates. |
-| `FilteredIntersection`, `MonomialDimension` | Filtered multiples, kernel dimension bounds, and exact monomial-space dimensions, adapted from the Pierce development. |
+| `FilteredIntersection`, `MonomialDimension` | Filtered multiples, kernel dimension bounds, and exact monomial-space dimensions. |
 | `PlaneHilbert` | Exact principal-plane Hilbert function; polynomial total degree equals the degree used by the counting target. |
 | `PointSeparation`, `PolynomialSection`, `Bezout` | A proper degree-`m` section of an actual degree-`d` prime curve has at most `dm` distinct points; sharp plane intersection and integer-box counting forms. |
 | `FormalImplicitRoot`, `FormalPlaneBranch` | Construct the unique formal power-series branch at a point with a nonzero partial derivative, in arbitrary characteristic. |

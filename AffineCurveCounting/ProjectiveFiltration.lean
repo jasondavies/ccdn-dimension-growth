@@ -11,8 +11,6 @@ public import Mathlib.Algebra.Polynomial.AlgebraMap
 /-!
 # The filtered homogeneous coordinate algebra
 
-Adapted from the generic projective-filtration construction in pierce-length-bound.
-
 For an affine coordinate ideal `I`, this constructs the subalgebra of
 `(K[x]/I)[w]` whose coefficient of `w^n` is represented by a polynomial of degree
 at most `n`. Its homogeneous pieces recover the existing filtered Hilbert

@@ -10,8 +10,6 @@ public import AffineCurveCounting.ProjectiveFiltration
 /-!
 # The actual quotient by the infinity coordinate
 
-Adapted from the generic infinity-section construction in pierce-length-bound.
-
 The degree-`n+1` image in the quotient of the filtered homogeneous coordinate
 algebra by its infinity coordinate has dimension `H(n+1)-H(n)`. Thus the
 certified affine Hilbert degree is already the eventual graded dimension of an

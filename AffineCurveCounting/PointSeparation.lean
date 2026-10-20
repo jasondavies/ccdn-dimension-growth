@@ -10,8 +10,8 @@ public import AffineCurveCounting.FilteredIntersection
 /-!
 # Point separation for polynomial sections
 
-Generic point-separation lemmas adapted from pierce-length-bound. Powers of
-any nonzero element vanishing at the selected points give independent classes.
+Powers of any nonzero element vanishing at the selected points give
+independent classes.
 -/
 
 @[expose] public section

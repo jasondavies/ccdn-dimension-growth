@@ -20,8 +20,8 @@ coordinate ring. HasAffineCurveDegree I d means dim(F_M(Q[x]/I)) = d*M+c for all
 sufficiently large M. Each F_M is proved finite-dimensional and the slope is
 proved unique. PlaneHilbert proves the exact principal-plane Hilbert-function
 formula and total-degree comparison. The theorem uses this affine Hilbert-degree
-interface directly; application-specific geometric degree correspondences
-remain obligations of the application.
+interface directly. Using another degree convention requires a proved
+comparison with this filtered Hilbert degree.
 
 Completed prerequisite: Bombieri--Vaaler (CCDN Theorem 3.3.4)
 ---------------------------------------------------------
@@ -506,16 +506,10 @@ and d(d-1)<=curveBound d B. The constant is chosen before the source ideal,
 degree and radius, and depends only on n. No external counting hypothesis,
 projection, field embedding or geometric-integrality premise remains.
 
-Pierce integration
-------------------
-The current joint-lift candidate proposes 128/435 and its powered optimization.
-It needs n=7 for unpowered graph degrees 17 through 5928, and higher degrees
-bounded in terms of fixed powers for the optimization. Exceptional curves
-still need n=3 and degrees 2 through 24. It uses ordinary pattern counting.
-The shared actual conic count is now proved in pierce-length-bound, but the
-joint graph-degree lower bound remains a separate obligation; neither follows
-from the results in this repository.
-
-The full external input is now proved. After its integrated axiom audit,
-pierce-length-bound can acquire a pinned dependency on this repository. This repository does not resolve the separate
-Pierce resultant, geometry, or exceptional-pattern counting obligations.
+Library interface
+-----------------
+The exported affine counting theorem takes a prime coordinate ideal, its
+positive affine Hilbert degree, and a real box radius at least one. The
+constant depends only on ambient dimension. Concrete curve presentations
+can use the theorem once their ideals, degrees and point sets are identified
+with this interface; no separate counting hypothesis is required.

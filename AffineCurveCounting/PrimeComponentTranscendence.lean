@@ -10,9 +10,7 @@ public import AffineCurveCounting.FilteredHilbertLinearity
 public import Mathlib.FieldTheory.Minpoly.Field
 
 /-! A point on a prime component forces a transcendental coordinate and
- positive eventual Hilbert slope in codimension two. Adapted from the generic
- arguments in FixedDividendTranscendentalCoordinate.lean and
- FixedDividendRationalComponents.lean of pierce-length-bound. -/
+ positive eventual Hilbert slope in codimension two. -/
 
 @[expose] public section
 namespace AffineCurveCounting

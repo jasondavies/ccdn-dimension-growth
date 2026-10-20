@@ -65,7 +65,7 @@ theorem curveBound_nonneg {d : ℕ} {B : ℝ} (hB : 1 ≤ B) : 0 ≤ curveBound 
   have := Real.log_nonneg hB
   positivity
 
-/-- The precise bounded-degree consequence used by the Pierce application. -/
+/-- A coefficient-uniform consequence for curves of bounded degree. -/
 theorem curveBound_le_sqrt {d D : ℕ} (hd : 2 ≤ d) (hD : d ≤ D) {B : ℝ}
     (hB : 1 ≤ B) :
     curveBound d B ≤ (D : ℝ) ^ 3 * B ^ (1 / 2 : ℝ) * (Real.log B + D) := by
