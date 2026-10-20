@@ -1875,3 +1875,66 @@ Log: /tmp/ccdn-noether-descent-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-noether-descent-checkpoint-sync.json
 Source inventory: /tmp/ccdn-noether-descent-checkpoint-inventory.json (678 files)
 Inventory SHA256: d5bed1619ad0e02e72ddc42acd220d844c6b70dd56a1b102e1655f9fb1ca6dbd
+
+
+2026-10-20: literal affine bounds, geometric projection and Salberger cover
+-------------------------------------------------------------------------
+Integrated forty-five new mathematical modules and ninety explicit endpoint
+audits. IntegerGoodHyperplaneSlices now exposes the slice-model construction
+as a reusable helper; its previous public theorem is unchanged.
+
+LiteralAffineBadPrimes defines the exact affine factor in Definition 3.2.1.
+The sharp chart determinant handles degree-dropping reductions by removing
+the extra infinity component at points whose first coordinate is a p-adic
+unit. The global determinant, rank and height comparison, actual point
+family, prime selection, bounded translation and nonabsolute branch are
+proved. literal_affine_hypersurface_auxiliary and
+literal_affine_plane_coefficient_count_uniform now prove the literal-factor
+conclusions of Proposition 4.2.1 and Corollary 4.2.4, including the full
+minimum and original leading coefficient height. The incorrect intermediate
+homogenization-factor equality remains false and is not used.
+
+GeometricProjectiveProjection proves the general geometric image required
+in 4.3.2, with exact degree, finite birational projection, factor-d count
+and dimension-only polynomial height cost. The affine and projective curve
+clauses include actual geometric images, function-field identities and
+additive count errors. Proper chart selection and coordinate permutations
+are constructed before the radius. The general affine 4.3.1 remains open.
+
+IntegralHyperplaneAvoidance proves the actual homogeneous intersection-ideal
+formulation of 4.3.7 for every positive degree, including degree one and
+coincident hyperplanes. CubicGoodHyperplane constructs an integer normal
+bounded by d^3. CubicAffineDimensionGrowth proves the corrected affine
+exponent 18+3n in n+3 variables, for both integer and rational equations.
+The projective general-variety exponent 2*n^3 remains available.
+
+SurfaceSalbergerCover proves the full affine covering estimate for every
+positive degree, with constants chosen before the surface and B. Actual
+geometric curves have degree at most d^2, number bounded by
+C*(B^(1/sqrt(d))*log B+1), and smooth-complement count bounded by
+C*B^(2/sqrt(d)+c/log(1+log B)). Coefficient height and content are discharged.
+The projective closure kernel, geometric primeness after scalar extension,
+exact Hilbert-function equality, chart locus and containment are constructed.
+Euler's identity proves the affine/projective Jacobian comparison, and
+salberger_surface_cover gives the projective coordinate-ideal formulation
+with homogeneous partial derivatives at [1:a]. Separate Scheme/Proj packaging
+is not claimed.
+
+SharpMinorSpecialization proves the polynomial specialization in Lemma 5.3:
+given a homogeneous polynomial in maximal minors and an actual full-rank
+rational nonvanishing witness, it constructs integer rows bounded by
+max(1,deg F), preserving independence and nonvanishing. For deg F<R and
+R>=1, maximal minors are bounded by R^r*r!. The actual Chow/good-center
+polynomial, the exact Section 5 center height and general affine projection
+remain open. Full-paper completion is not claimed.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 747 reachable modules.
+Full build: 9797 jobs, PASS.
+Transitive audit: 4169 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Final log: /tmp/ccdn-geometric-checkpoint-final-canonical.log
+Guarded integration: /tmp/ccdn-geometric-checkpoint-sync.json
+Source inventory: /tmp/ccdn-geometric-checkpoint-inventory.json (723 files)
+Inventory SHA256: 47cff5821a987feefdcf9264526ad4d2e589d99d7440f485900ddb1aa088e44f

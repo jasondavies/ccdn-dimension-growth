@@ -24,8 +24,10 @@ curves that split over an algebraic closure.
 
 The full affine hypersurface bound (Theorem 4) and the projective hypersurface
 case of Theorem 1 are also proved for every degree `d ≥ 5`, including degrees
-5 through 15. In `n+3` affine or homogeneous variables, the bound is
-`C(n) d^(18+9n) B^(n+1)`.
+5 through 15. In `n+3` affine variables, the improved bound is
+`C(n) d^(18+3n) B^(n+1)`, using integer hyperplane normals bounded by `d³`.
+The existing projective hypersurface endpoint in `n+3` homogeneous variables
+retains `C(n) d^(18+9n) B^(n+1)`.
 
 `projective_dimension_growth_cubic` proves Theorem 1 for general integral
 projective varieties, including zero-dimensional and empty loci. In `P^n`,
@@ -70,9 +72,14 @@ over characteristic-zero fields: a pure-dimensional ideal of dimension `m`
 and Hilbert multiplicity `d` has at most `d*|S|^m` zeros in the grid `S`.
 Its rational-box consequence is `d(2B+1)^m`. The proof constructs the
 minimal-prime component degree budget and bounds actual integral fibers by
-function-field rank. `exists_sharp_projective_projection` also gives the
-exact factor `d` in the count comparison for a constructed finite birational
-projective projection, with polynomial height cost.
+function-field rank. `exists_geometrically_integral_projective_projection`
+proves Proposition 4.3.2's general projection statement: a constructed finite
+birational integer projection has a geometrically integral image of the same
+degree, count factor `d`, and height cost `C(n) d^(2(n+1))`.
+`exists_geometric_projective_curve_projection` gives the curve clause, with
+additive error `d²` and height cost `C(n) d^(2n)`. The affine curve version of
+4.3.1 has additive error `d(d−1)`. The maps and image are chosen before the
+radius, and geometric integrality and function-field identities are proved.
 
 The higher-dimensional bad-prime height estimate (CCDN Corollary 3.2.3) is
 also proved. `hypersurface_bad_prime_factor_max` bounds the actual bad-prime
@@ -129,24 +136,31 @@ nonmultiple vanishing on every integer zero in the box, with the affine
 of the logarithmic and bad-prime terms. Prime selection, the coefficient-height
 dichotomy, polynomial box ranges and bounded translations are discharged.
 
-**This affine theorem uses a bad-prime factor that includes degree loss.**
-It differs from the literal affine wording of Definition 3.2.1. The factor
-agrees with that definition for homogeneous equations, so the projective
-results above do not have this issue. Exact literal Proposition 4.2.1 remains
-open; the [statement audit](docs/affine-factor-audit.txt) gives a concrete
-counterexample to the printed intermediate homogenization equality and records
-the author's published corrections. Lemma 4.2.2 is proved with its printed
-dimension-only multiplier: `projective_coefficient_height_dichotomy_uniform`
-gives `H(f) ≤ C(n) B^(d*N)`, with `N = choose(n+1+d,d)` in `n+2` variables,
-or a homogeneous degree-`d` nonmultiple vanishing on every bounded projective
-zero. This proof does not use the disputed affine-factor equality.
+`literal_affine_hypersurface_auxiliary` proves Proposition 4.2.1 with the
+paper's literal affine bad-prime factor and the complete minimum expression.
+It covers all real `B ≥ 1` and primitive irreducible integer equations of
+positive degree, including equations that split over the algebraic closure.
+`literal_affine_plane_coefficient_count_uniform` proves Corollary 4.2.4 with
+the same literal factor, original leading coefficient height and a single
+absolute constant chosen before the equation and radius.
 
-`affine_plane_coefficient_count_uniform` proves the full coefficient-sensitive
-minimum expression in Corollary 4.2.4 with the same degree-loss-inclusive
-bad-prime factor. The generic coprime Newton-edge Corollary 4.2.5 is proved:
+The proof handles degree-dropping reductions directly in the affine chart.
+Their homogenizations have the form `g X₀^(d−e)`; all supplied points have
+`X₀` a unit modulo the prime, so only `g` contributes local multiplicities.
+The printed intermediate equality between affine and homogeneous bad-prime
+factors remains false, as documented in the
+[statement audit](docs/affine-factor-audit.txt). The new proofs establish the
+literal conclusions without that equality. The earlier degree-loss-inclusive
+versions remain available.
+
+Lemma 4.2.2 is proved with its printed dimension-only multiplier:
+`projective_coefficient_height_dichotomy_uniform` gives
+`H(f) ≤ C(n) B^(d*N)`, with `N = choose(n+1+d,d)` in `n+2` variables,
+or a homogeneous degree-`d` nonmultiple vanishing on every bounded projective
+zero. The generic coprime Newton-edge Corollary 4.2.5 is also proved:
 `coprime_newton_edge_log_free_bound` gives
 `C d⁴ (log|c_d c_e|+1) B^(1/d)`. Irreducibility, the bad-prime bound and
-primitive normalization are proved from the support and endpoint conditions.
+primitive normalization follow from the support and endpoint conditions.
 
 The coefficient-uniform top-form auxiliary estimate (4-3-1) is now proved.
 If the leading homogeneous part of an integer equation is absolutely
@@ -188,20 +202,42 @@ for every `d ≥ 5`. The small degrees use a constructed smooth-congruence
 cover, proper auxiliary crossings, retained low-degree curves and the proved
 line contribution. The coefficient-height condition is discharged internally.
 
-`top_form_hypersurface_dimension_growth` extends the bound to every ambient
-dimension `n+3`, giving `C(n) d^(18+9n) B^(n+1)` for every `d ≥ 5`. It
-constructs a good integer hyperplane with normal bounded by `750d^9`,
-integer equations for all parallel slices, and the point maps used in the
-induction. `exists_effective_hyperplane_avoidance` now also constructs a
-nonzero homogeneous polynomial that vanishes on all bad hyperplane sections,
-in explicit graph coordinates for `d ≥ 2`. Its degree `d(d²−1)+1` is below
-the corrected bound in Lemma 4.3.7; the omitted coordinate chart is covered
-by a coordinate factor. `rational_top_form_hypersurface_dimension_growth`
-also covers rational equations. `projective_hypersurface_dimension_growth` proves the
-corresponding projective hypersurface bound, including rationally irreducible
-equations that split over an algebraic closure. These endpoints have no
-external counting, slicing, height or covering premise. The general
-projective-variety reduction is also completed by ProjectiveDimensionGrowth.
+`top_form_hypersurface_dimension_growth_cubic` extends the bound to every
+ambient dimension `n+3`, giving `C(n) d^(18+3n) B^(n+1)` for every `d ≥ 5`.
+It constructs a good integer hyperplane with normal bounded by `d³`, integer
+equations for all parallel slices, and the point maps used in the induction.
+The rational-equation version is also proved. This gives the corrected affine
+exponent `3N+9` in ambient dimension `N`. The earlier `18+9n` endpoint remains
+available.
+
+`exists_integral_hyperplane_avoidance` proves Lemma 4.3.7 for every positive
+degree, expressed by primeness of the actual hyperplane intersection ideal
+over the algebraic closure. It constructs a nonzero homogeneous detector of
+degree at most `(4+n)d(d²−1)` in `4+n` variables. For `d ≥ 2`, its degree is
+`d(d²−1)+1`, and a coordinate factor covers the omitted graph chart. For
+`d=1`, the detector is the constant one: the intersection ideal is prime,
+including coincident hyperplanes. No separate Scheme/Proj comparison is claimed.
+
+`projective_hypersurface_dimension_growth` proves the projective hypersurface
+bound, including rationally irreducible equations that split over an algebraic
+closure. These endpoints have no external counting, slicing, height or covering
+premise. The general projective-variety reduction is also completed by
+ProjectiveDimensionGrowth.
+
+`surface_salberger_cover` proves the affine form of the covering input in
+Theorem 4.3.5 for every positive degree. Constants `C(d), c(d)>0` are chosen
+before an arbitrary absolutely irreducible integer surface equation and
+`B ≥ 1`. The theorem constructs actual geometrically integral curves on the
+surface, each of degree at most `d²`, with number at most
+`C(d)(B^(1/√d) log B+1)`. The number of smooth integer points outside them is
+at most `C(d) B^(2/√d+c(d)/log(1+log B))`. Coefficient height and primitivity
+are discharged internally. `projective_surface_salberger_cover` also
+constructs the actual homogeneous geometrically prime closure ideals on the
+projective surface, proves the same projective degrees, and gives the same
+bounds on its affine chart. `projectiveSmoothAffineChart_eq` proves the
+equivalence of affine and homogeneous Jacobian nonsingularity by Euler's
+identity. The final `salberger_surface_cover` states the projective covering
+bound using the homogeneous partial derivatives at `[1:a]`.
 
 `non_rational_prime_count_le_box` and `nonabsolute_variety_count_le_box`
 prove the general affine statements of 4.1.3 and 4.1.4: the rational integer
@@ -215,7 +251,10 @@ internally. The hypersurface bound over arbitrary field extensions remains
 available as `nonabsolute_hypersurface_count_le_sharp`.
 The corresponding projective curves satisfy the stronger, height-independent
 bound `projectiveCount ≤ d²`, proved in `NonRationalProjectiveCurve` from their
-actual homogeneous ideals. This supplies the curve case of Remark 4.1.5.
+actual homogeneous ideals. `nonabsolute_affine_curve_count_le_degree_sq`
+also gives the height-independent affine bound `count ≤ d²`, by identifying
+the filtered Hilbert polynomial from the actual affine curve degree. These
+supply the curve bounds in Remark 4.1.5.
 
 `principal_section_count_le_box` bounds a proper degree-`e` section of a
 degree-`d`, dimension-`m+1` prime variety by `de(2B+1)^m`; section purity and
@@ -272,8 +311,9 @@ finite parameter-field extension. Each elimination step preserves Hilbert
 dimension, bounds the new multiplicity by the original one, and uses integer
 linear forms with bounded coefficients. Iteration constructs an injective,
 integral normalization map whose integer coefficients are at most
-`n! (d+1)^n`. A bounded primitive coordinate now augments this to a finite
-birational projection. The actual homogeneous irreducible image equation has
+`n! (d+1)^n`. For a homogeneous source ideal, a bounded primitive coordinate
+augments this to a finite birational projection. The actual homogeneous
+irreducible image equation has
 exactly degree `d`: a nonzero conductor compares the two Hilbert filtrations
 in both directions. The projection height is polynomial in `d`, with constants
 depending only on ambient dimension. Minimal polynomials bound actual affine
@@ -511,10 +551,12 @@ Apache license are recorded under `vendor/mertens/`.
 ## Remaining work
 
 The six main results are proved. Remaining intermediate obligations include
-exact projection geometry and height estimates, the Salberger covering
-statement, the degree-one geometric boundary of hyperplane avoidance, and
-the literal affine-factor versions of 4.2.1 and 4.2.4. The ledger distinguishes proved replacements
-from the exact statements they do not yet imply.
+the general affine projection statement and the exact projection-center
+geometry and heights of Section 5. The general projective projection, both
+curve projection clauses, literal affine-factor theorems, Salberger covering
+in the coordinate-ideal formulation, and all positive degrees of
+hyperplane-ideal avoidance are proved. The ledger distinguishes proved
+interfaces and replacements from the exact statements they do not yet imply.
 
 `not_printed_row_separator_bound` formally disproves Lemma 5.4's printed
 numerical constant. A five-equation system requires a coordinate of at least

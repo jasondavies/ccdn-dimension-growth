@@ -22,8 +22,9 @@ equation F(X,Y,Z)=439*X^2+Y*Z. The degree is two, the cutoff is 432, and 439
 is prime. Every affine reduction is absolutely irreducible: its equation
 solves uniquely for y over every field. Thus the literal affine factor is 1.
 At 439 the homogeneous reduction is Y*Z, whereas all other reductions are
-irreducible. Its factor is exp(log(439)/439)>1. The repository's affine factor
-has the latter value because it includes the degree drop.
+irreducible. Its factor is exp(log(439)/439)>1. The existing inclusive factor
+hypersurfaceBadPrimeFactor has the latter value because it includes the
+degree drop; the new literalAffineBadPrimeFactor has value 1.
 
 This refutes the intermediate equality between the literal affine and
 homogeneous factors asserted in the proof of Proposition 4.2.1. It does NOT
@@ -33,14 +34,15 @@ the affine factor is a possible convention, not a confirmed author intention.
 
 The formal theorem affine_hypersurface_auxiliary uses the repository's
 degree-loss-inclusive factor throughout. It proves all box and coefficient
-cases, including the minimum bound and bounded translations. The literal
-printed affine-factor version remains open. A uniform constant comparing the
-two factors is not a valid repair: replacing 439 by products of arbitrarily
+cases, including the minimum bound and bounded translations. The new
+literal_affine_hypersurface_auxiliary proves the literal printed version by
+the chart argument below. A uniform constant comparing the two factors
+would not be a valid repair: replacing 439 by products of arbitrarily
 many large primes gives literal factor 1 and an unbounded inclusive factor.
 The coefficient-uniform consequences may be proved directly from the existing
 variant and its height estimate.
 
-In degree at least two, the repository's affine factor equals its homogeneous
+In degree at least two, the inclusive affine factor equals its homogeneous
 factor. In degree one only the proved inequality is used: p*x+1 can become
 constant affinely but remains an irreducible homogeneous linear equation.
 
@@ -57,7 +59,43 @@ are embedded into the hyperplane X0=0; its proved determinant divisor
 absorbs the factorial interpolation cost. This argument does not use the
 disputed affine-factor equality. The earlier N^N multiplier remains a
 valid quantitative bound, sufficient for the polynomial box cutoff.
-The literal affine-factor versions of 4.2.1 and 4.2.4 remain open.
+The literal affine-factor conclusions of 4.2.1 and 4.2.4 are now proved by
+the chart argument and final assembly below.
+
+Exact chart determinant and literal-factor branches
+--------------------------------------------------
+LiteralAffineBadPrimes now defines the literal factor, including value zero
+for a nonabsolute equation, and proves finiteness and translation invariance.
+ProjectiveOpenResidueDeterminant proves the sharp prime-power divisor on
+the open set where the extra reduced factor is nonzero. Applied in
+AffineChartPrimeDeterminant, a degree-dropping reduction is written as
+g*X0^(d-e), where g is the homogenization of the actual degree-e affine
+reduction. At every supplied point the first coordinate is a p-adic unit;
+the extra X0 factor therefore contributes no local multiplicity. The sharp
+divisor with the original degree d follows from the proved counts for g.
+
+AffineChartGlobalDeterminant and the chart auxiliary modules propagate this
+through the prime sum, rank comparison, height ranges and coefficient
+positioning. LiteralScaledAuxiliary constructs the actual finite point
+family and excluded primes. LiteralAffineMinimum proves the full printed
+minimum with literalAffineBadPrimeFactor in two cases: an actual admissible
+scaling prime, and B<=S*(d+1)^k with fixed S>=1 and k. Both construct proper
+auxiliary polynomials, under primitivity and absolute irreducibility.
+There is no supplied finite-field count or local determinant premise.
+
+LiteralAffineAuxiliaryTheorem completes all radii, the zero-constant case
+by bounded integral translation, and the nonabsolute case. Its endpoint
+literal_affine_hypersurface_auxiliary has only the printed primitivity,
+irreducibility, positive degree and B>=1 assumptions. No geometric
+irreducibility or chosen-prime hypothesis remains. The dimension-only
+constant and original leading coefficient height are retained.
+
+LiteralAffinePlaneCount proves literal_affine_plane_coefficient_count_uniform
+for the actual affine integer zero locus, with one absolute positive constant
+chosen before the equation and B. Rational nondivisibility and Bezout are
+discharged internally. These prove the literal conclusions of Proposition
+4.2.1 and Corollary 4.2.4 while retaining the counterexample to the printed
+intermediate equality.
 
 Published corrections affecting future work
 ------------------------------------------

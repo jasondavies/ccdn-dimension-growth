@@ -53,35 +53,24 @@ theorem exists_integer_model_absolute_top {n : ℕ} (f : MvPolynomial (Fin n) �
       rw [map_eval, map_zero]
       exact hh.mpr hx
 
-/-- A bounded good hyperplane and integer equations for all its parallel
-slices. The leading form of every slice is absolutely irreducible of the
-original full degree, and actual integer zeros map by coordinate deletion. -/
-theorem exists_bounded_good_integer_hyperplane_slices {n : ℕ}
-    (f : MvPolynomial (Option (Fin (3 + n))) ℤ)
-    (hir : Irreducible (map (Int.castRingHom Qbar)
-      (homogeneousComponent f.totalDegree f)))
-    (hd : 0 < f.totalDegree) :
-    ∃ (D : ℤ) (a : Fin (3 + n) → ℤ) (g : ℤ → MvPolynomial (Fin (3 + n)) ℤ),
-      D ≠ 0 ∧ |D| ≤ (goodHyperplaneHeight f.totalDegree : ℤ) ∧
-      (∀ i, |a i| ≤ (goodHyperplaneHeight f.totalDegree : ℤ)) ∧
-      ∀ k : ℤ, (g k).totalDegree = f.totalDegree ∧
-        Irreducible (map (Int.castRingHom Qbar)
-          (homogeneousComponent (g k).totalDegree (g k))) ∧
-        ∀ x : Option (Fin (3 + n)) → ℤ,
-          D * x none - ∑ i, a i * x (some i) = k →
-          eval x f = 0 → eval (fun i => x (some i)) (g k) = 0 := by
+/-- Integer models for all parallel slices of any chosen good rational
+hyperplane; the normal may come from any quantitative construction. -/
+theorem exists_integer_hyperplane_slice_models {n : ℕ}
+    (f : MvPolynomial (Option (Fin n)) ℤ) (D : ℤ) (a : Fin n → ℤ)
+    (hD : D ≠ 0)
+    (hgood : Irreducible (map (algebraMap ℚ Qbar)
+      (graphHyperplaneRestriction (fun i => (a i : ℚ) / D)
+        (map (Int.castRingHom ℚ) (homogeneousComponent f.totalDegree f))))) :
+    ∃ g : ℤ → MvPolynomial (Fin n) ℤ, ∀ k : ℤ,
+      (g k).totalDegree = f.totalDegree ∧
+      Irreducible (map (Int.castRingHom Qbar)
+        (homogeneousComponent (g k).totalDegree (g k))) ∧
+      ∀ x : Option (Fin n) → ℤ,
+        D * x none - ∑ i, a i * x (some i) = k →
+        eval x f = 0 → eval (fun i => x (some i)) (g k) = 0 := by
   classical
-  let F := homogeneousComponent f.totalDegree f
-  have hF : F ≠ 0 := by
-    intro hz
-    exact hir.ne_zero (by change map _ F = 0; rw [hz, map_zero])
-  have hFdegree : F.totalDegree = f.totalDegree :=
-    (homogeneousComponent_isHomogeneous f.totalDegree f).totalDegree hF
-  obtain ⟨D, a, hD, hDb, hab, _, hgood⟩ :=
-    exists_bounded_geometrically_good_hyperplane F hir (hFdegree ▸ hd)
-  rw [hFdegree] at hDb hab
   let p := map (Int.castRingHom ℚ) f
-  let α : Fin (3 + n) → ℚ := fun i => (a i : ℚ) / D
+  let α : Fin n → ℚ := fun i => (a i : ℚ) / D
   have hpdegree : p.totalDegree = f.totalDegree := by
     unfold p totalDegree
     rw [support_map_of_injective _ Int.cast_injective]
@@ -93,10 +82,10 @@ theorem exists_bounded_good_integer_hyperplane_slices {n : ℕ}
     intro hz
     exact htopir.ne_zero (by rw [hz, map_zero])
   have hDq : (D : ℚ) ≠ 0 := by exact_mod_cast hD
-  have hslices (k : ℤ) : ∃ g : MvPolynomial (Fin (3 + n)) ℤ,
+  have hslices (k : ℤ) : ∃ g : MvPolynomial (Fin n) ℤ,
       g.totalDegree = f.totalDegree ∧
       Irreducible (map (Int.castRingHom Qbar) (homogeneousComponent g.totalDegree g)) ∧
-      ∀ x : Option (Fin (3 + n)) → ℤ,
+      ∀ x : Option (Fin n) → ℤ,
         D * x none - ∑ i, a i * x (some i) = k →
         eval x f = 0 → eval (fun i => x (some i)) g = 0 := by
     let q := affineGraphHyperplaneSlice α ((k : ℚ) / D) p
@@ -135,6 +124,36 @@ theorem exists_bounded_good_integer_hyperplane_slices {n : ℕ}
     rw [map_eval, map_zero] at hh
     exact hh
   choose g hg using hslices
+  exact ⟨g, hg⟩
+
+/-- A bounded good hyperplane and integer equations for all its parallel
+slices. The leading form of every slice is absolutely irreducible of the
+original full degree, and actual integer zeros map by coordinate deletion. -/
+theorem exists_bounded_good_integer_hyperplane_slices {n : ℕ}
+    (f : MvPolynomial (Option (Fin (3 + n))) ℤ)
+    (hir : Irreducible (map (Int.castRingHom Qbar)
+      (homogeneousComponent f.totalDegree f)))
+    (hd : 0 < f.totalDegree) :
+    ∃ (D : ℤ) (a : Fin (3 + n) → ℤ) (g : ℤ → MvPolynomial (Fin (3 + n)) ℤ),
+      D ≠ 0 ∧ |D| ≤ (goodHyperplaneHeight f.totalDegree : ℤ) ∧
+      (∀ i, |a i| ≤ (goodHyperplaneHeight f.totalDegree : ℤ)) ∧
+      ∀ k : ℤ, (g k).totalDegree = f.totalDegree ∧
+        Irreducible (map (Int.castRingHom Qbar)
+          (homogeneousComponent (g k).totalDegree (g k))) ∧
+        ∀ x : Option (Fin (3 + n)) → ℤ,
+          D * x none - ∑ i, a i * x (some i) = k →
+          eval x f = 0 → eval (fun i => x (some i)) (g k) = 0 := by
+  classical
+  let F := homogeneousComponent f.totalDegree f
+  have hF : F ≠ 0 := by
+    intro hz
+    exact hir.ne_zero (by change map _ F = 0; rw [hz, map_zero])
+  have hFdegree : F.totalDegree = f.totalDegree :=
+    (homogeneousComponent_isHomogeneous f.totalDegree f).totalDegree hF
+  obtain ⟨D, a, hD, hDb, hab, _, hgood⟩ :=
+    exists_bounded_geometrically_good_hyperplane F hir (hFdegree ▸ hd)
+  rw [hFdegree] at hDb hab
+  obtain ⟨g, hg⟩ := exists_integer_hyperplane_slice_models f D a hD hgood
   exact ⟨D, a, g, hD, hDb, hab, hg⟩
 
 end

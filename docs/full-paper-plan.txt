@@ -49,8 +49,9 @@ Theorem 4: PROVED. For each n > 2, constants c(n), e(n), uniformly for
 integer polynomials of degree d >= 5 with absolutely irreducible leading
 homogeneous part (irreducible over Q-bar, as in the rendered paper):
 N_aff(f,B) <= c(n) d^e(n) B^(n-2), B >= 1.
-top_form_hypersurface_dimension_growth gives C(n)*d^(18+9n)*B^(n+1)
-for n+3 integer variables and every d>=5. The small-degree surface cover,
+top_form_hypersurface_dimension_growth_cubic gives C(n)*d^(18+3n)*B^(n+1)
+for n+3 integer variables and every d>=5, using hyperplane normals bounded
+by d^3. In ambient dimension N this is the corrected exponent 3N+9. The small-degree surface cover,
 coefficient-height reduction, hyperplanes, slice equations and count injections
 are constructed; no missing geometric/counting premise. The rational-equation
 version is also proved.
@@ -714,14 +715,17 @@ Section 4:
     in both non-Q-defined and nonabsolute cases. The cone-to-graded Hilbert
     degree comparison and homogeneity of geometric components are derived.
     No separately named numerical restatements of Theorems 1--3 are added;
-4.2.1 affine auxiliary polynomial: the all-case theorem with the defined
-    degree-loss-inclusive affine bad-prime factor is PROVED by
-    affine_hypersurface_auxiliary. It has the complete minimum expression,
-    original leading homogeneous coefficient height and a dimension-only
-    constant. Prime choice, all coefficient/box cases and translations are
-    discharged. The exact literal printed affine factor remains OPEN:
-    its claimed equality under homogenization fails for q*x^2+y with q>432.
-    This is not a counterexample to the auxiliary conclusion itself;
+4.2.1 affine auxiliary polynomial: PROVED with the literal factor by
+    literal_affine_hypersurface_auxiliary. For every primitive irreducible
+    integer equation of positive degree and B>=1 it constructs an actual
+    proper auxiliary vanishing on all bounded integer zeros, with the full
+    minimum, original leading coefficient height and a dimension-only
+    constant. Prime selection, polynomial-box ranges, all coefficient cases,
+    translation and the nonabsolute case are discharged. The sharp chart
+    determinant permits a degree drop whenever the affine reduction remains
+    geometrically irreducible. The printed intermediate homogenization-factor
+    equality is still false; the new argument does not use it. The earlier
+    degree-loss-inclusive endpoint remains available;
 4.2.2 coefficient height versus bounded projective zeros: PROVED by
     projective_coefficient_height_dichotomy_uniform. In n+2 variables,
     one C(n)>0 works for every homogeneous nonzero f, degree d and B>=1:
@@ -733,22 +737,36 @@ Section 4:
     hypersurface_badPrime_height_transfer, with explicit dimension constant,
     actual maximum coefficient height, actual defined factor and every real
     lower height Y>=1. No monotonicity or counting theorem is assumed;
-4.2.4 coefficient-sensitive affine plane count: the full minimum expression
-    is PROVED by affine_plane_coefficient_count_uniform, using the defined
-    degree-loss-inclusive affine bad-prime factor. The literal-factor
-    distinction recorded for 4.2.1 still applies;
+4.2.4 coefficient-sensitive affine plane count: PROVED with the literal
+    factor by literal_affine_plane_coefficient_count_uniform, including the
+    full minimum expression, original leading coefficient height and
+    denominator. One absolute positive constant precedes every primitive
+    irreducible plane equation of positive degree and B>=1. Actual point
+    counting and rational nondivisibility follow from the constructed
+    auxiliary and proved Bezout theorem;
 4.2.5 coprime Newton-edge log-free affine count: PROVED in general by
     coprime_newton_edge_log_free_bound, with a universal constant and bound
     C*d^4*(log|c_d*c_e|+1)*B^(1/d). Support and nonzero endpoint coefficients
     give irreducibility over every field; every bad prime divides c_d*c_e.
     Primitive normalization and the bad-prime estimate are internal;
-4.3.1 bounded affine projection;
-4.3.2 bounded projective projection: exists_sharp_projective_projection
-    constructs an integral finite birational projection to an irreducible
-    homogeneous hypersurface of exactly degree d. The actual count comparison
-    has factor d and height cost C(n)*d^(2*(n+1)). This proves that quantitative
-    comparison; the full printed geometric-integrality interface and the
-    separate curve additive-error clause are not asserted by this endpoint;
+4.3.1 bounded affine projection: the curve clause is PROVED by
+    exists_geometric_affine_curve_projection. The actual geometrically
+    integral plane image has degree d, constructed rational-function-field
+    identity, additive count error d^2, and height cost C(n)*d^(2*n).
+    The underlying exists_geometric_affine_curve_count_reduction retains
+    the stronger additive error d*(d-1).
+    The projection and image precede B. The general higher-dimensional
+    affine statement remains OPEN;
+4.3.2 bounded projective projection: PROVED by
+    exists_geometrically_integral_projective_projection. The constructed
+    finite birational integer projection has geometrically integral image
+    of exactly degree d, actual count factor d, and height cost
+    C(n)*d^(2*(n+1)). Geometric integrality follows from proved scalar extension
+    of the actual projection kernel. The curve clause is PROVED separately
+    by exists_geometric_projective_curve_projection, with additive error d^2,
+    height cost C(n)*d^(2*n), and a constructed function-field identity.
+    Proper chart selection and coordinate permutation are internal and
+    independent of B. The exact Section 5 center height is not claimed;
 4.3.3 line contributions on affine surfaces: PROVED in the corrected form
     requiring absolute irreducibility of the leading form. For every d>=3,
     actual finite rational line families contribute at most C*d^6*B+#lines,
@@ -761,31 +779,63 @@ Section 4:
     bound C*d^18*B, absolutely irreducible leading form and every real B>=1.
     The large-degree auxiliary count and constructed small-degree congruence
     cover are combined with the proved line contribution;
-4.3.5 surface covering input (Salberger);
-4.3.6 stated polynomial-dependence consequence;
-4.3.7 effective good hyperplanes: the explicit polynomial formulation is
-    PROVED for d>=2 by exists_effective_hyperplane_avoidance, in 4+n variables.
-    It constructs a nonzero homogeneous detector of degree d*(d^2-1)+1,
-    at most (4+n)*d*(d^2-1), the corrected source bound. It vanishes on every
-    graph restriction that is not absolutely irreducible, over every field;
-    a coordinate factor covers the omitted chart. Nonvanishing uses an
-    internally constructed good section. The degree-one geometric boundary
-    is separate: a zero restricted equation can describe an integral whole
-    hyperplane, so polynomial irreducibility is not a valid proxy there.
-    No new scheme-theoretic section identification is claimed. The earlier
-    integral good normal bounded by 6*(2d^3+3)^3<=750d^9 remains available;
-4.3.8 stated slicing/dimension-growth consequences: PROVED for every d>=5,
-    by constructing integer equations for all parallel levels, preserving their
-    absolutely irreducible leading forms, and counting actual slices. Each
-    dimension step adds nine to the degree exponent. The projective exponent
-    2*n^3 is now PROVED by ProjectiveCubicExponent. Agreement with the exact
-    printed affine degree exponents is not claimed. Author addenda dated 2026-04-20:
+4.3.5 surface covering input (Salberger): the exact affine form is PROVED
+    by surface_salberger_cover for every d>=1. Degree-only positive constants
+    C,c precede every absolutely irreducible integer ternary equation and
+    B>=1. The constructed curves are geometrically prime, contained in the
+    actual surface, and have degrees at most d^2. Their number is at most
+    C*(B^(1/sqrt(d))*log B+1); the smooth complement has count at most
+    C*B^(2/sqrt(d)+c/log(1+log B)). Coefficient height and integer content are
+    discharged. projective_surface_salberger_cover constructs the actual
+    homogeneous geometrically prime curve ideals on a homogeneous rational
+    surface with X0 not dividing its equation. Exact closure Hilbert-function
+    equality gives the same projective curve degrees. The affine-chart
+    count excludes the preimage of those actual projective curve loci.
+    projectiveSmoothAffineChart_eq proves affine and homogeneous Jacobian
+    nonsingularity equivalent using Euler's identity. The final endpoint
+    salberger_surface_cover proves the projective coordinate-ideal
+    formulation using homogeneous partial derivatives at [1:a]. No
+    separate Scheme/Proj packaging is asserted;
+4.3.6 fixed-degree consequence and proof comparison: the fixed-degree
+    surface consequences, and hence the fixed-degree main bounds, are
+    already PROVED. The historical Browning--Heath-Brown--Salberger/Walsh
+    derivation is not separately reproduced;
+4.3.7 effective good hyperplanes: PROVED for every d>=1 in the actual
+    homogeneous intersection-ideal formulation, by
+    exists_integral_hyperplane_avoidance. The nonzero homogeneous detector
+    has degree at most (4+n)*d*(d^2-1) in 4+n variables and vanishes whenever
+    the intersection ideal becomes nonprime over the algebraic closure,
+    over every field. For d>=2 its degree is d*(d^2-1)+1; a coordinate
+    factor covers the omitted graph chart. For d=1, all such linear
+    intersection ideals are prime, including coincident hyperplanes, so
+    the detector is 1. No separate Scheme/Proj identification is claimed.
+    exists_cubic_geometrically_good_hyperplane constructs a good integer
+    normal bounded by d^3 for d>=2;
+4.3.8 stated slicing/dimension-growth consequences: PROVED for every d>=5.
+    CubicAffineDimensionGrowth constructs integer equations for all parallel
+    levels, preserves their absolutely irreducible leading forms, and counts
+    actual slices. Each dimension step adds three to the degree exponent,
+    giving 18+3n in n+3 affine variables, or 3N+9 in ambient dimension N.
+    This is the exponent from the corrected surface and hyperplane bounds.
+    The projective exponent 2*n^3 is PROVED by ProjectiveCubicExponent.
+    Author addenda dated 2026-04-20:
     https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf .
 
 Section 5:
-5.1 degree of bad projection-center locus;
-5.2 polynomial detecting bad centers on a Grassmannian chart;
-5.3 bounded integer projection matrix;
+5.1 bounded birational projection with height C(n)*d^(2*(n-m-1)^2): the
+    exact center/complement construction and this height bound remain OPEN;
+5.2 polynomial detecting bad centers on the Grassmannian: the actual
+    Chow-form construction and claimed degree bound remain OPEN;
+5.3 bounded integer projection matrix: the polynomial specialization is
+    PROVED by exists_integer_minor_specialization_degree_lt. Given a
+    homogeneous polynomial F in maximal-minor coordinates, an actual
+    full-rank rational matrix with F nonzero, deg F<R and R>=1, it constructs
+    an integer matrix with independent rows, preserved nonvanishing,
+    entries between 0 and R, and every maximal minor bounded by R^r*r!.
+    For R>=2 the entries are strictly below R. CoordinateGridAvoidance and
+    MinorCoordinateDegree prove the coordinatewise grid step with no extra
+    factor r in the entry bound. The actual good-center polynomial and
+    witness from 5.2 remain OPEN;
 5.4 small integer kernel vectors: the literal printed constant is FORMALLY
     DISPROVED by not_printed_row_separator_bound in RowSeparatorCounterexample.
     A system with s=5,r=6,B=10 has independent rows and requires a coordinate
@@ -1309,3 +1359,43 @@ it does not claim the literal bad-center-locus statements in Section 5.
 All six main results are now proved. Completion of the entire paper still
 requires the exact outstanding statements in the named-result ledger above,
 or a precisely recorded correction where the literal source is false.
+
+
+Geometric projection, cubic slicing and affine Salberger cover
+-------------------------------------------------------------
+ProjectionScalarExtension and ProjectiveChartScalarExtension identify the
+actual kernels after extending scalars. GeometricProjectiveProjection proves
+the general geometric image required by 4.3.2. GeometricCurveProjection,
+GeometricCurveCountReduction and GeometricProjectiveCurveProjection retain
+geometric integrality, full degree and the additive curve count comparison;
+ReconstructionFunctionField proves the birational function-field identity.
+
+HyperplaneSectionIdeal identifies the actual two-generator section ideal
+with the graph quotient and treats degree-one sections directly.
+IntegralHyperplaneAvoidance then covers every positive degree.
+CubicGoodHyperplane specializes the universal detector on an integer grid,
+giving a normal bounded by d^3. IntegerGoodHyperplaneSlices factors out the
+construction of slice equations, leaving its previous public endpoint intact.
+CubicIntegerHyperplaneSlices and CubicHyperplaneDimensionGrowth reuse that
+construction and add three powers of d per dimension. CubicAffineDimensionGrowth
+proves the final integer and rational bounds.
+
+AffineCurveHilbertPolynomial identifies the actual filtered Hilbert polynomial
+of a positive-degree affine curve and deduces count<=d^2 for nonabsolute
+curves. SurfaceGeometricCoefficientReduction supplies actual geometric curves
+in the large-coefficient branch. SurfaceGeometricCurveCover bounds the discarded
+nongeometric components; SurfaceMediumCurveCount bounds the medium-degree
+components. PrimeWindowSalbergerRate, LogarithmicSalbergerRate and
+SurfaceResidueSalbergerCount give the exact logarithmic exponent loss.
+SurfaceSalbergerHeightCover, SalbergerCoverNumerics and SurfaceSalbergerCover
+combine these and remove coefficient height and primitivity. This completes
+the affine covering theorem. ProjectiveClosureIdeal proves homogeneous
+primeness, geometric primeness and compatibility with scalar extension;
+ProjectiveClosureDegree proves exact equality of the homogeneous and
+filtered affine Hilbert functions, the actual chart locus and containment
+in the projective surface. RationalSurfaceSalbergerCover removes integer
+coefficient restrictions. ProjectiveSurfaceSalbergerCover assembles these
+into the projective coordinate-ideal covering statement. ProjectiveChartSmoothness
+uses Euler's identity to equate affine and homogeneous Jacobian nonsingularity;
+SalbergerSurfaceTheorem gives the final endpoint with homogeneous partial
+derivatives at [1:a].
