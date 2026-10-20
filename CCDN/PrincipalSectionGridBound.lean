@@ -75,7 +75,7 @@ theorem principal_section_degree_budget
   rw [show ((m + 1 : ℕ) : ℚ) = (m : ℚ) + 1 by push_cast; rfl, heq] at hh
   exact_mod_cast (div_le_div_iff_of_pos_right hfac).mp hh
 
-/-- Sharp Bezout-plus-grid count with the actual section and actual
+/-- Sharp Bezout-plus-grid count with the section and
 minimal-prime decomposition constructed inside the proof. -/
 theorem principal_section_grid_card_le
     {K : Type*} [Field K] [CharZero K] {n m : ℕ}

@@ -55,7 +55,7 @@ theorem formal_plane_map_eq_zero_iff_dvd {K : Type*} [Field K]
   · rintro ⟨q, rfl⟩
     rw [map_mul, hψ, zero_mul]
 
-/-- The actual substitution map attached to a chosen formal branch. -/
+/-- The substitution map attached to a chosen formal branch. -/
 def formalPlaneBranchMap {K : Type*} [Field K]
     (z : Fin 2 → K) (j : Fin 2) (g : PowerSeries K) :
     MvPolynomial (Fin 2) K →ₐ[K] PowerSeries K :=
@@ -85,7 +85,7 @@ lemma formalPlaneBranchMap_constant {K : Type*} [Field K]
         simpa only [ite_eq_right hk, MvPolynomial.eval_X] using hh
   exact RingHom.congr_fun he f
 
-/-- Every nonsingular point on an irreducible plane curve gives an actual
+/-- Every nonsingular point on an irreducible plane curve gives a
 faithful formal branch, with the original point as its constant evaluation. -/
 theorem exists_faithful_formal_plane_branch {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K) (hf : Irreducible f) (z : Fin 2 → K) (j : Fin 2)

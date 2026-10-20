@@ -2,7 +2,7 @@ module
 
 public import CCDN.SmoothPlaneChart
 
-/-! Smooth reduction classes of an actual plane equation, and their contribution
+/-! Smooth reduction classes of a plane equation, and their contribution
 to the gcd of maximal evaluation minors. No residue partition is assumed. -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ lemma cast_plane_eval {p : ℕ} (f : MvPolynomial (Fin 2) ℤ) (z : Fin 2 → �
   simpa only [MvPolynomial.eval₂_id, RingHom.comp_id, Function.comp_def, Int.coe_castRingHom] using
     MvPolynomial.eval₂_comp_left (Int.castRingHom (ZMod p)) (RingHom.id ℤ) z f
 
-/-- The exponent at a prime is constructed from the actual reduced points.
+/-- The exponent at a prime is constructed from the reduced points.
 Its quadratic lower bound depends only on the number of smooth rational points
 of the reduced equation. The integral points must all reduce to smooth points. -/
 theorem smooth_reduction_minorGcd {s N p : ℕ} [Fact p.Prime] (hs : 0 < s)

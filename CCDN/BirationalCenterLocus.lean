@@ -3,7 +3,7 @@ module
 public import CCDN.BirationalCenterNonvanishing
 public import CCDN.ZeroColumnCenterDensity
 
-/-! The actual geometrically disjoint birational-center condition, and its
+/-! The geometrically disjoint birational-center condition, and its
 independence from the enumeration used for the minor projection. -/
 
 @[expose] public section
@@ -64,7 +64,7 @@ abbrev IndependentCenterMatrix (K : Type*) [Field K] (r n : ℕ) :=
   {x : Fin r × Fin n → K //
     LinearIndependent K (fun i : Fin r => fun j : Fin n => x (i,j))}
 
-/-- The actual good-center locus; no detector polynomial is part of its
+/-- The good-center locus; no detector polynomial is part of its
 definition. -/
 def birationalMatrixCenterLocus {K : Type*} [Field K] {n r s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]

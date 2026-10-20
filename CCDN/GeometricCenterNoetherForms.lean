@@ -6,7 +6,7 @@ public import CCDN.GeometricProjectiveChow
 public import CCDN.PolynomialPredicates
 
 /-! The geometric center detector is defined over the original field.
-Its evaluations on rational center matrices detect the actual restrictions
+Its evaluations on rational center matrices detect the restrictions
 over algebraic closure, including all projective points at infinity. -/
 
 @[expose] public section

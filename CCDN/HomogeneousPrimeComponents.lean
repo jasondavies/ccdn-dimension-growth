@@ -4,7 +4,7 @@ public import CCDN.IdealScalarDescent
 public import Mathlib.RingTheory.GradedAlgebra.Radical
 public import CCDN.PolynomialPredicates
 
-/-! Homogeneity survives coefficient extension and passage to actual
+/-! Homogeneity survives coefficient extension and passage to
 minimal-prime components. The latter uses the prime homogeneous core. -/
 
 @[expose] public section

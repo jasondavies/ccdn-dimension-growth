@@ -3,7 +3,7 @@ module
 public import CCDN.NumberFieldUnitSquareClasses
 public import Mathlib.NumberTheory.NumberField.Norm
 
-/-! The actual unit-norm quotient in a quadratic extension is finite,
+/-! The unit-norm quotient in a quadratic extension is finite,
 with a uniform bound depending only on the base-field degree. Squares
 of base units are norms of their extensions. -/
 

@@ -5,7 +5,7 @@ public import CCDN.ProjectiveConeBound
 public import CCDN.ProjectiveSection
 
 /-! Projective cone forms of CCDN 4.1.3 and 4.1.4. Primitive integer
-representatives inject into the actual affine cone with the same radius. -/
+representatives inject into the affine cone with the same radius. -/
 
 @[expose] public section
 namespace CCDN

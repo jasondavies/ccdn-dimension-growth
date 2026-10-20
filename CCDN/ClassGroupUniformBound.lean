@@ -3,7 +3,7 @@ module
 public import CCDN.ClassGroupDegreeReduction
 public import CCDN.QuadraticClassGroupNumerics
 
-/-! Uniform class-group bounds by strong induction on the actual field
+/-! Uniform class-group bounds by strong induction on the field
 degree. A quadratic subfield has smaller degree, and discriminant descent
 leaves enough exponent saving to absorb the proved ramification factor.
 The coefficient is chosen before the field. -/

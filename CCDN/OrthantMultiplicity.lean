@@ -4,7 +4,7 @@ public import CCDN.OrthantHilbertPolynomial
 
 /-! The maximal orthants determine the leading term of the Hilbert polynomial.
 In particular its factorial-normalized leading coefficient is a positive
-integer, counted by actual cells of the standard-exponent partition. -/
+integer, counted by cells of the standard-exponent partition. -/
 
 @[expose] public section
 namespace CCDN

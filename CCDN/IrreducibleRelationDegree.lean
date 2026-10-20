@@ -3,7 +3,7 @@ module
 public import CCDN.HomogeneousNormalizationRank
 
 /-! An irreducible polynomial relation over a polynomial coefficient ring
-becomes the actual minimal polynomial, up to a nonzero scalar, over its
+becomes the minimal polynomial, up to a nonzero scalar, over its
 fraction field. -/
 
 @[expose] public section

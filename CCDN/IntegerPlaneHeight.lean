@@ -5,7 +5,7 @@ public import CCDN.PlaneGridHeight
 public import CCDN.UniversalPlaneEvaluation
 public import CCDN.ClosedFormHeight
 
-/-! Coefficient height of an actual integer plane section with bounded
+/-! Coefficient height of an integer plane section with bounded
 parameters, and the resulting bound on the universal bad-prime witness. -/
 
 @[expose] public section

@@ -3,7 +3,7 @@ module
 public import CCDN.SurfaceResidueCover
 public import CCDN.SingularHypersurfaceCount
 
-/-! An actual small-curve and residual cover for a surface of controlled
+/-! A small-curve and residual cover for a surface of controlled
 coefficient height. Both the auxiliaries and the initial prime components
 are constructed. -/
 

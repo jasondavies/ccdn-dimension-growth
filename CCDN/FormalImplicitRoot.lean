@@ -3,7 +3,7 @@ module
 public import CCDN.SmoothLocalDeterminant
 public import CCDN.PowerSeriesOrderIndependence
 
-/-! A simple root over the constant field lifts to an actual formal power
+/-! A simple root over the constant field lifts to a formal power
 series root. Newton iteration and coefficient stabilization prove existence;
 no monicity or implicit-function hypothesis is assumed. -/
 

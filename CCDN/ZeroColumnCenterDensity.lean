@@ -2,7 +2,7 @@ module
 
 public import CCDN.MatrixGoodCenterDensity
 
-/-! Zariski density of good full-row-rank matrices inside an actual
+/-! Zariski density of good full-row-rank matrices inside a
 prescribed-zero-column subspace. In particular this covers centers lying
 at infinity, without inferring density there from density in the ambient
 matrix space. -/
@@ -107,7 +107,7 @@ theorem zero_column_polynomial_locus_dense_subspace
   apply closure_mono (fun y hy => ?_) hcl
   exact ⟨⟨y,hy.1,hy.2.1⟩,hy.2.2,rfl⟩
 
-/-- Actual nonvanishing at a full-rank matrix in the prescribed subspace
+/-- Nonvanishing at a full-rank matrix in the prescribed subspace
 supplies the polynomial nonzero premise used by the density theorem. -/
 theorem zero_column_minor_locus_dense
     {r n : ℕ} (Z : Finset (Fin n))

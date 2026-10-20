@@ -73,7 +73,7 @@ theorem integral_coordinate_tuple_count_le_finrank
 open MvPolynomial
 
 set_option synthInstance.maxHeartbeats 200000 in
-/-- The sharp bound for an actual fiber of an integral polynomial projection.
+/-- The sharp bound for a fiber of an integral polynomial projection.
 All specialization maps are constructed from the stated coordinate equations. -/
 theorem integral_projection_fiber_card_le_finrank
     {K σ τ : Type*} [Field K] [CharZero K] [Fintype σ]

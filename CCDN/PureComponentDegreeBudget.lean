@@ -3,7 +3,7 @@ module
 public import CCDN.FilteredComponentRank
 public import CCDN.HilbertPolynomialComparison
 
-/-! The total multiplicity of the actual minimal-prime components of a
+/-! The total multiplicity of the minimal-prime components of a
 pure-dimensional affine ideal is at most the original Hilbert multiplicity.
 The finite component family, separators and filtered comparison are constructed
 internally. No degree budget is assumed. -/

@@ -6,7 +6,7 @@ public import CCDN.SurfaceNonlinearCount
 public import CCDN.SurfaceParallelLines
 public import CCDN.PolynomialPredicates
 
-/-! Finite families of actual rational affine lines on a surface. Grouping
+/-! Finite families of rational affine lines on a surface. Grouping
 lines by their projective direction combines the primitive spacing bound
 with the uniform reciprocal-height sum. -/
 
@@ -129,7 +129,7 @@ theorem surface_line_contribution_of_parallel_bound :
     exact_mod_cast count_biUnion_finset_le s (fun L => L) B
   exact hc.trans hall
 
-/-- Corrected CCDN Proposition 4.3.3 for a finite set of actual rational
+/-- Corrected CCDN Proposition 4.3.3 for a finite set of rational
 affine lines. Absolute irreducibility of the leading form supplies the
 parallel-line bound inside the proof. The constant is chosen before the
 surface, its degree, the radius and the family of lines. -/

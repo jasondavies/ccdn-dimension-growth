@@ -7,7 +7,7 @@ public import Mathlib.RingTheory.Finiteness.Basic
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
 public import CCDN.PolynomialPredicates
 
-/-! Balanced coordinate-power reductions give an actual finite module
+/-! Balanced coordinate-power reductions give a finite module
 over the polynomial algebra of the parameters, hence an integral projection. -/
 
 @[expose] public section

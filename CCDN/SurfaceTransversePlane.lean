@@ -4,7 +4,7 @@ public import CCDN.UniversalPlaneGoodSpecializationCharZero
 public import CCDN.TopFormAuxiliary
 public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 
-/-! Actual irreducible plane sections transverse to a prescribed direction.
+/-! Irreducible plane sections transverse to a prescribed direction.
 The avoidance condition also ensures that a second equation restricts
 nontrivially, by requiring its value at the plane's base point to be nonzero. -/
 

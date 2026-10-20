@@ -22,7 +22,7 @@ theorem ideal_map_involutive (σ : R ≃+* R) (hσ : Function.Involutive σ)
     RingHom.ext hσ
   rw [hh, Ideal.map_id]
 
-/-- The norm obstruction is represented by an actual invariant unit of
+/-- The norm obstruction is represented by an invariant unit of
 the ring. The equation uses integral numerators and denominators, so
 there is no choice of a fraction field in the statement. -/
 theorem ambiguous_ideal_scalar_invariant_unit

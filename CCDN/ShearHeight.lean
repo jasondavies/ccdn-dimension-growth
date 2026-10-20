@@ -91,7 +91,7 @@ lemma bivariateCoefficientBound_sum {ι : Type*} [Fintype ι]
     _ = _ := by simp
 
 /-- A shear costs at most (d+1)²*(1+|a|)^d in coefficient height. The proof
-uses the actual coefficient grid and the two-term multiplication recurrence. -/
+uses the coefficient grid and the two-term multiplication recurrence. -/
 theorem bivariateShear_coefficient_bound (a : ℤ) (d : ℕ) (f : ℤ[X][X])
     (hd : bivariateTotalDegree f ≤ d) (H : ℝ) (hH : 0 ≤ H)
     (hf : BivariateCoefficientBound f H) :

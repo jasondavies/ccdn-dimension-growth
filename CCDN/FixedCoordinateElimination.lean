@@ -5,7 +5,7 @@ public import CCDN.ProjectiveClosureProjection
 public import CCDN.FinIntegerHilbertElimination
 
 /-! Full-degree affine elimination also gives an integral projection of the
-actual projective closure, fixing its homogenizing coordinate. -/
+projective closure, fixing its homogenizing coordinate. -/
 
 @[expose] public section
 namespace CCDN
@@ -69,7 +69,7 @@ lemma closureEliminationDirection_eval {n : ℕ} (b : Option (Fin n) → ℤ)
     (boundedHomogenize f.totalDegree f) = _
   rw [closureEliminationDirection_comp, boundedHomogenize_eval_at_infinity f le_rfl]
 
-/-- A full-degree direction for an actual affine ideal equation gives an
+/-- A full-degree direction for an affine ideal equation gives an
 integral map of projective closures whose first coordinate remains X₀. -/
 theorem fixedCoordinateElimination_isIntegral {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ))

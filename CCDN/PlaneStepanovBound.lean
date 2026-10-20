@@ -50,7 +50,7 @@ theorem plane_stepanov_smooth_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
   exact planeFrobeniusAuxiliary_point_bound p f hf z hz hzero j hsmooth h a hD hN hd ha hi hne hdiv
 
 /-- Include the points where the selected partial derivative vanishes.
-Their number is bounded by d(d-1) using the actual proper derivative section. -/
+Their number is bounded by d(d-1) using the proper derivative section. -/
 theorem plane_stepanov_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Fin 2) (ZMod p)) (hf : Irreducible f)
     (hpos : 0 < f.totalDegree) (hchar : f.totalDegree < p)

@@ -2,7 +2,7 @@ module
 
 public import CCDN.Box
 
-/-! Counting actual bounded integral points by the integer values of a
+/-! Counting bounded integral points by the integer values of a
 linear form. Deleting a coordinate with nonzero coefficient is injective
 on each level and preserves the box radius. -/
 
@@ -113,7 +113,7 @@ theorem integerSlicePoints_card_le_count {n : ℕ}
     exact deleteIntegerCoordinate_injective_on_level a j hj
       ((Finset.mem_filter.mp hx).2.trans (Finset.mem_filter.mp hy).2.symm) hxy
 
-/-- Assembly over the actual levels of the integral point set. The sets
+/-- Assembly over the levels of the integral point set. The sets
 `Y k` can be the zero loci of the constructed hyperplane restrictions. -/
 theorem count_le_of_integer_hyperplane_slices {n : ℕ}
     (X : Set (RatPoint (n + 1))) (a : IntPoint (n + 1))

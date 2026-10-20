@@ -37,7 +37,7 @@ theorem absolute_irreducible_of_top_homogeneousComponent_irreducible {σ : Type*
     Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) :=
   (map_degree_and_irreducible_of_top_irreducible _ f hir).2
 
-/-- The actual affine bad-prime factor is no greater than that of the top
+/-- The affine bad-prime factor is no greater than that of the top
  form when the latter is absolutely irreducible. -/
 theorem hypersurfaceBadPrimeFactor_le_top_homogeneousComponent {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
@@ -53,7 +53,7 @@ theorem hypersurfaceBadPrimeFactor_le_top_homogeneousComponent {n : ℕ}
   · exact hypersurfaceBadReduction_imp_top_homogeneousComponent f
 
 /-- A height bound for the top form controls the full affine equation's
- actual bad-prime factor; lower-order coefficients play no role. -/
+ bad-prime factor; lower-order coefficients play no role. -/
 theorem hypersurfaceBadPrimeFactor_le_top_height {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hir : HasAbsIrreducibleTopForm f)
@@ -79,7 +79,7 @@ theorem PrimitiveIntegerPolynomial.irreducible_of_absolute_top {σ : Type*}
     (absolute_irreducible_of_top_homogeneousComponent_irreducible f hir)
 
 /-- Removing nonzero integer content preserves absolute irreducibility of
- the top homogeneous form, along with the actual affine degree. -/
+ the top homogeneous form, along with the affine degree. -/
 theorem absolute_top_irreducible_of_integer_scalar_factor {σ : Type*}
     {f g : MvPolynomial σ ℤ} {c : ℤ} (hc : c ≠ 0) (he : f = C c * g)
     (hir : HasAbsIrreducibleTopForm f) :

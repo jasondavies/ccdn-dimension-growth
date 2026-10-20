@@ -100,7 +100,7 @@ lemma unscaled_auxiliary_vanishes {n M : ℕ}
   rw [map_eval, map_zero]
   exact hcast
 
-/-- Ordinary homogenization gives an actual auxiliary in every affine
+/-- Ordinary homogenization gives an auxiliary in every affine
 box, with the height and bad-prime factor of the unscaled model. -/
 theorem unscaled_affine_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)

@@ -3,7 +3,7 @@ module
 public import CCDN.SharpProjectiveHypersurfaceCount
 public import CCDN.HypersurfaceCountNormalization
 
-/-! CCDN Lemma 2.8 and Corollary 2.9 with the actual finite-field count
+/-! CCDN Lemma 2.8 and Corollary 2.9 with the finite-field count
 proved, rather than supplied. All constants depend only on dimension. -/
 
 @[expose] public section

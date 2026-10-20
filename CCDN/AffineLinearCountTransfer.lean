@@ -3,7 +3,7 @@ module
 public import CCDN.ProjectiveLinearCountTransfer
 public import CCDN.AffineProjectionCount
 
-/-! Integral-point counts under an actual integer linear projection.
+/-! Integral-point counts under an integer linear projection.
 The finite-fiber hypothesis is discharged by normalization in the application. -/
 
 @[expose] public section

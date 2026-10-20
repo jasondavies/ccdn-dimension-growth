@@ -48,7 +48,7 @@ theorem polynomial_eq_scalar_pow_of_same_zeros
   rw [← hu,huC,mul_comm]
 
 /-- The source's pushforward irreducibility test reduces to equality of
-actual total degrees, once the geometric incidence zero loci agree. -/
+total degrees, once the geometric incidence zero loci agree. -/
 theorem irreducible_iff_degree_eq_of_same_zeros
     {K σ : Type*} [Field K] [IsAlgClosed K] [Finite σ]
     (F R : MvPolynomial σ K) (hF : Irreducible F)

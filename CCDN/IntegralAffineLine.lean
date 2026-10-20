@@ -2,7 +2,7 @@ module
 
 public import CCDN.ProjectivePrimitive
 
-/-! Integer points on actual rational affine lines. Primitive integer
+/-! Integer points on rational affine lines. Primitive integer
 directions make the line parameter integral, giving a spacing bound. -/
 
 @[expose] public section
@@ -128,7 +128,7 @@ lemma int_finset_card_le_span (T : Finset ℤ) (hT : T.Nonempty) :
   exact_mod_cast hh
 
 /-- Integer points on a primitive line are spaced by its largest direction
-coordinate. This counts the actual line's intersection with the integer box. -/
+coordinate. This counts the line's intersection with the integer box. -/
 theorem integral_rationalAffineLine_count {n : ℕ} (a v : IntPoint n)
     (hv : v ≠ 0) (hprim : Finset.univ.gcd v = 1) {B : ℝ} (hB : 0 ≤ B) :
     (count (rationalAffineLine (rationalPoint a) (rationalPoint v)) B : ℝ) ≤
@@ -180,7 +180,7 @@ theorem integral_rationalAffineLine_count {n : ℕ} (a v : IntPoint n)
     positivity
 
 /-- Divide an integer direction by the gcd of its coordinates. This gives
-an actual primitive direction of no greater height on the same rational line. -/
+a primitive direction of no greater height on the same rational line. -/
 theorem exists_primitive_integer_direction {n : ℕ} (w : IntPoint n) (hw : w ≠ 0) :
     ∃ v : IntPoint n, v ≠ 0 ∧ Finset.univ.gcd v = 1 ∧
       (∀ j, |(v j : ℝ)| ≤ |(w j : ℝ)|) ∧

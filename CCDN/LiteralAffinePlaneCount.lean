@@ -4,7 +4,7 @@ public import CCDN.LiteralAffineAuxiliaryTheorem
 public import CCDN.AffinePlaneCoefficientCount
 
 /-! CCDN Corollary 4.2.4 with the literal affine bad-prime factor and the
-original coefficient-sensitive minimum. The actual auxiliary equation
+original coefficient-sensitive minimum. The auxiliary equation
 and Bezout supply the count for every primitive irreducible plane equation. -/
 
 @[expose] public section
@@ -12,7 +12,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Actual integral points satisfy the complete coefficient-sensitive
+/-- Integral points satisfy the complete coefficient-sensitive
 bound, with the original leading homogeneous coefficient height and a
 single absolute constant. No geometric irreducibility is assumed. -/
 theorem literal_affine_plane_coefficient_count

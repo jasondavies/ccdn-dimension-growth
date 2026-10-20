@@ -2,7 +2,7 @@ module
 
 public import CCDN.SurfaceResidueEdgeCount
 
-/-! The actual finite residue-edge cover and its complete counting bound.
+/-! The finite residue-edge cover and its complete counting bound.
 No enumeration or coverage estimate is supplied as a hypothesis. -/
 
 @[expose] public section
@@ -118,7 +118,7 @@ theorem surface_residue_residual_count_le
       rw [mul_pow]
       ring
 
-/-- The actual nonsingular points on large initial components belong to
+/-- The nonsingular points on large initial components belong to
 the finite residual locus counted above. -/
 theorem large_curve_point_mem_surfaceResidueResidualLocus
     (f : MvPolynomial (Fin 3) ℤ)

@@ -2,7 +2,7 @@ module
 
 public import CCDN.CurveRationalInverse
 
-/-! An actual bounded integral plane projection of every prime affine curve
+/-! A bounded integral plane projection of every prime affine curve
 admits polynomial reconstruction of all original coordinates. The common
 reconstruction denominator is proper, but has no uniform degree bound here. -/
 

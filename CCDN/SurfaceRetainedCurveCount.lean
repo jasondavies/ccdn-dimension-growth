@@ -4,7 +4,7 @@ public import CCDN.SmallDegreeSurfaceCurveCount
 public import CCDN.SurfaceDegreeOneCount
 public import CCDN.PolynomialPredicates
 
-/-! The retained part of the small-degree surface cover. Actual lines and
+/-! The retained part of the small-degree surface cover. Lines and
 nonlinear prime curves are counted together, using their common degree
 budget and the logarithmic cap on the retained degrees. -/
 

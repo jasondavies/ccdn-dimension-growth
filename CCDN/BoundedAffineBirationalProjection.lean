@@ -4,7 +4,7 @@ public import CCDN.BoundedClosureNormalization
 
 /-! A bounded finite birational affine projection constructed from a
 normalization that remains finite at infinity. The degree-preservation step
-is supplied separately by comparison of the actual projective closures. -/
+is supplied separately by comparison of the projective closures. -/
 
 @[expose] public section
 namespace CCDN

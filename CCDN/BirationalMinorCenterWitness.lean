@@ -6,7 +6,7 @@ public import CCDN.MatrixProjectionFields
 public import CCDN.PolynomialPredicates
 
 /-! Constructed good centers for the literal maximal-minor projection.
-Equal kernels transfer both integrality and the actual generated function
+Equal kernels transfer both integrality and the generated function
 field. The affine construction retains a zero first column. -/
 
 @[expose] public section
@@ -44,7 +44,7 @@ theorem exists_birational_minor_center
     exact hfield
 
 /-- Every affine prime source has a constructed finite birational center
-for its actual projective closure lying in X0=0. This includes dimension zero.
+for its projective closure lying in X0=0. This includes dimension zero.
 The result is a literal minor projection, with no supplied center witness. -/
 theorem exists_fixed_coordinate_birational_minor_center
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [Infinite L]

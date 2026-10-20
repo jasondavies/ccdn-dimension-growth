@@ -3,7 +3,7 @@ module
 public import CCDN.ClassGroupUniformBound
 public import CCDN.OddDegreeClassGroupBound
 
-/-! CCDN Theorem 6 for the actual two-torsion subgroup of the ideal class
+/-! CCDN Theorem 6 for the two-torsion subgroup of the ideal class
 group. Constants are uniform over all number fields of the given degree.
 Odd degrees have no logarithm; even degrees have exactly one logarithm.
 The quadratic descent, exceptional subfields, lattice and curve counts

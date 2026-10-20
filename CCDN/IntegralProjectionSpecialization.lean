@@ -4,7 +4,7 @@ public import CCDN.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.Algebra.Polynomial.Eval.Coeff
 
-/-! Integrality supplies an actual monic equation for each coordinate of
+/-! Integrality supplies a monic equation for each coordinate of
 every geometric fiber. The equation is chosen before the points of that
 fiber and works over any extension of the base field. -/
 

@@ -4,7 +4,7 @@ public import CCDN.SharpCenterResultantDetector
 public import CCDN.PolynomialPredicates
 
 /-! Sharp resultant detectors for base-field centers, with geometric
-disjointness and the actual base-field birationality conclusion. -/
+disjointness and the base-field birationality conclusion. -/
 
 @[expose] public section
 namespace CCDN
@@ -23,7 +23,7 @@ lemma eval₂_center_minor_map
     (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) g).symm
 
 /-- The nonvanishing locus is exactly the set of geometrically disjoint
-centers whose actual projection is birational. No Chow equation, image
+centers whose projection is birational. No Chow equation, image
 multiplicity, or witness center is supplied. -/
 theorem exists_sharp_birational_center_detector
     {K : Type*} [Field K] [CharZero K] {n m r : ℕ}

@@ -3,7 +3,7 @@ module
 public import CCDN.ProjectiveClosureHilbertPolynomial
 public import CCDN.HypersurfaceOriginStalk
 
-/-! The actual projective closure of the affine origin is geometrically
+/-! The projective closure of the affine origin is geometrically
 prime and has projective dimension zero and degree one. -/
 
 @[expose] public section

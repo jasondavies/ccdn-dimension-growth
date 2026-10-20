@@ -98,8 +98,8 @@ lemma homogeneous_hypersurfaceBadReduction_iff {σ : Type*} {d : ℕ}
   · intro hbad
     exact ⟨Fact.out, Or.inr hbad⟩
 
-/-- Outside the actual bad-prime predicate, both full degree and geometric
-irreducibility hold for the actual coefficient reduction. -/
+/-- Outside the bad-prime predicate, both full degree and geometric
+irreducibility hold for the coefficient reduction. -/
 lemma hypersurface_good_reduction {σ : Type*} (f : MvPolynomial σ ℤ)
     (p : ℕ) [Fact p.Prime] (hgood : ¬HypersurfaceBadReduction f p) :
     map (Int.castRingHom (ZMod p)) f ≠ 0 ∧

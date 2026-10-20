@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
 public import Mathlib.Tactic
 
 /-! The algebraic starting point of the class-group application.
-Actual classes killed by two have nonzero integral representatives whose
+Classes killed by two have nonzero integral representatives whose
 squares are principal. A principal square determines its ideal uniquely;
 thus generators chosen for distinct classes are distinct. The norm assertion
 uses the absolute value: a signed field norm need not be positive. -/
@@ -52,7 +52,7 @@ end Dedekind
 
 variable (K : Type*) [Field K] [NumberField K]
 
-/-- The subgroup of the actual ideal class group killed by two. -/
+/-- The subgroup of the ideal class group killed by two. -/
 def classGroupTwoTorsion : Subgroup (ClassGroup (𝓞 K)) :=
   (powMonoidHom 2).ker
 
@@ -84,7 +84,7 @@ lemma generator_norm_eq_signed_square (I : Ideal (𝓞 K)) {β : 𝓞 K}
     simpa only [Int.natCast_natAbs, Nat.cast_pow] using congrArg (Nat.cast : ℕ → ℤ) h
   exact (abs_eq (by positivity)).mp h'
 
-/-- Every actual two-torsion class has a nonzero integral representative
+/-- Every two-torsion class has a nonzero integral representative
 within the usual Minkowski ideal-norm bound, with a nonzero generator of
 its square and the resulting exact absolute norm identity. -/
 theorem exists_two_torsion_integral_square_representative

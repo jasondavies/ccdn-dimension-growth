@@ -76,7 +76,7 @@ theorem exists_independent_rows_of_rank
   subst s
   exact ⟨a, ha, hi⟩
 
-/-- Full row rank supplies an actual nonzero square minor. -/
+/-- Full row rank supplies a nonzero square minor. -/
 theorem exists_nonzero_minor_of_independent_rows
     {F ν : Type*} [Field F] [Fintype ν] {s : ℕ}
     (A : Matrix (Fin s) ν F) (hi : LinearIndependent F A.row) :

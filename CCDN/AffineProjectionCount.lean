@@ -3,7 +3,7 @@ module
 public import CCDN.DegreePreservingProjectionBox
 public import CCDN.PolynomialMapDeterminant
 
-/-! Reduce the actual integral-point count of an arbitrary prime affine curve
+/-! Reduce the integral-point count of an arbitrary prime affine curve
 to the proved plane count, using the constructed degree-preserving projection. -/
 
 @[expose] public section

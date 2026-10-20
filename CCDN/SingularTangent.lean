@@ -3,7 +3,7 @@ module
 public import CCDN.HomogeneousHilbert
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 
-/-! Actual origin-adic layers of a nonhomogeneous hypersurface. The first
+/-! Origin-adic layers of a nonhomogeneous hypersurface. The first
 nonzero homogeneous part supplies the singular multiplicity bound directly. -/
 
 @[expose] public section
@@ -19,7 +19,7 @@ lemma homogeneous_mem_origin_power {K σ : Type*} [CommRing K]
   exact (hf.degree_eq_sum_deg_support he).le
 
 /-- Taking the first permitted homogeneous part changes a polynomial only by
-one higher power of the actual origin ideal. -/
+one higher power of the origin ideal. -/
 lemma sub_homogeneousComponent_mem_origin_power {K σ : Type*} [CommRing K]
     {f : MvPolynomial σ K} {k : ℕ} (hf : f ∈ idealOfVars σ K ^ k) :
     f - homogeneousComponent k f ∈ idealOfVars σ K ^ (k + 1) := by
@@ -35,13 +35,13 @@ def originTruncationIdeal {K σ : Type*} [Field K] (f : MvPolynomial σ K) (k : 
     Ideal (MvPolynomial σ K) := Ideal.span {f} ⊔ idealOfVars σ K ^ (k + 1)
 
 /-- The degree-k layer of the origin ideal, in the curve's quotient modulo
-its next power. This is the actual image of the ideal power, not a tangent-cone model. -/
+its next power. This is the image of the ideal power, not a tangent-cone model. -/
 def originLayer {K σ : Type*} [Field K] (f : MvPolynomial σ K) (k : ℕ) :
     Submodule K (MvPolynomial σ K ⧸ originTruncationIdeal f k) :=
   ((idealOfVars σ K ^ k).restrictScalars K).map
     (Ideal.Quotient.mkₐ K (originTruncationIdeal f k)).toLinearMap
 
-/-- Homogeneous degree-k polynomials generate the actual degree-k layer. -/
+/-- Homogeneous degree-k polynomials generate the degree-k layer. -/
 theorem originLayer_eq_homogeneousCoordinateSpace {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (k : ℕ) :
     originLayer f k = homogeneousCoordinateSpace (originTruncationIdeal f k) k := by
@@ -79,7 +79,7 @@ lemma initial_form_multiple_mem_truncation {K σ : Type*} [Field K]
   ring
 
 /-- The first nonzero homogeneous part gives the expected binomial upper bound
-for the actual local layer. No tangent-cone or graded-ring identification is assumed. -/
+for the local layer. No tangent-cone or graded-ring identification is assumed. -/
 theorem originLayer_hilbert_bound {K : Type*} [Field K] {n μ k : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K)
     (hf : f ∈ idealOfVars (Fin (n + 1)) K ^ μ)
@@ -121,7 +121,7 @@ lemma originLayer_finrank_le {K : Type*} [Field K] {n : ℕ}
     Module.Finite.of_fg (homogeneousSubmodule_fg _ _ _)
   exact (Submodule.finrank_map_le _ _).trans_eq (finrank_homogeneousSubmodule n k)
 
-/-- In the plane-curve case each actual origin-adic layer has dimension at most
+/-- In the plane-curve case each origin-adic layer has dimension at most
 its multiplicity. This is the bound needed for the quadratic local exponent. -/
 theorem plane_originLayer_finrank_le_multiplicity {K : Type*} [Field K]
     {μ k : ℕ} (f : MvPolynomial (Fin 2) K)

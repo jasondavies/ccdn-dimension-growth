@@ -10,7 +10,7 @@ namespace CCDN
 noncomputable section
 open Polynomial Matrix
 
-/-- A uniform bound on the actual integer coefficients. -/
+/-- A uniform bound on the integer coefficients. -/
 def BivariateCoefficientBound (f : ℤ[X][X]) (H : ℝ) : Prop :=
   ∀ i j, |(((f.coeff i).coeff j : ℤ) : ℝ)| ≤ H
 
@@ -135,7 +135,7 @@ lemma bivariateCoefficientBound_outerDerivative
   · rw [coeff_eq_zero_of_natDegree_lt (lt_of_le_of_lt hd (by omega))]
     simpa using mul_nonneg (Nat.cast_nonneg d) hH
 
-/-- Every actual matrix entry is at most 2*d*H in absolute value. -/
+/-- Every matrix entry is at most 2*d*H in absolute value. -/
 theorem closedFormCoefficientMatrix_entry_bound
     (d : ℕ) (f : ℤ[X][X]) (H : ℝ) (hH : 0 ≤ H)
     (hf : BivariateCoefficientBound f H) (houter : f.natDegree ≤ d)

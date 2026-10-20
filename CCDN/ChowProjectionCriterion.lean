@@ -67,7 +67,7 @@ theorem chowLinearSubstitution_ne_zero_iff_center_disjoint
     exact mul_ne_zero (C_ne_zero.mpr hc) (pow_ne_zero k hG.ne_zero)
 
 /-- Both equations and their scalar-power relation are constructed from the
-actual source and matrix. No source or image chart is part of the hypotheses. -/
+source and matrix. No source or image chart is part of the hypotheses. -/
 theorem exists_chow_projection_power
     {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

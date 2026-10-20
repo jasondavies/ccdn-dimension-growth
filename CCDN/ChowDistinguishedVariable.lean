@@ -3,7 +3,7 @@ module
 public import CCDN.GenericLinearIndependence
 public import CCDN.IrreducibleRelationDegree
 
-/-! View the actual Chow equation as a polynomial in one hyperplane's
+/-! View the Chow equation as a polynomial in one hyperplane's
 constant coefficient. Every other coefficient remains a separate variable;
 their incidence images are algebraically independent. -/
 
@@ -49,7 +49,7 @@ lemma chowAsUnivariate_natDegree {K : Type*} [Field K] {m n : ℕ}
     (degreeOf_rename_of_injective (chowDistinguishedVariableEquiv m n).injective
       (p := F) (Fin.last m,0))
 
-/-- The actual coefficient map induced by incidence. -/
+/-- The coefficient map induced by incidence. -/
 def chowCoefficientMap {K : Type*} [Field K] {n : ℕ} (m : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) :
     MvPolynomial (ChowCoefficientVariables m n) K →ₐ[K]

@@ -14,7 +14,7 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
-/-- Extend polynomial coefficients inside the actual ambient fraction field. -/
+/-- Extend polynomial coefficients inside the ambient fraction field. -/
 def polynomialFractionCoefficientMap
     {A K F σ : Type*} [CommRing A] [Field K] [Field F]
     [Algebra A K] [Algebra A F] [Algebra K F]
@@ -36,7 +36,7 @@ lemma polynomialFractionCoefficientMap_comp
   · intro i
     simp [polynomialFractionCoefficientMap]
 
-/-- The constructed coefficient extension realizes the same actual
+/-- The constructed coefficient extension realizes the same
 ambient field as a fraction field after coefficient localization. -/
 theorem polynomial_fraction_coefficient_extension
     {A K F σ : Type*} [CommRing A] [IsDomain A] [Field K] [Field F]

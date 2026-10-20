@@ -4,7 +4,7 @@ public import CCDN.FiniteFieldZeroPlanes
 
 /-! Exact incidence averaging over every affine-plane parameter triple,
 including degenerate triples. No divisibility correction for plane charts
-is needed because points and directions are kept as actual coordinates. -/
+is needed because points and directions are kept as coordinates. -/
 
 @[expose] public section
 namespace CCDN

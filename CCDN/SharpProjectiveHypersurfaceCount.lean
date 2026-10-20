@@ -4,7 +4,7 @@ public import CCDN.SharpHypersurfaceCount
 public import CCDN.FiniteFieldProjectiveCone
 public import CCDN.ProjectiveHypersurfaceMultiplicity
 
-/-! The sharp projective finite-field count and its actual singular
+/-! The sharp projective finite-field count and its singular
 multiplicity correction. This discharges the count in CCDN Lemma 2.7. -/
 
 @[expose] public section
@@ -40,7 +40,7 @@ theorem projective_hypersurface_finite_field_bound {n d : ℕ}
   apply h.trans
   nlinarith
 
-/-- CCDN Lemma 2.7 for the total multiplicity of the actual projective residue
+/-- CCDN Lemma 2.7 for the total multiplicity of the projective residue
 space. The constant depends only on dimension, and all counting inputs are
 proved. Degree one is included using the exact multiplicity bounds. -/
 theorem projective_hypersurface_totalMultiplicity_bound {n p d : ℕ} [Fact p.Prime]

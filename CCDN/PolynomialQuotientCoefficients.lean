@@ -3,7 +3,7 @@ module
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.Algebra.MvPolynomial.Equiv
 
-/-! Polynomial extension commutes with the actual coefficient quotient.
+/-! Polynomial extension commutes with the coefficient quotient.
 The comparison is obtained from its coefficientwise kernel, without any
 flatness or scalar-extension premise. -/
 

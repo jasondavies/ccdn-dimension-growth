@@ -5,7 +5,7 @@ public import CCDN.ClosedFormMinorCharge
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! A coefficient-controlled bad-prime witness for monic integer bivariate
-equations. Bad reduction is actual reducibility over an algebraic closure of
+equations. Bad reduction is reducibility over an algebraic closure of
 the residue field, not an assumed matrix-rank predicate. -/
 
 @[expose] public section
@@ -13,7 +13,7 @@ namespace CCDN
 noncomputable section
 open Polynomial Real
 
-/-- The actual reduced equation fails to be irreducible over an algebraic
+/-- The reduced equation fails to be irreducible over an algebraic
 closure of the prime field. The primality witness supplies the field instance. -/
 def BivariateGeometricBadPrime (f : ℤ[X][X]) (p : ℕ) : Prop :=
   ∃ hp : p.Prime, let _ : Fact p.Prime := ⟨hp⟩

@@ -64,7 +64,7 @@ lemma projection_relation_eval₂_eq_zero
   rw [← projectionCoordinateMap_finSuccEquiv, hc]
   exact hm
 
-/-- The actual monic relation obtained from the integral parameter map
+/-- The monic relation obtained from the integral parameter map
 forces every generator of the augmented kernel to have unit leading coefficient. -/
 theorem integral_projection_relation_unit_leadingCoeff
     {K σ : Type*} [Field K] {m : ℕ}
@@ -85,7 +85,7 @@ theorem integral_projection_relation_unit_leadingCoeff
   change (finSuccEquiv K m) f ∣ (finSuccEquiv K m) ((finSuccEquiv K m).symm p) at hd
   simpa only [AlgEquiv.apply_symm_apply] using hd
 
-/-- In an actual homogeneous integral projection, the principal image equation
+/-- In a homogeneous integral projection, the principal image equation
 has its full homogeneous degree in the additional primitive coordinate. -/
 theorem integral_homogeneous_projection_relation_natDegree
     {K σ : Type*} [Field K] {m d : ℕ}

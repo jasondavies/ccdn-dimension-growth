@@ -62,7 +62,7 @@ lemma projectionBoxFactor_le_degree_power (n : ℕ) {d : ℕ} (hd : 0 < d) :
       linarith
     _ = _ := by simp only [mul_pow]; ring
 
-/-- Proposition 4.3.2 for curves, with an actual chart, birational map and
+/-- Proposition 4.3.2 for curves, with a chart, birational map and
 geometrically integral degree-d image constructed before the radius. No
 supplied proper chart or rational point is needed. -/
 theorem exists_geometric_projective_curve_projection

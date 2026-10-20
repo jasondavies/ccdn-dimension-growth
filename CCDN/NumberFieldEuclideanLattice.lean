@@ -3,7 +3,7 @@ module
 public import CCDN.LatticeFinitePacking
 public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
 
-/-! The actual ring-of-integers lattice in the Euclidean mixed embedding.
+/-! The ring-of-integers lattice in the Euclidean mixed embedding.
 The real and imaginary coordinates are unweighted; the covolume is
 `2^(-r₂) √|D|`. All norm comparisons below have constants depending only
 on the degree. -/

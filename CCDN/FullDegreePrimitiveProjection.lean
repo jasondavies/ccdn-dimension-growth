@@ -3,7 +3,7 @@ module
 public import CCDN.CoordinatePowerGeneration
 
 /-! Once a linear parameter generates the degree filtration, a bounded moment
-coordinate produces an actual degree-preserving plane equation. This combines
+coordinate produces a degree-preserving plane equation. This combines
 full function-field degree with the quantitative primitive-element theorem. -/
 
 @[expose] public section

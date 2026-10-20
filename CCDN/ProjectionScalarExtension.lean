@@ -3,7 +3,7 @@ module
 public import CCDN.IdealScalarDescent
 public import CCDN.LinearProjectionFiltration
 
-/-! Scalar extension commutes with an actual polynomial image ideal.
+/-! Scalar extension commutes with a polynomial image ideal.
 Consequently a polynomial projection of a geometrically integral source
 has a geometrically integral image. No flatness or image-primality premise
 is supplied. -/
@@ -92,7 +92,7 @@ theorem projection_kernel_geometrically_prime
   rw [projection_kernel_scalar_extension]
   exact RingHom.ker_isPrime _
 
-/-- An actual nonzero equation generating the image ideal remains
+/-- A nonzero equation generating the image ideal remains
 irreducible over every field extension where the source ideal stays prime. -/
 theorem projection_equation_irreducible_map
     {K L : Type*} [Field K] [Field L] [Algebra K L] {m n : ℕ}

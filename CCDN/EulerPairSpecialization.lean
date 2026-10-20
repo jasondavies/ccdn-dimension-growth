@@ -71,7 +71,7 @@ theorem eulerClosedForm_minor_map {R S : Type*} [CommRing R] [CommRing S]
   change (((eulerClosedFormCoefficientMatrix k f).map φ).submatrix a c).det = _
   rw [eulerClosedFormCoefficientMatrix_map]
 
-/-- Characteristic-zero irreducibility supplies an actual nonzero integer
+/-- Characteristic-zero irreducibility supplies a nonzero integer
 minor of order d^2-1. No universal irreducibility theorem is assumed. -/
 theorem exists_eulerClosedForm_integer_minor
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]

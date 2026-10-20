@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
 /-! A complete homogeneous monomial basis at one coefficient specialization
 certifies generation of that whole homogeneous piece at algebraically
-independent coefficients. The certificate is its actual determinant. -/
+independent coefficients. The certificate is its determinant. -/
 
 @[expose] public section
 namespace CCDN

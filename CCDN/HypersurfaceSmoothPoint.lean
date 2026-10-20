@@ -3,7 +3,7 @@ module
 public import CCDN.PlaneSingularities
 public import Mathlib.RingTheory.Nullstellensatz
 
-/-! Actual smooth points on irreducible hypersurfaces over an algebraically
+/-! Smooth points on irreducible hypersurfaces over an algebraically
 closed field. The characteristic bound supplies a nonzero partial derivative;
 the Nullstellensatz supplies a point where it does not vanish. -/
 

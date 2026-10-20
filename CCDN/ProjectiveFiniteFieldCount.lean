@@ -4,7 +4,7 @@ public import CCDN.ProjectiveResidueCardinality
 public import CCDN.HomogeneousChartIrreducible
 public import CCDN.SharpPlaneCount
 
-/-! A sharp finite-field count for an actual irreducible homogeneous plane
+/-! A sharp finite-field count for an irreducible homogeneous plane
 curve. Chart irreducibility, its full degree and the infinity correction
 are proved; the affine input is the formalized Stepanov estimate. -/
 

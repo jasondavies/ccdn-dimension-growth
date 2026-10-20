@@ -6,7 +6,7 @@ public import Mathlib.LinearAlgebra.TensorProduct.Basis
 public import Mathlib.RingTheory.TensorProduct.Basic
 
 /-! A faithful formal branch remains faithful after arbitrary field extension.
-The construction is an actual embedding of the extended coordinate algebra
+The construction is an embedding of the extended coordinate algebra
 into power series over the extension field. -/
 
 @[expose] public section

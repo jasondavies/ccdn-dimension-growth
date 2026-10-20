@@ -3,7 +3,7 @@ module
 public import CCDN.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 
-/-! Maximal standard-monomial orthants construct actual algebraically
+/-! Maximal standard-monomial orthants construct algebraically
 independent original coordinates of cardinality equal to Hilbert dimension. -/
 
 @[expose] public section
@@ -61,8 +61,8 @@ lemma orthant_free_monomials_standard {K σ : Type*} [Field K] [Fintype σ]
     · rintro ⟨j, rfl⟩
       exact hi j.property
 
-/-- The independent coordinates are constructed from an actual maximal
-standard orthant, with exactly the degree of the actual Hilbert polynomial. -/
+/-- The independent coordinates are constructed from a maximal
+standard orthant, with exactly the degree of the Hilbert polynomial. -/
 theorem exists_hilbert_dimension_independent_coordinates
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) :

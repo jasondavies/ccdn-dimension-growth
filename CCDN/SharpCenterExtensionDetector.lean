@@ -5,7 +5,7 @@ public import CCDN.GeometricIdealPrimality
 public import CCDN.BirationalCenterLocus
 public import CCDN.PolynomialPredicates
 
-/-! Sharp equations over the source field detect actual birational centers
+/-! Sharp equations over the source field detect birational centers
 in every coefficient-field extension, including their geometric disjointness. -/
 
 @[expose] public section

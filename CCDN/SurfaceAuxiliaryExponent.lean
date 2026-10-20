@@ -17,7 +17,7 @@ lemma surface_inverse_sqrt_le_quarter {d : ℕ} (hd : 16 ≤ d) :
     Real.le_sqrt_of_sq_le (by exact_mod_cast hd)
   exact one_div_le_one_div_of_le (by norm_num) hs
 
-/-- The actual intersection degree includes the degree of its defining
+/-- The intersection degree includes the degree of its defining
  surface, in addition to the auxiliary degree. -/
 lemma surface_intersection_degree_budget {d : ℕ} (hd : 0 < d)
     {C B M D : ℝ} (hM : M ≤ C * (d : ℝ) ^ (7 / 2 : ℝ) * B ^ (1 / Real.sqrt d))
@@ -199,7 +199,7 @@ theorem curveBound_large_degree {δ : ℕ} (hδ : 0 < δ) {B : ℝ}
   convert hh using 1
   ring
 
-/-- The large-degree component sum uses only the actual total degree
+/-- The large-degree component sum uses only the total degree
  budget, with no bound on the number of components. -/
 theorem sum_curveBound_large_degree {ι : Type*} (s : Finset ι) (δ : ι → ℕ)
     {B : ℝ} (hB : 1 ≤ B) (hδ : ∀ i ∈ s, 0 < δ i)

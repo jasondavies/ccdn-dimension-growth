@@ -54,7 +54,7 @@ lemma mixedDegreeLinePoint_reduction_scalar_ne_zero {p a : ℕ} [Fact p.Prime]
   rw [ZMod.val_natCast_of_lt hap, ZMod.val_zero] at hval
   omega
 
-/-- Equality in the actual projective residue space, not merely equality of
+/-- Equality in the projective residue space, not merely equality of
 some informally normalized coordinates. -/
 lemma mixedDegreeLinePoint_projective_reduction {p a : ℕ} [Fact p.Prime]
     (ha : 0 < a) (hap : a < p) :

@@ -4,7 +4,7 @@ public import CCDN.ScaledModelPosition
 public import CCDN.ScaledModelCoordinates
 public import CCDN.PolynomialMapAuxiliary
 
-/-! A prime-scaled actual-plane point bound with the arbitrary coefficient
+/-! A prime-scaled plane point bound with the arbitrary coefficient
 height eliminated. The sharp finite-field count and a suitable scaling prime
 remain explicit hypotheses. -/
 
@@ -17,7 +17,7 @@ def scaledPlaneAuxiliaryDegreeBound (d : ℕ) (C R p : ℝ) : ℝ :=
   d + Real.log R + 2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 *
     (d : ℝ) ^ 3 * (1 + Real.log p / d) * R ^ (2 / (d : ℝ)) / p ^ (1 / (d : ℝ)) + 2
 
-/-- Count actual original integer plane points using the translated scaled
+/-- Count original integer plane points using the translated scaled
 model. The determinant estimate is applied to polynomial columns on the
 original curve, so its sharp residue-count hypothesis concerns that curve. -/
 theorem scaled_plane_finite_count

@@ -4,7 +4,7 @@ public import CCDN.ProjectiveSection
 public import CCDN.FilteredHilbertPolynomial
 public import CCDN.PolynomialPredicates
 
-/-! For an actual homogeneous ideal, the filtered Hilbert function is the
+/-! For a homogeneous ideal, the filtered Hilbert function is the
 successive sum of its graded pieces. This is proved by splitting off the
 top homogeneous component in the coordinate quotient. -/
 

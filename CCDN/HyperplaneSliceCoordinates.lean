@@ -6,7 +6,7 @@ public import CCDN.Plane
 public import CCDN.PolynomialPredicates
 
 /-! Coordinate transport between the graph-hyperplane construction and
-the actual finite integral-point count. -/
+the finite integral-point count. -/
 
 @[expose] public section
 namespace CCDN

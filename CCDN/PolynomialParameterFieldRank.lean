@@ -3,7 +3,7 @@ module
 public import CCDN.GenericLinearParameterField
 
 /-! The degree of a finite coefficient-field extension is unchanged by
-adjoining rational parameters, measured over the actual parameter
+adjoining rational parameters, measured over the parameter
 intermediate field inside an arbitrary polynomial fraction field. -/
 
 @[expose] public section

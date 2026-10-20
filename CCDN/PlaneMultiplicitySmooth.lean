@@ -3,7 +3,7 @@ module
 public import CCDN.SingularReduction
 public import CCDN.PlaneSingularities
 
-/-! Multiplicity greater than one forces an actual singular point. -/
+/-! Multiplicity greater than one forces a singular point. -/
 
 @[expose] public section
 namespace CCDN
@@ -44,7 +44,7 @@ theorem singular_of_origin_order_ge_two {K σ : Type*} [Field K]
   rw [← eval_zero_originShift, ← pderiv_originShift]
   exact origin_power_pderiv_zero hμ hf j
 
-/-- In particular, every positive actual order at a smooth point is one. -/
+/-- In particular, every positive order at a smooth point is one. -/
 theorem origin_order_eq_one_of_smooth {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (a : σ → K) {μ : ℕ} (hμ : 0 < μ)
     (hf : originShift a f ∈ idealOfVars σ K ^ μ)
@@ -67,7 +67,7 @@ lemma planeResidueMultiplicity_singular {p : ℕ} [Fact p.Prime]
   exact singular_of_origin_order_ge_two _ a.val ha hp
 
 /-- The multiplicity correction costs only a degree-dependent constant.
-The leading term remains the number of actual finite-field points. -/
+The leading term remains the number of finite-field points. -/
 theorem planeTotalMultiplicity_le_card_add_correction {p : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ)
     (hf : Irreducible (map (Int.castRingHom (ZMod p)) f))

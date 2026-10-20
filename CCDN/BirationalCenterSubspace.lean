@@ -4,8 +4,8 @@ public import CCDN.CenterSubspaceQuotient
 public import CCDN.BirationalCenterDensity
 public import CCDN.PolynomialPredicates
 
-/-! The actual birational-center condition depends only on the row span.
-It therefore defines a dense open set of actual center subspaces with the
+/-! The birational-center condition depends only on the row span.
+It therefore defines a dense open set of center subspaces with the
 quotient topology from independent matrices. -/
 
 @[expose] public section
@@ -61,7 +61,7 @@ lemma isBirationalMatrixCenter_iff_span
   unfold IsBirationalMatrixCenter
   rw [hgeom,projectionImageField_eq_of_matrix_kernel_eq J _ _ hker]
 
-/-- Actual center subspaces admitting a geometrically disjoint birational
+/-- Center subspaces admitting a geometrically disjoint birational
 projection. The condition is independent of the representing matrix. -/
 def birationalCenterSubspaceLocus
     {K : Type*} [Field K] {n r s : ℕ}

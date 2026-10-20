@@ -4,7 +4,7 @@ public import Mathlib.FieldTheory.PrimitiveElement
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Data.Multiset.Powerset
 
-/-! A degree-only bound for the actual intermediate fields of a finite
+/-! A degree-only bound for the intermediate fields of a finite
 separable extension. Monic divisors are encoded by root submultisets in
 an algebraic closure, so their number is at most two to the degree. -/
 
@@ -42,7 +42,7 @@ theorem monic_divisors_card_le_two_pow_natDegree
     _ ≤ 2 ^ f.natDegree :=
       Nat.pow_le_pow_right (by omega) (Polynomial.card_roots_map_le_natDegree _)
 
-/-- The number of actual intermediate fields depends only on the extension
+/-- The number of intermediate fields depends only on the extension
 degree, without a chosen normal closure or Galois-group estimate. -/
 theorem intermediateField_card_le_two_pow_finrank
     (F E : Type*) [Field F] [Field E] [Algebra F E]

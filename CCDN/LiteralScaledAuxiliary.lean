@@ -4,7 +4,7 @@ public import CCDN.AffineChartAbsoluteAuxiliary
 public import CCDN.LiteralAffineScaling
 public import CCDN.UnscaledHypersurfaceAuxiliary
 
-/-! Actual auxiliary polynomials for prime-scaled and ordinary homogeneous
+/-! Auxiliary polynomials for prime-scaled and ordinary homogeneous
 models with the literal affine bad-prime factor. The finite excluded-prime
 set, geometric good reductions, primitive point family and affine pullback
 are constructed from the original equation. -/

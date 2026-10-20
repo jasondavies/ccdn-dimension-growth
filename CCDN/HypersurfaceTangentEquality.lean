@@ -3,7 +3,7 @@ module
 public import CCDN.InitialFormMultiplication
 public import CCDN.HypersurfaceHilbert
 
-/-! The exact Hilbert function of the actual origin-adic layers of an
+/-! The exact Hilbert function of the origin-adic layers of an
 arbitrary hypersurface. Initial-form cancellation identifies the entire
 homogeneous kernel, not merely a subspace of relations. -/
 
@@ -96,7 +96,7 @@ theorem originLayer_hilbert_eq_of_lt [Finite σ]
   rw [LinearMap.range_domRestrict] at he
   exact he
 
-/-- CCDN 2.1's exact binomial formula for the actual origin-adic layers. -/
+/-- CCDN 2.1's exact binomial formula for the origin-adic layers. -/
 theorem originLayer_finrank_eq_hypersurfaceLayerBound {n μ k : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K)
     (hf : f ∈ idealOfVars (Fin (n + 1)) K ^ μ)

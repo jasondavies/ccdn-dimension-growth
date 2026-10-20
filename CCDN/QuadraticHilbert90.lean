@@ -42,7 +42,7 @@ theorem quadratic_hilbert90_units (σ : K ≃+* K) (hσ : Function.Involutive σ
 
 /-- If the scalar comparison of an element with its conjugate has norm
 one, multiplication by a principal element produces an invariant
-representative. Here the principal map is an actual homomorphism. -/
+representative. Here the principal map is a homomorphism. -/
 theorem quadratic_invariant_representative
     {A : Type*} [CommGroup A]
     (σ : K ≃+* K) (hσ : Function.Involutive σ)

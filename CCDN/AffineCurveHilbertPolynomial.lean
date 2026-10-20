@@ -2,7 +2,7 @@ module
 
 public import CCDN.NonRationalVarietyCount
 
-/-! Exact agreement of the affine curve degree interface with the actual
+/-! Exact agreement of the affine curve degree interface with the
 filtered Hilbert polynomial, and the nongeometric curve count. -/
 
 @[expose] public section

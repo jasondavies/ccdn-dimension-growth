@@ -4,7 +4,7 @@ public import CCDN.CurveFunctionField
 public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 
-/-! A positive affine Hilbert degree supplies an actual transcendental
+/-! A positive affine Hilbert degree supplies a transcendental
 coordinate. This constructs the parameter needed for the function-field bound. -/
 
 @[expose] public section
@@ -52,7 +52,7 @@ theorem affine_degree_has_transcendental_coordinate {K σ : Type*} [Field K] [Fi
   have hNeq : (N : ℤ) = r + c.natAbs + N₀ + 1 := by simp [N]
   nlinarith
 
-/-- The same coordinate stays transcendental in the actual fraction field. -/
+/-- The same coordinate stays transcendental in the fraction field. -/
 theorem affine_degree_fraction_transcendental_coordinate {K F σ : Type*}
     [Field K] [Field F] [Fintype σ] [Algebra K F]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]

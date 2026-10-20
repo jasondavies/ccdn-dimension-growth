@@ -3,7 +3,7 @@ module
 public import CCDN.HypersurfaceBadPrimeCoordinates
 public import CCDN.ProjectiveTranslation
 
-/-! The actual geometric bad-prime predicate is invariant under integral shears. -/
+/-! The geometric bad-prime predicate is invariant under integral shears. -/
 
 @[expose] public section
 namespace CCDN

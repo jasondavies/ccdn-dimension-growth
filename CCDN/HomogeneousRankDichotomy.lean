@@ -36,7 +36,7 @@ lemma homogeneousCoefficientMap_surjective {K : Type*} [Field K] (n M : ℕ) :
   simp [homogeneousCoefficientMap, f, coeff_monomial,
     (homogeneousMonomials_injective n M).eq_iff]
 
-/-- When all degree-M relations are multiples of f, the actual evaluation
+/-- When all degree-M relations are multiples of f, the evaluation
 kernel is exactly the image of the degree-allowed multiples. -/
 theorem homogeneous_evaluation_kernel_eq_multiples {K : Type*} [Field K]
     {n d M t : ℕ} (f : MvPolynomial (Fin (n + 1)) K)
@@ -145,7 +145,7 @@ theorem rational_relations_of_integer_relations {n M t : ℕ}
     _ = _ := by rw [hm]; ring
 
 /-- The no-auxiliary hypothesis over the integers forces the exact rational
-rank of the actual integer evaluation matrix. -/
+rank of the integer evaluation matrix. -/
 theorem integer_homogeneous_evaluation_rank_eq {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : f ≠ 0) (hdM : d ≤ M)
@@ -169,7 +169,7 @@ theorem integer_homogeneous_evaluation_rank_eq {n d M t : ℕ}
   rw [homogeneousEvaluationMatrix_intCast] at hr
   exact hr
 
-/-- Either there is an integral auxiliary polynomial, or the actual selected
+/-- Either there is an integral auxiliary polynomial, or the selected
 independent spanning rows have the exact Hilbert rank. -/
 theorem integer_homogeneous_rank_dichotomy {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d)

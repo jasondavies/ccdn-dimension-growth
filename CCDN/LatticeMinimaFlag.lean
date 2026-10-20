@@ -2,7 +2,7 @@ module
 
 public import CCDN.LatticeSuccessiveMinima
 
-/-! An orthonormal flag adapted to actual greedy lattice vectors. A small
+/-! An orthonormal flag adapted to greedy lattice vectors. A small
 coordinate box in this flag contains no nonzero lattice vector. -/
 
 @[expose] public section

@@ -4,7 +4,7 @@ public import CCDN.CenterResultantForms
 public import CCDN.BlockResultantIrreducibility
 public import CCDN.PolynomialPredicates
 
-/-! The selected-row derivative resultant detects irreducibility of an actual
+/-! The selected-row derivative resultant detects irreducibility of a
 Chow restriction. A nonzero restriction is a power of the constructed image
 Chow equation, so separability is exactly the absence of a repeated power. -/
 

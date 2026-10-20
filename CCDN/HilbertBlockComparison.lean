@@ -2,7 +2,7 @@ module
 
 public import CCDN.HilbertPolynomialComparison
 
-/-! Independent polynomial blocks compare with the actual Hilbert
+/-! Independent polynomial blocks compare with the Hilbert
 multiplicity. A fixed filtration shift does not change the leading term. -/
 
 @[expose] public section

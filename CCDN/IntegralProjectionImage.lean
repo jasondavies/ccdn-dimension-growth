@@ -4,7 +4,7 @@ public import CCDN.ProjectionScalarExtension
 public import Mathlib.RingTheory.Ideal.GoingUp
 public import Mathlib.RingTheory.Nullstellensatz
 
-/-! The image of an actual integral polynomial projection over an
+/-! The image of an integral polynomial projection over an
 algebraically closed field is exactly the zero locus of its kernel.
 Lying over and the Nullstellensatz construct every preimage point. -/
 

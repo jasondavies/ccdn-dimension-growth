@@ -7,7 +7,7 @@ public import CCDN.HomogeneousProjectionEquation
 public import CCDN.BalancedParameterFiniteness
 public import CCDN.PolynomialPredicates
 
-/-! Linear pullback of hyperplane tuples and actual image incidence under a
+/-! Linear pullback of hyperplane tuples and image incidence under a
 projection with center disjoint from the source. Integrality and lifting of
 geometric image points are consequences of that geometric condition. -/
 
@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-/-- Coordinate forms of an actual linear projection matrix. -/
+/-- Coordinate forms of a linear projection matrix. -/
 def chowProjectionForms {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1)) :
     MvPolynomial (Fin (n + 1)) K := ∑ j, C (A i j) * X j
@@ -32,13 +32,13 @@ lemma chowProjectionForms_eval {K : Type*} [Field K] {n s : ℕ}
     eval x (chowProjectionForms A i) = (A *ᵥ x) i := by
   simp [chowProjectionForms, Matrix.mulVec, dotProduct]
 
-/-- Pullback of actual target hyperplane coefficients along the matrix. -/
+/-- Pullback of target hyperplane coefficients along the matrix. -/
 def chowPullbackCoefficients {K : Type*} [Field K] {n s r : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
     (U : Fin r × Fin (s + 1) → K) (q : Fin r × Fin (n + 1)) : K :=
   ∑ k, U (q.1,k) * A k q.2
 
-/-- Substitution in the source Chow equation induced by an actual projection. -/
+/-- Substitution in the source Chow equation induced by a projection. -/
 def chowLinearSubstitution {K : Type*} [Field K] {n s r : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) :
     MvPolynomial (Fin r × Fin (n + 1)) K →ₐ[K]
@@ -65,7 +65,7 @@ lemma chowPullbackCoefficients_relation {K : Type*} [Field K] {n s r : ℕ}
     Finset.mul_sum, mul_assoc]
   rw [Finset.sum_comm]
 
-/-- The actual homogeneous image ideal of the matrix projection. -/
+/-- The homogeneous image ideal of the matrix projection. -/
 def chowProjectionImageIdeal {K : Type*} [Field K] {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) :
@@ -80,7 +80,7 @@ lemma chowProjectionImageIdeal_homogeneous {K : Type*} [Field K] {n s : ℕ}
       homogeneousComponent M f ∈ chowProjectionImageIdeal J A :=
   projection_kernel_homogeneousComponent_mem J hJ _ (chowProjectionForms_homogeneous A)
 
-/-- Disjointness from the actual projective center implies integrality; it is
+/-- Disjointness from the projective center implies integrality; it is
 not an extra finiteness hypothesis. -/
 theorem chow_projection_integral_of_center_disjoint
     {K : Type*} [Field K] [IsAlgClosed K] {n s : ℕ}
@@ -109,7 +109,7 @@ theorem chow_projection_integral_of_center_disjoint
   funext i
   exact hrel i
 
-/-- Every nonzero point of the actual image cone has an actual nonzero source
+/-- Every nonzero point of the image cone has a nonzero source
 point, and conversely; no closure or dominance premise replaces the image. -/
 theorem chow_projection_cone_image_iff
     {K : Type*} [Field K] [IsAlgClosed K] {n s : ℕ}
@@ -136,7 +136,7 @@ theorem chow_projection_cone_image_iff
     simpa only [aeval_eq_eval, chowProjectionForms_eval] using hh
 
 /-- The pulled-back tuple meets the source exactly when the target tuple
-meets the actual image. The center is assumed geometrically disjoint, and
+meets the image. The center is assumed geometrically disjoint, and
 integrality and point lifting are proved from that assumption. -/
 theorem chow_projection_incidence_iff
     {K : Type*} [Field K] [IsAlgClosed K] {n s r : ℕ}

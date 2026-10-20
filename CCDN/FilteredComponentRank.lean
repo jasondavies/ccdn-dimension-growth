@@ -2,7 +2,7 @@ module
 
 public import CCDN.FilteredPrimeDecomposition
 
-/-! Separating actual prime components makes their filtered dimensions
+/-! Separating prime components makes their filtered dimensions
 additive up to a fixed degree shift. -/
 
 @[expose] public section
@@ -58,7 +58,7 @@ theorem prime_separator_lifts_independent {K σ ι : Type*} [Field K]
   have hsum := (mul_eq_zero.mp he').resolve_left hane
   exact Fintype.linearIndependent_iff.mp (hv i) (fun k => c ⟨i, k⟩) hsum t.2
 
-/-- The sum of the actual component filtration dimensions injects into the
+/-- The sum of the component filtration dimensions injects into the
 original coordinate filtration after a fixed shift independent of N. -/
 theorem prime_components_filtered_rank_lower {K σ ι : Type*} [Field K]
     [Finite σ] [Fintype ι] [DecidableEq ι]

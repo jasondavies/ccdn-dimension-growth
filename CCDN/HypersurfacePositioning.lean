@@ -3,7 +3,7 @@ module
 public import CCDN.HypersurfaceFullOuterDegree
 public import CCDN.GenericPlaneMinor
 
-/-! Actual full-degree monic positioning of an irreducible hypersurface at a
+/-! Full-degree monic positioning of an irreducible hypersurface at a
 smooth point, using an invertible affine change and a nonzero scalar. -/
 
 @[expose] public section

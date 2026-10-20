@@ -4,7 +4,7 @@ public import CCDN.BoundedClosureElimination
 public import CCDN.ClosureIntegralComposition
 public import CCDN.BoundedBirationalHypersurfaceProjection
 
-/-! Bounded affine normalization with an integral map of actual projective
+/-! Bounded affine normalization with an integral map of projective
 closures fixing the homogenizing coordinate. -/
 
 @[expose] public section
@@ -12,7 +12,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Actual integer linear normalization of a prime quotient of positive
+/-- Integer linear normalization of a prime quotient of positive
 Hilbert dimension. No chosen projection, equations or normalization is assumed.
 The resulting polynomial map is both injective and integral. -/
 theorem exists_bounded_integer_closure_normalization (m k : ℕ)

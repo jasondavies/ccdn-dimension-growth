@@ -3,7 +3,7 @@ module
 public import CCDN.MonomialOrthants
 public import Mathlib.RingTheory.Polynomial.HilbertPoly
 
-/-! Counting the finite orthant partition gives an actual eventual polynomial
+/-! Counting the finite orthant partition gives an eventual polynomial
 for every lower set of exponent vectors, in arbitrary finite dimension. -/
 
 @[expose] public section
@@ -41,7 +41,7 @@ lemma orthantBaseDegree_le {σ : Type*} [Fintype σ] {B : ℕ}
     _ = _ := by simp
 
 /-- Exact eventual counting formula for a lower set partitioned into its
-actual translated orthants. -/
+translated orthants. -/
 theorem lowerSet_orthant_count {σ : Type*} [Fintype σ]
     (S : Set (σ → ℕ)) (B : ℕ)
     (hstable : ∀ a, a ∈ S ↔ clampExponent B a ∈ S)
@@ -117,7 +117,7 @@ lemma lowerSetOrthantPolynomial_eval {σ : Type*} [Fintype σ]
     · exact ((orthantBaseDegree_le b).trans hN).trans (Nat.le_add_right _ _)
   · simp
 
-/-- Every lower exponent set has an actual eventual counting polynomial.
+/-- Every lower exponent set has an eventual counting polynomial.
 The threshold and the polynomial are constructed from its finite orthant
 partition, without an assumed Hilbert polynomial. -/
 theorem lowerSet_eventually_polynomial {σ : Type*} [Fintype σ]

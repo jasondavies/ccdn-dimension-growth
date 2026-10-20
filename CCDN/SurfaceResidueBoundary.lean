@@ -7,7 +7,7 @@ public import CCDN.SurfaceCurveCrossing
 
 /-! A nonsingular point on a large-degree initial curve must cross a
 proper auxiliary section along a one-prime deletion edge. This constructs
-the residual cover from actual smooth reductions and actual auxiliaries. -/
+the residual cover from smooth reductions and auxiliaries. -/
 
 @[expose] public section
 namespace CCDN
@@ -74,7 +74,7 @@ lemma surface_prime_curve_degree_le
   simpa only [sum_singleton] using hh
 
 /-- A point on an initial prime curve above the terminal degree cutoff
-lies in an actual proper section across a bounded-modulus residue edge. -/
+lies in a proper section across a bounded-modulus residue edge. -/
 theorem surface_residue_boundary_of_large_curve
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))

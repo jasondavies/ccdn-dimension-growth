@@ -48,7 +48,7 @@ lemma linearMap_nonzero_kernel_of_finrank_lt {K V W : Type*} [Field K]
   exact (not_le_of_gt h) (LinearMap.finrank_le_finrank_of_injective hinj)
 
 /-- Independent bounded-degree coefficient classes and more unknowns than
-constraints yield actual bounded-degree auxiliary coefficients. -/
+constraints yield bounded-degree auxiliary coefficients. -/
 theorem exists_planeFrobenius_coefficients {K ι κ : Type*} [Field K]
     [Fintype ι] [DecidableEq ι] [Fintype κ] [DecidableEq κ]
     (f : MvPolynomial (Fin 2) K) (j : Fin 2)

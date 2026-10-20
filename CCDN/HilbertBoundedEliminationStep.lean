@@ -3,7 +3,7 @@ module
 public import CCDN.HilbertBoundedElimination
 public import CCDN.IntegralProjectionHilbert
 
-/-! A complete bounded elimination step: the actual contraction stays prime,
+/-! A complete bounded elimination step: the contraction stays prime,
 retains dimension, and has no larger Hilbert multiplicity. -/
 
 @[expose] public section
@@ -30,7 +30,7 @@ lemma coordinateEliminationMap_eq_projection {σ : Type*}
   rw [coordinateEliminationMap_direction_X]
   simp [projectionCoordinateMap, eliminationLinearCoordinates]
 
-/-- Construct a bounded integral projection and its actual prime
+/-- Construct a bounded integral projection and its prime
 contraction with the same Hilbert dimension and multiplicity at most d.
 This is the induction step for bounded linear normalization. -/
 theorem exists_multiplicity_bounded_elimination_step

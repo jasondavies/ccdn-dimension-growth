@@ -4,7 +4,7 @@ public import CCDN.MonomialDimension
 public import Mathlib.Data.Nat.Choose.Sum
 
 /-! Two finite differences of a binomial Hilbert function. This gives a
-coefficient-uniform codimension-two bound for actual filtered coordinate spaces. -/
+coefficient-uniform codimension-two bound for filtered coordinate spaces. -/
 
 @[expose] public section
 namespace CCDN

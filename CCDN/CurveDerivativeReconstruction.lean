@@ -11,7 +11,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Differentiate an actual family of degree-d plane equations to reconstruct
+/-- Differentiate a family of degree-d plane equations to reconstruct
 any linear source function using the same derivative denominator. -/
 theorem exists_derivative_reconstruction {K τ : Type*}
     [Field K] [CharZero K] [Fintype τ]

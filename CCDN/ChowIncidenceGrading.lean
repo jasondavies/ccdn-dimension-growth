@@ -3,7 +3,7 @@ module
 public import CCDN.ChowIncidenceIdeal
 public import CCDN.WeightedPolynomialSubstitution
 
-/-! The actual incidence elimination ideal is homogeneous separately in
+/-! The incidence elimination ideal is homogeneous separately in
 each block of hyperplane coefficients. -/
 
 @[expose] public section

@@ -11,7 +11,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The exact incidence identity with each section bounded according to its
-actual equation. No geometric count hypothesis is supplied. -/
+equation. No geometric count hypothesis is supplied. -/
 theorem plane_sections_incidence_bound {σ : Type*} [Fintype σ]
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial σ (ZMod p))
     (hsize : 27 * (f.totalDegree : ℝ) ^ 4 < p) :

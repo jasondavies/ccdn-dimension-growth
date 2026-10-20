@@ -4,7 +4,7 @@ public import CCDN.ShearHeight
 
 /-! The geometric bad-prime charge for arbitrary integer plane equations.
 Bounded integral normalization, coefficient growth and the integer minor
-witness are all discharged; reducibility is tested over the actual residue
+witness are all discharged; reducibility is tested over the residue
 field's algebraic closure. -/
 
 @[expose] public section

@@ -4,7 +4,7 @@ public import CCDN.HilbertLinearCoordinates
 public import CCDN.BinomialSectionBound
 public import Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
 
-/-! Actual hypersurface projection kernels in arbitrary dimension.
+/-! Hypersurface projection kernels in arbitrary dimension.
 The proper-intersection estimate excludes a second independent equation. -/
 
 @[expose] public section
@@ -63,7 +63,7 @@ theorem hypersurface_map_eq_zero_iff_dvd
     rw [map_mul, hψ, zero_mul]
 
 /-- A linear projection with one more coordinate than Hilbert dimension
-and an independent subtuple has an actual principal prime equation. -/
+and an independent subtuple has a principal prime equation. -/
 theorem exists_hypersurface_projection_equation
     {K τ : Type*} [Field K] [Fintype τ] [LinearOrder τ] {n : ℕ}
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]

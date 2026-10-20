@@ -2,7 +2,7 @@ module
 
 public import CCDN.ProjectiveBox
 
-/-! Primitive integral representatives of actual rational projective points. -/
+/-! Primitive integral representatives of rational projective points. -/
 
 @[expose] public section
 namespace CCDN
@@ -59,7 +59,7 @@ theorem exists_primitive_projective_rep {n : ℕ} (x : ProjectivePoint n) :
       exact ⟨_, he.symm⟩
     _ = x := x.mk_rep
 
-/-- A chosen primitive representative; subsequent bounds concern its actual coordinates. -/
+/-- A chosen primitive representative; subsequent bounds concern its coordinates. -/
 def primitiveProjectiveRep {n : ℕ} (x : ProjectivePoint n) : IntPoint (n + 1) :=
   (exists_primitive_projective_rep x).choose
 

@@ -8,7 +8,7 @@ public import CCDN.BoundedDegreeNormalizationFiber
 public import CCDN.BirationalProjectionHeight
 
 /-! The positive-dimensional affine projection in CCDN Proposition 4.3.1.
-The actual image equation has the source degree and remains irreducible
+The image equation has the source degree and remains irreducible
 after scalar extension. An integral normalization gives the exact factor d
 in the point-count comparison. -/
 

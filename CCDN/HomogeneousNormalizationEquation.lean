@@ -7,7 +7,7 @@ public import CCDN.HilbertProjectionDegree
 public import CCDN.HomogeneousIntegralRelation
 public import CCDN.PolynomialPredicates
 
-/-! Primitive augmentation of an actual finite homogeneous normalization
+/-! Primitive augmentation of a finite homogeneous normalization
 produces an irreducible equation whose degree in the new variable is exactly
 the Hilbert multiplicity. -/
 
@@ -17,7 +17,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The equation is constructed from the given normalization; its homogeneous
-and univariate degrees are both the actual Hilbert multiplicity. -/
+and univariate degrees are both the Hilbert multiplicity. -/
 theorem exists_homogeneous_normalization_primitive_equation
     {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

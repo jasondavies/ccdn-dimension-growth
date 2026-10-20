@@ -11,7 +11,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-/-- Without an auxiliary polynomial, selected actual rows have exact Hilbert
+/-- Without an auxiliary polynomial, selected rows have exact Hilbert
 rank and their Bombieri--Vaaler bound is at least the leading coefficient. -/
 theorem homogeneous_no_auxiliary_comparison {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 1)))
@@ -110,7 +110,7 @@ theorem homogeneous_no_auxiliary_log_comparison {n d M t : ℕ}
     exact_mod_cast (show (0 : ℤ) < _ by omega)
   · exact sub_pos.mpr (by exact_mod_cast hs)
 
-/-- Archimedean logarithmic bound for an actual integral evaluation matrix. -/
+/-- Archimedean logarithmic bound for an integral evaluation matrix. -/
 lemma evaluation_log_gram_le {n N s M : ℕ} (hN : 0 < N)
     (mon : Fin N → (Fin n →₀ ℕ)) (points : Fin s → Fin n → ℤ)
     {B : ℝ} (hB : 1 ≤ B) (hp : ∀ i j, |(points i j : ℝ)| ≤ B)
@@ -138,7 +138,7 @@ lemma evaluation_log_gram_le {n N s M : ℕ} (hN : 0 < N)
   norm_num at hlog
   nlinarith
 
-/-- The archimedean half of the determinant-method inequality, for actual
+/-- The archimedean half of the determinant-method inequality, for
 bounded integer points and exact Hilbert rank. -/
 theorem homogeneous_no_auxiliary_box_comparison {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 1)))

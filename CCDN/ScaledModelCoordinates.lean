@@ -69,7 +69,7 @@ lemma scaledModelCoordinates_auxiliary_transport {n M : ℕ}
       homogeneousTranslation ℤ a ((homogeneousTranslation ℤ a).symm g) at he
     simpa only [AlgEquiv.apply_symm_apply] using he
 
-/-- A nonmultiple on the actual translated scaled model counts the original
+/-- A nonmultiple on the translated scaled model counts the original
 integer points. The bound uses only the auxiliary degree and original degree. -/
 theorem scaled_positioned_points_card_le {M t : ℕ}
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)

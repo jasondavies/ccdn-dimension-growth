@@ -4,7 +4,7 @@ public import CCDN.ZeroDimensionalGeometricPoint
 public import CCDN.GeometricAffineProjection
 public import CCDN.OriginProjectivePoint
 
-/-! The zero-dimensional boundary of the actual affine projection theorem.
+/-! The zero-dimensional boundary of the affine projection theorem.
 The source is a rational point; the zero integer projection maps it finitely
 and birationally to the origin in the affine line. -/
 

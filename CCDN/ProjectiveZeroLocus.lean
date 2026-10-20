@@ -78,7 +78,7 @@ lemma mem_integer_projectiveZeroLocus {n d : ℕ}
   rw [← map_eval]
   exact Int.cast_eq_zero
 
-/-- Reduce an actual projective count to a finite family of bounded primitive
+/-- Reduce a projective count to a finite family of bounded primitive
 integer vectors representing distinct projective points. -/
 theorem projective_zero_count_le_of_family_bound {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d)

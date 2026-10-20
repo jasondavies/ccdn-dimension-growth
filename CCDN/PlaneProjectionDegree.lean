@@ -55,7 +55,7 @@ theorem plane_projection_equation_degree_le {K τ : Type*} [Field K] [Fintype τ
   rw [← hker]
   exact linear_projection_filtered_finrank_le I a ha M
 
-/-- A linear plane projection with a transcendental coordinate has an actual
+/-- A linear plane projection with a transcendental coordinate has an
 irreducible equation of positive degree at most d and no extra kernel relations. -/
 theorem exists_plane_projection_equation_degree_le {K τ : Type*} [Field K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
@@ -74,7 +74,7 @@ theorem exists_plane_projection_equation_degree_le {K τ : Type*} [Field K] [Fin
     exact Ideal.Quotient.eq_zero_iff_mem.symm
   rw [hh, hker, Ideal.mem_span_singleton]
 
-/-- The defining image equation vanishes at projections of actual source points. -/
+/-- The defining image equation vanishes at projections of source points. -/
 lemma projection_equation_eval_zero {K τ : Type*} [Field K]
     (I : Ideal (MvPolynomial τ K)) (a : Fin 2 → MvPolynomial τ K)
     (f : MvPolynomial (Fin 2) K) (hf : aeval a f ∈ I)

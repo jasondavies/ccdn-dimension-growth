@@ -3,7 +3,7 @@ module
 public import CCDN.SurfaceCongruenceAuxiliary
 public import CCDN.FiniteFieldPolynomialZeros
 
-/-! Actual smooth affine residue classes and their simultaneous cardinality
+/-! Smooth affine residue classes and their simultaneous cardinality
 bound. The elementary d*p^(ambient-1) bound suffices when the number of
 chosen primes is absorbed by a small power of the box size. -/
 

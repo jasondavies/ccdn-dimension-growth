@@ -32,7 +32,7 @@ theorem integer_center_subspace_plucker_height {r n T : ℕ}
     exact (RingHom.map_det (Int.castRingHom ℚ) (M.submatrix id c)).symm
   rwa [he]
 
-/-- Lemma 5.3 for the actual good-center subspace and its intrinsic Plücker
+/-- Lemma 5.3 for the good-center subspace and its intrinsic Plücker
 height. The degree-one and zero-dimensional cases are included. -/
 theorem exists_birational_center_plucker_height
     {n m s : ℕ} (hmn : m + 2 ≤ n + 1)

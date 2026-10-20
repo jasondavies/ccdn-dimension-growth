@@ -4,7 +4,7 @@ public import CCDN.ChowNormalizationDegreeComparison
 public import CCDN.ChowAxisBaseChange
 public import CCDN.ChowTotalDegree
 
-/-! The actual Chow incidence equation has one block degree equal to the
+/-! The Chow incidence equation has one block degree equal to the
 source Hilbert multiplicity in every row, and total degree (m+1)d.
 The generic normalization and primitive-element fields are constructed
 from the source; no rank or degree comparison is assumed. -/

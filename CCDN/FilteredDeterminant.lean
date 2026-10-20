@@ -4,7 +4,7 @@ public import CCDN.SingularApproximation
 public import CCDN.SmoothLocalDeterminant
 
 /-! Local determinant divisibility in arbitrary dimension. The exponent is
-computed from the cumulative dimensions of the actual origin-adic layers. -/
+computed from the cumulative dimensions of the origin-adic layers. -/
 
 @[expose] public section
 namespace CCDN
@@ -98,7 +98,7 @@ theorem pow_dvd_det_of_weighted_factorization_fintype {R ι : Type*} [CommRing R
   intro t
   exact he (t.toEmbedding.trans a.toEmbedding)
 
-/-- An actual homogeneous local generating family gives a determinant divisor
+/-- A homogeneous local generating family gives a determinant divisor
 at any precision, without a plane-curve restriction or assumed factorization. -/
 theorem origin_filtration_pow_dvd_det_mod {p n s e : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 1)) ℤ)

@@ -3,7 +3,7 @@ module
 public import CCDN.SurfaceSmallCurveCover
 public import CCDN.AffineCurveHilbertPolynomial
 
-/-! Splitting an actual surface section into bounded-degree geometric
+/-! Splitting a surface section into bounded-degree geometric
 curves, nongeometric exceptions, intermediate-degree curves and the
 constructed congruence remainder. -/
 

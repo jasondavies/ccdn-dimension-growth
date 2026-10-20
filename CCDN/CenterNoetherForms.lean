@@ -3,7 +3,7 @@ module
 public import CCDN.NoetherCoefficientFamily
 public import CCDN.UniversalCenterChowRestriction
 
-/-! Actual finite Noether forms on Plücker coordinates for the universal
+/-! Finite Noether forms on Plücker coordinates for the universal
 center restriction. Their composed degree is D(D^2-1) for D at least two;
 linear source equations use a degree-one coefficient detector. -/
 
@@ -38,7 +38,7 @@ lemma irreducible_map_algebraicClosure_iff_of_isAlgClosed
 
 /-- The detector is a finite family of genuine polynomials in the maximal
 minor coordinates, chosen before the center matrix. Its evaluations detect
-absolute irreducibility of the actual restricted source equation. -/
+absolute irreducibility of the restricted source equation. -/
 theorem exists_center_noether_forms
     {K : Type*} [Field K] [CharZero K] {r n s m D : ℕ}
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))

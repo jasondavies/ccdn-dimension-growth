@@ -7,7 +7,7 @@ public import CCDN.ProjectiveIntegerHeight
 public import CCDN.ProjectiveSection
 public import CCDN.PolynomialPredicates
 
-/-! CCDN Corollary 4.1.2: actual integer points outside a proper irreducible
+/-! CCDN Corollary 4.1.2: integer points outside a proper irreducible
 affine variety, with coordinates bounded by its Hilbert degree, and the
 corresponding rational projective points of bounded height. -/
 
@@ -58,7 +58,7 @@ theorem exists_integer_grid_field_eval_ne_zero
   refine ⟨a ∘ e, fun i => ha (e i), ?_⟩
   simpa only [g, eval_rename, Function.comp_def] using he
 
-/-- A zero-dimensional affine coordinate ring has at most its actual
+/-- A zero-dimensional affine coordinate ring has at most its
 Hilbert degree many distinct points, over the given coefficient field. -/
 theorem zero_dimensional_affine_points_card_le
     {K σ ι : Type*} [Field K] [Fintype σ] [LinearOrder σ] [Fintype ι]
@@ -138,7 +138,7 @@ lemma homogeneous_ideal_eval_zero {K σ : Type*} [Field K]
 
 /-- A bounded integer representative gives a rational projective point
 outside the variety even when its equations have coefficients in a larger
-characteristic-zero field. Both the rational height and the actual
+characteristic-zero field. Both the rational height and the
 projective nonmembership over that field occur in the conclusion. -/
 theorem exists_small_projective_integer_representative_outside
     {K : Type*} [Field K] [CharZero K] {n : ℕ}
@@ -176,7 +176,7 @@ theorem exists_small_projective_integer_representative_outside
     exact hf (hmem _ haK rfl f hfi)
 
 /-- The projective conclusion of CCDN Corollary 4.1.2 for rational
-homogeneous prime ideals, using the actual projective height. -/
+homogeneous prime ideals, using the projective height. -/
 theorem exists_small_rational_projective_point_outside_prime_ideal
     {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
     (hhom : IsHomogeneousIdeal I)

@@ -5,7 +5,7 @@ public import CCDN.SingularDeterminantCutoff
 import all ArithmeticHeights.BombieriVaaler
 
 /-! The determinant lower bound with the bad-prime input discharged by the
-actual coefficient-controlled witness. The sharp finite-field point estimate
+coefficient-controlled witness. The sharp finite-field point estimate
 remains explicit and is not asserted as a theorem here. -/
 
 @[expose] public section
@@ -16,7 +16,7 @@ open Finset MvPolynomial Real
 def heightDeterminantError (C : ℝ) : ℝ :=
   degreeFourDeterminantError C + Real.log 7 + 2 * mertensError + 1
 
-/-- The excluded-prime set and its charge are derived from the actual absolute
+/-- The excluded-prime set and its charge are derived from the absolute
 irreducibility and coefficient-height hypotheses. The only remaining local
 arithmetic estimate is the stated sharp finite-field point bound. -/
 theorem singular_determinant_log_lower_height

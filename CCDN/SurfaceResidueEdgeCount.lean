@@ -2,7 +2,7 @@ module
 
 public import CCDN.SurfaceResidueBoundary
 
-/-! Counting the actual proper sections attached to one residue-subset
+/-! Counting the proper sections attached to one residue-subset
 edge, including the sum over all smooth residue tuples. -/
 
 @[expose] public section
@@ -153,7 +153,7 @@ theorem surface_residue_crossing_scaled_count
   dsimp only [q] at hc hm
   nlinarith [hc, hm]
 
-/-- Summing all actual smooth residue tuples cancels the square of the
+/-- Summing all smooth residue tuples cancels the square of the
 modulus. Only d to the number of selected primes remains. -/
 theorem surface_residue_edge_count_le
     {f : MvPolynomial (Fin 3) ℤ} {A B L X : ℝ}

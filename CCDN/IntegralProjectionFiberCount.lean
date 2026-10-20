@@ -4,7 +4,7 @@ public import CCDN.IntegralAlgebraPointCount
 public import CCDN.LinearProjectionFiltration
 public import Mathlib.RingTheory.Polynomial.UniqueFactorization
 
-/-! Actual rational-point fibers of an integral polynomial projection.
+/-! Rational-point fibers of an integral polynomial projection.
 Evaluation on the quotient constructs the specialization homomorphisms,
 and normality of the polynomial base gives a uniform fiber bound. -/
 

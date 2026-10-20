@@ -6,7 +6,7 @@ public import CCDN.ProjectiveChowIncidence
 
 /-! Algebraically independent hyperplane coefficients have no common
 projective point on the closure once their number exceeds its dimension.
-The obstruction is constructed from the actual incidence elimination ideal. -/
+The obstruction is constructed from the incidence elimination ideal. -/
 
 @[expose] public section
 namespace CCDN

@@ -5,7 +5,7 @@ public import CCDN.ProjectivePermutation
 public import CCDN.ProjectionScaleAbsorption
 
 /-! CCDN Theorem 2 in every ambient dimension. Degree is the slope of
-the homogeneous Hilbert function. The height and count use actual rational
+the homogeneous Hilbert function. The height and count use rational
 projective points. All projection and plane-counting inputs are proved. -/
 
 @[expose] public section
@@ -66,7 +66,7 @@ theorem projective_curve_count_of_proper_chart {n d : ℕ}
   unfold projectiveCurveConstant
   nlinarith only [hR, hplane, hscale, herr]
 
-/-- The coordinate chart is chosen from an actual point when the counted
+/-- The coordinate chart is chosen from a point when the counted
 set is nonempty. Coordinate permutation has no height cost. -/
 theorem projective_curve_count {n d : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]

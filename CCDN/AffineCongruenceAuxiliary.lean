@@ -5,7 +5,7 @@ public import CCDN.StandardMonomialAuxiliary
 public import CCDN.WeightedMonomialDeterminant
 import all ArithmeticHeights.BombieriVaaler
 
-/-! Actual auxiliary polynomials from the competing congruence determinant
+/-! Auxiliary polynomials from the competing congruence determinant
 lower bound and weighted archimedean upper bound. -/
 
 @[expose] public section
@@ -34,7 +34,7 @@ def affineCongruenceDeterminantLower (n d s : ℕ) (H Q : ℝ) : ℝ :=
 
 /-- A strict numerical gap forces every maximal determinant to vanish.
 All arithmetic divisibility and archimedean bounds are proved from the
-equation, its smooth residue classes, and the actual integer points. -/
+equation, its smooth residue classes, and the integer points. -/
 theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 2)) ℤ)
     (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))

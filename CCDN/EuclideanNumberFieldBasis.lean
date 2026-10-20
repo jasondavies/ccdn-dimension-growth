@@ -2,7 +2,7 @@ module
 
 public import CCDN.NumberFieldEuclideanLattice
 
-/-! A real basis of integral lattice vectors gives an actual rational
+/-! A real basis of integral lattice vectors gives a rational
 number-field basis. Its real coordinates on embedded field elements are
 the corresponding rational coordinates, so missing-span conditions
 transfer without any rationality assumption on a real linear relation. -/

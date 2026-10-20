@@ -5,8 +5,8 @@ public import CCDN.PolynomialCoefficientNormalizationRank
 public import CCDN.GenericLinearParameterField
 public import CCDN.PolynomialCoordinateEmbeddings
 
-/-! Identify the actual incidence minimal polynomial with the generic
-primitive element of the actual affine normalization extension. -/
+/-! Identify the incidence minimal polynomial with the generic
+primitive element of the affine normalization extension. -/
 
 @[expose] public section
 namespace CCDN

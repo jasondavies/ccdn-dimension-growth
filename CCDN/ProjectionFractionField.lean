@@ -38,7 +38,7 @@ theorem primitive_parameter_tuple_adjoin_top
   exact hsub (by rw [hprim]; trivial)
 
 /-- An injective algebra map into a field realizes that field as the fraction
-field whenever an actual tuple of source elements generates it as a field. -/
+field whenever a tuple of source elements generates it as a field. -/
 theorem isFractionRing_of_generating_tuple
     {K A F σ : Type*} [Field K] [CommRing A] [Field F]
     [Algebra K A] [Algebra K F]

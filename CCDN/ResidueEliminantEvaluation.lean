@@ -2,7 +2,7 @@ module
 
 public import CCDN.ResidueEliminant
 
-/-! Evaluation of the actual residue eliminant. The Sylvester Bezout identity
+/-! Evaluation of the residue eliminant. The Sylvester Bezout identity
 proves its vanishing at every ratio g(beta)/f'(beta) at a simple root. -/
 
 @[expose] public section

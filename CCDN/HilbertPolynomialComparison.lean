@@ -4,7 +4,7 @@ public import CCDN.FilteredHilbertPolynomial
 public import Mathlib.Analysis.Polynomial.Basic
 
 /-! Eventual inequalities compare the degree and leading coefficient of
-actual Hilbert polynomials. -/
+Hilbert polynomials. -/
 
 @[expose] public section
 namespace CCDN
@@ -65,7 +65,7 @@ lemma filteredHilbertPolynomial_leadingCoeff_pos {K σ : Type*} [Field K]
   positivity
 
 /-- Any filtered-dimension inequality between proper polynomial quotients
-compares their actual Hilbert dimensions. -/
+compares their Hilbert dimensions. -/
 theorem filteredHilbertPolynomial_natDegree_le
     {K L σ τ : Type*} [Field K] [Field L] [Fintype σ] [Fintype τ]
     [LinearOrder σ] [LinearOrder τ]
@@ -81,7 +81,7 @@ theorem filteredHilbertPolynomial_natDegree_le
   rw [hM n ((le_max_left _ _).trans hn), hN n ((le_max_right _ _).trans hn)]
   exact_mod_cast hle n
 
-/-- When dimensions agree, filtered comparison also compares the actual
+/-- When dimensions agree, filtered comparison also compares the
 leading coefficients, and hence the geometric multiplicities. -/
 theorem filteredHilbertPolynomial_leadingCoeff_le
     {K L σ τ : Type*} [Field K] [Field L] [Fintype σ] [Fintype τ]

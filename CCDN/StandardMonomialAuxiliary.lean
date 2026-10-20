@@ -5,7 +5,7 @@ public import CCDN.RowSelection
 import all ArithmeticHeights.BombieriVaaler
 
 /-! Vanishing maximal determinants on a standard-monomial family produce
-an actual integer auxiliary outside the original principal ideal. -/
+an integer auxiliary outside the original principal ideal. -/
 
 @[expose] public section
 namespace CCDN

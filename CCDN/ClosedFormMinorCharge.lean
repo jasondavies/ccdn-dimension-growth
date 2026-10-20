@@ -3,7 +3,7 @@ module
 public import CCDN.ClosedFormHeight
 public import CCDN.BadPrimeCharge
 
-/-! The actual integer minor has the logarithmic height needed by the
+/-! The integer minor has the logarithmic height needed by the
 fourth-power prime cutoff. The charge applies to primes with proved matrix
 rank drop; identifying these with the geometric bad primes remains separate. -/
 

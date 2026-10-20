@@ -5,7 +5,7 @@ public import CCDN.ProjectivePlaneLinearCount
 public import CCDN.PolynomialPredicates
 
 /-! The plane curve estimate gives a smaller degree exponent for curves
-specified by their actual filtered Hilbert polynomial. The construction of
+specified by their filtered Hilbert polynomial. The construction of
 the finite birational projection and its integer matrix is internal. -/
 
 @[expose] public section

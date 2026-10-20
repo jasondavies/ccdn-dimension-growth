@@ -6,7 +6,7 @@ public import CCDN.ChowPolynomialPower
 
 /-! When a polynomial has the same hypersurface as an irreducible equation,
 a generic block-line derivative resultant detects its irreducibility.
-The positive block degree is the actual degree of the line polynomial. -/
+The positive block degree is the degree of the line polynomial. -/
 
 @[expose] public section
 namespace CCDN

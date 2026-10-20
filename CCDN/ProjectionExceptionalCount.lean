@@ -2,7 +2,7 @@ module
 
 public import CCDN.BoundedBirationalProjection
 
-/-! Polynomial reconstruction controls actual exceptional points and finite
+/-! Polynomial reconstruction controls exceptional points and finite
 point counts. The error is d times the reconstruction denominator's degree;
 a uniform O(d^2) bound still requires a low-degree denominator. -/
 

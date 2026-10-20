@@ -3,7 +3,7 @@ module
 public import CCDN.SingularApproximation
 public import CCDN.SmoothLocalDeterminant
 
-/-! Actual singular plane-curve local determinant divisibility, obtained from
+/-! Singular plane-curve local determinant divisibility, obtained from
 finite-precision homogeneous generators of the local maximal-ideal filtration. -/
 
 @[expose] public section
@@ -35,7 +35,7 @@ lemma sum_fin_zero_pad {A : Type*} [AddCommMonoid A] {r μ : ℕ}
 
 /-- Every square evaluation determinant of integral zeros in one singular
 residue class has the repeated-weight multiplicity exponent. The curve's
-multiplicity is determined by its actual reduction, rather than assumed local
+multiplicity is determined by its reduction, rather than assumed local
 spanning or factorization data. -/
 theorem singular_plane_pow_dvd_det_mod {p μ s : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ)

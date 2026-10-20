@@ -84,7 +84,7 @@ lemma ambientEuler_minor_map {R S σ : Type*} [CommRing R] [CommRing S]
       ((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial (MvPolynomial.map φ f))).submatrix rows cols).det := by
   rw [eulerClosedForm_minor_map, ← universalPlanePolynomial_map]
 
-/-- The first implication in the universal Noether theorem, for the actual
+/-- The first implication in the universal Noether theorem, for the
 constructed integer coefficient forms and arbitrary characteristic. -/
 theorem ambientNoetherForm_eq_zero_of_not_absolutely_irreducible
     {K σ : Type*} [Field K] [Fintype σ] [DecidableEq σ]

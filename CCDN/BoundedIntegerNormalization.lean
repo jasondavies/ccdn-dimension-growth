@@ -4,7 +4,7 @@ public import CCDN.FinIntegerHilbertElimination
 public import CCDN.HilbertFullDimension
 
 /-! Constructive bounded linear Noether normalization. The coefficients of
-the actual integer linear forms are bounded by n! (d+1)^n. -/
+the integer linear forms are bounded by n! (d+1)^n. -/
 
 @[expose] public section
 namespace CCDN
@@ -29,7 +29,7 @@ lemma integerNormalizationHeight_step (n d : ℕ) :
   rw [Nat.factorial_succ, pow_succ]
   nlinarith [Nat.zero_le (n.factorial * (d + 1) ^ n * (d + 1))]
 
-/-- Actual integer linear normalization of a prime quotient of positive
+/-- Integer linear normalization of a prime quotient of positive
 Hilbert dimension. No chosen projection, equations or normalization is assumed.
 The resulting polynomial map is both injective and integral. -/
 theorem exists_bounded_integer_normalization (m k : ℕ)

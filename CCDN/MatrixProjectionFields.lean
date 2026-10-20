@@ -4,7 +4,7 @@ public import CCDN.ProjectionImageFractionField
 public import CCDN.ChowLinearSpecialization
 public import Mathlib.LinearAlgebra.Dual.Lemmas
 
-/-! Kernel containment of actual matrices gives containment of their
+/-! Kernel containment of matrices gives containment of their
 projected-coordinate fields. Equal centers therefore give the same image
 function field, without any assumption on the coordinate ideal. -/
 

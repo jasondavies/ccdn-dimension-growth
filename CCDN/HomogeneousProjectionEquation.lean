@@ -5,7 +5,7 @@ public import CCDN.PlaneRelationSpace
 public import CCDN.HypersurfaceGoodDirection
 public import CCDN.PolynomialPredicates
 
-/-! The actual principal equation of the image of a homogeneous linear
+/-! The principal equation of the image of a homogeneous linear
 projection is homogeneous. -/
 
 @[expose] public section

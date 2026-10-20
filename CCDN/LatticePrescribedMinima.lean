@@ -15,7 +15,7 @@ variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [FiniteDimensional ℝ E]
 
 /-- Only the first vector is prescribed; all subsequent minima are attained
-in the actual lattice outside the preceding flag. -/
+in the lattice outside the preceding flag. -/
 def IsPrescribedGreedyLatticeFamily (L : Submodule ℤ E) (w : E)
     {k : ℕ} (v : Fin (k + 1) → E) : Prop :=
   LinearIndependent ℝ v ∧ v 0 = w ∧ (∀ i, v i ∈ L) ∧

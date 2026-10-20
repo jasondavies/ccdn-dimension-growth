@@ -4,7 +4,7 @@ public import CCDN.HypersurfaceSmallHeightDegree
 public import CCDN.HypersurfaceBadPrimeComparison
 public import CCDN.PlaneAuxiliarySelection
 
-/-! Actual higher-dimensional auxiliary polynomials in the small-height
+/-! Higher-dimensional auxiliary polynomials in the small-height
 range, retaining the original geometric bad-prime factor and exact exponents. -/
 
 @[expose] public section
@@ -19,7 +19,7 @@ def hypersurfaceSmallThreshold (n d : ℕ) (B L A : ℝ) : ℝ :=
       B ^ ((n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) /
         L ^ (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))))
 
-/-- A degree above the proved threshold yields an actual integer homogeneous
+/-- A degree above the proved threshold yields an integer homogeneous
 nonmultiple vanishing at all supplied bounded primitive points. -/
 theorem hypersurface_exists_auxiliary_small_height
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d M t : ℕ}

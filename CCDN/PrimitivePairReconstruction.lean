@@ -69,7 +69,7 @@ lemma adjoin_top_polynomial_fraction {K F σ : Type*} [Field K] [Field F] [Algeb
   rw [he, hs, div_zero]
 
 /-- A finite family of field elements has a common polynomial denominator in
-any generating tuple, with actual polynomial reconstruction identities. -/
+any generating tuple, with polynomial reconstruction identities. -/
 theorem exists_common_polynomial_reconstruction {K F σ ι : Type*}
     [Field K] [Field F] [Algebra K F] [Fintype ι] [DecidableEq ι]
     (a : σ → F) (ha : IntermediateField.adjoin K (Set.range a) = ⊤)

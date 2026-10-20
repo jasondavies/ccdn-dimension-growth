@@ -200,7 +200,7 @@ theorem zeroLocus_eq_line_of_affine_coordinates {K : Type*} [Field K]
     rw [he, map_zero, MvPolynomial.aeval_eq_eval] at hz'
     exact hz'
 
-/-- A degree-one prime component with a rational point is exactly an actual
+/-- A degree-one prime component with a rational point is exactly a
 rational affine line. This is equality of zero sets, not just containment. -/
 theorem degree_one_zeroLocus_eq_rationalAffineLine
     (p : Ideal (CoordinatePolynomial 3)) [p.IsPrime] (hp : p.height = 2)

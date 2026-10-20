@@ -5,7 +5,7 @@ public import CCDN.BoundedLinearProjection
 public import CCDN.IntegerLinearForms
 public import CCDN.PolynomialMapDeterminant
 
-/-! Actual height and cardinality transport through an integer linear
+/-! Height and cardinality transport through an integer linear
 projection with uniformly bounded affine fibers. -/
 
 @[expose] public section

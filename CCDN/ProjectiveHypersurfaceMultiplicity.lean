@@ -5,7 +5,7 @@ public import CCDN.ProjectiveHypersurfaceResidueDeterminant
 public import CCDN.HomogeneousChartIrreducible
 
 /-! The singular multiplicity correction for projective hypersurfaces.
-Actual chart coordinates inject each selected residue class into an affine
+Chart coordinates inject each selected residue class into an affine
 singular locus, whose codimension-two point bound is proved by interpolation. -/
 
 @[expose] public section
@@ -79,7 +79,7 @@ lemma projectiveHypersurfaceResidueMultiplicity_singular {n p d : ℕ} [Fact p.P
   exact singular_of_origin_order_ge_two _ _ hμ hp
 
 /-- Count singular classes in their n+3 possible charts. The pivots and
-multiplicities here are those of the actual reduced projective hypersurface. -/
+multiplicities here are those of the reduced projective hypersurface. -/
 theorem projective_hypersurface_singular_residue_card_le {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f)) (hchar : d < p) :
@@ -120,7 +120,7 @@ theorem projective_hypersurface_singular_residue_card_le {n p d : ℕ} [Fact p.P
   simpa only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul, mul_assoc]
     using h
 
-/-- Singular classes contribute only a lower-order correction to the actual
+/-- Singular classes contribute only a lower-order correction to the
 projective point count; the leading term is not multiplied by the degree. -/
 theorem projectiveHypersurfaceTotalMultiplicity_le_card_add_correction {n p d : ℕ}
     [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)

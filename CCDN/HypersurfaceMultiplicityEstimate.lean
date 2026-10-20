@@ -115,7 +115,7 @@ lemma hypersurfaceMultiplicityExponent_cutoff_pos (m s K : ℕ) (hm : 0 < m)
   obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hm)
   exact hypersurfaceMultiplicityExponent_cutoff n s K hμ
 
-/-- Optimize the cutoff for the actual local hypersurface exponent. -/
+/-- Optimize the cutoff for the local hypersurface exponent. -/
 theorem hypersurfaceMultiplicityExponent_root_bound (m s : ℕ) (hm : 0 < m)
     {μ : ℕ} (hμ : 0 < μ) (R : ℝ) (hR0 : 0 ≤ R)
     (hR : (μ : ℝ) * R ^ m = (m.factorial : ℝ) * s) :

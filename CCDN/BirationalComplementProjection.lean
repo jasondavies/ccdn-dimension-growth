@@ -4,7 +4,7 @@ public import CCDN.BoundedCenterProjectionAllRows
 public import CCDN.BoundedBirationalCenter
 public import CCDN.PolynomialPredicates
 
-/-! Actual complementary projections retain the geometric and degree
+/-! Complementary projections retain the geometric and degree
 properties of the minor projection with the same center. This interface
 is independent of the bound used to construct the center rows. -/
 
@@ -13,8 +13,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-/-- Properties of the actual normalized projection onto a complementary
-linear subspace, and of its actual homogeneous image ideal. -/
+/-- Properties of the normalized projection onto a complementary
+linear subspace, and of its homogeneous image ideal. -/
 structure BirationalComplementProjection {r n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [J.IsPrime]
     (M : Matrix (Fin r) (Fin (n + 1)) ℤ) (D : ℤ)
@@ -57,7 +57,7 @@ lemma integral_matrix_projection_no_base_point {n s : ℕ}
   · intro i
     simpa only [aeval_eq_eval, chowProjectionForms_eval, Pi.zero_apply] using congrFun hz i
 
-/-- Any bounded independent good center gives a bounded actual complementary
+/-- Any bounded independent good center gives a bounded complementary
 projection. The bound T is arbitrary, so sharper detector bounds can reuse
 this construction unchanged. -/
 theorem exists_bounded_birational_complement_of_minor_projection

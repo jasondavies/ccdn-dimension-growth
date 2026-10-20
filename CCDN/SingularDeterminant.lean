@@ -5,7 +5,7 @@ public import CCDN.PrimeSums
 import all ArithmeticHeights.BombieriVaaler
 
 /-! Global determinant lower bounds including singular reduction classes.
-The local divisibility, actual residue partition, multiplicities, and singular
+The local divisibility, residue partition, multiplicities, and singular
 correction are proved. Sharp finite-field point counts and control of the
 excluded primes remain explicit inputs. -/
 
@@ -27,7 +27,7 @@ lemma irreducible_mvPolynomial_totalDegree_pos {K σ : Type*} [Field K]
   rw [he]
   exact (isUnit_iff_ne_zero.mpr hc).map C
 
-/-- The local exponent can be bounded using the actual reduced point count
+/-- The local exponent can be bounded using the reduced point count
 and the proved degree-dependent singular correction. -/
 theorem singular_reduction_minorGcd_card_bound {s N p : ℕ} [Fact p.Prime] (hs : 0 < s)
     (f : MvPolynomial (Fin 2) ℤ) (g : Fin N → MvPolynomial (Fin 2) ℤ)
@@ -47,7 +47,7 @@ theorem singular_reduction_minorGcd_card_bound {s N p : ℕ} [Fact p.Prime] (hs 
   apply div_le_div_of_nonneg_left (sq_nonneg _) (by positivity)
   exact mul_le_mul_of_nonneg_left (by exact_mod_cast hbound) (by norm_num)
 
-/-- A global logarithmic determinant estimate with the actual residue-point
+/-- A global logarithmic determinant estimate with the residue-point
 count and the explicit singular correction retained in each denominator.
 No finite-field point estimate is assumed in this form. -/
 theorem singular_determinant_log_lower_exact {s N : ℕ} (hs : 0 < s)
@@ -84,7 +84,7 @@ theorem singular_determinant_log_lower_exact {s N : ℕ} (hs : 0 < s)
     exact (hlocal p hp).2.choose_spec.2
 
 /-- The global prime-sum estimate for arbitrary reduction points, including
-singular points. The hypothesis bounds the actual finite-field point count;
+singular points. The hypothesis bounds the finite-field point count;
 the singular correction and all local determinant divisibilities are derived.
 The displayed degree-dependent error is explicit and is not the final sharp
 CCDN dependence on degree. -/

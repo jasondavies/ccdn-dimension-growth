@@ -4,7 +4,7 @@ public import CCDN.NoIndexTwoClassGroupBound
 public import CCDN.QuadraticClassGroupDescent
 
 /-! Degree and discriminant facts used to assemble the class-group bound
-by strong induction on the actual number-field degree. -/
+by strong induction on the number-field degree. -/
 
 @[expose] public section
 namespace CCDN

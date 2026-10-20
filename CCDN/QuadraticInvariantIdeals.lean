@@ -5,7 +5,7 @@ public import Mathlib.NumberTheory.NumberField.Discriminant.Different
 public import Mathlib.NumberTheory.RamificationInertia.Galois
 public import Mathlib.RingTheory.DedekindDomain.Factorization
 
-/-! Actual prime ideal orbits in a quadratic number-field extension.
+/-! Prime ideal orbits in a quadratic number-field extension.
 These are the arithmetic inputs for factoring invariant ideals into
 extended base ideals and ramified prime factors. -/
 

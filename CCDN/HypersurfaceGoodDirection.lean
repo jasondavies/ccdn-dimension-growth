@@ -4,7 +4,7 @@ public import CCDN.HypersurfaceSmoothPoint
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-! Simultaneous avoidance of the top homogeneous form, a tangent hyperplane,
-and a chosen coordinate hyperplane. These are actual directions over the base
+and a chosen coordinate hyperplane. These are directions over the base
 field, rather than genericity assumptions supplied to a counting theorem. -/
 
 @[expose] public section

@@ -4,7 +4,7 @@ public import CCDN.FilteredIntersection
 public import CCDN.HilbertPolynomialComparison
 public import CCDN.PolynomialFiniteDifference
 
-/-! Actual Hilbert inequalities for a proper polynomial section of a prime
+/-! Hilbert inequalities for a proper polynomial section of a prime
 affine variety. Multiplication by the section is injective in the original
 coordinate domain and is killed in the section quotient. -/
 
@@ -95,7 +95,7 @@ theorem proper_section_hilbert_polynomial_difference
     exact_mod_cast h
   linarith
 
-/-- Every proper polynomial section lowers the actual affine Hilbert
+/-- Every proper polynomial section lowers the affine Hilbert
 dimension by at least one. In the maximal remaining dimension its leading
 coefficient is at most the expected intersection degree. -/
 theorem proper_section_hilbert_dimension_leadingCoeff

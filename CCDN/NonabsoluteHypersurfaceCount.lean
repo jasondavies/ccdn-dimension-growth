@@ -3,7 +3,7 @@ module
 public import CCDN.NonabsoluteSurfaceCount
 public import CCDN.CompleteIntersectionGridBound
 
-/-! Dimension growth for actual non-geometrically-irreducible rational
+/-! Dimension growth for non-geometrically-irreducible rational
 hypersurfaces in every ambient dimension. The dependence on the degree
 is quadratic; the explicit constant depends only on dimension. -/
 
@@ -51,7 +51,7 @@ theorem proper_intersection_count_le_box {n d : ℕ}
   exact hcard.trans (mul_le_mul_of_nonneg_left
     (pow_le_pow_left₀ (Nat.cast_nonneg _) hScard n) (by positivity))
 
-/-- Actual rationally irreducible full equations which split over an
+/-- Rationally irreducible full equations which split over an
 extension satisfy affine dimension growth with quadratic degree
 dependence. The dimension-only factor here is not asserted to be the
 sharp constant one in CCDN Corollary 4.1.4. -/

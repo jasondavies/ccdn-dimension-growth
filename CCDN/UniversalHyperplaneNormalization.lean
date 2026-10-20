@@ -4,7 +4,7 @@ public import CCDN.GenericHyperplaneNormalizationDescent
 public import CCDN.HomogeneousNormalizationRank
 
 /-! A named rational-function field of universal hyperplane coefficients,
-with its canonical independent tuple and actual finite normalization.
+with its canonical independent tuple and finite normalization.
 The function-field rank is exactly the original Hilbert multiplicity. -/
 
 @[expose] public section
@@ -77,8 +77,8 @@ theorem universal_hyperplane_normalization_injective
   generic_hyperplane_normalization_injective_of_geometric_prime I hm _
     (universalCoefficient_algebraicIndependent K _)
 
-/-- Exact degree for the actual universal normalization, in any chosen
-fraction field of its actual scalar-extended projective-closure cone. -/
+/-- Exact degree for the universal normalization, in any chosen
+fraction field of its scalar-extended projective-closure cone. -/
 theorem universal_hyperplane_normalization_finrank
     {K : Type*} [Field K] [CharZero K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

@@ -3,7 +3,7 @@ module
 public import CCDN.BoundedLinearSeparation
 public import Mathlib.FieldTheory.PrimitiveElement
 
-/-! Quantitative primitive elements and separation by actual affine coordinates. -/
+/-! Quantitative primitive elements and separation by affine coordinates. -/
 
 @[expose] public section
 namespace CCDN
@@ -27,7 +27,7 @@ theorem exists_bounded_primitive_element {R F : Type*} [Field R] [CharZero R] [F
     apply hinj
     simpa only [map_sum, map_mul, map_pow, map_natCast] using he
 
-/-- Maps from an actual fraction field are determined by the images of the
+/-- Maps from a fraction field are determined by the images of the
 original affine coordinates, even when the scalar field contains a parameter. -/
 theorem curve_coordinate_embeddings_injective {K R F L σ : Type*}
     [Field K] [Field R] [Field F] [Field L]

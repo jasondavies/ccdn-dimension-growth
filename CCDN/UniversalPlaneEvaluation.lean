@@ -2,7 +2,7 @@ module
 
 public import CCDN.FiniteFieldBadPlanes
 
-/-! Evaluation of an actual universal section, including the three points
+/-! Evaluation of a universal section, including the three points
 obtained from the base point by adding each direction. -/
 
 @[expose] public section

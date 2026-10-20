@@ -4,9 +4,9 @@ public import CCDN.CenterPluckerZariski
 public import CCDN.BirationalCenterSubspace
 public import CCDN.PolynomialPredicates
 
-/-! Actual geometrically disjoint birational centers form a dense open set
+/-! Geometrically disjoint birational centers form a dense open set
 for the Zariski topology induced by their projective maximal minors. This
-uses the constructed homogeneous detector and the actual rational witness;
+uses the constructed homogeneous detector and the rational witness;
 neither a detector nor a witness is a premise of the final theorem. -/
 
 @[expose] public section

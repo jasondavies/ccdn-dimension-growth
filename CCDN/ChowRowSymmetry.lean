@@ -3,7 +3,7 @@ module
 public import CCDN.ChowIncidenceForm
 public import CCDN.WeightedHomogeneousTransform
 
-/-! Permuting hyperplanes preserves the actual incidence ideal. Consequently
+/-! Permuting hyperplanes preserves the incidence ideal. Consequently
 the separate row degrees of its nonzero principal generator are all equal. -/
 
 @[expose] public section

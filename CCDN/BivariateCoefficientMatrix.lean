@@ -101,7 +101,7 @@ lemma bivariateCoefficients_injective {R : Type*} [CommRing R] :
   ext i j
   exact congrFun h (i,j)
 
-/-- The actual matrix of the closed-form equation on bounded unknowns.
+/-- The matrix of the closed-form equation on bounded unknowns.
 In particular it is an integer matrix when R=Z. -/
 def closedFormCoefficientMatrix {R : Type*} [CommRing R] (d : ℕ) (f : R[X][X]) :
     Matrix (ℕ × ℕ) (ClosedFormColumns d) R :=

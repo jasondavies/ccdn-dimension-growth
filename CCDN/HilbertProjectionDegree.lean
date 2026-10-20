@@ -3,9 +3,9 @@ module
 public import CCDN.HilbertProjectionKernel
 public import CCDN.PrincipalHilbertPolynomial
 
-/-! Degree bounds for actual hypersurface equations of linear projections.
+/-! Degree bounds for hypersurface equations of linear projections.
 The degree is bounded by the factorial-normalized leading coefficient of
-the original quotient's actual filtered Hilbert polynomial. -/
+the original quotient's filtered Hilbert polynomial. -/
 
 @[expose] public section
 namespace CCDN

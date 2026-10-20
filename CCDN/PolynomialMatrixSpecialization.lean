@@ -53,7 +53,7 @@ theorem polynomial_matrix_scaled_left_inverse {K ι κ : Type*} [Field K]
   simpa only [Matrix.map_apply, Matrix.smul_apply, smul_eq_mul, map_mul,
     Matrix.one_apply, apply_ite f, map_one, map_zero] using he
 
-/-- Full column rank over K(t) occurs at an actual integer specialization. -/
+/-- Full column rank over K(t) occurs at an integer specialization. -/
 theorem polynomial_matrix_injective_specialization {K ι κ : Type*} [Field K] [CharZero K]
     [Fintype ι] [Fintype κ] [DecidableEq ι] [DecidableEq κ]
     (A : Matrix ι κ (Polynomial K))

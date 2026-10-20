@@ -3,7 +3,7 @@ module
 public import CCDN.ProjectiveLocalDeterminant
 public import Mathlib.LinearAlgebra.Projectivization.Cardinality
 
-/-! Actual projective reduction of primitive integer points, and the affine
+/-! Projective reduction of primitive integer points, and the affine
 coordinate charts determined by their finite-field residue points. -/
 
 @[expose] public section
@@ -50,7 +50,7 @@ lemma cast_projectiveResidueChartLift {p : ℕ} [Fact p.Prime]
   simp [projectiveResidueChartLift]
 
 /-- Reduction determines both a unit coordinate and all affine congruences;
-these are derived from equality of actual projective residue points. -/
+these are derived from equality of projective residue points. -/
 theorem primitiveProjectiveReduction_chart {p : ℕ} [Fact p.Prime]
     (z : IntPoint 3) (hz : Finset.univ.gcd z = 1)
     (r : ProjectiveResidueSpace 2 p) (he : primitiveProjectiveReduction z hz = r) :
@@ -75,7 +75,7 @@ theorem primitiveProjectiveReduction_chart {p : ℕ} [Fact p.Prime]
     field_simp [projectiveResiduePivot_ne_zero]
     ring
 
-/-- Homogeneous equations remain zero at the actual projective reduction. -/
+/-- Homogeneous equations remain zero at the projective reduction. -/
 theorem primitiveProjectiveReduction_zero {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d)
     (z : IntPoint (n + 1)) (hz : Finset.univ.gcd z = 1) (hzf : eval z f = 0) :

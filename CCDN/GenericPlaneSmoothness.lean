@@ -3,7 +3,7 @@ module
 public import CCDN.GenericPlaneIrreducibility
 public import CCDN.PlaneSmoothGeometricIrreducibility
 
-/-! The actual generic plane f(x,y*z), with slopes in their rational function
+/-! The generic plane f(x,y*z), with slopes in their rational function
 field, has a smooth origin whenever the original equation does. Together with
 ordinary irreducibility this proves geometric irreducibility of the generic
 plane in the positioned coordinates. -/
@@ -66,7 +66,7 @@ lemma genericPlaneMap_pderiv {K F σ : Type*} [Field K] [Field F]
     cases i <;> simp [genericPlaneMap, pderiv_X] at hf ⊢
     all_goals simp only [hf, true_or]
 
-/-- Ordinary irreducibility over the actual rational function field in slopes. -/
+/-- Ordinary irreducibility over the rational function field in slopes. -/
 theorem genericPlaneMap_irreducible
     {K F σ : Type*} [Field K] [Field F]
     [Algebra K F] [Algebra (MvPolynomial σ K) F]

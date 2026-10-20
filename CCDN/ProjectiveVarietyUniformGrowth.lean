@@ -67,7 +67,7 @@ theorem projective_variety_dimension_growth_uniform_indices (n : ℕ) :
 
 /-- General positive-dimensional projective varieties of degree at least
 five, with a single constant and a single degree exponent for each ambient
-projective space. The height exponent is the actual projective dimension. -/
+projective space. The height exponent is the projective dimension. -/
 theorem projective_variety_dimension_growth_uniform (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →

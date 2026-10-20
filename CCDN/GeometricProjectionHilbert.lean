@@ -6,7 +6,7 @@ public import CCDN.HilbertScalarExtension
 public import CCDN.HomogeneousPermutationBaseChange
 public import CCDN.PolynomialPredicates
 
-/-! The actual matrix image commutes with coefficient extension and has
+/-! The matrix image commutes with coefficient extension and has
 the same Hilbert polynomial after extension. Geometric center avoidance
 also proves integrality over the original coefficient field. -/
 

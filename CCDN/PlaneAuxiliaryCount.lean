@@ -4,7 +4,7 @@ public import CCDN.HomogeneousChart
 public import CCDN.PlaneAuxiliarySelection
 public import CCDN.Bezout
 
-/-! Actual distinct-point bounds obtained from the auxiliary polynomials and
+/-! Distinct-point bounds obtained from the auxiliary polynomials and
 Bézout. The sharp finite-field estimate remains an explicit hypothesis. -/
 
 @[expose] public section
@@ -26,7 +26,7 @@ lemma rational_irreducible_of_charZero_map {F σ : Type*} [Field F] [CharZero F]
   rw [he]
   exact hf
 
-/-- The precise Bézout step for an actual homogeneous integer auxiliary
+/-- The precise Bézout step for a homogeneous integer auxiliary
 polynomial and a primitive equation whose chart has full degree. -/
 theorem plane_chart_points_card_le_auxiliary_degree {d M t : ℕ}
     (f g : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
@@ -61,7 +61,7 @@ theorem plane_chart_points_card_le_auxiliary_degree {d M t : ℕ}
   exact h.trans (Nat.mul_le_mul_left d ((affineChart_totalDegree_le g).trans hg.totalDegree_le))
 
 /-- In the small-height range, the explicit selected auxiliary degree yields
-a point count. All geometric data here are actual equations and integer points. -/
+a point count. All geometric data here are equations and integer points. -/
 theorem plane_chart_points_small_height_bound
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
@@ -119,7 +119,7 @@ theorem plane_chart_points_large_height_bound
       hR.trans (mul_le_mul_of_nonneg_left hM (by positivity))
     _ = _ := by ring
 
-/-- Enumerating the actual integer zeros transfers finite-family bounds to
+/-- Enumerating the integer zeros transfers finite-family bounds to
 the counting interface, including empty point sets. -/
 lemma integer_zero_count_le_of_family_bound {n : ℕ} (f : MvPolynomial (Fin n) ℤ)
     (B R : ℝ)
@@ -143,7 +143,7 @@ lemma integer_zero_count_le_of_family_bound {n : ℕ} (f : MvPolynomial (Fin n) 
   have h := hbound _ z hinj hzero hbox
   simpa only [Fintype.card_coe, S, count] using h
 
-/-- The finite-family bound in the actual real-radius counting interface. -/
+/-- The finite-family bound in the real-radius counting interface. -/
 theorem count_plane_chart_small_height_bound
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
@@ -166,7 +166,7 @@ theorem count_plane_chart_small_height_bound
   intro t z hinj hz hbox
   exact plane_chart_points_small_height_bound order f hf hf0 hd hprim hdchart hir H hH hcoeff z hinj hz hB hbox hC hheight hcount
 
-/-- The finite-family bound in the actual real-radius counting interface. -/
+/-- The finite-family bound in the real-radius counting interface. -/
 theorem count_plane_chart_large_height_bound
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)

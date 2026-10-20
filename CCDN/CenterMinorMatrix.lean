@@ -3,7 +3,7 @@ module
 public import CCDN.CenterMinorProjection
 public import CCDN.PolynomialPredicates
 
-/-! Enumerating the actual maximal-minor coordinates turns the source's
+/-! Enumerating the maximal-minor coordinates turns the source's
 Plücker projection into a matrix with exactly the center as its kernel.
 This supplies the literal center geometry to the Chow specialization API. -/
 
@@ -33,7 +33,7 @@ lemma exists_center_minor_coordinate_enumeration {r n : ℕ} (hr : r + 2 ≤ n) 
   have he : s + 2 = Fintype.card (Fin (r + 1) ↪ Fin n) := by omega
   exact (finCongr he).trans (Fintype.equivFin _).symm
 
-/-- Every entry is a degree-one polynomial evaluated at the actual center
+/-- Every entry is a degree-one polynomial evaluated at the center
 Plücker coordinates. The enumeration only orders the maximal minors. -/
 def centerMinorProjectionMatrix {K : Type*} [Field K] {r n s : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin n)) :
@@ -55,7 +55,7 @@ lemma centerMinorProjectionMatrix_mulVec {K : Type*} [Field K] {r n s : ℕ}
   rw [← chowProjectionForms_eval, centerMinorProjectionMatrix_form,
     centerMinorProjectionForm_eval]
 
-/-- The actual matrix kernel equals the linear center specified by its rows. -/
+/-- The matrix kernel equals the linear center specified by its rows. -/
 theorem centerMinorProjectionMatrix_ker {K : Type*} [Field K] {r n s : ℕ}
     (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
@@ -84,7 +84,7 @@ lemma centerMinorProjectionMatrix_disjoint {K : Type*} [Field K] {r n s : ℕ}
   rw [← centerMinorProjectionMatrix_ker A hA e]
   exact hz
 
-/-- The center's literal Plücker projection obeys the actual image-incidence
+/-- The center's literal Plücker projection obeys the image-incidence
 criterion; source and image are connected by the constructed minors. -/
 theorem center_minor_projection_incidence_iff
     {K : Type*} [Field K] [IsAlgClosed K] {r n s q : ℕ}

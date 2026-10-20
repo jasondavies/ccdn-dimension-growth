@@ -3,7 +3,7 @@ module
 public import CCDN.HeightDeterminant
 public import CCDN.PlaneChartDeterminant
 
-/-! The actual affine-chart determinant comparison with coefficient-controlled
+/-! The affine-chart determinant comparison with coefficient-controlled
 bad reduction. Only the sharp residue-point count remains an arithmetic input. -/
 
 @[expose] public section

@@ -3,7 +3,7 @@ module
 public import CCDN.IntegralProjectionClosedImage
 public import Mathlib.Algebra.MvPolynomial.Funext
 
-/-! Actual hyperplane incidence on an affine chart. The eliminated ideal is
+/-! Hyperplane incidence on an affine chart. The eliminated ideal is
 constructed by substitution in the coordinate domain, and its geometric
 zero equations are proved to be precisely the equations vanishing on all
 incident hyperplane tuples. No Chow polynomial is supplied as a premise. -/

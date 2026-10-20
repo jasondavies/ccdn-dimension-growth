@@ -98,7 +98,7 @@ theorem plane_finite_count_of_sharp_residue_bound
   convert ht using 1
   ring
 
-/-- The same coefficient-uniform bound on the actual real-radius integer-point
+/-- The same coefficient-uniform bound on the real-radius integer-point
 counting interface. The only counting input is the sharp residue estimate. -/
 theorem count_plane_of_sharp_residue_bound
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]

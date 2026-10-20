@@ -4,7 +4,7 @@ public import CCDN.DegreeOneComponentLines
 public import CCDN.SurfaceLineContribution
 public import CCDN.PolynomialPredicates
 
-/-! The proved line contribution applies to actual degree-one prime
+/-! The proved line contribution applies to degree-one prime
 components, with the original number of components as the additive cost. -/
 
 @[expose] public section

@@ -3,7 +3,7 @@ module
 public import CCDN.ClassGroupBalancedGenerator
 public import Mathlib.Data.Set.Card
 
-/-! The first counting reduction for actual two-torsion ideal classes:
+/-! The first counting reduction for two-torsion ideal classes:
 inject them into the finite set of bounded algebraic integers whose absolute
 norm is a square. Both possible signs of the signed norm are retained. -/
 

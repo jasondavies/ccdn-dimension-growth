@@ -3,7 +3,7 @@ module
 public import CCDN.LocalPrimeGenerators
 public import CCDN.ExactFiltrationWeights
 
-/-! Determinants of actual homomorphisms from arbitrary Noetherian local
+/-! Determinants of homomorphisms from arbitrary Noetherian local
 rings. The residue map of the target identifies its prime ideal; all local
 generators and their finite-precision factorizations are constructed from
 the source ring and its genuine mod-prime ideal layers. -/
@@ -59,7 +59,7 @@ lemma local_map_maximalIdeal_pow_dvd (τ : S →+* ZMod p)
   rw [Ideal.span_singleton_pow] at hmem
   exact Ideal.mem_span_singleton.mp hmem
 
-/-- The weighted determinant principle for actual Noetherian local rings.
+/-- The weighted determinant principle for Noetherian local rings.
 The only numerical input specifies the exponent in terms of the genuine
 layer dimensions; the generating family is constructed internally. -/
 theorem noetherian_local_det_of_weight_threshold [IsNoetherianRing R] {s e : ℕ}
@@ -113,7 +113,7 @@ theorem noetherian_local_det_of_weight_threshold [IsNoetherianRing R] {s e : ℕ
     simp
 
 /-- General local-ring counterpart of the existing hypersurface filtration
-divisor. The layer profile is that of the actual quotient `R/(p)`. -/
+divisor. The layer profile is that of the quotient `R/(p)`. -/
 theorem noetherian_local_filtration_det [IsNoetherianRing R] {s : ℕ}
     (τ : S →+* ZMod p) (hτ : RingHom.ker τ = Ideal.span {(p : S)})
     (ψ : Fin s → R →+* S) (x : Fin s → R) :

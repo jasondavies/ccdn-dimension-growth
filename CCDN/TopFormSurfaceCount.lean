@@ -5,7 +5,7 @@ public import CCDN.SurfaceDegreeOneCount
 public import CCDN.PolynomialPredicates
 
 /-! The corrected large-degree surface bound. The auxiliary section's
-nonlinear curves and its actual degree-one components together account
+nonlinear curves and its degree-one components together account
 for every bounded integer zero of the original surface. -/
 
 @[expose] public section

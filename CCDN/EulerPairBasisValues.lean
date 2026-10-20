@@ -50,7 +50,7 @@ theorem eulerClosedFormCoefficientMatrix_rank
       Set.finrank]
   rw [hr, card_eulerColumns]
 
-/-- An actual nonzero maximal minor has precisely the universal Noether
+/-- A nonzero maximal minor has precisely the universal Noether
 order, not the earlier rectangular-grid order 2*d^2-1. -/
 theorem exists_eulerClosedForm_nonzero_minor
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]

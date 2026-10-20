@@ -5,7 +5,7 @@ public import CCDN.ProjectiveChartIdeal
 public import CCDN.ProjectiveChartScalarExtension
 public import CCDN.HomogeneousPrimeComponents
 
-/-! The actual projective closure ideal of an affine coordinate ideal. The
+/-! The projective closure ideal of an affine coordinate ideal. The
 homogenizing parameter is a polynomial variable over the affine quotient,
 so primeness and homogeneous components are proved directly. -/
 

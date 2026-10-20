@@ -6,7 +6,7 @@ public import CCDN.QuadraticNormConjugation
 public import CCDN.AmbiguousIdealRelativeNorm
 public import CCDN.ClassGroupQuadraticInvolution
 
-/-! The unit-norm obstruction for actual ambiguous ideal classes.
+/-! The unit-norm obstruction for ambiguous ideal classes.
 Equal obstructions yield classes differing by a class represented by an
 invariant fractional ideal. The representatives can be chosen once, so
 the fiber argument does not need a preliminary choice-independent
@@ -50,7 +50,7 @@ theorem fractionField_ringOfIntegers_automorphism (σ : K ≃ₐ[F] K) :
       (RingOfIntegers.mapAlgEquiv σ).toRingEquiv x
   exact RingHom.congr_fun h
 
-/-- Classes represented by actual invariant invertible fractional ideals. -/
+/-- Classes represented by invariant invertible fractional ideals. -/
 def stronglyAmbiguousClassGroup (σ : K ≃ₐ[F] K) : Subgroup (ClassGroup (𝓞 K)) :=
   ((ClassGroup.mk K).comp
     ((fractionalIdealUnitAction (K := K)

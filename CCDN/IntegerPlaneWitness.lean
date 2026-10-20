@@ -3,7 +3,7 @@ module
 public import CCDN.IntegerPolynomialAvoidance
 public import CCDN.HypersurfaceBadPrimes
 
-/-! An actual nonzero bad-prime witness obtained by evaluating the universal
+/-! A nonzero bad-prime witness obtained by evaluating the universal
 plane polynomial on a bounded integer grid. -/
 
 @[expose] public section

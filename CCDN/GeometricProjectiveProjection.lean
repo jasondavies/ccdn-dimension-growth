@@ -4,7 +4,7 @@ public import CCDN.ProjectionScalarExtension
 public import CCDN.SharpProjectiveProjection
 public import CCDN.PolynomialPredicates
 
-/-! Geometric integrality in the actual finite birational projective
+/-! Geometric integrality in the finite birational projective
 projection. This supplies the general-dimensional geometric interface of
 Proposition 4.3.2, with a dimension-only polynomial height cost. -/
 
@@ -14,7 +14,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The constructed finite birational integer projection preserves degree
-and geometric integrality, and its actual point-count comparison has factor
+and geometric integrality, and its point-count comparison has factor
 exactly `d`. Scalar extension may be to any field where the source stays
 prime, in particular to an algebraic closure. -/
 theorem exists_geometrically_integral_projective_projection

@@ -6,7 +6,7 @@ public import CCDN.PrimitiveNormalization
 public import CCDN.TopFormIrreducibility
 
 /-! Parallel affine slices preserve the good leading hyperplane section.
-Rational restriction equations can then be replaced by actual integer
+Rational restriction equations can then be replaced by integer
 polynomials without changing their zero sets or total degrees. -/
 
 @[expose] public section

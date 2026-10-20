@@ -49,7 +49,7 @@ lemma projective_chart_eval_congr {M : ℕ} {q u : ℤ}
   · simp
 
 /-- Projective local determinant estimate in a chart whose first coordinate
-is a p-adic unit. The affine multiplicity belongs to the actual chart equation. -/
+is a p-adic unit. The affine multiplicity belongs to the chart equation. -/
 theorem projective_plane_chart_det_divisibility {p μ s d M : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hfhom : f.IsHomogeneous d)
     (F : Fin s → MvPolynomial (Fin 3) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)

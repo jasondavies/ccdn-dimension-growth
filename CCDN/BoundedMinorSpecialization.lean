@@ -8,7 +8,7 @@ public import CCDN.PrimitiveNormalization
 
 /-! The numerical specialization step for a nonempty polynomial condition on
 maximal minors. The geometric construction of a good-center condition is
-separate: this module starts with a polynomial and an actual full-rank rational
+separate: this module starts with a polynomial and a full-rank rational
 matrix where it does not vanish. -/
 
 @[expose] public section

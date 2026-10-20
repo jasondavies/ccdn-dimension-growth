@@ -4,7 +4,7 @@ public import CCDN.HypersurfacePositioning
 public import CCDN.ClosedFormScaling
 
 /-! The universal affine two-plane, with independent coordinates for its base
-point and both directions. Its specializations are actual affine-plane
+point and both directions. Its specializations are affine-plane
 restrictions; its polynomial coefficients are the objects to be counted. -/
 
 @[expose] public section

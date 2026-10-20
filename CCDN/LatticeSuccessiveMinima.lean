@@ -5,7 +5,7 @@ public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
 public import Mathlib.Data.Set.Finite.Lemmas
 
 /-! Greedy shortest independent lattice vectors. The minima are attained
-in the actual lattice, and each vector minimizes the norm outside the span
+in the lattice, and each vector minimizes the norm outside the span
 of its predecessors. This supplies the flag used in a product-of-minima
 estimate. -/
 
@@ -120,7 +120,7 @@ theorem IsGreedyLatticeFamily.norm_mono
   apply hv.2.2 i (v j) (hv.2.1 j)
   exact hv.1.notMem_span_image (not_lt_of_ge hij)
 
-/-- A real basis formed by actual successive lattice minima, with no
+/-- A real basis formed by successive lattice minima, with no
 chosen independent family or basis supplied as an input. -/
 theorem exists_greedy_lattice_basis
     (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L] :

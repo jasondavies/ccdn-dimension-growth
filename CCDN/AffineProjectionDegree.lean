@@ -6,7 +6,7 @@ public import CCDN.HomogeneousFiniteProjectionDegree
 public import CCDN.PrincipalHilbertPolynomial
 public import CCDN.IntegralProjectionHilbert
 
-/-! Degree preservation for an affine linear projection whose actual
+/-! Degree preservation for an affine linear projection whose
 projective-closure map is finite and birational. -/
 
 @[expose] public section

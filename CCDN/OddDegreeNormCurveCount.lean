@@ -4,7 +4,7 @@ public import CCDN.OddDegreeNormCurveBaseChange
 public import CCDN.AffinePlaneBadPrimeCount
 
 /-! Signed norm curves in odd field degree have no bad reduction primes.
-Their actual integral point count has no logarithmic loss, as required
+Their integral point count has no logarithmic loss, as required
 by the odd-degree branch of CCDN Theorem 6. -/
 
 @[expose] public section

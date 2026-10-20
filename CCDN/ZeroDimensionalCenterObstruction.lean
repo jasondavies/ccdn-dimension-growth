@@ -14,7 +14,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Actual maximal minors for the one-row matrix representing a point center. -/
+/-- Maximal minors for the one-row matrix representing a point center. -/
 def pointCenterPluckerCoordinates {K : Type*} [Field K] {n : ℕ}
     (p : Projectivization K (Fin (n + 1) → K)) : (Fin 1 ↪ Fin (n + 1)) → K :=
   fun c => Matrix.det (Matrix.submatrix (fun (_ : Fin 1) j => p.rep j) id c)
@@ -48,7 +48,7 @@ theorem no_constant_equations_for_proper_good_centers {K : Type*} [Field K] {n :
   rw [totalDegree_zero_eval_constant f (by have := hdeg f hf; omega) p.rep q.rep]
   exact hqzero f hf
 
-/-- An actual homogeneous geometrically prime ideal of projective dimension
+/-- A homogeneous geometrically prime ideal of projective dimension
 zero and degree one contradicts Lemma 5.2's strict numerical bound. Every
 nonempty good-center locus obeying the necessary center-disjointness
 condition fails the asserted defining-equation bound. For point centers
@@ -76,7 +76,7 @@ theorem zero_dimensional_center_degree_bound_obstruction :
     exact hdisjoint q h ((originProjectiveIdeal_chart_point 0).mpr rfl)
   exact no_constant_equations_for_proper_good_centers G hG q hq
 
-/-- The same obstruction in the actual maximal-minor coordinates used for
+/-- The same obstruction in the maximal-minor coordinates used for
 the Plucker embedding, without identifying its coordinate index with Fin 3. -/
 theorem zero_dimensional_plucker_degree_bound_obstruction :
     ∃ I : Ideal (CoordinatePolynomial 3), I.IsPrime ∧

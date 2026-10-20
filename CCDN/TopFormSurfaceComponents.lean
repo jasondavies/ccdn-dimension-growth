@@ -4,7 +4,7 @@ public import CCDN.TopFormAuxiliary
 public import CCDN.CompleteIntersectionDegreeBudget
 public import CCDN.PolynomialPredicates
 
-/-! The uniform surface auxiliary gives an actual finite curve cover of
+/-! The uniform surface auxiliary gives a finite curve cover of
 all bounded integer zeros, with total curve degree O(d^(9/2) B^(1/sqrt d)). -/
 
 @[expose] public section
@@ -13,7 +13,7 @@ noncomputable section
 open MvPolynomial
 
 /-- An absolutely irreducible top form supplies the auxiliary equation, the
-actual rational curve components, and their total degree bound. The component
+rational curve components, and their total degree bound. The component
 cover is exact on the auxiliary section and covers every original integer
 zero in the specified box. -/
 theorem top_form_surface_curve_components

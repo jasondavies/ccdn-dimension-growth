@@ -5,7 +5,7 @@ public import CCDN.FiniteFieldInterpolation
 public import Mathlib.Data.Nat.Choose.Bounds
 
 /-! Finite-field point bounds for a proper section of an irreducible
-hypersurface. The proof uses actual polynomial interpolation and the filtered
+hypersurface. The proof uses polynomial interpolation and the filtered
 Koszul rank estimate; no geometric degree or point-count theorem is assumed. -/
 
 @[expose] public section
@@ -36,7 +36,7 @@ theorem finite_field_common_zeros_card_le_choose {K ι : Type*} [Field K] [Finty
   exact hlower.trans (filteredCoordinateSpace_codim_two_bound hf hfg I hIf hIg (by dsimp [N]; omega))
 
 /-- Below the field-size degree threshold, a dimension-only constant times
-(degree f)(degree g) q^(ambient dimension-2) bounds the actual common zeros. -/
+(degree f)(degree g) q^(ambient dimension-2) bounds the common zeros. -/
 theorem finite_field_common_zeros_card_le {K ι : Type*} [Field K] [Fintype K]
     [Fintype ι] [DecidableEq ι] {n : ℕ}
     (f g : MvPolynomial (Fin (n + 2)) K) (hf : Prime f) (hfg : ¬ f ∣ g)

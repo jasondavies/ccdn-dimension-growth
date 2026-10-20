@@ -95,7 +95,7 @@ theorem smooth_plane_residue_minorGcd {c s N : ℕ}
   · intro k
     exact hf (residueRows label i k)
 
-/-- The actual row partition gives the sharp leading quadratic lower bound
+/-- The row partition gives the sharp leading quadratic lower bound
 for the sum of the smooth local exponents. -/
 theorem smooth_residue_exponent_lower {c s : ℕ} (label : Fin s → Fin c) (hc : 0 < c) :
     (s : ℝ) ^ 2 / (2 * c) - s ≤

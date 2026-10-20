@@ -11,7 +11,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The full affine projection theorem, retaining the actual finite
+/-- The full affine projection theorem, retaining the finite
 birational integer coordinate map and the exact image equation. -/
 theorem exists_geometrically_integral_affine_projection
     {L : Type*} [Field L] [Algebra ℚ L] [IsAlgClosed L] [IsGalois ℚ L]

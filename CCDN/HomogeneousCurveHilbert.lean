@@ -4,7 +4,7 @@ public import CCDN.HomogeneousFilteredRank
 public import CCDN.PolynomialPredicates
 
 /-! A quadratic Hilbert polynomial of a homogeneous affine cone gives the
-actual linear projective Hilbert function, with exactly the same degree. -/
+linear projective Hilbert function, with exactly the same degree. -/
 
 @[expose] public section
 namespace CCDN

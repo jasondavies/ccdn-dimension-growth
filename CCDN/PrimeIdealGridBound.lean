@@ -4,9 +4,9 @@ public import CCDN.GridPolynomialNormalization
 public import CCDN.BoundedDegreeNormalizationFiber
 public import CCDN.SmallOutsidePoint
 
-/-! The sharp grid bound for every actual prime affine variety. The
+/-! The sharp grid bound for every prime affine variety. The
 vanishing grid polynomials construct finite integral parameters; their
-function-field rank is controlled by the actual Hilbert multiplicity.
+function-field rank is controlled by the Hilbert multiplicity.
 No normalization, rank estimate or counting hypothesis is supplied. -/
 
 @[expose] public section

@@ -3,7 +3,7 @@ module
 public import CCDN.HypersurfaceLargeHeightDegree
 public import CCDN.HypersurfaceSmallHeightAuxiliary
 
-/-! Actual auxiliary polynomials in the large-height range. The degree is
+/-! Auxiliary polynomials in the large-height range. The degree is
 O_{n,T}(d^(4-1/(n+1))); the leading-coefficient positioning cost is explicit. -/
 
 @[expose] public section

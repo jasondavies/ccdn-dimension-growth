@@ -53,7 +53,7 @@ theorem surface_congruence_rank_power_bounds
   exact hb
 
 /-- All bounded integer zeros in specified smooth residue classes lie on
-an actual proper auxiliary. The degree criterion is entirely numerical. -/
+a proper auxiliary. The degree criterion is entirely numerical. -/
 theorem exists_surface_congruence_auxiliary_of_gap
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))

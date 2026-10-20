@@ -9,7 +9,7 @@ coordinate, and prove the degree bound for the resulting field extension. -/
 namespace CCDN
 noncomputable section
 
-/-- Send the rational-function variable to an actual transcendental element. -/
+/-- Send the rational-function variable to a transcendental element. -/
 def transcendentalRatFuncMap {K F : Type*} [Field K] [Field F] [Algebra K F]
     (u : F) (hu : Transcendental K u) : RatFunc K →ₐ[K] F :=
   RatFunc.liftAlgHom (Polynomial.aeval u)
@@ -20,7 +20,7 @@ lemma transcendentalRatFuncMap_X {K F : Type*} [Field K] [Field F] [Algebra K F]
   change RatFunc.liftRingHom (Polynomial.aeval u).toRingHom _ RatFunc.X = u
   exact (RatFunc.liftRingHom_X (Polynomial.aeval u).toRingHom _).trans (Polynomial.aeval_X u)
 
-/-- Every actual positive-degree affine curve has a coordinate parameter and
+/-- Every positive-degree affine curve has a coordinate parameter and
 a constructed embedding K(t) into its function field. The corresponding
 extension is finite, with degree at most the affine Hilbert degree. -/
 theorem exists_curve_rational_parameter {K F σ : Type*} [Field K] [Field F]

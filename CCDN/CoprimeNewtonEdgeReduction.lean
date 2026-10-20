@@ -4,7 +4,7 @@ public import CCDN.CoprimeNewtonEdge
 public import CCDN.PrimitiveNormalization
 public import CCDN.HypersurfaceBadPrimeFactor
 
-/-! Actual support and coefficient conditions for a coprime Newton edge.
+/-! Support and coefficient conditions for a coprime Newton edge.
 They imply full degree and geometric irreducibility over every field in
 which both endpoint coefficients remain nonzero. -/
 

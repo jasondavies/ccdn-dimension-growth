@@ -4,7 +4,7 @@ public import CCDN.OddDegreeClassGroupCounting
 public import CCDN.ClassGroupDiscriminantNumerics
 public import CCDN.NumberFieldShortBasis
 
-/-! The odd-degree branch of CCDN Theorem 6 for the actual ideal-class
+/-! The odd-degree branch of CCDN Theorem 6 for the ideal-class
 group. The lattice, bounded representatives, translation classes, and
 signed norm curves are all constructed in the imported proofs. -/
 

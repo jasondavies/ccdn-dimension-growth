@@ -32,7 +32,7 @@ lemma graphHyperplaneRestriction_rename {K σ τ : Type*}
       | some i => simp [graphHyperplaneRestriction]
   exact RingHom.congr_fun he f
 
-/-- The already constructed bounded integer normal yields an actual
+/-- The already constructed bounded integer normal yields a
 geometrically integral rational graph section in the double-Option coordinates. -/
 theorem exists_geometrically_good_graph_reindexed {n : ℕ}
     (f : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ)

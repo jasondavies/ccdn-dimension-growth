@@ -3,7 +3,7 @@ module
 public import CCDN.FixedCoordinateElimination
 public import CCDN.ProjectiveClosureSpecialization
 
-/-! A bounded elimination step whose affine projection and actual projective
+/-! A bounded elimination step whose affine projection and projective
 closure projection are both integral. The latter map fixes X₀. -/
 
 @[expose] public section

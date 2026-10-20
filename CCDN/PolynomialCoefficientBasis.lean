@@ -4,7 +4,7 @@ public import CCDN.PolynomialLinearSpecialization
 public import Mathlib.LinearAlgebra.Dimension.Localization
 
 /-! A coefficient-field basis remains a basis after adjoining arbitrary
-polynomial parameters. This records the actual scalar extension and its
+polynomial parameters. This records the scalar extension and its
 fraction-field degree for the generic primitive-element argument. -/
 
 @[expose] public section
@@ -54,7 +54,7 @@ def polynomialCoefficientEquiv {K A σ ι : Type*}
       ← Algebra.smul_def,map_smul,Module.Basis.coord_apply,Module.Basis.repr_self]
     simp [Finsupp.single_apply]
 
-/-- A finite basis of the coefficient algebra gives an actual basis over
+/-- A finite basis of the coefficient algebra gives a basis over
 the polynomial parameter ring. -/
 def polynomialCoefficientBasis {K A σ ι : Type*}
     [Field K] [CommRing A] [Algebra K A] [Fintype ι]
@@ -69,7 +69,7 @@ lemma polynomial_coefficient_finrank {K A σ ι : Type*}
   Module.finrank_eq_card_basis (polynomialCoefficientBasis b)
 
 /-- Adjoining independent rational parameters preserves the degree of an
-actual finite field extension. The tower instances specify the natural
+finite field extension. The tower instances specify the natural
 inclusions of coefficient and parameter rings. -/
 theorem polynomial_fraction_extension_finrank
     {K A R F σ ι : Type*} [Field K] [Field A] [Algebra K A]

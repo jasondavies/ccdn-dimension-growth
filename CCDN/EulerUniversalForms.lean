@@ -4,7 +4,7 @@ public import CCDN.EulerPairSpecialization
 
 /-! Universal homogeneous coefficient minors of the Euler-restricted operator.
 The constructed forms have degree exactly d^2-1 in the homogeneous sense,
-specialize to actual coefficient minors, and detect normalized irreducibility
+specialize to coefficient minors, and detect normalized irreducibility
 in characteristic zero. Reducibility vanishing and height bounds are separate. -/
 
 @[expose] public section
@@ -86,7 +86,7 @@ lemma universalEulerMatrix_homogeneous (k : ℕ) (row : ℕ × ℕ) (col : Euler
   intro i _
   exact isHomogeneous_C_mul_X _ _
 
-/-- Every universal matrix entry specializes to the actual differential
+/-- Every universal matrix entry specializes to the differential
 coefficient matrix, with no characteristic restriction. -/
 theorem universalEulerMatrix_specialize {R : Type*} [CommRing R]
     (k : ℕ) (f : Polynomial (Polynomial R)) (hf : bivariateTotalDegree f ≤ k + 2) :
@@ -111,7 +111,7 @@ theorem universalEulerMatrix_specialize {R : Type*} [CommRing R]
   change _ * _ = _ * _
   exact mul_comm _ _
 
-/-- The universal forms are the actual maximal coefficient minors. -/
+/-- The universal forms are the maximal coefficient minors. -/
 def universalEulerMinor (k : ℕ)
     (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :

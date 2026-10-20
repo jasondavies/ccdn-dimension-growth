@@ -3,9 +3,9 @@ module
 public import CCDN.SurfaceCongruenceCutoff
 public import CCDN.SmoothAffineResidueClasses
 
-/-! A coherent choice of actual proper auxiliaries for every finite
+/-! A coherent choice of proper auxiliaries for every finite
 smooth residue family. The structure stores conclusions of the determinant
-theorem; its existence is proved from the actual equation. -/
+theorem; its existence is proved from the equation. -/
 
 @[expose] public section
 namespace CCDN

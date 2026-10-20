@@ -4,7 +4,7 @@ public import CCDN.CongruenceHypersurfaceDeterminant
 public import CCDN.SmoothProjectiveCongruence
 public import CCDN.HypersurfaceHeightDeterminant
 
-/-! The actual global determinant bound with simultaneous smooth congruence
+/-! The global determinant bound with simultaneous smooth congruence
 conditions. Bad reductions and local exponents are derived from the equation. -/
 
 @[expose] public section

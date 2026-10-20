@@ -7,7 +7,7 @@ public import CCDN.FiniteGroupTorsionCover
 public import CCDN.IntegralIdealClass
 public import CCDN.DiscriminantPrimeIdealCover
 
-/-! The two-torsion in the actual strongly ambiguous class group is
+/-! The two-torsion in the strongly ambiguous class group is
 bounded by base-field two-torsion and the finite set of ramified primes.
 The cover comes from the proved invariant-ideal factorization. -/
 
@@ -65,7 +65,7 @@ theorem stronglyAmbiguousTwoTorsion_card_le_ramified_cover
   simpa only [Fintype.card_coe, Finset.card_powerset, stronglyAmbiguousTwoTorsion,
     classGroupTwoTorsionCard, classGroupTwoTorsion] using hh
 
-/-- A fully constructed discriminant-prime cover gives the actual
+/-- A fully constructed discriminant-prime cover gives the
 strongly ambiguous two-torsion estimate. -/
 theorem stronglyAmbiguousTwoTorsion_card_le_discriminant_primes
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1) :

@@ -2,7 +2,7 @@ module
 
 public import CCDN.ProjectivePlaneCoefficientCount
 
-/-! The second inequality of CCDN Corollary 3.1.2 bounds the actual
+/-! The second inequality of CCDN Corollary 3.1.2 bounds the
 coefficient-sensitive expression, so it composes with its first inequality. -/
 
 @[expose] public section
@@ -10,7 +10,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The actual bad-prime factor divided by the coefficient-height saving
+/-- The bad-prime factor divided by the coefficient-height saving
 is bounded independently of the coefficients and degree. -/
 theorem hypersurface_badPrime_div_height_bound {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f ≠ 0)
@@ -57,7 +57,7 @@ lemma projectivePlaneCoefficientUniformConstant_pos :
   positivity
 
 /-- The literal second bound in CCDN Corollary 3.1.2, with an absolute
-constant and the actual bad-prime factor and maximum coefficient height. -/
+constant and the bad-prime factor and maximum coefficient height. -/
 theorem projective_plane_coefficient_expression_le {d : ℕ}
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (hd : 0 < d) {B : ℝ} (hB : 1 ≤ B) :

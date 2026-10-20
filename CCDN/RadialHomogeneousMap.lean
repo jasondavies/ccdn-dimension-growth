@@ -50,7 +50,7 @@ lemma radialMap_coeff {K σ : Type*} [CommRing K] (f : MvPolynomial σ K) (n : �
     rw [homogeneousComponent_of_mem (isHomogeneous_monomial c rfl)]
     split_ifs <;> simp_all
 
-/-- Radial scaling lands in the actual homogeneous coordinate algebra of I. -/
+/-- Radial scaling lands in the homogeneous coordinate algebra of I. -/
 def quotientRadialMap {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K)) :
     MvPolynomial σ K →ₐ[K] projectiveCoordinateAlgebra I where
   toFun f := ⟨Polynomial.map (Ideal.Quotient.mk I) (radialMap f), by

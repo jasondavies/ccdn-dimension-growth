@@ -5,7 +5,7 @@ public import CCDN.IndependentProjectionRows
 public import CCDN.BoundedInfinityAvoidance
 public import CCDN.ProjectionImageFractionField
 
-/-! An actual independent homogeneous normalization can be augmented by
+/-! An independent homogeneous normalization can be augmented by
 one homogeneous linear form to a finite birational tuple, while retaining
 every original normalization coordinate. -/
 

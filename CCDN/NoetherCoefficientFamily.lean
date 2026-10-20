@@ -4,7 +4,7 @@ public import CCDN.UniversalNoetherForms
 public import CCDN.CoefficientwiseSubstitution
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 
-/-! Finite Noether detectors for actual polynomial coefficient families.
+/-! Finite Noether detectors for polynomial coefficient families.
 Composition multiplies the coefficient degree by D^2-1; no quadratic
 degree bound for the composed equations is assumed. -/
 
@@ -37,7 +37,7 @@ lemma homogeneousCoefficientSpecialization_homogeneous_field
   · intro i
     exact hp (homogeneousCoefficientExponent τ d i)
 
-/-- The finite equations are constructed by substitution into the actual
+/-- The finite equations are constructed by substitution into the
 universal integer Noether forms. All of them have homogeneous degree
 E(D^2-1), and their common zero set is exactly the locus of geometrically
 reducible specialized equations. Polynomial variables may be any nonempty
@@ -96,7 +96,7 @@ lemma homogeneous_linear_irreducible_iff_ne_zero
   simpa using hc m
 
 /-- A detector in every positive degree. The degree-one boundary uses the
-actual coefficients, so its degree is E rather than the impossible bound zero. -/
+coefficients, so its degree is E rather than the impossible bound zero. -/
 theorem exists_homogeneous_coefficient_detector
     {K σ τ : Type*} [Field K] [CharZero K] [Fintype τ] [Nonempty τ]
     (D E : ℕ) (hD : 0 < D) (p : MvPolynomial τ (MvPolynomial σ K))

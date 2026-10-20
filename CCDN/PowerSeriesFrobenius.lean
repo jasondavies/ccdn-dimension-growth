@@ -6,7 +6,7 @@ public import Mathlib.Algebra.CharP.Algebra
 public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 
 /-! Frobenius noncancellation from injectivity of finite coefficient jets.
-These are statements about actual power series, in prime-power characteristic,
+These are statements about power series, in prime-power characteristic,
 rather than assumed geometric independence principles. -/
 
 @[expose] public section

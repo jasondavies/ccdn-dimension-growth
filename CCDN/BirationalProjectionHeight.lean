@@ -3,7 +3,7 @@ module
 public import CCDN.BoundedBirationalHypersurfaceProjection
 
 /-! The constructed projection has a coefficient bound polynomial in
-the actual degree, with exponent and constant depending only on ambient
+the degree, with exponent and constant depending only on ambient
 dimension. -/
 
 @[expose] public section

@@ -5,7 +5,7 @@ public import CCDN.BirationalCenterPluckerTopology
 public import CCDN.SharpCenterBounds
 public import CCDN.PolynomialPredicates
 
-/-! Sharp homogeneous equations for the complement of the actual good-center
+/-! Sharp homogeneous equations for the complement of the good-center
 locus in Pluecker coordinates, including coefficient-field extension. -/
 
 @[expose] public section
@@ -15,7 +15,7 @@ open MvPolynomial Matrix
 attribute [local instance] affinePointZariskiTopology projectivePointZariskiTopology
   centerSubspacePluckerZariskiTopology
 
-/-- Common zero set on actual subspaces of equations defined over K and
+/-- Common zero set on subspaces of equations defined over K and
 evaluated at their projective Pluecker representatives over L. -/
 def centerPluckerFamilyZeroLocus
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n : ℕ}
@@ -105,7 +105,7 @@ theorem exists_sharp_birational_center_plucker_equations
     exact centerPluckerFamilyZeroLocus_complement_isOpen _ Φ hhom
 
 /-- The printed positive-dimensional degree bound and the degree-one
-boundary hold on the actual geometric subspaces over every extension L. -/
+boundary hold on the geometric subspaces over every extension L. -/
 theorem exists_dense_open_sharp_projective_center_plucker_equations
     {L : Type*} [Field L] [Algebra ℚ L] {n m : ℕ}
     (hmn : m + 2 ≤ n + 1)

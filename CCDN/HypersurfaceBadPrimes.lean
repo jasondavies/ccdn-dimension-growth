@@ -3,7 +3,7 @@ module
 public import CCDN.UniversalPlaneBadReduction
 public import Mathlib.Data.Nat.PrimeFin
 
-/-! The actual finite set of bad primes of an integer hypersurface. The
+/-! The finite set of bad primes of an integer hypersurface. The
 coefficient-height estimate for its charge is a separate remaining step. -/
 
 @[expose] public section
@@ -16,7 +16,7 @@ def HypersurfaceBadReduction {σ : Type*} (f : MvPolynomial σ ℤ) (p : ℕ) : 
     (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree ≠ f.totalDegree ∨
       ¬Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f)
 
-/-- A positive actual integer and the exact finite bad-prime set above the
+/-- A positive integer and the exact finite bad-prime set above the
 degree. No height, finite-set or reduction assumptions are supplied. -/
 theorem exists_hypersurface_bad_prime_set
     {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]

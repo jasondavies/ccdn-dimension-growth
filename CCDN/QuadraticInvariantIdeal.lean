@@ -3,7 +3,7 @@ module
 public import CCDN.QuadraticHilbert90
 public import Mathlib.RingTheory.ClassGroup.Basic
 
-/-! An actual fractional ideal with norm-one scalar comparison to its
+/-! A fractional ideal with norm-one scalar comparison to its
 conjugate can be replaced in its ideal class by an invariant fractional
 ideal. The norm-one hypothesis isolates the unit obstruction rather than
 discarding it. -/
@@ -57,7 +57,7 @@ theorem classGroup_mk_principal (b : Kˣ) :
   exact ⟨⟨(b : K), rfl⟩⟩
 
 /-- Trivial scalar norm obstruction gives an invariant ideal in the
-same actual ideal class, by the explicit quadratic Hilbert 90 argument. -/
+same ideal class, by the explicit quadratic Hilbert 90 argument. -/
 theorem exists_invariant_ideal_of_scalar_norm_one
     (σ : R ≃+* R) (hσ : Function.Involutive σ)
     (hσne : σ ≠ RingEquiv.refl R)

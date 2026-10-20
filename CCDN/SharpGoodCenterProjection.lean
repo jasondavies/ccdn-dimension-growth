@@ -6,7 +6,7 @@ public import CCDN.PolynomialPredicates
 
 /-! Unconditional bounded complementary projections at the height exponent
 of CCDN Section 5.1. The row-resultant detector constructs quadratic bounded
-integer center rows; the actual image is geometrically integral with the
+integer center rows; the image is geometrically integral with the
 same degree. Centers in X0=0 and the dimension-zero boundary are included. -/
 
 @[expose] public section
@@ -14,7 +14,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-/-- Construct the actual complementary projection from a projective
+/-- Construct the complementary projection from a projective
 geometrically integral source. The degree loss in height is 2r², where r is
 the vector dimension of the center, as in the source statement. -/
 theorem exists_sharp_bounded_birational_projective_projection
@@ -59,7 +59,7 @@ theorem exists_sharp_bounded_birational_projective_projection
     (hilbert_multiplicity_pos_of_prime J hdegree)
 
 /-- A bounded good center contained in X0=0 and the genuine complementary
-projection of the actual projective closure of an affine source. This also
+projection of the projective closure of an affine source. This also
 covers dimension zero and the zero-row (empty-center) boundary. -/
 theorem exists_sharp_bounded_fixed_coordinate_projection
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]

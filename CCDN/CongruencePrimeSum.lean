@@ -3,7 +3,7 @@ module
 public import CCDN.HigherDimensionalPrimeSum
 
 /-! Adding prescribed congruence primes to the global determinant estimate.
-The two disjoint collections of actual prime-power divisors are multiplied
+The two disjoint collections of prime-power divisors are multiplied
 before taking logarithms. -/
 
 @[expose] public section

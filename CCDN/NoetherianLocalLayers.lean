@@ -4,11 +4,11 @@ public import CCDN.FilteredDeterminant
 public import Mathlib.RingTheory.LocalRing.Quotient
 public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 
-/-! Weighted generators from actual ideal-adic layers of a Noetherian ring.
+/-! Weighted generators from ideal-adic layers of a Noetherian ring.
 
-The layer is the image of `I^k` in `A/I^(k+1)`, hence is an actual quotient
+The layer is the image of `I^k` in `A/I^(k+1)`, hence is a quotient
 of ideals rather than a supplied associated-graded model. If `A/I` is finite,
-Noetherianity makes every truncation finite. Bases of these actual layers
+Noetherianity makes every truncation finite. Bases of these layers
 therefore give generators with exactly the layer dimensions. -/
 
 @[expose] public section
@@ -17,7 +17,7 @@ noncomputable section
 
 variable {K A : Type*} [Field K] [CommRing A] [Algebra K A]
 
-/-- The actual degree-`k` ideal-adic layer, realized in the next truncation. -/
+/-- The degree-`k` ideal-adic layer, realized in the next truncation. -/
 def idealPowerLayer (K : Type*) [Field K] {A : Type*} [CommRing A] [Algebra K A]
     (I : Ideal A) (k : ℕ) : Submodule K (A ⧸ I ^ (k + 1)) :=
   ((I ^ k).restrictScalars K).map (Ideal.Quotient.mkₐ K (I ^ (k + 1))).toLinearMap
@@ -28,7 +28,7 @@ instance idealPowerLayer_finite (I : Ideal A) [IsNoetherianRing A]
     Ideal.finite_quotient_pow (IsNoetherian.noetherian I) (k + 1)
   infer_instance
 
-/-- Basis vectors lift to actual members of `I^k`. Their images are a basis,
+/-- Basis vectors lift to members of `I^k`. Their images are a basis,
 so they reduce every element of `I^k` modulo `I^(k+1)`. -/
 theorem exists_idealPowerLayer_generators (I : Ideal A) [IsNoetherianRing A]
     [Finite (A ⧸ I)] (k : ℕ) :
@@ -80,7 +80,7 @@ lemma ideal_layers_generate_truncation (I : Ideal A) (r : ℕ → ℕ)
     abel
 
 /-- Noetherianity and a finite residue quotient construct all weighted
-generators; their numbers are exactly the actual ideal-layer dimensions. -/
+generators; their numbers are exactly the ideal-layer dimensions. -/
 theorem exists_noetherian_truncation_generators (I : Ideal A) [IsNoetherianRing A]
     [Finite (A ⧸ I)] :
     ∃ g : (k : ℕ) → Fin (Module.finrank K (idealPowerLayer K I k)) → A,

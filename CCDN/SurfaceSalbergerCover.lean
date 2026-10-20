@@ -72,7 +72,7 @@ lemma smoothSurfaceLocus_C_mul (a : ℚ) (ha : a ≠ 0) (f : CoordinatePolynomia
 
 /-- The literal affine form of Salberger's covering theorem. Both constants
 are chosen before the surface and B; every retained curve is geometrically
-integral, has degree at most d², and is contained in the actual surface. -/
+integral, has degree at most d², and is contained in the surface. -/
 theorem surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (f : MvPolynomial (Fin 3) ℤ),

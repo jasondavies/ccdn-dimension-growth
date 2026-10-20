@@ -3,7 +3,7 @@ module
 public import CCDN.FiniteFieldPolynomialZeros
 
 /-! A nonzero integer polynomial of total degree at most A has a nonzero
-value at an actual integer point with every coordinate between 0 and A. -/
+value at an integer point with every coordinate between 0 and A. -/
 
 @[expose] public section
 namespace CCDN

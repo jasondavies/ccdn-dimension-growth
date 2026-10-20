@@ -5,7 +5,7 @@ public import CCDN.ScaledHypersurfaceHeight
 public import CCDN.ScaledAuxiliaryCount
 public import CCDN.ProjectiveIntegerHeight
 
-/-! The actual affine auxiliary polynomial obtained from a prime-scaled
+/-! The affine auxiliary polynomial obtained from a prime-scaled
 homogeneous model. All point and nondivisibility transports are proved. -/
 
 @[expose] public section
@@ -20,7 +20,7 @@ def hypersurfaceAuxiliaryDegreeBound (n d : ℕ) (B b H : ℝ) : ℝ :=
           H ^ (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) +
       (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B + (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)))
 
-/-- For any prime p<=B avoiding the constant coefficient, construct an actual
+/-- For any prime p<=B avoiding the constant coefficient, construct an
 affine auxiliary nonmultiple. The degree retains the exact height and bad-prime
 factor of the scaled model, ready for their quantitative estimates. -/
 theorem prime_scaled_affine_auxiliary {n : ℕ}

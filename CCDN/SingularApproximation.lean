@@ -2,7 +2,7 @@ module
 
 public import CCDN.ModularOriginGenerators
 
-/-! Uniform finite p-adic approximation by actual weighted local generators
+/-! Uniform finite p-adic approximation by weighted local generators
 at a possibly singular plane-curve residue point. -/
 
 @[expose] public section
@@ -94,7 +94,7 @@ theorem exists_singular_plane_approximation_mod {p μ : ℕ} [Fact p.Prime]
   obtain ⟨r, g, hr, hg, hrep⟩ := exists_integer_origin_generators f hf hμ
   exact ⟨r, g, hr, hg, fun N u => integer_generators_approximate_mod f r g (hrep N) u⟩
 
-/-- Actual mod-p singular multiplicity supplies the weighted homogeneous
+/-- Mod-p singular multiplicity supplies the weighted homogeneous
 integer generators and their simultaneous evaluation approximations. -/
 theorem exists_singular_plane_approximation {p μ : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ)

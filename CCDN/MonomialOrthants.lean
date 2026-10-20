@@ -86,7 +86,7 @@ lemma orthantExpand_sum {σ : Type*} [Fintype σ] {B : ℕ}
     _ = _ := hh
     _ = ∑ j, c j := Finset.sum_congr rfl (fun j _ => by simp [j.property])
 
-/-- Every cell of the truncation map is an actual coordinate orthant. -/
+/-- Every cell of the truncation map is a coordinate orthant. -/
 def orthantExpandEquiv {σ : Type*} {B : ℕ} (b : σ → Fin (B + 1)) :
     (orthantFree b → ℕ) ≃
       {a : σ → ℕ // clampExponent B a = fun i => (b i).val} where

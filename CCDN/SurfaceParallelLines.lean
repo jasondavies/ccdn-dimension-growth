@@ -37,7 +37,7 @@ theorem exists_parallel_line_plane_intersection (a b c v x : Fin 3 → ℚ)
     smul_eq_mul]
   linarith
 
-/-- Distinct actual parallel lines have distinct intersections with any
+/-- Distinct parallel lines have distinct intersections with any
 transverse plane. The index family is arbitrary but its line sets are injective. -/
 theorem surface_parallel_line_family_card_le_of_second_equation
     {ι : Type*} [Fintype ι] [DecidableEq ι]
@@ -78,7 +78,7 @@ theorem surface_parallel_line_family_card_le_of_second_equation
   rw [hFd] at hcount
   exact hcount.trans (Nat.mul_le_mul_left _ (affinePlaneMap_totalDegree_le a b c g))
 
-/-- A finite set of actual line sets has no duplicate lines; its cardinality
+/-- A finite set of line sets has no duplicate lines; its cardinality
 is therefore controlled by the same proper plane intersection. -/
 theorem surface_parallel_lines_card_le_of_second_equation
     (f : MvPolynomial (Fin 3) ℤ)

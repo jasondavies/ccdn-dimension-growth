@@ -13,7 +13,7 @@ noncomputable section
 open MvPolynomial
 
 /-- Bad ambient reduction forces the ENTIRE parameter polynomial to vanish.
-The target field is infinite, so it suffices to inspect actual sections. -/
+The target field is infinite, so it suffices to inspect sections. -/
 theorem universalPlaneBadWitness_map_eq_zero_of_bad
     {R L σ : Type*} [CommRing R] [Field L] [Infinite L] {p : ℕ} [CharP L p]
     (φ : R →+* L) (f : MvPolynomial σ R) (hpos : 0 < f.totalDegree)
@@ -60,7 +60,7 @@ theorem bad_prime_dvd_universalPlaneBadWitness_coeff
   rw [coeff_map] at hc
   exact (CharP.intCast_eq_zero_iff L p _).mp hc
 
-/-- An actual nonzero integer divisible by every bad prime larger than the
+/-- A nonzero integer divisible by every bad prime larger than the
 degree. The witness is a coefficient of the constructed universal polynomial,
 so later coefficient-height bounds apply to this same integer. -/
 theorem exists_integer_hypersurface_bad_prime_witness

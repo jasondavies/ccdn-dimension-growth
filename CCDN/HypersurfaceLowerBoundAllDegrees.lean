@@ -43,7 +43,7 @@ lemma hypersurface_grid_lower_bound_numerics {d n B L : ℕ}
 
 /-- The same absolutely irreducible degree-d equation and integer B give
 both lower bounds in the final paragraph of CCDN Section 6. The positive
-constant is chosen before d, and the projective equation is the actual
+constant is chosen before d, and the projective equation is the
 homogenization of the affine equation. -/
 theorem exists_hypersurface_lower_bounds_all_degrees (n : ℕ) (hn : 2 ≤ n) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 1 ≤ d →

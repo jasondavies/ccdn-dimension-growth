@@ -55,7 +55,7 @@ theorem primitive_field_degree_le_plane_relation {K R F : Type*}
   exact minpoly_degree_le_plane_relation ψ f hf hzero j k u hu he
 
 /-- Once the linear parameter has full field degree and the other coordinate
-is primitive, the actual irreducible image equation preserves degree. -/
+is primitive, the irreducible image equation preserves degree. -/
 theorem plane_projection_degree_eq_of_full_parameter {K R F τ : Type*}
     [Field K] [Field R] [Field F] [Algebra K R] [Algebra R F] [Algebra K F]
     [IsScalarTower K R F] [Module.Finite R F] [Fintype τ]

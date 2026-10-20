@@ -2,7 +2,7 @@ module
 
 public import CCDN.BivariateTotalDegree
 
-/-! Rank drop from actual coprime factor decompositions in small degree
+/-! Rank drop from coprime factor decompositions in small degree
 relative to the characteristic. Coprimality is imposed in the univariate
 fraction-field ring, where factorization can supply it. -/
 

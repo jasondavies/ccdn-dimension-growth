@@ -4,7 +4,7 @@ public import CCDN.SmoothHypersurfaceCongruence
 public import CCDN.ProjectiveHypersurfaceLocal
 import all ArithmeticHeights.BombieriVaaler
 
-/-! Smooth projective congruence classes give actual simultaneous divisors
+/-! Smooth projective congruence classes give simultaneous divisors
 for homogeneous evaluation matrices. -/
 
 @[expose] public section

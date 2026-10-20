@@ -23,7 +23,7 @@ lemma universalPlaneBadWitness_eval {σ : Type*}
   congr 1
   exact (bivariateMap_coeff (eval v) (universalPlanePolynomial f) f.totalDegree 0).symm
 
-/-- The evaluated witness is a leading coefficient times an actual integer
+/-- The evaluated witness is a leading coefficient times an integer
 minor; both are controlled by the height of the same plane section. -/
 theorem universalPlaneBadWitness_eval_log_bound {σ : Type*} [Fintype σ]
     (f : MvPolynomial σ ℤ) (hd : 1 ≤ f.totalDegree)

@@ -4,7 +4,7 @@ public import CCDN.NormCurveExceptionalReduction
 public import CCDN.OddIndexNormCurveCount
 public import CCDN.OddDegreeClassGroupCounting
 
-/-! Counting the actual bounded square-norm integers in the absence of
+/-! Counting the bounded square-norm integers in the absence of
 an index-two subfield. Ordinary norm curves and small-subfield exceptions
 are both counted by proved estimates. -/
 

@@ -3,7 +3,7 @@ module
 public import CCDN.ClassGroupNormCurveReduction
 public import Mathlib.Algebra.Group.Subgroup.ZPowers.Lemmas
 
-/-! Integer translates pack each actual bounded square-norm translation class
+/-! Integer translates pack each bounded square-norm translation class
 into the full archimedean lattice box. This isolates the remaining geometric
 lattice-point estimate from the already constructed norm-curve family. -/
 

@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.RingTheory.Localization.Integer
 
 /-! A finite extension of domains with a common fraction field has a
-nonzero conductor. Clearing the denominators of actual finite module
+nonzero conductor. Clearing the denominators of finite module
 generators supplies one multiplier valid for every element. -/
 
 @[expose] public section

@@ -4,7 +4,7 @@ public import CCDN.ClassGroupTwoTorsion
 public import Mathlib.LinearAlgebra.Dimension.Free
 
 /-! The degree-one base case for descent on the number-field degree.
-The ring of integers is identified with the integers, so its actual
+The ring of integers is identified with the integers, so its
 class group and its two-torsion subgroup are trivial. -/
 
 @[expose] public section

@@ -11,7 +11,7 @@ public import CCDN.HilbertFullDimension
 
 /-! Exact degree of an affine linear normalization whose homogeneous
 extension is finite with the homogenizing coordinate fixed. The proof
-compares the actual affine and cone function fields by adjoining one
+compares the affine and cone function fields by adjoining one
 radial variable, and applies exact homogeneous normalization degree. -/
 
 @[expose] public section

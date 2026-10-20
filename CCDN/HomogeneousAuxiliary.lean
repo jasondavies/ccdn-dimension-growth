@@ -11,7 +11,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-/-- An actual homogeneous equation yields a small homogeneous polynomial
+/-- A homogeneous equation yields a small homogeneous polynomial
 vanishing at every given integral point. No monomial list, selected rows,
 rank deficiency, or spanning hypothesis is supplied by the caller. -/
 theorem exists_small_homogeneous_vanishing_polynomial {n d M t : ℕ}

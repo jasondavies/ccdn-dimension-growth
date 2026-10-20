@@ -98,7 +98,7 @@ theorem galois_stable_polynomial_ideal_descends
   exact hq
 
 /-- A prime component over a Galois extension that does not descend is
-moved by an actual coefficient automorphism. -/
+moved by a coefficient automorphism. -/
 theorem exists_galois_moving_polynomial_ideal
     (k K : Type*) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K))

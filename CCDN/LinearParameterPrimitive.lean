@@ -6,7 +6,7 @@ public import CCDN.ProjectionFractionField
 public import CCDN.CurvePrimitivePair
 
 /-! Bounded primitive augmentation of any independent linear parameter
-tuple of the actual Hilbert dimension. -/
+tuple of the Hilbert dimension. -/
 
 @[expose] public section
 namespace CCDN

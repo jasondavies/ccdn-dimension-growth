@@ -6,7 +6,7 @@ public import CCDN.ProjectiveLinearCountTransfer
 
 /-! The zero-dimensional case of projective dimension growth. A
 one-parameter normalization sends every projective point to the unique
-point of projective zero-space; its actual affine fiber bound controls
+point of projective zero-space; its affine fiber bound controls
 the whole source, independently of height. -/
 
 @[expose] public section

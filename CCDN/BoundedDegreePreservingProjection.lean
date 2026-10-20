@@ -36,7 +36,7 @@ theorem exists_bounded_degree_preserving_projection {K : Type*} [Field K] [CharZ
   exact ⟨k₀, k₁, f, hk₀, hk₁, hf, hfd, htrans, hker⟩
 
 /-- The same bounded projection controls the loss of points on every finite
-subset of the actual source curve by d(d-1). -/
+subset of the source curve by d(d-1). -/
 theorem exists_bounded_projection_card_le {K : Type*} [Field K] [CharZero K]
     [DecidableEq (Fin 2 → K)] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

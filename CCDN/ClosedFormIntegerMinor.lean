@@ -4,7 +4,7 @@ public import CCDN.ClosedFormRank
 public import CCDN.ClosedFormBaseChange
 public import CCDN.FiniteRowMinor
 
-/-! An actual nonzero integer minor of the closed-form coefficient matrix.
+/-! A nonzero integer minor of the closed-form coefficient matrix.
 Rank drop after reduction forces divisibility of this same integer. The
 geometric rank-drop criterion and the height bound are separate obligations. -/
 

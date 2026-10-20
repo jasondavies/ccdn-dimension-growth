@@ -62,7 +62,7 @@ theorem local_exponent_sharp_of_root_bound (m s e : ℕ) (hm : 0 < m)
   linarith
 
 /-- The global single-prime determinant bound in denominator form, conditional
-only on the displayed bound for the actual total residue multiplicity.
+only on the displayed bound for the total residue multiplicity.
 The finite-field estimate itself is a separate mathematical obligation. -/
 theorem projective_hypersurface_minorGcd_of_count_bound {n s N p d M : ℕ}
     [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)

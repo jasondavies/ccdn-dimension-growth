@@ -4,7 +4,7 @@ public import CCDN.FormalBranchMultiplicity
 public import Mathlib.RingTheory.PowerSeries.Derivative
 
 /-! Tangent differentiation on formal plane branches. Vanishing of successive
-tangent derivatives implies actual local multiplicity below the characteristic. -/
+tangent derivatives implies local multiplicity below the characteristic. -/
 
 @[expose] public section
 namespace CCDN

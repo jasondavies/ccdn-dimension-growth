@@ -2,7 +2,7 @@ module
 
 public import CCDN.RowSpan
 
-/-! Independent rows can be selected from the actual finite evaluation matrix.
+/-! Independent rows can be selected from the finite evaluation matrix.
 A nonzero annihilator gives the strict rank deficiency required by Bombieri--Vaaler. -/
 
 @[expose] public section

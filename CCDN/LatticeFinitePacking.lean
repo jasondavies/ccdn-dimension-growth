@@ -3,7 +3,7 @@ module
 public import Mathlib.Algebra.Module.ZLattice.Covolume
 public import Mathlib.MeasureTheory.Group.GeometryOfNumbers
 
-/-! A finite set of actual lattice points gives disjoint translates of a
+/-! A finite set of lattice points gives disjoint translates of a
 fundamental domain. A bounded basis therefore gives an explicit
 finite-radius volume bound, without an asymptotic onset depending on the
 lattice. -/
@@ -95,7 +95,7 @@ theorem basis_lattice_coset_finite_packing
     exact (norm_sub_le _ _).trans (by linarith [hs x.val x.property, hs y hy]))
   simpa using hh
 
-/-- The number of occupied cosets can be bounded by the actual lattice
+/-- The number of occupied cosets can be bounded by the lattice
 index, before cancelling that index with the covolume ratio. -/
 theorem superlattice_finite_packing_index
     {E ι : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]

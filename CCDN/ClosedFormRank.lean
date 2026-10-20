@@ -58,7 +58,7 @@ theorem closedForm_kernel_finrank_le_one
     simpa using finrank_span_le_card (R := F) ({(f.derivative, (bivariateCoefficientDerivative F) f)} : Set _)
   exact he ▸ hl.trans hs
 
-/-- The matrix on the 2*d² actual unknown coefficients has rank at least
+/-- The matrix on the 2*d² unknown coefficients has rank at least
 2*d²-1. No finite-field or Noether theorem is assumed in this statement. -/
 theorem closedForm_coefficient_rank_lower
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] (d : ℕ)

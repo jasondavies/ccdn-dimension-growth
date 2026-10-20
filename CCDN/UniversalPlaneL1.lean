@@ -4,7 +4,7 @@ public import CCDN.NestedPolynomialL1
 public import CCDN.AmbientNoetherVanishing
 public import CCDN.EulerUniversalHeight
 
-/-! Explicit coefficient-sum bounds for actual generic plane restrictions.
+/-! Explicit coefficient-sum bounds for generic plane restrictions.
 An original monomial of degree d contributes at most 3^d; an Euler matrix
 entry contributes at most d times this quantity. -/
 

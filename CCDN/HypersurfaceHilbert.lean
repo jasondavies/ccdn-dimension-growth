@@ -4,7 +4,7 @@ public import CCDN.SingularTangent
 public import Mathlib.Data.Nat.Choose.Sum
 public import Mathlib.Data.Nat.Choose.Bounds
 
-/-! Binomial profiles for actual hypersurface local layers in all dimensions.
+/-! Binomial profiles for hypersurface local layers in all dimensions.
 The cumulative bound retains the leading coefficient μ/n! needed for the
 sharp determinant exponent. -/
 
@@ -83,7 +83,7 @@ theorem sum_hypersurfaceLayerBound_le (n μ k : ℕ) :
       rw [Nat.sum_range_add_choose]
       simp only [Nat.add_comm 1 n]
 
-/-- The actual cumulative local Hilbert function has this bound; no assumed
+/-- The cumulative local Hilbert function has this bound; no assumed
 presentation of the tangent cone is needed. -/
 theorem originLayer_cumulative_le {K : Type*} [Field K] {n μ : ℕ}
     (f : MvPolynomial (Fin (n + 2)) K)

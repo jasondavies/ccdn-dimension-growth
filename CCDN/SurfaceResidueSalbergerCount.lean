@@ -3,7 +3,7 @@ module
 public import CCDN.SurfaceResidueLinearCount
 public import CCDN.PrimeWindowSalbergerRate
 
-/-! The actual residue-edge remainder with the precise Salberger exponent.
+/-! The residue-edge remainder with the precise Salberger exponent.
 The constants depend only on the surface degree and the fixed height and
 auxiliary constants, and precede the equation and radius. -/
 

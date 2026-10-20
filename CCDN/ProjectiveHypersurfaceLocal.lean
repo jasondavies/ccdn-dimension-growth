@@ -5,7 +5,7 @@ public import CCDN.ProjectiveLocalDeterminant
 public import CCDN.HypersurfaceResidue
 
 /-! Projective hypersurface determinants in all positive dimensions.
-Unit normalization modulo prime powers transfers the actual local affine
+Unit normalization modulo prime powers transfers the local affine
 bound to homogeneous evaluation matrices of a common degree. -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ lemma projective_hypersurface_chart_eval_congr {n M : ℕ} {q u : ℤ}
   · simp
 
 /-- Projective local determinant estimate in a chart whose first coordinate
-is a p-adic unit. The affine multiplicity belongs to the actual chart equation. -/
+is a p-adic unit. The affine multiplicity belongs to the chart equation. -/
 theorem projective_hypersurface_chart_det_divisibility {p n μ s d M : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hfhom : f.IsHomogeneous d)
     (F : Fin s → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)

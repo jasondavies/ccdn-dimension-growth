@@ -168,7 +168,7 @@ lemma gridTopForm_map {R K : Type*} [CommRing R] [CommRing K]
     (φ : R →+* K) (d : ℕ) : map φ (gridTopForm R d) = gridTopForm K d := by
   simp [gridTopForm]
 
-/-- In particular, the actual integer grid equation satisfies the absolute
+/-- In particular, the integer grid equation satisfies the absolute
 irreducibility condition imposed on the highest homogeneous part in Theorem 4. -/
 theorem gridTopFormEquation_absolute_top (s : Finset ℤ) {d : ℕ}
     (hd : 1 ≤ d) (hs : s.card ≤ d - 1) :

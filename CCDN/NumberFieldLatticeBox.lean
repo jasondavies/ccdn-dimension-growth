@@ -3,7 +3,7 @@ module
 public import CCDN.NumberFieldEuclideanLattice
 public import CCDN.IntegerTranslationClassPacking
 
-/-! Finite-radius counting for the actual algebraic integers. The input
+/-! Finite-radius counting for the algebraic integers. The input
 is a short independent integral basis over the reals; it is not required
 to generate the ring of integers over `ℤ`. -/
 
@@ -43,7 +43,7 @@ theorem unitBall_volume_le_two_pow_finrank
 variable (K : Type*) [Field K] [NumberField K]
 
 /-- The bounded algebraic integers are embedded injectively into the
-actual Euclidean lattice and counted by finite-volume packing. -/
+Euclidean lattice and counted by finite-volume packing. -/
 theorem boundedArchimedeanIntegers_count_of_short_basis
     {ι : Type*} [Fintype ι]
     (b : Module.Basis ι ℝ (mixedEmbedding.euclidean.mixedSpace K))
@@ -133,7 +133,7 @@ theorem boundedArchimedeanIntegers_count_of_relative_short_basis
   rw [hrad, mul_pow] at ht
   exact ht.trans_eq (by unfold numberFieldLatticeBoxConstant; ring)
 
-/-- Dividing by actual short integer translates gives the expected
+/-- Dividing by short integer translates gives the expected
 one-dimensional saving for translation classes. -/
 theorem boundedSquareNormTranslationClasses_count_of_relative_short_basis
     {ι : Type*} [Fintype ι]

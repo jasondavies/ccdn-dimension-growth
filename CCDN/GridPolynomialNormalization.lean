@@ -3,7 +3,7 @@ module
 public import CCDN.LinearNormalizationInfinite
 public import Mathlib.Algebra.Polynomial.BigOperators
 
-/-! Actual integral polynomial parameters vanishing on a finite grid.
+/-! Integral polynomial parameters vanishing on a finite grid.
 Their degrees are bounded by the grid side length, independently of the
 ambient number of coordinates and of the defining ideal. -/
 

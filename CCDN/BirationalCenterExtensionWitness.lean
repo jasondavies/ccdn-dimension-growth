@@ -4,7 +4,7 @@ public import CCDN.SharpCenterExtensionDetector
 public import CCDN.BirationalMinorCenterWitness
 public import CCDN.PolynomialPredicates
 
-/-! Constructed rational centers remain actual geometrically disjoint
+/-! Constructed rational centers remain geometrically disjoint
 birational centers after arbitrary extension of the coefficient field. -/
 
 @[expose] public section

@@ -5,7 +5,7 @@ public import CCDN.ProjectionScalarExtension
 public import CCDN.HomogeneousFilteredProjection
 
 /-! Homogenizing a linear affine projection while retaining its homogenizing
-coordinate gives the actual projective closure of its affine image ideal. -/
+coordinate gives the projective closure of its affine image ideal. -/
 
 @[expose] public section
 namespace CCDN
@@ -56,7 +56,7 @@ lemma affineChart_aeval_closureProjectionCoordinates
         simp [affineChart]
   exact RingHom.congr_fun h f
 
-/-- This is an equality of the actual kernel ideals, not merely of zero sets. -/
+/-- This is an equality of the kernel ideals, not merely of zero sets. -/
 theorem projectiveClosureIdeal_projection_kernel
     {K : Type*} [Field K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))

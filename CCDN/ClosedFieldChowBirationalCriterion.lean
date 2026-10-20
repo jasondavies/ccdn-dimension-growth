@@ -3,7 +3,7 @@ module
 public import CCDN.ChowRestrictionBirational
 public import CCDN.PolynomialPredicates
 
-/-! The actual Chow restriction and function-field birationality criterion
+/-! The Chow restriction and function-field birationality criterion
 over an algebraically closed field, allowing arbitrary geometric centers. -/
 
 @[expose] public section

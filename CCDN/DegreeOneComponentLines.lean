@@ -2,7 +2,7 @@ module
 
 public import CCDN.DegreeOneAffineLine
 
-/-! A finite family of degree-one prime components gives an actual finite
+/-! A finite family of degree-one prime components gives a finite
 set of rational affine lines with the same rational zero-set union. Empty
 rational loci are discarded, and repeated line sets are counted only once. -/
 

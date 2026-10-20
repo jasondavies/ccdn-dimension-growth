@@ -79,7 +79,7 @@ lemma fixed_line_badPrimeFactor :
       simp [hbad p])
   simpa using hh
 
-/-- For every proposed absolute error constant, an actual nonzero evaluation
+/-- For every proposed absolute error constant, a nonzero evaluation
 determinant violates the n=1,d=1,b=1 specialization of the printed bound. -/
 theorem global_mixed_degree_det_violates_bound (C : ℝ) :
     ∃ N : ℕ, 2 ≤ N ∧ (globalMixedDegreeMatrix N).det ≠ 0 ∧

@@ -4,7 +4,7 @@ public import CCDN.GenericBlockLineHomogeneity
 public import CCDN.UniversalCenterChowRestriction
 public import CCDN.ChowProjectionCriterion
 
-/-! A derivative-resultant family for one hyperplane block of the actual
+/-! A derivative-resultant family for one hyperplane block of the
 universal center restriction. The Pluecker degree is D(2d-1). -/
 
 @[expose] public section

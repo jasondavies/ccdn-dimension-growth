@@ -5,7 +5,7 @@ public import CCDN.ScalarQuotientFractionField
 public import CCDN.IntermediateFieldParameterTower
 public import CCDN.ChowIncidenceIdeal
 
-/-! Exact normalization degree inside the actual fraction field of the
+/-! Exact normalization degree inside the fraction field of the
 polynomial coefficient extension of the original coordinate ring. The
 parameter field uses the universal incidence values of the first rows. -/
 
@@ -104,7 +104,7 @@ def chowNormalizationParameterField
       algebraMap (MvPolynomial (Fin m × Fin n) (MvPolynomial (Fin n) K ⧸ I)) F
         (chowIncidenceMap m I (X (i,0)))))
 
-/-- Exact degree over the actual parameter field of the first incidence
+/-- Exact degree over the parameter field of the first incidence
 rows, in any fraction field of the coefficient polynomial extension. -/
 theorem chow_incidence_parameter_field_finrank
     {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n m : ℕ}

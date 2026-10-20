@@ -42,7 +42,7 @@ theorem exists_prescribed_greedy_lattice_basis_norm_product_le
   obtain ⟨b, hb⟩ := exists_prescribed_greedy_lattice_basis L w hw hw0 hn
   exact ⟨b, hb, prescribed_greedy_lattice_basis_product_le L b hb hδ hlower⟩
 
-/-- A constructed real basis of actual lattice vectors, beginning with
+/-- A constructed real basis of lattice vectors, beginning with
 any prescribed nonzero lattice vector. The only cost of prescribing it
 is its length divided by the lower bound for all nonzero lattice lengths. -/
 theorem exists_prescribed_lattice_basis_norm_product_le

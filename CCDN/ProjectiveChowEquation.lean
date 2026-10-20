@@ -6,7 +6,7 @@ public import CCDN.ProjectiveClosureRecovery
 public import CCDN.PolynomialPredicates
 
 /-! The constructed irreducible multihomogeneous incidence equation has the
-actual projective intersection criterion. The criterion also holds over an
+projective intersection criterion. The criterion also holds over an
 algebraically closed coefficient extension and for a homogeneous prime ideal
 recovered from its nonempty standard chart. Exact block degrees are separate. -/
 
@@ -41,7 +41,7 @@ theorem chow_incidence_generator_eval_map_eq_zero_iff
   rw [projectiveClosureIdeal_scalar_extension]
   exact chow_incidence_generator_eval_eq_zero_iff r _ _ hgenL U
 
-/-- The Chow equation is constructed from the actual affine ideal; its zeros
+/-- The Chow equation is constructed from the affine ideal; its zeros
 are exactly hyperplane tuples meeting the full projective compactification. -/
 theorem exists_projective_chow_incidence_equation
     {K : Type*} [Field K] [IsAlgClosed K] {n m : ℕ}
@@ -74,7 +74,7 @@ theorem exists_geometric_projective_chow_incidence_equation
   exact ⟨F, δ, hF, hgen, hδ, hFL,
     chow_incidence_generator_eval_map_eq_zero_iff (m + 1) I F hgen⟩
 
-/-- The criterion for an actual homogeneous prime source, with a specified
+/-- The criterion for a homogeneous prime source, with a specified
 nonempty standard chart. Its dimension and degree are those of the cone Hilbert
 polynomial; the chart and Chow generator are constructed internally. -/
 theorem exists_homogeneous_prime_projective_chow_equation

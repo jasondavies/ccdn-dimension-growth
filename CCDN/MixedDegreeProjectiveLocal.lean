@@ -15,7 +15,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The actual local divisor for varying-degree columns, evaluated in one
+/-- The local divisor for varying-degree columns, evaluated in one
 projective chart modulo the required prime power. -/
 theorem mixed_degree_projective_chart_det_divisibility {p n μ s d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hfhom : f.IsHomogeneous d)

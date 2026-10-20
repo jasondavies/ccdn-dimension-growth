@@ -84,7 +84,7 @@ theorem surfaceResidueWindow_parameters {d : ℕ} (hd : 1 ≤ d)
     have hh := Real.exp_le_exp.mpr hlogX
     rwa [Real.exp_log (by positivity)] at hh
 
-/-- The actual residual locus has a uniform linear count. The constant is
+/-- The residual locus has a uniform linear count. The constant is
 chosen before the equation, radius, congruence auxiliaries and curve family. -/
 theorem surface_residue_linear_count (d : ℕ) (hd : 5 ≤ d)
     (K A : ℝ) (hK : 0 ≤ K) (hA : 0 ≤ A) :

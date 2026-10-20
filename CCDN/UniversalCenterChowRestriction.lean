@@ -4,7 +4,7 @@ public import CCDN.CenterMinorMatrix
 public import CCDN.UniversalPlaneDegree
 
 /-! The Chow restriction for the literal maximal-minor center projection as a
-polynomial family in Plücker coordinates. Its actual specialization is proved,
+polynomial family in Plücker coordinates. Its specialization is proved,
 and every coefficient has degree at most the source equation's total degree;
 for a homogeneous source equation every coefficient is homogeneous of that
 same degree (allowing zero coefficients). -/
@@ -87,7 +87,7 @@ lemma coefficient_isHomogeneous_of_commAlgEquiv
   rw [← commAlgEquiv_coeff_coeff, hz]
   rfl
 
-/-- Each coefficient is homogeneous in the actual Plücker variables, with
+/-- Each coefficient is homogeneous in the Plücker variables, with
 precisely the source equation's total homogeneous degree. -/
 theorem universalCenterChowMap_coefficient_homogeneous
     {K : Type*} [Field K] {r n s q D : ℕ}
@@ -98,7 +98,7 @@ theorem universalCenterChowMap_coefficient_homogeneous
   coefficient_isHomogeneous_of_commAlgEquiv _ (universalCenterChowMap_comm_homogeneous e F hF) a
 
 /-- The coefficient degree bound also holds without homogeneous input. This
-is the actual substitution bound D, prior to applying Noether forms. -/
+is the substitution bound D, prior to applying Noether forms. -/
 theorem universalCenterChowMap_coefficient_degree
     {K : Type*} [Field K] {r n s q : ℕ}
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin n))

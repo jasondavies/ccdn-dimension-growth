@@ -11,7 +11,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- An actual nonzero partial derivative cuts the irreducible hypersurface
+/-- A nonzero partial derivative cuts the irreducible hypersurface
 properly. Fixed-degree finite-field interpolation bounds all its singular points. -/
 theorem hypersurface_singular_points_card_le {ι : Type*} [Fintype ι] [DecidableEq ι]
     {n p : ℕ} [Fact p.Prime] (f : MvPolynomial (Fin (n + 2)) (ZMod p))

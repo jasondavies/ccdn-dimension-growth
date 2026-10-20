@@ -3,7 +3,7 @@ module
 public import CCDN.HomogeneousMonomials
 public import CCDN.RowSelection
 
-/-! Actual homogeneous equations give nonzero relations on the complete
+/-! Homogeneous equations give nonzero relations on the complete
 homogeneous evaluation matrix and hence strictly deficient row rank. -/
 
 @[expose] public section
@@ -51,7 +51,7 @@ lemma homogeneous_evaluation_kernel {n M t : ℕ}
   rw [← eval_polynomialOfCoefficients, he]
   exact hzero i
 
-/-- Select an actual spanning family of independent evaluation rows. The
+/-- Select a spanning family of independent evaluation rows. The
 homogeneous equation, padded to degree `M`, proves strict rank deficiency. -/
 theorem homogeneous_independent_evaluation_rows {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)

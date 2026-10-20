@@ -4,7 +4,7 @@ public import CCDN.BirationalComplementProjection
 public import CCDN.PolynomialPredicates
 
 /-! Unconditional bounded good-center projections from the cubic Chow
-Noether detector. Constants depend only on ambient dimension; the actual
+Noether detector. Constants depend only on ambient dimension; the
 complementary projection is finite and birational, with a geometrically
 integral image of the same Hilbert multiplicity. -/
 
@@ -49,7 +49,7 @@ lemma hilbert_multiplicity_pos_of_prime {K : Type*} [Field K] {n m d : ℕ}
   simp only [hz, Nat.cast_zero, zero_div] at hp
   exact lt_irrefl 0 hp
 
-/-- Construct the actual complementary projection from a projective
+/-- Construct the complementary projection from a projective
 geometrically integral source. The degree loss in height is 3r, where r is
 the vector dimension of the center, from the cubic detector bound. -/
 theorem exists_cubic_bounded_birational_projective_projection
@@ -94,7 +94,7 @@ theorem exists_cubic_bounded_birational_projective_projection
     (hilbert_multiplicity_pos_of_prime J hdegree)
 
 /-- A bounded good center contained in X0=0 and the genuine complementary
-projection of the actual projective closure of an affine source. This also
+projection of the projective closure of an affine source. This also
 covers dimension zero and the zero-row (empty-center) boundary. -/
 theorem exists_cubic_bounded_fixed_coordinate_projection
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]

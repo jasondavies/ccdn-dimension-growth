@@ -4,7 +4,7 @@ public import CCDN.SingularLocalDeterminant
 public import CCDN.SmoothPlaneChart
 import all ArithmeticHeights.BombieriVaaler
 
-/-! Translation and residue-block assembly for the actual singular local
+/-! Translation and residue-block assembly for the singular local
 plane-curve determinant theorem. -/
 
 @[expose] public section
@@ -84,7 +84,7 @@ theorem singular_plane_chart_minorGcd {p μ s N : ℕ} [Fact p.Prime]
   exact singular_plane_chart_det_divisibility f (fun j => F (t j)) x a hf hμ hx hfx
 
 /-- Summed multiplicity exponents for arbitrary residue blocks, including
-singular blocks. Each local hypothesis describes the actual reduced equation. -/
+singular blocks. Each local hypothesis describes the reduced equation. -/
 theorem singular_plane_residue_minorGcd {p c s N : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ) (F : Fin N → MvPolynomial (Fin 2) ℤ)
     (x : Fin s → Fin 2 → ℤ) (label : Fin s → Fin c)

@@ -3,7 +3,7 @@ module
 public import CCDN.ProjectiveHypersurfaceReduction
 public import CCDN.HypersurfaceAggregation
 
-/-! Actual projective hypersurface residue classes give the sharp single-prime
+/-! Projective hypersurface residue classes give the sharp single-prime
 determinant bound in every positive dimension. The residue partition, chart
 units and positive local multiplicities are all constructed from the equation. -/
 
@@ -77,7 +77,7 @@ theorem projectiveHypersurfaceTotalMultiplicity_bounds {n p d : ℕ} [Fact p.Pri
          _ = _ := by simp
 
 /-- Primitive zeros construct all local data. The resulting divisor has the
-sharp leading constant in terms of the actual total residue multiplicity. -/
+sharp leading constant in terms of the total residue multiplicity. -/
 theorem projective_hypersurface_reduction_minorGcd {n s N p d M : ℕ}
     [Fact p.Prime] (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)

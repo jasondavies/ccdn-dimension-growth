@@ -2,7 +2,7 @@ module
 
 public import CCDN.BoundedPrimitiveElement
 
-/-! Actual bounded linear coordinates generating an affine curve's function
+/-! Bounded linear coordinates generating an affine curve's function
 field. Degree preservation and control of exceptional fibers are separate
 projection obligations; this module proves the quantified birational input. -/
 
@@ -34,7 +34,7 @@ lemma momentCoordinate_fraction {K F : Type*} [Field K] [Field F] [Algebra K F]
   intro j _
   exact mul_comm _ _
 
-/-- Positive-degree curves have an actual coordinate and a bounded integer
+/-- Positive-degree curves have a coordinate and a bounded integer
 linear form generating the function field as a field over K. The field over
 the first coordinate has finite degree at most d. -/
 theorem exists_bounded_curve_primitive_pair {K F : Type*} [Field K] [CharZero K] [Field F]

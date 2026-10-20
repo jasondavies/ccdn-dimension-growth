@@ -4,7 +4,7 @@ public import CCDN.CongruencePrimeWindow
 public import CCDN.PolynomialBoxHeight
 public import CCDN.PlaneAuxiliaryCount
 
-/-! Actual nonsingular integer points have many smooth reduction primes
+/-! Nonsingular integer points have many smooth reduction primes
 in one common finite window. The excluded primes divide one nonzero partial
 derivative value, whose height is bounded directly from the equation. -/
 
@@ -90,7 +90,7 @@ theorem integer_pderiv_log_bound {n : ℕ}
   simpa only [Nat.cast_add, Nat.cast_one] using hlog
 
 /-- The common prime window contains a set with product at least exp L
-at which this actual nonsingular point has smooth reduction. -/
+at which this nonsingular point has smooth reduction. -/
 theorem exists_smooth_prime_window_subset {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) {H B L : ℝ}
     (hH : 1 ≤ H) (hB : 1 ≤ B) (hL : 1 ≤ L)

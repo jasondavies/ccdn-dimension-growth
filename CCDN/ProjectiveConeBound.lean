@@ -3,7 +3,7 @@ module
 public import CCDN.ProjectiveZeroLocus
 public import CCDN.Plane
 
-/-! An actual projective point count is bounded by the integer count on its
+/-! A projective point count is bounded by the integer count on its
 affine cone at the same height. Chosen primitive representatives supply the
 injection, so no height dilation or representative-choice premise is needed. -/
 

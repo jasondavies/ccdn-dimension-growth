@@ -3,7 +3,7 @@ module
 public import CCDN.HilbertPolynomialComparison
 
 /-! Polynomial parameters of degree at most q have function-field degree
-at most the actual Hilbert multiplicity times q to the dimension. -/
+at most the Hilbert multiplicity times q to the dimension. -/
 
 @[expose] public section
 namespace CCDN

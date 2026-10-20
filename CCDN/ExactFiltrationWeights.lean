@@ -139,7 +139,7 @@ theorem monotone_weight_le_iff_index_lt_cumulative
     rw [card_range, hT] at hh
     omega
 
-/-- The actual first s entries of the paper's nondecreasing sequence satisfy
+/-- The first s entries of the paper's nondecreasing sequence satisfy
 the exact finite-segment interface. -/
 theorem monotone_enumeration_isInitialWeightSegment
     (a r : ℕ → ℕ) (ha : Monotone a)

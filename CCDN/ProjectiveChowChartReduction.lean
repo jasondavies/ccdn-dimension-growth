@@ -6,7 +6,7 @@ public import CCDN.PolynomialPredicates
 
 /-! Any projective Chow equation can be moved to a nonempty affine chart
 without changing its block degrees or total degree. The chart has the
-actual dimension and multiplicity of the projective source. -/
+dimension and multiplicity of the projective source. -/
 
 @[expose] public section
 namespace CCDN

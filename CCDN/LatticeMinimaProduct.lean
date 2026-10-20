@@ -16,7 +16,7 @@ open Module MeasureTheory
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E]
 
-/-- Any positive monotone sequence of actual flag minima has product at
+/-- Any positive monotone sequence of flag minima has product at
 most n^n times the lattice covolume. -/
 theorem lattice_flag_minima_product_le
     {n : ℕ} (hn : 0 < n) (L : Submodule ℤ E)
@@ -70,7 +70,7 @@ theorem lattice_flag_minima_product_le
   rw [hvol] at hbound
   exact (div_le_iff₀ (pow_pos hnR n)).mp hbound |>.trans_eq (mul_comm _ _)
 
-/-- The product of the lengths of an actual greedy lattice basis is
+/-- The product of the lengths of a greedy lattice basis is
 uniformly controlled by the covolume. -/
 theorem greedy_lattice_basis_product_le
     {n : ℕ} (hn : 0 < n) (L : Submodule ℤ E)
@@ -83,7 +83,7 @@ theorem greedy_lattice_basis_product_le
   intro i x hx hxU
   exact hb.2.2 i x hx (by rwa [← hflag i])
 
-/-- Construct a complete independent family in the actual lattice and
+/-- Construct a complete independent family in the lattice and
 prove the product bound, without a supplied family or minima hypothesis. -/
 theorem exists_lattice_basis_norm_product_le
     (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]

@@ -5,7 +5,7 @@ public import Mathlib.LinearAlgebra.Matrix.Kronecker
 public import Mathlib.Data.Finset.Prod
 
 /-! Primitive points and homogeneous columns of differing degrees on one
-fixed projective line. Their actual evaluation matrix is a Kronecker product
+fixed projective line. Their evaluation matrix is a Kronecker product
 of two Vandermonde matrices. -/
 
 @[expose] public section

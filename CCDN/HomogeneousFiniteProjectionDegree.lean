@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Finiteness.Prod
 public import CCDN.PolynomialPredicates
 
 /-! A homogeneous finite birational linear projection preserves the
-actual Hilbert multiplicity. Both the conductor and the dimension equality
+Hilbert multiplicity. Both the conductor and the dimension equality
 are consequences of the algebraic hypotheses. -/
 
 @[expose] public section

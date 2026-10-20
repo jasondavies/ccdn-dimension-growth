@@ -5,7 +5,7 @@ public import CCDN.PowerSeriesFrobenius
 
 /-! A local Bézout bound on formal vanishing orders. It gives injective jets
 on low-degree functions and discharges the jet condition in Frobenius
-noncancellation for actual irreducible plane curves. -/
+noncancellation for irreducible plane curves. -/
 
 @[expose] public section
 namespace CCDN
@@ -32,7 +32,7 @@ lemma powerSeries_quotient_powers_independent {K : Type*} [Field K]
   rwa [hsum] at hc
 
 /-- If a proper degree-m section vanishes to order N on a formal plane
-branch, then N<=d*m. The parameter map and its equation are actual maps. -/
+branch, then N<=d*m. The parameter map and its equation are maps. -/
 theorem formal_plane_vanishing_order_bound {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] PowerSeries K) (hψ : ψ f = 0)
@@ -105,7 +105,7 @@ theorem formal_plane_independent_jets {K ι : Type*} [Field K] [Fintype ι] [Dec
     simpa only [g, map_sum, map_smul] using he
   exact Fintype.linearIndependent_iff.mp hi c hz
 
-/-- Frobenius coefficients cannot cancel a low-degree basis on an actual
+/-- Frobenius coefficients cannot cancel a low-degree basis on a
 formal plane branch. The numerical condition is d*D<p^r. -/
 theorem formal_plane_frobenius_relation_trivial {K ι : Type*} [Field K]
     [Fintype ι] [DecidableEq ι] (p r : ℕ) [Fact p.Prime] [CharP K p]

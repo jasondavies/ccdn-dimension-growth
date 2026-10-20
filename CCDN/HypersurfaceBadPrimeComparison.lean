@@ -2,7 +2,7 @@ module
 
 public import CCDN.HypersurfaceNormalizedComparison
 
-/-! Preserve the actual bad-prime factor through the normalized no-auxiliary
+/-! Preserve the bad-prime factor through the normalized no-auxiliary
 comparison, as required by the coefficient-sensitive CCDN Theorem 3.1.1. -/
 
 @[expose] public section
@@ -15,7 +15,7 @@ def hypersurfaceBadPrimeNormalizedError (n : ℕ) : ℝ :=
     (n + 2 : ℝ) * hypersurfaceArchimedeanError (n + 1) /
       ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ))
 
-/-- The actual normalized comparison retaining log b(f), rather than replacing
+/-- The normalized comparison retaining log b(f), rather than replacing
 it by the coefficient-height upper bound. The exact bad-prime set is constructed. -/
 theorem hypersurface_no_auxiliary_bad_prime_comparison
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d M t : ℕ}

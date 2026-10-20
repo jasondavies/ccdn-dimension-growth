@@ -5,7 +5,7 @@ public import CCDN.HilbertFunctionFieldRank
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
-/-! Construct a finite linear parameter field from actual coordinate
+/-! Construct a finite linear parameter field from coordinate
 functions, in arbitrary Hilbert dimension. -/
 
 @[expose] public section
@@ -19,8 +19,8 @@ def coordinateParameterField {K F σ : Type*} [Field K] [Field F] [Algebra K F]
   IntermediateField.adjoin K (Set.range (fun i : U =>
     algebraMap (MvPolynomial σ K ⧸ I) F ((Ideal.Quotient.mk I) (X i.val))))
 
-/-- There is an actual subset of coordinate functions whose generated field
-has finite extension degree at most the actual Hilbert multiplicity.
+/-- There is a subset of coordinate functions whose generated field
+has finite extension degree at most the Hilbert multiplicity.
 No parameter field, normalization or finiteness premise is supplied. -/
 theorem exists_finite_coordinate_parameter_field
     {K F σ : Type*} [Field K] [Field F] [Fintype σ] [LinearOrder σ] [Algebra K F]

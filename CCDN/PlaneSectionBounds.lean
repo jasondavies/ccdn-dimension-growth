@@ -3,7 +3,7 @@ module
 public import CCDN.PlaneIncidence
 public import CCDN.SharpPlaneCount
 
-/-! Actual section-point bounds in the good, nonzero and unrestricted cases.
+/-! Section-point bounds in the good, nonzero and unrestricted cases.
 The good-section bound uses the proved Stepanov theorem over the prime field. -/
 
 @[expose] public section

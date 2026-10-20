@@ -4,7 +4,7 @@ public import CCDN.MinorCoordinateDegree
 public import CCDN.ProjectiveZeroLocus
 public import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 
-/-! The sharp numerical specialization in CCDN Lemma 5.3. An actual
+/-! The sharp numerical specialization in CCDN Lemma 5.3. A
 nonvanishing homogeneous condition on Plücker coordinates has a full-rank
 integer witness with entries at most max(1, deg F), without a factor from
 the number of rows. Every maximal minor has the stated factorial height
@@ -36,7 +36,7 @@ theorem homogeneous_minor_nonvanishing_implies_independent
     homogeneous_eval_smul hhom (0 : ℚ) (fun _ => 0)
 
 /-- Sharp bounded specialization of a homogeneous Plücker condition. A
-constant condition is handled by an actual coordinate-row matrix. -/
+constant condition is handled by a coordinate-row matrix. -/
 theorem exists_sharp_integer_minor_specialization {r n : ℕ}
     (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
     (hhom : F.IsHomogeneous F.totalDegree)
@@ -121,7 +121,7 @@ theorem exists_integer_minor_specialization_degree_lt {r n R : ℕ}
   gcongr
 
 /-- For R≥2 the coordinates can be taken strictly below R, while retaining
-the same maximal-minor height bound and actual independence. -/
+the same maximal-minor height bound and independence. -/
 theorem exists_integer_minor_specialization_strict_degree_lt {r n R : ℕ}
     (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
     (hhom : F.IsHomogeneous F.totalDegree) (hR : 2 ≤ R) (hdeg : F.totalDegree < R)

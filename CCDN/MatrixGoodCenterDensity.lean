@@ -3,7 +3,7 @@ module
 public import CCDN.AffinePointZariski
 public import CCDN.ZeroColumnMinorSpecialization
 
-/-! Nonzero polynomial conditions are dense on the actual full-row-rank
+/-! Nonzero polynomial conditions are dense on the full-row-rank
 matrix parameter space. A maximal minor is multiplied into the condition
 to preserve row independence, including constant conditions. -/
 

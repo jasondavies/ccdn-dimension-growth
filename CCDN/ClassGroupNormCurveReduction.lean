@@ -3,7 +3,7 @@ module
 public import CCDN.ClassGroupTranslateFibers
 public import Mathlib.GroupTheory.QuotientGroup.Defs
 
-/-! The actual bounded square-norm set is partitioned by integer translations.
+/-! The bounded square-norm set is partitioned by integer translations.
 This constructs the finite norm-curve family rather than assuming one. The
 uniform estimate for the number of translation classes is a separate lattice
 theorem and is not asserted here. -/

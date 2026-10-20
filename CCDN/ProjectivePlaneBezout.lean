@@ -2,7 +2,7 @@ module
 
 public import CCDN.ProjectiveSection
 
-/-! The actual homogeneous degree of a plane equation agrees with its
+/-! The homogeneous degree of a plane equation agrees with its
 projective Hilbert degree, giving sharp projective plane intersection bounds. -/
 
 @[expose] public section

@@ -4,7 +4,7 @@ public import CCDN.SingularTangent
 
 /-! The first nonzero homogeneous form behaves multiplicatively. Consequently
 multiplication by an equation of order μ cancels μ powers of the origin
-ideal. These are statements about the actual polynomial ring and ideal. -/
+ideal. These are statements about the polynomial ring and ideal. -/
 
 @[expose] public section
 namespace CCDN

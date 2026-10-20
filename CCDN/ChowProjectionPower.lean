@@ -5,10 +5,10 @@ public import CCDN.ChowPolynomialPower
 public import CCDN.IntegralProjectionHilbert
 public import CCDN.PolynomialPredicates
 
-/-! The geometric power criterion for the actual restriction of a Chow
+/-! The geometric power criterion for the restriction of a Chow
 incidence equation along a linear projection. Meeting the center forces the
 restriction to vanish identically; a disjoint center gives precisely a scalar
-power of an actual image equation. Exact Chow block degrees are not assumed. -/
+power of an image equation. Exact Chow block degrees are not assumed. -/
 
 @[expose] public section
 namespace CCDN
@@ -46,7 +46,7 @@ lemma center_disjoint_of_chowLinearSubstitution_ne_zero
   intro p hp hAp
   exact hne (chowLinearSubstitution_eq_zero_of_center_meets J A F hF ⟨p, hp, hAp⟩)
 
-/-- The image incidence criterion is derived from the actual linear map and
+/-- The image incidence criterion is derived from the linear map and
 its disjoint center, rather than supplied as an equality of zero loci. -/
 theorem chowLinearSubstitution_same_zeros_as_image
     {K : Type*} [Field K] [IsAlgClosed K] {n s r : ℕ}

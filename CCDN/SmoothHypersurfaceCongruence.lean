@@ -6,7 +6,7 @@ public import CCDN.PrimeProduct
 public import CCDN.BlockDeterminant
 import all ArithmeticHeights.BombieriVaaler
 
-/-! Simultaneous congruence divisors for actual smooth hypersurface points.
+/-! Simultaneous congruence divisors for smooth hypersurface points.
 These are the local divisors needed for a congruence-refined auxiliary. -/
 
 @[expose] public section
@@ -14,7 +14,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- At a nonsingular reduced point the actual translated equation has
+/-- At a nonsingular reduced point the translated equation has
 multiplicity one. -/
 theorem smooth_hypersurface_origin_order {p : ℕ} [Fact p.Prime] {σ : Type*}
     (f : MvPolynomial σ ℤ) (a : σ → ℤ)

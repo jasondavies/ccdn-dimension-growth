@@ -3,7 +3,7 @@ module
 public import CCDN.HypersurfaceMultiplicityEstimate
 public import CCDN.PlaneMultiplicity
 
-/-! Singular local determinant bounds at an actual residue point in arbitrary
+/-! Singular local determinant bounds at a residue point in arbitrary
 dimension. Multiplicity is obtained from the first nonzero translated homogeneous
 component; no local model or counting estimate is supplied as a hypothesis. -/
 
@@ -77,7 +77,7 @@ theorem hypersurface_residue_pow_dvd_det_mod {p n μ s : ℕ} [Fact p.Prime]
     (fun j => originShift a (F j))
   simpa only [eval_sub_originShift] using h
 
-/-- At every actual residue point of a nonzero reduced equation there is an
+/-- At every residue point of a nonzero reduced equation there is an
 explicit exponent, uniform in all evaluation polynomials and points, with the
 sharp leading term and a linear error independent of multiplicity. -/
 theorem exists_hypersurface_local_determinant_bound {p n : ℕ} [Fact p.Prime]

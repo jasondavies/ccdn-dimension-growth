@@ -4,7 +4,7 @@ public import CCDN.NoetherianLocalLayers
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
-/-! The actual mod-`p` local layers used in the general local determinant
+/-! The mod-`p` local layers used in the general local determinant
 lemma. A ring homomorphism from a local ring to `ZMod p` is automatically
 surjective and has the maximal ideal as kernel. Consequently the residue
 field and every Noetherian adic truncation are finite, without a supplied
@@ -32,7 +32,7 @@ variable [IsLocalRing R]
 def localPrimeMaximalIdeal : Ideal (LocalPrimeReduction R p) :=
   (maximalIdeal R).map (Ideal.Quotient.mk (Ideal.span {(p : R)}))
 
-/-- Dimensions of the actual layers of the maximal ideal of `R/(p)`. -/
+/-- Dimensions of the layers of the maximal ideal of `R/(p)`. -/
 def localPrimeLayerDimension [Fact p.Prime] (k : ℕ) : ℕ :=
   Module.finrank (ZMod p) (idealPowerLayer (ZMod p) (localPrimeMaximalIdeal R p) k)
 
@@ -75,7 +75,7 @@ lemma localPrimeMaximalIdeal_eq
   IsLocalRing.map_maximalIdeal_of_surjective
     (Ideal.Quotient.mk (Ideal.span {(p : R)})) Ideal.Quotient.mk_surjective
 
-/-- Actual generators in `R/(p)`, indexed by its actual layer dimensions. -/
+/-- Generators in `R/(p)`, indexed by its layer dimensions. -/
 theorem exists_localPrimeReduction_generators [IsNoetherianRing R]
     (ρ : R →+* ZMod p) :
     ∃ g : (k : ℕ) → Fin (localPrimeLayerDimension R p k) → LocalPrimeReduction R p,

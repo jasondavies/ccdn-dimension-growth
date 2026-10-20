@@ -45,7 +45,7 @@ def hypersurfacePositionedAuxiliaryConstant (n : ℕ) (T : ℝ) : ℝ :=
 
 /-- The coefficient-sensitive auxiliary theorem for an absolutely irreducible
 homogeneous equation satisfying explicit leading-coefficient positioning.
-All degrees, both height ranges and the actual bad-prime set are constructed. -/
+All degrees, both height ranges and the bad-prime set are constructed. -/
 theorem hypersurface_positioned_auxiliary_degree
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)

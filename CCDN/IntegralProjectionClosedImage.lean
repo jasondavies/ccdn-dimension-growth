@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.Nullstellensatz
 
 /-! An integral polynomial projection has exactly its kernel's zero locus
 as its image over an algebraically closed field. Lying over constructs a
-maximal ideal upstairs, and the Nullstellensatz constructs the actual point. -/
+maximal ideal upstairs, and the Nullstellensatz constructs the point. -/
 
 @[expose] public section
 namespace CCDN

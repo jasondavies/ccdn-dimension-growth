@@ -4,7 +4,7 @@ public import CCDN.IndependentBirationalProjection
 public import CCDN.HomogeneousProjectionNoBasePoint
 public import CCDN.PolynomialPredicates
 
-/-! Actual rational projection centers of the required dimension, disjoint
+/-! Rational projection centers of the required dimension, disjoint
 from the variety over extension fields and inducing finite birational maps.
 The integer map has the proved normalization height bound; the sharper
 Section 5 bound on a basis of the center is a separate obligation. -/
@@ -35,7 +35,7 @@ theorem homogeneous_integer_projection_center_disjoint
   simpa only [integerLinearForm_aeval_extension] using hh
 
 /-- A geometrically good center is constructed, including degree one. Its
-vector dimension is n-m-1, and its projection has an actual geometrically
+vector dimension is n-m-1, and its projection has a geometrically
 integral image of the same degree. No center or projection is supplied. -/
 theorem exists_geometric_birational_projection_center
     {L : Type*} [Field L] [Algebra ℚ L] [Infinite L]

@@ -3,7 +3,7 @@ module
 public import CCDN.UniversalPlaneFamily
 
 /-! The constructed positioned family is a specialization of the universal
-family of all affine planes. Its nonzero minor therefore proves that an actual
+family of all affine planes. Its nonzero minor therefore proves that a
 universal parameter polynomial is nonzero. -/
 
 @[expose] public section

@@ -5,7 +5,7 @@ public import CCDN.HypersurfacePositioningCharZero
 
 /-! The singular locus of an irreducible rational hypersurface has a
 coefficient-uniform codimension-two integer point bound. A nonzero partial
-derivative gives the actual proper intersection used in the count. -/
+derivative gives the proper intersection used in the count. -/
 
 @[expose] public section
 namespace CCDN

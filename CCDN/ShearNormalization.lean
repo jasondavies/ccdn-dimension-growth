@@ -103,7 +103,7 @@ lemma leadingDirectionPolynomial_add {R : Type*} [CommRing R]
     leadingDirectionPolynomial (f + g) d = leadingDirectionPolynomial f d + leadingDirectionPolynomial g d := by
   simp [leadingDirectionPolynomial, Finset.sum_add_distrib]
 
-/-- The direction polynomial computes the actual leading axis coefficient. -/
+/-- The direction polynomial computes the leading axis coefficient. -/
 theorem directionAxisHom_coeff {R : Type*} [CommRing R]
     (a : R) (f : MvPolynomial (Fin 2) R) (d : ℕ) :
     (directionAxisHom R a f).coeff d =
@@ -175,7 +175,7 @@ lemma bivariateShear_map {R S : Type*} [CommRing R] [CommRing S]
   obtain ⟨g, rfl⟩ := (bivariatePolynomialEquiv R).surjective f
   simp only [bivariateShear_equiv, bivariatePolynomialEquiv_map, planeShear_map]
 
-/-- Shearing does not change the actual set of bad primes, including reductions
+/-- Shearing does not change the set of bad primes, including reductions
 where the degree drops. -/
 theorem bivariateBadReduction_shear_iff (a : ℤ) (f : ℤ[X][X]) (d p : ℕ) :
     BivariateBadReduction (bivariateShear ℤ a f) d p ↔ BivariateBadReduction f d p := by

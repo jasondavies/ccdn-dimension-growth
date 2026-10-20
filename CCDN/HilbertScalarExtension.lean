@@ -3,7 +3,7 @@ module
 public import CCDN.PolynomialLinearDescent
 public import CCDN.FilteredHilbertPolynomial
 
-/-! Scalar extension preserves the actual filtered Hilbert polynomial.
+/-! Scalar extension preserves the filtered Hilbert polynomial.
 Coefficient-linear functionals descend elements of the extended ideal.
 A functional nonzero on a leading coefficient preserves its leading exponent. -/
 

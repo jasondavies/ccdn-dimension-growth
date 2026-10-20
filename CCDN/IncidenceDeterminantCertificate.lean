@@ -6,7 +6,7 @@ public import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
 public import CCDN.PolynomialPredicates
 
 /-! A polynomial determinant separates an empty homogeneous linear incidence
-fiber from every tuple with a nonzero common zero. Its construction uses actual
+fiber from every tuple with a nonzero common zero. Its construction uses
 homogeneous ideal membership certificates and a complete monomial basis. -/
 
 @[expose] public section
@@ -53,7 +53,7 @@ lemma homogeneous_monomial_values_ne_zero {K : Type*} [Field K] {n M : ℕ}
   simp only [eval_monomial, one_mul, Finsupp.prod_single_index, pow_zero, Pi.zero_apply] at hz
   exact pow_ne_zero M hi hz
 
-/-- Actual homogeneous membership for every degree-`t+1` monomial constructs a
+/-- Homogeneous membership for every degree-`t+1` monomial constructs a
 polynomial which is nonzero at the chosen tuple and zero at every incident tuple. -/
 theorem exists_incidence_determinant_certificate {K : Type*} [Field K] {n r t : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))

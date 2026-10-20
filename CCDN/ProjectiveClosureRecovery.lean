@@ -3,7 +3,7 @@ module
 public import CCDN.ProjectiveClosureHilbertPolynomial
 public import CCDN.PolynomialPredicates
 
-/-! A nonempty standard chart recovers its actual homogeneous prime ideal
+/-! A nonempty standard chart recovers its homogeneous prime ideal
 by projective closure. Its affine Hilbert dimension and multiplicity follow
 from the cone Hilbert polynomial, in every dimension. -/
 

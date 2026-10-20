@@ -5,7 +5,7 @@ public import CCDN.HomogeneousHilbert
 public import CCDN.FilteredIntersection
 
 /-! Proper homogeneous sections of projective curves. The degree is the
-slope of the actual graded Hilbert function. Homogeneous interpolation and
+slope of the graded Hilbert function. Homogeneous interpolation and
 injective multiplication in the coordinate domain prove the section bound. -/
 
 @[expose] public section

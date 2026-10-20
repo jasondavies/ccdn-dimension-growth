@@ -3,7 +3,7 @@ module
 public import CCDN.PlaneShear
 
 /-! A bounded integer direction where the highest homogeneous part does not
-vanish. The direction polynomial packages the actual top-degree coefficients. -/
+vanish. The direction polynomial packages the top-degree coefficients. -/
 
 @[expose] public section
 namespace CCDN

@@ -48,7 +48,7 @@ theorem geometric_projective_dimension_zero_multiplicity_one
     simpa only [hpoly,Polynomial.leadingCoeff_one,Nat.factorial_zero,Nat.cast_one,div_one] using hdI
   exact_mod_cast hq.symm
 
-/-- The geometric projective point has an actual bounded good center whose
+/-- The geometric projective point has a bounded good center whose
 entries are zero or one, and a complementary projection of the same degree.
 The height constant depends only on the ambient dimension. -/
 theorem exists_zero_dimensional_zero_one_center_projection

@@ -5,7 +5,7 @@ public import Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody
 public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
 
-/-! Balanced square generators for actual two-torsion ideal classes.
+/-! Balanced square generators for two-torsion ideal classes.
 The anisotropic Minkowski argument is applied to the inverse ideal; the
 rescaling retains the exact generator needed for bounds at every place. -/
 
@@ -155,7 +155,7 @@ lemma balanced_discriminant_radius_powers {D : ℝ} (hD : 0 < D)
     have he : (1 / (2 * (n : ℝ))) * (2 : ℝ) = 1 / (n : ℝ) := by ring
     rw [he]
 
-/-- Every actual two-torsion class admits an integral square generator bounded
+/-- Every two-torsion class admits an integral square generator bounded
 at every infinite place by nine times the discriminant root. -/
 theorem exists_balanced_two_torsion_square_generator
     (c : classGroupTwoTorsion K) :

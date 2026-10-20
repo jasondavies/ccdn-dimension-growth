@@ -7,7 +7,7 @@ public import CCDN.ChowProjectionCriterion
 public import CCDN.PolynomialPredicates
 
 /-! A disjoint projection center gives an irreducible Chow restriction
-exactly when its actual coordinate-field extension is birational. Source
+exactly when its coordinate-field extension is birational. Source
 and image degrees are the proved Hilbert multiplicities. -/
 
 @[expose] public section

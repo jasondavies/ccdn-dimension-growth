@@ -4,7 +4,7 @@ public import CCDN.GeometricProjectionCenter
 public import CCDN.ChowProjectionBaseChange
 public import CCDN.PolynomialPredicates
 
-/-! Actual rational row matrices for the constructed geometric projection
+/-! Rational row matrices for the constructed geometric projection
 center. The rows form a basis of the kernel, and their scalar extension
 remains disjoint from the full projective source. -/
 
@@ -43,7 +43,7 @@ lemma matrix_rows_map_span_le_kernel
     map_sum, map_mul, Pi.zero_apply, map_zero] using hh
 
 /-- A basis of a genuinely constructed rational birational projection
-center. Scalar extension of its row span is disjoint from the actual
+center. Scalar extension of its row span is disjoint from the
 projective variety. No candidate center, rank, or genericity premise enters. -/
 theorem exists_geometric_center_row_witness
     {L : Type*} [Field L] [Algebra ℚ L] [Infinite L]

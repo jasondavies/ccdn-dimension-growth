@@ -45,7 +45,7 @@ lemma birational_complement_projection_ambient_height
 
 /-- An unconditional form of Lemma 5.1, with the literal ambient height
 quantifier and an explicit dimension-only constant. Geometric integrality
-and degree preservation of the actual projection image are included. -/
+and degree preservation of the projection image are included. -/
 theorem exists_sharp_ambient_birational_projection
     {n m : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]

@@ -4,7 +4,7 @@ public import CCDN.UniversalHyperplaneRestriction
 public import Mathlib.RingTheory.Polynomial.Ideal
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 
-/-! The actual homogeneous intersection ideal of a hypersurface and a
+/-! The homogeneous intersection ideal of a hypersurface and a
 hyperplane, and its graph-coordinate presentation. -/
 
 @[expose] public section

@@ -7,7 +7,7 @@ public import Mathlib.Tactic
 /-! Uniform control of the unit contribution to quadratic descent.
 Dirichlet's theorem and cyclicity of roots of unity give at most one
 binary choice per free unit and one further binary choice for torsion.
-The endpoint concerns the actual unit group modulo squares. -/
+The endpoint concerns the unit group modulo squares. -/
 
 @[expose] public section
 namespace CCDN
@@ -27,7 +27,7 @@ theorem zpow_eq_parity_pow {G : Type*} [Group G] (x : G)
 
 variable (K : Type*) [Field K] [NumberField K]
 
-/-- Every exponent-two quotient of the actual unit group has cardinality
+/-- Every exponent-two quotient of the unit group has cardinality
 at most `2^(unit rank + 1)`. The finite parametrization is constructed
 from a torsion generator and a fundamental system of units. -/
 theorem numberFieldUnit_exponent_two_quotient

@@ -105,7 +105,7 @@ theorem exists_numberField_short_basis_of_degree
   · apply (hb.2.2.2 i hi (b (Fin.last (n + 1))) (hb.2.2.1 _)
       (b.linearIndependent.notMem_span_image (not_lt_of_ge (Fin.le_last i)))).trans hlast
 
-/-- A real basis of actual integral lattice vectors with an explicit
+/-- A real basis of integral lattice vectors with an explicit
 constant depending only on the field degree. No short-basis premise is
 left for the lattice counting application. -/
 theorem exists_numberField_short_basis

@@ -40,7 +40,7 @@ lemma finite_ambientNoetherForms (σ : Type*) [Fintype σ] [DecidableEq σ] (k :
     ambientNoetherForm_coefficientL1_le σ k rows cols m⟩
 
 /-- The finite collection consists precisely of the extracted coefficients
-of all actual Euler minors of the universal plane restriction. -/
+of all Euler minors of the universal plane restriction. -/
 def universalNoetherForms (σ : Type*) [Fintype σ] [DecidableEq σ] (k : ℕ) :
     Finset (MvPolynomial (Sym σ (k + 2)) ℤ) :=
   (finite_ambientNoetherForms σ k).toFinset

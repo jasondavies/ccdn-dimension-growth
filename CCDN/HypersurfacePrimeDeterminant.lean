@@ -4,7 +4,7 @@ public import CCDN.HigherDimensionalPrimeSum
 public import CCDN.SharpHypersurfaceDeterminant
 import all ArithmeticHeights.BombieriVaaler
 
-/-! Global prime-sum estimates for actual homogeneous hypersurface evaluation
+/-! Global prime-sum estimates for homogeneous hypersurface evaluation
 matrices in every higher dimension, retaining the exact rank exponent. -/
 
 @[expose] public section

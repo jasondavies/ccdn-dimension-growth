@@ -123,7 +123,7 @@ lemma harmonic_block_excess (C μ K H s E : ℝ)
   nlinarith
 
 /-- No multiplicity-independent linear error works for the printed
-dimension-one arbitrary-profile hypothesis, even with c=1 and actual
+dimension-one arbitrary-profile hypothesis, even with c=1 and
 infinite monotone enumerations of positive integer profiles. -/
 theorem no_uniform_dimension_one_profile_error (C : ℝ) :
     ∃ (μ : ℕ) (g a : ℕ → ℕ) (s : ℕ),

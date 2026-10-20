@@ -218,7 +218,7 @@ theorem weighted_sequence_initial_sum_lower_bound (n c μ s : ℕ) (g w : ℕ �
     (fun i => w i.val) (initial_weight_count_le w g hgpos hcount)
   rwa [Fin.sum_univ_eq_sum_range (fun i => (w i : ℝ))] at h
 
-/-- The dimension-one version under the actual hypersurface layer bound.
+/-- The dimension-one version under the hypersurface layer bound.
 Unlike a bound involving `μ + c*μ/k`, this hypothesis gives a linear error
 uniform in `μ`. -/
 theorem weighted_sequence_dimension_one {s μ : ℕ} (hμ : 0 < μ)

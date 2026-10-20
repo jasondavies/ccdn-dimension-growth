@@ -3,7 +3,7 @@ module
 public import CCDN.FormalImplicitRoot
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 
-/-! Actual formal branches of plane equations at nonsingular points, in either
+/-! Formal branches of plane equations at nonsingular points, in either
 coordinate chart. The other coordinate is the parameter X plus its base value. -/
 
 @[expose] public section

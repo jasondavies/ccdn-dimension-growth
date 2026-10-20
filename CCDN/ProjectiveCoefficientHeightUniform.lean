@@ -140,7 +140,7 @@ theorem homogeneous_no_auxiliary_coefficient_height_uniform (n : ℕ) :
   nlinarith
 
 /-- CCDN Lemma 4.2.2 with a constant chosen before the degree, equation and
-height. The second alternative is an actual nonmultiple of the same degree
+height. The second alternative is a nonmultiple of the same degree
 vanishing on every bounded rational projective zero. -/
 theorem projective_coefficient_height_dichotomy_uniform (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧ ∀ {d : ℕ} (f : MvPolynomial (Fin (n + 2)) ℤ),

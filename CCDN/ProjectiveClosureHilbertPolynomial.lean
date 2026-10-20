@@ -4,7 +4,7 @@ public import CCDN.ProjectiveClosureDegree
 public import CCDN.HomogeneousFilteredRank
 public import CCDN.PolynomialFiniteDifference
 
-/-! The actual projective closure raises filtered Hilbert dimension by one
+/-! The projective closure raises filtered Hilbert dimension by one
 and preserves factorial-normalized multiplicity in every dimension. -/
 
 @[expose] public section
@@ -36,7 +36,7 @@ theorem projectiveClosureIdeal_hilbertPolynomial_difference
         Module.finrank K (filteredCoordinateSpace I (k + 1)) := by exact_mod_cast hh
   linarith
 
-/-- Both dimension and multiplicity are consequences of the actual closure
+/-- Both dimension and multiplicity are consequences of the closure
 ideal and its Hilbert functions, without a supplied compactification degree. -/
 theorem projectiveClosureIdeal_hilbertPolynomial_parameters
     {K : Type*} [Field K] {n : ℕ}

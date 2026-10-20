@@ -93,7 +93,7 @@ theorem homogeneousTranslation_chart_coefficient_bound {d : ℕ}
   rw [show 4 * (d + 1) = 2 * (d + 1) + 2 * (d + 1) by omega, pow_add]
   ring
 
-/-- An actual bounded integer translation supplies the leading-position
+/-- A bounded integer translation supplies the leading-position
 hypothesis with absolute constant 14, and a coefficient height at least one. -/
 theorem exists_translated_coefficient_position {d : ℕ} (hd : 0 < d)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) :

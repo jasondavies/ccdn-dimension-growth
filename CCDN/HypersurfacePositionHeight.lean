@@ -102,7 +102,7 @@ lemma hypersurfacePositionHeightFactor_log_le {r d : ℕ} (n : ℕ) (hr : 0 < r)
     (show 0 ≤ (5 * (n : ℝ) + 5) * d by positivity)
   nlinarith
 
-/-- Actual integer coordinates supply the logarithmic positioning condition,
+/-- Integer coordinates supply the logarithmic positioning condition,
 and the chosen height bounds both the original and translated coefficients. -/
 theorem exists_hypersurface_coefficient_position {n r d : ℕ} (hr : 0 < r) (hd : 0 < d)
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) :

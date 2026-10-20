@@ -3,7 +3,7 @@ module
 public import CCDN.PlaneAuxiliarySelection
 
 /-! The determinant comparison for polynomial homogeneous-coordinate maps of
-actual integer plane-curve points. The residue geometry is supplied by the
+integer plane-curve points. The residue geometry is supplied by the
 original plane equation, so coordinates such as (H,x,y) need no rational rows. -/
 
 @[expose] public section

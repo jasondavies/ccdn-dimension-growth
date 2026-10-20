@@ -4,7 +4,7 @@ public import CCDN.UniversalHomogeneousForm
 public import CCDN.EulerProductVanishing
 
 /-! Universal Noether coefficient forms in an arbitrary ambient variable
-space. They are the plane-parameter coefficients of actual Euler minors. -/
+space. They are the plane-parameter coefficients of Euler minors. -/
 
 @[expose] public section
 namespace CCDN
@@ -82,7 +82,7 @@ lemma ambientNoetherParameterMinor_specialize {R σ : Type*} [CommRing R]
     ← universalPlanePolynomial_map, universalHomogeneousForm_specialize _ f hf]
 
 /-- Evaluation of a Noether form is exactly the corresponding coefficient
-of the actual restricted-equation determinant. -/
+of the restricted-equation determinant. -/
 theorem ambientNoetherForm_specialize {R σ : Type*} [CommRing R]
     [Fintype σ] [DecidableEq σ]
     (k : ℕ) (f : MvPolynomial σ R) (hf : f.IsHomogeneous (k + 2))

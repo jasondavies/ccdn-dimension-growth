@@ -75,7 +75,7 @@ theorem rationalDerivative_mem_base_of_degree_lt_char
   simp only [RatFunc.algebraMap_C, RatFunc.algebraMap_eq_C, map_div₀]
 
 /-- Positive-characteristic constant descent with explicit bounds on the
-reduced rational coefficients of the actual minimal polynomial. Establishing
+reduced rational coefficients of the minimal polynomial. Establishing
 these bounds for a closed-form residue is a separate resultant calculation. -/
 theorem algebraic_differential_constant_mem_base_of_coeff_degree_lt_char
     {F L : Type*} [Field F] [IsAlgClosed F] [Field L] {p : ℕ} [CharP F p]

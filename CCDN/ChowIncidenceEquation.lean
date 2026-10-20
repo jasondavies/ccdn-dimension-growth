@@ -4,7 +4,7 @@ public import CCDN.ChowIncidenceNonzero
 public import CCDN.ChowIncidenceLocus
 public import Mathlib.RingTheory.UniqueFactorizationDomain.Kaplansky
 
-/-! An actual irreducible incidence equation is constructed from the
+/-! An irreducible incidence equation is constructed from the
 nonzero prime elimination ideal. Principality and the exact Chow
 multidegree are separate geometric obligations. -/
 

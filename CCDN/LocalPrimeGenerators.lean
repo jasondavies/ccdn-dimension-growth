@@ -2,7 +2,7 @@ module
 
 public import CCDN.LocalPrimeReduction
 
-/-! Lift bases of actual mod-prime local layers to a Noetherian local ring.
+/-! Lift bases of mod-prime local layers to a Noetherian local ring.
 The resulting generators belong to the correct maximal-ideal powers, and
 their approximation errors are explicit sums of a high-order term and a
 multiple of the prime. Iterating the latter gives any finite precision. -/
@@ -14,7 +14,7 @@ open IsLocalRing
 
 variable {R : Type*} [CommRing R] [IsLocalRing R] {p : ℕ} [Fact p.Prime]
 
-/-- Lift the actual quotient-layer generators to the corresponding ideal
+/-- Lift the quotient-layer generators to the corresponding ideal
 powers in the original local ring. -/
 theorem exists_local_prime_generators [IsNoetherianRing R] (ρ : R →+* ZMod p) :
     ∃ G : (k : ℕ) → Fin (localPrimeLayerDimension R p k) → R,

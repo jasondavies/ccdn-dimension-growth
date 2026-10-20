@@ -16,7 +16,7 @@ noncomputable section
 open Polynomial Matrix
 
 /-- A nonzero minor over the original coefficient field, obtained by proving
-geometric irreducibility from the actual smooth point. -/
+geometric irreducibility from the smooth point. -/
 theorem exists_closedForm_minor_of_smooth_plane_point
     {K : Type*} [Field K] {p : ℕ} [CharP K p]
     (d : ℕ) (hd : 0 < d) (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)

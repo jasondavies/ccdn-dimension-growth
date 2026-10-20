@@ -5,7 +5,7 @@ public import CCDN.ProjectiveProjectionCount
 public import CCDN.ScaledHypersurfaceBadPrimes
 
 /-! The integer grid gives distinct bounded-height rational points on the
-actual irreducible projective closure. This is the geometric input to CCDN
+irreducible projective closure. This is the geometric input to CCDN
 Proposition 5, including the stated degree and the exact grid size. -/
 
 @[expose] public section

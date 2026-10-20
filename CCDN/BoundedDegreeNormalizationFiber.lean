@@ -6,7 +6,7 @@ public import CCDN.HilbertLinearCoordinates
 public import CCDN.ProjectionFractionField
 
 /-! Sharp fibers of integral polynomial parameters of degree at most q.
-The actual Hilbert multiplicity bounds the field degree by d*q^dimension;
+The Hilbert multiplicity bounds the field degree by d*q^dimension;
 a separating integral element gives the same bound for every finite fiber. -/
 
 @[expose] public section
@@ -81,7 +81,7 @@ theorem bounded_degree_normalization_fiber_card_le_of_fractionField
     hbound.trans hrank
 
 /-- The fiber bound for the given normalization, with the function field
-and all degree estimates supplied by the actual coordinate ring. -/
+and all degree estimates supplied by the coordinate ring. -/
 theorem bounded_degree_normalization_fiber_card_le
     {K : Type*} [Field K] [CharZero K] {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (q : ℕ) (hq : 0 < q)

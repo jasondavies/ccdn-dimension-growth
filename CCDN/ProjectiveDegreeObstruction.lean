@@ -4,7 +4,7 @@ public import CCDN.ProjectiveCurveLowerBound
 public import CCDN.DegreeDependenceNumerics
 
 /-! The degree factor in a coefficient-uniform projective curve bound cannot
-be o(d²). The proof applies the upper bound to the actual curves constructed
+be o(d²). The proof applies the upper bound to the curves constructed
 for CCDN Proposition 5. -/
 
 @[expose] public section

@@ -3,7 +3,7 @@ module
 public import CCDN.ProjectiveReduction
 public import CCDN.HomogeneousChart
 
-/-! The residue partition and local multiplicities of an actual homogeneous
+/-! The residue partition and local multiplicities of a homogeneous
 plane curve supply a global single-prime determinant divisor. -/
 
 @[expose] public section
@@ -77,7 +77,7 @@ theorem projectivePlaneTotalMultiplicity_bounds {p d : ℕ} [Fact p.Prime]
 
 /-- Primitive integer zeros determine the residue partition, unit chart
 coordinates and positive local multiplicities. The divisor's leading
-quadratic constant uses their actual total multiplicity. -/
+quadratic constant uses their total multiplicity. -/
 theorem projective_reduction_minorGcd {s N p d M : ℕ} [Fact p.Prime] (hs : 0 < s)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)

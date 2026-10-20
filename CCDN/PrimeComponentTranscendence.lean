@@ -158,7 +158,7 @@ theorem height_two_transcendental_coordinate_of_point {K : Type*} [Field K]
   norm_num at hd
 
 /-- A height-two component with a base-field point has positive slope in
- any actual eventual linear Hilbert formula, independently of its cutoff. -/
+ any eventual linear Hilbert formula, independently of its cutoff. -/
 theorem height_two_eventual_slope_pos_of_point {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
     (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) {d : ℕ}

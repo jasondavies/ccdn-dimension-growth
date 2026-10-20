@@ -3,7 +3,7 @@ module
 public import CCDN.ExactFiltrationWeights
 public import Mathlib.Order.Interval.Set.Nat
 
-/-! Actual infinite monotone enumerations of positive integer profiles.
+/-! Infinite monotone enumerations of positive integer profiles.
 These supplement the finite initial-segment construction and identify the
 exact length and weight sum of every complete block. -/
 
@@ -56,7 +56,7 @@ theorem exists_positive_profile_enumeration (g : ℕ → ℕ) (hg : ∀ k, 0 < g
     simp only [weightProfileCumulative, sum_range_succ, Nat.add_sub_cancel_left]
 
 /-- Ending at a complete layer gives the exact sum of its multiplicities
-times their weights, for the actual infinite enumeration. -/
+times their weights, for the infinite enumeration. -/
 theorem enumeration_full_block_sum (g a : ℕ → ℕ)
     (hfinite : ∀ k, {i | a i = k}.Finite)
     (hcount : ∀ k, {i | a i = k}.ncard = g k)

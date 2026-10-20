@@ -3,7 +3,7 @@ module
 public import CCDN.BirationalCenterPluckerTopology
 public import CCDN.FixedCoordinateBirationalCenterDensity
 
-/-! Dense open birational centers in the actual Grassmannian subspace of
+/-! Dense open birational centers in the Grassmannian subspace of
 centers contained in X0=0. Density uses the constructed constrained matrix
 witness, and is not inferred from density in the ambient Grassmannian. -/
 

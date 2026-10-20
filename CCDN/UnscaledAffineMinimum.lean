@@ -151,7 +151,7 @@ theorem unscaled_hypersurface_auxiliary_minimum_bound {n k : ℕ}
   exact mul_le_mul_of_nonneg_left (add_le_add (add_le_add hmain le_rfl) le_rfl)
     (hypersurfaceAbsoluteAuxiliaryConstant_pos n).le
 
-/-- An actual affine auxiliary with the minimum degree bound in the
+/-- An affine auxiliary with the minimum degree bound in the
 polynomial box range. There is no assumption on the constant coefficient. -/
 theorem unscaled_affine_auxiliary_minimum {n k : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)

@@ -5,7 +5,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-! A generic linear form is primitive whenever one linear specialization
-is primitive. Independence follows from an actual specialization matrix;
+is primitive. Independence follows from a specialization matrix;
 the field degree is preserved by the explicit polynomial coefficient basis. -/
 
 @[expose] public section
@@ -43,7 +43,7 @@ theorem generic_linear_powers_polynomial_independent
       simpa only [Algebra.smul_def,MvPolynomial.algebraMap_def] using hq)
   exact congrFun hz i
 
-/-- The powers of the generic linear combination give an actual power
+/-- The powers of the generic linear combination give a power
 basis after adjoining independent rational parameters. -/
 def genericLinearPowerBasis
     {K A R F σ : Type*} [Field K] [Field A] [Algebra K A]

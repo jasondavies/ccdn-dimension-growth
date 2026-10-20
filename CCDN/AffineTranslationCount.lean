@@ -5,7 +5,7 @@ public import CCDN.PlaneGridHeight
 public import CCDN.SingularReduction
 
 /-! Bounded translations remove a zero constant coefficient and preserve the
-actual finite-field residue count, primitivity and integer point families. -/
+finite-field residue count, primitivity and integer point families. -/
 
 @[expose] public section
 namespace CCDN
@@ -39,7 +39,7 @@ lemma PrimitiveIntegerPolynomial.translate_affine {n : ℕ} (a : Fin n → ℤ)
   rw [hC, AlgEquiv.symm_apply_apply] at he
   exact hf c ((C_dvd_iff_dvd_coeff c f).mp he)
 
-/-- Translation of the actual residue zero set, over ZMod p for every p. -/
+/-- Translation of the residue zero set, over ZMod p for every p. -/
 def affineTranslationResidueEquiv (a : Fin 2 → ℤ) (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) :
     PlaneResidue (affineTranslation ℤ a f) p ≃ PlaneResidue f p where
   toFun x := ⟨x.val + fun j => (a j : ZMod p), by

@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.AlgebraicClosure
 public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 
 /-! The constructed Hilbert dimension equals transcendence-basis cardinality.
-Consequently integral embeddings preserve actual Hilbert dimension. -/
+Consequently integral embeddings preserve Hilbert dimension. -/
 
 @[expose] public section
 namespace CCDN
@@ -51,7 +51,7 @@ theorem hilbert_dimension_eq_transcendence_basis_card
   rw [Nat.card_eq_fintype_card] at hU
   omega
 
-/-- Integral embeddings preserve the actual filtered Hilbert dimension,
+/-- Integral embeddings preserve the filtered Hilbert dimension,
 without assuming a normalization or a Hilbert polynomial. -/
 theorem integral_embedding_hilbert_dimension_eq
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]

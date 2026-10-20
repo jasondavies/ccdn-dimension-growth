@@ -3,7 +3,7 @@ module
 public import CCDN.HypersurfaceCountError
 
 /-! A sharp coefficient-uniform count for geometrically irreducible affine
-hypersurfaces over prime fields, proved by actual plane-section averaging. -/
+hypersurfaces over prime fields, proved by plane-section averaging. -/
 
 @[expose] public section
 namespace CCDN
@@ -61,7 +61,7 @@ theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
         show 3 * n + 8 = (3 * n + 6) + 2 by omega, pow_add]
       ring
 
-/-- Renaming coordinates preserves the actual number of affine zeros. -/
+/-- Renaming coordinates preserves the number of affine zeros. -/
 lemma polynomial_zero_card_renameEquiv {K σ τ : Type*} [CommRing K]
     (e : σ ≃ τ) (f : MvPolynomial σ K) :
     Nat.card {z : τ → K // eval z (rename e f) = 0} =

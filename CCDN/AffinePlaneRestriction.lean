@@ -4,7 +4,7 @@ public import CCDN.HypersurfaceGoodDirection
 public import CCDN.PlaneSmoothGeometricIrreducibility
 public import CCDN.ShearNormalization
 
-/-! Actual affine two-plane substitutions, their degree bounds, and their
+/-! Affine two-plane substitutions, their degree bounds, and their
 smooth base point. The irreducibility conclusion explicitly requires ordinary
 irreducibility of the restricted equation; generic-plane irreducibility is a
 separate obligation. -/

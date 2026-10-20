@@ -54,7 +54,7 @@ lemma hypersurfaceBadPrimeFactor_eq_exp {n d : ℕ} (f : MvPolynomial (Fin (n + 
     simp only [Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdegree, hbad]
   rw [he]
 
-/-- The actual bad-prime factor satisfies the coefficient-height bound also
+/-- The bad-prime factor satisfies the coefficient-height bound also
 for nonabsolute equations, where the factor is zero by definition. -/
 theorem hypersurfaceBadPrimeFactor_le_height {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (H : ℝ) (hH : 1 ≤ H)

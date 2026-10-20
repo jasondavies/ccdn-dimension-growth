@@ -3,8 +3,8 @@ module
 public import CCDN.ChowIncidenceIdeal
 public import CCDN.HilbertTranscendenceBasis
 
-/-! More hyperplanes than the actual affine Hilbert dimension satisfy a
-nonzero incidence equation. The equation is constructed from the actual
+/-! More hyperplanes than the affine Hilbert dimension satisfy a
+nonzero incidence equation. The equation is constructed from the
 elimination kernel, by a transcendence-degree count. -/
 
 @[expose] public section
@@ -13,7 +13,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The incidence elimination ideal is nonzero as soon as the number of
-hyperplanes exceeds the actual dimension of the affine coordinate domain. -/
+hyperplanes exceeds the dimension of the affine coordinate domain. -/
 theorem chowIncidenceIdeal_ne_bot {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hr : (filteredHilbertPolynomial I).natDegree < r) :
@@ -38,7 +38,7 @@ theorem chowIncidenceIdeal_ne_bot {K : Type*} [Field K] {n r : ℕ}
   rw [Nat.card_eq_fintype_card] at hU
   nlinarith
 
-/-- An actual nonzero polynomial vanishes on every incident tuple of
+/-- A nonzero polynomial vanishes on every incident tuple of
 m+1 hyperplanes; it is not an assumed Chow form. -/
 theorem exists_nonzero_chow_incidence_equation {K : Type*} [Field K] [IsAlgClosed K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :

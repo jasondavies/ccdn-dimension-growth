@@ -2,7 +2,7 @@ module
 
 public import CCDN.PolynomialFamilyRelations
 
-/-! Construct a polynomial family of plane relations for actual linear
+/-! Construct a polynomial family of plane relations for linear
 projections of a prime affine curve. The relation has degree at most the
 curve's Hilbert degree and remains nonzero at parameter zero. -/
 

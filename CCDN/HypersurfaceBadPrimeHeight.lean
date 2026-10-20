@@ -41,7 +41,7 @@ theorem exists_hypersurface_bad_prime_height_witness
   · intro p hp hbad
     exact (dvd_abs _ _).mpr (hdiv p hp hbad)
 
-/-- The logarithmic charge bound for any finite family of actual bad primes.
+/-- The logarithmic charge bound for any finite family of bad primes.
 This includes degree-dropping primes as well as geometric reducibility. -/
 theorem hypersurface_bad_prime_charge
     {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]

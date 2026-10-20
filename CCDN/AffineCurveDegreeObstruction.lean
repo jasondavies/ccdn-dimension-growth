@@ -4,7 +4,7 @@ public import CCDN.GridAffineLowerBound
 public import CCDN.IntegerGridLowerBound
 public import CCDN.DegreeDependenceNumerics
 
-/-! The affine-curve sharpness statement in CCDN Section 6, with actual
+/-! The affine-curve sharpness statement in CCDN Section 6, with
 absolutely irreducible equations through the specified integer grids. -/
 
 @[expose] public section

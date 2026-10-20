@@ -3,7 +3,7 @@ module
 public import CCDN.AffineHypersurfaceAuxiliary
 public import CCDN.HypersurfaceRankArchimedean
 
-/-! A logarithm-free plane-curve estimate in terms of the actual
+/-! A logarithm-free plane-curve estimate in terms of the
 geometric bad-prime factor. Uniformly bounded bad-prime factors therefore
 give a coefficient-independent logarithm-free counting theorem. -/
 
@@ -49,7 +49,7 @@ theorem affine_plane_expression_le_bad_prime {d : ℕ} (hd : 0 < d)
     show (4 - 1 : ℝ) = 3 by norm_num, Real.rpow_natCast, Real.rpow_ofNat]
   nlinarith
 
-/-- The plane auxiliary and Bezout prove the bad-prime bound for actual
+/-- The plane auxiliary and Bezout prove the bad-prime bound for
 integer zeros. No auxiliary-existence or counting premise is supplied. -/
 theorem affine_plane_count_bad_prime
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)

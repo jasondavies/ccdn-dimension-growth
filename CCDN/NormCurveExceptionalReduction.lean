@@ -3,9 +3,9 @@ module
 public import CCDN.SmallSubfieldIntegerCount
 public import CCDN.SquareNormCurveIrreducibility
 
-/-! The actual square-norm integers are covered by their integer-translation
+/-! The square-norm integers are covered by their integer-translation
 fibers. Fibers with even generated-subfield index are absorbed into the
-actual small-subfield set when there is no index-two intermediate field. -/
+small-subfield set when there is no index-two intermediate field. -/
 
 @[expose] public section
 namespace CCDN

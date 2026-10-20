@@ -4,7 +4,7 @@ public import CCDN.GeneralBadReduction
 public import Mathlib.Algebra.MvPolynomial.Nilpotent
 public import Mathlib.Data.Nat.PrimeFin
 
-/-! Actual finite bad-prime sets for plane equations, with coefficient-height
+/-! Finite bad-prime sets for plane equations, with coefficient-height
 charge bounds and irreducible good reductions. -/
 
 @[expose] public section
@@ -35,7 +35,7 @@ lemma bivariateTotalDegree_equiv {R : Type*} [CommRing R]
     bivariateTotalDegree (bivariatePolynomialEquiv R f) = f.totalDegree := by
   simp only [bivariateTotalDegree, AlgEquiv.symm_apply_apply]
 
-/-- Bad reduction for the actual multivariate plane equation. -/
+/-- Bad reduction for the multivariate plane equation. -/
 def PlaneBadReduction (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) : Prop :=
   BivariateBadReduction (bivariatePolynomialEquiv ℤ f) f.totalDegree p
 
@@ -78,7 +78,7 @@ lemma irreducible_reduction_of_not_planeBadReduction
   simpa only [MvPolynomial.map_map, he] using h
 
 /-- The complete set of bad primes above 27*d^4 is finite and has the
-required charge bound. Good reductions outside this set are actual
+required charge bound. Good reductions outside this set are
 irreducible reductions, not an additional input. -/
 theorem exists_plane_bad_prime_set
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]

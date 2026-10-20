@@ -57,7 +57,7 @@ lemma genericFixedCoordinateFamily_map
   · simp [genericFixedCoordinateFamily, closureProjectionCoordinates]
   · simp [genericFixedCoordinateFamily, closureProjectionCoordinates, genericAffineParameterForms]
 
-/-- Independent coefficients give an actual finite normalization of the
+/-- Independent coefficients give a finite normalization of the
 projective closure while its homogenizing coordinate remains fixed. -/
 theorem generic_fixed_coordinate_projection_integral
     {K L : Type*} [Field K] [Infinite K] [Field L] [Algebra K L]

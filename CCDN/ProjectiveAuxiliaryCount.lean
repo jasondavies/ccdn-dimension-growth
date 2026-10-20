@@ -4,7 +4,7 @@ public import CCDN.ProjectiveAuxiliary
 public import CCDN.ProjectivePlaneBezout
 public import CCDN.PlaneAuxiliaryCount
 
-/-! Projective point counts obtained from actual integral homogeneous
+/-! Projective point counts obtained from integral homogeneous
 auxiliary polynomials and projective Bézout. -/
 
 @[expose] public section

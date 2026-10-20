@@ -3,7 +3,7 @@ module
 public import CCDN.ScalarQuotientPolynomialLocalization
 public import CCDN.LocalizationFractionEmbedding
 
-/-! An actual fraction field of the parameter polynomial extension is also
+/-! A fraction field of the parameter polynomial extension is also
 the fraction field of the scalar-extended source coordinate quotient. -/
 
 @[expose] public section
@@ -27,7 +27,7 @@ variable {K L F σ τ : Type*} [Field K] [Field L] [Field F]
   [Algebra (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
   [IsFractionRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
 
-/-- The canonical compatible embedding into the original actual fraction field. -/
+/-- The canonical compatible embedding into the original fraction field. -/
 def scalarQuotientFractionMap :
     (MvPolynomial σ L ⧸ I.map (map (algebraMap K L))) →+* F :=
   let : Algebra (MvPolynomial τ (MvPolynomial σ K ⧸ I))

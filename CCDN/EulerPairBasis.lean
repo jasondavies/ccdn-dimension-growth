@@ -3,7 +3,7 @@ module
 public import CCDN.EulerClosedFormRank
 
 /-! Canonical monomial coordinates for the d^2-1 Euler parameters and the
-actual coefficient matrix of their closed-form operator. -/
+coefficient matrix of their closed-form operator. -/
 
 @[expose] public section
 namespace CCDN
@@ -47,7 +47,7 @@ def eulerClosedFormCoefficientMatrix {R : Type*} [CommRing R] (k : ℕ)
     (f : Polynomial (Polynomial R)) : Matrix (ℕ × ℕ) (EulerColumns k) R :=
   fun i j => ((eulerClosedFormOperator k f (eulerPairBasis R k j)).coeff i.1).coeff i.2
 
-/-- Linear independence of all d^2-1 coefficient columns for an actual
+/-- Linear independence of all d^2-1 coefficient columns for an
 irreducible equation with constant outer leading coefficient. -/
 theorem eulerClosedFormCoefficientMatrix_columns_independent
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]

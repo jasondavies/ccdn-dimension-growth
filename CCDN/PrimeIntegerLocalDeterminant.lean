@@ -7,7 +7,7 @@ public import Mathlib.Data.ZMod.QuotientRing
 public import Mathlib.RingTheory.Filtration
 public import Mathlib.RingTheory.Localization.Submodule
 
-/-! The arbitrary Noetherian local determinant lemma with its actual target
+/-! The arbitrary Noetherian local determinant lemma with its target
 `ℤ_(p)`. Its residue map and prime-generated maximal ideal are constructed
 from localization, so no target-ring reduction assumptions remain. -/
 
@@ -22,7 +22,7 @@ abbrev PrimeIntegerLocalization (p : ℕ) [Fact p.Prime] :=
 
 variable (p : ℕ) [Fact p.Prime]
 
-/-- The actual residue homomorphism `ℤ_(p) → F_p`. -/
+/-- The residue homomorphism `ℤ_(p) → F_p`. -/
 def primeIntegerLocalizationResidue :
     PrimeIntegerLocalization p →+* ZMod p :=
   (Int.quotientSpanNatEquivZMod p).toRingHom.comp
@@ -51,7 +51,7 @@ lemma primeIntegerLocalizationResidue_kernel :
 
 variable {R : Type*} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
 
-/-- Lemma 2.4, with the exact sum of the first `s` actual local-layer weights.
+/-- Lemma 2.4, with the exact sum of the first `s` local-layer weights.
 The source need not carry an explicitly chosen `ℤ_(p)`-algebra structure:
 the given evaluation homomorphisms already supply all that the proof uses. -/
 theorem primeInteger_local_initial_weight_det {s : ℕ}
@@ -63,7 +63,7 @@ theorem primeInteger_local_initial_weight_det {s : ℕ}
   noetherian_local_initial_weight_det (primeIntegerLocalizationResidue p)
     (primeIntegerLocalizationResidue_kernel p) ψ x w hw
 
-/-- The paper's nondecreasing enumeration of the actual layer
+/-- The paper's nondecreasing enumeration of the layer
 multiplicities gives the same exact determinant exponent. -/
 theorem primeInteger_local_enumerated_weight_det {s : ℕ}
     (ψ : Fin s → R →+* PrimeIntegerLocalization p) (x : Fin s → R)
@@ -89,7 +89,7 @@ theorem primeInteger_local_exists_initial_weight_det {s : ℕ}
     exists_initial_weight_segment (localPrimeLayerDimension R p) s hcapacity
   exact ⟨w, hmono, hw, primeInteger_local_initial_weight_det p ψ x w hw⟩
 
-/-- If the actual profile has fewer than `s` weights in total, every
+/-- If the profile has fewer than `s` weights in total, every
 determinant is zero. This also covers Artinian mod-prime reductions. -/
 theorem primeInteger_local_det_eq_zero_of_insufficient_layers {s : ℕ}
     (ψ : Fin s → R →+* PrimeIntegerLocalization p) (x : Fin s → R)

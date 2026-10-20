@@ -54,7 +54,7 @@ theorem projective_height_finite (n : ℕ) (B : ℝ) :
   funext j
   simp [v, div_eq_mul_inv, mul_comm]
 
-/-- Actual projective points, counted once per rational line. -/
+/-- Projective points, counted once per rational line. -/
 def projectivePoints {n : ℕ} (X : Set (ProjectivePoint n)) (B : ℝ) :
     Finset (ProjectivePoint n) := by
   classical

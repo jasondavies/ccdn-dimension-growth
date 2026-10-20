@@ -4,7 +4,7 @@ public import Mathlib.RingTheory.ClassGroup.ExtendedHom
 public import Mathlib.RingTheory.Ideal.Norm.RelNorm
 public import Mathlib.Tactic
 
-/-! The relative ideal norm descends to the actual ideal class group.
+/-! The relative ideal norm descends to the ideal class group.
 This supplies the norm map required for quadratic descent without assuming
 a class-number or ambiguous-class estimate. -/
 
@@ -50,7 +50,7 @@ theorem classGroupRelativeNormOnClass_mk0 (I : (Ideal S)⁰) :
       ClassGroup.mk0 (nonzeroIdealRelNorm R S I) :=
   nonzeroIdealRelNorm_class_eq R S (ClassGroup.mk0_surjective (ClassGroup.mk0 I)).choose_spec
 
-/-- The relative norm of actual ideal classes, constructed from integral
+/-- The relative norm of ideal classes, constructed from integral
 representatives and proved independent of their choice. -/
 def classGroupRelativeNorm : ClassGroup S →* ClassGroup R where
   toFun := classGroupRelativeNormOnClass R S

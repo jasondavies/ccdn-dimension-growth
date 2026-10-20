@@ -2,7 +2,7 @@ module
 
 public import CCDN.ProjectiveChartDegree
 
-/-! The actual prime affine-chart ideal and the transport of projective
+/-! The prime affine-chart ideal and the transport of projective
 points and Hilbert degree to that ideal. -/
 
 @[expose] public section

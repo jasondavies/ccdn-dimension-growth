@@ -84,7 +84,7 @@ theorem PrimitiveIntegerPolynomial.rational_map_dvd_iff {σ : Type*}
     exact (hf.isRelPrime_constant hb).dvd_of_dvd_mul_left ⟨u, he⟩
   · exact map_dvd (MvPolynomial.map (Int.castRingHom ℚ))
 
-/-- Extract a primitive integer equation by the gcd of its actual nonzero
+/-- Extract a primitive integer equation by the gcd of its nonzero
 coefficients. The scalar is nonzero and no degree or support hypothesis is assumed. -/
 theorem exists_primitive_integer_factor {σ : Type*} (f : MvPolynomial σ ℤ) (hf : f ≠ 0) :
     ∃ (c : ℤ) (g : MvPolynomial σ ℤ), c ≠ 0 ∧ PrimitiveIntegerPolynomial g ∧ f = C c * g := by

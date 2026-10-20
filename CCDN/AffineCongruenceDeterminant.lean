@@ -3,7 +3,7 @@ module
 public import CCDN.SmoothCongruenceDeterminant
 public import CCDN.UnscaledHypersurfaceBadPrimes
 
-/-! Congruence-refined determinant estimates for actual affine zeros and
+/-! Congruence-refined determinant estimates for affine zeros and
 arbitrary bounded-degree polynomial evaluation columns. -/
 
 @[expose] public section

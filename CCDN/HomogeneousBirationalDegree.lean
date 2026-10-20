@@ -97,7 +97,7 @@ theorem filteredHilbertPolynomial_leadingCoeff_le_of_shift
       exact_mod_cast hle n)
   simpa only [hQlc] using hh
 
-/-- A nonzero conductor yields equality of actual Hilbert multiplicities
+/-- A nonzero conductor yields equality of Hilbert multiplicities
 for a homogeneous linear birational projection. -/
 theorem homogeneous_projection_leadingCoeff_eq
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]

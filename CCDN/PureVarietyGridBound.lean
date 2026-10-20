@@ -4,7 +4,7 @@ public import CCDN.PrimeIdealGridBound
 public import CCDN.PureComponentDegreeBudget
 
 /-! The exact pure-dimensional grid bound of CCDN Lemma 4.1.1.
-The actual minimal-prime components cover every point. Their constructed
+The minimal-prime components cover every point. Their constructed
 Hilbert multiplicities satisfy the additive degree budget, and the sharp
 prime grid bound applies to each component. -/
 
@@ -13,7 +13,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- A zero of an ideal belongs to one of its actual minimal-prime components,
+/-- A zero of an ideal belongs to one of its minimal-prime components,
 over an arbitrary coefficient field. -/
 theorem exists_minimalPrimeComponent_vanishing
     {K σ : Type*} [Field K] [Finite σ]

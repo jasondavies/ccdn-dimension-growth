@@ -3,7 +3,7 @@ module
 public import CCDN.PrimeComponentTranscendence
 public import CCDN.PolynomialSection
 
-/-! The elementary linear box bound for actual prime curves in affine
+/-! The elementary linear box bound for prime curves in affine
 three-space. A transcendental coordinate has fibers of size at most the
 affine Hilbert degree, and the integer box has only 2 floor(B)+1 values
 of that coordinate. No projection or point-counting hypothesis is supplied. -/
@@ -78,7 +78,7 @@ theorem curve_count_le_degree_mul_integer_interval
     simp only [he, Finset.card_empty]
     exact Nat.zero_le _
 
-/-- CCDN's elementary degree-times-box-side bound, for actual rational
+/-- CCDN's elementary degree-times-box-side bound, for rational
 prime curves in affine three-space. -/
 theorem curve_count_le_degree_mul_box_side
     (I : Ideal (CoordinatePolynomial 3)) [I.IsPrime]

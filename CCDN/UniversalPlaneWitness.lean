@@ -31,7 +31,7 @@ lemma universalPlanePolynomial_map {K L σ : Type*} [CommRing K] [CommRing L]
   rw [universalPlanePolynomial, universalPlaneMap_map, universalPlanePolynomial,
     bivariatePolynomialEquiv_map]
 
-/-- A geometrically irreducible equation yields an actual nonzero polynomial
+/-- A geometrically irreducible equation yields a nonzero polynomial
 in the full affine-plane parameter ring, of degree at most (2*d^2-1)*d.
 There are no smoothness or positioning hypotheses on the input equation. -/
 theorem exists_universalPlane_minor_degree

@@ -2,7 +2,7 @@ module
 
 public import CCDN.SingularPlaneChart
 
-/-! Positive singular multiplicity is derived from an actual nonzero equation
+/-! Positive singular multiplicity is derived from a nonzero equation
 vanishing at the origin; it is bounded by the equation's total degree. -/
 
 @[expose] public section

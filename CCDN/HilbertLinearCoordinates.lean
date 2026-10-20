@@ -5,7 +5,7 @@ public import CCDN.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 
 /-! Algebraically independent linear coordinates have cardinality at most
-the degree of the actual filtered Hilbert polynomial. -/
+the degree of the filtered Hilbert polynomial. -/
 
 @[expose] public section
 namespace CCDN

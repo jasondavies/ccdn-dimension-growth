@@ -140,7 +140,7 @@ lemma plane_degree_bound_of_log_bound {d M : ℕ} {B L A K : ℝ}
   push_cast
   ring
 
-/-- A degree exceeding the proved small-height threshold gives an actual
+/-- A degree exceeding the proved small-height threshold gives an
 integer homogeneous auxiliary polynomial. The sharp finite-field count is
 still required, explicitly, as in the determinant theorem. -/
 theorem plane_chart_exists_auxiliary_small_height

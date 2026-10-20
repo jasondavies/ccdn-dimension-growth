@@ -4,7 +4,7 @@ public import CCDN.FilteredComponentDegreeBudget
 public import CCDN.FilteredLinearGrowth
 public import CCDN.PrimeComponentTranscendence
 
-/-! An actual finite decomposition of a proper affine surface section into
+/-! A finite decomposition of a proper affine surface section into
 rational prime curves, with a proved additive degree budget. Components with
 no rational points are discarded before requiring positive curve degrees. -/
 
@@ -13,7 +13,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Every actual minimal-prime component has an eventual affine Hilbert
+/-- Every minimal-prime component has an eventual affine Hilbert
 degree. The slope is allowed to be zero until a rational point is exhibited. -/
 theorem polynomialSection_minimalPrime_degrees_exist
     (f g : CoordinatePolynomial 3) (hf : Irreducible f) (hfg : ¬ f ∣ g) :
@@ -33,7 +33,7 @@ theorem polynomialSection_minimalPrime_degrees_exist
   exact ⟨d, hd, polynomialSection_minimalPrime_curveDegree_sum_le f g hf hfg d hd⟩
 
 /-- A proper section in affine three-space is covered exactly by a finite
-set of actual rational prime curves. Their positive Hilbert degrees sum to
+set of rational prime curves. Their positive Hilbert degrees sum to
 at most the product of the two equation degrees. All components and degrees
 are constructed, including the case of an empty common zero set. -/
 theorem exists_completeIntersection_curve_components

@@ -3,7 +3,7 @@ module
 public import CCDN.HyperplaneSectionIdeal
 public import CCDN.EffectiveHyperplaneAvoidance
 
-/-! Effective avoidance for the actual homogeneous hyperplane intersection
+/-! Effective avoidance for the homogeneous hyperplane intersection
 ideal, including degree one and coincident hyperplanes. -/
 
 @[expose] public section
@@ -37,7 +37,7 @@ lemma hyperplaneSectionIdeal_isPrime_of_absolute_graph {K σ : Type*}
   exact Ideal.comap_isPrime _ _
 
 /-- The corrected degree bound in CCDN 4.3.7 for every positive degree,
-using primeness of the actual intersection ideal after algebraic closure.
+using primeness of the intersection ideal after algebraic closure.
 For degree one the detector is the constant one. -/
 theorem exists_integral_hyperplane_avoidance {n : ℕ}
     (f : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ)

@@ -97,7 +97,7 @@ theorem scaled_hypersurface_auxiliary_bound {n : ℕ}
   exact add_le_add (add_le_add hmain le_rfl) le_rfl
 
 /-- The logarithmic-height branch of the affine auxiliary bound, provided
-an actual scaling prime lies between B/A and B and avoids the constant term.
+a scaling prime lies between B/A and B and avoids the constant term.
 The constructed polynomial vanishes on every original integer zero in the box. -/
 theorem prime_scaled_affine_auxiliary_height {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)

@@ -2,7 +2,7 @@ module
 
 public import CCDN.BirationalCenterLocus
 
-/-! Actual fixed-dimensional linear subspaces as the quotient of independent
+/-! Fixed-dimensional linear subspaces as the quotient of independent
 center matrices by equality of row spans. The topology is explicitly the
 quotient topology; no identification with a Pluecker embedding is asserted. -/
 
@@ -54,7 +54,7 @@ lemma centerMatrixSpan_eq_iff {K : Type*} [Field K] {r n : ℕ}
   Subtype.ext_iff
 
 /-- An invariant open matrix condition descends to an open subset of the
-actual space of subspaces, with its quotient topology. -/
+space of subspaces, with its quotient topology. -/
 theorem center_subspace_image_isOpen
     {K : Type*} [Field K] {r n : ℕ}
     (S : Set (IndependentCenterMatrix K r n)) (hS : IsOpen S)

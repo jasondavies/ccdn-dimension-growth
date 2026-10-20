@@ -3,7 +3,7 @@ module
 public import CCDN.NumberFieldLatticeBox
 public import CCDN.NumberFieldShortBasis
 
-/-! Uniform finite-radius counts for the actual ring of integers and its
+/-! Uniform finite-radius counts for the ring of integers and its
 integer-translation classes. The required short basis is constructed,
 and every coefficient depends only on the degree. -/
 

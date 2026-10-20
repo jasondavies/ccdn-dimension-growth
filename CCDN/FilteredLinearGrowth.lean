@@ -5,7 +5,7 @@ public import CCDN.CoordinatePowerGeneration
 public import CCDN.PlaneProjectionDegree
 public import CCDN.BinomialSectionBound
 
-/-! An eventual linear upper bound gives an actual eventual linear Hilbert
+/-! An eventual linear upper bound gives an eventual linear Hilbert
 formula, with its slope bounded by the original coefficient. -/
 
 @[expose] public section

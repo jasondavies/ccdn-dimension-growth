@@ -114,7 +114,7 @@ lemma eulerFactorPair_outer_power_one_ne_zero (a b : ℕ) (ha : 0 < a) (hb : 0 <
   exact (smul_ne_zero hb0 hd0) hfst
 
 /-- The generic logarithmic pair is nonzero over its integral coefficient
-ring, proved by an actual rational specialization. -/
+ring, proved by a rational specialization. -/
 theorem genericEulerFactorPair_ne_zero (a b : ℕ) (ha : 0 < a) (hb : 0 < b) :
     eulerFactorPair a b (genericEulerFactorLeft a b) (genericEulerFactorRight a b) ≠ 0 := by
   intro hz

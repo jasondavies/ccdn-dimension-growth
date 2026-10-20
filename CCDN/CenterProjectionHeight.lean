@@ -93,7 +93,7 @@ lemma center_projection_source_exponent {m n r d : ℕ}
         d ^ (2 * r ^ 2) := by gcongr
     _ = _ := rfl
 
-/-- From bounded independent rows alone, construct the actual rational
+/-- From bounded independent rows alone, construct the rational
 projection and complementary projective (m+1)-space of Section 5.1. The
 exponent is exactly the exponent in (5-5); the integral matrix has the
 stronger cofactor bound of degree 2r, where r is the vector dimension of

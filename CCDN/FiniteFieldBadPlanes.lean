@@ -12,7 +12,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The actual bivariate restriction at a point of the full parameter space. -/
+/-- The bivariate restriction at a point of the full parameter space. -/
 def universalPlaneSection {K σ : Type*} [CommRing K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K) : Polynomial (Polynomial K) :=
   bivariateMap (eval v) (universalPlanePolynomial f)

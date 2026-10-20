@@ -4,9 +4,9 @@ public import CCDN.AffineNormalizationRank
 public import CCDN.FixedCoordinateGenericNormalization
 public import CCDN.UniversalHyperplaneNormalization
 
-/-! Exact affine normalization degree for actual independent linear
+/-! Exact affine normalization degree for independent linear
 coefficients, and for the named rational-function coefficient field.
-All fraction fields are actual fraction fields of the displayed affine
+All fraction fields are fraction fields of the displayed affine
 coordinate ring; no field-degree or generic-finiteness assumption remains. -/
 
 @[expose] public section

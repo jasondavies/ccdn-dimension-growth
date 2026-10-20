@@ -3,7 +3,7 @@ module
 public import CCDN.ParameterRecurrenceGrowth
 
 /-! Eventual generation of the affine degree filtration by a linear parameter
-forces the actual function-field extension to have the full Hilbert degree. -/
+forces the function-field extension to have the full Hilbert degree. -/
 
 @[expose] public section
 namespace CCDN

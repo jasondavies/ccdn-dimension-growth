@@ -34,7 +34,7 @@ theorem hypersurface_logarithmic_height_transfer {r d : ℕ} (hr : 0 < r) (hd : 
   exact (one_le_div hroot).mpr (dimension_root_le_degree hr hd)
 
 /-- CCDN Lemma 4.2.3 with an explicit dimension constant. The coefficient
-height is the actual maximum, and the bad-prime factor is the defined factor. -/
+height is the maximum, and the bad-prime factor is the defined factor. -/
 theorem hypersurface_badPrime_height_transfer {n d : ℕ}
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f ≠ 0)
     (hdegree : f.totalDegree = d) (hd : 0 < d)

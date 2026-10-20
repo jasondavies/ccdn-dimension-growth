@@ -2,7 +2,7 @@ module
 
 public import CCDN.FilteredHilbertPolynomial
 
-/-! The actual filtered Hilbert polynomial is unchanged by an invertible
+/-! The filtered Hilbert polynomial is unchanged by an invertible
 coordinate substitution preserving total degree in both directions. -/
 
 @[expose] public section

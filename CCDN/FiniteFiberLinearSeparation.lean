@@ -4,7 +4,7 @@ public import CCDN.BoundedDegreeNormalizationFiber
 public import CCDN.BoundedLinearSeparation
 public import CCDN.LinearNormalizationInfinite
 
-/-! Actual fibers of a linear normalization are finite. An additional
+/-! Fibers of a linear normalization are finite. An additional
 homogeneous linear form separates an outside point from the whole fiber. -/
 
 @[expose] public section

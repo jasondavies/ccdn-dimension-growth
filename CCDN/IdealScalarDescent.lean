@@ -86,7 +86,7 @@ theorem exists_coefficientLinearPolynomial_not_mem
   exact hφ hz
 
 /-- Low-degree separation descends from any algebraically closed extension
-over which both actual ideals stay prime. -/
+over which both ideals stay prime. -/
 theorem exists_low_degree_ideal_separator_of_geometrically_prime
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [IsAlgClosed L] {n : ℕ}
     (I J : Ideal (MvPolynomial (Fin n) K))

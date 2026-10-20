@@ -77,7 +77,7 @@ lemma projectivePlaneResidueMultiplicity_singular {p d : ℕ} [Fact p.Prime]
   exact singular_of_origin_order_ge_two _ _ hμ hp
 
 /-- Count singular classes in their three possible charts. The pivots and
-multiplicities here are those of the actual reduced projective curve. -/
+multiplicities here are those of the reduced projective curve. -/
 theorem projective_singular_residue_card_le {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f)) (hchar : d < p) :

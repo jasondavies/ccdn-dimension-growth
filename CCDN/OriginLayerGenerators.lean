@@ -2,7 +2,7 @@ module
 
 public import CCDN.SingularTangent
 
-/-! Homogeneous generators lifted from the actual origin-adic layers of a
+/-! Homogeneous generators lifted from the origin-adic layers of a
 plane equation, with the number at every weight bounded by its multiplicity. -/
 
 @[expose] public section
@@ -10,7 +10,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Module
 
-/-- A basis of the actual graded layer lifts to homogeneous polynomials and
+/-- A basis of the graded layer lifts to homogeneous polynomials and
 reduces every element of the ideal power modulo the equation and the next power. -/
 theorem exists_originLayer_generators {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (k : ℕ) :

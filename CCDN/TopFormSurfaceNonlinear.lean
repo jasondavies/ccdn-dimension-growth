@@ -4,7 +4,7 @@ public import CCDN.TopFormSurfaceComponents
 public import CCDN.SurfaceNonlinearCount
 public import CCDN.PolynomialPredicates
 
-/-! For an actual auxiliary section of a surface of degree at least sixteen,
+/-! For an auxiliary section of a surface of degree at least sixteen,
 all nonlinear components together contribute O(d^18 B) bounded integer points.
 Only the degree-one component union remains outside this estimate. -/
 

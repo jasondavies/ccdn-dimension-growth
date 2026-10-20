@@ -12,7 +12,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- A degree above the proved threshold yields an actual integer homogeneous
+/-- A degree above the proved threshold yields an integer homogeneous
 nonmultiple vanishing at all supplied bounded primitive points. -/
 theorem affine_chart_exists_auxiliary_small_height
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d M t : ℕ}

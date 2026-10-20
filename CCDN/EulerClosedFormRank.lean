@@ -104,7 +104,7 @@ theorem eulerClosedFormOperator_finrank_range {F : Type*} [Field F] [CharZero F]
     finrank_eulerPairSpace]
 
 /-- A nonzero constant outer leading coefficient is sufficient. Scalar
-normalization changes neither the actual domain nor injectivity. -/
+normalization changes neither the domain nor injectivity. -/
 theorem eulerClosedFormOperator_injective_of_constant_leading
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (k : ℕ) (f : F[X][X]) (hf : Irreducible f) (a : F) (ha : a ≠ 0)

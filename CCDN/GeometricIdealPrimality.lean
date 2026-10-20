@@ -27,7 +27,7 @@ lemma coefficientLinearPolynomial_eval_base_point
       (eval (fun j => algebraMap K L (x j)) f)
 
 /-- Geometric primeness over an algebraically closed base is automatic for
-an actual prime ideal; no extension-primality hypothesis is required. -/
+a prime ideal; no extension-primality hypothesis is required. -/
 theorem prime_ideal_scalar_extension_of_isAlgClosed
     {K L : Type*} [Field K] [IsAlgClosed K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :

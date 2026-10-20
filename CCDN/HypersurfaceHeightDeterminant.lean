@@ -3,7 +3,7 @@ module
 public import CCDN.HypersurfaceDeterminantRank
 public import CCDN.HypersurfaceBadPrimeCoordinates
 
-/-! The actual higher-dimensional bad-prime set and its coefficient height
+/-! The higher-dimensional bad-prime set and its coefficient height
 control discharge all reduction hypotheses in the global determinant bound. -/
 
 @[expose] public section
@@ -48,7 +48,7 @@ def hypersurfaceHeightDeterminantError (n : ℕ) : ℝ :=
     (n + 1 : ℝ) * (Real.log (hypersurfaceHeightConstant (n + 3)) + 2 * mertensError + 1)
 
 /-- The full higher-dimensional logarithmic determinant lower bound, with
-all local counts and the actual geometric bad-prime charge discharged. -/
+all local counts and the geometric bad-prime charge discharged. -/
 theorem hypersurface_determinant_log_lower_height
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K]
     {n s N d M : ℕ} (hs : 0 < s)

@@ -3,7 +3,7 @@ module
 public import CCDN.PlaneMultiplicity
 public import CCDN.SmoothReduction
 
-/-! All reduced points, their actual positive multiplicities, and the resulting
+/-! All reduced points, their positive multiplicities, and the resulting
 local determinant lower bound. No residue partition or multiplicity choice is
 supplied by the caller. The sharp finite-field total-multiplicity estimate is a
 separate geometric obligation. -/
@@ -35,7 +35,7 @@ lemma planeResidueLift_zero {f : MvPolynomial (Fin 2) ℤ} {p : ℕ} [NeZero p]
     eval₂ (Int.castRingHom (ZMod p)) (fun j => (planeResidueLift a j : ZMod p)) f = 0 := by
   simpa only [cast_planeResidueLift] using a.property
 
-/-- Multiplicity is selected from the actual translated reduced equation. -/
+/-- Multiplicity is selected from the translated reduced equation. -/
 def planeResidueMultiplicity (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fact p.Prime]
     (hf : map (Int.castRingHom (ZMod p)) f ≠ 0) (a : PlaneResidue f p) : ℕ :=
   Classical.choose (exists_reduction_multiplicity f (planeResidueLift a) hf
@@ -52,7 +52,7 @@ theorem planeResidueMultiplicity_spec (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [
   Classical.choose_spec (exists_reduction_multiplicity f (planeResidueLift a) hf
     (planeResidueLift_zero a))
 
-/-- The actual finite-field total multiplicity appearing in the denominator
+/-- The finite-field total multiplicity appearing in the denominator
 of the local determinant exponent. -/
 def planeTotalMultiplicity (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fact p.Prime]
     (hf : map (Int.castRingHom (ZMod p)) f ≠ 0) : ℕ :=
@@ -69,7 +69,7 @@ lemma planeTotalMultiplicity_bounds (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fa
            Finset.sum_le_sum fun a _ => (planeResidueMultiplicity_spec f p hf a).2.1
          _ = _ := by simp
 
-/-- Actual integral zeros supply all residue labels and multiplicities. The
+/-- Integral zeros supply all residue labels and multiplicities. The
 sum of the local exponents has the full quadratic leading coefficient, with
 no smoothness, local factorization, or supplied residue-partition hypothesis. -/
 theorem singular_reduction_minorGcd {s N p : ℕ} [Fact p.Prime] (hs : 0 < s)

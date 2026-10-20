@@ -3,7 +3,7 @@ module
 public import CCDN.HilbertTranscendenceBasis
 public import CCDN.HilbertLinearCoordinates
 
-/-! Integral linear projections preserve actual Hilbert dimension and
+/-! Integral linear projections preserve Hilbert dimension and
 do not increase its multiplicity. -/
 
 @[expose] public section

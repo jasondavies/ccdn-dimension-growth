@@ -103,7 +103,7 @@ theorem hypersurface_determinant_log_lower_degree_four_congruence {n s N d M : �
     exact (hlocal p hmem).choose_spec.2
 
 
-/-- The higher-dimensional rank-cutoff form of Proposition 3.2.6 for actual
+/-- The higher-dimensional rank-cutoff form of Proposition 3.2.6 for
 maximal minors and common-degree homogeneous evaluation columns. -/
 theorem hypersurface_determinant_log_lower_at_rank_congruence {n s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)

@@ -111,7 +111,7 @@ private lemma eight_pow_two_thirds (k : ℕ) :
   rw [← Real.rpow_natCast_mul (by norm_num), mul_comm (k : ℝ),
     Real.rpow_mul_natCast (by norm_num), he]
 
-/-- A uniform reciprocal-height sum for distinct actual rational projective
+/-- A uniform reciprocal-height sum for distinct rational projective
 zeros. The constant precedes the equation, its degree and the finite set. -/
 theorem projective_plane_reciprocal_height_sum :
     ∃ C : ℝ, 0 < C ∧

@@ -104,7 +104,7 @@ theorem derivativeResultant_map {R S : Type*} [CommRing R] [CommRing S]
   rw [derivativeResultant, Polynomial.derivative_map, Polynomial.resultant_map_map]
   rfl
 
-/-- The finite coefficient family detects nonvanishing of the actual
+/-- The finite coefficient family detects nonvanishing of the
 specialized fixed-size resultant, over any coefficient-ring extension. -/
 theorem derivativeResultantCoefficientFamily_nonvanishing_iff
     {R S σ τ : Type*} [CommRing R] [CommRing S]
@@ -154,7 +154,7 @@ theorem derivativeResultant_ne_zero_iff_separable
   simp only [hf0, ne_eq, not_false_eq_true, true_or, true_and, not_not]
 
 /-- After embedding the specialized parameter ring in a characteristic-zero
-field, the same coefficient family detects separability. Only the actual
+field, the same coefficient family detects separability. Only the
 degree of the specialized univariate polynomial is required. -/
 theorem derivativeResultantCoefficientFamily_separable_iff
     {R S L σ τ : Type*} [CommRing R] [CommRing S] [Field L] [CharZero L]

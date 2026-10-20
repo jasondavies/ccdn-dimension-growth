@@ -4,7 +4,7 @@ public import CCDN.ClassGroupBoundedGenerators
 public import CCDN.PlaneGridHeight
 public import Mathlib.LinearAlgebra.Charpoly.Basic
 
-/-! Actual integral norm polynomials and the two signed plane equations
+/-! Integral norm polynomials and the two signed plane equations
 needed to count square-norm generators. The norm polynomial retains the full
 number-field degree even when its parameter lies in a proper subfield. -/
 

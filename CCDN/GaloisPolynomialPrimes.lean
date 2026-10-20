@@ -6,7 +6,7 @@ public import Mathlib.FieldTheory.Galois.Infinite
 public import Mathlib.RingTheory.IntegralClosure.GoingDown
 public import Mathlib.RingTheory.MvPolynomial.Basic
 
-/-! Coefficient Galois actions and conjugacy of actual polynomial primes.
+/-! Coefficient Galois actions and conjugacy of polynomial primes.
 The invariant-ring assertion is proved coefficient by coefficient. Going
 down identifies the contractions of minimal primes of an extended ideal. -/
 
@@ -129,7 +129,7 @@ lemma eval_coefficient_galois_at_base_point (γ : Gal(K/k))
   rw [he] at h
   exact h.symm
 
-/-- Every base-field zero lies on every actual minimal component after
+/-- Every base-field zero lies on every minimal component after
 a finite Galois extension. No component cover or conjugacy is assumed. -/
 theorem finite_galois_base_point_on_every_component
     [FiniteDimensional k K] [IsGalois k K]

@@ -5,7 +5,7 @@ public import CCDN.AffineLineLeading
 public import CCDN.TopFormIrreducibility
 public import CCDN.ProjectiveZeroLocus
 
-/-! Directions of actual rational affine lines on a surface. Lines with two
+/-! Directions of rational affine lines on a surface. Lines with two
 bounded integer points have a bounded projective direction and a spacing
 bound expressed using its representative-independent projective height. -/
 
@@ -60,7 +60,7 @@ lemma rationalAffineLine_eq_projective_rep {n : ℕ}
   rw [heq]
   exact rationalAffineLine_smul_direction a p.rep c.ne_zero
 
-/-- A line with more than one bounded integer point has an actual projective
+/-- A line with more than one bounded integer point has a projective
 direction on the leading form. Its integer point count is bounded using the
 height of that projective point, independently of all chosen representatives. -/
 theorem surface_line_projective_direction {n : ℕ}

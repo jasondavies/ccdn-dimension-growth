@@ -6,7 +6,7 @@ public import CCDN.CurveBoxDegreeBound
 
 /-! CCDN Corollary 4.1.4 for irreducible affine hypersurfaces in three
 variables. Splitting of the full equation over any field extension gives
-an actual auxiliary equation of degree at most d. The prime curve
+an auxiliary equation of degree at most d. The prime curve
 components of the resulting section have total degree at most d², giving
 the sharp elementary bound d²(2B+1). This makes no assumption about the
 highest homogeneous component. -/
@@ -137,7 +137,7 @@ theorem nonabsolute_surface_count_le_three_degree_sq_mul
     _ = _ := by ring
 
 /-- The exact bound for an integer equation, with rational irreducibility
-and splitting after extension expressed on its actual coefficient images. -/
+and splitting after extension expressed on its coefficient images. -/
 theorem nonabsolute_integer_surface_count_le
     {K : Type*} [Field K] [Algebra ℚ K]
     (f : MvPolynomial (Fin 3) ℤ)

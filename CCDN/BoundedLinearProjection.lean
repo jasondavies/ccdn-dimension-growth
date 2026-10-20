@@ -179,7 +179,7 @@ lemma rationalPoint_integer_mulVec {m n : ℕ}
   funext i
   simp [rationalPoint, Matrix.mulVec, dotProduct]
 
-/-- The height estimate for the actual projective linear image of any
+/-- The height estimate for the projective linear image of any
 point outside the matrix kernel. The input height is its intrinsic
 multiplicative projective height. -/
 theorem projective_linear_map_height {m n : ℕ}

@@ -48,7 +48,7 @@ theorem infinity_chart_card_le_degree {K L σ ι : Type*} [Field K] [Field L]
   simpa only [finrank_top, Module.finrank_pi, Module.finrank_self, Finset.sum_const,
     Finset.card_univ, smul_eq_mul, mul_one] using hb
 
-/-- Each normalized infinity chart is an actual finite set with at most d
+/-- Each normalized infinity chart is a finite set with at most d
 points, not merely a bound for already finite subsets. -/
 theorem exists_finite_infinity_chart {K L σ : Type*} [Field K] [Field L]
     [Algebra K L] [Fintype σ] (I : Ideal (MvPolynomial σ K)) (d : ℕ)

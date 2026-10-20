@@ -4,7 +4,7 @@ public import CCDN.ProjectiveProjectionGrowth
 public import CCDN.LinearNormalizationFiberCount
 public import CCDN.PolynomialPredicates
 
-/-! Dimension growth for actual homogeneous prime ideals of positive
+/-! Dimension growth for homogeneous prime ideals of positive
 projective dimension. Normalization, primitive projection, exact image degree,
 finite fibers and height control are all constructed in the proof. -/
 
@@ -14,7 +14,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The general projective-variety bound, with dimension and codimension
-displayed separately. The hypotheses use the actual Hilbert polynomial of
+displayed separately. The hypotheses use the Hilbert polynomial of
 the coordinate ring and contain no supplied projection or counting theorem. -/
 theorem projective_variety_dimension_growth (m k : ℕ) :
     ∃ C : ℝ, 0 < C ∧

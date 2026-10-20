@@ -13,7 +13,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The actual bounded finite birational hypersurface projection, now with
+/-- The bounded finite birational hypersurface projection, now with
 full row rank in every degree whenever the ambient vector dimension allows
 m+2 independent rows. All original bounds and normalization data remain. -/
 theorem exists_independent_bounded_birational_hypersurface_projection

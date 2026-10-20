@@ -6,7 +6,7 @@ public import CCDN.BirationalProjectionHeight
 public import CCDN.PolynomialPredicates
 
 /-! The exact degree factor in the projective projection count.
-An actual finite birational integer projection preserves the Hilbert degree,
+A finite birational integer projection preserves the Hilbert degree,
 and every fiber is bounded by d through its integral linear normalization. -/
 
 @[expose] public section

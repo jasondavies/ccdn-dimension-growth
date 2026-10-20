@@ -3,7 +3,7 @@ module
 public import CCDN.StandardMonomials
 public import CCDN.OrthantMultiplicity
 
-/-! Existence, uniqueness and positive integral multiplicity of the actual
+/-! Existence, uniqueness and positive integral multiplicity of the
 filtered Hilbert polynomial of a polynomial quotient, in arbitrary finite
 dimension. These results construct the polynomial from standard exponents. -/
 
@@ -47,7 +47,7 @@ lemma filteredCoordinateSpace_finrank_eq_vector_card {K σ : Type*} [Field K]
   exact Finsupp.equivFunOnFinite.subtypeEquiv (fun a => by
     simp [boundedStandardExponents, standardExponentVectors, Finsupp.sum_fintype])
 
-/-- Actual eventual polynomiality of the filtered coordinate-space dimension. -/
+/-- Eventual polynomiality of the filtered coordinate-space dimension. -/
 theorem filteredCoordinateSpace_eventually_polynomial {K σ : Type*} [Field K]
     [Fintype σ] [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) :
     ∃ P : Polynomial ℚ, ∃ N : ℕ, ∀ n ≥ N,
@@ -67,7 +67,7 @@ lemma polynomial_eq_of_eventual_nat_eval_eq (P Q : Polynomial ℚ)
   rintro x ⟨n, hn, rfl⟩
   exact hN n hn
 
-/-- The uniquely determined actual filtered Hilbert polynomial. -/
+/-- The uniquely determined filtered Hilbert polynomial. -/
 def filteredHilbertPolynomial {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) : Polynomial ℚ :=
   (filteredCoordinateSpace_eventually_polynomial I).choose

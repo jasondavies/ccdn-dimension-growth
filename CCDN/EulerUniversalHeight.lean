@@ -32,7 +32,7 @@ lemma factorial_mul_degree_pow_le (d r : ℕ) (hr : r ≤ d ^ 2) :
       congr 1
       omega
 
-/-- The actual integer coefficient forms have the exact coefficient-sum
+/-- The integer coefficient forms have the exact coefficient-sum
 bound in the plane case, with no unspecified constant. -/
 theorem universalEulerMinor_coefficientL1_le (k : ℕ)
     (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)

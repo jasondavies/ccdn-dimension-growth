@@ -51,7 +51,7 @@ theorem exists_bounded_moment_nonvanishing {K ι : Type*} [Field K] [CharZero K]
   simpa only [P, Polynomial.ofFn_eq_sum_monomial, Polynomial.eval_finsetSum,
     Polynomial.eval_monomial] using hi
 
-/-- Avoiding infinity gives the actual eventual recurrence of the original
+/-- Avoiding infinity gives the eventual recurrence of the original
 coordinate filtration. -/
 theorem filtration_recurrence_of_infinity_avoidance {K L σ : Type*}
     [Field K] [Field L] [Algebra K L] [IsAlgClosed L] [Fintype σ]

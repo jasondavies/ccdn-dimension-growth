@@ -3,7 +3,7 @@ module
 public import CCDN.IdealAdicLayerQuotient
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
-/-! Localization at a maximal ideal preserves every actual adic layer.
+/-! Localization at a maximal ideal preserves every adic layer.
 The comparison is induced by the standard isomorphism of finite adic
 quotients, and identifies the images of the corresponding ideal powers. -/
 

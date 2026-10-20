@@ -5,7 +5,7 @@ public import CCDN.GridAffineLowerBound
 public import CCDN.GridProjectiveLowerBound
 public import CCDN.PolynomialPredicates
 
-/-! Actual integer hypersurfaces with absolutely irreducible top forms and
+/-! Integer hypersurfaces with absolutely irreducible top forms and
 large affine and projective point counts. These constructions apply to the
 hypotheses of CCDN Theorem 4 as well as to projective dimension growth. -/
 
@@ -75,7 +75,7 @@ lemma grid_box_power_lower_bounds {d n B : ℕ} (hn : 2 ≤ n) (hB : 1 ≤ B) (h
       _ ≤ _ := hlarge
 
 /-- For d≥4 and n≥3, an integer equation satisfying the absolute top-form
-hypothesis has at least d²B^(n−2)/64 affine points. Its actual homogeneous
+hypothesis has at least d²B^(n−2)/64 affine points. Its homogeneous
 closure simultaneously has at least dB^(n−1)/8 projective points. -/
 theorem exists_topform_hypersurface_lower_bounds (d n : ℕ) (hd : 4 ≤ d) (hn : 3 ≤ n) :
     ∃ f : MvPolynomial (Fin n) ℤ, ∃ B : ℕ,

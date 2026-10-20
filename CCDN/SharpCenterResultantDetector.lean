@@ -73,7 +73,7 @@ theorem exists_sharp_center_resultant_forms
     (chowRowResultant_ne_zero_iff_irreducible JL hJL hJLdim
       (centerMinorProjectionMatrix A e) (map φ F) hzero i d hd hrow)
 
-/-- A finite family over K detects every actual disjoint birational center
+/-- A finite family over K detects every disjoint birational center
 over the algebraically closed extension L. -/
 theorem exists_geometric_sharp_center_detector
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [IsAlgClosed L]

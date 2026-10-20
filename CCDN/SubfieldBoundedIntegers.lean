@@ -3,7 +3,7 @@ module
 public import CCDN.SeparatedIntegerPacking
 public import Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification
 
-/-! Bounded algebraic integers lying in an actual intermediate field
+/-! Bounded algebraic integers lying in an intermediate field
 inject into the bounded integers of that field. Every archimedean place
 of the subfield is obtained by restricting an ambient place. -/
 

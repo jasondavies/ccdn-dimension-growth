@@ -2,7 +2,7 @@ module
 
 public import CCDN.PrincipalSectionGridBound
 
-/-! A strict containment of affine prime ideals strictly lowers the actual
+/-! A strict containment of affine prime ideals strictly lowers the
 Hilbert dimension. The proof uses a genuine polynomial in their difference. -/
 
 @[expose] public section

@@ -3,7 +3,7 @@ module
 public import CCDN.OriginTruncationGenerators
 public import CCDN.ModularPolynomialLift
 
-/-! Lift singular local generators from the actual reduction modulo p. The
+/-! Lift singular local generators from the reduction modulo p. The
 remaining error is an explicit multiple of p, with a separate high-order term. -/
 
 @[expose] public section
@@ -52,7 +52,7 @@ theorem lift_origin_truncation_generators {σ : Type*} {p : ℕ} [Fact p.Prime]
   linear_combination hw
 
 
-/-- Integer generators in arbitrary dimension, with the actual residue-layer
+/-- Integer generators in arbitrary dimension, with the residue-layer
 Hilbert function as their weight profile. -/
 theorem exists_integer_hypersurface_generators {p n : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 1)) ℤ) :
@@ -69,7 +69,7 @@ theorem exists_integer_hypersurface_generators {p n : ℕ} [Fact p.Prime]
   obtain ⟨G, hG, hrep⟩ := lift_origin_truncation_generators f r g hg hs
   exact ⟨r, G, hr, hG, hrep⟩
 
-/-- The local generators are actual homogeneous integer polynomials. Their
+/-- The local generators are homogeneous integer polynomials. Their
 uniform reduction formula separates the defining equation, the origin-adic
 error, and the p-divisible error. -/
 theorem exists_integer_origin_generators {p μ : ℕ} [Fact p.Prime]

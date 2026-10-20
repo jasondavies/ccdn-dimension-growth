@@ -19,7 +19,7 @@ def centerMinorProjection {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (x : Fin n → K) (c : Fin (r + 1) ↪ Fin n) : K :=
   (Matrix.submatrix (Fin.cons x (fun i j => A i j)) id c).det
 
-/-- Laplace expansion gives the actual linear coordinate of the center map. -/
+/-- Laplace expansion gives the linear coordinate of the center map. -/
 def centerMinorProjectionForm {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (c : Fin (r + 1) ↪ Fin n) : MvPolynomial (Fin n) K :=
   ∑ j : Fin (r + 1), C ((-1 : K) ^ (j : ℕ) * (A.submatrix id (j.succAboveEmb.trans c)).det) * X (c j)
@@ -46,7 +46,7 @@ lemma centerMinorProjectionForm_eval {K : Type*} [Field K] {r n : ℕ}
   change (-1 : K) ^ (j : ℕ) * _ * x (c j) = (-1 : K) ^ (j : ℕ) * x (c j) * _
   ring
 
-/-- Vanishing of every actual projection coordinate is exactly membership in
+/-- Vanishing of every projection coordinate is exactly membership in
 the center; no generic-position or matrix-rank condition is supplied beyond
 independence of the rows defining that center. -/
 theorem centerMinorProjection_eq_zero_iff {K : Type*} [Field K] {r n : ℕ}
@@ -69,7 +69,7 @@ theorem centerMinorProjection_eq_zero_iff {K : Type*} [Field K] {r n : ℕ}
       LinearIndependent.of_comp (LinearMap.funLeft K K c) hi
     exact (linearIndependent_finCons.mp hh).2 hx
 
-/-- One coefficient, as a degree-one polynomial in actual Plücker variables. -/
+/-- One coefficient, as a degree-one polynomial in Plücker variables. -/
 def centerPluckerCoefficient {K : Type*} [Field K] {r n : ℕ}
     (c : Fin (r + 1) ↪ Fin n) (k : Fin n) : MvPolynomial (Fin r ↪ Fin n) K :=
   ∑ j : Fin (r + 1), if c j = k then C ((-1 : K) ^ (j : ℕ)) * X (j.succAboveEmb.trans c) else 0

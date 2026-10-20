@@ -4,7 +4,7 @@ public import CCDN.HypersurfacePositionedProjectiveAuxiliary
 public import CCDN.DistinguishedCoefficientOrder
 
 /-! Source-shaped versions of CCDN Lemmas 3.3.2 and 3.3.3. Positioning is
-assumed for an actual pure-power coefficient, including the last variable.
+assumed for a pure-power coefficient, including the last variable.
 The constant `C` is any positive real number, as in the paper. -/
 
 @[expose] public section

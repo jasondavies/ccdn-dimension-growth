@@ -8,7 +8,7 @@ public import CCDN.HilbertScalarExtension
 public import CCDN.IntegralProjectionHilbert
 public import CCDN.HilbertFullDimension
 
-/-! Universal hyperplanes give an actual finite linear normalization of
+/-! Universal hyperplanes give a finite linear normalization of
 the projective closure cone. Finiteness and independence are proved from
 the source ideal and algebraic independence of their coefficient tuple. -/
 

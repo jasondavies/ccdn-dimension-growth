@@ -7,7 +7,7 @@ public import Mathlib.GroupTheory.Index
 /-! The group-theoretic part of quadratic class-group descent. An
 involution on an elementary abelian two-group has at least the square
 root of the group's cardinality in fixed points. This is applied to the
-actual action of a field involution on two-torsion ideal classes; no
+action of a field involution on two-torsion ideal classes; no
 arithmetic estimate on those fixed classes is assumed or asserted. -/
 
 @[expose] public section
@@ -58,7 +58,7 @@ theorem classGroup_mulEquiv_involutive
 
 variable (K : Type*) [Field K]
 
-/-- The actual action of a field automorphism on two-torsion ideal classes. -/
+/-- The action of a field automorphism on two-torsion ideal classes. -/
 def classGroupTwoTorsionAction (σ : K ≃+* K) :
     classGroupTwoTorsion K →* classGroupTwoTorsion K where
   toFun c := ⟨ClassGroup.mulEquiv (RingOfIntegers.mapRingEquiv σ) c, by
@@ -90,7 +90,7 @@ theorem mem_fixedClassGroupTwoTorsion (σ : K ≃+* K) (c : classGroupTwoTorsion
 variable [NumberField K]
 
 /-- The factor of two in the quadratic rank estimate is proved here for
-the actual class-group action. Bounding the fixed subgroup arithmetically
+the class-group action. Bounding the fixed subgroup arithmetically
 is a separate genus-theory step. -/
 theorem classGroupTwoTorsionCard_le_fixed_square (σ : K ≃+* K)
     (hσ : Function.Involutive σ) :

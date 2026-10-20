@@ -2,7 +2,7 @@ module
 
 public import CCDN.ChowIncidenceIdeal
 
-/-! The constructed elimination ideal is the vanishing ideal of actual
+/-! The constructed elimination ideal is the vanishing ideal of
 hyperplane tuples having a common point on the chosen affine chart. -/
 
 @[expose] public section
@@ -29,7 +29,7 @@ lemma chowIncidentCoefficients_reconstruct {K : Type*} [Field K] {n r : ℕ}
   simp only [Fin.cons_zero, Fin.cons_succ, mul_one] at hh
   exact (eq_neg_of_add_eq_zero_left hh).symm
 
-/-- Hyperplane tuples whose intersection contains an actual point of the
+/-- Hyperplane tuples whose intersection contains a point of the
 affine variety represented in the projective chart x₀=1. -/
 def chowIncidenceLocus {K : Type*} [Field K] {n : ℕ} (r : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) : Set (Fin r × Fin (n + 1) → K) :=

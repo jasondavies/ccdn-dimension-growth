@@ -4,9 +4,9 @@ public import CCDN.CenterNoetherForms
 public import CCDN.CenterChowCriterion
 public import CCDN.PolynomialPredicates
 
-/-! A finite detector on actual Plücker coordinates, constructed from the
+/-! A finite detector on Plücker coordinates, constructed from the
 source variety. It detects nonzero irreducible Chow restrictions, forces
-center disjointness, and compares actual source and image Chow degrees.
+center disjointness, and compares source and image Chow degrees.
 Identifying these degrees with Hilbert multiplicities is a separate bridge. -/
 
 @[expose] public section

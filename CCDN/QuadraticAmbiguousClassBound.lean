@@ -4,7 +4,7 @@ public import CCDN.QuadraticObstructionFibers
 public import CCDN.FractionalIdealConjugation
 public import Mathlib.GroupTheory.Index
 
-/-! A cardinal bound for actual fixed two-torsion classes in terms of
+/-! A cardinal bound for fixed two-torsion classes in terms of
 strongly ambiguous classes and the genuine unit-norm quotient. This is
 the obstruction-fiber part of genus theory; the ramified-ideal estimate
 for the strongly ambiguous subgroup is a separate step. -/
@@ -37,7 +37,7 @@ theorem card_le_subgroup_mul_obstruction
 variable (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K]
   [Algebra F K]
 
-/-- Actual ideal, scalar and base-unit data for one ambiguous class. -/
+/-- Ideal, scalar and base-unit data for one ambiguous class. -/
 structure AmbiguousClassWitness (σ : K ≃ₐ[F] K) (c : ClassGroup (𝓞 K)) where
   ideal : (FractionalIdeal (𝓞 K)⁰ K)ˣ
   scalar : Kˣ
@@ -70,7 +70,7 @@ def chosenAmbiguousClassWitness (σ : K ≃ₐ[F] K)
   Classical.choice (nonempty_ambiguousClassWitness F K σ c.val.val
     ((mem_fixedClassGroupTwoTorsion K σ.toRingEquiv c.val).mp c.property))
 
-/-- A fixed choice of the actual unit-norm obstruction on fixed
+/-- A fixed choice of the unit-norm obstruction on fixed
 two-torsion classes. The cardinal argument only uses equality of values. -/
 def fixedClassUnitObstruction (σ : K ≃ₐ[F] K) :
     fixedClassGroupTwoTorsion K σ.toRingEquiv → quadraticUnitNormQuotient F K :=
@@ -88,7 +88,7 @@ theorem fixedClassUnitObstruction_eq_implies
     w.ideal z.ideal w.scalar z.scalar w.baseUnit z.baseUnit
     w.scalar_eq z.scalar_eq w.norm_eq z.norm_eq hce
 
-/-- The two-torsion subgroup of the actual strongly ambiguous subgroup. -/
+/-- The two-torsion subgroup of the strongly ambiguous subgroup. -/
 abbrev stronglyAmbiguousTwoTorsion (σ : K ≃ₐ[F] K) :=
   (powMonoidHom 2 : stronglyAmbiguousClassGroup F K σ →*
     stronglyAmbiguousClassGroup F K σ).ker
@@ -126,7 +126,7 @@ theorem fixedClassGroupTwoTorsion_card_le_degree
   (fixedClassGroupTwoTorsion_card_le F K hd σ hσ).trans
     (Nat.mul_le_mul_left _ (quadraticUnitNormQuotient_card_le_degree F K hd))
 
-/-- The actual quadratic two-torsion count is reduced to the strongly
+/-- The quadratic two-torsion count is reduced to the strongly
 ambiguous subgroup, with a proved degree-only unit factor. -/
 theorem classGroupTwoTorsionCard_le_stronglyAmbiguous
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1) :

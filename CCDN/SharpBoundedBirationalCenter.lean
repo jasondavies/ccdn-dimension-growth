@@ -5,7 +5,7 @@ public import CCDN.SharpCenterBounds
 public import CCDN.ZeroColumnMinorSpecialization
 public import CCDN.PolynomialPredicates
 
-/-! Actual integer good centers with the quadratic row bound from the
+/-! Integer good centers with the quadratic row bound from the
 row-resultant detector. Dimension zero is included using its proved degree
 one. All source ideals, center witnesses and nonvanishing are constructed. -/
 
@@ -16,7 +16,7 @@ open MvPolynomial Matrix
 
 def sharpCenterMinorBound (r m d : ℕ) : ℕ := r.factorial * ((m + 1) ^ 2 * d ^ 2) ^ r
 
-/-- The actual geometric good center has bounded integer independent rows.
+/-- The geometric good center has bounded integer independent rows.
 Both integrality and birationality concern its literal minor projection. -/
 theorem exists_sharp_bounded_integer_birational_center
     {n m : ℕ} (hmn : m + 2 ≤ n + 1)

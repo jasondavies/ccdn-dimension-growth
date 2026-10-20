@@ -3,7 +3,7 @@ module
 public import CCDN.UniversalPlaneEvaluation
 
 /-! Identically zero sections are bounded separately using their three
-actual defining points. This gives three powers of the field size in the
+defining points. This gives three powers of the field size in the
 denominator, even with degenerate parameterizations included. -/
 
 @[expose] public section
@@ -12,7 +12,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The usual degree-times-q^(m-1) bound, for arbitrary nonempty finite
-coordinate types and actual affine zeros. -/
+coordinate types and affine zeros. -/
 lemma finite_field_polynomial_zeros_card {K τ : Type*} [Field K] [Fintype K]
     [Fintype τ] [Nonempty τ] (f : MvPolynomial τ K) (hf : f ≠ 0) :
     Nat.card {x : τ → K // eval x f = 0} ≤

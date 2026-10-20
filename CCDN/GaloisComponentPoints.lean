@@ -4,7 +4,7 @@ public import CCDN.GaloisPolynomialPrimes
 public import CCDN.FiniteGaloisIdealDefinition
 public import CCDN.AlgebraicHilbertDimension
 
-/-! Base-field points lie on every actual geometric component. Finite
+/-! Base-field points lie on every geometric component. Finite
 Galois conjugacy first covers every prime over the original prime ideal;
 finite fields of definition then remove the finite-extension restriction. -/
 
@@ -43,7 +43,7 @@ theorem finite_galois_base_point_on_prime_over
   exact γ.injective (hz.trans (map_zero γ).symm)
 
 /-- The finite-dimensional restriction is removed using a constructed
-finite Galois field of definition for the actual prime ideal. -/
+finite Galois field of definition for the prime ideal. -/
 theorem galois_base_point_on_prime_over
     (k K : Type*) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) k)) [I.IsPrime]

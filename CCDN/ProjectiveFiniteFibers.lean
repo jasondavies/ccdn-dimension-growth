@@ -3,7 +3,7 @@ module
 public import CCDN.ProjectiveSection
 
 /-! Finite affine fibers of a linear map exclude a projective base point.
-Projective fibers inject into actual affine fibers after choosing a fixed
+Projective fibers inject into affine fibers after choosing a fixed
 nonzero representative in the target. -/
 
 @[expose] public section

@@ -4,7 +4,7 @@ public import CCDN.PrimeOpenVanishing
 public import CCDN.ChowPivotParametrization
 
 /-! The affine incidence elimination ideal is the vanishing ideal of the
-actual full projective hyperplane incidence locus, including points at
+full projective hyperplane incidence locus, including points at
 infinity. This asserts equality of vanishing ideals, not closedness of the
 incidence image. -/
 
@@ -49,7 +49,7 @@ lemma eval_chowPivot_substitution {K : Type*} [Field K] {n r : ℕ}
   funext q
   exact chowPivotPolynomials_eval j v x q
 
-/-- Clearing a pivot coordinate gives an actual equation in the closure
+/-- Clearing a pivot coordinate gives an equation in the closure
 ideal. Density is proved using its nonzero standard coordinate and primeness. -/
 theorem chowPivot_substitution_mem_projectiveClosure
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}

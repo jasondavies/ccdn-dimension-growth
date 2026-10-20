@@ -48,7 +48,7 @@ open scoped NumberField
 variable (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K] [Algebra F K]
 
 /-- For number fields, the concrete scalar comparison has field norm
-equal to an actual base-field unit. -/
+equal to a base-field unit. -/
 theorem ambiguous_numberField_ideal_norm_unit
     (σ : K ≃ₐ[F] K) (I : (Ideal (𝓞 K))⁰)
     (hI : ClassGroup.mulEquiv (RingOfIntegers.mapAlgEquiv σ).toRingEquiv

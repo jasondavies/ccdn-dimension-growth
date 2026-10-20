@@ -6,8 +6,8 @@ public import CCDN.HomogeneousChartIrreducible
 public import CCDN.PolynomialPredicates
 
 /-! Salberger's surface cover on the standard projective affine chart.
-Every returned curve is an actual homogeneous geometrically prime ideal;
-its degree is the actual projective Hilbert degree, proved by closure. -/
+Every returned curve is a homogeneous geometrically prime ideal;
+its degree is the projective Hilbert degree, proved by closure. -/
 
 @[expose] public section
 namespace CCDN
@@ -30,7 +30,7 @@ lemma projectiveClosure_union_chart {n : ℕ}
     exact Set.mem_iUnion₂.mpr ⟨projectiveClosureIdeal I,Finset.mem_image.mpr ⟨I,hI,rfl⟩,
       (projectiveClosureIdeal_chart_point I a).mpr haI⟩
 
-/-- The paper's projective surface and actual projective curves, with the
+/-- The paper's projective surface and projective curves, with the
 integer-point count taken in x₀=1. Constants are chosen before the equation
 and the box, and the hyperplane x₀=0 is required to intersect properly. -/
 theorem projective_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :

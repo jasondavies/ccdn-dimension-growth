@@ -3,7 +3,7 @@ module
 public import CCDN.FilteredHilbertPolynomial
 public import CCDN.PlaneHilbert
 
-/-! The actual filtered Hilbert polynomial of a principal hypersurface.
+/-! The filtered Hilbert polynomial of a principal hypersurface.
 Its dimension and multiplicity follow from the exact finite-dimensional
 principal-ideal rank identity, without geometric hypotheses. -/
 
@@ -60,7 +60,7 @@ lemma principal_preHilbert_sum_top_coeff (n d : ℕ) :
   simp only [Polynomial.finsetSum_coeff, Polynomial.coeff_preHilbertPoly_self,
     sum_const, card_range, nsmul_eq_mul, div_eq_mul_inv]
 
-/-- A nonconstant principal equation in n+1 variables has actual filtered
+/-- A nonconstant principal equation in n+1 variables has filtered
 Hilbert dimension n and multiplicity equal to its total degree. -/
 theorem principal_filteredHilbertPolynomial_degree_leadingCoeff
     {K : Type*} [Field K] {n : ℕ}

@@ -5,7 +5,7 @@ public import CCDN.HomogeneousZeroDimensionField
 public import CCDN.HomogeneousFiniteProjectionDegree
 public import CCDN.PolynomialPredicates
 
-/-! A finite homogeneous linear projection preserves the actual Hilbert
+/-! A finite homogeneous linear projection preserves the Hilbert
 multiplicity if and only if its projected coordinates generate the source
 function field. This includes the zero-dimensional affine cone. -/
 
@@ -14,7 +14,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Equality of source and actual image multiplicities forces birationality.
+/-- Equality of source and image multiplicities forces birationality.
 The image field, a finite linear normalization, and its rank are constructed
 internally; there is no dimension, normalization, or rank assumption. -/
 theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
@@ -46,7 +46,7 @@ theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
   nlinarith
 
 /-- Degree preservation and function-field birationality are equivalent for
-an actual finite homogeneous linear projection in characteristic zero. -/
+a finite homogeneous linear projection in characteristic zero. -/
 theorem homogeneous_finite_projection_leadingCoeff_eq_iff_birational
     {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n s : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

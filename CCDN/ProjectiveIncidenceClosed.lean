@@ -5,7 +5,7 @@ public import CCDN.IrrelevantPowerCertificate
 public import CCDN.ProjectiveChowIncidence
 public import CCDN.PolynomialPredicates
 
-/-! Closedness of the actual projective hyperplane incidence image, proved by
+/-! Closedness of the projective hyperplane incidence image, proved by
 finite homogeneous coefficient matrices. Empty fibers produce a determinant
 which is nonzero there and vanishes at every tuple with a projective intersection.
 No closed-image or geometric projection hypothesis is supplied. -/
@@ -42,7 +42,7 @@ lemma projectiveChowIncidenceLocus_iff_cone {K : Type*} [Field K] {n r : ℕ}
         (incidenceLinearForm_homogeneous U i) p.rep_nonzero hx p.mk_rep).mpr
         ((incidenceLinearForm_eval U i x).trans (hrel i))
 
-/-- Every tuple outside the actual projective incidence image has a polynomial
+/-- Every tuple outside the projective incidence image has a polynomial
 separator which is normalized to one there. -/
 theorem exists_polynomial_separator_of_not_projective_incidence
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
@@ -79,7 +79,7 @@ theorem exists_polynomial_separator_of_not_projective_incidence
   exact hD V ((projectiveChowIncidenceLocus_iff_cone J hJ V).mp hV)
 
 /-- The incidence image is closed: every point annihilating its vanishing ideal
-is represented by an actual nonzero intersection vector. -/
+is represented by a nonzero intersection vector. -/
 theorem projectiveChowIncidenceLocus_zeroLocus_vanishingIdeal
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -98,7 +98,7 @@ theorem projectiveChowIncidenceLocus_zeroLocus_vanishingIdeal
     exact hf U hU
 
 /-- Exact projective incidence, including infinity points, is the zero locus
-of the actual affine elimination ideal. -/
+of the affine elimination ideal. -/
 theorem chowIncidenceIdeal_zeroLocus_eq_projective_incidence
     {K : Type*} [Field K] [IsAlgClosed K] {n : ℕ}
     (r : ℕ) (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :

@@ -6,7 +6,7 @@ public import CCDN.QuotientAdicLayer
 
 /-! The local ring of a hypersurface at the origin and its exact Hilbert
 function. Both the coordinate-ring quotient and the stalk localization
-are actual constructions; their adic-layer identifications are proved. -/
+are constructions; their adic-layer identifications are proved. -/
 
 @[expose] public section
 namespace CCDN
@@ -47,13 +47,13 @@ lemma hypersurfaceOriginIdeal_isMaximal (f : MvPolynomial σ K)
   rintro _ rfl
   exact hf
 
-/-- The affine coordinate ring's actual origin-adic layer is the polynomial
+/-- The affine coordinate ring's origin-adic layer is the polynomial
 truncation layer used to compute its Hilbert function. -/
 def hypersurfaceCoordinateLayerEquiv (f : MvPolynomial σ K) (k : ℕ) :
     idealPowerLayer K (hypersurfaceOriginIdeal f) k ≃ₗ[K] originLayer f k :=
   quotientAdicLayerEquiv (Ideal.span {f}) (idealOfVars σ K) k
 
-/-- The stalk of the hypersurface at its origin, expressed as the actual
+/-- The stalk of the hypersurface at its origin, expressed as the
 localization of its coordinate ring at the origin maximal ideal. -/
 abbrev HypersurfaceOriginStalk (f : MvPolynomial σ K)
     [Fact (f ∈ idealOfVars σ K)] :=
@@ -67,7 +67,7 @@ variable (f : MvPolynomial σ K) [Fact (f ∈ idealOfVars σ K)]
 local instance : (hypersurfaceOriginIdeal f).IsMaximal :=
   hypersurfaceOriginIdeal_isMaximal f Fact.out
 
-/-- The actual stalk layer is linearly equivalent to the explicitly
+/-- The stalk layer is linearly equivalent to the explicitly
 computed origin truncation layer. -/
 def hypersurfaceStalkLayerEquiv (k : ℕ) :
     idealPowerLayer K (A := HypersurfaceOriginStalk f)
@@ -84,7 +84,7 @@ theorem hypersurfaceStalkLayer_finrank (k : ℕ) :
 
 end Stalk
 
-/-- The exact binomial formula of CCDN Lemma 2.1 for the actual local ring,
+/-- The exact binomial formula of CCDN Lemma 2.1 for the local ring,
 with no tangent-cone or localization-isomorphism premise. -/
 theorem hypersurfaceOriginStalk_hilbert_eq {n μ k : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) [Fact (f ∈ idealOfVars (Fin (n + 1)) K)]

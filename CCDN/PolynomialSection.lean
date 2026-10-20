@@ -7,7 +7,7 @@ module
 
 public import CCDN.PointSeparation
 
-/-! A sharp affine curve intersection bound from the actual Hilbert function.
+/-! A sharp affine curve intersection bound from the Hilbert function.
 Bounds intersections with arbitrary section polynomials. No projective intersection theorem or point-counting axiom is used. -/
 
 @[expose] public section

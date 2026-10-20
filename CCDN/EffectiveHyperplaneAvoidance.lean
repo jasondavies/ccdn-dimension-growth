@@ -4,7 +4,7 @@ public import CCDN.UniversalHyperplaneRestriction
 public import CCDN.GoodHyperplaneReindex
 public import CCDN.UniversalNoetherForms
 
-/-! Effective hyperplane avoidance from the actual universal Noether forms.
+/-! Effective hyperplane avoidance from the universal Noether forms.
 The polynomial is nonzero by a constructed geometrically good section.
 It is homogeneous of degree d(d²−1)+1 and vanishes on every bad graph
 section, as well as on the omitted chart. -/

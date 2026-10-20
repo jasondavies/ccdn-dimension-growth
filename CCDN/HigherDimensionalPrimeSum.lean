@@ -31,7 +31,7 @@ lemma log_lower_of_general_local_exponents (P : Finset ℕ) (e : ℕ → ℕ)
   exact hsum.trans hlog
 
 /-- A lower cutoff costs log(L); perturbing p by C sqrt(p) costs O(C/sqrt(L)).
-All selected prime-power divisors are multiplied into the actual integer D. -/
+All selected prime-power divisors are multiplied into the integer D. -/
 theorem general_determinant_log_lower_cutoff {x L C A E : ℝ}
     (hx : 1 ≤ x) (hL : 1 ≤ L) (hC : 0 ≤ C) (hA : 0 ≤ A) (hE : 0 ≤ E)
     (B : Finset ℕ) (mass : ℕ → ℝ) (e : ℕ → ℕ) {D : ℤ} (hD : 0 < D)

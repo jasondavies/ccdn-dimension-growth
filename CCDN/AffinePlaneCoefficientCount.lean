@@ -36,7 +36,7 @@ theorem degree_mul_affineAuxiliaryDegreeExpression (d : ℕ) (B L b : ℝ) :
   rw [hmin]
   ring_nf
 
-/-- Actual integral points satisfy the complete coefficient-sensitive
+/-- Integral points satisfy the complete coefficient-sensitive
 bound, with the original leading homogeneous coefficient height and a
 single absolute constant. No geometric irreducibility is assumed. -/
 theorem affine_plane_coefficient_count

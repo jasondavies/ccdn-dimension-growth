@@ -2,7 +2,7 @@ module
 
 public import CCDN.QuotientAdicLayer
 
-/-! Algebra equivalences preserve actual ideal-adic layers. -/
+/-! Algebra equivalences preserve ideal-adic layers. -/
 
 @[expose] public section
 namespace CCDN

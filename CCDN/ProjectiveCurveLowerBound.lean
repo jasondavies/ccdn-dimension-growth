@@ -3,7 +3,7 @@ module
 public import CCDN.GridProjectiveLowerBound
 public import CCDN.GridLowerBoundNumerics
 
-/-! CCDN Proposition 5 with its exact constant 1/5, for an actual absolutely
+/-! CCDN Proposition 5 with its exact constant 1/5, for an absolutely
 irreducible projective plane equation. The principal ideal is prime and its
 projective Hilbert degree is the prescribed degree. -/
 
@@ -36,7 +36,7 @@ theorem projective_plane_lower_bound (d : ℕ) (hd : 0 < d) :
     nlinarith [mul_nonneg hd0 (show 0 ≤ 3 - (d : ℝ) by linarith)]
 
 /-- The lower-bound equation defines an integral homogeneous plane curve
-whose degree is also certified by the actual projective Hilbert function. -/
+whose degree is also certified by the projective Hilbert function. -/
 theorem projective_integral_curve_lower_bound (d : ℕ) (hd : 0 < d) :
     ∃ F : MvPolynomial (Fin 3) ℚ, ∃ B : ℕ, 1 ≤ B ∧
       F.IsHomogeneous d ∧ F.totalDegree = d ∧

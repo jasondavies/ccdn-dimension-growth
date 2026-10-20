@@ -64,7 +64,7 @@ theorem plane_relation_pderiv_ne_zero {K A : Type*} [Field K] [CharZero K]
   exact hf (by rw [← hg, hg0, map_zero])
 
 /-- The derivative is a proper degree-(d-1) section when f generates the
-actual projection kernel. This is the proposed common reconstruction cut. -/
+projection kernel. This is the proposed common reconstruction cut. -/
 theorem projection_derivative_proper {K τ : Type*} [Field K] [CharZero K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) (a : Fin 2 → MvPolynomial τ K)
     (ha : ∀ i, (a i).totalDegree ≤ 1)

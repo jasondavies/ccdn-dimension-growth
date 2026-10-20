@@ -92,7 +92,7 @@ theorem closure_polynomial_coordinates_generate
   obtain ⟨p,q,_,rfl⟩ := IsFractionRing.div_surjective P x
   exact E.div_mem (hpoly p) (hpoly q)
 
-/-- The actual cone embedding realizes any fraction field of A[t] as a
+/-- The cone embedding realizes any fraction field of A[t] as a
 fraction field of the closure's homogeneous coordinate ring. -/
 theorem closure_polynomial_field_isFractionRing
     {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ}

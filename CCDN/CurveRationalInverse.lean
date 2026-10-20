@@ -11,7 +11,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Generation of the actual field gives reconstruction identities modulo the
+/-- Generation of the field gives reconstruction identities modulo the
 original ideal, with a denominator that does not vanish identically. -/
 theorem exists_curve_reconstruction_identities {K F σ τ : Type*}
     [Field K] [Field F] [Algebra K F] [Fintype τ] [DecidableEq τ]

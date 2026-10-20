@@ -36,7 +36,7 @@ theorem scaled_auxiliary_rational_not_dvd {n M : ℕ}
   exact hunit.mul_left_dvd.mpr hdiv
 
 /-- Once a homogeneous auxiliary nonmultiple has been constructed on the
-prime-scaled model, its degree gives the actual original-plane point bound. -/
+prime-scaled model, its degree gives the original-plane point bound. -/
 theorem scaled_plane_points_card_le_auxiliary_degree {M t : ℕ}
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom ℚ) f))

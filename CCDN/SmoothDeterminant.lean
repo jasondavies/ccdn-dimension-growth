@@ -14,7 +14,7 @@ noncomputable section
 open Finset Real
 
 /-- Global logarithmic bound for the gcd of the maximal evaluation minors at
-smooth reductions. The number of residue classes is the actual number of
+smooth reductions. The number of residue classes is the number of
 smooth points of the reduced equation. -/
 theorem smooth_determinant_log_lower {s N : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin 2) ℤ) (g : Fin N → MvPolynomial (Fin 2) ℤ)

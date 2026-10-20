@@ -3,7 +3,7 @@ module
 public import CCDN.HomogeneousHilbert
 public import CCDN.HomogeneousEvaluation
 
-/-! The homogeneous Hilbert count bounds actual evaluation-matrix ranks.
+/-! The homogeneous Hilbert count bounds evaluation-matrix ranks.
 The deficit includes every degree-allowed multiple of the defining equation. -/
 
 @[expose] public section

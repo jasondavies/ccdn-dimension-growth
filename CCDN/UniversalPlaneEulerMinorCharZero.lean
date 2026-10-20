@@ -30,7 +30,7 @@ lemma eulerClosedForm_minor_smul {R : Type*} [CommRing R]
   change (u • (eulerClosedFormCoefficientMatrix k f).submatrix a c).det = _
   rw [Matrix.det_smul, Fintype.card_fin]
 
-/-- The actual universal affine-plane family has a nonzero determinant of
+/-- The universal affine-plane family has a nonzero determinant of
 the precise Noether order. Smooth coordinates and geometric irreducibility
 of their generic section are constructed, not supplied. -/
 theorem exists_universalPlane_euler_minor_charZero

@@ -4,7 +4,7 @@ public import CCDN.UniversalPlaneFamily
 
 /-! Degree in the affine-plane parameters of every coefficient of the
 universal restriction. This degree is bounded by the original equation's
-actual total degree. -/
+total degree. -/
 
 @[expose] public section
 namespace CCDN

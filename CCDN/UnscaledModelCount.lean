@@ -110,7 +110,7 @@ theorem unscaled_plane_finite_count
         ring
       _ ≤ _ := le_max_right _ _
 
-/-- A sufficiently large actual coefficient forces the large-height branch
+/-- A sufficiently large coefficient forces the large-height branch
 and gives O(d^4), without any prime-selection assumption. -/
 theorem unscaled_plane_finite_count_large_coefficient
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {t : ℕ}

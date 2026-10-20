@@ -4,7 +4,7 @@ public import CCDN.ProjectiveClosureProjection
 public import CCDN.ProjectiveClosureDegree
 public import CCDN.ReconstructionFunctionField
 
-/-! A linear affine projection generating the actual function field also
+/-! A linear affine projection generating the function field also
 generates the function field of the cone over its projective closure when
 the homogenizing coordinate is retained. Rational reconstruction on the
 standard chart proves this without an assumed compactification map. -/

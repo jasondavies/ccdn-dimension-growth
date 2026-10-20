@@ -3,7 +3,7 @@ module
 public import CCDN.CenterSubspaceQuotient
 public import CCDN.CenterMinorProjection
 
-/-! The actual Plücker point of a fixed-dimensional center. Coordinates are
+/-! The Plücker point of a fixed-dimensional center. Coordinates are
 indexed by all ordered column injections, so signed redundant coordinates
 are retained. No assertion about the dimension of the projective target is
 needed. Equality of Plücker points is exactly equality of row spans. -/

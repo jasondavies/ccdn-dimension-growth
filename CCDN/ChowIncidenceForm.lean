@@ -4,7 +4,7 @@ public import CCDN.ChowIncidencePrincipal
 public import CCDN.PrincipalWeightedHomogeneous
 public import CCDN.ChowIncidenceBaseChange
 
-/-! Constructed incidence equations with separate homogeneity and actual
+/-! Constructed incidence equations with separate homogeneity and
 geometric irreducibility. Their exact block degree is not assumed or claimed. -/
 
 @[expose] public section

@@ -5,7 +5,7 @@ public import CCDN.UniversalPlaneWitnessCharZero
 public import CCDN.UniversalPlaneEvaluation
 public import CCDN.IntegerPolynomialAvoidance
 
-/-! A nonzero universal witness certifies a geometrically irreducible actual
+/-! A nonzero universal witness certifies a geometrically irreducible
  plane section in characteristic zero. Integer specialization can simultaneously
  avoid any additional nonzero polynomial condition on the plane parameters. -/
 

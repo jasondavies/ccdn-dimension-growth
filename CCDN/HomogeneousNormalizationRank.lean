@@ -3,7 +3,7 @@ module
 public import CCDN.HomogeneousNormalizationEquation
 public import CCDN.PolynomialPredicates
 
-/-! The field degree of an actual homogeneous finite linear normalization
+/-! The field degree of a homogeneous finite linear normalization
 is exactly the Hilbert multiplicity. The equation, monicity up to a unit,
 and primitive element are constructed rather than supplied. -/
 
@@ -31,7 +31,7 @@ lemma parameter_primitive_adjoin_top_of_tuple
     · exact Or.inr rfl
     · exact Or.inl ⟨j, rfl⟩
 
-/-- Exact normalization rank over its actual parameter subfield, for any
+/-- Exact normalization rank over its parameter subfield, for any
 chosen fraction field of the homogeneous prime coordinate ring. -/
 theorem homogeneous_normalization_functionField_finrank
     {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n m : ℕ}

@@ -2,7 +2,7 @@ module
 
 public import CCDN.BirationalCenterDensity
 
-/-! Actual disjoint birational centers form a dense open locus even after
+/-! Disjoint birational centers form a dense open locus even after
 requiring the center to lie in X0=0. The witness is constructed from the
 affine variety; ambient density alone is not used for this restriction. -/
 

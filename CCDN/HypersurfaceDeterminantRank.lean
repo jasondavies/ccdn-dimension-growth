@@ -42,7 +42,7 @@ lemma hypersurface_determinant_rank_identity (n s d : ℕ) (hs : 0 < s) (charge 
   field_simp
   ring
 
-/-- The higher-dimensional rank-cutoff form of Proposition 3.2.6 for actual
+/-- The higher-dimensional rank-cutoff form of Proposition 3.2.6 for
 maximal minors and common-degree homogeneous evaluation columns. -/
 theorem hypersurface_determinant_log_lower_at_rank {n s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)

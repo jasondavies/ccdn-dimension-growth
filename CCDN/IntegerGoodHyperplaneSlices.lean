@@ -3,7 +3,7 @@ module
 public import CCDN.BoundedGoodHyperplane
 public import CCDN.AffineHyperplaneSlice
 
-/-! Actual integer equations for every parallel level of a constructed good
+/-! Integer equations for every parallel level of a constructed good
 hyperplane. Degrees and geometric irreducibility of the leading forms are
 preserved, and deleting the solved coordinate does not enlarge the box. -/
 
@@ -128,7 +128,7 @@ theorem exists_integer_hyperplane_slice_models {n : ℕ}
 
 /-- A bounded good hyperplane and integer equations for all its parallel
 slices. The leading form of every slice is absolutely irreducible of the
-original full degree, and actual integer zeros map by coordinate deletion. -/
+original full degree, and integer zeros map by coordinate deletion. -/
 theorem exists_bounded_good_integer_hyperplane_slices {n : ℕ}
     (f : MvPolynomial (Option (Fin (3 + n))) ℤ)
     (hir : Irreducible (map (Int.castRingHom Qbar)

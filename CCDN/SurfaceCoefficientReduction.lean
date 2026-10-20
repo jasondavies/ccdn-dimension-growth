@@ -5,7 +5,7 @@ public import CCDN.UnscaledHypersurfaceAuxiliary
 
 /-! Coefficients of a primitive surface equation can be restricted to
 polynomial height in the box radius. The complementary case already has
-a linear point bound from an actual degree-at-most-d auxiliary. -/
+a linear point bound from a degree-at-most-d auxiliary. -/
 
 @[expose] public section
 namespace CCDN

@@ -4,7 +4,7 @@ public import CCDN.ProjectiveChowIncidence
 public import CCDN.PolynomialPredicates
 
 /-! Passing between nonzero vectors on a homogeneous affine cone and
-actual projective points preserves hyperplane incidence. -/
+projective points preserves hyperplane incidence. -/
 
 @[expose] public section
 namespace CCDN

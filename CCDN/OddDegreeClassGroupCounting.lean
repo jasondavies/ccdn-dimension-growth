@@ -3,7 +3,7 @@ module
 public import CCDN.NumberFieldLatticeBox
 public import CCDN.OddDegreeNormCurveCount
 
-/-! The odd-degree class-group counting step uses the actual finite
+/-! The odd-degree class-group counting step uses the finite
 translation classes and their two signed norm curves. The curve equation
 retains its full odd degree, including when the translating generator
 belongs to a proper subfield. -/
@@ -87,7 +87,7 @@ theorem boundedSquareNormIntegers_odd_count
           Real.sqrt B := Finset.sum_le_sum (fun q _ ↦ hpair q)
     _ = _ := by simp; ring
 
-/-- The algebraic and curve-counting reduction combined with the actual
+/-- The algebraic and curve-counting reduction combined with the
 finite lattice packing. Only the short integral basis is still an input. -/
 theorem boundedSquareNormIntegers_odd_count_of_relative_short_basis
     {ι : Type*} [Fintype ι]

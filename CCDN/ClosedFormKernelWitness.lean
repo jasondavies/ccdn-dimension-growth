@@ -3,7 +3,7 @@ module
 public import CCDN.BivariateCoefficientMatrix
 public import CCDN.BivariateFactorForms
 
-/-! Reconstruct bounded polynomial closed forms inside the actual matrix
+/-! Reconstruct bounded polynomial closed forms inside the matrix
 kernel. Two independent forms force the rank drop used by the integer minor. -/
 
 @[expose] public section
@@ -42,7 +42,7 @@ theorem bivariateGridPolynomial_reconstruct {R : Type*} [CommRing R]
     · rw [bivariateGridPolynomial_coeff_zero d _ i j (Or.inr (by omega)), hf i j (Or.inr (by omega))]
   · rw [bivariateGridPolynomial_coeff_zero d _ i j (Or.inl (by omega)), hf i j (Or.inl (by omega))]
 
-/-- Every pair supported on the grid comes from an actual coefficient vector. -/
+/-- Every pair supported on the grid comes from a coefficient vector. -/
 theorem exists_closedFormPair_of_grid {R : Type*} [CommRing R]
     (d : ℕ) (u : R[X][X] × R[X][X]) (hp : InBivariateGrid d u.1)
     (hq : InBivariateGrid d u.2) :
@@ -63,7 +63,7 @@ lemma closedFormOperator_gradient {F : Type*} [Field F] (f : F[X][X]) :
   ring
 
 /-- Two polynomial solutions, one not a scalar multiple of the other, give
-an actual rank drop of at least two. -/
+a rank drop of at least two. -/
 theorem closedForm_rank_drop_of_two_forms {F : Type*} [Field F]
     (d : ℕ) (f : F[X][X]) (u w : F[X][X] × F[X][X])
     (hu₁ : InBivariateGrid d u.1) (hu₂ : InBivariateGrid d u.2)

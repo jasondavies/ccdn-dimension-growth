@@ -3,7 +3,7 @@ module
 public import CCDN.SharpPluckerComplementEquations
 public import CCDN.FixedCoordinatePluckerTopology
 
-/-! Sharp equations for the complement of the actual good-center locus at
+/-! Sharp equations for the complement of the good-center locus at
 infinity of an affine source, including geometric coefficient extensions. -/
 
 @[expose] public section

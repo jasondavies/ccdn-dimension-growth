@@ -3,7 +3,7 @@ module
 public import CCDN.AmbientNoetherVanishing
 public import CCDN.UniversalPlaneEulerMinorCharZero
 
-/-! Characteristic-zero nonvanishing of the actual ambient integer
+/-! Characteristic-zero nonvanishing of the ambient integer
 coefficient forms, descended from the algebraic closure. -/
 
 @[expose] public section

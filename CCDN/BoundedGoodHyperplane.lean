@@ -17,7 +17,7 @@ local notation "K" => AlgebraicClosure ℚ
 
 def goodHyperplaneHeight (d : ℕ) : ℕ := 6 * (2 * d ^ 3 + 3) ^ 3
 
-/-- In at least four variables there is an actual hyperplane
+/-- In at least four variables there is a hyperplane
 `D*x₀ = ∑ aᵢ*xᵢ` whose restriction is geometrically irreducible of full
 degree. Its integer normal has height polynomial in the degree and is
 independent of the coefficient height of the original equation. -/

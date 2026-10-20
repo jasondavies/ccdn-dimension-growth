@@ -60,7 +60,7 @@ theorem genericPlanePolynomial_irreducible {K σ : Type*} [Field K]
       (genericPlaneStretch_irreducible f hf hd hm)
 
 /-- Localizing the slope parameters preserves the ordinary irreducibility of
-the actual generic plane equation. -/
+the generic plane equation. -/
 theorem genericPlanePolynomial_irreducible_fraction_slopes
     {K F σ : Type*} [Field K] [Field F]
     [Algebra (MvPolynomial σ K) F] [IsFractionRing (MvPolynomial σ K) F]

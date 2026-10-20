@@ -5,7 +5,7 @@ public import Mathlib.FieldTheory.Minpoly.Finite
 public import Mathlib.Algebra.Polynomial.Roots
 public import Mathlib.Data.Fintype.Pi
 
-/-! Uniform counts for actual coordinate tuples obtained from integral
+/-! Uniform counts for coordinate tuples obtained from integral
 algebra homomorphisms. A normal base ring bounds every integral generator's
 minimal polynomial by the degree of the fraction-field extension. -/
 
@@ -54,7 +54,7 @@ theorem integral_minpoly_natDegree_le_fraction_finrank
     ← minpoly.isIntegrallyClosed_eq_field_fractions F E ha]
   exact minpoly.natDegree_le (algebraMap A E a)
 
-/-- A polynomial degree bound for every finite set of actual specialization
+/-- A polynomial degree bound for every finite set of specialization
 tuples. A finite-fiber estimate is a conclusion, not an input premise. -/
 theorem integral_coordinate_tuple_count_le_finrank_pow
     (R A F E : Type*) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]

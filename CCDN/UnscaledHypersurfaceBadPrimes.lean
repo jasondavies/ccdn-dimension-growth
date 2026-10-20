@@ -93,7 +93,7 @@ lemma hypersurfaceBadReduction_unscaledHomogenize_iff {n : ℕ}
   rw [hchart] at hir' hdeg
   exact hbad.2.elim (fun h => h hdeg) (fun h => h hir')
 
-/-- Inclusion of the actual geometric bad-prime sets gives monotonicity of
+/-- Inclusion of the geometric bad-prime sets gives monotonicity of
  the corresponding factors, even across different numbers of variables. -/
 theorem hypersurfaceBadPrimeFactor_mono_of_badReduction_imp {n m : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (g : MvPolynomial (Fin (m + 1)) ℤ)
@@ -140,7 +140,7 @@ theorem hypersurfaceBadPrimeFactor_unscaledHomogenize_le {n : ℕ}
   · exact (unscaledHomogenize_absolute_irreducible_iff f hf).mp
   · exact hypersurfaceBadReduction_unscaledHomogenize_imp f hf
 
-/-- In degrees at least two the two actual factors agree exactly. The degree
+/-- In degrees at least two the two factors agree exactly. The degree
  restriction excludes linear reductions that become the homogenizing variable. -/
 theorem hypersurfaceBadPrimeFactor_unscaledHomogenize_eq {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f ≠ 0) (hd : 2 ≤ f.totalDegree) :

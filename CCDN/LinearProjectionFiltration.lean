@@ -30,7 +30,7 @@ lemma aeval_totalDegree_le {K σ τ : Type*} [Field K] [Fintype σ]
       rw [← Finset.sum_mul, Finsupp.sum_fintype _ _ (by simp), Nat.mul_comm]
     _ ≤ _ := Nat.mul_le_mul_left m (le_totalDegree he)
 
-/-- The actual map from projection coordinates to the original coordinate ring. -/
+/-- The map from projection coordinates to the original coordinate ring. -/
 def projectionCoordinateMap {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial τ K)) (a : σ → MvPolynomial τ K) :
     MvPolynomial σ K →ₐ[K] (MvPolynomial τ K ⧸ I) :=

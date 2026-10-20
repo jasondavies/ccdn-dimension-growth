@@ -71,7 +71,7 @@ theorem birationalMatrixCenterLocus_dense
   change eval x.val (centerMinorPolynomial G) ≠ 0 at hx
   rwa [eval_centerMinorPolynomial] at hx
 
-/-- Both conclusions concern the entire actual good-center locus. -/
+/-- Both conclusions concern the entire good-center locus. -/
 theorem birationalMatrixCenterLocus_dense_open
     {n m s : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]

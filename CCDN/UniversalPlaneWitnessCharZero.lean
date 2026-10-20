@@ -4,7 +4,7 @@ public import CCDN.GenericPlaneMinorCharZero
 public import CCDN.UniversalPlaneBadWitness
 
 /-! Characteristic-zero nonvanishing of the universal witness and its descent
-to an actual integer polynomial for a geometrically irreducible equation. -/
+to an integer polynomial for a geometrically irreducible equation. -/
 
 @[expose] public section
 namespace CCDN
@@ -44,7 +44,7 @@ lemma universalPlaneLeading_ne_zero_charZero
   apply hdir
   rw [← universalPlaneLeading_specialize a b 0, hz, map_zero]
 
-/-- An actual nonzero integer polynomial in the full parameter space,
+/-- A nonzero integer polynomial in the full parameter space,
 constructed for every geometrically irreducible integer equation. -/
 theorem exists_integer_universalPlane_badWitness
     {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]

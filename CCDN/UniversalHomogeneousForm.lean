@@ -68,7 +68,7 @@ def homogeneousCoefficientSpecialization {R σ : Type*} [CommRing R] [Fintype σ
     (d : ℕ) (f : MvPolynomial σ R) : MvPolynomial (Sym σ d) ℤ →+* R :=
   eval₂Hom (Int.castRingHom R) (homogeneousCoefficientData d f)
 
-/-- The coefficient variables specialize to the actual homogeneous equation,
+/-- The coefficient variables specialize to the homogeneous equation,
 over every commutative coefficient ring. -/
 theorem universalHomogeneousForm_specialize {R σ : Type*} [CommRing R]
     [Fintype σ] [DecidableEq σ] (d : ℕ)

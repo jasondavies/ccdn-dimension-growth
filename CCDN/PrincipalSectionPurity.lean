@@ -6,7 +6,7 @@ public import CCDN.PrincipalHilbertPolynomial
 public import CCDN.FilteredPrimeDecomposition
 
 /-! Principal sections of affine prime varieties are pure dimensional.
-A linear normalization is constructed from the actual Hilbert dimension.
+A linear normalization is constructed from the Hilbert dimension.
 Going down contracts each section component to a height-one prime in the
 polynomial normalization ring; its principal quotient has dimension one less. -/
 

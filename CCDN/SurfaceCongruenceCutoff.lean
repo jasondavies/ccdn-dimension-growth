@@ -217,7 +217,7 @@ theorem surface_congruence_degree_selection {d : ℕ} (hd : 0 < d)
     linarith
   exact surface_congruence_gap_of_log_rank hd hsN hK hB hH hQ hheight hroot hrank
 
-/-- The smooth residue classes have an actual proper auxiliary of degree
+/-- The smooth residue classes have a proper auxiliary of degree
 O_d,K((B^(1/√d)/exp Q + 1)(1 + log B + Q)). -/
 theorem exists_surface_congruence_auxiliary
     (f : MvPolynomial (Fin 3) ℤ)

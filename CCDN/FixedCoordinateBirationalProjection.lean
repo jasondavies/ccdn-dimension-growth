@@ -6,7 +6,7 @@ public import CCDN.ProjectiveClosureHilbertPolynomial
 public import CCDN.ProjectiveClosureProjection
 public import CCDN.HilbertFullDimension
 
-/-! A finite birational linear projection of the actual projective closure
+/-! A finite birational linear projection of the projective closure
 that retains the homogenizing coordinate. The tuple is independent even
 in degree one and in affine dimension zero. -/
 

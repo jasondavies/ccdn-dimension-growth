@@ -5,7 +5,7 @@ public import CCDN.AffineLineLeading
 
 /-! A direction where the highest homogeneous component is nonzero gives full
 outer degree after the explicit affine coordinate change. Its leading
-coefficient is the actual scalar obtained by evaluating that component. -/
+coefficient is the scalar obtained by evaluating that component. -/
 
 @[expose] public section
 namespace CCDN

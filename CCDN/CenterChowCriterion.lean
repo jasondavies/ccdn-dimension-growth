@@ -4,10 +4,10 @@ public import CCDN.UniversalCenterChowRestriction
 public import CCDN.ChowProjectionCriterion
 public import CCDN.PolynomialPredicates
 
-/-! The actual Chow restriction for centers represented by independent rows.
+/-! The Chow restriction for centers represented by independent rows.
 A source equation and its universal Plücker coefficient family are constructed
 before the center is selected. Nonzero specialization detects disjointness;
-for disjoint centers it is a scalar power of the actual image's equation.
+for disjoint centers it is a scalar power of the image's equation.
 The identification of Chow degree with geometric degree is a separate step. -/
 
 @[expose] public section
@@ -16,7 +16,7 @@ noncomputable section
 open MvPolynomial Matrix
 
 /-- Source Chow data, minor enumeration, coefficient homogeneity and the
-actual geometric restriction criterion are constructed from the source ideal.
+geometric restriction criterion are constructed from the source ideal.
 Neither an image equation, a chart, nor an equality of zero loci is supplied. -/
 theorem exists_center_chow_restriction
     {K : Type*} [Field K] [IsAlgClosed K] {n m r : ℕ}

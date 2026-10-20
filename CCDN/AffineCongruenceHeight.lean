@@ -5,7 +5,7 @@ public import CCDN.CongruenceBadPrimeCharge
 public import CCDN.UnscaledHypersurfaceAuxiliary
 
 /-! The affine congruence determinant bound with all bad-prime charges
-controlled by the actual equation's coefficient height and congruence modulus. -/
+controlled by the equation's coefficient height and congruence modulus. -/
 
 @[expose] public section
 namespace CCDN

@@ -2,7 +2,7 @@ module
 
 public import CCDN.QuadraticInvariantIdeals
 
-/-! Factorization of actual invariant integral ideals in a quadratic
+/-! Factorization of invariant integral ideals in a quadratic
 extension. The only prime factors left after extending a base ideal are
 ramified primes; repeated ramified factors can be absorbed in pairs. -/
 
@@ -160,7 +160,7 @@ theorem quadratic_ramified_multiset_parity
         ac_rfl
 
 /-- Every invariant integral ideal is an extended base ideal times a
-product of distinct actual ramified prime ideals. -/
+product of distinct ramified prime ideals. -/
 theorem invariant_integral_ideal_ramified_factorization
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     (I : Ideal (𝓞 K)) (hI : I ≠ 0) (hinv : σ • I = I) :

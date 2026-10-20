@@ -5,7 +5,7 @@ public import CCDN.HomogeneousParameterCertificates
 public import CCDN.HomogeneousPrimeComponents
 public import CCDN.PolynomialPredicates
 
-/-! Finiteness of homogeneous linear parameters at one actual coefficient
+/-! Finiteness of homogeneous linear parameters at one coefficient
 specialization implies finiteness at algebraically independent coefficients.
 The proof constructs a full homogeneous coefficient determinant internally. -/
 
@@ -14,7 +14,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Actual homogeneous finite normalization is open at its generic
+/-- Homogeneous finite normalization is open at its generic
 coefficient tuple. This also permits fixed rows such as the homogenizing
 coordinate, since the family may have arbitrary polynomial coefficients. -/
 theorem generic_linear_projection_integral_of_specialization

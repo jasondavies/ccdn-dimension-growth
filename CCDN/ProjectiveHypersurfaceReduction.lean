@@ -3,7 +3,7 @@ module
 public import CCDN.ProjectiveHypersurfaceLocal
 public import CCDN.ProjectiveReduction
 
-/-! Actual projective residue points determine unit charts and integral lifts
+/-! Projective residue points determine unit charts and integral lifts
 in arbitrary dimension. Their reduced affine equations vanish at those lifts. -/
 
 @[expose] public section
@@ -31,7 +31,7 @@ lemma cast_hypersurfaceResidueChartLift {n p : ℕ} [Fact p.Prime]
   simp [hypersurfaceResidueChartLift]
 
 /-- Reduction determines both a unit coordinate and all affine congruences;
-these are derived from equality of actual projective residue points. -/
+these are derived from equality of projective residue points. -/
 theorem primitiveProjectiveReduction_hypersurface_chart {n p : ℕ} [Fact p.Prime]
     (z : IntPoint (n + 3)) (hz : Finset.univ.gcd z = 1)
     (r : ProjectiveResidueSpace (n + 2) p) (he : primitiveProjectiveReduction z hz = r) :

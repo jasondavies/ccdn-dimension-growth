@@ -4,7 +4,7 @@ public import CCDN.ProjectiveSurfaceSalbergerCover
 public import CCDN.ProjectiveChartSmoothness
 public import CCDN.PolynomialPredicates
 
-/-! CCDN Theorem 4.3.5 with actual projective curve ideals, their projective
+/-! CCDN Theorem 4.3.5 with projective curve ideals, their projective
 Hilbert degrees, and the homogeneous Jacobian definition of nonsingular
 points in the standard affine chart. -/
 

@@ -7,7 +7,7 @@ public import CCDN.HomogeneousProjectionEquation
 public import CCDN.HilbertProjectionDegree
 public import CCDN.PolynomialPredicates
 
-/-! An actual bounded integer linear finite birational projection of a
+/-! A bounded integer linear finite birational projection of a
 homogeneous prime quotient to a hypersurface of exactly the same degree. -/
 
 @[expose] public section

@@ -193,7 +193,7 @@ lemma unscaled_auxiliary_bad_factor_bound {n k : ℕ}
     (hypersurfaceAbsoluteAuxiliaryConstant_pos n).le
 
 /-- The literal-factor auxiliary in the complete minimum form on a box of
-polynomial size in the degree. The better of two actual auxiliaries is chosen. -/
+polynomial size in the degree. The better of two auxiliaries is chosen. -/
 theorem literal_unscaled_affine_auxiliary_minimum {n k : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f)

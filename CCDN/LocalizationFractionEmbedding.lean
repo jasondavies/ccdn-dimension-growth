@@ -3,7 +3,7 @@ module
 public import Mathlib.RingTheory.Localization.LocalizationLocalization
 public import Mathlib.RingTheory.Localization.FractionRing
 
-/-! An actual nonzero localization of a domain embeds compatibly in any
+/-! A nonzero localization of a domain embeds compatibly in any
 fraction field of that domain and has the same fraction field. -/
 
 @[expose] public section

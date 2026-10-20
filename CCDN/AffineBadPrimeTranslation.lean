@@ -40,7 +40,7 @@ theorem hypersurfaceBadPrimeFactor_affineTranslation {n : ℕ}
   · rw [hypersurfaceBadPrimeFactor_eq_zero f hf,
       hypersurfaceBadPrimeFactor_eq_zero _ (fun h => hf (hir.mp h))]
 
-/-- Pull an actual auxiliary equation back through a bounded translation. -/
+/-- Pull an auxiliary equation back through a bounded translation. -/
 theorem affine_auxiliary_translation_transport {n : ℕ}
     (f g : MvPolynomial (Fin n) ℤ) (a : Fin n → ℤ)
     (hg : g ≠ 0) (hnd : ¬ affineTranslation ℤ a f ∣ g)

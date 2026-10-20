@@ -5,7 +5,7 @@ public import CCDN.GridLowerBoundNumerics
 public import CCDN.Plane
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
-/-! Actual affine counts supplied by finite Cartesian grids. -/
+/-! Affine counts supplied by finite Cartesian grids. -/
 
 @[expose] public section
 namespace CCDN
@@ -27,7 +27,7 @@ lemma integer_grid_le_affine_count {n : ℕ} (f : MvPolynomial (Fin n) ℚ)
   exact ⟨fun j => hsB (z j) (hz' j), hfzero z hz'⟩
 
 /-- A plane curve with exactly the degree and grid size used in Section 6.
-This is a lower bound for the actual integral-point count. -/
+This is a lower bound for the integral-point count. -/
 theorem exists_affine_plane_grid_lower_bound (d : ℕ) (hd : 4 ≤ d) :
     ∃ f : MvPolynomial (Fin 2) ℚ,
       f.totalDegree = d ∧ Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) ∧

@@ -3,7 +3,7 @@ module
 public import CCDN.FilteredHilbertPolynomial
 public import Mathlib.Algebra.MvPolynomial.Equiv
 
-/-! Coefficient-field isomorphisms preserve the actual filtered Hilbert
+/-! Coefficient-field isomorphisms preserve the filtered Hilbert
 polynomial. The standard exponent set is unchanged, so this does not need
 semilinear quotient identifications. -/
 

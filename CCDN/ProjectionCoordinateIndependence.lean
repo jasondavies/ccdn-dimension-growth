@@ -5,7 +5,7 @@ public import CCDN.BoundedBirationalHypersurfaceProjection
 public import Mathlib.LinearAlgebra.Matrix.Rank
 
 /-! A hypersurface image of degree at least two forces linear independence
-of the projection coordinates. Thus its actual linear kernel has the
+of the projection coordinates. Thus its linear kernel has the
 dimension required of a projection center. -/
 
 @[expose] public section

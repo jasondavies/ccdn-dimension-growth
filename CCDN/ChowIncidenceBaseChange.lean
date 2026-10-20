@@ -3,7 +3,7 @@ module
 public import CCDN.ChowIncidenceIdeal
 public import CCDN.PolynomialCoefficientDescent
 
-/-! Exact field base change for the actual Chow incidence ideal. Lift the
+/-! Exact field base change for the Chow incidence ideal. Lift the
 incidence substitution before taking the coordinate quotient, then test
 membership coefficientwise and descend by linear coefficient functionals. -/
 
@@ -60,7 +60,7 @@ lemma chowIncidencePolynomialMap_map {K L : Type*}
       refine Fin.cases ?_ (fun k => ?_) j <;> simp [chowIncidencePolynomialMap]
   exact RingHom.congr_fun he f
 
-/-- Linear descent commutes with the actual nested incidence substitution. -/
+/-- Linear descent commutes with the nested incidence substitution. -/
 lemma chowIncidencePolynomialMap_coefficientLinear {K L : Type*}
     [Field K] [Field L] [Algebra K L] {n : ℕ}
     (r : ℕ) (φ : L →ₗ[K] K)
@@ -108,7 +108,7 @@ theorem chowIncidenceIdeal_scalar_extension {K L : Type*}
       ((mem_chowIncidenceIdeal_iff_coeff _ f).mp hf e) φ
 
 /-- Geometric primeness of the source implies geometric primeness of its
-actual incidence ideal. The scalar extension is identified before using
+incidence ideal. The scalar extension is identified before using
 primality of the target polynomial ring. -/
 theorem chowIncidenceIdeal_geometrically_prime {K L : Type*}
     [Field K] [Field L] [Algebra K L] {n : ℕ}
@@ -118,7 +118,7 @@ theorem chowIncidenceIdeal_geometrically_prime {K L : Type*}
   rw [chowIncidenceIdeal_scalar_extension]
   infer_instance
 
-/-- Consequently an actual nonzero principal incidence equation stays
+/-- Consequently a nonzero principal incidence equation stays
 irreducible after every field extension over which the source remains prime. -/
 theorem chow_incidence_equation_irreducible_map {K L : Type*}
     [Field K] [Field L] [Algebra K L] {n : ℕ}

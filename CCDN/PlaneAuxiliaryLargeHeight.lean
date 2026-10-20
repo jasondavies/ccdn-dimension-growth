@@ -127,7 +127,7 @@ lemma plane_large_degree_bound_of_log_bound {d M : ℕ} {T K : ℝ}
   push_cast
   ring
 
-/-- Large coefficient height forces an actual auxiliary polynomial of degree
+/-- Large coefficient height forces an auxiliary polynomial of degree
 O(d³), under the explicit sharp finite-field and leading-position inputs. -/
 theorem plane_chart_exists_auxiliary_large_height
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}

@@ -26,7 +26,7 @@ theorem mem_prime_ideal_of_vanishing_on_principal_open
     · rw [hvan x (fun p hp => by simpa only [aeval_eq_eval] using hx p hp) hzero, mul_zero]
   exact (Ideal.IsPrime.mem_or_mem ‹I.IsPrime› hmul).resolve_left hg
 
-/-- The standard chart of the actual closure cone recovers the affine
+/-- The standard chart of the closure cone recovers the affine
 zero locus, before passing to projective equivalence classes. -/
 theorem projectiveClosure_cone_chart_zero
     {K : Type*} [Field K] {n : ℕ}

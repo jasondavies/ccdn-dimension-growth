@@ -2,8 +2,8 @@ module
 
 public import CCDN.OriginLayerGenerators
 
-/-! Finite-precision generation of actual hypersurface local quotients.
-Generator counts equal the actual layer dimensions; for plane curves each
+/-! Finite-precision generation of hypersurface local quotients.
+Generator counts equal the layer dimensions; for plane curves each
 weight needs at most μ generators. -/
 
 @[expose] public section
@@ -11,7 +11,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Successive actual layer reductions assemble into a finite-precision
+/-- Successive layer reductions assemble into a finite-precision
 polynomial representation, modulo the defining equation and the Nth origin power. -/
 lemma origin_layers_generate_truncation {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (r : ℕ → ℕ)
@@ -39,7 +39,7 @@ lemma origin_layers_generate_truncation {K σ : Type*} [Field K]
     linear_combination -he
 
 /-- In every ambient dimension, the numbers of homogeneous generators are
-exactly the dimensions of the actual origin-adic layers. -/
+exactly the dimensions of the origin-adic layers. -/
 theorem exists_origin_truncation_generators {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) :
     ∃ (r : ℕ → ℕ) (g : (k : ℕ) → Fin (r k) → MvPolynomial (Fin (n + 1)) K),

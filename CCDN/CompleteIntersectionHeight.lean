@@ -9,7 +9,7 @@ public import CCDN.Curve
 public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 
-/-! Finite prime decomposition and codimension two for an actual intersection
+/-! Finite prime decomposition and codimension two for an intersection
  of two equations. -/
 
 @[expose] public section

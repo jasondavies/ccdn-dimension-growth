@@ -36,7 +36,7 @@ theorem exists_bounded_full_degree_direction {σ : Type*} [Fintype σ]
   exact ⟨b, hb, by exact_mod_cast (mul_ne_zero_iff.mp hval).1,
     (mul_ne_zero_iff.mp hval).2⟩
 
-/-- Bounded integer directions give an actual full-degree monic equation,
+/-- Bounded integer directions give a full-degree monic equation,
 without an irreducibility or smooth-point assumption. -/
 theorem exists_bounded_monic_linear_coordinates {σ : Type*} [Fintype σ]
     (f : MvPolynomial (Option σ) ℚ) (hf : f ≠ 0) :
@@ -60,7 +60,7 @@ theorem exists_bounded_monic_linear_coordinates {σ : Type*} [Fintype σ]
     natDegree_optionEquivLeft]
   exact degreeOf_le_totalDegree _ _
 
-/-- The retained variables, transported back through the actual coordinate
+/-- The retained variables, transported back through the coordinate
 automorphism, as elements of the original quotient. -/
 def coordinateEliminationMap {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial (Option σ) K))
@@ -128,7 +128,7 @@ theorem coordinateEliminationMap_isIntegral {K σ : Type*} [Field K]
   change (ψ.toAlgHom.comp (φ.restrictScalars K)).IsIntegral at hint
   rwa [heq] at hint
 
-/-- An actual bounded linear elimination for any ideal with a chosen nonzero
+/-- A bounded linear elimination for any ideal with a chosen nonzero
 equation. Its remaining coordinates are linear forms in the original variables. -/
 theorem exists_bounded_integral_linear_elimination {σ : Type*} [Fintype σ]
     (I : Ideal (MvPolynomial (Option σ) ℚ))

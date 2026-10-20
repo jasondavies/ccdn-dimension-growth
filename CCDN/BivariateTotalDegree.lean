@@ -5,7 +5,7 @@ public import CCDN.ClosedFormBaseChange
 public import Mathlib.Algebra.MvPolynomial.Equiv
 public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 
-/-! Total degree of nested bivariate polynomials, transported from the actual
+/-! Total degree of nested bivariate polynomials, transported from the
 multivariate polynomial ring. This controls the support of factor forms. -/
 
 @[expose] public section
@@ -198,7 +198,7 @@ lemma bivariateMap_natDegree_of_monic {R S : Type*} [CommRing R] [CommRing S] [N
     (bivariateMap φ f).natDegree = f.natDegree :=
   hf.natDegree_map (Polynomial.mapRingHom φ)
 
-/-- Reduction of coefficients cannot increase the actual total degree. -/
+/-- Reduction of coefficients cannot increase the total degree. -/
 lemma bivariateTotalDegree_map_le {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : R[X][X]) :
     bivariateTotalDegree (bivariateMap φ f) ≤ bivariateTotalDegree f := by

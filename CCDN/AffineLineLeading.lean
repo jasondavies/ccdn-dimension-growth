@@ -33,7 +33,7 @@ lemma polynomial_affine_natDegree_le {R : Type*} [CommRing R] (a b : R) :
   · simp
   · exact Polynomial.natDegree_mul_le.trans (by simpa using (Polynomial.natDegree_X_le (R := R)))
 
-/-- Restriction to the actual affine line a+t*b. -/
+/-- Restriction to the affine line a+t*b. -/
 def affineLinePolynomial {R σ : Type*} [CommRing R] (a b : σ → R) :
     MvPolynomial σ R →+* Polynomial R :=
   MvPolynomial.eval₂Hom Polynomial.C

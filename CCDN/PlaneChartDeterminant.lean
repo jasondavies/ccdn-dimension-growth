@@ -3,7 +3,7 @@ module
 public import CCDN.HomogeneousDeterminantComparison
 public import CCDN.SingularDeterminantCutoff
 
-/-! Assemble the upper and lower determinant estimates on an actual affine
+/-! Assemble the upper and lower determinant estimates on an affine
 chart of a homogeneous plane equation. No finite-field point bound or
 bad-prime estimate is asserted here. -/
 
@@ -35,7 +35,7 @@ lemma planeAffineChart_evaluation_matrix {M s : ℕ} (z : Fin s → Fin 2 → �
 
 /-- Exact finite determinant comparison for bounded affine points on a plane
 curve. All local divisibility and the exact selected-row rank are derived.
-The finite set of good primes is explicit, and the actual residue-point counts
+The finite set of good primes is explicit, and the residue-point counts
 are retained rather than replaced by an unproved estimate. -/
 theorem plane_chart_no_auxiliary_determinant_comparison {d M t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
@@ -84,7 +84,7 @@ theorem plane_chart_no_auxiliary_determinant_comparison {d M t : ℕ}
   exact hlower.trans hupper
 
 /-- The plane determinant-method inequality with the fourth-power cutoff.
-Its remaining arithmetic inputs are the actual finite-field point estimate and
+Its remaining arithmetic inputs are the finite-field point estimate and
 a finite excluded-prime set; all matrix, rank, singular, and prime-tail steps
 are proved in this development. -/
 theorem plane_chart_no_auxiliary_degree_four_comparison {d M t : ℕ}

@@ -3,7 +3,7 @@ module
 public import CCDN.GridMultivariate
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
-/-! Section 6, Lemma 6.1: an actual absolutely irreducible rational equation
+/-! Section 6, Lemma 6.1: an absolutely irreducible rational equation
 of prescribed degree vanishes on the entire stated integer box. -/
 
 @[expose] public section

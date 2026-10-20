@@ -5,7 +5,7 @@ public import CCDN.CurveFunctionField
 public import CCDN.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 
-/-! General-dimensional function-field rank bounds from actual Hilbert
+/-! General-dimensional function-field rank bounds from Hilbert
 multiplicity. Independent functions over an independent linear parameter
 field yield blocks indexed by all bounded-degree parameter polynomials. -/
 

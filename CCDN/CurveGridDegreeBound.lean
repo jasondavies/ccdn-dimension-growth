@@ -6,7 +6,7 @@ public import CCDN.SmallOutsidePoint
 
 /-! The sharp degree-times-grid-side bound for prime curves in arbitrary
 affine dimension. The coordinate and all section bounds are constructed
-from the actual filtered Hilbert polynomial. -/
+from the filtered Hilbert polynomial. -/
 
 @[expose] public section
 namespace CCDN
@@ -61,7 +61,7 @@ theorem exists_coordinate_all_linear_sections_proper
   simp [Ne.symm hs] at hc
 
 /-- The prime-curve case of CCDN Lemma 4.1.1, over any field and with any
-finite coordinate grid. The slope is the actual Hilbert multiplicity. -/
+finite coordinate grid. The slope is the Hilbert multiplicity. -/
 theorem prime_curve_grid_card_le
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime] (d : ℕ)
@@ -87,7 +87,7 @@ theorem prime_curve_grid_card_le
       simp only [map_sub, eval_X, eval_C, (Finset.mem_filter.mp x.property).2, sub_self])
   simpa only [Fintype.card_coe, Nat.mul_one] using hh
 
-/-- For an actual rational prime curve in any ambient dimension, the
+/-- For a rational prime curve in any ambient dimension, the
 integer-point count is at most its degree times the integer interval size. -/
 theorem prime_curve_count_le_degree_mul_integer_interval
     {n : ℕ} (I : Ideal (CoordinatePolynomial n)) [I.IsPrime] (d : ℕ)

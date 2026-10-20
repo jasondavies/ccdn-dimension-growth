@@ -4,7 +4,7 @@ public import CCDN.GeometricCenterNoetherForms
 public import CCDN.ChowRestrictionBirational
 public import CCDN.PolynomialPredicates
 
-/-! Actual good centers are detected by a finite family of homogeneous
+/-! Good centers are detected by a finite family of homogeneous
 polynomials in maximal minors. The degree comes from the proved Noether-form
 composition, with the degree-one boundary treated by coefficient forms. -/
 
@@ -14,7 +14,7 @@ noncomputable section
 open MvPolynomial Matrix
 
 /-- The nonvanishing locus is exactly the set of geometrically disjoint
-centers whose actual projection is birational. No Chow equation, image
+centers whose projection is birational. No Chow equation, image
 multiplicity, or witness center is supplied. -/
 theorem exists_birational_center_detector
     {K : Type*} [Field K] [CharZero K] {n m r : ℕ}

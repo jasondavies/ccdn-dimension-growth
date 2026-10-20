@@ -5,7 +5,7 @@ public import CCDN.HilbertFunctionFieldRank
 public import CCDN.HilbertLinearCoordinates
 public import CCDN.ProjectionFractionField
 
-/-! A uniform finite-fiber bound for an actual linear normalization.
+/-! A uniform finite-fiber bound for a linear normalization.
 The fraction fields and their degree bound are constructed from the
 coordinate ring and its Hilbert multiplicity. -/
 
@@ -80,7 +80,7 @@ theorem linear_normalization_fiber_card_le_of_fractionField
     hbound.trans (Nat.pow_le_pow_left hrank (Fintype.card (Fin n)))
 
 /-- The fiber bound for the given normalization, with the function field
-and all degree estimates supplied by the actual coordinate ring. -/
+and all degree estimates supplied by the coordinate ring. -/
 theorem linear_normalization_fiber_card_le
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
     (l : Fin (m + 1) → MvPolynomial (Fin n) ℚ)

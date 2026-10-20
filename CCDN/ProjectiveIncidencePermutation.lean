@@ -5,7 +5,7 @@ public import CCDN.ProjectivePermutation
 public import CCDN.FilteredHilbertEquiv
 public import CCDN.PolynomialPredicates
 
-/-! Coordinate permutations transport the actual homogeneous ideal and
+/-! Coordinate permutations transport the homogeneous ideal and
 projective hyperplane incidence, without choosing projective representatives. -/
 
 @[expose] public section

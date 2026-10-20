@@ -4,7 +4,7 @@ public import CCDN.ProjectiveClosureIdeal
 public import CCDN.ProjectiveCoefficientExtension
 public import CCDN.ProjectivePlaneProjection
 
-/-! Projective closure preserves the actual Hilbert degree and its standard
+/-! Projective closure preserves the Hilbert degree and its standard
 chart recovers exactly the original affine zero locus. -/
 
 @[expose] public section

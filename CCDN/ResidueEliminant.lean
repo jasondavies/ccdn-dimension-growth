@@ -2,7 +2,7 @@ module
 
 public import CCDN.PolynomialResultantDegree
 
-/-! The actual eliminant for a ratio g(beta)/f'(beta).
+/-! The eliminant for a ratio g(beta)/f'(beta).
 For f,g in F[t][z], coefficients are lifted into F[u][t], and z is
 eliminated from f and u*f'-g. The resulting polynomial has outer t-degree
 at most (2*deg_z(f)-1) times the coefficient t-degree bound. -/

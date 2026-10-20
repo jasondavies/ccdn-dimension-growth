@@ -4,7 +4,7 @@ public import CCDN.HilbertFullDimension
 public import CCDN.PrincipalHilbertPolynomial
 
 /-! A prime projective variety of degree greater than one cannot have
-full ambient Hilbert dimension. This uses the actual Hilbert polynomial
+full ambient Hilbert dimension. This uses the Hilbert polynomial
 of the polynomial ring, rather than an additional geometric hypothesis. -/
 
 @[expose] public section

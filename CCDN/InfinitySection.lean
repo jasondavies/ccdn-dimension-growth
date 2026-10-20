@@ -8,12 +8,12 @@ module
 public import CCDN.ProjectiveFiltration
 
 /-!
-# The actual quotient by the infinity coordinate
+# The quotient by the infinity coordinate
 
 The degree-`n+1` image in the quotient of the filtered homogeneous coordinate
 algebra by its infinity coordinate has dimension `H(n+1)-H(n)`. Thus the
 certified affine Hilbert degree is already the eventual graded dimension of an
-actual quotient ring, rather than an assumed projective degree.
+quotient ring, rather than an assumed projective degree.
 -/
 
 @[expose] public section
@@ -85,7 +85,7 @@ lemma projectivePieceToInfinity_ker {K σ : Type*} [Field K]
   rw [Ideal.Quotient.eq_zero_iff_mem, projectiveMonomial_mem_infinityIdeal]
   rfl
 
-/-- Degree-`n+1` elements of the actual infinity quotient ring. -/
+/-- Degree-`n+1` elements of the infinity quotient ring. -/
 def infinityGradedSpace {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (n : ℕ) :
     Submodule K (projectiveCoordinateAlgebra I ⧸ projectiveInfinityIdeal I) :=
@@ -112,7 +112,7 @@ theorem infinityGradedSpace_finrank {K σ : Type*} [Field K] [Finite σ]
   exact h
 
 /-- Every certified affine Hilbert degree is the eventual graded dimension of the
-actual quotient by the infinity coordinate. -/
+quotient by the infinity coordinate. -/
 theorem infinityGradedSpace_eventually_degree {K σ : Type*} [Field K] [Finite σ]
     (I : Ideal (MvPolynomial σ K)) {d N : ℕ} {b : ℤ}
     (hdegree : ∀ n ≥ N,

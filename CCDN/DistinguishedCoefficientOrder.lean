@@ -3,7 +3,7 @@ module
 public import CCDN.HomogeneousLeadingCoefficient
 
 /-! A monomial order that puts a chosen pure coordinate power first. This
-lets the positioned estimates use the paper's actual distinguished coefficient. -/
+lets the positioned estimates use the paper's distinguished coefficient. -/
 
 @[expose] public section
 namespace CCDN
@@ -35,7 +35,7 @@ lemma distinguishedCoefficientOrder_le_pure {n d : ℕ} (i : Fin (n + 1))
   simpa only [Finsupp.equivMapDomain_single, Equiv.swap_apply_left] using hh
 
 /-- A nonzero coefficient of the selected pure power is the leading coefficient
-for an actual monomial order; no coordinate change of the equation is required. -/
+for a monomial order; no coordinate change of the equation is required. -/
 lemma distinguishedCoefficientOrder_leadingCoeff {R : Type*} [CommRing R] {n d : ℕ}
     (i : Fin (n + 1)) (f : MvPolynomial (Fin (n + 1)) R) (hd : f.totalDegree ≤ d)
     (hc : f.coeff (Finsupp.single i d) ≠ 0) :

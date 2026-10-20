@@ -4,7 +4,7 @@ public import CCDN.HilbertTranscendenceBasis
 public import Mathlib.RingTheory.IntegralClosure.GoingDown
 public import Mathlib.RingTheory.MvPolynomial.Basic
 
-/-! Actual affine Hilbert dimension across algebraic coefficient extensions.
+/-! Affine Hilbert dimension across algebraic coefficient extensions.
 Integral embeddings transfer a constructed transcendence basis; algebraic
 extension of the coefficient field preserves its cardinality. -/
 
@@ -55,7 +55,7 @@ theorem algebraic_coefficient_integral_embedding_hilbert_dimension_eq
   rw [Nat.card_eq_fintype_card] at hU
   exact hU.symm.trans hJ.symm
 
-/-- A prime over the original ideal has the same actual Hilbert dimension
+/-- A prime over the original ideal has the same Hilbert dimension
 after an algebraic coefficient extension. -/
 theorem algebraic_polynomial_prime_hilbert_dimension
     (k K σ : Type*) [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]
@@ -72,7 +72,7 @@ theorem algebraic_polynomial_prime_hilbert_dimension
   have hint : ψ.IsIntegral := (algebraic_polynomial_extension_integral k K σ).quotient
   exact (algebraic_coefficient_integral_embedding_hilbert_dimension_eq _ P ψ hψ hint).symm
 
-/-- All actual minimal components of an extended prime ideal have the
+/-- All minimal components of an extended prime ideal have the
 original dimension; purity is derived rather than supplied. -/
 theorem algebraic_polynomial_minimalPrime_under
     (k K σ : Type*) [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]

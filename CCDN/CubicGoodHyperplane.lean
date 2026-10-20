@@ -4,7 +4,7 @@ public import CCDN.EffectiveHyperplaneAvoidance
 public import CCDN.IntegerPolynomialAvoidance
 
 /-! A good integer hyperplane normal of height at most d³, obtained from
-the actual universal Noether detector and integer-grid avoidance. -/
+the universal Noether detector and integer-grid avoidance. -/
 
 @[expose] public section
 namespace CCDN

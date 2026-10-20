@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.Localization.Ideal
 
 /-! The scalar-extended coordinate quotient is the localization of the
 polynomial extension of the original coordinate quotient. All maps are
-the actual coefficient and coordinate maps. -/
+the coefficient and coordinate maps. -/
 
 @[expose] public section
 namespace CCDN
@@ -78,7 +78,7 @@ lemma scalarQuotientPolynomialMap_comp {K L σ τ : Type*} [Field K] [Field L]
   · intro i
     simp [scalarQuotientPolynomialMap,quotientPolynomialSwap,scalarCoordinateQuotientMap]
 
-/-- The precise localization structure on the actual scalar-extended quotient. -/
+/-- The precise localization structure on the scalar-extended quotient. -/
 theorem scalar_quotient_polynomial_localization {K L σ τ : Type*}
     [Field K] [Field L] [Algebra K L] [Algebra (MvPolynomial τ K) L]
     [IsScalarTower K (MvPolynomial τ K) L]

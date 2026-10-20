@@ -65,7 +65,7 @@ def hypersurfaceNormalizedError (n : ℕ) : ℝ :=
     (n + 2 : ℝ) * hypersurfaceArchimedeanError (n + 1) /
       ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ))
 
-/-- Actual absence of an auxiliary polynomial implies the normalized
+/-- Absence of an auxiliary polynomial implies the normalized
 inequality with constructed geometry and exact Hilbert rank. -/
 theorem hypersurface_no_auxiliary_normalized_comparison
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d M t : ℕ}

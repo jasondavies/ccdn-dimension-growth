@@ -6,7 +6,7 @@ public import CCDN.HomogeneousEvaluation
 public import Mathlib.FieldTheory.AlgebraicClosure
 public import CCDN.PolynomialPredicates
 
-/-! Actual homogeneous finite parameters give certificates for every
+/-! Homogeneous finite parameters give certificates for every
 monomial in one positive homogeneous degree. Extracting homogeneous
 components makes all parameter multipliers have the preceding degree. -/
 

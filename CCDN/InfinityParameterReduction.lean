@@ -4,7 +4,7 @@ public import CCDN.RadialHomogeneousMap
 public import Mathlib.RingTheory.Nullstellensatz
 
 /-! Vanishing only at the origin on the infinity section supplies balanced
-coordinate-power reductions. The Nullstellensatz is used on the actual kernel
+coordinate-power reductions. The Nullstellensatz is used on the kernel
 of the map to the infinity quotient, over any algebraically closed extension. -/
 
 @[expose] public section

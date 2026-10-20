@@ -7,7 +7,7 @@ public import CCDN.GeometricIdealPrimality
 public import CCDN.PolynomialPredicates
 
 /-! The constructed projective Chow equation has degree exactly d in every
-hyperplane block, where d is the actual Hilbert multiplicity. This includes
+hyperplane block, where d is the Hilbert multiplicity. This includes
 forms over the original field for geometrically integral sources. -/
 
 @[expose] public section

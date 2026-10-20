@@ -4,7 +4,7 @@ public import CCDN.HilbertCoordinateIndependence
 public import CCDN.HilbertProjectionDegree
 
 /-! A proper positive-codimension prime ideal of positive Hilbert dimension
-contains an actual nonzero equation of degree at most its Hilbert multiplicity.
+contains a nonzero equation of degree at most its Hilbert multiplicity.
 The independent coordinate subtuple and the equation are both constructed. -/
 
 @[expose] public section

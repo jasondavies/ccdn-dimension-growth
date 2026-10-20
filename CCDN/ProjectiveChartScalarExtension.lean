@@ -5,7 +5,7 @@ public import CCDN.ProjectiveChartIdeal
 public import CCDN.HomogeneousLinearDescent
 public import CCDN.ScaledHypersurfaceBadPrimes
 
-/-! Actual projective affine charts commute with extension of coefficients.
+/-! Projective affine charts commute with extension of coefficients.
 In particular the standard chart of a geometrically integral projective
 variety is geometrically integral. -/
 

@@ -15,7 +15,7 @@ lemma momentCoordinate_eval {K : Type*} [CommRing K] {n : ℕ}
     eval z (momentCoordinate K n k) = ∑ j : Fin n, (k : K) ^ j.val * z j := by
   simp only [momentCoordinate, map_sum, map_mul, eval_C, eval_X]
 
-/-- The actual integral linear form has coefficient-uniform polynomial height. -/
+/-- The integral linear form has coefficient-uniform polynomial height. -/
 theorem momentCoordinate_height {n d k : ℕ} (hk : k ≤ n * d ^ 2)
     {B : ℝ} (z : IntPoint n) (hz : ∀ j, |(z j : ℝ)| ≤ B) :
     |(eval z (momentCoordinate ℤ n k) : ℝ)| ≤

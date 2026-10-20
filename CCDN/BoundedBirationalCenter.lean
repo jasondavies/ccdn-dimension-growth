@@ -28,7 +28,7 @@ lemma center_detector_degree_le_cubic (D : ℕ) :
     D * max 1 (D ^ 2 - 1) ≤ max 1 D * (max 1 D) ^ 2 := Nat.mul_le_mul hD h2
     _ = (max 1 D) ^ 3 := by ring
 
-/-- The actual geometric good center has bounded integer independent rows.
+/-- The geometric good center has bounded integer independent rows.
 Both integrality and birationality concern its literal minor projection. -/
 theorem exists_bounded_integer_birational_center
     {n m : ℕ} (hmn : m + 2 ≤ n + 1)

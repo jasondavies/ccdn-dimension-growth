@@ -5,7 +5,7 @@ public import CCDN.ProjectiveClosureRecovery
 public import CCDN.PolynomialPredicates
 
 /-! An irreducible equation with the exact projective incidence criterion
-is a generator of the actual chart incidence ideal. This lets degree
+is a generator of the chart incidence ideal. This lets degree
 computations apply to any constructed projective Chow equation. -/
 
 @[expose] public section

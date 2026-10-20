@@ -7,7 +7,7 @@ import all ArithmeticHeights.BombieriVaaler
 
 /-! The corrected finite-family form of CCDN Proposition 3.2.6.
 Each square evaluation matrix has a common homogeneous degree, but the
-common degree may vary between matrices. The gcd is taken over the actual
+common degree may vary between matrices. The gcd is taken over the
 determinants, not over additional mixed minors. All local divisors and the
 bad-prime set are constructed from the equation and its primitive zeros.
 The unnormalized varying-degree-within-one-matrix statement is false. -/
@@ -73,7 +73,7 @@ theorem projective_hypersurface_familyGcd_sharp
   rw [← Matrix.det_transpose] at hdet
   exact hdet
 
-/-- Prime aggregation for the actual finite-family gcd. This intermediate
+/-- Prime aggregation for the finite-family gcd. This intermediate
 form only exposes the good-reduction predicate; the final theorem below
 constructs and discharges it. -/
 theorem hypersurface_familyGcd_log_lower_degree_four
@@ -159,7 +159,7 @@ theorem hypersurface_familyGcd_log_lower_degree_four
 Each matrix has one homogeneous degree, which may differ from every other
 matrix's degree. The exact paper bad-prime factor and dimension-only error
 are retained. Individual zero determinants, an empty row set and repeated
-points are allowed; only the actual family gcd must be nonzero. -/
+points are allowed; only the family gcd must be nonzero. -/
 theorem hypersurface_determinant_family_log_lower
     {ι : Type*} [Fintype ι] {n s d : ℕ}
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
@@ -203,7 +203,7 @@ theorem hypersurface_determinant_family_log_lower
       Real.zero_rpow (by positivity : (1 : ℝ) + 1 / (n + 1 : ℝ) ≠ 0), mul_zero, zero_mul]
     exact Real.log_nonneg hone
 
-/-- The same corrected family bound on actual rational projective points.
+/-- The same corrected family bound on rational projective points.
 Primitive integral representatives, and their vanishing equations, are
 constructed rather than supplied as additional data. -/
 theorem projective_hypersurface_determinant_family_log_lower

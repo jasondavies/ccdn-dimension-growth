@@ -2,7 +2,7 @@ module
 
 public import CCDN.RationalClosedForms
 
-/-! The characteristic-zero closed-form criterion on actual bivariate
+/-! The characteristic-zero closed-form criterion on bivariate
 polynomials. Gauss's lemma and rational differentiation discharge the
 fraction-field and differential-field hypotheses. -/
 

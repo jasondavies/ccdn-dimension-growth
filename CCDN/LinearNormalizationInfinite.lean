@@ -7,7 +7,7 @@ public import CCDN.FilteredHilbertEquiv
 
 /-! Homogeneous-linear Noether normalization over an infinite field.
 The parameter forms, integrality and algebraic independence are constructed
-from the actual prime ideal and its filtered Hilbert dimension. -/
+from the prime ideal and its filtered Hilbert dimension. -/
 
 @[expose] public section
 namespace CCDN

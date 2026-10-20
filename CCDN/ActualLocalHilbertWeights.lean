@@ -4,9 +4,9 @@ public import CCDN.HypersurfacePointStalk
 public import CCDN.InfiniteWeightEnumeration
 public import CCDN.PlaneMultiplicity
 
-/-! The exact local weight-sequence estimate for actual hypersurface stalks.
+/-! The exact local weight-sequence estimate for hypersurface stalks.
 The uniform error is dimension plus one. Every positive-dimensional
-hypersurface has a constructed infinite enumeration of its actual layers;
+hypersurface has a constructed infinite enumeration of its layers;
 neither the multiplicity nor an external Hilbert-function estimate is needed
 in the final existence theorem. -/
 
@@ -31,7 +31,7 @@ lemma hypersurfaceLayerBound_positive (n k : ℕ) {μ : ℕ} (hμ : 0 < μ) :
     rw [hypersurfaceLayerBound_succ_succ]
     exact Nat.add_pos_left (Nat.choose_pos (by omega)) _
 
-/-- CCDN 2.3 for the first s weights of the actual local ring. This uses the
+/-- CCDN 2.3 for the first s weights of the local ring. This uses the
 true hypersurface cumulative profile, so it includes dimension one without
 the false arbitrary-profile extension of the printed Lemma 2.2. -/
 theorem hypersurfacePointStalk_initial_weights_sharp {n μ s : ℕ}

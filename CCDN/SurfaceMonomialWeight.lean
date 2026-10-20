@@ -13,7 +13,7 @@ noncomputable section
 open MvPolynomial Finset
 
 /-- Standard monomials up to degree M have weighted degree at most
-(2/3)s sqrt(2s/d)+(2d+2)s, where s is their actual cardinality and d is
+(2/3)s sqrt(2s/d)+(2d+2)s, where s is their cardinality and d is
 the surface equation degree. -/
 theorem surface_standard_monomial_weight {K : Type*} [Field K]
     (f : MvPolynomial (Fin 3) K) (hf : f ≠ 0) (hd : 0 < f.totalDegree)

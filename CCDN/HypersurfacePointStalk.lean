@@ -6,7 +6,7 @@ public import CCDN.AffineTranslationCount
 public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
 
 /-! Exact local Hilbert functions at arbitrary rational points of an affine
-hypersurface, using the actual localization of its coordinate ring. The
+hypersurface, using the localization of its coordinate ring. The
 translation to the origin and its action on all adic layers are constructed. -/
 
 @[expose] public section
@@ -108,7 +108,7 @@ def hypersurfacePointStalkResidueEquiv :
     (hypersurfacePointIdeal f a) (HypersurfacePointStalk f a)).restrictScalars K).symm.trans
       (hypersurfacePointCoordinateResidueEquiv f a Fact.out)
 
-/-- The local ring's actual layer at a is identified with the explicitly
+/-- The local ring's layer at a is identified with the explicitly
 computed origin layer of f(X+a). -/
 def hypersurfacePointStalkLayerEquiv (k : ℕ) :
     idealPowerLayer K (A := HypersurfacePointStalk f a)
@@ -131,7 +131,7 @@ theorem hypersurfacePointStalkLayer_finrank (k : ℕ) :
 end Stalk
 
 /-- Exact binomial local Hilbert function at every K-rational point, in
-every characteristic, with multiplicity given by its actual first form. -/
+every characteristic, with multiplicity given by its first form. -/
 theorem hypersurfacePointStalk_hilbert_eq {μ k : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (a : Fin (n + 1) → K)
     [Fact (eval a f = 0)]
