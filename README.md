@@ -3,7 +3,7 @@
 A Lean 4 formalisation of Castryck–Cluckers–Dittmann–Nguyen's dimension-growth
 paper, including coefficient-uniform point bounds.
 
-**Status: Theorems 1, 2, 3 and 4 are proved in Lean.**
+**Status: Theorems 1–4 and 6, and Proposition 5, are proved in Lean.**
 `AffineCurveCounting.affineCurveBound` proves CCDN Theorem 3, and
 `AffineCurveCounting.projectiveCurveBound` proves Theorem 2. Both cover all
 ambient dimensions `n ≥ 2` and all positive degrees, with no external
@@ -27,25 +27,24 @@ case of Theorem 1 are also proved for every degree `d ≥ 5`, including degrees
 5 through 15. In `n+3` affine or homogeneous variables, the bound is
 `C(n) d^(18+9n) B^(n+1)`.
 
-`projective_dimension_growth` now proves Theorem 1 for general integral
+`projective_dimension_growth_cubic` proves Theorem 1 for general integral
 projective varieties, including zero-dimensional and empty loci. In `P^n`,
-one positive `C(n)` bounds `N(X,B)` by `C(n) d^e(n) B^dim(X)` for every
-`d ≥ 5` and `B ≥ 1`, with `e(n) = 18 + 10(n+1) + 2(n+1)²`.
-Degree and dimension come from the actual homogeneous coordinate ideal's
-Hilbert polynomial. All projections, fiber bounds and height estimates are
-proved internally. This proves the theorem's existence of a degree exponent;
-the paper's sharper remark `e(n) ≤ 2n³` is not claimed.
+one positive `C(n)` bounds `N(X,B)` by `C(n) d^(2n³) B^dim(X)` for every
+`d ≥ 5` and `B ≥ 1`. Degree and dimension come from the actual homogeneous
+coordinate ideal's Hilbert polynomial. All projections, fiber bounds and
+height estimates are proved internally. The earlier exponent
+`18 + 10(n+1) + 2(n+1)²` remains available through `projective_dimension_growth`.
 
-The odd-degree class-group bound in Theorem 6 is also proved:
-`h₂(K) ≤ C(n) |disc(K)|^(1/2−1/(2n))`, with a positive constant depending
-only on the field degree. The proof constructs the short lattice basis and
-counts the actual bounded algebraic integers and norm-curve fibers. For fields
-of degree at least three with no index-two subfield, the logarithmic bound
-is also proved:
-`h₂(K) ≤ C(n) |disc(K)|^(1/2−1/(2n)) log|disc(K)|`.
+`classGroup_two_torsion_bound` proves the full class-group Theorem 6. For
+all fields of any fixed degree `n ≥ 3`, one positive `C(n)` gives
+`h₂(K) ≤ C(n) |disc(K)|^(1/2−1/(2n)) (log|disc(K)|)^(1−n%2)`.
+The short lattice basis, norm curves, exceptional subfields, quadratic
+class-group descent and discriminant estimates are constructed and proved.
+Strong induction on the field degree absorbs the prime-factor and logarithmic
+losses in the quadratic case. Odd degrees retain the logarithm-free bound.
 
-**The full paper is not yet formalised.** The quadratic-tower branch of the
-class-group application and several exact intermediate statements remain open. The
+**The full paper is not yet formalised.** Several exact intermediate statements
+remain open. The
 [full-paper ledger](docs/full-paper-plan.txt) records the complete scope
 and the external inputs that must be proved.
 
@@ -62,8 +61,10 @@ maximal minors of common-degree homogeneous evaluation matrices. It retains
 the exact rank exponent and leading constant in Proposition 3.2.6, constructs
 the bad-prime set, and discharges its coefficient-height bound. The resulting
 Bombieri–Vaaler comparison and uniform auxiliary-degree selection in both
-height ranges are also proved. The arbitrary-family formulation with differing column degrees
-is not yet claimed.
+height ranges are also proved. For differing column degrees, the corrected
+local theorem includes inverse-pivot normalization. A checked counterexample
+rules out the unnormalized local statement. The arbitrary-degree global
+formulation remains unproved; see the [local statement audit](docs/local-determinant-audit.txt).
 
 The uniform Hilbert-rank estimates and normalized determinant comparison
 are now proved. They retain the exact factorial leading coefficient, bound
@@ -96,9 +97,11 @@ agrees with that definition for homogeneous equations, so the projective
 results above do not have this issue. Exact literal Proposition 4.2.1 remains
 open; the [statement audit](docs/affine-factor-audit.txt) gives a concrete
 counterexample to the printed intermediate homogenization equality and records
-the author's published corrections. The proved coefficient-height dichotomy
-has an explicit degree-dependent multiplier, sufficient for the auxiliary
-argument; Lemma 4.2.2's printed dimension-only multiplier is also still open.
+the author's published corrections. Lemma 4.2.2 is proved with its printed
+dimension-only multiplier: `projective_coefficient_height_dichotomy_uniform`
+gives `H(f) ≤ C(n) B^(d*N)`, with `N = choose(n+1+d,d)` in `n+2` variables,
+or a homogeneous degree-`d` nonmultiple vanishing on every bounded projective
+zero. This proof does not use the disputed affine-factor equality.
 
 `affine_plane_coefficient_count_uniform` proves the full coefficient-sensitive
 minimum expression in Corollary 4.2.4 with the same degree-loss-inclusive
@@ -251,17 +254,17 @@ the generated subfield; odd index gives absolute irreducibility. The remaining
 integers lie in subfields of degree at most `n/4`. An actual intermediate-field
 count and lattice packing bound this exceptional set uniformly.
 
-The corrected quadratic-tower reduction remains. Its proved components include
-the relative class-group norm, the involution's fixed-subgroup bound, an explicit
-Hilbert 90 correction, invariant ideal representatives when the scalar norm is
-one, the unit-norm quotient bound `2^[F:Q]`, finite-group torsion inequalities,
-and quadratic prime-orbit and extension identities. Equal unit obstructions
-now yield classes differing by an invariant ideal class, so the fixed
-two-torsion count is at most `2^[F:Q]` times the strongly ambiguous two-torsion
-count. Invariant fractional ideals have invariant integral representatives.
-Every nonzero invariant integral ideal now factors as an extended base ideal times
-a product of distinct ramified prime ideals. The resulting class-group count,
-discriminant estimate and tower assembly are not yet proved.
+The quadratic branch is proved by descent on field degree. The relative norm,
+Hilbert 90 correction and unit obstruction reduce fixed two-torsion to invariant
+ideal classes. Actual invariant ideals factor into an extended base ideal and
+distinct ramified primes. Those primes lie above rational primes dividing the
+absolute discriminant. For a quadratic extension `K/F`, the resulting estimate is
+`h₂(K) ≤ (h₂(F) 2^([K:Q] ω(D_K)+[F:Q]))²`.
+The exact discriminant inequality `D_F² ≤ D_K` leaves an exponent saving;
+a proved subpower estimate absorbs both the prime-factor loss and logarithms.
+The degree-one and degree-two base cases are proved. Strong induction completes
+Theorem 6 with constants chosen before the number field, without a supplied
+genus-theory or counting hypothesis.
 
 ## Build and audit
 
@@ -294,6 +297,12 @@ review of theorem statements.
 | `LinearNormalizationFiberCount`, `ProjectiveVarietyUniformGrowth`, `ZeroDimensionalProjectiveCount`, `ProjectiveDimensionGrowth` | Full Theorem 1 with constants depending only on ambient dimension, including zero-dimensional and empty loci. |
 | `IntegralAlgebraPointCount`, `IntegralProjectionFiberCount`, `ProjectiveLinearCountTransfer`, `ProjectiveProjectionGrowth` | Count actual integral-coordinate fibers, transfer projective counts and absorb the projection's polynomial height loss. |
 | `IntermediateFieldCount`, `SmallSubfieldIntegerCount`, `NoIndexTwoClassGroupBound` | Count intermediate fields and exceptional integers; prove the logarithmic class-group bound for fields without an index-two subfield. |
+| `DiscriminantPrimeIdealCover`, `StronglyAmbiguousClassCount`, `QuadraticClassGroupDescent` | Construct the ramification cover and prove quadratic class-group descent and the small-degree base cases. |
+| `PrimeFactorSubpower`, `QuadraticClassGroupNumerics`, `ClassGroupUniformBound`, `ClassGroupBound` | Absorb prime-factor and logarithmic losses, perform degree induction, and prove full Theorem 6 with its exact parity-dependent logarithm. |
+| `ProperHilbertDimension`, `ProjectiveHilbertCurveGrowth`, `ProjectiveCubicExponent` | Exclude full ambient dimension when degree exceeds one and sharpen Theorem 1 to exponent `2*n^3`. |
+| `SmallOutsidePoint`, `CurveGridDegreeBound` | Construct integer points of height at most the degree outside proper prime varieties and prove sharp grid counts for prime curves in every ambient dimension. |
+| `WeightedSequenceEstimate`, `MixedDegreeProjectiveLocal`, `MixedDegreeProjectiveExample` | Prove the weighted-profile estimate in dimensions at least two, normalize arbitrary-degree local determinants, and check the unnormalized counterexample. |
+| `AmbientProjectiveDeterminant`, `ProjectiveCoefficientNumerics`, `ProjectiveCoefficientHeightUniform` | Absorb interpolation costs with an actual minor-gcd divisor and prove Lemma 4.2.2 with a dimension-only multiplier. |
 | `QuadraticHilbert90`, `QuadraticInvariantIdeal`, `QuadraticUnitNormQuotient`, `QuadraticInvariantIdeals`, `FiniteGroupPowerTorsion` | Explicit norm-one correction, invariant representatives, unit quotient and torsion bounds, and quadratic prime extension identities. |
 | `SurfaceResidueEdgeCount`, `SurfaceResidueCover`, `SurfaceCoefficientReduction`, `SurfaceResidueLinearCount`, `SurfaceSmallCurveCover`, `SurfaceRetainedCurveCount`, `PrimitiveSurfaceFixedDegree`, `TopFormSurfaceFixedDegree` | Construct and count the smooth-congruence cover; discharge coefficient height and prove the full fixed-degree surface bound for every d ≥ 5. |
 | `BoundedHyperplaneDimensionGrowth`, `TopFormDimensionGrowthAllDegrees`, `HypersurfaceDimensionGrowth` | Theorem 4 in all degrees d ≥ 5 and all ambient dimensions; rational equations and the full projective hypersurface case of Theorem 1. |
@@ -439,9 +448,11 @@ Apache license are recorded under `vendor/mertens/`.
 
 ## Remaining work
 
-The quadratic-tower branch of Theorem 6 and the exact intermediate statements
-recorded in the ledger remain open. Theorems 1–4, Proposition 5, and Theorem 6
-for odd degree and for fields with no index-two subfield are proved.
+The six main results are proved. The exact intermediate statements recorded
+in the ledger remain open, including the universal Noether forms, several
+local and general-variety formulations, and the literal affine-factor
+versions of 4.2.1 and 4.2.4. Proved replacements used by the main theorems are distinguished
+from the exact statements they do not yet imply.
 CCDN Lemmas 2.7--2.8 and Corollary 2.9 are now proved for the actual projective
 hypersurface residue count and common-degree homogeneous evaluation matrices.
 For a geometrically irreducible degree-`d` affine hypersurface in `n+3`

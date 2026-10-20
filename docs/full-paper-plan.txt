@@ -15,18 +15,17 @@ mathematics are not completed counting theorems.
 Main statements
 ---------------
 
-Theorem 1: PROVED. projective_dimension_growth gives, for every ambient n,
-a positive C(n) and explicit e(n)=18+10(n+1)+2(n+1)^2, uniformly over
-homogeneous prime coordinate ideals of degree d>=5 and real B>=1:
-  N(X,B) <= C(n)*d^e(n)*B^dim(X).
+Theorem 1: PROVED. projective_dimension_growth_cubic gives, for every ambient
+n, a positive C(n), uniformly over homogeneous prime coordinate ideals of
+degree d>=5 and real B>=1:
+  N(X,B) <= C(n)*d^(2*n^3)*B^dim(X).
 Degree and dimension are determined by the actual filtered Hilbert polynomial.
 The proof constructs bounded finite birational projection, a homogeneous
 irreducible image equation of exactly degree d, actual finite fibers and
 height control. Zero-dimensional and empty loci are included. No geometric,
 finite-field or counting theorem is supplied as an extra premise.
-This proves the existence statement of Theorem 1. The sharper numerical remark
-e(n)<=2n^3 is not claimed and remains a separate sharpening obligation.
-The earlier hypersurface endpoint retains exponent 18+9n in P^(n+2).
+The earlier projective_dimension_growth endpoint retains exponent
+18+10(n+1)+2(n+1)^2; the hypersurface endpoint retains 18+9n in P^(n+2).
 
 Theorem 2: PROVED. AffineCurveCounting.projectiveCurveBound proves
 ProjectiveCurveBound: for each n>=2, one C(n)>0 bounds the actual rational
@@ -63,20 +62,17 @@ projective_integral_curve_lower_bound constructs the actual homogeneous
 equation, proves absolute irreducibility, prime defining ideal, and exact
 projective Hilbert degree, and counts the actual projective zero locus.
 
-Theorem 6: OPEN. For every number-field degree d > 2, a uniform constant
-depending only on d bounds the cardinality of the actual 2-torsion in
-the ideal class group:
-h_2(K) <= C(d) |disc(K)|^(1/2-1/(2d))
-                    (log |disc(K)|)^(1-(d mod 2)).
-PROVED CASE: odd_degree_classGroup_two_torsion_bound proves the exact
-logarithm-free bound for every odd field degree >=3, with a positive explicit
-constant depending only on the degree. The actual short basis, uniform
-lattice count, translation-class packing and signed norm curves are constructed.
-PROVED CASE: no_index_two_classGroup_two_torsion_bound proves the logarithmic
-bound for every field of degree at least three with no index-two intermediate
-field, with a positive
-explicit degree-only constant. Actual exceptional subfields and their bounded
-integers are counted. The corrected quadratic-tower branch remains open.
+Theorem 6: PROVED. classGroup_two_torsion_bound chooses one positive C(n)
+for every degree n>=3, before the number field, and proves
+  h_2(K) <= C(n)*|disc(K)|^(1/2-1/(2n))*(log|disc(K)|)^(1-(n mod 2)).
+OddDegreeClassGroupBound supplies the logarithm-free odd-degree branch.
+NoIndexTwoClassGroupBound counts actual norm curves and exceptional subfields
+when no index-two intermediate field exists. QuadraticClassGroupDescent proves
+an actual one-step bound via unit obstructions, invariant ideal classes and
+a finite discriminant-prime cover. Exact discriminant descent and proved
+prime-factor/polylogarithmic subpower estimates allow strong induction on the
+field degree. Both small-degree base cases are proved. No external genus,
+lattice, curve-counting or class-group theorem is an additional premise.
 
 Section 6 consequences: PROVED. Actual lower-bound families establish the
 stated obstructions: projective_curve_factor_not_isLittleO excludes o(d^2)
@@ -202,9 +198,13 @@ equation, bounds it by the degree, and proves this exponent divides every
 square polynomial evaluation determinant in that residue class. The theorem
 also holds for zeros modulo p^E, permitting projective unit normalization.
 This supplies the hypersurface consequences of Sections 2.1--2.4 directly.
-It does not assert the exact local Hilbert-function equality, the stronger
-mu-independent error in Lemma 2.1, the abstract sequence theorem for arbitrary
-g in Lemma 2.2, or Lemma 2.4 for every Noetherian local ring.
+WeightedSequenceEstimate now proves the abstract Lemma 2.2 for arbitrary
+profiles in dimensions at least two, with multiplicity-independent error.
+The dimension-one hypersurface profile is also covered. The printed
+arbitrary-profile dimension-one boundary requires correction; see
+docs/local-determinant-audit.txt. The exact local Hilbert-function equality,
+the stronger mu-independent error in Lemma 2.1, and Lemma 2.4 for every
+Noetherian local ring remain outside the proved scope.
 
 Projective hypersurface determinant step: PROVED for homogeneous evaluation
 matrices of a common degree, in every positive hypersurface dimension.
@@ -224,8 +224,11 @@ and their multiplicities. For total multiplicity T, the resulting exponent is
 and p^e divides the gcd of every maximal minor. The endpoint
 projective_hypersurface_minorGcd_bound includes s=0. Here m>=1 is the
 hypersurface dimension. This proves the common-degree evaluation-matrix
-statements needed from Sections 2.5--2.6. No assertion about columns of
-arbitrary different homogeneous degrees is made.
+statements needed from Sections 2.5--2.6. MixedDegreeProjectiveLocal proves
+the corrected arbitrary-degree local statement with entry-specific inverse
+pivot powers. MixedDegreeProjectiveExample formally refutes the literal
+unnormalized arbitrary-degree local assertion. These local results do not
+supply a global gcd bound for one fixed unnormalized integer matrix.
 HypersurfaceCountNormalization proves the numerical step of Lemma 2.8:
   T <= P^m + H*P^(m-1) implies T^(1/m) <= P+H,
 with the corresponding normalized error. It also transfers the actual
@@ -545,11 +548,21 @@ used to obtain its full mathematical consequences.
 
 Section 2:
 2.1 local hypersurface Hilbert functions and multiplicities;
-2.2 weighted-sequence estimate;
+2.2 weighted-sequence estimate: PROVED for arbitrary integer profiles in
+    every dimension m>=2, with error (m+1+c*(m-1)!)*s independent of
+    multiplicity. weighted_sequence_initial_sum_lower_bound gives the
+    initial-segment formulation. Dimension one is proved for the actual
+    hypersurface profile g(k)<=mu. A mathematical counterexample to the
+    printed arbitrary-profile dimension-one claim is documented in
+    docs/local-determinant-audit.txt; that counterexample is not formalized;
 2.3 local multiplicity sequence bound;
 2.4 local determinant divisibility;
-2.5 projective hypersurface determinant divisibility: proved for common-degree
-    evaluation matrices by ProjectiveHypersurfaceLocal;
+2.5 projective hypersurface determinant divisibility: PROVED for common-degree
+    primitive evaluations by ProjectiveHypersurfaceLocal. The corrected
+    arbitrary-degree local theorem includes inverse-pivot powers and is
+    PROVED by MixedDegreeProjectiveLocal. The unnormalized arbitrary-degree
+    local statement is formally disproved, even on one fixed smooth line,
+    by MixedDegreeProjectiveExample.no_uniform_mixed_degree_local_error;
 2.6 residue aggregation: actual partition, total multiplicity and sharp maximal-
     minor divisor proved by ProjectiveHypersurfaceResidueDeterminant;
 2.7 finite-field hypersurface count: PROVED by SharpHypersurfaceCount and
@@ -560,7 +573,8 @@ Section 2:
 2.9 single-prime p-adic determinant bound: PROVED for common-degree homogeneous
     evaluation matrices by projective_hypersurface_minorGcd_sharp. The matching
     simultaneous-prime bound and global auxiliary polynomials are also proved.
-    The varying-column-degree formulation remains an exact-statement gap.
+    No unnormalized arbitrary-degree extension is asserted; the corrected
+    local normalization does not supply such an extension.
 
 Section 3:
 3.1.1 homogeneous auxiliary polynomial with uniform degree bound: PROVED by
@@ -594,9 +608,11 @@ Section 3:
 3.2.6 simultaneous-prime determinant bound: PROVED in the common-degree
     maximal-minor form by exists_hypersurface_determinant_log_lower, with
     the exact rank exponent and leading constant, actual bad-prime set and
-    all local counts discharged. The arbitrary-family/varying-column-degree
-    formulation remains OPEN. The height-controlled version and exact-rank
-    no-auxiliary comparison are also PROVED;
+    all local counts discharged. The arbitrary-family/varying-degree global
+    formulation remains OPEN: prime-dependent chart normalization does not
+    give the required gcd estimate for one fixed integer matrix. No formal
+    counterexample to this global statement is claimed. The height-controlled
+    version and exact-rank no-auxiliary comparison are also PROVED;
 3.3.1 non-absolutely-irreducible auxiliary polynomial: PROVED by
     nonabsolute_projective_auxiliary, with exact degree d and vanishing at
     all rational projective zeros independently of height. Homogeneous
@@ -627,11 +643,17 @@ Section 3:
 Section 4:
 4.1.1 trivial pure-dimensional affine count: the exact hypersurface bound
     d(2B+1)^(n-1) is PROVED for every nonzero equation in n variables by
-    rational_hypersurface_count_le. The exact d(2B+1) bound for
-    prime curves in affine three-space is PROVED by CurveBoxDegreeBound,
-    using actual transcendental coordinates and bounded fibers. The general
-    pure-dimensional statement remains OPEN;
-4.1.2 small integer point outside a proper variety;
+    rational_hypersurface_count_le. CurveGridDegreeBound proves the exact
+    d*|S| grid bound for prime curves over any field in any finite ambient
+    dimension, and gives rational-box bounds d(2B+1). The actual Hilbert
+    dimension and multiplicity determine the coordinate and fiber bounds.
+    The general pure-dimensional statement remains OPEN;
+4.1.2 small integer point outside a proper variety: PROVED by
+    SmallOutsidePoint for actual positive-codimension prime ideals over
+    any characteristic-zero field, including dimension zero. It constructs
+    coordinates in [0,d] and an ideal member nonvanishing there. The
+    homogeneous version supplies a nonzero integer representative of
+    projective height at most d outside the actual projective locus;
 4.1.3 non-Q-defined geometric components;
 4.1.4 non-geometrically-integral varieties: the affine-surface case is PROVED
     by nonabsolute_surface_count_le, with exact d^2(2B+1) and splitting over
@@ -651,10 +673,13 @@ Section 4:
     discharged. The exact literal printed affine factor remains OPEN:
     its claimed equality under homogenization fails for q*x^2+y with q>432.
     This is not a counterexample to the auxiliary conclusion itself;
-4.2.2 coefficient height versus bounded integer zeros: the quantitative
-    dichotomy with H<=N^N*B^(d*N), N=choose(n+d,d), is PROVED, including an
-    actual degree-d nonmultiple. It suffices for the prime-selection cutoff.
-    The printed dimension-only multiplier remains OPEN;
+4.2.2 coefficient height versus bounded projective zeros: PROVED by
+    projective_coefficient_height_dichotomy_uniform. In n+2 variables,
+    one C(n)>0 works for every homogeneous nonzero f, degree d and B>=1:
+    H(f)<=C(n)*B^(d*N), N=choose(n+1+d,d), or an actual homogeneous
+    degree-d nonmultiple vanishes on every projective zero of height at
+    most B. The constant is independent of d and f; primitivity and
+    irreducibility are not required;
 4.2.3 coefficient-height transfer of the bad-prime contribution: PROVED by
     hypersurface_badPrime_height_transfer, with explicit dimension constant,
     actual maximum coefficient height, actual defined factor and every real
@@ -691,8 +716,9 @@ Section 4:
 4.3.8 stated slicing/dimension-growth consequences: PROVED for every d>=5,
     by constructing integer equations for all parallel levels, preserving their
     absolutely irreducible leading forms, and counting actual slices. Each
-    dimension step adds nine to the degree exponent. The exact printed
-    degree exponents remain OPEN. Author addenda dated 2026-04-20:
+    dimension step adds nine to the degree exponent. The projective exponent
+    2*n^3 is now PROVED by ProjectiveCubicExponent. Agreement with the exact
+    printed affine degree exponents is not claimed. Author addenda dated 2026-04-20:
     https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf .
 
 Section 5:
@@ -958,9 +984,8 @@ ClassGroupNormPolynomial constructs signed norm-polynomial fibers; in odd
 field degree OddDegreeNormCurves proves their full degree and absolute
 irreducibility. Translation-class packing and the actual norm-curve reduction
 are now proved below, together with the uniform lattice count and the complete
-odd-degree case. The no-index-two case is now completed below; the corrected
-quadratic-tower reduction remains. The cited external reduction is not assumed
-as an axiom.
+odd-degree case. The no-index-two case and corrected quadratic descent are
+now completed below. The cited external reduction is not assumed as an axiom.
 
 
 Residue-cover coverage and balanced class-group generators
@@ -1003,10 +1028,12 @@ External class-group reduction source audit:
 Louis Mallet-Burgues, Explicit bounds for 2-torsion in class groups of number
 fields (2024), Section 4 gives a counterexample to the genus-theory inequality
 used in the cited index-two-subfield branch. Section 2.2 instead descends a
-quadratic tower using Kluners-Wang, Theorem 2.7. The proposed route retains
-the stronger exponent in a nontrivial tower to absorb the additional
-subpower factor; that argument and the tower estimate are still unproved
-in this library. This is not a claim that CCDN Theorem 6 is false.
+quadratic tower using Kluners-Wang, Theorem 2.7. The completed direct ideal
+proof retains a degree-only unit factor and
+bounds ramified prime ideals by [K:Q]*omega(|disc K|). Exact discriminant
+descent leaves a stronger exponent at each quadratic step; the proved
+subpower absorption and strong degree induction below complete Theorem 6.
+No disproved coefficient-one genus formula is used.
 Sources:
 https://www.normalesup.org/~lmalletb/bounds%20on%202%20torsion.pdf
 https://arxiv.org/abs/2003.12161
@@ -1034,8 +1061,8 @@ full-degree irreducibility of signed norm curves over every field in odd field
 degree. AffinePlaneBadPrimeCount and OddDegreeNormCurveCount prove their bad
 factor is one and their count is at most C*d^4*B^(1/d), without a logarithm.
 The uniform lattice count and odd-degree assembly are completed below.
-Theorem 6 is now also proved for fields with no index-two subfield; the
-quadratic-tower branch remains open.
+Theorem 6 is now proved in all degrees n>=3 by the complete degree induction
+recorded below.
 
 
 Bounded Hilbert elimination, Newton-edge counts, and odd class groups
@@ -1093,8 +1120,8 @@ and proves that norm after extension is raising to the extension degree.
 ClassGroupQuadraticInvolution constructs the action of an actual field
 automorphism on class-group two-torsion and proves h2(K)<=|T^sigma|^2
 for an involution. This does not yet bound the arithmetic fixed subgroup.
-The no-index-two branch is now completed below. The corrected quadratic-tower
-branch remains open.
+The no-index-two branch and corrected quadratic descent are now completed
+below, including the full Theorem 6 assembly.
 
 
 Bounded birational projection and the no-index-two class-group bound
@@ -1132,8 +1159,8 @@ ZeroDimensionalProjectiveCount gives a bound independent of height, and
 EmptyProjectiveHilbertDimension excludes projective points when the filtered
 Hilbert polynomial is constant. ProjectiveDimensionGrowth assembles all cases
 into projective_dimension_growth, the full Theorem 1. Its explicit exponent
-18+10(n+1)+2(n+1)^2 is sufficient for the theorem's existence assertion; it
-does not assert the separate sharper remark e(n)<=2n^3.
+18+10(n+1)+2(n+1)^2 is sufficient for the theorem's existence assertion.
+ProjectiveCubicExponent below now supplies the sharper exponent 2*n^3.
 
 IntermediateFieldCount bounds the number of intermediate fields in a finite
 separable extension by 2^[K:F], through actual monic divisors of a primitive
@@ -1170,5 +1197,44 @@ InvariantIdealIntegralRepresentative clears denominators while preserving
 invariance. QuadraticInvariantFactorization proves that every invariant
 nonzero integral ideal is an extended nonzero base ideal times a product of
 distinct actual ramified prime ideals. The resulting strongly ambiguous
-class-group cardinal bound, ramification estimate and quadratic-tower/discriminant
-assembly remain open; no missing genus formula is assumed.
+class-group bound, ramification estimate and degree induction are now completed
+below; no missing genus formula is assumed.
+
+
+Full class-group theorem and cubic projective degree exponent
+-------------------------------------------------------------
+FiniteGroupTorsionCover bounds subgroup torsion from an actual finite coset
+cover. IntegralIdealClass transports the invariant-ideal factorization into
+class groups. StronglyAmbiguousClassCount then proves
+  |Strong(K/F)[2]| <= h2(F)*2^([K:Q]*omega(D_K)).
+DiscriminantPrimeIdealCover constructs the actual finite ramified-prime cover
+and proves exact discriminant descent D_F^[K:F]<=D_K. ClassGroupDegreeOne
+identifies the degree-one ring of integers with Z and proves its class group
+is trivial. QuadraticClassGroupDescent constructs the nontrivial quadratic
+automorphism internally and proves
+  h2(K) <= (h2(F)*2^([K:Q]*omega(D_K)+[F:Q]))^2.
+Its degree-two specialization is h2(K)<=2^(4*omega(D_K)+2).
+
+PrimeFactorSubpower proves 2^(a*omega(D))<=C(a,epsilon)*D^epsilon by splitting
+actual prime divisors at a fixed cutoff. QuadraticClassGroupNumerics includes
+the logarithmic losses and proves the complete numerical descent, retaining
+the target exponent 1/2-1/(2n). ClassGroupDegreeReduction identifies the
+smaller subfield degree and discriminant conventions. ClassGroupUniformBound
+performs strong induction on n, choosing constants before the number field.
+ClassGroupBound combines the odd-degree logarithm-free result with the
+inductive logarithmic bound to prove exactly the parity exponent in Theorem 6.
+All objects and intermediate estimates are constructed; no analytic or
+arithmetic gap is packaged as a hypothesis.
+
+ProperHilbertDimension proves that degree greater than one excludes full
+ambient Hilbert dimension. ProjectiveHilbertCurveGrowth uses the proved plane
+curve theorem and the actual bounded projection to control the low ambient
+dimensions. ProjectiveCubicExponent bounds the indexed projection exponent
+for every proper higher-dimensional case and treats empty and zero-dimensional
+loci explicitly. The resulting projective_dimension_growth_cubic proves the
+exponent 2*n^3 for Theorem 1. This is an independently proved consequence;
+it does not claim the literal bad-center-locus statements in Section 5.
+
+All six main results are now proved. Completion of the entire paper still
+requires the exact outstanding statements in the named-result ledger above,
+or a precisely recorded correction where the literal source is false.

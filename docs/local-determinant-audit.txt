@@ -1,0 +1,106 @@
+Local determinant / weighted-sequence exact-statement audit
+20 October 2026
+
+Primary source inspected:
+https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf
+Printed pp.2267--2268 and 2271--2272.
+The rendered printed page2268 (PDF page9) was inspected directly, not merely
+the extracted text. Snapshot: /tmp/ccdn-local-normalization-page9.png.
+No matching correction was found in the author's addenda dated 2026-04-20:
+https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf
+
+1. Arbitrary weighted profiles (Lemma2.2)
+
+WeightedSequenceEstimate.lean proves the following for every dimension m>=2.
+Let g:N->N, g(0)=1, mu>0, and
+  g(k) <= mu*k^(m-1)/(m-1)! + c*mu*k^(m-2)   (k>0).
+For every finite list of s weights in which weight k occurs at most g(k)
+times:
+  sum(weights) >= (m!/mu)^(1/m)*m/(m+1)*s^(1+1/m)
+                   - (m+1+c*(m-1)!)*s.
+There is no restriction that g be a hypersurface Hilbert function.
+There is no assumed cumulative estimate: the shifted binomial capacity
+is derived internally from the pointwise hypothesis. The explicit error
+is independent of mu. c=0 is allowed.
+
+The initial-segment endpoint assumes an infinite enumeration in which the
+set of indices of each weight has exactly g(k) members, with g(k)>0.
+It proves the paper's sum over the first s terms. Monotonicity is not needed:
+an arbitrary order can only make this lower-bound problem harder, and the
+finite-list proof already treats every order.
+
+Dimension1 requires care in the literal arbitrary-profile formulation.
+With k^(m-2) interpreted as 1/k, the printed m=1 uniform claim is false.
+A mathematical counterexample (not yet formalized as a Lean sequence) is:
+  c=1, mu=K!, g(0)=1, g(k)=mu+floor(mu/k) for k>0.
+Writing H_K=sum_{k=1}^K 1/k, the nondecreasing enumeration through weight K
+has exactly
+  s=1+mu*(K+H_K), E=sum(weights)=mu*K*(K+1)/2+mu*K.
+Since k divides mu for 1<=k<=K, these are exact integer equalities.
+For H_K>=3/2,
+  [s^2/(2mu)-E]/s >= (H_K-3/2)/3.
+Indeed s<=3muK and s^2/(2mu)-E>=muK*(H_K-3/2).
+The right side is unbounded with K, contradicting any error C_{1,1}*s.
+Thus the m=1 boundary cannot be silently included with the printed
+arbitrary-g assumption and mu-independent error.
+
+This does not affect the actual dimension1 hypersurface application:
+its layers obey g(k)<=mu, a stronger condition. The checked theorem
+weighted_sequence_dimension_one proves the sharp leading term with
+error 2s for every list with at most mu occurrences of each weight.
+The existing hypersurface determinant pipeline already has this valid
+dimension1 case.
+
+2. Unequal homogeneous column degrees (Corollary2.5)
+
+The rendered Corollary2.5 explicitly uses primitive integer tuples and
+homogeneous columns, but states no equality of column degrees and no
+replacement of evaluations by normalized chart functions.
+
+For every s and prime p>s, take the SAME fixed smooth line X2=0, points
+  z_i=(i+1,p,0), 0<=i<s,
+and columns
+  F_j=X0^j, 0<=j<s.
+MixedDegreeProjectiveExample.lean checks:
+* z_i is primitive;
+* z_i lies on X2=0;
+* every point has exactly the same actual projective reduction [1:0:0];
+* F_j is homogeneous of degree j;
+* the evaluation determinant is a Vandermonde determinant prime to p.
+It additionally proves no_uniform_mixed_degree_local_error:
+for EVERY real C, one can choose s,p so that no exponent e satisfying
+  s^2/2-C*s <= e
+has p^e dividing the unnormalized determinant.
+This is a family, not a single small numerical example hidden by an
+unspecified asymptotic error. The error has precisely the printed n=1,
+mu=1 shape.
+
+The flaw in treating the displayed primitive evaluations as local ring
+functions is that passage to the chart X0!=0 changes F_j(z_i) to
+  F_j(z_i)/z_i0^(deg F_j).
+For common column degree this is one invertible factor per matrix row.
+For different degrees it is an entry-dependent factor and cannot be
+discarded by determinant row scaling.
+
+MixedDegreeProjectiveLocal.lean proves the corrected local assertion:
+if N is the actual proved hypersurface multiplicity exponent and u_i
+is an inverse of the pivot coordinate modulo p^N, then
+  p^N | det(u_i^(deg F_j) * F_j(z_i)).
+The existence theorem constructs those inverse coordinates from the
+chart-unit hypothesis. It assumes no new count or factorization statement.
+
+The already checked common-degree Corollary2.5/2.9 and Proposition3.2.6
+pipeline remains valid and unchanged. The normalized mixed-degree theorem
+does NOT by itself prove a simultaneous-prime gcd inequality for a single
+unnormalized integer matrix: the normalizations can depend on the prime.
+Accordingly the new local example formally refutes the literal primitive-
+evaluation local statement; it is NOT labeled a separate formal
+counterexample to the full global Proposition3.2.6.
+
+3. Formal scope
+
+The three modules and their endpoints are included in the root import and
+transitive axiom audit. See verification.txt for the canonical build result.
+Exact Lemma 2.1 local-ring Hilbert equality, its sharper multiplicity-
+independent pointwise remainder, and general Noetherian Lemma 2.4 remain
+outside the proved scope.

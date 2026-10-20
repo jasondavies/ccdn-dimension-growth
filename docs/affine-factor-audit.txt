@@ -46,12 +46,18 @@ constant affinely but remains an irreducible homogeneous linear equation.
 
 Coefficient dichotomy
 ---------------------
-The proved dichotomy supplies H<=N^N*B^(d*N), N=choose(n+d,d), or an actual
-degree-d nonmultiple vanishing on all bounded projective zeros. The affine
-version supplies degree at most d. The factor N^N depends on d; it is not the
-dimension-only multiplier printed in Lemma 4.2.2. Its logarithmic size is
-sufficient for the polynomial box cutoff, but the exact printed multiplier
-remains open.
+Lemma 4.2.2 is now proved with the printed dimension-only multiplier by
+projective_coefficient_height_dichotomy_uniform. In n+2 variables, one
+C(n)>0 works for every nonzero homogeneous degree-d integer polynomial
+and every B>=1:
+H(f)<=C(n)*B^(d*N), N=choose(n+1+d,d), or an actual homogeneous degree-d
+nonmultiple vanishes on all projective zeros of height at most B.
+Primitivity and irreducibility are not needed. Primitive evaluation rows
+are embedded into the hyperplane X0=0; its proved determinant divisor
+absorbs the factorial interpolation cost. This argument does not use the
+disputed affine-factor equality. The earlier N^N multiplier remains a
+valid quantitative bound, sufficient for the polynomial box cutoff.
+The literal affine-factor versions of 4.2.1 and 4.2.4 remain open.
 
 Published corrections affecting future work
 ------------------------------------------

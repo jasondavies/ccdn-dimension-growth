@@ -1365,8 +1365,9 @@ Exact-statement audit found two distinctions, recorded in
 * Literal affine Definition 3.2.1 omits degree loss. Its equality under
   homogenization fails for 439*x^2+y. Our proved affine theorem uses the
   inclusive factor; exact literal Proposition 4.2.1 remains open.
-* The proved coefficient dichotomy has multiplier N^N, not the printed
-  dimension-only multiplier. Exact Lemma 4.2.2 remains open.
+* At this checkpoint the coefficient dichotomy had multiplier N^N and
+  exact Lemma 4.2.2 remained open. The later uniform coefficient-height
+  checkpoint below proves the dimension-only multiplier.
 The author's published addenda were checked; corrected targets for 4.3.3,
 4.3.4 and 4.3.7 are now recorded in the full-paper ledger.
 Main Theorems 1,4,6, Proposition 5, Section 6, exact Noether forms in 3.2.2,
@@ -1677,3 +1678,55 @@ Log: /tmp/ccdn-projection-no-index-two-canonical.log
 Guarded integration: /tmp/ccdn-projection-no-index-two-sync.json
 Source inventory: /tmp/ccdn-projection-no-index-two-inventory.json (563 files)
 Inventory SHA256: 24cbb65df543ee1bef64aa453f09393db5acec16116bf9d27a467c1f10c985b7
+
+
+
+2026-10-20: full class-group bound, cubic projective exponent, and exact lemmas
+---------------------------------------------------------------------------
+Integrated twenty-two new mathematical modules with root imports and endpoint
+audits. classGroup_two_torsion_bound proves full Theorem 6 for every degree
+n>=3, with a single positive degree-only constant and the exact parity-dependent
+logarithm. The quadratic branch constructs invariant ideal classes, bounds
+ramified primes by actual discriminant primes, proves discriminant descent,
+and absorbs prime-factor and logarithmic losses in strong degree induction.
+No genus-theory or external counting statement is an additional premise.
+
+projective_dimension_growth_cubic sharpens full Theorem 1 to exponent 2*n^3,
+including empty and zero-dimensional loci. SmallOutsidePoint proves the
+small-point Corollary 4.1.2 over every characteristic-zero field.
+CurveGridDegreeBound proves the exact degree-times-grid-size count for prime
+curves over any field in every finite ambient dimension.
+
+projective_coefficient_height_dichotomy_uniform proves exact Lemma 4.2.2:
+one C(n)>0 works for all nonzero homogeneous f of degree d in n+2 variables
+and every B>=1,
+giving H(f)<=C(n)*B^(d*choose(n+1+d,d)) or an actual degree-d homogeneous
+nonmultiple vanishing on every bounded projective zero. Primitive evaluation
+rows are embedded as (0,z) in the height-one hyperplane X0=0. Its proved
+minor-gcd bound absorbs the factorial interpolation term at large rank;
+bounded rank contributes a dimension-only constant.
+
+WeightedSequenceEstimate proves arbitrary-profile Lemma 2.2 in dimensions
+at least two, with explicit multiplicity-independent error, and the valid
+dimension-one hypersurface case. MixedDegreeProjectiveExample formally
+disproves the unnormalized arbitrary-degree local assertion on a fixed line.
+MixedDegreeProjectiveLocal proves the corrected inverse-pivot normalization.
+The separate dimension-one arbitrary-profile counterexample is documented
+mathematically, not formalized. No global arbitrary-degree determinant
+counterexample or theorem is claimed. See local-determinant-audit.txt.
+
+The six main results are proved. Exact intermediate statements in the ledger
+remain open, including universal Noether forms and the literal affine-factor
+versions of 4.2.1 and 4.2.4. Full-paper completion is not claimed.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 609 reachable modules.
+Full build: 9659 jobs, PASS.
+Transitive audit: 3326 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Pierce local dependency metadata and sibling source check: PASS.
+Log: /tmp/ccdn-main-results-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-main-results-checkpoint-sync.json
+Source inventory: /tmp/ccdn-main-results-checkpoint-inventory.json (585 files)
+Inventory SHA256: dc57fb94915db733140fa116b21c2f5fcab1267cf23cbb6bda0fb902ba2269d3
