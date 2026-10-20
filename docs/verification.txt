@@ -4,6 +4,13 @@ VERIFICATION RECORD
 Lean: leanprover/lean4:v4.35.0
 Mathlib: 56a005855ea17e0b0958f73ec801ae140b0a1679
 
+This is a chronological log; the newest entry is at the end. Entries before
+"Rename the library namespace and modules to CCDN" use the names in force when
+they ran: the module prefix and namespace AffineCurveCounting (now CCDN), and
+source paths under AffineCurveCounting/ (now CCDN/). Hashes in those entries
+refer to the files as they were then and are not expected to match the current
+tree. The current verification command is bash scripts/check.sh.
+
 Historical smooth-branch verification (19 October 2026)
 ------------------------------------------------------
 bash scripts/check.sh passes with 9103 Lake jobs, auditing 194 project and
@@ -2295,3 +2302,23 @@ was needed beyond the namespace replacements.
 Build log: /tmp/ccdn-namespace-rename-build.log
 Comparator log: /tmp/ccdn-namespace-rename-comparator.log
 Source inventory: /tmp/ccdn-namespace-rename-inventory.json (910 files)
+
+
+2026-10-20: Review cleanup
+--------------------------
+The Proposition 5 docstring in Challenge.lean now says what the paper claims
+(a lower bound showing d^4 in Theorem 2 cannot become o(d^2)); its statement is
+unchanged. Axioms.lean now also audits every declaration of the Solution module
+and prints axioms only for the nine compared statements and their seven library
+endpoints, since the sweep already covers every declaration. scripts/check.sh
+now also runs check-lean-sources.py; check_sources.py is renamed
+check-provenance.py. The README's development narrative moved verbatim to
+docs/development-notes.md. NOTICE carries the current project name.
+
+Source requirements and provenance: PASS (934 reachable modules).
+Full canonical build: PASS (9987 jobs).
+Axiom audit: PASS (5093 project, 555 vendor and 24 submission declarations),
+using only propext, Classical.choice and Quot.sound.
+Sandboxed Comparator: PASS for all nine statements, with Lean, NanoDa and
+con-ron, run on an identical-source isolated copy with real dependency
+directories.

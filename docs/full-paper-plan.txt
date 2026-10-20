@@ -10,7 +10,7 @@ DOI: https://doi.org/10.2140/ant.2020.14.2261
 Status: complete with the source corrections recorded below, including the
 class-group application and external mathematical inputs. The portable
 statement-to-declaration audit is docs/completion-audit.json. The final
-integrated verification is recorded in docs/verification.txt. Historical
+integrated verification is the latest entry of docs/verification.txt. Historical
 milestone sections below retain their original development context; the
 statement ledger and completion audit describe the final scope.
 

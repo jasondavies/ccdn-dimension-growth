@@ -185,10 +185,11 @@ theorem affine_hypersurface_bound_rat (n : ℕ) :
         C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) := by
   sorry
 
-/-- **Proposition 5** (sharpness of Theorem 2). For every `d ≥ 1` there is an
+/-- **Proposition 5** (lower bound for Theorem 2). For every `d ≥ 1` there is an
 integral projective plane curve `X = V(F) ⊆ ℙ²` over `ℚ` of degree `d`, with `F` irreducible
-over `ℚ̄`, and an integer `B ≥ 1` with `N(X, B) ≥ d² B^(2/d) / 5`. Its degree is checked
-both as the total degree of `F` and by the homogeneous Hilbert function. -/
+over `ℚ̄`, and an integer `B ≥ 1` with `N(X, B) ≥ d² B^(2/d) / 5`. Hence the factor `d⁴` in
+Theorem 2 cannot be replaced by anything in `o(d²)`. Its degree is checked both as the total
+degree of `F` and by the homogeneous Hilbert function. -/
 theorem projective_plane_curve_lower_bound (d : ℕ) (hd : 0 < d) :
     ∃ F : MvPolynomial (Fin 3) ℚ, ∃ B : ℕ, 1 ≤ B ∧
       F.IsHomogeneous d ∧ F.totalDegree = d ∧

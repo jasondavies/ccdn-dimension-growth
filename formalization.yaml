@@ -14,7 +14,7 @@ project:
     projective curves (Theorem 2); N_aff(X,B) ≤ C(n) d³ B^(1/d)(log B + d) for
     integral affine curves (Theorem 3); and C(N) d^(3N+9) B^(N−2) for affine
     hypersurfaces whose top-degree form is absolutely irreducible (Theorem 4). It
-    also proves the matching lower-bound construction d² B^(2/d)/5 (Proposition 5),
+    also proves the lower-bound construction d² B^(2/d)/5 (Proposition 5),
     and the 2-torsion bound
     h₂(K) ≤ C(n) |disc K|^(1/2−1/(2n)) (log |disc K|)^(1−n mod 2) for all number
     fields of degree n ≥ 3 (Theorem 6). Degree and dimension are defined through
