@@ -58,8 +58,8 @@ sources:
     relationship: "other"
     note: >-
       Authors' published corrections to the source paper. The formalization follows
-      them: n+2 variables in 2.6; absolute irreducibility of the top form in 4.3.3 and
-      Theorem 4; d^18 in 4.3.4; the factor d in 4.3.7; and the recomputed exponent in
+      them: n+2 variables in 2.6; absolute irreducibility of h(f) in 4.3.3; d^18 in
+      4.3.4; the factor d in 4.3.7; and the recomputed exponent in
       4.3.8.
     author_endorsement: "not-contacted"
   - title: "On Siegel's lemma"
@@ -142,15 +142,14 @@ automation:
 fidelity:
   divergences: >-
     Main results. Theorem 1 uses the explicit exponent 2n³ in place of the paper's
-    numerical exponent, which the addenda amend. Theorem 4 assumes absolute
-    irreducibility of the top-degree form, following the addenda's strengthening of
-    the irreducibility hypothesis in 4.3.3. It proves the explicit exponent 3N+9,
-    which the addenda leave to be recomputed. Theorems 2, 3 and 6 and Proposition 5 match
-    the printed statements. Degree is the Hilbert-function slope or the normalized
+    numerical exponent, which the addenda amend. Theorem 4 assumes, as printed, that
+    the top-degree form is irreducible over the algebraic closure of Q, and proves the
+    explicit exponent 3N+9, which the addenda leave to be recomputed. Theorems 2, 3
+    and 6 and Proposition 5 match the printed statements. Degree is the Hilbert-function slope or the normalized
     leading coefficient; integrality is primality of the ideal over Q.
     Intermediate statements (not compared here): Lemma 2.2 for n=1 with an arbitrary
     profile is formally refuted, and the hypersurface case is proved instead.
-    Lemmas 2.5, 2.6, 2.9 and Proposition 3.2.6 need a common homogeneous degree
+    Corollaries 2.5 and 2.9 and Propositions 2.6 and 3.2.6 need a common homogeneous degree
     within each evaluation matrix; the literal varying-degree 3.2.6 is formally
     refuted. In 4.2.1 the printed equality of affine and homogeneous bad-prime
     factors fails (counterexample 439x²+y), and the literal conclusion is proved
@@ -194,12 +193,12 @@ alignment:
     - source: "Theorem 4"
       lean: "CCDN.Submission.affine_hypersurface_bound"
       module: "Challenge"
-      status: "proved (with the addenda's corrected hypothesis)"
+      status: "proved"
       note: "Integer equations. From CCDN.top_form_hypersurface_dimension_growth_cubic."
     - source: "Theorem 4"
       lean: "CCDN.Submission.affine_hypersurface_bound_rat"
       module: "Challenge"
-      status: "proved (with the addenda's corrected hypothesis)"
+      status: "proved"
       note: "Rational equations. From CCDN.rational_top_form_hypersurface_dimension_growth_cubic."
     - source: "Proposition 5"
       lean: "CCDN.Submission.projective_plane_curve_lower_bound"
