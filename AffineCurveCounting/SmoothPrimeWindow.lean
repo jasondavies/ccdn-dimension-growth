@@ -1,0 +1,125 @@
+module
+
+public import AffineCurveCounting.CongruencePrimeWindow
+public import AffineCurveCounting.PolynomialBoxHeight
+public import AffineCurveCounting.PlaneAuxiliaryCount
+
+/-! Actual nonsingular integer points have many smooth reduction primes
+in one common finite window. The excluded primes divide one nonzero partial
+derivative value, whose height is bounded directly from the equation. -/
+
+@[expose] public section
+namespace AffineCurveCounting
+noncomputable section
+open MvPolynomial Finset
+
+theorem integer_pderiv_coefficient_bound {σ : Type*} [Fintype σ]
+    (f : MvPolynomial σ ℤ) (j : σ) {H : ℝ} (hH : 0 ≤ H)
+    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H) (e : σ →₀ ℕ) :
+    |((pderiv j f).coeff e : ℝ)| ≤ ((f.totalDegree : ℝ) + 1) * H := by
+  classical
+  rw [coeff_pderiv]
+  by_cases hz : f.coeff (e + Finsupp.single j 1) = 0
+  · simp only [hz, zero_mul, Int.cast_zero, abs_zero]
+    positivity
+  · have he : e j + 1 ≤ f.totalDegree := by
+      have h := ((degreeOf_le_iff).mp (degreeOf_le_totalDegree f j))
+        (e + Finsupp.single j 1) (mem_support_iff.mpr hz)
+      simpa only [Finsupp.add_apply, Finsupp.single_eq_same] using h
+    push_cast
+    rw [abs_mul, abs_of_nonneg (by positivity : (0 : ℝ) ≤ (e j : ℝ) + 1)]
+    have heR : (e j : ℝ) + 1 ≤ (f.totalDegree : ℝ) + 1 := by exact_mod_cast (by omega : e j + 1 ≤ f.totalDegree + 1)
+    calc
+      _ ≤ H * ((e j : ℝ) + 1) :=
+        mul_le_mul_of_nonneg_right (hcoeff _) (by positivity)
+      _ ≤ H * ((f.totalDegree : ℝ) + 1) :=
+        mul_le_mul_of_nonneg_left heR hH
+      _ = _ := by ring
+
+theorem integer_pderiv_totalDegree_le {σ : Type*}
+    (f : MvPolynomial σ ℤ) (j : σ) :
+    (pderiv j f).totalDegree ≤ f.totalDegree := by
+  rw [← rational_map_totalDegree (pderiv j f), ← pderiv_map]
+  exact (pderiv_totalDegree_le (map (Int.castRingHom ℚ) f) j).trans
+    (by rw [rational_map_totalDegree]; omega)
+
+theorem integer_pderiv_evaluation_bound {n : ℕ}
+    (f : MvPolynomial (Fin n) ℤ) (j : Fin n) {H B : ℝ}
+    (hH : 0 ≤ H) (hB : 1 ≤ B)
+    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (x : IntPoint n) (hx : ∀ i, |(x i : ℝ)| ≤ B) :
+    |(eval x (pderiv j f) : ℝ)| ≤
+      ((f.totalDegree : ℝ) + 1) ^ (n + 1) * H * B ^ f.totalDegree := by
+  have hb := polynomial_eval₂_box_bound (pderiv j f)
+    (((f.totalDegree : ℝ) + 1) * H) B (by positivity) hB
+    (integer_pderiv_coefficient_bound f j hH hcoeff)
+    (fun i => (x i : ℝ)) hx
+  have heval : (eval x (pderiv j f) : ℝ) =
+      eval₂ (Int.castRingHom ℝ) (fun i => (x i : ℝ)) (pderiv j f) := by
+    simpa only [eval₂_id, RingHom.comp_id, Function.comp_def, Int.coe_castRingHom] using
+      eval₂_comp_left (Int.castRingHom ℝ) (RingHom.id ℤ) x (pderiv j f)
+  rw [← heval, Fintype.card_fin] at hb
+  have hdeg := integer_pderiv_totalDegree_le f j
+  have hdegR : ((pderiv j f).totalDegree : ℝ) ≤ f.totalDegree := by exact_mod_cast hdeg
+  calc
+    _ ≤ (((pderiv j f).totalDegree : ℝ) + 1) ^ n *
+        (((f.totalDegree : ℝ) + 1) * H) * B ^ (pderiv j f).totalDegree := hb
+    _ ≤ ((f.totalDegree : ℝ) + 1) ^ n *
+        (((f.totalDegree : ℝ) + 1) * H) * B ^ f.totalDegree := by
+      gcongr
+    _ = _ := by rw [pow_succ]; ring
+
+theorem integer_pderiv_log_bound {n : ℕ}
+    (f : MvPolynomial (Fin n) ℤ) (j : Fin n) {H B : ℝ}
+    (hH : 1 ≤ H) (hB : 1 ≤ B)
+    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (x : IntPoint n) (hx : ∀ i, |(x i : ℝ)| ≤ B)
+    (hne : eval x (pderiv j f) ≠ 0) :
+    Real.log |(eval x (pderiv j f) : ℝ)| ≤
+      (n + 1 : ℝ) * Real.log ((f.totalDegree : ℝ) + 1) +
+        Real.log H + f.totalDegree * Real.log B := by
+  have hpos : (0 : ℝ) < |(eval x (pderiv j f) : ℝ)| :=
+    abs_pos.mpr (by exact_mod_cast hne)
+  have hdpos : (0 : ℝ) < (f.totalDegree : ℝ) + 1 := by positivity
+  have hH0 : 0 < H := by linarith
+  have hB0 : 0 < B := by linarith
+  have hlog := Real.log_le_log hpos
+    (integer_pderiv_evaluation_bound f j hH0.le hB hcoeff x hx)
+  rw [Real.log_mul (mul_pos (pow_pos hdpos _) hH0).ne' (pow_pos hB0 _).ne',
+    Real.log_mul (pow_pos hdpos _).ne' hH0.ne', Real.log_pow, Real.log_pow] at hlog
+  simpa only [Nat.cast_add, Nat.cast_one] using hlog
+
+/-- The common prime window contains a set with product at least exp L
+at which this actual nonsingular point has smooth reduction. -/
+theorem exists_smooth_prime_window_subset {n : ℕ}
+    (f : MvPolynomial (Fin n) ℤ) {H B L : ℝ}
+    (hH : 1 ≤ H) (hB : 1 ≤ B) (hL : 1 ≤ L)
+    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hheight : (n + 1 : ℝ) * Real.log ((f.totalDegree : ℝ) + 1) +
+      Real.log H + f.totalDegree * Real.log B ≤ L)
+    (x : IntPoint n) (hx : ∀ i, |(x i : ℝ)| ≤ B)
+    (hsmooth : ∃ j, eval x (pderiv j f) ≠ 0) :
+    ∃ P : Finset ℕ, P ⊆ congruencePrimeWindow L ∧
+      Real.exp L ≤ ∏ p ∈ P, (p : ℝ) ∧
+      ∀ p ∈ P, ∃ j, eval (fun i => (x i : ZMod p))
+        (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0 := by
+  classical
+  obtain ⟨j, hj⟩ := hsmooth
+  let D := eval x (pderiv j f)
+  have hD : D ≠ 0 := hj
+  have hbound : Real.log |(D : ℝ)| ≤ L :=
+    (integer_pderiv_log_bound f j hH hB hcoeff x hx hj).trans hheight
+  let P := (congruencePrimeWindow L).filter (fun p : ℕ => ¬ (p : ℤ) ∣ D)
+  refine ⟨P, filter_subset _ _, congruencePrimeWindow_avoiding_product hL hD hbound, ?_⟩
+  intro p hp
+  refine ⟨j, ?_⟩
+  have hnd := (mem_filter.mp hp).2
+  have he : eval (fun i => (x i : ZMod p))
+      (pderiv j (map (Int.castRingHom (ZMod p)) f)) = (D : ZMod p) := by
+    rw [pderiv_map]
+    exact (map_eval (Int.castRingHom (ZMod p)) x (pderiv j f)).symm
+  rw [he]
+  exact fun h => hnd ((ZMod.intCast_zmod_eq_zero_iff_dvd D p).mp h)
+
+end
+end AffineCurveCounting

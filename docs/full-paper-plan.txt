@@ -18,6 +18,11 @@ Main statements
 Theorem 1: OPEN. For each n > 1, constants c(n), e(n), uniformly for all
 integral projective Q-varieties X of degree d >= 5 and real B >= 1:
 N(X,B) <= c(n) d^e(n) B^dim(X). No B^epsilon or logarithmic loss.
+PROVED CASE: projective_hypersurface_dimension_growth handles rationally
+irreducible homogeneous hypersurfaces of every degree >=5 in every projective
+ambient dimension >=2, with explicit degree exponent 18+9n in P^(n+2).
+Both absolute and nonabsolute branches are proved.
+General projective varieties remain.
 
 Theorem 2: PROVED. AffineCurveCounting.projectiveCurveBound proves
 ProjectiveCurveBound: for each n>=2, one C(n)>0 bounds the actual rational
@@ -37,26 +42,40 @@ affine Hilbert growth:
 N_aff(X,B) <= C(n) d^3 B^(1/d) (log B + d).
 Check: scripts/check.sh; declaration and transitive-axiom audit in Axioms.lean.
 
-Theorem 4: OPEN. For each n > 2, constants c(n), e(n), uniformly for
-integer polynomials of degree d >= 5 with irreducible leading homogeneous
-part over Q:
+Theorem 4: PROVED. For each n > 2, constants c(n), e(n), uniformly for
+integer polynomials of degree d >= 5 with absolutely irreducible leading
+homogeneous part (irreducible over Q-bar, as in the rendered paper):
 N_aff(f,B) <= c(n) d^e(n) B^(n-2), B >= 1.
+top_form_hypersurface_dimension_growth gives C(n)*d^(18+9n)*B^(n+1)
+for n+3 integer variables and every d>=5. The small-degree surface cover,
+coefficient-height reduction, hyperplanes, slice equations and count injections
+are constructed; no missing geometric/counting premise. The rational-equation
+version is also proved.
 
-Proposition 5: OPEN. For every integer d > 0, construct an integral
+Proposition 5: PROVED. For every integer d > 0, construct an integral
 projective plane curve X of degree d and integer B >= 1 for which
 (1/5) d^2 B^(2/d) <= N(X,B).
+projective_integral_curve_lower_bound constructs the actual homogeneous
+equation, proves absolute irreducibility, prime defining ideal, and exact
+projective Hilbert degree, and counts the actual projective zero locus.
 
 Theorem 6: OPEN. For every number-field degree d > 2, a uniform constant
 depending only on d bounds the cardinality of the actual 2-torsion in
 the ideal class group:
 h_2(K) <= C(d) |disc(K)|^(1/2-1/(2d))
                     (log |disc(K)|)^(1-(d mod 2)).
-The class-group-to-integral-points reduction must also be proved.
+The reduction to an actual finite family of signed norm curves indexed by
+integer translation classes is proved. Its uniform lattice count and the
+corrected quadratic-tower branch remain open.
 
-Section 6 consequences: OPEN. The lower-bound examples must establish the
-stated obstructions to improving the degree factors: projective curves
-o(d^2), affine curves o(d^2/log d), and exponents below 1 and 2 in
-Theorems 1 and 4 respectively.
+Section 6 consequences: PROVED. Actual lower-bound families establish the
+stated obstructions: projective_curve_factor_not_isLittleO excludes o(d^2)
+in the B^(2/d) curve envelope; affine_curve_log_factor_not_isLittleO excludes
+o(d^2/log d) in the B^(1/d)*log B envelope.
+projective_hypersurface_degree_exponent_ge_one covers every projective
+ambient dimension >=2; affine_hypersurface_degree_exponent_ge_two covers
+every affine ambient dimension >=3. The affine examples satisfy the
+absolutely irreducible leading-form hypothesis of Theorem 4.
 
 Infrastructure and proof routes
 ------------------------------
@@ -490,16 +509,13 @@ sensitive Theorem 3.1.1 is preserved, rather than replaced by a larger bound.
 The choice of M in both coefficient-height ranges is PROVED, including
 bounded coordinate positioning and the nonabsolute auxiliary case.
 
-Next: affine auxiliary polynomials and coefficient-sensitive affine bounds,
-line contributions, surface bounds, bounded slicing, and projection to
-Theorems 4 and 1. The plane and curve cases already proved do not constitute
-the higher-dimensional global counting results.
-
-The paper's proof is comparatively self-contained for d >= 16.
-Its use of Browning--Heath-Brown--Salberger for fixed small degrees and
-Salberger's degree-five result must not become unproved Lean inputs.
-An alternative complete proof is acceptable only if it preserves every
-degree, dimension, height and uniformity quantifier.
+The affine auxiliary, line contributions, all-degree surface bound and
+bounded slicing now prove Theorem 4 and the hypersurface case of Theorem 1.
+The general-variety projection remains open. The small-degree surface proof
+uses a constructed smooth-congruence cover and crossing count; it does not
+assume the external Browning--Heath-Brown--Salberger or Salberger bounds.
+All degree, dimension, height and uniformity quantifiers of Theorem 4 are
+retained.
 
 Lower bounds need actual irreducible equations through the specified
 integer grids; irreducibility of the Newton-polytope construction cannot
@@ -585,21 +601,36 @@ Section 3:
 3.3.4 Bombieri--Vaaler (existing proved vendored dependency);
 3.3.5 elementary logarithmic inequality: PROVED by log_log_sub_div_le,
     with explicit additive constant -1 for every c>0 and x>1;
-3.4.1 coefficient bounds from grid values: a quantitative replacement is
-    PROVED in every dimension, with factor (d+1)^(n*(d+1)), sufficient for
-    the complete auxiliary theorem. The stated exact 3^d complex estimate
-    remains OPEN;
+3.4.1 coefficient bounds from grid values: PROVED with the exact complex
+    factor 3^d by complex_polynomial_coefficient_bound_of_integer_grid.
+    exists_complex_integer_grid_height_witness chooses one integer in [0,d]
+    controlling every coefficient simultaneously;
 3.4.2 bounded coordinate change positioning the leading coefficient: PROVED
-    for integer equations in arbitrary dimension. The actual shear preserves
-    the bad-prime set and has log-height loss O_{n,r}(d*d^(1/r)); its degree
-    bound consequence is fully assembled in the absolute auxiliary theorem.
-    The exact complex 3^((n+1)d) intermediate constant remains OPEN.
+    with the exact complex factor 3^(nd) for forms in n+1 variables, after
+    indexing the fixed coordinate first. The integer parameters lie in [0,d];
+    exists_complex_homogeneous_grid_height_witness controls every coefficient
+    at the same point, and exists_complex_bounded_leading_coefficient_translation
+    places it in the actual lexicographic leading coefficient. The existing
+    integer shear invariance and auxiliary-degree assembly remain available.
 
 Section 4:
-4.1.1 trivial pure-dimensional affine count;
+4.1.1 trivial pure-dimensional affine count: the exact hypersurface bound
+    d(2B+1)^(n-1) is PROVED for every nonzero equation in n variables by
+    rational_hypersurface_count_le. The exact d(2B+1) bound for
+    prime curves in affine three-space is PROVED by CurveBoxDegreeBound,
+    using actual transcendental coordinates and bounded fibers. The general
+    pure-dimensional statement remains OPEN;
 4.1.2 small integer point outside a proper variety;
 4.1.3 non-Q-defined geometric components;
-4.1.4 non-geometrically-integral varieties;
+4.1.4 non-geometrically-integral varieties: the affine-surface case is PROVED
+    by nonabsolute_surface_count_le, with exact d^2(2B+1) and splitting over
+    any field extension. The auxiliary equation, rational component cover
+    and degree budget are constructed. The all-dimensional hypersurface
+    bound with a dimension-only factor is also PROVED:
+    nonabsolute_hypersurface_dimension_growth gives
+    (3(n+2))^n*d^2*B^n in n+2 variables. It uses explicit grid separators
+    and a codimension-two Hilbert-rank bound. The sharp constant-one form
+    in all dimensions and general varieties remain OPEN;
 4.1.5 stated extension to geometric varieties;
 4.2.1 affine auxiliary polynomial: the all-case theorem with the defined
     degree-loss-inclusive affine bad-prime factor is PROVED by
@@ -618,38 +649,34 @@ Section 4:
     actual maximum coefficient height, actual defined factor and every real
     lower height Y>=1. No monotonicity or counting theorem is assumed;
 4.2.4 coefficient-sensitive affine plane count;
-4.2.5 coprime Newton-edge log-free affine count;
+4.2.5 coprime Newton-edge log-free affine count: the odd-degree signed norm
+    curve specialization is PROVED, with no bad primes in any characteristic
+    and bound C*d^4*B^(1/d). The general Newton-edge statement remains OPEN;
 4.3.1 bounded affine projection;
 4.3.2 bounded projective projection;
-4.3.3 line contributions on affine surfaces: OPEN. Corrected target requires
-    ABSOLUTE irreducibility of the leading homogeneous part. Actual rational
-    line arithmetic is PROVED: a line with at least two bounded integer
-    points has a primitive integer direction v of height <=2B and at most
-    1+2B/height(v) bounded integer points. Degree-one prime components with
-    a rational point equal actual rational affine lines. Characteristic-zero
-    integer planes with a full-degree geometrically irreducible section and
-    additional parameter avoidance are constructed. The parallel-line
-    multiplicity bound and the sum over projective directions remain OPEN;
-4.3.4 affine surface dimension growth: OPEN. Corrected degree factor is d^18,
-    not the printed d^14. The uniform auxiliary estimate (4-3-1) is PROVED,
-    with degree C*d^(7/2)*B^(1/sqrt(d)) and rational nondivisibility, including
-    removal of integer content. Actual proper surface sections have a finite
-    rational prime-curve cover with positive Hilbert degrees and additive
-    budget sum(degrees)<=degree(f)*degree(g). The combined top-form auxiliary
-    and component theorem covers every original bounded integer zero and has
-    total degree <=C*d^(9/2)*B^(1/sqrt(d)). The nonlinear component union
-    contributes <=C*d^18*B for d>=16, by the proved affine curve theorem and
-    summation of both curve-degree ranges. The combined endpoint constructs
-    the components and bounds original surface points outside their
-    degree-one union by A*d^18*B, with A independent of the equation and
-    radius. The line contribution and full surface-count assembly,
-    including degrees 5 through 15, remain OPEN;
+4.3.3 line contributions on affine surfaces: PROVED in the corrected form
+    requiring absolute irreducibility of the leading form. For every d>=3,
+    actual finite rational line families contribute at most C*d^6*B+#lines,
+    with C chosen before the equation, radius and family. Primitive directions,
+    their height bounds, nonzero directional derivatives, transverse good
+    planes, the d(d-1) parallel-line bound and reciprocal-height summation are
+    all constructed/proved. Degree-one prime component families are covered;
+4.3.4 affine surface dimension growth: PROVED for every d>=5 by
+    top_form_surface_dimension_growth, with the corrected coefficient-uniform
+    bound C*d^18*B, absolutely irreducible leading form and every real B>=1.
+    The large-degree auxiliary count and constructed small-degree congruence
+    cover are combined with the proved line contribution;
 4.3.5 surface covering input (Salberger);
 4.3.6 stated polynomial-dependence consequence;
 4.3.7 effective good hyperplanes: OPEN. Corrected degree is
-    (n+1)*d*(d^2-1), including the missing factor d;
-4.3.8 stated slicing/dimension-growth consequences: OPEN. Apply the corrected
-    4.3.3, 4.3.4 and 4.3.7. Author addenda dated 2026-04-20:
+    (n+1)*d*(d^2-1), including the missing factor d. A sufficient constructive
+    replacement is PROVED: an actual full-degree geometrically good hyperplane
+    with integral normal bounded by 6*(2d^3+3)^3 <=750d^9;
+4.3.8 stated slicing/dimension-growth consequences: PROVED for every d>=5,
+    by constructing integer equations for all parallel levels, preserving their
+    absolutely irreducible leading forms, and counting actual slices. Each
+    dimension step adds nine to the degree exponent. The exact printed
+    degree exponents remain OPEN. Author addenda dated 2026-04-20:
     https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf .
 
 Section 5:
@@ -659,8 +686,15 @@ Section 5:
 5.4 small integer kernel vectors.
 
 Section 6:
-6.1 absolutely irreducible polynomial containing a large integer grid;
-Proposition 5 and all subsequent degree-dependence obstructions.
+6.1: PROVED, exactly the stated grid and degree, in
+    exists_absolutely_irreducible_integer_grid for all d>=1,n>=2. The proof
+    uses explicit Eisenstein polynomials rather than Newton polytopes;
+Proposition 5: PROVED with exact constant 1/5, including the actual projective
+    count and Hilbert degree, in projective_integral_curve_lower_bound.
+The subsequent degree-dependence obstructions are PROVED by
+ProjectiveDegreeObstruction, AffineCurveDegreeObstruction and
+DegreeDependenceObstruction. The displayed Newton-polytope construction is
+replaced by proved explicit Eisenstein and binomial-leading-form constructions.
 
 Completion evidence
 -------------------
@@ -710,8 +744,9 @@ vanishing on all rational projective zeros of height at most B.
 This completes the absolutely irreducible case of Theorem 3.1.1 in every
 positive degree and hypersurface dimension. The nonabsolute case is completed
 by the subsequent descent argument below.
-The weaker interpolation factor proves the necessary mathematical consequence
-of Lemmas 3.4.1-2 but does not establish their exact stated complex constants.
+The original weaker interpolation factor suffices for this auxiliary proof.
+The subsequent ComplexGridInterpolation and ComplexMultivariateGrid modules
+also prove the exact stated complex constants of Lemmas 3.4.1-2.
 
 Full auxiliary theorem and nonabsolute descent
 --------------------------------------------
@@ -816,12 +851,13 @@ integer plane with full-degree geometrically irreducible section, together
 with avoidance of any supplied nonzero polynomial condition on the plane
 parameters. It bounds the parameters by 2*d^3+degree(P). Constructing the
 specific transversality and derivative-avoidance condition needed for the
-parallel-line bound remains separate work.
+parallel-line bound is completed by SurfaceTransversePlane below.
 
 These developments supply the auxiliary and component structure for surface
-dimension growth. Corrected Propositions 4.3.3 and 4.3.4 remain OPEN, as do
-the external low-degree surface inputs, higher-dimensional slicing and
-projection, and the other exact-statement obligations in the ledger.
+dimension growth. The subsequent line and surface assembly completes corrected
+Proposition 4.3.3 and the d>=16 case of 4.3.4. The subsequent congruence
+argument extends this to every d>=5, including all-dimensional slicing.
+General projective-variety projection and the other listed obligations remain.
 
 SurfaceAuxiliaryExponent sums the nonlinear curve-bound expression in both
 degree ranges, using the actual total-degree budget. The fourth-power term
@@ -837,3 +873,143 @@ equation and B, constructs the actual prime-curve family and its degrees,
 and proves both the nonlinear-union count and the original surface count
 outside the degree-one component union are <=A*d^18*B for d>=16.
 Neither the curve family nor a point-count bound is an input assumption.
+
+
+Surface lines, full large-degree surfaces, and exact complex interpolation
+------------------------------------------------------------------------
+SurfaceDirectionalDerivative proves that every nonzero rational direction
+has nonzero directional derivative when the top ternary form is absolutely
+irreducible. BinaryHomogeneousIrreducibility supplies the needed degree-one
+obstruction. SurfaceTransversePlane constructs a good plane transverse to
+the direction and with nonzero restricted derivative. SurfaceParallelLines
+then bounds actual distinct parallel lines by d(d-1), using plane Bezout.
+SurfaceLineDirections supplies the actual projective direction and primitive
+spacing bound. SurfaceDirectionSum proves the coefficient-uniform reciprocal
+height sum using geometric height bands and the proved projective curve bound.
+SurfaceLineContribution proves corrected 4.3.3. DegreeOneComponentLines and
+SurfaceDegreeOneCount transfer it to the constructed prime components.
+TopFormSurfaceCount proves the full corrected C*d^18*B surface bound for d>=16.
+This closes the line-contribution gap in the earlier nonlinear-only milestone.
+
+CurveBoxDegreeBound proves the elementary d(2B+1) bound for actual prime curves
+in affine three-space by a transcendental coordinate and proper linear fibers.
+NonabsoluteSurfaceCount constructs a degree<=d auxiliary by linear descent of
+proper factors over any extension, then uses actual complete-intersection
+components and their total degree budget to prove d^2(2B+1) for every rationally
+irreducible full surface equation that splits. This is the surface case of 4.1.4.
+
+ComplexGridInterpolation bounds each integer-grid Lagrange basis polynomial's
+coefficients by choose(d+1,i+1), and sums these bounds to
+2^(d+1)-1 <=3^d. This proves exact Lemma 3.4.1 over C. Iteration and homogeneous
+chart injectivity prove Lemma 3.4.2 with factor 3^(nd), including a single grid
+witness for all coefficients and the actual bounded leading-coefficient shear.
+No inverse-Vandermonde estimate or complex interpolation theorem is assumed.
+
+
+Smooth congruence auxiliary and further reduction infrastructure
+--------------------------------------------------------------
+SurfaceCongruenceCutoff proves an actual proper integer auxiliary on all
+bounded zeros in given smooth residue classes. Its degree is at most
+C(d,K)*(B^(1/sqrt(d))/exp(Q)+1)*(1+log(B)+Q), where Q is the sum of the
+selected prime logarithms and log(H)<=K*(log(B)+1). The constant is chosen
+before the coefficients, radius and congruences. The standard monomials,
+numerical rank and degree cutoff are constructed, with no remaining
+determinant-gap hypothesis. The residue cover and small-degree surface
+count are now completed below. SmallDegreeSurfaceNumerics proves that the required
+fixed polylogarithmic losses fit the strict exponent gaps for all d>=5.
+
+BoundedRowSeparation, BoundedLinearProjection and BoundedMinorSpecialization
+prove the integer linear algebra and bounded specialization used in Section 5.
+Projection kernels, ranks, idempotence up to scale and heights are explicit.
+A nonzero polynomial in maximal minors, with an actual rational full-rank
+witness, has an integer full-rank witness with entries at most r*(deg(F)+1).
+The geometric good-center witness, general-dimensional Hilbert-degree bridge
+and birational degree-preserving projection theorem remain open. These
+modules do not complete Section 5.1 or 5.2.
+
+ClassGroupTwoTorsion and ClassGroupIdealRescaling construct actual integral
+ideal representatives and injective principal-square generators for class
+group two-torsion, with exact absolute norms and both possible norm signs.
+Rescaling by a nonzero inverse-ideal element preserves the class and exact
+generator. ClassGroupBalancedGenerator now constructs distinct integral
+square generators with each infinite-place absolute value less than
+9*|disc(K)|^(1/[K:Q]). ClassGroupBoundedGenerators proves finiteness and
+reduces actual two-torsion cardinality to their bounded square-norm set.
+ClassGroupNormPolynomial constructs signed norm-polynomial fibers; in odd
+field degree OddDegreeNormCurves proves their full degree and absolute
+irreducibility. Translation-class packing and the actual norm-curve reduction
+are now proved below; the uniform lattice count and quadratic-tower reduction
+remain. The cited external reduction is not assumed as an axiom.
+
+
+Residue-cover coverage and balanced class-group generators
+--------------------------------------------------------
+CongruencePrimeWindow and SmoothPrimeWindow construct a common finite prime
+window and a large-product smooth subset at every nonsingular integer point.
+SmoothAffineResidueClasses counts actual simultaneous residue families by
+d^|P|*(product P)^2 on surfaces; no sharp finite-field surface count is assumed.
+SurfaceCongruenceFamily selects actual auxiliaries coherently for all such
+families. ResidueSubsetBoundary and SurfaceResidueBoundary prove that every
+nonsingular point on an initial curve of sufficiently large degree lies on
+a proper auxiliary crossing along a one-prime subset edge. SurfaceCurveCrossing
+proves the exact total-degree budget for any distinct prime curve family
+contained in a section and its proper intersection count. PrimeWindowSubpower
+absorbs the number and fixed multiplicities of subset edges into B^epsilon;
+SmallDegreeSurfaceCurveCount gives the O(B) contribution of initial nonlinear
+curves with logarithmic degree. The finite crossing sum and full small-degree
+surface theorem are completed by the following modules.
+
+SurfaceResidueEdgeCount and SurfaceResidueCover sum actual proper crossings.
+SurfaceCoefficientReduction bounds the coefficients or gives a degree-d
+auxiliary with O(d^2 B) points. SurfaceResidueLinearCount chooses the common
+window and absorbs its subset multiplicity and logarithmic factors into O(B).
+SurfaceSmallCurveCover, SurfaceRetainedCurveCount and PrimitiveSurfaceFixedDegree
+combine this residual count with the retained curves, singular points and lines.
+TopFormSurfaceFixedDegree removes primitivity and proves C(d)*B for every
+fixed d>=5. TopFormDimensionGrowthAllDegrees absorbs degrees 5..15 into the
+large-degree constant. BoundedHyperplaneDimensionGrowth provides the generic
+induction; HypersurfaceDimensionGrowth gives the rational and projective
+endpoints, including the nonabsolute branch. Thus Theorem 4 is proved in full.
+
+BoundedLinearElimination constructs integer directions bounded by deg(f)+1
+for a chosen nonzero f in an ideal, monic coordinates and actual quotient
+integrality over the retained linear forms. Bounding the degrees of the
+chosen contraction equations by the geometric degree remains necessary
+for the general-variety projection theorem.
+
+External class-group reduction source audit:
+Louis Mallet-Burgues, Explicit bounds for 2-torsion in class groups of number
+fields (2024), Section 4 gives a counterexample to the genus-theory inequality
+used in the cited index-two-subfield branch. Section 2.2 instead descends a
+quadratic tower using Kluners-Wang, Theorem 2.7. The proposed route retains
+the stronger exponent in a nontrivial tower to absorb the additional
+subpower factor; that argument and the tower estimate are still unproved
+in this library. This is not a claim that CCDN Theorem 6 is false.
+Sources:
+https://www.normalesup.org/~lmalletb/bounds%20on%202%20torsion.pdf
+https://arxiv.org/abs/2003.12161
+
+
+General Hilbert polynomial and actual norm-curve reduction
+---------------------------------------------------------
+MonomialOrthants and OrthantHilbertPolynomial partition standard exponent
+vectors into finitely many translated coordinate orthants. Their exact counts
+are binomial polynomials. OrthantMultiplicity proves positivity of the leading
+coefficient and its integral factorial multiple. FilteredHilbertPolynomial
+constructs the unique eventual filtered Hilbert polynomial for every ideal;
+proper ideals have positive integral multiplicity. General degree-preserving
+projection and the general-variety case of Theorem 1 remain open.
+
+ClassGroupTranslateFibers and ClassGroupNormCurveReduction prove an actual
+finite signed norm-curve family, indexed by bounded algebraic integers modulo
+integer translation, whose total integral point count bounds h2(K).
+IntegerTranslationClassPacking injects each class times integers of size at
+most R into the archimedean box of radius B+R, giving
+#classes(B)*(2*floor(R)+1).toNat <= #boundedArchimedeanIntegers(B+R).
+FieldMultiplicationHyperplane proves the multiplication nondegeneracy needed
+for the pending uniform lattice estimate. OddDegreeNormCurveBaseChange proves
+full-degree irreducibility of signed norm curves over every field in odd field
+degree. AffinePlaneBadPrimeCount and OddDegreeNormCurveCount prove their bad
+factor is one and their count is at most C*d^4*B^(1/d), without a logarithm.
+The uniform lattice count and corrected quadratic-tower branch are unproved;
+Theorem 6 remains open.

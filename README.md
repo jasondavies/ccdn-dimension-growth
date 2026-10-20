@@ -3,7 +3,7 @@
 A Lean 4 formalisation of Castryck–Cluckers–Dittmann–Nguyen's dimension-growth
 paper, including coefficient-uniform point bounds.
 
-**Status: the full affine and projective curve bounds are proved in Lean.**
+**Status: Theorems 2, 3 and 4 are proved in Lean.**
 `AffineCurveCounting.affineCurveBound` proves CCDN Theorem 3, and
 `AffineCurveCounting.projectiveCurveBound` proves Theorem 2. Both cover all
 ambient dimensions `n ≥ 2` and all positive degrees, with no external
@@ -22,8 +22,14 @@ Degree is specified by the slope of the affine or homogeneous Hilbert function,
 respectively. The projective count includes points at infinity, lines and
 curves that split over an algebraic closure.
 
-**The full paper is not yet formalised.** Higher-dimensional dimension growth,
-lower-bound constructions and the class-group application remain open. The
+The full affine hypersurface bound (Theorem 4) and the projective hypersurface
+case of Theorem 1 are also proved for every degree `d ≥ 5`, including degrees
+5 through 15. In `n+3` affine or homogeneous variables, the bound is
+`C(n) d^(18+9n) B^(n+1)`.
+
+**The full paper is not yet formalised.** The general projective-variety
+reduction, the class-group application and several exact intermediate
+statements remain open. The
 [full-paper ledger](docs/full-paper-plan.txt) records the complete scope
 and the external inputs that must be proved.
 
@@ -100,18 +106,108 @@ proved to be exactly rational affine lines. For each line with at least two
 bounded integer points, its primitive integer direction has height at most
 `2B`, and the integer count is at most `1 + 2B/height(direction)`.
 
-Characteristic-zero plane specialization also constructs an integer plane
-whose section is geometrically irreducible of full degree while avoiding any
-additional nonzero polynomial condition on its parameters. The parallel-line
-multiplicity bound and the sum over directions are still needed for corrected
-Proposition 4.3.3. For surface degree `d ≥ 16`, the nonlinear components'
-contribution is bounded by `C d^18 B`, using the proved total-degree budget
-and the unconditional affine curve theorem. The combined theorem
-`top_form_surface_nonlinear_count` constructs the components and bounds the
-original surface's bounded integer points outside their degree-one union by
-`A d^18 B`, with `A` chosen independently of the equation and radius.
-The complete surface count still needs the line contribution. Degrees 5
-through 15 and higher-dimensional dimension growth remain open.
+The corrected surface-line contribution is proved in
+`surface_line_contribution`: for absolutely irreducible leading form and
+`d ≥ 3`, any finite family of actual rational lines contributes at most
+`C d^6 B + number_of_lines`. A constructed transverse plane bounds parallel
+lines by `d(d−1)`, and the projective curve theorem bounds the sum of
+reciprocal direction heights. Both geometric inputs are proved.
+
+`top_form_surface_count` combines the line and nonlinear contributions into
+the full corrected surface estimate `C d^18 B` for `d ≥ 16` and absolutely
+irreducible leading form. Its constant is chosen before the equation and
+real radius `B ≥ 1`. The absolute-irreducibility condition is the one printed
+in Theorem 4 and Proposition 4.3.4; text extraction can lose the bar over Q.
+
+`top_form_surface_dimension_growth` supplies the same `C d^18 B` estimate
+for every `d ≥ 5`. The small degrees use a constructed smooth-congruence
+cover, proper auxiliary crossings, retained low-degree curves and the proved
+line contribution. The coefficient-height condition is discharged internally.
+
+`top_form_hypersurface_dimension_growth` extends the bound to every ambient
+dimension `n+3`, giving `C(n) d^(18+9n) B^(n+1)` for every `d ≥ 5`. It
+constructs a good integer hyperplane with normal bounded by `750d^9`,
+integer equations for all parallel slices, and the point maps used in the
+induction. `rational_top_form_hypersurface_dimension_growth` also covers
+rational equations. `projective_hypersurface_dimension_growth` proves the
+corresponding projective hypersurface bound, including rationally irreducible
+equations that split over an algebraic closure. These endpoints have no
+external counting, slicing, height or covering premise. The general
+projective-variety reduction remains open.
+
+`nonabsolute_surface_count_le` separately proves the sharp elementary bound
+`d²(2B+1)` for a rationally irreducible full surface equation that splits over
+a field extension, including the actual component construction and degree
+budget. This is the surface instance of Corollary 4.1.4.
+`nonabsolute_hypersurface_dimension_growth` proves the needed dimension-growth
+bound in all dimensions, with explicit constant `(3(n+2))^n` for `n+2`
+variables and degree factor `d²`. It constructs a proper auxiliary and uses
+grid interpolation in the filtered coordinate ring. The exact constant-one
+statement and general varieties remain open. The same method also bounds
+the actual singular locus of any rationally irreducible hypersurface.
+
+The exact complex interpolation estimates of Lemmas 3.4.1 and 3.4.2 are now
+proved. Integer-grid values bound every coefficient by `3^d` in one variable
+and `3^(nd)` in `n` variables. One grid point controls all coefficients, and
+a bounded integer shear puts that value in the leading coefficient of a
+homogeneous form.
+
+The lower-bound constructions in Lemma 6.1 and Proposition 5 are proved.
+`exists_absolutely_irreducible_integer_grid` constructs a prescribed-degree
+equation through the entire stated integer grid. `projective_integral_curve_lower_bound`
+constructs an actual integral projective plane curve and an integer radius
+with at least `(d²/5) B^(2/d)` rational points, for every positive degree.
+Its prime defining ideal and projective Hilbert degree are also certified.
+The proof uses explicit Eisenstein equations instead of the paper's
+Newton-polytope construction.
+The Section 6 degree-dependence obstructions are also proved for actual
+families: the projective curve factor cannot be `o(d²)`; the affine envelope
+`g(d) B^(1/d) log B` cannot have `g(d)=o(d²/log d)`; and dimension-growth degree
+exponents must be at least one projectively and two affinely. The affine
+examples have absolutely irreducible leading forms, meeting Theorem 4's
+actual hypothesis.
+
+For the small-degree surface cases, the smooth-congruence
+determinant divisors, their simultaneous global logarithmic estimate and
+the combined bad-prime charge are proved. The standard-monomial weight is
+bounded by `(2/3)s sqrt(2s/d)+(2d+2)s`, and the determinant upper bound retains
+the sum of column degrees. `exists_surface_congruence_auxiliary` now constructs
+an actual proper integer auxiliary on every bounded smooth congruence class,
+with degree at most `C(d,K)(B^(1/√d)/exp Q + 1)(1 + log B + Q)` when
+`log H ≤ K(log B + 1)` and `Q` is the sum of the selected prime logarithms.
+The constant is independent of the coefficients, radius and chosen congruences.
+A common prime window, its smooth residue classes and the boundary of its
+subsets are constructed. Every nonsingular point on a sufficiently large-degree
+initial curve lies on a proper auxiliary crossing. The product-of-degrees
+crossing bound, subpower subset count and logarithmic-degree curve contribution
+are proved. Summing the actual crossings gives a linear residual count.
+Combining this with retained curves and lines proves a coefficient-uniform
+`C(d) B` bound for every fixed `d ≥ 5`; the finitely many degrees 5 through 15
+then join the large-degree estimate above.
+
+The bounded linear algebra for general projective projections is proved:
+actual integer projection matrices, their kernels and ranks, height bounds,
+and bounded specialization of polynomials in maximal minors. Bounded linear
+elimination makes a chosen nonzero ideal equation monic and constructs an
+integral coordinate map. The general filtered Hilbert polynomial is now
+constructed for every ideal, with positive integral multiplicity for proper
+ideals. The geometric good-center construction and general-dimensional
+degree preservation remain.
+
+The class-group application now starts with the actual ideal class group:
+two-torsion classes have integral representatives with principal squares,
+chosen square generators are injective, and rescaling inside the inverse ideal
+preserves the class and exact generator. Signed norms are handled explicitly.
+Balanced generators are now constructed: each infinite-place absolute value
+is less than `9 |disc(K)|^(1/[K:Q])`. This gives an injection into a finite set
+of bounded integers with square absolute norm. Actual signed norm-polynomial
+curves are constructed and, in odd field degree, proved absolutely irreducible
+of the full field degree over every field. In odd degree, they have no bad
+reduction primes and satisfy a uniform logarithm-free `C d⁴ B^(1/d)` count.
+The actual two-torsion count is reduced to a finite sum of these signed norm
+curves indexed by integer translation classes. An injective packing argument
+bounds those classes by an ordinary lattice-box count. Its uniform estimate
+and the corrected quadratic-tower reduction are still required for Theorem 6.
 
 ## Build and audit
 
@@ -135,6 +231,15 @@ review of theorem statements.
 
 | Module | Checked content |
 | --- | --- |
+| `SurfaceResidueEdgeCount`, `SurfaceResidueCover`, `SurfaceCoefficientReduction`, `SurfaceResidueLinearCount`, `SurfaceSmallCurveCover`, `SurfaceRetainedCurveCount`, `PrimitiveSurfaceFixedDegree`, `TopFormSurfaceFixedDegree` | Construct and count the smooth-congruence cover; discharge coefficient height and prove the full fixed-degree surface bound for every d ≥ 5. |
+| `BoundedHyperplaneDimensionGrowth`, `TopFormDimensionGrowthAllDegrees`, `HypersurfaceDimensionGrowth` | Theorem 4 in all degrees d ≥ 5 and all ambient dimensions; rational equations and the full projective hypersurface case of Theorem 1. |
+| `MonomialOrthants`, `OrthantHilbertPolynomial`, `OrthantMultiplicity`, `FilteredHilbertPolynomial` | Construct the eventual filtered Hilbert polynomial and its positive integral multiplicity for every proper ideal. |
+| `ClassGroupTranslateFibers`, `ClassGroupNormCurveReduction`, `IntegerTranslationClassPacking` | Reduce actual two-torsion to signed norm curves and inject integer translates into a bounded archimedean lattice box. |
+| `OddDegreeNormCurveBaseChange`, `AffinePlaneBadPrimeCount`, `OddDegreeNormCurveCount` | Prove odd-degree norm curves have full degree and irreducibility in every characteristic, bad-prime factor one, and a logarithm-free count. |
+| `SurfaceLineDirections`, `BinaryHomogeneousIrreducibility`, `SurfaceDirectionalDerivative`, `SurfaceTransversePlane`, `SurfaceParallelLines` | Construct actual projective directions, nonzero directional derivatives and transverse irreducible plane sections; bound distinct parallel surface lines by d(d−1). |
+| `SurfaceDirectionSum`, `SurfaceLineContribution`, `DegreeOneComponentLines`, `SurfaceDegreeOneCount`, `TopFormSurfaceCount` | Uniform reciprocal direction-height sum, corrected line contribution and full corrected surface bound C d^18 B for absolutely irreducible top form and d ≥ 16. |
+| `CurveBoxDegreeBound`, `NonabsoluteSurfaceCount` | Elementary d(2B+1) prime-curve box bound and exact d²(2B+1) nonabsolute full-surface bound via constructed descent and components. |
+| `ComplexGridInterpolation`, `ComplexMultivariateGrid` | Exact complex coefficient bounds 3^d and 3^(nd), a simultaneous bounded integer-grid witness and the corresponding leading-coefficient shear. |
 | `TopFormIrreducibility`, `TopFormBadPrimes`, `TopFormAuxiliaryEstimate`, `TopFormAuxiliary` | Absolute irreducibility of the leading form controls the original equation and its bad primes; the resulting coefficient-uniform auxiliary has degree `C(r)d^(4−1/r)B^(1/d^(1/r))` and is a rational nonmultiple. |
 | `StandardMonomials`, `MonomialRays`, `FilteredHilbertLinearity`, `FilteredLinearGrowth` | Exact standard-monomial model of filtered dimensions, eventual linearity under an actual linear growth bound, and the proper-intersection specialization with arbitrary initial cutoff. |
 | `FilteredPrimeDecomposition`, `FilteredComponentRank`, `FilteredComponentDegreeBudget`, `CompleteIntersectionHeight`, `PrimeComponentTranscendence`, `CompleteIntersectionDegreeBudget`, `TopFormSurfaceComponents` | Actual minimal-prime decomposition, separators and additive Hilbert degree budget. The surface auxiliary covers all original bounded integer zeros by positive-degree rational prime curves of total degree at most `C d^(9/2) B^(1/√d)`. |

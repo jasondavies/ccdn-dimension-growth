@@ -1443,3 +1443,170 @@ plus 555 vendor declarations. Only propext, Classical.choice and Quot.sound
 occur. Source checks and git diff --check passed after documentation cleanup.
 The corresponding staging comments and documentation are synchronized; the
 nine additional staging modules remain outside this verified checkpoint.
+
+
+Resumed full-paper work: surface lines and exact interpolation — 20 October 2026
+-------------------------------------------------------------------------------
+Integrated fourteen new mathematical modules with root imports and endpoint
+checks. Corrected Proposition 4.3.3 is proved for actual finite rational line
+families on surfaces with absolutely irreducible top form. The derivative,
+transverse plane, parallel-line multiplicity and reciprocal direction-height
+sum are constructed. top_form_surface_count assembles the full corrected
+C*d^18*B surface bound for d>=16, with its constant chosen before f and B.
+
+The exact surface instance of Corollary 4.1.4 is proved separately:
+nonabsolute_surface_count_le bounds actual rationally irreducible full surface
+equations splitting over an extension by d^2(2B+1), with no geometric input
+hypotheses. The actual auxiliary and prime-curve degree budget are constructed.
+ComplexGridInterpolation and ComplexMultivariateGrid prove the exact complex
+3^d and 3^(nd) coefficient estimates, one simultaneous integer-grid witness,
+and its realization as the leading coefficient of a bounded shear.
+Rendered primary-paper page 2264 was checked: Theorem 4 requires irreducibility
+over Q-bar, whose overbar is lost in text extraction. The ledger now states
+that actual scope explicitly.
+
+Canonical bash scripts/check.sh: PASS.
+25 vendor hashes; 408 reachable modules; 9458 Lake jobs;
+2236 project and 555 vendor declarations audited;
+only propext, Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Source inventory: /tmp/ccdn-resume-core-inventory.json (384 project/root files).
+Inventory SHA256: 1fd892bfdbed499c9ad512f17c178f97a579a746abf22cfca848c5010f5cf2db
+Guarded integration manifest: /tmp/ccdn-resume-core-sync.json (18 files).
+Build/audit logs: /tmp/ccdn-resume-core-build.log,
+                 /tmp/ccdn-resume-core-canonical.log.
+
+Degrees 5..15, higher-dimensional slicing/projection, lower-bound constructions,
+class-group application and the other exact-statement obligations remain open.
+Further grid and hyperplane modules are still in staging and are not covered
+by this checkpoint. The full-paper goal remains active; no completion claimed.
+
+
+2026-10-20: all-ambient large-degree bounds and exact lower-bound constructions
+----------------------------------------------------------------------------
+Integrated twenty mathematical modules, root imports, endpoint audits and scope docs.
+Theorem 4 is proved for d>=16 in all ambient dimensions, with actual bounded
+hyperplanes, parallel integer equations, degree preservation and count maps.
+The rational-equation and absolutely irreducible projective hypersurface cases
+are also proved. Degrees 5--15 and the general projective-variety reduction remain.
+Exact Lemma 6.1 and Proposition 5 are proved by explicit Eisenstein/grid
+constructions; the projective endpoint includes the prime defining ideal and
+actual projective Hilbert degree. The all-dimensional elementary hypersurface
+box bound is also proved. This is not completion of the full paper.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 428 reachable modules.
+Full build: 9478 jobs, PASS.
+Transitive audit: 2347 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Log: /tmp/ccdn-dimension-lower-canonical.log
+Guarded integration: /tmp/ccdn-dimension-lower-sync.json
+Source inventory: /tmp/ccdn-dimension-lower-inventory.json (404 files)
+Inventory SHA256: 10fa5060eb4cb5e6efcb1522f3bae41d0e06aeb7ba2679090768fe6cacc88447
+
+
+2026-10-20: nonabsolute dimension growth, sharpness, and congruence determinants
+----------------------------------------------------------------------------
+Integrated twenty-three mathematical modules and updated imports/audits/scope.
+Projective hypersurface dimension growth for d>=16 now covers all rationally
+irreducible equations, including those which split over extensions. The
+nonabsolute and singular affine loci have explicit dimension-only constants
+and quadratic degree dependence in all ambient dimensions.
+Section 6 asymptotic degree obstructions are proved for actual constructed
+families, including absolute-top affine examples and the exact d>=3 affine
+logarithmic lower bound. The projective curve power exponent is at least two.
+The standard-monomial weight and weighted archimedean determinant estimates,
+smooth congruence divisors, global estimates, and bad-prime charge are proved.
+The small-degree surface auxiliary and residue cover are not yet completed.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 451 reachable modules.
+Full build: 9501 jobs, PASS.
+Transitive audit: 2440 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Log: /tmp/ccdn-growth-obstruction-canonical.log
+Guarded integration: /tmp/ccdn-growth-obstruction-sync.json
+Source inventory: /tmp/ccdn-growth-obstruction-inventory.json (427 files)
+Inventory SHA256: 117c2a37c36f534325b827ecfb1e6e7d71a6aaace02507974df28fdd91d4e414
+
+
+2026-10-20: actual smooth-congruence auxiliaries and reduction algebra
+-------------------------------------------------------------------
+Integrated eleven mathematical modules with root imports and endpoint audits.
+The surface congruence auxiliary now has an explicit uniform degree cutoff;
+no standard-monomial rank or determinant-gap premise remains. The residue
+cover and the small-degree surface count remain open. Bounded projection
+matrices, heights and maximal-minor specialization are proved, but the
+geometric good-center and general degree-preservation steps remain.
+Actual class-group two-torsion square representatives, injective generators
+and inverse-ideal rescaling are proved. The archimedean and lattice reduction
+and quadratic-tower branch remain open. Full-paper completion is not claimed.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 462 reachable modules.
+Full build: 9512 jobs, PASS.
+Transitive audit: 2515 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Log: /tmp/ccdn-congruence-projection-canonical.log
+Guarded integration: /tmp/ccdn-congruence-projection-sync.json
+Source inventory: /tmp/ccdn-congruence-projection-inventory.json (438 files)
+Inventory SHA256: 89a457cb99ac743da91e58640f0ceabb3449c70623bb8c632769ec99ba5706b2
+
+
+2026-10-20: residue-cover coverage and balanced square generators
+--------------------------------------------------------------
+Integrated fourteen mathematical modules with root imports and endpoint audits.
+Constructed a common prime window, smooth residue families and their coherent
+auxiliaries, and proved actual large-curve point coverage by proper subset-edge
+crossings. Degree budgets, subpower subset multiplicities and the retained
+logarithmic-degree curve count are proved. The finite crossing sum and full
+small-degree surface theorem are not included in this checkpoint.
+Bounded monic linear elimination is proved; its general geometric degree
+control remains open. Actual class-group square generators are bounded at
+every infinite place, reduce h2 to a finite square-norm set, and give signed
+norm curves with full-degree absolute irreducibility in odd field degree.
+Translation-class lattice counting and the corrected quadratic-tower branch
+remain open. The ledger records the source issue in that branch.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 476 reachable modules.
+Full build: 9526 jobs, PASS.
+Transitive audit: 2630 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Log: /tmp/ccdn-residue-balanced-canonical.log
+Guarded integration: /tmp/ccdn-residue-balanced-sync.json
+Source inventory: /tmp/ccdn-residue-balanced-inventory.json (452 files)
+Inventory SHA256: 2fd283131ddf4af263d30beda907a1250bcca59ee270aa91bd328b1af9da84a4
+
+
+2026-10-20: full Theorem 4, projective hypersurfaces, and norm-curve reduction
+-------------------------------------------------------------------------
+Integrated twenty-two new mathematical modules and the generic slicing
+refactor, with root imports, endpoint audits and updated statement coverage.
+Theorem 4 is proved for every d>=5 and every affine ambient dimension >=3.
+The small-degree proof constructs its smooth-congruence cover, proper crossings,
+retained curves and line contribution, and removes coefficient-height and
+primitivity hypotheses. Combining degrees 5..15 with the large-degree estimate
+and bounded hyperplane slicing gives C(n)*d^(18+9n)*B^(n+1) in n+3 variables.
+Rational equations and projective hypersurfaces, including nonabsolute ones,
+are covered. No external surface-counting theorem is assumed.
+
+The actual filtered Hilbert polynomial and positive integral multiplicity are
+constructed for all proper ideals. Actual class-group two-torsion is reduced
+to a finite signed norm-curve family indexed by integer translation classes.
+The packing injection is proved; odd-degree norm curves have no bad primes
+and satisfy a logarithm-free C*d^4*B^(1/d) bound. The general-variety reduction,
+uniform lattice estimate, corrected quadratic-tower branch and exact named
+statements recorded in the ledger remain open. Full-paper completion is not
+claimed. Follow-on staging modules are outside this checkpoint.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 498 reachable modules.
+Full build: 9548 jobs, PASS.
+Transitive audit: 2751 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Log: /tmp/ccdn-all-degree-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-all-degree-checkpoint-sync.json
+Source inventory: /tmp/ccdn-all-degree-checkpoint-inventory.json (474 files)
+Inventory SHA256: bfb9c47722df7d2214d7ae000bfb1f858a1eb8b859a2aafcd0f6f271f97cc80d
