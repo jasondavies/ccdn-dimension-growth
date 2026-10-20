@@ -12,7 +12,7 @@ https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf
 1. Arbitrary weighted profiles (Lemma2.2)
 
 WeightedSequenceEstimate.lean proves the following for every dimension m>=2.
-Let g:N->N, g(0)=1, mu>0, and
+Let g:N->N, g(0)=1, mu>0, c in N, and
   g(k) <= mu*k^(m-1)/(m-1)! + c*mu*k^(m-2)   (k>0).
 For every finite list of s weights in which weight k occurs at most g(k)
 times:
@@ -31,7 +31,10 @@ finite-list proof already treats every order.
 
 Dimension1 requires care in the literal arbitrary-profile formulation.
 With k^(m-2) interpreted as 1/k, the printed m=1 uniform claim is false.
-A mathematical counterexample (not yet formalized as a Lean sequence) is:
+WeightedDimensionOneExample.lean now formalizes the counterexample:
+no_uniform_dimension_one_profile_error constructs, for every real C, an
+actual positive profile and infinite monotone enumeration with exact finite
+fibers, and an initial segment violating s^2/(2mu)-C*s. Its construction is:
   c=1, mu=K!, g(0)=1, g(k)=mu+floor(mu/k) for k>0.
 Writing H_K=sum_{k=1}^K 1/k, the nondecreasing enumeration through weight K
 has exactly
@@ -99,10 +102,11 @@ counterexample to the full global Proposition3.2.6.
 
 3. Formal scope
 
-The three modules and their endpoints are included in the root import and
+The modules and their endpoints are included in the root import and
 transitive axiom audit. See verification.txt for the canonical build result.
-Exact Lemma 2.1 local-ring Hilbert equality and its sharper multiplicity-
-independent pointwise remainder remain outside the proved scope.
+The exact affine-chart local-ring Hilbert equality and the full local
+weight-sequence bound are now proved, as described in section 5 below.
+The separate multiplicity-independent pointwise remainder remains open.
 
 4. General Noetherian-local determinant lemma
 
@@ -128,6 +132,31 @@ extra capacity assumption: it constructs the first s weights and their
 determinant divisor, or proves the determinant zero by Krull intersection
 when the profile has fewer than s weights.
 
-This closes the full local-ring scope of Lemma 2.4. It does not close the
-remaining exact 2.1/2.3 interfaces or repair the mixed-degree normalization
-issue in Corollary 2.5.
+This closes the full local-ring scope of Lemma 2.4. The later local Hilbert
+and weight constructions below also give the exact 2.1 equality and 2.3
+interface. The mixed-degree normalization issue in Corollary 2.5 remains.
+
+5. Actual hypersurface stalks and their weight sequences
+
+HypersurfacePointStalk constructs the localization of K[x]/(f) at the
+maximal ideal of a K-rational zero a of f. Its residue field is identified
+with K. InitialFormMultiplication and HypersurfaceTangentEquality prove
+cancellation and the entire initial-form kernel, giving the exact layer
+formula determined by the first nonzero translated homogeneous component.
+Quotient, localization and translation equivalences transport this equality
+to the actual stalk. hypersurfacePointStalk_hilbert_eq applies over every
+field, with no supplied tangent-cone equality or Hilbert estimate.
+
+ActualLocalHilbertWeights.exists_hypersurfacePointStalk_hilbert_weights
+constructs the multiplicity mu, exact profile and infinite monotone weight
+enumeration directly from f!=0 and f(a)=0. For positive hypersurface
+dimension m it proves
+  sum(first s weights) >= (m!/mu)^(1/m)*m/(m+1)*s^(1+1/m) - (m+1)*s.
+InfiniteWeightEnumeration constructs the exact finite fibers. The sharp
+bound uses the cumulative binomial profile, including dimension one, and
+does not use the false arbitrary-profile extension above.
+
+This proves the affine-chart formulation of the local Hilbert equality and
+Lemma 2.3. A separate Scheme/Proj stalk comparison is not claimed. The
+pointwise multiplicity-independent lower-order estimate printed in
+Lemma 2.1 remains open; the actual weight bound bypasses that estimate.

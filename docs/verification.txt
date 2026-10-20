@@ -1779,3 +1779,51 @@ Log: /tmp/ccdn-exact-lemmas-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-exact-lemmas-checkpoint-sync.json
 Source inventory: /tmp/ccdn-exact-lemmas-checkpoint-inventory.json (614 files)
 Inventory SHA256: 3e3fea1ab8ad8d810e78eb23012aba148651f7c3a7bc1e6d942d610e97efc4e7
+
+
+2026-10-20: actual local Hilbert weights, sharp sections and Euler forms
+--------------------------------------------------------------------
+Integrated thirty-two new mathematical modules with root imports and
+sixty-two explicit endpoint audits. HypersurfacePointStalk proves the exact
+Hilbert layers of the actual coordinate-ring localization at a rational
+hypersurface point, including its residue field and translation. The local
+weight endpoint constructs multiplicity and an infinite monotone enumeration
+from the equation and point, with the sharp leading term and error (m+1)*s
+in every positive hypersurface dimension m. The arbitrary-profile dimension-
+one claim with a k^(-1) remainder is now formally disproved for every proposed
+uniform real error constant by WeightedDimensionOneExample.
+
+PrincipalSectionPurity and PrincipalSectionGridBound construct the actual
+pure section components, their degree budget and the sharp grid count.
+SharpPrincipalSectionCount proves d*deg(g)*(2B+1)^m for a proper polynomial
+section and d^2*(2B+1)^(ambient-2) for any rationally irreducible hypersurface
+that becomes reducible over a field extension. Conjugate-component bounds,
+Hilbert-polynomial scalar-extension invariance, algebraic component dimensions,
+finite Galois fields of definition, finite-Galois component conjugacy and
+base-point inclusion on every such component are also proved.
+
+EulerProductVanishing proves that the actual universal integer plane minors
+vanish on products over arbitrary commutative rings with positive degree
+budgets a+b=d, deg(g)<=a and deg(h)<=b. IntegerPolynomialL1 and
+EulerUniversalHeight prove their exact coefficient-sum bound d^(3*d^2-3).
+The proof includes repeated and inseparable factors without a characteristic
+or nonzero-kernel premise. The new stalk construction reuses the existing
+affine translation coefficient identity, resolving the duplicate declaration
+caught during the first combined build.
+
+Remaining exact-statement gaps are recorded in the coverage ledger. They
+include the separate pointwise remainder in Lemma 2.1, general-variety Galois
+descent and component assembly, and the arbitrary-ambient universal Noether
+forms. The two unfinished ambient modules remain outside the canonical
+repository. Full-paper completion is not claimed.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 670 reachable modules.
+Full build: 9720 jobs, PASS.
+Transitive audit: 3811 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Log: /tmp/ccdn-stalk-sections-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-stalk-sections-checkpoint-sync.json
+Source inventory: /tmp/ccdn-stalk-sections-checkpoint-inventory.json (646 files)
+Inventory SHA256: 5ab191cabf13eac589d21b55521e4bab214ac9175c1242897dc1844c2a9d212b

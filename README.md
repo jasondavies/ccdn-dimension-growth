@@ -54,6 +54,15 @@ The general Noetherian-local determinant lemma (2.4) is proved in
 constructs those weights, or proves the determinant zero when there are too few.
 The local generators and residue-field identifications are proved internally.
 
+`hypersurfacePointStalk_hilbert_eq` computes the exact Hilbert layers of the
+actual localized coordinate ring at a rational hypersurface point.
+`exists_hypersurfacePointStalk_hilbert_weights` constructs its multiplicity
+and infinite weight sequence, proving the sharp Lemma 2.3 bound with error
+`(m+1)s` in every positive hypersurface dimension `m`. The separate pointwise
+remainder in Lemma 2.1 remains open. `no_uniform_dimension_one_profile_error`
+formally refutes the arbitrary-profile dimension-one extension of Lemma 2.2;
+the stronger actual hypersurface profile still gives the required bound.
+
 `pure_ideal_grid_card_le` proves Lemma 4.1.1 in every finite ambient dimension
 over characteristic-zero fields: a pure-dimensional ideal of dimension `m`
 and Hilbert multiplicity `d` has at most `d*|S|^m` zeros in the grid `S`.
@@ -74,9 +83,11 @@ statement in Theorem 3.2.2 remains open.
 The Euler-constrained plane construction now produces universal integer
 determinant forms homogeneous of degree `d²−1` for `d ≥ 2`. Specialization is
 proved over arbitrary commutative rings, and some form is nonzero on each normalized
-absolutely irreducible plane equation in characteristic zero. Reducibility
-vanishing in every characteristic, the printed coefficient-norm bound and
-the full higher-dimensional universal theorem remain open.
+absolutely irreducible plane equation in characteristic zero. The forms now
+vanish on products with positive degree bounds `a+b=d`, `deg(g)≤a` and
+`deg(h)≤b`, in every characteristic, including repeated and inseparable
+factors. Their sums of absolute coefficient values are at most `d^(3d²−3)`. The full
+higher-dimensional universal theorem remains open.
 
 The higher-dimensional simultaneous-prime determinant estimate is proved for
 maximal minors of common-degree homogeneous evaluation matrices. It retains
@@ -183,16 +194,16 @@ equations that split over an algebraic closure. These endpoints have no
 external counting, slicing, height or covering premise. The general
 projective-variety reduction is also completed by ProjectiveDimensionGrowth.
 
-`nonabsolute_surface_count_le` separately proves the sharp elementary bound
-`d²(2B+1)` for a rationally irreducible full surface equation that splits over
-a field extension, including the actual component construction and degree
-budget. This is the surface instance of Corollary 4.1.4.
-`nonabsolute_hypersurface_dimension_growth` proves the needed dimension-growth
-bound in all dimensions, with explicit constant `(3(n+2))^n` for `n+2`
-variables and degree factor `d²`. It constructs a proper auxiliary and uses
-grid interpolation in the filtered coordinate ring. The exact constant-one
-statement and general varieties remain open. The same method also bounds
-the actual singular locus of any rationally irreducible hypersurface.
+`nonabsolute_hypersurface_count_le_sharp` proves the exact Corollary 4.1.4
+bound `d²(2B+1)^n` for every rationally irreducible equation in `n+2`
+variables that becomes reducible over a field extension. Its auxiliary is
+constructed internally. More generally, `principal_section_count_le_box`
+bounds a proper degree-`e` section of a degree-`d`, dimension-`m+1` prime
+variety by `de(2B+1)^m`; section purity and its degree budget are proved.
+Conjugate-component counts, Hilbert-polynomial invariance under scalar
+extension, finite Galois fields of definition and component conjugacy are
+also proved. The general-variety nonabsolute count still requires the
+remaining Galois descent and component assembly.
 
 The exact complex interpolation estimates of Lemmas 3.4.1 and 3.4.2 are now
 proved. Integer-grid values bound every coefficient by `3^d` in one variable
@@ -310,6 +321,12 @@ review of theorem statements.
 
 | Module | Checked content |
 | --- | --- |
+| `HypersurfaceTangentEquality`, `HypersurfacePointStalk`, `ActualLocalHilbertWeights` | Exact local Hilbert layers and constructed weight sequences with the sharp multiplicity bound. |
+| `InfiniteWeightEnumeration`, `WeightedDimensionOneExample` | Actual infinite profile enumerations and a counterexample to the arbitrary-profile dimension-one claim. |
+| `PrincipalSectionPurity`, `PrincipalSectionGridBound`, `SharpPrincipalSectionCount` | Pure proper sections, exact grid counts and the sharp nonabsolute hypersurface bound. |
+| `HilbertScalarExtension`, `IdealScalarDescent`, `GeometricPrimeIntersectionGrid` | Scalar-extension Hilbert invariance, descended separators and sharp geometric intersection counts. |
+| `GaloisPolynomialPrimes`, `AlgebraicHilbertDimension`, `FiniteGaloisIdealDefinition` | Actual component conjugacy, dimension preservation and constructed finite Galois fields of definition. |
+| `EulerProductVanishing`, `EulerSparseMatrix`, `IntegerPolynomialL1`, `EulerUniversalHeight` | All-characteristic product vanishing and the exact plane coefficient-sum bound. |
 | `CoprimeNewtonEdge`, `CoprimeNewtonEdgeReduction`, `CoprimeNewtonEdgeCount`, `AffinePlaneCoefficientCount` | Generic logarithm-free Newton-edge count and the coefficient-sensitive plane minimum expression with the defined bad-prime factor. |
 | `HilbertLowDegreeEquation`, `HilbertFunctionFieldRank`, `HilbertCoordinateParameterField`, `BoundedIntegerNormalization` | Construct a low-degree ideal equation and finite parameter field; iterate bounded integral elimination to obtain actual integer normalization. |
 | `LatticeSuccessiveMinima`, `LatticeMinimaProduct`, `LatticePrescribedProduct`, `NumberFieldShortBasis` | Construct greedy lattice bases, prove their product bound, and obtain a uniform discriminant-root bound for integral basis vectors. |

@@ -204,8 +204,9 @@ The dimension-one hypersurface profile is also covered. The printed
 arbitrary-profile dimension-one boundary requires correction; see
 docs/local-determinant-audit.txt. PrimeIntegerLocalDeterminant now proves
 Lemma 2.4 for arbitrary Noetherian local rings, with the actual Z_(p) target
-and exact initial local-layer weights. The exact local Hilbert-function
-equality and stronger mu-independent error in Lemma 2.1 remain open.
+and exact initial local-layer weights. The exact affine-chart local Hilbert
+function is now proved by HypersurfacePointStalk; the separate multiplicity-
+independent pointwise remainder in Lemma 2.1 remains open.
 
 Projective hypersurface determinant step: PROVED for homogeneous evaluation
 matrices of a common degree, in every positive hypersurface dimension.
@@ -548,15 +549,25 @@ For each item, record a proved exact statement or the proved replacement
 used to obtain its full mathematical consequences.
 
 Section 2:
-2.1 local hypersurface Hilbert functions and multiplicities;
+2.1 local hypersurface Hilbert functions and multiplicities: exact layer
+    equality is PROVED by hypersurfacePointStalk_hilbert_eq for the actual
+    coordinate-ring localization at every rational hypersurface point.
+    The multiplicity, initial-form kernel, residue field and translation are
+    constructed. The separate multiplicity-independent pointwise remainder
+    remains OPEN; no Scheme/Proj stalk comparison is asserted;
 2.2 weighted-sequence estimate: PROVED for arbitrary integer profiles in
     every dimension m>=2, with error (m+1+c*(m-1)!)*s independent of
     multiplicity. weighted_sequence_initial_sum_lower_bound gives the
     initial-segment formulation. Dimension one is proved for the actual
-    hypersurface profile g(k)<=mu. A mathematical counterexample to the
-    printed arbitrary-profile dimension-one claim is documented in
-    docs/local-determinant-audit.txt; that counterexample is not formalized;
-2.3 local multiplicity sequence bound;
+    hypersurface profile g(k)<=mu. WeightedDimensionOneExample now formally
+    disproves the arbitrary-profile dimension-one claim with the k^(-1)
+    interpretation: for every real error constant it constructs a positive
+    profile, infinite monotone enumeration and violating initial segment;
+2.3 local multiplicity sequence bound: PROVED for actual hypersurface stalks
+    by exists_hypersurfacePointStalk_hilbert_weights in every positive
+    dimension m. It constructs the multiplicity and infinite enumeration,
+    with the exact leading term and explicit error (m+1)*s. The proof uses
+    the exact cumulative profile, including dimension one;
 2.4 local determinant divisibility: PROVED for arbitrary Noetherian local
     rings by primeInteger_local_enumerated_weight_det, with actual Z_(p)
     evaluation maps and the exact first-s layer-weight sum. The residue map,
@@ -605,8 +616,12 @@ Section 3:
     homogeneous of degree d^2-1, d>=2. Their matrix specialization is proved
     in every characteristic, and their nonvanishing on normalized absolutely
     irreducible full-degree plane equations is proved in characteristic zero.
-    Reducibility vanishing in every characteristic, the printed coefficient
-    norm and the full higher-dimensional universal theorem remain OPEN;
+    EulerProductVanishing proves their vanishing on every product g*h with
+    positive degree budgets a+b=d, deg(g)<=a and deg(h)<=b, over arbitrary
+    commutative rings, including
+    repeated and inseparable factors. EulerUniversalHeight proves the exact
+    plane coefficient-sum bound d^(3*d^2-3). The full higher-dimensional
+    universal theorem remains OPEN;
 3.2.3 bad-prime factor height bound: PROVED by hypersurface_bad_prime_factor_max,
     for arbitrary finite families of actual bad primes, with an explicit
     dimension-dependent constant. The exact finite bad-prime set is constructed;
@@ -666,21 +681,24 @@ Section 4:
     coordinates in [0,d] and an ideal member nonvanishing there. The
     homogeneous version supplies a nonzero integer representative of
     projective height at most d outside the actual projective locus;
-4.1.3 non-Q-defined geometric components: LowDegreePointSeparation constructs
-    a degree-at-most-d ideal member separating any outside point of a prime
-    variety over an algebraically closed characteristic-zero field.
-    ProperSectionHilbert proves dimension drop and the leading-coefficient
-    bound for a proper polynomial section. These are proved inputs; purity
-    of the section and the full non-Q-defined component argument remain OPEN;
-4.1.4 non-geometrically-integral varieties: the affine-surface case is PROVED
-    by nonabsolute_surface_count_le, with exact d^2(2B+1) and splitting over
-    any field extension. The auxiliary equation, rational component cover
-    and degree budget are constructed. The all-dimensional hypersurface
-    bound with a dimension-only factor is also PROVED:
-    nonabsolute_hypersurface_dimension_growth gives
-    (3(n+2))^n*d^2*B^n in n+2 variables. It uses explicit grid separators
-    and a codimension-two Hilbert-rank bound. The sharp constant-one form
-    in all dimensions and general varieties remain OPEN;
+4.1.3 non-Q-defined geometric components: principal-section purity and its
+    exact d*deg(f) degree budget are PROVED. Low-degree separators and
+    principal_section_grid_card_le give exact section counts. For an actual
+    coefficient automorphism moving a prime ideal over an algebraically
+    closed characteristic-zero field, conjugate_prime_grid_card_le and
+    conjugate_prime_count_le_box prove the sharp d^2 count for points
+    fixed by that automorphism. GeometricPrimeIntersectionGrid descends this
+    to geometrically prime ideals over arbitrary characteristic-zero fields.
+    Hilbert scalar extension, algebraic component dimensions, finite Galois
+    fields of definition, and (after finite Galois extension) component
+    conjugacy and base-point inclusion in every component are PROVED.
+    Deriving the moved component from the full
+    non-Q-definition hypothesis and assembling the general statement remain OPEN;
+4.1.4 non-geometrically-integral varieties: the exact hypersurface statement
+    is PROVED in all ambient dimensions at least two by
+    nonabsolute_hypersurface_count_le_sharp, with d^2*(2B+1)^(ambient-2).
+    It allows reducibility over any field extension and constructs the
+    auxiliary equation internally. The general-variety statement remains OPEN;
 4.1.5 stated extension to geometric varieties;
 4.2.1 affine auxiliary polynomial: the all-case theorem with the defined
     degree-loss-inclusive affine bad-prime factor is PROVED by
