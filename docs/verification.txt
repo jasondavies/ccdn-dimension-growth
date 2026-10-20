@@ -2159,3 +2159,60 @@ Final log: /tmp/ccdn-chow-exact-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-chow-exact-checkpoint-sync.json
 Source inventory: /tmp/ccdn-chow-exact-checkpoint-inventory.json (867 files)
 Inventory SHA256: 6a0f8b09cfaa64dd02f9d5c8aa20060adab1c17439b8c353e4397cdb2488f18f
+
+
+2026-10-20: Sharp resultant detectors and bounded birational centers
+-----------------------------------------------------------------
+Integrated thirty-one new mathematical modules and 125 explicit theorem
+audits. Existing mathematical declarations were not modified. The source
+inventory covers every mathematical module reachable from the root.
+
+GenericBlockLine and GenericBlockLineIrreducible prove exact block degree,
+irreducibility over the parameter fraction field and separability for a
+generic line in a positive-degree block. ResultantCoefficientFamily and
+GenericBlockLineHomogeneity bound the derivative-resultant coefficients.
+BlockResultantIrreducibility detects the first power of an actual Chow
+restriction. SharpCenterResultantDetector constructs equations over the
+source characteristic-zero field, valid on all independent centers over
+an algebraically closed extension, whose nonvanishing detects precisely
+geometric disjointness and birationality. Their degree is D*(2*d-1), where
+D=(m+1)*d, strictly below D^2 when m>=1. This repairs the positive-dimensional
+degree bound by a new argument; it does not validate the printed Noether
+composition calculation. The strict m=0,d=1 bound remains false.
+
+BirationalCenterDensity and its constrained counterpart prove actual
+matrix-locus density and openness. CenterPluckerCoordinates constructs an
+injective projective maximal-minor map for actual fixed-dimensional
+subspaces, with homogeneous-equation compatibility. BirationalCenterPluckerTopology
+and FixedCoordinatePluckerTopology prove density and openness in the
+induced Plucker-Zariski topology, including centers contained in X0=0.
+Coordinates are indexed by all ordered column injections. No binomial
+coordinate count, quotient-topology equality or Scheme/Proj comparison is
+claimed.
+
+SharpBoundedBirationalCenter constructs integer good-center rows with
+entries at most (m+1)^2*d^2, and maximal minors at most
+r!*((m+1)^2*d^2)^r. SharpGoodCenterProjection constructs the complementary
+finite birational projection, a geometrically integral image of the same
+degree, and intrinsic height bound C(N)*d^(2*r^2)*H(x) on the source.
+The general off-center height estimate is available separately.
+ZeroDimensionalGoodCenter proves actual degree one in dimension zero and
+constructs the bounded centers; the fixed-coordinate results also cover
+empty centers. IntegerMinorProjectiveHeight bounds intrinsic projective
+height of the actual integer minor tuple without primitivity assumptions.
+
+Still to assemble: one sharp-degree complement-locus statement in actual
+CenterSubspace coordinates, and one good-center existence statement with
+its intrinsic Plucker height. The full-paper completion audit remains
+pending. This checkpoint does not claim full-paper completion.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 922 reachable modules.
+Full build: 9972 jobs, PASS.
+Transitive audit: 5038 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Final log: /tmp/ccdn-sharp-center-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-sharp-center-checkpoint-sync.json
+Source inventory: /tmp/ccdn-sharp-center-checkpoint-inventory.json (898 files)
+Inventory SHA256: 2d557030c529c5186c37504b34fe2b2f120a751c9806dca23f1f60e45bcd29fa

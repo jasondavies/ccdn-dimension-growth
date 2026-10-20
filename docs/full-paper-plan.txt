@@ -775,7 +775,8 @@ Section 4:
     by exists_geometric_projective_curve_projection, with additive error d^2,
     height cost C(n)*d^(2*n), and a constructed function-field identity.
     Proper chart selection and coordinate permutation are internal and
-    independent of B. The exact Section 5 center height is not claimed;
+    independent of B. The sharper center-height construction is recorded
+    separately in Section 5 below;
 4.3.3 line contributions on affine surfaces: PROVED in the corrected form
     requiring absolute irreducibility of the leading form. For every d>=3,
     actual finite rational line families contribute at most C*d^6*B+#lines,
@@ -831,20 +832,20 @@ Section 4:
     https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf .
 
 Section 5:
-5.1 bounded birational projection with height C(n)*d^(2*(n-m-1)^2): the
-    complementary projection and this height bound are PROVED from actual
-    bounded independent integer center rows, in
-    exists_center_projection_source_height. The constructed idempotent has
-    exactly the center as its kernel and a complementary image of dimension
-    m+2. Its formula, integral representatives and common denominator are
-    proved; a coordinate vanishing on the center is preserved.
-    exists_geometric_birational_projection_center constructs an actual
-    center of vector dimension n-m-1, geometrically disjoint from the source,
-    inducing a finite birational projection with geometrically integral
-    image of exactly degree d. IndependentBirationalProjection includes
-    degree one without changing the existing projection-matrix bound.
-    The sharper required bound on a basis of the center remains OPEN,
-    so the full quantitative statement is not yet proved;
+5.1 bounded birational projection with height C(n)*d^(2*(n-m-1)^2):
+    SharpBoundedBirationalCenter now constructs actual independent integer
+    good-center rows with entries at most (m+1)^2*d^2. SharpGoodCenterProjection
+    constructs the complementary projection, with the center as its exact
+    kernel, an integral birational coordinate map, and a geometrically
+    integral image of unchanged dimension and degree. Its packaged height
+    conclusion on X has exactly the printed exponent 2*(n-m-1)^2, with a
+    constant depending only on n. The proved entry bound and the general
+    normalizedIntegerProjection_projective_height estimate also give the
+    ambient height bound outside the center. The fixed-coordinate endpoint
+    constructs the center in X0=0 for affine closures; dimension zero is
+    included using the proved degree-one boundary, and the fixed-coordinate
+    endpoint includes the empty center. No bounded-center or good-center
+    premise remains in these constructions;
 5.2 polynomial detecting bad centers on the Grassmannian: the literal
     strict degree bound has a FORMALLY VERIFIED BOUNDARY OBSTRUCTION for
     m=0,d=1. An actual geometrically integral degree-one point and actual
@@ -869,7 +870,9 @@ Section 5:
     degree d is now PROVED by ChowExactDegree and ProjectiveChowExactDegree
     in characteristic zero, including dimension zero and equations over
     the original field for geometrically integral sources. The sharp
-    Grassmannian degree estimate remains OPEN.
+    degree estimate is now PROVED for the actual homogeneous detector;
+    its final packaging as equations for the complement in the subspace
+    Plucker model remains to be assembled below.
     GenericHyperplaneNormalization proves actual integral normalization
     and independent coordinates for algebraically independent hyperplane
     coefficients over an algebraically closed extension preserving source
@@ -927,11 +930,29 @@ Section 5:
     restriction, including D=1. BirationalMinorCenterWitness constructs
     actual independent rational center rows with integral birational
     determinant projection, also within X0=0 for affine closures.
-    The printed Noether
-    composition degree calculation is also not justified by the stated
-    degree bounds; this is a proof gap, not a positive-dimensional
-    counterexample. See docs/projection-center-audit.txt;
-5.3 bounded integer projection matrix: the polynomial specialization is
+    SharpCenterResultantDetector supplies a different, quadratic detector:
+    replace one hyperplane row by a generic line and take the derivative
+    resultant. GenericBlockLineIrreducible and BlockResultantIrreducibility
+    prove that its nonvanishing detects exponent one in the actual Chow
+    power. The resulting finite family is homogeneous of degree
+    D*(2*d-1), strictly below D^2 for m>=1. It is defined over the source
+    field and detects all geometric centers over an algebraically closed
+    extension. SharpBirationalCenterDetector gives the corresponding
+    base-field birationality statement. Dimension zero forces d=1 and uses
+    degree-one equations, correcting the impossible printed strict bound.
+    CenterPluckerCoordinates constructs an injective projective map from
+    actual dimension-r subspaces, using all ordered maximal minors.
+    CenterPluckerZariski defines the induced homogeneous-principal-open
+    Zariski topology. BirationalCenterPluckerTopology and
+    FixedCoordinatePluckerTopology prove actual good-center dense openness,
+    including the constrained X0=0 locus. The target has redundant ordered
+    coordinates; no binomial target dimension or Scheme/Proj identification
+    is asserted. Remaining assembly: combine the sharp family with this
+    subspace locus in a single complement-equations theorem. The printed
+    Noether composition remains a degree-calculation gap; the resultant
+    argument supplies the positive-dimensional bound independently.
+    See docs/projection-center-audit.txt;
+5.3 bounded good center in Plucker height: the polynomial specialization is
     PROVED by exists_integer_minor_specialization_degree_lt. Given a
     homogeneous polynomial F in maximal-minor coordinates, an actual
     full-rank rational matrix with F nonzero, deg F<R and R>=1, it constructs
@@ -944,14 +965,16 @@ Section 5:
     entries at most max(1,deg F), full rank and nonvanishing. This handles
     constant F as well as positive degree and assumes an actual rational
     witness obeying the same zero-column conditions.
-    BirationalCenterNonvanishing constructs a detector member and an actual
-    witness where it is nonzero, also within X0=0 for an affine closure.
-    MatrixGoodCenterDensity and ZeroColumnCenterDensity prove
-    density and openness of nonzero polynomial conditions in full-rank
-    matrix spaces, including prescribed zero columns. Their application to
-    this detector and the Grassmannian identification remain assembly steps.
-    The sharper quadratic polynomial degree from
-    5.2, needed for the printed center-basis bound, remains OPEN;
+    SharpBirationalCenterNonvanishing constructs a sharp detector member
+    nonzero at an actual witness, also within X0=0 for an affine closure.
+    SharpBoundedBirationalCenter applies the grid construction without a
+    supplied witness: the actual good-center rows have entries at most
+    T=(m+1)^2*d^2 and maximal minors at most r!*T^r. The dimension-zero
+    degree-one case is included. IntegerMinorProjectiveHeight proves the
+    intrinsic projective height bound r!*T^r for the actual maximal-minor
+    vector of any such bounded independent integer rows. Remaining assembly:
+    state the bound for the constructed good CenterSubspace through
+    centerSubspacePlucker, rather than as separate center and height results;
 5.4 small integer kernel vectors: the literal printed constant is FORMALLY
     DISPROVED by not_printed_row_separator_bound in RowSeparatorCounterexample.
     A system with s=5,r=6,B=10 has independent rows and requires a coordinate
@@ -1201,10 +1224,12 @@ A nonzero polynomial in maximal minors, with an actual rational full-rank
 witness, has an integer full-rank witness with entries at most r*(deg(F)+1).
 The later Hilbert modules below construct bounded-degree contraction equations
 and integral elimination preserving dimension. GeometricProjectionCenter now
-constructs an actual good center, including degree one. Its sharper center-basis
-height bound and the Section 5.2 bad-center degree estimate remain open.
-The constructive route below proves bounded birational degree-preserving
-projection without claiming the printed bad-center degree bounds.
+constructs an actual good center, including degree one. The subsequent
+SharpBoundedBirationalCenter and SharpGoodCenterProjection construct the
+quadratically bounded center basis and the source projection-height exponent.
+SharpCenterResultantDetector supplies the positive-dimensional bad-center
+degree bound. The Section 5 ledger above records the remaining final
+subspace-locus and intrinsic-center-height assembly.
 
 ClassGroupTwoTorsion and ClassGroupIdealRescaling construct actual integral
 ideal representatives and injective principal-square generators for class
@@ -1374,9 +1399,11 @@ integer normalization. For n source coordinates, the matrix entries are at most
 max(n!*(d+1)^n, (n*d^2+1)^n). BirationalProjectionHeight bounds this by a
 dimension-only constant times d^(2n), for d>=1.
 This proves the projection needed for counting by a different route from the
-paper's bad-center locus. The sharp quantitative bound in 5.1 and the
-positive-dimensional degree estimate in 5.2 remain obligations; the strict
-degree-one boundary statement of 5.2 is formally refuted above.
+paper's bad-center locus. The later sharp center and resultant modules listed
+in Section 5 above also prove the source projection-height exponent and the
+positive-dimensional detector degree bound. The strict degree-one boundary
+statement of 5.2 remains formally refuted; the valid replacement uses degree
+one and still gives the required bounded center.
 
 IntegralAlgebraPointCount and IntegralProjectionFiberCount count genuine
 coordinate tuples in an integral algebra using roots of minimal polynomials.
@@ -1473,7 +1500,8 @@ dimensions. ProjectiveCubicExponent bounds the indexed projection exponent
 for every proper higher-dimensional case and treats empty and zero-dimensional
 loci explicitly. The resulting projective_dimension_growth_cubic proves the
 exponent 2*n^3 for Theorem 1. This is an independently proved consequence;
-it does not claim the literal bad-center-locus statements in Section 5.
+the later sharp detector and center results are recorded separately in
+Section 5 above.
 
 All six main results are now proved. Completion of the entire paper still
 requires the exact outstanding statements in the named-result ledger above,

@@ -35,8 +35,19 @@ birational with geometrically integral image of exactly degree d.
 IndependentBirationalProjection ensures full row rank even in degree one:
 if the primitive row is redundant, the normalization already generates
 the field and a standard unit row replaces it. The original integer
-projection-matrix bound is preserved. This proves good-center existence,
-but the sharper required bound on a basis of the center remains open.
+projection-matrix bound is preserved. SharpBoundedBirationalCenter now
+constructs a good center with actual independent integer basis rows bounded
+by T=(m+1)^2*d^2. SharpGoodCenterProjection combines those rows with the
+complementary projection construction: the image is geometrically integral
+of unchanged dimension and degree, and the height bound on X has exactly
+the printed exponent 2*r^2. The constant depends only on the ambient
+dimension. The proved matrix-entry bound and the general
+normalizedIntegerProjection_projective_height estimate give the same
+ambient estimate outside the center. The fixed-coordinate endpoint places
+the center in X0=0 for an affine closure and includes the empty center.
+ZeroDimensionalGoodCenter proves that a geometrically integral
+zero-dimensional source has degree one and constructs zero-one center rows;
+this handles the dimension-zero boundary without a false strict degree bound.
 
 IntegralProjectionSpecialization supplies monic coordinate equations on
 every geometric fiber. HomogeneousProjectionNoBasePoint uses them to rule
@@ -51,8 +62,9 @@ From a homogeneous maximal-minor polynomial and an actual independent
 rational witness obeying those constraints, it constructs integer rows
 with entries at most max(1,deg F), full rank and preserved nonvanishing.
 Every maximal minor has magnitude at most r!*max(1,deg F)^r. The
-degree-zero case is included. This supplies the specialization needed for
-centers at infinity once the corresponding geometric witness is proved.
+degree-zero case is included. SharpBirationalCenterNonvanishing constructs
+the required geometric witness within X0=0, and SharpBoundedBirationalCenter
+applies this specialization to construct the bounded center there.
 
 2. Literal Lemma 5.2 at dimension zero and degree one
 ----------------------------------------------------
@@ -76,8 +88,8 @@ birational good-center locus itself. This already obstructs the printed
 conjunction of nonemptiness, disjointness and the strict defining-degree
 bound. No positive-dimensional counterexample is asserted.
 
-3. Chow incidence and the positive-dimensional degree gap
----------------------------------------------------------
+3. Chow incidence and sharp center detection
+---------------------------------------------
 
 ChowIncidenceIdeal constructs the actual elimination kernel for hyperplane
 tuples meeting an integral affine variety (a prime coordinate ideal) on
@@ -197,8 +209,9 @@ to be (m+1)*d. CenterNoetherForms and GeometricCenterNoetherForms construct
 a finite polynomial detector over the original characteristic-zero field.
 Its polynomials are homogeneous of degree D*max(1,D^2-1), where D=(m+1)*d;
 nonvanishing detects geometric irreducibility of the actual restriction.
-The degree-one case is included. This is a cubic degree bound, and does not
-establish the sharper printed Grassmannian estimate.
+The degree-one case is included. This earlier detector has a cubic degree
+bound; the quadratic resultant construction below supplies the sharper
+positive-dimensional estimate.
 
 ProjectionImageFractionField constructs the actual image function field
 inside the source field. HomogeneousProjectionRankBound proves
@@ -237,18 +250,39 @@ nonzero polynomial conditions are dense and open in the full-row-rank matrix
 space. ZeroColumnCenterDensity proves the constrained counterpart when the
 polynomial restriction to the prescribed-zero-column subspace is nonzero;
 an actual rational witness supplies this premise. Density in that subspace
-is proved directly, rather than inferred from ambient density. Applying
-these results to the constructed birational detector remains an assembly
-step; no Grassmannian quotient-topology identification is claimed here.
+is proved directly, rather than inferred from ambient density.
+BirationalCenterDensity and FixedCoordinateBirationalCenterDensity now
+apply these facts to the constructed actual birational-center locus.
+
+CenterPluckerCoordinates constructs the injective Plucker map of actual
+dimension-r subspaces, identifies equality with equality of row spans, and
+relates homogeneous equations to actual maximal minors. Its coordinates
+are indexed by all ordered column injections, so they contain signed
+redundancies. CenterPluckerZariski uses the topology induced by homogeneous
+principal opens in this projective space. BirationalCenterPluckerTopology
+and FixedCoordinatePluckerTopology prove that the actual good-center locus
+is dense and open in this topology, including the subspace of centers in
+X0=0. No equality with the earlier quotient topology, binomial target
+dimension, or Scheme/Proj identification is asserted.
 
 The source says each coefficient of R_X,Lambda has Plucker degree
 D=(m+1)*d. The cited universal Noether forms have degree D^2-1 in those
 coefficients. Direct composition therefore gives degree at most
-D*(D^2-1), not the claimed strict bound below D^2. A separate argument
-would be needed to obtain the printed bound from this construction.
-This observation identifies a gap in that degree calculation; it does
-not disprove the positive-dimensional bound. No proposed repair is
-treated as a formal theorem.
+D*(D^2-1), not the claimed strict bound below D^2. This remains a gap in
+the printed calculation, but a separate resultant argument is now proved.
+GenericBlockLine and GenericBlockLineIrreducible replace one hyperplane
+row by u+t*v and prove its exact degree and generic-line irreducibility.
+BlockResultantIrreducibility uses the actual Chow power R=c*G^e: the
+fixed-size derivative resultant is nonzero exactly when e=1.
+ResultantCoefficientFamily and GenericBlockLineHomogeneity prove that its
+parameter coefficients are homogeneous of degree D*(2*d-1) in the Plucker
+variables. SharpCenterResultantDetector constructs this finite family over
+the original characteristic-zero field and proves that it detects every
+geometrically disjoint birational center over an algebraically closed
+extension. SharpBirationalCenterDetector gives the base-field criterion.
+For m>=1 the degree is strictly below D^2, as proved in SharpCenterBounds.
+For m=0 geometric integrality forces d=1; degree-one equations and zero-one
+center rows provide the valid replacement at the obstructed boundary.
 
 4. General affine projection
 ----------------------------
@@ -269,5 +303,24 @@ from actual affine reconstruction identities. ProjectiveClosureHilbertPolynomial
 and AffineProjectionDegree then prove exact degree. ProjectiveClosureRecovery
 also proves that a homogeneous prime ideal with X0 outside it is recovered
 as the closure of its standard chart, with the exact chart Hilbert dimension
-and multiplicity. Full-paper completion is not claimed: the remaining
-Section 5 obligations are stated above.
+and multiplicity.
+
+5. Remaining final assembly
+----------------------------
+
+The sharp detector, actual Plucker dense openness, bounded good-center rows
+and complementary projection are proved. Full-paper completion is not yet
+claimed. Two final combined statements remain to be assembled:
+
+* Express the complement of the actual good CenterSubspace locus by the
+  sharp homogeneous family, with the positive-dimensional degree bound
+  and the corrected dimension-zero boundary in the Plucker model.
+* Combine the constructed good CenterSubspace with its intrinsic Plucker
+  height bound r!*((m+1)^2*d^2)^r. IntegerMinorProjectiveHeight already proves
+  this bound for the projectivized actual maximal-minor vector of bounded
+  independent integer rows; the identification with centerSubspacePlucker
+  and the unconditional good-center construction are separately proved.
+
+These are assembly obligations, not unproved curve-counting or generic
+projection hypotheses. The literal boundary obstruction in Lemma 5.2 and
+the corrected constant in Lemma 5.4 remain documented.

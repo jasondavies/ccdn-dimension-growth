@@ -45,19 +45,24 @@ class-group descent and discriminant estimates are constructed and proved.
 Strong induction on the field degree absorbs the prime-factor and logarithmic
 losses in the quadratic case. Odd degrees retain the logarithm-free bound.
 
-**The full paper is not yet formalised.** Several exact intermediate statements
-remain open, particularly the sharp Section 5 center bounds. The
-[full-paper ledger](docs/full-paper-plan.txt) records the complete scope
-and the external inputs that must be proved.
+**The full paper is not yet formalised.** The sharp Section 5 detector,
+bounded good-center rows and projection-height exponent are now proved.
+Final assembly remains for the sharp complement equations in the subspace
+Plucker model and the intrinsic Plucker height of the constructed good
+center. The [full-paper ledger](docs/full-paper-plan.txt) records the exact
+scope and the corrections to false literal source statements.
 
 The Chow-form construction now has its exact degree: each hyperplane block
 has degree `d`, and the total degree is `(m+1)d`. `ChowExactDegree` and
 `ProjectiveChowExactDegree` prove this for the actual incidence equation in
 characteristic zero, including dimension zero and geometric equations over
 the original field. The affine normalization rank and all parameter-field
-comparisons are proved internally. The constructed Noether detector has
-degree `D*max(1,D²−1)`, where `D=(m+1)d`; this does not yet give the printed
-quadratic degree bound. See [the center audit](docs/projection-center-audit.txt).
+comparisons are proved internally. A new derivative-resultant detector has
+degree `D(2d−1)`, where `D=(m+1)d`, strictly below `D²` in positive projective
+dimension. Its equations are defined over the original field and detect all
+geometric centers over algebraically closed extensions. This repairs the
+positive-dimensional bound independently of the printed Noether-composition
+calculation. See [the center audit](docs/projection-center-audit.txt).
 
 The general Noetherian-local determinant lemma (2.4) is proved in
 `primeInteger_local_enumerated_weight_det`, with the actual target
@@ -559,8 +564,9 @@ Apache license are recorded under `vendor/mertens/`.
 
 ## Remaining work
 
-The six main results are proved. Remaining intermediate obligations concern
-the sharp projection-center bounds of Section 5.
+The six main results are proved. Remaining Section 5 work combines the
+proved sharp detector with the actual subspace Plucker locus, and combines
+the bounded good-center construction with its intrinsic Plucker height.
 The general affine and projective projections, both
 curve projection clauses, literal affine-factor theorems, Salberger covering
 in the coordinate-ideal formulation, and all positive degrees of
@@ -583,7 +589,15 @@ are proved, including preservation of a coordinate that vanishes on the
 center. `exists_geometric_birational_projection_center` also constructs a
 center of the required dimension, disjoint from the variety over extension
 fields, with finite birational projection and the same image degree. It
-covers degree one. The sharper bound on a basis of that center remains open.
+covers degree one. `SharpBoundedBirationalCenter` now constructs actual
+good-center basis rows with entries at most `(m+1)²d²` and maximal minors
+at most `r!((m+1)²d²)^r`, where `r=n−m−1`. `SharpGoodCenterProjection`
+constructs the corresponding complementary projection and proves the
+height exponent `2r²` on the source, with unchanged image degree and
+geometric integrality. Its matrix-entry bound and the general projection
+height estimate also give the ambient bound outside the center. The
+fixed-coordinate endpoint constructs the center in `X0=0` for an affine
+closure; dimension zero and the empty-center boundary are included.
 
 `exists_geometric_chow_incidence_generator` constructs a generator of the
 actual incidence ideal, separately homogeneous in every hyperplane block
@@ -644,15 +658,33 @@ with the center in `X0=0` for affine closures. `BirationalCenterNonvanishing`
 selects a detector polynomial nonzero at such a constructed witness; its
 nonvanishing guarantees disjointness and birationality. The fixed-coordinate
 version covers arbitrary characteristic-zero fields and affine dimension
-zero. The sharper quadratic detector degree and resulting center-basis
-bound remain open.
+zero. `SharpCenterResultantDetector` replaces the earlier cubic detector
+with a finite homogeneous family of degree `D(2d−1)`: a generic line in
+one hyperplane row and its derivative resultant detect exponent one in the
+actual Chow power. `SharpCenterBounds` proves the strict bound `<D²` for
+`m≥1`; dimension zero forces `d=1` and uses degree-one equations.
+`SharpBirationalCenterNonvanishing` supplies actual witnesses for this
+sharp family, including centers in `X0=0`.
 
 `AffinePointZariski`, `MatrixGoodCenterDensity` and `ZeroColumnCenterDensity`
 prove that a nonzero polynomial condition is dense and open in the actual
 full-row-rank matrix space. The constrained result requires nonvanishing
 on the prescribed-zero-column subspace itself and supplies a wrapper from
-an actual rational witness. Applying these density results to the constructed
-detector is a separate assembly step.
+an actual rational witness. `BirationalCenterDensity` and
+`FixedCoordinateBirationalCenterDensity` now apply these results to the
+actual good-center locus. `CenterPluckerCoordinates` embeds actual subspaces
+using all ordered maximal minors, with signed redundancies in the target.
+`BirationalCenterPluckerTopology` and `FixedCoordinatePluckerTopology`
+prove dense openness for the induced projective Zariski topology. The
+remaining detector assembly is a single theorem identifying the complement
+in this model with the sharp homogeneous equations.
+
+`IntegerMinorProjectiveHeight` bounds the intrinsic projective height of the
+actual maximal-minor vector of bounded independent integer rows. The final
+Section 5.3 statement still needs to combine that result with the constructed
+good subspace through `centerSubspacePlucker`. No binomial target dimension,
+Scheme/Proj identification or equality with the earlier quotient topology
+is claimed by the Plucker modules.
 
 `zero_dimensional_plucker_degree_bound_obstruction` verifies a boundary
 failure in Lemma 5.2: at dimension zero and degree one, its strict bound
