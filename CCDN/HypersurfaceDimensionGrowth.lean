@@ -1,102 +1,78 @@
 module
 
-public import CCDN.TopFormDimensionGrowthAllDegrees
-public import CCDN.ProjectiveHypersurfaceDimensionGrowth
+public import CCDN.CubicAffineDimensionGrowth
+public import CCDN.ProjectiveConeBound
+public import CCDN.NonabsoluteHypersurfaceCount
 public import CCDN.PolynomialPredicates
 
-/-! Full CCDN affine hypersurface dimension growth and its projective
-hypersurface consequence, in every degree at least five. Rational
-coefficients are cleared to integers. The projective endpoint
-also includes rationally irreducible equations which split geometrically. -/
+/-! Projective hypersurface dimension growth in every degree at least five, from the
+affine bound on the cone. The equation need only be irreducible over `ℚ`: an equation which
+splits over `ℚ̄` has few points by the nonabsolute count. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The rational-equation version of the full affine bound. -/
-theorem rational_top_form_hypersurface_dimension_growth (n : ℕ) :
-    ∃ C : ℝ, 0 < C ∧
-      ∀ f : MvPolynomial (Fin (n + 3)) ℚ,
-      HasAbsIrreducibleTopFormRat f →
+/-- Dimension growth with degree exponent `e` for rationally irreducible projective
+hypersurfaces of degree at least five in `ℙ^(n+2)`. The height exponent is the
+hypersurface dimension `n + 1`. -/
+def ProjectiveHypersurfaceGrowth (n e : ℕ) : Prop :=
+  ∃ C : ℝ, 0 < C ∧
+    ∀ f : MvPolynomial (Fin (n + 3)) ℚ, f.IsHomogeneous f.totalDegree → Irreducible f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
-      (count (zeroLocus f) B : ℝ) ≤
-        C * (f.totalDegree : ℝ) ^ (18 + 9 * n) * B ^ (n + 1) := by
-  classical
-  obtain ⟨C, hC, hbound⟩ := top_form_hypersurface_dimension_growth n
-  refine ⟨C, hC, ?_⟩
-  intro f hir hd B hB
-  obtain ⟨g, hdeg, htop, hzero⟩ := exists_integer_model_absolute_top f hir
-  have hpoints : integralPoints (zeroLocus (map (Int.castRingHom ℚ) g)) B =
-      integralPoints (zeroLocus f) B := by
-    ext x
-    simp only [mem_integralPoints, zeroLocus, Set.mem_ofPred_eq]
-    have hx : eval (rationalPoint x) (map (Int.castRingHom ℚ) g) =
-        (eval x g : ℚ) := by
-      exact (map_eval (Int.castRingHom ℚ) x g).symm
-    rw [hx, Int.cast_eq_zero, hzero]
-    rfl
-  have h := hbound g htop (by omega) B hB
-  simpa only [hdeg, count, hpoints] using h
+        (projectiveCount (projectiveZeroLocus f) B : ℝ) ≤
+          C * (f.totalDegree : ℝ) ^ e * B ^ (n + 1)
 
-/-- Theorem 1 for geometrically integral hypersurfaces of degree at least
-five in projective space of dimension at least two. The exponent of the
-height is the hypersurface dimension. -/
-theorem absolute_projective_hypersurface_dimension_growth (n : ℕ) :
-    ∃ C : ℝ, 0 < C ∧
-      ∀ f : MvPolynomial (Fin (n + 3)) ℚ,
-      f.IsHomogeneous f.totalDegree →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) →
-      5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
-      (projectiveCount (projectiveZeroLocus f) B : ℝ) ≤
-        C * (f.totalDegree : ℝ) ^ (18 + 9 * n) * B ^ (n + 1) := by
-  obtain ⟨C, hC, hbound⟩ := rational_top_form_hypersurface_dimension_growth n
-  refine ⟨C, hC, ?_⟩
-  intro f hhom hir hd B hB
-  have htop : HasAbsIrreducibleTopFormRat f := by
-    dsimp only [HasAbsIrreducibleTopFormRat]
-    rwa [homogeneousComponent_eq_self hhom]
-  exact (Nat.cast_le.mpr (projective_count_le_affine_cone_count f hhom B)).trans
-    (hbound f htop hd B hB)
+theorem nonabsolute_projective_hypersurface_dimension_growth {K : Type*}
+    [Field K] [Algebra ℚ K] {n : ℕ}
+    (f : MvPolynomial (Fin (n + 2)) ℚ)
+    (hhom : f.IsHomogeneous f.totalDegree) (hir : Irreducible f)
+    (hred : ¬ Irreducible (map (algebraMap ℚ K) f))
+    {B : ℝ} (hB : 1 ≤ B) :
+    (projectiveCount (projectiveZeroLocus f) B : ℝ) ≤
+      (3 * (n + 2) : ℝ) ^ n * (f.totalDegree : ℝ) ^ 2 * B ^ n :=
+  (Nat.cast_le.mpr (projective_count_le_affine_cone_count f hhom B)).trans
+    (nonabsolute_hypersurface_dimension_growth f hir hred hB)
 
-
-/-- CCDN Theorem 1 dimension growth in every degree at least five for every
-rationally irreducible projective hypersurface in projective space of dimension
-at least two. Unlike the paper, the equation may split geometrically. -/
-theorem projective_hypersurface_dimension_growth (n : ℕ) :
-    ∃ C : ℝ, 0 < C ∧
-      ∀ f : MvPolynomial (Fin (n + 3)) ℚ,
-      f.IsHomogeneous f.totalDegree → Irreducible f →
-      5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
-      (projectiveCount (projectiveZeroLocus f) B : ℝ) ≤
-        C * (f.totalDegree : ℝ) ^ (18 + 9 * n) * B ^ (n + 1) := by
-  obtain ⟨C, hC, hbound⟩ := absolute_projective_hypersurface_dimension_growth n
+/-- The affine bound on the cone gives the projective hypersurface bound with the same
+degree exponent, provided the exponent is at least two. -/
+theorem RationalAffineHypersurfaceGrowth.projective {n e : ℕ}
+    (h : RationalAffineHypersurfaceGrowth n e) (he : 2 ≤ e) :
+    ProjectiveHypersurfaceGrowth n e := by
+  obtain ⟨C, hC, hbound⟩ := h
   let A : ℝ := (3 * (n + 3) : ℝ) ^ (n + 1)
-  have hA : 0 ≤ A := by positivity
-  refine ⟨C + A, by positivity, ?_⟩
-  intro f hhom hir hd B hB
-  have hd1 : (1 : ℝ) ≤ f.totalDegree := by
-    exact_mod_cast (show 1 ≤ f.totalDegree by omega)
+  refine ⟨C + A, by positivity, fun f hhom hir hd B hB => ?_⟩
+  have hd1 : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast (show 1 ≤ f.totalDegree by omega)
   have hB0 : 0 ≤ B := by linarith
   by_cases habs : Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f)
-  · apply (hbound f hhom habs hd B hB).trans
-    exact mul_le_mul_of_nonneg_right
-      (mul_le_mul_of_nonneg_right (by linarith : C ≤ C + A) (by positivity))
-      (pow_nonneg hB0 _)
+  · have htop : HasAbsIrreducibleTopFormRat f := by
+      dsimp only [HasAbsIrreducibleTopFormRat]
+      rwa [homogeneousComponent_eq_self hhom]
+    calc
+      _ ≤ C * (f.totalDegree : ℝ) ^ e * B ^ (n + 1) :=
+        (Nat.cast_le.mpr (projective_count_le_affine_cone_count f hhom B)).trans
+          (hbound f htop hd B hB)
+      _ ≤ (C + A) * (f.totalDegree : ℝ) ^ e * B ^ (n + 1) := by
+        gcongr
+        exact le_add_of_nonneg_right (by positivity)
   · have hh : (projectiveCount (projectiveZeroLocus f) B : ℝ) ≤
         A * (f.totalDegree : ℝ) ^ 2 * B ^ (n + 1) := by
       simpa only [A, Nat.cast_add, Nat.cast_one, add_assoc,
         show (1 : ℝ) + 2 = 3 by norm_num] using
         nonabsolute_projective_hypersurface_dimension_growth f hhom hir habs hB
-    have hp : (f.totalDegree : ℝ) ^ 2 ≤
-        (f.totalDegree : ℝ) ^ (18 + 9 * n) :=
-      pow_le_pow_right₀ hd1 (by omega)
     calc
       _ ≤ A * (f.totalDegree : ℝ) ^ 2 * B ^ (n + 1) := hh
-      _ ≤ (C + A) * (f.totalDegree : ℝ) ^ (18 + 9 * n) * B ^ (n + 1) := by
+      _ ≤ (C + A) * (f.totalDegree : ℝ) ^ e * B ^ (n + 1) := by
         gcongr
         linarith
 
+/-- CCDN Theorem 1 for rationally irreducible projective hypersurfaces of degree at least
+five in `ℙ^(n+2)`, with degree exponent `18 + 3n`. Unlike the paper, the equation may split
+over `ℚ̄`. -/
+theorem projective_hypersurface_dimension_growth (n : ℕ) :
+    ProjectiveHypersurfaceGrowth n (18 + 3 * n) :=
+  (affineHypersurfaceGrowth n).rational.projective (by omega)
 
 end
 end CCDN

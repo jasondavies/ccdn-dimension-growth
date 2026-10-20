@@ -265,9 +265,7 @@ public import CCDN.AffineHyperplaneSlice
 public import CCDN.IntegerGoodHyperplaneSlices
 public import CCDN.IntegerHyperplaneSlices
 public import CCDN.HyperplaneSliceCoordinates
-public import CCDN.TopFormDimensionGrowth
 public import CCDN.ProjectiveConeBound
-public import CCDN.ProjectiveHypersurfaceGrowth
 public import CCDN.HypersurfaceTrivialCount
 
 public import CCDN.GridEisenstein
@@ -282,7 +280,6 @@ public import CCDN.ProjectiveCurveLowerBound
 public import CCDN.GridPointInterpolation
 public import CCDN.CompleteIntersectionGridBound
 public import CCDN.NonabsoluteHypersurfaceCount
-public import CCDN.ProjectiveHypersurfaceDimensionGrowth
 public import CCDN.SingularHypersurfaceCount
 
 public import CCDN.DegreeDependenceNumerics
@@ -340,7 +337,6 @@ public import CCDN.SurfaceSmallCurveCover
 public import CCDN.SurfaceRetainedCurveCount
 public import CCDN.PrimitiveSurfaceFixedDegree
 public import CCDN.TopFormSurfaceFixedDegree
-public import CCDN.BoundedHyperplaneDimensionGrowth
 public import CCDN.TopFormDimensionGrowthAllDegrees
 public import CCDN.HypersurfaceDimensionGrowth
 public import CCDN.ClassGroupTranslateFibers
@@ -440,7 +436,6 @@ public import CCDN.InvariantIdealIntegralRepresentative
 public import CCDN.QuadraticInvariantFactorization
 public import CCDN.LinearNormalizationFiberCount
 public import CCDN.ProjectiveVarietyDimensionGrowth
-public import CCDN.ProjectiveVarietyUniformGrowth
 public import CCDN.ZeroDimensionalProjectiveCount
 public import CCDN.EmptyProjectiveHilbertDimension
 public import CCDN.ProjectiveDimensionGrowth
@@ -454,7 +449,6 @@ public import CCDN.IntegralIdealClass
 public import CCDN.StronglyAmbiguousClassCount
 public import CCDN.ProperHilbertDimension
 public import CCDN.ProjectiveHilbertCurveGrowth
-public import CCDN.ProjectiveCubicExponent
 public import CCDN.ClassGroupDegreeReduction
 public import CCDN.ClassGroupUniformBound
 public import CCDN.ClassGroupBound

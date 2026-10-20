@@ -13,6 +13,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The degree threshold of the large-degree surface bound `top_form_surface_count`. It
+comes from `surface_inverse_sqrt_le_quarter`: `1 / √d ≤ 1 / 4` once `16 ≤ d`. -/
+def topFormSurfaceThreshold : ℕ := 16
+
 /-- Corrected CCDN Proposition 4.3.4 for degrees at least sixteen and an
 absolutely irreducible highest homogeneous part. The positive constant is
 chosen before the integer polynomial and the real box radius. -/
@@ -20,7 +24,7 @@ theorem top_form_surface_count :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
       HasAbsIrreducibleTopForm f →
-      16 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
+      topFormSurfaceThreshold ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ 18 * B := by
   classical
@@ -30,6 +34,7 @@ theorem top_form_surface_count :
   have hK : 0 < K := topFormAuxiliaryConstant_pos 1
   refine ⟨A + C + K, by positivity, ?_⟩
   intro f hir hd B hB
+  unfold topFormSurfaceThreshold at hd
   obtain ⟨S, δ, hcomponents, _, hdegree, _, houtside⟩ :=
     hnonlinear f hir hd B hB
   let T := S.filter (fun P => δ P = 1)

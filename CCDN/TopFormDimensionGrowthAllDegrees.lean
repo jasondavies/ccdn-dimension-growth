@@ -2,17 +2,35 @@ module
 
 public import CCDN.TopFormSurfaceFixedDegree
 public import CCDN.TopFormSurfaceCount
-public import CCDN.BoundedHyperplaneDimensionGrowth
 public import CCDN.PolynomialPredicates
 
-/-! Full affine hypersurface dimension growth in degrees at least five.
-The finitely many small surface degrees are absorbed in one constant;
-the generic bounded-hyperplane induction then handles all dimensions. -/
+/-! The affine surface bound in every degree at least five. The finitely many
+degrees below the large-degree threshold are absorbed in one constant. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 open MvPolynomial
+
+/-- The fixed-degree surface bounds for the degrees `5 ≤ d < t` hold with one constant. -/
+theorem top_form_surface_bounded_degree_linear_bound (t : ℕ) :
+    ∃ C : ℝ, 0 < C ∧
+      ∀ f : MvPolynomial (Fin 3) ℤ,
+      HasAbsIrreducibleTopForm f →
+      5 ≤ f.totalDegree → f.totalDegree < t → ∀ B : ℝ, 1 ≤ B →
+      (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤ C * B := by
+  induction t with
+  | zero => exact ⟨1, one_pos, fun _ _ _ ht => absurd ht (Nat.not_lt_zero _)⟩
+  | succ t ih =>
+    obtain ⟨C, hC, hbound⟩ := ih
+    by_cases ht : 5 ≤ t
+    · obtain ⟨C', hC', hbound'⟩ := top_form_surface_fixed_degree_linear_bound t ht
+      refine ⟨C + C', by positivity, fun f hir hd hlt B hB => ?_⟩
+      have hB0 : 0 ≤ B := by linarith
+      rcases Nat.lt_succ_iff_lt_or_eq.mp hlt with hlt | heq
+      · exact (hbound f hir hd hlt B hB).trans (by gcongr; linarith)
+      · exact (hbound' f hir heq B hB).trans (by gcongr; linarith)
+    · exact ⟨C, hC, fun f hir hd hlt => hbound f hir hd (by omega)⟩
 
 theorem top_form_surface_dimension_growth :
     ∃ C : ℝ, 0 < C ∧
@@ -21,52 +39,19 @@ theorem top_form_surface_dimension_growth :
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ 18 * B := by
-  classical
   obtain ⟨Cbig, hCbig, hbig⟩ := top_form_surface_count
-  have hsmall (i : Fin 11) := top_form_surface_fixed_degree_linear_bound (i.val + 5) (by omega)
-  choose Csmall hCsmall hsmall using hsmall
-  let C := Cbig + ∑ i : Fin 11, Csmall i
-  have hsum : 0 ≤ ∑ i : Fin 11, Csmall i :=
-    Finset.sum_nonneg (fun i _ => (hCsmall i).le)
-  have hC : 0 < C := by dsimp only [C]; linarith
-  refine ⟨C, hC, ?_⟩
-  intro f hir hd B hB
+  obtain ⟨Csmall, hCsmall, hsmall⟩ :=
+    top_form_surface_bounded_degree_linear_bound topFormSurfaceThreshold
+  refine ⟨Cbig + Csmall, by positivity, fun f hir hd B hB => ?_⟩
   have hB0 : 0 ≤ B := by linarith
-  by_cases hlarge : 16 ≤ f.totalDegree
-  · apply (hbig f hir hlarge B hB).trans
-    gcongr
-    dsimp only [C]
-    linarith
-  · let i : Fin 11 := ⟨f.totalDegree - 5, by omega⟩
-    have hdegree : f.totalDegree = i.val + 5 := by dsimp only [i]; omega
-    have hh := hsmall i f hir hdegree B hB
-    have hCi : Csmall i ≤ C := by
-      have hi := Finset.single_le_sum (fun j (_ : j ∈ (Finset.univ : Finset (Fin 11))) =>
-        (hCsmall j).le) (Finset.mem_univ i)
-      dsimp only [C]
-      linarith
-    have hdR : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast (show 1 ≤ f.totalDegree by omega)
-    have hdpow : 1 ≤ (f.totalDegree : ℝ) ^ 18 := one_le_pow₀ hdR
-    calc
-      _ ≤ Csmall i * B := hh
-      _ ≤ C * B := mul_le_mul_of_nonneg_right hCi hB0
-      _ ≤ C * (f.totalDegree : ℝ) ^ 18 * B := by
-        exact mul_le_mul_of_nonneg_right
-          (by simpa only [mul_one] using mul_le_mul_of_nonneg_left hdpow hC.le) hB0
-
-/-- CCDN Theorem 4 for integer equations in all affine ambient dimensions
-at least three. The constant depends only on dimension, and the explicit
-degree exponent is 18 + 9n in n+3 variables. -/
-theorem top_form_hypersurface_dimension_growth (n : ℕ) :
-    ∃ C : ℝ, 0 < C ∧
-      ∀ f : MvPolynomial (Fin (n + 3)) ℤ,
-      HasAbsIrreducibleTopForm f →
-      5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
-      (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
-        C * (f.totalDegree : ℝ) ^ (18 + 9 * n) * B ^ (n + 1) := by
-  rw [show n + 3 = 3 + n by omega]
-  exact top_form_hypersurface_count_of_surface_bound 5 18 (by norm_num)
-    top_form_surface_dimension_growth n
+  have hdpow : 1 ≤ (f.totalDegree : ℝ) ^ 18 :=
+    one_le_pow₀ (by exact_mod_cast (show 1 ≤ f.totalDegree by omega))
+  by_cases hlarge : topFormSurfaceThreshold ≤ f.totalDegree
+  · exact (hbig f hir hlarge B hB).trans (by gcongr; linarith)
+  · calc
+      _ ≤ Csmall * B := hsmall f hir hd (by omega) B hB
+      _ ≤ (Cbig + Csmall) * 1 * B := by gcongr; linarith
+      _ ≤ (Cbig + Csmall) * (f.totalDegree : ℝ) ^ 18 * B := by gcongr
 
 end
 end CCDN

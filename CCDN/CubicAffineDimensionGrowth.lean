@@ -4,14 +4,44 @@ public import CCDN.CubicHyperplaneDimensionGrowth
 public import CCDN.TopFormDimensionGrowthAllDegrees
 public import CCDN.PolynomialPredicates
 
-/-! The corrected affine degree exponent in CCDN Remark 4.3.8.
-In N=n+3 variables the exponent is 18+3n=3N+9, using the corrected
-surface bound d^18 and the cubic good-hyperplane bound. -/
+/-! CCDN Theorem 4 with the corrected degree exponent of Remark 4.3.8.
+In `N = n + 3` variables the exponent is `18 + 3n = 3N + 9`: the corrected surface
+bound `d^18` and a cost of `d^3` for each bounded good hyperplane slice. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 open MvPolynomial
+
+/-- The rational-equation form of `AffineHypersurfaceGrowth`. -/
+def RationalAffineHypersurfaceGrowth (n e : ℕ) : Prop :=
+  ∃ C : ℝ, 0 < C ∧
+    ∀ f : MvPolynomial (Fin (n + 3)) ℚ, HasAbsIrreducibleTopFormRat f →
+      5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
+        (count (zeroLocus f) B : ℝ) ≤ C * (f.totalDegree : ℝ) ^ e * B ^ (n + 1)
+
+/-- Clearing denominators transfers affine dimension growth from integer equations to
+rational equations with the same constant. -/
+theorem AffineHypersurfaceGrowth.rational {n e : ℕ} (h : AffineHypersurfaceGrowth n e) :
+    RationalAffineHypersurfaceGrowth n e := by
+  classical
+  obtain ⟨C, hC, hbound⟩ := h
+  refine ⟨C, hC, fun f hir hd B hB => ?_⟩
+  obtain ⟨g, hdeg, htop, hzero⟩ := exists_integer_model_absolute_top f hir
+  have hpoints : integralPoints (zeroLocus (map (Int.castRingHom ℚ) g)) B =
+      integralPoints (zeroLocus f) B := by
+    ext x
+    simp only [mem_integralPoints, zeroLocus, Set.mem_ofPred_eq]
+    have hx : eval (rationalPoint x) (map (Int.castRingHom ℚ) g) = (eval x g : ℚ) :=
+      (map_eval (Int.castRingHom ℚ) x g).symm
+    rw [hx, Int.cast_eq_zero, hzero]
+    rfl
+  simpa only [hdeg, count, hpoints] using hbound g htop (by omega) B hB
+
+theorem affineHypersurfaceGrowth (n : ℕ) : AffineHypersurfaceGrowth n (18 + 3 * n) :=
+  affineHypersurfaceGrowth_of_surface (by
+    simpa only [AffineHypersurfaceGrowth, Nat.zero_add, pow_one]
+      using top_form_surface_dimension_growth) n
 
 /-- CCDN Theorem 4 for integer equations in all affine ambient dimensions
 at least three. The constant depends only on dimension, and the explicit
@@ -22,36 +52,19 @@ theorem top_form_hypersurface_dimension_growth_cubic (n : ℕ) :
       HasAbsIrreducibleTopForm f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
-        C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) := by
-  rw [show n + 3 = 3 + n by omega]
-  exact top_form_hypersurface_count_cubic_of_surface_bound 5 18 (by norm_num)
-    top_form_surface_dimension_growth n
+        C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) :=
+  affineHypersurfaceGrowth n
 
-
-/-- The rational-equation version of the full affine bound. -/
+/-- CCDN Theorem 4 for rational equations, with the degree exponent 18 + 3n in
+n+3 variables. -/
 theorem rational_top_form_hypersurface_dimension_growth_cubic (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (n + 3)) ℚ,
       HasAbsIrreducibleTopFormRat f →
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (count (zeroLocus f) B : ℝ) ≤
-        C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) := by
-  classical
-  obtain ⟨C, hC, hbound⟩ := top_form_hypersurface_dimension_growth_cubic n
-  refine ⟨C, hC, ?_⟩
-  intro f hir hd B hB
-  obtain ⟨g, hdeg, htop, hzero⟩ := exists_integer_model_absolute_top f hir
-  have hpoints : integralPoints (zeroLocus (map (Int.castRingHom ℚ) g)) B =
-      integralPoints (zeroLocus f) B := by
-    ext x
-    simp only [mem_integralPoints, zeroLocus, Set.mem_ofPred_eq]
-    have hx : eval (rationalPoint x) (map (Int.castRingHom ℚ) g) =
-        (eval x g : ℚ) := by
-      exact (map_eval (Int.castRingHom ℚ) x g).symm
-    rw [hx, Int.cast_eq_zero, hzero]
-    rfl
-  have h := hbound g htop (by omega) B hB
-  simpa only [hdeg, count, hpoints] using h
+        C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) :=
+  (affineHypersurfaceGrowth n).rational
 
 end
 end CCDN
