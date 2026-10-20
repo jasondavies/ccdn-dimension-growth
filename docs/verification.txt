@@ -2052,3 +2052,62 @@ Final log: /tmp/ccdn-affine-chow-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-affine-chow-checkpoint-sync.json
 Source inventory: /tmp/ccdn-affine-chow-checkpoint-inventory.json (788 files)
 Inventory SHA256: 49bc177be83a1f70e05f1767bd1b6c08fef828b1679ff01bec38e33e83c969e9
+
+
+2026-10-20: Chow projection and generic normalization
+----------------------------------------------------
+Integrated thirty-eight new mathematical modules and 119 explicit endpoint
+audits. Existing mathematical declarations were not modified. Two repeated
+helper statements were removed from the new modules in favor of their
+existing project definitions before the combined build.
+
+ProjectiveChowWithoutChart and GeometricProjectiveChow construct the actual
+projective incidence equation without a prescribed affine chart, including
+an equation over the original coefficient field. ChowRowSymmetry proves
+all block degrees agree, and ChowTotalDegree computes their sum.
+ChowProjectionCriterion constructs the image equation and proves that the
+actual linear restriction is c*G^k for a disjoint center, with c nonzero and
+k positive. Nonvanishing is equivalent to center disjointness.
+CenterChowCriterion realizes this for the literal determinant projection,
+whose kernel is the span of the independent center rows. Its coefficients
+are homogeneous polynomials in the actual Plucker coordinates.
+
+GeometricIdealPrimality transports geometric primality to arbitrary field
+extensions. UniversalHyperplaneNormalization constructs the rational
+coefficient field, finite injective normalization and exact homogeneous
+rank d. ClosureNormalizationInfinite constructs a finite normalization
+fixing X0 over every infinite field, including dimension zero. Polynomial
+generation certificates yield generic finiteness from a finite specialization;
+FixedCoordinateGenericNormalization proves the generic fixed-X0 and affine
+normalizations finite and injective under their stated hypotheses.
+
+GenericLinearPrimitive constructs a generic primitive linear coordinate
+after adjoining rational parameters. Polynomial coefficient and fraction
+field transport preserve its degree. ChowIncidenceMinimalPolynomial
+identifies the distinguished Chow coefficient degree with the actual
+incidence minimal-polynomial degree. The parameter-field comparison and
+cone-to-affine rank transfer remain open, so exact Chow block degree d is
+not claimed.
+
+ProjectionImageFractionField constructs the actual image field inside the
+source field. HomogeneousProjectionRankBound proves e*[F:L] <= d for the
+actual source and image Hilbert multiplicities. HomogeneousProjectionBirational
+proves that a finite homogeneous linear projection in characteristic zero
+preserves Hilbert multiplicity if and only if it is birational, including
+the zero-dimensional cone. No supplied image normalization or rank premise
+is needed. The full rank-degree equality is not claimed.
+
+The sharp Grassmannian detector and center-basis bounds remain open. The
+documented literal Section 5 statement issues remain recorded. This commit
+does not claim completion of the full paper.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 850 reachable modules.
+Full build: 9900 jobs, PASS.
+Transitive audit: 4637 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Final log: /tmp/ccdn-chow-projection-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-chow-projection-checkpoint-sync.json
+Source inventory: /tmp/ccdn-chow-projection-checkpoint-inventory.json (826 files)
+Inventory SHA256: d0609865295d79adc7b090f83be44c0f0ae75ed7a482eb75d9fb2c4492bca61e

@@ -876,6 +876,34 @@ Section 5:
     HomogeneousNormalizationRank proves exact fraction-field rank d for
     homogeneous prime finite linear normalization in characteristic zero;
     its identification with the Chow block degrees remains OPEN.
+    GeometricProjectiveChow removes the prescribed-chart hypothesis and
+    constructs the equation over the original coefficient field. ChowRowSymmetry
+    proves a common block degree, and ChowTotalDegree computes the total
+    degree from it. CenterChowCriterion constructs the literal determinant
+    restriction, with coefficients homogeneous in actual Plucker coordinates.
+    Nonvanishing is equivalent to disjointness of the center. For a disjoint
+    center the restriction is a nonzero scalar times a positive power of
+    the constructed image equation; irreducibility is equivalent to equality
+    of source and image Chow total degrees. No supplied image equation or
+    equality of geometric zero loci remains in this construction.
+    UniversalHyperplaneNormalization constructs the rational coefficient
+    field and proves generic finite normalization, injectivity and exact
+    homogeneous rank d. GeometricIdealPrimality supplies geometric primality
+    over arbitrary extensions from primality over an algebraic closure.
+    ClosureNormalizationInfinite constructs a finite normalization fixing
+    X0 over any infinite field, including dimension zero. Generic homogeneous
+    generation certificates give its generic counterpart in
+    FixedCoordinateGenericNormalization.
+    GenericLinearPrimitive constructs a generic primitive linear coordinate
+    after adjoining rational parameters. ChowIncidenceMinimalPolynomial
+    identifies the distinguished Chow coefficient degree with the actual
+    incidence minimal-polynomial degree. The comparison of the parameter
+    fields and the cone-to-affine rank transfer remain OPEN.
+    HomogeneousProjectionBirational proves equality of source and image
+    Hilbert multiplicities if and only if the actual finite homogeneous
+    linear projection is birational, in characteristic zero, including the
+    zero-dimensional cone. The image field and normalization are constructed
+    internally. This does not yet identify the Chow block degree with d.
     The printed Noether
     composition degree calculation is also not justified by the stated
     degree bounds; this is a proof gap, not a positive-dimensional

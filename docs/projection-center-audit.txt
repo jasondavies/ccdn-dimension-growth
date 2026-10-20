@@ -124,8 +124,11 @@ projective point. BalancedParameterFiniteness constructs finite module
 generators from the resulting coordinate-power relations. The source is not
 assumed finite over the parameters. ChowIncidenceHeight also proves that the
 constructed principal incidence ideal has height exactly one. A named
-universal coefficient-field construction and the exact degree computation
-are not claimed by these statements.
+universal coefficient-field construction is now supplied by
+UniversalHyperplaneNormalization: rational coefficient variables give an
+actual finite injective normalization of exact homogeneous field rank d.
+GeometricIdealPrimality proves the needed primality over arbitrary field
+extensions from primality over an algebraic closure.
 
 HomogeneousNormalizationRank proves exact fraction-field rank d over the
 actual parameter subfield of a homogeneous prime finite linear normalization
@@ -135,11 +138,58 @@ identifies its degree with the field degree. This removes the normalization
 rank obligation; identifying that rank with every Chow block degree is still
 required.
 
+ClosureNormalizationInfinite constructs a finite normalization fixing X0
+over every infinite field, including dimension zero. GenericLinearNormalizationOpenness
+proves that one finite specialization of a polynomial family of homogeneous
+linear maps makes its generic map finite. The proof constructs full-degree
+generation certificates and a determinant that is nonzero at that specialization.
+FixedCoordinateGenericNormalization applies this to the X0-fixed family
+and proves injectivity of the affine parameters and homogeneous coordinates.
+
+ChowRowSymmetry proves that all hyperplane block degrees of the constructed
+generator agree. ChowTotalDegree gives total degree (m+1) times the common
+block degree. ProjectiveChowWithoutChart and GeometricProjectiveChow remove
+the prescribed standard-chart hypothesis, including for the equation over
+the original coefficient field. ChowRowCoordinateDegree identifies a row
+degree with a coordinate degree using a nonzero evaluation on its axis.
+ChowIncidenceMinimalPolynomial identifies the distinguished coordinate
+degree with the actual incidence minimal-polynomial degree.
+GenericLinearPrimitive constructs a generic primitive linear coordinate of
+a finite field extension after adjoining rational parameters. The comparison
+of these parameter-field models and the transfer of exact cone rank to
+affine rank remain necessary to conclude that every block degree is d.
+
 ChowPolynomialPower proves a separate algebraic step in (5-3): nonzero
 polynomials with the same geometric zero locus, one irreducible, differ
 by a nonzero scalar times a positive power of that irreducible polynomial.
 It retains the scalar omitted by the printed identity and proves the
 irreducibility criterion by equality of degrees.
+
+ChowLinearSpecialization proves finiteness of a linear projection from a
+disjoint center, lifts actual nonzero image-cone points, and identifies
+projective incidence on the image. ChowProjectionCriterion constructs the
+source and image equations without prescribed charts and proves the actual
+restriction is c*G^k, with c nonzero and k positive. Nonzero restriction is
+equivalent to center disjointness; it preserves the source total degree.
+
+CenterMinorProjection and CenterMinorMatrix prove these facts for the
+literal determinant projection: its common zero space is exactly the span
+of the independent center rows. UniversalCenterChowRestriction constructs
+the polynomial family in the actual Plucker coordinates. Every coefficient
+is homogeneous of the source Chow total degree. CenterChowCriterion chooses
+this family before the center and gives the nonvanishing and power criteria
+for every independent center basis. The source total degree has not yet been
+identified with (m+1)*d, and no sharp Grassmannian detector is claimed.
+
+ProjectionImageFractionField constructs the actual image function field
+inside the source field. HomogeneousProjectionRankBound proves
+e*[F:L] <= d for a finite homogeneous linear projection, where d and e are
+the actual source and image Hilbert multiplicities. HomogeneousProjectionBirational
+therefore proves that these multiplicities are equal if and only if the
+projection is birational in characteristic zero. It also proves the boundary
+case of a zero-dimensional homogeneous cone. The separate identification
+of Chow block degree with Hilbert multiplicity is still needed to combine
+this with the Chow irreducibility criterion.
 
 The source says each coefficient of R_X,Lambda has Plucker degree
 D=(m+1)*d. The cited universal Noether forms have degree D^2-1 in those

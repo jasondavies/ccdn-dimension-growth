@@ -586,8 +586,16 @@ image is closed over algebraically closed fields, and `ProjectiveChowEquation`
 gives the exact criterion:
 the constructed equation vanishes precisely when the hyperplanes meet the
 variety. The criterion also holds after algebraically closed coefficient
-extension. The exact degree `d` in each block and the Grassmannian bad-center
-detector remain open.
+extension. `GeometricProjectiveChow` constructs the equation over the source
+field without requiring a chosen affine chart. Row symmetry proves that all
+block degrees agree, and their sum is the total degree.
+
+`CenterChowCriterion` constructs the restriction to the literal determinant
+projection from a center. Its coefficients are homogeneous polynomials in
+the Plucker coordinates. The restriction is nonzero exactly when the center
+is disjoint from the variety; in that case it is a nonzero scalar times a
+positive power of the constructed image equation. The exact block degree
+`d` and the Grassmannian bad-center detector remain open.
 
 `GenericHyperplaneNormalization` proves that algebraically independent
 hyperplane coefficients give an integral projection with independent
@@ -597,7 +605,22 @@ projective base points; finiteness is not an additional hypothesis.
 `HomogeneousNormalizationRank` proves that the fraction-field degree of an
 actual finite linear normalization in characteristic zero is exactly the
 source multiplicity `d`. The identification with each Chow block degree
-remains to be completed.
+remains to be completed. `UniversalHyperplaneNormalization` now constructs
+the independent coefficients in a rational function field and proves the
+finite normalization and exact rank there. Geometric primality is transported
+to arbitrary field extensions internally. `ClosureNormalizationInfinite`
+constructs a normalization preserving the homogenizing coordinate over any
+infinite field; `FixedCoordinateGenericNormalization` proves its generic
+version. `ChowIncidenceMinimalPolynomial` identifies one coefficient degree
+of the Chow equation with an actual minimal-polynomial degree. Identifying
+the resulting parameter fields and transporting the affine normalization
+rank are still required to prove that this degree is `d`.
+
+`HomogeneousProjectionBirational` proves that an actual finite homogeneous
+linear projection in characteristic zero preserves Hilbert multiplicity
+if and only if its projected coordinates generate the source function field.
+The proof constructs the image field and normalization internally and
+includes the zero-dimensional cone.
 
 `zero_dimensional_plucker_degree_bound_obstruction` verifies a boundary
 failure in Lemma 5.2: at dimension zero and degree one, its strict bound
