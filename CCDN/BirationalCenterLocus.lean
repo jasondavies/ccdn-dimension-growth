@@ -1,6 +1,7 @@
 module
 
-public import CCDN.BirationalCenterNonvanishing
+public import CCDN.BirationalMinorCenterWitness
+public import CCDN.ProjectiveClosureHilbertPolynomial
 public import CCDN.ZeroColumnCenterDensity
 
 /-! The geometrically disjoint birational-center condition, and its

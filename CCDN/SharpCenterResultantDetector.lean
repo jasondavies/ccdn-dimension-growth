@@ -3,7 +3,7 @@ module
 public import CCDN.CenterResultantBaseChange
 public import CCDN.ChowRowResultantCriterion
 public import CCDN.ClosedFieldChowBirationalCriterion
-public import CCDN.BirationalCenterDetector
+public import CCDN.ChowProjectionBaseChange
 public import CCDN.PolynomialPredicates
 
 /-! Sharp-degree resultant detectors defined over the source field and

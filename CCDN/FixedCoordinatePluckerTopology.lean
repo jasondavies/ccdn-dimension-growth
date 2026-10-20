@@ -1,11 +1,10 @@
 module
 
-public import CCDN.BirationalCenterPluckerTopology
-public import CCDN.FixedCoordinateBirationalCenterDensity
+public import CCDN.CenterPluckerZariski
+public import CCDN.BirationalCenterSubspace
 
-/-! Dense open birational centers in the Grassmannian subspace of
-centers contained in X0=0. Density uses the constructed constrained matrix
-witness, and is not inferred from density in the ambient Grassmannian. -/
+/-! Centers contained in X0=0, as matrices with zero first column and as
+subspaces with the topology induced from the Plücker topology. -/
 
 @[expose] public section
 namespace CCDN
@@ -13,6 +12,19 @@ noncomputable section
 open MvPolynomial Matrix
 attribute [local instance] affinePointZariskiTopology projectivePointZariskiTopology
   centerSubspacePluckerZariskiTopology
+
+abbrev FixedCoordinateCenterMatrix (K : Type*) [Field K] (r n : ℕ) :=
+  {x : Fin r × Fin (n + 1) → K //
+    (∀ i j, j ∈ ({0} : Finset (Fin (n + 1))) → x (i,j) = 0) ∧
+    LinearIndependent K (fun i : Fin r => fun j : Fin (n + 1) => x (i,j))}
+
+def fixedCoordinateBirationalCenterLocus
+    {K : Type*} [Field K] {n r s : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
+    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
+    Set (FixedCoordinateCenterMatrix K r n) :=
+  {x | IsBirationalMatrixCenter (projectiveClosureIdeal I) e
+    (Matrix.of fun i j => x.val (i,j))}
 
 abbrev FixedCoordinateCenterSubspace (K : Type*) [Field K] (r n : ℕ) :=
   {W : CenterSubspace K r (n + 1) // ∀ v ∈ W.val, v 0 = 0}
@@ -71,27 +83,6 @@ theorem fixedCoordinateBirationalSubspaceLocus_preimage
     centerMatrixSpan ⁻¹' birationalCenterSubspaceLocus (projectiveClosureIdeal I) e ↔ _
   rw [birationalCenterSubspaceLocus_preimage]
   rfl
-
-theorem fixedCoordinateBirationalSubspaceLocus_plucker_dense_open
-    {K : Type*} [Field K] [CharZero K] {n m s : ℕ}
-    (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
-    [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hmn : m + 1 ≤ n + 1) (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
-    (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :
-    Dense (fixedCoordinateBirationalSubspaceLocus I e) ∧
-      IsOpen (fixedCoordinateBirationalSubspaceLocus I e) := by
-  have := projectiveClosureIdeal_geometrically_prime (L := AlgebraicClosure K) I
-  obtain ⟨hcdim, hcdeg⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdim hdegree
-  constructor
-  · have hdense := fixedCoordinateMatrixSpan_surjective.denseRange.dense_image
-      fixedCoordinateMatrixSpan_continuous (fixedCoordinateBirationalCenterLocus_dense I hmn d hdim hdegree e)
-    rw [← fixedCoordinateBirationalSubspaceLocus_preimage I e,
-      Set.image_preimage_eq _ fixedCoordinateMatrixSpan_surjective] at hdense
-    exact hdense
-  · exact (birationalCenterSubspaceLocus_plucker_isOpen (projectiveClosureIdeal I)
-      (projectiveClosureIdeal_homogeneous I) d hcdim hcdeg (by omega) e).preimage continuous_subtype_val
 
 end
 end CCDN

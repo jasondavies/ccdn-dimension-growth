@@ -1,7 +1,7 @@
 module
 
 public import CCDN.BoundedCenterProjectionAllRows
-public import CCDN.BoundedBirationalCenter
+public import CCDN.BirationalCenterLocus
 public import CCDN.PolynomialPredicates
 
 /-! Complementary projections retain the geometric and degree
