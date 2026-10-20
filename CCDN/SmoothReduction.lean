@@ -3,7 +3,7 @@ module
 public import CCDN.SmoothPlaneChart
 
 /-! Smooth reduction classes of a plane equation, and their contribution
-to the gcd of maximal evaluation minors. No residue partition is assumed. -/
+to the gcd of maximal evaluation minors. -/
 
 @[expose] public section
 namespace CCDN

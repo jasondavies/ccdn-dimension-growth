@@ -5,8 +5,8 @@ public import CCDN.AffineBoxRanges
 public import CCDN.ScaledPlaneSmallCoefficient
 
 /-! Combining the scaling-prime, large-coefficient and small-box branches.
-Only the sharp finite-field count remains explicit for this plane theorem,
-aside from the nonzero constant term removed by a later translation. -/
+The plane theorem assumes the sharp finite-field count and a nonzero
+constant term; a later translation removes the second hypothesis. -/
 
 @[expose] public section
 namespace CCDN
@@ -43,7 +43,7 @@ lemma degree_four_le_curveBound {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 ≤ B) 
   nlinarith only [ht]
 
 /-- Coefficient-uniform affine plane count for nonzero constant term and every
-B>=1. Prime selection and all height and box cases are discharged. -/
+B>=1. -/
 theorem plane_finite_count_nonzero_constant
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {t : ℕ}
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)

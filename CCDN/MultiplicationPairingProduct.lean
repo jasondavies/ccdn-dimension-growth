@@ -5,8 +5,7 @@ public import Mathlib.LinearAlgebra.Matrix.BilinearForm
 
 /-! Determinant nondegeneracy turns multiplication bounds on a hyperplane
 complement into the product inequality used to control the largest
-successive minimum. This file contains the algebraic/product step; it does
-not assume or assert a lattice counting theorem. -/
+successive minimum. This file contains the algebraic product step. -/
 
 @[expose] public section
 namespace CCDN

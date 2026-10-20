@@ -5,8 +5,8 @@ public import CCDN.ClassGroupDiscriminantNumerics
 public import CCDN.NumberFieldShortBasis
 
 /-! The odd-degree branch of CCDN Theorem 6 for the ideal-class
-group. The lattice, bounded representatives, translation classes, and
-signed norm curves are all constructed in the imported proofs. -/
+group, via the lattice, bounded representatives, translation classes, and
+signed norm curves of the imported files. -/
 
 @[expose] public section
 namespace CCDN
@@ -29,8 +29,7 @@ lemma oddDegreeClassGroupConstant_pos {n : ℕ} (hn : 0 < n) :
 
 variable (K : Type*) [Field K] [NumberField K]
 
-/-- The log-free odd-degree bound, with no supplied lattice or class-group
-reduction premise. -/
+/-- The log-free odd-degree bound. -/
 theorem odd_degree_classGroup_two_torsion_bound
     (hn : 2 ≤ Module.finrank ℚ K) (hodd : Odd (Module.finrank ℚ K)) :
     (classGroupTwoTorsionCard K : ℝ) ≤

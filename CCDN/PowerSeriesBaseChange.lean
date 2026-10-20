@@ -4,9 +4,7 @@ public import CCDN.FiniteRowMinor
 public import Mathlib.RingTheory.PowerSeries.Basic
 
 /-! Finite linear independence of formal power series survives arbitrary
-field extension. A finite nonzero coefficient minor witnesses independence,
-so the argument does not assume that infinite products commute with tensor
-products. -/
+field extension. A finite nonzero coefficient minor witnesses independence. -/
 
 @[expose] public section
 namespace CCDN

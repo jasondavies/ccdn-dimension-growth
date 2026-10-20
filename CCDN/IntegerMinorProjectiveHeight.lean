@@ -4,7 +4,8 @@ public import CCDN.ProjectiveIntegerHeight
 public import CCDN.SharpMinorSpecialization
 
 /-! Integral maximal minors give the intrinsic projective height of a
-center, without a primitivity assumption or a choice of coordinate ordering. -/
+center. The minor vector need not be primitive, and the height does not
+depend on the coordinate ordering. -/
 
 @[expose] public section
 namespace CCDN

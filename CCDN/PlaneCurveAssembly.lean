@@ -4,7 +4,7 @@ public import CCDN.NonabsolutePlaneCount
 public import CCDN.RationalPlaneAssembly
 
 /-! The complete rational plane reduction to sharp finite-field counting.
-The non-absolutely-irreducible case is bounded unconditionally by d². -/
+The non-absolutely-irreducible case is bounded by d². -/
 
 @[expose] public section
 namespace CCDN
@@ -29,8 +29,8 @@ theorem count_nonabsolute_plane_le {F : Type*} [Field F] [CharZero F]
   have h := nonabsolute_plane_points_card_le f hf hd hred z hi hz
   simpa only [Fintype.card_coe, S, count] using h
 
-/-- The exact PlaneCurveBound target follows from the one remaining sharp
-finite-field estimate. The rational nonabsolute case is fully discharged. -/
+/-- The exact PlaneCurveBound target follows from the sharp finite-field
+estimate. The rational nonabsolute case is covered by the d² bound. -/
 theorem planeCurveBound_of_sharp_residue_bound {C : ℝ}
     (hC : 0 ≤ C) (hres : SharpPlaneResidueBound C) : PlaneCurveBound := by
   let K := 2 * Real.exp 1 * affineNonzeroConstantBound C

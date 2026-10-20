@@ -23,8 +23,7 @@ def integerBirationalProjectionHeight (n d : ℕ) : ℕ :=
   max (integerNormalizationHeight n d) ((n * d ^ 2 + 1) ^ n)
 
 /-- A bounded primitive augmentation of the constructed normalization
-produces a homogeneous irreducible equation of exactly the original degree.
-No normalization, image equation, conductor or birationality is supplied. -/
+produces a homogeneous irreducible equation of exactly the original degree. -/
 theorem exists_bounded_birational_hypersurface_projection
     (m k : ℕ) (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)

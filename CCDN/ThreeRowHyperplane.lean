@@ -19,7 +19,7 @@ lemma three_by_three_det_abs_le (M : Matrix (Fin 3) (Fin 3) ℤ) (T : ℕ)
     Nat.factorial_zero, Nat.reduceAdd, Nat.reduceMul, nsmul_eq_mul, Nat.cast_ofNat] using hh
 
 /-- The bounded row relation in integral coordinates. In particular the
-coefficient multiplying the extra row is nonzero, without clearing a new
+coefficient multiplying the extra row is nonzero, without clearing a further
 denominator after solving the linear system. -/
 theorem exists_bounded_three_row_relation
     (M : Matrix (Fin 3) (Fin 3) ℤ) (w : Fin 3 → ℤ) (T : ℕ)

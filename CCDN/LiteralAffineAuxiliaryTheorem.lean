@@ -6,7 +6,7 @@ public import CCDN.AffineHypersurfaceAuxiliary
 /-! CCDN Proposition 4.2.1 with the literal affine bad-prime factor.
 All box radii, zero constant coefficients and nonabsolute irreducible
 equations are included. The chart determinant proof handles good reductions
-which lose affine degree; no homogenization-factor equality is used. -/
+which lose affine degree. -/
 
 @[expose] public section
 namespace CCDN

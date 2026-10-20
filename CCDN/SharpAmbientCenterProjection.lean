@@ -43,7 +43,7 @@ lemma birational_complement_projection_ambient_height
       centerProjectionHeightConstant n * d ^ (2 * r ^ 2) from by
     simpa only [sharpCenterMinorBound, mul_assoc] using hh)
 
-/-- An unconditional form of Lemma 5.1, with the literal ambient height
+/-- Lemma 5.1, with the literal ambient height
 quantifier and an explicit dimension-only constant. Geometric integrality
 and degree preservation of the projection image are included. -/
 theorem exists_sharp_ambient_birational_projection

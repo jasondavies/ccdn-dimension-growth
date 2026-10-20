@@ -55,7 +55,7 @@ theorem integral_minpoly_natDegree_le_fraction_finrank
   exact minpoly.natDegree_le (algebraMap A E a)
 
 /-- A polynomial degree bound for every finite set of specialization
-tuples. A finite-fiber estimate is a conclusion, not an input premise. -/
+tuples. -/
 theorem integral_coordinate_tuple_count_le_finrank_pow
     (R A F E : Type*) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [CommRing A] [IsDomain A] [Field F] [Field E]

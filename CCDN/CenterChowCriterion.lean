@@ -16,8 +16,7 @@ noncomputable section
 open MvPolynomial Matrix
 
 /-- Source Chow data, minor enumeration, coefficient homogeneity and the
-geometric restriction criterion are constructed from the source ideal.
-Neither an image equation, a chart, nor an equality of zero loci is supplied. -/
+geometric restriction criterion are constructed from the source ideal. -/
 theorem exists_center_chow_restriction
     {K : Type*} [Field K] [IsAlgClosed K] {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

@@ -4,7 +4,7 @@ public import CCDN.PlaneFrobeniusSystem
 
 /-! The Stepanov point bound with an explicit finite-dimensional inequality.
 The polynomial bases, auxiliary coefficients, formal branches and multiplicity
-argument are constructed; only the numerical choice of degrees remains. -/
+argument are explicit, given a numerical choice of degrees. -/
 
 @[expose] public section
 namespace CCDN
@@ -29,8 +29,7 @@ theorem exists_filtered_polynomial_basis {K σ : Type*} [Field K] [Finite σ]
   simp only [he]
   exact b.linearIndependent.map' (filteredCoordinateSpace I D).subtype (Submodule.ker_subtype _)
 
-/-- A strict dimension inequality gives the smooth prime-field point count.
-There is no supplied auxiliary polynomial or counting theorem in the hypotheses. -/
+/-- A strict dimension inequality gives the smooth prime-field point count. -/
 theorem plane_stepanov_smooth_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Fin 2) (ZMod p)) (hf : Irreducible f)
     (z : ι → Fin 2 → ZMod p) (hz : Function.Injective z)

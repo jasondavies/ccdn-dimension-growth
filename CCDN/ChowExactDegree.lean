@@ -7,7 +7,7 @@ public import CCDN.ChowTotalDegree
 /-! The Chow incidence equation has one block degree equal to the
 source Hilbert multiplicity in every row, and total degree (m+1)d.
 The generic normalization and primitive-element fields are constructed
-from the source; no rank or degree comparison is assumed. -/
+from the source. -/
 
 @[expose] public section
 namespace CCDN

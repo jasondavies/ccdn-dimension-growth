@@ -99,7 +99,7 @@ theorem pow_dvd_det_of_weighted_factorization_fintype {R ι : Type*} [CommRing R
   exact he (t.toEmbedding.trans a.toEmbedding)
 
 /-- A homogeneous local generating family gives a determinant divisor
-at any precision, without a plane-curve restriction or assumed factorization. -/
+at any precision and in any dimension. -/
 theorem origin_filtration_pow_dvd_det_mod {p n s e : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (x : Fin s → Fin (n + 1) → ℤ) (hx : ∀ i j, (p : ℤ) ∣ x i j)

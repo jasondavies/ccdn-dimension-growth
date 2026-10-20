@@ -51,7 +51,7 @@ theorem eulerClosedFormCoefficientMatrix_rank
   rw [hr, card_eulerColumns]
 
 /-- A nonzero maximal minor has precisely the universal Noether
-order, not the earlier rectangular-grid order 2*d^2-1. -/
+order d^2-1. -/
 theorem exists_eulerClosedForm_nonzero_minor
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (k : ℕ) (f : Polynomial (Polynomial F)) (hf : Irreducible f)

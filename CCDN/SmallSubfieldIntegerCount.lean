@@ -5,8 +5,7 @@ public import CCDN.IntermediateFieldCount
 
 /-! Parameters lying in intermediate fields of degree at most one
 quarter of the ambient degree have a uniform fourth-root contribution
-at the balanced discriminant radius. The sets and subfields counted
-here are the ones, with no assumed exceptional-family bound. -/
+at the balanced discriminant radius. -/
 
 @[expose] public section
 namespace CCDN

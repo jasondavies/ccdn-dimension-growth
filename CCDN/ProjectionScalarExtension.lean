@@ -5,8 +5,7 @@ public import CCDN.LinearProjectionFiltration
 
 /-! Scalar extension commutes with a polynomial image ideal.
 Consequently a polynomial projection of a geometrically integral source
-has a geometrically integral image. No flatness or image-primality premise
-is supplied. -/
+has a geometrically integral image. -/
 
 @[expose] public section
 namespace CCDN

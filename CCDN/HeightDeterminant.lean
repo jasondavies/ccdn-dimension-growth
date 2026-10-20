@@ -4,9 +4,9 @@ public import CCDN.PlaneBadPrimes
 public import CCDN.SingularDeterminantCutoff
 import all ArithmeticHeights.BombieriVaaler
 
-/-! The determinant lower bound with the bad-prime input discharged by the
-coefficient-controlled witness. The sharp finite-field point estimate
-remains explicit and is not asserted as a theorem here. -/
+/-! The determinant lower bound, with the bad-prime input given by the
+coefficient-controlled witness. The sharp finite-field point estimate is an
+explicit hypothesis. -/
 
 @[expose] public section
 namespace CCDN
@@ -17,8 +17,8 @@ def heightDeterminantError (C : ℝ) : ℝ :=
   degreeFourDeterminantError C + Real.log 7 + 2 * mertensError + 1
 
 /-- The excluded-prime set and its charge are derived from the absolute
-irreducibility and coefficient-height hypotheses. The only remaining local
-arithmetic estimate is the stated sharp finite-field point bound. -/
+irreducibility and coefficient-height hypotheses. The only local arithmetic
+hypothesis is the stated sharp finite-field point bound. -/
 theorem singular_determinant_log_lower_height
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     {s N : ℕ} (hs : 0 < s) (f : MvPolynomial (Fin 2) ℤ) (hd : 0 < f.totalDegree)

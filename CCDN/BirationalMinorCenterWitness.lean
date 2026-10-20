@@ -45,7 +45,7 @@ theorem exists_birational_minor_center
 
 /-- Every affine prime source has a constructed finite birational center
 for its projective closure lying in X0=0. This includes dimension zero.
-The result is a literal minor projection, with no supplied center witness. -/
+The projection is the literal maximal-minor projection. -/
 theorem exists_fixed_coordinate_birational_minor_center
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [Infinite L]
     {m n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

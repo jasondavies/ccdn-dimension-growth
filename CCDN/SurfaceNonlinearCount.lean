@@ -4,7 +4,7 @@ public import CCDN.SurfaceAuxiliaryExponent
 public import CCDN.AffineCurveBound
 
 /-! Counting the nonlinear components of a surface section using their
-total Hilbert degree and the unconditional affine curve counting theorem. -/
+total Hilbert degree and the affine curve counting theorem. -/
 
 @[expose] public section
 namespace CCDN

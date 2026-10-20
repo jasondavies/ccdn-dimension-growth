@@ -7,9 +7,8 @@ public import Mathlib.Algebra.Polynomial.Roots
 public import CCDN.PolynomialPredicates
 
 /-! An integral homogeneous linear projection has no nonzero geometric
-point in its kernel. This proves disjointness from its projective
-center over any infinite extension field, without a supplied finite-fiber
-bound or an assumed base-point-free map. -/
+point in its kernel. This gives disjointness from its projective
+center over any infinite extension field. -/
 
 @[expose] public section
 namespace CCDN

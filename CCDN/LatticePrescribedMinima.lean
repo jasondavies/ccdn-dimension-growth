@@ -3,7 +3,7 @@ module
 public import CCDN.LatticeSuccessiveMinima
 
 /-! A lattice basis with a prescribed nonzero first vector. Every later
-vector is genuinely shortest outside the previous span. A supplied global
+vector is shortest outside the previous span. A given global
 lower bound replaces the first vector's norm in the monotone thresholds. -/
 
 @[expose] public section
@@ -71,7 +71,7 @@ theorem IsPrescribedGreedyLatticeFamily.snoc
       simpa only [Fin.snoc_castSucc, prescribed_snoc_image_Iio_castSucc] using hv.2.2.2 j hj0
 
 /-- Prescribed-first greedy independent lattice vectors of every possible
-length, with no initial independent family supplied by the caller. -/
+length. -/
 theorem exists_prescribed_greedy_lattice_family
     (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
     (w : E) (hw : w ∈ L) (hw0 : w ≠ 0)

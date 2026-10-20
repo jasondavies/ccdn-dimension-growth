@@ -35,8 +35,7 @@ lemma polynomial_coefficient_bound_renameEquiv {σ τ : Type*} (e : σ ≃ τ)
   rw [← hc]
   exact hf _
 
-/-- Construct the exact geometric bad-prime set and bound its charge, with
-no caller-supplied set, witness, or good-reduction hypothesis. -/
+/-- The exact geometric bad-prime set exists, and its charge is bounded. -/
 theorem exists_fin_hypersurface_bad_prime_charge
     {L : Type*} [Field L] [CharZero L] [IsAlgClosed L] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)

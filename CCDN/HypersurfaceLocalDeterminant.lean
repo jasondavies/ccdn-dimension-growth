@@ -46,8 +46,8 @@ lemma sum_cumulative_binomial (n K : ℕ) :
     rw [show n + (K + 1) = (n + K) + 1 by omega, Nat.choose_succ_succ']
     omega
 
-/-- Cutoffs beyond s add no positive deficits. This is why the finite
-exponent still controls every possible numerical cutoff. -/
+/-- Cutoffs beyond s add no positive deficits. Hence the finite
+exponent controls every numerical cutoff. -/
 lemma sum_hypersurface_deficits_le (n s K : ℕ) {μ : ℕ} (hμ : 0 < μ) :
     (∑ k ∈ Finset.range K, (s - μ * (n + 1 + k).choose (n + 1))) ≤
       hypersurfaceMultiplicityExponent (n + 1) μ s := by
@@ -91,7 +91,7 @@ theorem hypersurface_pow_dvd_det_mod {p n μ s : ℕ} [Fact p.Prime]
   origin_filtration_pow_dvd_det_mod f x hx
     (hypersurfaceMultiplicityExponent_le_origin _ hf hμ) hfx F
 
-/-- The exact-zero form, with no supplied local generators or factorization. -/
+/-- The same divisor for exact zeros of the equation. -/
 theorem hypersurface_pow_dvd_det {p n μ s : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 2)) ℤ)
     (hf : map (Int.castRingHom (ZMod p)) f ∈ idealOfVars (Fin (n + 2)) (ZMod p) ^ μ)

@@ -55,7 +55,7 @@ theorem primitive_ratFunc_pair_adjoin_top {K F : Type*} [Field K] [Field F] [Alg
   exact hsub (by rw [hprim]; trivial)
 
 /-- A generating polynomial tuple expresses any field element as a quotient
-with a genuinely nonzero evaluated denominator. -/
+with a nonzero evaluated denominator. -/
 lemma adjoin_top_polynomial_fraction {K F σ : Type*} [Field K] [Field F] [Algebra K F]
     (a : σ → F) (ha : IntermediateField.adjoin K (Set.range a) = ⊤) (x : F) :
     ∃ r s : MvPolynomial σ K, aeval a s ≠ 0 ∧ x = aeval a r / aeval a s := by

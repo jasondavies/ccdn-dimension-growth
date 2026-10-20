@@ -7,7 +7,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 /-! Weighted generators from ideal-adic layers of a Noetherian ring.
 
 The layer is the image of `I^k` in `A/I^(k+1)`, hence is a quotient
-of ideals rather than a supplied associated-graded model. If `A/I` is finite,
+of ideals. If `A/I` is finite,
 Noetherianity makes every truncation finite. Bases of these layers
 therefore give generators with exactly the layer dimensions. -/
 
@@ -55,8 +55,8 @@ theorem exists_idealPowerLayer_generators (I : Ideal A) [IsNoetherianRing A]
   have hsum := congrArg Subtype.val (b.sum_repr ubar)
   simpa only [Submodule.coe_sum, Submodule.coe_smul] using hsum.symm
 
-/-- Successive reductions by the genuine layers give a spanning family for
-every finite truncation, without Nakayama or a presentation of the ring. -/
+/-- Successive reductions by the layers give a spanning family for
+every finite truncation. -/
 lemma ideal_layers_generate_truncation (I : Ideal A) (r : ℕ → ℕ)
     (g : (k : ℕ) → Fin (r k) → A)
     (hspan : ∀ k u, u ∈ I ^ k → ∃ c : Fin (r k) → K,

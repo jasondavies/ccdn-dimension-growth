@@ -88,7 +88,7 @@ theorem boundedSquareNormIntegers_odd_count
     _ = _ := by simp; ring
 
 /-- The algebraic and curve-counting reduction combined with the
-finite lattice packing. Only the short integral basis is still an input. -/
+finite lattice packing, given a short integral basis `b`. -/
 theorem boundedSquareNormIntegers_odd_count_of_relative_short_basis
     {ι : Type*} [Fintype ι]
     (b : Module.Basis ι ℝ (mixedEmbedding.euclidean.mixedSpace K))

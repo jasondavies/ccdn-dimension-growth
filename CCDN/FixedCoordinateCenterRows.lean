@@ -6,7 +6,7 @@ public import CCDN.GeometricCenterRows
 
 /-! Constructed finite birational centers at infinity. Every center row has
 zero homogenizing coordinate; the construction includes affine dimension
-zero and requires no supplied projection or generic-center witness. -/
+zero. -/
 
 @[expose] public section
 namespace CCDN

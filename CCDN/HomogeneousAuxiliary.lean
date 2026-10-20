@@ -12,8 +12,7 @@ noncomputable section
 open MvPolynomial Matrix
 
 /-- A homogeneous equation yields a small homogeneous polynomial
-vanishing at every given integral point. No monomial list, selected rows,
-rank deficiency, or spanning hypothesis is supplied by the caller. -/
+vanishing at every given integral point. -/
 theorem exists_small_homogeneous_vanishing_polynomial {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → (Fin (n + 1) → ℤ)) (hzero : ∀ i, eval (points i) f = 0) :

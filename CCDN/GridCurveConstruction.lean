@@ -37,8 +37,7 @@ lemma grid_root_polynomial_eval_zero {K : Type*} [Field K]
   exact Finset.prod_eq_zero ha (by simp)
 
 /-- An arbitrary finite square grid of side s lies on an absolutely irreducible
-curve of every degree d≥s+2 satisfying 2s≤d+1. The proof uses an equation,
-not an assumed curve or an interpolation irreducibility hypothesis. -/
+curve of every degree d≥s+2 satisfying 2s≤d+1, given by an explicit equation. -/
 theorem exists_absolutely_irreducible_plane_grid
     {K L : Type*} [Field K] [Infinite K] [Field L] (φ : K →+* L)
     (s : Finset K) (hs : 0 < s.card) (d : ℕ)

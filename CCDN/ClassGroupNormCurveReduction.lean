@@ -4,9 +4,8 @@ public import CCDN.ClassGroupTranslateFibers
 public import Mathlib.GroupTheory.QuotientGroup.Defs
 
 /-! The bounded square-norm set is partitioned by integer translations.
-This constructs the finite norm-curve family rather than assuming one. The
-uniform estimate for the number of translation classes is a separate lattice
-theorem and is not asserted here. -/
+This constructs a finite norm-curve family. The uniform estimate for the
+number of translation classes is a separate lattice theorem. -/
 
 @[expose] public section
 namespace CCDN
@@ -83,7 +82,7 @@ theorem exists_actual_norm_curve_family (B : ℝ) :
       exact (Set.ncard_eq_toFinset_card _ _).symm
     _ ≤ _ := Finset.sum_le_sum (fun q _ ↦ squareNormTranslateFiber_count_le K (β q) (hb q))
 
-/-- The unconditional class-group-to-norm-curves reduction, with its finite
+/-- The class-group-to-norm-curves reduction, with its finite
 index set explicitly defined from the constructed bounded square generators. -/
 theorem classGroupTwoTorsionCard_le_actual_norm_curve_family :
     let B := 9 * |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ))

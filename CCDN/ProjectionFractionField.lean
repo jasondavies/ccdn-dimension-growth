@@ -5,7 +5,7 @@ public import CCDN.BoundedPrimitiveElement
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 
 /-! Field generation by a parameter tuple and one primitive coordinate,
-and the resulting genuine fraction-field structure on the image ring. -/
+and the resulting fraction-field structure on the image ring. -/
 
 @[expose] public section
 namespace CCDN

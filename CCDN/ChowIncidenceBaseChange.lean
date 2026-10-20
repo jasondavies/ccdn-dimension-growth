@@ -85,7 +85,7 @@ lemma chowIncidencePolynomialMap_coefficientLinear {K L : Type*}
         polynomialCoefficientLinear_mul_map, map_mul]
 
 /-- Field extension commutes with the constructed incidence ideal, for
-arbitrary source ideals. No primeness or kernel-injectivity premise is needed. -/
+arbitrary source ideals. -/
 theorem chowIncidenceIdeal_scalar_extension {K L : Type*}
     [Field K] [Field L] [Algebra K L] {n : ℕ}
     (r : ℕ) (I : Ideal (MvPolynomial (Fin n) K)) :

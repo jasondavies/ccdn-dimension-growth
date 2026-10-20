@@ -10,7 +10,7 @@ namespace CCDN
 noncomputable section
 open Matrix LinearMap Module
 
-/-- A genuine projection along independent center rows admits dual linear
+/-- A projection along independent center rows admits dual linear
 forms, normalized to take value one on the corresponding row. Their common
 zero space is exactly the complementary image, and their expansion is the
 projection formula (5-4). -/

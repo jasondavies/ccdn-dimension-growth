@@ -5,7 +5,7 @@ public import CCDN.PolynomialPredicates
 
 /-! The complete geometrically disjoint birational-center locus is Zariski
 open. For a rational geometric projective variety in the stated ambient
-range it is also dense, using a constructed center, not a supplied witness. -/
+range it is also dense. -/
 
 @[expose] public section
 namespace CCDN

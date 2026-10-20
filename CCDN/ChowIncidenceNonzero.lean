@@ -39,7 +39,7 @@ theorem chowIncidenceIdeal_ne_bot {K : Type*} [Field K] {n r : ℕ}
   nlinarith
 
 /-- A nonzero polynomial vanishes on every incident tuple of
-m+1 hyperplanes; it is not an assumed Chow form. -/
+m+1 hyperplanes. -/
 theorem exists_nonzero_chow_incidence_equation {K : Type*} [Field K] [IsAlgClosed K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
     ∃ R : MvPolynomial (Fin ((filteredHilbertPolynomial I).natDegree + 1) × Fin (n + 1)) K,

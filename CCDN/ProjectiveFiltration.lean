@@ -13,7 +13,7 @@ public import Mathlib.Algebra.Polynomial.AlgebraMap
 
 For an affine coordinate ideal `I`, this constructs the subalgebra of
 `(K[x]/I)[w]` whose coefficient of `w^n` is represented by a polynomial of degree
-at most `n`. Its homogeneous pieces recover the existing filtered Hilbert
+at most `n`. Its homogeneous pieces recover the filtered Hilbert
 function. Multiplication by the homogenizing coordinate identifies the previous
 filtered space inside the next piece.
 -/
@@ -72,7 +72,7 @@ lemma projective_monomial_mem {K σ : Type*} [Field K]
       simpa using ha
     · simp [Polynomial.coeff_monomial, hi]
 
-/-- The new coordinate `w` in the homogeneous coordinate algebra. -/
+/-- The homogenizing coordinate `w` in the homogeneous coordinate algebra. -/
 def projectiveInfinityCoordinate {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) : projectiveCoordinateAlgebra I :=
   ⟨Polynomial.X, by

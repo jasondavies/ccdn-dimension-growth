@@ -39,9 +39,9 @@ lemma boundedHomogenize_map_of_degree_bound {K L : Type*} [CommRing K] [CommRing
       Finset.sup_mono (support_map_subset _ _)).trans hd))
   rw [affineChart_map, affineChart_boundedHomogenize, affineChart_boundedHomogenize]
 
-/-- A genuinely irreducible affine reduction gives the sharp prime-power
+/-- An irreducible affine reduction gives the sharp prime-power
 minor divisor for points whose first homogeneous coordinate is a p-adic unit.
-There is no hypothesis that reduction preserves the affine degree. -/
+The reduction may lose affine degree. -/
 theorem affine_chart_hypersurface_minorGcd_sharp
     {n s N p d M : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)

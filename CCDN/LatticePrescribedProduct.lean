@@ -4,8 +4,8 @@ public import CCDN.LatticePrescribedMinima
 public import CCDN.LatticeMinimaProduct
 
 /-! The product-of-lengths bound for a prescribed first lattice vector.
-The construction uses genuine later minima and the proved covolume bound
-for positive monotone flag thresholds. -/
+Each later vector is shortest outside the preceding span, and the covolume
+bound for positive monotone flag thresholds applies. -/
 
 @[expose] public section
 namespace CCDN

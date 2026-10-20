@@ -15,7 +15,7 @@ open MvPolynomial
 
 /-- If polynomial relations specialize to the entire degree-D monomial
 basis, their generic values generate that homogeneous piece modulo any
-ideal containing those values. No rank or nonzero minor is assumed. -/
+ideal containing those values. -/
 theorem homogeneous_generation_of_basis_specialization
     {K L σ : Type*} [Field K] [Field L] [Algebra K L] {n D : ℕ}
     (p : Fin ((n + D).choose D) → MvPolynomial (Fin (n + 1)) (MvPolynomial σ K))

@@ -4,7 +4,7 @@ public import CCDN.BadPrimeCharge
 
 /-! A scaling prime from the first Mertens estimate. If every prime in a fixed
 multiplicative interval divides a nonzero integer, that integer has large
-logarithmic height. This does not assume a prime-number theorem. -/
+logarithmic height. -/
 
 @[expose] public section
 namespace CCDN

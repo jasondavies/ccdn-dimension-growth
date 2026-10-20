@@ -8,8 +8,8 @@ public import CCDN.CurveBoxDegreeBound
 variables. Splitting of the full equation over any field extension gives
 an auxiliary equation of degree at most d. The prime curve
 components of the resulting section have total degree at most d², giving
-the sharp elementary bound d²(2B+1). This makes no assumption about the
-highest homogeneous component. -/
+the sharp elementary bound d²(2B+1), whatever the highest homogeneous
+component. -/
 
 @[expose] public section
 namespace CCDN

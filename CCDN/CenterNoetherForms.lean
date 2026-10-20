@@ -36,7 +36,7 @@ lemma irreducible_map_algebraicClosure_iff_of_isAlgClosed
     (algebraMap K (AlgebraicClosure K)) IsAlgClosed.algebraMap_bijective_of_isIntegral
   exact MulEquiv.irreducible_iff (mapEquiv σ e)
 
-/-- The detector is a finite family of genuine polynomials in the maximal
+/-- The detector is a finite family of polynomials in the maximal
 minor coordinates, chosen before the center matrix. Its evaluations detect
 absolute irreducibility of the restricted source equation. -/
 theorem exists_center_noether_forms

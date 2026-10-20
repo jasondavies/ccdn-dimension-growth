@@ -7,7 +7,7 @@ public import CCDN.ReconstructionFunctionField
 /-! A linear affine projection generating the function field also
 generates the function field of the cone over its projective closure when
 the homogenizing coordinate is retained. Rational reconstruction on the
-standard chart proves this without an assumed compactification map. -/
+standard chart proves this. -/
 
 @[expose] public section
 namespace CCDN

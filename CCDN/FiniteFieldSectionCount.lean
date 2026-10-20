@@ -6,7 +6,7 @@ public import Mathlib.Data.Nat.Choose.Bounds
 
 /-! Finite-field point bounds for a proper section of an irreducible
 hypersurface. The proof uses polynomial interpolation and the filtered
-Koszul rank estimate; no geometric degree or point-count theorem is assumed. -/
+Koszul rank estimate. -/
 
 @[expose] public section
 namespace CCDN

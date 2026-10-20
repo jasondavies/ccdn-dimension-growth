@@ -4,7 +4,7 @@ public import CCDN.FormalBranchFaithful
 public import CCDN.PowerSeriesFrobenius
 
 /-! A local Bézout bound on formal vanishing orders. It gives injective jets
-on low-degree functions and discharges the jet condition in Frobenius
+on low-degree functions and verifies the jet condition in Frobenius
 noncancellation for irreducible plane curves. -/
 
 @[expose] public section

@@ -12,8 +12,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- No function-field degree or parameter embedding is assumed: avoiding
-infinity and the certified affine Hilbert degree suffice. -/
+/-- Avoiding infinity and the certified affine Hilbert degree suffice for a
+degree-preserving plane projection. -/
 theorem exists_degree_preserving_projection_of_infinity_avoidance {K L F : Type*}
     [Field K] [CharZero K] [Field L] [Algebra K L] [IsAlgClosed L]
     [Field F] [Algebra K F] {n : ℕ}

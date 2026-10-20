@@ -70,8 +70,8 @@ theorem exists_bounded_integer_birational_center
   simp only [cubicCenterMinorBound, Nat.cast_mul, Nat.cast_pow]
   gcongr
 
-/-- The same construction inside X0=0. The original affine variety and
-its projective closure supply all geometric hypotheses internally. -/
+/-- The same construction inside X0=0, for the projective closure of an
+affine prime ideal. -/
 theorem exists_bounded_integer_fixed_coordinate_center
     {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]

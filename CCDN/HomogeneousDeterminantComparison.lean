@@ -85,7 +85,7 @@ lemma log_gcd_le_of_coefficient_bound {L G D k : ℝ}
   exact ⟨hG, by linarith⟩
 
 /-- The logarithmic determinant comparison with exact Hilbert rank, derived
-from absence of an auxiliary polynomial rather than assumed as a matrix bound. -/
+from the absence of an auxiliary polynomial. -/
 theorem homogeneous_no_auxiliary_log_comparison {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 1)))
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)

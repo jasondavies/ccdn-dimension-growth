@@ -4,9 +4,7 @@ public import CCDN.FilteredComponentRank
 public import CCDN.HilbertPolynomialComparison
 
 /-! The total multiplicity of the minimal-prime components of a
-pure-dimensional affine ideal is at most the original Hilbert multiplicity.
-The finite component family, separators and filtered comparison are constructed
-internally. No degree budget is assumed. -/
+pure-dimensional affine ideal is at most the original Hilbert multiplicity. -/
 
 @[expose] public section
 namespace CCDN
@@ -93,8 +91,7 @@ theorem minimalPrimeComponents_multiplicity_sum_le
   have hfac : (0 : ℚ) < m.factorial := by positivity
   exact_mod_cast (div_le_div_iff_of_pos_right hfac).mp hh
 
-/-- Positive integral component multiplicities exist and satisfy the budget,
-with no supplied degree assignment or auxiliary component family. -/
+/-- Positive integral component multiplicities exist and satisfy the budget. -/
 theorem exists_minimalPrimeComponents_multiplicity_budget
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) (m d : ℕ)

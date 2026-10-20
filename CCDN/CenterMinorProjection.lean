@@ -47,8 +47,7 @@ lemma centerMinorProjectionForm_eval {K : Type*} [Field K] {r n : ℕ}
   ring
 
 /-- Vanishing of every projection coordinate is exactly membership in
-the center; no generic-position or matrix-rank condition is supplied beyond
-independence of the rows defining that center. -/
+the center, assuming only that the rows defining the center are independent. -/
 theorem centerMinorProjection_eq_zero_iff {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (hA : LinearIndependent K A.row) (x : Fin n → K) :
     centerMinorProjection A x = 0 ↔ x ∈ Submodule.span K (Set.range A.row) := by

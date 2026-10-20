@@ -13,9 +13,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The bounded finite birational hypersurface projection, now with
+/-- The bounded finite birational hypersurface projection, with
 full row rank in every degree whenever the ambient vector dimension allows
-m+2 independent rows. All original bounds and normalization data remain. -/
+m+2 independent rows. It keeps the row height bound, the finite normalization,
+birationality and the irreducible degree-d equation. -/
 theorem exists_independent_bounded_birational_hypersurface_projection
     (m n : ℕ) (hmn : m + 2 ≤ n)
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]

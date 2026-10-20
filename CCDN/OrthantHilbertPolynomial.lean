@@ -119,7 +119,7 @@ lemma lowerSetOrthantPolynomial_eval {σ : Type*} [Fintype σ]
 
 /-- Every lower exponent set has an eventual counting polynomial.
 The threshold and the polynomial are constructed from its finite orthant
-partition, without an assumed Hilbert polynomial. -/
+partition. -/
 theorem lowerSet_eventually_polynomial {σ : Type*} [Fintype σ]
     (S : Set (σ → ℕ)) (hS : IsLowerSet S) :
     ∃ P : Polynomial ℚ, ∃ N : ℕ, ∀ n ≥ N,

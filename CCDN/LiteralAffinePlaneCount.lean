@@ -14,7 +14,7 @@ open MvPolynomial
 
 /-- Integral points satisfy the complete coefficient-sensitive
 bound, with the original leading homogeneous coefficient height and a
-single absolute constant. No geometric irreducibility is assumed. -/
+single absolute constant. The equation need not be geometrically irreducible. -/
 theorem literal_affine_plane_coefficient_count
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
@@ -50,7 +50,7 @@ theorem literal_affine_plane_coefficient_count
   rw [mul_left_comm, degree_mul_affineAuxiliaryDegreeExpression] at hh
   exact hh
 
-/-- A declaration with the universal constant quantified before the
+/-- The same bound with the universal constant quantified before the
 equation, degree and box, matching the uniformity in Corollary 4.2.4. -/
 theorem literal_affine_plane_coefficient_count_uniform :
     ∃ C : ℝ, 0 < C ∧ ∀ f : MvPolynomial (Fin 2) ℤ,

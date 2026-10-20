@@ -5,7 +5,7 @@ public import CCDN.BoundedPrimitiveElement
 
 /-! Generic primitive linear combinations of a separating coordinate tuple.
 The primitive specialization is constructed by the bounded primitive-element
-theorem; no generic primitivity or minimal-polynomial degree is assumed. -/
+theorem. -/
 
 @[expose] public section
 namespace CCDN

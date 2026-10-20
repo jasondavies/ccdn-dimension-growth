@@ -80,8 +80,7 @@ lemma chowProjectionImageIdeal_homogeneous {K : Type*} [Field K] {n s : ℕ}
       homogeneousComponent M f ∈ chowProjectionImageIdeal J A :=
   projection_kernel_homogeneousComponent_mem J hJ _ (chowProjectionForms_homogeneous A)
 
-/-- Disjointness from the projective center implies integrality; it is
-not an extra finiteness hypothesis. -/
+/-- Disjointness from the projective center implies integrality. -/
 theorem chow_projection_integral_of_center_disjoint
     {K : Type*} [Field K] [IsAlgClosed K] {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -110,7 +109,7 @@ theorem chow_projection_integral_of_center_disjoint
   exact hrel i
 
 /-- Every nonzero point of the image cone has a nonzero source
-point, and conversely; no closure or dominance premise replaces the image. -/
+point, and conversely. -/
 theorem chow_projection_cone_image_iff
     {K : Type*} [Field K] [IsAlgClosed K] {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))

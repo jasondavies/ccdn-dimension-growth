@@ -78,7 +78,7 @@ lemma powerSeries_weighted_derivatives_vanishing {K : Type*} [Field K]
       exact (mul_eq_zero.mp he).resolve_right (by
         simpa only [Nat.cast_add, Nat.cast_one] using hchar (n + 1) (by omega) hn)
 
-/-- Polynomial tangent derivatives give genuine local divisibility. -/
+/-- Polynomial tangent derivatives give local divisibility. -/
 theorem formal_plane_multiplicity_of_tangent {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K)
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] PowerSeries K) (hψ : ψ f = 0)

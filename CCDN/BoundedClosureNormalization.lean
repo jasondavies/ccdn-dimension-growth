@@ -13,8 +13,7 @@ noncomputable section
 open MvPolynomial
 
 /-- Integer linear normalization of a prime quotient of positive
-Hilbert dimension. No chosen projection, equations or normalization is assumed.
-The resulting polynomial map is both injective and integral. -/
+Hilbert dimension. The resulting polynomial map is both injective and integral. -/
 theorem exists_bounded_integer_closure_normalization (m k : ℕ)
     (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime] (d : ℕ)
     (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)

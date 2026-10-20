@@ -33,7 +33,7 @@ def affineCongruenceDeterminantLower (n d s : ℕ) (H Q : ℝ) : ℝ :=
     (hypersurfaceDeterminantMain n s - (n + 2 : ℝ) * s) * Q
 
 /-- A strict numerical gap forces every maximal determinant to vanish.
-All arithmetic divisibility and archimedean bounds are proved from the
+The arithmetic divisibility and archimedean bounds come from the
 equation, its smooth residue classes, and the integer points. -/
 theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 2)) ℤ)
@@ -78,7 +78,7 @@ theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
   have hhi := weighted_evaluation_det_log_bound mon x hB hbox hne
   exact (not_lt_of_ge (hlo.trans hhi)) hgap
 
-/-- The determinant gap yields a genuine integer auxiliary, proper over
+/-- The determinant gap yields an integer auxiliary, proper over
 the rationals, for every given finite family of points in the residue classes. -/
 theorem exists_affine_congruence_auxiliary_of_gap {n N t M : ℕ} (hN : 0 < N)
     (f : MvPolynomial (Fin (n + 2)) ℤ)

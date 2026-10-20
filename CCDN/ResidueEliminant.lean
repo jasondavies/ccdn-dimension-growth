@@ -85,7 +85,7 @@ theorem residueEliminant_natDegree_le {F : Type*} [CommRing F]
       exact natDegree_map_le.trans (hg i)
 
 /-- The eliminant is nonzero: specializing u=0 gives the nonzero resultant
-of f and -g over F(t). No generic specialization is assumed. -/
+of f and -g over F(t). -/
 theorem residueEliminant_ne_zero {F : Type*} [Field F]
     (f g : F[X][X]) (hf : Irreducible (f.map (algebraMap F[X] (RatFunc F))))
     (hg : g ≠ 0) (hdeg : g.natDegree < f.natDegree) :

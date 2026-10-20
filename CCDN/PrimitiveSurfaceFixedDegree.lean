@@ -8,8 +8,7 @@ public import CCDN.PolynomialPredicates
 
 /-! A coefficient-uniform linear bound for primitive affine surface
 polynomials of each fixed degree at least five. The argument constructs
-its congruence auxiliaries and curve cover; no residue-cover or curve-count
-hypothesis is supplied by the caller. -/
+its congruence auxiliaries and curve cover. -/
 
 @[expose] public section
 namespace CCDN

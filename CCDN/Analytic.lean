@@ -5,8 +5,8 @@ public import CCDN.Plane
 /-!
 # Uniform estimates and bounded-degree consequences
 
-These are proved real inequalities. Their use with a point count still requires proving
-the geometric/determinant estimate. No counting conjecture is assumed as a global axiom.
+Real inequalities used to deduce uniform and bounded-degree estimates from CCDN
+Corollary 4.2.4.
 -/
 
 @[expose] public section

@@ -115,7 +115,7 @@ theorem bivariateShear_coefficient_bound (a : ℤ) (d : ℕ) (f : ℤ[X][X])
   simp only [BivariateGrid, Fintype.card_prod, Fintype.card_fin, Nat.cast_mul, Nat.cast_add, Nat.cast_one]
   ring
 
-/-- For the selected parameter 0<=a<=d, the new height is at most
+/-- For the selected parameter 0<=a<=d, the sheared height is at most
 H*(d+1)^(d+2), hence its logarithm costs only O(d log d). -/
 theorem bivariateShear_bounded_coefficient_bound (a d : ℕ) (ha : a ≤ d)
     (f : ℤ[X][X]) (hd : bivariateTotalDegree f ≤ d)

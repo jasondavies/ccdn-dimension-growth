@@ -6,8 +6,7 @@ public import CCDN.PolynomialPredicates
 
 /-! The degree-one boundary of the bounded-center construction. A
 geometrically integral zero-dimensional projective source has degree one.
-The constructed centers then have only zero and one entries, without a
-quadratic bad-center polynomial or a supplied rational point. -/
+The constructed centers have only zero and one entries. -/
 
 @[expose] public section
 namespace CCDN

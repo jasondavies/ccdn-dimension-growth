@@ -4,7 +4,7 @@ public import CCDN.ProjectiveLinearCountTransfer
 public import CCDN.AffineProjectionCount
 
 /-! Integral-point counts under an integer linear projection.
-The finite-fiber hypothesis is discharged by normalization in the application. -/
+In the application, the finite-fiber hypothesis follows from normalization. -/
 
 @[expose] public section
 namespace CCDN

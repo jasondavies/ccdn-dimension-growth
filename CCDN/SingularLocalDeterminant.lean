@@ -35,8 +35,7 @@ lemma sum_fin_zero_pad {A : Type*} [AddCommMonoid A] {r μ : ℕ}
 
 /-- Every square evaluation determinant of integral zeros in one singular
 residue class has the repeated-weight multiplicity exponent. The curve's
-multiplicity is determined by its reduction, rather than assumed local
-spanning or factorization data. -/
+multiplicity is determined by its reduction. -/
 theorem singular_plane_pow_dvd_det_mod {p μ s : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ)
     (hf : map (Int.castRingHom (ZMod p)) f ∈ idealOfVars (Fin 2) (ZMod p) ^ μ)
@@ -103,7 +102,7 @@ theorem singular_plane_pow_dvd_det_mod {p μ s : ℕ} [Fact p.Prime]
       exact hc j (x i) (hfx i) (hx i))
   simpa only [sub_add_cancel] using dvd_add hd hdet
 
-/-- The original exact-zero form follows from finite-precision divisibility. -/
+/-- The exact-zero form follows from finite-precision divisibility. -/
 theorem singular_plane_pow_dvd_det {p μ s : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ)
     (hf : map (Int.castRingHom (ZMod p)) f ∈ idealOfVars (Fin 2) (ZMod p) ^ μ)

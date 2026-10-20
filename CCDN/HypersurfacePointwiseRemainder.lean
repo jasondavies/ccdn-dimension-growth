@@ -86,8 +86,7 @@ theorem hypersurfaceLayerBound_dimension_one_le (μ k : ℕ) :
     hypersurfaceLayerBound 1 μ k ≤ μ := by
   simpa using hypersurfaceLayerBound_le_mul_choose 0 μ k
 
-/-- The pointwise remainder for the layers of the hypersurface stalk,
-with no tangent-cone or Hilbert-function assumption. -/
+/-- The pointwise remainder for the layers of the hypersurface stalk. -/
 theorem hypersurfacePointStalk_pointwise_remainder {K : Type*} [Field K]
     {n μ k : ℕ} (f : MvPolynomial (Fin (n + 3)) K) (a : Fin (n + 3) → K)
     [Fact (MvPolynomial.eval a f = 0)]
@@ -124,7 +123,7 @@ theorem exists_hypersurfaceLayerBound_uniform_error (m : ℕ) (hm : 0 < m) :
 
 /-- A single constant, chosen before the field, equation and rational point,
 gives the exact Lemma 2.1 remainder for every hypersurface stalk of
-positive dimension. Multiplicity and all layer identifications are constructed. -/
+positive dimension. -/
 theorem exists_hypersurfacePointStalk_pointwise_remainder (m : ℕ) (hm : 0 < m) :
     ∃ C : ℝ, 0 ≤ C ∧
       ∀ (K : Type*) [Field K] (f : MvPolynomial (Fin (m + 1)) K)

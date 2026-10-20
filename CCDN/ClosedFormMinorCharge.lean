@@ -5,7 +5,7 @@ public import CCDN.BadPrimeCharge
 
 /-! The integer minor has the logarithmic height needed by the
 fourth-power prime cutoff. The charge applies to primes with proved matrix
-rank drop; identifying these with the geometric bad primes remains separate. -/
+rank drop; identifying these with the geometric bad primes is a separate step. -/
 
 @[expose] public section
 namespace CCDN
@@ -21,7 +21,7 @@ lemma log_factorial_le_square (r : ℕ) : Real.log (r.factorial : ℝ) ≤ (r : 
   rw [Real.log_pow] at hl
   exact hl.trans (by nlinarith [Real.log_le_self hr0.le])
 
-/-- The determinant height fits the existing cutoff L=27*d^4 with scaled
+/-- The determinant height fits the cutoff L=27*d^4 with scaled
 height 1+log(H)/d². -/
 theorem closedForm_minor_log_height
     (d r : ℕ) (hd : 1 ≤ d) (hr : r ≤ 2 * d ^ 2)

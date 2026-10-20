@@ -37,8 +37,8 @@ lemma square_minorGcd_dvd_det {s : ℕ} (A : Matrix (Fin s) (Fin s) ℤ) :
   exact h
 
 /-- The ceiling of the uniform real exponent is a single prime-power
-that divides every determinant in the family. No rank assumption on any
-individual matrix, or nonemptiness assumption on the family, is needed. -/
+that divides every determinant in the family. Individual matrices may have
+any rank, and the family may be empty. -/
 theorem projective_hypersurface_familyGcd_sharp
     {ι : Type*} [Fintype ι] {n s p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
@@ -73,9 +73,8 @@ theorem projective_hypersurface_familyGcd_sharp
   rw [← Matrix.det_transpose] at hdet
   exact hdet
 
-/-- Prime aggregation for the finite-family gcd. This intermediate
-form only exposes the good-reduction predicate; the final theorem below
-constructs and discharges it. -/
+/-- Prime aggregation for the finite-family gcd, with good reduction outside
+`bad` as a hypothesis. The theorem below constructs the bad-prime set. -/
 theorem hypersurface_familyGcd_log_lower_degree_four
     {ι : Type*} [Fintype ι] {n s d : ℕ}
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
@@ -203,9 +202,8 @@ theorem hypersurface_determinant_family_log_lower
       Real.zero_rpow (by positivity : (1 : ℝ) + 1 / (n + 1 : ℝ) ≠ 0), mul_zero, zero_mul]
     exact Real.log_nonneg hone
 
-/-- The same corrected family bound on rational projective points.
-Primitive integral representatives, and their vanishing equations, are
-constructed rather than supplied as additional data. -/
+/-- The same corrected family bound on rational projective points, via their
+primitive integral representatives. -/
 theorem projective_hypersurface_determinant_family_log_lower
     {ι : Type*} [Fintype ι] {n s d : ℕ}
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)

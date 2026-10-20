@@ -87,7 +87,7 @@ theorem closedForm_rank_drop_of_coprime_factors
       RatFunc.algebraMap_C, RatFunc.algebraMap_eq_C, φ] using congrArg (Polynomial.map φ) he
 
 /-- Repeated irreducible factors of every multiplicity at least two likewise
-force rank drop; no squarefreeness assumption on the whole equation is used. -/
+force rank drop; the whole equation need not be squarefree. -/
 theorem closedForm_rank_drop_of_repeated_factor
     {F : Type*} [Field F] (p d k : ℕ) [CharP F p] (hd : 0 < d) (hdp : d < p)
     (g h : F[X][X]) (hg : Irreducible g) (hgm : g.Monic) (hh : h ≠ 0)

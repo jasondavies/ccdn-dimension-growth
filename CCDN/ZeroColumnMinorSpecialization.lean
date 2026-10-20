@@ -5,7 +5,7 @@ public import CCDN.SharpMinorSpecialization
 /-! Sharp bounded specialization of maximal-minor conditions while keeping
 prescribed matrix columns equal to zero. The distinguished zero column is
 the center-at-infinity case in Section 5.3. The nonvanishing rational
-witness remains an explicit premise, not a generic-center assertion. -/
+witness is an explicit hypothesis. -/
 
 @[expose] public section
 namespace CCDN

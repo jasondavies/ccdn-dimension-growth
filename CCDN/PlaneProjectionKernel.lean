@@ -49,7 +49,7 @@ theorem plane_projection_not_injective {K τ : Type*} [Field K] [Fintype τ]
   nlinarith
 
 /-- An irreducible equation in a plane map with a transcendental coordinate
-generates its entire kernel. The proof is the filtered section-rank bound. -/
+generates its entire kernel. The proof uses the filtered section-rank bound. -/
 theorem plane_map_eq_zero_iff_dvd {K A : Type*} [Field K] [CommRing A] [Algebra K A]
     (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] A) (hψ : ψ f = 0)
@@ -80,7 +80,7 @@ theorem plane_map_eq_zero_iff_dvd {K A : Type*} [Field K] [CommRing A] [Algebra 
   · rintro ⟨u, rfl⟩
     rw [map_mul, hψ, zero_mul]
 
-/-- A genuine plane projection with a transcendental coordinate has a
+/-- A linear plane projection with a transcendental coordinate has a
 principal prime kernel with an irreducible generator. -/
 theorem exists_plane_projection_equation {K τ : Type*} [Field K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]

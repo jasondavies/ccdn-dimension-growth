@@ -87,8 +87,8 @@ lemma local_prime_generators_approximate (I : Ideal R) (r : ℕ → ℕ)
     rw [pow_succ]
     linear_combination he + (p : R) * he'
 
-/-- Constructed weighted generators approximate every ring element modulo
-`m^N + (p^e)`, with no supplied local basis or factorization hypothesis. -/
+/-- The weighted generators approximate every ring element modulo
+`m^N + (p^e)`. -/
 theorem exists_local_prime_approximations [IsNoetherianRing R] (ρ : R →+* ZMod p) :
     ∃ G : (k : ℕ) → Fin (localPrimeLayerDimension R p k) → R,
       (∀ k j, G k j ∈ maximalIdeal R ^ k) ∧

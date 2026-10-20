@@ -8,8 +8,7 @@ public import CCDN.PolynomialPredicates
 /-! CCDN Theorem 1 in the homogeneous-coordinate-ideal formulation:
 uniform projective dimension growth for every rational prime projective
 variety of degree at least five. The Hilbert polynomial determines
-the degree and dimension. All projections, fibers and counting inputs are
-proved internally, including zero-dimensional and empty loci. -/
+the degree and dimension. Zero-dimensional and empty loci are included. -/
 
 @[expose] public section
 namespace CCDN

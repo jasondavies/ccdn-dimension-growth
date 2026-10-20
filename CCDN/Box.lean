@@ -87,7 +87,7 @@ theorem count_union_le {n : ℕ} (X Y : Set (RatPoint n)) (B : ℝ) :
   exact Finset.card_union_le _ _
 
 /-- Transport integral points through an injective, height-controlled map. The hypotheses
-are concrete properties of that map, rather than a curve-counting assumption. -/
+concern only that map. -/
 theorem count_le_of_injective {n m : ℕ} {X : Set (RatPoint n)} {Y : Set (RatPoint m)}
     {B C : ℝ} (f : IntPoint n → IntPoint m)
     (hmap : ∀ x ∈ integralPoints X B, f x ∈ integralPoints Y C)

@@ -5,7 +5,7 @@ public import Mathlib.Algebra.Algebra.Pi
 
 /-! A proper plane section has total multiplicity at least N at no more
 than d*m/N distinct smooth points. The proof uses local expansions
-and polynomial interpolation, with no assumed intersection multiplicity. -/
+and polynomial interpolation. -/
 
 @[expose] public section
 namespace CCDN

@@ -6,7 +6,7 @@ public import CCDN.ReconstructionFunctionField
 
 /-! The constructed bounded plane projection of a geometrically integral
 curve is geometrically integral, birational and degree-preserving. Its
-point-count error is at most d(d-1), with no geometric or fiber premises. -/
+point-count error is at most d(d-1). -/
 
 @[expose] public section
 namespace CCDN

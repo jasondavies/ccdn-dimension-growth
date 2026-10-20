@@ -131,7 +131,7 @@ theorem weights_sum_sharp_of_cumulative {s : ℕ} (w : Fin s → ℕ)
 
 /-- CCDN Lemma 2.2 for every dimension `n+2`, with the explicit constant
 `n + 3 + c*(n+1)!`. The profile and the selected weights are arbitrary.
-No monotonicity of the selected list is needed. -/
+The selected list need not be monotone. -/
 theorem weighted_sequence_sum_lower_bound (n c μ s : ℕ) (g : ℕ → ℕ)
     (hμ : 0 < μ) (hg0 : g 0 = 1)
     (hg : ∀ k, 0 < k →

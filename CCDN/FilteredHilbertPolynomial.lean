@@ -90,7 +90,7 @@ theorem filteredHilbertPolynomial_eq_of_eventual {K σ : Type*} [Field K]
   rw [hN n ((le_max_left _ _).trans hn), hM n ((le_max_right _ _).trans hn)]
 
 /-- Proper polynomial quotients have a positive integer factorial-normalized
-leading coefficient. Neither a Hilbert polynomial nor its degree is assumed. -/
+leading coefficient. -/
 theorem filteredHilbertPolynomial_positive_multiplicity {K σ : Type*} [Field K]
     [Fintype σ] [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) :
     ∃ d : ℕ, 0 < d ∧

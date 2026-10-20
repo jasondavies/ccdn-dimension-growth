@@ -5,8 +5,8 @@ public import CCDN.LocalizationAdicLayer
 public import CCDN.QuotientAdicLayer
 
 /-! The local ring of a hypersurface at the origin and its exact Hilbert
-function. Both the coordinate-ring quotient and the stalk localization
-are constructions; their adic-layer identifications are proved. -/
+function. The coordinate-ring quotient and the stalk localization are
+explicit, and their adic layers are identified. -/
 
 @[expose] public section
 namespace CCDN
@@ -84,8 +84,7 @@ theorem hypersurfaceStalkLayer_finrank (k : ℕ) :
 
 end Stalk
 
-/-- The exact binomial formula of CCDN Lemma 2.1 for the local ring,
-with no tangent-cone or localization-isomorphism premise. -/
+/-- The exact binomial formula of CCDN Lemma 2.1 for the local ring. -/
 theorem hypersurfaceOriginStalk_hilbert_eq {n μ k : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) [Fact (f ∈ idealOfVars (Fin (n + 1)) K)]
     (hf : f ∈ idealOfVars (Fin (n + 1)) K ^ μ)

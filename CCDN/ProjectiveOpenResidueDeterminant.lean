@@ -129,7 +129,7 @@ theorem projective_hypersurface_residue_minorGcd_nonempty {p n c s N d M : ℕ}
     simp [he, hypersurfaceMultiplicityExponent]
 
 /-- A reduced factor which never vanishes at the supplied points may be
-removed from the residue-space count. The local equation is still the
+removed from the residue-space count. The local equation is the
 original integer equation, so its exact integer zeros are retained. -/
 theorem projective_hypersurface_reduced_factor_minorGcd
     {n s N p d e t M : ℕ} [Fact p.Prime] (hs : 0 < s)
@@ -198,7 +198,7 @@ theorem projective_hypersurface_reduced_factor_minorGcd
       simpa only [k, a, label, E.symm_apply_apply] using hres
     · exact hz
 
-/-- The sharp single-prime determinant bound remains valid if the reduction
+/-- The sharp single-prime determinant bound holds also when the reduction
 has extra homogeneous factors which are nonzero at every supplied point.
 The geometrically irreducible factor may have any positive degree at most d. -/
 theorem projective_hypersurface_minorGcd_sharp_open

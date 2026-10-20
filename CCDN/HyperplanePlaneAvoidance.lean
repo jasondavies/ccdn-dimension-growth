@@ -38,7 +38,7 @@ lemma planeAnchorMinor_ne_zero (n : ℕ) : planeAnchorMinor n ≠ 0 := by
   norm_num at hv
 
 /-- The extra determinant condition costs only three in the integer grid
-size; no assumed good hyperplane enters this construction. -/
+size. -/
 theorem exists_integer_good_plane_with_anchor {n : ℕ}
     (f : MvPolynomial (Option (Fin (3 + n))) ℤ)
     (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))

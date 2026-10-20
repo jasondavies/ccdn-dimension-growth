@@ -15,7 +15,7 @@ noncomputable section
 open scoped TensorProduct
 
 /-- An irreducible plane equation with a smooth rational point remains
-irreducible over every extension field. No perfectness assumption is needed. -/
+irreducible over every extension field. The base field need not be perfect. -/
 theorem irreducible_map_of_smooth_plane_point
     {K L : Type*} [Field K] [Field L] [Algebra K L]
     (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)

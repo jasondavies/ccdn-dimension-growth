@@ -5,7 +5,7 @@ public import Mathlib.Data.Nat.ModEq
 
 /-! A coprime Newton edge forces irreducibility over every field.
 The proof uses the absence of two distinct monomials of equal weight
-below the weight of the edge, rather than a supplied Newton-polytope theorem. -/
+below the weight of the edge. -/
 
 @[expose] public section
 namespace CCDN

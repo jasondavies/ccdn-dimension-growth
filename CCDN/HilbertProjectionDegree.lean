@@ -34,8 +34,7 @@ theorem hypersurface_projection_equation_degree_le
   have hfac : (0 : ℚ) < n.factorial := by positivity
   exact_mod_cast (div_le_div_iff_of_pos_right hfac).mp hh
 
-/-- The equation and its degree bound are constructed from the projection,
-not supplied as extra hypotheses. -/
+/-- The equation and its degree bound are constructed from the projection. -/
 theorem exists_hypersurface_projection_equation_degree_le
     {K τ : Type*} [Field K] [Fintype τ] [LinearOrder τ] {n : ℕ}
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]

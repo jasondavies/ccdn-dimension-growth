@@ -15,8 +15,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- An unconditional bounded degree-preserving plane projection. Neither
-geometric integrality nor a supplied function-field embedding is required. -/
+/-- A bounded degree-preserving plane projection of a prime affine curve in
+characteristic zero. The curve need not be geometrically integral. -/
 theorem exists_bounded_degree_preserving_projection {K : Type*} [Field K] [CharZero K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (d : ℕ) (hd : 0 < d) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,

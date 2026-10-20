@@ -140,7 +140,7 @@ theorem exists_low_degree_point_separator_of_dimension_zero
 
 /-- Every point outside an affine prime variety over an algebraically closed
 characteristic-zero field is detected by an equation of degree at most the
-Hilbert multiplicity. No projection or separator is supplied. -/
+Hilbert multiplicity. -/
 theorem exists_low_degree_point_separator
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] (d : ℕ)

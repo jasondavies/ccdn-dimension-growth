@@ -3,7 +3,7 @@ module
 public import CCDN.PlaneCurveAssembly
 
 /-! Reduce sharp finite-field counting to geometrically irreducible equations.
-The nongeometric case is already bounded by the unconditional d² theorem. -/
+The nongeometric case is bounded by the d² theorem. -/
 
 @[expose] public section
 namespace CCDN
@@ -11,7 +11,8 @@ noncomputable section
 open MvPolynomial
 
 /-- The sharp point estimate needed on geometrically irreducible finite-field
-plane equations. `SharpPlaneCount` proves the stronger estimate for every irreducible equation. -/
+plane equations. `SharpPlaneCount` proves the stronger estimate for every
+irreducible equation. -/
 def SharpGeometricPlaneResidueBound (C : ℝ) : Prop :=
   ∀ (p : ℕ) [Fact p.Prime], ∀ f : MvPolynomial (Fin 2) (ZMod p),
     Irreducible (MvPolynomial.map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f) →
@@ -68,7 +69,7 @@ theorem sharpPlaneResidueBound_of_geometric {C : ℝ} (hC : 0 ≤ C)
     dsimp [q] at ht
     nlinarith
 
-/-- The full rational plane target now reduces to sharp counting only for
+/-- The full rational plane target reduces to sharp counting for
 geometrically irreducible finite-field curves. -/
 theorem planeCurveBound_of_geometric_residue_bound {C : ℝ} (hC : 0 ≤ C)
     (hgeom : SharpGeometricPlaneResidueBound C) : PlaneCurveBound :=

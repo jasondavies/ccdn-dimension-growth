@@ -13,7 +13,7 @@ open MvPolynomial
 
 /-- Every fixed degree at least five has a coefficient-uniform linear
 integer-point bound when the highest homogeneous part is absolutely
-irreducible. No primitivity, auxiliary, or curve-cover premise remains. -/
+irreducible. The equation need not be primitive. -/
 theorem top_form_surface_fixed_degree_linear_bound (d : ℕ) (hd : 5 ≤ d) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,

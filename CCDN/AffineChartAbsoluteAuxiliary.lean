@@ -14,8 +14,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The affine-chart version of the absolutely irreducible auxiliary theorem.
-Coefficient positioning and degree selection are constructed, and the
-constant depends only on dimension. The excluded-prime set must satisfy the
+The constant depends only on the dimension. The excluded-prime set must satisfy the
 displayed good-reduction and unit-chart conditions. -/
 theorem affine_chart_absolute_auxiliary_degree
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d t : ℕ}

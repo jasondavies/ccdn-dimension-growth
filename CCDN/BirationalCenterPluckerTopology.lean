@@ -5,9 +5,8 @@ public import CCDN.BirationalCenterSubspace
 public import CCDN.PolynomialPredicates
 
 /-! Geometrically disjoint birational centers form a dense open set
-for the Zariski topology induced by their projective maximal minors. This
-uses the constructed homogeneous detector and the rational witness;
-neither a detector nor a witness is a premise of the final theorem. -/
+for the Zariski topology induced by their projective maximal minors. The
+proof uses the homogeneous detector and the rational witness. -/
 
 @[expose] public section
 namespace CCDN

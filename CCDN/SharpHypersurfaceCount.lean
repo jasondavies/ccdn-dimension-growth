@@ -11,7 +11,7 @@ noncomputable section
 open MvPolynomial
 
 /-- In n+3 ambient coordinates, the leading term is p^(n+2), with an explicit
-absolute square-degree square-root error. All section counts are discharged. -/
+absolute square-degree square-root error. -/
 theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Option (Fin (n + 2))) (ZMod p))
     (hf : Irreducible (MvPolynomial.map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f))

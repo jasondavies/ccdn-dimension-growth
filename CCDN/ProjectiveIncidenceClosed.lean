@@ -7,8 +7,7 @@ public import CCDN.PolynomialPredicates
 
 /-! Closedness of the projective hyperplane incidence image, proved by
 finite homogeneous coefficient matrices. Empty fibers produce a determinant
-which is nonzero there and vanishes at every tuple with a projective intersection.
-No closed-image or geometric projection hypothesis is supplied. -/
+which is nonzero there and vanishes at every tuple with a projective intersection. -/
 
 @[expose] public section
 namespace CCDN

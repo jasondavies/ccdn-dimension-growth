@@ -27,7 +27,7 @@ def formalBranchBaseChange {K L A : Type*} [Field K] [Field L] [Algebra K L]
     formalBranchBaseChange (L := L) ψ (a ⊗ₜ[K] x) =
       a • PowerSeries.map (algebraMap K L) (ψ x) := rfl
 
-/-- No new algebra relation appears after extending a faithful formal branch. -/
+/-- Scalar extension of a faithful formal branch is faithful. -/
 theorem formalBranchBaseChange_injective
     {K L A : Type*} [Field K] [Field L] [Algebra K L]
     [CommRing A] [Algebra K A] (ψ : A →ₐ[K] PowerSeries K)

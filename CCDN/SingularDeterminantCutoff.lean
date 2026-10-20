@@ -130,7 +130,7 @@ def degreeFourDeterminantError (C : ℝ) : ℝ :=
 
 /-- Choosing the prime upper endpoint to equal the row count yields the
 plane-case shape of CCDN Proposition 3.2.6, with the geometric point-count and
-bad-prime hypotheses still explicit. -/
+bad-prime hypotheses explicit. -/
 theorem singular_determinant_log_lower_at_rank {s N : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin 2) ℤ) (hd : 0 < f.totalDegree)
     (g : Fin N → MvPolynomial (Fin 2) ℤ) (z : Fin s → Fin 2 → ℤ)

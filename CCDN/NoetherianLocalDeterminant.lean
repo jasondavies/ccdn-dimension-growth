@@ -6,7 +6,7 @@ public import CCDN.ExactFiltrationWeights
 /-! Determinants of homomorphisms from arbitrary Noetherian local
 rings. The residue map of the target identifies its prime ideal; all local
 generators and their finite-precision factorizations are constructed from
-the source ring and its genuine mod-prime ideal layers. -/
+the source ring and its mod-prime ideal layers. -/
 
 @[expose] public section
 namespace CCDN
@@ -60,8 +60,8 @@ lemma local_map_maximalIdeal_pow_dvd (τ : S →+* ZMod p)
   exact Ideal.mem_span_singleton.mp hmem
 
 /-- The weighted determinant principle for Noetherian local rings.
-The only numerical input specifies the exponent in terms of the genuine
-layer dimensions; the generating family is constructed internally. -/
+The only numerical input specifies the exponent in terms of the
+layer dimensions. -/
 theorem noetherian_local_det_of_weight_threshold [IsNoetherianRing R] {s e : ℕ}
     (τ : S →+* ZMod p) (hτ : RingHom.ker τ = Ideal.span {(p : S)})
     (ψ : Fin s → R →+* S) (x : Fin s → R)
@@ -112,7 +112,7 @@ theorem noetherian_local_det_of_weight_threshold [IsNoetherianRing R] {s e : ℕ
     subst e
     simp
 
-/-- General local-ring counterpart of the existing hypersurface filtration
+/-- General local-ring counterpart of the hypersurface filtration
 divisor. The layer profile is that of the quotient `R/(p)`. -/
 theorem noetherian_local_filtration_det [IsNoetherianRing R] {s : ℕ}
     (τ : S →+* ZMod p) (hτ : RingHom.ker τ = Ideal.span {(p : S)})
@@ -123,7 +123,7 @@ theorem noetherian_local_filtration_det [IsNoetherianRing R] {s : ℕ}
     (fun t => filtrationExponent_le_weights (localPrimeLayerDimension R p) t)
 
 /-- The exact sum of the first `s` local-layer weights is a determinant
-divisor, without a dimension restriction or asymptotic replacement. -/
+divisor, in every dimension and without asymptotic approximation. -/
 theorem noetherian_local_initial_weight_det [IsNoetherianRing R] {s : ℕ}
     (τ : S →+* ZMod p) (hτ : RingHom.ker τ = Ideal.span {(p : S)})
     (ψ : Fin s → R →+* S) (x : Fin s → R) (w : Fin s → ℕ)

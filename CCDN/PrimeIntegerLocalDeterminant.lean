@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.Localization.Submodule
 
 /-! The arbitrary Noetherian local determinant lemma with its target
 `ℤ_(p)`. Its residue map and prime-generated maximal ideal are constructed
-from localization, so no target-ring reduction assumptions remain. -/
+from localization. -/
 
 @[expose] public section
 namespace CCDN
@@ -52,8 +52,8 @@ lemma primeIntegerLocalizationResidue_kernel :
 variable {R : Type*} [CommRing R] [IsLocalRing R] [IsNoetherianRing R]
 
 /-- Lemma 2.4, with the exact sum of the first `s` local-layer weights.
-The source need not carry an explicitly chosen `ℤ_(p)`-algebra structure:
-the given evaluation homomorphisms already supply all that the proof uses. -/
+The source need not carry a `ℤ_(p)`-algebra structure: the proof uses only
+the given evaluation homomorphisms. -/
 theorem primeInteger_local_initial_weight_det {s : ℕ}
     (ψ : Fin s → R →+* PrimeIntegerLocalization p) (x : Fin s → R)
     (w : Fin s → ℕ)
@@ -76,8 +76,7 @@ theorem primeInteger_local_enumerated_weight_det {s : ℕ}
     (monotone_enumeration_isInitialWeightSegment a
       (localPrimeLayerDimension R p) ha hfinite hcount s)
 
-/-- Finite profiles are allowed whenever they contain at least `s` weights;
-the required initial segment is constructed rather than supplied. -/
+/-- Finite profiles are allowed whenever they contain at least `s` weights. -/
 theorem primeInteger_local_exists_initial_weight_det {s : ℕ}
     (ψ : Fin s → R →+* PrimeIntegerLocalization p) (x : Fin s → R)
     (hcapacity : ∃ N, s ≤ weightProfileCumulative (localPrimeLayerDimension R p) N) :
@@ -119,7 +118,7 @@ theorem primeInteger_local_det_eq_zero_of_insufficient_layers {s : ℕ}
   rw [Ideal.iInf_pow_eq_bot_of_isLocalRing I (maximalIdeal.isMaximal _).ne_top] at hmem
   exact hmem
 
-/-- Unconditional finite-profile formulation: either the exact first `s`
+/-- Finite-profile formulation: either the exact first `s`
 weights exist and give the divisor, or the determinant vanishes. -/
 theorem primeInteger_local_det_profile_dichotomy {s : ℕ}
     (ψ : Fin s → R →+* PrimeIntegerLocalization p) (x : Fin s → R) :

@@ -83,8 +83,7 @@ theorem sum_hypersurfaceLayerBound_le (n μ k : ℕ) :
       rw [Nat.sum_range_add_choose]
       simp only [Nat.add_comm 1 n]
 
-/-- The cumulative local Hilbert function has this bound; no assumed
-presentation of the tangent cone is needed. -/
+/-- The cumulative local Hilbert function has this bound. -/
 theorem originLayer_cumulative_le {K : Type*} [Field K] {n μ : ℕ}
     (f : MvPolynomial (Fin (n + 2)) K)
     (hf : f ∈ idealOfVars (Fin (n + 2)) K ^ μ)

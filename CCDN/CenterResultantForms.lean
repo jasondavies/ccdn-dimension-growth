@@ -67,7 +67,7 @@ theorem centerRowResultantFamily_totalDegree_le
   exact (centerRowResultantFamily_homogeneous e i F d hd hF g hg).totalDegree_le
 
 /-- Specialization is exact even when the restricted source equation is
-zero; no disjointness or degree-preservation premise is hidden here. -/
+zero. -/
 theorem centerRowResultantFamily_nonvanishing_iff
     {K : Type*} [Field K] {r n s q : ℕ}
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) (i : Fin q)

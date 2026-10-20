@@ -7,7 +7,7 @@ public import CCDN.GenericHyperplaneNormalizationDescent
 
 /-! Generic affine linear normalization with the homogenizing coordinate
 fixed. The finite specialization and its nonzero determinant are both
-constructed from the source ideal; no generic finiteness premise is used. -/
+constructed from the source ideal. -/
 
 @[expose] public section
 namespace CCDN

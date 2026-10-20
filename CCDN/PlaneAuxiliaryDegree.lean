@@ -3,7 +3,7 @@ module
 public import CCDN.PlaneChartHeight
 
 /-! Quantitative degree control from the plane determinant comparison.
-The finite-field estimate remains an explicit input through PlaneChartHeight. -/
+The finite-field estimate is an explicit hypothesis, through PlaneChartHeight. -/
 
 @[expose] public section
 namespace CCDN
@@ -141,8 +141,8 @@ lemma plane_degree_bound_of_log_bound {d M : ℕ} {B L A K : ℝ}
   ring
 
 /-- A degree exceeding the proved small-height threshold gives an
-integer homogeneous auxiliary polynomial. The sharp finite-field count is
-still required, explicitly, as in the determinant theorem. -/
+integer homogeneous auxiliary polynomial. As in the determinant theorem, the
+sharp finite-field count is an explicit hypothesis. -/
 theorem plane_chart_exists_auxiliary_small_height
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)

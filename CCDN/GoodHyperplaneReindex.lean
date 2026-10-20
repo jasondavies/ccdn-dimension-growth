@@ -2,8 +2,8 @@ module
 
 public import CCDN.BoundedGoodHyperplane
 
-/-! Transporting the constructed good hyperplane to coordinates suited to
-the universal Noether family. No generic-section premise is introduced. -/
+/-! Transport of the constructed good hyperplane to coordinates suited to
+the universal Noether family. -/
 
 @[expose] public section
 namespace CCDN
@@ -32,7 +32,7 @@ lemma graphHyperplaneRestriction_rename {K σ τ : Type*}
       | some i => simp [graphHyperplaneRestriction]
   exact RingHom.congr_fun he f
 
-/-- The already constructed bounded integer normal yields a
+/-- The constructed bounded integer normal yields a
 geometrically integral rational graph section in the double-Option coordinates. -/
 theorem exists_geometrically_good_graph_reindexed {n : ℕ}
     (f : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ)

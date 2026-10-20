@@ -31,8 +31,7 @@ lemma eulerClosedForm_minor_smul {R : Type*} [CommRing R]
   rw [Matrix.det_smul, Fintype.card_fin]
 
 /-- The universal affine-plane family has a nonzero determinant of
-the precise Noether order. Smooth coordinates and geometric irreducibility
-of their generic section are constructed, not supplied. -/
+the precise Noether order. -/
 theorem exists_universalPlane_euler_minor_charZero
     {K σ : Type*} [Field K] [CharZero K] [IsAlgClosed K] [Fintype σ]
     (k : ℕ) (f : MvPolynomial (Option σ) K) (hf : Irreducible f)

@@ -36,8 +36,8 @@ theorem projectiveClosureIdeal_hilbertPolynomial_difference
         Module.finrank K (filteredCoordinateSpace I (k + 1)) := by exact_mod_cast hh
   linarith
 
-/-- Both dimension and multiplicity are consequences of the closure
-ideal and its Hilbert functions, without a supplied compactification degree. -/
+/-- Both dimension and multiplicity are computed from the closure ideal and
+its Hilbert functions. -/
 theorem projectiveClosureIdeal_hilbertPolynomial_parameters
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

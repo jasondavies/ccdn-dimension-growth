@@ -58,7 +58,7 @@ lemma localizationAdicQuotientEquiv_layer (k : ℕ) :
     refine Submodule.mem_map.mpr ⟨Ideal.Quotient.mk _ x, ?_, hxbar⟩
     exact Submodule.mem_map.mpr ⟨x, hxI, rfl⟩
 
-/-- Localization preserves the literal `I^k/I^(k+1)` layer, represented
+/-- Localization preserves the `I^k/I^(k+1)` layer, represented
 by its image in the next quotient. -/
 def localizationAdicLayerEquiv (k : ℕ) :
     idealPowerLayer K I k ≃ₗ[K] idealPowerLayer K (maximalIdeal S) k :=

@@ -53,7 +53,7 @@ lemma eval_map_galois_coordinates {K L σ : Type*}
   | mul_X f i hf => simp only [map_mul, map_X, eval_X, hf, Function.comp_apply]
 
 /-- The rational point is constructed by uniqueness over a Galois
-algebraic closure; no rational-point premise is supplied. -/
+algebraic closure. -/
 theorem zero_dimensional_geometrically_integral_point
     {K L : Type*} [Field K] [Field L] [Algebra K L]
     [IsAlgClosed L] [IsGalois K L] {n : ℕ}

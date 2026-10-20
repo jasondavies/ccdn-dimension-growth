@@ -7,8 +7,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 /-! The mod-`p` local layers used in the general local determinant
 lemma. A ring homomorphism from a local ring to `ZMod p` is automatically
 surjective and has the maximal ideal as kernel. Consequently the residue
-field and every Noetherian adic truncation are finite, without a supplied
-residue-field identification or generating family. -/
+field and every Noetherian adic truncation are finite. -/
 
 @[expose] public section
 namespace CCDN
@@ -55,7 +54,7 @@ lemma prime_span_le_maximalIdeal (ρ : R →+* ZMod p) :
   change ρ (p : R) = 0
   simp
 
-/-- The residue quotient of `R/(p)` is the genuine finite field `F_p`. -/
+/-- The residue quotient of `R/(p)` is the finite field `F_p`. -/
 def localPrimeReduction_residue_equiv (ρ : R →+* ZMod p) :
     (LocalPrimeReduction R p ⧸ localPrimeMaximalIdeal R p) ≃+* ZMod p :=
   (DoubleQuot.quotQuotEquivQuotOfLE (prime_span_le_maximalIdeal ρ)).trans
@@ -67,7 +66,7 @@ lemma localPrimeReduction_finite_residue (ρ : R →+* ZMod p) :
     (localPrimeReduction_residue_equiv ρ).injective
 
 omit [Fact p.Prime] in
-/-- The image of the maximal ideal really is the maximal ideal of the
+/-- The image of the maximal ideal is the maximal ideal of the
 nonzero quotient. This records the local-ring meaning of the layer profile. -/
 lemma localPrimeMaximalIdeal_eq
     [IsLocalRing (LocalPrimeReduction R p)] :

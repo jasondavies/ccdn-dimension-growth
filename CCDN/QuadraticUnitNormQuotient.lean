@@ -44,8 +44,7 @@ theorem quadraticUnitNormQuotient_finite (hd : Module.finrank F K = 2) :
     (QuotientGroup.mk' (relativeUnitNorm F K).range)
     (QuotientGroup.mk'_surjective _) (quadraticUnitNormQuotient_square F K hd)).1
 
-/-- Uniform bound on the genuine unit-norm obstruction; no assumption
-that every unit is a norm is made. -/
+/-- Uniform bound on the unit-norm obstruction. -/
 theorem quadraticUnitNormQuotient_card_le (hd : Module.finrank F K = 2) :
     Nat.card (quadraticUnitNormQuotient F K) ≤
       2 ^ (NumberField.Units.rank F + 1) :=

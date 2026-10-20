@@ -152,7 +152,7 @@ theorem unscaled_hypersurface_auxiliary_minimum_bound {n k : ℕ}
     (hypersurfaceAbsoluteAuxiliaryConstant_pos n).le
 
 /-- An affine auxiliary with the minimum degree bound in the
-polynomial box range. There is no assumption on the constant coefficient. -/
+polynomial box range. The constant coefficient is arbitrary. -/
 theorem unscaled_affine_auxiliary_minimum {n k : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f) (hd : 0 < f.totalDegree)

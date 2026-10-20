@@ -6,8 +6,8 @@ public import CCDN.LinearNormalizationInfinite
 public import CCDN.PolynomialPredicates
 
 /-! A finite homogeneous linear projection has function-field degree at most
-the quotient of source and image multiplicities. A finite independent linear
-normalization of its image is constructed internally. -/
+the quotient of source and image multiplicities. The proof constructs a
+finite independent linear normalization of its image. -/
 
 @[expose] public section
 namespace CCDN
@@ -15,8 +15,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The image multiplicity times the function-field degree is bounded
-by the source multiplicity. No common normalization or field-rank premise is
-supplied; the parameter field and all fraction-ring structures are constructed. -/
+by the source multiplicity. -/
 theorem homogeneous_projection_functionField_rank_bound
     {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n s m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

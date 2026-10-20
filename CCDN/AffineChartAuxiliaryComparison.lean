@@ -4,8 +4,7 @@ public import CCDN.AffineChartGlobalDeterminant
 public import CCDN.HypersurfaceBadPrimeComparison
 
 /-! The coefficient obstruction with a chosen affine chart. The displayed
-prime condition is used only to invoke the proved chart-local divisor; no
-finite-field counting estimate is assumed. -/
+prime condition is used to invoke the chart-local divisor. -/
 
 @[expose] public section
 namespace CCDN
@@ -13,7 +12,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The normalized comparison retains the charge of the supplied finite prime
-set. Its hypotheses are genuine good affine reductions and chart units. -/
+set. Its hypotheses are good affine reductions and chart units. -/
 theorem affine_chart_no_auxiliary_comparison
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)

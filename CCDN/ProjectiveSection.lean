@@ -24,7 +24,7 @@ def projectiveHilbertFunction {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K
     (M : ℕ) : ℕ := Module.finrank K (homogeneousCoordinateSpace I M)
 
 /-- For a homogeneous prime ideal of a projective curve, this is its usual degree.
-The definition concerns only the coordinate ring and contains no counting bound. -/
+The definition concerns only the coordinate ring. -/
 def HasProjectiveCurveDegree {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (d : ℕ) : Prop :=
   ∃ N : ℕ, ∃ c : ℤ, ∀ M : ℕ, N ≤ M →
@@ -123,7 +123,7 @@ theorem projective_section_hilbert_drop {n m M : ℕ} {ι : Type*}
   exact h
 
 /-- A proper section of degree `m` meets a degree-`d` projective prime curve
-in at most `dm` distinct points over the base field. No intersection estimate is assumed. -/
+in at most `dm` distinct points over the base field. -/
 theorem projective_section_card_le_degree {n d m : ℕ} {ι : Type*}
     [Fintype ι] [DecidableEq ι]
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]

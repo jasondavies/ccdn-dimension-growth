@@ -88,8 +88,8 @@ theorem proper_hypersurface_intersection_count_le_sharp
     g (fun h => hfg (Ideal.mem_span_singleton.mp h)) hB
   simpa only [hzero] using hh
 
-/-- Exact quadratic-degree nonabsolute hypersurface bound, with no
-auxiliary equation supplied and no extra dimension-dependent factor. -/
+/-- Exact quadratic-degree nonabsolute hypersurface bound, with no extra
+dimension-dependent factor. -/
 theorem nonabsolute_hypersurface_count_le_sharp
     {K : Type*} [Field K] [Algebra ℚ K] {n : ℕ}
     (f : CoordinatePolynomial (n + 2)) (hir : Irreducible f)

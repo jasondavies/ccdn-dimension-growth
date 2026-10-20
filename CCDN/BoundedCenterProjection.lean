@@ -3,8 +3,8 @@ module
 public import CCDN.BoundedLinearProjection
 public import Mathlib.LinearAlgebra.Projection
 
-/-! A genuine rational projection from bounded independent center rows.
-The integral scalar-idempotent matrix already constructed by cofactors is
+/-! A rational projection from bounded independent center rows.
+The integral scalar-idempotent matrix constructed by cofactors is
 normalized to an idempotent linear map. Its image is a complementary space,
 with the exact expected dimension and canonical projection property. -/
 

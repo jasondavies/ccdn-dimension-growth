@@ -3,8 +3,8 @@ module
 public import CCDN.PlaneAuxiliarySelection
 
 /-! The determinant comparison for polynomial homogeneous-coordinate maps of
-integer plane-curve points. The residue geometry is supplied by the
-original plane equation, so coordinates such as (H,x,y) need no rational rows. -/
+integer plane-curve points. The residue geometry comes from the plane
+equation, so coordinates such as (H,x,y) need no rational rows. -/
 
 @[expose] public section
 namespace CCDN
@@ -29,7 +29,7 @@ lemma polynomial_coordinate_evaluation_matrix {M s : ℕ}
   simpa only [eval_monomial, one_mul] using h
 
 /-- The complete comparison on the image of any polynomial coordinate map.
-Bad-prime estimates are proved; the sharp finite-field count stays explicit. -/
+The sharp finite-field count is an explicit hypothesis. -/
 theorem polynomial_map_no_auxiliary_height_comparison
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)

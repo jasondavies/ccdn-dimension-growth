@@ -5,13 +5,13 @@ public import CCDN.ProjectionScaleAbsorption
 
 /-! The full coefficient-uniform affine curve counting theorem, with constants
 depending only on ambient dimension and with the exact degree dependence in
-CCDN Theorem 3. All projection and plane-counting inputs are proved. -/
+CCDN Theorem 3. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 
-/-- The full affine counting target is unconditional. -/
+/-- The affine curve counting bound `AffineCurveBound` of CCDN Theorem 3. -/
 theorem affineCurveBound : AffineCurveBound := by
   obtain ⟨C, hC, hplane⟩ := planeCurveBound
   intro n _hn

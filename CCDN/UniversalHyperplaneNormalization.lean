@@ -115,8 +115,8 @@ theorem universal_hyperplane_normalization_finrank
     (universal_hyperplane_normalization_injective I hm)
     (universal_hyperplane_projection_integral I (by rw [hm]; omega)) d hJdim hJdegree
 
-/-- The concrete fraction-field instance has no supplied field model or
-independent generic coefficients. -/
+/-- Exact degree for the concrete fraction field `FractionRing A`, with the
+universal hyperplane forms as the independent tuple. -/
 theorem universal_hyperplane_normalization_fractionRank
     {K : Type*} [Field K] [CharZero K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

@@ -3,8 +3,7 @@ module
 public import CCDN.ProjectiveMultiplicity
 
 /-! Sharp prime-power and global prime-sum bounds for projective plane
-evaluation matrices. All local geometry and finite-field estimates are
-proved; the remaining excluded-prime set is explicit. -/
+evaluation matrices. The excluded-prime set is explicit. -/
 
 @[expose] public section
 namespace CCDN
@@ -34,7 +33,7 @@ theorem projectivePlaneTotalMultiplicity_sharp {p d : ℕ} [Fact p.Prime]
   push_cast at hmassR hcorr
   nlinarith
 
-/-- A uniform local exponent with no caller-supplied point-count bound. -/
+/-- A uniform local exponent at primes `p > 27*d^4` of irreducible reduction. -/
 theorem projective_reduction_minorGcd_sharp {s N p d M : ℕ} [Fact p.Prime] (hs : 0 < s)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f))

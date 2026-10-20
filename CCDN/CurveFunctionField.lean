@@ -56,7 +56,7 @@ theorem fraction_parameter_rank_le {K R F σ ι : Type*} [Field K] [Field R] [Fi
     exact (ha i).trans (Algebra.smul_def _ _)
   exact polynomial_parameter_rank_le I d hdegree φ l hl u hu he h hlin
 
-/-- The genuine function-field extension is finite and has degree at most d. -/
+/-- The function-field extension is finite and has degree at most d. -/
 theorem curve_functionField_finite_rank_le {K R F σ : Type*} [Field K] [Field R] [Field F]
     [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]

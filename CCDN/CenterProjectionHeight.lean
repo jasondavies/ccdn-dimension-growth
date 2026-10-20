@@ -2,7 +2,7 @@ module
 
 public import CCDN.BoundedCenterProjection
 
-/-! The intrinsic projective height of the genuine projection from a bounded
+/-! The intrinsic projective height of the projection from a bounded
 integer center. The common-denominator cofactor construction gives a stronger
 bound than the exponent in CCDN (5-5), without the incorrect row-separation
 constant printed in Lemma 5.4. -/
@@ -97,7 +97,7 @@ lemma center_projection_source_exponent {m n r d : ℕ}
 projection and complementary projective (m+1)-space of Section 5.1. The
 exponent is exactly the exponent in (5-5); the integral matrix has the
 stronger cofactor bound of degree 2r, where r is the vector dimension of
-the center. Existence of a geometrically good center is separate. -/
+the center. Existence of a geometrically good center is proved separately. -/
 theorem exists_center_projection_source_height {s m n d : ℕ}
     (hd : 1 ≤ d) (hdim : (s + 1) + (m + 2) = n + 1)
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) ℤ)

@@ -4,8 +4,8 @@ public import CCDN.AffineNonzeroConstant
 public import CCDN.AffineTranslationCount
 
 /-! All affine scaling, coefficient-height and zero-constant-term reductions
-for primitive absolutely irreducible plane equations. The sharp finite-field
-estimate is the sole external counting hypothesis in the resulting bound. -/
+for primitive absolutely irreducible plane equations. The resulting bound
+assumes the sharp finite-field estimate. -/
 
 @[expose] public section
 namespace CCDN
@@ -40,9 +40,9 @@ lemma curveBound_translation_radius {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 ≤
     (show 0 ≤ (d : ℝ) ^ 3 * B ^ (1 / (d : ℝ)) by positivity)
   convert ht using 1 <;> ring
 
-/-- For primitive absolutely irreducible integer plane equations, all analytic
-and coordinate reductions are proved. The sharp finite-field point estimate
-remains explicit; no prime choice or coefficient-height assumptions remain. -/
+/-- Coefficient-uniform point count for a primitive absolutely irreducible
+integer plane equation, assuming the sharp finite-field point estimate at
+primes above 27*d^4. -/
 theorem plane_finite_count_of_sharp_residue_bound
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {t : ℕ}
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
@@ -99,7 +99,7 @@ theorem plane_finite_count_of_sharp_residue_bound
   ring
 
 /-- The same coefficient-uniform bound on the real-radius integer-point
-counting interface. The only counting input is the sharp residue estimate. -/
+counting interface, assuming the sharp residue estimate. -/
 theorem count_plane_of_sharp_residue_bound
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)

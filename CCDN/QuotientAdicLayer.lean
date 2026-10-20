@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! Adic layers in a quotient ring are identified with the corresponding
 images in the single quotient by the sum of the equation ideal and the
-next ideal power. No homogeneous presentation is assumed. -/
+next ideal power. -/
 
 @[expose] public section
 namespace CCDN

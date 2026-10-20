@@ -3,7 +3,7 @@ module
 public import CCDN.HilbertBoundedEliminationStep
 public import CCDN.GenericPlaneStretch
 
-/-! Bounded integral linear elimination with genuinely integer coefficients.
+/-! Bounded integral linear elimination with integer coefficients.
 Scaling the retained coordinates by the nonzero pivot preserves integrality. -/
 
 @[expose] public section

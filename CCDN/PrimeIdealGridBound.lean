@@ -6,8 +6,7 @@ public import CCDN.SmallOutsidePoint
 
 /-! The sharp grid bound for every prime affine variety. The
 vanishing grid polynomials construct finite integral parameters; their
-function-field rank is controlled by the Hilbert multiplicity.
-No normalization, rank estimate or counting hypothesis is supplied. -/
+function-field rank is controlled by the Hilbert multiplicity. -/
 
 @[expose] public section
 namespace CCDN

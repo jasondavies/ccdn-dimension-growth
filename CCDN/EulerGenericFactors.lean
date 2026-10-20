@@ -5,7 +5,7 @@ public import Mathlib.RingTheory.Localization.FractionRing
 
 /-! Generic factors with independent integral coefficient parameters.
 Specializing the logarithmic pair at `(x^a,1)` proves that the generic
-pair is nonzero, without separability assumptions on later specializations. -/
+pair is nonzero. -/
 
 @[expose] public section
 namespace CCDN

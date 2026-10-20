@@ -6,9 +6,9 @@ public import CCDN.ProperHilbertDimension
 public import CCDN.PolynomialPredicates
 
 /-! A cubic degree exponent for general projective dimension growth.
-This is an independent consequence of the constructed projections and the
-plane curve estimate. The original paper's numerical exponent remark is
-among the statements amended in the author's corrigendum. -/
+It follows from the constructed projections and the plane curve estimate.
+The paper's numerical exponent remark is among the statements amended in
+the author's corrigendum. -/
 
 @[expose] public section
 namespace CCDN
@@ -119,8 +119,7 @@ theorem projective_variety_dimension_growth_cubic_positive (n : ℕ) (hn : 2 ≤
   simpa only [hm', show m + 2 - 1 = m + 1 by omega] using hh
 
 /-- Theorem 1 admits the explicit exponent `2*n^3` in every ambient
-projective dimension, including the zero-dimensional and empty cases.
-No projection, fiber bound or geometric auxiliary is assumed. -/
+projective dimension, including the zero-dimensional and empty cases. -/
 theorem projective_dimension_growth_cubic (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →

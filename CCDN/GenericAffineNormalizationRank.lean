@@ -7,7 +7,7 @@ public import CCDN.UniversalHyperplaneNormalization
 /-! Exact affine normalization degree for independent linear
 coefficients, and for the named rational-function coefficient field.
 All fraction fields are fraction fields of the displayed affine
-coordinate ring; no field-degree or generic-finiteness assumption remains. -/
+coordinate ring. -/
 
 @[expose] public section
 namespace CCDN
@@ -43,7 +43,7 @@ abbrev universalAffineCoefficientField (K : Type*) [Field K] (m n : ℕ) :=
   universalCoefficientField K (Fin m × Fin n)
 
 /-- The independent coefficient tuple is constructed in the rational
-function field itself, rather than supplied by the caller. -/
+function field itself. -/
 theorem universal_affine_normalization_functionField_finrank
     {K F : Type*} [Field K] [CharZero K] {n m : ℕ} [Field F]
     [Algebra (universalAffineCoefficientField K m n) F]

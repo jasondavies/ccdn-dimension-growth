@@ -12,8 +12,8 @@ public import CCDN.ProjectiveFiltration
 
 The degree-`n+1` image in the quotient of the filtered homogeneous coordinate
 algebra by its infinity coordinate has dimension `H(n+1)-H(n)`. Thus the
-certified affine Hilbert degree is already the eventual graded dimension of an
-quotient ring, rather than an assumed projective degree.
+certified affine Hilbert degree is the eventual graded dimension of a
+quotient ring.
 -/
 
 @[expose] public section
@@ -46,7 +46,7 @@ instance projectiveInfinityIdeal_twoSided {K σ : Type*} [Field K]
   simpa only [smul_eq_mul, mul_comm a b] using (projectiveInfinityIdeal I).smul_mem b ha
 
 /-- Divisibility by the new coordinate is exactly membership one step lower in
-our original affine degree filtration. -/
+the affine degree filtration. -/
 theorem projectiveMonomial_mem_infinityIdeal {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (n : ℕ) (a : filteredCoordinateSpace I (n + 1)) :
     projectiveMonomialMap I (n + 1) a ∈ projectiveInfinityIdeal I ↔

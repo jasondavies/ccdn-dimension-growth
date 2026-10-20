@@ -4,8 +4,8 @@ public import CCDN.HomogeneousNormalizationEquation
 public import CCDN.PolynomialPredicates
 
 /-! The field degree of a homogeneous finite linear normalization
-is exactly the Hilbert multiplicity. The equation, monicity up to a unit,
-and primitive element are constructed rather than supplied. -/
+is exactly the Hilbert multiplicity. The proof constructs the equation, its
+monicity up to a unit, and a primitive element. -/
 
 @[expose] public section
 namespace CCDN

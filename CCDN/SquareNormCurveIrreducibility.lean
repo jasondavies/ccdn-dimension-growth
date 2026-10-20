@@ -5,7 +5,7 @@ public import CCDN.OddDegreeNormCurves
 
 /-! A double-cover polynomial with an odd root multiplicity is
 irreducible. Applied to the norm-polynomial factorization, this detects
-the genuine even-index subfield exceptions. -/
+the even-index subfield exceptions. -/
 
 @[expose] public section
 namespace CCDN

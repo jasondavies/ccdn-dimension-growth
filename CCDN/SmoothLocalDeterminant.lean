@@ -5,8 +5,7 @@ import all ArithmeticHeights.BombieriVaaler
 public import Mathlib.Algebra.Polynomial.Derivative
 
 /-! Local determinant divisibility at nonsingular integral plane-curve points.
-Finite polynomial Newton approximation supplies the local parameter; no p-adic
-implicit-function theorem is assumed. -/
+Finite polynomial Newton approximation supplies the local parameter. -/
 
 @[expose] public section
 namespace CCDN

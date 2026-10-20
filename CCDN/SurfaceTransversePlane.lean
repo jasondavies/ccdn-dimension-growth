@@ -113,7 +113,7 @@ lemma planeTransversalityPolynomial_ne_zero (v : Fin 3 → ℚ) (hv : v ≠ 0) :
     simp [planeDirectionMatrix, Matrix.det_fin_three] at hh
     exact hj hh
 
-/-- The existing integer specialization theorem, reindexed to three
+/-- The integer specialization theorem, reindexed to three
 coordinates, can avoid any nonzero rational parameter polynomial. -/
 theorem exists_good_rational_plane_avoiding
     (f : MvPolynomial (Fin 3) ℤ)
@@ -189,7 +189,7 @@ theorem exists_good_rational_plane_avoiding
   · rw [← map_affinePlaneMap]
     exact (rational_map_totalDegree q).trans hqd
 
-/-- A geometrically irreducible surface admits a genuinely transverse plane
+/-- A geometrically irreducible surface admits a transverse plane
 whose restriction of any prescribed nonzero second equation is nonzero. -/
 theorem exists_surface_transverse_plane
     (f : MvPolynomial (Fin 3) ℤ)

@@ -4,7 +4,7 @@ public import CCDN.AffineChartSmallAuxiliary
 public import CCDN.HypersurfacePositionedAuxiliary
 
 /-! Combine the two coefficient-height ranges for an affine-chart prime set.
-The large-height branch remains the unconditional existing construction. -/
+The large-height branch is the positioned hypersurface construction. -/
 
 @[expose] public section
 namespace CCDN

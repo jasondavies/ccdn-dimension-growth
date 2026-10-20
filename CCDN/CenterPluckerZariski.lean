@@ -4,8 +4,7 @@ public import CCDN.CenterPluckerCoordinates
 
 /-! Zariski topology defined by homogeneous projective equations, and its
 induced topology on center subspaces under the injective Plücker map.
-The row-span map from independent matrices is continuous for this topology.
-No identification with the row-span quotient topology is assumed. -/
+The row-span map from independent matrices is continuous for this topology. -/
 
 @[expose] public section
 namespace CCDN
@@ -100,7 +99,7 @@ theorem centerMatrixSpan_preimage_pluckerPrincipalOpen
   exact independentCenterPlucker_preimage_principalOpen f hf
 
 /-- Density descends to the Zariski topology induced by Plücker
-coordinates, not only to the previously defined row-span quotient topology. -/
+coordinates, as well as to the row-span quotient topology. -/
 theorem center_subspace_image_plucker_dense
     {K : Type*} [Field K] {r n : ℕ}
     (S : Set (IndependentCenterMatrix K r n)) (hS : Dense S) :

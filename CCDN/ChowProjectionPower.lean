@@ -8,7 +8,7 @@ public import CCDN.PolynomialPredicates
 /-! The geometric power criterion for the restriction of a Chow
 incidence equation along a linear projection. Meeting the center forces the
 restriction to vanish identically; a disjoint center gives precisely a scalar
-power of an image equation. Exact Chow block degrees are not assumed. -/
+power of an image equation. -/
 
 @[expose] public section
 namespace CCDN
@@ -47,7 +47,7 @@ lemma center_disjoint_of_chowLinearSubstitution_ne_zero
   exact hne (chowLinearSubstitution_eq_zero_of_center_meets J A F hF ⟨p, hp, hAp⟩)
 
 /-- The image incidence criterion is derived from the linear map and
-its disjoint center, rather than supplied as an equality of zero loci. -/
+its disjoint center. -/
 theorem chowLinearSubstitution_same_zeros_as_image
     {K : Type*} [Field K] [IsAlgClosed K] {n s r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -63,10 +63,9 @@ theorem chowLinearSubstitution_same_zeros_as_image
   rw [chowLinearSubstitution_eval, hF, hG]
   exact chow_projection_incidence_iff J hJ A hcenter U
 
-/-- With explicit nonempty source and image charts, both Chow equations are
-constructed internally. The restricted source equation is a positive scalar
-power of the image equation. No Chow equations or equal-zero-set premise are
-supplied. The absence of a degree formula is intentional at this stage. -/
+/-- Given nonempty source and image charts, both Chow equations are
+constructed. The restricted source equation is a positive scalar
+power of the image equation. -/
 theorem exists_chow_projection_power_with_charts
     {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

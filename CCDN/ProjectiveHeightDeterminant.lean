@@ -36,8 +36,8 @@ theorem homogeneous_irreducible_reduction_of_not_planeBadReduction
       Int.castRingHom K := by ext; simp
   simpa only [MvPolynomial.map_map, he] using hi
 
-/-- The global projective determinant lower bound with every local counting
-and bad-prime charge estimate discharged. -/
+/-- The global projective determinant lower bound, with the bad-prime charge
+controlled by the coefficient height `H` of the affine chart. -/
 theorem projective_determinant_log_lower_height
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K]
     {s N d M : ℕ} (hs : 0 < s)

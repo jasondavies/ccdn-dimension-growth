@@ -3,8 +3,8 @@ module
 public import CCDN.SharpProjectiveHypersurfaceCount
 public import CCDN.HypersurfaceCountNormalization
 
-/-! CCDN Lemma 2.8 and Corollary 2.9 with the finite-field count
-proved, rather than supplied. All constants depend only on dimension. -/
+/-! CCDN Lemma 2.8 and Corollary 2.9, including the finite-field count.
+All constants depend only on dimension. -/
 
 @[expose] public section
 namespace CCDN
@@ -48,7 +48,7 @@ theorem projective_hypersurface_normalized_count_error {n p d : ℕ} [Fact p.Pri
 
 /-- CCDN Corollary 2.9: the sharp single-prime divisor of every maximal minor
 of a common-degree homogeneous evaluation matrix. The residue count, local
-multiplicities and projective reduction are all constructed from f and z. -/
+multiplicities and projective reduction are constructed from f and z. -/
 theorem projective_hypersurface_minorGcd_sharp {n s N p d M : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)

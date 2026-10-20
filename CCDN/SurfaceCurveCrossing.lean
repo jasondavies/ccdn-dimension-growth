@@ -5,9 +5,9 @@ public import CCDN.SurfaceNonlinearCount
 public import CCDN.Bezout
 
 /-! Degree and proper-section budgets for any finite family of distinct
-prime curves on a surface section. A curve already constructed by another
-auxiliary is counted as a component of the new section whenever its ideal
-contains the new equation. -/
+prime curves on a surface section. A curve constructed by another
+auxiliary is counted as a component of the section whenever its ideal
+contains the section's equation. -/
 
 @[expose] public section
 namespace CCDN

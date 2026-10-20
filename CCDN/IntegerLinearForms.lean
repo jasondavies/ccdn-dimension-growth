@@ -2,7 +2,7 @@ module
 
 public import CCDN.LinearProjectionFiltration
 
-/-! Integer matrices give genuine linear forms. Composition is matrix
+/-! Integer matrices give linear forms. Composition is matrix
 multiplication, with an explicit coefficient-height bound. -/
 
 @[expose] public section

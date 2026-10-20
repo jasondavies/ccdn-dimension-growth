@@ -5,7 +5,7 @@ public import CCDN.FiniteFieldPolynomialZeros
 
 /-! Counting all affine-plane parameter choices whose section drops degree
 or is not geometrically irreducible. This includes zero restrictions, but
-incidence averaging still requires a sharper separate bound on those. -/
+incidence averaging uses a sharper separate bound on those. -/
 
 @[expose] public section
 namespace CCDN
@@ -48,8 +48,7 @@ lemma badPlaneParameters_witness_zero {K σ : Type*} [Field K] {p : ℕ} [CharP 
     apply hir
     simpa only [bivariateMap_comp_apply, universalPlaneSection, φ] using hh.2.2
 
-/-- The proportion of geometrically bad plane parameters is at most 2*d^3/q.
-The witness and its nonvanishing are constructed, not supplied as hypotheses. -/
+/-- The proportion of geometrically bad plane parameters is at most 2*d^3/q. -/
 theorem finite_field_bad_plane_parameters_mul_card
     {K σ : Type*} [Field K] [Fintype K] [Fintype σ] {p : ℕ} [CharP K p]
     (f : MvPolynomial (Option σ) K)

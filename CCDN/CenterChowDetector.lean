@@ -14,8 +14,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-/-- The entire polynomial family is chosen before the center. No source or
-image equation, chart, matrix witness, or generic-center premise is supplied.
+/-- The entire polynomial family is chosen before the center.
 For D at least two the homogeneous detector degree is exactly D(D^2-1). -/
 theorem exists_geometric_center_chow_detector
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n m r : ℕ}

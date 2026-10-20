@@ -8,8 +8,8 @@ public import CCDN.PrimeProduct
 
 Cauchy–Schwarz preserves the leading quadratic coefficient when residue classes
 have different multiplicities. These are the numerical aggregation steps in the
-curve case of CCDN Proposition 2.6. The geometric local divisibility and finite
-field multiplicity estimates remain separate proof obligations.
+curve case of CCDN Proposition 2.6. The geometric local divisibility and
+finite-field multiplicity estimates are not part of this module.
 -/
 
 @[expose] public section
@@ -49,7 +49,7 @@ theorem aggregate_exponent_lower {ι : Type*} (S : Finset ι)
     _ ≤ _ := by nlinarith
 
 /-- Local multiplicity bounds and prime-power divisibility give the global log
-lower bound. Neither the local divisibility nor the prime sums are assumed solved. -/
+lower bound. -/
 theorem log_lower_of_local_exponents (P : Finset ℕ) (e : ℕ → ℕ)
     (N : ℕ → ℝ) (s : ℕ) {D : ℤ} (hD : 0 < D)
     (hP : ∀ p ∈ P, Nat.Prime p) (hN : ∀ p ∈ P, 0 < N p)

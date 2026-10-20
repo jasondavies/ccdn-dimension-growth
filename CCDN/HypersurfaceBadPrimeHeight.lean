@@ -3,15 +3,14 @@ module
 public import CCDN.IntegerPlaneLogHeight
 
 /-! The geometric bad-prime charge in arbitrary dimension is controlled by
-coefficient height. The integer witness and its height are both constructed. -/
+coefficient height, via an explicit integer witness with bounded height. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- An effective positive integer detecting every bad prime above the degree.
-No determinant, witness or height estimate is supplied as an assumption. -/
+/-- An effective positive integer detecting every bad prime above the degree. -/
 theorem exists_hypersurface_bad_prime_height_witness
     {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]
     (f : MvPolynomial (Option σ) ℤ)
@@ -119,7 +118,7 @@ theorem hypersurface_bad_prime_factor_max
   convert mul_le_mul_of_nonneg_left hm hc using 1
   ring
 
-/-- The exact finite set of bad primes, with its unconditional height bound. -/
+/-- The exact finite set of bad primes, with its height bound. -/
 theorem exists_hypersurface_bad_prime_factor_bound
     {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]
     (f : MvPolynomial (Option σ) ℤ)

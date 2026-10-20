@@ -4,7 +4,7 @@ public import CCDN.HilbertLowDegreeEquation
 public import CCDN.BoundedLinearElimination
 
 /-! One bounded integral linear elimination, with the bound controlled
-by geometric Hilbert multiplicity rather than a supplied ideal equation. -/
+by geometric Hilbert multiplicity. -/
 
 @[expose] public section
 namespace CCDN

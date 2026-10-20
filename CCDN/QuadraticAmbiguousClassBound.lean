@@ -5,7 +5,7 @@ public import CCDN.FractionalIdealConjugation
 public import Mathlib.GroupTheory.Index
 
 /-! A cardinal bound for fixed two-torsion classes in terms of
-strongly ambiguous classes and the genuine unit-norm quotient. This is
+strongly ambiguous classes and the unit-norm quotient. This is
 the obstruction-fiber part of genus theory; the ramified-ideal estimate
 for the strongly ambiguous subgroup is a separate step. -/
 

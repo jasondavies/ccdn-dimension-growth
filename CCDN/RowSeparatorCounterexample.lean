@@ -47,8 +47,7 @@ lemma separatorCounterexample_first (x : Fin 6 → ℤ) :
     (∑ j, separatorCounterexampleMatrix 0 j * x j) = x 4 := by
   simp [Fin.sum_univ_succ, separatorCounterexampleMatrix]
 
-/-- An exact integral row-combination certificate; no kernel or lattice
-index assertion is supplied as a hypothesis. -/
+/-- An exact integral row-combination certificate. -/
 lemma separatorCounterexample_divisibility (x : Fin 6 → ℤ)
     (hx : ∀ i : Fin 5, i ≠ 0 → ∑ j, separatorCounterexampleMatrix i j * x j = 0) :
     (120050 : ℤ) ∣ x 4 := by

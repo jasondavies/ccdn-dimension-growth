@@ -5,8 +5,7 @@ public import Mathlib.LinearAlgebra.Finsupp.Defs
 
 /-! Coefficient-linear descent for arbitrary polynomial variable types.
 A finite expansion in a coefficient-field basis proves exact ideal descent,
-including nested-polynomial substitutions, without a supplied injectivity
-or flatness hypothesis. -/
+including nested-polynomial substitutions. -/
 
 @[expose] public section
 namespace CCDN

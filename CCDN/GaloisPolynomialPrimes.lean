@@ -69,7 +69,7 @@ instance coefficientGaloisPolynomial_invariant [IsGalois k K] :
     simp only [coefficientGaloisPolynomial_smul, coeff_map] at h
     exact h
 
-/-- Polynomial primes with the same contraction are actually conjugate
+/-- Polynomial primes with the same contraction are conjugate
 under the coefficient Galois group. -/
 theorem finite_galois_polynomial_primes_conjugate
     [FiniteDimensional k K] [IsGalois k K]
@@ -83,7 +83,7 @@ theorem finite_galois_polynomial_primes_conjugate
   congr 1
 
 /-- A minimal prime of an extended prime ideal contracts to the original
-prime. This proves the shared-contraction premise needed for conjugacy. -/
+prime. This is the shared-contraction hypothesis needed for conjugacy. -/
 theorem galois_polynomial_minimalPrime_under
     [FiniteDimensional k K] [IsGalois k K]
     (I : Ideal (MvPolynomial σ k)) [I.IsPrime]
@@ -130,7 +130,7 @@ lemma eval_coefficient_galois_at_base_point (γ : Gal(K/k))
   exact h.symm
 
 /-- Every base-field zero lies on every minimal component after
-a finite Galois extension. No component cover or conjugacy is assumed. -/
+a finite Galois extension. -/
 theorem finite_galois_base_point_on_every_component
     [FiniteDimensional k K] [IsGalois k K]
     (I : Ideal (MvPolynomial σ k)) [I.IsPrime]

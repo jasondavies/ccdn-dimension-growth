@@ -90,8 +90,8 @@ theorem prime_components_filtered_rank_lower {K σ ι : Type*} [Field K]
   have hh := hw.fintype_card_le_finrank
   simpa only [Fintype.card_sigma, Fintype.card_fin, κ] using hh
 
-/-- Applied to the canonical finite set of minimal primes, the dimension
-comparison needs no supplied component family or separators. -/
+/-- The dimension comparison for the canonical finite set of minimal primes,
+with constructed separators. -/
 theorem minimalPrimeComponents_filtered_rank_lower {K σ : Type*} [Field K] [Finite σ]
     (I : Ideal (MvPolynomial σ K)) :
     ∃ D : ℕ, ∀ N : ℕ,

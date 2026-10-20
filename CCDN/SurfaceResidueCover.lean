@@ -2,8 +2,7 @@ module
 
 public import CCDN.SurfaceResidueEdgeCount
 
-/-! The finite residue-edge cover and its complete counting bound.
-No enumeration or coverage estimate is supplied as a hypothesis. -/
+/-! The finite residue-edge cover and its complete counting bound. -/
 
 @[expose] public section
 namespace CCDN

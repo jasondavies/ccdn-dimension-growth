@@ -72,7 +72,7 @@ theorem eulerClosedForm_minor_map {R S : Type*} [CommRing R] [CommRing S]
   rw [eulerClosedFormCoefficientMatrix_map]
 
 /-- Characteristic-zero irreducibility supplies a nonzero integer
-minor of order d^2-1. No universal irreducibility theorem is assumed. -/
+minor of order d^2-1. -/
 theorem exists_eulerClosedForm_integer_minor
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (k : ℕ) (f : Polynomial (Polynomial ℤ))

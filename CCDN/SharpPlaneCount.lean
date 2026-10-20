@@ -3,7 +3,7 @@ module
 public import CCDN.StepanovRealBound
 public import CCDN.GeometricResidueReduction
 
-/-! Unconditional sharp finite-field counting and the complete rational-plane
+/-! Sharp finite-field counting and the complete rational-plane
 integral-point bound. The finite-field proof uses the constructed Stepanov
 auxiliary and retains an explicit absolute error constant. -/
 
@@ -33,7 +33,7 @@ theorem plane_finite_field_card_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
   exact stepanov_real_bound f.totalDegree p A D N (Fintype.card ι) hd hp hDp hN hNpos hpx hc
 
 /-- The sharp finite-field hypothesis used by the affine determinant argument
-is discharged with the absolute constant 161. -/
+holds with the absolute constant 161. -/
 theorem sharpPlaneResidueBound : SharpPlaneResidueBound 161 := by
   intro f _hd p hp hsize hir
   let : Fact p.Prime := ⟨hp⟩
@@ -52,8 +52,7 @@ theorem sharpPlaneResidueBound : SharpPlaneResidueBound 161 := by
   apply hh.trans
   gcongr
 
-/-- The full coefficient-uniform rational-plane integral-point bound.
-This theorem has no external counting hypothesis. -/
+/-- The full coefficient-uniform rational-plane integral-point bound. -/
 theorem planeCurveBound : PlaneCurveBound :=
   planeCurveBound_of_sharp_residue_bound (by norm_num : (0 : ℝ) ≤ 161) sharpPlaneResidueBound
 

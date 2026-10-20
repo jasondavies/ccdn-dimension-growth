@@ -4,9 +4,8 @@ public import CCDN.PlaneMultiplicity
 public import CCDN.SmoothReduction
 
 /-! All reduced points, their positive multiplicities, and the resulting
-local determinant lower bound. No residue partition or multiplicity choice is
-supplied by the caller. The sharp finite-field total-multiplicity estimate is a
-separate geometric obligation. -/
+local determinant lower bound. The sharp finite-field total-multiplicity
+estimate is a separate geometric obligation. -/
 
 @[expose] public section
 namespace CCDN
@@ -70,8 +69,8 @@ lemma planeTotalMultiplicity_bounds (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fa
          _ = _ := by simp
 
 /-- Integral zeros supply all residue labels and multiplicities. The
-sum of the local exponents has the full quadratic leading coefficient, with
-no smoothness, local factorization, or supplied residue-partition hypothesis. -/
+sum of the local exponents has the full quadratic leading coefficient.
+Singular points are allowed. -/
 theorem singular_reduction_minorGcd {s N p : ℕ} [Fact p.Prime] (hs : 0 < s)
     (f : MvPolynomial (Fin 2) ℤ) (g : Fin N → MvPolynomial (Fin 2) ℤ)
     (z : Fin s → Fin 2 → ℤ)

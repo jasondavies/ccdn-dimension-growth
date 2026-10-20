@@ -6,7 +6,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! A coefficient-controlled bad-prime witness for monic integer bivariate
 equations. Bad reduction is reducibility over an algebraic closure of
-the residue field, not an assumed matrix-rank predicate. -/
+the residue field. -/
 
 @[expose] public section
 namespace CCDN
@@ -62,7 +62,7 @@ theorem exists_monic_bad_prime_witness
     exact (dvd_abs _ _).mpr (monic_bad_prime_dvd_coefficient_minor d (by omega) f hf hdeg htotal a c p hp hbad)
 
 /-- The geometric bad-prime charge in the monic case has the required scaled
-logarithmic-height bound; no finite-field counting result is used here. -/
+logarithmic-height bound. -/
 theorem monic_geometric_bad_prime_charge
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (d : ℕ) (hd : 1 ≤ d) (f : ℤ[X][X]) (hf : f.Monic)

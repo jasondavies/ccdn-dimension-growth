@@ -15,8 +15,8 @@ noncomputable section
 open MvPolynomial
 
 /-- Equality of source and image multiplicities forces birationality.
-The image field, a finite linear normalization, and its rank are constructed
-internally; there is no dimension, normalization, or rank assumption. -/
+The proof constructs the image field, a finite linear normalization, and its
+rank. -/
 theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
     {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n s : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

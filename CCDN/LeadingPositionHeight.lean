@@ -43,7 +43,7 @@ lemma leadingPositionHeightFactor_log_le {d : ℕ} (hd : 0 < d) :
     _ ≤ _ := by nlinarith
 
 /-- Control the transformed coefficients through interpolation of translated
-grid values. No coefficient formula for the substitution is assumed. -/
+grid values. -/
 theorem homogeneousTranslation_chart_coefficient_bound {d : ℕ}
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d)
     (a : Fin 2 → ℤ) (ha : ∀ j, 0 ≤ a j ∧ a j ≤ d)

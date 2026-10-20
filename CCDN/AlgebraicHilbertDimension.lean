@@ -73,7 +73,7 @@ theorem algebraic_polynomial_prime_hilbert_dimension
   exact (algebraic_coefficient_integral_embedding_hilbert_dimension_eq _ P ψ hψ hint).symm
 
 /-- All minimal components of an extended prime ideal have the
-original dimension; purity is derived rather than supplied. -/
+original dimension. -/
 theorem algebraic_polynomial_minimalPrime_under
     (k K σ : Type*) [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]
     (I : Ideal (MvPolynomial σ k)) [I.IsPrime]

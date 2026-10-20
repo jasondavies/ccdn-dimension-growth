@@ -6,7 +6,7 @@ public import CCDN.PolynomialSection
 /-! The elementary linear box bound for prime curves in affine
 three-space. A transcendental coordinate has fibers of size at most the
 affine Hilbert degree, and the integer box has only 2 floor(B)+1 values
-of that coordinate. No projection or point-counting hypothesis is supplied. -/
+of that coordinate. -/
 
 @[expose] public section
 namespace CCDN

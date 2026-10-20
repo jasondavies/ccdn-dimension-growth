@@ -6,7 +6,7 @@ public import CCDN.PolynomialPredicates
 
 /-! For an auxiliary section of a surface of degree at least sixteen,
 all nonlinear components together contribute O(d^18 B) bounded integer points.
-Only the degree-one component union remains outside this estimate. -/
+The union of the degree-one components is not covered by this estimate. -/
 
 @[expose] public section
 namespace CCDN
@@ -14,7 +14,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The nonlinear part of the corrected large-degree surface bound, using
-constructed components and the unconditional curve counting theorem. The
+constructed components and the curve counting theorem. The
 constant precedes the surface equation, its coefficients, and the box radius. -/
 theorem top_form_surface_nonlinear_count :
     ∃ A : ℝ, 0 < A ∧

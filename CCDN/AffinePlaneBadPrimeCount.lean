@@ -50,7 +50,7 @@ theorem affine_plane_expression_le_bad_prime {d : ℕ} (hd : 0 < d)
   nlinarith
 
 /-- The plane auxiliary and Bezout prove the bad-prime bound for
-integer zeros. No auxiliary-existence or counting premise is supplied. -/
+integer zeros. -/
 theorem affine_plane_count_bad_prime
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))

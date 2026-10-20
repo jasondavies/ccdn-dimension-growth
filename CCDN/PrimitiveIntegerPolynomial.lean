@@ -69,7 +69,7 @@ lemma PrimitiveIntegerPolynomial.isRelPrime_constant {σ : Type*}
   exact (hf a ((C_dvd_iff_dvd_coeff a f).mp hqf)).map C
 
 /-- For any primitive equation, integer divisibility is exactly rational
-coefficient divisibility. No irreducibility assumption is needed. -/
+coefficient divisibility. -/
 theorem PrimitiveIntegerPolynomial.rational_map_dvd_iff {σ : Type*}
     {f g : MvPolynomial σ ℤ} (hf : PrimitiveIntegerPolynomial f) :
     MvPolynomial.map (Int.castRingHom ℚ) f ∣ MvPolynomial.map (Int.castRingHom ℚ) g ↔ f ∣ g := by
@@ -85,7 +85,7 @@ theorem PrimitiveIntegerPolynomial.rational_map_dvd_iff {σ : Type*}
   · exact map_dvd (MvPolynomial.map (Int.castRingHom ℚ))
 
 /-- Extract a primitive integer equation by the gcd of its nonzero
-coefficients. The scalar is nonzero and no degree or support hypothesis is assumed. -/
+coefficients. The scalar is nonzero. -/
 theorem exists_primitive_integer_factor {σ : Type*} (f : MvPolynomial σ ℤ) (hf : f ≠ 0) :
     ∃ (c : ℤ) (g : MvPolynomial σ ℤ), c ≠ 0 ∧ PrimitiveIntegerPolynomial g ∧ f = C c * g := by
   classical

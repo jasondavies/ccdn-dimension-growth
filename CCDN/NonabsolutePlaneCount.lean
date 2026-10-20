@@ -3,8 +3,8 @@ module
 public import CCDN.PolynomialLinearDescent
 
 /-! Irreducible base-field plane curves that split over an extension have at
-most d² base-field points. Linear coefficient descent and Bézout suffice;
-no Galois transitivity or smooth-point criterion is assumed. -/
+most d² base-field points. The proof uses linear coefficient descent and
+Bézout. -/
 
 @[expose] public section
 namespace CCDN
@@ -76,8 +76,8 @@ lemma totalDegree_pos_of_nonzero_nonunit {k : Type*} [Field k] {n : ℕ}
   rw [he]
   exact (isUnit_iff_ne_zero.mpr hc).map C
 
-/-- Splitting over any extension gives the unconditional d² bound on
-base-field points. No hypothesis on the extension's Galois group is needed. -/
+/-- Splitting over any extension, Galois or not, gives the d² bound on
+base-field points. -/
 theorem nonabsolute_plane_points_card_le {k K ι : Type*}
     [Field k] [Field K] [Algebra k K] [Fintype ι] [DecidableEq ι]
     (f : MvPolynomial (Fin 2) k) (hf : Irreducible f) (hd : 0 < f.totalDegree)

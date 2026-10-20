@@ -23,8 +23,7 @@ lemma eval₂_center_minor_map
     (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) g).symm
 
 /-- The nonvanishing locus is exactly the set of geometrically disjoint
-centers whose projection is birational. No Chow equation, image
-multiplicity, or witness center is supplied. -/
+centers whose projection is birational. -/
 theorem exists_sharp_birational_center_detector
     {K : Type*} [Field K] [CharZero K] {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

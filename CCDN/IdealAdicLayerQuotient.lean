@@ -3,8 +3,8 @@ module
 public import CCDN.NoetherianLocalLayers
 public import Mathlib.LinearAlgebra.Isomorphisms
 
-/-! Identify the layer used in the local determinant proof with the literal
-quotient `I^k/I^(k+1)`. The quotient denominator is restricted to `I^k`;
+/-! Identify the layer used in the local determinant proof with the quotient
+module `I^k/I^(k+1)`. The quotient denominator is restricted to `I^k`;
 the canonical map to `A/I^(k+1)` has precisely this kernel. -/
 
 @[expose] public section

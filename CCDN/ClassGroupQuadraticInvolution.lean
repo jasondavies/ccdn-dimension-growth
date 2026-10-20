@@ -7,8 +7,7 @@ public import Mathlib.GroupTheory.Index
 /-! The group-theoretic part of quadratic class-group descent. An
 involution on an elementary abelian two-group has at least the square
 root of the group's cardinality in fixed points. This is applied to the
-action of a field involution on two-torsion ideal classes; no
-arithmetic estimate on those fixed classes is assumed or asserted. -/
+action of a field involution on two-torsion ideal classes. -/
 
 @[expose] public section
 namespace CCDN

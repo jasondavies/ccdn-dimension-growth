@@ -3,8 +3,7 @@ module
 public import CCDN.ProjectiveHypersurfaceResidueDeterminant
 
 /-! Numerical normalization of a finite-field hypersurface count, as in
-CCDN Lemma 2.8. These inequalities do not assume or assert a point-count
-theorem: the input count bound is explicit. -/
+CCDN Lemma 2.8. The input count bound is an explicit hypothesis. -/
 
 @[expose] public section
 namespace CCDN
@@ -61,9 +60,8 @@ theorem local_exponent_sharp_of_root_bound (m s e : ℕ) (hm : 0 < m)
   simp only [heq] at h
   linarith
 
-/-- The global single-prime determinant bound in denominator form, conditional
-only on the displayed bound for the total residue multiplicity.
-The finite-field estimate itself is a separate mathematical obligation. -/
+/-- The global single-prime determinant bound in denominator form, assuming
+the displayed bound for the total residue multiplicity. -/
 theorem projective_hypersurface_minorGcd_of_count_bound {n s N p d M : ℕ}
     [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : MvPolynomial.map (Int.castRingHom (ZMod p)) f ≠ 0)

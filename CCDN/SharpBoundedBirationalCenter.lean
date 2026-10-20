@@ -7,7 +7,7 @@ public import CCDN.PolynomialPredicates
 
 /-! Integer good centers with the quadratic row bound from the
 row-resultant detector. Dimension zero is included using its proved degree
-one. All source ideals, center witnesses and nonvanishing are constructed. -/
+one. -/
 
 @[expose] public section
 namespace CCDN
@@ -61,8 +61,8 @@ theorem exists_sharp_bounded_integer_birational_center
   gcongr
   exact_mod_cast hbound
 
-/-- The same construction inside X0=0. The original affine variety and
-its projective closure supply all geometric hypotheses internally. -/
+/-- The same construction inside X0=0. The geometric hypotheses come from the
+affine variety and its projective closure. -/
 theorem exists_sharp_bounded_integer_fixed_coordinate_center
     {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]

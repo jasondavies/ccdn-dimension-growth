@@ -20,7 +20,7 @@ def hypersurfaceSmallThreshold (n d : ℕ) (B L A : ℝ) : ℝ :=
         L ^ (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))))
 
 /-- A degree above the proved threshold yields an integer homogeneous
-nonmultiple vanishing at all supplied bounded primitive points. -/
+nonmultiple vanishing at all given bounded primitive points. -/
 theorem hypersurface_exists_auxiliary_small_height
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
@@ -68,8 +68,8 @@ theorem hypersurface_exists_auxiliary_small_height
     simpa only [hypersurfaceSmallThreshold, Nat.cast_add, Nat.cast_one, hnR] using hb
   exact (not_lt_of_ge hb') hthreshold
 
-/-- Construct both the exact geometric bad-prime set and an integer auxiliary
-degree. The leading-coefficient saving and every radius exponent are retained. -/
+/-- The exact geometric bad-prime set together with an integer auxiliary
+degree. The bound keeps the leading-coefficient saving and every radius exponent. -/
 theorem hypersurface_auxiliary_small_height_degree
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)

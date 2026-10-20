@@ -23,7 +23,7 @@ lemma integer_adjugate_entry_abs_le {s : ℕ}
   simpa only [AbsoluteValue.abs_apply, Fintype.card_fin, nsmul_eq_mul] using hh
 
 /-- A full independent family admits simultaneous bounded integral dual
-forms. No minor or separating vectors are supplied as hypotheses. -/
+forms. -/
 theorem exists_bounded_integer_dual_rows {s r : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin r) ℤ)
     (hli : LinearIndependent ℚ (fun i => fun j => (A i j : ℚ)))

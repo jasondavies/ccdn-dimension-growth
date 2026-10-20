@@ -3,9 +3,9 @@ module
 public import CCDN.ShearHeight
 
 /-! The geometric bad-prime charge for arbitrary integer plane equations.
-Bounded integral normalization, coefficient growth and the integer minor
-witness are all discharged; reducibility is tested over the residue
-field's algebraic closure. -/
+The proof combines bounded integral normalization, coefficient growth and an
+integer minor witness; reducibility is tested over the residue field's
+algebraic closure. -/
 
 @[expose] public section
 namespace CCDN
@@ -72,8 +72,7 @@ theorem exists_plane_bad_prime_witness
     exact (bivariateBadReduction_shear_iff (a : ℤ) f d p).mpr hbad
 
 /-- Geometric bad primes above 27*d^4 have logarithmic charge controlled by
-log(1+log(H)/d²) plus an absolute constant. No geometric rank hypothesis or
-external irreducibility theorem remains in this estimate. -/
+log(1+log(H)/d²) plus an absolute constant. -/
 theorem plane_geometric_bad_prime_charge
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (d : ℕ) (hd : 1 ≤ d) (f : ℤ[X][X]) (hdeg : bivariateTotalDegree f = d)

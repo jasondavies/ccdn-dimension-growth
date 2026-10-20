@@ -5,7 +5,7 @@ public import CCDN.DifferentialConstantRelation
 
 /-! Constant residues in large positive characteristic. The nonzero
 annihilating relation and its degree bound are constructed by a Sylvester
-resultant, rather than supplied as minimal-polynomial hypotheses. -/
+resultant. -/
 
 @[expose] public section
 namespace CCDN

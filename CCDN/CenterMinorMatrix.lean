@@ -5,7 +5,7 @@ public import CCDN.PolynomialPredicates
 
 /-! Enumerating the maximal-minor coordinates turns the source's
 Plücker projection into a matrix with exactly the center as its kernel.
-This supplies the literal center geometry to the Chow specialization API. -/
+This connects the literal center projection to the Chow specialization results. -/
 
 @[expose] public section
 namespace CCDN

@@ -106,8 +106,7 @@ lemma gridEisensteinPolynomial_simple {K : Type*} [Field K]
   field_simp
   ring
 
-/-- Absolute irreducibility of the explicit construction: this theorem is
-valid over every field, with no irreducibility premise. -/
+/-- Absolute irreducibility of the explicit construction, over every field. -/
 theorem gridEisensteinPolynomial_irreducible {K : Type*} [Field K]
     (V : K[X]) (k : ℕ) (hm : V.Monic) (hd : 0 < V.natDegree)
     (h0 : V.coeff 0 ≠ 0) (hk : 2 ≤ k) :

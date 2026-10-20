@@ -5,8 +5,7 @@ public import CCDN.LatticeSeparatedVolume
 public import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
 
 /-! A uniform product-of-minima bound from Blichfeldt's principle.
-The constant n^n is sufficient for the number-field lattice application.
-No successive-minima theorem is assumed. -/
+The constant n^n is sufficient for the number-field lattice application. -/
 
 @[expose] public section
 namespace CCDN
@@ -83,8 +82,8 @@ theorem greedy_lattice_basis_product_le
   intro i x hx hxU
   exact hb.2.2 i x hx (by rwa [← hflag i])
 
-/-- Construct a complete independent family in the lattice and
-prove the product bound, without a supplied family or minima hypothesis. -/
+/-- A complete independent family in the lattice satisfying the
+product bound. -/
 theorem exists_lattice_basis_norm_product_le
     (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
     (hn : 0 < Module.finrank ℝ E) :

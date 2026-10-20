@@ -28,7 +28,7 @@ theorem exists_minimalPrimeComponent_vanishing
   exact ⟨⟨P, mem_minimalPrimeComponents.mpr hP⟩, fun f hf => hPJ hf⟩
 
 /-- A pure-dimensional affine ideal of multiplicity d has at most d*|S|^m
-points in the finite coordinate grid S. No component family is supplied. -/
+points in the finite coordinate grid S. -/
 theorem pure_ideal_grid_card_le
     {K : Type*} [Field K] [CharZero K] (n : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) (m d : ℕ)

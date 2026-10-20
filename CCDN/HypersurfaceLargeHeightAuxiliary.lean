@@ -16,7 +16,7 @@ def hypersurfaceLargeThreshold (n d : ℕ) (T : ℝ) : ℝ :=
     (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ))
 
 /-- In the large-height range, an integer degree above the explicit threshold
-supplies a genuine homogeneous auxiliary nonmultiple. -/
+gives a homogeneous auxiliary nonmultiple. -/
 theorem hypersurface_exists_auxiliary_large_height
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)

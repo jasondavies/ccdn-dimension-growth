@@ -5,7 +5,7 @@ public import Mathlib.Analysis.Complex.Exponential
 
 /-! The numerical component of the corrected surface estimate. The auxiliary
  degree contributes a further factor d to the intersection degree, giving d^18
- after taking fourth powers. No geometric covering or point count is assumed. -/
+ after taking fourth powers. -/
 
 @[expose] public section
 namespace CCDN

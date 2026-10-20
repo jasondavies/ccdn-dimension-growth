@@ -12,7 +12,7 @@ noncomputable section
 open MvPolynomial
 
 /-- Some constructed universal form detects every absolutely irreducible
-homogeneous equation in characteristic zero, with no positioning premise. -/
+homogeneous equation in characteristic zero. -/
 theorem exists_ambientNoetherForm_nonzero {K σ : Type*}
     [Field K] [CharZero K] [Fintype σ] [DecidableEq σ]
     (k : ℕ) (f : MvPolynomial (Option σ) K) (hf : f.IsHomogeneous (k + 2))

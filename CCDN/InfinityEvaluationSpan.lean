@@ -5,7 +5,7 @@ public import CCDN.InfinityParameterReduction
 
 /-! Evaluating homogeneous polynomials at geometric infinity points has
 L-linear rank at most the corresponding infinity Hilbert piece. The
-source curve and its Hilbert function remain over the original field K. -/
+source curve and its Hilbert function are defined over the original field K. -/
 
 @[expose] public section
 namespace CCDN
@@ -18,7 +18,7 @@ def homogeneousPointEvaluation {K L σ ι : Type*} [Field K] [Field L]
   LinearMap.pi (fun i => (aeval (z i)).toLinearMap.comp (homogeneousSubmodule σ K m).subtype)
 
 /-- The L-span of evaluations of K-polynomials is controlled by the
-infinity quotient; no geometric base-change degree assumption is needed. -/
+infinity quotient. -/
 theorem infinity_evaluation_span_finrank_le {K L σ ι : Type*} [Field K] [Field L]
     [Algebra K L] [Fintype σ] (I : Ideal (MvPolynomial σ K))
     (z : ι → σ → L) (hz : ∀ i, z i ∈ MvPolynomial.zeroLocus L (leadingInfinityIdeal I))

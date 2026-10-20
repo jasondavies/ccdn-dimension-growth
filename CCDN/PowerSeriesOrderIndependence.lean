@@ -67,8 +67,8 @@ lemma mixed_order_injective {ι κ : Type*} (n : ι → ℕ) (m : κ → ℕ) {q
   exact Prod.ext (hn hfirst) (hm hsecond)
 
 /-- Low-order series times q-th powers of another ordered family are jointly
-independent when the low orders are smaller than q. No characteristic
-assumption is needed for this noncancellation argument. -/
+independent when the low orders are smaller than q. This noncancellation
+argument works in every characteristic. -/
 theorem powerSeries_mixed_powers_independent
     {K ι κ : Type*} [Field K] [Fintype ι] [DecidableEq ι] [Fintype κ] [DecidableEq κ]
     (f : ι → PowerSeries K) (g : κ → PowerSeries K) (n : ι → ℕ) (m : κ → ℕ) {q : ℕ}

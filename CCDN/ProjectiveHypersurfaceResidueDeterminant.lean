@@ -135,8 +135,8 @@ theorem projective_hypersurface_reduction_minorGcd {n s N p d M : ℕ}
       simpa only [k, a, label, E.symm_apply_apply] using h
     · exact hz
 
-/-- The same theorem includes the empty matrix, without a separate positivity
-assumption on the number of rows or residue points. -/
+/-- The same theorem, including the empty matrix: the number of rows and of
+residue points may be zero. -/
 theorem projective_hypersurface_minorGcd_bound {n s N p d M : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)

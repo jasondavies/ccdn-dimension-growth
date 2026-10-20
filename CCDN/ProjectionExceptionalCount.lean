@@ -4,7 +4,7 @@ public import CCDN.BoundedBirationalProjection
 
 /-! Polynomial reconstruction controls exceptional points and finite
 point counts. The error is d times the reconstruction denominator's degree;
-a uniform O(d^2) bound still requires a low-degree denominator. -/
+a uniform O(d^2) bound requires a low-degree denominator. -/
 
 @[expose] public section
 namespace CCDN

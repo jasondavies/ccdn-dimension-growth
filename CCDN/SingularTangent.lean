@@ -61,7 +61,7 @@ theorem originLayer_eq_homogeneousCoordinateSpace {K σ : Type*} [Field K]
     obtain ⟨u, hu, rfl⟩ := Submodule.mem_map.mp hx
     exact Submodule.mem_map.mpr ⟨u, homogeneous_mem_origin_power hu, rfl⟩
 
-/-- The initial homogeneous equation really vanishes in each origin-adic layer
+/-- The initial homogeneous equation vanishes in each origin-adic layer
 after multiplying by an allowed homogeneous polynomial. -/
 lemma initial_form_multiple_mem_truncation {K σ : Type*} [Field K]
     {f : MvPolynomial σ K} {μ k : ℕ} (hf : f ∈ idealOfVars σ K ^ μ) (hk : μ ≤ k)
@@ -79,7 +79,7 @@ lemma initial_form_multiple_mem_truncation {K σ : Type*} [Field K]
   ring
 
 /-- The first nonzero homogeneous part gives the expected binomial upper bound
-for the local layer. No tangent-cone or graded-ring identification is assumed. -/
+for the local layer. -/
 theorem originLayer_hilbert_bound {K : Type*} [Field K] {n μ k : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K)
     (hf : f ∈ idealOfVars (Fin (n + 1)) K ^ μ)

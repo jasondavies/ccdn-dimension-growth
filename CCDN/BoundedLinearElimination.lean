@@ -7,8 +7,7 @@ public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 /-! A single bounded linear elimination step. A chosen nonzero ideal equation
 of degree d becomes monic after a linear coordinate change with integer
 direction bounded by d+1. The quotient is integral over the remaining linear
-coordinates. No bound on degrees of equations in subsequent contraction ideals
-is asserted here. -/
+coordinates. -/
 
 @[expose] public section
 namespace CCDN
@@ -36,8 +35,7 @@ theorem exists_bounded_full_degree_direction {σ : Type*} [Fintype σ]
   exact ⟨b, hb, by exact_mod_cast (mul_ne_zero_iff.mp hval).1,
     (mul_ne_zero_iff.mp hval).2⟩
 
-/-- Bounded integer directions give a full-degree monic equation,
-without an irreducibility or smooth-point assumption. -/
+/-- Bounded integer directions give a full-degree monic equation. -/
 theorem exists_bounded_monic_linear_coordinates {σ : Type*} [Fintype σ]
     (f : MvPolynomial (Option σ) ℚ) (hf : f ≠ 0) :
     ∃ (b : Option σ → ℤ) (hb : (b none : ℚ) ≠ 0),

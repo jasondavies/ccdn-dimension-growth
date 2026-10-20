@@ -6,7 +6,7 @@ public import CCDN.HypersurfaceShearInvariance
 public import CCDN.IntegerCoefficientHeight
 
 /-! The coefficient-sensitive auxiliary theorem for arbitrary absolutely
-irreducible homogeneous equations, with the coordinate positioning discharged. -/
+irreducible homogeneous equations in arbitrary coordinates. -/
 
 @[expose] public section
 namespace CCDN
@@ -24,9 +24,8 @@ lemma hypersurfaceAbsoluteAuxiliaryConstant_pos (n : ℕ) :
   unfold hypersurfaceAbsoluteAuxiliaryConstant hypersurfacePositionedAuxiliaryConstant
   positivity
 
-/-- The absolutely irreducible case of CCDN Theorem 3.1.1. All geometric,
-height and degree-selection inputs are constructed; the constant depends only
-on dimension. The coefficient height and bad-prime factor belong to the
+/-- The absolutely irreducible case of CCDN Theorem 3.1.1. The constant depends
+only on dimension. The coefficient height and bad-prime factor belong to the
 original equation. -/
 theorem hypersurface_absolute_auxiliary_degree
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d t : ℕ}

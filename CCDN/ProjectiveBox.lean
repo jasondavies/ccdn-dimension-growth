@@ -6,7 +6,7 @@ public import Mathlib.NumberTheory.Height.Projectivization
 
 /-! Rational projective points with the multiplicative height used by CCDN.
 Bounded-height sets are finite, and primitive integral coordinates recover
-the paper's maximum-coordinate height. No counting estimate is assumed. -/
+the paper's maximum-coordinate height. -/
 
 @[expose] public section
 namespace CCDN

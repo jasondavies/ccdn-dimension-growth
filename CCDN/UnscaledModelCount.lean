@@ -111,7 +111,7 @@ theorem unscaled_plane_finite_count
       _ ≤ _ := le_max_right _ _
 
 /-- A sufficiently large coefficient forces the large-height branch
-and gives O(d^4), without any prime-selection assumption. -/
+and gives O(d^4). -/
 theorem unscaled_plane_finite_count_large_coefficient
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {t : ℕ}
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)

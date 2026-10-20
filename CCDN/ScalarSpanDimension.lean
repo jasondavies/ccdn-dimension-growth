@@ -32,7 +32,7 @@ lemma finrank_scalar_span_range_le {K L V A : Type*} [Field K] [Field L]
   change Module.finrank L W ≤ Fintype.card (Fin (Module.finrank K V)) at h
   simpa only [Fintype.card_fin] using h
 
-/-- A factorization through a K-linear image still bounds the dimension after
+/-- A factorization through a K-linear image bounds the dimension after
 extending the span to L. -/
 lemma finrank_scalar_span_range_le_of_ker_le {K L V W A : Type*} [Field K] [Field L]
     [Algebra K L] [AddCommGroup V] [Module K V] [Module.Finite K V]

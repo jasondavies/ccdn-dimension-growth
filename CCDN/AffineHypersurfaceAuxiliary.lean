@@ -67,9 +67,7 @@ lemma affineMinimumAuxiliaryBound_le_expression (n d : ℕ) {A B L b : ℝ}
 /-- Every primitive irreducible integer affine hypersurface admits the
 coefficient-sensitive auxiliary in the complete minimum form, using the
 defined geometric bad-prime factor (which includes degree-dropping primes).
-The constant depends only on the dimension. No chosen scaling prime,
-restricted box range, coefficient-size condition, absolute irreducibility,
-or auxiliary-existence premise remains. -/
+The constant depends only on the dimension. -/
 theorem affine_hypersurface_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f) (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :

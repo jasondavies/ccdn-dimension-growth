@@ -6,7 +6,8 @@ public import Mathlib.Algebra.Polynomial.Degree.TrailingDegree
 public import Mathlib.Algebra.MvPolynomial.CommRing
 
 /-! A polynomial deformation whose constant specialization is injective
-remains injective, including after adjoining the deformation parameters.+The proof uses the first nonzero coefficient, not a genericity assumption. -/
+remains injective, including after adjoining the deformation parameters.
+The proof uses the first nonzero coefficient. -/
 
 @[expose] public section
 namespace CCDN

@@ -59,7 +59,7 @@ theorem closedForm_kernel_finrank_le_one
   exact he ▸ hl.trans hs
 
 /-- The matrix on the 2*d² unknown coefficients has rank at least
-2*d²-1. No finite-field or Noether theorem is assumed in this statement. -/
+2*d²-1. -/
 theorem closedForm_coefficient_rank_lower
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] (d : ℕ)
     (f : F[X][X]) (hf : Irreducible f) (hm : f.Monic) (hdeg : f.degree = d) :

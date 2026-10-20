@@ -80,7 +80,7 @@ theorem linear_normalization_fiber_card_le_of_fractionField
     hbound.trans (Nat.pow_le_pow_left hrank (Fintype.card (Fin n)))
 
 /-- The fiber bound for the given normalization, with the function field
-and all degree estimates supplied by the coordinate ring. -/
+and all degree estimates derived from the coordinate ring. -/
 theorem linear_normalization_fiber_card_le
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
     (l : Fin (m + 1) → MvPolynomial (Fin n) ℚ)

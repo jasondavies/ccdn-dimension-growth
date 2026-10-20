@@ -4,7 +4,7 @@ public import CCDN.SharpBoundedBirationalCenter
 public import CCDN.BirationalComplementProjection
 public import CCDN.PolynomialPredicates
 
-/-! Unconditional bounded complementary projections at the height exponent
+/-! Bounded complementary projections at the height exponent
 of CCDN Section 5.1. The row-resultant detector constructs quadratic bounded
 integer center rows; the image is geometrically integral with the
 same degree. Centers in X0=0 and the dimension-zero boundary are included. -/
@@ -58,7 +58,7 @@ theorem exists_sharp_bounded_birational_projective_projection
     (r := n + 1 - m - 1) (m := m) (d := d) (by omega) (by omega)
     (hilbert_multiplicity_pos_of_prime J hdegree)
 
-/-- A bounded good center contained in X0=0 and the genuine complementary
+/-- A bounded good center contained in X0=0 and the complementary
 projection of the projective closure of an affine source. This also
 covers dimension zero and the zero-row (empty-center) boundary. -/
 theorem exists_sharp_bounded_fixed_coordinate_projection

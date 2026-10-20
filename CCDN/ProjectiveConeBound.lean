@@ -4,8 +4,8 @@ public import CCDN.ProjectiveZeroLocus
 public import CCDN.Plane
 
 /-! A projective point count is bounded by the integer count on its
-affine cone at the same height. Chosen primitive representatives supply the
-injection, so no height dilation or representative-choice premise is needed. -/
+affine cone at the same height. Chosen primitive representatives give a
+height-preserving injection. -/
 
 @[expose] public section
 namespace CCDN

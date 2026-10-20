@@ -5,7 +5,7 @@ public import CCDN.ScalingPrime
 
 /-! The affine exponent 1/d with the scaling prime constructed from Mertens.
 This branch assumes a nonzero constant coefficient of small logarithmic height;
-the sharp finite-field count is still an explicit geometric hypothesis. -/
+the sharp finite-field count is an explicit geometric hypothesis. -/
 
 @[expose] public section
 namespace CCDN

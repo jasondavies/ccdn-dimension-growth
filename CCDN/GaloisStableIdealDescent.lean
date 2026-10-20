@@ -5,8 +5,7 @@ public import CCDN.HilbertCoefficientEquiv
 
 /-! Galois-stable polynomial ideals descend to the fixed field. Standard
 monomial representatives of individual monomials construct fixed ideal
-generators, so neither geometric reducedness nor a supplied descent datum
-is needed. -/
+generators. -/
 
 @[expose] public section
 namespace CCDN

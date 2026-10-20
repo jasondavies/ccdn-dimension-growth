@@ -80,8 +80,7 @@ theorem quadratic_absolute_discriminant_square_le (hd : Module.finrank F K = 2) 
   simpa only [hd] using absolute_discriminant_power_le K F
 
 /-- Relative ramification index two forces the prime into the
-finite discriminant cover. No assumption of a supplied ramified-prime
-set is used. -/
+finite discriminant cover. -/
 theorem mem_discriminantPrimeIdealCover_of_ramification_two
     (Q : Ideal (𝓞 K)) [Q.IsPrime] (hQ : Q ≠ ⊥)
     (he : Q.ramificationIdx (𝓞 F) = 2) :

@@ -4,8 +4,7 @@ public import CCDN.PlaneFrobeniusAuxiliary
 public import CCDN.PlaneSingularities
 
 /-! The finite linear system producing Frobenius auxiliary coefficients.
-A strict dimension inequality supplies a nontrivial solution; no auxiliary
-polynomial or nonzero coefficient is assumed. -/
+A strict dimension inequality gives a nontrivial solution. -/
 
 @[expose] public section
 namespace CCDN

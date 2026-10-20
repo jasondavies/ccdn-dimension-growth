@@ -179,9 +179,10 @@ theorem height_two_eventual_slope_pos_of_point {K : Type*} [Field K]
   push_cast at hlo'
   omega
 
-/-- The original linear-growth interface now supplies a positive degree over
- any coefficient field with a point on the component. For arbitrary cutoffs,
- use height_two_eventual_slope_pos_of_point after the generalized growth bridge. -/
+/-- Under a linear bound on the filtered dimensions, a height-two component with
+ a point over the coefficient field has an eventually linear Hilbert function of
+ positive slope `d ≤ C`. For arbitrary cutoffs, use
+ height_two_eventual_slope_pos_of_point after the generalized growth bridge. -/
 theorem height_two_degree_exists_of_point {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
     (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) (C : ℕ)

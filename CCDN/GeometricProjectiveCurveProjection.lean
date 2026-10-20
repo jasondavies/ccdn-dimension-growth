@@ -6,9 +6,9 @@ public import CCDN.HilbertCoordinateIndependence
 public import CCDN.ProjectivePermutation
 public import CCDN.PolynomialPredicates
 
-/-! Choosing a proper coordinate chart internally closes the geometric
-projective-curve projection statement, uniformly for all heights. The
-coordinate permutation has no height cost and is chosen before the radius. -/
+/-! The geometric projective-curve projection statement, uniformly for all
+heights, obtained by choosing a proper coordinate chart. The coordinate
+permutation has no height cost and is chosen before the radius. -/
 
 @[expose] public section
 namespace CCDN
@@ -63,8 +63,7 @@ lemma projectionBoxFactor_le_degree_power (n : ℕ) {d : ℕ} (hd : 0 < d) :
     _ = _ := by simp only [mul_pow]; ring
 
 /-- Proposition 4.3.2 for curves, with a chart, birational map and
-geometrically integral degree-d image constructed before the radius. No
-supplied proper chart or rational point is needed. -/
+geometrically integral degree-d image constructed before the radius. -/
 theorem exists_geometric_projective_curve_projection
     {L : Type*} [Field L] [Algebra ℚ L] {n d : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]

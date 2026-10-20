@@ -5,9 +5,9 @@ public import CCDN.FieldBasisMultiplicationProduct
 public import CCDN.LatticePrescribedProduct
 public import CCDN.LatticeDiscriminantNumerics
 
-/-! Construct short independent algebraic integers at the uniform
-discriminant-root scale. Greedy lattice vectors, the multiplication
-pairing, and the covolume estimate are all proved inputs. -/
+/-! Short independent algebraic integers at the uniform discriminant-root
+scale, from greedy lattice vectors, the multiplication pairing, and the
+covolume estimate. -/
 
 @[expose] public section
 namespace CCDN
@@ -106,8 +106,7 @@ theorem exists_numberField_short_basis_of_degree
       (b.linearIndependent.notMem_span_image (not_lt_of_ge (Fin.le_last i)))).trans hlast
 
 /-- A real basis of integral lattice vectors with an explicit
-constant depending only on the field degree. No short-basis premise is
-left for the lattice counting application. -/
+constant depending only on the field degree. -/
 theorem exists_numberField_short_basis
     (hd : 2 ≤ Module.finrank ℚ K) :
     ∃ b : Basis (Fin (Module.finrank ℚ K)) ℝ (mixedEmbedding.euclidean.mixedSpace K),

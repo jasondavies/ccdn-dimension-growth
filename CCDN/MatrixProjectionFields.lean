@@ -6,7 +6,7 @@ public import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-! Kernel containment of matrices gives containment of their
 projected-coordinate fields. Equal centers therefore give the same image
-function field, without any assumption on the coordinate ideal. -/
+function field, for any coordinate ideal. -/
 
 @[expose] public section
 namespace CCDN

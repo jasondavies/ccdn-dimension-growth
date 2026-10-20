@@ -93,8 +93,8 @@ theorem projective_plane_primitive_absolute_count
   exact (projective_plane_finite_count_positioned f hf hd hprim hir z hz0 hinj hzprim hz hB hbox).trans
     (projective_positioned_bound_le (by omega) hB)
 
-/-- No coefficient normalization hypothesis is required for a rational
-absolutely irreducible plane equation. The constant is independent of its
+/-- The bound for an arbitrary rational absolutely irreducible plane equation,
+which need not be primitive or integral. The constant is independent of its
 coefficients, degree, and real height radius. -/
 theorem projective_plane_rational_absolute_count
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {d : ℕ}

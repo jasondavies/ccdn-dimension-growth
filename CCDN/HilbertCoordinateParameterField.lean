@@ -20,8 +20,7 @@ def coordinateParameterField {K F σ : Type*} [Field K] [Field F] [Algebra K F]
     algebraMap (MvPolynomial σ K ⧸ I) F ((Ideal.Quotient.mk I) (X i.val))))
 
 /-- There is a subset of coordinate functions whose generated field
-has finite extension degree at most the Hilbert multiplicity.
-No parameter field, normalization or finiteness premise is supplied. -/
+has finite extension degree at most the Hilbert multiplicity. -/
 theorem exists_finite_coordinate_parameter_field
     {K F σ : Type*} [Field K] [Field F] [Fintype σ] [LinearOrder σ] [Algebra K F]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]

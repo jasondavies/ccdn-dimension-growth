@@ -3,7 +3,7 @@ module
 public import CCDN.PrincipalSectionGridBound
 
 /-! A strict containment of affine prime ideals strictly lowers the
-Hilbert dimension. The proof uses a genuine polynomial in their difference. -/
+Hilbert dimension. The proof uses a polynomial in their difference. -/
 
 @[expose] public section
 namespace CCDN

@@ -64,8 +64,8 @@ abbrev IndependentCenterMatrix (K : Type*) [Field K] (r n : ℕ) :=
   {x : Fin r × Fin n → K //
     LinearIndependent K (fun i : Fin r => fun j : Fin n => x (i,j))}
 
-/-- The good-center locus; no detector polynomial is part of its
-definition. -/
+/-- The good-center locus: independent center matrices satisfying the
+good-center condition. -/
 def birationalMatrixCenterLocus {K : Type*} [Field K] {n r s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
     (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :

@@ -78,7 +78,7 @@ theorem bounded_degree_polynomial_parameters_rank_le
   exact hh
 
 /-- Clearing common denominators gives the same sharp bound for arbitrary
-independent functions in the genuine fraction field. -/
+independent functions in the fraction field. -/
 theorem bounded_degree_fraction_parameters_rank_le
     {K R F σ τ ι : Type*} [Field K] [Field R] [Field F]
     [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F]

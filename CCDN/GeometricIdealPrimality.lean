@@ -5,7 +5,7 @@ public import Mathlib.FieldTheory.AlgebraicClosure
 
 /-! Primality of polynomial ideals over an algebraically closed field
 survives arbitrary coefficient-field extensions. Coefficient-linear
-functionals reduce nonmembership to genuine base-field equations. -/
+functionals reduce nonmembership to base-field equations. -/
 
 @[expose] public section
 namespace CCDN
@@ -27,7 +27,7 @@ lemma coefficientLinearPolynomial_eval_base_point
       (eval (fun j => algebraMap K L (x j)) f)
 
 /-- Geometric primeness over an algebraically closed base is automatic for
-a prime ideal; no extension-primality hypothesis is required. -/
+a prime ideal. -/
 theorem prime_ideal_scalar_extension_of_isAlgClosed
     {K L : Type*} [Field K] [IsAlgClosed K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
@@ -100,8 +100,8 @@ lemma ideal_scalar_extension_tower
   exact (IsScalarTower.algebraMap_apply K L E (f.coeff e)).symm
 
 /-- Primality after base change to the algebraic closure implies primality
-after every coefficient-field extension. This discharges geometric
-primality at transcendental universal coefficient fields as well. -/
+after every coefficient-field extension, including transcendental
+universal coefficient fields. -/
 theorem prime_ideal_scalar_extension_of_algebraicClosure
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))

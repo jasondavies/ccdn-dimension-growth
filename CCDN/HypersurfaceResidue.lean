@@ -5,7 +5,7 @@ public import CCDN.PlaneMultiplicity
 
 /-! Singular local determinant bounds at a residue point in arbitrary
 dimension. Multiplicity is obtained from the first nonzero translated homogeneous
-component; no local model or counting estimate is supplied as a hypothesis. -/
+component. -/
 
 @[expose] public section
 namespace CCDN

@@ -5,7 +5,7 @@ public import CCDN.ClosedFormRank
 
 /-! Scaling the defining equation by a nonzero constant preserves the matrix
 rank. This permits monic normalization over fields without enlarging integer
-coefficients or clearing new denominators. -/
+coefficients or clearing extra denominators. -/
 
 @[expose] public section
 namespace CCDN

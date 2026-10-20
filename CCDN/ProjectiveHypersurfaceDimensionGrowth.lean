@@ -25,7 +25,7 @@ theorem nonabsolute_projective_hypersurface_dimension_growth {K : Type*}
 
 /-- Large-degree CCDN dimension growth for every rationally irreducible
 projective hypersurface in projective space of dimension at least two.
-Absolute irreducibility is not an assumption of this endpoint. -/
+The hypersurface need not be absolutely irreducible. -/
 theorem projective_hypersurface_dimension_growth_large_degree (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (n + 3)) ℚ,

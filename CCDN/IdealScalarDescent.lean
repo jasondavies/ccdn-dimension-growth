@@ -49,8 +49,7 @@ theorem scalar_extension_not_le
   intro f hf
   exact (mem_ideal_scalar_extension_iff J f).mp (h (Ideal.mem_map_of_mem _ hf))
 
-/-- Some coefficient functional detects nonmembership in an extended ideal.
-No basis, coefficient decomposition or separating functional is supplied. -/
+/-- Some coefficient functional detects nonmembership in an extended ideal. -/
 theorem exists_coefficientLinearPolynomial_not_mem
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (J : Ideal (MvPolynomial (Fin n) K)) (g : MvPolynomial (Fin n) L)

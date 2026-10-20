@@ -81,7 +81,7 @@ theorem bounded_degree_normalization_fiber_card_le_of_fractionField
     hbound.trans hrank
 
 /-- The fiber bound for the given normalization, with the function field
-and all degree estimates supplied by the coordinate ring. -/
+and degree estimates obtained from the coordinate ring. -/
 theorem bounded_degree_normalization_fiber_card_le
     {K : Type*} [Field K] [CharZero K] {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (q : ℕ) (hq : 0 < q)

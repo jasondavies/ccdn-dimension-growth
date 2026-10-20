@@ -5,7 +5,7 @@ public import CCDN.PrincipalWeightedHomogeneous
 public import CCDN.ChowIncidenceBaseChange
 
 /-! Constructed incidence equations with separate homogeneity and
-geometric irreducibility. Their exact block degree is not assumed or claimed. -/
+geometric irreducibility. -/
 
 @[expose] public section
 namespace CCDN

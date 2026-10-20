@@ -120,8 +120,7 @@ theorem IsGreedyLatticeFamily.norm_mono
   apply hv.2.2 i (v j) (hv.2.1 j)
   exact hv.1.notMem_span_image (not_lt_of_ge hij)
 
-/-- A real basis formed by successive lattice minima, with no
-chosen independent family or basis supplied as an input. -/
+/-- A real basis formed by successive lattice minima. -/
 theorem exists_greedy_lattice_basis
     (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L] :
     ∃ b : Basis (Fin (Module.finrank ℝ E)) ℝ E, IsGreedyLatticeFamily L b := by

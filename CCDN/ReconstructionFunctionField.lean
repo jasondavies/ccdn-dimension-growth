@@ -3,7 +3,7 @@ module
 public import CCDN.CurveRationalInverse
 public import CCDN.ProjectionFractionField
 
-/-! Polynomial reconstruction identities prove genuine generation of the
+/-! Polynomial reconstruction identities prove generation of the
 source function field. This is the converse to the rational-inverse
 construction, and makes birationality explicit in counting projections. -/
 

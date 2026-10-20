@@ -42,7 +42,7 @@ theorem exists_originLayer_generators {K : Type*} [Field K] {n : ℕ}
   have hsum := congrArg Subtype.val (b.sum_repr ubar)
   simpa only [Submodule.coe_sum, Submodule.coe_smul] using hsum.symm
 
-/-- The singular multiplicity gives genuine homogeneous local generators at
+/-- The singular multiplicity gives homogeneous local generators at
 all weights, with at most μ generators at each weight. -/
 theorem exists_plane_origin_generators {K : Type*} [Field K] {μ : ℕ}
     (f : MvPolynomial (Fin 2) K) (hf : f ∈ idealOfVars (Fin 2) K ^ μ)

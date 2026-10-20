@@ -53,7 +53,7 @@ theorem exists_nonzero_birational_center_detector
 
 /-- The chosen detector remains nonzero after restricting to center
 matrices whose first column is zero. The witness is constructed from the
-affine ideal, rather than supplied as a genericity assumption. -/
+affine ideal. -/
 theorem exists_nonzero_fixed_coordinate_center_detector
     {K : Type*} [Field K] [CharZero K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]

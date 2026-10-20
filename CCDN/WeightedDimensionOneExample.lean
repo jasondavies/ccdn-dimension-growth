@@ -7,7 +7,7 @@ public import Mathlib.Data.Nat.Cast.Order.Field
 /-! The arbitrary-profile dimension-one boundary of CCDN Lemma 2.2 is
 false if its displayed k^(n-2) term is interpreted as 1/k.
 Factorial multiplicities make the harmonic excess exact on long blocks.
-This does not affect the genuine hypersurface profile, whose layers are
+This does not affect the hypersurface profile, whose layers are
 bounded by the multiplicity itself. -/
 
 @[expose] public section

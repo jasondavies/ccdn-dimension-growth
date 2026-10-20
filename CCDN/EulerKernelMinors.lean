@@ -2,7 +2,7 @@ module
 
 public import CCDN.EulerFactorKernel
 
-/-! A genuine nonzero Euler kernel vector forces every maximal universal
+/-! A nonzero Euler kernel vector forces every maximal universal
 coefficient minor to vanish after specialization. -/
 
 @[expose] public section

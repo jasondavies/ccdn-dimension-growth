@@ -38,7 +38,7 @@ theorem degree_mul_affineAuxiliaryDegreeExpression (d : ℕ) (B L b : ℝ) :
 
 /-- Integral points satisfy the complete coefficient-sensitive
 bound, with the original leading homogeneous coefficient height and a
-single absolute constant. No geometric irreducibility is assumed. -/
+single absolute constant. The equation need only be irreducible over ℚ. -/
 theorem affine_plane_coefficient_count
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))

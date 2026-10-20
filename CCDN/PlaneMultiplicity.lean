@@ -10,8 +10,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The first nonzero homogeneous component realizes the order at the origin.
-No multiplicity or ideal-power membership is supplied as a hypothesis. -/
+/-- The first nonzero homogeneous component realizes the order at the origin. -/
 theorem exists_origin_multiplicity {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (hf : f ≠ 0) (hz : eval (0 : σ → K) f = 0) :
     ∃ μ : ℕ, 0 < μ ∧ μ ≤ f.totalDegree ∧
@@ -103,7 +102,7 @@ lemma eval_zero_originShift {R σ : Type*} [CommRing R] (a : σ → R)
     rw [hf]
     simp [originShift]
 
-/-- A genuine reduced point of a nonzero equation has a positive multiplicity,
+/-- A reduced point of a nonzero equation has a positive multiplicity,
 measured after translation, at most the original integer equation's degree. -/
 theorem exists_reduction_multiplicity {p : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ) (a : Fin 2 → ℤ)

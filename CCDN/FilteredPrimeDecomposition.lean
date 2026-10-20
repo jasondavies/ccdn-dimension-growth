@@ -6,8 +6,8 @@ public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 public import Mathlib.RingTheory.Polynomial.Basic
 
 /-! Finite minimal-prime components and their filtered dimension budget.
-The existence of eventual linear Hilbert functions is a separate requirement;
-the component family and zero-set cover are constructed here. -/
+The component family and zero-set cover are constructed here; eventual
+linearity of their Hilbert functions is a separate hypothesis. -/
 
 @[expose] public section
 namespace CCDN
@@ -127,7 +127,7 @@ lemma idealZeroLocus_polynomialSectionIdeal {n : ℕ} (f g : CoordinatePolynomia
     exact fun p hp => hI hp
 
 /-- A finite, distinct family of prime components with equation
-containment and an exact rational-zero cover. No component family is supplied. -/
+containment and an exact rational-zero cover. -/
 theorem exists_polynomialSection_prime_components {n : ℕ}
     (f g : CoordinatePolynomial n) :
     ∃ S : Finset (Ideal (CoordinatePolynomial n)),

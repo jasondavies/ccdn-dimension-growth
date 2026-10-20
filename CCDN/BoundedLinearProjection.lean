@@ -52,7 +52,7 @@ lemma scalar_complement_projection_kernel {K ι κ : Type*} [Field K]
       Matrix.mul_one, Matrix.smul_mulVec, sub_self]
 
 /-- Constructing the matrix requires only independent bounded integer rows.
-In particular its nonvanishing off their span is proved, not assumed. -/
+In particular it is nonvanishing off their span. -/
 theorem exists_bounded_integer_scaled_projection {s r : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin r) ℤ)
     (hli : LinearIndependent ℚ (fun i => fun j => (A i j : ℚ)))
@@ -215,7 +215,7 @@ theorem projective_linear_map_height {m n : ℕ}
     (primitiveProjectiveRep_bound x) hw0
 
 /-- The linear-algebra and height part of projection from a bounded
-rational center: a genuine scalar-idempotent matrix, defined away from
+rational center: a scalar-idempotent matrix, defined away from
 exactly that center, with a uniform projective height estimate. -/
 theorem exists_bounded_projective_projection {s n : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) ℤ)

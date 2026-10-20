@@ -106,7 +106,7 @@ lemma graphHyperplaneRestriction_planeSection {K σ : Type*}
   | some i => rfl
 
 /-- Full degree and irreducibility of a concrete contained plane force both
-properties for the containing hyperplane, without a Bertini assumption. -/
+properties for the containing hyperplane. -/
 theorem graphHyperplaneRestriction_irreducible_of_plane
     {K σ : Type*} [Field K] [Infinite K] [Fintype σ]
     (f : MvPolynomial (Option σ) K) (a : σ → K)

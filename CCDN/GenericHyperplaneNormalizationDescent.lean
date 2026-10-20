@@ -5,7 +5,7 @@ public import CCDN.GeometricIdealPrimality
 
 /-! Generic homogeneous normalization over the coefficient field itself.
 The algebraic closure is used only to test the zero fiber, and
-geometric primality is discharged from the base algebraic closure. -/
+geometric primality is deduced from the base algebraic closure. -/
 
 @[expose] public section
 namespace CCDN

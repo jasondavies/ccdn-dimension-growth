@@ -56,7 +56,7 @@ lemma universalPlaneLeading_map {K L σ : Type*} [Field K] [Field L]
   simp only [universalPlaneLeading, ht, universalPlanePolynomial_map, bivariateMap_coeff]
 
 /-- Geometric irreducibility and the characteristic bound suffice for the
-leading polynomial to be nonzero; no rational good direction is assumed. -/
+leading polynomial to be nonzero. -/
 theorem universalPlaneLeading_ne_zero
     {K σ : Type*} [Field K] [Fintype σ] {p : ℕ} [CharP K p]
     (f : MvPolynomial (Option σ) K)

@@ -5,8 +5,8 @@ public import CCDN.PrimeSums
 import all ArithmeticHeights.BombieriVaaler
 
 /-! The global determinant estimate for points with smooth reduction at the
-selected primes. Finite-field point counts and the excluded-prime set remain
-explicit geometric inputs. Local divisibility is proved, not assumed. -/
+selected primes. Finite-field point counts and the excluded-prime set are
+explicit geometric hypotheses. -/
 
 @[expose] public section
 namespace CCDN

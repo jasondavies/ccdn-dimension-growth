@@ -6,7 +6,7 @@ public import CCDN.PolynomialPredicates
 
 /-! Full CCDN affine hypersurface dimension growth and its projective
 hypersurface consequence, in every degree at least five. Rational
-coefficient clearing is constructed internally. The projective endpoint
+coefficients are cleared to integers. The projective endpoint
 also includes rationally irreducible equations which split geometrically. -/
 
 @[expose] public section
@@ -60,9 +60,9 @@ theorem absolute_projective_hypersurface_dimension_growth (n : ℕ) :
     (hbound f htop hd B hB)
 
 
-/-- CCDN Theorem 1 dimension growth in every degree at least five for every rationally irreducible
-projective hypersurface in projective space of dimension at least two.
-Absolute irreducibility is not an assumption of this endpoint. -/
+/-- CCDN Theorem 1 dimension growth in every degree at least five for every
+rationally irreducible projective hypersurface in projective space of dimension
+at least two. Unlike the paper, the equation may split geometrically. -/
 theorem projective_hypersurface_dimension_growth (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (n + 3)) ℚ,

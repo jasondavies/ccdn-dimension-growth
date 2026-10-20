@@ -61,7 +61,7 @@ theorem idealZeroLocus_span_singleton {n : ℕ} (f : CoordinatePolynomial n) :
     rw [MvPolynomial.eval_mul, show MvPolynomial.eval x f = 0 from hx, zero_mul]
 
 /-- The final sharp intersection step for an auxiliary polynomial. Its degree
-and nondivisibility must still be supplied by the determinant method. -/
+and nondivisibility come from the determinant method. -/
 theorem count_plane_common_zeros_le (f g : CoordinatePolynomial 2)
     (hf : Irreducible f) (hfg : ¬ f ∣ g) (B : ℝ) :
     count (zeroLocus f ∩ zeroLocus g) B ≤ f.totalDegree * g.totalDegree := by

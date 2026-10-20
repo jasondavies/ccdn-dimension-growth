@@ -13,8 +13,7 @@ noncomputable section
 open MvPolynomial Finset
 
 /-- The global determinant contribution and all prescribed smooth-prime
-contributions hold simultaneously. No divisor or finite-field point-count
-estimate is assumed. -/
+contributions hold simultaneously. -/
 theorem exists_smooth_congruence_determinant_log_lower
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K]
     {n s N d M : ℕ} (hs : 0 < s)

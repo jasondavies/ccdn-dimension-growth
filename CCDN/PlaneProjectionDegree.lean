@@ -4,7 +4,7 @@ public import CCDN.PlaneProjectionKernel
 public import CCDN.NonabsolutePlaneCount
 
 /-! The irreducible image equation has degree at most the original affine
-Hilbert degree. This is an upper bound; preservation of degree is not assumed. -/
+Hilbert degree. This is an upper bound; the degree need not be preserved. -/
 
 @[expose] public section
 namespace CCDN

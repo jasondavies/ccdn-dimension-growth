@@ -52,8 +52,8 @@ theorem exists_origin_truncation_generators {K : Type*} [Field K] {n : ℕ}
   choose r g hr hg hs using fun k => exists_originLayer_generators f k
   exact ⟨r, g, hr, hg, origin_layers_generate_truncation f r g hs⟩
 
-/-- Genuine finite-precision weighted generators for any plane equation of
-multiplicity μ. No graded-ring presentation or spanning hypothesis is assumed. -/
+/-- Finite-precision weighted generators for any plane equation of
+multiplicity μ. -/
 theorem exists_plane_truncation_generators {K : Type*} [Field K] {μ : ℕ}
     (f : MvPolynomial (Fin 2) K) (hf : f ∈ idealOfVars (Fin 2) K ^ μ)
     (hμ : homogeneousComponent μ f ≠ 0) :
