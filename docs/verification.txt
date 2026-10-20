@@ -1730,3 +1730,52 @@ Log: /tmp/ccdn-main-results-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-main-results-checkpoint-sync.json
 Source inventory: /tmp/ccdn-main-results-checkpoint-inventory.json (585 files)
 Inventory SHA256: dc57fb94915db733140fa116b21c2f5fcab1267cf23cbb6bda0fb902ba2269d3
+
+
+
+2026-10-20: exact local determinants, pure grid counts and universal plane minors
+-----------------------------------------------------------------------------
+Integrated twenty-nine new mathematical modules with root imports and endpoint
+audits. Full Lemma 2.4 is proved by primeInteger_local_enumerated_weight_det for
+arbitrary Noetherian local rings with actual evaluation maps into Z_(p). It
+retains the exact local-layer weight sum. The residue map, layer generators,
+ideal-power quotient identification and lifting factorization are constructed.
+primeInteger_local_det_profile_dichotomy constructs initial weights or proves
+the determinant zero if the actual finite profile has insufficient capacity.
+
+Full Lemma 4.1.1 is proved by pure_ideal_grid_card_le over characteristic-zero
+fields in every finite ambient dimension. Actual pure Hilbert dimension m
+and multiplicity d give the exact d*|S|^m count, hence d*(2B+1)^m for rational
+integer-box points. The proof constructs polynomial normalization, actual
+minimal-prime components, and their additive degree budget. IntegralFiberRank
+bounds fibers by the function-field rank itself. SharpProjectiveProjection
+uses the sharp fiber estimate to construct a finite birational projection of
+the same degree d, with exact factor d in the projective count comparison and
+height cost C(n)*d^(2*(n+1)).
+
+ProperSectionHilbert proves actual dimension drop and the leading-coefficient
+bound for a proper section. LowDegreePointSeparation constructs degree-at-most-d
+equations separating any outside point over an algebraically closed
+characteristic-zero field, including dimension zero. Section purity and the
+full geometric-component counting argument remain open.
+
+Seven Euler modules construct the constrained plane differential matrix with
+d^2-1 columns for d>=2 and universal integer determinant forms homogeneous of
+degree d^2-1. Specialization is proved over arbitrary commutative rings, and
+some form is nonzero for normalized absolutely irreducible plane equations
+in characteristic zero. All-characteristic reducibility vanishing, the exact
+published coefficient-norm bound and the full higher-dimensional universal
+theorem remain open. The exact printed small-kernel-vector constant also
+remains open; the existing cofactor estimate is distinguished in the ledger.
+Full-paper completion is not claimed.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 638 reachable modules.
+Full build: 9688 jobs, PASS.
+Transitive audit: 3523 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Log: /tmp/ccdn-exact-lemmas-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-exact-lemmas-checkpoint-sync.json
+Source inventory: /tmp/ccdn-exact-lemmas-checkpoint-inventory.json (614 files)
+Inventory SHA256: 3e3fea1ab8ad8d810e78eb23012aba148651f7c3a7bc1e6d942d610e97efc4e7

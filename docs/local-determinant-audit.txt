@@ -101,6 +101,33 @@ counterexample to the full global Proposition3.2.6.
 
 The three modules and their endpoints are included in the root import and
 transitive axiom audit. See verification.txt for the canonical build result.
-Exact Lemma 2.1 local-ring Hilbert equality, its sharper multiplicity-
-independent pointwise remainder, and general Noetherian Lemma 2.4 remain
-outside the proved scope.
+Exact Lemma 2.1 local-ring Hilbert equality and its sharper multiplicity-
+independent pointwise remainder remain outside the proved scope.
+
+4. General Noetherian-local determinant lemma
+
+PrimeIntegerLocalDeterminant proves exact Lemma 2.4 with the actual target
+Z_(p), constructed as Localization.AtPrime(span{p:Z}). Its residue map to
+ZMod p and kernel span{p} are proved from localization.
+
+The source is an arbitrary commutative Noetherian local ring R. The actual
+evaluation maps R -> Z_(p) supply the residue-field identification. No
+chosen inclusion Z_(p) -> R is needed. localPrimeLayerDimension measures the
+image of the kth maximal-ideal power in A/m_A^(k+1), where A=R/(p).
+IdealAdicLayerQuotient identifies that image with the literal quotient
+m_A^k/m_A^(k+1); the residue-field equivalence identifies its scalar field.
+
+primeInteger_local_enumerated_weight_det gives the exact exponent from a
+monotone enumeration with the actual layer multiplicities. The finite-layer
+generators and lifting factorizations are constructed from Noetherianity.
+ExactFiltrationWeights constructs finite initial segments and proves their
+minimal-weight property, including profiles with zero layers.
+
+primeInteger_local_det_profile_dichotomy handles finite profiles without an
+extra capacity assumption: it constructs the first s weights and their
+determinant divisor, or proves the determinant zero by Krull intersection
+when the profile has fewer than s weights.
+
+This closes the full local-ring scope of Lemma 2.4. It does not close the
+remaining exact 2.1/2.3 interfaces or repair the mixed-degree normalization
+issue in Corollary 2.5.

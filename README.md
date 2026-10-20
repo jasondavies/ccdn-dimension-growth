@@ -48,6 +48,21 @@ remain open. The
 [full-paper ledger](docs/full-paper-plan.txt) records the complete scope
 and the external inputs that must be proved.
 
+The general Noetherian-local determinant lemma (2.4) is proved in
+`primeInteger_local_enumerated_weight_det`, with the actual target
+`ℤ_(p)` and the exact sum of local-layer weights. The finite-profile version
+constructs those weights, or proves the determinant zero when there are too few.
+The local generators and residue-field identifications are proved internally.
+
+`pure_ideal_grid_card_le` proves Lemma 4.1.1 in every finite ambient dimension
+over characteristic-zero fields: a pure-dimensional ideal of dimension `m`
+and Hilbert multiplicity `d` has at most `d*|S|^m` zeros in the grid `S`.
+Its rational-box consequence is `d(2B+1)^m`. The proof constructs the
+minimal-prime component degree budget and bounds actual integral fibers by
+function-field rank. `exists_sharp_projective_projection` also gives the
+exact factor `d` in the count comparison for a constructed finite birational
+projective projection, with polynomial height cost.
+
 The higher-dimensional bad-prime height estimate (CCDN Corollary 3.2.3) is
 also proved. `hypersurface_bad_prime_factor_max` bounds the actual bad-prime
 factor by a dimension-dependent constant times `max(log(H)/d², 1)`, where
@@ -55,6 +70,13 @@ factor by a dimension-dependent constant times `max(log(H)/d², 1)`, where
 integer plane specialization, a nonzero integer witness and its height bound.
 It includes degree-dropping reductions. The exact universal Noether-form
 statement in Theorem 3.2.2 remains open.
+
+The Euler-constrained plane construction now produces universal integer
+determinant forms homogeneous of degree `d²−1` for `d ≥ 2`. Specialization is
+proved over arbitrary commutative rings, and some form is nonzero on each normalized
+absolutely irreducible plane equation in characteristic zero. Reducibility
+vanishing in every characteristic, the printed coefficient-norm bound and
+the full higher-dimensional universal theorem remain open.
 
 The higher-dimensional simultaneous-prime determinant estimate is proved for
 maximal minors of common-degree homogeneous evaluation matrices. It retains

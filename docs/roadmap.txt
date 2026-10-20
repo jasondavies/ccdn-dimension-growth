@@ -90,9 +90,11 @@ A. Local algebra and multiplicity: Section 2, especially Lemma 2.4 and
    using the actual translated mod-p equation. Every graded layer has at most
    mu homogeneous generators, and finite-precision lifting gives the exponent
    sum_{i<s} floor(i/mu) >= s^2/(2*mu)-s. The singular plane local-algebra
-   obligation is closed. The general higher-dimensional hypersurface version
-   of CCDN Lemma 2.4 is not claimed; the plane counting route needs the case
-   implemented here.
+   obligation is closed. The subsequent hypersurface modules extend the
+   multiplicity estimate to every dimension. PrimeIntegerLocalDeterminant
+   now proves full Lemma 2.4 for arbitrary Noetherian local rings, with actual
+   Z_(p) targets and exact layer weights. Its finite-profile dichotomy
+   constructs the first s weights or proves the determinant zero.
 B. Aggregate residue classes (Proposition 2.6). The numerical convexity estimate
    preserving the leading constant and the resulting logarithmic prime-product
    lower bound are proved in ResidueAggregation. BlockDeterminant now proves
