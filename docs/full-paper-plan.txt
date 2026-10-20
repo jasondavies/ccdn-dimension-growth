@@ -749,22 +749,23 @@ Section 4:
     C*d^4*(log|c_d*c_e|+1)*B^(1/d). Support and nonzero endpoint coefficients
     give irreducibility over every field; every bad prime divides c_d*c_e.
     Primitive normalization and the bad-prime estimate are internal;
-4.3.1 bounded affine projection: the curve clause is PROVED by
+4.3.1 bounded affine projection: PROVED in every source dimension by
+    exists_geometrically_integral_affine_projection. The actual integer
+    projection is finite and birational, with geometrically integral image
+    equation of exactly degree d, actual kernel ideal, count factor d,
+    and box cost C(n)*d^(2*n). affine_variety_projection_constants chooses
+    C(n)>0 and exponent 2*n before all source dimensions, ideals, degrees
+    and radii. ClosureProjectionBirational supplies the actual closure
+    function-field identity; Hilbert comparison gives exact degree. The
+    zero-dimensional case constructs the rational point, proves its Hilbert
+    polynomial is 1, and gives the required integer projection. Ambient
+    dimension zero is included. The curve clause is PROVED by
     exists_geometric_affine_curve_projection. The actual geometrically
     integral plane image has degree d, constructed rational-function-field
     identity, additive count error d^2, and height cost C(n)*d^(2*n).
     The underlying exists_geometric_affine_curve_count_reduction retains
     the stronger additive error d*(d-1).
-    The projection and image precede B. For every positive source dimension,
-    exists_bounded_affine_birational_projection now constructs a bounded
-    integer finite birational affine projection, an irreducible image
-    equation of degree at most d, and a finite actual closure map fixing X0.
-    ProjectiveClosureHilbertPolynomial proves dimension and multiplicity
-    under closure. AffineProjectionDegree gives exact degree from a finite
-    birational closure map, but its field-generation hypothesis is not yet
-    discharged for the constructed map. AffineLinearCountTransfer proves
-    count transfer from actual finite fibers. The final general affine
-    exact-degree/factor-d assembly and dimension-zero case remain OPEN;
+    The projection and image precede B;
 4.3.2 bounded projective projection: PROVED by
     exists_geometrically_integral_projective_projection. The constructed
     finite birational integer projection has geometrically integral image
@@ -836,21 +837,46 @@ Section 5:
     exists_center_projection_source_height. The constructed idempotent has
     exactly the center as its kernel and a complementary image of dimension
     m+2. Its formula, integral representatives and common denominator are
-    proved; a coordinate vanishing on the center is preserved. Existence of
-    a geometrically good center with the required row bound remains OPEN,
-    so the full statement is not yet proved;
+    proved; a coordinate vanishing on the center is preserved.
+    exists_geometric_birational_projection_center constructs an actual
+    center of vector dimension n-m-1, geometrically disjoint from the source,
+    inducing a finite birational projection with geometrically integral
+    image of exactly degree d. IndependentBirationalProjection includes
+    degree one without changing the existing projection-matrix bound.
+    The sharper required bound on a basis of the center remains OPEN,
+    so the full quantitative statement is not yet proved;
 5.2 polynomial detecting bad centers on the Grassmannian: the literal
     strict degree bound has a FORMALLY VERIFIED BOUNDARY OBSTRUCTION for
     m=0,d=1. An actual geometrically integral degree-one point and actual
     one-row Plucker minors are constructed. Every nonempty center locus
     satisfying disjointness has nonempty proper complement, which degree<1
     equations cannot define. The full birational good-center locus is not
-    constructed by this obstruction theorem. In positive dimension, the
-    actual Chow-incidence elimination ideal is proved prime, separately
-    homogeneous in all hyperplane blocks, and nonzero for more hyperplanes
-    than the actual affine dimension; an irreducible equation is constructed.
-    Principality, exact block degree, field-base-change equality, and the
-    Grassmannian detector/degree estimate remain OPEN. The printed Noether
+    constructed by this obstruction theorem. In positive ambient dimension,
+    the actual incidence ideal for m+1 hyperplanes on a dimension-m prime
+    affine ideal is now PROVED principal, with an irreducible generator
+    homogeneous separately in every hyperplane block. The source dimension
+    is the actual Hilbert degree; no generic-independence or principality
+    premise is supplied. Field-base-change equality is PROVED for arbitrary
+    source ideals, giving geometric irreducibility of the generator for
+    geometrically integral sources. ProjectiveChowIncidence proves equality
+    with the vanishing ideal of actual full projective incidence on the
+    closure, including infinity. ProjectiveIncidenceClosed proves that the
+    actual projective incidence image is closed, even for arbitrary
+    homogeneous source ideals over algebraically closed fields.
+    ProjectiveChowEquation gives the exact
+    intersection criterion for the constructed irreducible generator,
+    including algebraically closed coefficient extensions. Exact block
+    degree d and the Grassmannian detector/degree estimate remain OPEN.
+    GenericHyperplaneNormalization proves actual integral normalization
+    and independent coordinates for algebraically independent hyperplane
+    coefficients over an algebraically closed extension preserving source
+    primeness. The finite-module conclusion is constructed from no common
+    projective zero, rather than supplied. ChowIncidenceHeight proves the
+    actual incidence ideal has height one.
+    HomogeneousNormalizationRank proves exact fraction-field rank d for
+    homogeneous prime finite linear normalization in characteristic zero;
+    its identification with the Chow block degrees remains OPEN.
+    The printed Noether
     composition degree calculation is also not justified by the stated
     degree bounds; this is a proof gap, not a positive-dimensional
     counterexample. See docs/projection-center-audit.txt;
@@ -1117,10 +1143,11 @@ Projection kernels, ranks, idempotence up to scale and heights are explicit.
 A nonzero polynomial in maximal minors, with an actual rational full-rank
 witness, has an integer full-rank witness with entries at most r*(deg(F)+1).
 The later Hilbert modules below construct bounded-degree contraction equations
-and integral elimination preserving dimension. The geometric good-center
-witness of the literal Section 5.1/5.2 statements remains open. A different
-constructive route now proves bounded birational degree-preserving projection,
-as recorded below. It does not claim the printed bad-center degree bounds.
+and integral elimination preserving dimension. GeometricProjectionCenter now
+constructs an actual good center, including degree one. Its sharper center-basis
+height bound and the Section 5.2 bad-center degree estimate remain open.
+The constructive route below proves bounded birational degree-preserving
+projection without claiming the printed bad-center degree bounds.
 
 ClassGroupTwoTorsion and ClassGroupIdealRescaling construct actual integral
 ideal representatives and injective principal-square generators for class

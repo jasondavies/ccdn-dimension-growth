@@ -25,9 +25,25 @@ Q preserves that coordinate and (Pz)_j=D*z_j. This gives the fixed nonzero
 denominator needed for the affine application.
 
 The construction uses a common nonzero minor and its cofactors. It does
-not use Lemma 5.4's incorrect square-root constant. It does not supply a
-center disjoint from a given variety or prove generic birationality. The
-geometrically good center and its required row bounds remain obligations.
+not use Lemma 5.4's incorrect square-root constant. This construction from
+bounded center rows is distinct from constructing a geometrically good center.
+
+GeometricProjectionCenter now constructs such a center as the kernel of an
+actual integer matrix. Its vector dimension is n-m-1, it is disjoint from
+the variety over extension fields, and its projection is finite and
+birational with geometrically integral image of exactly degree d.
+IndependentBirationalProjection ensures full row rank even in degree one:
+if the primitive row is redundant, the normalization already generates
+the field and a standard unit row replaces it. The original integer
+projection-matrix bound is preserved. This proves good-center existence,
+but the sharper required bound on a basis of the center remains open.
+
+IntegralProjectionSpecialization supplies monic coordinate equations on
+every geometric fiber. HomogeneousProjectionNoBasePoint uses them to rule
+out nonzero points in the projection kernel over every infinite extension
+field. IntegralProjectionImage also proves that an integral polynomial map
+over an algebraically closed field has image exactly the zero locus of its
+kernel, using lying over and the Nullstellensatz.
 
 ZeroColumnMinorSpecialization strengthens the proved polynomial
 specialization step of Lemma 5.3 to preserve any specified zero columns.
@@ -73,9 +89,51 @@ ChowIncidenceNonzero proves the kernel nonzero when the number of
 hyperplanes exceeds the actual filtered Hilbert dimension. Consequently,
 ChowIncidenceEquation constructs an actual irreducible equation vanishing
 on the incidence set. None of these conclusions assumes a supplied Chow
-form. Principality, exact multidegree (d,...,d), field-base-change equality,
-identification with the full projective incidence locus, and the Grassmannian
-detector remain to be proved.
+form.
+
+ChowIncidencePrincipal now proves principality for m+1 hyperplanes on a
+prime affine ideal of dimension m in positive ambient dimension. Generic
+linear independence is constructed by deformation from an actual
+normalization; a proper-section Hilbert argument proves that the kernel
+is principal. PrincipalWeightedHomogeneous proves the generator homogeneous
+separately in every hyperplane block. ChowIncidenceBaseChange proves exact
+commutation with arbitrary field extension, for every source ideal.
+ChowIncidenceForm constructs an absolutely irreducible generator when the
+source is geometrically integral. No supplied Chow equation, genericity
+or principality assumption remains in these results.
+
+ProjectiveChowIncidence identifies this ideal with the vanishing ideal of
+the full projective incidence locus on the actual closure. Polynomial pivot
+parametrization and vanishing on a nonempty open part of a prime variety
+cover the points at infinity. ProjectiveIncidenceClosed proves closedness
+of the actual projective incidence image for every homogeneous ideal
+over an algebraically closed field.
+An empty fiber gives a positive power of the irrelevant ideal contained
+in the incidence relations. Their degree-component coefficient matrix
+then supplies a determinant which separates that fiber from the incidence
+locus. ProjectiveChowEquation combines closedness with the constructed
+generator: its vanishing is equivalent to actual projective intersection,
+also after algebraically closed coefficient extension. The exact multidegree
+(d,...,d) and the Grassmannian detector still remain to be proved.
+
+GenericHyperplaneNormalization supplies actual integral normalization and
+independent coordinates for algebraically independent hyperplane coefficients
+over an algebraically closed extension where the source stays prime.
+GenericHyperplaneAvoidance proves that these hyperplanes have no common
+projective point. BalancedParameterFiniteness constructs finite module
+generators from the resulting coordinate-power relations. The source is not
+assumed finite over the parameters. ChowIncidenceHeight also proves that the
+constructed principal incidence ideal has height exactly one. A named
+universal coefficient-field construction and the exact degree computation
+are not claimed by these statements.
+
+HomogeneousNormalizationRank proves exact fraction-field rank d over the
+actual parameter subfield of a homogeneous prime finite linear normalization
+in characteristic zero. It constructs a primitive linear coordinate and its
+homogeneous image equation, proves the equation monic up to a unit, and
+identifies its degree with the field degree. This removes the normalization
+rank obligation; identifying that rank with every Chow block degree is still
+required.
 
 ChowPolynomialPower proves a separate algebraic step in (5-3): nonzero
 polynomials with the same geometric zero locus, one irreducible, differ
@@ -95,13 +153,21 @@ treated as a formal theorem.
 4. General affine projection
 ----------------------------
 
-The bounded closure-normalization modules construct a bounded integer
-finite birational affine projection in positive source dimension whose
-actual closure map is finite and fixes X0. Its irreducible image equation
-currently has degree at most d. ProjectiveClosureHilbertPolynomial proves
-that closure raises filtered dimension by one and preserves multiplicity.
-AffineProjectionDegree proves exact degree for a finite birational closure
-map. The remaining bridge must derive closure field generation from the
-constructed affine field generation. Final exact-degree/factor-d count
-assembly and the zero-dimensional case remain open. None of these
-remaining obligations is hidden in a claim of full-paper completion.
+The full general affine Proposition 4.3.1 is now proved by
+exists_geometrically_integral_affine_projection and its uniform-constant
+wrapper affine_variety_projection_constants. Actual integer finite
+birational projections preserve the source degree, geometric integrality
+and the exact kernel equation. The point-count factor is d and the box
+loss is C(n)*d^(2n), with constants chosen before the ideal, degree and
+radius. Every source dimension is covered, including dimension zero and
+ambient dimension zero; the zero-dimensional case constructs its rational
+point and proves degree one. The existing affine curve theorem supplies
+the sharper additive-error clause.
+
+ClosureProjectionBirational proves the needed closure field generation
+from actual affine reconstruction identities. ProjectiveClosureHilbertPolynomial
+and AffineProjectionDegree then prove exact degree. ProjectiveClosureRecovery
+also proves that a homogeneous prime ideal with X0 outside it is recovered
+as the closure of its standard chart, with the exact chart Hilbert dimension
+and multiplicity. Full-paper completion is not claimed: the remaining
+Section 5 obligations are stated above.

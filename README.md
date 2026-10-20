@@ -550,31 +550,54 @@ Apache license are recorded under `vendor/mertens/`.
 
 ## Remaining work
 
-The six main results are proved. Remaining intermediate obligations include
-the general affine projection statement and the exact projection-center
-geometry of Section 5. The general projective projection, both
+The six main results are proved. Remaining intermediate obligations concern
+the exact projection-center and Chow-form statements of Section 5.
+The general affine and projective projections, both
 curve projection clauses, literal affine-factor theorems, Salberger covering
 in the coordinate-ideal formulation, and all positive degrees of
 hyperplane-ideal avoidance are proved. The ledger distinguishes proved
 interfaces and replacements from the exact statements they do not yet imply.
 
-`exists_bounded_affine_birational_projection` constructs a bounded integer
-finite birational affine projection in every positive source dimension,
-with an irreducible image equation of degree at most the source degree.
-Its map on the actual projective closures is finite and fixes `X₀`.
-`projectiveClosureIdeal_hilbertPolynomial_parameters` proves that closure
-raises dimension by one and preserves multiplicity. The general affine
-exact-degree/count assembly still needs the closure birationality bridge.
+`exists_geometrically_integral_affine_projection` proves the full general
+affine statement of 4.3.1, including dimension zero. It constructs a bounded
+integer finite birational map, a geometrically integral image equation of
+exactly degree `d`, and the count comparison with factor `d` and box cost
+`C(n)d^(2n)`. `affine_variety_projection_constants` chooses the constants
+before the dimension, ideal, degree and radius. The proof establishes the
+actual closure map's birationality and Hilbert multiplicity; in dimension
+zero it constructs the rational point and proves its degree is one.
 
 `exists_center_projection_source_height` constructs a complementary
 projection from bounded independent integer center rows and proves the
 Section 5 height exponent `2(n−m−1)²`. Its formula and common denominator
 are proved, including preservation of a coordinate that vanishes on the
-center. Constructing a geometrically good center with these row bounds
-remains open. The new Chow-incidence ideal is prime, multihomogeneous and
-nonzero when the number of hyperplanes exceeds the affine dimension;
-an actual irreducible incidence equation is constructed. Its principality,
-exact Chow multidegree and Grassmannian bad-center detector remain open.
+center. `exists_geometric_birational_projection_center` also constructs a
+center of the required dimension, disjoint from the variety over extension
+fields, with finite birational projection and the same image degree. It
+covers degree one. The sharper bound on a basis of that center remains open.
+
+`exists_geometric_chow_incidence_generator` constructs a generator of the
+actual incidence ideal, separately homogeneous in every hyperplane block
+and absolutely irreducible for a geometrically integral source. Scalar
+extension commutes with that ideal. `chowIncidenceIdeal_eq_projective_vanishingIdeal`
+identifies it with the vanishing ideal of full projective incidence, including
+points at infinity. `ProjectiveIncidenceClosed` proves that this incidence
+image is closed over algebraically closed fields, and `ProjectiveChowEquation`
+gives the exact criterion:
+the constructed equation vanishes precisely when the hyperplanes meet the
+variety. The criterion also holds after algebraically closed coefficient
+extension. The exact degree `d` in each block and the Grassmannian bad-center
+detector remain open.
+
+`GenericHyperplaneNormalization` proves that algebraically independent
+hyperplane coefficients give an integral projection with independent
+coordinates over an algebraically closed extension where the source stays
+prime. The proof constructs finite module generators from the absence of
+projective base points; finiteness is not an additional hypothesis.
+`HomogeneousNormalizationRank` proves that the fraction-field degree of an
+actual finite linear normalization in characteristic zero is exactly the
+source multiplicity `d`. The identification with each Chow block degree
+remains to be completed.
 
 `zero_dimensional_plucker_degree_bound_obstruction` verifies a boundary
 failure in Lemma 5.2: at dimension zero and degree one, its strict bound

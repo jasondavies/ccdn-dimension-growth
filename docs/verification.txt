@@ -1994,3 +1994,61 @@ Final log: /tmp/ccdn-projection-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-projection-checkpoint-sync.json
 Source inventory: /tmp/ccdn-projection-checkpoint-inventory.json (747 files)
 Inventory SHA256: e0506df9612d8ec6cb9cf4772ee393802ec539a3eed53f4cd8030bacd027f8f0
+
+
+2026-10-20: full affine projection and projective incidence
+---------------------------------------------------------
+Integrated forty-one new mathematical modules and 106 explicit endpoint
+audits. Existing mathematical declarations were not modified.
+
+AffineVarietyProjection completes the general affine Proposition 4.3.1 in
+every source and ambient dimension, including zero. The constructed integer
+projection is finite and birational, with a geometrically integral image
+equation of exactly the source degree d. Count transfer has factor d and
+box cost C(n)*d^(2n), with uniform constants chosen before the source and
+radius. ClosureProjectionBirational proves the actual closure function-field
+identity. ZeroDimensionalGeometricPoint constructs the rational point in the
+zero-dimensional case and proves its Hilbert polynomial is one.
+
+IndependentBirationalProjection ensures full projection row rank, including
+degree one, while preserving the previous matrix-height bound.
+GeometricProjectionCenter constructs the actual center of vector dimension
+n-m-1 and proves geometric disjointness, finiteness, birationality and the
+exact image degree. The sharper Section 5 bound on a center basis remains
+open. IntegralProjectionImage proves the geometric image equals the zero
+locus of the actual kernel; monic fiber equations prove no projective base
+points. ProjectiveClosureRecovery recovers a homogeneous prime ideal from
+its nonempty standard chart and proves the chart Hilbert parameters.
+
+The actual Chow incidence ideal is now proved principal of height one,
+with an irreducible generator homogeneous separately in every hyperplane
+block. Scalar extension commutes exactly with the ideal; geometric source
+primeness gives irreducibility of the generator after extension.
+ProjectiveChowIncidence identifies its vanishing ideal with full projective
+incidence, including infinity. ProjectiveIncidenceClosed proves this image
+closed over algebraically closed fields by constructing a determinant
+separator for every empty fiber.
+ProjectiveChowEquation gives the exact intersection criterion for the
+constructed equation, also over algebraically closed coefficient extensions.
+
+GenericHyperplaneNormalization constructs an integral projection with
+independent coordinates from algebraically independent hyperplane
+coefficients, over an algebraically closed extension preserving source
+primeness. Balanced coordinate-power relations give actual finite module
+generators. HomogeneousNormalizationRank proves exact fraction-field rank d
+for homogeneous prime finite linear normalization in characteristic zero.
+Its primitive coordinate and homogeneous relation are constructed internally.
+The exact Chow block degrees and Grassmannian bad-center detector remain
+open. These results do not claim completion of the full paper or repair
+the documented literal Section 5 degree-bound issues.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 812 reachable modules.
+Full build: 9862 jobs, PASS.
+Transitive audit: 4423 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Final log: /tmp/ccdn-affine-chow-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-affine-chow-checkpoint-sync.json
+Source inventory: /tmp/ccdn-affine-chow-checkpoint-inventory.json (788 files)
+Inventory SHA256: 49bc177be83a1f70e05f1767bd1b6c08fef828b1679ff01bec38e33e83c969e9
