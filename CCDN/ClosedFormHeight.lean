@@ -45,21 +45,6 @@ lemma bivariateCoefficientBound_mono {f : ℤ[X][X]} {H K : ℝ}
     (hf : BivariateCoefficientBound f H) (h : H ≤ K) :
     BivariateCoefficientBound f K := fun i j => (hf i j).trans h
 
-lemma bivariateCoefficientDerivative_monomial (m n : ℕ) (a : ℤ) :
-    (bivariateCoefficientDerivative ℤ) (monomial m (monomial n a)) =
-      monomial m (monomial (n - 1) (a * n)) := by
-  apply Polynomial.ext
-  intro i
-  simp only [coeff_bivariateCoefficientDerivative, coeff_monomial]
-  split_ifs <;> simp [derivative_monomial]
-
-lemma bivariate_outerDerivative_monomial (m n : ℕ) (a : ℤ) :
-    (monomial m (monomial n a)).derivative =
-      monomial (m - 1) (monomial n (a * m)) := by
-  rw [derivative_monomial]
-  congr 1
-  rw [← map_natCast (C : ℤ →+* ℤ[X]) m, monomial_mul_C]
-
 lemma bivariateGridPolynomial_single {R : Type*} [CommRing R] (d : ℕ)
     (i : BivariateGrid d) (a : R) :
     bivariateGridPolynomial R d (Pi.single i a) =
@@ -164,7 +149,7 @@ theorem closedFormCoefficientMatrix_entry_bound
     change |(((((bivariateCoefficientDerivative ℤ) 0 * f - 0 * (bivariateCoefficientDerivative ℤ) f -
       (monomial j.1.val (monomial j.2.val 1)).derivative * f +
       monomial j.1.val (monomial j.2.val 1) * f.derivative).coeff i.1).coeff i.2 : ℤ) : ℝ)| ≤ _
-    simp only [map_zero, zero_mul, sub_self, zero_sub, bivariate_outerDerivative_monomial, one_mul]
+    simp only [map_zero, zero_mul, sub_self, zero_sub, bivariate_derivative_monomial, one_mul]
     rw [neg_add_eq_sub]
     have ha := bivariateCoefficientBound_monomial_mul hDH hdo 1 j.1.val j.2.val
     have hb := bivariateCoefficientBound_monomial_mul hH hf (j.1.val : ℤ) (j.1.val - 1) j.2.val

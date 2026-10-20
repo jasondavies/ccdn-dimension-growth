@@ -50,8 +50,7 @@ def IsGreedyLatticeFamily (L : Submodule ℤ E) {k : ℕ} (v : Fin k → E) : Pr
     (∀ i, v i ∈ L) ∧
     ∀ i x, x ∈ L → x ∉ Submodule.span ℝ (v '' Set.Iio i) → ‖v i‖ ≤ ‖x‖
 
-omit [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] in
-private theorem snoc_image_Iio_castSucc {k : ℕ} (v : Fin k → E) (x : E) (i : Fin k) :
+theorem snoc_image_Iio_castSucc {α : Type*} {k : ℕ} (v : Fin k → α) (x : α) (i : Fin k) :
     Fin.snoc v x '' Set.Iio i.castSucc = v '' Set.Iio i := by
   ext y
   constructor
@@ -64,8 +63,7 @@ private theorem snoc_image_Iio_castSucc {k : ℕ} (v : Fin k → E) (x : E) (i :
   · rintro ⟨j, hj, rfl⟩
     exact ⟨j.castSucc, hj, Fin.snoc_castSucc _ _ _⟩
 
-omit [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] in
-private theorem snoc_image_Iio_last {k : ℕ} (v : Fin k → E) (x : E) :
+theorem snoc_image_Iio_last {α : Type*} {k : ℕ} (v : Fin k → α) (x : α) :
     Fin.snoc v x '' Set.Iio (Fin.last k) = Set.range v := by
   ext y
   constructor

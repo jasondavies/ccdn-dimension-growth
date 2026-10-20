@@ -11,27 +11,17 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Multiplication by a homogeneous polynomial of degree `d` shifts homogeneous components
+by `d`. -/
 lemma homogeneousComponent_mul_left {K σ : Type*} [CommRing K]
     {f : MvPolynomial σ K} {d : ℕ} (hf : f.IsHomogeneous d)
     (u : MvPolynomial σ K) (k : ℕ) :
     homogeneousComponent (d + k) (f * u) = f * homogeneousComponent k u := by
-  classical
-  calc
-    homogeneousComponent (d + k) (f * u) =
-        homogeneousComponent (d + k) (f * ∑ j ∈ Finset.range (u.totalDegree + 1),
-          homogeneousComponent j u) := by rw [sum_homogeneousComponent]
-    _ = ∑ j ∈ Finset.range (u.totalDegree + 1),
-        homogeneousComponent (d + k) (f * homogeneousComponent j u) := by rw [Finset.mul_sum, map_sum]
-    _ = homogeneousComponent (d + k) (f * homogeneousComponent k u) := by
-      apply Finset.sum_eq_single k
-      · intro j _ hjk
-        rw [homogeneousComponent_of_mem (hf.mul (homogeneousComponent_isHomogeneous j u))]
-        simp only [show d + k ≠ d + j by omega, ite_false]
-      · intro hk
-        have hk' : u.totalDegree < k := by simpa using hk
-        rw [homogeneousComponent_eq_zero k u hk', mul_zero, map_zero]
-    _ = f * homogeneousComponent k u :=
-      homogeneousComponent_eq_self (hf.mul (homogeneousComponent_isHomogeneous k u))
+  let := MvPolynomial.gradedAlgebra (σ := σ) (R := K)
+  have ht := DirectSum.coe_decompose_mul_add_of_left_mem
+    (homogeneousSubmodule σ K) (j := k) hf (b := u)
+  simpa only [← DirectSum.Decomposition.decompose'_eq,
+    MvPolynomial.decomposition.decompose'_apply] using ht
 
 lemma homogeneous_multiplier {K σ : Type*} [CommRing K] [IsDomain K]
     {f u : MvPolynomial σ K} {d M : ℕ} (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)

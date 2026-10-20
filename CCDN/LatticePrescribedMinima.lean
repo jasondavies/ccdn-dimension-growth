@@ -21,34 +21,6 @@ def IsPrescribedGreedyLatticeFamily (L : Submodule ℤ E) (w : E)
   LinearIndependent ℝ v ∧ v 0 = w ∧ (∀ i, v i ∈ L) ∧
     ∀ i, i ≠ 0 → ∀ x, x ∈ L → x ∉ span ℝ (v '' Set.Iio i) → ‖v i‖ ≤ ‖x‖
 
-omit [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] in
-private theorem prescribed_snoc_image_Iio_castSucc {k : ℕ} (v : Fin k → E)
-    (x : E) (i : Fin k) :
-    Fin.snoc v x '' Set.Iio i.castSucc = v '' Set.Iio i := by
-  ext y
-  constructor
-  · rintro ⟨j, hj, rfl⟩
-    have hjk : j.val < k := lt_trans hj i.isLt
-    let j' : Fin k := ⟨j.val, hjk⟩
-    have he : j = j'.castSucc := rfl
-    refine ⟨j', hj, ?_⟩
-    rw [he, Fin.snoc_castSucc]
-  · rintro ⟨j, hj, rfl⟩
-    exact ⟨j.castSucc, hj, Fin.snoc_castSucc _ _ _⟩
-
-omit [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E] in
-private theorem prescribed_snoc_image_Iio_last {k : ℕ} (v : Fin k → E) (x : E) :
-    Fin.snoc v x '' Set.Iio (Fin.last k) = Set.range v := by
-  ext y
-  constructor
-  · rintro ⟨j, hj, rfl⟩
-    let j' : Fin k := ⟨j.val, hj⟩
-    have he : j = j'.castSucc := rfl
-    refine ⟨j', ?_⟩
-    rw [he, Fin.snoc_castSucc]
-  · rintro ⟨j, rfl⟩
-    exact ⟨j.castSucc, j.isLt, Fin.snoc_castSucc _ _ _⟩
-
 omit [FiniteDimensional ℝ E] in
 theorem IsPrescribedGreedyLatticeFamily.snoc
     {L : Submodule ℤ E} {w : E} {k : ℕ} {v : Fin (k + 1) → E}
@@ -65,10 +37,10 @@ theorem IsPrescribedGreedyLatticeFamily.snoc
   · intro i
     refine Fin.lastCases ?_ (fun j => ?_) i
     · intro _
-      simpa only [Fin.snoc_last, prescribed_snoc_image_Iio_last] using hmin
+      simpa only [Fin.snoc_last, snoc_image_Iio_last] using hmin
     · intro hj
       have hj0 : j ≠ 0 := by intro hz; apply hj; simp [hz]
-      simpa only [Fin.snoc_castSucc, prescribed_snoc_image_Iio_castSucc] using hv.2.2.2 j hj0
+      simpa only [Fin.snoc_castSucc, snoc_image_Iio_castSucc] using hv.2.2.2 j hj0
 
 /-- Prescribed-first greedy independent lattice vectors of every possible
 length. -/
