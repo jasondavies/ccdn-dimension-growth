@@ -7,10 +7,12 @@ Algebra & Number Theory 14 (2020), 2261-2294.
 Primary source: https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf
 DOI: https://doi.org/10.2140/ant.2020.14.2261
 
-The task covers the remainder of the paper, including its class-group
-application. It is not complete when only the affine curve theorem is
-proved. Definitions of targets and theorems conditional on missing
-mathematics are not completed counting theorems.
+Status: complete with the source corrections recorded below, including the
+class-group application and external mathematical inputs. The portable
+statement-to-declaration audit is docs/completion-audit.json. The final
+integrated verification is recorded in docs/verification.txt. Historical
+milestone sections below retain their original development context; the
+statement ledger and completion audit describe the final scope.
 
 Main statements
 ---------------
@@ -630,17 +632,23 @@ Section 3:
     extraction and the exact ambient coefficient estimate are proved;
 3.2.3 bad-prime factor height bound: PROVED by hypersurface_bad_prime_factor_max,
     for arbitrary finite families of actual bad primes, with an explicit
-    dimension-dependent constant. The exact finite bad-prime set is constructed;
+    dimension-dependent constant. The exact finite bad-prime set is constructed.
+    literalAffineBadPrimeFactor_le_max gives the explicit max-bound directly
+    for the literal affine factor, including degree-dropping reductions;
 3.2.4 weighted prime sum: PROVED, including the paper's constant 2, by
     PaperPrimeEstimates.prime_log_sum_le_two_mul using Mathlib's stronger
     Chebyshev theta bound with coefficient log(4);
 3.2.5 weighted prime tail: PROVED by prime_sqrt_tail_summable_and_bound,
     including convergence of the unrestricted infinite series and the bound
     2*primeBlockMass/sqrt(L) for every positive real cutoff L;
-3.2.6 simultaneous-prime determinant bound: PROVED in the common-degree
-    maximal-minor form by exists_hypersurface_determinant_log_lower, with
-    the exact rank exponent and leading constant, actual bad-prime set and
-    all local counts discharged. The unrestricted differing-degree global
+3.2.6 simultaneous-prime determinant bound: PROVED for arbitrary finite
+    families by hypersurface_determinant_family_log_lower and its actual
+    projective-point wrapper projective_hypersurface_determinant_family_log_lower.
+    Each matrix has its own common column degree; degrees may vary between
+    matrices. The exact leading constant, dimension-only error, actual gcd
+    and bad-prime factor are retained. Individual zero determinants and the
+    zero-row case are included. The maximal-minor statement remains available
+    in exists_hypersurface_determinant_log_lower. The unrestricted differing-degree global
     formulation is FORMALLY DISPROVED by
     no_uniform_global_mixed_degree_det_lower_bound. Primitive factorial-grid
     points on the fixed line X2=0 and individually homogeneous monomials give
@@ -653,14 +661,16 @@ Section 3:
     nonabsolute_projective_auxiliary, with exact degree d and vanishing at
     all rational projective zeros independently of height. Homogeneous
     coefficient descent works over any field extension;
-3.3.2 small-coefficient auxiliary polynomial: PROVED with exact bad-prime
-    factor and leading-coefficient height. The selected degree is bounded by
-    2d + d^(1-1/r)*log(B) + exp(C(r))*d^(4-1/r)*b(f)*
-    B^((r+1)/(r*d^(1/r)))/|lead(f)|^(1/(r*d*d^(1/r))) + 2.
-    Leading-coefficient positioning gives the coefficient-height form;
-3.3.3 large-coefficient auxiliary polynomial: PROVED under the explicit
-    position condition log(H)<=log|lead(f)|+T*d*d^(1/r), with actual
-    auxiliary degree O_{r,T}(d^(4-1/r)), independent of B and H;
+3.3.2 small-coefficient auxiliary polynomial: PROVED on the entire bounded
+    rational projective zero set by hypersurface_small_height_pure_coefficient_auxiliary.
+    The literal positive pure-power coefficient condition and the actual
+    coefficient height are used without a coordinate normalization premise.
+    The main term uses b(f) and coefficient height, the logarithmic term
+    has coefficient exactly 1, and the stronger residual is 4*d;
+3.3.3 large-coefficient auxiliary polynomial: PROVED on the entire bounded
+    rational projective zero set by hypersurface_large_height_pure_coefficient_auxiliary.
+    The literal positive pure-power positioning constant C is arbitrary.
+    The degree is O_{r,C}(d^(4-1/r)), independent of B and coefficient height;
 3.3.4 Bombieri--Vaaler (existing proved vendored dependency);
 3.3.5 elementary logarithmic inequality: PROVED by log_log_sub_div_le,
     with explicit additive constant -1 for every c>0 and x>1;
@@ -839,9 +849,10 @@ Section 5:
     kernel, an integral birational coordinate map, and a geometrically
     integral image of unchanged dimension and degree. Its packaged height
     conclusion on X has exactly the printed exponent 2*(n-m-1)^2, with a
-    constant depending only on n. The proved entry bound and the general
-    normalizedIntegerProjection_projective_height estimate also give the
-    ambient height bound outside the center. The fixed-coordinate endpoint
+    constant depending only on n. SharpAmbientCenterProjection packages the
+    full statement for every ambient rational point outside the constructed
+    center, including explicit geometric disjointness and the actual
+    complementary image. The fixed-coordinate endpoint
     constructs the center in X0=0 for affine closures; dimension zero is
     included using the proved degree-one boundary, and the fixed-coordinate
     endpoint includes the empty center. No bounded-center or good-center
@@ -870,9 +881,9 @@ Section 5:
     degree d is now PROVED by ChowExactDegree and ProjectiveChowExactDegree
     in characteristic zero, including dimension zero and equations over
     the original field for geometrically integral sources. The sharp
-    degree estimate is now PROVED for the actual homogeneous detector;
-    its final packaging as equations for the complement in the subspace
-    Plucker model remains to be assembled below.
+    degree estimate and the exact complement equations in the actual
+    subspace Plucker model are PROVED by SharpPluckerComplementEquations,
+    including dense openness over arbitrary field extensions.
     GenericHyperplaneNormalization proves actual integral normalization
     and independent coordinates for algebraically independent hyperplane
     coefficients over an algebraically closed extension preserving source
@@ -947,9 +958,13 @@ Section 5:
     FixedCoordinatePluckerTopology prove actual good-center dense openness,
     including the constrained X0=0 locus. The target has redundant ordered
     coordinates; no binomial target dimension or Scheme/Proj identification
-    is asserted. Remaining assembly: combine the sharp family with this
-    subspace locus in a single complement-equations theorem. The printed
-    Noether composition remains a degree-calculation gap; the resultant
+    is asserted. SharpPluckerComplementEquations and
+    SharpFixedPluckerComplementEquations identify the exact complement of
+    the actual good subspace locus with the common zero set of a family
+    over the source field. For any given field extension, both construct
+    such a family, prove dense openness and derive extension primality
+    internally. A single family uniform over all extensions is not asserted.
+    The printed Noether composition remains a degree-calculation gap; the resultant
     argument supplies the positive-dimensional bound independently.
     See docs/projection-center-audit.txt;
 5.3 bounded good center in Plucker height: the polynomial specialization is
@@ -972,9 +987,11 @@ Section 5:
     T=(m+1)^2*d^2 and maximal minors at most r!*T^r. The dimension-zero
     degree-one case is included. IntegerMinorProjectiveHeight proves the
     intrinsic projective height bound r!*T^r for the actual maximal-minor
-    vector of any such bounded independent integer rows. Remaining assembly:
-    state the bound for the constructed good CenterSubspace through
-    centerSubspacePlucker, rather than as separate center and height results;
+    vector of any such bounded independent integer rows.
+    BirationalCenterPluckerHeight proves the complete existence statement:
+    a constructed actual good CenterSubspace has intrinsic
+    centerSubspacePlucker height at most r!*T^r. The fixed-X0 result
+    includes the empty-center boundary;
 5.4 small integer kernel vectors: the literal printed constant is FORMALLY
     DISPROVED by not_printed_row_separator_bound in RowSeparatorCounterexample.
     A system with s=5,r=6,B=10 has independent rows and requires a coordinate
@@ -993,6 +1010,12 @@ The subsequent degree-dependence obstructions are PROVED by
 ProjectiveDegreeObstruction, AffineCurveDegreeObstruction and
 DegreeDependenceObstruction. The displayed Newton-polytope construction is
 replaced by proved explicit Eisenstein and binomial-leading-form constructions.
+The final paragraph's simultaneous lower bounds are PROVED by
+exists_hypersurface_lower_bounds_all_degrees for every n>=2 and d>=1.
+One c(n)=1/(16*n^2)>0 is chosen before d; the same absolutely irreducible
+equation and integer radius give both affine and projective-closure bounds.
+The projective equation is the actual homogenization, with the same degree.
+
 
 Completion evidence
 -------------------
@@ -1228,8 +1251,8 @@ constructs an actual good center, including degree one. The subsequent
 SharpBoundedBirationalCenter and SharpGoodCenterProjection construct the
 quadratically bounded center basis and the source projection-height exponent.
 SharpCenterResultantDetector supplies the positive-dimensional bad-center
-degree bound. The Section 5 ledger above records the remaining final
-subspace-locus and intrinsic-center-height assembly.
+degree bound. The Section 5 ledger above records the completed final
+subspace-locus and intrinsic-center-height statements.
 
 ClassGroupTwoTorsion and ClassGroupIdealRescaling construct actual integral
 ideal representatives and injective principal-square generators for class

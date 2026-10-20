@@ -1,0 +1,2835 @@
+{
+  "schema_version": 1,
+  "title": "CCDN consolidated requirement and evidence audit",
+  "created_utc": "2026-10-20T21:55:41.890615+00:00",
+  "baseline_commit": "2acce12abfc4d64e23c507940a30d2e324e98efc",
+  "source_documents": {
+    "paper": {
+      "title": "The dimension growth conjecture, polynomial in the degree and without logarithmic factors",
+      "url": "https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf",
+      "text_sha256": "db5c135b03da33699f80f76cb38340918c4a5b3167eeabfb1ca12278676aa371"
+    },
+    "author_addenda": {
+      "url": "https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf",
+      "date": "2026-04-20",
+      "text_sha256": "bd7c6aba034f3525c2c1623255287476774d1213f0d69aedbc95f0c277d76e80"
+    }
+  },
+  "input_audits": [
+    {
+      "name": "ccdn-completion-sections23-audit.json",
+      "sha256": "b0df91433693f3b6ec8548556920876838a2872fd34782decacbd64ae22f6161"
+    },
+    {
+      "name": "ccdn-completion-sections46-main-audit.json",
+      "sha256": "365c389aa8f5c202d80541be28ecba70b6d76e6a8302ff1939c858af002d2c02"
+    },
+    {
+      "name": "ccdn-completion-section5-audit.json",
+      "sha256": "ac430a92d56fc484ee977a61e7360de82f36ee9b46ea1909ef11f04785bc698b"
+    }
+  ],
+  "validation": {
+    "status": "passed",
+    "method": "Statement-scope review followed by canonical integrated build and transitive axiom audit. Every evidence hash and declaration location was rechecked against the canonical checkout.",
+    "evidence_file_hashes": "matched_canonical_checkout",
+    "evidence_declarations": "located_in_canonical_source",
+    "recorded_hash_comparisons": 207,
+    "declaration_reference_checks": 219,
+    "unique_evidence_declarations": 198,
+    "unique_evidence_files": 137,
+    "errors": [],
+    "command": "bash scripts/check.sh",
+    "reachable_modules": 934,
+    "vendor_source_hashes": 25,
+    "build_jobs": 9984,
+    "project_declarations_audited": 5093,
+    "vendor_declarations_audited": 555,
+    "allowed_axioms": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "source_inventory_sha256": "ae7c6d908eef697ec845ecf8f522415bc51f856c0d59019d3a7f843a2cb23454",
+    "date": "2026-10-20"
+  },
+  "path_convention": "Evidence file paths are relative to the repository root. vendor/bombieri-vaaler is the pinned local dependency; .lake/packages/mathlib denotes the Lake-resolved pinned mathlib checkout. No machine-specific absolute paths are used.",
+  "dependency_revisions": {
+    "mathlib": "56a005855ea17e0b0958f73ec801ae140b0a1679",
+    "mertens_adaptation": "AlexKontorovich/PrimeNumberTheoremAnd@c39a751132c88b6e8080b74c74023fd95b3d8be0"
+  },
+  "requirement_counts": {
+    "sections_2_3": 25,
+    "main_theorems_and_sections_4_6": 29,
+    "section_5": 8,
+    "total": 62
+  },
+  "model_caveats": [
+    "Actual coordinate ideals, their quotients/localizations, Hilbert functions and fraction fields are the geometric model. A separate equivalence with Mathlib Scheme/Proj objects has not been claimed or audited.",
+    "Local projective hypersurface stalks use actual affine-chart algebraic localizations. This is not an independently formalized Scheme/Proj stalk comparison.",
+    "Plucker coordinates use all ordered column injections, hence a signed redundant projective-coordinate model. Centers are actual fixed-dimensional submodules; their Zariski topology is induced by homogeneous principal opens. No binomial target-dimension identification or equality with the earlier row-span quotient topology is claimed.",
+    "The literal affine bad-prime factor and the factor including degree loss are distinct. They agree for nonzero homogeneous forms; affine source conclusions use the repaired literal-factor statements.",
+    "The Salberger radius-one case uses Lean totalized division in the log-denominator expression, together with a valid finite radius-one count.",
+    "Historical survey statements about degrees two through four and alternative proof routes are not dependencies of the recorded main results and are not included as requirements.",
+    "For each given field extension, the sharp Plucker complement family is constructed over the source field. No single family uniform over all extensions or scheme-theoretic universal family is asserted."
+  ],
+  "source_corrections": [
+    {
+      "requirement_id": "2.2",
+      "text": "Printed arbitrary-profile n=1 claim is false. For every proposed constant, an actual monotone infinite enumeration with c=1 and g(k)=mu+floor(mu/k), mu=K!, violates it. Restrict general lemma to n>=2; use the separately proved hypersurface n=1 bound. Not in author addenda dated 2026-04-20."
+    },
+    {
+      "requirement_id": "2.5",
+      "text": "Printed individually homogeneous columns need a common degree, or chart-normalized evaluations. Formal family on X2=0 with primitive (i+1,p,0) and columns X0^j refutes any uniform O(s) error in the literal unnormalized local assertion. Not an author-published correction."
+    },
+    {
+      "requirement_id": "2.6",
+      "text": "Author addenda corrects n+1 variables to n+2. The proof also requires the common-degree repair of 2.5; the repository does not claim the unrestricted unnormalized variant. No separate formal negation of the exact 2.6 expression was inspected."
+    },
+    {
+      "requirement_id": "2.9",
+      "text": "Same common-degree restriction as repaired 2.5/2.6. The unnormalized varying-degree form is not established; the separately refuted global 3.2.6 cannot be recovered from it."
+    },
+    {
+      "requirement_id": "3.2.6",
+      "text": "Literal unrestricted differing-degree formulation is formally false even for L=1 on the primitive absolutely irreducible line X2=0 with b(f)=1. Require common degree within each square matrix, or redesign the globally normalized evaluations; prime-dependent chart normalization alone does not give one integral gcd."
+    },
+    {
+      "requirement_id": "4.2.1",
+      "text": "Printed intermediate equality of literal affine and homogeneous bad-prime factors fails; chart determinant proof supplies the literal conclusion independently. Existing docs/affine-factor-audit.txt records example 439*x^2+y."
+    },
+    {
+      "requirement_id": "4.2.4",
+      "text": "Uses the repaired literal-factor auxiliary rather than the false homogenization-factor equality."
+    },
+    {
+      "requirement_id": "4.3.3",
+      "text": "Author addenda 2026-04-20 strengthens irreducibility of top form to absolute irreducibility. Literal weaker printed hypothesis is not claimed."
+    },
+    {
+      "requirement_id": "4.3.4",
+      "text": "Author addenda replaces printed d^14 with d^18."
+    },
+    {
+      "requirement_id": "4.3.7",
+      "text": "Author addenda inserts missing factor d into (n+1)(d^2-1)."
+    },
+    {
+      "requirement_id": "4.3.8",
+      "text": "Author addenda requires revising the printed affine exponent 2N+8 using corrected 4.3.4 and 4.3.7; the text does not specify the new number. Repository proves 3N+9 and retains projective 2*n^3."
+    },
+    {
+      "requirement_id": "5.2",
+      "text": "Literal m=0,d=1 strict degree<1 is formally refuted. Valid replacement is degree<=1. The positive-dimensional bound is proved by a generic-line derivative resultant; the printed Noether composition calculation does not give that bound."
+    },
+    {
+      "requirement_id": "5.4",
+      "text": "Replace sqrt((s-1)!*r)*B^(s-1) by (s-1)!*B^(s-1). Main projection estimates use a direct common-minor construction, retaining the required exponent."
+    }
+  ],
+  "follow_up_files": [
+    {
+      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
+      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+    },
+    {
+      "file": "AffineCurveCounting/LiteralAffineBadPrimeHeight.lean",
+      "sha256": "174f2cb1631e40b53d0005c7e57fef4fd56a266da317032079917852c90c48fd"
+    },
+    {
+      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+    },
+    {
+      "file": "AffineCurveCounting/DistinguishedCoefficientOrder.lean",
+      "sha256": "9d921b4b4344aa36789ca9f6f92d4b5535de765b2b76a386a9fd600d98bafb17"
+    },
+    {
+      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
+      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+    },
+    {
+      "file": "AffineCurveCounting/HypersurfaceLowerBoundAllDegrees.lean",
+      "sha256": "818615e5fe4c0be675cdd2e6a6a577f151abe75ea319b27ac44e2e5425022829"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "2.1",
+      "source_label": "2.1",
+      "requirement": "Exact actual local hypersurface layer dimensions and a multiplicity-independent O_n(k^(n-2)) pointwise remainder.",
+      "statement_status": "statement_matched_in_coordinate_model",
+      "scope": "Actual localization of K[x]/(f) at a rational zero, with residue-field equivalence and literal ideal-power layers. Final existence theorem constructs positive multiplicity bounded by degree and chooses the error constant before K,f,a,mu,k. All positive dimensions, including real exponent -1 and zero error in dimension one. Projective hypersurface stalk is represented by its actual affine chart; no Scheme/Proj stalk-equivalence theorem is asserted.",
+      "correction": null,
+      "evidence_refs": [
+        "e001",
+        "e002",
+        "e003"
+      ],
+      "source_line": 259
+    },
+    {
+      "id": "2.2",
+      "source_label": "2.2",
+      "requirement": "Uniform sharp initial-weight lower bound for arbitrary positive profiles with the printed pointwise bound.",
+      "statement_status": "literal_refuted_replacement_matched",
+      "scope": "General profile theorem covers n>=2, integer c>=0, and every exact enumeration; monotonicity unnecessary. Error n+1+c*(n-1)! is independent of mu. The stronger hypersurface profile g(k)<=mu supplies the needed n=1 application.",
+      "correction": "Printed arbitrary-profile n=1 claim is false. For every proposed constant, an actual monotone infinite enumeration with c=1 and g(k)=mu+floor(mu/k), mu=K!, violates it. Restrict general lemma to n>=2; use the separately proved hypersurface n=1 bound. Not in author addenda dated 2026-04-20.",
+      "evidence_refs": [
+        "e004",
+        "e005",
+        "e006"
+      ],
+      "source_line": 310
+    },
+    {
+      "id": "2.3",
+      "source_label": "2.3",
+      "requirement": "Sharp sum of initial actual hypersurface stalk weights with O_n(s), independent of multiplicity.",
+      "statement_status": "statement_matched_in_coordinate_model",
+      "scope": "Constructs actual multiplicity, exact layer profile, positive finite fibers and infinite monotone enumeration. Bound has error (n+1)s in source dimension n>=1. Does not rely on the false n=1 arbitrary-profile lemma.",
+      "correction": null,
+      "evidence_refs": [
+        "e007",
+        "e008"
+      ],
+      "source_line": 351,
+      "dependency_refs": [
+        "2.1"
+      ]
+    },
+    {
+      "id": "2.4",
+      "source_label": "2.4",
+      "requirement": "Divisibility by p raised to the sum of actual local-layer weights for arbitrary Noetherian local R and maps R->Z_(p).",
+      "statement_status": "stronger_statement_matched",
+      "scope": "Actual target Localization.AtPrime(span{p}); arbitrary commutative Noetherian local source. Maps supply residue-field identification, so no chosen inclusion Z_(p)->R is required. Exact initial-weight divisor; when the profile has insufficient total capacity the determinant is proved zero. No generator or factorization premises remain.",
+      "correction": null,
+      "evidence_refs": [
+        "e009",
+        "e010",
+        "e011"
+      ],
+      "source_line": 363
+    },
+    {
+      "id": "2.5",
+      "source_label": "2.5",
+      "requirement": "Local determinant at primitive integer points with the same actual projective reduction.",
+      "statement_status": "literal_refuted_replacement_matched",
+      "scope": "Common column degree permits cancellation of one invertible factor per row. Actual chart units/congruences are constructed in ProjectiveHypersurfaceReduction; varying-degree theorem instead uses inverse pivot powers entry by entry. Local exponent is actual hypersurfaceMultiplicityExponent with the proved sharp lower bound.",
+      "correction": "Printed individually homogeneous columns need a common degree, or chart-normalized evaluations. Formal family on X2=0 with primitive (i+1,p,0) and columns X0^j refutes any uniform O(s) error in the literal unnormalized local assertion. Not an author-published correction.",
+      "evidence_refs": [
+        "e012",
+        "e013",
+        "e014",
+        "e015"
+      ],
+      "source_line": 368
+    },
+    {
+      "id": "2.6",
+      "source_label": "2.6",
+      "requirement": "Single-prime determinant lower exponent in terms of actual total residue multiplicity.",
+      "statement_status": "corrected_statement_matched",
+      "scope": "All positive hypersurface dimensions and all row counts including zero. Actual residue points and their multiplicities, primitive integer zeros, same-degree homogeneous columns. Gives a divisor of every maximal minor; square case is included. No supplied partition, local model or finite-field count.",
+      "correction": "Author addenda corrects n+1 variables to n+2. The proof also requires the common-degree repair of 2.5; the repository does not claim the unrestricted unnormalized variant. No separate formal negation of the exact 2.6 expression was inspected.",
+      "evidence_refs": [
+        "e016",
+        "e017"
+      ],
+      "source_line": 386,
+      "dependency_refs": [
+        "2.3",
+        "2.5"
+      ]
+    },
+    {
+      "id": "2.7",
+      "source_label": "2.7",
+      "requirement": "For p>27d^4 and geometrically integral reduction, actual projective multiplicity count <=p^n+O_n(d^2 p^(n-1/2)).",
+      "statement_status": "statement_matched",
+      "scope": "Actual finite projective zero locus and sum of positive first-form multiplicities. In implementation dimension n+1, constant is 330+(n+3)(n+4)^n. Includes d=1. Full reduction irreducibility is the source hypothesis, not an external count premise.",
+      "correction": null,
+      "evidence_refs": [
+        "e018",
+        "e019"
+      ],
+      "source_line": 399,
+      "dependency_refs": [
+        "external.finite_field_count",
+        "external.singular_section_count"
+      ]
+    },
+    {
+      "id": "2.8",
+      "source_label": "2.8",
+      "requirement": "Normalized nth-root multiplicity error O_n(d^2/sqrt(p)).",
+      "statement_status": "statement_matched",
+      "scope": "Actual total multiplicity and same p>27d^4 hypothesis. Count input is discharged by 2.7; handles multiplicity count below p^n as well.",
+      "correction": null,
+      "evidence_refs": [
+        "e020"
+      ],
+      "source_line": 414,
+      "dependency_refs": [
+        "2.7"
+      ]
+    },
+    {
+      "id": "2.9",
+      "source_label": "2.9",
+      "requirement": "Sharp single-prime determinant divisor with denominator p+O_n(d^2 sqrt(p)).",
+      "statement_status": "corrected_statement_matched",
+      "scope": "Actual primitive integer zeros and common-degree homogeneous columns; maximal-minor gcd, including s=0. All local count and multiplicity inputs discharged.",
+      "correction": "Same common-degree restriction as repaired 2.5/2.6. The unnormalized varying-degree form is not established; the separately refuted global 3.2.6 cannot be recovered from it.",
+      "evidence_refs": [
+        "e021"
+      ],
+      "source_line": 418,
+      "dependency_refs": [
+        "2.6",
+        "2.7",
+        "2.8"
+      ]
+    },
+    {
+      "id": "3.1.1",
+      "source_label": "3.1.1",
+      "requirement": "Dimension-only coefficient-sensitive homogeneous auxiliary polynomial for all bounded rational projective zeros, including nonabsolute f.",
+      "statement_status": "statement_matched",
+      "scope": "Constant fixed before d,f,B. Source dimension r=n+1>=1, exponent B^((r+1)/(r*d^(1/r))), d^(4-1/r), coefficient height exponent 1/(r*d*d^(1/r)), original homogeneous b(f), and lower terms d^(1-1/r)logB+d^(4-1/r). Actual nonzero homogeneous integer g, f does not divide g, all rational points of height <=B. Irreducible over Z of positive degree suffices; source primitivity is automatic for this input.",
+      "correction": null,
+      "evidence_refs": [
+        "e022",
+        "e023",
+        "e024"
+      ],
+      "source_line": 433,
+      "dependency_refs": [
+        "3.3.1",
+        "3.3.2",
+        "3.3.3",
+        "3.4.reduction"
+      ]
+    },
+    {
+      "id": "3.1.2",
+      "source_label": "3.1.2",
+      "requirement": "Both coefficient-sensitive and uniform c*d^4*B^(2/d) projective plane count inequalities.",
+      "statement_status": "statement_matched",
+      "scope": "Actual projective bounded-height count for primitive irreducible homogeneous ternary integer equations, all d>0,B>=1. Both inequalities apply to the same displayed expression and constants are absolute.",
+      "correction": null,
+      "evidence_refs": [
+        "e025",
+        "e026"
+      ],
+      "source_line": 448,
+      "dependency_refs": [
+        "3.1.1",
+        "3.2.3",
+        "external.projective_bezout"
+      ]
+    },
+    {
+      "id": "3.2.1",
+      "source_label": "3.2.1",
+      "requirement": "Definition b(f)=0 if nonabsolute; otherwise exact exponential product over p>27d^4 with nonabsolute reduction.",
+      "statement_status": "statement_matched",
+      "scope": "The factor used in homogeneous Section 3 agrees exactly with the printed predicate: degree loss adds no primes for nonzero homogeneous forms. A separate literal affine factor now implements the printed definition for general affine polynomials; the inclusive affine factor must not be silently identified with it.",
+      "correction": null,
+      "evidence_refs": [
+        "e027",
+        "e028",
+        "e029",
+        "e030"
+      ],
+      "source_line": 463
+    },
+    {
+      "id": "3.2.2",
+      "source_label": "3.2.2",
+      "requirement": "Universal finite integral Noether forms of degree d^2-1, printed l1 bound, all-characteristic reducibility vanishing and char-zero detection.",
+      "statement_status": "stronger_statement_matched",
+      "scope": "Same finite family is chosen before the coefficient field/equation. l1 <= d^(3d^2-3)*[choose(n+d,n)*3^d]^(d^2-1). Supports all n>=0, hence source n>=3. Uses actual coefficient-index Sym(Option(Fin n),d), with proven binomial cardinality. Zero forms in a family are harmless. No supplied Noether family or bad-reduction witness.",
+      "correction": null,
+      "evidence_refs": [
+        "e031",
+        "e032",
+        "e033",
+        "e034"
+      ],
+      "source_line": 475,
+      "dependency_refs": [
+        "external.noether_forms"
+      ]
+    },
+    {
+      "id": "3.2.3",
+      "source_label": "3.2.3",
+      "requirement": "b(f)<=O_n(max(logH/d^2,1)), including actual finiteness.",
+      "statement_status": "statement_matched",
+      "scope": "Explicit dimension-only factor 2*exp(2*mertensError+1)*hypersurfaceHeightConstant(number of variables), before d,f,H. H>=1 is any coefficient bound; specialize to integerCoefficientHeight. The homogeneous factor agrees with the source, and literalAffineBadPrimeFactor_le_max states the same bound directly for the literal affine factor. Actual finiteness is constructed; primitivity is unnecessary.",
+      "correction": null,
+      "evidence_refs": [
+        "e035",
+        "e036",
+        "e037",
+        "e038",
+        "e039"
+      ],
+      "source_line": 495,
+      "dependency_refs": [
+        "3.2.1",
+        "external.mertens_first",
+        "external.bad_prime_witness"
+      ]
+    },
+    {
+      "id": "3.2.4",
+      "source_label": "3.2.4",
+      "requirement": "Sum over primes <=x of log p <=2x for x>0.",
+      "statement_status": "stronger_statement_matched",
+      "scope": "Allows x=0 as well. Uses actual finite prime sum and Mathlib Chebyshev.theta_le_log4_mul_x, then log4<=2.",
+      "correction": null,
+      "evidence_refs": [
+        "e040"
+      ],
+      "source_line": 521,
+      "dependency_refs": [
+        "external.chebyshev"
+      ]
+    },
+    {
+      "id": "3.2.5",
+      "source_label": "3.2.5",
+      "requirement": "Infinite prime sum above x of log(p)/p^(3/2)=O(x^-1/2), x>0.",
+      "statement_status": "statement_matched",
+      "scope": "Actual infinite series is proved summable, with bound 2*primeBlockMass/sqrt(x). Integrand log(p)/p/sqrt(p) equals source expression for positive primes. No PNT assumption; elementary block/Mertens proof.",
+      "correction": null,
+      "evidence_refs": [
+        "e041"
+      ],
+      "source_line": 528,
+      "dependency_refs": [
+        "external.mertens_first"
+      ]
+    },
+    {
+      "id": "3.2.6",
+      "source_label": "3.2.6",
+      "requirement": "Logarithmic lower bound for gcd of a finite family of evaluation determinants at primitive rational projective points.",
+      "statement_status": "literal_refuted_replacement_matched",
+      "scope": "Arbitrary finite family of square evaluation matrices, each with its own common homogeneous degree; degrees may vary between matrices. Actual determinant gcd is nonzero; individual zero determinants and zero rows are allowed. Primitive integer zeros are supplied, or constructed from actual rational projective points. Exact source leading constant, dimension-only error and defined homogeneous bad-prime factor are retained. No local divisor, rank, count or bad-prime set is supplied as a premise.",
+      "correction": "Literal unrestricted differing-degree formulation is formally false even for L=1 on the primitive absolutely irreducible line X2=0 with b(f)=1. Require common degree within each square matrix, or redesign the globally normalized evaluations; prime-dependent chart normalization alone does not give one integral gcd.",
+      "evidence_refs": [
+        "e042",
+        "e043",
+        "e044",
+        "e045",
+        "e046",
+        "e047",
+        "e048",
+        "e049"
+      ],
+      "source_line": 536,
+      "dependency_refs": [
+        "2.9",
+        "3.2.3",
+        "3.2.4",
+        "3.2.5"
+      ]
+    },
+    {
+      "id": "3.3.1",
+      "source_label": "3.3.1",
+      "requirement": "Nonabsolute rationally irreducible homogeneous integer f has an exact degree-d nonmultiple vanishing at all rational zeros.",
+      "statement_status": "statement_matched",
+      "scope": "Exact degree follows from nonzero and IsHomogeneous d. Factorization and coefficient-linear descent are constructed over arbitrary splitting extension; denominators are cleared. Actual all-zero-locus conclusion, independent of B. No external Walsh lemma assumption.",
+      "correction": null,
+      "evidence_refs": [
+        "e050",
+        "e051"
+      ],
+      "source_line": 581
+    },
+    {
+      "id": "3.3.2",
+      "source_label": "3.3.2",
+      "requirement": "Positioned small-height auxiliary with main coefficient saving, coefficient 1 on d^(1-1/n)logB, and O_n(d^2) residual.",
+      "statement_status": "stronger_statement_matched",
+      "scope": "Source-shaped all-projective endpoint takes any positive positioning constant C and the actual coefficient of X_i^d; choose the last coordinate for the printed formulation. No coordinate change is needed. For H(f)<=B^(2d(r+1)), it constructs one nonzero homogeneous integer nonmultiple vanishing at every rational projective zero of height <=B. Degree bound retains coefficient one on d^(1-1/r)logB and has remainder 4d, stronger than O_r(d^2). The leading constant depends on dimension and the fixed source positioning constant alone.",
+      "correction": null,
+      "evidence_refs": [
+        "e052",
+        "e053",
+        "e054",
+        "e055",
+        "e056",
+        "e057",
+        "e058",
+        "e059",
+        "e060",
+        "e061"
+      ],
+      "source_line": 597,
+      "dependency_refs": [
+        "3.2.6",
+        "3.3.4"
+      ]
+    },
+    {
+      "id": "3.3.3",
+      "source_label": "3.3.3",
+      "requirement": "Positioned large-height auxiliary of degree O_n(d^(4-1/n)), independent of B,H.",
+      "statement_status": "statement_matched",
+      "scope": "Source-shaped endpoint takes the actual pure-power coefficient in any specified coordinate and any positive positioning constant C. For B^(2d(r+1))<=H(f), one nonzero homogeneous integer nonmultiple vanishes on the entire bounded projective zero set and has degree <=C_large(r,C)*d^(4-1/r). Constant is independent of B,d,H(f); no finite point-family or logarithmic positioning hypothesis remains in this endpoint.",
+      "correction": null,
+      "evidence_refs": [
+        "e062",
+        "e063",
+        "e064",
+        "e065",
+        "e066"
+      ],
+      "source_line": 607,
+      "dependency_refs": [
+        "3.2.6",
+        "3.3.4"
+      ]
+    },
+    {
+      "id": "3.3.4",
+      "source_label": "3.3.4",
+      "requirement": "Bombieri-Vaaler nonzero integer kernel vector with exact Gram determinant / maximal-minor-gcd bound.",
+      "statement_status": "statement_matched",
+      "scope": "Actual integer m-by-N matrix with independent rational rows, m<N; returns nonzero integer kernel vector and exact supnorm rpow bound. No lattice-volume premise in endpoint. Gram determinant positive follows from row independence, so source absolute value is unnecessary. Vendor proof invokes proved Vaaler cube-slicing and Minkowski second theorem, not axiomatized numerical bounds.",
+      "correction": null,
+      "evidence_refs": [
+        "e067",
+        "e068"
+      ],
+      "source_line": 617,
+      "dependency_refs": [
+        "external.bombieri_vaaler"
+      ]
+    },
+    {
+      "id": "3.3.5",
+      "source_label": "3.3.5",
+      "requirement": "For c>0,x>1, loglogx-logx/c<=logc+O(1).",
+      "statement_status": "stronger_statement_matched",
+      "scope": "Same hypotheses, additive constant exactly -1, direct log(t)<=t-1 proof.",
+      "correction": null,
+      "evidence_refs": [
+        "e069"
+      ],
+      "source_line": 736
+    },
+    {
+      "id": "3.4.1",
+      "source_label": "3.4.1",
+      "requirement": "Complex univariate degree<=d has grid value controlling max coefficient with exact factor 3^d.",
+      "statement_status": "stronger_statement_matched",
+      "scope": "Actual f:C[X], all d including zero. One natural a<=d simultaneously controls every coefficient norm. Equals source max-height claim; no Vandermonde/Gautschi premise.",
+      "correction": null,
+      "evidence_refs": [
+        "e070"
+      ],
+      "source_line": 744,
+      "dependency_refs": [
+        "external.grid_interpolation"
+      ]
+    },
+    {
+      "id": "3.4.2",
+      "source_label": "3.4.2",
+      "requirement": "Complex homogeneous grid witness in n+2 variables with factor 3^((n+1)d).",
+      "statement_status": "statement_matched",
+      "scope": "Implementation Fin(N+1), factor 3^(N*d), fixed coordinate first rather than last. Set N=n+1. One grid point controls every coefficient; coefficient chart injectivity and bounded shear are proved.",
+      "correction": null,
+      "evidence_refs": [
+        "e071",
+        "e072"
+      ],
+      "source_line": 750,
+      "dependency_refs": [
+        "3.4.1"
+      ]
+    },
+    {
+      "id": "3.4.reduction",
+      "source_label": "3.4.reduction",
+      "requirement": "Remove leading-coefficient positioning without losing the dimension-only final constants or original bad-prime factor.",
+      "statement_status": "statement_matched_by_composition",
+      "scope": "Constructed bounded integer unimodular shear, actual coefficient bounds, exact homogeneous bad-prime invariance, pullback of auxiliary, and absorption of B dilation by d+1. Earlier weaker grid constant already sufficient; exact complex grid results independently establish printed 3.4.1-2.",
+      "correction": null,
+      "evidence_refs": [
+        "e073",
+        "e074",
+        "e075",
+        "e076"
+      ],
+      "source_line": 759,
+      "dependency_refs": [
+        "3.3.2",
+        "3.3.3",
+        "3.4.2"
+      ]
+    },
+    {
+      "id": "main.theorem_1",
+      "source_label": "Theorem 1",
+      "requirement": "For each n>1, uniform polynomial-in-degree projective dimension growth for every integral X of degree d>=5 and B>=1.",
+      "statement_status": "statement_matched",
+      "scope": "One positive C is chosen before I,d,B. Homogeneous prime coordinate ideal; degree and projective dimension are actual filtered Hilbert multiplicity and natDegree-1. Exponent exactly 2*n^3. Zero-dimensional and empty loci handled; no geometric/projection/counting hypothesis.",
+      "correction": null,
+      "evidence_refs": [
+        "e077"
+      ]
+    },
+    {
+      "id": "main.theorem_2",
+      "source_label": "Theorem 2",
+      "requirement": "Uniform C(n)*d^4*B^(2/d) for all integral projective curves, n>=2,d>0,B>=1.",
+      "statement_status": "statement_matched",
+      "scope": "Target quantifiers are n then C then prime ideal I then d then B. Degree is eventual homogeneous Hilbert slope, and count is actual finite projective-height set. No absolute irreducibility or supplied chart assumption.",
+      "correction": null,
+      "evidence_refs": [
+        "e078",
+        "e079",
+        "e080",
+        "e081"
+      ]
+    },
+    {
+      "id": "main.theorem_3",
+      "source_label": "Theorem 3",
+      "requirement": "Uniform C(n)*d^3*B^(1/d)*(log B+d) for every integral affine curve, n>=2,d>0,B>=1.",
+      "statement_status": "statement_matched",
+      "scope": "Degree is eventual affine Hilbert slope; actual integral points inside the real-radius box. C is chosen before I,d,B; no finite-field, height, projection or irreducibility-over-closure assumption.",
+      "correction": null,
+      "evidence_refs": [
+        "e082",
+        "e083",
+        "e084",
+        "e085",
+        "e086"
+      ]
+    },
+    {
+      "id": "main.theorem_4",
+      "source_label": "Theorem 4",
+      "requirement": "Affine hypersurface growth C(N)*d^e(N)*B^(N-2), N>=3,d>=5, absolute irreducibility of the highest homogeneous part.",
+      "statement_status": "statement_matched",
+      "scope": "N=n+3 variables; exact bound C*d^(18+3*n)*B^(n+1), i.e. e(N)=3N+9. Integer and rational equations; actual absolute irreducibility over AlgebraicClosure Q. C precedes equation and radius.",
+      "correction": null,
+      "evidence_refs": [
+        "e087",
+        "e088"
+      ]
+    },
+    {
+      "id": "main.proposition_5",
+      "source_label": "Proposition 5",
+      "requirement": "Every d>0 admits an integral projective plane curve and integer B>=1 with N>=d^2*B^(2/d)/5.",
+      "statement_status": "statement_matched",
+      "scope": "Actual homogeneous F over Q, exact total degree, absolute irreducibility, prime principal ideal, actual projective Hilbert degree, and integer B. Includes d=1,2,3, not only an asymptotic sequence.",
+      "correction": null,
+      "evidence_refs": [
+        "e089"
+      ]
+    },
+    {
+      "id": "main.theorem_6",
+      "source_label": "Theorem 6",
+      "requirement": "For each n>=3, h2(K)<=C(n)*|disc K|^(1/2-1/(2n))*log(|disc K|)^(1-n%2), uniformly in all degree-n number fields.",
+      "statement_status": "statement_matched",
+      "scope": "Actual kernel of squaring on ClassGroup(O_K), actual NumberField.discr, no supplied arithmetic bound. Positive C precedes field K, arbitrary type universe. Odd branch has no logarithm; even branch exactly one logarithm. Quadratic subfields discharged by degree induction; base degrees one/two proved.",
+      "correction": null,
+      "evidence_refs": [
+        "e090",
+        "e091",
+        "e092",
+        "e093",
+        "e094"
+      ]
+    },
+    {
+      "id": "4.1.1",
+      "source_label": "4.1.1",
+      "requirement": "Exact pure-dimensional affine grid bound d*(2B+1)^m.",
+      "statement_status": "statement_matched",
+      "scope": "Any characteristic-zero coefficient field for finite grids; rational real-box endpoint for B>=0. All actual minimal primes have Hilbert dimension m; their degree budget is derived, not supplied. Nonreduced ideals and empty/zero-dimensional cases allowed.",
+      "correction": null,
+      "evidence_refs": [
+        "e095",
+        "e096"
+      ]
+    },
+    {
+      "id": "4.1.2",
+      "source_label": "4.1.2",
+      "requirement": "Integer point outside proper irreducible affine/projective variety with all coordinates or projective height <=d.",
+      "statement_status": "statement_matched",
+      "scope": "Actual positive-codimension prime ideal with Hilbert degree d, any characteristic-zero field. Coordinates are even in [0,d]. Projective representative is nonzero, has actual intrinsic height <=d, and lies outside the actual projective locus.",
+      "correction": null,
+      "evidence_refs": [
+        "e097",
+        "e098",
+        "e099"
+      ]
+    },
+    {
+      "id": "4.1.3",
+      "source_label": "4.1.3",
+      "requirement": "Non-Q-defined absolutely irreducible varieties have affine count <=d^2*(2B+1)^(m-1), and corresponding projective cone bound.",
+      "statement_status": "statement_matched",
+      "scope": "Actual prime ideal over algebraically closed Galois extension K/Q; hypothesis is failure to equal extension of ANY rational ideal. The moving automorphism is derived. Positive affine dimension is indexed m+1, and zero-dimensional rational locus is separately empty. Specialization K=Qbar covers the source.",
+      "correction": null,
+      "evidence_refs": [
+        "e100",
+        "e101",
+        "e102"
+      ]
+    },
+    {
+      "id": "4.1.4",
+      "source_label": "4.1.4",
+      "requirement": "Same quadratic-degree saving for rational integral varieties that are not geometrically integral.",
+      "statement_status": "statement_matched",
+      "scope": "Hypothesis is actual scalar extension not prime. A geometric component, degree bound, and rational-point inclusion are constructed. Exact real box constant and all relevant dimensions; no supplied decomposition/count.",
+      "correction": null,
+      "evidence_refs": [
+        "e103",
+        "e104",
+        "e105"
+      ]
+    },
+    {
+      "id": "4.1.5",
+      "source_label": "4.1.5",
+      "requirement": "Extend Theorems 1-3 to geometric/nonabsolute or non-Q-defined cases.",
+      "statement_status": "stronger_statement_matched",
+      "scope": "General bounds above imply dimension growth/affine-curve cases; projective curves have the stronger height-independent <=d^2 bound. Named numerical restatements of the three consequences are unnecessary arithmetic specializations.",
+      "correction": null,
+      "evidence_refs": [
+        "e100",
+        "e103",
+        "e101",
+        "e104",
+        "e106",
+        "e107"
+      ]
+    },
+    {
+      "id": "4.2.1",
+      "source_label": "4.2.1",
+      "requirement": "Actual proper integer auxiliary with complete printed degree expression, literal affine b(f), original leading homogeneous coefficient height, all primitive irreducible f and B>=1.",
+      "statement_status": "corrected_statement_matched",
+      "scope": "n+2-variable indexing covers every source n>0. Expression has exact minimum, B^(1/d^(1/(n+1))), coefficient denominator exponent 1/((n+1)*d*d^(1/(n+1))), plus the two printed terms. g is nonzero, integer, not divisible by f, and vanishes at every bounded integer zero. Constant is dimension-only.",
+      "correction": "Printed intermediate equality of literal affine and homogeneous bad-prime factors fails; chart determinant proof supplies the literal conclusion independently. Existing docs/affine-factor-audit.txt records example 439*x^2+y.",
+      "evidence_refs": [
+        "e108",
+        "e109",
+        "e110",
+        "e030"
+      ]
+    },
+    {
+      "id": "4.2.2",
+      "source_label": "4.2.2",
+      "requirement": "Coefficient-height versus degree-d auxiliary dichotomy with dimension-only multiplier and B exponent d*choose(n+1+d,d).",
+      "statement_status": "statement_matched",
+      "scope": "One C(n)>0 before d,f,B; actual nonzero homogeneous integer g of degree d, nonmultiple of f, vanishing on all actual projective zeros <=B. No primitivity or irreducibility required, so stronger than source.",
+      "correction": null,
+      "evidence_refs": [
+        "e111"
+      ]
+    },
+    {
+      "id": "4.2.3",
+      "source_label": "4.2.3",
+      "requirement": "Bad-prime coefficient-height transfer from H(F) to arbitrary 1<=Y<=H(F).",
+      "statement_status": "statement_matched",
+      "scope": "Exact d powers and height exponent; explicit dimension-only coefficient. Uses defined factor including degree drop, which agrees with literal factor for nonzero homogeneous forms. The theorem needs only f!=0, positive actual degree, and the stated height inequalities.",
+      "correction": null,
+      "evidence_refs": [
+        "e112"
+      ]
+    },
+    {
+      "id": "4.2.4",
+      "source_label": "4.2.4",
+      "requirement": "Full coefficient-sensitive plane bound with literal affine factor and full minimum expression.",
+      "statement_status": "corrected_statement_matched",
+      "scope": "One absolute positive C before primitive irreducible f and real B>=1; denominator H(f_d)^(1/d^2), numerator minimum exactly as source, plus d log B+d^4. Actual rational zero-locus integral count.",
+      "correction": "Uses the repaired literal-factor auxiliary rather than the false homogenization-factor equality.",
+      "evidence_refs": [
+        "e113",
+        "e114"
+      ]
+    },
+    {
+      "id": "4.2.5",
+      "source_label": "4.2.5",
+      "requirement": "Coprime Newton-edge affine count <=C*d^4*(log|c_d*c_e|+1)*B^(1/d).",
+      "statement_status": "statement_matched",
+      "scope": "Universal C, every 0<e<d with gcd(d,e)=1; nonzero endpoint coefficients and exact strict edge support inequality. Primitive normalization and absolute irreducibility are derived, not assumed.",
+      "correction": null,
+      "evidence_refs": [
+        "e115"
+      ]
+    },
+    {
+      "id": "4.3.1",
+      "source_label": "4.3.1",
+      "requirement": "Uniform finite birational affine projection to A^(m+1), same geometric degree, count factor d and polynomial radius cost; curve refinement additive d^2.",
+      "statement_status": "statement_matched",
+      "scope": "Projection/image precede B. Actual integral coordinate map, generated fraction field equals top, kernel principal with absolute irreducible polynomial of exactly degree d. General radius cost C(n)*d^(2n); all source dimensions including m=0,n=0. Curve endpoint gives explicit function-field generation and additive d^2. The constants-only wrapper omits the field equality but the primary endpoint contains it.",
+      "correction": null,
+      "evidence_refs": [
+        "e116",
+        "e117",
+        "e118"
+      ]
+    },
+    {
+      "id": "4.3.2",
+      "source_label": "4.3.2",
+      "requirement": "Corresponding projective projection to P^(m+1), same geometric degree, count factor d and curve refinement additive d^2.",
+      "statement_status": "statement_matched",
+      "scope": "Actual homogeneous integer coordinate map, integral, fraction-field generation, exact principal kernel and degree d; C(n)*d^(2(n+1)) radius. Curve endpoint constructs proper chart/permutation internally, exact homogeneous image and geometric irreducibility, and C(n)*d^(2n) radius. No chart/point/center supplied.",
+      "correction": null,
+      "evidence_refs": [
+        "e119",
+        "e120"
+      ]
+    },
+    {
+      "id": "4.3.3",
+      "source_label": "4.3.3",
+      "requirement": "Line contributions on ternary surfaces <=C*d^6*B+#lines, d>=3.",
+      "statement_status": "corrected_statement_matched",
+      "scope": "Constant precedes f, degree, B and finite family. Actual rational affine line loci; both sum and union counts bounded. Degree-one prime components convert into actual line sets; absolute leading-form irreducibility supplies the parallel-line bound.",
+      "correction": "Author addenda 2026-04-20 strengthens irreducibility of top form to absolute irreducibility. Literal weaker printed hypothesis is not claimed.",
+      "evidence_refs": [
+        "e121",
+        "e122"
+      ]
+    },
+    {
+      "id": "4.3.4",
+      "source_label": "4.3.4",
+      "requirement": "All-degree affine surface dimension growth with absolute irreducible top form.",
+      "statement_status": "corrected_statement_matched",
+      "scope": "Uniform C*d^18*B for EVERY d>=5, real B>=1, actual integer ternary equation. Small degrees 5..15 are constructed internally, not assumed as fixed-degree counts.",
+      "correction": "Author addenda replaces printed d^14 with d^18.",
+      "evidence_refs": [
+        "e123"
+      ]
+    },
+    {
+      "id": "4.3.5",
+      "source_label": "4.3.5",
+      "requirement": "Salberger geometric surface curve cover: O_d(B^(1/sqrt d)*log B+1) curves of O_d(1) degree, smooth complement O_d(B^(2/sqrt d+c/log(1+log B))).",
+      "statement_status": "statement_matched_in_coordinate_model",
+      "scope": "C,c positive chosen before homogeneous absolute F and B; proper chart condition not X0|F. Constructed finite family of actual homogeneous geometrically prime curve ideals containing F, with exact projective Hilbert degrees <=d^2. Complement counts preimage of actual projective curve loci. Jacobian smoothness at [1:a] equals affine chart smoothness. Degree one included. At B=1 Lean totalizes log-denominator division; estimate is still valid there with finite radius-one count.",
+      "correction": null,
+      "evidence_refs": [
+        "e124",
+        "e125",
+        "e126",
+        "e127"
+      ]
+    },
+    {
+      "id": "4.3.6",
+      "source_label": "4.3.6",
+      "requirement": "Fixed-degree consequence and historical comparison of alternative arguments.",
+      "statement_status": "stronger_statement_matched",
+      "scope": "Fixed-degree consequences follow from stronger uniform polynomial-degree bounds. Historical Browning/Heath-Brown/Salberger/Walsh derivation need not be separately reproduced.",
+      "correction": null,
+      "evidence_refs": [
+        "e123",
+        "e077",
+        "e087"
+      ]
+    },
+    {
+      "id": "4.3.7",
+      "source_label": "4.3.7",
+      "requirement": "Nonzero homogeneous equation vanishing on bad hyperplane sections, with corrected degree bound.",
+      "statement_status": "corrected_statement_matched",
+      "scope": "For every d>=1 and at least four variables, actual nonprime geometric intersection ideal forces detector to vanish. Bound is (n+1)*d*(d^2-1) in projective dimension n; for d>=2 construction improves this to d*(d^2-1)+1. Degree-one detector is 1, because all linear intersection ideals are prime. No unproved Bertini hypothesis. Coordinate-ideal, not Scheme/Proj, formulation.",
+      "correction": "Author addenda inserts missing factor d into (n+1)(d^2-1).",
+      "evidence_refs": [
+        "e128"
+      ]
+    },
+    {
+      "id": "4.3.8",
+      "source_label": "4.3.8",
+      "requirement": "Corrected explicit degree-exponent consequences of slicing and projection.",
+      "statement_status": "corrected_statement_matched",
+      "scope": "Affine exponent 3N+9 for N>=3 follows corrected d^18 base plus cubic normals; projective exponent 2*n^3 is proved.",
+      "correction": "Author addenda requires revising the printed affine exponent 2N+8 using corrected 4.3.4 and 4.3.7; the text does not specify the new number. Repository proves 3N+9 and retains projective 2*n^3.",
+      "evidence_refs": [
+        "e087",
+        "e077"
+      ]
+    },
+    {
+      "id": "6.1",
+      "source_label": "6.1",
+      "requirement": "Every d>=1,n>=2 admits absolutely irreducible degree-d rational f vanishing on the exact box floor((d-1)/(2n)).",
+      "statement_status": "statement_matched",
+      "scope": "Exact source grid and degree, all positive d including d=1,2. Absolute irreducibility over Qbar; explicit Eisenstein construction replaces Newton-polytope theorem.",
+      "correction": null,
+      "evidence_refs": [
+        "e129"
+      ]
+    },
+    {
+      "id": "6.projective_curve_obstruction",
+      "source_label": "Section 6 projective curve obstruction",
+      "requirement": "Degree factor in uniform B^(2/d) envelope cannot be o(d^2).",
+      "statement_status": "statement_matched",
+      "scope": "Actual absolutely irreducible plane examples; fixed positive uniform C; exact lower d^2/5 and little-o conclusion. Applies already to strongest geometric subfamily.",
+      "correction": null,
+      "evidence_refs": [
+        "e130",
+        "e131",
+        "e132"
+      ]
+    },
+    {
+      "id": "6.affine_logarithmic_obstruction",
+      "source_label": "Section 6 affine logarithmic envelope obstruction",
+      "requirement": "Degree factor multiplying B^(1/d)*log B cannot be o(d^2/log d).",
+      "statement_status": "statement_matched",
+      "scope": "Actual examples for every d>=3; eventual lower bound for d>=7 avoids log B=0. Exact coefficient d^2/(4 log d). Statement explicitly uses B>=2 logarithmic envelope, not a reinterpretation of d^3*(log B+d).",
+      "correction": null,
+      "evidence_refs": [
+        "e133",
+        "e134",
+        "e135"
+      ]
+    },
+    {
+      "id": "6.dimension_growth_obstructions",
+      "source_label": "Section 6 dimension-growth exponent obstructions",
+      "requirement": "Any valid uniform projective/affine hypersurface degree exponents satisfy e>=1/e>=2 respectively.",
+      "statement_status": "statement_matched",
+      "scope": "Every projective n>=2 and affine n>=3; only d>=5 hypotheses, matching main growth theorems. Affine counterexamples have absolute leading forms, so meet corrected Theorem 4 hypotheses.",
+      "correction": null,
+      "evidence_refs": [
+        "e136",
+        "e137"
+      ]
+    },
+    {
+      "id": "6.all_positive_degree_examples",
+      "source_label": "Section 6 final all-positive-degree examples",
+      "requirement": "For each n>=2 choose c(n)>0 so EVERY d>0 admits one absolutely irreducible degree-d f and integer B>=1 with simultaneous affine >=c*d^2*B^(n-2) and projective-closure >=c*d*B^(n-1) counts.",
+      "statement_status": "statement_matched",
+      "scope": "For every n>=2 choose c(n)=1/(16*n^2)>0 before every d>=1. The same actual degree-d absolutely irreducible rational equation f and integer B>=1 have simultaneous affine count >=c*d^2*B^(n-2) and projective-closure count >=c*d*B^(n-1). The actual homogenization is homogeneous of degree d and absolutely irreducible. Includes all small degrees and n=2; existing stronger absolute-top-form examples are unchanged.",
+      "correction": null,
+      "evidence_refs": [
+        "e138",
+        "e139",
+        "e140",
+        "e141",
+        "e142"
+      ]
+    },
+    {
+      "id": "5.1",
+      "source_label": "Lemma 5.1",
+      "requirement": "Construct a geometrically disjoint rational center and complementary plane, finite birational projection and height C(n)d^(2(n-m-1)^2) for every ambient rational point outside the center.",
+      "statement_status": "statement_matched",
+      "scope": "Source is an actual geometrically prime homogeneous rational ideal with Hilbert dimension and degree. Center rows, scalar and projection matrix are existentially constructed; geometric disjointness, full row independence, complement and exact image dimension/degree are included. Final height quantifier ranges over all ambient points outside row span. Explicit constant depends only on ambient dimension.",
+      "correction": null,
+      "evidence_refs": [
+        "e143",
+        "e144",
+        "e145"
+      ]
+    },
+    {
+      "id": "5.chow_equation",
+      "source_label": "Section 5 Chow equation",
+      "requirement": "Construct actual absolutely irreducible multihomogeneous Chow equation of degree d in each of m+1 hyperplane blocks, with the exact geometric intersection criterion.",
+      "statement_status": "statement_matched",
+      "scope": "Equation over source field with geometric extension criterion, actual source Hilbert multiplicity, no supplied Chow form or rank. Degree preservation is equivalent to field generation for actual finite homogeneous linear projections.",
+      "correction": null,
+      "evidence_refs": [
+        "e146",
+        "e147"
+      ]
+    },
+    {
+      "id": "5.plucker_model",
+      "source_label": "Section 5 Plucker model",
+      "requirement": "Represent actual centers and their projective maximal-minor coordinates, independently of the chosen basis.",
+      "statement_status": "statement_matched",
+      "scope": "Centers are actual fixed-dimensional submodules. All ordered column injections index maximal minors, retaining signed redundant coordinates. Equality of projective points iff equality of row spans; Zariski topology is induced by homogeneous principal opens. No binomial target-dimension or Scheme/Proj comparison claimed.",
+      "correction": null,
+      "evidence_refs": [
+        "e148",
+        "e149",
+        "e150"
+      ]
+    },
+    {
+      "id": "5.2",
+      "source_label": "Lemma 5.2",
+      "requirement": "Actual good-center dense open locus and homogeneous equations for its complement, of degree strictly below (m+1)^2 d^2 in positive dimension.",
+      "statement_status": "corrected_statement_matched",
+      "scope": "One endpoint constructs source-field equations whose exact common zero set is the complement of the actual good CenterSubspace locus over every given field extension, with Dense and IsOpen in the induced Plucker-Zariski topology. Positivity m>=1 gives strict degree<D^2; m=0 forces d=1 and degree<=1. The actual good condition includes disjointness over the algebraic closure of the extension and birationality of its function field. Extension primality is constructed internally. Fixed-X0 counterpart covers arbitrary characteristic-zero source fields and empty centers.",
+      "correction": "Literal m=0,d=1 strict degree<1 is formally refuted. Valid replacement is degree<=1. The positive-dimensional bound is proved by a generic-line derivative resultant; the printed Noether composition calculation does not give that bound.",
+      "evidence_refs": [
+        "e151",
+        "e152",
+        "e153",
+        "e154",
+        "e155",
+        "e156"
+      ]
+    },
+    {
+      "id": "5.3",
+      "source_label": "Lemma 5.3",
+      "requirement": "Existence of a rational actual good center with intrinsic Plucker height <=r!*((m+1)^2*d^2)^r, r=n-m-1.",
+      "statement_status": "statement_matched",
+      "scope": "The constructed CenterSubspace belongs to the actual good locus and satisfies the intrinsic projective height bound in one endpoint. Any fixed enumeration of the determinant projection coordinates is allowed. Dimension zero and degree one included; bounded center or rank is not a premise.",
+      "correction": null,
+      "evidence_refs": [
+        "e157",
+        "e158"
+      ]
+    },
+    {
+      "id": "5.eq_4",
+      "source_label": "Equation 5-4",
+      "requirement": "Genuine projection along center rows with normalized dual coordinate forms and the complementary image.",
+      "statement_status": "statement_matched",
+      "scope": "Actual idempotent projection onto the complementary image has formula x-sum_i L_i(x)A_i; dual forms and their common-kernel image are constructed from independent rows.",
+      "correction": null,
+      "evidence_refs": [
+        "e159"
+      ]
+    },
+    {
+      "id": "5.4",
+      "source_label": "Lemma 5.4",
+      "requirement": "An integer row separator satisfying all but one independent equation with an explicit coefficient bound.",
+      "statement_status": "literal_refuted_replacement_matched",
+      "scope": "General factorial cofactor separator is proved and suffices for the source asymptotic conclusions; the actual counterexample has s=5,r=6,B=10 and required coordinate at least120050 versus printed120000.",
+      "correction": "Replace sqrt((s-1)!*r)*B^(s-1) by (s-1)!*B^(s-1). Main projection estimates use a direct common-minor construction, retaining the required exponent.",
+      "evidence_refs": [
+        "e160",
+        "e161"
+      ]
+    },
+    {
+      "id": "5.affine_center_at_infinity",
+      "source_label": "Section 5 affine center at infinity",
+      "requirement": "Construct the good center in X0=0 with bounded height and corresponding ambient projection estimate.",
+      "statement_status": "statement_matched",
+      "scope": "Actual projective closure of a geometrically prime affine ideal; constructed zero-first-column integer rows and actual good subspace. Dimension-zero and empty-center boundaries included.",
+      "correction": null,
+      "evidence_refs": [
+        "e162",
+        "e163",
+        "e164"
+      ]
+    }
+  ],
+  "external_dependencies": [
+    {
+      "id": "external.finite_field_count",
+      "reference": "Cafure-Matera 2006 Corollary 5.6 / Lang-Weil unweighted bound",
+      "contract": "Needed upper bound is established internally by constructed Stepanov auxiliary, exact plane incidence averaging and actual good-plane witness; final endpoint only assumes irreducibility and p>27d^4. Does not claim the stronger full Cafure-Matera theorem or a two-sided Lang-Weil estimate.",
+      "dependency_status": "not_assumed_replaced_by_internal_proof",
+      "evidence_refs": [
+        "e165",
+        "e166",
+        "e167"
+      ]
+    },
+    {
+      "id": "external.singular_section_count",
+      "reference": "Standard Lang-Weil estimate for codimension-two singular set in proof 2.7",
+      "contract": "Actual common zeros of prime f and proper g, bounded by dimension constant*deg(f)deg(g)*q^(ambient-2); degree-size condition is discharged by p>27d^4 for derivative section. Uses filtered Koszul rank and explicit finite-field separators, not component/count assumptions.",
+      "dependency_status": "not_assumed_replaced_by_internal_proof",
+      "evidence_refs": [
+        "e168"
+      ]
+    },
+    {
+      "id": "external.noether_forms",
+      "reference": "Ruppert 1986 Satz 4, Theorem 3.2.2",
+      "contract": "Actual Euler minors, coefficient extraction and finite collection. Vanishing over arbitrary commutative rings for bounded-degree products yields every-characteristic specialization. Nonvanishing char0 follows actual generic plane Euler rank. Exact printed coefficient-sum bound is a proved output.",
+      "dependency_status": "formalized_internally_exact",
+      "evidence_refs": [
+        "e169",
+        "e170",
+        "e171"
+      ]
+    },
+    {
+      "id": "external.bad_prime_witness",
+      "reference": "Use of Noether witness in Corollary 3.2.3",
+      "contract": "Constructs actual nonzero integer witness divisible by every bad prime. Includes degree loss, so stronger upper bound. Final exact universal Noether theorem is separately proved; bad-prime estimate does not assume it.",
+      "dependency_status": "formalized_internally_independent_route",
+      "evidence_refs": [
+        "e172",
+        "e173"
+      ]
+    },
+    {
+      "id": "external.mertens_first",
+      "reference": "Mertens first theorem in 3.2.3 and 3.2.6",
+      "contract": "Actual |sum(logp/p)-logx|<=log4+6+E1 for x>=1; E1 is a proved convergent nonnegative series. Apache-2.0 adaptation cites AlexKontorovich/PrimeNumberTheoremAnd c39a751132c88b6e8080b74c74023fd95b3d8be0. No PNT or Mertens hypothesis in exported endpoint.",
+      "dependency_status": "adapted_proof_in_repository",
+      "evidence_refs": [
+        "e174",
+        "e041"
+      ]
+    },
+    {
+      "id": "external.chebyshev",
+      "reference": "Chebyshev bound used in Lemma 3.2.4",
+      "contract": "Actual theta(x)<=log4*x for x>=0; no supplied analytic prime-count input. Mathlib pinned at 56a005855ea17e0b0958f73ec801ae140b0a1679.",
+      "dependency_status": "mathlib_theorem_contract_checked",
+      "evidence_refs": [
+        "e175"
+      ]
+    },
+    {
+      "id": "external.bombieri_vaaler",
+      "reference": "Bombieri-Vaaler 1983 Theorem 1",
+      "contract": "Exact matrix endpoint checked. Its geometric inputs are actual Vaaler central cube-slice volume lower bound and Minkowski product inequality for arbitrary bounded symmetric convex bodies with nonempty interior and actual Z-lattice. These are theorem proofs, not typeclass placeholders for conjectural estimates.",
+      "dependency_status": "vendored_full_proof_contract_checked",
+      "evidence_refs": [
+        "e067",
+        "e176",
+        "e177"
+      ]
+    },
+    {
+      "id": "external.projective_bezout",
+      "reference": "Bezout used in Corollary 3.1.2",
+      "contract": "Actual projective points including infinity, irreducible homogeneous f, homogeneous nonmultiple g; cardinal<=deg(f)deg(g). Proof from actual principal Hilbert function and proper projective section. No supplied intersection-degree or point-count input.",
+      "dependency_status": "formalized_internally_needed_exact_scope",
+      "evidence_refs": [
+        "e178"
+      ]
+    },
+    {
+      "id": "external.grid_interpolation",
+      "reference": "Gautschi 1962 Theorem 1 cited by Lemma 3.4.1",
+      "contract": "Proves the required 3^d coefficient/grid bound directly from Lagrange interpolation, explicit binomial basis bounds and sum 2^(d+1)-1<=3^d. Does not claim all of Gautschi’s inverse-matrix theorem.",
+      "dependency_status": "not_assumed_replaced_by_internal_exact_proof",
+      "evidence_refs": [
+        "e179"
+      ]
+    },
+    {
+      "id": "external.heintz_separation",
+      "reference": "Heintz low-degree separation / pure-component degree budget used in 4.1.1-4.1.4",
+      "contract": "Actual low-degree separator and actual minimal-prime degree budget feed the count; no externally supplied section/count certificate.",
+      "dependency_status": "contract_recorded",
+      "additional_unproved_premise_reported": false,
+      "evidence_refs": [
+        "e180",
+        "e095",
+        "e181"
+      ]
+    },
+    {
+      "id": "external.coefficient_height_dichotomy",
+      "reference": "Browning et al. coefficient height dichotomy (4.2.2)",
+      "contract": "Dimension-only coefficient and actual degree-d nonmultiple are directly proved.",
+      "dependency_status": "contract_recorded",
+      "additional_unproved_premise_reported": false,
+      "evidence_refs": [
+        "e111"
+      ]
+    },
+    {
+      "id": "external.newton_polytope_special_cases",
+      "reference": "Gao Newton-polytope irreducibility in 4.2.5 and 6.1",
+      "contract": "Special cases needed here are proved algebraically via edge/Eisenstein constructions. General Gao theorem is not assumed or claimed.",
+      "dependency_status": "contract_recorded",
+      "additional_unproved_premise_reported": false,
+      "evidence_refs": [
+        "e115",
+        "e129"
+      ]
+    },
+    {
+      "id": "external.salberger_cover",
+      "reference": "Salberger Theorem 7.2, quoted as 4.3.5",
+      "contract": "Actual geometric projective curve-ideal cover, required degrees and logarithmic rate, with genuine homogeneous Jacobian smooth locus; all objects constructed.",
+      "dependency_status": "contract_recorded",
+      "additional_unproved_premise_reported": false,
+      "evidence_refs": [
+        "e124",
+        "e127"
+      ]
+    },
+    {
+      "id": "external.small_degree_surfaces",
+      "reference": "Browning et al. fixed-degree small-surface bounds",
+      "contract": "Replaced by internal all-d>=5 surface construction; no Od,epsilon estimate supplied as a premise.",
+      "dependency_status": "contract_recorded",
+      "additional_unproved_premise_reported": false,
+      "evidence_refs": [
+        "e123"
+      ]
+    },
+    {
+      "id": "external.class_group_bounded_generators",
+      "reference": "Bhargava et al. class-group reduction / bounded generators",
+      "contract": "Actual class-group representatives have signed square norm and every infinite-place absolute value <9|disc|^(1/n); actual short real basis in the integer lattice and discriminant-normalized translation counts are constructed. Exceptional subfields are constructed and counted, not discarded by assumption.",
+      "dependency_status": "contract_recorded",
+      "additional_unproved_premise_reported": false,
+      "evidence_refs": [
+        "e182",
+        "e183",
+        "e184",
+        "e185",
+        "e186"
+      ]
+    },
+    {
+      "id": "external.signed_norm_curve_count",
+      "reference": "Norm-curve irreducibility and both signs in class-group counting",
+      "contract": "Odd subfield index ensures actual absolute irreducibility. Both norm signs are covered. No-index-two hypothesis occurs only in an intermediate branch and is discharged by quadratic descent in final theorem.",
+      "dependency_status": "contract_recorded",
+      "additional_unproved_premise_reported": false,
+      "evidence_refs": [
+        "e187",
+        "e188",
+        "e189",
+        "e190"
+      ]
+    },
+    {
+      "id": "external.number_field_lattice",
+      "reference": "Minkowski/lattice inputs",
+      "contract": "Balanced generators use Mathlib proved Minkowski convex-body theorem. Short basis uses proved prescribed greedy basis product, exact integer-lattice covolume, and field-basis multiplication inequality; no unproved lattice theorem premise.",
+      "dependency_status": "contract_recorded",
+      "additional_unproved_premise_reported": false,
+      "evidence_refs": [
+        "e191",
+        "e184",
+        "e192"
+      ]
+    },
+    {
+      "id": "external.quadratic_class_group_descent",
+      "reference": "Quadratic genus/class-group descent replacing an external Kluners-Wang input",
+      "contract": "Actual bound h2(K)<=[h2(F)*2^([K:Q] omega(disc K)+[F:Q])]^2 for every quadratic K/F; unit obstruction, invariant ideal factorization, actual ramified prime cover and discriminant descent proved. Subpower numeric estimates and induction remove the branch hypothesis. No general external class-group theorem is invoked as an axiom or hypothesis.",
+      "dependency_status": "contract_recorded",
+      "additional_unproved_premise_reported": false,
+      "evidence_refs": [
+        "e193",
+        "e194",
+        "e195",
+        "e196",
+        "e197",
+        "e198",
+        "e094"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "id": "e001",
+      "file": "AffineCurveCounting/HypersurfacePointStalk.lean",
+      "declaration": "AffineCurveCounting.HypersurfacePointStalk",
+      "line": 93,
+      "kind": "abbrev",
+      "sha256": "fc4e29f7a028a0f7f8bd669de835a1b508bf982c40924851756ec6ddf7520912"
+    },
+    {
+      "id": "e002",
+      "file": "AffineCurveCounting/HypersurfacePointStalk.lean",
+      "declaration": "AffineCurveCounting.hypersurfacePointStalk_hilbert_eq",
+      "line": 135,
+      "kind": "theorem",
+      "sha256": "fc4e29f7a028a0f7f8bd669de835a1b508bf982c40924851756ec6ddf7520912"
+    },
+    {
+      "id": "e003",
+      "file": "AffineCurveCounting/HypersurfacePointwiseRemainder.lean",
+      "declaration": "AffineCurveCounting.exists_hypersurfacePointStalk_pointwise_remainder",
+      "line": 128,
+      "kind": "theorem",
+      "sha256": "51970ccd2a50b7f9835d7de901dced964750a902d204a91e20cefdc071b013bd"
+    },
+    {
+      "id": "e004",
+      "file": "AffineCurveCounting/WeightedSequenceEstimate.lean",
+      "declaration": "AffineCurveCounting.weighted_sequence_initial_sum_lower_bound",
+      "line": 208,
+      "kind": "theorem",
+      "sha256": "35d0727544f26485b7453ebe5780794275c37c20fd204ce1fd45a96094277d38"
+    },
+    {
+      "id": "e005",
+      "file": "AffineCurveCounting/WeightedSequenceEstimate.lean",
+      "declaration": "AffineCurveCounting.weighted_sequence_dimension_one",
+      "line": 224,
+      "kind": "theorem",
+      "sha256": "35d0727544f26485b7453ebe5780794275c37c20fd204ce1fd45a96094277d38"
+    },
+    {
+      "id": "e006",
+      "file": "AffineCurveCounting/WeightedDimensionOneExample.lean",
+      "declaration": "AffineCurveCounting.no_uniform_dimension_one_profile_error",
+      "line": 128,
+      "kind": "theorem",
+      "sha256": "64f8e1acd6803656d2943915b474167ad8c10e26e631a31690c4476f12907a76"
+    },
+    {
+      "id": "e007",
+      "file": "AffineCurveCounting/ActualLocalHilbertWeights.lean",
+      "declaration": "AffineCurveCounting.exists_hypersurfacePointStalk_hilbert_weights",
+      "line": 73,
+      "kind": "theorem",
+      "sha256": "023e48ec50a998c52069360ebfdb5afd4087b41cd68787e1638d1533c93db2aa"
+    },
+    {
+      "id": "e008",
+      "file": "AffineCurveCounting/ActualLocalHilbertWeights.lean",
+      "declaration": "AffineCurveCounting.hypersurfacePointStalk_enumerated_weights_sharp",
+      "line": 57,
+      "kind": "theorem",
+      "sha256": "023e48ec50a998c52069360ebfdb5afd4087b41cd68787e1638d1533c93db2aa"
+    },
+    {
+      "id": "e009",
+      "file": "AffineCurveCounting/LocalPrimeReduction.lean",
+      "declaration": "AffineCurveCounting.localPrimeLayerDimension",
+      "line": 36,
+      "kind": "def",
+      "sha256": "e45d1779ef7e951bb459c6303a5bb410c28b1c81618c8304abdc7beb80b30040"
+    },
+    {
+      "id": "e010",
+      "file": "AffineCurveCounting/PrimeIntegerLocalDeterminant.lean",
+      "declaration": "AffineCurveCounting.primeInteger_local_enumerated_weight_det",
+      "line": 68,
+      "kind": "theorem",
+      "sha256": "88b7a675760ce781f6d7264998b01934196743bda329c3c663e9265f6252d856"
+    },
+    {
+      "id": "e011",
+      "file": "AffineCurveCounting/PrimeIntegerLocalDeterminant.lean",
+      "declaration": "AffineCurveCounting.primeInteger_local_det_profile_dichotomy",
+      "line": 124,
+      "kind": "theorem",
+      "sha256": "88b7a675760ce781f6d7264998b01934196743bda329c3c663e9265f6252d856"
+    },
+    {
+      "id": "e012",
+      "file": "AffineCurveCounting/ProjectiveHypersurfaceLocal.lean",
+      "declaration": "AffineCurveCounting.projective_hypersurface_local_det_divisibility",
+      "line": 104,
+      "kind": "theorem",
+      "sha256": "166034026b33f3e50d374ddcf8be4eb1579918a064707f37d1700c37417ad23a"
+    },
+    {
+      "id": "e013",
+      "file": "AffineCurveCounting/ProjectiveHypersurfaceResidueDeterminant.lean",
+      "declaration": "AffineCurveCounting.projectiveHypersurfaceResidueMultiplicity_spec",
+      "line": 44,
+      "kind": "theorem",
+      "sha256": "a2a0da1bd1b5caca59b74c09e01bb128f1afbfbba0173281ea314b26df82d5d2"
+    },
+    {
+      "id": "e014",
+      "file": "AffineCurveCounting/MixedDegreeProjectiveLocal.lean",
+      "declaration": "AffineCurveCounting.exists_mixed_degree_projective_chart_det_divisor",
+      "line": 70,
+      "kind": "theorem",
+      "sha256": "dfde5145db6a5ba5a3419b4591664658c90e314772f080b64709605eb81134be"
+    },
+    {
+      "id": "e015",
+      "file": "AffineCurveCounting/MixedDegreeProjectiveExample.lean",
+      "declaration": "AffineCurveCounting.no_uniform_mixed_degree_local_error",
+      "line": 103,
+      "kind": "theorem",
+      "sha256": "95767ef287edd73ed5c330babcb7c9905f9a7d06c0c2a5553e7ae5294556ea9a"
+    },
+    {
+      "id": "e016",
+      "file": "AffineCurveCounting/ProjectiveHypersurfaceResidueDeterminant.lean",
+      "declaration": "AffineCurveCounting.projectiveHypersurfaceTotalMultiplicity",
+      "line": 62,
+      "kind": "def",
+      "sha256": "a2a0da1bd1b5caca59b74c09e01bb128f1afbfbba0173281ea314b26df82d5d2"
+    },
+    {
+      "id": "e017",
+      "file": "AffineCurveCounting/ProjectiveHypersurfaceResidueDeterminant.lean",
+      "declaration": "AffineCurveCounting.projective_hypersurface_minorGcd_bound",
+      "line": 140,
+      "kind": "theorem",
+      "sha256": "a2a0da1bd1b5caca59b74c09e01bb128f1afbfbba0173281ea314b26df82d5d2"
+    },
+    {
+      "id": "e018",
+      "file": "AffineCurveCounting/SharpProjectiveHypersurfaceCount.lean",
+      "declaration": "AffineCurveCounting.projective_hypersurface_finite_field_bound",
+      "line": 17,
+      "kind": "theorem",
+      "sha256": "2fdc4aebff5ea2013aed4cec796fb49c12850b0e66937c39a00f6db532ecd2a3"
+    },
+    {
+      "id": "e019",
+      "file": "AffineCurveCounting/SharpProjectiveHypersurfaceCount.lean",
+      "declaration": "AffineCurveCounting.projective_hypersurface_totalMultiplicity_bound",
+      "line": 46,
+      "kind": "theorem",
+      "sha256": "2fdc4aebff5ea2013aed4cec796fb49c12850b0e66937c39a00f6db532ecd2a3"
+    },
+    {
+      "id": "e020",
+      "file": "AffineCurveCounting/SharpHypersurfaceDeterminant.lean",
+      "declaration": "AffineCurveCounting.projective_hypersurface_normalized_count_error",
+      "line": 22,
+      "kind": "theorem",
+      "sha256": "b4fe73c06f19db419642e1d038a3ada1891ba868d249f8ac6e1f1a1fafaf0742"
+    },
+    {
+      "id": "e021",
+      "file": "AffineCurveCounting/SharpHypersurfaceDeterminant.lean",
+      "declaration": "AffineCurveCounting.projective_hypersurface_minorGcd_sharp",
+      "line": 52,
+      "kind": "theorem",
+      "sha256": "b4fe73c06f19db419642e1d038a3ada1891ba868d249f8ac6e1f1a1fafaf0742"
+    },
+    {
+      "id": "e022",
+      "file": "AffineCurveCounting/HypersurfaceAuxiliaryTheorem.lean",
+      "declaration": "AffineCurveCounting.hypersurface_projective_auxiliary",
+      "line": 34,
+      "kind": "theorem",
+      "sha256": "34125b98c8c78037da872163305d8c4e30c19e3e8fe4d1b9d0104c6665ffd339"
+    },
+    {
+      "id": "e023",
+      "file": "AffineCurveCounting/HypersurfaceAbsoluteAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceAbsoluteAuxiliaryConstant",
+      "line": 18,
+      "kind": "def",
+      "sha256": "6753d593419f08182054703ea990797a31519b0d458802912eaa39c1b7dfe4e2"
+    },
+    {
+      "id": "e024",
+      "file": "AffineCurveCounting/HypersurfaceProjectiveAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurface_absolute_projective_auxiliary",
+      "line": 15,
+      "kind": "theorem",
+      "sha256": "9440f4f0125bf90b12e92fc228c611dc1542bc4c975c60c5fea3a52b9004366b"
+    },
+    {
+      "id": "e025",
+      "file": "AffineCurveCounting/ProjectivePlaneCoefficientCount.lean",
+      "declaration": "AffineCurveCounting.projective_plane_coefficient_count",
+      "line": 14,
+      "kind": "theorem",
+      "sha256": "9ae5c37c29e307f818e691fb52b2f54da6e125ac20b087bc28c8c447ed509b83"
+    },
+    {
+      "id": "e026",
+      "file": "AffineCurveCounting/ProjectivePlaneUniformExpression.lean",
+      "declaration": "AffineCurveCounting.projective_plane_coefficient_count_chain",
+      "line": 108,
+      "kind": "theorem",
+      "sha256": "5c6126e38df39e62cb927d936ec0eaaba83f65fa993726d74e2d97171f8513c1"
+    },
+    {
+      "id": "e027",
+      "file": "AffineCurveCounting/HypersurfaceBadPrimeFactor.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceBadPrimeFactor",
+      "line": 25,
+      "kind": "def",
+      "sha256": "0128277c923c0e8a64ef2eb1e50c02f3b3642301d5e5bab297bd685f50696ea8"
+    },
+    {
+      "id": "e028",
+      "file": "AffineCurveCounting/HypersurfaceBadPrimeCoordinates.lean",
+      "declaration": "AffineCurveCounting.homogeneous_hypersurfaceBadReduction_iff",
+      "line": 86,
+      "kind": "lemma",
+      "sha256": "eccbbc91fcc8a7824cfc36c28b68334307f1c4a7faf7bfd23995197d40995f36"
+    },
+    {
+      "id": "e029",
+      "file": "AffineCurveCounting/LiteralAffineBadPrimes.lean",
+      "declaration": "AffineCurveCounting.LiteralAffineBadReduction",
+      "line": 14,
+      "kind": "def",
+      "sha256": "7dca8f640559921c4eb428a9740d3cbc7c39241b92fb584de602c73cc78590ab"
+    },
+    {
+      "id": "e030",
+      "file": "AffineCurveCounting/LiteralAffineBadPrimes.lean",
+      "declaration": "AffineCurveCounting.literalAffineBadPrimeFactor",
+      "line": 31,
+      "kind": "def",
+      "sha256": "7dca8f640559921c4eb428a9740d3cbc7c39241b92fb584de602c73cc78590ab"
+    },
+    {
+      "id": "e031",
+      "file": "AffineCurveCounting/ExplicitNoetherTheorem.lean",
+      "declaration": "AffineCurveCounting.exists_explicit_noether_forms",
+      "line": 18,
+      "kind": "theorem",
+      "sha256": "1f1e3075fce59d8b28b5f40d3903471403d2290e14d2ddac2d60afb8b7a2a6b0"
+    },
+    {
+      "id": "e032",
+      "file": "AffineCurveCounting/UniversalNoetherForms.lean",
+      "declaration": "AffineCurveCounting.universalNoetherForms",
+      "line": 44,
+      "kind": "def",
+      "sha256": "b65c998c244b4446a33e51889c0c53cf03aa585dd2d7e777d7eb1e72d2db2790"
+    },
+    {
+      "id": "e033",
+      "file": "AffineCurveCounting/UniversalNoetherForms.lean",
+      "declaration": "AffineCurveCounting.universalNoetherForms_vanish",
+      "line": 81,
+      "kind": "theorem",
+      "sha256": "b65c998c244b4446a33e51889c0c53cf03aa585dd2d7e777d7eb1e72d2db2790"
+    },
+    {
+      "id": "e034",
+      "file": "AffineCurveCounting/UniversalNoetherForms.lean",
+      "declaration": "AffineCurveCounting.universalNoetherForms_nonvanishing",
+      "line": 93,
+      "kind": "theorem",
+      "sha256": "b65c998c244b4446a33e51889c0c53cf03aa585dd2d7e777d7eb1e72d2db2790"
+    },
+    {
+      "id": "e035",
+      "file": "AffineCurveCounting/HypersurfaceBadPrimeFactor.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceBadPrimeFactor_le_max",
+      "line": 87,
+      "kind": "theorem",
+      "sha256": "0128277c923c0e8a64ef2eb1e50c02f3b3642301d5e5bab297bd685f50696ea8"
+    },
+    {
+      "id": "e036",
+      "file": "AffineCurveCounting/HypersurfaceBadPrimeCoordinates.lean",
+      "declaration": "AffineCurveCounting.finite_fin_hypersurface_bad_primes",
+      "line": 70,
+      "kind": "theorem",
+      "sha256": "eccbbc91fcc8a7824cfc36c28b68334307f1c4a7faf7bfd23995197d40995f36"
+    },
+    {
+      "id": "e037",
+      "file": "AffineCurveCounting/LiteralAffineBadPrimes.lean",
+      "declaration": "AffineCurveCounting.finite_literal_affine_bad_primes",
+      "line": 22,
+      "kind": "lemma",
+      "sha256": "7dca8f640559921c4eb428a9740d3cbc7c39241b92fb584de602c73cc78590ab"
+    },
+    {
+      "id": "e038",
+      "file": "AffineCurveCounting/LiteralAffineBadPrimes.lean",
+      "declaration": "AffineCurveCounting.literalAffineBadPrimeFactor_le_inclusive",
+      "line": 61,
+      "kind": "lemma",
+      "sha256": "7dca8f640559921c4eb428a9740d3cbc7c39241b92fb584de602c73cc78590ab"
+    },
+    {
+      "id": "e039",
+      "file": "AffineCurveCounting/LiteralAffineBadPrimeHeight.lean",
+      "declaration": "AffineCurveCounting.literalAffineBadPrimeFactor_le_max",
+      "line": 14,
+      "kind": "theorem",
+      "sha256": "174f2cb1631e40b53d0005c7e57fef4fd56a266da317032079917852c90c48fd"
+    },
+    {
+      "id": "e040",
+      "file": "AffineCurveCounting/PaperPrimeEstimates.lean",
+      "declaration": "AffineCurveCounting.prime_log_sum_le_two_mul",
+      "line": 14,
+      "kind": "theorem",
+      "sha256": "6428203625a96698efaeaf1333aafbf2449b6c7361e7086b439d5bbbabb7d15b"
+    },
+    {
+      "id": "e041",
+      "file": "AffineCurveCounting/PaperPrimeEstimates.lean",
+      "declaration": "AffineCurveCounting.prime_sqrt_tail_summable_and_bound",
+      "line": 40,
+      "kind": "theorem",
+      "sha256": "6428203625a96698efaeaf1333aafbf2449b6c7361e7086b439d5bbbabb7d15b"
+    },
+    {
+      "id": "e042",
+      "file": "AffineCurveCounting/HypersurfaceHeightDeterminant.lean",
+      "declaration": "AffineCurveCounting.exists_hypersurface_determinant_log_lower",
+      "line": 16,
+      "kind": "theorem",
+      "sha256": "65d734616f720e8fbffda7dbdbb04512b4fbe75d6da175b6ab587fc840e3aa74"
+    },
+    {
+      "id": "e043",
+      "file": "AffineCurveCounting/HypersurfaceDeterminantRank.lean",
+      "declaration": "AffineCurveCounting.hypersurface_determinant_log_lower_at_rank",
+      "line": 47,
+      "kind": "theorem",
+      "sha256": "1ab3353fce84ac47fcb901508ca003747b1d06bda217757a445eaca6865a9bc7"
+    },
+    {
+      "id": "e044",
+      "file": "AffineCurveCounting/GlobalMixedDegreeDeterminant.lean",
+      "declaration": "AffineCurveCounting.no_uniform_global_mixed_degree_det_lower_bound",
+      "line": 107,
+      "kind": "theorem",
+      "sha256": "9205591aef88170e4bffcfa9d97e9a8091f1cb4da1fe3c9bd01aa22067953107"
+    },
+    {
+      "id": "e045",
+      "file": "AffineCurveCounting/HigherDimensionalPrimeSum.lean",
+      "declaration": "AffineCurveCounting.general_determinant_log_lower_cutoff",
+      "line": 35,
+      "kind": "theorem",
+      "sha256": "7c35eb95da98cd052a2cacdc45bf8f10bf5321b005d75361d13f3916ae7191b6"
+    },
+    {
+      "id": "e046",
+      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
+      "declaration": "AffineCurveCounting.homogeneousDeterminantFamilyGcd",
+      "line": 22,
+      "kind": "def",
+      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+    },
+    {
+      "id": "e047",
+      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
+      "declaration": "AffineCurveCounting.projective_hypersurface_familyGcd_sharp",
+      "line": 42,
+      "kind": "theorem",
+      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+    },
+    {
+      "id": "e048",
+      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
+      "declaration": "AffineCurveCounting.hypersurface_determinant_family_log_lower",
+      "line": 163,
+      "kind": "theorem",
+      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+    },
+    {
+      "id": "e049",
+      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
+      "declaration": "AffineCurveCounting.projective_hypersurface_determinant_family_log_lower",
+      "line": 209,
+      "kind": "theorem",
+      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+    },
+    {
+      "id": "e050",
+      "file": "AffineCurveCounting/HypersurfaceNonabsoluteAuxiliary.lean",
+      "declaration": "AffineCurveCounting.integer_nonabsolute_homogeneous_auxiliary",
+      "line": 71,
+      "kind": "theorem",
+      "sha256": "2ab60339e1f0c5f425ed7f38edfc1294231feb052e21cb4795989a4f4d29a044"
+    },
+    {
+      "id": "e051",
+      "file": "AffineCurveCounting/HypersurfaceNonabsoluteAuxiliary.lean",
+      "declaration": "AffineCurveCounting.nonabsolute_projective_auxiliary",
+      "line": 96,
+      "kind": "theorem",
+      "sha256": "2ab60339e1f0c5f425ed7f38edfc1294231feb052e21cb4795989a4f4d29a044"
+    },
+    {
+      "id": "e052",
+      "file": "AffineCurveCounting/HypersurfaceSmallHeightAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurface_auxiliary_small_height_degree",
+      "line": 73,
+      "kind": "theorem",
+      "sha256": "3bc19acba117a62686503acd8ee45c50df64b9525834a6acc843dad759ca44a9"
+    },
+    {
+      "id": "e053",
+      "file": "AffineCurveCounting/HypersurfacePositionedAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceSmallThreshold_position",
+      "line": 21,
+      "kind": "lemma",
+      "sha256": "7ee1cf8f1922f1a621517c47d2100725f3a1e0bc212db40a09213e1bb51451e9"
+    },
+    {
+      "id": "e054",
+      "file": "AffineCurveCounting/HypersurfaceSmallHeightAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceSmallThreshold",
+      "line": 16,
+      "kind": "def",
+      "sha256": "3bc19acba117a62686503acd8ee45c50df64b9525834a6acc843dad759ca44a9"
+    },
+    {
+      "id": "e055",
+      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceSourcePositionParameter",
+      "line": 16,
+      "kind": "def",
+      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+    },
+    {
+      "id": "e056",
+      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurface_pure_coefficient_log_position",
+      "line": 25,
+      "kind": "lemma",
+      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+    },
+    {
+      "id": "e057",
+      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurface_small_height_pure_coefficient_auxiliary",
+      "line": 57,
+      "kind": "theorem",
+      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+    },
+    {
+      "id": "e058",
+      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceSmallProjectiveConstant",
+      "line": 15,
+      "kind": "def",
+      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+    },
+    {
+      "id": "e059",
+      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceSmallProjectiveConstant_pos",
+      "line": 24,
+      "kind": "lemma",
+      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+    },
+    {
+      "id": "e060",
+      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurface_small_height_projective_auxiliary",
+      "line": 36,
+      "kind": "theorem",
+      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+    },
+    {
+      "id": "e061",
+      "file": "AffineCurveCounting/DistinguishedCoefficientOrder.lean",
+      "declaration": "AffineCurveCounting.distinguishedCoefficientOrder_leadingCoeff",
+      "line": 39,
+      "kind": "lemma",
+      "sha256": "9d921b4b4344aa36789ca9f6f92d4b5535de765b2b76a386a9fd600d98bafb17"
+    },
+    {
+      "id": "e062",
+      "file": "AffineCurveCounting/HypersurfaceLargeHeightAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurface_auxiliary_large_height_degree",
+      "line": 64,
+      "kind": "theorem",
+      "sha256": "4c32a9fcb5df7e51ef691051dd3efc714c572c541737d6bfddf5f25cbe568ab0"
+    },
+    {
+      "id": "e063",
+      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurface_large_height_pure_coefficient_auxiliary",
+      "line": 90,
+      "kind": "theorem",
+      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+    },
+    {
+      "id": "e064",
+      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceLargeProjectiveConstant",
+      "line": 20,
+      "kind": "def",
+      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+    },
+    {
+      "id": "e065",
+      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceLargeProjectiveConstant_pos",
+      "line": 29,
+      "kind": "lemma",
+      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+    },
+    {
+      "id": "e066",
+      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurface_large_height_projective_auxiliary",
+      "line": 102,
+      "kind": "theorem",
+      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+    },
+    {
+      "id": "e067",
+      "file": "vendor/bombieri-vaaler/ArithmeticHeights/BombieriVaaler.lean",
+      "declaration": "Int.Matrix.exists_ne_zero_mulVec_eq_zero_iSup_abs_le_det_rpow",
+      "line": 526,
+      "kind": "theorem",
+      "sha256": "31b4c55438102dc327261bfa805138ad79e423f3631664ec09cd89959e47f510"
+    },
+    {
+      "id": "e068",
+      "file": "AffineCurveCounting/HomogeneousDeterminantComparison.lean",
+      "declaration": "AffineCurveCounting.homogeneous_no_auxiliary_comparison",
+      "line": 16,
+      "kind": "theorem",
+      "sha256": "9e919cfd6a7714eb11ea47f0cea9da1dfbb258eaa5c993603afe5398ebe35ab7"
+    },
+    {
+      "id": "e069",
+      "file": "AffineCurveCounting/PaperLogarithmEstimate.lean",
+      "declaration": "AffineCurveCounting.log_log_sub_div_le",
+      "line": 11,
+      "kind": "theorem",
+      "sha256": "ee3fbcb4febb59a69acf5895127d6545b99ad2f31b3cbe7a03500145b291479e"
+    },
+    {
+      "id": "e070",
+      "file": "AffineCurveCounting/ComplexGridInterpolation.lean",
+      "declaration": "AffineCurveCounting.exists_complex_integer_grid_height_witness",
+      "line": 162,
+      "kind": "theorem",
+      "sha256": "5508f6028a6c8da4cbc17ba830bf045c1b09e1d18a29819bd10f9a05b54ee05c"
+    },
+    {
+      "id": "e071",
+      "file": "AffineCurveCounting/ComplexMultivariateGrid.lean",
+      "declaration": "AffineCurveCounting.exists_complex_homogeneous_grid_height_witness",
+      "line": 75,
+      "kind": "theorem",
+      "sha256": "22453e82c5bbe95d8650a0d8e9d77c9e1022c8fba786604f8a96672ebba1974e"
+    },
+    {
+      "id": "e072",
+      "file": "AffineCurveCounting/ComplexMultivariateGrid.lean",
+      "declaration": "AffineCurveCounting.exists_complex_bounded_leading_coefficient_translation",
+      "line": 94,
+      "kind": "theorem",
+      "sha256": "22453e82c5bbe95d8650a0d8e9d77c9e1022c8fba786604f8a96672ebba1974e"
+    },
+    {
+      "id": "e073",
+      "file": "AffineCurveCounting/HypersurfacePositionHeight.lean",
+      "declaration": "AffineCurveCounting.exists_hypersurface_coefficient_position",
+      "line": 107,
+      "kind": "theorem",
+      "sha256": "57b078bb678c731472f107174ae86bf265e25ba9e8cda34e8ab7d37004743ad7"
+    },
+    {
+      "id": "e074",
+      "file": "AffineCurveCounting/HypersurfaceShearInvariance.lean",
+      "declaration": "AffineCurveCounting.hypersurfaceBadReduction_homogeneousTranslation",
+      "line": 13,
+      "kind": "lemma",
+      "sha256": "8b9321efd17c2e3c88c0b1f7e8816bb7aecbf342f365782617bd7594f01b53ea"
+    },
+    {
+      "id": "e075",
+      "file": "AffineCurveCounting/HypersurfaceAuxiliaryScaling.lean",
+      "declaration": "AffineCurveCounting.auxiliary_box_rpow_factor",
+      "line": 12,
+      "kind": "lemma",
+      "sha256": "e6de17de0672b64f2c5f8477868a33fbe7bb197fc1e5d24166e0e497803a8e5e"
+    },
+    {
+      "id": "e076",
+      "file": "AffineCurveCounting/HypersurfaceAbsoluteAuxiliary.lean",
+      "declaration": "AffineCurveCounting.hypersurface_absolute_auxiliary_degree",
+      "line": 31,
+      "kind": "theorem",
+      "sha256": "6753d593419f08182054703ea990797a31519b0d458802912eaa39c1b7dfe4e2"
+    },
+    {
+      "id": "e077",
+      "file": "AffineCurveCounting/ProjectiveCubicExponent.lean",
+      "declaration": "AffineCurveCounting.projective_dimension_growth_cubic",
+      "line": 123,
+      "kind": "theorem",
+      "sha256": "aedfa9c2c4ea140486a7295ba8bd43f8210918f481e4106d11a9b7d2b69d197d"
+    },
+    {
+      "id": "e078",
+      "file": "AffineCurveCounting/ProjectiveCurveBound.lean",
+      "declaration": "AffineCurveCounting.ProjectiveCurveBound",
+      "line": 104,
+      "kind": "def",
+      "sha256": "a165c81f4087060145f92e34ac7a5ead2a783451166fc3d861df8b23611339a5"
+    },
+    {
+      "id": "e079",
+      "file": "AffineCurveCounting/ProjectiveCurveBound.lean",
+      "declaration": "AffineCurveCounting.projectiveCurveBound",
+      "line": 111,
+      "kind": "theorem",
+      "sha256": "a165c81f4087060145f92e34ac7a5ead2a783451166fc3d861df8b23611339a5"
+    },
+    {
+      "id": "e080",
+      "file": "AffineCurveCounting/ProjectiveSection.lean",
+      "declaration": "AffineCurveCounting.HasProjectiveCurveDegree",
+      "line": 28,
+      "kind": "def",
+      "sha256": "a25e084f8acdaf71700eb5d76b78d3bab523ba0459da9da2cddae3957e8f3d6e"
+    },
+    {
+      "id": "e081",
+      "file": "AffineCurveCounting/ProjectiveBox.lean",
+      "declaration": "AffineCurveCounting.projectiveCount",
+      "line": 63,
+      "kind": "def",
+      "sha256": "6983df75ff6550867e29328a2037f2153c2e6c6d16226b7ba769869d5e3a5905"
+    },
+    {
+      "id": "e082",
+      "file": "AffineCurveCounting/Curve.lean",
+      "declaration": "AffineCurveCounting.AffineCurveBound",
+      "line": 63,
+      "kind": "def",
+      "sha256": "ff29a2fe7c0c9d673fb0023c5ddfc7df75e3dfef4f7a366c1d9033afd7a4958f"
+    },
+    {
+      "id": "e083",
+      "file": "AffineCurveCounting/AffineCurveBound.lean",
+      "declaration": "AffineCurveCounting.affineCurveBound",
+      "line": 15,
+      "kind": "theorem",
+      "sha256": "c0824087ea48a13c6e8f0293ed4d2d080ece54438e3287801407deca3f944d1e"
+    },
+    {
+      "id": "e084",
+      "file": "AffineCurveCounting/Curve.lean",
+      "declaration": "AffineCurveCounting.HasAffineCurveDegree",
+      "line": 45,
+      "kind": "def",
+      "sha256": "ff29a2fe7c0c9d673fb0023c5ddfc7df75e3dfef4f7a366c1d9033afd7a4958f"
+    },
+    {
+      "id": "e085",
+      "file": "AffineCurveCounting/Plane.lean",
+      "declaration": "AffineCurveCounting.curveBound",
+      "line": 20,
+      "kind": "def",
+      "sha256": "0af68a37a9635f8a4f803b7253565701ab6086504e36b5c69fb8d994c1a07981"
+    },
+    {
+      "id": "e086",
+      "file": "AffineCurveCounting/Box.lean",
+      "declaration": "AffineCurveCounting.count",
+      "line": 57,
+      "kind": "def",
+      "sha256": "9dc92e2522339b880eeabbb9344d9d993159efb8ece3e7559ad00aa919d097e8"
+    },
+    {
+      "id": "e087",
+      "file": "AffineCurveCounting/CubicAffineDimensionGrowth.lean",
+      "declaration": "AffineCurveCounting.top_form_hypersurface_dimension_growth_cubic",
+      "line": 18,
+      "kind": "theorem",
+      "sha256": "de03e82175d07b44299bfd202e2a98e5fe071090ff7c1f132a684ccda366672e"
+    },
+    {
+      "id": "e088",
+      "file": "AffineCurveCounting/CubicAffineDimensionGrowth.lean",
+      "declaration": "AffineCurveCounting.rational_top_form_hypersurface_dimension_growth_cubic",
+      "line": 32,
+      "kind": "theorem",
+      "sha256": "de03e82175d07b44299bfd202e2a98e5fe071090ff7c1f132a684ccda366672e"
+    },
+    {
+      "id": "e089",
+      "file": "AffineCurveCounting/ProjectiveCurveLowerBound.lean",
+      "declaration": "AffineCurveCounting.projective_integral_curve_lower_bound",
+      "line": 40,
+      "kind": "theorem",
+      "sha256": "b543dfd3b61b3fb5b4a8d70bb6845e9eb6c81a30fed144b764bd38947b618ff6"
+    },
+    {
+      "id": "e090",
+      "file": "AffineCurveCounting/ClassGroupBound.lean",
+      "declaration": "AffineCurveCounting.classGroup_two_torsion_bound",
+      "line": 20,
+      "kind": "theorem",
+      "sha256": "f4a52abfad5c68ad271a776985143b76a881831c223494e4bd486d1ff4106c86"
+    },
+    {
+      "id": "e091",
+      "file": "AffineCurveCounting/ClassGroupTwoTorsion.lean",
+      "declaration": "AffineCurveCounting.classGroupTwoTorsion",
+      "line": 56,
+      "kind": "def",
+      "sha256": "2c482fa21eb42d79f6b424a803552b138e9287da36af3cd9371fd7cf957c2799"
+    },
+    {
+      "id": "e092",
+      "file": "AffineCurveCounting/ClassGroupTwoTorsion.lean",
+      "declaration": "AffineCurveCounting.classGroupTwoTorsionCard",
+      "line": 64,
+      "kind": "def",
+      "sha256": "2c482fa21eb42d79f6b424a803552b138e9287da36af3cd9371fd7cf957c2799"
+    },
+    {
+      "id": "e093",
+      "file": "AffineCurveCounting/ClassGroupUniformBound.lean",
+      "declaration": "AffineCurveCounting.ClassGroupLogarithmicBound",
+      "line": 17,
+      "kind": "def",
+      "sha256": "f4aaa7b1654a5be6de07f65d73d9a521508dd07a243736587fb7e6b03b4059dd"
+    },
+    {
+      "id": "e094",
+      "file": "AffineCurveCounting/ClassGroupUniformBound.lean",
+      "declaration": "AffineCurveCounting.classGroup_uniform_logarithmic_bound",
+      "line": 23,
+      "kind": "theorem",
+      "sha256": "f4aaa7b1654a5be6de07f65d73d9a521508dd07a243736587fb7e6b03b4059dd"
+    },
+    {
+      "id": "e095",
+      "file": "AffineCurveCounting/PureVarietyGridBound.lean",
+      "declaration": "AffineCurveCounting.pure_ideal_grid_card_le",
+      "line": 32,
+      "kind": "theorem",
+      "sha256": "6a6d1fcb57ef1d28a912b0d12c28ad602d5a0c96ad03e581aa6372117e3103a6"
+    },
+    {
+      "id": "e096",
+      "file": "AffineCurveCounting/PureVarietyGridBound.lean",
+      "declaration": "AffineCurveCounting.pure_variety_count_le_degree_mul_box_side",
+      "line": 109,
+      "kind": "theorem",
+      "sha256": "6a6d1fcb57ef1d28a912b0d12c28ad602d5a0c96ad03e581aa6372117e3103a6"
+    },
+    {
+      "id": "e097",
+      "file": "AffineCurveCounting/SmallOutsidePoint.lean",
+      "declaration": "AffineCurveCounting.exists_small_integer_point_outside_prime_ideal",
+      "line": 90,
+      "kind": "theorem",
+      "sha256": "2a460690211b7e171db66072af5297b7ebeb1435dfb1982e65e4ec2aeedbbdd9"
+    },
+    {
+      "id": "e098",
+      "file": "AffineCurveCounting/SmallOutsidePoint.lean",
+      "declaration": "AffineCurveCounting.exists_small_projective_integer_representative_outside",
+      "line": 142,
+      "kind": "theorem",
+      "sha256": "2a460690211b7e171db66072af5297b7ebeb1435dfb1982e65e4ec2aeedbbdd9"
+    },
+    {
+      "id": "e099",
+      "file": "AffineCurveCounting/SmallOutsidePoint.lean",
+      "declaration": "AffineCurveCounting.exists_small_rational_projective_point_outside_prime_ideal",
+      "line": 179,
+      "kind": "theorem",
+      "sha256": "2a460690211b7e171db66072af5297b7ebeb1435dfb1982e65e4ec2aeedbbdd9"
+    },
+    {
+      "id": "e100",
+      "file": "AffineCurveCounting/NonRationalVarietyCount.lean",
+      "declaration": "AffineCurveCounting.non_rational_prime_count_le_box",
+      "line": 17,
+      "kind": "theorem",
+      "sha256": "f7456a29768e0ac1d0d3792eb32414b20192e40738372550f953e41abd5b734b"
+    },
+    {
+      "id": "e101",
+      "file": "AffineCurveCounting/NonRationalProjectiveCount.lean",
+      "declaration": "AffineCurveCounting.non_rational_projective_count_le_box",
+      "line": 63,
+      "kind": "theorem",
+      "sha256": "7c13db21f923ae8bfb394e2eb49e4b06c2f0ee4c3cd4426a894b12940b35de9e"
+    },
+    {
+      "id": "e102",
+      "file": "AffineCurveCounting/ZeroDimensionalPrimeDescent.lean",
+      "declaration": "AffineCurveCounting.non_rational_zero_dimensional_locus_empty",
+      "line": 82,
+      "kind": "theorem",
+      "sha256": "ce8605ad360082716e99ad63448d5cb8f18f745e44946e8017844234ad15cede"
+    },
+    {
+      "id": "e103",
+      "file": "AffineCurveCounting/NonRationalVarietyCount.lean",
+      "declaration": "AffineCurveCounting.nonabsolute_variety_count_le_box",
+      "line": 43,
+      "kind": "theorem",
+      "sha256": "f7456a29768e0ac1d0d3792eb32414b20192e40738372550f953e41abd5b734b"
+    },
+    {
+      "id": "e104",
+      "file": "AffineCurveCounting/NonRationalProjectiveCount.lean",
+      "declaration": "AffineCurveCounting.nonabsolute_projective_variety_count_le_box",
+      "line": 76,
+      "kind": "theorem",
+      "sha256": "7c13db21f923ae8bfb394e2eb49e4b06c2f0ee4c3cd4426a894b12940b35de9e"
+    },
+    {
+      "id": "e105",
+      "file": "AffineCurveCounting/ZeroDimensionalPrimeDescent.lean",
+      "declaration": "AffineCurveCounting.nonabsolute_zero_dimensional_locus_empty",
+      "line": 94,
+      "kind": "theorem",
+      "sha256": "ce8605ad360082716e99ad63448d5cb8f18f745e44946e8017844234ad15cede"
+    },
+    {
+      "id": "e106",
+      "file": "AffineCurveCounting/NonRationalProjectiveCurve.lean",
+      "declaration": "AffineCurveCounting.non_rational_projective_curve_count_le_degree_sq",
+      "line": 29,
+      "kind": "theorem",
+      "sha256": "ddeb29937a734e9172d7f04daad82ca7271ebc7a07bb1590fd5ed33e63a7fda7"
+    },
+    {
+      "id": "e107",
+      "file": "AffineCurveCounting/NonRationalProjectiveCurve.lean",
+      "declaration": "AffineCurveCounting.nonabsolute_projective_curve_count_le_degree_sq",
+      "line": 92,
+      "kind": "theorem",
+      "sha256": "ddeb29937a734e9172d7f04daad82ca7271ebc7a07bb1590fd5ed33e63a7fda7"
+    },
+    {
+      "id": "e108",
+      "file": "AffineCurveCounting/LiteralAffineAuxiliaryTheorem.lean",
+      "declaration": "AffineCurveCounting.literal_affine_hypersurface_auxiliary",
+      "line": 122,
+      "kind": "theorem",
+      "sha256": "7af046ca2d2d4cd4c091285c8bec17913e18974477f080151e546a5f9511667b"
+    },
+    {
+      "id": "e109",
+      "file": "AffineCurveCounting/AffineHypersurfaceAuxiliary.lean",
+      "declaration": "AffineCurveCounting.affineAuxiliaryDegreeExpression",
+      "line": 16,
+      "kind": "def",
+      "sha256": "9520649c2500548151e157e629e3584f634ad9c61d1aa5c0994f3ab6fb4fa072"
+    },
+    {
+      "id": "e110",
+      "file": "AffineCurveCounting/AffineHypersurfaceAuxiliary.lean",
+      "declaration": "AffineCurveCounting.affineHypersurfaceAuxiliaryConstant_pos",
+      "line": 29,
+      "kind": "lemma",
+      "sha256": "9520649c2500548151e157e629e3584f634ad9c61d1aa5c0994f3ab6fb4fa072"
+    },
+    {
+      "id": "e111",
+      "file": "AffineCurveCounting/ProjectiveCoefficientHeightUniform.lean",
+      "declaration": "AffineCurveCounting.projective_coefficient_height_dichotomy_uniform",
+      "line": 145,
+      "kind": "theorem",
+      "sha256": "d1c06a3cb42d3e7d9825bf332a76c23c4bcfa6355de97f78471cc821f8883bdf"
+    },
+    {
+      "id": "e112",
+      "file": "AffineCurveCounting/HypersurfaceHeightTransfer.lean",
+      "declaration": "AffineCurveCounting.hypersurface_badPrime_height_transfer",
+      "line": 38,
+      "kind": "theorem",
+      "sha256": "a610368819c9f49551c04aaced5fe5eb638239b0980fe7e4f9eea20e6ff6420e"
+    },
+    {
+      "id": "e113",
+      "file": "AffineCurveCounting/LiteralAffinePlaneCount.lean",
+      "declaration": "AffineCurveCounting.literal_affine_plane_coefficient_count_uniform",
+      "line": 55,
+      "kind": "theorem",
+      "sha256": "fb2812ae0cb86b072cf300c653adf63e08e4301be76107aa44683a0f28baa5c4"
+    },
+    {
+      "id": "e114",
+      "file": "AffineCurveCounting/AffinePlaneCoefficientCount.lean",
+      "declaration": "AffineCurveCounting.affinePlaneCoefficientCountExpression",
+      "line": 16,
+      "kind": "def",
+      "sha256": "e457e1f883ece0f442cb1b1048c3236a24fdc74b61439f4ff178383e60e03268"
+    },
+    {
+      "id": "e115",
+      "file": "AffineCurveCounting/CoprimeNewtonEdgeCount.lean",
+      "declaration": "AffineCurveCounting.coprime_newton_edge_log_free_bound",
+      "line": 119,
+      "kind": "theorem",
+      "sha256": "475ca10548f7179add72e673485f4c8412bd8b806b385759775bd7d9710984c8"
+    },
+    {
+      "id": "e116",
+      "file": "AffineCurveCounting/AffineVarietyProjection.lean",
+      "declaration": "AffineCurveCounting.exists_geometrically_integral_affine_projection",
+      "line": 16,
+      "kind": "theorem",
+      "sha256": "a48656ad5c91a7197b39cd12c0ee1f9ac65d8701f9c2d3e1c3d64b0ca36823e9"
+    },
+    {
+      "id": "e117",
+      "file": "AffineCurveCounting/AffineVarietyProjection.lean",
+      "declaration": "AffineCurveCounting.affine_variety_projection_constants",
+      "line": 53,
+      "kind": "theorem",
+      "sha256": "a48656ad5c91a7197b39cd12c0ee1f9ac65d8701f9c2d3e1c3d64b0ca36823e9"
+    },
+    {
+      "id": "e118",
+      "file": "AffineCurveCounting/GeometricProjectiveCurveProjection.lean",
+      "declaration": "AffineCurveCounting.exists_geometric_affine_curve_projection",
+      "line": 117,
+      "kind": "theorem",
+      "sha256": "ca8e903f13c7662f4653fc29426b952bb210229592bf679019da9d844d2b7436"
+    },
+    {
+      "id": "e119",
+      "file": "AffineCurveCounting/GeometricProjectiveProjection.lean",
+      "declaration": "AffineCurveCounting.exists_geometrically_integral_projective_projection",
+      "line": 19,
+      "kind": "theorem",
+      "sha256": "de53e87f817117970e60f9aaeb807ec863c28de311c78a21743838de5a384577"
+    },
+    {
+      "id": "e120",
+      "file": "AffineCurveCounting/GeometricProjectiveCurveProjection.lean",
+      "declaration": "AffineCurveCounting.exists_geometric_projective_curve_projection",
+      "line": 67,
+      "kind": "theorem",
+      "sha256": "ca8e903f13c7662f4653fc29426b952bb210229592bf679019da9d844d2b7436"
+    },
+    {
+      "id": "e121",
+      "file": "AffineCurveCounting/SurfaceLineContribution.lean",
+      "declaration": "AffineCurveCounting.surface_line_contribution",
+      "line": 136,
+      "kind": "theorem",
+      "sha256": "6fdd8f1280ab139221a16ff67c3515b58dc6bc9f6af44192e4795f072c3b0d6f"
+    },
+    {
+      "id": "e122",
+      "file": "AffineCurveCounting/DegreeOneComponentLines.lean",
+      "declaration": "AffineCurveCounting.degree_one_components_line_cover",
+      "line": 13,
+      "kind": "theorem",
+      "sha256": "5a5809269cc34c14fadda0976f3e497d10eb3e3e84f20982f0b805577a6290c6"
+    },
+    {
+      "id": "e123",
+      "file": "AffineCurveCounting/TopFormDimensionGrowthAllDegrees.lean",
+      "declaration": "AffineCurveCounting.top_form_surface_dimension_growth",
+      "line": 16,
+      "kind": "theorem",
+      "sha256": "cd5f188930b5d84cedf13efe99d02f50a44cecbf93ef4049f9af18fdb27ed0fb"
+    },
+    {
+      "id": "e124",
+      "file": "AffineCurveCounting/SalbergerSurfaceTheorem.lean",
+      "declaration": "AffineCurveCounting.salberger_surface_cover",
+      "line": 15,
+      "kind": "theorem",
+      "sha256": "1b50d9367d8206f5cb0fdfe3b420262e23dc93b1ef15e8744f5b29cd9357fc36"
+    },
+    {
+      "id": "e125",
+      "file": "AffineCurveCounting/SurfaceSalbergerCover.lean",
+      "declaration": "AffineCurveCounting.surface_salberger_cover",
+      "line": 76,
+      "kind": "theorem",
+      "sha256": "3627872996c1caf86ece15d1858d0eaf4027d93ae5fea4a4dcfbb6e131a19e2d"
+    },
+    {
+      "id": "e126",
+      "file": "AffineCurveCounting/ProjectiveSurfaceSalbergerCover.lean",
+      "declaration": "AffineCurveCounting.projective_surface_salberger_cover",
+      "line": 35,
+      "kind": "theorem",
+      "sha256": "3e4ba264288df8612d4ea8395647ff5d22af60f08c10a93ce89bf86aad818cd9"
+    },
+    {
+      "id": "e127",
+      "file": "AffineCurveCounting/ProjectiveChartSmoothness.lean",
+      "declaration": "AffineCurveCounting.projectiveSmoothAffineChart_eq",
+      "line": 37,
+      "kind": "theorem",
+      "sha256": "ecfa205e63a38dc7e673310ad793d8b0a3784fbeef22e5d361e9f656bebfc0b0"
+    },
+    {
+      "id": "e128",
+      "file": "AffineCurveCounting/IntegralHyperplaneAvoidance.lean",
+      "declaration": "AffineCurveCounting.exists_integral_hyperplane_avoidance",
+      "line": 42,
+      "kind": "theorem",
+      "sha256": "2038e5146616a05ff9fb283584661e434daf0f6160203f24755229925a035c70"
+    },
+    {
+      "id": "e129",
+      "file": "AffineCurveCounting/IntegerGridLowerBound.lean",
+      "declaration": "AffineCurveCounting.exists_absolutely_irreducible_integer_grid",
+      "line": 63,
+      "kind": "theorem",
+      "sha256": "e1893dd2ed1c10171b90830a82f95f8c5f87eb609053acbb6e3454d3e79a7384"
+    },
+    {
+      "id": "e130",
+      "file": "AffineCurveCounting/ProjectiveDegreeObstruction.lean",
+      "declaration": "AffineCurveCounting.projective_curve_factor_lower_bound",
+      "line": 15,
+      "kind": "theorem",
+      "sha256": "decf2250642794a64b95df783a6b653c74c82de55d0ece3f20b17f0c6cf2a904"
+    },
+    {
+      "id": "e131",
+      "file": "AffineCurveCounting/ProjectiveDegreeObstruction.lean",
+      "declaration": "AffineCurveCounting.projective_curve_factor_not_isLittleO",
+      "line": 33,
+      "kind": "theorem",
+      "sha256": "decf2250642794a64b95df783a6b653c74c82de55d0ece3f20b17f0c6cf2a904"
+    },
+    {
+      "id": "e132",
+      "file": "AffineCurveCounting/ProjectiveDegreeObstruction.lean",
+      "declaration": "AffineCurveCounting.projective_curve_degree_exponent_ge_two",
+      "line": 52,
+      "kind": "theorem",
+      "sha256": "decf2250642794a64b95df783a6b653c74c82de55d0ece3f20b17f0c6cf2a904"
+    },
+    {
+      "id": "e133",
+      "file": "AffineCurveCounting/AffineCurveDegreeObstruction.lean",
+      "declaration": "AffineCurveCounting.exists_affine_curve_log_lower_bound",
+      "line": 81,
+      "kind": "theorem",
+      "sha256": "f53b40fdbaf4709839b3162c6c2c79ad6392511dfc3599e77bf55ecc9fe67266"
+    },
+    {
+      "id": "e134",
+      "file": "AffineCurveCounting/AffineCurveDegreeObstruction.lean",
+      "declaration": "AffineCurveCounting.affine_curve_log_factor_lower_bound",
+      "line": 118,
+      "kind": "theorem",
+      "sha256": "f53b40fdbaf4709839b3162c6c2c79ad6392511dfc3599e77bf55ecc9fe67266"
+    },
+    {
+      "id": "e135",
+      "file": "AffineCurveCounting/AffineCurveDegreeObstruction.lean",
+      "declaration": "AffineCurveCounting.affine_curve_log_factor_not_isLittleO",
+      "line": 141,
+      "kind": "theorem",
+      "sha256": "f53b40fdbaf4709839b3162c6c2c79ad6392511dfc3599e77bf55ecc9fe67266"
+    },
+    {
+      "id": "e136",
+      "file": "AffineCurveCounting/DegreeDependenceObstruction.lean",
+      "declaration": "AffineCurveCounting.projective_hypersurface_degree_exponent_ge_one",
+      "line": 150,
+      "kind": "theorem",
+      "sha256": "2f3bedbb2cb6ed1c75fbfb51529ea264b68487d38f3650a63c654ae915bea085"
+    },
+    {
+      "id": "e137",
+      "file": "AffineCurveCounting/DegreeDependenceObstruction.lean",
+      "declaration": "AffineCurveCounting.affine_hypersurface_degree_exponent_ge_two",
+      "line": 133,
+      "kind": "theorem",
+      "sha256": "2f3bedbb2cb6ed1c75fbfb51529ea264b68487d38f3650a63c654ae915bea085"
+    },
+    {
+      "id": "e138",
+      "file": "AffineCurveCounting/GridHypersurfaceLowerBound.lean",
+      "declaration": "AffineCurveCounting.exists_topform_hypersurface_lower_bounds",
+      "line": 80,
+      "kind": "theorem",
+      "sha256": "ce051a28b08a5c9d73ce3376429b4cd3c41f849c3230d82cbbaa1796ad9c65cc"
+    },
+    {
+      "id": "e139",
+      "file": "AffineCurveCounting/GridAffineLowerBound.lean",
+      "declaration": "AffineCurveCounting.exists_affine_plane_grid_lower_bound",
+      "line": 31,
+      "kind": "theorem",
+      "sha256": "da7a6671c35b47baf6d17c708a140a45d63d43bb24aaebbb95cf7302e0a8a625"
+    },
+    {
+      "id": "e140",
+      "file": "AffineCurveCounting/IntegerGridLowerBound.lean",
+      "declaration": "AffineCurveCounting.exists_irreducible_origin_equation",
+      "line": 54,
+      "kind": "lemma",
+      "sha256": "e1893dd2ed1c10171b90830a82f95f8c5f87eb609053acbb6e3454d3e79a7384"
+    },
+    {
+      "id": "e141",
+      "file": "AffineCurveCounting/HypersurfaceLowerBoundAllDegrees.lean",
+      "declaration": "AffineCurveCounting.hypersurface_grid_lower_bound_numerics",
+      "line": 14,
+      "kind": "lemma",
+      "sha256": "818615e5fe4c0be675cdd2e6a6a577f151abe75ea319b27ac44e2e5425022829"
+    },
+    {
+      "id": "e142",
+      "file": "AffineCurveCounting/HypersurfaceLowerBoundAllDegrees.lean",
+      "declaration": "AffineCurveCounting.exists_hypersurface_lower_bounds_all_degrees",
+      "line": 48,
+      "kind": "theorem",
+      "sha256": "818615e5fe4c0be675cdd2e6a6a577f151abe75ea319b27ac44e2e5425022829"
+    },
+    {
+      "id": "e143",
+      "file": "AffineCurveCounting/SharpAmbientCenterProjection.lean",
+      "declaration": "AffineCurveCounting.exists_sharp_ambient_birational_projection",
+      "line": 48,
+      "kind": "theorem",
+      "sha256": "acfa1345d20e2badc4a87d939ddac76e4d806782b8b0c1db3f9f8a07600ff3c6"
+    },
+    {
+      "id": "e144",
+      "file": "AffineCurveCounting/BirationalComplementProjection.lean",
+      "declaration": "AffineCurveCounting.BirationalComplementProjection",
+      "line": 17,
+      "kind": "structure",
+      "sha256": "e80c225506104c3749f62b5f731ae37d93a7a8d8f3539bff3c0628286bcce004"
+    },
+    {
+      "id": "e145",
+      "file": "AffineCurveCounting/CenterProjectionHeight.lean",
+      "declaration": "AffineCurveCounting.centerProjectionHeightConstant_pos",
+      "line": 72,
+      "kind": "lemma",
+      "sha256": "8e1b1a784d526feeed7505d995bb22ef9d2d528dece0ac837f53ab34f2d1c87f"
+    },
+    {
+      "id": "e146",
+      "file": "AffineCurveCounting/ProjectiveChowExactDegree.lean",
+      "declaration": "AffineCurveCounting.exists_geometric_projective_chow_exact_degree",
+      "line": 64,
+      "kind": "theorem",
+      "sha256": "d655a588a05aa003fe456f6b01b89a07bb48db3d9b0454622d90ab652ea12875"
+    },
+    {
+      "id": "e147",
+      "file": "AffineCurveCounting/HomogeneousProjectionBirational.lean",
+      "declaration": "AffineCurveCounting.homogeneous_finite_projection_leadingCoeff_eq_iff_birational",
+      "line": 49,
+      "kind": "theorem",
+      "sha256": "8c84286ad5324e1d7ab2937cb0855159fd29ba0dc4c83bb4085adc4b005894a1"
+    },
+    {
+      "id": "e148",
+      "file": "AffineCurveCounting/CenterPluckerCoordinates.lean",
+      "declaration": "AffineCurveCounting.independentCenterPlucker_eq_iff",
+      "line": 100,
+      "kind": "theorem",
+      "sha256": "f20e2797a3820d664fd427324a2d72010131dfa6bafaf4582458c76031a4bab2"
+    },
+    {
+      "id": "e149",
+      "file": "AffineCurveCounting/CenterPluckerCoordinates.lean",
+      "declaration": "AffineCurveCounting.centerSubspacePlucker_injective",
+      "line": 130,
+      "kind": "theorem",
+      "sha256": "f20e2797a3820d664fd427324a2d72010131dfa6bafaf4582458c76031a4bab2"
+    },
+    {
+      "id": "e150",
+      "file": "AffineCurveCounting/CenterPluckerZariski.lean",
+      "declaration": "AffineCurveCounting.centerSubspacePlucker_isEmbedding",
+      "line": 62,
+      "kind": "theorem",
+      "sha256": "3253a816b1917349a1704c3c54c4e7981fc1876fd86ec5d73d9fc17e63d956ef"
+    },
+    {
+      "id": "e151",
+      "file": "AffineCurveCounting/SharpPluckerComplementEquations.lean",
+      "declaration": "AffineCurveCounting.exists_dense_open_sharp_projective_center_plucker_equations",
+      "line": 108,
+      "kind": "theorem",
+      "sha256": "5f26e00fd06cf3e1c4cafe561d077adca69950dca88be969ca110f7125485ba7"
+    },
+    {
+      "id": "e152",
+      "file": "AffineCurveCounting/SharpFixedPluckerComplementEquations.lean",
+      "declaration": "AffineCurveCounting.exists_dense_open_sharp_fixed_center_plucker_equations",
+      "line": 24,
+      "kind": "theorem",
+      "sha256": "f9f2681f14fae55aa3772465eaf6323a663f7303da6c76a1ff239befe0541965"
+    },
+    {
+      "id": "e153",
+      "file": "AffineCurveCounting/SharpCenterResultantDetector.lean",
+      "declaration": "AffineCurveCounting.exists_geometric_sharp_center_detector",
+      "line": 77,
+      "kind": "theorem",
+      "sha256": "5f86bfdc641c7cca024a20280b91a8334dacf297ce2ab6b8b75dffe92a9a4151"
+    },
+    {
+      "id": "e154",
+      "file": "AffineCurveCounting/BirationalCenterPluckerTopology.lean",
+      "declaration": "AffineCurveCounting.birationalCenterSubspaceLocus_plucker_dense_open",
+      "line": 58,
+      "kind": "theorem",
+      "sha256": "754ce62bd03d405679ac5f522e0181ca61ed9a564f0b4707eb252064b80ebd99"
+    },
+    {
+      "id": "e155",
+      "file": "AffineCurveCounting/ZeroDimensionalCenterObstruction.lean",
+      "declaration": "AffineCurveCounting.zero_dimensional_plucker_degree_bound_obstruction",
+      "line": 80,
+      "kind": "theorem",
+      "sha256": "1b4605c714bdbf8ba7931b916e260cee743b4fd7a2b5ac01c3235992e10cd3fd"
+    },
+    {
+      "id": "e156",
+      "file": "AffineCurveCounting/ZeroDimensionalGoodCenter.lean",
+      "declaration": "AffineCurveCounting.geometric_projective_dimension_zero_multiplicity_one",
+      "line": 16,
+      "kind": "theorem",
+      "sha256": "9eacd57580f63768c1b41eb91341d0f374fd29ece3bd9d0993391961dff55d54"
+    },
+    {
+      "id": "e157",
+      "file": "AffineCurveCounting/BirationalCenterPluckerHeight.lean",
+      "declaration": "AffineCurveCounting.exists_birational_center_plucker_height",
+      "line": 36,
+      "kind": "theorem",
+      "sha256": "9b6943b3b48f673206469ad14c54a716258d940cca8656ae4a64ea7e9f0fc2d7"
+    },
+    {
+      "id": "e158",
+      "file": "AffineCurveCounting/BirationalCenterPluckerHeight.lean",
+      "declaration": "AffineCurveCounting.integer_center_subspace_plucker_height",
+      "line": 16,
+      "kind": "theorem",
+      "sha256": "9b6943b3b48f673206469ad14c54a716258d940cca8656ae4a64ea7e9f0fc2d7"
+    },
+    {
+      "id": "e159",
+      "file": "AffineCurveCounting/CenterProjectionFormula.lean",
+      "declaration": "AffineCurveCounting.exists_center_projection_coordinate_forms",
+      "line": 17,
+      "kind": "theorem",
+      "sha256": "5f958cf15c2de4a3d3fdc08be3948f31e73465eb5d28391481a057c5becdef27"
+    },
+    {
+      "id": "e160",
+      "file": "AffineCurveCounting/RowSeparatorCounterexample.lean",
+      "declaration": "AffineCurveCounting.not_printed_row_separator_bound",
+      "line": 96,
+      "kind": "theorem",
+      "sha256": "9501d05be452d702e6329c1cb8cc376f5db860adfd46d7fa135d448d1e4bb012"
+    },
+    {
+      "id": "e161",
+      "file": "AffineCurveCounting/BoundedRowSeparation.lean",
+      "declaration": "AffineCurveCounting.exists_bounded_row_separator",
+      "line": 86,
+      "kind": "theorem",
+      "sha256": "a12f2f0afc342eb460faa84f386abd4cd2047d881df4b8c50cd230bcf0042f9a"
+    },
+    {
+      "id": "e162",
+      "file": "AffineCurveCounting/BirationalCenterPluckerHeight.lean",
+      "declaration": "AffineCurveCounting.exists_fixed_coordinate_center_plucker_height",
+      "line": 60,
+      "kind": "theorem",
+      "sha256": "9b6943b3b48f673206469ad14c54a716258d940cca8656ae4a64ea7e9f0fc2d7"
+    },
+    {
+      "id": "e163",
+      "file": "AffineCurveCounting/SharpAmbientCenterProjection.lean",
+      "declaration": "AffineCurveCounting.exists_sharp_ambient_fixed_coordinate_projection",
+      "line": 88,
+      "kind": "theorem",
+      "sha256": "acfa1345d20e2badc4a87d939ddac76e4d806782b8b0c1db3f9f8a07600ff3c6"
+    },
+    {
+      "id": "e164",
+      "file": "AffineCurveCounting/FixedCoordinatePluckerTopology.lean",
+      "declaration": "AffineCurveCounting.fixedCoordinateBirationalSubspaceLocus_plucker_dense_open",
+      "line": 75,
+      "kind": "theorem",
+      "sha256": "163fb1c244a5046e502f943e6379ab53007c33ac0d98ce277991a5bebb2503d7"
+    },
+    {
+      "id": "e165",
+      "file": "AffineCurveCounting/SharpPlaneCount.lean",
+      "declaration": "AffineCurveCounting.plane_finite_field_card_bound",
+      "line": 17,
+      "kind": "theorem",
+      "sha256": "e0f2bf2484a4710bfe351e27e035008198a3aadeb100fe6e7fc234e841b9dd13"
+    },
+    {
+      "id": "e166",
+      "file": "AffineCurveCounting/PlaneStepanovBound.lean",
+      "declaration": "AffineCurveCounting.plane_stepanov_bound",
+      "line": 54,
+      "kind": "theorem",
+      "sha256": "34ec8b404f6f967e4024f8b421ff68eb4bd3e02b42c5f920851af5ef592019c9"
+    },
+    {
+      "id": "e167",
+      "file": "AffineCurveCounting/SharpHypersurfaceCount.lean",
+      "declaration": "AffineCurveCounting.affine_hypersurface_finite_field_bound",
+      "line": 78,
+      "kind": "theorem",
+      "sha256": "80fbc102e90cfc521f88fcde6e6533549272fba9fa5d02165230d23d968dbb9d"
+    },
+    {
+      "id": "e168",
+      "file": "AffineCurveCounting/FiniteFieldSectionCount.lean",
+      "declaration": "AffineCurveCounting.finite_field_common_zeros_card_le",
+      "line": 40,
+      "kind": "theorem",
+      "sha256": "a4cf9ad47574ee3f2c2cdfc97e19f8402b61e0aa1a7323afc96f5148f83c369f"
+    },
+    {
+      "id": "e169",
+      "file": "AffineCurveCounting/AmbientNoetherVanishing.lean",
+      "declaration": "AffineCurveCounting.ambientEuler_minor_eq_zero_of_product",
+      "line": 25,
+      "kind": "theorem",
+      "sha256": "5fb6ae0b4fc124377f35b429c6d5aa30faba8b8db69f94b973569a5287267cf8"
+    },
+    {
+      "id": "e170",
+      "file": "AffineCurveCounting/AmbientNoetherNonvanishing.lean",
+      "declaration": "AffineCurveCounting.exists_ambientNoetherForm_nonzero",
+      "line": 16,
+      "kind": "theorem",
+      "sha256": "8755b6727f2f72d1c98a437c7edfd77bb0d1b06e605975030242911899878f43"
+    },
+    {
+      "id": "e171",
+      "file": "AffineCurveCounting/AmbientNoetherHeight.lean",
+      "declaration": "AffineCurveCounting.ambientNoetherForm_coefficientL1_le",
+      "line": 63,
+      "kind": "theorem",
+      "sha256": "759d7e2ecf13b7910ac9f660028f78faf6a17ab15f2905808b90ddaf8da6335a"
+    },
+    {
+      "id": "e172",
+      "file": "AffineCurveCounting/HypersurfaceBadPrimeHeight.lean",
+      "declaration": "AffineCurveCounting.exists_hypersurface_bad_prime_height_witness",
+      "line": 15,
+      "kind": "theorem",
+      "sha256": "6fade10537490e8a3177a9565c882486e55352961e5c89c9564f1c89f6dd1726"
+    },
+    {
+      "id": "e173",
+      "file": "AffineCurveCounting/HypersurfaceBadPrimeHeight.lean",
+      "declaration": "AffineCurveCounting.hypersurface_bad_prime_factor_max",
+      "line": 99,
+      "kind": "theorem",
+      "sha256": "6fade10537490e8a3177a9565c882486e55352961e5c89c9564f1c89f6dd1726"
+    },
+    {
+      "id": "e174",
+      "file": "AffineCurveCounting/MertensFirst.lean",
+      "declaration": "AffineCurveCounting.Mertens.prime_sum_bounded_error",
+      "line": 265,
+      "kind": "theorem",
+      "sha256": "9fefe07926dbc01573efa37829019d5ef9ba4852cbace08bf0f38b3187849dc6"
+    },
+    {
+      "id": "e175",
+      "file": ".lake/packages/mathlib/Mathlib/NumberTheory/Chebyshev.lean",
+      "declaration": "Chebyshev.theta_le_log4_mul_x",
+      "line": 191,
+      "kind": "theorem",
+      "sha256": "e7263945c0294b31e3bb98c7fca5dfed52c8f48c75ae73200c9e052cf8daa720"
+    },
+    {
+      "id": "e176",
+      "file": "vendor/bombieri-vaaler/ArithmeticHeights/CubeSlicing.lean",
+      "declaration": "two_pow_finrank_le_volume_inter_cube",
+      "line": 352,
+      "kind": "theorem",
+      "sha256": "1cfb84c0492f3c326fb3aee30f58f072247fc634530cbaac40fe1df0fc003495"
+    },
+    {
+      "id": "e177",
+      "file": "vendor/bombieri-vaaler/ArithmeticHeights/MinkowskiSecond.lean",
+      "declaration": "ZLattice.prod_successiveMinimum_mul_measure_le",
+      "line": 423,
+      "kind": "theorem",
+      "sha256": "730a358c33fc27abc32f773826f5d669d95194bbbd28ae5f2afce6ecb1c97c33"
+    },
+    {
+      "id": "e178",
+      "file": "AffineCurveCounting/ProjectivePlaneBezout.lean",
+      "declaration": "AffineCurveCounting.projective_plane_common_zeros_card_le",
+      "line": 68,
+      "kind": "theorem",
+      "sha256": "3d131ff435134dcc695595a75b8453925218758533bff9ba32d1455eee83d383"
+    },
+    {
+      "id": "e179",
+      "file": "AffineCurveCounting/ComplexGridInterpolation.lean",
+      "declaration": "AffineCurveCounting.complex_polynomial_coefficient_bound_of_integer_grid",
+      "line": 119,
+      "kind": "theorem",
+      "sha256": "5508f6028a6c8da4cbc17ba830bf045c1b09e1d18a29819bd10f9a05b54ee05c"
+    },
+    {
+      "id": "e180",
+      "file": "AffineCurveCounting/LowDegreePointSeparation.lean",
+      "declaration": "AffineCurveCounting.exists_low_degree_ideal_separator",
+      "line": 160,
+      "kind": "theorem",
+      "sha256": "23f86bfff7488386fe07af9eff64ae3fde01ca9432c5225c0f4352890c5446b0"
+    },
+    {
+      "id": "e181",
+      "file": "AffineCurveCounting/ConjugatePrimeGridBound.lean",
+      "declaration": "AffineCurveCounting.conjugate_prime_grid_card_le",
+      "line": 26,
+      "kind": "theorem",
+      "sha256": "59d058d935c1cb2390e647a70e9d59bef3fac00feb817a723c3482f3ce5b122b"
+    },
+    {
+      "id": "e182",
+      "file": "AffineCurveCounting/ClassGroupBalancedGenerator.lean",
+      "declaration": "AffineCurveCounting.exists_injective_balanced_two_torsion_generators",
+      "line": 193,
+      "kind": "theorem",
+      "sha256": "53f27fc9d89acbbccb23c8f65b9617979d0d5993077630c437ff73cc72ffeb6e"
+    },
+    {
+      "id": "e183",
+      "file": "AffineCurveCounting/ClassGroupBoundedGenerators.lean",
+      "declaration": "AffineCurveCounting.classGroupTwoTorsionCard_le_boundedSquareNormIntegers",
+      "line": 33,
+      "kind": "theorem",
+      "sha256": "1ad71f5a893cfac6681603113a9a16f12827959e7351b007440ee0a969328406"
+    },
+    {
+      "id": "e184",
+      "file": "AffineCurveCounting/NumberFieldShortBasis.lean",
+      "declaration": "AffineCurveCounting.exists_numberField_short_basis",
+      "line": 111,
+      "kind": "theorem",
+      "sha256": "4bc9174749ba0fa777bea99de01b4f5f9524a21576c09ab80b0110162e1b7034"
+    },
+    {
+      "id": "e185",
+      "file": "AffineCurveCounting/UniformNumberFieldLatticeCount.lean",
+      "declaration": "AffineCurveCounting.boundedSquareNormTranslationClasses_uniform_count",
+      "line": 29,
+      "kind": "theorem",
+      "sha256": "55ced3d0023389f00c975ee142caf6cbe333ca02680b56f6ea4ca6ae061ccc46"
+    },
+    {
+      "id": "e186",
+      "file": "AffineCurveCounting/NormCurveExceptionalReduction.lean",
+      "declaration": "AffineCurveCounting.exists_actual_norm_curve_exception_split",
+      "line": 82,
+      "kind": "theorem",
+      "sha256": "10ea8cc4db984a8480d2ae067613a1ff9384dff154042c4eeb5baff262427ac1"
+    },
+    {
+      "id": "e187",
+      "file": "AffineCurveCounting/OddIndexNormCurveCount.lean",
+      "declaration": "AffineCurveCounting.signed_norm_curve_count_of_odd_subfield_index",
+      "line": 21,
+      "kind": "theorem",
+      "sha256": "3022c47bd54d6965dba8ebcbac95a50817f309e9de2c5e87a3001b449b2c4710"
+    },
+    {
+      "id": "e188",
+      "file": "AffineCurveCounting/OddDegreeNormCurveCount.lean",
+      "declaration": "AffineCurveCounting.signed_norm_curve_log_free_count",
+      "line": 64,
+      "kind": "theorem",
+      "sha256": "d34ee3f8938870427aa12df852e10a15d39ba3056a0a0272ed4a52352afe7cb0"
+    },
+    {
+      "id": "e189",
+      "file": "AffineCurveCounting/NoIndexTwoClassGroupCounting.lean",
+      "declaration": "AffineCurveCounting.boundedSquareNormIntegers_no_index_two_count",
+      "line": 50,
+      "kind": "theorem",
+      "sha256": "9c2d06f729d9f98af08c22f835a4c95a9b997f955d242a262779c7928328684a"
+    },
+    {
+      "id": "e190",
+      "file": "AffineCurveCounting/OddDegreeClassGroupBound.lean",
+      "declaration": "AffineCurveCounting.odd_degree_classGroup_two_torsion_bound",
+      "line": 34,
+      "kind": "theorem",
+      "sha256": "3506e85284ad18b1c37e09478ea56da4d7dfc06d4b458a255fbc97c63b17f3c0"
+    },
+    {
+      "id": "e191",
+      "file": "AffineCurveCounting/ClassGroupBalancedGenerator.lean",
+      "declaration": "AffineCurveCounting.exists_balanced_square_generator_of_radius",
+      "line": 77,
+      "kind": "theorem",
+      "sha256": "53f27fc9d89acbbccb23c8f65b9617979d0d5993077630c437ff73cc72ffeb6e"
+    },
+    {
+      "id": "e192",
+      "file": "AffineCurveCounting/LatticePrescribedProduct.lean",
+      "declaration": "AffineCurveCounting.prescribed_greedy_lattice_basis_product_le",
+      "line": 18,
+      "kind": "theorem",
+      "sha256": "df44a6d331c8078b9abb9a5d3b555eeff7c4d1b198d0dcac34f205d54ccaf6b5"
+    },
+    {
+      "id": "e193",
+      "file": "AffineCurveCounting/QuadraticClassGroupDescent.lean",
+      "declaration": "AffineCurveCounting.quadratic_classGroupTwoTorsion_descent",
+      "line": 34,
+      "kind": "theorem",
+      "sha256": "95b5a23494aba54004ecfdcae9ca14a2249ebb3a660778b7389c0bd59a27112e"
+    },
+    {
+      "id": "e194",
+      "file": "AffineCurveCounting/StronglyAmbiguousClassCount.lean",
+      "declaration": "AffineCurveCounting.stronglyAmbiguousTwoTorsion_card_le_discriminant_primes",
+      "line": 70,
+      "kind": "theorem",
+      "sha256": "760bc8be1646cf7c6f3f7420b7bd875711e66403edece90ae4829302c9dbe735"
+    },
+    {
+      "id": "e195",
+      "file": "AffineCurveCounting/DiscriminantPrimeIdealCover.lean",
+      "declaration": "AffineCurveCounting.absolute_discriminant_power_le",
+      "line": 69,
+      "kind": "theorem",
+      "sha256": "6a2aaa09e78339a50e510901dd9e5d257dd2a0cadcf50bba33bd609072ae0b91"
+    },
+    {
+      "id": "e196",
+      "file": "AffineCurveCounting/QuadraticClassGroupNumerics.lean",
+      "declaration": "AffineCurveCounting.quadratic_class_group_numeric_descent",
+      "line": 43,
+      "kind": "theorem",
+      "sha256": "5f3786402b3e47681a81efb5b26a9f8e54ed3debe997ad1be5e42b2da4d461ba"
+    },
+    {
+      "id": "e197",
+      "file": "AffineCurveCounting/QuadraticClassGroupDescent.lean",
+      "declaration": "AffineCurveCounting.quadratic_field_classGroupTwoTorsionCard_le",
+      "line": 56,
+      "kind": "theorem",
+      "sha256": "95b5a23494aba54004ecfdcae9ca14a2249ebb3a660778b7389c0bd59a27112e"
+    },
+    {
+      "id": "e198",
+      "file": "AffineCurveCounting/ClassGroupDegreeOne.lean",
+      "declaration": "AffineCurveCounting.classGroupTwoTorsionCard_eq_one_of_degree_one",
+      "line": 16,
+      "kind": "theorem",
+      "sha256": "ec4690b5e17e805a82ea479b92c985d0abcf2ea95ffce32ecbd5bd3da17a2101"
+    }
+  ]
+}

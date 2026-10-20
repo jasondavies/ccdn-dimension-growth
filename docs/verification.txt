@@ -2216,3 +2216,51 @@ Final log: /tmp/ccdn-sharp-center-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-sharp-center-checkpoint-sync.json
 Source inventory: /tmp/ccdn-sharp-center-checkpoint-inventory.json (898 files)
 Inventory SHA256: 2d557030c529c5186c37504b34fe2b2f120a751c9806dca23f1f60e45bcd29fa
+
+
+2026-10-20: Final full-paper scope audit and integration
+------------------------------------------------------
+Integrated twelve new mathematical modules and 37 explicit theorem audits.
+Existing mathematical declarations were not modified. The statement audit
+is recorded in docs/completion-audit.json, with source-file hashes and
+relative paths for the main results, auxiliary statements and required
+external inputs.
+
+Section 5 now has exact sharp complement equations in actual subspace
+coordinates, dense openness, intrinsic Plucker height of the constructed
+good center, and the full ambient off-center projection-height estimate.
+The fixed-X0 construction includes empty centers. For each given extension,
+the complement equations are constructed over the source field; no single
+family uniform over all extensions is asserted.
+
+HypersurfaceDeterminantFamily proves corrected Proposition 3.2.6 for an
+arbitrary finite family, with a common column degree within each matrix
+and possibly different degrees between matrices. LiteralAffineBadPrimeHeight
+gives the explicit max-bound for the literal affine bad-prime factor.
+HypersurfaceSourcePositionedAuxiliary states Lemmas 3.3.2 and 3.3.3 directly
+on all bounded projective zeros under the printed pure-power coefficient
+condition, with logarithmic coefficient 1 and residual 4d in the small
+case and a radius/height-independent constant in the large case.
+HypersurfaceLowerBoundAllDegrees proves the final Section 6 examples for
+every n>=2,d>=1, with the same equation and radius for both lower bounds.
+
+The six main results and the audited auxiliary statements are proved with
+the documented source corrections. False printed auxiliary assertions are
+formally refuted and valid replacements are proved; they are not claimed
+literally. Published addenda and repository counterexamples are distinguished
+in the audit and ledger. External inputs are proved in the required scope
+or supplied by verified dependencies, not asserted in unneeded generality.
+The models use homogeneous ideals, actual affine-chart localizations and
+actual subspaces with the induced ordered-minor Plucker topology. No further
+Scheme/Proj comparison or binomial-coordinate identification is claimed.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 934 reachable modules.
+Full build: 9984 jobs, PASS.
+Transitive audit: 5093 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Final log: /tmp/ccdn-full-paper-final-canonical.log
+Guarded integration: /tmp/ccdn-full-paper-final-sync.json
+Source inventory: /tmp/ccdn-full-paper-final-inventory.json (910 files)
+Inventory SHA256: ae7c6d908eef697ec845ecf8f522415bc51f856c0d59019d3a7f843a2cb23454

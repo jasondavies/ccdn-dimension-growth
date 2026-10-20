@@ -45,12 +45,24 @@ class-group descent and discriminant estimates are constructed and proved.
 Strong induction on the field degree absorbs the prime-factor and logarithmic
 losses in the quadratic case. Odd degrees retain the logarithm-free bound.
 
-**The full paper is not yet formalised.** The sharp Section 5 detector,
-bounded good-center rows and projection-height exponent are now proved.
-Final assembly remains for the sharp complement equations in the subspace
-Plucker model and the intrinsic Plucker height of the constructed good
-center. The [full-paper ledger](docs/full-paper-plan.txt) records the exact
-scope and the corrections to false literal source statements.
+**The full-paper formalisation is complete with documented source corrections.**
+The [completion audit](docs/completion-audit.json) maps the statements and
+external inputs to their Lean declarations. The [full-paper ledger](docs/full-paper-plan.txt)
+records the scope and the corrections to false literal source statements.
+Section 5 includes the actual good-center locus, its sharp complement equations,
+intrinsic Plucker height and the height bound at every ambient point off the center.
+
+`HypersurfaceDeterminantFamily` proves the corrected Proposition 3.2.6 for
+arbitrary finite families of square evaluation matrices. Columns within each
+matrix have a common homogeneous degree; that degree may vary between matrices.
+The gcd, primitive points and bad-prime factor are the actual defined objects.
+`HypersurfaceSourcePositionedAuxiliary` gives Lemmas 3.3.2 and 3.3.3 on the
+whole bounded projective zero set under the printed pure-power coefficient
+condition. The small-height bound retains logarithmic coefficient 1 and has
+remainder `4d`; the large-height constant depends only on dimension and the
+positioning constant. `HypersurfaceLowerBoundAllDegrees` supplies the final
+Section 6 examples for every `n ≥ 2` and `d ≥ 1`, with the same equation and
+radius giving both affine and projective lower bounds.
 
 The Chow-form construction now has its exact degree: each hyperplane block
 has degree `d`, and the total degree is `(m+1)d`. `ChowExactDegree` and
@@ -458,9 +470,9 @@ review of theorem statements.
 | `HypersurfaceLocalDeterminant`, `HypersurfaceMultiplicityEstimate`, `HypersurfaceResidue` | Every actual hypersurface residue point supplies determinant exponent at least `(n!/μ)^(1/n) n/(n+1) s^(1+1/n) − (n+1)s`, including singular points and zeros modulo the needed prime power. |
 | `ProjectiveHypersurfaceLocal`, `ProjectiveHypersurfaceReduction` | Projective unit normalization in every dimension and chart, using actual reductions of primitive integer vectors. |
 | `HypersurfaceAggregation`, `ProjectiveHypersurfaceResidueDeterminant` | Construct the actual projective residue partition and prove the sharp maximal-minor divisor in terms of total multiplicity, for homogeneous columns of a common degree. |
-| `HypersurfaceCountNormalization` | Normalize a displayed finite-field count bound without changing the leading constant; the higher-dimensional finite-field count itself remains open. |
+| `HypersurfaceCountNormalization` | Normalize a displayed finite-field count bound without changing the leading constant. `SharpHypersurfaceCount` and `SharpProjectiveHypersurfaceCount` prove the required actual counts. |
 | `BinomialSectionBound`, `FiniteFieldInterpolation`, `FiniteFieldSectionCount` | Explicit polynomial separators and filtered Koszul dimensions bound actual common zeros by a dimension-only constant times the product of the degrees and `q^(ambient dimension−2)`, below the stated field-size degree threshold. |
-| `HypersurfaceSingularities`, `ProjectiveHypersurfaceMultiplicity` | Count actual affine and projective singular points and prove the multiplicity correction `O_m(d² p^(m−1/2))` for projective hypersurface dimension `m ≥ 1` and `p > d²`. The sharp unweighted hypersurface count is still open. |
+| `HypersurfaceSingularities`, `ProjectiveHypersurfaceMultiplicity` | Count actual affine and projective singular points and prove the multiplicity correction `O_m(d² p^(m−1/2))` for projective hypersurface dimension `m ≥ 1` and `p > d²`. The sharp unweighted upper bound is proved in `SharpProjectiveHypersurfaceCount`. |
 | `FiniteFieldProjectiveCone` | Exact cone identity `#affine zeros = (q−1) #projective zeros + 1` in positive homogeneous degree, and transfer of an explicit affine-cone estimate preserving leading coefficient one. |
 | `SingularLocalDeterminant`, `SingularPlaneChart` | Actual singular residue classes contribute exponent `sum(i < s, floor(i / multiplicity))` to evaluation determinants and maximal-minor gcds; translation and residue-block assembly are proved. |
 | `PlaneMultiplicity`, `SingularReduction` | Actual reduced points determine positive multiplicities bounded by the equation degree, the complete residue partition, and the quadratic exponent bound using their total multiplicity; no smoothness or supplied partition is required. |
@@ -490,14 +502,14 @@ review of theorem statements.
 | `AlgebraicDifferentialConstants`, `RationalDifferential` | Formal differentiation on F(t), its characteristic-zero constant field, and descent of constants through algebraic differential extensions over an algebraically closed constant base. |
 | `BoundedDifferentialConstants` | In positive characteristic, zero derivative implies constancy for rational functions with reduced numerator and denominator degrees below the characteristic; algebraic constant descent follows from the corresponding explicit minimal-polynomial coefficient bounds. |
 | `DifferentialConstantRelation`, `PolynomialResultantDegree`, `ResidueEliminant`, `ResidueEliminantEvaluation`, `PositiveCharacteristicResidue` | Construct the nonzero resultant of `f` and `u f′−g`, prove its parameter-degree bound and its vanishing at `u=g(β)/f′(β)`, then prove the bounded-residue constant lemma in large characteristic directly from this relation. |
-| `SeparableRootDifferential`, `PositiveCharacteristicClosedForms`, `PositiveCharacteristicRank` | Construct the separable differential root extension in positive characteristic and prove the monic irreducible closed-form classification. Over an algebraically closed field of characteristic `>2d²`, a monic irreducible equation of total and outer degree `d` gives coefficient-matrix rank at least `2d²−1`. Generic-plane irreducibility and hypersurface positioning are proved below; the effective bad-section estimate remains open. |
+| `SeparableRootDifferential`, `PositiveCharacteristicClosedForms`, `PositiveCharacteristicRank` | Construct the separable differential root extension in positive characteristic and prove the monic irreducible closed-form classification. Over an algebraically closed field of characteristic `>2d²`, a monic irreducible equation of total and outer degree `d` gives coefficient-matrix rank at least `2d²−1`. Generic-plane irreducibility and hypersurface positioning are proved below; `FiniteFieldBadPlanes` supplies the effective bad-section count. |
 | `PowerSeriesBaseChange`, `FormalBranchBaseChange`, `PlaneSmoothGeometricIrreducibility` | Finite coefficient minors preserve power-series linear independence under arbitrary field extension. A faithful formal branch embeds the extended coordinate algebra into power series. Consequently, an irreducible plane curve with a smooth rational point remains irreducible over every extension field, in any characteristic and without a monicity assumption. |
 | `HypersurfaceSmoothPoint`, `HypersurfaceGoodDirection` | Construct a smooth point on an irreducible hypersurface of degree below the characteristic over an algebraically closed field, and choose a direction avoiding the top homogeneous form, the tangent hyperplane and a selected coordinate hyperplane. |
-| `AffinePlaneRestriction`, `SmoothPlaneMinor` | Actual affine-plane substitutions, their derivative and degree formulas, and a nonzero closed-form minor over the original field for a monic irreducible plane equation with a smooth rational point in characteristic `>2d²`. The positioned generic-plane argument is proved below; the effective bad-section estimate remains open. |
+| `AffinePlaneRestriction`, `SmoothPlaneMinor` | Actual affine-plane substitutions, their derivative and degree formulas, and a nonzero closed-form minor over the original field for a monic irreducible plane equation with a smooth rational point in characteristic `>2d²`. The positioned generic-plane argument is proved below; `FiniteFieldBadPlanes` supplies the effective bad-section count. |
 | `PolynomialPrimeLocalization`, `GenericPlaneStretch`, `GenericPlaneIrreducibility` | Nonconstant prime polynomials survive coefficient localization, and irreducibility survives purely transcendental extension. The actual equation `f(x,y*z)` is irreducible over the rational function field in the slopes when `f` is irreducible and monic in `x`. |
-| `GenericPlaneSmoothness`, `GenericPlaneMinor` | A smooth origin in the distinguished direction makes the positioned generic plane geometrically irreducible. In characteristic `>2d²`, a monic equation of full outer degree `d` and total degree at most `d` supplies a nonzero determinant polynomial in its slopes. Hypersurface positioning is proved below; bounding the parameter degree and counting bad sections remain open. |
+| `GenericPlaneSmoothness`, `GenericPlaneMinor` | A smooth origin in the distinguished direction makes the positioned generic plane geometrically irreducible. In characteristic `>2d²`, a monic equation of full outer degree `d` and total degree at most `d` supplies a nonzero determinant polynomial in its slopes. `UniversalPlaneDegree` and `FiniteFieldBadPlanes` supply the parameter-degree bound and bad-section count. |
 | `AffineLineLeading`, `HypersurfaceAffineCoordinates`, `HypersurfaceFullOuterDegree` | The top affine-line coefficient is the leading homogeneous form evaluated on its direction. An explicit invertible affine coordinate map preserves the degree bound, realizes the directional derivative at the origin, and gives full outer degree when that top value is nonzero. |
-| `HypersurfacePositioning` | Construct the smooth base point, transverse full-degree direction and nonzero scalar normalization for every irreducible positive-degree hypersurface over an algebraically closed field with degree below the characteristic. In characteristic `>2d²`, this discharges the generic-plane construction's positioning assumptions and produces a nonzero slope minor. The universal affine-plane parameter bound and bad-section counts remain open. |
+| `HypersurfacePositioning` | Construct the smooth base point, transverse full-degree direction and nonzero scalar normalization for every irreducible positive-degree hypersurface over an algebraically closed field with degree below the characteristic. In characteristic `>2d²`, this discharges the generic-plane construction's positioning assumptions and produces a nonzero slope minor. `UniversalPlaneDegree` and `FiniteFieldBadPlanes` complete the universal parameter bound and bad-section count. |
 | `DifferentialResidue`, `RationalClosedForms`, `BivariateClosedForms` | A simple-root residue of a closed form is constant; for monic irreducible bivariate equations over an algebraically closed characteristic-zero field, every form within the strict outer-degree bounds is a constant multiple of the gradient. |
 | `BivariateFactorForms` | Explicit closed forms from factors and repeated factors, with polynomial divisibility obstructions to their being scalar multiples of the whole gradient under stated coprimality hypotheses. |
 | `BivariateCoefficientMatrix`, `ClosedFormBaseChange` | Actual integer coefficient matrix on 2d² unknowns, exact kernel encoding, and compatibility with arbitrary coefficient ring maps. |
@@ -562,16 +574,18 @@ The first Mertens theorem is adapted from [PrimeNumberTheoremAnd](https://github
 The extracted proof uses only Mathlib. Its source revision, hashes, adaptation notes, and
 Apache license are recorded under `vendor/mertens/`.
 
-## Remaining work
+## Section 5 and source corrections
 
-The six main results are proved. Remaining Section 5 work combines the
-proved sharp detector with the actual subspace Plucker locus, and combines
-the bounded good-center construction with its intrinsic Plucker height.
+The six main results and the corrected Section 5 statements are proved.
+The final center theorems concern actual subspaces and their intrinsic
+projective heights, with no supplied good center or detector.
 The general affine and projective projections, both
 curve projection clauses, literal affine-factor theorems, Salberger covering
 in the coordinate-ideal formulation, and all positive degrees of
-hyperplane-ideal avoidance are proved. The ledger distinguishes proved
-interfaces and replacements from the exact statements they do not yet imply.
+hyperplane-ideal avoidance are proved. The ledger distinguishes exact source
+statements from corrected replacements and formally refuted literal claims. Local rings use actual affine-chart
+localizations; centers use the topology induced by projective ordered minors.
+No additional Scheme/Proj identification is claimed.
 
 `exists_geometrically_integral_affine_projection` proves the full general
 affine statement of 4.3.1, including dimension zero. It constructs a bounded
@@ -594,8 +608,9 @@ good-center basis rows with entries at most `(m+1)²d²` and maximal minors
 at most `r!((m+1)²d²)^r`, where `r=n−m−1`. `SharpGoodCenterProjection`
 constructs the corresponding complementary projection and proves the
 height exponent `2r²` on the source, with unchanged image degree and
-geometric integrality. Its matrix-entry bound and the general projection
-height estimate also give the ambient bound outside the center. The
+geometric integrality. `SharpAmbientCenterProjection` packages the bound
+for every ambient rational point outside the constructed center, together
+with explicit geometric disjointness and the actual complementary image. The
 fixed-coordinate endpoint constructs the center in `X0=0` for an affine
 closure; dimension zero and the empty-center boundary are included.
 
@@ -676,13 +691,18 @@ actual good-center locus. `CenterPluckerCoordinates` embeds actual subspaces
 using all ordered maximal minors, with signed redundancies in the target.
 `BirationalCenterPluckerTopology` and `FixedCoordinatePluckerTopology`
 prove dense openness for the induced projective Zariski topology. The
-remaining detector assembly is a single theorem identifying the complement
-in this model with the sharp homogeneous equations.
+final `SharpPluckerComplementEquations` and
+`SharpFixedPluckerComplementEquations` theorems identify the complement
+exactly with the common zero set of the sharp homogeneous family. They
+include dense openness and, for any given field extension, construct equations
+over the source field with extension primality proved internally. They do not
+assert that one family works simultaneously over every extension.
 
 `IntegerMinorProjectiveHeight` bounds the intrinsic projective height of the
-actual maximal-minor vector of bounded independent integer rows. The final
-Section 5.3 statement still needs to combine that result with the constructed
-good subspace through `centerSubspacePlucker`. No binomial target dimension,
+actual maximal-minor vector of bounded independent integer rows.
+`BirationalCenterPluckerHeight` constructs the actual good subspace and
+proves its intrinsic `centerSubspacePlucker` height bound in one statement.
+The fixed-coordinate result includes the empty center. No binomial target dimension,
 Scheme/Proj identification or equality with the earlier quotient topology
 is claimed by the Plucker modules.
 
@@ -799,7 +819,7 @@ primitivity, degree, irreducibility and the actual residue count.
 absolutely irreducible integer plane equations at every B≥1, conditional only
 on the stated sharp finite-field estimate. `RationalPlaneAssembly` extends it
 to rational absolutely irreducible equations with one coefficient-independent
-constant. `SharpPlaneResidueBound` names the remaining finite-field obligation;
+constant. `SharpPlaneResidueBound` names the finite-field input;
 it is discharged with constant 161 by `SharpPlaneCount.sharpPlaneResidueBound`.
 `PolynomialLinearDescent` and `NonabsolutePlaneCount` now handle rational
 irreducible equations that split over an extension: each factor's base-field
@@ -807,7 +827,7 @@ zeros lie on a nonzero base-field polynomial of no larger degree, and Bézout
 gives at most d² points in total. `PlaneCurveAssembly` therefore proves
 `SharpPlaneResidueBound C → PlaneCurveBound` for C≥0. The finite-field
 nongeometric case also costs at most d²; `GeometricResidueReduction` reduces
-the missing point estimate to geometrically irreducible equations alone.
+the point estimate to geometrically irreducible equations alone.
 The local Stepanov machinery is now proved: formal branches, local and summed
 multiplicity bounds, tangent differentiation, and Frobenius noncancellation.
 `PlaneFrobeniusSystem` constructs actual auxiliary coefficients from a strict

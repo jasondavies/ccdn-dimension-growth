@@ -1,4 +1,4 @@
-Projection centers: proved constructions and remaining statements
+Projection centers: complete statements and source corrections
 ================================================================
 
 Source: CCDN, The dimension growth conjecture, polynomial in the degree
@@ -41,9 +41,9 @@ by T=(m+1)^2*d^2. SharpGoodCenterProjection combines those rows with the
 complementary projection construction: the image is geometrically integral
 of unchanged dimension and degree, and the height bound on X has exactly
 the printed exponent 2*r^2. The constant depends only on the ambient
-dimension. The proved matrix-entry bound and the general
-normalizedIntegerProjection_projective_height estimate give the same
-ambient estimate outside the center. The fixed-coordinate endpoint places
+dimension. SharpAmbientCenterProjection gives the full ambient estimate
+for every rational point outside the constructed center, together with
+explicit geometric disjointness and the actual complementary image. The fixed-coordinate endpoint places
 the center in X0=0 for an affine closure and includes the empty center.
 ZeroDimensionalGoodCenter proves that a geometrically integral
 zero-dimensional source has degree one and constructs zero-one center rows;
@@ -305,22 +305,28 @@ also proves that a homogeneous prime ideal with X0 outside it is recovered
 as the closure of its standard chart, with the exact chart Hilbert dimension
 and multiplicity.
 
-5. Remaining final assembly
-----------------------------
+5. Complete subspace statements
+--------------------------------
 
-The sharp detector, actual Plucker dense openness, bounded good-center rows
-and complementary projection are proved. Full-paper completion is not yet
-claimed. Two final combined statements remain to be assembled:
+SharpPluckerComplementEquations constructs source-field homogeneous equations
+whose common zero set is exactly the complement of the actual good
+CenterSubspace locus. The same theorem proves density, openness and the
+strict quadratic degree bound in positive dimension, over any given field
+extension of Q. SharpFixedPluckerComplementEquations gives the constrained
+X0=0 result over any extension of a characteristic-zero source field.
+Extension primality and actual good-center witnesses are proved internally.
+The good-center condition retains disjointness over the algebraic closure
+of the extension and actual function-field birationality.
 
-* Express the complement of the actual good CenterSubspace locus by the
-  sharp homogeneous family, with the positive-dimensional degree bound
-  and the corrected dimension-zero boundary in the Plucker model.
-* Combine the constructed good CenterSubspace with its intrinsic Plucker
-  height bound r!*((m+1)^2*d^2)^r. IntegerMinorProjectiveHeight already proves
-  this bound for the projectivized actual maximal-minor vector of bounded
-  independent integer rows; the identification with centerSubspacePlucker
-  and the unconditional good-center construction are separately proved.
+BirationalCenterPluckerHeight constructs a rational CenterSubspace in the
+actual good locus and proves its intrinsic height at most
+r!*((m+1)^2*d^2)^r. The fixed-coordinate theorem also includes the empty
+center. IntegerMinorProjectiveHeight supplies the height bound for bounded
+integer maximal minors, and the proved basis-invariant Plucker map transfers
+it to the actual center. No primitivity, good-center or rank premise is
+supplied to the final existence theorem.
 
-These are assembly obligations, not unproved curve-counting or generic
-projection hypotheses. The literal boundary obstruction in Lemma 5.2 and
-the corrected constant in Lemma 5.4 remain documented.
+The literal boundary obstruction in Lemma 5.2 and the corrected constant
+in Lemma 5.4 remain part of the formalisation. The positive-dimensional
+quadratic degree bound uses the proved resultant argument; it does not
+validate the printed Noether-composition degree calculation.
