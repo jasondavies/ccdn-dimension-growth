@@ -1644,3 +1644,36 @@ Log: /tmp/ccdn-classgroup-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-classgroup-checkpoint-sync.json
 Source inventory: /tmp/ccdn-classgroup-checkpoint-inventory.json (519 files)
 Inventory SHA256: 5a2d59b9d5172ed63faec46e623bb237a60b1214916641b704a34e6299f962e2
+
+
+2026-10-20: general projective dimension growth and no-index-two class groups
+---------------------------------------------------------------------------
+Integrated forty-four mathematical modules, their root imports and endpoint
+audits. projective_dimension_growth proves full Theorem 1 in the actual
+homogeneous-coordinate-ideal formulation. A single positive C(n) and exponent
+18+10(n+1)+2(n+1)^2 work for every prime homogeneous ideal of degree d>=5
+and every real B>=1. Bounded integer normalization, primitive augmentation,
+finite birationality, exact image degree, actual affine/projective fibers,
+height transfer and the final uniform count are proved. Zero-dimensional
+and empty loci are included. The sharper remark e(n)<=2n^3 is not claimed.
+
+no_index_two_classGroup_two_torsion_bound proves the logarithmic Theorem 6
+bound for fields of degree at least three with no index-two subfield. The
+proof counts actual norm curves, exceptional subfields and bounded integers.
+Quadratic-descent infrastructure now includes actual unit obstructions and
+their fiber bound, invariant integral representatives, and factorization into
+an extended base ideal times distinct ramified prime ideals. The resulting
+strongly ambiguous class-group cardinal bound, discriminant descent and full
+quadratic-tower branch remain outside this checkpoint. The exact intermediate
+obligations in the ledger remain; full-paper completion is not claimed.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 587 reachable modules.
+Full build: 9637 jobs, PASS.
+Transitive audit: 3235 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Log: /tmp/ccdn-projection-no-index-two-canonical.log
+Guarded integration: /tmp/ccdn-projection-no-index-two-sync.json
+Source inventory: /tmp/ccdn-projection-no-index-two-inventory.json (563 files)
+Inventory SHA256: 24cbb65df543ee1bef64aa453f09393db5acec16116bf9d27a467c1f10c985b7

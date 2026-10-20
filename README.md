@@ -3,7 +3,7 @@
 A Lean 4 formalisation of Castryck–Cluckers–Dittmann–Nguyen's dimension-growth
 paper, including coefficient-uniform point bounds.
 
-**Status: Theorems 2, 3 and 4 are proved in Lean.**
+**Status: Theorems 1, 2, 3 and 4 are proved in Lean.**
 `AffineCurveCounting.affineCurveBound` proves CCDN Theorem 3, and
 `AffineCurveCounting.projectiveCurveBound` proves Theorem 2. Both cover all
 ambient dimensions `n ≥ 2` and all positive degrees, with no external
@@ -27,14 +27,25 @@ case of Theorem 1 are also proved for every degree `d ≥ 5`, including degrees
 5 through 15. In `n+3` affine or homogeneous variables, the bound is
 `C(n) d^(18+9n) B^(n+1)`.
 
+`projective_dimension_growth` now proves Theorem 1 for general integral
+projective varieties, including zero-dimensional and empty loci. In `P^n`,
+one positive `C(n)` bounds `N(X,B)` by `C(n) d^e(n) B^dim(X)` for every
+`d ≥ 5` and `B ≥ 1`, with `e(n) = 18 + 10(n+1) + 2(n+1)²`.
+Degree and dimension come from the actual homogeneous coordinate ideal's
+Hilbert polynomial. All projections, fiber bounds and height estimates are
+proved internally. This proves the theorem's existence of a degree exponent;
+the paper's sharper remark `e(n) ≤ 2n³` is not claimed.
+
 The odd-degree class-group bound in Theorem 6 is also proved:
 `h₂(K) ≤ C(n) |disc(K)|^(1/2−1/(2n))`, with a positive constant depending
 only on the field degree. The proof constructs the short lattice basis and
-counts the actual bounded algebraic integers and norm-curve fibers.
+counts the actual bounded algebraic integers and norm-curve fibers. For fields
+of degree at least three with no index-two subfield, the logarithmic bound
+is also proved:
+`h₂(K) ≤ C(n) |disc(K)|^(1/2−1/(2n)) log|disc(K)|`.
 
-**The full paper is not yet formalised.** The general projective-variety
-reduction, the even-degree class-group application and several exact intermediate
-statements remain open. The
+**The full paper is not yet formalised.** The quadratic-tower branch of the
+class-group application and several exact intermediate statements remain open. The
 [full-paper ledger](docs/full-paper-plan.txt) records the complete scope
 and the external inputs that must be proved.
 
@@ -145,7 +156,7 @@ rational equations. `projective_hypersurface_dimension_growth` proves the
 corresponding projective hypersurface bound, including rationally irreducible
 equations that split over an algebraic closure. These endpoints have no
 external counting, slicing, height or covering premise. The general
-projective-variety reduction remains open.
+projective-variety reduction is also completed by ProjectiveDimensionGrowth.
 
 `nonabsolute_surface_count_le` separately proves the sharp elementary bound
 `d²(2B+1)` for a rationally irreducible full surface equation that splits over
@@ -209,7 +220,14 @@ finite parameter-field extension. Each elimination step preserves Hilbert
 dimension, bounds the new multiplicity by the original one, and uses integer
 linear forms with bounded coefficients. Iteration constructs an injective,
 integral normalization map whose integer coefficients are at most
-`n! (d+1)^n`. General-dimensional birational degree preservation remains.
+`n! (d+1)^n`. A bounded primitive coordinate now augments this to a finite
+birational projection. The actual homogeneous irreducible image equation has
+exactly degree `d`: a nonzero conductor compares the two Hilbert filtrations
+in both directions. The projection height is polynomial in `d`, with constants
+depending only on ambient dimension. Minimal polynomials bound actual affine
+fibers by `d^n`. Projective count transfer, the hypersurface theorem and a
+finite maximum over dimensions give the full uniform general-variety bound.
+The zero-dimensional and empty-locus cases are proved separately.
 
 The class-group application now starts with the actual ideal class group:
 two-torsion classes have integral representatives with principal squares,
@@ -227,10 +245,23 @@ bounds those classes by an ordinary lattice-box count. Its uniform estimate
 is now proved: a prescribed greedy lattice basis, the multiplication pairing
 and covolume packing give basis lengths at most `n³ |disc(K)|^(1/n)`.
 `odd_degree_classGroup_two_torsion_bound` completes Theorem 6 in odd degree.
-The even-degree norm-curve analysis and corrected quadratic-tower reduction
-remain. A relative class-group norm, its compatibility with extension and the
-cardinality bound from an actual involution are proved as infrastructure
-for the latter.
+`no_index_two_classGroup_two_torsion_bound` proves the logarithmic bound when
+there is no index-two intermediate field. The norm polynomial factors through
+the generated subfield; odd index gives absolute irreducibility. The remaining
+integers lie in subfields of degree at most `n/4`. An actual intermediate-field
+count and lattice packing bound this exceptional set uniformly.
+
+The corrected quadratic-tower reduction remains. Its proved components include
+the relative class-group norm, the involution's fixed-subgroup bound, an explicit
+Hilbert 90 correction, invariant ideal representatives when the scalar norm is
+one, the unit-norm quotient bound `2^[F:Q]`, finite-group torsion inequalities,
+and quadratic prime-orbit and extension identities. Equal unit obstructions
+now yield classes differing by an invariant ideal class, so the fixed
+two-torsion count is at most `2^[F:Q]` times the strongly ambiguous two-torsion
+count. Invariant fractional ideals have invariant integral representatives.
+Every nonzero invariant integral ideal now factors as an extended base ideal times
+a product of distinct ramified prime ideals. The resulting class-group count,
+discriminant estimate and tower assembly are not yet proved.
 
 ## Build and audit
 
@@ -259,6 +290,11 @@ review of theorem statements.
 | `LatticeSuccessiveMinima`, `LatticeMinimaProduct`, `LatticePrescribedProduct`, `NumberFieldShortBasis` | Construct greedy lattice bases, prove their product bound, and obtain a uniform discriminant-root bound for integral basis vectors. |
 | `UniformNumberFieldLatticeCount`, `OddDegreeClassGroupCounting`, `OddDegreeClassGroupBound` | Actual lattice and translation-class counts and the unconditional odd-degree branch of Theorem 6. |
 | `ClassGroupRelativeNorm`, `ClassGroupQuadraticInvolution` | Construct the class-group norm and involution action; prove norm after extension and the fixed-subgroup cardinality bound. |
+| `FiniteBirationalConductor`, `HomogeneousBirationalDegree`, `BoundedBirationalHypersurfaceProjection` | Construct bounded finite birational projections and prove exact equality of source and image degree. |
+| `LinearNormalizationFiberCount`, `ProjectiveVarietyUniformGrowth`, `ZeroDimensionalProjectiveCount`, `ProjectiveDimensionGrowth` | Full Theorem 1 with constants depending only on ambient dimension, including zero-dimensional and empty loci. |
+| `IntegralAlgebraPointCount`, `IntegralProjectionFiberCount`, `ProjectiveLinearCountTransfer`, `ProjectiveProjectionGrowth` | Count actual integral-coordinate fibers, transfer projective counts and absorb the projection's polynomial height loss. |
+| `IntermediateFieldCount`, `SmallSubfieldIntegerCount`, `NoIndexTwoClassGroupBound` | Count intermediate fields and exceptional integers; prove the logarithmic class-group bound for fields without an index-two subfield. |
+| `QuadraticHilbert90`, `QuadraticInvariantIdeal`, `QuadraticUnitNormQuotient`, `QuadraticInvariantIdeals`, `FiniteGroupPowerTorsion` | Explicit norm-one correction, invariant representatives, unit quotient and torsion bounds, and quadratic prime extension identities. |
 | `SurfaceResidueEdgeCount`, `SurfaceResidueCover`, `SurfaceCoefficientReduction`, `SurfaceResidueLinearCount`, `SurfaceSmallCurveCover`, `SurfaceRetainedCurveCount`, `PrimitiveSurfaceFixedDegree`, `TopFormSurfaceFixedDegree` | Construct and count the smooth-congruence cover; discharge coefficient height and prove the full fixed-degree surface bound for every d ≥ 5. |
 | `BoundedHyperplaneDimensionGrowth`, `TopFormDimensionGrowthAllDegrees`, `HypersurfaceDimensionGrowth` | Theorem 4 in all degrees d ≥ 5 and all ambient dimensions; rational equations and the full projective hypersurface case of Theorem 1. |
 | `MonomialOrthants`, `OrthantHilbertPolynomial`, `OrthantMultiplicity`, `FilteredHilbertPolynomial` | Construct the eventual filtered Hilbert polynomial and its positive integral multiplicity for every proper ideal. |
@@ -403,8 +439,9 @@ Apache license are recorded under `vendor/mertens/`.
 
 ## Remaining work
 
-The general-variety case of Theorem 1, the even-degree case of Theorem 6,
-and the exact intermediate statements recorded in the ledger remain open.
+The quadratic-tower branch of Theorem 6 and the exact intermediate statements
+recorded in the ledger remain open. Theorems 1–4, Proposition 5, and Theorem 6
+for odd degree and for fields with no index-two subfield are proved.
 CCDN Lemmas 2.7--2.8 and Corollary 2.9 are now proved for the actual projective
 hypersurface residue count and common-degree homogeneous evaluation matrices.
 For a geometrically irreducible degree-`d` affine hypersurface in `n+3`
@@ -419,8 +456,9 @@ sections by their three defining points, and uses an exact incidence bijection.
 The characteristic-zero universal witness now supplies an actual nonzero
 integer divisible by every bad prime above the degree. The exact bad-prime
 set is proved finite, including degree-dropping reductions. Its quantitative
-coefficient-height bound remains open, as do the global auxiliary polynomials
-and the surface, slicing and projection arguments.
+coefficient-height bound, the projective auxiliary theorem, and the surface and
+slicing arguments are proved. The ledger distinguishes these consequences
+from the exact universal Noether-form statement and other open formulations.
 See [the full-paper ledger](docs/full-paper-plan.txt) for precise coverage,
 including the abstract statements not implied by the concrete local theorem.
 

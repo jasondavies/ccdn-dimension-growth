@@ -15,14 +15,18 @@ mathematics are not completed counting theorems.
 Main statements
 ---------------
 
-Theorem 1: OPEN. For each n > 1, constants c(n), e(n), uniformly for all
-integral projective Q-varieties X of degree d >= 5 and real B >= 1:
-N(X,B) <= c(n) d^e(n) B^dim(X). No B^epsilon or logarithmic loss.
-PROVED CASE: projective_hypersurface_dimension_growth handles rationally
-irreducible homogeneous hypersurfaces of every degree >=5 in every projective
-ambient dimension >=2, with explicit degree exponent 18+9n in P^(n+2).
-Both absolute and nonabsolute branches are proved.
-General projective varieties remain.
+Theorem 1: PROVED. projective_dimension_growth gives, for every ambient n,
+a positive C(n) and explicit e(n)=18+10(n+1)+2(n+1)^2, uniformly over
+homogeneous prime coordinate ideals of degree d>=5 and real B>=1:
+  N(X,B) <= C(n)*d^e(n)*B^dim(X).
+Degree and dimension are determined by the actual filtered Hilbert polynomial.
+The proof constructs bounded finite birational projection, a homogeneous
+irreducible image equation of exactly degree d, actual finite fibers and
+height control. Zero-dimensional and empty loci are included. No geometric,
+finite-field or counting theorem is supplied as an extra premise.
+This proves the existence statement of Theorem 1. The sharper numerical remark
+e(n)<=2n^3 is not claimed and remains a separate sharpening obligation.
+The earlier hypersurface endpoint retains exponent 18+9n in P^(n+2).
 
 Theorem 2: PROVED. AffineCurveCounting.projectiveCurveBound proves
 ProjectiveCurveBound: for each n>=2, one C(n)>0 bounds the actual rational
@@ -68,8 +72,11 @@ PROVED CASE: odd_degree_classGroup_two_torsion_bound proves the exact
 logarithm-free bound for every odd field degree >=3, with a positive explicit
 constant depending only on the degree. The actual short basis, uniform
 lattice count, translation-class packing and signed norm curves are constructed.
-The even-degree norm-curve analysis and corrected quadratic-tower branch
-remain open.
+PROVED CASE: no_index_two_classGroup_two_torsion_bound proves the logarithmic
+bound for every field of degree at least three with no index-two intermediate
+field, with a positive
+explicit degree-only constant. Actual exceptional subfields and their bounded
+integers are counted. The corrected quadratic-tower branch remains open.
 
 Section 6 consequences: PROVED. Actual lower-bound families establish the
 stated obstructions: projective_curve_factor_not_isLittleO excludes o(d^2)
@@ -514,8 +521,9 @@ bounded coordinate positioning and the nonabsolute auxiliary case.
 
 The affine auxiliary, line contributions, all-degree surface bound and
 bounded slicing now prove Theorem 4 and the hypersurface case of Theorem 1.
-The general-variety projection remains open. The small-degree surface proof
-uses a constructed smooth-congruence cover and crossing count; it does not
+The constructive birational route below now completes Theorem 1 for general
+varieties, including exact degree preservation and actual fiber counts. The
+small-degree surface proof uses a constructed smooth-congruence cover and crossing count; it does not
 assume the external Browning--Heath-Brown--Salberger or Salberger bounds.
 All degree, dimension, height and uniformity quantifiers of Theorem 4 are
 retained.
@@ -865,7 +873,8 @@ These developments supply the auxiliary and component structure for surface
 dimension growth. The subsequent line and surface assembly completes corrected
 Proposition 4.3.3 and the d>=16 case of 4.3.4. The subsequent congruence
 argument extends this to every d>=5, including all-dimensional slicing.
-General projective-variety projection and the other listed obligations remain.
+General projective-variety projection and counting are now completed below.
+The other exact obligations listed in the ledger remain.
 
 SurfaceAuxiliaryExponent sums the nonlinear curve-bound expression in both
 degree ranges, using the actual total-degree budget. The fourth-power term
@@ -933,8 +942,9 @@ A nonzero polynomial in maximal minors, with an actual rational full-rank
 witness, has an integer full-rank witness with entries at most r*(deg(F)+1).
 The later Hilbert modules below construct bounded-degree contraction equations
 and integral elimination preserving dimension. The geometric good-center
-witness and birational degree-preserving projection theorem remain open.
-These modules do not complete Section 5.1 or 5.2.
+witness of the literal Section 5.1/5.2 statements remains open. A different
+constructive route now proves bounded birational degree-preserving projection,
+as recorded below. It does not claim the printed bad-center degree bounds.
 
 ClassGroupTwoTorsion and ClassGroupIdealRescaling construct actual integral
 ideal representatives and injective principal-square generators for class
@@ -948,8 +958,9 @@ ClassGroupNormPolynomial constructs signed norm-polynomial fibers; in odd
 field degree OddDegreeNormCurves proves their full degree and absolute
 irreducibility. Translation-class packing and the actual norm-curve reduction
 are now proved below, together with the uniform lattice count and the complete
-odd-degree case. The even-degree analysis and quadratic-tower reduction
-remain. The cited external reduction is not assumed as an axiom.
+odd-degree case. The no-index-two case is now completed below; the corrected
+quadratic-tower reduction remains. The cited external reduction is not assumed
+as an axiom.
 
 
 Residue-cover coverage and balanced class-group generators
@@ -985,8 +996,8 @@ BoundedLinearElimination constructs integer directions bounded by deg(f)+1
 for a chosen nonzero f in an ideal, monic coordinates and actual quotient
 integrality over the retained linear forms. Bounding the degrees of the
 chosen contraction equations by the geometric degree is completed by the
-Hilbert modules below. Iteration and degree preservation remain necessary
-for the general-variety projection theorem.
+Hilbert modules below. Iteration and degree preservation are now proved by
+the constructive birational route recorded at the end of this ledger.
 
 External class-group reduction source audit:
 Louis Mallet-Burgues, Explicit bounds for 2-torsion in class groups of number
@@ -1009,7 +1020,7 @@ are binomial polynomials. OrthantMultiplicity proves positivity of the leading
 coefficient and its integral factorial multiple. FilteredHilbertPolynomial
 constructs the unique eventual filtered Hilbert polynomial for every ideal;
 proper ideals have positive integral multiplicity. General degree-preserving
-projection and the general-variety case of Theorem 1 remain open.
+projection and the full Theorem 1 counting assembly are now proved below.
 
 ClassGroupTranslateFibers and ClassGroupNormCurveReduction prove an actual
 finite signed norm-curve family, indexed by bounded algebraic integers modulo
@@ -1023,7 +1034,8 @@ full-degree irreducibility of signed norm curves over every field in odd field
 degree. AffinePlaneBadPrimeCount and OddDegreeNormCurveCount prove their bad
 factor is one and their count is at most C*d^4*B^(1/d), without a logarithm.
 The uniform lattice count and odd-degree assembly are completed below.
-Theorem 6 remains open in even degree.
+Theorem 6 is now also proved for fields with no index-two subfield; the
+quadratic-tower branch remains open.
 
 
 Bounded Hilbert elimination, Newton-edge counts, and odd class groups
@@ -1049,8 +1061,8 @@ FinIntegerHilbertElimination and BoundedIntegerNormalization iterate these
 steps. For positive Hilbert dimension and multiplicity d, they construct
 actual integer linear forms with coefficients at most n!*(d+1)^n whose
 map into the prime quotient is both injective and integral.
-This is not yet the general-variety counting theorem: birational degree
-preservation and the final count remain.
+Birational degree preservation and the final general-variety counting assembly
+are now proved by the constructive route below.
 
 WeightedPolynomialTop and the CoprimeNewtonEdge modules prove the general
 Corollary 4.2.5. AffinePlaneCoefficientCount gives the full 4.2.4 minimum
@@ -1081,4 +1093,82 @@ and proves that norm after extension is raising to the extension degree.
 ClassGroupQuadraticInvolution constructs the action of an actual field
 automorphism on class-group two-torsion and proves h2(K)<=|T^sigma|^2
 for an involution. This does not yet bound the arithmetic fixed subgroup.
-The even-degree and corrected quadratic-tower branches remain open.
+The no-index-two branch is now completed below. The corrected quadratic-tower
+branch remains open.
+
+
+Bounded birational projection and the no-index-two class-group bound
+--------------------------------------------------------------------
+FiniteBirationalConductor clears denominators of actual finite-module
+generators to obtain a nonzero conductor. HomogeneousFilteredProjection
+proves strictness of the degree filtration for homogeneous linear projections.
+HomogeneousBirationalDegree compares filtered dimensions using the conductor
+and proves equality of Hilbert leading coefficients.
+ProjectionFractionField and LinearParameterPrimitive construct a bounded
+primitive moment coordinate. HomogeneousFiniteProjectionDegree and
+HomogeneousProjectionEquation produce the actual homogeneous irreducible
+image equation and prove its degree is exactly the source multiplicity d.
+BoundedBirationalHypersurfaceProjection combines these results with bounded
+integer normalization. For n source coordinates, the matrix entries are at most
+max(n!*(d+1)^n, (n*d^2+1)^n). BirationalProjectionHeight bounds this by a
+dimension-only constant times d^(2n), for d>=1.
+This proves the projection needed for counting by a different route from the
+paper's bad-center locus. Literal Lemmas 5.1 and 5.2 remain obligations.
+
+IntegralAlgebraPointCount and IntegralProjectionFiberCount count genuine
+coordinate tuples in an integral algebra using roots of minimal polynomials.
+Their degrees are bounded by the actual fraction-field rank. ProjectiveFiniteFibers
+proves that a linear map with uniformly finite affine fibers has no projective
+base point and transfers each projective fiber into an actual affine fiber.
+ProjectiveLinearCountTransfer controls projective height under the integer
+matrix. ProjectiveProjectionGrowth absorbs its polynomial height loss into
+the proved hypersurface bound. LinearNormalizationFiberCount constructs the
+fraction fields of the actual normalization and uses the Hilbert rank bound
+to prove every affine fiber has at most d^n points. This discharges the fiber
+premise internally. ProjectiveVarietyDimensionGrowth combines these inputs;
+ProjectiveVarietyUniformGrowth takes a finite maximum over dimensions and
+codimensions, so both the constant and exponent depend only on ambient space.
+ZeroDimensionalProjectiveCount gives a bound independent of height, and
+EmptyProjectiveHilbertDimension excludes projective points when the filtered
+Hilbert polynomial is constant. ProjectiveDimensionGrowth assembles all cases
+into projective_dimension_growth, the full Theorem 1. Its explicit exponent
+18+10(n+1)+2(n+1)^2 is sufficient for the theorem's existence assertion; it
+does not assert the separate sharper remark e(n)<=2n^3.
+
+IntermediateFieldCount bounds the number of intermediate fields in a finite
+separable extension by 2^[K:F], through actual monic divisors of a primitive
+minimal polynomial. NormPolynomialSubfield identifies the integer norm
+polynomial with the power of the generated subfield's minimal polynomial.
+SquareNormCurveIrreducibility proves absolute irreducibility when that subfield
+index is odd; OddIndexNormCurveCount applies the proved affine curve theorem.
+SeparatedIntegerPacking and SubfieldBoundedIntegers bound actual algebraic
+integers in a bounded archimedean box. SmallSubfieldIntegerCount applies these
+to the finite union of subfields of degree at most n/4. NormCurveExceptionalReduction
+shows that every failed odd-index curve comes from this exceptional set when
+there is no index-two subfield. NoIndexTwoClassGroupCounting sums the actual
+fibers. NoIndexTwoClassGroupBound proves
+  h2(K) <= C(n)*|disc(K)|^(1/2-1/(2n))*log|disc(K)|
+with an explicit positive degree-only constant and no additional counting or
+lattice assumption, whenever K has degree at least three and no index-two
+intermediate field.
+
+QuadraticAmbiguousIdealScalar constructs the scalar comparison for a fixed
+ideal class. QuadraticHilbert90 and QuadraticInvariantIdeal explicitly correct
+a norm-one comparison to an invariant fractional ideal in the same class.
+NumberFieldUnitSquareClasses and QuadraticUnitNormQuotient bound the actual
+unit-norm quotient in a quadratic extension by 2^[F:Q]. AmbiguousIdealRelativeNorm
+identifies its relative-unit obstruction; QuadraticNormConjugation proves the
+quadratic involution and norm formula. FiniteGroupPowerTorsion proves the
+needed quotient and kernel/target cardinality inequalities for finite abelian
+groups. QuadraticInvariantIdeals constructs actual prime orbits and proves
+ramification and ideal-extension identities in quadratic extensions.
+QuadraticObstructionFibers and FractionalIdealConjugation identify equal
+actual unit obstructions with classes whose quotient has an invariant ideal
+representative. QuadraticAmbiguousClassBound bounds fixed two-torsion by
+2^[F:Q] times the actual strongly ambiguous two-torsion cardinality.
+InvariantIdealIntegralRepresentative clears denominators while preserving
+invariance. QuadraticInvariantFactorization proves that every invariant
+nonzero integral ideal is an extended nonzero base ideal times a product of
+distinct actual ramified prime ideals. The resulting strongly ambiguous
+class-group cardinal bound, ramification estimate and quadratic-tower/discriminant
+assembly remain open; no missing genus formula is assumed.
