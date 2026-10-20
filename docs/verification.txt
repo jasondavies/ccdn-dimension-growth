@@ -2264,3 +2264,34 @@ Final log: /tmp/ccdn-full-paper-final-canonical.log
 Guarded integration: /tmp/ccdn-full-paper-final-sync.json
 Source inventory: /tmp/ccdn-full-paper-final-inventory.json (910 files)
 Inventory SHA256: ae7c6d908eef697ec845ecf8f522415bc51f856c0d59019d3a7f843a2cb23454
+
+
+2026-10-20: Rename the library namespace and modules to CCDN
+---------------------------------------------------------
+Renamed the root module and source directory to CCDN, and mechanically
+replaced the old namespace in all 909 library source files. Their proof
+text is otherwise unchanged. Earlier verification entries retain the
+module names used when those checks ran.
+
+The Mathlib-only Challenge and matching Solution now use CCDN.Submission,
+so their definitions and theorem names do not collide with the library.
+The nine compared statements are unchanged apart from their namespace.
+Comparator configuration, formalization metadata, source checks and audit
+evidence references were updated. The adapted Mertens proof's local hash
+was refreshed for its namespace change; upstream provenance and all
+vendored Bombieri--Vaaler source files remain unchanged.
+
+Source requirements and source inventory: PASS (934 reachable modules).
+Full canonical build: PASS (9987 jobs).
+Axiom audit: PASS (5093 project and 555 vendor declarations), using only
+propext, Classical.choice and Quot.sound.
+All completion-audit evidence hashes and declaration locations: PASS.
+Sandboxed Comparator: PASS for all nine statements, with Lean, NanoDa and
+con-ron. This check used an identical-source isolated checkout with real
+local dependency directories because the working checkout uses symlinks.
+No change to the compared definitions, theorem types or proof arguments
+was needed beyond the namespace replacements.
+
+Build log: /tmp/ccdn-namespace-rename-build.log
+Comparator log: /tmp/ccdn-namespace-rename-comparator.log
+Source inventory: /tmp/ccdn-namespace-rename-inventory.json (910 files)

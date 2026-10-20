@@ -7,7 +7,7 @@ public import Mathlib
 
 This file is the human-auditable statement surface. It imports only Mathlib. Each
 compared theorem below is stated with `sorry`; `Solution.lean` restates the same
-definitions verbatim and proves the same statements from the `AffineCurveCounting`
+definitions verbatim and proves the same statements from the `CCDN`
 library.
 
 Source: W. Castryck, R. Cluckers, P. Dittmann and K. H. Nguyen, *The dimension growth
@@ -34,7 +34,7 @@ Theory 14 (2020) 2261–2294, arXiv:1904.13109, with the authors' list of addend
 
 @[expose] public section
 
-namespace CCDN
+namespace CCDN.Submission
 
 open MvPolynomial
 open scoped NumberField
@@ -211,4 +211,4 @@ theorem classGroup_two_torsion_bound (n : ℕ) (hn : 3 ≤ n) :
             (Real.log |(NumberField.discr K : ℝ)|) ^ (1 - n % 2) := by
   sorry
 
-end CCDN
+end CCDN.Submission

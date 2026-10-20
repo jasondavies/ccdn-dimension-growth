@@ -29,7 +29,7 @@ finite-field or counting theorem is supplied as an extra premise.
 The earlier projective_dimension_growth endpoint retains exponent
 18+10(n+1)+2(n+1)^2; the hypersurface endpoint retains 18+9n in P^(n+2).
 
-Theorem 2: PROVED. AffineCurveCounting.projectiveCurveBound proves
+Theorem 2: PROVED. CCDN.projectiveCurveBound proves
 ProjectiveCurveBound: for each n>=2, one C(n)>0 bounds the actual rational
 projective count by C(n)*d^4*B^(2/d), uniformly over prime coordinate ideals,
 positive homogeneous Hilbert degree d and real B>=1. The coordinate ideal
@@ -41,7 +41,7 @@ bounded degree-preserving projections, all exceptional fibers, points at
 infinity, and height-preserving coordinate permutations.
 Check: scripts/check.sh; Axioms.lean also prints the endpoint's axioms.
 
-Theorem 3: PROVED. AffineCurveCounting.affineCurveBound proves the full
+Theorem 3: PROVED. CCDN.affineCurveBound proves the full
 ambient-dimensional affine-curve bound, with degree specified by eventual
 affine Hilbert growth:
 N_aff(X,B) <= C(n) d^3 B^(1/d) (log B + d).

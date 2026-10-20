@@ -1,0 +1,155 @@
+module
+
+public import CCDN.ClosurePolynomialFractionField
+public import CCDN.AffineFractionPolynomialField
+public import CCDN.RadialParameterFieldRank
+public import CCDN.HomogeneousNormalizationRank
+public import CCDN.ProjectiveClosureSpecialization
+public import CCDN.ProjectiveClosureHilbertPolynomial
+public import CCDN.IntegralProjectionHilbert
+public import CCDN.HilbertFullDimension
+
+/-! Exact degree of an affine linear normalization whose homogeneous
+extension is finite with the homogenizing coordinate fixed. The proof
+compares the actual affine and cone function fields by adjoining one
+radial variable, and applies exact homogeneous normalization degree. -/
+
+@[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+attribute [local instance] MvPolynomial.algebraMvPolynomial
+
+theorem affine_normalization_parameters_finite
+    {K F : Type*} [Field K] [Field F] [Algebra K F] {n m : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
+    [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
+    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
+    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+    (a : Fin m → MvPolynomial (Fin n) K)
+    (ha : ∀ i, (a i).IsHomogeneous 1)
+    (hint : (projectionCoordinateMap I a).IsIntegral)
+    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
+    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    Module.Finite (IntermediateField.adjoin K
+      (Set.range (fun i => algebraMap (MvPolynomial (Fin n) K ⧸ I) F
+        ((Ideal.Quotient.mk I) (a i))))) F := by
+  classical
+  let A := MvPolynomial (Fin n) K ⧸ I
+  let v : Fin m → F := fun i => algebraMap A F ((Ideal.Quotient.mk I) (a i))
+  let R := IntermediateField.adjoin K (Set.range v)
+  have hdimA := integral_projection_hilbert_dimension_eq I (projectionCoordinateMap I a) hint
+  have hkerA : RingHom.ker (projectionCoordinateMap I a) = ⊥ :=
+    ideal_eq_bot_of_full_hilbert_dimension _ (RingHom.ker_ne_top _) (by
+      simpa only [Fintype.card_fin,hdim] using hdimA)
+  have hinjA : Function.Injective (projectionCoordinateMap I a) :=
+    (RingHom.injective_iff_ker_eq_bot _).mpr hkerA
+  have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) := by
+    change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (a i)))
+    rw [← projectionCoordinateMap_eq_aeval]
+    exact hinjA
+  have hiv : AlgebraicIndependent K v :=
+    hiA.map' (f := IsScalarTower.toAlgHom K A F) (IsFractionRing.injective A F)
+  let u : Fin m → R := fun i => ⟨v i,IntermediateField.subset_adjoin K _ ⟨i,rfl⟩⟩
+  have hiu : AlgebraicIndependent K u := AlgebraicIndependent.of_comp R.val hiv
+  obtain ⟨hfinite,_⟩ := hilbert_functionField_finite_rank_le (R := R) (F := F) I d
+    (by simpa only [Fintype.card_fin] using hdim)
+    (by simpa only [Fintype.card_fin] using hdegree) a (fun i => (ha i).totalDegree_le)
+    u hiu (fun _ => rfl)
+  exact hfinite
+
+theorem closure_normalization_parameters_injective
+    {K : Type*} [Field K] {n m : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
+    (a : Fin m → MvPolynomial (Fin n) K)
+    (hint : (projectionCoordinateMap (projectiveClosureIdeal I)
+      (closureProjectionCoordinates a)).IsIntegral)
+    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
+    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    Function.Injective (projectionCoordinateMap (projectiveClosureIdeal I)
+      (closureProjectionCoordinates a)) := by
+  let J := projectiveClosureIdeal I
+  obtain ⟨hdimJ,_⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdim hdegree
+  have hdimB := integral_projection_hilbert_dimension_eq J
+    (projectionCoordinateMap J (closureProjectionCoordinates a)) hint
+  have hkerB : RingHom.ker (projectionCoordinateMap J (closureProjectionCoordinates a)) = ⊥ :=
+    ideal_eq_bot_of_full_hilbert_dimension _ (RingHom.ker_ne_top _) (by
+      simpa only [Fintype.card_fin] using hdimB.trans hdimJ)
+  have hinjB : Function.Injective (projectionCoordinateMap J (closureProjectionCoordinates a)) :=
+    (RingHom.injective_iff_ker_eq_bot _).mpr hkerB
+  exact hinjB
+
+theorem affine_normalization_functionField_finrank
+    {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n m : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
+    [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
+    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
+    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+    (a : Fin m → MvPolynomial (Fin n) K)
+    (ha : ∀ i, (a i).IsHomogeneous 1)
+    (hint : (projectionCoordinateMap (projectiveClosureIdeal I)
+      (closureProjectionCoordinates a)).IsIntegral)
+    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
+    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    Module.finrank (IntermediateField.adjoin K
+      (Set.range (fun i => algebraMap (MvPolynomial (Fin n) K ⧸ I) F
+        ((Ideal.Quotient.mk I) (a i))))) F = d := by
+  classical
+  let A := MvPolynomial (Fin n) K ⧸ I
+  let J := projectiveClosureIdeal I
+  let B := MvPolynomial (Fin (n + 1)) K ⧸ J
+  let v : Fin m → F := fun i => algebraMap A F ((Ideal.Quotient.mk I) (a i))
+  let R := IntermediateField.adjoin K (Set.range v)
+  let : Module.Finite R F := affine_normalization_parameters_finite I a ha
+    (affine_projection_integral_of_closure_integral I a hint) d hdim hdegree
+  let P := MvPolynomial Unit A
+  let E := FractionRing P
+  let β : F →ₐ[K] E := fractionPolynomialCoefficientEmbedding
+    (K := K) (A := A) (F := F) (E := E) (σ := Unit)
+  let : Algebra F E := β.toRingHom.toAlgebra
+  let : IsScalarTower K F E := IsScalarTower.of_algHom β
+  let : IsScalarTower A F E := fraction_polynomial_coefficient_tower
+    (K := K) (A := A) (F := F) (E := E) (σ := Unit)
+  let ρ := polynomialFractionCoefficientMap (A := A) (K := F) (F := E) (σ := Unit)
+  let : Algebra (MvPolynomial Unit F) E := ρ.toAlgebra
+  let : IsScalarTower F (MvPolynomial Unit F) E := IsScalarTower.of_algebraMap_eq' (by
+    ext x
+    change algebraMap F E x = ρ (C x)
+    simp only [ρ,polynomialFractionCoefficientMap,eval₂Hom_C])
+  let : IsFractionRing (MvPolynomial Unit F) E :=
+    polynomial_fraction_coefficient_extension (A := A) (K := F) (F := E) (σ := Unit)
+  let θ : B →ₐ[K] E := closurePolynomialFieldMap (F := E) I
+  let : Algebra B E := θ.toRingHom.toAlgebra
+  let : IsScalarTower K B E := IsScalarTower.of_algHom θ
+  let : IsFractionRing B E := closure_polynomial_field_isFractionRing (F := E) I
+  obtain ⟨hdimJ,hdegreeJ⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdim hdegree
+  have hinjB := closure_normalization_parameters_injective I a hint d hdim hdegree
+  have hcone := homogeneous_normalization_functionField_finrank (F := E) J
+    (projectiveClosureIdeal_homogeneous I) (closureProjectionCoordinates a)
+    (closureProjectionCoordinates_homogeneous a ha) hinjB hint d hdimJ hdegreeJ
+  let t := algebraMap (MvPolynomial Unit F) E (X ())
+  have ht : t = algebraMap P E (X ()) := by
+    change ρ (X ()) = _
+    simp only [ρ,polynomialFractionCoefficientMap,eval₂Hom_X']
+    rfl
+  have hcoords : (fun i => algebraMap B E
+      ((Ideal.Quotient.mk J) (closureProjectionCoordinates a i))) =
+        (Fin.cons t (fun i => t * algebraMap F E (v i)) : Fin (m + 1) → E) := by
+    funext i
+    refine Fin.cases ?_ (fun j => ?_) i
+    · change θ ((Ideal.Quotient.mk J) (X 0)) = t
+      rw [closurePolynomialFieldMap_mk,projectiveClosurePolynomialMap_X_zero,ht]
+    · change θ ((Ideal.Quotient.mk J) (rename Fin.succ (a j))) =
+        t * algebraMap F E (v j)
+      rw [closurePolynomialFieldMap_mk,
+        projectiveClosurePolynomialMap_rename_homogeneous I _ (ha j),pow_one,map_mul,ht]
+      change algebraMap A E ((Ideal.Quotient.mk I) (a j)) * algebraMap P E (X ()) =
+        algebraMap P E (X ()) * algebraMap F E (algebraMap A F ((Ideal.Quotient.mk I) (a j)))
+      rw [← IsScalarTower.algebraMap_apply A F E]
+      exact mul_comm _ _
+  rw [hcoords] at hcone
+  have hradial := radial_parameter_field_finrank (K := K) (E := E) v
+  exact hradial.symm.trans hcone
+
+end
+end CCDN

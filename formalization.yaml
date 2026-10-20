@@ -85,14 +85,14 @@ related_formalizations:
     relationship: "adapts"
     note: >-
       Mertens' first theorem is adapted from PrimeNumberTheoremAnd/IEANTN/Mertens.lean
-      (Apache-2.0) into AffineCurveCounting/MertensFirst.lean, with an explicit bounded
+      (Apache-2.0) into CCDN/MertensFirst.lean, with an explicit bounded
       constant. Provenance is in vendor/mertens/upstream.json.
 
 status:
   scope: >-
     Compared in comparator.json: Theorems 1, 2, 3, 4 (integer and rational
     equations), Proposition 5 and Theorem 6 of the source paper, stated in the
-    CCDN namespace of Challenge.lean using only Mathlib. Two auxiliary theorems show
+    CCDN.Submission namespace of Challenge.lean using only Mathlib. Two auxiliary theorems show
     that the counted sets are finite, so the Set.ncard counts are genuine
     cardinalities. Varieties are modelled by ideals of polynomial rings over Q. An
     integral variety is a prime ideal, not necessarily geometrically prime. Degree
@@ -117,7 +117,7 @@ automation:
       framework: "not recorded"
       tool_setup: >-
         An AI coding agent with shell access, the pinned Lean toolchain and Lake. It
-        wrote essentially all Lean source in AffineCurveCounting/, the audit files
+        wrote essentially all Lean source in CCDN/, the audit files
         in docs/, and the README, under the direction of Jason Davies.
       cost:
         wall_time: "about 32 hours between the first and last commits in this repository (19–20 October 2026)"
@@ -174,50 +174,50 @@ review:
     mathematical review has been performed.
 
 alignment:
-  namespace: "CCDN"
+  namespace: "CCDN.Submission"
   statements:
     - source: "Theorem 1"
-      lean: "CCDN.projective_dimension_growth"
+      lean: "CCDN.Submission.projective_dimension_growth"
       module: "Challenge"
       status: "proved"
-      note: "From AffineCurveCounting.projective_dimension_growth_cubic. The Hilbert polynomial P is quantified explicitly; dim X = P.natDegree − 1."
+      note: "From CCDN.projective_dimension_growth_cubic. The Hilbert polynomial P is quantified explicitly; dim X = P.natDegree − 1."
     - source: "Theorem 2"
-      lean: "CCDN.projective_curve_bound"
+      lean: "CCDN.Submission.projective_curve_bound"
       module: "Challenge"
       status: "proved"
-      note: "From AffineCurveCounting.projectiveCurveBound."
+      note: "From CCDN.projectiveCurveBound."
     - source: "Theorem 3"
-      lean: "CCDN.affine_curve_bound"
+      lean: "CCDN.Submission.affine_curve_bound"
       module: "Challenge"
       status: "proved"
-      note: "From AffineCurveCounting.affineCurveBound."
+      note: "From CCDN.affineCurveBound."
     - source: "Theorem 4"
-      lean: "CCDN.affine_hypersurface_bound"
+      lean: "CCDN.Submission.affine_hypersurface_bound"
       module: "Challenge"
       status: "proved (with the addenda's corrected hypothesis)"
-      note: "Integer equations. From AffineCurveCounting.top_form_hypersurface_dimension_growth_cubic."
+      note: "Integer equations. From CCDN.top_form_hypersurface_dimension_growth_cubic."
     - source: "Theorem 4"
-      lean: "CCDN.affine_hypersurface_bound_rat"
+      lean: "CCDN.Submission.affine_hypersurface_bound_rat"
       module: "Challenge"
       status: "proved (with the addenda's corrected hypothesis)"
-      note: "Rational equations. From AffineCurveCounting.rational_top_form_hypersurface_dimension_growth_cubic."
+      note: "Rational equations. From CCDN.rational_top_form_hypersurface_dimension_growth_cubic."
     - source: "Proposition 5"
-      lean: "CCDN.projective_plane_curve_lower_bound"
+      lean: "CCDN.Submission.projective_plane_curve_lower_bound"
       module: "Challenge"
       status: "proved"
-      note: "From AffineCurveCounting.projective_integral_curve_lower_bound. Holds for every d ≥ 1."
+      note: "From CCDN.projective_integral_curve_lower_bound. Holds for every d ≥ 1."
     - source: "Theorem 6"
-      lean: "CCDN.classGroup_two_torsion_bound"
+      lean: "CCDN.Submission.classGroup_two_torsion_bound"
       module: "Challenge"
       status: "proved"
-      note: "From AffineCurveCounting.classGroup_two_torsion_bound."
+      note: "From CCDN.classGroup_two_torsion_bound."
     - source: "(auxiliary)"
-      lean: "CCDN.affineCount_set_finite"
+      lean: "CCDN.Submission.affineCount_set_finite"
       module: "Challenge"
       status: "proved"
       note: "The set counted by affineCount is finite."
     - source: "(auxiliary)"
-      lean: "CCDN.projectiveCount_set_finite"
+      lean: "CCDN.Submission.projectiveCount_set_finite"
       module: "Challenge"
       status: "proved"
       note: "The set counted by projectiveCount is finite (Northcott)."

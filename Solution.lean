@@ -1,30 +1,30 @@
 module
 
 public import Mathlib
-public import AffineCurveCounting
+public import CCDN
 
 /-!
 # Solution
 
 The definitions are copied verbatim from `Challenge.lean`. Each compared theorem is
-derived from the corresponding theorem of the `AffineCurveCounting` library. The bridging
+derived from the corresponding theorem of the `CCDN` library. The bridging
 lemmas identify the `Set.ncard` counts of the Challenge with the library's `Finset` counts;
 every other definition agrees with its library counterpart definitionally.
 
 | Challenge theorem | Library theorem |
 | --- | --- |
-| `projective_dimension_growth` | `AffineCurveCounting.projective_dimension_growth_cubic` |
-| `projective_curve_bound` | `AffineCurveCounting.projectiveCurveBound` |
-| `affine_curve_bound` | `AffineCurveCounting.affineCurveBound` |
-| `affine_hypersurface_bound` | `AffineCurveCounting.top_form_hypersurface_dimension_growth_cubic` |
-| `affine_hypersurface_bound_rat` | `AffineCurveCounting.rational_top_form_hypersurface_dimension_growth_cubic` |
-| `projective_plane_curve_lower_bound` | `AffineCurveCounting.projective_integral_curve_lower_bound` |
-| `classGroup_two_torsion_bound` | `AffineCurveCounting.classGroup_two_torsion_bound` |
+| `projective_dimension_growth` | `CCDN.projective_dimension_growth_cubic` |
+| `projective_curve_bound` | `CCDN.projectiveCurveBound` |
+| `affine_curve_bound` | `CCDN.affineCurveBound` |
+| `affine_hypersurface_bound` | `CCDN.top_form_hypersurface_dimension_growth_cubic` |
+| `affine_hypersurface_bound_rat` | `CCDN.rational_top_form_hypersurface_dimension_growth_cubic` |
+| `projective_plane_curve_lower_bound` | `CCDN.projective_integral_curve_lower_bound` |
+| `classGroup_two_torsion_bound` | `CCDN.classGroup_two_torsion_bound` |
 -/
 
 @[expose] public section
 
-namespace CCDN
+namespace CCDN.Submission
 
 open MvPolynomial
 open scoped NumberField
@@ -91,34 +91,34 @@ def IsAffineHilbertPolynomial {n : ℕ} (I : Ideal (MvPolynomial (Fin n) ℚ))
 /-! ## Bridges to the library -/
 
 theorem affineCount_eq {n : ℕ} (X : Set (Fin n → ℚ)) (B : ℝ) :
-    affineCount X B = AffineCurveCounting.count X B := by
+    affineCount X B = CCDN.count X B := by
   classical
-  unfold affineCount AffineCurveCounting.count
+  unfold affineCount CCDN.count
   rw [← Set.ncard_coe_finset]
   congr 1
   ext x
-  exact AffineCurveCounting.mem_integralPoints.symm
+  exact CCDN.mem_integralPoints.symm
 
 theorem projectiveCount_eq {n : ℕ} (X : Set (Projectivization ℚ (Fin (n + 1) → ℚ))) (B : ℝ) :
-    projectiveCount X B = AffineCurveCounting.projectiveCount X B := by
+    projectiveCount X B = CCDN.projectiveCount X B := by
   classical
-  unfold projectiveCount AffineCurveCounting.projectiveCount
+  unfold projectiveCount CCDN.projectiveCount
   rw [← Set.ncard_coe_finset]
   congr 1
   ext x
-  exact AffineCurveCounting.mem_projectivePoints.symm
+  exact CCDN.mem_projectivePoints.symm
 
 /-! ## The counted sets are finite -/
 
 theorem affineCount_set_finite {n : ℕ} (X : Set (Fin n → ℚ)) (B : ℝ) :
     {x : Fin n → ℤ | (∀ i, |(x i : ℝ)| ≤ B) ∧ (fun i => (x i : ℚ)) ∈ X}.Finite :=
-  (AffineCurveCounting.integralPoints X B).finite_toSet.subset fun _ hx =>
-    AffineCurveCounting.mem_integralPoints.mpr hx
+  (CCDN.integralPoints X B).finite_toSet.subset fun _ hx =>
+    CCDN.mem_integralPoints.mpr hx
 
 theorem projectiveCount_set_finite {n : ℕ} (X : Set (Projectivization ℚ (Fin (n + 1) → ℚ)))
     (B : ℝ) :
     {x : Projectivization ℚ (Fin (n + 1) → ℚ) | x.mulHeight ≤ B ∧ x ∈ X}.Finite :=
-  (AffineCurveCounting.projective_height_finite n B).subset fun _ hx => hx.1
+  (CCDN.projective_height_finite n B).subset fun _ hx => hx.1
 
 /-! ## Main results -/
 
@@ -132,11 +132,11 @@ theorem projective_dimension_growth (n : ℕ) :
       ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroSet I) B : ℝ) ≤
         C * (d : ℝ) ^ (2 * n ^ 3) * B ^ (P.natDegree - 1) := by
-  obtain ⟨C, hC, h⟩ := AffineCurveCounting.projective_dimension_growth_cubic n
+  obtain ⟨C, hC, h⟩ := CCDN.projective_dimension_growth_cubic n
   refine ⟨C, hC, fun I hI hhom d hd P hP hlead B hB => ?_⟩
-  have hPI : AffineCurveCounting.filteredHilbertPolynomial I = P := by
+  have hPI : CCDN.filteredHilbertPolynomial I = P := by
     obtain ⟨N, hN⟩ := hP
-    exact AffineCurveCounting.filteredHilbertPolynomial_eq_of_eventual I P
+    exact CCDN.filteredHilbertPolynomial_eq_of_eventual I P
       ⟨N, fun M hM => hN M hM⟩
   rw [projectiveCount_eq]
   have := h I hI hhom d hd (by rw [hPI]; exact hlead) B hB
@@ -149,7 +149,7 @@ theorem projective_curve_bound (n : ℕ) (hn : 2 ≤ n) :
       ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroSet I) B : ℝ) ≤
         C * ((d : ℝ) ^ 4 * B ^ (2 / (d : ℝ))) := by
-  obtain ⟨C, hC, h⟩ := AffineCurveCounting.projectiveCurveBound n hn
+  obtain ⟨C, hC, h⟩ := CCDN.projectiveCurveBound n hn
   refine ⟨C, hC, fun I hI d hd hdeg B hB => ?_⟩
   rw [projectiveCount_eq]
   exact h I hI d hd hdeg B hB
@@ -161,7 +161,7 @@ theorem affine_curve_bound (n : ℕ) (hn : 2 ≤ n) :
       ∀ B : ℝ, 1 ≤ B →
       (affineCount (affineZeroSet I) B : ℝ) ≤
         C * ((d : ℝ) ^ 3 * B ^ (1 / (d : ℝ)) * (Real.log B + d)) := by
-  obtain ⟨C, hC, h⟩ := AffineCurveCounting.affineCurveBound n hn
+  obtain ⟨C, hC, h⟩ := CCDN.affineCurveBound n hn
   refine ⟨C, hC, fun I hI d hd hdeg B hB => ?_⟩
   rw [affineCount_eq]
   exact h I hI d hd hdeg B hB
@@ -174,7 +174,7 @@ theorem affine_hypersurface_bound (n : ℕ) :
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (affineCount {x | eval x (map (Int.castRingHom ℚ) f) = 0} B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) := by
-  obtain ⟨C, hC, h⟩ := AffineCurveCounting.top_form_hypersurface_dimension_growth_cubic n
+  obtain ⟨C, hC, h⟩ := CCDN.top_form_hypersurface_dimension_growth_cubic n
   refine ⟨C, hC, fun f hf hd B hB => ?_⟩
   rw [affineCount_eq]
   exact h f hf hd B hB
@@ -187,7 +187,7 @@ theorem affine_hypersurface_bound_rat (n : ℕ) :
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (affineCount {x | eval x f = 0} B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) := by
-  obtain ⟨C, hC, h⟩ := AffineCurveCounting.rational_top_form_hypersurface_dimension_growth_cubic n
+  obtain ⟨C, hC, h⟩ := CCDN.rational_top_form_hypersurface_dimension_growth_cubic n
   refine ⟨C, hC, fun f hf hd B hB => ?_⟩
   rw [affineCount_eq]
   exact h f hf hd B hB
@@ -200,7 +200,7 @@ theorem projective_plane_curve_lower_bound (d : ℕ) (hd : 0 < d) :
       ((d : ℝ) ^ 2 / 5) * (B : ℝ) ^ (2 / (d : ℝ)) ≤
         (projectiveCount (projectiveZeroSet (Ideal.span {F})) B : ℝ) := by
   obtain ⟨F, B, hB, hhom, hdeg, hir, hprime, hcurve, hcount⟩ :=
-    AffineCurveCounting.projective_integral_curve_lower_bound d hd
+    CCDN.projective_integral_curve_lower_bound d hd
   refine ⟨F, B, hB, hhom, hdeg, hir, hprime, hcurve, ?_⟩
   rw [projectiveCount_eq]
   exact hcount
@@ -211,6 +211,6 @@ theorem classGroup_two_torsion_bound (n : ℕ) (hn : 3 ≤ n) :
         (Nat.card (powMonoidHom 2 : ClassGroup (𝓞 K) →* ClassGroup (𝓞 K)).ker : ℝ) ≤
           C * |(NumberField.discr K : ℝ)| ^ (1 / 2 - 1 / (2 * (n : ℝ))) *
             (Real.log |(NumberField.discr K : ℝ)|) ^ (1 - n % 2) :=
-  AffineCurveCounting.classGroup_two_torsion_bound.{u} n hn
+  CCDN.classGroup_two_torsion_bound.{u} n hn
 
-end CCDN
+end CCDN.Submission

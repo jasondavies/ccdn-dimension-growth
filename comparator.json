@@ -2,15 +2,15 @@
   "challenge_module": "Challenge",
   "solution_module": "Solution",
   "theorem_names": [
-    "CCDN.affineCount_set_finite",
-    "CCDN.projectiveCount_set_finite",
-    "CCDN.projective_dimension_growth",
-    "CCDN.projective_curve_bound",
-    "CCDN.affine_curve_bound",
-    "CCDN.affine_hypersurface_bound",
-    "CCDN.affine_hypersurface_bound_rat",
-    "CCDN.projective_plane_curve_lower_bound",
-    "CCDN.classGroup_two_torsion_bound"
+    "CCDN.Submission.affineCount_set_finite",
+    "CCDN.Submission.projectiveCount_set_finite",
+    "CCDN.Submission.projective_dimension_growth",
+    "CCDN.Submission.projective_curve_bound",
+    "CCDN.Submission.affine_curve_bound",
+    "CCDN.Submission.affine_hypersurface_bound",
+    "CCDN.Submission.affine_hypersurface_bound_rat",
+    "CCDN.Submission.projective_plane_curve_lower_bound",
+    "CCDN.Submission.classGroup_two_torsion_bound"
   ],
   "definition_names": [],
   "permitted_axioms": ["propext", "Quot.sound", "Classical.choice"]

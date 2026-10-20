@@ -31,7 +31,7 @@
   ],
   "validation": {
     "status": "passed",
-    "method": "Statement-scope review followed by canonical integrated build and transitive axiom audit. Every evidence hash and declaration location was rechecked against the canonical checkout.",
+    "method": "Existing statement-scope review retained under the namespace-only transformation. All 909 library source files were checked against the previous files after replacing the old name. Evidence hashes and declaration locations were verified, then the full canonical build and axiom audit passed. The nine submission statements separately passed the sandboxed Comparator with all three kernels.",
     "evidence_file_hashes": "matched_canonical_checkout",
     "evidence_declarations": "located_in_canonical_source",
     "recorded_hash_comparisons": 207,
@@ -50,8 +50,23 @@
       "Classical.choice",
       "Quot.sound"
     ],
-    "source_inventory_sha256": "ae7c6d908eef697ec845ecf8f522415bc51f856c0d59019d3a7f843a2cb23454",
-    "date": "2026-10-20"
+    "date": "2026-10-20",
+    "source_inventory_sha256": "44a2869d4ccf7dab2249ff41a58a3327b0e91467befedf70e5465b5702c70809",
+    "namespace_rename": {
+      "library_namespace": "CCDN",
+      "submission_namespace": "CCDN.Submission",
+      "build_jobs": 9987,
+      "source_files_renamed": 909,
+      "comparator_theorems": 9,
+      "comparator_kernels": [
+        "Lean",
+        "NanoDa",
+        "con-ron"
+      ],
+      "challenge_sha256": "ea69dad27be21c2e053ae9aa5a0e1ec401a613c6b4bc1f727af8e760fc10e78b",
+      "solution_sha256": "fab0984e9d2f3c33c243f08ae5adcaa6a7a5a457db2b4a41043013905b7f5c4a",
+      "comparator_config_sha256": "e56ab07f02a242f08c3d3895d52778510f45ae25ed5b49bf467dbf8cb0cf5afe"
+    }
   },
   "path_convention": "Evidence file paths are relative to the repository root. vendor/bombieri-vaaler is the pinned local dependency; .lake/packages/mathlib denotes the Lake-resolved pinned mathlib checkout. No machine-specific absolute paths are used.",
   "dependency_revisions": {
@@ -129,28 +144,28 @@
   ],
   "follow_up_files": [
     {
-      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
-      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+      "file": "CCDN/HypersurfaceDeterminantFamily.lean",
+      "sha256": "544f27d33166b080cd04bc1d5964a7b75afc04363484411b8ef840d8e437f5d5"
     },
     {
-      "file": "AffineCurveCounting/LiteralAffineBadPrimeHeight.lean",
-      "sha256": "174f2cb1631e40b53d0005c7e57fef4fd56a266da317032079917852c90c48fd"
+      "file": "CCDN/LiteralAffineBadPrimeHeight.lean",
+      "sha256": "475a754d1de2adcbb19ae1f78752989092fde121b8e37a4e345a9ee40cf38e6f"
     },
     {
-      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
-      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+      "file": "CCDN/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "sha256": "9ccc9d753c246fbc92ed71a1e2b736f5d21fdfb30e8a9634c8b0214f0a79d544"
     },
     {
-      "file": "AffineCurveCounting/DistinguishedCoefficientOrder.lean",
-      "sha256": "9d921b4b4344aa36789ca9f6f92d4b5535de765b2b76a386a9fd600d98bafb17"
+      "file": "CCDN/DistinguishedCoefficientOrder.lean",
+      "sha256": "2f34e717b3748db6d97844fe16c738b3d991023f46055ef89aa9acb847b3c7f4"
     },
     {
-      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
-      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+      "file": "CCDN/HypersurfaceSourcePositionedAuxiliary.lean",
+      "sha256": "8d7e50c569d5e45f4accb91b85a8ab65368a46906dc5de957a22338a05fe9fd5"
     },
     {
-      "file": "AffineCurveCounting/HypersurfaceLowerBoundAllDegrees.lean",
-      "sha256": "818615e5fe4c0be675cdd2e6a6a577f151abe75ea319b27ac44e2e5425022829"
+      "file": "CCDN/HypersurfaceLowerBoundAllDegrees.lean",
+      "sha256": "2794b25c972aec3d75aed75ac225b6cc152b96a55fb9da2766e38847ba56fcd4"
     }
   ],
   "requirements": [
@@ -1249,531 +1264,531 @@
   "evidence": [
     {
       "id": "e001",
-      "file": "AffineCurveCounting/HypersurfacePointStalk.lean",
-      "declaration": "AffineCurveCounting.HypersurfacePointStalk",
+      "file": "CCDN/HypersurfacePointStalk.lean",
+      "declaration": "CCDN.HypersurfacePointStalk",
       "line": 93,
       "kind": "abbrev",
-      "sha256": "fc4e29f7a028a0f7f8bd669de835a1b508bf982c40924851756ec6ddf7520912"
+      "sha256": "7a50fa4436fd1d7e3b06df07f551f5ce7f16cd2538d8f76cb352f9977861cada"
     },
     {
       "id": "e002",
-      "file": "AffineCurveCounting/HypersurfacePointStalk.lean",
-      "declaration": "AffineCurveCounting.hypersurfacePointStalk_hilbert_eq",
+      "file": "CCDN/HypersurfacePointStalk.lean",
+      "declaration": "CCDN.hypersurfacePointStalk_hilbert_eq",
       "line": 135,
       "kind": "theorem",
-      "sha256": "fc4e29f7a028a0f7f8bd669de835a1b508bf982c40924851756ec6ddf7520912"
+      "sha256": "7a50fa4436fd1d7e3b06df07f551f5ce7f16cd2538d8f76cb352f9977861cada"
     },
     {
       "id": "e003",
-      "file": "AffineCurveCounting/HypersurfacePointwiseRemainder.lean",
-      "declaration": "AffineCurveCounting.exists_hypersurfacePointStalk_pointwise_remainder",
+      "file": "CCDN/HypersurfacePointwiseRemainder.lean",
+      "declaration": "CCDN.exists_hypersurfacePointStalk_pointwise_remainder",
       "line": 128,
       "kind": "theorem",
-      "sha256": "51970ccd2a50b7f9835d7de901dced964750a902d204a91e20cefdc071b013bd"
+      "sha256": "269c6f4d254f22f568f6b7c67e2f759a73063fe2f8813d3dc098b9b5c7fd5c1b"
     },
     {
       "id": "e004",
-      "file": "AffineCurveCounting/WeightedSequenceEstimate.lean",
-      "declaration": "AffineCurveCounting.weighted_sequence_initial_sum_lower_bound",
+      "file": "CCDN/WeightedSequenceEstimate.lean",
+      "declaration": "CCDN.weighted_sequence_initial_sum_lower_bound",
       "line": 208,
       "kind": "theorem",
-      "sha256": "35d0727544f26485b7453ebe5780794275c37c20fd204ce1fd45a96094277d38"
+      "sha256": "a93449b5d1356037172ef68d1c98ae311d4b07b948d8f36b0d8c0e18bda67ed2"
     },
     {
       "id": "e005",
-      "file": "AffineCurveCounting/WeightedSequenceEstimate.lean",
-      "declaration": "AffineCurveCounting.weighted_sequence_dimension_one",
+      "file": "CCDN/WeightedSequenceEstimate.lean",
+      "declaration": "CCDN.weighted_sequence_dimension_one",
       "line": 224,
       "kind": "theorem",
-      "sha256": "35d0727544f26485b7453ebe5780794275c37c20fd204ce1fd45a96094277d38"
+      "sha256": "a93449b5d1356037172ef68d1c98ae311d4b07b948d8f36b0d8c0e18bda67ed2"
     },
     {
       "id": "e006",
-      "file": "AffineCurveCounting/WeightedDimensionOneExample.lean",
-      "declaration": "AffineCurveCounting.no_uniform_dimension_one_profile_error",
+      "file": "CCDN/WeightedDimensionOneExample.lean",
+      "declaration": "CCDN.no_uniform_dimension_one_profile_error",
       "line": 128,
       "kind": "theorem",
-      "sha256": "64f8e1acd6803656d2943915b474167ad8c10e26e631a31690c4476f12907a76"
+      "sha256": "f4831f9939b6cf4e3e05f8a5b87b71c52f441763ac143b949cb09d6a43ceec53"
     },
     {
       "id": "e007",
-      "file": "AffineCurveCounting/ActualLocalHilbertWeights.lean",
-      "declaration": "AffineCurveCounting.exists_hypersurfacePointStalk_hilbert_weights",
+      "file": "CCDN/ActualLocalHilbertWeights.lean",
+      "declaration": "CCDN.exists_hypersurfacePointStalk_hilbert_weights",
       "line": 73,
       "kind": "theorem",
-      "sha256": "023e48ec50a998c52069360ebfdb5afd4087b41cd68787e1638d1533c93db2aa"
+      "sha256": "06964146d3ad9e8f9c643caac2fa9e535f430f57e029f1f05fc4f1d04a696ab4"
     },
     {
       "id": "e008",
-      "file": "AffineCurveCounting/ActualLocalHilbertWeights.lean",
-      "declaration": "AffineCurveCounting.hypersurfacePointStalk_enumerated_weights_sharp",
+      "file": "CCDN/ActualLocalHilbertWeights.lean",
+      "declaration": "CCDN.hypersurfacePointStalk_enumerated_weights_sharp",
       "line": 57,
       "kind": "theorem",
-      "sha256": "023e48ec50a998c52069360ebfdb5afd4087b41cd68787e1638d1533c93db2aa"
+      "sha256": "06964146d3ad9e8f9c643caac2fa9e535f430f57e029f1f05fc4f1d04a696ab4"
     },
     {
       "id": "e009",
-      "file": "AffineCurveCounting/LocalPrimeReduction.lean",
-      "declaration": "AffineCurveCounting.localPrimeLayerDimension",
+      "file": "CCDN/LocalPrimeReduction.lean",
+      "declaration": "CCDN.localPrimeLayerDimension",
       "line": 36,
       "kind": "def",
-      "sha256": "e45d1779ef7e951bb459c6303a5bb410c28b1c81618c8304abdc7beb80b30040"
+      "sha256": "3a88e25e152f6fc3b6c5b1b7fd9c60004aa52244ce58c5da4c9ca90bbc3d71df"
     },
     {
       "id": "e010",
-      "file": "AffineCurveCounting/PrimeIntegerLocalDeterminant.lean",
-      "declaration": "AffineCurveCounting.primeInteger_local_enumerated_weight_det",
+      "file": "CCDN/PrimeIntegerLocalDeterminant.lean",
+      "declaration": "CCDN.primeInteger_local_enumerated_weight_det",
       "line": 68,
       "kind": "theorem",
-      "sha256": "88b7a675760ce781f6d7264998b01934196743bda329c3c663e9265f6252d856"
+      "sha256": "460dc9688f76a1e87baacc428fef6e207439210dd8e4d2df55d4aec2acd83e4c"
     },
     {
       "id": "e011",
-      "file": "AffineCurveCounting/PrimeIntegerLocalDeterminant.lean",
-      "declaration": "AffineCurveCounting.primeInteger_local_det_profile_dichotomy",
+      "file": "CCDN/PrimeIntegerLocalDeterminant.lean",
+      "declaration": "CCDN.primeInteger_local_det_profile_dichotomy",
       "line": 124,
       "kind": "theorem",
-      "sha256": "88b7a675760ce781f6d7264998b01934196743bda329c3c663e9265f6252d856"
+      "sha256": "460dc9688f76a1e87baacc428fef6e207439210dd8e4d2df55d4aec2acd83e4c"
     },
     {
       "id": "e012",
-      "file": "AffineCurveCounting/ProjectiveHypersurfaceLocal.lean",
-      "declaration": "AffineCurveCounting.projective_hypersurface_local_det_divisibility",
+      "file": "CCDN/ProjectiveHypersurfaceLocal.lean",
+      "declaration": "CCDN.projective_hypersurface_local_det_divisibility",
       "line": 104,
       "kind": "theorem",
-      "sha256": "166034026b33f3e50d374ddcf8be4eb1579918a064707f37d1700c37417ad23a"
+      "sha256": "3ee1d0d368926a6f88281e468f59c872791abaf0eedfacaea2447edcfc2d8a33"
     },
     {
       "id": "e013",
-      "file": "AffineCurveCounting/ProjectiveHypersurfaceResidueDeterminant.lean",
-      "declaration": "AffineCurveCounting.projectiveHypersurfaceResidueMultiplicity_spec",
+      "file": "CCDN/ProjectiveHypersurfaceResidueDeterminant.lean",
+      "declaration": "CCDN.projectiveHypersurfaceResidueMultiplicity_spec",
       "line": 44,
       "kind": "theorem",
-      "sha256": "a2a0da1bd1b5caca59b74c09e01bb128f1afbfbba0173281ea314b26df82d5d2"
+      "sha256": "03b7b2a088aeba3b01fda6dd0df83bf3dd1e3025db128ee29bcbb676388cc5f3"
     },
     {
       "id": "e014",
-      "file": "AffineCurveCounting/MixedDegreeProjectiveLocal.lean",
-      "declaration": "AffineCurveCounting.exists_mixed_degree_projective_chart_det_divisor",
+      "file": "CCDN/MixedDegreeProjectiveLocal.lean",
+      "declaration": "CCDN.exists_mixed_degree_projective_chart_det_divisor",
       "line": 70,
       "kind": "theorem",
-      "sha256": "dfde5145db6a5ba5a3419b4591664658c90e314772f080b64709605eb81134be"
+      "sha256": "728e5c21a06bff3d83d6460c876150aebc9eec51ff2791fbcb80d45830313b31"
     },
     {
       "id": "e015",
-      "file": "AffineCurveCounting/MixedDegreeProjectiveExample.lean",
-      "declaration": "AffineCurveCounting.no_uniform_mixed_degree_local_error",
+      "file": "CCDN/MixedDegreeProjectiveExample.lean",
+      "declaration": "CCDN.no_uniform_mixed_degree_local_error",
       "line": 103,
       "kind": "theorem",
-      "sha256": "95767ef287edd73ed5c330babcb7c9905f9a7d06c0c2a5553e7ae5294556ea9a"
+      "sha256": "72c952ccb435d074ade4737d3106bc9b40bf974d9e621e8f1a7b9aa49c0491f1"
     },
     {
       "id": "e016",
-      "file": "AffineCurveCounting/ProjectiveHypersurfaceResidueDeterminant.lean",
-      "declaration": "AffineCurveCounting.projectiveHypersurfaceTotalMultiplicity",
+      "file": "CCDN/ProjectiveHypersurfaceResidueDeterminant.lean",
+      "declaration": "CCDN.projectiveHypersurfaceTotalMultiplicity",
       "line": 62,
       "kind": "def",
-      "sha256": "a2a0da1bd1b5caca59b74c09e01bb128f1afbfbba0173281ea314b26df82d5d2"
+      "sha256": "03b7b2a088aeba3b01fda6dd0df83bf3dd1e3025db128ee29bcbb676388cc5f3"
     },
     {
       "id": "e017",
-      "file": "AffineCurveCounting/ProjectiveHypersurfaceResidueDeterminant.lean",
-      "declaration": "AffineCurveCounting.projective_hypersurface_minorGcd_bound",
+      "file": "CCDN/ProjectiveHypersurfaceResidueDeterminant.lean",
+      "declaration": "CCDN.projective_hypersurface_minorGcd_bound",
       "line": 140,
       "kind": "theorem",
-      "sha256": "a2a0da1bd1b5caca59b74c09e01bb128f1afbfbba0173281ea314b26df82d5d2"
+      "sha256": "03b7b2a088aeba3b01fda6dd0df83bf3dd1e3025db128ee29bcbb676388cc5f3"
     },
     {
       "id": "e018",
-      "file": "AffineCurveCounting/SharpProjectiveHypersurfaceCount.lean",
-      "declaration": "AffineCurveCounting.projective_hypersurface_finite_field_bound",
+      "file": "CCDN/SharpProjectiveHypersurfaceCount.lean",
+      "declaration": "CCDN.projective_hypersurface_finite_field_bound",
       "line": 17,
       "kind": "theorem",
-      "sha256": "2fdc4aebff5ea2013aed4cec796fb49c12850b0e66937c39a00f6db532ecd2a3"
+      "sha256": "047322abe2c50f5d27134018d54e75e1675245ccc1977ec30ac3be81622a6e6c"
     },
     {
       "id": "e019",
-      "file": "AffineCurveCounting/SharpProjectiveHypersurfaceCount.lean",
-      "declaration": "AffineCurveCounting.projective_hypersurface_totalMultiplicity_bound",
+      "file": "CCDN/SharpProjectiveHypersurfaceCount.lean",
+      "declaration": "CCDN.projective_hypersurface_totalMultiplicity_bound",
       "line": 46,
       "kind": "theorem",
-      "sha256": "2fdc4aebff5ea2013aed4cec796fb49c12850b0e66937c39a00f6db532ecd2a3"
+      "sha256": "047322abe2c50f5d27134018d54e75e1675245ccc1977ec30ac3be81622a6e6c"
     },
     {
       "id": "e020",
-      "file": "AffineCurveCounting/SharpHypersurfaceDeterminant.lean",
-      "declaration": "AffineCurveCounting.projective_hypersurface_normalized_count_error",
+      "file": "CCDN/SharpHypersurfaceDeterminant.lean",
+      "declaration": "CCDN.projective_hypersurface_normalized_count_error",
       "line": 22,
       "kind": "theorem",
-      "sha256": "b4fe73c06f19db419642e1d038a3ada1891ba868d249f8ac6e1f1a1fafaf0742"
+      "sha256": "4dbe59ec28d4b62714e71aafd36b304345d6c91314617677a75ff564b76f4f8b"
     },
     {
       "id": "e021",
-      "file": "AffineCurveCounting/SharpHypersurfaceDeterminant.lean",
-      "declaration": "AffineCurveCounting.projective_hypersurface_minorGcd_sharp",
+      "file": "CCDN/SharpHypersurfaceDeterminant.lean",
+      "declaration": "CCDN.projective_hypersurface_minorGcd_sharp",
       "line": 52,
       "kind": "theorem",
-      "sha256": "b4fe73c06f19db419642e1d038a3ada1891ba868d249f8ac6e1f1a1fafaf0742"
+      "sha256": "4dbe59ec28d4b62714e71aafd36b304345d6c91314617677a75ff564b76f4f8b"
     },
     {
       "id": "e022",
-      "file": "AffineCurveCounting/HypersurfaceAuxiliaryTheorem.lean",
-      "declaration": "AffineCurveCounting.hypersurface_projective_auxiliary",
+      "file": "CCDN/HypersurfaceAuxiliaryTheorem.lean",
+      "declaration": "CCDN.hypersurface_projective_auxiliary",
       "line": 34,
       "kind": "theorem",
-      "sha256": "34125b98c8c78037da872163305d8c4e30c19e3e8fe4d1b9d0104c6665ffd339"
+      "sha256": "61340c926458bdf18545f5effae654d9ae336e176582ff2dceeff2e5dc16d137"
     },
     {
       "id": "e023",
-      "file": "AffineCurveCounting/HypersurfaceAbsoluteAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceAbsoluteAuxiliaryConstant",
+      "file": "CCDN/HypersurfaceAbsoluteAuxiliary.lean",
+      "declaration": "CCDN.hypersurfaceAbsoluteAuxiliaryConstant",
       "line": 18,
       "kind": "def",
-      "sha256": "6753d593419f08182054703ea990797a31519b0d458802912eaa39c1b7dfe4e2"
+      "sha256": "2622f6b43353f05752458c48cefc76d9d36cebef16334d8007bb4c19de586c35"
     },
     {
       "id": "e024",
-      "file": "AffineCurveCounting/HypersurfaceProjectiveAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurface_absolute_projective_auxiliary",
+      "file": "CCDN/HypersurfaceProjectiveAuxiliary.lean",
+      "declaration": "CCDN.hypersurface_absolute_projective_auxiliary",
       "line": 15,
       "kind": "theorem",
-      "sha256": "9440f4f0125bf90b12e92fc228c611dc1542bc4c975c60c5fea3a52b9004366b"
+      "sha256": "b9b3691b018ec3ae20b22317f88174d8527ee1e231afa8d5fec5e34a31f811f5"
     },
     {
       "id": "e025",
-      "file": "AffineCurveCounting/ProjectivePlaneCoefficientCount.lean",
-      "declaration": "AffineCurveCounting.projective_plane_coefficient_count",
+      "file": "CCDN/ProjectivePlaneCoefficientCount.lean",
+      "declaration": "CCDN.projective_plane_coefficient_count",
       "line": 14,
       "kind": "theorem",
-      "sha256": "9ae5c37c29e307f818e691fb52b2f54da6e125ac20b087bc28c8c447ed509b83"
+      "sha256": "51e2d5a0707fd48a4aa79fb9c6e43d13bc36b4e879b202d373dff679f59233d6"
     },
     {
       "id": "e026",
-      "file": "AffineCurveCounting/ProjectivePlaneUniformExpression.lean",
-      "declaration": "AffineCurveCounting.projective_plane_coefficient_count_chain",
+      "file": "CCDN/ProjectivePlaneUniformExpression.lean",
+      "declaration": "CCDN.projective_plane_coefficient_count_chain",
       "line": 108,
       "kind": "theorem",
-      "sha256": "5c6126e38df39e62cb927d936ec0eaaba83f65fa993726d74e2d97171f8513c1"
+      "sha256": "c01cb4a43b69b7320f5703ea543f8c42e8e50831902cc05c14ca8d8b4177f030"
     },
     {
       "id": "e027",
-      "file": "AffineCurveCounting/HypersurfaceBadPrimeFactor.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceBadPrimeFactor",
+      "file": "CCDN/HypersurfaceBadPrimeFactor.lean",
+      "declaration": "CCDN.hypersurfaceBadPrimeFactor",
       "line": 25,
       "kind": "def",
-      "sha256": "0128277c923c0e8a64ef2eb1e50c02f3b3642301d5e5bab297bd685f50696ea8"
+      "sha256": "22fbf02b22cbfc197b37acb68111801e191622ed21dec349e896b2b176922374"
     },
     {
       "id": "e028",
-      "file": "AffineCurveCounting/HypersurfaceBadPrimeCoordinates.lean",
-      "declaration": "AffineCurveCounting.homogeneous_hypersurfaceBadReduction_iff",
+      "file": "CCDN/HypersurfaceBadPrimeCoordinates.lean",
+      "declaration": "CCDN.homogeneous_hypersurfaceBadReduction_iff",
       "line": 86,
       "kind": "lemma",
-      "sha256": "eccbbc91fcc8a7824cfc36c28b68334307f1c4a7faf7bfd23995197d40995f36"
+      "sha256": "55c7d00267533632a54ac67ed4931a48cdb6e90e12e5c142e55cc65ba899cc67"
     },
     {
       "id": "e029",
-      "file": "AffineCurveCounting/LiteralAffineBadPrimes.lean",
-      "declaration": "AffineCurveCounting.LiteralAffineBadReduction",
+      "file": "CCDN/LiteralAffineBadPrimes.lean",
+      "declaration": "CCDN.LiteralAffineBadReduction",
       "line": 14,
       "kind": "def",
-      "sha256": "7dca8f640559921c4eb428a9740d3cbc7c39241b92fb584de602c73cc78590ab"
+      "sha256": "6693dec3a29bf3cffdffbe46986d5c1a24a6f8da14259d01394d4f41ea484077"
     },
     {
       "id": "e030",
-      "file": "AffineCurveCounting/LiteralAffineBadPrimes.lean",
-      "declaration": "AffineCurveCounting.literalAffineBadPrimeFactor",
+      "file": "CCDN/LiteralAffineBadPrimes.lean",
+      "declaration": "CCDN.literalAffineBadPrimeFactor",
       "line": 31,
       "kind": "def",
-      "sha256": "7dca8f640559921c4eb428a9740d3cbc7c39241b92fb584de602c73cc78590ab"
+      "sha256": "6693dec3a29bf3cffdffbe46986d5c1a24a6f8da14259d01394d4f41ea484077"
     },
     {
       "id": "e031",
-      "file": "AffineCurveCounting/ExplicitNoetherTheorem.lean",
-      "declaration": "AffineCurveCounting.exists_explicit_noether_forms",
+      "file": "CCDN/ExplicitNoetherTheorem.lean",
+      "declaration": "CCDN.exists_explicit_noether_forms",
       "line": 18,
       "kind": "theorem",
-      "sha256": "1f1e3075fce59d8b28b5f40d3903471403d2290e14d2ddac2d60afb8b7a2a6b0"
+      "sha256": "d4275cd3c6456c1a2bdfce6355c5fcbec473654b25080084f7090fc6fef1e9df"
     },
     {
       "id": "e032",
-      "file": "AffineCurveCounting/UniversalNoetherForms.lean",
-      "declaration": "AffineCurveCounting.universalNoetherForms",
+      "file": "CCDN/UniversalNoetherForms.lean",
+      "declaration": "CCDN.universalNoetherForms",
       "line": 44,
       "kind": "def",
-      "sha256": "b65c998c244b4446a33e51889c0c53cf03aa585dd2d7e777d7eb1e72d2db2790"
+      "sha256": "c2c3967c28d4e1924c6945417a3f2c1f7ddaced94b71b9e2f21074b4993f1ca2"
     },
     {
       "id": "e033",
-      "file": "AffineCurveCounting/UniversalNoetherForms.lean",
-      "declaration": "AffineCurveCounting.universalNoetherForms_vanish",
+      "file": "CCDN/UniversalNoetherForms.lean",
+      "declaration": "CCDN.universalNoetherForms_vanish",
       "line": 81,
       "kind": "theorem",
-      "sha256": "b65c998c244b4446a33e51889c0c53cf03aa585dd2d7e777d7eb1e72d2db2790"
+      "sha256": "c2c3967c28d4e1924c6945417a3f2c1f7ddaced94b71b9e2f21074b4993f1ca2"
     },
     {
       "id": "e034",
-      "file": "AffineCurveCounting/UniversalNoetherForms.lean",
-      "declaration": "AffineCurveCounting.universalNoetherForms_nonvanishing",
+      "file": "CCDN/UniversalNoetherForms.lean",
+      "declaration": "CCDN.universalNoetherForms_nonvanishing",
       "line": 93,
       "kind": "theorem",
-      "sha256": "b65c998c244b4446a33e51889c0c53cf03aa585dd2d7e777d7eb1e72d2db2790"
+      "sha256": "c2c3967c28d4e1924c6945417a3f2c1f7ddaced94b71b9e2f21074b4993f1ca2"
     },
     {
       "id": "e035",
-      "file": "AffineCurveCounting/HypersurfaceBadPrimeFactor.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceBadPrimeFactor_le_max",
+      "file": "CCDN/HypersurfaceBadPrimeFactor.lean",
+      "declaration": "CCDN.hypersurfaceBadPrimeFactor_le_max",
       "line": 87,
       "kind": "theorem",
-      "sha256": "0128277c923c0e8a64ef2eb1e50c02f3b3642301d5e5bab297bd685f50696ea8"
+      "sha256": "22fbf02b22cbfc197b37acb68111801e191622ed21dec349e896b2b176922374"
     },
     {
       "id": "e036",
-      "file": "AffineCurveCounting/HypersurfaceBadPrimeCoordinates.lean",
-      "declaration": "AffineCurveCounting.finite_fin_hypersurface_bad_primes",
+      "file": "CCDN/HypersurfaceBadPrimeCoordinates.lean",
+      "declaration": "CCDN.finite_fin_hypersurface_bad_primes",
       "line": 70,
       "kind": "theorem",
-      "sha256": "eccbbc91fcc8a7824cfc36c28b68334307f1c4a7faf7bfd23995197d40995f36"
+      "sha256": "55c7d00267533632a54ac67ed4931a48cdb6e90e12e5c142e55cc65ba899cc67"
     },
     {
       "id": "e037",
-      "file": "AffineCurveCounting/LiteralAffineBadPrimes.lean",
-      "declaration": "AffineCurveCounting.finite_literal_affine_bad_primes",
+      "file": "CCDN/LiteralAffineBadPrimes.lean",
+      "declaration": "CCDN.finite_literal_affine_bad_primes",
       "line": 22,
       "kind": "lemma",
-      "sha256": "7dca8f640559921c4eb428a9740d3cbc7c39241b92fb584de602c73cc78590ab"
+      "sha256": "6693dec3a29bf3cffdffbe46986d5c1a24a6f8da14259d01394d4f41ea484077"
     },
     {
       "id": "e038",
-      "file": "AffineCurveCounting/LiteralAffineBadPrimes.lean",
-      "declaration": "AffineCurveCounting.literalAffineBadPrimeFactor_le_inclusive",
+      "file": "CCDN/LiteralAffineBadPrimes.lean",
+      "declaration": "CCDN.literalAffineBadPrimeFactor_le_inclusive",
       "line": 61,
       "kind": "lemma",
-      "sha256": "7dca8f640559921c4eb428a9740d3cbc7c39241b92fb584de602c73cc78590ab"
+      "sha256": "6693dec3a29bf3cffdffbe46986d5c1a24a6f8da14259d01394d4f41ea484077"
     },
     {
       "id": "e039",
-      "file": "AffineCurveCounting/LiteralAffineBadPrimeHeight.lean",
-      "declaration": "AffineCurveCounting.literalAffineBadPrimeFactor_le_max",
+      "file": "CCDN/LiteralAffineBadPrimeHeight.lean",
+      "declaration": "CCDN.literalAffineBadPrimeFactor_le_max",
       "line": 14,
       "kind": "theorem",
-      "sha256": "174f2cb1631e40b53d0005c7e57fef4fd56a266da317032079917852c90c48fd"
+      "sha256": "475a754d1de2adcbb19ae1f78752989092fde121b8e37a4e345a9ee40cf38e6f"
     },
     {
       "id": "e040",
-      "file": "AffineCurveCounting/PaperPrimeEstimates.lean",
-      "declaration": "AffineCurveCounting.prime_log_sum_le_two_mul",
+      "file": "CCDN/PaperPrimeEstimates.lean",
+      "declaration": "CCDN.prime_log_sum_le_two_mul",
       "line": 14,
       "kind": "theorem",
-      "sha256": "6428203625a96698efaeaf1333aafbf2449b6c7361e7086b439d5bbbabb7d15b"
+      "sha256": "f3573dc4f0028c6fe4e7abb36ed5304832e3db7636a8a75480a653c138fefcf2"
     },
     {
       "id": "e041",
-      "file": "AffineCurveCounting/PaperPrimeEstimates.lean",
-      "declaration": "AffineCurveCounting.prime_sqrt_tail_summable_and_bound",
+      "file": "CCDN/PaperPrimeEstimates.lean",
+      "declaration": "CCDN.prime_sqrt_tail_summable_and_bound",
       "line": 40,
       "kind": "theorem",
-      "sha256": "6428203625a96698efaeaf1333aafbf2449b6c7361e7086b439d5bbbabb7d15b"
+      "sha256": "f3573dc4f0028c6fe4e7abb36ed5304832e3db7636a8a75480a653c138fefcf2"
     },
     {
       "id": "e042",
-      "file": "AffineCurveCounting/HypersurfaceHeightDeterminant.lean",
-      "declaration": "AffineCurveCounting.exists_hypersurface_determinant_log_lower",
+      "file": "CCDN/HypersurfaceHeightDeterminant.lean",
+      "declaration": "CCDN.exists_hypersurface_determinant_log_lower",
       "line": 16,
       "kind": "theorem",
-      "sha256": "65d734616f720e8fbffda7dbdbb04512b4fbe75d6da175b6ab587fc840e3aa74"
+      "sha256": "f2b4b7795191f41b117af770cae21f2ff869bfe2a127340a67bd0f13e358ba72"
     },
     {
       "id": "e043",
-      "file": "AffineCurveCounting/HypersurfaceDeterminantRank.lean",
-      "declaration": "AffineCurveCounting.hypersurface_determinant_log_lower_at_rank",
+      "file": "CCDN/HypersurfaceDeterminantRank.lean",
+      "declaration": "CCDN.hypersurface_determinant_log_lower_at_rank",
       "line": 47,
       "kind": "theorem",
-      "sha256": "1ab3353fce84ac47fcb901508ca003747b1d06bda217757a445eaca6865a9bc7"
+      "sha256": "d809c3307fd68063c6d3992cca994c53a43e8ca8b7ca51e25291324ae579017c"
     },
     {
       "id": "e044",
-      "file": "AffineCurveCounting/GlobalMixedDegreeDeterminant.lean",
-      "declaration": "AffineCurveCounting.no_uniform_global_mixed_degree_det_lower_bound",
+      "file": "CCDN/GlobalMixedDegreeDeterminant.lean",
+      "declaration": "CCDN.no_uniform_global_mixed_degree_det_lower_bound",
       "line": 107,
       "kind": "theorem",
-      "sha256": "9205591aef88170e4bffcfa9d97e9a8091f1cb4da1fe3c9bd01aa22067953107"
+      "sha256": "a39ea8b9f39f6f72ace3c75854143b1938a0386c46e0f1388f9feb47562877d9"
     },
     {
       "id": "e045",
-      "file": "AffineCurveCounting/HigherDimensionalPrimeSum.lean",
-      "declaration": "AffineCurveCounting.general_determinant_log_lower_cutoff",
+      "file": "CCDN/HigherDimensionalPrimeSum.lean",
+      "declaration": "CCDN.general_determinant_log_lower_cutoff",
       "line": 35,
       "kind": "theorem",
-      "sha256": "7c35eb95da98cd052a2cacdc45bf8f10bf5321b005d75361d13f3916ae7191b6"
+      "sha256": "73268f5ad710f08fe5f971c455aed5c95be5e825f9e25f009e6e17a24d56f909"
     },
     {
       "id": "e046",
-      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
-      "declaration": "AffineCurveCounting.homogeneousDeterminantFamilyGcd",
+      "file": "CCDN/HypersurfaceDeterminantFamily.lean",
+      "declaration": "CCDN.homogeneousDeterminantFamilyGcd",
       "line": 22,
       "kind": "def",
-      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+      "sha256": "544f27d33166b080cd04bc1d5964a7b75afc04363484411b8ef840d8e437f5d5"
     },
     {
       "id": "e047",
-      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
-      "declaration": "AffineCurveCounting.projective_hypersurface_familyGcd_sharp",
+      "file": "CCDN/HypersurfaceDeterminantFamily.lean",
+      "declaration": "CCDN.projective_hypersurface_familyGcd_sharp",
       "line": 42,
       "kind": "theorem",
-      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+      "sha256": "544f27d33166b080cd04bc1d5964a7b75afc04363484411b8ef840d8e437f5d5"
     },
     {
       "id": "e048",
-      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
-      "declaration": "AffineCurveCounting.hypersurface_determinant_family_log_lower",
+      "file": "CCDN/HypersurfaceDeterminantFamily.lean",
+      "declaration": "CCDN.hypersurface_determinant_family_log_lower",
       "line": 163,
       "kind": "theorem",
-      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+      "sha256": "544f27d33166b080cd04bc1d5964a7b75afc04363484411b8ef840d8e437f5d5"
     },
     {
       "id": "e049",
-      "file": "AffineCurveCounting/HypersurfaceDeterminantFamily.lean",
-      "declaration": "AffineCurveCounting.projective_hypersurface_determinant_family_log_lower",
+      "file": "CCDN/HypersurfaceDeterminantFamily.lean",
+      "declaration": "CCDN.projective_hypersurface_determinant_family_log_lower",
       "line": 209,
       "kind": "theorem",
-      "sha256": "2634beb9725a0c37afea078560256ec90cc1bb898ba6652c892ba10ccc302097"
+      "sha256": "544f27d33166b080cd04bc1d5964a7b75afc04363484411b8ef840d8e437f5d5"
     },
     {
       "id": "e050",
-      "file": "AffineCurveCounting/HypersurfaceNonabsoluteAuxiliary.lean",
-      "declaration": "AffineCurveCounting.integer_nonabsolute_homogeneous_auxiliary",
+      "file": "CCDN/HypersurfaceNonabsoluteAuxiliary.lean",
+      "declaration": "CCDN.integer_nonabsolute_homogeneous_auxiliary",
       "line": 71,
       "kind": "theorem",
-      "sha256": "2ab60339e1f0c5f425ed7f38edfc1294231feb052e21cb4795989a4f4d29a044"
+      "sha256": "d14c9676732ec669e46d5a39c84eed213c9b702cc4b4e043bfe63a8feb005b53"
     },
     {
       "id": "e051",
-      "file": "AffineCurveCounting/HypersurfaceNonabsoluteAuxiliary.lean",
-      "declaration": "AffineCurveCounting.nonabsolute_projective_auxiliary",
+      "file": "CCDN/HypersurfaceNonabsoluteAuxiliary.lean",
+      "declaration": "CCDN.nonabsolute_projective_auxiliary",
       "line": 96,
       "kind": "theorem",
-      "sha256": "2ab60339e1f0c5f425ed7f38edfc1294231feb052e21cb4795989a4f4d29a044"
+      "sha256": "d14c9676732ec669e46d5a39c84eed213c9b702cc4b4e043bfe63a8feb005b53"
     },
     {
       "id": "e052",
-      "file": "AffineCurveCounting/HypersurfaceSmallHeightAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurface_auxiliary_small_height_degree",
+      "file": "CCDN/HypersurfaceSmallHeightAuxiliary.lean",
+      "declaration": "CCDN.hypersurface_auxiliary_small_height_degree",
       "line": 73,
       "kind": "theorem",
-      "sha256": "3bc19acba117a62686503acd8ee45c50df64b9525834a6acc843dad759ca44a9"
+      "sha256": "f3637a6a585d661ec5a308777dd8ac9bb5f4e9ef1497b43b983cca7bfaac3896"
     },
     {
       "id": "e053",
-      "file": "AffineCurveCounting/HypersurfacePositionedAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceSmallThreshold_position",
+      "file": "CCDN/HypersurfacePositionedAuxiliary.lean",
+      "declaration": "CCDN.hypersurfaceSmallThreshold_position",
       "line": 21,
       "kind": "lemma",
-      "sha256": "7ee1cf8f1922f1a621517c47d2100725f3a1e0bc212db40a09213e1bb51451e9"
+      "sha256": "e1a07c3c11e141aa7c19bb93f8e85a2ff8b06bdbec822a647e9040837cd92b1e"
     },
     {
       "id": "e054",
-      "file": "AffineCurveCounting/HypersurfaceSmallHeightAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceSmallThreshold",
+      "file": "CCDN/HypersurfaceSmallHeightAuxiliary.lean",
+      "declaration": "CCDN.hypersurfaceSmallThreshold",
       "line": 16,
       "kind": "def",
-      "sha256": "3bc19acba117a62686503acd8ee45c50df64b9525834a6acc843dad759ca44a9"
+      "sha256": "f3637a6a585d661ec5a308777dd8ac9bb5f4e9ef1497b43b983cca7bfaac3896"
     },
     {
       "id": "e055",
-      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceSourcePositionParameter",
+      "file": "CCDN/HypersurfaceSourcePositionedAuxiliary.lean",
+      "declaration": "CCDN.hypersurfaceSourcePositionParameter",
       "line": 16,
       "kind": "def",
-      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+      "sha256": "8d7e50c569d5e45f4accb91b85a8ab65368a46906dc5de957a22338a05fe9fd5"
     },
     {
       "id": "e056",
-      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurface_pure_coefficient_log_position",
+      "file": "CCDN/HypersurfaceSourcePositionedAuxiliary.lean",
+      "declaration": "CCDN.hypersurface_pure_coefficient_log_position",
       "line": 25,
       "kind": "lemma",
-      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+      "sha256": "8d7e50c569d5e45f4accb91b85a8ab65368a46906dc5de957a22338a05fe9fd5"
     },
     {
       "id": "e057",
-      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurface_small_height_pure_coefficient_auxiliary",
+      "file": "CCDN/HypersurfaceSourcePositionedAuxiliary.lean",
+      "declaration": "CCDN.hypersurface_small_height_pure_coefficient_auxiliary",
       "line": 57,
       "kind": "theorem",
-      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+      "sha256": "8d7e50c569d5e45f4accb91b85a8ab65368a46906dc5de957a22338a05fe9fd5"
     },
     {
       "id": "e058",
-      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceSmallProjectiveConstant",
+      "file": "CCDN/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "CCDN.hypersurfaceSmallProjectiveConstant",
       "line": 15,
       "kind": "def",
-      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+      "sha256": "9ccc9d753c246fbc92ed71a1e2b736f5d21fdfb30e8a9634c8b0214f0a79d544"
     },
     {
       "id": "e059",
-      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceSmallProjectiveConstant_pos",
+      "file": "CCDN/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "CCDN.hypersurfaceSmallProjectiveConstant_pos",
       "line": 24,
       "kind": "lemma",
-      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+      "sha256": "9ccc9d753c246fbc92ed71a1e2b736f5d21fdfb30e8a9634c8b0214f0a79d544"
     },
     {
       "id": "e060",
-      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurface_small_height_projective_auxiliary",
+      "file": "CCDN/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "CCDN.hypersurface_small_height_projective_auxiliary",
       "line": 36,
       "kind": "theorem",
-      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+      "sha256": "9ccc9d753c246fbc92ed71a1e2b736f5d21fdfb30e8a9634c8b0214f0a79d544"
     },
     {
       "id": "e061",
-      "file": "AffineCurveCounting/DistinguishedCoefficientOrder.lean",
-      "declaration": "AffineCurveCounting.distinguishedCoefficientOrder_leadingCoeff",
+      "file": "CCDN/DistinguishedCoefficientOrder.lean",
+      "declaration": "CCDN.distinguishedCoefficientOrder_leadingCoeff",
       "line": 39,
       "kind": "lemma",
-      "sha256": "9d921b4b4344aa36789ca9f6f92d4b5535de765b2b76a386a9fd600d98bafb17"
+      "sha256": "2f34e717b3748db6d97844fe16c738b3d991023f46055ef89aa9acb847b3c7f4"
     },
     {
       "id": "e062",
-      "file": "AffineCurveCounting/HypersurfaceLargeHeightAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurface_auxiliary_large_height_degree",
+      "file": "CCDN/HypersurfaceLargeHeightAuxiliary.lean",
+      "declaration": "CCDN.hypersurface_auxiliary_large_height_degree",
       "line": 64,
       "kind": "theorem",
-      "sha256": "4c32a9fcb5df7e51ef691051dd3efc714c572c541737d6bfddf5f25cbe568ab0"
+      "sha256": "bf4f47cfa3601ac91c69e22203bd981352431b64c2541a22014254a6f937a5e8"
     },
     {
       "id": "e063",
-      "file": "AffineCurveCounting/HypersurfaceSourcePositionedAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurface_large_height_pure_coefficient_auxiliary",
+      "file": "CCDN/HypersurfaceSourcePositionedAuxiliary.lean",
+      "declaration": "CCDN.hypersurface_large_height_pure_coefficient_auxiliary",
       "line": 90,
       "kind": "theorem",
-      "sha256": "facd3f81127cef8efd40a7ec02251bbf374a552962ef7cd1de2ef653a37dd027"
+      "sha256": "8d7e50c569d5e45f4accb91b85a8ab65368a46906dc5de957a22338a05fe9fd5"
     },
     {
       "id": "e064",
-      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceLargeProjectiveConstant",
+      "file": "CCDN/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "CCDN.hypersurfaceLargeProjectiveConstant",
       "line": 20,
       "kind": "def",
-      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+      "sha256": "9ccc9d753c246fbc92ed71a1e2b736f5d21fdfb30e8a9634c8b0214f0a79d544"
     },
     {
       "id": "e065",
-      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceLargeProjectiveConstant_pos",
+      "file": "CCDN/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "CCDN.hypersurfaceLargeProjectiveConstant_pos",
       "line": 29,
       "kind": "lemma",
-      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+      "sha256": "9ccc9d753c246fbc92ed71a1e2b736f5d21fdfb30e8a9634c8b0214f0a79d544"
     },
     {
       "id": "e066",
-      "file": "AffineCurveCounting/HypersurfacePositionedProjectiveAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurface_large_height_projective_auxiliary",
+      "file": "CCDN/HypersurfacePositionedProjectiveAuxiliary.lean",
+      "declaration": "CCDN.hypersurface_large_height_projective_auxiliary",
       "line": 102,
       "kind": "theorem",
-      "sha256": "52620523dee6bcffc7892e8cb72c46285b1f83a2e7971c340c49db6339804dc6"
+      "sha256": "9ccc9d753c246fbc92ed71a1e2b736f5d21fdfb30e8a9634c8b0214f0a79d544"
     },
     {
       "id": "e067",
@@ -1785,859 +1800,859 @@
     },
     {
       "id": "e068",
-      "file": "AffineCurveCounting/HomogeneousDeterminantComparison.lean",
-      "declaration": "AffineCurveCounting.homogeneous_no_auxiliary_comparison",
+      "file": "CCDN/HomogeneousDeterminantComparison.lean",
+      "declaration": "CCDN.homogeneous_no_auxiliary_comparison",
       "line": 16,
       "kind": "theorem",
-      "sha256": "9e919cfd6a7714eb11ea47f0cea9da1dfbb258eaa5c993603afe5398ebe35ab7"
+      "sha256": "5f28b3d6a9d4bdf9ada425ec7c0526d5646782ae9b7bb4c9ea6501988273b914"
     },
     {
       "id": "e069",
-      "file": "AffineCurveCounting/PaperLogarithmEstimate.lean",
-      "declaration": "AffineCurveCounting.log_log_sub_div_le",
+      "file": "CCDN/PaperLogarithmEstimate.lean",
+      "declaration": "CCDN.log_log_sub_div_le",
       "line": 11,
       "kind": "theorem",
-      "sha256": "ee3fbcb4febb59a69acf5895127d6545b99ad2f31b3cbe7a03500145b291479e"
+      "sha256": "af6fd328bb7bb4b1959655d79b5b765d8d440ad83a67bc9f0d8193c46af7ac0e"
     },
     {
       "id": "e070",
-      "file": "AffineCurveCounting/ComplexGridInterpolation.lean",
-      "declaration": "AffineCurveCounting.exists_complex_integer_grid_height_witness",
+      "file": "CCDN/ComplexGridInterpolation.lean",
+      "declaration": "CCDN.exists_complex_integer_grid_height_witness",
       "line": 162,
       "kind": "theorem",
-      "sha256": "5508f6028a6c8da4cbc17ba830bf045c1b09e1d18a29819bd10f9a05b54ee05c"
+      "sha256": "c7b18687760a6d972d751337b367100293ec5e0a545aa28d729622dc228e33a5"
     },
     {
       "id": "e071",
-      "file": "AffineCurveCounting/ComplexMultivariateGrid.lean",
-      "declaration": "AffineCurveCounting.exists_complex_homogeneous_grid_height_witness",
+      "file": "CCDN/ComplexMultivariateGrid.lean",
+      "declaration": "CCDN.exists_complex_homogeneous_grid_height_witness",
       "line": 75,
       "kind": "theorem",
-      "sha256": "22453e82c5bbe95d8650a0d8e9d77c9e1022c8fba786604f8a96672ebba1974e"
+      "sha256": "5140fc94f73e93ddd14dcdee2fffa85224c02c374b769a16f49378f2ffd3c819"
     },
     {
       "id": "e072",
-      "file": "AffineCurveCounting/ComplexMultivariateGrid.lean",
-      "declaration": "AffineCurveCounting.exists_complex_bounded_leading_coefficient_translation",
+      "file": "CCDN/ComplexMultivariateGrid.lean",
+      "declaration": "CCDN.exists_complex_bounded_leading_coefficient_translation",
       "line": 94,
       "kind": "theorem",
-      "sha256": "22453e82c5bbe95d8650a0d8e9d77c9e1022c8fba786604f8a96672ebba1974e"
+      "sha256": "5140fc94f73e93ddd14dcdee2fffa85224c02c374b769a16f49378f2ffd3c819"
     },
     {
       "id": "e073",
-      "file": "AffineCurveCounting/HypersurfacePositionHeight.lean",
-      "declaration": "AffineCurveCounting.exists_hypersurface_coefficient_position",
+      "file": "CCDN/HypersurfacePositionHeight.lean",
+      "declaration": "CCDN.exists_hypersurface_coefficient_position",
       "line": 107,
       "kind": "theorem",
-      "sha256": "57b078bb678c731472f107174ae86bf265e25ba9e8cda34e8ab7d37004743ad7"
+      "sha256": "3b65f56224c2d7318df095de3e0ee44d62c0d8ab6826c8695238bb6a39800464"
     },
     {
       "id": "e074",
-      "file": "AffineCurveCounting/HypersurfaceShearInvariance.lean",
-      "declaration": "AffineCurveCounting.hypersurfaceBadReduction_homogeneousTranslation",
+      "file": "CCDN/HypersurfaceShearInvariance.lean",
+      "declaration": "CCDN.hypersurfaceBadReduction_homogeneousTranslation",
       "line": 13,
       "kind": "lemma",
-      "sha256": "8b9321efd17c2e3c88c0b1f7e8816bb7aecbf342f365782617bd7594f01b53ea"
+      "sha256": "d5f71b9fecca9a84b176076a18da25036333e76bb16b0e1d5a1674bbc9b6c7e3"
     },
     {
       "id": "e075",
-      "file": "AffineCurveCounting/HypersurfaceAuxiliaryScaling.lean",
-      "declaration": "AffineCurveCounting.auxiliary_box_rpow_factor",
+      "file": "CCDN/HypersurfaceAuxiliaryScaling.lean",
+      "declaration": "CCDN.auxiliary_box_rpow_factor",
       "line": 12,
       "kind": "lemma",
-      "sha256": "e6de17de0672b64f2c5f8477868a33fbe7bb197fc1e5d24166e0e497803a8e5e"
+      "sha256": "8ee7df50e5bceadc1006d050d854dfad2fb313efab180c72bd5aa88b42cb9a8c"
     },
     {
       "id": "e076",
-      "file": "AffineCurveCounting/HypersurfaceAbsoluteAuxiliary.lean",
-      "declaration": "AffineCurveCounting.hypersurface_absolute_auxiliary_degree",
+      "file": "CCDN/HypersurfaceAbsoluteAuxiliary.lean",
+      "declaration": "CCDN.hypersurface_absolute_auxiliary_degree",
       "line": 31,
       "kind": "theorem",
-      "sha256": "6753d593419f08182054703ea990797a31519b0d458802912eaa39c1b7dfe4e2"
+      "sha256": "2622f6b43353f05752458c48cefc76d9d36cebef16334d8007bb4c19de586c35"
     },
     {
       "id": "e077",
-      "file": "AffineCurveCounting/ProjectiveCubicExponent.lean",
-      "declaration": "AffineCurveCounting.projective_dimension_growth_cubic",
+      "file": "CCDN/ProjectiveCubicExponent.lean",
+      "declaration": "CCDN.projective_dimension_growth_cubic",
       "line": 123,
       "kind": "theorem",
-      "sha256": "aedfa9c2c4ea140486a7295ba8bd43f8210918f481e4106d11a9b7d2b69d197d"
+      "sha256": "12f33ef445e25da4671bf3a13cfd9de005908d99184dcc066dfb8bf11fb2e3d9"
     },
     {
       "id": "e078",
-      "file": "AffineCurveCounting/ProjectiveCurveBound.lean",
-      "declaration": "AffineCurveCounting.ProjectiveCurveBound",
+      "file": "CCDN/ProjectiveCurveBound.lean",
+      "declaration": "CCDN.ProjectiveCurveBound",
       "line": 104,
       "kind": "def",
-      "sha256": "a165c81f4087060145f92e34ac7a5ead2a783451166fc3d861df8b23611339a5"
+      "sha256": "a45054040ff6482481739689c46fbd78d7efe22300612d33ff15da95ecf7f8d1"
     },
     {
       "id": "e079",
-      "file": "AffineCurveCounting/ProjectiveCurveBound.lean",
-      "declaration": "AffineCurveCounting.projectiveCurveBound",
+      "file": "CCDN/ProjectiveCurveBound.lean",
+      "declaration": "CCDN.projectiveCurveBound",
       "line": 111,
       "kind": "theorem",
-      "sha256": "a165c81f4087060145f92e34ac7a5ead2a783451166fc3d861df8b23611339a5"
+      "sha256": "a45054040ff6482481739689c46fbd78d7efe22300612d33ff15da95ecf7f8d1"
     },
     {
       "id": "e080",
-      "file": "AffineCurveCounting/ProjectiveSection.lean",
-      "declaration": "AffineCurveCounting.HasProjectiveCurveDegree",
+      "file": "CCDN/ProjectiveSection.lean",
+      "declaration": "CCDN.HasProjectiveCurveDegree",
       "line": 28,
       "kind": "def",
-      "sha256": "a25e084f8acdaf71700eb5d76b78d3bab523ba0459da9da2cddae3957e8f3d6e"
+      "sha256": "f6855f52a7d4465f9fa69ee05aa2918881d5ebc7c818e7ee99b62a0387afc72e"
     },
     {
       "id": "e081",
-      "file": "AffineCurveCounting/ProjectiveBox.lean",
-      "declaration": "AffineCurveCounting.projectiveCount",
+      "file": "CCDN/ProjectiveBox.lean",
+      "declaration": "CCDN.projectiveCount",
       "line": 63,
       "kind": "def",
-      "sha256": "6983df75ff6550867e29328a2037f2153c2e6c6d16226b7ba769869d5e3a5905"
+      "sha256": "ae1bb6b0d9e7a1e981a97bb99576e4ac14f99b37b5a2569774c22e4ae1a60f1f"
     },
     {
       "id": "e082",
-      "file": "AffineCurveCounting/Curve.lean",
-      "declaration": "AffineCurveCounting.AffineCurveBound",
+      "file": "CCDN/Curve.lean",
+      "declaration": "CCDN.AffineCurveBound",
       "line": 63,
       "kind": "def",
-      "sha256": "ff29a2fe7c0c9d673fb0023c5ddfc7df75e3dfef4f7a366c1d9033afd7a4958f"
+      "sha256": "bf8d8a5f49da17db5835d2fe6a2c5aabefb6ee7cad55e5c4309d8c92fe6f8a09"
     },
     {
       "id": "e083",
-      "file": "AffineCurveCounting/AffineCurveBound.lean",
-      "declaration": "AffineCurveCounting.affineCurveBound",
+      "file": "CCDN/AffineCurveBound.lean",
+      "declaration": "CCDN.affineCurveBound",
       "line": 15,
       "kind": "theorem",
-      "sha256": "c0824087ea48a13c6e8f0293ed4d2d080ece54438e3287801407deca3f944d1e"
+      "sha256": "65b0b1468fcbaf52b99cca7c98ec385c0d9ec3f93b8ae4c2c42eda33bd1d49d9"
     },
     {
       "id": "e084",
-      "file": "AffineCurveCounting/Curve.lean",
-      "declaration": "AffineCurveCounting.HasAffineCurveDegree",
+      "file": "CCDN/Curve.lean",
+      "declaration": "CCDN.HasAffineCurveDegree",
       "line": 45,
       "kind": "def",
-      "sha256": "ff29a2fe7c0c9d673fb0023c5ddfc7df75e3dfef4f7a366c1d9033afd7a4958f"
+      "sha256": "bf8d8a5f49da17db5835d2fe6a2c5aabefb6ee7cad55e5c4309d8c92fe6f8a09"
     },
     {
       "id": "e085",
-      "file": "AffineCurveCounting/Plane.lean",
-      "declaration": "AffineCurveCounting.curveBound",
+      "file": "CCDN/Plane.lean",
+      "declaration": "CCDN.curveBound",
       "line": 20,
       "kind": "def",
-      "sha256": "0af68a37a9635f8a4f803b7253565701ab6086504e36b5c69fb8d994c1a07981"
+      "sha256": "23813441486ca6d62776d60a653794f1a4664e351c296fc53a7033b5b092298d"
     },
     {
       "id": "e086",
-      "file": "AffineCurveCounting/Box.lean",
-      "declaration": "AffineCurveCounting.count",
+      "file": "CCDN/Box.lean",
+      "declaration": "CCDN.count",
       "line": 57,
       "kind": "def",
-      "sha256": "9dc92e2522339b880eeabbb9344d9d993159efb8ece3e7559ad00aa919d097e8"
+      "sha256": "e15a8d83836afe0c2dd69ad400e1e9b0c4e5277e309c41fcf9827dadb8e21891"
     },
     {
       "id": "e087",
-      "file": "AffineCurveCounting/CubicAffineDimensionGrowth.lean",
-      "declaration": "AffineCurveCounting.top_form_hypersurface_dimension_growth_cubic",
+      "file": "CCDN/CubicAffineDimensionGrowth.lean",
+      "declaration": "CCDN.top_form_hypersurface_dimension_growth_cubic",
       "line": 18,
       "kind": "theorem",
-      "sha256": "de03e82175d07b44299bfd202e2a98e5fe071090ff7c1f132a684ccda366672e"
+      "sha256": "3916b12514d8dc372be948087b625e56d63daea8349eaf42173700181cc7d848"
     },
     {
       "id": "e088",
-      "file": "AffineCurveCounting/CubicAffineDimensionGrowth.lean",
-      "declaration": "AffineCurveCounting.rational_top_form_hypersurface_dimension_growth_cubic",
+      "file": "CCDN/CubicAffineDimensionGrowth.lean",
+      "declaration": "CCDN.rational_top_form_hypersurface_dimension_growth_cubic",
       "line": 32,
       "kind": "theorem",
-      "sha256": "de03e82175d07b44299bfd202e2a98e5fe071090ff7c1f132a684ccda366672e"
+      "sha256": "3916b12514d8dc372be948087b625e56d63daea8349eaf42173700181cc7d848"
     },
     {
       "id": "e089",
-      "file": "AffineCurveCounting/ProjectiveCurveLowerBound.lean",
-      "declaration": "AffineCurveCounting.projective_integral_curve_lower_bound",
+      "file": "CCDN/ProjectiveCurveLowerBound.lean",
+      "declaration": "CCDN.projective_integral_curve_lower_bound",
       "line": 40,
       "kind": "theorem",
-      "sha256": "b543dfd3b61b3fb5b4a8d70bb6845e9eb6c81a30fed144b764bd38947b618ff6"
+      "sha256": "b6aa1f2fd688312834638c441babac4cb7159b53fc8ba6c9e8d5c5a49a36cf08"
     },
     {
       "id": "e090",
-      "file": "AffineCurveCounting/ClassGroupBound.lean",
-      "declaration": "AffineCurveCounting.classGroup_two_torsion_bound",
+      "file": "CCDN/ClassGroupBound.lean",
+      "declaration": "CCDN.classGroup_two_torsion_bound",
       "line": 20,
       "kind": "theorem",
-      "sha256": "f4a52abfad5c68ad271a776985143b76a881831c223494e4bd486d1ff4106c86"
+      "sha256": "48dac5cf8490cf2bb1318020a816897160a0f1e07cdb196c0a543cf5c3c62cce"
     },
     {
       "id": "e091",
-      "file": "AffineCurveCounting/ClassGroupTwoTorsion.lean",
-      "declaration": "AffineCurveCounting.classGroupTwoTorsion",
+      "file": "CCDN/ClassGroupTwoTorsion.lean",
+      "declaration": "CCDN.classGroupTwoTorsion",
       "line": 56,
       "kind": "def",
-      "sha256": "2c482fa21eb42d79f6b424a803552b138e9287da36af3cd9371fd7cf957c2799"
+      "sha256": "2704a14c30b59fe34c459ee3a98d459074d658244a31e60c59fb285958e0179e"
     },
     {
       "id": "e092",
-      "file": "AffineCurveCounting/ClassGroupTwoTorsion.lean",
-      "declaration": "AffineCurveCounting.classGroupTwoTorsionCard",
+      "file": "CCDN/ClassGroupTwoTorsion.lean",
+      "declaration": "CCDN.classGroupTwoTorsionCard",
       "line": 64,
       "kind": "def",
-      "sha256": "2c482fa21eb42d79f6b424a803552b138e9287da36af3cd9371fd7cf957c2799"
+      "sha256": "2704a14c30b59fe34c459ee3a98d459074d658244a31e60c59fb285958e0179e"
     },
     {
       "id": "e093",
-      "file": "AffineCurveCounting/ClassGroupUniformBound.lean",
-      "declaration": "AffineCurveCounting.ClassGroupLogarithmicBound",
+      "file": "CCDN/ClassGroupUniformBound.lean",
+      "declaration": "CCDN.ClassGroupLogarithmicBound",
       "line": 17,
       "kind": "def",
-      "sha256": "f4aaa7b1654a5be6de07f65d73d9a521508dd07a243736587fb7e6b03b4059dd"
+      "sha256": "627bff925eaba5cc41d33f5a68548897b6aac5a9a41e8420764029d5b76fa63a"
     },
     {
       "id": "e094",
-      "file": "AffineCurveCounting/ClassGroupUniformBound.lean",
-      "declaration": "AffineCurveCounting.classGroup_uniform_logarithmic_bound",
+      "file": "CCDN/ClassGroupUniformBound.lean",
+      "declaration": "CCDN.classGroup_uniform_logarithmic_bound",
       "line": 23,
       "kind": "theorem",
-      "sha256": "f4aaa7b1654a5be6de07f65d73d9a521508dd07a243736587fb7e6b03b4059dd"
+      "sha256": "627bff925eaba5cc41d33f5a68548897b6aac5a9a41e8420764029d5b76fa63a"
     },
     {
       "id": "e095",
-      "file": "AffineCurveCounting/PureVarietyGridBound.lean",
-      "declaration": "AffineCurveCounting.pure_ideal_grid_card_le",
+      "file": "CCDN/PureVarietyGridBound.lean",
+      "declaration": "CCDN.pure_ideal_grid_card_le",
       "line": 32,
       "kind": "theorem",
-      "sha256": "6a6d1fcb57ef1d28a912b0d12c28ad602d5a0c96ad03e581aa6372117e3103a6"
+      "sha256": "2a132e80215dd34a2bb16108821c7cedb487e6b88afa27ec2d7924cf17c0cede"
     },
     {
       "id": "e096",
-      "file": "AffineCurveCounting/PureVarietyGridBound.lean",
-      "declaration": "AffineCurveCounting.pure_variety_count_le_degree_mul_box_side",
+      "file": "CCDN/PureVarietyGridBound.lean",
+      "declaration": "CCDN.pure_variety_count_le_degree_mul_box_side",
       "line": 109,
       "kind": "theorem",
-      "sha256": "6a6d1fcb57ef1d28a912b0d12c28ad602d5a0c96ad03e581aa6372117e3103a6"
+      "sha256": "2a132e80215dd34a2bb16108821c7cedb487e6b88afa27ec2d7924cf17c0cede"
     },
     {
       "id": "e097",
-      "file": "AffineCurveCounting/SmallOutsidePoint.lean",
-      "declaration": "AffineCurveCounting.exists_small_integer_point_outside_prime_ideal",
+      "file": "CCDN/SmallOutsidePoint.lean",
+      "declaration": "CCDN.exists_small_integer_point_outside_prime_ideal",
       "line": 90,
       "kind": "theorem",
-      "sha256": "2a460690211b7e171db66072af5297b7ebeb1435dfb1982e65e4ec2aeedbbdd9"
+      "sha256": "082cf81879d6088ae61093f5be8afcfca2d67af05768c26c360503993ee97a38"
     },
     {
       "id": "e098",
-      "file": "AffineCurveCounting/SmallOutsidePoint.lean",
-      "declaration": "AffineCurveCounting.exists_small_projective_integer_representative_outside",
+      "file": "CCDN/SmallOutsidePoint.lean",
+      "declaration": "CCDN.exists_small_projective_integer_representative_outside",
       "line": 142,
       "kind": "theorem",
-      "sha256": "2a460690211b7e171db66072af5297b7ebeb1435dfb1982e65e4ec2aeedbbdd9"
+      "sha256": "082cf81879d6088ae61093f5be8afcfca2d67af05768c26c360503993ee97a38"
     },
     {
       "id": "e099",
-      "file": "AffineCurveCounting/SmallOutsidePoint.lean",
-      "declaration": "AffineCurveCounting.exists_small_rational_projective_point_outside_prime_ideal",
+      "file": "CCDN/SmallOutsidePoint.lean",
+      "declaration": "CCDN.exists_small_rational_projective_point_outside_prime_ideal",
       "line": 179,
       "kind": "theorem",
-      "sha256": "2a460690211b7e171db66072af5297b7ebeb1435dfb1982e65e4ec2aeedbbdd9"
+      "sha256": "082cf81879d6088ae61093f5be8afcfca2d67af05768c26c360503993ee97a38"
     },
     {
       "id": "e100",
-      "file": "AffineCurveCounting/NonRationalVarietyCount.lean",
-      "declaration": "AffineCurveCounting.non_rational_prime_count_le_box",
+      "file": "CCDN/NonRationalVarietyCount.lean",
+      "declaration": "CCDN.non_rational_prime_count_le_box",
       "line": 17,
       "kind": "theorem",
-      "sha256": "f7456a29768e0ac1d0d3792eb32414b20192e40738372550f953e41abd5b734b"
+      "sha256": "1f5031bbcf4e8ea89e4ee4f3d3a15f549c4c67f5c813b983ca026b4f6227e5af"
     },
     {
       "id": "e101",
-      "file": "AffineCurveCounting/NonRationalProjectiveCount.lean",
-      "declaration": "AffineCurveCounting.non_rational_projective_count_le_box",
+      "file": "CCDN/NonRationalProjectiveCount.lean",
+      "declaration": "CCDN.non_rational_projective_count_le_box",
       "line": 63,
       "kind": "theorem",
-      "sha256": "7c13db21f923ae8bfb394e2eb49e4b06c2f0ee4c3cd4426a894b12940b35de9e"
+      "sha256": "7391ac004ef4740dcc740c9c001617c5761935a5de130f50d5d53606ed74659c"
     },
     {
       "id": "e102",
-      "file": "AffineCurveCounting/ZeroDimensionalPrimeDescent.lean",
-      "declaration": "AffineCurveCounting.non_rational_zero_dimensional_locus_empty",
+      "file": "CCDN/ZeroDimensionalPrimeDescent.lean",
+      "declaration": "CCDN.non_rational_zero_dimensional_locus_empty",
       "line": 82,
       "kind": "theorem",
-      "sha256": "ce8605ad360082716e99ad63448d5cb8f18f745e44946e8017844234ad15cede"
+      "sha256": "ff7f4e1b2e419842ca1ef2e0c6613cda05a7a2d694467f7db6e888a4bdbd1e2c"
     },
     {
       "id": "e103",
-      "file": "AffineCurveCounting/NonRationalVarietyCount.lean",
-      "declaration": "AffineCurveCounting.nonabsolute_variety_count_le_box",
+      "file": "CCDN/NonRationalVarietyCount.lean",
+      "declaration": "CCDN.nonabsolute_variety_count_le_box",
       "line": 43,
       "kind": "theorem",
-      "sha256": "f7456a29768e0ac1d0d3792eb32414b20192e40738372550f953e41abd5b734b"
+      "sha256": "1f5031bbcf4e8ea89e4ee4f3d3a15f549c4c67f5c813b983ca026b4f6227e5af"
     },
     {
       "id": "e104",
-      "file": "AffineCurveCounting/NonRationalProjectiveCount.lean",
-      "declaration": "AffineCurveCounting.nonabsolute_projective_variety_count_le_box",
+      "file": "CCDN/NonRationalProjectiveCount.lean",
+      "declaration": "CCDN.nonabsolute_projective_variety_count_le_box",
       "line": 76,
       "kind": "theorem",
-      "sha256": "7c13db21f923ae8bfb394e2eb49e4b06c2f0ee4c3cd4426a894b12940b35de9e"
+      "sha256": "7391ac004ef4740dcc740c9c001617c5761935a5de130f50d5d53606ed74659c"
     },
     {
       "id": "e105",
-      "file": "AffineCurveCounting/ZeroDimensionalPrimeDescent.lean",
-      "declaration": "AffineCurveCounting.nonabsolute_zero_dimensional_locus_empty",
+      "file": "CCDN/ZeroDimensionalPrimeDescent.lean",
+      "declaration": "CCDN.nonabsolute_zero_dimensional_locus_empty",
       "line": 94,
       "kind": "theorem",
-      "sha256": "ce8605ad360082716e99ad63448d5cb8f18f745e44946e8017844234ad15cede"
+      "sha256": "ff7f4e1b2e419842ca1ef2e0c6613cda05a7a2d694467f7db6e888a4bdbd1e2c"
     },
     {
       "id": "e106",
-      "file": "AffineCurveCounting/NonRationalProjectiveCurve.lean",
-      "declaration": "AffineCurveCounting.non_rational_projective_curve_count_le_degree_sq",
+      "file": "CCDN/NonRationalProjectiveCurve.lean",
+      "declaration": "CCDN.non_rational_projective_curve_count_le_degree_sq",
       "line": 29,
       "kind": "theorem",
-      "sha256": "ddeb29937a734e9172d7f04daad82ca7271ebc7a07bb1590fd5ed33e63a7fda7"
+      "sha256": "45bd6b623ece09bcf58083331ade0b4d2b985754023ee382ba00c1618335d25c"
     },
     {
       "id": "e107",
-      "file": "AffineCurveCounting/NonRationalProjectiveCurve.lean",
-      "declaration": "AffineCurveCounting.nonabsolute_projective_curve_count_le_degree_sq",
+      "file": "CCDN/NonRationalProjectiveCurve.lean",
+      "declaration": "CCDN.nonabsolute_projective_curve_count_le_degree_sq",
       "line": 92,
       "kind": "theorem",
-      "sha256": "ddeb29937a734e9172d7f04daad82ca7271ebc7a07bb1590fd5ed33e63a7fda7"
+      "sha256": "45bd6b623ece09bcf58083331ade0b4d2b985754023ee382ba00c1618335d25c"
     },
     {
       "id": "e108",
-      "file": "AffineCurveCounting/LiteralAffineAuxiliaryTheorem.lean",
-      "declaration": "AffineCurveCounting.literal_affine_hypersurface_auxiliary",
+      "file": "CCDN/LiteralAffineAuxiliaryTheorem.lean",
+      "declaration": "CCDN.literal_affine_hypersurface_auxiliary",
       "line": 122,
       "kind": "theorem",
-      "sha256": "7af046ca2d2d4cd4c091285c8bec17913e18974477f080151e546a5f9511667b"
+      "sha256": "1ebbe1b0ae6812b7edb5a3d064ab533b617ead8a52200591dcffeef66bcec1f6"
     },
     {
       "id": "e109",
-      "file": "AffineCurveCounting/AffineHypersurfaceAuxiliary.lean",
-      "declaration": "AffineCurveCounting.affineAuxiliaryDegreeExpression",
+      "file": "CCDN/AffineHypersurfaceAuxiliary.lean",
+      "declaration": "CCDN.affineAuxiliaryDegreeExpression",
       "line": 16,
       "kind": "def",
-      "sha256": "9520649c2500548151e157e629e3584f634ad9c61d1aa5c0994f3ab6fb4fa072"
+      "sha256": "5a50c1cd16f69d326ebba185b4d24206b77ecb7c13f0940fa60410ae21d1e64e"
     },
     {
       "id": "e110",
-      "file": "AffineCurveCounting/AffineHypersurfaceAuxiliary.lean",
-      "declaration": "AffineCurveCounting.affineHypersurfaceAuxiliaryConstant_pos",
+      "file": "CCDN/AffineHypersurfaceAuxiliary.lean",
+      "declaration": "CCDN.affineHypersurfaceAuxiliaryConstant_pos",
       "line": 29,
       "kind": "lemma",
-      "sha256": "9520649c2500548151e157e629e3584f634ad9c61d1aa5c0994f3ab6fb4fa072"
+      "sha256": "5a50c1cd16f69d326ebba185b4d24206b77ecb7c13f0940fa60410ae21d1e64e"
     },
     {
       "id": "e111",
-      "file": "AffineCurveCounting/ProjectiveCoefficientHeightUniform.lean",
-      "declaration": "AffineCurveCounting.projective_coefficient_height_dichotomy_uniform",
+      "file": "CCDN/ProjectiveCoefficientHeightUniform.lean",
+      "declaration": "CCDN.projective_coefficient_height_dichotomy_uniform",
       "line": 145,
       "kind": "theorem",
-      "sha256": "d1c06a3cb42d3e7d9825bf332a76c23c4bcfa6355de97f78471cc821f8883bdf"
+      "sha256": "a407d4a1037ab7b72386db1e66d6fc787e41c8f21b3562f2a787eaccf1f6b61e"
     },
     {
       "id": "e112",
-      "file": "AffineCurveCounting/HypersurfaceHeightTransfer.lean",
-      "declaration": "AffineCurveCounting.hypersurface_badPrime_height_transfer",
+      "file": "CCDN/HypersurfaceHeightTransfer.lean",
+      "declaration": "CCDN.hypersurface_badPrime_height_transfer",
       "line": 38,
       "kind": "theorem",
-      "sha256": "a610368819c9f49551c04aaced5fe5eb638239b0980fe7e4f9eea20e6ff6420e"
+      "sha256": "22256539f77f8de946dc0ef51ec3ec6859320427ca13a59eca659873d61a22fb"
     },
     {
       "id": "e113",
-      "file": "AffineCurveCounting/LiteralAffinePlaneCount.lean",
-      "declaration": "AffineCurveCounting.literal_affine_plane_coefficient_count_uniform",
+      "file": "CCDN/LiteralAffinePlaneCount.lean",
+      "declaration": "CCDN.literal_affine_plane_coefficient_count_uniform",
       "line": 55,
       "kind": "theorem",
-      "sha256": "fb2812ae0cb86b072cf300c653adf63e08e4301be76107aa44683a0f28baa5c4"
+      "sha256": "49c83d55d82e17a6c9aa8e743fbac7ce93b074453512e9237aa7d7b747e9144a"
     },
     {
       "id": "e114",
-      "file": "AffineCurveCounting/AffinePlaneCoefficientCount.lean",
-      "declaration": "AffineCurveCounting.affinePlaneCoefficientCountExpression",
+      "file": "CCDN/AffinePlaneCoefficientCount.lean",
+      "declaration": "CCDN.affinePlaneCoefficientCountExpression",
       "line": 16,
       "kind": "def",
-      "sha256": "e457e1f883ece0f442cb1b1048c3236a24fdc74b61439f4ff178383e60e03268"
+      "sha256": "e0bae956e46a6cbacf39249b2cd35bb8409a0a2daea80c67a80f2d5af9953bb1"
     },
     {
       "id": "e115",
-      "file": "AffineCurveCounting/CoprimeNewtonEdgeCount.lean",
-      "declaration": "AffineCurveCounting.coprime_newton_edge_log_free_bound",
+      "file": "CCDN/CoprimeNewtonEdgeCount.lean",
+      "declaration": "CCDN.coprime_newton_edge_log_free_bound",
       "line": 119,
       "kind": "theorem",
-      "sha256": "475ca10548f7179add72e673485f4c8412bd8b806b385759775bd7d9710984c8"
+      "sha256": "504e17be82368b184eb6c732008c71ea91a02e7a6a3123ca6616dd31352eb464"
     },
     {
       "id": "e116",
-      "file": "AffineCurveCounting/AffineVarietyProjection.lean",
-      "declaration": "AffineCurveCounting.exists_geometrically_integral_affine_projection",
+      "file": "CCDN/AffineVarietyProjection.lean",
+      "declaration": "CCDN.exists_geometrically_integral_affine_projection",
       "line": 16,
       "kind": "theorem",
-      "sha256": "a48656ad5c91a7197b39cd12c0ee1f9ac65d8701f9c2d3e1c3d64b0ca36823e9"
+      "sha256": "119dfd3ac31684a925f0acf289cbe602491e0a682c320ebde7f92368af3c4b78"
     },
     {
       "id": "e117",
-      "file": "AffineCurveCounting/AffineVarietyProjection.lean",
-      "declaration": "AffineCurveCounting.affine_variety_projection_constants",
+      "file": "CCDN/AffineVarietyProjection.lean",
+      "declaration": "CCDN.affine_variety_projection_constants",
       "line": 53,
       "kind": "theorem",
-      "sha256": "a48656ad5c91a7197b39cd12c0ee1f9ac65d8701f9c2d3e1c3d64b0ca36823e9"
+      "sha256": "119dfd3ac31684a925f0acf289cbe602491e0a682c320ebde7f92368af3c4b78"
     },
     {
       "id": "e118",
-      "file": "AffineCurveCounting/GeometricProjectiveCurveProjection.lean",
-      "declaration": "AffineCurveCounting.exists_geometric_affine_curve_projection",
+      "file": "CCDN/GeometricProjectiveCurveProjection.lean",
+      "declaration": "CCDN.exists_geometric_affine_curve_projection",
       "line": 117,
       "kind": "theorem",
-      "sha256": "ca8e903f13c7662f4653fc29426b952bb210229592bf679019da9d844d2b7436"
+      "sha256": "8793796fd4763f8bc7ca51e0d6e24584a59965a9e4df2613d7a3da468cf6677a"
     },
     {
       "id": "e119",
-      "file": "AffineCurveCounting/GeometricProjectiveProjection.lean",
-      "declaration": "AffineCurveCounting.exists_geometrically_integral_projective_projection",
+      "file": "CCDN/GeometricProjectiveProjection.lean",
+      "declaration": "CCDN.exists_geometrically_integral_projective_projection",
       "line": 19,
       "kind": "theorem",
-      "sha256": "de53e87f817117970e60f9aaeb807ec863c28de311c78a21743838de5a384577"
+      "sha256": "0e33118ed24c42583387b80c4a94eb568e9b661e387948d20c6e402e39b4db07"
     },
     {
       "id": "e120",
-      "file": "AffineCurveCounting/GeometricProjectiveCurveProjection.lean",
-      "declaration": "AffineCurveCounting.exists_geometric_projective_curve_projection",
+      "file": "CCDN/GeometricProjectiveCurveProjection.lean",
+      "declaration": "CCDN.exists_geometric_projective_curve_projection",
       "line": 67,
       "kind": "theorem",
-      "sha256": "ca8e903f13c7662f4653fc29426b952bb210229592bf679019da9d844d2b7436"
+      "sha256": "8793796fd4763f8bc7ca51e0d6e24584a59965a9e4df2613d7a3da468cf6677a"
     },
     {
       "id": "e121",
-      "file": "AffineCurveCounting/SurfaceLineContribution.lean",
-      "declaration": "AffineCurveCounting.surface_line_contribution",
+      "file": "CCDN/SurfaceLineContribution.lean",
+      "declaration": "CCDN.surface_line_contribution",
       "line": 136,
       "kind": "theorem",
-      "sha256": "6fdd8f1280ab139221a16ff67c3515b58dc6bc9f6af44192e4795f072c3b0d6f"
+      "sha256": "f10212bae97785d6c178e197a7459297d2cd6cf7204cff32ee91e95ca422cbc2"
     },
     {
       "id": "e122",
-      "file": "AffineCurveCounting/DegreeOneComponentLines.lean",
-      "declaration": "AffineCurveCounting.degree_one_components_line_cover",
+      "file": "CCDN/DegreeOneComponentLines.lean",
+      "declaration": "CCDN.degree_one_components_line_cover",
       "line": 13,
       "kind": "theorem",
-      "sha256": "5a5809269cc34c14fadda0976f3e497d10eb3e3e84f20982f0b805577a6290c6"
+      "sha256": "2bebccb383328ba11253fa5dbeb89db3f9eab26d76468ab7b6c04dd2acc50d09"
     },
     {
       "id": "e123",
-      "file": "AffineCurveCounting/TopFormDimensionGrowthAllDegrees.lean",
-      "declaration": "AffineCurveCounting.top_form_surface_dimension_growth",
+      "file": "CCDN/TopFormDimensionGrowthAllDegrees.lean",
+      "declaration": "CCDN.top_form_surface_dimension_growth",
       "line": 16,
       "kind": "theorem",
-      "sha256": "cd5f188930b5d84cedf13efe99d02f50a44cecbf93ef4049f9af18fdb27ed0fb"
+      "sha256": "a2feafffc3d00f7a67356b4460198981742754fd45b2be6a49e4118e0a821988"
     },
     {
       "id": "e124",
-      "file": "AffineCurveCounting/SalbergerSurfaceTheorem.lean",
-      "declaration": "AffineCurveCounting.salberger_surface_cover",
+      "file": "CCDN/SalbergerSurfaceTheorem.lean",
+      "declaration": "CCDN.salberger_surface_cover",
       "line": 15,
       "kind": "theorem",
-      "sha256": "1b50d9367d8206f5cb0fdfe3b420262e23dc93b1ef15e8744f5b29cd9357fc36"
+      "sha256": "8d5aaa24f62a72e1b458b1fde3a70b739d150edba62901f6624a17b5cfa47dd1"
     },
     {
       "id": "e125",
-      "file": "AffineCurveCounting/SurfaceSalbergerCover.lean",
-      "declaration": "AffineCurveCounting.surface_salberger_cover",
+      "file": "CCDN/SurfaceSalbergerCover.lean",
+      "declaration": "CCDN.surface_salberger_cover",
       "line": 76,
       "kind": "theorem",
-      "sha256": "3627872996c1caf86ece15d1858d0eaf4027d93ae5fea4a4dcfbb6e131a19e2d"
+      "sha256": "9708ce1d40f824545a18faaf8082f515988b737f78b9972ace40183a6c97ce34"
     },
     {
       "id": "e126",
-      "file": "AffineCurveCounting/ProjectiveSurfaceSalbergerCover.lean",
-      "declaration": "AffineCurveCounting.projective_surface_salberger_cover",
+      "file": "CCDN/ProjectiveSurfaceSalbergerCover.lean",
+      "declaration": "CCDN.projective_surface_salberger_cover",
       "line": 35,
       "kind": "theorem",
-      "sha256": "3e4ba264288df8612d4ea8395647ff5d22af60f08c10a93ce89bf86aad818cd9"
+      "sha256": "fb996599555b7becf343485fc2715b4fcee880614fbcc7773be331e3c02b701f"
     },
     {
       "id": "e127",
-      "file": "AffineCurveCounting/ProjectiveChartSmoothness.lean",
-      "declaration": "AffineCurveCounting.projectiveSmoothAffineChart_eq",
+      "file": "CCDN/ProjectiveChartSmoothness.lean",
+      "declaration": "CCDN.projectiveSmoothAffineChart_eq",
       "line": 37,
       "kind": "theorem",
-      "sha256": "ecfa205e63a38dc7e673310ad793d8b0a3784fbeef22e5d361e9f656bebfc0b0"
+      "sha256": "7bcfd294bda76d311c74e671cc4e5f93fcdcb687870ed55168f5770d3512c8d2"
     },
     {
       "id": "e128",
-      "file": "AffineCurveCounting/IntegralHyperplaneAvoidance.lean",
-      "declaration": "AffineCurveCounting.exists_integral_hyperplane_avoidance",
+      "file": "CCDN/IntegralHyperplaneAvoidance.lean",
+      "declaration": "CCDN.exists_integral_hyperplane_avoidance",
       "line": 42,
       "kind": "theorem",
-      "sha256": "2038e5146616a05ff9fb283584661e434daf0f6160203f24755229925a035c70"
+      "sha256": "46c987ac1b8115c9c96b315b9ecac168a6f0d237e8fb57a2acdb066a9fe46b3f"
     },
     {
       "id": "e129",
-      "file": "AffineCurveCounting/IntegerGridLowerBound.lean",
-      "declaration": "AffineCurveCounting.exists_absolutely_irreducible_integer_grid",
+      "file": "CCDN/IntegerGridLowerBound.lean",
+      "declaration": "CCDN.exists_absolutely_irreducible_integer_grid",
       "line": 63,
       "kind": "theorem",
-      "sha256": "e1893dd2ed1c10171b90830a82f95f8c5f87eb609053acbb6e3454d3e79a7384"
+      "sha256": "ec2c559f8ae381b668a5df0b52316c85ad0cb053ef329c82564deb34eac2a46e"
     },
     {
       "id": "e130",
-      "file": "AffineCurveCounting/ProjectiveDegreeObstruction.lean",
-      "declaration": "AffineCurveCounting.projective_curve_factor_lower_bound",
+      "file": "CCDN/ProjectiveDegreeObstruction.lean",
+      "declaration": "CCDN.projective_curve_factor_lower_bound",
       "line": 15,
       "kind": "theorem",
-      "sha256": "decf2250642794a64b95df783a6b653c74c82de55d0ece3f20b17f0c6cf2a904"
+      "sha256": "1499ccbfefe3118b4a1b58feb9827a3a28e6d58324134dfd4df8fd55a577873f"
     },
     {
       "id": "e131",
-      "file": "AffineCurveCounting/ProjectiveDegreeObstruction.lean",
-      "declaration": "AffineCurveCounting.projective_curve_factor_not_isLittleO",
+      "file": "CCDN/ProjectiveDegreeObstruction.lean",
+      "declaration": "CCDN.projective_curve_factor_not_isLittleO",
       "line": 33,
       "kind": "theorem",
-      "sha256": "decf2250642794a64b95df783a6b653c74c82de55d0ece3f20b17f0c6cf2a904"
+      "sha256": "1499ccbfefe3118b4a1b58feb9827a3a28e6d58324134dfd4df8fd55a577873f"
     },
     {
       "id": "e132",
-      "file": "AffineCurveCounting/ProjectiveDegreeObstruction.lean",
-      "declaration": "AffineCurveCounting.projective_curve_degree_exponent_ge_two",
+      "file": "CCDN/ProjectiveDegreeObstruction.lean",
+      "declaration": "CCDN.projective_curve_degree_exponent_ge_two",
       "line": 52,
       "kind": "theorem",
-      "sha256": "decf2250642794a64b95df783a6b653c74c82de55d0ece3f20b17f0c6cf2a904"
+      "sha256": "1499ccbfefe3118b4a1b58feb9827a3a28e6d58324134dfd4df8fd55a577873f"
     },
     {
       "id": "e133",
-      "file": "AffineCurveCounting/AffineCurveDegreeObstruction.lean",
-      "declaration": "AffineCurveCounting.exists_affine_curve_log_lower_bound",
+      "file": "CCDN/AffineCurveDegreeObstruction.lean",
+      "declaration": "CCDN.exists_affine_curve_log_lower_bound",
       "line": 81,
       "kind": "theorem",
-      "sha256": "f53b40fdbaf4709839b3162c6c2c79ad6392511dfc3599e77bf55ecc9fe67266"
+      "sha256": "92c5b4013dadac2edd415d7e643c6aba839be5c7be5e046ac18cc155e782441c"
     },
     {
       "id": "e134",
-      "file": "AffineCurveCounting/AffineCurveDegreeObstruction.lean",
-      "declaration": "AffineCurveCounting.affine_curve_log_factor_lower_bound",
+      "file": "CCDN/AffineCurveDegreeObstruction.lean",
+      "declaration": "CCDN.affine_curve_log_factor_lower_bound",
       "line": 118,
       "kind": "theorem",
-      "sha256": "f53b40fdbaf4709839b3162c6c2c79ad6392511dfc3599e77bf55ecc9fe67266"
+      "sha256": "92c5b4013dadac2edd415d7e643c6aba839be5c7be5e046ac18cc155e782441c"
     },
     {
       "id": "e135",
-      "file": "AffineCurveCounting/AffineCurveDegreeObstruction.lean",
-      "declaration": "AffineCurveCounting.affine_curve_log_factor_not_isLittleO",
+      "file": "CCDN/AffineCurveDegreeObstruction.lean",
+      "declaration": "CCDN.affine_curve_log_factor_not_isLittleO",
       "line": 141,
       "kind": "theorem",
-      "sha256": "f53b40fdbaf4709839b3162c6c2c79ad6392511dfc3599e77bf55ecc9fe67266"
+      "sha256": "92c5b4013dadac2edd415d7e643c6aba839be5c7be5e046ac18cc155e782441c"
     },
     {
       "id": "e136",
-      "file": "AffineCurveCounting/DegreeDependenceObstruction.lean",
-      "declaration": "AffineCurveCounting.projective_hypersurface_degree_exponent_ge_one",
+      "file": "CCDN/DegreeDependenceObstruction.lean",
+      "declaration": "CCDN.projective_hypersurface_degree_exponent_ge_one",
       "line": 150,
       "kind": "theorem",
-      "sha256": "2f3bedbb2cb6ed1c75fbfb51529ea264b68487d38f3650a63c654ae915bea085"
+      "sha256": "8abebc7f0336441f215cc51eb9dc757c6ed7780b51519c54df066f5dd668cec3"
     },
     {
       "id": "e137",
-      "file": "AffineCurveCounting/DegreeDependenceObstruction.lean",
-      "declaration": "AffineCurveCounting.affine_hypersurface_degree_exponent_ge_two",
+      "file": "CCDN/DegreeDependenceObstruction.lean",
+      "declaration": "CCDN.affine_hypersurface_degree_exponent_ge_two",
       "line": 133,
       "kind": "theorem",
-      "sha256": "2f3bedbb2cb6ed1c75fbfb51529ea264b68487d38f3650a63c654ae915bea085"
+      "sha256": "8abebc7f0336441f215cc51eb9dc757c6ed7780b51519c54df066f5dd668cec3"
     },
     {
       "id": "e138",
-      "file": "AffineCurveCounting/GridHypersurfaceLowerBound.lean",
-      "declaration": "AffineCurveCounting.exists_topform_hypersurface_lower_bounds",
+      "file": "CCDN/GridHypersurfaceLowerBound.lean",
+      "declaration": "CCDN.exists_topform_hypersurface_lower_bounds",
       "line": 80,
       "kind": "theorem",
-      "sha256": "ce051a28b08a5c9d73ce3376429b4cd3c41f849c3230d82cbbaa1796ad9c65cc"
+      "sha256": "c6d3762b7d6966a8232a74ce829811fe5a5fb45a8fc5f94991177d53f978a0d8"
     },
     {
       "id": "e139",
-      "file": "AffineCurveCounting/GridAffineLowerBound.lean",
-      "declaration": "AffineCurveCounting.exists_affine_plane_grid_lower_bound",
+      "file": "CCDN/GridAffineLowerBound.lean",
+      "declaration": "CCDN.exists_affine_plane_grid_lower_bound",
       "line": 31,
       "kind": "theorem",
-      "sha256": "da7a6671c35b47baf6d17c708a140a45d63d43bb24aaebbb95cf7302e0a8a625"
+      "sha256": "7193d15998816144e410f26507436ccc26709d15643f953d669c3bdaf8dfe95d"
     },
     {
       "id": "e140",
-      "file": "AffineCurveCounting/IntegerGridLowerBound.lean",
-      "declaration": "AffineCurveCounting.exists_irreducible_origin_equation",
+      "file": "CCDN/IntegerGridLowerBound.lean",
+      "declaration": "CCDN.exists_irreducible_origin_equation",
       "line": 54,
       "kind": "lemma",
-      "sha256": "e1893dd2ed1c10171b90830a82f95f8c5f87eb609053acbb6e3454d3e79a7384"
+      "sha256": "ec2c559f8ae381b668a5df0b52316c85ad0cb053ef329c82564deb34eac2a46e"
     },
     {
       "id": "e141",
-      "file": "AffineCurveCounting/HypersurfaceLowerBoundAllDegrees.lean",
-      "declaration": "AffineCurveCounting.hypersurface_grid_lower_bound_numerics",
+      "file": "CCDN/HypersurfaceLowerBoundAllDegrees.lean",
+      "declaration": "CCDN.hypersurface_grid_lower_bound_numerics",
       "line": 14,
       "kind": "lemma",
-      "sha256": "818615e5fe4c0be675cdd2e6a6a577f151abe75ea319b27ac44e2e5425022829"
+      "sha256": "2794b25c972aec3d75aed75ac225b6cc152b96a55fb9da2766e38847ba56fcd4"
     },
     {
       "id": "e142",
-      "file": "AffineCurveCounting/HypersurfaceLowerBoundAllDegrees.lean",
-      "declaration": "AffineCurveCounting.exists_hypersurface_lower_bounds_all_degrees",
+      "file": "CCDN/HypersurfaceLowerBoundAllDegrees.lean",
+      "declaration": "CCDN.exists_hypersurface_lower_bounds_all_degrees",
       "line": 48,
       "kind": "theorem",
-      "sha256": "818615e5fe4c0be675cdd2e6a6a577f151abe75ea319b27ac44e2e5425022829"
+      "sha256": "2794b25c972aec3d75aed75ac225b6cc152b96a55fb9da2766e38847ba56fcd4"
     },
     {
       "id": "e143",
-      "file": "AffineCurveCounting/SharpAmbientCenterProjection.lean",
-      "declaration": "AffineCurveCounting.exists_sharp_ambient_birational_projection",
+      "file": "CCDN/SharpAmbientCenterProjection.lean",
+      "declaration": "CCDN.exists_sharp_ambient_birational_projection",
       "line": 48,
       "kind": "theorem",
-      "sha256": "acfa1345d20e2badc4a87d939ddac76e4d806782b8b0c1db3f9f8a07600ff3c6"
+      "sha256": "1a202d97dd622d1bc738d1f5ff64c67d3cd5c3c2c41dfbe7fef756251cf96bda"
     },
     {
       "id": "e144",
-      "file": "AffineCurveCounting/BirationalComplementProjection.lean",
-      "declaration": "AffineCurveCounting.BirationalComplementProjection",
+      "file": "CCDN/BirationalComplementProjection.lean",
+      "declaration": "CCDN.BirationalComplementProjection",
       "line": 17,
       "kind": "structure",
-      "sha256": "e80c225506104c3749f62b5f731ae37d93a7a8d8f3539bff3c0628286bcce004"
+      "sha256": "7e64c5b39366df60753fdbe08585cdf1692225866fee1e0a49ac7739bc169dc5"
     },
     {
       "id": "e145",
-      "file": "AffineCurveCounting/CenterProjectionHeight.lean",
-      "declaration": "AffineCurveCounting.centerProjectionHeightConstant_pos",
+      "file": "CCDN/CenterProjectionHeight.lean",
+      "declaration": "CCDN.centerProjectionHeightConstant_pos",
       "line": 72,
       "kind": "lemma",
-      "sha256": "8e1b1a784d526feeed7505d995bb22ef9d2d528dece0ac837f53ab34f2d1c87f"
+      "sha256": "7d3cb8267435d78eb4c37ca3de0a77ac5c5247067bccd29dd4dc08806627b229"
     },
     {
       "id": "e146",
-      "file": "AffineCurveCounting/ProjectiveChowExactDegree.lean",
-      "declaration": "AffineCurveCounting.exists_geometric_projective_chow_exact_degree",
+      "file": "CCDN/ProjectiveChowExactDegree.lean",
+      "declaration": "CCDN.exists_geometric_projective_chow_exact_degree",
       "line": 64,
       "kind": "theorem",
-      "sha256": "d655a588a05aa003fe456f6b01b89a07bb48db3d9b0454622d90ab652ea12875"
+      "sha256": "da3ecd83a069452c55003d32abececbd6d6c5dbae17511497303524bd4e5c106"
     },
     {
       "id": "e147",
-      "file": "AffineCurveCounting/HomogeneousProjectionBirational.lean",
-      "declaration": "AffineCurveCounting.homogeneous_finite_projection_leadingCoeff_eq_iff_birational",
+      "file": "CCDN/HomogeneousProjectionBirational.lean",
+      "declaration": "CCDN.homogeneous_finite_projection_leadingCoeff_eq_iff_birational",
       "line": 49,
       "kind": "theorem",
-      "sha256": "8c84286ad5324e1d7ab2937cb0855159fd29ba0dc4c83bb4085adc4b005894a1"
+      "sha256": "80a24df8cf797dbea2791cba42db66c5bc496a09054d0bd59e57769106adde71"
     },
     {
       "id": "e148",
-      "file": "AffineCurveCounting/CenterPluckerCoordinates.lean",
-      "declaration": "AffineCurveCounting.independentCenterPlucker_eq_iff",
+      "file": "CCDN/CenterPluckerCoordinates.lean",
+      "declaration": "CCDN.independentCenterPlucker_eq_iff",
       "line": 100,
       "kind": "theorem",
-      "sha256": "f20e2797a3820d664fd427324a2d72010131dfa6bafaf4582458c76031a4bab2"
+      "sha256": "acabf8bc96e642c63989c9d17e987bb27c630959106c4a246262cee6d35de174"
     },
     {
       "id": "e149",
-      "file": "AffineCurveCounting/CenterPluckerCoordinates.lean",
-      "declaration": "AffineCurveCounting.centerSubspacePlucker_injective",
+      "file": "CCDN/CenterPluckerCoordinates.lean",
+      "declaration": "CCDN.centerSubspacePlucker_injective",
       "line": 130,
       "kind": "theorem",
-      "sha256": "f20e2797a3820d664fd427324a2d72010131dfa6bafaf4582458c76031a4bab2"
+      "sha256": "acabf8bc96e642c63989c9d17e987bb27c630959106c4a246262cee6d35de174"
     },
     {
       "id": "e150",
-      "file": "AffineCurveCounting/CenterPluckerZariski.lean",
-      "declaration": "AffineCurveCounting.centerSubspacePlucker_isEmbedding",
+      "file": "CCDN/CenterPluckerZariski.lean",
+      "declaration": "CCDN.centerSubspacePlucker_isEmbedding",
       "line": 62,
       "kind": "theorem",
-      "sha256": "3253a816b1917349a1704c3c54c4e7981fc1876fd86ec5d73d9fc17e63d956ef"
+      "sha256": "4a338f7056b0ac4ab7d0795d35d42da9744fe8b84400300177047d0132fb21c5"
     },
     {
       "id": "e151",
-      "file": "AffineCurveCounting/SharpPluckerComplementEquations.lean",
-      "declaration": "AffineCurveCounting.exists_dense_open_sharp_projective_center_plucker_equations",
+      "file": "CCDN/SharpPluckerComplementEquations.lean",
+      "declaration": "CCDN.exists_dense_open_sharp_projective_center_plucker_equations",
       "line": 108,
       "kind": "theorem",
-      "sha256": "5f26e00fd06cf3e1c4cafe561d077adca69950dca88be969ca110f7125485ba7"
+      "sha256": "8199770d621fe08faa0654a1a1241b565e532cb3c8e475a335dfe49842bf93ae"
     },
     {
       "id": "e152",
-      "file": "AffineCurveCounting/SharpFixedPluckerComplementEquations.lean",
-      "declaration": "AffineCurveCounting.exists_dense_open_sharp_fixed_center_plucker_equations",
+      "file": "CCDN/SharpFixedPluckerComplementEquations.lean",
+      "declaration": "CCDN.exists_dense_open_sharp_fixed_center_plucker_equations",
       "line": 24,
       "kind": "theorem",
-      "sha256": "f9f2681f14fae55aa3772465eaf6323a663f7303da6c76a1ff239befe0541965"
+      "sha256": "7e8858f10132b7bfe1a64358de01f11dec6785e9ab887d69aac7b2e608047ae3"
     },
     {
       "id": "e153",
-      "file": "AffineCurveCounting/SharpCenterResultantDetector.lean",
-      "declaration": "AffineCurveCounting.exists_geometric_sharp_center_detector",
+      "file": "CCDN/SharpCenterResultantDetector.lean",
+      "declaration": "CCDN.exists_geometric_sharp_center_detector",
       "line": 77,
       "kind": "theorem",
-      "sha256": "5f86bfdc641c7cca024a20280b91a8334dacf297ce2ab6b8b75dffe92a9a4151"
+      "sha256": "383b5fcc8e0e5f161780673da9fc3e48e2caa71dac75f6d6ca7cf55d1f02c32b"
     },
     {
       "id": "e154",
-      "file": "AffineCurveCounting/BirationalCenterPluckerTopology.lean",
-      "declaration": "AffineCurveCounting.birationalCenterSubspaceLocus_plucker_dense_open",
+      "file": "CCDN/BirationalCenterPluckerTopology.lean",
+      "declaration": "CCDN.birationalCenterSubspaceLocus_plucker_dense_open",
       "line": 58,
       "kind": "theorem",
-      "sha256": "754ce62bd03d405679ac5f522e0181ca61ed9a564f0b4707eb252064b80ebd99"
+      "sha256": "0e1e54476f1eab7fe0e56f0afe715a255777410fb95817dac419198a2569cef8"
     },
     {
       "id": "e155",
-      "file": "AffineCurveCounting/ZeroDimensionalCenterObstruction.lean",
-      "declaration": "AffineCurveCounting.zero_dimensional_plucker_degree_bound_obstruction",
+      "file": "CCDN/ZeroDimensionalCenterObstruction.lean",
+      "declaration": "CCDN.zero_dimensional_plucker_degree_bound_obstruction",
       "line": 80,
       "kind": "theorem",
-      "sha256": "1b4605c714bdbf8ba7931b916e260cee743b4fd7a2b5ac01c3235992e10cd3fd"
+      "sha256": "189c78f9417551be43ca262315ec89a9316256283d6cec500a805df7b061ab0b"
     },
     {
       "id": "e156",
-      "file": "AffineCurveCounting/ZeroDimensionalGoodCenter.lean",
-      "declaration": "AffineCurveCounting.geometric_projective_dimension_zero_multiplicity_one",
+      "file": "CCDN/ZeroDimensionalGoodCenter.lean",
+      "declaration": "CCDN.geometric_projective_dimension_zero_multiplicity_one",
       "line": 16,
       "kind": "theorem",
-      "sha256": "9eacd57580f63768c1b41eb91341d0f374fd29ece3bd9d0993391961dff55d54"
+      "sha256": "3f1da47e54dc6364332686a05b39af7d943224b9e3495b22f5d24cd84990deb0"
     },
     {
       "id": "e157",
-      "file": "AffineCurveCounting/BirationalCenterPluckerHeight.lean",
-      "declaration": "AffineCurveCounting.exists_birational_center_plucker_height",
+      "file": "CCDN/BirationalCenterPluckerHeight.lean",
+      "declaration": "CCDN.exists_birational_center_plucker_height",
       "line": 36,
       "kind": "theorem",
-      "sha256": "9b6943b3b48f673206469ad14c54a716258d940cca8656ae4a64ea7e9f0fc2d7"
+      "sha256": "f274f3ee3d11c78f27100c52788d64703416624040dfec7abcc1b49150a5ac00"
     },
     {
       "id": "e158",
-      "file": "AffineCurveCounting/BirationalCenterPluckerHeight.lean",
-      "declaration": "AffineCurveCounting.integer_center_subspace_plucker_height",
+      "file": "CCDN/BirationalCenterPluckerHeight.lean",
+      "declaration": "CCDN.integer_center_subspace_plucker_height",
       "line": 16,
       "kind": "theorem",
-      "sha256": "9b6943b3b48f673206469ad14c54a716258d940cca8656ae4a64ea7e9f0fc2d7"
+      "sha256": "f274f3ee3d11c78f27100c52788d64703416624040dfec7abcc1b49150a5ac00"
     },
     {
       "id": "e159",
-      "file": "AffineCurveCounting/CenterProjectionFormula.lean",
-      "declaration": "AffineCurveCounting.exists_center_projection_coordinate_forms",
+      "file": "CCDN/CenterProjectionFormula.lean",
+      "declaration": "CCDN.exists_center_projection_coordinate_forms",
       "line": 17,
       "kind": "theorem",
-      "sha256": "5f958cf15c2de4a3d3fdc08be3948f31e73465eb5d28391481a057c5becdef27"
+      "sha256": "85cd29886fca39ff537c02001096cf6000e9c74f02f8e76ea49fc147c87a4fe1"
     },
     {
       "id": "e160",
-      "file": "AffineCurveCounting/RowSeparatorCounterexample.lean",
-      "declaration": "AffineCurveCounting.not_printed_row_separator_bound",
+      "file": "CCDN/RowSeparatorCounterexample.lean",
+      "declaration": "CCDN.not_printed_row_separator_bound",
       "line": 96,
       "kind": "theorem",
-      "sha256": "9501d05be452d702e6329c1cb8cc376f5db860adfd46d7fa135d448d1e4bb012"
+      "sha256": "80f0385933564d8f1839839ff8a58c7b86b111ba36a197d38cd17ee65ccd893d"
     },
     {
       "id": "e161",
-      "file": "AffineCurveCounting/BoundedRowSeparation.lean",
-      "declaration": "AffineCurveCounting.exists_bounded_row_separator",
+      "file": "CCDN/BoundedRowSeparation.lean",
+      "declaration": "CCDN.exists_bounded_row_separator",
       "line": 86,
       "kind": "theorem",
-      "sha256": "a12f2f0afc342eb460faa84f386abd4cd2047d881df4b8c50cd230bcf0042f9a"
+      "sha256": "10a07ec5215972e8402c61d6cc87a556e7301694c49bec17160e58406309f2f1"
     },
     {
       "id": "e162",
-      "file": "AffineCurveCounting/BirationalCenterPluckerHeight.lean",
-      "declaration": "AffineCurveCounting.exists_fixed_coordinate_center_plucker_height",
+      "file": "CCDN/BirationalCenterPluckerHeight.lean",
+      "declaration": "CCDN.exists_fixed_coordinate_center_plucker_height",
       "line": 60,
       "kind": "theorem",
-      "sha256": "9b6943b3b48f673206469ad14c54a716258d940cca8656ae4a64ea7e9f0fc2d7"
+      "sha256": "f274f3ee3d11c78f27100c52788d64703416624040dfec7abcc1b49150a5ac00"
     },
     {
       "id": "e163",
-      "file": "AffineCurveCounting/SharpAmbientCenterProjection.lean",
-      "declaration": "AffineCurveCounting.exists_sharp_ambient_fixed_coordinate_projection",
+      "file": "CCDN/SharpAmbientCenterProjection.lean",
+      "declaration": "CCDN.exists_sharp_ambient_fixed_coordinate_projection",
       "line": 88,
       "kind": "theorem",
-      "sha256": "acfa1345d20e2badc4a87d939ddac76e4d806782b8b0c1db3f9f8a07600ff3c6"
+      "sha256": "1a202d97dd622d1bc738d1f5ff64c67d3cd5c3c2c41dfbe7fef756251cf96bda"
     },
     {
       "id": "e164",
-      "file": "AffineCurveCounting/FixedCoordinatePluckerTopology.lean",
-      "declaration": "AffineCurveCounting.fixedCoordinateBirationalSubspaceLocus_plucker_dense_open",
+      "file": "CCDN/FixedCoordinatePluckerTopology.lean",
+      "declaration": "CCDN.fixedCoordinateBirationalSubspaceLocus_plucker_dense_open",
       "line": 75,
       "kind": "theorem",
-      "sha256": "163fb1c244a5046e502f943e6379ab53007c33ac0d98ce277991a5bebb2503d7"
+      "sha256": "a2a43a707e8fbf1ee8335734ccabaea71923595a72ab2ade58d21facc931f8d5"
     },
     {
       "id": "e165",
-      "file": "AffineCurveCounting/SharpPlaneCount.lean",
-      "declaration": "AffineCurveCounting.plane_finite_field_card_bound",
+      "file": "CCDN/SharpPlaneCount.lean",
+      "declaration": "CCDN.plane_finite_field_card_bound",
       "line": 17,
       "kind": "theorem",
-      "sha256": "e0f2bf2484a4710bfe351e27e035008198a3aadeb100fe6e7fc234e841b9dd13"
+      "sha256": "6da68738b0e45cf62d9c108ca493109b3b33088208966ba01efe3015d5818244"
     },
     {
       "id": "e166",
-      "file": "AffineCurveCounting/PlaneStepanovBound.lean",
-      "declaration": "AffineCurveCounting.plane_stepanov_bound",
+      "file": "CCDN/PlaneStepanovBound.lean",
+      "declaration": "CCDN.plane_stepanov_bound",
       "line": 54,
       "kind": "theorem",
-      "sha256": "34ec8b404f6f967e4024f8b421ff68eb4bd3e02b42c5f920851af5ef592019c9"
+      "sha256": "06ebaf69b7776674cd0574ed79ee08b27a1ba1cfa2c809846b46ade3f9bceb52"
     },
     {
       "id": "e167",
-      "file": "AffineCurveCounting/SharpHypersurfaceCount.lean",
-      "declaration": "AffineCurveCounting.affine_hypersurface_finite_field_bound",
+      "file": "CCDN/SharpHypersurfaceCount.lean",
+      "declaration": "CCDN.affine_hypersurface_finite_field_bound",
       "line": 78,
       "kind": "theorem",
-      "sha256": "80fbc102e90cfc521f88fcde6e6533549272fba9fa5d02165230d23d968dbb9d"
+      "sha256": "2b5bdfb35d5ef717c4b790091fda360dc572c04db44fa60a932df286507212da"
     },
     {
       "id": "e168",
-      "file": "AffineCurveCounting/FiniteFieldSectionCount.lean",
-      "declaration": "AffineCurveCounting.finite_field_common_zeros_card_le",
+      "file": "CCDN/FiniteFieldSectionCount.lean",
+      "declaration": "CCDN.finite_field_common_zeros_card_le",
       "line": 40,
       "kind": "theorem",
-      "sha256": "a4cf9ad47574ee3f2c2cdfc97e19f8402b61e0aa1a7323afc96f5148f83c369f"
+      "sha256": "fb9e42ad13e809dab4c5fb89c1e0a42f19f395df9e3707c826afb5014701ad7e"
     },
     {
       "id": "e169",
-      "file": "AffineCurveCounting/AmbientNoetherVanishing.lean",
-      "declaration": "AffineCurveCounting.ambientEuler_minor_eq_zero_of_product",
+      "file": "CCDN/AmbientNoetherVanishing.lean",
+      "declaration": "CCDN.ambientEuler_minor_eq_zero_of_product",
       "line": 25,
       "kind": "theorem",
-      "sha256": "5fb6ae0b4fc124377f35b429c6d5aa30faba8b8db69f94b973569a5287267cf8"
+      "sha256": "d7a28ea24decd7c4b77fcc36b7356e49f6d1403b9655f0e166614c2f9e607d69"
     },
     {
       "id": "e170",
-      "file": "AffineCurveCounting/AmbientNoetherNonvanishing.lean",
-      "declaration": "AffineCurveCounting.exists_ambientNoetherForm_nonzero",
+      "file": "CCDN/AmbientNoetherNonvanishing.lean",
+      "declaration": "CCDN.exists_ambientNoetherForm_nonzero",
       "line": 16,
       "kind": "theorem",
-      "sha256": "8755b6727f2f72d1c98a437c7edfd77bb0d1b06e605975030242911899878f43"
+      "sha256": "6d765c1644984d01b4b6a760d28c3fb53eb90cdb617b5ed2ccc9cf41d8ac6101"
     },
     {
       "id": "e171",
-      "file": "AffineCurveCounting/AmbientNoetherHeight.lean",
-      "declaration": "AffineCurveCounting.ambientNoetherForm_coefficientL1_le",
+      "file": "CCDN/AmbientNoetherHeight.lean",
+      "declaration": "CCDN.ambientNoetherForm_coefficientL1_le",
       "line": 63,
       "kind": "theorem",
-      "sha256": "759d7e2ecf13b7910ac9f660028f78faf6a17ab15f2905808b90ddaf8da6335a"
+      "sha256": "2ad8abaf31a8f53ab5d1a6ade2e24e82f3b9ef0d02466f383c0bf49a36e008d1"
     },
     {
       "id": "e172",
-      "file": "AffineCurveCounting/HypersurfaceBadPrimeHeight.lean",
-      "declaration": "AffineCurveCounting.exists_hypersurface_bad_prime_height_witness",
+      "file": "CCDN/HypersurfaceBadPrimeHeight.lean",
+      "declaration": "CCDN.exists_hypersurface_bad_prime_height_witness",
       "line": 15,
       "kind": "theorem",
-      "sha256": "6fade10537490e8a3177a9565c882486e55352961e5c89c9564f1c89f6dd1726"
+      "sha256": "5e9b7a1fe0b6c204afc80f9654f009700969634ab18013498991895b9d4e8429"
     },
     {
       "id": "e173",
-      "file": "AffineCurveCounting/HypersurfaceBadPrimeHeight.lean",
-      "declaration": "AffineCurveCounting.hypersurface_bad_prime_factor_max",
+      "file": "CCDN/HypersurfaceBadPrimeHeight.lean",
+      "declaration": "CCDN.hypersurface_bad_prime_factor_max",
       "line": 99,
       "kind": "theorem",
-      "sha256": "6fade10537490e8a3177a9565c882486e55352961e5c89c9564f1c89f6dd1726"
+      "sha256": "5e9b7a1fe0b6c204afc80f9654f009700969634ab18013498991895b9d4e8429"
     },
     {
       "id": "e174",
-      "file": "AffineCurveCounting/MertensFirst.lean",
-      "declaration": "AffineCurveCounting.Mertens.prime_sum_bounded_error",
+      "file": "CCDN/MertensFirst.lean",
+      "declaration": "CCDN.Mertens.prime_sum_bounded_error",
       "line": 265,
       "kind": "theorem",
-      "sha256": "9fefe07926dbc01573efa37829019d5ef9ba4852cbace08bf0f38b3187849dc6"
+      "sha256": "5b54af19c4d94c5e2b90cdabee1b1c45cacb24ff3aac732086ef8a696357d3a6"
     },
     {
       "id": "e175",
@@ -2665,171 +2680,171 @@
     },
     {
       "id": "e178",
-      "file": "AffineCurveCounting/ProjectivePlaneBezout.lean",
-      "declaration": "AffineCurveCounting.projective_plane_common_zeros_card_le",
+      "file": "CCDN/ProjectivePlaneBezout.lean",
+      "declaration": "CCDN.projective_plane_common_zeros_card_le",
       "line": 68,
       "kind": "theorem",
-      "sha256": "3d131ff435134dcc695595a75b8453925218758533bff9ba32d1455eee83d383"
+      "sha256": "b16d610110a7bbb732e31d340b1ca0633ccca1da09c38a80ba5d468471d8ed8f"
     },
     {
       "id": "e179",
-      "file": "AffineCurveCounting/ComplexGridInterpolation.lean",
-      "declaration": "AffineCurveCounting.complex_polynomial_coefficient_bound_of_integer_grid",
+      "file": "CCDN/ComplexGridInterpolation.lean",
+      "declaration": "CCDN.complex_polynomial_coefficient_bound_of_integer_grid",
       "line": 119,
       "kind": "theorem",
-      "sha256": "5508f6028a6c8da4cbc17ba830bf045c1b09e1d18a29819bd10f9a05b54ee05c"
+      "sha256": "c7b18687760a6d972d751337b367100293ec5e0a545aa28d729622dc228e33a5"
     },
     {
       "id": "e180",
-      "file": "AffineCurveCounting/LowDegreePointSeparation.lean",
-      "declaration": "AffineCurveCounting.exists_low_degree_ideal_separator",
+      "file": "CCDN/LowDegreePointSeparation.lean",
+      "declaration": "CCDN.exists_low_degree_ideal_separator",
       "line": 160,
       "kind": "theorem",
-      "sha256": "23f86bfff7488386fe07af9eff64ae3fde01ca9432c5225c0f4352890c5446b0"
+      "sha256": "c56829cb67135de70abf8f0311047fb8614742cdbdc5583f3bd264362f76032a"
     },
     {
       "id": "e181",
-      "file": "AffineCurveCounting/ConjugatePrimeGridBound.lean",
-      "declaration": "AffineCurveCounting.conjugate_prime_grid_card_le",
+      "file": "CCDN/ConjugatePrimeGridBound.lean",
+      "declaration": "CCDN.conjugate_prime_grid_card_le",
       "line": 26,
       "kind": "theorem",
-      "sha256": "59d058d935c1cb2390e647a70e9d59bef3fac00feb817a723c3482f3ce5b122b"
+      "sha256": "31805191bdf7e7393098d70106faeb6abf685beba433e6e3127e89671cc66bd9"
     },
     {
       "id": "e182",
-      "file": "AffineCurveCounting/ClassGroupBalancedGenerator.lean",
-      "declaration": "AffineCurveCounting.exists_injective_balanced_two_torsion_generators",
+      "file": "CCDN/ClassGroupBalancedGenerator.lean",
+      "declaration": "CCDN.exists_injective_balanced_two_torsion_generators",
       "line": 193,
       "kind": "theorem",
-      "sha256": "53f27fc9d89acbbccb23c8f65b9617979d0d5993077630c437ff73cc72ffeb6e"
+      "sha256": "d8cf3a4a752544203e0860767da197eb87a3ba4d38bedb7796769bbb59e4ed0e"
     },
     {
       "id": "e183",
-      "file": "AffineCurveCounting/ClassGroupBoundedGenerators.lean",
-      "declaration": "AffineCurveCounting.classGroupTwoTorsionCard_le_boundedSquareNormIntegers",
+      "file": "CCDN/ClassGroupBoundedGenerators.lean",
+      "declaration": "CCDN.classGroupTwoTorsionCard_le_boundedSquareNormIntegers",
       "line": 33,
       "kind": "theorem",
-      "sha256": "1ad71f5a893cfac6681603113a9a16f12827959e7351b007440ee0a969328406"
+      "sha256": "5168b1aea322675779d3e3c26e1e49bfa0e1c0e74def42dd2cbbf5534def4693"
     },
     {
       "id": "e184",
-      "file": "AffineCurveCounting/NumberFieldShortBasis.lean",
-      "declaration": "AffineCurveCounting.exists_numberField_short_basis",
+      "file": "CCDN/NumberFieldShortBasis.lean",
+      "declaration": "CCDN.exists_numberField_short_basis",
       "line": 111,
       "kind": "theorem",
-      "sha256": "4bc9174749ba0fa777bea99de01b4f5f9524a21576c09ab80b0110162e1b7034"
+      "sha256": "b11a1fb597b5987d270f80283da42db7b8527a44fec844dfa151a59eb509c8f4"
     },
     {
       "id": "e185",
-      "file": "AffineCurveCounting/UniformNumberFieldLatticeCount.lean",
-      "declaration": "AffineCurveCounting.boundedSquareNormTranslationClasses_uniform_count",
+      "file": "CCDN/UniformNumberFieldLatticeCount.lean",
+      "declaration": "CCDN.boundedSquareNormTranslationClasses_uniform_count",
       "line": 29,
       "kind": "theorem",
-      "sha256": "55ced3d0023389f00c975ee142caf6cbe333ca02680b56f6ea4ca6ae061ccc46"
+      "sha256": "ba7944389ac30278e94279fc24b427f1762dda7fb466116d676ba4dbe151907a"
     },
     {
       "id": "e186",
-      "file": "AffineCurveCounting/NormCurveExceptionalReduction.lean",
-      "declaration": "AffineCurveCounting.exists_actual_norm_curve_exception_split",
+      "file": "CCDN/NormCurveExceptionalReduction.lean",
+      "declaration": "CCDN.exists_actual_norm_curve_exception_split",
       "line": 82,
       "kind": "theorem",
-      "sha256": "10ea8cc4db984a8480d2ae067613a1ff9384dff154042c4eeb5baff262427ac1"
+      "sha256": "534b3c2e806afdd8048fb30160469ceadcd3fdfe13e93c7125c0259890b30138"
     },
     {
       "id": "e187",
-      "file": "AffineCurveCounting/OddIndexNormCurveCount.lean",
-      "declaration": "AffineCurveCounting.signed_norm_curve_count_of_odd_subfield_index",
+      "file": "CCDN/OddIndexNormCurveCount.lean",
+      "declaration": "CCDN.signed_norm_curve_count_of_odd_subfield_index",
       "line": 21,
       "kind": "theorem",
-      "sha256": "3022c47bd54d6965dba8ebcbac95a50817f309e9de2c5e87a3001b449b2c4710"
+      "sha256": "d7f6dd197678b684a80689f1a2293652acac6b009b1a4566f51f5b408e015a71"
     },
     {
       "id": "e188",
-      "file": "AffineCurveCounting/OddDegreeNormCurveCount.lean",
-      "declaration": "AffineCurveCounting.signed_norm_curve_log_free_count",
+      "file": "CCDN/OddDegreeNormCurveCount.lean",
+      "declaration": "CCDN.signed_norm_curve_log_free_count",
       "line": 64,
       "kind": "theorem",
-      "sha256": "d34ee3f8938870427aa12df852e10a15d39ba3056a0a0272ed4a52352afe7cb0"
+      "sha256": "0fc90690e0e925dde02d5aef489d73619eee5a233f233a16797534b117c0b2cd"
     },
     {
       "id": "e189",
-      "file": "AffineCurveCounting/NoIndexTwoClassGroupCounting.lean",
-      "declaration": "AffineCurveCounting.boundedSquareNormIntegers_no_index_two_count",
+      "file": "CCDN/NoIndexTwoClassGroupCounting.lean",
+      "declaration": "CCDN.boundedSquareNormIntegers_no_index_two_count",
       "line": 50,
       "kind": "theorem",
-      "sha256": "9c2d06f729d9f98af08c22f835a4c95a9b997f955d242a262779c7928328684a"
+      "sha256": "41517ab1665be33e5ca1edc0a05f9bc3f14caae73f913f8410ef3bd978ab9082"
     },
     {
       "id": "e190",
-      "file": "AffineCurveCounting/OddDegreeClassGroupBound.lean",
-      "declaration": "AffineCurveCounting.odd_degree_classGroup_two_torsion_bound",
+      "file": "CCDN/OddDegreeClassGroupBound.lean",
+      "declaration": "CCDN.odd_degree_classGroup_two_torsion_bound",
       "line": 34,
       "kind": "theorem",
-      "sha256": "3506e85284ad18b1c37e09478ea56da4d7dfc06d4b458a255fbc97c63b17f3c0"
+      "sha256": "b4809cc652e2bbf395e30fdacd51ae2c035c3f72c911f65ccda90299e5a64d43"
     },
     {
       "id": "e191",
-      "file": "AffineCurveCounting/ClassGroupBalancedGenerator.lean",
-      "declaration": "AffineCurveCounting.exists_balanced_square_generator_of_radius",
+      "file": "CCDN/ClassGroupBalancedGenerator.lean",
+      "declaration": "CCDN.exists_balanced_square_generator_of_radius",
       "line": 77,
       "kind": "theorem",
-      "sha256": "53f27fc9d89acbbccb23c8f65b9617979d0d5993077630c437ff73cc72ffeb6e"
+      "sha256": "d8cf3a4a752544203e0860767da197eb87a3ba4d38bedb7796769bbb59e4ed0e"
     },
     {
       "id": "e192",
-      "file": "AffineCurveCounting/LatticePrescribedProduct.lean",
-      "declaration": "AffineCurveCounting.prescribed_greedy_lattice_basis_product_le",
+      "file": "CCDN/LatticePrescribedProduct.lean",
+      "declaration": "CCDN.prescribed_greedy_lattice_basis_product_le",
       "line": 18,
       "kind": "theorem",
-      "sha256": "df44a6d331c8078b9abb9a5d3b555eeff7c4d1b198d0dcac34f205d54ccaf6b5"
+      "sha256": "6e74516ae1898d87170602280f40ea77706138548a377ac2731a4af0c6f14f32"
     },
     {
       "id": "e193",
-      "file": "AffineCurveCounting/QuadraticClassGroupDescent.lean",
-      "declaration": "AffineCurveCounting.quadratic_classGroupTwoTorsion_descent",
+      "file": "CCDN/QuadraticClassGroupDescent.lean",
+      "declaration": "CCDN.quadratic_classGroupTwoTorsion_descent",
       "line": 34,
       "kind": "theorem",
-      "sha256": "95b5a23494aba54004ecfdcae9ca14a2249ebb3a660778b7389c0bd59a27112e"
+      "sha256": "ca9c25ddb3ece822a0dc058d88ec71e2e0145ef29e8325055ee1ee766fc4ec8c"
     },
     {
       "id": "e194",
-      "file": "AffineCurveCounting/StronglyAmbiguousClassCount.lean",
-      "declaration": "AffineCurveCounting.stronglyAmbiguousTwoTorsion_card_le_discriminant_primes",
+      "file": "CCDN/StronglyAmbiguousClassCount.lean",
+      "declaration": "CCDN.stronglyAmbiguousTwoTorsion_card_le_discriminant_primes",
       "line": 70,
       "kind": "theorem",
-      "sha256": "760bc8be1646cf7c6f3f7420b7bd875711e66403edece90ae4829302c9dbe735"
+      "sha256": "e9ff988eb1760ce9ec7e52edd8d0d3dbe80eace4c878377128082087730d5dde"
     },
     {
       "id": "e195",
-      "file": "AffineCurveCounting/DiscriminantPrimeIdealCover.lean",
-      "declaration": "AffineCurveCounting.absolute_discriminant_power_le",
+      "file": "CCDN/DiscriminantPrimeIdealCover.lean",
+      "declaration": "CCDN.absolute_discriminant_power_le",
       "line": 69,
       "kind": "theorem",
-      "sha256": "6a2aaa09e78339a50e510901dd9e5d257dd2a0cadcf50bba33bd609072ae0b91"
+      "sha256": "58f9d5e9b8a6627b0930f16d262f55c352f229d9b95509ed2c6e6dfd3b27ea5e"
     },
     {
       "id": "e196",
-      "file": "AffineCurveCounting/QuadraticClassGroupNumerics.lean",
-      "declaration": "AffineCurveCounting.quadratic_class_group_numeric_descent",
+      "file": "CCDN/QuadraticClassGroupNumerics.lean",
+      "declaration": "CCDN.quadratic_class_group_numeric_descent",
       "line": 43,
       "kind": "theorem",
-      "sha256": "5f3786402b3e47681a81efb5b26a9f8e54ed3debe997ad1be5e42b2da4d461ba"
+      "sha256": "413b9293c2af4b0e319a8c5e292f63e61a34bf6ec43975831f4a6c0ba381a0c6"
     },
     {
       "id": "e197",
-      "file": "AffineCurveCounting/QuadraticClassGroupDescent.lean",
-      "declaration": "AffineCurveCounting.quadratic_field_classGroupTwoTorsionCard_le",
+      "file": "CCDN/QuadraticClassGroupDescent.lean",
+      "declaration": "CCDN.quadratic_field_classGroupTwoTorsionCard_le",
       "line": 56,
       "kind": "theorem",
-      "sha256": "95b5a23494aba54004ecfdcae9ca14a2249ebb3a660778b7389c0bd59a27112e"
+      "sha256": "ca9c25ddb3ece822a0dc058d88ec71e2e0145ef29e8325055ee1ee766fc4ec8c"
     },
     {
       "id": "e198",
-      "file": "AffineCurveCounting/ClassGroupDegreeOne.lean",
-      "declaration": "AffineCurveCounting.classGroupTwoTorsionCard_eq_one_of_degree_one",
+      "file": "CCDN/ClassGroupDegreeOne.lean",
+      "declaration": "CCDN.classGroupTwoTorsionCard_eq_one_of_degree_one",
       "line": 16,
       "kind": "theorem",
-      "sha256": "ec4690b5e17e805a82ea479b92c985d0abcf2ea95ffce32ecbd5bd3da17a2101"
+      "sha256": "03ee31ee16018ee9ece4307a751e83fffbfd1589bbc62b098b203a4226936546"
     }
   ]
 }

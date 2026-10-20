@@ -3,11 +3,14 @@
 A Lean 4 formalisation of Castryck–Cluckers–Dittmann–Nguyen's dimension-growth
 paper, including coefficient-uniform point bounds.
 
+The Lean namespace and module hierarchy are `CCDN`: use `import CCDN` for the
+whole library, or a specific module such as `CCDN.AffineCurveBound`.
+
 ## Statement surface (Palomar)
 
 [`Challenge.lean`](Challenge.lean) is the file to audit. It imports only Mathlib. It
 defines the counting functions, zero sets and Hilbert-function notions of degree, then
-states Theorems 1–4 and 6 and Proposition 5 in the `CCDN` namespace, with `sorry`.
+states Theorems 1–4 and 6 and Proposition 5 in the `CCDN.Submission` namespace, with `sorry`.
 [`Solution.lean`](Solution.lean) repeats those definitions verbatim and proves each
 statement from the library. [`comparator.json`](comparator.json) lists the compared
 theorems. [`formalization.yaml`](formalization.yaml) records sources, scope, known
@@ -25,8 +28,8 @@ reusable verifier on a pushed commit. The repository is licensed under Apache-2.
 papers and the vendored and adapted dependencies keep their own licences (see `NOTICE`).
 
 **Status: Theorems 1–4 and 6, and Proposition 5, are proved in Lean.**
-`AffineCurveCounting.affineCurveBound` proves CCDN Theorem 3, and
-`AffineCurveCounting.projectiveCurveBound` proves Theorem 2. Both cover all
+`CCDN.affineCurveBound` proves CCDN Theorem 3, and
+`CCDN.projectiveCurveBound` proves Theorem 2. Both cover all
 ambient dimensions `n ≥ 2` and all positive degrees, with no external
 counting hypothesis. The proofs include the plane bounds, bounded projections
 preserving degree, exceptional fibers and the uniform height/count assembly.

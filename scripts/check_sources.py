@@ -17,14 +17,14 @@ for relative, digest in expected.items():
         raise SystemExit(f"Vendored source hash mismatch: {relative}")
 
 mertens = json.loads((ROOT / "vendor" / "mertens" / "upstream.json").read_text())
-if hashlib.sha256((ROOT / "AffineCurveCounting" / "MertensFirst.lean").read_bytes()).hexdigest() != mertens["adapted_sha256"]:
+if hashlib.sha256((ROOT / "CCDN" / "MertensFirst.lean").read_bytes()).hexdigest() != mertens["adapted_sha256"]:
     raise SystemExit("Adapted Mertens source differs from the provenance manifest")
 
 modules = {
     ".".join(p.relative_to(ROOT).with_suffix("").parts): p
-    for p in (ROOT / "AffineCurveCounting").rglob("*.lean")
+    for p in (ROOT / "CCDN").rglob("*.lean")
 }
-modules["AffineCurveCounting"] = ROOT / "AffineCurveCounting.lean"
+modules["CCDN"] = ROOT / "CCDN.lean"
 modules.update({
     ".".join(p.relative_to(VENDOR).with_suffix("").parts): p
     for p in (VENDOR / "ArithmeticHeights").rglob("*.lean")
@@ -38,10 +38,10 @@ def visit(name):
     for dep in re.findall(r"^(?:public )?import (?:all )?(\S+)", modules[name].read_text(), re.M):
         if dep in modules:
             visit(dep)
-        elif dep.startswith(("AffineCurveCounting", "ArithmeticHeights")):
+        elif dep.startswith(("CCDN", "ArithmeticHeights")):
             raise SystemExit(f"Missing project dependency: {dep}")
 
-visit("AffineCurveCounting")
+visit("CCDN")
 missing = set(modules) - seen
 if missing:
     raise SystemExit(f"Mathematical sources omitted from build/audit: {sorted(missing)}")
