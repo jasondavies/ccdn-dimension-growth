@@ -1,0 +1,227 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+version: "v0.4"
+
+project:
+  name: "Dimension growth, polynomial in the degree (Castryck–Cluckers–Dittmann–Nguyen)"
+  description: >-
+    A Lean 4 formalization of the main results of Castryck, Cluckers, Dittmann and
+    Nguyen, "The dimension growth conjecture, polynomial in the degree and without
+    logarithmic factors" (Algebra & Number Theory 14, 2020), incorporating the
+    authors' 2026 addenda. It proves uniform bounds, polynomial in the degree, for
+    the number of rational points of bounded height on varieties over Q. The bounds
+    are: projective dimension growth N(X,B) ≤ C(n) d^(2n³) B^dim X for integral
+    X ⊆ P^n of degree d ≥ 5 (Theorem 1); N(X,B) ≤ C(n) d⁴ B^(2/d) for integral
+    projective curves (Theorem 2); N_aff(X,B) ≤ C(n) d³ B^(1/d)(log B + d) for
+    integral affine curves (Theorem 3); and C(N) d^(3N+9) B^(N−2) for affine
+    hypersurfaces whose top-degree form is absolutely irreducible (Theorem 4). It
+    also proves the matching lower-bound construction d² B^(2/d)/5 (Proposition 5),
+    and the 2-torsion bound
+    h₂(K) ≤ C(n) |disc K|^(1/2−1/(2n)) (log |disc K|)^(1−n mod 2) for all number
+    fields of degree n ≥ 3 (Theorem 6). Degree and dimension are defined through
+    Hilbert functions of the coordinate ring. Every constant depends only on the
+    ambient dimension or field degree. The proofs construct the paper's
+    determinant-method, projection and counting arguments in full. They include
+    corrected versions of several intermediate lemmas whose printed forms are false.
+  authors:
+    - "Jason Davies"
+  license: "Apache-2.0"
+  responsible_maintainers:
+    - "Jason Davies"
+
+classification:
+  arxiv: ["math.NT", "math.AG"]
+  # 11D45 counting solutions of Diophantine equations; 11G35 varieties over global
+  # fields; 14G05 rational points; 11G50 heights; 11R29 class numbers and class groups.
+  msc2020: ["11D45", "11G35", "14G05", "11G50", "11R29"]
+
+sources:
+  - title: "The dimension growth conjecture, polynomial in the degree and without logarithmic factors"
+    authors:
+      - "Wouter Castryck"
+      - "Raf Cluckers"
+      - "Philip Dittmann"
+      - "Kien Huu Nguyen"
+    id: "doi:10.2140/ant.2020.14.2261 (arXiv:1904.13109)"
+    type: "paper"
+    location: "Algebra & Number Theory 14 (2020), no. 8, 2261–2294; https://doi.org/10.2140/ant.2020.14.2261"
+    relationship: "formalizes"
+    note: >-
+      Theorems 1–4 and 6 and Proposition 5 are formalized. Theorems 1 and 4 have
+      explicit degree exponents (2n³ and 3N+9); the addenda leave e(N) in Theorem 4
+      to be recomputed. Intermediate statements that are false as
+      printed are proved in corrected form; see fidelity.divergences. Text used:
+      https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf.
+    author_endorsement: "not-contacted"
+  - title: "List of addenda to papers of R. Cluckers and coauthors (entry for the CCDN dimension-growth paper), dated 2026-04-20"
+    type: "other"
+    location: "https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf"
+    relationship: "other"
+    note: >-
+      Authors' published corrections to the source paper. The formalization follows
+      them: n+2 variables in 2.6; absolute irreducibility of the top form in 4.3.3 and
+      Theorem 4; d^18 in 4.3.4; the factor d in 4.3.7; and the recomputed exponent in
+      4.3.8.
+    author_endorsement: "not-contacted"
+  - title: "On Siegel's lemma"
+    authors:
+      - "Enrico Bombieri"
+      - "Jeffrey D. Vaaler"
+    id: "doi:10.1007/BF01393823"
+    type: "paper"
+    location: "Inventiones Mathematicae 73 (1983), 11–32"
+    relationship: "background"
+    note: "Theorem 1 (Siegel's lemma) is used in the auxiliary-polynomial construction, through the vendored formalization listed under related_formalizations."
+    author_endorsement: "n/a"
+
+related_formalizations:
+  - id: "https://github.com/rwst/Subspace-Theorems/tree/09835cb23557ae5ae0cf55a9c4ab9055f5d60338"
+    relationship: "builds-on"
+    note: >-
+      Ralf Stephan's Bombieri–Vaaler (Siegel's lemma) development, Apache-2.0. It is
+      vendored under vendor/bombieri-vaaler with SHA-256 provenance in upstream.json,
+      and two compatibility patches for Lean/Mathlib 4.35 are recorded in
+      lean-4.35.patch.
+  - id: "https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/tree/c39a751132c88b6e8080b74c74023fd95b3d8be0"
+    relationship: "adapts"
+    note: >-
+      Mertens' first theorem is adapted from PrimeNumberTheoremAnd/IEANTN/Mertens.lean
+      (Apache-2.0) into AffineCurveCounting/MertensFirst.lean, with an explicit bounded
+      constant. Provenance is in vendor/mertens/upstream.json.
+
+status:
+  scope: >-
+    Compared in comparator.json: Theorems 1, 2, 3, 4 (integer and rational
+    equations), Proposition 5 and Theorem 6 of the source paper, stated in the
+    CCDN namespace of Challenge.lean using only Mathlib. Two auxiliary theorems show
+    that the counted sets are finite, so the Set.ncard counts are genuine
+    cardinalities. Varieties are modelled by ideals of polynomial rings over Q. An
+    integral variety is a prime ideal, not necessarily geometrically prime. Degree
+    and dimension are read off the affine or homogeneous Hilbert function. No
+    equivalence with Mathlib Scheme or Proj objects is claimed. Projective height is
+    Mathlib's multiplicative height, which equals max |x_i| on primitive integer
+    coordinates. Theorem 1 holds for every n, including empty and zero-dimensional
+    loci, with the explicit exponent 2n³. Theorem 2 holds without assuming the ideal
+    is homogeneous; a point counts when all its representatives annihilate the
+    ideal. Theorem 4 is stated in N = n+3 variables with exponent 18+3n = 3N+9.
+    The rest of the library also formalizes the paper's Sections 2–6: 62 audited
+    requirements, mapped to Lean declarations in docs/completion-audit.json.
+    These are not part of this Comparator entry.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: []
+
+automation:
+  methods:
+    - method: "agent"
+      models: ["gpt-6-astra"]
+      framework: "not recorded"
+      tool_setup: >-
+        An AI coding agent with shell access, the pinned Lean toolchain and Lake. It
+        wrote essentially all Lean source in AffineCurveCounting/, the audit files
+        in docs/, and the README, under the direction of Jason Davies.
+      cost:
+        wall_time: "about 32 hours between the first and last commits in this repository (19–20 October 2026)"
+        spend_usd: "not tracked"
+        hardware: "local Linux workstation (16 cores, 249 GiB RAM)"
+      prompting_notes: "not recorded"
+    - method: "agent"
+      models: ["claude-opus-5-5"]
+      framework: "Claude Code"
+      tool_setup: >-
+        Prepared the Palomar packaging: Challenge.lean, Solution.lean,
+        comparator.json, this file, and the Lake layout change that builds the
+        vendored ArithmeticHeights library inside the root package.
+      prompting_notes: "Asked to prepare the repository for Palomar submission."
+  spend_usd: "not tracked"
+  notes: >-
+    The mathematical proof development was produced by an AI agent and directed by
+    the human author. The agent also produced the statement-scope audit
+    (docs/completion-audit.json) and the transitive axiom audit (Axioms.lean,
+    scripts/check.sh).
+
+fidelity:
+  divergences: >-
+    Main results. Theorem 1 uses the explicit exponent 2n³ in place of the paper's
+    numerical exponent, which the addenda amend. Theorem 4 assumes absolute
+    irreducibility of the top-degree form, following the addenda's strengthening of
+    the irreducibility hypothesis in 4.3.3. It proves the explicit exponent 3N+9,
+    which the addenda leave to be recomputed. Theorems 2, 3 and 6 and Proposition 5 match
+    the printed statements. Degree is the Hilbert-function slope or the normalized
+    leading coefficient; integrality is primality of the ideal over Q.
+    Intermediate statements (not compared here): Lemma 2.2 for n=1 with an arbitrary
+    profile is formally refuted, and the hypersurface case is proved instead.
+    Lemmas 2.5, 2.6, 2.9 and Proposition 3.2.6 need a common homogeneous degree
+    within each evaluation matrix; the literal varying-degree 3.2.6 is formally
+    refuted. In 4.2.1 the printed equality of affine and homogeneous bad-prime
+    factors fails (counterexample 439x²+y), and the literal conclusion is proved
+    by another route. In Lemma 5.2 the strict bound for m=0, d=1 is refuted and
+    replaced by ≤ 1; the positive-dimensional bound uses a derivative-resultant
+    detector rather than the printed Noether-composition calculation. In 5.4,
+    sqrt((s−1)!·r)·B^(s−1) is replaced by (s−1)!·B^(s−1). The external Lang–Weil,
+    Cafure–Matera, Salberger, Heintz and class-group inputs are proved internally
+    in the scope needed rather than assumed. Details: docs/completion-audit.json,
+    docs/full-paper-plan.txt and docs/projection-center-audit.txt.
+
+review:
+  status: "agent-reviewed"
+  reviewers: []
+  notes: >-
+    The producing agent checked statement scope against the paper and addenda for
+    all 62 requirements (docs/completion-audit.json). Lean checked every exported
+    declaration of the project and the vendored library for permitted axioms only
+    (Axioms.lean). The Challenge statements were written during Palomar packaging
+    and checked against the library with lake comparator. No independent human
+    mathematical review has been performed.
+
+alignment:
+  namespace: "CCDN"
+  statements:
+    - source: "Theorem 1"
+      lean: "CCDN.projective_dimension_growth"
+      module: "Challenge"
+      status: "proved"
+      note: "From AffineCurveCounting.projective_dimension_growth_cubic. The Hilbert polynomial P is quantified explicitly; dim X = P.natDegree − 1."
+    - source: "Theorem 2"
+      lean: "CCDN.projective_curve_bound"
+      module: "Challenge"
+      status: "proved"
+      note: "From AffineCurveCounting.projectiveCurveBound."
+    - source: "Theorem 3"
+      lean: "CCDN.affine_curve_bound"
+      module: "Challenge"
+      status: "proved"
+      note: "From AffineCurveCounting.affineCurveBound."
+    - source: "Theorem 4"
+      lean: "CCDN.affine_hypersurface_bound"
+      module: "Challenge"
+      status: "proved (with the addenda's corrected hypothesis)"
+      note: "Integer equations. From AffineCurveCounting.top_form_hypersurface_dimension_growth_cubic."
+    - source: "Theorem 4"
+      lean: "CCDN.affine_hypersurface_bound_rat"
+      module: "Challenge"
+      status: "proved (with the addenda's corrected hypothesis)"
+      note: "Rational equations. From AffineCurveCounting.rational_top_form_hypersurface_dimension_growth_cubic."
+    - source: "Proposition 5"
+      lean: "CCDN.projective_plane_curve_lower_bound"
+      module: "Challenge"
+      status: "proved"
+      note: "From AffineCurveCounting.projective_integral_curve_lower_bound. Holds for every d ≥ 1."
+    - source: "Theorem 6"
+      lean: "CCDN.classGroup_two_torsion_bound"
+      module: "Challenge"
+      status: "proved"
+      note: "From AffineCurveCounting.classGroup_two_torsion_bound."
+    - source: "(auxiliary)"
+      lean: "CCDN.affineCount_set_finite"
+      module: "Challenge"
+      status: "proved"
+      note: "The set counted by affineCount is finite."
+    - source: "(auxiliary)"
+      lean: "CCDN.projectiveCount_set_finite"
+      module: "Challenge"
+      status: "proved"
+      note: "The set counted by projectiveCount is finite (Northcott)."
+
+acknowledgements: >-
+  Mathlib; Ralf Stephan's Subspace-Theorems (Bombieri–Vaaler); the
+  PrimeNumberTheoremAnd project (Mertens' first theorem); the Lean FRO's comparator.

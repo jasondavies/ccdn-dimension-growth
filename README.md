@@ -3,6 +3,27 @@
 A Lean 4 formalisation of Castryck–Cluckers–Dittmann–Nguyen's dimension-growth
 paper, including coefficient-uniform point bounds.
 
+## Statement surface (Palomar)
+
+[`Challenge.lean`](Challenge.lean) is the file to audit. It imports only Mathlib. It
+defines the counting functions, zero sets and Hilbert-function notions of degree, then
+states Theorems 1–4 and 6 and Proposition 5 in the `CCDN` namespace, with `sorry`.
+[`Solution.lean`](Solution.lean) repeats those definitions verbatim and proves each
+statement from the library. [`comparator.json`](comparator.json) lists the compared
+theorems. [`formalization.yaml`](formalization.yaml) records sources, scope, known
+divergences from the printed paper, and how the work was produced.
+
+```text
+python3 scripts/check-lean-sources.py   # module headers and 10,000-line cap
+bash scripts/check.sh                   # build and transitive axiom audit
+./scripts/verify-comparator.sh          # lake comparator, as Palomar runs it
+```
+
+`verify-comparator.sh` needs Linux, `bwrap`, and real directories under
+`.lake/packages`, not symbolic links. The `Palomar preflight` workflow runs Palomar's
+reusable verifier on a pushed commit. The repository is licensed under Apache-2.0; cited
+papers and the vendored and adapted dependencies keep their own licences (see `NOTICE`).
+
 **Status: Theorems 1–4 and 6, and Proposition 5, are proved in Lean.**
 `AffineCurveCounting.affineCurveBound` proves CCDN Theorem 3, and
 `AffineCurveCounting.projectiveCurveBound` proves Theorem 2. Both cover all
@@ -887,6 +908,3 @@ See [the proof roadmap](docs/roadmap.txt).
   [author PDF](https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf).
 - The same counting input appears as Corollary 2.2 in
   [Cluckers–Dèbes–Hendel–Nguyen–Vermeulen (2025)](https://www.cambridge.org/core/journals/forum-of-mathematics-sigma/article/improvements-on-dimension-growth-results-and-effective-hilberts-irreducibility-theorem/A7BCAEBF00B8B165D6DDB3FFB9B40B97).
-
-The new source and documentation were developed with AI assistance. This repository makes
-no claim of independent human review or of a new mathematical counting theorem.

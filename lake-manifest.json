@@ -3,16 +3,6 @@
   "packagesDir": ".lake/packages",
   "packages": [
     {
-      "type": "path",
-      "scope": "",
-      "name": "bombieri_vaaler",
-      "manifestFile": "lake-manifest.json",
-      "inherited": false,
-      "dir": "vendor/bombieri-vaaler",
-      "copy": false,
-      "configFile": "lakefile.toml"
-    },
-    {
       "url": "https://github.com/leanprover-community/mathlib4.git",
       "type": "git",
       "subDir": null,
