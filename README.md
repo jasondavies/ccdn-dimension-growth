@@ -552,11 +552,37 @@ Apache license are recorded under `vendor/mertens/`.
 
 The six main results are proved. Remaining intermediate obligations include
 the general affine projection statement and the exact projection-center
-geometry and heights of Section 5. The general projective projection, both
+geometry of Section 5. The general projective projection, both
 curve projection clauses, literal affine-factor theorems, Salberger covering
 in the coordinate-ideal formulation, and all positive degrees of
 hyperplane-ideal avoidance are proved. The ledger distinguishes proved
 interfaces and replacements from the exact statements they do not yet imply.
+
+`exists_bounded_affine_birational_projection` constructs a bounded integer
+finite birational affine projection in every positive source dimension,
+with an irreducible image equation of degree at most the source degree.
+Its map on the actual projective closures is finite and fixes `X₀`.
+`projectiveClosureIdeal_hilbertPolynomial_parameters` proves that closure
+raises dimension by one and preserves multiplicity. The general affine
+exact-degree/count assembly still needs the closure birationality bridge.
+
+`exists_center_projection_source_height` constructs a complementary
+projection from bounded independent integer center rows and proves the
+Section 5 height exponent `2(n−m−1)²`. Its formula and common denominator
+are proved, including preservation of a coordinate that vanishes on the
+center. Constructing a geometrically good center with these row bounds
+remains open. The new Chow-incidence ideal is prime, multihomogeneous and
+nonzero when the number of hyperplanes exceeds the affine dimension;
+an actual irreducible incidence equation is constructed. Its principality,
+exact Chow multidegree and Grassmannian bad-center detector remain open.
+
+`zero_dimensional_plucker_degree_bound_obstruction` verifies a boundary
+failure in Lemma 5.2: at dimension zero and degree one, its strict bound
+allows only constant equations, which cannot define a nonempty proper
+bad-center locus. The formal statement uses an actual degree-one point
+and every nonempty center locus satisfying the necessary disjointness
+condition. It does not construct the full birational good-center locus.
+See the [projection-center audit](docs/projection-center-audit.txt).
 
 `not_printed_row_separator_bound` formally disproves Lemma 5.4's printed
 numerical constant. A five-equation system requires a coordinate of at least

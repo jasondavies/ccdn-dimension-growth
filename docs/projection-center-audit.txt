@@ -1,0 +1,107 @@
+Projection centers: proved constructions and remaining statements
+================================================================
+
+Source: CCDN, The dimension growth conjecture, polynomial in the degree
+and without logarithmic factors, Section 5, pp. 2287--2290.
+DOI: https://doi.org/10.2140/ant.2020.14.2261
+
+1. Actual complementary projection and height
+---------------------------------------------
+
+BoundedCenterProjection, CenterProjectionHeight and CenterProjectionFormula
+start from actual independent integer center rows A_i, with r rows and
+|A_ij|<=T. They construct a nonzero integer D and an integer matrix P with
+P^2=D*P and entries bounded by 2*r!*T^r. The rational map Q=D^(-1)*P is an
+idempotent with kernel exactly span(A_i), complementary image, and formula
+Qx=x-sum_i L_i(x)*A_i, where L_i(A_j)=delta_ij. Its intrinsic projective
+height satisfies H(Qx)<=2*(n+1)*r!*T^r*H(x) outside the center.
+
+For T=(m+1)^2*d^2 and r=n-m-1>=1, the constructed complementary space has
+vector dimension m+2 and the proved bound implies exactly
+H(Qx)<=C(n)*d^(2*r^2)*H(x), as in (5-5). The constant is chosen before
+the degree and center. Actual integral representatives come from P applied
+to the primitive input. If every center row has coordinate j equal to zero,
+Q preserves that coordinate and (Pz)_j=D*z_j. This gives the fixed nonzero
+denominator needed for the affine application.
+
+The construction uses a common nonzero minor and its cofactors. It does
+not use Lemma 5.4's incorrect square-root constant. It does not supply a
+center disjoint from a given variety or prove generic birationality. The
+geometrically good center and its required row bounds remain obligations.
+
+ZeroColumnMinorSpecialization strengthens the proved polynomial
+specialization step of Lemma 5.3 to preserve any specified zero columns.
+From a homogeneous maximal-minor polynomial and an actual independent
+rational witness obeying those constraints, it constructs integer rows
+with entries at most max(1,deg F), full rank and preserved nonvanishing.
+Every maximal minor has magnitude at most r!*max(1,deg F)^r. The
+degree-zero case is included. This supplies the specialization needed for
+centers at infinity once the corresponding geometric witness is proved.
+
+2. Literal Lemma 5.2 at dimension zero and degree one
+----------------------------------------------------
+
+The printed hypotheses allow m=0,d=1,n=2. OriginProjectivePoint constructs
+the actual projective ideal of [1:0:0]: it is homogeneous, geometrically
+prime, has cone Hilbert dimension one and multiplicity one, and its locus
+is exactly that point. A center in G(0,2) is itself a point of P^2. Its
+actual one-row maximal minors are its projective coordinates.
+
+Every nonempty locus G of centers disjoint from this X omits [1:0:0], so
+its complement is nonempty and proper. The asserted strict degree bound
+is (m+1)^2*d^2=1. Every equation of degree below one is constant; even an
+arbitrary infinite family of such equations has either empty or full zero
+locus. Thus such a family cannot cut out the complement of G.
+
+ZeroDimensionalCenterObstruction proves this directly, including an endpoint
+in actual maximal-minor coordinates. It quantifies every nonempty G obeying
+the necessary disjointness condition; it does not define or construct the
+birational good-center locus itself. This already obstructs the printed
+conjunction of nonemptiness, disjointness and the strict defining-degree
+bound. No positive-dimensional counterexample is asserted.
+
+3. Chow incidence and the positive-dimensional degree gap
+---------------------------------------------------------
+
+ChowIncidenceIdeal constructs the actual elimination kernel for hyperplane
+tuples meeting an integral affine variety (a prime coordinate ideal) on
+x0=1 and proves it prime. Over an
+algebraically closed field, ChowIncidenceLocus identifies it exactly with
+the vanishing ideal of the actual incidence set. ChowIncidenceGrading
+proves separate homogeneity in the hyperplane coefficient blocks.
+ChowIncidenceNonzero proves the kernel nonzero when the number of
+hyperplanes exceeds the actual filtered Hilbert dimension. Consequently,
+ChowIncidenceEquation constructs an actual irreducible equation vanishing
+on the incidence set. None of these conclusions assumes a supplied Chow
+form. Principality, exact multidegree (d,...,d), field-base-change equality,
+identification with the full projective incidence locus, and the Grassmannian
+detector remain to be proved.
+
+ChowPolynomialPower proves a separate algebraic step in (5-3): nonzero
+polynomials with the same geometric zero locus, one irreducible, differ
+by a nonzero scalar times a positive power of that irreducible polynomial.
+It retains the scalar omitted by the printed identity and proves the
+irreducibility criterion by equality of degrees.
+
+The source says each coefficient of R_X,Lambda has Plucker degree
+D=(m+1)*d. The cited universal Noether forms have degree D^2-1 in those
+coefficients. Direct composition therefore gives degree at most
+D*(D^2-1), not the claimed strict bound below D^2. A separate argument
+would be needed to obtain the printed bound from this construction.
+This observation identifies a gap in that degree calculation; it does
+not disprove the positive-dimensional bound. No proposed repair is
+treated as a formal theorem.
+
+4. General affine projection
+----------------------------
+
+The bounded closure-normalization modules construct a bounded integer
+finite birational affine projection in positive source dimension whose
+actual closure map is finite and fixes X0. Its irreducible image equation
+currently has degree at most d. ProjectiveClosureHilbertPolynomial proves
+that closure raises filtered dimension by one and preserves multiplicity.
+AffineProjectionDegree proves exact degree for a finite birational closure
+map. The remaining bridge must derive closure field generation from the
+constructed affine field generation. Final exact-degree/factor-d count
+assembly and the zero-dimensional case remain open. None of these
+remaining obligations is hidden in a claim of full-paper completion.

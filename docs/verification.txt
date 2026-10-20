@@ -1938,3 +1938,59 @@ Final log: /tmp/ccdn-geometric-checkpoint-final-canonical.log
 Guarded integration: /tmp/ccdn-geometric-checkpoint-sync.json
 Source inventory: /tmp/ccdn-geometric-checkpoint-inventory.json (723 files)
 Inventory SHA256: 47cff5821a987feefdcf9264526ad4d2e589d99d7440f485900ddb1aa088e44f
+
+
+2026-10-20: affine closure projections and Chow-incidence equations
+------------------------------------------------------------------
+Integrated twenty-four new mathematical modules and sixty-eight explicit
+endpoint audits. Existing mathematical declarations were not modified.
+
+ProjectiveClosureHilbertPolynomial proves the actual closure's Hilbert
+polynomial difference identity, dimension increase and exact multiplicity
+preservation. The bounded closure-normalization modules construct bounded
+integer finite birational affine projections in positive source dimension,
+with finite actual closure maps fixing X0. The image equation is irreducible
+and has degree at most d. AffineProjectionDegree proves equality of degree
+from actual finite birational closure-map hypotheses, and AffineLinearCountTransfer
+proves count transfer from actual finite fibers. The closure field-generation
+bridge, final exact-degree/factor-d assembly and dimension-zero case remain
+open; the full general affine projection statement is not claimed.
+
+BoundedCenterProjection, CenterProjectionHeight and CenterProjectionFormula
+construct a complementary idempotent from bounded independent integer center
+rows, with exact kernel, dimension, projection formula, integral representatives
+and common denominator. The height satisfies the exact Section 5 exponent
+2*(n-m-1)^2. A coordinate vanishing on the center is preserved by the rational
+projection, and its integral representative has the same fixed denominator.
+ZeroColumnMinorSpecialization proves sharp integer specialization preserving
+specified zero columns, full rank and nonvanishing, including degree zero.
+Actual geometric good-center existence with these bounds remains open.
+
+The seven Chow modules construct the actual prime incidence elimination
+ideal, identify it with the geometric vanishing ideal of affine incidence,
+prove separate block homogeneity and nonzero kernel when the number of
+hyperplanes exceeds the actual affine dimension, and construct an irreducible
+incidence equation. Equal geometric hypersurface loci also give the proved
+nonzero-scalar-times-positive-power identity. Principality, exact Chow
+multidegree, base-change equality, full projective incidence and the
+Grassmannian good-center detector remain open.
+
+OriginProjectivePoint constructs the actual geometrically integral degree-one
+point in P2. ZeroDimensionalCenterObstruction proves that any nonempty center
+locus satisfying disjointness cannot have its complement defined by degree<1
+equations, including actual Plucker maximal-minor coordinates. This obstructs
+the literal Lemma 5.2 at m=0,d=1; the theorem does not construct the full
+birational good-center locus. The source's positive-dimensional Noether
+composition degree calculation remains a documented proof gap, not a claimed
+counterexample. See docs/projection-center-audit.txt.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 771 reachable modules.
+Full build: 9821 jobs, PASS.
+Transitive audit: 4284 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Final log: /tmp/ccdn-projection-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-projection-checkpoint-sync.json
+Source inventory: /tmp/ccdn-projection-checkpoint-inventory.json (747 files)
+Inventory SHA256: e0506df9612d8ec6cb9cf4772ee393802ec539a3eed53f4cd8030bacd027f8f0

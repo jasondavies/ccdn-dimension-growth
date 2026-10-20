@@ -1,0 +1,68 @@
+module
+
+public import AffineCurveCounting.FixedCoordinateElimination
+public import AffineCurveCounting.ProjectiveClosureSpecialization
+
+/-! A bounded elimination step whose affine projection and actual projective
+closure projection are both integral. The latter map fixes X₀. -/
+
+@[expose] public section
+namespace AffineCurveCounting
+noncomputable section
+open MvPolynomial
+
+theorem exists_fin_integer_closure_elimination_step {n m : ℕ}
+    (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime] (d : ℕ)
+    (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
+    (hcodim : m < n)
+    (hdegree : (filteredHilbertPolynomial I).leadingCoeff =
+      (d : ℚ) / (m + 1).factorial) :
+    ∃ (c : Fin n → Fin (n + 1) → ℤ) (e : ℕ),
+      (∀ i j, |c i j| ≤ d + 1) ∧ 0 < e ∧ e ≤ d ∧
+      let a := fun i => integerLinearForm (c i)
+      let ψ := projectionCoordinateMap I a
+      ψ.IsIntegral ∧ (RingHom.ker ψ).IsPrime ∧
+      (filteredHilbertPolynomial (RingHom.ker ψ)).natDegree = m + 1 ∧
+      (filteredHilbertPolynomial (RingHom.ker ψ)).leadingCoeff =
+        (e : ℚ) / (m + 1).factorial ∧
+      (projectionCoordinateMap (projectiveClosureIdeal I)
+        (closureProjectionCoordinates a)).IsIntegral := by
+  obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d hdim
+    (by simpa only [Fintype.card_fin] using Nat.add_lt_add_right hcodim 1) hdegree
+  let F := renameEquiv ℚ (finSuccEquiv n) f
+  have hF : F ≠ 0 := by
+    intro h
+    apply hf
+    exact (renameEquiv ℚ (finSuccEquiv n)).injective (h.trans (map_zero _).symm)
+  have hFdeg : F.totalDegree = f.totalDegree := totalDegree_renameEquiv (finSuccEquiv n) f
+  obtain ⟨b, hbound, hb, hdir⟩ := exists_bounded_full_degree_direction F hF
+  have hbQ : (b none : ℚ) ≠ 0 := by exact_mod_cast hb
+  have hdir' : eval (Fin.cons (b none : ℚ) (fun i => (b (some i) : ℚ)))
+      (homogeneousComponent f.totalDegree f) ≠ 0 := by
+    rw [hFdeg] at hdir
+    change eval (fun i => (b i : ℚ))
+      (homogeneousComponent f.totalDegree (rename (finSuccEquiv n) f)) ≠ 0 at hdir
+    rw [← rename_homogeneousComponent, eval_rename] at hdir
+    convert hdir using 1
+    congr 1
+    congr 1
+    funext i
+    refine Fin.cases rfl (fun j => rfl) i
+  have hcone := fixedCoordinateElimination_isIntegral I f hf hfi b hbQ hdir'
+  let c := finEliminationMatrix b
+  have hc : ∀ i j, |c i j| ≤ d + 1 := by
+    apply finEliminationMatrix_height
+    intro i
+    refine ⟨(hbound i).1, ?_⟩
+    rw [hFdeg] at hbound
+    exact (hbound i).2.trans (by exact_mod_cast Nat.add_le_add_right hfd 1)
+  have hint := affine_projection_integral_of_closure_integral I
+    (fun i => integerLinearForm (c i)) hcone
+  obtain ⟨hdim', e, he, hed, hdegree'⟩ := integral_linear_projection_multiplicity I
+    (fun i => integerLinearForm (c i)) (fun i => integerLinearForm_degree (c i)) hint d
+      (by simpa only [hdim] using hdegree)
+  exact ⟨c, e, hc, he, hed, hint, RingHom.ker_isPrime _, hdim'.trans hdim,
+    by simpa only [hdim] using hdegree', hcone⟩
+
+end
+end AffineCurveCounting

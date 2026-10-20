@@ -755,8 +755,16 @@ Section 4:
     identity, additive count error d^2, and height cost C(n)*d^(2*n).
     The underlying exists_geometric_affine_curve_count_reduction retains
     the stronger additive error d*(d-1).
-    The projection and image precede B. The general higher-dimensional
-    affine statement remains OPEN;
+    The projection and image precede B. For every positive source dimension,
+    exists_bounded_affine_birational_projection now constructs a bounded
+    integer finite birational affine projection, an irreducible image
+    equation of degree at most d, and a finite actual closure map fixing X0.
+    ProjectiveClosureHilbertPolynomial proves dimension and multiplicity
+    under closure. AffineProjectionDegree gives exact degree from a finite
+    birational closure map, but its field-generation hypothesis is not yet
+    discharged for the constructed map. AffineLinearCountTransfer proves
+    count transfer from actual finite fibers. The final general affine
+    exact-degree/factor-d assembly and dimension-zero case remain OPEN;
 4.3.2 bounded projective projection: PROVED by
     exists_geometrically_integral_projective_projection. The constructed
     finite birational integer projection has geometrically integral image
@@ -823,9 +831,29 @@ Section 4:
 
 Section 5:
 5.1 bounded birational projection with height C(n)*d^(2*(n-m-1)^2): the
-    exact center/complement construction and this height bound remain OPEN;
-5.2 polynomial detecting bad centers on the Grassmannian: the actual
-    Chow-form construction and claimed degree bound remain OPEN;
+    complementary projection and this height bound are PROVED from actual
+    bounded independent integer center rows, in
+    exists_center_projection_source_height. The constructed idempotent has
+    exactly the center as its kernel and a complementary image of dimension
+    m+2. Its formula, integral representatives and common denominator are
+    proved; a coordinate vanishing on the center is preserved. Existence of
+    a geometrically good center with the required row bound remains OPEN,
+    so the full statement is not yet proved;
+5.2 polynomial detecting bad centers on the Grassmannian: the literal
+    strict degree bound has a FORMALLY VERIFIED BOUNDARY OBSTRUCTION for
+    m=0,d=1. An actual geometrically integral degree-one point and actual
+    one-row Plucker minors are constructed. Every nonempty center locus
+    satisfying disjointness has nonempty proper complement, which degree<1
+    equations cannot define. The full birational good-center locus is not
+    constructed by this obstruction theorem. In positive dimension, the
+    actual Chow-incidence elimination ideal is proved prime, separately
+    homogeneous in all hyperplane blocks, and nonzero for more hyperplanes
+    than the actual affine dimension; an irreducible equation is constructed.
+    Principality, exact block degree, field-base-change equality, and the
+    Grassmannian detector/degree estimate remain OPEN. The printed Noether
+    composition degree calculation is also not justified by the stated
+    degree bounds; this is a proof gap, not a positive-dimensional
+    counterexample. See docs/projection-center-audit.txt;
 5.3 bounded integer projection matrix: the polynomial specialization is
     PROVED by exists_integer_minor_specialization_degree_lt. Given a
     homogeneous polynomial F in maximal-minor coordinates, an actual
@@ -834,7 +862,12 @@ Section 5:
     entries between 0 and R, and every maximal minor bounded by R^r*r!.
     For R>=2 the entries are strictly below R. CoordinateGridAvoidance and
     MinorCoordinateDegree prove the coordinatewise grid step with no extra
-    factor r in the entry bound. The actual good-center polynomial and
+    factor r in the entry bound. ZeroColumnMinorSpecialization preserves
+    arbitrary specified zero columns, including centers in X0=0, with
+    entries at most max(1,deg F), full rank and nonvanishing. This handles
+    constant F as well as positive degree and assumes an actual rational
+    witness obeying the same zero-column conditions.
+    The actual good-center polynomial and
     witness from 5.2 remain OPEN;
 5.4 small integer kernel vectors: the literal printed constant is FORMALLY
     DISPROVED by not_printed_row_separator_bound in RowSeparatorCounterexample.
