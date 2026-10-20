@@ -3,7 +3,8 @@ Local determinant / weighted-sequence exact-statement audit
 
 Primary source inspected:
 https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf
-Printed pp.2267--2268 and 2271--2272.
+Printed pp.2267--2268 and 2271--2272; the global proposition on pp.2271--2272
+was also checked directly in the rendered pages.
 The rendered printed page2268 (PDF page9) was inspected directly, not merely
 the extracted text. Snapshot: /tmp/ccdn-local-normalization-page9.png.
 No matching correction was found in the author's addenda dated 2026-04-20:
@@ -96,9 +97,9 @@ The already checked common-degree Corollary2.5/2.9 and Proposition3.2.6
 pipeline remains valid and unchanged. The normalized mixed-degree theorem
 does NOT by itself prove a simultaneous-prime gcd inequality for a single
 unnormalized integer matrix: the normalizations can depend on the prime.
-Accordingly the new local example formally refutes the literal primitive-
-evaluation local statement; it is NOT labeled a separate formal
-counterexample to the full global Proposition3.2.6.
+The local example refutes the literal primitive-evaluation local statement.
+It does not by itself refute the global proposition. A separate global
+construction now does so, as recorded in section 6 below.
 
 3. Formal scope
 
@@ -106,7 +107,8 @@ The modules and their endpoints are included in the root import and
 transitive axiom audit. See verification.txt for the canonical build result.
 The exact affine-chart local-ring Hilbert equality and the full local
 weight-sequence bound are now proved, as described in section 5 below.
-The separate multiplicity-independent pointwise remainder remains open.
+HypersurfacePointwiseRemainder also proves the multiplicity-independent
+pointwise remainder with a constant chosen before the field and equation.
 
 4. General Noetherian-local determinant lemma
 
@@ -157,6 +159,45 @@ bound uses the cumulative binomial profile, including dimension one, and
 does not use the false arbitrary-profile extension above.
 
 This proves the affine-chart formulation of the local Hilbert equality and
-Lemma 2.3. A separate Scheme/Proj stalk comparison is not claimed. The
-pointwise multiplicity-independent lower-order estimate printed in
-Lemma 2.1 remains open; the actual weight bound bypasses that estimate.
+Lemma 2.3. A separate Scheme/Proj stalk comparison is not claimed.
+
+HypersurfacePointwiseRemainder now proves the separate pointwise estimate
+printed in Lemma 2.1. For each positive dimension m there exists C>=0, chosen
+before every field K, equation f!=0 and rational zero a, such that the
+constructed actual multiplicity mu and localized layer dimensions satisfy
+  g(k) <= mu*k^(m-1)/(m-1)! + C*k^((m:Real)-2), k>0.
+For m=1 the error is zero, including the literal negative exponent.
+PolynomialUniformDifference proves the required uniform polynomial difference
+estimate, independent of the step mu. No Hilbert or analytic estimate remains
+as a supplied premise.
+
+
+6. Global differing-degree Proposition 3.2.6
+
+GridVandermondeCounterexample and GlobalMixedDegreeDeterminant prove a
+separate global counterexample. The printed statement allows individually
+homogeneous forms without a common-degree condition, and includes d=1.
+Set n=d=L=1 and f=X2. The line equation is primitive and absolutely
+irreducible, and its defined bad-prime factor is exactly one.
+
+For N>=2 and Q=N!, use the N^2 primitive tuples
+  (i*Q+1,j+1,0), 0<=i,j<N,
+and the monomials X0^a*X1^b, 0<=a,b<N, of degrees a+b. Primitivity follows
+from j+1 dividing Q. The evaluation matrix is a Kronecker product of two
+Vandermonde matrices. Its determinant D_N is positive and satisfies
+  D_N <= (N*N!)^(N*choose(N,2))*N^(N*choose(N,2)),
+  log|D_N| <= (3/4)*N^4*log(N).
+The printed lower bound would require
+  log|D_N| >= (N^4/2)*(log(N^2)-C)
+for a uniform real C. Choosing log(N)>2C contradicts that inequality.
+
+no_uniform_global_mixed_degree_det_lower_bound negates the universal
+single-line specialization with primitive tuples and homogeneous forms
+indexed by Fin(s), in the printed orientation (F_i(xi_j)). All concrete
+hypotheses and nonvanishing are proved. The absolute gcd of a singleton
+is the absolute value of its determinant, so L=1 suffices. The sharper
+superfactorial identity is unnecessary and is not claimed as an endpoint.
+
+This refutes the unrestricted differing-degree formulation of the GLOBAL
+proposition. The common-degree determinant theorem used by the auxiliary
+polynomial and main counting results remains valid.

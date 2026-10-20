@@ -118,8 +118,11 @@ D. Bound bad primes using effective irreducibility/Noether forms (Section 3.2),
    sum log(p)/p<=log H+2*mertensError+1. Its exponential factor is at most
    exp(2*mertensError+1)*H. This follows from Mertens on the lower interval
    and the product of distinct prime divisors on the upper interval. The
-   plane geometric bad-prime criterion is now proved by the differential
-   matrix construction below; no general-dimensional Noether-forms theorem is asserted.
+   plane geometric bad-prime criterion is proved by the differential matrix
+   construction below. ExplicitNoetherTheorem now proves the full universal
+   Noether-form theorem in arbitrary dimension, including the printed degree
+   and coefficient bound and both specialization properties. See the current
+   full-paper ledger for exact coverage.
    The differential core is now proved in AlgebraicDifferentialConstants,
    RationalDifferential, DifferentialResidue, RationalClosedForms and
    BivariateClosedForms. Formal differentiation on F(t) has exactly F as its

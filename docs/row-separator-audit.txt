@@ -1,0 +1,38 @@
+Row-separator exact-statement audit (CCDN Lemma 5.4)
+20 October 2026
+
+Primary source inspected:
+https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf
+Printed p.2289 (PDF page30), checked in the rendered page. The displayed
+bound is sqrt((s-1)!*r)*B^(s-1) for s independent equations in r>s variables.
+No corresponding correction was found in the author's addenda dated
+2026-04-20: https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf .
+
+RowSeparatorCounterexample proves that this numerical constant is false.
+Its matrix has s=5,r=6,B=10:
+  [ 0,  0,   0,   0,  1, 0]
+  [10, 10,  10,  10, -3, 0]
+  [10, -9,   8,  -8, -6, 0]
+  [ 9,  8, -10, -10, -5, 0]
+  [ 9, -9,  -9,  10,  9, 0]
+Lean proves that the rows are Q-linearly independent and every coefficient
+has absolute value at most ten. With coordinates indexed from zero, the
+first equation is x4=0. An exact integer linear combination of the last
+four equations gives
+  x4 = 120050*(-2444*x2 - 1769*x3).
+Any integer solution of those equations that violates the first therefore
+has |x4|>=120050. The printed bound is sqrt(24*6)*10^4=120000.
+The unused sixth coordinate ensures s<r without removing the obstruction.
+
+no_separator_at_printed_bound certifies the concrete counterexample.
+not_printed_row_separator_bound negates the universal printed assertion,
+including row independence, coefficient bounds and the nonzero separator.
+No independence, lattice-index or arithmetic certificate remains a premise.
+
+The valid cofactor replacement in BoundedRowSeparation gives
+(s-1)!*B^(s-1) for s equations. The projection and counting arguments that
+use this replacement remain valid. The counterexample concerns the printed
+intermediate constant, not the six asymptotic main results.
+
+The module is root-imported and included in the transitive axiom audit;
+see verification.txt for the combined canonical verification.

@@ -80,8 +80,9 @@ theorem exists_bounded_integer_dual_rows {s r : ℕ}
     · rw [hboutside i j hj, abs_zero]
       positivity
 
-/-- CCDN Lemma 5.4's separation conclusion, with a cofactor bound which
-does not require the paper's extra ambient-dimension factor. -/
+/-- A valid factorial cofactor bound for the separation conclusion of CCDN
+Lemma 5.4. The different numerical constant printed in that lemma is refuted
+in `RowSeparatorCounterexample`. -/
 theorem exists_bounded_row_separator {s r : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin r) ℤ)
     (hli : LinearIndependent ℚ (fun i => fun j => (A i j : ℚ)))

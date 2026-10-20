@@ -58,8 +58,10 @@ The local generators and residue-field identifications are proved internally.
 actual localized coordinate ring at a rational hypersurface point.
 `exists_hypersurfacePointStalk_hilbert_weights` constructs its multiplicity
 and infinite weight sequence, proving the sharp Lemma 2.3 bound with error
-`(m+1)s` in every positive hypersurface dimension `m`. The separate pointwise
-remainder in Lemma 2.1 remains open. `no_uniform_dimension_one_profile_error`
+`(m+1)s` in every positive hypersurface dimension `m`.
+`exists_hypersurfacePointStalk_pointwise_remainder` also proves Lemma 2.1's
+multiplicity-independent error `C(m) k^(m−2)`, with the constant chosen before
+the field, equation and point. `no_uniform_dimension_one_profile_error`
 formally refutes the arbitrary-profile dimension-one extension of Lemma 2.2;
 the stronger actual hypersurface profile still gives the required bound.
 
@@ -77,17 +79,17 @@ also proved. `hypersurface_bad_prime_factor_max` bounds the actual bad-prime
 factor by a dimension-dependent constant times `max(log(H)/d², 1)`, where
 `H >= 1` bounds the equation's coefficients. The proof constructs a bounded
 integer plane specialization, a nonzero integer witness and its height bound.
-It includes degree-dropping reductions. The exact universal Noether-form
-statement in Theorem 3.2.2 remains open.
+It includes degree-dropping reductions.
 
-The Euler-constrained plane construction now produces universal integer
-determinant forms homogeneous of degree `d²−1` for `d ≥ 2`. Specialization is
-proved over arbitrary commutative rings, and some form is nonzero on each normalized
-absolutely irreducible plane equation in characteristic zero. The forms now
-vanish on products with positive degree bounds `a+b=d`, `deg(g)≤a` and
-`deg(h)≤b`, in every characteristic, including repeated and inseparable
-factors. Their sums of absolute coefficient values are at most `d^(3d²−3)`. The full
-higher-dimensional universal theorem remains open.
+`exists_explicit_noether_forms` proves the full universal Noether-form
+Theorem 3.2.2. For `d ≥ 2`, it constructs one finite family of integer forms
+for equations in `n+1` variables, homogeneous of degree `d²−1`, with coefficient
+sums at most `d^(3d²−3) (choose(n+d,n) 3^d)^(d²−1)`. Every form vanishes on
+equations that are not absolutely irreducible, in every characteristic; some
+form is nonzero on every absolutely irreducible equation in characteristic
+zero. The same family is chosen before the field and equation. The proof
+uses universal plane Euler minors, including repeated and inseparable factors,
+and proves the generic-plane nonvanishing and coefficient bounds internally.
 
 The higher-dimensional simultaneous-prime determinant estimate is proved for
 maximal minors of common-degree homogeneous evaluation matrices. It retains
@@ -96,8 +98,11 @@ the bad-prime set, and discharges its coefficient-height bound. The resulting
 Bombieri–Vaaler comparison and uniform auxiliary-degree selection in both
 height ranges are also proved. For differing column degrees, the corrected
 local theorem includes inverse-pivot normalization. A checked counterexample
-rules out the unnormalized local statement. The arbitrary-degree global
-formulation remains unproved; see the [local statement audit](docs/local-determinant-audit.txt).
+rules out the unnormalized local statement. A separate global counterexample,
+`no_uniform_global_mixed_degree_det_lower_bound`, now disproves the
+unrestricted differing-degree formulation of Proposition 3.2.6 for every
+proposed uniform error constant, using primitive points on one fixed line.
+See the [determinant statement audit](docs/local-determinant-audit.txt).
 
 The uniform Hilbert-rank estimates and normalized determinant comparison
 are now proved. They retain the exact factorial leading coefficient, bound
@@ -187,23 +192,34 @@ line contribution. The coefficient-height condition is discharged internally.
 dimension `n+3`, giving `C(n) d^(18+9n) B^(n+1)` for every `d ≥ 5`. It
 constructs a good integer hyperplane with normal bounded by `750d^9`,
 integer equations for all parallel slices, and the point maps used in the
-induction. `rational_top_form_hypersurface_dimension_growth` also covers
-rational equations. `projective_hypersurface_dimension_growth` proves the
+induction. `exists_effective_hyperplane_avoidance` now also constructs a
+nonzero homogeneous polynomial that vanishes on all bad hyperplane sections,
+in explicit graph coordinates for `d ≥ 2`. Its degree `d(d²−1)+1` is below
+the corrected bound in Lemma 4.3.7; the omitted coordinate chart is covered
+by a coordinate factor. `rational_top_form_hypersurface_dimension_growth`
+also covers rational equations. `projective_hypersurface_dimension_growth` proves the
 corresponding projective hypersurface bound, including rationally irreducible
 equations that split over an algebraic closure. These endpoints have no
 external counting, slicing, height or covering premise. The general
 projective-variety reduction is also completed by ProjectiveDimensionGrowth.
 
-`nonabsolute_hypersurface_count_le_sharp` proves the exact Corollary 4.1.4
-bound `d²(2B+1)^n` for every rationally irreducible equation in `n+2`
-variables that becomes reducible over a field extension. Its auxiliary is
-constructed internally. More generally, `principal_section_count_le_box`
-bounds a proper degree-`e` section of a degree-`d`, dimension-`m+1` prime
-variety by `de(2B+1)^m`; section purity and its degree budget are proved.
-Conjugate-component counts, Hilbert-polynomial invariance under scalar
-extension, finite Galois fields of definition and component conjugacy are
-also proved. The general-variety nonabsolute count still requires the
-remaining Galois descent and component assembly.
+`non_rational_prime_count_le_box` and `nonabsolute_variety_count_le_box`
+prove the general affine statements of 4.1.3 and 4.1.4: the rational integer
+points on a geometric prime variety not defined over the rationals, or a
+rational prime variety that becomes nonprime over an algebraic closure,
+number at most `d²(2B+1)^m` in dimension `m+1`. Their zero-dimensional
+rational loci are empty. Projective versions give `d²(2B+1)^m` in projective
+dimension `m`. Galois descent constructs the moving automorphism and geometric
+component; its degree and inclusion of all rational points are proved
+internally. The hypersurface bound over arbitrary field extensions remains
+available as `nonabsolute_hypersurface_count_le_sharp`.
+The corresponding projective curves satisfy the stronger, height-independent
+bound `projectiveCount ≤ d²`, proved in `NonRationalProjectiveCurve` from their
+actual homogeneous ideals. This supplies the curve case of Remark 4.1.5.
+
+`principal_section_count_le_box` bounds a proper degree-`e` section of a
+degree-`d`, dimension-`m+1` prime variety by `de(2B+1)^m`; section purity and
+its degree budget are proved.
 
 The exact complex interpolation estimates of Lemmas 3.4.1 and 3.4.2 are now
 proved. Integer-grid values bound every coefficient by `3^d` in one variable
@@ -404,6 +420,13 @@ review of theorem statements.
 | `MultivariateGridHeight`, `HypersurfaceLeadingCoefficient`, `HypersurfacePositionHeight`, `HypersurfaceShearInvariance`, `IntegerCoefficientHeight`, `HypersurfaceAuxiliaryScaling`, `HypersurfaceAbsoluteAuxiliary`, `HypersurfaceProjectiveAuxiliary` | Arbitrary-dimensional bounded coordinate positioning, exact bad-prime invariance, and the coefficient-sensitive auxiliary theorem for all bounded rational projective zeros of absolutely irreducible homogeneous equations. |
 | `HypersurfaceSmallHeightDegree`, `HypersurfaceSmallHeightAuxiliary`, `HypersurfaceLargeHeightDegree`, `HypersurfaceLargeHeightAuxiliary`, `HypersurfacePositionedAuxiliary` | Both numerical height regimes, integer degree selection, and actual auxiliary polynomials under explicit leading-coefficient positioning, retaining the exact bad-prime factor. |
 | `HypersurfaceRankArchimedean`, `HypersurfaceRankLogarithm`, `HypersurfaceNormalizedComparison`, `HypersurfaceBadPrimeComparison` | Explicit logarithmic rank and archimedean errors, followed by the actual normalized no-auxiliary comparison with both leading coefficients retained exactly. |
+| `GenericPlaneEulerMinorCharZero`, `UniversalPlaneEulerMinorCharZero`, `CoefficientwiseHomogeneous`, `UniversalHomogeneousForm`, `AmbientNoetherForms`, `AmbientNoetherVanishing`, `AmbientNoetherNonvanishing`, `NestedPolynomialL1`, `UniversalPlaneL1`, `AmbientNoetherHeight`, `UniversalNoetherForms`, `ExplicitNoetherTheorem`, `CoefficientwiseSubstitution` | Full Theorem 3.2.2: a finite universal family, exact degree and coefficient bound, all-characteristic vanishing, and characteristic-zero detection; homogeneous coefficient substitution. |
+| `PolynomialUniformDifference`, `HypersurfacePointwiseRemainder` | Lemma 2.1's pointwise Hilbert remainder, uniform in multiplicity and coefficients, for actual hypersurface stalks. |
+| `GaloisStableIdealDescent`, `GaloisComponentDegree`, `GaloisComponentPoints`, `NonRationalVarietyCount`, `ZeroDimensionalPrimeDescent`, `NonRationalProjectiveCount` | General affine and projective 4.1.3/4.1.4 counts, with Galois descent, component degree control and empty zero-dimensional rational loci. |
+| `UniversalHyperplaneRestriction`, `GoodHyperplaneReindex`, `EffectiveHyperplaneAvoidance` | A constructed homogeneous bad-hyperplane detector of degree `d(d²−1)+1` for `d≥2`, with the omitted chart covered. |
+| `GridVandermondeCounterexample`, `GlobalMixedDegreeDeterminant` | A primitive factorial grid on a fixed line refutes the differing-degree global determinant bound for every uniform error constant; common-degree bounds remain valid. |
+| `HomogeneousFilteredRank`, `HomogeneousCurveHilbert`, `ProjectiveCoefficientExtension`, `HomogeneousPrimeComponents`, `NonRationalProjectiveCurve` | Graded/filtered Hilbert comparison, homogeneous geometric components, and the height-independent projective count `≤d²` for the nonrational and nonabsolute curve cases of 4.1.5. |
+| `RowSeparatorCounterexample` | Formal counterexample to Lemma 5.4's printed constant; the existing factorial cofactor replacement remains valid. |
 | `PaperPrimeEstimates` | CCDN 3.2.4 with its explicit constant 2, and 3.2.5 including convergence and an explicit infinite-tail bound for every positive cutoff. |
 | `HigherDimensionalPrimeSum`, `HypersurfacePrimeDeterminant`, `HypersurfaceDeterminantRank` | Combine actual prime-power divisors, retain the fourth-power cutoff cost, and choose the dimension root of the rank as prime endpoint, giving the exact leading constant and rank power. |
 | `HypersurfaceBadPrimeCoordinates`, `HypersurfaceHeightDeterminant`, `HypersurfaceHeightComparison` | Construct the exact geometric bad-prime set, discharge its height bound, and combine the global determinant estimate with exact Hilbert rank and Bombieri–Vaaler in the absence of an auxiliary polynomial. |
@@ -487,11 +510,18 @@ Apache license are recorded under `vendor/mertens/`.
 
 ## Remaining work
 
-The six main results are proved. The exact intermediate statements recorded
-in the ledger remain open, including the universal Noether forms, several
-local and general-variety formulations, and the literal affine-factor
-versions of 4.2.1 and 4.2.4. Proved replacements used by the main theorems are distinguished
+The six main results are proved. Remaining intermediate obligations include
+exact projection geometry and height estimates, the Salberger covering
+statement, the degree-one geometric boundary of hyperplane avoidance, and
+the literal affine-factor versions of 4.2.1 and 4.2.4. The ledger distinguishes proved replacements
 from the exact statements they do not yet imply.
+
+`not_printed_row_separator_bound` formally disproves Lemma 5.4's printed
+numerical constant. A five-equation system requires a coordinate of at least
+120,050, while the stated bound is 120,000. The valid factorial cofactor bound
+used by the existing proofs is unaffected; see the
+[row-separator audit](docs/row-separator-audit.txt).
+
 CCDN Lemmas 2.7--2.8 and Corollary 2.9 are now proved for the actual projective
 hypersurface residue count and common-degree homogeneous evaluation matrices.
 For a geometrically irreducible degree-`d` affine hypersurface in `n+3`
@@ -507,8 +537,8 @@ The characteristic-zero universal witness now supplies an actual nonzero
 integer divisible by every bad prime above the degree. The exact bad-prime
 set is proved finite, including degree-dropping reductions. Its quantitative
 coefficient-height bound, the projective auxiliary theorem, and the surface and
-slicing arguments are proved. The ledger distinguishes these consequences
-from the exact universal Noether-form statement and other open formulations.
+slicing arguments are proved. The universal Noether-form theorem is now
+proved separately with its exact coefficient bound and specialization properties.
 See [the full-paper ledger](docs/full-paper-plan.txt) for precise coverage,
 including the abstract statements not implied by the concrete local theorem.
 

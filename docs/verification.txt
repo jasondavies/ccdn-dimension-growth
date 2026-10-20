@@ -1827,3 +1827,51 @@ Log: /tmp/ccdn-stalk-sections-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-stalk-sections-checkpoint-sync.json
 Source inventory: /tmp/ccdn-stalk-sections-checkpoint-inventory.json (646 files)
 Inventory SHA256: 5ab191cabf13eac589d21b55521e4bab214ac9175c1242897dc1844c2a9d212b
+
+
+2026-10-20: universal Noether forms, Galois counts and statement corrections
+------------------------------------------------------------------------
+Integrated thirty-two new mathematical modules and sixty-eight explicit
+endpoint audits. ExplicitNoetherTheorem proves the finite universal family
+in Theorem 3.2.2, chosen before the field and equation, with exact degree
+and coefficient-sum bound, all-characteristic vanishing and characteristic-
+zero detection. Generic-plane nonvanishing and ambient coefficient bounds
+are constructed. EffectiveHyperplaneAvoidance supplies a nonzero homogeneous
+bad-hyperplane detector of degree d*(d^2-1)+1 for d>=2, including the omitted
+coordinate chart. Its degree-one geometric boundary remains separate.
+
+HypersurfacePointwiseRemainder closes Lemma 2.1's pointwise remainder for
+actual affine-coordinate hypersurface stalks: its dimension-only constant
+is chosen before the field, equation, point and multiplicity. Dimension one
+has zero error, including the literal negative exponent. No separate
+Scheme/Proj stalk identification is claimed.
+
+Galois descent and component assembly prove the general affine and projective
+4.1.3/4.1.4 counts, with empty zero-dimensional affine rational loci.
+NonRationalProjectiveCurve proves projectiveCount<=d^2 independently of
+height for the non-Q-defined and nonabsolute curve cases of 4.1.5. Graded
+and filtered Hilbert functions, homogeneous geometric components and the
+projective coefficient-extension maps are related internally.
+
+Two exact printed intermediate assertions are formally disproved.
+RowSeparatorCounterexample gives a five-equation system in six variables
+requiring a coordinate of at least 120050 against the printed 120000 bound.
+GlobalMixedDegreeDeterminant constructs primitive factorial-grid points on
+the fixed line X2=0 and individually homogeneous monomials. Their nonzero
+determinants violate the unrestricted differing-degree Proposition 3.2.6
+for every proposed uniform real error constant. This is a global result,
+separate from the earlier local normalization example. The valid factorial
+cofactor replacement and common-degree determinant bounds used by the main
+results remain intact. Both statement audits and the coverage ledger record
+the precise distinctions. Full-paper completion is not claimed.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 702 reachable modules.
+Full build: 9752 jobs, PASS.
+Transitive audit: 4005 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Log: /tmp/ccdn-noether-descent-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-noether-descent-checkpoint-sync.json
+Source inventory: /tmp/ccdn-noether-descent-checkpoint-inventory.json (678 files)
+Inventory SHA256: d5bed1619ad0e02e72ddc42acd220d844c6b70dd56a1b102e1655f9fb1ca6dbd

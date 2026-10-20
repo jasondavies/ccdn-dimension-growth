@@ -205,8 +205,9 @@ arbitrary-profile dimension-one boundary requires correction; see
 docs/local-determinant-audit.txt. PrimeIntegerLocalDeterminant now proves
 Lemma 2.4 for arbitrary Noetherian local rings, with the actual Z_(p) target
 and exact initial local-layer weights. The exact affine-chart local Hilbert
-function is now proved by HypersurfacePointStalk; the separate multiplicity-
-independent pointwise remainder in Lemma 2.1 remains open.
+function is proved by HypersurfacePointStalk. HypersurfacePointwiseRemainder
+also proves the multiplicity-independent pointwise remainder in Lemma 2.1,
+with one constant for each positive dimension, before the field and equation.
 
 Projective hypersurface determinant step: PROVED for homogeneous evaluation
 matrices of a common degree, in every positive hypersurface dimension.
@@ -460,9 +461,11 @@ finite family. Here m is the number of variables; H>=1 bounds every original
 coefficient. Degree loss is included, so this also bounds the paper's subset
 of geometrically reducible reductions. No primitivity or homogeneity is
 needed. This proves the quantitative conclusion of Corollary 3.2.3.
-The exact universal Noether-form statement and constants of Theorem 3.2.2
-remain OPEN; the constructed witness supplies its required consequence
-without assuming that external theorem.
+ExplicitNoetherTheorem now also proves the exact universal Noether-form
+statement of Theorem 3.2.2: a finite family with degree d^2-1 and the printed
+coefficient-sum bound, all-characteristic vanishing on nonabsolute equations,
+and characteristic-zero detection. The earlier witness argument remains
+an independent proof of the bad-prime consequence.
 
 PaperPrimeEstimates proves the paper's explicit sum(log p)<=2x and the
 convergent infinite prime tail with bound 2*primeBlockMass/sqrt(L), L>0.
@@ -491,8 +494,9 @@ of an auxiliary nonmultiple of degree M, it proves the exact Hilbert rank
 s+choose(n+2+M-d,M-d)=choose(n+2+M,M) and the numerical determinant comparison.
 Choosing M with the paper's uniform bound is now PROVED by the auxiliary modules.
 Scope: the common-degree maximal-minor form of Proposition 3.2.6 is proved.
-The paper's formulation for arbitrary families of homogeneous determinants
-with potentially differing column degrees is not yet asserted.
+The unrestricted differing-degree formulation is now formally disproved by
+GlobalMixedDegreeDeterminant; its primitive factorial-grid construction is
+independent of the earlier local counterexample.
 
 The uniform Hilbert-profile estimates are now PROVED with exact leading
 constants. HypersurfaceRankProfile expresses the rank as d adjacent binomial
@@ -553,8 +557,11 @@ Section 2:
     equality is PROVED by hypersurfacePointStalk_hilbert_eq for the actual
     coordinate-ring localization at every rational hypersurface point.
     The multiplicity, initial-form kernel, residue field and translation are
-    constructed. The separate multiplicity-independent pointwise remainder
-    remains OPEN; no Scheme/Proj stalk comparison is asserted;
+    constructed. HypersurfacePointwiseRemainder proves the exact remainder
+    g(k)<=mu*k^(m-1)/(m-1)!+C(m)*k^(m-2), for every m>0 and k>0.
+    C(m) is chosen before the field, equation, point and multiplicity; m=1
+    allows C=0 with literal exponent -1. This proves the affine-chart
+    statement; no separate Scheme/Proj stalk comparison is asserted;
 2.2 weighted-sequence estimate: PROVED for arbitrary integer profiles in
     every dimension m>=2, with error (m+1+c*(m-1)!)*s independent of
     multiplicity. weighted_sequence_initial_sum_lower_bound gives the
@@ -610,18 +617,16 @@ Section 3:
     printed definition. For affine equations the predicate also includes
     degree-dropping reductions; agreement with the literal affine definition
     is NOT claimed. See docs/affine-factor-audit.txt;
-3.2.2 effective Noether forms: the required nonzero integer witness detecting
-    all bad primes above d, with coefficient-controlled height, is PROVED.
-    EulerUniversalForms now constructs actual universal integer plane minors
-    homogeneous of degree d^2-1, d>=2. Their matrix specialization is proved
-    in every characteristic, and their nonvanishing on normalized absolutely
-    irreducible full-degree plane equations is proved in characteristic zero.
-    EulerProductVanishing proves their vanishing on every product g*h with
-    positive degree budgets a+b=d, deg(g)<=a and deg(h)<=b, over arbitrary
-    commutative rings, including
-    repeated and inseparable factors. EulerUniversalHeight proves the exact
-    plane coefficient-sum bound d^(3*d^2-3). The full higher-dimensional
-    universal theorem remains OPEN;
+3.2.2 effective Noether forms: PROVED by exists_explicit_noether_forms.
+    For every d>=2 and n>=0, a finite family of integer forms in the degree-d
+    coefficient variables is constructed before every field and equation.
+    Each form is homogeneous of degree d^2-1, with coefficient sum at most
+      d^(3*d^2-3)*(choose(n+d,n)*3^d)^(d^2-1).
+    All forms vanish on nonabsolutely irreducible homogeneous equations in
+    every characteristic; some form is nonzero on each absolutely irreducible
+    equation in characteristic zero. The same family has all properties.
+    Universal plane Euler minors, generic-plane nonvanishing, finite-family
+    extraction and the exact ambient coefficient estimate are proved;
 3.2.3 bad-prime factor height bound: PROVED by hypersurface_bad_prime_factor_max,
     for arbitrary finite families of actual bad primes, with an explicit
     dimension-dependent constant. The exact finite bad-prime set is constructed;
@@ -634,11 +639,15 @@ Section 3:
 3.2.6 simultaneous-prime determinant bound: PROVED in the common-degree
     maximal-minor form by exists_hypersurface_determinant_log_lower, with
     the exact rank exponent and leading constant, actual bad-prime set and
-    all local counts discharged. The arbitrary-family/varying-degree global
-    formulation remains OPEN: prime-dependent chart normalization does not
-    give the required gcd estimate for one fixed integer matrix. No formal
-    counterexample to this global statement is claimed. The height-controlled
-    version and exact-rank no-auxiliary comparison are also PROVED;
+    all local counts discharged. The unrestricted differing-degree global
+    formulation is FORMALLY DISPROVED by
+    no_uniform_global_mixed_degree_det_lower_bound. Primitive factorial-grid
+    points on the fixed line X2=0 and individually homogeneous monomials give
+    a nonzero determinant violating the n=d=b=1 bound for every real uniform
+    error constant. This is the single-determinant case, with the printed
+    tuple indexing and matrix orientation, independent of the earlier local
+    counterexample. The common-degree height-controlled version and exact-rank
+    no-auxiliary comparison remain PROVED;
 3.3.1 non-absolutely-irreducible auxiliary polynomial: PROVED by
     nonabsolute_projective_auxiliary, with exact degree d and vanishing at
     all rational projective zeros independently of height. Homogeneous
@@ -681,25 +690,30 @@ Section 4:
     coordinates in [0,d] and an ideal member nonvanishing there. The
     homogeneous version supplies a nonzero integer representative of
     projective height at most d outside the actual projective locus;
-4.1.3 non-Q-defined geometric components: principal-section purity and its
-    exact d*deg(f) degree budget are PROVED. Low-degree separators and
-    principal_section_grid_card_le give exact section counts. For an actual
-    coefficient automorphism moving a prime ideal over an algebraically
-    closed characteristic-zero field, conjugate_prime_grid_card_le and
-    conjugate_prime_count_le_box prove the sharp d^2 count for points
-    fixed by that automorphism. GeometricPrimeIntersectionGrid descends this
-    to geometrically prime ideals over arbitrary characteristic-zero fields.
-    Hilbert scalar extension, algebraic component dimensions, finite Galois
-    fields of definition, and (after finite Galois extension) component
-    conjugacy and base-point inclusion in every component are PROVED.
-    Deriving the moved component from the full
-    non-Q-definition hypothesis and assembling the general statement remain OPEN;
-4.1.4 non-geometrically-integral varieties: the exact hypersurface statement
-    is PROVED in all ambient dimensions at least two by
-    nonabsolute_hypersurface_count_le_sharp, with d^2*(2B+1)^(ambient-2).
-    It allows reducibility over any field extension and constructs the
-    auxiliary equation internally. The general-variety statement remains OPEN;
-4.1.5 stated extension to geometric varieties;
+4.1.3 non-Q-defined geometric components: PROVED by
+    non_rational_prime_count_le_box and non_rational_projective_count_le_box.
+    For a prime ideal over an algebraically closed Galois extension of Q,
+    failure to descend to any rational ideal implies the exact affine bound
+    d^2*(2B+1)^m in dimension m+1 and the projective bound in dimension m.
+    GaloisStableIdealDescent constructs a moving coefficient automorphism
+    from the non-definition hypothesis. Dimension-zero affine rational loci
+    are empty. Dimension and degree come from actual Hilbert polynomials;
+4.1.4 non-geometrically-integral varieties: PROVED by
+    nonabsolute_variety_count_le_box and
+    nonabsolute_projective_variety_count_le_box for actual rational prime
+    ideals whose scalar extension to an algebraic closure is not prime.
+    The exact bounds are as in 4.1.3. The geometric component, its degree
+    budget and inclusion of every rational point are constructed internally,
+    with no supplied auxiliary or counting premise. Dimension-zero affine
+    rational loci are empty. nonabsolute_hypersurface_count_le_sharp also
+    covers hypersurface reducibility over arbitrary field extensions;
+4.1.5 stated extension to geometric varieties: the required count bounds are
+    PROVED. The affine and projective estimates in 4.1.3/4.1.4 cover the
+    Theorems 1 and 3 consequences. NonRationalProjectiveCurve proves the
+    stronger projective curve bound projectiveCount<=d^2, for every real B,
+    in both non-Q-defined and nonabsolute cases. The cone-to-graded Hilbert
+    degree comparison and homogeneity of geometric components are derived.
+    No separately named numerical restatements of Theorems 1--3 are added;
 4.2.1 affine auxiliary polynomial: the all-case theorem with the defined
     degree-loss-inclusive affine bad-prime factor is PROVED by
     affine_hypersurface_auxiliary. It has the complete minimum expression,
@@ -749,10 +763,17 @@ Section 4:
     cover are combined with the proved line contribution;
 4.3.5 surface covering input (Salberger);
 4.3.6 stated polynomial-dependence consequence;
-4.3.7 effective good hyperplanes: OPEN. Corrected degree is
-    (n+1)*d*(d^2-1), including the missing factor d. A sufficient constructive
-    replacement is PROVED: an actual full-degree geometrically good hyperplane
-    with integral normal bounded by 6*(2d^3+3)^3 <=750d^9;
+4.3.7 effective good hyperplanes: the explicit polynomial formulation is
+    PROVED for d>=2 by exists_effective_hyperplane_avoidance, in 4+n variables.
+    It constructs a nonzero homogeneous detector of degree d*(d^2-1)+1,
+    at most (4+n)*d*(d^2-1), the corrected source bound. It vanishes on every
+    graph restriction that is not absolutely irreducible, over every field;
+    a coordinate factor covers the omitted chart. Nonvanishing uses an
+    internally constructed good section. The degree-one geometric boundary
+    is separate: a zero restricted equation can describe an integral whole
+    hyperplane, so polynomial irreducibility is not a valid proxy there.
+    No new scheme-theoretic section identification is claimed. The earlier
+    integral good normal bounded by 6*(2d^3+3)^3<=750d^9 remains available;
 4.3.8 stated slicing/dimension-growth consequences: PROVED for every d>=5,
     by constructing integer equations for all parallel levels, preserving their
     absolutely irreducible leading forms, and counting actual slices. Each
@@ -765,10 +786,13 @@ Section 5:
 5.1 degree of bad projection-center locus;
 5.2 polynomial detecting bad centers on a Grassmannian chart;
 5.3 bounded integer projection matrix;
-5.4 small integer kernel vectors: the cofactor construction in
-    BoundedRowSeparation supplies (s-1)!*B^(s-1). The printed bound
-    sqrt((s-1)!*r)*B^(s-1) remains OPEN; the cofactor estimate does not
-    imply it for all ranks and ambient dimensions.
+5.4 small integer kernel vectors: the literal printed constant is FORMALLY
+    DISPROVED by not_printed_row_separator_bound in RowSeparatorCounterexample.
+    A system with s=5,r=6,B=10 has independent rows and requires a coordinate
+    of magnitude at least 120050, exceeding sqrt(24*6)*10^4=120000.
+    BoundedRowSeparation proves the valid replacement (s-1)!*B^(s-1),
+    already used by the projection/counting arguments. This does not refute
+    the six asymptotic main results. See docs/row-separator-audit.txt.
 
 Section 6:
 6.1: PROVED, exactly the stated grid and degree, in
