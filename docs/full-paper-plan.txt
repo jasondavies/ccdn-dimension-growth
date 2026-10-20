@@ -1,0 +1,842 @@
+Full-paper formalisation obligations
+===================================
+
+Scope: Castryck, Cluckers, Dittmann and Nguyen, "The dimension growth
+conjecture, polynomial in the degree and without logarithmic factors",
+Algebra & Number Theory 14 (2020), 2261-2294.
+Primary source: https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf
+DOI: https://doi.org/10.2140/ant.2020.14.2261
+
+The task covers the remainder of the paper, including its class-group
+application. It is not complete when only the affine curve theorem is
+proved. Definitions of targets and theorems conditional on missing
+mathematics are not completed counting theorems.
+
+Main statements
+---------------
+
+Theorem 1: OPEN. For each n > 1, constants c(n), e(n), uniformly for all
+integral projective Q-varieties X of degree d >= 5 and real B >= 1:
+N(X,B) <= c(n) d^e(n) B^dim(X). No B^epsilon or logarithmic loss.
+
+Theorem 2: PROVED. AffineCurveCounting.projectiveCurveBound proves
+ProjectiveCurveBound: for each n>=2, one C(n)>0 bounds the actual rational
+projective count by C(n)*d^4*B^(2/d), uniformly over prime coordinate ideals,
+positive homogeneous Hilbert degree d and real B>=1. The coordinate ideal
+and degree are independent of the height radius. The constant depends only
+on n; there is no epsilon or logarithmic loss, and no supplied projection,
+geometric-integrality, finite-field-count or coefficient-height hypothesis.
+The proof includes exact projective/affine chart Hilbert-function equality,
+bounded degree-preserving projections, all exceptional fibers, points at
+infinity, and height-preserving coordinate permutations.
+Check: scripts/check.sh; Axioms.lean also prints the endpoint's axioms.
+
+Theorem 3: PROVED. AffineCurveCounting.affineCurveBound proves the full
+ambient-dimensional affine-curve bound, with degree specified by eventual
+affine Hilbert growth:
+N_aff(X,B) <= C(n) d^3 B^(1/d) (log B + d).
+Check: scripts/check.sh; declaration and transitive-axiom audit in Axioms.lean.
+
+Theorem 4: OPEN. For each n > 2, constants c(n), e(n), uniformly for
+integer polynomials of degree d >= 5 with irreducible leading homogeneous
+part over Q:
+N_aff(f,B) <= c(n) d^e(n) B^(n-2), B >= 1.
+
+Proposition 5: OPEN. For every integer d > 0, construct an integral
+projective plane curve X of degree d and integer B >= 1 for which
+(1/5) d^2 B^(2/d) <= N(X,B).
+
+Theorem 6: OPEN. For every number-field degree d > 2, a uniform constant
+depending only on d bounds the cardinality of the actual 2-torsion in
+the ideal class group:
+h_2(K) <= C(d) |disc(K)|^(1/2-1/(2d))
+                    (log |disc(K)|)^(1-(d mod 2)).
+The class-group-to-integral-points reduction must also be proved.
+
+Section 6 consequences: OPEN. The lower-bound examples must establish the
+stated obstructions to improving the degree factors: projective curves
+o(d^2), affine curves o(d^2/log d), and exponents below 1 and 2 in
+Theorems 1 and 4 respectively.
+
+Infrastructure and proof routes
+------------------------------
+
+ProjectiveBox: bounded projective-height sets are finite, actual projective
+point counts are defined, and primitive integer coordinates give exactly
+the maximum-coordinate height in the paper.
+ProjectivePrimitive: construct primitive integer representatives and prove
+their injectivity as a chosen map and their height bounds.
+ProjectiveZeroLocus: homogeneous evaluation scales by the degree; projective
+zero loci are independent of representatives; finite projective counts
+reduce to bounded primitive integer families.
+ProjectivePointSeparation: distinct projective points have homogeneous
+Kronecker-delta separators in every degree at least the number of points
+minus one.
+ProjectiveSection: degree via the actual graded Hilbert function, uniqueness
+of degree, and a sharp dm bound for a proper degree-m section of a prime
+curve with Hilbert degree d.
+ProjectivePlaneBezout: a nonzero homogeneous plane equation of degree d has
+projective Hilbert degree d; an irreducible plane equation and a homogeneous
+nonmultiple of degree m have at most dm common projective rational points,
+including points at infinity.
+The zero-locus, interpolation, section and plane Bezout statements now hold
+over any field, including the finite fields needed by the determinant method.
+
+SingularApproximation, SingularLocalDeterminant and SingularPlaneChart:
+the existing exact-zero theorems are extended to zeros modulo the required
+prime power. The original theorem interfaces remain available as consequences.
+ProjectiveLocalDeterminant: integer unit normalization modulo prime powers
+transfers the singular affine determinant exponent to homogeneous evaluations,
+in every coordinate chart; row-block exponents add in every maximal minor.
+ProjectiveReduction: primitive integer vectors reduce to actual nonzero
+projective points; the residue points determine a unit coordinate, integer
+chart lifts and their affine congruences, and preserve the homogeneous equation.
+ProjectiveResidueDeterminant: the actual residue partition and positive
+multiplicities are constructed from a nonzero homogeneous reduction. Their
+sum gives the quadratic single-prime determinant bound, including singular
+classes and points outside the standard affine chart.
+ProjectiveAffineChart, ProjectiveResidueCardinality: the standard affine
+chart is injective; an irreducible reduced homogeneous curve not containing
+the line at infinity has at most d points there. Its projective point count
+is bounded by the affine chart count plus d.
+HomogeneousChartIrreducible: dehomogenization preserves degree and
+irreducibility when the coordinate does not divide the equation. For
+irreducible homogeneous equations of degree >= 2, the coordinate cannot
+divide the equation or be divisible by it.
+ProjectiveFiniteFieldCount: for d >= 2, irreducible homogeneous reduction,
+and p > 27*d^4, the actual projective residue count is at most
+p + 162*d^2*sqrt(p). No finite-field point-count theorem is left as a
+hypothesis in this result.
+ProjectiveMultiplicity: residues of multiplicity >=2 inject chartwise into
+singular affine zeros. There are at most 3*d*(d-1) such residues, giving
+total multiplicity <= #ProjectivePlaneResidue + 3*d^2*(d-1).
+ProjectivePrimeDeterminant: total multiplicity <= p+165*d^2*sqrt(p) above
+the fourth-power cutoff; local divisors sum to the sharp global logarithmic
+minor-gcd lower bound.
+HomogeneousChartIrreducible also proves that full-degree chart irreducibility
+implies homogeneous irreducibility. ProjectiveHeightDeterminant uses this
+to discharge good reductions and the bad-prime charge through the actual
+coefficient-controlled witness. No local counting input remains.
+ProjectiveHeightComparison, ProjectiveAuxiliary: exact Hilbert rank and
+Bombieri--Vaaler give actual homogeneous auxiliary polynomials with explicit
+degree bounds in both coefficient-height ranges, for all primitive points.
+ProjectiveAuxiliaryCount: the auxiliary nonmultiple cuts out at most d*M
+projective points by the proved projective Bezout theorem.
+ProjectiveTranslation: bounded integer shears preserve primitive vectors,
+projective distinctness, homogeneous equations and absolute irreducibility;
+the height radius grows by at most d+1.
+ProjectivePlanePositionedCount, ProjectivePlaneAbsoluteCount: coefficient
+positioning removes the coefficient-height dependence; primitive normalization
+transfers the bound to arbitrary absolutely irreducible rational equations.
+ProjectivePlaneNonabsoluteCount: extension splitting gives at most d^2+d
+base-field projective points, using the affine nonabsolute bound and Bezout
+at infinity. This discharges rational irreducibility without geometric
+irreducibility.
+ProjectivePlaneLinearCount: Schwartz--Zippel bounds linear equations by
+9*B^2. projective_plane_equation_bound combines all cases into the uniform
+C*d^4*B^(2/d) plane-equation bound for every positive degree.
+ProjectiveChartDegree: normalization in the coordinate fraction field
+identifies each homogeneous coordinate piece with the corresponding filtered
+piece of the affine chart, giving exact Hilbert-function equality in every
+degree. ProjectiveChartIdeal: the actual chart ideal is prime, has the same
+degree, and contains the images of all projective points in the chart.
+ProjectiveIntegerHeight: arbitrary integral representatives bound the
+projective height; primitive normalization only decreases the coordinate box.
+ProjectivePlaneProjection: the proved bounded affine projection lifts to a
+projective plane map with the same polynomial height factor.
+ProjectiveProjectionCount: the plane equation has exactly degree d; projection
+loses at most d(d-1) points on the affine chart and d on the omitted hyperplane.
+ProjectivePermutation: reindexing coordinates preserves height and every
+homogeneous Hilbert dimension, allowing a proper chart whenever points exist.
+ProjectiveCurveBound: absorb the projection scale into a constant depending
+only on ambient dimension and assemble the full Theorem 2.
+
+Higher-dimensional local determinant step: PROVED for integer polynomial
+hypersurfaces at actual prime-field residue points, in every positive dimension.
+OriginTruncationGenerators and ModularOriginGenerators now construct homogeneous
+integer generators with counts equal to the actual local-layer dimensions.
+The p-adic approximation lemmas work in arbitrary sets of variables.
+FilteredDeterminant proves divisibility directly from these generators, using
+Cauchy--Binet and cumulative weight deficits, with no assumed local model.
+HypersurfaceHilbert bounds the actual degree-k layer by the binomial difference
+and its cumulative dimension by mu*binomial(n+k,n), where n is the dimension.
+HypersurfaceLocalDeterminant defines the explicit exponent
+  E(n,mu,s) = sum(k<s, max(0, s-mu*binomial(n+k,n)))
+and proves the integer cutoff inequality
+  s*K <= E(n,mu,s) + mu*binomial(n+K,n+1)
+for every K, n>=1 and mu>=1.
+HypersurfaceMultiplicityEstimate optimizes K with the real nth root and proves
+  E(n,mu,s) >= (n!/mu)^(1/n)*n/(n+1)*s^(1+1/n) - (n+1)*s.
+The error is independent of mu and the coefficients. HypersurfaceResidue
+constructs the positive multiplicity from an actual translated nonzero reduced
+equation, bounds it by the degree, and proves this exponent divides every
+square polynomial evaluation determinant in that residue class. The theorem
+also holds for zeros modulo p^E, permitting projective unit normalization.
+This supplies the hypersurface consequences of Sections 2.1--2.4 directly.
+It does not assert the exact local Hilbert-function equality, the stronger
+mu-independent error in Lemma 2.1, the abstract sequence theorem for arbitrary
+g in Lemma 2.2, or Lemma 2.4 for every Noetherian local ring.
+
+Projective hypersurface determinant step: PROVED for homogeneous evaluation
+matrices of a common degree, in every positive hypersurface dimension.
+ProjectiveHypersurfaceLocal normalizes unit coordinates modulo the required
+prime power, transfers the affine divisor, and cancels invertible row factors.
+It works in every coordinate chart and assembles the residue-block maximal
+minor divisors. ProjectiveHypersurfaceReduction constructs the unit coordinate
+and affine congruences from equality of actual projective residue points.
+ProjectiveHypersurfaceResidueDeterminant defines the actual finite residue set
+and its positive degree-bounded multiplicities from translated chart equations.
+Primitive integer zeros construct the partition automatically; there is no
+supplied partition, local model, local exponent or finite-field estimate.
+HypersurfaceAggregation sums the proved integer cutoff inequalities before
+optimizing, so the error remains independent of the number of residue classes
+and their multiplicities. For total multiplicity T, the resulting exponent is
+  e >= (m!/T)^(1/m)*m/(m+1)*s^(1+1/m) - (m+1)*s,
+and p^e divides the gcd of every maximal minor. The endpoint
+projective_hypersurface_minorGcd_bound includes s=0. Here m>=1 is the
+hypersurface dimension. This proves the common-degree evaluation-matrix
+statements needed from Sections 2.5--2.6. No assertion about columns of
+arbitrary different homogeneous degrees is made.
+HypersurfaceCountNormalization proves the numerical step of Lemma 2.8:
+  T <= P^m + H*P^(m-1) implies T^(1/m) <= P+H,
+with the corresponding normalized error. It also transfers the actual
+projective determinant theorem to the denominator P+H. That corollary explicitly
+assumes the actual finite-field count bound. SharpHypersurfaceDeterminant now
+discharges that input using the proved count described below.
+
+The singular correction in Lemma 2.7 is now proved in every dimension.
+BinomialSectionBound proves the filtered codimension-two bound from the
+actual Koszul rank estimate. FiniteFieldInterpolation constructs polynomial
+point separators; FiniteFieldSectionCount combines them with that rank
+estimate to bound common zeros by
+  (n+4)^n * deg(f)*deg(g) * q^n
+for a prime equation f in n+2 variables, a nonmultiple g, and
+deg(f)+deg(g) <= 2(q-1).
+HypersurfaceSingularities applies this to f and a nonzero partial derivative.
+ProjectiveHypersurfaceMultiplicity partitions actual projective residues
+by the selected affine chart. For hypersurface dimension m=n+1, degree d>=2,
+irreducible reduction and p>d^2, the actual total multiplicity is at most
+  #projective residues + (n+3)(n+4)^n d^2 p^n sqrt(p).
+No finite-field point-count or singular-locus degree estimate is assumed.
+FiniteFieldProjectiveCone proves the exact cone count (q-1)N+1 and the
+numerical transfer of an affine-cone estimate to a projective estimate.
+
+For the unweighted count, the paper cites Cafure--Matera,
+Corollary 5.6 (https://doi.org/10.1016/j.ffa.2005.03.003). Its effective
+plane-section argument uses Gao's differential criterion and generic-plane
+irreducibility. Gao's primary manuscript is available at
+https://www.math.clemson.edu/~sgao/papers/fac_bipoly.pdf.
+The proved replacement upper-bound route uses a degree-O(d^3) nonzero minor to detect
+bad plane restrictions, alongside a separate count of identically zero
+restrictions. A degree-O(d^4) error divided by p is small enough above the
+p>27d^4 cutoff; the sharper two-sided Cafure--Matera estimate is not needed.
+This upper-bound route is now proved through the endpoints below.
+
+BoundedDifferentialConstants begins the positive-characteristic criterion:
+zero derivative and reduced numerator/denominator degrees below the
+characteristic imply that a rational function is constant. For an integral
+algebraic differential constant, the same bounds on every coefficient of
+its actual minimal polynomial imply descent to the algebraically closed
+base. These degree bounds are EXPLICIT INPUTS. For closed-form residues,
+the following proved direct elimination argument avoids those inputs.
+
+DifferentialConstantRelation proves that t'=1 prevents a nonzero polynomial
+in t of degree below the characteristic, with differential-constant
+coefficients, from vanishing. A nonzero bivariate relation with that degree
+bound therefore forces any differential-constant second argument to descend
+to the algebraically closed base.
+PolynomialResultantDegree, ResidueEliminant and ResidueEliminantEvaluation
+construct Res_z(f,u*f'-g), prove its nonvanishing by specialization at u=0,
+its parameter-degree bound (m+(m-1))*D, and its vanishing at the actual ratio
+g(beta)/f'(beta). Here m is the outer degree of f and D bounds the parameter
+degrees of the coefficients of f and g; g has smaller outer degree.
+PositiveCharacteristicResidue proves the needed irreducible case of Gao's
+bounded-residue constant lemma using these constructed facts. No
+minimal-polynomial coefficient bound or annihilating relation is assumed.
+
+SeparableRootDifferential constructs the implicit derivation on an actual
+separable monic root extension in any characteristic.
+DifferentialResidue now includes the single-residue gradient criterion,
+while preserving its original characteristic-zero interface.
+PositiveCharacteristicClosedForms constructs separability and the root
+extension and proves the monic closed-form classification from degree
+bounds below the characteristic.
+PositiveCharacteristicRank proves that, over an algebraically closed field
+of characteristic ell>2*d^2, a monic irreducible equation of total and outer
+degree d>0 has closed-form coefficient-matrix rank at least 2*d^2-1.
+The large-characteristic rank input is now proved. The positioned generic-plane
+irreducibility, nonzero-minor construction, parameter-degree control, effective
+bad-section count and identically zero restriction count are all proved below.
+The coordinate-positioning inputs are constructed below.
+
+The smooth-point part of generic-plane irreducibility is now proved.
+PowerSeriesBaseChange extracts a finite nonzero coefficient minor and proves
+that arbitrary linearly independent families of power series remain independent
+under every extension of the coefficient field. FormalBranchBaseChange uses
+a basis to construct an injective algebra map from the extended coordinate
+algebra into power series over that field. Thus its tensor product remains
+a domain. PlaneSmoothGeometricIrreducibility identifies the extended principal
+ideal and proves that every irreducible plane equation with a smooth rational
+point remains irreducible over every field extension. This works in arbitrary
+characteristic and needs no monicity assumption.
+HypersurfaceSmoothPoint uses the Nullstellensatz and a proper nonzero partial
+derivative to construct an actual smooth point over an algebraically closed
+field when the positive degree is below the characteristic.
+HypersurfaceGoodDirection constructs a direction where the top homogeneous
+component, directional derivative, and a selected coordinate are all nonzero.
+AffinePlaneRestriction defines the actual substitution z+x*b+y*c, proves the
+polynomial chain rule, the degree bound and the smooth base-point formulas.
+Its geometric irreducibility corollary still explicitly requires ordinary
+irreducibility of the restricted equation.
+SmoothPlaneMinor combines the smooth-point theorem with the proved differential
+rank criterion to obtain a nonzero minor over the original field: a monic
+irreducible plane equation of outer degree d>0 and total degree at most d,
+with a smooth rational point and characteristic >2*d^2, supplies an actual
+minor of order 2*d^2-1. Algebraic closure and descent of this minor are proved.
+The localized-substitution argument for positioned generic planes is now
+proved as follows. PolynomialPrimeLocalization proves that a prime polynomial
+of positive variable degree stays prime after coefficient localization at
+nonzero elements. Swapping two polynomial variable families proves that
+irreducibility survives purely transcendental extension.
+GenericPlaneStretch introduces an actual fresh variable y and proves ordinary
+irreducibility of f(x,y*z) over the polynomial ring in x,y,z: in the fraction
+field K(y), simultaneous scaling of the transverse variables is an explicit
+polynomial automorphism. Monicity in x descends the result before localization.
+GenericPlaneIrreducibility exchanges the presentations of the parameter ring
+and applies the prime-localization theorem to obtain irreducibility over K(z).
+GenericPlaneSmoothness identifies the polynomial with its actual multivariate
+substitution, proves the zero and derivative formulas at the origin, and uses
+the faithful-branch theorem to prove geometric irreducibility over every field
+extension of K(z). The inputs are ordinary irreducibility of f, monicity in x,
+positive x-degree, f(0)=0 and partial_x f(0) != 0. No generic-plane
+irreducibility hypothesis is supplied.
+GenericPlaneMinor proves a nonzero determinant polynomial in the original slope
+polynomial ring. For positive d, outer degree d, total degree <=d and
+characteristic >2*d^2, its order is 2*d^2-1. The scalar extension to the slope
+field, its geometric irreducibility, and descent of the nonzero minor are proved.
+Hypersurface positioning is now constructed over every algebraically closed
+field when the positive degree is smaller than the characteristic.
+AffineLineLeading proves that the coefficient of degree d>=deg(f) in
+f(a+t*b) equals the homogeneous component of degree d evaluated at b.
+HypersurfaceAffineCoordinates constructs the explicit automorphism
+  X_0 -> a_0+b_0*X_0,
+  X_i -> a_i+b_i*X_0+X_i  (i !=0),
+and its inverse, requiring only b_0!=0. It proves the degree bound, the
+origin evaluation and the directional-derivative identity.
+HypersurfaceFullOuterDegree identifies the top outer coefficient as the
+constant given by the leading homogeneous form at b. Nonvanishing gives
+outer degree exactly equal to the original total degree.
+HypersurfacePositioning constructs an actual smooth point and a direction
+with nonzero first coordinate, leading form and directional derivative.
+Dividing by the leading scalar gives an irreducible monic equation of full
+outer degree, with a smooth origin. All choices and identities are proved.
+The endpoint exists_positioned_genericPlane_minor constructs the coordinates
+and the nonzero slope determinant for any irreducible positive-degree equation
+in variables Option sigma over an algebraically closed field of characteristic
+>2*d^2. There is no supplied smooth point, direction, coordinate map, leading
+coefficient, generic-plane irreducibility or nonzero-minor hypothesis.
+The existing good-direction interface is preserved as a consequence of the
+new result that allows an independently selected nonzero coordinate.
+UniversalPlaneFamily and UniversalPlaneMinor identify the positioned family
+with an actual specialization of the universal affine-plane polynomial. The
+universal minor is nonzero, with no supplied family or determinant hypothesis.
+UniversalPlaneDegree proves every restriction coefficient has total parameter
+degree <=d, by exchanging the two variable families. ClosedFormParameterDegree
+proves differentiation preserves that bound and every r-row minor has parameter
+degree <=r*d. UniversalPlaneWitness descends the nonzero minor from the algebraic
+closure to the original coefficient field, with degree <=(2*d^2-1)*d.
+UniversalPlaneLeading identifies the top coefficient with the highest
+homogeneous form evaluated on the first direction, and proves its nonvanishing.
+UniversalPlaneBadWitness multiplies it by the minor, obtaining a nonzero
+polynomial of degree <=2*d^3. Over any target field of characteristic >d,
+nonvanishing implies full outer/total degree and irreducibility.
+FiniteFieldPolynomialZeros supplies the finite-field polynomial zero count
+for arbitrary finite coordinate types. FiniteFieldBadPlanes proves the actual
+number of bad parameter triples in m coordinates is <=2*d^3*q^(3*m-1), for a
+geometrically irreducible degree-d equation in characteristic >2*d^2. Bad means
+lost total degree or geometric reducibility; no witness is assumed. Degenerate
+parameterizations and zero restrictions are included in this coarse bound.
+UniversalPlaneEvaluation proves the actual restriction evaluation formula and
+an equivalence between parameter triples and their three defining points.
+FiniteFieldZeroPlanes injects zero restrictions into triples of hypersurface
+points, including coincident points and degenerate parameterizations. The
+resulting bound is d^3*q^(3*m-3), with no irreducibility or characteristic
+hypothesis besides the base being a finite field and the equation nonzero.
+PlaneIncidence constructs an explicit bijection between section incidences and
+(hypersurface point, two directions, two plane coordinates). Consequently
+sum_v #section(v) = #hypersurface * q^(2*m+2), exactly, including all parameters.
+PlaneSectionBounds proves the actual section counts: <=p^2 always, <=d*p
+for nonzero sections, and <=p+161*d^2*sqrt(p) for geometrically good sections.
+PlaneSectionSum combines these pointwise estimates with the exact incidence
+identity. HypersurfaceCountError absorbs the bad and zero errors above
+p>27*d^4, retaining leading coefficient one. SharpHypersurfaceCount proves
+  #affine zeros <= p^(n+2) + 164*d^2*p^(n+1)*sqrt(p)
+for every geometrically irreducible equation in n+3 coordinates over F_p.
+The input is actual geometric irreducibility, with no supplied good plane,
+witness, incidence relation, degree bound or finite-field counting assumption.
+Coordinate renaming transfers the Option-indexed construction to Fin(n+3).
+SharpProjectiveHypersurfaceCount applies the exact cone identity to obtain
+  #projective zeros <= p^(n+1) + 330*d^2*p^n*sqrt(p).
+Adding the already proved singular correction yields CCDN Lemma 2.7 with
+  C(n) = 330 + (n+3)*(n+4)^n.
+Degree one is included using the actual multiplicity bounds. For homogeneous
+integer f of positive degree d with geometrically irreducible reduction and
+p>27*d^4, projective_hypersurface_totalMultiplicity_bound proves this bound
+for the actual projective residue multiplicity, not an abstract count.
+SharpHypersurfaceDeterminant proves Lemma 2.8's normalized error <=C(n)*d^2/sqrt(p)
+and Corollary 2.9's actual maximal-minor divisor with denominator
+p+C(n)*d^2*sqrt(p), for primitive integer zeros and homogeneous evaluation
+columns of common degree. There is no remaining finite-field-count premise.
+
+The actual higher-dimensional bad-prime witness is now constructed.
+HypersurfacePositioningCharZero proves a nonzero partial derivative in
+characteristic zero, an actual smooth point and full-degree monic positioning.
+GenericPlaneMinorCharZero applies the already proved geometric irreducibility
+of the smooth generic plane and the characteristic-zero closed-form rank
+bound, then descends a nonzero slope minor. UniversalPlaneWitnessCharZero
+specializes the universal family and descends to a nonzero integer parameter
+polynomial W of degree <=2*d^3.
+FullDegreeSectionIrreducibility proves that an irreducible section retaining
+the full total degree forces ambient irreducibility. Degree additivity ensures
+no positive-degree factor can become a unit without loss of degree.
+UniversalPlaneBadReduction proves that W becomes the ZERO polynomial at every
+ambient reduction that loses degree or is geometrically reducible, over any
+infinite field of characteristic p>d. A nonzero integer coefficient of W is
+therefore divisible by every such bad prime. The coefficient is constructed;
+it is not a hypothesis or an abstract Noether-form assumption.
+HypersurfaceBadPrimes constructs a positive integer D and the exact finite
+set of bad primes above d, with every member dividing D. In particular the
+paper's set above 27*d^4 is finite, including zero and degree-dropping reductions.
+The quantitative height and bad-prime factor are now PROVED. Rather than
+selecting a coefficient, IntegerPolynomialAvoidance and IntegerPlaneWitness
+select an actual nonzero evaluation W(v) with every parameter in [0,2*d^3].
+Every bad prime above d divides this integer because the entire W vanishes
+at bad reduction. PolynomialBoxHeight bounds the support by (d+1)^m and
+bounds evaluations on a box from the original coefficients. IntegerPlaneHeight
+uses grid interpolation to bound every coefficient of the actual section.
+IntegerPlaneWitnessHeight writes W(v) as a leading coefficient times an
+integer closed-form minor. IntegerPlaneLogHeight proves that the section's
+logarithmic height is at most log(H)+m*d+11*d^2. Together these give a positive
+integer D with all bad primes above d dividing D and
+  log(D) <= 27*d^4 * C(m)*(1+log(H)/d^2), C(m)=28*(m+12).
+HypersurfaceBadPrimeHeight therefore proves both the charge bound and
+  exp(sum_bad log(p)/p) <= 2*exp(2*mertensError+1)*C(m)*max(log(H)/d^2,1)
+for every finite family of bad primes above 27*d^4, and constructs the exact
+finite family. Here m is the number of variables; H>=1 bounds every original
+coefficient. Degree loss is included, so this also bounds the paper's subset
+of geometrically reducible reductions. No primitivity or homogeneity is
+needed. This proves the quantitative conclusion of Corollary 3.2.3.
+The exact universal Noether-form statement and constants of Theorem 3.2.2
+remain OPEN; the constructed witness supplies its required consequence
+without assuming that external theorem.
+
+PaperPrimeEstimates proves the paper's explicit sum(log p)<=2x and the
+convergent infinite prime tail with bound 2*primeBlockMass/sqrt(L), L>0.
+
+Higher-dimensional simultaneous-prime bounds are now PROVED for the actual
+maximal-minor gcd of common-degree homogeneous evaluation matrices.
+HigherDimensionalPrimeSum generalizes the prime aggregation to arbitrary
+nonnegative main/error coefficients, retaining the sharp local rank power.
+HypersurfacePrimeDeterminant uses every proved local hypersurface divisor,
+the weighted prime tail and the 27*d^4 cutoff. HypersurfaceDeterminantRank
+chooses x=s^(1/r) for hypersurface dimension r=n+1 and obtains exactly
+  log(D) >= (r!)^(1/r)/(r+1) * s^(1+1/r) *
+    (log(s)-r*(4*log(d)+sum_bad log(p)/p)-E(r)),
+with explicit dimension-only E(r).
+HypersurfaceBadPrimeCoordinates proves coordinate invariance, constructs the
+exact bad-prime set in Fin coordinates, and shows that for nonzero homogeneous
+f the predicate agrees with failure of geometric irreducibility. The degree-
+dropping clause adds no extra primes in this homogeneous case.
+HypersurfaceHeightDeterminant constructs the exact bad-prime set and proves
+the same determinant lower bound without any supplied good-reduction or
+finite-field-count hypothesis. Its coefficient-height version replaces the
+charge by log(1+log(H)/d^2) plus a dimension constant.
+HypersurfaceHeightComparison combines this with actual independent-row
+selection, Bombieri--Vaaler and the archimedean Gram estimate. In the absence
+of an auxiliary nonmultiple of degree M, it proves the exact Hilbert rank
+s+choose(n+2+M-d,M-d)=choose(n+2+M,M) and the numerical determinant comparison.
+Choosing M with the paper's uniform bound is now PROVED by the auxiliary modules.
+Scope: the common-degree maximal-minor form of Proposition 3.2.6 is proved.
+The paper's formulation for arbitrary families of homogeneous determinants
+with potentially differing column degrees is not yet asserted.
+
+The uniform Hilbert-profile estimates are now PROVED with exact leading
+constants. HypersurfaceRankProfile expresses the rank as d adjacent binomial
+layers and proves, for M>=d,
+  d*(M-d+1)^r/r! <= s <= d*(M+r)^r/r!.
+HypersurfaceRankRoots takes actual real roots, giving the sharp shifted
+bounds and
+  |(r!)^(1/r)*s^(1/r)/M - d^(1/r)| <= (r+1)*d^2/M.
+HypersurfaceKernelRatio uses exact binomial identities to prove the stronger
+uniform estimate
+  |K/(M*s) - 1/(d*(r+1))| <= 1/M,
+where K=choose(r+1+M-d,M-d) is the actual homogeneous kernel dimension.
+HypersurfaceRankArchimedean proves M<=s, bounds the logarithm of the total
+coefficient count, and absorbs log(s!)/2 + s*log(R)/2 into
+  ((r+2)*r+(r+1))/2 * s^(1+1/r).
+HypersurfaceRankLogarithm proves, for M>=2d,
+  |log(s)-log(d)-r*log(M)| <= r*log(2)+log(r!)+r*log(r+1).
+HypersurfaceNormalizedComparison combines these results with the actual
+no-auxiliary determinant comparison. It divides by M*s and absorbs the
+archimedean terms into an explicit dimension constant, retaining exactly
+(r!)^(1/r)*s^(1/r)/((r+1)*M) and K/(M*s). Thus the height-controlled form
+of the paper's intermediate normalized inequality is proved without an
+assumed rank asymptotic, local count or bad-prime bound. Its actual geometric
+endpoint is hypersurface_no_auxiliary_normalized_comparison.
+HypersurfaceBadPrimeComparison also constructs the exact bad-prime set and
+retains its charge through the same normalized comparison, without any
+coefficient-height hypothesis. Thus the log(b(f)) needed by the coefficient-
+sensitive Theorem 3.1.1 is preserved, rather than replaced by a larger bound.
+The choice of M in both coefficient-height ranges is PROVED, including
+bounded coordinate positioning and the nonabsolute auxiliary case.
+
+Next: affine auxiliary polynomials and coefficient-sensitive affine bounds,
+line contributions, surface bounds, bounded slicing, and projection to
+Theorems 4 and 1. The plane and curve cases already proved do not constitute
+the higher-dimensional global counting results.
+
+The paper's proof is comparatively self-contained for d >= 16.
+Its use of Browning--Heath-Brown--Salberger for fixed small degrees and
+Salberger's degree-five result must not become unproved Lean inputs.
+An alternative complete proof is acceptable only if it preserves every
+degree, dimension, height and uniformity quantifier.
+
+Lower bounds need actual irreducible equations through the specified
+integer grids; irreducibility of the Newton-polytope construction cannot
+be replaced with an assumption. The class-group application needs the
+Bhargava--Shankar--Taniguchi--Thorne--Tsimerman--Zhao reduction, or a proved
+replacement, together with the applicable refined curve bound.
+
+Named-result coverage ledger
+----------------------------
+
+The following are coverage obligations, not assertions that existing
+modules already prove their full statements. Existing plane analogues
+must be checked for ambient-dimensional restrictions before reuse.
+For each item, record a proved exact statement or the proved replacement
+used to obtain its full mathematical consequences.
+
+Section 2:
+2.1 local hypersurface Hilbert functions and multiplicities;
+2.2 weighted-sequence estimate;
+2.3 local multiplicity sequence bound;
+2.4 local determinant divisibility;
+2.5 projective hypersurface determinant divisibility: proved for common-degree
+    evaluation matrices by ProjectiveHypersurfaceLocal;
+2.6 residue aggregation: actual partition, total multiplicity and sharp maximal-
+    minor divisor proved by ProjectiveHypersurfaceResidueDeterminant;
+2.7 finite-field hypersurface count: PROVED by SharpHypersurfaceCount and
+    SharpProjectiveHypersurfaceCount, including the actual singular
+    multiplicity correction, all positive degrees and dimensions;
+2.8 normalized finite-field count error: PROVED by
+    SharpHypersurfaceDeterminant.projective_hypersurface_normalized_count_error;
+2.9 single-prime p-adic determinant bound: PROVED for common-degree homogeneous
+    evaluation matrices by projective_hypersurface_minorGcd_sharp. The matching
+    simultaneous-prime bound and global auxiliary polynomials are also proved.
+    The varying-column-degree formulation remains an exact-statement gap.
+
+Section 3:
+3.1.1 homogeneous auxiliary polynomial with uniform degree bound: PROVED by
+    hypersurface_projective_auxiliary for every positive degree and dimension,
+    including actual rational projective points, the original maximum absolute
+    coefficient height and defined bad-prime factor, both height ranges,
+    bounded coordinate positioning, integer degree selection and the
+    nonabsolute case. Constants depend only on dimension;
+3.1.2 complete coefficient-sensitive inequality chain: PROVED by
+    projective_plane_coefficient_count_chain. It bounds both the actual count
+    and the coefficient-sensitive expression by the stated uniform d^4 B^(2/d)
+    expression, using an explicit absolute constant;
+3.2.1 bad-prime factor: actual predicate, finiteness of the exact set and
+    quantitative factor control are PROVED by HypersurfaceBadPrimes and
+    HypersurfaceBadPrimeHeight. For homogeneous equations this matches the
+    printed definition. For affine equations the predicate also includes
+    degree-dropping reductions; agreement with the literal affine definition
+    is NOT claimed. See docs/affine-factor-audit.txt;
+3.2.2 effective Noether forms: the required nonzero integer witness detecting
+    all bad primes above d, with coefficient-controlled height, is PROVED.
+    The exact universal Noether-form theorem and its stated constants remain OPEN;
+3.2.3 bad-prime factor height bound: PROVED by hypersurface_bad_prime_factor_max,
+    for arbitrary finite families of actual bad primes, with an explicit
+    dimension-dependent constant. The exact finite bad-prime set is constructed;
+3.2.4 weighted prime sum: PROVED, including the paper's constant 2, by
+    PaperPrimeEstimates.prime_log_sum_le_two_mul using Mathlib's stronger
+    Chebyshev theta bound with coefficient log(4);
+3.2.5 weighted prime tail: PROVED by prime_sqrt_tail_summable_and_bound,
+    including convergence of the unrestricted infinite series and the bound
+    2*primeBlockMass/sqrt(L) for every positive real cutoff L;
+3.2.6 simultaneous-prime determinant bound: PROVED in the common-degree
+    maximal-minor form by exists_hypersurface_determinant_log_lower, with
+    the exact rank exponent and leading constant, actual bad-prime set and
+    all local counts discharged. The arbitrary-family/varying-column-degree
+    formulation remains OPEN. The height-controlled version and exact-rank
+    no-auxiliary comparison are also PROVED;
+3.3.1 non-absolutely-irreducible auxiliary polynomial: PROVED by
+    nonabsolute_projective_auxiliary, with exact degree d and vanishing at
+    all rational projective zeros independently of height. Homogeneous
+    coefficient descent works over any field extension;
+3.3.2 small-coefficient auxiliary polynomial: PROVED with exact bad-prime
+    factor and leading-coefficient height. The selected degree is bounded by
+    2d + d^(1-1/r)*log(B) + exp(C(r))*d^(4-1/r)*b(f)*
+    B^((r+1)/(r*d^(1/r)))/|lead(f)|^(1/(r*d*d^(1/r))) + 2.
+    Leading-coefficient positioning gives the coefficient-height form;
+3.3.3 large-coefficient auxiliary polynomial: PROVED under the explicit
+    position condition log(H)<=log|lead(f)|+T*d*d^(1/r), with actual
+    auxiliary degree O_{r,T}(d^(4-1/r)), independent of B and H;
+3.3.4 Bombieri--Vaaler (existing proved vendored dependency);
+3.3.5 elementary logarithmic inequality: PROVED by log_log_sub_div_le,
+    with explicit additive constant -1 for every c>0 and x>1;
+3.4.1 coefficient bounds from grid values: a quantitative replacement is
+    PROVED in every dimension, with factor (d+1)^(n*(d+1)), sufficient for
+    the complete auxiliary theorem. The stated exact 3^d complex estimate
+    remains OPEN;
+3.4.2 bounded coordinate change positioning the leading coefficient: PROVED
+    for integer equations in arbitrary dimension. The actual shear preserves
+    the bad-prime set and has log-height loss O_{n,r}(d*d^(1/r)); its degree
+    bound consequence is fully assembled in the absolute auxiliary theorem.
+    The exact complex 3^((n+1)d) intermediate constant remains OPEN.
+
+Section 4:
+4.1.1 trivial pure-dimensional affine count;
+4.1.2 small integer point outside a proper variety;
+4.1.3 non-Q-defined geometric components;
+4.1.4 non-geometrically-integral varieties;
+4.1.5 stated extension to geometric varieties;
+4.2.1 affine auxiliary polynomial: the all-case theorem with the defined
+    degree-loss-inclusive affine bad-prime factor is PROVED by
+    affine_hypersurface_auxiliary. It has the complete minimum expression,
+    original leading homogeneous coefficient height and a dimension-only
+    constant. Prime choice, all coefficient/box cases and translations are
+    discharged. The exact literal printed affine factor remains OPEN:
+    its claimed equality under homogenization fails for q*x^2+y with q>432.
+    This is not a counterexample to the auxiliary conclusion itself;
+4.2.2 coefficient height versus bounded integer zeros: the quantitative
+    dichotomy with H<=N^N*B^(d*N), N=choose(n+d,d), is PROVED, including an
+    actual degree-d nonmultiple. It suffices for the prime-selection cutoff.
+    The printed dimension-only multiplier remains OPEN;
+4.2.3 coefficient-height transfer of the bad-prime contribution: PROVED by
+    hypersurface_badPrime_height_transfer, with explicit dimension constant,
+    actual maximum coefficient height, actual defined factor and every real
+    lower height Y>=1. No monotonicity or counting theorem is assumed;
+4.2.4 coefficient-sensitive affine plane count;
+4.2.5 coprime Newton-edge log-free affine count;
+4.3.1 bounded affine projection;
+4.3.2 bounded projective projection;
+4.3.3 line contributions on affine surfaces: OPEN. Corrected target requires
+    ABSOLUTE irreducibility of the leading homogeneous part. Actual rational
+    line arithmetic is PROVED: a line with at least two bounded integer
+    points has a primitive integer direction v of height <=2B and at most
+    1+2B/height(v) bounded integer points. Degree-one prime components with
+    a rational point equal actual rational affine lines. Characteristic-zero
+    integer planes with a full-degree geometrically irreducible section and
+    additional parameter avoidance are constructed. The parallel-line
+    multiplicity bound and the sum over projective directions remain OPEN;
+4.3.4 affine surface dimension growth: OPEN. Corrected degree factor is d^18,
+    not the printed d^14. The uniform auxiliary estimate (4-3-1) is PROVED,
+    with degree C*d^(7/2)*B^(1/sqrt(d)) and rational nondivisibility, including
+    removal of integer content. Actual proper surface sections have a finite
+    rational prime-curve cover with positive Hilbert degrees and additive
+    budget sum(degrees)<=degree(f)*degree(g). The combined top-form auxiliary
+    and component theorem covers every original bounded integer zero and has
+    total degree <=C*d^(9/2)*B^(1/sqrt(d)). The nonlinear component union
+    contributes <=C*d^18*B for d>=16, by the proved affine curve theorem and
+    summation of both curve-degree ranges. The combined endpoint constructs
+    the components and bounds original surface points outside their
+    degree-one union by A*d^18*B, with A independent of the equation and
+    radius. The line contribution and full surface-count assembly,
+    including degrees 5 through 15, remain OPEN;
+4.3.5 surface covering input (Salberger);
+4.3.6 stated polynomial-dependence consequence;
+4.3.7 effective good hyperplanes: OPEN. Corrected degree is
+    (n+1)*d*(d^2-1), including the missing factor d;
+4.3.8 stated slicing/dimension-growth consequences: OPEN. Apply the corrected
+    4.3.3, 4.3.4 and 4.3.7. Author addenda dated 2026-04-20:
+    https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf .
+
+Section 5:
+5.1 degree of bad projection-center locus;
+5.2 polynomial detecting bad centers on a Grassmannian chart;
+5.3 bounded integer projection matrix;
+5.4 small integer kernel vectors.
+
+Section 6:
+6.1 absolutely irreducible polynomial containing a large integer grid;
+Proposition 5 and all subsequent degree-dependence obstructions.
+
+Completion evidence
+-------------------
+
+Every main statement needs a reachable Lean declaration over actual
+mathematical objects, with no missing counting/geometric hypotheses.
+All proof files must be imported and built. Audit the transitive axioms;
+only propext, Classical.choice and Quot.sound are allowed. Match theorem
+statements to the paper, including constants chosen before coefficients,
+real radii, all requested degrees, and all ambient dimensions.
+
+The completed Pierce application uses a pinned copy of the affine theorem.
+Keep that snapshot unchanged while extending this standalone repository.
+
+Auxiliary degree selection milestone
+-----------------------------------
+AuxiliaryRatioEstimates and AuxiliaryLargeHeightRatios handle the normalized
+comparison in the two height ranges without assuming a sign for its logarithmic
+bracket. HypersurfaceSmallHeightDegree and HypersurfaceLargeHeightDegree turn
+these inequalities into explicit logarithmic and real degree bounds.
+HypersurfaceSmallHeightAuxiliary and HypersurfaceLargeHeightAuxiliary select
+integer degrees and construct actual nonzero homogeneous nonmultiples vanishing
+on every member of the given bounded primitive integer zero family.
+HypersurfacePositionedAuxiliary combines the two regimes. With r=n+1 and
+log(H)<=log|lead(f)|+T*d*d^(1/r), its bound is
+ C(n,T)*(d^(4-1/r)*b(f)*B^((r+1)/(r*d^(1/r)))/H^(1/(r*d*d^(1/r)))
+         +d^(1-1/r)*log(B)+d^(4-1/r)).
+The bad-prime set is the actual finite set above 27d^4. The theorem applies
+in Fin(n+3) variables for every n>=0 and d>0, over any characteristic-zero
+algebraically closed field in which the equation is irreducible. The later
+absolute auxiliary theorem discharges the positioning condition.
+
+Absolutely irreducible auxiliary theorem milestone
+-------------------------------------------------
+MultivariateGridHeight proves coefficient control from the full integer grid
+in arbitrary dimension, with factor (d+1)^(n*(d+1)). A single grid point
+controls all coefficients. HypersurfaceLeadingCoefficient uses it to construct
+a bounded integer shear with a nonzero large lexicographic leading coefficient.
+HypersurfacePositionHeight proves full transformed coefficient bounds and a
+logarithmic loss at most (5n+5)*(r+1)*d*d^(1/r). The selected height bounds both
+the original and transformed coefficients. HypersurfaceShearInvariance proves
+that the actual geometric bad-prime set is unchanged by this shear.
+IntegerCoefficientHeight is the actual maximum absolute integer coefficient.
+HypersurfaceAuxiliaryScaling absorbs the box dilation by d+1 into a dimension
+constant, with no extra degree power. HypersurfaceAbsoluteAuxiliary pulls the
+constructed polynomial back and proves the coefficient-sensitive degree bound
+for every finite family of primitive integer zeros. HypersurfaceProjectiveAuxiliary
+then enumerates the actual bounded projective zero set, obtaining one polynomial
+vanishing on all rational projective zeros of height at most B.
+This completes the absolutely irreducible case of Theorem 3.1.1 in every
+positive degree and hypersurface dimension. The nonabsolute case is completed
+by the subsequent descent argument below.
+The weaker interpolation factor proves the necessary mathematical consequence
+of Lemmas 3.4.1-2 but does not establish their exact stated complex constants.
+
+Full auxiliary theorem and nonabsolute descent
+--------------------------------------------
+HomogeneousLinearDescent preserves homogeneous degree under coefficient
+linear descent and replaces any factorization of a homogeneous equation by
+its top homogeneous factors. HypersurfaceNonabsoluteAuxiliary descends each
+of two proper factors, multiplies their descents and clears denominators.
+The resulting degree-d integer equation vanishes at every rational zero;
+irreducibility over the base field and strict factor degrees prove it is a
+nonmultiple. IntegerRationalIrreducibility proves the needed Gauss argument
+from primitive denominator-cleared divisors.
+HypersurfaceBadPrimeFactor defines the paper's factor: zero for nonabsolute
+equations and the exact finite exponential product otherwise. Its coefficient-
+height/max bounds are proved for the defined factor itself.
+HypersurfaceAuxiliaryTheorem combines the absolute and nonabsolute cases,
+proving the complete Theorem 3.1.1 with an explicit dimension constant.
+PaperLogarithmEstimate proves Lemma 3.3.5 with the sharp additive constant -1.
+ProjectivePlaneCoefficientCount proves the coefficient-sensitive first bound
+in Corollary 3.1.2, including all positive degrees and the actual projective
+point count, via the full auxiliary theorem and projective Bezout.
+
+Affine height transfer and prime-scaled auxiliary branch
+-------------------------------------------------------
+WeightedHeightRatio proves the needed logarithmic ratio comparison with a
+uniform dimension loss. HypersurfaceHeightTransfer combines it with the
+actual bad-prime factor height estimate, proving Lemma 4.2.3 for every
+positive degree and projective hypersurface dimension.
+ScaledHypersurfaceModel proves compatibility with arbitrary coefficient maps
+and irreducibility over fields for every nonzero scaling. Primitive integer
+prime scaling is irreducible when the prime avoids the constant coefficient.
+ScaledHypersurfaceHeight proves the full height gain p^d times the maximum
+absolute coefficient of the original leading homogeneous component.
+PrimeScaledAffineAuxiliary constructs an integer affine nonmultiple vanishing
+on every original bounded integer zero. Projective representatives need not
+be primitive; gcd removal controls their actual projective height. Proper
+slicing supplies nondivisibility and the degree bound.
+AffineScalingExponent proves that B/A<=p converts the projective exponent
+(r+1)/(r*d^(1/r)) to the affine exponent 1/d^(1/r), with loss at most A.
+PrimeScaledAffineHeight combines these results. With r=n+1, L the maximum
+absolute coefficient of the leading homogeneous part, and p in [B/A,B],
+its auxiliary degree is at most
+ C(n)*(C_height(n)*A*d^(2-1/r)*(logL+d*logB+d^2)*B^(1/d^(1/r))
+       /L^(1/(r*d*d^(1/r))) + d^(1-1/r)*logB + d^(4-1/r)).
+For A=scalingPrimeRatio, B>=A and 0!=f(0) with log|f(0)|<B/A, the existing
+proved Mertens estimate constructs p. This discharges prime choice in that
+branch, but does not establish the complete minimum expression or the other
+cases of Proposition 4.2.1.
+
+Top-form auxiliary and actual surface-section components
+-------------------------------------------------------
+TopFormIrreducibility proves that an irreducible leading homogeneous component
+forces irreducibility of the whole polynomial. It also proves preservation
+of full degree when the reduced leading form remains irreducible.
+TopFormBadPrimes therefore bounds the original equation's defined bad-prime
+factor by that of its leading form. TopFormAuxiliaryEstimate combines the
+height estimate with the fractional coefficient denominator and absorbs the
+lower auxiliary terms. TopFormAuxiliary proves (4-3-1) in every hypersurface
+dimension r>=1, with degree bound C(r)*d^(4-1/r)*B^(1/d^(1/r)).
+The theorem top_form_auxiliary_rational removes integer content and proves
+nondivisibility after mapping to Q, as required for a proper geometric
+intersection. This coefficient-uniform consequence does not have an affine
+bad-prime parameter; it does not close the literal-factor gap in 4.2.1.
+
+StandardMonomials proves existence and uniqueness of standard representatives
+for quotient classes using degree-compatible division. Its bounded exponent
+sets exactly count the filtered coordinate dimensions. MonomialRays and
+FilteredHilbertLinearity show that a linear dimension bound forces eventual
+constant shell sizes and an eventual affine Hilbert function. FilteredLinearGrowth
+allows an arbitrary initial cutoff and applies the result to actual proper
+intersections of two equations in three variables.
+
+FilteredPrimeDecomposition constructs the finite minimal-prime set and exact
+rational zero-set cover. Separators give linearly independent lifts from
+distinct prime coordinate rings, and FilteredComponentRank and
+FilteredComponentDegreeBudget prove additivity of the leading-degree budget.
+CompleteIntersectionHeight establishes height two for the minimal primes of
+a proper pair. PrimeComponentTranscendence uses a rational point to obtain
+a transcendental coordinate and positive Hilbert slope over Q itself.
+CompleteIntersectionDegreeBudget constructs the finite set of rational prime
+curves, discards components without rational points, proves equality of the
+union with the actual rational common-zero set, and proves
+sum(component degrees)<=degree(f)*degree(g). Neither the cover nor the degree
+budget is supplied as an extra assumption.
+TopFormSurfaceComponents combines this with the rationally proper surface
+auxiliary. Its constructed component cover contains every original bounded
+integer zero and has total degree <=C*d^(9/2)*B^(1/sqrt(d)).
+
+CriticalFilteredGrowth proves the multiplier relation forced by a one-dimensional
+increase of filtered spaces. DegreeOneAffineLine uses a rational point to
+descend its algebraic constants and proves equality, in both directions,
+between a degree-one prime component's rational zero set and an actual
+rational affine line. Its defining ideal vanishes identically on that line.
+IntegralAffineLine proves primitive rational-parameter integrality from
+Bezout's identity, normalizes the difference of two integer points, and
+counts the resulting arithmetic progression in the box. The actual
+projective direction height equals the maximum absolute coordinate of its
+primitive representative.
+
+ClosedFormReducibilityCharZero proves the needed rank-drop converse in
+characteristic zero. UniversalPlaneGoodSpecializationCharZero constructs an
+integer plane with full-degree geometrically irreducible section, together
+with avoidance of any supplied nonzero polynomial condition on the plane
+parameters. It bounds the parameters by 2*d^3+degree(P). Constructing the
+specific transversality and derivative-avoidance condition needed for the
+parallel-line bound remains separate work.
+
+These developments supply the auxiliary and component structure for surface
+dimension growth. Corrected Propositions 4.3.3 and 4.3.4 remain OPEN, as do
+the external low-degree surface inputs, higher-dimensional slicing and
+projection, and the other exact-statement obligations in the ledger.
+
+SurfaceAuxiliaryExponent sums the nonlinear curve-bound expression in both
+degree ranges, using the actual total-degree budget. The fourth-power term
+uses the corrected total degree d*degree(g), giving d^18. SurfaceNonlinearCount
+applies the unconditional affine curve theorem to each prime component and
+bounds the actual union by an explicit constant times d^18*B for d>=16.
+Its constant is chosen before the component family, coefficients and radius.
+This proves the nonlinear-component contribution; no line-count assumption
+has been used to claim the remaining full surface bound.
+TopFormSurfaceNonlinear combines the construction and counting endpoints.
+Its theorem top_form_surface_nonlinear_count chooses A>0 before the surface
+equation and B, constructs the actual prime-curve family and its degrees,
+and proves both the nonlinear-union count and the original surface count
+outside the degree-one component union are <=A*d^18*B for d>=16.
+Neither the curve family nor a point-count bound is an input assumption.

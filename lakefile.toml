@@ -1,4 +1,4 @@
-name = "affine_curve_counting"
+name = "ccdn_dimension_growth"
 version = "0.1.0"
 defaultTargets = ["AffineCurveCounting", "Axioms"]
 

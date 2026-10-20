@@ -10,7 +10,8 @@ import all ArithmeticHeights.BombieriVaaler
 Cauchy–Binet turns a weighted factorization into a determinant valuation bound. The
 univariate specialization gives the quadratic exponent `s*(s-1)/2` for polynomial
 evaluations in one residue class. The passage from a curve's local ring to such a
-factorization is a separate, unimplemented part of CCDN §2.
+factorization is proved in `FilteredDeterminant` in arbitrary ambient dimension.
+`HypersurfaceResidue` supplies the sharp singular hypersurface bound.
 -/
 
 @[expose] public section

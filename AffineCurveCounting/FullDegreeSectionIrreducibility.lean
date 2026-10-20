@@ -1,0 +1,65 @@
+module
+
+public import AffineCurveCounting.PlaneSectionBounds
+
+/-! An irreducible section retaining the full total degree forces the
+original equation to be irreducible. Degree additivity prevents either
+nonconstant ambient factor from disappearing under restriction. -/
+
+@[expose] public section
+namespace AffineCurveCounting
+noncomputable section
+open MvPolynomial
+
+lemma polynomial_isUnit_of_nonzero_degree_zero {K σ : Type*} [Field K]
+    (f : MvPolynomial σ K) (hf : f ≠ 0) (hd : f.totalDegree = 0) : IsUnit f := by
+  have he := totalDegree_eq_zero_iff_eq_C.mp hd
+  have hc : f.coeff 0 ≠ 0 := by intro h; apply hf; rw [he, h, map_zero]
+  rw [he]
+  exact (isUnit_iff_ne_zero.mpr hc).map C
+
+/-- A degree-nonincreasing polynomial ring homomorphism reflects irreducibility
+at every equation whose full degree is retained. -/
+theorem irreducible_of_full_degree_map {K σ τ : Type*} [Field K]
+    (ψ : MvPolynomial σ K →+* MvPolynomial τ K)
+    (hψ : ∀ g, (ψ g).totalDegree ≤ g.totalDegree)
+    (f : MvPolynomial σ K) (hir : Irreducible (ψ f))
+    (hdeg : (ψ f).totalDegree = f.totalDegree) : Irreducible f := by
+  refine ⟨fun hu => hir.not_isUnit (hu.map ψ), ?_⟩
+  intro a b he
+  have he' : ψ f = ψ a * ψ b := by rw [he, map_mul]
+  have ha : ψ a ≠ 0 := left_ne_zero_of_mul (he' ▸ hir.ne_zero)
+  have hb : ψ b ≠ 0 := right_ne_zero_of_mul (he' ▸ hir.ne_zero)
+  have ha0 : a ≠ 0 := by intro hz; exact ha (by rw [hz, map_zero])
+  have hb0 : b ≠ 0 := by intro hz; exact hb (by rw [hz, map_zero])
+  have ht := totalDegree_mul_of_isDomain ha0 hb0
+  have ht' := totalDegree_mul_of_isDomain ha hb
+  rw [← he] at ht
+  rw [← he', hdeg] at ht'
+  have hda := hψ a
+  have hdb := hψ b
+  rcases hir.isUnit_or_isUnit he' with hu | hu
+  · left
+    have hz := (isUnit_iff_totalDegree_of_isReduced.mp hu).2
+    exact polynomial_isUnit_of_nonzero_degree_zero a ha0 (by omega)
+  · right
+    have hz := (isUnit_iff_totalDegree_of_isReduced.mp hu).2
+    exact polynomial_isUnit_of_nonzero_degree_zero b hb0 (by omega)
+
+def planeSectionPolynomialHom {K σ : Type*} [CommRing K] (v : PlaneParameters σ → K) :
+    MvPolynomial σ K →+* MvPolynomial (Fin 2) K :=
+  (bivariatePolynomialEquiv K).symm.toRingHom.comp
+    ((bivariateMap (eval v)).comp
+      ((bivariatePolynomialEquiv _).toRingHom.comp (universalPlaneMap K σ).toRingHom))
+
+/-- Full degree excludes factor loss even for degenerate plane parameters. -/
+theorem irreducible_of_full_degree_planeSection {K σ : Type*} [Field K]
+    (f : MvPolynomial σ K) (v : PlaneParameters σ → K)
+    (hir : Irreducible (universalPlaneSection f v))
+    (hdeg : bivariateTotalDegree (universalPlaneSection f v) = f.totalDegree) : Irreducible f := by
+  apply irreducible_of_full_degree_map (planeSectionPolynomialHom v)
+    (fun g => planeSectionPolynomial_totalDegree g v) f _ hdeg
+  exact (MulEquiv.irreducible_iff (f := (bivariatePolynomialEquiv K).symm)).mpr hir
+
+end
+end AffineCurveCounting

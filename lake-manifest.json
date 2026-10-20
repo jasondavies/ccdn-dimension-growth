@@ -121,7 +121,7 @@
       "configFile": "lakefile.toml"
     }
   ],
-  "name": "affine_curve_counting",
+  "name": "ccdn_dimension_growth",
   "lakeDir": ".lake",
   "fixedToolchain": false
 }

@@ -1,0 +1,74 @@
+module
+
+public import AffineCurveCounting.SharpProjectiveHypersurfaceCount
+public import AffineCurveCounting.HypersurfaceCountNormalization
+
+/-! CCDN Lemma 2.8 and Corollary 2.9 with the actual finite-field count
+proved, rather than supplied. All constants depend only on dimension. -/
+
+@[expose] public section
+namespace AffineCurveCounting
+noncomputable section
+open MvPolynomial
+
+/-- Explicit dimension-only constant for the projective multiplicity count. -/
+def hypersurfaceCountConstant (n : ℕ) : ℝ := 330 + ((n + 3) * (n + 4) ^ n : ℕ)
+
+lemma hypersurfaceCountConstant_nonneg (n : ℕ) : 0 ≤ hypersurfaceCountConstant n := by
+  unfold hypersurfaceCountConstant
+  positivity
+
+/-- CCDN Lemma 2.8: normalized multiplicity-root error O_n(d^2/sqrt(p)). -/
+theorem projective_hypersurface_normalized_count_error {n p d : ℕ} [Fact p.Prime]
+    (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
+    (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)
+    (hir : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
+      (map (Int.castRingHom (ZMod p)) f)))
+    (hsize : 27 * (d : ℝ) ^ 4 < p) :
+    (projectiveHypersurfaceTotalMultiplicity f hf hf0 : ℝ) ^ (1 / (n + 1 : ℝ)) / p - 1 ≤
+      hypersurfaceCountConstant n * (d : ℝ) ^ 2 / Real.sqrt p := by
+  have hp : (0 : ℝ) < p := by exact_mod_cast (Fact.out : p.Prime).pos
+  have hs : 0 < Real.sqrt (p : ℝ) := Real.sqrt_pos.mpr hp
+  let H := hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p
+  have hH : 0 ≤ H := mul_nonneg (mul_nonneg (hypersurfaceCountConstant_nonneg n) (sq_nonneg _)) hs.le
+  have hc : (projectiveHypersurfaceTotalMultiplicity f hf hf0 : ℝ) ≤
+      (p : ℝ) ^ (n + 1) + H * (p : ℝ) ^ n := by
+    simpa only [H, hypersurfaceCountConstant, mul_assoc, mul_left_comm, mul_comm] using
+      projective_hypersurface_totalMultiplicity_bound f hf hd hf0 hir hsize
+  have h := hypersurface_count_normalized_root_error (n + 1) (by omega) hp hH
+    (Nat.cast_nonneg (projectiveHypersurfaceTotalMultiplicity f hf hf0))
+    (by simpa only [Nat.add_sub_cancel] using hc)
+  have he : H / (p : ℝ) = hypersurfaceCountConstant n * (d : ℝ) ^ 2 / Real.sqrt p := by
+    dsimp only [H]
+    apply (div_eq_div_iff (ne_of_gt hp) (ne_of_gt hs)).mpr
+    rw [mul_assoc, mul_assoc, ← pow_two, Real.sq_sqrt hp.le]
+    ring
+  rw [he] at h
+  simpa only [Nat.cast_add, Nat.cast_one] using h
+
+/-- CCDN Corollary 2.9: the sharp single-prime divisor of every maximal minor
+of a common-degree homogeneous evaluation matrix. The residue count, local
+multiplicities and projective reduction are all constructed from f and z. -/
+theorem projective_hypersurface_minorGcd_sharp {n s N p d M : ℕ} [Fact p.Prime]
+    (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
+    (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)
+    (hir : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
+      (map (Int.castRingHom (ZMod p)) f)))
+    (hsize : 27 * (d : ℝ) ^ 4 < p)
+    (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
+    (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
+    (hz : ∀ i, MvPolynomial.eval (z i) f = 0) :
+    ∃ e : ℕ,
+      ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) /
+        (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) *
+        (n + 1 : ℝ) / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) -
+        (n + 2 : ℝ) * s ≤ e ∧
+      (p : ℤ) ^ e ∣ Int.Matrix.minorGcd
+        (Matrix.of fun i j => MvPolynomial.eval (z i) (F j)) := by
+  apply projective_hypersurface_minorGcd_of_count_bound f hf hf0 F hF z hprim hz
+  · exact mul_nonneg (mul_nonneg (hypersurfaceCountConstant_nonneg n) (sq_nonneg _)) (Real.sqrt_nonneg _)
+  · simpa only [hypersurfaceCountConstant, mul_assoc, mul_left_comm, mul_comm] using
+      projective_hypersurface_totalMultiplicity_bound f hf hd hf0 hir hsize
+
+end
+end AffineCurveCounting

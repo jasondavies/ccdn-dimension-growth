@@ -1,0 +1,181 @@
+module
+
+public import AffineCurveCounting.HypersurfaceSingularities
+public import AffineCurveCounting.ProjectiveHypersurfaceResidueDeterminant
+public import AffineCurveCounting.HomogeneousChartIrreducible
+
+/-! The singular multiplicity correction for projective hypersurfaces.
+Actual chart coordinates inject each selected residue class into an affine
+singular locus, whose codimension-two point bound is proved by interpolation. -/
+
+@[expose] public section
+namespace AffineCurveCounting
+noncomputable section
+open MvPolynomial
+
+lemma hypersurfaceResidueChart_normalized {n p : ℕ} [Fact p.Prime]
+    (r : ProjectiveResidueSpace (n + 2) p) :
+    (Fin.cons 1 (fun j => (hypersurfaceResidueChartLift r j : ZMod p))) ∘
+      Equiv.swap 0 (hypersurfaceResiduePivot r) =
+        (r.rep (hypersurfaceResiduePivot r))⁻¹ • r.rep := by
+  have h : Fin.cons 1 (fun j => (hypersurfaceResidueChartLift r j : ZMod p)) =
+      (r.rep (hypersurfaceResiduePivot r))⁻¹ • (r.rep ∘ Equiv.swap 0 (hypersurfaceResiduePivot r)) := by
+    funext j
+    refine Fin.cases ?_ (fun k => ?_) j
+    · simp [hypersurfaceResiduePivot_ne_zero]
+    · simp [cast_hypersurfaceResidueChartLift, div_eq_mul_inv, mul_comm]
+  rw [h]
+  funext j
+  simp
+
+theorem hypersurfaceResidueChart_injective_of_pivot_eq {n p : ℕ} [Fact p.Prime]
+    {r t : ProjectiveResidueSpace (n + 2) p}
+    (hk : hypersurfaceResiduePivot r = hypersurfaceResiduePivot t)
+    (ha : (fun j => (hypersurfaceResidueChartLift r j : ZMod p)) =
+      (fun j => (hypersurfaceResidueChartLift t j : ZMod p))) : r = t := by
+  have he : (r.rep (hypersurfaceResiduePivot r))⁻¹ • r.rep =
+      (t.rep (hypersurfaceResiduePivot t))⁻¹ • t.rep := by
+    rw [← hypersurfaceResidueChart_normalized, ← hypersurfaceResidueChart_normalized, hk, ha]
+  have hh := congrArg (fun v : Fin (n + 3) → ZMod p => r.rep (hypersurfaceResiduePivot r) • v) he
+  have hs : (r.rep (hypersurfaceResiduePivot r) / t.rep (hypersurfaceResiduePivot t)) • t.rep =
+      r.rep := by
+    simpa only [smul_smul, mul_inv_cancel₀ (hypersurfaceResiduePivot_ne_zero r), one_smul,
+      div_eq_mul_inv] using hh.symm
+  calc
+    r = Projectivization.mk (ZMod p) r.rep r.rep_nonzero := r.mk_rep.symm
+    _ = Projectivization.mk (ZMod p) t.rep t.rep_nonzero := by
+      rw [Projectivization.mk_eq_mk_iff']
+      exact ⟨_, hs⟩
+    _ = t := t.mk_rep
+
+theorem projectiveHypersurfaceChart_irreducible_degree {n p d : ℕ} [Fact p.Prime]
+    (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
+    (hir : Irreducible (map (Int.castRingHom (ZMod p)) f)) (k : Fin (n + 3)) :
+    Irreducible (map (Int.castRingHom (ZMod p)) (projectiveHypersurfaceChart k f)) ∧
+      (map (Int.castRingHom (ZMod p)) (projectiveHypersurfaceChart k f)).totalDegree = d := by
+  let q := rename (Equiv.swap 0 k) (map (Int.castRingHom (ZMod p)) f)
+  have hq : q.IsHomogeneous d := (hf.map _).rename_isHomogeneous
+  have hqi : Irreducible q :=
+    (MulEquiv.irreducible_iff (f := renameEquiv (ZMod p) (Equiv.swap 0 k))).mpr hir
+  have hX := variable_not_dvd_irreducible_homogeneous q hq hqi hd 0
+  have he : map (Int.castRingHom (ZMod p)) (projectiveHypersurfaceChart k f) = affineChart (n + 2) q := by
+    change map _ (affineChart (n + 2) (rename (Equiv.swap 0 k) f)) = _
+    rw [← affineChart_map, map_rename]
+  rw [he]
+  exact ⟨affineChart_irreducible_of_not_variable_dvd q hq hqi hX,
+    affineChart_degree_of_not_variable_dvd q hq hX⟩
+
+lemma projectiveHypersurfaceResidueMultiplicity_singular {n p d : ℕ} [Fact p.Prime]
+    (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
+    (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (r : ProjectiveHypersurfaceResidue f p)
+    (hμ : 2 ≤ projectiveHypersurfaceResidueMultiplicity f hf hf0 r) :
+    ∀ j, eval (fun i => (hypersurfaceResidueChartLift r.val i : ZMod p))
+      (pderiv j (map (Int.castRingHom (ZMod p))
+        (projectiveHypersurfaceChart (hypersurfaceResiduePivot r.val) f))) = 0 := by
+  have hp := (projectiveHypersurfaceResidueMultiplicity_spec f hf hf0 r).2.2.1
+  change map (Int.castRingHom (ZMod p)) (originShift (hypersurfaceResidueChartLift r.val)
+    (projectiveHypersurfaceChart (hypersurfaceResiduePivot r.val) f)) ∈ _ at hp
+  rw [originShift_map] at hp
+  exact singular_of_origin_order_ge_two _ _ hμ hp
+
+/-- Count singular classes in their n+3 possible charts. The pivots and
+multiplicities here are those of the actual reduced projective hypersurface. -/
+theorem projective_hypersurface_singular_residue_card_le {n p d : ℕ} [Fact p.Prime]
+    (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
+    (hir : Irreducible (map (Int.castRingHom (ZMod p)) f)) (hchar : d < p) :
+    (Finset.univ.filter fun r : ProjectiveHypersurfaceResidue f p =>
+      2 ≤ projectiveHypersurfaceResidueMultiplicity f hf hir.ne_zero r).card ≤ (n + 3) * ((n + 4) ^ n * d * (d - 1) * p ^ n) := by
+  classical
+  let S := Finset.univ.filter fun r : ProjectiveHypersurfaceResidue f p =>
+    2 ≤ projectiveHypersurfaceResidueMultiplicity f hf hir.ne_zero r
+  let T (k : Fin (n + 3)) := S.filter fun r => hypersurfaceResiduePivot r.val = k
+  have hk {k : Fin (n + 3)} (r : T k) : hypersurfaceResiduePivot r.val.val = k :=
+    (Finset.mem_filter.mp r.property).2
+  have hT (k : Fin (n + 3)) : (T k).card ≤ (n + 4) ^ n * d * (d - 1) * p ^ n := by
+    let q := map (Int.castRingHom (ZMod p)) (projectiveHypersurfaceChart k f)
+    have hq := projectiveHypersurfaceChart_irreducible_degree f hf hd hir k
+    let z : T k → Fin (n + 2) → ZMod p := fun r j => (hypersurfaceResidueChartLift r.val.val j : ZMod p)
+    have hz : Function.Injective z := by
+      intro r t he
+      apply Subtype.ext
+      apply Subtype.ext
+      exact hypersurfaceResidueChart_injective_of_pivot_eq ((hk r).trans (hk t).symm) he
+    have hzero (r : T k) : eval (z r) q = 0 := by
+      have h := hypersurfaceResidueChartLift_zero f hf r.val.val r.val.property
+      rw [hk r] at h
+      simpa only [q, z, eval_map] using h
+    have hsing (r : T k) (j : Fin (n + 2)) : eval (z r) (pderiv j q) = 0 := by
+      have h := projectiveHypersurfaceResidueMultiplicity_singular f hf hir.ne_zero r.val
+        (Finset.mem_filter.mp (Finset.mem_filter.mp r.property).1).2 j
+      simpa only [hk r] using h
+    have h := hypersurface_singular_points_card_le (p := p) q hq.1
+      (by rw [hq.2]; omega) (by rwa [hq.2]) z hz hzero hsing
+    simpa only [Fintype.card_coe, q, hq.2] using h
+  have hsum : ∑ k : Fin (n + 3), (T k).card = S.card := by
+    simp only [T, Finset.card_eq_sum_ones, Finset.sum_filter]
+    rw [Finset.sum_comm]
+    simp
+  have h := Finset.sum_le_sum (fun k (_ : k ∈ (Finset.univ : Finset (Fin (n + 3)))) => hT k)
+  rw [hsum] at h
+  simpa only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul, mul_assoc]
+    using h
+
+/-- Singular classes contribute only a lower-order correction to the actual
+projective point count; the leading term is not multiplied by the degree. -/
+theorem projectiveHypersurfaceTotalMultiplicity_le_card_add_correction {n p d : ℕ}
+    [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
+    (hd : 2 ≤ d) (hir : Irreducible (map (Int.castRingHom (ZMod p)) f)) (hchar : d < p) :
+    projectiveHypersurfaceTotalMultiplicity f hf hir.ne_zero ≤
+      Fintype.card (ProjectiveHypersurfaceResidue f p) +
+        (n + 3) * (n + 4) ^ n * d ^ 2 * (d - 1) * p ^ n := by
+  classical
+  let S := Finset.univ.filter fun r : ProjectiveHypersurfaceResidue f p =>
+    2 ≤ projectiveHypersurfaceResidueMultiplicity f hf hir.ne_zero r
+  have hS : S.card ≤ (n + 3) * ((n + 4) ^ n * d * (d - 1) * p ^ n) :=
+    projective_hypersurface_singular_residue_card_le f hf hd hir hchar
+  have hpoint (r : ProjectiveHypersurfaceResidue f p) :
+      projectiveHypersurfaceResidueMultiplicity f hf hir.ne_zero r ≤
+        1 + if r ∈ S then d else 0 := by
+    have h := (projectiveHypersurfaceResidueMultiplicity_spec f hf hir.ne_zero r).2.1
+    by_cases hr : r ∈ S
+    · rw [ite_eq_left hr]; omega
+    · rw [ite_eq_right hr]
+      have hh : ¬ 2 ≤ projectiveHypersurfaceResidueMultiplicity f hf hir.ne_zero r := by
+        simpa only [S, Finset.mem_filter, Finset.mem_univ, true_and] using hr
+      omega
+  have hsum : projectiveHypersurfaceTotalMultiplicity f hf hir.ne_zero ≤
+      Fintype.card (ProjectiveHypersurfaceResidue f p) + S.card * d := by
+    calc _ ≤ ∑ r : ProjectiveHypersurfaceResidue f p, (1 + if r ∈ S then d else 0) :=
+           Finset.sum_le_sum fun r _ => hpoint r
+         _ = _ := by simp [Finset.sum_add_distrib]
+  apply hsum.trans
+  apply Nat.add_le_add_left
+  convert Nat.mul_le_mul_right d hS using 1
+  ring
+
+/-- Above the square-degree cutoff the multiplicity correction has the
+O_n(d^2 p^(dimension-1/2)) scale required by CCDN Lemma 2.7. -/
+theorem projectiveHypersurfaceTotalMultiplicity_le_card_add_sqrt_error {n p d : ℕ}
+    [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
+    (hd : 2 ≤ d) (hir : Irreducible (map (Int.castRingHom (ZMod p)) f)) (hsize : d ^ 2 < p) :
+    (projectiveHypersurfaceTotalMultiplicity f hf hir.ne_zero : ℝ) ≤
+      Fintype.card (ProjectiveHypersurfaceResidue f p) +
+        ((n + 3) * (n + 4) ^ n : ℕ) * (d : ℝ) ^ 2 * (p : ℝ) ^ n * Real.sqrt p := by
+  have hchar : d < p := (Nat.le_mul_self d).trans_lt (by simpa only [pow_two] using hsize)
+  have h := projectiveHypersurfaceTotalMultiplicity_le_card_add_correction f hf hd hir hchar
+  have hR : (projectiveHypersurfaceTotalMultiplicity f hf hir.ne_zero : ℝ) ≤
+      Fintype.card (ProjectiveHypersurfaceResidue f p) +
+        ((n + 3) * (n + 4) ^ n * d ^ 2 * (d - 1) * p ^ n : ℕ) := by exact_mod_cast h
+  have hs : (d : ℝ) ≤ Real.sqrt p := Real.le_sqrt_of_sq_le (by exact_mod_cast hsize.le)
+  have hsub : ((d - 1 : ℕ) : ℝ) ≤ Real.sqrt p :=
+    (by exact_mod_cast Nat.sub_le d 1 : ((d - 1 : ℕ) : ℝ) ≤ d).trans hs
+  have hmul := mul_le_mul_of_nonneg_left hsub
+    (show 0 ≤ (((n + 3) * (n + 4) ^ n : ℕ) : ℝ) * (d : ℝ) ^ 2 * (p : ℝ) ^ n by positivity)
+  apply hR.trans
+  apply add_le_add le_rfl
+  push_cast at hmul ⊢
+  convert hmul using 1
+  ring
+
+end
+end AffineCurveCounting

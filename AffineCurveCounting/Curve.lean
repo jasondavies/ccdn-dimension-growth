@@ -10,8 +10,13 @@ its degree is the slope of the eventually linear affine Hilbert function: the di
 of polynomials of total degree at most `M` in its coordinate ring is `d*M + c` for large `M`.
 
 `AffineCurveBound` records the full target, with constants depending only on the ambient
-dimension. It is not a theorem. The geometric infrastructure (including the passage from
-a plane defining polynomial to this Hilbert-function degree) is still to be proved.
+dimension. It is proved by `affineCurveBound` in the `AffineCurveBound` module.
+`PlaneHilbert` proves the passage from a plane defining
+polynomial to this Hilbert-function degree. `PlaneIdealCount` proves the full
+prime-ideal counting interface in dimension two. `BoundedDegreePreservingProjection`
+constructs bounded integral projections preserving degree in every dimension.
+The general integer-height and counting assembly is completed in
+`AffineProjectionCount`, `ProjectionScaleAbsorption` and `AffineCurveBound`.
 -/
 
 @[expose] public section

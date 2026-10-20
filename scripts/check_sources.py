@@ -16,6 +16,10 @@ for relative, digest in expected.items():
     if hashlib.sha256((VENDOR / relative).read_bytes()).hexdigest() != digest:
         raise SystemExit(f"Vendored source hash mismatch: {relative}")
 
+mertens = json.loads((ROOT / "vendor" / "mertens" / "upstream.json").read_text())
+if hashlib.sha256((ROOT / "AffineCurveCounting" / "MertensFirst.lean").read_bytes()).hexdigest() != mertens["adapted_sha256"]:
+    raise SystemExit("Adapted Mertens source differs from the provenance manifest")
+
 modules = {
     ".".join(p.relative_to(ROOT).with_suffix("").parts): p
     for p in (ROOT / "AffineCurveCounting").rglob("*.lean")

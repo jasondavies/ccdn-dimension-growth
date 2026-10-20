@@ -1,0 +1,63 @@
+Affine bad-prime convention and exact-statement audit
+===================================================
+Checked 2026-10-20.
+
+Primary paper:
+https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf
+DOI: 10.2140/ant.2020.14.2261
+Author's addenda, dated 2026-04-20:
+https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf
+Cached addenda PDF SHA256:
+9ebfd6f9ec3d961b7c64c854738b3f71ed6c4998bcd15ea538132cdfa2900dff
+
+Factor convention
+-----------------
+The literal Definition 3.2.1 excludes primes where the reduced polynomial
+fails absolute irreducibility. HypersurfaceBadReduction additionally excludes
+primes where the reduction loses degree. For nonzero homogeneous equations
+these agree. They need not agree for affine equations.
+
+Our independently checked example is f(x,y)=439*x^2+y, with homogeneous
+equation F(X,Y,Z)=439*X^2+Y*Z. The degree is two, the cutoff is 432, and 439
+is prime. Every affine reduction is absolutely irreducible: its equation
+solves uniquely for y over every field. Thus the literal affine factor is 1.
+At 439 the homogeneous reduction is Y*Z, whereas all other reductions are
+irreducible. Its factor is exp(log(439)/439)>1. The repository's affine factor
+has the latter value because it includes the degree drop.
+
+This refutes the intermediate equality between the literal affine and
+homogeneous factors asserted in the proof of Proposition 4.2.1. It does NOT
+refute the proposition's auxiliary-polynomial conclusion. The checked author
+addenda do not address this distinction. A closure-based interpretation of
+the affine factor is a possible convention, not a confirmed author intention.
+
+The formal theorem affine_hypersurface_auxiliary uses the repository's
+degree-loss-inclusive factor throughout. It proves all box and coefficient
+cases, including the minimum bound and bounded translations. The literal
+printed affine-factor version remains open. A uniform constant comparing the
+two factors is not a valid repair: replacing 439 by products of arbitrarily
+many large primes gives literal factor 1 and an unbounded inclusive factor.
+The coefficient-uniform consequences may be proved directly from the existing
+variant and its height estimate.
+
+In degree at least two, the repository's affine factor equals its homogeneous
+factor. In degree one only the proved inequality is used: p*x+1 can become
+constant affinely but remains an irreducible homogeneous linear equation.
+
+Coefficient dichotomy
+---------------------
+The proved dichotomy supplies H<=N^N*B^(d*N), N=choose(n+d,d), or an actual
+degree-d nonmultiple vanishing on all bounded projective zeros. The affine
+version supplies degree at most d. The factor N^N depends on d; it is not the
+dimension-only multiplier printed in Lemma 4.2.2. Its logarithmic size is
+sufficient for the polynomial box cutoff, but the exact printed multiplier
+remains open.
+
+Published corrections affecting future work
+------------------------------------------
+The author's addenda correct the variable count in Proposition 2.6 to n+2,
+strengthen the leading-form assumption in 4.3.3 to absolute irreducibility,
+replace d^14 by d^18 in 4.3.4, and add a factor d to the degree in 4.3.7.
+Remark 4.3.8 must use the corrected statements. These targets are recorded in
+full-paper-plan.txt. Our existing residue-determinant indexing already has
+the corrected variable count.
