@@ -1610,3 +1610,37 @@ Log: /tmp/ccdn-all-degree-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-all-degree-checkpoint-sync.json
 Source inventory: /tmp/ccdn-all-degree-checkpoint-inventory.json (474 files)
 Inventory SHA256: bfb9c47722df7d2214d7ae000bfb1f858a1eb8b859a2aafcd0f6f271f97cc80d
+
+
+2026-10-20: odd-degree class groups and bounded integer normalization
+-------------------------------------------------------------------
+Integrated forty-five mathematical modules with imports, endpoint audits
+and updated statement coverage. OddDegreeClassGroupBound proves the actual
+odd-degree case of Theorem 6 with explicit positive degree-only constant:
+h2(K)<=C(n)*|disc(K)|^(1/2-1/(2n)).
+The proof constructs a prescribed greedy integral lattice basis, proves
+its product and largest-vector bounds, and obtains uniform finite-radius
+counts for ordinary integers and translation classes. The signed norm-curve
+sum and discriminant exponent are proved with no external counting premise.
+
+BoundedIntegerNormalization constructs actual integer linear coordinates
+with coefficients at most n!*(d+1)^n and an injective integral map to the
+prime quotient. The underlying Hilbert dimensions, multiplicity estimates,
+finite function fields and bounded elimination steps are proved.
+The general Newton-edge Corollary 4.2.5 is proved. Corollary 4.2.4's full
+minimum expression is proved with the defined degree-loss-inclusive factor;
+the ledger's literal-factor distinction remains.
+Actual class-group norm and involution constructions provide initial
+quadratic-descent infrastructure. Theorem 1 for general varieties, Theorem 6
+in even degree and the exact intermediate obligations remain open.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 543 reachable modules.
+Full build: 9593 jobs, PASS.
+Transitive audit: 3021 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Log: /tmp/ccdn-classgroup-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-classgroup-checkpoint-sync.json
+Source inventory: /tmp/ccdn-classgroup-checkpoint-inventory.json (519 files)
+Inventory SHA256: 5a2d59b9d5172ed63faec46e623bb237a60b1214916641b704a34e6299f962e2

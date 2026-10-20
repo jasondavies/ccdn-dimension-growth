@@ -27,8 +27,13 @@ case of Theorem 1 are also proved for every degree `d ≥ 5`, including degrees
 5 through 15. In `n+3` affine or homogeneous variables, the bound is
 `C(n) d^(18+9n) B^(n+1)`.
 
+The odd-degree class-group bound in Theorem 6 is also proved:
+`h₂(K) ≤ C(n) |disc(K)|^(1/2−1/(2n))`, with a positive constant depending
+only on the field degree. The proof constructs the short lattice basis and
+counts the actual bounded algebraic integers and norm-curve fibers.
+
 **The full paper is not yet formalised.** The general projective-variety
-reduction, the class-group application and several exact intermediate
+reduction, the even-degree class-group application and several exact intermediate
 statements remain open. The
 [full-paper ledger](docs/full-paper-plan.txt) records the complete scope
 and the external inputs that must be proved.
@@ -83,6 +88,13 @@ counterexample to the printed intermediate homogenization equality and records
 the author's published corrections. The proved coefficient-height dichotomy
 has an explicit degree-dependent multiplier, sufficient for the auxiliary
 argument; Lemma 4.2.2's printed dimension-only multiplier is also still open.
+
+`affine_plane_coefficient_count_uniform` proves the full coefficient-sensitive
+minimum expression in Corollary 4.2.4 with the same degree-loss-inclusive
+bad-prime factor. The generic coprime Newton-edge Corollary 4.2.5 is proved:
+`coprime_newton_edge_log_free_bound` gives
+`C d⁴ (log|c_d c_e|+1) B^(1/d)`. Irreducibility, the bad-prime bound and
+primitive normalization are proved from the support and endpoint conditions.
 
 The coefficient-uniform top-form auxiliary estimate (4-3-1) is now proved.
 If the leading homogeneous part of an integer equation is absolutely
@@ -189,10 +201,15 @@ The bounded linear algebra for general projective projections is proved:
 actual integer projection matrices, their kernels and ranks, height bounds,
 and bounded specialization of polynomials in maximal minors. Bounded linear
 elimination makes a chosen nonzero ideal equation monic and constructs an
-integral coordinate map. The general filtered Hilbert polynomial is now
+integral coordinate map. The general filtered Hilbert polynomial is
 constructed for every ideal, with positive integral multiplicity for proper
-ideals. The geometric good-center construction and general-dimensional
-degree preservation remain.
+ideals. Its dimension yields independent original coordinates, and its
+multiplicity bounds the degree of an actual nonzero ideal equation and the
+finite parameter-field extension. Each elimination step preserves Hilbert
+dimension, bounds the new multiplicity by the original one, and uses integer
+linear forms with bounded coefficients. Iteration constructs an injective,
+integral normalization map whose integer coefficients are at most
+`n! (d+1)^n`. General-dimensional birational degree preservation remains.
 
 The class-group application now starts with the actual ideal class group:
 two-torsion classes have integral representatives with principal squares,
@@ -207,7 +224,13 @@ reduction primes and satisfy a uniform logarithm-free `C d⁴ B^(1/d)` count.
 The actual two-torsion count is reduced to a finite sum of these signed norm
 curves indexed by integer translation classes. An injective packing argument
 bounds those classes by an ordinary lattice-box count. Its uniform estimate
-and the corrected quadratic-tower reduction are still required for Theorem 6.
+is now proved: a prescribed greedy lattice basis, the multiplication pairing
+and covolume packing give basis lengths at most `n³ |disc(K)|^(1/n)`.
+`odd_degree_classGroup_two_torsion_bound` completes Theorem 6 in odd degree.
+The even-degree norm-curve analysis and corrected quadratic-tower reduction
+remain. A relative class-group norm, its compatibility with extension and the
+cardinality bound from an actual involution are proved as infrastructure
+for the latter.
 
 ## Build and audit
 
@@ -231,6 +254,11 @@ review of theorem statements.
 
 | Module | Checked content |
 | --- | --- |
+| `CoprimeNewtonEdge`, `CoprimeNewtonEdgeReduction`, `CoprimeNewtonEdgeCount`, `AffinePlaneCoefficientCount` | Generic logarithm-free Newton-edge count and the coefficient-sensitive plane minimum expression with the defined bad-prime factor. |
+| `HilbertLowDegreeEquation`, `HilbertFunctionFieldRank`, `HilbertCoordinateParameterField`, `BoundedIntegerNormalization` | Construct a low-degree ideal equation and finite parameter field; iterate bounded integral elimination to obtain actual integer normalization. |
+| `LatticeSuccessiveMinima`, `LatticeMinimaProduct`, `LatticePrescribedProduct`, `NumberFieldShortBasis` | Construct greedy lattice bases, prove their product bound, and obtain a uniform discriminant-root bound for integral basis vectors. |
+| `UniformNumberFieldLatticeCount`, `OddDegreeClassGroupCounting`, `OddDegreeClassGroupBound` | Actual lattice and translation-class counts and the unconditional odd-degree branch of Theorem 6. |
+| `ClassGroupRelativeNorm`, `ClassGroupQuadraticInvolution` | Construct the class-group norm and involution action; prove norm after extension and the fixed-subgroup cardinality bound. |
 | `SurfaceResidueEdgeCount`, `SurfaceResidueCover`, `SurfaceCoefficientReduction`, `SurfaceResidueLinearCount`, `SurfaceSmallCurveCover`, `SurfaceRetainedCurveCount`, `PrimitiveSurfaceFixedDegree`, `TopFormSurfaceFixedDegree` | Construct and count the smooth-congruence cover; discharge coefficient height and prove the full fixed-degree surface bound for every d ≥ 5. |
 | `BoundedHyperplaneDimensionGrowth`, `TopFormDimensionGrowthAllDegrees`, `HypersurfaceDimensionGrowth` | Theorem 4 in all degrees d ≥ 5 and all ambient dimensions; rational equations and the full projective hypersurface case of Theorem 1. |
 | `MonomialOrthants`, `OrthantHilbertPolynomial`, `OrthantMultiplicity`, `FilteredHilbertPolynomial` | Construct the eventual filtered Hilbert polynomial and its positive integral multiplicity for every proper ideal. |
@@ -375,8 +403,8 @@ Apache license are recorded under `vendor/mertens/`.
 
 ## Remaining work
 
-Theorems 1 and 4 (higher-dimensional dimension growth), Proposition 5 and
-Section 6 (lower bounds), and Theorem 6 (class-group application) remain open.
+The general-variety case of Theorem 1, the even-degree case of Theorem 6,
+and the exact intermediate statements recorded in the ledger remain open.
 CCDN Lemmas 2.7--2.8 and Corollary 2.9 are now proved for the actual projective
 hypersurface residue count and common-degree homogeneous evaluation matrices.
 For a geometrically irreducible degree-`d` affine hypersurface in `n+3`

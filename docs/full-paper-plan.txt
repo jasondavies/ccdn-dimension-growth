@@ -64,9 +64,12 @@ depending only on d bounds the cardinality of the actual 2-torsion in
 the ideal class group:
 h_2(K) <= C(d) |disc(K)|^(1/2-1/(2d))
                     (log |disc(K)|)^(1-(d mod 2)).
-The reduction to an actual finite family of signed norm curves indexed by
-integer translation classes is proved. Its uniform lattice count and the
-corrected quadratic-tower branch remain open.
+PROVED CASE: odd_degree_classGroup_two_torsion_bound proves the exact
+logarithm-free bound for every odd field degree >=3, with a positive explicit
+constant depending only on the degree. The actual short basis, uniform
+lattice count, translation-class packing and signed norm curves are constructed.
+The even-degree norm-curve analysis and corrected quadratic-tower branch
+remain open.
 
 Section 6 consequences: PROVED. Actual lower-bound families establish the
 stated obstructions: projective_curve_factor_not_isLittleO excludes o(d^2)
@@ -648,10 +651,15 @@ Section 4:
     hypersurface_badPrime_height_transfer, with explicit dimension constant,
     actual maximum coefficient height, actual defined factor and every real
     lower height Y>=1. No monotonicity or counting theorem is assumed;
-4.2.4 coefficient-sensitive affine plane count;
-4.2.5 coprime Newton-edge log-free affine count: the odd-degree signed norm
-    curve specialization is PROVED, with no bad primes in any characteristic
-    and bound C*d^4*B^(1/d). The general Newton-edge statement remains OPEN;
+4.2.4 coefficient-sensitive affine plane count: the full minimum expression
+    is PROVED by affine_plane_coefficient_count_uniform, using the defined
+    degree-loss-inclusive affine bad-prime factor. The literal-factor
+    distinction recorded for 4.2.1 still applies;
+4.2.5 coprime Newton-edge log-free affine count: PROVED in general by
+    coprime_newton_edge_log_free_bound, with a universal constant and bound
+    C*d^4*(log|c_d*c_e|+1)*B^(1/d). Support and nonzero endpoint coefficients
+    give irreducibility over every field; every bad prime divides c_d*c_e.
+    Primitive normalization and the bad-prime estimate are internal;
 4.3.1 bounded affine projection;
 4.3.2 bounded projective projection;
 4.3.3 line contributions on affine surfaces: PROVED in the corrected form
@@ -923,9 +931,10 @@ prove the integer linear algebra and bounded specialization used in Section 5.
 Projection kernels, ranks, idempotence up to scale and heights are explicit.
 A nonzero polynomial in maximal minors, with an actual rational full-rank
 witness, has an integer full-rank witness with entries at most r*(deg(F)+1).
-The geometric good-center witness, general-dimensional Hilbert-degree bridge
-and birational degree-preserving projection theorem remain open. These
-modules do not complete Section 5.1 or 5.2.
+The later Hilbert modules below construct bounded-degree contraction equations
+and integral elimination preserving dimension. The geometric good-center
+witness and birational degree-preserving projection theorem remain open.
+These modules do not complete Section 5.1 or 5.2.
 
 ClassGroupTwoTorsion and ClassGroupIdealRescaling construct actual integral
 ideal representatives and injective principal-square generators for class
@@ -938,7 +947,8 @@ reduces actual two-torsion cardinality to their bounded square-norm set.
 ClassGroupNormPolynomial constructs signed norm-polynomial fibers; in odd
 field degree OddDegreeNormCurves proves their full degree and absolute
 irreducibility. Translation-class packing and the actual norm-curve reduction
-are now proved below; the uniform lattice count and quadratic-tower reduction
+are now proved below, together with the uniform lattice count and the complete
+odd-degree case. The even-degree analysis and quadratic-tower reduction
 remain. The cited external reduction is not assumed as an axiom.
 
 
@@ -974,7 +984,8 @@ endpoints, including the nonabsolute branch. Thus Theorem 4 is proved in full.
 BoundedLinearElimination constructs integer directions bounded by deg(f)+1
 for a chosen nonzero f in an ideal, monic coordinates and actual quotient
 integrality over the retained linear forms. Bounding the degrees of the
-chosen contraction equations by the geometric degree remains necessary
+chosen contraction equations by the geometric degree is completed by the
+Hilbert modules below. Iteration and degree preservation remain necessary
 for the general-variety projection theorem.
 
 External class-group reduction source audit:
@@ -1007,9 +1018,67 @@ IntegerTranslationClassPacking injects each class times integers of size at
 most R into the archimedean box of radius B+R, giving
 #classes(B)*(2*floor(R)+1).toNat <= #boundedArchimedeanIntegers(B+R).
 FieldMultiplicationHyperplane proves the multiplication nondegeneracy needed
-for the pending uniform lattice estimate. OddDegreeNormCurveBaseChange proves
+for the uniform lattice estimate completed below. OddDegreeNormCurveBaseChange proves
 full-degree irreducibility of signed norm curves over every field in odd field
 degree. AffinePlaneBadPrimeCount and OddDegreeNormCurveCount prove their bad
 factor is one and their count is at most C*d^4*B^(1/d), without a logarithm.
-The uniform lattice count and corrected quadratic-tower branch are unproved;
-Theorem 6 remains open.
+The uniform lattice count and odd-degree assembly are completed below.
+Theorem 6 remains open in even degree.
+
+
+Bounded Hilbert elimination, Newton-edge counts, and odd class groups
+--------------------------------------------------------------------
+HilbertPolynomialComparison and PrincipalHilbertPolynomial compare actual
+Hilbert dimensions and multiplicities, including the exact hypersurface
+formula. HilbertCoordinateIndependence constructs independent original
+coordinates of cardinality equal to Hilbert dimension. HilbertLinearCoordinates,
+HilbertProjectionKernel and HilbertProjectionDegree construct a hypersurface
+projection equation of degree at most the source multiplicity.
+HilbertLowDegreeEquation applies this to a nonzero equation in the source
+prime ideal. HilbertBlockComparison and HilbertFunctionFieldRank bound the
+actual function-field rank by multiplicity; HilbertCoordinateParameterField
+constructs the finite coordinate parameter field.
+HilbertTranscendenceBasis and IntegralProjectionHilbert preserve dimension
+under integral projection and bound its new multiplicity.
+HilbertBoundedElimination and HilbertBoundedEliminationStep therefore construct
+an integral elimination step using a direction bounded by d+1.
+FilteredHilbertEquiv, IntegerLinearForms and IntegerHilbertElimination transfer
+this to actual integer linear coordinates and track their composition heights.
+HilbertFullDimension proves the full-dimensional terminal ideal is zero.
+FinIntegerHilbertElimination and BoundedIntegerNormalization iterate these
+steps. For positive Hilbert dimension and multiplicity d, they construct
+actual integer linear forms with coefficients at most n!*(d+1)^n whose
+map into the prime quotient is both injective and integral.
+This is not yet the general-variety counting theorem: birational degree
+preservation and the final count remain.
+
+WeightedPolynomialTop and the CoprimeNewtonEdge modules prove the general
+Corollary 4.2.5. AffinePlaneCoefficientCount gives the full 4.2.4 minimum
+expression with the defined degree-loss-inclusive affine factor.
+
+LatticeSuccessiveMinima constructs shortest-outside-span vectors.
+LatticeMinimaFlag and LatticeSeparatedVolume prove the required separated
+coordinate-box and covolume comparison; LatticeMinimaProduct gives
+product ||b_i|| <= n^n covol(L). LatticePrescribedMinima and
+LatticePrescribedProduct allow a prescribed first vector, in particular 1.
+MultiplicationPairingProduct and FieldBasisMultiplicationProduct compare the
+last minimum with the full product using the actual field multiplication
+pairing. EuclideanNumberFieldBasis transfers real coordinates to an actual
+rational field basis. NumberFieldShortBasis constructs integral lattice
+vectors spanning the real space with ||b_i||<=n^3 |disc(K)|^(1/n).
+It assumes neither a short basis nor Minkowski's second theorem.
+
+LatticeFinitePacking and NumberFieldLatticeBox give finite-radius packing
+for this actual lattice; UniformNumberFieldLatticeCount bounds both ordinary
+integers and integer-translation classes uniformly in the field.
+OddDegreeClassGroupCounting sums actual signed norm curves, and
+ClassGroupDiscriminantNumerics retains the exact exponent.
+OddDegreeClassGroupBound proves the full odd-degree case of Theorem 6,
+with a positive explicit degree-only constant and no remaining reduction
+or counting premise.
+ClassGroupRelativeNorm constructs the genuine norm on ideal class groups
+and proves that norm after extension is raising to the extension degree.
+ClassGroupQuadraticInvolution constructs the action of an actual field
+automorphism on class-group two-torsion and proves h2(K)<=|T^sigma|^2
+for an involution. This does not yet bound the arithmetic fixed subgroup.
+The even-degree and corrected quadratic-tower branches remain open.
