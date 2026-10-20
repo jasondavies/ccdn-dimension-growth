@@ -46,9 +46,18 @@ Strong induction on the field degree absorbs the prime-factor and logarithmic
 losses in the quadratic case. Odd degrees retain the logarithm-free bound.
 
 **The full paper is not yet formalised.** Several exact intermediate statements
-remain open. The
+remain open, particularly the sharp Section 5 center bounds. The
 [full-paper ledger](docs/full-paper-plan.txt) records the complete scope
 and the external inputs that must be proved.
+
+The Chow-form construction now has its exact degree: each hyperplane block
+has degree `d`, and the total degree is `(m+1)d`. `ChowExactDegree` and
+`ProjectiveChowExactDegree` prove this for the actual incidence equation in
+characteristic zero, including dimension zero and geometric equations over
+the original field. The affine normalization rank and all parameter-field
+comparisons are proved internally. The constructed Noether detector has
+degree `D*max(1,D²−1)`, where `D=(m+1)d`; this does not yet give the printed
+quadratic degree bound. See [the center audit](docs/projection-center-audit.txt).
 
 The general Noetherian-local determinant lemma (2.4) is proved in
 `primeInteger_local_enumerated_weight_det`, with the actual target
@@ -551,7 +560,7 @@ Apache license are recorded under `vendor/mertens/`.
 ## Remaining work
 
 The six main results are proved. Remaining intermediate obligations concern
-the exact projection-center and Chow-form statements of Section 5.
+the sharp projection-center bounds of Section 5.
 The general affine and projective projections, both
 curve projection clauses, literal affine-factor theorems, Salberger covering
 in the coordinate-ideal formulation, and all positive degrees of
@@ -594,8 +603,10 @@ block degrees agree, and their sum is the total degree.
 projection from a center. Its coefficients are homogeneous polynomials in
 the Plucker coordinates. The restriction is nonzero exactly when the center
 is disjoint from the variety; in that case it is a nonzero scalar times a
-positive power of the constructed image equation. The exact block degree
-`d` and the Grassmannian bad-center detector remain open.
+positive power of the constructed image equation. `ChowExactDegree` and
+`ProjectiveChowExactDegree` now prove block degree `d` and total degree
+`(m+1)d`, including dimension zero and geometric equations over the original
+characteristic-zero field.
 
 `GenericHyperplaneNormalization` proves that algebraically independent
 hyperplane coefficients give an integral projection with independent
@@ -604,23 +615,44 @@ prime. The proof constructs finite module generators from the absence of
 projective base points; finiteness is not an additional hypothesis.
 `HomogeneousNormalizationRank` proves that the fraction-field degree of an
 actual finite linear normalization in characteristic zero is exactly the
-source multiplicity `d`. The identification with each Chow block degree
-remains to be completed. `UniversalHyperplaneNormalization` now constructs
+source multiplicity `d`. `UniversalHyperplaneNormalization` constructs
 the independent coefficients in a rational function field and proves the
 finite normalization and exact rank there. Geometric primality is transported
 to arbitrary field extensions internally. `ClosureNormalizationInfinite`
 constructs a normalization preserving the homogenizing coordinate over any
 infinite field; `FixedCoordinateGenericNormalization` proves its generic
 version. `ChowIncidenceMinimalPolynomial` identifies one coefficient degree
-of the Chow equation with an actual minimal-polynomial degree. Identifying
-the resulting parameter fields and transporting the affine normalization
-rank are still required to prove that this degree is `d`.
+of the Chow equation with an actual minimal-polynomial degree.
+`AffineNormalizationRank` transfers the exact rank to the affine function
+field, and `ChowNormalizationDegreeComparison` identifies the parameter-field
+models. These complete the proof that every block degree equals `d`.
 
 `HomogeneousProjectionBirational` proves that an actual finite homogeneous
 linear projection in characteristic zero preserves Hilbert multiplicity
 if and only if its projected coordinates generate the source function field.
 The proof constructs the image field and normalization internally and
 includes the zero-dimensional cone.
+
+`ChowRestrictionBirational` connects this to the actual Chow restriction:
+for a disjoint center, the restriction is geometrically irreducible exactly
+when the projection is birational. `BirationalCenterDetector` constructs a
+finite family of homogeneous polynomials in maximal minors whose nonvanishing
+detects precisely disjointness and birationality. Their degree is
+`D*max(1,D²−1)`, with `D=(m+1)d`, including the degree-one case.
+`BirationalMinorCenterWitness` constructs actual rational witnesses, also
+with the center in `X0=0` for affine closures. `BirationalCenterNonvanishing`
+selects a detector polynomial nonzero at such a constructed witness; its
+nonvanishing guarantees disjointness and birationality. The fixed-coordinate
+version covers arbitrary characteristic-zero fields and affine dimension
+zero. The sharper quadratic detector degree and resulting center-basis
+bound remain open.
+
+`AffinePointZariski`, `MatrixGoodCenterDensity` and `ZeroColumnCenterDensity`
+prove that a nonzero polynomial condition is dense and open in the actual
+full-row-rank matrix space. The constrained result requires nonvanishing
+on the prescribed-zero-column subspace itself and supplies a wrapper from
+an actual rational witness. Applying these density results to the constructed
+detector is a separate assembly step.
 
 `zero_dimensional_plucker_degree_bound_obstruction` verifies a boundary
 failure in Lemma 5.2: at dimension zero and degree one, its strict bound

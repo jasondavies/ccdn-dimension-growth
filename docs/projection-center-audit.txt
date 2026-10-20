@@ -94,7 +94,7 @@ form.
 ChowIncidencePrincipal now proves principality for m+1 hyperplanes on a
 prime affine ideal of dimension m in positive ambient dimension. Generic
 linear independence is constructed by deformation from an actual
-normalization; a proper-section Hilbert argument proves that the kernel
+algebraically independent coordinate tuple; a proper-section Hilbert argument proves that the kernel
 is principal. PrincipalWeightedHomogeneous proves the generator homogeneous
 separately in every hyperplane block. ChowIncidenceBaseChange proves exact
 commutation with arbitrary field extension, for every source ideal.
@@ -113,8 +113,10 @@ in the incidence relations. Their degree-component coefficient matrix
 then supplies a determinant which separates that fiber from the incidence
 locus. ProjectiveChowEquation combines closedness with the constructed
 generator: its vanishing is equivalent to actual projective intersection,
-also after algebraically closed coefficient extension. The exact multidegree
-(d,...,d) and the Grassmannian detector still remain to be proved.
+also after algebraically closed coefficient extension. ChowExactDegree and
+ProjectiveChowExactDegree now prove the exact multidegree (d,...,d) in
+characteristic zero, including equations over the original field for
+geometrically integral sources and the zero-dimensional case.
 
 GenericHyperplaneNormalization supplies actual integral normalization and
 independent coordinates for algebraically independent hyperplane coefficients
@@ -134,9 +136,11 @@ HomogeneousNormalizationRank proves exact fraction-field rank d over the
 actual parameter subfield of a homogeneous prime finite linear normalization
 in characteristic zero. It constructs a primitive linear coordinate and its
 homogeneous image equation, proves the equation monic up to a unit, and
-identifies its degree with the field degree. This removes the normalization
-rank obligation; identifying that rank with every Chow block degree is still
-required.
+identifies its degree with the field degree. AffineNormalizationRank now
+transfers this exact rank to the actual affine function field for a finite
+normalization fixing X0, including dimension zero. The cone is embedded in
+the fraction field of the affine coordinate ring with a radial variable;
+adjoining that variable preserves the parameter-field rank.
 
 ClosureNormalizationInfinite constructs a finite normalization fixing X0
 over every infinite field, including dimension zero. GenericLinearNormalizationOpenness
@@ -154,10 +158,20 @@ the original coefficient field. ChowRowCoordinateDegree identifies a row
 degree with a coordinate degree using a nonzero evaluation on its axis.
 ChowIncidenceMinimalPolynomial identifies the distinguished coordinate
 degree with the actual incidence minimal-polynomial degree.
-GenericLinearPrimitive constructs a generic primitive linear coordinate of
-a finite field extension after adjoining rational parameters. The comparison
-of these parameter-field models and the transfer of exact cone rank to
-affine rank remain necessary to conclude that every block degree is d.
+GenericLinearPrimitive constructs a generic primitive linear coordinate in
+characteristic zero from coordinates separating the embeddings of a finite
+field extension, after adjoining rational parameters.
+ScalarQuotientFractionField, PolynomialCoefficientNormalizationRank and
+ChowNestedIncidence compare the actual quotient, fraction and parameter-field
+models. ChowAxisEvaluation constructs the required nonzero axis evaluation.
+ChowNormalizationDegreeComparison identifies the distinguished coefficient
+degree with the affine normalization rank. ChowExactDegree concludes that
+every block degree is d and the total degree is (m+1)*d.
+ProjectiveChowChartReduction and ProjectiveChowExactDegree extend this to
+arbitrary homogeneous prime sources with nonempty projective locus, without
+a prescribed chart, and to geometrically integral sources over the original
+characteristic-zero field. No supplied rank or degree-identification premise
+remains in these exact-degree endpoints.
 
 ChowPolynomialPower proves a separate algebraic step in (5-3): nonzero
 polynomials with the same geometric zero locus, one irreducible, differ
@@ -178,8 +192,13 @@ of the independent center rows. UniversalCenterChowRestriction constructs
 the polynomial family in the actual Plucker coordinates. Every coefficient
 is homogeneous of the source Chow total degree. CenterChowCriterion chooses
 this family before the center and gives the nonvanishing and power criteria
-for every independent center basis. The source total degree has not yet been
-identified with (m+1)*d, and no sharp Grassmannian detector is claimed.
+for every independent center basis. The source total degree is now proved
+to be (m+1)*d. CenterNoetherForms and GeometricCenterNoetherForms construct
+a finite polynomial detector over the original characteristic-zero field.
+Its polynomials are homogeneous of degree D*max(1,D^2-1), where D=(m+1)*d;
+nonvanishing detects geometric irreducibility of the actual restriction.
+The degree-one case is included. This is a cubic degree bound, and does not
+establish the sharper printed Grassmannian estimate.
 
 ProjectionImageFractionField constructs the actual image function field
 inside the source field. HomogeneousProjectionRankBound proves
@@ -187,9 +206,40 @@ e*[F:L] <= d for a finite homogeneous linear projection, where d and e are
 the actual source and image Hilbert multiplicities. HomogeneousProjectionBirational
 therefore proves that these multiplicities are equal if and only if the
 projection is birational in characteristic zero. It also proves the boundary
-case of a zero-dimensional homogeneous cone. The separate identification
-of Chow block degree with Hilbert multiplicity is still needed to combine
-this with the Chow irreducibility criterion.
+case of a zero-dimensional homogeneous cone. ChowRestrictionBirational now
+combines this with the exact Chow degree: for a geometrically disjoint
+center, the actual restriction is geometrically irreducible if and only
+if the base-field projection is birational. BirationalCenterDetector
+constructs a finite family over the original characteristic-zero field
+whose nonvanishing is exactly disjointness and birationality, with degree
+D*max(1,D^2-1). No Chow equation or image multiplicity is supplied.
+
+BirationalMinorCenterWitness constructs actual independent rational center
+rows whose literal determinant projection is integral and birational. Its
+fixed-coordinate version puts the center in X0=0 for an affine closure,
+including dimension zero. MatrixProjectionFields proves that the image
+function field depends only on the matrix kernel, allowing the constructed
+normalization and primitive coordinate to be replaced by the determinant
+projection. These are actual witnesses, without a supplied good-center
+existence hypothesis.
+
+BirationalCenterNonvanishing selects one member of the detector family
+nonzero at a constructed witness. In the projective case the base field is
+Q; the fixed-coordinate affine version works over every characteristic-zero
+field and includes dimension zero. It proves that nonvanishing of the
+selected member at any independent center implies geometric disjointness
+and birationality. The affine witness has zero first column, so the detector
+also remains nonzero on that constrained parameter subspace.
+
+AffinePointZariski defines the actual Zariski topology on field-valued affine
+points via evaluation prime ideals. MatrixGoodCenterDensity proves that
+nonzero polynomial conditions are dense and open in the full-row-rank matrix
+space. ZeroColumnCenterDensity proves the constrained counterpart when the
+polynomial restriction to the prescribed-zero-column subspace is nonzero;
+an actual rational witness supplies this premise. Density in that subspace
+is proved directly, rather than inferred from ambient density. Applying
+these results to the constructed birational detector remains an assembly
+step; no Grassmannian quotient-topology identification is claimed here.
 
 The source says each coefficient of R_X,Lambda has Plucker degree
 D=(m+1)*d. The cited universal Noether forms have degree D^2-1 in those

@@ -2111,3 +2111,51 @@ Final log: /tmp/ccdn-chow-projection-checkpoint-canonical.log
 Guarded integration: /tmp/ccdn-chow-projection-checkpoint-sync.json
 Source inventory: /tmp/ccdn-chow-projection-checkpoint-inventory.json (826 files)
 Inventory SHA256: d0609865295d79adc7b090f83be44c0f0ae75ed7a482eb75d9fb2c4492bca61e
+
+
+2026-10-20: Exact Chow degree and birational-center detector
+----------------------------------------------------------
+Integrated forty-one new mathematical modules and 118 explicit endpoint
+audits. Existing mathematical declarations were not modified. The source
+inventory covers every mathematical module reachable from the root.
+
+AffineNormalizationRank transfers the exact homogeneous normalization rank
+to the actual affine function field, including dimension zero. Quotient,
+localization, polynomial and intermediate-field comparisons identify the
+actual incidence parameter field. ChowAxisEvaluation constructs a nonzero
+axis evaluation. ChowExactDegree proves each hyperplane block has degree d
+and total degree (m+1)*d, for the actual geometrically prime affine source
+and its irreducible incidence generator. ProjectiveChowExactDegree extends
+this to projective sources without a prescribed chart and to equations over
+the original characteristic-zero field. These endpoints have no supplied
+normalization rank, field-model identification or Chow-degree premise.
+
+ChowRestrictionBirational proves that for a geometrically disjoint center
+the actual Chow restriction is geometrically irreducible if and only if the
+base-field projection is birational. BirationalCenterDetector constructs
+the finite polynomial family detecting exactly disjointness and birationality,
+of degree D*max(1,D^2-1), D=(m+1)*d, including the degree-one case.
+BirationalCenterNonvanishing constructs a selected nonzero member with a
+rational witness; its fixed-coordinate version works over every
+characteristic-zero field and puts the witness center in X0=0, including
+affine dimension zero. All field, image-degree and witness objects are
+constructed internally.
+
+AffinePointZariski, MatrixGoodCenterDensity and ZeroColumnCenterDensity prove
+density and openness of polynomial nonvanishing in full-row-rank matrix
+spaces, including prescribed zero columns. Their instantiation with the
+constructed detector, Grassmannian identification, the printed quadratic
+detector degree and sharp center-basis bound remain separate obligations.
+The literal Section 5 boundary obstruction and incorrect row-separator
+constant remain documented. This checkpoint does not complete the full paper.
+
+Canonical bash scripts/check.sh: PASS.
+Source check: 25 vendor hashes, 891 reachable modules.
+Full build: 9941 jobs, PASS.
+Transitive audit: 4830 project and 555 vendor declarations; only propext,
+Classical.choice and Quot.sound.
+Canonical git diff --check: PASS.
+Final log: /tmp/ccdn-chow-exact-checkpoint-canonical.log
+Guarded integration: /tmp/ccdn-chow-exact-checkpoint-sync.json
+Source inventory: /tmp/ccdn-chow-exact-checkpoint-inventory.json (867 files)
+Inventory SHA256: 6a0f8b09cfaa64dd02f9d5c8aa20060adab1c17439b8c353e4397cdb2488f18f

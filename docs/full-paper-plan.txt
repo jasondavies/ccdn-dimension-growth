@@ -866,7 +866,10 @@ Section 5:
     ProjectiveChowEquation gives the exact
     intersection criterion for the constructed irreducible generator,
     including algebraically closed coefficient extensions. Exact block
-    degree d and the Grassmannian detector/degree estimate remain OPEN.
+    degree d is now PROVED by ChowExactDegree and ProjectiveChowExactDegree
+    in characteristic zero, including dimension zero and equations over
+    the original field for geometrically integral sources. The sharp
+    Grassmannian degree estimate remains OPEN.
     GenericHyperplaneNormalization proves actual integral normalization
     and independent coordinates for algebraically independent hyperplane
     coefficients over an algebraically closed extension preserving source
@@ -874,8 +877,11 @@ Section 5:
     projective zero, rather than supplied. ChowIncidenceHeight proves the
     actual incidence ideal has height one.
     HomogeneousNormalizationRank proves exact fraction-field rank d for
-    homogeneous prime finite linear normalization in characteristic zero;
-    its identification with the Chow block degrees remains OPEN.
+    homogeneous prime finite linear normalization in characteristic zero.
+    AffineNormalizationRank transfers this rank to the actual affine
+    function field for a finite normalization fixing X0, including dimension
+    zero. PolynomialCoefficientNormalizationRank proves exact rank d in the
+    actual first-row incidence parameter-field model.
     GeometricProjectiveChow removes the prescribed-chart hypothesis and
     constructs the equation over the original coefficient field. ChowRowSymmetry
     proves a common block degree, and ChowTotalDegree computes the total
@@ -895,15 +901,32 @@ Section 5:
     generation certificates give its generic counterpart in
     FixedCoordinateGenericNormalization.
     GenericLinearPrimitive constructs a generic primitive linear coordinate
+    in characteristic zero from coordinates separating field embeddings,
     after adjoining rational parameters. ChowIncidenceMinimalPolynomial
     identifies the distinguished Chow coefficient degree with the actual
-    incidence minimal-polynomial degree. The comparison of the parameter
-    fields and the cone-to-affine rank transfer remain OPEN.
+    incidence minimal-polynomial degree. ScalarQuotientFractionField and
+    ChowNestedIncidence compare the actual quotient and parameter fields.
+    ChowAxisEvaluation constructs the nonzero axis evaluation, and
+    ChowNormalizationDegreeComparison identifies the distinguished degree
+    with the normalization rank. The cone-to-affine rank transfer and all
+    parameter-field comparisons are PROVED. Thus every block has degree d
+    and the total degree is (m+1)*d, with no supplied rank or degree premise.
     HomogeneousProjectionBirational proves equality of source and image
     Hilbert multiplicities if and only if the actual finite homogeneous
     linear projection is birational, in characteristic zero, including the
     zero-dimensional cone. The image field and normalization are constructed
-    internally. This does not yet identify the Chow block degree with d.
+    internally. ChowRestrictionBirational combines the exact Chow degree
+    with this comparison, proving that for a geometrically disjoint center
+    the actual restriction is geometrically irreducible iff the base-field
+    projection is birational. BirationalCenterDetector constructs the finite
+    family detecting exactly disjointness and birationality, without a
+    supplied Chow form or image multiplicity.
+    GeometricCenterNoetherForms constructs a finite detector over the
+    original field, homogeneous of degree D*max(1,D^2-1), D=(m+1)*d.
+    Nonvanishing detects geometric irreducibility of the literal center
+    restriction, including D=1. BirationalMinorCenterWitness constructs
+    actual independent rational center rows with integral birational
+    determinant projection, also within X0=0 for affine closures.
     The printed Noether
     composition degree calculation is also not justified by the stated
     degree bounds; this is a proof gap, not a positive-dimensional
@@ -921,8 +944,14 @@ Section 5:
     entries at most max(1,deg F), full rank and nonvanishing. This handles
     constant F as well as positive degree and assumes an actual rational
     witness obeying the same zero-column conditions.
-    The actual good-center polynomial and
-    witness from 5.2 remain OPEN;
+    BirationalCenterNonvanishing constructs a detector member and an actual
+    witness where it is nonzero, also within X0=0 for an affine closure.
+    MatrixGoodCenterDensity and ZeroColumnCenterDensity prove
+    density and openness of nonzero polynomial conditions in full-rank
+    matrix spaces, including prescribed zero columns. Their application to
+    this detector and the Grassmannian identification remain assembly steps.
+    The sharper quadratic polynomial degree from
+    5.2, needed for the printed center-basis bound, remains OPEN;
 5.4 small integer kernel vectors: the literal printed constant is FORMALLY
     DISPROVED by not_printed_row_separator_bound in RowSeparatorCounterexample.
     A system with s=5,r=6,B=10 has independent rows and requires a coordinate
@@ -1345,7 +1374,9 @@ integer normalization. For n source coordinates, the matrix entries are at most
 max(n!*(d+1)^n, (n*d^2+1)^n). BirationalProjectionHeight bounds this by a
 dimension-only constant times d^(2n), for d>=1.
 This proves the projection needed for counting by a different route from the
-paper's bad-center locus. Literal Lemmas 5.1 and 5.2 remain obligations.
+paper's bad-center locus. The sharp quantitative bound in 5.1 and the
+positive-dimensional degree estimate in 5.2 remain obligations; the strict
+degree-one boundary statement of 5.2 is formally refuted above.
 
 IntegralAlgebraPointCount and IntegralProjectionFiberCount count genuine
 coordinate tuples in an integral algebra using roots of minimal polynomials.
