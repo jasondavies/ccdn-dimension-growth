@@ -31,9 +31,8 @@ theorem surface_section_count_le
   rw [hcover]
   have hsum : (∑ P ∈ S, (δ P : ℝ)) ≤
       (f.totalDegree : ℝ) * g.totalDegree := by exact_mod_cast hbudget
-  exact (finite_curve_union_count_le_box_side S δ (fun P hP => by
-    have hh := hcurve P hP
-    exact ⟨hh.1, hh.2.1, hh.2.2.2.2.2⟩) hB).trans
+  exact (finite_curve_union_count_le_box_side S δ (fun P hP =>
+    ⟨(hcurve P hP).isPrime, (hcurve P hP).height_eq, (hcurve P hP).degree⟩) hB).trans
       (mul_le_mul_of_nonneg_right hsum (by linarith))
 
 theorem integer_surface_count_le_of_auxiliary

@@ -22,6 +22,13 @@ open MvPolynomial Finset Classical
 abbrev GeometricCurveIdeal (I : Ideal (CoordinatePolynomial 3)) : Prop :=
   (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime
 
+/-- `I` is a geometrically integral affine curve of positive degree `e` on the surface `f = 0`
+in affine three-space: the curves retained by the geometric Salberger cover. -/
+structure IsGeometricSurfaceCurve (f : CoordinatePolynomial 3)
+    (I : Ideal (CoordinatePolynomial 3)) (e : ℕ) : Prop extends IsSurfaceCurve f I e where
+  geometric : GeometricCurveIdeal I
+  pos : 0 < e
+
 def smoothSurfaceLocus (f : CoordinatePolynomial 3) : Set (RatPoint 3) :=
   zeroLocus f \ singularHypersurfaceLocus f
 
@@ -41,17 +48,12 @@ lemma integer_smooth_surface_derivative
 theorem surface_smooth_outside_geometric_cover
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
-    {A B H L X : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B) (hH : 1 ≤ H) (hL : 1 ≤ L)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
-    (hderivative : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
-      Real.log H + f.totalDegree * Real.log B ≤ L)
-    (hX : 1 < X) (hBX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)
-    (hXL : X ≤ Real.exp L) (F : SurfaceCongruenceFamily f B A)
+    {A B H L X : ℝ} (hA : 0 ≤ A) (hW : IsSurfaceResidueWindow f B H L X)
+    (F : SurfaceCongruenceFamily f B A)
     (S : Finset (Ideal (CoordinatePolynomial 3)))
     (δ : Ideal (CoordinatePolynomial 3) → ℕ) (D : ℕ)
-    (hS : ∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-      map (Int.castRingHom ℚ) f ∈ I ∧ map (Int.castRingHom ℚ) F.initial ∈ I ∧
-      HasAffineCurveDegree I (δ I))
+    (hS : ∀ I ∈ S, IsSectionCurve (map (Int.castRingHom ℚ) f)
+      (map (Int.castRingHom ℚ) F.initial) I (δ I))
     (hcover : zeroLocus (map (Int.castRingHom ℚ) f) ∩
       zeroLocus (map (Int.castRingHom ℚ) F.initial) = ⋃ I ∈ S, idealZeroLocus I) :
     count (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
@@ -59,11 +61,11 @@ theorem surface_smooth_outside_geometric_cover
       count (⋃ I ∈ S.filter (fun I => δ I ≤ D ∧ ¬GeometricCurveIdeal I), idealZeroLocus I) B +
       count (⋃ I ∈ S.filter (fun I => D < δ I ∧ (δ I : ℝ) ≤
         2 * f.totalDegree * A * surfaceResidueLogBudget B L), idealZeroLocus I) B +
-      count (surfaceResidueResidualLocus F S L X hL) B := by
+      count (surfaceResidueResidualLocus F S L X hW.one_le_window) B := by
   let bad := ⋃ I ∈ S.filter (fun I => δ I ≤ D ∧ ¬GeometricCurveIdeal I), idealZeroLocus I
   let medium := ⋃ I ∈ S.filter (fun I => D < δ I ∧ (δ I : ℝ) ≤
     2 * f.totalDegree * A * surfaceResidueLogBudget B L), idealZeroLocus I
-  let residual := surfaceResidueResidualLocus F S L X hL
+  let residual := surfaceResidueResidualLocus F S L X hW.one_le_window
   have hpoint : integralPoints (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
       (⋃ I ∈ S.filter (fun I => δ I ≤ D ∧ GeometricCurveIdeal I), idealZeroLocus I)) B ⊆
       integralPoints (bad ∪ medium ∪ residual) B := by
@@ -95,10 +97,9 @@ theorem surface_smooth_outside_geometric_cover
     · by_cases hmedium : (δ I : ℝ) ≤ 2 * f.totalDegree * A * surfaceResidueLogBudget B L
       · exact Or.inl (Or.inr (Set.mem_iUnion.mpr ⟨I,Set.mem_iUnion.mpr
           ⟨mem_filter.mpr ⟨hIS,by omega,hmedium⟩,hxI⟩⟩))
-      · obtain ⟨hIp,hIheight,hfI,hinitI,hdeg⟩ := hS I hIS
-        exact Or.inr (large_curve_point_mem_surfaceResidueResidualLocus f hir hA hB hH hL
-          hcoeff hderivative hX hBX hXL F S I hIS hIp hIheight hfI hinitI hdeg
-          (lt_of_not_ge hmedium) x hxB hxf hxI (integer_smooth_surface_derivative f x hxsmooth))
+      · exact Or.inr (large_curve_point_mem_surfaceResidueResidualLocus f hir hA hW F S I hIS
+          (hS I hIS).toIsSurfaceCurve (hS I hIS).mem_right (lt_of_not_ge hmedium) x hxB hxf hxI
+          (integer_smooth_surface_derivative f x hxsmooth))
   exact (card_le_card hpoint).trans ((count_union_le (bad ∪ medium) residual B).trans
     (Nat.add_le_add_right (count_union_le bad medium B) _))
 

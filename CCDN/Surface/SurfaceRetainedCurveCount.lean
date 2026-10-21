@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Curve.Curve
-public import Mathlib.RingTheory.Ideal.Height
+public import CCDN.Curve.SurfaceCurve
 import CCDN.Analysis.SmallDegreeSurfaceNumerics
 import CCDN.Curve.SmallDegreeSurfaceCurveCount
 import CCDN.Surface.SurfaceDegreeOneCount
@@ -41,8 +41,7 @@ theorem retained_surface_curve_union_bound :
       ∀ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ) (A D B : ℝ),
       0 ≤ A → 0 ≤ D → 1 ≤ B →
-      (∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧ map (Int.castRingHom ℚ) f ∈ I ∧
-        0 < δ I ∧ HasAffineCurveDegree I (δ I)) →
+      (∀ I ∈ S, IsSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I) ∧ 0 < δ I) →
       (∀ I ∈ S, (δ I : ℝ) ≤ D * (Real.log B + 1)) →
       (∑ I ∈ S, (δ I : ℝ)) ≤
         A * B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) * (Real.log B + 1) →
@@ -61,9 +60,8 @@ theorem retained_surface_curve_union_bound :
   have hlineCount := hline f hir (by omega) B (by linarith) lines
     (fun I hI => by
       obtain ⟨hIS, hδ⟩ := mem_filter.mp hI
-      obtain ⟨hp, hheight, _, _, hdeg⟩ := hS I hIS
-      exact ⟨hp, hheight, hδ ▸ hdeg⟩)
-    (fun I hI => (hS I (mem_filter.mp hI).1).2.2.1)
+      exact ⟨(hS I hIS).1.isPrime, (hS I hIS).1.height_eq, hδ ▸ (hS I hIS).1.degree⟩)
+    (fun I hI => (hS I (mem_filter.mp hI).1).1.mem)
   have hcurveBudget : (∑ I ∈ curves, (δ I : ℝ)) ≤
       A * B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) * (Real.log B + 1) ^ 1 := by
     rw [pow_one]
@@ -71,14 +69,13 @@ theorem retained_surface_curve_union_bound :
   have hcurveCount := hcurve curves δ f.totalDegree hd A D B hA hD hB
     (fun I hI => by
       obtain ⟨hIS, hδ⟩ := mem_filter.mp hI
-      have hh := hS I hIS
-      exact ⟨hh.1, hδ, hh.2.2.2.2⟩)
+      exact ⟨(hS I hIS).1.isPrime, hδ, (hS I hIS).1.degree⟩)
     (fun I hI => hcap I (mem_filter.mp hI).1) hcurveBudget
   have hcard : (lines.card : ℝ) ≤ ∑ I ∈ S, (δ I : ℝ) := by
     calc
       _ ≤ (S.card : ℝ) := by exact_mod_cast card_le_card (filter_subset (fun I => δ I = 1) S)
       _ = ∑ _I ∈ S, (1 : ℝ) := by simp
-      _ ≤ _ := sum_le_sum (fun I hI => by exact_mod_cast (hS I hI).2.2.2.1)
+      _ ≤ _ := sum_le_sum (fun I hI => by exact_mod_cast (hS I hI).2)
   have hcardBound : (lines.card : ℝ) ≤ A * Ccard * B := by
     have hh := mul_le_mul_of_nonneg_left (surface_curve_number_weight hd hB) hA
     exact (hcard.trans hbudget).trans (by simpa only [mul_assoc, Ccard] using hh)
@@ -90,7 +87,7 @@ theorem retained_surface_curve_union_bound :
     by_cases hδ : δ I = 1
     · exact Or.inl (Set.mem_iUnion.mpr ⟨I, Set.mem_iUnion.mpr
         ⟨mem_filter.mpr ⟨hIS, hδ⟩, hxI⟩⟩)
-    · have hδ2 : 2 ≤ δ I := by have := (hS I hIS).2.2.2.1; omega
+    · have hδ2 : 2 ≤ δ I := by have := (hS I hIS).2; omega
       exact Or.inr (Set.mem_iUnion.mpr ⟨I, Set.mem_iUnion.mpr
         ⟨mem_filter.mpr ⟨hIS, hδ2⟩, hxI⟩⟩)
   have hcount : (count (⋃ I ∈ S, idealZeroLocus I) B : ℝ) ≤

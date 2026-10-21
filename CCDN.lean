@@ -404,6 +404,7 @@ public import CCDN.Curve.CurveRationalInverse
 public import CCDN.Curve.CurveRationalParameter
 public import CCDN.Curve.ProjectiveHilbertCurveGrowth
 public import CCDN.Curve.SmallDegreeSurfaceCurveCount
+public import CCDN.Curve.SurfaceCurve
 public import CCDN.Determinant.AffineCongruenceDeterminant
 public import CCDN.Determinant.AlgEquivAdicLayer
 public import CCDN.Determinant.AmbientProjectiveDeterminant

@@ -35,8 +35,7 @@ theorem surface_residue_crossing_count_le
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
     (S : Finset (Ideal (CoordinatePolynomial 3)))
     (δ : Ideal (CoordinatePolynomial 3) → ℕ)
-    (hS : ∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-      map (Int.castRingHom ℚ) f ∈ I ∧ HasAffineCurveDegree I (δ I))
+    (hS : ∀ I ∈ S, IsSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I))
     (R : Finset ℕ) (hR : ∀ p ∈ R, p.Prime) (p : ℕ)
     (r : SmoothAffineResidueFamily f R) :
     count (surfaceResidueCrossing F S R hR p r) B ≤
@@ -51,10 +50,7 @@ theorem surface_residue_crossing_count_le
   let h := map (Int.castRingHom ℚ) (F.auxiliary R hR r)
   have hh := surface_curve_crossing_count_le (map (Int.castRingHom ℚ) f) g h hir
     (F.proper _ _ _) (S.filter (fun I => g ∈ I)) δ
-    (fun I hI => by
-      obtain ⟨hIS, hgI⟩ := mem_filter.mp hI
-      obtain ⟨hp, hheight, hf, hd⟩ := hS I hIS
-      exact ⟨hp, hheight, hf, hgI, hd⟩) B
+    (fun I hI => ⟨hS I (mem_filter.mp hI).1, (mem_filter.mp hI).2⟩) B
   have he : (S.filter (fun I => g ∈ I)).filter (fun I => h ∉ I) =
       S.filter (fun I => g ∈ I ∧ h ∉ I) := by ext I; simp only [mem_filter]; tauto
   rw [he] at hh
@@ -102,8 +98,7 @@ theorem surface_residue_crossing_scaled_count
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
     (S : Finset (Ideal (CoordinatePolynomial 3)))
     (δ : Ideal (CoordinatePolynomial 3) → ℕ)
-    (hS : ∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-      map (Int.castRingHom ℚ) f ∈ I ∧ HasAffineCurveDegree I (δ I))
+    (hS : ∀ I ∈ S, IsSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I))
     (R : Finset ℕ) (hRW : R ⊆ congruencePrimeWindow L)
     (hR : ∀ p ∈ R, p.Prime) (p : ℕ) (hp : p ∈ R)
     (hq : (∏ q ∈ R, (q : ℝ)) ≤ scalingPrimeRatio * L * X)
@@ -170,8 +165,7 @@ theorem surface_residue_edge_count_le
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
     (S : Finset (Ideal (CoordinatePolynomial 3)))
     (δ : Ideal (CoordinatePolynomial 3) → ℕ)
-    (hS : ∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-      map (Int.castRingHom ℚ) f ∈ I ∧ HasAffineCurveDegree I (δ I))
+    (hS : ∀ I ∈ S, IsSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I))
     (R : Finset ℕ) (hRW : R ⊆ congruencePrimeWindow L)
     (hR : ∀ p ∈ R, p.Prime) (p : ℕ) (hp : p ∈ R)
     (hq : (∏ q ∈ R, (q : ℝ)) ≤ scalingPrimeRatio * L * X) :

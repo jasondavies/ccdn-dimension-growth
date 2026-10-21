@@ -5,9 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.Curve
+public import CCDN.Curve.SurfaceCurve
 public import CCDN.Surface.TopFormAuxiliary
-public import Mathlib.RingTheory.Ideal.Height
 import CCDN.Surface.SurfaceNonlinearCount
 import CCDN.Surface.TopFormSurfaceComponents
 /-! For an auxiliary section of a surface of degree at least sixteen,
@@ -29,8 +28,7 @@ theorem top_form_surface_nonlinear_count :
       16 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       ∃ S : Finset (Ideal (CoordinatePolynomial 3)),
         ∃ δ : Ideal (CoordinatePolynomial 3) → ℕ,
-          (∀ P ∈ S, P.IsPrime ∧ P.height = 2 ∧
-            map (Int.castRingHom ℚ) f ∈ P ∧ 0 < δ P ∧ HasAffineCurveDegree P (δ P)) ∧
+          (∀ P ∈ S, IsSurfaceCurve (map (Int.castRingHom ℚ) f) P (δ P) ∧ 0 < δ P) ∧
           (∀ x : IntPoint 3, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 →
             ∃ P ∈ S, rationalPoint x ∈ idealZeroLocus P) ∧
           ((∑ P ∈ S, δ P : ℕ) : ℝ) ≤ topFormAuxiliaryConstant 1 *
@@ -55,8 +53,7 @@ theorem top_form_surface_nonlinear_count :
   have hcurves (P : Ideal (CoordinatePolynomial 3)) (hP : P ∈ T) :
       P.IsPrime ∧ 2 ≤ δ P ∧ HasAffineCurveDegree P (δ P) := by
     obtain ⟨hPS, hδ⟩ := Finset.mem_filter.mp hP
-    obtain ⟨hprime, _, _, _, _, hdegree⟩ := hcomponents P hPS
-    exact ⟨hprime, hδ, hdegree⟩
+    exact ⟨(hcomponents P hPS).isPrime, hδ, (hcomponents P hPS).degree⟩
   have hsubsum : (∑ P ∈ T, δ P) ≤ ∑ P ∈ S, δ P :=
     Finset.sum_le_sum_of_subset_of_nonneg (Finset.filter_subset _ _) (by intros; omega)
   have hTsum : (∑ P ∈ T, (δ P : ℝ)) ≤
@@ -79,7 +76,7 @@ theorem top_form_surface_nonlinear_count :
       rw [map_eval, map_zero]
       exact hxf
     obtain ⟨P, hPS, hxP⟩ := hcover x hbox hzero
-    obtain ⟨_, _, _, _, hpositive, _⟩ := hcomponents P hPS
+    have hpositive := (hcomponents P hPS).pos
     have hnotone : δ P ≠ 1 := by
       intro hone
       apply hxL
@@ -89,9 +86,7 @@ theorem top_form_surface_nonlinear_count :
     exact mem_integralPoints.mpr ⟨hbox,
       Set.mem_iUnion.mpr ⟨P, Set.mem_iUnion.mpr ⟨hPT, hxP⟩⟩⟩
   refine ⟨S, δ, ?_, hcover, hsum, hnonlinear, ?_⟩
-  · intro P hPS
-    obtain ⟨hprime, hheight, hpf, _, hpositive, hdegree⟩ := hcomponents P hPS
-    exact ⟨hprime, hheight, hpf, hpositive, hdegree⟩
+  · exact fun P hPS => ⟨(hcomponents P hPS).toIsSurfaceCurve, (hcomponents P hPS).pos⟩
   · have hh : (count (zeroLocus (map (Int.castRingHom ℚ) f) \ L) B : ℝ) ≤
         (count (⋃ P ∈ T, idealZeroLocus P) B : ℝ) := by exact_mod_cast houtside
     exact hh.trans hnonlinear

@@ -47,11 +47,11 @@ theorem affine_surface_count_large_degree :
   have hTcurve (P : Ideal (CoordinatePolynomial 3)) (hP : P ∈ T) :
       P.IsPrime ∧ P.height = 2 ∧ HasAffineCurveDegree P 1 := by
     obtain ⟨hPS, hone⟩ := Finset.mem_filter.mp hP
-    obtain ⟨hprime, hheight, _, _, hdeg⟩ := hcomponents P hPS
-    exact ⟨hprime, hheight, by simpa only [hone] using hdeg⟩
+    exact ⟨(hcomponents P hPS).1.isPrime, (hcomponents P hPS).1.height_eq,
+      by simpa only [hone] using (hcomponents P hPS).1.degree⟩
   have hTsurface (P : Ideal (CoordinatePolynomial 3)) (hP : P ∈ T) :
       map (Int.castRingHom ℚ) f ∈ P :=
-    (hcomponents P (Finset.mem_filter.mp hP).1).2.2.1
+    (hcomponents P (Finset.mem_filter.mp hP).1).1.mem
   have hlinecount : (count L B : ℝ) ≤ C * (f.totalDegree : ℝ) ^ 6 * B + T.card :=
     hlines f hir (by omega) B (by linarith) T hTcurve hTsurface
   have hcard : T.card ≤ ∑ P ∈ S, δ P := by
@@ -61,7 +61,7 @@ theorem affine_surface_count_large_degree :
       _ ≤ ∑ P ∈ S, δ P := by
         apply Finset.sum_le_sum
         intro P hP
-        exact (hcomponents P hP).2.2.2.1
+        exact (hcomponents P hP).2
   have hcardR : (T.card : ℝ) ≤ K * (f.totalDegree : ℝ) ^ (9 / 2 : ℝ) *
       B ^ (1 / (f.totalDegree : ℝ) ^ (1 / 2 : ℝ)) := by
     have hh : (T.card : ℝ) ≤ ((∑ P ∈ S, δ P : ℕ) : ℝ) := by

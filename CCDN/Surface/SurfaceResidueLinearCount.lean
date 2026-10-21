@@ -89,6 +89,17 @@ theorem surfaceResidueWindow_parameters {d : ℕ} (hd : 1 ≤ d)
     have hh := Real.exp_le_exp.mpr hlogX
     rwa [Real.exp_log (by positivity)] at hh
 
+/-- For a surface equation of degree `d ≥ 1` whose coefficients are bounded by `H ≥ 1` with
+`log H ≤ K (log B + 1)`, the chosen window `surfaceResidueWindow d K B` and the cutoff
+`2 B^(1/√d)` are residue-cover parameters. -/
+theorem isSurfaceResidueWindow_of_log_height {f : MvPolynomial (Fin 3) ℤ}
+    (hd : 1 ≤ f.totalDegree) {K B H : ℝ} (hK : 0 ≤ K) (hB : 1 ≤ B) (hH : 1 ≤ H)
+    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H) (hheight : Real.log H ≤ K * (Real.log B + 1)) :
+    IsSurfaceResidueWindow f B H (surfaceResidueWindow f.totalDegree K B)
+      (2 * B ^ (1 / Real.sqrt (f.totalDegree : ℝ))) := by
+  obtain ⟨hderivative, hX, hBX, hXL⟩ := surfaceResidueWindow_parameters hd hK hB hheight
+  exact ⟨hB, hH, surfaceResidueWindow_one_le _ hK hB, hcoeff, hderivative, hX, hBX, hXL⟩
+
 /-- The residual locus has a uniform linear count. The constant is
 chosen before the equation, radius, congruence auxiliaries and curve family. -/
 theorem surface_residue_linear_count (d : ℕ) (hd : 5 ≤ d)
@@ -99,8 +110,7 @@ theorem surface_residue_linear_count (d : ℕ) (hd : 5 ≤ d)
       Irreducible (MvPolynomial.map (Int.castRingHom ℚ) f) →
       ∀ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ),
-      (∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-        MvPolynomial.map (Int.castRingHom ℚ) f ∈ I ∧ HasAffineCurveDegree I (δ I)) →
+      (∀ I ∈ S, IsSurfaceCurve (MvPolynomial.map (Int.castRingHom ℚ) f) I (δ I)) →
       (count (surfaceResidueResidualLocus F S (surfaceResidueWindow d K B)
         (2 * B ^ (1 / Real.sqrt (d : ℝ))) (surfaceResidueWindow_one_le d hK hB)) B : ℝ) ≤
           C * B := by

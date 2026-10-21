@@ -27,8 +27,7 @@ theorem primitive_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
       f.totalDegree = d → ∀ B : ℝ, 1 ≤ B →
       ∃ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ),
-        (∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧ map (Int.castRingHom ℚ) f ∈ I ∧
-          GeometricCurveIdeal I ∧ 0 < δ I ∧ HasAffineCurveDegree I (δ I) ∧ δ I ≤ d ^ 2) ∧
+        (∀ I ∈ S, IsGeometricSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I) ∧ δ I ≤ d ^ 2) ∧
         (S.card : ℝ) ≤ C * (B ^ (1 / Real.sqrt (d : ℝ)) * Real.log B + 1) ∧
         (count (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
           (⋃ I ∈ S, idealZeroLocus I)) B : ℝ) ≤
@@ -106,10 +105,10 @@ theorem surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
   obtain ⟨S,δ,hS,hcard,hcount⟩ := hcover g hprim hgabs hgdeg B hB
   refine ⟨S,δ,?_,hcard,?_⟩
   · intro I hI
-    obtain ⟨hp,hh,hg,hgeo,hpos,hdeg,hδ⟩ := hS I hI
-    refine ⟨hp,hh,?_,hgeo,hpos,hdeg,hδ⟩
+    obtain ⟨hg,hδ⟩ := hS I hI
+    refine ⟨hg.isPrime,hg.height_eq,?_,hg.geometric,hg.pos,hg.degree,hδ⟩
     rw [he,map_mul,map_C]
-    exact I.mul_mem_left _ hg
+    exact I.mul_mem_left _ hg.mem
   · rw [he,map_mul,map_C,smoothSurfaceLocus_C_mul _ (by change (a : ℚ) ≠ 0; exact_mod_cast ha)]
     exact hcount
 

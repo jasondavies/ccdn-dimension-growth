@@ -59,19 +59,16 @@ theorem primitive_surface_fixed_degree_linear_bound (d : ℕ) (hd : 5 ≤ d) :
     have hheight' : Real.log (integerCoefficientHeight f : ℝ) ≤
         K * (Real.log B + 1) := hheight
     have hL := surfaceResidueWindow_one_le f.totalDegree hK hB
-    obtain ⟨hderivative, hX, hBX, hXL⟩ :=
-      surfaceResidueWindow_parameters (by omega : 1 ≤ f.totalDegree) hK hB hheight'
     obtain ⟨F, S, δ, hS, hbudget, hcover⟩ :=
-      exists_surface_small_curve_residual_cover f habs (by omega) hK hH hB hL
-        (coefficient_abs_le_integerCoefficientHeight f) hheight' hderivative hX hBX hXL
+      exists_surface_small_curve_residual_cover f habs (by omega) hK hheight'
+        (isSurfaceResidueWindow_of_log_height (by omega) hK hB hH
+          (coefficient_abs_le_integerCoefficientHeight f) hheight')
     let small := S.filter (fun I => (δ I : ℝ) ≤
       2 * f.totalDegree * A * surfaceResidueLogBudget B
         (surfaceResidueWindow f.totalDegree K B))
     have hsmall (I : Ideal (CoordinatePolynomial 3)) (hI : I ∈ small) :
-        I.IsPrime ∧ I.height = 2 ∧ map (Int.castRingHom ℚ) f ∈ I ∧
-          0 < δ I ∧ HasAffineCurveDegree I (δ I) := by
-      obtain ⟨hp, hh, hf, _, hdI, hdeg⟩ := hS I (mem_filter.mp hI).1
-      exact ⟨hp, hh, hf, hdI, hdeg⟩
+        IsSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I) ∧ 0 < δ I :=
+      ⟨(hS I (mem_filter.mp hI).1).toIsSurfaceCurve, (hS I (mem_filter.mp hI).1).pos⟩
     have hcap (I : Ideal (CoordinatePolynomial 3)) (hI : I ∈ small) :
         (δ I : ℝ) ≤ D * (Real.log B + 1) := by
       have hh := (mem_filter.mp hI).2
@@ -93,9 +90,7 @@ theorem primitive_surface_fixed_degree_linear_bound (d : ℕ) (hd : 5 ≤ d) :
         _ = _ := by dsimp only [A₀]; ring
     have hret : (count (⋃ I ∈ small, idealZeroLocus I) B : ℝ) ≤ Cret * B :=
       hcurve f htop hd small δ A₀ D B hA₀ hD hB hsmall hcap hbudget'
-    have hresidual := hres f rfl B hB F hir S δ (fun I hI => by
-      obtain ⟨hp, hh, hf, _, _, hdeg⟩ := hS I hI
-      exact ⟨hp, hh, hf, hdeg⟩)
+    have hresidual := hres f rfl B hB F hir S δ (fun I hI => (hS I hI).toIsSurfaceCurve)
     have hsingular : (count (singularHypersurfaceLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
         9 * (f.totalDegree : ℝ) ^ 2 * B := by
       have hh := singular_hypersurface_dimension_growth (n := 1)
