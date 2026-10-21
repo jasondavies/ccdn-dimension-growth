@@ -7,10 +7,11 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Height.ScaledHypersurfaceHeight
 import CCDN.Surface.TopFormAuxiliaryEstimate
 import CCDN.Surface.TopFormBadPrimes
-import CCDN.ForMathlib.MvPolynomial
 /-! A coefficient-uniform auxiliary for an affine hypersurface with absolutely
 irreducible leading form. This is the dimension-general form of CCDN (4-3-1). -/
 
@@ -33,11 +34,10 @@ theorem primitive_top_form_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : HasAbsIrreducibleTopForm f)
     {B : ℝ} (hB : 1 ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ topFormAuxiliaryConstant n *
         (f.totalDegree : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) *
-          B ^ (1 / (f.totalDegree : ℝ) ^ (1 / (n + 1 : ℝ))) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+          B ^ (1 / (f.totalDegree : ℝ) ^ (1 / (n + 1 : ℝ))) := by
   have hfIr := hprim.irreducible_of_absolute_top hir
   have habs := absolute_irreducible_of_top_homogeneousComponent_irreducible f hir
   have hd := absolute_integer_polynomial_totalDegree_pos f habs
@@ -56,8 +56,8 @@ theorem primitive_top_form_auxiliary {n : ℕ}
       _ ≤ _ := by
         simpa only [Nat.cast_add, Nat.cast_one] using
           hypersurface_badPrime_fractional_height_bound F hF0 hFd (r := n + 1) (by omega) hd
-  obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := affine_hypersurface_auxiliary f hprim hfIr hd hB
-  refine ⟨g, hg0, hgnd, hgdeg.trans ?_, hgz⟩
+  obtain ⟨g, hg, hgdeg⟩ := affine_hypersurface_auxiliary f hprim hfIr hd hB
+  refine ⟨g, hg, hgdeg.trans ?_⟩
   have hh := mul_le_mul_of_nonneg_left
     (affineAuxiliaryDegreeExpression_le_of_badPrime_ratio n hd hB hL hratio)
     (affineHypersurfaceAuxiliaryConstant_pos n).le
@@ -81,7 +81,7 @@ theorem top_form_auxiliary_rational {n : ℕ}
   have hf0 : f ≠ 0 := by intro hz; exact hir.ne_zero (by simp [hz])
   obtain ⟨c, u, hc, huprim, he⟩ := exists_primitive_integer_factor f hf0
   obtain ⟨huDegree, huTop⟩ := absolute_top_irreducible_of_integer_scalar_factor hc he hir
-  obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := primitive_top_form_auxiliary u huprim huTop hB
+  obtain ⟨g, ⟨hg0, hgnd, hgz⟩, hgdeg⟩ := primitive_top_form_auxiliary u huprim huTop hB
   have hudvd : u ∣ f := ⟨C c, by rw [he]; ring⟩
   refine ⟨g, hg0, ?_, ?_, ?_⟩
   · intro h

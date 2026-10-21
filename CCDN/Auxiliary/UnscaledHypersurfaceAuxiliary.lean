@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.HomogeneousSlice
 public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Height.ProjectiveZeroLocus
 import CCDN.Algebra.IntegerRationalIrreducibility
@@ -14,8 +15,8 @@ import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
 import CCDN.Auxiliary.HypersurfaceCoefficientDichotomy
 import CCDN.Auxiliary.UnscaledModelCount
-import CCDN.Height.ProjectiveIntegerHeight
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Height.ProjectiveIntegerHeight
 /-! The ordinary homogenization provides an affine auxiliary without a
 scaling-prime hypothesis and transfers the coefficient-height dichotomy. -/
 
@@ -116,19 +117,18 @@ box, with the height and bad-prime factor of the unscaled model. -/
 theorem unscaled_affine_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f) (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
         (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f))
-        (integerCoefficientHeight f : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+        (integerCoefficientHeight f : ℝ) := by
   let F := scaledHomogenize f.totalDegree 1 f
   have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous _ _ le_rfl
   have hFir : Irreducible F := scaledHomogenize_one_integer_irreducible f hprim hir hd
   obtain ⟨M, hM, G, _, hGhom, hGzero, hGnd⟩ := hypersurface_projective_auxiliary F hFhom hd hFir hB
   let g := homogeneousSlice (n + 2) 1 G
   have hgnd : ¬ f ∣ g := unscaled_auxiliary_not_dvd f hir.ne_zero hprim G hGhom hGnd
-  refine ⟨g, fun h => hgnd (by rw [h]; exact dvd_zero _), hgnd, ?_,
-    unscaled_auxiliary_vanishes f G hGhom hB hGzero⟩
+  refine ⟨g, ⟨fun h => hgnd (by rw [h]; exact dvd_zero _), hgnd,
+    unscaled_auxiliary_vanishes f G hGhom hB hGzero⟩, ?_⟩
   have hgM : (g.totalDegree : ℝ) ≤ M := by
     exact_mod_cast homogeneousSlice_degree_le (1 : ℤ) hGhom
   have hh := hgM.trans hM
@@ -144,8 +144,7 @@ theorem affine_coefficient_height_dichotomy {n : ℕ}
       ((n + f.totalDegree).choose f.totalDegree : ℝ) *
         Real.log ((n + f.totalDegree).choose f.totalDegree) +
       ((n + f.totalDegree).choose f.totalDegree : ℝ) * f.totalDegree * Real.log B ∨
-    ∃ g : MvPolynomial (Fin n) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧ g.totalDegree ≤ f.totalDegree ∧
-      ∀ x : IntPoint n, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+    ∃ g, IsBoxAuxiliary f g B ∧ g.totalDegree ≤ f.totalDegree := by
   rcases projective_coefficient_height_dichotomy (scaledHomogenize f.totalDegree 1 f)
       (scaledHomogenize_homogeneous 1 f le_rfl) (scaledHomogenize_ne_zero _ one_ne_zero hf0) hB with
     hheight | ⟨G, _, hGhom, hGnd, hGzero⟩
@@ -154,8 +153,8 @@ theorem affine_coefficient_height_dichotomy {n : ℕ}
   · right
     let g := homogeneousSlice n 1 G
     have hgnd : ¬ f ∣ g := unscaled_auxiliary_not_dvd f hf0 hprim G hGhom hGnd
-    exact ⟨g, fun h => hgnd (by rw [h]; exact dvd_zero _), hgnd,
-      homogeneousSlice_degree_le (1 : ℤ) hGhom, unscaled_auxiliary_vanishes f G hGhom hB hGzero⟩
+    exact ⟨g, ⟨fun h => hgnd (by rw [h]; exact dvd_zero _), hgnd,
+      unscaled_auxiliary_vanishes f G hGhom hB hGzero⟩, homogeneousSlice_degree_le (1 : ℤ) hGhom⟩
 
 end
 end CCDN

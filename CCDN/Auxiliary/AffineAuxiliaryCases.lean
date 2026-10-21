@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PrimeScaledAffineMinimum
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 import CCDN.Algebra.UnscaledAffineMinimum
 import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
 import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
@@ -90,12 +91,11 @@ theorem affine_auxiliary_minimum_nonzero_constant {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f) (hd : 0 < f.totalDegree) (hc : f.coeff 0 ≠ 0)
     {B : ℝ} (hB : 1 ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree
         (affineAuxiliaryComparisonConstant n) B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
-        (hypersurfaceBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+        (hypersurfaceBadPrimeFactor f) := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := hypersurfaceBadPrimeFactor (scaledHomogenize d 1 f)
@@ -105,9 +105,9 @@ theorem affine_auxiliary_minimum_nonzero_constant {n : ℕ}
     hypersurfaceBadPrimeFactor_unscaledHomogenize_le f hir.ne_zero
   have hA : 1 ≤ affineAuxiliaryComparisonConstant n := affineAuxiliaryComparisonConstant_one_le n
   by_cases hsmall : B ≤ affineAuxiliaryBoxScale * ((d : ℝ) + 1) ^ affineAuxiliaryBoxExponent n
-  · obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := unscaled_affine_auxiliary_minimum f hprim hir hd
+  · obtain ⟨g, hg, hgdeg⟩ := unscaled_affine_auxiliary_minimum f hprim hir hd
       affineAuxiliaryBoxScale_one_le hB hsmall
-    refine ⟨g, hg0, hgnd, hgdeg.trans ?_, hgz⟩
+    refine ⟨g, hg, hgdeg.trans ?_⟩
     exact (affineMinimumAuxiliaryBound_mono_A n d (le_max_right _ _) hB hL hb).trans
       (affineMinimumAuxiliaryBound_mono_b n d (zero_le_one.trans hA) hB hL hb')
   · have hBA : scalingPrimeRatio ≤ B := by
@@ -120,9 +120,9 @@ theorem affine_auxiliary_minimum_nonzero_constant {n : ℕ}
       have hS0 := zero_le_one.trans affineAuxiliaryBoxScale_one_le
       exact (hS.trans (le_mul_of_one_le_right hS0 hpow)).trans (le_of_not_ge hsmall)
     by_cases hheight : Real.log |(f.coeff 0 : ℝ)| < B / scalingPrimeRatio
-    · obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := affine_auxiliary_minimum_of_small_constant_coefficient
+    · obtain ⟨g, hg, hgdeg⟩ := affine_auxiliary_minimum_of_small_constant_coefficient
         f hprim hir hd hc hBA hheight
-      refine ⟨g, hg0, hgnd, hgdeg.trans ?_, hgz⟩
+      refine ⟨g, hg, hgdeg.trans ?_⟩
       exact (affineMinimumAuxiliaryBound_mono_A n d (le_max_left _ _) hB hL hb).trans
         (affineMinimumAuxiliaryBound_mono_b n d (zero_le_one.trans hA) hB hL hb')
     · rcases affine_coefficient_height_dichotomy f hir.ne_zero hprim hB with hh | hg
@@ -132,8 +132,8 @@ theorem affine_auxiliary_minimum_nonzero_constant {n : ℕ}
         have hcut := affine_coefficient_height_cutoff (n + 2) d scalingPrimeRatio_one_le hB
           ((le_of_not_gt hheight).trans (hcoef.trans hh))
         exact (hsmall hcut).elim
-      · obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := hg
-        refine ⟨g, hg0, hgnd, ?_, hgz⟩
+      · obtain ⟨g, hg, hgdeg⟩ := hg
+        refine ⟨g, hg, ?_⟩
         have hgR : (g.totalDegree : ℝ) ≤ d := by exact_mod_cast hgdeg
         exact hgR.trans (degree_le_affineMinimumAuxiliaryBound n hd (zero_le_one.trans hA) hB hL
           (hypersurfaceBadPrimeFactor_nonneg f))

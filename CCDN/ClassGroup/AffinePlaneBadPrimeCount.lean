@@ -65,7 +65,7 @@ theorem affine_plane_count_bad_prime
     (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
       affineHypersurfaceAuxiliaryConstant 0 * (f.totalDegree : ℝ) ^ 4 *
         (hypersurfaceBadPrimeFactor f + 2) * B ^ (1 / (f.totalDegree : ℝ)) := by
-  obtain ⟨g, _, hfg, hgdeg, hgz⟩ :=
+  obtain ⟨g, ⟨_, hfg, hgz⟩, hgdeg⟩ :=
     affine_hypersurface_auxiliary f hprim (hprim.irreducible_of_rational_map hir) hd hB
   have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hdegree := hgdeg.trans (mul_le_mul_of_nonneg_left

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Auxiliary.ScaledHomogenization
 import CCDN.Algebra.AffineScalingExponent
@@ -112,12 +113,11 @@ theorem prime_scaled_affine_auxiliary_height {n : ℕ}
     (hir : Irreducible f) (hd : 0 < f.totalDegree)
     {p : ℕ} (hp : p.Prime) (hp0 : ¬ (p : ℤ) ∣ f.coeff 0)
     {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) (hBp : B / A ≤ p) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineLogarithmicAuxiliaryBound n f.totalDegree A B
-        (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
-  obtain ⟨g, hg0, hgnd, hgdegree, hgzero⟩ := prime_scaled_affine_auxiliary f hprim hir hd hp hp0 hB hpB
-  refine ⟨g, hg0, hgnd, hgdegree.trans ?_, hgzero⟩
+        (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ) := by
+  obtain ⟨g, hg, hgdegree⟩ := prime_scaled_affine_auxiliary f hprim hir hd hp hp0 hB hpB
+  refine ⟨g, hg, hgdegree.trans ?_⟩
   exact scaled_hypersurface_auxiliary_bound f hir.ne_zero hd
     (by exact_mod_cast hp.one_lt.le : (1 : ℤ) ≤ p) hA hB
     (by simpa only [Int.cast_natCast] using hpB) (by simpa only [Int.cast_natCast] using hBp)

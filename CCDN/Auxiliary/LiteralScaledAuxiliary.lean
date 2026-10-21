@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
 public import CCDN.Auxiliary.ScaledHomogenization
 import CCDN.Algebra.ScaledHypersurfaceModel
@@ -138,18 +139,18 @@ theorem literal_prime_scaled_affine_auxiliary {n : ℕ}
     (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
     (hd : 0 < f.totalDegree) {p : ℕ} (hp : p.Prime) (hp0 : ¬(p : ℤ) ∣ f.coeff 0)
     {B : ℝ} (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
         (Real.exp 1 * literalAffineBadPrimeFactor f)
-        (integerCoefficientHeight (scaledHomogenize f.totalDegree (p : ℤ) f) : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+        (integerCoefficientHeight (scaledHomogenize f.totalDegree (p : ℤ) f) : ℝ) := by
   have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   obtain ⟨M, hM, G, _, hGhom, hGzero, hGnd⟩ := literal_scaled_homogeneous_auxiliary
     f hir hd p hp.pos (prime_scaled_zero_primitive f hp hp0) hB hpB
   let g := homogeneousSlice (n + 2) (p : ℤ) G
   have hgndQ := scaled_auxiliary_rational_not_dvd f hf0 hprim hp hp0 G hGhom hGnd
   have hgnd : ¬f ∣ g := fun h => hgndQ (map_dvd (map (Int.castRingHom ℚ)) h)
-  refine ⟨g, fun h => hgnd (by rw [h]; exact dvd_zero _), hgnd, ?_, ?_⟩
+  refine ⟨g, ⟨fun h => hgnd (by rw [h]; exact dvd_zero _), hgnd, ?_⟩, ?_⟩
+  swap
   · have hgM : (g.totalDegree : ℝ) ≤ M := by exact_mod_cast homogeneousSlice_degree_le (p : ℤ) hGhom
     exact hgM.trans (hM.trans (hypersurfaceAuxiliaryDegreeBound_mono_b n f.totalDegree
       (mul_le_mul_of_nonneg_right (literalScalingPrimeCharge_prime_le hp)
@@ -164,16 +165,16 @@ theorem literal_unscaled_affine_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
     (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
-        (literalAffineBadPrimeFactor f) (integerCoefficientHeight f : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+        (literalAffineBadPrimeFactor f) (integerCoefficientHeight f : ℝ) := by
   have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   obtain ⟨M, hM, G, _, hGhom, hGzero, hGnd⟩ := literal_scaled_homogeneous_auxiliary
     f hir hd 1 (by omega) (fun x _ => primitive_affine_integer_coordinates x) hB (by simpa using hB)
   let g := homogeneousSlice (n + 2) 1 G
   have hgnd : ¬f ∣ g := unscaled_auxiliary_not_dvd f hf0 hprim G hGhom hGnd
-  refine ⟨g, fun h => hgnd (by rw [h]; exact dvd_zero _), hgnd, ?_, ?_⟩
+  refine ⟨g, ⟨fun h => hgnd (by rw [h]; exact dvd_zero _), hgnd, ?_⟩, ?_⟩
+  swap
   · have hgM : (g.totalDegree : ℝ) ≤ M := by exact_mod_cast homogeneousSlice_degree_le (1 : ℤ) hGhom
     simpa only [Nat.cast_one, literalScalingPrimeCharge_one, one_mul,
       integerCoefficientHeight_scaledHomogenize_one] using hgM.trans hM

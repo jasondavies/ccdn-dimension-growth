@@ -112,7 +112,7 @@ theorem primitive_surface_geometric_coefficient_reduction
         (⋃ I ∈ T, idealZeroLocus I)) B : ℝ) ≤ (f.totalDegree : ℝ) ^ 4 := by
   have hf0 : f ≠ 0 := by intro h; exact hf.ne_zero (by rw [h, map_zero])
   rcases affine_coefficient_height_dichotomy f hf0 hprim hB with
-    hheight | ⟨g, _, hproper, hdeg, hzero⟩
+    hheight | ⟨g, ⟨_, hproper, hzero⟩, hdeg⟩
   · left
     have hlog := Real.log_nonneg hB
     have hNlog := Real.log_natCast_nonneg ((3 + f.totalDegree).choose f.totalDegree)

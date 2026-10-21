@@ -40,6 +40,15 @@ structure IsBoxAuxiliary {n : ℕ} (f g : MvPolynomial (Fin n) ℤ) (B : ℝ) : 
   not_dvd : ¬ f ∣ g
   vanishes : ∀ x : IntPoint n, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0
 
+/-- Unbundled form of an auxiliary polynomial on a box satisfying a further condition `P`,
+typically a degree bound, in the order in which the auxiliary theorems are stated. -/
+theorem exists_isBoxAuxiliary_and_iff {n : ℕ} {f : MvPolynomial (Fin n) ℤ} {B : ℝ}
+    {P : MvPolynomial (Fin n) ℤ → Prop} :
+    (∃ g, IsBoxAuxiliary f g B ∧ P g) ↔ ∃ g, g ≠ 0 ∧ ¬ f ∣ g ∧ P g ∧
+      ∀ x : IntPoint n, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 :=
+  ⟨fun ⟨g, hg, hP⟩ => ⟨g, hg.1, hg.2, hP, hg.3⟩,
+    fun ⟨g, h0, hnd, hP, hz⟩ => ⟨g, ⟨h0, hnd, hz⟩, hP⟩⟩
+
 /-- `g` is a homogeneous auxiliary polynomial of degree `M` for `f` through the points `z`: a
 nonzero form of degree `M` that vanishes at every point `z i` but is not a multiple of `f`. -/
 structure IsPointAuxiliary {σ R ι : Type*} [CommRing R] (f g : MvPolynomial σ R) (M : ℕ)
