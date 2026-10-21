@@ -24,7 +24,7 @@ open MvPolynomial
 
 /-- Iterated one-variable interpolation controls every coefficient of a complex polynomial
 from its values on the full grid {0,...,d}^n, with the exact factor 3^(nd). -/
-theorem complex_multivariate_coefficient_bound_of_integer_grid {n : ℕ}
+private theorem complex_multivariate_coefficient_bound_of_integer_grid {n : ℕ}
     (f : MvPolynomial (Fin n) ℂ) {d : ℕ} (hd : f.totalDegree ≤ d)
     {H : ℝ} (hH : 0 ≤ H)
     (heval : ∀ a : Fin n → ℕ, (∀ i, a i ≤ d) → ‖eval (fun i => (a i : ℂ)) f‖ ≤ H)

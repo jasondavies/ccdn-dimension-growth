@@ -23,7 +23,7 @@ noncomputable section
 open MvPolynomial
 
 /-- The product-of-degrees factor survives in every ambient dimension. -/
-theorem finite_field_common_zeros_card_le_choose {K ι : Type*} [Field K] [Fintype K]
+private theorem finite_field_common_zeros_card_le_choose {K ι : Type*} [Field K] [Fintype K]
     [Fintype ι] [DecidableEq ι] {n : ℕ}
     (f g : MvPolynomial (Fin (n + 2)) K) (hf : Prime f) (hfg : ¬ f ∣ g)
     (z : ι → Fin (n + 2) → K) (hz : Function.Injective z)

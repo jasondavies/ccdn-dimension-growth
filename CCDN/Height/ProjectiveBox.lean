@@ -24,7 +24,7 @@ lemma projective_rep_height {n : ℕ} (x : ProjectivePoint n) :
   rw [← Projectivization.mulHeight_mk x.rep_nonzero, x.mk_rep]
 
 /-- Every coordinate ratio has height bounded by the projective height. -/
-lemma projective_coordinate_ratio_height {n : ℕ} (x : ProjectivePoint n)
+private lemma projective_coordinate_ratio_height {n : ℕ} (x : ProjectivePoint n)
     (i j : Fin (n + 1)) :
     Height.mulHeight₁ (x.rep j / x.rep i) ≤ x.mulHeight := by
   rw [Height.mulHeight₁_div_eq_mulHeight]

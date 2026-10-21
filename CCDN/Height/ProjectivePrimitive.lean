@@ -93,7 +93,7 @@ theorem primitiveProjectiveRep_injective {n : ℕ} :
         congr 1
     _ = y := primitiveProjectiveRep_mk y
 
-theorem primitiveProjectiveRep_height {n : ℕ} (x : ProjectivePoint n) :
+private theorem primitiveProjectiveRep_height {n : ℕ} (x : ProjectivePoint n) :
     x.mulHeight = ((⨆ i, |primitiveProjectiveRep x i| : ℤ) : ℝ) := by
   have h := projective_height_primitive _ (primitiveProjectiveRep_ne_zero x)
     (primitiveProjectiveRep_gcd x)

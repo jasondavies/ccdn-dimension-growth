@@ -35,7 +35,7 @@ theorem exists_bounded_primitive_element {R F : Type*} [Field R] [CharZero R] [F
 
 /-- Maps from a fraction field are determined by the images of the
 original affine coordinates, even when the scalar field contains a parameter. -/
-theorem curve_coordinate_embeddings_injective {K R F L σ : Type*}
+private theorem curve_coordinate_embeddings_injective {K R F L σ : Type*}
     [Field K] [Field R] [Field F] [Field L]
     [Algebra K R] [Algebra K F] [Algebra R F] [IsScalarTower K R F]
     [Algebra K L] [Algebra R L] [IsScalarTower K R L]

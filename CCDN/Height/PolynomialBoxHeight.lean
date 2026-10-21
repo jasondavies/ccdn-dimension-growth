@@ -27,7 +27,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma polynomial_support_card_le {R σ : Type*} [CommSemiring R] [Fintype σ]
+private lemma polynomial_support_card_le {R σ : Type*} [CommSemiring R] [Fintype σ]
     (f : MvPolynomial σ R) :
     f.support.card ≤ (f.totalDegree + 1) ^ Fintype.card σ := by
   classical

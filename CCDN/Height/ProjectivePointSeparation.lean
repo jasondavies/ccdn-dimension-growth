@@ -19,7 +19,8 @@ noncomputable section
 open MvPolynomial
 variable {K : Type*} [Field K]
 
-lemma exists_projective_separating_minor {n : ℕ} {x y : Projectivization K (Fin (n + 1) → K)}
+private lemma exists_projective_separating_minor {n : ℕ}
+    {x y : Projectivization K (Fin (n + 1) → K)}
     (hxy : x ≠ y) :
     ∃ a b, y.rep b * x.rep a - y.rep a * x.rep b ≠ 0 := by
   by_contra! h
@@ -40,7 +41,8 @@ lemma exists_projective_separating_minor {n : ℕ} {x y : Projectivization K (Fi
       exact ⟨_, he.symm⟩
     _ = y := y.mk_rep
 
-lemma exists_projective_linear_separator {n : ℕ} {x y : Projectivization K (Fin (n + 1) → K)}
+private lemma exists_projective_linear_separator {n : ℕ}
+    {x y : Projectivization K (Fin (n + 1) → K)}
     (hxy : x ≠ y) :
     ∃ f : MvPolynomial (Fin (n + 1)) K,
       f.IsHomogeneous 1 ∧ eval x.rep f = 1 ∧ eval y.rep f = 0 := by
@@ -55,7 +57,7 @@ lemma exists_projective_linear_separator {n : ℕ} {x y : Projectivization K (Fi
 
 /-- Homogeneous Lagrange separators in degree `card ι - 1`, with exact
 Kronecker-delta values on the selected representatives. -/
-theorem exists_projective_point_separators {n : ℕ} {ι : Type*}
+private theorem exists_projective_point_separators {n : ℕ} {ι : Type*}
     [Fintype ι] [DecidableEq ι] (z : ι → Projectivization K (Fin (n + 1) → K))
     (hz : Function.Injective z) :
     ∃ h : ι → MvPolynomial (Fin (n + 1)) K,
