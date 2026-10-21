@@ -20,14 +20,15 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
+variable {K R F L σ τ : Type*} [Field K] [Field R] [Field F] [Field L]
+  [Algebra K R] [Algebra K F] [Algebra R F] [IsScalarTower K R F]
+  [Algebra K L] [Algebra R L] [IsScalarTower K R L]
+  (I : Ideal (MvPolynomial σ K))
+  [Algebra (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
+  [IsScalarTower K (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
+  [IsFractionRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
+
 theorem polynomial_coordinate_embeddings_injective
-    {K R F L σ τ : Type*} [Field K] [Field R] [Field F] [Field L]
-    [Algebra K R] [Algebra K F] [Algebra R F] [IsScalarTower K R F]
-    [Algebra K L] [Algebra R L] [IsScalarTower K R L]
-    (I : Ideal (MvPolynomial σ K))
-    [Algebra (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
-    [IsScalarTower K (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
-    [IsFractionRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
     (hparam : ∀ j : τ, ∃ r : R, algebraMap R F r =
       algebraMap (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F (X j)) :
     Function.Injective (fun φ : F →ₐ[R] L => fun j : σ =>
@@ -60,13 +61,6 @@ theorem polynomial_coordinate_embeddings_injective
   exact RingHom.congr_fun hfield x
 
 theorem neg_polynomial_coordinate_embeddings_injective
-    {K R F L σ τ : Type*} [Field K] [Field R] [Field F] [Field L]
-    [Algebra K R] [Algebra K F] [Algebra R F] [IsScalarTower K R F]
-    [Algebra K L] [Algebra R L] [IsScalarTower K R L]
-    (I : Ideal (MvPolynomial σ K))
-    [Algebra (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
-    [IsScalarTower K (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
-    [IsFractionRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
     (hparam : ∀ j : τ, ∃ r : R, algebraMap R F r =
       algebraMap (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F (X j)) :
     Function.Injective (fun φ : F →ₐ[R] L => fun j : σ =>

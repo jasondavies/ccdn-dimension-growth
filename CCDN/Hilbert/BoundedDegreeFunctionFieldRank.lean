@@ -90,15 +90,16 @@ theorem bounded_degree_polynomial_parameters_rank_le
   rw [finrank_restrictTotalDegree, ← Nat.choose_symm_add] at hh
   exact hh
 
+variable {K R F σ : Type*} [Field K] [Field R] [Field F]
+  [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F] [Fintype σ] [LinearOrder σ]
+  (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
+  [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
+  [IsFractionRing (MvPolynomial σ K ⧸ I) F]
+
 /-- Clearing common denominators gives the same sharp bound for arbitrary
 independent functions in the fraction field. -/
 theorem bounded_degree_fraction_parameters_rank_le
-    {K R F σ τ ι : Type*} [Field K] [Field R] [Field F]
-    [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F]
-    [Fintype σ] [LinearOrder σ] [Fintype τ] [Fintype ι] [DecidableEq ι]
-    (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
-    [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
-    [IsFractionRing (MvPolynomial σ K ⧸ I) F]
+    {τ ι : Type*} [Fintype τ] [Fintype ι] [DecidableEq ι]
     (d q : ℕ) (hq : 0 < q) (hdimdeg : HasAffineDimensionDegree I (Fintype.card τ) d)
     (l : τ → MvPolynomial σ K) (hl : ∀ i, (l i).totalDegree ≤ q)
     (u : τ → R) (hu : AlgebraicIndependent K u)
@@ -128,12 +129,7 @@ theorem bounded_degree_fraction_parameters_rank_le
 expected number of independent degree-q parameters. Its degree is at most
 the geometric multiplicity times q to the Hilbert dimension. -/
 theorem bounded_degree_hilbert_functionField_finite_rank_le
-    {K R F σ τ : Type*} [Field K] [Field R] [Field F]
-    [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F]
-    [Fintype σ] [LinearOrder σ] [Fintype τ]
-    (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
-    [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
-    [IsFractionRing (MvPolynomial σ K ⧸ I) F]
+    {τ : Type*} [Fintype τ]
     (d q : ℕ) (hq : 0 < q) (hdimdeg : HasAffineDimensionDegree I (Fintype.card τ) d)
     (l : τ → MvPolynomial σ K) (hl : ∀ i, (l i).totalDegree ≤ q)
     (u : τ → R) (hu : AlgebraicIndependent K u)
@@ -158,12 +154,7 @@ theorem bounded_degree_hilbert_functionField_finite_rank_le
 /-- The function field is finite over any field containing the expected
 number of independent linear parameters, of rank at most the multiplicity. -/
 theorem hilbert_functionField_finite_rank_le
-    {K R F σ τ : Type*} [Field K] [Field R] [Field F]
-    [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F]
-    [Fintype σ] [LinearOrder σ] [Fintype τ]
-    (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
-    [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
-    [IsFractionRing (MvPolynomial σ K ⧸ I) F]
+    {τ : Type*} [Fintype τ]
     (d : ℕ) (hdimdeg : HasAffineDimensionDegree I (Fintype.card τ) d)
     (l : τ → MvPolynomial σ K) (hl : ∀ i, (l i).totalDegree ≤ 1)
     (u : τ → R) (hu : AlgebraicIndependent K u)

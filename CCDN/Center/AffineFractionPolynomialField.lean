@@ -30,36 +30,25 @@ lemma polynomial_fraction_coefficient_map_injective
   rw [IsScalarTower.algebraMap_eq A (MvPolynomial σ A) E]
   exact (IsFractionRing.injective (MvPolynomial σ A) E).comp (C_injective σ A)
 
-def fractionPolynomialCoefficientEmbedding
-    {K A F E σ : Type*} [Field K] [CommRing A] [IsDomain A]
-    [Field F] [Field E] [Algebra K A] [Algebra K F] [Algebra K E]
-    [Algebra A F] [IsFractionRing A F] [IsScalarTower K A F]
-    [Algebra A E] [IsScalarTower K A E]
-    [Algebra (MvPolynomial σ A) E] [IsScalarTower A (MvPolynomial σ A) E]
-    [IsFractionRing (MvPolynomial σ A) E] : F →ₐ[K] E :=
+variable {K A F E σ : Type*} [Field K] [CommRing A] [IsDomain A]
+  [Field F] [Field E] [Algebra K A] [Algebra K F] [Algebra K E]
+  [Algebra A F] [IsFractionRing A F] [IsScalarTower K A F]
+  [Algebra A E] [IsScalarTower K A E]
+  [Algebra (MvPolynomial σ A) E] [IsScalarTower A (MvPolynomial σ A) E]
+  [IsFractionRing (MvPolynomial σ A) E]
+
+def fractionPolynomialCoefficientEmbedding : F →ₐ[K] E :=
   IsFractionRing.liftAlgHom (g := IsScalarTower.toAlgHom K A E)
     (polynomial_fraction_coefficient_map_injective (σ := σ))
 
-lemma fractionPolynomialCoefficientEmbedding_algebraMap
-    {K A F E σ : Type*} [Field K] [CommRing A] [IsDomain A]
-    [Field F] [Field E] [Algebra K A] [Algebra K F] [Algebra K E]
-    [Algebra A F] [IsFractionRing A F] [IsScalarTower K A F]
-    [Algebra A E] [IsScalarTower K A E]
-    [Algebra (MvPolynomial σ A) E] [IsScalarTower A (MvPolynomial σ A) E]
-    [IsFractionRing (MvPolynomial σ A) E] (x : A) :
+lemma fractionPolynomialCoefficientEmbedding_algebraMap (x : A) :
     fractionPolynomialCoefficientEmbedding (K := K) (A := A) (E := E) (σ := σ)
       (algebraMap A F x) =
       algebraMap A E x :=
   IsFractionRing.lift_algebraMap
     (polynomial_fraction_coefficient_map_injective (A := A) (E := E) (σ := σ)) x
 
-theorem fraction_polynomial_coefficient_tower
-    {K A F E σ : Type*} [Field K] [CommRing A] [IsDomain A]
-    [Field F] [Field E] [Algebra K A] [Algebra K F] [Algebra K E]
-    [Algebra A F] [IsFractionRing A F] [IsScalarTower K A F]
-    [Algebra A E] [IsScalarTower K A E]
-    [Algebra (MvPolynomial σ A) E] [IsScalarTower A (MvPolynomial σ A) E]
-    [IsFractionRing (MvPolynomial σ A) E] :
+theorem fraction_polynomial_coefficient_tower :
     let : Algebra F E :=
       (fractionPolynomialCoefficientEmbedding (K := K) (A := A) (F := F) (E := E)
         (σ := σ)).toRingHom.toAlgebra

@@ -32,12 +32,13 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
+variable {K F : Type*} [Field K] [Field F] [Algebra K F] {n m : ℕ}
+  (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
+  [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
+  [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
+  [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+
 theorem affine_normalization_parameters_finite
-    {K F : Type*} [Field K] [Field F] [Algebra K F] {n m : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
     (a : Fin m → MvPolynomial (Fin n) K)
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
@@ -67,8 +68,6 @@ theorem affine_normalization_parameters_finite
   exact hfinite
 
 theorem closure_normalization_parameters_injective
-    {K : Type*} [Field K] {n m : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (a : Fin m → MvPolynomial (Fin n) K)
     (hint : (projectionCoordinateMap (projectiveClosureIdeal I)
       (closureProjectionCoordinates a)).IsIntegral)
@@ -86,12 +85,7 @@ theorem closure_normalization_parameters_injective
     (RingHom.injective_iff_ker_eq_bot _).mpr hkerB
   exact hinjB
 
-theorem affine_normalization_functionField_finrank
-    {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n m : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+theorem affine_normalization_functionField_finrank [CharZero K]
     (a : Fin m → MvPolynomial (Fin n) K)
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap (projectiveClosureIdeal I)

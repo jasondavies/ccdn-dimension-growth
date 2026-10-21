@@ -33,14 +33,15 @@ lemma field_common_multiple_independent {R F ι : Type*} [Field R] [Field F]
     simpa only [mul_smul_comm] using hc
   exact Fintype.linearIndependent_iff.mp hv c hz i
 
+variable {K R F σ : Type*} [Field K] [Field R] [Field F]
+  [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F] [Fintype σ]
+  (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
+  [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
+  [IsFractionRing (MvPolynomial σ K ⧸ I) F]
+
 /-- Clearing a common denominator extends the polynomial rank bound to
 arbitrary elements of the fraction field. -/
-theorem fraction_parameter_rank_le {K R F σ ι : Type*} [Field K] [Field R] [Field F]
-    [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F]
-    [Fintype σ] [Fintype ι] [DecidableEq ι]
-    (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
-    [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
-    [IsFractionRing (MvPolynomial σ K ⧸ I) F]
+theorem fraction_parameter_rank_le {ι : Type*} [Fintype ι] [DecidableEq ι]
     (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (l : MvPolynomial σ K) (hl : l.totalDegree ≤ 1)
     (u : R) (hu : Transcendental K u)
@@ -65,11 +66,7 @@ theorem fraction_parameter_rank_le {K R F σ ι : Type*} [Field K] [Field R] [Fi
   exact polynomial_parameter_rank_le I d hdegree φ l hl u hu he h hlin
 
 /-- The function-field extension is finite and has degree at most d. -/
-theorem curve_functionField_finite_rank_le {K R F σ : Type*} [Field K] [Field R] [Field F]
-    [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F] [Fintype σ]
-    (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
-    [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
-    [IsFractionRing (MvPolynomial σ K ⧸ I) F]
+theorem curve_functionField_finite_rank_le
     (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (l : MvPolynomial σ K) (hl : l.totalDegree ≤ 1)
     (u : R) (hu : Transcendental K u)

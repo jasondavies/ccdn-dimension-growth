@@ -79,16 +79,18 @@ lemma adjoin_union_range_neg
       simpa only [neg_neg] using (IntermediateField.adjoin K _).neg_mem
         (IntermediateField.subset_adjoin K (S ∪ Set.range (fun i => -v i)) (Or.inr ⟨i,rfl⟩))
 
-lemma scalarQuotientFractionMap_ground_field
-    {K L F σ τ : Type*} [Field K] [Field L] [Field F]
-    [Algebra K L] [Algebra (MvPolynomial τ K) L]
-    [IsScalarTower K (MvPolynomial τ K) L] [IsFractionRing (MvPolynomial τ K) L]
-    [Algebra K F] (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
-    [(I.map (map (algebraMap K L))).IsPrime]
-    [Algebra (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
-    [IsScalarTower K (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
-    [IsFractionRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
-    (c : K) :
+section
+
+variable {K L F σ τ : Type*} [Field K] [Field L] [Field F]
+  [Algebra K L] [Algebra (MvPolynomial τ K) L]
+  [IsScalarTower K (MvPolynomial τ K) L] [IsFractionRing (MvPolynomial τ K) L]
+  [Algebra K F] (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
+  [(I.map (map (algebraMap K L))).IsPrime]
+  [Algebra (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
+  [IsScalarTower K (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
+  [IsFractionRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
+
+lemma scalarQuotientFractionMap_ground_field (c : K) :
     scalarQuotientFractionMap (F := F) (τ := τ) (L := L) I
       (Ideal.Quotient.mk _ (C (algebraMap K L c))) = algebraMap K F c := by
   let T := MvPolynomial τ (MvPolynomial σ K ⧸ I)
@@ -102,18 +104,12 @@ lemma scalarQuotientFractionMap_ground_field
   rw [RingHom.comp_apply,he,← IsScalarTower.algebraMap_apply K T F] at h
   exact h
 
-def scalarQuotientFractionCoefficientMap
-    {K L F σ τ : Type*} [Field K] [Field L] [Field F]
-    [Algebra K L] [Algebra (MvPolynomial τ K) L]
-    [IsScalarTower K (MvPolynomial τ K) L] [IsFractionRing (MvPolynomial τ K) L]
-    [Algebra K F] (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
-    [(I.map (map (algebraMap K L))).IsPrime]
-    [Algebra (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
-    [IsScalarTower K (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
-    [IsFractionRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F] : L →ₐ[K] F where
+def scalarQuotientFractionCoefficientMap : L →ₐ[K] F where
   toRingHom := (scalarQuotientFractionMap (F := F) (τ := τ) (L := L) I).comp
     (algebraMap L (MvPolynomial σ L ⧸ I.map (map (algebraMap K L))))
   commutes' c := scalarQuotientFractionMap_ground_field I c
+
+end
 
 def chowNormalizationParameterField
     {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ} (m : ℕ)

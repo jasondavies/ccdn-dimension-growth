@@ -20,15 +20,16 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+variable {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n : ℕ}
+  (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
+  [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
+  [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
+  [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+
 /-- Equality of source and image multiplicities forces birationality.
 The proof constructs the image field, a finite linear normalization, and its
 rank. -/
-theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
-    {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n s : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq {s : ℕ}
     (hI : IsHomogeneousIdeal I)
     (a : Fin s → MvPolynomial (Fin n) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
@@ -50,12 +51,7 @@ theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
 
 /-- Degree preservation and function-field birationality are equivalent for
 a finite homogeneous linear projection in characteristic zero. -/
-theorem homogeneous_finite_projection_leadingCoeff_eq_iff_birational
-    {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n s : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+theorem homogeneous_finite_projection_leadingCoeff_eq_iff_birational {s : ℕ}
     (hI : IsHomogeneousIdeal I)
     (a : Fin s → MvPolynomial (Fin n) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral) :
