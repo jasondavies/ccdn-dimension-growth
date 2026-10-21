@@ -7,7 +7,7 @@ module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDNPaper.Center.ProjectiveChowIncidence
-import CCDN.Algebra.WeightedHomogeneousTransform
+import CCDNPaper.Algebra.WeightedHomogeneousTransform
 import CCDNPaper.Center.GeometricProjectiveCurveProjection
 import CCDNPaper.Center.ProjectiveChowEquation
 import CCDNPaper.Center.ProjectiveIncidencePermutation

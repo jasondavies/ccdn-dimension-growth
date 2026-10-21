@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.WeightedPolynomialTop
+public import CCDNPaper.Algebra.WeightedPolynomialTop
 public import Mathlib.Algebra.Polynomial.Eval.Defs
 import CCDN.Algebra.AffineLineLeading
 

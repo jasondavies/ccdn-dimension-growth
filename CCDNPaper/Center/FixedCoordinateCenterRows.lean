@@ -10,13 +10,13 @@ public import CCDN.Projection.ImageFractionField
 public import CCDNPaper.Center.ChowLinearSpecialization
 public import Mathlib.RingTheory.MvPolynomial
 import CCDN.Hilbert.FullDimension
-import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import CCDN.Projection.IntegralProjectionHilbert
 import CCDNPaper.Center.ClosureNormalizationInfinite
 import CCDNPaper.Center.FixedCoordinateGenericNormalization
 import CCDNPaper.Center.GeometricCenterRows
 import CCDNPaper.Center.HomogeneousProjectionNoBasePoint
 import CCDNPaper.Center.IndependentPrimitiveExtension
+import CCDNPaper.Hilbert.ProjectiveClosureHilbertPolynomial
 import Mathlib.Algebra.CharZero.Infinite
 import Mathlib.LinearAlgebra.Matrix.Rank
 

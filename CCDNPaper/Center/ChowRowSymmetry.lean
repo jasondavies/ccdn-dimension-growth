@@ -7,7 +7,7 @@ module
 
 public import CCDNPaper.Center.ChowIncidenceIdeal
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import CCDN.Algebra.WeightedHomogeneousTransform
+import CCDNPaper.Algebra.WeightedHomogeneousTransform
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 
 /-! Permuting hyperplanes preserves the incidence ideal. Consequently

@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDNPaper.Center.ProjectiveChowIncidence
-import CCDN.ForMathlib.Nullstellensatz
 import CCDN.Height.ProjectiveZeroLocus
 import CCDNPaper.Center.IncidenceDeterminantCertificate
+import CCDNPaper.ForMathlib.Nullstellensatz
 
 /-! Closedness of the projective hyperplane incidence image, proved by
 finite homogeneous coefficient matrices. Empty fibers produce a determinant

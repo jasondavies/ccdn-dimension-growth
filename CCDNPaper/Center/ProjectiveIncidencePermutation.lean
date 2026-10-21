@@ -8,8 +8,8 @@ module
 public import CCDN.Algebra.ProjectivePermutation
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDNPaper.Center.ProjectiveChowIncidence
-import CCDN.Hilbert.FilteredHilbertEquiv
 import CCDNPaper.Center.ProjectiveIncidenceClosed
+import CCDNPaper.Hilbert.FilteredHilbertEquiv
 
 /-! Coordinate permutations transport the homogeneous ideal and
 projective hyperplane incidence, without choosing projective representatives. -/

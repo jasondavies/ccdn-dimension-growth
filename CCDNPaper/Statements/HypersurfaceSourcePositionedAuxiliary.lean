@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.ProjectiveAuxiliaryHeightRanges
+public import CCDNPaper.AuxiliaryPolynomial.ProjectiveAuxiliaryHeightRanges
 import CCDN.Plane.HomogeneousLeadingCoefficient
 
 /-!

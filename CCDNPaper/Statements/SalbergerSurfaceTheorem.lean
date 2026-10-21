@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.ProjectivePlaneProjection
-public import CCDN.Surface.ProjectiveChartSmoothness
-import CCDN.Surface.ProjectiveSurfaceSalbergerCover
+public import CCDNPaper.Surface.ProjectiveChartSmoothness
+import CCDNPaper.Surface.ProjectiveSurfaceSalbergerCover
 
 /-! CCDN Theorem 4.3.5 with projective curve ideals, their projective
 Hilbert degrees, and the homogeneous Jacobian definition of nonsingular

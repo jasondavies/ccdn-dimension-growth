@@ -10,9 +10,9 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDNPaper.Center.ProjectionHeight
 import CCDN.Algebra.ProjectiveChartScalarExtension
 import CCDN.Hilbert.PolynomialComparison
-import CCDN.Hypersurface.ZeroDimensionalGeometricPoint
 import CCDNPaper.Center.GeometricProjectiveCurveProjection
 import CCDNPaper.Center.ProjectiveClosureRecovery
+import CCDNPaper.Hypersurface.ZeroDimensionalGeometricPoint
 
 /-! Numerical bounds for the row-resultant good-center detector. Its degree
 D(2d-1) is strictly smaller than D^2 in positive projective dimension, and

@@ -9,7 +9,7 @@ public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.ForMathlib.Polynomial
-import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
+import CCDNPaper.Hilbert.ProjectiveClosureHilbertPolynomial
 
 /-! A nonempty standard chart recovers its homogeneous prime ideal
 by projective closure. Its affine Hilbert dimension and multiplicity follow

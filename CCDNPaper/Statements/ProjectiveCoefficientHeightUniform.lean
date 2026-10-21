@@ -14,8 +14,8 @@ import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Algebra.RowSelection
 import CCDN.AuxiliaryPolynomial.CoefficientBound
 import CCDN.AuxiliaryPolynomial.HypersurfaceCoefficientDichotomy
-import CCDN.Determinant.AmbientProjectiveDeterminant
 import CCDN.Determinant.HomogeneousDeterminantComparison
+import CCDNPaper.Determinant.AmbientProjectiveDeterminant
 
 /-!
 The coefficient-height dichotomy with a multiplier depending only on

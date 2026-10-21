@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDNPaper.Center.PluckerComplementEquations
-import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import CCDNPaper.Center.BirationalCenterExtensionWitness
 import CCDNPaper.Center.DetectorExtension
+import CCDNPaper.Hilbert.ProjectiveClosureHilbertPolynomial
 import Mathlib.Algebra.CharZero.Infinite
 
 /-! Sharp equations for the complement of the good-center locus at

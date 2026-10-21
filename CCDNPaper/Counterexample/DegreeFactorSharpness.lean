@@ -7,9 +7,9 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.ProjectiveZeroLocus
-import CCDN.Analysis.DegreeDependenceNumerics
-import CCDN.LowerBound.GridHypersurfaceLowerBound
 import CCDN.LowerBound.GridProjectiveLowerBound
+import CCDNPaper.Analysis.DegreeDependenceNumerics
+import CCDNPaper.LowerBound.GridHypersurfaceLowerBound
 
 /-! Obstructions to improving the degree factors in dimension growth.
 The lower bounds here come from explicitly constructed hypersurfaces with

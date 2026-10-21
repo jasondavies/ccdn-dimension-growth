@@ -7,11 +7,11 @@ module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDNPaper.Center.BirationalCenterLocus
-import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import CCDNPaper.Center.DetectorBounds
 import CCDNPaper.Center.DetectorExtension
 import CCDNPaper.Center.GoodCenterWitness
 import CCDNPaper.Center.ZeroColumnMinorSpecialization
+import CCDNPaper.Hilbert.ProjectiveClosureHilbertPolynomial
 
 /-! Integer good centers with the quadratic row bound from the
 row-resultant detector. Dimension zero is included using its proved degree

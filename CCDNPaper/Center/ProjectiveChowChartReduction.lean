@@ -8,7 +8,7 @@ module
 public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDNPaper.Center.ProjectiveChowIncidence
-import CCDN.Algebra.WeightedHomogeneousTransform
+import CCDNPaper.Algebra.WeightedHomogeneousTransform
 import CCDNPaper.Center.GeometricProjectiveCurveProjection
 import CCDNPaper.Center.ProjectiveClosureRecovery
 import CCDNPaper.Center.ProjectiveIncidencePermutation

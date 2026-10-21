@@ -5,6 +5,20 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDNPaper.Algebra.PolynomialDifferenceBounds
+public import CCDNPaper.Algebra.ProjectiveClosureDegree
+public import CCDNPaper.Algebra.ReconstructionFunctionField
+public import CCDNPaper.Algebra.WeightedHomogeneousTransform
+public import CCDNPaper.Algebra.WeightedPolynomialSubstitution
+public import CCDNPaper.Algebra.WeightedPolynomialTop
+public import CCDNPaper.Analysis.DegreeDependenceNumerics
+public import CCDNPaper.AuxiliaryPolynomial.AffineChartAbsoluteAuxiliary
+public import CCDNPaper.AuxiliaryPolynomial.AffineChartPrimeDeterminant
+public import CCDNPaper.AuxiliaryPolynomial.LiteralAffineAuxiliaryTheorem
+public import CCDNPaper.AuxiliaryPolynomial.LiteralAffineBadPrimes
+public import CCDNPaper.AuxiliaryPolynomial.LiteralAffineMinimum
+public import CCDNPaper.AuxiliaryPolynomial.LiteralScaledAuxiliary
+public import CCDNPaper.AuxiliaryPolynomial.ProjectiveAuxiliaryHeightRanges
 public import CCDNPaper.Center.AffineNormalizationRank
 public import CCDNPaper.Center.AffinePointZariski
 public import CCDNPaper.Center.BalancedParameterFiniteness
@@ -112,6 +126,57 @@ public import CCDNPaper.Counterexample.OriginProjectivePoint
 public import CCDNPaper.Counterexample.RowSeparatorConstant
 public import CCDNPaper.Counterexample.WeightedDimensionOne
 public import CCDNPaper.Counterexample.ZeroDimensionalCenter
+public import CCDNPaper.Curve.AffineCurveHilbertPolynomial
+public import CCDNPaper.Determinant.AmbientProjectiveDeterminant
+public import CCDNPaper.Determinant.FiltrationWeights
+public import CCDNPaper.Determinant.HypersurfaceOriginStalk
+public import CCDNPaper.Determinant.HypersurfacePointStalk
+public import CCDNPaper.Determinant.HypersurfaceTangentEquality
+public import CCDNPaper.Determinant.InfiniteWeightEnumeration
+public import CCDNPaper.Determinant.InitialFormMultiplication
+public import CCDNPaper.Determinant.LocalHilbertWeights
+public import CCDNPaper.Determinant.LocalPrimeGenerators
+public import CCDNPaper.Determinant.LocalPrimeReduction
+public import CCDNPaper.Determinant.LocalizationAdicLayer
+public import CCDNPaper.Determinant.NoetherianLocalDeterminant
+public import CCDNPaper.Determinant.ProjectiveOpenResidueDeterminant
+public import CCDNPaper.Determinant.WeightedSequenceEstimate
+public import CCDNPaper.ForMathlib.IdealPowerLayer
+public import CCDNPaper.ForMathlib.Nullstellensatz
+public import CCDNPaper.Hilbert.AlgebraicHilbertDimension
+public import CCDNPaper.Hilbert.CoefficientEquiv
+public import CCDNPaper.Hilbert.FilteredHilbertEquiv
+public import CCDNPaper.Hilbert.HomogeneousFilteredRank
+public import CCDNPaper.Hilbert.ProjectiveClosureHilbertPolynomial
+public import CCDNPaper.Hilbert.PureComponentDegreeBudget
+public import CCDNPaper.Hypersurface.ConjugatePrimeGridBound
+public import CCDNPaper.Hypersurface.GaloisComponentDegree
+public import CCDNPaper.Hypersurface.GaloisComponentPoints
+public import CCDNPaper.Hypersurface.GaloisPolynomialPrimes
+public import CCDNPaper.Hypersurface.GaloisStableIdealDescent
+public import CCDNPaper.Hypersurface.HyperplaneSectionIdeal
+public import CCDNPaper.Hypersurface.LowDegreePointSeparation
+public import CCDNPaper.Hypersurface.NonRationalProjectiveCount
+public import CCDNPaper.Hypersurface.NonRationalVarietyCount
+public import CCDNPaper.Hypersurface.PrincipalSectionGridBound
+public import CCDNPaper.Hypersurface.PrincipalSectionPurity
+public import CCDNPaper.Hypersurface.ProjectiveCoefficientExtension
+public import CCDNPaper.Hypersurface.PureVarietyGridBound
+public import CCDNPaper.Hypersurface.SmallOutsidePoint
+public import CCDNPaper.Hypersurface.ZeroDimensionalGeometricPoint
+public import CCDNPaper.Hypersurface.ZeroDimensionalPrimeDescent
+public import CCDNPaper.LowerBound.GridAffineLowerBound
+public import CCDNPaper.LowerBound.GridHypersurfaceLowerBound
+public import CCDNPaper.LowerBound.GridPolynomialNormalization
+public import CCDNPaper.LowerBound.GridTopFormConstruction
+public import CCDNPaper.Plane.CoprimeNewtonEdge
+public import CCDNPaper.Plane.CoprimeNewtonEdgeReduction
+public import CCDNPaper.Projection.AffineLinearCountTransfer
+public import CCDNPaper.Projection.ClosureProjectionBirational
+public import CCDNPaper.Projection.GeometricAffineProjection
+public import CCDNPaper.Projection.IntegralProjectionClosedImage
+public import CCDNPaper.Projection.LinearNormalizationInfinite
+public import CCDNPaper.Projection.ZeroDimensionalAffineProjection
 public import CCDNPaper.Statements.AffineCurveDegreeSharpness
 public import CCDNPaper.Statements.AffineVarietyProjection
 public import CCDNPaper.Statements.AmbientCenterProjection
@@ -138,6 +203,16 @@ public import CCDNPaper.Statements.ProjectiveCoefficientHeightUniform
 public import CCDNPaper.Statements.ProjectiveCurveDegreeSharpness
 public import CCDNPaper.Statements.ProjectivePlaneUniformExpression
 public import CCDNPaper.Statements.SalbergerSurfaceTheorem
+public import CCDNPaper.Surface.GeometricCoefficientReduction
+public import CCDNPaper.Surface.GeometricCurveCover
+public import CCDNPaper.Surface.MediumCurveCount
+public import CCDNPaper.Surface.PrimeWindowSalbergerRate
+public import CCDNPaper.Surface.ProjectiveChartSmoothness
+public import CCDNPaper.Surface.ProjectiveSurfaceSalbergerCover
+public import CCDNPaper.Surface.ResidueSalbergerCount
+public import CCDNPaper.Surface.SalbergerCover
+public import CCDNPaper.Surface.SalbergerCoverNumerics
+public import CCDNPaper.Surface.SalbergerHeightCover
 
 /-!
 # CCDNPaper
@@ -148,7 +223,9 @@ and holds the parts of the paper that the main results do not use:
 * `CCDNPaper/Center/`: Section 5 (Chow forms, good centres and Plücker equations);
 * `CCDNPaper/Statements/`: the paper's intermediate statements and side results as printed
   (or as corrected), linked to their labels in `docs/statements.md`;
-* `CCDNPaper/Counterexample/`: the formal refutations of printed intermediate statements.
+* `CCDNPaper/Counterexample/`: the formal refutations of printed intermediate statements;
+* the other directories, named after those of `CCDN/`: the supporting results that only this
+  library uses.
 
 Its declarations live in the namespace `CCDN`, like those of the main library.
 -/

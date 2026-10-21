@@ -2,7 +2,8 @@
 """Check the layering of the two libraries and of their directories.
 
 * Libraries: no module of the main library `CCDN` (below `CCDN/`, or the root CCDN.lean)
-  imports a module of the paper library `CCDNPaper`; `CCDNPaper` may import `CCDN`.
+  imports a module of the paper library `CCDNPaper`; `CCDNPaper` may import `CCDN`. Every module
+  of `CCDN` is needed by a main result: it lies in the import closure of the endpoints.
 * Foundation tier: a module in one of the FOUNDATION directories imports only Mathlib, the
   vendored libraries and other foundation modules, never a topic directory.
 * `CCDN/Statements.lean`, which states the main results, imports only foundation modules.
@@ -16,8 +17,8 @@ All violations are reported before exiting.
 import argparse
 import sys
 
-from common import FOUNDATION, MAIN, PAPER, ROOT, SIDE_RESULT, imports, library_module_paths, \
-    module_name
+from common import FOUNDATION, MAIN, PAPER, ROOT, SIDE_RESULT, import_closure, imports, \
+    library_module_paths, module_name
 
 STATEMENTS = f"{MAIN}.Statements"
 
@@ -62,12 +63,20 @@ def main() -> int:
                     and (library(name), home) != (PAPER, there)):
                 problems.append(f"{source}: imports the side result {target} ({PAPER}/{there}/ "
                                 "is imported only from within that directory)")
+    needed = import_closure(sorted(endpoints), modules)
+    for name in sorted(set(modules) - needed):
+        if library(name) == MAIN:
+            problems.append(f"{modules[name].relative_to(ROOT).as_posix()}: no main result "
+                            f"imports this module (it is not in the import closure of the "
+                            f"endpoints); move it into the paper library ({PAPER}/) or remove it")
     if problems:
         print("Layering check failed:")
         print("\n".join(f"  {problem}" for problem in problems))
         return 1
     foundation = sum(directory(name) in FOUNDATION for name in modules)
-    print(f"Layering: {MAIN} imports nothing from {PAPER}; the {foundation} foundation modules "
+    main = sum(library(name) == MAIN for name in modules)
+    print(f"Layering: the {main} modules of {MAIN} are all needed by the main results and import "
+          f"nothing from {PAPER}; the {foundation} foundation modules "
           f"({', '.join(FOUNDATION)}) and {STATEMENTS} import no topic module; the "
           f"{len(endpoints)} endpoints and the side results ({', '.join(SIDE_RESULT)}) are "
           "imported by no other library module.")

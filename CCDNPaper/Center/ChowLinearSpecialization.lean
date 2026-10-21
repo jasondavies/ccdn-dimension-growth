@@ -10,10 +10,10 @@ public import CCDN.Hilbert.LinearProjectionFiltration
 public import CCDNPaper.Center.ProjectiveChowIncidence
 import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Projection.HomogeneousProjectionEquation
-import CCDN.Projection.IntegralProjectionClosedImage
 import CCDNPaper.Center.BalancedParameterFiniteness
 import CCDNPaper.Center.HomogeneousProjectionNoBasePoint
 import CCDNPaper.Center.ProjectiveIncidenceClosed
+import CCDNPaper.Projection.IntegralProjectionClosedImage
 
 /-! Linear pullback of hyperplane tuples and image incidence under a
 projection with center disjoint from the source. Integrality and lifting of

@@ -8,9 +8,9 @@ module
 public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.ProjectiveZeroLocus
-import CCDN.LowerBound.GridAffineLowerBound
 import CCDN.LowerBound.GridProjectiveLowerBound
 import CCDN.LowerBound.IntegerGridLowerBound
+import CCDNPaper.LowerBound.GridAffineLowerBound
 
 /-! The final existence statement of CCDN Section 6, including every positive
  degree and every affine ambient dimension at least two. The same equation

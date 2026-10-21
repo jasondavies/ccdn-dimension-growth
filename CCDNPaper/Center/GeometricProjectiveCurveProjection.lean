@@ -12,7 +12,6 @@ public import CCDN.Projection.DegreePreservingProjectionBox
 public import CCDN.Projection.ImageFractionField
 import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Algebra.ProjectiveChartScalarExtension
-import CCDN.Algebra.ReconstructionFunctionField
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.CoordinateIndependence
@@ -20,6 +19,7 @@ import CCDN.Projection.AffineProjectionCount
 import CCDN.Projection.BoundedDegreePreservingProjection
 import CCDN.Projection.DegreePreservingProjectionCount
 import CCDN.Projection.ProjectiveProjectionCount
+import CCDNPaper.Algebra.ReconstructionFunctionField
 import CCDNPaper.Center.HomogeneousCurveHilbert
 import CCDNPaper.Center.ProjectiveIncidencePermutation
 

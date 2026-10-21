@@ -6,11 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
-public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
+public import CCDNPaper.AuxiliaryPolynomial.LiteralAffineBadPrimes
 import CCDN.Algebra.IntegerRationalIrreducibility
-import CCDN.AuxiliaryPolynomial.LiteralAffineAuxiliaryTheorem
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Plane.Bezout
+import CCDNPaper.AuxiliaryPolynomial.LiteralAffineAuxiliaryTheorem
 
 /-!
 CCDN Corollary 4.2.4 with the literal affine bad-prime factor and the

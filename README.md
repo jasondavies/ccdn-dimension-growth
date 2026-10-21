@@ -64,7 +64,7 @@ each one, with the counterexamples.
 | Proposition 2.6 | `n + 2` variables; needs a common degree | yes (variables only) | [`projective_hypersurface_minorGcd_bound`](CCDN/Determinant/ProjectiveHypersurfaceResidueDeterminant.lean) | corrected |
 | Corollary 2.9 | needs a common degree | no | [`projective_hypersurface_minorGcd_dvd`](CCDN/Determinant/HypersurfaceLocalDivisor.lean) | corrected |
 | Proposition 3.2.6 | false without a common degree in each matrix | no | [`no_uniform_global_mixed_degree_det_lower_bound`](CCDNPaper/Counterexample/GlobalMixedDegreeDeterminant.lean) | refuted |
-| Proposition 4.2.1 | true, but the proof's `b(F₁) = b(f)` fails | no | [`literalAffineBadPrimeFactor_homogenization_ne`](CCDNPaper/Counterexample/HomogenizedBadPrimeFactor.lean), [`literal_affine_hypersurface_auxiliary`](CCDN/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean) | proof_repaired |
+| Proposition 4.2.1 | true, but the proof's `b(F₁) = b(f)` fails | no | [`literalAffineBadPrimeFactor_homogenization_ne`](CCDNPaper/Counterexample/HomogenizedBadPrimeFactor.lean), [`literal_affine_hypersurface_auxiliary`](CCDNPaper/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean) | proof_repaired |
 | Corollary 4.2.4 | true, but proved through the faulty step of 4.2.1 | no | [`literal_affine_plane_coefficient_count_uniform`](CCDNPaper/Statements/LiteralAffinePlaneCount.lean) | proof_repaired |
 | Proposition 4.3.3 | the top form must be absolutely irreducible | yes | [`surface_line_contribution`](CCDN/Surface/LineContribution.lean) | corrected |
 | Proposition 4.3.4 | `d¹⁸` in place of `d¹⁴` | yes | [`affine_surface_dimension_growth`](CCDN/Surface/AffineSurfaceDimensionGrowth.lean) | corrected |

@@ -1155,12 +1155,12 @@
   "evidence": [
     {
       "id": "e001",
-      "file": "CCDN/Determinant/HypersurfacePointStalk.lean",
+      "file": "CCDNPaper/Determinant/HypersurfacePointStalk.lean",
       "declaration": "CCDN.HypersurfacePointStalk"
     },
     {
       "id": "e002",
-      "file": "CCDN/Determinant/HypersurfacePointStalk.lean",
+      "file": "CCDNPaper/Determinant/HypersurfacePointStalk.lean",
       "declaration": "CCDN.hypersurfacePointStalk_hilbert_eq"
     },
     {
@@ -1170,12 +1170,12 @@
     },
     {
       "id": "e004",
-      "file": "CCDN/Determinant/WeightedSequenceEstimate.lean",
+      "file": "CCDNPaper/Determinant/WeightedSequenceEstimate.lean",
       "declaration": "CCDN.weighted_sequence_initial_sum_lower_bound"
     },
     {
       "id": "e005",
-      "file": "CCDN/Determinant/WeightedSequenceEstimate.lean",
+      "file": "CCDNPaper/Determinant/WeightedSequenceEstimate.lean",
       "declaration": "CCDN.weighted_sequence_dimension_one"
     },
     {
@@ -1185,17 +1185,17 @@
     },
     {
       "id": "e007",
-      "file": "CCDN/Determinant/LocalHilbertWeights.lean",
+      "file": "CCDNPaper/Determinant/LocalHilbertWeights.lean",
       "declaration": "CCDN.exists_hypersurfacePointStalk_hilbert_weights"
     },
     {
       "id": "e008",
-      "file": "CCDN/Determinant/LocalHilbertWeights.lean",
+      "file": "CCDNPaper/Determinant/LocalHilbertWeights.lean",
       "declaration": "CCDN.hypersurfacePointStalk_enumerated_weights_sum_lower_bound"
     },
     {
       "id": "e009",
-      "file": "CCDN/Determinant/LocalPrimeReduction.lean",
+      "file": "CCDNPaper/Determinant/LocalPrimeReduction.lean",
       "declaration": "CCDN.localPrimeLayerDimension"
     },
     {
@@ -1295,12 +1295,12 @@
     },
     {
       "id": "e029",
-      "file": "CCDN/AuxiliaryPolynomial/LiteralAffineBadPrimes.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/LiteralAffineBadPrimes.lean",
       "declaration": "CCDN.LiteralAffineBadReduction"
     },
     {
       "id": "e030",
-      "file": "CCDN/AuxiliaryPolynomial/LiteralAffineBadPrimes.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/LiteralAffineBadPrimes.lean",
       "declaration": "CCDN.literalAffineBadPrimeFactor"
     },
     {
@@ -1335,12 +1335,12 @@
     },
     {
       "id": "e037",
-      "file": "CCDN/AuxiliaryPolynomial/LiteralAffineBadPrimes.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/LiteralAffineBadPrimes.lean",
       "declaration": "CCDN.finite_literal_affine_bad_primes"
     },
     {
       "id": "e038",
-      "file": "CCDN/AuxiliaryPolynomial/LiteralAffineBadPrimes.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/LiteralAffineBadPrimes.lean",
       "declaration": "CCDN.literalAffineBadPrimeFactor_le_inclusive"
     },
     {
@@ -1440,17 +1440,17 @@
     },
     {
       "id": "e058",
-      "file": "CCDN/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
       "declaration": "CCDN.hypersurfaceSmallProjectiveConstant"
     },
     {
       "id": "e059",
-      "file": "CCDN/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
       "declaration": "CCDN.hypersurfaceSmallProjectiveConstant_pos"
     },
     {
       "id": "e060",
-      "file": "CCDN/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
       "declaration": "CCDN.hypersurface_small_height_projective_auxiliary"
     },
     {
@@ -1470,17 +1470,17 @@
     },
     {
       "id": "e064",
-      "file": "CCDN/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
       "declaration": "CCDN.hypersurfaceLargeProjectiveConstant"
     },
     {
       "id": "e065",
-      "file": "CCDN/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
       "declaration": "CCDN.hypersurfaceLargeProjectiveConstant_pos"
     },
     {
       "id": "e066",
-      "file": "CCDN/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/ProjectiveAuxiliaryHeightRanges.lean",
       "declaration": "CCDN.hypersurface_large_height_projective_auxiliary"
     },
     {
@@ -1625,57 +1625,57 @@
     },
     {
       "id": "e095",
-      "file": "CCDN/Hypersurface/PureVarietyGridBound.lean",
+      "file": "CCDNPaper/Hypersurface/PureVarietyGridBound.lean",
       "declaration": "CCDN.pure_ideal_grid_card_le"
     },
     {
       "id": "e096",
-      "file": "CCDN/Hypersurface/PureVarietyGridBound.lean",
+      "file": "CCDNPaper/Hypersurface/PureVarietyGridBound.lean",
       "declaration": "CCDN.pure_variety_count_le_degree_mul_box_side"
     },
     {
       "id": "e097",
-      "file": "CCDN/Hypersurface/SmallOutsidePoint.lean",
+      "file": "CCDNPaper/Hypersurface/SmallOutsidePoint.lean",
       "declaration": "CCDN.exists_small_integer_point_outside_prime_ideal"
     },
     {
       "id": "e098",
-      "file": "CCDN/Hypersurface/SmallOutsidePoint.lean",
+      "file": "CCDNPaper/Hypersurface/SmallOutsidePoint.lean",
       "declaration": "CCDN.exists_small_projective_integer_representative_outside"
     },
     {
       "id": "e099",
-      "file": "CCDN/Hypersurface/SmallOutsidePoint.lean",
+      "file": "CCDNPaper/Hypersurface/SmallOutsidePoint.lean",
       "declaration": "CCDN.exists_small_rational_projective_point_outside_prime_ideal"
     },
     {
       "id": "e100",
-      "file": "CCDN/Hypersurface/NonRationalVarietyCount.lean",
+      "file": "CCDNPaper/Hypersurface/NonRationalVarietyCount.lean",
       "declaration": "CCDN.non_rational_prime_count_le_box"
     },
     {
       "id": "e101",
-      "file": "CCDN/Hypersurface/NonRationalProjectiveCount.lean",
+      "file": "CCDNPaper/Hypersurface/NonRationalProjectiveCount.lean",
       "declaration": "CCDN.non_rational_projective_count_le_box"
     },
     {
       "id": "e102",
-      "file": "CCDN/Hypersurface/ZeroDimensionalPrimeDescent.lean",
+      "file": "CCDNPaper/Hypersurface/ZeroDimensionalPrimeDescent.lean",
       "declaration": "CCDN.non_rational_zero_dimensional_locus_empty"
     },
     {
       "id": "e103",
-      "file": "CCDN/Hypersurface/NonRationalVarietyCount.lean",
+      "file": "CCDNPaper/Hypersurface/NonRationalVarietyCount.lean",
       "declaration": "CCDN.nonabsolute_variety_count_le_box"
     },
     {
       "id": "e104",
-      "file": "CCDN/Hypersurface/NonRationalProjectiveCount.lean",
+      "file": "CCDNPaper/Hypersurface/NonRationalProjectiveCount.lean",
       "declaration": "CCDN.nonabsolute_projective_variety_count_le_box"
     },
     {
       "id": "e105",
-      "file": "CCDN/Hypersurface/ZeroDimensionalPrimeDescent.lean",
+      "file": "CCDNPaper/Hypersurface/ZeroDimensionalPrimeDescent.lean",
       "declaration": "CCDN.nonabsolute_zero_dimensional_locus_empty"
     },
     {
@@ -1690,7 +1690,7 @@
     },
     {
       "id": "e108",
-      "file": "CCDN/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean",
+      "file": "CCDNPaper/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean",
       "declaration": "CCDN.literal_affine_hypersurface_auxiliary"
     },
     {
@@ -1775,17 +1775,17 @@
     },
     {
       "id": "e125",
-      "file": "CCDN/Surface/SalbergerCover.lean",
+      "file": "CCDNPaper/Surface/SalbergerCover.lean",
       "declaration": "CCDN.surface_salberger_cover"
     },
     {
       "id": "e126",
-      "file": "CCDN/Surface/ProjectiveSurfaceSalbergerCover.lean",
+      "file": "CCDNPaper/Surface/ProjectiveSurfaceSalbergerCover.lean",
       "declaration": "CCDN.projective_surface_salberger_cover"
     },
     {
       "id": "e127",
-      "file": "CCDN/Surface/ProjectiveChartSmoothness.lean",
+      "file": "CCDNPaper/Surface/ProjectiveChartSmoothness.lean",
       "declaration": "CCDN.projectiveSmoothAffineChart_eq"
     },
     {
@@ -1840,12 +1840,12 @@
     },
     {
       "id": "e138",
-      "file": "CCDN/LowerBound/GridHypersurfaceLowerBound.lean",
+      "file": "CCDNPaper/LowerBound/GridHypersurfaceLowerBound.lean",
       "declaration": "CCDN.exists_topform_hypersurface_lower_bounds"
     },
     {
       "id": "e139",
-      "file": "CCDN/LowerBound/GridAffineLowerBound.lean",
+      "file": "CCDNPaper/LowerBound/GridAffineLowerBound.lean",
       "declaration": "CCDN.exists_affine_plane_grid_lower_bound"
     },
     {
@@ -2050,12 +2050,12 @@
     },
     {
       "id": "e180",
-      "file": "CCDN/Hypersurface/LowDegreePointSeparation.lean",
+      "file": "CCDNPaper/Hypersurface/LowDegreePointSeparation.lean",
       "declaration": "CCDN.exists_low_degree_ideal_separator"
     },
     {
       "id": "e181",
-      "file": "CCDN/Hypersurface/ConjugatePrimeGridBound.lean",
+      "file": "CCDNPaper/Hypersurface/ConjugatePrimeGridBound.lean",
       "declaration": "CCDN.conjugate_prime_grid_card_le"
     },
     {

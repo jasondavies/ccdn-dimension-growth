@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialDifferenceBounds
-public import CCDN.Determinant.LocalHilbertWeights
+public import CCDNPaper.Algebra.PolynomialDifferenceBounds
+public import CCDNPaper.Determinant.LocalHilbertWeights
 public import Mathlib.RingTheory.Polynomial.Pochhammer
 
 /-! The multiplicity-independent pointwise remainder of CCDN Lemma 2.1.

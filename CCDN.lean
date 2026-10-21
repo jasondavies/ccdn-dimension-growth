@@ -42,7 +42,6 @@ public import CCDN.Algebra.OriginShift
 public import CCDN.Algebra.ParameterPowerSpan
 public import CCDN.Algebra.ParameterRecurrenceGrowth
 public import CCDN.Algebra.PointSeparation
-public import CCDN.Algebra.PolynomialDifferenceBounds
 public import CCDN.Algebra.PolynomialFamilyRelations
 public import CCDN.Algebra.PolynomialKernelOrigin
 public import CCDN.Algebra.PolynomialLinearDescent
@@ -56,7 +55,6 @@ public import CCDN.Algebra.ProjectiveAffineChart
 public import CCDN.Algebra.ProjectiveChartDegree
 public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Algebra.ProjectiveChartScalarExtension
-public import CCDN.Algebra.ProjectiveClosureDegree
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveFiltration
 public import CCDN.Algebra.ProjectiveFiniteFibers
@@ -65,16 +63,11 @@ public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Algebra.ProjectiveTranslation
 public import CCDN.Algebra.RadialHomogeneousMap
 public import CCDN.Algebra.RadialMap
-public import CCDN.Algebra.ReconstructionFunctionField
 public import CCDN.Algebra.RowSelection
 public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.Algebra.ScaledHomogenizationPrimitive
 public import CCDN.Algebra.ScaledHypersurfaceModel
 public import CCDN.Algebra.SectionImageRank
-public import CCDN.Algebra.WeightedHomogeneousTransform
-public import CCDN.Algebra.WeightedPolynomialSubstitution
-public import CCDN.Algebra.WeightedPolynomialTop
-public import CCDN.Analysis.DegreeDependenceNumerics
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.Analysis.PrimeProduct
 public import CCDN.Analysis.SmallDegreeSurfaceNumerics
@@ -83,8 +76,6 @@ public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
 public import CCDN.AuxiliaryPolynomial.AffineAuxiliaryCases
 public import CCDN.AuxiliaryPolynomial.AffineAuxiliaryTranslationBound
 public import CCDN.AuxiliaryPolynomial.AffineBadPrimeTranslation
-public import CCDN.AuxiliaryPolynomial.AffineChartAbsoluteAuxiliary
-public import CCDN.AuxiliaryPolynomial.AffineChartPrimeDeterminant
 public import CCDN.AuxiliaryPolynomial.AffineCongruenceAuxiliary
 public import CCDN.AuxiliaryPolynomial.AffineCongruenceHeight
 public import CCDN.AuxiliaryPolynomial.AffineHeightCutoff
@@ -125,10 +116,6 @@ public import CCDN.AuxiliaryPolynomial.HypersurfaceRankRoots
 public import CCDN.AuxiliaryPolynomial.HypersurfaceSmallHeightAuxiliary
 public import CCDN.AuxiliaryPolynomial.HypersurfaceSmallHeightDegree
 public import CCDN.AuxiliaryPolynomial.LargeHeightRatios
-public import CCDN.AuxiliaryPolynomial.LiteralAffineAuxiliaryTheorem
-public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
-public import CCDN.AuxiliaryPolynomial.LiteralAffineMinimum
-public import CCDN.AuxiliaryPolynomial.LiteralScaledAuxiliary
 public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 public import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryDegree
@@ -142,7 +129,6 @@ public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineHeight
 public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineMinimum
 public import CCDN.AuxiliaryPolynomial.ProjectiveAuxiliary
 public import CCDN.AuxiliaryPolynomial.ProjectiveAuxiliaryCount
-public import CCDN.AuxiliaryPolynomial.ProjectiveAuxiliaryHeightRanges
 public import CCDN.AuxiliaryPolynomial.RatioEstimates
 public import CCDN.AuxiliaryPolynomial.ScaledAuxiliaryCount
 public import CCDN.AuxiliaryPolynomial.ScaledHypersurfaceBadPrimes
@@ -204,16 +190,13 @@ public import CCDN.ClassGroup.TwoTorsion
 public import CCDN.ClassGroup.UniformBound
 public import CCDN.ClassGroupBound
 public import CCDN.Curve.AffineCurveCount
-public import CCDN.Curve.AffineCurveHilbertPolynomial
 public import CCDN.Curve.ProjectiveCurveCount
 public import CCDN.Curve.ProjectiveHilbertCurveGrowth
 public import CCDN.Determinant.AffineCongruenceDeterminant
-public import CCDN.Determinant.AmbientProjectiveDeterminant
 public import CCDN.Determinant.BlockDeterminant
 public import CCDN.Determinant.ClosedFormIntegerMinor
 public import CCDN.Determinant.ClosedFormMinorCharge
 public import CCDN.Determinant.FilteredDeterminant
-public import CCDN.Determinant.FiltrationWeights
 public import CCDN.Determinant.FormalBranchMultiplicity
 public import CCDN.Determinant.GenericPlaneEulerMinorCharZero
 public import CCDN.Determinant.GenericPlaneMinor
@@ -228,19 +211,9 @@ public import CCDN.Determinant.HypersurfaceHilbert
 public import CCDN.Determinant.HypersurfaceLocalDeterminant
 public import CCDN.Determinant.HypersurfaceLocalDivisor
 public import CCDN.Determinant.HypersurfaceMultiplicityEstimate
-public import CCDN.Determinant.HypersurfaceOriginStalk
-public import CCDN.Determinant.HypersurfacePointStalk
 public import CCDN.Determinant.HypersurfaceSmoothPoint
-public import CCDN.Determinant.HypersurfaceTangentEquality
-public import CCDN.Determinant.InfiniteWeightEnumeration
-public import CCDN.Determinant.InitialFormMultiplication
 public import CCDN.Determinant.LocalDeterminant
-public import CCDN.Determinant.LocalHilbertWeights
-public import CCDN.Determinant.LocalPrimeGenerators
-public import CCDN.Determinant.LocalPrimeReduction
-public import CCDN.Determinant.LocalizationAdicLayer
 public import CCDN.Determinant.ModularOriginGenerators
-public import CCDN.Determinant.NoetherianLocalDeterminant
 public import CCDN.Determinant.OriginTruncationGenerators
 public import CCDN.Determinant.PlaneMultiplicity
 public import CCDN.Determinant.PlaneMultiplicitySmooth
@@ -254,7 +227,6 @@ public import CCDN.Determinant.ProjectiveHypersurfaceReduction
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
 public import CCDN.Determinant.ProjectiveLocalDeterminant
 public import CCDN.Determinant.ProjectiveMultiplicity
-public import CCDN.Determinant.ProjectiveOpenResidueDeterminant
 public import CCDN.Determinant.ProjectivePlaneResidueDeterminant
 public import CCDN.Determinant.ProjectivePrimeDeterminant
 public import CCDN.Determinant.ProjectiveReduction
@@ -273,11 +245,9 @@ public import CCDN.Determinant.SmoothAffineResidueClasses
 public import CCDN.Determinant.SmoothCongruenceDeterminant
 public import CCDN.Determinant.SmoothProjectiveCongruence
 public import CCDN.Determinant.UniversalPlaneMinor
-public import CCDN.Determinant.WeightedSequenceEstimate
 public import CCDN.ForMathlib.FieldTheory
 public import CCDN.ForMathlib.FiniteGroupPowerTorsion
 public import CCDN.ForMathlib.FractionRing
-public import CCDN.ForMathlib.IdealPowerLayer
 public import CCDN.ForMathlib.IntegerPolynomialL1
 public import CCDN.ForMathlib.KrullHeight
 public import CCDN.ForMathlib.LinearMap
@@ -285,7 +255,6 @@ public import CCDN.ForMathlib.Log
 public import CCDN.ForMathlib.Matrix
 public import CCDN.ForMathlib.MvPolynomial
 public import CCDN.ForMathlib.MvPolynomialDerivative
-public import CCDN.ForMathlib.Nullstellensatz
 public import CCDN.ForMathlib.Polynomial
 public import CCDN.ForMathlib.PowerSeries
 public import CCDN.ForMathlib.SchwartzZippel
@@ -308,9 +277,7 @@ public import CCDN.Height.ProjectivePrimitive
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Height.ScaledHypersurfaceHeight
 public import CCDN.Hilbert.AffineCurveDegree
-public import CCDN.Hilbert.AlgebraicHilbertDimension
 public import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
-public import CCDN.Hilbert.CoefficientEquiv
 public import CCDN.Hilbert.CompleteIntersectionGridBound
 public import CCDN.Hilbert.CoordinateIndependence
 public import CCDN.Hilbert.CriticalFilteredGrowth
@@ -318,14 +285,12 @@ public import CCDN.Hilbert.CurveFunctionField
 public import CCDN.Hilbert.EmptyProjectiveHilbertDimension
 public import CCDN.Hilbert.FilteredComponentDegreeBudget
 public import CCDN.Hilbert.FilteredComponentRank
-public import CCDN.Hilbert.FilteredHilbertEquiv
 public import CCDN.Hilbert.FilteredHilbertLinearity
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.FilteredIntersection
 public import CCDN.Hilbert.FilteredPrimeDecomposition
 public import CCDN.Hilbert.FullDimension
 public import CCDN.Hilbert.FunctionFieldRank
-public import CCDN.Hilbert.HomogeneousFilteredRank
 public import CCDN.Hilbert.HomogeneousHilbert
 public import CCDN.Hilbert.HomogeneousPrimeComponents
 public import CCDN.Hilbert.InfinitySection
@@ -339,10 +304,8 @@ public import CCDN.Hilbert.PrimeComponentTranscendence
 public import CCDN.Hilbert.PrimeIdealDimensionDrop
 public import CCDN.Hilbert.PrincipalHilbertPolynomial
 public import CCDN.Hilbert.PrincipalStandardMonomials
-public import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 public import CCDN.Hilbert.ProperHilbertDimension
 public import CCDN.Hilbert.ProperSectionHilbert
-public import CCDN.Hilbert.PureComponentDegreeBudget
 public import CCDN.Hilbert.RecurrenceParameterTranscendence
 public import CCDN.Hilbert.ScalarExtension
 public import CCDN.Hilbert.ScaledHilbertBlockComparison
@@ -351,50 +314,30 @@ public import CCDN.Hilbert.TranscendenceBasis
 public import CCDN.Hypersurface.AffineHyperplaneSlice
 public import CCDN.Hypersurface.AffineHypersurfaceCount
 public import CCDN.Hypersurface.CoefficientwiseSubstitution
-public import CCDN.Hypersurface.ConjugatePrimeGridBound
 public import CCDN.Hypersurface.CurveBoxDegreeBound
 public import CCDN.Hypersurface.EffectiveHyperplaneAvoidance
 public import CCDN.Hypersurface.FiniteFieldCount
-public import CCDN.Hypersurface.GaloisComponentDegree
-public import CCDN.Hypersurface.GaloisComponentPoints
-public import CCDN.Hypersurface.GaloisPolynomialPrimes
-public import CCDN.Hypersurface.GaloisStableIdealDescent
 public import CCDN.Hypersurface.GoodHyperplane
 public import CCDN.Hypersurface.GoodHyperplaneBounds
 public import CCDN.Hypersurface.GoodHyperplaneReindex
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
-public import CCDN.Hypersurface.HyperplaneSectionIdeal
 public import CCDN.Hypersurface.HyperplaneSliceCoordinates
 public import CCDN.Hypersurface.HyperplaneSlicingInduction
 public import CCDN.Hypersurface.IntegerGoodHyperplaneSlices
 public import CCDN.Hypersurface.IntegerHyperplaneSlices
-public import CCDN.Hypersurface.LowDegreePointSeparation
-public import CCDN.Hypersurface.NonRationalProjectiveCount
-public import CCDN.Hypersurface.NonRationalVarietyCount
 public import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
 public import CCDN.Hypersurface.NonabsoluteSurfaceCount
-public import CCDN.Hypersurface.PrincipalSectionGridBound
-public import CCDN.Hypersurface.PrincipalSectionPurity
-public import CCDN.Hypersurface.ProjectiveCoefficientExtension
 public import CCDN.Hypersurface.ProjectiveHypersurfaceCount
 public import CCDN.Hypersurface.ProjectiveHypersurfaceDimensionGrowth
 public import CCDN.Hypersurface.ProjectiveVarietyDimensionGrowth
-public import CCDN.Hypersurface.PureVarietyGridBound
 public import CCDN.Hypersurface.SingularHypersurfaceCount
-public import CCDN.Hypersurface.SmallOutsidePoint
 public import CCDN.Hypersurface.UniversalHyperplaneRestriction
-public import CCDN.Hypersurface.ZeroDimensionalGeometricPoint
-public import CCDN.Hypersurface.ZeroDimensionalPrimeDescent
-public import CCDN.LowerBound.GridAffineLowerBound
 public import CCDN.LowerBound.GridCurveConstruction
 public import CCDN.LowerBound.GridEisenstein
 public import CCDN.LowerBound.GridEisensteinDegree
-public import CCDN.LowerBound.GridHypersurfaceLowerBound
 public import CCDN.LowerBound.GridLowerBoundNumerics
 public import CCDN.LowerBound.GridMultivariate
-public import CCDN.LowerBound.GridPolynomialNormalization
 public import CCDN.LowerBound.GridProjectiveLowerBound
-public import CCDN.LowerBound.GridTopFormConstruction
 public import CCDN.LowerBound.IntegerGridLowerBound
 public import CCDN.LowerBound.ProjectivePlaneLowerBound
 public import CCDN.Noether.AmbientNoetherForms
@@ -451,8 +394,6 @@ public import CCDN.Plane.AffineNonzeroConstant
 public import CCDN.Plane.AffinePlaneAssembly
 public import CCDN.Plane.AffinePlaneBadPrimeCount
 public import CCDN.Plane.Bezout
-public import CCDN.Plane.CoprimeNewtonEdge
-public import CCDN.Plane.CoprimeNewtonEdgeReduction
 public import CCDN.Plane.CurveCount
 public import CCDN.Plane.DegreeOneAffineLine
 public import CCDN.Plane.FiniteFieldBadPlanes
@@ -488,7 +429,6 @@ public import CCDN.Plane.StepanovBound
 public import CCDN.Plane.StepanovDimension
 public import CCDN.Plane.StepanovParameters
 public import CCDN.Plane.UnscaledModelCount
-public import CCDN.Projection.AffineLinearCountTransfer
 public import CCDN.Projection.AffineProjectionCount
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
 public import CCDN.Projection.BoundedClosureElimination
@@ -500,7 +440,6 @@ public import CCDN.Projection.BoundedIntegerNormalization
 public import CCDN.Projection.BoundedLinearElimination
 public import CCDN.Projection.BoundedLinearProjection
 public import CCDN.Projection.ClosureIntegralComposition
-public import CCDN.Projection.ClosureProjectionBirational
 public import CCDN.Projection.CurveDerivativeReconstruction
 public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Projection.CurveProjectionDeformation
@@ -511,7 +450,6 @@ public import CCDN.Projection.ExceptionalCount
 public import CCDN.Projection.FieldDegree
 public import CCDN.Projection.FixedCoordinateElimination
 public import CCDN.Projection.FullDegreePrimitiveProjection
-public import CCDN.Projection.GeometricAffineProjection
 public import CCDN.Projection.HilbertLowDegreeEquation
 public import CCDN.Projection.HilbertProjectionDegree
 public import CCDN.Projection.HilbertProjectionKernel
@@ -525,11 +463,9 @@ public import CCDN.Projection.InfinityParameterReduction
 public import CCDN.Projection.InfinityScaling
 public import CCDN.Projection.IntegerHilbertElimination
 public import CCDN.Projection.IntegralFiberRank
-public import CCDN.Projection.IntegralProjectionClosedImage
 public import CCDN.Projection.IntegralProjectionFiberCount
 public import CCDN.Projection.IntegralProjectionHilbert
 public import CCDN.Projection.LeadingCoordinateExtension
-public import CCDN.Projection.LinearNormalizationInfinite
 public import CCDN.Projection.LinearParameterPrimitive
 public import CCDN.Projection.PlaneProjectionDegree
 public import CCDN.Projection.PlaneProjectionDerivative
@@ -543,7 +479,6 @@ public import CCDN.Projection.ProjectivePlaneProjection
 public import CCDN.Projection.ProjectiveProjectionCount
 public import CCDN.Projection.ProjectiveProjectionGrowth
 public import CCDN.Projection.ScaleAbsorption
-public import CCDN.Projection.ZeroDimensionalAffineProjection
 public import CCDN.Projection.ZeroDimensionalProjectiveCount
 public import CCDN.ProjectiveCurveBound
 public import CCDN.ProjectiveCurveLowerBound
@@ -563,29 +498,19 @@ public import CCDN.Surface.CurveCrossing
 public import CCDN.Surface.DegreeOneCount
 public import CCDN.Surface.DirectionSum
 public import CCDN.Surface.DirectionalDerivative
-public import CCDN.Surface.GeometricCoefficientReduction
-public import CCDN.Surface.GeometricCurveCover
 public import CCDN.Surface.LineContribution
 public import CCDN.Surface.LineDirections
-public import CCDN.Surface.MediumCurveCount
 public import CCDN.Surface.MonomialWeight
 public import CCDN.Surface.NonlinearCount
 public import CCDN.Surface.ParallelLines
-public import CCDN.Surface.PrimeWindowSalbergerRate
 public import CCDN.Surface.PrimeWindowSubpower
 public import CCDN.Surface.PrimitiveSurfaceFixedDegree
-public import CCDN.Surface.ProjectiveChartSmoothness
-public import CCDN.Surface.ProjectiveSurfaceSalbergerCover
 public import CCDN.Surface.ResidueBoundary
 public import CCDN.Surface.ResidueCover
 public import CCDN.Surface.ResidueEdgeCount
 public import CCDN.Surface.ResidueLinearCount
-public import CCDN.Surface.ResidueSalbergerCount
 public import CCDN.Surface.ResidueSubsetBoundary
 public import CCDN.Surface.RetainedCurveCount
-public import CCDN.Surface.SalbergerCover
-public import CCDN.Surface.SalbergerCoverNumerics
-public import CCDN.Surface.SalbergerHeightCover
 public import CCDN.Surface.SmallCurveCover
 public import CCDN.Surface.SmallDegreeSurfaceCurveCount
 public import CCDN.Surface.SmoothPrimeWindow
@@ -602,9 +527,11 @@ public import CCDN.Surface.TransversePlane
 
 Root module of the formalisation of Castryck, Cluckers, Dittmann and Nguyen, *The dimension
 growth conjecture, polynomial in the degree and without logarithmic factors* (Algebra & Number
-Theory 14, 2020). It imports every module of the main library; `scripts/update-root.py`
-generates it. Section 5 of the paper, the paper's intermediate statements as printed and the
-counterexamples are in the separate library `CCDNPaper`, which this library does not import.
+Theory 14, 2020). It imports every module of the main library, which contains exactly the
+modules that the main results need; `scripts/update-root.py` generates it. The rest of the
+paper (Section 5, the paper's intermediate statements as printed, the counterexamples and the
+results only they use) is in the separate library `CCDNPaper`, which this library does not
+import.
 
 The main results are:
 * `CCDN.projective_dimension_growth` (Theorem 1);

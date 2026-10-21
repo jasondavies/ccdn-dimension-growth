@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Hilbert.HomogeneousFilteredRank
+import CCDNPaper.Hilbert.HomogeneousFilteredRank
 import Mathlib.NumberTheory.Height.NumberField
 import Mathlib.NumberTheory.Height.Projectivization
 

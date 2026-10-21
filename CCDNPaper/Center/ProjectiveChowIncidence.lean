@@ -11,7 +11,7 @@ public import CCDNPaper.Center.ChowIncidenceIdeal
 public import CCDNPaper.Center.ChowPivotParametrization
 public import Mathlib.RingTheory.Nullstellensatz
 import CCDN.Algebra.LinearForm
-import CCDN.Algebra.ProjectiveClosureDegree
+import CCDNPaper.Algebra.ProjectiveClosureDegree
 
 /-!
 The affine incidence elimination ideal is the vanishing ideal of the

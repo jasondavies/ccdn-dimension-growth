@@ -21,9 +21,11 @@ DOCS = {
 
 Root module of the formalisation of Castryck, Cluckers, Dittmann and Nguyen, *The dimension
 growth conjecture, polynomial in the degree and without logarithmic factors* (Algebra & Number
-Theory 14, 2020). It imports every module of the main library; `scripts/update-root.py`
-generates it. Section 5 of the paper, the paper's intermediate statements as printed and the
-counterexamples are in the separate library `CCDNPaper`, which this library does not import.
+Theory 14, 2020). It imports every module of the main library, which contains exactly the
+modules that the main results need; `scripts/update-root.py` generates it. The rest of the
+paper (Section 5, the paper's intermediate statements as printed, the counterexamples and the
+results only they use) is in the separate library `CCDNPaper`, which this library does not
+import.
 
 The main results are:
 * `CCDN.projective_dimension_growth` (Theorem 1);
@@ -46,7 +48,9 @@ and holds the parts of the paper that the main results do not use:
 * `CCDNPaper/Center/`: Section 5 (Chow forms, good centres and Plücker equations);
 * `CCDNPaper/Statements/`: the paper's intermediate statements and side results as printed
   (or as corrected), linked to their labels in `docs/statements.md`;
-* `CCDNPaper/Counterexample/`: the formal refutations of printed intermediate statements.
+* `CCDNPaper/Counterexample/`: the formal refutations of printed intermediate statements;
+* the other directories, named after those of `CCDN/`: the supporting results that only this
+  library uses.
 
 Its declarations live in the namespace `CCDN`, like those of the main library.
 -/

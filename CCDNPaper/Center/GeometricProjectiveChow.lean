@@ -11,8 +11,8 @@ public import CCDN.Hilbert.LinearProjectionFiltration
 public import CCDNPaper.Center.ProjectiveChowIncidence
 import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Algebra.ProjectiveChartScalarExtension
-import CCDN.Algebra.WeightedHomogeneousTransform
 import CCDN.Hilbert.HomogeneousPrimeComponents
+import CCDNPaper.Algebra.WeightedHomogeneousTransform
 import CCDNPaper.Center.GeometricProjectiveCurveProjection
 import CCDNPaper.Center.ProjectiveChowEquation
 import CCDNPaper.Center.ProjectiveClosureRecovery

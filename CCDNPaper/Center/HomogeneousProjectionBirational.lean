@@ -8,10 +8,10 @@ module
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.ImageFractionField
-import CCDN.Hypersurface.SmallOutsidePoint
-import CCDN.Hypersurface.ZeroDimensionalPrimeDescent
 import CCDN.Projection.HomogeneousFiniteProjectionDegree
 import CCDNPaper.Center.HomogeneousProjectionRankBound
+import CCDNPaper.Hypersurface.SmallOutsidePoint
+import CCDNPaper.Hypersurface.ZeroDimensionalPrimeDescent
 
 /-!
 A finite homogeneous linear projection preserves the Hilbert

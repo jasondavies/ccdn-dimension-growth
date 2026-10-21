@@ -13,12 +13,12 @@ import CCDN.ForMathlib.FractionRing
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
 import CCDN.Hilbert.FullDimension
 import CCDN.Hilbert.LinearCoordinates
-import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import CCDN.Projection.IntegralProjectionHilbert
 import CCDN.Projection.ProjectiveClosureSpecialization
 import CCDNPaper.Center.ClosurePolynomialFractionField
 import CCDNPaper.Center.HomogeneousNormalizationRank
 import CCDNPaper.Center.RadialParameterFieldRank
+import CCDNPaper.Hilbert.ProjectiveClosureHilbertPolynomial
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
 /-! Exact degree of an affine linear normalization whose homogeneous

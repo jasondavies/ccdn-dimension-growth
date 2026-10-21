@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.HyperplaneSectionIdeal
+public import CCDNPaper.Hypersurface.HyperplaneSectionIdeal
 import CCDN.Hypersurface.EffectiveHyperplaneAvoidance
 
 /-! Effective avoidance for the homogeneous hyperplane intersection

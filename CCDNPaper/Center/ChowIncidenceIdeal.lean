@@ -7,7 +7,7 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
-import CCDN.Algebra.WeightedPolynomialSubstitution
+import CCDNPaper.Algebra.WeightedPolynomialSubstitution
 import Mathlib.Algebra.MvPolynomial.CommRing
 import Mathlib.Algebra.MvPolynomial.Funext
 import Mathlib.RingTheory.Nullstellensatz

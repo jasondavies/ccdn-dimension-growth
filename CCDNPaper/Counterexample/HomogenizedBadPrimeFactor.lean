@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
+public import CCDNPaper.AuxiliaryPolynomial.LiteralAffineBadPrimes
 import Mathlib.Algebra.MvPolynomial.Division
 
 /-! Homogenization changes the bad-prime factor of CCDN Definition 3.2.1.

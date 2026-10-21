@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
-public import CCDN.Plane.CoprimeNewtonEdgeReduction
+public import CCDNPaper.Plane.CoprimeNewtonEdgeReduction
 import CCDN.Algebra.PrimitiveNormalization
 import CCDN.AuxiliaryPolynomial.BadPrimeCharge
 import CCDN.Plane.AffinePlaneBadPrimeCount

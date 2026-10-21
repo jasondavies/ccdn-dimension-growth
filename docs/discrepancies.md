@@ -53,7 +53,7 @@ has a summary table.
   [`literalAffineBadPrimeFactor_homogenization_unbounded`](../CCDNPaper/Counterexample/HomogenizedBadPrimeFactor.lean)]
   The statements of Proposition 4.2.1 and Corollary 4.2.4, which depends on it, are true as
   printed: the formalisation proves them by working directly in the affine chart
-  ([`literal_affine_hypersurface_auxiliary`](../CCDN/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean),
+  ([`literal_affine_hypersurface_auxiliary`](../CCDNPaper/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean),
   [`literal_affine_plane_coefficient_count_uniform`](../CCDNPaper/Statements/LiteralAffinePlaneCount.lean)).
   In Lean, "literal" names the paper's `b(f)` of the affine polynomial, as opposed to the
   factor of its homogenisation. Defining `b(f)` through the homogenisation would also repair

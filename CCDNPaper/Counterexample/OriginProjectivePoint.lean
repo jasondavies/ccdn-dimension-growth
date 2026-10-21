@@ -9,9 +9,9 @@ public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.ProjectivePlaneProjection
 public import Mathlib.RingTheory.MvPolynomial.Ideal
-import CCDN.Algebra.ProjectiveClosureDegree
-import CCDN.Determinant.HypersurfaceOriginStalk
-import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
+import CCDNPaper.Algebra.ProjectiveClosureDegree
+import CCDNPaper.Determinant.HypersurfaceOriginStalk
+import CCDNPaper.Hilbert.ProjectiveClosureHilbertPolynomial
 
 /-! The projective closure of the affine origin is geometrically
 prime and has projective dimension zero and degree one. -/

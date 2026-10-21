@@ -12,8 +12,8 @@ import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
 import CCDN.Hilbert.LinearCoordinates
 import CCDN.Projection.HomogeneousProjectionEquation
 import CCDN.Projection.IntegralProjectionHilbert
-import CCDN.Projection.LinearNormalizationInfinite
 import CCDNPaper.Center.HomogeneousNormalizationRank
+import CCDNPaper.Projection.LinearNormalizationInfinite
 import Mathlib.Algebra.CharZero.Infinite
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
