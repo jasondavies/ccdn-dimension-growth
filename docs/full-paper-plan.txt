@@ -51,7 +51,7 @@ Theorem 4: PROVED. For each n > 2, constants c(n), e(n), uniformly for
 integer polynomials of degree d >= 5 with absolutely irreducible leading
 homogeneous part (irreducible over Q-bar, as in the rendered paper):
 N_aff(f,B) <= c(n) d^e(n) B^(n-2), B >= 1.
-top_form_hypersurface_dimension_growth_cubic gives C(n)*d^(18+3n)*B^(n+1)
+affine_hypersurface_dimension_growth gives C(n)*d^(18+3n)*B^(n+1)
 for n+3 integer variables and every d>=5, using hyperplane normals bounded
 by d^3. In ambient dimension N this is the corrected exponent 3N+9. The small-degree surface cover,
 coefficient-height reduction, hyperplanes, slice equations and count injections
@@ -598,7 +598,7 @@ Section 2:
 2.8 normalized finite-field count error: PROVED by
     SharpHypersurfaceDeterminant.projective_hypersurface_normalized_count_error;
 2.9 single-prime p-adic determinant bound: PROVED for common-degree homogeneous
-    evaluation matrices by projective_hypersurface_minorGcd_sharp. The matching
+    evaluation matrices by projective_hypersurface_minorGcd_dvd. The matching
     simultaneous-prime bound and global auxiliary polynomials are also proved.
     No unnormalized arbitrary-degree extension is asserted; the corrected
     local normalization does not supply such an extension.
@@ -795,7 +795,7 @@ Section 4:
     planes, the d(d-1) parallel-line bound and reciprocal-height summation are
     all constructed/proved. Degree-one prime component families are covered;
 4.3.4 affine surface dimension growth: PROVED for every d>=5 by
-    top_form_surface_dimension_growth, with the corrected coefficient-uniform
+    affine_surface_dimension_growth, with the corrected coefficient-uniform
     bound C*d^18*B, absolutely irreducible leading form and every real B>=1.
     The large-degree auxiliary count and constructed small-degree congruence
     cover are combined with the proved line contribution;
@@ -829,7 +829,7 @@ Section 4:
     factor covers the omitted graph chart. For d=1, all such linear
     intersection ideals are prime, including coincident hyperplanes, so
     the detector is 1. No separate Scheme/Proj identification is claimed.
-    exists_cubic_geometrically_good_hyperplane constructs a good integer
+    exists_geometrically_good_hyperplane constructs a good integer
     normal bounded by d^3 for d>=2;
 4.3.8 stated slicing/dimension-growth consequences: PROVED for every d>=5.
     CubicAffineDimensionGrowth constructs integer equations for all parallel

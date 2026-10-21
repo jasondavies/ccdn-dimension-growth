@@ -126,7 +126,7 @@ corrected form, which the main results use.
   Noether forms of Theorem 3.2.2 have degree `D² − 1` in those coefficients. Composing them
   gives degree `D(D² − 1)`, not `< D²`. The lemma's bound is still true: the formalisation
   proves it with a derivative resultant along a generic line in one hyperplane block, which
-  has degree `D(2d − 1) < D²` (`exists_dense_open_sharp_projective_center_plucker_equations`).
+  has degree `D(2d − 1) < D²` (`exists_dense_open_projective_center_plucker_equations`).
 * **The constant in Lemma 5.4 is false.** For `s = 5`, `r = 6` and `B = 10`, the independent
   system with rows
 

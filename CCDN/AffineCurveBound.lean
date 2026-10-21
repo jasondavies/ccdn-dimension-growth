@@ -1,8 +1,7 @@
 module
 
-public import CCDN.AffineProjectionCount
-public import CCDN.ProjectionScaleAbsorption
-
+public import CCDN.Projection.AffineProjectionCount
+public import CCDN.Projection.ProjectionScaleAbsorption
 /-! The full coefficient-uniform affine curve counting theorem, with constants
 depending only on ambient dimension and with the exact degree dependence in
 CCDN Theorem 3. -/

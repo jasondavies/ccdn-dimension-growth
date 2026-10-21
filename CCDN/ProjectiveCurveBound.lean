@@ -1,9 +1,8 @@
 module
 
-public import CCDN.ProjectiveProjectionCount
-public import CCDN.ProjectivePermutation
-public import CCDN.ProjectionScaleAbsorption
-
+public import CCDN.Projection.ProjectiveProjectionCount
+public import CCDN.Algebra.ProjectivePermutation
+public import CCDN.Projection.ProjectionScaleAbsorption
 /-! CCDN Theorem 2 in every ambient dimension. Degree is the slope of
 the homogeneous Hilbert function. The height and count use rational
 projective points. All projection and plane-counting inputs are proved. -/

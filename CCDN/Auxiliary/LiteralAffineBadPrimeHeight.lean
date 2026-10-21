@@ -1,0 +1,23 @@
+module
+
+public import CCDN.Auxiliary.LiteralAffineBadPrimes
+/-! Corollary 3.2.3 for the literal affine bad-prime factor of Definition
+3.2.1, including degree drops which preserve irreducibility. -/
+
+@[expose] public section
+namespace CCDN
+noncomputable section
+
+/-- The height estimate concerns the literal factor itself, for every
+integer polynomial and any coefficient bound H at least one. -/
+theorem literalAffineBadPrimeFactor_le_max {n : ℕ}
+    (f : MvPolynomial (Fin (n + 1)) ℤ) (H : ℝ) (hH : 1 ≤ H)
+    (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H) :
+    literalAffineBadPrimeFactor f ≤
+      (2 * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (n + 1)) *
+        max (Real.log H / (f.totalDegree : ℝ) ^ 2) 1 :=
+  (literalAffineBadPrimeFactor_le_inclusive f).trans
+    (hypersurfaceBadPrimeFactor_le_max f H hH hcoeff)
+
+end
+end CCDN

@@ -52,10 +52,10 @@ run_cmd do
 
 /-! The library endpoints they are derived from. -/
 
-#print axioms CCDN.projective_dimension_growth_explicit
+#print axioms CCDN.projective_dimension_growth
 #print axioms CCDN.projectiveCurveBound
 #print axioms CCDN.affineCurveBound
-#print axioms CCDN.top_form_hypersurface_dimension_growth_cubic
-#print axioms CCDN.rational_top_form_hypersurface_dimension_growth_cubic
+#print axioms CCDN.affine_hypersurface_dimension_growth
+#print axioms CCDN.affine_hypersurface_dimension_growth_rat
 #print axioms CCDN.projective_integral_curve_lower_bound
 #print axioms CCDN.classGroup_two_torsion_bound

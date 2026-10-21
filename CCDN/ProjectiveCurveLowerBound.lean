@@ -1,8 +1,7 @@
 module
 
-public import CCDN.GridProjectiveLowerBound
-public import CCDN.GridLowerBoundNumerics
-
+public import CCDN.LowerBound.GridProjectiveLowerBound
+public import CCDN.LowerBound.GridLowerBoundNumerics
 /-! CCDN Proposition 5 with its exact constant 1/5, for an absolutely
 irreducible projective plane equation. The principal ideal is prime and its
 projective Hilbert degree is the prescribed degree. -/

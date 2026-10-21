@@ -179,18 +179,18 @@ The corrected surface-line contribution is proved in
 lines by `d(d−1)`, and the projective curve theorem bounds the sum of
 reciprocal direction heights. Both geometric inputs are proved.
 
-`top_form_surface_count` combines the line and nonlinear contributions into
+`affine_surface_count_large_degree` combines the line and nonlinear contributions into
 the full corrected surface estimate `C d^18 B` for `d ≥ 16` and absolutely
 irreducible leading form. Its constant is chosen before the equation and
 real radius `B ≥ 1`. The absolute-irreducibility condition is the one printed
 in Theorem 4 and Proposition 4.3.4; text extraction can lose the bar over Q.
 
-`top_form_surface_dimension_growth` supplies the same `C d^18 B` estimate
+`affine_surface_dimension_growth` supplies the same `C d^18 B` estimate
 for every `d ≥ 5`. The small degrees use a constructed smooth-congruence
 cover, proper auxiliary crossings, retained low-degree curves and the proved
 line contribution. The coefficient-height condition is discharged internally.
 
-`top_form_hypersurface_dimension_growth_cubic` extends the bound to every
+`affine_hypersurface_dimension_growth` extends the bound to every
 ambient dimension `n+3`, giving `C(n) d^(18+3n) B^(n+1)` for every `d ≥ 5`.
 It constructs a good integer hyperplane with normal bounded by `d³`, integer
 equations for all parallel slices, and the point maps used in the induction.
@@ -750,13 +750,13 @@ primitivity, degree, irreducibility and the actual residue count.
 absolutely irreducible integer plane equations at every B≥1, conditional only
 on the stated sharp finite-field estimate. `RationalPlaneAssembly` extends it
 to rational absolutely irreducible equations with one coefficient-independent
-constant. `SharpPlaneResidueBound` names the finite-field input;
+constant. `PlaneResidueBound` names the finite-field input;
 it is discharged with constant 161 by `SharpPlaneCount.sharpPlaneResidueBound`.
 `PolynomialLinearDescent` and `NonabsolutePlaneCount` now handle rational
 irreducible equations that split over an extension: each factor's base-field
 zeros lie on a nonzero base-field polynomial of no larger degree, and Bézout
 gives at most d² points in total. `PlaneCurveAssembly` therefore proves
-`SharpPlaneResidueBound C → PlaneCurveBound` for C≥0. The finite-field
+`PlaneResidueBound C → PlaneCurveBound` for C≥0. The finite-field
 nongeometric case also costs at most d²; `GeometricResidueReduction` reduces
 the point estimate to geometrically irreducible equations alone.
 The local Stepanov machinery is now proved: formal branches, local and summed
@@ -771,7 +771,7 @@ auxiliary and every formal branch. `StepanovParameters` now chooses
 `PlaneStepanovDimension` proves the dimension inequality above `27d⁴`;
 `StepanovRealBound` handles all rounding and proves the explicit error constant
 161. Thus `SharpPlaneCount` proves `p+161d² sqrt(p)` for every irreducible
-prime-field equation above the cutoff, discharges `SharpPlaneResidueBound 161`,
+prime-field equation above the cutoff, discharges `PlaneResidueBound 161`,
 and proves `PlaneCurveBound` unconditionally. The next projection steps now
 construct a transcendental original coordinate, prove its function-field
 extension has degree at most d, and produce a primitive linear form with

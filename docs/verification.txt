@@ -386,7 +386,7 @@ The primitive integer theorem therefore has no coefficient-height,
 prime-existence, constant-term or box-range restrictions beyond B>=1.
 Primitive rational normalization extends it to all absolutely irreducible
 rational plane equations with one explicit constant independent of degree
-and coefficients. The only counting input is SharpPlaneResidueBound C,
+and coefficients. The only counting input is PlaneResidueBound C,
 explicitly defined as a proposition and still unproved. The result does not
 assert PlaneCurveBound or AffineCurveBound.
 All six modules pass direct Lean checks with autoImplicit=false and
@@ -413,7 +413,7 @@ points in total. This theorem holds over arbitrary fields and extensions;
 no Galois action or smooth-point descent is assumed.
 The rational nonabsolute case is therefore bounded in every box independently
 of its radius. PlaneCurveAssembly proves the exact PlaneCurveBound target
-from SharpPlaneResidueBound C with C>=0. GeometricResidueReduction applies
+from PlaneResidueBound C with C>=0. GeometricResidueReduction applies
 the d^2 bound to nongeometric finite-field curves and handles degree drops
 under reduction. Thus SharpGeometricPlaneResidueBound C implies the full
 rational plane-count target. The geometric sharp estimate remains unproved.
@@ -459,7 +459,7 @@ pass direct Lean checks with autoImplicit=false and warningAsError=true.
 The integer choices A=floor(sqrt(p)/d), D=floor((p-1)/d), N=d*A-4*d² satisfy the
 strict dimension inequality for p>27*d^4. All rounding is accounted for.
 The resulting point count is p+161*d²*sqrt(p) for every irreducible prime-field
-plane equation. SharpPlaneResidueBound 161 is proved. The theorem
+plane equation. PlaneResidueBound 161 is proved. The theorem
 AffineCurveCounting.planeCurveBound proves the exact PlaneCurveBound statement
 without an external counting hypothesis. Earlier records of an open finite-field
 input or open plane theorem describe historical intermediate stages.
@@ -1459,7 +1459,7 @@ Integrated fourteen new mathematical modules with root imports and endpoint
 checks. Corrected Proposition 4.3.3 is proved for actual finite rational line
 families on surfaces with absolutely irreducible top form. The derivative,
 transverse plane, parallel-line multiplicity and reciprocal direction-height
-sum are constructed. top_form_surface_count assembles the full corrected
+sum are constructed. affine_surface_count_large_degree assembles the full corrected
 C*d^18*B surface bound for d>=16, with its constant chosen before f and B.
 
 The exact surface instance of Corollary 4.1.4 is proved separately:

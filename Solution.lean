@@ -13,11 +13,11 @@ every other definition agrees with its library counterpart definitionally.
 
 | Challenge theorem | Library theorem |
 | --- | --- |
-| `projective_dimension_growth` | `CCDN.projective_dimension_growth_explicit` |
+| `projective_dimension_growth` | `CCDN.projective_dimension_growth` |
 | `projective_curve_bound` | `CCDN.projectiveCurveBound` |
 | `affine_curve_bound` | `CCDN.affineCurveBound` |
-| `affine_hypersurface_bound` | `CCDN.top_form_hypersurface_dimension_growth_cubic` |
-| `affine_hypersurface_bound_rat` | `CCDN.rational_top_form_hypersurface_dimension_growth_cubic` |
+| `affine_hypersurface_bound` | `CCDN.affine_hypersurface_dimension_growth` |
+| `affine_hypersurface_bound_rat` | `CCDN.affine_hypersurface_dimension_growth_rat` |
 | `projective_plane_curve_lower_bound` | `CCDN.projective_integral_curve_lower_bound` |
 | `classGroup_two_torsion_bound` | `CCDN.classGroup_two_torsion_bound` |
 -/
@@ -132,7 +132,7 @@ theorem projective_dimension_growth (n : ℕ) :
       ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroSet I) B : ℝ) ≤
         C * (d : ℝ) ^ (2 * n ^ 2 + 5 * n - 5) * B ^ (P.natDegree - 1) := by
-  obtain ⟨C, hC, h⟩ := CCDN.projective_dimension_growth_explicit n
+  obtain ⟨C, hC, h⟩ := CCDN.projective_dimension_growth n
   refine ⟨C, hC, fun I hI hhom d hd P hP hlead B hB => ?_⟩
   have hPI : CCDN.filteredHilbertPolynomial I = P := by
     obtain ⟨N, hN⟩ := hP
@@ -174,7 +174,7 @@ theorem affine_hypersurface_bound (n : ℕ) :
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (affineCount {x | eval x (map (Int.castRingHom ℚ) f) = 0} B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) := by
-  obtain ⟨C, hC, h⟩ := CCDN.top_form_hypersurface_dimension_growth_cubic n
+  obtain ⟨C, hC, h⟩ := CCDN.affine_hypersurface_dimension_growth n
   refine ⟨C, hC, fun f hf hd B hB => ?_⟩
   rw [affineCount_eq]
   exact h f hf hd B hB
@@ -187,7 +187,7 @@ theorem affine_hypersurface_bound_rat (n : ℕ) :
       5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (affineCount {x | eval x f = 0} B : ℝ) ≤
         C * (f.totalDegree : ℝ) ^ (18 + 3 * n) * B ^ (n + 1) := by
-  obtain ⟨C, hC, h⟩ := CCDN.rational_top_form_hypersurface_dimension_growth_cubic n
+  obtain ⟨C, hC, h⟩ := CCDN.affine_hypersurface_dimension_growth_rat n
   refine ⟨C, hC, fun f hf hd B hB => ?_⟩
   rw [affineCount_eq]
   exact h f hf hd B hB

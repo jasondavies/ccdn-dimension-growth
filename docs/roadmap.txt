@@ -328,7 +328,7 @@ cost by curveBound(d,(d+1)B)<=2e*curveBound(d,B), proving the 1/d bound for
 all primitive absolutely irreducible integer plane equations.
 RationalPlaneAssembly clears denominators and content, obtaining the same
 bound uniformly for rational absolutely irreducible equations. The only
-counting hypothesis remaining here is SharpPlaneResidueBound C, explicitly
+counting hypothesis remaining here is PlaneResidueBound C, explicitly
 defined and still unproved. No coefficient-height, prime-existence or small-box
 hypotheses remain in this assembled theorem.
 PolynomialLinearDescent now sends a nonzero extension-field polynomial to a
@@ -337,11 +337,11 @@ zeros. NonabsolutePlaneCount partitions points between two nonunit factors
 and applies Bezout to the two descended sections. This gives at most d^2
 base-field points for an irreducible plane curve that splits over an extension,
 without Galois transitivity or a smooth-point criterion. PlaneCurveAssembly
-proves the exact PlaneCurveBound target from SharpPlaneResidueBound C for
+proves the exact PlaneCurveBound target from PlaneResidueBound C for
 C>=0, including all rational irreducible equations.
 GeometricResidueReduction applies the same d^2 theorem over finite fields and
 handles degree drops under reduction. It proves that
-SharpGeometricPlaneResidueBound C implies SharpPlaneResidueBound C, so the
+SharpGeometricPlaneResidueBound C implies PlaneResidueBound C, so the
 remaining point-count obligation concerns geometrically irreducible curves
 only. The geometric sharp estimate is still an unproved proposition, not an
 axiom. Prove it to discharge PlaneCurveBound unconditionally. The arbitrary-
@@ -379,7 +379,7 @@ principal Hilbert function to verify the actual dimension inequality.
 StepanovRealBound proves the real error estimate including all integer rounding:
   #S <= p + 161*d²*sqrt(p).
 SharpPlaneCount proves this for every irreducible plane equation over ZMod p,
-then proves SharpPlaneResidueBound 161 and PlaneCurveBound with no external
+then proves PlaneResidueBound 161 and PlaneCurveBound with no external
 counting hypotheses. The preceding finite-field obligations are discharged.
 The next obligation is the higher-dimensional projection and curve interface.
 

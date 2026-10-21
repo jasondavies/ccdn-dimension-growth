@@ -1,14 +1,13 @@
 module
 
-public import CCDN.ProjectiveVarietyDimensionGrowth
-public import CCDN.ProjectiveHilbertCurveGrowth
-public import CCDN.ProperHilbertDimension
-public import CCDN.PrimeIdealDimensionDrop
-public import CCDN.HomogeneousProjectionEquation
-public import CCDN.ZeroDimensionalProjectiveCount
-public import CCDN.EmptyProjectiveHilbertDimension
-public import CCDN.PolynomialPredicates
-
+public import CCDN.Hypersurface.ProjectiveVarietyDimensionGrowth
+public import CCDN.Curve.ProjectiveHilbertCurveGrowth
+public import CCDN.Hilbert.ProperHilbertDimension
+public import CCDN.Hilbert.PrimeIdealDimensionDrop
+public import CCDN.Projection.HomogeneousProjectionEquation
+public import CCDN.Hilbert.ZeroDimensionalProjectiveCount
+public import CCDN.Hilbert.EmptyProjectiveHilbertDimension
+public import CCDN.Algebra.PolynomialPredicates
 /-! CCDN Theorem 1 in the homogeneous-coordinate-ideal formulation: uniform projective
 dimension growth for every rational prime projective variety of degree at least five.
 The Hilbert polynomial determines the degree and dimension. Zero-dimensional and empty
@@ -107,7 +106,7 @@ theorem projectiveGrowth_of_le {n E : ℕ} (hpoint : 1 ≤ n → n + 1 ≤ E)
     (hcurve : 2 ≤ n → 3 * (n + 1) + 4 ≤ E)
     (hhyper : 3 ≤ n → 18 + 3 * (n - 2) ≤ E)
     (hproj : ∀ m k, m + k + 1 = n → 1 ≤ m → 2 ≤ k →
-      projectiveProjectionDegreeExponent m k ≤ E) :
+      projectionDegreeExponent m k ≤ E) :
     ProjectiveGrowth n E := by
   classical
   have hlt (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) (hI : I.IsPrime) (d : ℕ) (hd : 5 ≤ d)
@@ -184,9 +183,9 @@ theorem projectiveGrowth_of_le {n E : ℕ} (hpoint : 1 ≤ n → n + 1 ≤ E)
 `2mn + 5m + 3n + 21`. For codimension `k ≥ 2` it is at most its value `2n² + 2n + 6` at
 `k = 2`. -/
 lemma projectiveProjectionDegreeExponent_le {m k n : ℕ} (h : m + k + 1 = n) (hk : 2 ≤ k) :
-    projectiveProjectionDegreeExponent m k ≤ 2 * n ^ 2 + 2 * n + 6 := by
+    projectionDegreeExponent m k ≤ 2 * n ^ 2 + 2 * n + 6 := by
   subst h
-  unfold projectiveProjectionDegreeExponent
+  unfold projectionDegreeExponent
   nlinarith
 
 /-- The degree exponent `2n² + 5n - 5` of Theorem 1 in `ℙⁿ`. Its values `2` and `13` for
@@ -196,7 +195,7 @@ def projectiveGrowthExponent (n : ℕ) : ℕ := 2 * n ^ 2 + 5 * n - 5
 
 /-- CCDN Theorem 1 with the degree exponent `2n² + 5n - 5` in every ambient projective
 dimension `n`. -/
-theorem projective_dimension_growth_explicit (n : ℕ) :
+theorem projective_dimension_growth (n : ℕ) :
     ProjectiveGrowth n (projectiveGrowthExponent n) := by
   unfold projectiveGrowthExponent
   refine projectiveGrowth_of_le (fun hn => ?_) (fun hn => ?_) (fun hn => ?_)

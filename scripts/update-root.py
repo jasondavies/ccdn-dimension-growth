@@ -17,10 +17,10 @@ growth conjecture, polynomial in the degree and without logarithmic factors* (Al
 Theory 14, 2020). It imports every module of the library; `scripts/update-root.py` generates it.
 
 The main results are:
-* `CCDN.projective_dimension_growth_explicit` (Theorem 1);
+* `CCDN.projective_dimension_growth` (Theorem 1);
 * `CCDN.projectiveCurveBound` (Theorem 2);
 * `CCDN.affineCurveBound` (Theorem 3);
-* `CCDN.top_form_hypersurface_dimension_growth_cubic` and its rational form (Theorem 4);
+* `CCDN.affine_hypersurface_dimension_growth` and its rational form (Theorem 4);
 * `CCDN.projective_integral_curve_lower_bound` (Proposition 5);
 * `CCDN.classGroup_two_torsion_bound` (Theorem 6).
 
