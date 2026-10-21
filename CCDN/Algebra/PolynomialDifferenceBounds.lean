@@ -69,11 +69,15 @@ private lemma nat_polynomial_lower_terms_le (p : ℕ[X]) (n x : ℕ) (hx : 0 < x
   intro i hi
   exact Nat.mul_le_mul_left _ (Nat.pow_le_pow_right hx (by simpa using mem_range.mp hi))
 
-/-- This constant depends only on the polynomial, never on the evaluation
-point or on the difference step. -/
+/-- The constant `∑ i ≤ n, p.coeff i + p.coeff (n + 1) ^ 2 * (n + 3)` in the uniform difference
+bounds for a monic polynomial `p` of degree `n + 2`; it depends only on `p` and `n`, not on the
+evaluation point or the difference step. -/
 def polynomialDifferenceConstant (p : ℕ[X]) (n : ℕ) : ℕ :=
   (∑ i ∈ range (n + 1), p.coeff i) + p.coeff (n + 1) ^ 2 * (n + 3)
 
+/-- For a monic polynomial `p` with natural coefficients and degree `n + 2`, and `μ ≤ k`
+with `0 < k`, the value `p k` exceeds `p (k - μ)` by at most
+`(n + 2) * μ * k ^ (n + 1) + polynomialDifferenceConstant p n * k ^ n`. -/
 lemma nat_polynomial_difference_uniform (p : ℕ[X]) (n : ℕ)
     (hdegree : p.natDegree = n + 2) (hmonic : p.Monic)
     (k μ : ℕ) (hk : 0 < k) (hμ : μ ≤ k) :
@@ -89,6 +93,9 @@ lemma nat_polynomial_difference_uniform (p : ℕ[X]) (n : ℕ)
   have he := Nat.zero_le (p.coeff (n + 1) ^ 2 * k ^ n)
   nlinarith only [hgap, hrem, hz, he]
 
+/-- For a monic polynomial `p` with natural coefficients and degree `n + 2`, and `0 < k < μ`,
+the value `p k` is at most
+`(n + 2) * μ * k ^ (n + 1) + polynomialDifferenceConstant p n * k ^ n`. -/
 lemma nat_polynomial_before_step_uniform (p : ℕ[X]) (n : ℕ)
     (hdegree : p.natDegree = n + 2) (hmonic : p.Monic)
     (k μ : ℕ) (hk : 0 < k) (hμ : k < μ) :

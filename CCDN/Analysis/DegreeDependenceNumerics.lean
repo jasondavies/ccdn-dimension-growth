@@ -15,6 +15,8 @@ little-oh quantity. These lemmas will be applied to constructed point counts. -/
 namespace CCDN
 open Filter Asymptotics
 
+/-- If `f` is eventually positive and eventually `c * f ≤ C * g` with positive constants `c`
+and `C`, then `g` is not `o(f)` along the nontrivial filter `l`. -/
 theorem not_isLittleO_of_eventually_lower_bound {α : Type*}
     {l : Filter α} [l.NeBot] {f g : α → ℝ} {c C : ℝ}
     (hc : 0 < c) (hC : 0 < C)
@@ -32,6 +34,8 @@ theorem not_isLittleO_of_eventually_lower_bound {α : Type*}
   rw [heq] at hh
   nlinarith [mul_pos hc hx]
 
+/-- For real exponents `a < b`, the function `d ↦ d ^ a` on natural numbers is `o(d ^ b)` as
+`d → ∞`. -/
 lemma natCast_rpow_isLittleO_of_lt {a b : ℝ} (hab : a < b) :
     (fun d : ℕ => (d : ℝ) ^ a) =o[atTop] (fun d : ℕ => (d : ℝ) ^ b) := by
   apply isLittleO_of_tendsto'

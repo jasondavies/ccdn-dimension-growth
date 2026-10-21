@@ -16,6 +16,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- A homogeneous polynomial of degree `M` in `n + 1` variables is the sum of its terms over
+the degree-`M` monomials enumerated by `homogeneousMonomials n M`. -/
 lemma homogeneous_eq_sum_coeff {K : Type*} [CommSemiring K] {n M : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous M) :
     f = ∑ j, monomial (homogeneousMonomials n M j) (f.coeff (homogeneousMonomials n M j)) := by

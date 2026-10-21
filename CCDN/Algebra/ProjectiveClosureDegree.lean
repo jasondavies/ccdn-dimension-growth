@@ -17,6 +17,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The homogenizing variable `X 0` does not lie in the projective closure of a prime ideal
+`I`. -/
 lemma projectiveClosureIdeal_not_X_zero {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
     X 0 ∉ projectiveClosureIdeal I := by
@@ -25,6 +27,8 @@ lemma projectiveClosureIdeal_not_X_zero {K : Type*} [Field K] {n : ℕ}
   intro h
   exact Ideal.one_notMem I h
 
+/-- The standard affine chart ideal of the projective closure of a prime ideal `I` is `I`
+itself. -/
 lemma projectiveClosureIdeal_chart {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
     projectiveChartIdeal (projectiveClosureIdeal I) = I := by
@@ -34,7 +38,8 @@ lemma projectiveClosureIdeal_chart {K : Type*} [Field K] {n : ℕ}
     homogeneous_mem_projectiveClosureIdeal_iff _ _ (scaledHomogenize_homogeneous 1 f le_rfl),
     affineChart_scaledHomogenize_one]
 
-/-- Exact equality of all homogeneous and filtered Hilbert functions. -/
+/-- In every degree `M`, the homogeneous Hilbert function of the projective closure of a prime
+ideal `I` equals the dimension of the degree-`≤ M` part of the coordinate ring of `I`. -/
 theorem projectiveClosureIdeal_hilbertFunction {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] (M : ℕ) :
     projectiveHilbertFunction (projectiveClosureIdeal I) M =
@@ -54,6 +59,8 @@ theorem projectiveClosureIdeal_hilbertFunction {K : Type*} [Field K] {n : ℕ}
   rw [projectiveClosureIdeal_chart I] at hh
   exact hh.symm
 
+/-- If a prime ideal `I` defines an affine curve of degree `d`, then its projective closure
+defines a projective curve of degree `d`. -/
 theorem projectiveClosureIdeal_curveDegree {n d : ℕ}
     (I : Ideal (CoordinatePolynomial n)) [I.IsPrime]
     (hdegree : HasAffineCurveDegree I d) :
@@ -64,6 +71,7 @@ theorem projectiveClosureIdeal_curveDegree {n d : ℕ}
   rw [projectiveClosureIdeal_hilbertFunction]
   exact h M hM
 
+/-- Distinct ideals have distinct projective closures. -/
 theorem projectiveClosureIdeal_injective {K : Type*} [Field K] {n : ℕ} :
     Function.Injective (@projectiveClosureIdeal K _ n) := by
   intro I J h
@@ -75,6 +83,8 @@ theorem projectiveClosureIdeal_injective {K : Type*} [Field K] {n : ℕ} :
   rw [affineChart_scaledHomogenize_one] at hI hJ
   rw [← hI, ← hJ, h]
 
+/-- The projective point `[1 : a]` lies on the zero locus of the projective closure of `I` if
+and only if `a` lies on the affine zero locus of `I`. -/
 lemma projectiveClosureIdeal_chart_point {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (a : Fin n → K) :
     affineProjectivePoint a ∈ projectiveIdealZeroLocus (projectiveClosureIdeal I) ↔

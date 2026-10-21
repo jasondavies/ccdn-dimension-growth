@@ -16,6 +16,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If `f` is a primitive integer polynomial and the prime `p` does not divide its constant
+coefficient, then the scaled homogenization `scaledHomogenize d p f` is primitive. -/
 theorem PrimitiveIntegerPolynomial.scaledHomogenize {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     (hf : PrimitiveIntegerPolynomial f) (d : ℕ) {p : ℕ} (hp : p.Prime)
     (hp0 : ¬ (p : ℤ) ∣ f.coeff 0) :

@@ -21,6 +21,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Scaled homogenization commutes with mapping the coefficients along a ring homomorphism
+`φ`, the scaling factor `h` being replaced by `φ h`. -/
 lemma scaledHomogenize_map {R S : Type*} [CommRing R] [CommRing S] {n : ℕ}
     (φ : R →+* S) (d : ℕ) (h : R) (f : MvPolynomial (Fin n) R) :
     map φ (scaledHomogenize d h f) = scaledHomogenize d (φ h) (map φ f) := by

@@ -22,6 +22,7 @@ filtered space inside the next piece.
 namespace CCDN
 noncomputable section
 
+/-- Constants lie in every piece of the degree filtration of the coordinate ring. -/
 lemma filteredCoordinateSpace_algebraMap_mem {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (n : ℕ) (c : K) :
     algebraMap K (MvPolynomial σ K ⧸ I) c ∈ filteredCoordinateSpace I n := by
@@ -54,6 +55,8 @@ def projectiveCoordinateAlgebra {K σ : Type*} [Field K]
       simpa using filteredCoordinateSpace_algebraMap_mem I 0 c
     · simp [Polynomial.algebraMap_apply, Polynomial.coeff_C, hn]
 
+/-- The monomial `a * w ^ n` lies in the homogeneous coordinate algebra if and only if `a` lies
+in the degree-`n` piece of the filtered coordinate ring. -/
 lemma projective_monomial_mem {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (n : ℕ) (a : MvPolynomial σ K ⧸ I) :
     Polynomial.monomial n a ∈ projectiveCoordinateAlgebra I ↔

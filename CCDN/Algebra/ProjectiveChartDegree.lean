@@ -27,6 +27,8 @@ private lemma aeval_affineChart {K F : Type*} [Field K] [Field F] [Algebra K F] 
     eval₂ (algebraMap K F) (Fin.cons 1 x) f
   rw [← eval_map, ← affineChart_map, affineChart_eval, eval_map]
 
+/-- A homogeneous polynomial of degree `d` satisfies `f(a • v) = a ^ d * f(v)` for evaluations in
+any field `F` that is a `K`-algebra. -/
 lemma homogeneous_aeval_smul {K F σ : Type*} [Field K] [Field F] [Algebra K F]
     {f : MvPolynomial σ K} {d : ℕ} (hf : f.IsHomogeneous d) (a : F) (v : σ → F) :
     aeval (a • v) f = a ^ d * aeval v f := by
@@ -34,12 +36,17 @@ lemma homogeneous_aeval_smul {K F σ : Type*} [Field K] [Field F] [Algebra K F]
   rw [← eval_map, ← eval_map]
   exact homogeneous_eval_smul (hf.map _) a v
 
+/-- Given a `K`-algebra map `q` from the coordinate ring of `I` to a field `F`, the
+`K`-algebra map from polynomials in the affine coordinates to `F` sending `Xⱼ` to the ratio
+`q Xⱼ₊₁ / q X₀`. -/
 def projectiveChartCoordinateMap {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (q : (MvPolynomial (Fin (n + 1)) K ⧸ I) →ₐ[K] F) :
     MvPolynomial (Fin n) K →ₐ[K] F :=
   aeval (fun j => q ((Ideal.Quotient.mk I) (X j.succ)) / q ((Ideal.Quotient.mk I) (X 0)))
 
+/-- When `q X₀ ≠ 0`, the coordinate-ratio map sends the dehomogenization of a homogeneous
+polynomial `f` of degree `M` to `(q X₀)⁻¹ ^ M * q f`. -/
 lemma projectiveChartCoordinateMap_chart {K F : Type*} [Field K] [Field F] [Algebra K F]
     {n M : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (q : (MvPolynomial (Fin (n + 1)) K ⧸ I) →ₐ[K] F)
@@ -73,8 +80,9 @@ private lemma projectiveChartCoordinateMap_homogenize {K F : Type*} [Field K] [F
     (scaledHomogenize_homogeneous 1 f hf)
   rwa [affineChart_scaledHomogenize_one] at h
 
-/-- Exact equality in every degree, rather than just equality of eventual
-slopes. The proof uses division by the homogenizing coordinate in the field. -/
+/-- Let `q` embed the coordinate ring of `I` into a field with `q X₀ ≠ 0`. In every degree `M`,
+the filtered Hilbert function of the kernel of the coordinate-ratio map
+`projectiveChartCoordinateMap I q` equals the homogeneous Hilbert function of `I`. -/
 theorem projective_chart_filtered_finrank {K F : Type*} [Field K] [Field F] [Algebra K F]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (q : (MvPolynomial (Fin (n + 1)) K ⧸ I) →ₐ[K] F) (hq : Function.Injective q)
@@ -117,6 +125,9 @@ theorem projective_chart_filtered_finrank {K F : Type*} [Field K] [Field F] [Alg
   rw [himage] at hV
   exact hW.trans hV.symm
 
+/-- Let `q` embed the coordinate ring of `I` into a field with `q X₀ ≠ 0`. If `I` defines a
+projective curve of degree `d`, then the kernel of the coordinate-ratio map
+`projectiveChartCoordinateMap I q` defines an affine curve of degree `d`. -/
 theorem projective_chart_degree {F : Type*} [Field F] [Algebra ℚ F] {n d : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
     (q : (MvPolynomial (Fin (n + 1)) ℚ ⧸ I) →ₐ[ℚ] F) (hq : Function.Injective q)

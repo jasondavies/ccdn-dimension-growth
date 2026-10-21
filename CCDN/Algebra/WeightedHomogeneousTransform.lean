@@ -29,6 +29,8 @@ private theorem weighted_homogeneous_substitution
   have hh := weighted_substitution_monomial ψ w v a ha e (f.coeff e)
   rwa [hf (mem_support_iff.mp he)] at hh
 
+/-- Renaming variables along `ρ : σ → τ` with `v (ρ i) = w i` maps a `w`-weighted homogeneous
+polynomial of degree `d` to a `v`-weighted homogeneous polynomial of degree `d`. -/
 theorem weighted_homogeneous_rename
     {K σ τ : Type*} [CommRing K]
     (w : σ → ℕ) (v : τ → ℕ) (ρ : σ → τ) (hρ : ∀ i, v (ρ i) = w i)

@@ -29,11 +29,15 @@ instance homogeneousCoordinateSpace_finite {n : ℕ}
   exact Module.Finite.of_fg
     ((homogeneousSubmodule_fg _ _ _).map (Ideal.Quotient.mkₐ K I).toLinearMap)
 
+/-- The graded Hilbert function of `I`: the dimension of the degree-`M` part of the coordinate
+ring `MvPolynomial (Fin (n + 1)) K ⧸ I`, that is, of the image of the homogeneous polynomials
+of degree `M`. -/
 def projectiveHilbertFunction {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (M : ℕ) : ℕ := Module.finrank K (homogeneousCoordinateSpace I M)
 
-/-- For a homogeneous prime ideal of a projective curve, this is its usual degree.
-The definition concerns only the coordinate ring. -/
+/-- The ideal `I` has projective curve degree `d`: the graded Hilbert function of
+`MvPolynomial (Fin (n + 1)) K ⧸ I` eventually equals `d * M + c` for some constant `c`. For a
+homogeneous prime ideal of a projective curve, `d` is the usual degree. -/
 def HasProjectiveCurveDegree {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (d : ℕ) : Prop :=
   ∃ N : ℕ, ∃ c : ℤ, ∀ M : ℕ, N ≤ M →
@@ -46,6 +50,8 @@ def projectiveIdealZeroLocus {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K)
   {x | ∀ (v : Fin (n + 1) → K) (hv : v ≠ 0),
     Projectivization.mk K v hv = x → v ∈ idealZeroLocus I}
 
+/-- The chosen representative of a point of the projective zero locus of `I` lies in the affine
+zero locus of `I`. -/
 lemma projectiveIdealZeroLocus_rep {n : ℕ}
     {I : Ideal (MvPolynomial (Fin (n + 1)) K)} {x : Projectivization K (Fin (n + 1) → K)}
     (hx : x ∈ projectiveIdealZeroLocus I) :

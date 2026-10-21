@@ -27,6 +27,8 @@ private lemma sum_successor_squares_lower (M : ℕ) :
     push_cast
     nlinarith [sq_nonneg (M : ℝ), Nat.cast_nonneg (α := ℝ) M]
 
+/-- If `H k ≥ d * (k - d + 1) ^ 2 / 2` for all `k ≥ d`, then for `M ≥ d` the prefix sum
+`∑ k < M, H k` is at least `d * (M - d) ^ 3 / 6`. -/
 theorem surface_rank_prefix_sum_lower (H : ℕ → ℕ) {d M : ℕ} (hdM : d ≤ M)
     (hlower : ∀ k, d ≤ k →
       (d : ℝ) * ((k : ℝ) - d + 1) ^ 2 / 2 ≤ H k) :
@@ -50,6 +52,8 @@ theorem surface_rank_prefix_sum_lower (H : ℕ → ℕ) {d M : ℕ} (hdM : d ≤
   convert (hnum.trans hsum).trans hprefix using 1
   ring
 
+/-- Let `R ≥ 0` satisfy `d * R ^ 2 = 2 * s` and `M - d ≤ R ≤ M + 2`, where `0 < d ≤ M` and
+`s ≥ 0`. If `W + d * (M - d) ^ 3 / 6 ≤ M * s`, then `W ≤ (2 / 3) * s * R + (2 * d + 2) * s`. -/
 theorem surface_weight_root_bound {d M s W : ℝ}
     (hd : 0 < d) (hM : d ≤ M) (hs : 0 ≤ s) (R : ℝ) (hR : 0 ≤ R)
     (hroot : d * R ^ 2 = 2 * s)

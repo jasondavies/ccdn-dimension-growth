@@ -30,6 +30,7 @@ private lemma polynomial_coeff_prod_sum_of_natDegree_le
       (hq i (Finset.mem_insert_self _ _)) ht,
       ih (fun j hj => hq j (Finset.mem_insert_of_mem hj))]
 
+/-- The affine polynomial `C a + C b * X` has degree at most `1`. -/
 lemma polynomial_affine_natDegree_le {R : Type*} [CommRing R] (a b : R) :
     (Polynomial.C a + Polynomial.C b * Polynomial.X).natDegree ≤ 1 := by
   apply Polynomial.natDegree_add_le_of_degree_le

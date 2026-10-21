@@ -18,6 +18,7 @@ coordinate is either fixed or unrestricted. -/
 namespace CCDN
 noncomputable section
 
+/-- Truncate every coordinate of the exponent vector `a` at `B`, giving `i ↦ min (a i) B`. -/
 def clampExponent {σ : Type*} (B : ℕ) (a : σ → ℕ) : σ → ℕ :=
   fun i => min (a i) B
 
@@ -55,13 +56,18 @@ theorem lowerSet_clamp_stabilizes {σ : Type*} [Fintype σ]
 abbrev orthantFree {σ : Type*} {B : ℕ} (b : σ → Fin (B + 1)) :=
   {i : σ // (b i).val = B}
 
+/-- The total degree `∑ i, b i` of the base point of the orthant with truncated coordinate
+pattern `b`. -/
 def orthantBaseDegree {σ : Type*} [Fintype σ] {B : ℕ}
     (b : σ → Fin (B + 1)) : ℕ := ∑ i, (b i).val
 
+/-- The point of the orthant with truncated pattern `b` obtained by adding `c` to the base
+point `b` in the free coordinates (those where `b i = B`). -/
 def orthantExpand {σ : Type*} {B : ℕ} (b : σ → Fin (B + 1))
     (c : orthantFree b → ℕ) : σ → ℕ :=
   fun i => (b i).val + if h : (b i).val = B then c ⟨i, h⟩ else 0
 
+/-- Every point of the orthant with truncated pattern `b` truncates back to `b`. -/
 lemma clamp_orthantExpand {σ : Type*} {B : ℕ}
     (b : σ → Fin (B + 1)) (c : orthantFree b → ℕ) :
     clampExponent B (orthantExpand b c) = fun i => (b i).val := by
@@ -73,6 +79,8 @@ lemma clamp_orthantExpand {σ : Type*} {B : ℕ}
   · have hi := (b i).isLt
     omega
 
+/-- The total degree of a point of the orthant with pattern `b` is the base degree of `b`
+plus the total of the added free coordinates. -/
 lemma orthantExpand_sum {σ : Type*} [Fintype σ] {B : ℕ}
     (b : σ → Fin (B + 1)) (c : orthantFree b → ℕ) :
     (∑ i, orthantExpand b c i) = orthantBaseDegree b + ∑ j, c j := by

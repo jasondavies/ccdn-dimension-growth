@@ -27,6 +27,8 @@ private lemma polynomialCoefficientLinear_map_of_one {K L : Type*}
   simpa only [Algebra.smul_def, mul_one, hφ, Algebra.algebraMap_self,
     RingHom.id_apply] using hh
 
+/-- For a field extension `L` of `K`, a polynomial `f` over `K` lies in the extension of the
+ideal `I` to polynomials over `L` if and only if `f` lies in `I`. -/
 theorem mem_ideal_scalar_extension_iff
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (f : MvPolynomial (Fin n) K) :

@@ -16,7 +16,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Radial scaling lands in the homogeneous coordinate algebra of I. -/
+/-- The `K`-algebra map sending `f` to `∑ n, [f_n] T ^ n`, where `f_n` is the degree-`n`
+homogeneous component of `f` and `[·]` its class modulo `I`; it lands in the homogeneous
+coordinate algebra `projectiveCoordinateAlgebra I`. -/
 def quotientRadialMap {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K)) :
     MvPolynomial σ K →ₐ[K] projectiveCoordinateAlgebra I where
   toFun f := ⟨Polynomial.map (Ideal.Quotient.mk I) (radialMap f), by
@@ -34,6 +36,8 @@ def quotientRadialMap {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K)) :
     simp
     exact (Ideal.Quotient.mkₐ K I).commutes c
 
+/-- The coefficient of `T ^ n` in the radial image of `f` is the class modulo `I` of the
+degree-`n` homogeneous component of `f`. -/
 lemma quotientRadialMap_coeff {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (f : MvPolynomial σ K) (n : ℕ) :
     ((quotientRadialMap I f : projectiveCoordinateAlgebra I) :
@@ -42,6 +46,8 @@ lemma quotientRadialMap_coeff {K σ : Type*} [Field K]
   change (Polynomial.map (Ideal.Quotient.mk I) (radialMap f)).coeff n = _
   rw [Polynomial.coeff_map, radialMap_coeff]
 
+/-- The radial image of a homogeneous polynomial `f` of degree `n` is the class of `f`
+placed in degree `n` of the homogeneous coordinate algebra. -/
 lemma quotientRadialMap_homogeneous {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (f : MvPolynomial σ K) (n : ℕ) (hf : f.IsHomogeneous n) :
     quotientRadialMap I f = projectiveMonomialMap I n

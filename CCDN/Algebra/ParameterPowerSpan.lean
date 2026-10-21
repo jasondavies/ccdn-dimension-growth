@@ -28,6 +28,8 @@ instance parameterPowerSpan_finite {K F ι : Type*} [Field K] [Field F] [Algebra
     [Fintype ι] (u : F) (v : ι → F) (N : ℕ) : Module.Finite K (parameterPowerSpan K u v N) :=
   Module.Finite.span_of_finite K (Set.finite_range _)
 
+/-- The span of the products `u ^ j * v i` with `j ≤ N` has dimension at most
+`Fintype.card ι * (N + 1)`. -/
 lemma parameterPowerSpan_finrank_le {K F ι : Type*} [Field K] [Field F] [Algebra K F]
     [Fintype ι] (u : F) (v : ι → F) (N : ℕ) :
     Module.finrank K (parameterPowerSpan K u v N) ≤ Fintype.card ι * (N + 1) := by
@@ -38,6 +40,7 @@ lemma parameterPowerSpan_finrank_le {K F ι : Type*} [Field K] [Field F] [Algebr
   rw [Fintype.card_prod, Fintype.card_fin] at h
   exact h
 
+/-- The parameter power spans increase with the power bound. -/
 lemma parameterPowerSpan_mono {K F ι : Type*} [Field K] [Field F] [Algebra K F]
     (u : F) (v : ι → F) {M N : ℕ} (hMN : M ≤ N) :
     parameterPowerSpan K u v M ≤ parameterPowerSpan K u v N := by
@@ -45,6 +48,8 @@ lemma parameterPowerSpan_mono {K F ι : Type*} [Field K] [Field F] [Algebra K F]
   rintro _ ⟨⟨i,j⟩, rfl⟩
   exact Submodule.subset_span ⟨(i, ⟨j.val, by omega⟩), rfl⟩
 
+/-- Multiplication by the parameter `u` maps the span of powers up to `N` into the span of
+powers up to `N + 1`. -/
 lemma parameterPowerSpan_mul_mem {K F ι : Type*} [Field K] [Field F] [Algebra K F]
     (u : F) (v : ι → F) (N : ℕ) {x : F} (hx : x ∈ parameterPowerSpan K u v N) :
     u * x ∈ parameterPowerSpan K u v (N + 1) := by

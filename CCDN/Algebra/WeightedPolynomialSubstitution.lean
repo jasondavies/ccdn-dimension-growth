@@ -15,6 +15,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Substituting, for each variable `i` of weight `w i`, a polynomial `a i` that is weighted
+homogeneous of weight `w i` (for the weights `v`) into a monomial with exponent `e` gives a
+weighted homogeneous polynomial of weight `Finsupp.weight w e`. -/
 lemma weighted_substitution_monomial {K A σ τ : Type*} [CommRing K] [CommRing A]
     (ψ : K →+* A) (w : σ → ℕ) (v : τ → ℕ)
     (a : σ → MvPolynomial τ A) (ha : ∀ i, (a i).IsWeightedHomogeneous v (w i))
@@ -27,6 +30,9 @@ lemma weighted_substitution_monomial {K A σ τ : Type*} [CommRing K] [CommRing 
   simpa only [RingHom.comp_apply,Finsupp.prod,Finsupp.weight_apply,Finsupp.sum]
     using hh.C_mul (ψ c)
 
+/-- A substitution `X i ↦ a i` with each `a i` weighted homogeneous of weight `w i` (for the
+weights `v`) maps the `w`-weighted homogeneous component of degree `M` of `f` to the
+`v`-weighted homogeneous component of degree `M` of the image of `f`. -/
 theorem weighted_component_substitution {K A σ τ : Type*} [CommRing K] [CommRing A]
     (ψ : K →+* A) (w : σ → ℕ) (v : τ → ℕ)
     (a : σ → MvPolynomial τ A) (ha : ∀ i, (a i).IsWeightedHomogeneous v (w i))

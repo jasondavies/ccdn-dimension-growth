@@ -18,6 +18,8 @@ an unquantified genericity argument. -/
 namespace CCDN
 noncomputable section
 
+/-- In characteristic zero, a nonzero polynomial `P` does not vanish at some natural number
+`k ≤ P.natDegree`. -/
 lemma polynomial_exists_small_nat_eval_ne_zero {K : Type*} [Field K] [CharZero K]
     (P : Polynomial K) (hP : P ≠ 0) :
     ∃ k : ℕ, k ≤ P.natDegree ∧ P.eval (k : K) ≠ 0 := by

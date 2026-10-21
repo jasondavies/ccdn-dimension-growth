@@ -15,6 +15,7 @@ fixed power of the logarithm; geometric covering hypotheses are separate. -/
 namespace CCDN
 noncomputable section
 
+/-- For every natural number `d ≥ 5`, `1 / √d ≤ 9 / 20`. -/
 theorem surface_inverse_sqrt_le_nine_twentieths {d : ℕ} (hd : 5 ≤ d) :
     1 / Real.sqrt (d : ℝ) ≤ (9 / 20 : ℝ) := by
   have hdR : (5 : ℝ) ≤ d := by exact_mod_cast hd

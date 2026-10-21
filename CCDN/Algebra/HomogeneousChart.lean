@@ -19,16 +19,24 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The dehomogenization at the first coordinate: the ring homomorphism sending `X 0` to `1` and
+`X i.succ` to `X i`, which restricts a polynomial in `n + 1` variables to the affine chart
+`x₀ = 1`. -/
 def affineChart {K : Type*} [CommRing K] (n : ℕ) :
     MvPolynomial (Fin (n + 1)) K →+* MvPolynomial (Fin n) K :=
   eval₂Hom C (Fin.cons 1 X)
 
+/-- The exponent in `n` variables obtained from an exponent `m` in `n + 1` variables by forgetting
+the exponent of the first variable. -/
 def chartExponent {n : ℕ} (m : Fin (n + 1) →₀ ℕ) : Fin n →₀ ℕ :=
   Finsupp.equivFunOnFinite.symm (fun i => m i.succ)
 
+/-- The entry of `chartExponent m` at `i` is the entry of `m` at `i.succ`. -/
 @[simp] lemma chartExponent_apply {n : ℕ} (m : Fin (n + 1) →₀ ℕ) (i : Fin n) :
     chartExponent m i = m i.succ := rfl
 
+/-- The degree of an exponent `m` in `n + 1` variables is the exponent of the first variable plus
+the degree of `chartExponent m`. -/
 lemma exponent_degree_split {n : ℕ} (m : Fin (n + 1) →₀ ℕ) :
     m.sum (fun _ e => e) = m 0 + (chartExponent m).sum (fun _ e => e) := by
   rw [Finsupp.sum_fintype _ _ (by simp), Fin.sum_univ_succ,
@@ -46,6 +54,8 @@ private lemma chartExponent_injective_on_degree {n M : ℕ} {m k : Fin (n + 1) �
   refine Fin.cases h0 (fun j => ?_) i
   exact congrArg (fun t => t j) he
 
+/-- The affine chart of the monomial `monomial m c` is the monomial
+`monomial (chartExponent m) c`. -/
 lemma affineChart_monomial {K : Type*} [CommRing K] {n : ℕ}
     (m : Fin (n + 1) →₀ ℕ) (c : K) :
     affineChart n (monomial m c) = monomial (chartExponent m) c := by
@@ -54,6 +64,8 @@ lemma affineChart_monomial {K : Type*} [CommRing K] {n : ℕ}
     Finsupp.prod_fintype _ _ (by simp), Finsupp.prod_fintype _ _ (by simp), Fin.prod_univ_succ]
   simp
 
+/-- For `f` homogeneous of degree `M`, the coefficient of `affineChart n f` at the chart exponent of
+a degree-`M` exponent `m` is the coefficient of `f` at `m`. -/
 lemma affineChart_homogeneous_coefficient {K : Type*} [CommRing K] {n M : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous M)
     (j : Fin ((n + M).choose M)) :
@@ -68,6 +80,7 @@ lemma affineChart_homogeneous_coefficient {K : Type*} [CommRing K] {n M : ℕ}
   conv_lhs => rw [homogeneous_eq_sum_coeff f hf]
   simp [map_sum, affineChart_monomial, coeff_monomial, hinj.eq_iff]
 
+/-- Two homogeneous polynomials of the same degree with equal affine charts are equal. -/
 lemma affineChart_injective_on_homogeneous {K : Type*} [CommRing K] {n M : ℕ}
     {f g : MvPolynomial (Fin (n + 1)) K} (hf : f.IsHomogeneous M) (hg : g.IsHomogeneous M)
     (he : affineChart n f = affineChart n g) : f = g := by
@@ -78,6 +91,7 @@ lemma affineChart_injective_on_homogeneous {K : Type*} [CommRing K] {n M : ℕ}
   rw [homogeneous_eq_sum_coeff f hf, homogeneous_eq_sum_coeff g hg]
   simp only [hc]
 
+/-- Restriction to the affine chart `x₀ = 1` does not increase the total degree. -/
 lemma affineChart_totalDegree_le {K : Type*} [CommRing K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) : (affineChart n f).totalDegree ≤ f.totalDegree := by
   classical
@@ -91,9 +105,12 @@ lemma affineChart_totalDegree_le {K : Type*} [CommRing K] {n : ℕ}
   change (chartExponent m).sum (fun _ e => e) ≤ f.totalDegree
   omega
 
+/-- The exponent in `n + 1` variables obtained from `m` by prepending `M - |m|` as the exponent of
+the first variable, where `|m|` is the degree of `m`; it has degree `M` when `|m| ≤ M`. -/
 def homogenizedExponent {n : ℕ} (M : ℕ) (m : Fin n →₀ ℕ) : Fin (n + 1) →₀ ℕ :=
   Finsupp.equivFunOnFinite.symm (Fin.cons (M - m.sum (fun _ e => e)) m)
 
+/-- Forgetting the first entry of `homogenizedExponent M m` recovers `m`. -/
 @[simp] lemma chartExponent_homogenizedExponent {n : ℕ} (M : ℕ) (m : Fin n →₀ ℕ) :
     chartExponent (homogenizedExponent M m) = m := by
   ext i
@@ -118,6 +135,8 @@ def scaledHomogenize {R : Type*} [CommRing R] {n : ℕ} (d : ℕ) (h : R)
     (f : MvPolynomial (Fin n) R) : MvPolynomial (Fin (n + 1)) R :=
   ∑ m ∈ f.support, monomial (homogenizedExponent d m) (h ^ m.sum (fun _ e => e) * f.coeff m)
 
+/-- The coefficient of `scaledHomogenize d h f` at `homogenizedExponent d m` is
+`h ^ |m| * f.coeff m`, where `|m|` is the degree of `m`. -/
 lemma scaledHomogenize_coefficient {R : Type*} [CommRing R] {n : ℕ}
     (d : ℕ) (h : R) (f : MvPolynomial (Fin n) R) (m : Fin n →₀ ℕ) :
     (scaledHomogenize d h f).coeff (homogenizedExponent d m) =
@@ -128,6 +147,8 @@ lemma scaledHomogenize_coefficient {R : Type*} [CommRing R] {n : ℕ}
   · have hz := notMem_support_iff.mp hm
     simp [scaledHomogenize, coeff_monomial, (homogenizedExponent_injective d).eq_iff, hm, hz]
 
+/-- If `f` has total degree at most `d`, then its scaled homogenization in degree `d` is homogeneous
+of degree `d`. -/
 lemma scaledHomogenize_homogeneous {R : Type*} [CommRing R] {n d : ℕ}
     (h : R) (f : MvPolynomial (Fin n) R) (hf : f.totalDegree ≤ d) :
     (scaledHomogenize d h f).IsHomogeneous d := by
@@ -135,6 +156,8 @@ lemma scaledHomogenize_homogeneous {R : Type*} [CommRing R] {n d : ℕ}
   intro m hm
   exact isHomogeneous_monomial _ (homogenizedExponent_degree m ((le_totalDegree hm).trans hf))
 
+/-- Homogenization in degree `d`, that is scaled homogenization with `h = 1`, is a right inverse of
+the affine chart `x₀ = 1`. -/
 lemma affineChart_scaledHomogenize_one {R : Type*} [CommRing R] {n : ℕ}
     (d : ℕ) (f : MvPolynomial (Fin n) R) : affineChart n (scaledHomogenize d 1 f) = f := by
   classical
@@ -142,6 +165,8 @@ lemma affineChart_scaledHomogenize_one {R : Type*} [CommRing R] {n : ℕ}
     one_pow, one_mul]
   exact f.as_sum.symm
 
+/-- The affine chart `x₀ = 1` commutes with mapping the coefficients along a ring
+homomorphism `φ`. -/
 lemma affineChart_map {K L : Type*} [CommRing K] [CommRing L] {n : ℕ}
     (φ : K →+* L) (f : MvPolynomial (Fin (n + 1)) K) :
     affineChart n (MvPolynomial.map φ f) = MvPolynomial.map φ (affineChart n f) := by
@@ -154,6 +179,7 @@ lemma affineChart_map {K L : Type*} [CommRing K] [CommRing L] {n : ℕ}
       refine Fin.cases ?_ (fun j => ?_) i <;> simp [affineChart]
   exact RingHom.congr_fun he f
 
+/-- Evaluating the affine chart of `f` at `x` is evaluating `f` at the point `Fin.cons 1 x`. -/
 lemma affineChart_eval {K : Type*} [CommRing K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (x : Fin n → K) :
     eval x (affineChart n f) = eval (Fin.cons 1 x) f := by
@@ -164,6 +190,8 @@ lemma affineChart_eval {K : Type*} [CommRing K] {n : ℕ}
     refine Fin.cases ?_ (fun j => ?_) i <;> simp
   rw [he]
 
+/-- Evaluating the affine chart of `f` at `a` through `φ` is evaluating `f` at `Fin.cons 1 a`
+through `φ`. -/
 lemma eval₂_affineChart {K R : Type*} [CommRing K] [CommRing R] {n : ℕ} (φ : K →+* R)
     (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) K) :
     eval₂ φ a (affineChart n f) = eval₂ φ (Fin.cons 1 a) f := by
@@ -205,8 +233,9 @@ theorem homogeneous_dvd_of_affineChart_dvd {K : Type*} [CommRing K] [IsDomain K]
   · rw [map_mul, affineChart_scaledHomogenize_one]
     exact hq
 
-/-- Primitive integral homogeneous nonmultiples give proper rational affine
-sections. This discharges the coefficient and chart nondivisibility transfers. -/
+/-- Let `f` be a primitive integer homogeneous polynomial of degree `d` whose affine chart
+`x₀ = 1` still has degree `d`. If `f` does not divide the homogeneous polynomial `g`, then over
+`ℚ` the affine chart of `f` does not divide the affine chart of `g`. -/
 theorem rational_affineChart_not_dvd {n d M : ℕ} {f g : MvPolynomial (Fin (n + 1)) ℤ}
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hg : g.IsHomogeneous M)
     (hprim : PrimitiveIntegerPolynomial f) (hdchart : (affineChart n f).totalDegree = d)

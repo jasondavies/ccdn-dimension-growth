@@ -28,6 +28,8 @@ private theorem prime_power_product_dvd (P : Finset ℕ) (e : ℕ → ℕ) (D : 
     Nat.isCoprime_iff_coprime.mpr ((Nat.coprime_primes (hP p hp) (hP q hq)).mpr hpq)
   exact hcop.pow
 
+/-- If each prime `p` in the finite set `P` has `p ^ e p` dividing the positive integer `D`,
+then `∑ p ∈ P, e p * log p ≤ log D`. -/
 theorem sum_log_prime_powers_le_log (P : Finset ℕ) (e : ℕ → ℕ) {D : ℤ}
     (hD : 0 < D) (hP : ∀ p ∈ P, Nat.Prime p)
     (hdiv : ∀ p ∈ P, (p : ℤ) ^ e p ∣ D) :

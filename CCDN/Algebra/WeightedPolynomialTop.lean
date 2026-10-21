@@ -28,6 +28,9 @@ private lemma finset_prod_polynomial_monomial {R ι : Type*} [CommSemiring R]
   | @insert i s hi ih =>
     simp only [prod_insert hi, sum_insert hi, ih, Polynomial.monomial_mul_monomial]
 
+/-- The Rees substitution `X i ↦ X i * t ^ w i`, valued in polynomials in an auxiliary variable
+`t` with coefficients in `MvPolynomial σ R`; the coefficient of `t ^ k` in the image of `f` is
+the weighted homogeneous component of `f` of weight `k`. -/
 def weightedDegreePolynomial {R σ : Type*} [CommSemiring R] (w : σ → ℕ) :
     MvPolynomial σ R →+* Polynomial (MvPolynomial σ R) :=
   eval₂Hom (Polynomial.C.comp C) (fun i => Polynomial.monomial (w i) (X i))
@@ -53,6 +56,8 @@ private lemma weightedDegreePolynomial_coeff {R σ : Type*} [CommSemiring R]
   simp only [weightedDegreePolynomial_monomial, Polynomial.coeff_monomial]
   rw [weightedHomogeneousComponent_apply, sum_filter]
 
+/-- The weighted homogeneous component of a nonzero polynomial in its weighted total degree is
+nonzero. -/
 lemma weighted_top_component_ne_zero {R σ : Type*} [CommSemiring R]
     (w : σ → ℕ) (f : MvPolynomial σ R) (hf : f ≠ 0) :
     weightedHomogeneousComponent w (f.weightedTotalDegree w) f ≠ 0 := by
@@ -66,6 +71,8 @@ lemma weighted_top_component_ne_zero {R σ : Type*} [CommSemiring R]
   rw [ite_eq_left he'] at hh
   exact (mem_support_iff.mp hm) hh
 
+/-- The degree of the Rees substitution `weightedDegreePolynomial w f` in the auxiliary variable
+is the weighted total degree of `f`. -/
 lemma weightedDegreePolynomial_natDegree {R σ : Type*} [CommSemiring R]
     (w : σ → ℕ) (f : MvPolynomial σ R) :
     (weightedDegreePolynomial w f).natDegree = f.weightedTotalDegree w := by
@@ -93,6 +100,8 @@ private lemma weightedDegreePolynomial_leadingCoeff {R σ : Type*} [CommSemiring
       weightedHomogeneousComponent w (f.weightedTotalDegree w) f := by
   rw [Polynomial.leadingCoeff, weightedDegreePolynomial_natDegree, weightedDegreePolynomial_coeff]
 
+/-- Over a domain, the weighted total degree of a product of nonzero polynomials is the sum of
+their weighted total degrees. -/
 lemma weightedTotalDegree_mul_of_ne_zero {R σ : Type*} [CommSemiring R] [IsDomain R]
     (w : σ → ℕ) {f g : MvPolynomial σ R} (hf : f ≠ 0) (hg : g ≠ 0) :
     (f * g).weightedTotalDegree w = f.weightedTotalDegree w + g.weightedTotalDegree w := by
@@ -101,6 +110,8 @@ lemma weightedTotalDegree_mul_of_ne_zero {R σ : Type*} [CommSemiring R] [IsDoma
       (weightedDegreePolynomial_ne_zero w hg),
     weightedDegreePolynomial_natDegree, weightedDegreePolynomial_natDegree]
 
+/-- Over a domain, the top weighted homogeneous component of a product is the product of the top
+weighted homogeneous components. -/
 lemma weighted_top_component_mul {R σ : Type*} [CommSemiring R] [IsDomain R]
     (w : σ → ℕ) (f g : MvPolynomial σ R) :
     weightedHomogeneousComponent w ((f * g).weightedTotalDegree w) (f * g) =
@@ -109,6 +120,8 @@ lemma weighted_top_component_mul {R σ : Type*} [CommSemiring R] [IsDomain R]
   rw [← weightedDegreePolynomial_leadingCoeff, map_mul, Polynomial.leadingCoeff_mul,
     weightedDegreePolynomial_leadingCoeff, weightedDegreePolynomial_leadingCoeff]
 
+/-- Over a field, a nonzero polynomial of weighted total degree zero for strictly positive weights
+is a unit (a nonzero constant). -/
 lemma weightedTotalDegree_zero_isUnit {K σ : Type*} [Field K]
     (w : σ → ℕ) (hw : ∀ i, 0 < w i) (f : MvPolynomial σ K)
     (hf : f ≠ 0) (hd : f.weightedTotalDegree w = 0) : IsUnit f := by
