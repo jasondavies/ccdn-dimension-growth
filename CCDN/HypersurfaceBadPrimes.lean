@@ -10,10 +10,23 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A polynomial with an irreducible image under a coefficient map is nonzero. -/
+lemma ne_zero_of_irreducible_map {R S σ : Type*} [CommSemiring R] [CommSemiring S]
+    {φ : R →+* S} {f : MvPolynomial σ R} (h : Irreducible (map φ f)) : f ≠ 0 := by
+  rintro rfl
+  exact h.ne_zero (map_zero _)
+
 def HypersurfaceBadReduction {σ : Type*} (f : MvPolynomial σ ℤ) (p : ℕ) : Prop :=
   ∃ hp : p.Prime, let _ : Fact p.Prime := ⟨hp⟩
     (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree ≠ f.totalDegree ∨
       ¬Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f)
+
+/-- Good reduction at a prime `p`: the reduction of `f` modulo `p` is nonzero and
+absolutely irreducible. -/
+abbrev HasGoodReduction {σ : Type*} (f : MvPolynomial σ ℤ) (p : ℕ) [Fact p.Prime] : Prop :=
+  map (Int.castRingHom (ZMod p)) f ≠ 0 ∧
+    Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
+      (map (Int.castRingHom (ZMod p)) f))
 
 /-- A positive integer and the exact finite bad-prime set above the
 degree. -/

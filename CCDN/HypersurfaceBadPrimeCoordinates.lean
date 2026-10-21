@@ -101,9 +101,7 @@ lemma homogeneous_hypersurfaceBadReduction_iff {σ : Type*} {d : ℕ}
 irreducibility hold for the coefficient reduction. -/
 lemma hypersurface_good_reduction {σ : Type*} (f : MvPolynomial σ ℤ)
     (p : ℕ) [Fact p.Prime] (hgood : ¬HypersurfaceBadReduction f p) :
-    map (Int.castRingHom (ZMod p)) f ≠ 0 ∧
-      Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
-        (map (Int.castRingHom (ZMod p)) f)) := by
+    HasGoodReduction f p := by
   have hg : Irreducible (map (Int.castRingHom (AlgebraicClosure (ZMod p))) f) := by
     by_contra hn
     exact hgood ⟨Fact.out, Or.inr hn⟩
@@ -115,6 +113,24 @@ lemma hypersurface_good_reduction {σ : Type*} (f : MvPolynomial σ ℤ)
   refine ⟨?_, hi⟩
   intro hz
   exact hi.ne_zero (by rw [hz, map_zero])
+
+/-- The finite set of primes `p > 27 d ^ 4` of bad reduction of an absolutely
+irreducible form of degree `d > 0`. -/
+theorem exists_hypersurface_bad_prime_finset
+    {L : Type*} [Field L] [CharZero L] [IsAlgClosed L] {n d : ℕ}
+    (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
+    (hir : Irreducible (map (Int.castRingHom L) f)) :
+    ∃ bad : Finset ℕ, ∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p := by
+  have hdeg : f.totalDegree = d := hf.totalDegree (fun h => hir.ne_zero (by rw [h, map_zero]))
+  refine ⟨(finite_fin_hypersurface_bad_primes f hir (hdeg ▸ hd)).toFinset, fun p => ?_⟩
+  simp only [Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdeg]
+
+/-- A prime above the cutoff outside the bad-prime set has good reduction. -/
+lemma hasGoodReduction_of_not_mem {σ : Type*} {f : MvPolynomial σ ℤ} {d : ℕ}
+    {bad : Finset ℕ} (hbad : ∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p)
+    (p : ℕ) [Fact p.Prime] (hp : p ∉ bad) (hcut : 27 * (d : ℝ) ^ 4 < p) :
+    HasGoodReduction f p :=
+  hypersurface_good_reduction f p fun hb => hp ((hbad p).mpr ⟨by exact_mod_cast hcut, hb⟩)
 
 end
 end CCDN

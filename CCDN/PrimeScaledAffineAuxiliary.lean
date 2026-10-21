@@ -13,13 +13,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def hypersurfaceAuxiliaryDegreeBound (n d : ℕ) (B b H : ℝ) : ℝ :=
-  hypersurfaceAbsoluteAuxiliaryConstant n *
-    ((d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * b *
-        B ^ ((n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) /
-          H ^ (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) +
-      (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B + (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)))
-
 /-- For any prime p<=B avoiding the constant coefficient, construct an
 affine auxiliary nonmultiple. The degree retains the exact height and bad-prime
 factor of the scaled model, ready for their quantitative estimates. -/

@@ -39,6 +39,15 @@ lemma boundedHomogenize_map_of_degree_bound {K L : Type*} [CommRing K] [CommRing
       Finset.sup_mono (support_map_subset _ _)).trans hd))
   rw [affineChart_map, affineChart_boundedHomogenize, affineChart_boundedHomogenize]
 
+/-- An affine-chart good prime for `f` and the points `z`: the reduction of the affine
+chart `x₀ = 1` of `f` is absolutely irreducible and every point lies in that chart
+modulo `p`. -/
+abbrev AffineChartGoodPrime {n t : ℕ} (f : MvPolynomial (Fin (n + 3)) ℤ)
+    (z : Fin t → IntPoint (n + 3)) (p : ℕ) [Fact p.Prime] : Prop :=
+  Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
+    (map (Int.castRingHom (ZMod p)) (affineChart (n + 2) f))) ∧
+  ∀ i, IsCoprime (p : ℤ) (z i 0)
+
 /-- An irreducible affine reduction gives the sharp prime-power
 minor divisor for points whose first homogeneous coordinate is a p-adic unit.
 The reduction may lose affine degree. -/

@@ -32,7 +32,7 @@ lemma hypersurfaceAuxiliaryDegreeBound_mono_b (n d : ℕ) {B b b' H : ℝ}
     (hb : b ≤ b') (hB : 0 ≤ B) (hH : 0 ≤ H) :
     hypersurfaceAuxiliaryDegreeBound n d B b H ≤ hypersurfaceAuxiliaryDegreeBound n d B b' H := by
   have hC := (hypersurfaceAbsoluteAuxiliaryConstant_pos n).le
-  unfold hypersurfaceAuxiliaryDegreeBound
+  unfold hypersurfaceAuxiliaryDegreeBound auxDegreeBound
   gcongr
 
 /-- A homogeneous auxiliary for all original affine integer points, with a

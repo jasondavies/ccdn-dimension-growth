@@ -2,6 +2,7 @@ module
 
 public import CCDN.Analytic
 public import CCDN.AuxiliaryPolynomial
+public import CCDN.AuxiliaryDegreeBound
 public import CCDN.Nondivisibility
 public import CCDN.Determinant
 public import CCDN.RowSpan
@@ -556,9 +557,7 @@ public import CCDN.ZeroDimensionalPrimeDescent
 public import CCDN.AffineChartAbsoluteAuxiliary
 public import CCDN.AffineChartAuxiliaryComparison
 public import CCDN.AffineChartGlobalDeterminant
-public import CCDN.AffineChartPositionedAuxiliary
 public import CCDN.AffineChartPrimeDeterminant
-public import CCDN.AffineChartSmallAuxiliary
 public import CCDN.AffineCurveHilbertPolynomial
 public import CCDN.CoordinateGridAvoidance
 public import CCDN.CubicAffineDimensionGrowth
