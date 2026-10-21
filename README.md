@@ -65,10 +65,10 @@ each one, with the counterexamples.
 | Corollary 2.9 | needs a common degree | no | [`projective_hypersurface_minorGcd_dvd`](CCDN/Determinant/HypersurfaceLocalDivisor.lean) | corrected |
 | Proposition 3.2.6 | false without a common degree in each matrix | no | [`no_uniform_global_mixed_degree_det_lower_bound`](CCDN/Counterexample/GlobalMixedDegreeDeterminant.lean) | refuted |
 | Proposition 4.2.1 | true, but the proof's `b(F₁) = b(f)` fails | no | [`literalAffineBadPrimeFactor_homogenization_ne`](CCDN/Counterexample/HomogenizedBadPrimeFactor.lean), [`literal_affine_hypersurface_auxiliary`](CCDN/Auxiliary/LiteralAffineAuxiliaryTheorem.lean) | proof_repaired |
-| Corollary 4.2.4 | true, but proved through the faulty step of 4.2.1 | no | [`literal_affine_plane_coefficient_count_uniform`](CCDN/Auxiliary/LiteralAffinePlaneCount.lean) | proof_repaired |
+| Corollary 4.2.4 | true, but proved through the faulty step of 4.2.1 | no | [`literal_affine_plane_coefficient_count_uniform`](CCDN/Paper/LiteralAffinePlaneCount.lean) | proof_repaired |
 | Proposition 4.3.3 | the top form must be absolutely irreducible | yes | [`surface_line_contribution`](CCDN/Surface/SurfaceLineContribution.lean) | corrected |
 | Proposition 4.3.4 | `d¹⁸` in place of `d¹⁴` | yes | [`affine_surface_dimension_growth`](CCDN/Surface/AffineSurfaceDimensionGrowth.lean) | corrected |
-| Lemma 4.3.7 | degree `(n+1)d(d² − 1)` | yes | [`exists_integral_hyperplane_avoidance`](CCDN/Hypersurface/IntegralHyperplaneAvoidance.lean) | corrected |
+| Lemma 4.3.7 | degree `(n+1)d(d² − 1)` | yes | [`exists_integral_hyperplane_avoidance`](CCDN/Paper/IntegralHyperplaneAvoidance.lean) | corrected |
 | Remark 4.3.8 | exponents must be recomputed (see above) | yes | [`affine_hypersurface_dimension_growth`](CCDN/AffineHypersurfaceDimensionGrowth.lean), [`projective_dimension_growth`](CCDN/ProjectiveDimensionGrowth.lean) | corrected |
 | Lemma 5.2 | strict bound false for `m = 0`; printed argument insufficient for `m ≥ 1` | no | [`zero_dimensional_plucker_degree_bound_obstruction`](CCDN/Counterexample/ZeroDimensionalCenterObstruction.lean), [`exists_dense_open_projective_center_plucker_equations`](CCDN/Center/PluckerComplementEquations.lean) | refuted |
 | Lemma 5.4 | the constant is false; `(s−1)! B^(s−1)` holds | no | [`not_printed_row_separator_bound`](CCDN/Counterexample/RowSeparatorCounterexample.lean), [`exists_bounded_row_separator`](CCDN/Algebra/BoundedRowSeparation.lean) | refuted |

@@ -1165,7 +1165,7 @@
     },
     {
       "id": "e003",
-      "file": "CCDN/Determinant/HypersurfacePointwiseRemainder.lean",
+      "file": "CCDN/Paper/HypersurfacePointwiseRemainder.lean",
       "declaration": "CCDN.exists_hypersurfacePointStalk_pointwise_remainder"
     },
     {
@@ -1200,12 +1200,12 @@
     },
     {
       "id": "e010",
-      "file": "CCDN/Determinant/PrimeIntegerLocalDeterminant.lean",
+      "file": "CCDN/Paper/PrimeIntegerLocalDeterminant.lean",
       "declaration": "CCDN.primeInteger_local_enumerated_weight_det"
     },
     {
       "id": "e011",
-      "file": "CCDN/Determinant/PrimeIntegerLocalDeterminant.lean",
+      "file": "CCDN/Paper/PrimeIntegerLocalDeterminant.lean",
       "declaration": "CCDN.primeInteger_local_det_profile_dichotomy"
     },
     {
@@ -1220,7 +1220,7 @@
     },
     {
       "id": "e014",
-      "file": "CCDN/Determinant/MixedDegreeProjectiveLocal.lean",
+      "file": "CCDN/Paper/MixedDegreeProjectiveLocal.lean",
       "declaration": "CCDN.exists_mixed_degree_projective_chart_det_divisor"
     },
     {
@@ -1280,7 +1280,7 @@
     },
     {
       "id": "e026",
-      "file": "CCDN/Plane/ProjectivePlaneUniformExpression.lean",
+      "file": "CCDN/Paper/ProjectivePlaneUniformExpression.lean",
       "declaration": "CCDN.projective_plane_coefficient_count_chain"
     },
     {
@@ -1305,7 +1305,7 @@
     },
     {
       "id": "e031",
-      "file": "CCDN/Noether/ExplicitNoetherTheorem.lean",
+      "file": "CCDN/Paper/ExplicitNoetherTheorem.lean",
       "declaration": "CCDN.exists_explicit_noether_forms"
     },
     {
@@ -1345,17 +1345,17 @@
     },
     {
       "id": "e039",
-      "file": "CCDN/Auxiliary/LiteralAffineBadPrimeHeight.lean",
+      "file": "CCDN/Paper/LiteralAffineBadPrimeHeight.lean",
       "declaration": "CCDN.literalAffineBadPrimeFactor_le_max"
     },
     {
       "id": "e040",
-      "file": "CCDN/Analysis/PaperPrimeEstimates.lean",
+      "file": "CCDN/Paper/PrimeEstimates.lean",
       "declaration": "CCDN.prime_log_sum_le_two_mul"
     },
     {
       "id": "e041",
-      "file": "CCDN/Analysis/PaperPrimeEstimates.lean",
+      "file": "CCDN/Paper/PrimeEstimates.lean",
       "declaration": "CCDN.prime_sqrt_tail_summable_and_bound"
     },
     {
@@ -1380,22 +1380,22 @@
     },
     {
       "id": "e046",
-      "file": "CCDN/Determinant/HypersurfaceDeterminantFamily.lean",
+      "file": "CCDN/Paper/HypersurfaceDeterminantFamily.lean",
       "declaration": "CCDN.homogeneousDeterminantFamilyGcd"
     },
     {
       "id": "e047",
-      "file": "CCDN/Determinant/HypersurfaceDeterminantFamily.lean",
+      "file": "CCDN/Paper/HypersurfaceDeterminantFamily.lean",
       "declaration": "CCDN.projective_hypersurface_familyGcd_dvd"
     },
     {
       "id": "e048",
-      "file": "CCDN/Determinant/HypersurfaceDeterminantFamily.lean",
+      "file": "CCDN/Paper/HypersurfaceDeterminantFamily.lean",
       "declaration": "CCDN.hypersurface_determinant_family_log_lower"
     },
     {
       "id": "e049",
-      "file": "CCDN/Determinant/HypersurfaceDeterminantFamily.lean",
+      "file": "CCDN/Paper/HypersurfaceDeterminantFamily.lean",
       "declaration": "CCDN.projective_hypersurface_determinant_family_log_lower"
     },
     {
@@ -1425,17 +1425,17 @@
     },
     {
       "id": "e055",
-      "file": "CCDN/Auxiliary/HypersurfaceSourcePositionedAuxiliary.lean",
+      "file": "CCDN/Paper/HypersurfaceSourcePositionedAuxiliary.lean",
       "declaration": "CCDN.hypersurfaceSourcePositionParameter"
     },
     {
       "id": "e056",
-      "file": "CCDN/Auxiliary/HypersurfaceSourcePositionedAuxiliary.lean",
+      "file": "CCDN/Paper/HypersurfaceSourcePositionedAuxiliary.lean",
       "declaration": "CCDN.hypersurface_pure_coefficient_log_position"
     },
     {
       "id": "e057",
-      "file": "CCDN/Auxiliary/HypersurfaceSourcePositionedAuxiliary.lean",
+      "file": "CCDN/Paper/HypersurfaceSourcePositionedAuxiliary.lean",
       "declaration": "CCDN.hypersurface_small_height_pure_coefficient_auxiliary"
     },
     {
@@ -1465,7 +1465,7 @@
     },
     {
       "id": "e063",
-      "file": "CCDN/Auxiliary/HypersurfaceSourcePositionedAuxiliary.lean",
+      "file": "CCDN/Paper/HypersurfaceSourcePositionedAuxiliary.lean",
       "declaration": "CCDN.hypersurface_large_height_pure_coefficient_auxiliary"
     },
     {
@@ -1495,7 +1495,7 @@
     },
     {
       "id": "e069",
-      "file": "CCDN/Analysis/PaperLogarithmEstimate.lean",
+      "file": "CCDN/Paper/LogarithmEstimate.lean",
       "declaration": "CCDN.log_log_sub_div_le"
     },
     {
@@ -1505,12 +1505,12 @@
     },
     {
       "id": "e071",
-      "file": "CCDN/Auxiliary/ComplexMultivariateGrid.lean",
+      "file": "CCDN/Paper/ComplexMultivariateGrid.lean",
       "declaration": "CCDN.exists_complex_homogeneous_grid_height_witness"
     },
     {
       "id": "e072",
-      "file": "CCDN/Auxiliary/ComplexMultivariateGrid.lean",
+      "file": "CCDN/Paper/ComplexMultivariateGrid.lean",
       "declaration": "CCDN.exists_complex_bounded_leading_coefficient_translation"
     },
     {
@@ -1680,12 +1680,12 @@
     },
     {
       "id": "e106",
-      "file": "CCDN/Hypersurface/NonRationalProjectiveCurve.lean",
+      "file": "CCDN/Paper/NonRationalProjectiveCurve.lean",
       "declaration": "CCDN.non_rational_projective_curve_count_le_degree_sq"
     },
     {
       "id": "e107",
-      "file": "CCDN/Hypersurface/NonRationalProjectiveCurve.lean",
+      "file": "CCDN/Paper/NonRationalProjectiveCurve.lean",
       "declaration": "CCDN.nonabsolute_projective_curve_count_le_degree_sq"
     },
     {
@@ -1705,7 +1705,7 @@
     },
     {
       "id": "e111",
-      "file": "CCDN/Auxiliary/ProjectiveCoefficientHeightUniform.lean",
+      "file": "CCDN/Paper/ProjectiveCoefficientHeightUniform.lean",
       "declaration": "CCDN.projective_coefficient_height_dichotomy_uniform"
     },
     {
@@ -1715,7 +1715,7 @@
     },
     {
       "id": "e113",
-      "file": "CCDN/Auxiliary/LiteralAffinePlaneCount.lean",
+      "file": "CCDN/Paper/LiteralAffinePlaneCount.lean",
       "declaration": "CCDN.literal_affine_plane_coefficient_count_uniform"
     },
     {
@@ -1725,17 +1725,17 @@
     },
     {
       "id": "e115",
-      "file": "CCDN/Plane/CoprimeNewtonEdgeCount.lean",
+      "file": "CCDN/Paper/CoprimeNewtonEdgeCount.lean",
       "declaration": "CCDN.coprime_newton_edge_log_free_bound"
     },
     {
       "id": "e116",
-      "file": "CCDN/Projection/AffineVarietyProjection.lean",
+      "file": "CCDN/Paper/AffineVarietyProjection.lean",
       "declaration": "CCDN.exists_geometrically_integral_affine_projection"
     },
     {
       "id": "e117",
-      "file": "CCDN/Projection/AffineVarietyProjection.lean",
+      "file": "CCDN/Paper/AffineVarietyProjection.lean",
       "declaration": "CCDN.affine_variety_projection_constants"
     },
     {
@@ -1745,7 +1745,7 @@
     },
     {
       "id": "e119",
-      "file": "CCDN/Projection/GeometricProjectiveProjection.lean",
+      "file": "CCDN/Paper/GeometricProjectiveProjection.lean",
       "declaration": "CCDN.exists_geometrically_integral_projective_projection"
     },
     {
@@ -1770,7 +1770,7 @@
     },
     {
       "id": "e124",
-      "file": "CCDN/Surface/SalbergerSurfaceTheorem.lean",
+      "file": "CCDN/Paper/SalbergerSurfaceTheorem.lean",
       "declaration": "CCDN.salberger_surface_cover"
     },
     {
@@ -1790,7 +1790,7 @@
     },
     {
       "id": "e128",
-      "file": "CCDN/Hypersurface/IntegralHyperplaneAvoidance.lean",
+      "file": "CCDN/Paper/IntegralHyperplaneAvoidance.lean",
       "declaration": "CCDN.exists_integral_hyperplane_avoidance"
     },
     {
@@ -1800,32 +1800,32 @@
     },
     {
       "id": "e130",
-      "file": "CCDN/LowerBound/ProjectiveDegreeObstruction.lean",
+      "file": "CCDN/Paper/ProjectiveDegreeObstruction.lean",
       "declaration": "CCDN.projective_curve_factor_lower_bound"
     },
     {
       "id": "e131",
-      "file": "CCDN/LowerBound/ProjectiveDegreeObstruction.lean",
+      "file": "CCDN/Paper/ProjectiveDegreeObstruction.lean",
       "declaration": "CCDN.projective_curve_factor_not_isLittleO"
     },
     {
       "id": "e132",
-      "file": "CCDN/LowerBound/ProjectiveDegreeObstruction.lean",
+      "file": "CCDN/Paper/ProjectiveDegreeObstruction.lean",
       "declaration": "CCDN.projective_curve_degree_exponent_ge_two"
     },
     {
       "id": "e133",
-      "file": "CCDN/LowerBound/AffineCurveDegreeObstruction.lean",
+      "file": "CCDN/Paper/AffineCurveDegreeObstruction.lean",
       "declaration": "CCDN.exists_affine_curve_log_lower_bound"
     },
     {
       "id": "e134",
-      "file": "CCDN/LowerBound/AffineCurveDegreeObstruction.lean",
+      "file": "CCDN/Paper/AffineCurveDegreeObstruction.lean",
       "declaration": "CCDN.affine_curve_log_factor_lower_bound"
     },
     {
       "id": "e135",
-      "file": "CCDN/LowerBound/AffineCurveDegreeObstruction.lean",
+      "file": "CCDN/Paper/AffineCurveDegreeObstruction.lean",
       "declaration": "CCDN.affine_curve_log_factor_not_isLittleO"
     },
     {
@@ -1855,17 +1855,17 @@
     },
     {
       "id": "e141",
-      "file": "CCDN/LowerBound/HypersurfaceLowerBoundAllDegrees.lean",
+      "file": "CCDN/Paper/HypersurfaceLowerBoundAllDegrees.lean",
       "declaration": "CCDN.hypersurface_grid_lower_bound_numerics"
     },
     {
       "id": "e142",
-      "file": "CCDN/LowerBound/HypersurfaceLowerBoundAllDegrees.lean",
+      "file": "CCDN/Paper/HypersurfaceLowerBoundAllDegrees.lean",
       "declaration": "CCDN.exists_hypersurface_lower_bounds_all_degrees"
     },
     {
       "id": "e143",
-      "file": "CCDN/Center/AmbientCenterProjection.lean",
+      "file": "CCDN/Paper/AmbientCenterProjection.lean",
       "declaration": "CCDN.exists_ambient_birational_projection"
     },
     {
@@ -1910,7 +1910,7 @@
     },
     {
       "id": "e152",
-      "file": "CCDN/Center/FixedPluckerComplementEquations.lean",
+      "file": "CCDN/Paper/FixedPluckerComplementEquations.lean",
       "declaration": "CCDN.exists_dense_open_fixed_center_plucker_equations"
     },
     {
@@ -1935,17 +1935,17 @@
     },
     {
       "id": "e157",
-      "file": "CCDN/Center/BirationalCenterPluckerHeight.lean",
+      "file": "CCDN/Paper/BirationalCenterPluckerHeight.lean",
       "declaration": "CCDN.exists_birational_center_plucker_height"
     },
     {
       "id": "e158",
-      "file": "CCDN/Center/BirationalCenterPluckerHeight.lean",
+      "file": "CCDN/Paper/BirationalCenterPluckerHeight.lean",
       "declaration": "CCDN.integer_center_subspace_plucker_height"
     },
     {
       "id": "e159",
-      "file": "CCDN/Center/CenterProjectionFormula.lean",
+      "file": "CCDN/Paper/CenterProjectionFormula.lean",
       "declaration": "CCDN.exists_center_projection_coordinate_forms"
     },
     {
@@ -1960,17 +1960,17 @@
     },
     {
       "id": "e162",
-      "file": "CCDN/Center/BirationalCenterPluckerHeight.lean",
+      "file": "CCDN/Paper/BirationalCenterPluckerHeight.lean",
       "declaration": "CCDN.exists_fixed_coordinate_center_plucker_height"
     },
     {
       "id": "e163",
-      "file": "CCDN/Center/AmbientCenterProjection.lean",
+      "file": "CCDN/Paper/AmbientCenterProjection.lean",
       "declaration": "CCDN.exists_ambient_fixed_coordinate_projection"
     },
     {
       "id": "e164",
-      "file": "CCDN/Center/FixedPluckerComplementEquations.lean",
+      "file": "CCDN/Paper/FixedPluckerComplementEquations.lean",
       "declaration": "CCDN.fixedCoordinateBirationalSubspaceLocus_plucker_dense_open"
     },
     {

@@ -15,6 +15,12 @@ ROOT = Path(__file__).resolve().parents[1]
 LIBRARY = ROOT / "CCDN"
 AUDIT = ROOT / "docs" / "completion-audit.json"
 
+# The directory tiers of `CCDN/` (scripts/check-layers.py enforces them). Foundation modules
+# import only Mathlib, the vendored libraries and each other; topic directories hold the proof
+# routes; side-result directories are imported by no other directory.
+FOUNDATION = ("ForMathlib", "Algebra", "Analysis", "Height", "Hilbert")
+SIDE_RESULT = ("Counterexample", "Paper")
+
 # `[public] [meta] import [all] Module`, as accepted by the Lean 4 module system.
 IMPORT = re.compile(r"^(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([^\s-]+)", re.M)
 

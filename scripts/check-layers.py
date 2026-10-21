@@ -14,10 +14,8 @@ All violations are reported before exiting.
 import argparse
 import sys
 
-from common import ROOT, imports, library_module_paths, module_name
+from common import FOUNDATION, ROOT, SIDE_RESULT, imports, library_module_paths, module_name
 
-FOUNDATION = ("ForMathlib", "Algebra", "Analysis", "Height", "Hilbert")
-SIDE_RESULT = ("Counterexample", "Paper")
 STATEMENTS = "CCDN.Statements"
 
 

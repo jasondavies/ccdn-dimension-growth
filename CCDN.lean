@@ -86,8 +86,6 @@ public import CCDN.Algebra.WeightedPolynomialTop
 public import CCDN.Analysis.Analytic
 public import CCDN.Analysis.DegreeDependenceNumerics
 public import CCDN.Analysis.ElementaryLogBounds
-public import CCDN.Analysis.PaperLogarithmEstimate
-public import CCDN.Analysis.PaperPrimeEstimates
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.Analysis.PrimeProduct
 public import CCDN.Analysis.PrimeSums
@@ -115,7 +113,6 @@ public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.AuxiliaryPolynomial
 public import CCDN.Auxiliary.AuxiliaryRatioEstimates
 public import CCDN.Auxiliary.BadPrimeCharge
-public import CCDN.Auxiliary.ComplexMultivariateGrid
 public import CCDN.Auxiliary.CongruenceBadPrimeCharge
 public import CCDN.Auxiliary.ConstantLeadingBadReduction
 public import CCDN.Auxiliary.DistinguishedCoefficientOrder
@@ -150,14 +147,11 @@ public import CCDN.Auxiliary.HypersurfaceRankRoots
 public import CCDN.Auxiliary.HypersurfaceShearInvariance
 public import CCDN.Auxiliary.HypersurfaceSmallHeightAuxiliary
 public import CCDN.Auxiliary.HypersurfaceSmallHeightDegree
-public import CCDN.Auxiliary.HypersurfaceSourcePositionedAuxiliary
 public import CCDN.Auxiliary.IntegerPlaneWitness
 public import CCDN.Auxiliary.IntegerPlaneWitnessHeight
 public import CCDN.Auxiliary.LiteralAffineAuxiliaryTheorem
-public import CCDN.Auxiliary.LiteralAffineBadPrimeHeight
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
 public import CCDN.Auxiliary.LiteralAffineMinimum
-public import CCDN.Auxiliary.LiteralAffinePlaneCount
 public import CCDN.Auxiliary.LiteralAffineScaling
 public import CCDN.Auxiliary.LiteralScaledAuxiliary
 public import CCDN.Auxiliary.PlaneAuxiliaryCount
@@ -174,7 +168,6 @@ public import CCDN.Auxiliary.PrimeScaledAffineMinimum
 public import CCDN.Auxiliary.ProjectiveAuxiliary
 public import CCDN.Auxiliary.ProjectiveAuxiliaryCount
 public import CCDN.Auxiliary.ProjectiveAuxiliaryHeightRanges
-public import CCDN.Auxiliary.ProjectiveCoefficientHeightUniform
 public import CCDN.Auxiliary.ScaledAuxiliaryCount
 public import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 public import CCDN.Auxiliary.ScalingPrime
@@ -187,11 +180,9 @@ public import CCDN.Auxiliary.WeightedMonomialDeterminant
 public import CCDN.Center.AffineFractionPolynomialField
 public import CCDN.Center.AffineNormalizationRank
 public import CCDN.Center.AffinePointZariski
-public import CCDN.Center.AmbientCenterProjection
 public import CCDN.Center.BalancedParameterFiniteness
 public import CCDN.Center.BirationalCenterExtensionWitness
 public import CCDN.Center.BirationalCenterLocus
-public import CCDN.Center.BirationalCenterPluckerHeight
 public import CCDN.Center.BirationalCenterSubspace
 public import CCDN.Center.BirationalComplementProjection
 public import CCDN.Center.BlockResultantIrreducibility
@@ -204,7 +195,6 @@ public import CCDN.Center.CenterMinorMatrix
 public import CCDN.Center.CenterMinorProjection
 public import CCDN.Center.CenterPluckerCoordinates
 public import CCDN.Center.CenterPluckerZariski
-public import CCDN.Center.CenterProjectionFormula
 public import CCDN.Center.CenterProjectionHeight
 public import CCDN.Center.CenterResultantDetector
 public import CCDN.Center.CenterResultantForms
@@ -241,7 +231,6 @@ public import CCDN.Center.CodimensionOneKernel
 public import CCDN.Center.FixedCoordinateCenterRows
 public import CCDN.Center.FixedCoordinateEliminationInfinite
 public import CCDN.Center.FixedCoordinateGenericNormalization
-public import CCDN.Center.FixedPluckerComplementEquations
 public import CCDN.Center.GenericAffineNormalizationRank
 public import CCDN.Center.GenericBlockLine
 public import CCDN.Center.GenericBlockLineHomogeneity
@@ -413,7 +402,6 @@ public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Determinant.HomogeneousDeterminantComparison
 public import CCDN.Determinant.HypersurfaceAggregation
 public import CCDN.Determinant.HypersurfaceCountNormalization
-public import CCDN.Determinant.HypersurfaceDeterminantFamily
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Determinant.HypersurfaceHeightDeterminant
 public import CCDN.Determinant.HypersurfaceHilbert
@@ -422,7 +410,6 @@ public import CCDN.Determinant.HypersurfaceLocalDivisor
 public import CCDN.Determinant.HypersurfaceMultiplicityEstimate
 public import CCDN.Determinant.HypersurfaceOriginStalk
 public import CCDN.Determinant.HypersurfacePointStalk
-public import CCDN.Determinant.HypersurfacePointwiseRemainder
 public import CCDN.Determinant.HypersurfaceResidue
 public import CCDN.Determinant.HypersurfaceSingularities
 public import CCDN.Determinant.HypersurfaceSmoothPoint
@@ -434,7 +421,6 @@ public import CCDN.Determinant.LocalHilbertWeights
 public import CCDN.Determinant.LocalPrimeGenerators
 public import CCDN.Determinant.LocalPrimeReduction
 public import CCDN.Determinant.LocalizationAdicLayer
-public import CCDN.Determinant.MixedDegreeProjectiveLocal
 public import CCDN.Determinant.ModularOriginGenerators
 public import CCDN.Determinant.NoetherianLocalDeterminant
 public import CCDN.Determinant.Nondivisibility
@@ -447,7 +433,6 @@ public import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
 public import CCDN.Determinant.PlaneTangentMultiplicity
 public import CCDN.Determinant.PolynomialMapDeterminant
 public import CCDN.Determinant.PrimeAggregation
-public import CCDN.Determinant.PrimeIntegerLocalDeterminant
 public import CCDN.Determinant.ProjectiveFiniteFieldCount
 public import CCDN.Determinant.ProjectiveHeightComparison
 public import CCDN.Determinant.ProjectiveHeightDeterminant
@@ -584,10 +569,8 @@ public import CCDN.Hypersurface.HypersurfaceNonabsoluteAuxiliary
 public import CCDN.Hypersurface.IntegerGoodHyperplaneSlices
 public import CCDN.Hypersurface.IntegerHyperplaneSliceModels
 public import CCDN.Hypersurface.IntegerHyperplaneSlices
-public import CCDN.Hypersurface.IntegralHyperplaneAvoidance
 public import CCDN.Hypersurface.LowDegreePointSeparation
 public import CCDN.Hypersurface.NonRationalProjectiveCount
-public import CCDN.Hypersurface.NonRationalProjectiveCurve
 public import CCDN.Hypersurface.NonRationalVarietyCount
 public import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
 public import CCDN.Hypersurface.NonabsolutePlaneCount
@@ -605,7 +588,6 @@ public import CCDN.Hypersurface.SmallOutsidePoint
 public import CCDN.Hypersurface.UniversalHyperplaneRestriction
 public import CCDN.Hypersurface.ZeroDimensionalGeometricPoint
 public import CCDN.Hypersurface.ZeroDimensionalPrimeDescent
-public import CCDN.LowerBound.AffineCurveDegreeObstruction
 public import CCDN.LowerBound.GridAffineLowerBound
 public import CCDN.LowerBound.GridCurveConstruction
 public import CCDN.LowerBound.GridEisenstein
@@ -616,9 +598,7 @@ public import CCDN.LowerBound.GridMultivariate
 public import CCDN.LowerBound.GridPolynomialNormalization
 public import CCDN.LowerBound.GridProjectiveLowerBound
 public import CCDN.LowerBound.GridTopFormConstruction
-public import CCDN.LowerBound.HypersurfaceLowerBoundAllDegrees
 public import CCDN.LowerBound.IntegerGridLowerBound
-public import CCDN.LowerBound.ProjectiveDegreeObstruction
 public import CCDN.LowerBound.ProjectivePlaneLowerBound
 public import CCDN.Noether.AmbientNoetherForms
 public import CCDN.Noether.AmbientNoetherHeight
@@ -655,7 +635,6 @@ public import CCDN.Noether.EulerProductVanishing
 public import CCDN.Noether.EulerSparseMatrix
 public import CCDN.Noether.EulerUniversalForms
 public import CCDN.Noether.EulerUniversalHeight
-public import CCDN.Noether.ExplicitNoetherTheorem
 public import CCDN.Noether.FormalBranchBaseChange
 public import CCDN.Noether.FormalBranchFaithful
 public import CCDN.Noether.FormalBranchOrder
@@ -681,6 +660,32 @@ public import CCDN.Noether.UniversalPlaneIntegerSpecialization
 public import CCDN.Noether.UniversalPlaneL1
 public import CCDN.Noether.UniversalPlaneLeading
 public import CCDN.Noether.UniversalPlaneWitness
+public import CCDN.Paper.AffineCurveDegreeObstruction
+public import CCDN.Paper.AffineVarietyProjection
+public import CCDN.Paper.AmbientCenterProjection
+public import CCDN.Paper.BirationalCenterPluckerHeight
+public import CCDN.Paper.CenterProjectionFormula
+public import CCDN.Paper.ComplexMultivariateGrid
+public import CCDN.Paper.CoprimeNewtonEdgeCount
+public import CCDN.Paper.ExplicitNoetherTheorem
+public import CCDN.Paper.FixedPluckerComplementEquations
+public import CCDN.Paper.GeometricProjectiveProjection
+public import CCDN.Paper.HypersurfaceDeterminantFamily
+public import CCDN.Paper.HypersurfaceLowerBoundAllDegrees
+public import CCDN.Paper.HypersurfacePointwiseRemainder
+public import CCDN.Paper.HypersurfaceSourcePositionedAuxiliary
+public import CCDN.Paper.IntegralHyperplaneAvoidance
+public import CCDN.Paper.LiteralAffineBadPrimeHeight
+public import CCDN.Paper.LiteralAffinePlaneCount
+public import CCDN.Paper.LogarithmEstimate
+public import CCDN.Paper.MixedDegreeProjectiveLocal
+public import CCDN.Paper.NonRationalProjectiveCurve
+public import CCDN.Paper.PrimeEstimates
+public import CCDN.Paper.PrimeIntegerLocalDeterminant
+public import CCDN.Paper.ProjectiveCoefficientHeightUniform
+public import CCDN.Paper.ProjectiveDegreeObstruction
+public import CCDN.Paper.ProjectivePlaneUniformExpression
+public import CCDN.Paper.SalbergerSurfaceTheorem
 public import CCDN.Plane.AffineBoxRanges
 public import CCDN.Plane.AffineNonzeroConstant
 public import CCDN.Plane.AffinePlaneAssembly
@@ -688,7 +693,6 @@ public import CCDN.Plane.AffinePlaneBadPrimeCount
 public import CCDN.Plane.AffinePlaneRestriction
 public import CCDN.Plane.Bezout
 public import CCDN.Plane.CoprimeNewtonEdge
-public import CCDN.Plane.CoprimeNewtonEdgeCount
 public import CCDN.Plane.CoprimeNewtonEdgeReduction
 public import CCDN.Plane.DegreeOneAffineLine
 public import CCDN.Plane.FiniteFieldBadPlanes
@@ -720,7 +724,6 @@ public import CCDN.Plane.ProjectivePlaneCoefficientCount
 public import CCDN.Plane.ProjectivePlaneLinearCount
 public import CCDN.Plane.ProjectivePlaneNonabsoluteCount
 public import CCDN.Plane.ProjectivePlanePositionedCount
-public import CCDN.Plane.ProjectivePlaneUniformExpression
 public import CCDN.Plane.RationalPlaneAssembly
 public import CCDN.Plane.ScaledBoxExponent
 public import CCDN.Plane.ScaledHeightElimination
@@ -735,7 +738,6 @@ public import CCDN.Plane.UnscaledModelCount
 public import CCDN.Projection.AffineLinearCountTransfer
 public import CCDN.Projection.AffineProjectionCount
 public import CCDN.Projection.AffineProjectionDegree
-public import CCDN.Projection.AffineVarietyProjection
 public import CCDN.Projection.BoundedAffineBirationalProjection
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
 public import CCDN.Projection.BoundedClosureElimination
@@ -761,7 +763,6 @@ public import CCDN.Projection.FiniteFiberLinearSeparation
 public import CCDN.Projection.FixedCoordinateElimination
 public import CCDN.Projection.FullDegreePrimitiveProjection
 public import CCDN.Projection.GeometricAffineProjection
-public import CCDN.Projection.GeometricProjectiveProjection
 public import CCDN.Projection.HilbertBoundedEliminationStep
 public import CCDN.Projection.HilbertLowDegreeEquation
 public import CCDN.Projection.HilbertProjectionDegree
@@ -823,7 +824,6 @@ public import CCDN.Surface.ProjectiveSurfaceSalbergerCover
 public import CCDN.Surface.RationalSurfaceSalbergerCover
 public import CCDN.Surface.ResidueSubsetBoundary
 public import CCDN.Surface.SalbergerCoverNumerics
-public import CCDN.Surface.SalbergerSurfaceTheorem
 public import CCDN.Surface.SmoothPrimeWindow
 public import CCDN.Surface.SurfaceAuxiliaryExponent
 public import CCDN.Surface.SurfaceCoefficientReduction
