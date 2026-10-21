@@ -115,11 +115,12 @@ theorem projectiveCount_set_finite {n : ℕ} (X : Set (Projectivization ℚ (Fin
 
 /-- **Theorem 1** (projective dimension growth, polynomial in the degree). Let
 `X ⊆ ℙⁿ` be an integral projective variety over `ℚ` with homogeneous prime ideal `I`, degree
-`d ≥ 5` and dimension `m`. Then `N(X, B) ≤ C(n) d^(2n³) B^m` for all `B ≥ 1`.
+`d ≥ 5` and dimension `m`. Then `N(X, B) ≤ C(n) d^(2n² + 5n − 5) B^m` for all `B ≥ 1`.
 
 The affine Hilbert polynomial `P` of the cone `ℚ[x₀,…,xₙ]/I` has degree `m + 1` and leading
 coefficient `d / (m + 1)!`. The two hypotheses on `P` therefore say that `X` has degree `d`,
-and `P.natDegree - 1 = m`. The paper's degree exponent is replaced by the explicit `2n³`.
+and `P.natDegree - 1 = m`. The paper's degree exponent `e(n)` is made explicit as
+`2n² + 5n − 5`, with natural-number subtraction (the exponent is `0` for `n = 0`).
 The statement also covers `n ≤ 1` and the empty and zero-dimensional cases. -/
 theorem projective_dimension_growth (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
@@ -130,7 +131,7 @@ theorem projective_dimension_growth (n : ℕ) :
       P.leadingCoeff = (d : ℚ) / P.natDegree.factorial →
       ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroSet I) B : ℝ) ≤
-        C * (d : ℝ) ^ (2 * n ^ 3) * B ^ (P.natDegree - 1) := by
+        C * (d : ℝ) ^ (2 * n ^ 2 + 5 * n - 5) * B ^ (P.natDegree - 1) := by
   sorry
 
 /-- **Theorem 2** (projective curves). For `n ≥ 2`, every integral projective curve

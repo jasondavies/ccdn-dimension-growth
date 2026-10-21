@@ -13,7 +13,7 @@ every other definition agrees with its library counterpart definitionally.
 
 | Challenge theorem | Library theorem |
 | --- | --- |
-| `projective_dimension_growth` | `CCDN.projective_dimension_growth_cubic` |
+| `projective_dimension_growth` | `CCDN.projective_dimension_growth_explicit` |
 | `projective_curve_bound` | `CCDN.projectiveCurveBound` |
 | `affine_curve_bound` | `CCDN.affineCurveBound` |
 | `affine_hypersurface_bound` | `CCDN.top_form_hypersurface_dimension_growth_cubic` |
@@ -131,8 +131,8 @@ theorem projective_dimension_growth (n : ℕ) :
       P.leadingCoeff = (d : ℚ) / P.natDegree.factorial →
       ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroSet I) B : ℝ) ≤
-        C * (d : ℝ) ^ (2 * n ^ 3) * B ^ (P.natDegree - 1) := by
-  obtain ⟨C, hC, h⟩ := CCDN.projective_dimension_growth_cubic n
+        C * (d : ℝ) ^ (2 * n ^ 2 + 5 * n - 5) * B ^ (P.natDegree - 1) := by
+  obtain ⟨C, hC, h⟩ := CCDN.projective_dimension_growth_explicit n
   refine ⟨C, hC, fun I hI hhom d hd P hP hlead B hB => ?_⟩
   have hPI : CCDN.filteredHilbertPolynomial I = P := by
     obtain ⟨N, hN⟩ := hP

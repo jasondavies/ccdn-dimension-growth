@@ -194,14 +194,6 @@ lemma projectiveProjectionDegreeExponent_le {m k n : ℕ} (h : m + k + 1 = n) (h
 `n ≥ 4` it exceeds the projection exponent `2n² + 2n + 6` by `3n - 11`. -/
 def projectiveGrowthExponent (n : ℕ) : ℕ := 2 * n ^ 2 + 5 * n - 5
 
-lemma projectiveGrowthExponent_le_cubic (n : ℕ) : projectiveGrowthExponent n ≤ 2 * n ^ 3 := by
-  unfold projectiveGrowthExponent
-  rcases Nat.lt_or_ge n 3 with h | h
-  · interval_cases n <;> norm_num
-  · have : 3 * n ^ 2 ≤ n ^ 3 := by nlinarith
-    have : 3 * n ≤ n ^ 2 := by nlinarith
-    omega
-
 /-- CCDN Theorem 1 with the degree exponent `2n² + 5n - 5` in every ambient projective
 dimension `n`. -/
 theorem projective_dimension_growth_explicit (n : ℕ) :
@@ -217,21 +209,6 @@ theorem projective_dimension_growth_explicit (n : ℕ) :
     omega
   · have := projectiveProjectionDegreeExponent_le h hk
     omega
-
-/-- CCDN Theorem 1 with the degree exponent `2n³` in every ambient projective dimension `n`,
-including the zero-dimensional and empty cases. -/
-theorem projective_dimension_growth_cubic (n : ℕ) :
-    ∃ C : ℝ, 0 < C ∧
-      ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →
-      IsHomogeneousIdeal I →
-      ∀ d : ℕ, 5 ≤ d →
-      (filteredHilbertPolynomial I).leadingCoeff =
-        (d : ℚ) / (filteredHilbertPolynomial I).natDegree.factorial →
-      ∀ B : ℝ, 1 ≤ B →
-      (projectiveCount (projectiveIdealZeroLocus I) B : ℝ) ≤
-        C * (d : ℝ) ^ (2 * n ^ 3) *
-          B ^ ((filteredHilbertPolynomial I).natDegree - 1) :=
-  (projective_dimension_growth_explicit n).mono (projectiveGrowthExponent_le_cubic n)
 
 end
 end CCDN
