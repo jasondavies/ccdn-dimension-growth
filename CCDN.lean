@@ -76,6 +76,7 @@ public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Algebra.ProjectiveTranslation
 public import CCDN.Algebra.PureVarietyGridBound
 public import CCDN.Algebra.RadialHomogeneousMap
+public import CCDN.Algebra.RadialMap
 public import CCDN.Algebra.RationalParameterPowerSpan
 public import CCDN.Algebra.ReconstructionFunctionField
 public import CCDN.Algebra.RowSelection
