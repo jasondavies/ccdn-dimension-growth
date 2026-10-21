@@ -10,6 +10,7 @@ public import CCDN.Projection.LinearProjectionFiltration
 import CCDN.Auxiliary.HypersurfaceGoodDirection
 import CCDN.Plane.PlaneRelationSpace
 import CCDN.Projection.HomogeneousFilteredProjection
+import CCDN.ForMathlib.MvPolynomial
 /-! The principal equation of the image of a homogeneous linear
 projection is homogeneous. -/
 
@@ -46,7 +47,7 @@ theorem principal_generator_isHomogeneous
     (homogeneousComponent_isHomogeneous f.totalDegree f).totalDegree_le
   have hcne : c ≠ 0 := by
     intro hz
-    apply top_homogeneousComponent_ne_zero f hf
+    apply homogeneousComponent_totalDegree_ne_zero hf
     rw [hc, hz, zero_smul]
   have hh := (homogeneousComponent_isHomogeneous f.totalDegree f).C_mul c⁻¹
   rw [hc] at hh

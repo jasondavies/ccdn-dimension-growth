@@ -10,6 +10,7 @@ public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
 import CCDN.Height.ScaledHypersurfaceHeight
 import CCDN.Surface.TopFormAuxiliaryEstimate
 import CCDN.Surface.TopFormBadPrimes
+import CCDN.ForMathlib.MvPolynomial
 /-! A coefficient-uniform auxiliary for an affine hypersurface with absolutely
 irreducible leading form. This is the dimension-general form of CCDN (4-3-1). -/
 
@@ -42,7 +43,7 @@ theorem primitive_top_form_auxiliary {n : ℕ}
   have hd := absolute_integer_polynomial_totalDegree_pos f habs
   let d := f.totalDegree
   let F := homogeneousComponent d f
-  have hF0 : F ≠ 0 := integer_top_homogeneousComponent_ne_zero f hfIr.ne_zero
+  have hF0 : F ≠ 0 := homogeneousComponent_totalDegree_ne_zero hfIr.ne_zero
   have hFd : F.totalDegree = d := (homogeneousComponent_isHomogeneous d f).totalDegree hF0
   let L := (integerCoefficientHeight F : ℝ)
   let q := 1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)))

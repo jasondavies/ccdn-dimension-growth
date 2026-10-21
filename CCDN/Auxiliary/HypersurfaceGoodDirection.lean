@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Simultaneous avoidance of the top homogeneous form, a tangent hyperplane,
 and a chosen coordinate hyperplane, by a direction over the base field. -/
@@ -15,20 +16,6 @@ and a chosen coordinate hyperplane, by a direction over the base field. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial
-
-/-- The highest homogeneous component of a nonzero polynomial is nonzero. -/
-theorem top_homogeneousComponent_ne_zero {K σ : Type*} [Field K]
-    (f : MvPolynomial σ K) (hf : f ≠ 0) :
-    homogeneousComponent f.totalDegree f ≠ 0 := by
-  classical
-  have hs : f.support.Nonempty :=
-    Finset.nonempty_iff_ne_empty.mpr (fun h => hf (support_eq_empty.mp h))
-  obtain ⟨m, hm, hd⟩ := Finset.exists_mem_eq_sup f.support hs (fun s => s.degree)
-  have hdeg : m.degree = f.totalDegree := hd.symm
-  intro h
-  have hc := congrArg (fun g : MvPolynomial σ K => g.coeff m) h
-  rw [coeff_homogeneousComponent, ite_eq_left hdeg] at hc
-  exact (mem_support_iff.mp hm) hc
 
 /-- The linear form evaluating a differential on a direction. -/
 def tangentDirectionPolynomial {K σ : Type*} [Field K] [Fintype σ]
@@ -63,7 +50,7 @@ theorem exists_good_hypersurface_direction_with_coordinate
   classical
   let H := homogeneousComponent f.totalDegree f
   let T := tangentDirectionPolynomial f z
-  have hH : H ≠ 0 := top_homogeneousComponent_ne_zero f hf
+  have hH : H ≠ 0 := homogeneousComponent_totalDegree_ne_zero hf
   have hT : T ≠ 0 := by
     intro h
     have hc := congrArg (fun g : MvPolynomial σ K => g.coeff (Finsupp.single j 1)) h

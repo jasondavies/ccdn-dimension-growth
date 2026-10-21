@@ -13,6 +13,7 @@ import CCDN.Auxiliary.HypersurfacePositioning
 import CCDN.Projection.FixedCoordinateElimination
 import CCDN.Projection.HomogenizationAtInfinity
 import Mathlib.Algebra.MvPolynomial.Funext
+import CCDN.ForMathlib.MvPolynomial
 /-! Over any infinite field a full-degree affine elimination also gives
 an integral projection of the projective closure, retaining X0 exactly. -/
 
@@ -109,7 +110,7 @@ theorem exists_closure_integral_elimination_infinite
       (projectionCoordinateMap (projectiveClosureIdeal I)
         (closureProjectionCoordinates a)).IsIntegral := by
   let P := X 0 * homogeneousComponent f.totalDegree f
-  have hP : P ≠ 0 := mul_ne_zero (X_ne_zero 0) (top_homogeneousComponent_ne_zero f hf)
+  have hP : P ≠ 0 := mul_ne_zero (X_ne_zero 0) (homogeneousComponent_totalDegree_ne_zero hf)
   obtain ⟨b,hb⟩ : ∃ b : Fin (n + 1) → K, eval b P ≠ 0 := by
     by_contra! hz
     apply hP

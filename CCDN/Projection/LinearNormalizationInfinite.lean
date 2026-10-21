@@ -15,6 +15,7 @@ import CCDN.Hilbert.HilbertFullDimension
 import CCDN.Hilbert.ProperHilbertDimension
 import CCDN.Projection.BoundedLinearElimination
 import CCDN.Projection.IntegralProjectionHilbert
+import CCDN.ForMathlib.MvPolynomial
 /-! Homogeneous-linear Noether normalization over an infinite field.
 The parameter forms, integrality and algebraic independence are constructed
 from the prime ideal and its filtered Hilbert dimension. -/
@@ -31,7 +32,7 @@ lemma exists_integral_linear_elimination_infinite
     ∃ a : σ → MvPolynomial (Option σ) K,
       (∀ i, (a i).IsHomogeneous 1) ∧ (projectionCoordinateMap I a).IsIntegral := by
   let P := X none * homogeneousComponent f.totalDegree f
-  have hp : P ≠ 0 := mul_ne_zero (X_ne_zero none) (top_homogeneousComponent_ne_zero f hf)
+  have hp : P ≠ 0 := mul_ne_zero (X_ne_zero none) (homogeneousComponent_totalDegree_ne_zero hf)
   have hhom : P.IsHomogeneous (1 + f.totalDegree) :=
     (isHomogeneous_X K none).mul (homogeneousComponent_isHomogeneous _ _)
   obtain ⟨b, hb⟩ : ∃ b : Option σ → K, eval b P ≠ 0 := by

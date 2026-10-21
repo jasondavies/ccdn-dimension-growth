@@ -52,10 +52,10 @@ theorem nonabsolute_homogeneous_auxiliary {k K : Type*}
   have hhd := totalDegree_pos_of_ne_zero_of_not_isUnit hh0 hhu
   obtain ⟨hdegrees, htop⟩ := homogeneous_factorization_top (hf.map _) hmap0 hg0 hh0 hfac
   obtain ⟨g₀, hg₀, hg₀hom, hgz⟩ := exists_nonzero_homogeneous_linear_descent (k := k)
-    (homogeneousComponent g.totalDegree g) (top_homogeneousComponent_ne_zero g hg0)
+    (homogeneousComponent g.totalDegree g) (homogeneousComponent_totalDegree_ne_zero hg0)
     (homogeneousComponent_isHomogeneous _ _)
   obtain ⟨h₀, hh₀, hh₀hom, hhz⟩ := exists_nonzero_homogeneous_linear_descent (k := k)
-    (homogeneousComponent h.totalDegree h) (top_homogeneousComponent_ne_zero h hh0)
+    (homogeneousComponent h.totalDegree h) (homogeneousComponent_totalDegree_ne_zero hh0)
     (homogeneousComponent_isHomogeneous _ _)
   refine ⟨g₀ * h₀, mul_ne_zero hg₀ hh₀, hdegrees ▸ hg₀hom.mul hh₀hom, ?_, ?_⟩
   · intro hdiv

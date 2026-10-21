@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Algebra.IntegerPolynomialAvoidance
 import CCDN.Auxiliary.HypersurfaceGoodDirection
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+import CCDN.ForMathlib.MvPolynomial
 
 /-! A single bounded linear elimination step. A chosen nonzero ideal equation
 of degree d becomes monic after a linear coordinate change with integer
@@ -31,7 +32,7 @@ theorem exists_bounded_full_degree_direction {σ : Type*} [Fintype σ]
       b none ≠ 0 ∧
       eval (fun i => (b i : ℚ)) (homogeneousComponent f.totalDegree f) ≠ 0 := by
   let P := X none * homogeneousComponent f.totalDegree f
-  have hp : P ≠ 0 := mul_ne_zero (X_ne_zero none) (top_homogeneousComponent_ne_zero f hf)
+  have hp : P ≠ 0 := mul_ne_zero (X_ne_zero none) (homogeneousComponent_totalDegree_ne_zero hf)
   have hd : P.totalDegree ≤ f.totalDegree + 1 := by
     apply (totalDegree_mul _ _).trans
     rw [totalDegree_X]

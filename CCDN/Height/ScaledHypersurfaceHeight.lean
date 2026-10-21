@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.IntegerCoefficientHeight
 public import CCDN.Auxiliary.ScaledHomogenization
+import CCDN.ForMathlib.MvPolynomial
 /-! The exact leading homogeneous coefficient height supplies the full
 scaling gain in every dimension. -/
 
@@ -14,18 +15,6 @@ scaling gain in every dimension. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial
-
-lemma integer_top_homogeneousComponent_ne_zero {n : ℕ}
-    (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) :
-    homogeneousComponent f.totalDegree f ≠ 0 := by
-  classical
-  obtain ⟨m, hm, hd⟩ := Finset.exists_mem_eq_sup f.support (support_nonempty.mpr hf)
-    (fun s => s.degree)
-  have hdeg : m.degree = f.totalDegree := hd.symm
-  intro h
-  have hc := congrArg (fun g : MvPolynomial (Fin n) ℤ => g.coeff m) h
-  rw [coeff_homogeneousComponent, ite_eq_left hdeg] at hc
-  exact (mem_support_iff.mp hm) hc
 
 /-- The highest homogeneous part gains precisely h^d in coefficient height. -/
 theorem scaledHomogenize_leading_height_lower {n : ℕ}
@@ -54,7 +43,7 @@ theorem scaledHomogenize_leading_height_lower {n : ℕ}
 
 lemma leading_height_one_le {n : ℕ} (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) :
     (1 : ℝ) ≤ integerCoefficientHeight (homogeneousComponent f.totalDegree f) := by
-  exact_mod_cast integerCoefficientHeight_pos _ (integer_top_homogeneousComponent_ne_zero f hf)
+  exact_mod_cast integerCoefficientHeight_pos _ (homogeneousComponent_totalDegree_ne_zero hf)
 
 end
 end CCDN
