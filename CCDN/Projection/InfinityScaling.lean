@@ -14,7 +14,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma leadingInfinityIdeal_homogeneousComponent_mem {K σ : Type*} [Field K]
+private lemma leadingInfinityIdeal_homogeneousComponent_mem {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (f : MvPolynomial σ K)
     (hf : f ∈ leadingInfinityIdeal I) (m : ℕ) :
     homogeneousComponent m f ∈ leadingInfinityIdeal I := by

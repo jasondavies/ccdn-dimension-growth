@@ -31,7 +31,7 @@ theorem integral_projection_hilbert_dimension_eq
   exact integral_embedding_hilbert_dimension_eq (RingHom.ker ψ) I
     (Ideal.kerLiftAlg ψ) (Ideal.kerLiftAlg_injective ψ) hint.kerLift
 
-theorem integral_linear_projection_multiplicity
+private theorem integral_linear_projection_multiplicity
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     [LinearOrder σ] [LinearOrder τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]

@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open Matrix
 
-lemma scalar_complement_projection_square {R ι κ : Type*} [CommRing R]
+private lemma scalar_complement_projection_square {R ι κ : Type*} [CommRing R]
     [Fintype ι] [Fintype κ] [DecidableEq ι] [DecidableEq κ]
     (A L : Matrix ι κ R) (D : R)
     (hLA : L * A.transpose = D • (1 : Matrix ι ι R)) :
@@ -30,7 +30,7 @@ lemma scalar_complement_projection_square {R ι κ : Type*} [CommRing R]
   rw [Matrix.mul_sub, Matrix.mul_smul, Matrix.mul_one,
     ← Matrix.mul_assoc, hPA, Matrix.zero_mul, sub_zero]
 
-lemma scalar_complement_projection_kernel {K ι κ : Type*} [Field K]
+private lemma scalar_complement_projection_kernel {K ι κ : Type*} [Field K]
     [Fintype ι] [Fintype κ] [DecidableEq ι] [DecidableEq κ]
     (A L : Matrix ι κ K) (D : K) (hD : D ≠ 0)
     (hLA : L * A.transpose = D • (1 : Matrix ι ι K)) (x : κ → K) :
@@ -122,7 +122,7 @@ theorem exists_bounded_integer_scaled_projection {s r : ℕ}
     rw [hPmap]
     exact scalar_complement_projection_kernel AQ LQ D hDQ hLA x
 
-theorem integer_linear_map_box_bound {m n : ℕ}
+private theorem integer_linear_map_box_bound {m n : ℕ}
     (P : Matrix (Fin m) (Fin n) ℤ) {H B : ℝ} (hH : 0 ≤ H)
     (hP : ∀ i j, |(P i j : ℝ)| ≤ H)
     (z : IntPoint n) (hz : InBox z B) :
@@ -141,7 +141,7 @@ theorem integer_linear_map_box_bound {m n : ℕ}
 /-- An integer matrix with entries bounded by `H` maps an integer point of the box of radius
 `B` to a projective point of multiplicative height at most `n H B` (when the image is nonzero),
 since primitive reduction cannot enlarge an integral representative. -/
-theorem projective_integer_linear_map_height {m n : ℕ}
+private theorem projective_integer_linear_map_height {m n : ℕ}
     (P : Matrix (Fin (m + 1)) (Fin n) ℤ) {H B : ℝ} (hH : 0 ≤ H)
     (hP : ∀ i j, |(P i j : ℝ)| ≤ H)
     (z : IntPoint n) (hz : InBox z B) (himage : P *ᵥ z ≠ 0) :
@@ -149,7 +149,7 @@ theorem projective_integer_linear_map_height {m n : ℕ}
       (rationalPoint_ne_zero himage)).mulHeight ≤ (n : ℝ) * H * B :=
   projective_integer_height_le _ himage (integer_linear_map_box_bound P hH hP z hz)
 
-lemma rationalPoint_integer_mulVec {m n : ℕ}
+private lemma rationalPoint_integer_mulVec {m n : ℕ}
     (P : Matrix (Fin m) (Fin n) ℤ) (z : IntPoint n) :
     rationalPoint (P *ᵥ z) =
       (P.map (Int.castRingHom ℚ)) *ᵥ rationalPoint z := by

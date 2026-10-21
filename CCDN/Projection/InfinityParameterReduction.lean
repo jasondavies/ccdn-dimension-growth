@@ -45,7 +45,7 @@ lemma leadingInfinityIdeal_component_mem {K σ : Type*} [Field K]
 
 /-- A coordinate-power certificate at infinity gives a balanced reduction in
 the original affine quotient. -/
-theorem power_reduction_of_infinity_certificate {K σ : Type*} [Field K]
+private theorem power_reduction_of_infinity_certificate {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (l : MvPolynomial σ K) (hl : l.IsHomogeneous 1)
     (j : σ) (N : ℕ) (hN : 0 < N)
     (hpow : X j ^ N ∈ leadingInfinityIdeal I ⊔ Ideal.span {l}) :

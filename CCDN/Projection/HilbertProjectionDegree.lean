@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem hypersurface_projection_equation_degree_le
+private theorem hypersurface_projection_equation_degree_le
     {K τ : Type*} [Field K] [Fintype τ] [LinearOrder τ] {n : ℕ}
     (I : Ideal (MvPolynomial τ K)) (hI : I ≠ ⊤)
     (a : Fin (n + 1) → MvPolynomial τ K) (ha : ∀ i, (a i).totalDegree ≤ 1)

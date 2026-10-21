@@ -23,7 +23,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem proper_intersection_hilbert_dimension_le
+private theorem proper_intersection_hilbert_dimension_le
     {K : Type*} [Field K] {n : ℕ}
     {f g : MvPolynomial (Fin (n + 2)) K} (hf : Prime f) (hfg : ¬ f ∣ g)
     (I : Ideal (MvPolynomial (Fin (n + 2)) K)) (hI : I ≠ ⊤)

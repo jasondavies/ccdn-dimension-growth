@@ -29,7 +29,7 @@ open MvPolynomial
 
 /-- Restricting the projection along `l` to the tail variables gives the projection along the
 tail of `l`. -/
-theorem projectionCoordinateMap_comp_rename_succ {K τ : Type*} [Field K] {m : ℕ}
+private theorem projectionCoordinateMap_comp_rename_succ {K τ : Type*} [Field K] {m : ℕ}
     (I : Ideal (MvPolynomial τ K)) (l : Fin (m + 1) → MvPolynomial τ K) :
     (projectionCoordinateMap I l).comp (rename Fin.succ) =
       projectionCoordinateMap I (fun i : Fin m => l i.succ) := by
@@ -48,7 +48,7 @@ theorem projectionCoordinateMap_isIntegral_of_tail {K τ : Type*} [Field K] {m :
 
 /-- If the projection along the tail coordinates is injective, the images of the tail
 variables under the extended projection are algebraically independent. -/
-theorem algebraicIndependent_projectionCoordinateMap_X_succ {K τ : Type*} [Field K] {m : ℕ}
+private theorem algebraicIndependent_projectionCoordinateMap_X_succ {K τ : Type*} [Field K] {m : ℕ}
     (I : Ideal (MvPolynomial τ K)) (l : Fin (m + 1) → MvPolynomial τ K)
     (h : Function.Injective (projectionCoordinateMap I (fun i : Fin m => l i.succ))) :
     AlgebraicIndependent K (fun i : Fin m => projectionCoordinateMap I l (X i.succ)) := by

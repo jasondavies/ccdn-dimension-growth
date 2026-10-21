@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma momentCoordinate_aeval {K L : Type*} [Field K] [Field L] [Algebra K L]
+private lemma momentCoordinate_aeval {K L : Type*} [Field K] [Field L] [Algebra K L]
     {n : ℕ} (k : ℕ) (z : Fin n → L) :
     aeval z (momentCoordinate K n k) = ∑ j : Fin n, z j * (k : L) ^ j.val := by
   simp [momentCoordinate, mul_comm]

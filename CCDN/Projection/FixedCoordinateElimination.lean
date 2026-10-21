@@ -58,7 +58,7 @@ def finEliminationMatrix {n : ℕ} (b : Option (Fin n) → ℤ) :
     Fin n → Fin (n + 1) → ℤ :=
   fun i => Fin.cases (-b (some i)) (fun j => if j = i then b none else 0)
 
-lemma integerLinearForm_finEliminationMatrix {n : ℕ}
+private lemma integerLinearForm_finEliminationMatrix {n : ℕ}
     (b : Option (Fin n) → ℤ) (i : Fin n) :
     integerLinearForm (finEliminationMatrix b i) =
       C (b none : ℚ) * X i.succ - C (b (some i) : ℚ) * X 0 := by
@@ -114,11 +114,11 @@ def closurePivotEquiv (n : ℕ) : Fin (n + 2) ≃ Option (Fin (n + 1)) :=
     (closurePivotEquiv n).symm (some i.succ) = i.succ.succ := by
   exact (closurePivotEquiv n).symm_apply_eq.mpr (closurePivotEquiv_succ_succ i).symm
 
-def closureEliminationDirection {n : ℕ} (b : Option (Fin n) → ℤ) :
+private def closureEliminationDirection {n : ℕ} (b : Option (Fin n) → ℤ) :
     Option (Fin (n + 1)) → ℤ :=
   Option.elim' (b none) (Fin.cons 0 (fun i => b (some i)))
 
-lemma closureEliminationDirection_comp {n : ℕ} (b : Option (Fin n) → ℤ) :
+private lemma closureEliminationDirection_comp {n : ℕ} (b : Option (Fin n) → ℤ) :
     (fun i => (closureEliminationDirection b (closurePivotEquiv n i) : ℚ)) =
       Fin.cons 0 (Fin.cons (b none : ℚ) (fun i => (b (some i) : ℚ))) := by
   funext i
@@ -130,7 +130,7 @@ lemma closureEliminationDirection_comp {n : ℕ} (b : Option (Fin n) → ℤ) :
     · rw [closurePivotEquiv_succ_succ]
       rfl
 
-lemma closureEliminationDirection_eval {n : ℕ} (b : Option (Fin n) → ℤ)
+private lemma closureEliminationDirection_eval {n : ℕ} (b : Option (Fin n) → ℤ)
     (f : MvPolynomial (Fin (n + 1)) ℚ) :
     eval (fun i => (closureEliminationDirection b i : ℚ))
         (rename (closurePivotEquiv n) (scaledHomogenize f.totalDegree 1 f)) =

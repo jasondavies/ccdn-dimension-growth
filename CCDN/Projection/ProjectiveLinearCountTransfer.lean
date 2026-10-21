@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-def integerProjectiveLinearImage {m n : ℕ}
+private def integerProjectiveLinearImage {m n : ℕ}
     (P : Matrix (Fin (m + 1)) (Fin (n + 1)) ℤ) (x : ProjectivePoint n) :
     ProjectivePoint m :=
   if h : (P.map (Int.castRingHom ℚ)) *ᵥ x.rep ≠ 0 then

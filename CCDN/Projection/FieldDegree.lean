@@ -26,7 +26,7 @@ open MvPolynomial
 
 /-- A plane relation bounds the algebraic degree of either coordinate over a
 field containing a transcendental linear parameter. -/
-theorem minpoly_degree_le_plane_relation {K R F : Type*}
+private theorem minpoly_degree_le_plane_relation {K R F : Type*}
     [Field K] [Field R] [Field F] [Algebra K R] [Algebra R F] [Algebra K F]
     [IsScalarTower K R F] (ψ : MvPolynomial (Fin 2) K →ₐ[K] F)
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0) (hzero : ψ f = 0)
@@ -53,7 +53,7 @@ theorem minpoly_degree_le_plane_relation {K R F : Type*}
 
 /-- The degree of a plane equation is at least the degree of a function-field
 extension when its second coordinate is primitive over the parameter field. -/
-theorem primitive_field_degree_le_plane_relation {K R F : Type*}
+private theorem primitive_field_degree_le_plane_relation {K R F : Type*}
     [Field K] [Field R] [Field F] [Algebra K R] [Algebra R F] [Algebra K F]
     [IsScalarTower K R F] [Module.Finite R F]
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] F)

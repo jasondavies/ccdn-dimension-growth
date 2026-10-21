@@ -21,7 +21,7 @@ open MvPolynomial
 
 /-- The proper denominator of a linear projection vanishes at at most d*deg(Q)
 distinct points of the source curve. -/
-theorem reconstruction_exceptional_card_le {K σ τ ι : Type*} [Field K]
+private theorem reconstruction_exceptional_card_le {K σ τ ι : Type*} [Field K]
     [Fintype σ] [Fintype τ] [Fintype ι] [DecidableEq ι]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime] (d : ℕ)
     (hdegree : HasFilteredCurveDegree I d)

@@ -47,7 +47,7 @@ def integerEliminationCoordinates {σ : Type*} (b : Option σ → ℤ) :
     σ → MvPolynomial (Option σ) ℚ :=
   fun i => C (b none : ℚ) * X (some i) - C (b (some i) : ℚ) * X none
 
-lemma integerEliminationCoordinates_eq_scale {σ : Type*}
+private lemma integerEliminationCoordinates_eq_scale {σ : Type*}
     (b : Option σ → ℤ) (hb : (b none : ℚ) ≠ 0) (i : σ) :
     integerEliminationCoordinates b i =
       C (b none : ℚ) * eliminationLinearCoordinates (fun i => (b i : ℚ)) i := by

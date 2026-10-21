@@ -22,8 +22,9 @@ open MvPolynomial
 
 /-- An algebra map sends polynomial expressions in elements mapped into an intermediate field
 into that field. -/
-lemma algHom_aeval_mem_intermediateField {K R F σ : Type*} [Field K] [CommRing R] [Algebra K R]
-    [Field F] [Algebra K F] (ψ : R →ₐ[K] F) (E : IntermediateField K F) (a : σ → R)
+private lemma algHom_aeval_mem_intermediateField {K R F σ : Type*} [Field K] [CommRing R]
+    [Algebra K R] [Field F] [Algebra K F] (ψ : R →ₐ[K] F) (E : IntermediateField K F)
+    (a : σ → R)
     (ha : ∀ i, ψ (a i) ∈ E) (p : MvPolynomial σ K) : ψ (aeval a p) ∈ E := by
   induction p using MvPolynomial.induction_on with
   | C c =>
@@ -34,7 +35,7 @@ lemma algHom_aeval_mem_intermediateField {K R F σ : Type*} [Field K] [CommRing 
 
 /-- An intermediate field of the function field of a prime containing the class of every
 polynomial is the whole function field. -/
-lemma intermediateField_eq_top_of_forall_mk_mem {K σ : Type*} [Field K]
+private lemma intermediateField_eq_top_of_forall_mk_mem {K σ : Type*} [Field K]
     (J : Ideal (MvPolynomial σ K)) [J.IsPrime]
     (E : IntermediateField K (FractionRing (MvPolynomial σ K ⧸ J)))
     (h : ∀ p, algebraMap (MvPolynomial σ K ⧸ J) (FractionRing (MvPolynomial σ K ⧸ J))
@@ -50,7 +51,7 @@ lemma intermediateField_eq_top_of_forall_mk_mem {K σ : Type*} [Field K]
 
 /-- The homogenizing coordinate does not vanish in the function field of the cone over the
 projective closure. -/
-lemma algebraMap_mk_projectiveClosure_X_zero_ne_zero {K : Type*} [Field K] {n : ℕ}
+private lemma algebraMap_mk_projectiveClosure_X_zero_ne_zero {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
     algebraMap (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I)
       (FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I))

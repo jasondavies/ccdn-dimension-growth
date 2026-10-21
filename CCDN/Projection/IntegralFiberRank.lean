@@ -24,7 +24,7 @@ noncomputable section
 
 /-- Distinct specialization tuples are roots of one separating integral
 element's minimal polynomial. Normality bounds its degree by the field rank. -/
-theorem integral_coordinate_tuple_count_le_finrank
+private theorem integral_coordinate_tuple_count_le_finrank
     (R A F E : Type*) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [CommRing A] [IsDomain A] [Field F] [Field E]
     [Algebra R A] [Algebra R F] [IsFractionRing R F]

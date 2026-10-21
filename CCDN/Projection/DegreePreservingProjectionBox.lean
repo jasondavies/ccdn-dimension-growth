@@ -48,7 +48,7 @@ lemma projectionBoxFactor_one_le (n d : ℕ) : 1 ≤ projectionBoxFactor n d := 
     one_le_pow₀ (one_le_pow₀ hmul)
   nlinarith
 
-lemma momentCoordinate_height_of_le {n k : ℕ} {M B : ℝ}
+private lemma momentCoordinate_height_of_le {n k : ℕ} {M B : ℝ}
     (hM : 1 ≤ M) (hk : (k : ℝ) ≤ M)
     (z : IntPoint n) (hz : InBox z B) :
     |(eval z (momentCoordinate ℤ n k) : ℝ)| ≤ n * M ^ n * B := by

@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma aeval_closureProjectionCoordinates_rename {K : Type*} [Field K] {m n : ℕ}
+private lemma aeval_closureProjectionCoordinates_rename {K : Type*} [Field K] {m n : ℕ}
     (a : Fin m → MvPolynomial (Fin n) K) (f : MvPolynomial (Fin m) K) :
     aeval (closureProjectionCoordinates a) (rename Fin.succ f) =
       rename Fin.succ (aeval a f) := by
@@ -26,7 +26,7 @@ lemma aeval_closureProjectionCoordinates_rename {K : Type*} [Field K] {m n : ℕ
     simp [closureProjectionCoordinates]
   exact AlgHom.congr_fun h f
 
-lemma closureProjectionCoordinates_comp {K : Type*} [Field K] {l m n : ℕ}
+private lemma closureProjectionCoordinates_comp {K : Type*} [Field K] {l m n : ℕ}
     (a : Fin l → MvPolynomial (Fin m) K)
     (b : Fin m → MvPolynomial (Fin n) K) (i : Fin (l + 1)) :
     aeval (closureProjectionCoordinates b) (closureProjectionCoordinates a i) =

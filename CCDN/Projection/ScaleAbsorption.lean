@@ -38,7 +38,7 @@ lemma projectionBoxFactor_log_le (n : ℕ) {d : ℕ} (hd : 0 < d) :
   norm_num only [Nat.cast_ofNat]
   nlinarith
 
-lemma curveBound_scale_of_log_le {d : ℕ} (hd : 0 < d) {A B C : ℝ}
+private lemma curveBound_scale_of_log_le {d : ℕ} (hd : 0 < d) {A B C : ℝ}
     (hA : 1 ≤ A) (hB : 1 ≤ B) (hC : 0 ≤ C) (hlog : Real.log A ≤ C * d) :
     curveBound d (A * B) ≤ Real.exp C * (C + 1) * curveBound d B := by
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd

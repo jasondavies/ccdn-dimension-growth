@@ -23,7 +23,7 @@ open MvPolynomial
 
 /-- A nonzero relation cannot omit the coordinate complementary to a
 transcendental coordinate. -/
-theorem plane_relation_pderiv_ne_zero {K A : Type*} [Field K] [CharZero K]
+private theorem plane_relation_pderiv_ne_zero {K A : Type*} [Field K] [CharZero K]
     [CommRing A] [Algebra K A] (ψ : MvPolynomial (Fin 2) K →ₐ[K] A)
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0) (hzero : ψ f = 0)
     (j k : Fin 2) (hjk : j ≠ k) (hj : Transcendental K (ψ (X j))) :

@@ -59,7 +59,7 @@ theorem moment_cons_abs_le_integerBirationalProjectionHeight {m n d t : ℕ}
 
 /-- A bounded primitive augmentation of the constructed normalization
 produces a homogeneous irreducible equation of exactly the original degree. -/
-theorem exists_bounded_birational_hypersurface_projection
+private theorem exists_bounded_birational_hypersurface_projection
     (m k : ℕ) (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :

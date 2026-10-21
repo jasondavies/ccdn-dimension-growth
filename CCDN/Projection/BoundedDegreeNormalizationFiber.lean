@@ -23,7 +23,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem bounded_degree_normalization_fiber_card_le_of_fractionField
+private theorem bounded_degree_normalization_fiber_card_le_of_fractionField
     {K E : Type*} [Field K] [CharZero K] [Field E] [Algebra K E]
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     [Algebra (MvPolynomial (Fin n) K ⧸ I) E]

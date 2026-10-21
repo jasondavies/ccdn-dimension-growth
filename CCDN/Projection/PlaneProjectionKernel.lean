@@ -25,7 +25,7 @@ open MvPolynomial
 
 /-- A two-variable polynomial ring cannot inject, through linear coordinates,
 into a coordinate ring with eventually linear Hilbert growth. -/
-theorem plane_projection_not_injective {K τ : Type*} [Field K] [Fintype τ]
+private theorem plane_projection_not_injective {K τ : Type*} [Field K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) (a : Fin 2 → MvPolynomial τ K)
     (ha : ∀ i, (a i).totalDegree ≤ 1) (d : ℕ)
     (hdegree : HasFilteredCurveDegree I d) :
@@ -61,7 +61,7 @@ theorem plane_projection_not_injective {K τ : Type*} [Field K] [Fintype τ]
 
 /-- An irreducible equation in a plane map with a transcendental coordinate
 generates its entire kernel. The proof uses the filtered section-rank bound. -/
-theorem plane_map_eq_zero_iff_dvd {K A : Type*} [Field K] [CommRing A] [Algebra K A]
+private theorem plane_map_eq_zero_iff_dvd {K A : Type*} [Field K] [CommRing A] [Algebra K A]
     (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] A) (hψ : ψ f = 0)
     (j : Fin 2) (hj : Transcendental K (ψ (X j)))

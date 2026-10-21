@@ -46,7 +46,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_bounded_affine_birational_projection
+private theorem exists_bounded_affine_birational_projection
     (m k : ℕ) (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime]
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ (b : Fin (m + 2) → Fin (m + 1 + k) → ℤ) (f : MvPolynomial (Fin (m + 2)) ℚ),
@@ -97,7 +97,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem affine_projection_equation_degree_eq_of_closure
+private theorem affine_projection_equation_degree_eq_of_closure
     {m n : ℕ} (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
     (a : Fin (m + 2) → MvPolynomial (Fin n) ℚ)
     (ha : ∀ i, (a i).IsHomogeneous 1)

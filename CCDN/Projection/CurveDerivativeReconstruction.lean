@@ -27,7 +27,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma plane_deformation_relation_coefficients {K A ι : Type*}
+private lemma plane_deformation_relation_coefficients {K A ι : Type*}
     [Field K] [CommRing A] [Algebra K A] [Fintype ι]
     (a : Fin 2 → A) (k : Fin 2) (w : A)
     (r : ι → MvPolynomial (Fin 2) K) (v : ι → Polynomial K)

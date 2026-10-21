@@ -30,7 +30,7 @@ noncomputable section
 
 /-- A linear parameter generating the filtration in large degrees gives a
 function-field extension of degree exactly d. -/
-theorem curve_parameter_full_degree_of_recurrence {K F σ : Type*}
+private theorem curve_parameter_full_degree_of_recurrence {K F σ : Type*}
     [Field K] [Field F] [Fintype σ] [Algebra K F]
     [Algebra (RatFunc K) F] [IsScalarTower K (RatFunc K) F]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]

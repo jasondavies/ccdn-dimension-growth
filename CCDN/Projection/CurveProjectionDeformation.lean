@@ -26,7 +26,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma planeLinearDeformation_eval_quotient {K τ : Type*} [Field K]
+private lemma planeLinearDeformation_eval_quotient {K τ : Type*} [Field K]
     (I : Ideal (MvPolynomial τ K)) (a : Fin 2 → MvPolynomial τ K)
     (l : MvPolynomial τ K) (t : K) (f : MvPolynomial (Fin 2) K) :
     (planeLinearDeformation (fun i => (Ideal.Quotient.mk I) (a i)) 1

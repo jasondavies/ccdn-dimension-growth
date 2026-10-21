@@ -24,7 +24,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-theorem exists_integer_linear_normalization_of_le (m n : ℕ) (hmn : m + 1 ≤ n)
+private theorem exists_integer_linear_normalization_of_le (m n : ℕ) (hmn : m + 1 ≤ n)
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime] (d : ℕ)
     (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ a : Fin (m + 1) → Fin n → ℤ,

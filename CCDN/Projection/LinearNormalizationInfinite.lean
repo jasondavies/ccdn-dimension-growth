@@ -25,7 +25,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma exists_integral_linear_elimination_infinite
+private lemma exists_integral_linear_elimination_infinite
     {K σ : Type*} [Field K] [Infinite K] [Fintype σ]
     (I : Ideal (MvPolynomial (Option σ) K))
     (f : MvPolynomial (Option σ) K) (hf : f ≠ 0) (hfi : f ∈ I) :
@@ -58,7 +58,7 @@ lemma exists_integral_linear_elimination_infinite
     simp [projectionCoordinateMap, a]
   rwa [he] at hint
 
-lemma exists_fin_integral_linear_elimination_infinite
+private lemma exists_fin_integral_linear_elimination_infinite
     {K : Type*} [Field K] [Infinite K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     (hdim : (filteredHilbertPolynomial I).natDegree = m + 1) (hcodim : m < n) :
@@ -104,7 +104,7 @@ lemma exists_fin_integral_linear_elimination_infinite
   rw [he] at hcomp
   exact ⟨a, ha, hcomp, (integral_projection_hilbert_dimension_eq I _ hcomp).trans hdim⟩
 
-theorem exists_linear_integral_normalization_infinite
+private theorem exists_linear_integral_normalization_infinite
     {K : Type*} [Field K] [Infinite K] (m k : ℕ)
     (I : Ideal (MvPolynomial (Fin (m + 1 + k)) K)) [I.IsPrime]
     (hdim : (filteredHilbertPolynomial I).natDegree = m + 1) :

@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem conductor_filtered_finrank_le
+private theorem conductor_filtered_finrank_le
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
@@ -71,7 +71,7 @@ theorem conductor_filtered_finrank_le
     exact he i
   simpa only [Fintype.card_fin] using hwi.fintype_card_le_finrank
 
-theorem filteredHilbertPolynomial_leadingCoeff_le_of_shift
+private theorem filteredHilbertPolynomial_leadingCoeff_le_of_shift
     {K L σ τ : Type*} [Field K] [Field L] [Fintype σ] [Fintype τ]
     [LinearOrder σ] [LinearOrder τ]
     (I : Ideal (MvPolynomial σ K)) (J : Ideal (MvPolynomial τ L))

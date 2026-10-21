@@ -22,10 +22,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def integerAffineLinearImage {m n : ℕ} (P : Fin m → Fin n → ℤ)
+private def integerAffineLinearImage {m n : ℕ} (P : Fin m → Fin n → ℤ)
     (x : IntPoint n) : IntPoint m := fun i => ∑ j, P i j * x j
 
-lemma rationalPoint_integerAffineLinearImage {m n : ℕ}
+private lemma rationalPoint_integerAffineLinearImage {m n : ℕ}
     (P : Fin m → Fin n → ℤ) (x : IntPoint n) :
     rationalPoint (integerAffineLinearImage P x) =
       fun i => eval (rationalPoint x) (integerLinearForm (P i)) := by

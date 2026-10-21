@@ -28,12 +28,12 @@ lemma integerNormalizationHeight_pos (n d : ℕ) : 0 < integerNormalizationHeigh
   dsimp [integerNormalizationHeight]
   positivity
 
-lemma integerNormalizationHeight_mono (n : ℕ) {d e : ℕ} (h : d ≤ e) :
+private lemma integerNormalizationHeight_mono (n : ℕ) {d e : ℕ} (h : d ≤ e) :
     integerNormalizationHeight n d ≤ integerNormalizationHeight n e := by
   dsimp [integerNormalizationHeight]
   gcongr
 
-lemma integerNormalizationHeight_step (n d : ℕ) :
+private lemma integerNormalizationHeight_step (n d : ℕ) :
     n * integerNormalizationHeight n d * (d + 1) ≤
       integerNormalizationHeight (n + 1) d := by
   dsimp [integerNormalizationHeight]

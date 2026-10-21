@@ -99,7 +99,7 @@ lemma projectionImageFieldMap_comp_val :
   obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective x
   exact DFunLike.congr_fun (projectionImageCoordinate_eval_comp (F := F) I a) p
 
-lemma projectionImageFieldMap_X (i : σ) :
+private lemma projectionImageFieldMap_X (i : σ) :
     projectionImageFieldMap (F := F) I a
       ((Ideal.Quotient.mk (RingHom.ker (projectionCoordinateMap I a))) (X i)) =
       projectionImageCoordinate (F := F) I a i := by
@@ -116,7 +116,7 @@ lemma projectionImageFieldMap_injective [I.IsPrime] [IsFractionRing (MvPolynomia
   exact hx.symm.trans ((congrArg (projectionImageField (F := F) I a).val h).trans hy)
 
 
-lemma projectionImageFieldMap_generates :
+private lemma projectionImageFieldMap_generates :
     IntermediateField.adjoin K (Set.range (fun i => projectionImageFieldMap (F := F) I a
       ((Ideal.Quotient.mk (RingHom.ker (projectionCoordinateMap I a))) (X i)))) = ⊤ := by
   let L := projectionImageField (F := F) I a

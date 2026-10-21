@@ -45,7 +45,7 @@ def projectiveClosureSpecialization {K : Type*} [Field K] {n : ℕ}
     projectiveClosureSpecialization I (Ideal.Quotient.mk (projectiveClosureIdeal I) f) =
       Ideal.Quotient.mk I (affineChart n f) := rfl
 
-theorem projectiveClosureSpecialization_surjective {K : Type*} [Field K] {n : ℕ}
+private theorem projectiveClosureSpecialization_surjective {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) :
     Function.Surjective (projectiveClosureSpecialization I) := by
   intro x
