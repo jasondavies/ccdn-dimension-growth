@@ -74,7 +74,8 @@ theorem projective_chow_chart_reduction
     (hzero : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J) :
     ∃ (I : Ideal (MvPolynomial (Fin (n + 1)) K))
       (G : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K),
-      I.IsPrime ∧ HasAffineDimensionDegree I m d ∧ Irreducible G ∧ chowIncidenceIdeal (m + 1) I = Ideal.span {G} ∧
+      I.IsPrime ∧ HasAffineDimensionDegree I m d ∧
+      Irreducible G ∧ chowIncidenceIdeal (m + 1) I = Ideal.span {G} ∧
       (∀ i, G.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
       G.totalDegree = F.totalDegree := by
   classical
