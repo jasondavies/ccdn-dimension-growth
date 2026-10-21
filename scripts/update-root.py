@@ -9,9 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGET = ROOT / "CCDN.lean"
-HEADER = """module
-
-/-!
+DOC = """/-!
 # CCDN
 
 Root module of the formalisation of Castryck, Cluckers, Dittmann and Nguyen, *The dimension
@@ -29,7 +27,6 @@ The main results are:
 `Challenge.lean` states them using Mathlib only, and `Solution.lean` derives those statements
 from this library.
 -/
-
 """
 
 
@@ -38,7 +35,8 @@ def render() -> str:
         ".".join(path.relative_to(ROOT).with_suffix("").parts)
         for path in (ROOT / "CCDN").rglob("*.lean")
     )
-    return HEADER + "".join(f"public import {module}\n" for module in modules)
+    imports = "".join(f"public import {module}\n" for module in modules)
+    return "module\n\n" + imports + "\n" + DOC
 
 
 def main() -> int:
