@@ -74,8 +74,9 @@ theorem affine_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
     fin_cases j <;> rfl
   exact hc.trans (Nat.add_le_add_right (Finset.card_le_card hP) _)
 
-/-- The same plane equation works for all radii; its degree equals the source
-Hilbert degree and the projection loss is bounded independently of the box. -/
+/-- An integral affine curve of degree `d` has an irreducible plane equation `f` of degree
+`d` such that, for every radius `B ≥ 1`, its integral points of height at most `B` number at
+most those of `f` in a box enlarged by `projectionBoxFactor n d`, plus `d(d-1)`. -/
 theorem exists_plane_count_reduction {n : ℕ}
     (I : Ideal (CoordinatePolynomial n)) [I.IsPrime]
     (d : ℕ) (hd : 0 < d) (hdegree : HasAffineCurveDegree I d) :

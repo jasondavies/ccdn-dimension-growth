@@ -63,15 +63,15 @@ lemma prime_span_le_maximalIdeal (ρ : R →+* ZMod p) :
   simp
 
 /-- The residue quotient of `R/(p)` is the finite field `F_p`. -/
-def localPrimeReduction_residue_equiv (ρ : R →+* ZMod p) :
+def localPrimeReductionResidueEquiv (ρ : R →+* ZMod p) :
     (LocalPrimeReduction R p ⧸ localPrimeMaximalIdeal R p) ≃+* ZMod p :=
   (DoubleQuot.quotQuotEquivQuotOfLE (prime_span_le_maximalIdeal ρ)).trans
     (localZModResidueEquiv ρ)
 
 lemma localPrimeReduction_finite_residue (ρ : R →+* ZMod p) :
     Finite (LocalPrimeReduction R p ⧸ localPrimeMaximalIdeal R p) :=
-  Finite.of_injective (localPrimeReduction_residue_equiv ρ)
-    (localPrimeReduction_residue_equiv ρ).injective
+  Finite.of_injective (localPrimeReductionResidueEquiv ρ)
+    (localPrimeReductionResidueEquiv ρ).injective
 
 /-- Generators in `R/(p)`, indexed by its layer dimensions. -/
 theorem exists_localPrimeReduction_generators [IsNoetherianRing R]

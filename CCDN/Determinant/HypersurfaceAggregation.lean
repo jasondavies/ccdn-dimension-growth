@@ -27,13 +27,13 @@ theorem aggregate_hypersurface_exponents_cutoff {ι : Type*} [Fintype ι]
 
 /-- The sharp leading term depends only on the sum of local multiplicities,
 with exactly the same dimension-only error as the single-residue bound. -/
-theorem aggregate_hypersurface_exponents_sharp {ι : Type*} [Fintype ι]
+theorem aggregate_hypersurface_exponents_lower_bound {ι : Type*} [Fintype ι]
     (m : ℕ) (hm : 0 < m) (s μ : ι → ℕ) (hμ : ∀ i, 0 < μ i)
     (hμsum : 0 < ∑ i, μ i) :
     ((m.factorial : ℝ) / (∑ i, μ i : ℕ)) ^ (1 / (m : ℝ)) * m / (m + 1) *
       (∑ i, s i : ℕ) ^ (1 + 1 / (m : ℝ)) - (m + 1 : ℝ) * (∑ i, s i : ℕ) ≤
         (∑ i, hypersurfaceMultiplicityExponent m (μ i) (s i) : ℕ) :=
-  local_exponent_sharp m (∑ i, s i) _ hm hμsum
+  local_exponent_separated_lower_bound m (∑ i, s i) _ hm hμsum
     (aggregate_hypersurface_exponents_cutoff m hm s μ hμ)
 
 end

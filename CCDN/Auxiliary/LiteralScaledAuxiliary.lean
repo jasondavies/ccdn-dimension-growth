@@ -17,7 +17,10 @@ import CCDN.Determinant.AffineCongruenceDeterminant
 /-! Auxiliary polynomials for prime-scaled and ordinary homogeneous
 models with the literal affine bad-prime factor. The finite excluded-prime
 set, geometric good reductions, primitive point family and affine pullback
-are constructed from the original equation. -/
+are constructed from the original equation.
+Here "literal" means the paper's Definition 3.2.1 applied verbatim to the affine
+polynomial (`literalAffineBadPrimeFactor`, see `LiteralAffineBadPrimes`), as opposed to
+`hypersurfaceBadPrimeFactor`, which also counts primes at which the degree drops. -/
 
 @[expose] public section
 namespace CCDN

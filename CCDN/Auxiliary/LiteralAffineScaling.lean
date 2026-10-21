@@ -12,7 +12,9 @@ public import Mathlib.Algebra.GCDMonoid.Finset
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Determinant.ProjectiveLocalDeterminant
 /-! Primitivity and good affine reductions for prime-scaled models, with
-no degree-preservation requirement modulo the good primes. -/
+no degree-preservation requirement modulo the good primes, as needed for the literal affine
+bad-prime factor (`LiteralAffineBadPrimes`), which does not count primes at which the degree
+drops. -/
 
 @[expose] public section
 namespace CCDN

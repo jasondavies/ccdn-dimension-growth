@@ -8,11 +8,13 @@ module
 public import CCDN.Auxiliary.Interpolation
 
 /-!
-# Bombieri–Vaaler applied to polynomial interpolation
+# Coefficient bounds for interpolation polynomials
 
-This is the small-coefficient auxiliary-polynomial step of the determinant method.
-It does not yet ensure nondivisibility by a defining polynomial. Establishing that property
-requires the global determinant lower bound and the Hilbert-function argument in CCDN §3.3.
+A polynomial assembled by `polynomialOfCoefficients` from an integer coefficient vector
+bounded by `R` has every coefficient bounded by `R`. The Bombieri–Vaaler auxiliary
+constructions of the determinant method use this to bound the coefficients of the auxiliary
+polynomial. Nondivisibility by the defining polynomial is a separate step, proved from the
+global determinant lower bound in Section 3.3.
 -/
 
 @[expose] public section

@@ -113,8 +113,10 @@ theorem hypersurface_determinant_family_log_lower
       Real.zero_rpow (by positivity : (1 : ℝ) + 1 / (n + 1 : ℝ) ≠ 0), mul_zero, zero_mul]
     exact Real.log_nonneg hone
 
-/-- The same corrected family bound on rational projective points, via their
-primitive integral representatives. -/
+/-- The logarithm of the gcd of a family of evaluation determinants at rational projective
+points of an absolutely irreducible hypersurface (each matrix with a common column degree) is
+at least `hypersurfaceRankLowerBound` in terms of the homogeneous bad-prime factor. The points
+are evaluated at their primitive integral representatives. -/
 theorem projective_hypersurface_determinant_family_log_lower
     {ι : Type*} [Fintype ι] {n s d : ℕ}
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)

@@ -74,8 +74,10 @@ lemma integer_generators_approximate_mod {σ : Type*} {p N : ℕ} (f : MvPolynom
       simpa only [pow_succ, mul_comm (p : ℤ)] using mul_dvd_mul_left (p : ℤ) hbdiv
   exact hprec N le_rfl u
 
-/-- The same local generators work for all zeros modulo the requested
-precision. This permits normalization of projective points modulo prime powers. -/
+/-- For a plane equation of multiplicity `μ` at the origin modulo `p`, a family of at most `μ`
+integer homogeneous generators in each degree approximates every polynomial modulo `p^N` at all
+zeros of `f` modulo `p^N` divisible by `p`, with one choice of coefficients for all such zeros.
+This permits normalization of projective points modulo prime powers. -/
 theorem exists_singular_plane_approximation_mod {p μ : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ)
     (hf : map (Int.castRingHom (ZMod p)) f ∈ idealOfVars (Fin 2) (ZMod p) ^ μ)

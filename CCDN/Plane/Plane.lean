@@ -12,7 +12,7 @@ public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-!
 # The plane-curve target
 
-`PlaneCurveBound` records the statement proved by `planeCurveBound` in `SharpPlaneCount`.
+`PlaneCurveBound` records the statement proved by `planeCurveBound` in `CCDN.Plane.PlaneCount`.
 Irreducibility is over `ℚ`, not absolute irreducibility. The one constant is uniform in the
 polynomial, its degree, its coefficients, and the real radius.
 -/
@@ -28,7 +28,8 @@ noncomputable def curveBound (d : ℕ) (B : ℝ) : ℝ :=
   (d : ℝ) ^ 3 * B ^ (1 / (d : ℝ)) * (Real.log B + d)
 
 /-- The `n = 2` case of CCDN (2020), Theorem 3, expressed using rational defining
-polynomials. The proof in `SharpPlaneCount` includes denominator clearing and content removal. -/
+polynomials. The proof (`planeCurveBound`, in
+`CCDN.Plane.PlaneCount`) includes denominator clearing and content removal. -/
 def PlaneCurveBound : Prop :=
   ∃ C : ℝ, 0 < C ∧ ∀ f : MvPolynomial (Fin 2) ℚ, Irreducible f →
     0 < f.totalDegree → ∀ B : ℝ, 1 ≤ B →

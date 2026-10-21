@@ -121,7 +121,7 @@ lemma weighted_profile_le_shifted_choose (n c μ : ℕ) (g : ℕ → ℕ)
 
 /-- A binomial cumulative capacity gives the sharp weighted sum, independently
 of any ordering or Hilbert-function interpretation of the weights. -/
-theorem weights_sum_sharp_of_cumulative {s : ℕ} (w : Fin s → ℕ)
+theorem weights_sum_lower_bound_of_cumulative {s : ℕ} (w : Fin s → ℕ)
     (m μ : ℕ) (hm : 0 < m) (hμ : 0 < μ)
     (hcap : ∀ k, (univ.filter fun i => w i ≤ k).card ≤ μ * (m + k).choose m) :
     ((m.factorial : ℝ) / μ) ^ (1 / (m : ℝ)) * m / (m + 1) *
@@ -132,7 +132,7 @@ theorem weights_sum_sharp_of_cumulative {s : ℕ} (w : Fin s → ℕ)
     rw [← mul_sum, Fin.sum_univ_eq_sum_range (fun k => (m + k).choose m),
       sum_cumulative_binomial] at hc
     exact (weights_sum_cutoff w K).trans (Nat.add_le_add_left hc _)
-  simpa only [Nat.cast_sum] using local_exponent_sharp m s (∑ i, w i) hm hμ hcut
+  simpa only [Nat.cast_sum] using local_exponent_separated_lower_bound m s (∑ i, w i) hm hμ hcut
 
 /-- CCDN Lemma 2.2 for every dimension `n+2`, with the explicit constant
 `n + 3 + c*(n+1)!`. The profile and the selected weights are arbitrary.
@@ -178,7 +178,7 @@ theorem weighted_sequence_sum_lower_bound (n c μ s : ℕ) (g : ℕ → ℕ)
         omega
       rw [he, card_empty]
       exact Nat.zero_le _
-  have h := weights_sum_sharp_of_cumulative (fun i => w i + t) (n + 2) μ
+  have h := weights_sum_lower_bound_of_cumulative (fun i => w i + t) (n + 2) μ
     (by omega) hμ hcap
   simp only [Nat.cast_add, Nat.cast_ofNat, Nat.cast_mul, sum_add_distrib, sum_const,
     card_univ, Fintype.card_fin, nsmul_eq_mul, t] at h
@@ -234,7 +234,7 @@ theorem weighted_sequence_dimension_one {s μ : ℕ} (hμ : 0 < μ)
     have h := weight_count_le_cumulative w (fun _ => μ) hw k
     simpa only [sum_const, card_range, smul_eq_mul, Nat.choose_one_right,
       Nat.add_comm 1 k, Nat.mul_comm] using h
-  have h := weights_sum_sharp_of_cumulative w 1 μ (by norm_num) hμ hcap
+  have h := weights_sum_lower_bound_of_cumulative w 1 μ (by norm_num) hμ hcap
   norm_num at h
   convert (sub_le_iff_le_add.mpr h) using 1
   ring

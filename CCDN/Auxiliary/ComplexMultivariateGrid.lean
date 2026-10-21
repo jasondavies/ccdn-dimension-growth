@@ -62,7 +62,8 @@ theorem complex_multivariate_coefficient_bound_of_integer_grid {n : ℕ}
     rw [show (n + 1) * d = n * d + d by ring, pow_add]
     ring
 
-/-- The same grid point works for all coefficients of a complex polynomial. -/
+/-- A complex polynomial of total degree at most `d` has a grid point `a ∈ [0, d]ⁿ` at which
+its value bounds every coefficient: `‖coeff m‖ ≤ 3^(n d) ‖f(a)‖`. -/
 theorem exists_complex_multivariate_grid_height_witness {n : ℕ}
     (f : MvPolynomial (Fin n) ℂ) {d : ℕ} (hd : f.totalDegree ≤ d) :
     ∃ a : Fin n → ℕ, (∀ i, a i ≤ d) ∧ ∀ m,

@@ -17,7 +17,7 @@ noncomputable section
 open MvPolynomial Real
 
 /-- The remaining finite-field counting obligation, with one absolute constant.
-`SharpPlaneCount.sharpPlaneResidueBound` discharges this input with constant 161. -/
+`planeResidueBound` (in `CCDN.Plane.PlaneCount`) discharges this input with constant 161. -/
 def PlaneResidueBound (C : ℝ) : Prop :=
   ∀ f : MvPolynomial (Fin 2) ℤ, 0 < f.totalDegree →
     ∀ p : ℕ, p.Prime → 27 * (f.totalDegree : ℝ) ^ 4 < (p : ℝ) →

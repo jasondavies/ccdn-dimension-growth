@@ -42,7 +42,7 @@ lemma hypersurfaceLayerBound_positive (n k : ℕ) {μ : ℕ} (hμ : 0 < μ) :
 /-- CCDN 2.3 for the first s weights of the local ring. This uses the
 true hypersurface cumulative profile, so it includes dimension one without
 the false arbitrary-profile extension of the printed Lemma 2.2. -/
-theorem hypersurfacePointStalk_initial_weights_sharp {n μ s : ℕ}
+theorem hypersurfacePointStalk_initial_weights_sum_lower_bound {n μ s : ℕ}
     (f : MvPolynomial (Fin (n + 2)) K) (a : Fin (n + 2) → K)
     [Fact (eval a f = 0)] (hpos : 0 < μ)
     (hf : affineTranslation K a f ∈ idealOfVars (Fin (n + 2)) K ^ μ)
@@ -60,9 +60,11 @@ theorem hypersurfacePointStalk_initial_weights_sharp {n μ s : ℕ}
     simpa only [weightProfileCumulative, hypersurfacePointLayerDimension,
       hypersurfacePointStalkLayer_finrank, Nat.add_assoc, Nat.add_comm k 1] using hc
   simpa only [Nat.cast_add, Nat.cast_one, add_assoc, one_add_one_eq_two] using
-    weights_sum_sharp_of_cumulative w (n + 1) μ (by omega) hpos hcap
+    weights_sum_lower_bound_of_cumulative w (n + 1) μ (by omega) hpos hcap
 
-theorem hypersurfacePointStalk_enumerated_weights_sharp {n μ s : ℕ}
+/-- CCDN 2.3 for the first `s` terms of a monotone enumeration of the weights whose level
+counts are the local layer dimensions. -/
+theorem hypersurfacePointStalk_enumerated_weights_sum_lower_bound {n μ s : ℕ}
     (f : MvPolynomial (Fin (n + 2)) K) (a : Fin (n + 2) → K)
     [Fact (eval a f = 0)] (hpos : 0 < μ)
     (hf : affineTranslation K a f ∈ idealOfVars (Fin (n + 2)) K ^ μ)
@@ -73,7 +75,7 @@ theorem hypersurfacePointStalk_enumerated_weights_sharp {n μ s : ℕ}
     (((n + 1).factorial : ℝ) / μ) ^ (1 / (n + 1 : ℝ)) * (n + 1) / (n + 2) *
       (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) - (n + 2 : ℝ) * s ≤
         ∑ i : Fin s, (w i.val : ℝ) :=
-  hypersurfacePointStalk_initial_weights_sharp f a hpos hf hμ _
+  hypersurfacePointStalk_initial_weights_sum_lower_bound f a hpos hf hμ _
     (monotone_enumeration_isInitialWeightSegment w _ hw hfinite hcount s)
 
 /-- Construct the multiplicity, the exact Hilbert profile and its infinite
@@ -107,7 +109,7 @@ theorem exists_hypersurfacePointStalk_hilbert_weights {n : ℕ}
   obtain ⟨w, hw, hfinite, hcount, _⟩ :=
     exists_positive_profile_enumeration (hypersurfacePointLayerDimension f a) hpositive
   exact ⟨μ, hpos, hdeg, hprofile, w, hw, hfinite, hcount,
-    fun _ => hypersurfacePointStalk_enumerated_weights_sharp f a hpos hf hμ w hw hfinite hcount⟩
+    fun _ => hypersurfacePointStalk_enumerated_weights_sum_lower_bound f a hpos hf hμ w hw hfinite hcount⟩
 
 end
 end CCDN

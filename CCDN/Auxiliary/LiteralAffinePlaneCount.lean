@@ -14,7 +14,10 @@ import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Plane.Bezout
 /-! CCDN Corollary 4.2.4 with the literal affine bad-prime factor and the
 original coefficient-sensitive minimum. The auxiliary equation
-and Bezout supply the count for every primitive irreducible plane equation. -/
+and Bezout supply the count for every primitive irreducible plane equation.
+Here "literal" means the paper's Definition 3.2.1 applied verbatim to the affine
+polynomial (`literalAffineBadPrimeFactor`, see `LiteralAffineBadPrimes`), as opposed to
+`hypersurfaceBadPrimeFactor`, which also counts primes at which the degree drops. -/
 
 @[expose] public section
 namespace CCDN
@@ -59,8 +62,9 @@ theorem literal_affine_plane_coefficient_count
   rw [mul_left_comm, degree_mul_affineAuxiliaryDegreeExpression] at hh
   exact hh
 
-/-- The same bound with the universal constant quantified before the
-equation, degree and box, matching the uniformity in Corollary 4.2.4. -/
+/-- Corollary 4.2.4: one absolute constant `C`, chosen before the equation, its degree and
+the box, bounds the integral points of every primitive irreducible integer plane equation by
+`C` times the coefficient-sensitive expression with the literal affine bad-prime factor. -/
 theorem literal_affine_plane_coefficient_count_uniform :
     ∃ C : ℝ, 0 < C ∧ ∀ f : MvPolynomial (Fin 2) ℤ,
       PrimitiveIntegerPolynomial f → Irreducible f → 0 < f.totalDegree →

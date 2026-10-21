@@ -13,7 +13,10 @@ The proof of Proposition 4.2.1 replaces an affine equation `f` by its homogeniza
 and uses `b(F₁) = b(f)`. For `f = c x₁² + x₂` every reduction is absolutely irreducible, so
 `b(f) = 1`, while `F₁ = c x₁² + x₀ x₂` reduces to `x₀ x₂` modulo every prime factor of `c`.
 For `c = 439 > 27 · 2⁴` this gives `b(F₁) = 439^(1/439)`, and products of primes above `432`
-make `b(F₁)` unbounded. -/
+make `b(F₁)` unbounded. Here `b` is `literalAffineBadPrimeFactor`, Definition 3.2.1 read
+literally: a prime is bad only when the reduction is not absolutely irreducible, so the degree
+drop of `f` modulo the prime factors of `c` is not counted for `f`, while for the homogeneous
+`F₁` the same primes give reducible reductions. -/
 
 @[expose] public section
 namespace CCDN

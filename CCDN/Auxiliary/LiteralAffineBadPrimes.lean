@@ -8,9 +8,22 @@ module
 public import CCDN.Algebra.AffineTranslation
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
-/-! The literal affine bad-prime factor in CCDN Definition 3.2.1.
-Only failure of geometric irreducibility is counted. A reduction which loses
-degree but remains geometrically irreducible is good. -/
+/-!
+# The literal affine bad-prime factor
+
+`literalAffineBadPrimeFactor f` is the factor `b(f)` of CCDN Definition 3.2.1 applied verbatim
+to an affine integer polynomial `f`: it sums `log p / p` over the primes `p > 27 d⁴` at which the
+reduction of `f` is not absolutely irreducible (`LiteralAffineBadReduction`). A reduction that
+loses degree but remains absolutely irreducible is good, so primes at which `f` drops degree are
+not counted.
+
+This is in contrast with `hypersurfaceBadPrimeFactor` (`HypersurfaceBadReduction`), which also
+counts primes at which the degree drops, and is the factor used for homogeneous equations; the
+literal factor is at most it (`literalAffineBadPrimeFactor_le_inclusive`). The printed proof of
+Proposition 4.2.1 passes to the homogenization `F₁` of `f` and uses `b(F₁) = b(f)`, which fails
+(`Counterexample/HomogenizedBadPrimeFactor.lean`). The `LiteralAffine*` modules therefore prove
+Proposition 4.2.1 and Corollary 4.2.4 with the literal factor, working in the affine chart.
+-/
 
 @[expose] public section
 namespace CCDN

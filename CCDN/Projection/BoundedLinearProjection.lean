@@ -138,8 +138,9 @@ theorem integer_linear_map_box_bound {m n : ℕ}
       exact mul_le_mul (hP i j) (hz j) (abs_nonneg _) hH
     _ = _ := by simp [mul_assoc]
 
-/-- The same integer matrix gives the projective height estimate, since
-primitive reduction cannot enlarge an integral representative. -/
+/-- An integer matrix with entries bounded by `H` maps an integer point of the box of radius
+`B` to a projective point of multiplicative height at most `n H B` (when the image is nonzero),
+since primitive reduction cannot enlarge an integral representative. -/
 theorem projective_integer_linear_map_height {m n : ℕ}
     (P : Matrix (Fin (m + 1)) (Fin n) ℤ) {H B : ℝ} (hH : 0 ≤ H)
     (hP : ∀ i j, |(P i j : ℝ)| ≤ H)

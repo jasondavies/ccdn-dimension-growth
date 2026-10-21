@@ -84,8 +84,9 @@ theorem exists_bounded_degree_preserving_projection {K : Type*} [Field K] [CharZ
       (momentCoordinate K n k₀) (momentCoordinate_homogeneous K n k₀) havoid
   exact ⟨k₀, k₁, f, hk₀, hk₁, hf, hfd, htrans, hker⟩
 
-/-- The same bounded projection controls the loss of points on every finite
-subset of the source curve by d(d-1). -/
+/-- An integral affine curve of degree `d` has a projection to the plane by two moment
+coordinates of bounded index whose image is cut out by an irreducible equation of degree `d`,
+and which identifies at most `d(d-1)` points of any finite subset of the curve. -/
 theorem exists_bounded_projection_card_le {K : Type*} [Field K] [CharZero K]
     [DecidableEq (Fin 2 → K)] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

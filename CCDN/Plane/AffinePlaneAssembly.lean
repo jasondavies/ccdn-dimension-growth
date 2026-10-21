@@ -103,8 +103,9 @@ theorem plane_finite_count_of_residue_bound
   convert ht using 1
   ring
 
-/-- The same coefficient-uniform bound on the real-radius integer-point
-counting interface, assuming the sharp residue estimate. -/
+/-- For a primitive absolutely irreducible integer plane equation, the number of integer
+zeros of height at most a real `B ≥ 1` is bounded by a constant multiple of `curveBound`,
+assuming the finite-field point estimate `p + C d² √p` at primes above `27 d⁴`. -/
 theorem count_plane_of_residue_bound
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
