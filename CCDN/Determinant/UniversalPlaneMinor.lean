@@ -77,12 +77,9 @@ theorem exists_universalPlane_minor
     {K σ : Type*} [Field K] [IsAlgClosed K] [Fintype σ]
     (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
     (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K (2 * f.totalDegree ^ 2)) :
-    ∃ (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
-      (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree),
-      Function.Injective rows ∧ Function.Injective cols ∧
-      ((closedFormCoefficientMatrix f.totalDegree
-        (universalPlanePolynomial f)).submatrix rows cols).det ≠ 0 := by
-  obtain ⟨a, b, hb, _, rows, cols, hr, hc, hdet⟩ :=
+    (closedFormCoefficientMatrix f.totalDegree (universalPlanePolynomial f)).HasNonzeroMinor
+      (2 * f.totalDegree ^ 2 - 1) := by
+  obtain ⟨a, b, hb, _, rows, cols, hdet⟩ :=
     exists_positioned_genericPlane_minor f hf hpos hchar
   let R := MvPolynomial σ K
   let F := FractionRing R
@@ -92,7 +89,7 @@ theorem exists_universalPlane_minor
     (map_ne_zero_iff _ (IsFractionRing.injective R F)).mpr hdet
   rw [closedForm_minor_map, normalized_genericPlane_universal_specialization,
     closedForm_minor_smul, ← closedForm_minor_map] at hne
-  refine ⟨rows, cols, hr, hc, ?_⟩
+  refine ⟨rows, cols, ?_⟩
   intro he
   exact hne (by rw [he, map_zero, mul_zero])
 

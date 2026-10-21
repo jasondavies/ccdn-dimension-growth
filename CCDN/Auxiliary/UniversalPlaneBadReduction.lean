@@ -83,7 +83,7 @@ theorem exists_integer_hypersurface_bad_prime_witness
         ((MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree ≠ f.totalDegree ∨
           ¬Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f)) →
         (p : ℤ) ∣ (universalPlaneBadWitness f rows cols).coeff e := by
-  obtain ⟨rows, cols, _, _, hw, _⟩ := exists_integer_universalPlane_badWitness f hf hpos
+  obtain ⟨rows, cols, hw, _⟩ := exists_integer_universalPlane_badWitness f hf hpos
   obtain ⟨e, he⟩ : ∃ e, (universalPlaneBadWitness f rows cols).coeff e ≠ 0 := by
     by_contra hn
     push Not at hn

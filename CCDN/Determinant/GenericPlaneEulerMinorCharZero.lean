@@ -30,10 +30,8 @@ theorem exists_euler_minor_of_smooth_plane_point_charZero
     (hj : MvPolynomial.eval z (MvPolynomial.pderiv j f) ≠ 0)
     (hm : (bivariatePolynomialEquiv K f).Monic)
     (hdeg : (bivariatePolynomialEquiv K f).natDegree = k + 2) :
-    ∃ (a : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-      (c : Fin ((k + 2) ^ 2 - 1) → EulerColumns k),
-      Function.Injective a ∧ Function.Injective c ∧
-      ((eulerClosedFormCoefficientMatrix k (bivariatePolynomialEquiv K f)).submatrix a c).det ≠ 0 := by
+    (eulerClosedFormCoefficientMatrix k (bivariatePolynomialEquiv K f)).HasNonzeroMinor
+      ((k + 2) ^ 2 - 1) := by
   let L := AlgebraicClosure K
   let φ : K →+* L := algebraMap K L
   let g := bivariateMap φ (bivariatePolynomialEquiv K f)
@@ -44,9 +42,9 @@ theorem exists_euler_minor_of_smooth_plane_point_charZero
   have hgm : g.Monic := bivariateMap_monic φ hm
   have hgd : g.natDegree = k + 2 := by
     rw [bivariateMap_natDegree_of_monic φ hm, hdeg]
-  obtain ⟨a, c, ha, hc, hdet⟩ := exists_eulerClosedForm_nonzero_minor k g hgi
+  obtain ⟨a, c, hdet⟩ := exists_eulerClosedForm_nonzero_minor k g hgi
     1 one_ne_zero (by simpa using hgm.leadingCoeff) hgd
-  refine ⟨a, c, ha, hc, ?_⟩
+  refine ⟨a, c, ?_⟩
   intro he
   apply hdet
   rw [← eulerClosedForm_minor_map, he, map_zero]
@@ -58,15 +56,13 @@ theorem exists_genericPlane_euler_minor_charZero
     (hdeg : (optionEquivLeft K σ f).natDegree = k + 2)
     (hz : eval (0 : Option σ → K) f = 0)
     (hs : eval (0 : Option σ → K) (pderiv none f) ≠ 0) :
-    ∃ (a : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-      (c : Fin ((k + 2) ^ 2 - 1) → EulerColumns k),
-      Function.Injective a ∧ Function.Injective c ∧
-      ((eulerClosedFormCoefficientMatrix k (genericPlanePolynomial f)).submatrix a c).det ≠ 0 := by
+    (eulerClosedFormCoefficientMatrix k (genericPlanePolynomial f)).HasNonzeroMinor
+      ((k + 2) ^ 2 - 1) := by
   obtain ⟨hgi, hgz, hgs, hgm, hgd⟩ := genericPlaneMap_smooth_monic (k + 2) (by omega) f hf hm
     hdeg hz hs
-  obtain ⟨a, c, ha, hc, hdet⟩ := exists_euler_minor_of_smooth_plane_point_charZero
+  obtain ⟨a, c, hdet⟩ := exists_euler_minor_of_smooth_plane_point_charZero
     k _ hgi 0 0 hgz hgs hgm hgd
-  refine ⟨a, c, ha, hc, ?_⟩
+  refine ⟨a, c, ?_⟩
   intro he
   apply hdet
   rw [genericPlaneMap_bivariate, ← eulerClosedForm_minor_map, he, map_zero]
@@ -77,11 +73,9 @@ theorem exists_positioned_genericPlane_euler_minor_charZero
     (hd : f.totalDegree = k + 2) :
     ∃ (a b : Option σ → K) (hb : b none ≠ 0),
       eval b (homogeneousComponent f.totalDegree f) ≠ 0 ∧
-      ∃ (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-        (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k),
-        Function.Injective rows ∧ Function.Injective cols ∧
-        ((eulerClosedFormCoefficientMatrix k
-          (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).submatrix rows cols).det ≠ 0 := by
+      (eulerClosedFormCoefficientMatrix k
+        (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).HasNonzeroMinor
+          ((k + 2) ^ 2 - 1) := by
   obtain ⟨a, b, hb, hdir, hg, hm, hdeg, _, hz, hs⟩ :=
     exists_monic_smooth_hypersurface_coordinates f hf (by omega) (.of_charZero _)
   rw [hd] at hdeg

@@ -34,7 +34,7 @@ theorem exists_integer_geometrically_good_plane_avoiding {σ : Type*} [Fintype �
         f.totalDegree ∧
       Irreducible (bivariateMap (Int.castRingHom (AlgebraicClosure ℚ))
         (universalPlaneSection f v)) := by
-  obtain ⟨rows, cols, _, _, hW, hdegree⟩ := exists_integer_universalPlane_badWitness f hir hd
+  obtain ⟨rows, cols, hW, hdegree⟩ := exists_integer_universalPlane_badWitness f hir hd
   let W := universalPlaneBadWitness f rows cols
   obtain ⟨v, hv, hvalue⟩ := exists_integer_grid_eval_ne_zero (W * P) (mul_ne_zero hW hP)
     (2 * f.totalDegree ^ 3 + P.totalDegree)

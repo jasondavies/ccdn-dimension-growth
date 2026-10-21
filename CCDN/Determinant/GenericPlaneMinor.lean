@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Determinant.GenericPlaneSmoothness
+public import CCDN.ForMathlib.MatrixRank
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.SmoothPlaneMinor
@@ -70,16 +71,14 @@ theorem exists_genericPlane_minor
     (htotal : f.totalDegree ≤ d) (hchar : CharZeroOrGT K (2 * d ^ 2))
     (hz : eval (0 : Option σ → K) f = 0)
     (hs : eval (0 : Option σ → K) (pderiv none f) ≠ 0) :
-    ∃ (a : Fin (2 * d ^ 2 - 1) → ℕ × ℕ)
-      (c : Fin (2 * d ^ 2 - 1) → ClosedFormColumns d),
-      Function.Injective a ∧ Function.Injective c ∧
-      ((closedFormCoefficientMatrix d (genericPlanePolynomial f)).submatrix a c).det ≠ 0 := by
+    (closedFormCoefficientMatrix d (genericPlanePolynomial f)).HasNonzeroMinor
+      (2 * d ^ 2 - 1) := by
   let F := FractionRing (MvPolynomial σ K)
   obtain ⟨hgi, hgz, hgs, hgm, hgd⟩ := genericPlaneMap_smooth_monic d hd f hf hm hdeg hz hs
-  obtain ⟨a, c, ha, hc, hdet⟩ := exists_closedForm_minor_of_smooth_plane_point d _ hgi 0 0
+  obtain ⟨a, c, hdet⟩ := exists_closedForm_minor_of_smooth_plane_point d _ hgi 0 0
     hgz hgs hgm hgd ((genericPlaneMap_totalDegree_le f).trans htotal)
     (hchar.map (algebraMap K F))
-  refine ⟨a, c, ha, hc, fun he ↦ hdet ?_⟩
+  refine ⟨a, c, fun he ↦ hdet ?_⟩
   rw [genericPlaneMap_bivariate, ← closedForm_minor_map, he, map_zero]
 
 end

@@ -30,7 +30,7 @@ theorem exists_ambientNoetherForm_nonzero {K σ : Type*}
         (ambientNoetherForm (Option σ) k rows cols m) ≠ 0 := by
   let φ := algebraMap K (AlgebraicClosure K)
   have hd : (MvPolynomial.map φ f).totalDegree = k + 2 := (hf.map φ).totalDegree hir.ne_zero
-  obtain ⟨rows, cols, _, _, hdet⟩ := exists_universalPlane_euler_minor_charZero
+  obtain ⟨rows, cols, hdet⟩ := exists_universalPlane_euler_minor_charZero
     k (MvPolynomial.map φ f) hir hd
   obtain ⟨m, hm⟩ := exists_coeff_ne_zero hdet
   refine ⟨rows, cols, m, ?_⟩

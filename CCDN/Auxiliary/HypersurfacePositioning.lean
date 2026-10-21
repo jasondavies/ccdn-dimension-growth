@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Auxiliary.HypersurfaceAffineCoordinates
+public import CCDN.ForMathlib.MatrixRank
 public import CCDN.Noether.GenericPlaneIrreducibility
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Auxiliary.HypersurfaceFullOuterDegree
@@ -106,11 +107,9 @@ theorem exists_positioned_genericPlane_minor
     (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K (2 * f.totalDegree ^ 2)) :
     ∃ (a b : Option σ → K) (hb : b none ≠ 0),
       eval b (homogeneousComponent f.totalDegree f) ≠ 0 ∧
-      ∃ (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
-        (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree),
-        Function.Injective rows ∧ Function.Injective cols ∧
-        ((closedFormCoefficientMatrix f.totalDegree
-          (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).submatrix rows cols).det ≠ 0 := by
+      (closedFormCoefficientMatrix f.totalDegree
+        (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).HasNonzeroMinor
+          (2 * f.totalDegree ^ 2 - 1) := by
   obtain ⟨a, b, hb, hdir, hg, hm, hdeg, ht, hz, hs⟩ :=
     exists_monic_smooth_hypersurface_coordinates f hf hpos
       (hchar.mono (by nlinarith [Nat.le_mul_self f.totalDegree]))
