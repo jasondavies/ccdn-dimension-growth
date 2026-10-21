@@ -31,7 +31,7 @@ theorem prescribed_greedy_lattice_basis_product_le
   have hprod := lattice_flag_minima_product_le (by omega : 0 < n + 1) L c
     (prescribedLatticeMinima b δ) (hb.minima_pos hδ) (hb.minima_mono hlower)
     (fun i x hx hxU => hb.minima_outside hlower i x hx (by rwa [← hflag i]))
-  rw [prescribedLatticeMinima_prod b hb.2.1 hδ.ne']
+  rw [prescribedLatticeMinima_prod b hb.first_eq hδ.ne']
   have hh := mul_le_mul_of_nonneg_left hprod (div_nonneg (norm_nonneg w) hδ.le)
   simpa only [Nat.cast_add, Nat.cast_one, mul_assoc] using hh
 

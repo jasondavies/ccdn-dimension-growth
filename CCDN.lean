@@ -117,6 +117,7 @@ public import CCDN.Auxiliary.AffineCongruenceAuxiliary
 public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
 public import CCDN.Auxiliary.AuxiliaryDegreeBound
 public import CCDN.Auxiliary.AuxiliaryLargeHeightRatios
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.AuxiliaryPolynomial
 public import CCDN.Auxiliary.AuxiliaryRatioEstimates
 public import CCDN.Auxiliary.BadPrimeCharge
@@ -404,6 +405,7 @@ public import CCDN.Curve.CurveRationalInverse
 public import CCDN.Curve.CurveRationalParameter
 public import CCDN.Curve.ProjectiveHilbertCurveGrowth
 public import CCDN.Curve.SmallDegreeSurfaceCurveCount
+public import CCDN.Curve.SurfaceCurve
 public import CCDN.Determinant.AffineCongruenceDeterminant
 public import CCDN.Determinant.AlgEquivAdicLayer
 public import CCDN.Determinant.AmbientProjectiveDeterminant
@@ -513,6 +515,7 @@ public import CCDN.Height.AffineLinearCountTransfer
 public import CCDN.Height.AffineTranslationCount
 public import CCDN.Height.BoundedPrimitiveElement
 public import CCDN.Height.Box
+public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.FiniteFieldSectionCount
 public import CCDN.Height.HomogeneousEvaluationHeight
 public import CCDN.Height.HypersurfaceHeightComparison

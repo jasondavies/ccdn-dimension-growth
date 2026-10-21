@@ -31,13 +31,11 @@ theorem projective_chow_row_degree_eq_multiplicity
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
-    (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (hF : Irreducible F)
-    (δ : Fin (m + 1) → ℕ)
-    (hδ : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i))
-    (hzero : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J) :
+    (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ)
+    (hF : IsProjectiveChowEquation J F δ) :
     ∀ i, δ i = d := by
   obtain ⟨I,G,hI,hdimdegI,hG,hgen,hδG,_⟩ :=
-    projective_chow_chart_reduction J hJ d hdimdeg F hF δ hδ hzero
+    projective_chow_chart_reduction J hJ d hdimdeg F δ hF
   have : I.IsPrime := hI
   let : (I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime :=
     prime_ideal_scalar_extension_of_isAlgClosed I
@@ -49,14 +47,12 @@ theorem exists_projective_chow_exact_degree
     (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d) :
     ∃ F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K,
-      Irreducible F ∧ (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) d) ∧
-      F.totalDegree = (m + 1) * d ∧
-      ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J := by
-  obtain ⟨F,δ,hF,hδ,hzero⟩ :=
-    exists_projective_chow_equation_without_chart J hJ hdimdeg.natDegree_eq
-  have he := projective_chow_row_degree_eq_multiplicity J hJ d hdimdeg F hF δ hδ hzero
-  have hd := fun i => he i ▸ hδ i
-  exact ⟨F,hF,hd,chow_uniform_row_degree_totalDegree F hF.ne_zero d hd,hzero⟩
+      IsProjectiveChowEquation J F (fun _ => d) ∧ F.totalDegree = (m + 1) * d := by
+  obtain ⟨F,δ,hF⟩ := exists_projective_chow_equation_without_chart J hJ hdimdeg.natDegree_eq
+  have he := projective_chow_row_degree_eq_multiplicity J hJ d hdimdeg F δ hF
+  have hd := fun i => he i ▸ hF.row_homogeneous i
+  exact ⟨F,⟨hF.irreducible,hd,hF.eval_eq_zero_iff⟩,
+    chow_uniform_row_degree_totalDegree F hF.irreducible.ne_zero d hd⟩
 
 theorem exists_geometric_projective_chow_exact_degree
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [IsAlgClosed L]
@@ -72,20 +68,17 @@ theorem exists_geometric_projective_chow_exact_degree
       ∀ U, eval U (map (algebraMap K L) F) = 0 ↔
         U ∈ projectiveChowIncidenceLocus (m + 1) (J.map (map (algebraMap K L))) := by
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
-  obtain ⟨F,δ,hF,hFL,hδ,hzero⟩ :=
+  obtain ⟨F,δ,hF,hFL⟩ :=
     exists_geometric_projective_chow_without_chart (L := L) J hJ hdimdeg.natDegree_eq
-  have hδL (i) : (map (algebraMap K L) F).IsWeightedHomogeneous (chowRowWeight i) (δ i) := by
-    intro e he
-    apply hδ i
-    intro hz
-    apply he
-    rw [coeff_map,hz,map_zero]
   have he := projective_chow_row_degree_eq_multiplicity _
     (homogeneous_ideal_scalar_extension J hJ) d
     (hasProjectiveDimensionDegree_scalar_extension hdimdeg) (map (algebraMap K L) F)
-    hFL δ hδL hzero
-  have hd := fun i => he i ▸ hδ i
-  exact ⟨F,hF,hFL,hd,chow_uniform_row_degree_totalDegree F hF.ne_zero d hd,hzero⟩
+    δ hFL
+  have hd (i) : F.IsWeightedHomogeneous (chowRowWeight i) d :=
+    he i ▸ (isWeightedHomogeneous_map_iff (algebraMap K L).injective _ _ _).mp
+      (hFL.row_homogeneous i)
+  exact ⟨F,hF,hFL.irreducible,hd,chow_uniform_row_degree_totalDegree F hF.ne_zero d hd,
+    hFL.eval_eq_zero_iff⟩
 
 end
 end CCDN

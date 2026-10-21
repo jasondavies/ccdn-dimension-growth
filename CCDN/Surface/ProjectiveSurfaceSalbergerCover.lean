@@ -82,15 +82,16 @@ theorem projective_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
   refine ⟨T.image e,δ',?_,?_,?_⟩
   · intro J hJ
     obtain ⟨I,hI,rfl⟩ := Finset.mem_image.mp hJ
-    obtain ⟨hp,_,hf,hgeo,hpos,hdeg,hδ⟩ := hT I hI
-    have : I.IsPrime := hp
-    have : (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime := hgeo
+    obtain ⟨hIT,hδ⟩ := hT I hI
+    have : I.IsPrime := hIT.isPrime
+    have : (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime := hIT.geometric
     have hδeq : δ' (e I) = δ I := congrArg δ (hleft I)
     rw [hδeq]
     exact ⟨inferInstance,projectiveClosureIdeal_homogeneous I,
       projectiveClosureIdeal_geometrically_prime (L := AlgebraicClosure ℚ) I,
-      (homogeneous_mem_projectiveClosureIdeal_iff I F hhom).mpr hf,
-      projectiveClosureIdeal_not_X_zero I,hpos,projectiveClosureIdeal_curveDegree I hdeg,hδ⟩
+      (homogeneous_mem_projectiveClosureIdeal_iff I F hhom).mpr hIT.mem,
+      projectiveClosureIdeal_not_X_zero I,hIT.pos,projectiveClosureIdeal_curveDegree I hIT.degree,
+      hδ⟩
   · rw [Finset.card_image_of_injective T hinj]
     exact hcard
   · simpa only [e, projectiveClosure_union_chart] using hcount

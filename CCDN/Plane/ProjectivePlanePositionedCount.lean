@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.ProjectiveBox
 public import CCDN.Plane.ScaledPlaneCount
 import CCDN.Algebra.HomogeneousChartIrreducible
@@ -44,13 +45,13 @@ theorem projective_plane_finite_count_positioned
     (z : Fin t → IntPoint 3) (hz0 : ∀ i, z i ≠ 0)
     (hinj : Function.Injective (fun i => Projectivization.mk ℚ (rationalPoint (z i))
       (rationalPoint_ne_zero (hz0 i))))
-    (hzprim : ∀ i, Finset.univ.gcd (z i) = 1) (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) :
+    {B : ℝ} (hzB : IsPrimitiveBoxZeroFamily f B z) :
     (t : ℝ) ≤ max
       ((d : ℝ) * scaledPlaneAuxiliaryDegreeBound d projectivePlaneDeterminantConstant (((d : ℝ) +
           1) * B) 1)
       ((34 + 8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 20)) *
           (d : ℝ) ^ 4) := by
+  obtain ⟨⟨hB, hz, hbox⟩, hzprim⟩ := hzB
   have hdpos : 0 < d := by omega
   have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by simp [h])
   obtain ⟨a, H, ha, hH, hc, hlo, hhi⟩ := exists_translated_coefficient_position hdpos f hf hf0
@@ -86,7 +87,7 @@ theorem projective_plane_finite_count_positioned
   have hmp := hprim.translate_homogeneous a
   by_cases hsmall : Real.log H ≤ 4 * d * Real.log R
   · have ht := projective_points_small_height_bound MonomialOrder.lex model hmhom hm0 hd hmp
-      hmdeg hmchart H hH hc w hw0 hwi hwp hwz hR hwbox (hlo.trans hsmall)
+      ⟨hmdeg, hmchart, hH, hc⟩ w hw0 hwi ⟨⟨hR, hwz, hwbox⟩, hwp⟩ (hlo.trans hsmall)
     have hL : 0 < |((MonomialOrder.lex.leadingCoeff model : ℤ) : ℝ)| :=
       abs_pos.mpr (Int.cast_ne_zero.mpr (MonomialOrder.lex.leadingCoeff_ne_zero_iff.mpr hm0))
     have hratio := scaled_positioned_height_ratio_le hdpos (h := 1) le_rfl
@@ -108,7 +109,7 @@ theorem projective_plane_finite_count_positioned
       linarith only [hterm]
     exact (ht.trans (mul_le_mul_of_nonneg_left hbound (by positivity))).trans (le_max_left _ _)
   · have ht := projective_points_large_height_bound MonomialOrder.lex model hmhom hm0 hd hmp
-      hmdeg hmchart H hH hc w hw0 hwi hwp hwz hR hwbox 14 (by norm_num)
+      ⟨hmdeg, hmchart, hH, hc⟩ w hw0 hwi ⟨⟨hR, hwz, hwbox⟩, hwp⟩ 14 (by norm_num)
       (le_of_lt (lt_of_not_ge hsmall)) hhi
     rw [show heightDeterminantError projectivePlaneDeterminantConstant + 6 + 14 =
         heightDeterminantError projectivePlaneDeterminantConstant + 20 by ring] at ht

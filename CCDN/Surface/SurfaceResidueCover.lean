@@ -56,8 +56,7 @@ theorem surface_residue_residual_count_le
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
     (S : Finset (Ideal (CoordinatePolynomial 3)))
     (δ : Ideal (CoordinatePolynomial 3) → ℕ)
-    (hS : ∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-      map (Int.castRingHom ℚ) f ∈ I ∧ HasAffineCurveDegree I (δ I)) :
+    (hS : ∀ I ∈ S, IsSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I)) :
     (count (surfaceResidueResidualLocus F S L X hL) B : ℝ) ≤
       2 * f.totalDegree * A ^ 2 * (surfaceResidueLogBudget B L) ^ 2 *
         (scalingPrimeRatio * L + 1) ^ 2 * X ^ 2 *
@@ -128,30 +127,25 @@ the finite residual locus counted above. -/
 theorem large_curve_point_mem_surfaceResidueResidualLocus
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
-    {A B H L X : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B) (hH : 1 ≤ H) (hL : 1 ≤ L)
-    (hcoeff : CoefficientHeightLE f H)
-    (hheight : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
-      Real.log H + f.totalDegree * Real.log B ≤ L)
-    (hX : 1 < X) (hBX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)
-    (hXL : X ≤ Real.exp L) (F : SurfaceCongruenceFamily f B A)
+    {A B H L X : ℝ} (hA : 0 ≤ A) (hW : IsSurfaceResidueWindow f B H L X)
+    (F : SurfaceCongruenceFamily f B A)
     (S : Finset (Ideal (CoordinatePolynomial 3)))
-    (I : Ideal (CoordinatePolynomial 3)) (hIS : I ∈ S)
-    (hI : I.IsPrime) (hIheight : I.height = 2)
-    (hfI : map (Int.castRingHom ℚ) f ∈ I)
+    (I : Ideal (CoordinatePolynomial 3)) (hIS : I ∈ S) {d : ℕ}
+    (hI : IsSurfaceCurve (map (Int.castRingHom ℚ) f) I d)
     (hinitI : map (Int.castRingHom ℚ) F.initial ∈ I)
-    {d : ℕ} (hdegree : HasAffineCurveDegree I d)
     (hlarge : 2 * f.totalDegree * A * surfaceResidueLogBudget B L < d)
     (x : IntPoint 3) (hx : InBox x B) (hxf : eval x f = 0)
     (hxI : rationalPoint x ∈ idealZeroLocus I)
     (hsmooth : ∃ j, eval x (pderiv j f) ≠ 0) :
-    rationalPoint x ∈ surfaceResidueResidualLocus F S L X hL := by
-  obtain ⟨R, hR, p, hp, r, hRW, hprod, _, hparent, hchild, hzero⟩ :=
-    surface_residue_boundary_of_large_curve f hir hA hB hH hL hcoeff hheight hX hBX hXL
-      F I hI hIheight hfI hinitI hdegree hlarge x hx hxf hsmooth
-  apply mem_surfaceResidueResidualLocus F S hL R hRW hR p hp hprod.le r
+    rationalPoint x ∈ surfaceResidueResidualLocus F S L X hW.one_le_window := by
+  obtain ⟨R, hR, p, hp, r, hedge⟩ :=
+    surface_residue_boundary_of_large_curve f hir hA hW F I hI hinitI hlarge x hx hxf hsmooth
+  apply mem_surfaceResidueResidualLocus F S hW.one_le_window R hedge.subset_window hR p hp
+    hedge.prod_lt.le r
   apply Set.mem_iUnion.mpr
-  refine ⟨I, Set.mem_iUnion.mpr ⟨mem_filter.mpr ⟨hIS, hparent, hchild⟩, hxI, ?_⟩⟩
-  have hh := congrArg (Int.castRingHom ℚ) hzero
+  refine ⟨I, Set.mem_iUnion.mpr
+    ⟨mem_filter.mpr ⟨hIS, hedge.parent_mem, hedge.child_not_mem⟩, hxI, ?_⟩⟩
+  have hh := congrArg (Int.castRingHom ℚ) hedge.child_vanishes
   rw [map_eval, map_zero] at hh
   exact hh
 

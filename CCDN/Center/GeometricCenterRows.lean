@@ -71,12 +71,12 @@ theorem exists_geometric_center_row_witness
         (Set.range (fun i => algebraMap (MvPolynomial (Fin (n + 1)) ℚ ⧸ I)
           (FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ I))
           ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ := by
-  obtain ⟨b, S, _, hS, hdimS, _, hdisjoint, hint, hfield, _⟩ :=
+  obtain ⟨b, S, _, _, hS, hdimS, _, hdisjoint, hP, _⟩ :=
     exists_geometric_birational_projection_center (L := L) m n hmn I hI d hdimdeg
   obtain ⟨A, hA, hspan⟩ := exists_submodule_basis_matrix S hdimS
   have hker : Submodule.span ℚ (Set.range A.row) =
       (Matrix.mulVecLin (fun i j => (b i j : ℚ))).ker := hspan.trans hS
-  refine ⟨b, A, hA, hker, ?_, hint, hfield⟩
+  refine ⟨b, A, hA, hker, ?_, hP.integral, hP.birational⟩
   have hkerL := matrix_rows_map_span_le_kernel (algebraMap ℚ L) A
     (Matrix.of fun i j => (b i j : ℚ)) hker.le
   intro p hp hmem

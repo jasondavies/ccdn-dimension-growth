@@ -28,10 +28,8 @@ theorem exists_surface_initial_curve_components (f : MvPolynomial (Fin 3) ℤ)
     (F : SurfaceCongruenceFamily f B A) :
     ∃ S : Finset (Ideal (CoordinatePolynomial 3)),
       ∃ δ : Ideal (CoordinatePolynomial 3) → ℕ,
-        (∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-          map (Int.castRingHom ℚ) f ∈ I ∧
-          map (Int.castRingHom ℚ) F.initial ∈ I ∧
-          0 < δ I ∧ HasAffineCurveDegree I (δ I)) ∧
+        (∀ I ∈ S, IsSectionCurve (map (Int.castRingHom ℚ) f)
+          (map (Int.castRingHom ℚ) F.initial) I (δ I)) ∧
         zeroLocus (map (Int.castRingHom ℚ) f) ∩
           zeroLocus (map (Int.castRingHom ℚ) F.initial) = ⋃ I ∈ S, idealZeroLocus I ∧
         (∑ I ∈ S, (δ I : ℝ)) ≤ (f.totalDegree : ℝ) * A *
@@ -56,23 +54,18 @@ theorem exists_surface_initial_curve_components (f : MvPolynomial (Fin 3) ℤ)
 cover of degree at most `2 d A Λ(B, L)`, or lies in the residual locus. -/
 theorem surface_point_mem_small_curve_cover (f : MvPolynomial (Fin 3) ℤ)
     (hirQ : Irreducible (map (Int.castRingHom ℚ) f))
-    {A B H L X : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B) (hH : 1 ≤ H) (hL : 1 ≤ L)
-    (hcoeff : CoefficientHeightLE f H)
-    (hderivative : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
-      Real.log H + f.totalDegree * Real.log B ≤ L)
-    (hX : 1 < X) (hBX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)
-    (hXL : X ≤ Real.exp L) (F : SurfaceCongruenceFamily f B A)
+    {A B H L X : ℝ} (hA : 0 ≤ A) (hW : IsSurfaceResidueWindow f B H L X)
+    (F : SurfaceCongruenceFamily f B A)
     (S : Finset (Ideal (CoordinatePolynomial 3))) (δ : Ideal (CoordinatePolynomial 3) → ℕ)
-    (hS : ∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-      map (Int.castRingHom ℚ) f ∈ I ∧ map (Int.castRingHom ℚ) F.initial ∈ I ∧
-      0 < δ I ∧ HasAffineCurveDegree I (δ I))
+    (hS : ∀ I ∈ S, IsSectionCurve (map (Int.castRingHom ℚ) f)
+      (map (Int.castRingHom ℚ) F.initial) I (δ I))
     (hcover : zeroLocus (map (Int.castRingHom ℚ) f) ∩
       zeroLocus (map (Int.castRingHom ℚ) F.initial) = ⋃ I ∈ S, idealZeroLocus I)
     (x : IntPoint 3) (hx : InBox x B) (hxf : eval x f = 0) :
     rationalPoint x ∈ singularHypersurfaceLocus (map (Int.castRingHom ℚ) f) ∪
       (⋃ I ∈ S.filter (fun I => (δ I : ℝ) ≤
         2 * f.totalDegree * A * surfaceResidueLogBudget B L), idealZeroLocus I) ∪
-      surfaceResidueResidualLocus F S L X hL := by
+      surfaceResidueResidualLocus F S L X hW.one_le_window := by
   have hrat {g : MvPolynomial (Fin 3) ℤ} (hg : eval x g = 0) :
       eval (rationalPoint x) (map (Int.castRingHom ℚ) g) = 0 := by
     have hh := congrArg (Int.castRingHom ℚ) hg
@@ -87,10 +80,9 @@ theorem surface_point_mem_small_curve_cover (f : MvPolynomial (Fin 3) ℤ)
     · exact Or.inl (Or.inr (Set.mem_iUnion.mpr
         ⟨I, Set.mem_iUnion.mpr ⟨mem_filter.mpr ⟨hIS, hsmall⟩, hxI⟩⟩))
     · right
-      obtain ⟨hIp, hIheight, hfI, hinitI, _, hdegree⟩ := hS I hIS
-      exact large_curve_point_mem_surfaceResidueResidualLocus f hirQ hA hB hH hL hcoeff
-        hderivative hX hBX hXL F S I hIS hIp hIheight hfI hinitI hdegree
-        (lt_of_not_ge hsmall) x hx hxf hxI hsmooth
+      exact large_curve_point_mem_surfaceResidueResidualLocus f hirQ hA hW F S I hIS
+        (hS I hIS).toIsSurfaceCurve (hS I hIS).mem_right (lt_of_not_ge hsmall) x hx hxf hxI
+        hsmooth
   · refine Or.inl (Or.inl ?_)
     change eval (rationalPoint x) (map (Int.castRingHom ℚ) f) = 0 ∧ _
     refine ⟨hrat hxf, fun j => ?_⟩
@@ -103,21 +95,13 @@ initial auxiliary, or lie in the residual locus. -/
 theorem exists_surface_small_curve_residual_cover
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : AbsolutelyIrreducible f)
-    (hd : 0 < f.totalDegree) {K H B L X : ℝ}
-    (hK : 0 ≤ K) (hH : 1 ≤ H) (hB : 1 ≤ B) (hL : 1 ≤ L)
-    (hcoeff : CoefficientHeightLE f H)
-    (hheight : Real.log H ≤ K * (Real.log B + 1))
-    (hderivative : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
-      Real.log H + f.totalDegree * Real.log B ≤ L)
-    (hX : 1 < X) (hBX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)
-    (hXL : X ≤ Real.exp L) :
+    (hd : 0 < f.totalDegree) {K H B L X : ℝ} (hK : 0 ≤ K)
+    (hheight : Real.log H ≤ K * (Real.log B + 1)) (hW : IsSurfaceResidueWindow f B H L X) :
     ∃ F : SurfaceCongruenceFamily f B (surfaceCongruenceDegreeConstant f.totalDegree K),
       ∃ S : Finset (Ideal (CoordinatePolynomial 3)),
         ∃ δ : Ideal (CoordinatePolynomial 3) → ℕ,
-          (∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-            map (Int.castRingHom ℚ) f ∈ I ∧
-            map (Int.castRingHom ℚ) F.initial ∈ I ∧
-            0 < δ I ∧ HasAffineCurveDegree I (δ I)) ∧
+          (∀ I ∈ S, IsSectionCurve (map (Int.castRingHom ℚ) f)
+            (map (Int.castRingHom ℚ) F.initial) I (δ I)) ∧
           (∑ I ∈ S, (δ I : ℝ)) ≤ (f.totalDegree : ℝ) *
             surfaceCongruenceDegreeConstant f.totalDegree K *
             (B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) + 1) * (1 + Real.log B) ∧
@@ -126,19 +110,20 @@ theorem exists_surface_small_curve_residual_cover
             count (⋃ I ∈ S.filter (fun I => (δ I : ℝ) ≤
               2 * f.totalDegree * surfaceCongruenceDegreeConstant f.totalDegree K *
                 surfaceResidueLogBudget B L), idealZeroLocus I) B +
-            count (surfaceResidueResidualLocus F S L X hL) B := by
+            count (surfaceResidueResidualLocus F S L X hW.one_le_window) B := by
   classical
   have hA : 0 ≤ surfaceCongruenceDegreeConstant f.totalDegree K :=
     (surfaceCongruenceDegreeConstant_pos f.totalDegree K).le
   have hirQ := rational_irreducible_of_charZero_map f hir
-  obtain ⟨F⟩ := exists_surface_congruence_family f hir hd hK hH hB hcoeff hheight
+  obtain ⟨F⟩ := exists_surface_congruence_family f hir hd hK hW.one_le_height hW.one_le_radius
+    hW.coeff_le hheight
   obtain ⟨S, δ, hS, hcover, hbudget⟩ := exists_surface_initial_curve_components f hirQ F
   refine ⟨F, S, δ, hS, hbudget, ?_⟩
   let singular := singularHypersurfaceLocus (map (Int.castRingHom ℚ) f)
   let retained := ⋃ I ∈ S.filter (fun I => (δ I : ℝ) ≤
     2 * f.totalDegree * surfaceCongruenceDegreeConstant f.totalDegree K *
       surfaceResidueLogBudget B L), idealZeroLocus I
-  let residual := surfaceResidueResidualLocus F S L X hL
+  let residual := surfaceResidueResidualLocus F S L X hW.one_le_window
   have hcount : count (zeroLocus (map (Int.castRingHom ℚ) f)) B ≤
       count (singular ∪ retained ∪ residual) B := by
     apply card_le_card
@@ -148,8 +133,8 @@ theorem exists_surface_small_curve_residual_cover
       apply (show Function.Injective (Int.castRingHom ℚ) from Int.cast_injective)
       rw [map_eval, map_zero]
       exact hzero
-    exact mem_integralPoints.mpr ⟨hbox, surface_point_mem_small_curve_cover f hirQ hA hB hH hL
-      hcoeff hderivative hX hBX hXL F S δ hS hcover x hbox hxf⟩
+    exact mem_integralPoints.mpr
+      ⟨hbox, surface_point_mem_small_curve_cover f hirQ hA hW F S δ hS hcover x hbox hxf⟩
   exact hcount.trans ((count_union_le (singular ∪ retained) residual B).trans
     (Nat.add_le_add_right (count_union_le singular retained B) _))
 

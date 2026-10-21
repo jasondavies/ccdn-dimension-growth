@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HypersurfaceDeterminantRank
+public import CCDN.Height.CountingHypotheses
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Auxiliary.IntegerCoefficientHeight
@@ -37,18 +38,14 @@ theorem affine_congruence_determinant_log_lower_height {n s N M : ℕ} (hs : 0 <
     (x : Fin s → IntPoint (n + 2)) (hx : ∀ i, eval (x i) f = 0)
     (hrows : LinearIndependent ℚ
       ((Matrix.of fun i j => eval (x i) (G j)).map ((↑) : ℤ → ℚ)).row)
-    (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) (a : ℕ → IntPoint (n + 2))
-    (ha : ∀ p ∈ P, eval₂ (Int.castRingHom (ZMod p)) (fun j => (a p j : ZMod p)) f = 0)
-    (hsmooth : ∀ p ∈ P, ∃ j, eval (fun i => (a p i : ZMod p))
-      (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0)
-    (hres : ∀ p ∈ P, ∀ i j, (p : ℤ) ∣ x i j - a p j) :
+    (P : Finset ℕ) (a : ℕ → IntPoint (n + 2)) (hres : IsSmoothResidueFamily f P a x) :
     hypersurfaceRankLowerBound n s f.totalDegree
         (congruenceHeightCharge (n + 3) f.totalDegree H (∑ p ∈ P, Real.log p)) +
       (hypersurfaceDeterminantMain n s - (n + 2 : ℝ) * s) *
         (∑ p ∈ P, Real.log p) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (x i) (G j))) := by
   obtain ⟨bad, hbad, hbound⟩ := exists_affine_congruence_determinant_log_lower hs f hir hd
-    G hG x hx hrows P hP a ha hsmooth hres
+    G hG x hx hrows P a hres
   let F := scaledHomogenize f.totalDegree 1 f
   have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hF0 : F ≠ 0 := scaledHomogenize_ne_zero _ one_ne_zero hf0
@@ -62,7 +59,7 @@ theorem affine_congruence_determinant_log_lower_height {n s N M : ℕ} (hs : 0 <
     exact integerCoefficientHeight_le f (by linarith) hcoeff
   have hc := hypersurface_and_congruence_prime_charge F hFir (hFdegree ▸ hd) H hH
     (fun e => (coefficient_abs_le_integerCoefficientHeight F e).trans hheight) bad P
-    (fun p hp => by simpa only [hFdegree] using (hbad p).mp hp) hP
+    (fun p hp => by simpa only [hFdegree] using (hbad p).mp hp) hres.prime
   change (∑ p ∈ bad ∪ P, Real.log p / p) ≤
     congruenceHeightCharge (n + 3) F.totalDegree H (∑ p ∈ P, Real.log p) at hc
   rw [hFdegree] at hc

@@ -8,6 +8,7 @@ module
 public import CCDN.Algebra.HomogeneousMonomials
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.CountingHypotheses
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Determinant.HomogeneousDeterminantComparison
 /-! The determinant comparison for polynomial homogeneous-coordinate maps of
@@ -42,14 +43,9 @@ theorem polynomial_map_no_auxiliary_height_comparison
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d) (hdM : d ≤ M)
-    (q : MvPolynomial (Fin 2) ℤ) (hqdegree : q.totalDegree = d)
-    (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) q))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE q H)
-    (τ : Fin 3 → MvPolynomial (Fin 2) ℤ)
-    (z : Fin t → Fin 2 → ℤ) (hz : ∀ i, eval (z i) q = 0)
-    (himage : ∀ i, eval (fun j => eval (z i) (τ j)) f = 0)
-    {B C : ℝ} (hB : 1 ≤ B)
-    (hbox : ∀ i j, |(eval (z i) (τ j) : ℝ)| ≤ B) (hC : 0 ≤ C)
+    {q : MvPolynomial (Fin 2) ℤ} {H : ℝ} (hq : IsBoundedPlaneCurve F q d H)
+    (τ : Fin 3 → MvPolynomial (Fin 2) ℤ) (z : Fin t → Fin 2 → ℤ) (hz : ∀ i, eval (z i) q = 0)
+    {B C : ℝ} (himage : IsBoxZeroFamily f B (fun i j => eval (z i) (τ j))) (hC : 0 ≤ C)
     (hrel : ∀ g : MvPolynomial (Fin 3) ℤ, g.IsHomogeneous M →
       (∀ i, eval (fun j => eval (z i) (τ j)) g = 0) → f ∣ g)
     (hcount : PlaneResidueCountBound C d q) :
@@ -62,7 +58,7 @@ theorem polynomial_map_no_auxiliary_height_comparison
           (((2 + M).choose M : ℝ) - s) * Real.log |((order.leadingCoeff f : ℤ) : ℝ)| := by
   obtain ⟨s, a, _, _, hr, hi, hupper⟩ :=
     homogeneous_no_auxiliary_box_comparison order f hf hf0 hdM
-      (fun i j => eval (z i) (τ j)) himage hB hbox hrel
+      (fun i j => eval (z i) (τ j)) himage.eval_eq_zero himage.one_le_radius himage.abs_le hrel
   have hs := (plane_homogeneous_rank_bounds hd hdM hr).1
   refine ⟨s, hs, hr, plane_homogeneous_rank_identity hdM hr, ?_⟩
   let g := fun k => aeval τ (monomial (homogeneousMonomials 2 M k) (1 : ℤ))
@@ -71,11 +67,12 @@ theorem polynomial_map_no_auxiliary_height_comparison
       ((Matrix.of fun i k => eval ((z ∘ a) i) (g k)).map ((↑) : ℤ → ℚ)).row := by
     rw [show (Matrix.of fun i k => eval ((z ∘ a) i) (g k)) = _ from he]
     exact hi
+  have hqdegree := hq.totalDegree_eq
   have hqpos : 0 < q.totalDegree := by simpa only [hqdegree] using hd
   have hcount' := hcount
   rw [← hqdegree] at hcount'
-  have hlower := singular_determinant_log_lower_height hs q hqpos hir H hH hcoeff
-    g (z ∘ a) (fun i => hz (a i)) hi' hC hcount'
+  have hlower := singular_determinant_log_lower_height hs q hqpos hq.irreducible H
+    hq.one_le_height hq.coeff_le g (z ∘ a) (fun i => hz (a i)) hi' hC hcount'
   rw [hqdegree, show (Matrix.of fun i k => eval ((z ∘ a) i) (g k)) = _ from he] at hlower
   exact hlower.trans hupper
 

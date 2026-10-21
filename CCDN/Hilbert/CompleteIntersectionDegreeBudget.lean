@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredPrimeDecomposition
-public import Mathlib.RingTheory.Ideal.Height
+public import CCDN.Curve.SurfaceCurve
 import CCDN.Hilbert.FilteredComponentDegreeBudget
 import CCDN.Hilbert.FilteredLinearGrowth
 import CCDN.Hilbert.PrimeComponentTranscendence
@@ -44,8 +44,7 @@ theorem exists_completeIntersection_curve_components
     (f g : CoordinatePolynomial 3) (hf : Irreducible f) (hfg : ¬ f ∣ g) :
     ∃ S : Finset (Ideal (CoordinatePolynomial 3)),
       ∃ d : Ideal (CoordinatePolynomial 3) → ℕ,
-        (∀ P ∈ S, P.IsPrime ∧ P.height = 2 ∧ f ∈ P ∧ g ∈ P ∧
-          0 < d P ∧ HasAffineCurveDegree P (d P)) ∧
+        (∀ P ∈ S, IsSectionCurve f g P (d P)) ∧
         zeroLocus f ∩ zeroLocus g = ⋃ P ∈ S, idealZeroLocus P ∧
         (∑ P ∈ S, d P) ≤ f.totalDegree * g.totalDegree ∧
         (∀ P ∈ S, (polynomialSectionIdeal f g).IsMinimalPrime P) := by
@@ -70,10 +69,9 @@ theorem exists_completeIntersection_curve_components
     have : P.IsPrime := hminimal.isPrime
     have hheight : P.height = 2 := minimalPrime_pair_height_two hf.prime hfg hminimal
     have hdeg := hcurve P hPT
-    exact ⟨hminimal.isPrime, hheight,
-      hminimal.le (polynomialSectionIdeal_first_mem f g),
+    exact ⟨⟨hminimal.isPrime, hheight, hminimal.le (polynomialSectionIdeal_first_mem f g), hdeg⟩,
       hminimal.le (polynomialSectionIdeal_second_mem f g),
-      height_two_eventual_slope_pos_of_point P hheight z hz hdeg, hdeg⟩
+      height_two_eventual_slope_pos_of_point P hheight z hz hdeg⟩
   · ext x
     constructor
     · intro hx

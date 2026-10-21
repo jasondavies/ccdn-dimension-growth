@@ -92,8 +92,7 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
       Real.log H ≤ K * (Real.log B + 1) →
       ∃ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ),
-        (∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧ map (Int.castRingHom ℚ) f ∈ I ∧
-          GeometricCurveIdeal I ∧ 0 < δ I ∧ HasAffineCurveDegree I (δ I) ∧ δ I ≤ d ^ 2) ∧
+        (∀ I ∈ S, IsGeometricSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I) ∧ δ I ≤ d ^ 2) ∧
         (S.card : ℝ) ≤ C * (B ^ (1 / Real.sqrt (d : ℝ)) * Real.log B + 1) ∧
         (count (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
           (⋃ I ∈ S, idealZeroLocus I)) B : ℝ) ≤
@@ -116,7 +115,7 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
   subst d
   have hir := rational_irreducible_of_charZero_map f habs
   have hL := surfaceResidueWindow_one_le f.totalDegree hK hB
-  obtain ⟨hderivative,hX,hBX,hXL⟩ := surfaceResidueWindow_parameters hd hK hB hheight
+  have hW := isSurfaceResidueWindow_of_log_height hd hK hB hH hcoeff hheight
   obtain ⟨F⟩ := exists_surface_congruence_family f habs (by omega) hK hH hB hcoeff hheight
   obtain ⟨S,δ,hS,hcover,hbudget⟩ := exists_surface_initial_curve_components f hir F
   have hbudget' := curve_component_budget_le_double hA hB hbudget
@@ -124,10 +123,9 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
   refine ⟨kept,δ,?_,?_,?_⟩
   · intro I hI
     obtain ⟨hIS,hδ,hgeo⟩ := mem_filter.mp hI
-    obtain ⟨hp,hh,hf,_,hpos,hdeg⟩ := hS I hIS
-    exact ⟨hp,hh,hf,hgeo,hpos,hdeg,hδ⟩
+    exact ⟨⟨(hS I hIS).toIsSurfaceCurve,hgeo,(hS I hIS).pos⟩,hδ⟩
   · have hcard := curve_component_card_le (show kept ⊆ S from filter_subset _ S)
-      (fun I hI => (hS I hI).2.2.2.2.1) hd hA₀ hB hbudget'
+      (fun I hI => (hS I hI).pos) hd hA₀ hB hbudget'
     have hbase : 0 ≤ B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) * Real.log B + 1 := by
       have := Real.log_nonneg hB
       positivity
@@ -137,8 +135,7 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
     have hmed := hmedium medium δ f.totalDegree hd A₀ D B hA₀ hD hB
       (fun I hI => by
         obtain ⟨hIS,hδ,_⟩ := mem_filter.mp hI
-        obtain ⟨hp,_,_,_,_,hdeg⟩ := hS I hIS
-        exact ⟨hp,by nlinarith,hdeg⟩)
+        exact ⟨(hS I hIS).isPrime,by nlinarith,(hS I hIS).degree⟩)
       (fun I hI => by
         have hh := (mem_filter.mp hI).2.2
         rw [surfaceResidueLogBudget_window] at hh
@@ -147,17 +144,11 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
         hbudget')
     have hbad := count_le_of_curve_degree_budget hA₀ hB
       (nongeometric_curve_union_count_le S δ (f.totalDegree ^ 2)
-        (fun I hI => by
-          obtain ⟨hp,_,_,_,hpos,hdeg⟩ := hS I hI
-          exact ⟨hp,hpos,hdeg⟩) (show 0 ≤ B by linarith)) hbudget'
-    have hresidual := hres f rfl B hB F hir S δ (fun I hI => by
-      obtain ⟨hp,hh,hf,_,_,hdeg⟩ := hS I hI
-      exact ⟨hp,hh,hf,hdeg⟩)
-    have hpoint := surface_smooth_outside_geometric_cover f hir hA hB hH hL hcoeff
-      hderivative hX hBX hXL F S δ (f.totalDegree ^ 2)
-      (fun I hI => by
-        obtain ⟨hp,hh,hf,hg,_,hdeg⟩ := hS I hI
-        exact ⟨hp,hh,hf,hg,hdeg⟩) hcover
+        (fun I hI => ⟨(hS I hI).isPrime,(hS I hI).pos,(hS I hI).degree⟩)
+        (show 0 ≤ B by linarith)) hbudget'
+    have hresidual := hres f rfl B hB F hir S δ (fun I hI => (hS I hI).toIsSurfaceCurve)
+    have hpoint := surface_smooth_outside_geometric_cover f hir hA hW F S δ (f.totalDegree ^ 2)
+      hS hcover
     have hpointR : (count (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
         (⋃ I ∈ kept, idealZeroLocus I)) B : ℝ) ≤
         count (⋃ I ∈ S.filter (fun I => δ I ≤ f.totalDegree ^ 2 ∧ ¬GeometricCurveIdeal I),

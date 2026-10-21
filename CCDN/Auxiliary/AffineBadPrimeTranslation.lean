@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Algebra.AffineTranslation
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
+public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Height.Box
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
@@ -51,22 +52,18 @@ theorem hypersurfaceBadPrimeFactor_affineTranslation {n : ℕ}
 
 /-- Pull an auxiliary equation back through a bounded translation. -/
 theorem affine_auxiliary_translation_transport {n : ℕ}
-    (f g : MvPolynomial (Fin n) ℤ) (a : Fin n → ℤ)
-    (hg : g ≠ 0) (hnd : ¬ affineTranslation ℤ a f ∣ g)
-    {B D : ℝ} (ha : InBox a D)
-    (hzero : ∀ x : IntPoint n, InBox x (B + D) →
-      eval x (affineTranslation ℤ a f) = 0 → eval x g = 0) :
-    ∃ G : MvPolynomial (Fin n) ℤ, G ≠ 0 ∧ ¬ f ∣ G ∧ G.totalDegree = g.totalDegree ∧
-      ∀ x : IntPoint n, InBox x B → eval x f = 0 → eval x G = 0 := by
+    (f g : MvPolynomial (Fin n) ℤ) (a : Fin n → ℤ) {B D : ℝ}
+    (hg : IsBoxAuxiliary (affineTranslation ℤ a f) g (B + D)) (ha : InBox a D) :
+    ∃ G, IsBoxAuxiliary f G B ∧ G.totalDegree = g.totalDegree := by
   let G := (affineTranslation ℤ a).symm g
-  have hG0 : G ≠ 0 := (affineTranslation ℤ a).symm.injective.ne (by simpa using hg)
+  have hG0 : G ≠ 0 := (affineTranslation ℤ a).symm.injective.ne (by simpa using hg.ne_zero)
   have hGnd : ¬ f ∣ G := by
     intro hd
-    apply hnd
+    apply hg.not_dvd
     have hh := map_dvd (affineTranslation ℤ a).toRingHom hd
     change affineTranslation ℤ a f ∣ affineTranslation ℤ a ((affineTranslation ℤ a).symm g) at hh
     simpa only [AlgEquiv.apply_symm_apply] using hh
-  refine ⟨G, hG0, hGnd, affineTranslation_totalDegree (-a) g, ?_⟩
+  refine ⟨G, ⟨hG0, hGnd, ?_⟩, affineTranslation_totalDegree (-a) g⟩
   intro x hx hxf
   have hx' (j) : |((x - a) j : ℝ)| ≤ B + D := by
     change |((x j - a j : ℤ) : ℝ)| ≤ _
@@ -76,7 +73,7 @@ theorem affine_auxiliary_translation_transport {n : ℕ}
     rw [affineTranslation_eval, sub_add_cancel, hxf]
   change eval x (affineTranslation ℤ (-a) g) = 0
   rw [affineTranslation_eval]
-  exact hzero (x - a) hx' hf'
+  exact hg.vanishes (x - a) hx' hf'
 
 end
 end CCDN

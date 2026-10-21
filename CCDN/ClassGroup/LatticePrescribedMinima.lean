@@ -28,6 +28,33 @@ def IsPrescribedGreedyLatticeFamily (L : Submodule ℤ E) (w : E)
   LinearIndependent ℝ v ∧ v 0 = w ∧ (∀ i, v i ∈ L) ∧
     ∀ i, i ≠ 0 → ∀ x, x ∈ L → x ∉ span ℝ (v '' Set.Iio i) → ‖v i‖ ≤ ‖x‖
 
+section Projections
+
+omit [FiniteDimensional ℝ E]
+
+variable {L : Submodule ℤ E} {w : E} {k : ℕ} {v : Fin (k + 1) → E}
+
+/-- The vectors of a prescribed greedy family are linearly independent. -/
+theorem IsPrescribedGreedyLatticeFamily.linearIndependent
+    (hv : IsPrescribedGreedyLatticeFamily L w v) : LinearIndependent ℝ v := hv.1
+
+/-- The first vector of a prescribed greedy family is the prescribed vector. -/
+theorem IsPrescribedGreedyLatticeFamily.first_eq
+    (hv : IsPrescribedGreedyLatticeFamily L w v) : v 0 = w := hv.2.1
+
+/-- The vectors of a prescribed greedy family lie in the lattice. -/
+theorem IsPrescribedGreedyLatticeFamily.mem
+    (hv : IsPrescribedGreedyLatticeFamily L w v) (i : Fin (k + 1)) : v i ∈ L := hv.2.2.1 i
+
+/-- Every later vector of a prescribed greedy family is a shortest lattice vector outside the
+span of the preceding ones. -/
+theorem IsPrescribedGreedyLatticeFamily.norm_le
+    (hv : IsPrescribedGreedyLatticeFamily L w v) {i : Fin (k + 1)} (hi : i ≠ 0) {x : E}
+    (hx : x ∈ L) (hxU : x ∉ span ℝ (v '' Set.Iio i)) : ‖v i‖ ≤ ‖x‖ :=
+  hv.2.2.2 i hi x hx hxU
+
+end Projections
+
 omit [FiniteDimensional ℝ E] in
 theorem IsPrescribedGreedyLatticeFamily.snoc
     {L : Submodule ℤ E} {w : E} {k : ℕ} {v : Fin (k + 1) → E}
@@ -35,19 +62,20 @@ theorem IsPrescribedGreedyLatticeFamily.snoc
     (hxU : x ∉ span ℝ (Set.range v))
     (hmin : ∀ y, y ∈ L → y ∉ span ℝ (Set.range v) → ‖x‖ ≤ ‖y‖) :
     IsPrescribedGreedyLatticeFamily L w (Fin.snoc v x) := by
-  refine ⟨hv.1.finSnoc hxU, ?_, ?_, ?_⟩
-  · simpa using hv.2.1
+  refine ⟨hv.linearIndependent.finSnoc hxU, ?_, ?_, ?_⟩
+  · simpa using hv.first_eq
   · intro i
     refine Fin.lastCases ?_ (fun j => ?_) i
     · simpa using hx
-    · simpa using hv.2.2.1 j
+    · simpa using hv.mem j
   · intro i
     refine Fin.lastCases ?_ (fun j => ?_) i
     · intro _
       simpa only [Fin.snoc_last, Fin.snoc_image_Iio_last] using hmin
     · intro hj
       have hj0 : j ≠ 0 := by intro hz; apply hj; simp [hz]
-      simpa only [Fin.snoc_castSucc, Fin.snoc_image_Iio_castSucc] using hv.2.2.2 j hj0
+      simpa only [Fin.snoc_castSucc, Fin.snoc_image_Iio_castSucc] using
+        fun x hx hxU => hv.norm_le hj0 hx hxU
 
 /-- Prescribed-first greedy independent lattice vectors of every possible
 length. -/
@@ -66,7 +94,7 @@ theorem exists_prescribed_greedy_lattice_family
     obtain ⟨v, hv⟩ := ih (by omega)
     have hU : span ℝ (Set.range v) ≠ ⊤ := by
       intro he
-      have hdim := finrank_span_eq_card hv.1
+      have hdim := finrank_span_eq_card hv.linearIndependent
       rw [he, finrank_top, Fintype.card_fin] at hdim
       omega
     obtain ⟨x, hx, hxU, hmin⟩ := ZLattice.exists_shortest_vector_notMem L _ hU
@@ -78,7 +106,7 @@ theorem exists_prescribed_greedy_lattice_basis
     {n : ℕ} (hn : Module.finrank ℝ E = n + 1) :
     ∃ b : Basis (Fin (n + 1)) ℝ E, IsPrescribedGreedyLatticeFamily L w b := by
   obtain ⟨v, hv⟩ := exists_prescribed_greedy_lattice_family L w hw hw0 n (by omega)
-  let b := basisOfLinearIndependentOfCardEqFinrank' v hv.1 (by simpa using hn.symm)
+  let b := basisOfLinearIndependentOfCardEqFinrank' v hv.linearIndependent (by simpa using hn.symm)
   exact ⟨b, by simpa only [b, coe_basisOfLinearIndependentOfCardEqFinrank'] using hv⟩
 
 omit [FiniteDimensional ℝ E] in
@@ -94,7 +122,7 @@ theorem IsPrescribedGreedyLatticeFamily.minima_pos
   unfold prescribedLatticeMinima
   split_ifs
   · exact hδ
-  · exact norm_pos_iff.mpr (hv.1.ne_zero i)
+  · exact norm_pos_iff.mpr (hv.linearIndependent.ne_zero i)
 
 omit [FiniteDimensional ℝ E] in
 theorem IsPrescribedGreedyLatticeFamily.minima_mono
@@ -107,11 +135,10 @@ theorem IsPrescribedGreedyLatticeFamily.minima_mono
   · by_cases hj : j = 0
     · simp [prescribedLatticeMinima, hi, hj]
     · simpa [prescribedLatticeMinima, hi, hj] using
-        hlower (v j) (hv.2.2.1 j) (hv.1.ne_zero j)
+        hlower (v j) (hv.mem j) (hv.linearIndependent.ne_zero j)
   · have hj : j ≠ 0 := by intro hz; apply hi; exact le_antisymm (hz ▸ hij) (Fin.zero_le i)
     simp only [prescribedLatticeMinima, ite_eq_right hi, ite_eq_right hj]
-    exact hv.2.2.2 i hi (v j) (hv.2.2.1 j)
-      (hv.1.notMem_span_image (not_lt_of_ge hij))
+    exact hv.norm_le hi (hv.mem j) (hv.linearIndependent.notMem_span_image (not_lt_of_ge hij))
 
 omit [FiniteDimensional ℝ E] in
 theorem IsPrescribedGreedyLatticeFamily.minima_outside
@@ -126,7 +153,7 @@ theorem IsPrescribedGreedyLatticeFamily.minima_outside
     intro hz
     exact hxU (hz ▸ Submodule.zero_mem _)
   · rw [prescribedLatticeMinima, ite_eq_right hi]
-    exact hv.2.2.2 i hi x hx hxU
+    exact hv.norm_le hi hx hxU
 
 omit [FiniteDimensional ℝ E] [NormedSpace ℝ E] in
 theorem prescribedLatticeMinima_prod {n : ℕ} (v : Fin (n + 1) → E)

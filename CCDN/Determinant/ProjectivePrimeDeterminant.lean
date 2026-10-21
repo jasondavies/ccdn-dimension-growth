@@ -7,6 +7,7 @@ module
 
 public import CCDN.Determinant.ProjectivePlaneResidueDeterminant
 public import CCDN.Determinant.SingularDeterminantCutoff
+public import CCDN.Height.CountingHypotheses
 import CCDN.Determinant.PrimeAggregation
 import CCDN.Determinant.ProjectiveMultiplicity
 import CCDN.Height.ProjectiveFiniteFieldCount
@@ -64,12 +65,8 @@ theorem projective_plane_minorGcd_dvd {s N p d M : ℕ} [Fact p.Prime] (hs : 0 <
 
 theorem projective_determinant_log_lower_at_rank {s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
-    (F : Fin N → MvPolynomial (Fin 3) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
-    (z : Fin s → IntPoint 3) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0)
-    (hrows : LinearIndependent ℚ
-      ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row)
-    (bad : Finset ℕ)
+    {F : Fin N → MvPolynomial (Fin 3) ℤ} {z : Fin s → IntPoint 3}
+    (hev : IsIndependentEvaluation f M F z) (bad : Finset ℕ)
     (hred : ∀ p ∈ ((Ioc 0 s).filter Nat.Prime) \ bad,
       stepanovThreshold (d : ℝ) < p → Irreducible (map (Int.castRingHom (ZMod p)) f)) :
     (s : ℝ) ^ 2 / 2 * (Real.log s - 4 * Real.log d -
@@ -80,12 +77,12 @@ theorem projective_determinant_log_lower_at_rank {s N d M : ℕ} (hs : 0 < s)
     (by linarith [projectivePlaneDeterminantConstant_pos] :
       (0 : ℝ) ≤ projectivePlaneDeterminantConstant + 1)
     (show 0 ≤ (s : ℝ) ^ 2 / 2 by positivity) (Nat.cast_nonneg s) bad ∅ (empty_subset bad)
-    (by simp) 0 (one_pos.trans_le (Int.Matrix.one_le_minorGcd hrows)) (by
+    (by simp) 0 (one_pos.trans_le (Int.Matrix.one_le_minorGcd hev.rows_linearIndependent)) (by
       rw [Nat.floor_natCast]
       intro p hp hcut
       have : Fact p.Prime := ⟨(mem_filter.mp (mem_sdiff.mp hp).1).2⟩
       simpa only [div_div] using projective_plane_minorGcd_dvd hs f hf hd
-        (hred p hp hcut) hcut F hF z hprim hz) (by simp)
+        (hred p hp hcut) hcut F hev.isHomogeneous z hev.primitive hev.eval_eq_zero) (by simp)
   rw [sum_empty, add_zero] at h
   convert h using 1
   dsimp only [degreeFourDeterminantError]

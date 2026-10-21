@@ -28,36 +28,25 @@ theorem exists_projective_variety_projection
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hd : 1 ≤ d)
     (hdimdeg : HasProjectiveDimensionDegree I m d) :
-    ∃ b : Fin (m + 2) → Fin (n + 1) → ℤ,
-      (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (MvPolynomial (Fin (n + 1)) ℚ ⧸ I)
-          (FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ I))
-          ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ ∧
-      ∃ f : MvPolynomial (Fin (m + 2)) ℚ,
-        Irreducible f ∧ f.IsHomogeneous d ∧ f.totalDegree = d ∧
-        RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
-          Ideal.span {f} ∧
-        ∀ B : ℝ, projectiveCount (projectiveIdealZeroLocus I) B ≤
-          d * projectiveCount (projectiveZeroLocus f)
-            (((n + 1 : ℕ) * birationalProjectionHeightConstant (n + 1) : ℕ) *
-              (d : ℝ) ^ (2 * (n + 1)) * B) := by
-  obtain ⟨b, hb, hnorm, hinj, hint, hfield, f, hf, hfhom, hfdeg, hker⟩ :=
+    ∃ (b : Fin (m + 2) → Fin (n + 1) → ℤ) (f : MvPolynomial (Fin (m + 2)) ℚ),
+      IsBirationalProjection I (fun i => integerLinearForm (b i)) f ∧
+      f.IsHomogeneous d ∧ f.totalDegree = d ∧
+      ∀ B : ℝ, projectiveCount (projectiveIdealZeroLocus I) B ≤
+        d * projectiveCount (projectiveZeroLocus f)
+          (((n + 1 : ℕ) * birationalProjectionHeightConstant (n + 1) : ℕ) *
+            (d : ℝ) ^ (2 * (n + 1)) * B) := by
+  obtain ⟨b, f, hb, hN, hP, hfhom, hfdeg⟩ :=
     exists_bounded_birational_hypersurface_projection_of_le m (n + 1)
       (by omega) I hI d hdimdeg
-  refine ⟨b, hint, hfield, f, hf, hfhom, hfdeg, hker, ?_⟩
-  have hrel : aeval (fun i => integerLinearForm (b i)) f ∈ I := by
-    apply Ideal.Quotient.eq_zero_iff_mem.mp
-    change f ∈ RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i)))
-    rw [hker]
-    exact Ideal.subset_span (Set.mem_singleton f)
+  refine ⟨b, f, hP, hfhom, hfdeg, ?_⟩
+  have hrel := hP.aeval_mem
   have hfiber (z : Fin (m + 2) → ℚ) (s : Finset (Fin (n + 1) → ℚ))
       (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
       (hproj : ∀ x ∈ s, ∀ i, eval x (integerLinearForm (b i)) = z i) :
       s.card ≤ d := by
     have hh := bounded_degree_normalization_fiber_card_le I 1 (by omega)
       (fun i : Fin (m + 1) => integerLinearForm (b i.succ))
-      (fun i => linearForm_totalDegree_le _) hinj hnorm d hdimdeg
+      (fun i => linearForm_totalDegree_le _) hN.injective hN.integral d hdimdeg
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
     simpa only [one_pow, Nat.mul_one] using hh
   let H : ℝ := birationalProjectionHeightConstant (n + 1) * (d : ℝ) ^ (2 * (n + 1))

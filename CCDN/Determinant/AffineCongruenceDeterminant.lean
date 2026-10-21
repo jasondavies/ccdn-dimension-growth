@@ -8,6 +8,7 @@ module
 public import CCDN.Auxiliary.ScaledHomogenization
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Height.CountingHypotheses
 import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
 import CCDN.Determinant.SmoothCongruenceDeterminant
 /-! Congruence-refined determinant estimates for affine zeros and
@@ -34,11 +35,7 @@ theorem exists_affine_congruence_determinant_log_lower {n s N M : ℕ} (hs : 0 <
     (x : Fin s → IntPoint (n + 2)) (hx : ∀ i, eval (x i) f = 0)
     (hrows : LinearIndependent ℚ
       ((Matrix.of fun i j => eval (x i) (G j)).map ((↑) : ℤ → ℚ)).row)
-    (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) (a : ℕ → IntPoint (n + 2))
-    (ha : ∀ p ∈ P, eval₂ (Int.castRingHom (ZMod p)) (fun j => (a p j : ZMod p)) f = 0)
-    (hsmooth : ∀ p ∈ P, ∃ j, eval (fun i => (a p i : ZMod p))
-      (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0)
-    (hres : ∀ p ∈ P, ∀ i j, (p : ℤ) ∣ x i j - a p j) :
+    (P : Finset ℕ) (a : ℕ → IntPoint (n + 2)) (hres : IsSmoothResidueFamily f P a x) :
     ∃ bad : Finset ℕ,
       (∀ p, p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧
         HypersurfaceBadReduction (scaledHomogenize f.totalDegree 1 f) p) ∧
@@ -73,12 +70,12 @@ theorem exists_affine_congruence_determinant_log_lower {n s N M : ℕ} (hs : 0 <
     simp only [projectiveHypersurfaceChart, Equiv.swap_self, Equiv.coe_refl, rename_id_apply, F,
       affineChart_scaledHomogenize_one]
   obtain ⟨bad, hbad, hbound⟩ := exists_smooth_congruence_determinant_log_lower hs F hF hd hFir
-    H hH z (fun i => primitive_affine_integer_coordinates (x i)) hz hrows' P hP
-    (fun _ => 0) a (by simpa only [hchart] using ha)
-    (by simpa only [hchart] using hsmooth)
+    ⟨hH, fun i => primitive_affine_integer_coordinates (x i), hz, hrows'⟩ P hres.prime
+    (fun _ => 0) a (by simpa only [hchart] using hres.eval_eq_zero)
+    (by simpa only [hchart] using hres.smooth)
     (by intro p hp i; exact isCoprime_one_right)
     (by intro p hp i j; simpa only [Equiv.swap_self, Equiv.refl_apply,
-        z, Fin.cons_succ, Fin.cons_zero, mul_one] using hres p hp i j)
+        z, Fin.cons_succ, Fin.cons_zero, mul_one] using hres.dvd_sub p hp i j)
   rw [he] at hbound
   exact ⟨bad, hbad, hbound⟩
 

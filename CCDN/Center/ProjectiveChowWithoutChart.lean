@@ -27,15 +27,15 @@ theorem exists_projective_chow_equation_without_chart
     (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ),
-      Irreducible F ∧ (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
-      ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J := by
+      IsProjectiveChowEquation J F δ := by
   classical
   obtain ⟨e, hJ', hX, hp⟩ := exists_projectivePermutedIdeal_chart J hJ (by omega)
   let J' := projectivePermutedIdeal J e
   have : J'.IsPrime := projectivePermutedIdeal_isPrime J e
   obtain ⟨d,_,hdimdeg⟩ := exists_hasAffineDimensionDegree J' (Ideal.IsPrime.ne_top ‹J'.IsPrime›)
     ((congrArg Polynomial.natDegree hp).trans hdim)
-  obtain ⟨F,δ,hF,hδ,hzero⟩ := exists_homogeneous_prime_projective_chow_equation J' hJ' hX hdimdeg
+  obtain ⟨F,δ,⟨hF,hδ,hzero⟩⟩ :=
+    exists_homogeneous_prime_projective_chow_equation J' hJ' hX hdimdeg
   let ρ := chowColumnPermutation (r := m + 1) e
   refine ⟨rename ρ F, δ, ?_, ?_, ?_⟩
   · exact (MulEquiv.irreducible_iff (renameEquiv K ρ)).mpr hF

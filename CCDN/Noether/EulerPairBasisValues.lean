@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.EulerPairBasis
-import CCDN.ForMathlib.MatrixRank
+public import CCDN.ForMathlib.MatrixRank
 /-! Explicit monomial values of the Euler basis and nonzero minors of the
 correct Noether order d^2-1. -/
 
@@ -59,12 +59,8 @@ theorem exists_eulerClosedForm_nonzero_minor
     (k : ℕ) (f : Polynomial (Polynomial F)) (hf : Irreducible f)
     (a : F) (ha : a ≠ 0) (hl : f.leadingCoeff = Polynomial.C a)
     (hdeg : f.natDegree = k + 2) :
-    ∃ (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-      (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k),
-      Function.Injective rows ∧ Function.Injective cols ∧
-      ((eulerClosedFormCoefficientMatrix k f).submatrix rows cols).det ≠ 0 := by
-  exact Matrix.exists_det_submatrix_ne_zero_of_le_rank _ _
-    (eulerClosedFormCoefficientMatrix_rank k f hf a ha hl hdeg).ge
+    (eulerClosedFormCoefficientMatrix k f).HasNonzeroMinor ((k + 2) ^ 2 - 1) :=
+  Matrix.hasNonzeroMinor_of_le_rank _ (eulerClosedFormCoefficientMatrix_rank k f hf a ha hl hdeg).ge
 
 end
 end CCDN

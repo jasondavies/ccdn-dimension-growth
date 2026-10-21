@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredPrimeDecomposition
-public import Mathlib.RingTheory.Ideal.Height
+public import CCDN.Curve.SurfaceCurve
 import CCDN.Hilbert.CompleteIntersectionDegreeBudget
 import CCDN.Hilbert.CompleteIntersectionHeight
 import CCDN.Plane.Bezout
@@ -51,8 +51,7 @@ theorem surface_prime_curve_degree_sum_le
     (f g : CoordinatePolynomial 3) (hf : Irreducible f) (hfg : ¬ f ∣ g)
     (S : Finset (Ideal (CoordinatePolynomial 3)))
     (δ : Ideal (CoordinatePolynomial 3) → ℕ)
-    (hS : ∀ P ∈ S, P.IsPrime ∧ P.height = 2 ∧ f ∈ P ∧ g ∈ P ∧
-      HasAffineCurveDegree P (δ P)) :
+    (hS : ∀ P ∈ S, IsSurfaceCurve f P (δ P) ∧ g ∈ P) :
     ∑ P ∈ S, δ P ≤ f.totalDegree * g.totalDegree := by
   classical
   let T := minimalPrimeComponents (polynomialSectionIdeal f g)
@@ -60,7 +59,7 @@ theorem surface_prime_curve_degree_sum_le
   let e (P : Ideal (CoordinatePolynomial 3)) := if hP : P ∈ T then d ⟨P, hP⟩ else 0
   have hST : S ⊆ T := by
     intro P hPS
-    obtain ⟨hP, hheight, hfP, hgP, _⟩ := hS P hPS
+    obtain ⟨⟨hP, hheight, hfP, _⟩, hgP⟩ := hS P hPS
     exact mem_minimalPrimeComponents.mpr
       (height_two_prime_isMinimalPrime_section f g hf hfg P hP hheight hfP hgP)
   have he (P : T) : e P.val = d P := by
@@ -68,7 +67,7 @@ theorem surface_prime_curve_degree_sum_le
     rfl
   have heq (P) (hPS : P ∈ S) : δ P = e P := by
     rw [he ⟨P, hST hPS⟩]
-    exact affineCurveDegree_unique (hS P hPS).2.2.2.2 (hd ⟨P, hST hPS⟩)
+    exact affineCurveDegree_unique (hS P hPS).1.degree (hd ⟨P, hST hPS⟩)
   calc
     _ = ∑ P ∈ S, e P := Finset.sum_congr rfl heq
     _ ≤ ∑ P ∈ T, e P :=
@@ -85,8 +84,7 @@ theorem surface_curve_crossing_count_le
     (f g h : CoordinatePolynomial 3) (hf : Irreducible f) (hfg : ¬ f ∣ g)
     (S : Finset (Ideal (CoordinatePolynomial 3)))
     (δ : Ideal (CoordinatePolynomial 3) → ℕ)
-    (hS : ∀ P ∈ S, P.IsPrime ∧ P.height = 2 ∧ f ∈ P ∧ g ∈ P ∧
-      HasAffineCurveDegree P (δ P)) (B : ℝ) :
+    (hS : ∀ P ∈ S, IsSurfaceCurve f P (δ P) ∧ g ∈ P) (B : ℝ) :
     count (⋃ P ∈ S.filter (fun P => h ∉ P), idealZeroLocus P ∩ zeroLocus h) B ≤
       f.totalDegree * g.totalDegree * h.totalDegree := by
   classical
@@ -94,8 +92,8 @@ theorem surface_curve_crossing_count_le
   have hcurve (P) (hPT : P ∈ T) :
       count (idealZeroLocus P ∩ zeroLocus h) B ≤ δ P * h.totalDegree := by
     obtain ⟨hPS, hhP⟩ := Finset.mem_filter.mp hPT
-    have : P.IsPrime := (hS P hPS).1
-    exact count_curve_section_le P (hS P hPS).2.2.2.2 h hhP B
+    have : P.IsPrime := (hS P hPS).1.isPrime
+    exact count_curve_section_le P (hS P hPS).1.degree h hhP B
   have hbudget := surface_prime_curve_degree_sum_le f g hf hfg T δ
     (fun P hP => hS P (Finset.mem_filter.mp hP).1)
   calc

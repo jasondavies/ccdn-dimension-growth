@@ -20,23 +20,13 @@ open MvPolynomial
 theorem exists_bounded_affine_birational_projection
     (m k : ℕ) (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime]
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
-    ∃ b : Fin (m + 2) → Fin (m + 1 + k) → ℤ,
+    ∃ (b : Fin (m + 2) → Fin (m + 1 + k) → ℤ) (f : MvPolynomial (Fin (m + 2)) ℚ),
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight (m + 1 + k) d) ∧
-      (projectionCoordinateMap I
-        (fun i : Fin (m + 1) => integerLinearForm (b i.succ))).IsIntegral ∧
-      Function.Injective (projectionCoordinateMap I
-        (fun i : Fin (m + 1) => integerLinearForm (b i.succ))) ∧
-      (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (MvPolynomial (Fin (m + 1 + k)) ℚ ⧸ I)
-          (FractionRing (MvPolynomial (Fin (m + 1 + k)) ℚ ⧸ I))
-          ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ ∧
+      IsNoetherNormalization I (fun i : Fin (m + 1) => integerLinearForm (b i.succ)) ∧
+      IsBirationalProjection I (fun i => integerLinearForm (b i)) f ∧
       (projectionCoordinateMap (projectiveClosureIdeal I)
         (closureProjectionCoordinates (fun i => integerLinearForm (b i)))).IsIntegral ∧
-      ∃ f : MvPolynomial (Fin (m + 2)) ℚ,
-        Irreducible f ∧ 0 < f.totalDegree ∧ f.totalDegree ≤ d ∧
-        RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
-          Ideal.span {f} := by
+      0 < f.totalDegree ∧ f.totalDegree ≤ d := by
   classical
   let n := m + 1 + k
   let F := FractionRing (MvPolynomial (Fin n) ℚ ⧸ I)
@@ -67,9 +57,9 @@ theorem exists_bounded_affine_birational_projection
     apply RingHom.IsIntegral.tower_top (rename ι).toRingHom ψcone.toRingHom
     change (ψcone.comp (rename ι)).IsIntegral
     rwa [heqcone]
-  exact ⟨b, moment_cons_abs_le_integerBirationalProjectionHeight ht a ha, hinta, hinja,
-    projectionCoordinateMap_isIntegral_of_tail I l' hinta, hfield', hcone', f, hf, hfpos, hfd,
-    hker⟩
+  exact ⟨b, f, moment_cons_abs_le_integerBirationalProjectionHeight ht a ha, ⟨hinta, hinja⟩,
+    ⟨⟨hfield', hf, hker⟩, projectionCoordinateMap_isIntegral_of_tail I l' hinta⟩, hcone', hfpos,
+    hfd⟩
 
 end
 end CCDN

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveChartIdeal
+public import CCDN.Center.ProjectionImageFractionField
 public import CCDN.Projection.DegreePreservingProjectionBox
 import CCDN.Algebra.ProjectiveChartScalarExtension
 import CCDN.Algebra.ScaledHypersurfaceModel
@@ -30,14 +31,9 @@ theorem exists_geometric_projective_curve_count_reduction_of_chart
     [(I.map (map (algebraMap ℚ L))).IsPrime]
     (hX : X 0 ∉ I) (hd : 0 < d) (hdegree : HasProjectiveCurveDegree I d) :
     ∃ (k₀ k₁ : ℕ) (f : MvPolynomial (Fin 2) ℚ),
-      k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧ Irreducible f ∧ f.totalDegree = d ∧
-      let J := projectiveChartIdeal I
-      let a := ![momentCoordinate ℚ n k₀, momentCoordinate ℚ n k₁]
-      (∀ g, aeval a g ∈ J ↔ f ∣ g) ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (CoordinatePolynomial n ⧸ J)
-          (FractionRing (CoordinatePolynomial n ⧸ J))
-          ((Ideal.Quotient.mk J) (a i)))) = ⊤ ∧
+      k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧ f.totalDegree = d ∧
+      IsBirationalImage (projectiveChartIdeal I)
+        ![momentCoordinate ℚ n k₀, momentCoordinate ℚ n k₁] f ∧
       (scaledHomogenize d 1 f).IsHomogeneous d ∧
       Irreducible (scaledHomogenize d 1 f) ∧
       Irreducible (map (algebraMap ℚ L) (scaledHomogenize d 1 f)) ∧
@@ -47,18 +43,17 @@ theorem exists_geometric_projective_curve_count_reduction_of_chart
   let J := projectiveChartIdeal I
   let : (J.map (map (algebraMap ℚ L))).IsPrime :=
     projectiveChartIdeal_geometrically_prime I hX
-  obtain ⟨k₀, k₁, f, hk₀, hk₁, hf, hfL, hfd, hker, hfield, _, _, hcount⟩ :=
+  obtain ⟨k₀, k₁, f, hk₀, hk₁, hP, hfL, hfd, _, _, hcount⟩ :=
     exists_geometrically_integral_curve_projection (L := L) J d hd
       (projectiveChartIdeal_degree I hX hdegree)
-  refine ⟨k₀, k₁, f, hk₀, hk₁, hf, hfd, hker, hfield,
-    scaledHomogenize_homogeneous 1 f hfd.le, ?_, ?_, ?_⟩
-  · simpa only [hfd] using scaledHomogenize_irreducible f hf one_ne_zero
+  refine ⟨k₀, k₁, f, hk₀, hk₁, hfd, hP, scaledHomogenize_homogeneous 1 f hfd.le, ?_, ?_, ?_⟩
+  · simpa only [hfd] using scaledHomogenize_irreducible f hP.irreducible one_ne_zero
   · rw [scaledHomogenize_map, map_one]
     have hdeg : (map (algebraMap ℚ L) f).totalDegree = d :=
       (totalDegree_map_of_injective (algebraMap ℚ L).injective _).trans hfd
     simpa only [hdeg] using scaledHomogenize_irreducible _ hfL one_ne_zero
   · exact projective_curve_count_le_of_moment_projection I hX hd hdegree f hfd hk₀ hk₁
-      ((hker f).mpr dvd_rfl) hcount
+      hP.aeval_mem hcount
 
 end
 end CCDN

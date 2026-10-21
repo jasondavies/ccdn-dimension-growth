@@ -52,7 +52,6 @@ theorem exists_universalPlane_minor_degree
     (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K (2 * f.totalDegree ^ 2)) :
     ∃ (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
       (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree),
-      Function.Injective rows ∧ Function.Injective cols ∧
       ((closedFormCoefficientMatrix f.totalDegree
         (universalPlanePolynomial f)).submatrix rows cols).det ≠ 0 ∧
       (((closedFormCoefficientMatrix f.totalDegree
@@ -65,8 +64,8 @@ theorem exists_universalPlane_minor_degree
   have hex := exists_universalPlane_minor
     (MvPolynomial.map φ f) hf (ht ▸ hpos) (ht ▸ hchar.map φ)
   rw [ht] at hex
-  obtain ⟨rows, cols, hr, hc, hdet⟩ := hex
-  refine ⟨rows, cols, hr, hc, ?_, ?_⟩
+  obtain ⟨rows, cols, hdet⟩ := hex
+  refine ⟨rows, cols, ?_, ?_⟩
   · intro he
     rw [universalPlanePolynomial_map, ← closedForm_minor_map, he, map_zero] at hdet
     exact hdet rfl

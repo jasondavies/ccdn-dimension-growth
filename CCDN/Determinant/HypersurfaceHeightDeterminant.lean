@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HypersurfaceDeterminantRank
+public import CCDN.Height.CountingHypotheses
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
@@ -24,17 +25,15 @@ theorem exists_hypersurface_determinant_log_lower
     {n s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom K) f))
-    (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
-    (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0)
-    (hrows : LinearIndependent ℚ
-      ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row) :
+    {F : Fin N → MvPolynomial (Fin (n + 3)) ℤ} {z : Fin s → IntPoint (n + 3)}
+    (hev : IsIndependentEvaluation f M F z) :
     ∃ bad : Finset ℕ,
       (∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) ∧
       hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤
         Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   obtain ⟨bad, hmem⟩ := exists_hypersurface_bad_prime_finset f hf hd hir
-  exact ⟨bad, hmem, hypersurface_determinant_log_lower_at_rank hs f hf hd F hF z hprim hz hrows
+  exact ⟨bad, hmem, hypersurface_determinant_log_lower_at_rank hs f hf hd F hev.isHomogeneous z
+    hev.primitive hev.eval_eq_zero hev.rows_linearIndependent
     bad fun p _ hp hcut => hasGoodReduction_of_not_mem hmem p (mem_sdiff.mp hp).2 hcut⟩
 
 /-- The height-dependent error contains only dimension constants. -/
@@ -50,11 +49,8 @@ theorem hypersurface_determinant_log_lower_height
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom K) f))
     (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H)
-    (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
-    (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0)
-    (hrows : LinearIndependent ℚ
-      ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row) :
+    {F : Fin N → MvPolynomial (Fin (n + 3)) ℤ} {z : Fin s → IntPoint (n + 3)}
+    (hev : IsIndependentEvaluation f M F z) :
     factorialRoot n / (n + 2 : ℝ) *
       (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
         (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + Real.log (1 + Real.log H / (d : ℝ) ^ 2)) -
@@ -70,7 +66,8 @@ theorem hypersurface_determinant_log_lower_height
       (hcut : stepanovThreshold (d : ℝ) < p) :
       HasGoodReduction f p :=
     hasGoodReduction_of_not_mem hmem p (mem_sdiff.mp hp).2 hcut
-  have hlower := hypersurface_determinant_log_lower_at_rank hs f hf hd F hF z hprim hz hrows bad hred
+  have hlower := hypersurface_determinant_log_lower_at_rank hs f hf hd F hev.isHomogeneous z
+    hev.primitive hev.eval_eq_zero hev.rows_linearIndependent bad hred
   unfold hypersurfaceRankLowerBound at hlower
   have hc : 0 < hypersurfaceHeightConstant (n + 3) :=
     zero_lt_one.trans_le (hypersurfaceHeightConstant_one_le _)

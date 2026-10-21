@@ -48,7 +48,7 @@ theorem exists_bounded_integer_plane_witness
       eval v (universalPlaneBadWitness f rows cols) ≠ 0 ∧
       ∀ p : ℕ, f.totalDegree < p → HypersurfaceBadReduction f p →
         (p : ℤ) ∣ eval v (universalPlaneBadWitness f rows cols) := by
-  obtain ⟨rows, cols, _, _, hw, hd⟩ := exists_integer_universalPlane_badWitness f hf hpos
+  obtain ⟨rows, cols, hw, hd⟩ := exists_integer_universalPlane_badWitness f hf hpos
   obtain ⟨v, hv, he⟩ := exists_integer_grid_eval_ne_zero _ hw _ hd
   exact ⟨rows, cols, v, hv, he,
     fun p hp hbad => bad_prime_dvd_universalPlaneBadWitness_eval f hpos rows cols v p hp hbad⟩

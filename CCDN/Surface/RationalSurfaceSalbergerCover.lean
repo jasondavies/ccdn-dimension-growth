@@ -24,8 +24,7 @@ theorem rational_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
       f.totalDegree = d → ∀ B : ℝ, 1 ≤ B →
       ∃ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ),
-        (∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧ f ∈ I ∧
-          GeometricCurveIdeal I ∧ 0 < δ I ∧ HasAffineCurveDegree I (δ I) ∧ δ I ≤ d ^ 2) ∧
+        (∀ I ∈ S, IsGeometricSurfaceCurve f I (δ I) ∧ δ I ≤ d ^ 2) ∧
         (S.card : ℝ) ≤ C * (B ^ (1 / Real.sqrt (d : ℝ)) * Real.log B + 1) ∧
         (count (smoothSurfaceLocus f \ (⋃ I ∈ S, idealZeroLocus I)) B : ℝ) ≤
           C * B ^ (2 / Real.sqrt (d : ℝ) + c / Real.log (1 + Real.log B)) := by
@@ -51,7 +50,7 @@ theorem rational_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
   refine ⟨S,δ,?_,hcard,?_⟩
   · intro I hI
     obtain ⟨hp,hh,hg,hgeo,hpos,hdeg,hδ⟩ := hS I hI
-    refine ⟨hp,hh,?_,hgeo,hpos,hdeg,hδ⟩
+    refine ⟨⟨⟨hp,hh,?_,hdeg⟩,hgeo,hpos⟩,hδ⟩
     rw [he] at hg
     have hh' := I.mul_mem_left (MvPolynomial.C a⁻¹) hg
     simpa only [← mul_assoc, ← C_mul, inv_mul_cancel₀ ha, map_one, one_mul] using hh'

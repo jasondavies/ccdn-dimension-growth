@@ -6,9 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.AffineNonzeroConstant
+public import CCDN.Height.CountingHypotheses
 import CCDN.Auxiliary.PlaneAuxiliaryCount
-import CCDN.Height.AffineTranslationCount
 import CCDN.ForMathlib.Log
+import CCDN.Height.AffineTranslationCount
 /-! All affine scaling, coefficient-height and zero-constant-term reductions
 for primitive absolutely irreducible plane equations. The resulting bound
 assumes the sharp finite-field estimate. -/
@@ -51,10 +52,10 @@ theorem plane_finite_count_of_residue_bound
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {t : ℕ}
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f)) (hd : 0 < f.totalDegree)
-    (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0)
-    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) (hC : 0 ≤ C)
-    (hcount : PlaneResidueCountBound C f.totalDegree f) :
+    (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) {B C : ℝ} (hzB : IsBoxZeroFamily f B z)
+    (hC : 0 ≤ C) (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ (2 * Real.exp 1 * affineNonzeroConstantBound C) * curveBound f.totalDegree B := by
+  obtain ⟨hB, hz, hbox⟩ := hzB
   have hf0 : f ≠ 0 := fun h => hir.ne_zero (by simp [h])
   obtain ⟨a, ha, ha0⟩ := exists_bounded_translation_nonzero_constant f hf0
   let q := affineTranslation ℤ a f
@@ -90,8 +91,8 @@ theorem plane_finite_count_of_residue_bound
     rw [show Nat.card (PlaneResidue q ℓ) = Nat.card (PlaneResidue f ℓ) from
       affineTranslation_residue_card a f ℓ]
     exact hcount ℓ hℓ hsize hirf
-  have hh := plane_finite_count_nonzero_constant q hprimq hirq (by rwa [hdeg]) ha0 z' hinj' hz'
-    hR hbox' hC hcount'
+  have hh := plane_finite_count_nonzero_constant q hprimq hirq (by rwa [hdeg]) ha0 z' hinj'
+    ⟨hR, hz', hbox'⟩ hC hcount'
   rw [hdeg] at hh
   have ht := hh.trans (mul_le_mul_of_nonneg_left (curveBound_translation_radius hd hB)
     (affineNonzeroConstantBound_pos C).le)
@@ -111,7 +112,7 @@ theorem count_plane_of_residue_bound
       (2 * Real.exp 1 * affineNonzeroConstantBound C) * curveBound f.totalDegree B := by
   apply integer_zero_count_le_of_family_bound
   intro t z hinj hz hbox
-  exact plane_finite_count_of_residue_bound f hprim hir hd z hinj hz hB hbox hC hcount
+  exact plane_finite_count_of_residue_bound f hprim hir hd z hinj ⟨hB, hz, hbox⟩ hC hcount
 
 end
 end CCDN

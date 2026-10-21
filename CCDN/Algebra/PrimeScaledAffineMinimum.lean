@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.PrimeScaledAffineHeight
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.ScalingPrime
+public import CCDN.Height.PrimeScaledAffineHeight
 import CCDN.Algebra.AffineScalingExponent
 import CCDN.Auxiliary.PrimeScaledAffineAuxiliary
 import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
-import CCDN.Height.ScaledHypersurfaceHeight
 import CCDN.Height.HypersurfaceHeightTransfer
+import CCDN.Height.ScaledHypersurfaceHeight
 /-! Both bounds for the bad-prime factor apply to the same homogeneous
 auxiliary. Their minimum therefore survives the affine exponent saving. -/
 
@@ -178,25 +179,23 @@ theorem prime_scaled_affine_auxiliary_minimum {n : ℕ}
     (hir : Irreducible f) (hd : 0 < f.totalDegree)
     {p : ℕ} (hp : p.Prime) (hp0 : ¬ (p : ℤ) ∣ f.coeff 0)
     {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) (hBp : B / A ≤ p) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree A B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
-        (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) ∧
-      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
-  obtain ⟨g, hg0, hgnd, hgdegree, hgzero⟩ := prime_scaled_affine_auxiliary f hprim hir hd hp hp0 hB hpB
-  exact ⟨g, hg0, hgnd, hgdegree.trans
-    (scaled_hypersurface_auxiliary_minimum_bound f hir.ne_zero hd hp hA hB hpB hBp), hgzero⟩
+        (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) := by
+  obtain ⟨g, hg, hgdegree⟩ := prime_scaled_affine_auxiliary f hprim hir hd hp hp0 hB hpB
+  exact ⟨g, hg, hgdegree.trans
+    (scaled_hypersurface_auxiliary_minimum_bound f hir.ne_zero hd hp hA hB hpB hBp)⟩
 
 theorem affine_auxiliary_minimum_of_small_constant_coefficient {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f) (hd : 0 < f.totalDegree) (hc : f.coeff 0 ≠ 0)
     {B : ℝ} (hB : scalingPrimeRatio ≤ B)
     (hheight : Real.log |(f.coeff 0 : ℝ)| < B / scalingPrimeRatio) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree scalingPrimeRatio B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
-        (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) ∧
-      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
+        (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) := by
   obtain ⟨p, hp, hlo, hhi, hnd⟩ := exists_scaling_prime hB hc hheight
   exact prime_scaled_affine_auxiliary_minimum f hprim hir hd hp hnd
     scalingPrimeRatio_one_le (scalingPrimeRatio_one_le.trans hB) hhi hlo.le

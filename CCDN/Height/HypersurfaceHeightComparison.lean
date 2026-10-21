@@ -7,6 +7,7 @@ module
 
 public import CCDN.Determinant.HypersurfaceHeightDeterminant
 public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.CountingHypotheses
 import CCDN.Determinant.HomogeneousDeterminantComparison
 /-! Exact-rank Bombieri--Vaaler comparison for higher-dimensional hypersurfaces.
 Absence of an auxiliary polynomial forces the explicit numerical inequality. -/
@@ -39,9 +40,7 @@ theorem hypersurface_no_auxiliary_height_comparison
     (hf : f.IsHomogeneous d) (hd : 0 < d) (hdM : d ≤ M)
     (hir : Irreducible (map (Int.castRingHom K) f))
     (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H)
-    (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
+    {B : ℝ} {z : Fin t → IntPoint (n + 3)} (hzB : IsPrimitiveBoxZeroFamily f B z)
     (hrel : ∀ g : MvPolynomial (Fin (n + 3)) ℤ, g.IsHomogeneous M →
       (∀ i, eval (z i) g = 0) → f ∣ g) :
     ∃ s : ℕ, 0 < s ∧ s + (n + 2 + (M - d)).choose (M - d) = (n + 2 + M).choose M ∧
@@ -54,7 +53,8 @@ theorem hypersurface_no_auxiliary_height_comparison
             Real.log |((order.leadingCoeff f : ℤ) : ℝ)| := by
   have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
   obtain ⟨s, a, _, _, hr, hi, hupper⟩ :=
-    homogeneous_no_auxiliary_box_comparison order f hf hf0 hdM z hz hB hbox hrel
+    homogeneous_no_auxiliary_box_comparison order f hf hf0 hdM z hzB.eval_eq_zero
+      hzB.one_le_radius hzB.abs_le hrel
   have hs := hypersurface_homogeneous_rank_pos hd hdM hr
   refine ⟨s, hs, hr, ?_⟩
   let F := fun j => (monomial (homogeneousMonomials (n + 2) M j) 1 : MvPolynomial (Fin (n + 3)) ℤ)
@@ -68,8 +68,8 @@ theorem hypersurface_no_auxiliary_height_comparison
       ((Matrix.of fun i j => eval ((z ∘ a) i) (F j)).map ((↑) : ℤ → ℚ)).row := by
     rw [he]
     exact hi
-  have hlower := hypersurface_determinant_log_lower_height hs f hf hd hir H hH hcoeff
-    F hF (z ∘ a) (fun i => hprim (a i)) (fun i => hz (a i)) hi'
+  have hlower := hypersurface_determinant_log_lower_height (z := z ∘ a) hs f hf hd hir H hH
+    hcoeff ⟨hF, fun i => hzB.primitive (a i), fun i => hzB.eval_eq_zero (a i), hi'⟩
   rw [he] at hlower
   exact hlower.trans hupper
 

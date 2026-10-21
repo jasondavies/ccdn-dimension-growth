@@ -68,10 +68,8 @@ theorem projective_chow_chart_reduction
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
-    (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (hF : Irreducible F)
-    (δ : Fin (m + 1) → ℕ)
-    (hδ : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i))
-    (hzero : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J) :
+    (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ)
+    (hF : IsProjectiveChowEquation J F δ) :
     ∃ (I : Ideal (MvPolynomial (Fin (n + 1)) K))
       (G : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K),
       I.IsPrime ∧ HasAffineDimensionDegree I m d ∧
@@ -88,9 +86,9 @@ theorem projective_chow_chart_reduction
   let ρ := chowColumnPermutation (r := m + 1) e
   let G := rename ρ.symm F
   have hG : Irreducible G :=
-    (MulEquiv.irreducible_iff (renameEquiv K ρ.symm)).mpr hF
+    (MulEquiv.irreducible_iff (renameEquiv K ρ.symm)).mpr hF.irreducible
   have hzG (U) : eval U G = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J' := by
-    rw [show G = rename ρ.symm F from rfl,eval_rename,hzero]
+    rw [show G = rename ρ.symm F from rfl,eval_rename,hF.eval_eq_zero_iff]
     have hh := projectiveChowIncidenceLocus_permuted J hJ e (U ∘ ρ.symm)
     have he : (U ∘ ρ.symm) ∘ chowColumnPermutation e = U := by
       funext q
@@ -100,7 +98,8 @@ theorem projective_chow_chart_reduction
   refine ⟨projectiveChartIdeal J',G,inferInstance,hI,hG,
     chowIncidenceIdeal_chart_eq_span_of_projective_equation J' hJ' hX G hG hzG,?_,?_⟩
   · intro i
-    apply weighted_homogeneous_rename (chowRowWeight i) (chowRowWeight i) ρ.symm _ F (δ i) (hδ i)
+    apply weighted_homogeneous_rename (chowRowWeight i) (chowRowWeight i) ρ.symm _ F (δ i)
+      (hF.row_homogeneous i)
     intro q
     rfl
   · exact totalDegree_renameEquiv ρ.symm F

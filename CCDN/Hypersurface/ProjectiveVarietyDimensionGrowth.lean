@@ -30,19 +30,14 @@ theorem projective_variety_dimension_growth (m k : ℕ) :
   refine ⟨C, hC, ?_⟩
   intro I hprime hI d hd hdimdeg B hB
   have : I.IsPrime := hprime
-  obtain ⟨b, hb, hnorm, hinj, _, _, f, hf, hfhom, hfdeg, hker⟩ :=
+  obtain ⟨b, f, hb, hN, hP, hfhom, hfdeg⟩ :=
     exists_bounded_birational_hypersurface_projection_of_le (m + 1) (m + k + 2)
       (by omega) I hI d hdimdeg
-  have hrel : aeval (fun i => integerLinearForm (b i)) f ∈ I := by
-    apply Ideal.Quotient.eq_zero_iff_mem.mp
-    change f ∈ RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i)))
-    rw [hker]
-    exact Ideal.subset_span (Set.mem_singleton f)
-  apply hcount I d hd b hb f hf hfhom hfdeg hrel _ B hB
+  apply hcount I d hd b hb f hP.irreducible hfhom hfdeg hP.aeval_mem _ B hB
   intro z s hzero hproj
   exact (linear_normalization_fiber_card_le I
     (fun i : Fin (m + 2) => integerLinearForm (b i.succ))
-    (fun i => linearForm_totalDegree_le _) hinj hnorm d hdimdeg
+    (fun i => linearForm_totalDegree_le _) hN.injective hN.integral d hdimdeg
     (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)).trans
     (Nat.le_self_pow (by omega) d)
 

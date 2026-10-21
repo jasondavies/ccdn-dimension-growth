@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Auxiliary.PlaneBadPrimes
+public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.Box
 public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.CountingHypotheses
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Determinant.ProjectivePrimeDeterminant
 /-! Coefficient-controlled bad primes for homogeneous projective evaluation
@@ -51,20 +52,16 @@ theorem projective_determinant_log_lower_height
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K]
     {s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
-    (hdeg : (affineChart 2 f).totalDegree = d)
-    (hir : Irreducible (map (Int.castRingHom K) (affineChart 2 f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE (affineChart 2 f) H)
-    (F : Fin N → MvPolynomial (Fin 3) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
-    (z : Fin s → IntPoint 3) (hprim : ∀ i, univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0)
-    (hrows : LinearIndependent ℚ
-      ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row) :
+    {H : ℝ} (hchart : IsBoundedPlaneCurve K (affineChart 2 f) d H)
+    {F : Fin N → MvPolynomial (Fin 3) ℤ} {z : Fin s → IntPoint 3}
+    (hev : IsIndependentEvaluation f M F z) :
     (s : ℝ) ^ 2 / 2 * (Real.log s - 4 * Real.log d -
       Real.log (1 + Real.log H / (d : ℝ) ^ 2) -
         heightDeterminantError projectivePlaneDeterminantConstant) ≤
         Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
+  have hdeg := hchart.totalDegree_eq
   obtain ⟨bad, hmem, hcharge⟩ := exists_plane_bad_prime_set (affineChart 2 f)
-    (by omega) hir H hH hcoeff
+    (by omega) hchart.irreducible H hchart.one_le_height hchart.coeff_le
   rw [hdeg] at hmem hcharge
   have hred (p : ℕ) (hp : p ∈ ((Ioc 0 s).filter Nat.Prime) \ bad)
       (hlo : stepanovThreshold (d : ℝ) < p) :
@@ -73,8 +70,7 @@ theorem projective_determinant_log_lower_height
     apply homogeneous_irreducible_reduction_of_not_hypersurfaceBadReduction f hf hdeg
     intro hbad
     exact (mem_sdiff.mp hp).2 ((hmem p).mpr ⟨hlo, hbad⟩)
-  have hlower := projective_determinant_log_lower_at_rank hs f hf hd F hF z hprim hz hrows
-    bad hred
+  have hlower := projective_determinant_log_lower_at_rank hs f hf hd hev bad hred
   have hh := mul_le_mul_of_nonneg_left hcharge (show 0 ≤ (s : ℝ) ^ 2 / 2 by positivity)
   dsimp only [heightDeterminantError]
   nlinarith

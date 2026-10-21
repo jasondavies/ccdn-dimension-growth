@@ -6,13 +6,14 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PrimeScaledAffineMinimum
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.UnscaledAffineMinimum
 import CCDN.Auxiliary.LiteralScaledAuxiliary
 import CCDN.Height.AffineHeightCutoff
-import CCDN.Height.ScaledHypersurfaceHeight
 import CCDN.Height.HypersurfaceHeightTransfer
+import CCDN.Height.ScaledHypersurfaceHeight
 /-! Quantitative degree selection for the literal affine bad-prime branch.
 The logarithmic branch can be selected separately at the existence level.
 Here "literal" means the paper's Definition 3.2.1 applied verbatim to the affine
@@ -51,11 +52,10 @@ theorem literal_prime_scaled_affine_auxiliary_minimum {n : ℕ}
     (habs : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {p : ℕ} (hp : p.Prime) (hp0 : ¬(p : ℤ) ∣ f.coeff 0)
     {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) (hBp : B / A ≤ p) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree A B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
-        (literalAffineBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
+        (literalAffineBadPrimeFactor f) := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := literalAffineBadPrimeFactor f
@@ -67,9 +67,9 @@ theorem literal_prime_scaled_affine_auxiliary_minimum {n : ℕ}
   have hb : 0 ≤ b := literalAffineBadPrimeFactor_nonneg f
   have hA0 : 0 ≤ A := zero_le_one.trans hA
   by_cases hmin : T ≤ (d : ℝ) ^ 2 * b
-  · obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := prime_scaled_affine_auxiliary_height f hprim hir hd
+  · obtain ⟨g, hg, hgdeg⟩ := prime_scaled_affine_auxiliary_height f hprim hir hd
       hp hp0 hA hB hpB hBp
-    refine ⟨g, hg0, hgnd, hgdeg.trans ?_, hgz⟩
+    refine ⟨g, hg, hgdeg.trans ?_⟩
     change affineLogarithmicAuxiliaryBound n d A B L ≤ affineMinimumAuxiliaryBound n d A B L b
     unfold affineLogarithmicAuxiliaryBound affineMinimumAuxiliaryBound
     rw [min_eq_left hmin]
@@ -81,10 +81,10 @@ theorem literal_prime_scaled_affine_auxiliary_minimum {n : ℕ}
       (mul_le_mul_of_nonneg_right
         (mul_le_mul_of_nonneg_right
           (mul_le_mul_of_nonneg_right (le_max_left _ _) hA0) (by positivity)) hT) (by positivity)
-  · obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := literal_prime_scaled_affine_auxiliary f hprim habs hd
+  · obtain ⟨g, hg, hgdeg⟩ := literal_prime_scaled_affine_auxiliary f hprim habs hd
       hp hp0 hB hpB
-    refine ⟨g, hg0, hgnd, (hgdeg.trans
-      (literal_scaled_hypersurface_auxiliary_badPrime_bound f hir.ne_zero hd hp hA hB hBp)).trans ?_, hgz⟩
+    refine ⟨g, hg, (hgdeg.trans (literal_scaled_hypersurface_auxiliary_badPrime_bound f
+      hir.ne_zero hd hp hA hB hBp)).trans ?_⟩
     change _ ≤ affineMinimumAuxiliaryBound n d A B L b
     unfold affineMinimumAuxiliaryBound
     rw [min_eq_right (le_of_not_ge hmin)]
@@ -157,12 +157,11 @@ theorem literal_unscaled_affine_auxiliary_minimum {n k : ℕ}
     (habs : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {S B : ℝ} (hS : 1 ≤ S) (hB : 1 ≤ B)
     (hbound : B ≤ S * ((f.totalDegree : ℝ) + 1) ^ k) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree
         (Real.exp (Real.log S + (k : ℝ) * (n + 2 : ℝ))) B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
-        (literalAffineBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
+        (literalAffineBadPrimeFactor f) := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := literalAffineBadPrimeFactor f
@@ -170,8 +169,8 @@ theorem literal_unscaled_affine_auxiliary_minimum {n k : ℕ}
   let T := Real.log L + d * Real.log B + (d : ℝ) ^ 2
   have hL : 1 ≤ L := leading_height_one_le f hir.ne_zero
   by_cases hmin : T ≤ (d : ℝ) ^ 2 * b
-  · obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := unscaled_affine_auxiliary_minimum f hprim hir hd hS hB hbound
-    refine ⟨g, hg0, hgnd, hgdeg.trans ?_, hgz⟩
+  · obtain ⟨g, hg, hgdeg⟩ := unscaled_affine_auxiliary_minimum f hprim hir hd hS hB hbound
+    refine ⟨g, hg, hgdeg.trans ?_⟩
     change affineMinimumAuxiliaryBound n d E B L _ ≤ affineMinimumAuxiliaryBound n d E B L b
     unfold affineMinimumAuxiliaryBound
     rw [min_eq_left hmin]
@@ -181,9 +180,9 @@ theorem literal_unscaled_affine_auxiliary_minimum {n k : ℕ}
     have hC := (hypersurfaceAbsoluteAuxiliaryConstant_pos n).le
     gcongr
     exact min_le_left _ _
-  · obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := literal_unscaled_affine_auxiliary f hprim habs hd hB
-    exact ⟨g, hg0, hgnd, hgdeg.trans (unscaled_auxiliary_bad_factor_bound f hir.ne_zero hd
-      (literalAffineBadPrimeFactor_nonneg f) hS hB hbound (le_of_not_ge hmin)), hgz⟩
+  · obtain ⟨g, hg, hgdeg⟩ := literal_unscaled_affine_auxiliary f hprim habs hd hB
+    exact ⟨g, hg, hgdeg.trans (unscaled_auxiliary_bad_factor_bound f hir.ne_zero hd
+      (literalAffineBadPrimeFactor_nonneg f) hS hB hbound (le_of_not_ge hmin))⟩
 
 end
 end CCDN

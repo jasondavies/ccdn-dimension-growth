@@ -135,16 +135,15 @@ theorem absolute_auxiliary_degree_of_comparison
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d t : ℕ}
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom K) f))
-    (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0) (bad : Finset ℕ)
+    {B : ℝ} {z : Fin t → IntPoint (n + 3)} (hzB : IsPrimitiveBoxZeroFamily f B z)
+    (bad : Finset ℕ)
     (hcomp : ∀ a : Fin (n + 2) → ℤ, AuxiliaryRankComparison MonomialOrder.lex
-      (homogeneousTranslation ℤ a f) d (fun i => homogeneousPointTranslation (-a) (z i)) bad)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) :
+      (homogeneousTranslation ℤ a f) d (fun i => homogeneousPointTranslation (-a) (z i)) bad) :
     ∃ M : ℕ,
       (M : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n d B (primeSetFactor bad)
         (integerCoefficientHeight f) ∧
-      ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-        (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
+      ∃ g, IsPointAuxiliary f g M z := by
+  obtain ⟨⟨hB, hz, hbox⟩, hprim⟩ := hzB
   have hf0 := ne_zero_of_irreducible_map hir
   have hnR : (n : ℝ) + 1 + 1 = n + 2 := by ring
   obtain ⟨a, H, ha, hH, hcf, hcg, hpos⟩ := exists_hypersurface_coefficient_position
@@ -157,11 +156,11 @@ theorem absolute_auxiliary_degree_of_comparison
       Nat.cast_ofNat, hnR] using hpos
   obtain ⟨M, hbound, g, hg0, hgh, hgz, hgnd⟩ := positioned_auxiliary_degree_of_comparison
     MonomialOrder.lex model (homogeneousTranslation_homogeneous a hf) hd
-    (irreducible_map_homogeneousTranslation a hir) H hH hcg w
-    (fun i => (homogeneousPointTranslation_gcd (-a) (z i)).trans (hprim i))
-    (fun i => (eval_homogeneousTranslation_neg a f (z i)).trans (hz i)) bad (hcomp a)
-    (one_le_mul_of_one_le_of_one_le (by linarith [Nat.cast_nonneg (α := ℝ) d]) hB)
-    (fun i j => homogeneousPointTranslation_box hB a ha (z i) (hbox i) j)
+    (irreducible_map_homogeneousTranslation a hir) H hH hcg (z := w)
+    ⟨⟨one_le_mul_of_one_le_of_one_le (by linarith [Nat.cast_nonneg (α := ℝ) d]) hB,
+      fun i => (eval_homogeneousTranslation_neg a f (z i)).trans (hz i),
+      fun i j => homogeneousPointTranslation_box hB a ha (z i) (hbox i) j⟩,
+      fun i => (homogeneousPointTranslation_gcd (-a) (z i)).trans (hprim i)⟩ bad (hcomp a)
     (hypersurfaceAuxiliaryPositionConstant n)
     (by unfold hypersurfaceAuxiliaryPositionConstant; positivity) hposition
   refine ⟨M, ?_, homogeneousTranslation ℤ (-a) g,
@@ -197,15 +196,15 @@ theorem hypersurface_absolute_auxiliary_degree
         (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
   have hf0 := ne_zero_of_irreducible_map hir
   obtain ⟨bad, hbad⟩ := exists_hypersurface_bad_prime_finset f hf hd hir
-  obtain ⟨M, hM, hg⟩ := absolute_auxiliary_degree_of_comparison f hf hd hir z hprim hz bad
+  obtain ⟨M, hM, g, hg⟩ := absolute_auxiliary_degree_of_comparison f hf hd hir
+    ⟨⟨hB, hz, hbox⟩, hprim⟩ bad
     (fun a => hypersurface_auxiliaryRankComparison MonomialOrder.lex _
       (homogeneousTranslation_homogeneous a hf)
       ((homogeneousTranslation ℤ a).injective.ne (by simpa using hf0)) hd _
       (fun i => (homogeneousPointTranslation_gcd (-a) (z i)).trans (hprim i))
       (fun i => (eval_homogeneousTranslation_neg a f (z i)).trans (hz i)) bad
       fun p => by rw [hbad, hypersurfaceBadReduction_homogeneousTranslation f hf hf0])
-    hB hbox
-  exact ⟨bad, M, hbad, hM, hg⟩
+  exact ⟨bad, M, hbad, hM, g, isPointAuxiliary_iff.mp hg⟩
 
 end
 end CCDN

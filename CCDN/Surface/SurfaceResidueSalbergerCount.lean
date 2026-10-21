@@ -23,8 +23,7 @@ theorem surface_residue_salberger_count (d : ℕ) (hd : 1 ≤ d)
       Irreducible (MvPolynomial.map (Int.castRingHom ℚ) f) →
       ∀ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ),
-      (∀ I ∈ S, I.IsPrime ∧ I.height = 2 ∧
-        MvPolynomial.map (Int.castRingHom ℚ) f ∈ I ∧ HasAffineCurveDegree I (δ I)) →
+      (∀ I ∈ S, IsSurfaceCurve (MvPolynomial.map (Int.castRingHom ℚ) f) I (δ I)) →
       (count (surfaceResidueResidualLocus F S (surfaceResidueWindow d K B)
         (2 * B ^ (1 / Real.sqrt (d : ℝ))) (surfaceResidueWindow_one_le d hK hB)) B : ℝ) ≤
           C * B ^ (2 / Real.sqrt (d : ℝ) + c / Real.log (1 + Real.log B)) := by

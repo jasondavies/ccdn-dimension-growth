@@ -9,6 +9,7 @@ public import CCDN.Center.ChowPivotParametrization
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Center.ChowIncidenceLocus
+public import CCDN.Center.ChowIncidenceGrading
 import CCDN.Algebra.LinearForm
 import CCDN.Algebra.ProjectiveClosureDegree
 import CCDN.Center.PrimeOpenVanishing
@@ -27,6 +28,23 @@ def projectiveChowIncidenceLocus {K : Type*} [Field K] {n : ℕ} (r : ℕ)
     Set (Fin r × Fin (n + 1) → K) :=
   {U | ∃ p ∈ projectiveIdealZeroLocus J,
     ∀ i, ∑ j, U (i,j) * p.rep j = 0}
+
+/-- Weighted homogeneity is preserved and reflected by an injective coefficient map. -/
+theorem isWeightedHomogeneous_map_iff {R S σ M : Type*} [CommSemiring R] [CommSemiring S]
+    [AddCommMonoid M] {φ : R →+* S} (hφ : Function.Injective φ) (w : σ → M)
+    (p : MvPolynomial σ R) (m : M) :
+    (map φ p).IsWeightedHomogeneous w m ↔ p.IsWeightedHomogeneous w m := by
+  simp only [IsWeightedHomogeneous, coeff_map, ne_eq, map_eq_zero_iff φ hφ]
+
+/-- `F` is a projective Chow equation of the homogeneous ideal `J` with row degrees `δ`: it is
+irreducible, weighted homogeneous of degree `δ i` in the `i`-th row of hyperplane coefficients,
+and vanishes exactly at the hyperplane tuples meeting the projective variety of `J`. -/
+structure IsProjectiveChowEquation {K : Type*} [Field K] {n r : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (F : MvPolynomial (Fin r × Fin (n + 1)) K)
+    (δ : Fin r → ℕ) : Prop where
+  irreducible : Irreducible F
+  row_homogeneous : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)
+  eval_eq_zero_iff : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus r J
 
 theorem chowIncidenceLocus_subset_projectiveClosureIncidence
     {K : Type*} [Field K] {n r : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) :

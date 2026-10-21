@@ -31,8 +31,7 @@ theorem surface_geometric_cover_of_small_auxiliary
       eval x f = 0 → eval x g = 0) :
     ∃ (T : Finset (Ideal (CoordinatePolynomial 3)))
       (δ : Ideal (CoordinatePolynomial 3) → ℕ),
-      (∀ I ∈ T, I.IsPrime ∧ I.height = 2 ∧ map (Int.castRingHom ℚ) f ∈ I ∧
-        GeometricCurveIdeal I ∧ 0 < δ I ∧ HasAffineCurveDegree I (δ I) ∧
+      (∀ I ∈ T, IsGeometricSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I) ∧
         δ I ≤ f.totalDegree ^ 2) ∧
       T.card ≤ f.totalDegree ^ 2 ∧
       (count (zeroLocus (map (Int.castRingHom ℚ) f) \
@@ -51,12 +50,11 @@ theorem surface_geometric_cover_of_small_auxiliary
   refine ⟨T, δ, ?_, ?_, ?_⟩
   · intro I hI
     obtain ⟨hIS, hgeom⟩ := mem_filter.mp hI
-    obtain ⟨hprime, hheight, hfI, _, hpos, hdegree⟩ := hS I hIS
-    exact ⟨hprime, hheight, hfI, hgeom, hpos, hdegree, hδ I hIS⟩
+    exact ⟨⟨(hS I hIS).toIsSurfaceCurve, hgeom, (hS I hIS).pos⟩, hδ I hIS⟩
   · apply (card_le_card hTsub).trans
     calc
       S.card = ∑ _I ∈ S, 1 := by simp
-      _ ≤ ∑ I ∈ S, δ I := sum_le_sum (fun I hI => (hS I hI).2.2.2.2.1)
+      _ ≤ ∑ I ∈ S, δ I := sum_le_sum (fun I hI => (hS I hI).pos)
       _ ≤ _ := hsum
   · have hcount : count (zeroLocus (map (Int.castRingHom ℚ) f) \
           (⋃ I ∈ T, idealZeroLocus I)) B ≤
@@ -84,7 +82,7 @@ theorem surface_geometric_cover_of_small_auxiliary
       exact mem_integralPoints.mpr ⟨hxB, Set.mem_iUnion.mpr ⟨I, Set.mem_iUnion.mpr
         ⟨mem_filter.mpr ⟨hIS, hδ I hIS, hnon⟩, hxI⟩⟩⟩
     have hh := nongeometric_curve_union_count_le S δ (f.totalDegree ^ 2)
-      (fun I hI => ⟨(hS I hI).1, (hS I hI).2.2.2.2⟩) hB
+      (fun I hI => ⟨(hS I hI).isPrime, (hS I hI).pos, (hS I hI).degree⟩) hB
     have hsumR : (∑ I ∈ S, (δ I : ℝ)) ≤ (f.totalDegree : ℝ) ^ 2 := by
       exact_mod_cast hsum
     calc
@@ -104,15 +102,14 @@ theorem primitive_surface_geometric_coefficient_reduction
       surfaceCoefficientLogConstant f.totalDegree * (Real.log B + 1) ∨
     ∃ (T : Finset (Ideal (CoordinatePolynomial 3)))
       (δ : Ideal (CoordinatePolynomial 3) → ℕ),
-      (∀ I ∈ T, I.IsPrime ∧ I.height = 2 ∧ map (Int.castRingHom ℚ) f ∈ I ∧
-        GeometricCurveIdeal I ∧ 0 < δ I ∧ HasAffineCurveDegree I (δ I) ∧
+      (∀ I ∈ T, IsGeometricSurfaceCurve (map (Int.castRingHom ℚ) f) I (δ I) ∧
         δ I ≤ f.totalDegree ^ 2) ∧
       T.card ≤ f.totalDegree ^ 2 ∧
       (count (zeroLocus (map (Int.castRingHom ℚ) f) \
         (⋃ I ∈ T, idealZeroLocus I)) B : ℝ) ≤ (f.totalDegree : ℝ) ^ 4 := by
   have hf0 : f ≠ 0 := by intro h; exact hf.ne_zero (by rw [h, map_zero])
   rcases affine_coefficient_height_dichotomy f hf0 hprim hB with
-    hheight | ⟨g, _, hproper, hdeg, hzero⟩
+    hheight | ⟨g, ⟨_, hproper, hzero⟩, hdeg⟩
   · left
     have hlog := Real.log_nonneg hB
     have hNlog := Real.log_natCast_nonneg ((3 + f.totalDegree).choose f.totalDegree)

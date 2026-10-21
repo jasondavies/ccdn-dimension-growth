@@ -64,9 +64,9 @@ theorem ambient_projective_determinant_log_lower {n s N M : ℕ} (hs : 0 < s)
       ((Matrix.of fun i j => eval (w i) (G j)).map ((↑) : ℤ → ℚ)).row := by
     rw [he]
     exact hrows
-  have h := hypersurface_determinant_log_lower_height hs (X (0 : Fin (n + 3)))
-    (isHomogeneous_X ℤ _) (by omega : 0 < 1) hir 1 le_rfl hcoeff G hG w
-    (fun i => primitive_zero_cons _ (hprim i)) (fun i => by simp [w]) hr
+  have h := hypersurface_determinant_log_lower_height (z := w) hs (X (0 : Fin (n + 3)))
+    (isHomogeneous_X ℤ _) (by omega : 0 < 1) hir 1 le_rfl hcoeff
+    ⟨hG, fun i => primitive_zero_cons _ (hprim i), fun i => by simp [w], hr⟩
   simpa only [he, Nat.cast_one, Real.log_one, mul_zero, div_one, one_pow,
     zero_div, add_zero, sub_zero] using h
 

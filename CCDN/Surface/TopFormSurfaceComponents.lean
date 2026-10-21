@@ -7,7 +7,7 @@ module
 
 public import CCDN.Surface.TopFormAuxiliary
 public import CCDN.Hilbert.FilteredPrimeDecomposition
-public import Mathlib.RingTheory.Ideal.Height
+public import CCDN.Curve.SurfaceCurve
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Hilbert.CompleteIntersectionDegreeBudget
 import CCDN.Surface.TopFormBadPrimes
@@ -36,9 +36,8 @@ theorem top_form_surface_curve_components
       (∀ x : IntPoint 3, InBox x B → eval x f = 0 → eval x g = 0) ∧
       ∃ S : Finset (Ideal (CoordinatePolynomial 3)),
         ∃ d : Ideal (CoordinatePolynomial 3) → ℕ,
-          (∀ P ∈ S, P.IsPrime ∧ P.height = 2 ∧
-            map (Int.castRingHom ℚ) f ∈ P ∧ map (Int.castRingHom ℚ) g ∈ P ∧
-            0 < d P ∧ HasAffineCurveDegree P (d P)) ∧
+          (∀ P ∈ S, IsSectionCurve (map (Int.castRingHom ℚ) f) (map (Int.castRingHom ℚ) g) P
+            (d P)) ∧
           zeroLocus (map (Int.castRingHom ℚ) f) ∩ zeroLocus (map (Int.castRingHom ℚ) g) =
             ⋃ P ∈ S, idealZeroLocus P ∧
           ((∑ P ∈ S, d P : ℕ) : ℝ) ≤ topFormAuxiliaryConstant 1 *

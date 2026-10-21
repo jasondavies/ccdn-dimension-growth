@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.IntegerCoefficientHeight
 public import CCDN.Height.ProjectiveZeroLocus
 import CCDN.Auxiliary.HomogeneousAuxiliary
@@ -98,10 +99,7 @@ theorem projective_coefficient_height_dichotomy {n d : ℕ}
     Real.log (integerCoefficientHeight f : ℝ) ≤
       ((n + d).choose d : ℝ) * Real.log ((n + d).choose d) +
         ((n + d).choose d : ℝ) * d * Real.log B ∨
-    ∃ g : MvPolynomial (Fin (n + 1)) ℤ, g ≠ 0 ∧ g.IsHomogeneous d ∧ ¬ f ∣ g ∧
-      ∀ x : ProjectivePoint n, x.mulHeight ≤ B →
-        x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →
-        x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) g) := by
+    ∃ g, IsProjectiveAuxiliary f g d B := by
   classical
   let S := projectivePoints (projectiveZeroLocus (map (Int.castRingHom ℚ) f)) B
   let e := (Fintype.equivFin S).symm
@@ -116,7 +114,7 @@ theorem projective_coefficient_height_dichotomy {n d : ℕ}
   · right
     push Not at hrel
     obtain ⟨g, hgh, hgz, hgnd⟩ := hrel
-    refine ⟨g, fun h => hgnd (by rw [h]; exact dvd_zero _), hgh, hgnd, ?_⟩
+    refine ⟨g, fun h => hgnd (by rw [h]; exact dvd_zero _), hgh, ?_, hgnd⟩
     intro x hxB hxf
     let xS : S := ⟨x, mem_projectivePoints.mpr ⟨hxB, hxf⟩⟩
     obtain ⟨i, hi⟩ := e.surjective xS

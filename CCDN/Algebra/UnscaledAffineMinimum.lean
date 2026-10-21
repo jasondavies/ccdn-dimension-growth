@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PrimeScaledAffineMinimum
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
 import CCDN.Height.AffineHeightCutoff
 import CCDN.Height.HypersurfaceHeightTransfer
@@ -161,15 +162,14 @@ theorem unscaled_affine_auxiliary_minimum {n k : ℕ}
     (hir : Irreducible f) (hd : 0 < f.totalDegree)
     {S B : ℝ} (hS : 1 ≤ S) (hB : 1 ≤ B)
     (hbound : B ≤ S * ((f.totalDegree : ℝ) + 1) ^ k) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree
         (Real.exp (Real.log S + (k : ℝ) * (n + 2 : ℝ))) B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
-        (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) ∧
-      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
-  obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := unscaled_affine_auxiliary f hprim hir hd hB
-  exact ⟨g, hg0, hgnd, hgdeg.trans
-    (unscaled_hypersurface_auxiliary_minimum_bound f hir.ne_zero hd hS hB hbound), hgz⟩
+        (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) := by
+  obtain ⟨g, hg, hgdeg⟩ := unscaled_affine_auxiliary f hprim hir hd hB
+  exact ⟨g, hg, hgdeg.trans
+    (unscaled_hypersurface_auxiliary_minimum_bound f hir.ne_zero hd hS hB hbound)⟩
 
 end
 end CCDN
