@@ -12,9 +12,9 @@ import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Center.GeometricCurveProjection
 import CCDN.Projection.ProjectiveProjectionCount
 import CCDN.ForMathlib.MvPolynomial
-/-! The same explicitly constructed geometrically integral plane curve
-has the source degree, source function field and the additive point-count
-comparison in Propositions 4.3.1 and 4.3.2. -/
+/-! An explicitly constructed geometrically integral plane curve has the
+source degree and source function field of a projective curve, and satisfies
+the additive point-count comparison of Propositions 4.3.1 and 4.3.2. -/
 
 @[expose] public section
 namespace CCDN
