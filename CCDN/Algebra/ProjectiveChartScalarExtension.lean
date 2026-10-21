@@ -12,6 +12,7 @@ import CCDN.Algebra.IdealScalarDescent
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Hilbert.HilbertScalarExtension
 import CCDN.Projection.ProjectionScalarExtension
+import CCDN.ForMathlib.MvPolynomial
 /-! Projective affine charts commute with extension of coefficients.
 In particular the standard chart of a geometrically integral projective
 variety is geometrically integral. -/
@@ -73,8 +74,7 @@ theorem projectiveChartIdeal_scalar_extension
   · rw [Ideal.map_le_iff_le_comap]
     intro f hf
     rw [Ideal.mem_comap, projectiveChartIdeal_mem_iff_scaledHomogenize
-      _ hXL _ (show (map (algebraMap K L) f).totalDegree ≤ f.totalDegree from
-        Finset.sup_mono (support_map_subset _ _))]
+      _ hXL _ (totalDegree_map_le _ f)]
     have hm : map (algebraMap K L) (scaledHomogenize f.totalDegree 1 f) =
         scaledHomogenize f.totalDegree 1 (map (algebraMap K L) f) := by
       rw [scaledHomogenize_map, map_one]

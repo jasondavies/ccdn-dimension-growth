@@ -10,7 +10,7 @@ public import CCDN.Auxiliary.AuxiliaryDegreeBound
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
-import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.ForMathlib.MvPolynomial
 /-! Bad-prime factors of integer polynomials, and the geometric bad-prime factor used by the
 determinant method. A bad-prime factor `badPrimeFactor P` is zero for nonabsolute equations
 and the exact finite exponential product over the primes above `stepanovThreshold` satisfying
@@ -28,9 +28,8 @@ lemma absolute_integer_polynomial_totalDegree_pos {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) :
     0 < f.totalDegree := by
-  have hh := totalDegree_pos_of_nonzero_nonunit _ hf.ne_zero hf.not_isUnit
-  unfold totalDegree at hh ⊢
-  rwa [support_map_of_injective _ Int.cast_injective] at hh
+  rw [← totalDegree_map_of_injective (Int.castRingHom (AlgebraicClosure ℚ)).injective_int f]
+  exact totalDegree_pos_of_ne_zero_of_not_isUnit hf.ne_zero hf.not_isUnit
 
 /-- The bad-prime factor of an integer polynomial `f` relative to a bad-reduction predicate
 `P`: the product `primeSetFactor` of the primes `p > stepanovThreshold (deg f)` with `P f p`
@@ -127,7 +126,7 @@ theorem hypersurfaceBadPrimeFactor_le_height {n : ℕ}
         (1 + Real.log H / (f.totalDegree : ℝ) ^ 2) := by
   have hlog : 0 ≤ Real.log H := Real.log_nonneg hH
   have hc : 0 < hypersurfaceHeightConstant (n + 1) :=
-    lt_of_lt_of_le zero_lt_one (hypersurfaceHeightConstant_one_le _)
+    zero_lt_one.trans_le (hypersurfaceHeightConstant_one_le _)
   by_cases hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
   · obtain ⟨bad, hbad, hcharge⟩ := exists_fin_hypersurface_bad_prime_charge f hf
       (absolute_integer_polynomial_totalDegree_pos f hf) H hH hcoeff

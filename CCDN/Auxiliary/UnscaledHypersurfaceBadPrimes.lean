@@ -12,6 +12,7 @@ import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import CCDN.ForMathlib.MvPolynomial
 /-! Comparison with the affine bad-prime factor. For degree at least two the
 homogeneous and affine bad-reduction predicates agree. In degree one, the
 homogeneous bad-prime set can be smaller because affine degree loss can
@@ -41,9 +42,8 @@ lemma unscaledHomogenize_absolute_irreducible_iff {n : ℕ}
       (scaledHomogenize f.totalDegree 1 f)) ↔
       Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) := by
   let φ := Int.castRingHom (AlgebraicClosure ℚ)
-  have hd : (map φ f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+  have hd : (map φ f).totalDegree = f.totalDegree :=
+    totalDegree_map_of_injective (RingHom.injective_int _) f
   have hfmap : map φ f ≠ 0 := by
     exact fun h => hf ((map_injective φ Int.cast_injective) (by simpa using h))
   rw [scaledHomogenize_map, map_one]

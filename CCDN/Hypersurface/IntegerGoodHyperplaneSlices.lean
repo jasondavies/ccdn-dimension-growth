@@ -11,6 +11,7 @@ import CCDN.Projection.PrimitiveNormalization
 import CCDN.Surface.TopFormIrreducibility
 import Mathlib.Algebra.Order.Star.Rat
 import Mathlib.Algebra.BigOperators.Field
+import CCDN.ForMathlib.MvPolynomial
 /-! Integer equations for every parallel level of a constructed good
 hyperplane. Degrees and geometric irreducibility of the leading forms are
 preserved, and deleting the solved coordinate does not enlarge the box. -/
@@ -79,9 +80,8 @@ theorem exists_integer_hyperplane_slice_models {n : ℕ}
   classical
   let p := map (Int.castRingHom ℚ) f
   let α : Fin n → ℚ := fun i => (a i : ℚ) / D
-  have hpdegree : p.totalDegree = f.totalDegree := by
-    unfold p totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+  have hpdegree : p.totalDegree = f.totalDegree :=
+    totalDegree_map_of_injective (RingHom.injective_int _) f
   have htopir : Irreducible (map (algebraMap ℚ Qbar)
       (graphHyperplaneRestriction α (homogeneousComponent p.totalDegree p))) := by
     rw [hpdegree, ← map_homogeneousComponent]

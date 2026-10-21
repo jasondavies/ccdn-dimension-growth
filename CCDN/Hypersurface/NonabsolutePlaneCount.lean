@@ -73,11 +73,6 @@ lemma plane_points_card_le_of_extension_factorization {k K ι : Type*}
     _ ≤ f.totalDegree * g.totalDegree + f.totalDegree * h.totalDegree := Nat.add_le_add hs ht
     _ = f.totalDegree ^ 2 := by rw [← Nat.mul_add, hdegree, pow_two]
 
-/-- Explicit-argument form of `MvPolynomial.totalDegree_pos_of_ne_zero_of_not_isUnit`. -/
-lemma totalDegree_pos_of_nonzero_nonunit {k : Type*} [Field k] {n : ℕ}
-    (f : MvPolynomial (Fin n) k) (hf : f ≠ 0) (hu : ¬ IsUnit f) : 0 < f.totalDegree :=
-  totalDegree_pos_of_ne_zero_of_not_isUnit hf hu
-
 /-- Splitting over any extension, Galois or not, gives the d² bound on
 base-field points. -/
 theorem nonabsolute_plane_points_card_le {k K ι : Type*}

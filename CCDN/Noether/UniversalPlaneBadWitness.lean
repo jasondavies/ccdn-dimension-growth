@@ -16,6 +16,7 @@ import CCDN.Noether.ClosedFormScaling
 import CCDN.Noether.UniversalPlaneDegree
 import CCDN.Noether.UniversalPlaneWitness
 import CCDN.ForMathlib.MatrixRank
+import CCDN.ForMathlib.MvPolynomial
 /-! A nonzero polynomial of degree at most 2*d^3 detects all plane sections
 that lose the full degree or fail geometric irreducibility. -/
 
@@ -149,9 +150,8 @@ theorem exists_integer_universalPlane_badWitness
       universalPlaneBadWitness f rows cols ≠ 0 ∧
       (universalPlaneBadWitness f rows cols).totalDegree ≤ 2 * f.totalDegree ^ 3 := by
   let φ : ℤ →+* L := Int.castRingHom L
-  have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+  have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree :=
+    totalDegree_map_of_injective (RingHom.injective_int _) f
   have hex := exists_universalPlane_minor (MvPolynomial.map φ f) hf (ht ▸ hpos)
     (.of_charZero _)
   rw [ht] at hex

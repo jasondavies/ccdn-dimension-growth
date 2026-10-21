@@ -9,6 +9,7 @@ public import CCDN.Algebra.HomogeneousMonomials
 public import CCDN.Height.PrimitiveIntegerPolynomial
 import CCDN.Algebra.HomogeneousEvaluation
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import CCDN.ForMathlib.MvPolynomial
 /-! Restriction to x₀=1 is injective on forms of a fixed homogeneous degree.
 Explicit homogenization supplies its inverse on bounded-degree polynomials. -/
 
@@ -218,11 +219,7 @@ theorem rational_affineChart_not_dvd {n d M : ℕ} {f g : MvPolynomial (Fin (n +
   apply homogeneous_dvd_of_affineChart_dvd (hf.map _) ?_ (hg.map _) ?_ hdiv
   · exact fun he => hf0 ((map_injective (Int.castRingHom ℚ) Int.cast_injective) (by simpa using he))
   · rw [affineChart_map]
-    have he : (MvPolynomial.map (Int.castRingHom ℚ) (affineChart n f)).totalDegree =
-        (affineChart n f).totalDegree := by
-      unfold totalDegree
-      rw [support_map_of_injective _ Int.cast_injective]
-    exact he.trans hdchart
+    exact (totalDegree_map_of_injective (RingHom.injective_int _) _).trans hdchart
 
 end
 end CCDN

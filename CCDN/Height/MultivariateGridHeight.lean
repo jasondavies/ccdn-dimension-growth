@@ -10,6 +10,7 @@ public import Mathlib.Analysis.Complex.Norm
 import CCDN.Auxiliary.ComplexGridInterpolation
 import Mathlib.Tactic.IntervalCases
 import Mathlib.Tactic.Positivity
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Coefficient control on the integer grid in every finite dimension.
 Iterating the sharp univariate bound gives the factor 3^(nd) over ℂ (CCDN Lemma 3.4.2);
@@ -81,11 +82,6 @@ theorem exists_complex_multivariate_grid_height_witness {n : ℕ}
   intro b hb
   exact hmax b (by simpa only [S, Fintype.mem_piFinset, Finset.mem_range, Nat.lt_succ_iff] using hb)
 
-/-- Mapping the coefficients does not increase the total degree. -/
-private lemma totalDegree_map_le {R S σ : Type*} [CommRing R] [CommRing S] {φ : R →+* S}
-    {f : MvPolynomial σ R} : (map φ f).totalDegree ≤ f.totalDegree := by
-  classical exact Finset.sup_mono (support_map_subset φ f)
-
 /-- The sharp factor 3^(nd) is at most the factor (d+1)^(n(d+1)) of the real statements. -/
 private lemma three_pow_mul_le (n d : ℕ) :
     (3 : ℝ) ^ (n * d) ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) := by
@@ -105,7 +101,7 @@ private lemma coefficient_bound_of_integer_grid_of_ringHom {R : Type*} [CommRing
     (m : Fin n →₀ ℕ) :
     ‖φ (f.coeff m)‖ ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) * H := by
   have h := complex_multivariate_coefficient_bound_of_integer_grid (map φ f)
-    (totalDegree_map_le.trans hd) hH
+    ((totalDegree_map_le _ _).trans hd) hH
     (fun a ha => by simpa [map_eval, Function.comp_def] using heval a ha) m
   rw [coeff_map] at h
   exact h.trans (mul_le_mul_of_nonneg_right (three_pow_mul_le n d) hH)
@@ -139,7 +135,7 @@ theorem exists_integer_multivariate_grid_height_witness {n : ℕ}
     ∃ a : Fin n → ℤ, (∀ i, 0 ≤ a i ∧ a i ≤ d) ∧ eval a f ≠ 0 ∧ ∀ m,
       |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) * |(eval a f : ℝ)| := by
   obtain ⟨a, ha, hc⟩ := exists_complex_multivariate_grid_height_witness
-    (map (Int.castRingHom ℂ) f) (totalDegree_map_le.trans hd)
+    (map (Int.castRingHom ℂ) f) ((totalDegree_map_le _ _).trans hd)
   have he : eval (fun i => (a i : ℂ)) (map (Int.castRingHom ℂ) f) =
       ((eval (fun i => (a i : ℤ)) f : ℤ) : ℂ) := by
     simpa [Function.comp_def] using (map_eval (Int.castRingHom ℂ) (fun i => (a i : ℤ)) f).symm

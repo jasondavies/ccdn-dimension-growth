@@ -9,6 +9,7 @@ public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Algebra.HomogeneousSlice
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.ForMathlib.MvPolynomial
 /-! Prime scaling changes the geometric bad-prime factor by at most an
 absolute constant. Outside the scaling prime, the homogeneous models are
 related by an invertible change of coordinates and a nonzero scalar. -/
@@ -48,9 +49,7 @@ lemma scaledHomogenize_map_irreducible_iff {K : Type*} [Field K] {n d : ℕ}
       Irreducible (map φ (scaledHomogenize d 1 f)) := by
   rw [scaledHomogenize_map, scaledHomogenize_map, map_one]
   apply scaledHomogenize_irreducible_iff _ hh
-  apply le_trans _ hd
-  unfold totalDegree
-  exact Finset.sup_mono (support_map_subset _ _)
+  exact (totalDegree_map_le _ _).trans hd
 
 lemma hypersurfaceBadReduction_scaledHomogenize {n d : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) (hd : f.totalDegree ≤ d)

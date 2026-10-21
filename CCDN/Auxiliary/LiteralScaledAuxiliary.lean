@@ -14,6 +14,7 @@ import CCDN.Auxiliary.LiteralAffineScaling
 import CCDN.Auxiliary.ScaledAuxiliaryCount
 import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
 import CCDN.Determinant.AffineCongruenceDeterminant
+import CCDN.ForMathlib.MvPolynomial
 /-! Auxiliary polynomials for prime-scaled and ordinary homogeneous
 models with the literal affine bad-prime factor. The finite excluded-prime
 set, geometric good reductions, primitive point family and affine pullback
@@ -80,11 +81,9 @@ theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
   have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous _ _ le_rfl
   have hFabs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) F) := by
     rw [show F = scaledHomogenize f.totalDegree (h : ℤ) f from rfl, scaledHomogenize_map]
-    have hdeg : (map (Int.castRingHom (AlgebraicClosure ℚ)) f).totalDegree = f.totalDegree := by
-      unfold totalDegree
-      rw [support_map_of_injective _ Int.cast_injective]
-    rw [← hdeg]
-    exact scaledHomogenize_irreducible _ hir (by simpa using (show (h : AlgebraicClosure ℚ) ≠ 0 by exact_mod_cast hh.ne'))
+    rw [← totalDegree_map_of_injective (Int.castRingHom (AlgebraicClosure ℚ)).injective_int f]
+    exact scaledHomogenize_irreducible _ hir
+      (by simpa using (show (h : AlgebraicClosure ℚ) ≠ 0 by exact_mod_cast hh.ne'))
   let bad := (finite_literal_affine_bad_primes f hir).toFinset
   have hbad (p) : p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧
       LiteralAffineBadReduction f p := by

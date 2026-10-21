@@ -12,6 +12,7 @@ public import CCDN.Auxiliary.ConstantLeadingBadReduction
 import CCDN.Auxiliary.GeneralBadReduction
 import CCDN.Projection.ShearNormalization
 import Mathlib.Algebra.MvPolynomial.Nilpotent
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Finite bad-prime sets for plane equations, with coefficient-height
 charge bounds and irreducible good reductions. -/
@@ -26,9 +27,8 @@ lemma mvPolynomial_irreducible_of_field_map
     (f : MvPolynomial σ F) (hf : Irreducible (MvPolynomial.map φ f)) : Irreducible f := by
   have hunit (q : MvPolynomial σ F) (hq : IsUnit (MvPolynomial.map φ q)) : IsUnit q := by
     obtain ⟨hc, hd⟩ := MvPolynomial.isUnit_iff_totalDegree_of_isReduced.mp hq
-    have he : (MvPolynomial.map φ q).totalDegree = q.totalDegree := by
-      unfold MvPolynomial.totalDegree
-      rw [MvPolynomial.support_map_of_injective _ φ.injective]
+    have he : (MvPolynomial.map φ q).totalDegree = q.totalDegree :=
+      MvPolynomial.totalDegree_map_of_injective φ.injective q
     apply MvPolynomial.isUnit_iff_totalDegree_of_isReduced.mpr
     refine ⟨isUnit_iff_ne_zero.mpr ?_, he ▸ hd⟩
     intro hz
