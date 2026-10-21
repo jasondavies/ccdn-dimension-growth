@@ -77,7 +77,6 @@ theorem dvd_det_square_column_factor {k N : ℕ} (A : Matrix (Fin k) (Fin N) ℤ
   intro s _
   exact dvd_mul_of_dvd_left (hd _) _
 
-
 lemma det_dependent_blockDiagonal {c : ℕ} (n : Fin c → ℕ)
     (B : ∀ i, Matrix (Fin (n i)) (Fin (n i)) ℤ) :
     (Matrix.blockDiagonal' B).det = ∏ i, (B i).det := by
@@ -123,16 +122,6 @@ theorem block_minor_divisors_dvd_det {c : ℕ} (n : Fin c → ℕ)
   rw [← hfac, Matrix.det_mul, det_dependent_blockDiagonal]
   exact dvd_mul_of_dvd_left (Finset.prod_dvd_prod_of_dvd _ _ (fun i _ => hdiv i)) _
 
-/-- The residue-class exponents add in the determinant valuation. -/
-theorem block_prime_powers_dvd_det {c : ℕ} (n : Fin c → ℕ)
-    (A : Matrix (Σ i, Fin (n i)) (Σ i, Fin (n i)) ℤ) (p : ℤ) (e : Fin c → ℕ)
-    (he : ∀ i, ∀ j : Fin (n i) ↪o Fin (Fintype.card (Σ i, Fin (n i))),
-      p ^ e i ∣ (A.submatrix (Sigma.mk i) ((Fintype.equivFin _).symm ∘ j)).det) :
-    p ^ (∑ i, e i) ∣ A.det := by
-  simpa only [Finset.prod_pow_eq_pow_sum] using
-    block_minor_divisors_dvd_det n A (fun i => p ^ e i) he
-
-
 /-- Enumerate rows grouped by their residue-class label. -/
 def partitionRowEquiv {c s : ℕ} (label : Fin s → Fin c) :
     (Σ i : Fin c, Fin (Fintype.card {j : Fin s // label j = i})) ≃ Fin s :=
@@ -142,6 +131,11 @@ def partitionRowEquiv {c s : ℕ} (label : Fin s → Fin c) :
 def residueRows {c s : ℕ} (label : Fin s → Fin c) (i : Fin c) :
     Fin (Fintype.card {j : Fin s // label j = i}) → Fin s :=
   fun j => ((Fintype.equivFin {j : Fin s // label j = i}).symm j).val
+
+lemma residueRows_label {c s : ℕ} (label : Fin s → Fin c) (i : Fin c)
+    (j : Fin (Fintype.card {j : Fin s // label j = i})) :
+    label (residueRows label i j) = i :=
+  ((Fintype.equivFin {j : Fin s // label j = i}).symm j).property
 
 lemma sum_residue_class_sizes {c s : ℕ} (label : Fin s → Fin c) :
     (∑ i : Fin c, Fintype.card {j : Fin s // label j = i}) = s := by

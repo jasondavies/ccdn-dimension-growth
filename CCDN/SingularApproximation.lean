@@ -67,19 +67,6 @@ lemma integer_generators_approximate_mod {σ : Type*} {p N : ℕ} (f : MvPolynom
       simpa only [pow_succ, mul_comm (p : ℤ)] using mul_dvd_mul_left (p : ℤ) hbdiv
   exact hprec N le_rfl u
 
-/-- Exact zeros are a special case of finite-precision zeros. -/
-lemma integer_generators_approximate {σ : Type*} {p N : ℕ} (f : MvPolynomial σ ℤ)
-    (r : ℕ → ℕ) (g : (k : ℕ) → Fin (r k) → MvPolynomial σ ℤ)
-    (hrep : ∀ u, ∃ (c : (k : Fin N) → Fin (r k.val) → ℤ) (h v w : MvPolynomial σ ℤ),
-      v ∈ idealOfVars σ ℤ ^ N ∧
-      u - ∑ k : Fin N, ∑ j, c k j • g k.val j = f * h + v + C (p : ℤ) * w)
-    (u : MvPolynomial σ ℤ) :
-    ∃ c : (k : Fin N) → Fin (r k.val) → ℤ, ∀ x : σ → ℤ,
-      eval x f = 0 → (∀ j, (p : ℤ) ∣ x j) →
-      (p : ℤ) ^ N ∣ eval x u - ∑ k : Fin N, ∑ j, c k j * eval x (g k.val j) := by
-  obtain ⟨c, hc⟩ := integer_generators_approximate_mod f r g hrep u
-  exact ⟨c, fun x hfx hx => hc x (by rw [hfx]; exact dvd_zero _) hx⟩
-
 /-- The same local generators work for all zeros modulo the requested
 precision. This permits normalization of projective points modulo prime powers. -/
 theorem exists_singular_plane_approximation_mod {p μ : ℕ} [Fact p.Prime]
@@ -93,20 +80,6 @@ theorem exists_singular_plane_approximation_mod {p μ : ℕ} [Fact p.Prime]
         (p : ℤ) ^ N ∣ eval x u - ∑ k : Fin N, ∑ j, c k j * eval x (g k.val j) := by
   obtain ⟨r, g, hr, hg, hrep⟩ := exists_integer_origin_generators f hf hμ
   exact ⟨r, g, hr, hg, fun N u => integer_generators_approximate_mod f r g (hrep N) u⟩
-
-/-- Mod-p singular multiplicity supplies the weighted homogeneous
-integer generators and their simultaneous evaluation approximations. -/
-theorem exists_singular_plane_approximation {p μ : ℕ} [Fact p.Prime]
-    (f : MvPolynomial (Fin 2) ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) f ∈ idealOfVars (Fin 2) (ZMod p) ^ μ)
-    (hμ : homogeneousComponent μ (map (Int.castRingHom (ZMod p)) f) ≠ 0) :
-    ∃ (r : ℕ → ℕ) (g : (k : ℕ) → Fin (r k) → MvPolynomial (Fin 2) ℤ),
-      (∀ k, r k ≤ μ) ∧ (∀ k j, (g k j).IsHomogeneous k) ∧
-      ∀ N u, ∃ c : (k : Fin N) → Fin (r k.val) → ℤ, ∀ x : Fin 2 → ℤ,
-        eval x f = 0 → (∀ j, (p : ℤ) ∣ x j) →
-        (p : ℤ) ^ N ∣ eval x u - ∑ k : Fin N, ∑ j, c k j * eval x (g k.val j) := by
-  obtain ⟨r, g, hr, hg, hrep⟩ := exists_integer_origin_generators f hf hμ
-  exact ⟨r, g, hr, hg, fun N u => integer_generators_approximate f r g (hrep N) u⟩
 
 end
 end CCDN

@@ -118,24 +118,5 @@ theorem hypersurface_bad_prime_factor_max
   convert mul_le_mul_of_nonneg_left hm hc using 1
   ring
 
-/-- The exact finite set of bad primes, with its height bound. -/
-theorem exists_hypersurface_bad_prime_factor_bound
-    {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]
-    (f : MvPolynomial (Option σ) ℤ)
-    (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))
-    (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H) :
-    ∃ P : Finset ℕ,
-      (∀ p, p ∈ P ↔ 27 * f.totalDegree ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
-      Real.exp (∑ p ∈ P, Real.log p / p) ≤
-        (Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (Fintype.card (Option σ))) *
-          (1 + Real.log H / (f.totalDegree : ℝ) ^ 2) := by
-  classical
-  let P := (finite_hypersurface_bad_primes f hf hpos).toFinset
-  have hmem (p : ℕ) : p ∈ P ↔ 27 * f.totalDegree ^ 4 < p ∧ HypersurfaceBadReduction f p := by
-    simp [P]
-  exact ⟨P, hmem, hypersurface_bad_prime_factor f hf hpos H hH hcoeff P
-    (fun p hp => ((hmem p).mp hp).2) (fun p hp => ((hmem p).mp hp).1)⟩
-
 end
 end CCDN

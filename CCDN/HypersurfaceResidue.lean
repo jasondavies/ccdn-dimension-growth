@@ -77,30 +77,5 @@ theorem hypersurface_residue_pow_dvd_det_mod {p n μ s : ℕ} [Fact p.Prime]
     (fun j => originShift a (F j))
   simpa only [eval_sub_originShift] using h
 
-/-- At every residue point of a nonzero reduced equation there is an
-explicit exponent, uniform in all evaluation polynomials and points, with the
-sharp leading term and a linear error independent of multiplicity. -/
-theorem exists_hypersurface_local_determinant_bound {p n : ℕ} [Fact p.Prime]
-    (f : MvPolynomial (Fin (n + 2)) ℤ) (a : Fin (n + 2) → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) f ≠ 0)
-    (ha : eval₂ (Int.castRingHom (ZMod p)) (fun j => (a j : ZMod p)) f = 0) :
-    ∃ μ : ℕ, 0 < μ ∧ μ ≤ f.totalDegree ∧
-      (∀ s : ℕ, (((n + 1).factorial : ℝ) / μ) ^ (1 / (n + 1 : ℝ)) *
-        (n + 1 : ℝ) / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) -
-        (n + 2 : ℝ) * s ≤ hypersurfaceMultiplicityExponent (n + 1) μ s) ∧
-      ∀ (s : ℕ) (x : Fin s → Fin (n + 2) → ℤ),
-        (∀ i j, (p : ℤ) ∣ x i j - a j) →
-        (∀ i, (p : ℤ) ^ hypersurfaceMultiplicityExponent (n + 1) μ s ∣ eval (x i) f) →
-        ∀ F : Fin s → MvPolynomial (Fin (n + 2)) ℤ,
-          (p : ℤ) ^ hypersurfaceMultiplicityExponent (n + 1) μ s ∣
-            (Matrix.of fun i j => eval (x i) (F j)).det := by
-  obtain ⟨μ, hpos, hdeg, hpow, hμ⟩ := exists_hypersurface_reduction_multiplicity f a hf ha
-  refine ⟨μ, hpos, hdeg, ?_, ?_⟩
-  · intro s
-    simpa only [Nat.cast_add, Nat.cast_one, show (n : ℝ) + 1 + 1 = n + 2 by ring] using
-      hypersurfaceMultiplicityExponent_sharp (n + 1) s (by omega) hpos
-  · intro s x hx hfx F
-    exact hypersurface_residue_pow_dvd_det_mod f a hpow hμ x hx hfx F
-
 end
 end CCDN

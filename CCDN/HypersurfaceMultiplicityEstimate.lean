@@ -115,23 +115,6 @@ lemma hypersurfaceMultiplicityExponent_cutoff_pos (m s K : ℕ) (hm : 0 < m)
   obtain ⟨n, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hm)
   exact hypersurfaceMultiplicityExponent_cutoff n s K hμ
 
-/-- Optimize the cutoff for the local hypersurface exponent. -/
-theorem hypersurfaceMultiplicityExponent_root_bound (m s : ℕ) (hm : 0 < m)
-    {μ : ℕ} (hμ : 0 < μ) (R : ℝ) (hR0 : 0 ≤ R)
-    (hR : (μ : ℝ) * R ^ m = (m.factorial : ℝ) * s) :
-    (s : ℝ) * R * m / (m + 1) ≤
-      hypersurfaceMultiplicityExponent m μ s + (m + 1 : ℝ) * s :=
-  local_exponent_root_bound m s _ hm R hR0 hR
-    (fun K => hypersurfaceMultiplicityExponent_cutoff_pos m s K hm hμ)
-
-/-- Root form of the sharp local estimate. -/
-theorem hypersurfaceMultiplicityExponent_lower_bound (m s : ℕ) (hm : 0 < m)
-    {μ : ℕ} (hμ : 0 < μ) :
-    (s : ℝ) * (((m.factorial : ℝ) * s / μ) ^ (1 / (m : ℝ))) * m / (m + 1) ≤
-      hypersurfaceMultiplicityExponent m μ s + (m + 1 : ℝ) * s :=
-  local_exponent_lower_bound m s _ hm hμ
-    (fun K => hypersurfaceMultiplicityExponent_cutoff_pos m s K hm hμ)
-
 /-- The sharp local estimate in the paper's separated-power notation. -/
 theorem hypersurfaceMultiplicityExponent_sharp (m s : ℕ) (hm : 0 < m)
     {μ : ℕ} (hμ : 0 < μ) :

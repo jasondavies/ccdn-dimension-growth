@@ -99,47 +99,5 @@ theorem exists_sharp_integer_minor_specialization {r n : ℕ}
     exact ⟨(hv (i, j)).1, (hv (i, j)).2.trans
       (by exact_mod_cast le_max_right (1 : ℕ) F.totalDegree)⟩
 
-/-- The non-strict row bound covers all positive R, including constant
-conditions at R=1. It implies the literal maximal-minor bound R^r r!. -/
-theorem exists_integer_minor_specialization_degree_lt {r n R : ℕ}
-    (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
-    (hhom : F.IsHomogeneous F.totalDegree) (hR : 1 ≤ R) (hdeg : F.totalDegree < R)
-    (A : Matrix (Fin r) (Fin n) ℚ) (hli : LinearIndependent ℚ A.row)
-    (hF : eval (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) F ≠ 0) :
-    ∃ M : Matrix (Fin r) (Fin n) ℤ,
-      (∀ i j, 0 ≤ M i j ∧ M i j ≤ R) ∧
-      LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row ∧
-      eval (fun c : Fin r ↪ Fin n =>
-        ((M.map (Int.castRingHom ℚ)).submatrix id c).det) F ≠ 0 ∧
-      ∀ c : Fin r ↪ Fin n, |(M.submatrix id c).det| ≤ (R : ℤ) ^ r * r.factorial := by
-  obtain ⟨M, hb, hi, hv, hm⟩ := exists_sharp_integer_minor_specialization F hhom A hli hF
-  have hmax : ((max 1 F.totalDegree : ℕ) : ℤ) ≤ R := by
-    exact_mod_cast max_le hR hdeg.le
-  refine ⟨M, fun i j => ⟨(hb i j).1, (hb i j).2.trans hmax⟩, hi, hv, fun c => ?_⟩
-  apply (hm c).trans
-  rw [mul_comm ((R : ℤ) ^ r)]
-  gcongr
-
-/-- For R≥2 the coordinates can be taken strictly below R, while retaining
-the same maximal-minor height bound and independence. -/
-theorem exists_integer_minor_specialization_strict_degree_lt {r n R : ℕ}
-    (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
-    (hhom : F.IsHomogeneous F.totalDegree) (hR : 2 ≤ R) (hdeg : F.totalDegree < R)
-    (A : Matrix (Fin r) (Fin n) ℚ) (hli : LinearIndependent ℚ A.row)
-    (hF : eval (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) F ≠ 0) :
-    ∃ M : Matrix (Fin r) (Fin n) ℤ,
-      (∀ i j, 0 ≤ M i j ∧ M i j < R) ∧
-      LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row ∧
-      eval (fun c : Fin r ↪ Fin n =>
-        ((M.map (Int.castRingHom ℚ)).submatrix id c).det) F ≠ 0 ∧
-      ∀ c : Fin r ↪ Fin n, |(M.submatrix id c).det| ≤ (R : ℤ) ^ r * r.factorial := by
-  obtain ⟨M, hb, hi, hv, hm⟩ := exists_sharp_integer_minor_specialization F hhom A hli hF
-  have hmax : ((max 1 F.totalDegree : ℕ) : ℤ) < R := by
-    exact_mod_cast max_lt (show 1 < R by omega) hdeg
-  refine ⟨M, fun i j => ⟨(hb i j).1, (hb i j).2.trans_lt hmax⟩, hi, hv, fun c => ?_⟩
-  apply (hm c).trans
-  rw [mul_comm ((R : ℤ) ^ r)]
-  gcongr
-
 end
 end CCDN

@@ -79,23 +79,5 @@ theorem genericPlaneMap_irreducible
   rw [genericPlaneMap_bivariate]
   exact genericPlanePolynomial_irreducible_fraction_slopes f hf hd hm hx
 
-/-- The generic plane stays irreducible over every extension of its slope field
-when the original hypersurface has a smooth origin in the distinguished direction. -/
-theorem genericPlaneMap_geometrically_irreducible
-    {K F L σ : Type*} [Field K] [Field F] [Field L]
-    [Algebra K F] [Algebra (MvPolynomial σ K) F] [Algebra F L]
-    [IsScalarTower K (MvPolynomial σ K) F] [IsFractionRing (MvPolynomial σ K) F]
-    (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
-    (hd : 0 < f.totalDegree) (hm : (optionEquivLeft K σ f).Monic)
-    (hx : 0 < (optionEquivLeft K σ f).natDegree)
-    (hz : eval (0 : Option σ → K) f = 0)
-    (hs : eval (0 : Option σ → K) (pderiv none f) ≠ 0) :
-    Irreducible (MvPolynomial.map (algebraMap F L) (genericPlaneMap K F σ f)) := by
-  apply irreducible_map_of_smooth_plane_point _
-    (genericPlaneMap_irreducible f hf hd hm hx) (0 : Fin 2 → F) 0
-  · rw [genericPlaneMap_eval_zero, hz, map_zero]
-  · rw [genericPlaneMap_pderiv, genericPlaneMap_eval_zero]
-    exact (map_ne_zero (algebraMap K F)).mpr hs
-
 end
 end CCDN

@@ -53,20 +53,6 @@ theorem orderEmbedding_value_ge {s N : ℕ} (t : Fin s ↪o Fin N) (i : Fin s) :
       omega
   exact hpoint i i.isLt
 
-theorem sum_orderEmbedding_values_ge {s N : ℕ} (t : Fin s ↪o Fin N) :
-    s * (s - 1) / 2 ≤ ∑ i, (t i).val := by
-  calc
-    _ = ∑ i : Fin s, i.val := by
-      rw [Fin.sum_univ_eq_sum_range (fun j => j), Finset.sum_range_id]
-    _ ≤ _ := Finset.sum_le_sum fun i _ => orderEmbedding_value_ge t i
-
-theorem triangular_pow_dvd_det_of_factorization {R : Type*} [CommRing R] {s N : ℕ}
-    (U : Matrix (Fin s) (Fin N) R) (V : Matrix (Fin N) (Fin s) R)
-    (p : R) (hV : ∀ i j, p ^ i.val ∣ V i j) :
-    p ^ (s * (s - 1) / 2) ∣ (U * V).det :=
-  pow_dvd_det_of_weighted_factorization U V p (fun i => i.val) _ hV
-    sum_orderEmbedding_values_ge
-
 /-- The sequence of weights in which each nonnegative integer occurs `μ` times. -/
 def multiplicityExponent (s μ : ℕ) : ℕ := ∑ i : Fin s, i.val / μ
 
@@ -98,60 +84,5 @@ theorem multiplicityExponent_lower_bound (s μ : ℕ) (hμ : 0 < μ) :
     | succ s => simp; ring
   unfold multiplicityExponent
   nlinarith
-
-/-- Polynomial evaluations at multiples of `p` have determinant divisible by the
-triangular power of `p`. This holds over `ℤ` for every modulus, including nonprimes. -/
-theorem triangular_pow_dvd_polynomial_eval_det {s : ℕ}
-    (f : Fin s → Polynomial ℤ) (t : Fin s → ℤ) (p : ℤ) :
-    p ^ (s * (s - 1) / 2) ∣ (Matrix.of fun i j => (f j).eval (p * t i)).det := by
-  classical
-  let N := (Finset.univ.sup fun j => (f j).natDegree) + 1
-  let U : Matrix (Fin s) (Fin N) ℤ := fun i k => t i ^ k.val
-  let V : Matrix (Fin N) (Fin s) ℤ := fun k j => p ^ k.val * (f j).coeff k.val
-  have hfac : (Matrix.of fun i j => (f j).eval (p * t i)) = U * V := by
-    ext i j
-    change (f j).eval (p * t i) = ∑ k : Fin N, t i ^ k.val * (p ^ k.val * (f j).coeff k.val)
-    have hdeg : (f j).natDegree < N := by
-      exact Nat.lt_succ_of_le (Finset.le_sup (f := fun j => (f j).natDegree) (Finset.mem_univ j))
-    rw [Polynomial.eval_eq_sum_range' hdeg]
-    rw [Fin.sum_univ_eq_sum_range (fun k => t i ^ k * (p ^ k * (f j).coeff k)) N]
-    apply Finset.sum_congr rfl
-    intro k _
-    rw [mul_pow]
-    ring
-  rw [hfac]
-  exact triangular_pow_dvd_det_of_factorization U V p (fun k j => dvd_mul_right _ _)
-
-/-- The same quadratic divisibility exponent for evaluations in an arbitrary residue class. -/
-theorem triangular_pow_dvd_polynomial_eval_det_of_congruent {s : ℕ}
-    (f : Fin s → Polynomial ℤ) (x : Fin s → ℤ) (p a : ℤ)
-    (hx : ∀ i, p ∣ x i - a) :
-    p ^ (s * (s - 1) / 2) ∣ (Matrix.of fun i j => (f j).eval (x i)).det := by
-  classical
-  choose t ht using hx
-  let g : Fin s → Polynomial ℤ := fun j => (f j).comp (Polynomial.X + Polynomial.C a)
-  have h := triangular_pow_dvd_polynomial_eval_det g t p
-  have heq : (Matrix.of fun i j => (g j).eval (p * t i)) =
-      (Matrix.of fun i j => (f j).eval (x i)) := by
-    ext i j
-    change ((f j).comp (Polynomial.X + Polynomial.C a)).eval (p * t i) = (f j).eval (x i)
-    simp only [Polynomial.eval_comp, Polynomial.eval_add, Polynomial.eval_X, Polynomial.eval_C]
-    congr 1
-    linarith [ht i]
-  rwa [heq] at h
-
-/-- All maximal minors share the residue-class divisibility, so their gcd has it too.
-This is the same gcd that appears in the Bombieri–Vaaler bound. -/
-theorem triangular_pow_dvd_polynomial_eval_minorGcd {s N : ℕ}
-    (f : Fin N → Polynomial ℤ) (x : Fin s → ℤ) (p a : ℤ)
-    (hx : ∀ i, p ∣ x i - a) :
-    p ^ (s * (s - 1) / 2) ∣ Int.Matrix.minorGcd (Matrix.of fun i j => (f j).eval (x i)) := by
-  classical
-  unfold Int.Matrix.minorGcd
-  apply Finset.dvd_gcd
-  intro S _
-  rw [Matrix.plucker_row_eq_det_submatrix]
-  let t := (S : Finset (Fin N)).orderEmbOfFin (Set.powersetCard.card_eq S)
-  exact triangular_pow_dvd_polynomial_eval_det_of_congruent (fun j => f (t j)) x p a hx
 
 end CCDN

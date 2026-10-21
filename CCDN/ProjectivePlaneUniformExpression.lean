@@ -49,13 +49,6 @@ def projectivePlaneCoefficientUniformConstant : ℝ :=
   hypersurfaceAbsoluteAuxiliaryConstant 0 *
     (2 * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant 3 + 2)
 
-lemma projectivePlaneCoefficientUniformConstant_pos :
-    0 < projectivePlaneCoefficientUniformConstant := by
-  unfold projectivePlaneCoefficientUniformConstant
-  have hC := hypersurfaceAbsoluteAuxiliaryConstant_pos 0
-  have hH := hypersurfaceHeightConstant_one_le 3
-  positivity
-
 /-- The literal second bound in CCDN Corollary 3.1.2, with an absolute
 constant and the bad-prime factor and maximum coefficient height. -/
 theorem projective_plane_coefficient_expression_le {d : ℕ}

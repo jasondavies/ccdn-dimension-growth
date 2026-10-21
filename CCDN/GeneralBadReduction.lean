@@ -96,37 +96,5 @@ theorem plane_geometric_bad_prime_charge
   rw [Real.log_mul (by norm_num : (7 : ℝ) ≠ 0) (by linarith : 1 + Real.log H / (d : ℝ) ^ 2 ≠ 0)] at h
   linarith
 
-/-- The bad-prime factor has the required linear dependence on
-max(1,log(H)/d²), with an absolute explicit multiplier. -/
-theorem plane_geometric_bad_prime_factor
-    {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
-    (d : ℕ) (hd : 1 ≤ d) (f : ℤ[X][X]) (hdeg : bivariateTotalDegree f = d)
-    (hir : Irreducible (bivariateMap (Int.castRingHom F) f))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : BivariateCoefficientBound f H)
-    (P : Finset ℕ) (hbad : ∀ p ∈ P, BivariateBadReduction f d p)
-    (hlo : ∀ p ∈ P, 27 * (d : ℝ) ^ 4 < (p : ℝ)) :
-    Real.exp (∑ p ∈ P, Real.log p / p) ≤
-      14 * Real.exp (2 * mertensError + 1) * max 1 (Real.log H / (d : ℝ) ^ 2) := by
-  let x := Real.log H / (d : ℝ) ^ 2
-  have hx : 0 ≤ x := div_nonneg (Real.log_nonneg hH) (sq_nonneg _)
-  have h := Real.exp_le_exp.mpr (plane_geometric_bad_prime_charge d hd f hdeg hir H hH hcoeff P hbad hlo)
-  change Real.exp _ ≤ Real.exp (Real.log (1 + x) + Real.log 7 + 2 * mertensError + 1) at h
-  have he : Real.exp (Real.log (1 + x) + Real.log 7 + 2 * mertensError + 1) =
-      7 * Real.exp (2 * mertensError + 1) * (1 + x) := by
-    rw [show Real.log (1 + x) + Real.log 7 + 2 * mertensError + 1 =
-      Real.log (1 + x) + (Real.log 7 + (2 * mertensError + 1)) by ring,
-      Real.exp_add, Real.exp_add, Real.exp_log (by linarith : 0 < 1 + x),
-      Real.exp_log (by norm_num : (0 : ℝ) < 7)]
-    ring
-  rw [he] at h
-  have hh : 1 + x ≤ 2 * max 1 x := by
-    have h₁ := le_max_left (1 : ℝ) x
-    have h₂ := le_max_right (1 : ℝ) x
-    linarith
-  have hm := mul_le_mul_of_nonneg_left hh
-    (show 0 ≤ 7 * Real.exp (2 * mertensError + 1) by positivity)
-  change Real.exp _ ≤ 14 * Real.exp (2 * mertensError + 1) * max 1 x
-  nlinarith
-
 end
 end CCDN

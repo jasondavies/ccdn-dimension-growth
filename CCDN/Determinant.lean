@@ -47,18 +47,6 @@ theorem abs_gram_det_le {s N : ℕ} (A : Matrix (Fin s) (Fin N) ℝ) {H : ℝ}
   have h := Matrix.det_le (abv := AbsoluteValue.abs) hentry
   simpa [nsmul_eq_mul] using h
 
-/-- Two equal rows modulo an integer modulus force divisibility of the determinant.
-Primality is unnecessary for this elementary first-order divisibility statement. -/
-theorem modulus_dvd_det_of_congruent_rows {s : ℕ} (A : Matrix (Fin s) (Fin s) ℤ)
-    (p : ℕ) {i j : Fin s} (hij : i ≠ j) (hrows : ∀ k, (p : ℤ) ∣ A j k - A i k) :
-    (p : ℤ) ∣ A.det := by
-  apply (ZMod.intCast_zmod_eq_zero_iff_dvd A.det p).mp
-  change (Int.castRingHom (ZMod p)) A.det = 0
-  rw [(Int.castRingHom (ZMod p)).map_det]
-  apply Matrix.det_zero_of_row_eq hij
-  funext k
-  exact (ZMod.intCast_eq_intCast_iff_dvd_sub (A i k) (A j k) p).mpr (hrows k)
-
 theorem evaluation_gram_det_le {n N s M : ℕ}
     (mon : Fin N → (Fin n →₀ ℕ)) (points : Fin s → (Fin n → ℤ))
     {B : ℝ} (hB : 1 ≤ B) (hpoints : ∀ i k, |(points i k : ℝ)| ≤ B)

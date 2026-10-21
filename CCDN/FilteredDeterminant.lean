@@ -16,13 +16,6 @@ this is a lower bound for the sum of the first s weights, with multiplicity. -/
 def filtrationExponent (r : ℕ → ℕ) (s : ℕ) : ℕ :=
   Finset.univ.sum fun k : Fin s => s - (Finset.univ.sum fun j : Fin (k.val + 1) => r j.val)
 
-lemma filtrationExponent_antitone {r q : ℕ → ℕ} (h : ∀ k, r k ≤ q k) (s : ℕ) :
-    filtrationExponent q s ≤ filtrationExponent r s := by
-  unfold filtrationExponent
-  apply Finset.sum_le_sum
-  intro k _
-  exact Nat.sub_le_sub_left (Finset.sum_le_sum fun j _ => h j.val) s
-
 lemma sum_weight_tail_counts_le {s : ℕ} (w : Fin s → ℕ) :
     (∑ k : Fin s, (Finset.univ.filter fun i => k.val < w i).card) ≤ ∑ i, w i := by
   classical
@@ -140,16 +133,6 @@ theorem origin_filtration_pow_dvd_det_mod {p n s e : ℕ} [Fact p.Prime]
       rw [Matrix.of_apply, hprod]
       exact hc j (x i) (hfx i) (hx i))
   simpa only [sub_add_cancel] using dvd_add hd hdet
-
-/-- Exact zeros give the same divisor. -/
-theorem origin_filtration_pow_dvd_det {p n s : ℕ} [Fact p.Prime]
-    (f : MvPolynomial (Fin (n + 1)) ℤ)
-    (x : Fin s → Fin (n + 1) → ℤ) (hx : ∀ i j, (p : ℤ) ∣ x i j)
-    (hfx : ∀ i, eval (x i) f = 0) (F : Fin s → MvPolynomial (Fin (n + 1)) ℤ) :
-    (p : ℤ) ^ filtrationExponent
-      (fun k => Module.finrank (ZMod p) (originLayer (map (Int.castRingHom (ZMod p)) f) k)) s
-        ∣ (Matrix.of fun i j => eval (x i) (F j)).det :=
-  origin_filtration_pow_dvd_det_mod f x hx le_rfl (fun i => by rw [hfx]; exact dvd_zero _) F
 
 end
 end CCDN

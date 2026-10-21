@@ -112,16 +112,6 @@ theorem noetherian_local_det_of_weight_threshold [IsNoetherianRing R] {s e : ℕ
     subst e
     simp
 
-/-- General local-ring counterpart of the hypersurface filtration
-divisor. The layer profile is that of the quotient `R/(p)`. -/
-theorem noetherian_local_filtration_det [IsNoetherianRing R] {s : ℕ}
-    (τ : S →+* ZMod p) (hτ : RingHom.ker τ = Ideal.span {(p : S)})
-    (ψ : Fin s → R →+* S) (x : Fin s → R) :
-    (p : S) ^ filtrationExponent (localPrimeLayerDimension R p) s ∣
-      (Matrix.of fun i j => ψ i (x j)).det :=
-  noetherian_local_det_of_weight_threshold τ hτ ψ x
-    (fun t => filtrationExponent_le_weights (localPrimeLayerDimension R p) t)
-
 /-- The exact sum of the first `s` local-layer weights is a determinant
 divisor, in every dimension and without asymptotic approximation. -/
 theorem noetherian_local_initial_weight_det [IsNoetherianRing R] {s : ℕ}

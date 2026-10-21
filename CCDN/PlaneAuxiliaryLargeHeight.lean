@@ -127,49 +127,5 @@ lemma plane_large_degree_bound_of_log_bound {d M : ℕ} {T K : ℝ}
   push_cast
   ring
 
-/-- Large coefficient height forces an auxiliary polynomial of degree
-O(d³), under the explicit sharp finite-field and leading-position inputs. -/
-theorem plane_chart_exists_auxiliary_large_height
-    {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}
-    (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
-    (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d) (hMlarge : 32 * d ≤ M)
-    (hdchart : (planeAffineChart f).totalDegree = d)
-    (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) (planeAffineChart f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |((planeAffineChart f).coeff m : ℝ)| ≤ H)
-    (z : Fin t → Fin 2 → ℤ) (hz : ∀ i, MvPolynomial.eval (z i) (planeAffineChart f) = 0)
-    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
-    (T : ℝ) (hT : 0 ≤ T)
-    (hheight : 4 * d * Real.log B ≤ Real.log H)
-    (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * (d : ℝ) ^ 2)
-    (hthreshold : 8 * Real.exp (heightDeterminantError C + 6 + T) * (d : ℝ) ^ 3 < M)
-    (hcount : ∀ p : ℕ, p.Prime → 27 * (d : ℝ) ^ 4 < (p : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) (planeAffineChart f)) →
-      (Nat.card (PlaneResidue (planeAffineChart f) p) : ℝ) ≤
-        p + C * (d : ℝ) ^ 2 * Real.sqrt p) :
-    ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-      (∀ i, MvPolynomial.eval (Fin.cons 1 (z i)) g = 0) ∧ ¬ f ∣ g := by
-  classical
-  have hdM : d ≤ M := by omega
-  by_contra hnone
-  have hrel : ∀ g : MvPolynomial (Fin 3) ℤ, g.IsHomogeneous M →
-      (∀ i, MvPolynomial.eval (Fin.cons 1 (z i)) g = 0) → f ∣ g := by
-    intro g hg hv
-    by_cases hg0 : g = 0
-    · simp [hg0]
-    · by_contra hnd
-      exact hnone ⟨g, hg0, hg, hv, hnd⟩
-  have hdchart' : 0 < (planeAffineChart f).totalDegree := by simpa only [hdchart] using hd
-  have hcount' := hcount
-  rw [← hdchart] at hcount'
-  obtain ⟨s, _, _, hr, hc⟩ := plane_chart_no_auxiliary_height_comparison
-    order f hf hf0 hd hdM hdchart' hir H hH hcoeff z hz hB hbox hC hrel hcount'
-  rw [hdchart] at hc
-  have hL : 1 ≤ |((order.leadingCoeff f : ℤ) : ℝ)| := by
-    exact_mod_cast Int.one_le_abs (order.leadingCoeff_ne_zero_iff.mpr hf0)
-  have hlog := plane_auxiliary_large_height_log_bound hd hMlarge hr hB hL hH hT
-    hheight hposition hc
-  have hbound := plane_large_degree_bound_of_log_bound hd (lt_of_lt_of_le hd hdM) hlog
-  exact (not_lt_of_ge hbound) hthreshold
-
 end
 end CCDN

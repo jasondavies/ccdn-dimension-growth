@@ -45,35 +45,5 @@ theorem eulerClosedForm_minor_eq_zero_of_kernel
   ext i
   simpa only [map_zero, Finsupp.zero_apply] using hz i
 
-theorem universalEulerMinor_eq_zero_of_kernel
-    {F : Type*} [Field F] (k : ℕ) (f : Polynomial (Polynomial F))
-    (hf : bivariateTotalDegree f ≤ k + 2)
-    (u : EulerPairSpace F k) (hu : u ≠ 0)
-    (hker : eulerClosedFormOperator k f u = 0)
-    (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-    (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
-    eval₂ (Int.castRingHom F) (eulerCoefficientData (k + 2) f)
-      (universalEulerMinor k rows cols) = 0 := by
-  change (eval₂Hom (Int.castRingHom F) (eulerCoefficientData (k + 2) f))
-    (((universalEulerMatrix k).submatrix rows cols).det) = 0
-  rw [RingHom.map_det]
-  change (((universalEulerMatrix k).map
-    (eval₂Hom (Int.castRingHom F) (eulerCoefficientData (k + 2) f))).submatrix rows cols).det = 0
-  rw [universalEulerMatrix_specialize k f hf]
-  exact eulerClosedForm_minor_eq_zero_of_kernel k f u hu hker rows cols
-
-theorem universalEulerMinor_eq_zero_of_factor_pair
-    {F : Type*} [Field F] (k a b : ℕ) (ha : 0 < a) (hb : 0 < b)
-    (hab : a + b = k + 2) (g h : Polynomial (Polynomial F))
-    (hg : bivariateTotalDegree g ≤ a) (hh : bivariateTotalDegree h ≤ b)
-    (hne : eulerFactorPair a b g h ≠ 0)
-    (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-    (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
-    eval₂ (Int.castRingHom F) (eulerCoefficientData (k + 2) (g * h))
-      (universalEulerMinor k rows cols) = 0 := by
-  obtain ⟨u, hu, hker⟩ := exists_eulerFactorKernel k a b ha hb hab g h hg hh hne
-  apply universalEulerMinor_eq_zero_of_kernel k (g * h) _ u hu hker rows cols
-  exact (bivariateTotalDegree_mul_le g h).trans (by omega)
-
 end
 end CCDN

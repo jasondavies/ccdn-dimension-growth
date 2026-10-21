@@ -91,16 +91,5 @@ theorem hypersurface_pow_dvd_det_mod {p n μ s : ℕ} [Fact p.Prime]
   origin_filtration_pow_dvd_det_mod f x hx
     (hypersurfaceMultiplicityExponent_le_origin _ hf hμ) hfx F
 
-/-- The same divisor for exact zeros of the equation. -/
-theorem hypersurface_pow_dvd_det {p n μ s : ℕ} [Fact p.Prime]
-    (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) f ∈ idealOfVars (Fin (n + 2)) (ZMod p) ^ μ)
-    (hμ : homogeneousComponent μ (map (Int.castRingHom (ZMod p)) f) ≠ 0)
-    (x : Fin s → Fin (n + 2) → ℤ) (hx : ∀ i j, (p : ℤ) ∣ x i j)
-    (hfx : ∀ i, eval (x i) f = 0) (F : Fin s → MvPolynomial (Fin (n + 2)) ℤ) :
-    (p : ℤ) ^ hypersurfaceMultiplicityExponent (n + 1) μ s ∣
-      (Matrix.of fun i j => eval (x i) (F j)).det :=
-  hypersurface_pow_dvd_det_mod f hf hμ x hx (fun i => by rw [hfx]; exact dvd_zero _) F
-
 end
 end CCDN

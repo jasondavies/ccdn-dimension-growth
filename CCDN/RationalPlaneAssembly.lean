@@ -53,18 +53,5 @@ theorem count_rational_plane_of_sharp_residue_bound
   have h := count_plane_of_sharp_residue_bound g hg hgi hgd hB hC (hres g hgd)
   rwa [hzero, hdeg] at h
 
-/-- The finite-field input implies one constant uniform in all rational
-absolutely irreducible plane equations, degrees, coefficients and box radii. -/
-theorem absolute_plane_bound_of_sharp_residue_bound
-    (F : Type*) [Field F] [CharZero F] [IsAlgClosed F]
-    {C : ℝ} (hC : 0 ≤ C) (hres : SharpPlaneResidueBound C) :
-    ∃ K : ℝ, 0 < K ∧ ∀ f : MvPolynomial (Fin 2) ℚ,
-      Irreducible (MvPolynomial.map (algebraMap ℚ F) f) → 0 < f.totalDegree →
-      ∀ B : ℝ, 1 ≤ B → (count (zeroLocus f) B : ℝ) ≤ K * curveBound f.totalDegree B := by
-  refine ⟨2 * Real.exp 1 * affineNonzeroConstantBound C, ?_, ?_⟩
-  · exact mul_pos (by positivity) (affineNonzeroConstantBound_pos C)
-  · intro f hir hd B hB
-    exact count_rational_plane_of_sharp_residue_bound f hir hd hB hC hres
-
 end
 end CCDN

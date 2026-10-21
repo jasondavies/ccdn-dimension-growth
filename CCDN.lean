@@ -14,7 +14,6 @@ public import CCDN.PrimeSums
 public import CCDN.Bezout
 public import CCDN.PlaneSingularities
 public import CCDN.RowSelection
-public import CCDN.SmoothDeterminant
 public import CCDN.HomogeneousAuxiliary
 public import CCDN.PlaneMultiplicitySmooth
 public import CCDN.PlaneChartDeterminant
@@ -23,9 +22,7 @@ public import CCDN.BivariateFactorForms
 public import CCDN.ClosedFormHeight
 public import CCDN.ClosedFormKernelWitness
 public import CCDN.ClosedFormMinorCharge
-public import CCDN.MonicBadReduction
 public import CCDN.ShearNormalization
-public import CCDN.PlaneChartHeight
 public import CCDN.PlaneAuxiliarySelection
 public import CCDN.PlaneAuxiliaryCount
 public import CCDN.LeadingPositionHeight
@@ -36,7 +33,6 @@ public import CCDN.GeometricResidueReduction
 public import CCDN.PlaneStepanovBound
 public import CCDN.SharpPlaneCount
 public import CCDN.BoundedProjectionCoordinates
-public import CCDN.PlaneIdealCount
 public import CCDN.ProjectionExceptionalCount
 public import CCDN.DegreePreservingProjectionCount
 public import CCDN.BoundedDegreePreservingProjection

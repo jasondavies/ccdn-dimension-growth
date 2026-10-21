@@ -32,11 +32,6 @@ def integerPlaneHeight (m d : ℕ) (H A : ℝ) : ℝ :=
   ((d : ℝ) + 1) ^ (2 * (d + 1)) *
     (((d : ℝ) + 1) ^ m * H * (A * (1 + 2 * d)) ^ d)
 
-lemma integerPlaneHeight_nonneg (m d : ℕ) {H A : ℝ} (hH : 0 ≤ H) (hA : 0 ≤ A) :
-    0 ≤ integerPlaneHeight m d H A := by
-  unfold integerPlaneHeight
-  positivity
-
 /-- Each coefficient of a bounded integer plane section is bounded explicitly
 in terms of the original coefficient height, degree and ambient dimension. -/
 theorem integer_plane_section_coefficient_bound {σ : Type*} [Fintype σ]

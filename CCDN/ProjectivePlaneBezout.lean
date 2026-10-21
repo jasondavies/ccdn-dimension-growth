@@ -84,17 +84,5 @@ theorem projective_plane_common_zeros_card_le {d m : ℕ} {ι : Type*}
     exact hzf i
   · exact hzg
 
-theorem projectiveCount_plane_common_zeros_le {d m : ℕ}
-    (f g : CoordinatePolynomial 3) (hf : f.IsHomogeneous d)
-    (hir : Irreducible f) (hg : g.IsHomogeneous m) (hfg : ¬ f ∣ g) (B : ℝ) :
-    projectiveCount (projectiveZeroLocus f ∩ projectiveZeroLocus g) B ≤ d * m := by
-  classical
-  let S := projectivePoints (projectiveZeroLocus f ∩ projectiveZeroLocus g) B
-  have h := projective_plane_common_zeros_card_le f g hf hir hg hfg
-    (fun x : S => x.val) Subtype.val_injective
-    (fun x => (mem_projectivePoints.mp x.property).2.1)
-    (fun x => (mem_projectivePoints.mp x.property).2.2)
-  simpa only [Fintype.card_coe, S, projectiveCount] using h
-
 end
 end CCDN

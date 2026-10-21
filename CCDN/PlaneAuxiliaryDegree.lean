@@ -1,9 +1,9 @@
 module
 
-public import CCDN.PlaneChartHeight
+public import CCDN.HeightDeterminant
+public import CCDN.PlaneChartDeterminant
 
-/-! Quantitative degree control from the plane determinant comparison.
-The finite-field estimate is an explicit hypothesis, through PlaneChartHeight. -/
+/-! Quantitative degree control from the plane determinant comparison. -/
 
 @[expose] public section
 namespace CCDN
@@ -139,54 +139,6 @@ lemma plane_degree_bound_of_log_bound {d M : ℕ} {B L A K : ℝ}
   convert hlog using 1
   push_cast
   ring
-
-/-- A degree exceeding the proved small-height threshold gives an
-integer homogeneous auxiliary polynomial. As in the determinant theorem, the
-sharp finite-field count is an explicit hypothesis. -/
-theorem plane_chart_exists_auxiliary_small_height
-    {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}
-    (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
-    (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d) (hdM : d ≤ M)
-    (hdchart : (planeAffineChart f).totalDegree = d)
-    (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) (planeAffineChart f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |((planeAffineChart f).coeff m : ℝ)| ≤ H)
-    (z : Fin t → Fin 2 → ℤ) (hz : ∀ i, MvPolynomial.eval (z i) (planeAffineChart f) = 0)
-    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
-    (hML : Real.log B ≤ M)
-    (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 4 * d * Real.log B)
-    (hthreshold : 2 * Real.exp (heightDeterminantError C + 23) * (d : ℝ) ^ 3 *
-      (1 + Real.log H / (d : ℝ) ^ 2) * B ^ (2 / (d : ℝ)) /
-        |((order.leadingCoeff f : ℤ) : ℝ)| ^ (1 / (d : ℝ) ^ 2) < M)
-    (hcount : ∀ p : ℕ, p.Prime → 27 * (d : ℝ) ^ 4 < (p : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) (planeAffineChart f)) →
-      (Nat.card (PlaneResidue (planeAffineChart f) p) : ℝ) ≤
-        p + C * (d : ℝ) ^ 2 * Real.sqrt p) :
-    ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-      (∀ i, MvPolynomial.eval (Fin.cons 1 (z i)) g = 0) ∧ ¬ f ∣ g := by
-  classical
-  by_contra hnone
-  have hrel : ∀ g : MvPolynomial (Fin 3) ℤ, g.IsHomogeneous M →
-      (∀ i, MvPolynomial.eval (Fin.cons 1 (z i)) g = 0) → f ∣ g := by
-    intro g hg hv
-    by_cases hg0 : g = 0
-    · simp [hg0]
-    · by_contra hnd
-      exact hnone ⟨g, hg0, hg, hv, hnd⟩
-  have hdchart' : 0 < (planeAffineChart f).totalDegree := by simpa only [hdchart] using hd
-  have hcount' := hcount
-  rw [← hdchart] at hcount'
-  obtain ⟨s, _, _, hr, hc⟩ := plane_chart_no_auxiliary_height_comparison
-    order f hf hf0 hd hdM hdchart' hir H hH hcoeff z hz hB hbox hC hrel hcount'
-  rw [hdchart] at hc
-  have hL : 1 ≤ |((order.leadingCoeff f : ℤ) : ℝ)| := by
-    exact_mod_cast Int.one_le_abs (order.leadingCoeff_ne_zero_iff.mpr hf0)
-  have hlog := plane_auxiliary_log_degree_bound hd hdM hr hB hL hML hheight hc
-  have hA : 0 < 1 + Real.log H / (d : ℝ) ^ 2 := by
-    have := Real.log_nonneg hH
-    positivity
-  have hbound := plane_degree_bound_of_log_bound hd (lt_of_lt_of_le hd hdM)
-    (by linarith) (by linarith) hA hlog
-  exact (not_lt_of_ge hbound) hthreshold
 
 end
 end CCDN

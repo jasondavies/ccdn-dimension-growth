@@ -50,13 +50,6 @@ lemma universalMaximalMinor_eval {r n : ℕ} (c : Fin r ↪ Fin n)
   ext i j
   simp
 
-lemma universalMaximalMinor_degree {r n : ℕ} (c : Fin r ↪ Fin n) :
-    (universalMaximalMinor c).totalDegree ≤ r := by
-  have hh := matrix_det_parameterDegree
-    (Matrix.of fun i j : Fin r => (X (i, c j) :
-      MvPolynomial (Fin r × Fin n) ℚ)) 1 (by intros; simp)
-  simpa only [universalMaximalMinor, Fintype.card_fin, Nat.mul_one] using hh
-
 lemma eval_minor_substitution {r n : ℕ}
     (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
     (A : Matrix (Fin r) (Fin n) ℚ) :
@@ -68,53 +61,6 @@ lemma eval_minor_substitution {r n : ℕ}
     simp only [AlgHom.comp_apply, aeval_X]
     exact universalMaximalMinor_eval c A
   exact congrArg (fun φ => φ F) hh
-
-/-- A nonempty polynomial condition on maximal minors has a bounded integer
-specialization of full row rank. The extra minor preserving rank costs one
-in the degree of the condition. -/
-theorem exists_bounded_integer_minor_specialization {r n : ℕ}
-    (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
-    (A : Matrix (Fin r) (Fin n) ℚ)
-    (hli : LinearIndependent ℚ A.row)
-    (hF : eval (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) F ≠ 0) :
-    ∃ M : Matrix (Fin r) (Fin n) ℤ,
-      (∀ i j, 0 ≤ M i j ∧ M i j ≤ r * (F.totalDegree + 1)) ∧
-      LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row ∧
-      eval (fun c : Fin r ↪ Fin n =>
-        ((M.map (Int.castRingHom ℚ)).submatrix id c).det) F ≠ 0 := by
-  classical
-  obtain ⟨c, hc, hdet⟩ := exists_nonzero_minor_of_independent_rows A hli
-  let e : Fin r ↪ Fin n := ⟨c, hc⟩
-  let U := aeval universalMaximalMinor F
-  let V := U * universalMaximalMinor e
-  have hV : V ≠ 0 := by
-    intro hz
-    have hh : eval (fun p => A p.1 p.2) V ≠ 0 := by
-      rw [show V = U * universalMaximalMinor e from rfl, eval_mul,
-        show U = aeval universalMaximalMinor F from rfl,
-        eval_minor_substitution, universalMaximalMinor_eval]
-      exact mul_ne_zero hF hdet
-    exact hh (by rw [hz, map_zero])
-  have hdeg : V.totalDegree ≤ r * (F.totalDegree + 1) := by
-    calc
-      V.totalDegree ≤ U.totalDegree + (universalMaximalMinor e).totalDegree :=
-        totalDegree_mul _ _
-      _ ≤ r * F.totalDegree + r := Nat.add_le_add
-        (aeval_totalDegree_le _ universalMaximalMinor_degree F)
-        (universalMaximalMinor_degree e)
-      _ = _ := by ring
-  obtain ⟨v, hv, hvalue⟩ :=
-    exists_integer_grid_rational_eval_ne_zero V hV _ hdeg
-  let M : Matrix (Fin r) (Fin n) ℤ := fun i j => v (i, j)
-  have hv' : eval (fun p => ((M.map (Int.castRingHom ℚ)) p.1 p.2)) V ≠ 0 := hvalue
-  rw [show V = U * universalMaximalMinor e from rfl, eval_mul,
-    show U = aeval universalMaximalMinor F from rfl,
-    eval_minor_substitution, universalMaximalMinor_eval] at hv'
-  have hm := (mul_ne_zero_iff.mp hv').2
-  have hi : LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row := by
-    apply LinearIndependent.of_comp (LinearMap.funLeft ℚ ℚ e)
-    exact Matrix.linearIndependent_rows_of_det_ne_zero hm
-  exact ⟨M, fun i j => hv (i, j), hi, (mul_ne_zero_iff.mp hv').1⟩
 
 end
 end CCDN
