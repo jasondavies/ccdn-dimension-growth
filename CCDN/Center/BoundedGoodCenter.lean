@@ -52,6 +52,9 @@ end
 
 open MvPolynomial Matrix
 
+/-- The bound `r! * ((m + 1)² d²) ^ r` on the absolute values of the maximal minors of an integer
+center matrix with `r` rows and entries in `[0, (m + 1)² d²]`, for a variety of dimension `m` and
+degree `d`. -/
 def centerMinorBound (r m d : ℕ) : ℕ := r.factorial * ((m + 1) ^ 2 * d ^ 2) ^ r
 
 /-- A good center with zero columns `S` yields a good center with bounded
@@ -89,7 +92,10 @@ private theorem exists_bounded_integer_center_of_witness
   gcongr
   exact_mod_cast hbound
 
-/-- The geometric good center has bounded integer independent rows. -/
+/-- Let `J ⊆ ℚ[X_0, …, X_{n+1}]` be a homogeneous prime ideal of projective dimension `m` and degree
+`d`, with `m + 2 ≤ n + 1`, that stays prime over `ℚ̄`. There is an integer matrix with `n - m`
+rows, linearly independent over `ℚ`, with entries in `[0, (m + 1)² d²]` and maximal minors bounded
+by `centerMinorBound`, that is a birational center for `J`. -/
 theorem exists_bounded_integer_birational_center
     {n m : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]

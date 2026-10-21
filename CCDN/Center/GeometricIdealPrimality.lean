@@ -79,6 +79,8 @@ private theorem prime_ideal_of_prime_scalar_extension
   rw [← he]
   infer_instance
 
+/-- Extending the coefficients of an ideal from `K` to `L` and then from `L` to `E` agrees with
+extending them directly from `K` to `E`, for a scalar tower `K → L → E`. -/
 lemma ideal_scalar_extension_tower
     {K L E : Type*} [Field K] [Field L] [Field E]
     [Algebra K L] [Algebra L E] [Algebra K E] [IsScalarTower K L E] {n : ℕ}

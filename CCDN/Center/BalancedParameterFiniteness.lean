@@ -20,6 +20,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If, for some `N > 0`, every power `X j ^ N` is congruent modulo `I` to a combination
+`∑ i, a i * s i` with all `s i` of total degree at most `N - 1`, then the coordinate ring
+`MvPolynomial σ K ⧸ I` is integral over the polynomial algebra in the parameters `a`, i.e.
+`projectionCoordinateMap I a` is integral. -/
 theorem integral_projection_of_balanced_power_reductions
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     (I : Ideal (MvPolynomial σ K)) (a : τ → MvPolynomial σ K)
@@ -104,6 +108,10 @@ theorem integral_projection_of_balanced_power_reductions
     exact Submodule.fg_span (Set.finite_range _))
   exact fun x => IsIntegral.of_finite R x
 
+/-- Let `I` be a homogeneous ideal and `a` a family of linear forms such that, over an
+algebraically closed extension `L`, the only common zero of `I` and the forms `a i` is the
+origin. Then `projectionCoordinateMap I a` is integral: the linear projection given by `a` is
+finite on the affine cone of `I`. -/
 theorem integral_projection_of_homogeneous_origin_fiber
     {K L σ τ : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L]
     [Fintype σ] [Fintype τ]

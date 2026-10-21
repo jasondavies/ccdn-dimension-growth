@@ -27,6 +27,7 @@ def matrixPluckerCoordinates {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) : (Fin r ↪ Fin n) → K :=
   fun c => (A.submatrix id c).det
 
+/-- A matrix with linearly independent rows has a nonzero maximal minor. -/
 theorem matrixPluckerCoordinates_ne_zero
     {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (hA : LinearIndependent K A.row) :
@@ -35,21 +36,29 @@ theorem matrixPluckerCoordinates_ne_zero
   intro hz
   exact hd (congrFun hz ⟨c, hc⟩)
 
+/-- The Plücker coordinates of the image of a matrix under a ring homomorphism `φ` are the images
+of its Plücker coordinates. -/
 lemma matrixPluckerCoordinates_map {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (c : Fin r ↪ Fin n) :
     matrixPluckerCoordinates (A.map φ) c = φ (matrixPluckerCoordinates A c) :=
   (φ.map_det (A.submatrix id c)).symm
 
+/-- The center projection of Section 5 determined by the center matrix `A`: its coordinate
+indexed by `c` at the point `x` is the maximal minor, on the columns `c`, of the matrix obtained
+by adjoining `x` to `A` as its first row. -/
 def centerMinorProjection {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (x : Fin n → K) (c : Fin (r + 1) ↪ Fin n) : K :=
   (Matrix.submatrix (Fin.cons x (fun i j => A i j)) id c).det
 
-/-- Laplace expansion gives the linear coordinate of the center map. -/
+/-- The `c`-th coordinate of the center projection as a linear form, given by Laplace expansion
+along the adjoined first row. -/
 def centerMinorProjectionForm {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (c : Fin (r + 1) ↪ Fin n) : MvPolynomial (Fin n) K :=
   ∑ j : Fin (r + 1),
     C ((-1 : K) ^ (j : ℕ) * (A.submatrix id (j.succAboveEmb.trans c)).det) * X (c j)
 
+/-- Evaluating the linear form `centerMinorProjectionForm A c` at `x` gives the `c`-th coordinate
+of the center projection of `x`. -/
 lemma centerMinorProjectionForm_eval {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (c : Fin (r + 1) ↪ Fin n) (x : Fin n → K) :
     eval x (centerMinorProjectionForm A c) = centerMinorProjection A x c := by
@@ -91,11 +100,13 @@ theorem centerMinorProjection_eq_zero_iff {K : Type*} [Field K] {r n : ℕ}
       LinearIndependent.of_comp (LinearMap.funLeft K K c) hi
     exact (linearIndependent_finCons.mp hh).2 hx
 
-/-- One coefficient, as a degree-one polynomial in Plücker variables. -/
+/-- The coefficient of `X k` in the center projection form indexed by `c`, as a degree-one
+polynomial in the Plücker variables of the center. -/
 def centerPluckerCoefficient {K : Type*} [Field K] {r n : ℕ}
     (c : Fin (r + 1) ↪ Fin n) (k : Fin n) : MvPolynomial (Fin r ↪ Fin n) K :=
   ∑ j : Fin (r + 1), if c j = k then C ((-1 : K) ^ (j : ℕ)) * X (j.succAboveEmb.trans c) else 0
 
+/-- Each `centerPluckerCoefficient c k` is homogeneous of degree one. -/
 lemma centerPluckerCoefficient_homogeneous {K : Type*} [Field K] {r n : ℕ}
     (c : Fin (r + 1) ↪ Fin n) (k : Fin n) :
     (centerPluckerCoefficient (K := K) c k).IsHomogeneous 1 := by

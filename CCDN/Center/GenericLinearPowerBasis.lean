@@ -20,6 +20,9 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
+/-- Let `b` be a power basis of `A` over `K`, and suppose the generic linear form `linearForm x`
+specializes at `c` to the generator of `b`. Then the powers of `linearForm x` with exponents below
+`b.dim` are linearly independent over `MvPolynomial σ K`. -/
 theorem generic_linear_powers_polynomial_independent
     {K A σ : Type*} [Field K] [CommRing A] [Algebra K A] [Fintype σ]
     (b : PowerBasis K A) (x : σ → A) (c : σ → K)

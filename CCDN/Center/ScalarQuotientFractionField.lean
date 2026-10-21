@@ -48,6 +48,8 @@ def scalarQuotientFractionMap :
     (((nonZeroDivisors (MvPolynomial τ K)).map (C (σ := σ))).map
       (quotientPolynomialSwap I).toMonoidHom)
 
+/-- The map `scalarQuotientFractionMap` extends the structure map of `F` along
+`scalarQuotientPolynomialMap`. -/
 lemma scalarQuotientFractionMap_comp :
     (scalarQuotientFractionMap (F := F) (τ := τ) (L := L) I).comp
       (scalarQuotientPolynomialMap (τ := τ) (L := L) I) =
@@ -65,6 +67,8 @@ lemma scalarQuotientFractionMap_comp :
     (((nonZeroDivisors (MvPolynomial τ K)).map (C (σ := σ))).map
       (quotientPolynomialSwap I).toMonoidHom)
 
+/-- Via `scalarQuotientFractionMap`, a fraction field `F` of `(K[X]/I)[τ]` is also a fraction
+field of the scalar-extended quotient `L[X]/I L`, where `L` is a fraction field of `K[τ]`. -/
 theorem scalarQuotientFractionMap_isFractionRing :
     let : Algebra (MvPolynomial σ L ⧸ I.map (map (algebraMap K L))) F :=
       (scalarQuotientFractionMap (F := F) (τ := τ) (L := L) I).toAlgebra
@@ -82,6 +86,8 @@ theorem scalarQuotientFractionMap_isFractionRing :
     (((nonZeroDivisors (MvPolynomial τ K)).map (C (σ := σ))).map
       (quotientPolynomialSwap I).toMonoidHom)
 
+/-- The map `scalarQuotientFractionMap` sends the class of the coordinate `X i` to the image of
+the corresponding coordinate of `K[X]/I`. -/
 @[simp] lemma scalarQuotientFractionMap_coordinate (i : σ) :
     scalarQuotientFractionMap (F := F) (τ := τ) (L := L) I
       (Ideal.Quotient.mk _ (X i)) =
@@ -91,6 +97,8 @@ theorem scalarQuotientFractionMap_isFractionRing :
     (C (Ideal.Quotient.mk I (X i)))
   simpa [scalarQuotientPolynomialMap,scalarCoordinateQuotientMap] using h
 
+/-- The map `scalarQuotientFractionMap` sends the class of the parameter `X j` of `K[τ] ⊆ L` to
+the image of the corresponding parameter variable. -/
 @[simp] lemma scalarQuotientFractionMap_parameter (j : τ) :
     scalarQuotientFractionMap (F := F) (τ := τ) (L := L) I
       (Ideal.Quotient.mk _ (C (algebraMap (MvPolynomial τ K) L (X j)))) =

@@ -92,6 +92,9 @@ private lemma chow_row_homogeneous_rename
   intro q
   simp [chowRowWeight, chowRowPermutation]
 
+/-- If a nonzero polynomial `F` generates the Chow incidence ideal of `I` and is weighted
+homogeneous of degree `δ i` in each row `i` of hyperplane coefficients, then all the row degrees
+`δ i` are equal. -/
 theorem chow_generator_row_degrees_equal
     {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
@@ -125,6 +128,8 @@ private lemma sum_chow_row_weight {r s : ℕ} (e : (Fin r × Fin s) →₀ ℕ) 
   intro q _
   simp [chowRowWeight]
 
+/-- A polynomial in rows of variables indexed by `Fin r × Fin s` that is weighted homogeneous of
+degree `δ i` in each row `i` is homogeneous of total degree `∑ i, δ i`. -/
 theorem chow_rows_homogeneous_total_degree
     {K : Type*} [CommRing K] {r s : ℕ}
     (F : MvPolynomial (Fin r × Fin s) K) (δ : Fin r → ℕ)
@@ -136,6 +141,8 @@ theorem chow_rows_homogeneous_total_degree
   rw [hw, ← sum_chow_row_weight e]
   exact Finset.sum_congr rfl (fun i _ => hδ i he)
 
+/-- A nonzero polynomial in `r` rows of variables that is weighted homogeneous of degree `d` in each
+row has total degree `r * d`. -/
 theorem chow_uniform_row_degree_totalDegree
     {K : Type*} [CommRing K] {r s : ℕ}
     (F : MvPolynomial (Fin r × Fin s) K) (hF : F ≠ 0) (d : ℕ)

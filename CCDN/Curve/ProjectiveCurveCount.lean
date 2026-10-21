@@ -21,9 +21,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The explicit constant `projectivePlaneAbsoluteConstant * exp (2 * projectionLogConstant n) + 1`
+of the projective curve count in `ℙⁿ`: the plane-curve constant, enlarged by the height loss of a
+bounded projection to the plane, plus one to absorb the `d²` error term of the projection. -/
 def projectiveCurveConstant (n : ℕ) : ℝ :=
   projectivePlaneAbsoluteConstant * Real.exp (2 * projectionLogConstant n) + 1
 
+/-- The constant `projectiveCurveConstant n` is positive. -/
 lemma projectiveCurveConstant_pos (n : ℕ) : 0 < projectiveCurveConstant n := by
   unfold projectiveCurveConstant
   have := projectivePlaneAbsoluteConstant_pos
@@ -48,6 +52,9 @@ private theorem projectiveCurveEstimate_scale (n : ℕ) {d : ℕ} (hd : 0 < d)
     (show 0 ≤ (d : ℝ) ^ 4 * B ^ (2 / (d : ℝ)) by positivity)
   convert h using 1 <;> ring
 
+/-- Let `I` be the homogeneous prime ideal of a projective curve of degree `d > 0` in `ℙⁿ` that is
+not contained in the hyperplane `X 0 = 0` (that is, `X 0 ∉ I`). For `B ≥ 1`, the number of rational
+points of height at most `B` on the curve is at most `projectiveCurveConstant n * d⁴ B^(2/d)`. -/
 theorem projective_curve_count_of_proper_chart {n d : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime] (hX : X 0 ∉ I)
     (hd : 0 < d) (hdegree : HasProjectiveCurveDegree I d) {B : ℝ} (hB : 1 ≤ B) :
@@ -80,8 +87,9 @@ theorem projective_curve_count_of_proper_chart {n d : ℕ}
       unfold projectiveCurveConstant
       ring
 
-/-- The coordinate chart is chosen from a point when the counted
-set is nonempty. Coordinate permutation has no height cost. -/
+/-- Let `I` be the homogeneous prime ideal of a projective curve of degree `d > 0` in `ℙⁿ`. For
+`B ≥ 1`, the number of rational points of height at most `B` on the curve is at most
+`projectiveCurveConstant n * d⁴ B^(2/d)`. -/
 theorem projective_curve_count {n d : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]
     (hd : 0 < d) (hdegree : HasProjectiveCurveDegree I d) {B : ℝ} (hB : 1 ≤ B) :

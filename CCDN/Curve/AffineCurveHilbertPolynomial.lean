@@ -40,6 +40,9 @@ private lemma affineCurve_filteredHilbertPolynomial_degree {n : ℕ}
   exact ⟨by rw [hc, Polynomial.natDegree_linear hd0],
     by rw [hc, Polynomial.leadingCoeff_linear hd0, Nat.factorial_one, Nat.cast_one, div_one]⟩
 
+/-- An affine curve over `ℚ` of degree `d > 0`, given by a prime ideal `I` that does not stay
+prime over the algebraic closure (a curve that is not geometrically integral), has at most `d ^ 2`
+integer points of height at most `B`. -/
 theorem nonabsolute_affine_curve_count_le_degree_sq
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n : ℕ} (I : Ideal (CoordinatePolynomial n)) [I.IsPrime]

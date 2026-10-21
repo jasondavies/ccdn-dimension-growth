@@ -40,6 +40,10 @@ private lemma exists_variable_outside_independent_span
     Fintype.card_fin, Fintype.card_fin] at hh
   omega
 
+/-- Let `I` be a prime ideal in characteristic zero with projective dimension `m` and degree `d`,
+and let `a` be `m + 1` linear forms whose coordinate map on `K[X]/I` is integral and injective.
+If `m + 2 ≤ n`, there is a linear form `v` such that `Fin.cons v a` is linearly independent, its
+coordinate map is integral, and its images generate the function field `F` of `I`. -/
 theorem exists_independent_linear_primitive_extension
     {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

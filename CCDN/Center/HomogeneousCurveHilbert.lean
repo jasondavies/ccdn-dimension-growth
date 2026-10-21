@@ -34,6 +34,9 @@ private lemma quadratic_polynomial_successive_difference
   rw [heval, heval, heval, heval]
   ring
 
+/-- If the filtered Hilbert polynomial of a homogeneous ideal `I` has degree `2` and leading
+coefficient `d / 2`, then the projective Hilbert function of `I` is eventually `d * M + c`, i.e.
+`I` has projective curve degree `d`. -/
 theorem projectiveCurveDegree_of_filteredHilbertPolynomial
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))

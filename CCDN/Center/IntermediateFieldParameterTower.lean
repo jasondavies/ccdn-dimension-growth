@@ -50,6 +50,8 @@ private lemma intermediateField_adjoin_mapped_tower
   · rintro ⟨a,ha,rfl⟩
     exact ⟨⟨a,ha⟩,hφ ⟨a,ha⟩⟩
 
+/-- Adjoining `T ⊆ F` to the intermediate field `K⟮S⟯`, acting on `F` through a `K`-algebra map
+`φ`, gives (as a field over `K`) the field generated over `K` by `φ '' S ∪ T`. -/
 lemma intermediateField_adjoin_mapped_generators
     {K A F : Type*} [Field K] [Field A] [Field F]
     [Algebra K A] [Algebra K F]
@@ -65,6 +67,9 @@ lemma intermediateField_adjoin_mapped_generators
     IntermediateField.adjoin_self, IntermediateField.adjoin_map,
     ← IntermediateField.adjoin_union]
 
+/-- In a tower `K ⊆ L ⊆ F`, if `L` is generated over `K` by the values of `u`, then the field
+obtained by adjoining `T` to `L`, viewed over `K`, is generated over `K` by the images of the
+`u i` in `F` together with `T`. -/
 lemma intermediateField_adjoin_tower_generators
     {K L F σ : Type*} [Field K] [Field L] [Field F]
     [Algebra K L] [Algebra K F] [Algebra L F] [IsScalarTower K L F]

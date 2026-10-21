@@ -20,19 +20,28 @@ local instance nestedIncidenceCoefficientRing {K σ τ : Type*} [Field K]
   letI : CommRing (MvPolynomial σ K ⧸ I) := inferInstance
   infer_instance
 
+/-- The coordinate ring of the incidence variety of the first `m` hyperplanes: polynomials in
+their nonconstant coefficients over the coordinate ring `K[X]/I`. -/
 abbrev ChowFirstRowCoordinateRing {K : Type*} [Field K] {n : ℕ} (m : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) :=
   MvPolynomial (Fin m × Fin n) (MvPolynomial (Fin n) K ⧸ I)
 
+/-- Polynomials in the nonconstant coefficients of the last hyperplane over
+`ChowFirstRowCoordinateRing m I`, a nested presentation of the incidence coordinate ring of
+`m + 1` hyperplanes. -/
 abbrev ChowNestedCoordinateRing {K : Type*} [Field K] {n : ℕ} (m : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) :=
   MvPolynomial (Fin n) (ChowFirstRowCoordinateRing m I)
 
+/-- The ring map from the incidence coordinate ring of `m + 1` hyperplanes to a field `F` over
+the nested coordinate ring, obtained by splitting off the last row of coefficients. -/
 def chowNestedIncidenceMap {K F : Type*} [Field K] [Field F] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
     [Algebra (ChowNestedCoordinateRing m I) F] : ChowIncidenceCoordinateRing m I →+* F :=
   (algebraMap (ChowNestedCoordinateRing m I) F).comp (chowLastRowSplit m I).toRingHom
 
+/-- If `F` is a fraction field of the nested coordinate ring, then via `chowNestedIncidenceMap`
+it is also a fraction field of the incidence coordinate ring of `m + 1` hyperplanes. -/
 lemma chowNestedIncidenceMap_isFractionRing {K F : Type*} [Field K] [Field F] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
     [Algebra (ChowNestedCoordinateRing m I) F]
@@ -42,6 +51,7 @@ lemma chowNestedIncidenceMap_isFractionRing {K F : Type*} [Field K] [Field F] {m
   exact (IsFractionRing.isFractionRing_iff_of_base_ringEquiv
     (S := F) (chowLastRowSplit m I).symm.toRingEquiv).mp inferInstance
 
+/-- The map `chowNestedIncidenceMap` restricts to the structure map on scalars from `K`. -/
 lemma chowNestedIncidenceMap_ground {K F : Type*} [Field K] [Field F]
     [Algebra K F] {m n : ℕ} (I : Ideal (MvPolynomial (Fin n) K))
     [Algebra (ChowNestedCoordinateRing m I) F]
@@ -53,6 +63,9 @@ lemma chowNestedIncidenceMap_ground {K F : Type*} [Field K] [Field F]
   rw [chowLastRowSplit_C]
   exact (IsScalarTower.algebraMap_apply K (ChowNestedCoordinateRing m I) F c).symm
 
+/-- Through the nested presentation, the Chow parameter field is generated over `K` by the
+nonconstant coefficients of the first `m` hyperplanes, their incidence constant coefficients,
+and the nonconstant coefficients of the last hyperplane. -/
 lemma chow_nested_parameter_field {K F : Type*} [Field K] [Field F]
     [Algebra K F] {m n : ℕ} (I : Ideal (MvPolynomial (Fin n) K))
     [Algebra (ChowFirstRowCoordinateRing m I) F]

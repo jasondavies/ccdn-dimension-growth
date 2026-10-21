@@ -38,6 +38,9 @@ private theorem chowProjectionImageIdeal_scalar_extension
   rw [chowProjectionImageIdeal, projection_kernel_scalar_extension, chowProjectionForms_map]
   rfl
 
+/-- The image ideal of the linear projection by the rows of `A`, computed after extending the
+coefficients from `K` to `L`, has the same filtered Hilbert polynomial as the image ideal over
+`K`. -/
 theorem chowProjectionImageIdeal_hilbertPolynomial_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n s : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -47,6 +50,9 @@ theorem chowProjectionImageIdeal_hilbertPolynomial_scalar_extension
       filteredHilbertPolynomial (chowProjectionImageIdeal I A) := by
   rw [← chowProjectionImageIdeal_scalar_extension, filteredHilbertPolynomial_scalar_extension]
 
+/-- If the homogeneous ideal `I` has no zero over an algebraically closed extension `L` that lies
+in the kernel of `A`, as a projective point, then the projection by the rows of `A` is integral
+over the original field `K`. -/
 theorem projection_integral_of_geometric_center_disjoint
     {K L : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L] {n s : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))

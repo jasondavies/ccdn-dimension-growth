@@ -124,6 +124,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The set of coefficient tuples `U` of `r` hyperplanes in projective `n`-space that have a common
+point on the projective zero locus of the ideal `J`. -/
 def projectiveChowIncidenceLocus {K : Type*} [Field K] {n : ℕ} (r : ℕ)
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) :
     Set (Fin r × Fin (n + 1) → K) :=
@@ -143,8 +145,13 @@ and vanishes exactly at the hyperplane tuples meeting the projective variety of 
 structure IsProjectiveChowEquation {K : Type*} [Field K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (F : MvPolynomial (Fin r × Fin (n + 1)) K)
     (δ : Fin r → ℕ) : Prop where
+  /-- The polynomial `F` is irreducible. -/
   irreducible : Irreducible F
+  /-- For each `i`, `F` is weighted homogeneous of degree `δ i` in the `i`-th row of hyperplane
+    coefficients. -/
   row_homogeneous : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)
+  /-- `F` vanishes at `U` exactly when the hyperplanes with coefficients `U` have a common point on
+    the projective variety of `J`. -/
   eval_eq_zero_iff : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus r J
 
 private theorem chowIncidenceLocus_subset_projectiveClosureIncidence

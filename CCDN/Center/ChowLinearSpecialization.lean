@@ -29,11 +29,14 @@ abbrev chowProjectionForms {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1)) :
     MvPolynomial (Fin (n + 1)) K := linearForm (A i)
 
+/-- Each coordinate form of a linear projection matrix is homogeneous of degree one. -/
 lemma chowProjectionForms_homogeneous {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1)) :
     (chowProjectionForms A i).IsHomogeneous 1 :=
   linearForm_isHomogeneous (A i)
 
+/-- The `i`-th coordinate form of the matrix `A`, evaluated at `x`, is the `i`-th entry of
+`A *ᵥ x`. -/
 lemma chowProjectionForms_eval {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1))
     (x : Fin (n + 1) → K) :
@@ -53,6 +56,8 @@ def chowLinearSubstitution {K : Type*} [Field K] {n s r : ℕ}
       MvPolynomial (Fin r × Fin (s + 1)) K :=
   aeval (fun q => ∑ k, C (A k q.2) * X (q.1,k))
 
+/-- Evaluating `chowLinearSubstitution A F` at target hyperplane coefficients `U` is evaluating `F`
+at the pulled-back coefficients `chowPullbackCoefficients A U`. -/
 lemma chowLinearSubstitution_eval {K : Type*} [Field K] {n s r : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
     (F : MvPolynomial (Fin r × Fin (n + 1)) K)
@@ -65,6 +70,8 @@ lemma chowLinearSubstitution_eval {K : Type*} [Field K] {n s r : ℕ}
   funext q
   simp [chowPullbackCoefficients, mul_comm]
 
+/-- The `i`-th pulled-back hyperplane evaluated at a source point `x` equals the `i`-th target
+hyperplane evaluated at the image point `A *ᵥ x`. -/
 lemma chowPullbackCoefficients_relation {K : Type*} [Field K] {n s r : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
     (U : Fin r × Fin (s + 1) → K) (x : Fin (n + 1) → K) (i : Fin r) :
@@ -80,6 +87,8 @@ def chowProjectionImageIdeal {K : Type*} [Field K] {n s : ℕ}
     Ideal (MvPolynomial (Fin (s + 1)) K) :=
   RingHom.ker (projectionCoordinateMap J (chowProjectionForms A))
 
+/-- If `J` is a homogeneous ideal, the image ideal `chowProjectionImageIdeal J A` of the linear
+projection by `A` contains the homogeneous components of each of its elements. -/
 lemma chowProjectionImageIdeal_homogeneous {K : Type*} [Field K] {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : IsHomogeneousIdeal J)

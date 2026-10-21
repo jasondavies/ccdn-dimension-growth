@@ -64,6 +64,8 @@ def birationalCenterSubspaceLocus
     Set (CenterSubspace K r (n + 1)) :=
   centerMatrixSpan '' birationalMatrixCenterLocus J
 
+/-- An independent center matrix spans a subspace in `birationalCenterSubspaceLocus J` if and
+only if it lies in `birationalMatrixCenterLocus J`. -/
 lemma birationalCenterSubspaceLocus_preimage
     {K : Type*} [Field K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime] :

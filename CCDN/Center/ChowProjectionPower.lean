@@ -38,6 +38,10 @@ private theorem chowLinearSubstitution_eq_zero_of_center_meets
   rw [chowPullbackCoefficients_relation, hAp]
   simp
 
+/-- Let `F` vanish exactly on the projective Chow incidence locus of `J`, over an infinite field. If
+the restriction `chowLinearSubstitution A F` along the projection by `A` is nonzero, then the center
+of `A` is disjoint from the projective zero locus of `J`: `A` annihilates no representative of a
+point of that locus. -/
 lemma center_disjoint_of_chowLinearSubstitution_ne_zero
     {K : Type*} [Field K] [Infinite K] {n s r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))

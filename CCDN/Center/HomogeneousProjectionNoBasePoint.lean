@@ -77,6 +77,8 @@ private lemma homogeneous_ideal_aeval_smul
   rw [homogeneous_aeval_smul (homogeneousComponent_isHomogeneous _ _),
     hx _ (hI f hf N), mul_zero]
 
+/-- For a homogeneous ideal `I` and linear forms `a` giving an integral projection, the only
+zero of `I` over an infinite extension `L` at which all forms `a j` vanish is the origin. -/
 theorem homogeneous_integral_projection_zero_fiber
     {K L σ τ : Type*} [Field K] [Field L] [Algebra K L] [Infinite L]
     (I : Ideal (MvPolynomial σ K))
@@ -104,6 +106,9 @@ theorem homogeneous_integral_projection_zero_fiber
   rw [hh]
   exact Set.infinite_univ
 
+/-- For a homogeneous ideal `I` and linear forms `a` giving an integral projection, the forms do
+not vanish simultaneously at any projective zero of `I` over an infinite extension `L`: the
+projection has no base point on the projective variety. -/
 theorem homogeneous_integral_projection_geometric_no_base_point
     {K L : Type*} [Field K] [Field L] [Algebra K L] [Infinite L] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))

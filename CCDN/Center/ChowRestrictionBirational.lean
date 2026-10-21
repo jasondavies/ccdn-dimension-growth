@@ -28,6 +28,12 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- Let `I` be a homogeneous, geometrically prime ideal over a field of characteristic zero,
+defining a projective variety of dimension `m` and degree `d`, with geometric Chow equation `F`.
+If the projection given by the matrix `A` has center disjoint from the variety over the algebraic
+closure, then the linear substitution of `A` into `F` is irreducible if and only if the
+projection is birational onto its image, i.e. the projection forms generate the whole function
+field. -/
 theorem geometric_chow_restriction_irreducible_iff_birational
     {K : Type*} [Field K] [CharZero K] {n s m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 2)) K)) [I.IsPrime]

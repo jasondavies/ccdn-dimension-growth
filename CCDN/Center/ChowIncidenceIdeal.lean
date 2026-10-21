@@ -43,6 +43,9 @@ def chowIncidenceMap {K : Type*} [Field K] {n : ℕ} (r : ℕ)
     (-(∑ j, X (q.1,j) * C (Ideal.Quotient.mk I (X j))))
     (fun j => X (q.1,j)) q.2)
 
+/-- The Chow incidence ideal of `r` affine hyperplanes on the affine variety of `I`: the
+polynomials in the hyperplane coefficients that vanish identically after the incidence
+substitution `chowIncidenceMap`, i.e. the kernel of that substitution. -/
 def chowIncidenceIdeal {K : Type*} [Field K] {n : ℕ} (r : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) :
     Ideal (MvPolynomial (Fin r × Fin (n + 1)) K) :=
@@ -154,6 +157,8 @@ private lemma chowIncidenceMap_weightedComponent {K : Type*} [Field K] {n r : �
   intro q
   simpa only [chowIncidenceMap,aeval_X] using chowIncidence_variable_weight I i q
 
+/-- The Chow incidence ideal is multihomogeneous: each homogeneous component of a member, taken
+with respect to the coefficients of a single hyperplane, again lies in the ideal. -/
 theorem chowIncidenceIdeal_multihomogeneous {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (R : MvPolynomial (Fin r × Fin (n + 1)) K)
     (hR : R ∈ chowIncidenceIdeal r I) (i : Fin r) (M : ℕ) :

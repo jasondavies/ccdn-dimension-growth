@@ -59,6 +59,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If the values of the polynomials `p i` at a single parameter point `a` are algebraically
+independent over `K`, then the variables `X j` together with the generic values `p i` are
+algebraically independent over `K` in `MvPolynomial σ A`. -/
 theorem generic_polynomial_independence
     {K A σ ι : Type*} [Field K] [CommRing A] [IsDomain A] [Algebra K A]
     (p : ι → MvPolynomial σ A) (a : σ → K)

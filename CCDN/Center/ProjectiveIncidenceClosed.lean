@@ -19,6 +19,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For a homogeneous ideal `J`, a tuple `U` of `r` hyperplanes lies in the projective Chow
+incidence locus if and only if some nonzero point of the affine cone of `J` lies on all the
+hyperplanes `∑ j, U (i, j) * x j = 0`. -/
 lemma projectiveChowIncidenceLocus_iff_cone {K : Type*} [Field K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : IsHomogeneousIdeal J)

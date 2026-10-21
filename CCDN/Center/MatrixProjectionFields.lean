@@ -84,6 +84,8 @@ private theorem projectionImageField_le_of_matrix_kernel_le
     exact E.algebraMap_mem _
   · exact IntermediateField.subset_adjoin K _ ⟨j,rfl⟩
 
+/-- Linear projections by the rows of matrices `A` and `B` with the same kernel generate the same
+subfield of a field `F` over the coordinate ring `K[X]/I`. -/
 theorem projectionImageField_eq_of_matrix_kernel_eq
     {K F : Type*} [Field K] [Field F] [Algebra K F] {n s t : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -97,6 +99,8 @@ theorem projectionImageField_eq_of_matrix_kernel_eq
   le_antisymm (projectionImageField_le_of_matrix_kernel_le I A B hker.ge)
     (projectionImageField_le_of_matrix_kernel_le I B A hker.le)
 
+/-- If the kernel of `A` is contained in the kernel of `B` and the projection by the rows of `B`
+is integral, then the projection by the rows of `A` is integral. -/
 theorem projection_integral_of_matrix_kernel_le
     {K : Type*} [Field K] {n s t : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))

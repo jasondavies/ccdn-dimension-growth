@@ -23,6 +23,11 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- Let `I ⊆ ℚ[X_0, …, X_n]` be a homogeneous prime ideal of projective dimension `m` and degree
+`d`, with `m + 2 ≤ n`, that stays prime over an infinite field `L`. There is a rational matrix `A`
+with `n - m - 1` linearly independent rows whose span over `L` contains no point of the projective
+zero locus of `I` over `L`, and such that the maximal-minor projection from this center is integral
+and generates the function field. -/
 theorem exists_birational_minor_center
     {L : Type*} [Field L] [Algebra ℚ L] [Infinite L]
     (m n : ℕ) (hmn : m + 2 ≤ n)

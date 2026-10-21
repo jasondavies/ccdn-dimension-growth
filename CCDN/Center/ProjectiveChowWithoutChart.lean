@@ -20,6 +20,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Over an algebraically closed field, a homogeneous prime ideal `J` whose filtered Hilbert
+polynomial has degree `m + 1` (a projective variety of dimension `m`) has a projective Chow
+equation with `m + 1` hyperplane rows, for some row degrees `δ`. -/
 theorem exists_projective_chow_equation_without_chart
     {K : Type*} [Field K] [IsAlgClosed K] {n m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

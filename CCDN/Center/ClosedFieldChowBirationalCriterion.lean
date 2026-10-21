@@ -24,6 +24,11 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- Over an algebraically closed field of characteristic zero, let `J` be a homogeneous prime
+ideal of projective dimension `m` and degree `d` with projective Chow equation `F`, and let `A`
+be a matrix whose kernel avoids the projective variety of `J`. Then the substitution of the
+projection `A` into `F` is irreducible if and only if the projection by the rows of `A` is
+birational, that is, the forms generate the whole function field of `J`. -/
 theorem chow_restriction_irreducible_iff_birational_over_closed_field
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

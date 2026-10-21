@@ -28,11 +28,15 @@ def coefficientLinearMap {K A σ : Type*} [Field K] [CommRing A] [Algebra K A]
   map_add' p q := by ext d; simp
   map_smul' c p := by ext d; simp
 
+/-- Each coefficient of `coefficientLinearMap l p` is the image under `l` of the corresponding
+coefficient of `p`. -/
 @[simp] lemma coefficientLinearMap_coeff {K A σ : Type*}
     [Field K] [CommRing A] [Algebra K A] (l : A →ₗ[K] K)
     (p : MvPolynomial σ A) (d : σ →₀ ℕ) :
     (coefficientLinearMap l p).coeff d = l (p.coeff d) := rfl
 
+/-- `coefficientLinearMap l` is linear over polynomials with coefficients in `K`: it commutes with
+multiplication by the image of a polynomial `p` over `K`. -/
 lemma coefficientLinearMap_map_mul {K A σ : Type*}
     [Field K] [CommRing A] [Algebra K A] (l : A →ₗ[K] K)
     (p : MvPolynomial σ K) (q : MvPolynomial σ A) :

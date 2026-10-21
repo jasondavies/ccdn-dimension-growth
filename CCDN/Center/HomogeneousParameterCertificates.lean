@@ -21,6 +21,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Let `I` be a homogeneous ideal and `a` a family of linear forms whose projection is integral.
+Then there is a positive degree `D` such that every homogeneous polynomial of degree `D` lies in
+`I ⊔ Ideal.span (Set.range a)`. -/
 theorem integral_homogeneous_parameters_full_degree
     {K τ : Type*} [Field K] [Fintype τ] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -67,6 +70,9 @@ theorem integral_homogeneous_parameters_full_degree
   have hh := H.mul_mem_left (monomial v (f.coeff e)) (hpower j)
   simpa only [X_pow_eq_monomial, monomial_mul_monomial, mul_one, hve] using hh
 
+/-- Let `I` be a homogeneous ideal and `a` a family of linear forms. A homogeneous polynomial `f` of
+positive degree `D` in `I ⊔ Ideal.span (Set.range a)` can be written as `g + ∑ i, a i * s i` with
+`g ∈ I` homogeneous of degree `D` and every `s i` homogeneous of degree `D - 1`. -/
 theorem homogeneous_parameter_certificate
     {K τ : Type*} [Field K] [Fintype τ] {n D : ℕ} (hD : 0 < D)
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))

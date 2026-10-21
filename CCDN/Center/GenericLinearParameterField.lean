@@ -77,6 +77,9 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
+/-- The subfield of `F` generated over `K` by the images of the variables `X i` of
+`MvPolynomial σ A`. When `F` is a fraction field of `MvPolynomial σ A`, it is the rational function
+field over `K` in these variables. -/
 def polynomialParameterField {K A F σ : Type*}
     [Field K] [Field A] [Field F] [Algebra K A] [Algebra K F]
     [Algebra (MvPolynomial σ A) F] : IntermediateField K F :=
@@ -157,6 +160,11 @@ theorem polynomialParameterField_rec {K A F σ : Type*} [Field K] [Field A] [Alg
       rw [aeval_X])
   exact h
 
+/-- Let `A` be a finite extension of a field `K` of characteristic zero, `F` a fraction field of
+`MvPolynomial (Fin n) A`, and `R ⊆ F` the rational function field over `K` in the variables. If the
+tuple `x` separates the `K`-embeddings of `A` into an algebraic closure, then `[F : R] = [A : K]`
+and the generic linear form `∑ j, x j * X j` is a primitive element of `F` over `R` whose minimal
+polynomial has degree `[A : K]`. -/
 theorem generic_linear_parameter_field_degree
     {K A F : Type*} [Field K] [CharZero K] [Field A] [Algebra K A]
     [Module.Finite K A] [Field F] [Algebra K F] {n : ℕ}

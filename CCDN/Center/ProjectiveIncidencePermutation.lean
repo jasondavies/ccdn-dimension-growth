@@ -19,6 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Permuting the coordinates of a homogeneous ideal gives a homogeneous ideal. -/
 theorem projectivePermutedIdeal_homogeneous
     {K : Type*} [Field K] {n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -30,6 +31,7 @@ theorem projectivePermutedIdeal_homogeneous
   rw [mem_projectivePermutedIdeal, rename_homogeneousComponent]
   exact hJ _ ((mem_projectivePermutedIdeal J e f).mp hf) M
 
+/-- Permuting the coordinates of an ideal does not change its filtered Hilbert polynomial. -/
 theorem projectivePermutedIdeal_filteredHilbertPolynomial
     {K : Type*} [Field K] {n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -59,9 +61,14 @@ private lemma coordinate_comp_equiv_ne_zero
   have hh := congrFun h (e.symm i)
   simpa only [Function.comp_apply, Equiv.apply_symm_apply, Pi.zero_apply] using hh
 
+/-- The permutation of hyperplane coefficients `Fin r × Fin s` that applies the coordinate
+permutation `e` within each hyperplane row. -/
 def chowColumnPermutation {r s : ℕ} (e : Equiv.Perm (Fin s)) :
     Fin r × Fin s ≃ Fin r × Fin s := Equiv.prodCongr (Equiv.refl _) e
 
+/-- For a homogeneous ideal `J`, a hyperplane tuple `U` meets the projective variety of `J` if and
+only if the tuple `U ∘ chowColumnPermutation e` meets the variety of the coordinate-permuted
+ideal. -/
 theorem projectiveChowIncidenceLocus_permuted
     {K : Type*} [Field K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))

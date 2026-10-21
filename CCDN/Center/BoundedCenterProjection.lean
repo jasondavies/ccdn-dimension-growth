@@ -30,6 +30,8 @@ private lemma normalizedIntegerProjection_apply {n : ℕ}
     (D : ℤ) (P : Matrix (Fin n) (Fin n) ℤ) (x : Fin n → ℚ) :
     normalizedIntegerProjection D P x = (D : ℚ)⁻¹ • ((P.map (Int.castRingHom ℚ)) *ᵥ x) := rfl
 
+/-- If `D ≠ 0` and the integer matrix `P` satisfies `P * P = D • P`, then the normalized rational
+map `D⁻¹ • P` is idempotent. -/
 lemma normalizedIntegerProjection_idempotent {n : ℕ}
     (D : ℤ) (hD : D ≠ 0) (P : Matrix (Fin n) (Fin n) ℤ)
     (hP : P * P = D • P) :
@@ -52,6 +54,8 @@ lemma normalizedIntegerProjection_idempotent {n : ℕ}
   rw [show (D : ℚ)⁻¹ * (D : ℚ)⁻¹ * D = (D : ℚ)⁻¹ by field_simp]
   rfl
 
+/-- For `D ≠ 0`, the normalized map `D⁻¹ • P` sends `x` to zero exactly when the matrix `P`, viewed
+over `ℚ`, does. -/
 lemma normalizedIntegerProjection_eq_zero_iff {n : ℕ}
     (D : ℤ) (hD : D ≠ 0) (P : Matrix (Fin n) (Fin n) ℤ) (x : Fin n → ℚ) :
     normalizedIntegerProjection D P x = 0 ↔ (P.map (Int.castRingHom ℚ)) *ᵥ x = 0 := by
@@ -59,6 +63,8 @@ lemma normalizedIntegerProjection_eq_zero_iff {n : ℕ}
   have hDq : (D : ℚ) ≠ 0 := by exact_mod_cast hD
   exact or_iff_right (inv_ne_zero hDq)
 
+/-- If `D ≠ 0` and `P * P = D • P`, then `x` minus its image under the normalized map `D⁻¹ • P` lies
+in the kernel of that map. -/
 lemma normalizedIntegerProjection_sub_mem_ker {n : ℕ}
     (D : ℤ) (hD : D ≠ 0) (P : Matrix (Fin n) (Fin n) ℤ)
     (hP : P * P = D • P) (x : Fin n → ℚ) :
@@ -68,8 +74,10 @@ lemma normalizedIntegerProjection_sub_mem_ker {n : ℕ}
   have he := congrArg (fun f : Module.End ℚ (Fin n → ℚ) => f x) hi
   exact sub_eq_zero.mpr he.symm
 
-/-- The normalization is exactly projection onto its image along the center,
-not merely a linear map with the same kernel. -/
+/-- For an integer matrix `A` with `s + 1` rows that are linearly independent over `ℚ` and entries
+of absolute value at most `T`, there are a nonzero integer `D` and an integer matrix `P` with
+entries bounded by `2 (s + 1)! T ^ (s + 1)` and `P * P = D • P`, such that `D⁻¹ • P` is the
+projection along the row span of `A` onto a complementary subspace of dimension `n - s`. -/
 theorem exists_bounded_rational_center_projection {s n : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) ℤ)
     (hli : LinearIndependent ℚ (fun i => fun j => (A i j : ℚ)))

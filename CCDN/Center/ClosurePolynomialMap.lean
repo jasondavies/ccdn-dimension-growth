@@ -18,6 +18,10 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
+/-- The `K`-algebra map from `K[X_0, …, X_n]` to the polynomial ring in one variable over the affine
+coordinate ring `K[X_1, …, X_n] ⧸ I` that sends a form `f` of degree `d` to the class of its
+dehomogenization `affineChart n f` times the `d`-th power of the variable. Its kernel is the
+projective closure ideal of `I`. -/
 def projectiveClosurePolynomialMap {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) :
     MvPolynomial (Fin (n + 1)) K →ₐ[K]
@@ -45,12 +49,16 @@ private lemma projectiveClosurePolynomialMap_homogeneous {K : Type*} [Field K] {
   rw [projectiveClosureMap_homogeneous I f hf]
   simp [uniqueAlgEquiv_symm_apply]
 
+/-- The homogenizing coordinate `X 0` maps to the polynomial variable `X ()` under
+`projectiveClosurePolynomialMap I`. -/
 lemma projectiveClosurePolynomialMap_X_zero {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) :
     projectiveClosurePolynomialMap I (X 0) = X () := by
   rw [projectiveClosurePolynomialMap_homogeneous I _ (isHomogeneous_X K 0)]
   simp [affineChart]
 
+/-- A homogeneous affine polynomial `f` of degree `d`, written in the coordinates `X 1, …, X n`,
+maps under `projectiveClosurePolynomialMap I` to the class of `f` modulo `I` times `X () ^ d`. -/
 lemma projectiveClosurePolynomialMap_rename_homogeneous {K : Type*} [Field K] {n d : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (f : MvPolynomial (Fin n) K)
     (hf : f.IsHomogeneous d) :
@@ -59,6 +67,8 @@ lemma projectiveClosurePolynomialMap_rename_homogeneous {K : Type*} [Field K] {n
   rw [projectiveClosurePolynomialMap_homogeneous I _ hf.rename_isHomogeneous,
     affineChart_rename_succ]
 
+/-- The coordinate `X j.succ` maps under `projectiveClosurePolynomialMap I` to the class of `X j`
+modulo `I` times the polynomial variable `X ()`. -/
 lemma projectiveClosurePolynomialMap_X_succ {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (j : Fin n) :
     projectiveClosurePolynomialMap I (X j.succ) =
@@ -66,6 +76,7 @@ lemma projectiveClosurePolynomialMap_X_succ {K : Type*} [Field K] {n : ℕ}
   rw [← rename_X Fin.succ j,
     projectiveClosurePolynomialMap_rename_homogeneous I _ (isHomogeneous_X K j), pow_one]
 
+/-- The kernel of `projectiveClosurePolynomialMap I` is the projective closure ideal of `I`. -/
 lemma projectiveClosurePolynomialMap_ker {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) :
     RingHom.ker (projectiveClosurePolynomialMap I) = projectiveClosureIdeal I := by
@@ -75,6 +86,9 @@ lemma projectiveClosurePolynomialMap_ker {K : Type*} [Field K] {n : ℕ}
   exact (uniqueAlgEquiv (MvPolynomial (Fin n) K ⧸ I) Unit).symm.injective.eq_iff'
     (map_zero _)
 
+/-- The `K`-algebra map from the homogeneous coordinate ring of the projective closure of `I` to the
+polynomial ring in one variable over the affine coordinate ring `K[X_1, …, X_n] ⧸ I`, induced by
+`projectiveClosurePolynomialMap I`. -/
 def closurePolynomialQuotientMap {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) :
     (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I) →ₐ[K]
@@ -85,6 +99,9 @@ def closurePolynomialQuotientMap {K : Type*} [Field K] {n : ℕ}
         rwa [projectiveClosurePolynomialMap_ker]
       exact h)
 
+/-- The map `closurePolynomialQuotientMap I` is injective: the homogeneous coordinate ring of the
+projective closure of `I` embeds into the polynomial ring in one variable over the affine coordinate
+ring. -/
 theorem closurePolynomialQuotientMap_injective {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) :
     Function.Injective (closurePolynomialQuotientMap I) := by

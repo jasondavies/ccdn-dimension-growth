@@ -40,6 +40,10 @@ private theorem projective_chow_row_degree_eq_multiplicity
     prime_ideal_scalar_extension_of_isAlgClosed I
   exact chow_generator_row_degree_eq_multiplicity I d hdimdegI G hG hgen δ hδG
 
+/-- Over an algebraically closed field of characteristic zero, a homogeneous prime ideal `J`
+defining a projective variety of dimension `m` and degree `d` has a projective Chow equation that
+is homogeneous of degree exactly `d` in each of the `m + 1` hyperplane rows, hence of total
+degree `(m + 1) * d`. -/
 theorem exists_projective_chow_exact_degree
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K] {m n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
@@ -53,6 +57,11 @@ theorem exists_projective_chow_exact_degree
   exact ⟨F,⟨hF.irreducible,hd,hF.eval_eq_zero_iff⟩,
     chow_uniform_row_degree_totalDegree F hF.irreducible.ne_zero d hd⟩
 
+/-- Let `J` be a homogeneous prime ideal over a field `K` of characteristic zero that stays prime
+over an algebraically closed extension `L`, defining a projective variety of dimension `m` and
+degree `d`. Then there is a polynomial `F` over `K`, irreducible over both `K` and `L`, homogeneous
+of degree `d` in each hyperplane row and of total degree `(m + 1) * d`, whose image over `L`
+vanishes exactly on the hyperplane tuples meeting the variety. -/
 theorem exists_geometric_projective_chow_exact_degree
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [IsAlgClosed L]
     {m n : ℕ}

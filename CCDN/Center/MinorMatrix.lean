@@ -22,6 +22,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- If `r + 2 ≤ n`, the column injections `Fin (r + 1) ↪ Fin n` can be enumerated by `Fin (s + 2)`
+for some `s`, since there are at least two of them. -/
 lemma exists_center_minor_coordinate_enumeration {r n : ℕ} (hr : r + 2 ≤ n) :
     ∃ s : ℕ, Nonempty (Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin n)) := by
   classical
@@ -88,6 +90,9 @@ theorem centerMinorProjectionMatrix_ker {K : Type*} [Field K] {r n s : ℕ}
     funext i
     exact congrFun h (e i)
 
+/-- If the rows of `A` are linearly independent and their span contains no representative of a point
+of the projective zero locus of `J`, then the center projection matrix of `A` sends no such
+representative to zero. -/
 lemma centerMinorProjectionMatrix_disjoint {K : Type*} [Field K] {r n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
@@ -100,6 +105,8 @@ lemma centerMinorProjectionMatrix_disjoint {K : Type*} [Field K] {r n s : ℕ}
   rw [← centerMinorProjectionMatrix_ker A hA e]
   exact hz
 
+/-- The linear forms given by the rows of `centerMinorProjectionMatrix A e` generate the same image
+field as the center projection forms `centerMinorProjectionForm A`, whatever the enumeration `e`. -/
 lemma projectionImageField_centerMinorProjectionMatrix
     {K F : Type*} [Field K] [Field F] [Algebra K F] {r n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -111,6 +118,8 @@ lemma projectionImageField_centerMinorProjectionMatrix
       projectionImageField (F := F) J (centerMinorProjectionForm A) := by
   rw [chowProjectionForms_centerMinorProjectionMatrix, projectionImageField_comp_equiv]
 
+/-- The projection by the rows of `centerMinorProjectionMatrix A e` is integral if and only if the
+center projection by `centerMinorProjectionForm A` is integral. -/
 lemma centerMinorProjectionMatrix_isIntegral_iff {K : Type*} [Field K] {r n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (A : Matrix (Fin r) (Fin (n + 1)) K)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :

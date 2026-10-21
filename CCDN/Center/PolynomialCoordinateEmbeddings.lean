@@ -60,6 +60,9 @@ private theorem polynomial_coordinate_embeddings_injective
   ext x
   exact RingHom.congr_fun hfield x
 
+/-- Let `F` be a fraction field of `(MvPolynomial σ K ⧸ I)[τ]` such that every parameter `X j`
+lies in the image of the coefficient field `R`. Then an `R`-algebra embedding of `F` into `L` is
+determined by its values on the negated affine coordinates `-x j`. -/
 theorem neg_polynomial_coordinate_embeddings_injective
     (hparam : ∀ j : τ, ∃ r : R, algebraMap R F r =
       algebraMap (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F (X j)) :

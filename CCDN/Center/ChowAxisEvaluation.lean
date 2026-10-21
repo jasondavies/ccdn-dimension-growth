@@ -127,6 +127,10 @@ private theorem exists_hyperplane_axis_outside_closure_incidence
         rw [hrow] at hh
         simpa only [closureProjectionCoordinates,Fin.cons_succ,aeval_eq_eval] using hh
 
+/-- Let `I` be a prime ideal over an algebraically closed field whose filtered Hilbert
+polynomial has degree `m`, and let `F` generate the Chow incidence ideal with `m + 1` hyperplane
+rows. If `F` is homogeneous of degree `d` in the last row of coefficients, then its degree in the
+constant coefficient `(Fin.last m, 0)` of that row is exactly `d`. -/
 theorem chow_generator_last_coordinate_degree
     {K : Type*} [Field K] [IsAlgClosed K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

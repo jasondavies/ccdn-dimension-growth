@@ -22,6 +22,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Dimension growth for projective curves in `ℙⁿ` over `ℚ`, specified by their Hilbert
+polynomial: there is a constant `C > 0`, depending only on `n ≥ 1`, such that every homogeneous
+prime ideal `I` of projective dimension `1` and degree `d ≥ 5` has at most
+`C * d ^ (3 * (n + 1) + 4) * B` rational points of height at most `B` for all `B ≥ 1`. -/
 theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →

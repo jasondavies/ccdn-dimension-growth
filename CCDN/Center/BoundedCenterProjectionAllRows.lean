@@ -16,6 +16,12 @@ namespace CCDN
 noncomputable section
 open Matrix LinearMap
 
+/-- For an integer matrix `A` with `r` rationally independent rows (possibly `r = 0`) and
+entries bounded by `T`, there are a nonzero integer `D` and an integer matrix `P` with entries
+at most `2 * r! * T ^ r` in absolute value such that `P / D` is an idempotent projection of
+`ℚ^(n+1)` with kernel the row span of `A` onto a complement of rank `n + 1 - r`; moreover
+`P / D` sends each vector to the unique point of its range differing from it by an element of
+the row span. -/
 theorem exists_bounded_rational_center_projection_all_rows {r n : ℕ}
     (A : Matrix (Fin r) (Fin (n + 1)) ℤ)
     (hli : LinearIndependent ℚ (fun i => fun j => (A i j : ℚ)))
@@ -61,6 +67,8 @@ theorem exists_bounded_rational_center_projection_all_rows {r n : ℕ}
       simp only [hz, Submodule.mem_bot, sub_eq_zero] at hxy
       simpa only [hi, LinearMap.id_apply] using hxy
 
+/-- For `D ≠ 0`, the kernel of the rational matrix `P` coincides with the kernel of the
+normalized projection `P / D`. -/
 lemma normalizedIntegerProjection_matrix_ker {n : ℕ}
     (D : ℤ) (hD : D ≠ 0) (P : Matrix (Fin n) (Fin n) ℤ) :
     (P.map (Int.castRingHom ℚ)).mulVecLin.ker = (normalizedIntegerProjection D P).ker := by

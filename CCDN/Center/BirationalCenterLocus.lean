@@ -22,6 +22,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- Mapping the entries along a ring homomorphism `φ` commutes with forming the center projection
+matrix `centerMinorProjectionMatrix`. -/
 lemma centerMinorProjectionMatrix_map
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n s : ℕ}
     (A : Matrix (Fin r) (Fin (n + 1)) K)
@@ -33,6 +35,8 @@ lemma centerMinorProjectionMatrix_map
     map_sum, apply_ite, map_mul, eval_X, map_zero, map_pow, map_neg, map_one,
     matrixPluckerCoordinates_map]
 
+/-- Linearly independent rows of a matrix over a field `K` remain linearly independent after mapping
+the entries along a field homomorphism `φ : K →+* L`. -/
 lemma linearIndependent_matrix_rows_map
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (hA : LinearIndependent K A.row) :
@@ -57,6 +61,8 @@ def centerMinorPolynomial {K : Type*} [Field K] {r n : ℕ}
     (G : MvPolynomial (Fin r ↪ Fin n) K) : MvPolynomial (Fin r × Fin n) K :=
   aeval (matrixMinorPolynomial K) G
 
+/-- Evaluating `centerMinorPolynomial G` at the entries `x` of a matrix is evaluating `G` at the
+Plücker coordinates (the maximal minors) of that matrix. -/
 lemma eval_centerMinorPolynomial {K : Type*} [Field K] {r n : ℕ}
     (G : MvPolynomial (Fin r ↪ Fin n) K) (x : Fin r × Fin n → K) :
     eval x (centerMinorPolynomial G) =
@@ -82,6 +88,8 @@ def IsBirationalMatrixCenter {K : Type*} [Field K] {n r : ℕ}
   projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ J)) J
     (centerMinorProjectionForm A) = ⊤
 
+/-- The birational-center condition `IsBirationalMatrixCenter J A` depends only on the ideal `J`,
+not on the primality instance: equal ideals give equivalent conditions. -/
 lemma isBirationalMatrixCenter_congr {K : Type*} [Field K] {n r : ℕ}
     {J J' : Ideal (MvPolynomial (Fin (n + 1)) K)} [J.IsPrime] [J'.IsPrime] (h : J = J')
     (A : Matrix (Fin r) (Fin (n + 1)) K) :

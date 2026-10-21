@@ -70,6 +70,12 @@ end
 
 open MvPolynomial Matrix
 
+/-- Let `I` be a prime ideal over a field of characteristic zero defining an affine variety of
+dimension `m` and degree `d`, with `m + 1 ≤ n`. There are matrices `B` (with `m + 2` independent
+rows) and `A` (with `n - m - 1` independent rows spanning the kernel of `B`) such that every row
+of `A` has zero homogenizing coordinate, the center spanned by the rows of `A` misses the
+projective closure of the variety over any infinite extension `L`, and the projection given by
+the linear forms of `B` is finite and birational on the projective closure. -/
 theorem exists_fixed_coordinate_center_row_witness
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [Infinite L]
     {m n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

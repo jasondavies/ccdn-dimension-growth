@@ -32,11 +32,13 @@ abbrev incidenceLinearForm {K : Type*} [CommSemiring K] {n r : ℕ}
     (U : Fin r × Fin (n + 1) → K) (i : Fin r) : MvPolynomial (Fin (n + 1)) K :=
   linearForm fun j => U (i,j)
 
+/-- The incidence linear form `incidenceLinearForm U i` is homogeneous of degree one. -/
 lemma incidenceLinearForm_homogeneous {K : Type*} [CommSemiring K] {n r : ℕ}
     (U : Fin r × Fin (n + 1) → K) (i : Fin r) :
     (incidenceLinearForm U i).IsHomogeneous 1 :=
   linearForm_isHomogeneous _
 
+/-- Evaluating `incidenceLinearForm U i` at `x` gives `∑ j, U (i, j) * x j`. -/
 lemma incidenceLinearForm_eval {K : Type*} [CommSemiring K] {n r : ℕ}
     (U : Fin r × Fin (n + 1) → K) (i : Fin r) (x : Fin (n + 1) → K) :
     eval x (incidenceLinearForm U i) = ∑ j, U (i,j) * x j :=
