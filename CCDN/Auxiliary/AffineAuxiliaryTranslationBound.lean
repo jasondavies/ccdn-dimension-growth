@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.PrimeScaledAffineMinimum
 import CCDN.Height.HypersurfacePositionHeight
+import CCDN.ForMathlib.Log
 /-! Translating the affine box by a vector bounded by the degree costs only
  a dimension constant in the coefficient-sensitive minimum bound. -/
 
@@ -44,9 +45,7 @@ lemma affine_box_translation_min {d : ℕ} (hd : 0 < d)
     min (Real.log L + d * Real.log (B + d) + (d : ℝ) ^ 2) ((d : ℝ) ^ 2 * b) ≤
       2 * min (Real.log L + d * Real.log B + (d : ℝ) ^ 2) ((d : ℝ) ^ 2 * b) := by
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
-  have hlogd : Real.log ((d : ℝ) + 1) ≤ d := by
-    have hh := Real.log_le_sub_one_of_pos (show 0 < (d : ℝ) + 1 by positivity)
-    linarith
+  have hlogd : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self d.cast_nonneg
   have hnum : Real.log L + d * Real.log (B + d) + (d : ℝ) ^ 2 ≤
       2 * (Real.log L + d * Real.log B + (d : ℝ) ^ 2) := by
     have hlog := affine_box_translation_log hd hB
@@ -68,9 +67,7 @@ lemma affine_box_translation_lower {r d : ℕ} (_hr : 0 < r) (hd : 0 < d)
         (d : ℝ) ^ (4 - 1 / (r : ℝ))) := by
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hd0 : (0 : ℝ) < d := by linarith
-  have hlogd : Real.log ((d : ℝ) + 1) ≤ d := by
-    have hh := Real.log_le_sub_one_of_pos (show 0 < (d : ℝ) + 1 by positivity)
-    linarith
+  have hlogd : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self d.cast_nonneg
   have hpow : (d : ℝ) ^ (1 - 1 / (r : ℝ)) * d ≤ (d : ℝ) ^ (4 - 1 / (r : ℝ)) := by
     calc
       _ = (d : ℝ) ^ (2 - 1 / (r : ℝ)) := by

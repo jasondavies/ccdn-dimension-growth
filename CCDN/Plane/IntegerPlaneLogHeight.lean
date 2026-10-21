@@ -37,8 +37,8 @@ lemma integerPlaneHeight_log_le (m d : ℕ) (hd : 1 ≤ d)
   have hH0 : 0 < H := by linarith
   have hl1 : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self hd0.le
   have hl2 : Real.log (1 + 2 * (d : ℝ)) ≤ 2 * d := by
-    have hh := Real.log_le_sub_one_of_pos (show (0 : ℝ) < 1 + 2 * d by positivity)
-    linarith
+    rw [add_comm]
+    exact Real.log_add_one_le_self (by positivity)
   have hld := Real.log_le_self hd0.le
   have hltwo := Real.log_le_self (by norm_num : (0 : ℝ) ≤ 2)
   have hA : Real.log (2 * (d : ℝ) ^ 3 * (1 + 2 * d)) ≤ 7 * d := by

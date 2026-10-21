@@ -9,6 +9,7 @@ public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Analysis.ElementaryLogBounds
 import CCDN.Auxiliary.PlaneAuxiliaryDegree
+import CCDN.ForMathlib.Log
 /-! The complementary large-coefficient-height auxiliary-degree estimate. -/
 
 @[expose] public section
@@ -153,8 +154,7 @@ lemma plane_large_degree_bound_of_log_bound {d M : ℕ} {T K : ℝ}
     (hlog : Real.log M ≤ K + 6 + Real.log 2 + Real.log 4 + T + 3 * Real.log d) :
     (M : ℝ) ≤ 8 * Real.exp (K + 6 + T) * (d : ℝ) ^ 3 := by
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd
-  have hMR : (0 : ℝ) < M := by exact_mod_cast hM
-  apply (Real.log_le_log_iff hMR (by positivity)).mp
+  refine Real.natCast_le_of_log_le_log hM (by positivity) ?_
   rw [Real.log_mul (by positivity) (by positivity),
     Real.log_mul (by norm_num) (Real.exp_pos _).ne', Real.log_exp, Real.log_pow]
   have h8 : Real.log 8 = Real.log 2 + Real.log 4 := by

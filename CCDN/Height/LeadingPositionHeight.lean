@@ -37,11 +37,9 @@ lemma leadingPositionHeightFactor_log_le {d : ℕ} (hd : 0 < d) :
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have h₁ : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self d.cast_nonneg
   have h₂ : Real.log ((d : ℝ) + 2) ≤ d + 1 := by
-    have h := Real.log_le_sub_one_of_pos (show (0 : ℝ) < d + 2 by positivity)
-    linarith
-  have h₃ : Real.log (2 * (d : ℝ) + 1) ≤ 2 * d := by
-    have h := Real.log_le_sub_one_of_pos (show (0 : ℝ) < 2 * d + 1 by positivity)
-    linarith
+    rw [show (d : ℝ) + 2 = (d + 1) + 1 by ring]
+    exact Real.log_add_one_le_self (by positivity)
+  have h₃ : Real.log (2 * (d : ℝ) + 1) ≤ 2 * d := Real.log_add_one_le_self (by positivity)
   unfold leadingPositionHeightFactor
   rw [Real.log_mul (by positivity) (by positivity), Real.log_mul (by positivity) (by positivity),
     Real.log_pow, Real.log_pow, Real.log_pow]

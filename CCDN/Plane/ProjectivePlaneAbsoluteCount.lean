@@ -10,6 +10,7 @@ public import CCDN.Plane.ScaledPlaneCount
 import CCDN.Plane.ProjectivePlanePositionedCount
 import CCDN.Plane.RationalPlaneAssembly
 import CCDN.Projection.PrimitiveNormalization
+import CCDN.ForMathlib.Log
 /-! An absolute d^4 B^(2/d) bound for primitive absolutely irreducible
 homogeneous plane equations of degree at least two. -/
 
@@ -62,9 +63,7 @@ lemma projective_positioned_bound_le {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 �
   have hQ : 1 ≤ Q := Real.one_le_rpow hB (by positivity)
   have hE : 0 ≤ E := by dsimp [E]; positivity
   have hA : 0 ≤ A := by dsimp [A]; positivity
-  have hlogplus : Real.log ((d : ℝ) + 1) ≤ d := by
-    have h := Real.log_le_sub_one_of_pos (show (0 : ℝ) < d + 1 by positivity)
-    linarith
+  have hlogplus : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self d.cast_nonneg
   have hlogR : Real.log (((d : ℝ) + 1) * B) ≤ d + Real.log B := by
     rw [Real.log_mul (by positivity) hB0.ne']
     linarith

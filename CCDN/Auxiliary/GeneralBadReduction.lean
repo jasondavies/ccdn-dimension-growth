@@ -10,6 +10,7 @@ public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.ConstantLeadingBadReduction
 import CCDN.Auxiliary.BadPrimeCharge
 import CCDN.Plane.ShearHeight
+import CCDN.ForMathlib.Log
 /-! The geometric bad-prime charge for arbitrary integer plane equations.
 The proof combines bounded integral normalization, coefficient growth and an
 integer minor witness; reducibility is tested over the residue field's
@@ -33,7 +34,7 @@ lemma normalized_shear_scaled_log_height (d : ℕ) (hd : 1 ≤ d)
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hd0 : (0 : ℝ) < d := by linarith
   have hlog := Real.log_nonneg hH
-  have hdlog := Real.log_le_sub_one_of_pos (show 0 < (d : ℝ) + 1 by positivity)
+  have hdlog := Real.log_add_one_le_self (Nat.cast_nonneg (α := ℝ) d)
   have hcost : ((d : ℝ) + 2) * Real.log ((d : ℝ) + 1) ≤ 3 * (d : ℝ) ^ 2 := by
     have hh := mul_le_mul_of_nonneg_left hdlog (show 0 ≤ (d : ℝ) + 2 by positivity)
     nlinarith

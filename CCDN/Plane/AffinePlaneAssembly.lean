@@ -8,6 +8,7 @@ module
 public import CCDN.Algebra.AffineNonzeroConstant
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Height.AffineTranslationCount
+import CCDN.ForMathlib.Log
 /-! All affine scaling, coefficient-height and zero-constant-term reductions
 for primitive absolutely irreducible plane equations. The resulting bound
 assumes the sharp finite-field estimate. -/
@@ -23,9 +24,7 @@ lemma curveBound_translation_radius {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 ≤
   have hB0 : 0 < B := by linarith
   have hdplus : (0 : ℝ) < d + 1 := by positivity
   have hlogB := Real.log_nonneg hB
-  have hlogd : Real.log ((d : ℝ) + 1) ≤ d := by
-    have h := Real.log_le_sub_one_of_pos hdplus
-    linarith
+  have hlogd : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self d.cast_nonneg
   have hpow : ((d : ℝ) + 1) ^ (1 / (d : ℝ)) ≤ Real.exp 1 := by
     rw [Real.rpow_def_of_pos hdplus, mul_one_div]
     apply Real.exp_le_exp.mpr
