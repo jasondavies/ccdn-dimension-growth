@@ -126,35 +126,5 @@ theorem exists_integer_hyperplane_slice_models {n : ℕ}
   choose g hg using hslices
   exact ⟨g, hg⟩
 
-/-- A bounded good hyperplane and integer equations for all its parallel
-slices. The leading form of every slice is absolutely irreducible of the
-original full degree, and integer zeros map by coordinate deletion. -/
-theorem exists_bounded_good_integer_hyperplane_slices {n : ℕ}
-    (f : MvPolynomial (Option (Fin (3 + n))) ℤ)
-    (hir : Irreducible (map (Int.castRingHom Qbar)
-      (homogeneousComponent f.totalDegree f)))
-    (hd : 0 < f.totalDegree) :
-    ∃ (D : ℤ) (a : Fin (3 + n) → ℤ) (g : ℤ → MvPolynomial (Fin (3 + n)) ℤ),
-      D ≠ 0 ∧ |D| ≤ (goodHyperplaneHeight f.totalDegree : ℤ) ∧
-      (∀ i, |a i| ≤ (goodHyperplaneHeight f.totalDegree : ℤ)) ∧
-      ∀ k : ℤ, (g k).totalDegree = f.totalDegree ∧
-        Irreducible (map (Int.castRingHom Qbar)
-          (homogeneousComponent (g k).totalDegree (g k))) ∧
-        ∀ x : Option (Fin (3 + n)) → ℤ,
-          D * x none - ∑ i, a i * x (some i) = k →
-          eval x f = 0 → eval (fun i => x (some i)) (g k) = 0 := by
-  classical
-  let F := homogeneousComponent f.totalDegree f
-  have hF : F ≠ 0 := by
-    intro hz
-    exact hir.ne_zero (by change map _ F = 0; rw [hz, map_zero])
-  have hFdegree : F.totalDegree = f.totalDegree :=
-    (homogeneousComponent_isHomogeneous f.totalDegree f).totalDegree hF
-  obtain ⟨D, a, hD, hDb, hab, _, hgood⟩ :=
-    exists_bounded_geometrically_good_hyperplane F hir (hFdegree ▸ hd)
-  rw [hFdegree] at hDb hab
-  obtain ⟨g, hg⟩ := exists_integer_hyperplane_slice_models f D a hD hgood
-  exact ⟨D, a, g, hD, hDb, hab, hg⟩
-
 end
 end CCDN

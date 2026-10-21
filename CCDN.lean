@@ -390,7 +390,6 @@ public import CCDN.LatticeMinimaProduct
 public import CCDN.LatticeDiscriminantNumerics
 public import CCDN.EuclideanNumberFieldBasis
 public import CCDN.NumberFieldShortBasis
-public import CCDN.ClassGroupRelativeNorm
 public import CCDN.UniformNumberFieldLatticeCount
 public import CCDN.OddDegreeClassGroupBound
 public import CCDN.ClassGroupQuadraticInvolution
@@ -420,7 +419,6 @@ public import CCDN.SmallSubfieldIntegerCount
 public import CCDN.NormCurveExceptionalReduction
 public import CCDN.NoIndexTwoClassGroupCounting
 public import CCDN.NoIndexTwoClassGroupBound
-public import CCDN.QuadraticAmbiguousIdealScalar
 public import CCDN.QuadraticHilbert90
 public import CCDN.QuadraticInvariantIdeal
 public import CCDN.NumberFieldUnitSquareClasses
@@ -453,7 +451,6 @@ public import CCDN.ClassGroupDegreeReduction
 public import CCDN.ClassGroupUniformBound
 public import CCDN.ClassGroupBound
 public import CCDN.SmallOutsidePoint
-public import CCDN.CurveGridDegreeBound
 public import CCDN.WeightedSequenceEstimate
 public import CCDN.MixedDegreeProjectiveExample
 public import CCDN.MixedDegreeProjectiveLocal
@@ -503,7 +500,6 @@ public import CCDN.EulerSparseMatrix
 public import CCDN.EulerUniversalHeight
 public import CCDN.FiniteGaloisIdealDefinition
 public import CCDN.GaloisPolynomialPrimes
-public import CCDN.GeometricPrimeIntersectionGrid
 public import CCDN.HilbertCoefficientEquiv
 public import CCDN.HilbertScalarExtension
 public import CCDN.HypersurfaceOriginStalk

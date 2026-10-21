@@ -52,23 +52,6 @@ theorem hypersurfaceBadPrimeFactor_le_top_homogeneousComponent {n : ℕ}
   · exact fun _ => hir
   · exact hypersurfaceBadReduction_imp_top_homogeneousComponent f
 
-/-- A height bound for the top form controls the full affine equation's
- bad-prime factor; lower-order coefficients play no role. -/
-theorem hypersurfaceBadPrimeFactor_le_top_height {n : ℕ}
-    (f : MvPolynomial (Fin (n + 1)) ℤ)
-    (hir : HasAbsIrreducibleTopForm f)
-    (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ m, |((homogeneousComponent f.totalDegree f).coeff m : ℝ)| ≤ H) :
-    hypersurfaceBadPrimeFactor f ≤
-      (Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (n + 1)) *
-        (1 + Real.log H / (f.totalDegree : ℝ) ^ 2) := by
-  have htop : homogeneousComponent f.totalDegree f ≠ 0 := by
-    intro hz
-    exact hir.ne_zero (by rw [hz, map_zero])
-  have hh := hypersurfaceBadPrimeFactor_le_height (homogeneousComponent f.totalDegree f) H hH hcoeff
-  rw [(homogeneousComponent_isHomogeneous _ _).totalDegree htop] at hh
-  exact (hypersurfaceBadPrimeFactor_le_top_homogeneousComponent f hir).trans hh
-
 /-- Primitivity reflects the irreducibility supplied by the absolute top form
  back to the integer polynomial ring. -/
 theorem PrimitiveIntegerPolynomial.irreducible_of_absolute_top {σ : Type*}

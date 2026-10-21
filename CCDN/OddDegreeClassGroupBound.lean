@@ -20,13 +20,6 @@ def oddDegreeClassGroupConstant (n : ℕ) : ℝ :=
     (numberFieldLatticeBoxConstant n ((n : ℝ) ^ 3) * (2 : ℝ) ^ n) *
     (3 * (9 : ℝ) ^ (n - 1))
 
-lemma oddDegreeClassGroupConstant_pos {n : ℕ} (hn : 0 < n) :
-    0 < oddDegreeClassGroupConstant n := by
-  have hnR : (0 : ℝ) < n := by exact_mod_cast hn
-  have hC := affineHypersurfaceAuxiliaryConstant_pos 0
-  unfold oddDegreeClassGroupConstant numberFieldLatticeBoxConstant
-  positivity
-
 variable (K : Type*) [Field K] [NumberField K]
 
 /-- The log-free odd-degree bound. -/

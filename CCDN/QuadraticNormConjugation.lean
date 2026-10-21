@@ -51,17 +51,5 @@ theorem quadratic_norm_eq_mul_conjugate
       False.elim ((quadratic_automorphism_eq_one_or F K hd σ hσ τ).elim hτ.1 hτ.2))
   simpa only [AlgEquiv.one_apply] using hp
 
-theorem quadratic_fixed_iff_mem_base
-    (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1) (x : K) :
-    σ x = x ↔ x ∈ Set.range (algebraMap F K) := by
-  let : Algebra.IsQuadraticExtension F K := ⟨hd⟩
-  rw [IsGalois.mem_range_algebraMap_iff_fixed]
-  constructor
-  · intro hx τ
-    rcases quadratic_automorphism_eq_one_or F K hd σ hσ τ with rfl | rfl
-    · exact AlgEquiv.one_apply x
-    · exact hx
-  · exact fun hx ↦ hx σ
-
 end
 end CCDN

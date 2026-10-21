@@ -74,25 +74,5 @@ theorem signedNormCurvePolynomial_totalDegree (K : Type*) [Field K] [NumberField
   change bivariateTotalDegree (X ^ 2 - C (C ε * integerNormPolynomial K β)) = _
   rw [double_cover_bivariateTotalDegree _ (by omega), hd]
 
-theorem signedNormCurvePolynomial_map_irreducible_of_odd
-    (K E : Type*) [Field K] [NumberField K] [Field E] [CharZero E]
-    (β : 𝓞 K) {ε : ℤ} (hε : ε ≠ 0) (hn : Odd (Module.finrank ℚ K)) :
-    Irreducible (MvPolynomial.map (Int.castRingHom E)
-      (signedNormCurvePolynomial K β ε)) := by
-  apply (MulEquiv.irreducible_iff (f := bivariatePolynomialEquiv E)).mp
-  rw [← bivariatePolynomialEquiv_map]
-  simp only [signedNormCurvePolynomial, AlgEquiv.apply_symm_apply]
-  change Irreducible (Polynomial.map (Polynomial.mapRingHom (Int.castRingHom E))
-    (X ^ 2 - C (C ε * integerNormPolynomial K β)))
-  simp only [Polynomial.map_sub, Polynomial.map_pow, Polynomial.map_X, Polynomial.map_C,
-    coe_mapRingHom, Polynomial.map_mul]
-  apply odd_degree_double_cover_irreducible
-  have he : (ε : E) ≠ 0 := by exact_mod_cast hε
-  change Odd (C (ε : E) *
-    (integerNormPolynomial K β).map (Int.castRingHom E)).natDegree
-  rw [natDegree_C_mul he, (integerNormPolynomial_monic K β).natDegree_map,
-    integerNormPolynomial_natDegree]
-  exact hn
-
 end
 end CCDN

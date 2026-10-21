@@ -60,30 +60,6 @@ theorem numberFieldUnit_exponent_two_quotient
   simpa only [Nat.card_eq_fintype_card, Fintype.card_prod,
     Fintype.card_fun, Fintype.card_fin, pow_succ, mul_comm] using hc
 
-/-- Square classes of units of the ring of integers. -/
-abbrev numberFieldUnitSquareClasses :=
-  (𝓞 K)ˣ ⧸ (powMonoidHom 2 : (𝓞 K)ˣ →* (𝓞 K)ˣ).range
-
-omit [NumberField K] in
-theorem numberFieldUnitSquareClasses_square (x : numberFieldUnitSquareClasses K) :
-    x ^ 2 = 1 := by
-  induction x using QuotientGroup.induction_on with
-  | H u =>
-    rw [← QuotientGroup.mk_pow]
-    exact (QuotientGroup.eq_one_iff _).mpr ⟨u, rfl⟩
-
-instance : Finite (numberFieldUnitSquareClasses K) :=
-  (numberFieldUnit_exponent_two_quotient K
-    (QuotientGroup.mk' (powMonoidHom 2 : (𝓞 K)ˣ →* (𝓞 K)ˣ).range)
-    (QuotientGroup.mk'_surjective _) (numberFieldUnitSquareClasses_square K)).1
-
-theorem numberFieldUnitSquareClasses_card_le_rank :
-    Nat.card (numberFieldUnitSquareClasses K) ≤
-      2 ^ (NumberField.Units.rank K + 1) :=
-  (numberFieldUnit_exponent_two_quotient K
-    (QuotientGroup.mk' (powMonoidHom 2 : (𝓞 K)ˣ →* (𝓞 K)ˣ).range)
-    (QuotientGroup.mk'_surjective _) (numberFieldUnitSquareClasses_square K)).2
-
 theorem numberField_unit_rank_add_one_le_degree :
     NumberField.Units.rank K + 1 ≤ Module.finrank ℚ K := by
   have hpos := Fintype.card_pos (α := InfinitePlace K)
@@ -91,13 +67,6 @@ theorem numberField_unit_rank_add_one_le_degree :
   have hrank := InfinitePlace.card_add_two_mul_card_eq_rank (K := K)
   unfold NumberField.Units.rank
   omega
-
-/-- The unit square-class contribution is bounded solely by the number
-field degree, as needed in a uniform quadratic-tower estimate. -/
-theorem numberFieldUnitSquareClasses_card_le_degree :
-    Nat.card (numberFieldUnitSquareClasses K) ≤ 2 ^ Module.finrank ℚ K := by
-  apply (numberFieldUnitSquareClasses_card_le_rank K).trans
-  exact Nat.pow_le_pow_right (by norm_num) (numberField_unit_rank_add_one_le_degree K)
 
 end
 end CCDN

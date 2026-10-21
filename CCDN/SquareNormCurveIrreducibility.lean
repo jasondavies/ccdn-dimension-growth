@@ -103,39 +103,5 @@ theorem signedNormCurvePolynomial_absolute_irreducible_of_odd_subfield_index
   · change (ε : AlgebraicClosure ℚ) ≠ 0
     exact_mod_cast hε
 
-/-- Every reducible signed norm curve comes from a parameter whose
-generated subfield has even index. -/
-theorem signedNormCurvePolynomial_reducible_implies_even_subfield_index
-    (K : Type*) [Field K] [NumberField K]
-    (β : 𝓞 K) {ε : ℤ} (hε : ε ≠ 0)
-    (hir : ¬ Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure ℚ))
-      (signedNormCurvePolynomial K β ε))) :
-    Even (Module.finrank ℚ⟮(β : K)⟯ K) := by
-  rcases Nat.even_or_odd (Module.finrank ℚ⟮(β : K)⟯ K) with he | ho
-  · exact he
-  · exact (hir (signedNormCurvePolynomial_absolute_irreducible_of_odd_subfield_index
-      K β hε ho)).elim
-
-theorem signedNormCurvePolynomial_reducible_small_subfield
-    (K : Type*) [Field K] [NumberField K]
-    (hnoTwo : ∀ L : IntermediateField ℚ K, Module.finrank L K ≠ 2)
-    (β : 𝓞 K) {ε : ℤ} (hε : ε ≠ 0)
-    (hir : ¬ Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure ℚ))
-      (signedNormCurvePolynomial K β ε))) :
-    ∃ L : IntermediateField ℚ K, (β : K) ∈ L ∧
-      4 ≤ Module.finrank L K ∧
-      4 * Module.finrank ℚ L ≤ Module.finrank ℚ K := by
-  let L := ℚ⟮(β : K)⟯
-  have he := signedNormCurvePolynomial_reducible_implies_even_subfield_index K β hε hir
-  have hpos : 0 < Module.finrank L K := Module.finrank_pos
-  have hne := hnoTwo L
-  have hfour : 4 ≤ Module.finrank L K := by
-    obtain ⟨k, hk⟩ := he
-    change Module.finrank L K = k + k at hk
-    omega
-  refine ⟨L, IntermediateField.mem_adjoin_simple_self ℚ (β : K), hfour, ?_⟩
-  have hdim := Module.finrank_mul_finrank ℚ L K
-  nlinarith
-
 end
 end CCDN

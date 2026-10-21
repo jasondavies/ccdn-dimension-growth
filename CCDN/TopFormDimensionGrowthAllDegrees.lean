@@ -32,6 +32,9 @@ theorem top_form_surface_bounded_degree_linear_bound (t : ℕ) :
       · exact (hbound' f hir heq B hB).trans (by gcongr; linarith)
     · exact ⟨C, hC, fun f hir hd hlt => hbound f hir hd (by omega)⟩
 
+/-- Corrected CCDN Proposition 4.3.4 in every degree at least five: the surface bound
+`C d^18 B` for integer equations in three variables with absolutely irreducible top-degree
+form. -/
 theorem top_form_surface_dimension_growth :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,

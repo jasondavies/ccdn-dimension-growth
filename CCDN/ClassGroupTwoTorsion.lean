@@ -75,15 +75,6 @@ lemma generator_absolute_norm_of_ideal_square (I : Ideal (𝓞 K)) {β : 𝓞 K}
     (Algebra.norm ℤ β).natAbs = Ideal.absNorm I ^ 2 := by
   rw [← Ideal.absNorm_span_singleton, ← hI, map_pow]
 
-lemma generator_norm_eq_signed_square (I : Ideal (𝓞 K)) {β : 𝓞 K}
-    (hI : I ^ 2 = Ideal.span {β}) :
-    Algebra.norm ℤ β = (Ideal.absNorm I : ℤ) ^ 2 ∨
-      Algebra.norm ℤ β = -((Ideal.absNorm I : ℤ) ^ 2) := by
-  have h := generator_absolute_norm_of_ideal_square K I hI
-  have h' : |Algebra.norm ℤ β| = (Ideal.absNorm I : ℤ) ^ 2 := by
-    simpa only [Int.natCast_natAbs, Nat.cast_pow] using congrArg (Nat.cast : ℕ → ℤ) h
-  exact (abs_eq (by positivity)).mp h'
-
 /-- Every two-torsion class has a nonzero integral representative
 within the usual Minkowski ideal-norm bound, with a nonzero generator of
 its square and the resulting exact absolute norm identity. -/
@@ -103,22 +94,6 @@ theorem exists_two_torsion_integral_square_representative
     exact c.property
   obtain ⟨β, hβ, hIβ⟩ := exists_generator_of_class_square_eq_one I hIsq
   exact ⟨I, β, hIc, hβ, hIβ, generator_absolute_norm_of_ideal_square K _ hIβ, hInorm⟩
-
-/-- Generators can be chosen injectively on the two-torsion class group.
-No archimedean bound is asserted here; that is the separate geometry-of-numbers
-step required in the class-group reduction. -/
-theorem exists_injective_two_torsion_square_generators :
-    ∃ β : classGroupTwoTorsion K → 𝓞 K, Function.Injective β ∧
-      ∀ c, β c ≠ 0 ∧ ∃ I : (Ideal (𝓞 K))⁰,
-        ClassGroup.mk0 I = c ∧ (I : Ideal (𝓞 K)) ^ 2 = Ideal.span {β c} ∧
-          (Algebra.norm ℤ (β c)).natAbs = Ideal.absNorm (I : Ideal (𝓞 K)) ^ 2 := by
-  classical
-  choose I β hc hβ hsq hnorm hbound using exists_two_torsion_integral_square_representative K
-  refine ⟨β, ?_, fun c => ⟨hβ c, I c, hc c, hsq c, hnorm c⟩⟩
-  intro c e hce
-  apply Subtype.ext
-  rw [← hc c, ← hc e]
-  exact ideal_class_eq_of_square_generators_eq (I c) (I e) (hsq c) (hsq e) hce
 
 end
 end CCDN

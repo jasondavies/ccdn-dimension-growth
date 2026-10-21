@@ -1,6 +1,8 @@
 module
 
-public import CCDN.ClassGroupRelativeNorm
+public import Mathlib.RingTheory.ClassGroup.ExtendedHom
+public import Mathlib.RingTheory.Ideal.Norm.RelNorm
+public import Mathlib.Tactic
 public import Mathlib.NumberTheory.NumberField.Norm
 
 /-! Scalar comparisons for ambiguous ideal classes have relative norm

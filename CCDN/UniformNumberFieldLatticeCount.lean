@@ -15,17 +15,6 @@ open scoped Classical
 
 variable (K : Type*) [Field K] [NumberField K]
 
-theorem boundedArchimedeanIntegers_uniform_count
-    (hn : 2 ≤ Module.finrank ℚ K) {B : ℝ}
-    (hB : |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ)) ≤ B) :
-    ((boundedArchimedeanIntegers K B).ncard : ℝ) * Real.sqrt |(discr K : ℝ)| ≤
-      numberFieldLatticeBoxConstant (Module.finrank ℚ K) ((Module.finrank ℚ K : ℝ) ^ 3) *
-        B ^ Module.finrank ℚ K := by
-  obtain ⟨b, hb, hnorm⟩ := exists_numberField_short_basis K hn
-  have hB0 : 0 ≤ B := (Real.rpow_nonneg (abs_nonneg _) _).trans hB
-  apply boundedArchimedeanIntegers_count_of_relative_short_basis K b hb hB0 (by positivity)
-  exact fun i ↦ (hnorm i).trans (mul_le_mul_of_nonneg_left hB (by positivity))
-
 theorem boundedSquareNormTranslationClasses_uniform_count
     (hn : 2 ≤ Module.finrank ℚ K) {B : ℝ} (hB1 : 1 ≤ B)
     (hB : |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ)) ≤ B) :
