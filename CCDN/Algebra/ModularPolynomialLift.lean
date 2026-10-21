@@ -18,7 +18,7 @@ open MvPolynomial
 def modularPolynomialLift {σ : Type*} {p : ℕ} (f : MvPolynomial σ (ZMod p)) :
     MvPolynomial σ ℤ := ∑ e ∈ f.support, monomial e (f.coeff e).val
 
-lemma coeff_modularPolynomialLift {σ : Type*} {p : ℕ}
+private lemma coeff_modularPolynomialLift {σ : Type*} {p : ℕ}
     (f : MvPolynomial σ (ZMod p)) (e : σ →₀ ℕ) :
     (modularPolynomialLift f).coeff e = (f.coeff e).val := by
   classical

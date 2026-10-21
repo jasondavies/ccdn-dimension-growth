@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-lemma homogeneousCoefficientMap_injective {K : Type*} [Field K] (n M : ℕ) :
+private lemma homogeneousCoefficientMap_injective {K : Type*} [Field K] (n M : ℕ) :
     Function.Injective ((homogeneousCoefficientMap K n M).domRestrict
       (homogeneousSubmodule (Fin (n + 1)) K M)) := by
   intro u v huv
@@ -28,7 +28,7 @@ lemma homogeneousCoefficientMap_injective {K : Type*} [Field K] (n M : ℕ) :
   rw [homogeneous_eq_sum_coeff u.val u.property, homogeneous_eq_sum_coeff v.val v.property]
   simp only [he]
 
-lemma homogeneousCoefficientMap_surjective {K : Type*} [Field K] (n M : ℕ) :
+private lemma homogeneousCoefficientMap_surjective {K : Type*} [Field K] (n M : ℕ) :
     Function.Surjective ((homogeneousCoefficientMap K n M).domRestrict
       (homogeneousSubmodule (Fin (n + 1)) K M)) := by
   classical
@@ -45,7 +45,7 @@ lemma homogeneousCoefficientMap_surjective {K : Type*} [Field K] (n M : ℕ) :
 
 /-- When all degree-M relations are multiples of f, the evaluation
 kernel is exactly the image of the degree-allowed multiples. -/
-theorem homogeneous_evaluation_kernel_eq_multiples {K : Type*} [Field K]
+private theorem homogeneous_evaluation_kernel_eq_multiples {K : Type*} [Field K]
     {n d M t : ℕ} (f : MvPolynomial (Fin (n + 1)) K)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → Fin (n + 1) → K) (hzero : ∀ i, eval (points i) f = 0)
@@ -79,7 +79,7 @@ theorem homogeneous_evaluation_kernel_eq_multiples {K : Type*} [Field K]
     simp only [eval_mul, hzero i, zero_mul, Pi.zero_apply]
 
 /-- The exact Hilbert rank in the absence of an auxiliary polynomial. -/
-theorem homogeneous_evaluation_rank_eq {K : Type*} [Field K]
+private theorem homogeneous_evaluation_rank_eq {K : Type*} [Field K]
     {n d M t : ℕ} (f : MvPolynomial (Fin (n + 1)) K)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → Fin (n + 1) → K) (hzero : ∀ i, eval (points i) f = 0)
@@ -106,7 +106,7 @@ theorem homogeneous_evaluation_rank_eq {K : Type*} [Field K]
   simpa only [Matrix.rank, Module.finrank_pi, Module.finrank_self, mul_one, Fintype.card_fin] using h
 
 /-- Clearing denominators preserves a prescribed homogeneous degree. -/
-theorem homogeneous_integer_multiple {n M : ℕ}
+private theorem homogeneous_integer_multiple {n M : ℕ}
     (g : MvPolynomial (Fin (n + 1)) ℚ) (hg : g.IsHomogeneous M) :
     ∃ (b : ℤ) (u : MvPolynomial (Fin (n + 1)) ℤ), b ≠ 0 ∧
       u.IsHomogeneous M ∧ map (Int.castRingHom ℚ) u = C (b : ℚ) * g := by
@@ -125,7 +125,7 @@ theorem homogeneous_integer_multiple {n M : ℕ}
 
 /-- Absence of an integral auxiliary polynomial also rules out rational
 homogeneous relations outside the principal ideal. -/
-theorem rational_relations_of_integer_relations {n M t : ℕ}
+private theorem rational_relations_of_integer_relations {n M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (points : Fin t → Fin (n + 1) → ℤ)
     (hrel : ∀ u : MvPolynomial (Fin (n + 1)) ℤ, u.IsHomogeneous M →

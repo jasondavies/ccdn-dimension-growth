@@ -18,7 +18,7 @@ noncomputable section
 open Polynomial Matrix
 
 /-- Remove the common order of vanishing of a nonzero polynomial vector. -/
-lemma polynomial_vector_remove_common_X {K ι : Type*} [Field K]
+private lemma polynomial_vector_remove_common_X {K ι : Type*} [Field K]
     (w : ι → Polynomial K) (hw : w ≠ 0) :
     ∃ N : ℕ, ∃ v : ι → Polynomial K,
       (∀ i, w i = X ^ N * v i) ∧ ∃ i, (v i).eval 0 ≠ 0 := by
@@ -47,7 +47,7 @@ lemma polynomial_vector_remove_common_X {K ι : Type*} [Field K]
 
 /-- Rational-function dependence of columns gives a nonzero polynomial
 kernel vector by clearing one common denominator. -/
-theorem polynomial_matrix_kernel_of_not_injective {K ι κ : Type*} [Field K]
+private theorem polynomial_matrix_kernel_of_not_injective {K ι κ : Type*} [Field K]
     [Fintype ι] [Fintype κ] [DecidableEq ι] [DecidableEq κ]
     (A : Matrix ι κ (Polynomial K))
     (hA : ¬ Function.Injective (A.map (algebraMap (Polynomial K) (RatFunc K))).mulVecLin) :

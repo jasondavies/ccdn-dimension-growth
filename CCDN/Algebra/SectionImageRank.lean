@@ -16,7 +16,7 @@ the Hilbert-function argument. -/
 namespace CCDN
 noncomputable section
 
-lemma section_powers_independent {K A B ι : Type*} [Field K]
+private lemma section_powers_independent {K A B ι : Type*} [Field K]
     [CommRing A] [IsDomain A] [Algebra K A] [CommRing B] [Algebra K B]
     [Fintype ι] [DecidableEq ι] (φ : A →ₐ[K] B) (h : ι → A)
     (hlin : LinearIndependent K (fun i => φ (h i))) (l : A) (hl : l ≠ 0)
@@ -50,7 +50,7 @@ lemma section_powers_independent {K A B ι : Type*} [Field K]
     obtain ⟨i, k⟩ := t
     exact Fin.cases (hconst i) (fun k => hc (i, k)) k
 
-lemma section_image_filtered_lower {K B σ ι : Type*} [Field K]
+private lemma section_image_filtered_lower {K B σ ι : Type*} [Field K]
     [CommRing B] [Algebra K B] [Fintype σ] [Fintype ι] [DecidableEq ι]
     (p : Ideal (MvPolynomial σ K)) [p.IsPrime]
     (φ : (MvPolynomial σ K ⧸ p) →ₐ[K] B)

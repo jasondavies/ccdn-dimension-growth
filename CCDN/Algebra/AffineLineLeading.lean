@@ -14,7 +14,7 @@ on the top homogeneous component and the direction, not the base point. -/
 namespace CCDN
 noncomputable section
 
-lemma polynomial_coeff_prod_sum_of_natDegree_le
+private lemma polynomial_coeff_prod_sum_of_natDegree_le
     {R ι : Type*} [CommRing R] (s : Finset ι) (q : ι → Polynomial R) (e : ι → ℕ)
     (hq : ∀ i ∈ s, (q i).natDegree ≤ e i) :
     (∏ i ∈ s, q i).coeff (∑ i ∈ s, e i) = ∏ i ∈ s, (q i).coeff (e i) := by
@@ -42,7 +42,7 @@ def affineLinePolynomial {R σ : Type*} [CommRing R] (a b : σ → R) :
   MvPolynomial.eval₂Hom Polynomial.C
     (fun i => Polynomial.C (a i) + Polynomial.C (b i) * Polynomial.X)
 
-lemma affineLinePolynomial_monomial_top {R σ : Type*} [CommRing R]
+private lemma affineLinePolynomial_monomial_top {R σ : Type*} [CommRing R]
     (a b : σ → R) (m : σ →₀ ℕ) (c : R) (d : ℕ) (hd : m.degree ≤ d) :
     (affineLinePolynomial a b (MvPolynomial.monomial m c)).coeff d =
       if d = m.degree then c * m.prod (fun i e => b i ^ e) else 0 := by

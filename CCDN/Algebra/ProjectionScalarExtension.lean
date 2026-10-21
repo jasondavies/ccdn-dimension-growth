@@ -37,7 +37,7 @@ theorem polynomialCoefficientLinear_aeval
           map (algebraMap K L) (X i) := by simp
       rw [hX, polynomialCoefficientLinear_mul_map, map_mul, aeval_X]
 
-lemma map_aeval_polynomial_substitution
+private lemma map_aeval_polynomial_substitution
     {K L : Type*} [Field K] [Field L] [Algebra K L] {m n : ℕ}
     (a : Fin m → MvPolynomial (Fin n) K) (f : MvPolynomial (Fin m) K) :
     map (algebraMap K L) (aeval a f) =

@@ -26,7 +26,7 @@ namespace CCDN
 noncomputable section
 open Polynomial Finset
 
-lemma nat_power_gap_le (n x y μ : ℕ) (hxy : x = y + μ) :
+private lemma nat_power_gap_le (n x y μ : ℕ) (hxy : x = y + μ) :
     x ^ (n + 1) ≤ y ^ (n + 1) + (n + 1) * μ * x ^ n := by
   induction n with
   | zero => simpa using hxy.le
@@ -38,7 +38,7 @@ lemma nat_power_gap_le (n x y μ : ℕ) (hxy : x = y + μ) :
     simp only [pow_succ] at *
     nlinarith
 
-lemma nat_augmented_power_gap_le (n x y μ a : ℕ) (hxy : x = y + μ)
+private lemma nat_augmented_power_gap_le (n x y μ a : ℕ) (hxy : x = y + μ)
     (ha : a ≤ μ) :
     x ^ (n + 2) + a * x ^ (n + 1) ≤
       y ^ (n + 2) + a * y ^ (n + 1) + (n + 2) * μ * x ^ (n + 1) := by
@@ -49,7 +49,7 @@ lemma nat_augmented_power_gap_le (n x y μ a : ℕ) (hxy : x = y + μ)
   simp only [pow_succ] at *
   nlinarith
 
-lemma nat_augmented_power_gap_uniform (n x y μ a : ℕ) (hxy : x = y + μ) :
+private lemma nat_augmented_power_gap_uniform (n x y μ a : ℕ) (hxy : x = y + μ) :
     x ^ (n + 2) + a * x ^ (n + 1) ≤
       y ^ (n + 2) + a * y ^ (n + 1) + (n + 2) * μ * x ^ (n + 1) +
         a ^ 2 * (n + 1) * x ^ n := by
@@ -61,7 +61,7 @@ lemma nat_augmented_power_gap_uniform (n x y μ a : ℕ) (hxy : x = y + μ) :
     have h₃ := Nat.mul_le_mul_left (a * (n + 1) * x ^ n) hμ
     nlinarith
 
-lemma nat_polynomial_eval_top_two (p : ℕ[X]) (n : ℕ)
+private lemma nat_polynomial_eval_top_two (p : ℕ[X]) (n : ℕ)
     (hdegree : p.natDegree = n + 2) (hmonic : p.Monic) (x : ℕ) :
     p.eval x = x ^ (n + 2) + p.coeff (n + 1) * x ^ (n + 1) +
       ∑ i ∈ range (n + 1), p.coeff i * x ^ i := by
@@ -70,7 +70,7 @@ lemma nat_polynomial_eval_top_two (p : ℕ[X]) (n : ℕ)
   rw [hc]
   ring
 
-lemma nat_polynomial_lower_terms_le (p : ℕ[X]) (n x : ℕ) (hx : 0 < x) :
+private lemma nat_polynomial_lower_terms_le (p : ℕ[X]) (n x : ℕ) (hx : 0 < x) :
     (∑ i ∈ range (n + 1), p.coeff i * x ^ i) ≤
       (∑ i ∈ range (n + 1), p.coeff i) * x ^ n := by
   rw [sum_mul]

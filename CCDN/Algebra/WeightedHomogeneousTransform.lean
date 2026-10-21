@@ -14,7 +14,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem weighted_homogeneous_substitution
+private theorem weighted_homogeneous_substitution
     {K A σ τ : Type*} [CommRing K] [CommRing A]
     (ψ : K →+* A) (w : σ → ℕ) (v : τ → ℕ)
     (a : σ → MvPolynomial τ A)

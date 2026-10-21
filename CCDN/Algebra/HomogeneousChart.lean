@@ -34,7 +34,7 @@ lemma exponent_degree_split {n : ℕ} (m : Fin (n + 1) →₀ ℕ) :
     Finsupp.sum_fintype _ _ (by simp)]
   rfl
 
-lemma chartExponent_injective_on_degree {n M : ℕ} {m k : Fin (n + 1) →₀ ℕ}
+private lemma chartExponent_injective_on_degree {n M : ℕ} {m k : Fin (n + 1) →₀ ℕ}
     (hm : m.sum (fun _ e => e) = M) (hk : k.sum (fun _ e => e) = M)
     (he : chartExponent m = chartExponent k) : m = k := by
   have h0 : m 0 = k 0 := by
@@ -98,14 +98,14 @@ def homogenizedExponent {n : ℕ} (M : ℕ) (m : Fin n →₀ ℕ) : Fin (n + 1)
   ext i
   rfl
 
-lemma homogenizedExponent_degree {n M : ℕ} (m : Fin n →₀ ℕ)
+private lemma homogenizedExponent_degree {n M : ℕ} (m : Fin n →₀ ℕ)
     (hm : m.sum (fun _ e => e) ≤ M) :
     (homogenizedExponent M m).sum (fun _ e => e) = M := by
   rw [exponent_degree_split, chartExponent_homogenizedExponent]
   change M - m.sum (fun _ e => e) + m.sum (fun _ e => e) = M
   omega
 
-lemma homogenizedExponent_injective {n : ℕ} (d : ℕ) :
+private lemma homogenizedExponent_injective {n : ℕ} (d : ℕ) :
     Function.Injective (homogenizedExponent (n := n) d) := by
   intro m k h
   simpa only [chartExponent_homogenizedExponent] using congrArg chartExponent h

@@ -15,7 +15,7 @@ coefficient-uniform codimension-two bound for filtered coordinate spaces. -/
 namespace CCDN
 noncomputable section
 
-lemma choose_shift_sum (n k d : ℕ) :
+private lemma choose_shift_sum (n k d : ℕ) :
     (n + 1 + (k + d)).choose (n + 1) = (n + 1 + k).choose (n + 1) +
       ∑ i ∈ Finset.range d, (n + (k + i + 1)).choose n := by
   induction d with
@@ -27,7 +27,7 @@ lemma choose_shift_sum (n k d : ℕ) :
     rw [show n + 1 + (k + d) = n + (k + d + 1) by omega]
     omega
 
-lemma choose_shift_bound (n k d : ℕ) :
+private lemma choose_shift_bound (n k d : ℕ) :
     (n + 1 + (k + d)).choose (n + 1) ≤ (n + 1 + k).choose (n + 1) +
       d * (n + (k + d)).choose n := by
   rw [choose_shift_sum]
@@ -41,7 +41,7 @@ lemma choose_shift_bound (n k d : ℕ) :
 
 /-- The second finite difference has the product-of-degrees factor and loses
 two powers of the cutoff, in every ambient dimension. -/
-theorem choose_double_difference_bound (n k d e : ℕ) :
+private theorem choose_double_difference_bound (n k d e : ℕ) :
     (n + 2 + (k + d + e)).choose (n + 2) + (n + 2 + k).choose (n + 2) ≤
       (n + 2 + (k + d)).choose (n + 2) + (n + 2 + (k + e)).choose (n + 2) +
         d * e * (n + (k + d + e)).choose n := by

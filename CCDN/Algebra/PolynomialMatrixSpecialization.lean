@@ -33,7 +33,7 @@ lemma ratFunc_matrix_common_denominator {K ι κ : Type*} [Field K]
 
 /-- An injective polynomial matrix has a polynomial left inverse up to one
 nonzero scalar polynomial. -/
-theorem polynomial_matrix_scaled_left_inverse {K ι κ : Type*} [Field K]
+private theorem polynomial_matrix_scaled_left_inverse {K ι κ : Type*} [Field K]
     [Fintype ι] [Fintype κ] [DecidableEq ι] [DecidableEq κ]
     (A : Matrix ι κ (Polynomial K))
     (hA : Function.Injective (A.map (algebraMap (Polynomial K) (RatFunc K))).mulVecLin) :

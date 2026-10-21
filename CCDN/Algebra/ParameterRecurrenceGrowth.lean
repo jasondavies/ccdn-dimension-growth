@@ -23,7 +23,7 @@ block after multiplication by one nonzero rational-function denominator.
 namespace CCDN
 noncomputable section
 
-lemma ratFunc_polynomial_eval {K F : Type*} [Field K] [Field F]
+private lemma ratFunc_polynomial_eval {K F : Type*} [Field K] [Field F]
     [Algebra K F] [Algebra (RatFunc K) F] [IsScalarTower K (RatFunc K) F]
     (p : Polynomial K) :
     algebraMap (RatFunc K) F (algebraMap (Polynomial K) (RatFunc K) p) =
@@ -37,7 +37,7 @@ lemma ratFunc_polynomial_eval {K F : Type*} [Field K] [Field F]
 
 /-- A common parameter denominator makes every supplied vector a bounded
 polynomial combination of a fixed function-field basis. -/
-theorem finite_family_parameter_power_span {K F ι : Type*} [Field K] [Field F]
+private theorem finite_family_parameter_power_span {K F ι : Type*} [Field K] [Field F]
     [Algebra K F] [Algebra (RatFunc K) F] [IsScalarTower K (RatFunc K) F]
     [Module.Finite (RatFunc K) F] [Fintype ι]
     (w : ι → F) :
@@ -80,7 +80,7 @@ noncomputable section
 
 /-- Eventual generation by the parameter bounds filtered dimensions with
 slope equal to the rank over its rational-function field. -/
-theorem parameter_recurrence_growth_bound {K A F : Type*} [Field K]
+private theorem parameter_recurrence_growth_bound {K A F : Type*} [Field K]
     [AddCommGroup A] [Module K A] [Field F] [Algebra K F]
     [Algebra (RatFunc K) F] [IsScalarTower K (RatFunc K) F]
     [Module.Finite (RatFunc K) F]

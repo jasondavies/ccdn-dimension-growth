@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
-lemma finset_prod_polynomial_monomial {R ι : Type*} [CommSemiring R]
+private lemma finset_prod_polynomial_monomial {R ι : Type*} [CommSemiring R]
     (s : Finset ι) (d : ι → ℕ) (a : ι → R) :
     (∏ i ∈ s, Polynomial.monomial (d i) (a i)) =
       Polynomial.monomial (∑ i ∈ s, d i) (∏ i ∈ s, a i) := by
@@ -32,7 +32,7 @@ def weightedDegreePolynomial {R σ : Type*} [CommSemiring R] (w : σ → ℕ) :
     MvPolynomial σ R →+* Polynomial (MvPolynomial σ R) :=
   eval₂Hom (Polynomial.C.comp C) (fun i => Polynomial.monomial (w i) (X i))
 
-lemma weightedDegreePolynomial_monomial {R σ : Type*} [CommSemiring R]
+private lemma weightedDegreePolynomial_monomial {R σ : Type*} [CommSemiring R]
     (w : σ → ℕ) (m : σ →₀ ℕ) (a : R) :
     weightedDegreePolynomial w (monomial m a) =
       Polynomial.monomial (Finsupp.weight w m) (monomial m a) := by
@@ -44,7 +44,7 @@ lemma weightedDegreePolynomial_monomial {R σ : Type*} [CommSemiring R]
   · simp only [Finsupp.weight_apply, Finsupp.sum, smul_eq_mul, mul_comm]
   · exact (monomial_eq (s := m) (a := a)).symm
 
-lemma weightedDegreePolynomial_coeff {R σ : Type*} [CommSemiring R]
+private lemma weightedDegreePolynomial_coeff {R σ : Type*} [CommSemiring R]
     (w : σ → ℕ) (f : MvPolynomial σ R) (k : ℕ) :
     (weightedDegreePolynomial w f).coeff k = weightedHomogeneousComponent w k f := by
   classical
@@ -78,7 +78,7 @@ lemma weightedDegreePolynomial_natDegree {R σ : Type*} [CommSemiring R]
     · rw [weightedDegreePolynomial_coeff]
       exact weighted_top_component_ne_zero w f hf
 
-lemma weightedDegreePolynomial_ne_zero {R σ : Type*} [CommSemiring R]
+private lemma weightedDegreePolynomial_ne_zero {R σ : Type*} [CommSemiring R]
     (w : σ → ℕ) {f : MvPolynomial σ R} (hf : f ≠ 0) :
     weightedDegreePolynomial w f ≠ 0 := by
   intro hz
@@ -86,7 +86,7 @@ lemma weightedDegreePolynomial_ne_zero {R σ : Type*} [CommSemiring R]
   rw [weightedDegreePolynomial_coeff, Polynomial.coeff_zero] at hh
   exact weighted_top_component_ne_zero w f hf hh
 
-lemma weightedDegreePolynomial_leadingCoeff {R σ : Type*} [CommSemiring R]
+private lemma weightedDegreePolynomial_leadingCoeff {R σ : Type*} [CommSemiring R]
     (w : σ → ℕ) (f : MvPolynomial σ R) :
     (weightedDegreePolynomial w f).leadingCoeff =
       weightedHomogeneousComponent w (f.weightedTotalDegree w) f := by

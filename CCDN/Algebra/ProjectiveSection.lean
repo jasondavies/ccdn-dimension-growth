@@ -53,7 +53,7 @@ lemma projectiveIdealZeroLocus_rep {n : ℕ}
     x.rep ∈ idealZeroLocus I :=
   hx x.rep x.rep_nonzero x.mk_rep
 
-lemma homogeneousCoordinateSpace_mul_mem {n M m : ℕ}
+private lemma homogeneousCoordinateSpace_mul_mem {n M m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     {f : MvPolynomial (Fin (n + 1)) K} (hf : f.IsHomogeneous m)
     {a : MvPolynomial (Fin (n + 1)) K ⧸ I}
@@ -64,7 +64,7 @@ lemma homogeneousCoordinateSpace_mul_mem {n M m : ℕ}
 
 /-- Distinct points on a proper homogeneous section force a drop in the graded
 Hilbert function at least as large as their number. -/
-theorem projective_section_hilbert_drop {n m M : ℕ} {ι : Type*}
+private theorem projective_section_hilbert_drop {n m M : ℕ} {ι : Type*}
     [Fintype ι] [DecidableEq ι]
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous m) (hfI : f ∉ I)

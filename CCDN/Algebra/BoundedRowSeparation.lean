@@ -16,7 +16,7 @@ Lemma 5.4, with the bound s! T^s for s+1 independent equations. -/
 namespace CCDN
 noncomputable section
 
-lemma integer_adjugate_entry_abs_le {s : ℕ}
+private lemma integer_adjugate_entry_abs_le {s : ℕ}
     (M : Matrix (Fin (s + 1)) (Fin (s + 1)) ℤ) (T : ℕ)
     (hM : ∀ i j, |M i j| ≤ (T : ℤ)) (i j : Fin (s + 1)) :
     |M.adjugate i j| ≤ (s.factorial : ℤ) * (T : ℤ) ^ s := by

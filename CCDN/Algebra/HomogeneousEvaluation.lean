@@ -35,7 +35,7 @@ lemma homogeneous_eq_sum_coeff {K : Type*} [CommSemiring K] {n M : ℕ}
     rw [← h]
     exact homogeneousMonomials_degree n M j
 
-lemma homogeneous_coefficients_ne_zero {n M : ℕ}
+private lemma homogeneous_coefficients_ne_zero {n M : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous M) (hf0 : f ≠ 0) :
     (fun j => f.coeff (homogeneousMonomials n M j)) ≠ 0 := by
   intro h
@@ -44,7 +44,7 @@ lemma homogeneous_coefficients_ne_zero {n M : ℕ}
   have hz : ∀ j, f.coeff (homogeneousMonomials n M j) = 0 := fun j => congrFun h j
   simp only [hz, monomial_zero, Finset.sum_const_zero]
 
-lemma homogeneous_evaluation_kernel {n M t : ℕ}
+private lemma homogeneous_evaluation_kernel {n M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous M)
     (points : Fin t → (Fin (n + 1) → ℤ)) (hzero : ∀ i, eval (points i) f = 0) :
     evaluationMatrix (homogeneousMonomials n M) points *ᵥ

@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma polynomialCoefficientLinear_map_of_one {K L : Type*}
+private lemma polynomialCoefficientLinear_map_of_one {K L : Type*}
     [Field K] [Field L] [Algebra K L] {n : ℕ}
     (φ : L →ₗ[K] K) (hφ : φ 1 = 1) (f : MvPolynomial (Fin n) K) :
     polynomialCoefficientLinear φ (map (algebraMap K L) f) = f := by

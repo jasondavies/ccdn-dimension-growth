@@ -29,7 +29,7 @@ def radialMap {K σ : Type*} [CommRing K] :
     radialMap (MvPolynomial.X j : MvPolynomial σ K) =
       Polynomial.C (MvPolynomial.X j) * Polynomial.X := by simp [radialMap]
 
-lemma radialMap_monomial {K σ : Type*} [CommRing K] (e : σ →₀ ℕ) (c : K) :
+private lemma radialMap_monomial {K σ : Type*} [CommRing K] (e : σ →₀ ℕ) (c : K) :
     radialMap (monomial e c) = Polynomial.C (monomial e c) * Polynomial.X ^ e.degree := by
   classical
   rw [monomial_eq, map_mul, radialMap_C, map_finsuppProd]

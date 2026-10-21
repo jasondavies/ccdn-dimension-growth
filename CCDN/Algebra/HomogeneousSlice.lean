@@ -110,7 +110,7 @@ lemma homogeneousSlice_scaledHomogenize {R : Type*} [CommRing R] {n d : ℕ}
 
 /-- Nonzero constant slices reflect divisibility when the equation's degree
 is preserved. This is the proper-section transfer for the scaled models. -/
-theorem homogeneous_dvd_of_slice_dvd {K : Type*} [Field K] {n d M : ℕ}
+private theorem homogeneous_dvd_of_slice_dvd {K : Type*} [Field K] {n d M : ℕ}
     {f g : MvPolynomial (Fin (n + 1)) K} {h : K} (hh : h ≠ 0)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hg : g.IsHomogeneous M)
     (hd : (homogeneousSlice n h f).totalDegree = d)
@@ -126,7 +126,7 @@ theorem homogeneous_dvd_of_slice_dvd {K : Type*} [Field K] {n d M : ℕ}
     (firstCoordinateScale K h hh).symm (firstCoordinateScale K h hh g) at he
   simpa only [AlgEquiv.symm_apply_apply] using he
 
-lemma homogeneousSlice_map {R S : Type*} [CommRing R] [CommRing S] {n : ℕ}
+private lemma homogeneousSlice_map {R S : Type*} [CommRing R] [CommRing S] {n : ℕ}
     (φ : R →+* S) (h : R) (f : MvPolynomial (Fin (n + 1)) R) :
     MvPolynomial.map φ (homogeneousSlice n h f) = homogeneousSlice n (φ h) (MvPolynomial.map φ f) := by
   have he : (MvPolynomial.map φ).comp (homogeneousSlice n h) =

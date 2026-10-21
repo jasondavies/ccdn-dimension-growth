@@ -30,11 +30,11 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
-def coefficientLinearUnivariate {K A : Type*} [Field K] [CommRing A] [Algebra K A]
+private def coefficientLinearUnivariate {K A : Type*} [Field K] [CommRing A] [Algebra K A]
     (φ : A →ₗ[K] K) (p : Polynomial A) : Polynomial K :=
   ∑ n ∈ p.support, monomial n (φ (p.coeff n))
 
-lemma coefficientLinearUnivariate_coeff {K A : Type*} [Field K] [CommRing A] [Algebra K A]
+private lemma coefficientLinearUnivariate_coeff {K A : Type*} [Field K] [CommRing A] [Algebra K A]
     (φ : A →ₗ[K] K) (p : Polynomial A) (n : ℕ) :
     (coefficientLinearUnivariate φ p).coeff n = φ (p.coeff n) := by
   classical
@@ -44,14 +44,14 @@ lemma coefficientLinearUnivariate_coeff {K A : Type*} [Field K] [CommRing A] [Al
     simp [coefficientLinearUnivariate, coeff_monomial, hn, hz]
 
 /-- Coefficientwise application of a linear functional. -/
-def coefficientLinearUnivariateMap {K A : Type*} [Field K] [CommRing A] [Algebra K A]
+private def coefficientLinearUnivariateMap {K A : Type*} [Field K] [CommRing A] [Algebra K A]
     (φ : A →ₗ[K] K) : Polynomial A →ₗ[K] Polynomial K where
   toFun := coefficientLinearUnivariate φ
   map_add' p q := by ext n; simp [coefficientLinearUnivariate_coeff]
   map_smul' c p := by ext n; simp [coefficientLinearUnivariate_coeff]
 
-lemma coefficientLinearUnivariate_scalar_mul {K A : Type*} [Field K] [CommRing A] [Algebra K A]
-    (φ : A →ₗ[K] K) (p : Polynomial K) (q : Polynomial A) :
+private lemma coefficientLinearUnivariate_scalar_mul {K A : Type*} [Field K] [CommRing A]
+    [Algebra K A] (φ : A →ₗ[K] K) (p : Polynomial K) (q : Polynomial A) :
     coefficientLinearUnivariate φ (p.map (algebraMap K A) * q) =
       p * coefficientLinearUnivariate φ q := by
   ext n
@@ -61,7 +61,7 @@ lemma coefficientLinearUnivariate_scalar_mul {K A : Type*} [Field K] [CommRing A
   rw [coeff_map, coefficientLinearUnivariate_coeff]
   simpa [Algebra.smul_def] using φ.map_smul (p.coeff t.1) (q.coeff t.2)
 
-lemma coefficientLinearUnivariate_eval {K A : Type*} [Field K] [CommRing A] [Algebra K A]
+private lemma coefficientLinearUnivariate_eval {K A : Type*} [Field K] [CommRing A] [Algebra K A]
     (φ : A →ₗ[K] K) (p : Polynomial A) (t : K) :
     (coefficientLinearUnivariate φ p).eval t = φ (p.eval (algebraMap K A t)) := by
   classical
@@ -80,7 +80,7 @@ namespace CCDN
 noncomputable section
 open Polynomial Matrix
 
-lemma exists_finite_detecting_functionals {K V : Type*} [Field K]
+private lemma exists_finite_detecting_functionals {K V : Type*} [Field K]
     [AddCommGroup V] [Module K V] (S : Submodule K V) [Module.Finite K S] :
     ∃ φ : Fin (Module.finrank K S) → V →ₗ[K] K,
       ∀ x ∈ S, (∀ i, φ i x = 0) → x = 0 := by

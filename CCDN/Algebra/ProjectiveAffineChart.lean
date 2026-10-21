@@ -19,7 +19,7 @@ variable {K : Type*} [Field K]
 def projectiveAffineCoordinates {n : ℕ} (x : Projectivization K (Fin (n + 1) → K)) :
     Fin n → K := fun j => x.rep j.succ / x.rep 0
 
-lemma projectiveAffineCoordinates_normalization {n : ℕ}
+private lemma projectiveAffineCoordinates_normalization {n : ℕ}
     (x : Projectivization K (Fin (n + 1) → K)) (hx : x.rep 0 ≠ 0) :
     Fin.cons 1 (projectiveAffineCoordinates x) = (x.rep 0)⁻¹ • x.rep := by
   funext j
@@ -33,7 +33,7 @@ lemma affineCoordinateVector_ne_zero {n : ℕ} (a : Fin n → K) :
   have hh := congrFun h 0
   simp at hh
 
-lemma projectiveAffineCoordinates_mk {n : ℕ}
+private lemma projectiveAffineCoordinates_mk {n : ℕ}
     (x : Projectivization K (Fin (n + 1) → K)) (hx : x.rep 0 ≠ 0) :
     Projectivization.mk K (Fin.cons 1 (projectiveAffineCoordinates x))
       (affineCoordinateVector_ne_zero _) = x := by

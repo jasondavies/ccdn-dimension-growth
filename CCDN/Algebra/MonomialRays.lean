@@ -37,7 +37,7 @@ instance finite_boundedStandardExponents {K σ : Type*} [Field K] [Fintype σ]
 
 /-- A standard monomial with two large exponents supplies an entire square of
 independent quotient classes in degree at most `2B`. -/
-theorem standard_square_le_filtered {K σ : Type*} [Field K] [Fintype σ]
+private theorem standard_square_le_filtered {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (B : ℕ)
     {a : σ →₀ ℕ} (ha : a ∈ Ideal.standardExponents I MonomialOrder.degLex)
     {i j : σ} (hij : i ≠ j) (hi : B ≤ a i) (hj : B ≤ a j) :

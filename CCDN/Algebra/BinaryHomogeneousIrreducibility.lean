@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem uniqueAlgEquiv_natDegree {R σ : Type*} [CommRing R] [Unique σ]
+private theorem uniqueAlgEquiv_natDegree {R σ : Type*} [CommRing R] [Unique σ]
     (f : MvPolynomial σ R) :
     ((uniqueAlgEquiv R σ) f).natDegree = f.totalDegree := by
   classical

@@ -24,7 +24,7 @@ open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
 /-- A nonconstant polynomial over a domain cannot divide a nonzero constant. -/
-theorem mvPolynomial_not_dvd_nonzero_constant
+private theorem mvPolynomial_not_dvd_nonzero_constant
     {R σ : Type*} [CommRing R] [IsDomain R]
     (f : MvPolynomial σ R) (hf : f ≠ 0) (hd : 0 < f.totalDegree)
     (a : R) (ha : a ≠ 0) : ¬ f ∣ C a := by

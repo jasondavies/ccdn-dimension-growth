@@ -27,7 +27,7 @@ def originShift {R σ : Type*} [CommRing R] (a : σ → R) :
     originShift a (X j) = X j + C (a j) := by
   simp [originShift]
 
-lemma originShift_neg {R σ : Type*} [CommRing R] (a : σ → R) (f : MvPolynomial σ R) :
+private lemma originShift_neg {R σ : Type*} [CommRing R] (a : σ → R) (f : MvPolynomial σ R) :
     originShift (-a) (originShift a f) = f := by
   induction f using MvPolynomial.induction_on with
   | C c => simp
@@ -66,7 +66,7 @@ lemma originShift_map {R S σ : Type*} [CommRing R] [CommRing S]
   | add f g hf hg => simp only [map_add, hf, hg]
   | mul_X f j hf => simp [hf]
 
-lemma eval_originShift {R σ : Type*} [CommRing R] (a x : σ → R)
+private lemma eval_originShift {R σ : Type*} [CommRing R] (a x : σ → R)
     (f : MvPolynomial σ R) :
     eval x (originShift a f) = eval (fun j => x j + a j) f := by
   induction f using MvPolynomial.induction_on with

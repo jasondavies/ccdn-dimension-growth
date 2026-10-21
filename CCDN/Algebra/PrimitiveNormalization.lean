@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma integer_scalar_factor_ne_zero {σ : Type*} {f g : MvPolynomial σ ℤ} {c : ℤ}
+private lemma integer_scalar_factor_ne_zero {σ : Type*} {f g : MvPolynomial σ ℤ} {c : ℤ}
     (hf : f ≠ 0) (he : f = C c * g) : g ≠ 0 := by
   intro hg
   apply hf

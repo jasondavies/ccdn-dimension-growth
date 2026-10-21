@@ -19,7 +19,7 @@ noncomputable section
 
 /-- Distinct points in a proper polynomial section force a corresponding lower
 bound for the filtered coordinate-space growth. -/
-theorem polynomial_points_filtered_lower {K σ ι : Type*} [Field K] [Fintype σ]
+private theorem polynomial_points_filtered_lower {K σ ι : Type*} [Field K] [Fintype σ]
     [Fintype ι] [DecidableEq ι]
     (p : Ideal (MvPolynomial σ K)) [p.IsPrime]
     (l : MvPolynomial σ K) (hl : l ∉ p) (m : ℕ) (hld : l.totalDegree ≤ m)

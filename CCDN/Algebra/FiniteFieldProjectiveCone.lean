@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem homogeneous_affine_cone_card {K : Type*} [Field K] [Fintype K] {n d : ℕ}
+private theorem homogeneous_affine_cone_card {K : Type*} [Field K] [Fintype K] {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous d) (hd : 0 < d) :
     Nat.card {v : Fin (n + 1) → K // eval v f = 0} =
       Nat.card (projectiveZeroLocus f) * (Fintype.card K - 1) + 1 := by

@@ -37,7 +37,7 @@ theorem coordinate_kernel_mem_iff_homogenize {K F : Type*} [Field K] [Field F]
     (scaledHomogenize_homogeneous 1 f hf)
   rwa [affineChart_scaledHomogenize_one] at h
 
-theorem projective_point_chart_vanishes {K F : Type*} [Field K] [Field F]
+private theorem projective_point_chart_vanishes {K F : Type*} [Field K] [Field F]
     [Algebra K F] {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (q : (MvPolynomial (Fin (n + 1)) K ⧸ I) →ₐ[K] F) (hq : Function.Injective q)
     (h0 : q ((Ideal.Quotient.mk I) (X 0)) ≠ 0)

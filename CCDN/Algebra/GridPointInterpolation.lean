@@ -16,12 +16,12 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def gridPointSeparator {K σ : Type*} [Field K] [Fintype σ] [DecidableEq K]
+private def gridPointSeparator {K σ : Type*} [Field K] [Fintype σ] [DecidableEq K]
     (S : Finset K) (a : σ → K) : MvPolynomial σ K :=
   ∏ j, ∏ t ∈ S.erase (a j),
     C ((a j - t)⁻¹) * (X j - C t)
 
-lemma gridPointSeparator_eval {K σ : Type*} [Field K] [Fintype σ]
+private lemma gridPointSeparator_eval {K σ : Type*} [Field K] [Fintype σ]
     [DecidableEq K]
     (S : Finset K) (a x : σ → K) (hx : ∀ j, x j ∈ S) :
     eval x (gridPointSeparator S a) = if x = a then 1 else 0 := by
@@ -44,7 +44,7 @@ lemma gridPointSeparator_eval {K σ : Type*} [Field K] [Fintype σ]
     apply Finset.prod_eq_zero (Finset.mem_erase.mpr ⟨hj, hx j⟩)
     simp
 
-lemma gridPointSeparator_degree {K σ : Type*} [Field K] [Fintype σ]
+private lemma gridPointSeparator_degree {K σ : Type*} [Field K] [Fintype σ]
     [DecidableEq K]
     (S : Finset K) (a : σ → K) (ha : ∀ j, a j ∈ S) :
     (gridPointSeparator S a).totalDegree ≤ Fintype.card σ * (S.card - 1) := by

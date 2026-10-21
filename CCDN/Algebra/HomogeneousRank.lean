@@ -42,7 +42,7 @@ lemma homogeneous_evaluation_mulVec {K : Type*} [Field K] {n M t : ℕ}
       simp [homogeneousEvaluationMatrix, homogeneousCoefficientMap, mulVec, dotProduct, eval_monomial, mul_comm]
 
 /-- Every finite set of zeros obeys the projective Hilbert rank bound. -/
-theorem homogeneous_evaluation_rank_bound {K : Type*} [Field K] {n d M t : ℕ}
+private theorem homogeneous_evaluation_rank_bound {K : Type*} [Field K] {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → (Fin (n + 1) → K)) (hzero : ∀ i, eval (points i) f = 0) :
     (homogeneousEvaluationMatrix K n M points).rank + (n + (M - d)).choose (M - d) ≤
@@ -84,7 +84,7 @@ theorem homogeneous_evaluation_rank_bound {K : Type*} [Field K] {n d M t : ℕ}
     finrank_top, Module.finrank_pi, Module.finrank_self, mul_one, Fintype.card_fin] using hbound
 
 /-- For independent evaluation rows the row count satisfies the same sharp deficit. -/
-theorem homogeneous_independent_rows_hilbert_bound {K : Type*} [Field K] {n d M t : ℕ}
+private theorem homogeneous_independent_rows_hilbert_bound {K : Type*} [Field K] {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → (Fin (n + 1) → K)) (hzero : ∀ i, eval (points i) f = 0)
     (hli : LinearIndependent K (homogeneousEvaluationMatrix K n M points).row) :

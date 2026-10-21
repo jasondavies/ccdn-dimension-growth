@@ -38,7 +38,7 @@ lemma polynomialCoefficientLinear_affineChart
   rw [he] at h
   exact h
 
-lemma polynomialCoefficientLinear_scaledHomogenize_one
+private lemma polynomialCoefficientLinear_scaledHomogenize_one
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n D : ℕ}
     (φ : L →ₗ[K] K) (f : MvPolynomial (Fin n) L) (hf : f.totalDegree ≤ D) :
     polynomialCoefficientLinear φ (scaledHomogenize D 1 f) =
@@ -61,7 +61,7 @@ lemma projectiveChartIdeal_mem_iff_scaledHomogenize
   exact (IsFractionRing.injective (MvPolynomial (Fin (n + 1)) K ⧸ I)
     (FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ I))) (by simpa using h)
 
-theorem projectiveChartIdeal_scalar_extension
+private theorem projectiveChartIdeal_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     [(I.map (map (algebraMap K L))).IsPrime] (hX : X 0 ∉ I) :

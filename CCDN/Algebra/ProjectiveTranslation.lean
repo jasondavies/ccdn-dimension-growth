@@ -27,7 +27,7 @@ lemma homogeneousPointTranslation_inverse {R : Type*} [CommRing R] {n : ℕ}
   · rfl
   · simp [homogeneousPointTranslation]
 
-lemma homogeneousPointTranslation_injective {R : Type*} [CommRing R] {n : ℕ}
+private lemma homogeneousPointTranslation_injective {R : Type*} [CommRing R] {n : ℕ}
     (a : Fin n → R) : Function.Injective (homogeneousPointTranslation a) :=
   Function.LeftInverse.injective (homogeneousPointTranslation_inverse a)
 
@@ -42,7 +42,7 @@ lemma homogeneousPointTranslation_ne_zero {R : Type*} [CommRing R] {n : ℕ}
     refine Fin.cases ?_ (fun j => ?_) i <;> simp [homogeneousPointTranslation]
   exact h.trans hzero.symm
 
-lemma homogeneousPointTranslation_smul {K : Type*} [Field K] {n : ℕ}
+private lemma homogeneousPointTranslation_smul {K : Type*} [Field K] {n : ℕ}
     (a : Fin n → K) (c : K) (x : Fin (n + 1) → K) :
     homogeneousPointTranslation a (c • x) = c • homogeneousPointTranslation a x := by
   funext i
@@ -51,7 +51,7 @@ lemma homogeneousPointTranslation_smul {K : Type*} [Field K] {n : ℕ}
   · simp only [homogeneousPointTranslation, Fin.cons_succ, Pi.smul_apply, smul_eq_mul]
     ring
 
-lemma homogeneousPointTranslation_map {R S : Type*} [CommRing R] [CommRing S]
+private lemma homogeneousPointTranslation_map {R S : Type*} [CommRing R] [CommRing S]
     {n : ℕ} (φ : R →+* S) (a : Fin n → R) (x : Fin (n + 1) → R) :
     φ ∘ homogeneousPointTranslation a x = homogeneousPointTranslation (φ ∘ a) (φ ∘ x) := by
   funext i
