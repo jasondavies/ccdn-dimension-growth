@@ -34,12 +34,7 @@ theorem exists_proper_partial_derivative {K σ : Type*}
   have hdeg : (pderiv j f).totalDegree < f.totalDegree := by
     have := pderiv_totalDegree_le f j
     omega
-  refine ⟨j, hj, ?_, hdeg⟩
-  rintro ⟨g, he⟩
-  have hg : g ≠ 0 := by intro hz; exact hj (by rw [he, hz, mul_zero])
-  have hm := totalDegree_mul_of_isDomain hir.ne_zero hg
-  rw [← he] at hm
-  omega
+  exact ⟨j, hj, not_dvd_pderiv_of_pderiv_ne_zero hir.ne_zero hj, hdeg⟩
 
 theorem singular_hypersurface_count_le {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℚ) (hir : Irreducible f)

@@ -33,13 +33,7 @@ theorem hypersurface_singular_points_card_le {ι : Type*} [Fintype ι] [Decidabl
     Fintype.card ι ≤ (n + 4) ^ n * f.totalDegree * (f.totalDegree - 1) * p ^ n := by
   obtain ⟨j, hj⟩ := exists_pderiv_ne_zero hpos (CharZeroOrGT.of_charP hchar)
   have hdeg := pderiv_totalDegree_le f j
-  have hnd : ¬ f ∣ pderiv j f := by
-    intro hd
-    obtain ⟨q, he⟩ := hd
-    have hq : q ≠ 0 := by intro hq; simp [hq] at he; exact hj he
-    have htotal := totalDegree_mul_of_isDomain hf.ne_zero hq
-    rw [← he] at htotal
-    omega
+  have hnd := not_dvd_pderiv_of_pderiv_ne_zero hf.ne_zero hj
   have hdegrees : f.totalDegree + (pderiv j f).totalDegree ≤
       2 * (Fintype.card (ZMod p) - 1) := by
     rw [ZMod.card]

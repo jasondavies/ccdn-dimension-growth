@@ -70,20 +70,9 @@ theorem projection_derivative_proper {K τ : Type*} [Field K] [CharZero K] [Fint
     change Transcendental K ((Ideal.Quotient.mk I) (aeval a (X j)))
     rwa [aeval_X]
   have hp := plane_relation_pderiv_ne_zero ψ f hf hz j k hjk ht
-  have hdeg := pderiv_totalDegree_le f k
-  have hdpos : 0 < f.totalDegree := by
-    by_contra! hn
-    have he := totalDegree_eq_zero_iff_eq_C.mp (Nat.eq_zero_of_le_zero hn)
-    apply hp
-    rw [he, pderiv_C]
-  refine ⟨?_, (aeval_totalDegree_le a ha _).trans (by simpa only [one_mul] using hdeg)⟩
-  intro hbad
-  have hdiv := (hker _).mp hbad
-  obtain ⟨g, hg⟩ := hdiv
-  have hg0 : g ≠ 0 := by intro he; apply hp; rw [hg, he, mul_zero]
-  have he := totalDegree_mul_of_isDomain hf hg0
-  rw [← hg] at he
-  omega
+  refine ⟨fun hbad => not_dvd_pderiv_of_pderiv_ne_zero hf hp ((hker _).mp hbad),
+    (aeval_totalDegree_le a ha _).trans ?_⟩
+  simpa only [one_mul] using pderiv_totalDegree_le f k
 
 end
 end CCDN

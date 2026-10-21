@@ -34,6 +34,20 @@ theorem pderiv_totalDegree_le {K σ : Type*} [Field K]
   rw [he] at hd
   omega
 
+/-- A nonzero polynomial does not divide any of its nonzero partial derivatives, since these
+have smaller total degree. -/
+theorem not_dvd_pderiv_of_pderiv_ne_zero {K σ : Type*} [Field K]
+    {f : MvPolynomial σ K} (hf : f ≠ 0) {i : σ} (hi : pderiv i f ≠ 0) : ¬ f ∣ pderiv i f := by
+  rintro ⟨q, he⟩
+  have hq : q ≠ 0 := by rintro rfl; exact hi (by rw [he, mul_zero])
+  have hpos : 0 < f.totalDegree := by
+    refine Nat.pos_of_ne_zero fun h0 => hi ?_
+    rw [totalDegree_eq_zero_iff_eq_C.mp h0, pderiv_C]
+  have htotal := totalDegree_mul_of_isDomain hf hq
+  rw [← he] at htotal
+  have := pderiv_totalDegree_le f i
+  omega
+
 /-- Distinct singular points of an irreducible plane equation of degree `d`
 number at most `d(d-1)`, whenever the degree is smaller than the characteristic. -/
 theorem plane_singular_points_card_le {K ι : Type*} [Field K] [Fintype ι] [DecidableEq ι]
@@ -44,16 +58,9 @@ theorem plane_singular_points_card_le {K ι : Type*} [Field K] [Fintype ι] [Dec
     (hzsing : ∀ i j, eval (z i) (pderiv j f) = 0) :
     Fintype.card ι ≤ f.totalDegree * (f.totalDegree - 1) := by
   obtain ⟨j, hj⟩ := exists_pderiv_ne_zero hpos (CharZeroOrGT.of_charP hchar)
-  have hdeg := pderiv_totalDegree_le f j
-  have hnd : ¬ f ∣ pderiv j f := by
-    intro hd
-    obtain ⟨q, he⟩ := hd
-    have hq : q ≠ 0 := by intro hq; simp [hq] at he; exact hj he
-    have htotal := totalDegree_mul_of_isDomain hf.ne_zero hq
-    rw [← he] at htotal
-    omega
-  exact (plane_common_zeros_card_le f (pderiv j f) hf hnd z hz hzf
-    (fun i => hzsing i j)).trans (Nat.mul_le_mul_left _ hdeg)
+  exact (plane_common_zeros_card_le f (pderiv j f) hf
+    (not_dvd_pderiv_of_pderiv_ne_zero hf.ne_zero hj) z hz hzf
+    (fun i => hzsing i j)).trans (Nat.mul_le_mul_left _ (pderiv_totalDegree_le f j))
 
 end
 end CCDN
