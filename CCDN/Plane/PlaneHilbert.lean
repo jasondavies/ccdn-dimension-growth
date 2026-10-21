@@ -6,8 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredIntersection
-import CCDN.Hilbert.MonomialDimension
+import CCDN.ForMathlib.MvPolynomial
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import CCDN.ForMathlib.LinearMap
 /-! The exact affine Hilbert function of a principal plane equation. This
 identifies polynomial total degree with the degree in the curve-counting target. -/
 
@@ -40,11 +41,8 @@ theorem principal_filtered_finrank {K σ : Type*} [Field K] [Finite σ]
       refine ⟨filteredMultiples_le_degree f hN hx, ?_⟩
       obtain ⟨u, _, rfl⟩ := (mem_filteredMultiples f x N).mp hx
       exact Ideal.Quotient.eq_zero_iff_mem.mpr (Ideal.mem_span_singleton.mpr (dvd_mul_right f u))
-  have h := LinearMap.finrank_range_add_finrank_ker (φ.domRestrict V)
-  rw [LinearMap.range_domRestrict, LinearMap.ker_domRestrict] at h
-  have he := Submodule.finrank_map_subtype_eq V (φ.ker.comap V.subtype)
-  rw [Submodule.map_comap_subtype, hk, filteredMultiples_finrank f hf] at he
-  rw [← he] at h
+  have h := φ.finrank_map_add_finrank_inf_ker V
+  rw [hk, filteredMultiples_finrank f hf] at h
   exact h
 
 theorem finrank_restrictTotalDegree_two {K : Type*} [Field K] (N : ℕ) :

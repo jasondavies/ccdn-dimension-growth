@@ -18,12 +18,12 @@ open MvPolynomial Module
 
 lemma eulerPairCoordinates_basis_left {R : Type*} [CommRing R] (k : ℕ) (i : EulerLowIndex k) :
     eulerPairCoordinates R k (eulerPairBasis R k (.inl i)) =
-      (monomial ((boundedExponentEquivSym (Fin 2) k).symm i).val 1, 0) := by
+      (monomial ((Finsupp.degreeLeEquivSym (Fin 2) k).symm i).val 1, 0) := by
   simp [eulerPairCoordinates, eulerPairBasis, Basis.prod_apply, eulerLowBasis_apply]
 
 lemma eulerPairCoordinates_basis_right {R : Type*} [CommRing R] (k : ℕ) (i : EulerLowIndex k) :
     eulerPairCoordinates R k (eulerPairBasis R k (.inr (.inl i))) =
-      (0, monomial ((boundedExponentEquivSym (Fin 2) k).symm i).val 1) := by
+      (0, monomial ((Finsupp.degreeLeEquivSym (Fin 2) k).symm i).val 1) := by
   simp [eulerPairCoordinates, eulerPairBasis, Basis.prod_apply, eulerLowBasis_apply]
 
 lemma eulerPairCoordinates_basis_radial {R : Type*} [CommRing R] (k : ℕ) (i : EulerTopIndex k) :

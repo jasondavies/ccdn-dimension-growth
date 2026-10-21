@@ -45,10 +45,7 @@ theorem powerSeries_linearIndependent_map
       rfl
     rw [hm]
     exact (map_ne_zero (algebraMap K L)).mpr hdet
-  have hrankB : Fintype.card ι ≤ B.rank := by
-    have h := B.rank_submatrix_le a c
-    rw [Matrix.rank_of_det_ne_zero hdetB, Fintype.card_fin] at h
-    exact h
+  have hrankB : Fintype.card ι ≤ B.rank := B.le_rank_of_det_submatrix_ne_zero a c hdetB
   have hker : B.mulVecLin.ker = ⊥ := by
     apply Submodule.finrank_eq_zero.mp
     have h := B.mulVecLin.finrank_range_add_finrank_ker

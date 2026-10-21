@@ -157,13 +157,13 @@ theorem surface_congruence_degree_selection {d : ℕ} (hd : 0 < d)
   let ρ := B ^ (1 / Real.sqrt (d : ℝ)) / Real.exp Q
   let E := Real.exp (surfaceCongruenceGapConstant d K / 2) + 1
   let S := E * (ρ + 1) * T
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hT : 1 ≤ T := by dsimp only [T]; linarith [Real.log_nonneg hB]
-  have hT0 : 0 < T := lt_of_lt_of_le zero_lt_one hT
+  have hT0 : 0 < T := zero_lt_one.trans_le hT
   have hρ : 0 < ρ := by dsimp only [ρ]; positivity
   have hE : 1 ≤ E := by dsimp only [E]; linarith [Real.exp_pos (surfaceCongruenceGapConstant d K / 2)]
-  have hE0 : 0 < E := lt_of_lt_of_le zero_lt_one hE
+  have hE0 : 0 < E := zero_lt_one.trans_le hE
   have hS0 : 0 < S := by dsimp only [S]; positivity
   have hST : T ≤ S := by
     have hh := mul_le_mul hE (show 1 ≤ ρ + 1 by linarith) (by norm_num) hE0.le

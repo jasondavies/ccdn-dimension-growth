@@ -18,14 +18,14 @@ noncomputable section
 open Polynomial
 
 def eulerLowExponent (k : ℕ) (i : EulerLowIndex k) : Fin 2 →₀ ℕ :=
-  ((boundedExponentEquivSym (Fin 2) k).symm i).val
+  ((Finsupp.degreeLeEquivSym (Fin 2) k).symm i).val
 
 def eulerTopExponent (k : ℕ) (i : EulerTopIndex k) : Fin 2 →₀ ℕ :=
   ((degreeEqEquivSym (Fin 2) k).symm i).val
 
 lemma eulerLowExponent_degree (k : ℕ) (i : EulerLowIndex k) :
     eulerLowExponent k i 0 + eulerLowExponent k i 1 ≤ k := by
-  have hh := ((boundedExponentEquivSym (Fin 2) k).symm i).property
+  have hh := ((Finsupp.degreeLeEquivSym (Fin 2) k).symm i).property
   change (eulerLowExponent k i).sum (fun _ e => e) ≤ k at hh
   rw [bivariate_exponent_eq (eulerLowExponent k i), bivariate_exponent_sum] at hh
   exact hh
@@ -38,7 +38,7 @@ lemma eulerTopExponent_degree (k : ℕ) (i : EulerTopIndex k) :
   exact hh
 
 lemma eulerLowExponent_injective (k : ℕ) : Function.Injective (eulerLowExponent k) :=
-  Subtype.val_injective.comp (boundedExponentEquivSym (Fin 2) k).symm.injective
+  Subtype.val_injective.comp (Finsupp.degreeLeEquivSym (Fin 2) k).symm.injective
 
 def eulerMonomialOutput (k : ℕ) (col : EulerColumns k) (i : EulerLowIndex (k + 2)) : ℕ × ℕ :=
   let s := eulerLowExponent (k + 2) i 0

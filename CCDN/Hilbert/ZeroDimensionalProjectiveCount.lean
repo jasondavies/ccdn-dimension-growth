@@ -12,7 +12,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.LinearProjectionFiltration
 import CCDN.Height.ProjectiveLinearCountTransfer
 import CCDN.Projection.BoundedIntegerNormalization
-import CCDN.Projection.LinearNormalizationFiberCount
+import CCDN.Projection.BoundedDegreeNormalizationFiber
 import CCDN.Projection.ProjectiveFiniteFibers
 /-! The zero-dimensional case of projective dimension growth. A
 one-parameter normalization sends every projective point to the unique
@@ -51,8 +51,9 @@ theorem zero_dimensional_projective_count_le
   have hfinite (z : Fin 1 → ℚ) (s : Finset (Fin (n + 1) → ℚ))
       (hs : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0) (hz : ∀ x ∈ s, L x = z) :
       s.card ≤ d ^ (n + 1) := by
-    apply linear_normalization_fiber_card_le I (fun i => integerLinearForm (a i))
+    refine (linear_normalization_fiber_card_le I (fun i => integerLinearForm (a i))
       (fun i => integerLinearForm_degree (a i)) hi hint d ⟨hdim, by simpa using hdegree⟩ z s hs
+      ?_).trans (Nat.le_self_pow (Nat.succ_ne_zero n) d)
     intro x hx i
     rw [← hLapply, hz x hx]
   let s := projectivePoints (projectiveIdealZeroLocus I) B

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.ScaledHomogenization
+import CCDN.ForMathlib.MvPolynomial
 /-! Restriction to a nonzero constant homogenizing coordinate. Proper affine
 sections follow from homogeneous nonmultiples also on x₀=h, not just x₀=1. -/
 
@@ -156,9 +157,7 @@ theorem rational_homogeneousSlice_not_dvd {n d M : ℕ}
   · change (homogeneousSlice n ((Int.castRingHom ℚ) h) (MvPolynomial.map (Int.castRingHom ℚ) f)).totalDegree = d
     rw [← homogeneousSlice_map]
     have he : (MvPolynomial.map (Int.castRingHom ℚ) (homogeneousSlice n h f)).totalDegree =
-        (homogeneousSlice n h f).totalDegree := by
-      unfold totalDegree
-      rw [support_map_of_injective _ Int.cast_injective]
+        (homogeneousSlice n h f).totalDegree := totalDegree_map_of_injective Int.cast_injective _
     exact he.trans hd
 
 end

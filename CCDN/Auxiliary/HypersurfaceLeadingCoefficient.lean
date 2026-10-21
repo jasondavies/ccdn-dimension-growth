@@ -38,7 +38,7 @@ theorem exists_hypersurface_leading_coefficient_translation {n d : ℕ}
     (homogeneousTranslation_homogeneous a hf).totalDegree_le (he ▸ hval)
   refine ⟨a, ha, by rw [hlc, he]; exact hval, ?_⟩
   intro m
-  by_cases hm : m.sum (fun _ e => e) = d
+  by_cases hm : m.degree = d
   · obtain ⟨j, rfl⟩ := homogeneousMonomials_surjective n d m hm
     rw [← affineChart_homogeneous_coefficient f hf j, hlc, he]
     exact hcoeff _

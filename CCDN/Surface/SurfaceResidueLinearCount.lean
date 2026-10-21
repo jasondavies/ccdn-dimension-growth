@@ -65,7 +65,7 @@ theorem surfaceResidueWindow_parameters {d : ℕ} (hd : 1 ≤ d)
       1 < 2 * B ^ (1 / Real.sqrt (d : ℝ)) ∧
       B ^ (1 / Real.sqrt (d : ℝ)) ≤ 2 * B ^ (1 / Real.sqrt (d : ℝ)) ∧
       2 * B ^ (1 / Real.sqrt (d : ℝ)) ≤ Real.exp (surfaceResidueWindow d K B) := by
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlogB := Real.log_nonneg hB
   have hlogd := Real.log_nonneg (show (1 : ℝ) ≤ (d : ℝ) + 1 by
     linarith [Nat.cast_nonneg (α := ℝ) d])
@@ -117,7 +117,7 @@ theorem surface_residue_linear_count (d : ℕ) (hd : 5 ≤ d)
   have hE : 0 ≤ E := by dsimp only [E]; positivity
   refine ⟨E * C₀ + 1, by positivity, ?_⟩
   intro f hfd B hB F hir S δ hS
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlogB := Real.log_nonneg hB
   have hL := surfaceResidueWindow_one_le d hK hB
   have hpoly := surface_residue_residual_count_le F hA hB hL

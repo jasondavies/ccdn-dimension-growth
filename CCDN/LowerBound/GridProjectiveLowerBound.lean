@@ -13,6 +13,7 @@ import CCDN.LowerBound.GridCurveConstruction
 import CCDN.LowerBound.IntegerGridLowerBound
 import CCDN.Projection.ProjectiveProjectionCount
 import Mathlib.Algebra.Order.Star.Rat
+import CCDN.ForMathlib.MvPolynomial
 /-! The integer grid gives distinct bounded-height rational points on the
 irreducible projective closure. This is the geometric input to CCDN
 Proposition 5, including the stated degree and the exact grid size. -/
@@ -85,10 +86,8 @@ lemma projective_closure_absolute_irreducible {n d : ℕ}
     exact hf.ne_zero (by rw [← hh, map_zero])
   refine ⟨hhom, hhom.totalDegree h0, ?_⟩
   rw [boundedHomogenize_map_coefficients]
-  have hdeg : (map (algebraMap ℚ (AlgebraicClosure ℚ)) f).totalDegree = d := by
-    unfold totalDegree
-    rw [support_map_of_injective _ (algebraMap ℚ (AlgebraicClosure ℚ)).injective]
-    exact hd
+  have hdeg : (map (algebraMap ℚ (AlgebraicClosure ℚ)) f).totalDegree = d :=
+      (totalDegree_map_of_injective (algebraMap ℚ (AlgebraicClosure ℚ)).injective _).trans hd
   simpa only [hdeg] using boundedHomogenize_irreducible _ hf
 
 /-- For d≥4, the precise asymmetric integer grid used in Section 6 supplies

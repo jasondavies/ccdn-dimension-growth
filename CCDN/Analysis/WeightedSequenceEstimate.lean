@@ -21,25 +21,6 @@ namespace CCDN
 noncomputable section
 open Finset
 
-/-- Tail counting with an arbitrary cutoff, rather than just the list length. -/
-lemma sum_weight_tail_counts_cutoff_le {s : ℕ} (w : Fin s → ℕ) (K : ℕ) :
-    (∑ k : Fin K, (univ.filter fun i => k.val < w i).card) ≤ ∑ i, w i := by
-  classical
-  simp only [card_eq_sum_ones, sum_filter]
-  rw [sum_comm]
-  apply sum_le_sum
-  intro i _
-  have hcard : (univ.filter fun k : Fin K => k.val < w i).card ≤ w i := by
-    let φ : {k : Fin K // k.val < w i} → Fin (w i) := fun k =>
-      ⟨k.val.val, k.property⟩
-    have hφ : Function.Injective φ := by
-      intro a b h
-      apply Subtype.ext
-      exact Fin.ext (congrArg (fun v : Fin (w i) => v.val) h)
-    simpa only [Fintype.card_subtype, Fintype.card_fin] using
-      Fintype.card_le_of_injective φ hφ
-  simpa only [card_eq_sum_ones, sum_filter] using hcard
-
 /-- The elementary cutoff inequality for any finite list of weights. -/
 lemma weights_sum_cutoff {s : ℕ} (w : Fin s → ℕ) (K : ℕ) :
     s * K ≤ (∑ i, w i) +
@@ -53,7 +34,7 @@ lemma weights_sum_cutoff {s : ℕ} (w : Fin s → ℕ) (K : ℕ) :
   have hsum := congrArg (fun a : Fin K → ℕ => ∑ k, a k) (funext hpart)
   simp only [sum_add_distrib, sum_const, card_univ, Fintype.card_fin, smul_eq_mul]
     at hsum
-  have htail := sum_weight_tail_counts_cutoff_le w K
+  have htail := sum_weight_tail_counts_le w K
   rw [Nat.mul_comm K s] at hsum
   omega
 

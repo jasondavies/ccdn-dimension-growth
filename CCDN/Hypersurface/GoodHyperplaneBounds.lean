@@ -10,6 +10,7 @@ import CCDN.Algebra.ThreeRowHyperplane
 import CCDN.Plane.HyperplanePlaneAvoidance
 import CCDN.Plane.IntegerPlaneHeight
 import Mathlib.Algebra.BigOperators.Field
+import CCDN.ForMathlib.MvPolynomial
 /-! Constructing a good rational hyperplane with a bounded integer normal.
 The degree-nine bound is a polynomial replacement for the precise avoidance
 polynomial in corrected CCDN Lemma 4.3.7. -/
@@ -80,9 +81,8 @@ theorem exists_bounded_geometrically_good_hyperplane {n : ℕ}
         apply Finset.sum_congr rfl
         intro i _
         ring
-  have hfdegree : (map (Int.castRingHom K) f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+  have hfdegree : (map (Int.castRingHom K) f).totalDegree = f.totalDegree :=
+      totalDegree_map_of_injective Int.cast_injective _
   have hsection := universalPlaneSection_map (Int.castRingHom K) f v
   have hgood := graphHyperplaneRestriction_irreducible_of_plane
     (map (Int.castRingHom K) f) αK vK hcontain
@@ -99,9 +99,7 @@ theorem exists_bounded_geometrically_good_hyperplane {n : ℕ}
       graphHyperplaneRestriction αK (map (Int.castRingHom K) f) := by
     rw [graphHyperplaneRestriction_map, hα, hmapf]
   have hmapdegree (g : MvPolynomial (Fin (3 + n)) ℚ) :
-      (map φ g).totalDegree = g.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ φ.injective]
+      (map φ g).totalDegree = g.totalDegree := totalDegree_map_of_injective φ.injective _
   refine ⟨D, a, hD, hDb.trans_eq hheight, haheight, ?_, ?_⟩
   · rw [← hmapdegree, hmap, hgood.1, hfdegree]
   · change Irreducible (map φ (graphHyperplaneRestriction α (map (Int.castRingHom ℚ) f)))

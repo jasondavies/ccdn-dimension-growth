@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.EulerPairBasis
+import CCDN.ForMathlib.MatrixRank
 /-! A nonzero Euler kernel vector forces every maximal universal
 coefficient minor to vanish after specialization. -/
 
@@ -24,10 +25,7 @@ theorem eulerClosedForm_minor_eq_zero_of_kernel
   classical
   by_contra hdet
   let A := eulerClosedFormCoefficientMatrix k f
-  have hlo : (k + 2) ^ 2 - 1 ≤ A.rank := by
-    have hh := Matrix.rank_submatrix_le A rows cols
-    rw [Matrix.rank_of_det_ne_zero hdet, Fintype.card_fin] at hh
-    exact hh
+  have hlo : (k + 2) ^ 2 - 1 ≤ A.rank := A.le_rank_of_det_submatrix_ne_zero rows cols hdet
   have hr : A.rank = Fintype.card (EulerColumns k) := by
     apply le_antisymm (Matrix.rank_le_card_width _)
     simpa only [card_eulerColumns] using hlo

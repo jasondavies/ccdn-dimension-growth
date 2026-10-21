@@ -11,6 +11,7 @@ import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import Mathlib.RingTheory.Localization.Ideal
 import Mathlib.RingTheory.MvPolynomial.Localization
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Nonconstant prime polynomials remain prime when coefficients are localized.
 This also proves preservation of irreducibility under purely transcendental
@@ -74,9 +75,7 @@ theorem irreducible_mvPolynomial_map_fraction_parameters
     have h := (MulEquiv.prime_iff (MvPolynomial.commAlgEquiv K τ σ)).mpr hC
     simpa only [MvPolynomial.commAlgEquiv_C, g] using h
   have hdeg : 0 < g.totalDegree := by
-    have he : g.totalDegree = f.totalDegree := by
-      unfold totalDegree
-      rw [support_map_of_injective _ (C_injective τ K)]
+    have he : g.totalDegree = f.totalDegree := totalDegree_map_of_injective (C_injective τ K) _
     rw [he]
     exact hd
   have h := prime_mvPolynomial_map_localization (S := F)

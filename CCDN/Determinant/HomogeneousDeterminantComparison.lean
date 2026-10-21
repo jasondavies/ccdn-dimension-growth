@@ -125,7 +125,7 @@ theorem homogeneous_no_auxiliary_log_comparison {n d M t : ℕ}
 lemma evaluation_log_gram_le {n N s M : ℕ} (hN : 0 < N)
     (mon : Fin N → (Fin n →₀ ℕ)) (points : Fin s → Fin n → ℤ)
     {B : ℝ} (hB : 1 ≤ B) (hp : ∀ i j, |(points i j : ℝ)| ≤ B)
-    (hdeg : ∀ j, (mon j).sum (fun _ e => e) ≤ M)
+    (hdeg : ∀ j, (mon j).degree ≤ M)
     (hG : 0 < (((evaluationMatrix mon points * (evaluationMatrix mon points)ᵀ).det : ℤ) : ℝ)) :
     Real.log (((evaluationMatrix mon points * (evaluationMatrix mon points)ᵀ).det : ℤ) : ℝ) / 2 ≤
       Real.log (s.factorial : ℝ) / 2 + (s : ℝ) / 2 * Real.log N + s * M * Real.log B := by

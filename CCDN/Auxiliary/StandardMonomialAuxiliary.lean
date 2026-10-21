@@ -26,7 +26,7 @@ theorem exists_standard_auxiliary_of_zero_determinants {n N t M : ℕ}
     (f : MvPolynomial (Fin n) ℚ) (mon : Fin N → (Fin n →₀ ℕ))
     (hmon : Function.Injective mon)
     (hstd : ∀ j, mon j ∈ Ideal.standardExponents (Ideal.span {f}) MonomialOrder.degLex)
-    (hdegree : ∀ j, (mon j).sum (fun _ e => e) ≤ M)
+    (hdegree : ∀ j, (mon j).degree ≤ M)
     (x : Fin t → IntPoint n)
     (hdet : ∀ a : Fin N → Fin t, (evaluationMatrix mon (x ∘ a)).det = 0) :
     ∃ g : MvPolynomial (Fin n) ℤ, g ≠ 0 ∧

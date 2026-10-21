@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredIntersection
-import CCDN.Hilbert.MonomialDimension
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Two finite differences of a binomial Hilbert function. This gives a
 coefficient-uniform codimension-two bound for filtered coordinate spaces. -/
@@ -76,7 +76,7 @@ theorem filteredCoordinateSpace_codim_two_bound {K : Type*} [Field K] {n N : ℕ
     Module.finrank K (filteredCoordinateSpace I N) ≤
       f.totalDegree * g.totalDegree * (n + N).choose n := by
   have h := filteredCoordinateSpace_finrank_bound hf hfg I hIf hIg hN
-  simp only [finrank_restrictTotalDegree, Fintype.card_fin,
+  simp only [MvPolynomial.finrank_restrictTotalDegree, Fintype.card_fin,
     ← Nat.choose_symm_add (a := n + 2)] at h
   have hc := choose_double_difference_bound n (N - (f.totalDegree + g.totalDegree))
     f.totalDegree g.totalDegree

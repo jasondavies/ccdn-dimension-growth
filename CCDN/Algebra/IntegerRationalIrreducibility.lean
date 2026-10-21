@@ -10,6 +10,7 @@ import CCDN.Hypersurface.NonabsolutePlaneCount
 import CCDN.Projection.PrimitiveNormalization
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import CCDN.ForMathlib.MvPolynomial
 /-! Positive-degree irreducible integer equations remain irreducible over Q.
 Primitive denominator-cleared divisors give an elementary Gauss argument. -/
 
@@ -21,9 +22,8 @@ open MvPolynomial
 theorem rational_map_irreducible_of_integer {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hir : Irreducible f) (hd : 0 < f.totalDegree) :
     Irreducible (map (Int.castRingHom ℚ) f) := by
-  have hdegree : (map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+  have hdegree : (map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree :=
+      totalDegree_map_of_injective Int.cast_injective _
   have hf0 : map (Int.castRingHom ℚ) f ≠ 0 := by
     intro he
     exact hir.ne_zero ((map_injective (Int.castRingHom ℚ) Int.cast_injective) (by simpa using he))
@@ -40,8 +40,8 @@ theorem rational_map_irreducible_of_integer {n : ℕ}
   · exact Or.inr hru
   have hq0 : q ≠ 0 := fun hh => hf0 (by simp [he, hh])
   have hr0 : r ≠ 0 := fun hh => hf0 (by simp [he, hh])
-  have hqd := totalDegree_pos_of_nonzero_nonunit q hq0 hqu
-  have hrd := totalDegree_pos_of_nonzero_nonunit r hr0 hru
+  have hqd := totalDegree_pos_of_ne_zero_of_not_isUnit hq0 hqu
+  have hrd := totalDegree_pos_of_ne_zero_of_not_isUnit hr0 hru
   have hsum : q.totalDegree + r.totalDegree = f.totalDegree := by
     rw [← totalDegree_mul_of_isDomain hq0 hr0, ← he, hdegree]
   obtain ⟨g, a, hgprim, ha, hmodel⟩ := exists_primitive_integer_model q hq0

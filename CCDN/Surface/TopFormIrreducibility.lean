@@ -9,6 +9,7 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Algebra.HomogeneousLinearDescent
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import CCDN.ForMathlib.MvPolynomial
 
 /-! An irreducible highest homogeneous component forces irreducibility of
  the full polynomial. Coefficient reduction preserves this implication and
@@ -70,9 +71,7 @@ theorem map_degree_and_irreducible_of_top_irreducible
     (map φ f).totalDegree = f.totalDegree ∧ Irreducible (map φ f) := by
   have htop : Irreducible (homogeneousComponent f.totalDegree (map φ f)) := by
     rwa [map_homogeneousComponent] at hir
-  have hle : (map φ f).totalDegree ≤ f.totalDegree := by
-    unfold totalDegree
-    exact Finset.sup_mono (support_map_subset _ _)
+  have hle : (map φ f).totalDegree ≤ f.totalDegree := totalDegree_map_le _ _
   have hge : f.totalDegree ≤ (map φ f).totalDegree := by
     by_contra h
     exact htop.ne_zero (homogeneousComponent_eq_zero _ _ (by omega))

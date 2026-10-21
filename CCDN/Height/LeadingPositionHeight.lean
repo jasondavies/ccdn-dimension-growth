@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
 import CCDN.Algebra.HomogeneousLeadingCoefficient
 import CCDN.Height.HomogeneousEvaluationHeight
 import CCDN.Plane.PlaneGridHeight
+import CCDN.ForMathlib.Log
 /-! The bounded leading-coefficient translation has a controlled height cost.
 Its logarithmic coefficient-position loss is at most 14d². -/
 
@@ -34,9 +35,7 @@ lemma leadingPositionHeightFactor_one_le (d : ℕ) : 1 ≤ leadingPositionHeight
 lemma leadingPositionHeightFactor_log_le {d : ℕ} (hd : 0 < d) :
     Real.log (leadingPositionHeightFactor d) ≤ 14 * (d : ℝ) ^ 2 := by
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
-  have h₁ : Real.log ((d : ℝ) + 1) ≤ d := by
-    have h := Real.log_le_sub_one_of_pos (show (0 : ℝ) < d + 1 by positivity)
-    linarith
+  have h₁ : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self d.cast_nonneg
   have h₂ : Real.log ((d : ℝ) + 2) ≤ d + 1 := by
     have h := Real.log_le_sub_one_of_pos (show (0 : ℝ) < d + 2 by positivity)
     linarith

@@ -12,7 +12,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Height.ProjectiveLinearCountTransfer
 import CCDN.Plane.ProjectivePlaneLinearCount
 import CCDN.Projection.BoundedBirationalHypersurfaceProjection
-import CCDN.Projection.LinearNormalizationFiberCount
+import CCDN.Projection.BoundedDegreeNormalizationFiber
 /-! The plane curve estimate gives a smaller degree exponent for curves
 specified by their filtered Hilbert polynomial. The construction of
 the finite birational projection and its integer matrix is internal. -/
@@ -51,10 +51,11 @@ theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
       (hzero : ∀ x ∈ s, ∀ g ∈ I, eval x g = 0)
       (hproj : ∀ x ∈ s, ∀ i, eval x (integerLinearForm (b i)) = z i) :
       s.card ≤ d ^ (n + 1) := by
-    exact linear_normalization_fiber_card_le I
+    exact (linear_normalization_fiber_card_le I
       (fun i : Fin 2 => integerLinearForm (b i.succ))
       (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdimdeg
-      (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
+      (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)).trans
+      (Nat.le_self_pow (Nat.succ_ne_zero n) d)
   let H : ℝ := birationalProjectionHeightConstant (n + 1) * (d : ℝ) ^ (2 * (n + 1))
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast (show 1 ≤ d by omega)
   have hH : 1 ≤ H := by

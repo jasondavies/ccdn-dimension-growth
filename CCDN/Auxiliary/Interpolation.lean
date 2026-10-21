@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Basic.Real.Basic
+public import Mathlib.Data.Finsupp.Weight
 public import Mathlib.Data.Matrix.Mul
 import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
@@ -49,7 +50,7 @@ theorem polynomialOfCoefficients_ne_zero {n N : ℕ} (mon : Fin N → (Fin n →
 
 theorem totalDegree_polynomialOfCoefficients_le {n N M : ℕ}
     (mon : Fin N → (Fin n →₀ ℕ)) (v : Fin N → ℤ)
-    (hdeg : ∀ j, (mon j).sum (fun _ e => e) ≤ M) :
+    (hdeg : ∀ j, (mon j).degree ≤ M) :
     (polynomialOfCoefficients mon v).totalDegree ≤ M := by
   apply (MvPolynomial.totalDegree_finsetSum _ _).trans
   apply Finset.sup_le
@@ -70,10 +71,9 @@ theorem eval_polynomialOfCoefficients {n N s : ℕ} (mon : Fin N → (Fin n →�
 /-- Monomial evaluation has the expected height bound, uniformly in the exponents and point. -/
 theorem abs_monomial_value_le {n M : ℕ} (e : Fin n →₀ ℕ) (x : Fin n → ℤ)
     {B : ℝ} (hB : 1 ≤ B) (hx : ∀ i, |(x i : ℝ)| ≤ B)
-    (he : e.sum (fun _ k => k) ≤ M) :
+    (he : e.degree ≤ M) :
     |((e.prod (fun i k => x i ^ k) : ℤ) : ℝ)| ≤ B ^ M := by
-  have hsum : ∑ i, e i ≤ M := by
-    simpa only [Finsupp.sum_fintype e (fun _ k => k) (fun _ => rfl)] using he
+  have hsum : ∑ i, e i ≤ M := by rwa [Finsupp.degree_eq_sum] at he
   rw [Finsupp.prod_fintype e (fun i k => x i ^ k) (fun _ => pow_zero _)]
   push_cast
   rw [Finset.abs_prod]

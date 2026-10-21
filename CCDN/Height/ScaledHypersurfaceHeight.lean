@@ -20,7 +20,7 @@ lemma integer_top_homogeneousComponent_ne_zero {n : ℕ}
     homogeneousComponent f.totalDegree f ≠ 0 := by
   classical
   obtain ⟨m, hm, hd⟩ := Finset.exists_mem_eq_sup f.support (support_nonempty.mpr hf)
-    (fun s => s.sum (fun _ e => e))
+    (fun s => s.degree)
   have hdeg : m.degree = f.totalDegree := hd.symm
   intro h
   have hc := congrArg (fun g : MvPolynomial (Fin n) ℤ => g.coeff m) h

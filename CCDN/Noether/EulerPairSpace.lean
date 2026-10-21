@@ -8,7 +8,6 @@ module
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 import CCDN.ForMathlib.MvPolynomial
-import CCDN.Hilbert.MonomialDimension
 import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition

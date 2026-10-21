@@ -24,8 +24,8 @@ theorem affine_plane_expression_le_bad_prime {d : ℕ} (hd : 0 < d)
     affineAuxiliaryDegreeExpression 0 d B L b ≤
       (d : ℝ) ^ 3 * (b + 2) * B ^ (1 / (d : ℝ)) := by
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
-  have hd0 : (0 : ℝ) < d := lt_of_lt_of_le zero_lt_one hdR
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hd0 : (0 : ℝ) < d := zero_lt_one.trans_le hdR
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlogB := Real.log_nonneg hB
   have hlogL := Real.log_nonneg hL
   have hpow : 1 ≤ B ^ (1 / (d : ℝ)) := Real.one_le_rpow hB (by positivity)

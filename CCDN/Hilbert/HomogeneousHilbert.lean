@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 import CCDN.ForMathlib.MvPolynomial
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import CCDN.ForMathlib.LinearMap
 /-! Exact homogeneous Hilbert functions of a principal equation. Multiplication
 by a homogeneous nonzero equation identifies the entire homogeneous kernel. -/
 
@@ -62,11 +63,8 @@ theorem principal_homogeneous_finrank {K σ : Type*} [Field K] [Finite σ]
       change (f * u).IsHomogeneous M
       simpa only [Nat.add_sub_of_le hM] using hf.mul hu
   let _ : Module.Finite K V := Module.Finite.of_fg (homogeneousSubmodule_fg σ K M)
-  have h := LinearMap.finrank_range_add_finrank_ker (φ.domRestrict V)
-  rw [LinearMap.range_domRestrict, LinearMap.ker_domRestrict] at h
-  have he := Submodule.finrank_map_subtype_eq V (φ.ker.comap V.subtype)
-  rw [Submodule.map_comap_subtype, hk, homogeneousMultiples_finrank f hf0] at he
-  rw [← he] at h
+  have h := φ.finrank_map_add_finrank_inf_ker V
+  rw [hk, homogeneousMultiples_finrank f hf0] at h
   exact h
 
 /-- Exact projective hypersurface Hilbert count, with no geometric hypothesis. -/

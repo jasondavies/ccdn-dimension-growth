@@ -9,6 +9,7 @@ public import CCDN.Hilbert.HypersurfaceHilbert
 import CCDN.Determinant.InitialFormMultiplication
 import CCDN.ForMathlib.MvPolynomial
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import CCDN.ForMathlib.LinearMap
 /-! The exact Hilbert function of the origin-adic layers of an
 arbitrary hypersurface. Initial-form cancellation identifies the entire
 homogeneous kernel, not merely a subspace of relations. -/
@@ -68,11 +69,8 @@ theorem originLayer_hilbert_eq [Finite σ]
       change (homogeneousComponent μ f * u).IsHomogeneous k
       simpa only [Nat.add_sub_of_le hk] using (homogeneousComponent_isHomogeneous μ f).mul hu
   let _ : Module.Finite K V := Module.Finite.of_fg (homogeneousSubmodule_fg σ K k)
-  have h := LinearMap.finrank_range_add_finrank_ker (φ.domRestrict V)
-  rw [LinearMap.range_domRestrict, LinearMap.ker_domRestrict] at h
-  have he := Submodule.finrank_map_subtype_eq V (φ.ker.comap V.subtype)
-  rw [Submodule.map_comap_subtype, hker, homogeneousMultiples_finrank _ hμ] at he
-  rw [← he] at h
+  have h := φ.finrank_map_add_finrank_inf_ker V
+  rw [hker, homogeneousMultiples_finrank _ hμ] at h
   rwa [originLayer_eq_homogeneousCoordinateSpace]
 
 /-- Below the equation's first nonzero degree the layer has no relations. -/

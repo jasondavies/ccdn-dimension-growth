@@ -21,18 +21,6 @@ noncomputable section
 open NumberField
 open scoped NumberField
 
-theorem exists_nontrivial_quadratic_automorphism
-    (F K : Type*) [Field F] [Field K] [Algebra F K]
-    [FiniteDimensional F K] [Algebra.IsSeparable F K]
-    (hd : Module.finrank F K = 2) :
-    ∃ σ : K ≃ₐ[F] K, σ ≠ 1 := by
-  let : Algebra.IsQuadraticExtension F K := ⟨hd⟩
-  have : Nontrivial (K ≃ₐ[F] K) :=
-    (Finite.one_lt_card_iff_nontrivial).mp (by
-      rw [IsGalois.card_aut_eq_finrank, hd]
-      omega)
-  exact exists_ne 1
-
 /-- A quadratic extension has two-torsion controlled by base-field
 two-torsion and a proved discriminant-prime factor. The constant loss
 from units is retained explicitly. -/
@@ -43,7 +31,10 @@ theorem quadratic_classGroupTwoTorsion_descent
       (classGroupTwoTorsionCard F *
         2 ^ (Module.finrank ℚ K * (NumberField.discr K).natAbs.primeFactors.card +
           Module.finrank ℚ F)) ^ 2 := by
-  obtain ⟨σ, hσ⟩ := exists_nontrivial_quadratic_automorphism F K hd
+  let : Algebra.IsQuadraticExtension F K := ⟨hd⟩
+  have : Nontrivial (K ≃ₐ[F] K) :=
+    Finite.one_lt_card_iff_nontrivial.mp (by rw [IsGalois.card_aut_eq_finrank, hd]; omega)
+  obtain ⟨σ, hσ⟩ := exists_ne (1 : K ≃ₐ[F] K)
   calc
     _ ≤ (Nat.card (stronglyAmbiguousTwoTorsion F K σ) *
         2 ^ Module.finrank ℚ F) ^ 2 :=

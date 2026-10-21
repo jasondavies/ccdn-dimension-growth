@@ -11,6 +11,7 @@ import CCDN.Algebra.PolynomialLinearDescent
 import CCDN.Curve.CurveBoxDegreeBound
 import CCDN.Hypersurface.NonabsolutePlaneCount
 import Mathlib.Algebra.MvPolynomial.Nilpotent
+import CCDN.ForMathlib.MvPolynomial
 /-! CCDN Corollary 4.1.4 for irreducible affine hypersurfaces in three
 variables. Splitting of the full equation over any field extension gives
 an auxiliary equation of degree at most d. The prime curve
@@ -32,14 +33,13 @@ theorem nonabsolute_affine_auxiliary {k K : Type*}
     ∃ q : MvPolynomial (Fin n) k, q ≠ 0 ∧
       q.totalDegree ≤ f.totalDegree ∧ ¬ f ∣ q ∧
       ∀ x : Fin n → k, eval x f = 0 → eval x q = 0 := by
-  have hd := totalDegree_pos_of_nonzero_nonunit f hir.ne_zero hir.not_isUnit
+  have hd := totalDegree_pos_of_ne_zero_of_not_isUnit hir.ne_zero hir.not_isUnit
   have hmap0 : map (algebraMap k K) f ≠ 0 := by
     intro he
     apply hir.ne_zero
     exact map_injective (algebraMap k K) (algebraMap k K).injective (by simpa using he)
-  have hmapd : (map (algebraMap k K) f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ (algebraMap k K).injective]
+  have hmapd : (map (algebraMap k K) f).totalDegree = f.totalDegree :=
+      totalDegree_map_of_injective (algebraMap k K).injective _
   have hmapu : ¬ IsUnit (map (algebraMap k K) f) := by
     intro hu
     have he := (isUnit_iff_totalDegree_of_isReduced.mp hu).2
@@ -57,8 +57,8 @@ theorem nonabsolute_affine_auxiliary {k K : Type*}
   obtain ⟨g, h, hfac, hgu, hhu⟩ := hfac
   have hg0 : g ≠ 0 := fun he => hmap0 (by simp [hfac, he])
   have hh0 : h ≠ 0 := fun he => hmap0 (by simp [hfac, he])
-  have hgd := totalDegree_pos_of_nonzero_nonunit g hg0 hgu
-  have hhd := totalDegree_pos_of_nonzero_nonunit h hh0 hhu
+  have hgd := totalDegree_pos_of_ne_zero_of_not_isUnit hg0 hgu
+  have hhd := totalDegree_pos_of_ne_zero_of_not_isUnit hh0 hhu
   have hdegrees : g.totalDegree + h.totalDegree = f.totalDegree := by
     rw [hfac, totalDegree_mul_of_isDomain hg0 hh0] at hmapd
     exact hmapd

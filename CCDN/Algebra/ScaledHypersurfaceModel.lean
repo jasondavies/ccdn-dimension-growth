@@ -11,6 +11,7 @@ import CCDN.Algebra.HomogeneousSlice
 import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.Auxiliary.ScaledHomogenizationPrimitive
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import CCDN.ForMathlib.MvPolynomial
 /-! Irreducibility and coefficient maps of scaled homogeneous models in
 arbitrary dimension, including reduction modulo primes. -/
 
@@ -65,9 +66,8 @@ theorem scaledHomogenize_integer_irreducible {n : ℕ}
     Irreducible (scaledHomogenize f.totalDegree (p : ℤ) f) := by
   apply (hprim.scaledHomogenize f.totalDegree hp hp0).irreducible_of_rational_map
   rw [scaledHomogenize_map]
-  have hdeg : (map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+  have hdeg : (map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree :=
+      totalDegree_map_of_injective Int.cast_injective _
   rw [← hdeg]
   exact scaledHomogenize_irreducible _ (rational_map_irreducible_of_integer f hir hd)
     (by simpa only [Int.coe_castRingHom, Int.cast_natCast] using

@@ -41,7 +41,7 @@ theorem surface_residue_salberger_count (d : ℕ) (hd : 1 ≤ d)
   have hE : 0 ≤ E := by dsimp only [E]; positivity
   refine ⟨E * C₀ + 1, c₀, by positivity, hc₀, ?_⟩
   intro f hfd B hB F hir S δ hS
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlogB := Real.log_nonneg hB
   have hL := surfaceResidueWindow_one_le d hK hB
   have hpoly := surface_residue_residual_count_le F hA hB hL

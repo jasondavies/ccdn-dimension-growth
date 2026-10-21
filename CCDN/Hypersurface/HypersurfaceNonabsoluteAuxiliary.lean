@@ -12,6 +12,7 @@ import CCDN.Hypersurface.NonabsolutePlaneCount
 import CCDN.Projection.PrimitiveNormalization
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import CCDN.ForMathlib.MvPolynomial
 /-! A degree-d auxiliary equation for nonabsolute irreducible hypersurfaces.
 Linear descent of the two homogeneous factors suffices over any extension. -/
 
@@ -47,8 +48,8 @@ theorem nonabsolute_homogeneous_auxiliary {k K : Type*}
   obtain ⟨g, h, hfac, hgu, hhu⟩ := hfac
   have hg0 : g ≠ 0 := fun he => hmap0 (by simp [hfac, he])
   have hh0 : h ≠ 0 := fun he => hmap0 (by simp [hfac, he])
-  have hgd := totalDegree_pos_of_nonzero_nonunit g hg0 hgu
-  have hhd := totalDegree_pos_of_nonzero_nonunit h hh0 hhu
+  have hgd := totalDegree_pos_of_ne_zero_of_not_isUnit hg0 hgu
+  have hhd := totalDegree_pos_of_ne_zero_of_not_isUnit hh0 hhu
   obtain ⟨hdegrees, htop⟩ := homogeneous_factorization_top (hf.map _) hmap0 hg0 hh0 hfac
   obtain ⟨g₀, hg₀, hg₀hom, hgz⟩ := exists_nonzero_homogeneous_linear_descent (k := k)
     (homogeneousComponent g.totalDegree g) (top_homogeneousComponent_ne_zero g hg0)

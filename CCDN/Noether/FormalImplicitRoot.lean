@@ -21,12 +21,6 @@ series root. Newton iteration and coefficient stabilization prove existence. -/
 namespace CCDN
 noncomputable section
 
-lemma constantCoeff_polynomial_eval {K : Type*} [CommRing K]
-    (f : Polynomial (PowerSeries K)) (g : PowerSeries K) :
-    PowerSeries.constantCoeff (f.eval g) =
-      (f.map PowerSeries.constantCoeff).eval (PowerSeries.constantCoeff g) := by
-  rw [Polynomial.eval_map, Polynomial.eval₂_at_apply]
-
 def formalNewtonSequence {K : Type*} [Field K]
     (f : Polynomial (PowerSeries K)) (b u : K) : ℕ → PowerSeries K
   | 0 => PowerSeries.C b
@@ -50,7 +44,8 @@ lemma formalNewton_step {K : Type*} [Field K]
   have hqder : (PowerSeries.X : PowerSeries K) ∣ q - f.derivative.eval g := hXdiff.trans hq
   have hbase : (PowerSeries.X : PowerSeries K) ∣ 1 - PowerSeries.C u * f.derivative.eval g := by
     apply PowerSeries.X_dvd_iff.mpr
-    simp only [map_sub, map_one, map_mul, PowerSeries.constantCoeff_C, constantCoeff_polynomial_eval, hg, hu, sub_self]
+    simp only [map_sub, map_one, map_mul, PowerSeries.constantCoeff_C,
+      ← Polynomial.eval_map_apply, hg, hu, sub_self]
   have hbracket : (PowerSeries.X : PowerSeries K) ∣ 1 - PowerSeries.C u * q := by
     have hh := dvd_mul_of_dvd_left hqder (PowerSeries.C u)
     convert dvd_sub hbase hh using 1
@@ -72,11 +67,12 @@ lemma formalNewton_precision {K : Type*} [Field K]
       refine ⟨by simp [formalNewtonSequence], ?_⟩
       rw [show (0 : ℕ) + 1 = 1 by omega, pow_one]
       apply PowerSeries.X_dvd_iff.mpr
-      simp only [formalNewtonSequence, constantCoeff_polynomial_eval, PowerSeries.constantCoeff_C, hroot]
+      simp only [formalNewtonSequence, ← Polynomial.eval_map_apply, PowerSeries.constantCoeff_C,
+        hroot]
   | succ n ih =>
       refine ⟨?_, formalNewton_step f b u hu _ ih.1 (by omega) ih.2⟩
       simp only [formalNewtonSequence, map_sub, map_mul, PowerSeries.constantCoeff_C,
-        constantCoeff_polynomial_eval, ih.1, hroot, mul_zero, sub_zero]
+        ← Polynomial.eval_map_apply, ih.1, hroot, mul_zero, sub_zero]
 
 lemma formalNewton_stabilizes {K : Type*} [Field K]
     (f : Polynomial (PowerSeries K)) (b u : K)
@@ -136,7 +132,7 @@ theorem formal_simple_root_unique {K : Type*} [Field K]
   obtain ⟨q, he, hq⟩ := polynomial_divided_difference f g h
   have hX : (PowerSeries.X : PowerSeries K) ∣ g - h := PowerSeries.X_dvd_iff.mpr (by simp [hg, hh])
   have hc := PowerSeries.X_dvd_iff.mp (hX.trans hq)
-  simp only [map_sub, constantCoeff_polynomial_eval, hh, sub_eq_zero] at hc
+  simp only [map_sub, ← Polynomial.eval_map_apply, hh, sub_eq_zero] at hc
   have hq0 : q ≠ 0 := by
     intro hz
     apply hder

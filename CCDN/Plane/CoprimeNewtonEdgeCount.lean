@@ -116,7 +116,7 @@ theorem coprime_newton_edge_count
     have hh := mul_le_mul hx hy (abs_nonneg _) (abs_nonneg _)
     simpa only [newtonEdgeCoefficientProduct, Int.cast_mul, abs_mul] using hh
   have hlog := Real.log_le_log
-    (lt_of_lt_of_le zero_lt_one hg.coefficient_product_abs_one_le) hprod
+    (zero_lt_one.trans_le hg.coefficient_product_abs_one_le) hprod
   rw [hzero]
   apply (primitive_coprime_newton_edge_count g hg hprim hB).trans
   have hC := coprimeNewtonEdgeCountConstant_pos.le

@@ -22,17 +22,17 @@ open MvPolynomial Module
 
 lemma eulerLowBasis_repr_apply {R : Type*} [CommRing R] (d : ℕ)
     (f : restrictTotalDegree (Fin 2) R d) (i : EulerLowIndex d) :
-    (eulerLowBasis R d).repr f i = f.val.coeff ((boundedExponentEquivSym (Fin 2) d).symm i).val := by
-  unfold eulerLowBasis
-  erw [Basis.repr_reindex_apply]
+    (eulerLowBasis R d).repr f i =
+      f.val.coeff ((Finsupp.degreeLeEquivSym (Fin 2) d).symm i).val := by
+  exact Basis.repr_reindex_apply _ _ _ _
 
 def eulerCoefficientMonomial (R : Type*) [CommRing R] (d : ℕ) (i : EulerLowIndex d) :
     Polynomial (Polynomial R) :=
-  bivariatePolynomialEquiv R (monomial ((boundedExponentEquivSym (Fin 2) d).symm i).val 1)
+  bivariatePolynomialEquiv R (monomial ((Finsupp.degreeLeEquivSym (Fin 2) d).symm i).val 1)
 
 def eulerCoefficientData {R : Type*} [CommRing R] (d : ℕ)
     (f : Polynomial (Polynomial R)) (i : EulerLowIndex d) : R :=
-  ((bivariatePolynomialEquiv R).symm f).coeff ((boundedExponentEquivSym (Fin 2) d).symm i).val
+  ((bivariatePolynomialEquiv R).symm f).coeff ((Finsupp.degreeLeEquivSym (Fin 2) d).symm i).val
 
 /-- These parameters are precisely the polynomial's ordinary monomial coefficients. -/
 theorem eulerCoefficientData_reconstruct {R : Type*} [CommRing R] (d : ℕ)

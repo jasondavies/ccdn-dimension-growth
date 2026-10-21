@@ -94,11 +94,8 @@ theorem unscaled_hypersurface_minimum_height_bound {n : ℕ}
     have hpow : L ^ q ≤ H ^ q :=
       Real.rpow_le_rpow hL0.le hLH (by dsimp [q]; positivity)
     have he : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) =
-        (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 := by
-      rw [← Real.rpow_natCast d 2, ← Real.rpow_add hd0]
-      congr 1
-      norm_num
-      ring
+        (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 :=
+      rpow_four_sub_eq_mul_sq hd0 n
     calc
       _ ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * b / L ^ q :=
         div_le_div_of_nonneg_left (by positivity) (by positivity) hpow

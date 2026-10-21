@@ -8,7 +8,7 @@ module
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 /-! Coefficientwise integer lifts preserve homogeneous weights and origin-ideal
-powers. Reduction modulo p has exactly the coefficientwise divisibility kernel. -/
+powers. -/
 
 @[expose] public section
 namespace CCDN
@@ -50,19 +50,6 @@ lemma modularPolynomialLift_mem_origin_power {σ : Type*} {p k : ℕ}
   rw [mem_pow_idealOfVars_iff'] at hf ⊢
   intro e he
   rw [coeff_modularPolynomialLift, hf e he, ZMod.val_zero, Nat.cast_zero]
-
-lemma map_mod_prime_eq_zero_iff {σ : Type*} (p : ℕ) (f : MvPolynomial σ ℤ) :
-    map (Int.castRingHom (ZMod p)) f = 0 ↔ C (p : ℤ) ∣ f := by
-  rw [C_dvd_iff_dvd_coeff]
-  constructor
-  · intro h e
-    have he := congrArg (fun q : MvPolynomial σ (ZMod p) => q.coeff e) h
-    simp only [coeff_map, Int.coe_castRingHom, AddMonoidAlgebra.coeff_zero] at he
-    exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mp he
-  · intro h
-    ext e
-    simp only [coeff_map, Int.coe_castRingHom, AddMonoidAlgebra.coeff_zero]
-    exact (ZMod.intCast_zmod_eq_zero_iff_dvd _ _).mpr (h e)
 
 end
 end CCDN

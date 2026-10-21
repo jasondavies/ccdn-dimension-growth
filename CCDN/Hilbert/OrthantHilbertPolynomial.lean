@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.MonomialOrthants
 public import Mathlib.RingTheory.Polynomial.HilbertPoly
-public import CCDN.Hilbert.MonomialDimension
+public import CCDN.ForMathlib.MvPolynomial
 import Mathlib.Data.Sym.Card
 
 /-! Counting the finite orthant partition gives an eventual polynomial
@@ -20,7 +20,7 @@ noncomputable section
 open Classical in
 def boundedExponentVectorEquivSym (σ : Type*) [Fintype σ] (N : ℕ) :
     {a : σ → ℕ // ∑ i, a i ≤ N} ≃ Sym (Option σ) N :=
-  (slackExponentEquiv σ N).trans (Sym.equivNatSumOfFintype (Option σ) N).symm
+  (Sym.equivNatSumLeOfFintype σ N).symm
 
 instance finite_boundedExponentVectors {σ : Type*} [Fintype σ] (N : ℕ) :
     Finite {a : σ → ℕ // ∑ i, a i ≤ N} :=

@@ -13,6 +13,7 @@ import CCDN.Determinant.UniversalPlaneMinor
 import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.UniversalPlaneDegree
 import CCDN.Projection.ShearNormalization
+import CCDN.ForMathlib.MvPolynomial
 /-! A nonzero universal minor of cubic parameter degree, over the original
 coefficient field. The nonvanishing proof descends from an algebraic closure. -/
 
@@ -59,9 +60,8 @@ theorem exists_universalPlane_minor_degree
           (2 * f.totalDegree ^ 2 - 1) * f.totalDegree := by
   let L := AlgebraicClosure K
   let φ : K →+* L := algebraMap K L
-  have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ φ.injective]
+  have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree :=
+      totalDegree_map_of_injective φ.injective _
   have hex := exists_universalPlane_minor
     (MvPolynomial.map φ f) hf (ht ▸ hpos) (ht ▸ hchar.map φ)
   rw [ht] at hex

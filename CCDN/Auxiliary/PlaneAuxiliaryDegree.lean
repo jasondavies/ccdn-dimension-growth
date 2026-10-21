@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Algebra.HomogeneousRankDichotomy
+import CCDN.ForMathlib.Log
 /-! Quantitative degree control from the plane determinant comparison. -/
 
 @[expose] public section
@@ -131,8 +132,7 @@ lemma plane_degree_bound_of_log_bound {d M : ℕ} {B L A K : ℝ}
     (M : ℝ) ≤ 2 * Real.exp (K + 23) * (d : ℝ) ^ 3 * A * B ^ (2 / (d : ℝ)) /
       L ^ (1 / (d : ℝ) ^ 2) := by
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd
-  have hMR : (0 : ℝ) < M := by exact_mod_cast hM
-  apply (Real.log_le_log_iff hMR (by positivity)).mp
+  refine Real.natCast_le_of_log_le_log hM (by positivity) ?_
   rw [Real.log_div (by positivity) (by positivity)]
   simp only [Real.log_mul (by positivity : (2 : ℝ) ≠ 0) (Real.exp_pos _).ne',
     Real.log_mul (by positivity : 2 * Real.exp (K + 23) ≠ 0) (by positivity : (d : ℝ) ^ 3 ≠ 0),

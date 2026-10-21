@@ -20,6 +20,8 @@ the column index type is finite.
 * `Matrix.exists_rank_linearIndependent_rows`: there are `A.rank` linearly independent rows.
 * `Matrix.exists_det_submatrix_ne_zero_of_le_rank`: every `r ≤ A.rank` is witnessed by a
   nonzero `r × r` minor with distinct rows and columns.
+* `Matrix.le_rank_of_det_submatrix_ne_zero`: conversely, a nonzero `k × k` minor shows
+  `k ≤ A.rank`.
 -/
 
 @[expose] public section
@@ -118,5 +120,11 @@ theorem exists_det_submatrix_ne_zero_of_le_rank
   have hli : LinearIndependent F (A.submatrix (a ∘ b) id).row := hi.comp b hb
   obtain ⟨c, hc, hd⟩ := exists_det_submatrix_ne_zero_of_linearIndependent_row _ hli
   exact ⟨a ∘ b, c, ha.comp hb, hc, hd⟩
+
+/-- A nonzero `k × k` minor shows that a matrix over a domain has rank at least `k`. -/
+theorem le_rank_of_det_submatrix_ne_zero {R ι ν : Type*} [CommRing R] [IsDomain R] [Fintype ν]
+    {k : ℕ} (A : Matrix ι ν R) (r : Fin k → ι) (c : Fin k → ν)
+    (h : (A.submatrix r c).det ≠ 0) : k ≤ A.rank := by
+  simpa only [rank_of_det_ne_zero h, Fintype.card_fin] using A.rank_submatrix_le r c
 
 end Matrix

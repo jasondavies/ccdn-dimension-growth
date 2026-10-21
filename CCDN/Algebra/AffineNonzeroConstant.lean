@@ -43,7 +43,7 @@ def affineNonzeroConstantBound (C : ℝ) : ℝ :=
     Real.exp (2 * Real.log affineSmallBoxScale + 6))
 
 lemma affineNonzeroConstantBound_pos (C : ℝ) : 0 < affineNonzeroConstantBound C := by
-  have hA : 0 < scalingPrimeRatio := lt_of_lt_of_le zero_lt_one scalingPrimeRatio_one_le
+  have hA : 0 < scalingPrimeRatio := zero_lt_one.trans_le scalingPrimeRatio_one_le
   have hS := Real.log_nonneg affineSmallBoxScale_one_le
   unfold affineNonzeroConstantBound
   positivity

@@ -7,7 +7,7 @@ module
 
 public import CCDN.Noether.EulerClosedFormRank
 public import CCDN.Algebra.HomogeneousMonomials
-public import CCDN.Hilbert.MonomialDimension
+public import CCDN.ForMathlib.MvPolynomial
 /-! Canonical monomial coordinates for the d^2-1 Euler parameters and the
 coefficient matrix of their closed-form operator. -/
 
@@ -24,8 +24,8 @@ abbrev EulerColumns (k : ℕ) := EulerLowIndex k ⊕ (EulerLowIndex k ⊕ EulerT
 def eulerLowBasis (R : Type*) [CommRing R] (k : ℕ) :
     Basis (EulerLowIndex k) R (restrictTotalDegree (Fin 2) R k) := by
   classical
-  exact (basisRestrictSupport R {p : Fin 2 →₀ ℕ | p.sum (fun _ e => e) ≤ k}).reindex
-    (boundedExponentEquivSym (Fin 2) k)
+  exact (basisRestrictSupport R {p : Fin 2 →₀ ℕ | p.degree ≤ k}).reindex
+    (Finsupp.degreeLeEquivSym (Fin 2) k)
 
 /-- The usual monomial basis of the homogeneous space. -/
 def eulerTopBasis (R : Type*) [CommRing R] (k : ℕ) :

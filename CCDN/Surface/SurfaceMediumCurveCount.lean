@@ -21,7 +21,7 @@ theorem curveBound_medium_degree {δ d : ℕ} (hd : 1 ≤ d) (hδ : d ≤ δ)
     (hδD : (δ : ℝ) ≤ D * (Real.log B + 1)) :
     curveBound δ B ≤ (δ : ℝ) * D ^ 2 * (D + 1) *
       B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1) ^ 3 := by
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlog := Real.log_nonneg hB
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hδR : (d : ℝ) ≤ δ := by exact_mod_cast hδ
@@ -62,7 +62,7 @@ theorem medium_degree_curve_union_bound :
   obtain ⟨C,hC,hcount⟩ := affineCurveBound 3 (by omega)
   refine ⟨C,hC,?_⟩
   intro S δ d hd A D B hA hD hB hcurve hcap hbudget
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlog := Real.log_nonneg hB
   calc
     _ ≤ ∑ P ∈ S, (count (idealZeroLocus P) B : ℝ) := by

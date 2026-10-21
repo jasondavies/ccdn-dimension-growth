@@ -7,6 +7,7 @@ module
 
 public import CCDN.Noether.ClosedFormBaseChange
 public import Mathlib.LinearAlgebra.Matrix.Rank
+import CCDN.ForMathlib.MatrixRank
 /-! A nonzero integer minor of the closed-form coefficient matrix.
 Rank drop after reduction forces divisibility of this same integer. The
 geometric rank-drop criterion and the height bound are separate obligations. -/
@@ -39,10 +40,7 @@ theorem characteristic_dvd_closedForm_minor_of_rank_lt
   change (Int.castRingHom K) _ = 0
   rw [closedForm_minor_map]
   by_contra hn
-  have he := Matrix.rank_of_det_ne_zero hn
-  have hl := (closedFormCoefficientMatrix d (bivariateMap (Int.castRingHom K) f)).rank_submatrix_le a c
-  rw [he, Fintype.card_fin] at hl
-  omega
+  exact hr.not_ge (Matrix.le_rank_of_det_submatrix_ne_zero _ a c hn)
 
 end
 end CCDN

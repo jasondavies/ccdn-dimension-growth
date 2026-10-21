@@ -52,7 +52,7 @@ lemma filteredCoordinateSpace_finrank_eq_vector_card {K σ : Type*} [Field K]
   rw [filteredCoordinateSpace_finrank_eq_standard_card]
   apply Nat.card_congr
   exact Finsupp.equivFunOnFinite.subtypeEquiv (fun a => by
-    simp [Ideal.boundedStandardExponents, standardExponentVectors, Finsupp.sum_fintype])
+    simp [Ideal.boundedStandardExponents, standardExponentVectors, Finsupp.degree_eq_sum])
 
 /-- Eventual polynomiality of the filtered coordinate-space dimension. -/
 theorem filteredCoordinateSpace_eventually_polynomial {K σ : Type*} [Field K]

@@ -15,6 +15,7 @@ import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
 import CCDN.Auxiliary.HypersurfaceCoefficientDichotomy
 import CCDN.Auxiliary.UnscaledModelCount
 import CCDN.Height.ProjectiveIntegerHeight
+import CCDN.ForMathlib.MvPolynomial
 /-! The ordinary homogenization provides an affine auxiliary without a
 scaling-prime hypothesis and transfers the coefficient-height dichotomy. -/
 
@@ -57,9 +58,8 @@ lemma scaledHomogenize_one_integer_irreducible {n : ℕ}
     Irreducible (scaledHomogenize f.totalDegree 1 f) := by
   apply (hprim.scaledHomogenize_one _).irreducible_of_rational_map
   rw [scaledHomogenize_map]
-  have hdeg : (map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+  have hdeg : (map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree :=
+      totalDegree_map_of_injective Int.cast_injective _
   rw [← hdeg]
   exact scaledHomogenize_irreducible _ (rational_map_irreducible_of_integer f hir hd)
     (by simp)

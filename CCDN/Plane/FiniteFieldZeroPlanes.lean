@@ -49,8 +49,7 @@ theorem zero_plane_parameters_card_le_cube {K σ : Type*} [CommRing K]
     apply Subtype.ext
     apply planeTriplePointsEquiv.injective
     funext j
-    have hh := congrArg Subtype.val (congrFun h j)
-    exact hh
+    exact congrArg Subtype.val (congrFun h j)
   have h := Nat.card_le_card_of_injective ψ hψ
   simpa only [Nat.card_eq_fintype_card, Fintype.card_fun, Fintype.card_fin] using h
 

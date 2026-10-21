@@ -15,6 +15,7 @@ import CCDN.Hilbert.ProperHilbertDimension
 import CCDN.Hilbert.ZeroDimensionalProjectiveCount
 import CCDN.Hypersurface.ProjectiveVarietyDimensionGrowth
 import CCDN.Projection.HomogeneousProjectionEquation
+import CCDN.ForMathlib.MvPolynomial
 /-! CCDN Theorem 1 in the homogeneous-coordinate-ideal formulation: uniform projective
 dimension growth for every rational prime projective variety of degree at least five.
 The Hilbert polynomial determines the degree and dimension. Zero-dimensional and empty
@@ -64,12 +65,8 @@ theorem exists_prime_generator_of_hilbert_dimension {n : ℕ}
       Fintype.card_fin] at hdim
     omega
   obtain ⟨p, hpI, hp⟩ := hI.exists_mem_prime_of_ne_bot hbot
-  have hdeg : 0 < p.totalDegree := by
-    by_contra! h
-    have he := totalDegree_eq_zero_iff_eq_C.mp (Nat.eq_zero_of_le_zero h)
-    apply hp.not_isUnit
-    rw [he]
-    exact (isUnit_iff_ne_zero.mpr fun hc => hp.ne_zero (by rw [he, hc, map_zero])).map C
+  have hdeg : 0 < p.totalDegree :=
+    totalDegree_pos_of_ne_zero_of_not_isUnit hp.ne_zero hp.not_isUnit
   have : (Ideal.span {p}).IsPrime := (Ideal.span_singleton_prime hp.ne_zero).mpr hp
   refine ⟨p, hp, hdeg, ?_⟩
   by_contra hne

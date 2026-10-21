@@ -42,18 +42,11 @@ theorem geometric_projective_dimension_zero_multiplicity_one
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ)) : d = 1 := by
   classical
-  obtain ⟨j,hj⟩ := exists_coordinate_not_mem_of_positive_hilbert_dimension J (by omega)
-  let e := Equiv.swap 0 j
+  obtain ⟨e, hJ', hX, hp⟩ := exists_projectivePermutedIdeal_chart J hJ (by omega)
   let J' := projectivePermutedIdeal J e
   have : J'.IsPrime := projectivePermutedIdeal_isPrime J e
   let : (J'.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime :=
     projectivePermutedIdeal_geometrically_prime J e
-  have hJ' := projectivePermutedIdeal_homogeneous J hJ e
-  have hX : X 0 ∉ J' := by
-    change X 0 ∉ projectivePermutedIdeal J e
-    rw [mem_projectivePermutedIdeal,rename_X]
-    simpa only [e,Equiv.swap_apply_left] using hj
-  have hp := projectivePermutedIdeal_filteredHilbertPolynomial J e
   have hdim' : (filteredHilbertPolynomial J').natDegree = 0 + 1 :=
     (congrArg Polynomial.natDegree hp).trans hdim
   have hd' : (filteredHilbertPolynomial J').leadingCoeff = (d : ℚ) / (0 + 1).factorial := by

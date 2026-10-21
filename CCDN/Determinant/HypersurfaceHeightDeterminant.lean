@@ -72,7 +72,7 @@ theorem hypersurface_determinant_log_lower_height
   have hlower := hypersurface_determinant_log_lower_at_rank hs f hf hd F hF z hprim hz hrows bad hred
   unfold hypersurfaceRankLowerBound at hlower
   have hc : 0 < hypersurfaceHeightConstant (n + 3) :=
-    lt_of_lt_of_le zero_lt_one (hypersurfaceHeightConstant_one_le _)
+    zero_lt_one.trans_le (hypersurfaceHeightConstant_one_le _)
   have hh : 0 < 1 + Real.log H / (d : ℝ) ^ 2 := by
     have := div_nonneg (Real.log_nonneg hH) (sq_nonneg (d : ℝ))
     linarith

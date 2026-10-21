@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 import CCDN.Hilbert.HilbertPolynomialComparison
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Projection.HilbertProjectionKernel
+import CCDN.ForMathlib.MvPolynomial
 /-! Degree bounds for hypersurface equations of linear projections.
 The degree is bounded by the factorial-normalized leading coefficient of
 the original quotient's filtered Hilbert polynomial. -/
@@ -57,16 +58,8 @@ theorem exists_hypersurface_projection_equation_degree_le
   obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨f, hf, hker⟩ := exists_hypersurface_projection_equation I a ha
     (by rw [hdim]; omega) b hb hi
-  have hfdeg : 0 < f.totalDegree := by
-    by_contra hn
-    have he := totalDegree_eq_zero_iff_eq_C.mp (show f.totalDegree = 0 by omega)
-    have hc : f.coeff 0 ≠ 0 := by
-      intro hc
-      apply hf.ne_zero
-      rw [he, hc, map_zero]
-    apply hf.not_isUnit
-    rw [he]
-    exact (isUnit_iff_ne_zero.mpr hc).map C
+  have hfdeg : 0 < f.totalDegree :=
+    totalDegree_pos_of_ne_zero_of_not_isUnit hf.ne_zero hf.not_isUnit
   exact ⟨f, hf, hfdeg, hypersurface_projection_equation_degree_le I
     (Ideal.IsPrime.ne_top ‹I.IsPrime›) a ha d hdim hdegree f hf.ne_zero hfdeg hker, hker⟩
 

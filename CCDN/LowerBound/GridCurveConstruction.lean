@@ -20,15 +20,6 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
-lemma grid_root_polynomial_monic {K : Type*} [Field K] (s : Finset K) :
-    (∏ a ∈ s, (X - C a : K[X])).Monic :=
-  monic_prod_of_monic s _ (fun a _ => monic_X_sub_C a)
-
-lemma grid_root_polynomial_natDegree {K : Type*} [Field K] (s : Finset K) :
-    (∏ a ∈ s, (X - C a : K[X])).natDegree = s.card := by
-  rw [natDegree_prod_of_monic s _ (fun a _ => monic_X_sub_C a)]
-  simp
-
 lemma grid_root_polynomial_constant_ne_zero {K : Type*} [Field K]
     (s : Finset K) (h0 : 0 ∉ s) :
     (∏ a ∈ s, (X - C a : K[X])).coeff 0 ≠ 0 := by
@@ -62,8 +53,8 @@ theorem exists_absolutely_irreducible_plane_grid
     intro x hx he
     exact ha ((sub_eq_zero.mp he) ▸ hx)
   let V : K[X] := ∏ x ∈ t, (X - C x)
-  have hm : V.Monic := grid_root_polynomial_monic t
-  have hvdeg : V.natDegree = s.card := (grid_root_polynomial_natDegree t).trans ht
+  have hm : V.Monic := monic_prod_X_sub_C id t
+  have hvdeg : V.natDegree = s.card := (natDegree_finsetProd_X_sub_C_eq_card t id).trans ht
   have hv0 : V.coeff 0 ≠ 0 := grid_root_polynomial_constant_ne_zero t ht0
   let k := d - s.card
   have hk : 2 ≤ k := by dsimp [k]; omega

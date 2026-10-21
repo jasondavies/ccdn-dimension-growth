@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Field.ZMod
 import CCDN.Algebra.FullDegreeSectionIrreducibility
 import CCDN.Noether.UniversalPlaneWitness
 import Mathlib.Algebra.MvPolynomial.Funext
+import CCDN.ForMathlib.MvPolynomial
 
 /-! All coefficients of the universal witness vanish at a degree-dropping or
 reducible ambient reduction. A nonzero integer coefficient therefore detects
@@ -40,9 +41,7 @@ theorem universalPlaneBadWitness_map_eq_zero_of_bad
   have he : universalPlaneSection (MvPolynomial.map φ f) v =
       bivariateMap ψ (universalPlanePolynomial f) := by
     rw [universalPlaneSection, universalPlanePolynomial_map, ← bivariateMap_comp_apply]
-  have hdle : (MvPolynomial.map φ f).totalDegree ≤ f.totalDegree := by
-    unfold totalDegree
-    exact Finset.sup_mono (support_map_subset _ _)
+  have hdle : (MvPolynomial.map φ f).totalDegree ≤ f.totalDegree := totalDegree_map_le _ _
   have hs := universalPlanePolynomial_specialization_totalDegree (MvPolynomial.map φ f) (eval v)
   change bivariateTotalDegree (universalPlaneSection (MvPolynomial.map φ f) v) ≤ _ at hs
   rw [he, hg.2.1] at hs

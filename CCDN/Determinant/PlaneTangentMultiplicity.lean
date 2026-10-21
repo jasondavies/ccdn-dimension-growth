@@ -8,6 +8,7 @@ module
 public import CCDN.Noether.FormalPlaneDifferentiation
 import CCDN.Determinant.FormalBranchMultiplicity
 import CCDN.Noether.FormalBranchFaithful
+import CCDN.ForMathlib.NatCast
 /-! A polynomial criterion for the multiplicity form of plane Bézout.
 All formal branches are constructed from the nonsingularity assumptions. -/
 
@@ -40,13 +41,6 @@ theorem plane_tangent_multiplicity_bound {K ι : Type*} [Field K]
     (hsmooth i) g N hchar (hvan i)
 
 /-- Characteristic p allows all requested multiplicities up to p. -/
-lemma cast_ne_zero_below_characteristic {K : Type*} [Field K]
-    (p N : ℕ) [CharP K p] (hN : N ≤ p) :
-    ∀ n, 0 < n → n < N → (n : K) ≠ 0 := by
-  intro n hn hnN hzero
-  have hd := (CharP.cast_eq_zero_iff K p n).mp hzero
-  exact (not_le_of_gt (hnN.trans_le hN)) (Nat.le_of_dvd hn hd)
-
 theorem plane_tangent_multiplicity_bound_charP {K ι : Type*} [Field K]
     [Fintype ι] [DecidableEq ι] (p : ℕ) [CharP K p]
     (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
@@ -57,7 +51,7 @@ theorem plane_tangent_multiplicity_bound_charP {K ι : Type*} [Field K]
     (hvan : ∀ i r, r < N → eval (z i) ((planeTangent f (j i))^[r] g) = 0) :
     Fintype.card ι * N ≤ f.totalDegree * g.totalDegree :=
   plane_tangent_multiplicity_bound f hf z hz hzero j hsmooth g hnd N
-    (cast_ne_zero_below_characteristic p N hN) hvan
+    (fun _ hn hnN ↦ CharP.natCast_ne_zero_of_lt K hn.ne' (hnN.trans_le hN)) hvan
 
 end
 end CCDN

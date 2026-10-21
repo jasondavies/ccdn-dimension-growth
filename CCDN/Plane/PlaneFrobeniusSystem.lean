@@ -11,6 +11,7 @@ import CCDN.Determinant.PlaneSingularities
 import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 /-! The finite linear system producing Frobenius auxiliary coefficients.
 A strict dimension inequality gives a nontrivial solution. -/
 
@@ -42,17 +43,6 @@ lemma planeTangent_iterate_totalDegree_le {K : Type*} [Field K]
   | succ r hr =>
     rw [Function.iterate_succ_apply']
     exact (planeTangent_totalDegree_le f _ j).trans (by nlinarith)
-
-lemma linearMap_nonzero_kernel_of_finrank_lt {K V W : Type*} [Field K]
-    [AddCommGroup V] [Module K V] [Module.Finite K V]
-    [AddCommGroup W] [Module K W] [Module.Finite K W]
-    (F : V →ₗ[K] W) (h : Module.finrank K W < Module.finrank K V) :
-    ∃ c, c ≠ 0 ∧ F c = 0 := by
-  by_contra! hn
-  have hinj : Function.Injective F := (injective_iff_map_eq_zero F).mpr (fun c hc => by
-    by_contra hcz
-    exact hn c hcz hc)
-  exact (not_le_of_gt h) (LinearMap.finrank_le_finrank_of_injective hinj)
 
 /-- Independent bounded-degree coefficient classes and more unknowns than
 constraints yield bounded-degree auxiliary coefficients. -/
@@ -89,7 +79,9 @@ theorem exists_planeFrobenius_coefficients {K ι κ : Type*} [Field K]
   have hdim' : Module.finrank K (∀ r, V r) < Module.finrank K (ι × κ → K) := by
     rw [Module.finrank_pi, Fintype.card_prod, Module.finrank_pi_fintype]
     exact hdim
-  obtain ⟨c, hc, hFc⟩ := linearMap_nonzero_kernel_of_finrank_lt F hdim'
+  obtain ⟨c, hFc, hc⟩ :=
+    Submodule.exists_mem_ne_zero_of_ne_bot (LinearMap.ker_ne_bot_of_finrank_lt (f := F) hdim')
+  rw [LinearMap.mem_ker] at hFc
   let a : ι → MvPolynomial (Fin 2) K := fun i => ∑ k, c (i, k) • b k
   refine ⟨a, ?_, ?_, ?_⟩
   · intro i

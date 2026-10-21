@@ -12,6 +12,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Auxiliary.HypersurfacePositioning
 import CCDN.Noether.UniversalPlaneWitness
 import CCDN.Projection.ShearNormalization
+import CCDN.ForMathlib.MvPolynomial
 /-! The leading coefficient of a universal plane section detects loss of the
 full outer degree. It is evaluated by the highest homogeneous form in the
 first direction. -/
@@ -59,9 +60,8 @@ lemma universalPlaneLeading_specialize {K σ : Type*} [CommRing K]
 lemma universalPlaneLeading_map {K L σ : Type*} [Field K] [Field L]
     (φ : K →+* L) (f : MvPolynomial σ K) :
     universalPlaneLeading (MvPolynomial.map φ f) = MvPolynomial.map φ (universalPlaneLeading f) := by
-  have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ φ.injective]
+  have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree :=
+      totalDegree_map_of_injective φ.injective _
   simp only [universalPlaneLeading, ht, universalPlanePolynomial_map, bivariateMap_coeff]
 
 /-- Over an algebraically closed field, irreducibility and the characteristic bound
@@ -85,9 +85,8 @@ theorem universalPlaneLeading_ne_zero
     (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K f.totalDegree) :
     universalPlaneLeading f ≠ 0 := by
   let φ : K →+* AlgebraicClosure K := algebraMap K (AlgebraicClosure K)
-  have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ φ.injective]
+  have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree :=
+      totalDegree_map_of_injective φ.injective _
   have hn := universalPlaneLeading_ne_zero_of_irreducible (MvPolynomial.map φ f) hf (ht ▸ hpos)
     (ht ▸ hchar.map φ)
   rw [universalPlaneLeading_map] at hn

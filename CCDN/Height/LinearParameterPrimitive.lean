@@ -45,10 +45,8 @@ theorem exists_bounded_linear_parameter_primitive
   let R := IntermediateField.adjoin K (Set.range u)
   let uR : Fin (m + 1) → R := fun i =>
     ⟨u i, IntermediateField.subset_adjoin K _ ⟨i, rfl⟩⟩
-  have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (l i)) := by
-    change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (l i)))
-    rw [← projectionCoordinateMap_eq_aeval]
-    exact hi
+  have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (l i)) :=
+    injective_projectionCoordinateMap_iff.mp hi
   have hiF : AlgebraicIndependent K u := hiA.map' (IsFractionRing.injective A F)
   have hiR : AlgebraicIndependent K uR := AlgebraicIndependent.of_comp R.val hiF
   obtain ⟨hfinite, hrank⟩ := hilbert_functionField_finite_rank_le (R := R) (F := F) I d

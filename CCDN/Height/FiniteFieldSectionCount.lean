@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
 import CCDN.Algebra.BinomialSectionBound
-import CCDN.Auxiliary.FiniteFieldInterpolation
+import CCDN.LowerBound.GridPointInterpolation
 import Mathlib.Tactic.Positivity.Finset
 import Mathlib.Algebra.Order.Star.Int
 import Mathlib.Algebra.Order.Ring.Star
@@ -38,8 +38,9 @@ theorem finite_field_common_zeros_card_le_choose {K ι : Type*} [Field K] [Finty
     obtain ⟨b, rfl⟩ := Ideal.mem_span_singleton.mp hw
     rw [← he]
     simp only [eval_add, eval_mul, hzf, hzg, zero_mul, zero_add]
-  have hlower := finite_field_points_filtered_lower I z hz hzI (N := N)
-    (by simp only [Fintype.card_fin]; dsimp [N]; omega)
+  have hlower := grid_points_filtered_lower I Finset.univ z hz
+    (fun _ _ ↦ Finset.mem_univ _) hzI (N := N)
+    (by simp only [Fintype.card_fin, Finset.card_univ]; dsimp [N]; omega)
   have hIf : f ∈ I := (show Ideal.span {f} ≤ I from le_sup_left) (Ideal.subset_span (by simp))
   have hIg : g ∈ I := (show Ideal.span {g} ≤ I from le_sup_right) (Ideal.subset_span (by simp))
   exact hlower.trans (filteredCoordinateSpace_codim_two_bound hf hfg I hIf hIg (by dsimp [N]; omega))

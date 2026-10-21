@@ -13,6 +13,7 @@ import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Noether.UniversalPlaneIntegerSpecialization
 import CCDN.Projection.PrimitiveNormalization
 import CCDN.Projection.ShearNormalization
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Irreducible plane sections transverse to a prescribed direction.
 The avoidance condition also ensures that a second equation restricts
@@ -165,9 +166,8 @@ theorem exists_good_rational_plane_avoiding
     (MulEquiv.irreducible_iff (f := bivariatePolynomialEquiv _)).mp hgood
   have hqd : q.totalDegree = f.totalDegree := by
     rw [bivariateTotalDegree_equiv] at hdeg
-    have hm : (map (Int.castRingHom (AlgebraicClosure ℚ)) q).totalDegree = q.totalDegree := by
-      unfold totalDegree
-      rw [support_map_of_injective _ Int.cast_injective]
+    have hm : (map (Int.castRingHom (AlgebraicClosure ℚ)) q).totalDegree = q.totalDegree :=
+        totalDegree_map_of_injective Int.cast_injective _
     simpa only [hm, hFd] using hdeg
   refine ⟨(Int.castRingHom ℚ) ∘ a, (Int.castRingHom ℚ) ∘ b,
     (Int.castRingHom ℚ) ∘ c, ?_, ?_, ?_⟩

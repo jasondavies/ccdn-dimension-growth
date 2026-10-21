@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.ScaledPlaneCount
+import CCDN.ForMathlib.Log
 /-! The scaling-prime interval yields the affine box exponent 1/d. These
 numerical bounds are independent of the coefficient height. -/
 
@@ -21,9 +22,7 @@ lemma scaled_box_power_ratio_le {d : ℕ} (hd : 0 < d) {A B p : ℝ}
   have hd0 : (0 : ℝ) < d := by linarith
   have hB0 : 0 < B := by linarith
   have hdplus : (0 : ℝ) < d + 1 := by linarith
-  have hlog : Real.log ((d : ℝ) + 1) ≤ d := by
-    have h := Real.log_le_sub_one_of_pos hdplus
-    linarith
+  have hlog : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self hd0.le
   have hdeg : ((d : ℝ) + 1) ^ (2 / (d : ℝ)) ≤ Real.exp 2 := by
     rw [Real.rpow_def_of_pos hdplus]
     apply Real.exp_le_exp.mpr
@@ -61,8 +60,7 @@ lemma scaled_auxiliary_degree_bound_le {d : ℕ} (hd : 0 < d) {A B p C : ℝ}
   have hlogpB := Real.log_le_log hp0 hpB
   have hlogR : Real.log (((d : ℝ) + 1) * B) ≤ d + Real.log B := by
     rw [Real.log_mul (by positivity) hB0.ne']
-    have h := Real.log_le_sub_one_of_pos (show (0 : ℝ) < d + 1 by positivity)
-    linarith
+    linarith [Real.log_add_one_le_self hd0.le]
   let Q := B ^ (1 / (d : ℝ))
   let E := 2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14
   have hQ : 1 ≤ Q := Real.one_le_rpow hB (by positivity)

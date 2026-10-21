@@ -120,7 +120,6 @@ public import CCDN.Auxiliary.ComplexGridInterpolation
 public import CCDN.Auxiliary.ComplexMultivariateGrid
 public import CCDN.Auxiliary.CongruenceBadPrimeCharge
 public import CCDN.Auxiliary.ConstantLeadingBadReduction
-public import CCDN.Auxiliary.FiniteFieldInterpolation
 public import CCDN.Auxiliary.GeneralBadReduction
 public import CCDN.Auxiliary.HomogeneousAuxiliary
 public import CCDN.Auxiliary.HomogeneousChartInterpolation
@@ -494,6 +493,8 @@ public import CCDN.ForMathlib.FieldTheory
 public import CCDN.ForMathlib.Fin
 public import CCDN.ForMathlib.FiniteGroupPowerTorsion
 public import CCDN.ForMathlib.IntegerPolynomialL1
+public import CCDN.ForMathlib.LinearMap
+public import CCDN.ForMathlib.Log
 public import CCDN.ForMathlib.Matrix
 public import CCDN.ForMathlib.MatrixRank
 public import CCDN.ForMathlib.MvPolynomial
@@ -567,7 +568,6 @@ public import CCDN.Hilbert.HomogeneousFilteredRank
 public import CCDN.Hilbert.HomogeneousHilbert
 public import CCDN.Hilbert.HomogeneousPrimeComponents
 public import CCDN.Hilbert.HypersurfaceHilbert
-public import CCDN.Hilbert.MonomialDimension
 public import CCDN.Hilbert.OrthantHilbertPolynomial
 public import CCDN.Hilbert.PrimeComponentTranscendence
 public import CCDN.Hilbert.PrimeIdealDimensionDrop
@@ -782,7 +782,6 @@ public import CCDN.Projection.IntegralProjectionClosedImage
 public import CCDN.Projection.IntegralProjectionFiberCount
 public import CCDN.Projection.IntegralProjectionHilbert
 public import CCDN.Projection.LeadingCoordinateExtension
-public import CCDN.Projection.LinearNormalizationFiberCount
 public import CCDN.Projection.LinearNormalizationInfinite
 public import CCDN.Projection.LinearProjectionFiltration
 public import CCDN.Projection.NormalizationHeightOne

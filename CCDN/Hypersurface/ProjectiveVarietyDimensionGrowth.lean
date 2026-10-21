@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.ProjectiveProjectionGrowth
-import CCDN.Projection.LinearNormalizationFiberCount
+import CCDN.Projection.BoundedDegreeNormalizationFiber
 /-! Dimension growth for homogeneous prime ideals of positive
 projective dimension. -/
 
@@ -40,10 +40,11 @@ theorem projective_variety_dimension_growth (m k : ℕ) :
     exact Ideal.subset_span (Set.mem_singleton f)
   apply hcount I d hd b hb f hf hfhom hfdeg hrel _ B hB
   intro z s hzero hproj
-  exact linear_normalization_fiber_card_le I
+  exact (linear_normalization_fiber_card_le I
     (fun i : Fin (m + 2) => integerLinearForm (b i.succ))
     (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdimdeg
-    (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
+    (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)).trans
+    (Nat.le_self_pow (by omega) d)
 
 end
 end CCDN

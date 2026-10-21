@@ -10,6 +10,7 @@ public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Auxiliary.AuxiliaryRatioEstimates
 import CCDN.Auxiliary.HypersurfaceKernelRatio
 import CCDN.Auxiliary.HypersurfaceRankRoots
+import CCDN.ForMathlib.Log
 /-! The small-height numerical auxiliary-degree bound, with exact box and
 coefficient exponents and a constant depending only on dimension. -/
 
@@ -73,8 +74,7 @@ theorem hypersurface_degree_bound_of_log_bound {r d M : ℕ} {B L A C : ℝ}
       B ^ ((r + 1 : ℝ) / ((r : ℝ) * (d : ℝ) ^ (1 / (r : ℝ)))) /
         L ^ (1 / ((r : ℝ) * d * (d : ℝ) ^ (1 / (r : ℝ)))) := by
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd
-  have hMR : (0 : ℝ) < M := by exact_mod_cast hM
-  apply (Real.log_le_log_iff hMR (by positivity)).mp
+  refine Real.natCast_le_of_log_le_log hM (by positivity) ?_
   rw [Real.log_div (by positivity) (by positivity),
     Real.log_mul (by positivity) (by positivity), Real.log_mul (by positivity) hA.ne',
     Real.log_mul (Real.exp_pos _).ne' (by positivity), Real.log_exp,

@@ -15,6 +15,7 @@ import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.ClosedFormScaling
 import CCDN.Noether.UniversalPlaneDegree
 import CCDN.Noether.UniversalPlaneWitness
+import CCDN.ForMathlib.MatrixRank
 /-! A nonzero polynomial of degree at most 2*d^3 detects all plane sections
 that lose the full degree or fail geometric irreducibility. -/
 
@@ -115,8 +116,7 @@ theorem universalPlaneBadWitness_good_specialization
   have hdet : ((closedFormCoefficientMatrix f.totalDegree g).submatrix rows cols).det ≠ 0 := by
     rw [← closedForm_minor_map]
     exact hh.2
-  have hrank := Matrix.rank_submatrix_le (closedFormCoefficientMatrix f.totalDegree g) rows cols
-  rw [Matrix.rank_of_det_ne_zero hdet, Fintype.card_fin] at hrank
+  have hrank := Matrix.le_rank_of_det_submatrix_ne_zero _ rows cols hdet
   omega
 
 /-- A concrete cubic-degree bad-section witness over the original field. -/

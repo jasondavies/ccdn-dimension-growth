@@ -23,7 +23,7 @@ theorem top_homogeneousComponent_ne_zero {K σ : Type*} [Field K]
   classical
   have hs : f.support.Nonempty :=
     Finset.nonempty_iff_ne_empty.mpr (fun h => hf (support_eq_empty.mp h))
-  obtain ⟨m, hm, hd⟩ := Finset.exists_mem_eq_sup f.support hs (fun s => s.sum (fun _ e => e))
+  obtain ⟨m, hm, hd⟩ := Finset.exists_mem_eq_sup f.support hs (fun s => s.degree)
   have hdeg : m.degree = f.totalDegree := hd.symm
   intro h
   have hc := congrArg (fun g : MvPolynomial σ K => g.coeff m) h

@@ -15,11 +15,6 @@ the affine auxiliary-polynomial theorem. -/
 @[expose] public section
 namespace CCDN
 
-lemma homogeneous_monomial_count_le_power (n d : ℕ) :
-    (n + d).choose d ≤ (d + 1) ^ n := by
-  rw [← Nat.choose_symm_add, Nat.add_comm n d]
-  exact Nat.choose_add_le_add_one_pow d n
-
 lemma box_le_of_logarithmic_height_bound {A B N D : ℝ}
     (hA : 1 ≤ A) (hB : 1 ≤ B) (hN : 1 ≤ N) (hD : 0 ≤ D)
     (hheight : B / A ≤ N * Real.log N + N * D * Real.log B) :
@@ -71,7 +66,8 @@ theorem affine_coefficient_height_cutoff (n d : ℕ) {A B : ℝ}
     exact_mod_cast Nat.choose_pos (show d ≤ n + d by omega)
   have hbound := box_le_of_logarithmic_height_bound hA hB hN (Nat.cast_nonneg d) hheight
   have hcount : ((n + d).choose d : ℝ) ≤ ((d : ℝ) + 1) ^ n := by
-    exact_mod_cast homogeneous_monomial_count_le_power n d
+    rw [← Nat.choose_symm_add, Nat.add_comm n d]
+    exact_mod_cast Nat.choose_add_le_add_one_pow d n
   calc
     B ≤ 4 * A ^ 2 * ((n + d).choose d : ℝ) ^ 4 * ((d : ℝ) + 1) ^ 2 := hbound
     _ ≤ 4 * A ^ 2 * (((d : ℝ) + 1) ^ n) ^ 4 * ((d : ℝ) + 1) ^ 2 := by

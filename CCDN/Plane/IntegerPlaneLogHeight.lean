@@ -7,6 +7,7 @@ module
 
 public import CCDN.Plane.IntegerPlaneHeight
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import CCDN.ForMathlib.Log
 /-! The bounded-parameter section loses only O_m(d²) in logarithmic height.
 The resulting nonzero integer witness fits the fourth-power prime cutoff. -/
 
@@ -34,9 +35,7 @@ lemma integerPlaneHeight_log_le (m d : ℕ) (hd : 1 ≤ d)
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hd0 : (0 : ℝ) < d := by linarith
   have hH0 : 0 < H := by linarith
-  have hl1 : Real.log ((d : ℝ) + 1) ≤ d := by
-    have hh := Real.log_le_sub_one_of_pos (show (0 : ℝ) < d + 1 by positivity)
-    linarith
+  have hl1 : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self hd0.le
   have hl2 : Real.log (1 + 2 * (d : ℝ)) ≤ 2 * d := by
     have hh := Real.log_le_sub_one_of_pos (show (0 : ℝ) < 1 + 2 * d by positivity)
     linarith
