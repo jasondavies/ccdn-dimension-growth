@@ -34,7 +34,7 @@ theorem exists_sharp_center_resultant_forms
       (∀ g ∈ Φ, g.totalDegree ≤ ((m + 1) * d) * (2 * d - 1)) ∧
       ∀ A : Matrix (Fin r) (Fin (n + 2)) L,
         (∃ g ∈ Φ, eval₂ (algebraMap K L)
-          (fun c : Fin r ↪ Fin (n + 2) => (A.submatrix id c).det) g ≠ 0) ↔
+          (matrixPluckerCoordinates A) g ≠ 0) ↔
           Irreducible (chowLinearSubstitution (centerMinorProjectionMatrix A e)
             (map (algebraMap K L) F)) := by
   classical
@@ -84,19 +84,17 @@ theorem exists_geometric_sharp_center_detector
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2) :
-    ∃ (s : ℕ) (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 2)))
-      (Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K)),
+    ∃ Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K),
       (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
       (∀ g ∈ Φ, g.totalDegree ≤ ((m + 1) * d) * (2 * d - 1)) ∧
       ∀ (A : Matrix (Fin r) (Fin (n + 2)) L) (_ : LinearIndependent L A.row),
         (∃ g ∈ Φ, eval₂ (algebraMap K L)
-          (fun c : Fin r ↪ Fin (n + 2) => (A.submatrix id c).det) g ≠ 0) ↔
+          (matrixPluckerCoordinates A) g ≠ 0) ↔
         (∀ p ∈ projectiveIdealZeroLocus (J.map (map (algebraMap K L))),
           p.rep ∉ Submodule.span L (Set.range A.row)) ∧
         projectionImageField
           (F := FractionRing (MvPolynomial (Fin (n + 2)) L ⧸ J.map (map (algebraMap K L))))
-          (J.map (map (algebraMap K L)))
-          (chowProjectionForms (centerMinorProjectionMatrix A e)) = ⊤ := by
+          (J.map (map (algebraMap K L))) (centerMinorProjectionForm A) = ⊤ := by
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
   let φ := algebraMap K L
   let JL := J.map (map φ)
@@ -115,8 +113,9 @@ theorem exists_geometric_sharp_center_detector
     intro hz
     apply ha
     rw [coeff_map,hz,map_zero]
-  refine ⟨s,e,Φ,hhom,hdeg,?_⟩
+  refine ⟨Φ,hhom,hdeg,?_⟩
   intro A hA
+  rw [← projectionImageField_centerMinorProjectionMatrix _ A e]
   let M := centerMinorProjectionMatrix A e
   let R := chowLinearSubstitution M (map φ F)
   have hcenteriff : R ≠ 0 ↔ ∀ p ∈ projectiveIdealZeroLocus JL,

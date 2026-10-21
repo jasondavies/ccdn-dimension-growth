@@ -15,10 +15,10 @@ lemma universalCenterChowMap_specialize_extension
     (A : Matrix (Fin r) (Fin (n + 1)) L)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
     (F : MvPolynomial (Fin q × Fin (n + 1)) K) :
-    map (eval₂Hom φ (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det))
+    map (eval₂Hom φ (matrixPluckerCoordinates A))
       (universalCenterChowMap e F) =
       chowLinearSubstitution (centerMinorProjectionMatrix A e) (map φ F) := by
-  have he : (map (eval₂Hom φ (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det))).comp
+  have he : (map (eval₂Hom φ (matrixPluckerCoordinates A))).comp
       (universalCenterChowMap (K := K) (q := q) e) =
       (chowLinearSubstitution (r := q) (centerMinorProjectionMatrix A e)).toRingHom.comp
         (map φ) := by
@@ -36,12 +36,12 @@ theorem centerRowResultantFamily_nonvanishing_iff_extension
     (F : MvPolynomial (Fin q × Fin (n + 1)) K) (d : ℕ)
     (A : Matrix (Fin r) (Fin (n + 1)) L) :
     (∃ g ∈ centerRowResultantFamily e i F d,
-      eval₂ φ (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det) g ≠ 0) ↔
+      eval₂ φ (matrixPluckerCoordinates A) g ≠ 0) ↔
     derivativeResultant (genericBlockLine (chowRowBlock i)
       (chowLinearSubstitution (centerMinorProjectionMatrix A e) (map φ F))) d ≠ 0 := by
   have he := derivativeResultantCoefficientFamily_nonvanishing_iff
     (genericBlockLine (chowRowBlock i) (universalCenterChowMap e F)) d φ
-    (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det)
+    (matrixPluckerCoordinates A)
   simpa only [centerRowResultantFamily,genericBlockLine_map,
     universalCenterChowMap_specialize_extension] using he
 

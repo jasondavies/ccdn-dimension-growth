@@ -42,42 +42,34 @@ lemma matrix_span_rows_map_eq
     (matrix_span_rows_map_le φ B A hspan.ge)
 
 lemma isBirationalMatrixCenter_iff_span
-    {K : Type*} [Field K] {n r s t u : ℕ}
+    {K : Type*} [Field K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
-    (e' : Fin (u + 2) ≃ (Fin (t + 1) ↪ Fin (n + 1)))
-    (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
-    (B : Matrix (Fin t) (Fin (n + 1)) K) (hB : LinearIndependent K B.row)
+    (A B : Matrix (Fin r) (Fin (n + 1)) K)
+    (hA : LinearIndependent K A.row) (hB : LinearIndependent K B.row)
     (hspan : Submodule.span K (Set.range A.row) = Submodule.span K (Set.range B.row)) :
-    IsBirationalMatrixCenter J e A ↔ IsBirationalMatrixCenter J e' B := by
-  have hgeom := matrix_span_rows_map_eq (algebraMap K (AlgebraicClosure K)) A B hspan
-  have hker : (centerMinorProjectionMatrix A e).mulVecLin.ker =
-      (centerMinorProjectionMatrix B e').mulVecLin.ker := by
-    rw [centerMinorProjectionMatrix_ker A hA e,centerMinorProjectionMatrix_ker B hB e']
-    exact hspan
+    IsBirationalMatrixCenter J A ↔ IsBirationalMatrixCenter J B := by
   unfold IsBirationalMatrixCenter
-  rw [hgeom,projectionImageField_eq_of_matrix_kernel_eq J _ _ hker]
+  rw [matrix_span_rows_map_eq (algebraMap K (AlgebraicClosure K)) A B hspan,
+    projectionImageField_centerMinorProjectionForm_eq_of_span_eq J A B hA hB hspan]
 
 /-- Center subspaces admitting a geometrically disjoint birational
 projection. The condition is independent of the representing matrix. -/
 def birationalCenterSubspaceLocus
-    {K : Type*} [Field K] {n r s : ℕ}
-    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
+    {K : Type*} [Field K] {n r : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime] :
     Set (CenterSubspace K r (n + 1)) :=
-  centerMatrixSpan '' birationalMatrixCenterLocus J e
+  centerMatrixSpan '' birationalMatrixCenterLocus J
 
 lemma birationalCenterSubspaceLocus_preimage
-    {K : Type*} [Field K] {n r s : ℕ}
-    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
-    centerMatrixSpan ⁻¹' birationalCenterSubspaceLocus J e = birationalMatrixCenterLocus J e := by
+    {K : Type*} [Field K] {n r : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime] :
+    centerMatrixSpan ⁻¹' birationalCenterSubspaceLocus (r := r) J =
+      birationalMatrixCenterLocus J := by
   ext x
   constructor
   · rintro ⟨y,hy,hxy⟩
-    exact (isBirationalMatrixCenter_iff_span J e e
-      (Matrix.of fun i j => y.val (i,j)) y.property
-      (Matrix.of fun i j => x.val (i,j)) x.property
+    exact (isBirationalMatrixCenter_iff_span J
+      (Matrix.of fun i j => y.val (i,j)) (Matrix.of fun i j => x.val (i,j)) y.property x.property
       ((centerMatrixSpan_eq_iff y x).mp hxy)).mp hy
   · intro hx
     exact ⟨x,hx,rfl⟩

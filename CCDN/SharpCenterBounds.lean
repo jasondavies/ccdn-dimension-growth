@@ -108,21 +108,5 @@ lemma geometric_projective_multiplicity_boundary
       (by simpa only [Nat.zero_add,Nat.factorial_one,Nat.cast_one,div_one] using hdegree)
   · exact Or.inl (by omega)
 
-lemma geometric_affine_multiplicity_boundary
-    {K : Type*} [Field K] [CharZero K] {n m d : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
-    1 ≤ m ∨ d = 1 := by
-  by_cases hm : m = 0
-  · right
-    rw [hm] at hdim hdegree
-    obtain ⟨_,_,hpoly⟩ := zero_dimensional_geometrically_integral_point (L := AlgebraicClosure K) I hdim
-    have hh : (1 : ℚ) = d := by
-      simpa only [hpoly,Polynomial.leadingCoeff_one,Nat.factorial_zero,Nat.cast_one,div_one] using hdegree
-    exact_mod_cast hh.symm
-  · exact Or.inl (by omega)
-
 end
 end CCDN

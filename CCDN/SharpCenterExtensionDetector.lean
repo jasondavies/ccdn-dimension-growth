@@ -1,6 +1,6 @@
 module
 
-public import CCDN.SharpBirationalCenterDetector
+public import CCDN.SharpCenterResultantDetector
 public import CCDN.GeometricIdealPrimality
 public import CCDN.BirationalCenterLocus
 public import CCDN.PolynomialPredicates
@@ -17,12 +17,11 @@ lemma eval₂_center_minor_map_tower
     {K L E : Type*} [Field K] [Field L] [Field E]
     (φ : K →+* L) (ψ : L →+* E) {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) L) (g : MvPolynomial (Fin r ↪ Fin n) K) :
-    eval₂ (ψ.comp φ) (fun c : Fin r ↪ Fin n => ((A.map ψ).submatrix id c).det) g =
-      ψ (eval₂ φ (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) g) := by
-  have hm (c : Fin r ↪ Fin n) : ((A.map ψ).submatrix id c).det = ψ ((A.submatrix id c).det) :=
-    (ψ.map_det (A.submatrix id c)).symm
-  simp_rw [hm]
-  exact (eval₂_comp_left ψ φ (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) g).symm
+    eval₂ (ψ.comp φ) (matrixPluckerCoordinates (A.map ψ)) g =
+      ψ (eval₂ φ (matrixPluckerCoordinates A) g) := by
+  rw [show matrixPluckerCoordinates (A.map ψ) = ψ ∘ matrixPluckerCoordinates A from
+    funext (matrixPluckerCoordinates_map ψ A)]
+  exact (eval₂_comp_left ψ φ (matrixPluckerCoordinates A) g).symm
 
 theorem exists_sharp_extended_birational_center_detector
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L]
@@ -34,14 +33,13 @@ theorem exists_sharp_extended_birational_center_detector
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2) :
-    ∃ (s : ℕ) (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 2)))
-      (Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K)),
+    ∃ Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K),
       (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
       (∀ g ∈ Φ, g.totalDegree ≤ ((m + 1) * d) * (2 * d - 1)) ∧
       ∀ (A : Matrix (Fin r) (Fin (n + 2)) L) (_ : LinearIndependent L A.row),
         (∃ g ∈ Φ, eval₂ (algebraMap K L)
-          (fun c : Fin r ↪ Fin (n + 2) => (A.submatrix id c).det) g ≠ 0) ↔
-        IsBirationalMatrixCenter (J.map (map (algebraMap K L))) e A := by
+          (matrixPluckerCoordinates A) g ≠ 0) ↔
+        IsBirationalMatrixCenter (J.map (map (algebraMap K L))) A := by
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
   let E := AlgebraicClosure L
   let φ := algebraMap K L
@@ -78,14 +76,14 @@ theorem exists_sharp_extended_birational_center_detector
     dsimp only [JL,φ,ψ]
     rw [ideal_scalar_extension_tower]
     exact hzero
-  refine ⟨s,e,Φ,hhom,hdeg,?_⟩
+  refine ⟨Φ,hhom,hdeg,?_⟩
   intro A hA
   let AE := A.map ψ
   let M := centerMinorProjectionMatrix AE e
   let R := chowLinearSubstitution M (map θ F)
   have hAE : LinearIndependent E AE.row := linearIndependent_matrix_rows_map ψ A hA
   have hdetA : (∃ g ∈ Φ, eval₂ φ
-      (fun c : Fin r ↪ Fin (n + 2) => (A.submatrix id c).det) g ≠ 0) ↔ Irreducible R := by
+      (matrixPluckerCoordinates A) g ≠ 0) ↔ Irreducible R := by
     have hh := hdet AE
     have ht : θ = ψ.comp φ := IsScalarTower.algebraMap_eq K L E
     change (∃ g ∈ Φ, eval₂ θ _ g ≠ 0) ↔ _ at hh
@@ -109,7 +107,8 @@ theorem exists_sharp_extended_birational_center_detector
       p.rep ∉ Submodule.span E (Set.range AE.row)) :
       Irreducible R ↔ projectionImageField
         (F := FractionRing (MvPolynomial (Fin (n + 2)) L ⧸ JL)) JL
-        (chowProjectionForms (centerMinorProjectionMatrix A e)) = ⊤ := by
+        (centerMinorProjectionForm A) = ⊤ := by
+    rw [← projectionImageField_centerMinorProjectionMatrix _ A e]
     have hh := geometric_chow_restriction_irreducible_iff_birational JL hJL d hJLdim hJLdegree
       (map φ F) (hmap.symm ▸ hFE) hδL hzeroL (centerMinorProjectionMatrix A e)
     rw [centerMinorProjectionMatrix_map,hmap] at hh
@@ -121,6 +120,37 @@ theorem exists_sharp_extended_birational_center_detector
     exact ⟨hc,(hbir hc).mp hir⟩
   · rintro ⟨hc,hf⟩
     exact hdetA.mpr ((hbir hc).mpr hf)
+
+lemma ideal_map_algebraMap_self {K σ : Type*} [Field K] (J : Ideal (MvPolynomial σ K)) :
+    J.map (map (algebraMap K K)) = J := by
+  have h : (map (algebraMap K K) : MvPolynomial σ K →+* MvPolynomial σ K) = RingHom.id _ := by
+    ext <;> simp
+  rw [h,Ideal.map_id]
+
+/-- The detector over the source field itself. -/
+theorem exists_sharp_birational_center_detector
+    {K : Type*} [Field K] [CharZero K] {n m r : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
+    [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
+    (hJ : IsHomogeneousIdeal J)
+    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
+    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (hr : r + 2 ≤ n + 2) :
+    ∃ Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K),
+      (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
+      (∀ g ∈ Φ, g.totalDegree ≤ ((m + 1) * d) * (2 * d - 1)) ∧
+      ∀ (A : Matrix (Fin r) (Fin (n + 2)) K) (_ : LinearIndependent K A.row),
+        (∃ g ∈ Φ, eval (matrixPluckerCoordinates A) g ≠ 0) ↔ IsBirationalMatrixCenter J A := by
+  have : (J.map (map (algebraMap K K))).IsPrime := by
+    rw [ideal_map_algebraMap_self]
+    infer_instance
+  obtain ⟨Φ,hhom,hdeg,hdet⟩ :=
+    exists_sharp_extended_birational_center_detector (L := K) J hJ d hdim hdegree hr
+  refine ⟨Φ,hhom,hdeg,fun A hA => ?_⟩
+  rw [← isBirationalMatrixCenter_congr (ideal_map_algebraMap_self J)]
+  refine Iff.trans ?_ (hdet A hA)
+  rw [Algebra.algebraMap_self]
+  rfl
 
 end
 end CCDN

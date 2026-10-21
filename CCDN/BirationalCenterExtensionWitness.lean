@@ -50,96 +50,86 @@ lemma matrix_map_algebraMap_tower
 /-- A finite birational center over K remains a geometrically disjoint
 birational center after extending the coefficients to any field L. -/
 theorem isBirationalMatrixCenter_map_of_finite_birational
-    {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n r s t : ℕ}
+    {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
-    (hJ : IsHomogeneousIdeal J)
+    (hJ : IsHomogeneousIdeal J) (hr : r + 2 ≤ n + 1)
     (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
-    (e' : Fin (t + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
     (hdis : ∀ p ∈ projectiveIdealZeroLocus
         ((J.map (map (algebraMap K L))).map (map (algebraMap L (AlgebraicClosure L)))),
       p.rep ∉ Submodule.span (AlgebraicClosure L)
         (Set.range ((A.map (algebraMap K L)).map (algebraMap L (AlgebraicClosure L))).row))
-    (hint : (projectionCoordinateMap J
-      (chowProjectionForms (centerMinorProjectionMatrix A e'))).IsIntegral)
+    (hint : (projectionCoordinateMap J (centerMinorProjectionForm A)).IsIntegral)
     (hfield : projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ J)) J
-      (chowProjectionForms (centerMinorProjectionMatrix A e')) = ⊤)
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
-    IsBirationalMatrixCenter (J.map (map (algebraMap K L))) e (A.map (algebraMap K L)) := by
+      (centerMinorProjectionForm A) = ⊤) :
+    IsBirationalMatrixCenter (J.map (map (algebraMap K L))) (A.map (algebraMap K L)) := by
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
+  obtain ⟨s, ⟨e⟩⟩ := exists_center_minor_coordinate_enumeration hr
   let E := AlgebraicClosure L
   let AL := A.map (algebraMap K L)
   let JL := J.map (map (algebraMap K L))
   have hAL : LinearIndependent L AL.row := linearIndependent_matrix_rows_map _ A hA
-  have hdisL : ∀ p ∈ projectiveIdealZeroLocus (JL.map (map (algebraMap L E))),
-      p.rep ∉ Submodule.span E (Set.range (AL.map (algebraMap L E)).row) := hdis
-  have hker : (centerMinorProjectionMatrix A e).mulVecLin.ker =
-      (centerMinorProjectionMatrix A e').mulVecLin.ker := by
-    rw [centerMinorProjectionMatrix_ker A hA e,centerMinorProjectionMatrix_ker A hA e']
-  have hint' : (projectionCoordinateMap J
-      (chowProjectionForms (centerMinorProjectionMatrix A e))).IsIntegral :=
-    projection_integral_of_matrix_kernel_le J _ _ hker.le hint
+  have hint' := (centerMinorProjectionMatrix_isIntegral_iff J A e).mpr hint
   have hfield' : projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ J)) J
       (chowProjectionForms (centerMinorProjectionMatrix A e)) = ⊤ := by
-    rw [projectionImageField_eq_of_matrix_kernel_eq J _ _ hker]
+    rw [projectionImageField_centerMinorProjectionMatrix]
     exact hfield
   have hgeom := centerMinorProjectionMatrix_disjoint
     (JL.map (map (algebraMap L E))) (AL.map (algebraMap L E))
-    (linearIndependent_matrix_rows_map _ AL hAL) e hdisL
+    (linearIndependent_matrix_rows_map _ AL hAL) e hdis
   have hintL : (projectionCoordinateMap JL
       (chowProjectionForms (centerMinorProjectionMatrix AL e))).IsIntegral := by
     apply projection_integral_of_geometric_center_disjoint (L := E) JL
       (homogeneous_ideal_scalar_extension (L := L) J hJ)
     rw [centerMinorProjectionMatrix_map]
     exact hgeom
-  refine ⟨hdisL,?_⟩
+  refine ⟨hdis,?_⟩
   have hh := homogeneous_matrix_projection_birational_scalar_extension J hJ
     (centerMinorProjectionMatrix A e) hint'
     (by simpa only [centerMinorProjectionMatrix_map] using hintL) hfield'
+  rw [← projectionImageField_centerMinorProjectionMatrix _ AL e]
   simpa only [centerMinorProjectionMatrix_map] using hh
 
 theorem exists_birational_center_matrix_over_extension
-    {L : Type*} [Field L] [Algebra ℚ L] {n m s : ℕ}
+    {L : Type*} [Field L] [Algebra ℚ L] {n m : ℕ}
     (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
     [(J.map (map (algebraMap ℚ L))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
-    (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :
+    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     ∃ A : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) L,
-      LinearIndependent L A.row ∧ IsBirationalMatrixCenter (J.map (map (algebraMap ℚ L))) e A := by
+      LinearIndependent L A.row ∧ IsBirationalMatrixCenter (J.map (map (algebraMap ℚ L))) A := by
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap ℚ L).injective
   have hJE : (J.map (map (algebraMap ℚ (AlgebraicClosure L)))).IsPrime :=
     prime_ideal_scalar_extension_of_algebraicClosure J
-  obtain ⟨A,t,e',hA,hdis,hint,hfield⟩ :=
+  obtain ⟨A,hA,hdis,hint,hfield⟩ :=
     exists_birational_minor_center (L := AlgebraicClosure L) m (n + 1) hmn J hJ d hdim hdegree
   refine ⟨_,linearIndependent_matrix_rows_map _ A hA,
-    isBirationalMatrixCenter_map_of_finite_birational J hJ A hA e' ?_ hint hfield e⟩
+    isBirationalMatrixCenter_map_of_finite_birational J hJ (by omega) A hA ?_ hint hfield⟩
   rw [ideal_scalar_extension_tower,matrix_map_algebraMap_tower]
   exact hdis
 
 /-- The fixed-coordinate witness: a center in X0=0 for the projective closure
 of an affine source, good over every extension field. -/
 theorem exists_fixed_coordinate_birational_center_matrix_over_extension
-    {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n m s : ℕ}
+    {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     [((projectiveClosureIdeal I).map (map (algebraMap K L))).IsPrime]
     (hmn : m + 1 ≤ n + 1) (d : ℕ)
     (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
-    (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :
+    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
     ∃ A : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) L,
       LinearIndependent L A.row ∧ (∀ i, A i 0 = 0) ∧
-      IsBirationalMatrixCenter ((projectiveClosureIdeal I).map (map (algebraMap K L))) e A := by
+      IsBirationalMatrixCenter ((projectiveClosureIdeal I).map (map (algebraMap K L))) A := by
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
-  obtain ⟨A,t,e',hA,hA0,hdis,hint,hfield⟩ :=
+  obtain ⟨A,hA,hA0,hdis,hint,hfield⟩ :=
     exists_fixed_coordinate_birational_minor_center (L := AlgebraicClosure L) I hmn d hdim hdegree
   refine ⟨_,linearIndependent_matrix_rows_map _ A hA,fun i => ?_,
     isBirationalMatrixCenter_map_of_finite_birational _ (projectiveClosureIdeal_homogeneous I)
-      A hA e' ?_ hint hfield e⟩
+      (by omega) A hA ?_ hint hfield⟩
   · simp only [Matrix.map_apply,hA0,map_zero]
   · rw [ideal_scalar_extension_tower,matrix_map_algebraMap_tower]
     exact hdis

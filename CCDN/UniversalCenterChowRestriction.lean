@@ -27,10 +27,10 @@ lemma universalCenterChowMap_specialize
     (A : Matrix (Fin r) (Fin (n + 1)) K)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
     (F : MvPolynomial (Fin q × Fin (n + 1)) K) :
-    map (eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det))
+    map (eval (matrixPluckerCoordinates A))
         (universalCenterChowMap e F) =
       chowLinearSubstitution (centerMinorProjectionMatrix A e) F := by
-  have he : (map (eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det))).comp
+  have he : (map (eval (matrixPluckerCoordinates A))).comp
       (universalCenterChowMap (K := K) (q := q) e) =
       (chowLinearSubstitution (r := q) (centerMinorProjectionMatrix A e)).toRingHom := by
     apply MvPolynomial.ringHom_ext

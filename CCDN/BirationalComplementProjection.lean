@@ -58,20 +58,15 @@ lemma integral_matrix_projection_no_base_point {n s : ℕ}
     simpa only [aeval_eq_eval, chowProjectionForms_eval, Pi.zero_apply] using congrFun hz i
 
 /-- Any bounded independent good center gives a bounded complementary
-projection. The bound T is arbitrary, so sharper detector bounds can reuse
-this construction unchanged. -/
+projection. The bound T is arbitrary. -/
 theorem exists_bounded_birational_complement_of_minor_projection
-    {r n s : ℕ} (J : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [J.IsPrime]
+    {r n : ℕ} (J : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
-    (hJ : IsHomogeneousIdeal J)
+    (hJ : IsHomogeneousIdeal J) (hr : r + 2 ≤ n + 1)
     (M : Matrix (Fin r) (Fin (n + 1)) ℤ)
     (hM : LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row)
     (T : ℕ) (hb : ∀ i j, |M i j| ≤ (T : ℤ))
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
-    (hint : (projectionCoordinateMap J (chowProjectionForms
-      (centerMinorProjectionMatrix (M.map (Int.castRingHom ℚ)) e))).IsIntegral)
-    (hfield : projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ J)) J
-      (chowProjectionForms (centerMinorProjectionMatrix (M.map (Int.castRingHom ℚ)) e)) = ⊤) :
+    (hgood : IsBirationalMatrixCenter J (M.map (Int.castRingHom ℚ))) :
     ∃ (D : ℤ) (P : Matrix (Fin (n + 1)) (Fin (n + 1)) ℤ),
       BirationalComplementProjection J M D P ∧
       (∀ i j, |P i j| ≤ 2 * (r.factorial : ℤ) * (T : ℤ) ^ r) ∧
@@ -83,15 +78,15 @@ theorem exists_bounded_birational_complement_of_minor_projection
   obtain ⟨D,hD,P,hP,hPP,hi,hker,hcompl,hdim,hsub,_⟩ :=
     exists_bounded_rational_center_projection_all_rows M hM T hb
   have hk : (P.map (Int.castRingHom ℚ)).mulVecLin.ker =
-      (centerMinorProjectionMatrix (M.map (Int.castRingHom ℚ)) e).mulVecLin.ker := by
-    rw [normalizedIntegerProjection_matrix_ker D hD P, hker,
-      centerMinorProjectionMatrix_ker _ hM e]
+      Submodule.span ℚ (Set.range (M.map (Int.castRingHom ℚ)).row) := by
+    rw [normalizedIntegerProjection_matrix_ker D hD P, hker]
     rfl
-  have hpi := projection_integral_of_matrix_kernel_le J _ _ hk.le hint
+  have hpi := isIntegral_of_centerMinorProjectionForm J _ hM hr _ hk.le
+    (hgood.isIntegral hJ hM hr)
   have hpf : projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ J)) J
       (chowProjectionForms (P.map (Int.castRingHom ℚ))) = ⊤ := by
-    rw [projectionImageField_eq_of_matrix_kernel_eq J _ _ hk]
-    exact hfield
+    rw [← projectionImageField_centerMinorProjectionForm_of_ker J _ hM hr _ hk]
+    exact hgood.2
   have hdata : BirationalComplementProjection J M D P :=
     { scale_ne_zero := hD
       scaled_idempotent := hPP

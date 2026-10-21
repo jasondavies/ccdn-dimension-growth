@@ -1,8 +1,7 @@
 module
 
 public import CCDN.BirationalCenterExtensionWitness
-public import CCDN.CenterPluckerZariski
-public import CCDN.BirationalCenterSubspace
+public import CCDN.FixedCoordinatePluckerTopology
 public import CCDN.SharpCenterBounds
 public import CCDN.PolynomialPredicates
 
@@ -60,49 +59,67 @@ lemma centerMatrixSpan_mem_familyComplement_iff
   · rintro ⟨g,hg,hv⟩
     exact ⟨g,hg,fun hz => hv ((homogeneous_eval₂_centerMatrixSpan φ g (hΦ g hg) x).mp hz)⟩
 
-lemma ideal_map_algebraMap_self {K σ : Type*} [Field K] (J : Ideal (MvPolynomial σ K)) :
-    J.map (map (algebraMap K K)) = J := by
-  have h : (map (algebraMap K K) : MvPolynomial σ K →+* MvPolynomial σ K) = RingHom.id _ := by
-    ext <;> simp
-  rw [h,Ideal.map_id]
-
 lemma birationalCenterSubspaceLocus_congr
-    {K : Type*} [Field K] {n r s t : ℕ}
-    (J J' : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime] [J'.IsPrime]
-    (h : J = J') (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
-    (e' : Fin (t + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
-    birationalCenterSubspaceLocus J e = birationalCenterSubspaceLocus J' e' := by
-  subst J'
-  ext W
-  obtain ⟨x,rfl⟩ := centerMatrixSpan_surjective W
-  change x ∈ centerMatrixSpan ⁻¹' birationalCenterSubspaceLocus J e ↔
-    x ∈ centerMatrixSpan ⁻¹' birationalCenterSubspaceLocus J e'
-  rw [birationalCenterSubspaceLocus_preimage,birationalCenterSubspaceLocus_preimage]
-  exact isBirationalMatrixCenter_iff_enumeration J e e' _ x.property
+    {K : Type*} [Field K] {n r : ℕ}
+    {J J' : Ideal (MvPolynomial (Fin (n + 1)) K)} [J.IsPrime] [J'.IsPrime] (h : J = J') :
+    birationalCenterSubspaceLocus (r := r) J = birationalCenterSubspaceLocus J' := by
+  subst h
+  rfl
+
+/-- The good locus has dense intersection with the centers having zero
+columns `S`, as soon as one such center lies outside the zero locus. -/
+theorem zeroColumnCenterSubspace_familyComplement_dense
+    {K L : Type*} [Field K] [Field L] [Infinite L] (φ : K →+* L) {r n D : ℕ}
+    (Φ : Finset (MvPolynomial (Fin r ↪ Fin n) K)) (hΦ : ∀ g ∈ Φ, g.IsHomogeneous D)
+    (S : Finset (Fin n)) (x : ZeroColumnCenterMatrix L r n S)
+    (hx : centerMatrixSpan ⟨x.val, x.property.2⟩ ∈ (centerPluckerFamilyZeroLocus φ Φ)ᶜ) :
+    Dense {W : ZeroColumnCenterSubspace L r n S |
+      W.val ∈ (centerPluckerFamilyZeroLocus φ Φ)ᶜ} := by
+  obtain ⟨g,hg,hv⟩ := (centerMatrixSpan_mem_familyComplement_iff φ Φ hΦ _).mp hx
+  let A : Matrix (Fin r) (Fin n) L := Matrix.of fun i j => x.val (i,j)
+  have hp : zeroColumnSubstitution S (centerMinorPolynomial (map φ g)) ≠ 0 := by
+    intro hz
+    have h0 := congrArg (eval x.val) hz
+    rw [eval_zeroColumnSubstitution,zeroColumnPoint_fixed S _ x.property.1,map_zero] at h0
+    exact hv h0
+  have hdense := zeroColumnMatrixSpan_surjective.denseRange.dense_image
+    zeroColumnMatrixSpan_continuous
+    (zero_column_polynomial_locus_dense_subspace S A x.property.2 x.property.1 _ hp)
+  refine hdense.mono ?_
+  rintro _ ⟨y,hy,rfl⟩
+  exact (centerMatrixSpan_mem_familyComplement_iff φ Φ hΦ _).mpr ⟨g,hg,hy⟩
+
+/-- The ambient case `S = ∅`. -/
+theorem centerSubspace_familyComplement_dense
+    {K L : Type*} [Field K] [Field L] [Infinite L] (φ : K →+* L) {r n D : ℕ}
+    (Φ : Finset (MvPolynomial (Fin r ↪ Fin n) K)) (hΦ : ∀ g ∈ Φ, g.IsHomogeneous D)
+    (x : IndependentCenterMatrix L r n)
+    (hx : centerMatrixSpan x ∈ (centerPluckerFamilyZeroLocus φ Φ)ᶜ) :
+    Dense (centerPluckerFamilyZeroLocus φ Φ)ᶜ := by
+  have hd := zeroColumnCenterSubspace_familyComplement_dense φ Φ hΦ ∅
+    ⟨x.val,fun _ _ h => absurd h (Finset.notMem_empty _),x.property⟩ hx
+  have hsurj : Function.Surjective
+      (Subtype.val : ZeroColumnCenterSubspace L r n ∅ → CenterSubspace L r n) :=
+    fun W => ⟨⟨W,fun _ _ _ h => absurd h (Finset.notMem_empty _)⟩,rfl⟩
+  refine (hsurj.denseRange.dense_image continuous_subtype_val hd).mono ?_
+  rintro _ ⟨W,hW,rfl⟩
+  exact hW
 
 lemma birationalCenterSubspaceLocus_eq_complement_of_extension_detector
-    {K L : Type*} [Field K] [Field L] (φ : K →+* L) {n r s D : ℕ}
+    {K L : Type*} [Field K] [Field L] (φ : K →+* L) {n r D : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) L)) [J.IsPrime]
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
     (Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 1)) K))
     (hΦ : ∀ g ∈ Φ, g.IsHomogeneous D)
     (hdet : ∀ (A : Matrix (Fin r) (Fin (n + 1)) L), LinearIndependent L A.row →
-      ((∃ g ∈ Φ, eval₂ φ (matrixPluckerCoordinates A) g ≠ 0) ↔ IsBirationalMatrixCenter J e A)) :
-    birationalCenterSubspaceLocus J e = (centerPluckerFamilyZeroLocus φ Φ)ᶜ := by
+      ((∃ g ∈ Φ, eval₂ φ (matrixPluckerCoordinates A) g ≠ 0) ↔ IsBirationalMatrixCenter J A)) :
+    birationalCenterSubspaceLocus J = (centerPluckerFamilyZeroLocus φ Φ)ᶜ := by
   ext W
   obtain ⟨x,rfl⟩ := centerMatrixSpan_surjective W
-  change x ∈ centerMatrixSpan ⁻¹' birationalCenterSubspaceLocus J e ↔ _
-  rw [birationalCenterSubspaceLocus_preimage]
-  change IsBirationalMatrixCenter J e (Matrix.of fun i j => x.val (i,j)) ↔ _
+  change x ∈ centerMatrixSpan ⁻¹' birationalCenterSubspaceLocus J ↔ _
+  rw [birationalCenterSubspaceLocus_preimage,centerMatrixSpan_mem_familyComplement_iff φ Φ hΦ]
+  change IsBirationalMatrixCenter J (Matrix.of fun i j => x.val (i,j)) ↔ _
   refine (hdet (Matrix.of fun i j => x.val (i,j)) x.property).symm.trans ?_
-  change (∃ g ∈ Φ, eval₂ φ (matrixPluckerCoordinates (Matrix.of fun i j => x.val (i,j))) g ≠ 0) ↔
-    ¬ ∀ g ∈ Φ, eval₂ φ (centerSubspacePlucker (centerMatrixSpan x)).rep g = 0
-  simp only [not_forall]
-  constructor
-  · rintro ⟨g,hg,hv⟩
-    exact ⟨g,hg,fun hz => hv ((homogeneous_eval₂_centerMatrixSpan φ g (hΦ g hg) x).mp hz)⟩
-  · rintro ⟨g,hg,hv⟩
-    exact ⟨g,hg,fun hz => hv ((homogeneous_eval₂_centerMatrixSpan φ g (hΦ g hg) x).mpr hz)⟩
+  simp only [eval_centerMinorPolynomial,eval_map]
 
 theorem exists_sharp_birational_center_plucker_equations
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L]
@@ -114,20 +131,17 @@ theorem exists_sharp_birational_center_plucker_equations
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
     (hr : r + 2 ≤ n + 2) :
-    ∃ (s : ℕ) (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 2)))
-      (Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K)),
+    ∃ Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K),
       (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
       (∀ g ∈ Φ, g.totalDegree ≤ ((m + 1) * d) * (2 * d - 1)) ∧
       (1 ≤ m → ∀ g ∈ Φ, g.totalDegree < ((m + 1) * d) ^ 2) ∧
       (m = 0 → d = 1 ∧ ∀ g ∈ Φ, g.totalDegree ≤ 1) ∧
-      birationalCenterSubspaceLocus (J.map (map (algebraMap K L))) e =
-        (centerPluckerFamilyZeroLocus (algebraMap K L) Φ)ᶜ ∧
-      IsOpen (birationalCenterSubspaceLocus (J.map (map (algebraMap K L))) e) := by
-  obtain ⟨s,e,Φ,hhom,hdeg,hdet⟩ :=
+      birationalCenterSubspaceLocus (J.map (map (algebraMap K L))) =
+        (centerPluckerFamilyZeroLocus (algebraMap K L) Φ)ᶜ := by
+  obtain ⟨Φ,hhom,hdeg,hdet⟩ :=
     exists_sharp_extended_birational_center_detector (L := L) J hJ d hdim hdegree hr
-  have he := birationalCenterSubspaceLocus_eq_complement_of_extension_detector
-    (algebraMap K L) (J.map (map (algebraMap K L))) e Φ hhom hdet
-  refine ⟨s,e,Φ,hhom,hdeg,?_,?_,he,?_⟩
+  refine ⟨Φ,hhom,hdeg,?_,?_,birationalCenterSubspaceLocus_eq_complement_of_extension_detector
+    (algebraMap K L) (J.map (map (algebraMap K L))) Φ hhom hdet⟩
   · intro hm g hg
     exact (hdeg g hg).trans_lt (sharp_center_detector_degree_lt_square hm
       (hilbert_multiplicity_pos_of_prime J hdegree))
@@ -136,8 +150,6 @@ theorem exists_sharp_birational_center_plucker_equations
       (by omega)
     refine ⟨hd,fun g hg => ?_⟩
     simpa only [hm,hd,Nat.zero_add,mul_one,Nat.reduceSub] using hdeg g hg
-  · rw [he]
-    exact centerPluckerFamilyZeroLocus_complement_isOpen _ Φ hhom
 
 /-- The printed positive-dimensional degree bound and the degree-one
 boundary hold on the geometric subspaces over every extension L. -/
@@ -151,55 +163,49 @@ theorem exists_dense_open_sharp_projective_center_plucker_equations
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     letI : (J.map (map (algebraMap ℚ L))).IsPrime :=
       prime_ideal_scalar_extension_of_algebraicClosure J
-    ∃ (s : ℕ) (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2)))
-      (Φ : Finset (MvPolynomial (Fin (n + 1 - m - 1) ↪ Fin (n + 2)) ℚ)),
+    ∃ Φ : Finset (MvPolynomial (Fin (n + 1 - m - 1) ↪ Fin (n + 2)) ℚ),
       (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
       (∀ g ∈ Φ, g.totalDegree ≤ ((m + 1) * d) * (2 * d - 1)) ∧
       (1 ≤ m → ∀ g ∈ Φ, g.totalDegree < ((m + 1) * d) ^ 2) ∧
       (m = 0 → d = 1 ∧ ∀ g ∈ Φ, g.totalDegree ≤ 1) ∧
-      birationalCenterSubspaceLocus (J.map (map (algebraMap ℚ L))) e =
+      birationalCenterSubspaceLocus (J.map (map (algebraMap ℚ L))) =
         (centerPluckerFamilyZeroLocus (algebraMap ℚ L) Φ)ᶜ ∧
-      Dense (birationalCenterSubspaceLocus (J.map (map (algebraMap ℚ L))) e) ∧
-      IsOpen (birationalCenterSubspaceLocus (J.map (map (algebraMap ℚ L))) e) := by
+      Dense (birationalCenterSubspaceLocus (r := n + 1 - m - 1) (J.map (map (algebraMap ℚ L)))) ∧
+      IsOpen (birationalCenterSubspaceLocus (r := n + 1 - m - 1)
+        (J.map (map (algebraMap ℚ L)))) := by
   have hJL : (J.map (map (algebraMap ℚ L))).IsPrime :=
     prime_ideal_scalar_extension_of_algebraicClosure J
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap ℚ L).injective
-  obtain ⟨s,e,Φ,hhom,hdeg,hstrict,hboundary,he,hopen⟩ :=
+  obtain ⟨Φ,hhom,hdeg,hstrict,hboundary,he⟩ :=
     exists_sharp_birational_center_plucker_equations (L := L) (r := n + 1 - m - 1)
       J hJ d hdim hdegree (by omega)
   obtain ⟨A,hA,hgood⟩ := exists_birational_center_matrix_over_extension
-    (L := L) hmn J hJ d hdim hdegree e
-  let x : IndependentCenterMatrix L (n + 1 - m - 1) (n + 2) :=
-    ⟨fun q => A q.1 q.2,hA⟩
-  have hx : centerMatrixSpan x ∈ birationalCenterSubspaceLocus (J.map (map (algebraMap ℚ L))) e :=
-    ⟨x,hgood,rfl⟩
-  rw [he] at hx
-  obtain ⟨g,hg,hv⟩ := (centerMatrixSpan_mem_familyComplement_iff _ Φ hhom x).mp hx
-  have hdense := centerPluckerPrincipalOpen_dense (map (algebraMap ℚ L) g)
-    ((hhom g hg).map _) x hv
-  refine ⟨s,e,Φ,hhom,hdeg,hstrict,hboundary,he,hdense.mono ?_,hopen⟩
-  intro W hW
-  rw [he]
-  intro hz
-  change eval (centerSubspacePlucker W).rep (map (algebraMap ℚ L) g) ≠ 0 at hW
-  rw [eval_map] at hW
-  exact hW (hz g hg)
+    (L := L) hmn J hJ d hdim hdegree
+  let x : IndependentCenterMatrix L (n + 1 - m - 1) (n + 2) := ⟨fun q => A q.1 q.2,hA⟩
+  have hx : centerMatrixSpan x ∈ (centerPluckerFamilyZeroLocus (algebraMap ℚ L) Φ)ᶜ := by
+    rw [← he]
+    exact ⟨x,hgood,rfl⟩
+  refine ⟨Φ,hhom,hdeg,hstrict,hboundary,he,?_,?_⟩
+  · rw [he]
+    exact centerSubspace_familyComplement_dense _ Φ hhom _ hx
+  · rw [he]
+    exact centerPluckerFamilyZeroLocus_complement_isOpen _ Φ hhom
 
 /-- The good-center subspaces of a rational geometric projective variety
 form a dense open set in the Plücker topology. -/
 theorem birationalCenterSubspaceLocus_plucker_dense_open
-    {n m s : ℕ} (hmn : m + 2 ≤ n + 1)
+    {n m : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
-    (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :
-    Dense (birationalCenterSubspaceLocus J e) ∧ IsOpen (birationalCenterSubspaceLocus J e) := by
+    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    Dense (birationalCenterSubspaceLocus (r := n + 1 - m - 1) J) ∧
+      IsOpen (birationalCenterSubspaceLocus (r := n + 1 - m - 1) J) := by
   have : (J.map (map (algebraMap ℚ ℚ))).IsPrime := prime_ideal_scalar_extension_of_algebraicClosure J
-  obtain ⟨t,e',_,_,_,_,_,_,hdense,hopen⟩ :=
+  obtain ⟨_,_,_,_,_,_,hdense,hopen⟩ :=
     exists_dense_open_sharp_projective_center_plucker_equations (L := ℚ) hmn J hJ d hdim hdegree
-  rw [birationalCenterSubspaceLocus_congr _ J (ideal_map_algebraMap_self J) e' e] at hdense hopen
+  rw [birationalCenterSubspaceLocus_congr (ideal_map_algebraMap_self J)] at hdense hopen
   exact ⟨hdense,hopen⟩
 
 end

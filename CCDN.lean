@@ -721,7 +721,6 @@ public import CCDN.GeometricProjectionHilbert
 public import CCDN.IndependentPrimitiveExtension
 public import CCDN.IntermediateFieldParameterTower
 public import CCDN.LocalizationFractionEmbedding
-public import CCDN.MatrixGoodCenterDensity
 public import CCDN.MatrixProjectionFields
 public import CCDN.PolynomialCoefficientNormalizationRank
 public import CCDN.PolynomialCoordinateEmbeddings
@@ -752,7 +751,6 @@ public import CCDN.GenericBlockLineHomogeneity
 public import CCDN.GenericBlockLineIrreducible
 public import CCDN.IntegerMinorProjectiveHeight
 public import CCDN.ResultantCoefficientFamily
-public import CCDN.SharpBirationalCenterDetector
 public import CCDN.SharpBirationalCenterNonvanishing
 public import CCDN.SharpBoundedBirationalCenter
 public import CCDN.SharpCenterBounds

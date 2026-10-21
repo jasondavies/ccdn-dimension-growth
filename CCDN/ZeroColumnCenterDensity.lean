@@ -1,17 +1,40 @@
 module
 
-public import CCDN.MatrixGoodCenterDensity
+public import CCDN.AffinePointZariski
+public import CCDN.ZeroColumnMinorSpecialization
 
 /-! Zariski density of good full-row-rank matrices inside a
 prescribed-zero-column subspace. In particular this covers centers lying
 at infinity, without inferring density there from density in the ambient
-matrix space. -/
+matrix space. A maximal minor is multiplied into the condition to preserve
+row independence. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 attribute [local instance] affinePointZariskiTopology
+
+def matrixMinorPolynomial (K : Type*) [Field K] {r n : ℕ} (c : Fin r ↪ Fin n) :
+    MvPolynomial (Fin r × Fin n) K :=
+  (Matrix.of fun i j : Fin r => X (i,c j)).det
+
+lemma matrixMinorPolynomial_eval {K : Type*} [Field K] {r n : ℕ}
+    (c : Fin r ↪ Fin n) (x : Fin r × Fin n → K) :
+    eval x (matrixMinorPolynomial K c) = (Matrix.of fun i j : Fin r => x (i,c j)).det := by
+  rw [matrixMinorPolynomial,RingHom.map_det]
+  congr 1
+  ext i j
+  exact eval_X _
+
+lemma matrix_rows_independent_of_minor
+    {K : Type*} [Field K] {r n : ℕ} (c : Fin r ↪ Fin n)
+    (x : Fin r × Fin n → K) (hx : eval x (matrixMinorPolynomial K c) ≠ 0) :
+    LinearIndependent K (fun i : Fin r => fun j : Fin n => x (i,j)) := by
+  rw [matrixMinorPolynomial_eval] at hx
+  apply LinearIndependent.of_comp (LinearMap.funLeft K K c)
+  exact Matrix.linearIndependent_rows_of_det_ne_zero hx
+
 
 def zeroColumnPoint {K : Type*} [Field K] {r n : ℕ}
     (Z : Finset (Fin n)) (x : Fin r × Fin n → K) : Fin r × Fin n → K :=

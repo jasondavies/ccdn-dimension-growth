@@ -3,27 +3,14 @@ module
 public import CCDN.CenterSubspaceQuotient
 public import CCDN.CenterMinorProjection
 
-/-! The Plücker point of a fixed-dimensional center. Coordinates are
-indexed by all ordered column injections, so signed redundant coordinates
-are retained. No assertion about the dimension of the projective target is
-needed. Equality of Plücker points is exactly equality of row spans. -/
+/-! The Plücker point of a fixed-dimensional center, with the coordinates
+`matrixPluckerCoordinates`. No assertion about the dimension of the projective
+target is needed. Equality of Plücker points is exactly equality of row spans. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 open Matrix MvPolynomial
-
-def matrixPluckerCoordinates {K : Type*} [Field K] {r n : ℕ}
-    (A : Matrix (Fin r) (Fin n) K) : (Fin r ↪ Fin n) → K :=
-  fun c => (A.submatrix id c).det
-
-theorem matrixPluckerCoordinates_ne_zero
-    {K : Type*} [Field K] {r n : ℕ}
-    (A : Matrix (Fin r) (Fin n) K) (hA : LinearIndependent K A.row) :
-    matrixPluckerCoordinates A ≠ 0 := by
-  obtain ⟨c, hc, hd⟩ := exists_nonzero_minor_of_independent_rows A hA
-  intro hz
-  exact hd (congrFun hz ⟨c, hc⟩)
 
 theorem exists_row_matrix_of_span_le
     {K : Type*} [Field K] {r s n : ℕ}
