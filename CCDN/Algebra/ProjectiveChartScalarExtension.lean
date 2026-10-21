@@ -83,7 +83,8 @@ theorem projectiveChartIdeal_scalar_extension
       ((projectiveChartIdeal_mem_iff_scaledHomogenize I hX f le_rfl).mp hf)
   · intro g hg
     by_contra hnot
-    obtain ⟨φ, hφ⟩ := exists_polynomialCoefficientLinear_not_mem (projectiveChartIdeal I) g hnot
+    obtain ⟨φ, hφ⟩ :=
+      exists_polynomialCoefficientLinear_not_mem (projectiveChartIdeal I) g hnot
     apply hφ
     rw [projectiveChartIdeal_mem_iff_scaledHomogenize I hX _
       (polynomialCoefficientLinear_totalDegree_le φ g),

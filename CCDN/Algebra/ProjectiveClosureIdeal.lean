@@ -97,7 +97,8 @@ theorem projectiveClosureIdeal_scalar_extension {K L : Type*}
     exact Ideal.mem_map_of_mem _ ((mem_projectiveClosureIdeal_iff I f).mp hf M)
   · intro f hf
     by_contra hnot
-    obtain ⟨φ,hφ⟩ := exists_polynomialCoefficientLinear_not_mem (projectiveClosureIdeal I) f hnot
+    obtain ⟨φ,hφ⟩ :=
+      exists_polynomialCoefficientLinear_not_mem (projectiveClosureIdeal I) f hnot
     apply hφ
     rw [mem_projectiveClosureIdeal_iff]
     intro M

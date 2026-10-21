@@ -34,7 +34,8 @@ theorem exists_nonzero_homogeneous_linear_descent {k K : Type*}
       ∀ x : Fin n → k, eval (algebraMap k K ∘ x) f = 0 → eval x g = 0 := by
   obtain ⟨m, hm⟩ := exists_coeff_ne_zero hf
   obtain ⟨φ, hφ⟩ := Module.Projective.exists_dual_ne_zero k hm
-  refine ⟨polynomialCoefficientLinear φ f, ?_, polynomialCoefficientLinear_homogeneous φ f hhom, ?_⟩
+  refine ⟨polynomialCoefficientLinear φ f, ?_,
+    polynomialCoefficientLinear_homogeneous φ f hhom, ?_⟩
   · intro he
     have hh := polynomialCoefficientLinear_coeff φ f m
     have hz : φ (f.coeff m) = 0 := by simpa [he] using hh.symm
