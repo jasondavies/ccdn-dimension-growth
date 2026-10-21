@@ -9,7 +9,6 @@ public import CCDN.Curve
 public import CCDN.LocalDeterminant
 public import CCDN.PrimeProduct
 public import CCDN.ResidueAggregation
-public import CCDN.MertensFirst
 public import CCDN.PrimeSums
 public import CCDN.Bezout
 public import CCDN.PlaneSingularities

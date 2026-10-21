@@ -5,9 +5,9 @@ import Solution
 import Lean.Util.CollectAxioms
 
 /-! Audit every exported declaration in this project's mathematical modules, the vendored
-Bombieri–Vaaler dependency and the `Solution` module that proves the compared statements.
-Imported declarations carry Lean's transitive axiom metadata. This is an axiom audit, not an
-independent kernel implementation or a proof of the target. -/
+Bombieri–Vaaler and Mertens dependencies and the `Solution` module that proves the compared
+statements. Imported declarations carry Lean's transitive axiom metadata. This is an axiom audit,
+not an independent kernel implementation or a proof of the target. -/
 
 open Lean Elab Command
 
@@ -23,7 +23,7 @@ run_cmd do
     let some idx := env.getModuleIdxFor? name | continue
     let some mod := modules[idx.toNat]? | throwError "Missing module for {name}"
     let isOwn := (`CCDN).isPrefixOf mod
-    let isVendor := (`ArithmeticHeights).isPrefixOf mod
+    let isVendor := (`ArithmeticHeights).isPrefixOf mod || (`Mertens).isPrefixOf mod
     let isSubmission := mod == `Solution
     if !isOwn && !isVendor && !isSubmission then continue
     let axioms ← collectAxioms name

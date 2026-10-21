@@ -1,6 +1,6 @@
 module
 
-public import CCDN.MertensFirst
+public import Mertens
 public import CCDN.ResidueAggregation
 
 /-! Prime-sum estimates after excluding a finite bad-prime set. The bounds on

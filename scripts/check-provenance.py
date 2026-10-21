@@ -16,8 +16,12 @@ for relative, digest in expected.items():
     if hashlib.sha256((VENDOR / relative).read_bytes()).hexdigest() != digest:
         raise SystemExit(f"Vendored source hash mismatch: {relative}")
 
-mertens = json.loads((ROOT / "vendor" / "mertens" / "upstream.json").read_text())
-if hashlib.sha256((ROOT / "CCDN" / "MertensFirst.lean").read_bytes()).hexdigest() != mertens["adapted_sha256"]:
+MERTENS = ROOT / "vendor" / "mertens"
+mertens = json.loads((MERTENS / "upstream.json").read_text())
+if {str(p.relative_to(MERTENS)) for p in MERTENS.rglob("*.lean")} != {mertens["path"]}:
+    raise SystemExit("Vendored Mertens file inventory differs from the provenance manifest")
+mertens_digest = hashlib.sha256((MERTENS / mertens["path"]).read_bytes()).hexdigest()
+if mertens_digest != mertens["adapted_sha256"]:
     raise SystemExit("Adapted Mertens source differs from the provenance manifest")
 
 modules = {
@@ -29,6 +33,7 @@ modules.update({
     ".".join(p.relative_to(VENDOR).with_suffix("").parts): p
     for p in (VENDOR / "ArithmeticHeights").rglob("*.lean")
 })
+modules[mertens["module"]] = MERTENS / mertens["path"]
 seen = set()
 
 def visit(name):
@@ -38,11 +43,11 @@ def visit(name):
     for dep in re.findall(r"^(?:public )?import (?:all )?(\S+)", modules[name].read_text(), re.M):
         if dep in modules:
             visit(dep)
-        elif dep.startswith(("CCDN", "ArithmeticHeights")):
+        elif dep.startswith(("CCDN", "ArithmeticHeights", "Mertens")):
             raise SystemExit(f"Missing project dependency: {dep}")
 
 visit("CCDN")
 missing = set(modules) - seen
 if missing:
     raise SystemExit(f"Mathematical sources omitted from build/audit: {sorted(missing)}")
-print(f"Source checks passed: {len(expected)} vendor hashes; {len(seen)} reachable modules.")
+print(f"Source checks passed: {len(expected) + 1} vendor hashes; {len(seen)} reachable modules.")
