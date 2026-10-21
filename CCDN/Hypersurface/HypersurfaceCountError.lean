@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import Mathlib.Analysis.Real.Sqrt
 /-! Numerical absorption of bad and zero plane sections above the cutoff
 p>27*d^4. The leading term remains exactly p^(m-1). -/
@@ -13,8 +14,9 @@ p>27*d^4. The leading term remains exactly p^(m-1). -/
 namespace CCDN
 noncomputable section
 
-lemma hypersurface_bad_section_error {d p : ℝ} (hd : 1 ≤ d) (hp : 27 * d ^ 4 < p) :
+lemma hypersurface_bad_section_error {d p : ℝ} (hd : 1 ≤ d) (hp : stepanovThreshold d < p) :
     2 * d ^ 4 * p + d ^ 3 ≤ 3 * d ^ 2 * p * Real.sqrt p := by
+  unfold stepanovThreshold at hp
   have hd0 : 0 ≤ d := by linarith
   have hd2 : 1 ≤ d ^ 2 := by nlinarith
   have hd4 : 1 ≤ d ^ 4 := by nlinarith [sq_nonneg (d ^ 2 - 1)]
@@ -30,13 +32,16 @@ lemma hypersurface_bad_section_error {d p : ℝ} (hd : 1 ≤ d) (hp : 27 * d ^ 4
 /-- The unsimplified incidence estimate implies the desired sharp affine
 hypersurface estimate in every ambient dimension at least three. -/
 theorem hypersurface_count_of_incidence_bound (n : ℕ) {d p N : ℝ}
-    (hd : 1 ≤ d) (hp : 27 * d ^ 4 < p)
+    (hd : 1 ≤ d) (hp : stepanovThreshold d < p)
     (hcount : N * p ^ (2 * n + 8) ≤
-      p ^ (3 * n + 9) * (p + 161 * d ^ 2 * Real.sqrt p) +
+      p ^ (3 * n + 9) * (p + planeResidueConstant * d ^ 2 * Real.sqrt p) +
       2 * d ^ 4 * p ^ (3 * n + 9) + d ^ 3 * p ^ (3 * n + 8)) :
-    N ≤ p ^ (n + 2) + 164 * d ^ 2 * p ^ (n + 1) * Real.sqrt p := by
-  have hp0 : 0 < p := lt_of_le_of_lt (by positivity) hp
+    N ≤ p ^ (n + 2) + hypersurfaceResidueConstant * d ^ 2 * p ^ (n + 1) * Real.sqrt p := by
+  rw [planeResidueConstant_eq] at hcount
+  rw [hypersurfaceResidueConstant_eq]
   have herr := hypersurface_bad_section_error hd hp
+  unfold stepanovThreshold at hp
+  have hp0 : 0 < p := lt_of_le_of_lt (by positivity) hp
   have hmajor := mul_le_mul_of_nonneg_left herr (pow_nonneg hp0.le (3 * n + 8))
   have hfact :
       p ^ (3 * n + 9) * (p + 161 * d ^ 2 * Real.sqrt p) +

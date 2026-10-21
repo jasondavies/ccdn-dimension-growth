@@ -31,7 +31,7 @@ theorem hypersurface_determinant_log_lower_at_rank_congruence {n s N d M : ℕ} 
       Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j)))
     (hred : ∀ (p : ℕ) [Fact p.Prime],
       p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad →
-      27 * (d : ℝ) ^ 4 < p →
+      stepanovThreshold (d : ℝ) < p →
       HasGoodReduction f p) :
     hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) +
       (∑ p ∈ P, (v p : ℝ) * Real.log p) ≤

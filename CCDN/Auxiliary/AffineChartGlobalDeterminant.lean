@@ -30,7 +30,7 @@ theorem affine_chart_determinant_log_lower_at_rank {n s N d M : ℕ} (hs : 0 < s
     (bad : Finset ℕ)
     (hred : ∀ (p : ℕ) [Fact p.Prime],
       p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad →
-      27 * (d : ℝ) ^ 4 < p →
+      stepanovThreshold (d : ℝ) < p →
       AffineChartGoodPrime f z p) :
     hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by

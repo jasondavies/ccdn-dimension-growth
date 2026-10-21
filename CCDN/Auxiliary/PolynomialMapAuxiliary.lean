@@ -33,10 +33,7 @@ theorem polynomial_map_exists_auxiliary_small_height
     (hthreshold : 2 * Real.exp (heightDeterminantError C + 23) * (d : ℝ) ^ 3 *
       (1 + Real.log H / (d : ℝ) ^ 2) * B ^ (2 / (d : ℝ)) /
         |((order.leadingCoeff f : ℤ) : ℝ)| ^ (1 / (d : ℝ) ^ 2) < M)
-    (hcount : ∀ p : ℕ, p.Prime → 27 * (d : ℝ) ^ 4 < (p : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) q) →
-      (Nat.card (PlaneResidue q p) : ℝ) ≤
-        p + C * (d : ℝ) ^ 2 * Real.sqrt p) :
+    (hcount : PlaneResidueCountBound C d q) :
     ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
       (∀ i, MvPolynomial.eval (fun j => MvPolynomial.eval (z i) (τ j)) g = 0) ∧ ¬ f ∣ g := by
   classical
@@ -76,10 +73,7 @@ theorem polynomial_map_exists_auxiliary_large_height
     (hheight : 4 * d * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * (d : ℝ) ^ 2)
     (hthreshold : 8 * Real.exp (heightDeterminantError C + 6 + T) * (d : ℝ) ^ 3 < M)
-    (hcount : ∀ p : ℕ, p.Prime → 27 * (d : ℝ) ^ 4 < (p : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) q) →
-      (Nat.card (PlaneResidue q p) : ℝ) ≤
-        p + C * (d : ℝ) ^ 2 * Real.sqrt p) :
+    (hcount : PlaneResidueCountBound C d q) :
     ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
       (∀ i, MvPolynomial.eval (fun j => MvPolynomial.eval (z i) (τ j)) g = 0) ∧ ¬ f ∣ g := by
   classical
@@ -114,10 +108,7 @@ theorem polynomial_map_auxiliary_small_height_degree
     (himage : ∀ i, MvPolynomial.eval (fun j => MvPolynomial.eval (z i) (τ j)) f = 0)
     {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(MvPolynomial.eval (z i) (τ j) : ℝ)| ≤ B) (hC : 0 ≤ C)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 4 * d * Real.log B)
-    (hcount : ∀ p : ℕ, p.Prime → 27 * (d : ℝ) ^ 4 < (p : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) q) →
-      (Nat.card (PlaneResidue q p) : ℝ) ≤
-        p + C * (d : ℝ) ^ 2 * Real.sqrt p) :
+    (hcount : PlaneResidueCountBound C d q) :
     ∃ M : ℕ, (M : ℝ) ≤ d + Real.log B +
       2 * Real.exp (heightDeterminantError C + 23) * (d : ℝ) ^ 3 *
         (1 + Real.log H / (d : ℝ) ^ 2) * B ^ (2 / (d : ℝ)) /
@@ -152,10 +143,7 @@ theorem polynomial_map_auxiliary_large_height_degree
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 4 * d * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * (d : ℝ) ^ 2)
-    (hcount : ∀ p : ℕ, p.Prime → 27 * (d : ℝ) ^ 4 < (p : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) q) →
-      (Nat.card (PlaneResidue q p) : ℝ) ≤
-        p + C * (d : ℝ) ^ 2 * Real.sqrt p) :
+    (hcount : PlaneResidueCountBound C d q) :
     ∃ M : ℕ, (M : ℝ) ≤ (34 + 8 * Real.exp (heightDeterminantError C + 6 + T)) * (d : ℝ) ^ 3 ∧
       ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ i, MvPolynomial.eval (fun j => MvPolynomial.eval (z i) (τ j)) g = 0) ∧ ¬ f ∣ g := by

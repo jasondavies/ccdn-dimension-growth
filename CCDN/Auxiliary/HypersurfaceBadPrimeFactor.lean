@@ -11,11 +11,13 @@ public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Hypersurface.NonabsolutePlaneCount
-/-! The geometric bad-prime factor used by the determinant method.
-It is zero for nonabsolute equations and an exact finite exponential product
-otherwise. For nonzero homogeneous equations it agrees with CCDN Definition
-3.2.1. For affine equations its bad-prime predicate also includes degree loss;
-this stronger convention is not identical to the literal printed definition. -/
+/-! Bad-prime factors of integer polynomials, and the geometric bad-prime factor used by the
+determinant method. A bad-prime factor `badPrimeFactor P` is zero for nonabsolute equations
+and the exact finite exponential product over the primes above `stepanovThreshold` satisfying
+the bad-reduction predicate `P` otherwise. For nonzero homogeneous equations the geometric
+factor agrees with CCDN Definition 3.2.1. For affine equations its bad-prime predicate also
+includes degree loss; this stronger convention is not identical to the literal printed
+definition. -/
 
 @[expose] public section
 namespace CCDN
@@ -30,37 +32,90 @@ lemma absolute_integer_polynomial_totalDegree_pos {n : ℕ}
   unfold totalDegree at hh ⊢
   rwa [support_map_of_injective _ Int.cast_injective] at hh
 
-def hypersurfaceBadPrimeFactor {n : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ) : ℝ := by
+/-- The bad-prime factor of an integer polynomial `f` relative to a bad-reduction predicate
+`P`: the product `primeSetFactor` of the primes `p > stepanovThreshold (deg f)` with `P f p`
+when `f` is absolutely irreducible over `ℚ`, and `0` otherwise. The hypothesis `hP` gives the
+finiteness of these primes for absolutely irreducible `f`. -/
+def badPrimeFactor {σ : Type*} (P : MvPolynomial σ ℤ → ℕ → Prop)
+    (hP : ∀ f : MvPolynomial σ ℤ, Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) →
+      {p : ℕ | stepanovThreshold f.totalDegree < p ∧ P f p}.Finite)
+    (f : MvPolynomial σ ℤ) : ℝ := by
   classical
   exact if h : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) then
-    Real.exp (∑ p ∈ (finite_fin_hypersurface_bad_primes f h
-      (absolute_integer_polynomial_totalDegree_pos f h)).toFinset, Real.log p / p)
+    primeSetFactor (hP f h).toFinset
   else 0
 
-lemma hypersurfaceBadPrimeFactor_nonneg {n : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ) :
-    0 ≤ hypersurfaceBadPrimeFactor f := by
-  unfold hypersurfaceBadPrimeFactor
+section BadPrimeFactor
+
+variable {σ : Type*} {P Q : MvPolynomial σ ℤ → ℕ → Prop}
+  {hP : ∀ f : MvPolynomial σ ℤ, Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) →
+    {p : ℕ | stepanovThreshold f.totalDegree < p ∧ P f p}.Finite}
+  {hQ : ∀ f : MvPolynomial σ ℤ, Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) →
+    {p : ℕ | stepanovThreshold f.totalDegree < p ∧ Q f p}.Finite}
+
+lemma badPrimeFactor_nonneg (f : MvPolynomial σ ℤ) : 0 ≤ badPrimeFactor P hP f := by
+  unfold badPrimeFactor
   split <;> positivity
+
+lemma badPrimeFactor_eq_zero {f : MvPolynomial σ ℤ}
+    (hf : ¬ Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) :
+    badPrimeFactor P hP f = 0 := by
+  simp only [badPrimeFactor, dite_eq_right hf]
+
+/-- For an absolutely irreducible equation of degree `d`, the bad-prime factor is the
+`primeSetFactor` of any finite set listing exactly the bad primes above `27 d⁴`. -/
+lemma badPrimeFactor_eq_primeSetFactor {d : ℕ} {f : MvPolynomial σ ℤ}
+    (hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hdegree : f.totalDegree = d) (bad : Finset ℕ)
+    (hbad : ∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ P f p) :
+    badPrimeFactor P hP f = primeSetFactor bad := by
+  classical
+  unfold badPrimeFactor
+  rw [dite_eq_left hf]
+  congr 1
+  ext p
+  simp only [Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdegree, hbad]
+
+/-- A weaker bad-reduction predicate gives a smaller bad-prime factor. -/
+lemma badPrimeFactor_mono (f : MvPolynomial σ ℤ) (hPQ : ∀ p, P f p → Q f p) :
+    badPrimeFactor P hP f ≤ badPrimeFactor Q hQ f := by
+  classical
+  by_cases hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
+  · unfold badPrimeFactor
+    rw [dite_eq_left hf, dite_eq_left hf]
+    apply Real.exp_le_exp.mpr
+    apply Finset.sum_le_sum_of_subset_of_nonneg
+    · intro p hp
+      simp only [Set.Finite.mem_toFinset, Set.mem_ofPred_eq] at hp ⊢
+      exact ⟨hp.1, hPQ p hp.2⟩
+    · intro p _ _
+      exact div_nonneg (Real.log_natCast_nonneg p) (Nat.cast_nonneg p)
+  · rw [badPrimeFactor_eq_zero hf, badPrimeFactor_eq_zero hf]
+
+end BadPrimeFactor
+
+/-- The geometric bad-prime factor: `badPrimeFactor` for `HypersurfaceBadReduction`, which
+counts both failure of absolute irreducibility and degree loss modulo `p`. -/
+def hypersurfaceBadPrimeFactor {n : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ) : ℝ :=
+  badPrimeFactor HypersurfaceBadReduction
+    (fun f h => finite_fin_hypersurface_bad_primes f h
+      (absolute_integer_polynomial_totalDegree_pos f h)) f
+
+lemma hypersurfaceBadPrimeFactor_nonneg {n : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ) :
+    0 ≤ hypersurfaceBadPrimeFactor f :=
+  badPrimeFactor_nonneg f
 
 lemma hypersurfaceBadPrimeFactor_eq_zero {n : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : ¬ Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) :
-    hypersurfaceBadPrimeFactor f = 0 := by
-  simp only [hypersurfaceBadPrimeFactor, dite_eq_right hf]
+    hypersurfaceBadPrimeFactor f = 0 :=
+  badPrimeFactor_eq_zero hf
 
 lemma hypersurfaceBadPrimeFactor_eq_exp {n d : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
     (hdegree : f.totalDegree = d) (bad : Finset ℕ)
-    (hbad : ∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) :
-    hypersurfaceBadPrimeFactor f = primeSetFactor bad := by
-  classical
-  unfold hypersurfaceBadPrimeFactor
-  rw [dite_eq_left hf]
-  congr 1
-  have he : (finite_fin_hypersurface_bad_primes f hf
-      (absolute_integer_polynomial_totalDegree_pos f hf)).toFinset = bad := by
-    ext p
-    simp only [Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdegree, hbad]
-  rw [he]
+    (hbad : ∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) :
+    hypersurfaceBadPrimeFactor f = primeSetFactor bad :=
+  badPrimeFactor_eq_primeSetFactor hf hdegree bad hbad
 
 /-- The bad-prime factor satisfies the coefficient-height bound also
 for nonabsolute equations, where the factor is zero by definition. -/

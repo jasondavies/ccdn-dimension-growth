@@ -39,7 +39,8 @@ theorem hypersurfaceBadPrimeFactor_affineTranslation {n : ℕ}
   by_cases hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
   · let bad := (finite_fin_hypersurface_bad_primes f hf
       (absolute_integer_polynomial_totalDegree_pos f hf)).toFinset
-    have hbad (p) : p ∈ bad ↔ 27 * f.totalDegree ^ 4 < p ∧ HypersurfaceBadReduction f p := by
+    have hbad (p) : p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧
+        HypersurfaceBadReduction f p := by
       simp only [bad, Set.Finite.mem_toFinset, Set.mem_ofPred_eq]
     rw [hypersurfaceBadPrimeFactor_eq_exp f hf rfl bad hbad]
     exact hypersurfaceBadPrimeFactor_eq_exp _ (hir.mpr hf) (affineTranslation_totalDegree a f)

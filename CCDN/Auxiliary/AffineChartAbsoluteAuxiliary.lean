@@ -39,7 +39,7 @@ theorem affine_chart_absolute_auxiliary_degree
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)
     (bad : Finset ℕ)
-    (hgood : ∀ (p : ℕ) [Fact p.Prime], p ∉ bad → 27 * (d : ℝ) ^ 4 < p →
+    (hgood : ∀ (p : ℕ) [Fact p.Prime], p ∉ bad → stepanovThreshold (d : ℝ) < p →
       AffineChartGoodPrime f z p)
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) :
     ∃ M : ℕ,

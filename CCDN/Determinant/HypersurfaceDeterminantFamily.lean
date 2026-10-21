@@ -51,7 +51,7 @@ theorem projective_hypersurface_familyGcd_dvd
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)
     (hir : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
       (map (Int.castRingHom (ZMod p)) f)))
-    (hsize : 27 * (d : ℝ) ^ 4 < p)
+    (hsize : stepanovThreshold (d : ℝ) < p)
     (M : ι → ℕ) (F : ι → Fin s → MvPolynomial (Fin (n + 3)) ℤ)
     (hF : ∀ l j, (F l j).IsHomogeneous (M l))
     (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, univ.gcd (z i) = 1)

@@ -96,9 +96,11 @@ theorem projective_plane_rational_count {d : ℕ}
     have hd4 : (d : ℝ) ^ 2 + d ≤ 2 * (d : ℝ) ^ 4 := by nlinarith [sq_nonneg ((d : ℝ) ^ 2 - 1)]
     have hC : 2 ≤ projectivePlaneAbsoluteConstant := by
       unfold projectivePlaneAbsoluteConstant
-      have hpos := Real.exp_pos (heightDeterminantError 164 + 20)
-      have hpos' : 0 ≤ 2 * Real.exp (heightDeterminantError 164 + 23) * Real.exp 14 * Real.exp 2 :=
-        by positivity
+      have hpos := Real.exp_pos
+        (heightDeterminantError projectivePlaneDeterminantConstant + 20)
+      have hpos' : 0 ≤
+          2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) *
+            Real.exp 14 * Real.exp 2 := by positivity
       linarith
     have hQ : 1 ≤ B ^ (2 / (d : ℝ)) := Real.one_le_rpow hB (by positivity)
     calc

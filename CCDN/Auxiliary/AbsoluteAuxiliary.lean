@@ -190,7 +190,7 @@ theorem hypersurface_absolute_auxiliary_degree
     (hz : ∀ i, eval (z i) f = 0)
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) :
     ∃ (bad : Finset ℕ) (M : ℕ),
-      (∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
+      (∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) ∧
       (M : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n d B (primeSetFactor bad)
         (integerCoefficientHeight f) ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧

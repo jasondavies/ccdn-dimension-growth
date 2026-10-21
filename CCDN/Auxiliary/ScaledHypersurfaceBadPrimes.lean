@@ -92,10 +92,10 @@ theorem hypersurfaceBadPrimeFactor_le_of_badReduction_imp {n : ℕ}
       (absolute_integer_polynomial_totalDegree_pos f hf)).toFinset
     let T := (finite_fin_hypersurface_bad_primes g hg
       (absolute_integer_polynomial_totalDegree_pos g hg)).toFinset
-    have hS : ∀ q, q ∈ S ↔ 27 * f.totalDegree ^ 4 < q ∧ HypersurfaceBadReduction f q := by
+    have hS : ∀ q, q ∈ S ↔ stepanovThreshold f.totalDegree < q ∧ HypersurfaceBadReduction f q := by
       intro q
       exact Set.Finite.mem_toFinset _
-    have hT : ∀ q, q ∈ T ↔ 27 * g.totalDegree ^ 4 < q ∧ HypersurfaceBadReduction g q := by
+    have hT : ∀ q, q ∈ T ↔ stepanovThreshold g.totalDegree < q ∧ HypersurfaceBadReduction g q := by
       intro q
       exact Set.Finite.mem_toFinset _
     have hsub : S ⊆ insert p T := by

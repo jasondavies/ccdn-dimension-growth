@@ -28,6 +28,14 @@ lemma affineSmallBoxScale_one_le : 1 ≤ affineSmallBoxScale := by
   unfold affineSmallBoxScale
   nlinarith
 
+/-- The constant of `plane_finite_count_nonzero_constant` for residue constant `C`, the sum of
+the constants of its regimes, with `E = heightDeterminantError C`: the scaled small-coefficient
+regime (`plane_finite_count_small_constant_coefficient`) costs
+`38 + 8 exp (E + 20) + 2 exp (E + 23) e¹⁴ e² · scalingPrimeRatio`, and the small-box regime
+(`small_box_unscaled_degree_bound`) costs `log S + 6 + 2 exp (E + 23) e¹⁴ exp (2 log S + 6)`
+with `S = affineSmallBoxScale`. The large-coefficient constant `34 + 8 exp (E + 20)` is
+dominated by the first. The numerical constants are explained in
+`projectivePlaneAbsoluteConstant`. -/
 def affineNonzeroConstantBound (C : ℝ) : ℝ :=
   (38 + 8 * Real.exp (heightDeterminantError C + 20) +
     2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 * scalingPrimeRatio) +
@@ -59,9 +67,7 @@ theorem plane_finite_count_nonzero_constant
     (hd : 0 < f.totalDegree) (hf0 : f.coeff 0 ≠ 0)
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0)
     {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
-    (hcount : ∀ ℓ : ℕ, ℓ.Prime → 27 * (f.totalDegree : ℝ) ^ 4 < (ℓ : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod ℓ)) f) →
-      (Nat.card (PlaneResidue f ℓ) : ℝ) ≤ ℓ + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt ℓ) :
+    (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ affineNonzeroConstantBound C * curveBound f.totalDegree B := by
   let d := f.totalDegree
   let K₁ := 38 + 8 * Real.exp (heightDeterminantError C + 20) +

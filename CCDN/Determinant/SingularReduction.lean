@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.SingularPlaneChart
+public import CCDN.Plane.FiniteFieldConstants
 import CCDN.Determinant.BlockDeterminant
 public import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.ResidueAggregation
@@ -33,6 +34,16 @@ instance (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [NeZero p] :
   classical
   unfold PlaneResidue
   infer_instance
+
+/-- The finite-field point-count hypothesis for one plane equation `f`, with degree
+parameter `d` and constant `C`: at every prime `p > stepanovThreshold d` where `f` has
+irreducible reduction, `f` has at most `p + C d² √p` zeros in `𝔽_p²`. `PlaneResidueBound C`
+asserts it for every equation with `d = deg f`, and `planeResidueBound` proves it with
+`C = planeResidueConstant`. -/
+def PlaneResidueCountBound (C : ℝ) (d : ℕ) (f : MvPolynomial (Fin 2) ℤ) : Prop :=
+  ∀ p : ℕ, p.Prime → stepanovThreshold (d : ℝ) < p →
+    Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) f) →
+      (Nat.card (PlaneResidue f p) : ℝ) ≤ p + C * (d : ℝ) ^ 2 * Real.sqrt p
 
 def planeResidueLift {f : MvPolynomial (Fin 2) ℤ} {p : ℕ} (a : PlaneResidue f p) :
     Fin 2 → ℤ := fun j => (a.val j).val

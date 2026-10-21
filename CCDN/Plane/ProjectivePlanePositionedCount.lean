@@ -47,8 +47,10 @@ theorem projective_plane_finite_count_positioned
     (hzprim : ∀ i, Finset.univ.gcd (z i) = 1) (hz : ∀ i, eval (z i) f = 0)
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) :
     (t : ℝ) ≤ max
-      ((d : ℝ) * scaledPlaneAuxiliaryDegreeBound d 164 (((d : ℝ) + 1) * B) 1)
-      ((34 + 8 * Real.exp (heightDeterminantError 164 + 20)) * (d : ℝ) ^ 4) := by
+      ((d : ℝ) * scaledPlaneAuxiliaryDegreeBound d projectivePlaneDeterminantConstant (((d : ℝ) +
+          1) * B) 1)
+      ((34 + 8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 20)) *
+          (d : ℝ) ^ 4) := by
   have hdpos : 0 < d := by omega
   have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by simp [h])
   obtain ⟨a, H, ha, hH, hc, hlo, hhi⟩ := exists_translated_coefficient_position hdpos f hf hf0
@@ -91,13 +93,15 @@ theorem projective_plane_finite_count_positioned
       (by simpa using hH) hL hhi
     simp only [Real.log_one, zero_div, add_zero, Real.one_rpow, div_one] at hratio
     have hterm := mul_le_mul_of_nonneg_left hratio (show 0 ≤
-      2 * Real.exp (heightDeterminantError 164 + 23) * (d : ℝ) ^ 3 * R ^ (2 / (d : ℝ))
+      2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) * (d : ℝ) ^ 3 *
+          R ^ (2 / (d : ℝ))
       by positivity)
     have hbound : (d : ℝ) + Real.log R +
-        2 * Real.exp (heightDeterminantError 164 + 23) * (d : ℝ) ^ 3 *
+        2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) *
+            (d : ℝ) ^ 3 *
           (1 + Real.log H / (d : ℝ) ^ 2) * R ^ (2 / (d : ℝ)) /
             |((MonomialOrder.lex.leadingCoeff model : ℤ) : ℝ)| ^ (1 / (d : ℝ) ^ 2) + 2 ≤
-        scaledPlaneAuxiliaryDegreeBound d 164 R 1 := by
+        scaledPlaneAuxiliaryDegreeBound d projectivePlaneDeterminantConstant R 1 := by
       unfold scaledPlaneAuxiliaryDegreeBound
       simp only [Real.log_one, zero_div, add_zero, mul_one, Real.one_rpow, div_one]
       ring_nf at hterm ⊢
@@ -106,7 +110,8 @@ theorem projective_plane_finite_count_positioned
   · have ht := projective_points_large_height_bound MonomialOrder.lex model hmhom hm0 hd hmp
       hmdeg hmchart H hH hc w hw0 hwi hwp hwz hR hwbox 14 (by norm_num)
       (le_of_lt (lt_of_not_ge hsmall)) hhi
-    rw [show heightDeterminantError 164 + 6 + 14 = heightDeterminantError 164 + 20 by ring] at ht
+    rw [show heightDeterminantError projectivePlaneDeterminantConstant + 6 + 14 =
+        heightDeterminantError projectivePlaneDeterminantConstant + 20 by ring] at ht
     exact ht.trans (le_max_right _ _)
 
 end

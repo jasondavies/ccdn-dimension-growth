@@ -160,7 +160,7 @@ theorem literalAffineBadPrimeFactor_badPrimeHomogenizedExample {c : ℤ} (hc : c
   intro p
   rw [literalAffineBadReduction_badPrimeHomogenizedExample, Finset.mem_filter,
     Nat.mem_primeFactors, Int.natCast_dvd]
-  have : 27 * 2 ^ 4 = 432 := by norm_num
+  have : stepanovThreshold 2 = 432 := by norm_num [stepanovThreshold]
   have hc' := Int.natAbs_ne_zero.mpr hc
   rw [this]
   tauto

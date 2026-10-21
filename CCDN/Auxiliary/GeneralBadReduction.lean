@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.ConstantLeadingBadReduction
 import CCDN.Auxiliary.BadPrimeCharge
@@ -86,7 +87,7 @@ theorem plane_geometric_bad_prime_charge
     (hir : Irreducible (bivariateMap (Int.castRingHom F) f))
     (H : ℝ) (hH : 1 ≤ H) (hcoeff : BivariateCoefficientBound f H)
     (P : Finset ℕ) (hbad : ∀ p ∈ P, BivariateBadReduction f d p)
-    (hlo : ∀ p ∈ P, 27 * (d : ℝ) ^ 4 < (p : ℝ)) :
+    (hlo : ∀ p ∈ P, stepanovThreshold (d : ℝ) < (p : ℝ)) :
     (∑ p ∈ P, Real.log p / p) ≤
       Real.log (1 + Real.log H / (d : ℝ) ^ 2) + Real.log 7 + 2 * mertensError + 1 := by
   obtain ⟨D, hD, hheight, hdiv⟩ := exists_plane_bad_prime_witness d hd f hdeg hir H hH hcoeff

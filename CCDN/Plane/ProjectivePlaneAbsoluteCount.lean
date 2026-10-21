@@ -18,24 +18,47 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The absolute constant of `projective_plane_primitive_absolute_count`. Write
+`E = heightDeterminantError projectivePlaneDeterminantConstant`.
+
+* Small coefficient height: the auxiliary degree is at most
+  `d + log R + 2 exp (E + 23) d³ (1 + log H / d²) R^(2/d) / |lc|^(1/d²) + 2`
+  (`projective_auxiliary_small_height_degree`), where `23 = 5 + 2 + 16` collects the
+  archimedean error of `plane_rank_archimedean_error` and the remainders of the box and
+  coefficient terms in `plane_auxiliary_log_degree_bound`. Positioning the leading coefficient
+  costs `log H ≤ log |lc| + 14 d²` (`exists_translated_coefficient_position`), hence the factor
+  `exp 14` (`scaled_positioned_height_ratio_le`). The translated radius `R = (d + 1) B`
+  satisfies `R^(2/d) ≤ e² B^(2/d)`, and `d + log R + 2 ≤ 5 d³ B^(2/d)`; this gives
+  `exp 2` and the leading `5` (`projective_positioned_bound_le`).
+* Large coefficient height: the auxiliary degree is at least `32 d` and at most
+  `32 d + 8 exp (E + 6 + T) d³ + 2 ≤ (34 + 8 exp (E + 6 + T)) d³`
+  (`projective_auxiliary_large_height_degree`), where `6 = 5 + 1` and the `8 = 2 · 4` come from
+  `plane_auxiliary_large_height_log_bound`, and `T = 14` is the positioning loss; hence
+  `E + 20`.
+
+Bézout multiplies either degree bound by `d`. -/
 def projectivePlaneAbsoluteConstant : ℝ :=
-  5 + 2 * Real.exp (heightDeterminantError 164 + 23) * Real.exp 14 * Real.exp 2 +
-    (34 + 8 * Real.exp (heightDeterminantError 164 + 20))
+  5 + 2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) *
+      Real.exp 14 * Real.exp 2 +
+    (34 + 8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 20))
 
 lemma projectivePlaneAbsoluteConstant_pos : 0 < projectivePlaneAbsoluteConstant := by
   unfold projectivePlaneAbsoluteConstant
   positivity
 
 lemma projective_positioned_bound_le {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 ≤ B) :
-    max ((d : ℝ) * scaledPlaneAuxiliaryDegreeBound d 164 (((d : ℝ) + 1) * B) 1)
-      ((34 + 8 * Real.exp (heightDeterminantError 164 + 20)) * (d : ℝ) ^ 4) ≤
+    max ((d : ℝ) *
+        scaledPlaneAuxiliaryDegreeBound d projectivePlaneDeterminantConstant (((d : ℝ) + 1) * B) 1)
+      ((34 + 8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 20)) *
+        (d : ℝ) ^ 4) ≤
       projectivePlaneAbsoluteConstant * (d : ℝ) ^ 4 * B ^ (2 / (d : ℝ)) := by
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hd0 : (0 : ℝ) < d := by positivity
   have hB0 : 0 < B := by linarith
   let Q := B ^ (2 / (d : ℝ))
-  let E := 2 * Real.exp (heightDeterminantError 164 + 23) * Real.exp 14
-  let A := 34 + 8 * Real.exp (heightDeterminantError 164 + 20)
+  let E := 2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) *
+      Real.exp 14
+  let A := 34 + 8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 20)
   have hQ : 1 ≤ Q := Real.one_le_rpow hB (by positivity)
   have hE : 0 ≤ E := by dsimp [E]; positivity
   have hA : 0 ≤ A := by dsimp [A]; positivity
@@ -66,7 +89,8 @@ lemma projective_positioned_bound_le {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 �
       5 * (d : ℝ) ^ 3 * Q := by nlinarith
   have hterm := mul_le_mul_of_nonneg_left hpower
     (show 0 ≤ E * (d : ℝ) ^ 3 by positivity)
-  have hdeg : scaledPlaneAuxiliaryDegreeBound d 164 (((d : ℝ) + 1) * B) 1 ≤
+  have hdeg :
+      scaledPlaneAuxiliaryDegreeBound d projectivePlaneDeterminantConstant (((d : ℝ) + 1) * B) 1 ≤
       (5 + E * Real.exp 2) * (d : ℝ) ^ 3 * Q := by
     unfold scaledPlaneAuxiliaryDegreeBound
     simp only [Real.log_one, zero_div, add_zero, mul_one, Real.one_rpow, div_one]

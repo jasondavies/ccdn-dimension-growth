@@ -19,10 +19,10 @@ noncomputable section
 open scoped NumberField IntermediateField
 
 def oddIndexNormCurveCountConstant : ℝ :=
-  2 * Real.exp 1 * affineNonzeroConstantBound 161
+  2 * Real.exp 1 * affineNonzeroConstantBound planeResidueConstant
 
 lemma oddIndexNormCurveCountConstant_pos : 0 < oddIndexNormCurveCountConstant :=
-  mul_pos (by positivity) (affineNonzeroConstantBound_pos 161)
+  mul_pos (by positivity) (affineNonzeroConstantBound_pos planeResidueConstant)
 
 theorem signed_norm_curve_count_of_odd_subfield_index
     (K : Type*) [Field K] [NumberField K]
@@ -45,7 +45,7 @@ theorem signed_norm_curve_count_of_odd_subfield_index
     exact signedNormCurvePolynomial_absolute_irreducible_of_odd_subfield_index
       K β hε hindex
   have h := count_rational_plane_of_residue_bound _ hir (by omega) hB
-    (by norm_num : (0 : ℝ) ≤ 161) planeResidueBound
+    planeResidueConstant_pos.le planeResidueBound
   rw [hd] at h
   simpa only [curveBound, oddIndexNormCurveCountConstant, mul_assoc] using h
 

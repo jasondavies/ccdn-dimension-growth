@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Plane.FiniteFieldZeroPlanes
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Analysis.Real.Sqrt
@@ -21,11 +22,11 @@ open MvPolynomial
 equation. -/
 theorem plane_sections_incidence_bound {σ : Type*} [Fintype σ]
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial σ (ZMod p))
-    (hsize : 27 * (f.totalDegree : ℝ) ^ 4 < p) :
+    (hsize : stepanovThreshold (f.totalDegree : ℝ) < p) :
     (Nat.card {z : σ → ZMod p // eval z f = 0} : ℝ) *
         (p : ℝ) ^ (2 * Fintype.card σ + 2) ≤
       (p : ℝ) ^ (3 * Fintype.card σ) *
-        (p + 161 * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p) +
+        (p + planeResidueConstant * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p) +
       (Nat.card (BadPlaneParameters f) : ℝ) * (f.totalDegree * p) +
       (Nat.card (ZeroPlaneParameters f) : ℝ) * (p : ℝ) ^ 2 := by
   classical
@@ -35,8 +36,11 @@ theorem plane_sections_incidence_bound {σ : Type*} [Fintype σ]
       ¬Irreducible (bivariateMap (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
         (universalPlaneSection f v))
   let Z : V → Prop := fun v => universalPlaneSection f v = 0
-  let A : ℝ := p + 161 * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p
-  have hA : 0 ≤ A := by dsimp [A]; positivity
+  let A : ℝ := p + planeResidueConstant * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p
+  have hA : 0 ≤ A := by
+    have := planeResidueConstant_pos
+    dsimp [A]
+    positivity
   have hpoint (v : V) : (Nat.card (PlaneSectionPoints f v) : ℝ) ≤
       A + (if B v then (f.totalDegree : ℝ) * p else 0) +
         (if Z v then (p : ℝ) ^ 2 else 0) := by

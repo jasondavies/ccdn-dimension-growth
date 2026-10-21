@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Projection.PlaneIncidence
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Analysis.Real.Sqrt
@@ -81,9 +82,9 @@ lemma planeSectionPoints_card_le_sharp {σ : Type*}
     (v : PlaneParameters σ → ZMod p)
     (hir : Irreducible (bivariateMap (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
       (universalPlaneSection f v)))
-    (hsize : 27 * (f.totalDegree : ℝ) ^ 4 < p) :
+    (hsize : stepanovThreshold (f.totalDegree : ℝ) < p) :
     (Nat.card (PlaneSectionPoints f v) : ℝ) ≤
-      p + 161 * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p := by
+      p + planeResidueConstant * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p := by
   classical
   let g := planeSectionPolynomial f v
   have hg : Irreducible g := by
@@ -92,7 +93,7 @@ lemma planeSectionPoints_card_le_sharp {σ : Type*}
     rw [← bivariatePolynomialEquiv_map]
     simpa only [g, planeSectionPolynomial, AlgEquiv.apply_symm_apply] using hir
   have hd : g.totalDegree ≤ f.totalDegree := planeSectionPolynomial_totalDegree f v
-  have hs : 27 * (g.totalDegree : ℝ) ^ 4 < p := by
+  have hs : stepanovThreshold (g.totalDegree : ℝ) < p := by
     apply lt_of_le_of_lt _ hsize
     gcongr
   let S := {t : Fin 2 → ZMod p // eval t g = 0}
@@ -101,6 +102,7 @@ lemma planeSectionPoints_card_le_sharp {σ : Type*}
   rw [planeSectionPoints_card_eq, Nat.card_eq_fintype_card]
   apply h.trans
   gcongr
+  exact planeResidueConstant_pos.le
 
 end
 end CCDN

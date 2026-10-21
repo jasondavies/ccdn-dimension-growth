@@ -54,7 +54,7 @@ theorem exists_auxiliary_small_height_of_comparison {n d M t : ℕ}
     exact_mod_cast Int.one_le_abs (order.leadingCoeff_ne_zero_iff.mpr hf0)
   have hnR : (n : ℝ) + 1 + 1 = n + 2 := by ring
   have hlog := hypersurface_small_height_log_degree_bound (r := n + 1) (by omega) hd hM hr
-    B |((order.leadingCoeff f : ℤ) : ℝ)| (Real.exp (∑ p ∈ bad, Real.log p / p))
+    B |((order.leadingCoeff f : ℤ) : ℝ)| (primeSetFactor bad)
     (hypersurfaceBadPrimeNormalizedError n) hB hL
     (by simpa only [Nat.cast_add, Nat.cast_one, hnR] using hheight)
     (by simpa only [Nat.cast_add, Nat.cast_one] using hscale)
@@ -63,7 +63,7 @@ theorem exists_auxiliary_small_height_of_comparison {n d M t : ℕ}
     (by linarith : 0 < B) (by linarith : 0 < |((order.leadingCoeff f : ℤ) : ℝ)|)
     (Real.exp_pos _) hlog
   have hb' : (M : ℝ) ≤ hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
-      (Real.exp (∑ p ∈ bad, Real.log p / p)) := by
+      (primeSetFactor bad) := by
     simpa only [hypersurfaceSmallThreshold, Nat.cast_add, Nat.cast_one, hnR] using hb
   exact (not_lt_of_ge hb') hthreshold
 
@@ -84,7 +84,7 @@ theorem auxiliary_small_height_degree_of_comparison {n d t : ℕ}
         (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd
   let R := hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
-    (Real.exp (∑ p ∈ bad, Real.log p / p))
+    (primeSetFactor bad)
   have hR : 0 ≤ R := by dsimp only [R, hypersurfaceSmallThreshold]; positivity
   let l := (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B
   have hl : 0 ≤ l := mul_nonneg (Real.rpow_nonneg hdR.le _) (Real.log_nonneg hB)
@@ -113,7 +113,7 @@ theorem hypersurface_auxiliary_small_height_degree
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 2 * d * (n + 2 : ℝ) * Real.log B) :
     ∃ (bad : Finset ℕ) (M : ℕ),
-      (∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
+      (∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) ∧
       (M : ℝ) ≤ 2 * d + (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
         hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
           (primeSetFactor bad) + 2 ∧

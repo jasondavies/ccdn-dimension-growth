@@ -31,8 +31,8 @@ theorem projective_exists_auxiliary_small_height
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
     (hML : Real.log B ≤ M)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 4 * d * Real.log B)
-    (hthreshold : 2 * Real.exp (heightDeterminantError 164 + 23) * (d : ℝ) ^ 3 *
-      (1 + Real.log H / (d : ℝ) ^ 2) * B ^ (2 / (d : ℝ)) /
+    (hthreshold : 2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) *
+      (d : ℝ) ^ 3 * (1 + Real.log H / (d : ℝ) ^ 2) * B ^ (2 / (d : ℝ)) /
         |((order.leadingCoeff f : ℤ) : ℝ)| ^ (1 / (d : ℝ) ^ 2) < M) :
     ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
       (∀ i, MvPolynomial.eval (z i) g = 0) ∧ ¬ f ∣ g := by
@@ -70,7 +70,9 @@ theorem projective_exists_auxiliary_large_height
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 4 * d * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * (d : ℝ) ^ 2)
-    (hthreshold : 8 * Real.exp (heightDeterminantError 164 + 6 + T) * (d : ℝ) ^ 3 < M) :
+    (hthreshold :
+      8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 6 + T) *
+        (d : ℝ) ^ 3 < M) :
     ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
       (∀ i, MvPolynomial.eval (z i) g = 0) ∧ ¬ f ∣ g := by
   classical
@@ -104,13 +106,13 @@ theorem projective_auxiliary_small_height_degree
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 4 * d * Real.log B) :
     ∃ M : ℕ, (M : ℝ) ≤ d + Real.log B +
-      2 * Real.exp (heightDeterminantError 164 + 23) * (d : ℝ) ^ 3 *
+      2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) * (d : ℝ) ^ 3 *
         (1 + Real.log H / (d : ℝ) ^ 2) * B ^ (2 / (d : ℝ)) /
           |((order.leadingCoeff f : ℤ) : ℝ)| ^ (1 / (d : ℝ) ^ 2) + 2 ∧
       ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ i, MvPolynomial.eval (z i) g = 0) ∧ ¬ f ∣ g := by
-  let R := 2 * Real.exp (heightDeterminantError 164 + 23) * (d : ℝ) ^ 3 *
-    (1 + Real.log H / (d : ℝ) ^ 2) * B ^ (2 / (d : ℝ)) /
+  let R := 2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) *
+    (d : ℝ) ^ 3 * (1 + Real.log H / (d : ℝ) ^ 2) * B ^ (2 / (d : ℝ)) /
       |((order.leadingCoeff f : ℤ) : ℝ)| ^ (1 / (d : ℝ) ^ 2)
   have hR : 0 ≤ R := by
     have := Real.log_nonneg hH
@@ -135,10 +137,13 @@ theorem projective_auxiliary_large_height_degree
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 4 * d * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * (d : ℝ) ^ 2) :
-    ∃ M : ℕ, (M : ℝ) ≤ (34 + 8 * Real.exp (heightDeterminantError 164 + 6 + T)) * (d : ℝ) ^ 3 ∧
+    ∃ M : ℕ, (M : ℝ) ≤
+        (34 + 8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 6 + T)) *
+          (d : ℝ) ^ 3 ∧
       ∃ g : MvPolynomial (Fin 3) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ i, MvPolynomial.eval (z i) g = 0) ∧ ¬ f ∣ g := by
-  let R := 8 * Real.exp (heightDeterminantError 164 + 6 + T) * (d : ℝ) ^ 3
+  let R := 8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 6 + T) *
+      (d : ℝ) ^ 3
   have hR : 0 ≤ R := by dsimp only [R]; positivity
   obtain ⟨M, hMlarge, _, hth, hM⟩ := auxiliary_integer_degree_selection (32 * d)
     (show (0 : ℝ) ≤ 0 from le_rfl) hR

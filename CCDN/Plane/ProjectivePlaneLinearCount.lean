@@ -94,9 +94,11 @@ theorem projective_plane_equation_bound {d : ℕ}
     have h := projective_plane_linear_count f hf hir.ne_zero hB
     have hC : 9 ≤ projectivePlaneAbsoluteConstant := by
       unfold projectivePlaneAbsoluteConstant
-      have hpos := Real.exp_pos (heightDeterminantError 164 + 20)
-      have hpos' : 0 ≤ 2 * Real.exp (heightDeterminantError 164 + 23) * Real.exp 14 * Real.exp 2 :=
-        by positivity
+      have hpos := Real.exp_pos
+        (heightDeterminantError projectivePlaneDeterminantConstant + 20)
+      have hpos' : 0 ≤
+          2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) *
+            Real.exp 14 * Real.exp 2 := by positivity
       linarith
     norm_num only [Nat.cast_one, one_pow, mul_one, div_one, Real.rpow_two]
     exact h.trans (mul_le_mul_of_nonneg_right hC (sq_nonneg B))

@@ -114,10 +114,7 @@ theorem scaled_plane_finite_count_one_over_degree
     (hz : ∀ i, MvPolynomial.eval (z i) f = 0)
     {A B C : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) (hBp : B ≤ A * p)
     (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
-    (hcount : ∀ ℓ : ℕ, ℓ.Prime → 27 * (f.totalDegree : ℝ) ^ 4 < (ℓ : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod ℓ)) f) →
-      (Nat.card (PlaneResidue f ℓ) : ℝ) ≤
-        ℓ + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt ℓ) :
+    (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤
       (38 + 8 * Real.exp (heightDeterminantError C + 20) +
         2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 * A) *

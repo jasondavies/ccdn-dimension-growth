@@ -29,7 +29,7 @@ theorem exists_hypersurface_determinant_log_lower
     (hrows : LinearIndependent ℚ
       ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row) :
     ∃ bad : Finset ℕ,
-      (∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
+      (∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) ∧
       hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤
         Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   obtain ⟨bad, hmem⟩ := exists_hypersurface_bad_prime_finset f hf hd hir
@@ -66,7 +66,7 @@ theorem hypersurface_determinant_log_lower_height
   rw [hdeg] at hmem hcharge
   have hred (p : ℕ) [Fact p.Prime]
       (hp : p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad)
-      (hcut : 27 * (d : ℝ) ^ 4 < p) :
+      (hcut : stepanovThreshold (d : ℝ) < p) :
       HasGoodReduction f p :=
     hasGoodReduction_of_not_mem hmem p (mem_sdiff.mp hp).2 hcut
   have hlower := hypersurface_determinant_log_lower_at_rank hs f hf hd F hF z hprim hz hrows bad hred

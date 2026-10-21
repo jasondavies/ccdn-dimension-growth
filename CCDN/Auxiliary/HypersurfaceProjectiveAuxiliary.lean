@@ -48,7 +48,7 @@ theorem hypersurface_absolute_projective_auxiliary
     (hir : Irreducible (map (Int.castRingHom K) f))
     {B : ℝ} (hB : 1 ≤ B) :
     ∃ (bad : Finset ℕ) (M : ℕ),
-      (∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
+      (∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) ∧
       (M : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n d B (primeSetFactor bad)
         (integerCoefficientHeight f) ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧

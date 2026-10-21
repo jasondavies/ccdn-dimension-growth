@@ -131,6 +131,7 @@ public import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Auxiliary.HypersurfaceBadPrimeHeight
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
+public import CCDN.Auxiliary.HypersurfaceBadReduction
 public import CCDN.Auxiliary.HypersurfaceCoefficientDichotomy
 public import CCDN.Auxiliary.HypersurfaceFullOuterDegree
 public import CCDN.Auxiliary.HypersurfaceGoodDirection
@@ -704,6 +705,7 @@ public import CCDN.Plane.CoprimeNewtonEdgeCount
 public import CCDN.Plane.CoprimeNewtonEdgeReduction
 public import CCDN.Plane.DegreeOneAffineLine
 public import CCDN.Plane.FiniteFieldBadPlanes
+public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Plane.FiniteFieldPolynomialZeros
 public import CCDN.Plane.FiniteFieldZeroPlanes
 public import CCDN.Plane.HyperplanePlaneAvoidance

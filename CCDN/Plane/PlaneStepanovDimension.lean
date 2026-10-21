@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Plane.PlaneHilbert
 import CCDN.Plane.StepanovParameters
@@ -39,7 +40,7 @@ lemma principal_plane_hilbert_bounds {K : Type*} [Field K]
 /-- The numerical inequality suffices for the exact filtered dimensions. -/
 theorem stepanov_hilbert_dimension_inequality {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0) (p A D N : ℕ)
-    (hd : 0 < f.totalDegree) (hp : 27 * f.totalDegree ^ 4 < p)
+    (hd : 0 < f.totalDegree) (hp : stepanovThreshold f.totalDegree < p)
     (hA : f.totalDegree ≤ A) (hD : f.totalDegree ≤ D)
     (hx : (f.totalDegree * A) ^ 2 ≤ p) (hy : p ≤ f.totalDegree * D + f.totalDegree)
     (hN : N + 4 * f.totalDegree ^ 2 = f.totalDegree * A) (hNpos : 0 < N) :

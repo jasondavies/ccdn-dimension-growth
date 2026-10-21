@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Analysis.Real.Sqrt
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
@@ -24,9 +25,10 @@ absolute square-degree square-root error. -/
 theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Option (Fin (n + 2))) (ZMod p))
     (hf : Irreducible (MvPolynomial.map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f))
-    (hsize : 27 * (f.totalDegree : ℝ) ^ 4 < p) :
+    (hsize : stepanovThreshold (f.totalDegree : ℝ) < p) :
     (Nat.card {z : Option (Fin (n + 2)) → ZMod p // eval z f = 0} : ℝ) ≤
-      (p : ℝ) ^ (n + 2) + 164 * (f.totalDegree : ℝ) ^ 2 * (p : ℝ) ^ (n + 1) * Real.sqrt p := by
+      (p : ℝ) ^ (n + 2) + hypersurfaceResidueConstant * (f.totalDegree : ℝ) ^ 2 *
+        (p : ℝ) ^ (n + 1) * Real.sqrt p := by
   have hir := mvPolynomial_irreducible_of_field_map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f hf
   have hd : 0 < f.totalDegree := by
     by_contra hn
@@ -59,7 +61,8 @@ theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
     show 3 * (n + 2 + 1) = 3 * n + 9 by omega] at hi
   apply hypersurface_count_of_incidence_bound n hdR hsize
   calc
-    _ ≤ (p : ℝ) ^ (3 * n + 9) * (p + 161 * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p) +
+    _ ≤ (p : ℝ) ^ (3 * n + 9) *
+          (p + planeResidueConstant * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p) +
         (2 * (f.totalDegree : ℝ) ^ 3 * (p : ℝ) ^ (3 * n + 8)) * (f.totalDegree * p) +
         ((f.totalDegree : ℝ) ^ 3 * (p : ℝ) ^ (3 * n + 6)) * (p : ℝ) ^ 2 := by
       exact hi.trans (add_le_add
@@ -87,9 +90,10 @@ lemma polynomial_zero_card_renameEquiv {K σ τ : Type*} [CommRing K]
 theorem affine_hypersurface_finite_field_bound {n : ℕ}
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) (ZMod p))
     (hf : Irreducible (MvPolynomial.map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f))
-    (hsize : 27 * (f.totalDegree : ℝ) ^ 4 < p) :
+    (hsize : stepanovThreshold (f.totalDegree : ℝ) < p) :
     (Nat.card {z : Fin (n + 3) → ZMod p // eval z f = 0} : ℝ) ≤
-      (p : ℝ) ^ (n + 2) + 164 * (f.totalDegree : ℝ) ^ 2 * (p : ℝ) ^ (n + 1) * Real.sqrt p := by
+      (p : ℝ) ^ (n + 2) + hypersurfaceResidueConstant * (f.totalDegree : ℝ) ^ 2 *
+        (p : ℝ) ^ (n + 1) * Real.sqrt p := by
   let e : Fin (n + 3) ≃ Option (Fin (n + 2)) := finSuccEquiv' 0
   let g := rename e f
   have hg : Irreducible (MvPolynomial.map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) g) := by
