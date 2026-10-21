@@ -120,7 +120,8 @@ theorem projective_plane_primitive_absolute_count
       projectivePlaneAbsoluteConstant * (d : ℝ) ^ 4 * B ^ (2 / (d : ℝ)) := by
   apply projective_zero_count_le_of_family_bound f hf
   intro t z hz0 hinj hzprim hz hbox
-  exact (projective_plane_finite_count_positioned f hf hd hprim hir z hz0 hinj hzprim hz hB hbox).trans
+  exact (projective_plane_finite_count_positioned f hf hd hprim hir z hz0 hinj
+    ⟨⟨hB, hz, hbox⟩, hzprim⟩).trans
     (projective_positioned_bound_le (by omega) hB)
 
 /-- The bound for an arbitrary rational absolutely irreducible plane equation,
