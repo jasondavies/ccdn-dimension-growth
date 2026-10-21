@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.FiniteFieldConstants
 import all ArithmeticHeights.BombieriVaaler
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.Determinant.SingularReduction

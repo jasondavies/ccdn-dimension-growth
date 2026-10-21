@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.LinearForm
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Center.BalancedParameterFiniteness

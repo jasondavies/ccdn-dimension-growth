@@ -8,7 +8,6 @@ module
 public import CCDN.Noether.UniversalPlaneBadWitness
 public import Mathlib.Algebra.Field.ZMod
 import CCDN.Plane.FullDegreeSectionIrreducibility
-import CCDN.Noether.UniversalPlaneWitness
 import Mathlib.Algebra.MvPolynomial.Funext
 import CCDN.ForMathlib.MvPolynomial
 

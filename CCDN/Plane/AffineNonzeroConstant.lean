@@ -10,7 +10,6 @@ public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.PrimitiveIntegerPolynomial
 public import CCDN.Statements
-public import CCDN.Height.Box
 import CCDN.Plane.UnscaledModelCount
 import CCDN.Plane.AffineBoxRanges
 import CCDN.Plane.ScaledBoxExponent

@@ -7,7 +7,6 @@ module
 
 public import CCDN.Center.ScalarQuotientPolynomialLocalization
 public import CCDN.ForMathlib.FractionRing
-import Mathlib.Tactic.ContinuousFunctionalCalculus
 /-! A fraction field of the parameter polynomial extension is also
 the fraction field of the scalar-extended source coordinate quotient. -/
 

@@ -7,12 +7,8 @@ module
 
 public import CCDN.Algebra.AffineTranslation
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Noether.GenericPlaneStretch
 public import CCDN.Algebra.ScaledHomogenization
-public import CCDN.Height.Box
-public import Mathlib.Algebra.GCDMonoid.Finset
-import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Determinant.ProjectiveLocalDeterminant
 

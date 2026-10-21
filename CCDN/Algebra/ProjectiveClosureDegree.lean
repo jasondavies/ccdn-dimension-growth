@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveClosureIdeal
-public import CCDN.Algebra.ProjectiveAffineChart
 public import CCDN.Algebra.ProjectiveChartIdeal
 import CCDN.Algebra.ProjectiveChartScalarExtension
 /-! Projective closure preserves the Hilbert degree and its standard

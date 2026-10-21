@@ -5,9 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Statements
 public import CCDN.Plane.AffineNonzeroConstant
-public import CCDN.Height.CountingHypotheses
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.ForMathlib.Log
 import CCDN.AuxiliaryPolynomial.AffineTranslationCount

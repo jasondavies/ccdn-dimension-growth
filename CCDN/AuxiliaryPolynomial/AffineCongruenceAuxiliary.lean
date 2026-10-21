@@ -6,10 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.ForMathlib.StandardExponents
-public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.AuxiliaryPolynomial.AffineCongruenceHeight
-public import CCDN.Height.CountingHypotheses
 import CCDN.AuxiliaryPolynomial.StandardMonomialAuxiliary
 import CCDN.AuxiliaryPolynomial.WeightedMonomialDeterminant
 import all ArithmeticHeights.BombieriVaaler

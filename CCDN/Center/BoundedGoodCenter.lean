@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Center.BirationalCenterLocus
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.DetectorBounds

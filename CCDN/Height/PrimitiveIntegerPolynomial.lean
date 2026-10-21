@@ -8,11 +8,9 @@ module
 public import Mathlib.Algebra.MvPolynomial.Eval
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
-import Mathlib.Data.Nat.Factorial.DoubleFactorial
 import Mathlib.RingTheory.Localization.Integer
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.Algebra.EuclideanDomain.Int
-import Mathlib.RingTheory.PrincipalIdealDomain
 import CCDN.ForMathlib.MvPolynomial
 
 /-! Primitive integer multivariate equations, denominator clearing, and

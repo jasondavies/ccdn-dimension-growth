@@ -6,9 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.ScaledModelCoordinates
-public import CCDN.Height.Box
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
-public import CCDN.Height.CountingHypotheses
 public import CCDN.Plane.ScaledPlaneCount
 import CCDN.Algebra.HomogeneousSlice
 import CCDN.Plane.ScaledModelPosition

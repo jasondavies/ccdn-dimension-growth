@@ -11,7 +11,6 @@ public import CCDN.Determinant.SingularTangent
 import CCDN.Algebra.ModularPolynomialLift
 import CCDN.Determinant.OriginTruncationGenerators
 import Mathlib.FieldTheory.Finite.Polynomial
-import Mathlib.Tactic.LinearCombination
 
 /-! Lift singular local generators from the reduction modulo p. The
 remaining error is an explicit multiple of p, with a separate high-order term. -/

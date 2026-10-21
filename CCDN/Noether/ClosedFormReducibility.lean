@@ -7,10 +7,7 @@ module
 
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateTotalDegree
-import Mathlib.RingTheory.DedekindDomain.Basic
-import Mathlib.RingTheory.Polynomial.GaussLemma
 import Mathlib.RingTheory.Polynomial.IsIntegral
-import Mathlib.RingTheory.Valuation.ValuationRing
 import CCDN.ForMathlib.Polynomial
 import CCDN.Noether.BivariateFactorForms
 import Mathlib.FieldTheory.RatFunc.AsPolynomial

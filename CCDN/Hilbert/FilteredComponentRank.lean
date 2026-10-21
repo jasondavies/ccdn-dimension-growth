@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredPrimeDecomposition
-public import CCDN.Hilbert.FilteredIntersection
 /-! Separating prime components makes their filtered dimensions
 additive up to a fixed degree shift. -/
 

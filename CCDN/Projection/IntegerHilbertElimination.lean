@@ -9,7 +9,6 @@ public import CCDN.Projection.BoundedLinearElimination
 public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Noether.GenericPlaneStretch
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
-import Mathlib.Tactic.FieldSimp
 
 /-!
 Bounded integral linear elimination with integer coefficients.

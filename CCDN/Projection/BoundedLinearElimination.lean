@@ -10,7 +10,6 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Algebra.IntegerPolynomialAvoidance
-import CCDN.AuxiliaryPolynomial.HypersurfaceGoodDirection
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 import CCDN.ForMathlib.MvPolynomial
 

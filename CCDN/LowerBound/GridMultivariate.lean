@@ -7,9 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
 import CCDN.LowerBound.GridCurveConstruction
-import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.SimpleRing.Principal
-import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 
 /-! Enlarging the ambient affine space preserves the irreducible grid equation. -/

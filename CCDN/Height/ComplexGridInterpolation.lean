@@ -9,8 +9,7 @@ public import Mathlib.Algebra.Polynomial.Degree.Defs
 public import Mathlib.Algebra.Polynomial.Eval.Defs
 public import Mathlib.Analysis.Complex.Norm
 import Mathlib.LinearAlgebra.Lagrange
-import ArithmeticHeights.Absolute
-import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+import Mathlib.Analysis.Complex.Basic
 
 /-! Sharp coefficient control from the integer grid. The absolute coefficient
 sum of each Lagrange basis polynomial is at most a binomial coefficient;

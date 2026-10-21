@@ -6,10 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Statements
-public import CCDN.Height.ProjectiveZeroLocus
-public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
 import CCDN.Hypersurface.AffineHypersurfaceCount
 import CCDN.Hilbert.PrimeIdealDimensionDrop

@@ -12,7 +12,6 @@ import CCDN.Noether.FormalPlaneBranch
 import CCDN.ForMathlib.PowerSeries
 import CCDN.Hilbert.PlaneHilbert
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
-import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.SimpleRing.Principal
 
 /-! A formal plane parameterization with a free coordinate has exactly the

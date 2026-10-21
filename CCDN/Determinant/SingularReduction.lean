@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.SingularPlaneChart
 public import CCDN.Plane.FiniteFieldConstants
 import CCDN.Determinant.BlockDeterminant
 public import CCDN.Determinant.PlaneMultiplicity

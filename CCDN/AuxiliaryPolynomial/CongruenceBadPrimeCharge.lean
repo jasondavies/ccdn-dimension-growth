@@ -8,7 +8,6 @@ module
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimes
 public import CCDN.Plane.IntegerPlaneLogHeight
-public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.AuxiliaryPolynomial.BadPrimeCharge
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeHeight

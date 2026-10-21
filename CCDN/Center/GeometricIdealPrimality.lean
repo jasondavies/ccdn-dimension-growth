@@ -9,8 +9,6 @@ public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.PolynomialLinearDescent
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Algebra.IdealScalarDescent
-import CCDN.Hilbert.ScalarExtension
-import CCDN.Algebra.ProjectionScalarExtension
 import Mathlib.RingTheory.Nullstellensatz
 
 /-! Primality of polynomial ideals over an algebraically closed field

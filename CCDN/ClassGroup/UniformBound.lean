@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.TwoTorsion
 public import CCDN.ClassGroup.NoIndexTwoClassGroupBound
 import CCDN.ClassGroup.BalancedGenerator
 import CCDN.ClassGroup.DiscriminantPrimeIdealCover

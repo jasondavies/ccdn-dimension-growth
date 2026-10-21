@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.ResidueEdgeCount
-public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Surface.NonlinearCount
 /-! The finite residue-edge cover and its complete counting bound. -/
 

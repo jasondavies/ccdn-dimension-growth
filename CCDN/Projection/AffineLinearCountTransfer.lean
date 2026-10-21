@@ -9,10 +9,8 @@ public import CCDN.Algebra.IntegerLinearForms
 public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Determinant.PolynomialMapDeterminant
-import CCDN.Projection.ProjectiveLinearCountTransfer
 import CCDN.Projection.AffineProjectionCount
 /-! Integral-point counts under an integer linear projection.
 In the application, the finite-fiber hypothesis follows from normalization. -/

@@ -6,11 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.FiniteFieldConstants
-public import Aesop.BuiltinRules
-public import Mathlib.Algebra.Group.Nat.Defs
-public import Mathlib.Tactic.ToDual
-import ArithmeticHeights.Absolute
 import Mathlib.Algebra.Order.Star.Int
+import Mathlib.Tactic.Linarith
 
 /-! Integer parameters for the Stepanov construction above the cutoff
 `stepanovThreshold d = 27 * d ^ 4`. -/

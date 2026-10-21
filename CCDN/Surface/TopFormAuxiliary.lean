@@ -5,9 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Height.ScaledHypersurfaceHeight
 import CCDN.Surface.TopFormAuxiliaryEstimate

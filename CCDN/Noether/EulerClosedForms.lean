@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.BivariateCoefficientMatrix
-import CCDN.Noether.BivariateTotalDegree
 import CCDN.Noether.ClosedFormGradient
 import CCDN.Noether.ClosedFormScaling
 /-! The Euler constraint removes the gradient kernel from the bivariate

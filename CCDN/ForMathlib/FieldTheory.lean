@@ -6,12 +6,8 @@ Authors: Jason Davies
 module
 
 public import Mathlib.FieldTheory.Separable
-public import Mathlib.Algebra.Field.Defs
-public import Mathlib.Algebra.Group.Units.Hom
-public import Mathlib.Algebra.Ring.Equiv
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.FieldTheory.PrimitiveElement
-import Mathlib.Tactic.LinearCombination
 
 /-!
 # Counting monic divisors and intermediate fields; Hilbert 90 for an involution

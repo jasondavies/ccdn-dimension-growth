@@ -7,7 +7,6 @@ module
 
 public import CCDN.Hypersurface.UniversalHyperplaneRestriction
 public import CCDN.Noether.UniversalHomogeneousForm
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Hypersurface.CoefficientwiseSubstitution
 import CCDN.Hypersurface.GoodHyperplaneReindex
 import CCDN.Noether.UniversalNoetherForms

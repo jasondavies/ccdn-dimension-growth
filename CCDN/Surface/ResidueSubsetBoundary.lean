@@ -7,16 +7,10 @@ module
 
 public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
 public import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic.NormNum.Prime
-import Mathlib.Tactic.NormNum.Ordinal
-import Mathlib.Tactic.NormNum.NatLog
-import Mathlib.Tactic.NormNum.ModEq
-import Mathlib.Tactic.NormNum.IsSquare
-import Mathlib.Tactic.NormNum.Irrational
-import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
-import Mathlib.Tactic.Echelon.Zsqrtd
-import Mathlib.Algebra.Order.Floor.Semifield
-import Mathlib.Data.Nat.Factorial.DoubleFactorial
+import Mathlib.Tactic.Linarith
+import Mathlib.Data.Finset.Powerset
+import Mathlib.Data.Finset.Max
+import Mathlib.Algebra.BigOperators.Group.Finset.Basic
 /-! Finite subset selection for the residue cover. A minimal modulus
 crosses its target by at most one prime factor. A change of containment
 then occurs across a single deletion edge. -/

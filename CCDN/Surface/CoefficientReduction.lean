@@ -9,7 +9,6 @@ public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import CCDN.Height.PrimitiveIntegerPolynomial
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount

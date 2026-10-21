@@ -7,9 +7,6 @@ module
 
 public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Height.ProjectiveZeroLocus
-public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.LowerBound.GridAffineLowerBound
 import CCDN.LowerBound.GridProjectiveLowerBound

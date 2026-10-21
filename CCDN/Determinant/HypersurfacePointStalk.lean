@@ -9,7 +9,6 @@ public import CCDN.Determinant.HypersurfaceOriginStalk
 public import CCDN.Algebra.AffineTranslation
 public import CCDN.Determinant.LocalizationAdicLayer
 public import CCDN.Determinant.HypersurfaceHilbert
-public import CCDN.ForMathlib.IdealPowerLayer
 import CCDN.Determinant.HypersurfaceTangentEquality
 import CCDN.AuxiliaryPolynomial.AffineTranslationCount
 

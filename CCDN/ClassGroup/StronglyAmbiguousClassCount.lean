@@ -7,13 +7,11 @@ module
 
 public import CCDN.ClassGroup.QuadraticInvariantFactorization
 public import CCDN.ClassGroup.QuadraticAmbiguousClassBound
-public import Mathlib.RingTheory.ClassGroup.ExtendedHom
 import CCDN.ClassGroup.DiscriminantPrimeIdealCover
 import CCDN.ClassGroup.InvariantIdealIntegralRepresentative
 import CCDN.ClassGroup.QuadraticInvariantIdeals
 import CCDN.ClassGroup.QuadraticNormConjugation
 import CCDN.ForMathlib.FiniteGroupPowerTorsion
-import Mathlib.Tactic.Measurability.Init
 
 /-!
 The two-torsion in the strongly ambiguous class group is

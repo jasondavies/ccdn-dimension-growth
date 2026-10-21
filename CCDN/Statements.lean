@@ -5,15 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.IdealZeroLocus
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Height.Box
-public import CCDN.Height.ProjectiveBox
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 # Statements of the main results

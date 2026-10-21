@@ -6,12 +6,10 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.Localization.FractionRing
-public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.MvPolynomial.Localization
-import Mathlib.RingTheory.Localization.Integer
 
 /-!
 # Fraction fields of localizations, polynomial rings and finite extensions

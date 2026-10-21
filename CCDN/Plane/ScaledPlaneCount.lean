@@ -8,7 +8,6 @@ module
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.PrimitiveIntegerPolynomial
-public import CCDN.Height.Box
 import CCDN.Plane.ScaledModelCoordinates
 import CCDN.Plane.ScaledModelPosition
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount

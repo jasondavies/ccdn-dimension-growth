@@ -6,9 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineMinimum
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.AuxiliaryPolynomial.UnscaledAffineMinimum
 import CCDN.AuxiliaryPolynomial.LiteralScaledAuxiliary
 import CCDN.AuxiliaryPolynomial.AffineHeightCutoff

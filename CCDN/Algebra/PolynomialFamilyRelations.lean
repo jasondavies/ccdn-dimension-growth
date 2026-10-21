@@ -8,11 +8,8 @@ module
 public import Mathlib.Algebra.Polynomial.Eval.Defs
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.Finiteness.Defs
-public import Mathlib.Algebra.Algebra.Defs
 import CCDN.Algebra.PolynomialKernelOrigin
 import Mathlib.LinearAlgebra.FreeModule.PID
-import Mathlib.Algebra.Polynomial.Degree.Support
-import Mathlib.Algebra.Polynomial.Eval.Coeff
 
 /-!
 Relations among a finite family of algebra-valued polynomials can be

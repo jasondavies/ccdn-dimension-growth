@@ -10,7 +10,6 @@ public import CCDN.Determinant.FiltrationWeights
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Determinant.WeightedSequenceEstimate
 import CCDN.Determinant.InfiniteWeightEnumeration
-import CCDN.Determinant.PlaneMultiplicity
 import CCDN.AuxiliaryPolynomial.AffineTranslationCount
 /-! The exact local weight-sequence estimate for hypersurface stalks.
 The uniform error is dimension plus one. Every positive-dimensional

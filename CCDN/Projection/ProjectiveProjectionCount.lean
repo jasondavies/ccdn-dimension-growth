@@ -7,7 +7,6 @@ module
 
 public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Projection.DegreePreservingProjectionBox
-import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Projection.BoundedDegreePreservingProjection
 import CCDN.Projection.ProjectivePlaneProjection

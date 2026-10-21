@@ -7,7 +7,6 @@ module
 
 public import CCDN.Algebra.MonomialEvaluationMatrix
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-public import CCDN.Height.Box
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 
 /-!

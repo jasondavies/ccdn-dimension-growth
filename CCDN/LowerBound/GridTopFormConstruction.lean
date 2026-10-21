@@ -5,8 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.HomogeneousLinearDescent
 import Mathlib.Algebra.MvPolynomial.Nilpotent

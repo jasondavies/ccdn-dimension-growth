@@ -8,7 +8,6 @@ module
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.LinearAlgebra.LinearIndependent.Defs
 import Mathlib.Algebra.MvPolynomial.CommRing
-import Mathlib.Data.Sym.Sym2.Init
 import Mathlib.Algebra.BigOperators.Fin
 import Mathlib.Tactic.Ring
 /-!

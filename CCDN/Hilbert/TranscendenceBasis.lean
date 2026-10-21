@@ -13,7 +13,6 @@ import Mathlib.RingTheory.AlgebraicIndependent.AlgebraicClosure
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
 import CCDN.Hilbert.CoordinateIndependence
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
 /-!
 The constructed Hilbert dimension equals transcendence-basis cardinality.

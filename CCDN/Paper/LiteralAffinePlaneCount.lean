@@ -6,9 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
-public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
 import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.AuxiliaryPolynomial.LiteralAffineAuxiliaryTheorem

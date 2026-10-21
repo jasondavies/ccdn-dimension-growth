@@ -7,13 +7,10 @@ module
 
 public import CCDN.ClassGroup.LatticePrescribedMinima
 public import CCDN.ClassGroup.NumberFieldEuclideanLattice
-public import Mathlib.Algebra.Module.ZLattice.Covolume
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.ClassGroup.EuclideanNumberFieldBasis
 import CCDN.ClassGroup.FieldBasisMultiplicationProduct
 import CCDN.ClassGroup.LatticeMinimaFlag
 import CCDN.ClassGroup.LatticeMinimaProduct
-import Mathlib.Algebra.Order.Algebra
 
 /-!
 Short independent algebraic integers at the uniform discriminant-root

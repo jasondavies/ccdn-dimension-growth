@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Order.Archimedean.Real.Basic
 public import Mathlib.Data.Int.Interval
-public import Mathlib.Data.Fintype.Pi
 public import Mathlib.Algebra.MvPolynomial.Eval
 
 /-!

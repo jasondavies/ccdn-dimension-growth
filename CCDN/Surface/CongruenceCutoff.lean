@@ -6,8 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.CongruenceAuxiliary
-public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.AuxiliaryPolynomial.HypersurfaceRankArchimedean
 import Mathlib.Algebra.Order.Star.Real
 /-! Numerical degree selection for the smooth-congruence auxiliary on a

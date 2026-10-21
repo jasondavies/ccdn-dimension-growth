@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.ProjectiveLocalDeterminant
-public import CCDN.Height.Box
 import CCDN.Height.ProjectiveZeroLocus
 
 /-! Projective reduction of primitive integer points, and the affine

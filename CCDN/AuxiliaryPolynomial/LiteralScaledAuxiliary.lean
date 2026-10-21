@@ -6,10 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
-public import CCDN.Algebra.ScaledHomogenization
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.AuxiliaryPolynomial.AffineChartAbsoluteAuxiliary
 import CCDN.AuxiliaryPolynomial.ScaledAuxiliaryCount

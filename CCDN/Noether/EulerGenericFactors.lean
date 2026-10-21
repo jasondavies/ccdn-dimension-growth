@@ -7,7 +7,6 @@ module
 
 public import CCDN.Noether.EulerFactorKernel
 public import CCDN.Noether.EulerUniversalForms
-public import Mathlib.Tactic.Continuity
 import CCDN.Noether.EulerPairBasisValues
 import CCDN.Noether.ShearNormalization
 

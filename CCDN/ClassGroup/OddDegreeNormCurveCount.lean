@@ -7,9 +7,6 @@ module
 
 public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
 public import CCDN.ClassGroup.NormPolynomial
-public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Plane.AffinePlaneBadPrimeCount
 import CCDN.ClassGroup.OddDegreeNormCurveBaseChange
 import CCDN.ClassGroup.OddDegreeNormCurves

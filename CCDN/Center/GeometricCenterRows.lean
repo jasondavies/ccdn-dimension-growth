@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.IntegerLinearForms
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Hilbert.FilteredHilbertPolynomial

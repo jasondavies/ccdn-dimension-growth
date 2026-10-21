@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialLinearDescent
-public import Mathlib.RingTheory.Ideal.Maps
 import CCDN.Hilbert.ScalarExtension
 import Mathlib.LinearAlgebra.Dual.Lemmas
 /-! Coefficient-linear descent detects nonmembership in scalar-extended

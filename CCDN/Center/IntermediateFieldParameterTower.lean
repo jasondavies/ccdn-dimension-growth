@@ -7,7 +7,6 @@ module
 
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import Mathlib.Algebra.Order.Field.Basic
-import Mathlib.Tactic.ContinuousFunctionalCalculus
 
 /-! Explicit generators for intermediate fields obtained by adjoining
 parameters after a coefficient-field extension. -/

@@ -10,9 +10,6 @@ public import CCDN.Algebra.AffineLineLeading
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
-public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import CCDN.Plane.IntegralAffineLine
 import CCDN.Algebra.BinaryHomogeneousIrreducibility
 import CCDN.Determinant.PlaneSingularities
@@ -20,7 +17,6 @@ import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Surface.LineDirections
 import CCDN.Surface.TopFormIrreducibility
-import Mathlib.Algebra.Order.Star.Rat
 /-! Directional derivatives of surfaces with absolutely irreducible top form. -/
 
 @[expose] public section

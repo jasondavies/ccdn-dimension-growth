@@ -8,11 +8,7 @@ module
 public import CCDN.Algebra.CharZeroOrGT
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Derivation.MapCoeffs
-public import Mathlib.RingTheory.Derivation.DifferentialRing
-public import Mathlib.Algebra.Polynomial.Derivative
 import CCDN.Noether.DifferentialResidue
-import Mathlib.Data.Nat.Totient
-import Mathlib.Tactic.ContinuousFunctionalCalculus
 
 /-!
 A low-degree algebraic relation detects differential constants.

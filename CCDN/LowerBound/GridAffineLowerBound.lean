@@ -6,13 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.LowerBound.GridCurveConstruction
 import CCDN.LowerBound.GridLowerBoundNumerics
-import Mathlib.Algebra.Order.Star.Rat
 
 /-! Affine counts supplied by finite Cartesian grids. -/
 

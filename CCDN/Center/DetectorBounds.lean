@@ -11,7 +11,6 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Algebra.ProjectiveChartScalarExtension
 import CCDN.Center.GeometricProjectiveCurveProjection
 import CCDN.Center.ProjectiveClosureRecovery
-import CCDN.Center.ProjectiveIncidencePermutation
 import CCDN.Hilbert.PolynomialComparison
 import CCDN.Hypersurface.ZeroDimensionalGeometricPoint
 /-! Numerical bounds for the row-resultant good-center detector. Its degree

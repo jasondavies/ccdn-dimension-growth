@@ -7,8 +7,6 @@ module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
-public import CCDN.Height.ProjectiveZeroLocus
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.AuxiliaryPolynomial.HypersurfaceProjectiveAuxiliary
 import CCDN.AuxiliaryPolynomial.HypersurfaceNonabsoluteAuxiliary

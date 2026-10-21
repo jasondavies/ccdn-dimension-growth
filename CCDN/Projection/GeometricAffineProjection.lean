@@ -8,22 +8,14 @@ module
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
 public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
-public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import CCDN.Projection.ProjectiveClosureProjection
-public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
-public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Projection.AffineLinearCountTransfer
 import CCDN.Projection.BoundedDegreeNormalizationFiber
 import CCDN.Projection.ClosureProjectionBirational
 import CCDN.Algebra.ProjectionScalarExtension
-import CCDN.Projection.ProjectiveClosureSpecialization
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import CCDN.Projection.HomogeneousFiniteProjectionDegree
-import CCDN.Projection.IntegralProjectionHilbert
 import CCDN.Projection.LinearParameterPrimitive
 import CCDN.Projection.LeadingCoordinateExtension
 

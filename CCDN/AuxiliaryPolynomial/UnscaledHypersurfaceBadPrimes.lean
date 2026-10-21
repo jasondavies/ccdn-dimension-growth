@@ -7,11 +7,8 @@ module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.Algebra.ScaledHomogenization
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.ScaledHypersurfaceModel
-import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
-import CCDN.AuxiliaryPolynomial.ScaledHypersurfaceBadPrimes
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import CCDN.ForMathlib.MvPolynomial
 /-! Comparison with the affine bad-prime factor. For degree at least two the

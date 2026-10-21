@@ -6,8 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.ProjectiveAuxiliaryHeightRanges
-public import CCDN.Algebra.PolynomialPredicates
-public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
 import CCDN.Plane.HomogeneousLeadingCoefficient
 
 /-!

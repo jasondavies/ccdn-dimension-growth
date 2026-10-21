@@ -7,9 +7,7 @@ module
 
 public import CCDN.Center.ChowNestedIncidence
 public import CCDN.Center.PolynomialCoefficientNormalizationRank
-public import CCDN.Center.ChowLastRowSplit
 public import CCDN.Center.GenericLinearPowerBasis
-public import CCDN.ForMathlib.FractionRing
 import CCDN.Center.GenericLinearParameterField
 import CCDN.Center.IntermediateFieldParameterTower
 import CCDN.Center.PolynomialCoordinateEmbeddings

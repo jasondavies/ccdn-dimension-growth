@@ -7,9 +7,6 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.ProjectiveZeroLocus
-public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Analysis.DegreeDependenceNumerics
 import CCDN.LowerBound.GridHypersurfaceLowerBound
 import CCDN.LowerBound.GridProjectiveLowerBound

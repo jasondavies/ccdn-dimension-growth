@@ -7,7 +7,6 @@ module
 
 public import CCDN.ClassGroup.QuadraticInvariantIdeal
 import CCDN.ClassGroup.FractionalIdealConjugation
-import Mathlib.Tactic.Measurability.Init
 /-! An invariant fractional ideal has an invariant integral
 representative in the same ideal class. Multiplying a denominator by
 its conjugate makes the denominator clearing compatible with the

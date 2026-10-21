@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.EulerGenericFactors
-public import CCDN.Noether.EulerPairBasis
 import CCDN.Noether.EulerPairSpecialization
 import CCDN.ForMathlib.Matrix
 

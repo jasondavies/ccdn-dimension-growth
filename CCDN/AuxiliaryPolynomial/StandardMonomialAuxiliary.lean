@@ -8,9 +8,7 @@ module
 import all ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.MonomialEvaluationMatrix
 public import CCDN.ForMathlib.StandardExponents
-public import CCDN.Height.Box
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-public import Mathlib.Tactic.Continuity
 import CCDN.Algebra.RowSelection
 import CCDN.Algebra.RowSelection
 

@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousChart
-public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.ProjectiveBox
 public import CCDN.Plane.ScaledPlaneCount
 import CCDN.Algebra.HomogeneousChartIrreducible

@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.ClosureNormalizationInfinite

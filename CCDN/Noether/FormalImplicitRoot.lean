@@ -9,10 +9,7 @@ public import Mathlib.Algebra.Polynomial.Derivative
 public import Mathlib.RingTheory.PowerSeries.Basic
 import CCDN.ForMathlib.Polynomial
 import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
-import Mathlib.Data.Nat.Factorial.DoubleFactorial
 import Mathlib.RingTheory.SimpleRing.Principal
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.Tactic.LinearCombination
 
 /-! A simple root over the constant field lifts to a formal power
 series root. Newton iteration and coefficient stabilization prove existence. -/

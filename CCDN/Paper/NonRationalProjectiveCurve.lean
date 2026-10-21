@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hypersurface.NonRationalProjectiveCount
 import CCDN.Hypersurface.LowDegreePointSeparation
 import CCDN.Hypersurface.ProjectiveCoefficientExtension

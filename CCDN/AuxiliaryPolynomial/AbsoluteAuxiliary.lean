@@ -6,11 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.PositionedAuxiliary
-public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Algebra.ProjectiveTranslation
-public import CCDN.Algebra.HomogeneousTranslation
-public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimes
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
 import CCDN.AuxiliaryPolynomial.HypersurfacePositionHeight
 

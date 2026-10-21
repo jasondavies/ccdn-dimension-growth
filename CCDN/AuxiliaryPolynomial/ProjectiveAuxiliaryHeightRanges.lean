@@ -8,11 +8,9 @@ module
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeComparison
 public import CCDN.AuxiliaryPolynomial.HypersurfaceNormalizedComparison
-public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.AuxiliaryPolynomial.HypersurfaceLargeHeightDegree
 public import CCDN.AuxiliaryPolynomial.HypersurfaceSmallHeightDegree
 public import CCDN.Height.ProjectiveZeroLocus
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.AuxiliaryPolynomial.HypersurfaceLargeHeightAuxiliary
 import CCDN.AuxiliaryPolynomial.HypersurfaceProjectiveAuxiliary
 /-! The two positioned auxiliary estimates for the entire bounded projective

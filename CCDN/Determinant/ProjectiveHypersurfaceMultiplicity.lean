@@ -6,17 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
-public import Mathlib.Algebra.Field.ZMod
-public import Mathlib.Algebra.MvPolynomial.PDeriv
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Determinant.PlaneMultiplicitySmooth
 import CCDN.Algebra.CharZeroOrGT
 import CCDN.Determinant.PlaneSingularities
 import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Height.FiniteFieldSectionCount
-import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
-import Mathlib.RingTheory.Polynomial.UniqueFactorization
-import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.SimpleRing.Principal
 
 /-!

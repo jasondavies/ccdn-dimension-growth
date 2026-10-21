@@ -6,8 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.ProjectiveHypersurfaceLocal
-public import CCDN.Height.Box
-public import CCDN.Determinant.PlaneMultiplicity
 import all ArithmeticHeights.BombieriVaaler
 import CCDN.Determinant.PlaneMultiplicitySmooth
 

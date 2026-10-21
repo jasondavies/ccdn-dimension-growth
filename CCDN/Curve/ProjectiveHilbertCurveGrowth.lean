@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveBox
 public import CCDN.Hilbert.FilteredHilbertPolynomial

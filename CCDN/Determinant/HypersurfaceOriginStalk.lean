@@ -7,9 +7,9 @@ module
 
 public import CCDN.Determinant.SingularTangent
 public import CCDN.ForMathlib.IdealPowerLayer
+import Mathlib.RingTheory.MvPolynomial.Ideal
 import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.LocalRing.Defs
-import Mathlib.RingTheory.MvPolynomial.Ideal
 
 /-!
 The coordinate ring of a hypersurface and its origin ideal. The

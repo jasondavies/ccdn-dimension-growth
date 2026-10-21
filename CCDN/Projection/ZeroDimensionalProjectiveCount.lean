@@ -10,7 +10,6 @@ public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveBox
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
-import CCDN.Projection.ProjectiveLinearCountTransfer
 import CCDN.Projection.BoundedIntegerNormalization
 import CCDN.Projection.BoundedDegreeNormalizationFiber
 import CCDN.Algebra.ProjectiveFiniteFibers

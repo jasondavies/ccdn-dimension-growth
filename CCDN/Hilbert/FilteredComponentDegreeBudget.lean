@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FilteredIntersection
 public import CCDN.Hilbert.FilteredPrimeDecomposition
 import CCDN.Algebra.BinomialSectionBound
 import CCDN.Hilbert.FilteredComponentRank

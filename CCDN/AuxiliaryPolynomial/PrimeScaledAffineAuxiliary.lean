@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.Algebra.ScaledHomogenization
 import CCDN.Algebra.ScaledHypersurfaceModel

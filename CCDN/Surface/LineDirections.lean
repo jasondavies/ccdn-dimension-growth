@@ -10,11 +10,7 @@ public import CCDN.Algebra.AffineLineLeading
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
-public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Surface.TopFormIrreducibility
-import Mathlib.Algebra.Order.Star.Rat
 import CCDN.ForMathlib.MvPolynomial
 /-! Directions of rational affine lines on a surface. Lines with two
 bounded integer points have a bounded projective direction and a spacing

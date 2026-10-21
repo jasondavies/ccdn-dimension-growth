@@ -7,8 +7,6 @@ module
 
 public import CCDN.ForMathlib.IntegerPolynomialL1
 public import CCDN.Noether.AmbientNoetherForms
-public import Mathlib.Algebra.Group.Nat.Defs
-public import Mathlib.Data.Nat.Factorial.Basic
 import CCDN.Noether.UniversalPlaneL1
 
 /-!

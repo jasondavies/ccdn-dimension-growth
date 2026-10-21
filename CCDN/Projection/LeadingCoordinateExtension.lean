@@ -8,9 +8,7 @@ module
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
-public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
-public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Hilbert.LinearCoordinates
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Projection.HilbertProjectionDegree

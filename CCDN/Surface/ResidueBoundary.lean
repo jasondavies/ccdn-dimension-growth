@@ -8,7 +8,6 @@ module
 public import CCDN.Surface.CongruenceFamily
 public import CCDN.Surface.CurveComponents
 public import CCDN.Surface.CongruencePrimeWindow
-public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Surface.ResidueSubsetBoundary
 import CCDN.Surface.SmoothPrimeWindow

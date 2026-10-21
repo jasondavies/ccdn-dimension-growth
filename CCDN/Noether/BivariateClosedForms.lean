@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Polynomial.Bivariate
 public import CCDN.Noether.RationalDifferential
-public import Mathlib.RingTheory.Derivation.MapCoeffs
 import Mathlib.FieldTheory.RatFunc.AsPolynomial
 import Mathlib.RingTheory.Polynomial.IsIntegral
 

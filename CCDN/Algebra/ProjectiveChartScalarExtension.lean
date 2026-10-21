@@ -10,7 +10,6 @@ public import CCDN.Algebra.PolynomialLinearDescent
 import CCDN.Algebra.HomogeneousLinearDescent
 import CCDN.Algebra.IdealScalarDescent
 import CCDN.Algebra.ScaledHypersurfaceModel
-import CCDN.Hilbert.ScalarExtension
 import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.ForMathlib.MvPolynomial
 /-! Projective affine charts commute with extension of coefficients.

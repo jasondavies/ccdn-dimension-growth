@@ -5,9 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.Polynomial.Derivative
 public import Mathlib.RingTheory.Polynomial.Resultant.Basic
-import Mathlib.Algebra.Polynomial.Taylor
 
 /-!
 # Finite differences, derivatives and resultants of univariate polynomials

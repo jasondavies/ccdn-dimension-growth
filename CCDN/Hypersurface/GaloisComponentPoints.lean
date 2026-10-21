@@ -6,8 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.IdealZeroLocus
-public import Mathlib.FieldTheory.Galois.Basic
-public import Mathlib.Tactic.Continuity
 public import Mathlib.FieldTheory.Galois.GaloisClosure
 import CCDN.Hilbert.AlgebraicHilbertDimension
 import CCDN.Hypersurface.GaloisPolynomialPrimes

@@ -7,8 +7,6 @@ module
 
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateTotalDegree
-public import CCDN.Noether.BivariateCoefficientMatrix
-public import Mathlib.LinearAlgebra.Matrix.Rank
 import CCDN.Noether.ClosedFormReducibility
 import CCDN.Noether.ClosedFormGradient
 

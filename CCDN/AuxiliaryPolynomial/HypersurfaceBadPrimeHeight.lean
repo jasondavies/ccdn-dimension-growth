@@ -9,11 +9,6 @@ public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.AuxiliaryPolynomial.DegreeBound
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimes
-public import CCDN.Height.IntegerCoefficientHeight
-public import CCDN.Noether.UniversalPlaneBadWitness
-public import CCDN.Noether.ClosedFormHeight
-public import CCDN.Plane.FiniteFieldBadPlanes
-public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import CCDN.AuxiliaryPolynomial.BadPrimeCharge
 import CCDN.Algebra.IntegerPolynomialAvoidance
 import CCDN.AuxiliaryPolynomial.UniversalPlaneBadReduction

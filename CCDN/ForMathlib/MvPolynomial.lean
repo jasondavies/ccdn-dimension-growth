@@ -7,9 +7,7 @@ module
 
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-public import Mathlib.Algebra.MvPolynomial.Degrees
 import Mathlib.Data.Sym.Card
-import Mathlib.Data.Finsupp.Multiset
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 
 /-!

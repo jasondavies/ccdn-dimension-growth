@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import CCDN.Projection.InfinityParameterReduction
 import CCDN.ForMathlib.LinearMap
 

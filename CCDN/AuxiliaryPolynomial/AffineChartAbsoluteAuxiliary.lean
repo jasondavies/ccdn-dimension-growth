@@ -7,9 +7,6 @@ module
 
 public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
 public import CCDN.AuxiliaryPolynomial.AffineChartPrimeDeterminant
-public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeComparison
-public import CCDN.Determinant.HypersurfaceDeterminantRank
-public import CCDN.Height.CountingHypotheses
 import CCDN.Algebra.AffineTranslation
 import all ArithmeticHeights.BombieriVaaler
 

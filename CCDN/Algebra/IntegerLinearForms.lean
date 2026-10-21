@@ -6,9 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.LinearForm
-import Mathlib.CategoryTheory.Category.Init
-import Mathlib.Tactic.NormNum.GCD
-import Mathlib.Data.Sym.Sym2.Init
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-! Integer matrices give linear forms. Composition is matrix
 multiplication, with an explicit coefficient-height bound. -/

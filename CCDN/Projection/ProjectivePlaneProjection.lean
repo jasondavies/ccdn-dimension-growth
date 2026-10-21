@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveChartIdeal
-public import CCDN.Algebra.ProjectiveAffineChart
 public import CCDN.Projection.DegreePreservingProjectionBox
 import CCDN.Determinant.PolynomialMapDeterminant
 import CCDN.Height.ProjectiveIntegerHeight

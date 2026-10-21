@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineMinimum
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
 import CCDN.AuxiliaryPolynomial.UnscaledAffineMinimum
 import CCDN.AuxiliaryPolynomial.HypersurfaceAuxiliaryTheorem
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceAuxiliary

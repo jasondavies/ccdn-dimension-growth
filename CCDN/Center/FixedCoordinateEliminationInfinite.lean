@@ -8,7 +8,6 @@ module
 public import CCDN.Projection.ProjectiveClosureProjection
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Projection.ProjectiveClosureSpecialization
-import CCDN.AuxiliaryPolynomial.HypersurfaceGoodDirection
 import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 import CCDN.Projection.FixedCoordinateElimination
 import CCDN.Projection.FixedCoordinateElimination

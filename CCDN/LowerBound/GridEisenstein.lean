@@ -7,15 +7,10 @@ module
 
 public import Mathlib.Algebra.Polynomial.Degree.Defs
 public import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Data.Nat.Totient
 import Mathlib.RingTheory.Polynomial.Eisenstein.Basic
-import Mathlib.Tactic.ContinuousFunctionalCalculus
 import Mathlib.RingTheory.SimpleRing.Principal
-import Mathlib.CategoryTheory.Category.Init
-import Mathlib.Tactic.NormNum.GCD
-import Mathlib.Data.Sym.Sym2.Init
-import Mathlib.Basic.NNReal.Defs
 import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+import Mathlib.Tactic.FieldSimp
 
 /-! Explicit absolutely irreducible equations through a Cartesian grid.
 The construction uses Eisenstein at the inner coordinate zero. -/

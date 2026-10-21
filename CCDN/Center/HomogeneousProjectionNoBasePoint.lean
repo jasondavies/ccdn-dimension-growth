@@ -5,10 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Hilbert.LinearProjectionFiltration
-public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Algebra.ProjectiveChartDegree
 
 /-!

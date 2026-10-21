@@ -9,8 +9,6 @@ public import CCDN.Algebra.HomogeneousChart
 public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
-public import CCDN.Height.ProjectiveBox
-public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.AuxiliaryPolynomial.ProjectiveAuxiliary

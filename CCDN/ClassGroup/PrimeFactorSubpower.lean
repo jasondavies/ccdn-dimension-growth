@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Tactic.Measurability.Init
 
 /-! A fixed exponential in the number of distinct prime factors is
 subpower. The proof splits the prime divisors at a fixed cutoff; above

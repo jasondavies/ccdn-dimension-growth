@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Hypersurface.GoodHyperplaneBounds
 /-! Transport of the constructed good hyperplane to coordinates suited to
 the universal Noether family. -/

@@ -6,9 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.AuxiliaryPolynomial.AffineLeadingTranslation
 import CCDN.AuxiliaryPolynomial.AffineAuxiliaryTranslationBound
 import CCDN.AuxiliaryPolynomial.AffineBadPrimeTranslation

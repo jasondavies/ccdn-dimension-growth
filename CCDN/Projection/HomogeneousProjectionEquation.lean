@@ -7,7 +7,6 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.LinearProjectionFiltration
-import CCDN.AuxiliaryPolynomial.HypersurfaceGoodDirection
 import CCDN.Projection.PlaneRelationSpace
 import CCDN.Projection.HomogeneousFilteredProjection
 import CCDN.ForMathlib.MvPolynomial

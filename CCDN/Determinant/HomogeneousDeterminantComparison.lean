@@ -8,15 +8,12 @@ module
 public import ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.HomogeneousMonomials
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
-public import CCDN.Height.Box
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Algebra.RowSelection
 import CCDN.AuxiliaryPolynomial.CoefficientBound
 import CCDN.Determinant.GramDeterminant
-import Mathlib.Data.Nat.Factorial.DoubleFactorial
 import Mathlib.Algebra.Order.Star.Int
-import Mathlib.Algebra.Order.Ring.Abs
 
 /-!
 The exact-rank Bombieri--Vaaler comparison when no integral auxiliary

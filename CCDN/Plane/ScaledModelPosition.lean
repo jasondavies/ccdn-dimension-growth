@@ -8,7 +8,6 @@ module
 public import CCDN.Plane.LeadingPositionHeight
 public import CCDN.Algebra.ScaledHomogenization
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Plane.HomogeneousLeadingCoefficient
 
 /-!

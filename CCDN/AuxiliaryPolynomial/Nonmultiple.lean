@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.Box
 public import CCDN.Height.ProjectiveZeroLocus
 
 /-!

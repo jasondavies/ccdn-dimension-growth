@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.ScalingPrime
 public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineHeight
 import CCDN.AuxiliaryPolynomial.PrimeScaledAffineHeight

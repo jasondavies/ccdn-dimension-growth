@@ -6,9 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic.GCongr
 import Mathlib.Tactic.Linarith
-import Mathlib.Tactic.NormNum
 import Mathlib.Tactic.Ring
 /-! The prime cutoff `27 d⁴` and the absolute constants of the finite-field point counts.
 

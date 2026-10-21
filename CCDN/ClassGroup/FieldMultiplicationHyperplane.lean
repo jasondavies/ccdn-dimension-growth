@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Algebra.Defs
 public import Mathlib.Algebra.Field.Defs
-import Mathlib.Tactic.Measurability.Init
 
 /-! The algebraic nondegeneracy input for the uniform shape estimate of
 a number-field lattice. Multiplication preserving a rational hyperplane

@@ -10,9 +10,6 @@ public import CCDN.Algebra.HomogeneousTranslation
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
 public import CCDN.Height.IntegerCoefficientHeight
-public import Mathlib.Basic.Real.Basic
-public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-public import CCDN.Height.Box
 import CCDN.Plane.HomogeneousLeadingCoefficient
 import CCDN.Plane.GridHeight
 import CCDN.ForMathlib.Log

@@ -8,9 +8,6 @@ module
 public import CCDN.Determinant.ProjectiveHypersurfaceReduction
 public import CCDN.Determinant.BlockDeterminant
 public import Mathlib.LinearAlgebra.Projectivization.Cardinality
-public import CCDN.Determinant.HypersurfaceLocalDeterminant
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import Mathlib.Tactic.Monotonicity.Lemmas
 import CCDN.Determinant.HypersurfaceMultiplicityEstimate
 
 /-!

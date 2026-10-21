@@ -8,7 +8,6 @@ module
 public import CCDN.Determinant.ProjectivePlaneResidueDeterminant
 public import CCDN.Determinant.SingularDeterminantCutoff
 public import CCDN.Height.CountingHypotheses
-public import CCDN.Plane.FiniteFieldConstants
 import CCDN.Determinant.PrimeAggregation
 import CCDN.Determinant.ProjectiveMultiplicity
 import CCDN.Algebra.HomogeneousChartIrreducible

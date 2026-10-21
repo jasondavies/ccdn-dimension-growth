@@ -6,11 +6,9 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Basic.Real.Basic
 public import Mathlib.Data.Finsupp.Weight
 public import Mathlib.Data.Matrix.Mul
 public import CCDN.Height.Box
-import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Tactic.Positivity
 

@@ -5,8 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ForMathlib.StandardExponents
-public import CCDN.Hilbert.FilteredIntersection
 public import CCDN.Algebra.MonomialRays
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.StandardMonomials

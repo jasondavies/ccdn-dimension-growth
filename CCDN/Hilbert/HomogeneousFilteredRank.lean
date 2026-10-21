@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredIntersection
 import Mathlib.NumberTheory.Height.NumberField
 import Mathlib.NumberTheory.Height.Projectivization

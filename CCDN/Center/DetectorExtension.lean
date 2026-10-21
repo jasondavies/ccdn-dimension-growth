@@ -6,9 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.BirationalCenterLocus
-public import CCDN.Center.MinorMatrix
-public import CCDN.Center.ChowLinearSpecialization
-public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.ResultantDetector
 import CCDN.Center.BirationalCenterLocus

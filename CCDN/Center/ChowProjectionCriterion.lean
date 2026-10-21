@@ -5,10 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.ChowLinearSpecialization
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
 import CCDN.Center.ChowPolynomialPower
 import CCDN.Center.ChowProjectionPower
 import CCDN.Center.ChowRowSymmetry

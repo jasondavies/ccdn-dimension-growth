@@ -9,7 +9,6 @@ public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.AuxiliaryPolynomial.CongruenceBadPrimeCharge
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceAuxiliary
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceBadPrimes

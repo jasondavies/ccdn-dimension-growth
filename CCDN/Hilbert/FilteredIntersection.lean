@@ -10,8 +10,6 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import CCDN.ForMathlib.LinearMap
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-!
 # Filtered multiples in a two-equation ideal

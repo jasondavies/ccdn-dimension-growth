@@ -6,15 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
-public import CCDN.Algebra.PolynomialPredicates
-public import Mathlib.Algebra.Order.AbsoluteValue.Basic
-public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import CCDN.Plane.HyperplanePlaneAvoidance
 import CCDN.Plane.IntegerPlaneHeight
 import Mathlib.Algebra.BigOperators.Field
 import CCDN.ForMathlib.MvPolynomial
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
-import Mathlib.LinearAlgebra.Matrix.Adjugate
 
 /-!
 Constructing a good rational hyperplane with a bounded integer normal.

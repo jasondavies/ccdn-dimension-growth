@@ -8,7 +8,6 @@ module
 public import CCDN.Determinant.FiltrationWeights
 import Mathlib.Order.Interval.Set.Nat
 import Mathlib.Algebra.Order.BigOperators.Group.Finset
-import Mathlib.Order.Interval.Finset.Defs
 import Mathlib.Algebra.Group.Action.Defs
 import Mathlib.Order.Interval.Finset.Nat
 

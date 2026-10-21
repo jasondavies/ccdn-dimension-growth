@@ -9,7 +9,6 @@ public import Mathlib.RingTheory.Ideal.Height
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import Mathlib.RingTheory.Ideal.UFD
 import Mathlib.RingTheory.IntegralClosure.GoingDown
-import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-!
 # Krull heights of contracted primes and of two-equation intersections

@@ -6,19 +6,10 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Basic.Real.Basic
 public import CCDN.Height.IntegerCoefficientHeight
-import Mathlib.Tactic.NormNum.Prime
-import Mathlib.Tactic.NormNum.Ordinal
-import Mathlib.Tactic.NormNum.NatLog
-import Mathlib.Tactic.NormNum.ModEq
-import Mathlib.Tactic.NormNum.IsSquare
-import Mathlib.Tactic.NormNum.Irrational
-import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
-import Mathlib.Tactic.Echelon.Zsqrtd
-import Mathlib.Tactic.Basify
-import Mathlib.Algebra.Order.Floor.Semifield
-import Mathlib.Data.Nat.Factorial.DoubleFactorial
+import Mathlib.Tactic.Ring
+import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+import Mathlib.Tactic.Linarith
 /-! Coefficient-height bounds for evaluating a polynomial on a bounded box.
 The constants depend only on total degree and the number of variables. -/
 

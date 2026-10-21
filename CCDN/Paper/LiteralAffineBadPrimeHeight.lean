@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
-public import CCDN.Height.IntegerCoefficientHeight
 /-! Corollary 3.2.3 for the literal affine bad-prime factor of Definition
 3.2.1, including degree drops which preserve irreducibility.
 Here "literal" means the paper's Definition 3.2.1 applied verbatim to the affine

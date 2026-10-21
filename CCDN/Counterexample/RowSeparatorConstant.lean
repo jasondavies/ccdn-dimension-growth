@@ -12,7 +12,6 @@ import Mathlib.Algebra.Order.Algebra
 import Mathlib.Algebra.Order.Field.Power
 import Mathlib.Analysis.Normed.Group.Basic
 import Mathlib.Data.EReal.Inv
-import Mathlib.Data.Nat.Totient
 import Mathlib.Tactic.LinearCombination
 
 /-! A counterexample to the numerical constant printed in CCDN Lemma 5.4.

@@ -5,13 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.MinorMatrix
-public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Center.ResultantForms
-public import CCDN.Center.ResultantCoefficientFamily
-public import CCDN.Center.GenericBlockLine
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Center.ChowProjectionCriterion
 import CCDN.Center.ChowRowSymmetry
 import CCDN.Center.ClosedFieldChowBirationalCriterion

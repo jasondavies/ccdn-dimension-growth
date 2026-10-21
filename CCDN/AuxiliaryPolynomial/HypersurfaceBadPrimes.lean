@@ -7,8 +7,6 @@ module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadReduction
 public import CCDN.Plane.FiniteFieldConstants
-public import Mathlib.Algebra.Field.ZMod
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.AuxiliaryPolynomial.UniversalPlaneBadReduction
 
 /-! The finite set of bad primes of an integer hypersurface. -/

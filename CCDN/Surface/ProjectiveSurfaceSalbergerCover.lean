@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Projection.ProjectivePlaneProjection
 public import CCDN.Surface.GeometricCurveCover

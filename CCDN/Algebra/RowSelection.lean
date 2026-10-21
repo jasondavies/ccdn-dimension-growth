@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Data.Matrix.Mul
 public import Mathlib.LinearAlgebra.LinearIndependent.Defs
 public import CCDN.Algebra.MonomialEvaluationMatrix
 import CCDN.ForMathlib.Matrix

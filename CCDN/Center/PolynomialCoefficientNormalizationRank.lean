@@ -7,9 +7,7 @@ module
 
 public import CCDN.Center.ScalarQuotientFractionField
 public import CCDN.Center.ChowIncidenceIdeal
-public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import CCDN.Center.FixedCoordinateGenericNormalization
 import CCDN.Center.GeometricIdealPrimality
 import CCDN.Center.IntermediateFieldParameterTower

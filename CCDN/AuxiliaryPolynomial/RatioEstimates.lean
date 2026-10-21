@@ -6,17 +6,9 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic.ReduceModChar
-import Mathlib.Tactic.NormNum.RealSqrt
-import Mathlib.Tactic.NormNum.Parity
-import Mathlib.Tactic.NormNum.NatSqrt
-import Mathlib.Tactic.NormNum.NatFib
-import Mathlib.Tactic.NormNum.LegendreSymbol
-import Mathlib.Tactic.NormNum.IsCoprime
-import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Rational
-import Mathlib.Tactic.Inclusion.Extension.Core.Core
-import Mathlib.NumberTheory.Chebyshev
-import ArithmeticHeights.Absolute
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.Ring
 /-! Reciprocal estimates retain the exact leading coefficients when solving
 the normalized determinant inequality, even when its bracket is negative. -/
 

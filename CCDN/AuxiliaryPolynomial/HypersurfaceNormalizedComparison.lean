@@ -7,8 +7,6 @@ module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceRankArchimedean
 public import CCDN.Determinant.HypersurfaceHeightDeterminant
-public import CCDN.Height.IntegerCoefficientHeight
-public import CCDN.Height.CountingHypotheses
 import CCDN.AuxiliaryPolynomial.HypersurfaceHeightComparison
 /-! The normalized higher-dimensional determinant inequality, retaining the
 exact root-rank and kernel-rank coefficients needed for uniform degree selection. -/

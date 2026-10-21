@@ -6,10 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ZeroColumnCenterDensity
-public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Center.MinorProjection
-public import CCDN.Projection.ImageFractionField
 public import CCDN.Center.MinorMatrix
 import CCDN.Center.GeometricProjectionHilbert
 import CCDN.ForMathlib.Matrix

@@ -8,18 +8,11 @@ module
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateClosedForms
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Mathlib.FieldTheory.RatFunc.Basic
-public import Mathlib.RingTheory.Derivation.DifferentialRing
-public import Mathlib.RingTheory.SimpleRing.Principal
-public import Mathlib.RingTheory.AdjoinRoot
-public import Mathlib.RingTheory.Derivation.MapCoeffs
 import CCDN.Noether.DifferentialResidue
 import CCDN.ForMathlib.Polynomial
 import Mathlib.RingTheory.Polynomial.IsIntegral
 import CCDN.Determinant.ResidueEliminantEvaluation
 import CCDN.Noether.DifferentialConstantRelation
-import Mathlib.Data.Nat.Totient
 
 /-!
 The monic irreducible closed-form criterion, in characteristic zero or in

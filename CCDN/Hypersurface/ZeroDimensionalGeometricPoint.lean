@@ -7,7 +7,6 @@ module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.FieldTheory.Galois.Basic
-public import Mathlib.Tactic.Continuity
 import CCDN.Hilbert.ScalarExtension
 import CCDN.Hypersurface.ZeroDimensionalPrimeDescent
 import Mathlib.RingTheory.Nullstellensatz

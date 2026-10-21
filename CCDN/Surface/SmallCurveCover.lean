@@ -7,8 +7,6 @@ module
 
 public import CCDN.Surface.ResidueCover
 public import CCDN.Hypersurface.SingularHypersurfaceCount
-public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Surface.CompleteIntersectionDegreeBudget
 /-! A small-curve and residual cover for a surface of controlled

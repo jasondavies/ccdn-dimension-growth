@@ -9,13 +9,10 @@ public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.PolynomialCoefficientDescent
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
-public import Mathlib.RingTheory.Ideal.Maps
 import CCDN.Center.GenericLinearIndependence
 import CCDN.Hilbert.TranscendenceBasis
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import CCDN.Projection.HilbertProjectionKernel
-import Mathlib.RingTheory.Polynomial.UniqueFactorization
-import Mathlib.RingTheory.SimpleModule.Basic
 
 /-!
 Generators and base change of the Chow incidence ideal. A nonzero polynomial-map kernel

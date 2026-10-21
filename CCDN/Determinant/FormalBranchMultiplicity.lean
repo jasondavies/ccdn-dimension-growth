@@ -12,7 +12,6 @@ import CCDN.Noether.FormalBranchOrder
 import CCDN.Hilbert.PlaneHilbert
 import Mathlib.RingTheory.PowerSeries.Inverse
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
-import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.SimpleRing.Principal
 
 /-! A proper plane section has total multiplicity at least N at no more

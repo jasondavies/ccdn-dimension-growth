@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.ScalingPrime
-import CCDN.Analysis.PrimeCutoff
 import CCDN.AuxiliaryPolynomial.BadPrimeCharge
 /-! A fixed multiplicative prime window has enough product to avoid every
 integer of prescribed logarithmic height, and only O(L/log L) primes.

@@ -7,8 +7,6 @@ module
 
 public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.HypersurfaceNormalizedComparison
-public import CCDN.Height.IntegerCoefficientHeight
-public import CCDN.Height.CountingHypotheses
 public import CCDN.AuxiliaryPolynomial.HypersurfaceLargeHeightDegree
 import CCDN.AuxiliaryPolynomial.PolynomialMapAuxiliary
 /-! Auxiliary polynomials in the large-height range. The degree is

@@ -7,15 +7,11 @@ module
 
 public import CCDN.Hilbert.FilteredPrimeDecomposition
 public import CCDN.Surface.CurveComponents
-public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Hilbert.FilteredComponentDegreeBudget
 import CCDN.Hilbert.PrimeComponentTranscendence
 import CCDN.Algebra.BinomialSectionBound
 import CCDN.Algebra.CoordinatePowerGeneration
 import CCDN.Hilbert.FilteredHilbertLinearity
-import CCDN.Hilbert.AffineCurveDegree
-import Mathlib.LinearAlgebra.Dimension.Constructions
-import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 
 /-!
 A finite decomposition of a proper affine surface section into

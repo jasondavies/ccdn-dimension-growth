@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.AffineAuxiliaryCases
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
 import CCDN.AuxiliaryPolynomial.AffineLeadingTranslation
 import CCDN.AuxiliaryPolynomial.AffineAuxiliaryTranslationBound
 import CCDN.AuxiliaryPolynomial.AffineBadPrimeTranslation

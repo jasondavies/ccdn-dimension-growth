@@ -6,9 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.LinearAlgebra.Matrix.Rank
-public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import Mathlib.LinearAlgebra.Matrix.Block
-import Mathlib.RingTheory.Ideal.Quotient.Basic
 
 /-!
 # Minors and determinants of matrices

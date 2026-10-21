@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ProjectiveChowIncidence
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Center.IncidenceDeterminantCertificate
 import CCDN.ForMathlib.Nullstellensatz
 import CCDN.Height.ProjectiveZeroLocus

@@ -9,8 +9,6 @@ public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.Algebra.Polynomial.Coeff
 public import Mathlib.Algebra.Polynomial.Eval.Defs
 import CCDN.Algebra.RadialMap
-import Mathlib.Algebra.Polynomial.Div
-import Mathlib.Algebra.Polynomial.Monomial
 
 /-!
 Simultaneous polynomial deformation in arbitrarily many parameters.

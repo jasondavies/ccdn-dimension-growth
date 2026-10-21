@@ -10,7 +10,6 @@ public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Projection.IntegralProjectionHilbert
 import CCDN.Projection.LinearNormalizationInfinite
-import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-! Integral polynomial parameters vanishing on a finite grid.

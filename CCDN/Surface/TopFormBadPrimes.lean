@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.Height.PrimitiveIntegerPolynomial
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount

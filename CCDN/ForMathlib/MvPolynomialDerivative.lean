@@ -6,9 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.PDeriv
-public import Mathlib.Algebra.CharP.Defs
 import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Finiteness.Attr
 
 /-!
 # Partial derivatives: the chain rule and vanishing derivatives

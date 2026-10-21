@@ -9,16 +9,12 @@ public import CCDN.ForMathlib.IntegerPolynomialL1
 public import CCDN.Noether.AmbientNoetherForms
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import CCDN.ForMathlib.Matrix
-public import CCDN.Noether.EulerPairBasis
-public import CCDN.Noether.UniversalPlane
 import CCDN.Noether.AmbientNoetherHeight
 import CCDN.Noether.AmbientNoetherVanishing
 import Mathlib.Data.Sym.Card
-import Mathlib.Data.Int.Interval
 import CCDN.Determinant.GenericPlaneEulerMinorCharZero
 import CCDN.Determinant.UniversalPlaneMinor
 import CCDN.Noether.EulerPairSpecialization
-import CCDN.Noether.EulerUniversalForms
 
 /-!
 A finite family of universal integer Noether forms, with the exact

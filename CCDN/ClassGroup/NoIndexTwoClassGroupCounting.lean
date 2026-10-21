@@ -6,10 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.SmallSubfieldIntegerCount
-public import CCDN.Statements
 public import CCDN.Plane.AffineNonzeroConstant
-public import CCDN.ClassGroup.NormPolynomial
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.ClassGroup.NormCurveExceptionalReduction
 import CCDN.ClassGroup.OddDegreeClassGroupCounting
 import CCDN.ClassGroup.OddDegreeNormCurveBaseChange

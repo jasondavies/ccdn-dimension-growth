@@ -6,11 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousChart
-public import CCDN.Height.PrimitiveIntegerPolynomial
-public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 import CCDN.Plane.Bezout
 import CCDN.ForMathlib.MvPolynomial

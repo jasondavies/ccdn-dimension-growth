@@ -7,7 +7,6 @@ module
 
 public import CCDN.Algebra.HomogeneousMonomials
 public import CCDN.Determinant.HeightDeterminant
-public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.CountingHypotheses
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Determinant.HomogeneousDeterminantComparison

@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Statements
 public import CCDN.Hypersurface.HyperplaneSlicingInduction
 import CCDN.Hypersurface.IntegerGoodHyperplaneSlices
 import CCDN.Surface.AffineSurfaceDimensionGrowth

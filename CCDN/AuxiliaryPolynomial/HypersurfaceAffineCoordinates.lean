@@ -6,9 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.CategoryTheory.Types.Basic
-public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.Tactic.LinearCombination
-public import Mathlib.Tactic.ReduceModChar
 public import CCDN.Algebra.OriginShift
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.ForMathlib.MvPolynomialDerivative

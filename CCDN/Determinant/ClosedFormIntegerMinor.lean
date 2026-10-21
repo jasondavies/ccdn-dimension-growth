@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.ClosedFormBaseChange
-public import Mathlib.LinearAlgebra.Matrix.Rank
 import CCDN.ForMathlib.Matrix
 /-! A nonzero integer minor of the closed-form coefficient matrix.
 Rank drop after reduction forces divisibility of this same integer. The

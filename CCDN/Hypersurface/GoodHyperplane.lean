@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.IntegerPolynomialAvoidance
 import CCDN.Hypersurface.EffectiveHyperplaneAvoidance
 import CCDN.Hypersurface.GoodHyperplaneReindex

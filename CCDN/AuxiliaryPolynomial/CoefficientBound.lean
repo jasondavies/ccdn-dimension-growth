@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.MonomialEvaluationMatrix
-public import CCDN.Height.Box
 
 /-!
 # Coefficient bounds for interpolation polynomials

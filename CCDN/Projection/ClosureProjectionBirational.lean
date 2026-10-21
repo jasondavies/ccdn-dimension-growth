@@ -7,7 +7,6 @@ module
 
 public import CCDN.Projection.ProjectiveClosureProjection
 public import CCDN.Algebra.ProjectiveChartDegree
-public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import CCDN.Algebra.ProjectiveClosureDegree
 import CCDN.Projection.CurveRationalInverse
 /-! A linear affine projection generating the function field also

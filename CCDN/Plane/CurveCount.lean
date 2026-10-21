@@ -5,12 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Statements
 public import CCDN.Plane.RationalPlaneAssembly
-public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Plane.FiniteFieldConstants
-public import Mathlib.Analysis.Real.Sqrt
-public import CCDN.Determinant.SingularReduction
 import CCDN.Plane.NonabsolutePlaneCount
 import CCDN.Plane.StepanovBound
 import CCDN.Plane.StepanovDimension

@@ -9,7 +9,6 @@ public import CCDN.Hypersurface.GraphHyperplaneRestriction
 import CCDN.Hypersurface.AffineHyperplaneSlice
 import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Surface.TopFormIrreducibility
-import Mathlib.Algebra.Order.Star.Rat
 import Mathlib.Algebra.BigOperators.Field
 import CCDN.ForMathlib.MvPolynomial
 /-! Integer equations for every parallel level of a constructed good

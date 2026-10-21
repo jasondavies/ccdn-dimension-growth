@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Tactic.Continuity
 import CCDN.Algebra.PolynomialLinearDescent
 import CCDN.Plane.Bezout
 import Mathlib.Algebra.MvPolynomial.Nilpotent

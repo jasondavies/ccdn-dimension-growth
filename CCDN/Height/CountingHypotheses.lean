@@ -7,12 +7,8 @@ module
 
 public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.Box
-public import Mathlib.Algebra.GCDMonoid.Finset
 public import Mathlib.Algebra.MvPolynomial.PDeriv
-public import Mathlib.Algebra.Order.Archimedean.Real.Basic
-public import Mathlib.Data.Matrix.Basic
 public import Mathlib.Data.ZMod.Basic
-public import Mathlib.LinearAlgebra.LinearIndependent.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!

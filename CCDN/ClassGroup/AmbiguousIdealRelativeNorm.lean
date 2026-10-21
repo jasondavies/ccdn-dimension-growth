@@ -9,7 +9,6 @@ public import Mathlib.RingTheory.ClassGroup.ExtendedHom
 public import Mathlib.NumberTheory.NumberField.Basic
 public import Mathlib.RingTheory.IntegralClosure.IntegralRestrict
 import Mathlib.RingTheory.Ideal.Norm.RelNorm
-import Mathlib.Tactic.Measurability.Init
 
 /-! Scalar comparisons for ambiguous ideal classes have relative norm
 equal to a unit of the base ring. This formulation works directly with

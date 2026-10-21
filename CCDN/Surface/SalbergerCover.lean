@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.GeometricCurveCover
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Surface.GeometricCoefficientReduction

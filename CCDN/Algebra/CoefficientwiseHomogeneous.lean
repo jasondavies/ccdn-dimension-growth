@@ -8,16 +8,6 @@ module
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.Tactic.Polynomial.Basic
-import Mathlib.Tactic.NormNum.Prime
-import Mathlib.Tactic.NormNum.Ordinal
-import Mathlib.Tactic.NormNum.NatLog
-import Mathlib.Tactic.NormNum.ModEq
-import Mathlib.Tactic.NormNum.IsSquare
-import Mathlib.Tactic.NormNum.Irrational
-import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
-import Mathlib.Tactic.Echelon.Zsqrtd
-import Mathlib.Algebra.Order.Floor.Semifield
-import Mathlib.Data.Nat.Factorial.DoubleFactorial
 import Mathlib.Algebra.MvPolynomial.CommRing
 /-! Homogeneity in the coefficient variables, while retaining independent
 polynomial parameters. This property survives determinant expansion and

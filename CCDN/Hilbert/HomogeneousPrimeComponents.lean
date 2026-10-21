@@ -8,7 +8,6 @@ module
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.PolynomialLinearDescent
 import CCDN.Algebra.IdealScalarDescent
-import CCDN.Hilbert.ScalarExtension
 import Mathlib.RingTheory.GradedAlgebra.Radical
 /-! Homogeneity survives coefficient extension and passage to
 minimal-prime components. The latter uses the prime homogeneous core. -/

@@ -8,7 +8,6 @@ module
 public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Hilbert.CompleteIntersectionGridBound
 import CCDN.Hypersurface.NonabsoluteSurfaceCount

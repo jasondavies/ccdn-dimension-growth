@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.GenericLinearParameterField
-import CCDN.Center.PolynomialCoefficientBasis
 import Mathlib.LinearAlgebra.FreeModule.PID
 
 /-!

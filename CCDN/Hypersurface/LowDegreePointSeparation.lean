@@ -9,7 +9,6 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.LinearProjectionFiltration
-public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Hypersurface.SmallOutsidePoint
 import CCDN.Projection.HilbertProjectionDegree
 import CCDN.Projection.IntegralProjectionClosedImage

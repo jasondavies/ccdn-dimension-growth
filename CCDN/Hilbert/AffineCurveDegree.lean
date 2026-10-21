@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredIntersection
-public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-!
 # The affine Hilbert degree of a curve

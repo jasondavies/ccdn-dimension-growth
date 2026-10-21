@@ -6,8 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
-public import CCDN.Height.IntegerCoefficientHeight
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!
 CCDN Lemma 4.2.3: replace the full coefficient height by any lower height

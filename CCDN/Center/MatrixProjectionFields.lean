@@ -7,7 +7,6 @@ module
 
 public import CCDN.Projection.ImageFractionField
 public import CCDN.Center.ChowLinearSpecialization
-public import Mathlib.Tactic.Continuity
 import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-! Kernel containment of matrices gives containment of their

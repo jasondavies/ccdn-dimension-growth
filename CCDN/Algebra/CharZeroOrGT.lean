@@ -7,10 +7,7 @@ module
 
 public import Mathlib.Algebra.CharP.Defs
 public import Mathlib.Algebra.Field.Defs
-public import Mathlib.Algebra.Ring.Hom.Defs
 import CCDN.ForMathlib.MvPolynomialDerivative
-import Mathlib.Algebra.CharP.Basic
-import Mathlib.Algebra.GroupWithZero.Units.Lemmas
 
 /-!
 # Characteristic zero or larger than a bound

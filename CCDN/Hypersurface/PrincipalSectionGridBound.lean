@@ -10,7 +10,6 @@ import CCDN.Hypersurface.PureVarietyGridBound
 import CCDN.Hilbert.PolynomialComparison
 import CCDN.Hilbert.ProperSectionHilbert
 import CCDN.Hypersurface.PrincipalSectionPurity
-import Mathlib.Algebra.Order.Star.Rat
 import Mathlib.Algebra.CharZero.Infinite
 /-! The exact degree and grid bound for a proper principal section.
 Both purity and the intersection multiplicity budget are derived from the

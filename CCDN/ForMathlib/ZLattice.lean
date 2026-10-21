@@ -5,17 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.Module.ZLattice.Basic
 public import Mathlib.Algebra.Module.ZLattice.Covolume
-public import Mathlib.Data.Fin.Tuple.Basic
-public import Mathlib.Order.Interval.Set.Defs
-public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
-public import Mathlib.Order.Interval.Finset.Fin
 import Mathlib.MeasureTheory.Group.GeometryOfNumbers
-import Mathlib.Algebra.BigOperators.Fin
-import Mathlib.Algebra.BigOperators.Intervals
-import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Order.Interval.Set.Fin
 
 /-!
 # Shortest lattice vectors, greedy flags and Blichfeldt's bound

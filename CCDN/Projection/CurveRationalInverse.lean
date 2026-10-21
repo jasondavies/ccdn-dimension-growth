@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.IdealZeroLocus
-public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import CCDN.Height.PrimitivePairReconstruction

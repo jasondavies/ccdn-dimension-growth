@@ -14,8 +14,6 @@ import CCDN.Determinant.PlaneSingularities
 import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Plane.Bezout
 import CCDN.Plane.FrobeniusSystem
-import Mathlib.LinearAlgebra.Dimension.Free
-import Mathlib.LinearAlgebra.Basis.VectorSpace
 /-! The Stepanov point bound with an explicit finite-dimensional inequality.
 The polynomial bases, auxiliary coefficients, formal branches and multiplicity
 argument are explicit, given a numerical choice of degrees. -/

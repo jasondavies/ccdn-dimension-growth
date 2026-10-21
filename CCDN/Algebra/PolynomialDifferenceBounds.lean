@@ -7,16 +7,7 @@ module
 
 public import Mathlib.Algebra.Polynomial.Degree.Defs
 public import Mathlib.Algebra.Polynomial.Eval.Defs
-import Mathlib.Tactic.Measurability.Init
 import Mathlib.Tactic.Polynomial.Basic
-import Mathlib.Tactic.NormNum.Prime
-import Mathlib.Tactic.NormNum.Ordinal
-import Mathlib.Tactic.NormNum.NatLog
-import Mathlib.Tactic.NormNum.ModEq
-import Mathlib.Tactic.NormNum.IsSquare
-import Mathlib.Tactic.NormNum.Irrational
-import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
-import Mathlib.Tactic.Echelon.Zsqrtd
 
 /-! Uniform first-order bounds for differences of monic polynomials with
 nonnegative coefficients. The error constant does not depend on the step. -/

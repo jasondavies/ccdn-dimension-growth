@@ -7,7 +7,6 @@ module
 
 public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.MvPolynomial
 import CCDN.Center.IndependentProjectionRows
 import CCDN.Projection.LinearParameterPrimitive

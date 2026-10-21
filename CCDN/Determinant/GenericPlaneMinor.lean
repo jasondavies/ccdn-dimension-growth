@@ -8,16 +8,11 @@ module
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Determinant.GenericPlaneSmoothness
 public import CCDN.ForMathlib.Matrix
-public import CCDN.Noether.BivariateTotalDegree
-public import Mathlib.Algebra.MvPolynomial.PDeriv
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Noether.ClosedFormScaling
 import CCDN.Noether.ShearNormalization
 import CCDN.Noether.FormalBranchBaseChange
-import Mathlib.RingTheory.TensorProduct.Quotient
-import Mathlib.Algebra.Ring.Hom.InjSurj
-import Mathlib.RingTheory.TensorProduct.MvPolynomial
 
 /-!
 A nonzero polynomial determinant in the generic slope parameters. For a

@@ -7,12 +7,10 @@ module
 
 public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.Height.IntegerCoefficientHeight
-public import CCDN.Height.ProjectiveZeroLocus
 public import ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.HomogeneousMonomials
 import CCDN.Determinant.HomogeneousDeterminantComparison
 import CCDN.Algebra.PrimitiveNormalization
-import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRank
 import CCDN.Algebra.RowSelection

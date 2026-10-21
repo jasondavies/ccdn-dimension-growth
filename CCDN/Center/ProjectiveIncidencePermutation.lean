@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectivePermutation
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.ProjectiveIncidenceClosed

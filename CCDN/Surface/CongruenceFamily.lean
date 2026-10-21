@@ -7,8 +7,6 @@ module
 
 public import CCDN.Surface.CongruenceCutoff
 public import CCDN.Determinant.SmoothAffineResidueClasses
-public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Height.IntegerCoefficientHeight
 /-! A coherent choice of proper auxiliaries for every finite
 smooth residue family. The structure stores conclusions of the determinant
 theorem; its existence is proved from the equation. -/

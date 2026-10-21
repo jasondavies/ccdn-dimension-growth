@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.FiniteFieldBadPlanes
-public import Mathlib.Tactic.Continuity
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.AuxiliaryPolynomial.PlaneBadPrimes

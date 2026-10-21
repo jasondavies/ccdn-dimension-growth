@@ -7,7 +7,6 @@ module
 
 public import CCDN.Center.UniversalCenterChowRestriction
 public import CCDN.Center.MinorMatrix
-public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.GenericBlockLine
 public import CCDN.Center.ResultantCoefficientFamily
 import CCDN.Center.GenericBlockLineHomogeneity
