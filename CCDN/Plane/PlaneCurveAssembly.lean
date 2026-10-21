@@ -8,7 +8,7 @@ module
 public import CCDN.Statements
 public import CCDN.Plane.RationalPlaneAssembly
 public import CCDN.Algebra.PolynomialPredicates
-import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Plane.NonabsolutePlaneCount
 /-! The complete rational plane reduction to sharp finite-field counting.
 The non-absolutely-irreducible case is bounded by d². -/
 

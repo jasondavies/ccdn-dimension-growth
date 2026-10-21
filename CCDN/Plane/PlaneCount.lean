@@ -8,7 +8,7 @@ module
 public import CCDN.Statements
 public import CCDN.Plane.RationalPlaneAssembly
 import CCDN.Determinant.GeometricResidueReduction
-import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Plane.NonabsolutePlaneCount
 import CCDN.Plane.PlaneCurveAssembly
 import CCDN.Plane.PlaneStepanovBound
 import CCDN.Plane.PlaneStepanovDimension

@@ -13,7 +13,7 @@ public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import CCDN.Surface.SurfaceCurve
 import CCDN.Analysis.SmallDegreeSurfaceNumerics
-import CCDN.Curve.SmallDegreeSurfaceCurveCount
+import CCDN.Surface.SmallDegreeSurfaceCurveCount
 import CCDN.Surface.SurfaceDegreeOneCount
 /-! The retained part of the small-degree surface cover. Lines and
 nonlinear prime curves are counted together, using their common degree

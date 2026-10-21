@@ -8,7 +8,7 @@ module
 public import CCDN.Height.ProjectiveZeroLocus
 import CCDN.Algebra.HomogeneousLinearDescent
 import CCDN.Auxiliary.HypersurfaceGoodDirection
-import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Plane.NonabsolutePlaneCount
 import CCDN.Algebra.PrimitiveNormalization
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors

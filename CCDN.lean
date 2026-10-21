@@ -136,6 +136,7 @@ public import CCDN.Auxiliary.HypersurfaceKernelRatio
 public import CCDN.Auxiliary.HypersurfaceLargeHeightAuxiliary
 public import CCDN.Auxiliary.HypersurfaceLargeHeightDegree
 public import CCDN.Auxiliary.HypersurfaceLeadingCoefficient
+public import CCDN.Auxiliary.HypersurfaceNonabsoluteAuxiliary
 public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
 public import CCDN.Auxiliary.HypersurfacePositionHeight
 public import CCDN.Auxiliary.HypersurfacePositioning
@@ -382,7 +383,6 @@ public import CCDN.Curve.CurveDerivativeReconstruction
 public import CCDN.Curve.CurvePrimitivePair
 public import CCDN.Curve.ProjectiveCurveCount
 public import CCDN.Curve.ProjectiveHilbertCurveGrowth
-public import CCDN.Curve.SmallDegreeSurfaceCurveCount
 public import CCDN.Determinant.AffineCongruenceDeterminant
 public import CCDN.Determinant.AlgEquivAdicLayer
 public import CCDN.Determinant.AmbientProjectiveDeterminant
@@ -565,7 +565,6 @@ public import CCDN.Hypersurface.HyperplaneSliceCoordinates
 public import CCDN.Hypersurface.HyperplaneSlicingInduction
 public import CCDN.Hypersurface.HypersurfaceCount
 public import CCDN.Hypersurface.HypersurfaceCountError
-public import CCDN.Hypersurface.HypersurfaceNonabsoluteAuxiliary
 public import CCDN.Hypersurface.IntegerGoodHyperplaneSlices
 public import CCDN.Hypersurface.IntegerHyperplaneSliceModels
 public import CCDN.Hypersurface.IntegerHyperplaneSlices
@@ -573,7 +572,6 @@ public import CCDN.Hypersurface.LowDegreePointSeparation
 public import CCDN.Hypersurface.NonRationalProjectiveCount
 public import CCDN.Hypersurface.NonRationalVarietyCount
 public import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
-public import CCDN.Hypersurface.NonabsolutePlaneCount
 public import CCDN.Hypersurface.NonabsoluteSurfaceCount
 public import CCDN.Hypersurface.PrimeIdealGridBound
 public import CCDN.Hypersurface.PrincipalSectionGridBound
@@ -706,6 +704,7 @@ public import CCDN.Plane.IntegerPlaneHeight
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Plane.IntegralAffineLine
 public import CCDN.Plane.LeadingPositionHeight
+public import CCDN.Plane.NonabsolutePlaneCount
 public import CCDN.Plane.PlaneCount
 public import CCDN.Plane.PlaneCurveAssembly
 public import CCDN.Plane.PlaneDeformationRelation
@@ -824,6 +823,7 @@ public import CCDN.Surface.ProjectiveSurfaceSalbergerCover
 public import CCDN.Surface.RationalSurfaceSalbergerCover
 public import CCDN.Surface.ResidueSubsetBoundary
 public import CCDN.Surface.SalbergerCoverNumerics
+public import CCDN.Surface.SmallDegreeSurfaceCurveCount
 public import CCDN.Surface.SmoothPrimeWindow
 public import CCDN.Surface.SurfaceAuxiliaryExponent
 public import CCDN.Surface.SurfaceCoefficientReduction

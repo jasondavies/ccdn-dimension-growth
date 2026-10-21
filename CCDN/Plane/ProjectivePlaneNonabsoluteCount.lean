@@ -9,7 +9,7 @@ public import CCDN.Plane.ProjectivePlaneAbsoluteCount
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.ProjectiveAffineChart
-import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Plane.NonabsolutePlaneCount
 import CCDN.Plane.ProjectivePlaneBezout
 import CCDN.ForMathlib.MvPolynomial
 /-! Curves that are irreducible over the base field but split over an

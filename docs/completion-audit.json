@@ -1400,12 +1400,12 @@
     },
     {
       "id": "e050",
-      "file": "CCDN/Hypersurface/HypersurfaceNonabsoluteAuxiliary.lean",
+      "file": "CCDN/Auxiliary/HypersurfaceNonabsoluteAuxiliary.lean",
       "declaration": "CCDN.integer_nonabsolute_homogeneous_auxiliary"
     },
     {
       "id": "e051",
-      "file": "CCDN/Hypersurface/HypersurfaceNonabsoluteAuxiliary.lean",
+      "file": "CCDN/Auxiliary/HypersurfaceNonabsoluteAuxiliary.lean",
       "declaration": "CCDN.nonabsolute_projective_auxiliary"
     },
     {

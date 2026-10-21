@@ -11,7 +11,7 @@ public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.Auxiliary.HypersurfaceProjectiveAuxiliary
-import CCDN.Hypersurface.HypersurfaceNonabsoluteAuxiliary
+import CCDN.Auxiliary.HypersurfaceNonabsoluteAuxiliary
 /-! CCDN Theorem 3.1.1 for irreducible integer homogeneous equations.
 The constant is fixed before the equation, degree and radius are chosen. -/
 

@@ -7,7 +7,7 @@ module
 
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.Algebraic.Defs
-import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Plane.NonabsolutePlaneCount
 import CCDN.Hilbert.PlaneHilbert
 import CCDN.Projection.PlaneProjectionKernel
 import CCDN.ForMathlib.MvPolynomial
