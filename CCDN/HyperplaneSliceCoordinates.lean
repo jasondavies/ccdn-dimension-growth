@@ -13,14 +13,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma goodHyperplaneHeight_le {d : ℕ} (hd : 1 ≤ d) :
-    goodHyperplaneHeight d ≤ 750 * d ^ 9 := by
-  have h3 : 1 ≤ d ^ 3 := Nat.one_le_iff_ne_zero.mpr (pow_ne_zero _ (by omega))
-  unfold goodHyperplaneHeight
-  calc
-    6 * (2 * d ^ 3 + 3) ^ 3 ≤ 6 * (5 * d ^ 3) ^ 3 := by gcongr; omega
-    _ = _ := by ring
-
 lemma integer_top_irreducible_rename {σ τ : Type*} (e : σ ≃ τ)
     (f : MvPolynomial σ ℤ)
     (hir : HasAbsIrreducibleTopForm f) :

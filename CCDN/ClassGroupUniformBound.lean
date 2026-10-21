@@ -30,17 +30,13 @@ theorem classGroup_uniform_logarithmic_bound (n : ℕ) (hn : 2 ≤ n) :
       obtain ⟨C, hC, hbound⟩ := quadratic_class_group_base_numeric
       refine ⟨C, hC, ?_⟩
       intro K _ _ hdeg
-      have hD : 1 ≤ (discr K).natAbs :=
-        numberField_discriminant_natAbs_pos K
-      have hDreal : (1 : ℝ) ≤ ((discr K).natAbs : ℝ) := by exact_mod_cast hD
       have hh : (classGroupTwoTorsionCard K : ℝ) ≤
           (2 : ℝ) ^ (4 * (discr K).natAbs.primeFactors.card + 2) := by
         exact_mod_cast quadratic_field_classGroupTwoTorsionCard_le K hdeg
-      have hb := hh.trans (hbound (discr K).natAbs hD)
-      have hlog : 1 ≤ Real.log ((discr K).natAbs : ℝ) + 1 := by
-        linarith [Real.log_nonneg hDreal]
+      have hb := hh.trans (hbound (discr K).natAbs (numberField_discriminant_natAbs_pos K))
       have ht := hb.trans (le_mul_of_one_le_right
-        (by positivity : 0 ≤ C * ((discr K).natAbs : ℝ) ^ (1 / 4 : ℝ)) hlog)
+        (by positivity : 0 ≤ C * ((discr K).natAbs : ℝ) ^ (1 / 4 : ℝ))
+        (one_le_log_discr_natAbs_add_one K))
       convert ht using 1
       norm_num
     have hn3 : 3 ≤ n := by omega
@@ -54,9 +50,7 @@ theorem classGroup_uniform_logarithmic_bound (n : ℕ) (hn : 2 ≤ n) :
       refine ⟨T, hA.trans_le hAT, ?_⟩
       intro K _ _ hdeg
       have hD : 1 ≤ (discr K).natAbs := numberField_discriminant_natAbs_pos K
-      have hDreal : (1 : ℝ) ≤ ((discr K).natAbs : ℝ) := by exact_mod_cast hD
-      have hlog : 1 ≤ Real.log ((discr K).natAbs : ℝ) + 1 := by
-        linarith [Real.log_nonneg hDreal]
+      have hlog := one_le_log_discr_natAbs_add_one K
       by_cases hno : ∀ L : IntermediateField ℚ K, Module.finrank L K ≠ 2
       · have hh := no_index_two_classGroup_log_one_bound K (by omega) hno
         rw [hdeg] at hh

@@ -13,7 +13,7 @@ noncomputable section
 open MvPolynomial
 
 def projectiveProjectionDegreeExponent (m k : ℕ) : ℕ :=
-  18 + 9 * m + (m + k + 2) + 2 * (m + k + 2) * (m + 1)
+  18 + 3 * m + (m + k + 2) + 2 * (m + k + 2) * (m + 1)
 
 theorem projective_projection_dimension_growth (m k : ℕ) :
     ∃ C : ℝ, 0 < C ∧
@@ -64,7 +64,7 @@ theorem projective_projection_dimension_growth (m k : ℕ) :
   rw [hfdeg] at htarget
   have hnon : (0 : ℝ) ≤ (d : ℝ) ^ N := by positivity
   have hh : (projectiveCount (projectiveIdealZeroLocus I) B : ℝ) ≤
-      (d : ℝ) ^ N * (C * (d : ℝ) ^ (18 + 9 * m) *
+      (d : ℝ) ^ N * (C * (d : ℝ) ^ (18 + 3 * m) *
         ((N : ℝ) * H * B) ^ (m + 1)) := by
     apply (show (projectiveCount (projectiveIdealZeroLocus I) B : ℝ) ≤
       (d : ℝ) ^ N * projectiveCount (projectiveZeroLocus f) ((N : ℝ) * H * B) by

@@ -85,18 +85,5 @@ theorem top_form_auxiliary_rational {n : ℕ}
     rw [he, eval_mul, eval_C] at hxf
     exact (mul_eq_zero.mp hxf).resolve_left hc
 
-/-- The integer-divisibility version of the rationally proper auxiliary. -/
-theorem top_form_auxiliary {n : ℕ}
-    (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hir : HasAbsIrreducibleTopForm f)
-    {B : ℝ} (hB : 1 ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
-      (g.totalDegree : ℝ) ≤ topFormAuxiliaryConstant n *
-        (f.totalDegree : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) *
-          B ^ (1 / (f.totalDegree : ℝ) ^ (1 / (n + 1 : ℝ))) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
-  obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := top_form_auxiliary_rational f hir hB
-  exact ⟨g, hg0, fun h => hgnd (map_dvd (map (Int.castRingHom ℚ)) h), hgdeg, hgz⟩
-
 end
 end CCDN

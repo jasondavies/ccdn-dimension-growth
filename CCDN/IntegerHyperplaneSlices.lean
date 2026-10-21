@@ -136,36 +136,5 @@ theorem count_le_of_integer_hyperplane_slices {n : ℕ}
     _ = ((integerSliceLevels X B a).card : ℝ) * K := by simp
     _ ≤ _ := mul_le_mul_of_nonneg_right (integerSliceLevels_card_le X a hH hB ha) hK
 
-/-- A normal of height at most `750 d^9` costs nine powers of the degree
-and one power of the box radius in a dimension induction. -/
-theorem count_le_of_bounded_integer_hyperplane_slices {n d e r : ℕ}
-    (X : Set (RatPoint (n + 1))) (a : IntPoint (n + 1))
-    (j : Fin (n + 1)) (hj : a j ≠ 0) (Y : ℤ → Set (RatPoint n))
-    (hd : 1 ≤ d) {B C : ℝ} (hB : 1 ≤ B) (hC : 0 ≤ C)
-    (ha : ∀ i, |(a i : ℝ)| ≤ 750 * (d : ℝ) ^ 9)
-    (hmap : ∀ k x, x ∈ integerSlicePoints X B a k →
-      rationalPoint (deleteIntegerCoordinate j x) ∈ Y k)
-    (hcount : ∀ k, (count (Y k) B : ℝ) ≤ C * (d : ℝ) ^ e * B ^ r) :
-    (count X B : ℝ) ≤
-      (1500 * (n + 1 : ℕ) + 1) * C * (d : ℝ) ^ (e + 9) * B ^ (r + 1) := by
-  have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
-  have hd0 : (0 : ℝ) ≤ d := Nat.cast_nonneg _
-  have hB0 : 0 ≤ B := by linarith
-  have hK : 0 ≤ C * (d : ℝ) ^ e * B ^ r := by positivity
-  have hD : 1 ≤ (d : ℝ) ^ 9 := one_le_pow₀ hdR
-  have hDB : 1 ≤ (d : ℝ) ^ 9 * B := one_le_mul_of_one_le_of_one_le hD hB
-  have hfactor :
-      2 * (n + 1 : ℕ) * (750 * (d : ℝ) ^ 9) * B + 1 ≤
-        (1500 * (n + 1 : ℕ) + 1) * (d : ℝ) ^ 9 * B := by
-    nlinarith
-  calc
-    _ ≤ (2 * (n + 1 : ℕ) * (750 * (d : ℝ) ^ 9) * B + 1) *
-        (C * (d : ℝ) ^ e * B ^ r) :=
-      count_le_of_integer_hyperplane_slices X a j hj Y
-        (by positivity) hB0 hK ha hmap hcount
-    _ ≤ ((1500 * (n + 1 : ℕ) + 1) * (d : ℝ) ^ 9 * B) *
-        (C * (d : ℝ) ^ e * B ^ r) := mul_le_mul_of_nonneg_right hfactor hK
-    _ = _ := by rw [pow_add, pow_succ]; ring
-
 end
 end CCDN

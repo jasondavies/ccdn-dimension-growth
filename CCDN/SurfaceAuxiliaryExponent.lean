@@ -17,24 +17,6 @@ lemma surface_inverse_sqrt_le_quarter {d : ℕ} (hd : 16 ≤ d) :
     Real.le_sqrt_of_sq_le (by exact_mod_cast hd)
   exact one_div_le_one_div_of_le (by norm_num) hs
 
-/-- The intersection degree includes the degree of its defining
- surface, in addition to the auxiliary degree. -/
-lemma surface_intersection_degree_budget {d : ℕ} (hd : 0 < d)
-    {C B M D : ℝ} (hM : M ≤ C * (d : ℝ) ^ (7 / 2 : ℝ) * B ^ (1 / Real.sqrt d))
-    (hD : D ≤ d * M) :
-    D ≤ C * (d : ℝ) ^ (9 / 2 : ℝ) * B ^ (1 / Real.sqrt d) := by
-  have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
-  have hh := mul_le_mul_of_nonneg_left hM hd0.le
-  have he : (d : ℝ) * (d : ℝ) ^ (7 / 2 : ℝ) = (d : ℝ) ^ (9 / 2 : ℝ) := by
-    calc
-      _ = (d : ℝ) ^ (1 : ℝ) * (d : ℝ) ^ (7 / 2 : ℝ) := by rw [Real.rpow_one]
-      _ = _ := by rw [← Real.rpow_add hd0]; norm_num
-  calc
-    D ≤ d * M := hD
-    _ ≤ d * (C * (d : ℝ) ^ (7 / 2 : ℝ) * B ^ (1 / Real.sqrt d)) := hh
-    _ = C * ((d : ℝ) * (d : ℝ) ^ (7 / 2 : ℝ)) * B ^ (1 / Real.sqrt d) := by ring
-    _ = _ := by rw [he]
-
 /-- The large-component fourth moment has exactly the corrected degree
  factor d^18, uniformly for every surface degree at least sixteen. -/
 theorem surface_degree_budget_fourth {d : ℕ} (hd : 16 ≤ d)
@@ -54,16 +36,6 @@ theorem surface_degree_budget_fourth {d : ℕ} (hd : 16 ≤ d)
   have hbox : B ^ ((1 / Real.sqrt (d : ℝ)) * (4 : ℕ)) ≤ B := by
     simpa only [Real.rpow_one] using Real.rpow_le_rpow_of_exponent_le hB hexp
   exact hpow.trans (mul_le_mul_of_nonneg_left hbox (by positivity))
-
-/-- The same bound directly from the surface auxiliary degree and Bezout
- degree budget, retaining the essential extra factor of d. -/
-theorem surface_auxiliary_degree_fourth {d : ℕ} (hd : 16 ≤ d)
-    {C B M D : ℝ} (hC : 0 ≤ C) (hB : 1 ≤ B) (hD0 : 0 ≤ D)
-    (hM : M ≤ C * (d : ℝ) ^ (7 / 2 : ℝ) * B ^ (1 / Real.sqrt d))
-    (hD : D ≤ d * M) :
-    D ^ 4 ≤ C ^ 4 * (d : ℝ) ^ 18 * B :=
-  surface_degree_budget_fourth hd hC hB hD0
-    (surface_intersection_degree_budget (by omega) hM hD)
 
 lemma small_degree_rpow_weight {δ : ℕ} (hδ : 2 ≤ δ) {B : ℝ}
     (hB : 1 ≤ B) (hδB : (δ : ℝ) ≤ Real.log B) :
@@ -198,21 +170,6 @@ theorem curveBound_large_degree {δ : ℕ} (hδ : 0 < δ) {B : ℝ}
   unfold curveBound
   convert hh using 1
   ring
-
-/-- The large-degree component sum uses only the total degree
- budget, with no bound on the number of components. -/
-theorem sum_curveBound_large_degree {ι : Type*} (s : Finset ι) (δ : ι → ℕ)
-    {B : ℝ} (hB : 1 ≤ B) (hδ : ∀ i ∈ s, 0 < δ i)
-    (hBδ : ∀ i ∈ s, Real.log B ≤ (δ i : ℝ)) :
-    ∑ i ∈ s, curveBound (δ i) B ≤
-      (2 * Real.exp 1) * (∑ i ∈ s, (δ i : ℝ)) ^ 4 := by
-  calc
-    _ ≤ ∑ i ∈ s, (2 * Real.exp 1) * (δ i : ℝ) ^ 4 :=
-      Finset.sum_le_sum fun i hi => curveBound_large_degree (hδ i hi) hB (hBδ i hi)
-    _ = (2 * Real.exp 1) * ∑ i ∈ s, (δ i : ℝ) ^ 4 := by rw [Finset.mul_sum]
-    _ ≤ _ := mul_le_mul_of_nonneg_left
-      (sum_fourth_powers_le_fourth_power_sum s (fun i => (δ i : ℝ))
-        (fun _ _ => by positivity)) (by positivity)
 
 /-- Both degree ranges can be summed using their common total-degree
  budget. Every component here has degree at least two. -/

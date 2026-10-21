@@ -4,6 +4,7 @@ public import CCDN.ClassGroupIdealRescaling
 public import Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody
 public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
 public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
+public import Mathlib.Analysis.Complex.ExponentialBounds
 
 /-! Balanced square generators for two-torsion ideal classes.
 The anisotropic Minkowski argument is applied to the inverse ideal; the
@@ -16,6 +17,35 @@ open scoped NumberField nonZeroDivisors Real
 open NumberField NumberField.InfinitePlace
 open MeasureTheory MeasureTheory.Measure
 open NNReal
+
+section Discriminant
+
+variable (K : Type*) [Field K] [NumberField K]
+
+/-- The absolute discriminant, as the absolute value of an integer cast to `ℕ` and to `ℝ`. -/
+lemma numberField_discriminant_natAbs_cast :
+    ((discr K).natAbs : ℝ) = |(discr K : ℝ)| := by
+  simpa only [Int.cast_natCast, Int.cast_abs] using
+    congrArg (fun z : ℤ => (z : ℝ)) (Int.natCast_natAbs (discr K))
+
+lemma numberField_discriminant_natAbs_pos : 0 < (discr K).natAbs :=
+  Int.natAbs_pos.mpr (discr_ne_zero K)
+
+lemma one_le_abs_discr : 1 ≤ |(discr K : ℝ)| := by
+  exact_mod_cast Int.one_le_abs (discr_ne_zero K)
+
+lemma three_le_abs_discr (hn : 2 ≤ Module.finrank ℚ K) : 3 ≤ |(discr K : ℝ)| := by
+  have hh : (3 : ℤ) ≤ |discr K| := by
+    have := abs_discr_gt_two (K := K) (by omega : 1 < Module.finrank ℚ K)
+    omega
+  exact_mod_cast hh
+
+lemma one_le_log_abs_discr (hn : 2 ≤ Module.finrank ℚ K) :
+    1 ≤ Real.log |(discr K : ℝ)| := by
+  simpa only [Real.log_exp] using Real.log_le_log (Real.exp_pos 1)
+    (Real.exp_one_lt_three.le.trans (three_le_abs_discr K hn))
+
+end Discriminant
 
 lemma prod_weighted_sqrt_radii {ι : Type*} [Fintype ι]
     (u : ι → ℝ≥0) (m : ι → ℕ) (T : ℝ≥0) :
@@ -168,8 +198,7 @@ theorem exists_balanced_two_torsion_square_generator
   classical
   obtain ⟨I, α, hIc, hα, hIα, _, _⟩ :=
     exists_two_torsion_integral_square_representative K c
-  have hD : 0 < |(discr K : ℝ)| := abs_pos.mpr (by
-    exact_mod_cast discr_ne_zero K)
+  have hD : 0 < |(discr K : ℝ)| := zero_lt_one.trans_le (one_le_abs_discr K)
   have hn : 0 < Module.finrank ℚ K := Module.finrank_pos
   let T : ℝ≥0 := ⟨3 * |(discr K : ℝ)| ^
     (1 / (2 * (Module.finrank ℚ K : ℝ))), by positivity⟩

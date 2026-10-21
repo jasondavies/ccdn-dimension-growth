@@ -42,16 +42,5 @@ theorem classGroupTwoTorsionCard_le_boundedSquareNormIntegers :
   exact ⟨h0, fun w ↦ (hw w).le, Ideal.absNorm (J : Ideal (𝓞 K)), hnorm⟩
 
 omit [NumberField K] in
-lemma boundedSquareNormIntegers_signed_norm {B : ℝ} {β : 𝓞 K}
-    (hβ : β ∈ boundedSquareNormIntegers K B) :
-    ∃ m : ℕ, Algebra.norm ℤ β = (m : ℤ) ^ 2 ∨
-      Algebra.norm ℤ β = -((m : ℤ) ^ 2) := by
-  obtain ⟨m, hm⟩ := hβ.2.2
-  refine ⟨m, ?_⟩
-  have h : |Algebra.norm ℤ β| = (m : ℤ) ^ 2 := by
-    simpa only [Int.natCast_natAbs, Nat.cast_pow]
-      using congrArg (Nat.cast : ℕ → ℤ) hm
-  exact (abs_eq (by positivity)).mp h
-
 end
 end CCDN

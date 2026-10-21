@@ -82,23 +82,5 @@ theorem exists_actual_norm_curve_family (B : ℝ) :
       exact (Set.ncard_eq_toFinset_card _ _).symm
     _ ≤ _ := Finset.sum_le_sum (fun q _ ↦ squareNormTranslateFiber_count_le K (β q) (hb q))
 
-/-- The class-group-to-norm-curves reduction, with its finite
-index set explicitly defined from the constructed bounded square generators. -/
-theorem classGroupTwoTorsionCard_le_actual_norm_curve_family :
-    let B := 9 * |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ))
-    ∃ β : (boundedSquareNormTranslationClasses K B) → 𝓞 K,
-      Function.Injective β ∧
-      (∀ q, ∀ w : InfinitePlace K, w (β q : K) ≤ B) ∧
-      classGroupTwoTorsionCard K ≤
-        ∑ q : boundedSquareNormTranslationClasses K B,
-          (count (signedNormCurveLocus K (β q) 1)
-            (max (2 * B) (Real.sqrt (B ^ Module.finrank ℚ K))) +
-          count (signedNormCurveLocus K (β q) (-1))
-            (max (2 * B) (Real.sqrt (B ^ Module.finrank ℚ K)))) := by
-  dsimp only
-  obtain ⟨β, hi, hb, hc⟩ := exists_actual_norm_curve_family K
-    (9 * |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ)))
-  exact ⟨β, hi, hb, (classGroupTwoTorsionCard_le_boundedSquareNormIntegers K).trans hc⟩
-
 end
 end CCDN

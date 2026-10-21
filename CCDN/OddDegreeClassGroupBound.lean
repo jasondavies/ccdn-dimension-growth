@@ -20,13 +20,6 @@ def oddDegreeClassGroupConstant (n : ℕ) : ℝ :=
     (numberFieldLatticeBoxConstant n ((n : ℝ) ^ 3) * (2 : ℝ) ^ n) *
     (3 * (9 : ℝ) ^ (n - 1))
 
-lemma oddDegreeClassGroupConstant_pos {n : ℕ} (hn : 0 < n) :
-    0 < oddDegreeClassGroupConstant n := by
-  have hnR : (0 : ℝ) < n := by exact_mod_cast hn
-  have hC := affineHypersurfaceAuxiliaryConstant_pos 0
-  unfold oddDegreeClassGroupConstant numberFieldLatticeBoxConstant
-  positivity
-
 variable (K : Type*) [Field K] [NumberField K]
 
 /-- The log-free odd-degree bound. -/
@@ -36,8 +29,7 @@ theorem odd_degree_classGroup_two_torsion_bound
       oddDegreeClassGroupConstant (Module.finrank ℚ K) *
         |(discr K : ℝ)| ^
           (1 / 2 - 1 / (2 * (Module.finrank ℚ K : ℝ))) := by
-  have hD1 : 1 ≤ |(discr K : ℝ)| := by
-    exact_mod_cast (Int.one_le_abs (discr_ne_zero K))
+  have hD1 := one_le_abs_discr K
   have hD : 0 < |(discr K : ℝ)| := zero_lt_one.trans_le hD1
   let B := 9 * |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ))
   have hroot : 1 ≤ |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ)) :=
