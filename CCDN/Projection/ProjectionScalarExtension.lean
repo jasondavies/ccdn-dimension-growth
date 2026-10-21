@@ -18,33 +18,24 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma coefficientLinearPolynomial_C {K L : Type*}
-    [Field K] [Field L] [Algebra K L] {n : ℕ}
-    (φ : L →ₗ[K] K) (c : L) :
-    coefficientLinearPolynomial (n := n) φ (C c) = C (φ c) := by
-  classical
-  ext a
-  simp only [coefficientLinearPolynomial_coeff, coeff_C]
-  split_ifs <;> simp
-
 /-- Coefficient functionals commute with substitution of polynomials defined
 over the base field, even though they need not preserve multiplication. -/
-theorem coefficientLinearPolynomial_aeval
+theorem polynomialCoefficientLinear_aeval
     {K L : Type*} [Field K] [Field L] [Algebra K L] {m n : ℕ}
     (φ : L →ₗ[K] K) (a : Fin m → MvPolynomial (Fin n) K)
     (g : MvPolynomial (Fin m) L) :
-    coefficientLinearPolynomial φ
+    polynomialCoefficientLinear φ
         (aeval (fun i => map (algebraMap K L) (a i)) g) =
-      aeval a (coefficientLinearPolynomial φ g) := by
+      aeval a (polynomialCoefficientLinear φ g) := by
   induction g using MvPolynomial.induction_on with
-  | C c => simp only [aeval_C, algebraMap_eq, coefficientLinearPolynomial_C]
+  | C c => simp only [aeval_C, algebraMap_eq, polynomialCoefficientLinear_C]
   | add g h hg hh =>
-      simp only [map_add, coefficientLinearPolynomial_add, hg, hh]
+      simp only [map_add, map_add, hg, hh]
   | mul_X g i hg =>
-      rw [map_mul, aeval_X, coefficientLinearPolynomial_mul_map, hg]
+      rw [map_mul, aeval_X, polynomialCoefficientLinear_mul_map, hg]
       have hX : (X i : MvPolynomial (Fin m) L) =
           map (algebraMap K L) (X i) := by simp
-      rw [hX, coefficientLinearPolynomial_mul_map, map_mul, aeval_X]
+      rw [hX, polynomialCoefficientLinear_mul_map, map_mul, aeval_X]
 
 lemma map_aeval_polynomial_substitution
     {K L : Type*} [Field K] [Field L] [Algebra K L] {m n : ℕ}
@@ -80,11 +71,11 @@ theorem projection_kernel_scalar_extension
     exact Ideal.mem_map_of_mem _ ((mem_projectionCoordinateMap_ker I a f).mp hf)
   · intro g hg
     by_contra hnot
-    obtain ⟨φ, hφ⟩ := exists_coefficientLinearPolynomial_not_mem
+    obtain ⟨φ, hφ⟩ := exists_polynomialCoefficientLinear_not_mem
       (RingHom.ker (projectionCoordinateMap I a)) g hnot
     apply hφ
-    rw [mem_projectionCoordinateMap_ker, ← coefficientLinearPolynomial_aeval]
-    exact coefficientLinearPolynomial_mem_scalar_extension I _
+    rw [mem_projectionCoordinateMap_ker, ← polynomialCoefficientLinear_aeval]
+    exact polynomialCoefficientLinear_mem_scalar_extension I _
       ((mem_projectionCoordinateMap_ker _ _ g).mp hg) φ
 
 theorem projection_kernel_geometrically_prime

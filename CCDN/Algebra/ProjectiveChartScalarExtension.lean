@@ -21,12 +21,12 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma coefficientLinearPolynomial_affineChart
+lemma polynomialCoefficientLinear_affineChart
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (φ : L →ₗ[K] K) (f : MvPolynomial (Fin (n + 1)) L) :
-    coefficientLinearPolynomial φ (affineChart n f) =
-      affineChart n (coefficientLinearPolynomial φ f) := by
-  have h := coefficientLinearPolynomial_aeval φ
+    polynomialCoefficientLinear φ (affineChart n f) =
+      affineChart n (polynomialCoefficientLinear φ f) := by
+  have h := polynomialCoefficientLinear_aeval φ
     (Fin.cons (1 : MvPolynomial (Fin n) K) X) f
   have he : (fun i : Fin (n + 1) => map (algebraMap K L)
       ((Fin.cons (1 : MvPolynomial (Fin n) K) X :
@@ -37,15 +37,15 @@ lemma coefficientLinearPolynomial_affineChart
   rw [he] at h
   exact h
 
-lemma coefficientLinearPolynomial_scaledHomogenize_one
+lemma polynomialCoefficientLinear_scaledHomogenize_one
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n D : ℕ}
     (φ : L →ₗ[K] K) (f : MvPolynomial (Fin n) L) (hf : f.totalDegree ≤ D) :
-    coefficientLinearPolynomial φ (scaledHomogenize D 1 f) =
-      scaledHomogenize D 1 (coefficientLinearPolynomial φ f) := by
+    polynomialCoefficientLinear φ (scaledHomogenize D 1 f) =
+      scaledHomogenize D 1 (polynomialCoefficientLinear φ f) := by
   apply affineChart_injective_on_homogeneous
-    (coefficientLinearPolynomial_homogeneous φ _ (scaledHomogenize_homogeneous 1 f hf))
-    (scaledHomogenize_homogeneous 1 _ ((coefficientLinearPolynomial_degree φ f).trans hf))
-  rw [← coefficientLinearPolynomial_affineChart,
+    (polynomialCoefficientLinear_homogeneous φ _ (scaledHomogenize_homogeneous 1 f hf))
+    (scaledHomogenize_homogeneous 1 _ ((polynomialCoefficientLinear_totalDegree_le φ f).trans hf))
+  rw [← polynomialCoefficientLinear_affineChart,
     affineChart_scaledHomogenize_one, affineChart_scaledHomogenize_one]
 
 lemma projectiveChartIdeal_mem_iff_scaledHomogenize
@@ -83,12 +83,12 @@ theorem projectiveChartIdeal_scalar_extension
       ((projectiveChartIdeal_mem_iff_scaledHomogenize I hX f le_rfl).mp hf)
   · intro g hg
     by_contra hnot
-    obtain ⟨φ, hφ⟩ := exists_coefficientLinearPolynomial_not_mem (projectiveChartIdeal I) g hnot
+    obtain ⟨φ, hφ⟩ := exists_polynomialCoefficientLinear_not_mem (projectiveChartIdeal I) g hnot
     apply hφ
     rw [projectiveChartIdeal_mem_iff_scaledHomogenize I hX _
-      (coefficientLinearPolynomial_degree φ g),
-      ← coefficientLinearPolynomial_scaledHomogenize_one φ g le_rfl]
-    exact coefficientLinearPolynomial_mem_scalar_extension I _
+      (polynomialCoefficientLinear_totalDegree_le φ g),
+      ← polynomialCoefficientLinear_scaledHomogenize_one φ g le_rfl]
+    exact polynomialCoefficientLinear_mem_scalar_extension I _
       ((projectiveChartIdeal_mem_iff_scaledHomogenize _ hXL g le_rfl).mp hg) φ
 
 theorem projectiveChartIdeal_geometrically_prime

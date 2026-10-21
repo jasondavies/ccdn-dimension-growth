@@ -17,15 +17,15 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma coefficientLinearPolynomial_homogeneous {k K : Type*}
+lemma polynomialCoefficientLinear_homogeneous {k K : Type*}
     [Field k] [Field K] [Algebra k K] {n d : ℕ}
     (φ : K →ₗ[k] k) (f : MvPolynomial (Fin n) K) (hf : f.IsHomogeneous d) :
-    (coefficientLinearPolynomial φ f).IsHomogeneous d := by
+    (polynomialCoefficientLinear φ f).IsHomogeneous d := by
   intro m hm
   apply hf
   intro hzero
   apply hm
-  rw [coefficientLinearPolynomial_coeff, hzero, map_zero]
+  rw [polynomialCoefficientLinear_coeff, hzero, map_zero]
 
 theorem exists_nonzero_homogeneous_linear_descent {k K : Type*}
     [Field k] [Field K] [Algebra k K] {n d : ℕ}
@@ -34,13 +34,13 @@ theorem exists_nonzero_homogeneous_linear_descent {k K : Type*}
       ∀ x : Fin n → k, eval (algebraMap k K ∘ x) f = 0 → eval x g = 0 := by
   obtain ⟨m, hm⟩ := exists_coeff_ne_zero hf
   obtain ⟨φ, hφ⟩ := Module.Projective.exists_dual_ne_zero k hm
-  refine ⟨coefficientLinearPolynomial φ f, ?_, coefficientLinearPolynomial_homogeneous φ f hhom, ?_⟩
+  refine ⟨polynomialCoefficientLinear φ f, ?_, polynomialCoefficientLinear_homogeneous φ f hhom, ?_⟩
   · intro he
-    have hh := coefficientLinearPolynomial_coeff φ f m
+    have hh := polynomialCoefficientLinear_coeff φ f m
     have hz : φ (f.coeff m) = 0 := by simpa [he] using hh.symm
     exact hφ hz
   · intro x hx
-    rw [coefficientLinearPolynomial_eval, hx, map_zero]
+    rw [polynomialCoefficientLinear_eval, hx, map_zero]
 
 lemma top_homogeneousComponent_mul {K σ : Type*} [CommRing K]
     (g h : MvPolynomial σ K) :

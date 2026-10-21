@@ -18,13 +18,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma coefficientLinearPolynomial_homogeneousComponent
+lemma polynomialCoefficientLinear_homogeneousComponent
     {k K : Type*} [Field k] [Field K] [Algebra k K] {n : ℕ}
     (φ : K →ₗ[k] k) (N : ℕ) (f : MvPolynomial (Fin n) K) :
-    coefficientLinearPolynomial φ (homogeneousComponent N f) =
-      homogeneousComponent N (coefficientLinearPolynomial φ f) := by
+    polynomialCoefficientLinear φ (homogeneousComponent N f) =
+      homogeneousComponent N (polynomialCoefficientLinear φ f) := by
   ext a
-  simp only [coefficientLinearPolynomial_coeff, coeff_homogeneousComponent]
+  simp only [polynomialCoefficientLinear_coeff, coeff_homogeneousComponent]
   split_ifs <;> simp only [map_zero]
 
 /-- The extension of scalars of a homogeneous ideal is homogeneous. -/
@@ -36,10 +36,10 @@ theorem homogeneous_ideal_scalar_extension
       homogeneousComponent N f ∈ I.map (map (algebraMap K L)) := by
   intro f hf N
   by_contra hn
-  obtain ⟨φ, hφ⟩ := exists_coefficientLinearPolynomial_not_mem I _ hn
+  obtain ⟨φ, hφ⟩ := exists_polynomialCoefficientLinear_not_mem I _ hn
   apply hφ
-  rw [coefficientLinearPolynomial_homogeneousComponent]
-  exact hI _ (coefficientLinearPolynomial_mem_scalar_extension I f hf φ) N
+  rw [polynomialCoefficientLinear_homogeneousComponent]
+  exact hI _ (polynomialCoefficientLinear_mem_scalar_extension I f hf φ) N
 
 theorem minimal_prime_ideal_homogeneous
     {K σ : Type*} [Field K]
