@@ -40,10 +40,10 @@
     "unique_evidence_files": 138,
     "errors": [],
     "command": "bash scripts/check.sh",
-    "reachable_modules": 875,
+    "reachable_modules": 876,
     "vendor_source_hashes": 26,
-    "build_jobs": 9984,
-    "project_declarations_audited": 4640,
+    "build_jobs": 9929,
+    "project_declarations_audited": 4658,
     "vendor_declarations_audited": 582,
     "allowed_axioms": [
       "propext",
