@@ -106,7 +106,7 @@ theorem hypersurface_determinant_log_lower_at_rank {n s N d M : ℕ} (hs : 0 < s
     hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   refine hypersurface_log_lower_at_rank_of_local_divisors hs hd bad
-    (lt_of_lt_of_le one_pos (Int.Matrix.one_le_minorGcd hrows)) fun p hp hcut => ?_
+    (one_pos.trans_le (Int.Matrix.one_le_minorGcd hrows)) fun p hp hcut => ?_
   have : Fact p.Prime := ⟨(mem_filter.mp (mem_sdiff.mp hp).1).2⟩
   obtain ⟨hf0, hir⟩ := hred p hp hcut
   simpa only [hypersurfaceDeterminantMain_div] using

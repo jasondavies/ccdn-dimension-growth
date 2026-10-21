@@ -43,7 +43,7 @@ lemma congruencePrimeWindow_weight_le_rpow {K R B : ℝ} (hK : 1 ≤ K) (hR : 1 
         Real.log (Real.log B + 1)) := by
   let A := (Real.log 4 + 4) * scalingPrimeRatio
   have hA : 0 < A := log_four_add_four_mul_scalingPrimeRatio_pos
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlogR : 0 ≤ Real.log (2 * R) := Real.log_nonneg (by linarith)
   let c := 2 * A * K * Real.log (2 * R) + 8 * k + 1
   let t := Real.log B
@@ -121,7 +121,7 @@ theorem congruencePrimeWindow_edge_polylog_salberger {K R : ℝ}
           C * B ^ (c / Real.log (1 + Real.log B)) := by
   let A := (Real.log 4 + 4) * scalingPrimeRatio
   have hA : 0 < A := log_four_add_four_mul_scalingPrimeRatio_pos
-  have hK0 : 0 < K := lt_of_lt_of_le zero_lt_one hK
+  have hK0 : 0 < K := zero_lt_one.trans_le hK
   have hlogR : 0 ≤ Real.log (2 * R) := Real.log_nonneg (by linarith)
   let c := 2 * A * K * Real.log (2 * R) + 8 * k + 1
   let C := Real.exp (2 * A * K / Real.log 2 * Real.log (2 * R)) * 2 ^ k + 1
@@ -164,7 +164,7 @@ theorem congruencePrimeWindow_edge_polylog_salberger_weight {K R : ℝ}
   obtain ⟨C,c,hC,hc,h⟩ := congruencePrimeWindow_edge_polylog_salberger hK hR k
   refine ⟨C,c,hC,hc,?_⟩
   intro α B hB
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hh := mul_le_mul_of_nonneg_right (h B hB) (Real.rpow_nonneg hB0.le α)
   rw [Real.rpow_add hB0]
   convert hh using 1 <;> ring

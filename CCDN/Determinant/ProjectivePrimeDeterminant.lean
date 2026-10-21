@@ -80,7 +80,7 @@ theorem projective_determinant_log_lower_at_rank {s N d M : ℕ} (hs : 0 < s)
     (by linarith [projectivePlaneDeterminantConstant_pos] :
       (0 : ℝ) ≤ projectivePlaneDeterminantConstant + 1)
     (show 0 ≤ (s : ℝ) ^ 2 / 2 by positivity) (Nat.cast_nonneg s) bad ∅ (empty_subset bad)
-    (by simp) 0 (lt_of_lt_of_le one_pos (Int.Matrix.one_le_minorGcd hrows)) (by
+    (by simp) 0 (one_pos.trans_le (Int.Matrix.one_le_minorGcd hrows)) (by
       rw [Nat.floor_natCast]
       intro p hp hcut
       have : Fact p.Prime := ⟨(mem_filter.mp (mem_sdiff.mp hp).1).2⟩

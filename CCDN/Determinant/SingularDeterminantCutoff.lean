@@ -64,7 +64,7 @@ theorem singular_determinant_log_lower_cutoff {s N : ℕ} (hs : 0 < s)
     exact ⟨by dsimp only [m]; exact_mod_cast hm, e, by rwa [div_div], hdiv⟩
   have h := determinant_log_lower_of_local_divisors hx hd hdL (by linarith : 0 ≤ C + 1)
     (show 0 ≤ (s : ℝ) ^ 2 / 2 by positivity) (Nat.cast_nonneg s) B ∅ (empty_subset B)
-    (by simp) 0 m (lt_of_lt_of_le one_pos (Int.Matrix.one_le_minorGcd hrows))
+    (by simp) 0 m (one_pos.trans_le (Int.Matrix.one_le_minorGcd hrows))
     (fun p hp hpL => (hlocal p hp hpL).1) (fun p hp hpL => by
       have hcorr := singular_correction_absorb hd hdL hpL
       have hcount := hupper p hp hpL
