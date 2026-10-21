@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
 public import CCDN.Height.ProjectiveZeroLocus
 import CCDN.Algebra.FiniteFieldProjectiveCone
@@ -25,13 +26,14 @@ theorem projective_hypersurface_finite_field_bound {n d : ℕ}
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) (ZMod p))
     (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (MvPolynomial.map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f))
-    (hsize : 27 * (d : ℝ) ^ 4 < p) :
+    (hsize : stepanovThreshold (d : ℝ) < p) :
     (Nat.card (projectiveZeroLocus f) : ℝ) ≤ (p : ℝ) ^ (n + 1) +
-      330 * (d : ℝ) ^ 2 * (p : ℝ) ^ n * Real.sqrt p := by
+      projectiveHypersurfaceResidueConstant * (d : ℝ) ^ 2 * (p : ℝ) ^ n * Real.sqrt p := by
+  rw [projectiveHypersurfaceResidueConstant_eq]
   have hi := mvPolynomial_irreducible_of_field_map _ f hir
   have hdeg : f.totalDegree = d := hf.totalDegree hi.ne_zero
   have hcone := affine_hypersurface_finite_field_bound p f hir (hdeg ▸ hsize)
-  rw [hdeg] at hcone
+  rw [hdeg, hypersurfaceResidueConstant_eq] at hcone
   have h := homogeneous_projective_count_of_cone_bound f hf hd
     (H := 164 * (d : ℝ) ^ 2 * Real.sqrt p) (by positivity) (by
       simpa only [ZMod.card, mul_assoc, mul_left_comm, mul_comm] using hcone)
@@ -55,9 +57,10 @@ theorem projective_hypersurface_totalMultiplicity_bound {n p d : ℕ} [Fact p.Pr
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)
     (hir : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
       (map (Int.castRingHom (ZMod p)) f)))
-    (hsize : 27 * (d : ℝ) ^ 4 < p) :
+    (hsize : stepanovThreshold (d : ℝ) < p) :
     (projectiveHypersurfaceTotalMultiplicity f hf hf0 : ℝ) ≤ (p : ℝ) ^ (n + 1) +
-      (330 + ((n + 3) * (n + 4) ^ n : ℕ)) * (d : ℝ) ^ 2 * (p : ℝ) ^ n * Real.sqrt p := by
+      (projectiveHypersurfaceResidueConstant + ((n + 3) * (n + 4) ^ n : ℕ)) * (d : ℝ) ^ 2 *
+        (p : ℝ) ^ n * Real.sqrt p := by
   have hi := mvPolynomial_irreducible_of_field_map _ _ hir
   have hc := projective_hypersurface_finite_field_bound p
     (map (Int.castRingHom (ZMod p)) f) (hf.map _) hd hir hsize

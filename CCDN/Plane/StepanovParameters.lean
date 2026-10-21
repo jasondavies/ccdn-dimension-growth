@@ -5,22 +5,25 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import Aesop.BuiltinRules
 public import Mathlib.Algebra.Group.Nat.Defs
 public import Mathlib.Tactic.ToDual
 import ArithmeticHeights.Absolute
 import Mathlib.Algebra.Order.Star.Int
 
-/-! Integer parameters for the Stepanov construction above the 27*d^4 cutoff. -/
+/-! Integer parameters for the Stepanov construction above the cutoff
+`stepanovThreshold d = 27 * d ^ 4`. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 
 lemma stepanov_numeric_dimension (d p x y N : ℕ) (hd : 0 < d)
-    (hp : 27 * d ^ 4 < p) (hx : x ^ 2 ≤ p) (hy : p ≤ y + d)
+    (hp : stepanovThreshold d < p) (hx : x ^ 2 ≤ p) (hy : p ≤ y + d)
     (hN : N + 4 * d ^ 2 = x) (hNpos : 0 < N) :
     N * (x + y + d + d ^ 2 * N) < (x - d ^ 2) * (y - d ^ 2) := by
+  unfold stepanovThreshold at hp
   let b := d ^ 2
   have hb : d ≤ b := by simpa only [b, pow_two] using Nat.le_mul_self d
   have hbpos : 0 < b := by dsimp [b]; positivity
@@ -63,10 +66,11 @@ lemma stepanov_numeric_dimension (d p x y N : ℕ) (hd : 0 < d)
 /-- Concrete integer degrees: A=floor(sqrt(p)/d), D=floor((p-1)/d),
 and N=d*A-4*d^2. The cutoff ensures a positive multiplicity. -/
 theorem exists_stepanov_integer_parameters (d p : ℕ) (hd : 0 < d)
-    (hp : 27 * d ^ 4 < p) :
+    (hp : stepanovThreshold d < p) :
     ∃ A D N : ℕ, d ≤ A ∧ d ≤ D ∧ d * D < p ∧ N ≤ p ∧
       N + 4 * d ^ 2 = d * A ∧ 0 < N ∧ (d * A) ^ 2 ≤ p ∧
       p ≤ d * D + d ∧ p < (d * A + d) ^ 2 := by
+  unfold stepanovThreshold at hp
   let A := Nat.sqrt p / d
   let D := (p - 1) / d
   let x := d * A

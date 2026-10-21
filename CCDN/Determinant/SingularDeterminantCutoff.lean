@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 import all ArithmeticHeights.BombieriVaaler
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.Determinant.SingularReduction
@@ -83,10 +84,10 @@ theorem singular_determinant_log_lower_degree_four {s N : ℕ} (hs : 0 < s)
       ((Matrix.of fun i k => eval (z i) (g k)).map ((↑) : ℤ → ℚ)).row)
     {x C : ℝ} (hx : 1 ≤ x) (hC : 0 ≤ C) (B : Finset ℕ)
     (hf : ∀ p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B,
-      27 * (f.totalDegree : ℝ) ^ 4 < (p : ℝ) →
+      stepanovThreshold (f.totalDegree : ℝ) < (p : ℝ) →
       Irreducible (map (Int.castRingHom (ZMod p)) f))
     (hupper : ∀ p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B,
-      27 * (f.totalDegree : ℝ) ^ 4 < (p : ℝ) →
+      stepanovThreshold (f.totalDegree : ℝ) < (p : ℝ) →
       (Nat.card (PlaneResidue f p) : ℝ) ≤ p + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p) :
     (s : ℝ) ^ 2 / 2 * (Real.log x - 4 * Real.log f.totalDegree - Real.log 27 -
       2 * mertensError - (∑ p ∈ B, Real.log p / p) - 2 * primeBlockMass * (C + 1)) -
@@ -101,6 +102,11 @@ theorem singular_determinant_log_lower_degree_four {s N : ℕ} (hs : 0 < s)
   convert h using 1
   ring
 
+/-- The absolute error of the plane determinant lower bound at the cutoff
+`stepanovThreshold d`, for residue constant `C` (`singular_determinant_log_lower_at_rank`):
+`log 27` from `log (27 d⁴) = log 27 + 4 log d`, `2 mertensError` from Mertens' estimate,
+`2 primeBlockMass (C + 1)` from the point-count error `C d² √p` and the singular correction
+`d² (d - 1) ≤ d² √p`, and `2 (log 4 + 4)` from the term `s (log 4 + 4) x` at `x = s`. -/
 def degreeFourDeterminantError (C : ℝ) : ℝ :=
   Real.log 27 + 2 * mertensError + 2 * primeBlockMass * (C + 1) + 2 * (Real.log 4 + 4)
 
@@ -115,10 +121,10 @@ theorem singular_determinant_log_lower_at_rank {s N : ℕ} (hs : 0 < s)
       ((Matrix.of fun i k => eval (z i) (g k)).map ((↑) : ℤ → ℚ)).row)
     {C : ℝ} (hC : 0 ≤ C) (B : Finset ℕ)
     (hf : ∀ p ∈ ((Ioc 0 s).filter Nat.Prime) \ B,
-      27 * (f.totalDegree : ℝ) ^ 4 < (p : ℝ) →
+      stepanovThreshold (f.totalDegree : ℝ) < (p : ℝ) →
       Irreducible (map (Int.castRingHom (ZMod p)) f))
     (hupper : ∀ p ∈ ((Ioc 0 s).filter Nat.Prime) \ B,
-      27 * (f.totalDegree : ℝ) ^ 4 < (p : ℝ) →
+      stepanovThreshold (f.totalDegree : ℝ) < (p : ℝ) →
       (Nat.card (PlaneResidue f p) : ℝ) ≤ p + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p) :
     (s : ℝ) ^ 2 / 2 * (Real.log s - 4 * Real.log f.totalDegree -
       (∑ p ∈ B, Real.log p / p) - degreeFourDeterminantError C) ≤

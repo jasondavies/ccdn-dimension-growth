@@ -54,9 +54,7 @@ theorem plane_finite_count_of_residue_bound
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f)) (hd : 0 < f.totalDegree)
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0)
     {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
-    (hcount : ∀ ℓ : ℕ, ℓ.Prime → 27 * (f.totalDegree : ℝ) ^ 4 < (ℓ : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod ℓ)) f) →
-      (Nat.card (PlaneResidue f ℓ) : ℝ) ≤ ℓ + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt ℓ) :
+    (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ (2 * Real.exp 1 * affineNonzeroConstantBound C) * curveBound f.totalDegree B := by
   have hf0 : f ≠ 0 := fun h => hir.ne_zero (by simp [h])
   obtain ⟨a, ha, ha0⟩ := exists_bounded_translation_nonzero_constant f hf0
@@ -84,9 +82,7 @@ theorem plane_finite_count_of_residue_bound
   have hbox' : ∀ i j, |(z' i j : ℝ)| ≤ R := by
     intro i j
     exact homogeneousTranslation_integer_point_box hB a (z i) ha (hbox i) j
-  have hcount' : ∀ ℓ : ℕ, ℓ.Prime → 27 * (q.totalDegree : ℝ) ^ 4 < (ℓ : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod ℓ)) q) →
-      (Nat.card (PlaneResidue q ℓ) : ℝ) ≤ ℓ + C * (q.totalDegree : ℝ) ^ 2 * Real.sqrt ℓ := by
+  have hcount' : PlaneResidueCountBound C q.totalDegree q := by
     intro ℓ hℓ hsize hirℓ
     rw [hdeg] at hsize ⊢
     have hirf : Irreducible (MvPolynomial.map (Int.castRingHom (ZMod ℓ)) f) := by
@@ -111,9 +107,7 @@ theorem count_plane_of_residue_bound
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f)) (hd : 0 < f.totalDegree)
     {B C : ℝ} (hB : 1 ≤ B) (hC : 0 ≤ C)
-    (hcount : ∀ ℓ : ℕ, ℓ.Prime → 27 * (f.totalDegree : ℝ) ^ 4 < (ℓ : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod ℓ)) f) →
-      (Nat.card (PlaneResidue f ℓ) : ℝ) ≤ ℓ + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt ℓ) :
+    (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (count (zeroLocus (MvPolynomial.map (Int.castRingHom ℚ) f)) B : ℝ) ≤
       (2 * Real.exp 1 * affineNonzeroConstantBound C) * curveBound f.totalDegree B := by
   apply integer_zero_count_le_of_family_bound

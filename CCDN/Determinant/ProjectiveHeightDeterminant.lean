@@ -20,13 +20,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
-theorem homogeneous_irreducible_reduction_of_not_planeBadReduction
+theorem homogeneous_irreducible_reduction_of_not_hypersurfaceBadReduction
     {d p : ℕ} [Fact p.Prime] (f : MvPolynomial (Fin 3) ℤ)
     (hf : f.IsHomogeneous d) (hdeg : (affineChart 2 f).totalDegree = d)
-    (hgood : ¬PlaneBadReduction (affineChart 2 f) p) :
+    (hgood : ¬HypersurfaceBadReduction (affineChart 2 f) p) :
     Irreducible (map (Int.castRingHom (ZMod p)) f) := by
   let K := AlgebraicClosure (ZMod p)
-  obtain ⟨hdegree, hir⟩ := (not_planeBadReduction_iff (affineChart 2 f) p).mp hgood
+  obtain ⟨hdegree, hir⟩ := (not_hypersurfaceBadReduction_iff (affineChart 2 f) p).mp hgood
   have hc : affineChart 2 (map (Int.castRingHom K) f) =
       map (Int.castRingHom K) (affineChart 2 f) := affineChart_map _ f
   have hf0 : map (Int.castRingHom K) f ≠ 0 := by
@@ -59,16 +59,17 @@ theorem projective_determinant_log_lower_height
     (hrows : LinearIndependent ℚ
       ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row) :
     (s : ℝ) ^ 2 / 2 * (Real.log s - 4 * Real.log d -
-      Real.log (1 + Real.log H / (d : ℝ) ^ 2) - heightDeterminantError 164) ≤
+      Real.log (1 + Real.log H / (d : ℝ) ^ 2) -
+        heightDeterminantError projectivePlaneDeterminantConstant) ≤
         Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   obtain ⟨bad, hmem, hcharge⟩ := exists_plane_bad_prime_set (affineChart 2 f)
     (by omega) hir H hH hcoeff
   rw [hdeg] at hmem hcharge
   have hred (p : ℕ) (hp : p ∈ ((Ioc 0 s).filter Nat.Prime) \ bad)
-      (hlo : 27 * (d : ℝ) ^ 4 < p) :
+      (hlo : stepanovThreshold (d : ℝ) < p) :
       Irreducible (map (Int.castRingHom (ZMod p)) f) := by
     let : Fact p.Prime := ⟨(mem_filter.mp (mem_sdiff.mp hp).1).2⟩
-    apply homogeneous_irreducible_reduction_of_not_planeBadReduction f hf hdeg
+    apply homogeneous_irreducible_reduction_of_not_hypersurfaceBadReduction f hf hdeg
     intro hbad
     exact (mem_sdiff.mp hp).2 ((hmem p).mpr ⟨hlo, hbad⟩)
   have hlower := projective_determinant_log_lower_at_rank hs f hf hd F hF z hprim hz hrows

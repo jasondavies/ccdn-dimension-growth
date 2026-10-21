@@ -28,14 +28,14 @@ noncomputable section
 open MvPolynomial
 
 def literalScalingPrimeCharge (h : ℕ) : ℝ :=
-  Real.exp (∑ p ∈ h.primeFactors, Real.log p / p)
+  primeSetFactor h.primeFactors
 
 lemma literalScalingPrimeCharge_one : literalScalingPrimeCharge 1 = 1 := by
-  simp [literalScalingPrimeCharge]
+  simp [literalScalingPrimeCharge, primeSetFactor]
 
 lemma literalScalingPrimeCharge_prime_le {p : ℕ} (hp : p.Prime) :
     literalScalingPrimeCharge p ≤ Real.exp 1 := by
-  unfold literalScalingPrimeCharge
+  unfold literalScalingPrimeCharge primeSetFactor
   rw [hp.primeFactors, Finset.sum_singleton]
   apply Real.exp_le_exp.mpr
   apply (div_le_one (by exact_mod_cast hp.pos : (0 : ℝ) < p)).mpr
@@ -86,10 +86,11 @@ theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
     rw [← hdeg]
     exact scaledHomogenize_irreducible _ hir (by simpa using (show (h : AlgebraicClosure ℚ) ≠ 0 by exact_mod_cast hh.ne'))
   let bad := (finite_literal_affine_bad_primes f hir).toFinset
-  have hbad (p) : p ∈ bad ↔ 27 * f.totalDegree ^ 4 < p ∧ LiteralAffineBadReduction f p := by
+  have hbad (p) : p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧
+      LiteralAffineBadReduction f p := by
     simp only [bad, Set.Finite.mem_toFinset, Set.mem_ofPred_eq]
   have hgood : ∀ (p : ℕ) [Fact p.Prime], p ∉ bad ∪ h.primeFactors →
-      27 * (f.totalDegree : ℝ) ^ 4 < p →
+      stepanovThreshold (f.totalDegree : ℝ) < p →
       Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
         (map (Int.castRingHom (ZMod p)) (affineChart (n + 2) F))) ∧
       ∀ i, IsCoprime (p : ℤ) (z i 0) := by
@@ -111,10 +112,11 @@ theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
       exact (Nat.prime_iff_prime_int.mp hp.out).irreducible.coprime_iff_not_dvd.mpr hphZ
   obtain ⟨M, hM, G, hG0, hGhom, hGzero, hGnd⟩ := affine_chart_absolute_auxiliary_degree
     F hFhom hd hFabs z hprim hz (bad ∪ h.primeFactors) hgood hB hbox
-  have hcharge : Real.exp (∑ p ∈ bad ∪ h.primeFactors, Real.log p / p) ≤
+  have hcharge : primeSetFactor (bad ∪ h.primeFactors) ≤
       literalScalingPrimeCharge h * literalAffineBadPrimeFactor f := by
-    rw [literalAffineBadPrimeFactor_eq_exp f hir rfl bad hbad, literalScalingPrimeCharge,
-      ← Real.exp_add]
+    rw [literalAffineBadPrimeFactor_eq_exp f hir rfl bad hbad, literalScalingPrimeCharge]
+    unfold primeSetFactor
+    rw [← Real.exp_add]
     apply Real.exp_le_exp.mpr
     rw [add_comm]
     have he := Finset.sum_union_inter (s₁ := bad) (s₂ := h.primeFactors)

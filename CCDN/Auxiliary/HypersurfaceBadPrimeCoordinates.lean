@@ -50,7 +50,7 @@ theorem exists_fin_hypersurface_bad_prime_charge
     (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H) :
     ∃ bad : Finset ℕ,
-      (∀ p, p ∈ bad ↔ 27 * f.totalDegree ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
+      (∀ p, p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧ HypersurfaceBadReduction f p) ∧
       (∑ p ∈ bad, Real.log p / p) ≤
         Real.log (hypersurfaceHeightConstant (n + 1) *
           (1 + Real.log H / (f.totalDegree : ℝ) ^ 2)) + 2 * mertensError + 1 := by
@@ -63,7 +63,8 @@ theorem exists_fin_hypersurface_bad_prime_charge
   have hd : g.totalDegree = f.totalDegree := totalDegree_renameEquiv e f
   have hgc : ∀ m, |(g.coeff m : ℝ)| ≤ H := polynomial_coefficient_bound_renameEquiv e f H hcoeff
   let bad := (finite_hypersurface_bad_primes g hg (hd ▸ hpos)).toFinset
-  have hmem (p : ℕ) : p ∈ bad ↔ 27 * f.totalDegree ^ 4 < p ∧ HypersurfaceBadReduction f p := by
+  have hmem (p : ℕ) : p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧
+      HypersurfaceBadReduction f p := by
     simp only [bad, Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hd, g,
       hypersurfaceBadReduction_renameEquiv]
   refine ⟨bad, hmem, ?_⟩
@@ -77,7 +78,7 @@ theorem finite_fin_hypersurface_bad_primes
     {L : Type*} [Field L] [CharZero L] [IsAlgClosed L] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : Irreducible (map (Int.castRingHom L) f)) (hpos : 0 < f.totalDegree) :
-    {p : ℕ | 27 * f.totalDegree ^ 4 < p ∧ HypersurfaceBadReduction f p}.Finite := by
+    {p : ℕ | stepanovThreshold f.totalDegree < p ∧ HypersurfaceBadReduction f p}.Finite := by
   let e : Fin (n + 1) ≃ Option (Fin n) := finSuccEquiv' 0
   let g := rename e f
   have hg : Irreducible (map (Int.castRingHom L) g) := by
@@ -127,15 +128,15 @@ theorem exists_hypersurface_bad_prime_finset
     {L : Type*} [Field L] [CharZero L] [IsAlgClosed L] {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom L) f)) :
-    ∃ bad : Finset ℕ, ∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p := by
+    ∃ bad : Finset ℕ, ∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p := by
   have hdeg : f.totalDegree = d := hf.totalDegree (ne_zero_of_irreducible_map hir)
   refine ⟨(finite_fin_hypersurface_bad_primes f hir (hdeg ▸ hd)).toFinset, fun p => ?_⟩
   simp only [Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdeg]
 
 /-- A prime above the cutoff outside the bad-prime set has good reduction. -/
 lemma hasGoodReduction_of_not_mem {σ : Type*} {f : MvPolynomial σ ℤ} {d : ℕ}
-    {bad : Finset ℕ} (hbad : ∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p)
-    (p : ℕ) [Fact p.Prime] (hp : p ∉ bad) (hcut : 27 * (d : ℝ) ^ 4 < p) :
+    {bad : Finset ℕ} (hbad : ∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p)
+    (p : ℕ) [Fact p.Prime] (hp : p ∉ bad) (hcut : stepanovThreshold (d : ℝ) < p) :
     HasGoodReduction f p :=
   hypersurface_good_reduction f p fun hb => hp ((hbad p).mpr ⟨by exact_mod_cast hcut, hb⟩)
 

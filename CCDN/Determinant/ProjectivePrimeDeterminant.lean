@@ -21,9 +21,10 @@ open MvPolynomial Finset
 theorem projectivePlaneTotalMultiplicity_le {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f))
-    (hsize : 27 * (d : ℝ) ^ 4 < p) :
+    (hsize : stepanovThreshold (d : ℝ) < p) :
     (projectivePlaneTotalMultiplicity f hf hir.ne_zero : ℝ) ≤
-      p + 165 * (d : ℝ) ^ 2 * Real.sqrt p := by
+      p + (projectivePlaneDeterminantConstant + 1) * (d : ℝ) ^ 2 * Real.sqrt p := by
+  rw [projectivePlaneDeterminantConstant_eq]
   have hp : 27 * d ^ 4 < p := by exact_mod_cast hsize
   have hchar : d < p := by
     have h1 := Nat.le_mul_self d
@@ -34,6 +35,7 @@ theorem projectivePlaneTotalMultiplicity_le {p d : ℕ} [Fact p.Prime]
       Fintype.card (ProjectivePlaneResidue f p) + (3 * d ^ 2 * (d - 1) : ℕ) := by
     exact_mod_cast hmass
   have hc := projective_plane_finite_field_card_bound f hf hd hir hsize
+  rw [projectivePlaneResidueConstant_eq] at hc
   have hcorr := singular_correction_absorb (show 0 < d by omega)
     (L := 27 * (d : ℝ) ^ 4)
     (show (d : ℝ) ^ 4 ≤ 27 * (d : ℝ) ^ 4 by nlinarith [sq_nonneg ((d : ℝ) ^ 2)])
@@ -41,15 +43,16 @@ theorem projectivePlaneTotalMultiplicity_le {p d : ℕ} [Fact p.Prime]
   push_cast at hmassR hcorr
   nlinarith
 
-/-- A uniform local exponent at primes `p > 27*d^4` of irreducible reduction. -/
+/-- A uniform local exponent at primes `p > stepanovThreshold d` of irreducible reduction. -/
 theorem projective_plane_minorGcd_dvd {s N p d M : ℕ} [Fact p.Prime] (hs : 0 < s)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f))
-    (hsize : 27 * (d : ℝ) ^ 4 < p)
+    (hsize : stepanovThreshold (d : ℝ) < p)
     (F : Fin N → MvPolynomial (Fin 3) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → IntPoint 3) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0) :
-    ∃ e : ℕ, (s : ℝ) ^ 2 / (2 * (p + 165 * (d : ℝ) ^ 2 * Real.sqrt p)) - s ≤ e ∧
+    ∃ e : ℕ, (s : ℝ) ^ 2 /
+        (2 * (p + (projectivePlaneDeterminantConstant + 1) * (d : ℝ) ^ 2 * Real.sqrt p)) - s ≤ e ∧
       (p : ℤ) ^ e ∣ Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j)) := by
   obtain ⟨hpos, e, _, he, hdiv⟩ := projective_reduction_minorGcd hs f hf hir.ne_zero
     F hF z hprim hz
@@ -68,12 +71,14 @@ theorem projective_determinant_log_lower_at_rank {s N d M : ℕ} (hs : 0 < s)
       ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row)
     (bad : Finset ℕ)
     (hred : ∀ p ∈ ((Ioc 0 s).filter Nat.Prime) \ bad,
-      27 * (d : ℝ) ^ 4 < p → Irreducible (map (Int.castRingHom (ZMod p)) f)) :
+      stepanovThreshold (d : ℝ) < p → Irreducible (map (Int.castRingHom (ZMod p)) f)) :
     (s : ℝ) ^ 2 / 2 * (Real.log s - 4 * Real.log d -
-      (∑ p ∈ bad, Real.log p / p) - degreeFourDeterminantError 164) ≤
+      (∑ p ∈ bad, Real.log p / p) - degreeFourDeterminantError projectivePlaneDeterminantConstant) ≤
         Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   have h := determinant_log_lower_of_local_divisors_degree_four (x := (s : ℝ))
-    (by exact_mod_cast hs) (show 0 < d by omega) (show (0 : ℝ) ≤ 165 by norm_num)
+    (by exact_mod_cast hs) (show 0 < d by omega)
+    (by linarith [projectivePlaneDeterminantConstant_pos] :
+      (0 : ℝ) ≤ projectivePlaneDeterminantConstant + 1)
     (show 0 ≤ (s : ℝ) ^ 2 / 2 by positivity) (Nat.cast_nonneg s) bad ∅ (empty_subset bad)
     (by simp) 0 (lt_of_lt_of_le one_pos (Int.Matrix.one_le_minorGcd hrows)) (by
       rw [Nat.floor_natCast]

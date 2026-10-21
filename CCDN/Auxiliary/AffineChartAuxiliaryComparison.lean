@@ -23,7 +23,7 @@ theorem affine_chart_auxiliaryRankComparison {n d t : ℕ}
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d)
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0) (bad : Finset ℕ)
-    (hgood : ∀ (p : ℕ) [Fact p.Prime], p ∉ bad → 27 * (d : ℝ) ^ 4 < p →
+    (hgood : ∀ (p : ℕ) [Fact p.Prime], p ∉ bad → stepanovThreshold (d : ℝ) < p →
       AffineChartGoodPrime f z p) :
     AuxiliaryRankComparison order f d z bad :=
   auxiliaryRankComparison_of_determinant_lower order f hf hf0 hd z hz bad

@@ -42,7 +42,7 @@ theorem coprime_newton_edge_bad_prime_factor
   have hir := (h.map_of_injective (Int.castRingHom (AlgebraicClosure ℚ)) Int.cast_injective).irreducible
   have hd : 0 < f.totalDegree := by rw [h.totalDegree]; have := h.lower_pos; have := h.degree_gt; omega
   let P := (finite_fin_hypersurface_bad_primes f hir hd).toFinset
-  have hP (p : ℕ) : p ∈ P ↔ 27 * f.totalDegree ^ 4 < p ∧ HypersurfaceBadReduction f p := by
+  have hP (p : ℕ) : p ∈ P ↔ stepanovThreshold f.totalDegree < p ∧ HypersurfaceBadReduction f p := by
     simp only [P, Set.Finite.mem_toFinset, Set.mem_ofPred_eq]
   rw [hypersurfaceBadPrimeFactor_eq_exp f hir rfl P hP]
   let D := |newtonEdgeCoefficientProduct f d e|

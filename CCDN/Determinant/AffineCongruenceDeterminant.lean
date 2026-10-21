@@ -40,7 +40,7 @@ theorem exists_affine_congruence_determinant_log_lower {n s N M : ℕ} (hs : 0 <
       (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0)
     (hres : ∀ p ∈ P, ∀ i j, (p : ℤ) ∣ x i j - a p j) :
     ∃ bad : Finset ℕ,
-      (∀ p, p ∈ bad ↔ 27 * f.totalDegree ^ 4 < p ∧
+      (∀ p, p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧
         HypersurfaceBadReduction (scaledHomogenize f.totalDegree 1 f) p) ∧
       hypersurfaceRankLowerBound n s f.totalDegree (∑ p ∈ bad ∪ P, Real.log p / p) +
         (hypersurfaceDeterminantMain n s - (n + 2 : ℝ) * s) *

@@ -63,7 +63,7 @@ theorem affine_chart_minorGcd_dvd
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hir : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
       (map (Int.castRingHom (ZMod p)) (affineChart (n + 2) f))))
-    (hsize : 27 * (d : ℝ) ^ 4 < p)
+    (hsize : stepanovThreshold (d : ℝ) < p)
     (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)

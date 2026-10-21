@@ -40,7 +40,7 @@ theorem exists_smooth_congruence_determinant_log_lower
     (hres : ∀ p ∈ P, ∀ i j, (p : ℤ) ∣
       z i (Equiv.swap 0 (k p) j.succ) - a p j * z i (k p)) :
     ∃ bad : Finset ℕ,
-      (∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
+      (∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) ∧
       hypersurfaceRankLowerBound n s d (∑ p ∈ bad ∪ P, Real.log p / p) +
         (hypersurfaceDeterminantMain n s - (n + 2 : ℝ) * s) *
           (∑ p ∈ P, Real.log p) ≤

@@ -59,7 +59,7 @@ theorem hypersurface_bad_prime_charge
     (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (P : Finset ℕ) (hP : ∀ p ∈ P, HypersurfaceBadReduction f p)
-    (hcut : ∀ p ∈ P, 27 * f.totalDegree ^ 4 < p) :
+    (hcut : ∀ p ∈ P, stepanovThreshold f.totalDegree < p) :
     (∑ p ∈ P, Real.log p / p) ≤
       Real.log (hypersurfaceHeightConstant (Fintype.card (Option σ)) *
         (1 + Real.log H / (f.totalDegree : ℝ) ^ 2)) + 2 * mertensError + 1 := by
@@ -70,7 +70,8 @@ theorem hypersurface_bad_prime_charge
     apply hdiv p _ (hP p hp)
     have h1 := Nat.le_mul_self f.totalDegree
     have h2 := Nat.le_mul_self (f.totalDegree * f.totalDegree)
-    nlinarith [hcut p hp]
+    have h3 : 27 * f.totalDegree ^ 4 < p := hcut p hp
+    nlinarith [h3]
   · nlinarith [one_le_pow₀ hd1 (n := 4)]
   · exact one_le_mul_of_one_le_of_one_le (hypersurfaceHeightConstant_one_le _)
       (le_add_of_nonneg_right (div_nonneg (Real.log_nonneg hH) (sq_nonneg _)))
@@ -86,7 +87,7 @@ theorem hypersurface_bad_prime_factor
     (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (P : Finset ℕ) (hP : ∀ p ∈ P, HypersurfaceBadReduction f p)
-    (hcut : ∀ p ∈ P, 27 * f.totalDegree ^ 4 < p) :
+    (hcut : ∀ p ∈ P, stepanovThreshold f.totalDegree < p) :
     primeSetFactor P ≤
       (Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (Fintype.card (Option σ))) *
         (1 + Real.log H / (f.totalDegree : ℝ) ^ 2) := by
@@ -112,7 +113,7 @@ theorem hypersurface_bad_prime_factor_max
     (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (P : Finset ℕ) (hP : ∀ p ∈ P, HypersurfaceBadReduction f p)
-    (hcut : ∀ p ∈ P, 27 * f.totalDegree ^ 4 < p) :
+    (hcut : ∀ p ∈ P, stepanovThreshold f.totalDegree < p) :
     primeSetFactor P ≤
       (2 * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (Fintype.card (Option σ))) *
         max (Real.log H / (f.totalDegree : ℝ) ^ 2) 1 := by

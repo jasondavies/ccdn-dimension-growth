@@ -20,6 +20,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Real
 
+/-- The auxiliary degree bound for a plane equation of degree `d` after translation into a box
+of radius `R` and scaling by `p`, with residue constant `C`. The constants `23` and `exp 14` are
+explained in `projectivePlaneAbsoluteConstant`. -/
 def scaledPlaneAuxiliaryDegreeBound (d : ℕ) (C R p : ℝ) : ℝ :=
   d + Real.log R + 2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 *
     (d : ℝ) ^ 3 * (1 + Real.log p / d) * R ^ (2 / (d : ℝ)) / p ^ (1 / (d : ℝ)) + 2
@@ -36,10 +39,7 @@ theorem scaled_plane_finite_count
     (hz : ∀ i, eval (z i) f = 0)
     {B C : ℝ} (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B)
     (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
-    (hcount : ∀ ℓ : ℕ, ℓ.Prime → 27 * (f.totalDegree : ℝ) ^ 4 < (ℓ : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod ℓ)) f) →
-      (Nat.card (PlaneResidue f ℓ) : ℝ) ≤
-        ℓ + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt ℓ) :
+    (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ max
       ((f.totalDegree : ℝ) * scaledPlaneAuxiliaryDegreeBound f.totalDegree C
         (((f.totalDegree : ℝ) + 1) * B) p)

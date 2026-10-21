@@ -76,7 +76,7 @@ theorem hypersurface_small_height_projective_auxiliary
   have hp := hypersurfaceSmallThreshold_position hd (by linarith : 0 ≤ B) hH hL
     (Real.exp_pos (∑ p ∈ bad, Real.log p / p)).le hposition
   have hp' : hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
-      (Real.exp (∑ p ∈ bad, Real.log p / p)) ≤ hypersurfaceSmallProjectiveConstant n T *
+      (primeSetFactor bad) ≤ hypersurfaceSmallProjectiveConstant n T *
         auxMainTerm n d B (hypersurfaceBadPrimeFactor f) (integerCoefficientHeight f) := by
     rw [hfactor]
     convert hp using 1

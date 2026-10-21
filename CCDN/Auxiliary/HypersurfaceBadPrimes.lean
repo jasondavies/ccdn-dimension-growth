@@ -5,6 +5,8 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Auxiliary.HypersurfaceBadReduction
+public import CCDN.Plane.FiniteFieldConstants
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Auxiliary.UniversalPlaneBadReduction
@@ -21,11 +23,6 @@ lemma ne_zero_of_irreducible_map {R S σ : Type*} [CommSemiring R] [CommSemiring
     {φ : R →+* S} {f : MvPolynomial σ R} (h : Irreducible (map φ f)) : f ≠ 0 := by
   rintro rfl
   exact h.ne_zero (map_zero _)
-
-def HypersurfaceBadReduction {σ : Type*} (f : MvPolynomial σ ℤ) (p : ℕ) : Prop :=
-  ∃ hp : p.Prime, let _ : Fact p.Prime := ⟨hp⟩
-    (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree ≠ f.totalDegree ∨
-      ¬Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f)
 
 /-- Good reduction at a prime `p`: the reduction of `f` modulo `p` is nonzero and
 absolutely irreducible. -/
@@ -70,7 +67,7 @@ theorem finite_hypersurface_bad_primes
     (f : MvPolynomial (Option σ) ℤ)
     (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))
     (hpos : 0 < f.totalDegree) :
-    {p : ℕ | 27 * f.totalDegree ^ 4 < p ∧ HypersurfaceBadReduction f p}.Finite := by
+    {p : ℕ | stepanovThreshold f.totalDegree < p ∧ HypersurfaceBadReduction f p}.Finite := by
   obtain ⟨_, B, _, hmem, _⟩ := exists_hypersurface_bad_prime_set f hf hpos
   apply B.finite_toSet.subset
   intro p hp
@@ -78,7 +75,8 @@ theorem finite_hypersurface_bad_primes
   refine ⟨?_, hp.2⟩
   have h1 := Nat.le_mul_self f.totalDegree
   have h2 := Nat.le_mul_self (f.totalDegree * f.totalDegree)
-  nlinarith [hp.1]
+  have h3 : 27 * f.totalDegree ^ 4 < p := hp.1
+  nlinarith [h3]
 
 end
 end CCDN

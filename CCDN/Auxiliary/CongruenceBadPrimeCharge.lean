@@ -51,7 +51,7 @@ theorem hypersurface_and_congruence_prime_charge
     (hf : Irreducible (map (Int.castRingHom L) f)) (hd : 0 < f.totalDegree)
     (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (bad P : Finset ℕ)
-    (hbad : ∀ p ∈ bad, 27 * f.totalDegree ^ 4 < p ∧ HypersurfaceBadReduction f p)
+    (hbad : ∀ p ∈ bad, stepanovThreshold f.totalDegree < p ∧ HypersurfaceBadReduction f p)
     (hP : ∀ p ∈ P, p.Prime) :
     (∑ p ∈ bad ∪ P, Real.log p / p) ≤
       Real.log (1 + 27 * (f.totalDegree : ℝ) ^ 4 *
@@ -74,7 +74,7 @@ theorem hypersurface_and_congruence_prime_charge
   have hdvd (p : ℕ) (hp : p ∈ bad ∪ P) : (p : ℤ) ∣ D * q := by
     rcases mem_union.mp hp with hb | hp
     · apply dvd_mul_of_dvd_left (hdiv p ?_ (hbad p hb).2)
-      have hcut := (hbad p hb).1
+      have hcut : 27 * f.totalDegree ^ 4 < p := (hbad p hb).1
       have h₁ := Nat.le_mul_self f.totalDegree
       have h₂ := Nat.le_mul_self (f.totalDegree * f.totalDegree)
       nlinarith

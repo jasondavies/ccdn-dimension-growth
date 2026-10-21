@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Auxiliary.AuxiliaryDegreeBound
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
 import CCDN.Hypersurface.HypersurfaceCountNormalization
@@ -17,12 +18,17 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Explicit dimension-only constant for the projective multiplicity count. -/
-def hypersurfaceCountConstant (n : ℕ) : ℝ := 330 + ((n + 3) * (n + 4) ^ n : ℕ)
+/-- Explicit dimension-only constant for the projective multiplicity count
+(`projective_hypersurface_totalMultiplicity_bound`) in `n + 3` coordinates: the projective
+point count contributes `projectiveHypersurfaceResidueConstant = 330`, and the multiplicities
+of the singular points contribute `(n + 3) (n + 4)ⁿ`
+(`projectiveHypersurfaceTotalMultiplicity_le_card_add_sqrt_error`). -/
+def hypersurfaceCountConstant (n : ℕ) : ℝ :=
+  projectiveHypersurfaceResidueConstant + ((n + 3) * (n + 4) ^ n : ℕ)
 
 lemma hypersurfaceCountConstant_nonneg (n : ℕ) : 0 ≤ hypersurfaceCountConstant n := by
   unfold hypersurfaceCountConstant
-  positivity
+  exact add_nonneg projectiveHypersurfaceResidueConstant_pos.le (Nat.cast_nonneg _)
 
 /-- The main local coefficient for projective hypersurfaces of dimension n+1. -/
 def hypersurfaceDeterminantMain (n s : ℕ) : ℝ :=
@@ -47,7 +53,7 @@ theorem projective_hypersurface_normalized_count_error {n p d : ℕ} [Fact p.Pri
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)
     (hir : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
       (map (Int.castRingHom (ZMod p)) f)))
-    (hsize : 27 * (d : ℝ) ^ 4 < p) :
+    (hsize : stepanovThreshold (d : ℝ) < p) :
     (projectiveHypersurfaceTotalMultiplicity f hf hf0 : ℝ) ^ (1 / (n + 1 : ℝ)) / p - 1 ≤
       hypersurfaceCountConstant n * (d : ℝ) ^ 2 / Real.sqrt p := by
   have hp : (0 : ℝ) < p := by exact_mod_cast (Fact.out : p.Prime).pos
@@ -77,7 +83,7 @@ theorem projective_hypersurface_minorGcd_dvd {n s N p d M : ℕ} [Fact p.Prime]
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)
     (hir : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
       (map (Int.castRingHom (ZMod p)) f)))
-    (hsize : 27 * (d : ℝ) ^ 4 < p)
+    (hsize : stepanovThreshold (d : ℝ) < p)
     (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, MvPolynomial.eval (z i) f = 0) :

@@ -51,9 +51,7 @@ theorem polynomial_map_no_auxiliary_height_comparison
     (hbox : ∀ i j, |(eval (z i) (τ j) : ℝ)| ≤ B) (hC : 0 ≤ C)
     (hrel : ∀ g : MvPolynomial (Fin 3) ℤ, g.IsHomogeneous M →
       (∀ i, eval (fun j => eval (z i) (τ j)) g = 0) → f ∣ g)
-    (hcount : ∀ p : ℕ, p.Prime → 27 * (d : ℝ) ^ 4 < (p : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) q) →
-      (Nat.card (PlaneResidue q p) : ℝ) ≤ p + C * (d : ℝ) ^ 2 * Real.sqrt p) :
+    (hcount : PlaneResidueCountBound C d q) :
     ∃ s : ℕ, 0 < s ∧ s + (2 + (M - d)).choose (M - d) = (2 + M).choose M ∧
       2 * s + d ^ 2 = d * (2 * M + 3) ∧
       (s : ℝ) ^ 2 / 2 * (Real.log s - 4 * Real.log d -

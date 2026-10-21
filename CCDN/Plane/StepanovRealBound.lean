@@ -5,21 +5,25 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import Mathlib.Analysis.Real.Sqrt
 /-! The explicit real-valued error term for the integer Stepanov parameters. -/
 
 @[expose] public section
 namespace CCDN
 
+/-- The Stepanov count `t N ≤ d (D + p A) + d (d - 1) N` gives the plane-curve bound
+`t ≤ p + 161 d² √p`; see `planeResidueConstant` for the derivation of `161`. -/
 lemma stepanov_real_bound (d p A D N t : ℕ) (hd : 0 < d)
-    (hp : 27 * d ^ 4 < p) (hD : d * D < p)
+    (hp : stepanovThreshold d < p) (hD : d * D < p)
     (hN : N + 4 * d ^ 2 = d * A) (hNpos : 0 < N)
     (hpx : p < (d * A + d) ^ 2)
     (hcount : t * N ≤ d * (D + p * A) + d * (d - 1) * N) :
-    (t : ℝ) ≤ p + 161 * (d : ℝ) ^ 2 * Real.sqrt p := by
+    (t : ℝ) ≤ p + planeResidueConstant * (d : ℝ) ^ 2 * Real.sqrt p := by
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hd2 : (1 : ℝ) ≤ (d : ℝ) ^ 2 := by nlinarith only [hdR]
   have hdle : (d : ℝ) ≤ (d : ℝ) ^ 2 := by nlinarith only [hdR]
+  unfold stepanovThreshold at hp
   have hpR : 27 * (d : ℝ) ^ 4 < p := by exact_mod_cast hp
   have hp0 : (0 : ℝ) < p := by nlinarith only [hpR, pow_nonneg (Nat.cast_nonneg d : (0 : ℝ) ≤ d) 4]
   let s := Real.sqrt (p : ℝ)

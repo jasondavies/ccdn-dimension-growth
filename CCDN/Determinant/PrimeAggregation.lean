@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Analysis.PrimeCutoff
 import CCDN.Analysis.PrimeProduct
 /-! Simultaneous prime divisibility with arbitrary main and error coefficients.
@@ -169,7 +170,7 @@ theorem determinant_log_lower_of_local_divisors_degree_four {x K A E : ℝ} {d :
     (hx : 1 ≤ x) (hd : 0 < d) (hK : 0 ≤ K) (hA : 0 ≤ A) (hE : 0 ≤ E)
     (bad P : Finset ℕ) (hPbad : P ⊆ bad) (hP : ∀ p ∈ P, p.Prime) (v : ℕ → ℕ)
     {D : ℤ} (hD : 0 < D)
-    (hlocal : ∀ p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ bad, 27 * (d : ℝ) ^ 4 < p →
+    (hlocal : ∀ p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ bad, stepanovThreshold (d : ℝ) < p →
       ∃ e : ℕ, A / (p + K * (d : ℝ) ^ 2 * Real.sqrt p) - E ≤ e ∧ (p : ℤ) ^ e ∣ D)
     (hcong : ∀ p ∈ P, (p : ℤ) ^ v p ∣ D) :
     A * (Real.log x - 4 * Real.log d - Real.log 27 - 2 * mertensError -

@@ -34,7 +34,8 @@ theorem projective_no_auxiliary_height_comparison
     ∃ s : ℕ, 0 < s ∧ s + (2 + (M - d)).choose (M - d) = (2 + M).choose M ∧
       2 * s + d ^ 2 = d * (2 * M + 3) ∧
       (s : ℝ) ^ 2 / 2 * (Real.log s - 4 * Real.log d -
-        Real.log (1 + Real.log H / (d : ℝ) ^ 2) - heightDeterminantError 164) ≤
+        Real.log (1 + Real.log H / (d : ℝ) ^ 2) -
+          heightDeterminantError projectivePlaneDeterminantConstant) ≤
         Real.log (s.factorial : ℝ) / 2 + (s : ℝ) / 2 * Real.log ((2 + M).choose M) +
           s * M * Real.log B -
           (((2 + M).choose M : ℝ) - s) * Real.log |((order.leadingCoeff f : ℤ) : ℝ)| := by

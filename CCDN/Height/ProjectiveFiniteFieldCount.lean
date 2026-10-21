@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Determinant.ProjectivePlaneResidueDeterminant
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Determinant.ProjectiveResidueCardinality
@@ -21,10 +22,11 @@ open MvPolynomial
 theorem projective_plane_finite_field_card_bound {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f))
-    (hsize : 27 * (d : ℝ) ^ 4 < p) :
+    (hsize : stepanovThreshold (d : ℝ) < p) :
     (Fintype.card (ProjectivePlaneResidue f p) : ℝ) ≤
-      p + 162 * (d : ℝ) ^ 2 * Real.sqrt p := by
+      p + projectivePlaneResidueConstant * (d : ℝ) ^ 2 * Real.sqrt p := by
   classical
+  rw [projectivePlaneResidueConstant_eq]
   let q := map (Int.castRingHom (ZMod p)) f
   have hX := variable_not_dvd_irreducible_homogeneous q (hf.map _) hir hd 0
   have hchart := affineChart_irreducible_of_not_variable_dvd q (hf.map _) hir hX
@@ -38,7 +40,7 @@ theorem projective_plane_finite_field_card_bound {p d : ℕ} [Fact p.Prime]
   have ha := plane_finite_field_card_bound p (affineChart 2 q) hchart
     (by rwa [hdeg]) (fun a : PlaneResidue (planeAffineChart f) p => a.val)
     Subtype.val_injective hz
-  rw [hdeg] at ha
+  rw [hdeg, planeResidueConstant_eq] at ha
   have hcardR : (Fintype.card (ProjectivePlaneResidue f p) : ℝ) ≤
       Fintype.card (PlaneResidue (planeAffineChart f) p) + d := by exact_mod_cast hcard
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast (show 1 ≤ d by omega)

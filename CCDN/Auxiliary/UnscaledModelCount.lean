@@ -56,9 +56,7 @@ theorem unscaled_plane_finite_count
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f)) (hd : 0 < f.totalDegree)
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0)
     {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
-    (hcount : ∀ ℓ : ℕ, ℓ.Prime → 27 * (f.totalDegree : ℝ) ^ 4 < (ℓ : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod ℓ)) f) →
-      (Nat.card (PlaneResidue f ℓ) : ℝ) ≤ ℓ + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt ℓ) :
+    (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ max
       ((f.totalDegree : ℝ) * scaledPlaneAuxiliaryDegreeBound f.totalDegree C
         (((f.totalDegree : ℝ) + 1) * B) 1)
@@ -130,9 +128,7 @@ theorem unscaled_plane_finite_count_large_coefficient
     (m : Fin 2 →₀ ℕ) (hm : f.coeff m ≠ 0)
     (hheight : 4 * (f.totalDegree : ℝ) * Real.log (((f.totalDegree : ℝ) + 1) * B) ≤
       Real.log |(f.coeff m : ℝ)|)
-    (hcount : ∀ ℓ : ℕ, ℓ.Prime → 27 * (f.totalDegree : ℝ) ^ 4 < (ℓ : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod ℓ)) f) →
-      (Nat.card (PlaneResidue f ℓ) : ℝ) ≤ ℓ + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt ℓ) :
+    (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ (34 + 8 * Real.exp (heightDeterminantError C + 20)) * (f.totalDegree : ℝ) ^ 4 := by
   let d := f.totalDegree
   let R := ((d : ℝ) + 1) * B

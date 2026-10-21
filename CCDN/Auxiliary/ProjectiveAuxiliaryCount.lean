@@ -68,7 +68,7 @@ theorem projective_points_small_height_bound
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 4 * d * Real.log B) :
     (t : ℝ) ≤ d * (d + Real.log B +
-      2 * Real.exp (heightDeterminantError 164 + 23) * (d : ℝ) ^ 3 *
+      2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) * (d : ℝ) ^ 3 *
         (1 + Real.log H / (d : ℝ) ^ 2) * B ^ (2 / (d : ℝ)) /
           |((order.leadingCoeff f : ℤ) : ℝ)| ^ (1 / (d : ℝ) ^ 2) + 2) := by
   obtain ⟨M, hM, g, _, hg, hzg, hnd⟩ := projective_auxiliary_small_height_degree
@@ -93,14 +93,18 @@ theorem projective_points_large_height_bound
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
     (T : ℝ) (hT : 0 ≤ T) (hheight : 4 * d * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * (d : ℝ) ^ 2) :
-    (t : ℝ) ≤ (34 + 8 * Real.exp (heightDeterminantError 164 + 6 + T)) * (d : ℝ) ^ 4 := by
+    (t : ℝ) ≤
+      (34 + 8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 6 + T)) *
+        (d : ℝ) ^ 4 := by
   obtain ⟨M, hM, g, _, hg, hzg, hnd⟩ := projective_auxiliary_large_height_degree
     order f hf hf0 hd hdeg hir H hH hcoeff z hzprim hz hB hbox T hT hheight hposition
   have h := projective_integer_points_card_le_auxiliary_degree f g hf hg hprim
     (projective_chart_rational_irreducible f hf hf0 hdeg hir) hnd z hz0 hinj hz hzg
   have hR : (t : ℝ) ≤ d * (M : ℝ) := by exact_mod_cast h
   calc
-    _ ≤ d * ((34 + 8 * Real.exp (heightDeterminantError 164 + 6 + T)) * (d : ℝ) ^ 3) :=
+    _ ≤ d * ((34 + 8 *
+          Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 6 + T)) *
+        (d : ℝ) ^ 3) :=
       hR.trans (mul_le_mul_of_nonneg_left hM (by positivity))
     _ = _ := by ring
 

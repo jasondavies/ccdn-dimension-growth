@@ -65,7 +65,7 @@ theorem hypersurface_log_lower_at_rank_of_local_divisors_congruence {n s d : ℕ
     (hs : 0 < s) (hd : 0 < d) (bad P : Finset ℕ) (hPbad : P ⊆ bad) (hP : ∀ p ∈ P, p.Prime)
     (v : ℕ → ℕ) {D : ℤ} (hD : 0 < D)
     (hlocal : ∀ p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad,
-      27 * (d : ℝ) ^ 4 < p → ∃ e : ℕ, hypersurfaceDeterminantMain n s /
+      stepanovThreshold (d : ℝ) < p → ∃ e : ℕ, hypersurfaceDeterminantMain n s /
         (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) - (n + 2 : ℝ) * s ≤ e ∧
         (p : ℤ) ^ e ∣ D)
     (hcong : ∀ p ∈ P, (p : ℤ) ^ v p ∣ D) :
@@ -81,7 +81,7 @@ divisors. -/
 theorem hypersurface_log_lower_at_rank_of_local_divisors {n s d : ℕ}
     (hs : 0 < s) (hd : 0 < d) (bad : Finset ℕ) {D : ℤ} (hD : 0 < D)
     (hlocal : ∀ p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad,
-      27 * (d : ℝ) ^ 4 < p → ∃ e : ℕ, hypersurfaceDeterminantMain n s /
+      stepanovThreshold (d : ℝ) < p → ∃ e : ℕ, hypersurfaceDeterminantMain n s /
         (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) - (n + 2 : ℝ) * s ≤ e ∧
         (p : ℤ) ^ e ∣ D) :
     hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤ Real.log D := by
@@ -101,7 +101,7 @@ theorem hypersurface_determinant_log_lower_at_rank {n s N d M : ℕ} (hs : 0 < s
     (bad : Finset ℕ)
     (hred : ∀ (p : ℕ) [Fact p.Prime],
       p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad →
-      27 * (d : ℝ) ^ 4 < p →
+      stepanovThreshold (d : ℝ) < p →
       HasGoodReduction f p) :
     hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by

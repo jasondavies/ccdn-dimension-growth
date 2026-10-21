@@ -16,13 +16,11 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Real
 
-/-- The remaining finite-field counting obligation, with one absolute constant.
-`planeResidueBound` (in `CCDN.Plane.PlaneCount`) discharges this input with constant 161. -/
+/-- The finite-field counting obligation `PlaneResidueCountBound` for every plane equation
+of positive degree, with one absolute constant. `planeResidueBound` discharges it with
+`C = planeResidueConstant`. -/
 def PlaneResidueBound (C : ℝ) : Prop :=
-  ∀ f : MvPolynomial (Fin 2) ℤ, 0 < f.totalDegree →
-    ∀ p : ℕ, p.Prime → 27 * (f.totalDegree : ℝ) ^ 4 < (p : ℝ) →
-      Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) f) →
-      (Nat.card (PlaneResidue f p) : ℝ) ≤ p + C * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p
+  ∀ f : MvPolynomial (Fin 2) ℤ, 0 < f.totalDegree → PlaneResidueCountBound C f.totalDegree f
 
 lemma rational_scalar_model_irreducible_charZero {F σ : Type*} [Field F] [CharZero F]
     {f : MvPolynomial σ ℚ} {g : MvPolynomial σ ℤ} {a : ℚ} (ha : a ≠ 0)

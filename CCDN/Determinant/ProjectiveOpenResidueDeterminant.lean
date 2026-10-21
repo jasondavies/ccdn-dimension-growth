@@ -220,7 +220,7 @@ theorem projective_hypersurface_minorGcd_dvd_open
       (map (Int.castRingHom (ZMod p)) g)))
     (hfactor : map (Int.castRingHom (ZMod p)) f =
       map (Int.castRingHom (ZMod p)) g * map (Int.castRingHom (ZMod p)) h)
-    (hsize : 27 * (d : ℝ) ^ 4 < p)
+    (hsize : stepanovThreshold (d : ℝ) < p)
     (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)
@@ -235,9 +235,8 @@ theorem projective_hypersurface_minorGcd_dvd_open
   · obtain ⟨hpos, a, hcut, hdiv⟩ := projective_hypersurface_reduced_factor_minorGcd hs
       f g h hf hg hh hg0 hfactor F hF z hprim hz havoid
     have hedR : (e : ℝ) ≤ d := by exact_mod_cast hed
-    have hsize' : 27 * (e : ℝ) ^ 4 < p :=
-      (mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (Nat.cast_nonneg e) hedR 4)
-        (by norm_num)).trans_lt hsize
+    have hsize' : stepanovThreshold (e : ℝ) < p :=
+      (stepanovThreshold_le_stepanovThreshold (Nat.cast_nonneg e) hedR).trans_lt hsize
     have hcount := projective_hypersurface_totalMultiplicity_bound g hg he hg0 hir hsize'
     have hsq : (e : ℝ) ^ 2 ≤ (d : ℝ) ^ 2 := pow_le_pow_left₀ (Nat.cast_nonneg e) hedR 2
     have hmajor : (projectiveHypersurfaceTotalMultiplicity g hg hg0 : ℝ) ≤
@@ -245,9 +244,14 @@ theorem projective_hypersurface_minorGcd_dvd_open
           (hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) * (p : ℝ) ^ n := by
       calc
         _ ≤ (p : ℝ) ^ (n + 1) +
-            (330 + ((n + 3) * (n + 4) ^ n : ℕ)) * (d : ℝ) ^ 2 * (p : ℝ) ^ n * Real.sqrt p := by
+            (projectiveHypersurfaceResidueConstant + ((n + 3) * (n + 4) ^ n : ℕ)) * (d : ℝ) ^ 2 *
+              (p : ℝ) ^ n * Real.sqrt p := by
           apply hcount.trans
-          gcongr
+          have hC := hypersurfaceCountConstant_nonneg n
+          unfold hypersurfaceCountConstant at hC
+          have hm := mul_le_mul_of_nonneg_right (mul_le_mul_of_nonneg_left hsq hC)
+            (show 0 ≤ (p : ℝ) ^ n * Real.sqrt p by positivity)
+          nlinarith [hm]
         _ = _ := by unfold hypersurfaceCountConstant; ring
     have hroot := hypersurface_count_root_bound (n + 1) (by omega) (Nat.cast_nonneg p)
       (show 0 ≤ hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p from

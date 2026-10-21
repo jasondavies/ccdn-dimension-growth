@@ -75,7 +75,7 @@ theorem auxiliaryRankComparison_of_determinant_lower {n d t : ℕ}
   have hnN : n + 1 + 1 = n + 2 := by omega
   have hnR : (n : ℝ) + 1 + 1 = n + 2 := by ring
   have hh := hypersurface_rank_comparison_normalized (r := n + 1) (by omega) hd hdM hr
-    B |((order.leadingCoeff f : ℤ) : ℝ)| (Real.exp (∑ p ∈ bad, Real.log p / p))
+    B |((order.leadingCoeff f : ℤ) : ℝ)| (primeSetFactor bad)
     (hypersurfaceDeterminantError n)
     (by simpa only [hypersurfaceRankLowerBound, hnN, Nat.cast_add, Nat.cast_one, hnR,
       Real.log_exp] using hc)
@@ -89,7 +89,7 @@ theorem hypersurface_auxiliaryRankComparison {n d t : ℕ}
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d)
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0) (bad : Finset ℕ)
-    (hbad : ∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) :
+    (hbad : ∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) :
     AuxiliaryRankComparison order f d z bad :=
   auxiliaryRankComparison_of_determinant_lower order f hf hf0 hd z hz bad
     fun _ _ _ a F hs hF hi => hypersurface_determinant_log_lower_at_rank hs f hf hd F hF

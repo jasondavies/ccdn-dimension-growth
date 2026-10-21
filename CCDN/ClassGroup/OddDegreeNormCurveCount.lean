@@ -59,7 +59,7 @@ theorem signedNormCurvePolynomial_bad_prime_factor
   have hir := signedNormCurvePolynomial_map_irreducible_in_every_characteristic K
     (AlgebraicClosure ℚ) β hεQ hodd
   have hbad (p : ℕ) : p ∈ (∅ : Finset ℕ) ↔
-      27 * (signedNormCurvePolynomial K β ε).totalDegree ^ 4 < p ∧
+      stepanovThreshold (signedNormCurvePolynomial K β ε).totalDegree < p ∧
         HypersurfaceBadReduction (signedNormCurvePolynomial K β ε) p := by
     simp only [Finset.notMem_empty, false_iff, not_and]
     intro _
