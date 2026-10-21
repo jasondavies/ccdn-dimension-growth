@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.AffineCongruenceAuxiliary
 public import CCDN.Hilbert.PrincipalStandardMonomials
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.HypersurfaceRankProfile
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Surface.SurfaceMonomialWeight
@@ -64,7 +65,7 @@ theorem surface_congruence_rank_power_bounds
 a proper auxiliary. The degree criterion is entirely numerical. -/
 theorem exists_surface_congruence_auxiliary_of_gap
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     {M : ℕ} (hM : f.totalDegree ≤ M)

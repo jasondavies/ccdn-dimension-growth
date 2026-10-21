@@ -44,7 +44,7 @@ and the box, and the hyperplane x₀=0 is required to intersect properly. -/
 theorem projective_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (F : CoordinatePolynomial 4), F.IsHomogeneous d →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducibleRat F →
       (¬ X 0 ∣ F) → ∀ B : ℝ, 1 ≤ B →
       ∃ (S : Finset (Ideal (CoordinatePolynomial 4)))
         (δ : Ideal (CoordinatePolynomial 4) → ℕ),
@@ -69,8 +69,8 @@ theorem projective_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
       simpa only [Ideal.map_span, Set.image_singleton, map_X, Ideal.mem_span_singleton] using hh
     exact Ideal.mem_span_singleton.mp
       ((mem_ideal_scalar_extension_iff (Ideal.span {X 0}) F).mp hmem)
-  have hfabs : Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (affineChart 3 F)) := by
-    rw [← affineChart_map]
+  have hfabs : AbsolutelyIrreducibleRat (affineChart 3 F) := by
+    rw [AbsolutelyIrreducibleRat, ← affineChart_map]
     exact affineChart_irreducible_of_not_variable_dvd _ (hhom.map _) habs hXK
   have hfdeg : (affineChart 3 F).totalDegree = d :=
     affineChart_degree_of_not_variable_dvd F hhom hX

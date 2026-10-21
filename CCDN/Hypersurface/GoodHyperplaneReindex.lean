@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Hypersurface.GoodHyperplaneBounds
 /-! Transport of the constructed good hyperplane to coordinates suited to
 the universal Noether family. -/
@@ -41,15 +42,15 @@ lemma graphHyperplaneRestriction_rename {K σ τ : Type*}
 geometrically integral rational graph section in the double-Option coordinates. -/
 theorem exists_geometrically_good_graph_reindexed {n : ℕ}
     (f : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) :
     ∃ a : Option (Fin (2 + n)) → ℚ,
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ))
-        (graphHyperplaneRestriction a (map (Int.castRingHom ℚ) f))) := by
+      AbsolutelyIrreducibleRat (graphHyperplaneRestriction a (map (Int.castRingHom ℚ) f)) := by
   let e : Option (Fin (2 + n)) ≃ Fin (3 + n) :=
     (_root_.finSuccEquiv (2 + n)).symm.trans (finCongr (by omega))
   let F := rename (Equiv.optionCongr e) f
-  have hFir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) F) := by
+  have hFir : AbsolutelyIrreducible F := by
+    dsimp only [AbsolutelyIrreducible]
     rw [map_rename]
     exact (MulEquiv.irreducible_iff
       (f := (renameEquiv (AlgebraicClosure ℚ) (Equiv.optionCongr e)).toMulEquiv)).mpr hir

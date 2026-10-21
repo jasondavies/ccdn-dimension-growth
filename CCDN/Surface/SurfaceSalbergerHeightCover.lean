@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceGeometricCurveCover
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Analysis.SalbergerCoverNumerics
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Hilbert.CompleteIntersectionDegreeBudget
@@ -84,7 +85,7 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
     (K : ℝ) (hK : 0 ≤ K) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (f : MvPolynomial (Fin 3) ℤ),
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) →
+      AbsolutelyIrreducible f →
       f.totalDegree = d → ∀ H B : ℝ, 1 ≤ H → 1 ≤ B →
       (∀ e, |(f.coeff e : ℝ)| ≤ H) →
       Real.log H ≤ K * (Real.log B + 1) →

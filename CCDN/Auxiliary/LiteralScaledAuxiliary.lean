@@ -8,6 +8,7 @@ module
 public import CCDN.Auxiliary.AbsoluteAuxiliary
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
 public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.AffineChartAbsoluteAuxiliary
 import CCDN.Auxiliary.LiteralAffineScaling
@@ -53,7 +54,7 @@ lemma hypersurfaceAuxiliaryDegreeBound_mono_b (n d : ℕ) {B b b' H : ℝ}
 finite prime charge coming only from the scale and literal bad reductions. -/
 theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (h : ℕ) (hh : 0 < h)
     (hprimitive : ∀ x : IntPoint (n + 2), eval x f = 0 →
       Finset.univ.gcd (Fin.cons (h : ℤ) x) = 1)
@@ -79,8 +80,9 @@ theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
     · simpa only [z, Fin.cons_zero, Int.cast_natCast, abs_of_nonneg (Nat.cast_nonneg (α := ℝ) h)] using hhB
     · exact mem_integerBox.mp (Finset.mem_filter.mp (E i).property).1 k
   have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous _ _ le_rfl
-  have hFabs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) F) := by
-    rw [show F = scaledHomogenize f.totalDegree (h : ℤ) f from rfl, scaledHomogenize_map]
+  have hFabs : AbsolutelyIrreducible F := by
+    rw [AbsolutelyIrreducible, show F = scaledHomogenize f.totalDegree (h : ℤ) f from rfl,
+      scaledHomogenize_map]
     rw [← totalDegree_map_of_injective (Int.castRingHom (AlgebraicClosure ℚ)).injective_int f]
     exact scaledHomogenize_irreducible _ hir
       (by simpa using (show (h : AlgebraicClosure ℚ) ≠ 0 by exact_mod_cast hh.ne'))
@@ -135,7 +137,7 @@ theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
 scaling prime charged by at most exp(1). -/
 theorem literal_prime_scaled_affine_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {p : ℕ} (hp : p.Prime) (hp0 : ¬(p : ℤ) ∣ f.coeff 0)
     {B : ℝ} (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) :
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
@@ -162,7 +164,7 @@ theorem literal_prime_scaled_affine_auxiliary {n : ℕ}
 with no extra prime and no restriction on the constant coefficient. -/
 theorem literal_unscaled_affine_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬f ∣ g ∧
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B

@@ -59,7 +59,7 @@ private theorem projective_hypersurface_factor_lower_bound_three {n : ℕ} (hn :
     {g : ℕ → ℝ} {C : ℝ}
     (hbound : ∀ F : MvPolynomial (Fin (n + 1)) ℚ,
       F.IsHomogeneous F.totalDegree →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducibleRat F →
       5 ≤ F.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroLocus F) B : ℝ) ≤
         C * g F.totalDegree * B ^ (n - 1))
@@ -85,7 +85,7 @@ theorem projective_hypersurface_factor_lower_bound {n : ℕ} (hn : 2 ≤ n)
     {g : ℕ → ℝ} {C : ℝ}
     (hbound : ∀ F : MvPolynomial (Fin (n + 1)) ℚ,
       F.IsHomogeneous F.totalDegree →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducibleRat F →
       5 ≤ F.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroLocus F) B : ℝ) ≤
         C * g F.totalDegree * B ^ (n - 1))
@@ -121,7 +121,7 @@ theorem projective_hypersurface_factor_not_isLittleO {n : ℕ} (hn : 2 ≤ n)
     {g : ℕ → ℝ} {C : ℝ} (hC : 0 < C)
     (hbound : ∀ F : MvPolynomial (Fin (n + 1)) ℚ,
       F.IsHomogeneous F.totalDegree →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducibleRat F →
       5 ≤ F.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroLocus F) B : ℝ) ≤
         C * g F.totalDegree * B ^ (n - 1)) :
@@ -156,7 +156,7 @@ theorem projective_hypersurface_degree_exponent_ge_one {n : ℕ} (hn : 2 ≤ n)
     {e C : ℝ} (hC : 0 < C)
     (hbound : ∀ F : MvPolynomial (Fin (n + 1)) ℚ,
       F.IsHomogeneous F.totalDegree →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducibleRat F →
       5 ≤ F.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroLocus F) B : ℝ) ≤
         C * (F.totalDegree : ℝ) ^ e * B ^ (n - 1)) :

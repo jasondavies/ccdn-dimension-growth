@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceCongruenceAuxiliary
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.HypersurfaceRankArchimedean
 import Mathlib.Algebra.Order.Star.Real
 /-! Numerical degree selection for the smooth-congruence auxiliary on a
@@ -226,7 +227,7 @@ theorem surface_congruence_degree_selection {d : ℕ} (hd : 0 < d)
 O_d,K((B^(1/√d)/exp Q + 1)(1 + log B + Q)). -/
 theorem exists_surface_congruence_auxiliary
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {K H B : ℝ} (hK : 0 ≤ K) (hH : 1 ≤ H) (hB : 1 ≤ B)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (hheight : Real.log H ≤ K * (Real.log B + 1))

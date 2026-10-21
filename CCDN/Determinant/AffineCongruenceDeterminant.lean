@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.ScaledHomogenization
 public import CCDN.Determinant.HypersurfaceDeterminantRank
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
 import CCDN.Determinant.SmoothCongruenceDeterminant
 /-! Congruence-refined determinant estimates for affine zeros and
@@ -27,7 +28,7 @@ lemma primitive_affine_integer_coordinates {n : ℕ} (x : Fin n → ℤ) :
 without changing a single affine evaluation. -/
 theorem exists_affine_congruence_determinant_log_lower {n s N M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree)
     (G : Fin N → MvPolynomial (Fin (n + 2)) ℤ) (hG : ∀ j, (G j).totalDegree ≤ M)
     (x : Fin s → IntPoint (n + 2)) (hx : ∀ i, eval (x i) f = 0)
@@ -49,7 +50,7 @@ theorem exists_affine_congruence_determinant_log_lower {n s N M : ℕ} (hs : 0 <
   let F := scaledHomogenize f.totalDegree 1 f
   have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hF : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous 1 f le_rfl
-  have hFir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) F) :=
+  have hFir : AbsolutelyIrreducible F :=
     (unscaledHomogenize_absolute_irreducible_iff f hf0).mpr hir
   let H := fun j => scaledHomogenize M 1 (G j)
   have hH : ∀ j, (H j).IsHomogeneous M := fun j => scaledHomogenize_homogeneous 1 _ (hG j)

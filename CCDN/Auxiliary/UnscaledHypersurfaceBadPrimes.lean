@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
@@ -38,14 +39,13 @@ lemma affineChart_not_variable_dvd_of_full_degree {K : Type*} [Field K] {n : ℕ
 
 lemma unscaledHomogenize_absolute_irreducible_iff {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) :
-    Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (scaledHomogenize f.totalDegree 1 f)) ↔
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) := by
+    AbsolutelyIrreducible (scaledHomogenize f.totalDegree 1 f) ↔ AbsolutelyIrreducible f := by
   let φ := Int.castRingHom (AlgebraicClosure ℚ)
   have hd : (map φ f).totalDegree = f.totalDegree :=
     totalDegree_map_of_injective (RingHom.injective_int _) f
   have hfmap : map φ f ≠ 0 := by
     exact fun h => hf ((map_injective φ Int.cast_injective) (by simpa using h))
+  dsimp only [AbsolutelyIrreducible]
   rw [scaledHomogenize_map, map_one]
   change Irreducible (scaledHomogenize f.totalDegree 1 (map φ f)) ↔ Irreducible (map φ f)
   constructor
@@ -84,12 +84,11 @@ lemma hypersurfaceBadReduction_unscaledHomogenize_imp {n : ℕ}
 theorem hypersurfaceBadPrimeFactor_mono_of_badReduction_imp {n m : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (g : MvPolynomial (Fin (m + 1)) ℤ)
     (hd : f.totalDegree = g.totalDegree)
-    (habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) →
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) g))
+    (habs : AbsolutelyIrreducible f → AbsolutelyIrreducible g)
     (hbad : ∀ q, HypersurfaceBadReduction f q → HypersurfaceBadReduction g q) :
     hypersurfaceBadPrimeFactor f ≤ hypersurfaceBadPrimeFactor g := by
   classical
-  by_cases hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
+  by_cases hf : AbsolutelyIrreducible f
   · have hg := habs hf
     let S := (finite_fin_hypersurface_bad_primes f hf
       (absolute_integer_polynomial_totalDegree_pos f hf)).toFinset

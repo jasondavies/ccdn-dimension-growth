@@ -49,9 +49,9 @@ theorem RationalAffineHypersurfaceGrowth.projective {n e : ℕ}
   refine ⟨C + A, by positivity, fun f hhom hir hd B hB => ?_⟩
   have hd1 : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast (show 1 ≤ f.totalDegree by omega)
   have hB0 : 0 ≤ B := by linarith
-  by_cases habs : Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f)
+  by_cases habs : AbsolutelyIrreducibleRat f
   · have htop : HasAbsIrreducibleTopFormRat f := by
-      dsimp only [HasAbsIrreducibleTopFormRat]
+      dsimp only [HasAbsIrreducibleTopFormRat, AbsolutelyIrreducibleRat]
       rwa [homogeneousComponent_eq_self hhom]
     calc
       _ ≤ C * (f.totalDegree : ℝ) ^ e * B ^ (n + 1) :=

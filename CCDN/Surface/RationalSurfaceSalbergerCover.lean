@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceGeometricCurveCover
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Projection.PrimitiveNormalization
 import CCDN.Surface.SurfaceSalbergerCover
 /-! Clearing rational coefficients preserves the exact geometric Salberger
@@ -19,7 +20,7 @@ open MvPolynomial
 theorem rational_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (f : CoordinatePolynomial 3),
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) →
+      AbsolutelyIrreducibleRat f →
       f.totalDegree = d → ∀ B : ℝ, 1 ≤ B →
       ∃ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ),
@@ -43,8 +44,8 @@ theorem rational_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
     have hφ : (algebraMap ℚ (AlgebraicClosure ℚ)).comp (Int.castRingHom ℚ) =
         Int.castRingHom (AlgebraicClosure ℚ) := by ext; simp
     simpa only [map_map,map_mul,map_C,hφ] using hh
-  have hgabs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) g) := by
-    rw [heK]
+  have hgabs : AbsolutelyIrreducible g := by
+    rw [AbsolutelyIrreducible, heK]
     exact (irreducible_isUnit_mul ((isUnit_iff_ne_zero.mpr haK).map MvPolynomial.C)).mpr habs
   obtain ⟨S,δ,hS,hcard,hcount⟩ := hcover g hgabs hgdeg B hB
   refine ⟨S,δ,?_,hcard,?_⟩

@@ -7,6 +7,7 @@ module
 
 public import CCDN.Plane.FiniteFieldBadPlanes
 public import Mathlib.Tactic.Continuity
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Determinant.PlaneMultiplicity
@@ -128,7 +129,7 @@ lemma planeTransversalityPolynomial_ne_zero (v : Fin 3 → ℚ) (hv : v ≠ 0) :
 coordinates, can avoid any nonzero rational parameter polynomial. -/
 theorem exists_good_rational_plane_avoiding
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree)
     (P : MvPolynomial (PlaneParameters (Fin 3)) ℚ) (hP : P ≠ 0) :
     ∃ a b c : Fin 3 → ℚ,
@@ -140,8 +141,8 @@ theorem exists_good_rational_plane_avoiding
   let ep : PlaneParameters (Fin 3) ≃ PlaneParameters (Option (Fin 2)) :=
     Equiv.prodCongr e (Equiv.refl _)
   let F := rename e f
-  have hF : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) F) := by
-    rw [show F = rename e f from rfl, map_rename]
+  have hF : AbsolutelyIrreducible F := by
+    rw [AbsolutelyIrreducible, show F = rename e f from rfl, map_rename]
     exact (MulEquiv.irreducible_iff (f := renameEquiv _ e)).mpr hir
   have hFd : F.totalDegree = f.totalDegree := totalDegree_renameEquiv e f
   obtain ⟨PZ, t, _, ht, hmodel⟩ := exists_primitive_integer_model P hP
@@ -162,7 +163,7 @@ theorem exists_good_rational_plane_avoiding
     congr 1
     exact affinePlaneMap_rename e _ _ _ f
   rw [hsection, bivariatePolynomialEquiv_map] at hgood hdeg
-  have hqir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) q) :=
+  have hqir : AbsolutelyIrreducible q :=
     (MulEquiv.irreducible_iff (f := bivariatePolynomialEquiv _)).mp hgood
   have hqd : q.totalDegree = f.totalDegree := by
     rw [bivariateTotalDegree_equiv] at hdeg
@@ -203,7 +204,7 @@ theorem exists_good_rational_plane_avoiding
 whose restriction of any prescribed nonzero second equation is nonzero. -/
 theorem exists_surface_transverse_plane
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (v : Fin 3 → ℚ) (hv : v ≠ 0)
     (g : MvPolynomial (Fin 3) ℚ) (hg : g ≠ 0) :
     ∃ a b c : Fin 3 → ℚ,

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.RationalPlaneAssembly
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Hypersurface.NonabsolutePlaneCount
 /-! The complete rational plane reduction to sharp finite-field counting.
 The non-absolutely-irreducible case is bounded by d². -/
@@ -44,7 +45,7 @@ theorem planeCurveBound_of_residue_bound {C : ℝ}
   have hG : 0 ≤ curveBound f.totalDegree B := by
     have h := degree_four_le_curveBound hd hB
     exact (by positivity : (0 : ℝ) ≤ (f.totalDegree : ℝ) ^ 4).trans h
-  by_cases habs : Irreducible (MvPolynomial.map (algebraMap ℚ (AlgebraicClosure ℚ)) f)
+  by_cases habs : AbsolutelyIrreducibleRat f
   · exact (count_rational_plane_of_residue_bound f habs hd hB hC hres).trans
       (mul_le_mul_of_nonneg_right (by linarith) hG)
   · have hh := count_nonabsolute_plane_le f hf hd habs B

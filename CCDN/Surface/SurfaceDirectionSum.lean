@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.ProjectiveZeroLocus
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Plane.ProjectivePlaneLinearCount
 /-! The reciprocal heights of distinct rational projective points on a
@@ -162,7 +163,7 @@ theorem integer_projective_plane_reciprocal_height_sum :
     ∃ C : ℝ, 0 < C ∧
       ∀ (d : ℕ), 3 ≤ d →
       ∀ F : MvPolynomial (Fin 3) ℤ, F.IsHomogeneous d →
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducible F →
       ∀ s : Finset (ProjectivePoint 2),
         (∀ x ∈ s, x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) F)) →
         ∑ x ∈ s, 1 / x.mulHeight ≤ C * (d : ℝ) ^ 4 := by

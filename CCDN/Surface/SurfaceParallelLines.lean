@@ -50,7 +50,7 @@ transverse plane. The index family is arbitrary but its line sets are injective.
 theorem surface_parallel_line_family_card_le_of_second_equation
     {ι : Type*} [Fintype ι] [DecidableEq ι]
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree)
     (v : Fin 3 → ℚ) (hv : v ≠ 0) (x : ι → RatPoint 3)
     (hinj : Function.Injective (fun i => rationalAffineLine (x i) v))
@@ -90,7 +90,7 @@ theorem surface_parallel_line_family_card_le_of_second_equation
 is therefore controlled by the same proper plane intersection. -/
 theorem surface_parallel_lines_card_le_of_second_equation
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree)
     (v : Fin 3 → ℚ) (hv : v ≠ 0)
     (S : Finset (Set (RatPoint 3)))

@@ -8,6 +8,7 @@ module
 public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Plane.Plane
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.LowerBound.GridAffineLowerBound
 import CCDN.LowerBound.GridProjectiveLowerBound
 import CCDN.LowerBound.IntegerGridLowerBound
@@ -57,10 +58,10 @@ homogenization of the affine equation. -/
 theorem exists_hypersurface_lower_bounds_all_degrees (n : ℕ) (hn : 2 ≤ n) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 1 ≤ d →
       ∃ (f : MvPolynomial (Fin n) ℚ) (B : ℕ), 1 ≤ B ∧
-        f.totalDegree = d ∧ Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) ∧
+        f.totalDegree = d ∧ AbsolutelyIrreducibleRat f ∧
         (scaledHomogenize d 1 f).IsHomogeneous d ∧
         (scaledHomogenize d 1 f).totalDegree = d ∧
-        Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (scaledHomogenize d 1 f)) ∧
+        AbsolutelyIrreducibleRat (scaledHomogenize d 1 f) ∧
         c * (d : ℝ) ^ 2 * (B : ℝ) ^ (n - 2) ≤ (count (zeroLocus f) B : ℝ) ∧
         c * (d : ℝ) * (B : ℝ) ^ (n - 1) ≤
           (projectiveCount (projectiveZeroLocus (scaledHomogenize d 1 f)) B : ℝ) := by

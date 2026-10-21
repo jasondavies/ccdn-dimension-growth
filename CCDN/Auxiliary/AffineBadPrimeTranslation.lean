@@ -8,6 +8,7 @@ module
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Algebra.AffineTranslation
 public import CCDN.Height.Box
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Height.AffineTranslationCount
 /-! Integral translations preserve the affine bad-prime factor, including
@@ -33,10 +34,10 @@ theorem hypersurfaceBadPrimeFactor_affineTranslation {n : ℕ}
     (a : Fin (n + 1) → ℤ) (f : MvPolynomial (Fin (n + 1)) ℤ) :
     hypersurfaceBadPrimeFactor (affineTranslation ℤ a f) = hypersurfaceBadPrimeFactor f := by
   classical
-  have hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) (affineTranslation ℤ a f)) ↔
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) := by
+  have hir : AbsolutelyIrreducible (affineTranslation ℤ a f) ↔ AbsolutelyIrreducible f := by
+    dsimp only [AbsolutelyIrreducible]
     rw [affineTranslation_map, affineTranslation_irreducible_iff]
-  by_cases hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
+  by_cases hf : AbsolutelyIrreducible f
   · let bad := (finite_fin_hypersurface_bad_primes f hf
       (absolute_integer_polynomial_totalDegree_pos f hf)).toFinset
     have hbad (p) : p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧

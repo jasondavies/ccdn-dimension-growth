@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveZeroLocus
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.LowerBound.GridLowerBoundNumerics
 import CCDN.LowerBound.GridProjectiveLowerBound
@@ -25,7 +26,7 @@ of degree d and an integer B≥1 with N(X,B)≥d² B^(2/d)/5. -/
 theorem projective_plane_lower_bound (d : ℕ) (hd : 0 < d) :
     ∃ F : MvPolynomial (Fin 3) ℚ, ∃ B : ℕ, 1 ≤ B ∧
       F.IsHomogeneous d ∧ F.totalDegree = d ∧
-        Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) ∧
+        AbsolutelyIrreducibleRat F ∧
           ((d : ℝ) ^ 2 / 5) * (B : ℝ) ^ (2 / (d : ℝ)) ≤
             (projectiveCount (projectiveZeroLocus F) B : ℝ) := by
   by_cases hlarge : 4 ≤ d
@@ -48,7 +49,7 @@ whose degree is also certified by the projective Hilbert function. -/
 theorem projective_integral_curve_lower_bound (d : ℕ) (hd : 0 < d) :
     ∃ F : MvPolynomial (Fin 3) ℚ, ∃ B : ℕ, 1 ≤ B ∧
       F.IsHomogeneous d ∧ F.totalDegree = d ∧
-        Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) ∧
+        AbsolutelyIrreducibleRat F ∧
           (Ideal.span {F}).IsPrime ∧ HasProjectiveCurveDegree (Ideal.span {F}) d ∧
             ((d : ℝ) ^ 2 / 5) * (B : ℝ) ^ (2 / (d : ℝ)) ≤
               (projectiveCount (projectiveIdealZeroLocus (Ideal.span {F})) B : ℝ) := by

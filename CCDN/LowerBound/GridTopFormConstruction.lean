@@ -7,6 +7,7 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.HomogeneousLinearDescent
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
@@ -178,9 +179,9 @@ lemma gridTopForm_map {R K : Type*} [CommRing R] [CommRing K]
 irreducibility condition imposed on the highest homogeneous part in Theorem 4. -/
 theorem gridTopFormEquation_absolute_top (s : Finset ℤ) {d : ℕ}
     (hd : 1 ≤ d) (hs : s.card ≤ d - 1) :
-    Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent (gridTopFormEquation s d).totalDegree (gridTopFormEquation s d))) := by
-  rw [gridTopFormEquation_totalDegree s hd hs, gridTopFormEquation_top s hd hs, gridTopForm_map]
+    HasAbsIrreducibleTopForm (gridTopFormEquation s d) := by
+  rw [HasAbsIrreducibleTopForm, AbsolutelyIrreducible, gridTopFormEquation_totalDegree s hd hs,
+    gridTopFormEquation_top s hd hs, gridTopForm_map]
   exact gridTopForm_irreducible d
 
 end

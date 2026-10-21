@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Auxiliary.ProjectiveAffineChart
 import CCDN.Hypersurface.NonabsolutePlaneCount
@@ -87,7 +88,7 @@ theorem projective_plane_rational_count {d : ℕ}
     (hir : Irreducible f) {B : ℝ} (hB : 1 ≤ B) :
     (projectiveCount (projectiveZeroLocus f) B : ℝ) ≤
       projectivePlaneAbsoluteConstant * (d : ℝ) ^ 4 * B ^ (2 / (d : ℝ)) := by
-  by_cases habs : Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f)
+  by_cases habs : AbsolutelyIrreducibleRat f
   · exact projective_plane_rational_absolute_count f hf hd habs hB
   · have h := projectiveCount_nonabsolute_plane_le f hf hd hir habs B
     have hR : (projectiveCount (projectiveZeroLocus f) B : ℝ) ≤ (d : ℝ) ^ 2 + d := by

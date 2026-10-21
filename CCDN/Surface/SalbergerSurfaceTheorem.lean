@@ -21,7 +21,7 @@ open MvPolynomial
 theorem salberger_surface_cover (d : ℕ) (hd : 1 ≤ d) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (F : CoordinatePolynomial 4), F.IsHomogeneous d →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducibleRat F →
       (¬ X 0 ∣ F) → ∀ B : ℝ, 1 ≤ B →
       ∃ (S : Finset (Ideal (CoordinatePolynomial 4)))
         (δ : Ideal (CoordinatePolynomial 4) → ℕ),

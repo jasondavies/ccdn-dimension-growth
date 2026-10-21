@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.AffineTranslation
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 /-!
 # The literal affine bad-prime factor
@@ -40,7 +41,7 @@ lemma LiteralAffineBadReduction.hypersurfaceBadReduction {σ : Type*}
 
 lemma finite_literal_affine_bad_primes {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
-    (hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) :
+    (hf : AbsolutelyIrreducible f) :
     {p : ℕ | stepanovThreshold f.totalDegree < p ∧ LiteralAffineBadReduction f p}.Finite := by
   apply (finite_fin_hypersurface_bad_primes f hf
     (absolute_integer_polynomial_totalDegree_pos f hf)).subset
@@ -57,12 +58,12 @@ lemma literalAffineBadPrimeFactor_nonneg {n : ℕ} (f : MvPolynomial (Fin (n + 1
   badPrimeFactor_nonneg f
 
 lemma literalAffineBadPrimeFactor_eq_zero {n : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ)
-    (hf : ¬Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) :
+    (hf : ¬AbsolutelyIrreducible f) :
     literalAffineBadPrimeFactor f = 0 :=
   badPrimeFactor_eq_zero hf
 
 lemma literalAffineBadPrimeFactor_eq_exp {n d : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ)
-    (hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hf : AbsolutelyIrreducible f)
     (hd : f.totalDegree = d) (bad : Finset ℕ)
     (hbad : ∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ LiteralAffineBadReduction f p) :
     literalAffineBadPrimeFactor f = primeSetFactor bad :=
@@ -87,10 +88,10 @@ theorem literalAffineBadPrimeFactor_affineTranslation {n : ℕ}
     (a : Fin (n + 1) → ℤ) (f : MvPolynomial (Fin (n + 1)) ℤ) :
     literalAffineBadPrimeFactor (affineTranslation ℤ a f) = literalAffineBadPrimeFactor f := by
   classical
-  have hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) (affineTranslation ℤ a f)) ↔
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) := by
+  have hir : AbsolutelyIrreducible (affineTranslation ℤ a f) ↔ AbsolutelyIrreducible f := by
+    dsimp only [AbsolutelyIrreducible]
     rw [affineTranslation_map, affineTranslation_irreducible_iff]
-  by_cases hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
+  by_cases hf : AbsolutelyIrreducible f
   · let bad := (finite_literal_affine_bad_primes f hf).toFinset
     have hbad (p) : p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧
         LiteralAffineBadReduction f p := by

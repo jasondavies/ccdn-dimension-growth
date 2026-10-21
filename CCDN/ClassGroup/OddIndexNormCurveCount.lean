@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.AffineNonzeroConstant
 public import CCDN.ClassGroup.ClassGroupNormPolynomial
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.ClassGroup.OddDegreeNormCurveBaseChange
 import CCDN.ClassGroup.SquareNormCurveIrreducibility
 import CCDN.Plane.PlaneCount
@@ -37,13 +38,10 @@ theorem signed_norm_curve_count_of_odd_subfield_index
           (Real.log B + Module.finrank ℚ K) := by
   have hεQ : (ε : ℚ) ≠ 0 := by exact_mod_cast hε
   have hd := signedNormCurvePolynomial_map_totalDegree K ℚ β hεQ hn
-  have hir : Irreducible (MvPolynomial.map (algebraMap ℚ (AlgebraicClosure ℚ))
-      (MvPolynomial.map (Int.castRingHom ℚ) (signedNormCurvePolynomial K β ε))) := by
-    have hcomp : (algebraMap ℚ (AlgebraicClosure ℚ)).comp (Int.castRingHom ℚ) =
-        Int.castRingHom (AlgebraicClosure ℚ) := by ext; simp
-    rw [MvPolynomial.map_map, hcomp]
-    exact signedNormCurvePolynomial_absolute_irreducible_of_odd_subfield_index
-      K β hε hindex
+  have hir : AbsolutelyIrreducibleRat
+      (MvPolynomial.map (Int.castRingHom ℚ) (signedNormCurvePolynomial K β ε)) :=
+    (absolutelyIrreducibleRat_map_iff _).mpr
+      (signedNormCurvePolynomial_absolute_irreducible_of_odd_subfield_index K β hε hindex)
   have h := count_rational_plane_of_residue_bound _ hir (by omega) hB
     planeResidueConstant_pos.le planeResidueBound
   rw [hd] at h

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceGeometricCurveCover
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Projection.PrimitiveNormalization
 import CCDN.Surface.SurfaceGeometricCoefficientReduction
@@ -23,7 +24,7 @@ open MvPolynomial
 theorem primitive_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (f : MvPolynomial (Fin 3) ℤ), PrimitiveIntegerPolynomial f →
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) →
+      AbsolutelyIrreducible f →
       f.totalDegree = d → ∀ B : ℝ, 1 ≤ B →
       ∃ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ),
@@ -83,7 +84,7 @@ integral, has degree at most d², and is contained in the surface. -/
 theorem surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (f : MvPolynomial (Fin 3) ℤ),
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) →
+      AbsolutelyIrreducible f →
       f.totalDegree = d → ∀ B : ℝ, 1 ≤ B →
       ∃ (S : Finset (Ideal (CoordinatePolynomial 3)))
         (δ : Ideal (CoordinatePolynomial 3) → ℕ),
@@ -100,8 +101,8 @@ theorem surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
   obtain ⟨a,g,ha,hprim,he⟩ := exists_primitive_integer_factor f hf0
   have hgdeg : g.totalDegree = d := (integer_scalar_factor_degree hf0 ha he).trans hfd
   have hane : (a : AlgebraicClosure ℚ) ≠ 0 := by exact_mod_cast ha
-  have hgabs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) g) := by
-    rw [he,map_mul,map_C] at habs
+  have hgabs : AbsolutelyIrreducible g := by
+    rw [AbsolutelyIrreducible, he,map_mul,map_C] at habs
     exact (irreducible_isUnit_mul ((isUnit_iff_ne_zero.mpr hane).map MvPolynomial.C)).mp habs
   obtain ⟨S,δ,hS,hcard,hcount⟩ := hcover g hprim hgabs hgdeg B hB
   refine ⟨S,δ,?_,hcard,?_⟩

@@ -38,7 +38,7 @@ lemma exists_integer_topform_grid_equation (s : Finset ℤ) (d n : ℕ)
   have hgdeg : g.totalDegree = d := gridTopFormEquation_totalDegree s hd hs
   refine ⟨rename i g, ?_, ?_, ?_⟩
   · rw [totalDegree_rename_of_leftInverse i r hr, hgdeg]
-  · dsimp only [HasAbsIrreducibleTopForm]
+  · dsimp only [HasAbsIrreducibleTopForm, AbsolutelyIrreducible]
     rw [totalDegree_rename_of_leftInverse i r hr, ← rename_homogeneousComponent, map_rename]
     exact irreducible_rename_of_injective i hi _ (gridTopFormEquation_absolute_top s hd hs)
   · intro z hz
@@ -49,15 +49,12 @@ lemma integer_absolute_top_rational_model {n d : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hd : f.totalDegree = d)
     (htop : HasAbsIrreducibleTopForm f) :
     (map (Int.castRingHom ℚ) f).totalDegree = d ∧
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (map (Int.castRingHom ℚ) f)) := by
+      AbsolutelyIrreducibleRat (map (Int.castRingHom ℚ) f) := by
   refine ⟨?_, ?_⟩
   · exact (totalDegree_map_of_injective Int.cast_injective f).trans hd
-  · have h := (map_degree_and_irreducible_of_top_irreducible
-      (Int.castRingHom (AlgebraicClosure ℚ)) f htop).2
-    rw [map_map]
-    have he : (algebraMap ℚ (AlgebraicClosure ℚ)).comp (Int.castRingHom ℚ) =
-        Int.castRingHom (AlgebraicClosure ℚ) := by ext; simp
-    rwa [he]
+  · exact (absolutelyIrreducibleRat_map_iff f).mpr
+      (map_degree_and_irreducible_of_top_irreducible (Int.castRingHom (AlgebraicClosure ℚ)) f
+        htop).2
 
 lemma grid_box_power_lower_bounds {d n B : ℕ} (hn : 2 ≤ n) (hB : 1 ≤ B) (hdB : d ≤ 8 * B) :
     ((d : ℝ) ^ 2 / 64) * (B : ℝ) ^ (n - 2) ≤ ((2 * B + 1 : ℕ) : ℝ) ^ n ∧
@@ -89,7 +86,7 @@ theorem exists_topform_hypersurface_lower_bounds (d n : ℕ) (hd : 4 ≤ d) (hn 
     ∃ f : MvPolynomial (Fin n) ℤ, ∃ B : ℕ,
       1 ≤ B ∧ B ≤ d ∧ d ≤ 8 * B ∧ f.totalDegree = d ∧
       HasAbsIrreducibleTopForm f ∧
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (map (Int.castRingHom ℚ) f)) ∧
+      AbsolutelyIrreducibleRat (map (Int.castRingHom ℚ) f) ∧
       ((d : ℝ) ^ 2 / 64) * (B : ℝ) ^ (n - 2) ≤
         (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ∧
       ((d : ℝ) / 8) * (B : ℝ) ^ (n - 1) ≤

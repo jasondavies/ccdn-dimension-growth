@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.ProjectiveAuxiliaryHeightRanges
 public import CCDN.Algebra.DistinguishedCoefficientOrder
+public import CCDN.Algebra.PolynomialPredicates
 /-! Source-shaped versions of CCDN Lemmas 3.3.2 and 3.3.3. Positioning is
 assumed for a pure-power coefficient, including the last variable.
 The constant `C` is any positive real number, as in the paper. -/
@@ -61,7 +62,7 @@ paper. The remainder `4*d` is stronger than the printed `O_n(d^2)`. -/
 theorem hypersurface_small_height_pure_coefficient_auxiliary
     {n d : ℕ} (i : Fin (n + 3)) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf : f.IsHomogeneous d) (hd : 0 < d)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     {B C : ℝ} (hB : 1 ≤ B) (hC : 0 < C)
     (hheight : (integerCoefficientHeight f : ℝ) ≤ B ^ (2 * d * (n + 2)))
     (hposition : (integerCoefficientHeight f : ℝ) *
@@ -94,7 +95,7 @@ coefficient height. The chosen monomial order requires no coordinate change. -/
 theorem hypersurface_large_height_pure_coefficient_auxiliary
     {n d : ℕ} (i : Fin (n + 3)) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf : f.IsHomogeneous d) (hd : 0 < d)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     {B C : ℝ} (hB : 1 ≤ B) (hC : 0 < C)
     (hheight : B ^ (2 * d * (n + 2)) ≤ (integerCoefficientHeight f : ℝ))
     (hposition : (integerCoefficientHeight f : ℝ) *

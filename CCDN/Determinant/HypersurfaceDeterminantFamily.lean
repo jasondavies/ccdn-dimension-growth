@@ -9,6 +9,7 @@ public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Height.ProjectiveZeroLocus
 import all ArithmeticHeights.BombieriVaaler
 public import CCDN.Determinant.HypersurfaceDeterminantRank
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 
 /-! The corrected finite-family form of CCDN Proposition 3.2.6.
@@ -87,7 +88,7 @@ points are allowed; only the family gcd must be nonzero. -/
 theorem hypersurface_determinant_family_log_lower
     {ι : Type*} [Fintype ι] {n s d : ℕ}
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (M : ι → ℕ) (F : ι → Fin s → MvPolynomial (Fin (n + 3)) ℤ)
     (hF : ∀ l j, (F l j).IsHomogeneous (M l))
     (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, univ.gcd (z i) = 1)
@@ -120,7 +121,7 @@ are evaluated at their primitive integral representatives. -/
 theorem projective_hypersurface_determinant_family_log_lower
     {ι : Type*} [Fintype ι] {n s d : ℕ}
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (M : ι → ℕ) (F : ι → Fin s → MvPolynomial (Fin (n + 3)) ℤ)
     (hF : ∀ l j, (F l j).IsHomogeneous (M l))
     (x : Fin s → ProjectivePoint (n + 2))

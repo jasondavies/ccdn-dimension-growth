@@ -8,6 +8,7 @@ module
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Auxiliary.AbsoluteAuxiliary
 public import CCDN.Height.ProjectiveZeroLocus
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.Auxiliary.HypersurfaceProjectiveAuxiliary
 import CCDN.Hypersurface.HypersurfaceNonabsoluteAuxiliary
@@ -49,15 +50,13 @@ theorem hypersurface_projective_auxiliary
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) g)) ∧ ¬ f ∣ g := by
   classical
-  by_cases habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
+  by_cases habs : AbsolutelyIrreducible f
   · obtain ⟨bad, M, hbad, hdegree, hg⟩ := hypersurface_absolute_projective_auxiliary f hf hd habs hB
     refine ⟨M, hdegree.trans_eq ?_, hg⟩
     rw [hypersurfaceBadPrimeFactor_eq_exp f habs (hf.totalDegree hir.ne_zero) bad hbad]
   · have hQ := rational_map_irreducible_of_integer f hir (by rw [hf.totalDegree hir.ne_zero]; exact hd)
-    have hred : ¬ Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (map (Int.castRingHom ℚ) f)) := by
-      have he : (algebraMap ℚ (AlgebraicClosure ℚ)).comp (Int.castRingHom ℚ) =
-          Int.castRingHom (AlgebraicClosure ℚ) := by ext; simp
-      simpa only [map_map, he] using habs
+    have hred : ¬ AbsolutelyIrreducibleRat (map (Int.castRingHom ℚ) f) :=
+      (absolutelyIrreducibleRat_map_iff f).not.mpr habs
     obtain ⟨g, hg0, hgh, hgnd, hzeros⟩ := nonabsolute_projective_auxiliary f hf hd hQ hred
     refine ⟨d, ?_, g, hg0, hgh, fun x _ hx => hzeros hx, hgnd⟩
     unfold hypersurfaceAuxiliaryDegreeBound auxDegreeBound auxMainTerm

@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.PrimeScaledAffineMinimum
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.UnscaledAffineMinimum
 import CCDN.Auxiliary.LiteralScaledAuxiliary
 import CCDN.Height.AffineHeightCutoff
@@ -47,7 +48,7 @@ theorem literal_scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
 theorem literal_prime_scaled_affine_auxiliary_minimum {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f)
-    (habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (habs : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {p : ℕ} (hp : p.Prime) (hp0 : ¬(p : ℤ) ∣ f.coeff 0)
     {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) (hBp : B / A ≤ p) :
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
@@ -153,7 +154,7 @@ polynomial size in the degree. The better of two auxiliaries is chosen. -/
 theorem literal_unscaled_affine_auxiliary_minimum {n k : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f)
-    (habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (habs : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {S B : ℝ} (hS : 1 ≤ S) (hB : 1 ≤ B)
     (hbound : B ≤ S * ((f.totalDegree : ℝ) + 1) ^ k) :
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧

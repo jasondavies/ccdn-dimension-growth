@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
+public import CCDN.Algebra.PolynomialPredicates
 import Mathlib.Algebra.MvPolynomial.Division
 
 /-! Homogenization changes the bad-prime factor of CCDN Definition 3.2.1.
@@ -155,9 +156,8 @@ lemma literalAffineBadReduction_badPrimeHomogenizedExample (c : ℤ) (p : ℕ) :
 theorem literalAffineBadPrimeFactor_badPrimeHomogenizedExample {c : ℤ} (hc : c ≠ 0) :
     literalAffineBadPrimeFactor (badPrimeHomogenizedExample c) =
       primeSetFactor (c.natAbs.primeFactors.filter (432 < ·)) := by
-  have hirr : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (badPrimeHomogenizedExample c)) := by
-    rw [map_badPrimeHomogenizedExample]
+  have hirr : AbsolutelyIrreducible (badPrimeHomogenizedExample c) := by
+    rw [AbsolutelyIrreducible, map_badPrimeHomogenizedExample]
     exact irreducible_C_mul_X_sq_add_X_mul_X (Int.cast_ne_zero.mpr hc)
   apply literalAffineBadPrimeFactor_eq_exp _ hirr (totalDegree_badPrimeHomogenizedExample hc)
   intro p

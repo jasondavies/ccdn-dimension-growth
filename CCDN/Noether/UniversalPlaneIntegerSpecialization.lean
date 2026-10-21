@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.FiniteFieldBadPlanes
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.IntegerPolynomialAvoidance
 /-! A nonzero universal witness certifies a geometrically irreducible
 plane section in characteristic zero. Integer specialization can simultaneously
@@ -21,7 +22,7 @@ open MvPolynomial
  The parameter bound is independent of the equation's coefficient height. -/
 theorem exists_integer_geometrically_good_plane_avoiding {σ : Type*} [Fintype σ]
     (f : MvPolynomial (Option σ) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree)
     (P : MvPolynomial (PlaneParameters (Option σ)) ℤ) (hP : P ≠ 0) :
     ∃ v : PlaneParameters (Option σ) → ℤ,

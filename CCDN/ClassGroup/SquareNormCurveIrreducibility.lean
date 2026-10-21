@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.ClassGroupNormPolynomial
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.ClassGroup.NormPolynomialSubfield
 import CCDN.Projection.ShearNormalization
 import Mathlib.RingTheory.Polynomial.IsIntegral
@@ -88,8 +89,7 @@ theorem signedNormCurvePolynomial_absolute_irreducible_of_odd_subfield_index
     (K : Type*) [Field K] [NumberField K]
     (β : 𝓞 K) {ε : ℤ} (hε : ε ≠ 0)
     (hindex : Odd (Module.finrank ℚ⟮(β : K)⟯ K)) :
-    Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure ℚ))
-      (signedNormCurvePolynomial K β ε)) := by
+    AbsolutelyIrreducible (signedNormCurvePolynomial K β ε) := by
   apply (MulEquiv.irreducible_iff
     (f := bivariatePolynomialEquiv (AlgebraicClosure ℚ))).mp
   rw [← bivariatePolynomialEquiv_map]

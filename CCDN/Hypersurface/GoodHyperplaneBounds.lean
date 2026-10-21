@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.ThreeRowHyperplane
 import CCDN.Plane.HyperplanePlaneAvoidance
 import CCDN.Plane.IntegerPlaneHeight
@@ -29,16 +30,15 @@ degree. Its integer normal has height polynomial in the degree and is
 independent of the coefficient height of the original equation. -/
 theorem exists_bounded_geometrically_good_hyperplane {n : ℕ}
     (f : MvPolynomial (Option (Fin (3 + n))) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) :
     ∃ (D : ℤ) (a : Fin (3 + n) → ℤ),
       D ≠ 0 ∧ |D| ≤ (goodHyperplaneHeight f.totalDegree : ℤ) ∧
       (∀ i, |a i| ≤ (goodHyperplaneHeight f.totalDegree : ℤ)) ∧
       (graphHyperplaneRestriction (fun i => (a i : ℚ) / D)
         (map (Int.castRingHom ℚ) f)).totalDegree = f.totalDegree ∧
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ))
-        (graphHyperplaneRestriction (fun i => (a i : ℚ) / D)
-          (map (Int.castRingHom ℚ) f))) := by
+      AbsolutelyIrreducibleRat (graphHyperplaneRestriction (fun i => (a i : ℚ) / D)
+        (map (Int.castRingHom ℚ) f)) := by
   classical
   let T := 2 * f.totalDegree ^ 3 + 3
   obtain ⟨v, hv, hminor, _, hplanedegree, hplaneir⟩ :=

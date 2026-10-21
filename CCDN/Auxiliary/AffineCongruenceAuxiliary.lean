@@ -8,6 +8,7 @@ module
 public import CCDN.Height.AffineCongruenceHeight
 import all ArithmeticHeights.BombieriVaaler
 public import CCDN.ForMathlib.StandardMonomials
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.StandardMonomialAuxiliary
 import CCDN.Determinant.WeightedMonomialDeterminant
 
@@ -43,7 +44,7 @@ The arithmetic divisibility and archimedean bounds come from the
 equation, its smooth residue classes, and the integer points. -/
 theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (mon : Fin s → (Fin (n + 2) →₀ ℕ))
@@ -88,7 +89,7 @@ theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
 the rationals, for every given finite family of points in the residue classes. -/
 theorem exists_affine_congruence_auxiliary_of_gap {n N t M : ℕ} (hN : 0 < N)
     (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (mon : Fin N → (Fin (n + 2) →₀ ℕ)) (hmon : Function.Injective mon)

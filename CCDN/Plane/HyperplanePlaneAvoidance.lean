@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.FiniteFieldBadPlanes
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.UniversalPlaneIntegerSpecialization
 /-! A bounded geometrically good plane whose three parameter columns have
@@ -47,7 +48,7 @@ lemma planeAnchorMinor_ne_zero (n : ℕ) : planeAnchorMinor n ≠ 0 := by
 size. -/
 theorem exists_integer_good_plane_with_anchor {n : ℕ}
     (f : MvPolynomial (Option (Fin (3 + n))) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) :
     ∃ v : PlaneParameters (Option (Fin (3 + n))) → ℤ,
       (∀ p, 0 ≤ v p ∧ v p ≤ 2 * f.totalDegree ^ 3 + 3) ∧

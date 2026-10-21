@@ -7,6 +7,7 @@ module
 
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Plane.IntegerPlaneLogHeight
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.CongruenceBadPrimeCharge
 import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
 import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
@@ -28,7 +29,7 @@ def congruenceHeightCharge (m d : ℕ) (H Q : ℝ) : ℝ :=
 errors in the affine smooth-congruence determinant estimate. -/
 theorem affine_congruence_determinant_log_lower_height {n s N M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (G : Fin N → MvPolynomial (Fin (n + 2)) ℤ) (hG : ∀ j, (G j).totalDegree ≤ M)
@@ -52,7 +53,7 @@ theorem affine_congruence_determinant_log_lower_height {n s N M : ℕ} (hs : 0 <
   have hF0 : F ≠ 0 := scaledHomogenize_ne_zero _ one_ne_zero hf0
   have hFdegree : F.totalDegree = f.totalDegree :=
     (scaledHomogenize_homogeneous 1 f le_rfl).totalDegree hF0
-  have hFir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) F) :=
+  have hFir : AbsolutelyIrreducible F :=
     (unscaledHomogenize_absolute_irreducible_iff f hf0).mpr hir
   have hheight : (integerCoefficientHeight F : ℝ) ≤ H := by
     rw [show F = scaledHomogenize f.totalDegree 1 f from rfl,

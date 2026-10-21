@@ -7,6 +7,7 @@ module
 
 public import CCDN.Plane.Plane
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Analysis.DegreeDependenceNumerics
 import CCDN.LowerBound.GridAffineLowerBound
 import CCDN.LowerBound.GridLowerBoundNumerics
@@ -88,7 +89,7 @@ lemma grid_radius_rpow_mul_log_le_log_degree {d : ℕ} (hd : 3 ≤ d)
 theorem exists_affine_curve_log_lower_bound (d : ℕ) (hd : 3 ≤ d) :
     ∃ f : MvPolynomial (Fin 2) ℚ, ∃ B : ℕ,
       B = (d + 1) / 4 ∧ 1 ≤ B ∧ f.totalDegree = d ∧
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) ∧
+      AbsolutelyIrreducibleRat f ∧
       ((d : ℝ) ^ 2 / (4 * Real.log d)) *
           (B : ℝ) ^ (1 / (d : ℝ)) * Real.log B ≤
         (count (zeroLocus f) B : ℝ) := by
@@ -124,7 +125,7 @@ theorem exists_affine_curve_log_lower_bound (d : ℕ) (hd : 3 ≤ d) :
 
 theorem affine_curve_log_factor_lower_bound {g : ℕ → ℝ} {C : ℝ}
     (hbound : ∀ f : MvPolynomial (Fin 2) ℚ,
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) →
+      AbsolutelyIrreducibleRat f →
       2 ≤ f.totalDegree → ∀ B : ℝ, 2 ≤ B →
       (count (zeroLocus f) B : ℝ) ≤
         C * g f.totalDegree * B ^ (1 / (f.totalDegree : ℝ)) * Real.log B)
@@ -148,7 +149,7 @@ This is the logarithmic envelope of the bound discussed in CCDN Section 6. -/
 theorem affine_curve_log_factor_not_isLittleO {g : ℕ → ℝ} {C : ℝ}
     (hC : 0 < C)
     (hbound : ∀ f : MvPolynomial (Fin 2) ℚ,
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) →
+      AbsolutelyIrreducibleRat f →
       2 ≤ f.totalDegree → ∀ B : ℝ, 2 ≤ B →
       (count (zeroLocus f) B : ℝ) ≤
         C * g f.totalDegree * B ^ (1 / (f.totalDegree : ℝ)) * Real.log B) :

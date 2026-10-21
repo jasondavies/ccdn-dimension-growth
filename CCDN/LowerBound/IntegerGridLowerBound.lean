@@ -7,6 +7,7 @@ module
 
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import CCDN.Height.Box
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.LowerBound.GridMultivariate
 import CCDN.Projection.ShearNormalization
 import Mathlib.Algebra.Order.Star.Rat
@@ -71,7 +72,7 @@ lemma exists_irreducible_origin_equation
 /-- CCDN Lemma 6.1. The radius is exactly floor((d−1)/(2n)). -/
 theorem exists_absolutely_irreducible_integer_grid (d n : ℕ) (hd : 1 ≤ d) (hn : 2 ≤ n) :
     ∃ f : MvPolynomial (Fin n) ℚ,
-      f.totalDegree = d ∧ Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) ∧
+      f.totalDegree = d ∧ AbsolutelyIrreducibleRat f ∧
         ∀ z : IntPoint n, (∀ i, |z i| ≤ ((d - 1) / (2 * n) : ℕ)) →
           eval (rationalPoint z) f = 0 := by
   classical

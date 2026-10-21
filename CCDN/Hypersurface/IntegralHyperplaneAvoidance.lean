@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.HyperplaneSectionIdeal
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Hypersurface.EffectiveHyperplaneAvoidance
 /-! Effective avoidance for the homogeneous hyperplane intersection
 ideal, including degree one and coincident hyperplanes. -/
@@ -46,7 +47,7 @@ For degree one the detector is the constant one. -/
 theorem exists_integral_hyperplane_avoidance {n : ℕ}
     (f : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ)
     (d : ℕ) (hd : 0 < d) (hf : f.IsHomogeneous d)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) :
+    (hir : AbsolutelyIrreducible f) :
     ∃ (G : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ) (e : ℕ),
       G ≠ 0 ∧ G.IsHomogeneous e ∧ e ≤ (4 + n) * d * (d ^ 2 - 1) ∧
       ∀ (K : Type u) [Field K] (A : Option (Option (Fin (2 + n))) → K),

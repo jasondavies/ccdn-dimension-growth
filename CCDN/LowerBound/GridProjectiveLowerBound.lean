@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.ProjectivePlaneProjection
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Height.ProjectiveIntegerHeight
 import CCDN.LowerBound.GridCurveConstruction
@@ -68,10 +69,10 @@ theorem integer_grid_le_projective_count {n d : ℕ}
 
 lemma projective_closure_absolute_irreducible {n d : ℕ}
     (f : MvPolynomial (Fin n) ℚ) (hd : f.totalDegree = d)
-    (hf : Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f)) :
+    (hf : AbsolutelyIrreducibleRat f) :
     (scaledHomogenize d 1 f).IsHomogeneous d ∧
       (scaledHomogenize d 1 f).totalDegree = d ∧
-        Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (scaledHomogenize d 1 f)) := by
+        AbsolutelyIrreducibleRat (scaledHomogenize d 1 f) := by
   have hhom := scaledHomogenize_homogeneous 1 f hd.le
   have h0 : scaledHomogenize d 1 f ≠ 0 := by
     intro h
@@ -79,6 +80,7 @@ lemma projective_closure_absolute_irreducible {n d : ℕ}
     rw [h, map_zero] at hh
     exact hf.ne_zero (by rw [← hh, map_zero])
   refine ⟨hhom, hhom.totalDegree h0, ?_⟩
+  dsimp only [AbsolutelyIrreducibleRat]
   rw [scaledHomogenize_map, map_one]
   have hdeg : (map (algebraMap ℚ (AlgebraicClosure ℚ)) f).totalDegree = d :=
     (totalDegree_map_of_injective (algebraMap ℚ (AlgebraicClosure ℚ)).injective _).trans hd
@@ -89,7 +91,7 @@ lemma projective_closure_absolute_irreducible {n d : ℕ}
 theorem exists_projective_grid_lower_bound (d : ℕ) (hd : 4 ≤ d) :
     ∃ F : MvPolynomial (Fin 3) ℚ,
       F.IsHomogeneous d ∧ F.totalDegree = d ∧
-        Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) ∧
+        AbsolutelyIrreducibleRat F ∧
           ((d - 1) / 2 + 1) ^ 2 ≤
             projectiveCount (projectiveZeroLocus F)
               (((d - 1) / 2 - (d - 1) / 4 : ℕ) : ℝ) := by
@@ -131,7 +133,7 @@ Proposition 5. -/
 theorem exists_projective_two_point_lower_bound (d : ℕ) (hd : 0 < d) :
     ∃ F : MvPolynomial (Fin 3) ℚ,
       F.IsHomogeneous d ∧ F.totalDegree = d ∧
-        Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) ∧
+        AbsolutelyIrreducibleRat F ∧
           2 ≤ projectiveCount (projectiveZeroLocus F) 1 := by
   classical
   obtain ⟨f, hfdeg, hfir, hfzero, hfone⟩ := exists_irreducible_zero_one_equation

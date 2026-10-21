@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.UniversalHyperplaneRestriction
 public import CCDN.Algebra.UniversalHomogeneousForm
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.CoefficientwiseSubstitution
 import CCDN.Hypersurface.GoodHyperplaneReindex
 import CCDN.Noether.UniversalNoetherForms
@@ -52,7 +53,7 @@ degree d(d²−1)+1. A₀=0 is covered without a chart hypothesis. -/
 theorem exists_effective_hyperplane_avoidance {n : ℕ}
     (f : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ)
     (d : ℕ) (hd : 2 ≤ d) (hf : f.IsHomogeneous d)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) :
+    (hir : AbsolutelyIrreducible f) :
     ∃ G : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ,
       G ≠ 0 ∧ G.IsHomogeneous (d * (d ^ 2 - 1) + 1) ∧
       G.totalDegree ≤ (4 + n) * d * (d ^ 2 - 1) ∧

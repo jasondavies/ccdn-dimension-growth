@@ -41,7 +41,7 @@ theorem hypersurfaceBadReduction_imp_top_homogeneousComponent {σ : Type*}
 theorem absolute_irreducible_of_top_homogeneousComponent_irreducible {σ : Type*}
     (f : MvPolynomial σ ℤ)
     (hir : HasAbsIrreducibleTopForm f) :
-    Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) :=
+    AbsolutelyIrreducible f :=
   (map_degree_and_irreducible_of_top_irreducible _ f hir).2
 
 /-- The affine bad-prime factor is no greater than that of the top
@@ -86,7 +86,7 @@ theorem absolute_top_irreducible_of_integer_scalar_factor {σ : Type*}
       _ = homogeneousComponent f.totalDegree (C c * g) := congrArg (homogeneousComponent _) he
       _ = C c * homogeneousComponent f.totalDegree g := homogeneousComponent_C_mul _ _ _
       _ = _ := by rw [hdegree]
-  dsimp only [HasAbsIrreducibleTopForm] at hir
+  dsimp only [HasAbsIrreducibleTopForm, AbsolutelyIrreducible] at hir
   rw [htop, map_mul, map_C] at hir
   have hcK : (Int.castRingHom (AlgebraicClosure ℚ)) c ≠ 0 := by
     simpa only [Int.coe_castRingHom, ne_eq, Int.cast_eq_zero] using hc

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HypersurfaceHeightDeterminant
+public import CCDN.Algebra.PolynomialPredicates
 
 /-! A universal determinant divisor for primitive projective evaluations.
 Embedding the points in a coordinate hyperplane makes the established
@@ -47,8 +48,8 @@ theorem ambient_projective_determinant_log_lower {n s N M : ℕ} (hs : 0 < s)
       Matrix.of fun i j => eval (z i) (F j) := by
     ext i j
     simp [G, w, eval_rename, Function.comp_def]
-  have hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (X (0 : Fin (n + 3)) : MvPolynomial (Fin (n + 3)) ℤ)) := by
+  have hir : AbsolutelyIrreducible (X (0 : Fin (n + 3)) : MvPolynomial (Fin (n + 3)) ℤ) := by
+    dsimp only [AbsolutelyIrreducible]
     rw [map_X]
     apply irreducible_of_totalDegree_eq_one (totalDegree_X _)
     intro x hx

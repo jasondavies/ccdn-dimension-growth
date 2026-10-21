@@ -12,6 +12,7 @@ public import CCDN.Auxiliary.IntegerCoefficientHeight
 public import CCDN.Height.HypersurfaceLargeHeightDegree
 public import CCDN.Height.HypersurfaceSmallHeightDegree
 public import CCDN.Height.ProjectiveZeroLocus
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.HypersurfaceLargeHeightAuxiliary
 import CCDN.Auxiliary.HypersurfaceProjectiveAuxiliary
 /-! The two positioned auxiliary estimates for the entire bounded projective
@@ -47,7 +48,7 @@ position cost and the stronger residual `4*d`. No finite-family input remains. -
 theorem hypersurface_small_height_projective_auxiliary
     {n d : ℕ} (order : MonomialOrder (Fin (n + 3)))
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     {B : ℝ} (hB : 1 ≤ B) (T : ℝ)
     (hheight : Real.log (integerCoefficientHeight f : ℝ) ≤
       2 * d * (n + 2 : ℝ) * Real.log B)
@@ -90,7 +91,7 @@ constant depends only on dimension and the fixed positioning parameter. -/
 theorem hypersurface_large_height_projective_auxiliary
     {n d : ℕ} (order : MonomialOrder (Fin (n + 3)))
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     {B : ℝ} (hB : 1 ≤ B) (T : ℝ) (hT : 0 ≤ T)
     (hheight : 2 * d * (n + 2 : ℝ) * Real.log B ≤
       Real.log (integerCoefficientHeight f : ℝ))

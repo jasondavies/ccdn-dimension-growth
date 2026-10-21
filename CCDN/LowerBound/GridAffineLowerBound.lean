@@ -7,6 +7,7 @@ module
 
 public import CCDN.Plane.Plane
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.LowerBound.GridCurveConstruction
 import CCDN.LowerBound.GridLowerBoundNumerics
 import Mathlib.Algebra.Order.Star.Rat
@@ -36,7 +37,7 @@ lemma integer_grid_le_affine_count {n : ℕ} (f : MvPolynomial (Fin n) ℚ)
 This is a lower bound for the integral-point count. -/
 theorem exists_affine_plane_grid_lower_bound (d : ℕ) (hd : 4 ≤ d) :
     ∃ f : MvPolynomial (Fin 2) ℚ,
-      f.totalDegree = d ∧ Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) ∧
+      f.totalDegree = d ∧ AbsolutelyIrreducibleRat f ∧
         ((d - 1) / 2 + 1) ^ 2 ≤
           count (zeroLocus f) ((((d + 1) / 4 : ℕ)) : ℝ) := by
   classical

@@ -65,7 +65,7 @@ theorem affine_variety_projection_constants (n : ℕ) :
       (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial →
       ∃ (b : Fin (m + 1) → Fin n → ℤ) (f : MvPolynomial (Fin (m + 1)) ℚ),
         (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
-        Irreducible f ∧ Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) ∧
+        Irreducible f ∧ AbsolutelyIrreducibleRat f ∧
         f.totalDegree = d ∧
         RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
           Ideal.span {f} ∧

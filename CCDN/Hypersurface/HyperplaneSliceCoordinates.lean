@@ -19,8 +19,8 @@ open MvPolynomial
 lemma integer_top_irreducible_rename {σ τ : Type*} (e : σ ≃ τ)
     (f : MvPolynomial σ ℤ)
     (hir : HasAbsIrreducibleTopForm f) :
-    Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (homogeneousComponent (rename e f).totalDegree (rename e f))) := by
+    HasAbsIrreducibleTopForm (rename e f) := by
+  dsimp only [HasAbsIrreducibleTopForm, AbsolutelyIrreducible]
   rw [show (rename e f).totalDegree = f.totalDegree from totalDegree_renameEquiv e f,
     ← rename_homogeneousComponent, map_rename]
   exact (MulEquiv.irreducible_iff (f := renameEquiv _ e)).mpr hir

@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Algebra.HomogeneousSlice
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.ForMathlib.MvPolynomial
@@ -75,12 +76,11 @@ nonabsolute case is included, using the paper's zero convention. -/
 theorem hypersurfaceBadPrimeFactor_le_of_badReduction_imp {n : ℕ}
     (f g : MvPolynomial (Fin (n + 1)) ℤ) {p : ℕ} (hp : 0 < p)
     (hd : f.totalDegree = g.totalDegree)
-    (habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f) →
-      Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) g))
+    (habs : AbsolutelyIrreducible f → AbsolutelyIrreducible g)
     (hbad : ∀ q, q ≠ p → HypersurfaceBadReduction f q → HypersurfaceBadReduction g q) :
     hypersurfaceBadPrimeFactor f ≤ Real.exp 1 * hypersurfaceBadPrimeFactor g := by
   classical
-  by_cases hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
+  by_cases hf : AbsolutelyIrreducible f
   · have hg := habs hf
     let S := (finite_fin_hypersurface_bad_primes f hf
       (absolute_integer_polynomial_totalDegree_pos f hf)).toFinset

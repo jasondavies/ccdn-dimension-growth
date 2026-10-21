@@ -23,8 +23,7 @@ theorem exists_good_integer_hyperplane_slices {n : ℕ}
       D ≠ 0 ∧ |D| ≤ (f.totalDegree ^ 3 : ℕ) ∧
       (∀ i, |a i| ≤ (f.totalDegree ^ 3 : ℕ)) ∧
       ∀ k : ℤ, (g k).totalDegree = f.totalDegree ∧
-        Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-          (homogeneousComponent (g k).totalDegree (g k))) ∧
+        HasAbsIrreducibleTopForm (g k) ∧
         ∀ x : Option (Fin (3 + n)) → ℤ,
           D * x none - ∑ i, a i * x (some i) = k →
           eval x f = 0 → eval (fun i => x (some i)) (g k) = 0 := by

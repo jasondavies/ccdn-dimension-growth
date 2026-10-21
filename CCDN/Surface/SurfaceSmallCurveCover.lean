@@ -7,6 +7,7 @@ module
 
 public import CCDN.Surface.SurfaceResidueCover
 public import CCDN.Hypersurface.SingularHypersurfaceCount
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Hilbert.CompleteIntersectionDegreeBudget
 /-! A small-curve and residual cover for a surface of controlled
@@ -100,7 +101,7 @@ singular, lie on a component of degree at most `2 d A Λ(B, L)` of the curve cov
 initial auxiliary, or lie in the residual locus. -/
 theorem exists_surface_small_curve_residual_cover
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {K H B L X : ℝ}
     (hK : 0 ≤ K) (hH : 1 ≤ H) (hB : 1 ≤ B) (hL : 1 ≤ L)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)

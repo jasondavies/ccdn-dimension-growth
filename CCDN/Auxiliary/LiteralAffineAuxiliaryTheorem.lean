@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.AffineLeadingTranslation
 import CCDN.Auxiliary.AffineAuxiliaryTranslationBound
 import CCDN.Auxiliary.AffineBadPrimeTranslation
@@ -35,7 +36,7 @@ has the affine auxiliary, uniformly over all box radii. -/
 theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f)
-    (habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) (hd : 0 < f.totalDegree) (hc : f.coeff 0 ≠ 0)
+    (habs : AbsolutelyIrreducible f) (hd : 0 < f.totalDegree) (hc : f.coeff 0 ≠ 0)
     {B : ℝ} (hB : 1 ≤ B) :
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree
@@ -89,7 +90,7 @@ theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
 theorem literal_affine_hypersurface_auxiliary_absolute {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f)
-    (habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :
+    (habs : AbsolutelyIrreducible f) (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
       (g.totalDegree : ℝ) ≤ affineHypersurfaceAuxiliaryConstant n *
         affineAuxiliaryDegreeExpression n f.totalDegree B
@@ -110,8 +111,9 @@ theorem literal_affine_hypersurface_auxiliary_absolute {n : ℕ}
   have htd : t.totalDegree = d := affineTranslation_totalDegree a f
   have htdpos : 0 < t.totalDegree := htd ▸ hd
   have hB' : 1 ≤ B + d := by have := Nat.cast_nonneg (α := ℝ) d; linarith
-  have htabs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) t) := by
-    simpa only [t, affineTranslation_map, affineTranslation_irreducible_iff] using habs
+  have htabs : AbsolutelyIrreducible t := by
+    simpa only [AbsolutelyIrreducible, t, affineTranslation_map, affineTranslation_irreducible_iff]
+      using habs
   obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ :=
     literal_affine_auxiliary_minimum_nonzero_constant t htprim htir htabs htdpos hc hB'
   have habox (j) : |(a j : ℝ)| ≤ d := by
@@ -145,7 +147,7 @@ theorem literal_affine_hypersurface_auxiliary {n : ℕ}
           (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
           (literalAffineBadPrimeFactor f) ∧
       ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
-  by_cases habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
+  by_cases habs : AbsolutelyIrreducible f
   · exact literal_affine_hypersurface_auxiliary_absolute f hprim hir habs hd hB
   · simpa only [literalAffineBadPrimeFactor_eq_zero f habs, hypersurfaceBadPrimeFactor_eq_zero f habs] using
       affine_hypersurface_auxiliary f hprim hir hd hB

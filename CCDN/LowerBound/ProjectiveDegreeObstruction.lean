@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.ProjectiveZeroLocus
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Analysis.DegreeDependenceNumerics
 import CCDN.ProjectiveCurveLowerBound
 /-! The degree factor in a coefficient-uniform projective curve bound cannot
@@ -20,7 +21,7 @@ open MvPolynomial Filter Asymptotics
 theorem projective_curve_factor_lower_bound {g : ℕ → ℝ} {C : ℝ}
     (hbound : ∀ F : MvPolynomial (Fin 3) ℚ,
       F.IsHomogeneous F.totalDegree →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducibleRat F →
       0 < F.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroLocus F) B : ℝ) ≤
         C * g F.totalDegree * B ^ (2 / (F.totalDegree : ℝ)))
@@ -39,7 +40,7 @@ theorem projective_curve_factor_not_isLittleO {g : ℕ → ℝ} {C : ℝ}
     (hC : 0 < C)
     (hbound : ∀ F : MvPolynomial (Fin 3) ℚ,
       F.IsHomogeneous F.totalDegree →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducibleRat F →
       0 < F.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroLocus F) B : ℝ) ≤
         C * g F.totalDegree * B ^ (2 / (F.totalDegree : ℝ))) :
@@ -58,7 +59,7 @@ theorem projective_curve_degree_exponent_ge_two {e C : ℝ}
     (hC : 0 < C)
     (hbound : ∀ F : MvPolynomial (Fin 3) ℚ,
       F.IsHomogeneous F.totalDegree →
-      Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) F) →
+      AbsolutelyIrreducibleRat F →
       0 < F.totalDegree → ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveZeroLocus F) B : ℝ) ≤
         C * (F.totalDegree : ℝ) ^ e * B ^ (2 / (F.totalDegree : ℝ))) :

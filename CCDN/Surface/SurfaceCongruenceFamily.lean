@@ -7,6 +7,7 @@ module
 
 public import CCDN.Surface.SurfaceCongruenceCutoff
 public import CCDN.Determinant.SmoothAffineResidueClasses
+public import CCDN.Algebra.PolynomialPredicates
 /-! A coherent choice of proper auxiliaries for every finite
 smooth residue family. The structure stores conclusions of the determinant
 theorem; its existence is proved from the equation. -/
@@ -37,7 +38,7 @@ structure SurfaceCongruenceFamily (f : MvPolynomial (Fin 3) ℤ) (B A : ℝ) whe
 
 theorem exists_surface_congruence_family
     (f : MvPolynomial (Fin 3) ℤ)
-    (hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
+    (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {K H B : ℝ} (hK : 0 ≤ K) (hH : 1 ≤ H) (hB : 1 ≤ B)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (hheight : Real.log H ≤ K * (Real.log B + 1)) :
