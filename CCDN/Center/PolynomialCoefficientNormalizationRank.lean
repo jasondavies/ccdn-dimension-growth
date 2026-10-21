@@ -149,6 +149,10 @@ private def scalarQuotientFractionCoefficientMap : L →ₐ[K] F where
 
 end
 
+/-- The subfield of `F` generated over `K` by the hyperplane coefficient variables `X (i, j)` for
+`i < m` together with the incidence values `-(∑ j, X (i, j) * x j)` of the first `m` hyperplanes at
+the generic point `x` of the variety of `I`. Here `F` is an algebra over the polynomial ring in
+these coefficients over the coordinate ring of `I`. -/
 def chowNormalizationParameterField
     {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ} (m : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K))

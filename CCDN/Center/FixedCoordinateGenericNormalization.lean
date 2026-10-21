@@ -27,11 +27,14 @@ abbrev genericAffineParameterForms {R : Type*} [CommRing R] {m n : ℕ}
     (u : Fin m × Fin n → R) : Fin m → MvPolynomial (Fin n) R :=
   fun i => linearForm fun j => u (i,j)
 
+/-- Each form in `genericAffineParameterForms u` is homogeneous of degree one. -/
 lemma genericAffineParameterForms_homogeneous {R : Type*} [CommRing R] {m n : ℕ}
     (u : Fin m × Fin n → R) (i : Fin m) :
     (genericAffineParameterForms u i).IsHomogeneous 1 :=
   linearForm_isHomogeneous _
 
+/-- Every family of linear forms (homogeneous of degree one) over a field is
+`genericAffineParameterForms c` for some coefficient array `c`. -/
 lemma homogeneous_linear_forms_coefficient_representation
     {K : Type*} [Field K] {m n : ℕ} (a : Fin m → MvPolynomial (Fin n) K)
     (ha : ∀ i, (a i).IsHomogeneous 1) :

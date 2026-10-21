@@ -17,6 +17,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A univariate polynomial `f` over `MvPolynomial σ (MvPolynomial τ R)` is coefficientwise
+homogeneous of degree `D` if each of its coefficients is `CoefficientwiseHomogeneous` of degree
+`D`, i.e. all its inner coefficients in the parameters `τ` are homogeneous of degree `D`. -/
 def PolynomialCoefficientwiseHomogeneous {R σ τ : Type*} [CommRing R]
     (f : Polynomial (MvPolynomial σ (MvPolynomial τ R))) (D : ℕ) : Prop :=
   ∀ i, CoefficientwiseHomogeneous (f.coeff i) D
@@ -55,6 +58,7 @@ private theorem one :
   simpa only [map_one] using
     C_of_isHomogeneous (CoefficientwiseHomogeneous.one (R := R) (σ := σ) (τ := τ))
 
+/-- The variable `Polynomial.X` is coefficientwise homogeneous of degree zero. -/
 theorem X :
     PolynomialCoefficientwiseHomogeneous
       (Polynomial.X : Polynomial (MvPolynomial σ (MvPolynomial τ R))) 0 := by
@@ -133,6 +137,9 @@ private theorem genericBlockLine_coefficientwise_homogeneous
     (fun i _ => (hv i).pow (e i))
   simpa only [RingHom.comp_apply, add_zero, Finsupp.prod] using hc.mul hp
 
+/-- If the parameter coefficients of `f` are homogeneous of degree `D` and `d > 0`, then every
+member of the derivative-resultant coefficient family of the generic block line restriction
+`genericBlockLine b f` (in degree `d`) is homogeneous of degree `D * (2 * d - 1)`. -/
 theorem genericBlockLine_resultant_family_homogeneous
     {R σ τ : Type*} [CommRing R] (b : σ → Bool)
     (f : MvPolynomial σ (MvPolynomial τ R)) (d D : ℕ) (hd : 0 < d)

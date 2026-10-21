@@ -51,6 +51,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- The linear substitution `chowLinearSubstitution A` induced by a projection preserves weighted
+homogeneity of degree `d` in the coefficients of the `i`-th hyperplane. -/
 theorem chowLinearSubstitution_row_homogeneous
     {K : Type*} [Field K] {n s r : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin r)
@@ -65,6 +67,8 @@ theorem chowLinearSubstitution_row_homogeneous
     exact (isWeightedHomogeneous_X K (chowRowWeight i) (q.1,k)).C_mul (A k q.2)
   exact weighted_homogeneous_aeval (chowRowWeight i) (chowRowWeight i) _ ha F d hF
 
+/-- If `F` is nonzero and homogeneous in each block of hyperplane coefficients, then a nonzero
+linear substitution `chowLinearSubstitution A F` has the same total degree as `F`. -/
 theorem chowLinearSubstitution_totalDegree_of_ne_zero
     {K : Type*} [Field K] {n s r : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
@@ -95,6 +99,10 @@ private theorem exists_chow_projection_image_equation
     (chowProjectionImageIdeal_homogeneous J hJ A)
     ((integral_projection_hilbert_dimension_eq J _ hint).trans hdim)
 
+/-- Let `J` be a homogeneous prime ideal over an algebraically closed field with projective variety
+of dimension `m`, and let `F` vanish exactly on the incidence locus of `m + 1` hyperplanes with
+that variety. Then the linear substitution of `F` along the projection `A` is nonzero if and only
+if the center of `A` is disjoint from the projective variety of `J`. -/
 theorem chowLinearSubstitution_ne_zero_iff_center_disjoint
     {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

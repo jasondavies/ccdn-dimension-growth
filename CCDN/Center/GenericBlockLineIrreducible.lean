@@ -94,6 +94,9 @@ private theorem genericBlockLine_fraction_irreducible
     omega
   exact (hp.isPrimitive hd).irreducible_iff_irreducible_map_fraction_map.mp hp
 
+/-- In characteristic zero, if `f` is irreducible and of positive degree in the block selected by
+`b`, then its restriction `genericBlockLine b f` to a generic line in that block is separable as a
+univariate polynomial over the fraction field `F` of the line parameters. -/
 theorem genericBlockLine_fraction_separable
     {K F σ : Type*} [Field K] [CharZero K] [Field F]
     [Algebra (MvPolynomial (σ ⊕ σ) K) F] [IsFractionRing (MvPolynomial (σ ⊕ σ) K) F]

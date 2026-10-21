@@ -86,6 +86,11 @@ private theorem exists_closure_normalization_infinite
       exact (Ideal.kerLiftAlg_injective ψ).comp hinja
     · exact closure_projection_integral_comp I c hc a hconec hconea
 
+/-- Noether normalization by linear forms over an infinite field, compatible with projective
+closure: if the affine variety of the prime ideal `I` in `n` variables has dimension `m`, there
+are `m` linear forms `a` whose coordinate map is integral and injective on `K[X]/I`, and whose
+homogenized coordinates, together with the homogenizing coordinate, are integral on the
+projective closure of `I`. -/
 theorem exists_closure_normalization_infinite_of_le
     {K : Type*} [Field K] [Infinite K] (m n : ℕ) (hmn : m ≤ n)
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

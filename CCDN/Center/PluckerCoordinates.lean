@@ -84,11 +84,15 @@ private theorem matrix_span_eq_of_plucker_smul
     centerMinorProjection_smul_of_plucker A B c he]
   simp only [smul_eq_zero, hc, false_or]
 
+/-- The Plücker point of a full-row-rank `r × n` matrix: the projective point given by its
+maximal minors `matrixPluckerCoordinates`, which are not all zero. -/
 def independentCenterPlucker {K : Type*} [Field K] {r n : ℕ}
     (x : IndependentCenterMatrix K r n) : Projectivization K ((Fin r ↪ Fin n) → K) :=
   Projectivization.mk K (matrixPluckerCoordinates (Matrix.of fun i j => x.val (i,j)))
     (matrixPluckerCoordinates_ne_zero _ x.property)
 
+/-- Two full-row-rank matrices have the same Plücker point if and only if they have the same
+row span. -/
 theorem independentCenterPlucker_eq_iff
     {K : Type*} [Field K] {r n : ℕ} (x y : IndependentCenterMatrix K r n) :
     independentCenterPlucker x = independentCenterPlucker y ↔
@@ -102,6 +106,7 @@ theorem independentCenterPlucker_eq_iff
     obtain ⟨c, hc, he⟩ := matrixPluckerCoordinates_smul_of_span_eq _ _ x.property hspan
     exact ⟨Units.mk0 c hc, he.symm⟩
 
+/-- A chosen full-row-rank matrix whose rows span the `r`-dimensional subspace `W`. -/
 def centerSubspaceMatrix {K : Type*} [Field K] {r n : ℕ}
     (W : CenterSubspace K r n) : IndependentCenterMatrix K r n :=
   Classical.choose (centerMatrixSpan_surjective W)
@@ -110,22 +115,29 @@ private theorem centerSubspaceMatrix_span {K : Type*} [Field K] {r n : ℕ}
     (W : CenterSubspace K r n) : centerMatrixSpan (centerSubspaceMatrix W) = W :=
   Classical.choose_spec (centerMatrixSpan_surjective W)
 
+/-- The Plücker point of an `r`-dimensional subspace `W` of `Fin n → K`, computed from any
+matrix whose rows form a basis of `W`. -/
 def centerSubspacePlucker {K : Type*} [Field K] {r n : ℕ}
     (W : CenterSubspace K r n) : Projectivization K ((Fin r ↪ Fin n) → K) :=
   independentCenterPlucker (centerSubspaceMatrix W)
 
+/-- The Plücker point of the row span of a full-row-rank matrix `x` is the Plücker point of
+`x`. -/
 theorem centerSubspacePlucker_matrixSpan {K : Type*} [Field K] {r n : ℕ}
     (x : IndependentCenterMatrix K r n) :
     centerSubspacePlucker (centerMatrixSpan x) = independentCenterPlucker x := by
   apply (independentCenterPlucker_eq_iff _ _).mpr
   exact centerSubspaceMatrix_span _
 
+/-- Distinct `r`-dimensional subspaces have distinct Plücker points. -/
 theorem centerSubspacePlucker_injective {K : Type*} [Field K] {r n : ℕ} :
     Function.Injective (centerSubspacePlucker (K := K) (r := r) (n := n)) := by
   intro W V h
   have he := (independentCenterPlucker_eq_iff _ _).mp h
   simpa only [centerSubspaceMatrix_span] using he
 
+/-- A homogeneous polynomial `f` in the Plücker coordinates vanishes at the Plücker point of a
+full-row-rank matrix `x` if and only if it vanishes at the maximal minors of `x`. -/
 theorem homogeneous_eval_independentCenterPlucker
     {K : Type*} [Field K] {r n d : ℕ}
     (f : MvPolynomial (Fin r ↪ Fin n) K) (hf : f.IsHomogeneous d)

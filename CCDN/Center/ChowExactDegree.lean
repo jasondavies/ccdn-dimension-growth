@@ -122,6 +122,10 @@ private theorem chow_univariate_degree_eq_multiplicity
   exact (chow_univariate_degree_eq_normalization_rank (A := A) (F := F)
     I hfinite hdimdeg.natDegree_eq G hG hmem).trans hrank
 
+/-- Let `I` be a prime ideal over a field of characteristic zero that stays prime over the
+algebraic closure, of affine dimension `m` and degree `d`. If the irreducible polynomial `G`
+generates the Chow incidence ideal of `m + 1` hyperplanes and is homogeneous of degree `δ i` in
+the `i`-th row of hyperplane coefficients, then every row degree `δ i` equals `d`. -/
 theorem chow_generator_row_degree_eq_multiplicity
     {K : Type*} [Field K] [CharZero K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

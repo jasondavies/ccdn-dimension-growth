@@ -20,6 +20,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- A subspace `S` of `Fin n → K` of dimension `r` is the row span of some `r × n` matrix with
+linearly independent rows. -/
 theorem exists_submodule_basis_matrix
     {K : Type*} [Field K] {r n : ℕ}
     (S : Submodule K (Fin n → K)) (hr : Module.finrank K S = r) :
@@ -34,6 +36,8 @@ theorem exists_submodule_basis_matrix
   simpa only [Submodule.map_span, ← Set.range_comp, Function.comp_def,
     Submodule.map_top, Submodule.range_subtype, Submodule.subtype_apply] using hh
 
+/-- If the row span of `A` lies in the kernel of `B`, then after mapping both matrices along a
+field homomorphism `φ` the row span of `A.map φ` still lies in the kernel of `B.map φ`. -/
 lemma matrix_rows_map_span_le_kernel
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r s n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (B : Matrix (Fin s) (Fin n) K)

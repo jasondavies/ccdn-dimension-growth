@@ -99,6 +99,9 @@ private theorem fixed_coordinate_elimination_integral
   change (φ.toAlgHom.comp χ).IsIntegral at hint
   rwa [heq] at hint
 
+/-- Over an infinite field, if the ideal `I` contains a nonzero polynomial, then there are `n`
+linear forms giving an integral projection of the affine variety of `I` whose extension by the
+coordinate `X 0` also gives an integral projection of the projective closure of `I`. -/
 theorem exists_closure_integral_elimination_infinite
     {K : Type*} [Field K] [Infinite K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))

@@ -17,6 +17,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Let `I` be a homogeneous ideal and `a` a family of linear forms. If `X j ^ N` (with `N > 0`)
+lies in `I + (a)`, then modulo `I` it can be written as `∑ i, a i * s i` with every `s i` of
+total degree at most `N - 1`. -/
 theorem homogeneous_parameter_power_reduction
     {K σ τ : Type*} [Field K] [Fintype τ]
     (I : Ideal (MvPolynomial σ K))
@@ -52,6 +55,10 @@ theorem homogeneous_parameter_power_reduction
         (homogeneousComponent_isHomogeneous k (s i)).totalDegree_le
     · simpa only [map_mul] using hq
 
+/-- Let `I` be a homogeneous ideal and `a` a family of linear forms whose only common zero with
+`I` over an algebraically closed extension `L` is the origin. Then there is `N > 0` such that,
+for every coordinate `j`, `X j ^ N` is congruent modulo `I` to `∑ i, a i * s i` with every `s i`
+of total degree at most `N - 1`. -/
 theorem exists_homogeneous_parameter_power_reductions
     {K L σ τ : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L]
     [Fintype σ] [Fintype τ]

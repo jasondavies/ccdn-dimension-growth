@@ -16,14 +16,17 @@ namespace CCDN
 noncomputable section
 open Matrix Module
 
+/-- The `r`-dimensional linear subspaces of `Fin n → K`. -/
 abbrev CenterSubspace (K : Type*) [Field K] (r n : ℕ) :=
   {W : Submodule K (Fin n → K) // Module.finrank K W = r}
 
+/-- The `r`-dimensional subspace spanned by the rows of an independent center matrix. -/
 def centerMatrixSpan {K : Type*} [Field K] {r n : ℕ}
     (x : IndependentCenterMatrix K r n) : CenterSubspace K r n :=
   ⟨Submodule.span K (Set.range (fun i : Fin r => fun j : Fin n => x.val (i,j))),
     by simpa only [Fintype.card_fin] using finrank_span_eq_card x.property⟩
 
+/-- Every `r`-dimensional subspace is the row span of some independent center matrix. -/
 lemma centerMatrixSpan_surjective {K : Type*} [Field K] {r n : ℕ} :
     Function.Surjective (centerMatrixSpan (K := K) (r := r) (n := n)) := by
   intro W
@@ -39,6 +42,8 @@ lemma centerMatrixSpan_surjective {K : Type*} [Field K] {r n : ℕ} :
   apply Subtype.ext
   exact hspan
 
+/-- Two independent center matrices define the same center subspace if and only if their row
+spans are equal. -/
 lemma centerMatrixSpan_eq_iff {K : Type*} [Field K] {r n : ℕ}
     (x y : IndependentCenterMatrix K r n) :
     centerMatrixSpan x = centerMatrixSpan y ↔

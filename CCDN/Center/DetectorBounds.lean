@@ -23,6 +23,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If the filtered Hilbert polynomial of a prime ideal `J` has leading coefficient
+`d / m!`, then the degree `d` is positive. -/
 lemma hilbert_multiplicity_pos_of_prime {K : Type*} [Field K] {n m d : ℕ}
     (J : Ideal (MvPolynomial (Fin n) K)) [J.IsPrime]
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / m.factorial) : 1 ≤ d := by
@@ -62,6 +64,8 @@ theorem geometric_projective_dimension_zero_multiplicity_one
     simpa only [hpoly,Polynomial.leadingCoeff_one,Nat.factorial_zero,Nat.cast_one,div_one] using hdI
   exact_mod_cast hq.symm
 
+/-- For `m ≥ 1` and `d ≥ 1`, with `D = (m + 1) * d`, the detector degree `D * (2 * d - 1)` is
+strictly smaller than `D ^ 2`. -/
 lemma center_detector_degree_lt_square {m d : ℕ} (hm : 1 ≤ m) (hd : 1 ≤ d) :
     ((m + 1) * d) * (2 * d - 1) < ((m + 1) * d) ^ 2 := by
   have hD : 0 < (m + 1) * d := by positivity
@@ -69,6 +73,8 @@ lemma center_detector_degree_lt_square {m d : ℕ} (hm : 1 ≤ m) (hd : 1 ≤ d)
   have hsmall : 2 * d - 1 < (m + 1) * d := by omega
   nlinarith
 
+/-- For `d ≥ 1`, if either `m ≥ 1` or `d = 1`, then `max 1 ((m + 1) * d * (2 * d - 1))` is at
+most `(m + 1) ^ 2 * d ^ 2`. -/
 lemma center_detector_degree_le_square {m d : ℕ}
     (hd : 1 ≤ d) (hboundary : 1 ≤ m ∨ d = 1) :
     max 1 (((m + 1) * d) * (2 * d - 1)) ≤ (m + 1) ^ 2 * d ^ 2 := by
@@ -80,7 +86,9 @@ lemma center_detector_degree_le_square {m d : ℕ}
   · simp only [mul_one, Nat.reduceSub]
     nlinarith
 
-/-- The printed projection-height exponent also covers the empty center. -/
+/-- For `r ≤ n + 1` center rows (including the empty center `r = 0`), `m ≤ n` and `d ≥ 1`, the
+projection-height exponent `(n + 1) * (2 * r! * ((m + 1) ^ 2 * d ^ 2) ^ r)` is at most
+`centerProjectionHeightConstant n * d ^ (2 * r ^ 2)`. -/
 lemma center_projection_source_exponent_all_rows {m n r d : ℕ}
     (hrn : r ≤ n + 1) (hmn : m + 1 ≤ n + 1) (hd : 1 ≤ d) :
     (n + 1) * (2 * r.factorial * ((m + 1) ^ 2 * d ^ 2) ^ r) ≤
@@ -96,6 +104,8 @@ lemma center_projection_source_exponent_all_rows {m n r d : ℕ}
       _ ≤ 2 * (n + 1) * (n + 1).factorial * (n + 1) ^ (2 * (n + 1)) := by gcongr
   · exact center_projection_source_exponent (by omega) hrn hmn hd
 
+/-- A geometrically integral projective variety of dimension `m` and degree `d` over a field of
+characteristic zero satisfies `1 ≤ m` or `d = 1`: in dimension zero it is a single point. -/
 lemma geometric_projective_multiplicity_boundary
     {K : Type*} [Field K] [CharZero K] {n m d : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

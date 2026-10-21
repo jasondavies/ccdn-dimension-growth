@@ -36,10 +36,15 @@ private theorem generic_linear_independence
     simp [a,apply_ite,ite_mul]
   simpa only [he] using hc
 
+/-- The hyperplane coefficient indices consisting of all nonconstant coefficients of `m + 1`
+hyperplanes together with the constant coefficients of the first `m` hyperplanes. -/
 def chowIndependentVariables (m n : ℕ) :
     ((Fin (m + 1) × Fin n) ⊕ Fin m) → Fin (m + 1) × Fin (n + 1) :=
   Sum.elim (fun q => (q.1,q.2.succ)) (fun i => (i.castSucc,0))
 
+/-- If the affine variety of the prime ideal `I` has dimension `m`, then under the incidence
+substitution for `m + 1` hyperplanes, the images of the coefficient variables indexed by
+`chowIndependentVariables m n` are algebraically independent over `K`. -/
 theorem chowIncidence_independent_coordinates {K : Type*} [Field K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hm : (filteredHilbertPolynomial I).natDegree = m) :

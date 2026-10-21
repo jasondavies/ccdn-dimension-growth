@@ -154,6 +154,8 @@ theorem exists_projectivePermutedIdeal_chart {K : Type*} [Field K] {n : ℕ}
   rw [mem_projectivePermutedIdeal, rename_X]
   simpa only [Equiv.swap_apply_left] using hj
 
+/-- Permuting the coordinates of an ideal preserves geometric primeness: if `I` stays prime over
+`L`, so does `projectivePermutedIdeal I e`. -/
 theorem projectivePermutedIdeal_geometrically_prime
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -167,6 +169,9 @@ theorem projectivePermutedIdeal_geometrically_prime
   rw [he]
   exact projection_kernel_geometrically_prime I _
 
+/-- The constant `(n + 1) * (2 * (n + 1)) ^ (2 * n)` in the height bound
+`curveProjectionHeightConstant n * d ^ (2 * n) * B` for the plane projection of a degree-`d`
+curve in `n`-dimensional space. -/
 def curveProjectionHeightConstant (n : ℕ) : ℝ :=
   ((n : ℝ) + 1) * (2 * ((n : ℝ) + 1)) ^ (2 * n)
 
@@ -231,8 +236,11 @@ theorem exists_geometric_projective_curve_projection
   apply projectiveCount_mono (Set.Subset.refl _)
   exact mul_le_mul_of_nonneg_right (projectionBoxFactor_le_degree_power n hd) (by linarith)
 
-/-- The corresponding affine count has a dimension-only polynomial height
-constant and the same explicit function-field identity. -/
+/-- Proposition 4.3.2 for affine curves: a degree-`d` affine curve over `ℚ`, geometrically
+integral over `L`, projects birationally by two moment coordinates of bounded index onto an
+irreducible plane curve `f` of degree `d`, geometrically irreducible over `L`, and its count of
+points of height at most `B` is bounded by the count on `f` at height
+`curveProjectionHeightConstant n * d ^ (2 * n) * B`, plus `d ^ 2`. -/
 theorem exists_geometric_affine_curve_projection
     {L : Type*} [Field L] [Algebra ℚ L] {n : ℕ}
     (I : Ideal (CoordinatePolynomial n)) [I.IsPrime]

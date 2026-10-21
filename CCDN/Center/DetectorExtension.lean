@@ -65,9 +65,10 @@ private lemma chowLinearSubstitution_centerMinor_ne_zero_iff
   change p.rep ∈ (centerMinorProjectionMatrix A e).mulVecLin.ker
   rwa [centerMinorProjectionMatrix_ker A hA e]
 
-/-- Sharp equations over the source field detect birational centers over every coefficient
-extension `L`: a matrix of independent rows is a birational center for the extended prime
-exactly when one of the detector forms does not vanish on its minors. -/
+/-- A finite family of forms over the source field, homogeneous of degree `(m + 1) d (2d - 1)` in
+the Plücker coordinates, detects birational centers over every coefficient extension `L`: a matrix
+of independent rows is a birational center for the extended prime exactly when one of the forms
+does not vanish on its minors. -/
 theorem exists_extended_birational_center_detector
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L]
     {n m r : ℕ}
@@ -141,13 +142,19 @@ theorem exists_extended_birational_center_detector
   · rintro ⟨hc,hf⟩
     exact hdetA.mpr ((hbir hc).mpr hf)
 
+/-- Extending an ideal of `MvPolynomial σ K` along the identity map `algebraMap K K` gives back the
+same ideal. -/
 lemma ideal_map_algebraMap_self {K σ : Type*} [Field K] (J : Ideal (MvPolynomial σ K)) :
     J.map (map (algebraMap K K)) = J := by
   have h : (map (algebraMap K K) : MvPolynomial σ K →+* MvPolynomial σ K) = RingHom.id _ := by
     ext <;> simp
   rw [h,Ideal.map_id]
 
-/-- The detector over the source field itself. -/
+/-- Let `J` be a homogeneous prime ideal over a field `K` of characteristic zero, of projective
+dimension `m` and degree `d`, that stays prime over an algebraic closure. There is a finite family
+of forms in the Plücker coordinates, homogeneous of degree `(m + 1) d (2d - 1)`, such that a matrix
+over `K` with independent rows is a birational center for `J` exactly when one of the forms does
+not vanish on its minors. -/
 theorem exists_birational_center_detector
     {K : Type*} [Field K] [CharZero K] {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

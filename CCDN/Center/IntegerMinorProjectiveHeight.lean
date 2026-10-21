@@ -40,6 +40,8 @@ private theorem integer_tuple_height_le {ι : Type*} [Fintype ι]
   change Height.mulHeight ((fun k => (z k : ℚ)) ∘ e) ≤ B at hh
   rwa [Height.mulHeight_comp_equiv] at hh
 
+/-- An integer matrix whose rows are linearly independent over `ℚ` has a nonzero maximal minor, so
+its vector of maximal minors is nonzero. -/
 lemma integer_maximal_minors_ne_zero {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) ℤ)
     (hA : LinearIndependent ℚ (A.map (Int.castRingHom ℚ)).row) :
@@ -53,6 +55,9 @@ lemma integer_maximal_minors_ne_zero {r n : ℕ}
   rw [RingHom.map_det] at hh
   exact hh
 
+/-- If an integer `r × n` matrix with `ℚ`-linearly independent rows has entries of absolute value at
+most `T`, then the multiplicative projective height of its vector of maximal minors is at most
+`r! * T ^ r`. -/
 theorem integer_maximal_minor_projective_height {r n T : ℕ}
     (A : Matrix (Fin r) (Fin n) ℤ)
     (hA : LinearIndependent ℚ (A.map (Int.castRingHom ℚ)).row)

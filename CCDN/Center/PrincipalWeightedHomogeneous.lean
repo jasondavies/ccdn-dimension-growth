@@ -51,6 +51,9 @@ private theorem principal_weighted_homogeneous_of_components
   rw [hg,hgC,mul_comm,coeff_C_mul]
   exact mul_ne_zero hcoeff hk
 
+/-- A nonzero generator `F` of a principal Chow incidence ideal of `r` hyperplanes is
+multihomogeneous: for each `i` it is homogeneous of some degree `δ i` in the `i`-th row of
+hyperplane coefficients. -/
 theorem chow_incidence_generator_multihomogeneous
     {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))

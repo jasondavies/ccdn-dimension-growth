@@ -53,10 +53,15 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The coordinate ring of the affine incidence variety of `m + 1` hyperplanes through a point
+of the variety of `I`: polynomials in the nonconstant hyperplane coefficients over the
+coordinate ring `K[X]/I`. -/
 abbrev ChowIncidenceCoordinateRing {K : Type*} [Field K] {n : ℕ} (m : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) :=
   MvPolynomial (Fin (m + 1) × Fin n) (MvPolynomial (Fin n) K ⧸ I)
 
+/-- The subfield of `E` generated over `K` by the images of all incidence hyperplane
+coefficients except the constant coefficient of the last hyperplane. -/
 def chowParameterField {K E : Type*} [Field K] [Field E] [Algebra K E]
     {n : ℕ} (m : ℕ) (I : Ideal (MvPolynomial (Fin n) K))
     [Algebra (ChowIncidenceCoordinateRing m I) E] : IntermediateField K E :=
@@ -64,14 +69,18 @@ def chowParameterField {K E : Type*} [Field K] [Field E] [Algebra K E]
     algebraMap (ChowIncidenceCoordinateRing m I) E
       (chowIncidenceMap (m + 1) I (X (chowIndependentVariables m n q)))))
 
+/-- The image in `E` of the constant coefficient of the last incidence hyperplane, which equals
+minus the value of its linear part at the generic point of the variety of `I`. -/
 def chowLastIncidenceValue {K E : Type*} [Field K] [Field E] {n : ℕ}
     (m : ℕ) (I : Ideal (MvPolynomial (Fin n) K))
     [Algebra (ChowIncidenceCoordinateRing m I) E] : E :=
   algebraMap (ChowIncidenceCoordinateRing m I) E
     (chowIncidenceMap (m + 1) I (X (Fin.last m,0)))
 
-/-- The degree in the final constant coefficient is the degree of an
-minimal polynomial in the generic incidence function field. -/
+/-- If `I` is prime of affine dimension `m` and `F` is an irreducible element of the Chow
+incidence ideal, then the degree of `F` in the constant coefficient of the last hyperplane equals
+the degree of the minimal polynomial of `chowLastIncidenceValue` over `chowParameterField`, in
+any fraction field `E` of the incidence coordinate ring. -/
 theorem chow_incidence_minpoly_natDegree
     {K E : Type*} [Field K] [Field E] [Algebra K E] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

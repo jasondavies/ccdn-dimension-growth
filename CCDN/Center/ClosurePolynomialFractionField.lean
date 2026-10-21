@@ -25,11 +25,16 @@ variable {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ}
   [Algebra (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
   [IsScalarTower K (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
 
+/-- The `K`-algebra map from the homogeneous coordinate ring of the projective closure of `I` to
+a field `F` over the polynomial ring `(MvPolynomial (Fin n) K ⧸ I)[t]`, obtained from the cone
+embedding `closurePolynomialQuotientMap I` followed by the algebra map to `F`. -/
 def closurePolynomialFieldMap :
     (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I) →ₐ[K] F :=
   (IsScalarTower.toAlgHom K (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F).comp
     (closurePolynomialQuotientMap I)
 
+/-- On the class of a polynomial `f`, `closurePolynomialFieldMap I` is the image of
+`projectiveClosurePolynomialMap I f` in `F`. -/
 lemma closurePolynomialFieldMap_mk (f : MvPolynomial (Fin (n + 1)) K) :
     closurePolynomialFieldMap (F := F) I (Ideal.Quotient.mk (projectiveClosureIdeal I) f) =
       algebraMap (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F

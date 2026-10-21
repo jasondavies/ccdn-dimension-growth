@@ -20,10 +20,14 @@ noncomputable section
 open MvPolynomial Matrix
 attribute [local instance] affinePointZariskiTopology
 
+/-- The maximal minor of the generic `r × n` matrix (with entries the variables `X (i, j)`) on
+the columns selected by `c`. -/
 def matrixMinorPolynomial (K : Type*) [Field K] {r n : ℕ} (c : Fin r ↪ Fin n) :
     MvPolynomial (Fin r × Fin n) K :=
   (Matrix.of fun i j : Fin r => X (i,c j)).det
 
+/-- Evaluating `matrixMinorPolynomial K c` at the entries `x` gives the minor of the matrix `x`
+on the columns selected by `c`. -/
 lemma matrixMinorPolynomial_eval {K : Type*} [Field K] {r n : ℕ}
     (c : Fin r ↪ Fin n) (x : Fin r × Fin n → K) :
     eval x (matrixMinorPolynomial K c) = (Matrix.of fun i j : Fin r => x (i,c j)).det := by
@@ -41,15 +45,19 @@ private lemma matrix_rows_independent_of_minor
   exact Matrix.linearIndependent_rows_of_det_ne_zero hx
 
 
+/-- The matrix obtained from `x` by setting every entry in a column of `Z` to zero. -/
 def zeroColumnPoint {K : Type*} [Field K] {r n : ℕ}
     (Z : Finset (Fin n)) (x : Fin r × Fin n → K) : Fin r × Fin n → K :=
   fun q => if q.2 ∈ Z then 0 else x q
 
+/-- The substitution setting every matrix-entry variable in a column of `Z` to zero, i.e. the
+restriction of polynomials to the subspace of matrices vanishing on the columns of `Z`. -/
 def zeroColumnSubstitution {K : Type*} [Field K] {r n : ℕ}
     (Z : Finset (Fin n)) :
     MvPolynomial (Fin r × Fin n) K →ₐ[K] MvPolynomial (Fin r × Fin n) K :=
   aeval (fun q => if q.2 ∈ Z then 0 else X q)
 
+/-- Evaluating `zeroColumnSubstitution Z p` at `x` is evaluating `p` at `zeroColumnPoint Z x`. -/
 lemma eval_zeroColumnSubstitution {K : Type*} [Field K] {r n : ℕ}
     (Z : Finset (Fin n)) (x : Fin r × Fin n → K)
     (p : MvPolynomial (Fin r × Fin n) K) :
@@ -64,6 +72,7 @@ lemma eval_zeroColumnSubstitution {K : Type*} [Field K] {r n : ℕ}
       by_cases hq : q.2 ∈ Z <;> simp [hq,zeroColumnPoint]
   exact RingHom.congr_fun he p
 
+/-- A matrix whose columns in `Z` already vanish is fixed by `zeroColumnPoint Z`. -/
 lemma zeroColumnPoint_fixed {K : Type*} [Field K] {r n : ℕ}
     (Z : Finset (Fin n)) (x : Fin r × Fin n → K)
     (hx : ∀ i j, j ∈ Z → x (i,j) = 0) : zeroColumnPoint Z x = x := by
@@ -111,6 +120,10 @@ private theorem zero_column_polynomial_locus_closure
     (zeroColumnSubstitution Z g) hzero
   rwa [eval_zeroColumnSubstitution,zeroColumnPoint_fixed Z x hx] at he
 
+/-- Over an infinite field, suppose some full-row-rank matrix vanishes on the columns of `Z` and
+`p` does not vanish identically on matrices vanishing on those columns. Then the matrices with
+`p ≠ 0` are Zariski dense in the space of full-row-rank matrices vanishing on the columns of
+`Z`. -/
 theorem zero_column_polynomial_locus_dense_subspace
     {K : Type*} [Field K] [Infinite K] {r n : ℕ}
     (Z : Finset (Fin n)) (A : Matrix (Fin r) (Fin n) K)

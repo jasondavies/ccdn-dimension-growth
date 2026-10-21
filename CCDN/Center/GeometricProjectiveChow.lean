@@ -58,6 +58,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Let `J` be a homogeneous prime ideal over `K` whose projective variety has dimension `m` and
+which stays prime over the algebraically closed field `L`. Then there is an irreducible
+polynomial `F` over `K` whose image over `L` is a projective Chow equation of the extension of
+`J` to `L`, with some row degrees `δ`. -/
 theorem exists_geometric_projective_chow_without_chart
     {K L : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L] {n m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

@@ -36,6 +36,8 @@ private lemma homogeneous_mem_projectiveChartIdeal_iff
   exact (IsFractionRing.injective A F)
     (by change q ((Ideal.Quotient.mk I) (X 0)) = q 0; simpa only [map_zero] using h)
 
+/-- A homogeneous prime ideal `I` not containing `X 0` is the projective closure of its
+dehomogenization in the standard chart `X 0 ≠ 0`. -/
 theorem projectiveClosureIdeal_chartIdeal_eq
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
@@ -53,6 +55,9 @@ theorem projectiveClosureIdeal_chartIdeal_eq
     exact I.sum_mem (fun N _ => h N)
   · exact hI f
 
+/-- If the homogeneous prime ideal `I` does not contain `X 0` and has projective dimension `m`
+and degree `d`, then its dehomogenization in the chart `X 0 ≠ 0` has affine dimension `m` and
+degree `d`. -/
 theorem projectiveChartIdeal_hilbertPolynomial_parameters
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]

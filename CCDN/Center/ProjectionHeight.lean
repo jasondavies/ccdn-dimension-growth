@@ -30,6 +30,9 @@ private lemma projectivization_normalizedIntegerProjection {n : ℕ}
   refine ⟨hxP, (Projectivization.mk_eq_mk_iff' ℚ _ _ _ _).mpr ?_⟩
   exact ⟨(D : ℚ)⁻¹, rfl⟩
 
+/-- If the integer matrix `P` has entries bounded by `H` in absolute value and `D ≠ 0`, then the
+projective image under `normalizedIntegerProjection D P` of a rational projective point `x` has
+multiplicative height at most `(n + 1) * H` times the height of `x`. -/
 lemma normalizedIntegerProjection_projective_height {n : ℕ}
     (D : ℤ) (hD : D ≠ 0) (P : Matrix (Fin (n + 1)) (Fin (n + 1)) ℤ)
     {H : ℝ} (hH : 0 ≤ H) (hP : ∀ i j, |(P i j : ℝ)| ≤ H)
@@ -44,10 +47,14 @@ lemma normalizedIntegerProjection_projective_height {n : ℕ}
 def centerProjectionHeightConstant (n : ℕ) : ℕ :=
   2 * (n + 1) * (n + 1).factorial * (n + 1) ^ (2 * (n + 1))
 
+/-- The constant `centerProjectionHeightConstant n` is positive. -/
 lemma centerProjectionHeightConstant_pos (n : ℕ) : 0 < centerProjectionHeightConstant n := by
   unfold centerProjectionHeightConstant
   positivity
 
+/-- For `1 ≤ r ≤ n + 1`, `m ≤ n` and `1 ≤ d`, the height factor
+`(n + 1) * (2 * r! * ((m + 1) ^ 2 * d ^ 2) ^ r)` of a center projection is at most
+`centerProjectionHeightConstant n * d ^ (2 * r ^ 2)`. -/
 lemma center_projection_source_exponent {m n r d : ℕ}
     (hr : 1 ≤ r) (hrn : r ≤ n + 1) (hmn : m + 1 ≤ n + 1) (hd : 1 ≤ d) :
     (n + 1) * (2 * r.factorial * ((m + 1) ^ 2 * d ^ 2) ^ r) ≤

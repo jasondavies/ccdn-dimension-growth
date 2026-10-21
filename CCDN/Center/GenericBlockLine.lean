@@ -17,9 +17,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The weight function assigning `1` to the variables in the block selected by `b` and `0` to
+all others. -/
 def genericBlockWeight {σ : Type*} (b : σ → Bool) : σ → ℕ :=
   fun i => if b i then 1 else 0
 
+/-- Restriction of a polynomial to a generic affine line in the block selected by `b`: the
+variable `X i` is replaced by `Y i + Z i * t` when `b i` holds and by `Y i` otherwise, where `Y`
+and `Z` are new variables and `t` is the polynomial variable. -/
 def genericBlockLine {R σ : Type*} [CommRing R] (b : σ → Bool) :
     MvPolynomial σ R →+* Polynomial (MvPolynomial (σ ⊕ σ) R) :=
   eval₂Hom (Polynomial.C.comp C) (fun i =>
@@ -78,6 +83,8 @@ private lemma genericBlockLine_origin {R σ : Type*} [CommRing R]
           genericBlockWeight, hi, ← Polynomial.C_mul_X_pow_eq_monomial]
   exact RingHom.congr_fun he f
 
+/-- The degree in the line parameter of `genericBlockLine b f` equals the weighted total degree
+of `f` in the block selected by `b`. -/
 theorem genericBlockLine_natDegree {R σ : Type*} [CommRing R]
     (b : σ → Bool) (f : MvPolynomial σ R) :
     (genericBlockLine b f).natDegree = f.weightedTotalDegree (genericBlockWeight b) := by
@@ -85,6 +92,8 @@ theorem genericBlockLine_natDegree {R σ : Type*} [CommRing R]
   rw [← weightedDegreePolynomial_natDegree, ← genericBlockLine_origin]
   exact Polynomial.natDegree_map_le
 
+/-- Restriction to the generic block line commutes with mapping the coefficients along a ring
+homomorphism. -/
 lemma genericBlockLine_map {R S σ : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (b : σ → Bool) (f : MvPolynomial σ R) :
     (genericBlockLine b f).map (MvPolynomial.map φ) =

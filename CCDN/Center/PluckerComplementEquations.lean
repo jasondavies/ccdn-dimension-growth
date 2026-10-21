@@ -29,6 +29,9 @@ def centerPluckerFamilyZeroLocus
     (Φ : Finset (MvPolynomial (Fin r ↪ Fin n) K)) : Set (CenterSubspace L r n) :=
   {W | ∀ g ∈ Φ, eval₂ φ (centerSubspacePlucker W).rep g = 0}
 
+/-- For a finite family `Φ` of homogeneous polynomials of a common degree, the set of subspaces
+at which some member of `Φ` does not vanish in Plücker coordinates is open in the Plücker
+topology. -/
 lemma centerPluckerFamilyZeroLocus_complement_isOpen
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n D : ℕ}
     (Φ : Finset (MvPolynomial (Fin r ↪ Fin n) K))
@@ -66,6 +69,7 @@ private lemma centerMatrixSpan_mem_familyComplement_iff
   · rintro ⟨g,hg,hv⟩
     exact ⟨g,hg,fun hz => hv ((homogeneous_eval₂_centerMatrixSpan φ g (hΦ g hg) x).mp hz)⟩
 
+/-- Equal prime ideals have equal loci of birational center subspaces. -/
 lemma birationalCenterSubspaceLocus_congr
     {K : Type*} [Field K] {n r : ℕ}
     {J J' : Ideal (MvPolynomial (Fin (n + 1)) K)} [J.IsPrime] [J'.IsPrime] (h : J = J') :
@@ -73,8 +77,9 @@ lemma birationalCenterSubspaceLocus_congr
   subst h
   rfl
 
-/-- The good locus has dense intersection with the centers having zero
-columns `S`, as soon as one such center lies outside the zero locus. -/
+/-- Over an infinite field `L`, the subspaces with zero columns `S` outside the common zero
+locus of a homogeneous family `Φ` are dense among all subspaces with zero columns `S`, as soon
+as one subspace spanned by a matrix with zero columns `S` lies outside that zero locus. -/
 theorem zeroColumnCenterSubspace_familyComplement_dense
     {K L : Type*} [Field K] [Field L] [Infinite L] (φ : K →+* L) {r n D : ℕ}
     (Φ : Finset (MvPolynomial (Fin r ↪ Fin n) K)) (hΦ : ∀ g ∈ Φ, g.IsHomogeneous D)
@@ -128,6 +133,12 @@ private lemma birationalCenterSubspaceLocus_eq_complement_of_extension_detector
   refine (hdet (Matrix.of fun i j => x.val (i,j)) x.property).symm.trans ?_
   simp only [eval_centerMinorPolynomial,eval_map]
 
+/-- Let `J` be a homogeneous prime ideal over a field of characteristic zero, prime over the
+algebraic closure and over `L`, of projective dimension `m` and degree `d`. Then there is a
+finite family `Φ` of homogeneous polynomials in the Plücker coordinates of `r`-dimensional
+subspaces, of degree `(m + 1) * d * (2 * d - 1)`, which is less than `((m + 1) * d) ^ 2` when
+`m ≥ 1` and at most `1` when `m = 0` (in which case `d = 1`), such that a subspace over `L` is a
+birational center for `J` exactly when some member of `Φ` does not vanish at it. -/
 theorem exists_birational_center_plucker_equations
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L]
     {n m r : ℕ}
@@ -157,8 +168,12 @@ theorem exists_birational_center_plucker_equations
     refine ⟨hd,fun g hg => ?_⟩
     simpa only [hm,hd,Nat.zero_add,mul_one,Nat.reduceSub] using hdeg g hg
 
-/-- The printed positive-dimensional degree bound and the degree-one
-boundary hold on the geometric subspaces over every extension L. -/
+/-- Let `J` be a homogeneous rational prime ideal, prime over the algebraic closure, of
+projective dimension `m` and degree `d` with `m + 2 ≤ n + 1`. For every field `L` of
+characteristic zero there is a finite family `Φ` of homogeneous rational Plücker polynomials of
+degree `(m + 1) * d * (2 * d - 1)`, less than `((m + 1) * d) ^ 2` when `m ≥ 1` and at most `1`
+when `m = 0` (in which case `d = 1`), whose nonvanishing locus is exactly the locus of
+birational center subspaces of dimension `n - m` over `L`; this locus is dense and open. -/
 theorem exists_dense_open_projective_center_plucker_equations
     {L : Type*} [Field L] [Algebra ℚ L] {n m : ℕ}
     (hmn : m + 2 ≤ n + 1)

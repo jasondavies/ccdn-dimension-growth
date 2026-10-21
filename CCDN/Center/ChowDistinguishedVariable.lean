@@ -20,6 +20,9 @@ open MvPolynomial
 abbrev ChowCoefficientVariables (m n : ℕ) :=
   (Fin (m + 1) × Fin n) ⊕ Fin m
 
+/-- The bijection between the hyperplane coefficients `Fin (m + 1) × Fin (n + 1)` and
+`Option (ChowCoefficientVariables m n)`, sending the constant coefficient `(Fin.last m, 0)` of
+the last hyperplane to `none` and every other coefficient to `some` of its index. -/
 def chowDistinguishedVariableEquiv (m n : ℕ) :
     (Fin (m + 1) × Fin (n + 1)) ≃ Option (ChowCoefficientVariables m n) where
   toFun q := Fin.cases
@@ -37,13 +40,17 @@ def chowDistinguishedVariableEquiv (m n : ℕ) :
     | none => simp
     | some q => cases q <;> simp [chowIndependentVariables]
 
-/-- Exact polynomial regrouping; no coefficient specialization occurs. -/
+/-- The `K`-algebra isomorphism regrouping a polynomial in the hyperplane coefficients as a
+univariate polynomial in the last hyperplane's constant coefficient `(Fin.last m, 0)`, with
+coefficients polynomials in the remaining variables; no coefficient is specialized. -/
 def chowAsUnivariate (K : Type*) [Field K] (m n : ℕ) :
     MvPolynomial (Fin (m + 1) × Fin (n + 1)) K ≃ₐ[K]
       Polynomial (MvPolynomial (ChowCoefficientVariables m n) K) :=
   (renameEquiv K (chowDistinguishedVariableEquiv m n)).trans
     (optionEquivLeft K _)
 
+/-- The degree of `chowAsUnivariate K m n F` as a univariate polynomial equals the degree of
+`F` in the constant coefficient `(Fin.last m, 0)` of the last hyperplane. -/
 lemma chowAsUnivariate_natDegree {K : Type*} [Field K] {m n : ℕ}
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K) :
     (chowAsUnivariate K m n F).natDegree = degreeOf (Fin.last m,0) F := by
@@ -71,6 +78,9 @@ private lemma chowCoefficientMap_injective {K : Type*} [Field K] {m n : ℕ}
   rw [he]
   exact chowIncidence_independent_coordinates I hm
 
+/-- The incidence image of `F` is obtained by evaluating the univariate polynomial
+`chowAsUnivariate K m n F` at the incidence image of the distinguished variable
+`X (Fin.last m, 0)`, after mapping its coefficients by `chowCoefficientMap m I`. -/
 lemma chowIncidenceMap_eq_univariate_eval {K : Type*} [Field K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K) :

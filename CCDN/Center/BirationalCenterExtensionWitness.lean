@@ -101,6 +101,10 @@ private theorem isBirationalMatrixCenter_map_of_finite_birational
   rw [← projectionImageField_centerMinorProjectionMatrix _ AL e]
   simpa only [centerMinorProjectionMatrix_map] using hh
 
+/-- Let `J ⊆ ℚ[X_0, …, X_{n+1}]` be a homogeneous prime ideal of projective dimension `m` and degree
+`d`, with `m + 2 ≤ n + 1`, that stays prime over `ℚ̄`. For every field `L` of characteristic zero
+over which `J` stays prime, there is a matrix over `L` with `n - m` linearly independent rows that
+is a birational center (`IsBirationalMatrixCenter`) for the extension of `J` to `L`. -/
 theorem exists_birational_center_matrix_over_extension
     {L : Type*} [Field L] [Algebra ℚ L] {n m : ℕ}
     (hmn : m + 2 ≤ n + 1)

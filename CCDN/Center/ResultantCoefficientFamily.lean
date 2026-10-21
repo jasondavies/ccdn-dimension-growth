@@ -65,6 +65,8 @@ private theorem resultant_coefficientwise_homogeneous
     · exact hf _
     · exact CoefficientwiseHomogeneous.zero D
 
+/-- The resultant of `f` and its derivative `f'`, computed from the Sylvester matrix of the fixed
+formal sizes `d` and `d - 1` regardless of the actual degrees. -/
 def derivativeResultant {R : Type*} [CommRing R] (f : Polynomial R) (d : ℕ) : R :=
   Polynomial.resultant f f.derivative d (d - 1)
 
@@ -79,12 +81,17 @@ private theorem derivativeResultant_coefficientwise_homogeneous
   · rw [Polynomial.coeff_derivative, mul_comm]
     simpa only [Nat.cast_add, Nat.cast_one] using (hf (i + 1)).natCast_mul (i + 1)
 
+/-- The finite set of nonzero coefficients of `derivativeResultant f d`, viewed as a polynomial
+in the `σ`-variables with coefficients in `MvPolynomial τ R`. -/
 def derivativeResultantCoefficientFamily {R σ τ : Type*} [CommRing R]
     (f : Polynomial (MvPolynomial σ (MvPolynomial τ R))) (d : ℕ) :
     Finset (MvPolynomial τ R) := by
   classical
   exact (derivativeResultant f d).support.image (derivativeResultant f d).coeff
 
+/-- If every coefficient of `f` is coefficientwise homogeneous of degree `D` in the
+`τ`-variables and `0 < d`, then every member of `derivativeResultantCoefficientFamily f d` is
+homogeneous of degree `D * (2 * d - 1)`. -/
 theorem derivativeResultantCoefficientFamily_homogeneous
     {R σ τ : Type*} [CommRing R]
     (f : Polynomial (MvPolynomial σ (MvPolynomial τ R))) (d D : ℕ) (hd : 0 < d)
@@ -95,6 +102,8 @@ theorem derivativeResultantCoefficientFamily_homogeneous
   obtain ⟨a, _, rfl⟩ := Finset.mem_image.mp hg
   exact derivativeResultant_coefficientwise_homogeneous f d D hd hf a
 
+/-- The fixed-size derivative resultant commutes with mapping the coefficients along a ring
+homomorphism. -/
 theorem derivativeResultant_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : Polynomial R) (d : ℕ) :
     derivativeResultant (f.map φ) d = φ (derivativeResultant f d) := by
@@ -129,12 +138,15 @@ theorem derivativeResultantCoefficientFamily_nonvanishing_iff
         Finset.mem_image.mpr ⟨b, mem_support_iff.mpr hb, rfl⟩
       exact not_ne_iff.mp (fun hh => h ⟨_, hg, hh⟩)
 
+/-- For `0 < d`, the fixed-size derivative resultant of the zero polynomial vanishes. -/
 theorem derivativeResultant_zero {R : Type*} [CommRing R] (d : ℕ) (hd : 0 < d) :
     derivativeResultant (0 : Polynomial R) d = 0 := by
   change Polynomial.resultant (0 : Polynomial R) 0 d (d - 1) = 0
   rw [Polynomial.resultant_zero_zero]
   exact zero_pow (by omega : d + (d - 1) ≠ 0)
 
+/-- Over a field of characteristic zero, a polynomial `f` of exact degree `d > 0` has nonzero
+fixed-size derivative resultant if and only if it is separable. -/
 theorem derivativeResultant_ne_zero_iff_separable
     {K : Type*} [Field K] [CharZero K]
     (f : Polynomial K) (d : ℕ) (hd : 0 < d) (hf : f.natDegree = d) :

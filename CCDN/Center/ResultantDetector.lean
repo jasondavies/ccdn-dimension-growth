@@ -129,6 +129,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- Let `J` be a homogeneous prime ideal over a field `K` of characteristic zero, of projective
+dimension `m` and degree `d`, that stays prime over an algebraically closed extension `L`. There are
+an irreducible `F` over `K` whose image over `L` is a projective Chow equation of `J` with all row
+degrees `d`, an enumeration `e` of the column injections, and a finite family `Φ` of polynomials in
+the Plücker coordinates, homogeneous of degree `(m + 1) d (2d - 1)`, such that a center matrix `A`
+over `L` makes some member of `Φ` nonzero exactly when the restriction of `F` along the center
+projection of `A` is irreducible. -/
 theorem exists_center_resultant_forms
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [IsAlgClosed L]
     {n m r : ℕ}
