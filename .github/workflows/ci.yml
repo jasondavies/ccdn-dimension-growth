@@ -1,4 +1,5 @@
-# Build the library and run every repository check on each push and pull request.
+# Build both libraries (CCDN and CCDNPaper) and run every repository check on each push and
+# pull request.
 #
 # Third-party actions are pinned to full commit SHAs (the release tag is in the comment), and
 # the elan installer to a release commit, so that a moved tag or branch cannot change the job.
@@ -23,7 +24,7 @@ env:
 jobs:
   check:
     runs-on: ubuntu-latest
-    # Warm builds take 11-18 minutes; a cold build of the whole library takes longer.
+    # Warm builds take 11-18 minutes; a cold build of both libraries takes longer.
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0

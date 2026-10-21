@@ -108,9 +108,15 @@ status:
     loci, with the explicit exponent 2n²+5n−5. Theorem 2 holds without assuming the ideal
     is homogeneous; a point counts when all its representatives annihilate the
     ideal. Theorem 4 is stated in N = n+3 variables with exponent 18+3n = 3N+9.
-    The rest of the library also formalises the paper's Sections 2–6: 62 audited
+    The repository also formalises the paper's Sections 2–6: 62 audited
     requirements, mapped to Lean declarations in docs/completion-audit.json.
-    These are not part of this Comparator entry.
+    These are not part of this Comparator entry. The code forms two Lake libraries:
+    CCDN contains exactly the modules the compared theorems need, and Solution.lean
+    imports only Mathlib and CCDN; CCDNPaper, which imports CCDN, holds the rest of
+    the paper, including Section 5 (good centres, Chow forms, Plücker equations),
+    which is formalised as printed with the corrections listed under
+    fidelity.divergences but is not used by the main results (Theorem 1 reduces the
+    codimension through a bounded linear Noether normalisation instead).
   sorry_count: 0
   sorry_in_definitions: 0
   axioms: []
@@ -122,8 +128,8 @@ automation:
       framework: "not recorded"
       tool_setup: >-
         An AI coding agent with shell access, the pinned Lean toolchain and Lake. It
-        wrote essentially all Lean source in CCDN/, the audit files
-        in docs/, and the README, under the direction of Jason Davies.
+        wrote essentially all Lean source (now split between CCDN/ and CCDNPaper/),
+        the audit files in docs/, and the README, under the direction of Jason Davies.
       cost:
         wall_time: "about 32 hours between the repository's first commit (d96d122, 19 October 2026, 13:33 UTC) and the commit completing the audited formalisation (b6fe8d0, 20 October 2026, 21:57 UTC); work before the first commit was not recorded"
         spend_usd: "not tracked"
@@ -138,8 +144,9 @@ automation:
         vendored ArithmeticHeights library inside the root package. Later, with
         Claude Code subagents, a maintainability refactor of the library: dead code
         and duplicated proofs removed, modules organised into topic directories,
-        repeated hypotheses named, a sharper Theorem 1 exponent (2n²+5n−5), CI and
-        generated documentation.
+        repeated hypotheses named, a sharper Theorem 1 exponent (2n²+5n−5), CI,
+        generated documentation, and the split of the material the main results do
+        not use into the separate CCDNPaper library.
       prompting_notes: "Asked to prepare the repository for Palomar submission, and later to review it for maintainability and resolve the findings."
   spend_usd: "not tracked"
   notes: >-

@@ -1,16 +1,25 @@
 # Proof overview
 
 How each main result is assembled, and where its ingredients live. Paths are relative to
-`CCDN/`; [modules.md](modules.md) lists every module, and [statements.md](statements.md)
-maps the paper's numbered statements to Lean declarations.
+`CCDN/`, except those starting with `CCDNPaper/`, which are relative to the repository root;
+[modules.md](modules.md) lists every module, and [statements.md](statements.md) maps the
+paper's numbered statements to Lean declarations.
+
+The code forms two libraries. The main library `CCDN` (below `CCDN/`) contains exactly the
+modules that the six main results need, and `Solution.lean` and the comparator use only it. The
+paper library `CCDNPaper` (below `CCDNPaper/`) imports `CCDN` and holds the rest of the paper:
+Section 5 (`CCDNPaper/Center/`), the paper's intermediate statements as printed or corrected
+(`CCDNPaper/Statements/`), the counterexamples (`CCDNPaper/Counterexample/`) and the
+supporting results that only these use. `CCDN` never imports `CCDNPaper`. Both are built by
+`lake build`, `scripts/check.sh` and CI.
 
 The directories are layered. `Statements.lean` states Theorems 1–4 as propositions, and each
 main result has an endpoint module at the top of `CCDN/` that assembles its proof; no library
 module imports an endpoint. The proofs live in topic directories (`Plane/`, `Curve/`,
 `Surface/`, `Hypersurface/`, ...), which build on the foundation directories `ForMathlib/`,
 `Algebra/`, `Analysis/`, `Height/` and `Hilbert/`; foundation modules import no topic module.
-`CCDNPaper/Counterexample/` and `CCDNPaper/Statements/` hold side results that nothing else imports.
-`scripts/check-layers.py` checks these rules.
+`CCDNPaper/Counterexample/` and `CCDNPaper/Statements/` hold side results that nothing else
+imports. `scripts/check-layers.py` checks these rules.
 
 ## Theorem 3: affine curves (`AffineCurveBound.lean`)
 
@@ -48,7 +57,9 @@ irreducible. The Lean statement writes `N = n + 3`, so the bound reads `C d^(18+
 1. **Surfaces** (`Surface/`). `Surface/AffineSurfaceDimensionGrowth.lean` proves the bound
    `C d¹⁸ B` in three variables. For `d ≥ 16` it combines an auxiliary polynomial, the line
    contribution of Proposition 4.3.3 and a cover of the remaining points by curves. For
-   `5 ≤ d ≤ 15` it uses a Salberger-type cover by congruence classes (Theorem 4.3.5).
+   `5 ≤ d ≤ 15` it uses a Salberger-type cover by congruence classes
+   (`Surface/PrimitiveSurfaceFixedDegree.lean`); Theorem 4.3.5 as printed is proved separately
+   in `CCDNPaper/Surface/`.
 2. **Slicing** (`Hypersurface/`). `Hypersurface/HyperplaneSlicingInduction.lean` adds one
    variable at a time, counting points level by level along a linear form
    (`Hypersurface/IntegerHyperplaneSlices.lean`). The universal Noether forms give a nonzero
@@ -74,16 +85,20 @@ splits by codimension:
   linear Noether normalisation (`Projection/BoundedIntegerNormalization.lean`) and a bounded
   primitive linear parameter, not from the Chow forms and good centres of Section 5. Its height
   and fibre losses are polynomial in `d` (`Projection/ProjectiveProjectionGrowth.lean`,
-  `Hypersurface/ProjectiveVarietyDimensionGrowth.lean`). Section 5 itself (good centres,
-  Chow forms, Plücker equations) is formalised in `CCDNPaper/Center/`, and Lemmas 5.1–5.4 are stated
-  from it in `CCDNPaper/Statements/`, but no main result imports them.
+  `Hypersurface/ProjectiveVarietyDimensionGrowth.lean`).
+
+Section 5 of the paper (good centres, Chow forms, Plücker equations) is formalised as printed,
+including the corrections recorded in the README's discrepancy table (Lemmas 5.2 and 5.4), in
+the paper library: `CCDNPaper/Center/`, with Lemmas 5.1–5.4 stated in `CCDNPaper/Statements/`.
+The main theorems do not use it: Theorem 1 reduces the codimension through the bounded Noether
+normalisation of `Projection/BoundedIntegerNormalization.lean` instead.
 
 ## Proposition 5: lower bound (`ProjectiveCurveLowerBound.lean`)
 
 `projective_integral_curve_lower_bound` constructs, for every `d ≥ 1`, an absolutely
 irreducible plane curve through a full grid of rational points, using Eisenstein equations
-(`LowerBound/`). The other Section 6 obstructions are stated in `CCDNPaper/Statements/`, from the
-constructions in `LowerBound/`.
+(`LowerBound/`). The other Section 6 obstructions are stated in `CCDNPaper/Statements/`, from
+the grid constructions in `LowerBound/` and `CCDNPaper/LowerBound/`.
 
 ## Theorem 6: class groups (`ClassGroupBound.lean`)
 
@@ -100,7 +115,9 @@ constructions in `LowerBound/`.
 
 ## Counterexamples and the paper's intermediate statements
 
-`CCDNPaper/Counterexample/` holds the formal refutations of printed intermediate statements described in
-the README's "Discrepancies with the paper" section. `CCDNPaper/Statements/` states the paper's other
-intermediate results as printed (or as corrected), where the main results use a different form
-or do not need them; [statements.md](statements.md) links each to its paper label.
+These live in the paper library. `CCDNPaper/Counterexample/` holds the formal refutations of
+printed intermediate statements described in the README's "Discrepancies with the paper"
+section. `CCDNPaper/Statements/` states the paper's other intermediate results as printed (or as
+corrected), where the main results use a different form or do not need them;
+[statements.md](statements.md) links each to its paper label. The other directories of
+`CCDNPaper/` hold the supporting results that only these statements use.

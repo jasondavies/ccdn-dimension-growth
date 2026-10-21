@@ -14,8 +14,8 @@ python3 scripts/check-consistency.py
 python3 scripts/update-root.py --check
 python3 scripts/update-docs.py --check
 
-# Builds the library, Challenge, Solution and Axioms. Elaborating Axioms runs the axiom audit,
-# so a disallowed axiom fails the build, and Lake prints (or, for a cached build, replays) its
-# summary and the axioms of the compared theorems; a separate `lake env lean Axioms.lean` is
-# not needed.
+# Builds the default targets of lakefile.toml: both libraries (CCDN and CCDNPaper), Challenge,
+# Solution and Axioms. Elaborating Axioms runs the axiom audit, so a disallowed axiom fails the
+# build, and Lake prints (or, for a cached build, replays) its summary and the axioms of the
+# compared theorems; a separate `lake env lean Axioms.lean` is not needed.
 lake build

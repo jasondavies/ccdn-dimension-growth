@@ -10,8 +10,10 @@ paper, including coefficient-uniform point bounds.
   [docs/statements.md](docs/statements.md) maps each of the paper's numbered statements to Lean.
 - *Lean users:* see [Build and checks](#build-and-checks), then
   [docs/overview.md](docs/overview.md) for how each result is assembled and
-  [docs/modules.md](docs/modules.md) for every module. Use `import CCDN` for the whole library,
-  or a single module such as `CCDN.AffineCurveBound`; the namespace is `CCDN`.
+  [docs/modules.md](docs/modules.md) for every module. The code forms [two libraries](#libraries):
+  use `import CCDN` for the main results and everything they use, `import CCDNPaper` for the rest
+  of the paper, or a single module such as `CCDN.AffineCurveBound`; the namespace is `CCDN` in
+  both.
 
 ## Results
 
@@ -44,6 +46,32 @@ The external results the paper cites (Lang–Weil, Cafure–Matera, Salberger's 
 Heintz's bounds, Bombieri–Vaaler, Mertens and others) are proved in the library, vendored, or
 taken from Mathlib, not assumed; the second table of [docs/statements.md](docs/statements.md)
 lists all 18 with their Lean declarations.
+
+## Libraries
+
+The Lake package builds two libraries of this project, besides the vendored ones:
+
+| Library | Sources | Content |
+| --- | --- | --- |
+| `CCDN` (main) | `CCDN/`, root `CCDN.lean` | exactly the modules that the six main results need: [`CCDN/Statements.lean`](CCDN/Statements.lean), the six endpoint modules, and the foundation and topic directories they import |
+| `CCDNPaper` (paper) | `CCDNPaper/`, root `CCDNPaper.lean` | the rest of the paper: Section 5 (`CCDNPaper/Center/`), the paper's intermediate statements as printed or as corrected (`CCDNPaper/Statements/`), the counterexamples of the [discrepancy table](#discrepancies-with-the-paper) (`CCDNPaper/Counterexample/`), and the supporting results that only these use, in directories named after those of `CCDN/` |
+
+`CCDNPaper` imports `CCDN`, but `CCDN` never imports `CCDNPaper`, and every module of `CCDN` lies
+in the import closure of the six endpoints; `scripts/check-layers.py` checks both rules.
+`Solution.lean` imports only Mathlib and `CCDN`, so the comparator, which checks `Solution.lean`
+against `Challenge.lean`, depends only on the main library. Both libraries are default Lake
+targets: `lake build`, `scripts/check.sh` and CI build both, and `Axioms.lean` audits the axioms
+of both. Declarations of both libraries live in the namespace `CCDN`.
+
+**Section 5 is not used by the main results.** Section 5 of the paper (good centres, Chow forms,
+Plücker equations and Lemmas 5.1–5.4) is formalised as printed in `CCDNPaper/Center/` and
+`CCDNPaper/Statements/`, including the corrections recorded in the discrepancy table (Lemmas 5.2
+and 5.4). The main theorems do not use it. Theorem 1 reduces the codimension through a bounded
+linear Noether normalisation,
+[`CCDN/Projection/BoundedIntegerNormalization.lean`](CCDN/Projection/BoundedIntegerNormalization.lean),
+which yields the bounded finite birational projection onto a hypersurface in
+[`CCDN/Projection/BoundedBirationalHypersurfaceProjection.lean`](CCDN/Projection/BoundedBirationalHypersurfaceProjection.lean),
+in place of the paper's good centres ([overview](docs/overview.md)).
 
 ## Discrepancies with the paper
 
@@ -90,7 +118,7 @@ audited statements of the paper to its Lean declarations, and
 [`Challenge.lean`](Challenge.lean) is the file to audit. It imports only Mathlib, defines the
 counting functions, zero sets and Hilbert-function notions of degree, and states the compared
 theorems in the namespace `CCDN.Submission`, with `sorry`. [`Solution.lean`](Solution.lean)
-repeats those definitions verbatim and proves each statement from the library.
+repeats those definitions verbatim and proves each statement from the main library `CCDN`.
 [`comparator.json`](comparator.json) lists the nine compared theorems:
 
 | Theorem | Content |
@@ -115,7 +143,7 @@ the proofs through Lean's kernel and the toolchain's independent kernels (NanoDa
   it. It needs Linux, `bwrap`, and real directories (not symbolic links) under `.lake/packages`.
   It replays every declaration the compared proofs depend on, Mathlib's included, through three
   kernels. On a 16-core workstation with 249 GiB of RAM and the build already cached, the
-  replay itself took about four minutes; a cold run first builds the whole library. The last
+  replay itself took about four minutes; a cold run first builds the main library. The last
   run (21 October 2026, on the current statements, including the Theorem 1 exponent
   `2n² + 5n − 5`) was accepted by all three kernels. Earlier runs are recorded in
   [docs/history/verification.txt](docs/history/verification.txt).
@@ -148,12 +176,14 @@ bash scripts/check.sh
 - `normalize-imports.py --check`: every library module lists its `public import` lines, then
   its plain imports, each sorted, between the `module` line and the module docstring; run the
   script without `--check` to normalize the import blocks.
-- `check-layers.py`: the foundation directories and `CCDN/Statements.lean` import no topic
-  directory, no library module imports an endpoint, and the side results are imported only
-  from their own directory ([layout](#documentation)).
+- `check-layers.py`: the main library `CCDN` imports nothing from `CCDNPaper` and contains only
+  modules that the main results import, the foundation directories and `CCDN/Statements.lean`
+  import no topic directory, no library module imports an endpoint, and the side results are
+  imported only from their own directory ([layout](#documentation)).
 - `check-provenance.py`: the vendored sources match their recorded hashes, reverse-applying
-  `vendor/bombieri-vaaler/lean-4.35.patch` restores the upstream files, and every module is
-  reachable from the root import.
+  `vendor/bombieri-vaaler/lean-4.35.patch` restores the upstream files, every module is
+  reachable from one of the root imports `CCDN.lean` and `CCDNPaper.lean`, and each module
+  belongs to exactly one Lake library.
 - `audit-evidence.py`: `docs/completion-audit.json` follows its [schema](docs/audit-schema.md),
   and every evidence declaration is declared in the file it names.
 - `check-docs.py`: links in README and `docs/` resolve, linked declarations exist, and every
@@ -164,12 +194,12 @@ bash scripts/check.sh
   table above and the statement counts agree with the audit; the toolchain and Mathlib
   revision quoted here match `lean-toolchain`, `lakefile.toml` and `lake-manifest.json`; and
   this list names the commands of `scripts/check.sh`, in order.
-- `update-root.py --check` and `update-docs.py --check`: `CCDN.lean`, `docs/modules.md` and
-  `docs/statements.md` are generated; run the scripts without `--check` after adding, moving or
+- `update-root.py --check` and `update-docs.py --check`: `CCDN.lean`, `CCDNPaper.lean`,
+  `docs/modules.md` and `docs/statements.md` are generated; run the scripts without `--check` after adding, moving or
   removing modules or editing the audit.
-- `lake build`: builds the library, `Challenge`, `Solution` and `Axioms`. Building `Axioms`
-  audits the transitive axioms of every declaration in the library, the vendored dependencies
-  and `Solution.lean`, and prints the axioms of the compared theorems; only `propext`,
+- `lake build`: builds both libraries, `Challenge`, `Solution` and `Axioms`. Building `Axioms`
+  audits the transitive axioms of every declaration in `CCDN`, `CCDNPaper`, the vendored
+  dependencies and `Solution.lean`, and prints the axioms of the compared theorems; only `propext`,
   `Classical.choice` and `Quot.sound` are allowed. Lake replays these messages when the build
   is cached.
 
@@ -200,17 +230,20 @@ dependencies keep their own licences (see [`NOTICE`](NOTICE)).
 - [`docs/statements.md`](docs/statements.md): the paper's numbered statements and the external
   results it cites, with their Lean declarations (generated from `docs/completion-audit.json`;
   [schema](docs/audit-schema.md)).
-- [`docs/modules.md`](docs/modules.md): every module, by directory (generated). The
-  directories are layered, and `scripts/check-layers.py` enforces the layers:
+- [`docs/modules.md`](docs/modules.md): every module of both [libraries](#libraries), by
+  directory (generated). The directories are layered, and `scripts/check-layers.py` enforces
+  the layers:
   - [`CCDN/Statements.lean`](CCDN/Statements.lean) states Theorems 1–4, and each of the six
     main results has an endpoint module at the top of `CCDN/` (statement plus a short
     assembly), which no library module imports;
   - the foundation directories `ForMathlib/`, `Algebra/`, `Analysis/`, `Height/` and
-    `Hilbert/` hold general results and import nothing else from the library
-    (`CCDN/ForMathlib/` is written under Mathlib namespaces, for upstreaming);
-  - the topic directories hold the proof routes, each in the directory of its topic;
-  - `CCDNPaper/Counterexample/` and `CCDNPaper/Statements/` hold side results (refutations, and the paper's
-    intermediate statements as stated there) that nothing else imports.
+    `Hilbert/` (of either library) hold general results and import no topic directory
+    (`ForMathlib/` is written under Mathlib namespaces, for upstreaming);
+  - the topic directories hold the proof routes, each in the directory of its topic; those of
+    `CCDNPaper/` hold results that only the paper library uses, and `CCDNPaper/Center/` is
+    Section 5;
+  - `CCDNPaper/Counterexample/` and `CCDNPaper/Statements/` hold side results (refutations,
+    and the paper's intermediate statements as stated there) that nothing else imports.
 - [`docs/history/`](docs/history/): development notes, the verification log and the original
   statement audits, kept for the record and not maintained.
 
