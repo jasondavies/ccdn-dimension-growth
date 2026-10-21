@@ -11,6 +11,7 @@ import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Hilbert.CompleteIntersectionDegreeBudget
 import CCDN.Surface.SurfaceMediumCurveCount
 import CCDN.Surface.SurfaceResidueSalbergerCount
+import CCDN.Surface.SurfaceSmallCurveCover
 import Mathlib.Algebra.Order.Star.Real
 /-! The literal bounded-degree geometric curve cover for surfaces of
 polynomial coefficient height. All constants precede the equation and
@@ -19,8 +20,66 @@ radius; the remaining height alternative is handled separately. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Finset Classical
+open MvPolynomial Finset
 
+/-- Since `B^(1/√d) ≥ 1`, the curve-component degree budget `d A (B^(1/√d) + 1)(1 + log B)` is
+at most `2 d A B^(1/√d) (log B + 1)`. -/
+lemma curve_component_budget_le_double {d : ℕ} {A B s : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B)
+    (hs : s ≤ (d : ℝ) * A * (B ^ (1 / Real.sqrt (d : ℝ)) + 1) * (1 + Real.log B)) :
+    s ≤ 2 * d * A * B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1) := by
+  have hroot : 1 ≤ B ^ (1 / Real.sqrt (d : ℝ)) := Real.one_le_rpow hB (by positivity)
+  have hlogB := Real.log_nonneg hB
+  calc
+    _ ≤ _ := hs
+    _ ≤ (d : ℝ) * A * (2 * B ^ (1 / Real.sqrt (d : ℝ))) * (1 + Real.log B) := by
+      gcongr
+      linarith
+    _ = _ := by ring
+
+/-- A subfamily of curve components of positive degrees whose total degree is at most
+`A₀ B^(1/√d) (log B + 1)` has at most `2 A₀ (B^(1/√d) log B + 1)` members. -/
+lemma curve_component_card_le {ι : Type*} {S T : Finset ι} {δ : ι → ℕ} (hT : T ⊆ S)
+    (hpos : ∀ I ∈ S, 0 < δ I) {d : ℕ} (hd : 1 ≤ d) {A₀ B : ℝ} (hA₀ : 0 ≤ A₀) (hB : 1 ≤ B)
+    (hbudget : (∑ I ∈ S, (δ I : ℝ)) ≤
+      A₀ * B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1)) :
+    (T.card : ℝ) ≤ 2 * A₀ * (B ^ (1 / Real.sqrt (d : ℝ)) * Real.log B + 1) := by
+  have hcard : (T.card : ℝ) ≤ ∑ I ∈ S, (δ I : ℝ) := by
+    calc
+      _ = ∑ _I ∈ T, (1 : ℝ) := by simp
+      _ ≤ ∑ I ∈ T, (δ I : ℝ) := by
+        apply sum_le_sum
+        intro I hI
+        exact_mod_cast hpos I (hT hI)
+      _ ≤ _ := sum_le_sum_of_subset_of_nonneg hT (by intros; positivity)
+  have hsqrt : 1 ≤ Real.sqrt (d : ℝ) := Real.le_sqrt_of_sq_le (by exact_mod_cast hd)
+  have hα : 1 / Real.sqrt (d : ℝ) ≤ 1 := by
+    simpa using one_div_le_one_div_of_le zero_lt_one hsqrt
+  have hn := mul_le_mul_of_nonneg_left (salberger_curve_number_normalization hα hB) hA₀
+  linarith [hcard.trans hbudget]
+
+/-- A point count bounded by `d²` times a degree sum of size at most
+`A₀ B^(1/√d) (log B + 1)` is at most `d² A₀ B^(2/√d) (log B + 1)^4`. -/
+lemma count_le_of_curve_degree_budget {d : ℕ} {A₀ B N s : ℝ} (hA₀ : 0 ≤ A₀) (hB : 1 ≤ B)
+    (hN : N ≤ ((d ^ 2 : ℕ) : ℝ) * s)
+    (hs : s ≤ A₀ * B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1)) :
+    N ≤ ((d : ℝ) ^ 2 * A₀) * B ^ (2 / Real.sqrt (d : ℝ)) * (Real.log B + 1) ^ 4 := by
+  have hw := salberger_nonnegative_weight_mono
+    (show 0 ≤ 1 / Real.sqrt (d : ℝ) by positivity) hB
+  have he : 2 * (1 / Real.sqrt (d : ℝ)) = 2 / Real.sqrt (d : ℝ) := by ring
+  rw [he] at hw
+  calc
+    _ ≤ ((d ^ 2 : ℕ) : ℝ) * s := hN
+    _ ≤ ((d ^ 2 : ℕ) : ℝ) * (A₀ * B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1)) := by gcongr
+    _ = ((d : ℝ) ^ 2 * A₀) * (B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1)) := by
+      push_cast; ring
+    _ ≤ _ := by
+      have hh := mul_le_mul_of_nonneg_left hw (show 0 ≤ (d : ℝ) ^ 2 * A₀ by positivity)
+      nlinarith
+
+/-- Literal bounded-degree geometric curve cover of a degree-`d` surface whose coefficient
+height is polynomial in `B`: at most `C (B^(1/√d) log B + 1)` geometric curves of degree at most
+`d²` cover all smooth points of height at most `B` outside a set of
+`C B^(2/√d + c / log(1 + log B))` points. -/
 theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
     (K : ℝ) (hK : 0 ≤ K) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
@@ -37,6 +96,7 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
         (count (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
           (⋃ I ∈ S, idealZeroLocus I)) B : ℝ) ≤
           C * B ^ (2 / Real.sqrt (d : ℝ) + c / Real.log (1 + Real.log B)) := by
+  classical
   let A := surfaceCongruenceDegreeConstant d K
   have hA : 0 ≤ A := (surfaceCongruenceDegreeConstant_pos d K).le
   let A₀ := 2 * (d : ℝ) * A
@@ -53,59 +113,26 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
   intro f habs hfd H B hH hB hcoeff hheight
   subst d
   have hir := rational_irreducible_of_charZero_map f habs
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
-  have hlogB := Real.log_nonneg hB
-  have hroot : 1 ≤ B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) := Real.one_le_rpow hB (by positivity)
   have hL := surfaceResidueWindow_one_le f.totalDegree hK hB
   obtain ⟨hderivative,hX,hBX,hXL⟩ := surfaceResidueWindow_parameters hd hK hB hheight
   obtain ⟨F⟩ := exists_surface_congruence_family f habs (by omega) hK hH hB hcoeff hheight
-  have hproper : ¬ map (Int.castRingHom ℚ) f ∣ map (Int.castRingHom ℚ) F.initial :=
-    F.proper ∅ (by simp) (emptySmoothAffineResidueFamily f)
-  obtain ⟨S,δ,hS,hcover,hbudget,_⟩ := exists_completeIntersection_curve_components
-    (map (Int.castRingHom ℚ) f) (map (Int.castRingHom ℚ) F.initial) hir hproper
-  have hinitial : (F.initial.totalDegree : ℝ) ≤ A *
-      (B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) + 1) * (1 + Real.log B) := by
-    have hh := F.degree_le ∅ (by simp) (emptySmoothAffineResidueFamily f)
-    simpa only [SurfaceCongruenceFamily.initial, sum_empty, Real.exp_zero, div_one, add_zero] using hh
-  have hbudget' : (∑ I ∈ S, (δ I : ℝ)) ≤
-      A₀ * B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) * (Real.log B + 1) := by
-    rw [rational_map_totalDegree, rational_map_totalDegree] at hbudget
-    have hb : (∑ I ∈ S, (δ I : ℝ)) ≤ (f.totalDegree : ℝ) * F.initial.totalDegree := by exact_mod_cast hbudget
-    calc
-      _ ≤ _ := hb
-      _ ≤ (f.totalDegree : ℝ) * (A *
-          (B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) + 1) * (1 + Real.log B)) := by gcongr
-      _ ≤ (f.totalDegree : ℝ) * (A *
-          (2 * B ^ (1 / Real.sqrt (f.totalDegree : ℝ))) * (1 + Real.log B)) := by
-        gcongr
-        linarith
-      _ = _ := by dsimp only [A₀]; ring
+  obtain ⟨S,δ,hS,hcover,hbudget⟩ := exists_surface_initial_curve_components f hir F
+  have hbudget' := curve_component_budget_le_double hA hB hbudget
   let kept := S.filter (fun I => δ I ≤ f.totalDegree ^ 2 ∧ GeometricCurveIdeal I)
-  let medium := S.filter (fun I => f.totalDegree ^ 2 < δ I ∧ (δ I : ℝ) ≤
-    2 * f.totalDegree * A * surfaceResidueLogBudget B (surfaceResidueWindow f.totalDegree K B))
-  let bad := S.filter (fun I => δ I ≤ f.totalDegree ^ 2 ∧ ¬GeometricCurveIdeal I)
   refine ⟨kept,δ,?_,?_,?_⟩
   · intro I hI
     obtain ⟨hIS,hδ,hgeo⟩ := mem_filter.mp hI
     obtain ⟨hp,hh,hf,_,hpos,hdeg⟩ := hS I hIS
     exact ⟨hp,hh,hf,hgeo,hpos,hdeg,hδ⟩
-  · have hcard : (kept.card : ℝ) ≤ ∑ I ∈ S, (δ I : ℝ) := by
-      calc
-        _ = ∑ _I ∈ kept, (1 : ℝ) := by simp
-        _ ≤ ∑ I ∈ kept, (δ I : ℝ) := by
-          apply sum_le_sum
-          intro I hI
-          have hh := (hS I (mem_filter.mp hI).1).2.2.2.2.1
-          exact_mod_cast hh
-        _ ≤ _ := sum_le_sum_of_subset_of_nonneg (filter_subset _ _) (by intros; positivity)
-    have hsqrt : 1 ≤ Real.sqrt (f.totalDegree : ℝ) :=
-      Real.le_sqrt_of_sq_le (by exact_mod_cast hd)
-    have hα : 1 / Real.sqrt (f.totalDegree : ℝ) ≤ 1 := by
-      simpa using one_div_le_one_div_of_le zero_lt_one hsqrt
-    have hn := mul_le_mul_of_nonneg_left (salberger_curve_number_normalization hα hB) hA₀
-    have hbase : 0 ≤ B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) * Real.log B + 1 := by positivity
-    nlinarith [hcard.trans hbudget']
-  · have hmed := hmedium medium δ f.totalDegree hd A₀ D B hA₀ hD hB
+  · have hcard := curve_component_card_le (show kept ⊆ S from filter_subset _ S)
+      (fun I hI => (hS I hI).2.2.2.2.1) hd hA₀ hB hbudget'
+    have hbase : 0 ≤ B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) * Real.log B + 1 := by
+      have := Real.log_nonneg hB
+      positivity
+    exact hcard.trans (mul_le_mul_of_nonneg_right (by linarith) hbase)
+  · let medium := S.filter (fun I => f.totalDegree ^ 2 < δ I ∧ (δ I : ℝ) ≤
+      2 * f.totalDegree * A * surfaceResidueLogBudget B (surfaceResidueWindow f.totalDegree K B))
+    have hmed := hmedium medium δ f.totalDegree hd A₀ D B hA₀ hD hB
       (fun I hI => by
         obtain ⟨hIS,hδ,_⟩ := mem_filter.mp hI
         obtain ⟨hp,_,_,_,_,hdeg⟩ := hS I hIS
@@ -114,28 +141,13 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
         have hh := (mem_filter.mp hI).2.2
         rw [surfaceResidueLogBudget_window] at hh
         simpa only [D,A₀,mul_assoc] using hh)
-      ((sum_le_sum_of_subset_of_nonneg (filter_subset _ _) (by intros; positivity)).trans hbudget')
-    have hbad := nongeometric_curve_union_count_le S δ (f.totalDegree ^ 2)
-      (fun I hI => by
-        obtain ⟨hp,_,_,_,hpos,hdeg⟩ := hS I hI
-        exact ⟨hp,hpos,hdeg⟩) (show 0 ≤ B by linarith)
-    have hbad' : (count (⋃ I ∈ bad, idealZeroLocus I) B : ℝ) ≤
-        ((f.totalDegree : ℝ) ^ 2 * A₀) *
-          B ^ (2 / Real.sqrt (f.totalDegree : ℝ)) * (Real.log B + 1) ^ 4 := by
-      have hw := salberger_nonnegative_weight_mono
-        (show 0 ≤ 1 / Real.sqrt (f.totalDegree : ℝ) by positivity) hB
-      have he : 2 * (1 / Real.sqrt (f.totalDegree : ℝ)) = 2 / Real.sqrt (f.totalDegree : ℝ) := by ring
-      rw [he] at hw
-      calc
-        _ ≤ (f.totalDegree ^ 2 : ℕ) * ∑ I ∈ S, (δ I : ℝ) := hbad
-        _ ≤ (f.totalDegree ^ 2 : ℕ) *
-            (A₀ * B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) * (Real.log B + 1)) := by gcongr
-        _ = ((f.totalDegree : ℝ) ^ 2 * A₀) *
-            (B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) * (Real.log B + 1)) := by push_cast; ring
-        _ ≤ _ := by
-          have hh := mul_le_mul_of_nonneg_left hw
-            (show 0 ≤ (f.totalDegree : ℝ) ^ 2 * A₀ by positivity)
-          nlinarith
+      ((sum_le_sum_of_subset_of_nonneg (filter_subset _ _) (by intros; positivity)).trans
+        hbudget')
+    have hbad := count_le_of_curve_degree_budget hA₀ hB
+      (nongeometric_curve_union_count_le S δ (f.totalDegree ^ 2)
+        (fun I hI => by
+          obtain ⟨hp,_,_,_,hpos,hdeg⟩ := hS I hI
+          exact ⟨hp,hpos,hdeg⟩) (show 0 ≤ B by linarith)) hbudget'
     have hresidual := hres f rfl B hB F hir S δ (fun I hI => by
       obtain ⟨hp,hh,hf,_,_,hdeg⟩ := hS I hI
       exact ⟨hp,hh,hf,hdeg⟩)
@@ -146,23 +158,25 @@ theorem surface_salberger_cover_of_height (d : ℕ) (hd : 1 ≤ d)
         exact ⟨hp,hh,hf,hg,hdeg⟩) hcover
     have hpointR : (count (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
         (⋃ I ∈ kept, idealZeroLocus I)) B : ℝ) ≤
-        count (⋃ I ∈ bad, idealZeroLocus I) B +
+        count (⋃ I ∈ S.filter (fun I => δ I ≤ f.totalDegree ^ 2 ∧ ¬GeometricCurveIdeal I),
+          idealZeroLocus I) B +
         count (⋃ I ∈ medium, idealZeroLocus I) B +
         count (surfaceResidueResidualLocus F S (surfaceResidueWindow f.totalDegree K B)
           (2 * B ^ (1 / Real.sqrt (f.totalDegree : ℝ))) hL) B := by
-      simpa only [Nat.cast_add, kept, bad, medium] using (Nat.cast_le (α := ℝ)).mpr hpoint
+      simpa only [Nat.cast_add, kept, medium] using (Nat.cast_le (α := ℝ)).mpr hpoint
     have htotal : (count (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
         (⋃ I ∈ kept, idealZeroLocus I)) B : ℝ) ≤
         E * B ^ (2 / Real.sqrt (f.totalDegree : ℝ)) * (Real.log B + 1) ^ 4 +
           Cr * B ^ (2 / Real.sqrt (f.totalDegree : ℝ) + cr / Real.log (1 + Real.log B)) := by
-      have hh := add_le_add (add_le_add hbad' hmed) hresidual
+      have hh := add_le_add (add_le_add hbad hmed) hresidual
       apply hpointR.trans
       convert hh using 1
       dsimp only [E]
       ring
-    have hh := htotal.trans (hcombine (2 / Real.sqrt (f.totalDegree : ℝ)) B hB)
-    have hp : 0 ≤ B ^ (2 / Real.sqrt (f.totalDegree : ℝ) + cn / Real.log (1 + Real.log B)) := by positivity
-    exact hh.trans (mul_le_mul_of_nonneg_right (by linarith only [hA₀]) hp)
+    have hp : 0 ≤ B ^ (2 / Real.sqrt (f.totalDegree : ℝ) + cn / Real.log (1 + Real.log B)) := by
+      positivity
+    exact (htotal.trans (hcombine (2 / Real.sqrt (f.totalDegree : ℝ)) B hB)).trans
+      (mul_le_mul_of_nonneg_right (by linarith only [hA₀]) hp)
 
 end
 end CCDN

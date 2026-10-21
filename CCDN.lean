@@ -90,6 +90,7 @@ public import CCDN.Algebra.UniversalHyperplaneRestriction
 public import CCDN.Algebra.UnscaledAffineMinimum
 public import CCDN.Analysis.Analytic
 public import CCDN.Analysis.DegreeDependenceNumerics
+public import CCDN.Analysis.ElementaryLogBounds
 public import CCDN.Analysis.PaperLogarithmEstimate
 public import CCDN.Analysis.PaperPrimeEstimates
 public import CCDN.Analysis.PrimeCutoff
@@ -782,6 +783,7 @@ public import CCDN.Projection.IntegralFiberRank
 public import CCDN.Projection.IntegralProjectionClosedImage
 public import CCDN.Projection.IntegralProjectionFiberCount
 public import CCDN.Projection.IntegralProjectionHilbert
+public import CCDN.Projection.LeadingCoordinateExtension
 public import CCDN.Projection.LinearNormalizationFiberCount
 public import CCDN.Projection.LinearNormalizationInfinite
 public import CCDN.Projection.LinearProjectionFiltration

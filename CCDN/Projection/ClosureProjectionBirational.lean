@@ -20,6 +20,49 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- An algebra map sends polynomial expressions in elements mapped into an intermediate field
+into that field. -/
+lemma algHom_aeval_mem_intermediateField {K R F σ : Type*} [Field K] [CommRing R] [Algebra K R]
+    [Field F] [Algebra K F] (ψ : R →ₐ[K] F) (E : IntermediateField K F) (a : σ → R)
+    (ha : ∀ i, ψ (a i) ∈ E) (p : MvPolynomial σ K) : ψ (aeval a p) ∈ E := by
+  induction p using MvPolynomial.induction_on with
+  | C c =>
+      rw [aeval_C, AlgHom.commutes]
+      exact E.algebraMap_mem c
+  | add p r hp hr => rw [map_add, map_add]; exact E.add_mem hp hr
+  | mul_X p i hp => rw [map_mul, aeval_X, map_mul]; exact E.mul_mem hp (ha i)
+
+/-- An intermediate field of the function field of a prime containing the class of every
+polynomial is the whole function field. -/
+lemma intermediateField_eq_top_of_forall_mk_mem {K σ : Type*} [Field K]
+    (J : Ideal (MvPolynomial σ K)) [J.IsPrime]
+    (E : IntermediateField K (FractionRing (MvPolynomial σ K ⧸ J)))
+    (h : ∀ p, algebraMap (MvPolynomial σ K ⧸ J) (FractionRing (MvPolynomial σ K ⧸ J))
+      (Ideal.Quotient.mk J p) ∈ E) : E = ⊤ := by
+  apply top_unique
+  intro x _
+  obtain ⟨r, s, _, rfl⟩ := IsFractionRing.div_surjective (MvPolynomial σ K ⧸ J) x
+  apply E.div_mem
+  · obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective r
+    exact h p
+  · obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective s
+    exact h p
+
+/-- The homogenizing coordinate does not vanish in the function field of the cone over the
+projective closure. -/
+lemma algebraMap_mk_projectiveClosure_X_zero_ne_zero {K : Type*} [Field K] {n : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
+    algebraMap (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I)
+      (FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I))
+      (Ideal.Quotient.mk (projectiveClosureIdeal I) (X 0)) ≠ 0 := by
+  intro h
+  apply projectiveClosureIdeal_not_X_zero I
+  apply Ideal.Quotient.eq_zero_iff_mem.mp
+  exact (IsFractionRing.injective (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I)
+    (FractionRing _)) (by simpa only [map_zero] using h)
+
+/-- A linear affine projection generating the function field also generates the function field
+of the cone over the projective closure, once the homogenizing coordinate is retained. -/
 theorem closure_projection_generates_functionField
     {K : Type*} [Field K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
@@ -48,12 +91,7 @@ theorem closure_projection_generates_functionField
   let E := IntermediateField.adjoin K
     (Set.range (fun i => θ (closureProjectionCoordinates a i)))
   have hker : RingHom.ker ψ = I := projectiveClosureIdeal_chart I
-  have h0 : θ (X 0) ≠ 0 := by
-    intro h
-    apply projectiveClosureIdeal_not_X_zero I
-    apply Ideal.Quotient.eq_zero_iff_mem.mp
-    exact (IsFractionRing.injective B F)
-      (by change θ (X 0) = q 0; simpa only [map_zero] using h)
+  have h0 : θ (X 0) ≠ 0 := algebraMap_mk_projectiveClosure_X_zero_ne_zero I
   have h0E : θ (X 0) ∈ E :=
     IntermediateField.subset_adjoin K _ ⟨0, rfl⟩
   have haE (i : Fin m) : ψ (a i) ∈ E := by
@@ -64,15 +102,6 @@ theorem closure_projection_generates_functionField
     rw [hh]
     exact E.mul_mem (E.inv_mem h0E)
       (IntermediateField.subset_adjoin K _ ⟨i.succ, rfl⟩)
-  have heval (p : MvPolynomial (Fin m) K) : ψ (aeval a p) ∈ E := by
-    induction p using MvPolynomial.induction_on with
-    | C c =>
-        rw [aeval_C]
-        change ψ (algebraMap K (MvPolynomial (Fin n) K) c) ∈ E
-        rw [AlgHom.commutes]
-        exact E.algebraMap_mem c
-    | add p r hp hr => rw [map_add, map_add]; exact E.add_mem hp hr
-    | mul_X p i hp => rw [map_mul, aeval_X, map_mul]; exact E.mul_mem hp (haE i)
   have hQne : ψ (aeval a Q) ≠ 0 := by
     intro h
     apply hQ
@@ -88,7 +117,8 @@ theorem closure_projection_generates_functionField
       apply (eq_div_iff hQne).mpr
       exact (mul_comm _ _).trans hh
     rw [he]
-    exact E.div_mem (heval (P i)) (heval Q)
+    exact E.div_mem (algHom_aeval_mem_intermediateField ψ E a haE (P i))
+      (algHom_aeval_mem_intermediateField ψ E a haE Q)
   have hcoord (i : Fin (n + 1)) : θ (X i) ∈ E := by
     refine Fin.cases h0E (fun j => ?_) i
     have he : ψ (X j) = θ (X j.succ) / θ (X 0) := by
@@ -98,23 +128,11 @@ theorem closure_projection_generates_functionField
       rw [he, div_mul_cancel₀ _ h0]
     rw [hj]
     exact E.mul_mem (hchart j) h0E
-  have hpoly (p : MvPolynomial (Fin (n + 1)) K) : θ p ∈ E := by
-    induction p using MvPolynomial.induction_on with
-    | C c =>
-        change θ (algebraMap K (MvPolynomial (Fin (n + 1)) K) c) ∈ E
-        rw [AlgHom.commutes]
-        exact E.algebraMap_mem c
-    | add p r hp hr => rw [map_add]; exact E.add_mem hp hr
-    | mul_X p i hp => rw [map_mul]; exact E.mul_mem hp (hcoord i)
   change E = ⊤
-  apply top_unique
-  intro x _
-  obtain ⟨r, s, _, rfl⟩ := IsFractionRing.div_surjective B x
-  apply E.div_mem
-  · obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective r
-    exact hpoly p
-  · obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective s
-    exact hpoly p
+  refine intermediateField_eq_top_of_forall_mk_mem J E (fun p => ?_)
+  have hh := algHom_aeval_mem_intermediateField θ E X hcoord p
+  rw [aeval_X_left_apply] at hh
+  exact hh
 
 end
 end CCDN

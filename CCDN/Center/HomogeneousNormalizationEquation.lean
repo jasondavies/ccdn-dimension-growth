@@ -10,11 +10,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.LinearProjectionFiltration
 import CCDN.Center.HomogeneousIntegralRelation
 import CCDN.Height.LinearParameterPrimitive
-import CCDN.Hilbert.HilbertLinearCoordinates
-import CCDN.Hilbert.PrincipalHilbertPolynomial
-import CCDN.Projection.HilbertProjectionDegree
-import CCDN.Projection.HomogeneousFiniteProjectionDegree
-import CCDN.Projection.HomogeneousProjectionEquation
+import CCDN.Projection.LeadingCoordinateExtension
 /-! Primitive augmentation of a finite homogeneous normalization
 produces an irreducible equation whose degree in the new variable is exactly
 the Hilbert multiplicity. -/
@@ -46,9 +42,8 @@ theorem exists_homogeneous_normalization_primitive_equation
       RingHom.ker (projectionCoordinateMap I (Fin.cases z a)) = Ideal.span {f} ∧
       (finSuccEquiv K (m + 1) f).natDegree = d := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨k, _, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I a (fun i => (ha i).totalDegree_le) hi d ⟨hdim, hdegree⟩
+    I a (fun i => (ha i).totalDegree_le) hi d hdimdeg
   let z := momentCoordinate K n k
   let l : Fin (m + 2) → MvPolynomial (Fin n) K := Fin.cases z a
   have hl (i) : (l i).IsHomogeneous 1 := by
@@ -56,45 +51,9 @@ theorem exists_homogeneous_normalization_primitive_equation
     change (momentCoordinate K n k).IsHomogeneous 1
     unfold momentCoordinate
     exact IsHomogeneous.sum _ _ _ (fun j _ => isHomogeneous_C_mul_X ((k : K) ^ j.val) j)
-  let ψ := projectionCoordinateMap I l
-  have heq : ψ.comp (rename Fin.succ) = projectionCoordinateMap I a := by
-    ext i
-    simp only [AlgHom.comp_apply, rename_X, projectionCoordinateMap, aeval_X,
-      Ideal.Quotient.mkₐ_eq_mk]
-    change (Ideal.Quotient.mk I) (aeval l (X i.succ)) = (Ideal.Quotient.mk I) (a i)
-    rw [aeval_X]
-    rfl
-  have hintl : ψ.IsIntegral := by
-    apply RingHom.IsIntegral.tower_top (rename Fin.succ).toRingHom ψ.toRingHom
-    change (ψ.comp (rename Fin.succ)).IsIntegral
-    rwa [heq]
-  have hAI : AlgebraicIndependent K (fun i : Fin (m + 1) => ψ (X i.succ)) := by
-    have hh : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) := by
-      change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (a i)))
-      rw [← projectionCoordinateMap_eq_aeval]
-      exact hi
-    convert hh using 1
-    funext i
-    change (Ideal.Quotient.mk I) (aeval l (X i.succ)) = (Ideal.Quotient.mk I) (a i)
-    rw [aeval_X]
-    rfl
-  obtain ⟨f, hf, hfpos, _, hker⟩ := exists_hypersurface_projection_equation_degree_le
-    I l (fun i => (hl i).totalDegree_le) d ⟨hdim, hdegree⟩
-    (fun i => X i.succ) (fun _ => by simp) hAI
-  have hfield' : IntermediateField.adjoin K
-      (Set.range (fun i : Fin (m + 2) => algebraMap (MvPolynomial (Fin n) K ⧸ I) F
-        ((Ideal.Quotient.mk I) (l i)))) = ⊤ := hfield
-  have hlead := homogeneous_finite_birational_projection_leadingCoeff_eq
-    (F := F) I hI l hl hintl hfield'
-  rw [hker, principal_filteredHilbertPolynomial_leadingCoeff f hf.ne_zero hfpos,
-    hdegree] at hlead
-  have hfdeg : f.totalDegree = d := by
-    have hh := (div_left_inj' (by positivity : ((m + 1).factorial : ℚ) ≠ 0)).mp hlead
-    exact_mod_cast hh
-  have hfhom : f.IsHomogeneous d := by
-    rw [← hfdeg]
-    exact homogeneous_projection_equation I hI l hl f hf.ne_zero hker
-  exact ⟨z, f, hfield', hf, hfhom, hfdeg, hfdeg ▸ hfpos, hker,
+  obtain ⟨f, hf, hfhom, hfdeg, hd, hker⟩ := exists_homogeneous_extended_projection_equation
+    (F := F) I hI l hl hint hi hfield d hdimdeg
+  exact ⟨z, f, hfield, hf, hfhom, hfdeg, hd, hker,
     integral_homogeneous_projection_relation_natDegree I a hint z f hfhom hker⟩
 
 end
