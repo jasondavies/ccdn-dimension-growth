@@ -28,7 +28,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def coordinateParameterField {K F σ : Type*} [Field K] [Field F] [Algebra K F]
+private def coordinateParameterField {K F σ : Type*} [Field K] [Field F] [Algebra K F]
     (I : Ideal (MvPolynomial σ K)) [Algebra (MvPolynomial σ K ⧸ I) F]
     (U : Set σ) : IntermediateField K F :=
   IntermediateField.adjoin K (Set.range (fun i : U =>
@@ -36,7 +36,7 @@ def coordinateParameterField {K F σ : Type*} [Field K] [Field F] [Algebra K F]
 
 /-- There is a subset of coordinate functions whose generated field
 has finite extension degree at most the Hilbert multiplicity. -/
-theorem exists_finite_coordinate_parameter_field
+private theorem exists_finite_coordinate_parameter_field
     {K F σ : Type*} [Field K] [Field F] [Fintype σ] [LinearOrder σ] [Algebra K F]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
     [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]

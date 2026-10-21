@@ -16,7 +16,7 @@ filtration recurrence to be transcendental. -/
 namespace CCDN
 noncomputable section
 
-lemma algebraic_parameter_recurrence_bounded {K A : Type*} [Field K]
+private lemma algebraic_parameter_recurrence_bounded {K A : Type*} [Field K]
     [CommRing A] [Algebra K A] (u : A) (hu : IsAlgebraic K u)
     (V : ℕ → Submodule K A) [∀ m, Module.Finite K (V m)]
     (N : ℕ) (hrec : ∀ m ≥ N, V (m + 1) = V m ⊔ (V m).map (LinearMap.mulLeft K u)) :

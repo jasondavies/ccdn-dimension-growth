@@ -43,7 +43,7 @@ theorem homogeneousMultiples_finrank {K σ : Type*} [Field K]
   (Submodule.equivMapOfInjective (LinearMap.mulLeft K f)
     (fun _ _ h => mul_left_cancel₀ hf h) _).finrank_eq.symm
 
-theorem principal_homogeneous_finrank {K σ : Type*} [Field K] [Finite σ]
+private theorem principal_homogeneous_finrank {K σ : Type*} [Field K] [Finite σ]
     (f : MvPolynomial σ K) {d M : ℕ} (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hM : d ≤ M) :
     Module.finrank K (homogeneousCoordinateSpace (Ideal.span {f}) M) +
       Module.finrank K (homogeneousSubmodule σ K (M - d)) =

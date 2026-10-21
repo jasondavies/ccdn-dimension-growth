@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma algebraicIndependent_coordinates_of_standard
+private lemma algebraicIndependent_coordinates_of_standard
     {K σ ι : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ)
     (j : ι → σ) (hj : Function.Injective j)
@@ -42,7 +42,7 @@ lemma algebraicIndependent_coordinates_of_standard
   have hz := Ideal.eq_zero_of_mem_restrictSupport_standardExponents I m hs hmem
   exact (rename_injective j hj) (by simpa only [map_zero] using hz)
 
-lemma orthant_free_monomials_standard {K σ : Type*} [Field K] [Fintype σ]
+private lemma orthant_free_monomials_standard {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) (B : ℕ)
     (hstable : ∀ a, a ∈ standardExponentVectors I m ↔
       clampExponent B a ∈ standardExponentVectors I m)

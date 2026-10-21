@@ -17,7 +17,7 @@ open MvPolynomial
 
 /-- Polynomial lifts independent on separate prime components remain
 jointly independent after multiplying by the component separators. -/
-theorem prime_separator_lifts_independent {K σ ι : Type*} [Field K]
+private theorem prime_separator_lifts_independent {K σ ι : Type*} [Field K]
     [Fintype ι] [DecidableEq ι] (κ : ι → Type*) [∀ i, Fintype (κ i)]
     (I : Ideal (MvPolynomial σ K)) (P : ι → Ideal (MvPolynomial σ K))
     (hprime : ∀ i, (P i).IsPrime) (hIP : ∀ i, I ≤ P i)
@@ -65,7 +65,7 @@ theorem prime_separator_lifts_independent {K σ ι : Type*} [Field K]
 
 /-- The sum of the component filtration dimensions injects into the
 original coordinate filtration after a fixed shift independent of N. -/
-theorem prime_components_filtered_rank_lower {K σ ι : Type*} [Field K]
+private theorem prime_components_filtered_rank_lower {K σ ι : Type*} [Field K]
     [Finite σ] [Fintype ι] [DecidableEq ι]
     (I : Ideal (MvPolynomial σ K)) (P : ι → Ideal (MvPolynomial σ K))
     (hprime : ∀ i, (P i).IsPrime) (hIP : ∀ i, I ≤ P i)

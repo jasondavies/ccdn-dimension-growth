@@ -41,7 +41,7 @@ variable {K R F σ : Type*} [Field K] [Field R] [Field F]
 
 /-- Clearing a common denominator extends the polynomial rank bound to
 arbitrary elements of the fraction field. -/
-theorem fraction_parameter_rank_le {ι : Type*} [Fintype ι] [DecidableEq ι]
+private theorem fraction_parameter_rank_le {ι : Type*} [Fintype ι] [DecidableEq ι]
     (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (l : MvPolynomial σ K) (hl : l.totalDegree ≤ 1)
     (u : R) (hu : Transcendental K u)

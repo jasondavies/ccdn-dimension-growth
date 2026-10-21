@@ -20,7 +20,7 @@ open MvPolynomial
 
 /-- The leading terms of same-dimensional minimal-prime components are
 bounded by the original leading term. -/
-theorem minimalPrimeComponents_leadingCoeff_sum_le
+private theorem minimalPrimeComponents_leadingCoeff_sum_le
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) (m : ℕ)
     (hdim : (filteredHilbertPolynomial I).natDegree = m)
@@ -83,7 +83,7 @@ theorem minimalPrimeComponents_leadingCoeff_sum_le
   simpa only [hPlc, hQlc] using hh
 
 /-- The integer degree budget for pure-dimensional minimal-prime components. -/
-theorem minimalPrimeComponents_multiplicity_sum_le
+private theorem minimalPrimeComponents_multiplicity_sum_le
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) (m d : ℕ)
     (hdimdeg : HasAffineDimensionDegree I m d)

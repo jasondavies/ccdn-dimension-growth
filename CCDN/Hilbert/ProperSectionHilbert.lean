@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem proper_section_filtered_hilbert_drop
+private theorem proper_section_filtered_hilbert_drop
     {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
     (f : MvPolynomial σ K) (hf : f ∉ I) (N : ℕ) :

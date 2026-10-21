@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem finite_point_bound_of_hilbert_dimension_zero
+private theorem finite_point_bound_of_hilbert_dimension_zero
     {σ : Type*} [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ ℚ)) (hdim : (filteredHilbertPolynomial I).natDegree = 0) :
     ∃ M : ℕ, ∀ s : Finset (σ → ℚ),

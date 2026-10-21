@@ -26,7 +26,7 @@ open MvPolynomial
 
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
-theorem algebraic_polynomial_extension_integral
+private theorem algebraic_polynomial_extension_integral
     (k K σ : Type*) [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K] :
     (map (σ := σ) (algebraMap k K)).IsIntegral := by
   change ∀ f : MvPolynomial σ K, IsIntegral (MvPolynomial σ k) f
@@ -42,7 +42,7 @@ theorem algebraic_polynomial_extension_integral
     simpa only [algebraMap_def, map_X] using
       (isIntegral_algebraMap (R := MvPolynomial σ k) (A := MvPolynomial σ K) (x := X i))
 
-theorem algebraic_coefficient_integral_embedding_hilbert_dimension_eq
+private theorem algebraic_coefficient_integral_embedding_hilbert_dimension_eq
     {k K σ τ : Type*} [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]
     [Fintype σ] [Fintype τ] [LinearOrder σ] [LinearOrder τ]
     (I : Ideal (MvPolynomial σ k)) [I.IsPrime]
@@ -68,7 +68,7 @@ theorem algebraic_coefficient_integral_embedding_hilbert_dimension_eq
 
 /-- A prime over the original ideal has the same Hilbert dimension
 after an algebraic coefficient extension. -/
-theorem algebraic_polynomial_prime_hilbert_dimension
+private theorem algebraic_polynomial_prime_hilbert_dimension
     (k K σ : Type*) [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]
     [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ k)) [I.IsPrime]

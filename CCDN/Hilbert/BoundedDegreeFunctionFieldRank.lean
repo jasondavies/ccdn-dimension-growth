@@ -28,7 +28,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem bounded_degree_polynomial_parameters_rank_le
+private theorem bounded_degree_polynomial_parameters_rank_le
     {K R F σ τ ι : Type*} [Field K] [Field R] [Field F]
     [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F]
     [Fintype σ] [LinearOrder σ] [Fintype τ] [Fintype ι] [DecidableEq ι]
@@ -98,7 +98,7 @@ variable {K R F σ : Type*} [Field K] [Field R] [Field F]
 
 /-- Clearing common denominators gives the same sharp bound for arbitrary
 independent functions in the fraction field. -/
-theorem bounded_degree_fraction_parameters_rank_le
+private theorem bounded_degree_fraction_parameters_rank_le
     {τ ι : Type*} [Fintype τ] [Fintype ι] [DecidableEq ι]
     (d q : ℕ) (hq : 0 < q) (hdimdeg : HasAffineDimensionDegree I (Fintype.card τ) d)
     (l : τ → MvPolynomial σ K) (hl : ∀ i, (l i).totalDegree ≤ q)

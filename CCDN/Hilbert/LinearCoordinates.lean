@@ -40,7 +40,7 @@ lemma injective_projectionCoordinateMap_iff {K σ τ : Type*} [Field K]
   rw [projectionCoordinateMap_eq_aeval]
   rfl
 
-lemma independent_linear_filtered_finrank_lower
+private lemma independent_linear_filtered_finrank_lower
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) (a : σ → MvPolynomial τ K)
     (ha : ∀ i, (a i).totalDegree ≤ 1)

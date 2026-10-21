@@ -23,7 +23,7 @@ noncomputable section
 open MvPolynomial
 
 /-- Standard representatives describe precisely each filtered coordinate space. -/
-theorem map_bounded_standard_eq {K σ : Type*} [Field K]
+private theorem map_bounded_standard_eq {K σ : Type*} [Field K]
     [LinearOrder σ] [WellFoundedGT σ] (I : Ideal (MvPolynomial σ K)) (N : ℕ) :
     (restrictSupport K (Ideal.boundedStandardExponents I MonomialOrder.degLex N)).map
         (Ideal.Quotient.mkₐ K I).toLinearMap = filteredCoordinateSpace I N := by

@@ -23,12 +23,12 @@ namespace CCDN
 noncomputable section
 
 /-- Full coordinate rays with uniquely normalized base points. -/
-def fullExponentRays {σ : Type*} [Fintype σ] [DecidableEq σ]
+private def fullExponentRays {σ : Type*} [Fintype σ] [DecidableEq σ]
     (S : Set (σ →₀ ℕ)) (B : ℕ) :=
   {p : σ × (σ → Fin B) // (p.2 p.1).val = 0 ∧
     ∀ n, exponentRay B p.1 p.2 n ∈ S}
 
-lemma exponentRay_degree {σ : Type*} [Fintype σ] [DecidableEq σ]
+private lemma exponentRay_degree {σ : Type*} [Fintype σ] [DecidableEq σ]
     (B : ℕ) (j : σ) (b : σ → Fin B) (n : ℕ) (hb : (b j).val = 0) :
     Finsupp.degree (exponentRay B j b n) = n + ∑ k, (b k).val := by
   have h := Finsupp.sum_update_add
@@ -37,7 +37,7 @@ lemma exponentRay_degree {σ : Type*} [Fintype σ] [DecidableEq σ]
   change (exponentRay B j b n).sum (fun _ v => v) = _
   simpa [exponentRay, Finsupp.sum_fintype, hb, add_comm] using h
 
-lemma rayBase_weight_le {σ : Type*} [Fintype σ] {B : ℕ} (b : σ → Fin B) :
+private lemma rayBase_weight_le {σ : Type*} [Fintype σ] {B : ℕ} (b : σ → Fin B) :
     (∑ k, (b k).val) ≤ Fintype.card σ * B := by
   calc
     _ ≤ ∑ _ : σ, B := Finset.sum_le_sum (fun k _ => (b k).isLt.le)
@@ -45,7 +45,7 @@ lemma rayBase_weight_le {σ : Type*} [Fintype σ] {B : ℕ} (b : σ → Fin B) :
 
 /-- A lower monomial set confined to coordinate rays has eventually constant
 shell cardinalities. -/
-theorem lowerSet_shell_card_eventually_constant {σ : Type*} [Fintype σ] [DecidableEq σ]
+private theorem lowerSet_shell_card_eventually_constant {σ : Type*} [Fintype σ] [DecidableEq σ]
     (S : Set (σ →₀ ℕ)) (hS : IsLowerSet S) (B : ℕ) (hB : 0 < B)
     (hunique : ∀ a ∈ S, ∀ i j, B ≤ a i → B ≤ a j → i = j) :
     ∃ N, ∀ n ≥ N,
@@ -125,7 +125,7 @@ theorem lowerSet_shell_card_eventually_constant {σ : Type*} [Fintype σ] [Decid
   exact (Nat.card_congr (Equiv.ofBijective φ ⟨hinj, hsurj⟩)).symm
 
 /-- Splitting off the top degree shell gives the Hilbert-function increment. -/
-theorem standard_card_succ {K σ : Type*} [Field K] [Fintype σ]
+private theorem standard_card_succ {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (N : ℕ) :
     Module.finrank K (filteredCoordinateSpace I (N + 1)) =
       Module.finrank K (filteredCoordinateSpace I N) +

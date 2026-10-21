@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem prime_ideal_strict_hilbert_dimension_drop
+private theorem prime_ideal_strict_hilbert_dimension_drop
     {K : Type*} [Field K] {n m : ℕ}
     (I J : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)

@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
-lemma principal_binomial_layer_sum (n d N : ℕ) (hN : d ≤ N) :
+private lemma principal_binomial_layer_sum (n d N : ℕ) (hN : d ≤ N) :
     (∑ i ∈ range d, (N + n - i).choose n) +
       (N - d + (n + 1)).choose (n + 1) = (N + (n + 1)).choose (n + 1) := by
   induction d with
@@ -35,7 +35,7 @@ lemma principal_binomial_layer_sum (n d N : ℕ) (hN : d ≤ N) :
 
 /-- Exact filtered Hilbert polynomial of any nonzero principal equation
 in n+1 variables, including the constant case. -/
-theorem principal_filteredHilbertPolynomial {K : Type*} [Field K] {n : ℕ}
+private theorem principal_filteredHilbertPolynomial {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f ≠ 0) :
     filteredHilbertPolynomial (Ideal.span {f}) =
       ∑ i ∈ range f.totalDegree, Polynomial.preHilbertPoly ℚ n i := by
@@ -56,13 +56,13 @@ theorem principal_filteredHilbertPolynomial {K : Type*} [Field K] {n : ℕ}
   intro i hi
   exact Polynomial.preHilbertPoly_eq_choose_add_sub ℚ n (by have := mem_range.mp hi; omega)
 
-lemma principal_preHilbert_sum_degree_le (n d : ℕ) :
+private lemma principal_preHilbert_sum_degree_le (n d : ℕ) :
     (∑ i ∈ range d, Polynomial.preHilbertPoly ℚ n i).natDegree ≤ n := by
   apply Polynomial.natDegree_sum_le_of_forall_le
   intro i _
   exact (Polynomial.natDegree_preHilbertPoly ℚ n i).le
 
-lemma principal_preHilbert_sum_top_coeff (n d : ℕ) :
+private lemma principal_preHilbert_sum_top_coeff (n d : ℕ) :
     (∑ i ∈ range d, Polynomial.preHilbertPoly ℚ n i).coeff n = (d : ℚ) / n.factorial := by
   simp only [Polynomial.finsetSum_coeff, Polynomial.coeff_preHilbertPoly_self,
     sum_const, card_range, nsmul_eq_mul, div_eq_mul_inv]

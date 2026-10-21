@@ -17,14 +17,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma monomialOrder_degree_mapEquiv
+private lemma monomialOrder_degree_mapEquiv
     {K L σ : Type*} [Field K] [Field L] (e : K ≃+* L)
     (m : MonomialOrder σ) (f : MvPolynomial σ K) :
     m.degree (mapEquiv σ e f) = m.degree f := by
   simp only [MonomialOrder.degree, mapEquiv_apply]
   rw [support_map_of_injective f e.injective]
 
-theorem standardExponents_coefficientEquiv
+private theorem standardExponents_coefficientEquiv
     {K L σ : Type*} [Field K] [Field L] (I : Ideal (MvPolynomial σ K))
     (e : K ≃+* L) (m : MonomialOrder σ) :
     Ideal.standardExponents (I.map (mapEquiv σ e)) m = Ideal.standardExponents I m := by
@@ -41,7 +41,7 @@ theorem standardExponents_coefficientEquiv
     have hg0 : g ≠ 0 := fun h => hf0 (by simp [h])
     simpa only [monomialOrder_degree_mapEquiv] using ha g hg hg0
 
-theorem filteredCoordinateSpace_finrank_coefficientEquiv
+private theorem filteredCoordinateSpace_finrank_coefficientEquiv
     {K L σ : Type*} [Field K] [Field L] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (e : K ≃+* L) (N : ℕ) :
     Module.finrank K (filteredCoordinateSpace I N) =

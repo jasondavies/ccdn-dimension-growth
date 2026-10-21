@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma totalDegree_sub_next_homogeneousComponent_le
+private lemma totalDegree_sub_next_homogeneousComponent_le
     {K σ : Type*} [Field K] (f : MvPolynomial σ K) (N : ℕ)
     (hf : f.totalDegree ≤ N + 1) :
     (f - homogeneousComponent (N + 1) f).totalDegree ≤ N := by
@@ -35,7 +35,7 @@ lemma totalDegree_sub_next_homogeneousComponent_le
     have hd : a.degree ≤ N + 1 := (le_totalDegree (mem_support_iff.mpr hfa)).trans hf
     omega
 
-theorem filteredCoordinateSpace_succ_eq_sup_homogeneous
+private theorem filteredCoordinateSpace_succ_eq_sup_homogeneous
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) (N : ℕ) :
     filteredCoordinateSpace I (N + 1) =
@@ -60,7 +60,7 @@ theorem filteredCoordinateSpace_succ_eq_sup_homogeneous
       intro f hf
       exact (mem_restrictTotalDegree _ _ _).mpr (IsHomogeneous.totalDegree_le hf)
 
-theorem filteredCoordinateSpace_disjoint_next_homogeneous
+private theorem filteredCoordinateSpace_disjoint_next_homogeneous
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hI : IsHomogeneousIdeal I) (N : ℕ) :

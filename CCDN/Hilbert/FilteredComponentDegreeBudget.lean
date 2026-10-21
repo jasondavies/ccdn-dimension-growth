@@ -19,7 +19,7 @@ open MvPolynomial
 
 /-- A common linear upper bound bounds the sum of the eventual linear
 slopes of the minimal-prime components. -/
-theorem minimalPrimeComponents_slope_sum_le {K σ : Type*} [Field K] [Finite σ]
+private theorem minimalPrimeComponents_slope_sum_le {K σ : Type*} [Field K] [Finite σ]
     (I : Ideal (MvPolynomial σ K)) (C N₀ : ℕ)
     (hupper : ∀ N ≥ N₀, Module.finrank K (filteredCoordinateSpace I N) ≤ C * (N + 1))
     (d : minimalPrimeComponents I → ℕ)
@@ -66,7 +66,7 @@ theorem minimalPrimeComponents_slope_sum_le {K σ : Type*} [Field K] [Finite σ]
 
 /-- The product-of-degrees budget holds for the prime components.
 Only their eventual Hilbert formulas are inputs to this intermediate lemma. -/
-theorem polynomialSection_minimalPrime_slope_sum_le {K : Type*} [Field K]
+private theorem polynomialSection_minimalPrime_slope_sum_le {K : Type*} [Field K]
     (f g : MvPolynomial (Fin 3) K) (hf : Prime f) (hfg : ¬ f ∣ g)
     (d : minimalPrimeComponents (polynomialSectionIdeal f g) → ℕ)
     (hdegree : ∀ P, HasFilteredCurveDegree P.val (d P)) :

@@ -14,7 +14,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem filteredCoordinateSpace_finrank_equiv
+private theorem filteredCoordinateSpace_finrank_equiv
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     (I : Ideal (MvPolynomial σ K)) (J : Ideal (MvPolynomial τ K))
     (e : MvPolynomial σ K ≃ₐ[K] MvPolynomial τ K) (hJ : J = I.map e)
@@ -49,7 +49,7 @@ theorem filteredCoordinateSpace_finrank_equiv
       exact hgy
   exact (LinearEquiv.ofBijective T ⟨hinj, hsurj⟩).finrank_eq
 
-theorem filteredHilbertPolynomial_equiv
+private theorem filteredHilbertPolynomial_equiv
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     [LinearOrder σ] [LinearOrder τ]
     (I : Ideal (MvPolynomial σ K)) (J : Ideal (MvPolynomial τ K))

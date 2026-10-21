@@ -27,7 +27,7 @@ instance finite_boundedExponentVectors {σ : Type*} [Fintype σ] (N : ℕ) :
   Finite.of_equiv (Sym (Option σ) N) (boundedExponentVectorEquivSym σ N).symm
 
 open Classical in
-lemma card_boundedExponentVectors {σ : Type*} [Fintype σ] (N : ℕ) :
+private lemma card_boundedExponentVectors {σ : Type*} [Fintype σ] (N : ℕ) :
     Nat.card {a : σ → ℕ // ∑ i, a i ≤ N} =
       (Fintype.card σ + N).choose (Fintype.card σ) := by
   rw [Nat.card_congr (boundedExponentVectorEquivSym σ N), Nat.card_eq_fintype_card,
@@ -42,7 +42,7 @@ instance finite_boundedLowerExponents {σ : Type*} [Fintype σ]
     (fun _ _ h => Subtype.ext (congrArg
       (fun a : {a : σ → ℕ // ∑ i, a i ≤ N} => a.val) h))
 
-lemma orthantBaseDegree_le {σ : Type*} [Fintype σ] {B : ℕ}
+private lemma orthantBaseDegree_le {σ : Type*} [Fintype σ] {B : ℕ}
     (b : σ → Fin (B + 1)) : orthantBaseDegree b ≤ Fintype.card σ * B := by
   calc
     _ ≤ ∑ _ : σ, B := Finset.sum_le_sum (fun i _ => Nat.le_of_lt_succ (b i).isLt)
@@ -51,7 +51,7 @@ lemma orthantBaseDegree_le {σ : Type*} [Fintype σ] {B : ℕ}
 open Classical in
 /-- Exact eventual counting formula for a lower set partitioned into its
 translated orthants. -/
-theorem lowerSet_orthant_count {σ : Type*} [Fintype σ]
+private theorem lowerSet_orthant_count {σ : Type*} [Fintype σ]
     (S : Set (σ → ℕ)) (B : ℕ)
     (hstable : ∀ a, a ∈ S ↔ clampExponent B a ∈ S)
     (N : ℕ) (hN : Fintype.card σ * B ≤ N) :

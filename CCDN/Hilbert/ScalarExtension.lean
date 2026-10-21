@@ -19,7 +19,7 @@ noncomputable section
 open MvPolynomial
 open scoped MonomialOrder
 
-lemma polynomialCoefficientLinear_monomialOrder_degree
+private lemma polynomialCoefficientLinear_monomialOrder_degree
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (φ : L →ₗ[K] K) (g : MvPolynomial (Fin n) L) (m : MonomialOrder (Fin n))
     (hφ : φ (g.coeff (m.degree g)) ≠ 0) :
@@ -67,7 +67,7 @@ theorem standardExponents_scalar_extension
     simpa only [polynomialCoefficientLinear_monomialOrder_degree φ g m hφ] using
       ha _ hdescent hnonzero
 
-theorem filteredCoordinateSpace_finrank_scalar_extension
+private theorem filteredCoordinateSpace_finrank_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (N : ℕ) :
     Module.finrank L (filteredCoordinateSpace (I.map (map (algebraMap K L))) N) =
