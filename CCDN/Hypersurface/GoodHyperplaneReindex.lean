@@ -16,6 +16,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Restriction to the graph hyperplane `x_none = ∑ a j * x j` commutes with renaming the
+coordinates along an equivalence `e`. -/
 lemma graphHyperplaneRestriction_rename {K σ τ : Type*}
     [CommRing K] [Fintype σ] [Fintype τ]
     (e : σ ≃ τ) (a : τ → K) (f : MvPolynomial (Option σ) K) :

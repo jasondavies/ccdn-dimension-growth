@@ -16,6 +16,11 @@ auxiliary constants, and precede the equation and radius. -/
 namespace CCDN
 noncomputable section
 
+/-- For a degree `d ≥ 1` and constants `K, A ≥ 0`, there are `C, c > 0` such that, for every
+integer surface equation `f` of degree `d` irreducible over `ℚ`, every congruence family with
+constant `A`, and every family of curves on the surface, the residual locus of the residue cover
+with prime window `surfaceResidueWindow d K B` and cutoff `2 B^(1/√d)` has at most
+`C B^(2/√d + c/log(1 + log B))` integral points of height at most `B`. -/
 theorem surface_residue_salberger_count (d : ℕ) (hd : 1 ≤ d)
     (K A : ℝ) (hK : 0 ≤ K) (hA : 0 ≤ A) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧

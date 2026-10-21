@@ -20,6 +20,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The coefficient bound for the birational hypersurface projection in `n` variables and degree
+`d`: the maximum of the normalization height and `(n * d ^ 2 + 1) ^ n`, which bounds the moment
+row. -/
 def integerBirationalProjectionHeight (n d : ℕ) : ℕ :=
   max (integerNormalizationHeight n d) ((n * d ^ 2 + 1) ^ n)
 
@@ -112,14 +115,19 @@ section
 the degree, with exponent and constant depending only on ambient
 dimension. -/
 
+/-- The constant `n! * 2 ^ n + (n + 1) ^ n` in the polynomial bound on the birational projection
+height in `n` variables. -/
 def birationalProjectionHeightConstant (n : ℕ) : ℕ :=
   n.factorial * 2 ^ n + (n + 1) ^ n
 
+/-- The birational projection height constant is positive. -/
 lemma birationalProjectionHeightConstant_pos (n : ℕ) :
     0 < birationalProjectionHeightConstant n := by
   dsimp [birationalProjectionHeightConstant]
   positivity
 
+/-- For degree `d ≥ 1`, the birational projection height in `n` variables is at most
+`birationalProjectionHeightConstant n * d ^ (2 * n)`. -/
 theorem integerBirationalProjectionHeight_le (n d : ℕ) (hd : 1 ≤ d) :
     integerBirationalProjectionHeight n d ≤
       birationalProjectionHeightConstant n * d ^ (2 * n) := by

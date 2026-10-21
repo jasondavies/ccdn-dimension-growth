@@ -17,10 +17,13 @@ namespace CCDN
 noncomputable section
 open Finset Real
 
+/-- The primes `p` with `L < p ≤ c L`, where `c` is `scalingPrimeRatio`. -/
 def congruencePrimeWindow (L : ℝ) : Finset ℕ :=
   ((Ioc 0 ⌊scalingPrimeRatio * L⌋₊).filter Nat.Prime) \
     ((Ioc 0 ⌊L⌋₊).filter Nat.Prime)
 
+/-- For `L ≥ 1`, a natural number lies in `congruencePrimeWindow L` exactly when it is a prime
+`p` with `L < p ≤ c L`, where `c` is `scalingPrimeRatio`. -/
 lemma mem_congruencePrimeWindow {L : ℝ} (hL : 1 ≤ L) {p : ℕ} :
     p ∈ congruencePrimeWindow L ↔
       p.Prime ∧ L < (p : ℝ) ∧ (p : ℝ) ≤ scalingPrimeRatio * L := by
@@ -67,6 +70,8 @@ private theorem congruencePrimeWindow_log_mass {L : ℝ} (hL : 1 ≤ L) :
       _ = _ := by field_simp
   linarith
 
+/-- For `L ≥ 1`, the sum of `log p` over the primes of `congruencePrimeWindow L` is at most
+`(log 4 + 4) c L`, where `c` is `scalingPrimeRatio`. -/
 theorem congruencePrimeWindow_log_upper {L : ℝ} (hL : 1 ≤ L) :
     (∑ p ∈ congruencePrimeWindow L, Real.log p) ≤
       (Real.log 4 + 4) * scalingPrimeRatio * L := by
@@ -78,6 +83,8 @@ theorem congruencePrimeWindow_log_upper {L : ℝ} (hL : 1 ≤ L) :
     (by simpa only [mul_assoc] using
       Chebyshev.psi_le_const_mul_self (show 0 ≤ scalingPrimeRatio * L by positivity)))
 
+/-- For `L ≥ 1`, the number of primes in `congruencePrimeWindow L`, multiplied by `log L`, is
+at most `(log 4 + 4) c L`, where `c` is `scalingPrimeRatio`. -/
 theorem congruencePrimeWindow_card_log_bound {L : ℝ} (hL : 1 ≤ L) :
     (congruencePrimeWindow L).card * Real.log L ≤
       (Real.log 4 + 4) * scalingPrimeRatio * L := by
@@ -109,6 +116,8 @@ private theorem congruencePrimeWindow_avoiding_log_mass {L : ℝ} (hL : 1 ≤ L)
   change (∑ p ∈ bad, Real.log p) + _ = _ at hsplit
   linarith
 
+/-- For `L ≥ 1` and a nonzero integer `D` with `log |D| ≤ L`, the product of the primes of
+`congruencePrimeWindow L` not dividing `D` is at least `exp L`. -/
 theorem congruencePrimeWindow_avoiding_product {L : ℝ} (hL : 1 ≤ L)
     {D : ℤ} (hD : D ≠ 0) (hheight : Real.log |(D : ℝ)| ≤ L) :
     Real.exp L ≤

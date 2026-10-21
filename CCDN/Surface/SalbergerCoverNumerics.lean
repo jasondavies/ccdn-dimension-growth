@@ -61,6 +61,7 @@ end CCDN
 namespace CCDN
 noncomputable section
 
+/-- For `α ≤ 1` and `B ≥ 1`, `B^α (log B + 1) ≤ 2 (B^α log B + 1)`. -/
 theorem salberger_curve_number_normalization {α B : ℝ}
     (hα : α ≤ 1) (hB : 1 ≤ B) :
     B ^ α * (Real.log B + 1) ≤ 2 * (B ^ α * Real.log B + 1) := by
@@ -73,6 +74,7 @@ theorem salberger_curve_number_normalization {α B : ℝ}
   have hinv : B ^ α * (B ^ α)⁻¹ = 1 := mul_inv_cancel₀ hp.ne'
   nlinarith
 
+/-- For `α ≥ 0` and `B ≥ 1`, `B^α (log B + 1) ≤ B^(2α) (log B + 1)⁴`. -/
 lemma salberger_nonnegative_weight_mono {α B : ℝ} (hα : 0 ≤ α) (hB : 1 ≤ B) :
     B ^ α * (Real.log B + 1) ≤ B ^ (2 * α) * (Real.log B + 1) ^ 4 := by
   have hlog : 1 ≤ Real.log B + 1 := by linarith [Real.log_nonneg hB]
@@ -82,6 +84,8 @@ lemma salberger_nonnegative_weight_mono {α B : ℝ} (hα : 0 ≤ α) (hB : 1 �
   · positivity
   · positivity
 
+/-- For `E, R ≥ 0` and `c₀ > 0`, there are `C, c > 0` such that, for all `α` and `B ≥ 1`,
+`E B^α (log B + 1)⁴ + R B^(α + c₀/log(1 + log B)) ≤ C B^(α + c/log(1 + log B))`. -/
 theorem salberger_remainders_combine (E R c₀ : ℝ)
     (hE : 0 ≤ E) (hR : 0 ≤ R) (hc₀ : 0 < c₀) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧ ∀ α B : ℝ, 1 ≤ B →

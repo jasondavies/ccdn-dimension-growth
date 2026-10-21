@@ -16,6 +16,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For a nonzero integer polynomial `f` of degree `d > 0` with coefficient height `H` and for
+`r > 0`, the bad-prime factor of `f` divided by `H^(1/(r d d^(1/r)))` is bounded by a constant
+depending only on `r` and the number of variables. -/
 theorem hypersurface_badPrime_fractional_height_bound {m r d : ℕ}
     (f : MvPolynomial (Fin (m + 1)) ℤ) (hf : f ≠ 0)
     (hdegree : f.totalDegree = d) (hr : 0 < r) (hd : 0 < d) :

@@ -52,6 +52,8 @@ def coordinateEliminationMap {K σ : Type*} [Field K]
     MvPolynomial σ K →ₐ[K] MvPolynomial (Option σ) K ⧸ I :=
   (Ideal.Quotient.mkₐ K I).comp (e.symm.toAlgHom.comp (rename some))
 
+/-- For the linear coordinate change attached to a direction `b` with `b none ≠ 0`, the elimination
+map sends the variable `X i` to the class of `X (some i) - (b (some i) / b none) * X none`. -/
 lemma coordinateEliminationMap_direction_X {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial (Option σ) K)) (b : Option σ → K)
     (hb : b none ≠ 0) (i : σ) :

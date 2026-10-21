@@ -21,6 +21,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If `f` is a prime rational polynomial in `n + 2` variables not dividing `g`, and both have
+total degree at most `d`, then the common zero set of `f` and `g` has at most
+`(n + 2) ^ n * d ^ 2 * (2 * B + 1) ^ n` integral points of height at most `B`. -/
 theorem proper_intersection_count_le_box {n d : ℕ}
     (f g : CoordinatePolynomial (n + 2)) (hf : Prime f) (hfg : ¬ f ∣ g)
     (hfd : f.totalDegree ≤ d) (hgd : g.totalDegree ≤ d)
@@ -79,6 +82,9 @@ private theorem nonabsolute_hypersurface_count_le {K : Type*}
     exact_mod_cast count_mono hsubset (le_refl B)
   exact hcount.trans (proper_intersection_count_le_box f g hir.prime hfg le_rfl hgd hB)
 
+/-- An irreducible rational polynomial `f` in `n + 2` variables that becomes reducible over some
+extension field has at most `(3 * (n + 2)) ^ n * deg f ^ 2 * B ^ n` integral zeros of height
+at most `B`, for every `B ≥ 1`. -/
 theorem nonabsolute_hypersurface_dimension_growth {K : Type*}
     [Field K] [Algebra ℚ K] {n : ℕ}
     (f : CoordinatePolynomial (n + 2)) (hir : Irreducible f)

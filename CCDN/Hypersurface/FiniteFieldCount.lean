@@ -25,6 +25,8 @@ p>27*d^4. The leading term remains exactly p^(m-1).
 namespace CCDN
 noncomputable section
 
+/-- For `1 ≤ d` and `p` above the threshold `27 * d ^ 4`, the bad-section error
+`2 * d ^ 4 * p + d ^ 3` is at most `3 * d ^ 2 * p * √p`. -/
 lemma hypersurface_bad_section_error {d p : ℝ} (hd : 1 ≤ d) (hp : stepanovThreshold d < p) :
     2 * d ^ 4 * p + d ^ 3 ≤ 3 * d ^ 2 * p * Real.sqrt p := by
   unfold stepanovThreshold at hp
@@ -136,7 +138,9 @@ private lemma polynomial_zero_card_renameEquiv {K σ τ : Type*} [CommRing K]
     left_inv := fun z => by apply Subtype.ext; funext i; simp
     right_inv := fun z => by apply Subtype.ext; funext i; simp }
 
-/-- The sharp affine count in the standard Fin-indexed ambient coordinates. -/
+/-- A geometrically irreducible affine hypersurface `f = 0` in `n + 3` variables over `ZMod p`,
+with `p` above the threshold `27 * (deg f) ^ 4`, has at most
+`p ^ (n + 2) + hypersurfaceResidueConstant * (deg f) ^ 2 * p ^ (n + 1) * √p` points. -/
 theorem affine_hypersurface_finite_field_bound {n : ℕ}
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) (ZMod p))
     (hf : Irreducible (MvPolynomial.map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f))

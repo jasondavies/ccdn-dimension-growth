@@ -20,6 +20,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- An integral map `ψ` from a polynomial ring to the quotient by a prime `I` preserves Hilbert
+dimension: the filtered Hilbert polynomials of `ker ψ` and of `I` have the same degree. -/
 theorem integral_projection_hilbert_dimension_eq
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     [LinearOrder σ] [LinearOrder τ]

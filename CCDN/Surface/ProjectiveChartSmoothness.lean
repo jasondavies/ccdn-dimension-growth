@@ -38,6 +38,9 @@ def projectiveSmoothAffineChart {n : ℕ} (F : CoordinatePolynomial (n + 1)) :
   {a | eval (Fin.cons 1 a) F = 0 ∧
     ∃ j, eval (Fin.cons 1 a) (pderiv j F) ≠ 0}
 
+/-- For a homogeneous polynomial `F` in four variables, the nonsingular points of the
+projective surface `F = 0` on the chart where the first coordinate is one are exactly the
+nonsingular rational points of the affine surface given by the dehomogenization of `F`. -/
 theorem projectiveSmoothAffineChart_eq {d : ℕ}
     (F : CoordinatePolynomial 4) (hF : F.IsHomogeneous d) :
     projectiveSmoothAffineChart F = smoothSurfaceLocus (affineChart 3 F) := by

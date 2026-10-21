@@ -24,6 +24,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If a prime ideal `I` over an infinite field has affine dimension `m + 1` and `f ∉ I`, then
+every minimal prime of `I ⊔ (f)` has affine dimension `m`. -/
 theorem principal_section_minimalPrime_hilbert_dimension
     {K : Type*} [Field K] [Infinite K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
@@ -110,6 +112,9 @@ theorem principal_section_minimalPrime_hilbert_dimension
   rw [hker, ← hFspan] at he
   exact he.symm.trans (principal_filteredHilbertPolynomial_natDegree F hF0 hFdeg)
 
+/-- The section of the affine variety of a prime ideal `I` of dimension `m + 1` over an infinite
+field by a polynomial `f ∉ I` is pure: every minimal prime component of `I ⊔ (f)` has affine
+dimension `m`. -/
 theorem principal_section_minimalPrimeComponents_pure
     {K : Type*} [Field K] [Infinite K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

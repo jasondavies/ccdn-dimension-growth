@@ -157,9 +157,10 @@ private theorem projective_plane_reciprocal_height_sum :
   exact (hcR.trans (projective_plane_equation_bound f hf (by omega) hir hB)).trans
     (mul_le_mul_of_nonneg_left hp (by positivity))
 
-/-- Integer homogeneous equations with absolutely irreducible geometric
-zero locus satisfy the same uniform weighted bound, without a primitivity
-or coefficient-height hypothesis. -/
+/-- There is an absolute constant `C` such that, for every absolutely irreducible integer
+homogeneous polynomial `F` of degree `d ≥ 3` in three variables, the sum of the reciprocal
+multiplicative heights of any finite set of rational points of the plane curve `F = 0` is at
+most `C d⁴`; no primitivity or coefficient-height hypothesis is needed. -/
 theorem integer_projective_plane_reciprocal_height_sum :
     ∃ C : ℝ, 0 < C ∧
       ∀ (d : ℕ), 3 ≤ d →

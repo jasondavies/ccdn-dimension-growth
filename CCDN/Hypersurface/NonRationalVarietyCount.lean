@@ -24,6 +24,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If a prime ideal `I` over an algebraically closed Galois extension of `ℚ`, of projective
+dimension `m` and degree `d`, is not the extension of an ideal over `ℚ`, then its variety has
+at most `d ^ 2 * (2 * B + 1) ^ m` integral points of height at most `B`. -/
 theorem non_rational_prime_count_le_box
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

@@ -22,6 +22,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Evaluating the restriction `affineLinePolynomial a v f` of `f` to the line through `a` with
+direction `v` at `t` gives the value of `f` at `a + t • v`. -/
 lemma eval_affineLinePolynomial {K σ : Type*} [Field K]
     (a v : σ → K) (f : MvPolynomial σ K) (t : K) :
     (affineLinePolynomial a v f).eval t = eval (a + t • v) f := by

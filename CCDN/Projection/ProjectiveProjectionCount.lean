@@ -20,6 +20,12 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Let `I` be a prime ideal defining a projective curve of degree `d` not contained in the
+hyperplane `X₀ = 0`, and suppose the moment coordinates with parameters `k₀ ≤ n ^ 2 * d` and
+`k₁ ≤ n * d ^ 2` satisfy the plane relation `f` of degree `d` on its affine chart, losing at most
+`d * (d - 1)` points on any finite set of chart points. Then the curve has at most `d ^ 2` more
+rational points of height at most `B` than the projective plane curve defined by the homogenization
+of `f` has of height at most `projectionBoxFactor n d * B`. -/
 theorem projective_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime] (hX : X 0 ∉ I)
     (hd : 0 < d) (hdegree : HasProjectiveCurveDegree I d)
@@ -84,6 +90,9 @@ theorem projective_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
   change S.card ≤ _
   omega
 
+/-- A projective curve of degree `d > 0` in `ℙⁿ`, given by a prime ideal `I` not containing
+`X 0`, has at most `d ^ 2` more rational points of height at most `B` than some irreducible
+projective plane curve of degree `d` has of height at most `projectionBoxFactor n d * B`. -/
 theorem exists_projective_plane_count_reduction {n d : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime] (hX : X 0 ∉ I)
     (hd : 0 < d) (hdegree : HasProjectiveCurveDegree I d) :

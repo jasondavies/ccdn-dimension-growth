@@ -24,10 +24,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The algebra map restricting a polynomial to the plane parametrized by
+`(s, t) ↦ a + s b + t c`, sending `Xᵢ` to `aᵢ + bᵢ X 0 + cᵢ X 1`. -/
 def affinePlaneMap {K σ : Type*} [CommRing K] (a b c : σ → K) :
     MvPolynomial σ K →ₐ[K] MvPolynomial (Fin 2) K :=
   aeval (fun i => C (a i) + C (b i) * X 0 + C (c i) * X 1)
 
+/-- Evaluating the restriction of `f` to the plane `a + s b + t c` at `z` gives the value of
+`f` at `a + z 0 • b + z 1 • c`. -/
 lemma affinePlaneMap_eval {K σ : Type*} [CommRing K] (a b c : σ → K)
     (f : MvPolynomial σ K) (z : Fin 2 → K) :
     eval z (affinePlaneMap a b c f) =
@@ -39,6 +43,7 @@ lemma affinePlaneMap_eval {K σ : Type*} [CommRing K] (a b c : σ → K)
     · intro i; simp [affinePlaneMap]
   exact RingHom.congr_fun he f
 
+/-- Restricting a polynomial to an affine plane does not increase its total degree. -/
 lemma affinePlaneMap_totalDegree_le {K σ : Type*} [CommRing K]
     (a b c : σ → K) (f : MvPolynomial σ K) :
     (affinePlaneMap a b c f).totalDegree ≤ f.totalDegree := by
@@ -87,6 +92,8 @@ private lemma universalPlaneSection_eq_affinePlaneMap {K σ : Type*} [CommRing K
   rw [universalPlaneSection, he, universalPlanePolynomial_specialize]
   rfl
 
+/-- The `3 × 3` matrix with columns `b`, `c` and `v`; over a field, its determinant is nonzero
+exactly when `b`, `c` and `v` are linearly independent. -/
 def planeDirectionMatrix {K : Type*} [CommRing K] (b c v : Fin 3 → K) :
     Matrix (Fin 3) (Fin 3) K :=
   fun i j => ![b i, c i, v i] j

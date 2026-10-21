@@ -19,9 +19,18 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The exponent `18 + 3 * m + N + 2 * N * (m + 1)`, with `N = m + k + 2`, of the degree in the
+point-count bound obtained by projecting an `(m + 1)`-dimensional variety in `ℙ^(m + k + 1)` to a
+hypersurface in `ℙ^(m + 2)`. -/
 def projectionDegreeExponent (m k : ℕ) : ℕ :=
   18 + 3 * m + (m + k + 2) + 2 * (m + k + 2) * (m + 1)
 
+/-- There is a constant `C` depending only on `m` and `k` with the following property. Let integer
+forms `b`, with coefficients bounded by the birational projection height, satisfy an irreducible
+homogeneous relation `f` of degree `d ≥ 5` modulo `I`, and let every affine fiber of the projection
+of the zero locus of `I` have at most `d ^ (m + k + 2)` points. Then the zero locus of `I` in
+`ℙ^(m + k + 1)` has at most `C * d ^ projectionDegreeExponent m k * B ^ (m + 1)` rational points of
+height at most `B`. -/
 theorem projective_projection_dimension_growth (m k : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ (I : Ideal (MvPolynomial (Fin (m + k + 2)) ℚ)) (d : ℕ), 5 ≤ d →

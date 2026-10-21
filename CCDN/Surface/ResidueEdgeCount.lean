@@ -20,6 +20,9 @@ noncomputable section
 open MvPolynomial Finset
 
 open Classical in
+/-- For a congruence family `F`, a set `R` of primes, a prime `p` and smooth residues `r`
+modulo `R`, the rational points on curves `I ∈ S` whose ideal contains the auxiliary of
+`R.erase p` but not the one of `R`, and at which the latter auxiliary vanishes. -/
 def surfaceResidueCrossing {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
     (F : SurfaceCongruenceFamily f B A)
     (S : Finset (Ideal (CoordinatePolynomial 3)))

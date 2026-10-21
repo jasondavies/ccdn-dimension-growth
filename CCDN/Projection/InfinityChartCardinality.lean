@@ -62,7 +62,9 @@ private theorem infinity_evaluation_span_finrank_le {K L σ ι : Type*} [Field K
     rw [quotientRadialMap_homogeneous I p (m + 1) p.property]
   exact (LinearMap.finrank_span_range_le_of_ker_le f g hker).trans (Submodule.finrank_mono hrange)
 
-/-- In stable degrees the same evaluation span has dimension at most d. -/
+/-- In stable degrees `m ≥ N`, where the filtered coordinate spaces have dimension `d * m + b`,
+the `L`-span of the value vectors `(h (z i))_i` of the homogeneous polynomials `h` of degree
+`m + 1` at points `z i` of the cone at infinity has dimension at most `d`. -/
 private theorem infinity_evaluation_span_finrank_le_degree {K L σ ι : Type*} [Field K] [Field L]
     [Algebra K L] [Fintype σ] (I : Ideal (MvPolynomial σ K))
     (z : ι → σ → L) (hz : ∀ i, z i ∈ MvPolynomial.zeroLocus L (leadingInfinityIdeal I))

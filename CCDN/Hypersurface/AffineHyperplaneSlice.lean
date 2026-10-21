@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The `K`-algebra automorphism of `K[x_none, x_0, …, x_{n-1}]` translating the distinguished
+coordinate `x_none` by the constant `c` and fixing the other coordinates. -/
 def optionCoordinateShift {K : Type*} [CommRing K] {n : ℕ} (c : K) :
     MvPolynomial (Option (Fin n)) K →ₐ[K] MvPolynomial (Option (Fin n)) K :=
   aeval (fun i => Option.elim i (X none + C c) (fun j => X (some j)))
@@ -65,11 +67,15 @@ private lemma optionCoordinateShift_eval {K : Type*} [CommRing K] {n : ℕ}
       cases i <;> simp [optionCoordinateShift]
   exact RingHom.congr_fun he f
 
+/-- The restriction of `f` to the affine hyperplane `x_none = ∑ a j * x j + c`, written as a
+polynomial in the remaining coordinates `x j`. -/
 def affineGraphHyperplaneSlice {K : Type*} [CommRing K] {n : ℕ}
     (a : Fin n → K) (c : K) (f : MvPolynomial (Option (Fin n)) K) :
     MvPolynomial (Fin n) K :=
   graphHyperplaneRestriction a (optionCoordinateShift c f)
 
+/-- Evaluating the affine slice `affineGraphHyperplaneSlice a c f` at `x` is evaluating `f` at the
+point of the hyperplane `x_none = ∑ a j * x j + c` lying over `x`. -/
 lemma affineGraphHyperplaneSlice_eval {K : Type*} [CommRing K] {n : ℕ}
     (a : Fin n → K) (c : K) (f : MvPolynomial (Option (Fin n)) K) (x : Fin n → K) :
     eval x (affineGraphHyperplaneSlice a c f) =
@@ -77,6 +83,8 @@ lemma affineGraphHyperplaneSlice_eval {K : Type*} [CommRing K] {n : ℕ}
   rw [affineGraphHyperplaneSlice, graphHyperplaneRestriction_eval, optionCoordinateShift_eval]
   rfl
 
+/-- The degree-`f.totalDegree` component of an affine slice of `f` is the restriction of the top
+form of `f` to the parallel linear hyperplane `x_none = ∑ a j * x j`. -/
 lemma affineGraphHyperplaneSlice_top {K : Type*} [CommRing K] [Nontrivial K] {n : ℕ}
     (a : Fin n → K) (c : K) (f : MvPolynomial (Option (Fin n)) K) :
     homogeneousComponent f.totalDegree (affineGraphHyperplaneSlice a c f) =

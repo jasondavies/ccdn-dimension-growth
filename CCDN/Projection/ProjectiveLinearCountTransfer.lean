@@ -31,6 +31,11 @@ private def integerProjectiveLinearImage {m n : ℕ}
       have hh := congrFun hz 0
       exact one_ne_zero hh)
 
+/-- Let `P` be an integer matrix with entries of absolute value at most `H` whose linear forms
+satisfy the homogeneous relation `f` modulo `I`. If every affine fiber of the induced map on the
+zero locus of `I` has at most `M` points, then the projective rational points of height at most `B`
+on the zero locus of `I` number at most `M` times those of height at most `(n + 1) * H * B` on the
+projective hypersurface `f = 0`. -/
 theorem projective_integer_linear_count_transfer
     {m n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
     (P : Matrix (Fin (m + 1)) (Fin (n + 1)) ℤ)

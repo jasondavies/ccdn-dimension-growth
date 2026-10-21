@@ -15,6 +15,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- For a subset `R` of the prime window of logarithmic size `L` whose product is at most
+`c L X` (with `c` the constant `scalingPrimeRatio`), the union over the primes `p ∈ R` and the
+smooth residue families `r` modulo `R` of the crossing sets of the deletion edge
+`R.erase p ⊂ R`; the empty set for every other `R`. -/
 def surfaceResidueSubsetLocus {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
     (F : SurfaceCongruenceFamily f B A)
     (S : Finset (Ideal (CoordinatePolynomial 3))) (L X : ℝ) (hL : 1 ≤ L)
@@ -27,6 +31,9 @@ def surfaceResidueSubsetLocus {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
     else ∅
   else ∅
 
+/-- The residual locus of the surface residue cover: the union of the edge crossing sets
+`surfaceResidueSubsetLocus F S L X hL R` over all subsets `R` of the prime window of
+logarithmic size `L`. -/
 def surfaceResidueResidualLocus {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
     (F : SurfaceCongruenceFamily f B A)
     (S : Finset (Ideal (CoordinatePolynomial 3))) (L X : ℝ) (hL : 1 ≤ L) :
@@ -48,6 +55,11 @@ private theorem mem_surfaceResidueResidualLocus
   simp only [surfaceResidueSubsetLocus, dite_eq_left hRW, ite_eq_left hprod]
   exact Set.mem_iUnion.mpr ⟨p, Set.mem_iUnion.mpr ⟨hp, Set.mem_iUnion.mpr ⟨r, hx⟩⟩⟩
 
+/-- For an irreducible surface `f = 0` of degree `d ≥ 1` with curves `S`, a congruence family
+`F` with constant `A` and a cutoff `X ≥ B^(1/√d)`, the residual locus has at most
+`2 d A² b² (c L + 1)² X² #W (2d)^#W` integral points of height at most `B`, where `b` is the
+logarithmic budget `surfaceResidueLogBudget B L`, `c` is `scalingPrimeRatio` and `W` is the
+prime window of logarithmic size `L`. -/
 theorem surface_residue_residual_count_le
     {f : MvPolynomial (Fin 3) ℤ} {A B L X : ℝ}
     (F : SurfaceCongruenceFamily f B A) (hA : 0 ≤ A) (hB : 1 ≤ B) (hL : 1 ≤ L)
@@ -122,8 +134,9 @@ theorem surface_residue_residual_count_le
       rw [mul_pow]
       ring
 
-/-- The nonsingular points on large initial components belong to
-the finite residual locus counted above. -/
+/-- An integer point of the box at which the surface `f = 0` is nonsingular, lying on a curve
+`I ∈ S` that contains the initial auxiliary and has degree greater than `2 d A` times the
+logarithmic budget, belongs to the residual locus `surfaceResidueResidualLocus F S L X`. -/
 theorem large_curve_point_mem_surfaceResidueResidualLocus
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))

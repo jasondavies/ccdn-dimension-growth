@@ -69,6 +69,8 @@ noncomputable section
 open MvPolynomial
 local notation "K" => AlgebraicClosure ℚ
 
+/-- The height bound `6 * (2 * d ^ 3 + 3) ^ 3` for the integer normal of a good hyperplane
+section of a degree-`d` hypersurface. -/
 def goodHyperplaneHeight (d : ℕ) : ℕ := 6 * (2 * d ^ 3 + 3) ^ 3
 
 /-- In at least four variables there is a hyperplane

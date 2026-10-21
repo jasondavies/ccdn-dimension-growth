@@ -36,6 +36,8 @@ theorem AffineHypersurfaceGrowth.rational {n e : ℕ} (h : AffineHypersurfaceGro
     rfl
   simpa only [hdeg, count, hpoints] using hbound g htop (by omega) B hB
 
+/-- Affine dimension growth with degree exponent `18 + 3 * n` for integer polynomials in `n + 3`
+variables of degree at least five with absolutely irreducible top-degree form. -/
 theorem affineHypersurfaceGrowth (n : ℕ) : AffineHypersurfaceGrowth n (18 + 3 * n) :=
   affineHypersurfaceGrowth_of_surface (by
     simpa only [AffineHypersurfaceGrowth, Nat.zero_add, pow_one]

@@ -16,6 +16,7 @@ import CCDN.ForMathlib.Log
 namespace CCDN
 noncomputable section
 
+/-- For `d ≥ 16`, the exponent `1 / √d` is at most `1 / 4`. -/
 lemma surface_inverse_sqrt_le_quarter {d : ℕ} (hd : 16 ≤ d) :
     1 / Real.sqrt (d : ℝ) ≤ (1 / 4 : ℝ) := by
   have hs : (4 : ℝ) ≤ Real.sqrt (d : ℝ) :=

@@ -19,17 +19,25 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The universal restriction of an integer polynomial to the hyperplane
+`A none * x_none + ∑ A (some j) * x j = 0`, whose normal coefficients `A` are indeterminates,
+without denominators: it substitutes `x_none ↦ -∑ A (some j) * x j` and `x j ↦ A none * x j`. -/
 def universalHyperplaneRestriction {σ : Type*} [Fintype σ] :
     MvPolynomial (Option σ) ℤ →ₐ[ℤ]
       MvPolynomial σ (MvPolynomial (Option σ) ℤ) :=
   aeval (fun i => Option.elim i
     (-(∑ j, C (X (some j)) * X j)) (fun j => C (X none) * X j))
 
+/-- The restriction of a polynomial to the hyperplane `A none * x_none + ∑ A (some j) * x j = 0`
+without denominators, obtained by substituting `x_none ↦ -∑ A (some j) * x j` and
+`x j ↦ A none * x j`. -/
 def scaledHyperplaneRestriction {K σ : Type*} [CommRing K] [Fintype σ]
     (A : Option σ → K) : MvPolynomial (Option σ) K →ₐ[K] MvPolynomial σ K :=
   aeval (fun i => Option.elim i
     (-(∑ j, C (A (some j)) * X j)) (fun j => C (A none) * X j))
 
+/-- Specializing the coefficient indeterminates of the universal hyperplane restriction at a
+normal vector `A` gives the scaled hyperplane restriction for `A`. -/
 lemma universalHyperplaneRestriction_specialize {K σ : Type*}
     [CommRing K] [Fintype σ] (A : Option σ → K) (f : MvPolynomial (Option σ) ℤ) :
     map (eval₂Hom (Int.castRingHom K) A) (universalHyperplaneRestriction f) =
@@ -44,6 +52,8 @@ lemma universalHyperplaneRestriction_specialize {K σ : Type*}
       cases i <;> simp [universalHyperplaneRestriction, scaledHyperplaneRestriction]
   exact RingHom.congr_fun he f
 
+/-- The universal hyperplane restriction of a homogeneous polynomial of degree `d` has
+coefficients that are homogeneous of degree `d` in the normal coefficients. -/
 lemma universalHyperplaneRestriction_coefficientwiseHomogeneous
     {σ : Type*} [Fintype σ] {d : ℕ} {f : MvPolynomial (Option σ) ℤ}
     (hf : f.IsHomogeneous d) :
@@ -69,6 +79,7 @@ lemma universalHyperplaneRestriction_coefficientwiseHomogeneous
   simpa only [universalHyperplaneRestriction, aeval_def, coe_eval₂Hom, he, one_mul] using
     CoefficientwiseHomogeneous.eval₂ hf (C.comp C) _ hc hg
 
+/-- The scaled hyperplane restriction preserves homogeneity of degree `d`. -/
 lemma scaledHyperplaneRestriction_homogeneous {K σ : Type*}
     [CommRing K] [Fintype σ] (A : Option σ → K)
     {d : ℕ} {f : MvPolynomial (Option σ) K} (hf : f.IsHomogeneous d) :
@@ -83,6 +94,9 @@ lemma scaledHyperplaneRestriction_homogeneous {K σ : Type*}
     | some j => exact (isHomogeneous_X _ j).C_mul (A none)
   simpa only [scaledHyperplaneRestriction, one_mul] using hf.aeval _ hg
 
+/-- For `A none ≠ 0` and `f` homogeneous of degree `d`, the scaled hyperplane restriction of `f`
+is `A none ^ d` times its restriction to the graph hyperplane
+`x_none = ∑ -(A (some i) / A none) * x i`. -/
 lemma scaledHyperplaneRestriction_eq_graph {K σ : Type*}
     [Field K] [Fintype σ] (A : Option σ → K) (hA : A none ≠ 0)
     {d : ℕ} {f : MvPolynomial (Option σ) K} (hf : f.IsHomogeneous d) :
@@ -108,6 +122,8 @@ lemma scaledHyperplaneRestriction_eq_graph {K σ : Type*}
   rw [hv, eval₂_eq_eval_map, homogeneous_eval_smul (hf.map C), ← eval₂_eq_eval_map,
     ← map_pow]
 
+/-- The scaled hyperplane restriction for the normal vector `(1, -a)` is the restriction to the
+graph hyperplane `x_none = ∑ a i * x i`. -/
 lemma scaledHyperplaneRestriction_normalized {K σ : Type*}
     [CommRing K] [Fintype σ] (a : σ → K) (f : MvPolynomial (Option σ) K) :
     scaledHyperplaneRestriction (fun i => Option.elim i 1 (fun j => -a j)) f =

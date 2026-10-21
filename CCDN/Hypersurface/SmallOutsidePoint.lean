@@ -87,6 +87,7 @@ theorem exists_small_integer_point_outside_prime_ideal
     obtain ⟨a, ha, he⟩ := exists_integer_grid_eval_ne_zero_of_totalDegree f hf d hfd
     exact ⟨a, ha, f, hfi, he⟩
 
+/-- Every polynomial in a proper homogeneous ideal vanishes at the origin. -/
 lemma homogeneous_ideal_eval_zero {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (hproper : I ≠ ⊤)
     (hhom : IsHomogeneousIdeal I)

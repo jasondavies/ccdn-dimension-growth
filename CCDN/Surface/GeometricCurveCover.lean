@@ -20,6 +20,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- The ideal `I` of `ℚ[x, y, z]` stays prime after extension of scalars to the algebraic
+closure of `ℚ`: the curve it defines is geometrically integral. -/
 abbrev GeometricCurveIdeal (I : Ideal (CoordinatePolynomial 3)) : Prop :=
   (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime
 
@@ -27,9 +29,13 @@ abbrev GeometricCurveIdeal (I : Ideal (CoordinatePolynomial 3)) : Prop :=
 in affine three-space: the curves retained by the geometric Salberger cover. -/
 structure IsGeometricSurfaceCurve (f : CoordinatePolynomial 3)
     (I : Ideal (CoordinatePolynomial 3)) (e : ℕ) : Prop extends IsSurfaceCurve f I e where
+  /-- The curve is geometrically integral. -/
   geometric : GeometricCurveIdeal I
+  /-- The degree `e` is positive. -/
   pos : 0 < e
 
+/-- The nonsingular rational points of the surface `f = 0`: its rational zeros at which some
+partial derivative of `f` does not vanish. -/
 def smoothSurfaceLocus (f : CoordinatePolynomial 3) : Set (RatPoint 3) :=
   zeroLocus f \ singularHypersurfaceLocus f
 
@@ -47,6 +53,12 @@ private lemma integer_smooth_surface_derivative
   exact hh
 
 open Classical in
+/-- Let `S` be the curve components, with degrees `δ`, of the intersection of the surface
+`f = 0` (irreducible over `ℚ`) with the initial auxiliary of a congruence family `F`. The
+nonsingular integral points of the surface outside the geometrically integral components of
+degree at most `D` are counted by those on the remaining components of degree at most `D`,
+those on the components of degree between `D` and `2 d A` times the logarithmic budget (with
+`d` the degree of `f`), and those in the residual locus of the residue cover. -/
 theorem surface_smooth_outside_geometric_cover
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))

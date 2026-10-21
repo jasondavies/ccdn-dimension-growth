@@ -16,12 +16,16 @@ only on ambient dimension, retaining the exact exponent 1/d and d³ factor. -/
 namespace CCDN
 noncomputable section
 
+/-- The constant `c = 2 * n ^ 2 + 3 * n`, for which `log (projectionBoxFactor n d) ≤ c * d`. -/
 def projectionLogConstant (n : ℕ) : ℝ := 2 * (n : ℝ) ^ 2 + 3 * n
 
+/-- The projection log constant is nonnegative. -/
 lemma projectionLogConstant_nonneg (n : ℕ) : 0 ≤ projectionLogConstant n := by
   unfold projectionLogConstant
   positivity
 
+/-- For `d > 0`, the logarithm of the projection box factor is at most
+`projectionLogConstant n * d`. -/
 lemma projectionBoxFactor_log_le (n : ℕ) {d : ℕ} (hd : 0 < d) :
     Real.log (projectionBoxFactor n d) ≤ projectionLogConstant n * d := by
   have hn : (0 : ℝ) ≤ n := by positivity
@@ -59,7 +63,9 @@ private lemma curveBound_scale_of_log_le {d : ℕ} (hd : 0 < d) {A B C : ℝ}
         ((C + 1) * (Real.log B + d)) := by gcongr
     _ = _ := by ring
 
-/-- A uniform scale constant, chosen before degree, ideal and radius. -/
+/-- Scaling the radius by the projection box factor multiplies the curve bound by at most a
+constant depending only on `n`: with `c = projectionLogConstant n`, for `d > 0` and `B ≥ 1`,
+`curveBound d (projectionBoxFactor n d * B) ≤ exp c * (c + 1) * curveBound d B`. -/
 theorem projection_curveBound_scale (n : ℕ) {d : ℕ} (hd : 0 < d)
     {B : ℝ} (hB : 1 ≤ B) :
     curveBound d (projectionBoxFactor n d * B) ≤

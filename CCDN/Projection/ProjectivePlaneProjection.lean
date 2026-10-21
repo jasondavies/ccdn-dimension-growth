@@ -19,6 +19,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For an integer vector `z` with `z 0 ≠ 0`, the projective point `[1 : z 1 / z 0 : …]` is the
+point with homogeneous coordinates `z`. -/
 lemma affineProjectivePoint_eq_integer {n : ℕ} (z : IntPoint (n + 1)) (hz0 : z 0 ≠ 0) :
     affineProjectivePoint (fun j => (z j.succ : ℚ) / (z 0 : ℚ)) =
       Projectivization.mk ℚ (rationalPoint z)
@@ -31,12 +33,17 @@ lemma affineProjectivePoint_eq_integer {n : ℕ} (z : IntPoint (n + 1)) (hz0 : z
   · simp [rationalPoint, h0]
   · simp [rationalPoint, div_eq_mul_inv, mul_comm]
 
+/-- The map from `ℙⁿ` to the projective plane on the chart `X₀ ≠ 0`, sending a point with affine
+coordinates `x` to `[1 : m₀(x) : m₁(x)]`, where `m₀`, `m₁` are the moment coordinates with
+parameters `k₀` and `k₁`. -/
 def projectivePlaneChartProjection {n : ℕ} (k₀ k₁ : ℕ) (x : ProjectivePoint n) :
     ProjectivePoint 2 :=
   affineProjectivePoint
     ![eval (projectiveAffineCoordinates x) (momentCoordinate ℚ n k₀),
       eval (projectiveAffineCoordinates x) (momentCoordinate ℚ n k₁)]
 
+/-- For parameters `k₀ ≤ n ^ 2 * d` and `k₁ ≤ n * d ^ 2`, the plane chart projection of a point on
+the chart `X₀ ≠ 0` of height at most `B ≥ 1` has height at most `projectionBoxFactor n d * B`. -/
 theorem projectivePlaneChartProjection_height {n d k₀ k₁ : ℕ}
     (hk₀ : k₀ ≤ n ^ 2 * d) (hk₁ : k₁ ≤ n * d ^ 2)
     (x : ProjectivePoint n) (hx : x.rep 0 ≠ 0) {B : ℝ} (hB : 1 ≤ B)
@@ -72,6 +79,10 @@ theorem projectivePlaneChartProjection_height {n d k₀ k₁ : ℕ}
       mem_integerBox.mpr (fun j => (primitiveProjectiveRep_bound x j.succ).trans hxB)
     exact mem_integerBox.mp (degreeProjection_box hk₀ hk₁ (by linarith) hzbox) k
 
+/-- If the moment coordinates satisfy the plane relation `f` of degree `d` on the affine chart of
+the prime `I` (with `X 0 ∉ I`), then the plane chart projection maps the points of the projective
+variety of `I` on the chart `X₀ ≠ 0` into the projective plane curve defined by the homogenization
+of `f`. -/
 theorem projectivePlaneChartProjection_zero {n d k₀ k₁ : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime] (hX : X 0 ∉ I)
     (f : MvPolynomial (Fin 2) ℚ) (hfd : f.totalDegree = d)

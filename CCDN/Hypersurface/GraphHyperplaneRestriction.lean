@@ -19,10 +19,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The restriction of a polynomial in the coordinates `x_none` and `x i` to the hyperplane
+`x_none = ∑ a i * x i`, as a polynomial in the remaining coordinates `x i`. -/
 def graphHyperplaneRestriction {K σ : Type*} [CommRing K] [Fintype σ]
     (a : σ → K) : MvPolynomial (Option σ) K →ₐ[K] MvPolynomial σ K :=
   aeval (fun i => Option.elim i (∑ j, C (a j) * X j) X)
 
+/-- Restriction to a graph hyperplane does not increase the total degree. -/
 lemma graphHyperplaneRestriction_totalDegree_le {K σ : Type*}
     [Field K] [Fintype σ] (a : σ → K) (f : MvPolynomial (Option σ) K) :
     (graphHyperplaneRestriction a f).totalDegree ≤ f.totalDegree := by
@@ -35,6 +38,8 @@ lemma graphHyperplaneRestriction_totalDegree_le {K σ : Type*}
     exact (totalDegree_mul _ _).trans (by simp)
   | some j => simp
 
+/-- Evaluating the restriction of `f` to the hyperplane `x_none = ∑ a j * x j` at `x` is
+evaluating `f` at the point of the hyperplane lying over `x`. -/
 lemma graphHyperplaneRestriction_eval {K σ : Type*} [CommRing K] [Fintype σ]
     (a x : σ → K) (f : MvPolynomial (Option σ) K) :
     eval x (graphHyperplaneRestriction a f) =
@@ -48,6 +53,7 @@ lemma graphHyperplaneRestriction_eval {K σ : Type*} [CommRing K] [Fintype σ]
       cases i <;> simp [graphHyperplaneRestriction]
   exact RingHom.congr_fun he f
 
+/-- Restriction to a graph hyperplane preserves homogeneity of degree `d`. -/
 lemma graphHyperplaneRestriction_homogeneous {K σ : Type*}
     [CommRing K] [Fintype σ] (a : σ → K) {f : MvPolynomial (Option σ) K} {d : ℕ}
     (hf : f.IsHomogeneous d) : (graphHyperplaneRestriction a f).IsHomogeneous d := by
@@ -61,6 +67,8 @@ lemma graphHyperplaneRestriction_homogeneous {K σ : Type*}
     | some j => exact isHomogeneous_X K j
   simpa only [one_mul, v, graphHyperplaneRestriction] using hf.aeval v hv
 
+/-- Restriction to the graph hyperplane commutes with applying a ring homomorphism `φ` to the
+coefficients, the hyperplane coefficients `a` being mapped by `φ` as well. -/
 lemma graphHyperplaneRestriction_map {K L σ : Type*}
     [CommRing K] [CommRing L] [Fintype σ]
     (φ : K →+* L) (a : σ → K) (f : MvPolynomial (Option σ) K) :
@@ -75,6 +83,8 @@ lemma graphHyperplaneRestriction_map {K L σ : Type*}
       cases i <;> simp [graphHyperplaneRestriction]
   exact RingHom.congr_fun he f
 
+/-- Restriction to a graph hyperplane commutes with taking the homogeneous component of
+degree `d`. -/
 lemma graphHyperplaneRestriction_homogeneousComponent {K σ : Type*}
     [CommRing K] [Fintype σ] (a : σ → K)
     (f : MvPolynomial (Option σ) K) (d : ℕ) :

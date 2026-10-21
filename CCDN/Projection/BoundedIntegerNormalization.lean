@@ -23,8 +23,11 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The coefficient bound `n! * (d + 1) ^ n` for the bounded linear Noether normalization of a
+degree-`d` variety in `n` variables. -/
 def integerNormalizationHeight (n d : ℕ) : ℕ := n.factorial * (d + 1) ^ n
 
+/-- The normalization height is positive. -/
 lemma integerNormalizationHeight_pos (n d : ℕ) : 0 < integerNormalizationHeight n d := by
   dsimp [integerNormalizationHeight]
   positivity

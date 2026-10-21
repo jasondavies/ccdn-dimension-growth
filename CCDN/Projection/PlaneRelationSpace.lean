@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A multiple `g` of a nonzero polynomial `f` with total degree at most that of `f` is a scalar
+multiple of `f`. -/
 lemma eq_scalar_mul_of_dvd_of_totalDegree_le {K σ : Type*} [Field K]
     (f g : MvPolynomial σ K) (hf : f ≠ 0) (hdiv : f ∣ g)
     (hdeg : g.totalDegree ≤ f.totalDegree) : ∃ c : K, g = c • f := by

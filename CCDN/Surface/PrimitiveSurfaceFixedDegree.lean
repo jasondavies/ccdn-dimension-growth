@@ -26,8 +26,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
-/-- The constant is chosen before the primitive equation and the box
-radius. Absolute irreducibility is required only of the leading form. -/
+/-- For each degree `d ≥ 5`, there is a constant `C` such that every primitive integer
+surface equation of degree `d` with absolutely irreducible top-degree form has at most `C B`
+integral points of height at most `B` on its zero set, for every `B ≥ 1`. -/
 theorem primitive_surface_fixed_degree_linear_bound (d : ℕ) (hd : 5 ≤ d) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ, PrimitiveIntegerPolynomial f →

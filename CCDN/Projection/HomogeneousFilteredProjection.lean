@@ -46,6 +46,8 @@ private lemma degreeTruncation_eq_self {K σ : Type*} [Field K] (N : ℕ)
   have hh : ¬ i < p.totalDegree + 1 := by simpa only [Finset.mem_range] using hnot
   omega
 
+/-- Substituting homogeneous linear forms commutes with taking homogeneous components: the
+degree-`N` component of `aeval a p` is `aeval a` of the degree-`N` component of `p`. -/
 lemma homogeneousComponent_aeval_linear {K σ τ : Type*} [Field K]
     (a : σ → MvPolynomial τ K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (N : ℕ) (p : MvPolynomial σ K) :
@@ -66,8 +68,9 @@ private lemma degreeTruncation_aeval_linear {K σ τ : Type*} [Field K]
     degreeTruncation N (aeval a p) = aeval a (degreeTruncation N p) := by
   simp only [degreeTruncation_apply, map_sum, homogeneousComponent_aeval_linear a ha]
 
-/-- Closure under homogeneous components is the usual homogeneity condition
-on an ideal; it suffices for strictness of the projection filtration. -/
+/-- The projection of a homogeneous quotient by homogeneous linear forms `a` is strict for the
+total-degree filtration: if the image of `p` has degree at most `N` in the quotient by `I`, then it
+is the image of some `q` of total degree at most `N`. -/
 theorem homogeneous_projection_filtered_lift
     {K σ τ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial τ K))

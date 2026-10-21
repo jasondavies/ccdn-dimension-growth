@@ -24,10 +24,12 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The derivative `∑ i, v i * ∂f/∂xᵢ` of the polynomial `f` in the direction `v`. -/
 def directionalDerivative {R σ : Type*} [CommRing R] [Fintype σ]
     (v : σ → R) (f : MvPolynomial σ R) : MvPolynomial σ R :=
   ∑ i, C (v i) * pderiv i f
 
+/-- A directional derivative of `f` has total degree at most `f.totalDegree - 1`. -/
 lemma directionalDerivative_totalDegree_le {K σ : Type*} [Field K] [Fintype σ]
     (v : σ → K) (f : MvPolynomial σ K) :
     (directionalDerivative v f).totalDegree ≤ f.totalDegree - 1 := by
@@ -193,6 +195,8 @@ private theorem top_irreducible_directionalDerivative_ne_zero
   rw [directionalDerivative_map, directionalDerivative_homogeneousComponent v f (by omega),
     hz, map_zero, map_zero]
 
+/-- If the integer surface equation `f` has degree at least two and an absolutely irreducible
+top-degree form, then its derivative over `ℚ` in every nonzero direction `v` is nonzero. -/
 theorem surface_directionalDerivative_ne_zero
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : HasAbsIrreducibleTopForm f) (hd : 2 ≤ f.totalDegree)
@@ -204,10 +208,12 @@ theorem surface_directionalDerivative_ne_zero
   convert hir using 1
   congr 1
 
+/-- Every directional derivative of a constant polynomial is zero. -/
 @[simp] lemma directionalDerivative_C {R σ : Type*} [CommRing R] [Fintype σ]
     (v : σ → R) (a : R) : directionalDerivative v (C a) = 0 := by
   simp [directionalDerivative]
 
+/-- The derivative of the coordinate `X j` in the direction `v` is the constant `v j`. -/
 @[simp] lemma directionalDerivative_X {R σ : Type*} [CommRing R] [Fintype σ]
     (v : σ → R) (j : σ) : directionalDerivative v (X j) = C (v j) := by
   classical
@@ -255,6 +261,8 @@ private theorem directionalDerivative_zero_on_line {K σ : Type*} [Field K] [Inf
   rw [← eval_affineLinePolynomial, ← hder]
   simp
 
+/-- If the rational affine line through `a` with direction `v` lies on the hypersurface
+`f = 0`, then it also lies on the zero set of the derivative of `f` in the direction `v`. -/
 theorem rationalAffineLine_contained_directionalDerivative {n : ℕ}
     (a v : RatPoint n) (f : CoordinatePolynomial n)
     (hline : rationalAffineLine a v ⊆ zeroLocus f) :

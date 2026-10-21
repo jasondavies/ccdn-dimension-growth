@@ -22,6 +22,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The rational points of the singular locus of the hypersurface `f = 0`: the common zeros of
+`f` and all its partial derivatives. -/
 def singularHypersurfaceLocus {n : ℕ} (f : MvPolynomial (Fin n) ℚ) :
     Set (RatPoint n) :=
   {x | eval x f = 0 ∧ ∀ j, eval x (pderiv j f) = 0}
@@ -49,6 +51,9 @@ private theorem singular_hypersurface_count_le {n : ℕ}
   exact (Nat.cast_le.mpr (count_mono hsub le_rfl)).trans
     (proper_intersection_count_le_box f (pderiv j f) hir.prime hproper le_rfl hdeg.le hB)
 
+/-- The singular locus of an irreducible rational hypersurface in `n + 2` variables has at most
+`(3 * (n + 2)) ^ n * deg f ^ 2 * B ^ n` integral points of height at most `B`, for every
+`B ≥ 1`. -/
 theorem singular_hypersurface_dimension_growth {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℚ) (hir : Irreducible f)
     {B : ℝ} (hB : 1 ≤ B) :

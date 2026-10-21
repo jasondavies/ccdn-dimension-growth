@@ -19,10 +19,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The constant in the degree bound of the auxiliary polynomial for affine hypersurfaces in
+`n + 2` variables with absolutely irreducible top-degree form, independent of the
+coefficients. -/
 def topFormAuxiliaryConstant (n : ℕ) : ℝ :=
   affineHypersurfaceAuxiliaryConstant n *
     ((n + 1 : ℝ) * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (n + 2) + 2)
 
+/-- The auxiliary constant `topFormAuxiliaryConstant n` is positive. -/
 lemma topFormAuxiliaryConstant_pos (n : ℕ) : 0 < topFormAuxiliaryConstant n := by
   have hC := affineHypersurfaceAuxiliaryConstant_pos n
   have hH := zero_le_one.trans (hypersurfaceHeightConstant_one_le (n + 2))

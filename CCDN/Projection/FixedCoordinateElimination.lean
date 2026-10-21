@@ -27,6 +27,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For `f` of total degree at most `D`, the degree-`D` homogenization of `f`, restricted to the
+hyperplane at infinity `X₀ = 0`, is the degree-`D` homogeneous component of `f`. -/
 theorem scaledHomogenize_one_eval_at_infinity {K : Type*} [Field K] {n D : ℕ}
     (f : MvPolynomial (Fin n) K) (hf : f.totalDegree ≤ D) (b : Fin n → K) :
     eval (Fin.cons 0 b) (scaledHomogenize D 1 f) =
@@ -53,6 +55,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The integer matrix whose `i`-th row is the linear form `b none * X (i + 1) - b (some i) * X 0`,
+eliminating the coordinate `X 0` along the direction `b`. -/
 def finEliminationMatrix {n : ℕ} (b : Option (Fin n) → ℤ) :
     Fin n → Fin (n + 1) → ℤ :=
   fun i => Fin.cases (-b (some i)) (fun j => if j = i then b none else 0)
@@ -64,6 +68,8 @@ private lemma integerLinearForm_finEliminationMatrix {n : ℕ}
   rw [integerLinearForm, linearForm, Fin.sum_univ_succ]
   simp [finEliminationMatrix, apply_ite, ite_mul, sub_eq_add_neg, add_comm]
 
+/-- If every entry of the direction `b` lies in `[0, d + 1]`, then every entry of the elimination
+matrix has absolute value at most `d + 1`. -/
 lemma finEliminationMatrix_height {n d : ℕ} (b : Option (Fin n) → ℤ)
     (hb : ∀ i, 0 ≤ b i ∧ b i ≤ d + 1) (i : Fin n) (j : Fin (n + 1)) :
     |finEliminationMatrix b i j| ≤ d + 1 := by
@@ -83,15 +89,21 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The reindexing of `Fin (n + 2)` that sends coordinate `1` to `none` and the remaining
+coordinates, in order, to `some 0, some 1, …`; it makes the homogenizing coordinate `0` the first
+retained coordinate. -/
 def closurePivotEquiv (n : ℕ) : Fin (n + 2) ≃ Option (Fin (n + 1)) :=
   (Equiv.swap 0 (Fin.succ 0)).trans (finSuccEquiv (n + 1))
 
+/-- The pivot reindexing sends coordinate `0` to `some 0`. -/
 @[simp] lemma closurePivotEquiv_zero (n : ℕ) : closurePivotEquiv n 0 = some 0 := by
   simp [closurePivotEquiv]
 
+/-- The pivot reindexing sends coordinate `1` to `none`. -/
 @[simp] lemma closurePivotEquiv_one (n : ℕ) : closurePivotEquiv n (Fin.succ 0) = none := by
   simp [closurePivotEquiv]
 
+/-- The pivot reindexing sends coordinate `i + 2` to `some (i + 1)`. -/
 @[simp] lemma closurePivotEquiv_succ_succ {n : ℕ} (i : Fin n) :
     closurePivotEquiv n i.succ.succ = some i.succ := by
   have h0 : i.succ.succ ≠ (0 : Fin (n + 2)) := Fin.succ_ne_zero _
@@ -101,14 +113,17 @@ def closurePivotEquiv (n : ℕ) : Fin (n + 2) ≃ Option (Fin (n + 1)) :=
   simp only [closurePivotEquiv, Equiv.trans_apply, Equiv.swap_apply_of_ne_of_ne h0 h1]
   rfl
 
+/-- The inverse pivot reindexing sends `none` to coordinate `1`. -/
 @[simp] lemma closurePivotEquiv_symm_none (n : ℕ) :
     (closurePivotEquiv n).symm none = Fin.succ 0 := by
   exact (closurePivotEquiv n).symm_apply_eq.mpr (closurePivotEquiv_one n).symm
 
+/-- The inverse pivot reindexing sends `some 0` to coordinate `0`. -/
 @[simp] lemma closurePivotEquiv_symm_some_zero (n : ℕ) :
     (closurePivotEquiv n).symm (some 0) = 0 := by
   exact (closurePivotEquiv n).symm_apply_eq.mpr (closurePivotEquiv_zero n).symm
 
+/-- The inverse pivot reindexing sends `some (i + 1)` to coordinate `i + 2`. -/
 @[simp] lemma closurePivotEquiv_symm_some_succ {n : ℕ} (i : Fin n) :
     (closurePivotEquiv n).symm (some i.succ) = i.succ.succ := by
   exact (closurePivotEquiv n).symm_apply_eq.mpr (closurePivotEquiv_succ_succ i).symm

@@ -21,6 +21,9 @@ namespace CCDN
 noncomputable section
 open Finset
 
+/-- If a finite set `P` of positive integers bounded by `U` has product at least `X > 1`, then
+it contains a nonempty subset `R` with product at least `X` and less than `U X`, all of whose
+proper subsets have product less than `X`. -/
 theorem exists_minimal_product_subset (P : Finset ℕ) {X U : ℝ}
     (hX : 1 < X) (hP : ∀ p ∈ P, (0 : ℝ) < p)
     (hU : ∀ p ∈ P, (p : ℝ) ≤ U)

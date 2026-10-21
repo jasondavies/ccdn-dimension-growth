@@ -33,6 +33,11 @@ private theorem surface_curve_number_weight {d : ℕ} (hd : 5 ≤ d) {B : ℝ} (
       norm_num only [Nat.factorial, Nat.cast_one, pow_one, div_one] at hh
       convert hh using 1
 
+/-- There is an absolute constant `C` such that, for an integer surface equation `f` of degree
+`d ≥ 5` with absolutely irreducible top-degree form and a finite family `S` of curves of
+positive degree on the surface, each of degree at most `D (log B + 1)` and of total degree at
+most `A B^(1/√d) (log B + 1)`, the union of the curves has at most
+`C (d⁶ + A (D² (D + 1) + 1)) B` integral points of height at most `B`. -/
 theorem retained_surface_curve_union_bound :
     ∃ C : ℝ, 0 < C ∧
       ∀ (f : MvPolynomial (Fin 3) ℤ),

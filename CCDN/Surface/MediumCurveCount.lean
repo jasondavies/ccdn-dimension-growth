@@ -48,8 +48,10 @@ private theorem curveBound_medium_degree {δ d : ℕ} (hd : 1 ≤ d) (hδ : d �
       · positivity
     _ = _ := by ring
 
-/-- An absolute curve constant, with the surface degree and all family
-parameters quantified afterwards. -/
+/-- There is an absolute constant `C` such that, for a finite family of integral affine curves
+of degrees at least `d ≥ 1`, each of degree at most `D (log B + 1)` and of total degree at most
+`A B^(1/√d) (log B + 1)`, the union of the curves has at most
+`C A D² (D + 1) B^(2/√d) (log B + 1)⁴` integral points of height at most `B`. -/
 theorem medium_degree_curve_union_bound :
     ∃ C : ℝ, 0 < C ∧
       ∀ (S : Finset (Ideal (CoordinatePolynomial 3)))

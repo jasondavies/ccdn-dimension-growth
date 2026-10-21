@@ -19,6 +19,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For a homogeneous ideal `I` and homogeneous linear forms `a`, the kernel of the projection by
+`a` is closed under taking homogeneous components. -/
 theorem projection_kernel_homogeneousComponent_mem
     {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial τ K))
@@ -33,6 +35,8 @@ theorem projection_kernel_homogeneousComponent_mem
   apply Ideal.Quotient.eq_zero_iff_mem.mp
   exact hp
 
+/-- A nonzero generator of a principal ideal that is closed under homogeneous components is
+homogeneous of its total degree. -/
 theorem principal_generator_isHomogeneous
     {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K))
@@ -54,6 +58,8 @@ theorem principal_generator_isHomogeneous
   rw [← smul_eq_C_mul] at hh
   simpa only [smul_smul, inv_mul_cancel₀ hcne, one_smul] using hh
 
+/-- If the kernel of the projection of a homogeneous ideal by homogeneous linear forms is generated
+by a nonzero polynomial `f`, then `f` is homogeneous of its total degree. -/
 theorem homogeneous_projection_equation
     {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial τ K))

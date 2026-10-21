@@ -17,15 +17,23 @@ is O(B), uniformly in coefficients, auxiliaries and initial curve families. -/
 namespace CCDN
 noncomputable section
 
+/-- The constant `4 log (d + 1) + K + d + 2` scaling the logarithmic prime window of the residue
+cover for a surface of degree `d` with logarithmic height constant `K`. -/
 def surfaceResidueWindowScale (d : ℕ) (K : ℝ) : ℝ :=
   4 * Real.log ((d : ℝ) + 1) + K + d + 2
 
+/-- The logarithmic size `surfaceResidueWindowScale d K * (log B + 1)` of the prime window of
+the residue cover for a surface of degree `d` in the box of radius `B`. -/
 def surfaceResidueWindow (d : ℕ) (K B : ℝ) : ℝ :=
   surfaceResidueWindowScale d K * (Real.log B + 1)
 
+/-- The constant `1 + (log 4 + 4) c s`, with `c` the constant `scalingPrimeRatio` and `s` the
+window scale `surfaceResidueWindowScale d K`, by which the logarithmic budget of the residue
+cover is a multiple of `log B + 1`. -/
 def surfaceResidueLogScale (d : ℕ) (K : ℝ) : ℝ :=
   1 + (Real.log 4 + 4) * scalingPrimeRatio * surfaceResidueWindowScale d K
 
+/-- For `K ≥ 0`, the window scale `surfaceResidueWindowScale d K` is at least two. -/
 theorem surfaceResidueWindowScale_two_le (d : ℕ) {K : ℝ} (hK : 0 ≤ K) :
     2 ≤ surfaceResidueWindowScale d K := by
   have hh := Real.log_nonneg (show (1 : ℝ) ≤ (d : ℝ) + 1 by
@@ -33,6 +41,8 @@ theorem surfaceResidueWindowScale_two_le (d : ℕ) {K : ℝ} (hK : 0 ≤ K) :
   unfold surfaceResidueWindowScale
   nlinarith [Nat.cast_nonneg (α := ℝ) d]
 
+/-- For `K ≥ 0` and `B ≥ 1`, the prime window size `surfaceResidueWindow d K B` is at
+least one. -/
 theorem surfaceResidueWindow_one_le (d : ℕ) {K B : ℝ} (hK : 0 ≤ K) (hB : 1 ≤ B) :
     1 ≤ surfaceResidueWindow d K B := by
   have hscale := surfaceResidueWindowScale_two_le d hK
@@ -40,6 +50,7 @@ theorem surfaceResidueWindow_one_le (d : ℕ) {K B : ℝ} (hK : 0 ≤ K) (hB : 1
   unfold surfaceResidueWindow
   nlinarith
 
+/-- For `K ≥ 0`, the budget constant `surfaceResidueLogScale d K` is at least one. -/
 theorem surfaceResidueLogScale_one_le (d : ℕ) {K : ℝ} (hK : 0 ≤ K) :
     1 ≤ surfaceResidueLogScale d K := by
   have hs := surfaceResidueWindowScale_two_le d hK
@@ -50,6 +61,8 @@ theorem surfaceResidueLogScale_one_le (d : ℕ) {K : ℝ} (hK : 0 ≤ K) :
     positivity
   linarith
 
+/-- For the prime window `surfaceResidueWindow d K B`, the logarithmic budget of the residue
+cover equals `surfaceResidueLogScale d K * (log B + 1)`. -/
 theorem surfaceResidueLogBudget_window (d : ℕ) (K B : ℝ) :
     surfaceResidueLogBudget B (surfaceResidueWindow d K B) =
       surfaceResidueLogScale d K * (Real.log B + 1) := by

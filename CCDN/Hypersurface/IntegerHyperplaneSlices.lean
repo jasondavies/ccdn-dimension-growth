@@ -16,11 +16,16 @@ on each level and preserves the box radius. -/
 namespace CCDN
 noncomputable section
 
+/-- The value `∑ a i * x i` of the integer linear form with coefficients `a` at the point `x`. -/
 def integerLinearLevel {n : ℕ} (a x : IntPoint n) : ℤ := ∑ i, a i * x i
 
+/-- The projection of an integer point in `n + 1` coordinates to `n` coordinates by deleting
+coordinate `j`. -/
 def deleteIntegerCoordinate {n : ℕ} (j : Fin (n + 1))
     (x : IntPoint (n + 1)) : IntPoint n := fun i => x (j.succAbove i)
 
+/-- The integral points of `X` of height at most `B` on the level set `∑ a i * x i = k` of the
+integer linear form with coefficients `a`. -/
 noncomputable def integerSlicePoints {n : ℕ} (X : Set (RatPoint n))
     (B : ℝ) (a : IntPoint n) (k : ℤ) : Finset (IntPoint n) := by
   classical

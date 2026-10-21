@@ -32,6 +32,10 @@ private lemma eval_coefficientEquiv_of_fixed
   rw [hcomp] at he
   exact he.symm
 
+/-- Let `I` be a prime ideal over an algebraically closed field of characteristic zero whose
+projective variety has dimension `m` and degree `d`, and let `e` be a field automorphism that
+moves `I`. Then at most `d ^ 2 * S.card ^ m` points of the grid `S ^ n` with `e`-fixed
+coordinates lie on the variety of `I`. -/
 theorem conjugate_prime_grid_card_le
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
@@ -65,6 +69,9 @@ def rationalIdealZeroLocusOver {K : Type*} [Field K] [Algebra ℚ K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) : Set (RatPoint n) :=
   {x | ∀ f ∈ I, eval (fun i => algebraMap ℚ K (x i)) f = 0}
 
+/-- If a prime ideal `I` over an algebraically closed extension of `ℚ`, with projective dimension
+`m` and degree `d`, is moved by a `ℚ`-automorphism, then its variety has at most
+`d ^ 2 * (2 * B + 1) ^ m` integral points of height at most `B`. -/
 theorem conjugate_prime_count_le_box
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A prime ideal of projective dimension `n` and degree `d` in more than `n + 1` variables contains
+a nonzero polynomial of total degree at most `d`. -/
 theorem exists_mem_ideal_degree_le_multiplicity
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ] {n : ℕ}
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime] (d : ℕ)

@@ -83,8 +83,9 @@ private theorem integral_coordinate_tuple_count_le_finrank
 
 open MvPolynomial
 
-/-- The sharp bound for a fiber of an integral polynomial projection.
-All specialization maps are constructed from the stated coordinate equations. -/
+/-- In characteristic zero, every fiber of an integral projection of the variety of a prime `I`
+by polynomials `l` has at most `[E : F]` points, where `F` is the fraction field of the polynomial
+ring of the target and `E` is a finite extension of `F` receiving the coordinate ring of `I`. -/
 theorem integral_projection_fiber_card_le_finrank
     {K σ τ : Type*} [Field K] [CharZero K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]

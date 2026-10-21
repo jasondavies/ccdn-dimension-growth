@@ -22,6 +22,9 @@ noncomputable section
 open MvPolynomial
 local notation "Qbar" => AlgebraicClosure ℚ
 
+/-- A rational polynomial whose top-degree form is absolutely irreducible has an integer model of
+the same total degree, also with absolutely irreducible top-degree form, that has the same
+integer zeros. -/
 theorem exists_integer_model_absolute_top {n : ℕ} (f : MvPolynomial (Fin n) ℚ)
     (hir : Irreducible (map (algebraMap ℚ Qbar) (homogeneousComponent f.totalDegree f))) :
     ∃ g : MvPolynomial (Fin n) ℤ,

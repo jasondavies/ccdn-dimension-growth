@@ -24,6 +24,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Given `m + 1` linear forms algebraically independent modulo a prime `I` of projective dimension
+`m` and degree `d` (in characteristic zero), some moment coordinate with parameter `k ≤ n * d ^ 2`
+together with these forms generates the function field of `I`. -/
 theorem exists_bounded_linear_parameter_primitive
     {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

@@ -22,6 +22,11 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- One step of bounded linear elimination: for a prime ideal `I` in `n + 1` variables of projective
+dimension `m < n` and degree `d`, there are integer linear forms in `n` coordinates with
+coefficients of absolute value at most `d + 1` whose projection is integral, with prime kernel of
+projective dimension `m` and some degree `e` with `0 < e ≤ d`, and such that the associated
+projection of the projective closure of `I` is integral as well. -/
 theorem exists_fin_integer_closure_elimination_step {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime] (d : ℕ)
     (hdimdeg : HasProjectiveDimensionDegree I m d) (hcodim : m < n) :

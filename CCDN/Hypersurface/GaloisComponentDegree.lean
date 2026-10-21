@@ -21,6 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Extending a proper polynomial ideal along a field extension `k → K` gives a proper ideal. -/
 theorem scalar_extension_ideal_ne_top
     {k K : Type*} [Field k] [Field K] [Algebra k K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) k)) (hI : I ≠ ⊤) :
@@ -32,6 +33,8 @@ theorem scalar_extension_ideal_ne_top
   rw [h]
   trivial
 
+/-- Every minimal prime of the extension of a prime ideal `I` along an algebraic field extension
+has the same affine dimension `m` as `I` and degree between `1` and the degree `d` of `I`. -/
 theorem algebraic_component_degree_le
     (k K : Type*) [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) k)) [I.IsPrime]
@@ -54,6 +57,8 @@ theorem algebraic_component_degree_le
   have hfac : (0 : ℚ) < m.factorial := by positivity
   exact_mod_cast (div_le_div_iff_of_pos_right hfac).mp hle
 
+/-- If a prime ideal `I` over `k` does not stay prime over a Galois extension `K`, then no minimal
+prime of its extension to `K` is the extension of an ideal defined over `k`. -/
 theorem galois_component_not_defined_over_base
     (k K : Type*) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) k)) [I.IsPrime]

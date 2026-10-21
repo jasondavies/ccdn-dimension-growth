@@ -34,6 +34,9 @@ private theorem exists_integer_linear_normalization_of_le (m n : ℕ) (hmn : m +
   obtain ⟨a, _, hint, hi⟩ := exists_bounded_integer_normalization m k I d hdimdeg
   exact ⟨a, hint, hi⟩
 
+/-- If a prime ideal `I` in `n + 1` variables has Hilbert dimension one (projective dimension
+zero) and degree `d`, its projective zero locus has at most `d ^ (n + 1)` rational points of any
+height. -/
 theorem zero_dimensional_projective_count_le
     {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = 1)
