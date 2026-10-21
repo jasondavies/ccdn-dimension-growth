@@ -39,7 +39,7 @@ theorem plane_finite_count_small_constant_coefficient
   have hBp : B ≤ scalingPrimeRatio * p := by
     have h := (div_lt_iff₀ hA0).mp hlo
     nlinarith
-  exact scaled_plane_finite_count_one_over_degree f hprim hir hd hp hnd z hinj hz
-    hA (hA.trans hB) hhi hBp hbox hC hcount
+  exact scaled_plane_finite_count_one_over_degree f hprim hir hd hp hnd z hinj
+    ⟨hA.trans hB, hz, hbox⟩ hA hhi hBp hC hcount
 
 end CCDN
