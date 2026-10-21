@@ -9,7 +9,6 @@ public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Noether.UniversalPlaneBadWitness
 import CCDN.Algebra.IntegerPolynomialAvoidance
 import CCDN.Auxiliary.UniversalPlaneBadReduction
-import CCDN.Noether.UniversalPlaneWitnessCharZero
 /-! A nonzero bad-prime witness obtained by evaluating the universal
 plane polynomial on a bounded integer grid. -/
 

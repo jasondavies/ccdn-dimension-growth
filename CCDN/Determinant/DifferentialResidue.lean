@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.Derivation.MapCoeffs
-import CCDN.Noether.AlgebraicDifferentialConstants
 /-! Residues of closed rational one-forms at simple polynomial roots.
 The polynomial proof avoids needing a partial-fraction decomposition. -/
 
@@ -19,6 +18,18 @@ open scoped Differential
 lemma polynomial_degree_C_mul_le {K : Type*} [Field K] (a : K) (p : K[X]) :
     (C a * p).degree ≤ p.degree := by
   simpa only [smul_eq_C_mul] using degree_smul_le a p
+
+/-- Coefficientwise differentiation strictly lowers the degree of a monic
+polynomial, since its leading coefficient differentiates to zero. -/
+lemma differential_mapCoeffs_degree_lt {K : Type*} [Field K] [Differential K]
+    {p : K[X]} (hp : p.Monic) : (Differential.mapCoeffs p).degree < p.degree := by
+  rw [degree_eq_natDegree hp.ne_zero, degree_lt_iff_coeff_zero]
+  intro n hn
+  rw [Differential.coeff_mapCoeffs]
+  rcases eq_or_lt_of_le hn with h | h
+  · rw [← h, hp.coeff_natDegree]
+    exact Derivation.map_one_eq_zero _
+  · rw [coeff_eq_zero_of_natDegree_lt h, map_zero]
 
 lemma derivative_differential_mapCoeffs {K : Type*} [Field K] [Differential K]
     (f : K[X]) : (Differential.mapCoeffs f).derivative =
@@ -51,17 +62,6 @@ theorem closed_form_residue_deriv_eq_zero
     linear_combination hde + (aeval c p.derivative) * hrootD -
       (aeval c f.derivative.derivative) * hq
   rw [Derivation.leibniz_div, smul_eq_mul, smul_eq_mul, smul_eq_mul, hn, mul_zero]
-
-/-- Over an algebraic differential extension of F(t), every simple-root
-residue of such a closed form belongs to the algebraically closed base F. -/
-theorem closed_form_residue_mem_constants
-    {F K : Type*} [Field F] [Field K] [Algebra F K] [Differential K]
-    [Differential.ContainConstants F K] (f p q : K[X]) (c : K)
-    (hroot : aeval c f = 0) (hsimple : aeval c f.derivative ≠ 0)
-    (hclosed : Differential.mapCoeffs p * f - p * Differential.mapCoeffs f =
-      q.derivative * f - q * f.derivative) :
-    aeval c p / aeval c f.derivative ∈ (algebraMap F K).range :=
-  mem_range_of_deriv_eq_zero F (closed_form_residue_deriv_eq_zero f p q c hroot hsimple hclosed)
 
 lemma differential_mapCoeffs_map {K L : Type*} [Field K] [Field L]
     [Differential K] [Differential L] [Algebra K L] [DifferentialAlgebra K L]
@@ -117,36 +117,6 @@ theorem closed_form_eq_constant_gradient_of_residue_mem_base
     · exact (degree_sub_le _ _).trans_lt (max_lt hqdeg
         ((polynomial_degree_C_mul_le _ _).trans_lt (differential_mapCoeffs_degree_lt hm)))
   exact ⟨a, hpEq, sub_eq_zero.mp hqzero⟩
-
-/-- The original constant-field version, in particular applicable in
-characteristic zero, follows from the single-residue criterion. -/
-theorem closed_form_eq_constant_gradient
-    {F K L : Type*} [Field F] [Field K] [Field L]
-    [Algebra F K] [Algebra K L] [Algebra F L] [IsScalarTower F K L]
-    [Differential K] [Differential L] [DifferentialAlgebra K L]
-    [Differential.ContainConstants F L]
-    (f p q : K[X]) (hf : Irreducible f) (hm : f.Monic) (c : L)
-    (hc : aeval c f = 0) (hsimple : aeval c f.derivative ≠ 0)
-    (hpdeg : p.degree < f.degree) (hqdeg : q.degree < f.degree)
-    (hclosed : Differential.mapCoeffs p * f - p * Differential.mapCoeffs f =
-      q.derivative * f - q * f.derivative) :
-    ∃ a : F, p = C (algebraMap F K a) * f.derivative ∧
-      q = C (algebraMap F K a) * Differential.mapCoeffs f := by
-  let φ := algebraMap K L
-  have hc' : aeval c (f.map φ) = 0 := by simpa [φ, aeval_def, eval_map] using hc
-  have hs' : aeval c (f.map φ).derivative ≠ 0 := by
-    simpa [φ, derivative_map, aeval_def, eval_map] using hsimple
-  have he' : Differential.mapCoeffs (p.map φ) * f.map φ -
-      p.map φ * Differential.mapCoeffs (f.map φ) =
-      (q.map φ).derivative * f.map φ - q.map φ * (f.map φ).derivative := by
-    dsimp only [φ]
-    simp only [differential_mapCoeffs_map, derivative_map]
-    simpa only [Polynomial.map_sub, Polynomial.map_mul] using congrArg (Polynomial.map φ) hclosed
-  have hres := closed_form_residue_mem_constants (F := F)
-    (f.map φ) (p.map φ) (q.map φ) c hc' hs' he'
-  apply closed_form_eq_constant_gradient_of_residue_mem_base f p q hf hm c hc hsimple hpdeg hqdeg hclosed
-  simpa only [φ, derivative_map, aeval_def, eval₂_map, Algebra.algebraMap_self, RingHom.id_comp]
-    using hres
 
 end
 end CCDN

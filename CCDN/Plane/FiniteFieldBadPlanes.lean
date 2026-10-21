@@ -40,15 +40,16 @@ lemma badPlaneParameters_witness_zero {K σ : Type*} [Field K] {p : ℕ} [CharP 
     (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree)
     (v : BadPlaneParameters f) : eval v.val (universalPlaneBadWitness f rows cols) = 0 := by
   by_contra h
-  have hbase := universalPlaneBadWitness_good_specialization f hpos hchar rows cols (eval v.val) h
+  have hbase := universalPlaneBadWitness_good_specialization f hpos (.of_charP hchar) rows cols
+    (eval v.val) h
   rcases v.property with hdeg | hir
   · exact hdeg hbase.2.1
   · let L := AlgebraicClosure K
     let φ : K →+* L := algebraMap K L
-    have : CharP L p := charP_of_injective_algebraMap φ.injective p
     have hw : (φ.comp (eval v.val)) (universalPlaneBadWitness f rows cols) ≠ 0 :=
       (map_ne_zero_iff φ φ.injective).mpr h
-    have hh := universalPlaneBadWitness_good_specialization f hpos hchar rows cols _ hw
+    have hh := universalPlaneBadWitness_good_specialization f hpos
+      ((CharZeroOrGT.of_charP hchar).map φ) rows cols _ hw
     apply hir
     simpa only [bivariateMap_comp_apply, universalPlaneSection, φ] using hh.2.2
 
@@ -61,7 +62,8 @@ theorem finite_field_bad_plane_parameters_mul_card
     Nat.card (BadPlaneParameters f) * Fintype.card K ≤
       (2 * f.totalDegree ^ 3) * Fintype.card K ^ Fintype.card (PlaneParameters (Option σ)) := by
   classical
-  obtain ⟨rows, cols, _, _, hw, hdeg⟩ := exists_universalPlane_badWitness f hf hpos hchar
+  obtain ⟨rows, cols, _, _, hw, hdeg⟩ := exists_universalPlane_badWitness f hf hpos
+    (.of_charP hchar)
   let W := universalPlaneBadWitness f rows cols
   have hdp : f.totalDegree < p := by nlinarith
   let ψ : BadPlaneParameters f → {v : PlaneParameters (Option σ) → K // eval v W = 0} :=

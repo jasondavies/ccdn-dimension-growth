@@ -6,8 +6,10 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import CCDN.Algebra.CharZeroOrGT
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Determinant.PlaneSingularities
+import CCDN.ForMathlib.MvPolynomialDerivative
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import Mathlib.RingTheory.Nullstellensatz
 
@@ -56,15 +58,14 @@ theorem exists_hypersurface_point_partial_ne_zero
   have hp := pderiv_totalDegree_le f j
   omega
 
-/-- An irreducible hypersurface of positive degree smaller than the
-characteristic has a smooth rational point over the algebraically closed base. -/
+/-- An irreducible hypersurface of positive degree smaller than the characteristic (or in
+characteristic zero) has a smooth rational point over the algebraically closed base. -/
 theorem exists_smooth_hypersurface_point_of_degree_lt_char
     {K σ : Type*} [Field K] [IsAlgClosed K] [Fintype σ]
-    {p : ℕ} [CharP K p]
     (f : MvPolynomial σ K) (hf : Irreducible f)
-    (hpos : 0 < f.totalDegree) (hchar : f.totalDegree < p) :
+    (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K f.totalDegree) :
     ∃ (z : σ → K) (j : σ), eval z f = 0 ∧ eval z (pderiv j f) ≠ 0 := by
-  obtain ⟨j, hj⟩ := exists_pderiv_ne_zero_of_degree_lt_char (p := p) f hpos hchar
+  obtain ⟨j, hj⟩ := exists_pderiv_ne_zero hpos hchar
   obtain ⟨z, hz, hderiv⟩ := exists_hypersurface_point_partial_ne_zero f hf hpos j hj
   exact ⟨z, j, hz, hderiv⟩
 

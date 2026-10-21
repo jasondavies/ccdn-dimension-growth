@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.UniversalPlaneFamily
 public import CCDN.Auxiliary.HypersurfacePositioning
 public import CCDN.Determinant.GenericPlaneSmoothness
@@ -70,19 +71,19 @@ lemma normalized_genericPlane_universal_specialization
   simp [genericPlaneMap, bivariatePolynomialEquiv_C]
 
 /-- Every irreducible positive-degree hypersurface over an algebraically closed
-field of characteristic >2*d^2 has a nonzero minor in the UNIVERSAL affine-plane
+field of characteristic zero or >2*d^2 has a nonzero minor in the UNIVERSAL affine-plane
 parameter ring, not merely in a family through a fixed line. -/
 theorem exists_universalPlane_minor
     {K σ : Type*} [Field K] [IsAlgClosed K] [Fintype σ]
-    {p : ℕ} [CharP K p] (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
-    (hpos : 0 < f.totalDegree) (hchar : 2 * f.totalDegree ^ 2 < p) :
+    (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
+    (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K (2 * f.totalDegree ^ 2)) :
     ∃ (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
       (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree),
       Function.Injective rows ∧ Function.Injective cols ∧
       ((closedFormCoefficientMatrix f.totalDegree
         (universalPlanePolynomial f)).submatrix rows cols).det ≠ 0 := by
   obtain ⟨a, b, hb, _, rows, cols, hr, hc, hdet⟩ :=
-    exists_positioned_genericPlane_minor (p := p) f hf hpos hchar
+    exists_positioned_genericPlane_minor f hf hpos hchar
   let R := MvPolynomial σ K
   let F := FractionRing R
   let φ : R →+* F := algebraMap R F

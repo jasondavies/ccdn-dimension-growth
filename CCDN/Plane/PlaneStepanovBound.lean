@@ -14,6 +14,8 @@ import CCDN.Plane.Bezout
 import CCDN.Plane.PlaneFrobeniusSystem
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.LinearAlgebra.Basis.VectorSpace
+import CCDN.Algebra.CharZeroOrGT
+import CCDN.ForMathlib.MvPolynomialDerivative
 /-! The Stepanov point bound with an explicit finite-dimensional inequality.
 The polynomial bases, auxiliary coefficients, formal branches and multiplicity
 argument are explicit, given a numerical choice of degrees. -/
@@ -75,7 +77,7 @@ theorem plane_stepanov_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
     Fintype.card ι * N ≤ f.totalDegree * (D + p * A) +
       f.totalDegree * (f.totalDegree - 1) * N := by
   classical
-  obtain ⟨k, hk⟩ := exists_pderiv_ne_zero_of_degree_lt_char f hpos hchar
+  obtain ⟨k, hk⟩ := exists_pderiv_ne_zero hpos (CharZeroOrGT.of_charP hchar)
   let P (i : ι) := eval (z i) (pderiv k f) = 0
   have hgood := plane_stepanov_smooth_bound p f hf
     (fun i : {i // ¬ P i} => z i.val) (hz.comp Subtype.val_injective)

@@ -7,10 +7,10 @@ module
 
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.PDeriv
-import CCDN.Auxiliary.HypersurfacePositioningCharZero
 import CCDN.Determinant.PlaneSingularities
 import CCDN.Determinant.SingularDeterminant
 import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
+import CCDN.ForMathlib.MvPolynomialDerivative
 /-! The singular locus of an irreducible rational hypersurface has a
 coefficient-uniform codimension-two integer point bound. A nonzero partial
 derivative gives the proper intersection used in the count. -/
@@ -30,7 +30,7 @@ theorem exists_proper_partial_derivative {K σ : Type*}
     ∃ j, pderiv j f ≠ 0 ∧ ¬ f ∣ pderiv j f ∧
       (pderiv j f).totalDegree < f.totalDegree := by
   have hd := irreducible_mvPolynomial_totalDegree_pos hir
-  obtain ⟨j, hj⟩ := exists_pderiv_ne_zero_of_charZero f hd
+  obtain ⟨j, hj⟩ := exists_pderiv_ne_zero hd fun n hn _ ↦ Nat.cast_ne_zero.mpr hn.ne'
   have hdeg : (pderiv j f).totalDegree < f.totalDegree := by
     have := pderiv_totalDegree_le f j
     omega

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.AffineLineLeading
+public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.UniversalPlaneFamily
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Auxiliary.HypersurfacePositioning
@@ -63,26 +64,34 @@ lemma universalPlaneLeading_map {K L σ : Type*} [Field K] [Field L]
     rw [support_map_of_injective _ φ.injective]
   simp only [universalPlaneLeading, ht, universalPlanePolynomial_map, bivariateMap_coeff]
 
+/-- Over an algebraically closed field, irreducibility and the characteristic bound
+suffice for the leading polynomial to be nonzero. -/
+theorem universalPlaneLeading_ne_zero_of_irreducible
+    {K σ : Type*} [Field K] [IsAlgClosed K] [Fintype σ]
+    (f : MvPolynomial (Option σ) K) (hf : Irreducible f) (hpos : 0 < f.totalDegree)
+    (hchar : CharZeroOrGT K f.totalDegree) :
+    universalPlaneLeading f ≠ 0 := by
+  obtain ⟨a, b, _, hdir, _⟩ := exists_monic_smooth_hypersurface_coordinates f hf hpos hchar
+  intro hz
+  apply hdir
+  rw [← universalPlaneLeading_specialize a b 0, hz, map_zero]
+
 /-- Geometric irreducibility and the characteristic bound suffice for the
 leading polynomial to be nonzero. -/
 theorem universalPlaneLeading_ne_zero
-    {K σ : Type*} [Field K] [Fintype σ] {p : ℕ} [CharP K p]
+    {K σ : Type*} [Field K] [Fintype σ]
     (f : MvPolynomial (Option σ) K)
     (hf : Irreducible (MvPolynomial.map (algebraMap K (AlgebraicClosure K)) f))
-    (hpos : 0 < f.totalDegree) (hchar : 2 * f.totalDegree ^ 2 < p) :
+    (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K f.totalDegree) :
     universalPlaneLeading f ≠ 0 := by
-  let L := AlgebraicClosure K
-  let φ : K →+* L := algebraMap K L
-  have : CharP L p := charP_of_injective_algebraMap φ.injective p
+  let φ : K →+* AlgebraicClosure K := algebraMap K (AlgebraicClosure K)
   have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree := by
     unfold totalDegree
     rw [support_map_of_injective _ φ.injective]
-  have hdp : (MvPolynomial.map φ f).totalDegree < p := by rw [ht]; nlinarith
-  obtain ⟨a, b, _, hdir, _⟩ := exists_monic_smooth_hypersurface_coordinates
-    (MvPolynomial.map φ f) hf (ht ▸ hpos) hdp
-  intro hz
-  apply hdir
-  rw [← universalPlaneLeading_specialize a b 0, universalPlaneLeading_map, hz, map_zero, map_zero]
+  have hn := universalPlaneLeading_ne_zero_of_irreducible (MvPolynomial.map φ f) hf (ht ▸ hpos)
+    (ht ▸ hchar.map φ)
+  rw [universalPlaneLeading_map] at hn
+  exact fun hz ↦ hn (by rw [hz, map_zero])
 
 end
 end CCDN

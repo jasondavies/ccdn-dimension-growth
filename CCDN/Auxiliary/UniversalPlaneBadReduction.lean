@@ -9,7 +9,6 @@ public import CCDN.Noether.UniversalPlaneBadWitness
 public import Mathlib.Algebra.Field.ZMod
 import CCDN.Algebra.FullDegreeSectionIrreducibility
 import CCDN.Noether.UniversalPlaneWitness
-import CCDN.Noether.UniversalPlaneWitnessCharZero
 import Mathlib.Algebra.MvPolynomial.Funext
 
 /-! All coefficients of the universal witness vanish at a degree-dropping or
@@ -37,7 +36,7 @@ theorem universalPlaneBadWitness_map_eq_zero_of_bad
   rw [map_zero]
   by_contra h
   let ψ : MvPolynomial (PlaneParameters σ) R →+* L := (eval v).comp (MvPolynomial.map φ)
-  have hg := universalPlaneBadWitness_good_specialization f hpos hchar rows cols ψ h
+  have hg := universalPlaneBadWitness_good_specialization f hpos (.of_charP hchar) rows cols ψ h
   have he : universalPlaneSection (MvPolynomial.map φ f) v =
       bivariateMap ψ (universalPlanePolynomial f) := by
     rw [universalPlaneSection, universalPlanePolynomial_map, ← bivariateMap_comp_apply]

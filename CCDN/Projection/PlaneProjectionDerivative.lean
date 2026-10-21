@@ -9,6 +9,7 @@ public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.RingTheory.Algebraic.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import CCDN.Determinant.PlaneSingularities
+import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Projection.LinearProjectionFiltration
 import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 /-! In characteristic zero, a plane relation with a transcendental first
@@ -20,27 +21,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma pderiv_ne_zero_of_mem_vars_charZero {K σ : Type*} [Field K] [CharZero K]
-    (f : MvPolynomial σ K) (i : σ) (hi : i ∈ f.vars) : pderiv i f ≠ 0 := by
-  classical
-  obtain ⟨m, hm, hmi⟩ := (mem_vars_iff_mem_support i).mp hi
-  have hmpos : 0 < m i := Nat.pos_of_ne_zero (Finsupp.mem_support_iff.mp hmi)
-  let u := m - Finsupp.single i 1
-  have hui : u i + 1 = m i := by simp only [u, Finsupp.tsub_apply, Finsupp.single_eq_same]; omega
-  have hu : u + Finsupp.single i 1 = m := by
-    apply tsub_add_cancel_of_le
-    intro j
-    by_cases hji : j = i
-    · subst j; simp only [Finsupp.single_eq_same]; omega
-    · simp [Finsupp.single_eq_of_ne hji]
-  intro hz
-  have hc := congrArg (fun g : MvPolynomial σ K => g.coeff u) hz
-  rw [coeff_pderiv, hu] at hc
-  change f.coeff m * ((u i : K) + 1) = 0 at hc
-  have he : (u i : K) + 1 = (m i : K) := by exact_mod_cast hui
-  rw [he] at hc
-  exact (mul_ne_zero (mem_support_iff.mp hm) (Nat.cast_ne_zero.mpr (by omega))) hc
-
 /-- A nonzero relation cannot omit the coordinate complementary to a
 transcendental coordinate. -/
 theorem plane_relation_pderiv_ne_zero {K A : Type*} [Field K] [CharZero K]
@@ -49,8 +29,8 @@ theorem plane_relation_pderiv_ne_zero {K A : Type*} [Field K] [CharZero K]
     (j k : Fin 2) (hjk : j ≠ k) (hj : Transcendental K (ψ (X j))) :
     pderiv k f ≠ 0 := by
   classical
-  apply pderiv_ne_zero_of_mem_vars_charZero
-  by_contra hk
+  intro hz
+  have hk := notMem_vars_of_pderiv_eq_zero hz fun n hn _ ↦ Nat.cast_ne_zero.mpr hn.ne'
   have hvars : (f.vars : Set (Fin 2)) ⊆ Set.range (fun _ : Unit => j) := by
     intro t ht
     have htk : t ≠ k := fun h => hk (h ▸ ht)

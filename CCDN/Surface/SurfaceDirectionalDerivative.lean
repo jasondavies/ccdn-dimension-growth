@@ -12,6 +12,7 @@ public import CCDN.Curve.Curve
 public import CCDN.Plane.IntegralAffineLine
 import CCDN.Algebra.BinaryHomogeneousIrreducibility
 import CCDN.Determinant.PlaneSingularities
+import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Plane.AffinePlaneRestriction
 import CCDN.Surface.SurfaceLineDirections
 import CCDN.Surface.TopFormIrreducibility
@@ -65,32 +66,6 @@ lemma directionalDerivative_homogeneousComponent {R σ : Type*} [CommRing R] [Fi
   simp only [directionalDerivative, map_sum, homogeneousComponent_C_mul,
     pderiv_homogeneousComponent _ _ hd]
 
-lemma notMem_vars_of_pderiv_eq_zero {K σ : Type*} [Field K] [CharZero K]
-    (f : MvPolynomial σ K) (i : σ) (hz : pderiv i f = 0) : i ∉ f.vars := by
-  classical
-  intro hi
-  obtain ⟨m, hm, hmi⟩ := (mem_vars_iff_mem_support i).mp hi
-  have hpos : 0 < m i := Nat.pos_of_ne_zero (Finsupp.mem_support_iff.mp hmi)
-  let u := m - Finsupp.single i 1
-  have hui : u i + 1 = m i := by
-    simp only [u, Finsupp.tsub_apply, Finsupp.single_eq_same]
-    omega
-  have hu : u + Finsupp.single i 1 = m := by
-    apply tsub_add_cancel_of_le
-    intro j
-    by_cases hji : j = i
-    · subst j
-      simp only [Finsupp.single_eq_same]
-      omega
-    · simp [Finsupp.single_eq_of_ne hji]
-  have hc := congrArg (fun g : MvPolynomial σ K => g.coeff u) hz
-  rw [coeff_pderiv, hu] at hc
-  have he : (u i : K) + 1 = (m i : K) := by
-    exact_mod_cast hui
-  change f.coeff m * ((u i : K) + 1) = 0 at hc
-  rw [he] at hc
-  exact (mul_ne_zero (mem_support_iff.mp hm) (Nat.cast_ne_zero.mpr (by omega))) hc
-
 lemma irreducible_of_rename_succ {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin n) K) (hf : Irreducible (rename Fin.succ f)) :
     Irreducible f := by
@@ -114,7 +89,7 @@ lemma ternary_homogeneous_irreducible_pderiv_zero_ne_zero
     (f : MvPolynomial (Fin 3) K) (hf : f.IsHomogeneous d) (hir : Irreducible f)
     (hd : 2 ≤ d) : pderiv 0 f ≠ 0 := by
   intro hz
-  have hv := notMem_vars_of_pderiv_eq_zero f 0 hz
+  have hv := notMem_vars_of_pderiv_eq_zero hz fun n hn _ ↦ Nat.cast_ne_zero.mpr hn.ne'
   have hs : ↑f.vars ⊆ Set.range (Fin.succ : Fin 2 → Fin 3) := by
     intro i hi
     revert hi

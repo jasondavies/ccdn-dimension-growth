@@ -13,6 +13,8 @@ import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.SimpleRing.Principal
+import CCDN.Algebra.CharZeroOrGT
+import CCDN.ForMathlib.MvPolynomialDerivative
 /-! The singular points of an irreducible hypersurface satisfy a
 coefficient-uniform codimension-two finite-field bound. -/
 
@@ -29,7 +31,7 @@ theorem hypersurface_singular_points_card_le {ι : Type*} [Fintype ι] [Decidabl
     (z : ι → Fin (n + 2) → ZMod p) (hz : Function.Injective z)
     (hzf : ∀ i, eval (z i) f = 0) (hzsing : ∀ i j, eval (z i) (pderiv j f) = 0) :
     Fintype.card ι ≤ (n + 4) ^ n * f.totalDegree * (f.totalDegree - 1) * p ^ n := by
-  obtain ⟨j, hj⟩ := exists_pderiv_ne_zero_of_degree_lt_char (p := p) f hpos hchar
+  obtain ⟨j, hj⟩ := exists_pderiv_ne_zero hpos (CharZeroOrGT.of_charP hchar)
   have hdeg := pderiv_totalDegree_le f j
   have hnd : ¬ f ∣ pderiv j f := by
     intro hd

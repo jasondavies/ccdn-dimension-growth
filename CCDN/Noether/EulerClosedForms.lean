@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.BivariateCoefficientMatrix
+import CCDN.Noether.BivariateTotalDegree
+import CCDN.Noether.ClosedFormGradient
 import CCDN.Noether.ClosedFormScaling
 /-! The Euler constraint removes the gradient kernel from the bivariate
 closed-form criterion. This supplies the injective operator needed for
@@ -50,7 +52,16 @@ theorem bivariate_euler_closed_form_eq_zero
     change (bivariateCoefficientDerivative F) p * f - p * (bivariateCoefficientDerivative F) f -
       q.derivative * f + q * f.derivative = 0 at hclosed
     linear_combination hclosed
-  obtain ⟨a, hp, hq⟩ := bivariate_closed_form_eq_gradient f p q hf hm hpdeg hqdeg he
+  have hnat (r : F[X][X]) (hr : r.degree < f.degree) : r.natDegree < f.natDegree := by
+    by_cases h0 : r = 0
+    · simpa only [h0, natDegree_zero] using hd
+    · exact natDegree_lt_natDegree h0 hr
+  let D := max (bivariateTotalDegree f) (bivariateTotalDegree p)
+  obtain ⟨a, hp, hq⟩ := bivariate_closed_form_eq_gradient f p q hf hm (hnat p hpdeg)
+    (hnat q hqdeg) D
+    (fun i ↦ (bivariate_coefficient_natDegree_le_totalDegree f i).trans (le_max_left _ _))
+    (fun i ↦ (bivariate_coefficient_natDegree_le_totalDegree p i).trans (le_max_right _ _))
+    (.of_charZero _) (.of_charZero _) he
   have heq : (p,q) = a • (f.derivative, (bivariateCoefficientDerivative F) f) := by
     apply Prod.ext
     · simpa only [Prod.smul_fst, bivariate_smul_eq_constant_mul] using hp

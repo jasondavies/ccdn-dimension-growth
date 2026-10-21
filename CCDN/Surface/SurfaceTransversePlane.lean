@@ -10,7 +10,7 @@ public import Mathlib.Tactic.Continuity
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Determinant.PlaneMultiplicity
-import CCDN.Noether.UniversalPlaneGoodSpecializationCharZero
+import CCDN.Noether.UniversalPlaneIntegerSpecialization
 import CCDN.Projection.PrimitiveNormalization
 import CCDN.Projection.ShearNormalization
 

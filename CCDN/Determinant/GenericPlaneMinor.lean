@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Determinant.GenericPlaneSmoothness
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneMultiplicity
@@ -28,14 +29,14 @@ lemma genericPlaneMap_totalDegree_le {K F σ : Type*} [Field K] [Field F]
   | none => simp
   | some i => exact (totalDegree_mul _ _).trans (by simp)
 
-/-- In characteristic greater than 2*d^2, a positioned irreducible hypersurface
+/-- In characteristic zero or greater than 2*d^2, a positioned irreducible hypersurface
 with a smooth origin supplies a nonzero minor polynomial in its plane slopes. -/
 theorem exists_genericPlane_minor
-    {K σ : Type*} [Field K] {p : ℕ} [CharP K p]
+    {K σ : Type*} [Field K]
     (d : ℕ) (hd : 0 < d) (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
     (hm : (optionEquivLeft K σ f).Monic)
     (hdeg : (optionEquivLeft K σ f).natDegree = d)
-    (htotal : f.totalDegree ≤ d) (hchar : 2 * d ^ 2 < p)
+    (htotal : f.totalDegree ≤ d) (hchar : CharZeroOrGT K (2 * d ^ 2))
     (hz : eval (0 : Option σ → K) f = 0)
     (hs : eval (0 : Option σ → K) (pderiv none f) ≠ 0) :
     ∃ (a : Fin (2 * d ^ 2 - 1) → ℕ × ℕ)
@@ -46,7 +47,6 @@ theorem exists_genericPlane_minor
   let F := FractionRing R
   let φ : R →+* F := algebraMap R F
   let g := genericPlaneMap K F σ f
-  have : CharP F p := charP_of_injective_algebraMap (algebraMap K F).injective p
   have hx : 0 < (optionEquivLeft K σ f).natDegree := hdeg ▸ hd
   have hpos : 0 < f.totalDegree := by
     rw [natDegree_optionEquivLeft] at hx
@@ -65,7 +65,7 @@ theorem exists_genericPlane_minor
       (genericPlanePolynomial_monic f hm), genericPlanePolynomial_natDegree f hm, hdeg]
   have hgt : g.totalDegree ≤ d := (genericPlaneMap_totalDegree_le f).trans htotal
   obtain ⟨a, c, ha, hc, hdet⟩ := exists_closedForm_minor_of_smooth_plane_point
-    (p := p) d hd g hgi (0 : Fin 2 → F) 0 hgz hgs hgm hgd hgt hchar
+    d g hgi (0 : Fin 2 → F) 0 hgz hgs hgm hgd hgt (hchar.map (algebraMap K F))
   refine ⟨a, c, ha, hc, ?_⟩
   intro he
   apply hdet

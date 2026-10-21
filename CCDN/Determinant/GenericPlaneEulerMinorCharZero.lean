@@ -7,7 +7,6 @@ module
 
 public import CCDN.Auxiliary.HypersurfacePositioning
 public import CCDN.Noether.EulerPairBasis
-import CCDN.Auxiliary.HypersurfacePositioningCharZero
 import CCDN.Determinant.GenericPlaneSmoothness
 import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
 import CCDN.Noether.EulerPairBasisValues
@@ -101,7 +100,7 @@ theorem exists_positioned_genericPlane_euler_minor_charZero
         ((eulerClosedFormCoefficientMatrix k
           (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).submatrix rows cols).det ≠ 0 := by
   obtain ⟨a, b, hb, hdir, hg, hm, hdeg, _, hz, hs⟩ :=
-    exists_monic_smooth_hypersurface_coordinates_charZero f hf (by omega)
+    exists_monic_smooth_hypersurface_coordinates f hf (by omega) (.of_charZero _)
   rw [hd] at hdeg
   exact ⟨a, b, hb, hdir, exists_genericPlane_euler_minor_charZero k
     (normalizedHypersurfaceCoordinates a b hb f) hg hm hdeg hz hs⟩

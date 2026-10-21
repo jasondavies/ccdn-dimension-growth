@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.UniversalPlaneFamily
+public import CCDN.Algebra.CharZeroOrGT
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.UniversalPlaneMinor
@@ -44,10 +45,10 @@ lemma universalPlanePolynomial_map {K L σ : Type*} [CommRing K] [CommRing L]
 in the full affine-plane parameter ring, of degree at most (2*d^2-1)*d.
 There are no smoothness or positioning hypotheses on the input equation. -/
 theorem exists_universalPlane_minor_degree
-    {K σ : Type*} [Field K] [Fintype σ] {p : ℕ} [CharP K p]
+    {K σ : Type*} [Field K] [Fintype σ]
     (f : MvPolynomial (Option σ) K)
     (hf : Irreducible (MvPolynomial.map (algebraMap K (AlgebraicClosure K)) f))
-    (hpos : 0 < f.totalDegree) (hchar : 2 * f.totalDegree ^ 2 < p) :
+    (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K (2 * f.totalDegree ^ 2)) :
     ∃ (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
       (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree),
       Function.Injective rows ∧ Function.Injective cols ∧
@@ -58,12 +59,11 @@ theorem exists_universalPlane_minor_degree
           (2 * f.totalDegree ^ 2 - 1) * f.totalDegree := by
   let L := AlgebraicClosure K
   let φ : K →+* L := algebraMap K L
-  have : CharP L p := charP_of_injective_algebraMap φ.injective p
   have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree := by
     unfold totalDegree
     rw [support_map_of_injective _ φ.injective]
   have hex := exists_universalPlane_minor
-    (MvPolynomial.map φ f) hf (ht ▸ hpos) (ht ▸ hchar)
+    (MvPolynomial.map φ f) hf (ht ▸ hpos) (ht ▸ hchar.map φ)
   rw [ht] at hex
   obtain ⟨rows, cols, hr, hc, hdet⟩ := hex
   refine ⟨rows, cols, hr, hc, ?_, ?_⟩

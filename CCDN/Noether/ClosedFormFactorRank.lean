@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateTotalDegree
 import CCDN.ForMathlib.Polynomial
 import CCDN.Noether.BivariateFactorForms
@@ -44,7 +45,7 @@ theorem closedForm_rank_drop_of_extra_form {F : Type*} [Field F]
 and hence the required matrix rank drop. -/
 theorem closedForm_rank_drop_of_coprime_factors
     {F : Type*} [Field F] (d : ℕ) (hd : 0 < d)
-    (hchar : ∀ n : ℕ, 0 < n → n ≤ d → (n : F) ≠ 0)
+    (hchar : CharZeroOrGT F d)
     (g h : F[X][X]) (hg : Irreducible g) (hgm : g.Monic)
     (hh : h ≠ 0) (hhpos : 0 < h.natDegree)
     (hcop : IsCoprime (g.map (algebraMap F[X] (RatFunc F)))
@@ -86,7 +87,7 @@ theorem closedForm_rank_drop_of_coprime_factors
 force rank drop; the whole equation need not be squarefree. -/
 theorem closedForm_rank_drop_of_repeated_factor
     {F : Type*} [Field F] (d k : ℕ) (hd : 0 < d)
-    (hchar : ∀ n : ℕ, 0 < n → n ≤ d → (n : F) ≠ 0)
+    (hchar : CharZeroOrGT F d)
     (g h : F[X][X]) (hg : Irreducible g) (hgm : g.Monic) (hh : h ≠ 0)
     (hcop : IsCoprime (g.map (algebraMap F[X] (RatFunc F)))
       (h.map (algebraMap F[X] (RatFunc F))))
