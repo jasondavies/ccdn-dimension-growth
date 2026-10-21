@@ -23,7 +23,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem curve_count_le_degree_mul_integer_interval
+private theorem curve_count_le_degree_mul_integer_interval
     (I : Ideal (CoordinatePolynomial 3)) [I.IsPrime]
     (hheight : I.height = 2) {d : ℕ} (hdegree : HasAffineCurveDegree I d)
     (B : ℝ) :

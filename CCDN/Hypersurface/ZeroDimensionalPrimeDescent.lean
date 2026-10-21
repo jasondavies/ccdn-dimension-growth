@@ -30,7 +30,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem prime_ideal_eq_of_le_of_hilbert_dimension_zero
+private theorem prime_ideal_eq_of_le_of_hilbert_dimension_zero
     {K : Type*} [Field K] {n : ℕ}
     (I J : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hdim : (filteredHilbertPolynomial I).natDegree = 0)
@@ -73,7 +73,7 @@ theorem zero_dimensional_prime_eq_eval_kernel
   prime_ideal_eq_of_le_of_hilbert_dimension_zero I _ hdim
     (RingHom.ker_ne_top _) hx
 
-theorem zero_dimensional_prime_with_base_point_descends
+private theorem zero_dimensional_prime_with_base_point_descends
     (k K : Type*) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hdim : (filteredHilbertPolynomial I).natDegree = 0)

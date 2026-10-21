@@ -64,7 +64,7 @@ theorem proper_intersection_count_le_box {n d : ℕ}
 extension satisfy affine dimension growth with quadratic degree
 dependence. The dimension-only factor here is not asserted to be the
 sharp constant one in CCDN Corollary 4.1.4. -/
-theorem nonabsolute_hypersurface_count_le {K : Type*}
+private theorem nonabsolute_hypersurface_count_le {K : Type*}
     [Field K] [Algebra ℚ K] {n : ℕ}
     (f : CoordinatePolynomial (n + 2)) (hir : Irreducible f)
     (hred : ¬ Irreducible (map (algebraMap ℚ K) f))

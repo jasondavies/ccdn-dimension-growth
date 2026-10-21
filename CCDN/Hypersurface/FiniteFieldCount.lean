@@ -42,7 +42,7 @@ lemma hypersurface_bad_section_error {d p : ℝ} (hd : 1 ≤ d) (hp : stepanovTh
 
 /-- The unsimplified incidence estimate implies the desired sharp affine
 hypersurface estimate in every ambient dimension at least three. -/
-theorem hypersurface_count_of_incidence_bound (n : ℕ) {d p N : ℝ}
+private theorem hypersurface_count_of_incidence_bound (n : ℕ) {d p N : ℝ}
     (hd : 1 ≤ d) (hp : stepanovThreshold d < p)
     (hcount : N * p ^ (2 * n + 8) ≤
       p ^ (3 * n + 9) * (p + planeResidueConstant * d ^ 2 * Real.sqrt p) +
@@ -77,7 +77,7 @@ open MvPolynomial
 
 /-- In n+3 ambient coordinates, the leading term is p^(n+2), with an explicit
 absolute square-degree square-root error. -/
-theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
+private theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Option (Fin (n + 2))) (ZMod p))
     (hf : Irreducible (MvPolynomial.map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f))
     (hsize : stepanovThreshold (f.totalDegree : ℝ) < p) :
@@ -121,7 +121,7 @@ theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
       ring
 
 /-- Renaming coordinates preserves the number of affine zeros. -/
-lemma polynomial_zero_card_renameEquiv {K σ τ : Type*} [CommRing K]
+private lemma polynomial_zero_card_renameEquiv {K σ τ : Type*} [CommRing K]
     (e : σ ≃ τ) (f : MvPolynomial σ K) :
     Nat.card {z : τ → K // eval z (rename e f) = 0} =
       Nat.card {z : σ → K // eval z f = 0} := by

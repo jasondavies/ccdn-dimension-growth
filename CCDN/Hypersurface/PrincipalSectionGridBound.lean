@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem principal_section_hilbert_dimension
+private theorem principal_section_hilbert_dimension
     {K : Type*} [Field K] [Infinite K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
@@ -35,7 +35,7 @@ theorem principal_section_hilbert_dimension
   exact filteredHilbertPolynomial_natDegree_le P _ hP.isPrime.ne_top
     (filteredCoordinateSpace_finrank_antitone_ideal _ _ hP.le)
 
-theorem principal_section_degree_budget
+private theorem principal_section_degree_budget
     {K : Type*} [Field K] [Infinite K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)

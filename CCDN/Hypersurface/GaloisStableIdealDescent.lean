@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem standard_representative_fixed_by_coefficientEquiv
+private theorem standard_representative_fixed_by_coefficientEquiv
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (e : K ≃+* K)
     (hI : I.map (mapEquiv (Fin n) e) = I)

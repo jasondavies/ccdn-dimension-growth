@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma graphHyperplaneRestriction_surjective {K σ : Type*}
+private lemma graphHyperplaneRestriction_surjective {K σ : Type*}
     [CommRing K] [Fintype σ] (a : σ → K) :
     Function.Surjective (graphHyperplaneRestriction a) := by
   have he : (graphHyperplaneRestriction a).comp (rename (R := K) some) =
@@ -28,7 +28,7 @@ lemma graphHyperplaneRestriction_surjective {K σ : Type*}
   intro f
   exact ⟨rename some f, AlgHom.congr_fun he f⟩
 
-lemma graphHyperplaneRestriction_ker {K σ : Type*}
+private lemma graphHyperplaneRestriction_ker {K σ : Type*}
     [CommRing K] [Fintype σ] (a : σ → K) :
     RingHom.ker (graphHyperplaneRestriction a).toRingHom =
       Ideal.span {X none - ∑ j, C (a j) * X (some j)} := by
@@ -48,7 +48,7 @@ lemma graphHyperplaneRestriction_ker {K σ : Type*}
   congr 2
   simp [L, map_sum, map_mul]
 
-lemma graphHyperplaneRestriction_comap_span {K σ : Type*}
+private lemma graphHyperplaneRestriction_comap_span {K σ : Type*}
     [CommRing K] [Fintype σ] (a : σ → K) (f : MvPolynomial (Option σ) K) :
     (Ideal.span {graphHyperplaneRestriction a f}).comap
         (graphHyperplaneRestriction a).toRingHom =
@@ -59,7 +59,7 @@ lemma graphHyperplaneRestriction_comap_span {K σ : Type*}
     graphHyperplaneRestriction_ker, ← Ideal.span_union, Set.singleton_union] at he
   exact he
 
-lemma homogeneous_linear_span_isPrime {K σ : Type*} [Field K]
+private lemma homogeneous_linear_span_isPrime {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (hf : f.IsHomogeneous 1) :
     (Ideal.span {f}).IsPrime := by
   by_cases hf0 : f = 0
@@ -76,7 +76,7 @@ lemma homogeneous_linear_span_isPrime {K σ : Type*} [Field K]
       simpa using hc m)
     exact (Ideal.span_singleton_prime hf0).mpr hir.prime
 
-lemma linearForm_option_graph {K σ : Type*}
+private lemma linearForm_option_graph {K σ : Type*}
     [Field K] [Fintype σ] (A : Option σ → K) (hA : A none ≠ 0) :
     linearForm A = C (A none) *
       (X none - ∑ j, C (-A (some j) / A none) * X (some j)) := by
@@ -102,7 +102,7 @@ lemma hyperplaneSectionIdeal_graph {K σ : Type*}
     Ideal.span_insert, Ideal.span_insert,
     Ideal.span_singleton_mul_left_unit ((isUnit_iff_ne_zero.mpr hA).map C)]
 
-lemma homogeneous_linear_hyperplane_section_isPrime_of_pivot {K σ : Type*}
+private lemma homogeneous_linear_hyperplane_section_isPrime_of_pivot {K σ : Type*}
     [Field K] [Fintype σ] (A : Option σ → K) (hA : A none ≠ 0)
     (f : MvPolynomial (Option σ) K) (hf : f.IsHomogeneous 1) :
     (Ideal.span {f, linearForm A}).IsPrime := by

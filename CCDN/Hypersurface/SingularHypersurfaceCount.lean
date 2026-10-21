@@ -25,7 +25,7 @@ def singularHypersurfaceLocus {n : ℕ} (f : MvPolynomial (Fin n) ℚ) :
     Set (RatPoint n) :=
   {x | eval x f = 0 ∧ ∀ j, eval x (pderiv j f) = 0}
 
-theorem exists_proper_partial_derivative {K σ : Type*}
+private theorem exists_proper_partial_derivative {K σ : Type*}
     [Field K] [CharZero K] [Fintype σ]
     (f : MvPolynomial σ K) (hir : Irreducible f) :
     ∃ j, pderiv j f ≠ 0 ∧ ¬ f ∣ pderiv j f ∧
@@ -37,7 +37,7 @@ theorem exists_proper_partial_derivative {K σ : Type*}
     omega
   exact ⟨j, hj, not_dvd_pderiv_of_pderiv_ne_zero hir.ne_zero hj, hdeg⟩
 
-theorem singular_hypersurface_count_le {n : ℕ}
+private theorem singular_hypersurface_count_le {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℚ) (hir : Irreducible f)
     {B : ℝ} (hB : 0 ≤ B) :
     (count (singularHypersurfaceLocus f) B : ℝ) ≤

@@ -32,7 +32,7 @@ noncomputable section
 open MvPolynomial
 
 /-- Height-preserving comparison with the affine cone, for every real radius. -/
-theorem projective_count_le_affine_cone_count {n d : ℕ}
+private theorem projective_count_le_affine_cone_count {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℚ) (hf : f.IsHomogeneous d) (B : ℝ) :
     projectiveCount (projectiveZeroLocus f) B ≤ count (zeroLocus f) B := by
   classical
@@ -55,7 +55,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem nonabsolute_projective_hypersurface_dimension_growth {K : Type*}
+private theorem nonabsolute_projective_hypersurface_dimension_growth {K : Type*}
     [Field K] [Algebra ℚ K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℚ)
     (hhom : f.IsHomogeneous f.totalDegree) (hir : Irreducible f)
@@ -68,7 +68,7 @@ theorem nonabsolute_projective_hypersurface_dimension_growth {K : Type*}
 
 /-- The affine bound on the cone gives the projective hypersurface bound with the same
 degree exponent, provided the exponent is at least two. -/
-theorem RationalAffineHypersurfaceGrowth.projective {n e : ℕ}
+private theorem RationalAffineHypersurfaceGrowth.projective {n e : ℕ}
     (h : RationalAffineHypersurfaceGrowth n e) (he : 2 ≤ e) :
     ProjectiveHypersurfaceGrowth n e := by
   obtain ⟨C, hC, hbound⟩ := h

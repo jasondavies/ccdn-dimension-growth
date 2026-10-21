@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma exists_good_hyperplane_double_option {n : ℕ}
+private lemma exists_good_hyperplane_double_option {n : ℕ}
     (f : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ)
     (d : ℕ) (hd : 2 ≤ d) (hf : f.IsHomogeneous d)
     (hir : AbsolutelyIrreducible f) :

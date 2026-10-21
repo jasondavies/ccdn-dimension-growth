@@ -21,7 +21,7 @@ def optionCoordinateShift {K : Type*} [CommRing K] {n : ℕ} (c : K) :
     MvPolynomial (Option (Fin n)) K →ₐ[K] MvPolynomial (Option (Fin n)) K :=
   aeval (fun i => Option.elim i (X none + C c) (fun j => X (some j)))
 
-lemma optionCoordinateShift_rename {K : Type*} [CommRing K] {n : ℕ}
+private lemma optionCoordinateShift_rename {K : Type*} [CommRing K] {n : ℕ}
     (c : K) (f : MvPolynomial (Option (Fin n)) K) :
     rename (finSuccEquiv n).symm (optionCoordinateShift c f) =
       affineTranslation K (Fin.cons c (fun _ => 0)) (rename (finSuccEquiv n).symm f) := by
@@ -35,13 +35,13 @@ lemma optionCoordinateShift_rename {K : Type*} [CommRing K] {n : ℕ}
       cases i <;> simp [optionCoordinateShift, affineTranslation]
   exact RingHom.congr_fun he f
 
-lemma optionCoordinateShift_degree {K : Type*} [CommRing K] [Nontrivial K] {n : ℕ}
+private lemma optionCoordinateShift_degree {K : Type*} [CommRing K] [Nontrivial K] {n : ℕ}
     (c : K) (f : MvPolynomial (Option (Fin n)) K) :
     (optionCoordinateShift c f).totalDegree = f.totalDegree := by
   have hh := congrArg totalDegree (optionCoordinateShift_rename c f)
   simpa only [← renameEquiv_apply, totalDegree_renameEquiv, affineTranslation_totalDegree] using hh
 
-lemma optionCoordinateShift_top {K : Type*} [CommRing K] [Nontrivial K] {n : ℕ}
+private lemma optionCoordinateShift_top {K : Type*} [CommRing K] [Nontrivial K] {n : ℕ}
     (c : K) (f : MvPolynomial (Option (Fin n)) K) :
     homogeneousComponent f.totalDegree (optionCoordinateShift c f) =
       homogeneousComponent f.totalDegree f := by
@@ -51,7 +51,7 @@ lemma optionCoordinateShift_top {K : Type*} [CommRing K] [Nontrivial K] {n : ℕ
     affineTranslation_leading_homogeneousComponent (Fin.cons c (fun _ : Fin n => 0))
       (rename (finSuccEquiv n).symm f)
 
-lemma optionCoordinateShift_eval {K : Type*} [CommRing K] {n : ℕ}
+private lemma optionCoordinateShift_eval {K : Type*} [CommRing K] {n : ℕ}
     (c : K) (x : Option (Fin n) → K) (f : MvPolynomial (Option (Fin n)) K) :
     eval x (optionCoordinateShift c f) =
       eval (fun i => Option.elim i (x none + c) (fun j => x (some j))) f := by

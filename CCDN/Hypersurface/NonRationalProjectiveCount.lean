@@ -32,7 +32,7 @@ def rationalProjectiveIdealZeroLocusOver
     Projectivization.mk ℚ v hv = x →
       (algebraMap ℚ K ∘ v) ∈ idealZeroLocus I}
 
-theorem projective_ideal_count_le_affine_cone_count
+private theorem projective_ideal_count_le_affine_cone_count
     {n : ℕ} (I : Ideal (CoordinatePolynomial (n + 1))) (B : ℝ) :
     projectiveCount (projectiveIdealZeroLocus I) B ≤ count (idealZeroLocus I) B := by
   classical
@@ -50,7 +50,7 @@ theorem projective_ideal_count_le_affine_cone_count
   rw [Finset.card_image_of_injective S primitiveProjectiveRep_injective] at hc
   exact hc
 
-theorem extension_projective_ideal_count_le_affine_cone_count
+private theorem extension_projective_ideal_count_le_affine_cone_count
     {K : Type*} [Field K] [Algebra ℚ K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) (B : ℝ) :
     projectiveCount (rationalProjectiveIdealZeroLocusOver I) B ≤

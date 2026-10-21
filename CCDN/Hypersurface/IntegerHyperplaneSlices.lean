@@ -29,18 +29,18 @@ noncomputable def integerSlicePoints {n : ℕ} (X : Set (RatPoint n))
   classical
   exact (integralPoints X B).filter fun x => integerLinearLevel a x = k
 
-noncomputable def integerSliceLevels {n : ℕ} (X : Set (RatPoint n))
+private noncomputable def integerSliceLevels {n : ℕ} (X : Set (RatPoint n))
     (B : ℝ) (a : IntPoint n) : Finset ℤ := by
   classical
   exact (integralPoints X B).image (integerLinearLevel a)
 
-theorem count_eq_sum_integerSlicePoints {n : ℕ} (X : Set (RatPoint n))
+private theorem count_eq_sum_integerSlicePoints {n : ℕ} (X : Set (RatPoint n))
     (B : ℝ) (a : IntPoint n) :
     count X B = ∑ k ∈ integerSliceLevels X B a, (integerSlicePoints X B a k).card := by
   classical
   exact Finset.card_eq_sum_card_image (integerLinearLevel a) (integralPoints X B)
 
-theorem integerLinearLevel_abs_le {n : ℕ} (a x : IntPoint n) {H B : ℝ}
+private theorem integerLinearLevel_abs_le {n : ℕ} (a x : IntPoint n) {H B : ℝ}
     (hH : 0 ≤ H) (ha : InBox a H)
     (hx : InBox x B) :
     |(integerLinearLevel a x : ℝ)| ≤ (n : ℝ) * H * B := by
@@ -55,7 +55,7 @@ theorem integerLinearLevel_abs_le {n : ℕ} (a x : IntPoint n) {H B : ℝ}
       exact mul_le_mul (ha i) (hx i) (abs_nonneg _) hH
     _ = _ := by simp [mul_assoc]
 
-theorem integerSliceLevels_card_le {n : ℕ} (X : Set (RatPoint n))
+private theorem integerSliceLevels_card_le {n : ℕ} (X : Set (RatPoint n))
     (a : IntPoint n) {H B : ℝ} (hH : 0 ≤ H) (hB : 0 ≤ B)
     (ha : InBox a H) :
     ((integerSliceLevels X B a).card : ℝ) ≤ 2 * (n : ℝ) * H * B + 1 := by
@@ -85,7 +85,7 @@ theorem integerSliceLevels_card_le {n : ℕ} (X : Set (RatPoint n))
     _ ≤ 2 * R + 1 := by linarith [Int.floor_le R]
     _ = _ := by dsimp [R]; ring
 
-theorem deleteIntegerCoordinate_injective_on_level {n : ℕ}
+private theorem deleteIntegerCoordinate_injective_on_level {n : ℕ}
     (a : IntPoint (n + 1)) (j : Fin (n + 1)) (hj : a j ≠ 0)
     {x y : IntPoint (n + 1)}
     (hlevel : integerLinearLevel a x = integerLinearLevel a y)
@@ -106,7 +106,7 @@ theorem deleteIntegerCoordinate_injective_on_level {n : ℕ}
   · obtain ⟨k, rfl⟩ := Fin.exists_succAbove_eq hi
     exact congrFun hdelete k
 
-theorem integerSlicePoints_card_le_count {n : ℕ}
+private theorem integerSlicePoints_card_le_count {n : ℕ}
     (X : Set (RatPoint (n + 1))) (Y : Set (RatPoint n)) (B : ℝ)
     (a : IntPoint (n + 1)) (j : Fin (n + 1)) (hj : a j ≠ 0) (k : ℤ)
     (hmap : ∀ x ∈ integerSlicePoints X B a k,

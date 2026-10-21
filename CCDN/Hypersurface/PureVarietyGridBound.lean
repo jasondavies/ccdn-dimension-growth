@@ -30,7 +30,7 @@ open MvPolynomial
 
 /-- The irreducible case of CCDN Lemma 4.1.1 over any characteristic-zero
 field, including zero-dimensional varieties and empty coordinate grids. -/
-theorem prime_ideal_grid_card_le
+private theorem prime_ideal_grid_card_le
     {K : Type*} [Field K] [CharZero K] (n : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] (d : ℕ)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff =
@@ -78,7 +78,7 @@ open MvPolynomial
 
 /-- A zero of an ideal belongs to one of its minimal-prime components,
 over an arbitrary coefficient field. -/
-theorem exists_minimalPrimeComponent_vanishing
+private theorem exists_minimalPrimeComponent_vanishing
     {K σ : Type*} [Field K] [Finite σ]
     (I : Ideal (MvPolynomial σ K)) (x : σ → K)
     (hx : ∀ f ∈ I, eval x f = 0) :
@@ -133,7 +133,7 @@ theorem pure_ideal_grid_card_le
     _ ≤ d * S.card ^ m := Nat.mul_le_mul_right _ hbudget
 
 /-- The integer interval form of the pure-dimensional rational variety bound. -/
-theorem pure_variety_count_le_integer_interval
+private theorem pure_variety_count_le_integer_interval
     {n : ℕ} (I : Ideal (CoordinatePolynomial n)) (m d : ℕ)
     (hdimdeg : HasAffineDimensionDegree I m d)
     (hpure : ∀ P : minimalPrimeComponents I,

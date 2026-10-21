@@ -17,7 +17,7 @@ open MvPolynomial Finsupp
 
 namespace CoefficientwiseHomogeneous
 
-lemma pow {R σ τ : Type*} [CommRing R]
+private lemma pow {R σ τ : Type*} [CommRing R]
     {f : MvPolynomial σ (MvPolynomial τ R)} {d : ℕ}
     (hf : CoefficientwiseHomogeneous f d) (n : ℕ) :
     CoefficientwiseHomogeneous (f ^ n) (d * n) := by

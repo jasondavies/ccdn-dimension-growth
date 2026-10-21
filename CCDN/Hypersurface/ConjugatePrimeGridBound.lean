@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma eval_coefficientEquiv_of_fixed
+private lemma eval_coefficientEquiv_of_fixed
     {K σ : Type*} [Field K] (e : K ≃+* K) (x : σ → K)
     (hx : ∀ i, e (x i) = x i) (f : MvPolynomial σ K) :
     eval x (mapEquiv σ e f) = e (eval x f) := by

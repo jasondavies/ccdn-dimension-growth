@@ -25,7 +25,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_good_integer_hyperplane_slices {n : ℕ}
+private theorem exists_good_integer_hyperplane_slices {n : ℕ}
     (f : MvPolynomial (Option (Fin (3 + n))) ℤ)
     (hir : HasAbsIrreducibleTopForm f) (hd : 2 ≤ f.totalDegree) :
     ∃ (D : ℤ) (a : Fin (3 + n) → ℤ) (g : ℤ → MvPolynomial (Fin (3 + n)) ℤ),
@@ -51,7 +51,7 @@ open MvPolynomial
 
 /-- A normal of height at most `d^3` costs three powers of the degree
 and one power of the box radius in a dimension induction. -/
-theorem count_le_of_good_integer_hyperplane_slices {n d e r : ℕ}
+private theorem count_le_of_good_integer_hyperplane_slices {n d e r : ℕ}
     (X : Set (RatPoint (n + 1))) (a : IntPoint (n + 1))
     (j : Fin (n + 1)) (hj : a j ≠ 0) (Y : ℤ → Set (RatPoint n))
     (hd : 1 ≤ d) {B C : ℝ} (hB : 1 ≤ B) (hC : 0 ≤ C)
@@ -83,7 +83,7 @@ theorem count_le_of_good_integer_hyperplane_slices {n d e r : ℕ}
 /-- One bounded good hyperplane slice: affine dimension growth in `n + 3` variables
 gives it in `n + 4` variables, at the cost of three powers of the degree and one power of
 the box radius. -/
-theorem AffineHypersurfaceGrowth.succ {n e : ℕ} (h : AffineHypersurfaceGrowth n e) :
+private theorem AffineHypersurfaceGrowth.succ {n e : ℕ} (h : AffineHypersurfaceGrowth n e) :
     AffineHypersurfaceGrowth (n + 1) (e + 3) := by
   classical
   obtain ⟨C, hC, hbound⟩ := h

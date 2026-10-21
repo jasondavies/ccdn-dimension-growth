@@ -33,7 +33,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem linear_normalization_fiber_finite
+private theorem linear_normalization_fiber_finite
     {K : Type*} [Field K] [CharZero K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (l : Fin (m + 1) → MvPolynomial (Fin n) K)
@@ -51,7 +51,7 @@ theorem linear_normalization_fiber_finite
   simp only [one_pow, mul_one, hcard] at hh
   omega
 
-theorem exists_linear_form_separating_finite_set
+private theorem exists_linear_form_separating_finite_set
     {K : Type*} [Field K] [CharZero K] {n : ℕ}
     (s : Finset (Fin n → K)) (z : Fin n → K) (hz : z ∉ s) :
     ∃ t : MvPolynomial (Fin n) K, t.IsHomogeneous 1 ∧
@@ -79,7 +79,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_low_degree_point_separator_of_pos_dimension
+private theorem exists_low_degree_point_separator_of_pos_dimension
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
@@ -151,7 +151,7 @@ theorem exists_low_degree_point_separator_of_pos_dimension
     apply hsep x (hV.mem_toFinset.mpr hxV)
     simpa only [a, Fin.lastCases_last] using hxa (Fin.last (m + 1))
 
-theorem exists_low_degree_point_separator_of_dimension_zero
+private theorem exists_low_degree_point_separator_of_dimension_zero
     {K : Type*} [Field K] [IsAlgClosed K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = 0)
@@ -205,7 +205,7 @@ theorem exists_low_degree_point_separator_of_dimension_zero
 /-- Every point outside an affine prime variety over an algebraically closed
 characteristic-zero field is detected by an equation of degree at most the
 Hilbert multiplicity. -/
-theorem exists_low_degree_point_separator
+private theorem exists_low_degree_point_separator
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] (d : ℕ)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff =

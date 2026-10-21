@@ -27,7 +27,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_finite_galois_ideal_definition
+private theorem exists_finite_galois_ideal_definition
     (k K : Type*) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) :
     ∃ L : FiniteGaloisIntermediateField k K,
@@ -61,7 +61,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem finite_galois_base_point_on_prime_over
+private theorem finite_galois_base_point_on_prime_over
     (k K σ : Type*) [Field k] [Field K] [Algebra k K]
     [FiniteDimensional k K] [IsGalois k K]
     (I : Ideal (MvPolynomial σ k)) [I.IsPrime]
@@ -92,7 +92,7 @@ theorem finite_galois_base_point_on_prime_over
 
 /-- The finite-dimensional restriction is removed using a constructed
 finite Galois field of definition for the prime ideal. -/
-theorem galois_base_point_on_prime_over
+private theorem galois_base_point_on_prime_over
     (k K : Type*) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) k)) [I.IsPrime]
     (P : Ideal (MvPolynomial (Fin n) K)) [P.IsPrime]

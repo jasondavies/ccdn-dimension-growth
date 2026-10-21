@@ -22,7 +22,7 @@ noncomputable section
 open MvPolynomial
 universe u
 
-lemma hyperplaneNoether_specialize {K σ : Type*}
+private lemma hyperplaneNoether_specialize {K σ : Type*}
     [CommRing K] [Fintype σ] [DecidableEq σ]
     (d : ℕ) (f : MvPolynomial (Option σ) ℤ) (A : Option σ → K)
     (Φ : MvPolynomial (Sym σ d) ℤ) :
@@ -32,7 +32,7 @@ lemma hyperplaneNoether_specialize {K σ : Type*}
         (scaledHyperplaneRestriction A (map (Int.castRingHom K) f)) Φ := by
   rw [homogeneousCoefficientSpecialization_map, universalHyperplaneRestriction_specialize]
 
-lemma scaledHyperplaneRestriction_not_absolutely_irreducible {K σ : Type*}
+private lemma scaledHyperplaneRestriction_not_absolutely_irreducible {K σ : Type*}
     [Field K] [Fintype σ] (A : Option σ → K) (hA : A none ≠ 0)
     {d : ℕ} {f : MvPolynomial (Option σ) K} (hf : f.IsHomogeneous d)
     (hbad : ¬Irreducible (map (algebraMap K (AlgebraicClosure K))

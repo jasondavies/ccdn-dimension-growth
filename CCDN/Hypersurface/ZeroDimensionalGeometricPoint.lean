@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem eval_kernel_filtered_finrank {K σ : Type*}
+private theorem eval_kernel_filtered_finrank {K σ : Type*}
     [Field K] [Fintype σ] (x : σ → K) (N : ℕ) :
     Module.finrank K (filteredCoordinateSpace (RingHom.ker (eval x)) N) = 1 := by
   let I := RingHom.ker (eval x)
@@ -45,13 +45,13 @@ theorem eval_kernel_filtered_finrank {K σ : Type*}
   let e' := (Ideal.quotientEquivAlgOfEq K heval.symm).trans e
   simpa using e'.toLinearEquiv.finrank_eq
 
-theorem eval_kernel_filteredHilbertPolynomial {K σ : Type*}
+private theorem eval_kernel_filteredHilbertPolynomial {K σ : Type*}
     [Field K] [Fintype σ] [LinearOrder σ] (x : σ → K) :
     filteredHilbertPolynomial (RingHom.ker (eval x)) = 1 := by
   apply filteredHilbertPolynomial_eq_of_eventual
   exact ⟨0, fun N _ => by rw [eval_kernel_filtered_finrank]; simp⟩
 
-lemma eval_map_galois_coordinates {K L σ : Type*}
+private lemma eval_map_galois_coordinates {K L σ : Type*}
     [Field K] [Field L] [Algebra K L] (γ : Gal(L/K)) (x : σ → L)
     (f : MvPolynomial σ K) :
     eval (γ ∘ x) (map (algebraMap K L) f) =
