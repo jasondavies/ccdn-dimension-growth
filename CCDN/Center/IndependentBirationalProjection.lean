@@ -97,30 +97,20 @@ theorem exists_independent_bounded_birational_hypersurface_projection
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
-    ∃ b : Fin (m + 2) → Fin n → ℤ,
+    ∃ (b : Fin (m + 2) → Fin n → ℤ) (f : MvPolynomial (Fin (m + 2)) ℚ),
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight n d) ∧
       LinearIndependent ℚ (fun i => fun j => (b i j : ℚ)) ∧
-      (projectionCoordinateMap I
-        (fun i : Fin (m + 1) => integerLinearForm (b i.succ))).IsIntegral ∧
-      Function.Injective (projectionCoordinateMap I
-        (fun i : Fin (m + 1) => integerLinearForm (b i.succ))) ∧
-      (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (MvPolynomial (Fin n) ℚ ⧸ I)
-          (FractionRing (MvPolynomial (Fin n) ℚ ⧸ I))
-          ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ ∧
-      ∃ f : MvPolynomial (Fin (m + 2)) ℚ,
-        Irreducible f ∧ f.IsHomogeneous d ∧ f.totalDegree = d ∧
-        RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
-          Ideal.span {f} := by
+      IsNoetherNormalization I (fun i : Fin (m + 1) => integerLinearForm (b i.succ)) ∧
+      IsBirationalProjection I (fun i => integerLinearForm (b i)) f ∧
+      f.IsHomogeneous d ∧ f.totalDegree = d := by
   classical
-  obtain ⟨b, hb, hinta, hinja, hint, hfield, f, hf, hfhom, hfdeg, hker⟩ :=
+  obtain ⟨b, f, hb, hN, hP, hfhom, hfdeg⟩ :=
     exists_bounded_birational_hypersurface_projection_of_le m n (by omega) I hI d hdimdeg
   by_cases hli : LinearIndependent ℚ (fun i => fun j => (b i j : ℚ))
-  · exact ⟨b, hb, hli, hinta, hinja, hint, hfield, f, hf, hfhom, hfdeg, hker⟩
+  · exact ⟨b, f, hb, hli, hN, hP, hfhom, hfdeg⟩
   have htail : LinearIndependent ℚ
       (fun i : Fin (m + 1) => fun j => (b i.succ j : ℚ)) :=
-    integer_rows_linearIndependent_of_projection_injective I (fun i => b i.succ) hinja
+    integer_rows_linearIndependent_of_projection_injective I (fun i => b i.succ) hN.injective
   have hdep : (fun j => (b 0 j : ℚ)) ∈ Submodule.span ℚ
       (Set.range (fun i : Fin (m + 1) => fun j => (b i.succ j : ℚ))) := by
     by_contra hn
@@ -129,14 +119,16 @@ theorem exists_independent_bounded_birational_hypersurface_projection
   let c : Fin (m + 2) → Fin n → ℤ :=
     Fin.cases (fun k => if k = j then 1 else 0) (fun i => b i.succ)
   have hfieldc := adjoin_integerLinearForm_eq_top_of_first_mem_span I b c (fun _ => rfl) hdep
-    hfield
+    hP.birational
   obtain ⟨g, hg, hghom, hgdeg, _, hkg⟩ := exists_homogeneous_extended_projection_equation
     (F := FractionRing (MvPolynomial (Fin n) ℚ ⧸ I)) I hI
     (fun i => integerLinearForm (c i)) (fun i => linearForm_isHomogeneous _)
-    hinta hinja hfieldc d hdimdeg
-  exact ⟨c, unit_row_cons_abs_le (by exact_mod_cast integerBirationalProjectionHeight_one_le n d)
-      _ (fun s => hb s.succ) j, unit_row_cons_linearIndependent _ j htail hj, hinta, hinja,
-    projectionCoordinateMap_isIntegral_of_tail I _ hinta, hfieldc, g, hg, hghom, hgdeg, hkg⟩
+    hN.integral hN.injective hfieldc d hdimdeg
+  exact ⟨c, g, unit_row_cons_abs_le
+      (by exact_mod_cast integerBirationalProjectionHeight_one_le n d) _ (fun s => hb s.succ) j,
+    unit_row_cons_linearIndependent _ j htail hj, hN,
+    ⟨projectionCoordinateMap_isIntegral_of_tail I _ hN.integral, hfieldc, hg, hkg⟩, hghom,
+    hgdeg⟩
 
 end
 end CCDN

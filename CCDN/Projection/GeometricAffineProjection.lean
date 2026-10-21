@@ -37,20 +37,13 @@ theorem exists_geometric_affine_projection_positive_dimension
     [(I.map (map (algebraMap ℚ L))).IsPrime]
     (d : ℕ) (hd : 1 ≤ d)
     (hdimdeg : HasProjectiveDimensionDegree I m d) :
-    ∃ b : Fin (m + 2) → Fin n → ℤ,
+    ∃ (b : Fin (m + 2) → Fin n → ℤ) (f : MvPolynomial (Fin (m + 2)) ℚ),
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight n d) ∧
-      (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (MvPolynomial (Fin n) ℚ ⧸ I)
-          (FractionRing (MvPolynomial (Fin n) ℚ ⧸ I))
-          ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ ∧
-      ∃ f : MvPolynomial (Fin (m + 2)) ℚ,
-        Irreducible f ∧ Irreducible (map (algebraMap ℚ L) f) ∧ f.totalDegree = d ∧
-        RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
-          Ideal.span {f} ∧
-        ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
-          d * count (zeroLocus f)
-            ((affineProjectionHeightConstant n : ℝ) * (d : ℝ) ^ (2 * n) * B) := by
+      IsBirationalProjection I (fun i => integerLinearForm (b i)) f ∧
+      Irreducible (map (algebraMap ℚ L) f) ∧ f.totalDegree = d ∧
+      ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
+        d * count (zeroLocus f)
+          ((affineProjectionHeightConstant n : ℝ) * (d : ℝ) ^ (2 * n) * B) := by
   obtain ⟨hdim, hdegree⟩ := hdimdeg
   have hmn : m + 1 ≤ n := by
     obtain ⟨_, _, hdimle, _⟩ := filteredHilbertPolynomial_positive_multiplicity I
@@ -58,26 +51,23 @@ theorem exists_geometric_affine_projection_positive_dimension
     simpa only [hdim, Fintype.card_fin] using hdimle
   obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hmn
   let n := m + 1 + k
-  obtain ⟨b, hb, hnorm, hinj, hint, hfield, hcone, f, hf, hfpos, _, hker⟩ :=
+  obtain ⟨b, f, hb, hN, hP, hcone, hfpos, _⟩ :=
     exists_bounded_affine_birational_projection m k I d ⟨hdim, hdegree⟩
   have hfieldcone := closure_projection_generates_functionField I
-    (fun i => integerLinearForm (b i)) (fun i => linearForm_isHomogeneous _) hfield
+    (fun i => integerLinearForm (b i)) (fun i => linearForm_isHomogeneous _) hP.birational
   have hfdeg := affine_projection_equation_degree_eq_of_closure I
     (fun i => integerLinearForm (b i)) (fun i => linearForm_isHomogeneous _)
-    hcone hfieldcone d ⟨hdim, hdegree⟩ f hf.ne_zero hfpos hker
-  refine ⟨b, hb, hint, hfield, f, hf,
-    projection_equation_irreducible_map I _ f hf.ne_zero hker, hfdeg, hker, ?_⟩
-  have hrel : aeval (fun i => integerLinearForm (b i)) f ∈ I := by
-    apply (mem_projectionCoordinateMap_ker I _ f).mp
-    rw [hker]
-    exact Ideal.subset_span (Set.mem_singleton f)
+    hcone hfieldcone d ⟨hdim, hdegree⟩ f hP.irreducible.ne_zero hfpos hP.ker_eq
+  refine ⟨b, f, hb, hP,
+    projection_equation_irreducible_map I _ f hP.irreducible.ne_zero hP.ker_eq, hfdeg, ?_⟩
+  have hrel := hP.aeval_mem
   have hfiber (z : Fin (m + 2) → ℚ) (s : Finset (Fin n → ℚ))
       (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
       (hproj : ∀ x ∈ s, ∀ i, eval x (integerLinearForm (b i)) = z i) :
       s.card ≤ d := by
     have hh := bounded_degree_normalization_fiber_card_le I 1 (by omega)
       (fun i : Fin (m + 1) => integerLinearForm (b i.succ))
-      (fun i => linearForm_totalDegree_le _) hinj hnorm d ⟨hdim, hdegree⟩
+      (fun i => linearForm_totalDegree_le _) hN.injective hN.integral d ⟨hdim, hdegree⟩
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
     simpa only [one_pow, Nat.mul_one] using hh
   let H : ℝ := birationalProjectionHeightConstant n * (d : ℝ) ^ (2 * n)

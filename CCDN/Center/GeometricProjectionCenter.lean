@@ -52,7 +52,7 @@ theorem exists_geometric_birational_projection_center
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ (b : Fin (m + 2) → Fin (n + 1) → ℤ)
-      (Λ : Submodule ℚ (Fin (n + 1) → ℚ)),
+      (Λ : Submodule ℚ (Fin (n + 1) → ℚ)) (f : MvPolynomial (Fin (m + 2)) ℚ),
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight (n + 1) d) ∧
       Λ = (Matrix.mulVecLin (fun i j => (b i j : ℚ))).ker ∧
       Module.finrank ℚ Λ = n - m - 1 ∧
@@ -60,25 +60,17 @@ theorem exists_geometric_birational_projection_center
       (∀ x : Projectivization L (Fin (n + 1) → L),
         x ∈ projectiveIdealZeroLocus (I.map (map (algebraMap ℚ L))) →
         (fun i j => (b i j : L)) *ᵥ x.rep ≠ 0) ∧
-      (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (MvPolynomial (Fin (n + 1)) ℚ ⧸ I)
-          (FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ I))
-          ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ ∧
-      ∃ f : MvPolynomial (Fin (m + 2)) ℚ,
-        Irreducible f ∧ Irreducible (map (algebraMap ℚ L) f) ∧
-        f.IsHomogeneous d ∧ f.totalDegree = d ∧
-        RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
-          Ideal.span {f} := by
-  obtain ⟨b, hb, hli, _, _, hint, hfield, f, hf, hfhom, hfdeg, hker⟩ :=
+      IsBirationalProjection I (fun i => integerLinearForm (b i)) f ∧
+      Irreducible (map (algebraMap ℚ L) f) ∧ f.IsHomogeneous d ∧ f.totalDegree = d := by
+  obtain ⟨b, f, hb, hli, _, hP, hfhom, hfdeg⟩ :=
     exists_independent_bounded_birational_hypersurface_projection m (n + 1)
       (by omega) I hI d hdimdeg
   obtain ⟨hs, hdimker⟩ := independent_integer_rows_kernel_dimension b hli
-  refine ⟨b, (Matrix.mulVecLin (fun i j => (b i j : ℚ))).ker,
-    hb, rfl, ?_, hs, ?_, hint, hfield, f, hf,
-    projection_equation_irreducible_map I _ f hf.ne_zero hker, hfhom, hfdeg, hker⟩
+  refine ⟨b, (Matrix.mulVecLin (fun i j => (b i j : ℚ))).ker, f,
+    hb, rfl, ?_, hs, ?_, hP,
+    projection_equation_irreducible_map I _ f hP.irreducible.ne_zero hP.ker_eq, hfhom, hfdeg⟩
   · omega
-  · exact homogeneous_integer_projection_center_disjoint I hI b hint
+  · exact homogeneous_integer_projection_center_disjoint I hI b hP.integral
 
 end
 end CCDN
