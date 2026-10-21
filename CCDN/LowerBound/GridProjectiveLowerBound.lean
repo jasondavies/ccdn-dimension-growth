@@ -23,7 +23,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma affineProjectivePoint_integer_height_le {n : ℕ} (z : IntPoint n)
+private lemma affineProjectivePoint_integer_height_le {n : ℕ} (z : IntPoint n)
     {B : ℝ} (hB : 1 ≤ B) (hz : InBox z B) :
     (affineProjectivePoint (rationalPoint z)).mulHeight ≤ B := by
   let w : IntPoint (n + 1) := Fin.cons 1 z

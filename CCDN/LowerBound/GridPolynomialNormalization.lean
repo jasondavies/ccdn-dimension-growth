@@ -22,10 +22,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def gridCoordinatePolynomial {K σ : Type*} [Field K]
+private def gridCoordinatePolynomial {K σ : Type*} [Field K]
     (S : Finset K) (i : σ) : MvPolynomial σ K := ∏ t ∈ S, (X i - C t)
 
-lemma gridCoordinatePolynomial_degree {K σ : Type*} [Field K]
+private lemma gridCoordinatePolynomial_degree {K σ : Type*} [Field K]
     (S : Finset K) (i : σ) : (gridCoordinatePolynomial S i).totalDegree ≤ S.card := by
   classical
   apply (totalDegree_finsetProd _ _).trans
@@ -36,7 +36,7 @@ lemma gridCoordinatePolynomial_degree {K σ : Type*} [Field K]
       exact (totalDegree_sub _ _).trans (by simp)
     _ = _ := by simp
 
-lemma gridCoordinatePolynomial_eval_zero {K σ : Type*} [Field K]
+private lemma gridCoordinatePolynomial_eval_zero {K σ : Type*} [Field K]
     (S : Finset K) (x : σ → K) (i : σ) (hxi : x i ∈ S) :
     eval x (gridCoordinatePolynomial S i) = 0 := by
   classical
@@ -46,7 +46,7 @@ lemma gridCoordinatePolynomial_eval_zero {K σ : Type*} [Field K]
 
 /-- The coordinate grid polynomials give an integral map into every
 quotient of the polynomial ring. This is proved using their monic equations. -/
-theorem gridCoordinateMap_isIntegral {K σ : Type*} [Field K]
+private theorem gridCoordinateMap_isIntegral {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (S : Finset K) (hS : S.Nonempty) :
     (projectionCoordinateMap I (gridCoordinatePolynomial S)).IsIntegral := by
   classical

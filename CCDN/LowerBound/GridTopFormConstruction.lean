@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma homogeneousComponent_mul_of_degree_le {R σ : Type*} [CommRing R]
+private lemma homogeneousComponent_mul_of_degree_le {R σ : Type*} [CommRing R]
     (f g : MvPolynomial σ R) {a b : ℕ}
     (hf : f.totalDegree ≤ a) (hg : g.totalDegree ≤ b) :
     homogeneousComponent (a + b) (f * g) =
@@ -43,7 +43,7 @@ lemma homogeneousComponent_mul_of_degree_le {R σ : Type*} [CommRing R]
 def variableGridPolynomial {R σ : Type*} [CommRing R] (s : Finset R) (i : σ) :
     MvPolynomial σ R := ∏ a ∈ s, (X i - C a)
 
-lemma variableGridPolynomial_totalDegree_le {R σ : Type*} [CommRing R]
+private lemma variableGridPolynomial_totalDegree_le {R σ : Type*} [CommRing R]
     (s : Finset R) (i : σ) : (variableGridPolynomial s i).totalDegree ≤ s.card := by
   unfold variableGridPolynomial
   apply (totalDegree_finsetProd _ _).trans
@@ -54,7 +54,7 @@ lemma variableGridPolynomial_totalDegree_le {R σ : Type*} [CommRing R]
       exact (totalDegree_sub _ _).trans (by simp only [totalDegree_C, max_zero]; exact (isHomogeneous_X R i).totalDegree_le)
     _ = _ := by simp
 
-lemma variableGridPolynomial_top {R σ : Type*} [CommRing R]
+private lemma variableGridPolynomial_top {R σ : Type*} [CommRing R]
     (s : Finset R) (i : σ) :
     homogeneousComponent s.card (variableGridPolynomial s i) = X i ^ s.card := by
   classical
@@ -78,7 +78,7 @@ lemma variableGridPolynomial_top {R σ : Type*} [CommRing R]
 def paddedGridPolynomial {R σ : Type*} [CommRing R] (s : Finset R) (i : σ) (d : ℕ) :
     MvPolynomial σ R := X i ^ (d - s.card) * variableGridPolynomial s i
 
-lemma paddedGridPolynomial_totalDegree_le {R σ : Type*} [CommRing R]
+private lemma paddedGridPolynomial_totalDegree_le {R σ : Type*} [CommRing R]
     (s : Finset R) (i : σ) {d : ℕ} (hd : s.card ≤ d) :
     (paddedGridPolynomial s i d).totalDegree ≤ d := by
   apply (totalDegree_mul _ _).trans
@@ -87,7 +87,7 @@ lemma paddedGridPolynomial_totalDegree_le {R σ : Type*} [CommRing R]
   have hg := variableGridPolynomial_totalDegree_le s i
   omega
 
-lemma paddedGridPolynomial_top {R σ : Type*} [CommRing R]
+private lemma paddedGridPolynomial_top {R σ : Type*} [CommRing R]
     (s : Finset R) (i : σ) {d : ℕ} (hd : s.card ≤ d) :
     homogeneousComponent d (paddedGridPolynomial s i d) = X i ^ d := by
   have he : d = (d - s.card) + s.card := (Nat.sub_add_cancel hd).symm
@@ -98,7 +98,7 @@ lemma paddedGridPolynomial_top {R σ : Type*} [CommRing R]
     homogeneousComponent_eq_self (isHomogeneous_X_pow i _), variableGridPolynomial_top,
     ← pow_add, ← he]
 
-lemma paddedGridPolynomial_eval_zero {R σ : Type*} [CommRing R]
+private lemma paddedGridPolynomial_eval_zero {R σ : Type*} [CommRing R]
     (s : Finset R) (i : σ) (d : ℕ) (z : σ → R) (hz : z i ∈ s) :
     eval z (paddedGridPolynomial s i d) = 0 := by
   have hg : eval z (variableGridPolynomial s i) = 0 := by
@@ -108,10 +108,10 @@ lemma paddedGridPolynomial_eval_zero {R σ : Type*} [CommRing R]
   simp [paddedGridPolynomial, hg]
 
 /-- A degree-d binomial that is absolutely irreducible in every characteristic. -/
-def gridTopForm (R : Type*) [CommRing R] (d : ℕ) : MvPolynomial (Fin 3) R :=
+private def gridTopForm (R : Type*) [CommRing R] (d : ℕ) : MvPolynomial (Fin 3) R :=
   X 0 * X 2 ^ (d - 1) - X 1 ^ d
 
-lemma gridTopForm_irreducible {R : Type*} [Field R] (d : ℕ) :
+private lemma gridTopForm_irreducible {R : Type*} [Field R] (d : ℕ) :
     Irreducible (gridTopForm R d) := by
   have hrel : IsRelPrime (X (2 : Fin 3) : MvPolynomial (Fin 3) R) (X 1) := by
     apply (X_prime.irreducible.isRelPrime_iff_not_dvd).mpr
@@ -132,7 +132,7 @@ def gridTopFormEquation {R : Type*} [CommRing R] (s : Finset R) (d : ℕ) :
     MvPolynomial (Fin 3) R :=
   X 0 * paddedGridPolynomial s 2 (d - 1) - paddedGridPolynomial s 1 d
 
-lemma gridTopFormEquation_totalDegree_le {R : Type*} [CommRing R]
+private lemma gridTopFormEquation_totalDegree_le {R : Type*} [CommRing R]
     (s : Finset R) {d : ℕ} (hd : 1 ≤ d) (hs : s.card ≤ d - 1) :
     (gridTopFormEquation s d).totalDegree ≤ d := by
   apply (totalDegree_sub _ _).trans
@@ -143,7 +143,7 @@ lemma gridTopFormEquation_totalDegree_le {R : Type*} [CommRing R]
     omega
   · exact paddedGridPolynomial_totalDegree_le s 1 (by omega)
 
-lemma gridTopFormEquation_top {R : Type*} [CommRing R]
+private lemma gridTopFormEquation_top {R : Type*} [CommRing R]
     (s : Finset R) {d : ℕ} (hd : 1 ≤ d) (hs : s.card ≤ d - 1) :
     homogeneousComponent d (gridTopFormEquation s d) = gridTopForm R d := by
   unfold gridTopFormEquation gridTopForm
@@ -171,7 +171,7 @@ lemma gridTopFormEquation_eval_zero {R : Type*} [CommRing R]
     paddedGridPolynomial_eval_zero s 1 d z h₁,
     paddedGridPolynomial_eval_zero s 2 (d - 1) z h₂, mul_zero, sub_self]
 
-lemma gridTopForm_map {R K : Type*} [CommRing R] [CommRing K]
+private lemma gridTopForm_map {R K : Type*} [CommRing R] [CommRing K]
     (φ : R →+* K) (d : ℕ) : map φ (gridTopForm R d) = gridTopForm K d := by
   simp [gridTopForm]
 

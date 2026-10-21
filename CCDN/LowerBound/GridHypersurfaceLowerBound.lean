@@ -26,7 +26,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma exists_integer_topform_grid_equation (s : Finset ℤ) (d n : ℕ)
+private lemma exists_integer_topform_grid_equation (s : Finset ℤ) (d n : ℕ)
     (hd : 1 ≤ d) (hn : 3 ≤ n) (hs : s.card ≤ d - 1) :
     ∃ f : MvPolynomial (Fin n) ℤ,
       f.totalDegree = d ∧
@@ -58,7 +58,7 @@ lemma integer_absolute_top_rational_model {n d : ℕ}
       (map_degree_and_irreducible_of_top_irreducible (Int.castRingHom (AlgebraicClosure ℚ)) f
         htop).2
 
-lemma grid_box_power_lower_bounds {d n B : ℕ} (hn : 2 ≤ n) (hB : 1 ≤ B) (hdB : d ≤ 8 * B) :
+private lemma grid_box_power_lower_bounds {d n B : ℕ} (hn : 2 ≤ n) (hB : 1 ≤ B) (hdB : d ≤ 8 * B) :
     ((d : ℝ) ^ 2 / 64) * (B : ℝ) ^ (n - 2) ≤ ((2 * B + 1 : ℕ) : ℝ) ^ n ∧
       ((d : ℝ) / 8) * (B : ℝ) ^ (n - 1) ≤ ((2 * B + 1 : ℕ) : ℝ) ^ n := by
   have hB0 : (0 : ℝ) ≤ B := Nat.cast_nonneg B

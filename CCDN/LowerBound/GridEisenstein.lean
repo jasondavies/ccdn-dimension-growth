@@ -27,7 +27,7 @@ open Polynomial
 
 /-- A monic bivariate polynomial reducing to a pure power at the inner
 coordinate zero is irreducible if its constant coefficient has a simple zero. -/
-theorem irreducible_of_bivariate_eisenstein {K : Type*} [Field K]
+private theorem irreducible_of_bivariate_eisenstein {K : Type*} [Field K]
     (f : K[X][X]) (hm : f.Monic) (hd : 0 < f.natDegree)
     (hred : f.map (evalRingHom 0) = X ^ f.natDegree)
     (hsimple : (f.coeff 0).coeff 1 ≠ 0) : Irreducible f := by
@@ -64,7 +64,7 @@ lemma gridEisensteinPolynomial_coeff {K : Type*} [Field K]
       if i = 0 then gridEisensteinCorrection V k else 0 := by
   simp only [gridEisensteinPolynomial, coeff_add, coeff_map, coeff_C_mul, coeff_sub, coeff_C]
 
-lemma gridEisensteinPolynomial_natDegree_le {K : Type*} [Field K]
+private lemma gridEisensteinPolynomial_natDegree_le {K : Type*} [Field K]
     (V : K[X]) (k : ℕ) : (gridEisensteinPolynomial V k).natDegree ≤ V.natDegree := by
   apply natDegree_le_iff_coeff_eq_zero.mpr
   intro i hi
@@ -72,20 +72,20 @@ lemma gridEisensteinPolynomial_natDegree_le {K : Type*} [Field K]
   rw [ite_eq_right (by omega : i ≠ 0)]
   simp [coeff_eq_zero_of_natDegree_lt hi, coeff_X_pow, ne_of_gt hi]
 
-lemma gridEisensteinPolynomial_topCoeff {K : Type*} [Field K]
+private lemma gridEisensteinPolynomial_topCoeff {K : Type*} [Field K]
     (V : K[X]) (k : ℕ) (hm : V.Monic) (hd : 0 < V.natDegree) :
     (gridEisensteinPolynomial V k).coeff V.natDegree = 1 := by
   rw [gridEisensteinPolynomial_coeff, hm.coeff_natDegree]
   simp [ne_of_gt hd]
 
-lemma gridEisensteinPolynomial_monic {K : Type*} [Field K]
+private lemma gridEisensteinPolynomial_monic {K : Type*} [Field K]
     (V : K[X]) (k : ℕ) (hm : V.Monic) (hd : 0 < V.natDegree) :
     (gridEisensteinPolynomial V k).Monic :=
   monic_of_natDegree_le_of_coeff_eq_one V.natDegree
     (gridEisensteinPolynomial_natDegree_le V k)
     (gridEisensteinPolynomial_topCoeff V k hm hd)
 
-lemma gridEisensteinPolynomial_natDegree {K : Type*} [Field K]
+private lemma gridEisensteinPolynomial_natDegree {K : Type*} [Field K]
     (V : K[X]) (k : ℕ) (hm : V.Monic) (hd : 0 < V.natDegree) :
     (gridEisensteinPolynomial V k).natDegree = V.natDegree := by
   apply le_antisymm (gridEisensteinPolynomial_natDegree_le V k)
@@ -93,7 +93,7 @@ lemma gridEisensteinPolynomial_natDegree {K : Type*} [Field K]
   rw [gridEisensteinPolynomial_topCoeff V k hm hd]
   exact one_ne_zero
 
-lemma gridEisensteinPolynomial_reduction {K : Type*} [Field K]
+private lemma gridEisensteinPolynomial_reduction {K : Type*} [Field K]
     (V : K[X]) (k : ℕ) (h0 : V.coeff 0 ≠ 0) (hk : 0 < k) :
     (gridEisensteinPolynomial V k).map (evalRingHom 0) = X ^ V.natDegree := by
   have he : (evalRingHom (0 : K)).comp C = RingHom.id K := by ext a; simp
@@ -102,7 +102,7 @@ lemma gridEisensteinPolynomial_reduction {K : Type*} [Field K]
     Polynomial.map_X, map_map, he, map_id]
   simp [← coeff_zero_eq_eval_zero, h0, ne_of_gt hk]
 
-lemma gridEisensteinPolynomial_simple {K : Type*} [Field K]
+private lemma gridEisensteinPolynomial_simple {K : Type*} [Field K]
     (V : K[X]) (k : ℕ) (h0 : V.coeff 0 ≠ 0)
     (hd : 0 < V.natDegree) (hk : 2 ≤ k) :
     ((gridEisensteinPolynomial V k).coeff 0).coeff 1 = V.coeff 0 := by
