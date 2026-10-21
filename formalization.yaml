@@ -4,7 +4,7 @@ version: "v0.4"
 project:
   name: "Dimension growth, polynomial in the degree (Castryck–Cluckers–Dittmann–Nguyen)"
   description: >-
-    A Lean 4 formalization of the main results of Castryck, Cluckers, Dittmann and
+    A Lean 4 formalisation of the main results of Castryck, Cluckers, Dittmann and
     Nguyen, "The dimension growth conjecture, polynomial in the degree and without
     logarithmic factors" (Algebra & Number Theory 14, 2020), incorporating the
     authors' 2026 addenda. It proves uniform bounds, polynomial in the degree, for
@@ -46,10 +46,13 @@ sources:
     location: "Algebra & Number Theory 14 (2020), no. 8, 2261–2294; https://doi.org/10.2140/ant.2020.14.2261"
     relationship: "formalizes"
     note: >-
-      Theorems 1–4 and 6 and Proposition 5 are formalized. Theorems 1 and 4 have
-      explicit degree exponents (2n²+5n−5 and 3N+9); the addenda leave e(N) in Theorem 4
-      to be recomputed. Intermediate statements that are false as
-      printed are proved in corrected form; see fidelity.divergences. Text used:
+      Theorems 1–4 and 6 and Proposition 5 are formalised. As printed, Theorems 1 and 4
+      assert only that some degree exponent e(n) exists, and Remark 4.3.8 estimates
+      e(n) ≤ 2n+8 for Theorem 4 (n variables) and e(n) ≤ 2n³ for Theorem 1 (X ⊆ P^n).
+      The formalisation proves the explicit exponents 3N+9 for Theorem 4 in N ≥ 3
+      variables and 2n²+5n−5 (at most 2n³) for Theorem 1. Intermediate statements whose
+      printed forms are false or amended are proved in corrected form; see
+      fidelity.divergences. Text used:
       https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf.
     author_endorsement: "not-contacted"
   - title: "List of addenda to papers of R. Cluckers and coauthors (entry for the CCDN dimension-growth paper), dated 2026-04-20"
@@ -57,10 +60,12 @@ sources:
     location: "https://rcluckers.perso.math.cnrs.fr/prints/list-of-addenda.pdf"
     relationship: "other"
     note: >-
-      Authors' published corrections to the source paper. The formalization follows
+      Authors' published corrections to the source paper. The formalisation follows
       them: n+2 variables in 2.6; absolute irreducibility of h(f) in 4.3.3; d^18 in
-      4.3.4; the factor d in 4.3.7; and the recomputed exponent in
-      4.3.8.
+      4.3.4; the factor d in 4.3.7. For Remark 4.3.8 the addenda say the exponents must
+      be recomputed from the corrected 4.3.4 and 4.3.7 but give no new values, so the
+      printed estimate e(n) ≤ 2n+8 for Theorem 4 is no longer supported; the
+      formalisation proves 3N+9 in N variables.
     author_endorsement: "not-contacted"
   - title: "On Siegel's lemma"
     authors:
@@ -70,7 +75,7 @@ sources:
     type: "paper"
     location: "Inventiones Mathematicae 73 (1983), 11–32"
     relationship: "background"
-    note: "Theorem 1 (Siegel's lemma) is used in the auxiliary-polynomial construction, through the vendored formalization listed under related_formalizations."
+    note: "Theorem 1 (Siegel's lemma) is used in the auxiliary-polynomial construction, through the vendored formalisation listed under related_formalizations."
     author_endorsement: "n/a"
 
 related_formalizations:
@@ -103,7 +108,7 @@ status:
     loci, with the explicit exponent 2n²+5n−5. Theorem 2 holds without assuming the ideal
     is homogeneous; a point counts when all its representatives annihilate the
     ideal. Theorem 4 is stated in N = n+3 variables with exponent 18+3n = 3N+9.
-    The rest of the library also formalizes the paper's Sections 2–6: 62 audited
+    The rest of the library also formalises the paper's Sections 2–6: 62 audited
     requirements, mapped to Lean declarations in docs/completion-audit.json.
     These are not part of this Comparator entry.
   sorry_count: 0
@@ -120,7 +125,7 @@ automation:
         wrote essentially all Lean source in CCDN/, the audit files
         in docs/, and the README, under the direction of Jason Davies.
       cost:
-        wall_time: "about 32 hours between the first and last commits in this repository (19–20 October 2026)"
+        wall_time: "about 32 hours between the repository's first commit (d96d122, 19 October 2026, 13:33 UTC) and the commit completing the audited formalisation (b6fe8d0, 20 October 2026, 21:57 UTC); work before the first commit was not recorded"
         spend_usd: "not tracked"
         hardware: "local Linux workstation (16 cores, 249 GiB RAM)"
       prompting_notes: "not recorded"
@@ -145,25 +150,34 @@ automation:
 
 fidelity:
   divergences: >-
-    Main results. Theorem 1 uses the explicit exponent 2n²+5n−5 in place of the paper's
-    numerical exponent, which the addenda amend. Theorem 4 assumes, as printed, that
-    the top-degree form is irreducible over the algebraic closure of Q, and proves the
-    explicit exponent 3N+9, which the addenda leave to be recomputed. Theorems 2, 3
-    and 6 and Proposition 5 match the printed statements. Degree is the Hilbert-function slope or the normalized
+    Main results. The printed Theorems 1 and 4 leave the degree exponent e(n)
+    unspecified; Remark 4.3.8 estimates e(n) ≤ 2n³ for Theorem 1 and e(n) ≤ 2n+8 for
+    Theorem 4 (n variables), and the addenda say the remark must be recomputed after
+    their corrections of 4.3.4 and 4.3.7, without giving new values. Theorem 1 is
+    proved with the explicit exponent 2n²+5n−5, which is at most 2n³. Theorem 4
+    assumes, as printed, that the top-degree form is irreducible over the algebraic
+    closure of Q, and is proved with the explicit exponent 3N+9 in N ≥ 3 variables,
+    stated in Lean with N = n+3 (exponent 18+3n). Theorems 2, 3 and 6 and
+    Proposition 5 match the printed statements. Degree is the Hilbert-function slope or the normalised
     leading coefficient; integrality is primality of the ideal over Q.
-    Intermediate statements (not compared here): Lemma 2.2 for n=1 with an arbitrary
-    profile is formally refuted, and the hypersurface case is proved instead.
-    Corollaries 2.5 and 2.9 and Propositions 2.6 and 3.2.6 need a common homogeneous degree
-    within each evaluation matrix; the literal varying-degree 3.2.6 is formally
-    refuted. In 4.2.1 the printed equality of affine and homogeneous bad-prime
-    factors fails (formal counterexample 439x²+y), and the literal conclusion is proved
-    by another route. In Lemma 5.2 the strict bound for m=0, d=1 is refuted and
-    replaced by ≤ 1; the positive-dimensional bound uses a derivative-resultant
-    detector rather than the printed Noether-composition calculation. In 5.4,
-    sqrt((s−1)!·r)·B^(s−1) is replaced by (s−1)!·B^(s−1). The external Lang–Weil,
-    Cafure–Matera, Salberger, Heintz and class-group inputs are proved internally
-    in the scope needed rather than assumed. Details: docs/completion-audit.json,
-    docs/statements.md and the notes in docs/history/.
+    Intermediate statements (not compared here), classified as refuted (printed
+    statement formally false in some case), corrected (printed statement amended,
+    amended form proved) or proof_repaired (true as printed, printed proof wrong).
+    Refuted: Lemma 2.2 for n=1 (the hypersurface case is proved instead); Corollary
+    2.5 and Proposition 3.2.6 with columns of differing degrees (a common degree
+    within each evaluation matrix is required); Lemma 5.2 for m=0, d=1, where the
+    strict bound is replaced by ≤ 1 (the positive-dimensional bound is true but is
+    proved with a derivative-resultant detector, since the printed Noether-composition
+    calculation does not give it); the constant sqrt((s−1)!·r)·B^(s−1) of Lemma 5.4,
+    replaced by (s−1)!·B^(s−1). Corrected: Proposition 2.6 and Corollary 2.9 (common
+    degree; n+2 variables in 2.6) and the addenda's corrections of 4.3.3, 4.3.4,
+    4.3.7 and 4.3.8. Proof repaired: Proposition 4.2.1 and Corollary 4.2.4, whose
+    printed proof uses an equality of affine and homogeneous bad-prime factors that
+    fails (formal counterexample 439x²+y); their printed statements are proved by
+    working in the affine chart. The external Lang–Weil, Cafure–Matera, Salberger,
+    Heintz and class-group inputs are proved internally in the scope needed rather
+    than assumed. Details: README.md, docs/discrepancies.md, docs/statements.md and
+    docs/completion-audit.json.
 
 review:
   status: "agent-reviewed"
