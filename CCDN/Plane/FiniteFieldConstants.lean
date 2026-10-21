@@ -14,8 +14,9 @@ import Mathlib.Tactic.Ring
 
 Every count below holds for primes `p > stepanovThreshold d = 27 d⁴` and has the shape
 `main term + C d² √p · (lower-order power of p)`. The constants are derived from the plane
-constant `planeResidueConstant = 161` by explicit additive corrections, recorded here with
-the lemmas where they arise. -/
+constant `planeResidueConstant = 161` by explicit additive corrections, recorded in the
+docstrings and in the `_eq_add` lemmas. They are defined as numerals, so statements quoting
+the numerals are definitionally equal to statements using the names. -/
 
 @[expose] public section
 namespace CCDN
@@ -50,52 +51,67 @@ def planeResidueConstant : ℝ := 161
 
 /-- The constant `162 = 161 + 1` of the projective plane-curve count
 (`projective_plane_finite_field_card_bound`): the affine chart contributes
-`p + 161 d² √p` and the line at infinity at most `d ≤ d² √p` further points. -/
-def projectivePlaneResidueConstant : ℝ := planeResidueConstant + 1
+`p + 161 d² √p` and the line at infinity at most `d ≤ d² √p` further points
+(`projectivePlaneResidueConstant_eq_add`). -/
+def projectivePlaneResidueConstant : ℝ := 162
 
 /-- The constant `C = 164 = 162 + 2` for which the projective plane total multiplicity is
 at most `p + (C + 1) d² √p` (`projectivePlaneTotalMultiplicity_le`). The singular
 correction `3 d² (d - 1) ≤ 3 d² √p` adds `3` to `162`; the shift by one matches the affine
-convention of `degreeFourDeterminantError`, whose singular correction `d² (d - 1)` costs `1`. -/
-def projectivePlaneDeterminantConstant : ℝ := projectivePlaneResidueConstant + 2
+convention of `degreeFourDeterminantError`, whose singular correction `d² (d - 1)` costs `1`
+(`projectivePlaneDeterminantConstant_eq_add`). -/
+def projectivePlaneDeterminantConstant : ℝ := 164
 
 /-- The constant `164 = 161 + 3` of the affine hypersurface count
 `#X(𝔽_p) ≤ p^(m-1) + 164 d² p^(m-2) √p` (`affine_hypersurface_finite_field_bound`). Averaging
 the plane count over plane sections gives `161`; bad and zero plane sections cost at most
-`3 d² p √p` (`hypersurface_bad_section_error`). -/
-def hypersurfaceResidueConstant : ℝ := planeResidueConstant + 3
+`3 d² p √p` (`hypersurface_bad_section_error`, `hypersurfaceResidueConstant_eq_add`). -/
+def hypersurfaceResidueConstant : ℝ := 164
 
 /-- The constant `330 = 2 (164 + 1)` of the projective hypersurface count
 (`projective_hypersurface_finite_field_bound`). Applied to the affine cone count with error
 `H = 164 d² √p`, `homogeneous_projective_count_of_cone_bound` gives the projective error
-`2 (H + 1) p^(m-2)`, and `1 ≤ d² √p`. -/
-def projectiveHypersurfaceResidueConstant : ℝ := 2 * (hypersurfaceResidueConstant + 1)
+`2 (H + 1) p^(m-2)`, and `1 ≤ d² √p` (`projectiveHypersurfaceResidueConstant_eq_add`). -/
+def projectiveHypersurfaceResidueConstant : ℝ := 330
 
 lemma planeResidueConstant_eq : planeResidueConstant = 161 := rfl
 
-lemma projectivePlaneResidueConstant_eq : projectivePlaneResidueConstant = 162 := by
+lemma projectivePlaneResidueConstant_eq : projectivePlaneResidueConstant = 162 := rfl
+
+lemma projectivePlaneDeterminantConstant_eq : projectivePlaneDeterminantConstant = 164 := rfl
+
+lemma hypersurfaceResidueConstant_eq : hypersurfaceResidueConstant = 164 := rfl
+
+lemma projectiveHypersurfaceResidueConstant_eq : projectiveHypersurfaceResidueConstant = 330 :=
+  rfl
+
+lemma projectivePlaneResidueConstant_eq_add :
+    projectivePlaneResidueConstant = planeResidueConstant + 1 := by
   norm_num [projectivePlaneResidueConstant, planeResidueConstant]
 
-lemma projectivePlaneDeterminantConstant_eq : projectivePlaneDeterminantConstant = 164 := by
-  norm_num [projectivePlaneDeterminantConstant, projectivePlaneResidueConstant_eq]
+lemma projectivePlaneDeterminantConstant_eq_add :
+    projectivePlaneDeterminantConstant = projectivePlaneResidueConstant + 2 := by
+  norm_num [projectivePlaneDeterminantConstant, projectivePlaneResidueConstant]
 
-lemma hypersurfaceResidueConstant_eq : hypersurfaceResidueConstant = 164 := by
+lemma hypersurfaceResidueConstant_eq_add :
+    hypersurfaceResidueConstant = planeResidueConstant + 3 := by
   norm_num [hypersurfaceResidueConstant, planeResidueConstant]
 
-lemma projectiveHypersurfaceResidueConstant_eq : projectiveHypersurfaceResidueConstant = 330 := by
-  norm_num [projectiveHypersurfaceResidueConstant, hypersurfaceResidueConstant_eq]
+lemma projectiveHypersurfaceResidueConstant_eq_add :
+    projectiveHypersurfaceResidueConstant = 2 * (hypersurfaceResidueConstant + 1) := by
+  norm_num [projectiveHypersurfaceResidueConstant, hypersurfaceResidueConstant]
 
 lemma planeResidueConstant_pos : 0 < planeResidueConstant := by
   norm_num [planeResidueConstant]
 
 lemma projectivePlaneDeterminantConstant_pos : 0 < projectivePlaneDeterminantConstant := by
-  norm_num [projectivePlaneDeterminantConstant_eq]
+  norm_num [projectivePlaneDeterminantConstant]
 
 lemma hypersurfaceResidueConstant_pos : 0 < hypersurfaceResidueConstant := by
-  norm_num [hypersurfaceResidueConstant_eq]
+  norm_num [hypersurfaceResidueConstant]
 
 lemma projectiveHypersurfaceResidueConstant_pos : 0 < projectiveHypersurfaceResidueConstant := by
-  norm_num [projectiveHypersurfaceResidueConstant_eq]
+  norm_num [projectiveHypersurfaceResidueConstant]
 
 end
 end CCDN
