@@ -56,32 +56,5 @@ theorem generic_linear_primitive
     intro a _
     exact hle (show a ∈ (⊤ : Subalgebra R F) from trivial)
 
-/-- Original affine coordinates of a finite function field provide the
-separating tuple automatically. This is the generic last linear form used
-in the Chow incidence degree comparison. -/
-theorem generic_coordinate_linear_primitive
-    {K E A R F : Type*} [Field K] [Field E] [CharZero E] [Field A]
-    [Algebra K E] [Algebra K A] [Algebra E A] [IsScalarTower K E A]
-    [Module.Finite E A] [Field R] [Field F] {n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial (Fin n) K ⧸ I) A]
-    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) A]
-    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) A]
-    [Algebra (MvPolynomial (Fin n) E) R]
-    [IsFractionRing (MvPolynomial (Fin n) E) R]
-    [Algebra (MvPolynomial (Fin n) A) F]
-    [IsFractionRing (MvPolynomial (Fin n) A) F]
-    [Algebra (MvPolynomial (Fin n) E) F] [Algebra R F]
-    [IsScalarTower (MvPolynomial (Fin n) E) R F]
-    [IsScalarTower (MvPolynomial (Fin n) E) (MvPolynomial (Fin n) A) F] :
-    let x := fun j : Fin n => algebraMap (MvPolynomial (Fin n) K ⧸ I) A
-      ((Ideal.Quotient.mk I) (X j))
-    Module.finrank R F = Module.finrank E A ∧
-    (minpoly R (algebraMap (MvPolynomial (Fin n) A) F
-      (genericLinearForm x))).natDegree = Module.finrank E A ∧
-    IntermediateField.adjoin R
-      {algebraMap (MvPolynomial (Fin n) A) F (genericLinearForm x)} = ⊤ := by
-  exact generic_linear_primitive _ (curve_coordinate_embeddings_injective I)
-
 end
 end CCDN

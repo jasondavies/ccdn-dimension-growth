@@ -78,14 +78,6 @@ theorem genericBlockLine_natDegree {R σ : Type*} [CommRing R]
   rw [← weightedDegreePolynomial_natDegree, ← genericBlockLine_origin]
   exact Polynomial.natDegree_map_le
 
-theorem genericBlockLine_ne_zero {R σ : Type*} [CommRing R]
-    (b : σ → Bool) {f : MvPolynomial σ R} (hf : f ≠ 0) :
-    genericBlockLine b f ≠ 0 := by
-  intro hz
-  have he := genericBlockLine_origin b f
-  rw [hz, Polynomial.map_zero] at he
-  exact weightedDegreePolynomial_ne_zero _ hf he.symm
-
 lemma genericBlockLine_map {R S σ : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (b : σ → Bool) (f : MvPolynomial σ R) :
     (genericBlockLine b f).map (MvPolynomial.map φ) =

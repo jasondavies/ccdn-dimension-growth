@@ -1,6 +1,7 @@
 module
 
 public import CCDN.RadialHomogeneousMap
+public import CCDN.HomogeneousHilbert
 public import Mathlib.RingTheory.Nullstellensatz
 
 /-! Vanishing only at the origin on the infinity section supplies balanced
@@ -37,16 +38,6 @@ lemma leadingInfinityIdeal_component_mem {K σ : Type*} [Field K]
   rw [he]
   exact g.property n
 
-lemma homogeneousComponent_mul_homogeneous_left {K σ : Type*} [CommRing K]
-    {f : MvPolynomial σ K} {i : ℕ} (hf : f.IsHomogeneous i)
-    (g : MvPolynomial σ K) (j : ℕ) :
-    homogeneousComponent (i + j) (f * g) = f * homogeneousComponent j g := by
-  let := MvPolynomial.gradedAlgebra (σ := σ) (R := K)
-  have ht := DirectSum.coe_decompose_mul_add_of_left_mem
-    (homogeneousSubmodule σ K) (j := j) hf (b := g)
-  simpa only [← DirectSum.Decomposition.decompose'_eq,
-    MvPolynomial.decomposition.decompose'_apply] using ht
-
 /-- A coordinate-power certificate at infinity gives a balanced reduction in
 the original affine quotient. -/
 theorem power_reduction_of_infinity_certificate {K σ : Type*} [Field K]
@@ -66,7 +57,7 @@ theorem power_reduction_of_infinity_certificate {K σ : Type*} [Field K]
       simpa only [add_sub_cancel_right] using hg
     have hm := leadingInfinityIdeal_component_mem I _ hrel n
     rw [map_sub, homogeneousComponent_eq_self (isHomogeneous_X_pow j (n + 1)),
-      show n + 1 = 1 + n by omega, homogeneousComponent_mul_homogeneous_left hl] at hm
+      show n + 1 = 1 + n by omega, homogeneousComponent_mul_left hl] at hm
     obtain ⟨r, hr, heq⟩ := Submodule.mem_map.mp hm
     refine ⟨r, homogeneousComponent n s, (mem_restrictTotalDegree _ _ _).mp hr,
       (homogeneousComponent_isHomogeneous n s).totalDegree_le, ?_⟩

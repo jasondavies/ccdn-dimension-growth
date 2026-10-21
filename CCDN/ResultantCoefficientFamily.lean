@@ -90,14 +90,6 @@ theorem derivativeResultantCoefficientFamily_homogeneous
   obtain ⟨a, _, rfl⟩ := Finset.mem_image.mp hg
   exact derivativeResultant_coefficientwise_homogeneous f d D hd hf a
 
-theorem derivativeResultantCoefficientFamily_totalDegree_le
-    {R σ τ : Type*} [CommRing R]
-    (f : Polynomial (MvPolynomial σ (MvPolynomial τ R))) (d D : ℕ) (hd : 0 < d)
-    (hf : ∀ i, CoefficientwiseHomogeneous (f.coeff i) D) :
-    ∀ g ∈ derivativeResultantCoefficientFamily f d, g.totalDegree ≤ D * (2 * d - 1) := by
-  intro g hg
-  exact (derivativeResultantCoefficientFamily_homogeneous f d D hd hf g hg).totalDegree_le
-
 theorem derivativeResultant_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : Polynomial R) (d : ℕ) :
     derivativeResultant (f.map φ) d = φ (derivativeResultant f d) := by
@@ -152,32 +144,6 @@ theorem derivativeResultant_ne_zero_iff_separable
   rw [← hder, ← hf, ne_eq, Polynomial.resultant_eq_zero_iff,
     Polynomial.separable_def]
   simp only [hf0, ne_eq, not_false_eq_true, true_or, true_and, not_not]
-
-/-- After embedding the specialized parameter ring in a characteristic-zero
-field, the same coefficient family detects separability. Only the
-degree of the specialized univariate polynomial is required. -/
-theorem derivativeResultantCoefficientFamily_separable_iff
-    {R S L σ τ : Type*} [CommRing R] [CommRing S] [Field L] [CharZero L]
-    (f : Polynomial (MvPolynomial σ (MvPolynomial τ R))) (d : ℕ) (hd : 0 < d)
-    (φ : R →+* S) (a : τ → S) (θ : MvPolynomial σ S →+* L)
-    (hθ : Function.Injective θ)
-    (hdegree : (f.map (θ.comp (MvPolynomial.map (eval₂Hom φ a)))).natDegree = d) :
-    (∃ g ∈ derivativeResultantCoefficientFamily f d, eval₂ φ a g ≠ 0) ↔
-      (f.map (θ.comp (MvPolynomial.map (eval₂Hom φ a)))).Separable := by
-  rw [derivativeResultantCoefficientFamily_nonvanishing_iff]
-  have he := derivativeResultant_ne_zero_iff_separable
-    (f.map (θ.comp (MvPolynomial.map (eval₂Hom φ a)))) d hd hdegree
-  rw [← Polynomial.map_map, derivativeResultant_map] at he
-  simpa only [Polynomial.map_map] using (map_ne_zero_iff θ hθ).symm.trans he
-
-theorem derivativeResultant_degree_strict_quadratic
-    (m d : ℕ) (hm : 1 ≤ m) (hd : 0 < d) :
-    ((m + 1) * d) * (2 * d - 1) < ((m + 1) * d) ^ 2 := by
-  have hD : 0 < (m + 1) * d := by positivity
-  have hlt : 2 * d - 1 < (m + 1) * d := by
-    have hh : 2 * d ≤ (m + 1) * d := Nat.mul_le_mul_right d (by omega)
-    omega
-  simpa only [pow_two] using Nat.mul_lt_mul_of_pos_left hlt hD
 
 end
 end CCDN

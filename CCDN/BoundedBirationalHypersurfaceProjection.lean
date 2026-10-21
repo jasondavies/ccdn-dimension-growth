@@ -15,10 +15,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma integerLinearForm_isHomogeneous {σ : Type*} [Fintype σ] (a : σ → ℤ) :
-    (integerLinearForm a).IsHomogeneous 1 :=
-  IsHomogeneous.sum _ _ _ (fun i _ => isHomogeneous_C_mul_X _ i)
-
 def integerBirationalProjectionHeight (n d : ℕ) : ℕ :=
   max (integerNormalizationHeight n d) ((n * d ^ 2 + 1) ^ n)
 

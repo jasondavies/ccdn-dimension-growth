@@ -47,47 +47,5 @@ theorem minimalPrime_pair_height_two {R : Type*} [CommRing R] [IsDomain R]
 def coordinateZeroLocus {K σ : Type*} [CommRing K] (I : Ideal (MvPolynomial σ K)) : Set (σ → K) :=
   {x | ∀ p ∈ I, MvPolynomial.eval x p = 0}
 
-/-- Every common zero lies on a minimal-prime component, and conversely. -/
-theorem common_zero_iff_minimalPrime {K σ : Type*} [Field K]
-    (f g : MvPolynomial σ K) (x : σ → K) :
-    (MvPolynomial.eval x f = 0 ∧ MvPolynomial.eval x g = 0) ↔
-      ∃ p ∈ (Ideal.span ({f, g} : Set (MvPolynomial σ K))).minimalPrimes,
-        x ∈ coordinateZeroLocus p := by
-  constructor
-  · rintro ⟨hf, hg⟩
-    let φ := MvPolynomial.eval₂Hom (RingHom.id K) x
-    let : (RingHom.ker φ).IsPrime := RingHom.ker_isPrime φ
-    have hle : Ideal.span ({f, g} : Set (MvPolynomial σ K)) ≤ RingHom.ker φ := by
-      rw [Ideal.span_le]
-      intro p hp
-      rcases hp with rfl | hp
-      · exact hf
-      · have : p = g := by simpa using hp
-        subst p
-        exact hg
-    obtain ⟨p, hp, hpx⟩ := Ideal.exists_minimalPrimes_le hle
-    exact ⟨p, hp, fun q hq => hpx hq⟩
-  · rintro ⟨p, hp, hx⟩
-    exact ⟨hx f (hp.le (Ideal.subset_span (by simp))),
-      hx g (hp.le (Ideal.subset_span (by simp)))⟩
-
-/-- A finite decomposition into prime zero loci, each of codimension two. -/
-theorem finite_prime_decomposition_height_two {K σ : Type*} [Field K] [Finite σ]
-    {f g : MvPolynomial σ K} (hf : Prime f) (hfg : ¬ f ∣ g) :
-    ∃ S : Finset (Ideal (MvPolynomial σ K)),
-      (∀ p ∈ S, p.IsPrime ∧ p.height = 2) ∧
-      (∀ x, (MvPolynomial.eval x f = 0 ∧ MvPolynomial.eval x g = 0) ↔
-        ∃ p ∈ S, x ∈ coordinateZeroLocus p) := by
-  classical
-  let hfin := Ideal.finite_minimalPrimes_of_isNoetherianRing
-    (MvPolynomial σ K) (Ideal.span ({f, g} : Set (MvPolynomial σ K)))
-  refine ⟨hfin.toFinset, ?_, ?_⟩
-  · intro p hp
-    have hp' := hfin.mem_toFinset.mp hp
-    exact ⟨hp'.isPrime, minimalPrime_pair_height_two hf hfg hp'⟩
-  · intro x
-    simpa only [hfin.mem_toFinset] using common_zero_iff_minimalPrime f g x
-
-
 end
 end CCDN

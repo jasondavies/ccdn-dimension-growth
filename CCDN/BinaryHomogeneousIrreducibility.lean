@@ -55,14 +55,5 @@ theorem binary_homogeneous_irreducible_degree_le_one
   rw [uniqueAlgEquiv_natDegree, hdeg] at hh
   omega
 
-theorem binary_homogeneous_irreducible_degree_eq_one
-    {K : Type*} [Field K] [IsAlgClosed K] {d : ℕ}
-    (f : MvPolynomial (Fin 2) K) (hf : f.IsHomogeneous d)
-    (hir : Irreducible f) : d = 1 := by
-  have hlo := irreducible_mvPolynomial_totalDegree_pos hir
-  rw [hf.totalDegree hir.ne_zero] at hlo
-  have hhi := binary_homogeneous_irreducible_degree_le_one f hf hir
-  omega
-
 end
 end CCDN

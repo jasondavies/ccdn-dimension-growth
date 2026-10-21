@@ -1,6 +1,6 @@
 module
 
-public import Mathlib
+public import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
 /-! Numerical obstructions to replacing a positive degree factor by a
 little-oh quantity. These lemmas will be applied to constructed point counts. -/

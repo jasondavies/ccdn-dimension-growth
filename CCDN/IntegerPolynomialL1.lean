@@ -49,10 +49,6 @@ lemma natAbs_coeff_le_coefficientL1 (f : MvPolynomial σ ℤ) (m : σ →₀ ℕ
 @[simp] lemma coefficientL1_one : coefficientL1 (1 : MvPolynomial σ ℤ) = 1 := by
   simpa using coefficientL1_C (σ := σ) 1
 
-@[simp] lemma coefficientL1_C_mul_X (c : ℤ) (i : σ) :
-    coefficientL1 (C c * X i) = c.natAbs := by
-  rw [X, C_mul_monomial, mul_one, coefficientL1_monomial]
-
 lemma coefficientL1_add_le (f g : MvPolynomial σ ℤ) :
     coefficientL1 (f + g) ≤ coefficientL1 f + coefficientL1 g := by
   classical

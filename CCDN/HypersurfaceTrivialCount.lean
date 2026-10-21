@@ -2,6 +2,7 @@ module
 
 public import CCDN.Plane
 public import CCDN.PrimitiveNormalization
+public import Mathlib.Algebra.MvPolynomial.SchwartzZippel
 
 /-! The exact elementary box bound for a nonzero affine hypersurface in
 any number of variables: the hypersurface case of CCDN Lemma 4.1.1. -/

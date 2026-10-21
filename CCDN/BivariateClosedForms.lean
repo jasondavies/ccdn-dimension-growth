@@ -1,6 +1,8 @@
 module
 
 public import CCDN.RationalClosedForms
+public import Mathlib.RingTheory.Polynomial.IsIntegral
+public import Mathlib.Algebra.Polynomial.Bivariate
 
 /-! The characteristic-zero closed-form criterion on bivariate
 polynomials. Gauss's lemma and rational differentiation discharge the
@@ -21,6 +23,18 @@ def bivariateCoefficientDerivative (F : Type*) [CommRing F] :
 @[simp]
 lemma coeff_bivariateCoefficientDerivative {F : Type*} [CommRing F] (p : F[X][X]) (n : ℕ) :
     ((bivariateCoefficientDerivative F) p).coeff n = (p.coeff n).derivative := rfl
+
+lemma bivariateCoefficientDerivative_monomial {R : Type*} [CommRing R] (m n : ℕ) (a : R) :
+    (bivariateCoefficientDerivative R) (monomial m (monomial n a)) =
+      monomial m (monomial (n - 1) (a * n)) := by
+  ext i
+  simp only [coeff_bivariateCoefficientDerivative, coeff_monomial]
+  split_ifs <;> simp [derivative_monomial]
+
+/-- Differentiate a bivariate monomial in the outer variable. -/
+lemma bivariate_derivative_monomial {R : Type*} [CommRing R] (m n : ℕ) (a : R) :
+    (monomial m (monomial n a)).derivative = monomial (m - 1) (monomial n (a * m)) := by
+  rw [derivative_monomial, ← map_natCast (C : R →+* R[X]) m, monomial_mul_C]
 
 lemma bivariateCoefficientDerivative_map {F : Type*} [Field F] (p : F[X][X]) :
     ((bivariateCoefficientDerivative F) p).map (algebraMap F[X] (RatFunc F)) =

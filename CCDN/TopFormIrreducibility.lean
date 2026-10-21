@@ -1,6 +1,7 @@
 module
 
 public import CCDN.HomogeneousLinearDescent
+public import Mathlib.Algebra.MvPolynomial.Nilpotent
 
 /-! An irreducible highest homogeneous component forces irreducibility of
  the full polynomial. Coefficient reduction preserves this implication and

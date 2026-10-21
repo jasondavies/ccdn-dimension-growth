@@ -71,13 +71,5 @@ theorem hypersurface_kernel_ratio_bounds {r d M s : ℕ} (hd : 0 < d) (hdM : d �
       nlinarith [mul_le_mul_of_nonneg_right hd1 (mul_nonneg hr0.le hs0.le)]
     nlinarith
 
-/-- An explicit dimension-independent error for the kernel ratio. -/
-theorem hypersurface_kernel_ratio_error {r d M s : ℕ} (hd : 0 < d) (hdM : d ≤ M)
-    (hr : s + (r + 1 + (M - d)).choose (M - d) = (r + 1 + M).choose M) :
-    |((r + 1 + (M - d)).choose (M - d) : ℝ) / ((M : ℝ) * s) -
-      1 / ((d : ℝ) * (r + 1 : ℝ))| ≤ 1 / (M : ℝ) := by
-  obtain ⟨hl, hu⟩ := hypersurface_kernel_ratio_bounds hd hdM hr
-  exact abs_le.mpr ⟨by linarith, by linarith⟩
-
 end
 end CCDN

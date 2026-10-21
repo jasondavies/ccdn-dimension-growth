@@ -23,6 +23,12 @@ name = "Axioms"
 name = "ArithmeticHeights"
 srcDir = "vendor/bombieri-vaaler"
 
+# Adapted first Mertens theorem (see vendor/mertens/upstream.json), built as part of this
+# package so that no build output is written below vendor/.
+[[lean_lib]]
+name = "Mertens"
+srcDir = "vendor/mertens"
+
 # The Challenge deliberately states its theorems with `sorry`.
 [[lean_lib]]
 name = "Challenge"

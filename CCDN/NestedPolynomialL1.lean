@@ -68,13 +68,6 @@ lemma flattenPolynomial_map_C {σ τ : Type*} (p : MvPolynomial σ ℤ) :
   | add f g hf hg => simp [hf, hg]
   | mul_X f i hf => simp [hf]
 
-lemma flattenPolynomial_C {σ τ : Type*} (p : MvPolynomial τ ℤ) :
-    (sumAlgEquiv ℤ σ τ).symm (C p) = rename Sum.inr p := by
-  induction p using MvPolynomial.induction_on with
-  | C c => simp
-  | add f g hf hg => simp [hf, hg]
-  | mul_X f i hf => simp [hf]
-
 /-- One original coefficient variable multiplying an integer parameter
 polynomial has no coefficient-norm cost beyond that parameter polynomial. -/
 theorem coefficientL1_flatten_C_X_mul_map_C_le {σ τ : Type*}

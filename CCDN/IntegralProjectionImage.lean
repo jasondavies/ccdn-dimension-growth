@@ -57,24 +57,5 @@ theorem exists_point_of_integral_projection_kernel_zero
     have hh := hxS (aeval a (X i - C (z i))) hJmem
     simpa only [map_sub, aeval_X, aeval_C, algebraMap_eq, eval_C, sub_eq_zero] using hh
 
-theorem integral_projection_image_zero_locus
-    {K : Type*} [Field K] [IsAlgClosed K] {m n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K))
-    (a : Fin m → MvPolynomial (Fin n) K)
-    (hint : (projectionCoordinateMap I a).IsIntegral) :
-    (fun x : Fin n → K => fun i => eval x (a i)) '' MvPolynomial.zeroLocus K I =
-      MvPolynomial.zeroLocus K (RingHom.ker (projectionCoordinateMap I a)) := by
-  ext z
-  constructor
-  · rintro ⟨x, hx, rfl⟩ f hf
-    have hh := hx (aeval a f) ((mem_projectionCoordinateMap_ker I a f).mp hf)
-    rw [comp_aeval_apply] at hh
-    exact hh
-  · intro hz
-    obtain ⟨x, hx, he⟩ := exists_point_of_integral_projection_kernel_zero I a hint z
-      (fun f hf => hz f hf)
-    refine ⟨x, ?_, funext he⟩
-    exact hx
-
 end
 end CCDN

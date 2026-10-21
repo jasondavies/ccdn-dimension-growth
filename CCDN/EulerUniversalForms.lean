@@ -80,12 +80,6 @@ def universalEulerMatrix (k : ℕ) : Matrix (ℕ × ℕ) (EulerColumns k)
   fun row col => ∑ i, C (eulerClosedFormCoefficientMatrix k
     (eulerCoefficientMonomial ℤ (k + 2) i) row col) * X i
 
-lemma universalEulerMatrix_homogeneous (k : ℕ) (row : ℕ × ℕ) (col : EulerColumns k) :
-    (universalEulerMatrix k row col).IsHomogeneous 1 := by
-  apply IsHomogeneous.sum
-  intro i _
-  exact isHomogeneous_C_mul_X _ _
-
 /-- Every universal matrix entry specializes to the differential
 coefficient matrix, with no characteristic restriction. -/
 theorem universalEulerMatrix_specialize {R : Type*} [CommRing R]
@@ -117,44 +111,6 @@ def universalEulerMinor (k : ℕ)
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
     MvPolynomial (EulerLowIndex (k + 2)) ℤ :=
   ((universalEulerMatrix k).submatrix rows cols).det
-
-lemma universalEulerMinor_homogeneous (k : ℕ)
-    (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-    (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
-    (universalEulerMinor k rows cols).IsHomogeneous ((k + 2) ^ 2 - 1) := by
-  classical
-  unfold universalEulerMinor
-  rw [Matrix.det_apply']
-  apply IsHomogeneous.sum
-  intro σ _
-  have hh := IsHomogeneous.prod Finset.univ
-    (fun i => universalEulerMatrix k (rows (σ i)) (cols i)) (fun _ => 1)
-    (fun i _ => universalEulerMatrix_homogeneous _ _ _)
-  have hp : (∏ i, universalEulerMatrix k (rows (σ i)) (cols i)).IsHomogeneous
-      ((k + 2) ^ 2 - 1) := by
-    simpa only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul, mul_one] using hh
-  simpa using hp.C_mul (Equiv.Perm.sign σ : ℤ)
-
-/-- The universal forms detect every irreducible plane equation of full
-outer degree with a constant nonzero leading coefficient in characteristic zero. -/
-theorem exists_universalEulerMinor_nonzero
-    {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
-    (k : ℕ) (f : Polynomial (Polynomial F)) (hf : Irreducible f)
-    (htotal : bivariateTotalDegree f ≤ k + 2) (a : F) (ha : a ≠ 0)
-    (hl : f.leadingCoeff = Polynomial.C a) (hdeg : f.natDegree = k + 2) :
-    ∃ (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-      (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k),
-      eval₂ (Int.castRingHom F) (eulerCoefficientData (k + 2) f)
-        (universalEulerMinor k rows cols) ≠ 0 := by
-  obtain ⟨rows, cols, _, _, hn⟩ := exists_eulerClosedForm_nonzero_minor k f hf a ha hl hdeg
-  refine ⟨rows, cols, ?_⟩
-  change (eval₂Hom (Int.castRingHom F) (eulerCoefficientData (k + 2) f))
-    (((universalEulerMatrix k).submatrix rows cols).det) ≠ 0
-  rw [RingHom.map_det]
-  change (((universalEulerMatrix k).map
-    (eval₂Hom (Int.castRingHom F) (eulerCoefficientData (k + 2) f))).submatrix rows cols).det ≠ 0
-  rw [universalEulerMatrix_specialize k f htotal]
-  exact hn
 
 end
 end CCDN

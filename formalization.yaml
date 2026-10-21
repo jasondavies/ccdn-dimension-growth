@@ -85,7 +85,7 @@ related_formalizations:
     relationship: "adapts"
     note: >-
       Mertens' first theorem is adapted from PrimeNumberTheoremAnd/IEANTN/Mertens.lean
-      (Apache-2.0) into CCDN/MertensFirst.lean, with an explicit bounded
+      (Apache-2.0) into vendor/mertens/Mertens.lean, with an explicit bounded
       constant. Provenance is in vendor/mertens/upstream.json.
 
 status:

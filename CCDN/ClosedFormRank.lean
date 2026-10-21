@@ -1,6 +1,7 @@
 module
 
 public import CCDN.BivariateCoefficientMatrix
+public import Mathlib.LinearAlgebra.Matrix.Rank
 
 /-! Rank forced by the characteristic-zero closed-form classification. -/
 

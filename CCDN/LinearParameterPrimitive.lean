@@ -1,6 +1,6 @@
 module
 
-public import CCDN.HilbertFunctionFieldRank
+public import CCDN.BoundedDegreeFunctionFieldRank
 public import CCDN.HilbertLinearCoordinates
 public import CCDN.ProjectionFractionField
 public import CCDN.CurvePrimitivePair

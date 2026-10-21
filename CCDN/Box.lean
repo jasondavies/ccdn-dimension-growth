@@ -1,6 +1,8 @@
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.Data.Fintype.BigOperators
+public import Mathlib.Data.Int.Interval
 
 /-!
 # Integral points in real-radius boxes
@@ -39,16 +41,6 @@ theorem mem_integerBox {n : ℕ} {B : ℝ} {x : IntPoint n} :
     have hneg : -(x i) ≤ ⌊B⌋ := Int.le_floor.mpr (by simpa using hn)
     exact ⟨by omega, Int.le_floor.mpr hhi⟩
 
-theorem integerBox_mono {n : ℕ} {B C : ℝ} (h : B ≤ C) :
-    integerBox n B ⊆ integerBox n C := by
-  intro x hx
-  exact mem_integerBox.mpr fun i => (mem_integerBox.mp hx i).trans h
-
-theorem card_integerBox (n : ℕ) (B : ℝ) :
-    (integerBox n B).card = (2 * ⌊B⌋ + 1).toNat ^ n := by
-  simp [integerBox, Fintype.card_piFinset, Int.card_Icc, sub_neg_eq_add,
-    show ⌊B⌋ + 1 + ⌊B⌋ = 2 * ⌊B⌋ + 1 by omega]
-
 noncomputable def integralPoints {n : ℕ} (X : Set (RatPoint n)) (B : ℝ) :
     Finset (IntPoint n) := by
   classical
@@ -69,12 +61,6 @@ theorem count_mono {n : ℕ} {X Y : Set (RatPoint n)} {B C : ℝ}
   obtain ⟨hb, hx⟩ := mem_integralPoints.mp hx
   exact mem_integralPoints.mpr ⟨fun i => (hb i).trans hBC, hXY hx⟩
 
-theorem count_le_box {n : ℕ} (X : Set (RatPoint n)) (B : ℝ) :
-    count X B ≤ (2 * ⌊B⌋ + 1).toNat ^ n := by
-  classical
-  rw [← card_integerBox]
-  exact Finset.card_le_card (Finset.filter_subset _ _)
-
 theorem count_union_le {n : ℕ} (X Y : Set (RatPoint n)) (B : ℝ) :
     count (X ∪ Y) B ≤ count X B + count Y B := by
   classical
@@ -85,14 +71,5 @@ theorem count_union_le {n : ℕ} (X Y : Set (RatPoint n)) (B : ℝ) :
   unfold count
   rw [h]
   exact Finset.card_union_le _ _
-
-/-- Transport integral points through an injective, height-controlled map. The hypotheses
-concern only that map. -/
-theorem count_le_of_injective {n m : ℕ} {X : Set (RatPoint n)} {Y : Set (RatPoint m)}
-    {B C : ℝ} (f : IntPoint n → IntPoint m)
-    (hmap : ∀ x ∈ integralPoints X B, f x ∈ integralPoints Y C)
-    (hinj : Set.InjOn f (↑(integralPoints X B) : Set (IntPoint n))) :
-    count X B ≤ count Y C :=
-  Finset.card_le_card_of_injOn f hmap hinj
 
 end CCDN

@@ -104,7 +104,7 @@ theorem nonabsolute_projective_curve_count_le_degree_sq
   obtain ⟨e, _, hed, hedim, hedegree⟩ :=
     algebraic_component_degree_le ℚ K I d hdim (by simpa using hdegree) P hP
   have hPhom := minimal_prime_ideal_homogeneous _
-    (scalar_extension_ideal_homogeneous I hI) P hP
+    (homogeneous_ideal_scalar_extension I hI) P hP
   have hsubset : projectiveIdealZeroLocus I ⊆ rationalProjectiveIdealZeroLocusOver P := by
     intro x hx v hv he
     exact galois_base_point_on_every_component ℚ K I P hP v (hx v hv he)

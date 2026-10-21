@@ -2,6 +2,8 @@ module
 
 public import CCDN.PolynomialSection
 public import CCDN.PlaneHilbert
+public import Mathlib.RingTheory.Polynomial.UniqueFactorization
+public import Mathlib.RingTheory.SimpleRing.Principal
 
 /-! Sharp bounds for distinct points in proper polynomial sections. In the plane,
 the principal Hilbert function gives the usual product-of-degrees bound. -/

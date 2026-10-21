@@ -12,19 +12,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem homogeneous_ideal_scalar_extension
-    {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
-    (J : Ideal (MvPolynomial (Fin n) K))
-    (hJ : IsHomogeneousIdeal J) :
-    ∀ f ∈ J.map (map (algebraMap K L)), ∀ M,
-      homogeneousComponent M f ∈ J.map (map (algebraMap K L)) := by
-  intro f hf M
-  by_contra hnot
-  obtain ⟨φ,hφ⟩ := exists_coefficientLinearPolynomial_not_mem J _ hnot
-  apply hφ
-  rw [coefficientLinearPolynomial_homogeneousComponent]
-  exact hJ _ (coefficientLinearPolynomial_mem_scalar_extension J f hf φ) M
-
 lemma projectivePermutedIdeal_eq_projection_kernel
     {K : Type*} [Field K] {n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -44,7 +31,6 @@ theorem projectivePermutedIdeal_scalar_extension
   rw [projectivePermutedIdeal_eq_projection_kernel, projection_kernel_scalar_extension,
     projectivePermutedIdeal_eq_projection_kernel]
   simp only [map_X]
-
 
 end
 end CCDN

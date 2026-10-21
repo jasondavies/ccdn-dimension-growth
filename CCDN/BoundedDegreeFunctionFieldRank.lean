@@ -6,7 +6,8 @@ public import CCDN.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 
 /-! Function-field rank bounds for polynomial parameters of bounded
-degree, obtained from the geometric Hilbert multiplicity. -/
+degree, obtained from the geometric Hilbert multiplicity. Linear parameters are the case of
+degree one. -/
 
 @[expose] public section
 namespace CCDN
@@ -145,6 +146,26 @@ theorem bounded_degree_hilbert_functionField_finite_rank_le
   have hh := bounded_degree_fraction_parameters_rank_le I d q hq hdim hdegree l hl u hu he
     (Module.finBasis R F) (Module.finBasis R F).linearIndependent
   simpa only [Fintype.card_fin] using hh
+
+/-- The function field is finite over any field containing the expected
+number of independent linear parameters, of rank at most the multiplicity. -/
+theorem hilbert_functionField_finite_rank_le
+    {K R F σ τ : Type*} [Field K] [Field R] [Field F]
+    [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F]
+    [Fintype σ] [LinearOrder σ] [Fintype τ]
+    (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
+    [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
+    [IsFractionRing (MvPolynomial σ K ⧸ I) F]
+    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = Fintype.card τ)
+    (hdegree : (filteredHilbertPolynomial I).leadingCoeff =
+      (d : ℚ) / (Fintype.card τ).factorial)
+    (l : τ → MvPolynomial σ K) (hl : ∀ i, (l i).totalDegree ≤ 1)
+    (u : τ → R) (hu : AlgebraicIndependent K u)
+    (he : ∀ i, algebraMap (MvPolynomial σ K ⧸ I) F ((Ideal.Quotient.mk I) (l i)) =
+      algebraMap R F (u i)) :
+    Module.Finite R F ∧ Module.finrank R F ≤ d := by
+  simpa only [one_pow, mul_one] using
+    bounded_degree_hilbert_functionField_finite_rank_le I d 1 one_pos hdim hdegree l hl u hu he
 
 end
 end CCDN

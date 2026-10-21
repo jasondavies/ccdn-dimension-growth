@@ -69,30 +69,5 @@ theorem lattice_flag_minima_product_le
   rw [hvol] at hbound
   exact (div_le_iff₀ (pow_pos hnR n)).mp hbound |>.trans_eq (mul_comm _ _)
 
-/-- The product of the lengths of a greedy lattice basis is
-uniformly controlled by the covolume. -/
-theorem greedy_lattice_basis_product_le
-    {n : ℕ} (hn : 0 < n) (L : Submodule ℤ E)
-    [DiscreteTopology L] [IsZLattice ℝ L]
-    (b : Basis (Fin n) ℝ E) (hb : IsGreedyLatticeFamily L b) :
-    ∏ i, ‖b i‖ ≤ (n : ℝ) ^ n * ZLattice.covolume L := by
-  obtain ⟨c, hflag⟩ := exists_orthonormal_basis_with_same_flag b
-  apply lattice_flag_minima_product_le hn L c (fun i => ‖b i‖)
-    (fun i => norm_pos_iff.mpr (b.ne_zero i)) hb.norm_mono
-  intro i x hx hxU
-  exact hb.2.2 i x hx (by rwa [← hflag i])
-
-/-- A complete independent family in the lattice satisfying the
-product bound. -/
-theorem exists_lattice_basis_norm_product_le
-    (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
-    (hn : 0 < Module.finrank ℝ E) :
-    ∃ b : Basis (Fin (Module.finrank ℝ E)) ℝ E,
-      (∀ i, b i ∈ L) ∧
-      (∏ i, ‖b i‖) ≤ (Module.finrank ℝ E : ℝ) ^ Module.finrank ℝ E *
-        ZLattice.covolume L := by
-  obtain ⟨b, hb⟩ := exists_greedy_lattice_basis L
-  exact ⟨b, hb.2.1, greedy_lattice_basis_product_le hn L b hb⟩
-
 end
 end CCDN

@@ -21,12 +21,13 @@ lemma coefficientLinearPolynomial_homogeneousComponent
   simp only [coefficientLinearPolynomial_coeff, coeff_homogeneousComponent]
   split_ifs <;> simp only [map_zero]
 
-theorem scalar_extension_ideal_homogeneous
-    {k K : Type*} [Field k] [Field K] [Algebra k K] {n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) k))
+/-- The extension of scalars of a homogeneous ideal is homogeneous. -/
+theorem homogeneous_ideal_scalar_extension
+    {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K))
     (hI : IsHomogeneousIdeal I) :
-    ∀ f ∈ I.map (map (algebraMap k K)), ∀ N,
-      homogeneousComponent N f ∈ I.map (map (algebraMap k K)) := by
+    ∀ f ∈ I.map (map (algebraMap K L)), ∀ N,
+      homogeneousComponent N f ∈ I.map (map (algebraMap K L)) := by
   intro f hf N
   by_contra hn
   obtain ⟨φ, hφ⟩ := exists_coefficientLinearPolynomial_not_mem I _ hn

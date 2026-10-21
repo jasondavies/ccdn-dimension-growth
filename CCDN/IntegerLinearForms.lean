@@ -20,6 +20,10 @@ lemma integerLinearForm_degree {σ : Type*} [Fintype σ] (a : σ → ℤ) :
   apply (totalDegree_mul _ _).trans
   rw [totalDegree_C, totalDegree_X]
 
+lemma integerLinearForm_isHomogeneous {σ : Type*} [Fintype σ] (a : σ → ℤ) :
+    (integerLinearForm a).IsHomogeneous 1 :=
+  IsHomogeneous.sum _ _ _ (fun i _ => isHomogeneous_C_mul_X _ i)
+
 lemma integerLinearForm_identity {σ : Type*} [Fintype σ] [DecidableEq σ] (i : σ) :
     integerLinearForm (fun j => if j = i then 1 else 0) = X i := by
   simp [integerLinearForm]

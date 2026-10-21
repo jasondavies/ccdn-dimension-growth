@@ -81,7 +81,7 @@ theorem homogeneous_parameter_certificate
   have hmul (i : τ) : homogeneousComponent D (a i * s i) =
       a i * homogeneousComponent (D - 1) (s i) := by
     conv_lhs => rw [show D = 1 + (D - 1) by omega]
-    exact homogeneousComponent_mul_homogeneous_left (ha i) (s i) (D - 1)
+    exact homogeneousComponent_mul_left (ha i) (s i) (D - 1)
   simp only [hmul] at hh
   exact ⟨homogeneousComponent D g, fun i => homogeneousComponent (D - 1) (s i),
     hI g hg D, homogeneousComponent_isHomogeneous _ _,

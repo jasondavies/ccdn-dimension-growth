@@ -25,10 +25,10 @@ def eulerLowBasis (R : Type*) [CommRing R] (k : ℕ) :
 def eulerTopBasis (R : Type*) [CommRing R] (k : ℕ) :
     Basis (EulerTopIndex k) R (homogeneousSubmodule (Fin 2) R k) := by
   classical
-  let e : restrictSupport R {p : Fin 2 →₀ ℕ | p.sum (fun _ e => e) = k} ≃ₗ[R]
+  let e : restrictSupport R {p : Fin 2 →₀ ℕ | p.degree = k} ≃ₗ[R]
       homogeneousSubmodule (Fin 2) R k :=
     LinearEquiv.ofEq _ _ (homogeneousSubmodule_eq_finsupp_supported (Fin 2) R k).symm
-  exact ((basisRestrictSupport R {p : Fin 2 →₀ ℕ | p.sum (fun _ e => e) = k}).reindex
+  exact ((basisRestrictSupport R {p : Fin 2 →₀ ℕ | p.degree = k}).reindex
     (exactExponentEquivSym (Fin 2) k)).map e
 
 

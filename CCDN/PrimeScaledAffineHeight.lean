@@ -114,20 +114,5 @@ theorem prime_scaled_affine_auxiliary_height {n : ℕ}
     (by exact_mod_cast hp.one_lt.le : (1 : ℤ) ≤ p) hA hB
     (by simpa only [Int.cast_natCast] using hpB) (by simpa only [Int.cast_natCast] using hBp)
 
-/-- A small nonzero constant coefficient supplies the scaling prime itself.
-No prime-choice hypothesis remains in this branch of Proposition 4.2.1. -/
-theorem affine_auxiliary_of_small_constant_coefficient {n : ℕ}
-    (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
-    (hir : Irreducible f) (hd : 0 < f.totalDegree) (hc : f.coeff 0 ≠ 0)
-    {B : ℝ} (hB : scalingPrimeRatio ≤ B)
-    (hheight : Real.log |(f.coeff 0 : ℝ)| < B / scalingPrimeRatio) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
-      (g.totalDegree : ℝ) ≤ affineLogarithmicAuxiliaryBound n f.totalDegree scalingPrimeRatio B
-        (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
-  obtain ⟨p, hp, hlo, hhi, hnd⟩ := exists_scaling_prime hB hc hheight
-  exact prime_scaled_affine_auxiliary_height f hprim hir hd hp hnd
-    scalingPrimeRatio_one_le (scalingPrimeRatio_one_le.trans hB) hhi hlo.le
-
 end
 end CCDN

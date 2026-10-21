@@ -85,20 +85,5 @@ theorem nonabsolute_hypersurface_dimension_growth {K : Type*}
       linarith
     _ = _ := by simp only [mul_pow]; ring
 
-theorem nonabsolute_integer_hypersurface_count_le {K : Type*}
-    [Field K] [Algebra ℚ K] {n : ℕ}
-    (f : MvPolynomial (Fin (n + 2)) ℤ)
-    (hir : Irreducible (map (Int.castRingHom ℚ) f))
-    (hred : ¬ Irreducible
-      (map (algebraMap ℚ K) (map (Int.castRingHom ℚ) f)))
-    {B : ℝ} (hB : 0 ≤ B) :
-    (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
-      (n + 2 : ℝ) ^ n * (f.totalDegree : ℝ) ^ 2 * (2 * B + 1) ^ n := by
-  have hdegree : (map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
-  simpa only [hdegree] using nonabsolute_hypersurface_count_le
-    (map (Int.castRingHom ℚ) f) hir hred hB
-
 end
 end CCDN

@@ -150,14 +150,5 @@ theorem monotone_enumeration_isInitialWeightSegment
   simp only [monotone_weight_le_iff_index_lt_cumulative a r ha hfinite hcount]
   exact Fin.card_filter_val_lt
 
-/-- For a positive profile, exact fiber cardinalities themselves imply the
-required finiteness, matching the infinite-sequence convention in the paper. -/
-theorem positive_profile_enumeration_isInitialWeightSegment
-    (a r : ℕ → ℕ) (ha : Monotone a) (hr : ∀ k, 0 < r k)
-    (hcount : ∀ k, {i | a i = k}.ncard = r k) (s : ℕ) :
-    IsInitialWeightSegment r (fun i : Fin s => a i.val) :=
-  monotone_enumeration_isInitialWeightSegment a r ha
-    (fun k => Set.finite_of_ncard_pos (by rw [hcount]; exact hr k)) hcount s
-
 end
 end CCDN

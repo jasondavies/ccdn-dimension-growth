@@ -1,6 +1,9 @@
 module
 
 public import CCDN.Plane
+public import Mathlib.Algebra.Order.Star.Int
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 
 /-!
 # Affine curves and the full counting target
@@ -31,11 +34,6 @@ def idealZeroLocus {n : ℕ} (I : Ideal (CoordinatePolynomial n)) : Set (RatPoin
 noncomputable def coordinateSpace {n : ℕ} (I : Ideal (CoordinatePolynomial n)) (M : ℕ) :
     Submodule ℚ (CoordinatePolynomial n ⧸ I) :=
   (MvPolynomial.restrictTotalDegree (Fin n) ℚ M).map (Ideal.Quotient.mkₐ ℚ I).toLinearMap
-
-instance coordinateSpace_finite {n : ℕ} (I : Ideal (CoordinatePolynomial n)) (M : ℕ) :
-    Module.Finite ℚ (coordinateSpace I M) := by
-  unfold coordinateSpace
-  infer_instance
 
 noncomputable def affineHilbertFunction {n : ℕ} (I : Ideal (CoordinatePolynomial n))
     (M : ℕ) : ℕ := Module.finrank ℚ (coordinateSpace I M)

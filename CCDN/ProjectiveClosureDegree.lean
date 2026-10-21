@@ -96,16 +96,5 @@ lemma projectiveClosureIdeal_chart_point {K : Type*} [Field K] {n : ℕ}
     exact homogeneous_ideal_eval_smul (projectiveClosureIdeal I)
       (projectiveClosureIdeal_homogeneous I) _ hvanish c f hf
 
-/-- The closure lies on every homogeneous equation whose affine chart
-vanishes in the original affine ideal. -/
-theorem projectiveClosureIdeal_lies_on {K : Type*} [Field K] {n d : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K))
-    (F : MvPolynomial (Fin (n + 1)) K) (hF : F.IsHomogeneous d)
-    (hmem : affineChart n F ∈ I) :
-    projectiveIdealZeroLocus (projectiveClosureIdeal I) ⊆ projectiveZeroLocus F := by
-  intro x hx
-  exact projectiveIdealZeroLocus_rep hx F
-    ((homogeneous_mem_projectiveClosureIdeal_iff I F hF).mpr hmem)
-
 end
 end CCDN

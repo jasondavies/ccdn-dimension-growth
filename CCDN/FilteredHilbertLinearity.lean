@@ -25,10 +25,6 @@ def fullExponentRays {σ : Type*} [Fintype σ] [DecidableEq σ]
   {p : σ × (σ → Fin B) // (p.2 p.1).val = 0 ∧
     ∀ n, exponentRay B p.1 p.2 n ∈ S}
 
-instance {σ : Type*} [Fintype σ] [DecidableEq σ]
-    (S : Set (σ →₀ ℕ)) (B : ℕ) : Finite (fullExponentRays S B) :=
-  inferInstanceAs (Finite {_p : σ × (σ → Fin B) // _})
-
 lemma exponentRay_degree {σ : Type*} [Fintype σ] [DecidableEq σ]
     (B : ℕ) (j : σ) (b : σ → Fin B) (n : ℕ) (hb : (b j).val = 0) :
     Finsupp.degree (exponentRay B j b n) = n + ∑ k, (b k).val := by

@@ -1,6 +1,9 @@
 module
 
 public import CCDN.Box
+public import Mathlib.Algebra.BigOperators.Fin
+public import Mathlib.Algebra.Order.BigOperators.Group.Finset
+public import Mathlib.Algebra.Order.Ring.Star
 
 /-! Counting bounded integral points by the integer values of a
 linear form. Deleting a coordinate with nonzero coefficient is injective

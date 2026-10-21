@@ -22,22 +22,6 @@ lemma bivariatePolynomialEquiv_monomial {R : Type*} [CommRing R]
   by_cases h₀ : m 0 = i <;> by_cases h₁ : m 1 = j <;>
     simp [MvPolynomial.coeff_monomial, coeff_monomial, he, h₀, h₁]
 
-lemma euler_bivariate_innerDerivative_monomial {R : Type*} [CommRing R]
-    (m n : ℕ) (a : R) :
-    (bivariateCoefficientDerivative R) (monomial m (monomial n a)) =
-      monomial m (monomial (n - 1) (a * n)) := by
-  ext i
-  simp only [coeff_bivariateCoefficientDerivative, coeff_monomial]
-  split_ifs <;> simp [derivative_monomial]
-
-lemma euler_bivariate_outerDerivative_monomial {R : Type*} [CommRing R]
-    (m n : ℕ) (a : R) :
-    (monomial m (monomial n a)).derivative =
-      monomial (m - 1) (monomial n (a * m)) := by
-  rw [derivative_monomial]
-  congr 1
-  rw [← map_natCast (C : R →+* R[X]) m, monomial_mul_C]
-
 lemma closedFormOperator_monomial_left {R : Type*} [CommRing R]
     (m n s t : ℕ) :
     closedFormOperator (monomial s (monomial t (1 : R)))
@@ -45,7 +29,7 @@ lemma closedFormOperator_monomial_left {R : Type*} [CommRing R]
       monomial (m + s) (monomial (n + t - 1) ((n : R) - t)) := by
   change _ - _ - _ + _ = (monomial (m + s) (monomial (n + t - 1) ((n : R) - t)) : R[X][X])
   simp only [derivative_zero, zero_mul, sub_zero, add_zero,
-    euler_bivariate_innerDerivative_monomial, one_mul, monomial_mul_monomial, mul_one]
+    bivariateCoefficientDerivative_monomial, one_mul, monomial_mul_monomial, mul_one]
   cases n with
   | zero =>
     simp
@@ -64,7 +48,7 @@ lemma closedFormOperator_monomial_right {R : Type*} [CommRing R]
       (0, monomial m (monomial n 1)) =
       monomial (m + s - 1) (monomial (n + t) ((s : R) - m)) := by
   change _ - _ - _ + _ = (monomial (m + s - 1) (monomial (n + t) ((s : R) - m)) : R[X][X])
-  simp only [map_zero, zero_mul, zero_sub, euler_bivariate_outerDerivative_monomial,
+  simp only [map_zero, zero_mul, zero_sub, bivariate_derivative_monomial,
     one_mul, monomial_mul_monomial, mul_one, neg_zero]
   rw [neg_add_eq_sub]
   cases m with

@@ -69,7 +69,7 @@ theorem generic_linear_projection_integral_of_specialization
       (isHomogeneous_X_pow j D)
   apply integral_projection_of_balanced_power_reductions IL aL D hD
   intro j
-  exact homogeneous_parameter_power_reduction IL (scalar_extension_ideal_homogeneous I hI)
+  exact homogeneous_parameter_power_reduction IL (homogeneous_ideal_scalar_extension I hI)
     aL (fun i => (ha i).map (aeval u).toRingHom) j D hD (hpow j)
 
 end

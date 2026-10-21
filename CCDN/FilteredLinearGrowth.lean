@@ -59,27 +59,5 @@ theorem proper_intersection_eventual_linear_degree {K : Type*} [Field K]
   simp only [Nat.choose_one_right] at hh
   exact hh.trans (Nat.mul_le_mul_left _ (by omega))
 
-/-- A transcendental coordinate rules out slope zero in an eventual linear
-Hilbert formula. -/
-theorem positive_slope_of_transcendental_coordinate
-    {K σ : Type*} [Field K] [Fintype σ]
-    (I : Ideal (MvPolynomial σ K)) {j : σ}
-    (hj : Transcendental K ((Ideal.Quotient.mk I) (X j))) {d : ℕ}
-    (hlinear : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c) :
-    0 < d := by
-  obtain ⟨N, c, hlinear⟩ := hlinear
-  by_contra h
-  have hd : d = 0 := by omega
-  have hlo := transcendental_coordinate_filtered_lower I hj (N + c.natAbs)
-  have hhi := hlinear (N + c.natAbs) (by omega)
-  rw [hd] at hhi
-  simp only [Nat.cast_zero, zero_mul, zero_add] at hhi
-  have habs : c ≤ (c.natAbs : ℤ) := Int.le_natAbs
-  have hlo' : ((N + c.natAbs + 1 : ℕ) : ℤ) ≤
-      (Module.finrank K (filteredCoordinateSpace I (N + c.natAbs)) : ℤ) := by exact_mod_cast hlo
-  push_cast at hlo'
-  omega
-
 end
 end CCDN

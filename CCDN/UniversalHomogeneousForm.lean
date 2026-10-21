@@ -27,12 +27,6 @@ def universalHomogeneousForm (σ : Type*) [Fintype σ] [DecidableEq σ] (d : ℕ
     MvPolynomial σ (MvPolynomial (Sym σ d) ℤ) :=
   ∑ i, monomial (homogeneousCoefficientExponent σ d i) (X i)
 
-lemma universalHomogeneousForm_homogeneous (σ : Type*) [Fintype σ] [DecidableEq σ] (d : ℕ) :
-    (universalHomogeneousForm σ d).IsHomogeneous d := by
-  apply IsHomogeneous.sum
-  intro i _
-  exact isHomogeneous_monomial _ (homogeneousCoefficientExponent_degree σ d i)
-
 def homogeneousCoefficientData {R σ : Type*} [CommRing R] [Fintype σ] [DecidableEq σ]
     (d : ℕ) (f : MvPolynomial σ R) (i : Sym σ d) : R :=
   f.coeff (homogeneousCoefficientExponent σ d i)
@@ -91,10 +85,6 @@ def universalPlanePolynomialLinear (R σ : Type*) [CommRing R] :
     MvPolynomial σ R →ₗ[R] Polynomial (Polynomial (MvPolynomial (PlaneParameters σ) R)) :=
   ((bivariatePolynomialEquiv (MvPolynomial (PlaneParameters σ) R)).toLinearMap.restrictScalars R).comp
     (universalPlaneMap R σ).toLinearMap
-
-lemma universalPlanePolynomialLinear_apply {R σ : Type*} [CommRing R]
-    (f : MvPolynomial σ R) :
-    universalPlanePolynomialLinear R σ f = universalPlanePolynomial f := rfl
 
 end
 end CCDN

@@ -93,7 +93,6 @@ lemma three_le_height_coordinate_kernel {K : Type*} [Field K] (c : Fin 3 → K) 
     _ ≤ (RingHom.ker (partialCoordinateEval c 2)).height + 1 := by gcongr
     _ ≤ _ := h2
 
-
 /-- An algebraic element detected by a base-field-valued point is scalar. -/
 lemma algebraic_eq_scalar_of_point {K A : Type*} [Field K] [CommRing A]
     [IsDomain A] [Algebra K A] (φ : A →ₐ[K] K) {y : A} (hy : IsAlgebraic K y) :
@@ -178,20 +177,6 @@ theorem height_two_eventual_slope_pos_of_point {K : Type*} [Field K]
       (Module.finrank K (filteredCoordinateSpace p (N + c.natAbs)) : ℤ) := by exact_mod_cast hlo
   push_cast at hlo'
   omega
-
-/-- Under a linear bound on the filtered dimensions, a height-two component with
- a point over the coefficient field has an eventually linear Hilbert function of
- positive slope `d ≤ C`. For arbitrary cutoffs, use
- height_two_eventual_slope_pos_of_point after the generalized growth bridge. -/
-theorem height_two_degree_exists_of_point {K : Type*} [Field K]
-    (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
-    (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) (C : ℕ)
-    (hbound : ∀ N ≥ 14, Module.finrank K (filteredCoordinateSpace p N) ≤ C * (N + 2)) :
-    ∃ d, 0 < d ∧ d ≤ C ∧ ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace p n) : ℤ) = (d : ℤ) * n + c := by
-  obtain ⟨d, hd, N, c, hlinear⟩ := filteredCoordinateSpace_eventually_linear p C hbound
-  exact ⟨d, height_two_eventual_slope_pos_of_point p hp z hz ⟨N, c, hlinear⟩,
-    hd, N, c, hlinear⟩
 
 end
 end CCDN

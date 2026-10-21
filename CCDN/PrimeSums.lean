@@ -1,6 +1,6 @@
 module
 
-public import CCDN.MertensFirst
+public import Mertens
 public import CCDN.ResidueAggregation
 
 /-! The Mertens lower bound for the prime sum after excluding a finite

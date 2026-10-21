@@ -104,25 +104,7 @@ theorem integral_projection_fiber_card_le_finrank
     exact hint (b i)
   apply integral_coordinate_tuple_count_le_finrank R A F E b hb s
   intro x hx
-  let φ : A →ₐ[K] K := Ideal.Quotient.liftₐ I (aeval x) (fun f hf => hzero x hx f hf)
-  have hφ (f : MvPolynomial σ K) :
-      φ (Ideal.Quotient.mk I f) = eval x f := by
-    exact congrArg (fun g : MvPolynomial σ K →ₐ[K] K => g f)
-      (Ideal.Quotient.liftₐ_comp I (aeval x) (fun f hf => hzero x hx f hf))
-  have hcomp : φ.comp (projectionCoordinateMap I l) = aeval z := by
-    ext i
-    simpa only [projectionCoordinateMap, AlgHom.comp_apply, aeval_X,
-      Ideal.Quotient.mkₐ_eq_mk] using (hφ (l i)).trans (hproj x hx i)
-  let ψ : A →ₐ[R] K :=
-    { φ.toRingHom with
-      commutes' := fun r => by
-        change φ (algebraMap R A r) = (aeval z) r
-        rw [hmap]
-        exact congrArg (fun f : R →ₐ[K] K => f r) hcomp }
-  refine ⟨ψ, ?_⟩
-  intro i
-  change φ (Ideal.Quotient.mk I (X i)) = x i
-  simpa only [eval_X] using hφ (X i)
+  exact exists_projection_fiber_specialization I l hmap z x (hzero x hx) (hproj x hx)
 
 end
 end CCDN

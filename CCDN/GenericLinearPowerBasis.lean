@@ -80,30 +80,5 @@ def genericLinearPowerBasis
     basis_eq_pow := fun i => congrFun
       (coe_basisOfLinearIndependentOfCardEqFinrank' _ hi _) i }
 
-@[simp] theorem genericLinearPowerBasis_gen
-    {K A R F σ : Type*} [Field K] [Field A] [Algebra K A]
-    [Field R] [Field F] [Fintype σ]
-    [Algebra (MvPolynomial σ K) R] [IsFractionRing (MvPolynomial σ K) R]
-    [Algebra (MvPolynomial σ A) F] [IsFractionRing (MvPolynomial σ A) F]
-    [Algebra (MvPolynomial σ K) F] [Algebra R F]
-    [IsScalarTower (MvPolynomial σ K) R F]
-    [IsScalarTower (MvPolynomial σ K) (MvPolynomial σ A) F]
-    (b : PowerBasis K A) (x : σ → A) (c : σ → K)
-    (hc : ∑i, x i * algebraMap K A (c i) = b.gen) :
-    (genericLinearPowerBasis (R := R) (F := F) b x c hc).gen =
-      algebraMap (MvPolynomial σ A) F (genericLinearForm x) := rfl
-
-@[simp] theorem genericLinearPowerBasis_dim
-    {K A R F σ : Type*} [Field K] [Field A] [Algebra K A]
-    [Field R] [Field F] [Fintype σ]
-    [Algebra (MvPolynomial σ K) R] [IsFractionRing (MvPolynomial σ K) R]
-    [Algebra (MvPolynomial σ A) F] [IsFractionRing (MvPolynomial σ A) F]
-    [Algebra (MvPolynomial σ K) F] [Algebra R F]
-    [IsScalarTower (MvPolynomial σ K) R F]
-    [IsScalarTower (MvPolynomial σ K) (MvPolynomial σ A) F]
-    (b : PowerBasis K A) (x : σ → A) (c : σ → K)
-    (hc : ∑i, x i * algebraMap K A (c i) = b.gen) :
-    (genericLinearPowerBasis (R := R) (F := F) b x c hc).dim = b.dim := rfl
-
 end
 end CCDN

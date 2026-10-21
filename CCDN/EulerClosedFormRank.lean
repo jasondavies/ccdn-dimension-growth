@@ -95,14 +95,6 @@ theorem eulerClosedFormOperator_injective {F : Type*} [Field F] [CharZero F] [Is
   apply hzero
   rw [map_sub, huv, sub_self]
 
-/-- Exact rank of the constructed Euler-constrained differential operator. -/
-theorem eulerClosedFormOperator_finrank_range {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
-    (k : ℕ) (f : F[X][X]) (hf : Irreducible f) (hm : f.Monic)
-    (hdeg : f.natDegree = k + 2) :
-    Module.finrank F (LinearMap.range (eulerClosedFormOperator k f)) = (k + 2) ^ 2 - 1 := by
-  rw [LinearMap.finrank_range_of_inj (eulerClosedFormOperator_injective k f hf hm hdeg),
-    finrank_eulerPairSpace]
-
 /-- A nonzero constant outer leading coefficient is sufficient. Scalar
 normalization changes neither the domain nor injectivity. -/
 theorem eulerClosedFormOperator_injective_of_constant_leading

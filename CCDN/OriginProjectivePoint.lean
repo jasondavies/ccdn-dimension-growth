@@ -94,32 +94,5 @@ theorem originProjectiveIdeal_chart_point {K : Type*} [Field K] {n : ℕ}
     rw [idealOfVars_eq_ker_constantCoeff] at hf
     simpa only [eval_zero, RingHom.mem_ker] using hf
 
-theorem originProjectiveIdeal_locus {K : Type*} [Field K] (n : ℕ) :
-    projectiveIdealZeroLocus (originProjectiveIdeal K n) =
-      {affineProjectivePoint (0 : Fin n → K)} := by
-  ext x
-  constructor
-  · intro hx
-    have hs (i : Fin n) : x.rep i.succ = 0 := by
-      have hXi : X i.succ ∈ originProjectiveIdeal K n := by
-        rw [originProjectiveIdeal, homogeneous_mem_projectiveClosureIdeal_iff _ _
-          (isHomogeneous_X K i.succ)]
-        simp only [affineChart, eval₂Hom_X', Fin.cons_succ]
-        exact Ideal.subset_span ⟨i,rfl⟩
-      simpa only [eval_X] using projectiveIdealZeroLocus_rep hx _ hXi
-    have h0 : x.rep 0 ≠ 0 := by
-      intro h
-      apply x.rep_nonzero
-      funext i
-      exact Fin.cases h hs i
-    have ha : projectiveAffineCoordinates x = 0 := by
-      funext i
-      simp only [projectiveAffineCoordinates, hs, zero_div, Pi.zero_apply]
-    have he := projectiveAffineCoordinates_mk x h0
-    rw [ha] at he
-    exact Set.mem_singleton_iff.mpr he.symm
-  · rintro rfl
-    exact (originProjectiveIdeal_chart_point 0).mpr rfl
-
 end
 end CCDN

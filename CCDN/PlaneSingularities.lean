@@ -1,6 +1,7 @@
 module
 
 public import CCDN.Bezout
+public import Mathlib.Algebra.MvPolynomial.PDeriv
 
 /-! The singular-point correction in the finite-field curve estimate. The
 remaining estimate for all nonsingular rational points is not asserted here. -/

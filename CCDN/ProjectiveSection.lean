@@ -30,19 +30,6 @@ def HasProjectiveCurveDegree {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K)
   ∃ N : ℕ, ∃ c : ℤ, ∀ M : ℕ, N ≤ M →
     (projectiveHilbertFunction I M : ℤ) = (d : ℤ) * M + c
 
-theorem projectiveCurveDegree_unique {n : ℕ}
-    {I : Ideal (MvPolynomial (Fin (n + 1)) K)} {d e : ℕ}
-    (hd : HasProjectiveCurveDegree I d) (he : HasProjectiveCurveDegree I e) : d = e := by
-  obtain ⟨N, c, hN⟩ := hd
-  obtain ⟨P, k, hP⟩ := he
-  have hN0 := hN (max N P) (le_max_left _ _)
-  have hP0 := hP (max N P) (le_max_right _ _)
-  have hN1 := hN (max N P + 1) (by omega)
-  have hP1 := hP (max N P + 1) (by omega)
-  push_cast at hN0 hP0 hN1 hP1
-  have hde : (d : ℤ) = e := by nlinarith
-  exact_mod_cast hde
-
 /-- A projective point belongs to the zero locus when every representative
 annihilates the ideal. For homogeneous ideals this is the usual projective zero locus. -/
 def projectiveIdealZeroLocus {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K)) :

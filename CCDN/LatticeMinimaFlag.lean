@@ -81,19 +81,5 @@ theorem lattice_flag_coordinate_box_zero
       _ ≤ _ := norm_sum_le _ _
   exact (not_lt_of_ge hmin) (hnorm.trans_lt hstrict)
 
-omit [FiniteDimensional ℝ E] in
-theorem greedy_lattice_coordinate_box_zero
-    {n : ℕ} (hn : 0 < n) (L : Submodule ℤ E)
-    (b : Basis (Fin n) ℝ E) (hb : IsGreedyLatticeFamily L b)
-    (c : OrthonormalBasis (Fin n) ℝ E)
-    (hflag : ∀ i, Submodule.span ℝ (c '' Set.Iio i) =
-      Submodule.span ℝ (b '' Set.Iio i))
-    {x : E} (hx : x ∈ L)
-    (hbox : ∀ i, |c.toBasis.repr x i| < ‖b i‖ / n) : x = 0 := by
-  apply lattice_flag_coordinate_box_zero hn L c (fun i => ‖b i‖)
-    (fun i => norm_pos_iff.mpr (b.ne_zero i)) hb.norm_mono _ hx hbox
-  intro i y hy hyU
-  exact hb.2.2 i y hy (by rwa [← hflag i])
-
 end
 end CCDN

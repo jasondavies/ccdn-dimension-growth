@@ -1,6 +1,6 @@
 module
 
-public import CCDN.PolynomialKernelDerivative
+public import CCDN.PolynomialKernelOrigin
 public import CCDN.PlaneSingularities
 
 /-! In characteristic zero, a plane relation with a transcendental first

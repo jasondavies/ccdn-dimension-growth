@@ -31,18 +31,5 @@ lemma polynomial_quotient_map_kernel {R σ : Type*} [CommRing R]
     change map (Ideal.Quotient.mk I) (C r) = 0
     rw [map_C, Ideal.Quotient.eq_zero_iff_mem.mpr hr, C_0]
 
-/-- Coefficient quotient comparison with its exact evaluation map. -/
-def polynomialQuotientCoefficients {R σ : Type*} [CommRing R]
-    (I : Ideal R) :
-    (MvPolynomial σ R ⧸ I.map C) ≃+* MvPolynomial σ (R ⧸ I) :=
-  (Ideal.quotEquivOfEq (polynomial_quotient_map_kernel (σ := σ) I).symm).trans
-    (RingHom.quotientKerEquivOfSurjective
-      (map_surjective _ Ideal.Quotient.mk_surjective))
-
-@[simp] lemma polynomialQuotientCoefficients_mk {R σ : Type*} [CommRing R]
-    (I : Ideal R) (p : MvPolynomial σ R) :
-    polynomialQuotientCoefficients I (Ideal.Quotient.mk _ p) =
-      map (Ideal.Quotient.mk I) p := rfl
-
 end
 end CCDN

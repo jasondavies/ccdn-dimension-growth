@@ -59,23 +59,6 @@ lemma bivariateParameterDegreeBound_outerDerivative {K τ : Type*} [CommRing K]
     C (MvPolynomial.C ((i : K) + 1)) by simp, coeff_mul_C]
   exact (MvPolynomial.totalDegree_mul _ _).trans (by simpa only [MvPolynomial.totalDegree_C, Nat.add_zero] using hf (i+1) j)
 
-lemma bivariateCoefficientDerivative_monomial_ring {R : Type*} [CommRing R]
-    (m n : ℕ) (a : R) :
-    (bivariateCoefficientDerivative R) (monomial m (monomial n a)) =
-      monomial m (monomial (n - 1) (a * n)) := by
-  apply Polynomial.ext
-  intro i
-  simp only [coeff_bivariateCoefficientDerivative, coeff_monomial]
-  split_ifs <;> simp [derivative_monomial]
-
-lemma bivariate_outerDerivative_monomial_ring {R : Type*} [CommRing R]
-    (m n : ℕ) (a : R) :
-    (monomial m (monomial n a)).derivative =
-      monomial (m - 1) (monomial n (a * m)) := by
-  rw [derivative_monomial]
-  congr 1
-  rw [← map_natCast (C : R →+* R[X]) m, monomial_mul_C]
-
 /-- Every matrix entry depends linearly on the input polynomial coefficients. -/
 theorem closedFormCoefficientMatrix_parameterDegree {K τ : Type*} [CommRing K]
     (d : ℕ) (f : (MvPolynomial τ K)[X][X]) (D : ℕ)
@@ -91,7 +74,7 @@ theorem closedFormCoefficientMatrix_parameterDegree {K τ : Type*} [CommRing K]
     change (((((bivariateCoefficientDerivative _) (monomial j.1.val (monomial j.2.val 1))) * f -
       monomial j.1.val (monomial j.2.val 1) * (bivariateCoefficientDerivative _) f -
       (0 : (MvPolynomial τ K)[X][X]).derivative * f + 0 * f.derivative).coeff i.1).coeff i.2).totalDegree ≤ _
-    simp only [map_zero, zero_mul, sub_zero, add_zero, bivariateCoefficientDerivative_monomial_ring, one_mul]
+    simp only [map_zero, zero_mul, sub_zero, add_zero, bivariateCoefficientDerivative_monomial, one_mul]
     have ha := bivariateParameterDegreeBound_monomial_mul hf (j.2.val : K) j.1.val (j.2.val-1)
     have hb := bivariateParameterDegreeBound_monomial_mul hdi (1 : K) j.1.val j.2.val
     simpa only [map_natCast, map_one] using (bivariateParameterDegreeBound_sub ha hb) i.1 i.2
@@ -100,7 +83,7 @@ theorem closedFormCoefficientMatrix_parameterDegree {K τ : Type*} [CommRing K]
     change ((((bivariateCoefficientDerivative _) 0 * f - 0 * (bivariateCoefficientDerivative _) f -
       (monomial j.1.val (monomial j.2.val 1)).derivative * f +
       monomial j.1.val (monomial j.2.val 1) * f.derivative).coeff i.1).coeff i.2).totalDegree ≤ _
-    simp only [map_zero, zero_mul, sub_self, zero_sub, bivariate_outerDerivative_monomial_ring, one_mul]
+    simp only [map_zero, zero_mul, sub_self, zero_sub, bivariate_derivative_monomial, one_mul]
     rw [neg_add_eq_sub]
     have ha := bivariateParameterDegreeBound_monomial_mul hdo (1 : K) j.1.val j.2.val
     have hb := bivariateParameterDegreeBound_monomial_mul hf (j.1.val : K) (j.1.val-1) j.2.val

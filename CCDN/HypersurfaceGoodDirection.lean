@@ -77,15 +77,5 @@ theorem exists_good_hypersurface_direction_with_coordinate
   rw [← tangentDirectionPolynomial_eval]
   exact right_ne_zero_of_mul (left_ne_zero_of_mul hb)
 
-/-- Choose the nonzero coordinate to be the given nonzero partial direction. -/
-theorem exists_good_hypersurface_direction
-    {K σ : Type*} [Field K] [Infinite K] [Fintype σ]
-    (f : MvPolynomial σ K) (hf : f ≠ 0) (z : σ → K)
-    (j : σ) (hj : eval z (pderiv j f) ≠ 0) :
-    ∃ b : σ → K, b j ≠ 0 ∧
-      eval b (homogeneousComponent f.totalDegree f) ≠ 0 ∧
-      (∑ i, eval z (pderiv i f) * b i) ≠ 0 :=
-  exists_good_hypersurface_direction_with_coordinate f hf z j hj j
-
 end
 end CCDN

@@ -1,6 +1,6 @@
 module
 
-public import CCDN.BoundedClosureNormalization
+public import CCDN.BoundedBirationalHypersurfaceProjection
 
 /-! A bounded finite birational affine projection constructed from a
 normalization that remains finite at infinity. The degree-preservation step

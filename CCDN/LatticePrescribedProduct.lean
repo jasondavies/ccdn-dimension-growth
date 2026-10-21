@@ -29,33 +29,5 @@ theorem prescribed_greedy_lattice_basis_product_le
   have hh := mul_le_mul_of_nonneg_left hprod (div_nonneg (norm_nonneg w) hδ.le)
   simpa only [Nat.cast_add, Nat.cast_one, mul_assoc] using hh
 
-/-- The shortest-outside-span property and product estimate hold for the
-same constructed basis, allowing later arguments to use its last minimum. -/
-theorem exists_prescribed_greedy_lattice_basis_norm_product_le
-    (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
-    (w : E) (hw : w ∈ L) (hw0 : w ≠ 0)
-    {n : ℕ} (hn : Module.finrank ℝ E = n + 1)
-    (δ : ℝ) (hδ : 0 < δ) (hlower : ∀ x, x ∈ L → x ≠ 0 → δ ≤ ‖x‖) :
-    ∃ b : Basis (Fin (n + 1)) ℝ E,
-      IsPrescribedGreedyLatticeFamily L w b ∧
-      (∏ i, ‖b i‖) ≤ (‖w‖ / δ) * (n + 1 : ℝ) ^ (n + 1) * ZLattice.covolume L := by
-  obtain ⟨b, hb⟩ := exists_prescribed_greedy_lattice_basis L w hw hw0 hn
-  exact ⟨b, hb, prescribed_greedy_lattice_basis_product_le L b hb hδ hlower⟩
-
-/-- A constructed real basis of lattice vectors, beginning with
-any prescribed nonzero lattice vector. The only cost of prescribing it
-is its length divided by the lower bound for all nonzero lattice lengths. -/
-theorem exists_prescribed_lattice_basis_norm_product_le
-    (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
-    (w : E) (hw : w ∈ L) (hw0 : w ≠ 0)
-    {n : ℕ} (hn : Module.finrank ℝ E = n + 1)
-    (δ : ℝ) (hδ : 0 < δ) (hlower : ∀ x, x ∈ L → x ≠ 0 → δ ≤ ‖x‖) :
-    ∃ b : Basis (Fin (n + 1)) ℝ E,
-      b 0 = w ∧ (∀ i, b i ∈ L) ∧ (∀ i, δ ≤ ‖b i‖) ∧
-      (∏ i, ‖b i‖) ≤ (‖w‖ / δ) * (n + 1 : ℝ) ^ (n + 1) * ZLattice.covolume L := by
-  obtain ⟨b, hb⟩ := exists_prescribed_greedy_lattice_basis L w hw hw0 hn
-  exact ⟨b, hb.2.1, hb.2.2.1, fun i => hlower (b i) (hb.2.2.1 i) (b.ne_zero i),
-    prescribed_greedy_lattice_basis_product_le L b hb hδ hlower⟩
-
 end
 end CCDN
