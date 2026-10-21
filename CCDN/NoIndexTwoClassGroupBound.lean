@@ -62,17 +62,10 @@ theorem no_index_two_classGroup_two_torsion_bound
   let a := 1 / 2 - 1 / (2 * (n : ℝ))
   have hnpos : 0 < n := by dsimp [n]; omega
   have hnR : (2 : ℝ) ≤ n := by exact_mod_cast hn
-  have hD3 : 3 ≤ D := by
-    have hh : (3 : ℤ) ≤ |discr K| := by
-      have hh := abs_discr_gt_two (K := K) (by omega : 1 < Module.finrank ℚ K)
-      omega
-    dsimp only [D]
-    exact_mod_cast hh
+  have hD3 : 3 ≤ D := three_le_abs_discr K hn
   have hD1 : 1 ≤ D := by linarith
   have hD : 0 < D := by linarith
-  have hlog : 1 ≤ Real.log D := by
-    have hh := Real.log_le_log (Real.exp_pos 1) (Real.exp_one_lt_three.le.trans hD3)
-    simpa only [Real.log_exp] using hh
+  have hlog : 1 ≤ Real.log D := one_le_log_abs_discr K hn
   have hroot : 1 ≤ D ^ (1 / (n : ℝ)) := Real.one_le_rpow hD1 (by positivity)
   have hB : 1 ≤ B := by dsimp [B]; linarith
   have hBroot : D ^ (1 / (n : ℝ)) ≤ B := by dsimp [B]; linarith

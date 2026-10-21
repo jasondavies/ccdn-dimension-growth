@@ -13,24 +13,9 @@ open NumberField
 
 variable (K : Type*) [Field K] [NumberField K]
 
-lemma numberField_discriminant_natAbs_cast :
-    ((discr K).natAbs : ℝ) = |(discr K : ℝ)| := by
-  simpa only [Int.cast_natCast, Int.cast_abs] using
-    congrArg (fun z : ℤ => (z : ℝ)) (Int.natCast_natAbs (discr K))
-
-lemma numberField_discriminant_natAbs_pos : 0 < (discr K).natAbs :=
-  Int.natAbs_pos.mpr (discr_ne_zero K)
-
-lemma numberField_discriminant_log_ge_one (hn : 2 ≤ Module.finrank ℚ K) :
-    1 ≤ Real.log ((discr K).natAbs : ℝ) := by
-  have hD3 : (3 : ℝ) ≤ ((discr K).natAbs : ℝ) := by
-    have hh : (3 : ℤ) ≤ |discr K| := by
-      have := abs_discr_gt_two (K := K) (by omega : 1 < Module.finrank ℚ K)
-      omega
-    rw [numberField_discriminant_natAbs_cast]
-    exact_mod_cast hh
-  have h := Real.log_le_log (Real.exp_pos 1) (Real.exp_one_lt_three.le.trans hD3)
-  simpa only [Real.log_exp] using h
+lemma one_le_log_discr_natAbs_add_one : 1 ≤ Real.log ((discr K).natAbs : ℝ) + 1 := by
+  rw [numberField_discriminant_natAbs_cast]
+  linarith [Real.log_nonneg (one_le_abs_discr K)]
 
 theorem index_two_subfield_degree
     (hn : 3 ≤ Module.finrank ℚ K) (L : IntermediateField ℚ K)

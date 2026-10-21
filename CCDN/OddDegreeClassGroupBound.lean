@@ -36,8 +36,7 @@ theorem odd_degree_classGroup_two_torsion_bound
       oddDegreeClassGroupConstant (Module.finrank ℚ K) *
         |(discr K : ℝ)| ^
           (1 / 2 - 1 / (2 * (Module.finrank ℚ K : ℝ))) := by
-  have hD1 : 1 ≤ |(discr K : ℝ)| := by
-    exact_mod_cast (Int.one_le_abs (discr_ne_zero K))
+  have hD1 := one_le_abs_discr K
   have hD : 0 < |(discr K : ℝ)| := zero_lt_one.trans_le hD1
   let B := 9 * |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ))
   have hroot : 1 ≤ |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ)) :=

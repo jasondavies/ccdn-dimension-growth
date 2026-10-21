@@ -53,18 +53,26 @@ theorem projective_curve_count_of_proper_chart {n d : ℕ}
   have hR : (projectiveCount (projectiveIdealZeroLocus I) B : ℝ) ≤
       projectiveCount (projectiveZeroLocus f) (projectionBoxFactor n d * B) + (d : ℝ) ^ 2 := by
     exact_mod_cast hreduce B hB
-  have hscale := mul_le_mul_of_nonneg_left (projectiveCurveEstimate_scale n hd hB)
-    projectivePlaneAbsoluteConstant_pos.le
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
-  have hd4 : (d : ℝ) ^ 2 ≤ (d : ℝ) ^ 4 := by nlinarith [sq_nonneg ((d : ℝ) ^ 2 - 1)]
   have hQ : 1 ≤ B ^ (2 / (d : ℝ)) := Real.one_le_rpow hB (by positivity)
   have herr : (d : ℝ) ^ 2 ≤ projectiveCurveEstimate d B :=
-    hd4.trans (le_mul_of_one_le_right (by positivity) hQ)
-  rw [mul_assoc] at hplane
-  change _ ≤ projectivePlaneAbsoluteConstant * projectiveCurveEstimate d (projectionBoxFactor n d * B)
-    at hplane
-  unfold projectiveCurveConstant
-  nlinarith only [hR, hplane, hscale, herr]
+    (pow_le_pow_right₀ hd1 (by norm_num)).trans (le_mul_of_one_le_right (by positivity) hQ)
+  calc
+    _ ≤ projectiveCount (projectiveZeroLocus f) (projectionBoxFactor n d * B) +
+        (d : ℝ) ^ 2 := hR
+    _ ≤ projectivePlaneAbsoluteConstant *
+          projectiveCurveEstimate d (projectionBoxFactor n d * B) +
+        projectiveCurveEstimate d B := by
+      rw [projectiveCurveEstimate, ← mul_assoc]
+      exact add_le_add hplane herr
+    _ ≤ projectivePlaneAbsoluteConstant *
+          (Real.exp (2 * projectionLogConstant n) * projectiveCurveEstimate d B) +
+        projectiveCurveEstimate d B := by
+      gcongr
+      exacts [projectivePlaneAbsoluteConstant_pos.le, projectiveCurveEstimate_scale n hd hB]
+    _ = projectiveCurveConstant n * projectiveCurveEstimate d B := by
+      unfold projectiveCurveConstant
+      ring
 
 /-- The coordinate chart is chosen from a point when the counted
 set is nonempty. Coordinate permutation has no height cost. -/
