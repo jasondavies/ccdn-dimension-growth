@@ -12,7 +12,10 @@ import CCDN.Auxiliary.LiteralScaledAuxiliary
 import CCDN.Height.AffineHeightCutoff
 import CCDN.Height.ScaledHypersurfaceHeight
 /-! Quantitative degree selection for the literal affine bad-prime branch.
-The logarithmic branch can be selected separately at the existence level. -/
+The logarithmic branch can be selected separately at the existence level.
+Here "literal" means the paper's Definition 3.2.1 applied verbatim to the affine
+polynomial (`literalAffineBadPrimeFactor`, see `LiteralAffineBadPrimes`), as opposed to
+`hypersurfaceBadPrimeFactor`, which also counts primes at which the degree drops. -/
 
 @[expose] public section
 namespace CCDN

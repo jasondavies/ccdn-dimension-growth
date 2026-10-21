@@ -1,3 +1,5 @@
+Historical record, not maintained; see docs/history/README.md.
+
 CCDN THEOREM 3: FORMAL PROOF ROADMAP
 =================================
 

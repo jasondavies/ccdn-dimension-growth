@@ -89,9 +89,10 @@ theorem local_exponent_lower_bound (m s e : ℕ) (hm : 0 < m)
   have hμ0 : (μ : ℝ) ≠ 0 := by exact_mod_cast Nat.ne_of_gt hμ
   field_simp
 
-/-- The same estimate in the paper's separated-power notation. The error
-constant m+1 is uniform in both the equation and its multiplicity. -/
-theorem local_exponent_sharp (m s e : ℕ) (hm : 0 < m)
+/-- Under the binomial cutoff hypothesis, `(m!/μ)^(1/m) · m/(m+1) · s^(1+1/m) − (m+1)s ≤ e`:
+the local exponent bound in the paper's separated-power notation. The error constant `m+1` is
+uniform in both the equation and its multiplicity. -/
+theorem local_exponent_separated_lower_bound (m s e : ℕ) (hm : 0 < m)
     {μ : ℕ} (hμ : 0 < μ)
     (hcutoff : ∀ K : ℕ, s * K ≤ e + μ * (m + K).choose (m + 1)) :
     ((m.factorial : ℝ) / μ) ^ (1 / (m : ℝ)) * m / (m + 1) *
@@ -120,12 +121,12 @@ lemma hypersurfaceMultiplicityExponent_cutoff_pos (m s K : ℕ) (hm : 0 < m)
   exact hypersurfaceMultiplicityExponent_cutoff n s K hμ
 
 /-- The sharp local estimate in the paper's separated-power notation. -/
-theorem hypersurfaceMultiplicityExponent_sharp (m s : ℕ) (hm : 0 < m)
+theorem hypersurfaceMultiplicityExponent_lower_bound (m s : ℕ) (hm : 0 < m)
     {μ : ℕ} (hμ : 0 < μ) :
     ((m.factorial : ℝ) / μ) ^ (1 / (m : ℝ)) * m / (m + 1) *
       (s : ℝ) ^ (1 + 1 / (m : ℝ)) - (m + 1 : ℝ) * s ≤
         hypersurfaceMultiplicityExponent m μ s :=
-  local_exponent_sharp m s _ hm hμ
+  local_exponent_separated_lower_bound m s _ hm hμ
     (fun K => hypersurfaceMultiplicityExponent_cutoff_pos m s K hm hμ)
 
 end

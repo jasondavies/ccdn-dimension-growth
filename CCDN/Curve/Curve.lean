@@ -19,8 +19,9 @@ of polynomials of total degree at most `M` in its coordinate ring is `d*M + c` f
 `AffineCurveBound` records the full target, with constants depending only on the ambient
 dimension. It is proved by `affineCurveBound` in the `AffineCurveBound` module.
 `PlaneHilbert` proves the passage from a plane defining
-polynomial to this Hilbert-function degree. `PlaneIdealCount` proves the full
-prime-ideal counting interface in dimension two. `BoundedDegreePreservingProjection`
+polynomial to this Hilbert-function degree. `exists_plane_count_reduction` (in
+`AffineProjectionCount`) reduces a prime ideal of any ambient dimension, including two, to an
+irreducible plane equation of the same degree. `BoundedDegreePreservingProjection`
 constructs bounded integral projections preserving degree in every dimension.
 The general integer-height and counting assembly is completed in
 `AffineProjectionCount`, `ProjectionScaleAbsorption` and `AffineCurveBound`.

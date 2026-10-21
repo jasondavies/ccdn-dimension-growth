@@ -19,7 +19,6 @@ contains the section's equation. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open Classical
 
 theorem height_two_prime_isMinimalPrime_section
     (f g : CoordinatePolynomial 3) (hf : Irreducible f) (hfg : ¬ f ∣ g)
@@ -79,6 +78,7 @@ theorem surface_prime_curve_degree_sum_le
       exact Finset.sum_congr rfl (fun P _ => he P)
     _ ≤ _ := hsum
 
+open Classical in
 /-- Proper intersections of any such curve family with a third polynomial
 have a uniform product-of-three-degrees point bound at every radius. -/
 theorem surface_curve_crossing_count_le

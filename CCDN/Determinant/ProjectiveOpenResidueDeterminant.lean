@@ -257,7 +257,7 @@ theorem projective_hypersurface_minorGcd_dvd_open
       (by simpa only [Nat.add_sub_cancel] using hmajor)
     refine ⟨a, ?_, hdiv⟩
     simpa only [Nat.cast_add, Nat.cast_one, show (n : ℝ) + 1 + 1 = n + 2 by ring] using
-      local_exponent_sharp_of_root_bound (n + 1) s a (by omega) hpos hroot hcut
+      local_exponent_separated_lower_bound_of_root_bound (n + 1) s a (by omega) hpos hroot hcut
   · have hs0 : s = 0 := by omega
     refine ⟨0, ?_, by simp⟩
     simp only [hs0, Nat.cast_zero,

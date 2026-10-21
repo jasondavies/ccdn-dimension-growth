@@ -33,8 +33,10 @@ lemma totalDegree_zero_eval_constant {K σ : Type*} [Field K]
   rw [(totalDegree_eq_zero_iff_eq_C).mp hf]
   simp only [eval_C]
 
-/-- The same obstruction in the maximal-minor coordinates used for
-the Plucker embedding, without identifying its coordinate index with Fin 3. -/
+/-- Lemma 5.2's strict degree bound fails for `m = 0`: there is a geometrically integral
+rational point `X ⊂ ℙ²` such that, for every nonempty set `G` of points off `X`, the
+complement of `G` is not the common zero set of polynomials of degree `< (0+1)²·1² = 1` in the
+Plücker (maximal-minor) coordinates. -/
 theorem zero_dimensional_plucker_degree_bound_obstruction :
     ∃ I : Ideal (CoordinatePolynomial 3), I.IsPrime ∧
       IsHomogeneousIdeal I ∧

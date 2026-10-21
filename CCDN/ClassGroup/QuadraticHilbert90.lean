@@ -47,7 +47,8 @@ theorem quadratic_hilbert90 (σ : K ≃+* K) (hσ : Function.Involutive σ)
   · refine ⟨1 + a, h, ?_⟩
     rw [map_add, map_one, mul_add, mul_one, ha, add_comm]
 
-/-- The same construction in the multiplicative group. -/
+/-- Hilbert 90 for a nontrivial involution, in the unit group: a unit `a` with
+`a σ(a) = 1` has the form `b / σ(b)` for some unit `b`. -/
 theorem quadratic_hilbert90_units (σ : K ≃+* K) (hσ : Function.Involutive σ)
     (hσne : σ ≠ RingEquiv.refl K) (a : Kˣ)
     (ha : (a : K) * σ (a : K) = 1) :

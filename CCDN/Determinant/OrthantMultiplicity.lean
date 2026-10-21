@@ -13,7 +13,6 @@ integer, counted by cells of the standard-exponent partition. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open Classical
 
 lemma sum_preHilbertPoly_leading {ι : Type*} (s : Finset ι) (hs : s.Nonempty)
     (dim shift : ι → ℕ) :
@@ -56,10 +55,12 @@ lemma sum_preHilbertPoly_leading {ι : Type*} (s : Finset ι) (hs : s.Nonempty)
   refine ⟨hd, he, ?_⟩
   rw [Polynomial.leadingCoeff, he, hc, div_eq_mul_inv]
 
+open Classical in
 def lowerSetOrthantPatterns {σ : Type*} [Fintype σ]
     (S : Set (σ → ℕ)) (B : ℕ) : Finset (σ → Fin (B + 1)) :=
   Finset.univ.filter (fun b => (fun i => (b i).val) ∈ S)
 
+open Classical in
 lemma lowerSetOrthantPolynomial_eq_sum {σ : Type*} [Fintype σ]
     (S : Set (σ → ℕ)) (B : ℕ) :
     lowerSetOrthantPolynomial S B =
@@ -76,6 +77,7 @@ theorem lowerSet_eventually_polynomial_positive {σ : Type*} [Fintype σ]
       P.leadingCoeff = (d : ℚ) / P.natDegree.factorial ∧
       ∃ N : ℕ, ∀ n ≥ N, P.eval (n : ℚ) =
         (Nat.card {a : σ → ℕ // a ∈ S ∧ ∑ i, a i ≤ n} : ℚ) := by
+  classical
   obtain ⟨B, _, hB⟩ := lowerSet_clamp_stabilizes S hS
   let s := lowerSetOrthantPatterns S B
   have hs : s.Nonempty := by

@@ -109,8 +109,10 @@ theorem exists_bounded_integer_birational_center
     hdimdeg ∅ A hA (fun _ _ h => absurd h (Finset.notMem_empty _)) ⟨hdis,hfield⟩
   exact ⟨M,hM,hminor,hli,hgood⟩
 
-/-- The same construction inside X0=0, for the projective closure of an
-affine source. -/
+/-- For an affine prime ideal of dimension `m` and degree `d` that stays prime over `ℚ̄`,
+there is a linearly independent integer center matrix for its projective closure whose first
+column vanishes (so the center lies in the hyperplane `X₀ = 0`), with entries in
+`[0, (m+1)²d²]`, maximal minors bounded by `centerMinorBound`, and birational projection. -/
 theorem exists_bounded_integer_fixed_coordinate_center
     {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]

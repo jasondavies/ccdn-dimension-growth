@@ -123,7 +123,7 @@ theorem projective_hypersurface_reduction_minorGcd {n s N p d M : ℕ}
     have h := aggregate_hypersurface_exponents_cutoff (n + 1) (by omega) sizes μ
       (fun i => (hμ i).1) K
     simpa only [hsum, hsize] using h
-  · have h := aggregate_hypersurface_exponents_sharp (n + 1) (by omega) sizes μ
+  · have h := aggregate_hypersurface_exponents_lower_bound (n + 1) (by omega) sizes μ
       (fun i => (hμ i).1) (by rw [hsum]; exact hpos)
     simpa only [hsum, hsize, Nat.cast_add, Nat.cast_one,
       show (n : ℝ) + 1 + 1 = n + 2 by ring] using h
@@ -142,8 +142,9 @@ theorem projective_hypersurface_reduction_minorGcd {n s N p d M : ℕ}
       simpa only [k, a, label, E.symm_apply_apply] using h
     · exact hz
 
-/-- The same theorem, including the empty matrix: the number of rows and of
-residue points may be zero. -/
+/-- For primitive integral zeros of a homogeneous hypersurface and homogeneous columns of a
+common degree, `p^e` divides the gcd of the maximal minors, where `e` is bounded below in terms
+of the total residue multiplicity. The number of rows and of residue points may be zero. -/
 theorem projective_hypersurface_minorGcd_bound {n s N p d M : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0)

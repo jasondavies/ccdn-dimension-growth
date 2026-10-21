@@ -16,8 +16,8 @@ for every lower set of exponent vectors, in arbitrary finite dimension. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open Classical
 
+open Classical in
 def boundedExponentVectorEquivSym (σ : Type*) [Fintype σ] (N : ℕ) :
     {a : σ → ℕ // ∑ i, a i ≤ N} ≃ Sym (Option σ) N :=
   (slackExponentEquiv σ N).trans (Sym.equivNatSumOfFintype (Option σ) N).symm
@@ -26,6 +26,7 @@ instance finite_boundedExponentVectors {σ : Type*} [Fintype σ] (N : ℕ) :
     Finite {a : σ → ℕ // ∑ i, a i ≤ N} :=
   Finite.of_equiv (Sym (Option σ) N) (boundedExponentVectorEquivSym σ N).symm
 
+open Classical in
 lemma card_boundedExponentVectors {σ : Type*} [Fintype σ] (N : ℕ) :
     Nat.card {a : σ → ℕ // ∑ i, a i ≤ N} =
       (Fintype.card σ + N).choose (Fintype.card σ) := by
@@ -47,6 +48,7 @@ lemma orthantBaseDegree_le {σ : Type*} [Fintype σ] {B : ℕ}
     _ ≤ ∑ _ : σ, B := Finset.sum_le_sum (fun i _ => Nat.le_of_lt_succ (b i).isLt)
     _ = _ := by simp
 
+open Classical in
 /-- Exact eventual counting formula for a lower set partitioned into its
 translated orthants. -/
 theorem lowerSet_orthant_count {σ : Type*} [Fintype σ]

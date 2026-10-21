@@ -58,7 +58,7 @@ theorem exists_smooth_congruence_determinant_log_lower
     (fun _ => hypersurfaceMultiplicityExponent (n + 1) 1 s) hcong ?_
   · have he : hypersurfaceDeterminantMain n s - (n + 2 : ℝ) * s ≤
         (hypersurfaceMultiplicityExponent (n + 1) 1 s : ℝ) := by
-      have he := hypersurfaceMultiplicityExponent_sharp (n + 1) s (by omega)
+      have he := hypersurfaceMultiplicityExponent_lower_bound (n + 1) s (by omega)
         (show 0 < (1 : ℕ) by omega)
       simpa only [Nat.cast_one, div_one, hypersurfaceDeterminantMain,
         Nat.cast_add, Nat.cast_one, show (n : ℝ) + 1 + 1 = n + 2 by ring] using he

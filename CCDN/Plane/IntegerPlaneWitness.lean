@@ -34,8 +34,9 @@ lemma bad_prime_dvd_universalPlaneBadWitness_eval {σ : Type*} [Fintype σ]
   exact dvd_mul_of_dvd_left
     (bad_prime_dvd_universalPlaneBadWitness_coeff f hpos rows cols p hp hbad e) _
 
-/-- The same universal witness has a nonzero value on the box of side 2d³.
-Every prime above d with bad geometric reduction divides that value. -/
+/-- The universal plane bad-prime witness of an absolutely irreducible integer polynomial
+takes a nonzero value at some integer parameter in the box `[0, 2d³]`, and every prime above
+`d` with bad geometric reduction divides that value. -/
 theorem exists_bounded_integer_plane_witness
     {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]
     (f : MvPolynomial (Option σ) ℤ)

@@ -124,8 +124,9 @@ theorem projectiveCount_set_finite {n : ℕ} (X : Set (Projectivization ℚ (Fin
 
 The affine Hilbert polynomial `P` of the cone `ℚ[x₀,…,xₙ]/I` has degree `m + 1` and leading
 coefficient `d / (m + 1)!`. The two hypotheses on `P` therefore say that `X` has degree `d`,
-and `P.natDegree - 1 = m`. The paper's degree exponent `e(n)` is made explicit as
-`2n² + 5n − 5`, with natural-number subtraction (the exponent is `0` for `n = 0`).
+and `P.natDegree - 1 = m`. The paper leaves the degree exponent `e(n)` unspecified; its
+Remark 4.3.8 estimates `e(n) ≤ 2n³`. Here it is the explicit `2n² + 5n − 5`, which is at most
+`2n³` for `n ≥ 1`; with natural-number subtraction it is `0` for `n = 0`.
 The statement also covers `n ≤ 1` and the empty and zero-dimensional cases. -/
 theorem projective_dimension_growth (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
@@ -167,8 +168,10 @@ theorem affine_curve_bound (n : ℕ) (hn : 2 ≤ n) :
 variables. Let `f ∈ ℤ[x₁,…,x_N]` have degree `d ≥ 5`, and let its top-degree homogeneous
 part be irreducible over `ℚ̄`. Then `N_aff(V(f), B) ≤ C(N) d^(18+3n) B^(N-2)`.
 
-The paper leaves the exponent `e(N)` unspecified after the addenda's corrections. It is made
-explicit here as `18 + 3n = 3N + 9`. -/
+The paper leaves the exponent `e(N)` unspecified. Its Remark 4.3.8 estimates `e(N) ≤ 2N + 8`,
+but the authors' addenda correct Proposition 4.3.4 and Lemma 4.3.7, on which that estimate
+rests, and say the remark must be recomputed without giving a new value. The exponent here is
+the explicit `18 + 3n = 3N + 9`. -/
 theorem affine_hypersurface_bound (n : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin (n + 3)) ℤ,

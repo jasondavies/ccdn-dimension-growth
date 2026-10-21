@@ -94,7 +94,7 @@ lemma planeShear_totalDegree {R : Type*} [CommRing R] [Nontrivial R]
   rw [he] at h
   exact h
 
-/-- The same integral coordinate change commutes with every coefficient map. -/
+/-- `planeShear` commutes with every coefficient map. -/
 lemma planeShear_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (a : R) (f : MvPolynomial (Fin 2) R) :
     MvPolynomial.map φ (planeShear R a f) =

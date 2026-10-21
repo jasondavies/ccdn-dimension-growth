@@ -53,7 +53,7 @@ theorem plane_sections_incidence_bound {σ : Type*} [Fintype σ]
           exact_mod_cast (by simpa only [ZMod.card] using planeSectionPoints_card_le_degree_mul_card f v hz)
         linarith
       · rw [ite_eq_right hb, add_zero]
-        apply planeSectionPoints_card_le_sharp p f v _ hsize
+        apply planeSectionPoints_card_le_add_mul_sqrt p f v _ hsize
         exact not_not.mp (fun hh => hb (Or.inr hh))
   have hsum := Finset.sum_le_sum (fun v (_ : v ∈ (Finset.univ : Finset V)) => hpoint v)
   have hi : (Nat.card {z : σ → ZMod p // eval z f = 0} : ℝ) *

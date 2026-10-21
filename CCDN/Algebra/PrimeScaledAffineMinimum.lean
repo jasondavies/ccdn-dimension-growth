@@ -121,8 +121,9 @@ theorem scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
   exact scaled_hypersurface_auxiliary_bound_of_badPrime_le f hf hd hp hA hB hBp
     (hypersurfaceBadPrimeFactor_nonneg _) (hypersurfaceBadPrimeFactor_nonneg _) hbad
 
-/-- The same projective auxiliary satisfies both coefficient estimates;
-the better bound is therefore available without changing its zero set. -/
+/-- The auxiliary degree bound of the `p`-scaled homogenization is at most
+`affineMinimumAuxiliaryBound`, the minimum of the two coefficient estimates, so the auxiliary
+polynomial satisfies the better of the two without changing its zero set. -/
 theorem scaled_hypersurface_auxiliary_minimum_bound {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hf : f ≠ 0) (hd : 0 < f.totalDegree)
     {p : ℕ} (hp : p.Prime) {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B)

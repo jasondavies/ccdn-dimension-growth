@@ -32,7 +32,8 @@ lemma bivariateEval_equiv {K : Type*} [CommRing K]
         bivariatePolynomialEquiv_X_zero, bivariatePolynomialEquiv_X_one]
   exact RingHom.congr_fun he f
 
-/-- The same section, in the multivariate presentation used by point counting. -/
+/-- The plane section `universalPlaneSection f v` as a polynomial in two variables
+(`MvPolynomial (Fin 2)`), the presentation used by point counting. -/
 def planeSectionPolynomial {K σ : Type*} [CommRing K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K) : MvPolynomial (Fin 2) K :=
   (bivariatePolynomialEquiv K).symm (universalPlaneSection f v)
@@ -76,7 +77,9 @@ lemma planeSectionPoints_card_le_degree_mul_card {K σ : Type*} [Field K] [Finty
   simp only [Fintype.card_fin, Nat.reduceSub, pow_one] at h
   exact h.trans (Nat.mul_le_mul_right _ (planeSectionPolynomial_totalDegree f v))
 
-lemma planeSectionPoints_card_le_sharp {σ : Type*}
+/-- A plane section that is absolutely irreducible over `𝔽_p`, for `p > 27 d⁴`, has at most
+`p + 161 d² √p` points. -/
+lemma planeSectionPoints_card_le_add_mul_sqrt {σ : Type*}
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial σ (ZMod p))
     (v : PlaneParameters σ → ZMod p)
     (hir : Irreducible (bivariateMap (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))

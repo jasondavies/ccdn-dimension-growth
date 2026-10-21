@@ -148,8 +148,9 @@ theorem residue_minor_divisors_dvd_det {c s : ℕ}
   intro i j
   exact hd i (e ∘ (Fintype.equivFin _).symm ∘ j)
 
-/-- The same product divides the gcd of all maximal minors of a rectangular
-matrix, as required by the Bombieri--Vaaler bound. -/
+/-- If each `d i` divides every maximal minor of the rows labelled `i`, then `∏ i, d i`
+divides the gcd of all maximal minors of the rectangular matrix, as required by the
+Bombieri--Vaaler bound. -/
 theorem residue_minor_divisors_dvd_minorGcd {c s N : ℕ}
     (A : Matrix (Fin s) (Fin N) ℤ) (label : Fin s → Fin c) (d : Fin c → ℤ)
     (hd : ∀ i, ∀ j : Fin (Fintype.card {j : Fin s // label j = i}) → Fin N,

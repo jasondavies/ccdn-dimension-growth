@@ -18,7 +18,12 @@ import CCDN.Height.ScaledHypersurfaceHeight
 /-! CCDN Proposition 4.2.1 with the literal affine bad-prime factor.
 All box radii, zero constant coefficients and nonabsolute irreducible
 equations are included. The chart determinant proof handles good reductions
-which lose affine degree. -/
+which lose affine degree.
+Here "literal" means the paper's Definition 3.2.1 applied verbatim to the affine
+polynomial (`literalAffineBadPrimeFactor`, see `LiteralAffineBadPrimes`), as opposed to
+`hypersurfaceBadPrimeFactor`, which also counts primes at which the degree drops. The printed
+route through the homogenization does not give this factor
+(`Counterexample/HomogenizedBadPrimeFactor.lean`). -/
 
 @[expose] public section
 namespace CCDN

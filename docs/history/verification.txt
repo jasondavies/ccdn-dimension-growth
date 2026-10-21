@@ -1,3 +1,5 @@
+Historical record, not maintained; see docs/history/README.md.
+
 VERIFICATION RECORD
 19 October 2026
 

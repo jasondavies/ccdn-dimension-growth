@@ -122,7 +122,8 @@ theorem congruencePrimeWindow_edge_polylog_salberger {K R : ℝ}
       _ ≤ C := by dsimp only [C]; linarith
       _ ≤ C * B ^ (c / Real.log (t + 1)) := le_mul_of_one_le_right (by linarith) hBpow
 
-/-- The same precise rate with an arbitrary leading power of B retained. -/
+/-- With `W` the congruence prime window of length `K (log B + 1)`,
+`|W| R^|W| B^α (log B + 1)^k ≤ C B^(α + c / log(1 + log B))` for every real exponent `α`. -/
 theorem congruencePrimeWindow_edge_polylog_salberger_weight {K R : ℝ}
     (hK : 1 ≤ K) (hR : 1 ≤ R) (k : ℕ) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧ ∀ α B : ℝ, 1 ≤ B →

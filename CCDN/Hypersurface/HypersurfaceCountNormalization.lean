@@ -45,7 +45,7 @@ theorem hypersurface_count_normalized_root_error (m : ℕ) (hm : 0 < m)
 
 /-- An upper bound on the multiplicity root gives the usual denominator form
 of the sharp determinant exponent. -/
-theorem local_exponent_sharp_of_root_bound (m s e : ℕ) (hm : 0 < m)
+theorem local_exponent_separated_lower_bound_of_root_bound (m s e : ℕ) (hm : 0 < m)
     {μ : ℕ} (hμ : 0 < μ) {Q : ℝ}
     (hroot : (μ : ℝ) ^ (1 / (m : ℝ)) ≤ Q)
     (hcutoff : ∀ K : ℕ, s * K ≤ e + μ * (m + K).choose (m + 1)) :
@@ -60,7 +60,7 @@ theorem local_exponent_sharp_of_root_bound (m s e : ℕ) (hm : 0 < m)
     exact div_le_div_of_nonneg_left hf hr hroot
   have hscale : (0 : ℝ) ≤ (m : ℝ) / (m + 1) * (s : ℝ) ^ (1 + 1 / (m : ℝ)) := by positivity
   have h := mul_le_mul_of_nonneg_right hcoef hscale
-  have he := local_exponent_sharp m s e hm hμ hcutoff
+  have he := local_exponent_separated_lower_bound m s e hm hμ hcutoff
   have heq (a : ℝ) : a * ((m : ℝ) / (m + 1) * (s : ℝ) ^ (1 + 1 / (m : ℝ))) =
       a * m / (m + 1) * (s : ℝ) ^ (1 + 1 / (m : ℝ)) := by ring
   simp only [heq] at h
@@ -90,7 +90,7 @@ theorem projective_hypersurface_minorGcd_of_count_bound {n s N p d M : ℕ}
       (by simpa only [Nat.add_sub_cancel] using hcount)
     refine ⟨e, ?_, hd⟩
     simpa only [Nat.cast_add, Nat.cast_one, show (n : ℝ) + 1 + 1 = n + 2 by ring] using
-      local_exponent_sharp_of_root_bound (n + 1) s e (by omega) hpos hroot hcut
+      local_exponent_separated_lower_bound_of_root_bound (n + 1) s e (by omega) hpos hroot hcut
   · have hs0 : s = 0 := by omega
     refine ⟨0, ?_, by simp⟩
     simp only [hs0, Nat.cast_zero,

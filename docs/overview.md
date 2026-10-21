@@ -17,29 +17,36 @@ an affine curve of degree `d` in `𝔸ⁿ`.
 2. **Projection to the plane** (`Projection/`). A bounded integral linear projection preserves
    the degree of the curve (`Projection/BoundedDegreePreservingProjection.lean`). It costs a
    bounded enlargement of the box, which `Projection/ProjectionScaleAbsorption.lean` absorbs
-   into the constant. Exceptional fibers contribute at most `d(d − 1)` points.
+   into the constant. Exceptional fibres contribute at most `d(d − 1)` points.
 
 ## Theorem 2: projective curves (`ProjectiveCurveBound.lean`)
 
 `projectiveCurveBound` gives `N(X, B) ≤ C(n) d⁴ B^(2/d)`. A coordinate permutation puts the
 curve in a chart where it is not contained in the hyperplane at infinity. The projective plane
 count (`Plane/`) and a bounded projection from `ℙⁿ` to `ℙ²`
-(`Projection/ProjectiveProjectionCount.lean`) then give the bound. Points at infinity and
-curves that split over `ℚ̄` (`Hypersurface/NonRationalProjectiveCurve.lean`) are included.
+(`Projection/ProjectiveProjectionCount.lean`) then give the bound. Points at infinity are
+included, and curves that are irreducible over `ℚ` but split over `ℚ̄` have at most `d² + d`
+rational points (`Hypersurface/ProjectivePlaneNonabsoluteCount.lean`).
 
 ## Theorem 4: affine hypersurfaces (`AffineHypersurfaceDimensionGrowth.lean`)
 
-`affine_hypersurface_dimension_growth` gives `C(n) d^(18+3n) B^(n+1)` in `n + 3` variables,
-for an equation of degree `d ≥ 5` whose top-degree form is absolutely irreducible.
+`affine_hypersurface_dimension_growth` gives `N_aff(f, B) ≤ C(N) d^(3N+9) B^(N−2)` in
+`N ≥ 3` variables, for an equation of degree `d ≥ 5` whose top-degree form is absolutely
+irreducible. The Lean statement writes `N = n + 3`, so the bound reads `C d^(18+3n) B^(n+1)`.
 
 1. **Surfaces** (`Surface/`). `Surface/AffineSurfaceDimensionGrowth.lean` proves the bound
    `C d¹⁸ B` in three variables. For `d ≥ 16` it combines an auxiliary polynomial, the line
    contribution of Proposition 4.3.3 and a cover of the remaining points by curves. For
    `5 ≤ d ≤ 15` it uses a Salberger-type cover by congruence classes (Theorem 4.3.5).
 2. **Slicing** (`Hypersurface/`). `Hypersurface/HyperplaneSlicingInduction.lean` adds one
-   variable at a time. A good integer hyperplane with normal bounded by `d³`
-   (Lemma 4.3.7, `Hypersurface/IntegralHyperplaneAvoidance.lean`) keeps the top form absolutely
-   irreducible on every parallel slice, so each step costs a factor `d³ B`.
+   variable at a time, counting points level by level along a linear form
+   (`Hypersurface/IntegerHyperplaneSlices.lean`). The universal Noether forms give a nonzero
+   detector of degree `d(d² − 1) + 1` for the bad hyperplanes (the corrected Lemma 4.3.7,
+   `Hypersurface/EffectiveHyperplaneAvoidance.lean`), hence a good integer hyperplane with
+   normal bounded by `d³` (`Hypersurface/GoodHyperplane.lean`). Its parallel slices keep an
+   absolutely irreducible top form (`Hypersurface/IntegerGoodHyperplaneSlices.lean`), so each
+   step costs a factor `d³ B`. (The audited statement of Lemma 4.3.7, which also covers
+   degree one, is proved separately and is not on this path.)
 
 ## Theorem 1: projective varieties (`ProjectiveDimensionGrowth.lean`)
 
@@ -50,11 +57,15 @@ splits by codimension:
 - **Hypersurfaces:** a homogeneous prime of codimension one is principal
   (`exists_prime_generator_of_hilbert_dimension`). Its count comes from Theorem 4 through the
   affine cone (`Hypersurface/ProjectiveHypersurfaceDimensionGrowth.lean`).
-- **Codimension at least two:** a projection from a good center (`Center/`, Section 5) maps the
-  variety birationally onto a hypersurface of the same degree in `ℙ^(m+1)`, with polynomially
-  bounded height cost (`Projection/`, `Hypersurface/ProjectiveVarietyDimensionGrowth.lean`).
-  The center comes from Chow forms and explicit Plücker equations for the bad centers
-  (`Center/PluckerComplementEquations.lean`).
+- **Codimension at least two:** a bounded integer linear projection maps the variety finitely
+  and birationally onto a hypersurface of the same degree in `ℙ^(m+1)`
+  (`Projection/BoundedBirationalHypersurfaceProjection.lean`). It is built from a bounded
+  linear Noether normalisation (`Projection/BoundedIntegerNormalization.lean`) and a bounded
+  primitive linear parameter, not from the Chow forms and good centres of Section 5. Its height
+  and fibre losses are polynomial in `d` (`Projection/ProjectiveProjectionGrowth.lean`,
+  `Hypersurface/ProjectiveVarietyDimensionGrowth.lean`). Section 5 itself (good centres,
+  Chow forms, Plücker equations, Lemmas 5.1–5.4) is formalised in `Center/`, but no main
+  result imports it.
 
 ## Proposition 5: lower bound (`ProjectiveCurveLowerBound.lean`)
 

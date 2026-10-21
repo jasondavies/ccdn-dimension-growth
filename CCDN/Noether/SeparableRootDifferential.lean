@@ -43,6 +43,11 @@ def separableAdjoinRootDifferential {K : Type*} [Field K] [Differential K]
         rw [AdjoinRoot.aeval_eq, AdjoinRoot.mk_self]
       simpa only [AdjoinRoot.aeval_eq] using hsep.aeval_derivative_ne_zero hc)
 
+-- Needed by `rw [Derivation.liftOfSurjective_apply]` below. With the default setting
+-- (Lean v4.35.0) the rewrite fails: the pattern `(Derivation.liftOfSurjective ?hf ?hd) (?m ?x)`
+-- is not found in `(Derivation.liftOfSurjective ⋯ ⋯) ((AdjoinRoot.mk f).toIntAlgHom (C a))`,
+-- since matching `?m ?x` against the `toIntAlgHom` coercion needs unfolding past the
+-- transparency that the unifier otherwise respects.
 set_option backward.isDefEq.respectTransparency false in
 theorem separableAdjoinRootDifferential_algebra {K : Type*} [Field K] [Differential K]
     (f : K[X]) [Fact (Irreducible f)] [Fact f.Monic] (hsep : f.Separable) :
