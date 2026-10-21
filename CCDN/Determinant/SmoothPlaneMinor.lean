@@ -5,17 +5,18 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateTotalDegree
 public import Mathlib.Algebra.MvPolynomial.PDeriv
-import CCDN.Algebra.PositiveCharacteristicRank
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
 import CCDN.ForMathlib.MatrixRank
+import CCDN.Noether.ClosedFormRank
 import CCDN.Projection.ShearNormalization
 
 /-! A smooth rational point supplies a nonzero closed-form coefficient minor
-for an irreducible plane equation in large characteristic. The base field need
-not be algebraically closed. -/
+for an irreducible plane equation in characteristic zero or large characteristic.
+The base field need not be algebraically closed. -/
 
 @[expose] public section
 namespace CCDN
@@ -25,14 +26,14 @@ open Polynomial Matrix
 /-- A nonzero minor over the original coefficient field, obtained by proving
 geometric irreducibility from the smooth point. -/
 theorem exists_closedForm_minor_of_smooth_plane_point
-    {K : Type*} [Field K] {p : ℕ} [CharP K p]
-    (d : ℕ) (hd : 0 < d) (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
+    {K : Type*} [Field K]
+    (d : ℕ) (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
     (z : Fin 2 → K) (j : Fin 2)
     (hz : MvPolynomial.eval z f = 0)
     (hj : MvPolynomial.eval z (MvPolynomial.pderiv j f) ≠ 0)
     (hm : (bivariatePolynomialEquiv K f).Monic)
     (hdeg : (bivariatePolynomialEquiv K f).natDegree = d)
-    (htotal : f.totalDegree ≤ d) (hchar : 2 * d ^ 2 < p) :
+    (htotal : f.totalDegree ≤ d) (hchar : CharZeroOrGT K (2 * d ^ 2)) :
     ∃ (a : Fin (2 * d ^ 2 - 1) → ℕ × ℕ)
       (c : Fin (2 * d ^ 2 - 1) → ClosedFormColumns d),
       Function.Injective a ∧ Function.Injective c ∧
@@ -40,7 +41,6 @@ theorem exists_closedForm_minor_of_smooth_plane_point
   let L := AlgebraicClosure K
   let φ : K →+* L := algebraMap K L
   let g := bivariateMap φ (bivariatePolynomialEquiv K f)
-  have : CharP L p := charP_of_injective_algebraMap (algebraMap K L).injective p
   have hgi : Irreducible g := by
     dsimp only [g]
     rw [bivariatePolynomialEquiv_map, MulEquiv.irreducible_iff (f := bivariatePolynomialEquiv L)]
@@ -51,7 +51,8 @@ theorem exists_closedForm_minor_of_smooth_plane_point
   have hgt : bivariateTotalDegree g ≤ d := by
     apply (bivariateTotalDegree_map_le φ _).trans
     simpa only [bivariateTotalDegree, AlgEquiv.symm_apply_apply] using htotal
-  have hr := closedForm_coefficient_rank_lower_of_char (ell := p) d hd g hgi hgm hgd hgt hchar
+  have hr := closedForm_coefficient_rank_lower d g hgi hgm hgd d hgt
+    ((hchar.map φ).mono (by rw [sq, mul_assoc]))
   obtain ⟨a, c, ha, hc, hdet⟩ := Matrix.exists_det_submatrix_ne_zero_of_le_rank
     (closedFormCoefficientMatrix d g) (2 * d ^ 2 - 1) (by omega)
   refine ⟨a, c, ha, hc, ?_⟩

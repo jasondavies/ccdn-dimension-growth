@@ -8,8 +8,10 @@ module
 public import CCDN.Hilbert.FilteredIntersection
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.Algebra.CharZeroOrGT
 import CCDN.Auxiliary.PlaneFrobeniusAuxiliary
 import CCDN.Determinant.PlaneSingularities
+import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Plane.Bezout
 import CCDN.Plane.PlaneFrobeniusSystem
 import Mathlib.LinearAlgebra.Dimension.Free
@@ -75,7 +77,7 @@ theorem plane_stepanov_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
     Fintype.card ι * N ≤ f.totalDegree * (D + p * A) +
       f.totalDegree * (f.totalDegree - 1) * N := by
   classical
-  obtain ⟨k, hk⟩ := exists_pderiv_ne_zero_of_degree_lt_char f hpos hchar
+  obtain ⟨k, hk⟩ := exists_pderiv_ne_zero hpos (CharZeroOrGT.of_charP hchar)
   let P (i : ι) := eval (z i) (pderiv k f) = 0
   have hgood := plane_stepanov_smooth_bound p f hf
     (fun i : {i // ¬ P i} => z i.val) (hz.comp Subtype.val_injective)

@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Auxiliary.HypersurfaceAffineCoordinates
 public import CCDN.Noether.GenericPlaneIrreducibility
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
@@ -78,8 +79,8 @@ lemma normalizedHypersurfaceCoordinates_partial_ne_zero {K σ : Type*} [Field K]
 hypotheses: the coordinates and the nonzero scalar are actually constructed. -/
 theorem exists_monic_smooth_hypersurface_coordinates
     {K σ : Type*} [Field K] [IsAlgClosed K] [Fintype σ]
-    {p : ℕ} [CharP K p] (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
-    (hpos : 0 < f.totalDegree) (hchar : f.totalDegree < p) :
+    (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
+    (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K f.totalDegree) :
     ∃ (a b : Option σ → K) (hb : b none ≠ 0),
       eval b (homogeneousComponent f.totalDegree f) ≠ 0 ∧
       Irreducible (normalizedHypersurfaceCoordinates a b hb f) ∧
@@ -88,7 +89,7 @@ theorem exists_monic_smooth_hypersurface_coordinates
       (normalizedHypersurfaceCoordinates a b hb f).totalDegree ≤ f.totalDegree ∧
       eval (0 : Option σ → K) (normalizedHypersurfaceCoordinates a b hb f) = 0 ∧
       eval (0 : Option σ → K) (pderiv none (normalizedHypersurfaceCoordinates a b hb f)) ≠ 0 := by
-  obtain ⟨a, j, ha, hj⟩ := exists_smooth_hypersurface_point_of_degree_lt_char (p := p) f hf hpos hchar
+  obtain ⟨a, j, ha, hj⟩ := exists_smooth_hypersurface_point_of_degree_lt_char f hf hpos hchar
   obtain ⟨b, hb, hdir, ht⟩ := exists_good_hypersurface_direction_with_coordinate f hf.ne_zero a j hj none
   exact ⟨a, b, hb, hdir, normalizedHypersurfaceCoordinates_irreducible a b hb f hf hdir,
     normalizedHypersurfaceCoordinates_monic a b hb f hdir,
@@ -97,12 +98,12 @@ theorem exists_monic_smooth_hypersurface_coordinates
     normalizedHypersurfaceCoordinates_eval_zero a b hb f ha,
     normalizedHypersurfaceCoordinates_partial_ne_zero a b hb f hdir ht⟩
 
-/-- Every irreducible positive-degree hypersurface in large characteristic has
-an explicitly positioned generic-plane family with a nonzero slope minor. -/
+/-- Every irreducible positive-degree hypersurface in characteristic zero or larger
+than 2*d^2 has an explicitly positioned generic-plane family with a nonzero slope minor. -/
 theorem exists_positioned_genericPlane_minor
     {K σ : Type*} [Field K] [IsAlgClosed K] [Fintype σ]
-    {p : ℕ} [CharP K p] (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
-    (hpos : 0 < f.totalDegree) (hchar : 2 * f.totalDegree ^ 2 < p) :
+    (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
+    (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K (2 * f.totalDegree ^ 2)) :
     ∃ (a b : Option σ → K) (hb : b none ≠ 0),
       eval b (homogeneousComponent f.totalDegree f) ≠ 0 ∧
       ∃ (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
@@ -110,10 +111,10 @@ theorem exists_positioned_genericPlane_minor
         Function.Injective rows ∧ Function.Injective cols ∧
         ((closedFormCoefficientMatrix f.totalDegree
           (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).submatrix rows cols).det ≠ 0 := by
-  have hp : f.totalDegree < p := by nlinarith [Nat.le_mul_self f.totalDegree]
   obtain ⟨a, b, hb, hdir, hg, hm, hdeg, ht, hz, hs⟩ :=
-    exists_monic_smooth_hypersurface_coordinates (p := p) f hf hpos hp
-  exact ⟨a, b, hb, hdir, exists_genericPlane_minor (p := p) f.totalDegree hpos
+    exists_monic_smooth_hypersurface_coordinates f hf hpos
+      (hchar.mono (by nlinarith [Nat.le_mul_self f.totalDegree]))
+  exact ⟨a, b, hb, hdir, exists_genericPlane_minor f.totalDegree hpos
     (normalizedHypersurfaceCoordinates a b hb f) hg hm hdeg ht hchar hz hs⟩
 
 end

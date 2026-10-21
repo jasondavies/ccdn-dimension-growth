@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateTotalDegree
 import CCDN.Noether.ClosedFormFactorRank
 import Mathlib.RingTheory.DedekindDomain.Basic
@@ -62,11 +63,11 @@ lemma exists_monic_bivariate_primary_factor {F : Type*} [Field F]
   exact hnd ((hgm.isPrimitive.dvd_iff_fraction_map_dvd_fraction_map (RatFunc F)).mpr hdiv)
 
 /-- A reducible normalized equation of total degree at most d, with outer
-degree d and every degree up to d nonzero in the base field, has coefficient-matrix kernel
+degree d, in characteristic zero or larger than d, has coefficient-matrix kernel
 dimension at least two. Both squarefree and repeated-factor cases are covered. -/
-theorem closedForm_rank_drop_of_not_irreducible_of_natCast
+theorem closedForm_rank_drop_of_not_irreducible
     {F : Type*} [Field F] (d : ℕ) (hd : 0 < d)
-    (hchar : ∀ n : ℕ, 0 < n → n ≤ d → (n : F) ≠ 0)
+    (hchar : CharZeroOrGT F d)
     (f : F[X][X]) (hf : f.Monic) (hred : ¬Irreducible f)
     (hdeg : f.natDegree = d) (htotal : bivariateTotalDegree f ≤ d) :
     (closedFormCoefficientMatrix d f).rank + 2 ≤ 2 * d ^ 2 := by

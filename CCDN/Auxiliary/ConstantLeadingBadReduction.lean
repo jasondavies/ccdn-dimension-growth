@@ -98,7 +98,7 @@ lemma constant_leading_bad_prime_dvd
     change g.natDegree = f.natDegree at hdegK
     omega
   have hred : ¬Irreducible g := hbad.resolve_left (not_ne_iff.mpr he)
-  have hr := closedForm_rank_drop_of_constant_leading p d hd hp (a : K) haK g hlK hred
+  have hr := closedForm_rank_drop_of_constant_leading d hd (.of_charP hp) (a : K) haK g hlK hred
     (hdegK.trans hdeg) ht
   apply dvd_mul_of_dvd_right
   apply characteristic_dvd_closedForm_minor_of_rank_lt (K := K) p d (2 * d ^ 2 - 1) f r c

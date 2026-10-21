@@ -16,6 +16,7 @@ public import CCDN.Algebra.BinaryHomogeneousIrreducibility
 public import CCDN.Algebra.BinomialSectionBound
 public import CCDN.Algebra.BoundedLinearSeparation
 public import CCDN.Algebra.BoundedRowSeparation
+public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Algebra.CoefficientwiseHomogeneous
 public import CCDN.Algebra.CoefficientwiseSubstitution
 public import CCDN.Algebra.ConjugatePrimeGridBound
@@ -56,7 +57,6 @@ public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.PolynomialPrimeLocalization
 public import CCDN.Algebra.PolynomialResultantDegree
 public import CCDN.Algebra.PolynomialSection
-public import CCDN.Algebra.PositiveCharacteristicRank
 public import CCDN.Algebra.PrimeIdealGridBound
 public import CCDN.Algebra.PrimeScaledAffineMinimum
 public import CCDN.Algebra.ProjectiveChartDegree
@@ -140,7 +140,6 @@ public import CCDN.Auxiliary.HypersurfaceLargeHeightAuxiliary
 public import CCDN.Auxiliary.HypersurfaceLeadingCoefficient
 public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
 public import CCDN.Auxiliary.HypersurfacePositioning
-public import CCDN.Auxiliary.HypersurfacePositioningCharZero
 public import CCDN.Auxiliary.HypersurfaceProjectiveAuxiliary
 public import CCDN.Auxiliary.HypersurfaceRankArchimedean
 public import CCDN.Auxiliary.HypersurfaceRankLogarithm
@@ -417,7 +416,6 @@ public import CCDN.Determinant.FiltrationWeights
 public import CCDN.Determinant.FormalBranchMultiplicity
 public import CCDN.Determinant.GenericPlaneEulerMinorCharZero
 public import CCDN.Determinant.GenericPlaneMinor
-public import CCDN.Determinant.GenericPlaneMinorCharZero
 public import CCDN.Determinant.GenericPlaneSmoothness
 public import CCDN.Determinant.GeometricResidueReduction
 public import CCDN.Determinant.HeightDeterminant
@@ -456,7 +454,6 @@ public import CCDN.Determinant.PlaneSingularities
 public import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
 public import CCDN.Determinant.PlaneTangentMultiplicity
 public import CCDN.Determinant.PolynomialMapDeterminant
-public import CCDN.Determinant.PositiveCharacteristicResidue
 public import CCDN.Determinant.PrimeAggregation
 public import CCDN.Determinant.PrimeIntegerLocalDeterminant
 public import CCDN.Determinant.ProjectiveChartSmoothness
@@ -475,6 +472,7 @@ public import CCDN.Determinant.ResidueAggregation
 public import CCDN.Determinant.ResidueEliminant
 public import CCDN.Determinant.ResidueEliminantEvaluation
 public import CCDN.Determinant.ResidueSubsetBoundary
+public import CCDN.Determinant.SimpleRootResidue
 public import CCDN.Determinant.SingularApproximation
 public import CCDN.Determinant.SingularDeterminant
 public import CCDN.Determinant.SingularDeterminantCutoff
@@ -498,6 +496,7 @@ public import CCDN.ForMathlib.IntegerPolynomialL1
 public import CCDN.ForMathlib.Matrix
 public import CCDN.ForMathlib.MatrixRank
 public import CCDN.ForMathlib.MvPolynomial
+public import CCDN.ForMathlib.MvPolynomialDerivative
 public import CCDN.ForMathlib.NatCast
 public import CCDN.ForMathlib.Polynomial
 public import CCDN.ForMathlib.SchwartzZippel
@@ -634,7 +633,6 @@ public import CCDN.LowerBound.GridTopFormConstruction
 public import CCDN.LowerBound.HypersurfaceLowerBoundAllDegrees
 public import CCDN.LowerBound.IntegerGridLowerBound
 public import CCDN.LowerBound.ProjectiveDegreeObstruction
-public import CCDN.Noether.AlgebraicDifferentialConstants
 public import CCDN.Noether.AmbientNoetherForms
 public import CCDN.Noether.AmbientNoetherHeight
 public import CCDN.Noether.AmbientNoetherNonvanishing
@@ -646,6 +644,7 @@ public import CCDN.Noether.BivariateTotalDegree
 public import CCDN.Noether.BoundedDifferentialConstants
 public import CCDN.Noether.ClosedFormBaseChange
 public import CCDN.Noether.ClosedFormFactorRank
+public import CCDN.Noether.ClosedFormGradient
 public import CCDN.Noether.ClosedFormHeight
 public import CCDN.Noether.ClosedFormKernelWitness
 public import CCDN.Noether.ClosedFormParameterDegree
@@ -677,11 +676,9 @@ public import CCDN.Noether.FormalPlaneDifferentiation
 public import CCDN.Noether.GenericPlaneIrreducibility
 public import CCDN.Noether.GenericPlaneStretch
 public import CCDN.Noether.NoetherianLocalLayers
-public import CCDN.Noether.PositiveCharacteristicClosedForms
 public import CCDN.Noether.PowerSeriesBaseChange
 public import CCDN.Noether.PowerSeriesFrobenius
 public import CCDN.Noether.PowerSeriesOrderIndependence
-public import CCDN.Noether.RationalClosedForms
 public import CCDN.Noether.RationalDifferential
 public import CCDN.Noether.SeparableRootDifferential
 public import CCDN.Noether.UniversalNoetherForms
@@ -689,11 +686,10 @@ public import CCDN.Noether.UniversalPlaneBadWitness
 public import CCDN.Noether.UniversalPlaneDegree
 public import CCDN.Noether.UniversalPlaneEvaluation
 public import CCDN.Noether.UniversalPlaneFamily
-public import CCDN.Noether.UniversalPlaneGoodSpecializationCharZero
+public import CCDN.Noether.UniversalPlaneIntegerSpecialization
 public import CCDN.Noether.UniversalPlaneL1
 public import CCDN.Noether.UniversalPlaneLeading
 public import CCDN.Noether.UniversalPlaneWitness
-public import CCDN.Noether.UniversalPlaneWitnessCharZero
 public import CCDN.Plane.AffinePlaneAssembly
 public import CCDN.Plane.AffinePlaneCoefficientCount
 public import CCDN.Plane.AffinePlaneRestriction

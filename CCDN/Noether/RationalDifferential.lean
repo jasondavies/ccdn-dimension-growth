@@ -9,7 +9,6 @@ public import Mathlib.RingTheory.SimpleRing.Principal
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.RatFunc.Basic
 public import Mathlib.RingTheory.Derivation.DifferentialRing
-import CCDN.Noether.AlgebraicDifferentialConstants
 import Mathlib.FieldTheory.RatFunc.AsPolynomial
 
 /-! The formal derivative on a rational function field and its constant field. -/
@@ -91,64 +90,6 @@ avoid introducing a competing global instance on rational functions. -/
 def rationalDifferential (K : Type*) [Field K] : Differential (RatFunc K) := by
   let : Algebra ℤ (RatFunc K) := Ring.toIntAlgebra _
   exact ⟨(rationalDerivation K).restrictScalars ℤ⟩
-
-/-- In characteristic zero a rational function with zero formal derivative
-is a constant. The proof uses the reduced numerator and denominator. -/
-theorem rationalDerivative_eq_zero_iff [CharZero K] (x : RatFunc K) :
-    rationalDerivative x = 0 ↔ x ∈ (algebraMap K (RatFunc K)).range := by
-  constructor
-  · intro hx
-    have hfrac : rationalDerivativeFraction x.num x.denom = 0 := by
-      rw [← rationalDerivative_div, x.num_div_denom]
-      exact hx
-    have hden := RatFunc.algebraMap_ne_zero x.denom_ne_zero
-    have hnum : algebraMap K[X] (RatFunc K) x.num.derivative * algebraMap K[X] (RatFunc K) x.denom -
-        algebraMap K[X] (RatFunc K) x.num * algebraMap K[X] (RatFunc K) x.denom.derivative = 0 :=
-      (div_eq_zero_iff.mp hfrac).resolve_right (pow_ne_zero 2 hden)
-    have he : x.num.derivative * x.denom = x.num * x.denom.derivative := by
-      apply RatFunc.algebraMap_injective K
-      simpa only [map_mul] using sub_eq_zero.mp hnum
-    have hdvd : x.denom ∣ x.denom.derivative := by
-      apply x.isCoprime_num_denom.symm.dvd_of_dvd_mul_left
-      rw [← he]
-      exact dvd_mul_left _ _
-    have hdz : x.denom.derivative = 0 := by
-      by_contra hn
-      exact (not_le_of_gt (degree_derivative_lt x.denom_ne_zero)) (degree_le_of_dvd hdvd hn)
-    have hnz : x.num.derivative = 0 := by
-      rw [hdz, mul_zero] at he
-      exact (mul_eq_zero.mp he).resolve_right x.denom_ne_zero
-    refine ⟨x.num.coeff 0 / x.denom.coeff 0, ?_⟩
-    conv_rhs => rw [← x.num_div_denom, eq_C_of_derivative_eq_zero hnz, eq_C_of_derivative_eq_zero hdz]
-    simp only [RatFunc.algebraMap_C, RatFunc.algebraMap_eq_C, map_div₀]
-  · rintro ⟨c, rfl⟩
-    rw [IsScalarTower.algebraMap_apply K K[X] (RatFunc K), rationalDerivative_polynomial]
-    simp
-
-/-- The chosen rational differential structure has exactly the coefficient
-field as its constants. -/
-theorem rationalDifferential_containConstants (K : Type*) [Field K] [CharZero K] :
-    let := rationalDifferential K
-    Differential.ContainConstants K (RatFunc K) := by
-  let := rationalDifferential K
-  constructor
-  intro x hx
-  exact (rationalDerivative_eq_zero_iff x).mp hx
-
-/-- Constants of an algebraic differential extension of F(t), for
-algebraically closed characteristic-zero F, belong to F. -/
-theorem rational_algebraic_differential_constants
-    {F L : Type*} [Field F] [CharZero F] [IsAlgClosed F] [Field L]
-    [Algebra F L] [Algebra (RatFunc F) L] [IsScalarTower F (RatFunc F) L]
-    [Differential L] [Algebra.IsAlgebraic (RatFunc F) L] :
-    let := rationalDifferential F
-    DifferentialAlgebra (RatFunc F) L → Differential.ContainConstants F L := by
-  dsimp only
-  let := rationalDifferential F
-  intro h
-  have := h
-  have := rationalDifferential_containConstants F
-  exact containConstants_of_algebraic (F := F) (K := RatFunc F) (L := L)
 
 end
 end CCDN
