@@ -43,6 +43,8 @@ private theorem uniqueAlgEquiv_natDegree {R σ : Type*} [CommRing R] [Unique σ]
     change m.degree ≤ _
     rwa [he]
 
+/-- Over an algebraically closed field, an irreducible homogeneous polynomial in two variables
+has degree at most `1`. -/
 theorem binary_homogeneous_irreducible_degree_le_one
     {K : Type*} [Field K] [IsAlgClosed K] {d : ℕ}
     (f : MvPolynomial (Fin 2) K) (hf : f.IsHomogeneous d)

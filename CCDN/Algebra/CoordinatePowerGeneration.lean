@@ -15,6 +15,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The degree filtration of the coordinate ring `MvPolynomial σ K ⧸ I` is increasing. -/
 lemma filteredCoordinateSpace_mono {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) {m n : ℕ} (hmn : m ≤ n) :
     filteredCoordinateSpace I m ≤ filteredCoordinateSpace I n := by
@@ -22,6 +23,8 @@ lemma filteredCoordinateSpace_mono {K σ : Type*} [Field K]
   intro f hf
   exact (mem_restrictTotalDegree _ _ _).mpr (((mem_restrictTotalDegree _ _ _).mp hf).trans hmn)
 
+/-- The degree filtration of the coordinate ring is multiplicative: a product of classes of
+degree at most `m` and `n` has degree at most `m + n`. -/
 lemma filteredCoordinateSpace_mul_mem {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) {m n : ℕ} {x y : MvPolynomial σ K ⧸ I}
     (hx : x ∈ filteredCoordinateSpace I m) (hy : y ∈ filteredCoordinateSpace I n) :
@@ -33,6 +36,8 @@ lemma filteredCoordinateSpace_mul_mem {K σ : Type*} [Field K]
   rw [mem_restrictTotalDegree] at hf hg ⊢
   exact (totalDegree_mul _ _).trans (Nat.add_le_add hf hg)
 
+/-- An exponent vector of positive degree at least `Fintype.card σ * N` has some coordinate
+at least `N`. -/
 lemma large_exponent_of_degree {σ : Type*} [Fintype σ]
     (e : σ →₀ ℕ) (N : ℕ) (hpos : 0 < e.degree)
     (he : Fintype.card σ * N ≤ e.degree) : ∃ j, N ≤ e j := by
@@ -48,8 +53,10 @@ lemma large_exponent_of_degree {σ : Type*} [Fintype σ]
   simp only [Finset.sum_const, Finset.card_univ, smul_eq_mul] at hlt
   omega
 
-/-- An explicit balanced reduction of each coordinate power gives the exact
-filtered recurrence needed for a full-degree parameter. -/
+/-- Let `l` have total degree at most `1`. If each coordinate power `X j ^ N` is congruent
+modulo `I` to `r + l * s` with `r` and `s` of total degree at most `N - 1`, then for every
+`n ≥ Fintype.card σ * N` the degree-`(n + 1)` piece of the filtered coordinate ring is the
+degree-`n` piece plus `l` times the degree-`n` piece. -/
 theorem eventual_generation_of_power_reductions {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (l : MvPolynomial σ K) (hl : l.totalDegree ≤ 1)
     (N : ℕ) (hN : 0 < N)

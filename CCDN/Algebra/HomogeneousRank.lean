@@ -21,14 +21,21 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- The `K`-linear map sending a polynomial in `n + 1` variables to its vector of coefficients
+at the degree-`M` monomials, enumerated by `homogeneousMonomials n M`. -/
 def homogeneousCoefficientMap (K : Type*) [Field K] (n M : ℕ) :
     MvPolynomial (Fin (n + 1)) K →ₗ[K] (Fin ((n + M).choose M) → K) :=
   LinearMap.pi fun j => lcoeff K (homogeneousMonomials n M j)
 
+/-- The matrix of values of the degree-`M` monomials in `n + 1` variables at the points
+`points i`: its `(i, j)` entry is the `j`-th monomial of `homogeneousMonomials n M` evaluated
+at `points i`. -/
 def homogeneousEvaluationMatrix (K : Type*) [Field K] (n M : ℕ) {t : ℕ}
     (points : Fin t → (Fin (n + 1) → K)) : Matrix (Fin t) (Fin ((n + M).choose M)) K :=
   fun i j => (homogeneousMonomials n M j).prod fun k e => points i k ^ e
 
+/-- For a homogeneous polynomial `f` of degree `M`, multiplying the homogeneous evaluation matrix
+by the coefficient vector of `f` gives the vector of values of `f` at the points. -/
 lemma homogeneous_evaluation_mulVec {K : Type*} [Field K] {n M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous M)
     (points : Fin t → (Fin (n + 1) → K)) (i : Fin t) :
@@ -43,7 +50,9 @@ lemma homogeneous_evaluation_mulVec {K : Type*} [Field K] {n M t : ℕ}
       simp [homogeneousEvaluationMatrix, homogeneousCoefficientMap, mulVec, dotProduct,
         eval_monomial, mul_comm]
 
-/-- Every finite set of zeros obeys the projective Hilbert rank bound. -/
+/-- For finitely many zeros of a nonzero homogeneous polynomial `f` of degree `d ≤ M`, the rank
+of their degree-`M` evaluation matrix plus the dimension of the degree-`M` multiples of `f` is at
+most the number of degree-`M` monomials. -/
 private theorem homogeneous_evaluation_rank_bound {K : Type*} [Field K] {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → (Fin (n + 1) → K)) (hzero : ∀ i, eval (points i) f = 0) :
@@ -85,7 +94,9 @@ private theorem homogeneous_evaluation_rank_bound {K : Type*} [Field K] {n d M t
   simpa only [U, homogeneousMultiples_finrank f hf0, finrank_homogeneousSubmodule_fin,
     finrank_top, Module.finrank_pi, Module.finrank_self, mul_one, Fintype.card_fin] using hbound
 
-/-- For independent evaluation rows the row count satisfies the same sharp deficit. -/
+/-- For finitely many zeros of a nonzero homogeneous polynomial `f` of degree `d ≤ M` with
+linearly independent degree-`M` evaluation rows, the number of points plus the dimension of the
+degree-`M` multiples of `f` is at most the number of degree-`M` monomials. -/
 private theorem homogeneous_independent_rows_hilbert_bound {K : Type*} [Field K] {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → (Fin (n + 1) → K)) (hzero : ∀ i, eval (points i) f = 0)
@@ -94,6 +105,8 @@ private theorem homogeneous_independent_rows_hilbert_bound {K : Type*} [Field K]
   have h := homogeneous_evaluation_rank_bound f hf hf0 hdM points hzero
   simpa only [hli.rank_matrix, Fintype.card_fin] using h
 
+/-- The homogeneous evaluation matrix of integer points, computed over `ℚ`, is the cast of the
+integer evaluation matrix of the degree-`M` monomials. -/
 lemma homogeneousEvaluationMatrix_intCast {n M t : ℕ}
     (points : Fin t → (Fin (n + 1) → ℤ)) :
     homogeneousEvaluationMatrix ℚ n M (fun i j => (points i j : ℚ)) =
@@ -101,7 +114,10 @@ lemma homogeneousEvaluationMatrix_intCast {n M t : ℕ}
   ext i j
   simp [homogeneousEvaluationMatrix, evaluationMatrix]
 
-/-- The exact Hilbert deficit for independent integer evaluation rows. -/
+/-- For `t` integer zeros of a nonzero homogeneous integer polynomial `f` of degree `d ≤ M`
+whose degree-`M` evaluation rows are linearly independent over `ℚ`, the count `t` plus the
+dimension `(n + (M - d)).choose (M - d)` of the degree-`M` multiples of `f` is at most the
+number `(n + M).choose M` of degree-`M` monomials in `n + 1` variables. -/
 theorem integer_homogeneous_rows_hilbert_bound {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → (Fin (n + 1) → ℤ)) (hzero : ∀ i, eval (points i) f = 0)

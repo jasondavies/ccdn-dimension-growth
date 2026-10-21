@@ -21,6 +21,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Let `F` be the function field of the prime ideal `I`. If there are polynomials `Q` and
+`P i` with `Q(a) ∉ I` and `Q(a) * X i ≡ P i (a)` modulo `I` for every `i`, then the classes of
+the polynomials `a` generate `F` as a field over `K`. -/
 theorem reconstruction_generates_functionField
     {K F σ τ : Type*} [Field K] [Field F] [Algebra K F]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]

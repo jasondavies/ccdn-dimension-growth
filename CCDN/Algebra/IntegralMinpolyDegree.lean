@@ -19,6 +19,9 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
+/-- Let `R` be an integrally closed domain with fraction field `F`, and let `E` be a finite
+extension of `F` receiving compatible maps from `R`, `A` and `F`. The minimal polynomial over
+`R` of an integral element `a` of the domain `A` has degree at most `[E : F]`. -/
 theorem integral_minpoly_natDegree_le_fraction_finrank
     (R A F E : Type*) [CommRing R] [IsDomain R] [IsIntegrallyClosed R]
     [CommRing A] [IsDomain A] [Field F] [Field E]

@@ -89,6 +89,8 @@ def exponentRay {σ : Type*} [Fintype σ] [DecidableEq σ] (B : ℕ)
     (j : σ) (b : σ → Fin B) (n : ℕ) : σ →₀ ℕ :=
   (Finsupp.equivFunOnFinite.symm (fun k => (b k).val)).update j n
 
+/-- The ray exponent `exponentRay B j b n` has coordinate `n` at `j` and coordinate `b k` at
+every other `k`. -/
 @[simp] lemma exponentRay_apply {σ : Type*} [Fintype σ] [DecidableEq σ]
     (B : ℕ) (j : σ) (b : σ → Fin B) (n : ℕ) (k : σ) :
     exponentRay B j b n k = if k = j then n else (b k).val := by

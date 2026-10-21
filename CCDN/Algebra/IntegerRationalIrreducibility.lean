@@ -19,6 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- An irreducible integer polynomial of positive total degree remains irreducible over `ℚ`. -/
 theorem rational_map_irreducible_of_integer {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hir : Irreducible f) (hd : 0 < f.totalDegree) :
     Irreducible (map (Int.castRingHom ℚ) f) := by

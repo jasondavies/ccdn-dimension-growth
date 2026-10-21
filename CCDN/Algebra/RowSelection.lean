@@ -48,6 +48,9 @@ private theorem integer_dotProduct_eq_zero_of_mem_span {s N : ℕ}
   simp only [dotProduct] at h ⊢
   exact_mod_cast h
 
+/-- If an integer coefficient vector `v` annihilates the evaluation matrix of the monomials
+`mon` at the points `points`, then the polynomial with coefficients `v` vanishes at every
+integer point `x` whose monomial evaluation row lies in the `ℚ`-span of the matrix rows. -/
 theorem vanishes_of_evaluation_row_mem_span {n N s : ℕ}
     (mon : Fin N → (Fin n →₀ ℕ)) (points : Fin s → (Fin n → ℤ))
     (v : Fin N → ℤ) (hAv : evaluationMatrix mon points *ᵥ v = 0)
@@ -63,7 +66,8 @@ end CCDN
 namespace CCDN
 open Matrix
 
-/-- A spanning family of independent rows has at most as many rows as there are columns. -/
+/-- Every matrix with `N` columns has an injectively indexed family of `s ≤ N` linearly
+independent rows spanning its row space. -/
 theorem exists_independent_spanning_rows {F ι : Type*} [Field F] {N : ℕ}
     (A : Matrix ι (Fin N) F) :
     ∃ (s : ℕ) (a : Fin s → ι), Function.Injective a ∧
@@ -96,6 +100,8 @@ private theorem independent_rows_lt_of_kernel {s N : ℕ} (A : Matrix (Fin s) (F
     (r := Pi.single j 1) (by rw [hspan]; trivial)
   simpa using hz
 
+/-- If a rational matrix with `N` columns has a nonzero kernel vector, then some injectively
+indexed family of `s < N` linearly independent rows spans its row space. -/
 theorem exists_independent_spanning_rows_lt {t N : ℕ}
     (A : Matrix (Fin t) (Fin N) ℚ) (v : Fin N → ℚ) (hv : v ≠ 0)
     (hker : A *ᵥ v = 0) :

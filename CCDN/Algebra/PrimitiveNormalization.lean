@@ -25,11 +25,15 @@ private lemma integer_scalar_factor_ne_zero {σ : Type*} {f g : MvPolynomial σ 
   apply hf
   rw [he, hg, mul_zero]
 
+/-- If a nonzero integer polynomial factors as `f = C c * g` with `c ≠ 0`, then `g` has the
+same total degree as `f`. -/
 lemma integer_scalar_factor_degree {σ : Type*} {f g : MvPolynomial σ ℤ} {c : ℤ}
     (hf : f ≠ 0) (hc : c ≠ 0) (he : f = C c * g) : g.totalDegree = f.totalDegree := by
   have hg := integer_scalar_factor_ne_zero hf he
   rw [he, totalDegree_mul_of_isDomain (C_eq_zero.not.mpr hc) hg, totalDegree_C, zero_add]
 
+/-- If `f = C c * g` with a nonzero integer `c`, then every coefficient of `g` is at most the
+corresponding coefficient of `f` in absolute value. -/
 lemma integer_scalar_factor_coefficient_bound {σ : Type*}
     {f g : MvPolynomial σ ℤ} {c : ℤ} (hc : c ≠ 0) (he : f = C c * g) (m : σ →₀ ℕ) :
     |(g.coeff m : ℝ)| ≤ |(f.coeff m : ℝ)| := by
@@ -58,6 +62,8 @@ theorem exists_primitive_integer_model {σ : Type*} (f : MvPolynomial σ ℚ) (h
   rw [← mul_assoc, ← C_mul, mul_div_cancel₀ _ hcQ]
   exact hh.symm
 
+/-- An integer polynomial `g` whose image over `ℚ` is a nonzero rational multiple `C a * f` of
+a nonzero polynomial `f` has the same total degree as `f`. -/
 lemma rational_scalar_model_degree {σ : Type*} {f : MvPolynomial σ ℚ}
     {g : MvPolynomial σ ℤ} {a : ℚ} (ha : a ≠ 0) (hf : f ≠ 0)
     (he : MvPolynomial.map (Int.castRingHom ℚ) g = C a * f) : g.totalDegree = f.totalDegree := by
@@ -66,6 +72,8 @@ lemma rational_scalar_model_degree {σ : Type*} {f : MvPolynomial σ ℚ}
   rw [he, totalDegree_mul_of_isDomain (C_eq_zero.not.mpr ha) hf, totalDegree_C, zero_add] at hd
   exact hd.symm
 
+/-- If the image over `ℚ` of an integer polynomial `g` is `C a * f` for a homogeneous
+polynomial `f` of degree `d`, then `g` is homogeneous of degree `d`. -/
 lemma rational_scalar_model_homogeneous {σ : Type*} {f : MvPolynomial σ ℚ}
     {g : MvPolynomial σ ℤ} {a : ℚ} {d : ℕ}
     (he : MvPolynomial.map (Int.castRingHom ℚ) g = C a * f) (hf : f.IsHomogeneous d) :
@@ -74,6 +82,8 @@ lemma rational_scalar_model_homogeneous {σ : Type*} {f : MvPolynomial σ ℚ}
   rw [he]
   exact hf.C_mul a
 
+/-- If the image over `ℚ` of an integer polynomial `g` is `C a * f` with `a ≠ 0`, then `g` and
+`f` have the same rational zeros. -/
 lemma rational_scalar_model_zero_iff {σ : Type*} {f : MvPolynomial σ ℚ}
     {g : MvPolynomial σ ℤ} {a : ℚ} (ha : a ≠ 0)
     (he : MvPolynomial.map (Int.castRingHom ℚ) g = C a * f) (x : σ → ℚ) :

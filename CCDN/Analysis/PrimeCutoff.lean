@@ -18,8 +18,11 @@ bad-prime set.
 namespace CCDN
 open Finset Real
 
+/-- The explicit constant `log 4 + 6 + E₁` in Mertens' first theorem: for every `x ≥ 1`,
+`|∑_{p ≤ x} log p / p - log x| ≤ mertensError` (`Mertens.prime_sum_bounded_error`). -/
 noncomputable def mertensError : ℝ := Real.log 4 + 6 + Mertens.E₁
 
+/-- The Mertens error constant `mertensError` is positive. -/
 lemma mertensError_pos : 0 < mertensError := by
   have hE : 0 ≤ Mertens.E₁ := tsum_nonneg Mertens.E₁.summand_nonneg
   have hl : 0 ≤ Real.log 4 := Real.log_nonneg (by norm_num)
@@ -47,13 +50,18 @@ namespace CCDN
 noncomputable section
 open Finset Real
 
+/-- For `t ≥ 0`, a prime `p` lies in the set of primes in `(0, ⌊t⌋]` if and only if
+`p ≤ t`. -/
 lemma prime_mem_upto_iff {t : ℝ} (ht : 0 ≤ t) {p : ℕ} (hp : p.Prime) :
     p ∈ ((Ioc 0 ⌊t⌋₊).filter Nat.Prime) ↔ (p : ℝ) ≤ t := by
   simp only [mem_filter, mem_Ioc, hp, and_true, hp.pos, true_and]
   exact Nat.le_floor_iff ht
 
+/-- An explicit constant bounding the prime weight `∑ log p / p` over the primes in any
+interval `(L, 4 L]` with `L ≥ 1`. -/
 def primeBlockMass : ℝ := Real.log 4 + 2 * mertensError
 
+/-- The prime block constant `primeBlockMass` is positive. -/
 lemma primeBlockMass_pos : 0 < primeBlockMass := by
   have h := mertensError_pos
   have hl : 0 ≤ Real.log 4 := Real.log_nonneg (by norm_num)

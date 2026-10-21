@@ -17,11 +17,15 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The ideal obtained from `I` by permuting the coordinates by `e`: the polynomials `f` with
+`rename e f ∈ I`. -/
 def projectivePermutedIdeal {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) (e : Equiv.Perm (Fin (n + 1))) :
     Ideal (MvPolynomial (Fin (n + 1)) K) :=
   RingHom.ker ((Ideal.Quotient.mkₐ K I).comp (renameEquiv K e).toAlgHom)
 
+/-- A polynomial `f` lies in the permuted ideal `projectivePermutedIdeal I e` if and only if
+`rename e f` lies in `I`. -/
 lemma mem_projectivePermutedIdeal {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) (e : Equiv.Perm (Fin (n + 1)))
     (f : MvPolynomial (Fin (n + 1)) K) :
@@ -59,6 +63,7 @@ private theorem projectiveHilbertFunction_permuted {K : Type*} [Field K] {n : �
   rw [he] at h
   exact h
 
+/-- Permuting the coordinates preserves the degree of a projective curve. -/
 theorem projectiveCurveDegree_permuted {K : Type*} [Field K] {n d : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) (e : Equiv.Perm (Fin (n + 1)))
     (hdegree : HasProjectiveCurveDegree I d) :
@@ -123,6 +128,8 @@ private lemma projectivePermutation_zeroLocus {K : Type*} [Field K] {n : ℕ}
   have hv' : ((c : K) • x.rep) ∘ e = v := hc
   rwa [hv'] at h
 
+/-- Permuting the coordinates does not decrease the number of rational projective points of
+height at most `B` on the zero locus of `I`. -/
 theorem projectiveCount_le_permuted {n : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) (e : Equiv.Perm (Fin (n + 1))) (B : ℝ) :
     projectiveCount (projectiveIdealZeroLocus I) B ≤

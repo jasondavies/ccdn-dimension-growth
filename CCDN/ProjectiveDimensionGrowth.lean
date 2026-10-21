@@ -29,6 +29,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Projective dimension growth with degree exponent `E` implies it with any larger exponent
+`E'`. -/
 theorem ProjectiveGrowth.mono {n E E' : ℕ} (h : ProjectiveGrowth n E) (hE : E ≤ E') :
     ProjectiveGrowth n E' := by
   obtain ⟨C, hC, hbound⟩ := h

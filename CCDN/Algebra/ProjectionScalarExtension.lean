@@ -47,6 +47,8 @@ private lemma map_aeval_polynomial_substitution
   | add f g hf hg => simp only [map_add, hf, hg]
   | mul_X f i hf => simp only [map_mul, aeval_X, map_X, hf]
 
+/-- A polynomial `f` lies in the kernel of the coordinate map `Y i ↦ a i` into
+`MvPolynomial (Fin n) K ⧸ I` if and only if the substitution `aeval a f` lies in `I`. -/
 lemma mem_projectionCoordinateMap_ker
     {K : Type*} [Field K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
@@ -78,6 +80,9 @@ theorem projection_kernel_scalar_extension
     exact polynomialCoefficientLinear_mem_scalar_extension I _
       ((mem_projectionCoordinateMap_ker _ _ g).mp hg) φ
 
+/-- If the ideal `I` stays prime after extending scalars from `K` to `L`, then so does the
+kernel of the coordinate map `Y i ↦ a i` into `MvPolynomial (Fin n) K ⧸ I`, that is, the ideal
+of the image of the polynomial map `a`. -/
 theorem projection_kernel_geometrically_prime
     {K L : Type*} [Field K] [Field L] [Algebra K L] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))

@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Applying a linear map `φ : K → k` to the coefficients of a homogeneous polynomial of
+degree `d` gives a homogeneous polynomial of degree `d`. -/
 lemma polynomialCoefficientLinear_homogeneous {k K : Type*}
     [Field k] [Field K] [Algebra k K] {n d : ℕ}
     (φ : K →ₗ[k] k) (f : MvPolynomial (Fin n) K) (hf : f.IsHomogeneous d) :
@@ -28,6 +30,9 @@ lemma polynomialCoefficientLinear_homogeneous {k K : Type*}
   apply hm
   rw [polynomialCoefficientLinear_coeff, hzero, map_zero]
 
+/-- A nonzero homogeneous polynomial `f` of degree `d` over an extension field `K` of `k` yields
+a nonzero homogeneous polynomial `g` of degree `d` over `k` that vanishes at every `k`-point
+where `f` vanishes. -/
 theorem exists_nonzero_homogeneous_linear_descent {k K : Type*}
     [Field k] [Field K] [Algebra k K] {n d : ℕ}
     (f : MvPolynomial (Fin n) K) (hf : f ≠ 0) (hhom : f.IsHomogeneous d) :
@@ -44,6 +49,8 @@ theorem exists_nonzero_homogeneous_linear_descent {k K : Type*}
   · intro x hx
     rw [polynomialCoefficientLinear_eval, hx, map_zero]
 
+/-- The homogeneous component of `g * h` in degree `g.totalDegree + h.totalDegree` is the
+product of the top-degree homogeneous components of `g` and `h`. -/
 lemma top_homogeneousComponent_mul {K σ : Type*} [CommRing K]
     (g h : MvPolynomial σ K) :
     homogeneousComponent (g.totalDegree + h.totalDegree) (g * h) =

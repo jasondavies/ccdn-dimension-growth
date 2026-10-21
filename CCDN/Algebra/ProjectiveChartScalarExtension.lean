@@ -22,6 +22,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Applying a `K`-linear map `φ : L → K` to the coefficients commutes with the affine chart
+`affineChart n` (setting the first variable to `1`). -/
 lemma polynomialCoefficientLinear_affineChart
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (φ : L →ₗ[K] K) (f : MvPolynomial (Fin (n + 1)) L) :
@@ -49,6 +51,9 @@ private lemma polynomialCoefficientLinear_scaledHomogenize_one
   rw [← polynomialCoefficientLinear_affineChart,
     affineChart_scaledHomogenize_one, affineChart_scaledHomogenize_one]
 
+/-- For a prime ideal `I` not containing `X 0`, a polynomial `f` of total degree at most `D`
+lies in the chart ideal `projectiveChartIdeal I` if and only if its homogenization
+`scaledHomogenize D 1 f` in degree `D` lies in `I`. -/
 lemma projectiveChartIdeal_mem_iff_scaledHomogenize
     {K : Type*} [Field K] {n D : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
@@ -92,6 +97,8 @@ private theorem projectiveChartIdeal_scalar_extension
     exact polynomialCoefficientLinear_mem_scalar_extension I _
       ((projectiveChartIdeal_mem_iff_scaledHomogenize _ hXL g le_rfl).mp hg) φ
 
+/-- If a prime ideal `I` not containing `X 0` stays prime after extending scalars from `K` to
+`L`, then so does its affine chart ideal `projectiveChartIdeal I`. -/
 theorem projectiveChartIdeal_geometrically_prime
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]

@@ -16,10 +16,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The shear of a point `x` by `a`, keeping `x 0` and sending `x (j + 1)` to
+`x (j + 1) + a j * x 0`; on the affine chart `x 0 = 1` it is the translation by `a`. -/
 def homogeneousPointTranslation {R : Type*} [CommRing R] {n : ℕ}
     (a : Fin n → R) (x : Fin (n + 1) → R) : Fin (n + 1) → R :=
   Fin.cons (x 0) (fun j => x j.succ + a j * x 0)
 
+/-- The shear by `-a` undoes the shear by `a`. -/
 lemma homogeneousPointTranslation_inverse {R : Type*} [CommRing R] {n : ℕ}
     (a : Fin n → R) (x : Fin (n + 1) → R) :
     homogeneousPointTranslation (-a) (homogeneousPointTranslation a x) = x := by
@@ -32,6 +35,7 @@ private lemma homogeneousPointTranslation_injective {R : Type*} [CommRing R] {n 
     (a : Fin n → R) : Function.Injective (homogeneousPointTranslation a) :=
   Function.LeftInverse.injective (homogeneousPointTranslation_inverse a)
 
+/-- The shear of a nonzero point is nonzero. -/
 lemma homogeneousPointTranslation_ne_zero {R : Type*} [CommRing R] {n : ℕ}
     (a : Fin n → R) {x : Fin (n + 1) → R} (hx : x ≠ 0) :
     homogeneousPointTranslation a x ≠ 0 := by
@@ -60,6 +64,8 @@ private lemma homogeneousPointTranslation_map {R S : Type*} [CommRing R] [CommRi
   · rfl
   · simp [homogeneousPointTranslation]
 
+/-- An integral shear preserves the greatest common divisor of the coordinates of an integer
+point; in particular it preserves primitivity. -/
 lemma homogeneousPointTranslation_gcd {n : ℕ} (a : Fin n → ℤ)
     (x : Fin (n + 1) → ℤ) :
     Finset.univ.gcd (homogeneousPointTranslation a x) = Finset.univ.gcd x := by
@@ -76,6 +82,8 @@ lemma homogeneousPointTranslation_gcd {n : ℕ} (a : Fin n → ℤ)
   apply dvd_antisymm_of_normalize_eq Finset.normalize_gcd Finset.normalize_gcd
     hback (hdiv a x)
 
+/-- An integral shear preserves distinctness of projective classes: if the nonzero integer points
+`z i` represent pairwise distinct points of projective space over `ℚ`, so do their shears. -/
 lemma homogeneousPointTranslation_projective_injective {n t : ℕ}
     (a : Fin n → ℤ) (z : Fin t → IntPoint (n + 1)) (hz0 : ∀ i, z i ≠ 0)
     (hinj : Function.Injective (fun i => Projectivization.mk ℚ (rationalPoint (z i))
@@ -94,6 +102,8 @@ lemma homogeneousPointTranslation_projective_injective {n t : ℕ}
     ← homogeneousPointTranslation_smul] at hc
   exact homogeneousPointTranslation_injective _ hc
 
+/-- If `z` lies in the box of radius `B ≥ 1` and every coordinate of `a` lies in `[0, d]`, then
+the shear of `z` by `-a` lies in the box of radius `(d + 1) * B`. -/
 lemma homogeneousPointTranslation_box {n d : ℕ} {B : ℝ} (hB : 1 ≤ B)
     (a : Fin n → ℤ) (ha : ∀ j, 0 ≤ a j ∧ a j ≤ d)
     (z : IntPoint (n + 1)) (hz : InBox z B) (j : Fin (n + 1)) :
@@ -113,6 +123,9 @@ lemma homogeneousPointTranslation_box {n d : ℕ} {B : ℝ} (hB : 1 ≤ B)
       _ ≤ B + (d : ℝ) * B := by gcongr; exact hz _; exact hz _
       _ = _ := by ring
 
+/-- The homogeneous translation commutes with coefficient maps: mapping the coefficients of the
+homogeneous translation of `f` by `a` along `φ` gives the homogeneous translation of the mapped
+polynomial by `φ ∘ a`. -/
 lemma homogeneousTranslation_map {R S : Type*} [CommRing R] [CommRing S] {n : ℕ}
     (φ : R →+* S) (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) R) :
     map φ (homogeneousTranslation R a f) =

@@ -26,11 +26,14 @@ def polynomialCoefficientLinear {R A B σ : Type*} [CommSemiring R]
   (AddMonoidAlgebra.coeffLinearEquiv R).symm.toLinearMap ∘ₗ
     Finsupp.mapRange.linearMap φ ∘ₗ (AddMonoidAlgebra.coeffLinearEquiv R).toLinearMap
 
+/-- Each coefficient of `polynomialCoefficientLinear φ f` is the image under `φ` of the
+corresponding coefficient of `f`. -/
 @[simp] lemma polynomialCoefficientLinear_coeff {R A B σ : Type*}
     [CommSemiring R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
     (φ : A →ₗ[R] B) (f : MvPolynomial σ A) (e : σ →₀ ℕ) :
     (polynomialCoefficientLinear φ f).coeff e = φ (f.coeff e) := rfl
 
+/-- Applying the linear map `φ` coefficientwise sends the constant `C a` to `C (φ a)`. -/
 @[simp] lemma polynomialCoefficientLinear_C {R A B σ : Type*}
     [CommSemiring R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
     (φ : A →ₗ[R] B) (a : A) :
@@ -40,6 +43,9 @@ def polynomialCoefficientLinear {R A B σ : Type*} [CommSemiring R]
   simp only [polynomialCoefficientLinear_coeff, coeff_C]
   split_ifs <;> simp
 
+/-- If `φ (a * θ b) = φ a * b` for a ring map `θ : B →+* A`, then applying `φ` coefficientwise
+is linear over polynomials with coefficients in `B`: it sends `f * map θ g` to
+`polynomialCoefficientLinear φ f * g`. -/
 lemma polynomialCoefficientLinear_mul_compatible {R A B σ : Type*}
     [CommSemiring R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
     (φ : A →ₗ[R] B) (θ : B →+* A)
@@ -54,6 +60,9 @@ lemma polynomialCoefficientLinear_mul_compatible {R A B σ : Type*}
   intro p _
   rw [coeff_map, polynomialCoefficientLinear_coeff, hφ]
 
+/-- For a field extension `L / K` and a `K`-linear functional `φ : L → K`, applying `φ`
+coefficientwise is linear over polynomials with coefficients in `K`: it sends
+`f * map (algebraMap K L) g` to `polynomialCoefficientLinear φ f * g`. -/
 lemma polynomialCoefficientLinear_mul_map {K L σ : Type*}
     [Field K] [Field L] [Algebra K L]
     (φ : L →ₗ[K] K) (f : MvPolynomial σ L) (g : MvPolynomial σ K) :
@@ -92,6 +101,7 @@ theorem polynomialCoefficientLinear_mem_scalar_extension {K L σ : Type*}
       simpa only [smul_eq_mul, mul_assoc] using hx ψ (r * a)
   simpa only [one_mul] using hh φ 1
 
+/-- Applying a linear map coefficientwise does not increase the total degree. -/
 lemma polynomialCoefficientLinear_totalDegree_le {R A B σ : Type*}
     [CommSemiring R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
     (φ : A →ₗ[R] B) (f : MvPolynomial σ A) :
@@ -105,6 +115,8 @@ lemma polynomialCoefficientLinear_totalDegree_le {R A B σ : Type*}
   intro hz
   exact hm (by rw [hz, map_zero])
 
+/-- For a field extension `K / k` and a `k`-linear functional `φ : K → k`, evaluating the
+coefficientwise image of `f` under `φ` at a `k`-point `x` gives `φ` of the value of `f` at `x`. -/
 lemma polynomialCoefficientLinear_eval {k K σ : Type*} [Field k] [Field K] [Algebra k K]
     (φ : K →ₗ[k] k) (f : MvPolynomial σ K) (x : σ → k) :
     eval x (polynomialCoefficientLinear φ f) = φ (eval (algebraMap k K ∘ x) f) := by
@@ -117,7 +129,9 @@ lemma polynomialCoefficientLinear_eval {k K σ : Type*} [Field k] [Field K] [Alg
     simp only [map_mul, eval_X, hf, Function.comp_apply]
     rw [mul_comm _ (algebraMap k K (x j)), ← Algebra.smul_def, φ.map_smul, smul_eq_mul, mul_comm]
 
-/-- Descent preserves every zero whose coordinates lie in the base field. -/
+/-- Linear coefficient descent: for a field extension `K / k`, a nonzero polynomial `f` over `K`
+has a nonzero polynomial over `k` of total degree at most that of `f` vanishing at every
+`k`-point where `f` vanishes. -/
 theorem exists_nonzero_polynomial_linear_descent {k K : Type*}
     [Field k] [Field K] [Algebra k K] {n : ℕ}
     (f : MvPolynomial (Fin n) K) (hf : f ≠ 0) :

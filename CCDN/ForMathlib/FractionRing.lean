@@ -55,6 +55,8 @@ def liftOfLocalization {R S F : Type*}
     ((map_ne_zero_iff _ (IsFractionRing.injective R F)).mpr
       (IsLocalization.submonoid_coe_ne_zero (S := S) M y)))
 
+/-- The embedding `liftOfLocalization M` of the localization `S` into a fraction field `F` of `R`
+restricts to the algebra map `R → F` along `R → S`. -/
 theorem liftOfLocalization_comp {R S F : Type*}
     [CommRing R] [IsDomain R] [CommRing S] [Nontrivial S]
     [Field F] [Algebra R S] [Algebra R F]
@@ -101,6 +103,8 @@ def coeffFractionRingEmbedding : F →ₐ[K] E :=
   IsFractionRing.liftAlgHom (g := IsScalarTower.toAlgHom K A E)
     (algebraMap_injective_of_isFractionRing (σ := σ))
 
+/-- The embedding `coeffFractionRingEmbedding` of a fraction field `F` of `A` into `E` sends the
+image of `x : A` in `F` to the image of `x` in `E`. -/
 lemma coeffFractionRingEmbedding_algebraMap (x : A) :
     coeffFractionRingEmbedding (K := K) (A := A) (E := E) (σ := σ)
       (algebraMap A F x) =
@@ -108,6 +112,8 @@ lemma coeffFractionRingEmbedding_algebraMap (x : A) :
   IsFractionRing.lift_algebraMap
     (algebraMap_injective_of_isFractionRing (A := A) (E := E) (σ := σ)) x
 
+/-- With the `F`-algebra structure on `E` given by `coeffFractionRingEmbedding`, the rings `A`, `F`
+and `E` form a scalar tower. -/
 theorem isScalarTower_coeffFractionRingEmbedding :
     let : Algebra F E :=
       (coeffFractionRingEmbedding (K := K) (A := A) (F := F) (E := E)
@@ -134,6 +140,8 @@ def fractionRingCoeffMap
     [Algebra (MvPolynomial σ A) F] : MvPolynomial σ K →+* F :=
   eval₂Hom (algebraMap K F) (fun i => algebraMap (MvPolynomial σ A) F (X i))
 
+/-- Composing `fractionRingCoeffMap` with the coefficient map `MvPolynomial σ A → MvPolynomial σ K`
+gives the algebra map `MvPolynomial σ A → F`. -/
 lemma fractionRingCoeffMap_comp
     {A K F σ : Type*} [CommRing A] [Field K] [Field F]
     [Algebra A K] [Algebra A F] [Algebra K F]

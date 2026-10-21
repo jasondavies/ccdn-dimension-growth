@@ -17,6 +17,8 @@ noncomputable section
 open MvPolynomial
 variable {K : Type*} [Field K]
 
+/-- The affine coordinates `(x₁ / x₀, …, xₙ / x₀)` of a projective point `x`, computed from
+its chosen representative; meaningful on the standard chart `x₀ ≠ 0`. -/
 def projectiveAffineCoordinates {n : ℕ} (x : Projectivization K (Fin (n + 1) → K)) :
     Fin n → K := fun j => x.rep j.succ / x.rep 0
 
@@ -28,6 +30,7 @@ private lemma projectiveAffineCoordinates_normalization {n : ℕ}
   · simp [hx]
   · simp [projectiveAffineCoordinates, div_eq_mul_inv, mul_comm]
 
+/-- The vector `(1, a₁, …, aₙ)` is nonzero. -/
 lemma affineCoordinateVector_ne_zero {n : ℕ} (a : Fin n → K) :
     (Fin.cons 1 a : Fin (n + 1) → K) ≠ 0 := by
   intro h
@@ -44,6 +47,8 @@ private lemma projectiveAffineCoordinates_mk {n : ℕ}
       exact ⟨_, (projectiveAffineCoordinates_normalization x hx).symm⟩
     _ = x := x.mk_rep
 
+/-- Projective points with nonzero first coordinate are determined by their affine
+coordinates. -/
 theorem projectiveAffineCoordinates_injective {n : ℕ}
     {x y : Projectivization K (Fin (n + 1) → K)}
     (hx : x.rep 0 ≠ 0) (hy : y.rep 0 ≠ 0)
@@ -52,6 +57,9 @@ theorem projectiveAffineCoordinates_injective {n : ℕ}
     (affineCoordinateVector_ne_zero a)) hxy
   rwa [projectiveAffineCoordinates_mk x hx, projectiveAffineCoordinates_mk y hy] at h
 
+/-- If a projective point `x` with nonzero first coordinate lies on the zero locus of a
+homogeneous polynomial `f`, then the dehomogenization of `f` vanishes at the affine coordinates
+of `x`. -/
 theorem projectiveAffineCoordinates_zero {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous d)
     (x : Projectivization K (Fin (n + 1) → K)) (hx : x.rep 0 ≠ 0)
@@ -65,6 +73,7 @@ def affineProjectivePoint {K : Type*} [Field K] {n : ℕ} (a : Fin n → K) :
     Projectivization K (Fin (n + 1) → K) :=
   Projectivization.mk K (Fin.cons 1 a) (affineCoordinateVector_ne_zero a)
 
+/-- The map `a ↦ [1 : a]` from affine space to projective space is injective. -/
 theorem affineProjectivePoint_injective {K : Type*} [Field K] (n : ℕ) :
     Function.Injective (@affineProjectivePoint K _ n) := by
   intro a b he

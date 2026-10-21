@@ -17,6 +17,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If the zeros of `I` in `ℚ^(n+1)` killed by the linear map `L` form a set of at most `M`
+elements, then `L` does not vanish on the representative of any point of the projective zero
+locus of `I`. -/
 theorem projective_linear_image_ne_zero_of_finite_zero_fiber
     {n r : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
     (L : (Fin (n + 1) → ℚ) →ₗ[ℚ] (Fin r → ℚ)) (M : ℕ)
@@ -49,6 +52,10 @@ theorem projective_linear_image_ne_zero_of_finite_zero_fiber
   rw [Finset.card_image_of_injective _ hinj, Finset.card_univ, Fintype.card_fin] at hh
   omega
 
+/-- Let `s` be a finite set of points of the projective zero locus of `I` on which the linear
+map `L` is nonzero and which `L` sends to the single projective point `y`. If at most `M` zeros
+of `I` in `ℚ^(n+1)` are sent by `L` to the representative of `y`, then `s` has at most `M`
+elements. -/
 theorem projective_linear_fiber_card_le
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
     (L : (Fin (n + 1) → ℚ) →ₗ[ℚ] (Fin (m + 1) → ℚ))
