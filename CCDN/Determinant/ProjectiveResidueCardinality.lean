@@ -35,10 +35,10 @@ theorem projectivePlaneResidue_infinity_card_le {p d : ℕ} [Fact p.Prime]
 theorem projectivePlaneResidue_affine_card_le {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) :
     Fintype.card {r : ProjectivePlaneResidue f p // r.val.rep 0 ≠ 0} ≤
-      Fintype.card (PlaneResidue (planeAffineChart f) p) := by
+      Fintype.card (PlaneResidue (affineChart 2 f) p) := by
   classical
   let S := {r : ProjectivePlaneResidue f p // r.val.rep 0 ≠ 0}
-  let ψ : S → PlaneResidue (planeAffineChart f) p := fun r =>
+  let ψ : S → PlaneResidue (affineChart 2 f) p := fun r =>
     ⟨projectiveAffineCoordinates r.val.val, by
       have h := projectiveAffineCoordinates_zero (map (Int.castRingHom (ZMod p)) f)
         (hf.map _) r.val.val r.property r.val.property
@@ -57,7 +57,7 @@ theorem projectivePlaneResidue_card_le_affine_add_degree {p d : ℕ} [Fact p.Pri
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f))
     (hproper : ¬ map (Int.castRingHom (ZMod p)) f ∣ X 0) :
     Fintype.card (ProjectivePlaneResidue f p) ≤
-      Fintype.card (PlaneResidue (planeAffineChart f) p) + d := by
+      Fintype.card (PlaneResidue (affineChart 2 f) p) + d := by
   classical
   have htotal : Fintype.card {r : ProjectivePlaneResidue f p // r.val.rep 0 ≠ 0} =
       Fintype.card (ProjectivePlaneResidue f p) -

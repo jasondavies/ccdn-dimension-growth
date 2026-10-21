@@ -143,6 +143,17 @@ lemma affineChart_eval {K : Type*} [CommRing K] {n : ℕ}
     refine Fin.cases ?_ (fun j => ?_) i <;> simp
   rw [he]
 
+lemma eval₂_affineChart {K R : Type*} [CommRing K] [CommRing R] {n : ℕ} (φ : K →+* R)
+    (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) K) :
+    eval₂ φ a (affineChart n f) = eval₂ φ (Fin.cons 1 a) f := by
+  induction f using MvPolynomial.induction_on with
+  | C c => simp only [affineChart, eval₂Hom_C, eval₂_C]
+  | add f g hf hg => simp only [map_add, eval₂_add, hf, hg]
+  | mul_X f j hf =>
+    rw [map_mul, eval₂_mul, eval₂_mul, hf]
+    congr 1
+    refine Fin.cases ?_ (fun k => ?_) j <;> simp [affineChart]
+
 /-- Divisibility of affine charts lifts to homogeneous divisibility when the
 first equation retains its degree on the chart. -/
 theorem homogeneous_dvd_of_affineChart_dvd {K : Type*} [CommRing K] [IsDomain K]

@@ -453,7 +453,6 @@ public import CCDN.Determinant.NoetherianLocalDeterminant
 public import CCDN.Determinant.OriginLayerGenerators
 public import CCDN.Determinant.OriginTruncationGenerators
 public import CCDN.Determinant.OrthantMultiplicity
-public import CCDN.Determinant.PlaneChartDeterminant
 public import CCDN.Determinant.PlaneMultiplicity
 public import CCDN.Determinant.PlaneMultiplicitySmooth
 public import CCDN.Determinant.PlaneSingularities

@@ -99,17 +99,6 @@ theorem primitiveProjectiveReduction_zero {n p d : ℕ} [Fact p.Prime]
     exact h
   rw [he, mul_zero]
 
-lemma eval₂_planeAffineChart {R : Type*} [CommRing R] (φ : ℤ →+* R)
-    (a : Fin 2 → R) (f : MvPolynomial (Fin 3) ℤ) :
-    eval₂ φ a (planeAffineChart f) = eval₂ φ (Fin.cons 1 a) f := by
-  induction f using MvPolynomial.induction_on with
-  | C c => simp only [planeAffineChart, eval₂Hom_C, eval₂_C]
-  | add f g hf hg => simp only [map_add, eval₂_add, hf, hg]
-  | mul_X f j hf =>
-    rw [map_mul, eval₂_mul, eval₂_mul, hf]
-    congr 1
-    refine Fin.cases ?_ (fun k => ?_) j <;> simp [planeAffineChart]
-
 /-- The integer chart representative of a projective residue zero satisfies
 the reduced affine equation. -/
 theorem projectiveResidueChartLift_zero {p d : ℕ} [Fact p.Prime]
@@ -131,8 +120,8 @@ theorem projectiveResidueChartLift_zero {p d : ℕ} [Fact p.Prime]
     funext j
     simp
   change eval₂ (Int.castRingHom (ZMod p)) a
-    (planeAffineChart (rename (Equiv.swap 0 k) f)) = 0
-  rw [eval₂_planeAffineChart, eval₂_rename, hv', ← eval_map,
+    (affineChart 2 (rename (Equiv.swap 0 k) f)) = 0
+  rw [eval₂_affineChart, eval₂_rename, hv', ← eval_map,
     homogeneous_eval_smul (hf.map _), hr, mul_zero]
 
 end

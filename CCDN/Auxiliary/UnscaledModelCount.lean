@@ -39,7 +39,7 @@ lemma unscaled_positioned_points_card_le {M t : ℕ}
     t ≤ f.totalDegree * M := by
   obtain ⟨g', hg', he, hnd'⟩ := scaledModelCoordinates_auxiliary_transport 1 a f g hg hnd
   have hf0 : f ≠ 0 := fun h => hir.ne_zero (by simp [h])
-  have hchart : planeAffineChart (scaledHomogenize f.totalDegree 1 f) = f := by
+  have hchart : affineChart 2 (scaledHomogenize f.totalDegree 1 f) = f := by
     change homogeneousSlice 2 1 (scaledHomogenize f.totalDegree 1 f) = f
     simp only [homogeneousSlice_scaledHomogenize 1 f le_rfl, one_pow, map_one, one_mul]
   have hh := plane_chart_points_card_le_auxiliary_degree (scaledHomogenize f.totalDegree 1 f) g'

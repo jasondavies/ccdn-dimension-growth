@@ -5,11 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PlaneChartDeterminant
+public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Height.PrimitiveIntegerPolynomial
 public import CCDN.Plane.Plane
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import CCDN.Algebra.HomogeneousChart
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Plane.Bezout
 /-! Distinct-point bounds obtained from the auxiliary polynomials and
@@ -39,10 +38,10 @@ polynomial and a primitive equation whose chart has full degree. -/
 theorem plane_chart_points_card_le_auxiliary_degree {d M t : ℕ}
     (f g : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (hg : g.IsHomogeneous M) (hprim : PrimitiveIntegerPolynomial f)
-    (hdchart : (planeAffineChart f).totalDegree = d)
-    (hir : Irreducible (MvPolynomial.map (Int.castRingHom ℚ) (planeAffineChart f)))
+    (hdchart : (affineChart 2 f).totalDegree = d)
+    (hir : Irreducible (MvPolynomial.map (Int.castRingHom ℚ) (affineChart 2 f)))
     (hnd : ¬ f ∣ g) (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z)
-    (hzf : ∀ i, eval (z i) (planeAffineChart f) = 0)
+    (hzf : ∀ i, eval (z i) (affineChart 2 f) = 0)
     (hzg : ∀ i, eval (Fin.cons 1 (z i)) g = 0) : t ≤ d * M := by
   let zQ : Fin t → Fin 2 → ℚ := fun i j => (z i j : ℚ)
   have hiQ : Function.Injective zQ := by
@@ -50,19 +49,19 @@ theorem plane_chart_points_card_le_auxiliary_degree {d M t : ℕ}
     apply hinj
     funext k
     exact Int.cast_injective (congrFun he k)
-  have hfQ : ∀ i, eval (zQ i) (MvPolynomial.map (Int.castRingHom ℚ) (planeAffineChart f)) = 0 := by
+  have hfQ : ∀ i, eval (zQ i) (MvPolynomial.map (Int.castRingHom ℚ) (affineChart 2 f)) = 0 := by
     intro i
     have h := congrArg (Int.castRingHom ℚ) (hzf i)
     rw [map_eval, map_zero] at h
     exact h
-  have hgQ : ∀ i, eval (zQ i) (MvPolynomial.map (Int.castRingHom ℚ) (planeAffineChart g)) = 0 := by
+  have hgQ : ∀ i, eval (zQ i) (MvPolynomial.map (Int.castRingHom ℚ) (affineChart 2 g)) = 0 := by
     intro i
     have h := congrArg (Int.castRingHom ℚ) (hzg i)
-    rw [← planeAffineChart_eval] at h
+    rw [← affineChart_eval] at h
     rw [map_eval, map_zero] at h
     exact h
-  have hndQ : ¬ MvPolynomial.map (Int.castRingHom ℚ) (planeAffineChart f) ∣
-      MvPolynomial.map (Int.castRingHom ℚ) (planeAffineChart g) :=
+  have hndQ : ¬ MvPolynomial.map (Int.castRingHom ℚ) (affineChart 2 f) ∣
+      MvPolynomial.map (Int.castRingHom ℚ) (affineChart 2 g) :=
     rational_affineChart_not_dvd hf hf0 hg hprim hdchart hnd
   have h := plane_common_zeros_card_le _ _ hir hndQ zQ hiQ hfQ hgQ
   rw [Fintype.card_fin, rational_map_totalDegree, rational_map_totalDegree, hdchart] at h
