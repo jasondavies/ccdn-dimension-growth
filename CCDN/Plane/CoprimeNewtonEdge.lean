@@ -20,7 +20,7 @@ open MvPolynomial Finset
 
 def coprimeEdgeWeight (d e : ℕ) : Fin 2 → ℕ := fun i => if i = 0 then e else d
 
-lemma coprimeEdgeWeight_pos {d e : ℕ} (hd : 0 < d) (he : 0 < e) (i : Fin 2) :
+private lemma coprimeEdgeWeight_pos {d e : ℕ} (hd : 0 < d) (he : 0 < e) (i : Fin 2) :
     0 < coprimeEdgeWeight d e i := by
   unfold coprimeEdgeWeight
   split_ifs <;> assumption
@@ -30,7 +30,7 @@ lemma coprimeEdgeWeight_apply (d e : ℕ) (m : Fin 2 →₀ ℕ) :
   simp [Finsupp.weight_apply, Finsupp.sum_fintype, Fin.sum_univ_two,
     coprimeEdgeWeight, mul_comm]
 
-lemma coprime_weight_eq_below_edge {d e : ℕ} (hd : 0 < d) (_he : 0 < e)
+private lemma coprime_weight_eq_below_edge {d e : ℕ} (hd : 0 < d) (_he : 0 < e)
     (hcop : d.Coprime e) {m n : Fin 2 →₀ ℕ}
     (hweight : Finsupp.weight (coprimeEdgeWeight d e) m =
       Finsupp.weight (coprimeEdgeWeight d e) n)
@@ -50,7 +50,7 @@ lemma coprime_weight_eq_below_edge {d e : ℕ} (hd : 0 < d) (_he : 0 < e)
   ext i
   fin_cases i <;> assumption
 
-lemma weighted_top_monomial_of_below_coprime_edge {K : Type*} [Field K]
+private lemma weighted_top_monomial_of_below_coprime_edge {K : Type*} [Field K]
     {d e : ℕ} (hd : 0 < d) (he : 0 < e) (hcop : d.Coprime e)
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0)
     (hlt : f.weightedTotalDegree (coprimeEdgeWeight d e) < d * e) :

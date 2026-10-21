@@ -44,7 +44,7 @@ lemma planeSectionPolynomial_totalDegree {K σ : Type*} [CommRing K]
     (planeSectionPolynomial f v).totalDegree ≤ f.totalDegree :=
   universalPlanePolynomial_specialization_totalDegree f (eval v)
 
-lemma planeSectionPoints_card_eq {K σ : Type*} [CommRing K]
+private lemma planeSectionPoints_card_eq {K σ : Type*} [CommRing K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K) :
     Nat.card (PlaneSectionPoints f v) =
       Nat.card {t : Fin 2 → K // eval t (planeSectionPolynomial f v) = 0} := by

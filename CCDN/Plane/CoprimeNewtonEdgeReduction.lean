@@ -30,7 +30,7 @@ lemma HasCoprimeNewtonEdge.ne_zero {R : Type*} [CommSemiring R]
   intro hz
   simpa only [hz, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply, ne_eq, not_true_eq_false] using h.x_coeff
 
-lemma HasCoprimeNewtonEdge.weightedTotalDegree {R : Type*} [CommSemiring R]
+private lemma HasCoprimeNewtonEdge.weightedTotalDegree {R : Type*} [CommSemiring R]
     {f : MvPolynomial (Fin 2) R} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e) :
     f.weightedTotalDegree (coprimeEdgeWeight d e) = d * e := by
   apply le_antisymm
@@ -60,7 +60,7 @@ lemma HasCoprimeNewtonEdge.irreducible {K : Type*} [Field K]
   coprime_newton_edge_irreducible f (by have := h.lower_pos; have := h.degree_gt; omega)
     h.lower_pos h.coprime h.weightedTotalDegree h.x_coeff h.y_coeff
 
-lemma HasCoprimeNewtonEdge.map {R K : Type*} [CommSemiring R] [CommSemiring K]
+private lemma HasCoprimeNewtonEdge.map {R K : Type*} [CommSemiring R] [CommSemiring K]
     {f : MvPolynomial (Fin 2) R} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e)
     (φ : R →+* K)
     (hx : φ (f.coeff (Finsupp.single 0 d)) ≠ 0)

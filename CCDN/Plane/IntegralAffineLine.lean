@@ -42,7 +42,7 @@ lemma rationalAffineLine_shift_base {n : ℕ} (a v : RatPoint n) (s : ℚ) :
     ring
 
 /-- Any two distinct points determine the entire parameterized rational line. -/
-lemma rationalAffineLine_eq_of_distinct_points {n : ℕ} {a v x y : RatPoint n}
+private lemma rationalAffineLine_eq_of_distinct_points {n : ℕ} {a v x y : RatPoint n}
     (hx : x ∈ rationalAffineLine a v) (hy : y ∈ rationalAffineLine a v) (hxy : x ≠ y) :
     rationalAffineLine x (y - x) = rationalAffineLine a v := by
   obtain ⟨s, rfl⟩ := hx
@@ -62,7 +62,7 @@ lemma integerDirectionHeight_pos {n : ℕ} {v : IntPoint n} (hv : v ≠ 0) :
   obtain ⟨j, hj⟩ := Function.ne_iff.mp hv
   exact (Int.natAbs_pos.mpr hj).trans_le (Finset.le_sup (f := fun j => (v j).natAbs) (Finset.mem_univ j))
 
-lemma exists_coordinate_integerDirectionHeight {n : ℕ} {v : IntPoint n} (hv : v ≠ 0) :
+private lemma exists_coordinate_integerDirectionHeight {n : ℕ} {v : IntPoint n} (hv : v ≠ 0) :
     ∃ j, |(v j : ℝ)| = integerDirectionHeight v := by
   obtain ⟨j, _⟩ := Function.ne_iff.mp hv
   obtain ⟨k, _, hk⟩ := Finset.exists_mem_eq_sup (Finset.univ : Finset (Fin n))
@@ -73,7 +73,7 @@ lemma exists_coordinate_integerDirectionHeight {n : ℕ} {v : IntPoint n} (hv : 
 
 /-- Bezout's identity for a primitive direction forces a rational integral
 multiple of that direction to have an integer multiplier. -/
-theorem rational_scalar_integral_of_primitive {n : ℕ} (v : IntPoint n)
+private theorem rational_scalar_integral_of_primitive {n : ℕ} (v : IntPoint n)
     (hprim : Finset.univ.gcd v = 1) {t : ℚ} (w : IntPoint n)
     (hw : ∀ j, (w j : ℚ) = t * v j) :
     ∃ k : ℤ, (k : ℚ) = t := by
@@ -85,7 +85,7 @@ theorem rational_scalar_integral_of_primitive {n : ℕ} (v : IntPoint n)
   rw [show (∑ j, t * (v j : ℚ) * c j) = t * ∑ j, (v j : ℚ) * c j by
     rw [Finset.mul_sum]; apply Finset.sum_congr rfl; intro j _; ring, hcQ, mul_one]
 
-theorem integer_mem_rationalAffineLine_iff {n : ℕ} (a v x : IntPoint n)
+private theorem integer_mem_rationalAffineLine_iff {n : ℕ} (a v x : IntPoint n)
     (hprim : Finset.univ.gcd v = 1) :
     rationalPoint x ∈ rationalAffineLine (rationalPoint a) (rationalPoint v) ↔
       ∃ k : ℤ, ∀ j, x j = a j + k * v j := by
@@ -109,7 +109,7 @@ theorem integer_mem_rationalAffineLine_iff {n : ℕ} (a v x : IntPoint n)
     change (x j : ℚ) = (a j : ℚ) + (k : ℚ) * v j
     exact_mod_cast hk j
 
-lemma int_finset_card_le_span (T : Finset ℤ) (hT : T.Nonempty) :
+private lemma int_finset_card_le_span (T : Finset ℤ) (hT : T.Nonempty) :
     (T.card : ℝ) ≤ (T.max' hT : ℝ) - (T.min' hT : ℝ) + 1 := by
   have hsub : T ⊆ Finset.Icc (T.min' hT) (T.max' hT) := by
     intro k hk
@@ -127,7 +127,7 @@ lemma int_finset_card_le_span (T : Finset ℤ) (hT : T.Nonempty) :
 
 /-- Integer points on a primitive line are spaced by its largest direction
 coordinate. This counts the line's intersection with the integer box. -/
-theorem integral_rationalAffineLine_count {n : ℕ} (a v : IntPoint n)
+private theorem integral_rationalAffineLine_count {n : ℕ} (a v : IntPoint n)
     (hv : v ≠ 0) (hprim : Finset.univ.gcd v = 1) {B : ℝ} (hB : 0 ≤ B) :
     (count (rationalAffineLine (rationalPoint a) (rationalPoint v)) B : ℝ) ≤
       1 + 2 * B / integerDirectionHeight v := by
@@ -179,7 +179,7 @@ theorem integral_rationalAffineLine_count {n : ℕ} (a v : IntPoint n)
 
 /-- Divide an integer direction by the gcd of its coordinates. This gives
 a primitive direction of no greater height on the same rational line. -/
-theorem exists_primitive_integer_direction {n : ℕ} (w : IntPoint n) (hw : w ≠ 0) :
+private theorem exists_primitive_integer_direction {n : ℕ} (w : IntPoint n) (hw : w ≠ 0) :
     ∃ v : IntPoint n, v ≠ 0 ∧ Finset.univ.gcd v = 1 ∧
       (∀ j, |(v j : ℝ)| ≤ |(w j : ℝ)|) ∧
       ∀ a : RatPoint n, rationalAffineLine a (rationalPoint w) =
@@ -214,7 +214,7 @@ theorem exists_primitive_integer_direction {n : ℕ} (w : IntPoint n) (hw : w �
 
 /-- Two bounded integer points give a primitive integer direction of
 height at most twice the box radius, representing their full rational line. -/
-theorem exists_primitive_direction_of_two_integer_points {n : ℕ}
+private theorem exists_primitive_direction_of_two_integer_points {n : ℕ}
     (a b : IntPoint n) (hab : a ≠ b) {B : ℝ}
     (ha : InBox a B) (hb : InBox b B) :
     ∃ v : IntPoint n, v ≠ 0 ∧ Finset.univ.gcd v = 1 ∧

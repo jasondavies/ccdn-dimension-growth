@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma polynomial_plane_coeff_one_chain {K A : Type*} [CommRing K] [CommRing A]
+private lemma polynomial_plane_coeff_one_chain {K A : Type*} [CommRing K] [CommRing A]
     [Algebra K A] (ψ : MvPolynomial (Fin 2) K →ₐ[K] Polynomial A)
     (f : MvPolynomial (Fin 2) K) :
     (ψ f).coeff 1 = (ψ (pderiv 0 f)).coeff 0 * (ψ (X 0)).coeff 1 +

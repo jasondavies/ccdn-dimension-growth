@@ -36,7 +36,7 @@ def ZeroPlaneParameters {K σ : Type*} [CommRing K] (f : MvPolynomial σ K) :=
 
 /-- Sending a zero section to its three defining hypersurface points is
 injective. -/
-theorem zero_plane_parameters_card_le_cube {K σ : Type*} [CommRing K]
+private theorem zero_plane_parameters_card_le_cube {K σ : Type*} [CommRing K]
     [Fintype K] [Fintype σ] (f : MvPolynomial σ K) :
     Nat.card (ZeroPlaneParameters f) ≤
       (Nat.card {x : σ → K // eval x f = 0}) ^ 3 := by

@@ -32,7 +32,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem homogeneous_integer_evaluation_bound {n d : ℕ}
+private theorem homogeneous_integer_evaluation_bound {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d)
     {H R : ℝ} (hH : 0 ≤ H) (hR : 1 ≤ R) (hcoeff : CoefficientHeightLE f H)
     (x : Fin (n + 1) → ℤ) (hx : InBox x R) :
@@ -52,7 +52,7 @@ theorem homogeneous_integer_evaluation_bound {n d : ℕ}
         (homogeneousMonomials_degree n d j).le) (abs_nonneg _) hH
     _ = _ := by simp [mul_assoc]
 
-lemma ternary_homogeneous_dimension_le_square (d : ℕ) :
+private lemma ternary_homogeneous_dimension_le_square (d : ℕ) :
     ((2 + d).choose d : ℝ) ≤ ((d : ℝ) + 2) ^ 2 := by
   have h : 2 * ((2 + d).choose d : ℝ) = ((d : ℝ) + 2) * (d + 1) := by
     exact_mod_cast ternary_homogeneous_dimension d

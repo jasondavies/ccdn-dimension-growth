@@ -31,7 +31,7 @@ lemma PrimitiveIntegerPolynomial.scaledHomogenize_one {n : ℕ}
   have h := hc (homogenizedExponent d m)
   simpa only [scaledHomogenize_coefficient, one_pow, one_mul] using h
 
-lemma unscaled_positioned_points_card_le {M t : ℕ}
+private lemma unscaled_positioned_points_card_le {M t : ℕ}
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom ℚ) f))
     (a : Fin 2 → ℤ) (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z)

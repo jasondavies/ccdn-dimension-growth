@@ -22,7 +22,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem homogeneous_absolute_chart_data
+private theorem homogeneous_absolute_chart_data
     {K : Type*} [Field K] [CharZero K] {d : ℕ}
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom K) f)) :

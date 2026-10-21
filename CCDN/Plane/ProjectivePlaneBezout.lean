@@ -18,7 +18,7 @@ open MvPolynomial
 
 variable {K : Type*} [Field K]
 
-theorem principal_projective_plane_hilbert_function
+private theorem principal_projective_plane_hilbert_function
     (f : MvPolynomial (Fin 3) K) {d M : ℕ}
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hM : d ≤ M) :
     (projectiveHilbertFunction (Ideal.span {f}) M : ℤ) =

@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem affine_plane_expression_le_bad_prime {d : ℕ} (hd : 0 < d)
+private theorem affine_plane_expression_le_bad_prime {d : ℕ} (hd : 0 < d)
     {B L b : ℝ} (hB : 1 ≤ B) (hL : 1 ≤ L) (hb : 0 ≤ b) :
     affineAuxiliaryDegreeExpression 0 d B L b ≤
       (d : ℝ) ^ 3 * (b + 2) * B ^ (1 / (d : ℝ)) := by

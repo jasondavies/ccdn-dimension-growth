@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem nonabsolute_projective_plane_points_card_le {k K ι : Type*}
+private theorem nonabsolute_projective_plane_points_card_le {k K ι : Type*}
     [Field k] [Field K] [Algebra k K] [Fintype ι] [DecidableEq ι] {d : ℕ}
     (f : MvPolynomial (Fin 3) k) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible f) (hred : ¬ Irreducible (map (algebraMap k K) f))
@@ -70,7 +70,7 @@ theorem nonabsolute_projective_plane_points_card_le {k K ι : Type*}
     exact projectiveAffineCoordinates_zero f hf (z i.val)
       (Finset.mem_filter.mp i.property).2 (hz i.val)
 
-theorem projectiveCount_nonabsolute_plane_le
+private theorem projectiveCount_nonabsolute_plane_le
     {K : Type*} [Field K] [Algebra ℚ K] {d : ℕ}
     (f : MvPolynomial (Fin 3) ℚ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible f) (hred : ¬ Irreducible (map (algebraMap ℚ K) f)) (B : ℝ) :

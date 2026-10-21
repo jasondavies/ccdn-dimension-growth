@@ -17,7 +17,7 @@ for the constructed integer parameters. -/
 namespace CCDN
 noncomputable section
 
-lemma principal_plane_hilbert_balance {K : Type*} [Field K]
+private lemma principal_plane_hilbert_balance {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0) {M : ℕ} (hM : f.totalDegree ≤ M) :
     Module.finrank K (filteredCoordinateSpace (Ideal.span {f}) M) + f.totalDegree.choose 2 =
       f.totalDegree * M + f.totalDegree := by
@@ -26,7 +26,7 @@ lemma principal_plane_hilbert_balance {K : Type*} [Field K]
       f.totalDegree.choose 2 = (f.totalDegree : ℤ) * M + f.totalDegree := by omega
   exact_mod_cast he
 
-lemma principal_plane_hilbert_bounds {K : Type*} [Field K]
+private lemma principal_plane_hilbert_bounds {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0) {M : ℕ} (hM : f.totalDegree ≤ M) :
     f.totalDegree * M - f.totalDegree ^ 2 ≤
       Module.finrank K (filteredCoordinateSpace (Ideal.span {f}) M) ∧

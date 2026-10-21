@@ -62,7 +62,7 @@ open MvPolynomial Real
 
 def affineSmallBoxScale : ℝ := (12 * scalingPrimeRatio) ^ 2
 
-lemma affineSmallBoxScale_one_le : 1 ≤ affineSmallBoxScale := by
+private lemma affineSmallBoxScale_one_le : 1 ≤ affineSmallBoxScale := by
   have h := scalingPrimeRatio_one_le
   unfold affineSmallBoxScale
   nlinarith

@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma polynomial_isUnit_of_nonzero_degree_zero {K σ : Type*} [Field K]
+private lemma polynomial_isUnit_of_nonzero_degree_zero {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (hf : f ≠ 0) (hd : f.totalDegree = 0) : IsUnit f := by
   by_contra hu
   exact (totalDegree_pos_of_ne_zero_of_not_isUnit hf hu).ne' hd

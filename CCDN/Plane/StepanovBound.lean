@@ -26,7 +26,7 @@ noncomputable section
 open MvPolynomial
 
 /-- A strict dimension inequality gives the smooth prime-field point count. -/
-theorem plane_stepanov_smooth_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
+private theorem plane_stepanov_smooth_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Fin 2) (ZMod p)) (hf : Irreducible f)
     (z : ι → Fin 2 → ZMod p) (hz : Function.Injective z)
     (hzero : ∀ i, eval (z i) f = 0) (j : Fin 2)

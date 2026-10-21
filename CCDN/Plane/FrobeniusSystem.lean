@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma planeTangent_totalDegree_le {K : Type*} [Field K]
+private lemma planeTangent_totalDegree_le {K : Type*} [Field K]
     (f h : MvPolynomial (Fin 2) K) (j : Fin 2) :
     (planeTangent f j h).totalDegree ≤ h.totalDegree + f.totalDegree := by
   rw [planeTangent_apply]
@@ -35,7 +35,7 @@ lemma planeTangent_totalDegree_le {K : Type*} [Field K]
       have h2 := pderiv_totalDegree_le h j.rev
       omega)
 
-lemma planeTangent_iterate_totalDegree_le {K : Type*} [Field K]
+private lemma planeTangent_iterate_totalDegree_le {K : Type*} [Field K]
     (f h : MvPolynomial (Fin 2) K) (j : Fin 2) (r : ℕ) :
     ((planeTangent f j)^[r] h).totalDegree ≤ h.totalDegree + r * f.totalDegree := by
   induction r with

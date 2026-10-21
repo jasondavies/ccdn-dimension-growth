@@ -57,7 +57,7 @@ lemma lex_leadingCoeff_eq_pure_first {R : Type*} [CommRing R] {n d : ℕ}
   change f.coeff (MonomialOrder.lex.degree f) = _
   rw [he]
 
-lemma homogeneous_pure_first_coefficient {R : Type*} [CommRing R] {n d : ℕ}
+private lemma homogeneous_pure_first_coefficient {R : Type*} [CommRing R] {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) R) (hf : f.IsHomogeneous d) :
     f.coeff (Finsupp.single 0 d) = eval (Fin.cons 1 (0 : Fin n → R)) f := by
   have hd : (Finsupp.single (0 : Fin (n + 1)) d).degree = d := by simp

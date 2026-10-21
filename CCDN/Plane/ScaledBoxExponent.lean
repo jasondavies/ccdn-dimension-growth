@@ -16,7 +16,7 @@ numerical bounds are independent of the coefficient height. -/
 namespace CCDN
 open Real
 
-lemma scaled_box_power_ratio_le {d : ℕ} (hd : 0 < d) {A B p : ℝ}
+private lemma scaled_box_power_ratio_le {d : ℕ} (hd : 0 < d) {A B p : ℝ}
     (hA : 1 ≤ A) (hB : 1 ≤ B) (hp : 0 < p) (hBp : B ≤ A * p) :
     (((d : ℝ) + 1) * B) ^ (2 / (d : ℝ)) / p ^ (1 / (d : ℝ)) ≤
       Real.exp 2 * A * B ^ (1 / (d : ℝ)) := by
@@ -48,7 +48,7 @@ lemma scaled_box_power_ratio_le {d : ℕ} (hd : 0 < d) {A B p : ℝ}
     (mul_le_mul hdeg hquot (Real.rpow_nonneg (div_nonneg hB0.le hp.le) _) (Real.exp_pos _).le)
     (Real.rpow_nonneg hB0.le _)
 
-lemma scaled_auxiliary_degree_bound_le {d : ℕ} (hd : 0 < d) {A B p C : ℝ}
+private lemma scaled_auxiliary_degree_bound_le {d : ℕ} (hd : 0 < d) {A B p C : ℝ}
     (hA : 1 ≤ A) (hB : 1 ≤ B) (hp : 1 ≤ p) (hpB : p ≤ B) (hBp : B ≤ A * p) :
     (d : ℝ) * scaledPlaneAuxiliaryDegreeBound d C (((d : ℝ) + 1) * B) p ≤
       (4 + 2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 * A) *

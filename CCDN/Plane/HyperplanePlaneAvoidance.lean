@@ -18,23 +18,23 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def planeAnchorMinor (n : ℕ) :
+private def planeAnchorMinor (n : ℕ) :
     MvPolynomial (PlaneParameters (Option (Fin (3 + n)))) ℤ :=
   Matrix.det (Matrix.of (fun i j : Fin 3 => X (some (i.castAdd n), j)))
 
-lemma planeAnchorMinor_eval (n : ℕ)
+private lemma planeAnchorMinor_eval (n : ℕ)
     (v : PlaneParameters (Option (Fin (3 + n))) → ℤ) :
     eval v (planeAnchorMinor n) =
       Matrix.det (Matrix.of (fun i j : Fin 3 => v (some (i.castAdd n), j))) := by
   simp [planeAnchorMinor, Matrix.det_fin_three]
 
-lemma planeAnchorMinor_degree (n : ℕ) : (planeAnchorMinor n).totalDegree ≤ 3 := by
+private lemma planeAnchorMinor_degree (n : ℕ) : (planeAnchorMinor n).totalDegree ≤ 3 := by
   have hh := matrix_det_parameterDegree
     (Matrix.of (fun i j : Fin 3 => (X (some (i.castAdd n), j) :
       MvPolynomial (PlaneParameters (Option (Fin (3 + n)))) ℤ))) 1 (by intros; simp)
   simpa only [planeAnchorMinor, Fintype.card_fin, Nat.mul_one] using hh
 
-lemma planeAnchorMinor_ne_zero (n : ℕ) : planeAnchorMinor n ≠ 0 := by
+private lemma planeAnchorMinor_ne_zero (n : ℕ) : planeAnchorMinor n ≠ 0 := by
   let v : PlaneParameters (Option (Fin (3 + n))) → ℤ :=
     fun p => Option.elim p.1 0 (fun i => if i.val = p.2.val then 1 else 0)
   have hv : eval v (planeAnchorMinor n) = 1 := by

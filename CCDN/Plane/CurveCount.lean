@@ -36,7 +36,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma planeResidue_card_eq_zero_card (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) :
+private lemma planeResidue_card_eq_zero_card (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) :
     Nat.card (PlaneResidue f p) =
       Nat.card {x : Fin 2 → ZMod p // eval x (MvPolynomial.map (Int.castRingHom (ZMod p)) f) = 0} := by
   apply Nat.card_congr
@@ -105,7 +105,7 @@ open MvPolynomial Real
 
 /-- Every box on a rational irreducible plane curve which splits over a field
 extension has at most d² integer points, independently of the radius. -/
-theorem count_nonabsolute_plane_le {F : Type*} [Field F] [CharZero F]
+private theorem count_nonabsolute_plane_le {F : Type*} [Field F] [CharZero F]
     (f : MvPolynomial (Fin 2) ℚ) (hf : Irreducible f) (hd : 0 < f.totalDegree)
     (hred : ¬ Irreducible (MvPolynomial.map (algebraMap ℚ F) f)) (B : ℝ) :
     count (zeroLocus f) B ≤ f.totalDegree ^ 2 := by
@@ -123,7 +123,7 @@ theorem count_nonabsolute_plane_le {F : Type*} [Field F] [CharZero F]
 
 /-- The exact PlaneCurveBound target follows from the sharp finite-field
 estimate. The rational nonabsolute case is covered by the d² bound. -/
-theorem planeCurveBound_of_residue_bound {C : ℝ}
+private theorem planeCurveBound_of_residue_bound {C : ℝ}
     (hC : 0 ≤ C) (hres : PlaneResidueBound C) : PlaneCurveBound := by
   let K := 2 * Real.exp 1 * affineNonzeroConstantBound C
   have hK : 0 < K := mul_pos (by positivity) (affineNonzeroConstantBound_pos C)

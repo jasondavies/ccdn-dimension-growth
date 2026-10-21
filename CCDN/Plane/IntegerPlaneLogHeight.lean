@@ -28,7 +28,7 @@ lemma integerPlaneHeight_one_le (m d : ℕ) (hd : 1 ≤ d)
     · exact one_le_mul_of_one_le_of_one_le (one_le_pow₀ (by linarith)) hH
     · exact one_le_pow₀ (one_le_mul_of_one_le_of_one_le hA (by linarith))
 
-lemma integerPlaneHeight_log_le (m d : ℕ) (hd : 1 ≤ d)
+private lemma integerPlaneHeight_log_le (m d : ℕ) (hd : 1 ≤ d)
     (H : ℝ) (hH : 1 ≤ H) :
     Real.log (integerPlaneHeight m d H (2 * (d : ℝ) ^ 3)) ≤
       Real.log H + (m : ℝ) * d + 11 * (d : ℝ) ^ 2 := by

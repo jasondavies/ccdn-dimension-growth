@@ -22,7 +22,7 @@ def scaledModelCoordinates {n : ℕ} (h : ℤ) (a : Fin n → ℤ) :
     Fin (n + 1) → MvPolynomial (Fin n) ℤ :=
   Fin.cons (C h) (fun j => X j - C (a j * h))
 
-lemma scaledModelCoordinates_eval {n : ℕ} (h : ℤ) (a z : Fin n → ℤ) :
+private lemma scaledModelCoordinates_eval {n : ℕ} (h : ℤ) (a z : Fin n → ℤ) :
     (fun j => eval z (scaledModelCoordinates h a j)) =
       Fin.cons h (fun j => z j - a j * h) := by
   funext i

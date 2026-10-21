@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma integer_ternary_zero_box_card_le (f : MvPolynomial (Fin 3) ℤ) (hf : f ≠ 0)
+private lemma integer_ternary_zero_box_card_le (f : MvPolynomial (Fin 3) ℤ) (hf : f ≠ 0)
     {B : ℝ} (hB : 1 ≤ B) :
     (((integerBox 3 B).filter (fun x => eval x f = 0)).card : ℝ) ≤
       f.totalDegree * (3 * B) ^ 2 := by
@@ -45,7 +45,7 @@ lemma integer_ternary_zero_box_card_le (f : MvPolynomial (Fin 3) ℤ) (hf : f �
   exact hcard.trans (mul_le_mul_of_nonneg_left
     (pow_le_pow_left₀ hSpos.le hScard 2) (by positivity))
 
-theorem projective_plane_linear_count
+private theorem projective_plane_linear_count
     (f : MvPolynomial (Fin 3) ℚ) (hf : f.IsHomogeneous 1) (hf0 : f ≠ 0)
     {B : ℝ} (hB : 1 ≤ B) :
     (projectiveCount (projectiveZeroLocus f) B : ℝ) ≤ 9 * B ^ 2 := by

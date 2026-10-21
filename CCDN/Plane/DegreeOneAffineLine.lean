@@ -29,7 +29,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma coordinate_mul_filtered_mem {K σ : Type*} [Field K]
+private lemma coordinate_mul_filtered_mem {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (j : σ) (N : ℕ)
     {u : MvPolynomial σ K ⧸ I} (hu : u ∈ filteredCoordinateSpace I N) :
     (Ideal.Quotient.mk I) (X j) * u ∈ filteredCoordinateSpace I (N + 1) := by
@@ -43,7 +43,7 @@ lemma coordinate_mul_filtered_mem {K σ : Type*} [Field K]
 
 /-- Affine coordinate formulas in a prime quotient give polynomial containment
 of an affine line through each base-field-valued point. -/
-theorem affine_coordinates_line_polynomial_identity {K : Type*} [Field K]
+private theorem affine_coordinates_line_polynomial_identity {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime]
     (j : Fin 3) (c d : Fin 3 → K)
     (hj : Transcendental K ((Ideal.Quotient.mk p) (X j)))
@@ -103,7 +103,7 @@ theorem affine_coordinates_line_polynomial_identity {K : Type*} [Field K]
 
 /-- A degree-one prime curve containing a base-field point has affine coordinate
 formulas over that same field. In particular this holds directly over `ℚ`. -/
-theorem degree_one_coordinates_affine_of_point {K : Type*} [Field K]
+private theorem degree_one_coordinates_affine_of_point {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
     (hdegree : HasFilteredCurveDegree p 1)
     (z : Fin 3 → K) (hz : z ∈ idealZeroLocus p) :
@@ -144,7 +144,7 @@ theorem degree_one_coordinates_affine_of_point {K : Type*} [Field K]
 
 /-- Affine coordinate identities identify the entire base-field zero set
 with the parameterized line, in both directions. -/
-theorem zeroLocus_eq_line_of_affine_coordinates {K : Type*} [Field K]
+private theorem zeroLocus_eq_line_of_affine_coordinates {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime]
     (j : Fin 3) (c d : Fin 3 → K)
     (hj : Transcendental K ((Ideal.Quotient.mk p) (X j)))

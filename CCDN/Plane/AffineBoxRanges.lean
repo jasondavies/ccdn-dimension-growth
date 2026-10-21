@@ -42,7 +42,7 @@ lemma large_box_height_threshold {d : ℕ} (hd : 0 < d) {A B : ℝ} (hA : 1 ≤ 
   nlinarith
 
 /-- On B<=S*d² the 2/d box power has an absolute bound depending only on S. -/
-lemma small_box_log_bound {d : ℕ} (hd : 0 < d) {S B : ℝ} (hS : 1 ≤ S)
+private lemma small_box_log_bound {d : ℕ} (hd : 0 < d) {S B : ℝ} (hS : 1 ≤ S)
     (hB : 1 ≤ B) (hBS : B ≤ S * (d : ℝ) ^ 2) :
     Real.log (((d : ℝ) + 1) * B) ≤ Real.log S + 3 * d := by
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
@@ -59,7 +59,7 @@ lemma small_box_log_bound {d : ℕ} (hd : 0 < d) {S B : ℝ} (hS : 1 ≤ S)
   norm_num at hlogB
   linarith
 
-lemma small_box_power_bound {d : ℕ} (hd : 0 < d) {S B : ℝ} (hS : 1 ≤ S)
+private lemma small_box_power_bound {d : ℕ} (hd : 0 < d) {S B : ℝ} (hS : 1 ≤ S)
     (hB : 1 ≤ B) (hBS : B ≤ S * (d : ℝ) ^ 2) :
     (((d : ℝ) + 1) * B) ^ (2 / (d : ℝ)) ≤ Real.exp (2 * Real.log S + 6) := by
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
