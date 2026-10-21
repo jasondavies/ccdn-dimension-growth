@@ -20,6 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- The homogeneous coordinates `(1, x)` of an integer point `x` are primitive: their gcd is `1`. -/
 lemma primitive_affine_integer_coordinates {n : ℕ} (x : Fin n → ℤ) :
     Finset.univ.gcd (Fin.cons 1 x) = 1 := by
   have he : insert (0 : Fin (n + 1)) univ = univ := insert_eq_of_mem (mem_univ _)

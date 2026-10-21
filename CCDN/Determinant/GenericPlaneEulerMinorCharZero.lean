@@ -66,6 +66,10 @@ private theorem exists_genericPlane_euler_minor_charZero
   apply hdet
   rw [genericPlaneMap_bivariate, ← eulerClosedForm_minor_map, he, map_zero]
 
+/-- Over an algebraically closed field of characteristic zero, every irreducible polynomial `f` of
+degree `k + 2` admits an affine coordinate change, given by `a` and `b` with `b none ≠ 0` and the
+top-degree form of `f` nonvanishing at `b`, after which the Euler closed-form coefficient matrix of
+the generic plane section has a nonzero minor of order `(k + 2) ^ 2 - 1`. -/
 theorem exists_positioned_genericPlane_euler_minor_charZero
     {K σ : Type*} [Field K] [CharZero K] [IsAlgClosed K] [Fintype σ]
     (k : ℕ) (f : MvPolynomial (Option σ) K) (hf : Irreducible f)

@@ -20,6 +20,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If `f ≠ 0` is homogeneous of degree `d` and `f * u` is homogeneous of degree `M ≥ d`, then `u`
+is homogeneous of degree `M - d`. -/
 lemma homogeneous_multiplier {K σ : Type*} [CommRing K] [IsDomain K]
     {f u : MvPolynomial σ K} {d M : ℕ} (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (hfu : (f * u).IsHomogeneous M) (hM : d ≤ M) : u.IsHomogeneous (M - d) := by
@@ -29,14 +31,19 @@ lemma homogeneous_multiplier {K σ : Type*} [CommRing K] [IsDomain K]
   rw [mul_left_cancel₀ hf0 he]
   exact homogeneousComponent_isHomogeneous _ _
 
+/-- The degree-`M` part of the graded coordinate ring: the image of the homogeneous polynomials of
+degree `M` in `K[X] ⧸ I`. -/
 def homogeneousCoordinateSpace {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (M : ℕ) : Submodule K (MvPolynomial σ K ⧸ I) :=
   (homogeneousSubmodule σ K M).map (Ideal.Quotient.mkₐ K I).toLinearMap
 
+/-- The multiples `f * u` of `f` by homogeneous polynomials `u` of degree `M - d`. -/
 def homogeneousMultiples {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (d M : ℕ) : Submodule K (MvPolynomial σ K) :=
   (homogeneousSubmodule σ K (M - d)).map (LinearMap.mulLeft K f)
 
+/-- For `f ≠ 0`, the space of homogeneous multiples `homogeneousMultiples f d M` has the dimension
+of the space of homogeneous polynomials of degree `M - d`. -/
 theorem homogeneousMultiples_finrank {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (hf : f ≠ 0) (d M : ℕ) :
     Module.finrank K (homogeneousMultiples f d M) =

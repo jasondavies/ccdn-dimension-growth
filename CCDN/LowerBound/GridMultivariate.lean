@@ -17,6 +17,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Renaming the variables of an irreducible polynomial along an injective map keeps it irreducible.
+-/
 lemma irreducible_rename_of_injective {K σ τ : Type*} [Field K]
     (i : σ → τ) (hi : Function.Injective i) (f : MvPolynomial σ K)
     (hf : Irreducible f) : Irreducible (rename i f) := by
@@ -31,6 +33,7 @@ lemma irreducible_rename_of_injective {K σ τ : Type*} [Field K]
   apply irreducible_iff_prime.mp
   exact (MulEquiv.irreducible_iff (f := renameEquiv K e)).mpr hf
 
+/-- Renaming the variables along a map with a left inverse preserves the total degree. -/
 lemma totalDegree_rename_of_leftInverse {K σ τ : Type*} [CommRing K]
     (i : σ → τ) (r : τ → σ) (hr : Function.LeftInverse r i)
     (f : MvPolynomial σ K) : (rename i f).totalDegree = f.totalDegree := by

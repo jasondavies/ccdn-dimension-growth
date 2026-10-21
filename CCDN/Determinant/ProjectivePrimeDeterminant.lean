@@ -28,6 +28,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For a homogeneous integer polynomial `f` of degree `d ≥ 2` with irreducible reduction modulo a
+prime `p > 27 d⁴`, the reduced plane curve has at most `p + projectivePlaneResidueConstant · d² ·
+√p` points over `𝔽_p`. -/
 theorem projective_plane_finite_field_card_bound {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f))
@@ -67,6 +70,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- For a homogeneous integer polynomial `f` of degree `d ≥ 2` with irreducible reduction modulo a
+prime `p > 27 d⁴`, the total residue multiplicity of `f mod p` is at most `p +
+(projectivePlaneDeterminantConstant + 1) · d² · √p`. -/
 theorem projectivePlaneTotalMultiplicity_le {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f))
@@ -111,6 +117,11 @@ private theorem projective_plane_minorGcd_dvd {s N p d M : ℕ} [Fact p.Prime] (
   apply div_le_div_of_nonneg_left (sq_nonneg _) (by positivity)
   exact mul_le_mul_of_nonneg_left hm (by norm_num)
 
+/-- Plane case of CCDN Proposition 3.2.6 at a single rank: for an independent evaluation of forms at
+`s` primitive zeros of a degree-`d ≥ 2` plane curve whose reductions modulo primes `27 d⁴ < p ≤ s`
+outside `bad` are irreducible, the logarithm of the gcd of the maximal minors is at least `s² / 2 ·
+(log s - 4 log d - ∑_{p ∈ bad} log p / p - E)`, with the explicit constant `E =
+degreeFourDeterminantError projectivePlaneDeterminantConstant`. -/
 theorem projective_determinant_log_lower_at_rank {s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     {F : Fin N → MvPolynomial (Fin 3) ℤ} {z : Fin s → IntPoint 3}

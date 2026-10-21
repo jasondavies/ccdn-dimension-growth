@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 
 open Classical in
+/-- The bijection between exponent vectors in `σ → ℕ` of total degree at most `N` and multisets of
+size `N` on `Option σ`. -/
 def boundedExponentVectorEquivSym (σ : Type*) [Fintype σ] (N : ℕ) :
     {a : σ → ℕ // ∑ i, a i ≤ N} ≃ Sym (Option σ) N :=
   (Sym.equivNatSumLeOfFintype σ N).symm
@@ -107,6 +109,8 @@ def lowerSetOrthantPolynomial {σ : Type*} [Fintype σ]
   exact ∑ b : σ → Fin (B + 1), if (fun i => (b i).val) ∈ S then
     Polynomial.preHilbertPoly ℚ (Fintype.card (orthantFree b)) (orthantBaseDegree b) else 0
 
+/-- If membership in `S` is determined by clamping exponents at `B`, then for `N ≥ |σ| · B` the
+orthant polynomial of `S` evaluated at `N` counts the vectors of `S` of total degree at most `N`. -/
 lemma lowerSetOrthantPolynomial_eval {σ : Type*} [Fintype σ]
     (S : Set (σ → ℕ)) (B : ℕ)
     (hstable : ∀ a, a ∈ S ↔ clampExponent B a ∈ S)

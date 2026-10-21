@@ -50,6 +50,8 @@ private theorem filteredCoordinateSpace_finrank_coefficientEquiv
     filteredCoordinateSpace_finrank_eq_standard_card]
   simp only [Ideal.boundedStandardExponents, standardExponents_coefficientEquiv]
 
+/-- A ring isomorphism `K ≃+* L` of coefficient fields preserves the filtered Hilbert polynomial of
+an ideal. -/
 theorem filteredHilbertPolynomial_coefficientEquiv
     {K L σ : Type*} [Field K] [Field L] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (e : K ≃+* L) :

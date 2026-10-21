@@ -20,6 +20,8 @@ blocks over the constant field, whose filtered growth bounds their number. -/
 namespace CCDN
 noncomputable section
 
+/-- In a tower `K → R → F`, the products `u k • v i` of a family `v` independent over `R` and a
+family `u` independent over `K` are independent over `K`. -/
 lemma tower_smul_independent {K R F ι κ : Type*} [Field K] [Field R] [Field F]
     [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F]
     [Fintype ι] [DecidableEq ι] [Fintype κ] [DecidableEq κ]
@@ -33,6 +35,7 @@ lemma tower_smul_independent {K R F ι κ : Type*} [Field K] [Field R] [Field F]
   have hz := Fintype.linearIndependent_iff.mp hv _ he t.1
   exact Fintype.linearIndependent_iff.mp hu (fun k => c (t.1, k)) hz t.2
 
+/-- The powers `1, u, …, u ^ (N - 1)` of a transcendental element `u` are linearly independent. -/
 lemma transcendental_powers_independent {K R : Type*} [Field K] [CommRing R] [Algebra K R]
     (u : R) (hu : Transcendental K u) (N : ℕ) :
     LinearIndependent K (fun i : Fin N => u ^ i.val) := by

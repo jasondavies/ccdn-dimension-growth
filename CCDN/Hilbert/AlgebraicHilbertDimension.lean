@@ -105,6 +105,9 @@ theorem algebraic_polynomial_minimalPrime_under
   rw [he]
   simpa only [Ideal.under_def, algebraMap_def] using hQover.over.symm
 
+/-- Algebraic extension of the coefficient field preserves Hilbert dimension: for a prime `I` over
+`k` and an algebraic extension `K / k`, every minimal prime over the extension of `I` to `K` has
+filtered Hilbert polynomial of the same degree as that of `I`. -/
 theorem algebraic_polynomial_minimalPrime_dimension
     (k K σ : Type*) [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]
     [Fintype σ] [LinearOrder σ]

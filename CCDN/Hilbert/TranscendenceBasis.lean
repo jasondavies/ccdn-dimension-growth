@@ -73,6 +73,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For a prime ideal `I`, some set of coordinate functions, of size the Hilbert dimension of `I`,
+is a transcendence basis of `K[X] ⧸ I` over `K`. -/
 theorem exists_hilbert_coordinate_transcendence_basis
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime] :
@@ -99,6 +101,8 @@ theorem exists_hilbert_coordinate_transcendence_basis
     exact IntermediateField.isAlgebraic_adjoin_iff_top.mp hfieldalg
   exact ⟨U, hU, IsTranscendenceBasis.of_comp φ (IsFractionRing.injective _ _) hBF⟩
 
+/-- For a prime ideal `I`, the Hilbert dimension of `I` equals the cardinality of any transcendence
+basis of `K[X] ⧸ I` over `K`. -/
 theorem hilbert_dimension_eq_transcendence_basis_card
     {K σ ι : Type*} [Field K] [Fintype σ] [LinearOrder σ] [Fintype ι]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]

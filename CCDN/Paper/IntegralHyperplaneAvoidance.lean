@@ -17,6 +17,9 @@ noncomputable section
 open MvPolynomial
 universe u
 
+/-- For the hyperplane `A · x = 0` with `A none ≠ 0`, if the restriction of `f` to the hyperplane,
+written as a graph over the other coordinates, is absolutely irreducible, then the ideal generated
+by `f` and the linear form is prime over the algebraic closure; used for CCDN Lemma 4.3.7. -/
 lemma hyperplaneSectionIdeal_isPrime_of_absolute_graph {K σ : Type*}
     [Field K] [Fintype σ] (A : Option σ → K) (hA : A none ≠ 0)
     (f : MvPolynomial (Option σ) K)

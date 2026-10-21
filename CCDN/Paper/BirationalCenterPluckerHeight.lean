@@ -20,6 +20,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- Plücker height bound used for CCDN Lemma 5.3: the row span of an `r × n` integer matrix of rank
+`r` with entries bounded by `T` has Plücker height at most `r! · T ^ r`. -/
 theorem integer_center_subspace_plucker_height {r n T : ℕ}
     (M : Matrix (Fin r) (Fin n) ℤ)
     (hM : LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row)

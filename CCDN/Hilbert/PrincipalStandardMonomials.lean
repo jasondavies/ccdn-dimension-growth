@@ -18,10 +18,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- The finite set of standard exponents of `I`, for the monomial order `m`, of total degree at most
+`N`. -/
 def standardMonomialPrefix {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) (N : ℕ) :
     Finset (σ →₀ ℕ) := (Set.toFinite (Ideal.boundedStandardExponents I m N)).toFinset
 
+/-- An exponent lies in `standardMonomialPrefix I m N` exactly when it is a standard exponent of `I`
+of degree at most `N`. -/
 @[simp] lemma mem_standardMonomialPrefix {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) (N : ℕ) (a : σ →₀ ℕ) :
     a ∈ standardMonomialPrefix I m N ↔
@@ -29,6 +33,8 @@ def standardMonomialPrefix {K σ : Type*} [Field K] [Fintype σ]
   simp only [standardMonomialPrefix, Set.Finite.mem_toFinset]
   rfl
 
+/-- The number of degree-lexicographic standard exponents of `I` of degree at most `N` equals the
+affine Hilbert function of `I` at `N`. -/
 theorem standardMonomialPrefix_card {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (N : ℕ) :
     (standardMonomialPrefix I MonomialOrder.degLex N).card =

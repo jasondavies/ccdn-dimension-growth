@@ -20,8 +20,11 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The integer point `(a, p, 0)` on the line `X₂ = 0`, used to show that the local determinant
+bound of CCDN Corollary 2.5 needs a common column degree. -/
 def mixedDegreeLinePoint (p a : ℕ) : Fin 3 → ℤ := ![(a : ℤ), (p : ℤ), 0]
 
+/-- For a prime `p` and `0 < a < p`, the point `mixedDegreeLinePoint p a` is primitive. -/
 lemma mixedDegreeLinePoint_primitive {p a : ℕ} (hp : p.Prime)
     (ha : 0 < a) (hap : a < p) :
     Finset.univ.gcd (mixedDegreeLinePoint p a) = 1 := by
@@ -39,16 +42,19 @@ lemma mixedDegreeLinePoint_primitive {p a : ℕ} (hp : p.Prime)
   rw [← Finset.normalize_gcd, normalize_eq_one]
   exact isUnit_of_dvd_one hd
 
+/-- The point `mixedDegreeLinePoint p a` lies on the line `X₂ = 0`. -/
 lemma mixedDegreeLinePoint_zero (p a : ℕ) :
     eval (mixedDegreeLinePoint p a) (X (2 : Fin 3)) = 0 := by
   simp [mixedDegreeLinePoint]
 
+/-- Modulo `p`, the point `mixedDegreeLinePoint p a` is `a` times `(1, 0, 0)`. -/
 lemma mixedDegreeLinePoint_reduction {p a : ℕ} [Fact p.Prime] :
     (fun j => (mixedDegreeLinePoint p a j : ZMod p)) =
       (a : ZMod p) • (![1, 0, 0] : Fin 3 → ZMod p) := by
   ext j
   fin_cases j <;> simp [mixedDegreeLinePoint]
 
+/-- For `0 < a < p` with `p` prime, `a` is nonzero modulo `p`. -/
 lemma mixedDegreeLinePoint_reduction_scalar_ne_zero {p a : ℕ} [Fact p.Prime]
     (ha : 0 < a) (hap : a < p) :
     (a : ZMod p) ≠ 0 := by
@@ -68,6 +74,7 @@ lemma mixedDegreeLinePoint_projective_reduction {p a : ℕ} [Fact p.Prime]
   apply (Projectivization.mk_eq_mk_iff' (ZMod p) _ _ _ _).mpr
   exact ⟨a, mixedDegreeLinePoint_reduction.symm⟩
 
+/-- The monomial `X₀ ^ j` is homogeneous of degree `j`. -/
 lemma mixedDegreeLineForm_homogeneous (j : ℕ) :
     (X (0 : Fin 3) ^ j : MvPolynomial (Fin 3) ℤ).IsHomogeneous j :=
   isHomogeneous_X_pow _ _

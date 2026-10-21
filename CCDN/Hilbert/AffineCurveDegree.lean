@@ -21,6 +21,7 @@ eventually linear functions compares their slopes (`eventual_linear_slope_le`).
 
 namespace CCDN
 
+/-- The polynomial ring `ℚ[x₁, …, xₙ]` in which affine algebraic sets are cut out. -/
 abbrev CoordinatePolynomial (n : ℕ) := MvPolynomial (Fin n) ℚ
 
 /-- The affine Hilbert function: the dimension of the polynomials of total degree at
@@ -34,6 +35,8 @@ def HasAffineCurveDegree {n : ℕ} (I : Ideal (CoordinatePolynomial n)) (d : ℕ
   ∃ N : ℕ, ∃ c : ℤ, ∀ M : ℕ, N ≤ M →
     (affineHilbertFunction I M : ℤ) = (d : ℤ) * M + c
 
+/-- The affine Hilbert degree of a curve is unique: if `I` has affine curve degree `d` and `e`, then
+`d = e`. -/
 theorem affineCurveDegree_unique {n : ℕ} {I : Ideal (CoordinatePolynomial n)} {d e : ℕ}
     (hd : HasAffineCurveDegree I d) (he : HasAffineCurveDegree I e) : d = e := by
   obtain ⟨N, c, hN⟩ := hd

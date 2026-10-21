@@ -45,13 +45,18 @@ def PlaneResidueCountBound (C : ℝ) (d : ℕ) (f : MvPolynomial (Fin 2) ℤ) : 
     Irreducible (MvPolynomial.map (Int.castRingHom (ZMod p)) f) →
       (Nat.card (PlaneResidue f p) : ℝ) ≤ p + C * (d : ℝ) ^ 2 * Real.sqrt p
 
+/-- The integer lift, with coordinates in `[0, p)`, of an `𝔽_p`-point of the reduced affine plane
+curve. -/
 def planeResidueLift {f : MvPolynomial (Fin 2) ℤ} {p : ℕ} (a : PlaneResidue f p) :
     Fin 2 → ℤ := fun j => (a.val j).val
 
+/-- The integer lift of a residue point reduces modulo `p` to the point itself. -/
 lemma cast_planeResidueLift {f : MvPolynomial (Fin 2) ℤ} {p : ℕ} [NeZero p]
     (a : PlaneResidue f p) (j : Fin 2) : (planeResidueLift a j : ZMod p) = a.val j := by
   simp [planeResidueLift]
 
+/-- The reduction of `f` modulo `p` vanishes at the reduction of the integer lift of a residue point
+of `f`. -/
 lemma planeResidueLift_zero {f : MvPolynomial (Fin 2) ℤ} {p : ℕ} [NeZero p]
     (a : PlaneResidue f p) :
     eval₂ (Int.castRingHom (ZMod p)) (fun j => (planeResidueLift a j : ZMod p)) f = 0 := by
@@ -63,6 +68,9 @@ def planeResidueMultiplicity (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fact p.Pr
   Classical.choose (exists_hypersurface_reduction_multiplicity f (planeResidueLift a) hf
     (planeResidueLift_zero a))
 
+/-- The multiplicity of `f mod p` at a residue point `a` is between `1` and the total degree of `f`;
+after translating `a` to the origin, the reduced equation lies in that power of the ideal of the
+origin and has a nonzero homogeneous component of that degree. -/
 theorem planeResidueMultiplicity_spec (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fact p.Prime]
     (hf : map (Int.castRingHom (ZMod p)) f ≠ 0) (a : PlaneResidue f p) :
     0 < planeResidueMultiplicity f p hf a ∧

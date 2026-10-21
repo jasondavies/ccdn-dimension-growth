@@ -20,6 +20,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix Real
 
+/-- Evaluating the composite `g ∘ τ` of a polynomial map `τ` and a polynomial `g` at `z` is
+evaluating `g` at `τ(z)`. -/
 lemma eval_polynomial_coordinate_map {R : Type*} [CommRing R] {n m : ℕ}
     (τ : Fin m → MvPolynomial (Fin n) R) (g : MvPolynomial (Fin m) R) (z : Fin n → R) :
     eval z (aeval τ g) = eval (fun j => eval z (τ j)) g := by

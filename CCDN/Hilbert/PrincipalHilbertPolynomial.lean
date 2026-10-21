@@ -83,12 +83,16 @@ theorem principal_filteredHilbertPolynomial_degree_leadingCoeff
     (Polynomial.le_natDegree_of_ne_zero hn)
   exact ⟨by rw [hP, hdegree], by rw [hP, Polynomial.leadingCoeff, hdegree, hcoeff]⟩
 
+/-- The filtered Hilbert polynomial of a nonconstant principal ideal `(f)` in `n + 1` variables has
+degree `n`. -/
 theorem principal_filteredHilbertPolynomial_natDegree
     {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f ≠ 0) (hd : 0 < f.totalDegree) :
     (filteredHilbertPolynomial (Ideal.span {f})).natDegree = n :=
   (principal_filteredHilbertPolynomial_degree_leadingCoeff f hf hd).natDegree_eq
 
+/-- The filtered Hilbert polynomial of a nonconstant principal ideal `(f)` in `n + 1` variables has
+leading coefficient `deg f / n!`, so the hypersurface has degree `deg f`. -/
 theorem principal_filteredHilbertPolynomial_leadingCoeff
     {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f ≠ 0) (hd : 0 < f.totalDegree) :

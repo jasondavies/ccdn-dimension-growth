@@ -29,6 +29,10 @@ abbrev projectivePlaneResidueMultiplicity {p d : ℕ} [Fact p.Prime]
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (r : ProjectivePlaneResidue f p) : ℕ :=
   projectiveHypersurfaceResidueMultiplicity f hf hf0 r
 
+/-- The multiplicity of the reduction `f mod p` of a plane curve at a residue point `r` is between
+`1` and the degree `d`; in the chart of `r`, translated so that `r` is the origin, the reduced
+equation lies in that power of the ideal of the origin and has a nonzero homogeneous component of
+that degree. -/
 theorem projectivePlaneResidueMultiplicity_spec {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (r : ProjectivePlaneResidue f p) :

@@ -24,9 +24,12 @@ def partialCoordinateEval {K : Type*} [CommRing K] (c : Fin 3 → K) (n : ℕ) :
     MvPolynomial (Fin 3) K →+* MvPolynomial (Fin 3) K :=
   eval₂Hom C (fun j => if j.val < n then C (c j) else X j)
 
+/-- `partialCoordinateEval c n` fixes constants. -/
 @[simp] lemma partialCoordinateEval_C {K : Type*} [CommRing K] (c : Fin 3 → K) (n : ℕ) (a : K) :
     partialCoordinateEval c n (C a) = C a := by simp [partialCoordinateEval]
 
+/-- `partialCoordinateEval c n` replaces `X j` by `c j` for `j < n` and fixes the other variables.
+-/
 @[simp] lemma partialCoordinateEval_X {K : Type*} [CommRing K] (c : Fin 3 → K) (n : ℕ) (j : Fin 3) :
     partialCoordinateEval c n (X j) = if j.val < n then C (c j) else X j := by
   simp [partialCoordinateEval]
@@ -120,6 +123,7 @@ def coordinatePoint {K σ : Type*} [Field K]
     intro f hf
     simpa only [MvPolynomial.aeval_eq_eval] using hz f hf)
 
+/-- Evaluation at the point `z` sends the class of `f` to `f(z)`. -/
 @[simp] lemma coordinatePoint_mk {K σ : Type*} [Field K]
     (p : Ideal (MvPolynomial σ K)) (z : σ → K) (hz : z ∈ idealZeroLocus p)
     (f : MvPolynomial σ K) :

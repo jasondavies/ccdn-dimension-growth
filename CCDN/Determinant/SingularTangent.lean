@@ -21,6 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A homogeneous polynomial of degree `k` lies in the `k`-th power of the ideal of the origin. -/
 lemma homogeneous_mem_origin_power {K σ : Type*} [CommRing K]
     {f : MvPolynomial σ K} {k : ℕ} (hf : f.IsHomogeneous k) :
     f ∈ idealOfVars σ K ^ k := by
@@ -41,11 +42,14 @@ lemma sub_homogeneousComponent_mem_origin_power {K σ : Type*} [CommRing K]
   · rw [ite_eq_right hk, sub_zero]
     exact hf e (by omega)
 
+/-- The ideal `(f) + 𝔪₀ ^ (k + 1)`, where `𝔪₀` is the ideal of the origin; the quotient by it is the
+coordinate ring of `f = 0` truncated at the origin. -/
 def originTruncationIdeal {K σ : Type*} [Field K] (f : MvPolynomial σ K) (k : ℕ) :
     Ideal (MvPolynomial σ K) := Ideal.span {f} ⊔ idealOfVars σ K ^ (k + 1)
 
-/-- The degree-k layer of the origin ideal, in the curve's quotient modulo
-its next power. This is the image of the ideal power, not a tangent-cone model. -/
+/-- The degree-`k` layer of the ideal of the origin on the hypersurface `f = 0`: the image of
+the `k`-th power of the ideal of the origin in the quotient by `(f)` and the `(k + 1)`-th power.
+This is the image of the ideal power, not a tangent-cone model. -/
 def originLayer {K σ : Type*} [Field K] (f : MvPolynomial σ K) (k : ℕ) :
     Submodule K (MvPolynomial σ K ⧸ originTruncationIdeal f k) :=
   ((idealOfVars σ K ^ k).restrictScalars K).map
@@ -123,6 +127,8 @@ instance originLayer_finite {K σ : Type*} [Field K] [Finite σ]
   unfold homogeneousCoordinateSpace
   infer_instance
 
+/-- The degree-`k` origin layer of a hypersurface in `n + 1` variables has dimension at most the
+number `(n + k).choose k` of monomials of degree `k`. -/
 lemma originLayer_finrank_le {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (k : ℕ) :
     Module.finrank K (originLayer f k) ≤ (n + k).choose k := by

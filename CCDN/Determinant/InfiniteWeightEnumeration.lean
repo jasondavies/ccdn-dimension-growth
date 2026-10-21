@@ -20,6 +20,9 @@ namespace CCDN
 noncomputable section
 open Finset
 
+/-- Every profile `g` of positive integers has an infinite monotone enumeration: a monotone sequence
+`a` taking each value `k` exactly `g k` times, with `a i ≤ k` exactly for the first
+`weightProfileCumulative g k` indices `i`. -/
 theorem exists_positive_profile_enumeration (g : ℕ → ℕ) (hg : ∀ k, 0 < g k) :
     ∃ a : ℕ → ℕ, Monotone a ∧
       (∀ k, {i | a i = k}.Finite) ∧

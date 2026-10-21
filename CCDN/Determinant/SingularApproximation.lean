@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If every coordinate of `x` is divisible by `p`, then `p ^ N` divides `u(x)` for every integer
+polynomial `u` in the `N`-th power of the ideal of the origin. -/
 lemma origin_power_eval_dvd {σ : Type*} (p : ℤ) (x : σ → ℤ) (hx : ∀ j, p ∣ x j)
     {N : ℕ} {u : MvPolynomial σ ℤ} (hu : u ∈ idealOfVars σ ℤ ^ N) :
     p ^ N ∣ eval x u := by

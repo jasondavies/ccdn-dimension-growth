@@ -15,6 +15,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A proper ideal whose filtered Hilbert polynomial has degree equal to the number of variables is
+the zero ideal. -/
 theorem ideal_eq_bot_of_full_hilbert_dimension
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤)

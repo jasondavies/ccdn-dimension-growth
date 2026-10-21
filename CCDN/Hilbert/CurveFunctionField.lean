@@ -21,6 +21,8 @@ Common denominators transfer arbitrary field elements to polynomial classes. -/
 namespace CCDN
 noncomputable section
 
+/-- Multiplying a linearly independent family in a field by a common nonzero element keeps it
+linearly independent. -/
 lemma field_common_multiple_independent {R F ι : Type*} [Field R] [Field F]
     [Algebra R F] [Fintype ι] [DecidableEq ι]
     (v : ι → F) (hv : LinearIndependent R v) (b : F) (hb : b ≠ 0) :

@@ -19,6 +19,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- Ambient height bound of CCDN Lemma 5.1: for a finite birational complementary projection with
+integer data bounded by `2 · centerMinorBound r m d`, every rational point `x` outside the center
+has nonzero normalized image, of height at most `centerProjectionHeightConstant n · d ^ (2 r²) ·
+H(x)`. -/
 lemma birational_complement_projection_ambient_height
     {n m r d : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [J.IsPrime]

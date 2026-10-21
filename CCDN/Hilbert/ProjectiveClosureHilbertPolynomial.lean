@@ -20,6 +20,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For a prime ideal `I`, the first difference `P̄(X + 1) - P̄(X)` of the filtered Hilbert
+polynomial `P̄` of the projective closure of `I` is `P(X + 1)`, where `P` is the filtered Hilbert
+polynomial of `I`. -/
 theorem projectiveClosureIdeal_hilbertPolynomial_difference
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :

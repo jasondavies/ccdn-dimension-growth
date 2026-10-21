@@ -38,6 +38,8 @@ private lemma polynomialCoefficientLinear_monomialOrder_degree
     rw [mem_support_iff, polynomialCoefficientLinear_coeff]
     exact hφ
 
+/-- Extending scalars along a field extension `K → L` does not change the standard exponents of an
+ideal. -/
 theorem standardExponents_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (m : MonomialOrder (Fin n)) :
@@ -77,6 +79,8 @@ private theorem filteredCoordinateSpace_finrank_scalar_extension
     filteredCoordinateSpace_finrank_eq_standard_card]
   simp only [Ideal.boundedStandardExponents, standardExponents_scalar_extension]
 
+/-- Extending scalars along a field extension `K → L` preserves the filtered Hilbert polynomial of
+an ideal. -/
 theorem filteredHilbertPolynomial_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) :

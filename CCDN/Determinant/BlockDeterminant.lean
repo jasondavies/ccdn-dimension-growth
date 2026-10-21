@@ -120,15 +120,19 @@ private def partitionRowEquiv {c s : ℕ} (label : Fin s → Fin c) :
   (Equiv.sigmaCongrRight fun i =>
     (Fintype.equivFin {j : Fin s // label j = i}).symm).trans (Equiv.sigmaFiberEquiv label)
 
+/-- An enumeration of the rows `j` with `label j = i`, the `i`-th block of the partition of the rows
+determined by `label`. -/
 def residueRows {c s : ℕ} (label : Fin s → Fin c) (i : Fin c) :
     Fin (Fintype.card {j : Fin s // label j = i}) → Fin s :=
   fun j => ((Fintype.equivFin {j : Fin s // label j = i}).symm j).val
 
+/-- Every row enumerated by `residueRows label i` has label `i`. -/
 lemma residueRows_label {c s : ℕ} (label : Fin s → Fin c) (i : Fin c)
     (j : Fin (Fintype.card {j : Fin s // label j = i})) :
     label (residueRows label i j) = i :=
   ((Fintype.equivFin {j : Fin s // label j = i}).symm j).property
 
+/-- The sizes of the classes of a labelling `label : Fin s → Fin c` add up to `s`. -/
 lemma sum_residue_class_sizes {c s : ℕ} (label : Fin s → Fin c) :
     (∑ i : Fin c, Fintype.card {j : Fin s // label j = i}) = s := by
   have h := Fintype.card_congr (partitionRowEquiv label)
@@ -174,6 +178,9 @@ private theorem residue_minor_divisors_dvd_minorGcd {c s N : ℕ}
   intro i j
   exact hd i _
 
+/-- If the rows of an integer matrix `A` are partitioned into blocks by `label`, and for each block
+`i` the power `p ^ e i` divides every maximal minor of the block's rows, then `p ^ (∑ i, e i)`
+divides the gcd of the maximal minors of `A`. -/
 theorem residue_prime_powers_dvd_minorGcd {c s N : ℕ}
     (A : Matrix (Fin s) (Fin N) ℤ) (label : Fin s → Fin c)
     (p : ℤ) (e : Fin c → ℕ)

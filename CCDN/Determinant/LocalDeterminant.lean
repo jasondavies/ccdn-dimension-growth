@@ -25,6 +25,8 @@ namespace CCDN
 
 open Matrix
 
+/-- Cauchy–Binet valuation bound: if `p ^ weight i` divides the `i`-th row of `V`, and every choice
+of `s` increasing row indices has total weight at least `e`, then `p ^ e` divides `det (U * V)`. -/
 theorem pow_dvd_det_of_weighted_factorization {R : Type*} [CommRing R] {s N : ℕ}
     (U : Matrix (Fin s) (Fin N) R) (V : Matrix (Fin N) (Fin s) R)
     (p : R) (weight : Fin N → ℕ) (e : ℕ)
@@ -58,9 +60,12 @@ private theorem orderEmbedding_value_ge {s N : ℕ} (t : Fin s ↪o Fin N) (i : 
       omega
   exact hpoint i i.isLt
 
-/-- The sequence of weights in which each nonnegative integer occurs `μ` times. -/
+/-- The sum `∑_{i < s} ⌊i / μ⌋` of the first `s` terms of the weight sequence in which each
+nonnegative integer occurs `μ` times. -/
 def multiplicityExponent (s μ : ℕ) : ℕ := ∑ i : Fin s, i.val / μ
 
+/-- If `p ^ ⌊i / μ⌋` divides the `i`-th row of `V`, then `p ^ multiplicityExponent s μ` divides `det
+(U * V)`. -/
 theorem multiplicity_pow_dvd_det_of_factorization {R : Type*} [CommRing R] {s N : ℕ}
     (U : Matrix (Fin s) (Fin N) R) (V : Matrix (Fin N) (Fin s) R)
     (p : R) (μ : ℕ) (hV : ∀ i j, p ^ (i.val / μ) ∣ V i j) :

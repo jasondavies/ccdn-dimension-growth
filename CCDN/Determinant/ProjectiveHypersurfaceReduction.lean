@@ -17,18 +17,24 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A coordinate index at which the chosen representative of a point of `ℙⁿ⁺²(𝔽_p)` is nonzero. -/
 def hypersurfaceResiduePivot {n p : ℕ} [Fact p.Prime] (r : ProjectiveResidueSpace (n + 2) p) :
     Fin (n + 3) := Classical.choose (Function.ne_iff.mp r.rep_nonzero)
 
+/-- The representative of `r` is nonzero at the coordinate `hypersurfaceResiduePivot r`. -/
 lemma hypersurfaceResiduePivot_ne_zero {n p : ℕ} [Fact p.Prime]
     (r : ProjectiveResidueSpace (n + 2) p) : r.rep (hypersurfaceResiduePivot r) ≠ 0 :=
   Classical.choose_spec (Function.ne_iff.mp r.rep_nonzero)
 
+/-- Integer lifts of the affine coordinates of a point `r` of `ℙⁿ⁺²(𝔽_p)` in the chart where its
+pivot coordinate `hypersurfaceResiduePivot r` is moved to the front and set to `1`. -/
 def hypersurfaceResidueChartLift {n p : ℕ} [Fact p.Prime] (r : ProjectiveResidueSpace (n + 2) p) :
     Fin (n + 2) → ℤ := fun j =>
   (r.rep (Equiv.swap 0 (hypersurfaceResiduePivot r) j.succ) /
     r.rep (hypersurfaceResiduePivot r)).val
 
+/-- Modulo `p`, `hypersurfaceResidueChartLift r` gives the coordinates of `r` divided by its pivot
+coordinate, with the pivot coordinate swapped to the front. -/
 lemma cast_hypersurfaceResidueChartLift {n p : ℕ} [Fact p.Prime]
     (r : ProjectiveResidueSpace (n + 2) p) (j : Fin (n + 2)) :
     (hypersurfaceResidueChartLift r j : ZMod p) =
@@ -62,6 +68,7 @@ theorem primitiveProjectiveReduction_hypersurface_chart {n p : ℕ} [Fact p.Prim
     field_simp [hypersurfaceResiduePivot_ne_zero]
     ring
 
+/-- Evaluating the affine chart of a form `f` at `a` is evaluating `f` at `(1, a)`. -/
 lemma eval₂_hypersurfaceAffineChart {R : Type*} [CommRing R] {n : ℕ} (φ : ℤ →+* R)
     (a : Fin (n + 2) → R) (f : MvPolynomial (Fin (n + 3)) ℤ) :
     eval₂ φ a (affineChart (n + 2) f) = eval₂ φ (Fin.cons 1 a) f := by

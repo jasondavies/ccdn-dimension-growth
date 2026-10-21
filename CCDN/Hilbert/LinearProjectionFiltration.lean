@@ -17,6 +17,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Substituting polynomials of total degree at most `m` multiplies the total degree by at most `m`.
+-/
 lemma aeval_totalDegree_le {K σ τ : Type*} [Field K] [Fintype σ]
     (a : σ → MvPolynomial τ K) {m : ℕ} (ha : ∀ i, (a i).totalDegree ≤ m)
     (f : MvPolynomial σ K) : (aeval a f).totalDegree ≤ m * f.totalDegree := by
@@ -42,6 +44,8 @@ def projectionCoordinateMap {K σ τ : Type*} [Field K]
     MvPolynomial σ K →ₐ[K] (MvPolynomial τ K ⧸ I) :=
   (Ideal.Quotient.mkₐ K I).comp (aeval a)
 
+/-- A linear coordinate substitution maps polynomials of total degree at most `M` into the filtered
+piece of degree `M` of the coordinate ring. -/
 lemma projectionCoordinateMap_filtered {K σ τ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial τ K)) (a : σ → MvPolynomial τ K)
     (ha : ∀ i, (a i).totalDegree ≤ 1) {M : ℕ}

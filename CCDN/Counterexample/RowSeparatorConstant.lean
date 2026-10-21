@@ -33,10 +33,12 @@ def separatorCounterexampleMatrix : Matrix (Fin 5) (Fin 6) ℤ :=
      9, 8, -10, -10, -5, 0;
      9, -9, -9, 10, 9, 0]
 
+/-- Every entry of `separatorCounterexampleMatrix` has absolute value at most `10`. -/
 lemma separatorCounterexample_coeff_le (i : Fin 5) (j : Fin 6) :
     |separatorCounterexampleMatrix i j| ≤ (10 : ℤ) := by
   fin_cases i <;> fin_cases j <;> norm_num [separatorCounterexampleMatrix]
 
+/-- The five rows of `separatorCounterexampleMatrix` are linearly independent over `ℚ`. -/
 lemma separatorCounterexample_independent :
     LinearIndependent ℚ (fun i => fun j => (separatorCounterexampleMatrix i j : ℚ)) := by
   apply Fintype.linearIndependent_iff.mpr
@@ -54,6 +56,7 @@ lemma separatorCounterexample_independent :
   · change c 3 = 0; linarith
   · change c 4 = 0; linarith
 
+/-- The first equation of `separatorCounterexampleMatrix` is `x₄ = 0`. -/
 lemma separatorCounterexample_first (x : Fin 6 → ℤ) :
     (∑ j, separatorCounterexampleMatrix 0 j * x j) = x 4 := by
   simp [Fin.sum_univ_succ, separatorCounterexampleMatrix]
@@ -70,6 +73,8 @@ lemma separatorCounterexample_divisibility (x : Fin 6 → ℤ)
   refine ⟨-2444 * x 2 - 1769 * x 3, ?_⟩
   linear_combination 11594083 * h1 + 2651360 * h2 - 13796060 * h3 - 2032210 * h4
 
+/-- An integer vector satisfying the last four equations of `separatorCounterexampleMatrix` but not
+the first has `|x₄| ≥ 120050`. -/
 lemma separatorCounterexample_coordinate_large (x : Fin 6 → ℤ)
     (hfirst : (∑ j, separatorCounterexampleMatrix 0 j * x j) ≠ 0)
     (hother : ∀ i : Fin 5, i ≠ 0 → ∑ j, separatorCounterexampleMatrix i j * x j = 0) :
@@ -77,6 +82,8 @@ lemma separatorCounterexample_coordinate_large (x : Fin 6 → ℤ)
   rw [separatorCounterexample_first] at hfirst
   exact Int.le_abs_of_dvd hfirst (separatorCounterexample_divisibility x hother)
 
+/-- The separator bound printed in CCDN Lemma 5.4, `√(s! · r) · B ^ s`, equals `120000` for `s + 1 =
+5` equations in `r = 6` variables with coefficients bounded by `B = 10`. -/
 lemma separatorCounterexample_printed_bound :
     Real.sqrt (((5 - 1 : ℕ).factorial : ℝ) * 6) * (10 : ℝ) ^ (5 - 1 : ℕ) = 120000 := by
   have hs : Real.sqrt 144 = 12 :=

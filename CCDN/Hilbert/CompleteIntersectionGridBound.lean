@@ -19,6 +19,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If `f` is prime, `g` is not divisible by `f`, and both have total degree at most `d`, then the
+number of distinct common zeros of `f` and `g` in the grid `Sⁿ⁺²` is at most `(n + 2) ^ n · d² · |S|
+^ n`. -/
 theorem proper_intersection_grid_card_le {K ι : Type*} [Field K]
     [Fintype ι] [DecidableEq ι] {n d : ℕ}
     (f g : MvPolynomial (Fin (n + 2)) K) (hf : Prime f) (hfg : ¬ f ∣ g)

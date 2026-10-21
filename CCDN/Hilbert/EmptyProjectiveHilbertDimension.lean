@@ -47,6 +47,8 @@ private theorem finite_point_bound_of_hilbert_dimension_zero
     simpa only [Fintype.card_coe] using hh
   exact hh'.trans_eq hdimN
 
+/-- An ideal of `ℚ[X₀, …, Xₙ]` whose filtered Hilbert polynomial is constant has empty projective
+zero locus. -/
 theorem projectiveIdealZeroLocus_eq_empty_of_hilbert_dimension_zero
     {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
     (hdim : (filteredHilbertPolynomial I).natDegree = 0) :

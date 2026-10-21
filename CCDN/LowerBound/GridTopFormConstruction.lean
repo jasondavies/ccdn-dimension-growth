@@ -155,6 +155,8 @@ private lemma gridTopFormEquation_top {R : Type*} [CommRing R]
     (paddedGridPolynomial_totalDegree_le s 2 hs),
     homogeneousComponent_eq_self (isHomogeneous_X R (0 : Fin 3)), paddedGridPolynomial_top s 2 hs]
 
+/-- If `1 ≤ d` and the grid set `s` has at most `d - 1` elements, then `gridTopFormEquation s d` has
+total degree `d`. -/
 lemma gridTopFormEquation_totalDegree {R : Type*} [CommRing R] [IsDomain R]
     (s : Finset R) {d : ℕ} (hd : 1 ≤ d) (hs : s.card ≤ d - 1) :
     (gridTopFormEquation s d).totalDegree = d := by
@@ -165,6 +167,7 @@ lemma gridTopFormEquation_totalDegree {R : Type*} [CommRing R] [IsDomain R]
   have hv := congrArg (eval (![0, 1, 0] : Fin 3 → R)) hh
   simp [gridTopForm] at hv
 
+/-- `gridTopFormEquation s d` vanishes at every point whose last two coordinates lie in `s`. -/
 lemma gridTopFormEquation_eval_zero {R : Type*} [CommRing R]
     (s : Finset R) (d : ℕ) (z : Fin 3 → R) (h₁ : z 1 ∈ s) (h₂ : z 2 ∈ s) :
     eval z (gridTopFormEquation s d) = 0 := by

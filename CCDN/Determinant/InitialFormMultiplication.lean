@@ -19,6 +19,8 @@ open MvPolynomial
 
 variable {K σ : Type*} [CommRing K]
 
+/-- A polynomial in the `N`-th power of the ideal of the origin has no homogeneous components of
+degree `k < N`. -/
 lemma homogeneousComponent_eq_zero_of_mem_origin_power
     {f : MvPolynomial σ K} {k N : ℕ}
     (hf : f ∈ idealOfVars σ K ^ N) (hk : k < N) :
@@ -45,6 +47,9 @@ private lemma first_form_product_congruence
   convert (idealOfVars σ K ^ (μ + ν + 1)).add_mem h₁ h₂ using 1
   ring
 
+/-- If `f` lies in the `μ`-th and `g` in the `ν`-th power of the ideal of the origin, then the
+degree-`(μ + ν)` component of `f * g` is the product of the degree-`μ` component of `f` and the
+degree-`ν` component of `g`. -/
 lemma first_homogeneousComponent_mul
     {f g : MvPolynomial σ K} {μ ν : ℕ}
     (hf : f ∈ idealOfVars σ K ^ μ) (hg : g ∈ idealOfVars σ K ^ ν) :

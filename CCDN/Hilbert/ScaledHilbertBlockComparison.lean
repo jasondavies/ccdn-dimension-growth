@@ -17,6 +17,8 @@ at most the Hilbert multiplicity times q to the dimension. -/
 namespace CCDN
 noncomputable section
 
+/-- If `I` has affine dimension `m` and degree `d`, and `r · (m + N).choose m` is at most the affine
+Hilbert function of `I` at `D + q N` for all `N`, then `r ≤ d · q ^ m`. -/
 theorem hilbert_scaled_block_count_le_multiplicity
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) (m d r D q : ℕ) (hq : 0 < q)

@@ -27,6 +27,7 @@ def pointCenterPluckerCoordinates {K : Type*} [Field K] {n : ℕ}
     (p : Projectivization K (Fin (n + 1) → K)) : (Fin 1 ↪ Fin (n + 1)) → K :=
   fun c => Matrix.det (Matrix.submatrix (fun (_ : Fin 1) j => p.rep j) id c)
 
+/-- A polynomial of total degree zero takes the same value at every point. -/
 lemma totalDegree_zero_eval_constant {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (hf : f.totalDegree = 0) (a b : σ → K) :
     eval a f = eval b f := by

@@ -21,6 +21,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Numerical step of the examples in every positive degree of CCDN Section 6: for `n ≥ 2`, `1 ≤ B ≤
+L` and `d ≤ 4 n B`, both `d² / (16 n²) · B ^ (n - 2)` and `d / (16 n²) · B ^ (n - 1)` are at most `L
+^ n`. -/
 lemma hypersurface_grid_lower_bound_numerics {d n B L : ℕ}
     (hn : 2 ≤ n) (hB : 1 ≤ B) (hdB : d ≤ 4 * n * B) (hBL : B ≤ L) :
     ((d : ℝ) ^ 2 / (16 * (n : ℝ) ^ 2)) * (B : ℝ) ^ (n - 2) ≤ (L : ℝ) ^ n ∧

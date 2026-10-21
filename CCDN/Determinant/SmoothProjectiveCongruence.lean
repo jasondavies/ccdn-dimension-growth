@@ -49,6 +49,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If integer zeros `z i` of a homogeneous `f` all have their `k`-th coordinate prime to `p` and
+reduce, in the affine chart `k`, to the same nonsingular point `a` of `f mod p`, then for forms `F
+j` of a common degree `M` the power `p ^ hypersurfaceMultiplicityExponent (n + 1) 1 s` divides the
+gcd of the maximal minors of the evaluation matrix `(F j (z i))`. -/
 theorem smooth_projective_hypersurface_congruence_minorGcd {p n s N d M : ℕ}
     [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)

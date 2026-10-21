@@ -16,9 +16,11 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The projective space `ℙⁿ(𝔽_p)` over the prime field `𝔽_p`. -/
 abbrev ProjectiveResidueSpace (n p : ℕ) [Fact p.Prime] :=
   Projectivization (ZMod p) (Fin (n + 1) → ZMod p)
 
+/-- A primitive integer vector has nonzero reduction modulo every prime. -/
 lemma primitive_mod_ne_zero {n p : ℕ} [Fact p.Prime]
     (z : IntPoint n) (hz : Finset.univ.gcd z = 1) :
     (fun i => (z i : ZMod p)) ≠ 0 := by
@@ -31,22 +33,29 @@ lemma primitive_mod_ne_zero {n p : ℕ} [Fact p.Prime]
   have hp : Prime (p : ℤ) := Nat.prime_iff_prime_int.mp (Fact.out : p.Prime)
   exact hp.not_isUnit (isUnit_of_dvd_one hd)
 
+/-- The reduction modulo `p` of a primitive integer point, as a point of `ℙⁿ(𝔽_p)`. -/
 def primitiveProjectiveReduction {n p : ℕ} [Fact p.Prime]
     (z : IntPoint (n + 1)) (hz : Finset.univ.gcd z = 1) : ProjectiveResidueSpace n p :=
   Projectivization.mk (ZMod p) (fun i => (z i : ZMod p)) (primitive_mod_ne_zero z hz)
 
+/-- A coordinate index at which the chosen representative of a point of `ℙ²(𝔽_p)` is nonzero. -/
 def projectiveResiduePivot {p : ℕ} [Fact p.Prime] (r : ProjectiveResidueSpace 2 p) :
     Fin 3 := Classical.choose (Function.ne_iff.mp r.rep_nonzero)
 
+/-- The representative of `r` is nonzero at the coordinate `projectiveResiduePivot r`. -/
 lemma projectiveResiduePivot_ne_zero {p : ℕ} [Fact p.Prime]
     (r : ProjectiveResidueSpace 2 p) : r.rep (projectiveResiduePivot r) ≠ 0 :=
   Classical.choose_spec (Function.ne_iff.mp r.rep_nonzero)
 
+/-- Integer lifts of the affine coordinates of a point `r` of `ℙ²(𝔽_p)` in the chart where its pivot
+coordinate `projectiveResiduePivot r` is moved to the front and set to `1`. -/
 def projectiveResidueChartLift {p : ℕ} [Fact p.Prime] (r : ProjectiveResidueSpace 2 p) :
     Fin 2 → ℤ := fun j =>
   (r.rep (Equiv.swap 0 (projectiveResiduePivot r) j.succ) /
     r.rep (projectiveResiduePivot r)).val
 
+/-- Modulo `p`, `projectiveResidueChartLift r` gives the coordinates of `r` divided by its pivot
+coordinate, with the pivot coordinate swapped to the front. -/
 lemma cast_projectiveResidueChartLift {p : ℕ} [Fact p.Prime]
     (r : ProjectiveResidueSpace 2 p) (j : Fin 2) :
     (projectiveResidueChartLift r j : ZMod p) =

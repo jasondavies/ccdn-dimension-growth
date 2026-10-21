@@ -63,12 +63,16 @@ theorem grid_square_card_lower_bound {d : ℕ} (hd : 0 < d)
     _ = (d : ℝ) ^ 2 / 4 := by ring
     _ ≤ _ := hs
 
+/-- For `d > 0`, `⌊(d - 1) / 2⌋ - ⌊(d - 1) / 4⌋ = ⌊(d + 1) / 4⌋`, relating the grid size to the
+radius in the numerics for CCDN Proposition 5. -/
 lemma grid_lower_bound_radius_identity (d : ℕ) (hd : 0 < d) :
     (d - 1) / 2 - (d - 1) / 4 = (d + 1) / 4 := by omega
 
+/-- For `d ≥ 3`, the grid radius `⌊(d + 1) / 4⌋` is at least `1`. -/
 lemma grid_lower_bound_radius_pos {d : ℕ} (hd : 3 ≤ d) :
     1 ≤ (d + 1) / 4 := by omega
 
+/-- The grid radius satisfies `4 ⌊(d + 1) / 4⌋ ≤ d + 1`. -/
 lemma grid_lower_bound_radius_size (d : ℕ) :
     4 * (((d + 1) / 4 : ℕ) : ℝ) ≤ (d : ℝ) + 1 := by
   exact_mod_cast (show 4 * ((d + 1) / 4) ≤ d + 1 by omega)

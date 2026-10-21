@@ -18,6 +18,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If a rational polynomial `f` in `n` variables vanishes on the grid `sⁿ` of integer points and
+every element of `s` has absolute value at most `B`, then `f = 0` has at least `|s| ^ n` integer
+points of height at most `B`. -/
 lemma integer_grid_le_affine_count {n : ℕ} (f : MvPolynomial (Fin n) ℚ)
     (s : Finset ℤ) {B : ℝ} (hsB : ∀ a ∈ s, |(a : ℝ)| ≤ B)
     (hfzero : ∀ z : IntPoint n, (∀ j, z j ∈ s) → eval (rationalPoint z) f = 0) :

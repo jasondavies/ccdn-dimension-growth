@@ -19,6 +19,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The filtered Hilbert polynomial of the zero ideal in `|σ|` variables is the binomial polynomial
+`preHilbertPoly ℚ |σ| 0`. -/
 theorem filteredHilbertPolynomial_bot {K σ : Type*} [Field K]
     [Fintype σ] [LinearOrder σ] :
     filteredHilbertPolynomial (⊥ : Ideal (MvPolynomial σ K)) =
@@ -35,6 +37,8 @@ theorem filteredHilbertPolynomial_bot {K σ : Type*} [Field K]
   rw [Nat.add_comm, Nat.choose_symm_add]
 
 
+/-- A proper ideal of Hilbert degree `d > 1` has Hilbert dimension smaller than the number of
+variables. -/
 theorem hilbert_dimension_lt_ambient_of_degree_gt_one
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) (d : ℕ) (hd : 1 < d)

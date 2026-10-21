@@ -16,6 +16,8 @@ namespace CCDN
 noncomputable section
 open Filter
 
+/-- A rational polynomial that is eventually nonnegative on the natural numbers has nonnegative
+leading coefficient. -/
 lemma leadingCoeff_nonneg_of_eventual_nat_eval_nonneg (P : Polynomial ℚ)
     (hP : ∃ N : ℕ, ∀ n ≥ N, 0 ≤ P.eval (n : ℚ)) : 0 ≤ P.leadingCoeff := by
   obtain ⟨N, hN⟩ := hP
@@ -34,6 +36,8 @@ lemma leadingCoeff_nonneg_of_eventual_nat_eval_nonneg (P : Polynomial ℚ)
       (ht.eventually_lt_atBot (0 : ℚ))).exists
     exact (not_lt_of_ge (hN n hnN)) hneg
 
+/-- If `P` has positive leading coefficient and `P(n) ≤ Q(n)` for all large `n`, then `deg P ≤ deg
+Q`. -/
 lemma polynomial_natDegree_le_of_eventual_nat_eval_le
     (P Q : Polynomial ℚ) (hP : 0 < P.leadingCoeff)
     (hle : ∃ N : ℕ, ∀ n ≥ N, P.eval (n : ℚ) ≤ Q.eval (n : ℚ)) :
@@ -46,6 +50,8 @@ lemma polynomial_natDegree_le_of_eventual_nat_eval_le
   rw [Polynomial.leadingCoeff_sub_of_degree_lt' (Polynomial.degree_lt_degree hd)] at hnon
   linarith
 
+/-- If `P` and `Q` have the same degree and positive leading coefficients and `P(n) ≤ Q(n)` for all
+large `n`, then the leading coefficient of `P` is at most that of `Q`. -/
 lemma polynomial_leadingCoeff_le_of_eventual_nat_eval_le
     (P Q : Polynomial ℚ) (hP : 0 < P.leadingCoeff) (hQ : 0 < Q.leadingCoeff)
     (hd : P.natDegree = Q.natDegree)
@@ -62,6 +68,7 @@ lemma polynomial_leadingCoeff_le_of_eventual_nat_eval_le
   rw [Polynomial.leadingCoeff_sub_of_degree_eq hdeg (ne_of_lt hc)] at hnon
   linarith
 
+/-- The filtered Hilbert polynomial of a proper ideal has positive leading coefficient. -/
 lemma filteredHilbertPolynomial_leadingCoeff_pos {K σ : Type*} [Field K]
     [Fintype σ] [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) :
     0 < (filteredHilbertPolynomial I).leadingCoeff := by

@@ -24,6 +24,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- `projectionCoordinateMap I a` is evaluation at the classes of the coordinate polynomials `a i`
+in `K[X] ⧸ I`. -/
 lemma projectionCoordinateMap_eq_aeval {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial τ K)) (a : σ → MvPolynomial τ K) :
     projectionCoordinateMap I a =
@@ -64,6 +66,8 @@ private lemma independent_linear_filtered_finrank_lower
   rw [finrank_restrictTotalDegree, ← Nat.choose_symm_add] at h
   exact h
 
+/-- If polynomials `a i` of degree at most one have algebraically independent classes in `K[X] ⧸ I`,
+their number is at most the degree of the filtered Hilbert polynomial of `I`. -/
 theorem independent_linear_card_le_hilbert_dimension
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ] [LinearOrder τ]
     (I : Ideal (MvPolynomial τ K)) (a : σ → MvPolynomial τ K)
@@ -83,6 +87,8 @@ theorem independent_linear_card_le_hilbert_dimension
     (Nat.cast_le.mpr (independent_linear_filtered_finrank_lower I a ha hi N) :
       ((Fintype.card σ + N).choose (Fintype.card σ) : ℚ) ≤ _)
 
+/-- If more polynomials `a i` of degree at most one are given than the degree of the filtered
+Hilbert polynomial of `I`, then `projectionCoordinateMap I a` is not injective. -/
 theorem linear_projection_not_injective_of_hilbert_dimension_lt
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ] [LinearOrder τ]
     (I : Ideal (MvPolynomial τ K)) (a : σ → MvPolynomial τ K)

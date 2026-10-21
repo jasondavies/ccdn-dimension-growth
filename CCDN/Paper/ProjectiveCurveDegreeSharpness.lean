@@ -19,6 +19,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Filter Asymptotics
 
+/-- Projective curve obstruction of CCDN Section 6: if `C * g d * B ^ (2 / d)` bounds the rational
+points of height at most `B` on every absolutely irreducible projective plane curve of degree `d >
+0`, then `d² / 5 ≤ C * g d` for every `d > 0`. -/
 theorem projective_curve_factor_lower_bound {g : ℕ → ℝ} {C : ℝ}
     (hbound : ∀ F : MvPolynomial (Fin 3) ℚ,
       F.IsHomogeneous F.totalDegree →

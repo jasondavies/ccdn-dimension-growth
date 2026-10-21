@@ -63,6 +63,8 @@ private theorem filteredHilbertPolynomial_equiv
   refine ⟨M, fun N hN => ?_⟩
   rw [hM N hN, filteredCoordinateSpace_finrank_equiv I J e hJ he hei N]
 
+/-- Renaming the variables along a bijection `σ ≃ τ` preserves the filtered Hilbert polynomial of an
+ideal. -/
 theorem filteredHilbertPolynomial_renameEquiv
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     [LinearOrder σ] [LinearOrder τ]
