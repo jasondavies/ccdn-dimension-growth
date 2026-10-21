@@ -8,7 +8,6 @@ module
 public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
 public import CCDN.AuxiliaryPolynomial.AffineChartPrimeDeterminant
 import CCDN.Algebra.AffineTranslation
-import all ArithmeticHeights.BombieriVaaler
 
 /-!
 Coefficient-sensitive auxiliary equations with affine-chart good primes.

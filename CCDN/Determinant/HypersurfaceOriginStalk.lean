@@ -7,8 +7,6 @@ module
 
 public import CCDN.Determinant.SingularTangent
 public import CCDN.ForMathlib.IdealPowerLayer
-import Mathlib.RingTheory.MvPolynomial.Ideal
-import Mathlib.Algebra.MvPolynomial.Basic
 import Mathlib.RingTheory.LocalRing.Defs
 
 /-!

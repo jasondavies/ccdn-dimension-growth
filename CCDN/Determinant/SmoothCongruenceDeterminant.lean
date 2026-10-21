@@ -10,7 +10,6 @@ public import CCDN.Height.CountingHypotheses
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
 import CCDN.Determinant.HypersurfaceMultiplicityEstimate
 import CCDN.Determinant.SmoothProjectiveCongruence
-import all ArithmeticHeights.BombieriVaaler
 
 /-!
 The global determinant bound with simultaneous smooth congruence

@@ -7,7 +7,6 @@ module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.Height.ProjectiveZeroLocus
-import all ArithmeticHeights.BombieriVaaler
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 
 /-! The corrected finite-family form of CCDN Proposition 3.2.6.
@@ -39,7 +38,7 @@ lemma square_minorGcd_dvd_det {s : ℕ} (A : Matrix (Fin s) (Fin s) ℤ) :
   let S : Set.powersetCard (Fin s) s := ⟨univ, by simp⟩
   have h := Finset.gcd_dvd (s := univ) (f := exteriorPower.plucker s A.row) (mem_univ S)
   rw [exteriorPower.plucker_fin_eq_det] at h
-  exact h
+  rwa [minorGcd_eq_gcd_plucker]
 
 /-- The ceiling of the uniform real exponent is a single prime-power
 that divides every determinant in the family. Individual matrices may have

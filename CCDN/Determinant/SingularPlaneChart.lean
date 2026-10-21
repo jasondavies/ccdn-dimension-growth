@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-import all ArithmeticHeights.BombieriVaaler
 public import ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.OriginShift
 public import CCDN.Determinant.LocalDeterminant

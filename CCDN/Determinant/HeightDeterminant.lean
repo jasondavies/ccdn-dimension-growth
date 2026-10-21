@@ -7,7 +7,6 @@ module
 
 public import CCDN.Determinant.SingularDeterminantCutoff
 public import CCDN.Height.IntegerCoefficientHeight
-import all ArithmeticHeights.BombieriVaaler
 import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 
 /-! The determinant lower bound, with the bad-prime input given by the

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-import all ArithmeticHeights.BombieriVaaler
+import ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.MonomialEvaluationMatrix
 public import CCDN.ForMathlib.StandardExponents
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic

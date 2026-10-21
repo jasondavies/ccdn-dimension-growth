@@ -9,7 +9,6 @@ public import CCDN.ForMathlib.StandardExponents
 public import CCDN.AuxiliaryPolynomial.AffineCongruenceHeight
 import CCDN.AuxiliaryPolynomial.StandardMonomialAuxiliary
 import CCDN.AuxiliaryPolynomial.WeightedMonomialDeterminant
-import all ArithmeticHeights.BombieriVaaler
 
 /-! Auxiliary polynomials from the competing congruence determinant
 lower bound and weighted archimedean upper bound. -/
@@ -24,7 +23,7 @@ private theorem square_minorGcd_eq_abs_det {s : ℕ} (A : Matrix (Fin s) (Fin s)
   classical
   let : Nonempty (Set.powersetCard (Fin s) s) :=
     ⟨⟨univ, by simp⟩⟩
-  unfold Int.Matrix.minorGcd
+  rw [minorGcd_eq_gcd_plucker]
   have hp : exteriorPower.plucker s A.row = fun _ => A.det :=
     funext (fun S => exteriorPower.plucker_fin_eq_det A.row S)
   rw [hp]

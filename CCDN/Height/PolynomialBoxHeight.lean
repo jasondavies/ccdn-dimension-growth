@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import CCDN.Height.IntegerCoefficientHeight
-import Mathlib.Tactic.Ring
 import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 import Mathlib.Tactic.Linarith
 /-! Coefficient-height bounds for evaluating a polynomial on a bounded box.

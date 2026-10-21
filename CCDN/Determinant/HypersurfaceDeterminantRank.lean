@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HypersurfaceLocalDivisor
-import all ArithmeticHeights.BombieriVaaler
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimes
 public import CCDN.Analysis.PrimeCutoff
 import CCDN.Determinant.PrimeAggregation

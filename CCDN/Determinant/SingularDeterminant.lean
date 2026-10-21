@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-import all ArithmeticHeights.BombieriVaaler
 public import CCDN.Determinant.SingularReduction
 import CCDN.Determinant.PlaneMultiplicitySmooth
 import CCDN.ForMathlib.MvPolynomial

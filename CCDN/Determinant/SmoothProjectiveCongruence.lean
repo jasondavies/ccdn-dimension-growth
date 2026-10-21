@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.ProjectiveHypersurfaceLocal
-import all ArithmeticHeights.BombieriVaaler
 import CCDN.Determinant.PlaneMultiplicitySmooth
+import CCDN.Determinant.BlockDeterminant
 
 /-!
 Smooth projective congruence classes give simultaneous divisors
@@ -65,7 +65,7 @@ theorem smooth_projective_hypersurface_congruence_minorGcd {p n s N d M : ℕ}
   classical
   obtain ⟨hpow, hcomp⟩ := smooth_hypersurface_origin_order
     (projectiveHypersurfaceChart k f) a ha hs
-  unfold Int.Matrix.minorGcd
+  rw [minorGcd_eq_gcd_plucker]
   apply Finset.dvd_gcd
   intro S _
   rw [Matrix.plucker_row_eq_det_submatrix]
