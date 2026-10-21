@@ -62,7 +62,7 @@ lemma primeBlockMass_pos : 0 < primeBlockMass := by
 
 /-- The Mertens bounded error bounds every factor-four prime interval by a
 constant independent of its location. -/
-lemma prime_block_weight_le {L : ℝ} (hL : 1 ≤ L) (S : Finset ℕ)
+private lemma prime_block_weight_le {L : ℝ} (hL : 1 ≤ L) (S : Finset ℕ)
     (hprime : ∀ p ∈ S, p.Prime) (hlo : ∀ p ∈ S, L < (p : ℝ))
     (hhi : ∀ p ∈ S, (p : ℝ) ≤ 4 * L) :
     ∑ p ∈ S, Real.log p / p ≤ primeBlockMass := by
@@ -93,7 +93,7 @@ lemma prime_block_weight_le {L : ℝ} (hL : 1 ≤ L) (S : Finset ℕ)
 
 /-- A prime interval above L has weighted reciprocal-square-root mass
 bounded by its Mertens weight divided by sqrt(L). -/
-lemma prime_block_sqrt_weight_le {L : ℝ} (hL : 1 ≤ L) (S : Finset ℕ)
+private lemma prime_block_sqrt_weight_le {L : ℝ} (hL : 1 ≤ L) (S : Finset ℕ)
     (hprime : ∀ p ∈ S, p.Prime) (hlo : ∀ p ∈ S, L < (p : ℝ))
     (hhi : ∀ p ∈ S, (p : ℝ) ≤ 4 * L) :
     ∑ p ∈ S, Real.log p / p / Real.sqrt p ≤ primeBlockMass / Real.sqrt L := by
@@ -109,7 +109,7 @@ lemma prime_block_sqrt_weight_le {L : ℝ} (hL : 1 ≤ L) (S : Finset ℕ)
 
 /-- Finite dyadic assembly retains a constant times L^(-1/2), rather than
 summing over every integer and losing a logarithm. -/
-lemma prime_sqrt_tail_le_of_pow_bound (n : ℕ) {L : ℝ} (hL : 1 ≤ L)
+private lemma prime_sqrt_tail_le_of_pow_bound (n : ℕ) {L : ℝ} (hL : 1 ≤ L)
     (S : Finset ℕ) (hprime : ∀ p ∈ S, p.Prime) (hlo : ∀ p ∈ S, L < (p : ℝ))
     (hhi : ∀ p ∈ S, (p : ℝ) ≤ 4 ^ n * L) :
     ∑ p ∈ S, Real.log p / p / Real.sqrt p ≤ 2 * primeBlockMass / Real.sqrt L := by
@@ -170,7 +170,7 @@ theorem prime_sqrt_tail_le {L : ℝ} (hL : 1 ≤ L) (S : Finset ℕ)
 
 /-- The exact reciprocal perturbation error, retaining the prime weight
 needed for the sharp tail estimate. -/
-lemma log_div_sqrt_perturbation_exact {p C N : ℝ} (hp : 1 ≤ p) (hC : 0 ≤ C)
+private lemma log_div_sqrt_perturbation_exact {p C N : ℝ} (hp : 1 ≤ p) (hC : 0 ≤ C)
     (hN : 0 < N) (hupper : N ≤ p + C * Real.sqrt p) :
     Real.log p / p - C * (Real.log p / p / Real.sqrt p) ≤ Real.log p / N := by
   have hp0 : 0 < p := by linarith

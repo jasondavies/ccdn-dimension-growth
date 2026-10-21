@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open Finset
 
-lemma sum_successor_squares_lower (M : ℕ) :
+private lemma sum_successor_squares_lower (M : ℕ) :
     (M : ℝ) ^ 3 / 3 ≤ ∑ i ∈ range M, ((i : ℝ) + 1) ^ 2 := by
   induction M with
   | zero => simp
