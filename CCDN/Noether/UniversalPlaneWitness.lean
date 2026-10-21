@@ -40,6 +40,7 @@ private lemma universalPlaneMap_map {K L σ : Type*} [CommRing K] [CommRing L]
       simp [universalPlaneMap]
   exact RingHom.congr_fun he f
 
+/-- The universal plane restriction commutes with applying a coefficient ring homomorphism. -/
 lemma universalPlanePolynomial_map {K L σ : Type*} [CommRing K] [CommRing L]
     (φ : K →+* L) (f : MvPolynomial σ K) :
     universalPlanePolynomial (MvPolynomial.map φ f) =

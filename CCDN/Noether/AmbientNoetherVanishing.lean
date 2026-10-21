@@ -25,11 +25,16 @@ private lemma universalPlanePolynomial_mul {R σ : Type*} [CommRing R]
     universalPlanePolynomial (g * h) = universalPlanePolynomial g * universalPlanePolynomial h := by
   simp only [universalPlanePolynomial, map_mul]
 
+/-- The universal plane restriction of `f` has bivariate total degree at most the total degree of
+`f`. -/
 lemma universalPlanePolynomial_totalDegree_le {R σ : Type*} [CommRing R]
     (f : MvPolynomial σ R) : bivariateTotalDegree (universalPlanePolynomial f) ≤ f.totalDegree := by
   simpa only [universalPlanePolynomial, bivariateTotalDegree, AlgEquiv.symm_apply_apply] using
     universalPlaneMap_planeDegree_le f
 
+/-- If `g` and `h` have total degrees at most `a` and `b`, with `a, b > 0` and `a + b = k + 2`,
+then every minor of order `(k + 2)^2 - 1` of the Euler closed-form coefficient matrix of the
+universal plane restriction of `g * h` vanishes. -/
 theorem ambientEuler_minor_eq_zero_of_product {R σ : Type*} [CommRing R]
     (k a b : ℕ) (ha : 0 < a) (hb : 0 < b) (hab : a + b = k + 2)
     (g h : MvPolynomial σ R) (hg : g.totalDegree ≤ a) (hh : h.totalDegree ≤ b)
@@ -73,6 +78,8 @@ private theorem ambientEuler_minor_eq_zero_of_not_irreducible {K σ : Type*} [Fi
   rw [he]
   exact ambientEuler_minor_eq_zero_of_product k _ _ hgpos hhpos hsum g h le_rfl le_rfl rows cols
 
+/-- Minors of the Euler closed-form coefficient matrix of the universal plane restriction commute
+with applying a coefficient ring homomorphism `φ` to the polynomial. -/
 lemma ambientEuler_minor_map {R S σ : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (k : ℕ) (f : MvPolynomial σ R)
     (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)

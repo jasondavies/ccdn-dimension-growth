@@ -67,6 +67,8 @@ open MvPolynomial
 def bivariateEval {K : Type*} [CommRing K] (x y : K) : Polynomial (Polynomial K) →+* K :=
   (Polynomial.evalRingHom x).comp (Polynomial.mapRingHom (Polynomial.evalRingHom y))
 
+/-- Evaluating the universal plane section of `f` with parameters `v` at `(x, y)` gives `f` at the
+point `a + x • b + y • c` of the plane with base point `a` and directions `b`, `c` given by `v`. -/
 lemma universalPlaneSection_eval {K σ : Type*} [CommRing K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K) (x y : K) :
     bivariateEval x y (universalPlaneSection f v) =
@@ -83,7 +85,8 @@ lemma universalPlaneSection_eval {K σ : Type*} [CommRing K]
         bivariatePolynomialEquiv_X_zero, bivariatePolynomialEquiv_X_one, bivariateMap]
   exact RingHom.congr_fun he f
 
-/-- The parameter triple and its three defining points contain the same data. -/
+/-- The equivalence between plane parameters, a base point `a` with directions `b` and `c`, and
+the three defining points `a`, `a + b` and `a + c` of the plane. -/
 def planeTriplePointsEquiv {K σ : Type*} [CommRing K] :
     (PlaneParameters σ → K) ≃ (Fin 3 → σ → K) where
   toFun v := ![fun i => v (i,0), fun i => v (i,0) + v (i,1), fun i => v (i,0) + v (i,2)]

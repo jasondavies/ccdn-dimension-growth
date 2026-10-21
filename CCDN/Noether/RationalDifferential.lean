@@ -20,12 +20,14 @@ open Polynomial
 
 variable {K : Type*} [Field K]
 
-/-- Quotient-rule numerator and denominator for formal rational differentiation. -/
+/-- The quotient-rule derivative `(p' * q - p * q') / q ^ 2` of the fraction `p / q`. -/
 def rationalDerivativeFraction (p q : K[X]) : RatFunc K :=
   (algebraMap K[X] (RatFunc K) p.derivative * algebraMap K[X] (RatFunc K) q -
     algebraMap K[X] (RatFunc K) p * algebraMap K[X] (RatFunc K) q.derivative) /
       (algebraMap K[X] (RatFunc K) q) ^ 2
 
+/-- The quotient-rule derivative of a fraction is unchanged by multiplying its numerator and
+denominator by the same nonzero polynomial. -/
 lemma rationalDerivativeFraction_mul {p q a : K[X]} (hq : q ≠ 0) (ha : a ≠ 0) :
     rationalDerivativeFraction (a * p) (a * q) = rationalDerivativeFraction p q := by
   simp only [rationalDerivativeFraction, derivative_mul, map_add, map_mul]
@@ -43,11 +45,13 @@ private lemma rationalDerivative_div (p q : K[X]) :
   intro p
   simp [rationalDerivativeFraction]
 
+/-- The formal rational derivative of a polynomial is its ordinary derivative. -/
 lemma rationalDerivative_polynomial (p : K[X]) :
     rationalDerivative (algebraMap K[X] (RatFunc K) p) =
       algebraMap K[X] (RatFunc K) p.derivative := by
   simpa [rationalDerivativeFraction] using rationalDerivative_div p 1
 
+/-- The formal rational derivative is additive. -/
 lemma rationalDerivative_add (x y : RatFunc K) :
     rationalDerivative (x + y) = rationalDerivative x + rationalDerivative y := by
   induction x using RatFunc.induction_on with | _ p q hq
@@ -60,6 +64,7 @@ lemma rationalDerivative_add (x y : RatFunc K) :
   field_simp
   ring
 
+/-- The formal rational derivative satisfies the Leibniz rule. -/
 lemma rationalDerivative_mul (x y : RatFunc K) :
     rationalDerivative (x * y) = x * rationalDerivative y + y * rationalDerivative x := by
   induction x using RatFunc.induction_on with | _ p q hq
@@ -84,8 +89,8 @@ def rationalDerivation (K : Type*) [Field K] : Derivation K (RatFunc K) (RatFunc
     simpa using rationalDerivative_polynomial (1 : K[X])
   leibniz' x y := rationalDerivative_mul x y
 
-/-- The corresponding differential field structure; it is kept explicit to
-avoid introducing a competing global instance on rational functions. -/
+/-- The differential field structure on `RatFunc K` given by formal rational differentiation; it
+is kept explicit to avoid introducing a competing global instance on rational functions. -/
 @[reducible]
 def rationalDifferential (K : Type*) [Field K] : Differential (RatFunc K) := by
   let : Algebra ℤ (RatFunc K) := Ring.toIntAlgebra _

@@ -16,16 +16,20 @@ namespace CCDN
 noncomputable section
 open Polynomial Matrix
 
-/-- A uniform bound on the integer coefficients. -/
+/-- Every coefficient of the integer bivariate polynomial `f` has absolute value at most `H`. -/
 def BivariateCoefficientBound (f : ℤ[X][X]) (H : ℝ) : Prop :=
   ∀ i j, |(((f.coeff i).coeff j : ℤ) : ℝ)| ≤ H
 
+/-- The `k`-th coefficient of `monomial n a * f` is `a * f.coeff (k - n)` if `n ≤ k` and zero
+otherwise. -/
 lemma coeff_monomial_mul_at {R : Type*} [CommRing R]
     (f : R[X]) (a : R) (n k : ℕ) :
     (monomial n a * f).coeff k = if n ≤ k then a * f.coeff (k - n) else 0 := by
   rw [← C_mul_X_pow_eq_monomial, mul_assoc, coeff_C_mul, coeff_X_pow_mul']
   split_ifs <;> simp_all
 
+/-- Multiplying an integer bivariate polynomial with coefficients bounded by `H ≥ 0` by a monomial
+with coefficient `a` gives coefficients bounded by `|a| * H`. -/
 lemma bivariateCoefficientBound_monomial_mul
     {f : ℤ[X][X]} {H : ℝ} (hH : 0 ≤ H) (hf : BivariateCoefficientBound f H)
     (a : ℤ) (m n : ℕ) :
@@ -47,6 +51,7 @@ private lemma bivariateCoefficientBound_sub {f g : ℤ[X][X]} {H K : ℝ}
   simp only [coeff_sub, Int.cast_sub]
   exact (abs_sub _ _).trans (add_le_add (hf i j) (hg i j))
 
+/-- A coefficient bound `H` for `f` implies every larger coefficient bound `K`. -/
 lemma bivariateCoefficientBound_mono {f : ℤ[X][X]} {H K : ℝ}
     (hf : BivariateCoefficientBound f H) (h : H ≤ K) :
     BivariateCoefficientBound f K := fun i j => (hf i j).trans h
@@ -58,6 +63,8 @@ private lemma bivariateGridPolynomial_single {R : Type*} [CommRing R] (d : ℕ)
   classical
   simp [bivariateGridPolynomial, Pi.single_apply, apply_ite]
 
+/-- The standard basis vector of the first block decodes to the pair `(monomial, 0)` with the
+corresponding grid monomial. -/
 lemma closedFormPair_single_inl {R : Type*} [CommRing R] (d : ℕ)
     (i : BivariateGrid d) :
     closedFormPair R d (Pi.single (.inl i) 1) =
@@ -73,6 +80,8 @@ lemma closedFormPair_single_inl {R : Type*} [CommRing R] (d : ℕ)
     simp only [Pi.single_apply, reduceCtorEq, ite_false]
     exact (bivariateGridPolynomial R d).map_zero
 
+/-- The standard basis vector of the second block decodes to the pair `(0, monomial)` with the
+corresponding grid monomial. -/
 lemma closedFormPair_single_inr {R : Type*} [CommRing R] (d : ℕ)
     (i : BivariateGrid d) :
     closedFormPair R d (Pi.single (.inr i) 1) =

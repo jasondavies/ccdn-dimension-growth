@@ -20,6 +20,8 @@ coordinate the polynomial variable. -/
 def leadingDirectionPolynomial {R : Type*} [CommRing R] (f : R[X][X]) (d : ℕ) : R[X] :=
   ∑ j ∈ Finset.range (d + 1), monomial j ((f.coeff (d - j)).coeff j)
 
+/-- The `j`-th coefficient of the leading direction polynomial of degree `d` is the coefficient of
+`f` with outer exponent `d - j` and inner exponent `j` when `j ≤ d`, and zero otherwise. -/
 lemma leadingDirectionPolynomial_coeff {R : Type*} [CommRing R]
     (f : R[X][X]) (d j : ℕ) :
     (leadingDirectionPolynomial f d).coeff j =

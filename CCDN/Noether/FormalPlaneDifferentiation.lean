@@ -22,6 +22,8 @@ def planeTangent {K : Type*} [CommRing K] (f : MvPolynomial (Fin 2) K) (j : Fin 
     Derivation K (MvPolynomial (Fin 2) K) (MvPolynomial (Fin 2) K) :=
   (pderiv j.rev f) • pderiv j - (pderiv j f) • pderiv j.rev
 
+/-- The tangent vector field of `f` with local parameter coordinate `j` applied to `h` is
+`∂_{j.rev} f * ∂_j h - ∂_j f * ∂_{j.rev} h`. -/
 lemma planeTangent_apply {K : Type*} [CommRing K]
     (f h : MvPolynomial (Fin 2) K) (j : Fin 2) :
     planeTangent f j h = pderiv j.rev f * pderiv j h - pderiv j f * pderiv j.rev h := rfl

@@ -22,6 +22,8 @@ def planeShearHom (R : Type*) [CommRing R] (a : R) :
     MvPolynomial (Fin 2) R →ₐ[R] MvPolynomial (Fin 2) R :=
   aeval ![X 0, X 1 + C a * X 0]
 
+/-- Composing the plane shears with parameters `a` and `b` gives the shear with parameter
+`a + b`. -/
 lemma planeShearHom_comp {R : Type*} [CommRing R] (a b : R) :
     (planeShearHom R a).comp (planeShearHom R b) = planeShearHom R (a + b) := by
   apply MvPolynomial.algHom_ext
@@ -29,6 +31,7 @@ lemma planeShearHom_comp {R : Type*} [CommRing R] (a b : R) :
   fin_cases i <;> simp [planeShearHom]
   ring
 
+/-- The plane shear with parameter zero is the identity. -/
 @[simp]
 lemma planeShearHom_zero (R : Type*) [CommRing R] :
     planeShearHom R 0 = AlgHom.id R _ := by
@@ -36,8 +39,9 @@ lemma planeShearHom_zero (R : Type*) [CommRing R] :
   intro i
   fin_cases i <;> simp [planeShearHom]
 
-/-- The inverse shear uses the negative parameter, so this works over Z and
-all its residue fields without determinant denominators. -/
+/-- The plane shear `x₁ ↦ x₁ + a * x₀` as an algebra automorphism. The inverse shear uses the
+negative parameter, so this works over Z and all its residue fields without determinant
+denominators. -/
 def planeShear (R : Type*) [CommRing R] (a : R) :
     MvPolynomial (Fin 2) R ≃ₐ[R] MvPolynomial (Fin 2) R :=
   AlgEquiv.ofAlgHom (planeShearHom R a) (planeShearHom R (-a))
@@ -85,7 +89,7 @@ private lemma planeShear_totalDegree_le {R : Type*} [CommRing R] [Nontrivial R]
   intro m hm
   exact (planeShear_monomial_totalDegree_le a m (f.coeff m)).trans (le_totalDegree hm)
 
-/-- The inverse shear gives the reverse inequality, so total degree is exact. -/
+/-- A plane shear preserves the total degree; the inverse shear gives the reverse inequality. -/
 lemma planeShear_totalDegree {R : Type*} [CommRing R] [Nontrivial R]
     (a : R) (f : MvPolynomial (Fin 2) R) :
     (planeShear R a f).totalDegree = f.totalDegree := by

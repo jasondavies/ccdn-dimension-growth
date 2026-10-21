@@ -123,6 +123,8 @@ namespace CCDN
 noncomputable section
 open Polynomial Matrix
 
+/-- The closed-form operator is linear in the equation: scaling the equation by `a` scales the
+operator by `a`. -/
 lemma closedFormOperator_smul_equation {R : Type*} [CommRing R]
     (a : R) (f : R[X][X]) (u : R[X][X] × R[X][X]) :
     closedFormOperator (a • f) u = a • closedFormOperator f u := by
@@ -131,6 +133,7 @@ lemma closedFormOperator_smul_equation {R : Type*} [CommRing R]
   rw [(bivariateCoefficientDerivative R).map_smul, derivative_smul]
   simp only [mul_smul_comm, smul_sub, smul_add]
 
+/-- Scaling the equation by `a` scales its closed-form coefficient matrix by `a`. -/
 lemma closedFormCoefficientMatrix_smul {R : Type*} [CommRing R]
     (a : R) (d : ℕ) (f : R[X][X]) :
     closedFormCoefficientMatrix d (a • f) = a • closedFormCoefficientMatrix d f := by
@@ -149,25 +152,31 @@ private lemma closedForm_rank_smul {F : Type*} [Field F] (a : F) (ha : a ≠ 0)
   rw [closedFormCoefficientMatrix_smul]
   exact Matrix.rank_smul_of_mem_nonZeroDivisors _ (mem_nonZeroDivisors_of_ne_zero ha)
 
+/-- Scalar multiplication of a bivariate polynomial by `a` is multiplication by the constant
+polynomial `a`. -/
 lemma bivariate_smul_eq_constant_mul {R : Type*} [CommRing R] (a : R) (f : R[X][X]) :
     a • f = C (C a) * f := by
   simp only [Algebra.smul_def, Polynomial.algebraMap_apply, Algebra.algebraMap_self,
     RingHom.id_apply]
 
+/-- Over a field, multiplying a bivariate polynomial by a nonzero scalar preserves
+irreducibility. -/
 lemma bivariate_irreducible_smul_iff {F : Type*} [Field F]
     (a : F) (ha : a ≠ 0) (f : F[X][X]) : Irreducible (a • f) ↔ Irreducible f := by
   rw [bivariate_smul_eq_constant_mul]
   have hu : IsUnit (C (C a) : F[X][X]) := ((isUnit_iff_ne_zero.mpr ha).map C).map C
   exact (associated_unit_mul_left f (C (C a)) hu).irreducible_iff
 
+/-- Scalar multiplication does not increase the total degree. -/
 lemma bivariateTotalDegree_smul_le {R : Type*} [CommRing R] (a : R) (f : R[X][X]) :
     bivariateTotalDegree (a • f) ≤ bivariateTotalDegree f := by
   unfold bivariateTotalDegree
   rw [map_smul]
   exact MvPolynomial.totalDegree_smul_le _ _
 
-/-- Normalize over the coefficient field, so no integer denominators need to
-be cleared in the original coefficient matrix. -/
+/-- If the outer leading coefficient of `f` is the nonzero constant `a`, then `a⁻¹ • f` is monic.
+Normalizing over the coefficient field means no integer denominators need to be cleared in the
+original coefficient matrix. -/
 lemma bivariate_monic_normalize {F : Type*} [Field F]
     (a : F) (ha : a ≠ 0) (f : F[X][X]) (hl : f.leadingCoeff = C a) :
     (a⁻¹ • f).Monic := by
@@ -175,8 +184,9 @@ lemma bivariate_monic_normalize {F : Type*} [Field F]
   change (C (C a⁻¹) * f).leadingCoeff = 1
   rw [leadingCoeff_mul, leadingCoeff_C, hl, ← map_mul, inv_mul_cancel₀ ha, map_one]
 
-/-- The characteristic-zero rank lower bound needs only a nonzero constant
-outer leading coefficient, not an integer monic equation. -/
+/-- Over an algebraically closed field of characteristic zero, an irreducible `f` of outer degree
+`d` whose outer leading coefficient is a nonzero constant has closed-form coefficient matrix of
+rank at least `2 * d ^ 2 - 1`; the equation need not be monic. -/
 theorem closedForm_rank_lower_of_constant_leading
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (d : ℕ) (a : F) (ha : a ≠ 0) (f : F[X][X])
@@ -189,7 +199,9 @@ theorem closedForm_rank_lower_of_constant_leading
   have hr := closedForm_coefficient_rank_lower d _ hi hm hd _ le_rfl (.of_charZero _)
   rwa [closedForm_rank_smul _ (inv_ne_zero ha)] at hr
 
-/-- The reducibility criterion only needs a nonzero constant outer leading coefficient. -/
+/-- A reducible `f` of outer degree and total degree `d`, whose outer leading coefficient is a
+nonzero constant, has closed-form coefficient matrix of rank at most `2 * d ^ 2 - 2`, in
+characteristic zero or greater than `d`. -/
 theorem closedForm_rank_drop_of_constant_leading
     {F : Type*} [Field F] (d : ℕ) (hd : 0 < d) (hchar : CharZeroOrGT F d)
     (a : F) (ha : a ≠ 0) (f : F[X][X])

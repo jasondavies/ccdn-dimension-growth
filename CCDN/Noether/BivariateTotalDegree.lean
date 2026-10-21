@@ -16,12 +16,15 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
-/-- Variable zero is the outer variable, and variable one is the inner one. -/
+/-- The identification of polynomials in two variables with nested polynomials `R[X][X]`:
+variable zero is the outer variable, and variable one is the inner one. -/
 def bivariatePolynomialEquiv (R : Type*) [CommRing R] :
     MvPolynomial (Fin 2) R ≃ₐ[R] R[X][X] :=
   (MvPolynomial.finSuccEquiv R 1).trans
     (Polynomial.mapAlgEquiv (MvPolynomial.uniqueAlgEquiv R (Fin 1)))
 
+/-- The coefficient with outer exponent `i` and inner exponent `j` of the nested polynomial
+associated with `f` is the coefficient of `f` at the exponent vector `(i, j)`. -/
 lemma bivariatePolynomialEquiv_coeff {R : Type*} [CommRing R]
     (f : MvPolynomial (Fin 2) R) (i j : ℕ) :
     ((bivariatePolynomialEquiv R f).coeff i).coeff j =
@@ -34,6 +37,7 @@ lemma bivariatePolynomialEquiv_coeff {R : Type*} [CommRing R]
   rw [MvPolynomial.coeff_uniqueAlgEquiv, MvPolynomial.finSuccEquiv_coeff_coeff]
   rfl
 
+/-- Every exponent vector in two variables is `Finsupp.cons` of its two components. -/
 lemma bivariate_exponent_eq (m : Fin 2 →₀ ℕ) :
     m = Finsupp.cons (m 0) (Finsupp.single 0 (m 1)) := by
   ext i
@@ -42,15 +46,18 @@ lemma bivariate_exponent_eq (m : Fin 2 →₀ ℕ) :
   · change m 1 = (Finsupp.cons (m 0) (Finsupp.single 0 (m 1))) (Fin.succ (0 : Fin 1))
     rw [Finsupp.cons_succ, Finsupp.single_eq_same]
 
+/-- The degree of the two-variable exponent vector with components `i` and `j` is `i + j`. -/
 lemma bivariate_exponent_sum (i j : ℕ) :
     (Finsupp.cons i (Finsupp.single 0 j) : Fin 2 →₀ ℕ).sum (fun _ e => e) = i + j := by
   simp [Finsupp.sum_cons]
 
-/-- Total degree, with the usual convention that the zero polynomial has
-natural-valued total degree zero. -/
+/-- The total degree of a nested bivariate polynomial, with the usual convention that the zero
+polynomial has natural-valued total degree zero. -/
 def bivariateTotalDegree {R : Type*} [CommRing R] (f : R[X][X]) : ℕ :=
   ((bivariatePolynomialEquiv R).symm f).totalDegree
 
+/-- If the coefficient of `f` with outer exponent `i` and inner exponent `j` is nonzero, then
+`i + j` is at most the total degree of `f`. -/
 lemma bivariateTotalDegree_coeff_le {R : Type*} [CommRing R]
     (f : R[X][X]) (i j : ℕ) (h : (f.coeff i).coeff j ≠ 0) :
     i + j ≤ bivariateTotalDegree f := by
@@ -59,6 +66,8 @@ lemma bivariateTotalDegree_coeff_le {R : Type*} [CommRing R]
   have hm := MvPolynomial.mem_support_iff.mpr (hc ▸ h)
   simpa only [bivariate_exponent_sum, bivariateTotalDegree] using MvPolynomial.le_totalDegree hm
 
+/-- The total degree of `f` is at most `d` if and only if `i + j ≤ d` whenever the coefficient of
+`f` with outer exponent `i` and inner exponent `j` is nonzero. -/
 lemma bivariateTotalDegree_le_iff {R : Type*} [CommRing R]
     (f : R[X][X]) (d : ℕ) :
     bivariateTotalDegree f ≤ d ↔ ∀ i j, (f.coeff i).coeff j ≠ 0 → i + j ≤ d := by
@@ -84,12 +93,14 @@ private lemma bivariateTotalDegree_mul {R : Type*} [CommRing R] [IsDomain R]
     ((map_ne_zero_iff _ (bivariatePolynomialEquiv R).symm.injective).mpr hf)
     ((map_ne_zero_iff _ (bivariatePolynomialEquiv R).symm.injective).mpr hg)
 
+/-- The total degree of a product is at most the sum of the total degrees. -/
 lemma bivariateTotalDegree_mul_le {R : Type*} [CommRing R] (f g : R[X][X]) :
     bivariateTotalDegree (f * g) ≤ bivariateTotalDegree f + bivariateTotalDegree g := by
   unfold bivariateTotalDegree
   rw [map_mul]
   exact MvPolynomial.totalDegree_mul _ _
 
+/-- Differentiation in the outer variable lowers the total degree by at least one. -/
 lemma bivariateTotalDegree_outerDerivative_le {R : Type*} [CommRing R]
     (f : R[X][X]) : bivariateTotalDegree f.derivative ≤ bivariateTotalDegree f - 1 := by
   rw [bivariateTotalDegree_le_iff]
@@ -101,6 +112,7 @@ lemma bivariateTotalDegree_outerDerivative_le {R : Type*} [CommRing R]
   have h := bivariateTotalDegree_coeff_le f (i + 1) j hc
   omega
 
+/-- Differentiation in the inner variable lowers the total degree by at least one. -/
 lemma bivariateTotalDegree_innerDerivative_le {R : Type*} [CommRing R]
     (f : R[X][X]) :
     bivariateTotalDegree ((bivariateCoefficientDerivative R) f) ≤ bivariateTotalDegree f - 1 := by
@@ -113,6 +125,8 @@ lemma bivariateTotalDegree_innerDerivative_le {R : Type*} [CommRing R]
   have h := bivariateTotalDegree_coeff_le f i (j + 1) hc
   omega
 
+/-- A bivariate polynomial of total degree less than `d` is supported in the grid of outer and inner
+exponents less than `d`. -/
 lemma inBivariateGrid_of_totalDegree_lt {R : Type*} [CommRing R]
     (d : ℕ) (f : R[X][X]) (hd : bivariateTotalDegree f < d) : InBivariateGrid d f := by
   intro i j hij
@@ -120,11 +134,13 @@ lemma inBivariateGrid_of_totalDegree_lt {R : Type*} [CommRing R]
   have h := bivariateTotalDegree_coeff_le f i j hc
   omega
 
+/-- The zero polynomial has total degree zero. -/
 @[simp]
 lemma bivariateTotalDegree_zero {R : Type*} [CommRing R] :
     bivariateTotalDegree (0 : R[X][X]) = 0 := by
   simp [bivariateTotalDegree]
 
+/-- The degree in the outer variable is at most the total degree. -/
 lemma bivariate_natDegree_le_totalDegree {R : Type*} [CommRing R]
     (f : R[X][X]) : f.natDegree ≤ bivariateTotalDegree f := by
   by_cases hf : f = 0
@@ -167,7 +183,9 @@ lemma bivariate_factor_form_in_grid {R : Type*} [CommRing R] [IsDomain R]
     have h₂ := bivariateTotalDegree_innerDerivative_le g
     omega
 
-/-- The higher-pole form for g^(k+2)*h also fits strictly inside the grid. -/
+/-- If `g` is nonconstant and `g ^ (k + 2) * h` has total degree at most `d`, then the products
+of `g ^ k * h` with both partial derivatives of `g` (the numerators of the higher-pole form) fit
+strictly inside the grid. -/
 lemma bivariate_power_factor_form_in_grid {R : Type*} [CommRing R] [IsDomain R]
     (d k : ℕ) (g h : R[X][X]) (hg : g ≠ 0) (hh : h ≠ 0)
     (hgdeg : 0 < bivariateTotalDegree g)
@@ -183,6 +201,7 @@ lemma bivariate_power_factor_form_in_grid {R : Type*} [CommRing R] [IsDomain R]
   rw [bivariateTotalDegree_mul g _ hg (mul_ne_zero (pow_ne_zero _ hg) hh)]
   omega
 
+/-- The inner degree of each outer coefficient is at most the total degree. -/
 lemma bivariate_coefficient_natDegree_le_totalDegree {R : Type*} [CommRing R]
     (f : R[X][X]) (i : ℕ) : (f.coeff i).natDegree ≤ bivariateTotalDegree f := by
   by_cases hc : f.coeff i = 0
@@ -192,10 +211,14 @@ lemma bivariate_coefficient_natDegree_le_totalDegree {R : Type*} [CommRing R]
   have hh := bivariateTotalDegree_coeff_le f i _ hn
   omega
 
+/-- Applying a coefficient ring homomorphism to both levels preserves monicity in the outer
+variable. -/
 lemma bivariateMap_monic {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) {f : R[X][X]} (hf : f.Monic) : (bivariateMap φ f).Monic :=
   hf.map (Polynomial.mapRingHom φ)
 
+/-- Applying a coefficient ring homomorphism to a polynomial monic in the outer variable preserves
+its outer degree, provided the target ring is nontrivial. -/
 lemma bivariateMap_natDegree_of_monic {R S : Type*} [CommRing R] [CommRing S] [Nontrivial S]
     (φ : R →+* S) {f : R[X][X]} (hf : f.Monic) :
     (bivariateMap φ f).natDegree = f.natDegree :=

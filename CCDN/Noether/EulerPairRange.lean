@@ -81,6 +81,8 @@ private theorem exists_eulerPairCoordinates {F : Type*} [Field F]
     rw [hQ]
     ring
 
+/-- Every pair of bivariate polynomials of total degree at most `k + 1` whose radial contraction
+also has total degree at most `k + 1` comes from an element of `EulerPairSpace F k`. -/
 theorem exists_eulerBivariatePair {F : Type*} [Field F]
     (k : ℕ) (p q : Polynomial (Polynomial F))
     (hp : bivariateTotalDegree p ≤ k + 1)

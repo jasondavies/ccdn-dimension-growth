@@ -22,6 +22,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The parameter space of Euler-constrained pairs: triples `(A, B, Q)` with `A` and `B` bivariate
+polynomials of total degree at most `k` and `Q` homogeneous of degree `k`. -/
 abbrev EulerPairSpace (R : Type*) [CommRing R] (k : ℕ) :=
   (restrictTotalDegree (Fin 2) R k) × (restrictTotalDegree (Fin 2) R k) ×
     (homogeneousSubmodule (Fin 2) R k)
@@ -36,6 +38,7 @@ def eulerPairCoordinates (R : Type*) [CommRing R] (k : ℕ) :
     apply Prod.ext <;> simp only [Prod.smul_fst, Prod.smul_snd, SetLike.val_smul,
       mul_smul_comm, smul_add, smul_sub, RingHom.id_apply]
 
+/-- The first polynomial `A + y * Q` of an Euler pair has total degree at most `k + 1`. -/
 lemma eulerPairCoordinates_fst_degree {R : Type*} [CommRing R] (k : ℕ)
     (u : EulerPairSpace R k) : (eulerPairCoordinates R k u).1.totalDegree ≤ k + 1 := by
   have hA := (mem_restrictTotalDegree _ _ _).mp u.1.property
@@ -47,6 +50,7 @@ lemma eulerPairCoordinates_fst_degree {R : Type*} [CommRing R] (k : ℕ)
       have hx := (isHomogeneous_X R (1 : Fin 2)).totalDegree_le
       omega)
 
+/-- The second polynomial `B - x * Q` of an Euler pair has total degree at most `k + 1`. -/
 lemma eulerPairCoordinates_snd_degree {R : Type*} [CommRing R] (k : ℕ)
     (u : EulerPairSpace R k) : (eulerPairCoordinates R k u).2.totalDegree ≤ k + 1 := by
   have hB := (mem_restrictTotalDegree _ _ _).mp u.2.1.property
@@ -65,6 +69,8 @@ private lemma eulerPairCoordinates_contraction {R : Type*} [CommRing R] (k : ℕ
   change X 0 * (u.1.val + X 1 * u.2.2.val) + X 1 * (u.2.1.val - X 0 * u.2.2.val) = _
   ring
 
+/-- The radial contraction `x * P + y * Q` of the pair `(P, Q)` attached to an element of
+`EulerPairSpace R k` has total degree at most `k + 1`. -/
 lemma eulerPairCoordinates_contraction_degree {R : Type*} [CommRing R] (k : ℕ)
     (u : EulerPairSpace R k) :
     (X 0 * (eulerPairCoordinates R k u).1 + X 1 * (eulerPairCoordinates R k u).2).totalDegree ≤
@@ -98,6 +104,7 @@ private lemma eulerPairCoordinates_eq_zero {F : Type*} [Field F] (k : ℕ)
   rw [hQ0, mul_zero, sub_zero] at hq
   exact Prod.ext (Subtype.ext hp) (Prod.ext (Subtype.ext hq) (Subtype.ext hQ0))
 
+/-- Over a field, the map `(A, B, Q) ↦ (A + y * Q, B - x * Q)` is injective. -/
 theorem eulerPairCoordinates_injective {F : Type*} [Field F] (k : ℕ) :
     Function.Injective (eulerPairCoordinates F k) := by
   intro u v huv

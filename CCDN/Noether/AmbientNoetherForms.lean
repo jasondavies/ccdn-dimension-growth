@@ -19,17 +19,23 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The `(row, col)` entry of the Euler closed-form coefficient matrix of the universal plane
+restriction of a polynomial in the variables `σ`, as an `R`-linear function of that polynomial. -/
 def ambientEulerEntryLinear (R σ : Type*) [CommRing R] (k : ℕ)
     (row : ℕ × ℕ) (col : EulerColumns k) :
     MvPolynomial σ R →ₗ[R] MvPolynomial (PlaneParameters σ) R :=
   ((eulerCoefficientEntryLinear (R := MvPolynomial (PlaneParameters σ) R)
     k row col).restrictScalars R).comp (universalPlanePolynomialLinear R σ)
 
+/-- `ambientEulerEntryLinear R σ k row col f` is the `(row, col)` entry of the Euler closed-form
+coefficient matrix of the universal plane restriction of `f`. -/
 lemma ambientEulerEntryLinear_apply {R σ : Type*} [CommRing R] (k : ℕ)
     (row : ℕ × ℕ) (col : EulerColumns k) (f : MvPolynomial σ R) :
     ambientEulerEntryLinear R σ k row col f =
       eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f) row col := rfl
 
+/-- The entries `ambientEulerEntryLinear` commute with applying a coefficient ring homomorphism
+`φ` to the polynomial. -/
 lemma ambientEulerEntryLinear_map {R S σ : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (k : ℕ) (row : ℕ × ℕ) (col : EulerColumns k)
     (f : MvPolynomial σ R) :
@@ -40,6 +46,10 @@ lemma ambientEulerEntryLinear_map {R S σ : Type*} [CommRing R] [CommRing S]
     (eulerClosedFormCoefficientMatrix_map (MvPolynomial.map φ) k (universalPlanePolynomial f))
       row) col).symm
 
+/-- The minor with rows `rows` and columns `cols` of the Euler closed-form coefficient matrix of
+the universal plane restriction of the universal homogeneous form of degree `k + 2`. It is a
+polynomial in the plane parameters with coefficients that are integer polynomials in the
+coefficients of the form. -/
 def ambientNoetherParameterMinor (σ : Type*) [Fintype σ] [DecidableEq σ]
     (k : ℕ) (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
@@ -47,6 +57,9 @@ def ambientNoetherParameterMinor (σ : Type*) [Fintype σ] [DecidableEq σ]
   ((eulerClosedFormCoefficientMatrix k
     (universalPlanePolynomial (universalHomogeneousForm σ (k + 2)))).submatrix rows cols).det
 
+/-- The ambient Noether form indexed by a minor `(rows, cols)` and a plane-parameter monomial `m`:
+the coefficient of `m` in `ambientNoetherParameterMinor σ k rows cols`, an integer polynomial in
+the coefficients of a homogeneous form of degree `k + 2`. -/
 def ambientNoetherForm (σ : Type*) [Fintype σ] [DecidableEq σ]
     (k : ℕ) (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k)

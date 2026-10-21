@@ -19,10 +19,12 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
+/-- The bivariate polynomial of total degree at most `d` with monomial coefficients `c`. -/
 def eulerPolynomialFromCoefficients {R : Type*} [CommRing R]
     (d : ℕ) (c : EulerLowIndex d → R) : R[X][X] :=
   ∑ i, c i • eulerCoefficientMonomial R d i
 
+/-- The polynomial `eulerPolynomialFromCoefficients d c` has total degree at most `d`. -/
 lemma eulerPolynomialFromCoefficients_degree {R : Type*} [CommRing R]
     (d : ℕ) (c : EulerLowIndex d → R) :
     bivariateTotalDegree (eulerPolynomialFromCoefficients d c) ≤ d := by
@@ -54,21 +56,30 @@ private lemma eulerPolynomialFromCoefficients_map {R S : Type*} [CommRing R] [Co
   simp only [eulerPolynomialFromCoefficients, map_sum, bivariateMap_smul,
     eulerCoefficientMonomial_map, Function.comp_apply]
 
+/-- Index set of the coefficient parameters of a pair of generic factors of total degrees at most
+`a` and `b`. -/
 abbrev EulerFactorParameters (a b : ℕ) := EulerLowIndex a ⊕ EulerLowIndex b
 
+/-- The generic bivariate polynomial of total degree at most `a`, whose coefficients are
+independent integer variables. -/
 def genericEulerFactorLeft (a b : ℕ) :
     (MvPolynomial (EulerFactorParameters a b) ℤ)[X][X] :=
   eulerPolynomialFromCoefficients a (fun i => MvPolynomial.X (Sum.inl i))
 
+/-- The generic bivariate polynomial of total degree at most `b`, whose coefficients are
+independent integer variables, disjoint from those of `genericEulerFactorLeft a b`. -/
 def genericEulerFactorRight (a b : ℕ) :
     (MvPolynomial (EulerFactorParameters a b) ℤ)[X][X] :=
   eulerPolynomialFromCoefficients b (fun i => MvPolynomial.X (Sum.inr i))
 
+/-- The ring homomorphism specializing the generic factors to `g` and `h`, sending each coefficient
+variable to the corresponding coefficient of `g` or `h`. -/
 def genericEulerFactorSpecialization {R : Type*} [CommRing R] (a b : ℕ)
     (g h : R[X][X]) : MvPolynomial (EulerFactorParameters a b) ℤ →+* R :=
   MvPolynomial.eval₂Hom (Int.castRingHom R)
     (Sum.elim (eulerCoefficientData a g) (eulerCoefficientData b h))
 
+/-- If `g` has total degree at most `a`, then `genericEulerFactorLeft a b` specializes to `g`. -/
 lemma genericEulerFactorLeft_specialize {R : Type*} [CommRing R]
     (a b : ℕ) (g h : R[X][X]) (hg : bivariateTotalDegree g ≤ a) :
     bivariateMap (genericEulerFactorSpecialization a b g h) (genericEulerFactorLeft a b) = g := by
@@ -80,6 +91,7 @@ lemma genericEulerFactorLeft_specialize {R : Type*} [CommRing R]
   rw [he]
   exact eulerPolynomialFromCoefficients_data a g hg
 
+/-- If `h` has total degree at most `b`, then `genericEulerFactorRight a b` specializes to `h`. -/
 lemma genericEulerFactorRight_specialize {R : Type*} [CommRing R]
     (a b : ℕ) (g h : R[X][X]) (hh : bivariateTotalDegree h ≤ b) :
     bivariateMap (genericEulerFactorSpecialization a b g h) (genericEulerFactorRight a b) = h := by
@@ -91,6 +103,8 @@ lemma genericEulerFactorRight_specialize {R : Type*} [CommRing R]
   rw [he]
   exact eulerPolynomialFromCoefficients_data b h hh
 
+/-- The logarithmic factor pair commutes with applying a coefficient ring homomorphism to both
+factors. -/
 lemma eulerFactorPair_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (a b : ℕ) (g h : R[X][X]) :
     (bivariateMap φ (eulerFactorPair a b g h).1,

@@ -23,6 +23,8 @@ def formalPlanePolynomial {K : Type*} [CommRing K] (j : Fin 2) (a : K) :
   MvPolynomial.eval₂Hom (Polynomial.C.comp PowerSeries.C)
     (fun k => if k = j then Polynomial.X else Polynomial.C (PowerSeries.X + PowerSeries.C a))
 
+/-- `formalPlanePolynomial j a` sends variable `j` to the polynomial variable and the other
+variable to the constant polynomial with value the power series `X + a`. -/
 @[simp] lemma formalPlanePolynomial_X {K : Type*} [CommRing K]
     (j k : Fin 2) (a : K) :
     formalPlanePolynomial j a (MvPolynomial.X k) =
@@ -65,6 +67,7 @@ private lemma formalPlanePolynomial_constant_eval {K : Type*} [CommRing K]
   | mul_X f k hf =>
     by_cases h : k = j <;> simp [map_mul, formalPlanePolynomial_X, hf, h]
 
+/-- A point of the plane is recovered from its coordinate `j` and its other coordinate `j.rev`. -/
 lemma plane_coordinate_cases {K : Type*} (z : Fin 2 → K) (j : Fin 2) :
     (fun k => if k = j then z j else z j.rev) = z := by
   funext k

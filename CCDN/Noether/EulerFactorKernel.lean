@@ -70,6 +70,9 @@ private lemma bivariateEuler_defect_degree {R : Type*} [CommRing R]
     exact hij rfl
   omega
 
+/-- The logarithmic factor pair of `g` and `h` with weights `a` and `b`: the pair `(P, Q)` with
+`(P dx + Q dy) / (g * h) = b • dg / g - a • dh / h`, so `P = b • h * ∂ₓg - a • g * ∂ₓh` for the
+outer derivative `∂ₓ` and `Q = b • h * ∂ᵧg - a • g * ∂ᵧh` for the inner derivative `∂ᵧ`. -/
 def eulerFactorPair {R : Type*} [CommRing R] (a b : ℕ)
     (g h : R[X][X]) : R[X][X] × R[X][X] :=
   ((b : R) • (h * g.derivative) - (a : R) • (g * h.derivative),
@@ -106,6 +109,9 @@ private lemma eulerFactorPair_closed {F : Type*} [Field F] (a b : ℕ)
       (a : F) • (g * h.derivative, g * (bivariateCoefficientDerivative F) h)) = 0
   rw [map_sub, map_smul, map_smul, hg', hh', smul_zero, smul_zero, sub_self]
 
+/-- If `g` and `h` have total degrees at most `a` and `b` with `a, b > 0` and `a + b = k + 2`, and
+their logarithmic factor pair is nonzero, then the Euler closed-form operator of `g * h` has a
+nonzero kernel vector in `EulerPairSpace F k`. -/
 theorem exists_eulerFactorKernel {F : Type*} [Field F]
     (k a b : ℕ) (ha : 0 < a) (hb : 0 < b) (hab : a + b = k + 2)
     (g h : F[X][X]) (hg : bivariateTotalDegree g ≤ a)

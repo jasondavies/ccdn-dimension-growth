@@ -17,16 +17,22 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Module
 
+/-- The basis vector of `EulerPairSpace R k` from the first low block corresponds to the pair
+`(m, 0)` for the associated monomial `m` of degree at most `k`. -/
 lemma eulerPairCoordinates_basis_left {R : Type*} [CommRing R] (k : ℕ) (i : EulerLowIndex k) :
     eulerPairCoordinates R k (eulerPairBasis R k (.inl i)) =
       (monomial ((Finsupp.degreeLeEquivSym (Fin 2) k).symm i).val 1, 0) := by
   simp [eulerPairCoordinates, eulerPairBasis, Basis.prod_apply, eulerLowBasis_apply]
 
+/-- The basis vector of `EulerPairSpace R k` from the second low block corresponds to the pair
+`(0, m)` for the associated monomial `m` of degree at most `k`. -/
 lemma eulerPairCoordinates_basis_right {R : Type*} [CommRing R] (k : ℕ) (i : EulerLowIndex k) :
     eulerPairCoordinates R k (eulerPairBasis R k (.inr (.inl i))) =
       (0, monomial ((Finsupp.degreeLeEquivSym (Fin 2) k).symm i).val 1) := by
   simp [eulerPairCoordinates, eulerPairBasis, Basis.prod_apply, eulerLowBasis_apply]
 
+/-- The basis vector of `EulerPairSpace R k` from the homogeneous block corresponds to the radial
+pair `(y * m, -(x * m))` for the associated monomial `m` of degree `k`. -/
 lemma eulerPairCoordinates_basis_radial {R : Type*} [CommRing R] (k : ℕ) (i : EulerTopIndex k) :
     eulerPairCoordinates R k (eulerPairBasis R k (.inr (.inr i))) =
       (X 1 * monomial ((degreeEqEquivSym (Fin 2) k).symm i).val 1,
@@ -70,6 +76,8 @@ theorem eulerClosedFormCoefficientMatrix_map {R S : Type*} [CommRing R] [CommRin
   rw [← bivariateMap_coeff, bivariateMap_closedFormOperator, eulerBivariatePair_basis_map]
   rfl
 
+/-- Every minor of the Euler closed-form coefficient matrix commutes with applying a coefficient
+ring homomorphism `φ` to the equation. -/
 theorem eulerClosedForm_minor_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (k r : ℕ) (f : Polynomial (Polynomial R))
     (a : Fin r → ℕ × ℕ) (c : Fin r → EulerColumns k) :

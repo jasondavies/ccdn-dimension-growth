@@ -27,15 +27,18 @@ private lemma eulerLowBasis_repr_apply {R : Type*} [CommRing R] (d : ℕ)
       f.val.coeff ((Finsupp.degreeLeEquivSym (Fin 2) d).symm i).val := by
   exact Basis.repr_reindex_apply _ _ _ _
 
+/-- The bivariate monomial with coefficient one indexed by `i`, of total degree at most `d`. -/
 def eulerCoefficientMonomial (R : Type*) [CommRing R] (d : ℕ) (i : EulerLowIndex d) :
     Polynomial (Polynomial R) :=
   bivariatePolynomialEquiv R (monomial ((Finsupp.degreeLeEquivSym (Fin 2) d).symm i).val 1)
 
+/-- The coefficient of `f` at the bivariate monomial of total degree at most `d` indexed by `i`. -/
 def eulerCoefficientData {R : Type*} [CommRing R] (d : ℕ)
     (f : Polynomial (Polynomial R)) (i : EulerLowIndex d) : R :=
   ((bivariatePolynomialEquiv R).symm f).coeff ((Finsupp.degreeLeEquivSym (Fin 2) d).symm i).val
 
-/-- These parameters are precisely the polynomial's ordinary monomial coefficients. -/
+/-- A bivariate polynomial of total degree at most `d` is the sum of the monomials
+`eulerCoefficientMonomial R d i` weighted by its coefficients `eulerCoefficientData d f i`. -/
 theorem eulerCoefficientData_reconstruct {R : Type*} [CommRing R] (d : ℕ)
     (f : Polynomial (Polynomial R)) (hf : bivariateTotalDegree f ≤ d) :
     ∑ i, eulerCoefficientData d f i • eulerCoefficientMonomial R d i = f := by
@@ -47,6 +50,7 @@ theorem eulerCoefficientData_reconstruct {R : Type*} [CommRing R] (d : ℕ)
     eulerLowBasis_repr_apply, eulerLowBasis_apply, AlgEquiv.apply_symm_apply,
     eulerCoefficientData, eulerCoefficientMonomial, u] using hh
 
+/-- Applying a coefficient ring homomorphism fixes the monomials `eulerCoefficientMonomial`. -/
 lemma eulerCoefficientMonomial_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (d : ℕ) (i : EulerLowIndex d) :
     bivariateMap φ (eulerCoefficientMonomial R d i) = eulerCoefficientMonomial S d i := by
@@ -63,6 +67,8 @@ def closedFormEquationLinear {R : Type*} [CommRing R]
     ring
   map_smul' a f := closedFormOperator_smul_equation a f u
 
+/-- The `(row, col)` entry of the Euler closed-form coefficient matrix, as a linear function of the
+equation. -/
 def eulerCoefficientEntryLinear {R : Type*} [CommRing R] (k : ℕ)
     (row : ℕ × ℕ) (col : EulerColumns k) : Polynomial (Polynomial R) →ₗ[R] R :=
   (LinearMap.proj row).comp ((bivariateCoefficients R).comp

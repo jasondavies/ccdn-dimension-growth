@@ -17,8 +17,9 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
-/-- The parameters are coefficients; the two polynomial variables are the
-coordinates on the plane. -/
+/-- Every coefficient of the bivariate polynomial `f`, whose coefficients are polynomials in the
+parameters `τ`, has total degree at most `D` in the parameters; the two polynomial variables are
+the coordinates on the plane. -/
 def BivariateParameterDegreeBound {K τ : Type*} [CommRing K]
     (f : (MvPolynomial τ K)[X][X]) (D : ℕ) : Prop :=
   ∀ i j, ((f.coeff i).coeff j).totalDegree ≤ D
@@ -100,6 +101,8 @@ private theorem closedFormCoefficientMatrix_parameterDegree {K τ : Type*} [Comm
     have hb := bivariateParameterDegreeBound_monomial_mul hf (j.1.val : K) (j.1.val-1) j.2.val
     simpa only [map_natCast, map_one] using (bivariateParameterDegreeBound_sub ha hb) i.1 i.2
 
+/-- If every entry of a square matrix of multivariate polynomials has total degree at most `D`, then
+its determinant has total degree at most the size of the matrix times `D`. -/
 lemma matrix_det_parameterDegree {K τ ι : Type*} [CommRing K] [Fintype ι] [DecidableEq ι]
     (M : Matrix ι ι (MvPolynomial τ K)) (D : ℕ)
     (hM : ∀ i j, (M i j).totalDegree ≤ D) :

@@ -26,17 +26,20 @@ open Polynomial Matrix
 def bivariateMap {R S : Type*} [CommRing R] [CommRing S] (φ : R →+* S) :
     R[X][X] →+* S[X][X] := Polynomial.mapRingHom (Polynomial.mapRingHom φ)
 
+/-- The coefficients of `bivariateMap φ f` are the images under `φ` of those of `f`. -/
 @[simp]
 lemma bivariateMap_coeff {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : R[X][X]) (i j : ℕ) :
     ((bivariateMap φ f).coeff i).coeff j = φ ((f.coeff i).coeff j) := by
   simp [bivariateMap]
 
+/-- Applying a coefficient ring homomorphism commutes with the outer derivative. -/
 lemma bivariateMap_derivative {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : R[X][X]) :
     bivariateMap φ f.derivative = (bivariateMap φ f).derivative := by
   exact (Polynomial.derivative_map _ _).symm
 
+/-- Applying a coefficient ring homomorphism commutes with the inner derivative. -/
 lemma bivariateMap_coefficientDerivative {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : R[X][X]) :
     bivariateMap φ ((bivariateCoefficientDerivative R) f) =
@@ -51,6 +54,8 @@ private lemma bivariateMap_gridPolynomial {R S : Type*} [CommRing R] [CommRing S
       bivariateGridPolynomial S d (fun i => φ (v i)) := by
   simp [bivariateGridPolynomial, bivariateMap]
 
+/-- Applying a coefficient ring homomorphism commutes with the closed-form operator, applied to the
+equation and to both unknowns. -/
 lemma bivariateMap_closedFormOperator {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : R[X][X]) (u : R[X][X] × R[X][X]) :
     bivariateMap φ (closedFormOperator f u) =
@@ -99,6 +104,8 @@ open Polynomial Matrix
 def InBivariateGrid {R : Type*} [CommRing R] (d : ℕ) (f : R[X][X]) : Prop :=
   ∀ i j, d ≤ i ∨ d ≤ j → (f.coeff i).coeff j = 0
 
+/-- The polynomial with coefficients on the grid `BivariateGrid d` has zero coefficient at every
+monomial with outer exponent `i` and inner exponent `j` such that `d ≤ i` or `d ≤ j`. -/
 lemma bivariateGridPolynomial_coeff_zero {R : Type*} [CommRing R] (d : ℕ)
     (v : BivariateGrid d → R) (i j : ℕ) (h : d ≤ i ∨ d ≤ j) :
     ((bivariateGridPolynomial R d v).coeff i).coeff j = 0 := by

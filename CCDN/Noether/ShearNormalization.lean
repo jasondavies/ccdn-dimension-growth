@@ -16,10 +16,12 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
+/-- Variable zero corresponds to the outer variable of the nested polynomial ring. -/
 lemma bivariatePolynomialEquiv_X_zero {R : Type*} [CommRing R] :
     bivariatePolynomialEquiv R (MvPolynomial.X 0) = (X : R[X][X]) := by
   simp [bivariatePolynomialEquiv, MvPolynomial.finSuccEquiv_X_zero]
 
+/-- Variable one corresponds to the inner variable of the nested polynomial ring. -/
 lemma bivariatePolynomialEquiv_X_one {R : Type*} [CommRing R] :
     bivariatePolynomialEquiv R (MvPolynomial.X 1) = (C X : R[X][X]) := by
   change Polynomial.map (MvPolynomial.uniqueAlgEquiv R (Fin 1)).toRingHom
@@ -27,6 +29,7 @@ lemma bivariatePolynomialEquiv_X_one {R : Type*} [CommRing R] :
   rw [MvPolynomial.finSuccEquiv_X_succ, Polynomial.map_C]
   simp
 
+/-- Constants correspond to constants of the nested polynomial ring. -/
 lemma bivariatePolynomialEquiv_C {R : Type*} [CommRing R] (a : R) :
     bivariatePolynomialEquiv R (MvPolynomial.C a) = C (C a) := by
   exact (bivariatePolynomialEquiv R).commutes a
@@ -66,6 +69,8 @@ private lemma directionAxisHom_monomial {R : Type*} [CommRing R]
   rw [← C_mul_X_pow_eq_monomial, mul_pow, ← map_pow, map_mul, pow_add]
   ring
 
+/-- A two-variable exponent vector `m` equals `Finsupp.cons i (Finsupp.single 0 j)` if and only if
+its components are `i` and `j`. -/
 lemma bivariate_exponent_eq_iff (m : Fin 2 →₀ ℕ) (i j : ℕ) :
     Finsupp.cons i (Finsupp.single 0 j) = m ↔ m 0 = i ∧ m 1 = j := by
   constructor
@@ -131,6 +136,7 @@ private lemma bivariateShear_totalDegree {R : Type*} [CommRing R] [Nontrivial R]
   simp only [AlgEquiv.trans_apply, AlgEquiv.symm_apply_apply]
   exact planeShear_totalDegree _ _
 
+/-- A plane shear preserves irreducibility of bivariate polynomials. -/
 lemma bivariateShear_irreducible_iff {R : Type*} [CommRing R]
     (a : R) (f : R[X][X]) : Irreducible (bivariateShear R a f) ↔ Irreducible f :=
   MulEquiv.irreducible_iff (f := bivariateShear R a)
@@ -165,6 +171,8 @@ theorem exists_bounded_full_outer_shear (f : ℤ[X][X]) (hf : f ≠ 0) :
   rw [bivariateShear_totalDegree] at hhi
   omega
 
+/-- The identification of two-variable polynomials with nested polynomials commutes with applying a
+coefficient ring homomorphism. -/
 lemma bivariatePolynomialEquiv_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : MvPolynomial (Fin 2) R) :
     bivariateMap φ (bivariatePolynomialEquiv R f) =
@@ -172,12 +180,15 @@ lemma bivariatePolynomialEquiv_map {R S : Type*} [CommRing R] [CommRing S]
   ext i j
   simp only [bivariateMap_coeff, bivariatePolynomialEquiv_coeff, MvPolynomial.coeff_map]
 
+/-- The nested plane shear corresponds to the plane shear of two-variable polynomials. -/
 lemma bivariateShear_equiv {R : Type*} [CommRing R]
     (a : R) (f : MvPolynomial (Fin 2) R) :
     bivariateShear R a (bivariatePolynomialEquiv R f) =
       bivariatePolynomialEquiv R (planeShear R a f) := by
   simp only [bivariateShear, AlgEquiv.trans_apply, AlgEquiv.symm_apply_apply]
 
+/-- Applying a coefficient ring homomorphism `φ` commutes with shearing, the shear parameter `a`
+becoming `φ a`. -/
 lemma bivariateShear_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (a : R) (f : R[X][X]) :
     bivariateMap φ (bivariateShear R a f) =

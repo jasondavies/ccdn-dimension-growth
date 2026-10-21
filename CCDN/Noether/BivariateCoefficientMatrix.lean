@@ -17,7 +17,10 @@ namespace CCDN
 noncomputable section
 open Polynomial Matrix
 
+/-- Index set of the bivariate monomials whose outer and inner exponents are both less than `d`. -/
 abbrev BivariateGrid (d : ℕ) := Fin d × Fin d
+/-- Index set of the unknown coefficients of a pair of polynomials supported in the grid
+`BivariateGrid d`; these index the columns of the closed-form coefficient matrix. -/
 abbrev ClosedFormColumns (d : ℕ) := BivariateGrid d ⊕ BivariateGrid d
 
 /-- Reconstruct a polynomial with outer and inner exponents less than d. -/
@@ -32,6 +35,8 @@ def bivariateGridPolynomial (R : Type*) [CommRing R] (d : ℕ) :
     intro i _
     simp only [smul_monomial, smul_eq_mul]
 
+/-- The coefficient with outer exponent `i` and inner exponent `j` of the polynomial with grid
+coefficients `v` is `v (i, j)`. -/
 lemma bivariateGridPolynomial_coeff {R : Type*} [CommRing R] {d : ℕ}
     (v : BivariateGrid d → R) (i j : Fin d) :
     ((bivariateGridPolynomial R d v).coeff i.val).coeff j.val = v (i,j) := by
@@ -45,6 +50,8 @@ private lemma bivariateGridPolynomial_injective {R : Type*} [CommRing R] (d : �
   have hh := congrArg (fun p : R[X][X] => (p.coeff i.1.val).coeff i.2.val) h
   simpa only [bivariateGridPolynomial_coeff] using hh
 
+/-- The polynomial with coefficients `v` on the grid `BivariateGrid d` has outer degree less than
+`d`. -/
 lemma bivariateGridPolynomial_degree_lt {R : Type*} [CommRing R] {d : ℕ}
     (v : BivariateGrid d → R) : (bivariateGridPolynomial R d v).degree < d := by
   classical
@@ -70,6 +77,7 @@ def closedFormPair (R : Type*) [CommRing R] (d : ℕ) :
     · exact (bivariateGridPolynomial R d).map_smul a _
     · exact (bivariateGridPolynomial R d).map_smul a _
 
+/-- Decoding a coefficient vector into a pair of grid polynomials is injective. -/
 lemma closedFormPair_injective {R : Type*} [CommRing R] (d : ℕ) :
     Function.Injective (closedFormPair R d) := by
   intro v w h
@@ -101,6 +109,7 @@ def bivariateCoefficients (R : Type*) [CommRing R] : R[X][X] →ₗ[R] (ℕ × �
   map_add' f g := by ext; simp
   map_smul' a f := by ext; simp
 
+/-- A bivariate polynomial is determined by its coefficients. -/
 lemma bivariateCoefficients_injective {R : Type*} [CommRing R] :
     Function.Injective (bivariateCoefficients R) := by
   intro f g h

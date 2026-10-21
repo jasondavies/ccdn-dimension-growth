@@ -26,6 +26,8 @@ private lemma euler_restrict_basis_val {R : Type*} [CommRing R]
   rw [Finsupp.supportedEquivFinsupp_symm_single]
   rfl
 
+/-- The basis vector of `eulerLowBasis R k` indexed by `i` is the monomial with exponent vector
+corresponding to `i` and coefficient one. -/
 lemma eulerLowBasis_apply {R : Type*} [CommRing R] (k : ℕ) (i : EulerLowIndex k) :
     (eulerLowBasis R k i).val =
       monomial ((Finsupp.degreeLeEquivSym (Fin 2) k).symm i).val 1 := by
@@ -34,6 +36,8 @@ lemma eulerLowBasis_apply {R : Type*} [CommRing R] (k : ℕ) (i : EulerLowIndex 
     (Finsupp.degreeLeEquivSym (Fin 2) k) i
   exact (congrArg Subtype.val h).trans (euler_restrict_basis_val _ _)
 
+/-- The basis vector of `eulerTopBasis R k` indexed by `i` is the monomial of degree `k` with
+exponent vector corresponding to `i` and coefficient one. -/
 lemma eulerTopBasis_apply {R : Type*} [CommRing R] (k : ℕ) (i : EulerTopIndex k) :
     (eulerTopBasis R k i).val =
       monomial ((degreeEqEquivSym (Fin 2) k).symm i).val 1 := by

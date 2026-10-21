@@ -88,6 +88,8 @@ private theorem eulerClosedForm_entry_l1_le {σ : Type*} (k H : ℕ)
     have hh : (c.natAbs : ℤ) ≤ (k + 2 : ℕ) := by simpa only [Int.natCast_natAbs] using hc
     exact_mod_cast hh
 
+/-- For a monomial of degree `k + 2`, every Euler matrix entry of its universal plane restriction
+has coefficient ℓ¹-norm at most `(k + 2) * 3 ^ (k + 2)`. -/
 theorem ambientEulerEntry_monomial_l1_le {σ : Type*} (k : ℕ)
     (m : σ →₀ ℕ) (hm : m.degree = k + 2) (row : ℕ × ℕ) (col : EulerColumns k) :
     l1Norm (ambientEulerEntryLinear ℤ σ k row col (monomial m 1)) ≤

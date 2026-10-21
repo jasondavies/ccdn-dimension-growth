@@ -36,6 +36,9 @@ noncomputable section
 open Polynomial Differential
 open scoped Differential
 
+/-- The differential structure on `AdjoinRoot f` extending the derivation of `K`, for a monic
+irreducible separable `f`: the root `α` is sent to `-(f^D)(α) / f'(α)`, where `f^D` is `f` with
+its coefficients differentiated. -/
 @[reducible]
 def separableAdjoinRootDifferential {K : Type*} [Field K] [Differential K]
     (f : K[X]) [Fact (Irreducible f)] [Fact f.Monic] (hsep : f.Separable) :

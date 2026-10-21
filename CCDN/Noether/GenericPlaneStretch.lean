@@ -52,6 +52,7 @@ def variableScaleEquiv (K σ : Type*) [Field K] (a : K) (ha : a ≠ 0) :
       simp only [map_mul, aeval_C, aeval_X, MvPolynomial.algebraMap_eq]
       rw [← mul_assoc, ← map_mul, mul_inv_cancel₀ ha, map_one, one_mul])
 
+/-- The scaling automorphism by `a` sends each variable `X i` to `a * X i`. -/
 @[simp] lemma variableScaleEquiv_X {K σ : Type*} [Field K]
     (a : K) (ha : a ≠ 0) (i : σ) :
     variableScaleEquiv K σ a ha (X i) = C a * X i := by
@@ -63,6 +64,9 @@ def genericStretchCoefficients (K σ : Type*) [Field K] :
     MvPolynomial σ K →ₐ[K] MvPolynomial σ (MvPolynomial Unit K) :=
   aeval (fun i => C (X ()) * X i)
 
+/-- The generic stretch `f(x, z) ↦ f(x, y * z)` of `f`, viewed as a polynomial in the distinguished
+outer variable `x` whose coefficients involve the transverse variables `z` and the fresh
+parameter `y`. -/
 def genericPlaneStretch {K σ : Type*} [Field K]
     (f : MvPolynomial (Option σ) K) :
     Polynomial (MvPolynomial σ (MvPolynomial Unit K)) :=

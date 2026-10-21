@@ -127,6 +127,7 @@ private lemma finite_homogeneous_coefficientL1_bounded (σ : Type*) [Fintype σ]
   refine ⟨c, ?_⟩
   exact homogeneousCoefficientData_reconstruct r f hf.1
 
+/-- For fixed `σ` and `k`, there are only finitely many ambient Noether forms. -/
 lemma finite_ambientNoetherForms (σ : Type*) [Fintype σ] [DecidableEq σ] (k : ℕ) :
     {f | ∃ rows cols m, f = ambientNoetherForm σ k rows cols m}.Finite := by
   apply (finite_homogeneous_coefficientL1_bounded (Sym σ (k + 2))
@@ -137,8 +138,9 @@ lemma finite_ambientNoetherForms (σ : Type*) [Fintype σ] [DecidableEq σ] (k :
   exact ⟨ambientNoetherForm_homogeneous σ k rows cols m,
     ambientNoetherForm_coefficientL1_le σ k rows cols m⟩
 
-/-- The finite collection consists precisely of the extracted coefficients
-of all Euler minors of the universal plane restriction. -/
+/-- The finite collection of universal Noether forms of degree `k + 2` in the variables `σ`: the
+extracted plane-parameter coefficients of all Euler minors of the universal plane restriction of
+the universal homogeneous form. -/
 def universalNoetherForms (σ : Type*) [Fintype σ] [DecidableEq σ] (k : ℕ) :
     Finset (MvPolynomial (Sym σ (k + 2)) ℤ) :=
   (finite_ambientNoetherForms σ k).toFinset
@@ -148,6 +150,7 @@ private lemma mem_universalNoetherForms {σ : Type*} [Fintype σ] [DecidableEq �
     f ∈ universalNoetherForms σ k ↔ ∃ rows cols m, f = ambientNoetherForm σ k rows cols m := by
   exact Set.Finite.mem_toFinset _
 
+/-- Every universal Noether form is homogeneous of degree `(k + 2) ^ 2 - 1`. -/
 theorem universalNoetherForms_homogeneous {σ : Type*} [Fintype σ] [DecidableEq σ]
     (k : ℕ) (g : MvPolynomial (Sym σ (k + 2)) ℤ)
     (hg : g ∈ universalNoetherForms σ k) :
@@ -163,7 +166,9 @@ private lemma card_homogeneousCoefficientIndices (n d : ℕ) :
   congr 1
   omega
 
-/-- The printed integer coefficient bound, with n+1 homogeneous variables. -/
+/-- The printed integer coefficient bound: in `n + 1` homogeneous variables, every universal
+Noether form has coefficient ℓ¹-norm at most
+`(k + 2) ^ (3 * (k + 2) ^ 2 - 3) * (choose (n + k + 2) n * 3 ^ (k + 2)) ^ ((k + 2) ^ 2 - 1)`. -/
 theorem universalNoetherForms_coefficientL1_le (n k : ℕ)
     (g : MvPolynomial (Sym (Option (Fin n)) (k + 2)) ℤ)
     (hg : g ∈ universalNoetherForms (Option (Fin n)) k) :
@@ -174,8 +179,8 @@ theorem universalNoetherForms_coefficientL1_le (n k : ℕ)
   simpa only [card_homogeneousCoefficientIndices] using
     ambientNoetherForm_coefficientL1_le (Option (Fin n)) k rows cols m
 
-/-- Every form vanishes on a geometrically reducible equation, over an
-arbitrary field, with no characteristic assumption. -/
+/-- Every universal Noether form vanishes on a geometrically reducible homogeneous equation of
+degree `k + 2`, over an arbitrary field, with no characteristic assumption. -/
 theorem universalNoetherForms_vanish {K σ : Type*} [Field K]
     [Fintype σ] [DecidableEq σ]
     (k : ℕ) (f : MvPolynomial σ K) (hf : f.IsHomogeneous (k + 2))
@@ -186,8 +191,8 @@ theorem universalNoetherForms_vanish {K σ : Type*} [Field K]
   obtain ⟨rows,cols,m,rfl⟩ := (mem_universalNoetherForms k g).mp hg
   exact ambientNoetherForm_eq_zero_of_not_absolutely_irreducible k f hf hred rows cols m
 
-/-- In characteristic zero, an absolutely irreducible equation makes at
-least one member of the same finite universal collection nonzero. -/
+/-- In characteristic zero, an absolutely irreducible homogeneous equation of degree `k + 2`
+makes at least one universal Noether form nonzero. -/
 theorem universalNoetherForms_nonvanishing {K σ : Type*} [Field K] [CharZero K]
     [Fintype σ] [DecidableEq σ]
     (k : ℕ) (f : MvPolynomial (Option σ) K) (hf : f.IsHomogeneous (k + 2))

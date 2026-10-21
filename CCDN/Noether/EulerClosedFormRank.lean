@@ -105,8 +105,9 @@ private theorem eulerClosedFormOperator_injective {F : Type*} [Field F] [CharZer
   apply hzero
   rw [map_sub, huv, sub_self]
 
-/-- A nonzero constant outer leading coefficient is sufficient. Scalar
-normalization changes neither the domain nor injectivity. -/
+/-- Over an algebraically closed field of characteristic zero, the Euler closed-form operator of
+an irreducible `f` of outer degree `k + 2` whose outer leading coefficient is a nonzero constant
+is injective. Scalar normalization changes neither the domain nor injectivity. -/
 theorem eulerClosedFormOperator_injective_of_constant_leading
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (k : ℕ) (f : F[X][X]) (hf : Irreducible f) (a : F) (ha : a ≠ 0)

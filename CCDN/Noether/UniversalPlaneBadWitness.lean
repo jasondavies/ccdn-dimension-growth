@@ -22,6 +22,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The universal plane restriction of `f` has total degree at most the total degree of `f` in the
+two plane coordinates. -/
 lemma universalPlaneMap_planeDegree_le {K σ : Type*} [CommRing K]
     (f : MvPolynomial σ K) : (universalPlaneMap K σ f).totalDegree ≤ f.totalDegree := by
   change (eval₂Hom (C.comp (C : K →+* MvPolynomial (PlaneParameters σ) K))
@@ -40,6 +42,8 @@ lemma universalPlaneMap_planeDegree_le {K σ : Type*} [CommRing K]
     · exact (totalDegree_mul _ _).trans (by simpa using hx 0)
   · exact (totalDegree_mul _ _).trans (by simpa using hx 1)
 
+/-- Every specialization of the plane parameters of the universal plane restriction of `f` has
+total degree at most the total degree of `f`. -/
 lemma universalPlanePolynomial_specialization_totalDegree {K L σ : Type*}
     [CommRing K] [CommRing L] (f : MvPolynomial σ K)
     (φ : MvPolynomial (PlaneParameters σ) K →+* L) :
@@ -48,7 +52,9 @@ lemma universalPlanePolynomial_specialization_totalDegree {K L σ : Type*}
   simpa only [universalPlanePolynomial, bivariateTotalDegree, AlgEquiv.symm_apply_apply]
     using universalPlaneMap_planeDegree_le f
 
-/-- The leading coefficient factor includes all outer-degree drops. -/
+/-- The bad-plane witness: the universal outer leading coefficient of the plane restriction of
+`f` times the closed-form minor with rows `rows` and columns `cols`. The leading-coefficient
+factor detects all outer-degree drops. -/
 def universalPlaneBadWitness {K σ : Type*} [CommRing K] (f : MvPolynomial σ K)
     (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree) :

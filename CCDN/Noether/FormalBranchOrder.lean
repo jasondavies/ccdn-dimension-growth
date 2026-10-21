@@ -22,6 +22,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If `X ^ N` divides the power series `g`, then the images of `1, X, …, X ^ (N - 1)` in the
+quotient by `g` are linearly independent. -/
 lemma powerSeries_quotient_powers_independent {K : Type*} [Field K]
     (g : PowerSeries K) (N : ℕ) (hvan : PowerSeries.X ^ N ∣ g) :
     LinearIndependent K (fun i : Fin N =>

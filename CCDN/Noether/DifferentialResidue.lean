@@ -32,6 +32,7 @@ private lemma differential_mapCoeffs_degree_lt {K : Type*} [Field K] [Differenti
     exact Derivation.map_one_eq_zero _
   · rw [coeff_eq_zero_of_natDegree_lt h, map_zero]
 
+/-- Coefficientwise differentiation commutes with the formal derivative of polynomials. -/
 lemma derivative_differential_mapCoeffs {K : Type*} [Field K] [Differential K]
     (f : K[X]) : (Differential.mapCoeffs f).derivative =
       Differential.mapCoeffs f.derivative := by
@@ -66,6 +67,8 @@ theorem closed_form_residue_deriv_eq_zero
       (aeval c f.derivative.derivative) * hq
   rw [Derivation.leibniz_div, smul_eq_mul, smul_eq_mul, smul_eq_mul, hn, mul_zero]
 
+/-- Coefficientwise differentiation commutes with extending coefficients along a differential
+algebra `K → L`. -/
 lemma differential_mapCoeffs_map {K L : Type*} [Field K] [Field L]
     [Differential K] [Differential L] [Algebra K L] [DifferentialAlgebra K L]
     (p : K[X]) : Differential.mapCoeffs (p.map (algebraMap K L)) =

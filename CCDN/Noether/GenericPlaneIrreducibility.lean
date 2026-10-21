@@ -47,10 +47,13 @@ private lemma genericPlaneCoefficientEquiv_stretch {K σ : Type*} [Field K]
       simp [genericPlaneCoefficientEquiv, genericStretchCoefficients, genericPlaneCoefficients]
   simp only [genericPlaneStretch, genericPlanePolynomial, Polynomial.map_map, he]
 
+/-- If `f` is monic in its distinguished variable, then so is the generic plane equation of `f`. -/
 lemma genericPlanePolynomial_monic {K σ : Type*} [Field K]
     (f : MvPolynomial (Option σ) K) (hf : (optionEquivLeft K σ f).Monic) :
     (genericPlanePolynomial f).Monic := hf.map _
 
+/-- If `f` is monic in its distinguished variable, then the generic plane equation of `f` has the
+same degree in that variable. -/
 lemma genericPlanePolynomial_natDegree {K σ : Type*} [Field K]
     (f : MvPolynomial (Option σ) K) (hf : (optionEquivLeft K σ f).Monic) :
     (genericPlanePolynomial f).natDegree = (optionEquivLeft K σ f).natDegree :=

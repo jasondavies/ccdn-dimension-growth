@@ -18,10 +18,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The exponent vector of degree `d` in the variables `σ` corresponding to a multiset `i` of size
+`d`. -/
 def homogeneousCoefficientExponent (σ : Type*) [Fintype σ] [DecidableEq σ]
     (d : ℕ) (i : Sym σ d) : σ →₀ ℕ :=
   ((degreeEqEquivSym σ d).symm i).val
 
+/-- The exponent vector `homogeneousCoefficientExponent σ d i` has degree `d`. -/
 lemma homogeneousCoefficientExponent_degree (σ : Type*) [Fintype σ] [DecidableEq σ]
     (d : ℕ) (i : Sym σ d) : (homogeneousCoefficientExponent σ d i).degree = d :=
   ((degreeEqEquivSym σ d).symm i).property
@@ -30,14 +33,19 @@ private lemma homogeneousCoefficientExponent_injective (σ : Type*) [Fintype σ]
     (d : ℕ) : Function.Injective (homogeneousCoefficientExponent σ d) :=
   Subtype.val_injective.comp (degreeEqEquivSym σ d).symm.injective
 
+/-- The universal homogeneous form of degree `d` in the variables `σ`: the sum of all monomials of
+degree `d`, each with its own independent integer coefficient variable. -/
 def universalHomogeneousForm (σ : Type*) [Fintype σ] [DecidableEq σ] (d : ℕ) :
     MvPolynomial σ (MvPolynomial (Sym σ d) ℤ) :=
   ∑ i, monomial (homogeneousCoefficientExponent σ d i) (X i)
 
+/-- The coefficient of `f` at the degree-`d` monomial indexed by `i`. -/
 def homogeneousCoefficientData {R σ : Type*} [CommRing R] [Fintype σ] [DecidableEq σ]
     (d : ℕ) (f : MvPolynomial σ R) (i : Sym σ d) : R :=
   f.coeff (homogeneousCoefficientExponent σ d i)
 
+/-- A homogeneous polynomial `f` of degree `d` is the sum of its degree-`d` monomials weighted by
+`homogeneousCoefficientData d f`. -/
 theorem homogeneousCoefficientData_reconstruct {R σ : Type*} [CommRing R]
     [Fintype σ] [DecidableEq σ] (d : ℕ)
     (f : MvPolynomial σ R) (hf : f.IsHomogeneous d) :
@@ -65,6 +73,8 @@ theorem homogeneousCoefficientData_reconstruct {R σ : Type*} [CommRing R]
     intro hi
     exact hm (hi ▸ homogeneousCoefficientExponent_degree σ d i)
 
+/-- The ring homomorphism from the integer polynomials in the coefficient variables to `R` that
+sends each coefficient variable to the corresponding coefficient of `f`. -/
 def homogeneousCoefficientSpecialization {R σ : Type*} [CommRing R] [Fintype σ] [DecidableEq σ]
     (d : ℕ) (f : MvPolynomial σ R) : MvPolynomial (Sym σ d) ℤ →+* R :=
   eval₂Hom (Int.castRingHom R) (homogeneousCoefficientData d f)
@@ -81,6 +91,8 @@ theorem universalHomogeneousForm_specialize {R σ : Type*} [CommRing R]
       homogeneousCoefficientData d f i := eval₂_X _ _ _
   simpa only [map_monomial, hX] using homogeneousCoefficientData_reconstruct d f hf
 
+/-- The universal homogeneous form is the sum over all degree-`d` monomials of the coefficient
+variable times that monomial, an expansion linear in the coefficient variables. -/
 lemma universalHomogeneousForm_linear_expansion (σ : Type*) [Fintype σ] [DecidableEq σ]
     (d : ℕ) :
     universalHomogeneousForm σ d =
@@ -89,6 +101,7 @@ lemma universalHomogeneousForm_linear_expansion (σ : Type*) [Fintype σ] [Decid
           (monomial (homogeneousCoefficientExponent σ d i) (1 : ℤ)) := by
   simp only [universalHomogeneousForm, map_monomial, map_one, smul_monomial, smul_eq_mul, mul_one]
 
+/-- The universal plane restriction `universalPlanePolynomial` as an `R`-linear map. -/
 def universalPlanePolynomialLinear (R σ : Type*) [CommRing R] :
     MvPolynomial σ R →ₗ[R] Polynomial (Polynomial (MvPolynomial (PlaneParameters σ) R)) :=
   ((bivariatePolynomialEquiv (MvPolynomial (PlaneParameters σ) R)).toLinearMap.restrictScalars

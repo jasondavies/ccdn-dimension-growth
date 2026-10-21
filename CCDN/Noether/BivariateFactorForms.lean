@@ -15,6 +15,7 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
+/-- The inner and outer derivatives of a bivariate polynomial commute. -/
 lemma derivative_bivariateCoefficientDerivative {F : Type*} [Field F] (p : F[X][X]) :
     ((bivariateCoefficientDerivative F) p).derivative =
       (bivariateCoefficientDerivative F) p.derivative := by
@@ -79,8 +80,8 @@ theorem bivariate_power_factor_closed_form {F : Type*} [Field F]
   rw [he]
   exact bivariate_square_factor_closed_form g (g ^ k * h)
 
-/-- Higher repeated factors also produce a numerator outside the scalar
-span of the whole gradient; cancellation exposes its extra pole. -/
+/-- For a nonconstant separable `g` coprime to `h`, the numerator `g ^ k * h * g'` is not a
+scalar multiple of the derivative of `g ^ (k + 2) * h`; cancellation exposes its extra pole. -/
 theorem power_factor_numerator_not_scalar_gradient
     {R : Type*} [CommRing R] [IsDomain R] (g h : R[X]) (k : ℕ)
     (hg : 0 < g.degree) (hgh : IsCoprime g h) (hgg : IsCoprime g g.derivative)
