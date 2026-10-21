@@ -7,7 +7,7 @@ module
 
 public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.ChowLinearSpecialization
-public import CCDN.Projection.ProjectionImageFractionField
+public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.ChowPolynomialPower
 import CCDN.Center.ChowProjectionCriterion

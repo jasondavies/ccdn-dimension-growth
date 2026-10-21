@@ -15,7 +15,7 @@ import CCDN.Center.GeometricIdealPrimality
 import CCDN.Center.GeometricProjectiveChow
 import CCDN.Center.ProjectiveChowChartReduction
 import CCDN.Center.ProjectiveChowWithoutChart
-import CCDN.Hilbert.HilbertScalarExtension
+import CCDN.Hilbert.ScalarExtension
 import CCDN.Hilbert.HomogeneousPrimeComponents
 /-! The constructed projective Chow equation has degree exactly d in every
 hyperplane block, where d is the Hilbert multiplicity. This includes

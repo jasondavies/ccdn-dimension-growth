@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.CharZeroOrGT
-public import CCDN.Auxiliary.HypersurfacePositioning
+public import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 public import CCDN.Determinant.GenericPlaneSmoothness
 public import CCDN.Noether.UniversalPlane
 public import Mathlib.Tactic.Continuity

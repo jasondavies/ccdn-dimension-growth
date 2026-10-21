@@ -23,7 +23,7 @@ has a summary table.
   `O_c(s)`. In the proof, the replacement `g(k) = µ + cµ(k⁰ − (k−1)⁰) = µ` is not pointwise
   larger when `n = 1`. The hypersurface application is unaffected because there `g(k) ≤ µ`, and
   the lemma holds for `n ≥ 2` with an error independent of `µ`.
-  [[`no_uniform_dimension_one_profile_error`](../CCDN/Counterexample/WeightedDimensionOneExample.lean)]
+  [[`no_uniform_dimension_one_profile_error`](../CCDN/Counterexample/WeightedDimensionOne.lean)]
 * **Corollary 2.5 needs the `Fⱼ` to have a common degree** (`refuted`). Take `n = 1`, the line
   `f = x₂` in `ℙ²` (so `µ = 1`), a prime `p > s`, the primitive points `ξᵢ = (i, p, 0)` for
   `1 ≤ i ≤ s`, which all reduce to `[1:0:0]`, and `Fⱼ = x₀^(j−1)`. Then `det(Fⱼ(ξᵢ))` is a
@@ -31,7 +31,7 @@ has a summary table.
   corollary asks for `e ≥ s²/2 − O(s)`. In the proof, `Fⱼ(ξᵢ)` differs from the value of the
   local function `Fⱼ/x₀^(deg Fⱼ)` by the factor `ξᵢ₀^(deg Fⱼ)`. That factor comes out of the
   determinant only when all the degrees are equal.
-  [[`no_uniform_mixed_degree_local_error`](../CCDN/Counterexample/MixedDegreeProjectiveExample.lean)]
+  [[`no_uniform_mixed_degree_local_error`](../CCDN/Counterexample/MixedDegreeProjective.lean)]
   The formalisation proves Proposition 2.6 and Corollary 2.9 only with a common degree
   (`corrected`). The paper deduces Proposition 3.2.6 from Corollary 2.9, so the next example
   shows that they need it too.
@@ -53,7 +53,7 @@ has a summary table.
   [`literalAffineBadPrimeFactor_homogenization_unbounded`](../CCDN/Counterexample/HomogenizedBadPrimeFactor.lean)]
   The statements of Proposition 4.2.1 and Corollary 4.2.4, which depends on it, are true as
   printed: the formalisation proves them by working directly in the affine chart
-  ([`literal_affine_hypersurface_auxiliary`](../CCDN/Auxiliary/LiteralAffineAuxiliaryTheorem.lean),
+  ([`literal_affine_hypersurface_auxiliary`](../CCDN/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean),
   [`literal_affine_plane_coefficient_count_uniform`](../CCDN/Paper/LiteralAffinePlaneCount.lean)).
   In Lean, "literal" names the paper's `b(f)` of the affine polynomial, as opposed to the
   factor of its homogenisation. Defining `b(f)` through the homogenisation would also repair
@@ -63,7 +63,7 @@ has a summary table.
   `d = 1`, and the bound `< (m+1)²d² = 1` allows only constants. For `X = [1:0:0] ⊂ ℙ²`, the
   complement of `G_X` is a nonempty proper subset of `G(0, 2) = ℙ²`, which constant equations
   cannot cut out. Linear equations do, so the bound is `≤ 1` there.
-  [[`zero_dimensional_plucker_degree_bound_obstruction`](../CCDN/Counterexample/ZeroDimensionalCenterObstruction.lean)]
+  [[`zero_dimensional_plucker_degree_bound_obstruction`](../CCDN/Counterexample/ZeroDimensionalCenter.lean)]
   For `m ≥ 1`, the coefficients of `R_{X,Λ}` have Plücker degree `D = (m+1)d`, and the
   Noether forms of Theorem 3.2.2 have degree `D² − 1` in those coefficients. Composing them
   gives degree `D(D² − 1)`, not `< D²`. The lemma's bound is still true: the formalisation
@@ -87,7 +87,7 @@ has a summary table.
   Cofactors give the valid bound `(s−1)! B^(s−1)`
   ([`exists_bounded_row_separator`](../CCDN/Algebra/BoundedRowSeparation.lean)). The projection
   estimate (5-5) keeps its exponent `2(n−m−1)²`.
-  [[`not_printed_row_separator_bound`](../CCDN/Counterexample/RowSeparatorCounterexample.lean)]
+  [[`not_printed_row_separator_bound`](../CCDN/Counterexample/RowSeparatorConstant.lean)]
 
 ## Covered by the addenda
 

@@ -18,14 +18,14 @@ module imports an endpoint. The proofs live in topic directories (`Plane/`, `Cur
 `N_aff(X, B) ≤ C(n) d³ B^(1/d) (log B + d)` for every prime ideal of an affine curve of degree
 `d` in `𝔸ⁿ`. The two steps below are combined in `Curve/AffineCurveCount.lean`.
 
-1. **Plane curves** (`Plane/`, `Determinant/`, `Auxiliary/`). The determinant method gives the
+1. **Plane curves** (`Plane/`, `Determinant/`, `AuxiliaryPolynomial/`). The determinant method gives the
    plane bound `PlaneCurveBound`. The local determinant estimates at smooth and singular
    residue classes are in `Determinant/`, the finite-field point count in
-   `Plane/PlaneCount.lean`, and the auxiliary polynomial of Theorem 3.1.1 with its
-   bad-prime factor in `Auxiliary/`.
+   `Plane/CurveCount.lean`, and the auxiliary polynomial of Theorem 3.1.1 with its
+   bad-prime factor in `AuxiliaryPolynomial/`.
 2. **Projection to the plane** (`Projection/`). A bounded integral linear projection preserves
    the degree of the curve (`Projection/BoundedDegreePreservingProjection.lean`). It costs a
-   bounded enlargement of the box, which `Projection/ProjectionScaleAbsorption.lean` absorbs
+   bounded enlargement of the box, which `Projection/ScaleAbsorption.lean` absorbs
    into the constant. Exceptional fibres contribute at most `d(d − 1)` points.
 
 ## Theorem 2: projective curves (`ProjectiveCurveBound.lean`)

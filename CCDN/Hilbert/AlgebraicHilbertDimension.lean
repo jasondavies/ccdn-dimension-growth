@@ -9,7 +9,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.Algebraic.Defs
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import CCDN.Hilbert.HilbertTranscendenceBasis
+import CCDN.Hilbert.TranscendenceBasis
 import Mathlib.RingTheory.AlgebraicIndependent.AlgebraicClosure
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import Mathlib.RingTheory.IntegralClosure.GoingDown

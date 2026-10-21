@@ -9,7 +9,7 @@ public import CCDN.Center.ChowLinearSpecialization
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.BalancedParameterFiniteness
 import CCDN.Center.ProjectiveIncidenceClosed
-import CCDN.Hilbert.HilbertScalarExtension
+import CCDN.Hilbert.ScalarExtension
 import CCDN.Hilbert.HomogeneousPrimeComponents
 import CCDN.Algebra.ProjectionScalarExtension
 /-! The matrix image commutes with coefficient extension and has

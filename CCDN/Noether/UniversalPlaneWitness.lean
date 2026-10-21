@@ -14,7 +14,7 @@ import CCDN.Determinant.UniversalPlaneMinor
 import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.ShearNormalization
 import CCDN.ForMathlib.MvPolynomial
-import CCDN.Auxiliary.HypersurfacePositioning
+import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 
 /-!
 A nonzero universal minor of cubic parameter degree, over the original coefficient field; the

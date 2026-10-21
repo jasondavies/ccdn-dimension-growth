@@ -11,7 +11,7 @@ public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import CCDN.ForMathlib.IdealHeight
+public import CCDN.ForMathlib.KrullHeight
 public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Algebra.CoordinatePowerGeneration
 import CCDN.Hilbert.CriticalFilteredGrowth

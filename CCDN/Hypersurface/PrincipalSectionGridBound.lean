@@ -7,7 +7,7 @@ module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Hypersurface.PureVarietyGridBound
-import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.PolynomialComparison
 import CCDN.Hilbert.ProperSectionHilbert
 import CCDN.Hypersurface.PrincipalSectionPurity
 import Mathlib.Algebra.Order.Star.Rat

@@ -7,7 +7,7 @@ module
 
 public import CCDN.Center.PluckerComplementEquations
 import CCDN.Center.BirationalCenterExtensionWitness
-import CCDN.Center.CenterDetectorExtension
+import CCDN.Center.DetectorExtension
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import Mathlib.Algebra.CharZero.Infinite
 import Mathlib.FieldTheory.IsAlgClosed.Basic

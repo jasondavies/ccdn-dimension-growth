@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.QuadraticObstructionFibers
-public import CCDN.ClassGroup.ClassGroupQuadraticInvolution
+public import CCDN.ClassGroup.QuadraticInvolution
 import CCDN.ClassGroup.AmbiguousIdealRelativeNorm
 import CCDN.ClassGroup.FractionalIdealConjugation
 import CCDN.ClassGroup.QuadraticNormConjugation

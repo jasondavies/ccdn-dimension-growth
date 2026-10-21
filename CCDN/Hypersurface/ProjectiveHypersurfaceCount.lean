@@ -9,9 +9,9 @@ public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
 public import CCDN.Height.ProjectiveZeroLocus
 import CCDN.Algebra.FiniteFieldProjectiveCone
-import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 import CCDN.Determinant.ProjectiveHypersurfaceMultiplicity
-import CCDN.Hypersurface.HypersurfaceCount
+import CCDN.Hypersurface.FiniteFieldCount
 /-! The sharp projective finite-field count and its singular
 multiplicity correction. This discharges the count in CCDN Lemma 2.7. -/
 

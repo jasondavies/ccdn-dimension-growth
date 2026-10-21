@@ -9,7 +9,7 @@ public import CCDN.Algebra.HomogeneousTranslation
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
 public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousChart
-import CCDN.Plane.PlaneGridHeight
+import CCDN.Plane.GridHeight
 /-! Positioning a coefficient-height witness as the lexicographic leading
 coefficient by a bounded integral translation of the affine chart. -/
 

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfacePositioning
+public import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 public import CCDN.Noether.EulerPairBasis
 import CCDN.Determinant.GenericPlaneMinor
 import CCDN.Determinant.GenericPlaneSmoothness

@@ -9,7 +9,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.ProjectiveClosureProjection
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Center.FixedCoordinateEliminationInfinite
-import CCDN.Hilbert.HilbertFullDimension
+import CCDN.Hilbert.FullDimension
 import CCDN.Hilbert.ProperHilbertDimension
 import CCDN.Projection.ClosureIntegralComposition
 import CCDN.Projection.IntegralProjectionHilbert

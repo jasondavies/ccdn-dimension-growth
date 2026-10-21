@@ -7,8 +7,8 @@ module
 
 public import CCDN.ClassGroup.NoIndexTwoClassGroupCounting
 public import CCDN.ClassGroup.NumberFieldLatticeBox
-import CCDN.ClassGroup.ClassGroupBalancedGenerator
-import CCDN.ClassGroup.ClassGroupDiscriminantNumerics
+import CCDN.ClassGroup.BalancedGenerator
+import CCDN.ClassGroup.DiscriminantNumerics
 import CCDN.ClassGroup.NumberFieldShortBasis
 
 /-!

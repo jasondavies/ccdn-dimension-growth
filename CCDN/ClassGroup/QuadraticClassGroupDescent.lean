@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupTwoTorsion
+public import CCDN.ClassGroup.TwoTorsion
 import CCDN.ClassGroup.StronglyAmbiguousClassCount
 
 /-!

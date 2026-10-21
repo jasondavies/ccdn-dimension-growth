@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupNormPolynomial
+public import CCDN.ClassGroup.NormPolynomial
 import Mathlib.Tactic.NormNum.Prime
 import Mathlib.Tactic.NormNum.Ordinal
 import Mathlib.Tactic.NormNum.NatLog

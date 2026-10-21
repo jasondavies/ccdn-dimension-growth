@@ -12,8 +12,8 @@ public import CCDN.Height.Box
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Algebra.RowSpan
-import CCDN.Auxiliary.AuxiliaryPolynomial
-import CCDN.Determinant.Determinant
+import CCDN.AuxiliaryPolynomial.CoefficientBound
+import CCDN.Determinant.GramDeterminant
 import Mathlib.Data.Nat.Factorial.DoubleFactorial
 import Mathlib.Algebra.Order.Star.Int
 import Mathlib.Algebra.Order.Ring.Abs

@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Height.ScaledHypersurfaceHeight
 import CCDN.Plane.Bezout
 /-! A logarithm-free plane-curve estimate in terms of the

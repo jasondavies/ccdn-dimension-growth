@@ -8,7 +8,7 @@ module
 public import CCDN.Center.ChowDistinguishedVariable
 public import Mathlib.FieldTheory.Minpoly.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
-import CCDN.Projection.ProjectionFractionField
+import CCDN.Projection.PrimitiveCoordinateField
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 import Mathlib.RingTheory.Polynomial.GaussLemma
 

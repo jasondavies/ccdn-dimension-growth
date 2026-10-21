@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.CenterMinorProjection
+public import CCDN.Center.MinorProjection
 import CCDN.Noether.UniversalPlane
 /-! The Chow restriction for the literal maximal-minor center projection as a
 polynomial family in Plücker coordinates. Its specialization is proved,

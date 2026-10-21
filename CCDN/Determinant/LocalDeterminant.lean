@@ -7,7 +7,7 @@ module
 
 import all ArithmeticHeights.BombieriVaaler
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import CCDN.Determinant.Determinant
+import CCDN.Determinant.GramDeterminant
 
 /-!
 # Determinant divisibility from filtered factorizations

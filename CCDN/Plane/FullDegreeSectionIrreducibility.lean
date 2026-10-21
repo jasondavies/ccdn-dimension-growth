@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.FiniteFieldBadPlanes
-import CCDN.Plane.PlaneSectionBounds
+import CCDN.Plane.SectionBounds
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import CCDN.ForMathlib.MvPolynomial

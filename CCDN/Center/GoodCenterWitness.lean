@@ -8,10 +8,10 @@ module
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Center.CenterMinorProjection
-public import CCDN.Projection.ProjectionImageFractionField
+public import CCDN.Center.MinorProjection
+public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Center.CenterMinorMatrix
+import CCDN.Center.MinorMatrix
 import CCDN.Center.FixedCoordinateCenterRows
 import CCDN.Center.GeometricCenterRows
 /-! Constructed good centers for the literal maximal-minor projection.

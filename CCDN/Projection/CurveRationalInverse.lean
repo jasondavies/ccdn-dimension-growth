@@ -14,7 +14,7 @@ import Mathlib.Algebra.MvPolynomial.CommRing
 /-! Birational projection coordinates admit a rational inverse in the original
 coordinate ring. Its denominator cuts out all possible noninjective fibers.
 This module gives no bound on the degree of that denominator;
-`ProjectionExceptionalCount` converts a denominator of degree `D` into at most `d * D`
+`ExceptionalCount` converts a denominator of degree `D` into at most `d * D`
 exceptional points. -/
 
 @[expose] public section

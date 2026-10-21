@@ -8,7 +8,7 @@ module
 public import CCDN.Hilbert.FilteredIntersection
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.RingTheory.Algebraic.Defs
-public import CCDN.Plane.PlaneLinearDeformation
+public import CCDN.Plane.LinearDeformation
 import CCDN.Projection.PlaneRelationSpace
 import CCDN.Projection.CurveProjectionDeformation
 import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic

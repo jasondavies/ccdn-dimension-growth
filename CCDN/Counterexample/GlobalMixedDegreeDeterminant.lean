@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Counterexample.GridVandermondeCounterexample
+public import CCDN.Counterexample.GridVandermonde
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import Mathlib.Tactic.NormNum.RealSqrt
 import Mathlib.Tactic.NormNum.Parity

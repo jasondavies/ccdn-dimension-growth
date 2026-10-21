@@ -11,7 +11,7 @@ public import CCDN.Determinant.LocalizationAdicLayer
 public import CCDN.Determinant.HypersurfaceHilbert
 public import CCDN.ForMathlib.IdealPowerLayer
 import CCDN.Determinant.HypersurfaceTangentEquality
-import CCDN.Auxiliary.AffineTranslationCount
+import CCDN.AuxiliaryPolynomial.AffineTranslationCount
 
 /-!
 Exact local Hilbert functions at arbitrary rational points of an affine

@@ -11,8 +11,8 @@ public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import CCDN.Height.BoundedPrimitiveElement
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
-import CCDN.Hilbert.HilbertLinearCoordinates
-import CCDN.Projection.ProjectionFractionField
+import CCDN.Hilbert.LinearCoordinates
+import CCDN.Projection.PrimitiveCoordinateField
 import Mathlib.Algebra.CharP.IntermediateField
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 /-! Bounded primitive augmentation of any independent linear parameter

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.LiteralAffineBadPrimes
+public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
 public import CCDN.Algebra.PolynomialPredicates
 import Mathlib.Algebra.MvPolynomial.Division
 

@@ -11,7 +11,7 @@ public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Hilbert.LinearCoordinates
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Projection.HilbertProjectionDegree
 import CCDN.Projection.HomogeneousFiniteProjectionDegree

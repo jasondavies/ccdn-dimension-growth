@@ -8,7 +8,7 @@ module
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Hilbert.LinearCoordinates
 import Mathlib.RingTheory.Nullstellensatz
 
 /-! An integral polynomial projection has exactly its kernel's zero locus

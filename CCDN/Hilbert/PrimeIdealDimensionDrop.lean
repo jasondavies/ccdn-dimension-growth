@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.PolynomialComparison
 import CCDN.Hilbert.ProperSectionHilbert
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Hilbert.ProperHilbertDimension

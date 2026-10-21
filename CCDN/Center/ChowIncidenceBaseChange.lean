@@ -11,7 +11,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import Mathlib.RingTheory.Ideal.Maps
 import CCDN.Center.GenericLinearIndependence
-import CCDN.Hilbert.HilbertTranscendenceBasis
+import CCDN.Hilbert.TranscendenceBasis
 import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import CCDN.Projection.HilbertProjectionKernel
 import Mathlib.RingTheory.Polynomial.UniqueFactorization

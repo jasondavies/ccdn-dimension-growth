@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.FiniteFieldConstants
-public import CCDN.Auxiliary.AuxiliaryDegreeBound
+public import CCDN.AuxiliaryPolynomial.DegreeBound
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
 import CCDN.Determinant.HypersurfaceCountNormalization
 import CCDN.Hypersurface.ProjectiveHypersurfaceCount

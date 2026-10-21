@@ -13,8 +13,8 @@ public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Algebra.RowSpan
-import CCDN.Auxiliary.AuxiliaryPolynomial
-import CCDN.Auxiliary.HypersurfaceCoefficientDichotomy
+import CCDN.AuxiliaryPolynomial.CoefficientBound
+import CCDN.AuxiliaryPolynomial.HypersurfaceCoefficientDichotomy
 import CCDN.Determinant.AmbientProjectiveDeterminant
 import CCDN.Determinant.HomogeneousDeterminantComparison
 import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics

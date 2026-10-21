@@ -24,7 +24,7 @@ This module imports only the foundation directories (the counting functions of `
 zero loci and degree predicates of `Algebra/`, and the Hilbert-function degrees of `Hilbert/`),
 so each statement can be read without the proof infrastructure.
 
-* `PlaneCurveBound`: Theorem 3 for plane curves, proved in `CCDN.Plane.PlaneCount`;
+* `PlaneCurveBound`: Theorem 3 for plane curves, proved in `CCDN.Plane.CurveCount`;
 * `AffineCurveBound`: Theorem 3, proved in `CCDN.AffineCurveBound`;
 * `ProjectiveCurveBound`: Theorem 2, proved in `CCDN.ProjectiveCurveBound`;
 * `AffineHypersurfaceGrowth` and `RationalAffineHypersurfaceGrowth`: Theorem 4 with a given
@@ -52,7 +52,7 @@ noncomputable def curveBound (d : ℕ) (B : ℝ) : ℝ :=
 
 /-- The `n = 2` case of CCDN (2020), Theorem 3, expressed using rational defining
 polynomials. The proof (`planeCurveBound`, in
-`CCDN.Plane.PlaneCount`) includes denominator clearing and content removal.
+`CCDN.Plane.CurveCount`) includes denominator clearing and content removal.
 Irreducibility is over `ℚ`, not absolute irreducibility. The one constant is uniform in the
 polynomial, its degree, its coefficients, and the real radius. -/
 def PlaneCurveBound : Prop :=

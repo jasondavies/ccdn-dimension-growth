@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupNormPolynomial
+public import CCDN.ClassGroup.NormPolynomial
 import CCDN.ClassGroup.OddDegreeNormCurves
 import CCDN.Noether.ShearNormalization
 /-! Odd-degree norm curves keep their degree and irreducibility in every

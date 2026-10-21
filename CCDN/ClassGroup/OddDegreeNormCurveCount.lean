@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
-public import CCDN.ClassGroup.ClassGroupNormPolynomial
+public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
+public import CCDN.ClassGroup.NormPolynomial
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real

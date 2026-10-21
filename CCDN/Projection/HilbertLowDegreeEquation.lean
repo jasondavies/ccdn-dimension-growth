@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Hilbert.HilbertCoordinateIndependence
+import CCDN.Hilbert.CoordinateIndependence
 import CCDN.Projection.HilbertProjectionDegree
 /-! A proper positive-codimension prime ideal of positive Hilbert dimension
 contains a nonzero equation of degree at most its Hilbert multiplicity.

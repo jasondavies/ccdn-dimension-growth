@@ -8,8 +8,8 @@ module
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import CCDN.Hilbert.HilbertPolynomialComparison
-import CCDN.Hilbert.HilbertTranscendenceBasis
+import CCDN.Hilbert.PolynomialComparison
+import CCDN.Hilbert.TranscendenceBasis
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 /-! Integral linear projections preserve Hilbert dimension and
 do not increase its multiplicity. -/

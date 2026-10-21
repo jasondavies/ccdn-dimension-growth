@@ -24,7 +24,8 @@ DIRECTORIES = {
     "": "Main results, with their statements and one endpoint module per result",
     "Algebra": "Polynomial and commutative-algebra lemmas",
     "Analysis": "Real and prime-number estimates",
-    "Auxiliary": "Auxiliary polynomials, positioning and bad primes (Sections 3.1, 3.3, 3.4, 4.2)",
+    "AuxiliaryPolynomial": "Auxiliary polynomials, positioning and bad primes (Sections 3.1, 3.3, "
+                           "3.4, 4.2)",
     "Center": "Chow forms, good centres and Plücker equations (Section 5); entry point "
               "`BirationalComplementProjection`",
     "ClassGroup": "Two-torsion in class groups (Theorem 6)",

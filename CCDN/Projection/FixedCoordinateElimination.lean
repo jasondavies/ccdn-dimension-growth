@@ -8,7 +8,7 @@ module
 public import CCDN.Projection.ProjectiveClosureProjection
 public import CCDN.Projection.IntegerHilbertElimination
 public import CCDN.Algebra.IntegerLinearForms
-import CCDN.Auxiliary.HypersurfacePositioning
+import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 import CCDN.Projection.HomogenizationAtInfinity
 
 /-!

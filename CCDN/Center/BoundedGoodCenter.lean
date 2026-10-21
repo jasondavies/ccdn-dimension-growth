@@ -8,8 +8,8 @@ module
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Center.BirationalCenterLocus
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Center.CenterDetectorBounds
-import CCDN.Center.CenterDetectorExtension
+import CCDN.Center.DetectorBounds
+import CCDN.Center.DetectorExtension
 import CCDN.Center.GoodCenterWitness
 import CCDN.Center.ZeroColumnMinorSpecialization
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial

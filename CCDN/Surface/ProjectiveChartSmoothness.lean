@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.SurfaceGeometricCurveCover
+public import CCDN.Surface.GeometricCurveCover
 import Mathlib.RingTheory.MvPolynomial.EulerIdentity
 
 /-! The affine Jacobian criterion on x₀=1 is exactly the homogeneous

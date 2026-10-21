@@ -16,8 +16,8 @@ import CCDN.Center.HomogeneousNormalizationRank
 import CCDN.ForMathlib.FractionRing
 import CCDN.Center.RadialParameterFieldRank
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
-import CCDN.Hilbert.HilbertFullDimension
-import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Hilbert.FullDimension
+import CCDN.Hilbert.LinearCoordinates
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import CCDN.Projection.IntegralProjectionHilbert
 import Mathlib.RingTheory.AlgebraicIndependent.Basic

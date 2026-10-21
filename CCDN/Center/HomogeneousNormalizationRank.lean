@@ -9,8 +9,8 @@ public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Center.HomogeneousIntegralRelation
-import CCDN.Hilbert.HilbertLinearCoordinates
-import CCDN.Projection.ProjectionFractionField
+import CCDN.Hilbert.LinearCoordinates
+import CCDN.Projection.PrimitiveCoordinateField
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 import Mathlib.RingTheory.Polynomial.GaussLemma
 import CCDN.Projection.LinearParameterPrimitive

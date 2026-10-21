@@ -13,7 +13,7 @@ public import CCDN.Height.Box
 import CCDN.Height.PolynomialBoxHeight
 import CCDN.Noether.UniversalPlaneSpecialization
 import CCDN.Noether.UniversalPlaneWitness
-import CCDN.Plane.PlaneGridHeight
+import CCDN.Plane.GridHeight
 /-! Coefficient height of an integer plane section with bounded
 parameters, and the resulting bound on the universal bad-prime witness. -/
 

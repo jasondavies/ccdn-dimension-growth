@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ForMathlib.StandardMonomials
+public import CCDN.ForMathlib.StandardExponents
 public import Mathlib.FieldTheory.Galois.Basic
 import Mathlib.FieldTheory.Galois.Infinite
 /-! Galois-stable polynomial ideals descend to the fixed field. Standard

@@ -8,13 +8,13 @@ module
 public import CCDN.ClassGroup.SmallSubfieldIntegerCount
 public import CCDN.Statements
 public import CCDN.Plane.AffineNonzeroConstant
-public import CCDN.ClassGroup.ClassGroupNormPolynomial
+public import CCDN.ClassGroup.NormPolynomial
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.ClassGroup.NormCurveExceptionalReduction
 import CCDN.ClassGroup.OddDegreeClassGroupCounting
 import CCDN.ClassGroup.OddDegreeNormCurveBaseChange
 import CCDN.ClassGroup.SquareNormCurveIrreducibility
-import CCDN.Plane.PlaneCount
+import CCDN.Plane.CurveCount
 
 /-!
 Counting the bounded square-norm integers in the absence of

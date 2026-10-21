@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupNormPolynomial
+public import CCDN.ClassGroup.NormPolynomial
 import Mathlib.FieldTheory.RatFunc.Degree
 import Mathlib.RingTheory.Polynomial.IsIntegral
 

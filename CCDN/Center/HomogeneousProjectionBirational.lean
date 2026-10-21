@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Projection.ProjectionImageFractionField
+public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.HomogeneousProjectionRankBound
 import CCDN.Projection.HomogeneousFiniteProjectionDegree

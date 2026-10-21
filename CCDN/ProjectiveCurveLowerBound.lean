@@ -8,7 +8,7 @@ module
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Algebra.PolynomialPredicates
-import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 import CCDN.LowerBound.ProjectivePlaneLowerBound
 import CCDN.Plane.ProjectivePlaneBezout
 /-! CCDN Proposition 5 with its exact constant 1/5, for an absolutely

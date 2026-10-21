@@ -9,7 +9,7 @@ public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Algebra.CoordinatePowerGeneration
-import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.PolynomialComparison
 import CCDN.Projection.HomogeneousFilteredProjection
 import Mathlib.LinearAlgebra.FreeModule.PID
 /-! A homogeneous linear projection with a nonzero conductor preserves

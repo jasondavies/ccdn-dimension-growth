@@ -10,7 +10,7 @@ public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.DegreePreservingProjectionBox
-public import CCDN.Projection.ProjectionImageFractionField
+public import CCDN.Projection.ImageFractionField
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Hilbert.FilteredIntersection
@@ -18,7 +18,7 @@ public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import CCDN.Center.HomogeneousCurveHilbert
 import CCDN.Center.ProjectiveIncidencePermutation
-import CCDN.Hilbert.HilbertCoordinateIndependence
+import CCDN.Hilbert.CoordinateIndependence
 import CCDN.Projection.AffineProjectionCount
 import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Algebra.ProjectiveChartScalarExtension

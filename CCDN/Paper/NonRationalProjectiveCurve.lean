@@ -10,7 +10,7 @@ public import CCDN.Hypersurface.NonRationalProjectiveCount
 import CCDN.Hypersurface.LowDegreePointSeparation
 import CCDN.Hypersurface.ProjectiveCoefficientExtension
 import CCDN.Center.HomogeneousCurveHilbert
-import CCDN.Hilbert.HilbertCoefficientEquiv
+import CCDN.Hilbert.CoefficientEquiv
 import CCDN.Hilbert.HomogeneousPrimeComponents
 import CCDN.Hilbert.PrimeIdealDimensionDrop
 import CCDN.Hypersurface.GaloisComponentDegree

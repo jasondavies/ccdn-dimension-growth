@@ -7,7 +7,7 @@ module
 
 public import CCDN.Determinant.HypersurfaceLocalDivisor
 import all ArithmeticHeights.BombieriVaaler
-public import CCDN.Auxiliary.HypersurfaceBadPrimes
+public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimes
 public import CCDN.Analysis.PrimeCutoff
 import CCDN.Determinant.PrimeAggregation
 /-! Choosing the prime endpoint at the dimension root of the row count

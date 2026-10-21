@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Statements
-public import CCDN.Projection.ProjectionScaleAbsorption
+public import CCDN.Projection.ScaleAbsorption
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
 import CCDN.Algebra.ProjectivePermutation
 import CCDN.Plane.ProjectivePlaneLinearCount

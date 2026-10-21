@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ScalingPrime
+public import CCDN.AuxiliaryPolynomial.ScalingPrime
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.PrimitiveIntegerPolynomial

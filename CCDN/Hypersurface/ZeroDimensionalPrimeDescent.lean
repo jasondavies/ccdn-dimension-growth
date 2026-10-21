@@ -13,8 +13,8 @@ public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.FieldTheory.Galois.Basic
 import CCDN.Hilbert.AlgebraicHilbertDimension
-import CCDN.Hilbert.HilbertCoefficientEquiv
-import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.CoefficientEquiv
+import CCDN.Hilbert.PolynomialComparison
 import CCDN.Hilbert.ProperSectionHilbert
 import CCDN.Hypersurface.GaloisComponentDegree
 import CCDN.Hypersurface.GaloisComponentPoints

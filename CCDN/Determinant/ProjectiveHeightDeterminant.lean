@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousChart
-public import CCDN.Auxiliary.PlaneBadPrimes
+public import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.Box
 public import CCDN.Height.IntegerCoefficientHeight

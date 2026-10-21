@@ -13,7 +13,7 @@ import CCDN.Determinant.PrimeAggregation
 import CCDN.Determinant.ProjectiveMultiplicity
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Determinant.ProjectiveResidueCardinality
-import CCDN.Plane.PlaneCount
+import CCDN.Plane.CurveCount
 
 /-!
 Sharp prime-power and global prime-sum bounds for projective plane

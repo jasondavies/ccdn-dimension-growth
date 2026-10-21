@@ -7,7 +7,7 @@ module
 
 public import CCDN.Center.GenericLinearPowerBasis
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import CCDN.Projection.ProjectionFractionField
+import CCDN.Projection.PrimitiveCoordinateField
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 import CCDN.Height.BoundedPrimitiveElement
 

@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Algebraic.Defs
 import CCDN.Projection.CurveDerivativeReconstruction
 import CCDN.Determinant.PlaneSingularities
 import CCDN.Projection.PlaneProjectionDerivative
-import CCDN.Projection.ProjectionExceptionalCount
+import CCDN.Projection.ExceptionalCount
 /-! A degree-preserving linear plane projection of a prime affine curve in
 characteristic zero loses at most d(d-1) points from any finite source set.
 The proof constructs a common derivative denominator and all reconstruction

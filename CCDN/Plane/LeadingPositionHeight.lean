@@ -14,7 +14,7 @@ public import Mathlib.Basic.Real.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import CCDN.Height.Box
 import CCDN.Plane.HomogeneousLeadingCoefficient
-import CCDN.Plane.PlaneGridHeight
+import CCDN.Plane.GridHeight
 import CCDN.ForMathlib.Log
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy

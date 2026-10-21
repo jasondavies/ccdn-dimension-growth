@@ -8,7 +8,7 @@ module
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
-import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.PolynomialComparison
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Projection.HilbertProjectionKernel
 import CCDN.ForMathlib.MvPolynomial

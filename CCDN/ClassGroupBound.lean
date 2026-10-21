@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupTwoTorsion
-import CCDN.ClassGroup.ClassGroupBalancedGenerator
-import CCDN.ClassGroup.ClassGroupUniformBound
+public import CCDN.ClassGroup.TwoTorsion
+import CCDN.ClassGroup.BalancedGenerator
+import CCDN.ClassGroup.UniformBound
 import CCDN.ClassGroup.OddDegreeClassGroupBound
 /-! CCDN Theorem 6 for the two-torsion subgroup of the ideal class
 group. Constants are uniform over all number fields of the given degree.

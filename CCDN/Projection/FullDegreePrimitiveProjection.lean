@@ -11,7 +11,7 @@ public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import Mathlib.RingTheory.SimpleRing.Principal
 import CCDN.Height.BoundedPrimitiveElement
 import CCDN.Projection.PlaneProjectionKernel
-import CCDN.Projection.ProjectionFieldDegree
+import CCDN.Projection.FieldDegree
 import CCDN.Algebra.ParameterRecurrenceGrowth
 import CCDN.Hilbert.CurveFunctionField
 

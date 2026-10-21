@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AbsoluteAuxiliary
-public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
+public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.Height.ProjectiveZeroLocus
 import CCDN.Algebra.IntegerRationalIrreducibility
-import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
+import CCDN.AuxiliaryPolynomial.HypersurfaceAuxiliaryTheorem
 import CCDN.Plane.ProjectivePlaneBezout
 
 /-!

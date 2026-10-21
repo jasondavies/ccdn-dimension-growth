@@ -9,7 +9,7 @@ public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import CCDN.Surface.SurfaceDegreeOneCount
+import CCDN.Surface.DegreeOneCount
 import CCDN.Surface.TopFormSurfaceNonlinear
 /-! The corrected large-degree surface bound. The auxiliary section's
 nonlinear curves and its degree-one components together account

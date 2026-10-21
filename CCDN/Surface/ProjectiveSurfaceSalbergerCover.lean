@@ -8,12 +8,12 @@ module
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Projection.ProjectivePlaneProjection
-public import CCDN.Surface.SurfaceGeometricCurveCover
+public import CCDN.Surface.GeometricCurveCover
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.IdealScalarDescent
 import CCDN.Algebra.ProjectiveClosureDegree
 import CCDN.Algebra.PrimitiveNormalization
-import CCDN.Surface.SurfaceSalbergerCover
+import CCDN.Surface.SalbergerCover
 
 /-!
 Salberger's surface cover on the standard projective affine chart.

@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.PolynomialComparison
 import Mathlib.RingTheory.Polynomial.HilbertPoly
 import Mathlib.Tactic.Positivity
 /-! Polynomial parameters of degree at most q have function-field degree

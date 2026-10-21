@@ -15,7 +15,7 @@ import CCDN.Center.GeometricIdealPrimality
 import CCDN.Center.IntermediateFieldParameterTower
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 import CCDN.Center.AffineNormalizationRank
-import CCDN.Hilbert.HilbertScalarExtension
+import CCDN.Hilbert.ScalarExtension
 import Mathlib.Algebra.CharZero.Infinite
 
 /-!

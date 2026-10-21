@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupNormPolynomial
+public import CCDN.ClassGroup.NormPolynomial
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.ClassGroup.NormPolynomialSubfield
 import CCDN.Noether.ShearNormalization

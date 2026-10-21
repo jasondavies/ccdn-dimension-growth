@@ -9,8 +9,8 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 import CCDN.Algebra.BinomialSectionBound
-import CCDN.Hilbert.HilbertLinearCoordinates
-import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.LinearCoordinates
+import CCDN.Hilbert.PolynomialComparison
 import Mathlib.RingTheory.Polynomial.HilbertPoly
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.RingTheory.SimpleModule.Basic

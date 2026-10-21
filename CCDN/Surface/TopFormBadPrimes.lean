@@ -6,10 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.Height.PrimitiveIntegerPolynomial
-import CCDN.Auxiliary.PlaneAuxiliaryCount
-import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
+import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
+import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceBadPrimes
 import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Surface.TopFormIrreducibility
 /-! Bad reduction of an affine equation is contained in bad reduction of

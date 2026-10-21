@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
-import CCDN.Auxiliary.HypersurfaceHeightTransfer
+public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
+import CCDN.AuxiliaryPolynomial.HypersurfaceHeightTransfer
 /-! Uniform coefficient absorption and affine-box estimates for the
 auxiliary theorem with an irreducible leading homogeneous form. -/
 

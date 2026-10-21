@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.Interpolation
+public import CCDN.Algebra.MonomialEvaluationMatrix
 /-!
 # Vanishing transfers from independent rows to their span
 

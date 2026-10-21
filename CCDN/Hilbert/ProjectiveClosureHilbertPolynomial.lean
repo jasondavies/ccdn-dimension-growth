@@ -9,7 +9,7 @@ public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Algebra.ProjectiveClosureDegree
 import CCDN.ForMathlib.Polynomial
-import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.PolynomialComparison
 import CCDN.Hilbert.HomogeneousFilteredRank
 import Mathlib.Algebra.Order.Star.Rat
 /-! The projective closure raises filtered Hilbert dimension by one

@@ -6,12 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.CoprimeNewtonEdgeReduction
-public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import CCDN.Auxiliary.BadPrimeCharge
-import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.AuxiliaryPolynomial.BadPrimeCharge
+import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
 import CCDN.Plane.AffinePlaneBadPrimeCount
 import CCDN.Algebra.PrimitiveNormalization
 /-! CCDN Corollary 4.2.5: the coprime Newton edge gives a logarithm-free

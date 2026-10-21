@@ -11,8 +11,8 @@ public import CCDN.Height.PrimitiveIntegerPolynomial
 public import CCDN.Height.Box
 import CCDN.Plane.ScaledModelCoordinates
 import CCDN.Plane.ScaledModelPosition
-import CCDN.Auxiliary.PlaneAuxiliaryCount
-import CCDN.Auxiliary.PolynomialMapAuxiliary
+import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
+import CCDN.AuxiliaryPolynomial.PolynomialMapAuxiliary
 /-! A prime-scaled plane point bound with the arbitrary coefficient
 height eliminated. The sharp finite-field count and a suitable scaling prime
 remain explicit hypotheses. -/

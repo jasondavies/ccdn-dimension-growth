@@ -9,7 +9,7 @@ public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Height.IntegerCoefficientHeight
-import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
 /-! The global determinant bound in higher dimension, with its reduction
 hypotheses verified by the bad-prime set and its coefficient-height control. -/
 

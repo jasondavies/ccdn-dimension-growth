@@ -11,8 +11,8 @@ public import CCDN.Center.ChowLinearSpecialization
 public import CCDN.Height.ProjectiveBox
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.BoundedCenterProjectionAllRows
-import CCDN.Center.CenterMinorMatrix
-import CCDN.Center.CenterProjectionHeight
+import CCDN.Center.MinorMatrix
+import CCDN.Center.ProjectionHeight
 import CCDN.Center.HomogeneousProjectionNoBasePoint
 import CCDN.Projection.HomogeneousFiniteProjectionDegree
 import CCDN.Projection.IntegralProjectionHilbert

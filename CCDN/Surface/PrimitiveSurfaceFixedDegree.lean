@@ -10,11 +10,11 @@ public import CCDN.Height.PrimitiveIntegerPolynomial
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import CCDN.Auxiliary.PlaneAuxiliaryCount
-import CCDN.Surface.SurfaceCoefficientReduction
-import CCDN.Surface.SurfaceResidueLinearCount
-import CCDN.Surface.SurfaceRetainedCurveCount
-import CCDN.Surface.SurfaceSmallCurveCover
+import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
+import CCDN.Surface.CoefficientReduction
+import CCDN.Surface.ResidueLinearCount
+import CCDN.Surface.RetainedCurveCount
+import CCDN.Surface.SmallCurveCover
 import CCDN.Surface.TopFormBadPrimes
 import Mathlib.Algebra.Order.Star.Real
 /-! A coefficient-uniform linear bound for primitive affine surface

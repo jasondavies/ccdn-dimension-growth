@@ -8,10 +8,10 @@ module
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import CCDN.Auxiliary.HypersurfaceGoodDirection
-import CCDN.Auxiliary.HypersurfacePositioning
+import CCDN.AuxiliaryPolynomial.HypersurfaceGoodDirection
+import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 import CCDN.Hilbert.FilteredHilbertEquiv
-import CCDN.Hilbert.HilbertFullDimension
+import CCDN.Hilbert.FullDimension
 import CCDN.Hilbert.ProperHilbertDimension
 import CCDN.Projection.BoundedLinearElimination
 import CCDN.Projection.IntegralProjectionHilbert

@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.CenterSubspaceQuotient
-import CCDN.Center.CenterMinorMatrix
+public import CCDN.Center.SubspaceQuotient
+import CCDN.Center.MinorMatrix
 /-! The birational-center condition depends only on the row span, so it
 defines a locus of center subspaces. -/
 

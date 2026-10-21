@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
 public import CCDN.ClassGroup.NumberFieldLatticeBox
-import CCDN.ClassGroup.ClassGroupBalancedGenerator
-import CCDN.ClassGroup.ClassGroupDiscriminantNumerics
+import CCDN.ClassGroup.BalancedGenerator
+import CCDN.ClassGroup.DiscriminantNumerics
 import CCDN.ClassGroup.NumberFieldShortBasis
 import CCDN.ClassGroup.OddDegreeClassGroupCounting
 /-! The odd-degree branch of CCDN Theorem 6 for the ideal-class

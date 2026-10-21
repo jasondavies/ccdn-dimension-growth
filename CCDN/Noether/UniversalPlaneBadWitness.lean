@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.CharZeroOrGT
-import CCDN.Auxiliary.ConstantLeadingBadReduction
+import CCDN.AuxiliaryPolynomial.ConstantLeadingBadReduction
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.UniversalPlaneMinor

@@ -5,12 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionImageFractionField
+public import CCDN.Projection.ImageFractionField
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.HomogeneousNormalizationRank
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
-import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Hilbert.LinearCoordinates
 import CCDN.Projection.HomogeneousProjectionEquation
 import CCDN.Projection.IntegralProjectionHilbert
 import CCDN.Projection.LinearNormalizationInfinite

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionImageFractionField
+public import CCDN.Projection.ImageFractionField
 public import CCDN.Center.ChowLinearSpecialization
 public import Mathlib.Tactic.Continuity
 import Mathlib.LinearAlgebra.Dual.Lemmas

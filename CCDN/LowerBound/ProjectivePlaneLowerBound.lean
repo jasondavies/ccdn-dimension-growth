@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.ProjectiveZeroLocus
-import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 import CCDN.LowerBound.GridLowerBoundNumerics
 import CCDN.LowerBound.GridProjectiveLowerBound
 import CCDN.Plane.ProjectivePlaneBezout

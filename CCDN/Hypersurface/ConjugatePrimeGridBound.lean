@@ -9,7 +9,7 @@ public import CCDN.Height.Box
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Hypersurface.LowDegreePointSeparation
-import CCDN.Hilbert.HilbertCoefficientEquiv
+import CCDN.Hilbert.CoefficientEquiv
 import CCDN.Hilbert.PrimeIdealDimensionDrop
 import CCDN.Hypersurface.PrincipalSectionGridBound
 /-! The sharp grid bound for prime varieties moved by a coefficient

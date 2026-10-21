@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.CenterMinorMatrix
+public import CCDN.Center.MinorMatrix
 import CCDN.ForMathlib.Matrix
 /-! Coefficient extension commutes with the literal maximal-minor projection
 and with restriction of a Chow equation. -/

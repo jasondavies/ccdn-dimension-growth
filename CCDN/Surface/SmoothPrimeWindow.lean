@@ -9,7 +9,7 @@ public import CCDN.Surface.CongruencePrimeWindow
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import CCDN.Height.IntegerCoefficientHeight
-import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Determinant.PlaneSingularities
 import CCDN.Height.PolynomialBoxHeight
 /-! Nonsingular integer points have many smooth reduction primes

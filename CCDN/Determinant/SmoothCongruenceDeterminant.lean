@@ -7,7 +7,7 @@ module
 
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Height.CountingHypotheses
-import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
 import CCDN.Determinant.HypersurfaceMultiplicityEstimate
 import CCDN.Determinant.SmoothProjectiveCongruence
 import all ArithmeticHeights.BombieriVaaler

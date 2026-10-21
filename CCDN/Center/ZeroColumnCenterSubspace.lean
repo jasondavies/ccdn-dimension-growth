@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.CenterPluckerZariski
+public import CCDN.Center.PluckerZariski
 public import CCDN.Center.BirationalCenterSubspace
 public import CCDN.Algebra.ProjectiveClosureIdeal
 /-! Centers with prescribed zero columns, as matrices and as subspaces with

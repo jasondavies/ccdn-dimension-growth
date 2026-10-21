@@ -10,7 +10,7 @@ public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.RingTheory.MvPolynomial
-import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Hilbert.LinearCoordinates
 import Mathlib.LinearAlgebra.Matrix.Rank
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
 

@@ -5,14 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.LiteralAffineBadPrimes
+public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
 import CCDN.Algebra.IntegerRationalIrreducibility
-import CCDN.Auxiliary.LiteralAffineAuxiliaryTheorem
-import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.AuxiliaryPolynomial.LiteralAffineAuxiliaryTheorem
+import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Plane.Bezout
 
 /-!
