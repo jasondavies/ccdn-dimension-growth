@@ -20,7 +20,7 @@ filtered Hilbert polynomial, and the nongeometric curve count. -/
 namespace CCDN
 noncomputable section
 
-lemma affineCurve_filteredHilbertPolynomial {n : ℕ}
+private lemma affineCurve_filteredHilbertPolynomial {n : ℕ}
     (I : Ideal (CoordinatePolynomial n)) (d : ℕ) (hd : HasAffineCurveDegree I d) :
     ∃ c : ℤ, filteredHilbertPolynomial I = Polynomial.C (d : ℚ) * Polynomial.X +
       Polynomial.C (c : ℚ) := by
@@ -32,7 +32,7 @@ lemma affineCurve_filteredHilbertPolynomial {n : ℕ}
     exact_mod_cast hc M hM
   simpa using he.symm
 
-lemma affineCurve_filteredHilbertPolynomial_degree {n : ℕ}
+private lemma affineCurve_filteredHilbertPolynomial_degree {n : ℕ}
     (I : Ideal (CoordinatePolynomial n)) (d : ℕ) (hd : 0 < d)
     (hdegree : HasAffineCurveDegree I d) : HasAffineDimensionDegree I 1 d := by
   obtain ⟨c, hc⟩ := affineCurve_filteredHilbertPolynomial I d hdegree

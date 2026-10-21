@@ -29,7 +29,7 @@ lemma projectiveCurveConstant_pos (n : ℕ) : 0 < projectiveCurveConstant n := b
   have := projectivePlaneAbsoluteConstant_pos
   positivity
 
-theorem projectiveCurveEstimate_scale (n : ℕ) {d : ℕ} (hd : 0 < d)
+private theorem projectiveCurveEstimate_scale (n : ℕ) {d : ℕ} (hd : 0 < d)
     {B : ℝ} (hB : 1 ≤ B) :
     projectiveCurveEstimate d (projectionBoxFactor n d * B) ≤
       Real.exp (2 * projectionLogConstant n) * projectiveCurveEstimate d B := by
