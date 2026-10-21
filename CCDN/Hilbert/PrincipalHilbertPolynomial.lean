@@ -72,30 +72,28 @@ Hilbert dimension n and multiplicity equal to its total degree. -/
 theorem principal_filteredHilbertPolynomial_degree_leadingCoeff
     {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f ≠ 0) (hd : 0 < f.totalDegree) :
-    (filteredHilbertPolynomial (Ideal.span {f})).natDegree = n ∧
-      (filteredHilbertPolynomial (Ideal.span {f})).leadingCoeff =
-        (f.totalDegree : ℚ) / n.factorial := by
-  rw [principal_filteredHilbertPolynomial f hf]
+    HasAffineDimensionDegree (Ideal.span {f}) n f.totalDegree := by
+  have hP := principal_filteredHilbertPolynomial f hf
   have hcoeff := principal_preHilbert_sum_top_coeff n f.totalDegree
   have hn : (∑ i ∈ range f.totalDegree, Polynomial.preHilbertPoly ℚ n i).coeff n ≠ 0 := by
     rw [hcoeff]
     positivity
   have hdegree := le_antisymm (principal_preHilbert_sum_degree_le n f.totalDegree)
     (Polynomial.le_natDegree_of_ne_zero hn)
-  exact ⟨hdegree, by rw [Polynomial.leadingCoeff, hdegree, hcoeff]⟩
+  exact ⟨by rw [hP, hdegree], by rw [hP, Polynomial.leadingCoeff, hdegree, hcoeff]⟩
 
 theorem principal_filteredHilbertPolynomial_natDegree
     {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f ≠ 0) (hd : 0 < f.totalDegree) :
     (filteredHilbertPolynomial (Ideal.span {f})).natDegree = n :=
-  (principal_filteredHilbertPolynomial_degree_leadingCoeff f hf hd).1
+  (principal_filteredHilbertPolynomial_degree_leadingCoeff f hf hd).natDegree_eq
 
 theorem principal_filteredHilbertPolynomial_leadingCoeff
     {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f ≠ 0) (hd : 0 < f.totalDegree) :
     (filteredHilbertPolynomial (Ideal.span {f})).leadingCoeff =
       (f.totalDegree : ℚ) / n.factorial :=
-  (principal_filteredHilbertPolynomial_degree_leadingCoeff f hf hd).2
+  (principal_filteredHilbertPolynomial_degree_leadingCoeff f hf hd).leadingCoeff_eq
 
 end
 end CCDN

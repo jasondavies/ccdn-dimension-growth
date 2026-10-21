@@ -30,12 +30,12 @@ theorem exists_low_degree_point_separator_of_pos_dimension
     (z : Fin n → K) (hz : ¬ ∀ f ∈ I, eval z f = 0) :
     ∃ g : MvPolynomial (Fin n) K, g ∈ I ∧ g.totalDegree ≤ d ∧ eval z g ≠ 0 := by
   classical
-  have ⟨hdim, hdegree⟩ := hdimdeg
   have hmn : m + 1 ≤ n := by
     obtain ⟨_, _, hd, _⟩ := filteredHilbertPolynomial_positive_multiplicity I
       (Ideal.IsPrime.ne_top ‹I.IsPrime›)
-    simpa only [hdim, Fintype.card_fin] using hd
-  obtain ⟨l, hl, hint, hinj⟩ := exists_linear_integral_normalization_infinite_of_le m n hmn I hdim
+    simpa only [hdimdeg.natDegree_eq, Fintype.card_fin] using hd
+  obtain ⟨l, hl, hint, hinj⟩ :=
+    exists_linear_integral_normalization_infinite_of_le m n hmn I hdimdeg.natDegree_eq
   let V := {x : Fin n → K | x ∈ idealZeroLocus I ∧
     ∀ i, eval x (l i) = eval z (l i)}
   have hV : V.Finite := linear_normalization_fiber_finite I l

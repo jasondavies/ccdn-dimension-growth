@@ -138,5 +138,14 @@ theorem filteredHilbertPolynomial_positive_multiplicity {K σ : Type*} [Field K]
     exact hN n hn
   exact ⟨d, hd, he.symm ▸ hdeg, he.symm ▸ hlc⟩
 
+/-- A proper ideal whose filtered Hilbert polynomial has degree `m` has dimension `m` and some
+positive degree. -/
+theorem exists_hasAffineDimensionDegree {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
+    (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) {m : ℕ}
+    (hdim : (filteredHilbertPolynomial I).natDegree = m) :
+    ∃ d : ℕ, 0 < d ∧ HasAffineDimensionDegree I m d := by
+  obtain ⟨d, hd, _, hlc⟩ := filteredHilbertPolynomial_positive_multiplicity I hI
+  exact ⟨d, hd, hdim, hdim ▸ hlc⟩
+
 end
 end CCDN

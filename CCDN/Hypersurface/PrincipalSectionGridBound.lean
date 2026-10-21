@@ -63,18 +63,13 @@ theorem principal_section_degree_budget
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (f : MvPolynomial (Fin n) K) (hf : f ∉ I) (hfdeg : 0 < f.totalDegree)
     (hsection : I ⊔ Ideal.span {f} ≠ ⊤) :
-    ∃ e : ℕ, 0 < e ∧ e ≤ d * f.totalDegree ∧
-      (filteredHilbertPolynomial (I ⊔ Ideal.span {f})).natDegree = m ∧
-      (filteredHilbertPolynomial (I ⊔ Ideal.span {f})).leadingCoeff =
-        (e : ℚ) / m.factorial := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
-  have hdimJ := principal_section_hilbert_dimension I hdim f hf hfdeg hsection
-  obtain ⟨e, he, _, hlc⟩ := filteredHilbertPolynomial_positive_multiplicity
-    (I ⊔ Ideal.span {f}) hsection
-  rw [hdimJ] at hlc
-  refine ⟨e, he, ?_, hdimJ, hlc⟩
-  have hh := (proper_section_hilbert_dimension_leadingCoeff I m hdim f hf hfdeg hsection).2 hdimJ
-  rw [hlc, hdegree, Nat.factorial_succ, Nat.cast_mul] at hh
+    ∃ e : ℕ, 0 < e ∧ e ≤ d * f.totalDegree ∧ HasAffineDimensionDegree (I ⊔ Ideal.span {f}) m e := by
+  have hdimJ := principal_section_hilbert_dimension I hdimdeg.natDegree_eq f hf hfdeg hsection
+  obtain ⟨e, he, hJe⟩ := exists_hasAffineDimensionDegree (I ⊔ Ideal.span {f}) hsection hdimJ
+  refine ⟨e, he, ?_, hJe⟩
+  have hh := (proper_section_hilbert_dimension_leadingCoeff I m hdimdeg.natDegree_eq f hf hfdeg
+    hsection).2 hdimJ
+  rw [hJe.leadingCoeff_eq, hdimdeg.leadingCoeff_eq, Nat.factorial_succ, Nat.cast_mul] at hh
   have hfac : (0 : ℚ) < m.factorial := by positivity
   have heq : (d : ℚ) / ((m + 1) * m.factorial) * (m + 1) * f.totalDegree =
       ((d * f.totalDegree : ℕ) : ℚ) / m.factorial := by
@@ -123,9 +118,9 @@ theorem principal_section_grid_card_le
     apply hJ
     dsimp [J]
     rw [Ideal.span_singleton_eq_top.mpr hu, sup_top_eq]
-  obtain ⟨e, _, hed, hedim, helc⟩ :=
+  obtain ⟨e, _, hed, hJe⟩ :=
     principal_section_degree_budget I d hdimdeg f hf hfdeg hJ
-  have hh := pure_ideal_grid_card_le n J m e hedim helc
+  have hh := pure_ideal_grid_card_le n J m e hJe.natDegree_eq hJe.leadingCoeff_eq
     (principal_section_minimalPrimeComponents_pure I hdimdeg.natDegree_eq f hf) S s hzJ hgrid
   exact hh.trans (Nat.mul_le_mul_right _ hed)
 

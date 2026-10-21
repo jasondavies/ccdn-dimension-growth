@@ -90,7 +90,6 @@ theorem chow_univariate_degree_eq_multiplicity
     (G : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K)
     (hG : Irreducible G) (hmem : G ∈ chowIncidenceIdeal (m + 1) I) :
     (chowAsUnivariate K m n G).natDegree = d := by
-  have ⟨hm, hdegree⟩ := hdimdeg
   classical
   let T := ChowFirstRowCoordinateRing m I
   let N := ChowNestedCoordinateRing m I
@@ -113,7 +112,7 @@ theorem chow_univariate_degree_eq_multiplicity
   have hd : 0 < d := by
     obtain ⟨e,he,_,heq⟩ := filteredHilbertPolynomial_positive_multiplicity I
       (Ideal.IsPrime.ne_top ‹I.IsPrime›)
-    rw [hm,hdegree] at heq
+    rw [hdimdeg.natDegree_eq, hdimdeg.leadingCoeff_eq] at heq
     have hfac : (m.factorial : ℚ) ≠ 0 := Nat.cast_ne_zero.mpr (Nat.factorial_ne_zero m)
     have hde : (d : ℚ) = e := (div_left_inj' hfac).mp heq
     have hde' : d = e := Nat.cast_injective hde
@@ -121,7 +120,7 @@ theorem chow_univariate_degree_eq_multiplicity
   have hfinite : Module.Finite (chowNormalizationParameterField (F := A) m I) A :=
     Module.finite_of_finrank_pos (by rwa [hrank])
   exact (chow_univariate_degree_eq_normalization_rank (A := A) (F := F)
-    I hfinite hm G hG hmem).trans hrank
+    I hfinite hdimdeg.natDegree_eq G hG hmem).trans hrank
 
 theorem chow_generator_row_degree_eq_multiplicity
     {K : Type*} [Field K] [CharZero K] {m n : ℕ}

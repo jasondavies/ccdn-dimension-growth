@@ -113,15 +113,15 @@ theorem nonabsolute_projective_curve_count_le_degree_sq
   obtain ⟨P, hP⟩ := Ideal.nonempty_minimalPrimes
     (scalar_extension_ideal_ne_top (K := K) I (Ideal.IsPrime.ne_top ‹I.IsPrime›))
   have : P.IsPrime := hP.isPrime
-  obtain ⟨e, _, hed, hedim, hedegree⟩ :=
+  obtain ⟨e, _, hed, hPe⟩ :=
     algebraic_component_degree_le ℚ K I d ⟨hdim, by simpa using hdegree⟩ P hP
   have hPhom := minimal_prime_ideal_homogeneous _
     (homogeneous_ideal_scalar_extension I hI) P hP
   have hsubset : projectiveIdealZeroLocus I ⊆ rationalProjectiveIdealZeroLocusOver P := by
     intro x hx v hv he
     exact galois_base_point_on_every_component ℚ K I P hP v (hx v hv he)
-  have hh := non_rational_projective_curve_count_le_degree_sq P hPhom e hedim
-    (by simpa using hedegree) (galois_component_not_defined_over_base ℚ K I hred P hP) B
+  have hh := non_rational_projective_curve_count_le_degree_sq P hPhom e hPe.natDegree_eq
+    (by simpa using hPe.leadingCoeff_eq) (galois_component_not_defined_over_base ℚ K I hred P hP) B
   exact (projectiveCount_mono hsubset le_rfl).trans (hh.trans (Nat.pow_le_pow_left hed 2))
 
 end

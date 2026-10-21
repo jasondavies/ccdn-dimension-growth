@@ -38,21 +38,19 @@ theorem algebraic_component_degree_le
     (d : ℕ) (hdimdeg : HasAffineDimensionDegree I m d)
     (P : Ideal (MvPolynomial (Fin n) K))
     (hP : P ∈ (I.map (map (algebraMap k K))).minimalPrimes) :
-    ∃ e : ℕ, 0 < e ∧ e ≤ d ∧
-      (filteredHilbertPolynomial P).natDegree = m ∧
-      (filteredHilbertPolynomial P).leadingCoeff = (e : ℚ) / m.factorial := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
+    ∃ e : ℕ, 0 < e ∧ e ≤ d ∧ HasAffineDimensionDegree P m e := by
   have : P.IsPrime := hP.isPrime
-  have hPdim := (algebraic_polynomial_minimalPrime_dimension k K (Fin n) I P hP).trans hdim
-  obtain ⟨e, he, _, helc⟩ := filteredHilbertPolynomial_positive_multiplicity P hP.isPrime.ne_top
-  rw [hPdim] at helc
-  refine ⟨e, he, ?_, hPdim, helc⟩
+  have hPdim := (algebraic_polynomial_minimalPrime_dimension k K (Fin n) I P hP).trans
+    hdimdeg.natDegree_eq
+  obtain ⟨e, he, hPe⟩ := exists_hasAffineDimensionDegree P hP.isPrime.ne_top hPdim
+  refine ⟨e, he, ?_, hPe⟩
   have hle := filteredHilbertPolynomial_leadingCoeff_le P
     (I.map (map (algebraMap k K))) hP.isPrime.ne_top
     (scalar_extension_ideal_ne_top I (Ideal.IsPrime.ne_top ‹I.IsPrime›))
-    (by simpa only [filteredHilbertPolynomial_scalar_extension, hdim] using hPdim)
+    (by simpa only [filteredHilbertPolynomial_scalar_extension, hdimdeg.natDegree_eq] using hPdim)
     (filteredCoordinateSpace_finrank_antitone_ideal _ _ hP.le)
-  rw [filteredHilbertPolynomial_scalar_extension, helc, hdegree] at hle
+  rw [filteredHilbertPolynomial_scalar_extension, hPe.leadingCoeff_eq,
+    hdimdeg.leadingCoeff_eq] at hle
   have hfac : (0 : ℚ) < m.factorial := by positivity
   exact_mod_cast (div_le_div_iff_of_pos_right hfac).mp hle
 
