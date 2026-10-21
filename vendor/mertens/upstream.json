@@ -8,11 +8,13 @@
   "upstream_sha256": "6f71a221604463ba1479872012cfb12b885a9e6a8f8abb87a08b4c12c4dca60b",
   "adapted_sha256": "5b54af19c4d94c5e2b90cdabee1b1c45cacb24ff3aac732086ef8a696357d3a6",
   "changes": [
-    "Extract only first Mertens theorem and its prerequisites.",
-    "Remove blueprint metadata, Euler-Maclaurin identity, and unused integral estimate for the prime-power error constant.",
-    "Use explicit bounded constant log(4)+6+E1.",
-    "Change namespace, module visibility, and imports to match Lean/Mathlib 4.35.0.",
-    "Rename the local namespace from AffineCurveCounting.Mertens to CCDN.Mertens; proof text is unchanged.",
-    "Vendor as the separate `Mertens` library in vendor/mertens/Mertens.lean; proof text and declaration names are unchanged."
-  ]
+    "Extract only the first Mertens theorem and its prerequisites.",
+    "Remove blueprint metadata, the Euler-Maclaurin identity, and the unused integral estimate for the prime-power error constant.",
+    "Use the explicit bounded constant log(4)+6+E1.",
+    "Add the lemmas E₁Λ.bounded', sum_mangoldt_div_eq_log', E₁Λ.le_E₁p_add_E₁ and prime_sum_bounded_error for the explicit constant; retained upstream declarations keep their names.",
+    "Update module visibility and imports for Lean/Mathlib 4.35.0.",
+    "Put the declarations, which upstream are in the namespace Mertens, in the namespace CCDN.Mertens. The file was first adapted into AffineCurveCounting.Mertens (this project's earlier namespace) and later renamed to CCDN.Mertens; that rename changed only the namespace.",
+    "Vendor as the separate Lake library `Mertens` (module `Mertens`, file vendor/mertens/Mertens.lean); its declarations live in the namespace CCDN.Mertens."
+  ],
+  "namespace": "CCDN.Mertens"
 }
