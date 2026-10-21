@@ -69,7 +69,7 @@ theorem exists_fixed_coordinate_center_plucker_height
       (centerSubspacePlucker W.val).mulHeight ≤
         (centerMinorBound (n + 1 - m - 1) m d : ℕ) := by
   obtain ⟨M,hM,_,hM0,hli,hgood⟩ :=
-    exists_bounded_integer_fixed_coordinate_center I hmn d hdim hdegree
+    exists_bounded_integer_fixed_coordinate_center I hmn d ⟨hdim, hdegree⟩
   let x : FixedCoordinateCenterMatrix ℚ (n + 1 - m - 1) (n + 1) :=
     ⟨fun q => (M q.1 q.2 : ℚ),
       (by intro i j hj; simp only [Finset.mem_singleton.mp hj, hM0, Int.cast_zero]), hli⟩

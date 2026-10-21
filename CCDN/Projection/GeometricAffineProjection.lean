@@ -51,20 +51,19 @@ theorem exists_geometric_affine_projection_positive_dimension
         ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
           d * count (zeroLocus f)
             ((affineProjectionHeightConstant n : ℝ) * (d : ℝ) ^ (2 * n) * B) := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   have hmn : m + 1 ≤ n := by
     obtain ⟨_, _, hdimle, _⟩ := filteredHilbertPolynomial_positive_multiplicity I
       (Ideal.IsPrime.ne_top ‹I.IsPrime›)
-    simpa only [hdim, Fintype.card_fin] using hdimle
+    simpa only [hdimdeg.natDegree_eq, Fintype.card_fin] using hdimle
   obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hmn
   let n := m + 1 + k
   obtain ⟨b, hb, hnorm, hinj, hint, hfield, hcone, f, hf, hfpos, _, hker⟩ :=
-    exists_bounded_affine_birational_projection m k I d ⟨hdim, hdegree⟩
+    exists_bounded_affine_birational_projection m k I d hdimdeg
   have hfieldcone := closure_projection_generates_functionField I
     (fun i => integerLinearForm (b i)) (fun i => linearForm_isHomogeneous _) hfield
   have hfdeg := affine_projection_equation_degree_eq_of_closure I
     (fun i => integerLinearForm (b i)) (fun i => linearForm_isHomogeneous _)
-    hcone hfieldcone d ⟨hdim, hdegree⟩ f hf.ne_zero hfpos hker
+    hcone hfieldcone d hdimdeg f hf.ne_zero hfpos hker
   refine ⟨b, hb, hint, hfield, f, hf,
     projection_equation_irreducible_map I _ f hf.ne_zero hker, hfdeg, hker, ?_⟩
   have hrel : aeval (fun i => integerLinearForm (b i)) f ∈ I := by
@@ -77,7 +76,7 @@ theorem exists_geometric_affine_projection_positive_dimension
       s.card ≤ d := by
     have hh := bounded_degree_normalization_fiber_card_le I 1 (by omega)
       (fun i : Fin (m + 1) => integerLinearForm (b i.succ))
-      (fun i => linearForm_totalDegree_le _) hinj hnorm d ⟨hdim, hdegree⟩
+      (fun i => linearForm_totalDegree_le _) hinj hnorm d hdimdeg
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
     simpa only [one_pow, Nat.mul_one] using hh
   let H : ℝ := birationalProjectionHeightConstant n * (d : ℝ) ^ (2 * n)

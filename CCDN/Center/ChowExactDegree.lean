@@ -86,11 +86,11 @@ theorem chow_univariate_degree_eq_multiplicity
     {K : Type*} [Field K] [CharZero K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hm : (filteredHilbertPolynomial I).natDegree = m)
-    (d : ℕ) (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
+    (d : ℕ) (hdimdeg : HasAffineDimensionDegree I m d)
     (G : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K)
     (hG : Irreducible G) (hmem : G ∈ chowIncidenceIdeal (m + 1) I) :
     (chowAsUnivariate K m n G).natDegree = d := by
+  have ⟨hm, hdegree⟩ := hdimdeg
   classical
   let T := ChowFirstRowCoordinateRing m I
   let N := ChowNestedCoordinateRing m I
@@ -109,7 +109,7 @@ theorem chow_univariate_degree_eq_multiplicity
   let : Algebra A F := aAF
   let : IsScalarTower T A F := FractionRing.isScalarTower_liftAlgebra T F
   let : IsScalarTower K A F := IsScalarTower.to₁₃₄ K T A F
-  have hrank := chow_incidence_parameter_field_finrank (F := A) I d hm hdegree
+  have hrank := chow_incidence_parameter_field_finrank (F := A) I d hdimdeg
   have hd : 0 < d := by
     obtain ⟨e,he,_,heq⟩ := filteredHilbertPolynomial_positive_multiplicity I
       (Ideal.IsPrime.ne_top ‹I.IsPrime›)
@@ -127,8 +127,7 @@ theorem chow_generator_row_degree_eq_multiplicity
     {K : Type*} [Field K] [CharZero K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hm : (filteredHilbertPolynomial I).natDegree = m)
-    (d : ℕ) (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
+    (d : ℕ) (hdimdeg : HasAffineDimensionDegree I m d)
     (G : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K)
     (hG : Irreducible G) (hgen : chowIncidenceIdeal (m + 1) I = Ideal.span {G})
     (δ : Fin (m + 1) → ℕ)
@@ -137,9 +136,9 @@ theorem chow_generator_row_degree_eq_multiplicity
   have hmem : G ∈ chowIncidenceIdeal (m + 1) I := by
     rw [hgen]
     exact Ideal.subset_span (Set.mem_singleton G)
-  have hu := chow_univariate_degree_eq_multiplicity I hm d hdegree G hG hmem
+  have hu := chow_univariate_degree_eq_multiplicity I d hdimdeg G hG hmem
   have hl := chow_generator_univariate_degree_of_geometric_prime
-    (L := AlgebraicClosure K) I hm G hgen (δ (Fin.last m)) (hδ _)
+    (L := AlgebraicClosure K) I hdimdeg.natDegree_eq G hgen (δ (Fin.last m)) (hδ _)
   intro i
   exact (chow_generator_row_degrees_equal I G hG.ne_zero hgen δ hδ i (Fin.last m)).trans
     (hl.symm.trans hu)

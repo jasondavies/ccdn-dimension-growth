@@ -60,9 +60,7 @@ theorem projectiveChartIdeal_hilbertPolynomial_parameters
     (hI : IsHomogeneousIdeal I)
     (hX : X 0 ∉ I) (m d : ℕ)
     (hdimdeg : HasProjectiveDimensionDegree I m d) :
-    (filteredHilbertPolynomial (projectiveChartIdeal I)).natDegree = m ∧
-      (filteredHilbertPolynomial (projectiveChartIdeal I)).leadingCoeff =
-        (d : ℚ) / m.factorial := by
+    HasAffineDimensionDegree (projectiveChartIdeal I) m d := by
   obtain ⟨hdim, hdegree⟩ := hdimdeg
   let Q := filteredHilbertPolynomial (projectiveChartIdeal I)
   have he := projectiveClosureIdeal_hilbertPolynomial_difference (projectiveChartIdeal I)

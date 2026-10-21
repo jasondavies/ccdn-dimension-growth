@@ -114,7 +114,7 @@ theorem nonabsolute_projective_curve_count_le_degree_sq
     (scalar_extension_ideal_ne_top (K := K) I (Ideal.IsPrime.ne_top ‹I.IsPrime›))
   have : P.IsPrime := hP.isPrime
   obtain ⟨e, _, hed, hedim, hedegree⟩ :=
-    algebraic_component_degree_le ℚ K I d hdim (by simpa using hdegree) P hP
+    algebraic_component_degree_le ℚ K I d ⟨hdim, by simpa using hdegree⟩ P hP
   have hPhom := minimal_prime_ideal_homogeneous _
     (homogeneous_ideal_scalar_extension I hI) P hP
   have hsubset : projectiveIdealZeroLocus I ⊆ rationalProjectiveIdealZeroLocusOver P := by

@@ -79,13 +79,28 @@ def filteredHilbertPolynomial {K σ : Type*} [Field K] [Fintype σ] [LinearOrder
     (I : Ideal (MvPolynomial σ K)) : Polynomial ℚ :=
   (filteredCoordinateSpace_eventually_polynomial I).choose
 
+/-- The filtered Hilbert polynomial of `I` has degree `m` and leading coefficient `d / m!`:
+the affine variety cut out by `I` has dimension `m` and degree `d`. -/
+structure HasAffineDimensionDegree {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
+    (I : Ideal (MvPolynomial σ K)) (m d : ℕ) : Prop where
+  natDegree_eq : (filteredHilbertPolynomial I).natDegree = m
+  leadingCoeff_eq : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial
+
 /-- The cone over `I` has filtered Hilbert polynomial of degree `m + 1` and leading coefficient
 `d / (m + 1)!`. For a homogeneous ideal `I` this says that the projective variety cut out by `I`
-has dimension `m` and degree `d`. -/
-structure HasProjectiveDimensionDegree {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
-    (I : Ideal (MvPolynomial σ K)) (m d : ℕ) : Prop where
-  natDegree_eq : (filteredHilbertPolynomial I).natDegree = m + 1
-  leadingCoeff_eq : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial
+has dimension `m` and degree `d`; it is the affine dimension and degree of the cone. -/
+abbrev HasProjectiveDimensionDegree {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
+    (I : Ideal (MvPolynomial σ K)) (m d : ℕ) : Prop :=
+  HasAffineDimensionDegree I (m + 1) d
+
+/-- Dimension and degree only depend on the filtered Hilbert polynomial. -/
+theorem HasAffineDimensionDegree.of_filteredHilbertPolynomial_eq
+    {K L σ τ : Type*} [Field K] [Fintype σ] [LinearOrder σ] [Field L] [Fintype τ]
+    [LinearOrder τ] {I : Ideal (MvPolynomial σ K)} {J : Ideal (MvPolynomial τ L)} {m d : ℕ}
+    (h : HasAffineDimensionDegree I m d)
+    (hJI : filteredHilbertPolynomial J = filteredHilbertPolynomial I) :
+    HasAffineDimensionDegree J m d :=
+  ⟨hJI ▸ h.natDegree_eq, hJI ▸ h.leadingCoeff_eq⟩
 
 theorem filteredHilbertPolynomial_spec {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) :

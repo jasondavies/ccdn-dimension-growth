@@ -42,7 +42,7 @@ theorem conjugate_prime_grid_card_le
     (hgrid : ∀ x ∈ s, ∀ i, x i ∈ S) :
     s.card ≤ d ^ 2 * S.card ^ m := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
+  have ⟨hdim, hdegree⟩ := hdimdeg
   let J := I.map (mapEquiv (Fin n) e)
   have : J.IsPrime := Ideal.map_isPrime_of_equiv _
   have hpoly : filteredHilbertPolynomial J = filteredHilbertPolynomial I :=
@@ -55,7 +55,7 @@ theorem conjugate_prime_grid_card_le
     obtain ⟨g, hg, rfl⟩ := (Ideal.mem_map_iff_of_surjective
       (mapEquiv (Fin n) e) (mapEquiv (Fin n) e).surjective).mp hfJ
     rw [eval_coefficientEquiv_of_fixed e x (hfixed x hx), hzero x hx g hg, map_zero]
-  have hh := principal_section_grid_card_le I d ⟨hdim, hdegree⟩ f hfI S s
+  have hh := principal_section_grid_card_le I d hdimdeg f hfI S s
     hzero hsectionzero hgrid
   exact hh.trans (Nat.mul_le_mul_right _ (by simpa only [pow_two] using Nat.mul_le_mul_left d hfd))
 

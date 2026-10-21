@@ -143,17 +143,16 @@ theorem exists_birational_center_plucker_equations
       (m = 0 → d = 1 ∧ ∀ g ∈ Φ, g.totalDegree ≤ 1) ∧
       birationalCenterSubspaceLocus (J.map (map (algebraMap K L))) =
         (centerPluckerFamilyZeroLocus (algebraMap K L) Φ)ᶜ := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨Φ,hhom,hdeg,hdet⟩ :=
-    exists_extended_birational_center_detector (L := L) J hJ d ⟨hdim, hdegree⟩ hr
+    exists_extended_birational_center_detector (L := L) J hJ d hdimdeg hr
   refine ⟨Φ,hhom,hdeg,?_,?_,birationalCenterSubspaceLocus_eq_complement_of_extension_detector
     (algebraMap K L) (J.map (map (algebraMap K L))) Φ hhom hdet⟩
   · intro hm g hg
     exact (hdeg g hg).trans_lt (center_detector_degree_lt_square hm
-      (hilbert_multiplicity_pos_of_prime J hdegree))
+      (hilbert_multiplicity_pos_of_prime J hdimdeg.leadingCoeff_eq))
   · intro hm
     have hd : d = 1 :=
-      (geometric_projective_multiplicity_boundary J hJ ⟨hdim, hdegree⟩).resolve_left (by omega)
+      (geometric_projective_multiplicity_boundary J hJ hdimdeg).resolve_left (by omega)
     refine ⟨hd,fun g hg => ?_⟩
     simpa only [hm,hd,Nat.zero_add,mul_one,Nat.reduceSub] using hdeg g hg
 

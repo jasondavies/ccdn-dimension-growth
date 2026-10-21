@@ -96,7 +96,6 @@ theorem principal_section_grid_card_le
     (hgrid : ∀ x ∈ s, ∀ i, x i ∈ S) :
     s.card ≤ d * f.totalDegree * S.card ^ m := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let J := I ⊔ Ideal.span {f}
   have hzJ (x) (hx : x ∈ s) : ∀ g ∈ J, eval x g = 0 := by
     change J ≤ RingHom.ker (eval x)
@@ -125,9 +124,9 @@ theorem principal_section_grid_card_le
     dsimp [J]
     rw [Ideal.span_singleton_eq_top.mpr hu, sup_top_eq]
   obtain ⟨e, _, hed, hedim, helc⟩ :=
-    principal_section_degree_budget I d ⟨hdim, hdegree⟩ f hf hfdeg hJ
+    principal_section_degree_budget I d hdimdeg f hf hfdeg hJ
   have hh := pure_ideal_grid_card_le n J m e hedim helc
-    (principal_section_minimalPrimeComponents_pure I hdim f hf) S s hzJ hgrid
+    (principal_section_minimalPrimeComponents_pure I hdimdeg.natDegree_eq f hf) S s hzJ hgrid
   exact hh.trans (Nat.mul_le_mul_right _ hed)
 
 end

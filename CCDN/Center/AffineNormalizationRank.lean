@@ -41,8 +41,7 @@ theorem affine_normalization_parameters_finite
     (a : Fin m → MvPolynomial (Fin n) K)
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    (d : ℕ) (hdimdeg : HasAffineDimensionDegree I m d) :
     Module.Finite (IntermediateField.adjoin K
       (Set.range (fun i => algebraMap (MvPolynomial (Fin n) K ⧸ I) F
         ((Ideal.Quotient.mk I) (a i))))) F := by
@@ -53,7 +52,7 @@ theorem affine_normalization_parameters_finite
   have hdimA := integral_projection_hilbert_dimension_eq I (projectionCoordinateMap I a) hint
   have hkerA : RingHom.ker (projectionCoordinateMap I a) = ⊥ :=
     ideal_eq_bot_of_full_hilbert_dimension _ (RingHom.ker_ne_top _) (by
-      simpa only [Fintype.card_fin,hdim] using hdimA)
+      simpa only [Fintype.card_fin,hdimdeg.natDegree_eq] using hdimA)
   have hinjA : Function.Injective (projectionCoordinateMap I a) :=
     (RingHom.injective_iff_ker_eq_bot _).mpr hkerA
   have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) :=
@@ -63,8 +62,7 @@ theorem affine_normalization_parameters_finite
   let u : Fin m → R := fun i => ⟨v i,IntermediateField.subset_adjoin K _ ⟨i,rfl⟩⟩
   have hiu : AlgebraicIndependent K u := AlgebraicIndependent.of_comp R.val hiv
   obtain ⟨hfinite,_⟩ := hilbert_functionField_finite_rank_le (R := R) (F := F) I d
-    (by simpa only [Fintype.card_fin] using hdim)
-    (by simpa only [Fintype.card_fin] using hdegree) a (fun i => (ha i).totalDegree_le)
+    (by simpa only [Fintype.card_fin] using hdimdeg) a (fun i => (ha i).totalDegree_le)
     u hiu (fun _ => rfl)
   exact hfinite
 
@@ -74,12 +72,11 @@ theorem closure_normalization_parameters_injective
     (a : Fin m → MvPolynomial (Fin n) K)
     (hint : (projectionCoordinateMap (projectiveClosureIdeal I)
       (closureProjectionCoordinates a)).IsIntegral)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    (d : ℕ) (hdimdeg : HasAffineDimensionDegree I m d) :
     Function.Injective (projectionCoordinateMap (projectiveClosureIdeal I)
       (closureProjectionCoordinates a)) := by
   let J := projectiveClosureIdeal I
-  obtain ⟨hdimJ,_⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdim hdegree
+  have hdimJ := (projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdimdeg).natDegree_eq
   have hdimB := integral_projection_hilbert_dimension_eq J
     (projectionCoordinateMap J (closureProjectionCoordinates a)) hint
   have hkerB : RingHom.ker (projectionCoordinateMap J (closureProjectionCoordinates a)) = ⊥ :=
@@ -99,8 +96,7 @@ theorem affine_normalization_functionField_finrank
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap (projectiveClosureIdeal I)
       (closureProjectionCoordinates a)).IsIntegral)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    (d : ℕ) (hdimdeg : HasAffineDimensionDegree I m d) :
     Module.finrank (IntermediateField.adjoin K
       (Set.range (fun i => algebraMap (MvPolynomial (Fin n) K ⧸ I) F
         ((Ideal.Quotient.mk I) (a i))))) F = d := by
@@ -111,7 +107,7 @@ theorem affine_normalization_functionField_finrank
   let v : Fin m → F := fun i => algebraMap A F ((Ideal.Quotient.mk I) (a i))
   let R := IntermediateField.adjoin K (Set.range v)
   let : Module.Finite R F := affine_normalization_parameters_finite I a ha
-    (affine_projection_integral_of_closure_integral I a hint) d hdim hdegree
+    (affine_projection_integral_of_closure_integral I a hint) d hdimdeg
   let P := MvPolynomial Unit A
   let E := FractionRing P
   let β : F →ₐ[K] E := fractionPolynomialCoefficientEmbedding
@@ -132,11 +128,11 @@ theorem affine_normalization_functionField_finrank
   let : Algebra B E := θ.toRingHom.toAlgebra
   let : IsScalarTower K B E := IsScalarTower.of_algHom θ
   let : IsFractionRing B E := closure_polynomial_field_isFractionRing (F := E) I
-  obtain ⟨hdimJ,hdegreeJ⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdim hdegree
-  have hinjB := closure_normalization_parameters_injective I a hint d hdim hdegree
+  have hinjB := closure_normalization_parameters_injective I a hint d hdimdeg
   have hcone := homogeneous_normalization_functionField_finrank (F := E) J
     (projectiveClosureIdeal_homogeneous I) (closureProjectionCoordinates a)
-    (closureProjectionCoordinates_homogeneous a ha) hinjB hint d ⟨hdimJ, hdegreeJ⟩
+    (closureProjectionCoordinates_homogeneous a ha) hinjB hint d
+    (projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdimdeg)
   let t := algebraMap (MvPolynomial Unit F) E (X ())
   have ht : t = algebraMap P E (X ()) := by
     change ρ (X ()) = _

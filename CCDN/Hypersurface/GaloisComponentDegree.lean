@@ -35,13 +35,13 @@ theorem scalar_extension_ideal_ne_top
 theorem algebraic_component_degree_le
     (k K : Type*) [Field k] [Field K] [Algebra k K] [Algebra.IsAlgebraic k K]
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) k)) [I.IsPrime]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
+    (d : ℕ) (hdimdeg : HasAffineDimensionDegree I m d)
     (P : Ideal (MvPolynomial (Fin n) K))
     (hP : P ∈ (I.map (map (algebraMap k K))).minimalPrimes) :
     ∃ e : ℕ, 0 < e ∧ e ≤ d ∧
       (filteredHilbertPolynomial P).natDegree = m ∧
       (filteredHilbertPolynomial P).leadingCoeff = (e : ℚ) / m.factorial := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   have : P.IsPrime := hP.isPrime
   have hPdim := (algebraic_polynomial_minimalPrime_dimension k K (Fin n) I P hP).trans hdim
   obtain ⟨e, he, _, helc⟩ := filteredHilbertPolynomial_positive_multiplicity P hP.isPrime.ne_top

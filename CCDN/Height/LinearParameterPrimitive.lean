@@ -38,7 +38,6 @@ theorem exists_bounded_linear_parameter_primitive
         (Set.range (fun i : Fin (m + 2) =>
           algebraMap (MvPolynomial (Fin n) K ⧸ I) F
             ((Ideal.Quotient.mk I) (Fin.cases (momentCoordinate K n k) l i)))) = ⊤ := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let A := MvPolynomial (Fin n) K ⧸ I
   let φ := IsScalarTower.toAlgHom K A F
   let u : Fin (m + 1) → F := fun i => φ ((Ideal.Quotient.mk I) (l i))
@@ -50,8 +49,7 @@ theorem exists_bounded_linear_parameter_primitive
   have hiF : AlgebraicIndependent K u := hiA.map' (IsFractionRing.injective A F)
   have hiR : AlgebraicIndependent K uR := AlgebraicIndependent.of_comp R.val hiF
   obtain ⟨hfinite, hrank⟩ := hilbert_functionField_finite_rank_le (R := R) (F := F) I d
-    (by simpa only [Fintype.card_fin] using hdim)
-    (by simpa only [Fintype.card_fin] using hdegree) l hl uR hiR (fun _ => rfl)
+    (by simpa only [Fintype.card_fin] using hdimdeg) l hl uR hiR (fun _ => rfl)
   let : Module.Finite R F := hfinite
   obtain ⟨k, hk, hprim⟩ := exists_bounded_curve_primitive_element (R := R) (F := F) I
   refine ⟨k, hk.trans (Nat.mul_le_mul_left n (Nat.pow_le_pow_left hrank 2)), ?_⟩

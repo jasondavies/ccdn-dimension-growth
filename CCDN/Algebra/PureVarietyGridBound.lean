@@ -55,7 +55,7 @@ theorem pure_ideal_grid_card_le
       simp only [map_one, one_ne_zero] at hh
     simp [hs]
   obtain ⟨δ, hδ, hbudget⟩ :=
-    exists_minimalPrimeComponents_multiplicity_budget I hI m d hdim hdegree hpure
+    exists_minimalPrimeComponents_multiplicity_budget I hI m d ⟨hdim, hdegree⟩ hpure
   let t (P : minimalPrimeComponents I) := s.filter (fun x => ∀ f ∈ P.val, eval x f = 0)
   have ht (P : minimalPrimeComponents I) : (t P).card ≤ δ P * S.card ^ m := by
     have : P.val.IsPrime := minimalPrimeComponents_isPrime P.property
@@ -78,8 +78,7 @@ theorem pure_ideal_grid_card_le
 /-- The integer interval form of the pure-dimensional rational variety bound. -/
 theorem pure_variety_count_le_integer_interval
     {n : ℕ} (I : Ideal (CoordinatePolynomial n)) (m d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
+    (hdimdeg : HasAffineDimensionDegree I m d)
     (hpure : ∀ P : minimalPrimeComponents I,
       (filteredHilbertPolynomial P.val).natDegree = m) (B : ℝ) :
     count (idealZeroLocus I) B ≤ d * ((2 * ⌊B⌋ + 1).toNat) ^ m := by
@@ -94,7 +93,8 @@ theorem pure_variety_count_le_integer_interval
     intro x y h
     funext i
     exact Int.cast_injective (congrFun h i)
-  have hh := pure_ideal_grid_card_le n I m d hdim hdegree hpure T (S.image rationalPoint)
+  have hh := pure_ideal_grid_card_le n I m d hdimdeg.natDegree_eq hdimdeg.leadingCoeff_eq hpure T
+    (S.image rationalPoint)
     (by
       intro x hx
       obtain ⟨a, ha, rfl⟩ := Finset.mem_image.mp hx
@@ -128,7 +128,7 @@ theorem pure_variety_count_le_degree_mul_box_side
     linarith [Int.floor_le B]
   calc
     _ ≤ (d : ℝ) * ((2 * ⌊B⌋ + 1).toNat : ℝ) ^ m := by
-      exact_mod_cast pure_variety_count_le_integer_interval I m d hdim hdegree hpure B
+      exact_mod_cast pure_variety_count_le_integer_interval I m d ⟨hdim, hdegree⟩ hpure B
     _ ≤ _ := mul_le_mul_of_nonneg_left
       (pow_le_pow_left₀ (Nat.cast_nonneg _) hside m) (Nat.cast_nonneg _)
 

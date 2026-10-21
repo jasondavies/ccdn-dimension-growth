@@ -56,7 +56,7 @@ theorem exists_finite_coordinate_parameter_field
     exact huF
   have hdim : (filteredHilbertPolynomial I).natDegree = Fintype.card U := by
     simpa only [Nat.card_eq_fintype_card] using hU.symm
-  exact hilbert_functionField_finite_rank_le I d hdim (by simpa only [← hdim] using hdegree)
+  exact hilbert_functionField_finite_rank_le I d ⟨hdim, by simpa only [← hdim] using hdegree⟩
     (fun i : U => X i.val) (fun _ => by simp) u hu (fun _ => rfl)
 
 end

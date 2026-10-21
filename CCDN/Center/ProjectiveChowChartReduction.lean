@@ -74,22 +74,16 @@ theorem projective_chow_chart_reduction
     (hzero : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J) :
     ∃ (I : Ideal (MvPolynomial (Fin (n + 1)) K))
       (G : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K),
-      I.IsPrime ∧ (filteredHilbertPolynomial I).natDegree = m ∧
-      (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial ∧
-      Irreducible G ∧ chowIncidenceIdeal (m + 1) I = Ideal.span {G} ∧
+      I.IsPrime ∧ HasAffineDimensionDegree I m d ∧ Irreducible G ∧ chowIncidenceIdeal (m + 1) I = Ideal.span {G} ∧
       (∀ i, G.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
       G.totalDegree = F.totalDegree := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
-  obtain ⟨e, hJ', hX, hp⟩ := exists_projectivePermutedIdeal_chart J hJ (by omega)
+  obtain ⟨e, hJ', hX, hp⟩ :=
+    exists_projectivePermutedIdeal_chart J hJ (by simp [hdimdeg.natDegree_eq])
   let J' := projectivePermutedIdeal J e
   have : J'.IsPrime := projectivePermutedIdeal_isPrime J e
-  have hm' : (filteredHilbertPolynomial J').natDegree = m + 1 :=
-    (congrArg Polynomial.natDegree hp).trans hdim
-  have hd' : (filteredHilbertPolynomial J').leadingCoeff = (d : ℚ) / (m + 1).factorial :=
-    (congrArg Polynomial.leadingCoeff hp).trans hdegree
-  obtain ⟨hmI,hdI⟩ :=
-    projectiveChartIdeal_hilbertPolynomial_parameters J' hJ' hX m d ⟨hm', hd'⟩
+  have hI := projectiveChartIdeal_hilbertPolynomial_parameters J' hJ' hX m d
+    (hdimdeg.of_filteredHilbertPolynomial_eq hp)
   let ρ := chowColumnPermutation (r := m + 1) e
   let G := rename ρ.symm F
   have hG : Irreducible G :=
@@ -102,7 +96,7 @@ theorem projective_chow_chart_reduction
       exact congrArg U (ρ.symm_apply_apply q)
     rw [he] at hh
     exact hh.symm
-  refine ⟨projectiveChartIdeal J',G,inferInstance,hmI,hdI,hG,
+  refine ⟨projectiveChartIdeal J',G,inferInstance,hI,hG,
     chowIncidenceIdeal_chart_eq_span_of_projective_equation J' hJ' hX G hG hzG,?_,?_⟩
   · intro i
     apply weighted_homogeneous_rename (chowRowWeight i) (chowRowWeight i) ρ.symm _ F (δ i) (hδ i)

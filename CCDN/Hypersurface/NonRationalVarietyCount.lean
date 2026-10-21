@@ -54,12 +54,11 @@ theorem nonabsolute_variety_count_le_box
     {B : ℝ} (hB : 0 ≤ B) :
     (count (idealZeroLocus I) B : ℝ) ≤
       (d : ℝ) ^ 2 * (2 * B + 1) ^ m := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨P, hP⟩ := Ideal.nonempty_minimalPrimes
     (scalar_extension_ideal_ne_top (K := K) I (Ideal.IsPrime.ne_top ‹I.IsPrime›))
   have : P.IsPrime := hP.isPrime
   obtain ⟨e, _, hed, hedim, hedegree⟩ :=
-    algebraic_component_degree_le ℚ K I d hdim hdegree P hP
+    algebraic_component_degree_le ℚ K I d hdimdeg P hP
   have hsubset : idealZeroLocus I ⊆ rationalIdealZeroLocusOver P := by
     intro x hx
     exact galois_base_point_on_every_component ℚ K I P hP x hx

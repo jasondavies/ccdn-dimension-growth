@@ -34,8 +34,8 @@ theorem exists_fin_integer_closure_elimination_step {n m : ℕ}
         (e : ℚ) / (m + 1).factorial ∧
       (projectionCoordinateMap (projectiveClosureIdeal I)
         (closureProjectionCoordinates a)).IsIntegral := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
-  obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d ⟨hdim, hdegree⟩
+  have ⟨hdim, hdegree⟩ := hdimdeg
+  obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d hdimdeg
     (by simpa only [Fintype.card_fin] using Nat.add_lt_add_right hcodim 1)
   let F := renameEquiv ℚ (finSuccEquiv n) f
   have hF : F ≠ 0 := by

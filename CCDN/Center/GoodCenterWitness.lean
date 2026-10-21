@@ -54,8 +54,7 @@ theorem exists_fixed_coordinate_birational_minor_center
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [Infinite L]
     {m n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hmn : m + 1 ≤ n) (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    (hdimdeg : HasAffineDimensionDegree I m d) :
     ∃ A : Matrix (Fin (n - m - 1)) (Fin (n + 1)) K,
       LinearIndependent K A.row ∧ (∀ i, A i 0 = 0) ∧
       (∀ p ∈ projectiveIdealZeroLocus ((projectiveClosureIdeal I).map (map (algebraMap K L))),
@@ -66,7 +65,7 @@ theorem exists_fixed_coordinate_birational_minor_center
         (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I))
         (projectiveClosureIdeal I) (centerMinorProjectionForm A) = ⊤ := by
   obtain ⟨B, A, _, hA, hA0, hker, hdisjoint, hint, hfield⟩ :=
-    exists_fixed_coordinate_center_row_witness (L := L) I hmn d hdim hdegree
+    exists_fixed_coordinate_center_row_witness (L := L) I hmn d hdimdeg
   have hr : n - m - 1 + 2 ≤ n + 1 := by omega
   refine ⟨A, hA, hA0, hdisjoint,
     centerMinorProjectionForm_isIntegral_of_ker _ A hA hr B hker.le hint, ?_⟩
