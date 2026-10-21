@@ -84,6 +84,8 @@ theorem nonabsolute_affine_auxiliary {k K : Type*}
     · rw [hgz x hgzero, zero_mul]
     · rw [hhz x hhzero, mul_zero]
 
+/-- A finite union of affine curves in three-space, given by height-two primes `P` of degree
+`d P`, has at most `(∑ P, d P) * (2 * B + 1)` integral points of height at most `B`. -/
 theorem finite_curve_union_count_le_box_side
     (S : Finset (Ideal (CoordinatePolynomial 3)))
     (d : Ideal (CoordinatePolynomial 3) → ℕ)

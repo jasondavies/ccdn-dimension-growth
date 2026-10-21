@@ -79,8 +79,9 @@ theorem surface_prime_curve_degree_sum_le
     _ ≤ _ := hsum
 
 open Classical in
-/-- Proper intersections of any such curve family with a third polynomial
-have a uniform product-of-three-degrees point bound at every radius. -/
+/-- For curves `P ∈ S` on the irreducible surface `f = 0` whose ideals contain `g` (with `f`
+not dividing `g`), the integral points of height at most `B` on `h = 0` lying on those curves
+whose ideals do not contain `h` number at most `deg f * deg g * deg h`. -/
 theorem surface_curve_crossing_count_le
     (f g h : CoordinatePolynomial 3) (hf : Irreducible f) (hfg : ¬ f ∣ g)
     (S : Finset (Ideal (CoordinatePolynomial 3)))

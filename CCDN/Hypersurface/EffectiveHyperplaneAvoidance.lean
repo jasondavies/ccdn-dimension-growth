@@ -47,9 +47,12 @@ private lemma scaledHyperplaneRestriction_not_absolutely_irreducible {K σ : Typ
         (algebraMap K (AlgebraicClosure K)).injective.ne (pow_ne_zero d hA))).map C
   exact fun hi => hbad ((irreducible_isUnit_mul hu).mp hi)
 
-/-- Corrected CCDN Lemma 4.3.7 for degree at least two, in explicit
-hyperplane coordinates. The constructed form even satisfies the sharper
-degree d(d²−1)+1. A₀=0 is covered without a chart hypothesis. -/
+/-- A corrected form of CCDN Lemma 4.3.7 for degree `d ≥ 2`, in explicit hyperplane coordinates:
+for an absolutely irreducible integer form `f` of degree `d`, there is a nonzero integer form `G`
+in the hyperplane coefficients, homogeneous of degree `d * (d ^ 2 - 1) + 1` and of total degree at
+most `(4 + n) * d * (d ^ 2 - 1)`, that vanishes at every coefficient vector `A` over any field,
+either with `A₀ = 0` or for which the restriction of `f` to the hyperplane `A` is not absolutely
+irreducible. -/
 theorem exists_effective_hyperplane_avoidance {n : ℕ}
     (f : MvPolynomial (Option (Option (Fin (2 + n)))) ℤ)
     (d : ℕ) (hd : 2 ≤ d) (hf : f.IsHomogeneous d)

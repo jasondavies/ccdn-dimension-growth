@@ -16,10 +16,16 @@ surface. All constants are independent of coefficients and box radius. -/
 namespace CCDN
 noncomputable section
 
+/-- A constant, depending on the degree `d` and the logarithmic height constant `K`, bounding
+the height charge of the smooth-congruence determinant estimate for a surface of degree `d`
+whose coefficient height `H` satisfies `log H ≤ K (log B + 1)`. -/
 def surfaceCongruenceChargeConstant (d : ℕ) (K : ℝ) : ℝ :=
   Real.log (2 + 27 * (d : ℝ) ^ 4 * hypersurfaceHeightConstant 4 *
     (1 + K / (d : ℝ) ^ 2)) + 2 * mertensError + 1
 
+/-- The constant `8 log d + 2 surfaceCongruenceChargeConstant d K + E + 6d + 22`, with `E` the
+determinant error in dimension one, controlling the numerical gap between the upper and lower
+bounds for surface congruence determinants. -/
 def surfaceCongruenceGapConstant (d : ℕ) (K : ℝ) : ℝ :=
   8 * Real.log d + 2 * surfaceCongruenceChargeConstant d K +
     hypersurfaceDeterminantError 1 + 6 * d + 22
@@ -135,9 +141,13 @@ private theorem surface_congruence_gap_of_log_rank {d s : ℕ}
   change _ < A * _ - _
   nlinarith
 
+/-- The constant `d + 2 (exp (G / 2) + 1) + 1`, with `G` the gap constant
+`surfaceCongruenceGapConstant d K`, which scales the degree of the surface congruence
+auxiliaries. -/
 def surfaceCongruenceDegreeConstant (d : ℕ) (K : ℝ) : ℝ :=
   d + 2 * (Real.exp (surfaceCongruenceGapConstant d K / 2) + 1) + 1
 
+/-- The auxiliary degree constant `surfaceCongruenceDegreeConstant d K` is positive. -/
 theorem surfaceCongruenceDegreeConstant_pos (d : ℕ) (K : ℝ) :
     0 < surfaceCongruenceDegreeConstant d K := by
   unfold surfaceCongruenceDegreeConstant

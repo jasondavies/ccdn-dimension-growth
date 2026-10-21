@@ -21,6 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Evaluating the moment coordinate with parameter `k` at `z` gives `∑ j, k ^ j * z j`. -/
 lemma momentCoordinate_eval {K : Type*} [CommRing K] {n : ℕ}
     (k : ℕ) (z : Fin n → K) :
     eval z (momentCoordinate K n k) = ∑ j : Fin n, (k : K) ^ j.val * z j := by
@@ -33,12 +34,17 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The integer projection of `ℤⁿ` to `ℤ²` given by the two moment coordinates with parameters `k₀`
+and `k₁`. -/
 def degreeProjection (n k₀ k₁ : ℕ) (z : IntPoint n) : IntPoint 2 :=
   ![eval z (momentCoordinate ℤ n k₀), eval z (momentCoordinate ℤ n k₁)]
 
+/-- The box scaling factor `(n + 1) * ((n + 1) * (d + 1)) ^ (2 * n)` for the moment projection in
+`n` variables and degree `d`. -/
 def projectionBoxFactor (n d : ℕ) : ℝ :=
   ((n : ℝ) + 1) * ((((n : ℝ) + 1) * ((d : ℝ) + 1)) ^ 2) ^ n
 
+/-- The box scaling factor of the moment projection is at least one. -/
 lemma projectionBoxFactor_one_le (n d : ℕ) : 1 ≤ projectionBoxFactor n d := by
   unfold projectionBoxFactor
   have hn : (1 : ℝ) ≤ n + 1 := by linarith [Nat.cast_nonneg (α := ℝ) n]
@@ -67,6 +73,8 @@ private lemma momentCoordinate_height_of_le {n k : ℕ} {M B : ℝ}
       exact mul_le_mul hp (hz j) (abs_nonneg _) (by positivity)
     _ = _ := by simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, nsmul_eq_mul]; ring
 
+/-- For parameters `k₀ ≤ n ^ 2 * d` and `k₁ ≤ n * d ^ 2`, the moment projection maps the integer box
+of radius `B` into the integer box of radius `projectionBoxFactor n d * B`. -/
 lemma degreeProjection_box {n d k₀ k₁ : ℕ} (hk₀ : k₀ ≤ n ^ 2 * d)
     (hk₁ : k₁ ≤ n * d ^ 2) {B : ℝ} (hB : 0 ≤ B)
     {z : IntPoint n} (hz : z ∈ integerBox n B) :
@@ -106,11 +114,15 @@ lemma degreeProjection_box {n d k₀ k₁ : ℕ} (hk₀ : k₀ ≤ n ^ 2 * d)
   · exact (momentCoordinate_height_of_le hM hk₀M z hb).trans hc
   · exact (momentCoordinate_height_of_le hM hk₁M z hb).trans hc
 
+/-- Evaluating the integer moment coordinate at an integer point and casting to `ℚ` agrees with
+evaluating the rational moment coordinate at the corresponding rational point. -/
 lemma rationalPoint_moment_eval {n : ℕ} (k : ℕ) (z : IntPoint n) :
     (eval z (momentCoordinate ℤ n k) : ℚ) =
       eval (rationalPoint z) (momentCoordinate ℚ n k) := by
   simp [momentCoordinate_eval, rationalPoint]
 
+/-- The rational point of the integer moment projection of `z` is the pair of rational moment
+coordinates evaluated at `z`. -/
 lemma rationalPoint_degreeProjection {n k₀ k₁ : ℕ} (z : IntPoint n) :
     rationalPoint (degreeProjection n k₀ k₁ z) =
       ![eval (rationalPoint z) (momentCoordinate ℚ n k₀),

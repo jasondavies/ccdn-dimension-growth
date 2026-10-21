@@ -35,6 +35,10 @@ private lemma closureProjectionCoordinates_comp {K : Type*} [Field K] {l m n : �
   · simp [closureProjectionCoordinates]
   · exact aeval_closureProjectionCoordinates_rename b (a j)
 
+/-- Integrality of projective closure projections is stable under composition: if the closure
+projection of `I` by homogeneous linear forms `b` is integral, and the closure projection of the
+kernel of `b` by `a` is integral, then the closure projection of `I` by the composite forms
+`aeval b (a j)` is integral. -/
 theorem closure_projection_integral_comp
     {K : Type*} [Field K] {l m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))

@@ -15,12 +15,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The semilinear inclusion of `σ → k` into `σ → K` induced by a field extension `k → K`. -/
 def coefficientExtensionVector (k K σ : Type*) [Field k] [Field K] [Algebra k K] :
     (σ → k) →ₛₗ[algebraMap k K] (σ → K) where
   toFun v := algebraMap k K ∘ v
   map_add' v w := by funext i; simp
   map_smul' a v := by funext i; simp
 
+/-- The inclusion of `σ → k` into `σ → K` induced by a field extension is injective. -/
 lemma coefficientExtensionVector_injective
     (k K σ : Type*) [Field k] [Field K] [Algebra k K] :
     Function.Injective (coefficientExtensionVector k K σ) := by
@@ -28,12 +30,15 @@ lemma coefficientExtensionVector_injective
   funext i
   exact (algebraMap k K).injective (congrFun h i)
 
+/-- The map from the projective space of `σ → k` to the projective space of `σ → K` induced by a
+field extension `k → K`. -/
 def projectiveCoefficientExtension
     (k K σ : Type*) [Field k] [Field K] [Algebra k K] :
     Projectivization k (σ → k) → Projectivization K (σ → K) :=
   Projectivization.map (coefficientExtensionVector k K σ)
     (coefficientExtensionVector_injective k K σ)
 
+/-- The map of projective spaces induced by a field extension is injective. -/
 theorem projectiveCoefficientExtension_injective
     (k K σ : Type*) [Field k] [Field K] [Algebra k K] :
     Function.Injective (projectiveCoefficientExtension k K σ) := by
@@ -62,6 +67,8 @@ theorem projectiveCoefficientExtension_injective
       rw [map_mul, hc]
       exact congrFun ha i
 
+/-- The image over `K` of a rational projective point on the variety of a homogeneous ideal `I`
+over an extension `K` of `ℚ` lies on the projective variety of `I` over `K`. -/
 theorem projectiveCoefficientExtension_mem_ideal
     {K : Type*} [Field K] [Algebra ℚ K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))

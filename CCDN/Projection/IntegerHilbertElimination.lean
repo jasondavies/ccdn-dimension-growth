@@ -23,10 +23,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The linear forms `X (some i) - (b (some i) / b none) * X none`, projecting away the coordinate
+`X none` along the direction `b`. -/
 def eliminationLinearCoordinates {σ : Type*} (b : Option σ → ℚ) :
     σ → MvPolynomial (Option σ) ℚ :=
   fun i => X (some i) - C (b (some i) / b none) * X none
 
+/-- For a direction `b` with `b none ≠ 0`, the elimination map of the associated linear coordinate
+change is the projection by the elimination linear forms of `b`. -/
 lemma coordinateEliminationMap_eq_projection {σ : Type*}
     (I : Ideal (MvPolynomial (Option σ) ℚ)) (b : Option σ → ℚ) (hb : b none ≠ 0) :
     coordinateEliminationMap I (hypersurfaceAffineCoordinates 0 b hb) =
@@ -42,6 +46,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The linear forms `b none * X (some i) - b (some i) * X none` with integer coefficients,
+projecting away the coordinate `X none` along the integer direction `b`. -/
 def integerEliminationCoordinates {σ : Type*} (b : Option σ → ℤ) :
     σ → MvPolynomial (Option σ) ℚ :=
   fun i => C (b none : ℚ) * X (some i) - C (b (some i) : ℚ) * X none
@@ -55,6 +61,9 @@ private lemma integerEliminationCoordinates_eq_scale {σ : Type*}
   dsimp only [integerEliminationCoordinates, eliminationLinearCoordinates]
   rw [mul_sub, ← mul_assoc, ← map_mul, hh]
 
+/-- If the projection by the rational elimination forms of an integer direction `b` with
+`b none ≠ 0` is integral, then so is the projection by the integer elimination forms, which differ
+by the scalar `b none`. -/
 theorem integerEliminationMap_isIntegral {σ : Type*}
     (I : Ideal (MvPolynomial (Option σ) ℚ)) (b : Option σ → ℤ)
     (hb : (b none : ℚ) ≠ 0)

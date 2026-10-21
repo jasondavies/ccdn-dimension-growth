@@ -25,6 +25,8 @@ open scoped Pointwise
 
 variable (k K σ : Type*) [Field k] [Field K] [Algebra k K]
 
+/-- An element `γ` of `Gal(K/k)` acts on a polynomial over `K` by applying `γ` to its
+coefficients. -/
 lemma coefficientGaloisPolynomial_smul (γ : Gal(K/k)) (f : MvPolynomial σ K) :
     γ • f = map γ.toRingHom f := by
   ext m
@@ -48,6 +50,7 @@ instance coefficientGaloisPolynomialAction :
 
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
+/-- The coefficient action of `Gal(K/k)` fixes every polynomial with coefficients in `k`. -/
 lemma coefficientGaloisPolynomial_fixed_base (γ : Gal(K/k)) (f : MvPolynomial σ k) :
     γ • (algebraMap (MvPolynomial σ k) (MvPolynomial σ K) f) =
       algebraMap (MvPolynomial σ k) (MvPolynomial σ K) f := by
@@ -111,6 +114,8 @@ theorem galois_polynomial_minimalPrime_under
   rw [he]
   simpa only [Ideal.under_def, MvPolynomial.algebraMap_def] using hQover.over.symm
 
+/-- At a point with coordinates in `k`, evaluating the Galois conjugate `map γ f` of a polynomial
+`f` over `K` gives the conjugate `γ` of the value of `f`. -/
 lemma eval_coefficient_galois_at_base_point (γ : Gal(K/k))
     (x : σ → k) (f : MvPolynomial σ K) :
     eval (algebraMap k K ∘ x) (map γ.toRingHom f) =

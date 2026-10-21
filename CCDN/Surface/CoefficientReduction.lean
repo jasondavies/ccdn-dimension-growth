@@ -68,9 +68,13 @@ private theorem integer_surface_count_le_of_auxiliary
   rw [rational_map_totalDegree, rational_map_totalDegree] at hbound
   exact le_trans (by exact_mod_cast hcount) hbound
 
+/-- The constant `N (log N + d) + 1`, where `N = binom(d + 3, d)` is the number of monomials of
+degree at most `d` in three variables, in the logarithmic coefficient-height bound for primitive
+surface equations of degree `d`. -/
 def surfaceCoefficientLogConstant (d : ℕ) : ℝ :=
   ((3 + d).choose d : ℝ) * (Real.log ((3 + d).choose d) + d) + 1
 
+/-- The coefficient-height constant `surfaceCoefficientLogConstant d` is positive. -/
 theorem surfaceCoefficientLogConstant_pos (d : ℕ) :
     0 < surfaceCoefficientLogConstant d := by
   have hh := Real.log_natCast_nonneg ((3 + d).choose d)

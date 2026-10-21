@@ -47,6 +47,7 @@ private lemma leadingInfinityIdeal_homogeneousComponent_mem {K σ : Type*} [Fiel
     rw [hz]
     exact (projectiveInfinityIdeal I).zero_mem
 
+/-- A homogeneous polynomial of degree `m` satisfies `f (c • z) = c ^ m * f z`. -/
 lemma homogeneous_aeval_scale {K L σ : Type*} [Field K] [Field L] [Algebra K L]
     [Fintype σ] (f : MvPolynomial σ K) {m : ℕ} (hf : f.IsHomogeneous m)
     (z : σ → L) (c : L) : aeval (fun j => c * z j) f = c ^ m * aeval z f := by
@@ -67,6 +68,7 @@ lemma homogeneous_aeval_scale {K L σ : Type*} [Field K] [Field L] [Algebra K L]
   rw [hesum]
   ring
 
+/-- The zero locus of the ideal at infinity is a cone: it is stable under scaling by any `c`. -/
 lemma infinity_zeroLocus_scale {K L σ : Type*} [Field K] [Field L]
     [Algebra K L] [Fintype σ] (I : Ideal (MvPolynomial σ K)) (z : σ → L)
     (hz : z ∈ MvPolynomial.zeroLocus L (leadingInfinityIdeal I)) (c : L) :

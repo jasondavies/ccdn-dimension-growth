@@ -17,6 +17,8 @@ namespace CCDN
 noncomputable section
 open Finset
 
+/-- For `L ≥ 1`, the number of primes in `congruencePrimeWindow L`, multiplied by `log 2`, is
+at most `(log 4 + 4) c L`, where `c` is `scalingPrimeRatio`. -/
 theorem congruencePrimeWindow_card_log_two {L : ℝ} (hL : 1 ≤ L) :
     (congruencePrimeWindow L).card * Real.log 2 ≤
       (Real.log 4 + 4) * scalingPrimeRatio * L := by
@@ -149,6 +151,9 @@ private theorem congruencePrimeWindow_edge_polylog_linear {K R : ℝ}
         (mul_pos hC₁ hC₂).le
     _ = _ := by rw [Real.rpow_one]
 
+/-- For `K, R ≥ 1` and `k : ℕ`, there is a constant `C` such that, for every degree `d ≥ 5` and
+every `B ≥ 1`, the prime window `W` of logarithmic size `K (log B + 1)` satisfies
+`#W R^#W B^(2/√d) (log B + 1)^k ≤ C B`. -/
 theorem congruencePrimeWindow_surface_residual_bound {K R : ℝ}
     (hK : 1 ≤ K) (hR : 1 ≤ R) (k : ℕ) :
     ∃ C : ℝ, 0 < C ∧ ∀ (d : ℕ), 5 ≤ d → ∀ B : ℝ, 1 ≤ B →

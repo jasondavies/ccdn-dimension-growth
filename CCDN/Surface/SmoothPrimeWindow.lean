@@ -99,8 +99,10 @@ private theorem integer_pderiv_log_bound {n : ℕ}
     Real.log_mul (pow_pos hdpos _).ne' hH0.ne', Real.log_pow, Real.log_pow] at hlog
   simpa only [Nat.cast_add, Nat.cast_one] using hlog
 
-/-- The common prime window contains a set with product at least exp L
-at which this nonsingular point has smooth reduction. -/
+/-- If `x` is an integer point of the box at which some partial derivative of `f` is nonzero,
+and `L` dominates the logarithmic size of such a derivative, then the prime window of
+logarithmic size `L` contains a set of primes with product at least `exp L` modulo each of
+which `x` is a smooth point of `f`. -/
 theorem exists_smooth_prime_window_subset {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) {H B L : ℝ}
     (hH : 1 ≤ H) (hB : 1 ≤ B) (hL : 1 ≤ L)

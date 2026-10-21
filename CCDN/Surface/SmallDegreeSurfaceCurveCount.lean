@@ -81,8 +81,10 @@ private theorem sum_curveBound_logarithmic_degrees {ι : Type*}
         (by positivity)
     _ = _ := by dsimp only [C]; ring
 
-/-- A universal constant bounds the union, uniformly in the surface degree,
-the coefficient-dependent family and its two numerical degree budgets. -/
+/-- For each `k`, there is a constant `C` such that, for `d ≥ 5` and a finite family of
+integral affine curves of degree at least two, each of degree at most `D (log B + 1)` and of
+total degree at most `A B^(1/√d) (log B + 1)^k`, the union of the curves has at most
+`C A D² (D + 1) B` integral points of height at most `B`. -/
 theorem logarithmic_degree_curve_union_bound (k : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ (S : Finset (Ideal (CoordinatePolynomial 3)))

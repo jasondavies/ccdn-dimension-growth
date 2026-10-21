@@ -68,6 +68,10 @@ private theorem extension_projective_ideal_count_le_affine_cone_count
   rw [Finset.card_image_of_injective S primitiveProjectiveRep_injective] at hc
   exact hc
 
+/-- If a prime ideal `I` over an algebraically closed Galois extension of `ℚ`, of projective
+dimension `m` and degree `d`, is not the extension of an ideal over `ℚ`, then at most
+`d ^ 2 * (2 * B + 1) ^ m` rational projective points of height at most `B` lie on the
+projective zero set of `I`. -/
 theorem non_rational_projective_count_le_box
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
@@ -80,6 +84,9 @@ theorem non_rational_projective_count_le_box
   (Nat.cast_le.mpr (extension_projective_ideal_count_le_affine_cone_count I B)).trans
     (non_rational_prime_count_le_box I d hdimdeg hundef hB)
 
+/-- If a rational prime ideal `I` of projective dimension `m` and degree `d` does not stay prime
+over an algebraically closed Galois extension of `ℚ`, then at most `d ^ 2 * (2 * B + 1) ^ m`
+rational projective points of height at most `B` lie on the projective zero set of `I`. -/
 theorem nonabsolute_projective_variety_count_le_box
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n m : ℕ} (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]

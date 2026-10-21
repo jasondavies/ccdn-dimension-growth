@@ -17,6 +17,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Renaming the variables of an integer polynomial along an equivalence preserves absolute
+irreducibility of its top-degree form. -/
 lemma integer_top_irreducible_rename {σ τ : Type*} (e : σ ≃ τ)
     (f : MvPolynomial σ ℤ)
     (hir : HasAbsIrreducibleTopForm f) :
@@ -26,9 +28,13 @@ lemma integer_top_irreducible_rename {σ τ : Type*} (e : σ ≃ τ)
     ← rename_homogeneousComponent, map_rename]
   exact (MulEquiv.irreducible_iff (f := renameEquiv _ e)).mpr hir
 
+/-- The integer normal vector `(D, -a 0, …, -a (n - 1))` of the hyperplane
+`D * x 0 = ∑ a i * x (i + 1)`. -/
 def graphIntegerNormal {n : ℕ} (D : ℤ) (a : Fin n → ℤ) : IntPoint (n + 1) :=
   Fin.cons D (fun i => -a i)
 
+/-- If `|D|` and every `|a i|` are at most `H`, then every coordinate of `graphIntegerNormal D a`
+has absolute value at most `H`. -/
 lemma graphIntegerNormal_height {n : ℕ} (D : ℤ) (a : Fin n → ℤ) {H : ℕ}
     (hD : |D| ≤ (H : ℤ)) (ha : ∀ i, |a i| ≤ (H : ℤ)) :
     ∀ i, |(graphIntegerNormal D a i : ℝ)| ≤ (H : ℝ) := by

@@ -20,6 +20,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Over an algebraically closed field, if the projection of the variety of `I` by the polynomials
+`l` is integral, then every point `z` on the zero locus of its kernel is the image of a point `x` of
+the variety, that is, `l i (x) = z i` for all `i`. -/
 theorem integral_projection_exists_point
     {K σ τ : Type*} [Field K] [IsAlgClosed K] [Finite σ]
     (I : Ideal (MvPolynomial σ K)) (l : τ → MvPolynomial σ K)

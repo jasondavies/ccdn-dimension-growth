@@ -17,6 +17,7 @@ B^(c/log(1+log B)), with constants fixed before B. -/
 namespace CCDN
 noncomputable section
 
+/-- For `t ≥ 1`, the square of `log (t + 1)` is at most `8 t`. -/
 lemma log_add_one_sq_le_eight_mul {t : ℝ} (ht : 1 ≤ t) :
     (Real.log (t + 1)) ^ 2 ≤ 8 * t := by
   have hu : 0 < t + 1 := by linarith

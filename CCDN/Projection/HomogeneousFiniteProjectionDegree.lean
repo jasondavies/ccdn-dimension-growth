@@ -22,6 +22,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A homogeneous linear projection of a homogeneous prime quotient that is integral and birational
+(its coordinates generate the function field) preserves the leading coefficient of the filtered
+Hilbert polynomial, and hence the degree. -/
 theorem homogeneous_finite_birational_projection_leadingCoeff_eq
     {K F σ τ : Type*} [Field K] [Field F] [Algebra K F]
     [Fintype σ] [Fintype τ] [LinearOrder σ] [LinearOrder τ]

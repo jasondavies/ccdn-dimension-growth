@@ -18,13 +18,20 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The map from the polynomial ring to the coordinate ring of the section at infinity of the
+projective closure of `I`: a polynomial `f` goes to the class of its radial scaling `∑ n, f_n t ^ n`
+in the homogeneous coordinate algebra modulo the infinity ideal. -/
 def infinityCoordinateMap {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K)) :
     MvPolynomial σ K →ₐ[K] projectiveCoordinateAlgebra I ⧸ projectiveInfinityIdeal I :=
   (Ideal.Quotient.mkₐ K (projectiveInfinityIdeal I)).comp (quotientRadialMap I)
 
+/-- The homogeneous ideal of the section at infinity of the projective closure of `I`, defined as
+the kernel of `infinityCoordinateMap I`. -/
 def leadingInfinityIdeal {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K)) :
     Ideal (MvPolynomial σ K) := RingHom.ker (infinityCoordinateMap I)
 
+/-- If `f` lies in the ideal at infinity of `I`, then modulo `I` each homogeneous component of `f`
+of degree `n + 1` lies in the filtration piece of degree at most `n`. -/
 lemma leadingInfinityIdeal_component_mem {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (f : MvPolynomial σ K) (hf : f ∈ leadingInfinityIdeal I)
     (n : ℕ) :

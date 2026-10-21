@@ -18,6 +18,7 @@ of nonzero directions. No separation of pairs is needed for this step. -/
 namespace CCDN
 noncomputable section
 
+/-- The moment coordinate `∑ j, k ^ j * X j` is homogeneous of degree one. -/
 lemma momentCoordinate_homogeneous (K : Type*) [Field K] (n k : ℕ) :
     (momentCoordinate K n k).IsHomogeneous 1 := by
   apply MvPolynomial.IsHomogeneous.sum

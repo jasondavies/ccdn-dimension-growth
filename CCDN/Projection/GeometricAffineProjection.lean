@@ -129,9 +129,12 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The constant `(n + 1) * birationalProjectionHeightConstant n` scaling the height in the
+point-count comparison for the affine projection in `n` variables. -/
 def affineProjectionHeightConstant (n : ℕ) : ℕ :=
   (n + 1) * birationalProjectionHeightConstant n
 
+/-- The affine projection height constant is positive. -/
 lemma affineProjectionHeightConstant_pos (n : ℕ) : 0 < affineProjectionHeightConstant n := by
   exact Nat.mul_pos (Nat.succ_pos n) (birationalProjectionHeightConstant_pos n)
 

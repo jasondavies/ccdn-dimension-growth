@@ -31,6 +31,10 @@ private lemma rationalPoint_integerAffineLinearImage {m n : ℕ}
   funext i
   simp [rationalPoint, integerAffineLinearImage, eval_linearForm]
 
+/-- Let `P` be an integer `m × n` matrix with entries of absolute value at most `H` whose linear
+forms satisfy the relation `f` modulo `I`. If every fiber of the induced map on the zero locus of
+`I` has at most `M` points, then the integral points of height at most `B` on the zero locus of
+`I` number at most `M` times those of height at most `n * H * B` on the zero locus of `f`. -/
 theorem affine_integer_linear_count_transfer
     {m n : ℕ} (I : Ideal (MvPolynomial (Fin n) ℚ))
     (P : Fin m → Fin n → ℤ) (f : MvPolynomial (Fin m) ℚ)

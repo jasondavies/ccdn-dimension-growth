@@ -62,6 +62,7 @@ private theorem prime_ideal_eq_of_le_of_hilbert_dimension_zero
   rw [Polynomial.leadingCoeff_neg] at hnon
   linarith
 
+/-- A zero-dimensional prime ideal is the ideal of polynomials vanishing at any of its zeros. -/
 theorem zero_dimensional_prime_eq_eval_kernel
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
@@ -96,6 +97,8 @@ private theorem zero_dimensional_prime_with_base_point_descends
     rw [eval_coefficient_galois_at_base_point, hx g hg, map_zero]
   exact (zero_dimensional_prime_eq_eval_kernel J hJdim _ hxJ).trans hIker.symm
 
+/-- A zero-dimensional prime ideal over a Galois extension of `ℚ` that is not the extension of an
+ideal over `ℚ` has no rational zeros. -/
 theorem non_rational_zero_dimensional_locus_empty
     {K : Type*} [Field K] [Algebra ℚ K] [IsGalois ℚ K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
@@ -108,6 +111,8 @@ theorem non_rational_zero_dimensional_locus_empty
   exact hundef ⟨I.comap (map (algebraMap ℚ K)),
     zero_dimensional_prime_with_base_point_descends ℚ K I hdim x hx⟩
 
+/-- A zero-dimensional rational prime ideal that does not stay prime over a Galois extension of
+`ℚ` has no rational zeros. -/
 theorem nonabsolute_zero_dimensional_locus_empty
     {K : Type*} [Field K] [Algebra ℚ K] [IsGalois ℚ K]
     {n : ℕ} (I : Ideal (CoordinatePolynomial n)) [I.IsPrime]

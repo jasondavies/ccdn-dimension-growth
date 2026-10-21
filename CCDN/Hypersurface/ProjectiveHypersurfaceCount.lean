@@ -21,8 +21,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The sharp unweighted projective hypersurface bound in every positive
-projective dimension, with an explicit absolute constant. -/
+/-- An absolutely irreducible form `f` of degree `d > 0` in `n + 3` variables over `ZMod p`, with
+`p` above the threshold `27 * d ^ 4`, has at most
+`p ^ (n + 1) + projectiveHypersurfaceResidueConstant * d ^ 2 * p ^ n * √p` projective zeros. -/
 theorem projective_hypersurface_finite_field_bound {n d : ℕ}
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Fin (n + 3)) (ZMod p))
     (hf : f.IsHomogeneous d) (hd : 0 < d)

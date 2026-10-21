@@ -75,6 +75,8 @@ private theorem primitive_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
         nlinarith [sq_nonneg (d : ℝ), sq_nonneg ((d : ℝ)^2)]
       exact hh.trans (hc'.trans (le_mul_of_one_le_right (by positivity) hp))
 
+/-- Multiplying a surface equation by a nonzero rational constant does not change its
+nonsingular rational points. -/
 lemma smoothSurfaceLocus_C_mul (a : ℚ) (ha : a ≠ 0) (f : CoordinatePolynomial 3) :
     smoothSurfaceLocus (C a * f) = smoothSurfaceLocus f := by
   ext x

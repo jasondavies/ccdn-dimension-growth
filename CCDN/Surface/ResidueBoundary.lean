@@ -22,6 +22,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- The quantity `1 + log B + (log 4 + 4) c L`, with `c` the constant `scalingPrimeRatio`,
+which bounds `1 + log B + ∑ p ∈ R, log p` for every set `R` of primes in the prime window of
+logarithmic size `L`. -/
 def surfaceResidueLogBudget (B L : ℝ) : ℝ :=
   1 + Real.log B + (Real.log 4 + 4) * scalingPrimeRatio * L
 
@@ -31,16 +34,26 @@ the coefficients of `f` are bounded by `H ≥ 1`; the logarithmic prime window `
 a point of the box, where `d` is the degree of `f`; and the residue-modulus cutoff `X`
 satisfies `1 < X`, `B^(1/√d) ≤ X` and `X ≤ e^L`. -/
 structure IsSurfaceResidueWindow (f : MvPolynomial (Fin 3) ℤ) (B H L X : ℝ) : Prop where
+  /-- The box radius is at least one. -/
   one_le_radius : 1 ≤ B
+  /-- The height bound is at least one. -/
   one_le_height : 1 ≤ H
+  /-- The logarithmic size of the prime window is at least one. -/
   one_le_window : 1 ≤ L
+  /-- The coefficients of `f` are bounded by `H` in absolute value. -/
   coeff_le : CoefficientHeightLE f H
+  /-- The window dominates the logarithmic size of a partial derivative of `f` on the
+  box. -/
   log_le_window : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
     Real.log H + f.totalDegree * Real.log B ≤ L
+  /-- The modulus cutoff exceeds one. -/
   one_lt_cutoff : 1 < X
+  /-- The modulus cutoff is at least `B^(1/√d)`. -/
   root_le_cutoff : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X
+  /-- The modulus cutoff is at most `exp L`. -/
   cutoff_le_exp : X ≤ Real.exp L
 
+/-- For a finite set `P` of primes, the exponential of `∑ p ∈ P, log p` is `∏ p ∈ P, p`. -/
 lemma exp_sum_log_primes (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) :
     Real.exp (∑ p ∈ P, Real.log p) = ∏ p ∈ P, (p : ℝ) := by
   rw [Real.exp_sum]
@@ -105,13 +118,20 @@ structure IsSurfaceResidueEdge {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
     (F : SurfaceCongruenceFamily f B A) (I : Ideal (CoordinatePolynomial 3)) (L X : ℝ)
     (x : IntPoint 3) (R : Finset ℕ) (hR : ∀ p ∈ R, p.Prime) (p : ℕ)
     (r : SmoothAffineResidueFamily f R) : Prop where
+  /-- The primes of `R` lie in the prime window of logarithmic size `L`. -/
   subset_window : R ⊆ congruencePrimeWindow L
+  /-- The product of the primes of `R` is less than `c L X`, with `c` the constant
+  `scalingPrimeRatio`. -/
   prod_lt : (∏ q ∈ R, (q : ℝ)) < scalingPrimeRatio * L * X
+  /-- The product of the primes of `R.erase p` is less than `X`. -/
   erase_prod_lt : (∏ q ∈ R.erase p, (q : ℝ)) < X
+  /-- The auxiliary attached to `R.erase p`, over `ℚ`, lies in the ideal `I` of the curve. -/
   parent_mem : map (Int.castRingHom ℚ)
     (F.auxiliary (R.erase p) (fun q hq => hR q (mem_of_mem_erase hq))
       (r.restrict (erase_subset p R))) ∈ I
+  /-- The auxiliary attached to `R`, over `ℚ`, does not lie in the ideal `I`. -/
   child_not_mem : map (Int.castRingHom ℚ) (F.auxiliary R hR r) ∉ I
+  /-- The auxiliary attached to `R` vanishes at `x`. -/
   child_vanishes : eval x (F.auxiliary R hR r) = 0
 
 /-- A point on an initial prime curve above the terminal degree cutoff

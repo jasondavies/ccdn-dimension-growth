@@ -20,6 +20,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Applying a ring homomorphism to the coefficients commutes with taking the homogeneous
+component of degree `d`. -/
 lemma map_homogeneousComponent {R S σ : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (d : ℕ) (f : MvPolynomial σ R) :
     map φ (homogeneousComponent d f) = homogeneousComponent d (map φ f) := by

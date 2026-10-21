@@ -155,6 +155,9 @@ private theorem exists_linear_integral_normalization_infinite
     · rw [← he]
       exact (Ideal.kerLiftAlg_injective ψ).comp hinja
 
+/-- Linear Noether normalization over an infinite field: a prime ideal in `n ≥ m + 1` variables of
+Hilbert dimension `m + 1` admits `m + 1` homogeneous linear forms whose projection is integral and
+injective. -/
 theorem exists_linear_integral_normalization_infinite_of_le
     {K : Type*} [Field K] [Infinite K] (m n : ℕ) (hmn : m + 1 ≤ n)
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

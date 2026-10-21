@@ -26,6 +26,9 @@ rational loci are discarded, and repeated line sets are counted only once.
 namespace CCDN
 noncomputable section
 
+/-- The union of the rational zero sets of finitely many degree-one affine curves in
+three-space is a union of at most as many rational affine lines, each of which is the zero set
+of one of the curves. -/
 theorem degree_one_components_line_cover
     (S : Finset (Ideal (CoordinatePolynomial 3)))
     (hcurve : ∀ P ∈ S, P.IsPrime ∧ P.height = 2 ∧ HasAffineCurveDegree P 1) :
@@ -69,6 +72,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- There is an absolute constant `C` such that, for an integer surface equation `f` of degree
+`d ≥ 3` with absolutely irreducible top-degree form, the integral points of height at most `B`
+on a finite family `S` of degree-one curves on the surface number at most
+`C d⁶ B + #S`. -/
 theorem surface_degree_one_component_contribution :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,

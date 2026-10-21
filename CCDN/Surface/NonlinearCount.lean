@@ -16,6 +16,8 @@ total Hilbert degree and the affine curve counting theorem. -/
 namespace CCDN
 noncomputable section
 
+/-- The number of integral points of height at most `B` on a finite union of sets is at most
+the sum of the numbers of such points on the individual sets. -/
 theorem count_biUnion_finset_le {n : ℕ} {ι : Type*}
     (s : Finset ι) (X : ι → Set (RatPoint n)) (B : ℝ) :
     count (⋃ i ∈ s, X i) B ≤ ∑ i ∈ s, count (X i) B := by

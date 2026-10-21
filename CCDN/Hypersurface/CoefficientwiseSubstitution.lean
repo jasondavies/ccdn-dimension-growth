@@ -26,6 +26,9 @@ private lemma pow {R σ τ : Type*} [CommRing R]
   | zero => simpa only [pow_zero, Nat.mul_zero] using one (R := R) (σ := σ) (τ := τ)
   | succ n ih => simpa only [pow_succ, Nat.mul_succ] using ih.mul hf
 
+/-- Substituting coefficientwise homogeneous forms of degree `n` into a homogeneous polynomial `φ`
+of degree `m`, with constant coefficients mapped to coefficientwise degree `0`, gives a
+coefficientwise homogeneous polynomial of degree `n * m`. -/
 lemma eval₂ {R S σ τ υ : Type*} [CommRing R] [CommRing S]
     {φ : MvPolynomial σ R} {m n : ℕ} (hφ : φ.IsHomogeneous m)
     (f : R →+* MvPolynomial τ (MvPolynomial υ S))
@@ -46,6 +49,8 @@ lemma eval₂ {R S σ τ υ : Type*} [CommRing R] [CommRing S]
 
 end CoefficientwiseHomogeneous
 
+/-- Specializing a universal coefficient polynomial `Φ` at the degree-`d` coefficients of `f`
+commutes with applying a ring homomorphism `ψ` to the coefficients of `f`. -/
 lemma homogeneousCoefficientSpecialization_map {R S σ : Type*}
     [CommRing R] [CommRing S] [Fintype σ] [DecidableEq σ]
     (ψ : R →+* S) (d : ℕ) (f : MvPolynomial σ R)
@@ -61,6 +66,9 @@ lemma homogeneousCoefficientSpecialization_map {R S σ : Type*}
       simp [homogeneousCoefficientSpecialization, homogeneousCoefficientData, coeff_map]
   exact RingHom.congr_fun he Φ
 
+/-- If the coefficients of `f` are homogeneous of degree `e` in auxiliary variables and `Φ` is a
+homogeneous polynomial of degree `r` in the universal coefficients, then specializing `Φ` at
+the degree-`d` coefficients of `f` gives a homogeneous polynomial of degree `e * r`. -/
 lemma homogeneousCoefficientSpecialization_homogeneous
     {σ τ : Type*} [Fintype σ] [DecidableEq σ]
     (d e r : ℕ) (f : MvPolynomial σ (MvPolynomial τ ℤ))
