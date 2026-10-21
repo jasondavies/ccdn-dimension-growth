@@ -36,11 +36,8 @@ theorem hypersurface_projective_auxiliary
     (hf : f.IsHomogeneous d) (hd : 0 < d) (hir : Irreducible f)
     {B : ℝ} (hB : 1 ≤ B) :
     ∃ M : ℕ,
-      (M : ℝ) ≤ hypersurfaceAbsoluteAuxiliaryConstant n *
-        ((d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * hypersurfaceBadPrimeFactor f *
-            B ^ ((n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) /
-              (integerCoefficientHeight f : ℝ) ^ (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) +
-          (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B + (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ))) ∧
+      (M : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n d B (hypersurfaceBadPrimeFactor f)
+        (integerCoefficientHeight f) ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ x : ProjectivePoint (n + 2), x.mulHeight ≤ B →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →
@@ -48,8 +45,8 @@ theorem hypersurface_projective_auxiliary
   classical
   by_cases habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
   · obtain ⟨bad, M, hbad, hdegree, hg⟩ := hypersurface_absolute_projective_auxiliary f hf hd habs hB
-    rw [← hypersurfaceBadPrimeFactor_eq_exp f habs (hf.totalDegree hir.ne_zero) bad hbad] at hdegree
-    exact ⟨M, hdegree, hg⟩
+    refine ⟨M, hdegree.trans_eq ?_, hg⟩
+    rw [hypersurfaceBadPrimeFactor_eq_exp f habs (hf.totalDegree hir.ne_zero) bad hbad]
   · have hQ := rational_map_irreducible_of_integer f hir (by rw [hf.totalDegree hir.ne_zero]; exact hd)
     have hred : ¬ Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (map (Int.castRingHom ℚ) f)) := by
       have he : (algebraMap ℚ (AlgebraicClosure ℚ)).comp (Int.castRingHom ℚ) =
@@ -57,14 +54,9 @@ theorem hypersurface_projective_auxiliary
       simpa only [map_map, he] using habs
     obtain ⟨g, hg0, hgh, hgnd, hzeros⟩ := nonabsolute_projective_auxiliary f hf hd hQ hred
     refine ⟨d, ?_, g, hg0, hgh, fun x _ hx => hzeros hx, hgnd⟩
+    unfold hypersurfaceAuxiliaryDegreeBound auxDegreeBound auxMainTerm
     rw [hypersurfaceBadPrimeFactor_eq_zero f habs, mul_zero, zero_mul, zero_div, zero_add]
-    have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
-    have hexp : (1 : ℝ) ≤ 4 - 1 / (n + 1 : ℝ) := by
-      have hh := (div_le_one (by positivity : (0 : ℝ) < n + 1)).mpr
-        (show 1 ≤ (n + 1 : ℝ) by have := Nat.cast_nonneg (α := ℝ) n; linarith)
-      linarith
-    have hdD : (d : ℝ) ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) := by
-      simpa only [Real.rpow_one] using Real.rpow_le_rpow_of_exponent_le hd1 hexp
+    have hdD : (d : ℝ) ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) := le_rpow_four_sub_inv hd
     have hl : 0 ≤ (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B :=
       mul_nonneg (Real.rpow_nonneg (by positivity) _) (Real.log_nonneg hB)
     exact (hdD.trans (le_add_of_nonneg_left hl)).trans

@@ -65,15 +65,6 @@ lemma localPrimeReduction_finite_residue (ρ : R →+* ZMod p) :
   Finite.of_injective (localPrimeReduction_residue_equiv ρ)
     (localPrimeReduction_residue_equiv ρ).injective
 
-omit [Fact p.Prime] in
-/-- The image of the maximal ideal is the maximal ideal of the
-nonzero quotient. This records the local-ring meaning of the layer profile. -/
-lemma localPrimeMaximalIdeal_eq
-    [IsLocalRing (LocalPrimeReduction R p)] :
-    localPrimeMaximalIdeal R p = maximalIdeal (LocalPrimeReduction R p) :=
-  IsLocalRing.map_maximalIdeal_of_surjective
-    (Ideal.Quotient.mk (Ideal.span {(p : R)})) Ideal.Quotient.mk_surjective
-
 /-- Generators in `R/(p)`, indexed by its layer dimensions. -/
 theorem exists_localPrimeReduction_generators [IsNoetherianRing R]
     (ρ : R →+* ZMod p) :

@@ -31,7 +31,7 @@ lemma hypersurface_pure_coefficient_log_position {n d : ℕ}
         (f.coeff (Finsupp.single i d) : ℝ)) :
     Real.log (integerCoefficientHeight f : ℝ) ≤
       Real.log |(((distinguishedCoefficientOrder i).leadingCoeff f : ℤ) : ℝ)| +
-        hypersurfaceSourcePositionParameter n C * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)) := by
+        hypersurfaceSourcePositionParameter n C * d * degreeRoot n d := by
   have hH : 0 < (integerCoefficientHeight f : ℝ) := by
     exact_mod_cast integerCoefficientHeight_pos f hf0
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
@@ -66,15 +66,15 @@ theorem hypersurface_small_height_pure_coefficient_auxiliary
     ∃ M : ℕ,
       (M : ℝ) ≤ hypersurfaceSmallProjectiveConstant n (hypersurfaceSourcePositionParameter n C) *
         ((d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * hypersurfaceBadPrimeFactor f *
-          B ^ ((n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) /
+          B ^ (boxExponent n d) /
           (integerCoefficientHeight f : ℝ) ^
-            (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))))) +
+            (heightExponent n d)) +
         (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B + 4 * d ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ x : ProjectivePoint (n + 2), x.mulHeight ≤ B →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) g)) ∧ ¬ f ∣ g := by
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hH : 0 < (integerCoefficientHeight f : ℝ) := by
     exact_mod_cast integerCoefficientHeight_pos f hf0
   have hh := Real.log_le_log hH hheight
@@ -103,7 +103,7 @@ theorem hypersurface_large_height_pure_coefficient_auxiliary
         (∀ x : ProjectivePoint (n + 2), x.mulHeight ≤ B →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) g)) ∧ ¬ f ∣ g := by
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hh := Real.log_le_log (pow_pos (by linarith : 0 < B) _) hheight
   rw [Real.log_pow] at hh
   push_cast at hh

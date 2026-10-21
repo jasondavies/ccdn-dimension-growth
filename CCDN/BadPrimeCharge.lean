@@ -1,6 +1,7 @@
 module
 
 public import CCDN.PrimeCutoff
+public import CCDN.AuxiliaryDegreeBound
 
 /-! Analytic control of bad-prime charges from an integer witness.
 The construction and coefficient bound for a Noether witness remain separate. -/
@@ -82,19 +83,6 @@ theorem bad_prime_charge_split (P : Finset ℕ) {D : ℤ} (hD : 0 < D)
   change (∑ p ∈ U, Real.log p / p) + (∑ p ∈ V, Real.log p / p) = _ at hsplit
   linarith
 
-/-- Choosing the splitting point max(L,log D) bounds the witness-dependent
-charge by a logarithm of its logarithmic height. -/
-theorem bad_prime_charge_loglog (P : Finset ℕ) {D : ℤ} (hD : 0 < D)
-    (hP : ∀ p ∈ P, p.Prime) (hdiv : ∀ p ∈ P, (p : ℤ) ∣ D)
-    {L : ℝ} (hL : 1 ≤ L) (hlo : ∀ p ∈ P, L < (p : ℝ)) :
-    (∑ p ∈ P, Real.log p / p) ≤
-      Real.log (max L (Real.log D)) - Real.log L + 2 * mertensError + 1 := by
-  have h := bad_prime_charge_split P hD hP hdiv hL (le_max_left L (Real.log D)) hlo
-  have hT : 0 < max L (Real.log D) := lt_of_lt_of_le (by linarith) (le_max_left _ _)
-  have htail : Real.log D / max L (Real.log D) ≤ 1 := by
-    exact (div_le_one hT).mpr (le_max_right _ _)
-  linarith
-
 /-- A logarithmic-height bound for an integer witness controls the bad-prime
 charge at the scale of the cutoff. Constructing such a witness is algebraic. -/
 theorem bad_prime_charge_of_height (P : Finset ℕ) {D : ℤ} (hD : 0 < D)
@@ -116,7 +104,7 @@ theorem bad_prime_factor_of_height (P : Finset ℕ) {D : ℤ} (hD : 0 < D)
     (hP : ∀ p ∈ P, p.Prime) (hdiv : ∀ p ∈ P, (p : ℤ) ∣ D)
     {L H : ℝ} (hL : 1 ≤ L) (hH : 1 ≤ H) (hlo : ∀ p ∈ P, L < (p : ℝ))
     (hheight : Real.log D ≤ L * H) :
-    Real.exp (∑ p ∈ P, Real.log p / p) ≤ Real.exp (2 * mertensError + 1) * H := by
+    primeSetFactor P ≤ Real.exp (2 * mertensError + 1) * H := by
   have h := Real.exp_le_exp.mpr (bad_prime_charge_of_height P hD hP hdiv hL hH hlo hheight)
   calc
     _ ≤ Real.exp (Real.log H + 2 * mertensError + 1) := h

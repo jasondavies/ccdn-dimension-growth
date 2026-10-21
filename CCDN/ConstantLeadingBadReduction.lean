@@ -1,7 +1,9 @@
 module
 
 public import CCDN.ClosedFormScaling
-public import CCDN.MonicBadReduction
+public import CCDN.ClosedFormReducibility
+public import CCDN.ClosedFormMinorCharge
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 
 /-! Bad reduction for integer bivariate equations with a nonzero constant
 outer leading coefficient. A leading-coefficient factor in the witness also
@@ -138,32 +140,6 @@ theorem exists_full_outer_bad_prime_witness
     nlinarith [mul_nonneg hfac hlog]
   · intro p hp hbad
     exact (dvd_abs _ _).mpr (constant_leading_bad_prime_dvd d (by omega) f a hl hdeg htotal r c p hp hbad)
-
-/-- The general constant-leading-coefficient case has the required bad-prime
-charge, with an absolute factor two in the scaled logarithmic height. -/
-theorem full_outer_bad_prime_charge
-    {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
-    (d : ℕ) (hd : 1 ≤ d) (f : ℤ[X][X]) (hdeg : f.natDegree = d)
-    (htotal : bivariateTotalDegree f ≤ d)
-    (hir : Irreducible (bivariateMap (Int.castRingHom F) f))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : BivariateCoefficientBound f H)
-    (P : Finset ℕ) (hbad : ∀ p ∈ P, BivariateBadReduction f d p)
-    (hlo : ∀ p ∈ P, 27 * (d : ℝ) ^ 4 < (p : ℝ)) :
-    (∑ p ∈ P, Real.log p / p) ≤
-      Real.log (1 + 2 * Real.log H / (d : ℝ) ^ 2) + 2 * mertensError + 1 := by
-  obtain ⟨D, hD, hheight, hdiv⟩ := exists_full_outer_bad_prime_witness d hd f hdeg htotal hir H hH hcoeff
-  have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
-  have hcut : (d : ℝ) ≤ 27 * (d : ℝ) ^ 4 := by
-    nlinarith [sq_nonneg ((d : ℝ) ^ 2 - 1)]
-  refine bad_prime_charge_of_height (D := D) (L := 27 * (d : ℝ) ^ 4)
-    (H := 1 + 2 * Real.log H / (d : ℝ) ^ 2) P hD ?_ ?_ ?_ ?_ hlo hheight
-  · intro p hp
-    exact (hbad p hp).choose
-  · intro p hp
-    apply hdiv p _ (hbad p hp)
-    exact_mod_cast hcut.trans_lt (hlo p hp)
-  · linarith
-  · exact le_add_of_nonneg_right (div_nonneg (mul_nonneg (by norm_num) (Real.log_nonneg hH)) (sq_nonneg _))
 
 end
 end CCDN

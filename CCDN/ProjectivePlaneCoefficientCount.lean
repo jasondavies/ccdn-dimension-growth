@@ -22,6 +22,8 @@ theorem projective_plane_coefficient_count {d : ℕ}
           d * Real.log B + (d : ℝ) ^ 4) := by
   classical
   obtain ⟨M, hdegree, g, hg0, hgh, hzero, hgnd⟩ := hypersurface_projective_auxiliary f hf hd hir hB
+  dsimp only [hypersurfaceAuxiliaryDegreeBound, auxDegreeBound, auxMainTerm, boxExponent,
+    heightExponent, degreeRoot] at hdegree
   let S := projectivePoints (projectiveZeroLocus (map (Int.castRingHom ℚ) f)) B
   have hQ := rational_map_irreducible_of_integer f hir (by rw [hf.totalDegree hir.ne_zero]; exact hd)
   have hnd : ¬ map (Int.castRingHom ℚ) f ∣ map (Int.castRingHom ℚ) g := by

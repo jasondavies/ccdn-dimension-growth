@@ -54,31 +54,6 @@ lemma globalMixedDegreeMatrix_log_det_le {N : ℕ} (hN : 2 ≤ N) :
     nlinarith only [hprod]
   exact hsum.trans (mul_le_mul_of_nonneg_right hpoly hlog)
 
-lemma fixed_line_absolute {K : Type*} [Field K] :
-    Irreducible (X (2 : Fin 3) : MvPolynomial (Fin 3) K) := X_prime.irreducible
-
-lemma fixed_line_primitive : PrimitiveIntegerPolynomial (X (2 : Fin 3) : MvPolynomial (Fin 3) ℤ) := by
-  intro c hc
-  have h := hc (Finsupp.single (2 : Fin 3) 1)
-  simp at h
-  exact isUnit_of_dvd_one h
-
-lemma fixed_line_badPrimeFactor :
-    hypersurfaceBadPrimeFactor (X (2 : Fin 3) : MvPolynomial (Fin 3) ℤ) = 1 := by
-  have hir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ))
-      (X (2 : Fin 3) : MvPolynomial (Fin 3) ℤ)) := by
-    simpa using (fixed_line_absolute (K := AlgebraicClosure ℚ))
-  have hbad (p : ℕ) : ¬ HypersurfaceBadReduction (X (2 : Fin 3)) p := by
-    rintro ⟨hp, hbad⟩
-    let : Fact p.Prime := ⟨hp⟩
-    have hi := fixed_line_absolute (K := AlgebraicClosure (ZMod p))
-    simp [map_X, totalDegree_X, hi] at hbad
-  have hh := hypersurfaceBadPrimeFactor_eq_exp (X (2 : Fin 3)) hir
-    (by simp : (X (2 : Fin 3) : MvPolynomial (Fin 3) ℤ).totalDegree = 1) ∅ (by
-      intro p
-      simp [hbad p])
-  simpa using hh
-
 /-- For every proposed absolute error constant, a nonzero evaluation
 determinant violates the n=1,d=1,b=1 specialization of the printed bound. -/
 theorem global_mixed_degree_det_violates_bound (C : ℝ) :

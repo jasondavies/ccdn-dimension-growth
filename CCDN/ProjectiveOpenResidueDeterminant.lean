@@ -217,7 +217,7 @@ theorem projective_hypersurface_minorGcd_sharp_open
     (hz : ∀ i, eval (z i) f = 0)
     (havoid : ∀ i, eval (fun j => (z i j : ZMod p)) (map (Int.castRingHom (ZMod p)) h) ≠ 0) :
     ∃ a : ℕ,
-      ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) /
+      factorialRoot n /
         (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) *
         (n + 1 : ℝ) / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) -
         (n + 2 : ℝ) * s ≤ a ∧

@@ -60,7 +60,7 @@ theorem affine_plane_count_bad_prime
         (hypersurfaceBadPrimeFactor f + 2) * B ^ (1 / (f.totalDegree : ℝ)) := by
   obtain ⟨g, _, hfg, hgdeg, hgz⟩ :=
     affine_hypersurface_auxiliary f hprim (hprim.irreducible_of_rational_map hir) hd hB
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hdegree := hgdeg.trans (mul_le_mul_of_nonneg_left
     (affine_plane_expression_le_bad_prime hd hB (leading_height_one_le f hf0)
       (hypersurfaceBadPrimeFactor_nonneg f)) (affineHypersurfaceAuxiliaryConstant_pos 0).le)

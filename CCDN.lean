@@ -2,6 +2,7 @@ module
 
 public import CCDN.Analytic
 public import CCDN.AuxiliaryPolynomial
+public import CCDN.AuxiliaryDegreeBound
 public import CCDN.Nondivisibility
 public import CCDN.Determinant
 public import CCDN.RowSpan
@@ -14,7 +15,6 @@ public import CCDN.PrimeSums
 public import CCDN.Bezout
 public import CCDN.PlaneSingularities
 public import CCDN.RowSelection
-public import CCDN.SmoothDeterminant
 public import CCDN.HomogeneousAuxiliary
 public import CCDN.PlaneMultiplicitySmooth
 public import CCDN.PlaneChartDeterminant
@@ -23,9 +23,7 @@ public import CCDN.BivariateFactorForms
 public import CCDN.ClosedFormHeight
 public import CCDN.ClosedFormKernelWitness
 public import CCDN.ClosedFormMinorCharge
-public import CCDN.MonicBadReduction
 public import CCDN.ShearNormalization
-public import CCDN.PlaneChartHeight
 public import CCDN.PlaneAuxiliarySelection
 public import CCDN.PlaneAuxiliaryCount
 public import CCDN.LeadingPositionHeight
@@ -36,7 +34,6 @@ public import CCDN.GeometricResidueReduction
 public import CCDN.PlaneStepanovBound
 public import CCDN.SharpPlaneCount
 public import CCDN.BoundedProjectionCoordinates
-public import CCDN.PlaneIdealCount
 public import CCDN.ProjectionExceptionalCount
 public import CCDN.DegreePreservingProjectionCount
 public import CCDN.BoundedDegreePreservingProjection
@@ -155,7 +152,6 @@ public import CCDN.IntegerPlaneLogHeight
 public import CCDN.HypersurfaceBadPrimeHeight
 
 public import CCDN.HigherDimensionalPrimeSum
-public import CCDN.HypersurfacePrimeDeterminant
 public import CCDN.HypersurfaceDeterminantRank
 public import CCDN.HypersurfaceBadPrimeCoordinates
 public import CCDN.HypersurfaceHeightDeterminant
@@ -296,7 +292,6 @@ public import CCDN.SurfaceMonomialWeight
 public import CCDN.WeightedMonomialDeterminant
 public import CCDN.SmoothHypersurfaceCongruence
 public import CCDN.SmoothProjectiveCongruence
-public import CCDN.CongruencePrimeSum
 public import CCDN.CongruenceHypersurfaceDeterminant
 public import CCDN.SmoothCongruenceDeterminant
 public import CCDN.AffineCongruenceDeterminant
@@ -551,9 +546,7 @@ public import CCDN.ZeroDimensionalPrimeDescent
 public import CCDN.AffineChartAbsoluteAuxiliary
 public import CCDN.AffineChartAuxiliaryComparison
 public import CCDN.AffineChartGlobalDeterminant
-public import CCDN.AffineChartPositionedAuxiliary
 public import CCDN.AffineChartPrimeDeterminant
-public import CCDN.AffineChartSmallAuxiliary
 public import CCDN.AffineCurveHilbertPolynomial
 public import CCDN.CoordinateGridAvoidance
 public import CCDN.CubicAffineDimensionGrowth

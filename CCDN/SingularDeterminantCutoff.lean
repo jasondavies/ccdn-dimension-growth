@@ -1,6 +1,6 @@
 module
 
-public import CCDN.PrimeCutoff
+public import CCDN.HigherDimensionalPrimeSum
 import all ArithmeticHeights.BombieriVaaler
 
 /-! Fourth-power cutoff removes the polynomial-in-degree error from the
@@ -30,7 +30,7 @@ theorem singular_determinant_log_lower_cutoff {s N : ℕ} (hs : 0 < s)
     (hz : ∀ i, eval (z i) f = 0)
     (hrows : LinearIndependent ℚ
       ((Matrix.of fun i k => eval (z i) (g k)).map ((↑) : ℤ → ℚ)).row)
-    {x L C : ℝ} (hx : 1 ≤ x) (hL : 1 ≤ L) (hC : 0 ≤ C)
+    {x L C : ℝ} (hx : 1 ≤ x) (hC : 0 ≤ C)
     (hdL : (f.totalDegree : ℝ) ^ 4 ≤ L) (B : Finset ℕ)
     (hf : ∀ p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B, L < (p : ℝ) →
       Irreducible (map (Int.castRingHom (ZMod p)) f))
@@ -40,57 +40,30 @@ theorem singular_determinant_log_lower_cutoff {s N : ℕ} (hs : 0 < s)
       (∑ p ∈ B, Real.log p / p) - 2 * primeBlockMass * (C + 1)) -
       s * ((Real.log 4 + 4) * x) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i k => eval (z i) (g k))) := by
-  classical
-  let S := (((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B).filter (fun p : ℕ => L < (p : ℝ))
-  let D := Int.Matrix.minorGcd (Matrix.of fun i k => eval (z i) (g k))
-  let m : ℕ → ℝ := fun p =>
-    (Nat.card (PlaneResidue f p) + f.totalDegree ^ 2 * (f.totalDegree - 1) : ℕ)
-  have hp (p : ℕ) (h : p ∈ S) : p.Prime :=
-    (mem_filter.mp (mem_sdiff.mp (mem_filter.mp h).1).1).2
   have hd1 : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast hd
   have hd4 : (f.totalDegree : ℝ) ≤ (f.totalDegree : ℝ) ^ 4 := by
     nlinarith [sq_nonneg ((f.totalDegree : ℝ) ^ 2 - 1)]
-  have hlocal (p : ℕ) (h : p ∈ S) : 0 < m p ∧
-      ∃ e : ℕ, (s : ℝ) ^ 2 / (2 * m p) - s ≤ e ∧ (p : ℤ) ^ e ∣ D := by
-    let : Fact p.Prime := ⟨hp p h⟩
-    have hmem := mem_filter.mp h
-    have hchar : f.totalDegree < p := by exact_mod_cast hd4.trans_lt (hdL.trans_lt hmem.2)
-    obtain ⟨hm, e, he, hd⟩ := singular_reduction_minorGcd_card_bound hs f g z hz
-      (hf p hmem.1 hmem.2) hchar
-    exact ⟨by dsimp only [m]; exact_mod_cast hm, e, he, hd⟩
-  let e : ℕ → ℕ := fun p => if h : p ∈ S then (hlocal p h).2.choose else 0
-  have hglobal := determinant_log_lower_cutoff hx hL
-    (show 0 ≤ (C + 1) * (f.totalDegree : ℝ) ^ 2 by positivity) B m s e
-    (D := D) (lt_of_lt_of_le (by norm_num) (Int.Matrix.one_le_minorGcd hrows))
-    (fun p hp hL => (hlocal p (mem_filter.mpr ⟨hp, hL⟩)).1) ?_ ?_ ?_
-  · have hsqrt : (f.totalDegree : ℝ) ^ 2 ≤ Real.sqrt L := by
-      apply Real.le_sqrt_of_sq_le
-      convert hdL using 1
-      ring
-    have htail : (C + 1) * (f.totalDegree : ℝ) ^ 2 *
-        (2 * primeBlockMass / Real.sqrt L) ≤ 2 * primeBlockMass * (C + 1) := by
-      rw [← mul_div_assoc]
-      apply (div_le_iff₀ (Real.sqrt_pos.mpr (by linarith))).mpr
-      have h := mul_le_mul_of_nonneg_left hsqrt
-        (show 0 ≤ 2 * primeBlockMass * (C + 1) from
-          mul_nonneg (mul_nonneg (by norm_num) primeBlockMass_pos.le) (by linarith))
-      nlinarith
-    have hmul := mul_le_mul_of_nonneg_left htail (show 0 ≤ (s : ℝ) ^ 2 / 2 by positivity)
-    linarith
-  · intro p hp hL
-    have hcorr := singular_correction_absorb hd hdL hL
-    have hcount := hupper p hp hL
-    dsimp only [m]
-    rw [Nat.cast_add]
-    nlinarith
-  · intro p hp hL
-    have hmem : p ∈ S := mem_filter.mpr ⟨hp, hL⟩
-    rw [show e p = (hlocal p hmem).2.choose from dite_eq_left hmem]
-    exact (hlocal p hmem).2.choose_spec.1
-  · intro p hp hL
-    have hmem : p ∈ S := mem_filter.mpr ⟨hp, hL⟩
-    rw [show e p = (hlocal p hmem).2.choose from dite_eq_left hmem]
-    exact (hlocal p hmem).2.choose_spec.2
+  let m : ℕ → ℝ := fun p =>
+    (Nat.card (PlaneResidue f p) + f.totalDegree ^ 2 * (f.totalDegree - 1) : ℕ)
+  have hlocal (p : ℕ) (hp : p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B) (hpL : L < (p : ℝ)) :
+      0 < m p ∧ ∃ e : ℕ, (s : ℝ) ^ 2 / 2 / m p - s ≤ e ∧
+        (p : ℤ) ^ e ∣ Int.Matrix.minorGcd (Matrix.of fun i k => eval (z i) (g k)) := by
+    have : Fact p.Prime := ⟨(mem_filter.mp (mem_sdiff.mp hp).1).2⟩
+    have hchar : f.totalDegree < p := by exact_mod_cast hd4.trans_lt (hdL.trans_lt hpL)
+    obtain ⟨hm, e, he, hdiv⟩ := singular_reduction_minorGcd_card_bound hs f g z hz
+      (hf p hp hpL) hchar
+    exact ⟨by dsimp only [m]; exact_mod_cast hm, e, by rwa [div_div], hdiv⟩
+  have h := determinant_log_lower_of_local_divisors hx hd hdL (by linarith : 0 ≤ C + 1)
+    (show 0 ≤ (s : ℝ) ^ 2 / 2 by positivity) (Nat.cast_nonneg s) B ∅ (empty_subset B)
+    (by simp) 0 m (lt_of_lt_of_le one_pos (Int.Matrix.one_le_minorGcd hrows))
+    (fun p hp hpL => (hlocal p hp hpL).1) (fun p hp hpL => by
+      have hcorr := singular_correction_absorb hd hdL hpL
+      have hcount := hupper p hp hpL
+      dsimp only [m]
+      rw [Nat.cast_add]
+      nlinarith) (fun p hp hpL => (hlocal p hp hpL).2) (by simp)
+  rw [sum_empty, add_zero] at h
+  linarith
 
 /-- The paper's cutoff 27*d^4 leaves precisely a 4*log(d) degree loss,
 plus absolute constants and the explicit bad-prime charge. -/
@@ -111,12 +84,7 @@ theorem singular_determinant_log_lower_degree_four {s N : ℕ} (hs : 0 < s)
       2 * mertensError - (∑ p ∈ B, Real.log p / p) - 2 * primeBlockMass * (C + 1)) -
       s * ((Real.log 4 + 4) * x) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i k => eval (z i) (g k))) := by
-  have hd1 : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast hd
-  have hL : 1 ≤ 27 * (f.totalDegree : ℝ) ^ 4 := by
-    have h := pow_le_pow_left₀ (by norm_num : (0 : ℝ) ≤ 1) hd1 4
-    norm_num at h
-    linarith
-  have h := singular_determinant_log_lower_cutoff hs f hd g z hz hrows hx hL hC
+  have h := singular_determinant_log_lower_cutoff hs f hd g z hz hrows hx hC
     (show (f.totalDegree : ℝ) ^ 4 ≤ 27 * (f.totalDegree : ℝ) ^ 4 from
       le_mul_of_one_le_left (by positivity) (by norm_num))
     B hf hupper

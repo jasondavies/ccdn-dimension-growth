@@ -74,15 +74,5 @@ theorem exists_plane_projection_equation_degree_le {K τ : Type*} [Field K] [Fin
     exact Ideal.Quotient.eq_zero_iff_mem.symm
   rw [hh, hker, Ideal.mem_span_singleton]
 
-/-- The defining image equation vanishes at projections of source points. -/
-lemma projection_equation_eval_zero {K τ : Type*} [Field K]
-    (I : Ideal (MvPolynomial τ K)) (a : Fin 2 → MvPolynomial τ K)
-    (f : MvPolynomial (Fin 2) K) (hf : aeval a f ∈ I)
-    (z : τ → K) (hz : ∀ g ∈ I, eval z g = 0) :
-    eval (fun i => eval z (a i)) f = 0 := by
-  have hh := hz (aeval a f) hf
-  change eval z (eval₂ C a f) = 0 at hh
-  rwa [← eval_assoc] at hh
-
 end
 end CCDN

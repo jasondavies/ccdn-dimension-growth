@@ -37,10 +37,6 @@ def planeShear (R : Type*) [CommRing R] (a : R) :
     (by rw [planeShearHom_comp, add_neg_cancel, planeShearHom_zero])
     (by rw [planeShearHom_comp, neg_add_cancel, planeShearHom_zero])
 
-lemma planeShear_irreducible_iff {R : Type*} [CommRing R] (a : R)
-    (f : MvPolynomial (Fin 2) R) : Irreducible (planeShear R a f) ↔ Irreducible f :=
-  MulEquiv.irreducible_iff (f := planeShear R a)
-
 lemma planeShear_monomial {R : Type*} [CommRing R] (a : R)
     (m : Fin 2 →₀ ℕ) (c : R) :
     planeShear R a (monomial m c) =

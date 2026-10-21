@@ -64,33 +64,5 @@ theorem closedForm_minor_log_height
   rw [he]
   nlinarith [mul_nonneg (sq_nonneg (d : ℝ)) hlog]
 
-/-- A selected nonzero coefficient minor controls the charge of every finite
-set of primes where the reduced matrix drops below its order. -/
-theorem closedForm_rank_drop_prime_charge
-    (d r : ℕ) (hd : 1 ≤ d) (hr : r ≤ 2 * d ^ 2)
-    (f : ℤ[X][X]) (H : ℝ) (hH : 1 ≤ H)
-    (hf : BivariateCoefficientBound f H) (houter : f.natDegree ≤ d)
-    (hinner : ∀ i, (f.coeff i).natDegree ≤ d)
-    (a : Fin r → ℕ × ℕ) (c : Fin r → ClosedFormColumns d)
-    (hD : ((closedFormCoefficientMatrix d f).submatrix a c).det ≠ 0)
-    (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime)
-    (hlo : ∀ p ∈ P, 27 * (d : ℝ) ^ 4 < (p : ℝ))
-    (hrank : ∀ p ∈ P,
-      (closedFormCoefficientMatrix d (bivariateMap (Int.castRingHom (ZMod p)) f)).rank < r) :
-    (∑ p ∈ P, Real.log p / p) ≤
-      Real.log (1 + Real.log H / (d : ℝ) ^ 2) + 2 * mertensError + 1 := by
-  let D := ((closedFormCoefficientMatrix d f).submatrix a c).det
-  have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
-  have hpos : 0 < |D| := abs_pos.mpr hD
-  refine bad_prime_charge_of_height (D := |D|) (L := 27 * (d : ℝ) ^ 4)
-    (H := 1 + Real.log H / (d : ℝ) ^ 2) P hpos hP ?_ ?_ ?_ hlo ?_
-  · intro p hp
-    have : Fact p.Prime := ⟨hP p hp⟩
-    exact (dvd_abs _ _).mpr (characteristic_dvd_closedForm_minor_of_rank_lt (K := ZMod p)
-      p d r f a c (hrank p hp))
-  · nlinarith [sq_nonneg ((d : ℝ) ^ 2 - 1)]
-  · exact le_add_of_nonneg_right (div_nonneg (Real.log_nonneg hH) (sq_nonneg _))
-  · simpa only [D, Int.cast_abs] using closedForm_minor_log_height d r hd hr f H hH hf houter hinner a c hD
-
 end
 end CCDN

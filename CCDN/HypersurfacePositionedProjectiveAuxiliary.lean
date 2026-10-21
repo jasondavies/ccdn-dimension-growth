@@ -41,35 +41,23 @@ theorem hypersurface_small_height_projective_auxiliary
     (hheight : Real.log (integerCoefficientHeight f : ℝ) ≤
       2 * d * (n + 2 : ℝ) * Real.log B)
     (hposition : Real.log (integerCoefficientHeight f : ℝ) ≤
-      Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
-        T * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))) :
+      Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * d * degreeRoot n d) :
     ∃ M : ℕ,
       (M : ℝ) ≤ hypersurfaceSmallProjectiveConstant n T *
-        ((d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * hypersurfaceBadPrimeFactor f *
-          B ^ ((n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) /
-          (integerCoefficientHeight f : ℝ) ^
-            (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))))) +
+          auxMainTerm n d B (hypersurfaceBadPrimeFactor f) (integerCoefficientHeight f) +
         (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B + 4 * d ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ x : ProjectivePoint (n + 2), x.mulHeight ≤ B →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) g)) ∧ ¬ f ∣ g := by
-  classical
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 := ne_zero_of_irreducible_map hir
   have hH : 0 < (integerCoefficientHeight f : ℝ) := by
     exact_mod_cast integerCoefficientHeight_pos f hf0
   have hL : 0 < |((order.leadingCoeff f : ℤ) : ℝ)| :=
     abs_pos.mpr (Int.cast_ne_zero.mpr (order.leadingCoeff_ne_zero_iff.mpr hf0))
   have hlead : |((order.leadingCoeff f : ℤ) : ℝ)| ≤ (integerCoefficientHeight f : ℝ) :=
     coefficient_abs_le_integerCoefficientHeight f (order.degree f)
-  let S := projectivePoints (projectiveZeroLocus (map (Int.castRingHom ℚ) f)) B
-  let e := (Fintype.equivFin S).symm
-  let z : Fin (Fintype.card S) → IntPoint (n + 3) := fun i => primitiveProjectiveRep (e i).val
-  have hprim (i) : Finset.univ.gcd (z i) = 1 := primitiveProjectiveRep_gcd _
-  have hzero (i) : eval (z i) f = 0 :=
-    (mem_integer_projectiveZeroLocus hf _).mp (mem_projectivePoints.mp (e i).property).2
-  have hbox (i j) : |(z i j : ℝ)| ≤ B :=
-    (primitiveProjectiveRep_bound _ j).trans (mem_projectivePoints.mp (e i).property).1
+  obtain ⟨t, z, hprim, hzero, hbox, hlift⟩ := exists_bounded_projective_zero_family f hf B
   obtain ⟨bad, M, hbad, hdegree, g, hg0, hgh, hgz, hgnd⟩ :=
     hypersurface_auxiliary_small_height_degree order f hf hd hir z hprim hzero hB hbox
       ((Real.log_le_log hL hlead).trans hheight)
@@ -78,24 +66,13 @@ theorem hypersurface_small_height_projective_auxiliary
     (Real.exp_pos (∑ p ∈ bad, Real.log p / p)).le hposition
   have hp' : hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
       (Real.exp (∑ p ∈ bad, Real.log p / p)) ≤ hypersurfaceSmallProjectiveConstant n T *
-        ((d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * hypersurfaceBadPrimeFactor f *
-          B ^ ((n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) /
-          (integerCoefficientHeight f : ℝ) ^
-            (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))))) := by
+        auxMainTerm n d B (hypersurfaceBadPrimeFactor f) (integerCoefficientHeight f) := by
     rw [hfactor]
     convert hp using 1
-    unfold hypersurfaceSmallProjectiveConstant hypersurfaceSmallThreshold
+    unfold hypersurfaceSmallProjectiveConstant hypersurfaceSmallThreshold auxMainTerm
     ring
-  refine ⟨M, ?_, g, hg0, hgh, ?_, hgnd⟩
-  · have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
-    linarith
-  · intro x hxB hxf
-    let xS : S := ⟨x, mem_projectivePoints.mpr ⟨hxB, hxf⟩⟩
-    obtain ⟨i, hi⟩ := e.surjective xS
-    have hh := hgz i
-    dsimp only [z] at hh
-    rw [hi] at hh
-    exact (mem_integer_projectiveZeroLocus hgh x).mpr hh
+  have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
+  exact ⟨M, by linarith, g, hg0, hgh, hlift g hgh hgz, hgnd⟩
 
 /-- CCDN Lemma 3.3.3 for the full bounded projective zero set. The displayed
 constant depends only on dimension and the fixed positioning parameter. -/
@@ -107,38 +84,21 @@ theorem hypersurface_large_height_projective_auxiliary
     (hheight : 2 * d * (n + 2 : ℝ) * Real.log B ≤
       Real.log (integerCoefficientHeight f : ℝ))
     (hposition : Real.log (integerCoefficientHeight f : ℝ) ≤
-      Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
-        T * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))) :
+      Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * d * degreeRoot n d) :
     ∃ M : ℕ, (M : ℝ) ≤ hypersurfaceLargeProjectiveConstant n T *
         (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ x : ProjectivePoint (n + 2), x.mulHeight ≤ B →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) g)) ∧ ¬ f ∣ g := by
-  classical
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
   have hH : 1 ≤ (integerCoefficientHeight f : ℝ) := by
-    exact_mod_cast integerCoefficientHeight_pos f hf0
-  let S := projectivePoints (projectiveZeroLocus (map (Int.castRingHom ℚ) f)) B
-  let e := (Fintype.equivFin S).symm
-  let z : Fin (Fintype.card S) → IntPoint (n + 3) := fun i => primitiveProjectiveRep (e i).val
-  have hprim (i) : Finset.univ.gcd (z i) = 1 := primitiveProjectiveRep_gcd _
-  have hzero (i) : eval (z i) f = 0 :=
-    (mem_integer_projectiveZeroLocus hf _).mp (mem_projectivePoints.mp (e i).property).2
-  have hbox (i j) : |(z i j : ℝ)| ≤ B :=
-    (primitiveProjectiveRep_bound _ j).trans (mem_projectivePoints.mp (e i).property).1
+    exact_mod_cast integerCoefficientHeight_pos f (ne_zero_of_irreducible_map hir)
+  obtain ⟨t, z, hprim, hzero, hbox, hlift⟩ := exists_bounded_projective_zero_family f hf B
   obtain ⟨M, hdegree, g, hg0, hgh, hgz, hgnd⟩ :=
     hypersurface_auxiliary_large_height_degree order f hf hd hir
       (integerCoefficientHeight f : ℝ) hH (coefficient_abs_le_integerCoefficientHeight f)
       z hprim hzero hB hbox T hT hheight hposition
-  refine ⟨M, hdegree, g, hg0, hgh, ?_, hgnd⟩
-  intro x hxB hxf
-  let xS : S := ⟨x, mem_projectivePoints.mpr ⟨hxB, hxf⟩⟩
-  obtain ⟨i, hi⟩ := e.surjective xS
-  have hh := hgz i
-  dsimp only [z] at hh
-  rw [hi] at hh
-  exact (mem_integer_projectiveZeroLocus hgh x).mpr hh
+  exact ⟨M, hdegree, g, hg0, hgh, hlift g hgh hgz, hgnd⟩
 
 end
 end CCDN

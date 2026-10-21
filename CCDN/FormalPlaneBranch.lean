@@ -17,11 +17,6 @@ def formalPlanePolynomial {K : Type*} [CommRing K] (j : Fin 2) (a : K) :
   MvPolynomial.eval₂Hom (Polynomial.C.comp PowerSeries.C)
     (fun k => if k = j then Polynomial.X else Polynomial.C (PowerSeries.X + PowerSeries.C a))
 
-@[simp] lemma formalPlanePolynomial_C {K : Type*} [CommRing K]
-    (j : Fin 2) (a c : K) :
-    formalPlanePolynomial j a (MvPolynomial.C c) = Polynomial.C (PowerSeries.C c) := by
-  simp [formalPlanePolynomial]
-
 @[simp] lemma formalPlanePolynomial_X {K : Type*} [CommRing K]
     (j k : Fin 2) (a : K) :
     formalPlanePolynomial j a (MvPolynomial.X k) =

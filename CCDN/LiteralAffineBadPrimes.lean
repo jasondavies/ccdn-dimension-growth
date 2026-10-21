@@ -48,7 +48,7 @@ lemma literalAffineBadPrimeFactor_eq_exp {n d : ℕ} (f : MvPolynomial (Fin (n +
     (hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
     (hd : f.totalDegree = d) (bad : Finset ℕ)
     (hbad : ∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ LiteralAffineBadReduction f p) :
-    literalAffineBadPrimeFactor f = Real.exp (∑ p ∈ bad, Real.log p / p) := by
+    literalAffineBadPrimeFactor f = primeSetFactor bad := by
   classical
   unfold literalAffineBadPrimeFactor
   rw [dite_eq_left hf]
@@ -73,17 +73,6 @@ lemma literalAffineBadPrimeFactor_le_inclusive {n : ℕ}
     · intro p _ _
       exact div_nonneg (Real.log_natCast_nonneg p) (Nat.cast_nonneg p)
   · rw [literalAffineBadPrimeFactor_eq_zero f hf, hypersurfaceBadPrimeFactor_eq_zero f hf]
-
-lemma literal_affine_good_reduction {σ : Type*} (f : MvPolynomial σ ℤ)
-    (p : ℕ) [Fact p.Prime] (hgood : ¬LiteralAffineBadReduction f p) :
-    Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
-      (map (Int.castRingHom (ZMod p)) f)) := by
-  have hg : Irreducible (map (Int.castRingHom (AlgebraicClosure (ZMod p))) f) := by
-    by_contra hn
-    exact hgood ⟨Fact.out, hn⟩
-  have he : (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))).comp (Int.castRingHom (ZMod p)) =
-      Int.castRingHom (AlgebraicClosure (ZMod p)) := by ext; simp
-  simpa only [map_map, he] using hg
 
 lemma literalAffineBadReduction_affineTranslation {n : ℕ}
     (a : Fin n → ℤ) (f : MvPolynomial (Fin n) ℤ) (p : ℕ) :

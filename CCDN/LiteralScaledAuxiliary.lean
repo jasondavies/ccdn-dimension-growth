@@ -32,7 +32,7 @@ lemma hypersurfaceAuxiliaryDegreeBound_mono_b (n d : ℕ) {B b b' H : ℝ}
     (hb : b ≤ b') (hB : 0 ≤ B) (hH : 0 ≤ H) :
     hypersurfaceAuxiliaryDegreeBound n d B b H ≤ hypersurfaceAuxiliaryDegreeBound n d B b' H := by
   have hC := (hypersurfaceAbsoluteAuxiliaryConstant_pos n).le
-  unfold hypersurfaceAuxiliaryDegreeBound
+  unfold hypersurfaceAuxiliaryDegreeBound auxDegreeBound auxMainTerm
   gcongr
 
 /-- A homogeneous auxiliary for all original affine integer points, with a
@@ -129,7 +129,7 @@ theorem literal_prime_scaled_affine_auxiliary {n : ℕ}
         (Real.exp 1 * literalAffineBadPrimeFactor f)
         (integerCoefficientHeight (scaledHomogenize f.totalDegree (p : ℤ) f) : ℝ) ∧
       ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   obtain ⟨M, hM, G, _, hGhom, hGzero, hGnd⟩ := literal_scaled_homogeneous_auxiliary
     f hir hd p hp.pos (prime_scaled_zero_primitive f hp hp0) hB hpB
   let g := homogeneousSlice (n + 2) (p : ℤ) G
@@ -154,7 +154,7 @@ theorem literal_unscaled_affine_auxiliary {n : ℕ}
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
         (literalAffineBadPrimeFactor f) (integerCoefficientHeight f : ℝ) ∧
       ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   obtain ⟨M, hM, G, _, hGhom, hGzero, hGnd⟩ := literal_scaled_homogeneous_auxiliary
     f hir hd 1 (by omega) (fun x _ => primitive_affine_integer_coordinates x) hB (by simpa using hB)
   let g := homogeneousSlice (n + 2) 1 G

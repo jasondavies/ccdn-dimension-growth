@@ -29,36 +29,6 @@ lemma eval_sub_originShift {R σ : Type*} [CommRing R] (a x : σ → R)
   rw [eval_originShift]
   simp only [sub_add_cancel]
 
-/-- A reduced hypersurface point determines a positive, degree-bounded
-multiplicity in every ambient dimension. -/
-theorem exists_hypersurface_reduction_multiplicity {p : ℕ} [Fact p.Prime] {σ : Type*}
-    (f : MvPolynomial σ ℤ) (a : σ → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) f ≠ 0)
-    (ha : eval₂ (Int.castRingHom (ZMod p)) (fun j => (a j : ZMod p)) f = 0) :
-    ∃ μ : ℕ, 0 < μ ∧ μ ≤ f.totalDegree ∧
-      map (Int.castRingHom (ZMod p)) (originShift a f) ∈ idealOfVars σ (ZMod p) ^ μ ∧
-      homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (originShift a f)) ≠ 0 := by
-  let φ := Int.castRingHom (ZMod p)
-  have hshift := originShift_map φ a f
-  have hn : map φ (originShift a f) ≠ 0 := by
-    rw [hshift]
-    exact originShift_ne_zero _ hf
-  have hz : eval (0 : σ → ZMod p) (map φ (originShift a f)) = 0 := by
-    rw [hshift, eval_zero_originShift, eval_map]
-    exact ha
-  have he : map φ (originShift a f) =
-      eval₂Hom (C.comp φ) (fun j => X j + C (φ (a j))) f := by
-    rw [hshift]
-    exact eval₂Hom_map_hom φ _ C f
-  have hdeg : (map φ (originShift a f)).totalDegree ≤ f.totalDegree := by
-    rw [he]
-    apply linear_eval₂_totalDegree_le
-    intro j
-    exact (totalDegree_add _ _).trans
-      (max_le (le_of_eq (totalDegree_X _)) (by rw [totalDegree_C]; omega))
-  obtain ⟨μ, hpos, hμdeg, hpow, hμ⟩ := exists_origin_multiplicity _ hn hz
-  exact ⟨μ, hpos, hμdeg.trans hdeg, hpow, hμ⟩
-
 /-- Translation carries the finite-precision determinant theorem to any
 residue class. Its divisor and its precision use the same explicit exponent. -/
 theorem hypersurface_residue_pow_dvd_det_mod {p n μ s : ℕ} [Fact p.Prime]
@@ -76,31 +46,6 @@ theorem hypersurface_residue_pow_dvd_det_mod {p n μ s : ℕ} [Fact p.Prime]
     (fun i => by simpa only [eval_sub_originShift] using hfx i)
     (fun j => originShift a (F j))
   simpa only [eval_sub_originShift] using h
-
-/-- At every residue point of a nonzero reduced equation there is an
-explicit exponent, uniform in all evaluation polynomials and points, with the
-sharp leading term and a linear error independent of multiplicity. -/
-theorem exists_hypersurface_local_determinant_bound {p n : ℕ} [Fact p.Prime]
-    (f : MvPolynomial (Fin (n + 2)) ℤ) (a : Fin (n + 2) → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) f ≠ 0)
-    (ha : eval₂ (Int.castRingHom (ZMod p)) (fun j => (a j : ZMod p)) f = 0) :
-    ∃ μ : ℕ, 0 < μ ∧ μ ≤ f.totalDegree ∧
-      (∀ s : ℕ, (((n + 1).factorial : ℝ) / μ) ^ (1 / (n + 1 : ℝ)) *
-        (n + 1 : ℝ) / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) -
-        (n + 2 : ℝ) * s ≤ hypersurfaceMultiplicityExponent (n + 1) μ s) ∧
-      ∀ (s : ℕ) (x : Fin s → Fin (n + 2) → ℤ),
-        (∀ i j, (p : ℤ) ∣ x i j - a j) →
-        (∀ i, (p : ℤ) ^ hypersurfaceMultiplicityExponent (n + 1) μ s ∣ eval (x i) f) →
-        ∀ F : Fin s → MvPolynomial (Fin (n + 2)) ℤ,
-          (p : ℤ) ^ hypersurfaceMultiplicityExponent (n + 1) μ s ∣
-            (Matrix.of fun i j => eval (x i) (F j)).det := by
-  obtain ⟨μ, hpos, hdeg, hpow, hμ⟩ := exists_hypersurface_reduction_multiplicity f a hf ha
-  refine ⟨μ, hpos, hdeg, ?_, ?_⟩
-  · intro s
-    simpa only [Nat.cast_add, Nat.cast_one, show (n : ℝ) + 1 + 1 = n + 2 by ring] using
-      hypersurfaceMultiplicityExponent_sharp (n + 1) s (by omega) hpos
-  · intro s x hx hfx F
-    exact hypersurface_residue_pow_dvd_det_mod f a hpow hμ x hx hfx F
 
 end
 end CCDN

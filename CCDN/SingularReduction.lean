@@ -1,7 +1,6 @@
 module
 
 public import CCDN.PlaneMultiplicity
-public import CCDN.SmoothReduction
 
 /-! All reduced points, their positive multiplicities, and the resulting
 local determinant lower bound. The sharp finite-field total-multiplicity
@@ -11,6 +10,12 @@ estimate is a separate geometric obligation. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial
+
+lemma cast_plane_eval {p : ℕ} (f : MvPolynomial (Fin 2) ℤ) (z : Fin 2 → ℤ) :
+    (MvPolynomial.eval z f : ZMod p) =
+      MvPolynomial.eval₂ (Int.castRingHom (ZMod p)) (fun j => (z j : ZMod p)) f := by
+  simpa only [MvPolynomial.eval₂_id, RingHom.comp_id, Function.comp_def, Int.coe_castRingHom] using
+    MvPolynomial.eval₂_comp_left (Int.castRingHom (ZMod p)) (RingHom.id ℤ) z f
 
 /-- All affine rational points of the reduced plane equation. -/
 def PlaneResidue (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) :=

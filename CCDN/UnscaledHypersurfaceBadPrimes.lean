@@ -69,30 +69,6 @@ lemma hypersurfaceBadReduction_unscaledHomogenize_imp {n : ℕ}
     exact scaledHomogenize_irreducible _ hir one_ne_zero
   · exact Or.inl hd
 
-lemma hypersurfaceBadReduction_unscaledHomogenize_iff {n : ℕ}
-    (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) (hd : 2 ≤ f.totalDegree) (p : ℕ) :
-    HypersurfaceBadReduction (scaledHomogenize f.totalDegree 1 f) p ↔
-      HypersurfaceBadReduction f p := by
-  refine ⟨hypersurfaceBadReduction_unscaledHomogenize_imp f hf p, ?_⟩
-  intro hbad
-  let : Fact p.Prime := ⟨hbad.1⟩
-  apply (homogeneous_hypersurfaceBadReduction_iff _
-    (scaledHomogenize_homogeneous 1 f le_rfl)
-    (scaledHomogenize_ne_zero _ one_ne_zero hf) p).mpr
-  intro hir
-  let F := map (Int.castRingHom (AlgebraicClosure (ZMod p)))
-    (scaledHomogenize f.totalDegree 1 f)
-  have hhom : F.IsHomogeneous f.totalDegree :=
-    (scaledHomogenize_homogeneous 1 f le_rfl).map _
-  have hX : ¬ X 0 ∣ F := variable_not_dvd_irreducible_homogeneous F hhom hir hd 0
-  have hchart : affineChart n F = map (Int.castRingHom (AlgebraicClosure (ZMod p))) f := by
-    rw [show F = map _ _ from rfl, affineChart_map, scaledHomogenize_one,
-      affineChart_boundedHomogenize]
-  have hir' := affineChart_irreducible_of_not_variable_dvd F hhom hir hX
-  have hdeg := affineChart_degree_of_not_variable_dvd F hhom hX
-  rw [hchart] at hir' hdeg
-  exact hbad.2.elim (fun h => h hdeg) (fun h => h hir')
-
 /-- Inclusion of the geometric bad-prime sets gives monotonicity of
  the corresponding factors, even across different numbers of variables. -/
 theorem hypersurfaceBadPrimeFactor_mono_of_badReduction_imp {n m : ℕ}
@@ -139,30 +115,6 @@ theorem hypersurfaceBadPrimeFactor_unscaledHomogenize_le {n : ℕ}
       (scaledHomogenize_ne_zero _ one_ne_zero hf)
   · exact (unscaledHomogenize_absolute_irreducible_iff f hf).mp
   · exact hypersurfaceBadReduction_unscaledHomogenize_imp f hf
-
-/-- In degrees at least two the two factors agree exactly. The degree
- restriction excludes linear reductions that become the homogenizing variable. -/
-theorem hypersurfaceBadPrimeFactor_unscaledHomogenize_eq {n : ℕ}
-    (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f ≠ 0) (hd : 2 ≤ f.totalDegree) :
-    hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f) =
-      hypersurfaceBadPrimeFactor f := by
-  apply le_antisymm (hypersurfaceBadPrimeFactor_unscaledHomogenize_le f hf)
-  apply hypersurfaceBadPrimeFactor_mono_of_badReduction_imp
-  · exact ((scaledHomogenize_homogeneous 1 f le_rfl).totalDegree
-      (scaledHomogenize_ne_zero _ one_ne_zero hf)).symm
-  · exact (unscaledHomogenize_absolute_irreducible_iff f hf).mpr
-  · intro q
-    exact (hypersurfaceBadReduction_unscaledHomogenize_iff f hf hd q).mpr
-
-/-- Prime-scaled homogenization is controlled by the original affine factor,
- with an absolute multiplicative constant and no degree restriction. -/
-theorem hypersurfaceBadPrimeFactor_prime_scaled_le_affine {n : ℕ}
-    (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f ≠ 0) {p : ℕ} (hp : p.Prime) :
-    hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree (p : ℤ) f) ≤
-      Real.exp 1 * hypersurfaceBadPrimeFactor f := by
-  exact (hypersurfaceBadPrimeFactor_scaledHomogenize_le f hf hp).trans
-    (mul_le_mul_of_nonneg_left (hypersurfaceBadPrimeFactor_unscaledHomogenize_le f hf)
-      (Real.exp_pos _).le)
 
 end
 end CCDN

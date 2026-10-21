@@ -33,19 +33,15 @@ theorem affine_congruence_determinant_log_lower_height {n s N M : ℕ} (hs : 0 <
     (hsmooth : ∀ p ∈ P, ∃ j, eval (fun i => (a p i : ZMod p))
       (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0)
     (hres : ∀ p ∈ P, ∀ i j, (p : ℤ) ∣ x i j - a p j) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-      (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-        (Real.log s - (n + 1 : ℝ) *
-          (4 * Real.log f.totalDegree +
-            congruenceHeightCharge (n + 3) f.totalDegree H (∑ p ∈ P, Real.log p)) -
-              hypersurfaceDeterminantError n) +
+    hypersurfaceRankLowerBound n s f.totalDegree
+        (congruenceHeightCharge (n + 3) f.totalDegree H (∑ p ∈ P, Real.log p)) +
       (hypersurfaceDeterminantMain n s - (n + 2 : ℝ) * s) *
         (∑ p ∈ P, Real.log p) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (x i) (G j))) := by
   obtain ⟨bad, hbad, hbound⟩ := exists_affine_congruence_determinant_log_lower hs f hir hd
     G hG x hx hrows P hP a ha hsmooth hres
   let F := scaledHomogenize f.totalDegree 1 f
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hF0 : F ≠ 0 := scaledHomogenize_ne_zero _ one_ne_zero hf0
   have hFdegree : F.totalDegree = f.totalDegree :=
     (scaledHomogenize_homogeneous 1 f le_rfl).totalDegree hF0

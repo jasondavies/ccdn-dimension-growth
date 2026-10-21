@@ -61,20 +61,6 @@ lemma hypersurfacePointIdeal_isMaximal (f : MvPolynomial (Fin n) K)
   rintro _ rfl
   exact hf
 
-/-- The residue field at the rational point is canonically the coefficient
-field, as an algebra over that field. -/
-def hypersurfacePointCoordinateResidueEquiv (f : MvPolynomial (Fin n) K)
-    (a : Fin n → K) (hf : eval a f = 0) :
-    (HypersurfaceCoordinateRing f ⧸ hypersurfacePointIdeal f a) ≃ₐ[K] K := by
-  let φ : MvPolynomial (Fin n) K →ₐ[K] K :=
-    { eval a with commutes' := fun c => by simp }
-  have hspan : Ideal.span {f} ≤ RingHom.ker φ := by
-    apply Ideal.span_le.mpr
-    rintro _ rfl
-    exact hf
-  exact (DoubleQuot.quotQuotEquivQuotOfLEₐ K hspan).trans
-    (Ideal.quotientKerAlgEquivOfSurjective (f := φ) (fun c => ⟨C c, by simp [φ]⟩))
-
 lemma hypersurfaceTranslationEquiv_map_pointIdeal (f : MvPolynomial (Fin n) K)
     (a : Fin n → K) :
     (hypersurfacePointIdeal f a).map (hypersurfaceTranslationEquiv f a).toRingHom =
@@ -101,12 +87,6 @@ variable (f : MvPolynomial (Fin n) K) (a : Fin n → K) [Fact (eval a f = 0)]
 
 local instance : (hypersurfacePointIdeal f a).IsMaximal :=
   hypersurfacePointIdeal_isMaximal f a Fact.out
-
-def hypersurfacePointStalkResidueEquiv :
-    ResidueField (HypersurfacePointStalk f a) ≃ₐ[K] K :=
-  ((IsLocalization.AtPrime.equivQuotMaximalIdeal
-    (hypersurfacePointIdeal f a) (HypersurfacePointStalk f a)).restrictScalars K).symm.trans
-      (hypersurfacePointCoordinateResidueEquiv f a Fact.out)
 
 /-- The local ring's layer at a is identified with the explicitly
 computed origin layer of f(X+a). -/

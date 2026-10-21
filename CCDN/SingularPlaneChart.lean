@@ -1,7 +1,9 @@
 module
 
 public import CCDN.SingularLocalDeterminant
-public import CCDN.SmoothPlaneChart
+public import CCDN.SmoothLocalDeterminant
+public import CCDN.ResidueAggregation
+public import Mathlib.Algebra.MvPolynomial.PDeriv
 import all ArithmeticHeights.BombieriVaaler
 
 /-! Translation and residue-block assembly for the singular local
@@ -64,24 +66,6 @@ theorem singular_plane_chart_det_divisibility {p μ s : ℕ} [Fact p.Prime]
     (fun i j => x i j - a j) hx (fun i => by rw [he]; exact hfx i)
     (fun j => planeTranslate a (F j))
   simpa only [he] using h
-
-/-- All maximal minors have the same local multiplicity divisor. -/
-theorem singular_plane_chart_minorGcd {p μ s N : ℕ} [Fact p.Prime]
-    (f : MvPolynomial (Fin 2) ℤ) (F : Fin N → MvPolynomial (Fin 2) ℤ)
-    (x : Fin s → Fin 2 → ℤ) (a : Fin 2 → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) (planeTranslate a f) ∈
-      idealOfVars (Fin 2) (ZMod p) ^ μ)
-    (hμ : homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (planeTranslate a f)) ≠ 0)
-    (hx : ∀ i j, (p : ℤ) ∣ x i j - a j) (hfx : ∀ i, eval (x i) f = 0) :
-    (p : ℤ) ^ multiplicityExponent s μ ∣
-      Int.Matrix.minorGcd (Matrix.of fun i j => eval (x i) (F j)) := by
-  classical
-  unfold Int.Matrix.minorGcd
-  apply Finset.dvd_gcd
-  intro S _
-  rw [Matrix.plucker_row_eq_det_submatrix]
-  let t := (S : Finset (Fin N)).orderEmbOfFin (Set.powersetCard.card_eq S)
-  exact singular_plane_chart_det_divisibility f (fun j => F (t j)) x a hf hμ hx hfx
 
 /-- Summed multiplicity exponents for arbitrary residue blocks, including
 singular blocks. Each local hypothesis describes the reduced equation. -/

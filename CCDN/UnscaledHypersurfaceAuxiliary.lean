@@ -122,7 +122,7 @@ theorem unscaled_affine_auxiliary {n : ℕ}
     exact_mod_cast homogeneousSlice_degree_le (1 : ℤ) hGhom
   have hh := hgM.trans hM
   simpa only [F, integerCoefficientHeight_scaledHomogenize_one,
-    hypersurfaceAuxiliaryDegreeBound] using hh
+    hypersurfaceAuxiliaryDegreeBound, auxDegreeBound, auxMainTerm] using hh
 
 /-- Either the affine equation has controlled coefficient height, or a
 degree-at-most-d nonmultiple vanishes on every bounded integer zero. -/

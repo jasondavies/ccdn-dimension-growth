@@ -3,7 +3,8 @@ module
 public import CCDN.HypersurfaceLargeHeightAuxiliary
 
 /-! Combine the two height ranges under the paper's explicit leading-coefficient
-position condition. The main term retains the original bad-prime factor. -/
+position condition. The main term retains the bad-prime factor of any finite prime
+set whose normalized comparison holds. -/
 
 @[expose] public section
 namespace CCDN
@@ -20,7 +21,7 @@ lemma inverse_rpow_le_of_log_position {H L q D : ℝ} (hH : 0 < H) (hL : 0 < L)
 
 lemma hypersurfaceSmallThreshold_position {n d : ℕ} {B H L A T : ℝ}
     (hd : 0 < d) (hB : 0 ≤ B) (hH : 0 < H) (hL : 0 < L) (hA : 0 ≤ A)
-    (hposition : Real.log H ≤ Real.log L + T * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))) :
+    (hposition : Real.log H ≤ Real.log L + T * d * degreeRoot n d) :
     hypersurfaceSmallThreshold n d B L A ≤
       Real.exp (T / (n + 1 : ℝ)) * hypersurfaceSmallThreshold n d B H A := by
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
@@ -43,10 +44,76 @@ def hypersurfacePositionedAuxiliaryConstant (n : ℕ) (T : ℝ) : ℝ :=
     Real.exp (T / (n + 1 : ℝ)) *
       Real.exp (hypersurfaceSmallHeightError (n + 1) (hypersurfaceBadPrimeNormalizedError n))
 
+/-- The small-height degree bound fits under the positioned bound. -/
+lemma small_height_bound_le_positioned {n d : ℕ} (hd : 0 < d) {B b H T : ℝ} (hB : 1 ≤ B)
+    (hb : 0 ≤ b) (hH : 0 ≤ H) :
+    2 * d + (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
+        Real.exp (T / (n + 1 : ℝ)) * Real.exp (hypersurfaceSmallHeightError (n + 1)
+          (hypersurfaceBadPrimeNormalizedError n)) * auxMainTerm n d B b H + 2 ≤
+      hypersurfacePositionedAuxiliaryConstant n T * auxDegreeBound n d B b H := by
+  have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
+  have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
+  let Q := auxMainTerm n d B b H
+  let l := (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B
+  let D := (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ))
+  let C := hypersurfacePositionedAuxiliaryConstant n T
+  let Cs := Real.exp (T / (n + 1 : ℝ)) *
+    Real.exp (hypersurfaceSmallHeightError (n + 1) (hypersurfaceBadPrimeNormalizedError n))
+  have hQ : 0 ≤ Q := by
+    have : (0 : ℝ) ≤ B := by linarith
+    dsimp [Q, auxMainTerm]; positivity
+  have hl : 0 ≤ l := mul_nonneg (Real.rpow_nonneg hd0.le _) (Real.log_nonneg hB)
+  have hD : 0 ≤ D := Real.rpow_nonneg hd0.le _
+  have hlarge := Real.exp_pos
+    (hypersurfaceLargeHeightError (n + 1) (hypersurfaceNormalizedError n) T)
+  have hn : (0 : ℝ) ≤ n := Nat.cast_nonneg n
+  have hCs : Cs ≤ C := by
+    dsimp only [Cs, C, hypersurfacePositionedAuxiliaryConstant]
+    linarith
+  have hC4 : 4 ≤ C := by
+    have : 0 < Cs := mul_pos (Real.exp_pos _) (Real.exp_pos _)
+    dsimp only [C, hypersurfacePositionedAuxiliaryConstant]
+    dsimp only [Cs] at this
+    linarith
+  have hdD : (d : ℝ) ≤ D := le_rpow_four_sub_inv hd
+  change 2 * d + l + Cs * Q + 2 ≤ C * (Q + l + D)
+  have h1 := mul_le_mul_of_nonneg_right hCs hQ
+  have h2 := mul_le_mul_of_nonneg_right (show 1 ≤ C by linarith) hl
+  have h3 := mul_le_mul_of_nonneg_right hC4 hD
+  nlinarith
+
+/-- The large-height degree bound fits under the positioned bound. -/
+lemma large_height_bound_le_positioned {n d : ℕ} (hd : 0 < d) {B b H T : ℝ} (hB : 1 ≤ B)
+    (hb : 0 ≤ b) (hH : 0 ≤ H) :
+    (8 * (n + 2 : ℝ) + Real.exp (hypersurfaceLargeHeightError (n + 1)
+        (hypersurfaceNormalizedError n) T) + 2) * (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) ≤
+      hypersurfacePositionedAuxiliaryConstant n T * auxDegreeBound n d B b H := by
+  have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
+  have hD : 0 ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) := Real.rpow_nonneg hd0.le _
+  have hQl : 0 ≤ auxMainTerm n d B b H + (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B := by
+    have : (0 : ℝ) ≤ B := by linarith
+    have := Real.log_nonneg hB
+    unfold auxMainTerm; positivity
+  have hS : 0 < Real.exp (T / (n + 1 : ℝ)) *
+      Real.exp (hypersurfaceSmallHeightError (n + 1) (hypersurfaceBadPrimeNormalizedError n)) :=
+    mul_pos (Real.exp_pos _) (Real.exp_pos _)
+  have hlarge := Real.exp_pos
+    (hypersurfaceLargeHeightError (n + 1) (hypersurfaceNormalizedError n) T)
+  have hCl : 8 * (n + 2 : ℝ) + Real.exp (hypersurfaceLargeHeightError (n + 1)
+      (hypersurfaceNormalizedError n) T) + 2 ≤ hypersurfacePositionedAuxiliaryConstant n T := by
+    unfold hypersurfacePositionedAuxiliaryConstant
+    linarith
+  have hC : 0 ≤ hypersurfacePositionedAuxiliaryConstant n T := by
+    have := Nat.cast_nonneg (α := ℝ) n
+    linarith
+  unfold auxDegreeBound
+  nlinarith [mul_le_mul_of_nonneg_right hCl hD, mul_nonneg hC hQl]
+
 /-- The coefficient-sensitive auxiliary theorem for an absolutely irreducible
-homogeneous equation satisfying explicit leading-coefficient positioning.
-All degrees, both height ranges and the bad-prime set are constructed. -/
-theorem hypersurface_positioned_auxiliary_degree
+homogeneous equation satisfying explicit leading-coefficient positioning, for any
+finite prime set `bad` for which the normalized comparison holds. Both height ranges
+and the degree are constructed. -/
+theorem positioned_auxiliary_degree_of_comparison
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf : f.IsHomogeneous d) (hd : 0 < d)
@@ -54,90 +121,37 @@ theorem hypersurface_positioned_auxiliary_degree
     (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)
+    (bad : Finset ℕ) (hcomp : AuxiliaryRankComparison order f d z bad)
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
     (T : ℝ) (hT : 0 ≤ T)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
-      T * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))) :
-    ∃ (bad : Finset ℕ) (M : ℕ),
-      (∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
+      T * d * degreeRoot n d) :
+    ∃ M : ℕ,
       (M : ℝ) ≤ hypersurfacePositionedAuxiliaryConstant n T *
-        ((d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * Real.exp (∑ p ∈ bad, Real.log p / p) *
-            B ^ ((n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) /
-              H ^ (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) +
-          (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B + (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ))) ∧
+        auxDegreeBound n d B (primeSetFactor bad) H ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
-  classical
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
-  have hdeg : f.totalDegree = d := hf.totalDegree hf0
-  have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
-  have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
+  have hf0 := ne_zero_of_irreducible_map hir
   have hL : 0 < |((order.leadingCoeff f : ℤ) : ℝ)| :=
     abs_pos.mpr (Int.cast_ne_zero.mpr (order.leadingCoeff_ne_zero_iff.mpr hf0))
-  let bad := (finite_fin_hypersurface_bad_primes f hir (hdeg ▸ hd)).toFinset
-  have hbad (p : ℕ) : p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p := by
-    simp only [bad, Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdeg]
-  let Q := (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * Real.exp (∑ p ∈ bad, Real.log p / p) *
-    B ^ ((n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) /
-      H ^ (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))))
-  let l := (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B
-  let D := (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ))
-  let C := hypersurfacePositionedAuxiliaryConstant n T
-  let Cs := Real.exp (T / (n + 1 : ℝ)) *
-    Real.exp (hypersurfaceSmallHeightError (n + 1) (hypersurfaceBadPrimeNormalizedError n))
-  let Cl := 8 * (n + 2 : ℝ) + Real.exp (hypersurfaceLargeHeightError (n + 1) (hypersurfaceNormalizedError n) T) + 2
-  have hQ : 0 ≤ Q := by dsimp [Q]; positivity
-  have hl : 0 ≤ l := mul_nonneg (Real.rpow_nonneg hd0.le _) (Real.log_nonneg hB)
-  have hD : 0 ≤ D := Real.rpow_nonneg hd0.le _
-  have hlarge : 0 < Real.exp (hypersurfaceLargeHeightError (n + 1) (hypersurfaceNormalizedError n) T) := Real.exp_pos _
-  have hsmallC : 0 < Cs := mul_pos (Real.exp_pos _) (Real.exp_pos _)
-  have hn : (0 : ℝ) ≤ n := Nat.cast_nonneg n
-  have hC4 : 4 ≤ C := by
-    dsimp only [C, hypersurfacePositionedAuxiliaryConstant]
-    dsimp only [Cs] at hsmallC
-    linarith
-  have hCs : Cs ≤ C := by
-    dsimp only [Cs, C, hypersurfacePositionedAuxiliaryConstant]
-    linarith
-  have hCl : Cl ≤ C := by
-    dsimp only [Cl, C, hypersurfacePositionedAuxiliaryConstant]
-    dsimp only [Cs] at hsmallC
-    linarith
-  have hexp : (1 : ℝ) ≤ 4 - 1 / (n + 1 : ℝ) := by
-    have hh := (div_le_one (by positivity : (0 : ℝ) < n + 1)).mpr
-      (show 1 ≤ (n + 1 : ℝ) by have := Nat.cast_nonneg (α := ℝ) n; linarith)
-    linarith
-  have hdD : (d : ℝ) ≤ D := by
-    simpa only [Real.rpow_one] using Real.rpow_le_rpow_of_exponent_le hd1 hexp
-  have hD1 : 1 ≤ D := hd1.trans hdD
+  have hb : 0 ≤ primeSetFactor bad := (Real.exp_pos _).le
   by_cases hsmall : Real.log H ≤ 2 * d * (n + 2 : ℝ) * Real.log B
   · have hlead : |((order.leadingCoeff f : ℤ) : ℝ)| ≤ H := hcoeff (order.degree f)
-    obtain ⟨bad', M, hbad', hbound, hg⟩ := hypersurface_auxiliary_small_height_degree order f hf hd hir
-      z hprim hz hB hbox ((Real.log_le_log hL hlead).trans hsmall)
-    have heq : bad' = bad := Finset.ext fun p => (hbad' p).trans (hbad p).symm
-    rw [heq] at hbound
+    obtain ⟨M, hbound, hg⟩ := auxiliary_small_height_degree_of_comparison order f hf0 hd z hB
+      hbox bad hcomp ((Real.log_le_log hL hlead).trans hsmall)
     have hp := hypersurfaceSmallThreshold_position hd (by linarith : 0 ≤ B)
-      (by linarith : 0 < H) hL (Real.exp_pos (∑ p ∈ bad, Real.log p / p)).le hposition
+      (by linarith : 0 < H) hL hb hposition
     have hp' : hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
-        (Real.exp (∑ p ∈ bad, Real.log p / p)) ≤ Cs * Q := by
+        (primeSetFactor bad) ≤ Real.exp (T / (n + 1 : ℝ)) *
+          Real.exp (hypersurfaceSmallHeightError (n + 1) (hypersurfaceBadPrimeNormalizedError n)) *
+          auxMainTerm n d B (primeSetFactor bad) H := by
       convert hp using 1
-      unfold hypersurfaceSmallThreshold Cs Q
+      unfold hypersurfaceSmallThreshold auxMainTerm
       ring
-    refine ⟨bad, M, hbad, ?_, hg⟩
-    change (M : ℝ) ≤ C * (Q + l + D)
-    change (M : ℝ) ≤ 2 * d + l + _ + 2 at hbound
-    have h1 := mul_le_mul_of_nonneg_right hCs hQ
-    have h2 := mul_le_mul_of_nonneg_right (show 1 ≤ C by linarith) hl
-    have h3 := mul_le_mul_of_nonneg_right hC4 hD
-    nlinarith
-  · obtain ⟨M, hbound, hg⟩ := hypersurface_auxiliary_large_height_degree order f hf hd hir H hH hcoeff
-      z hprim hz hB hbox T hT (le_of_not_ge hsmall) hposition
-    refine ⟨bad, M, hbad, ?_, hg⟩
-    change (M : ℝ) ≤ C * (Q + l + D)
-    change (M : ℝ) ≤ Cl * D at hbound
-    have h1 := mul_le_mul_of_nonneg_right hCl hD
-    have h2 := mul_nonneg (show 0 ≤ C by linarith) (add_nonneg hQ hl)
-    nlinarith
-
+    refine ⟨M, le_trans ?_ (small_height_bound_le_positioned hd hB hb (by linarith)), hg⟩
+    linarith
+  · obtain ⟨M, hbound, hg⟩ := hypersurface_auxiliary_large_height_degree order f hf hd hir H hH
+      hcoeff z hprim hz hB hbox T hT (le_of_not_ge hsmall) hposition
+    exact ⟨M, hbound.trans (large_height_bound_le_positioned hd hB hb (by linarith)), hg⟩
 end
 end CCDN

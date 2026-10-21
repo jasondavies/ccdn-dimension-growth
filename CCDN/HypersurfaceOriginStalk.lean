@@ -4,9 +4,9 @@ public import CCDN.HypersurfaceTangentEquality
 public import CCDN.LocalizationAdicLayer
 public import CCDN.QuotientAdicLayer
 
-/-! The local ring of a hypersurface at the origin and its exact Hilbert
-function. The coordinate-ring quotient and the stalk localization are
-explicit, and their adic layers are identified. -/
+/-! The coordinate ring of a hypersurface and its origin ideal. The
+origin-adic layers of the coordinate ring are the polynomial
+truncation layers. -/
 
 @[expose] public section
 namespace CCDN
@@ -38,63 +38,11 @@ def hypersurfaceOriginIdeal (f : MvPolynomial σ K) :
     Ideal (HypersurfaceCoordinateRing f) :=
   (idealOfVars σ K).map (Ideal.Quotient.mk (Ideal.span {f}))
 
-lemma hypersurfaceOriginIdeal_isMaximal (f : MvPolynomial σ K)
-    (hf : f ∈ idealOfVars σ K) : (hypersurfaceOriginIdeal f).IsMaximal := by
-  let : (idealOfVars σ K).IsMaximal := idealOfVars_isMaximal
-  apply Ideal.IsMaximal.map_of_surjective_of_ker_le Ideal.Quotient.mk_surjective
-  rw [Ideal.mk_ker]
-  apply Ideal.span_le.mpr
-  rintro _ rfl
-  exact hf
-
 /-- The affine coordinate ring's origin-adic layer is the polynomial
 truncation layer used to compute its Hilbert function. -/
 def hypersurfaceCoordinateLayerEquiv (f : MvPolynomial σ K) (k : ℕ) :
     idealPowerLayer K (hypersurfaceOriginIdeal f) k ≃ₗ[K] originLayer f k :=
   quotientAdicLayerEquiv (Ideal.span {f}) (idealOfVars σ K) k
-
-/-- The stalk of the hypersurface at its origin, expressed as the
-localization of its coordinate ring at the origin maximal ideal. -/
-abbrev HypersurfaceOriginStalk (f : MvPolynomial σ K)
-    [Fact (f ∈ idealOfVars σ K)] :=
-  letI := (hypersurfaceOriginIdeal_isMaximal f (Fact.out : f ∈ idealOfVars σ K)).isPrime
-  Localization.AtPrime (hypersurfaceOriginIdeal f)
-
-section Stalk
-
-variable (f : MvPolynomial σ K) [Fact (f ∈ idealOfVars σ K)]
-
-local instance : (hypersurfaceOriginIdeal f).IsMaximal :=
-  hypersurfaceOriginIdeal_isMaximal f Fact.out
-
-/-- The stalk layer is linearly equivalent to the explicitly
-computed origin truncation layer. -/
-def hypersurfaceStalkLayerEquiv (k : ℕ) :
-    idealPowerLayer K (A := HypersurfaceOriginStalk f)
-      (maximalIdeal (HypersurfaceOriginStalk f)) k ≃ₗ[K]
-      originLayer f k :=
-  (localizationAdicLayerEquiv (K := K) (S := HypersurfaceOriginStalk f)
-    (hypersurfaceOriginIdeal f) k).symm.trans (hypersurfaceCoordinateLayerEquiv f k)
-
-theorem hypersurfaceStalkLayer_finrank (k : ℕ) :
-    Module.finrank K (idealPowerLayer K (A := HypersurfaceOriginStalk f)
-      (maximalIdeal (HypersurfaceOriginStalk f)) k) =
-      Module.finrank K (originLayer f k) :=
-  (hypersurfaceStalkLayerEquiv f k).finrank_eq
-
-end Stalk
-
-/-- The exact binomial formula of CCDN Lemma 2.1 for the local ring. -/
-theorem hypersurfaceOriginStalk_hilbert_eq {n μ k : ℕ}
-    (f : MvPolynomial (Fin (n + 1)) K) [Fact (f ∈ idealOfVars (Fin (n + 1)) K)]
-    (hf : f ∈ idealOfVars (Fin (n + 1)) K ^ μ)
-    (hμ : homogeneousComponent μ f ≠ 0) :
-    Module.finrank K
-      (idealPowerLayer K (A := HypersurfaceOriginStalk f)
-        (maximalIdeal (HypersurfaceOriginStalk f)) k) =
-      hypersurfaceLayerBound n μ k := by
-  rw [hypersurfaceStalkLayer_finrank]
-  exact originLayer_finrank_eq_hypersurfaceLayerBound f hf hμ
 
 end
 end CCDN

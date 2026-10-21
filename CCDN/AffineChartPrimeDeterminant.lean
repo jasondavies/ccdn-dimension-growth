@@ -39,6 +39,15 @@ lemma boundedHomogenize_map_of_degree_bound {K L : Type*} [CommRing K] [CommRing
       Finset.sup_mono (support_map_subset _ _)).trans hd))
   rw [affineChart_map, affineChart_boundedHomogenize, affineChart_boundedHomogenize]
 
+/-- An affine-chart good prime for `f` and the points `z`: the reduction of the affine
+chart `x₀ = 1` of `f` is absolutely irreducible and every point lies in that chart
+modulo `p`. -/
+abbrev AffineChartGoodPrime {n t : ℕ} (f : MvPolynomial (Fin (n + 3)) ℤ)
+    (z : Fin t → IntPoint (n + 3)) (p : ℕ) [Fact p.Prime] : Prop :=
+  Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
+    (map (Int.castRingHom (ZMod p)) (affineChart (n + 2) f))) ∧
+  ∀ i, IsCoprime (p : ℤ) (z i 0)
+
 /-- An irreducible affine reduction gives the sharp prime-power
 minor divisor for points whose first homogeneous coordinate is a p-adic unit.
 The reduction may lose affine degree. -/
@@ -53,10 +62,8 @@ theorem affine_chart_hypersurface_minorGcd_sharp
     (hz : ∀ i, eval (z i) f = 0)
     (hunit : ∀ i, IsCoprime (p : ℤ) (z i 0)) :
     ∃ a : ℕ,
-      ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) /
-        (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) *
-        (n + 1 : ℝ) / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) -
-        (n + 2 : ℝ) * s ≤ a ∧
+      hypersurfaceDeterminantMain n s /
+        (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) - (n + 2 : ℝ) * s ≤ a ∧
       (p : ℤ) ^ a ∣ Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j)) := by
   let fbar := map (Int.castRingHom (ZMod p)) f
   let a := affineChart (n + 2) fbar
@@ -98,6 +105,7 @@ theorem affine_chart_hypersurface_minorGcd_sharp
       map (Int.castRingHom (ZMod p)) g * map (Int.castRingHom (ZMod p)) h := by
     rw [hgreduce]
     simpa only [h, map_pow, map_X] using homogeneous_eq_chartHomogenize_mul_X fbar (hf.map _)
+  simp only [← hypersurfaceDeterminantMain_div]
   apply projective_hypersurface_minorGcd_sharp_open f g h hf hghom hhhom he hed hg0
     (by rwa [hgreduce]) hfactor hsize F hF z hprim hz
   intro i
