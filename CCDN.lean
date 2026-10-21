@@ -414,7 +414,6 @@ public import CCDN.HomogeneousProjectionEquation
 public import CCDN.BoundedBirationalHypersurfaceProjection
 public import CCDN.ProjectiveFiniteFibers
 public import CCDN.ProjectiveLinearCountTransfer
-public import CCDN.BirationalProjectionHeight
 public import CCDN.ProjectiveProjectionGrowth
 public import CCDN.NormPolynomialSubfield
 public import CCDN.SquareNormCurveIrreducibility
@@ -673,7 +672,6 @@ public import CCDN.ChowProjectionCriterion
 public import CCDN.ChowProjectionPower
 public import CCDN.ChowRowCoordinateDegree
 public import CCDN.ChowRowSymmetry
-public import CCDN.ChowTotalDegree
 public import CCDN.ClosureNormalizationInfinite
 public import CCDN.FixedCoordinateEliminationInfinite
 public import CCDN.FixedCoordinateGenericNormalization
@@ -703,7 +701,6 @@ public import CCDN.AffineFractionPolynomialField
 public import CCDN.AffineNormalizationRank
 public import CCDN.AffinePointZariski
 public import CCDN.BirationalMinorCenterWitness
-public import CCDN.ChowAxisBaseChange
 public import CCDN.ChowAxisEvaluation
 public import CCDN.ChowExactDegree
 public import CCDN.ChowLastRowSplit
@@ -713,7 +710,6 @@ public import CCDN.ChowProjectionBaseChange
 public import CCDN.ChowRestrictionBirational
 public import CCDN.ClosurePolynomialFractionField
 public import CCDN.ClosurePolynomialMap
-public import CCDN.FixedCoordinateBirationalProjection
 public import CCDN.FixedCoordinateCenterRows
 public import CCDN.GenericAffineNormalizationRank
 public import CCDN.GeometricCenterRows
@@ -728,7 +724,6 @@ public import CCDN.PolynomialParameterFieldRank
 public import CCDN.PolynomialQuotientCoefficients
 public import CCDN.ProjectiveChowChartReduction
 public import CCDN.ProjectiveChowExactDegree
-public import CCDN.ProjectiveChowGenerator
 public import CCDN.RadialParameterFieldRank
 public import CCDN.ScalarQuotientFractionField
 public import CCDN.ScalarQuotientPolynomialLocalization
@@ -740,7 +735,6 @@ public import CCDN.BlockResultantIrreducibility
 public import CCDN.BoundedCenterProjectionAllRows
 public import CCDN.CenterPluckerCoordinates
 public import CCDN.CenterPluckerZariski
-public import CCDN.CenterResultantBaseChange
 public import CCDN.CenterResultantForms
 public import CCDN.CenterSubspaceQuotient
 public import CCDN.ChowRowResultantCriterion
@@ -751,7 +745,6 @@ public import CCDN.GenericBlockLineHomogeneity
 public import CCDN.GenericBlockLineIrreducible
 public import CCDN.IntegerMinorProjectiveHeight
 public import CCDN.ResultantCoefficientFamily
-public import CCDN.SharpBirationalCenterNonvanishing
 public import CCDN.SharpBoundedBirationalCenter
 public import CCDN.SharpCenterBounds
 public import CCDN.SharpCenterResultantDetector

@@ -1,6 +1,6 @@
 module
 
-public import CCDN.CenterResultantBaseChange
+public import CCDN.CenterResultantForms
 public import CCDN.ChowRowResultantCriterion
 public import CCDN.ClosedFieldChowBirationalCriterion
 public import CCDN.ChowProjectionBaseChange

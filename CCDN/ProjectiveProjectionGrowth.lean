@@ -1,7 +1,7 @@
 module
 
 public import CCDN.ProjectiveLinearCountTransfer
-public import CCDN.BirationalProjectionHeight
+public import CCDN.BoundedBirationalHypersurfaceProjection
 public import CCDN.HypersurfaceDimensionGrowth
 
 /-! The quantitative counting step for the constructed projection. The

@@ -2,7 +2,7 @@ module
 
 public import CCDN.BoundedDegreeNormalizationFiber
 public import CCDN.ProjectiveLinearCountTransfer
-public import CCDN.BirationalProjectionHeight
+public import CCDN.BoundedBirationalHypersurfaceProjection
 public import CCDN.PolynomialPredicates
 
 /-! The exact degree factor in the projective projection count.

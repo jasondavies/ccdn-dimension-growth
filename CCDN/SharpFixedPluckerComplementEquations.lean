@@ -74,7 +74,8 @@ theorem fixedCoordinateBirationalSubspaceLocus_plucker_dense_open
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
     Dense (fixedCoordinateBirationalSubspaceLocus (r := n + 1 - m - 1) I) ∧
       IsOpen (fixedCoordinateBirationalSubspaceLocus (r := n + 1 - m - 1) I) := by
-  have : (I.map (map (algebraMap K K))).IsPrime := prime_ideal_scalar_extension_of_algebraicClosure I
+  have : (I.map (map (algebraMap K K))).IsPrime :=
+    prime_ideal_scalar_extension_of_algebraicClosure I
   obtain ⟨_,_,_,_,_,_,hdense,hopen⟩ :=
     exists_dense_open_sharp_fixed_center_plucker_equations (L := K) I hmn d hdim hdegree
   have : (projectiveClosureIdeal (I.map (map (algebraMap K K)))).IsPrime :=

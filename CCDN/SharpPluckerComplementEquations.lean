@@ -202,7 +202,8 @@ theorem birationalCenterSubspaceLocus_plucker_dense_open
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
     Dense (birationalCenterSubspaceLocus (r := n + 1 - m - 1) J) ∧
       IsOpen (birationalCenterSubspaceLocus (r := n + 1 - m - 1) J) := by
-  have : (J.map (map (algebraMap ℚ ℚ))).IsPrime := prime_ideal_scalar_extension_of_algebraicClosure J
+  have : (J.map (map (algebraMap ℚ ℚ))).IsPrime :=
+    prime_ideal_scalar_extension_of_algebraicClosure J
   obtain ⟨_,_,_,_,_,_,hdense,hopen⟩ :=
     exists_dense_open_sharp_projective_center_plucker_equations (L := ℚ) hmn J hJ d hdim hdegree
   rw [birationalCenterSubspaceLocus_congr (ideal_map_algebraMap_self J)] at hdense hopen

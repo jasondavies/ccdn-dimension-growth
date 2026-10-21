@@ -2,7 +2,7 @@ module
 
 public import CCDN.ChowProjectionPower
 public import CCDN.ProjectiveChowWithoutChart
-public import CCDN.ChowTotalDegree
+public import CCDN.ChowRowSymmetry
 public import CCDN.WeightedHomogeneousEvaluation
 public import CCDN.PolynomialPredicates
 
