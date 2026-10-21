@@ -9,7 +9,7 @@ project:
     logarithmic factors" (Algebra & Number Theory 14, 2020), incorporating the
     authors' 2026 addenda. It proves uniform bounds, polynomial in the degree, for
     the number of rational points of bounded height on varieties over Q. The bounds
-    are: projective dimension growth N(X,B) ≤ C(n) d^(2n³) B^dim X for integral
+    are: projective dimension growth N(X,B) ≤ C(n) d^(2n²+5n−5) B^dim X for integral
     X ⊆ P^n of degree d ≥ 5 (Theorem 1); N(X,B) ≤ C(n) d⁴ B^(2/d) for integral
     projective curves (Theorem 2); N_aff(X,B) ≤ C(n) d³ B^(1/d)(log B + d) for
     integral affine curves (Theorem 3); and C(N) d^(3N+9) B^(N−2) for affine
@@ -47,7 +47,7 @@ sources:
     relationship: "formalizes"
     note: >-
       Theorems 1–4 and 6 and Proposition 5 are formalized. Theorems 1 and 4 have
-      explicit degree exponents (2n³ and 3N+9); the addenda leave e(N) in Theorem 4
+      explicit degree exponents (2n²+5n−5 and 3N+9); the addenda leave e(N) in Theorem 4
       to be recomputed. Intermediate statements that are false as
       printed are proved in corrected form; see fidelity.divergences. Text used:
       https://rcluckers.perso.math.cnrs.fr/prints/Cast-Cl-Ditt-Nguy.pdf.
@@ -100,7 +100,7 @@ status:
     equivalence with Mathlib Scheme or Proj objects is claimed. Projective height is
     Mathlib's multiplicative height, which equals max |x_i| on primitive integer
     coordinates. Theorem 1 holds for every n, including empty and zero-dimensional
-    loci, with the explicit exponent 2n³. Theorem 2 holds without assuming the ideal
+    loci, with the explicit exponent 2n²+5n−5. Theorem 2 holds without assuming the ideal
     is homogeneous; a point counts when all its representatives annihilate the
     ideal. Theorem 4 is stated in N = n+3 variables with exponent 18+3n = 3N+9.
     The rest of the library also formalizes the paper's Sections 2–6: 62 audited
@@ -130,8 +130,12 @@ automation:
       tool_setup: >-
         Prepared the Palomar packaging: Challenge.lean, Solution.lean,
         comparator.json, this file, and the Lake layout change that builds the
-        vendored ArithmeticHeights library inside the root package.
-      prompting_notes: "Asked to prepare the repository for Palomar submission."
+        vendored ArithmeticHeights library inside the root package. Later, with
+        Claude Code subagents, a maintainability refactor of the library: dead code
+        and duplicated proofs removed, modules organised into topic directories,
+        repeated hypotheses named, a sharper Theorem 1 exponent (2n²+5n−5), CI and
+        generated documentation.
+      prompting_notes: "Asked to prepare the repository for Palomar submission, and later to review it for maintainability and resolve the findings."
   spend_usd: "not tracked"
   notes: >-
     The mathematical proof development was produced by an AI agent and directed by
@@ -141,7 +145,7 @@ automation:
 
 fidelity:
   divergences: >-
-    Main results. Theorem 1 uses the explicit exponent 2n³ in place of the paper's
+    Main results. Theorem 1 uses the explicit exponent 2n²+5n−5 in place of the paper's
     numerical exponent, which the addenda amend. Theorem 4 assumes, as printed, that
     the top-degree form is irreducible over the algebraic closure of Q, and proves the
     explicit exponent 3N+9, which the addenda leave to be recomputed. Theorems 2, 3
@@ -159,7 +163,7 @@ fidelity:
     sqrt((s−1)!·r)·B^(s−1) is replaced by (s−1)!·B^(s−1). The external Lang–Weil,
     Cafure–Matera, Salberger, Heintz and class-group inputs are proved internally
     in the scope needed rather than assumed. Details: docs/completion-audit.json,
-    docs/full-paper-plan.txt and docs/projection-center-audit.txt.
+    docs/statements.md and the notes in docs/history/.
 
 review:
   status: "agent-reviewed"
@@ -179,7 +183,7 @@ alignment:
       lean: "CCDN.Submission.projective_dimension_growth"
       module: "Challenge"
       status: "proved"
-      note: "From CCDN.projective_dimension_growth_cubic. The Hilbert polynomial P is quantified explicitly; dim X = P.natDegree − 1."
+      note: "From CCDN.projective_dimension_growth. The Hilbert polynomial P is quantified explicitly; dim X = P.natDegree − 1."
     - source: "Theorem 2"
       lean: "CCDN.Submission.projective_curve_bound"
       module: "Challenge"

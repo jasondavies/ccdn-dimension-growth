@@ -4,5 +4,7 @@ cd "$(dirname "$0")/.."
 python3 scripts/check-lean-sources.py
 python3 scripts/check-provenance.py
 python3 scripts/audit-evidence.py
+python3 scripts/update-root.py --check
+python3 scripts/update-docs.py --check
 lake build
 lake env lean Axioms.lean

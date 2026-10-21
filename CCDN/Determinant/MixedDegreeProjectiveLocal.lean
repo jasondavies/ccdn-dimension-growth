@@ -1,6 +1,11 @@
+/-
+Copyright (c) 2026 Jason Davies. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Jason Davies
+-/
 module
 
-public import CCDN.Algebra.ProjectiveHypersurfaceLocal
+public import CCDN.Determinant.ProjectiveHypersurfaceLocal
 /-! Local determinant divisibility for homogeneous columns of arbitrary
 degrees, with the normalization required by affine-chart evaluation.
 

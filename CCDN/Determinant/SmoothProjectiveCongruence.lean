@@ -1,7 +1,12 @@
+/-
+Copyright (c) 2026 Jason Davies. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Jason Davies
+-/
 module
 
 public import CCDN.Determinant.SmoothHypersurfaceCongruence
-public import CCDN.Algebra.ProjectiveHypersurfaceLocal
+public import CCDN.Determinant.ProjectiveHypersurfaceLocal
 import all ArithmeticHeights.BombieriVaaler
 
 /-! Smooth projective congruence classes give simultaneous divisors

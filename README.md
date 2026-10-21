@@ -26,47 +26,25 @@ bash scripts/check.sh             # source requirements, provenance, build, axio
 reusable verifier on a pushed commit. The repository is licensed under Apache-2.0; cited
 papers and the vendored and adapted dependencies keep their own licences (see `NOTICE`).
 
-**Status: Theorems 1–4 and 6, and Proposition 5, are proved in Lean.**
-`CCDN.affineCurveBound` proves CCDN Theorem 3, and
-`CCDN.projectiveCurveBound` proves Theorem 2. Both cover all
-ambient dimensions `n ≥ 2` and all positive degrees, with no external
-counting hypothesis. The proofs include the plane bounds, bounded projections
-preserving degree, exceptional fibers and the uniform height/count assembly.
-There are no counting axioms.
+**Status: Theorems 1–4 and 6, and Proposition 5, are proved in Lean.** Every constant depends
+only on the ambient dimension (or the field degree), and is chosen before the variety, its
+degree and the radius `B ≥ 1`. Degree and dimension are read off Hilbert functions, and an
+integral variety is a prime ideal over `ℚ`, so varieties that split over `ℚ̄` are included.
 
-For every real `B ≥ 1`, the proved bounds are:
+| Result | Bound | Lean |
+| --- | --- | --- |
+| Theorem 1 | `N(X, B) ≤ C(n) d^(2n²+5n−5) B^dim X` for integral `X ⊆ ℙⁿ`, `d ≥ 5` | `CCDN.projective_dimension_growth` |
+| Theorem 2 | `N(X, B) ≤ C(n) d⁴ B^(2/d)` for integral curves `X ⊆ ℙⁿ`, `n ≥ 2` | `CCDN.projectiveCurveBound` |
+| Theorem 3 | `N_aff(X, B) ≤ C(n) d³ B^(1/d) (log B + d)` for integral curves `X ⊆ 𝔸ⁿ`, `n ≥ 2` | `CCDN.affineCurveBound` |
+| Theorem 4 | `N_aff(f, B) ≤ C(N) d^(3N+9) B^(N−2)` in `N ≥ 3` variables, top form absolutely irreducible, `d ≥ 5` | `CCDN.affine_hypersurface_dimension_growth` (and `_rat`) |
+| Proposition 5 | an integral plane curve of degree `d` with `N(X, B) ≥ d² B^(2/d) / 5` for some `B` | `CCDN.projective_integral_curve_lower_bound` |
+| Theorem 6 | `h₂(K) ≤ C(n) \|disc K\|^(1/2−1/(2n)) (log \|disc K\|)^(1 − n mod 2)` for `[K : ℚ] = n ≥ 3` | `CCDN.classGroup_two_torsion_bound` |
 
-```text
-N_aff(X, B) ≤ C(n) d³ B^(1/d) (log B + d).
-N_proj(X, B) ≤ C(n) d⁴ B^(2/d).
-```
-
-Degree is specified by the slope of the affine or homogeneous Hilbert function,
-respectively. The projective count includes points at infinity, lines and
-curves that split over an algebraic closure.
-
-The full affine hypersurface bound (Theorem 4) and the projective hypersurface
-case of Theorem 1 are also proved for every degree `d ≥ 5`, including degrees
-5 through 15. In `n+3` affine variables, the improved bound is
-`C(n) d^(18+3n) B^(n+1)`, using integer hyperplane normals bounded by `d³`.
-The existing projective hypersurface endpoint in `n+3` homogeneous variables
-retains `C(n) d^(18+9n) B^(n+1)`.
-
-`projective_dimension_growth_cubic` proves Theorem 1 for general integral
-projective varieties, including zero-dimensional and empty loci. In `P^n`,
-one positive `C(n)` bounds `N(X,B)` by `C(n) d^(2n³) B^dim(X)` for every
-`d ≥ 5` and `B ≥ 1`. Degree and dimension come from the actual homogeneous
-coordinate ideal's Hilbert polynomial. All projections, fiber bounds and
-height estimates are proved internally. The earlier exponent
-`18 + 10(n+1) + 2(n+1)²` remains available through `projective_dimension_growth`.
-
-`classGroup_two_torsion_bound` proves the full class-group Theorem 6. For
-all fields of any fixed degree `n ≥ 3`, one positive `C(n)` gives
-`h₂(K) ≤ C(n) |disc(K)|^(1/2−1/(2n)) (log|disc(K)|)^(1−n%2)`.
-The short lattice basis, norm curves, exceptional subfields, quadratic
-class-group descent and discriminant estimates are constructed and proved.
-Strong induction on the field degree absorbs the prime-factor and logarithmic
-losses in the quadratic case. Odd degrees retain the logarithm-free bound.
+The paper leaves the degree exponents `e(n)` of Theorems 1 and 4 unspecified; here they are
+explicit. The exponent `2n² + 5n − 5` of Theorem 1 is at most `2n³` for every `n`. The external
+inputs the paper cites (Lang–Weil, Cafure–Matera, Salberger's covering theorem, Bombieri–Vaaler,
+Mertens) are proved or vendored, not assumed. [docs/overview.md](docs/overview.md) describes how
+each result is assembled.
 
 ## Discrepancies with the paper
 
@@ -150,7 +128,7 @@ The formalisation follows the addenda's corrections. Proposition 2.6 is stated w
 polynomials in `n + 2` variables. Proposition 4.3.3 assumes `h(f)` is absolutely
 irreducible. Proposition 4.3.4 has `d¹⁸` in place of `d¹⁴`. Lemma 4.3.7 has degree
 `(n+1)d(d² − 1)`. For Remark 4.3.8, the resulting exponents are `e = 3N + 9` in
-Theorem 4 (in `N` variables) and `e = 2n³` in Theorem 1 (in `ℙⁿ`).
+Theorem 4 (in `N` variables) and `e = 2n² + 5n − 5` in Theorem 1 (in `ℙⁿ`).
 
 ### Modelling choices
 
@@ -162,9 +140,9 @@ Theorem 1 is proved for every `n`, including empty and zero-dimensional varietie
 external inputs (Lang–Weil, Cafure–Matera, Salberger's Theorem 4.3.5, Heintz's bounds and
 the class-group facts) are proved within the scope the paper needs, not assumed.
 Proposition 5 uses Eisenstein equations in place of the paper's Newton-polytope
-construction. The [full-paper ledger](docs/full-paper-plan.txt) and the
-[completion audit](docs/completion-audit.json) map each of the 62 audited statements to its
-Lean declaration.
+construction. [docs/statements.md](docs/statements.md) maps each of the 62 audited statements
+of the paper to its Lean declarations; [docs/completion-audit.json](docs/completion-audit.json)
+records the scope notes behind it.
 
 ## Build and audit
 
@@ -178,13 +156,45 @@ lake exe cache get
 bash scripts/check.sh
 ```
 
-The check enforces the module header and 10,000-line cap on every Lean source, verifies
-vendored source hashes and import coverage, builds every module, and audits the transitive
-axioms of every exported declaration in the library, the vendored dependency and
-`Solution.lean`. Only `propext`, `Classical.choice`, and `Quot.sound` are allowed.
-The audit is not an independent kernel implementation and does not replace mathematical
-review of theorem statements; `verify-comparator.sh` additionally replays the compared
-proofs through the toolchain's independent kernels.
+`scripts/check.sh` runs every check below; CI (`.github/workflows/ci.yml`) runs it on each
+push and pull request.
+
+- `check-lean-sources.py`: the module header and 10,000-line cap on every Lean source.
+- `check-provenance.py`: vendored source hashes, and that every module is reachable from the
+  root import.
+- `audit-evidence.py`: the file, line and hash of every evidence declaration in
+  `docs/completion-audit.json` (`--update` refreshes them).
+- `update-root.py --check` and `update-docs.py --check`: `CCDN.lean`, `docs/modules.md` and
+  `docs/statements.md` are generated; run the scripts without `--check` after adding, moving or
+  removing modules.
+- `lake build`, then `Axioms.lean`: the transitive axioms of every declaration in the library,
+  the vendored dependencies and `Solution.lean`. Only `propext`, `Classical.choice` and
+  `Quot.sound` are allowed.
+
+The axiom audit is not an independent kernel and does not replace mathematical review of the
+statements; `verify-comparator.sh` additionally replays the compared proofs through the
+toolchain's independent kernels.
+
+## Layout
+
+The library `CCDN/` keeps the six main-result modules at its top level and groups the rest by
+topic; [docs/modules.md](docs/modules.md) describes every module.
+
+| Directory | Content |
+| --- | --- |
+| `Determinant/` | Local and global determinant estimates (Sections 2 and 3.2) |
+| `Auxiliary/` | Auxiliary polynomials, coordinate positioning and bad primes (Sections 3.1, 3.3, 3.4, 4.2) |
+| `Noether/` | Noether irreducibility forms (Theorem 3.2.2) |
+| `Plane/`, `Curve/` | Plane curves; Theorems 2 and 3 |
+| `Projection/`, `Center/` | Projections and normalizations; Chow forms and good centers (Section 5) |
+| `Surface/`, `Hypersurface/` | Surfaces (4.3.3–4.3.5); slicing and hypersurface counts (4.1, 4.3.6–4.3.8) |
+| `ClassGroup/` | Theorem 6 |
+| `LowerBound/`, `Counterexample/` | Section 6; refutations of printed intermediate statements |
+| `Hilbert/`, `Height/`, `Algebra/`, `Analysis/` | Hilbert functions; heights; algebra; estimates |
+| `ForMathlib/` | General results, under Mathlib namespaces, suitable for upstreaming |
+
+The paper-specific declarations live in the namespace `CCDN`; the compared statements in
+`Challenge.lean` and `Solution.lean` live in `CCDN.Submission`.
 
 ## Reused proof
 
@@ -196,19 +206,20 @@ The code is rebuilt against this project's pinned Mathlib; upstream verification
 are not a substitute for that build.
 
 The first Mertens theorem is adapted from [PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd/blob/c39a751132c88b6e8080b74c74023fd95b3d8be0/PrimeNumberTheoremAnd/IEANTN/Mertens.lean).
-The extracted proof uses only Mathlib. Its source revision, hashes, adaptation notes, and
-Apache license are recorded under `vendor/mertens/`.
+It is vendored as the separate library `Mertens` (`vendor/mertens/Mertens.lean`), which uses
+only Mathlib. Its source revision, hashes, adaptation notes and Apache license are recorded
+under `vendor/mertens/`.
 
 ## Documentation
 
-- [`docs/development-notes.md`](docs/development-notes.md): proof routes, the module
-  table and the Section 5 corrections in detail.
-- [`docs/full-paper-plan.txt`](docs/full-paper-plan.txt): the full-paper ledger.
-- [`docs/completion-audit.json`](docs/completion-audit.json): requirement-to-declaration
-  audit with evidence hashes.
-- [`docs/verification.txt`](docs/verification.txt): chronological verification log.
-- [`docs/roadmap.txt`](docs/roadmap.txt) and the `docs/*-audit.txt` files: proof roadmap
-  for Theorem 3 and individual statement audits.
+Start with [`Challenge.lean`](Challenge.lean) for the statements, then:
+
+- [`docs/overview.md`](docs/overview.md): how each main result is assembled.
+- [`docs/statements.md`](docs/statements.md): the paper's numbered statements and their Lean
+  declarations (generated from `docs/completion-audit.json`, which adds scope notes).
+- [`docs/modules.md`](docs/modules.md): every module, by directory (generated).
+- [`docs/history/`](docs/history/): development notes, the verification log and the original
+  statement audits, kept for the record.
 
 ## References
 

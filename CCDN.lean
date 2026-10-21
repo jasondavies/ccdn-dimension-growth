@@ -1,3 +1,8 @@
+/-
+Copyright (c) 2026 Jason Davies. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Jason Davies
+-/
 module
 
 public import CCDN.AffineCurveBound
@@ -63,7 +68,6 @@ public import CCDN.Algebra.ProjectiveClosureSpecialization
 public import CCDN.Algebra.ProjectiveCoefficientExtension
 public import CCDN.Algebra.ProjectiveConeBound
 public import CCDN.Algebra.ProjectiveFiltration
-public import CCDN.Algebra.ProjectiveHypersurfaceLocal
 public import CCDN.Algebra.ProjectiveHypersurfaceReduction
 public import CCDN.Algebra.ProjectivePermutation
 public import CCDN.Algebra.ProjectiveReduction
@@ -383,7 +387,6 @@ public import CCDN.Counterexample.DegreeDependenceObstruction
 public import CCDN.Counterexample.GlobalMixedDegreeDeterminant
 public import CCDN.Counterexample.GridVandermondeCounterexample
 public import CCDN.Counterexample.MixedDegreeProjectiveExample
-public import CCDN.Counterexample.MixedDegreeProjectiveLocal
 public import CCDN.Counterexample.OriginProjectivePoint
 public import CCDN.Counterexample.RowSeparatorCounterexample
 public import CCDN.Counterexample.WeightedDimensionOneExample
@@ -441,6 +444,7 @@ public import CCDN.Determinant.LocalHilbertWeights
 public import CCDN.Determinant.LocalPrimeGenerators
 public import CCDN.Determinant.LocalPrimeReduction
 public import CCDN.Determinant.LocalizationAdicLayer
+public import CCDN.Determinant.MixedDegreeProjectiveLocal
 public import CCDN.Determinant.ModularOriginGenerators
 public import CCDN.Determinant.NoetherianLocalDeterminant
 public import CCDN.Determinant.OriginLayerGenerators
@@ -458,6 +462,7 @@ public import CCDN.Determinant.PrimeAggregation
 public import CCDN.Determinant.PrimeIntegerLocalDeterminant
 public import CCDN.Determinant.ProjectiveChartSmoothness
 public import CCDN.Determinant.ProjectiveHeightDeterminant
+public import CCDN.Determinant.ProjectiveHypersurfaceLocal
 public import CCDN.Determinant.ProjectiveHypersurfaceMultiplicity
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
 public import CCDN.Determinant.ProjectiveLocalDeterminant
