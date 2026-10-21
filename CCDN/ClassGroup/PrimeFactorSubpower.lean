@@ -79,6 +79,8 @@ private theorem primeFactors_pow_subpower {R ε : ℝ} (hR : 1 ≤ R) (hε : 0 <
   congr 1
   ring
 
+/-- For every `a` and `ε > 0` there is `C > 0` with `2 ^ (a * ω(D)) ≤ C * D ^ ε` for all `D ≥ 1`,
+where `ω(D)` is the number of distinct prime factors of `D`. -/
 theorem two_pow_primeFactors_subpower (a : ℕ) {ε : ℝ} (hε : 0 < ε) :
     ∃ C : ℝ, 0 < C ∧ ∀ D : ℕ, 1 ≤ D →
       (2 : ℝ) ^ (a * D.primeFactors.card) ≤ C * (D : ℝ) ^ ε := by

@@ -30,6 +30,7 @@ open scoped nonZeroDivisors
 
 variable {R : Type*} [CommRing R] [IsDedekindDomain R]
 
+/-- The ideal class of an integral ideal, with the zero ideal sent to the trivial class. -/
 def integralIdealClass (I : Ideal R) : ClassGroup R :=
   if h : I = 0 then 1 else ClassGroup.mk0 ⟨I, mem_nonZeroDivisors_iff_ne_zero.mpr h⟩
 
@@ -37,6 +38,7 @@ private lemma integralIdealClass_eq (I : Ideal R) (hI : I ≠ 0) :
     integralIdealClass I = ClassGroup.mk0 ⟨I, mem_nonZeroDivisors_iff_ne_zero.mpr hI⟩ := by
   simp only [integralIdealClass, dite_eq_right hI]
 
+/-- The unit ideal has trivial ideal class. -/
 @[simp] lemma integralIdealClass_one : integralIdealClass (1 : Ideal R) = 1 := by
   rw [integralIdealClass_eq _ one_ne_zero]
   exact map_one ClassGroup.mk0

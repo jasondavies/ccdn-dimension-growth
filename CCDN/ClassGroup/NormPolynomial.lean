@@ -22,17 +22,22 @@ open NumberField Polynomial
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- The integer norm polynomial of `β ∈ 𝓞 K`: the characteristic polynomial of multiplication by
+`β`, whose value at `x ∈ ℤ` is the norm `N(x - β)`. -/
 def integerNormPolynomial (β : 𝓞 K) : ℤ[X] :=
   (Algebra.lmul ℤ (𝓞 K) β).charpoly
 
+/-- The integer norm polynomial of an algebraic integer is monic. -/
 lemma integerNormPolynomial_monic (β : 𝓞 K) :
     (integerNormPolynomial K β).Monic :=
   LinearMap.charpoly_monic _
 
+/-- The integer norm polynomial of an algebraic integer of `K` has degree `[K : ℚ]`. -/
 lemma integerNormPolynomial_natDegree (β : 𝓞 K) :
     (integerNormPolynomial K β).natDegree = Module.finrank ℚ K := by
   rw [integerNormPolynomial, LinearMap.charpoly_natDegree, RingOfIntegers.rank]
 
+/-- The integer norm polynomial of `β` evaluated at `x ∈ ℤ` is the norm `N(x - β)`. -/
 lemma integerNormPolynomial_eval (β : 𝓞 K) (x : ℤ) :
     (integerNormPolynomial K β).eval x =
       Algebra.norm ℤ (algebraMap ℤ (𝓞 K) x - β) := by
@@ -40,8 +45,9 @@ lemma integerNormPolynomial_eval (β : 𝓞 K) (x : ℤ) :
     map_sub (Algebra.lmul ℤ (𝓞 K)), Algebra.lmul_algebraMap]
   rfl
 
-/-- The outer coordinate is the square root of the norm; the inner
-coordinate is the integral translation parameter. -/
+/-- The signed norm-curve polynomial `y ^ 2 - ε * N(x - β)` in the plane coordinates `(y, x)`,
+where `N(x - β)` is the integer norm polynomial of `β`: on an integral point the first
+coordinate is a square root of the norm and the second is the integral translation parameter. -/
 def signedNormCurvePolynomial (β : 𝓞 K) (ε : ℤ) : MvPolynomial (Fin 2) ℤ :=
   (bivariatePolynomialEquiv ℤ).symm
     (X ^ 2 - C (C ε * integerNormPolynomial K β))
@@ -52,6 +58,8 @@ private lemma signedNormCurvePolynomial_eval (β : 𝓞 K) (ε x y : ℤ) :
   rw [← bivariatePolynomialEquiv_eval _ y x]
   simp [signedNormCurvePolynomial, integerNormPolynomial_eval]
 
+/-- If `|N(x - β)| = m ^ 2`, then `(m, x)` is an integral point on one of the two signed norm curves
+`y ^ 2 = N(x - β)` or `y ^ 2 = -N(x - β)`. -/
 lemma square_norm_yields_signedNormCurve_point
     (β : 𝓞 K) (x : ℤ) (m : ℕ)
     (h : (Algebra.norm ℤ (algebraMap ℤ (𝓞 K) x - β)).natAbs = m ^ 2) :

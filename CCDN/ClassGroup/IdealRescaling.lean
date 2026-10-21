@@ -22,6 +22,8 @@ open FractionalIdeal
 variable {R K : Type*} [CommRing R] [IsDedekindDomain R]
   [Field K] [Algebra R K] [IsFractionRing R K]
 
+/-- Rescaling an integral ideal `I` with `I ^ 2 = (α)` by a nonzero `κ ∈ I⁻¹` gives an integral
+ideal `J = κ I` in the same class with `J ^ 2 = (β)` for the exact generator `β = α * κ ^ 2`. -/
 theorem rescale_integral_ideal_square (I : (Ideal R)⁰) {α : R} (hα : α ≠ 0)
     (hIα : (I : Ideal R) ^ 2 = Ideal.span {α})
     {κ : K} (hκ : κ ≠ 0) (hκI : κ ∈ (I : FractionalIdeal R⁰ K)⁻¹) :

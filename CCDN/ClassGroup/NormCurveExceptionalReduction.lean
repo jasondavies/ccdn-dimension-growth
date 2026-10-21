@@ -83,6 +83,11 @@ private lemma even_index_translate_mem_smallSubfield
   change algebraMap ℤ K x - (β : K) ∈ L
   exact L.sub_mem (L.intCast_mem x) (IntermediateField.mem_adjoin_simple_self ℚ (β : K))
 
+/-- For a number field `K` without an intermediate field of index two, there is an injective family
+of algebraic integers `β q` bounded by `B`, indexed by the bounded square-norm translation
+classes, such that the number of bounded square-norm integers is at most the number of bounded
+integers in small subfields plus the number of points of height at most
+`max (2 * B) (√(B ^ n))` on the signed norm curves for those `β q` with `[K : ℚ(β q)]` odd. -/
 theorem exists_norm_curve_exception_split
     (hnoTwo : ∀ L : IntermediateField ℚ K, Module.finrank L K ≠ 2) (B : ℝ) :
     ∃ β : (boundedSquareNormTranslationClasses K B) → 𝓞 K,

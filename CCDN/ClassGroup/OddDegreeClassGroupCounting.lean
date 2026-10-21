@@ -19,6 +19,8 @@ namespace CCDN
 noncomputable section
 open NumberField NumberField.InfinitePlace
 
+/-- For `n ≥ 2` and `B ≥ 1`, the norm-curve box height `H = max (2 * B) (√(B ^ n))` satisfies
+`H ^ (1 / n) ≤ 2 * √B`. -/
 lemma normCurveBoxHeight_root_le {n : ℕ} (hn : 2 ≤ n) {B : ℝ} (hB : 1 ≤ B) :
     (max (2 * B) (Real.sqrt (B ^ n))) ^ (1 / (n : ℝ)) ≤ 2 * Real.sqrt B := by
   have hB0 : 0 ≤ B := zero_le_one.trans hB

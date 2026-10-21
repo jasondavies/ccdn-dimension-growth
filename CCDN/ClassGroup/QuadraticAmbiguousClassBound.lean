@@ -44,15 +44,23 @@ private theorem card_le_subgroup_mul_obstruction
 variable (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K]
   [Algebra F K]
 
-/-- Ideal, scalar and base-unit data for one ambiguous class. -/
+/-- Witness data for an ambiguous ideal class `c` (one fixed by `σ`): an invertible fractional
+ideal representing `c`, a scalar comparing it with its conjugate, and a base unit equal to the
+relative norm of that scalar. -/
 structure AmbiguousClassWitness (σ : K ≃ₐ[F] K) (c : ClassGroup (𝓞 K)) where
+  /-- An invertible fractional ideal representing the class. -/
   ideal : (FractionalIdeal (𝓞 K)⁰ K)ˣ
+  /-- The scalar comparing the conjugate of `ideal` with `ideal`. -/
   scalar : Kˣ
+  /-- A unit of `𝓞 F` equal to the relative norm of `scalar`. -/
   baseUnit : (𝓞 F)ˣ
+  /-- The fractional ideal `ideal` represents the class `c`. -/
   class_eq : ClassGroup.mk K ideal = c
+  /-- The conjugate of `ideal` under `σ` is the principal ideal of `scalar` times `ideal`. -/
   scalar_eq : fractionalIdealUnitAction (K := K)
     (RingOfIntegers.mapAlgEquiv σ).toRingEquiv ideal =
       toPrincipalIdeal (𝓞 K) K scalar * ideal
+  /-- The relative norm of `scalar` is the base unit `baseUnit`. -/
   norm_eq : Algebra.norm F (scalar : K) = ((baseUnit : 𝓞 F) : F)
 
 private theorem nonempty_ambiguousClassWitness (σ : K ≃ₐ[F] K) (c : ClassGroup (𝓞 K))

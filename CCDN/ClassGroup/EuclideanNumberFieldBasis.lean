@@ -20,6 +20,9 @@ open scoped NumberField
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- A real basis `b` of the Euclidean mixed space consisting of vectors of the integer lattice comes
+from a `ℚ`-basis `q` of `K` consisting of algebraic integers `v i`, with
+`euclideanNumberFieldEmbedding K (q i) = b i`. -/
 theorem exists_field_basis_of_euclidean_lattice_basis
     {ι : Type*} [Fintype ι]
     (b : Basis ι ℝ (mixedEmbedding.euclidean.mixedSpace K))
@@ -58,6 +61,9 @@ private theorem euclidean_field_basis_repr
     split_ifs <;> norm_num
   exact congrArg (fun f => f x) hmaps
 
+/-- If the real basis `b` is the image of the rational basis `q` and the `i`-th `q`-coordinate of
+`x : K` is nonzero, then the embedding of `x` does not lie in the real span of `b '' S` for any
+`S` not containing `i`. -/
 theorem euclidean_notMem_basis_span_of_coordinate_ne_zero
     {ι : Type*} [Fintype ι]
     (b : Basis ι ℝ (mixedEmbedding.euclidean.mixedSpace K)) (q : Basis ι ℚ K)

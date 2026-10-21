@@ -75,6 +75,8 @@ private theorem separated_finite_ball_count
     ring
   simpa only [mul_assoc, hhalf, mul_one, hradius] using hscale
 
+/-- For `B ≥ 0`, the number of algebraic integers of `K` bounded by `B` at every infinite place
+is at most `(2 * √n * B + 1) ^ n`, where `n = [K : ℚ]`. -/
 theorem boundedArchimedeanIntegers_separated_count
     (K : Type*) [Field K] [NumberField K] {B : ℝ} (hB : 0 ≤ B) :
     ((boundedArchimedeanIntegers K B).ncard : ℝ) ≤

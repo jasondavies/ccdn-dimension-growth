@@ -23,6 +23,7 @@ open scoped NumberField
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- The finite set of prime ideals of `𝓞 K` lying over the rational prime ideal `(p)`. -/
 def rationalPrimeIdealFiber (p : ℕ) : Finset (Ideal (𝓞 K)) :=
   (Algebra.QuasiFinite.finite_primesOver
     (S := 𝓞 K) (Ideal.span {(p : ℤ)})).toFinset
@@ -54,9 +55,13 @@ private theorem rationalPrimeIdealFiber_card_le (p : ℕ) (hp : p.Prime) :
       exact Nat.one_le_iff_ne_zero.mpr
         (Nat.mul_pos (Q.val.ramificationIdx_pos ℤ) (Q.val.inertiaDeg_pos ℤ)).ne'
 
+/-- The finite set of prime ideals of `𝓞 K` lying over rational primes dividing the absolute
+discriminant of `K`; it contains every nonzero prime that ramifies in some subextension. -/
 def discriminantPrimeIdealCover : Finset (Ideal (𝓞 K)) :=
   (NumberField.discr K).natAbs.primeFactors.biUnion (rationalPrimeIdealFiber K)
 
+/-- The discriminant prime-ideal cover has at most `[K : ℚ]` times the number of prime factors of
+the absolute discriminant. -/
 theorem discriminantPrimeIdealCover_card_le :
     (discriminantPrimeIdealCover K).card ≤
       Module.finrank ℚ K * (NumberField.discr K).natAbs.primeFactors.card := by
@@ -80,6 +85,7 @@ theorem absolute_discriminant_power_le :
     F (𝓞 F) K (𝓞 K)]
   exact Nat.mul_comm _ _
 
+/-- For a quadratic extension `K / F` of number fields, `|discr F| ^ 2 ≤ |discr K|`. -/
 theorem quadratic_absolute_discriminant_square_le (hd : Module.finrank F K = 2) :
     (NumberField.discr F).natAbs ^ 2 ≤ (NumberField.discr K).natAbs := by
   simpa only [hd] using absolute_discriminant_power_le K F

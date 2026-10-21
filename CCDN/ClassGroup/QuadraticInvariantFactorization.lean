@@ -23,6 +23,8 @@ open scoped Pointwise
 variable (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K]
   [Algebra F K] [FiniteDimensional F K]
 
+/-- The predicate that `Q` is a nonzero prime ideal of `𝓞 K` with ramification index `2` over
+`𝓞 F`. -/
 def IsQuadraticRamifiedPrime (Q : Ideal (𝓞 K)) : Prop :=
   Q.IsPrime ∧ Q ≠ ⊥ ∧ Q.ramificationIdx (𝓞 F) = 2
 

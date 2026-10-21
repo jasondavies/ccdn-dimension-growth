@@ -28,6 +28,9 @@ open NumberField
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- For a number field `K` of degree `n ≥ 2` and a radius `B ≥ max 1 (|discr K| ^ (1 / n))`, the
+number of bounded square-norm translation classes times `√|discr K|` is at most a constant
+depending only on `n` times `B ^ (n - 1)`. -/
 theorem boundedSquareNormTranslationClasses_uniform_count
     (hn : 2 ≤ Module.finrank ℚ K) {B : ℝ} (hB1 : 1 ≤ B)
     (hB : |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ)) ≤ B) :
@@ -46,12 +49,15 @@ namespace CCDN
 noncomputable section
 open NumberField
 
+/-- The degree-dependent constant in the two-torsion class-group bound for number fields of degree
+`n` without an intermediate field of index two. -/
 def noIndexTwoClassGroupConstant (n : ℕ) : ℝ :=
   (noIndexTwoCurveContributionConstant n *
     (numberFieldLatticeBoxConstant n ((n : ℝ) ^ 3) * (2 : ℝ) ^ n) *
       (3 * (9 : ℝ) ^ (n - 1))) * (Real.log 9 + 2) +
     smallSubfieldIntegerCountConstant n * (9 : ℝ) ^ ((n : ℝ) / 4)
 
+/-- The constant `noIndexTwoClassGroupConstant n` is positive. -/
 lemma noIndexTwoClassGroupConstant_pos (n : ℕ) :
     0 < noIndexTwoClassGroupConstant n := by
   have hc := noIndexTwoCurveContributionConstant_nonneg n
@@ -76,6 +82,9 @@ private lemma balanced_radius_log_le {D : ℝ} (hD : 0 < D) (hlog : 1 ≤ Real.l
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- For a number field `K` of degree `n ≥ 2` with no intermediate field `L` of index `[K : L] = 2`,
+the two-torsion subgroup of the class group has order at most
+`C(n) * |discr K| ^ (1 / 2 - 1 / (2 * n)) * log |discr K|`. -/
 theorem no_index_two_classGroup_two_torsion_bound
     (hn : 2 ≤ Module.finrank ℚ K)
     (hnoTwo : ∀ L : IntermediateField ℚ K, Module.finrank L K ≠ 2) :

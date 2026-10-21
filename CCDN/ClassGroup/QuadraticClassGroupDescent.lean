@@ -27,6 +27,7 @@ noncomputable section
 open NumberField
 open scoped NumberField
 
+/-- A number field of degree one over `ℚ` has trivial two-torsion in its class group. -/
 theorem classGroupTwoTorsionCard_eq_one_of_degree_one
     (K : Type*) [Field K] [NumberField K] (hd : Module.finrank ℚ K = 1) :
     classGroupTwoTorsionCard K = 1 := by
@@ -49,9 +50,9 @@ noncomputable section
 open NumberField
 open scoped NumberField
 
-/-- A quadratic extension has two-torsion controlled by base-field
-two-torsion and a proved discriminant-prime factor. The constant loss
-from units is retained explicitly. -/
+/-- For a quadratic extension `K / F` of number fields,
+`h₂(K) ≤ (h₂(F) * 2 ^ ([K : ℚ] * ω(discr K) + [F : ℚ])) ^ 2`, where `ω` counts distinct prime
+factors; the term `[F : ℚ]` accounts for the unit-norm obstruction. -/
 theorem quadratic_classGroupTwoTorsion_descent
     (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K]
     [Algebra F K] (hd : Module.finrank F K = 2) :
@@ -75,8 +76,8 @@ theorem quadratic_classGroupTwoTorsion_descent
           (stronglyAmbiguousTwoTorsion_card_le_discriminant_primes F K hd σ hσ)) 2
     _ = _ := by rw [mul_assoc, ← pow_add]
 
-/-- The quadratic-degree base case is already subpower in the
-discriminant: only the number of its distinct prime divisors occurs. -/
+/-- A quadratic number field `K` satisfies `h₂(K) ≤ 2 ^ (4 * ω(discr K) + 2)`, where `ω` counts
+distinct prime factors; this is subpower in the discriminant. -/
 theorem quadratic_field_classGroupTwoTorsionCard_le
     (K : Type*) [Field K] [NumberField K] (hd : Module.finrank ℚ K = 2) :
     classGroupTwoTorsionCard K ≤

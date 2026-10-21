@@ -20,6 +20,8 @@ noncomputable section
 variable (F K : Type*) [Field F] [Field K] [Algebra F K]
   [FiniteDimensional F K] [Algebra.IsSeparable F K]
 
+/-- In a quadratic separable extension with a nontrivial automorphism `σ`, every automorphism is
+either the identity or `σ`. -/
 theorem quadratic_automorphism_eq_one_or
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     (τ : K ≃ₐ[F] K) : τ = 1 ∨ τ = σ := by
@@ -34,6 +36,7 @@ theorem quadratic_automorphism_eq_one_or
       rw [Finset.card_erase_of_mem (Finset.mem_univ _), Finset.card_univ, hc]
     exact Finset.card_le_one.mp he _ (by simp [hτ]) _ (by simp [hσ])
 
+/-- Every automorphism of a quadratic separable extension is an involution. -/
 theorem quadratic_automorphism_involutive
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) :
     Function.Involutive σ := by
@@ -45,6 +48,8 @@ theorem quadratic_automorphism_involutive
   simpa only [pow_two, AlgEquiv.mul_apply, AlgEquiv.one_apply] using
     congrArg (fun τ : K ≃ₐ[F] K ↦ τ x) hs
 
+/-- In a quadratic separable extension with nontrivial automorphism `σ`, the norm of `x` is
+`x * σ x`. -/
 theorem quadratic_norm_eq_mul_conjugate
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1) (x : K) :
     algebraMap F K (Algebra.norm F x) = x * σ x := by

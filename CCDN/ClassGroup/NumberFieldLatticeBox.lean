@@ -101,6 +101,7 @@ integral vectors have norm at most `C` times the box radius. -/
 def numberFieldLatticeBoxConstant (n : ℕ) (C : ℝ) : ℝ :=
   (2 : ℝ) ^ n * (2 : ℝ) ^ n * (2 * Real.sqrt n + n * C) ^ n
 
+/-- The box-count constant `numberFieldLatticeBoxConstant n C` is nonnegative for `C ≥ 0`. -/
 lemma numberFieldLatticeBoxConstant_nonneg (n : ℕ) {C : ℝ} (hC : 0 ≤ C) :
     0 ≤ numberFieldLatticeBoxConstant n C := by
   unfold numberFieldLatticeBoxConstant

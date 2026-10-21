@@ -63,6 +63,7 @@ theorem numberFieldUnit_exponent_two_quotient
   simpa only [Nat.card_eq_fintype_card, Fintype.card_prod,
     Fintype.card_fun, Fintype.card_fin, pow_succ, mul_comm] using hc
 
+/-- The unit rank of a number field plus one is at most its degree over `ℚ`. -/
 theorem numberField_unit_rank_add_one_le_degree :
     NumberField.Units.rank K + 1 ≤ Module.finrank ℚ K := by
   have hpos := Fintype.card_pos (α := InfinitePlace K)

@@ -84,6 +84,8 @@ private theorem classGroupTwoTorsionAction_involutive (σ : K ≃+* K)
 def fixedClassGroupTwoTorsion (σ : K ≃+* K) : Subgroup (classGroupTwoTorsion K) :=
   (classGroupTwoTorsionAction K σ).eqLocus (MonoidHom.id _)
 
+/-- A two-torsion class lies in the `σ`-fixed subgroup if and only if `σ` maps its underlying ideal
+class to itself. -/
 @[simp]
 theorem mem_fixedClassGroupTwoTorsion (σ : K ≃+* K) (c : classGroupTwoTorsion K) :
     c ∈ fixedClassGroupTwoTorsion K σ ↔
@@ -92,9 +94,8 @@ theorem mem_fixedClassGroupTwoTorsion (σ : K ≃+* K) (c : classGroupTwoTorsion
 
 variable [NumberField K]
 
-/-- The factor of two in the quadratic rank estimate is proved here for
-the class-group action. Bounding the fixed subgroup arithmetically
-is a separate genus-theory step. -/
+/-- For an involutive automorphism `σ` of `K`, the order of the two-torsion subgroup of the class
+group is at most the square of the order of its `σ`-fixed subgroup. -/
 theorem classGroupTwoTorsionCard_le_fixed_square (σ : K ≃+* K)
     (hσ : Function.Involutive σ) :
     classGroupTwoTorsionCard K ≤ Nat.card (fixedClassGroupTwoTorsion K σ) ^ 2 := by

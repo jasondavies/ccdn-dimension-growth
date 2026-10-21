@@ -33,6 +33,7 @@ open scoped NumberField
 
 variable (F K : Type*) [Field F] [Field K] [Algebra F K]
 
+/-- The relative norm `N_{K/F}` restricted to unit groups of rings of integers. -/
 def relativeUnitNorm : (𝓞 K)ˣ →* (𝓞 F)ˣ :=
   Units.map (RingOfIntegers.norm F)
 
@@ -42,6 +43,8 @@ private theorem relativeUnitNorm_extended (u : (𝓞 F)ˣ) :
   apply Units.ext
   exact RingOfIntegers.norm_algebraMap F u
 
+/-- The unit-norm obstruction group: the units of `𝓞 F` modulo the relative norms of units of
+`𝓞 K`. -/
 abbrev quadraticUnitNormQuotient :=
   (𝓞 F)ˣ ⧸ (relativeUnitNorm F K).range
 
@@ -56,6 +59,7 @@ private theorem quadraticUnitNormQuotient_square (hd : Module.finrank F K = 2)
 
 variable [NumberField F]
 
+/-- For a quadratic extension `K / F` of number fields, the unit-norm quotient is finite. -/
 theorem quadraticUnitNormQuotient_finite (hd : Module.finrank F K = 2) :
     Finite (quadraticUnitNormQuotient F K) :=
   (numberFieldUnit_exponent_two_quotient F
@@ -70,6 +74,8 @@ private theorem quadraticUnitNormQuotient_card_le (hd : Module.finrank F K = 2) 
     (QuotientGroup.mk' (relativeUnitNorm F K).range)
     (QuotientGroup.mk'_surjective _) (quadraticUnitNormQuotient_square F K hd)).2
 
+/-- For a quadratic extension `K / F` of number fields, the unit-norm quotient has order at most
+`2 ^ [F : ℚ]`. -/
 theorem quadraticUnitNormQuotient_card_le_degree (hd : Module.finrank F K = 2) :
     Nat.card (quadraticUnitNormQuotient F K) ≤ 2 ^ Module.finrank ℚ F :=
   (quadraticUnitNormQuotient_card_le F K hd).trans
@@ -123,6 +129,8 @@ def stronglyAmbiguousClassGroup (σ : K ≃ₐ[F] K) : Subgroup (ClassGroup (�
         (MonoidHom.id _)).subtype).range
 
 omit [NumberField F] in
+/-- An ideal class is strongly ambiguous if and only if it is the class of a `σ`-invariant
+invertible fractional ideal. -/
 theorem mem_stronglyAmbiguousClassGroup (σ : K ≃ₐ[F] K) (c : ClassGroup (𝓞 K)) :
     c ∈ stronglyAmbiguousClassGroup F K σ ↔
       ∃ I : (FractionalIdeal (𝓞 K)⁰ K)ˣ,

@@ -18,6 +18,8 @@ open scoped nonZeroDivisors
 variable {R K : Type*} [CommRing R] [IsDedekindDomain R]
   [Field K] [Algebra R K] [IsFractionRing R K]
 
+/-- Applying a ring automorphism `σ` of `R` to the fractional ideal of an integral ideal `I` gives
+the fractional ideal of the integral ideal `I.map σ`. -/
 theorem fractionalIdeal_conjugate_coeIdeal (σ : R ≃+* R) (I : Ideal R) :
     FractionalIdeal.ringEquivOfRingEquiv K K σ (I : FractionalIdeal R⁰ K) =
       (I.map σ.toRingHom : FractionalIdeal R⁰ K) := by
@@ -43,6 +45,8 @@ theorem fractionalIdeal_conjugate_coeIdeal (σ : R ≃+* R) (I : Ideal R) :
       ⟨s, hs, rfl⟩, ?_⟩
     exact IsFractionRing.ringEquivOfRingEquiv_algebraMap σ s
 
+/-- If `(x) * σ(I) = (y) * I` for nonzero `x y : R`, then the conjugate of the fractional ideal of
+`I` under `σ` equals the principal fractional ideal of `y / x` times that of `I`. -/
 theorem integral_ideal_scalar_fractional_comparison
     (σ : R ≃+* R) (I : (Ideal R)⁰) (x y : R) (hx : x ≠ 0) (hy : y ≠ 0)
     (hxy : Ideal.span {x} * (I : Ideal R).map σ.toRingHom =

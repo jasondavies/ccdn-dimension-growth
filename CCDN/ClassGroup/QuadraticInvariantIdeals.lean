@@ -26,6 +26,8 @@ variable (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K]
   [Algebra F K] [FiniteDimensional F K]
 
 omit [NumberField F] [NumberField K] [FiniteDimensional F K] in
+/-- The action of `σ : K ≃ₐ[F] K` on ideals of `𝓞 K` is the image under the induced automorphism of
+`𝓞 K`. -/
 lemma quadratic_integer_ideal_action (σ : K ≃ₐ[F] K) (I : Ideal (𝓞 K)) :
     σ • I = I.map (RingOfIntegers.mapAlgEquiv σ).toRingHom := by
   rfl
@@ -68,6 +70,8 @@ private theorem quadratic_prime_ramification_identity
     IsGalois.card_aut_eq_finrank, hd] at hh
   exact hh
 
+/-- In a quadratic extension `K / F`, every prime ideal of `𝓞 K` has ramification index `1` or `2`
+over `𝓞 F`. -/
 theorem quadratic_prime_ramification_one_or_two
     (hd : Module.finrank F K = 2) (Q : Ideal (𝓞 K)) [Q.IsPrime] :
     Q.ramificationIdx (𝓞 F) = 1 ∨ Q.ramificationIdx (𝓞 F) = 2 := by
@@ -77,6 +81,8 @@ theorem quadratic_prime_ramification_one_or_two
     nlinarith only [hh]
   exact (Nat.dvd_prime Nat.prime_two).mp hdvd
 
+/-- In a quadratic extension with nontrivial automorphism `σ`, a prime ideal of `𝓞 K` not fixed by
+`σ` is unramified over `𝓞 F`. -/
 theorem quadratic_moving_prime_unramified
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     (Q : Ideal (𝓞 K)) [Q.IsPrime] (hmove : σ • Q ≠ Q) :
@@ -90,6 +96,9 @@ theorem quadratic_moving_prime_unramified
   have hf := Q.inertiaDeg_pos (𝓞 F)
   nlinarith
 
+/-- In a quadratic extension with nontrivial automorphism `σ`, a nonzero prime `Q` of `𝓞 K` fixed by
+`σ` is the only prime above its contraction `P`, so `P 𝓞 K = Q ^ e` with `e` its ramification
+index. -/
 theorem quadratic_fixed_prime_extension
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     (Q : Ideal (𝓞 K)) [Q.IsPrime] (hQ : Q ≠ ⊥) (hfix : σ • Q = Q) :
@@ -103,6 +112,8 @@ theorem quadratic_fixed_prime_extension
   rw [Ideal.map_algebraMap_eq_finsetProd_pow hp, hset]
   simp
 
+/-- In a quadratic extension with nontrivial automorphism `σ`, a nonzero prime `Q` of `𝓞 K` not
+fixed by `σ` satisfies `P 𝓞 K = Q * σ Q`, where `P` is its contraction to `𝓞 F`. -/
 theorem quadratic_moving_prime_extension
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     (Q : Ideal (𝓞 K)) [Q.IsPrime] (hQ : Q ≠ ⊥) (hmove : σ • Q ≠ Q) :

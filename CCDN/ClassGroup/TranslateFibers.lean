@@ -27,10 +27,13 @@ open NumberField NumberField.InfinitePlace
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- The set of nonzero algebraic integers `β ∈ 𝓞 K` bounded by `B` at every infinite place whose
+absolute norm `|N(β)|` is a perfect square. -/
 def boundedSquareNormIntegers (B : ℝ) : Set (𝓞 K) :=
   {β | β ≠ 0 ∧ (∀ w : InfinitePlace K, w (β : K) ≤ B) ∧
     ∃ m : ℕ, (Algebra.norm ℤ β).natAbs = m ^ 2}
 
+/-- There are finitely many bounded square-norm integers `boundedSquareNormIntegers K B`. -/
 lemma boundedSquareNormIntegers_finite (B : ℝ) :
     (boundedSquareNormIntegers K B).Finite := by
   apply Set.Finite.of_injOn (f := fun β : 𝓞 K ↦ (β : K))
@@ -40,8 +43,9 @@ lemma boundedSquareNormIntegers_finite (B : ℝ) :
   · exact RingOfIntegers.coe_injective.injOn
   · exact Embeddings.finite_of_norm_le K ℂ B
 
-/-- The bounded-integer reduction has no hypothesis supplying representatives
-or a counting family: the injection comes from the proved Minkowski step. -/
+/-- The two-torsion subgroup of the class group of `K` has at most as many elements as there are
+bounded square-norm integers at the balanced radius `9 * |discr K| ^ (1 / [K : ℚ])`; the
+injection sends each class to a balanced generator of the square of a representative ideal. -/
 theorem classGroupTwoTorsionCard_le_boundedSquareNormIntegers :
     classGroupTwoTorsionCard K ≤
       (boundedSquareNormIntegers K
@@ -99,17 +103,25 @@ private lemma integer_translate_coordinate_le (α β : 𝓞 K) {B : ℝ}
     _ ≤ w (α : K) + w (β : K) := w.val.add_le _ _
     _ ≤ 2 * B := by linarith [hα w, hβ w]
 
+/-- The bounded square-norm integers of the form `x - β` with `x ∈ ℤ`, that is, those in the
+integer-translation class of `-β`. -/
 def squareNormTranslateFiber (β : 𝓞 K) (B : ℝ) : Set (𝓞 K) :=
   {α | α ∈ boundedSquareNormIntegers K B ∧
     ∃ x : ℤ, α = algebraMap ℤ (𝓞 K) x - β}
 
+/-- Each square-norm translate fiber `squareNormTranslateFiber K β B` is finite. -/
 lemma squareNormTranslateFiber_finite (β : 𝓞 K) (B : ℝ) :
     (squareNormTranslateFiber K β B).Finite :=
   (boundedSquareNormIntegers_finite K B).subset (fun _ h ↦ h.1)
 
+/-- The rational plane curve `y ^ 2 = ε * N(x - β)` cut out by the signed norm-curve polynomial of
+`β` with sign `ε`. -/
 def signedNormCurveLocus (β : 𝓞 K) (ε : ℤ) : Set (RatPoint 2) :=
   zeroLocus (MvPolynomial.map (Int.castRingHom ℚ) (signedNormCurvePolynomial K β ε))
 
+/-- If `β` is bounded by `B` at every infinite place, then the square-norm translate fiber of `β`
+has at most as many elements as there are integral points of height at most
+`max (2 * B) (√(B ^ n))` on the two signed norm curves `y ^ 2 = ±N(x - β)`, where `n = [K : ℚ]`. -/
 theorem squareNormTranslateFiber_count_le (β : 𝓞 K) {B : ℝ}
     (hβ : ∀ w : InfinitePlace K, w (β : K) ≤ B) :
     (squareNormTranslateFiber K β B).ncard ≤

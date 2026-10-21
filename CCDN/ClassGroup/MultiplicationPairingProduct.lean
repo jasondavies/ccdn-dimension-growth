@@ -22,6 +22,7 @@ noncomputable section
 
 variable {F K : Type*} [Field F] [Field K] [Algebra F K]
 
+/-- The intersection of the kernels of two linear functionals `ℓ` and `μ` on `K`. -/
 def hyperplaneComplement (ℓ μ : K →ₗ[F] F) : Submodule F K :=
   LinearMap.ker ℓ ⊓ LinearMap.ker μ
 
@@ -78,6 +79,9 @@ private lemma determinant_weight_product_bound {ι R : Type*} [Fintype ι] [Deci
     _ = (∏ i, w i) ^ 2 := by
       rw [Finset.prod_mul_distrib, Equiv.prod_comp, sq]
 
+/-- Let `ℓ ≠ 0` and `μ` be linear functionals on `K` with `ℓ 1 = 0` and `μ 1 = 1`, and let `b` be a
+basis of `hyperplaneComplement ℓ μ` with weights `w`. If `M ≤ w i * w j` whenever
+`ℓ (b i * b j) ≠ 0`, then `M ^ (d + 2) ≤ (M * ∏ i, w i) ^ 2`, where `d` is the size of the basis. -/
 theorem hyperplane_multiplication_minimum_product
     {ι : Type*} [Fintype ι] [DecidableEq ι]
     (ℓ μ : K →ₗ[F] F) (hℓ : ℓ ≠ 0) (hℓ1 : ℓ 1 = 0) (hμ1 : μ 1 = 1)

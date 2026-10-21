@@ -18,6 +18,8 @@ noncomputable section
 
 variable {F K ι : Type*} [Field F] [Field K] [Algebra F K]
 
+/-- The span of the basis vectors `b i` with `i ≠ p` and `i ≠ q` is the intersection of the kernels
+of the coordinate functionals `b.coord q` and `b.coord p`. -/
 theorem fieldBasisMiddle_span (b : Module.Basis ι F K) (p q : ι) :
     Submodule.span F (Set.range (fun i : {i : ι // i ≠ p ∧ i ≠ q} ↦ b i)) =
       hyperplaneComplement (b.coord q) (b.coord p) := by
@@ -52,6 +54,7 @@ def fieldBasisMiddle (b : Module.Basis ι F K) (p q : ι) :
       Subtype.val_injective)).map
     (LinearEquiv.ofEq _ _ (fieldBasisMiddle_span b p q))
 
+/-- The vectors of `fieldBasisMiddle b p q` are the original basis vectors `b i`. -/
 @[simp]
 theorem fieldBasisMiddle_apply (b : Module.Basis ι F K) (p q : ι)
     (i : {i : ι // i ≠ p ∧ i ≠ q}) :

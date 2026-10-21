@@ -57,6 +57,8 @@ private theorem integerNormPolynomial_map_eq_minpoly_pow
   rw [Algebra.coe_norm_int, Polynomial.eval_pow]
   simpa using norm_sub_eq_minpoly_eval_pow (β : K) (x : ℚ)
 
+/-- Over an algebraic closure of `ℚ`, the integer norm polynomial of `β` is the minimal
+polynomial of `β` over `ℚ` raised to the power `[K : ℚ(β)]`. -/
 theorem integerNormPolynomial_map_eq_minpoly_pow_algebraicClosure
     (K : Type*) [Field K] [NumberField K] (β : 𝓞 K) :
     (integerNormPolynomial K β).map (Int.castRingHom (AlgebraicClosure ℚ)) =

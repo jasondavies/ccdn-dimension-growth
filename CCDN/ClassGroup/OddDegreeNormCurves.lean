@@ -36,6 +36,8 @@ private lemma odd_degree_polynomial_not_square_ratFunc {F : Type*} [Field F]
   push_cast at hk'
   omega
 
+/-- For a polynomial `p` of odd degree over a field `F`, the double-cover polynomial `Y ^ 2 - p` is
+irreducible in `F[X][Y]`. -/
 lemma odd_degree_double_cover_irreducible {F : Type*} [Field F]
     (p : F[X]) (hp : Odd p.natDegree) :
     Irreducible (X ^ 2 - C p : F[X][X]) := by
@@ -45,6 +47,8 @@ lemma odd_degree_double_cover_irreducible {F : Type*} [Field F]
   exact X_pow_sub_C_irreducible_of_prime Nat.prime_two
     (odd_degree_polynomial_not_square_ratFunc p hp)
 
+/-- For a polynomial `p` of degree at least `2`, the double-cover polynomial `Y ^ 2 - p` has total
+degree `deg p`. -/
 lemma double_cover_bivariateTotalDegree {R : Type*} [CommRing R] [Nontrivial R]
     (p : R[X]) (hp : 2 ≤ p.natDegree) :
     bivariateTotalDegree (X ^ 2 - C p : R[X][X]) = p.natDegree := by
@@ -70,6 +74,8 @@ lemma double_cover_bivariateTotalDegree {R : Type*} [CommRing R] [Nontrivial R]
       (by simpa using neg_ne_zero.mpr (leadingCoeff_ne_zero.mpr hp0))
     simpa using h
 
+/-- For `[K : ℚ] ≥ 2` and `ε ≠ 0`, the signed norm-curve polynomial `y ^ 2 - ε * N(x - β)` has total
+degree `[K : ℚ]`. -/
 theorem signedNormCurvePolynomial_totalDegree (K : Type*) [Field K] [NumberField K]
     (β : 𝓞 K) {ε : ℤ} (hε : ε ≠ 0) (hn : 2 ≤ Module.finrank ℚ K) :
     (signedNormCurvePolynomial K β ε).totalDegree = Module.finrank ℚ K := by

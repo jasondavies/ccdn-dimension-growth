@@ -32,6 +32,8 @@ private lemma signedNormCurvePolynomial_bivariate_map (β : 𝓞 K) (ε : ℤ) :
     (X ^ 2 - C (C ε * integerNormPolynomial K β)) = _
   simp
 
+/-- If `[K : ℚ]` is odd and the sign `ε` is nonzero in the field `E`, then the signed norm-curve
+polynomial of `β` remains irreducible over `E`, in any characteristic. -/
 theorem signedNormCurvePolynomial_map_irreducible_in_every_characteristic
     (β : 𝓞 K) {ε : ℤ} (hε : (ε : E) ≠ 0) (hn : Odd (Module.finrank ℚ K)) :
     Irreducible (MvPolynomial.map (Int.castRingHom E)
@@ -43,6 +45,8 @@ theorem signedNormCurvePolynomial_map_irreducible_in_every_characteristic
     integerNormPolynomial_natDegree]
   exact hn
 
+/-- If `[K : ℚ] ≥ 2` and the sign `ε` is nonzero in the field `E`, then the signed norm-curve
+polynomial of `β` has total degree `[K : ℚ]` over `E`. -/
 theorem signedNormCurvePolynomial_map_totalDegree
     (β : 𝓞 K) {ε : ℤ} (hε : (ε : E) ≠ 0) (hn : 2 ≤ Module.finrank ℚ K) :
     (MvPolynomial.map (Int.castRingHom E)

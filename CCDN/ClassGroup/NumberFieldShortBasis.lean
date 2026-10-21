@@ -74,6 +74,9 @@ open Module MeasureTheory
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E]
 
+/-- If `δ > 0` bounds the norms of nonzero lattice vectors from below, then a prescribed greedy
+lattice basis with first vector `w` satisfies
+`∏ i, ‖b i‖ ≤ (‖w‖ / δ) * (n + 1) ^ (n + 1) * covol(L)`. -/
 theorem prescribed_greedy_lattice_basis_product_le
     (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
     {n : ℕ} {w : E} (b : Basis (Fin (n + 1)) ℝ E)

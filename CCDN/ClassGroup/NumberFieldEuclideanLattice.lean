@@ -34,24 +34,30 @@ def euclideanNumberFieldEmbedding : K →+* mixedEmbedding.euclidean.mixedSpace 
     rw [map_mul]
     rfl
 
+/-- Transporting the Euclidean embedding of `x` back to the mixed space gives the mixed embedding
+of `x`. -/
 @[simp] lemma toMixed_euclideanNumberFieldEmbedding (x : K) :
     mixedEmbedding.euclidean.toMixed K (euclideanNumberFieldEmbedding K x) =
       mixedEmbedding K x :=
   (mixedEmbedding.euclidean.toMixed K).apply_symm_apply _
 
+/-- The Euclidean mixed embedding of a number field is injective. -/
 lemma euclideanNumberFieldEmbedding_injective :
     Function.Injective (euclideanNumberFieldEmbedding K) :=
   (mixedEmbedding.euclidean.toMixed K).symm.injective.comp
     (mixedEmbedding_injective (K := K))
 
+/-- The Euclidean mixed embedding of `K`, as a `ℚ`-linear map. -/
 def euclideanNumberFieldLinearMap :
     K →ₗ[ℚ] mixedEmbedding.euclidean.mixedSpace K :=
   ((mixedEmbedding.euclidean.toMixed K).symm.toLinearMap.restrictScalars ℚ).comp
     (mixedEmbedding K).toRatAlgHom.toLinearMap
 
+/-- The `ℚ`-linear Euclidean embedding agrees with `euclideanNumberFieldEmbedding`. -/
 @[simp] lemma euclideanNumberFieldLinearMap_apply (x : K) :
     euclideanNumberFieldLinearMap K x = euclideanNumberFieldEmbedding K x := rfl
 
+/-- The Euclidean embedding of an algebraic integer lies in the Euclidean integer lattice. -/
 lemma euclideanNumberFieldEmbedding_mem_integerLattice (x : 𝓞 K) :
     euclideanNumberFieldEmbedding K (x : K) ∈ mixedEmbedding.euclidean.integerLattice K := by
   change mixedEmbedding.euclidean.toMixed K (euclideanNumberFieldEmbedding K (x : K)) ∈
@@ -59,6 +65,8 @@ lemma euclideanNumberFieldEmbedding_mem_integerLattice (x : 𝓞 K) :
   rw [toMixed_euclideanNumberFieldEmbedding]
   exact ⟨x, rfl⟩
 
+/-- A vector lies in the Euclidean integer lattice if and only if it is the Euclidean embedding of
+an algebraic integer. -/
 lemma mem_euclidean_integerLattice_iff
     (x : mixedEmbedding.euclidean.mixedSpace K) :
     x ∈ mixedEmbedding.euclidean.integerLattice K ↔
@@ -102,6 +110,7 @@ private lemma euclideanNumberFieldEmbedding_norm_sq (x : K) :
     rw [mixedEmbedding.mixedEmbedding_apply_isComplex, norm_embedding_eq]
 
 open Classical in
+/-- The Euclidean embedding of a nonzero algebraic integer has norm at least `1`. -/
 lemma one_le_euclidean_norm_integer {x : 𝓞 K} (hx : x ≠ 0) :
     1 ≤ ‖euclideanNumberFieldEmbedding K (x : K)‖ := by
   by_contra! h
@@ -111,6 +120,7 @@ lemma one_le_euclidean_norm_integer {x : 𝓞 K} (hx : x ≠ 0) :
   exact (hw.trans (infinitePlace_le_euclidean_norm K w (x : K))).not_gt h
 
 open Classical in
+/-- Every nonzero vector of the Euclidean integer lattice has norm at least `1`. -/
 lemma one_le_euclidean_integerLattice_norm
     {x : mixedEmbedding.euclidean.mixedSpace K}
     (hx : x ∈ mixedEmbedding.euclidean.integerLattice K) (hne : x ≠ 0) :
@@ -122,6 +132,8 @@ lemma one_le_euclidean_integerLattice_norm
   simp [hz]
 
 open Classical in
+/-- If `w x ≤ B` at every infinite place `w`, then the Euclidean embedding of `x` has norm at most
+`√[K : ℚ] * B`. -/
 lemma euclideanNumberFieldEmbedding_norm_le {B : ℝ} (hB : 0 ≤ B)
     (x : K) (hx : ∀ w : InfinitePlace K, w x ≤ B) :
     ‖euclideanNumberFieldEmbedding K x‖ ≤ Real.sqrt (Module.finrank ℚ K) * B := by
@@ -143,12 +155,15 @@ lemma euclideanNumberFieldEmbedding_norm_le {B : ℝ} (hB : 0 ≤ B)
     mul_nonneg (Nat.cast_nonneg (nrComplexPlaces K) (α := ℝ)) (sq_nonneg B)]
 
 open Classical in
+/-- The Euclidean embedding of `1` has norm at most `√[K : ℚ]`. -/
 lemma euclideanNumberFieldEmbedding_one_norm_le :
     ‖euclideanNumberFieldEmbedding K 1‖ ≤ Real.sqrt (Module.finrank ℚ K) := by
   simpa using euclideanNumberFieldEmbedding_norm_le K (B := 1) zero_le_one 1
     (fun w ↦ by simp)
 
 open Classical in
+/-- The Euclidean norm is submultiplicative on embedded field elements: the norm of the embedding of
+`x * y` is at most the product of the norms of the embeddings of `x` and `y`. -/
 lemma euclideanNumberFieldEmbedding_norm_mul_le (x y : K) :
     ‖euclideanNumberFieldEmbedding K (x * y)‖ ≤
       ‖euclideanNumberFieldEmbedding K x‖ * ‖euclideanNumberFieldEmbedding K y‖ := by
@@ -169,6 +184,8 @@ lemma euclideanNumberFieldEmbedding_norm_mul_le (x y : K) :
   nlinarith only [hreal, hcomplex]
 
 open Classical in
+/-- The Euclidean integer lattice has covolume `2 ^ (-r₂) * √|discr K|`, where `r₂` is the number of
+complex places of `K`. -/
 lemma euclidean_integerLattice_covolume :
     ZLattice.covolume (mixedEmbedding.euclidean.integerLattice K) =
       (2 : ℝ)⁻¹ ^ nrComplexPlaces K * Real.sqrt |(discr K : ℝ)| := by

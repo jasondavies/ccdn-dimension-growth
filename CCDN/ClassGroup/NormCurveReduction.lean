@@ -19,15 +19,23 @@ open NumberField NumberField.InfinitePlace
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- The quotient of `𝓞 K` by the additive subgroup of rational integers, whose classes are the
+orbits under integer translation. -/
 abbrev IntegerTranslationQuotient :=
   (𝓞 K) ⧸ AddSubgroup.zmultiples (1 : 𝓞 K)
 
+/-- The finite set of integer-translation classes of the bounded square-norm integers
+`boundedSquareNormIntegers K B`. -/
 def boundedSquareNormTranslationClasses (B : ℝ) :
     Finset (IntegerTranslationQuotient K) := by
   classical
   exact (boundedSquareNormIntegers_finite K B).toFinset.image
     (fun α : 𝓞 K ↦ (α : IntegerTranslationQuotient K))
 
+/-- There is an injective family of algebraic integers `β q` bounded by `B` at every infinite place,
+indexed by the bounded square-norm translation classes, such that the number of bounded
+square-norm integers is at most the total number of points of height at most
+`max (2 * B) (√(B ^ n))` on the signed norm curves for `β q` with signs `±1`. -/
 theorem exists_norm_curve_family (B : ℝ) :
     ∃ β : (boundedSquareNormTranslationClasses K B) → 𝓞 K,
       Function.Injective β ∧

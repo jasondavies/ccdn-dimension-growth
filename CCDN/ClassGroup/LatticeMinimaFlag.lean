@@ -20,6 +20,9 @@ open Module Submodule InnerProductSpace
 variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
   [FiniteDimensional ℝ E]
 
+/-- Every basis `b` of a finite-dimensional real inner product space has an orthonormal basis `c`
+(its Gram–Schmidt orthonormalisation) spanning the same flag: for each `i`, the vectors with
+index `< i` of `c` and of `b` span the same subspace. -/
 theorem exists_orthonormal_basis_with_same_flag {n : ℕ}
     (b : Basis (Fin n) ℝ E) :
     ∃ c : OrthonormalBasis (Fin n) ℝ E, ∀ i,

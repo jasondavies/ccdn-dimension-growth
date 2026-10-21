@@ -49,6 +49,9 @@ private lemma classGroup_balanced_radius_power_identity {D : ℝ} (hD : 0 < D)
       rw [← Real.rpow_add hD, hexp, Real.rpow_add hD]
     _ = _ := by ring
 
+/-- If `N * √D ≤ A * R ^ (n - 1) * √R` for the balanced radius `R = 9 * D ^ (1 / n)`, then
+`N ≤ A * 3 * 9 ^ (n - 1) * D ^ (1 / 2 - 1 / (2 * n))`: the discriminant exponent obtained from
+a square-root norm-curve count and an `n - 1` dimensional translation-class count. -/
 theorem classGroup_discriminant_bound_of_balanced_radius
     {D A N : ℝ} (hD : 0 < D) {n : ℕ} (hn : 0 < n)
     (h : N * Real.sqrt D ≤

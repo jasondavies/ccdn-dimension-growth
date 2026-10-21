@@ -19,9 +19,11 @@ open NumberField NumberField.InfinitePlace
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- The set of algebraic integers `α ∈ 𝓞 K` with `w α ≤ B` at every infinite place `w`. -/
 def boundedArchimedeanIntegers (B : ℝ) : Set (𝓞 K) :=
   {α | ∀ w : InfinitePlace K, w (α : K) ≤ B}
 
+/-- There are finitely many algebraic integers of `K` bounded by `B` at every infinite place. -/
 lemma boundedArchimedeanIntegers_finite (B : ℝ) :
     (boundedArchimedeanIntegers K B).Finite := by
   apply Set.Finite.of_injOn (f := fun β : 𝓞 K ↦ (β : K))
@@ -31,6 +33,9 @@ lemma boundedArchimedeanIntegers_finite (B : ℝ) :
   · exact RingOfIntegers.coe_injective.injOn
   · exact Embeddings.finite_of_norm_le K ℂ B
 
+/-- Translating representatives of the bounded square-norm translation classes by the integers in
+`[-⌊R⌋, ⌊R⌋]` gives distinct algebraic integers bounded by `B + R` at every infinite place, so
+the number of classes times `2 * ⌊R⌋ + 1` is at most the number of such integers. -/
 theorem boundedSquareNormTranslationClasses_packing (B R : ℝ) :
     (boundedSquareNormTranslationClasses K B).card *
         (2 * ⌊R⌋ + 1).toNat ≤

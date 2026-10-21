@@ -20,8 +20,9 @@ open Module Submodule
 variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
   [FiniteDimensional ℝ E]
 
-/-- Only the first vector is prescribed; all subsequent minima are attained
-in the lattice outside the preceding flag. -/
+/-- A prescribed greedy lattice family: linearly independent vectors `v` of the lattice `L` with
+first vector `v 0 = w`, each later vector `v i` being a shortest vector of `L` outside the real
+span of the preceding vectors. -/
 def IsPrescribedGreedyLatticeFamily (L : Submodule ℤ E) (w : E)
     {k : ℕ} (v : Fin (k + 1) → E) : Prop :=
   LinearIndependent ℝ v ∧ v 0 = w ∧ (∀ i, v i ∈ L) ∧
@@ -100,6 +101,8 @@ private theorem exists_prescribed_greedy_lattice_family
     obtain ⟨x, hx, hxU, hmin⟩ := ZLattice.exists_shortest_vector_notMem L _ hU
     exact ⟨Fin.snoc v x, hv.snoc hx hxU hmin⟩
 
+/-- Every nonzero vector `w` of a full lattice `L` in a real space of dimension `n + 1` is the first
+vector of a basis `b` of lattice vectors that forms a prescribed greedy lattice family. -/
 theorem exists_prescribed_greedy_lattice_basis
     (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
     (w : E) (hw : w ∈ L) (hw0 : w ≠ 0)
@@ -110,10 +113,14 @@ theorem exists_prescribed_greedy_lattice_basis
   exact ⟨b, by simpa only [b, coe_basisOfLinearIndependentOfCardEqFinrank'] using hv⟩
 
 omit [FiniteDimensional ℝ E] in
+/-- The successive thresholds of a prescribed greedy family `v`: the first is the given lower bound
+`δ`, and the `i`-th for `i ≠ 0` is the norm `‖v i‖`. -/
 def prescribedLatticeMinima {n : ℕ} (v : Fin (n + 1) → E) (δ : ℝ) : Fin (n + 1) → ℝ :=
   fun i => if i = 0 then δ else ‖v i‖
 
 omit [FiniteDimensional ℝ E] in
+/-- For a positive lower bound `δ`, all thresholds `prescribedLatticeMinima v δ` of a prescribed
+greedy lattice family are positive. -/
 theorem IsPrescribedGreedyLatticeFamily.minima_pos
     {L : Submodule ℤ E} {w : E} {n : ℕ} {v : Fin (n + 1) → E}
     (hv : IsPrescribedGreedyLatticeFamily L w v) {δ : ℝ} (hδ : 0 < δ) :
@@ -125,6 +132,8 @@ theorem IsPrescribedGreedyLatticeFamily.minima_pos
   · exact norm_pos_iff.mpr (hv.linearIndependent.ne_zero i)
 
 omit [FiniteDimensional ℝ E] in
+/-- If `δ` is a lower bound for the norms of nonzero lattice vectors, then the thresholds
+`prescribedLatticeMinima v δ` of a prescribed greedy lattice family are monotone. -/
 theorem IsPrescribedGreedyLatticeFamily.minima_mono
     {L : Submodule ℤ E} {w : E} {n : ℕ} {v : Fin (n + 1) → E}
     (hv : IsPrescribedGreedyLatticeFamily L w v) {δ : ℝ}
@@ -141,6 +150,9 @@ theorem IsPrescribedGreedyLatticeFamily.minima_mono
     exact hv.norm_le hi (hv.mem j) (hv.linearIndependent.notMem_span_image (not_lt_of_ge hij))
 
 omit [FiniteDimensional ℝ E] in
+/-- If `δ` is a lower bound for the norms of nonzero lattice vectors, then every lattice vector
+outside the span of the vectors of index `< i` of a prescribed greedy lattice family has norm at
+least the `i`-th threshold `prescribedLatticeMinima v δ i`. -/
 theorem IsPrescribedGreedyLatticeFamily.minima_outside
     {L : Submodule ℤ E} {w : E} {n : ℕ} {v : Fin (n + 1) → E}
     (hv : IsPrescribedGreedyLatticeFamily L w v) {δ : ℝ}
@@ -156,6 +168,8 @@ theorem IsPrescribedGreedyLatticeFamily.minima_outside
     exact hv.norm_le hi hx hxU
 
 omit [FiniteDimensional ℝ E] [NormedSpace ℝ E] in
+/-- The product of the norms `‖v i‖` equals `‖w‖ / δ` times the product of the thresholds
+`prescribedLatticeMinima v δ i`, where `v 0 = w` and `δ ≠ 0`. -/
 theorem prescribedLatticeMinima_prod {n : ℕ} (v : Fin (n + 1) → E)
     {w : E} (hw : v 0 = w) {δ : ℝ} (hδ : δ ≠ 0) :
     (∏ i, ‖v i‖) = (‖w‖ / δ) * ∏ i, prescribedLatticeMinima v δ i := by

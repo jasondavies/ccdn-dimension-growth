@@ -65,12 +65,16 @@ noncomputable section
 open NumberField
 universe u
 
+/-- The statement that every number field `K` of degree `n` satisfies
+`h₂(K) ≤ C * |discr K| ^ (1 / 2 - 1 / (2 * n)) * (log |discr K| + 1)`. -/
 def ClassGroupLogarithmicBound (n : ℕ) (C : ℝ) : Prop :=
   ∀ (K : Type u) [Field K] [NumberField K], Module.finrank ℚ K = n →
     (classGroupTwoTorsionCard K : ℝ) ≤
       C * ((discr K).natAbs : ℝ) ^ (1 / 2 - 1 / (2 * (n : ℝ))) *
         (Real.log ((discr K).natAbs : ℝ) + 1)
 
+/-- For every `n ≥ 2` there is a constant `C > 0` such that every number field `K` of degree `n`
+satisfies `h₂(K) ≤ C * |discr K| ^ (1 / 2 - 1 / (2 * n)) * (log |discr K| + 1)`. -/
 theorem classGroup_uniform_logarithmic_bound (n : ℕ) (hn : 2 ≤ n) :
     ∃ C : ℝ, 0 < C ∧ ClassGroupLogarithmicBound.{u} n C := by
   classical

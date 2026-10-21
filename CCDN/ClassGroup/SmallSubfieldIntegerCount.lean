@@ -44,18 +44,24 @@ private lemma small_dimension_packing_bound {m n : ℕ} (hm : 4 * m ≤ n)
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- The algebraic integers of `K` bounded by `B` at every infinite place that lie in an intermediate
+field `L` with `4 * [L : ℚ] ≤ [K : ℚ]`. -/
 def boundedSmallSubfieldIntegers (B : ℝ) : Set (𝓞 K) :=
   {β | β ∈ boundedArchimedeanIntegers K B ∧
     ∃ L : IntermediateField ℚ K,
       4 * Module.finrank ℚ L ≤ Module.finrank ℚ K ∧ (β : K) ∈ L}
 
+/-- The set `boundedSmallSubfieldIntegers K B` is finite. -/
 lemma boundedSmallSubfieldIntegers_finite (B : ℝ) :
     (boundedSmallSubfieldIntegers K B).Finite :=
   (boundedArchimedeanIntegers_finite K B).subset (fun _ h ↦ h.1)
 
+/-- The constant `2 ^ n * (2 * √n + 1) ^ n` in the count of bounded integers in small subfields of
+a number field of degree `n`. -/
 def smallSubfieldIntegerCountConstant (n : ℕ) : ℝ :=
   (2 : ℝ) ^ n * (2 * Real.sqrt (n : ℝ) + 1) ^ n
 
+/-- The constant `smallSubfieldIntegerCountConstant n` is positive. -/
 lemma smallSubfieldIntegerCountConstant_pos (n : ℕ) :
     0 < smallSubfieldIntegerCountConstant n := by
   unfold smallSubfieldIntegerCountConstant
@@ -113,6 +119,8 @@ private theorem boundedSmallSubfieldIntegers_count {B : ℝ} (hB : 1 ≤ B) :
       exact_mod_cast hcard
     _ = _ := by unfold smallSubfieldIntegerCountConstant; ring
 
+/-- At the balanced radius `9 * D ^ (1 / n)` with `D ≥ 1` and `n = [K : ℚ]`, the number of bounded
+integers in small subfields is at most a constant depending only on `n` times `D ^ (1 / 4)`. -/
 theorem boundedSmallSubfieldIntegers_balanced_count {D : ℝ} (hD : 1 ≤ D) :
     ((boundedSmallSubfieldIntegers K
         (9 * D ^ (1 / (Module.finrank ℚ K : ℝ)))).ncard : ℝ) ≤

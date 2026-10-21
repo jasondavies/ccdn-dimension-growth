@@ -21,6 +21,8 @@ open scoped nonZeroDivisors
 variable {R K : Type*} [CommRing R] [IsDedekindDomain R]
   [Field K] [Algebra R K] [IsFractionRing R K]
 
+/-- For an involutive ring automorphism `σ` of `R`, every `σ`-invariant invertible fractional ideal
+`J` has a `σ`-invariant nonzero integral ideal `I` in the same ideal class. -/
 theorem exists_invariant_integral_ideal_representative
     (σ : R ≃+* R) (hσ : Function.Involutive σ)
     (J : (FractionalIdeal R⁰ K)ˣ)

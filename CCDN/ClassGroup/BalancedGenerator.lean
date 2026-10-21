@@ -31,18 +31,23 @@ lemma numberField_discriminant_natAbs_cast :
   simpa only [Int.cast_natCast, Int.cast_abs] using
     congrArg (fun z : ℤ => (z : ℝ)) (Int.natCast_natAbs (discr K))
 
+/-- The absolute discriminant `(discr K).natAbs` of a number field is positive. -/
 lemma numberField_discriminant_natAbs_pos : 0 < (discr K).natAbs :=
   Int.natAbs_pos.mpr (discr_ne_zero K)
 
+/-- The absolute discriminant of a number field is at least `1`. -/
 lemma one_le_abs_discr : 1 ≤ |(discr K : ℝ)| := by
   exact_mod_cast Int.one_le_abs (discr_ne_zero K)
 
+/-- A number field of degree at least `2` over `ℚ` has absolute discriminant at least `3`. -/
 lemma three_le_abs_discr (hn : 2 ≤ Module.finrank ℚ K) : 3 ≤ |(discr K : ℝ)| := by
   have hh : (3 : ℤ) ≤ |discr K| := by
     have := abs_discr_gt_two (K := K) (by omega : 1 < Module.finrank ℚ K)
     omega
   exact_mod_cast hh
 
+/-- A number field of degree at least `2` over `ℚ` has logarithmic absolute discriminant
+`log |discr K| ≥ 1`. -/
 lemma one_le_log_abs_discr (hn : 2 ≤ Module.finrank ℚ K) :
     1 ≤ Real.log |(discr K : ℝ)| := by
   simpa only [Real.log_exp] using Real.log_le_log (Real.exp_pos 1)

@@ -27,12 +27,17 @@ namespace CCDN
 noncomputable section
 open scoped NumberField IntermediateField
 
+/-- The absolute constant in the count of integral points on signed norm curves whose parameter
+generates a subfield of odd index. -/
 def oddIndexNormCurveCountConstant : ℝ :=
   2 * Real.exp 1 * affineNonzeroConstantBound planeResidueConstant
 
 private lemma oddIndexNormCurveCountConstant_pos : 0 < oddIndexNormCurveCountConstant :=
   mul_pos (by positivity) (affineNonzeroConstantBound_pos planeResidueConstant)
 
+/-- If `[K : ℚ(β)]` is odd, `n = [K : ℚ] ≥ 2` and `ε ≠ 0`, then the signed norm curve
+`y ^ 2 = ε * N(x - β)` has at most `C * n ^ 3 * B ^ (1 / n) * (log B + n)` integral points of
+height at most `B ≥ 1`. -/
 theorem signed_norm_curve_count_of_odd_subfield_index
     (K : Type*) [Field K] [NumberField K]
     (β : 𝓞 K) {ε : ℤ} (hε : ε ≠ 0)
@@ -85,9 +90,12 @@ private lemma normCurveBoxHeight_log_le {n : ℕ} (hn : 2 ≤ n) {B : ℝ} (hB :
   have hlogB := Real.log_nonneg hB
   nlinarith
 
+/-- The degree-dependent constant bounding the contribution of one integer-translation class to the
+bounded square-norm count for fields of degree `n` without an index-two subfield. -/
 def noIndexTwoCurveContributionConstant (n : ℕ) : ℝ :=
   8 * oddIndexNormCurveCountConstant * (n : ℝ) ^ 4
 
+/-- The constant `noIndexTwoCurveContributionConstant n` is nonnegative. -/
 lemma noIndexTwoCurveContributionConstant_nonneg (n : ℕ) :
     0 ≤ noIndexTwoCurveContributionConstant n := by
   have := oddIndexNormCurveCountConstant_pos
@@ -96,6 +104,9 @@ lemma noIndexTwoCurveContributionConstant_nonneg (n : ℕ) :
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- For a number field of degree `n ≥ 2` without an intermediate field of index two and `B ≥ 1`, the
+number of bounded square-norm integers is at most the number of bounded integers in small
+subfields plus `C(n)` times the number of translation classes times `√B * (log B + 1)`. -/
 theorem boundedSquareNormIntegers_no_index_two_count
     (hnoTwo : ∀ L : IntermediateField ℚ K, Module.finrank L K ≠ 2)
     (hn : 2 ≤ Module.finrank ℚ K) {B : ℝ} (hB : 1 ≤ B) :

@@ -19,13 +19,18 @@ open NumberField NumberField.InfinitePlace
 
 variable (K : Type*) [Field K] [NumberField K]
 
+/-- The algebraic integers of `K` bounded by `B` at every infinite place that lie in the
+intermediate field `L`. -/
 def boundedIntegersInSubfield (L : IntermediateField ℚ K) (B : ℝ) : Set (𝓞 K) :=
   {β | β ∈ boundedArchimedeanIntegers K B ∧ (β : K) ∈ L}
 
+/-- The set `boundedIntegersInSubfield K L B` is finite. -/
 lemma boundedIntegersInSubfield_finite (L : IntermediateField ℚ K) (B : ℝ) :
     (boundedIntegersInSubfield K L B).Finite :=
   (boundedArchimedeanIntegers_finite K B).subset (fun _ h ↦ h.1)
 
+/-- The map sending a bounded algebraic integer of `K` lying in `L` to the same element viewed as a
+bounded algebraic integer of `L`; every infinite place of `L` is restricted from one of `K`. -/
 def boundedIntegerToSubfield (L : IntermediateField ℚ K) (B : ℝ) :
     boundedIntegersInSubfield K L B → boundedArchimedeanIntegers L B := fun β ↦ by
   let γ : L := ⟨(β.val : K), β.property.2⟩
@@ -42,6 +47,7 @@ def boundedIntegerToSubfield (L : IntermediateField ℚ K) (B : ℝ) :
   rw [show (z : L) = γ from RingOfIntegers.coe_mk hγ]
   exact β.property.1 v
 
+/-- The map `boundedIntegerToSubfield` does not change the underlying element of `K`. -/
 @[simp] lemma boundedIntegerToSubfield_coe (L : IntermediateField ℚ K) (B : ℝ)
     (β : boundedIntegersInSubfield K L B) :
     (((boundedIntegerToSubfield K L B β).val : L) : K) = (β.val : K) := by
@@ -64,6 +70,8 @@ private theorem boundedIntegersInSubfield_ncard_le (L : IntermediateField ℚ K)
     Fintype.card_le_of_injective (boundedIntegerToSubfield K L B)
       (boundedIntegerToSubfield_injective K L B)
 
+/-- For `B ≥ 0`, the number of algebraic integers of `K` bounded by `B` at every infinite place and
+lying in `L` is at most `(2 * √m * B + 1) ^ m`, where `m = [L : ℚ]`. -/
 theorem boundedIntegersInSubfield_count (L : IntermediateField ℚ K)
     {B : ℝ} (hB : 0 ≤ B) :
     ((boundedIntegersInSubfield K L B).ncard : ℝ) ≤
