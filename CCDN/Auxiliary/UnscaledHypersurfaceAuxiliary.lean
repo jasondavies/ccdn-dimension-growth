@@ -147,7 +147,7 @@ theorem affine_coefficient_height_dichotomy {n : ℕ}
     ∃ g, IsBoxAuxiliary f g B ∧ g.totalDegree ≤ f.totalDegree := by
   rcases projective_coefficient_height_dichotomy (scaledHomogenize f.totalDegree 1 f)
       (scaledHomogenize_homogeneous 1 f le_rfl) (scaledHomogenize_ne_zero _ one_ne_zero hf0) hB with
-    hheight | ⟨G, _, hGhom, hGnd, hGzero⟩
+    hheight | ⟨G, _, hGhom, hGzero, hGnd⟩
   · left
     simpa only [integerCoefficientHeight_scaledHomogenize_one] using hheight
   · right
