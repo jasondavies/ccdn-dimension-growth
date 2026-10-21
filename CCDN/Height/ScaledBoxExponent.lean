@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Height.CountingHypotheses
 public import CCDN.Plane.ScaledPlaneCount
 import CCDN.ForMathlib.Log
 /-! The scaling-prime interval yields the affine box exponent 1/d. These
@@ -109,15 +110,15 @@ theorem scaled_plane_finite_count_one_over_degree
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f))
     (hd : 0 < f.totalDegree) {p : ℕ} (hp : p.Prime) (hp0 : ¬ (p : ℤ) ∣ f.coeff 0)
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z)
-    (hz : ∀ i, MvPolynomial.eval (z i) f = 0)
-    {A B C : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) (hBp : B ≤ A * p)
-    (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
+    {A B C : ℝ} (hzB : IsBoxZeroFamily f B z) (hA : 1 ≤ A) (hpB : (p : ℝ) ≤ B) (hBp : B ≤ A * p)
+    (hC : 0 ≤ C)
     (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤
       (38 + 8 * Real.exp (heightDeterminantError C + 20) +
         2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 * A) *
       (f.totalDegree : ℝ) ^ 3 * B ^ (1 / (f.totalDegree : ℝ)) *
         (Real.log B + f.totalDegree) := by
+  have hB := hzB.one_le_radius
   let d := f.totalDegree
   let Q := B ^ (1 / (d : ℝ))
   let U := Real.log B + d
@@ -137,7 +138,7 @@ theorem scaled_plane_finite_count_one_over_degree
     nlinarith only [ht]
   have hsmall := scaled_auxiliary_degree_bound_le hd hA hB
     (show (1 : ℝ) ≤ p by exact_mod_cast hp.one_lt.le) hpB hBp (C := C)
-  have hcount' := scaled_plane_finite_count f hprim hir hd hp hp0 z hinj hz hB hpB hbox hC hcount
+  have hcount' := scaled_plane_finite_count f hprim hir hd hp hp0 z hinj hzB hpB hC hcount
   have hb : (t : ℝ) ≤ (K₁ + K₂) * ((d : ℝ) ^ 3 * Q * U) := by
     apply hcount'.trans
     apply max_le

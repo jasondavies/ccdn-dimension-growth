@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.AffineCongruenceHeight
-import all ArithmeticHeights.BombieriVaaler
 public import CCDN.ForMathlib.StandardMonomials
+public import CCDN.Height.AffineCongruenceHeight
+public import CCDN.Height.CountingHypotheses
 import CCDN.Auxiliary.StandardMonomialAuxiliary
 import CCDN.Determinant.WeightedMonomialDeterminant
+import all ArithmeticHeights.BombieriVaaler
 
 /-! Auxiliary polynomials from the competing congruence determinant
 lower bound and weighted archimedean upper bound. -/
@@ -48,13 +49,8 @@ theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (mon : Fin s → (Fin (n + 2) →₀ ℕ))
     (hdegree : ∀ j, Finsupp.degree (mon j) ≤ M)
-    (x : Fin s → IntPoint (n + 2)) (hx : ∀ i, eval (x i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(x i j : ℝ)| ≤ B)
-    (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) (a : ℕ → IntPoint (n + 2))
-    (ha : ∀ p ∈ P, eval₂ (Int.castRingHom (ZMod p)) (fun j => (a p j : ZMod p)) f = 0)
-    (hsmooth : ∀ p ∈ P, ∃ j, eval (fun i => (a p i : ZMod p))
-      (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0)
-    (hres : ∀ p ∈ P, ∀ i j, (p : ℤ) ∣ x i j - a p j)
+    {B : ℝ} {x : Fin s → IntPoint (n + 2)} (hxB : IsBoxZeroFamily f B x)
+    (P : Finset ℕ) (a : ℕ → IntPoint (n + 2)) (hres : IsSmoothResidueFamily f P a x)
     (hgap : Real.log (s.factorial : ℝ) +
       (∑ j, ((Finsupp.degree (mon j) : ℕ) : ℝ)) * Real.log B <
       affineCongruenceDeterminantLower n f.totalDegree s H (∑ p ∈ P, Real.log p)) :
@@ -79,9 +75,9 @@ theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
     change ((evaluationMatrix mon x).det : ℚ) ≠ 0
     exact_mod_cast hne
   have hlo := affine_congruence_determinant_log_lower_height hs f hir hd H hH hcoeff
-    G hG x hx hrows P hP a ha hsmooth hres
+    G hG x hxB.eval_eq_zero hrows P a hres
   rw [hmat, square_minorGcd_eq_abs_det, Int.cast_abs] at hlo
-  have hhi := weighted_evaluation_det_log_bound mon x hB hbox hne
+  have hhi := weighted_evaluation_det_log_bound mon x hxB.one_le_radius hxB.abs_le hne
   exact (not_lt_of_ge (hlo.trans hhi)) hgap
 
 /-- The determinant gap yields an integer auxiliary, proper over
@@ -95,13 +91,8 @@ theorem exists_affine_congruence_auxiliary_of_gap {n N t M : ℕ} (hN : 0 < N)
     (hstd : ∀ j, mon j ∈ Ideal.standardExponents
       (Ideal.span {map (Int.castRingHom ℚ) f}) MonomialOrder.degLex)
     (hdegree : ∀ j, Finsupp.degree (mon j) ≤ M)
-    (x : Fin t → IntPoint (n + 2)) (hx : ∀ i, eval (x i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(x i j : ℝ)| ≤ B)
-    (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) (a : ℕ → IntPoint (n + 2))
-    (ha : ∀ p ∈ P, eval₂ (Int.castRingHom (ZMod p)) (fun j => (a p j : ZMod p)) f = 0)
-    (hsmooth : ∀ p ∈ P, ∃ j, eval (fun i => (a p i : ZMod p))
-      (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0)
-    (hres : ∀ p ∈ P, ∀ i j, (p : ℤ) ∣ x i j - a p j)
+    {B : ℝ} {x : Fin t → IntPoint (n + 2)} (hxB : IsBoxZeroFamily f B x)
+    (P : Finset ℕ) (a : ℕ → IntPoint (n + 2)) (hres : IsSmoothResidueFamily f P a x)
     (hgap : Real.log (N.factorial : ℝ) +
       (∑ j, ((Finsupp.degree (mon j) : ℕ) : ℝ)) * Real.log B <
       affineCongruenceDeterminantLower n f.totalDegree N H (∑ p ∈ P, Real.log p)) :
@@ -111,9 +102,9 @@ theorem exists_affine_congruence_auxiliary_of_gap {n N t M : ℕ} (hN : 0 < N)
   apply exists_standard_auxiliary_of_zero_determinants
     (map (Int.castRingHom ℚ) f) mon hmon hstd hdegree x
   intro b
-  exact affine_congruence_evaluation_det_eq_zero hN f hir hd H hH hcoeff
-    mon hdegree (x ∘ b) (fun i => hx (b i)) hB (fun i j => hbox (b i) j)
-    P hP a ha hsmooth (fun p hp i j => hres p hp (b i) j) hgap
+  exact affine_congruence_evaluation_det_eq_zero hN f hir hd H hH hcoeff mon hdegree (x := x ∘ b)
+    ⟨hxB.one_le_radius, fun i => hxB.eval_eq_zero (b i), fun i j => hxB.abs_le (b i) j⟩ P a
+    ⟨hres.prime, hres.eval_eq_zero, hres.smooth, fun p hp i j => hres.dvd_sub p hp (b i) j⟩ hgap
 
 end
 end CCDN

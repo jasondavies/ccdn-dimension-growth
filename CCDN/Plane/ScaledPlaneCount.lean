@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.PrimitiveIntegerPolynomial
 import CCDN.Algebra.ScaledModelCoordinates
 import CCDN.Algebra.ScaledModelPosition
@@ -36,14 +37,13 @@ theorem scaled_plane_finite_count
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f))
     (hd : 0 < f.totalDegree) {p : ℕ} (hp : p.Prime) (hp0 : ¬ (p : ℤ) ∣ f.coeff 0)
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z)
-    (hz : ∀ i, eval (z i) f = 0)
-    {B C : ℝ} (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B)
-    (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
+    {B C : ℝ} (hzB : IsBoxZeroFamily f B z) (hpB : (p : ℝ) ≤ B) (hC : 0 ≤ C)
     (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ max
       ((f.totalDegree : ℝ) * scaledPlaneAuxiliaryDegreeBound f.totalDegree C
         (((f.totalDegree : ℝ) + 1) * B) p)
       ((34 + 8 * Real.exp (heightDeterminantError C + 20)) * (f.totalDegree : ℝ) ^ 4) := by
+  obtain ⟨hB, hz, hbox⟩ := hzB
   let d := f.totalDegree
   let R := ((d : ℝ) + 1) * B
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd
@@ -70,10 +70,10 @@ theorem scaled_plane_finite_count
     exact scaledModelCoordinates_box hB (by positivity) (by exact_mod_cast hpB) a (z i) ha (hbox i) j
   have hirq := rational_irreducible_of_charZero_map f hir
   by_cases hsmall : Real.log H ≤ 4 * d * Real.log R
-  · obtain ⟨M, hM, g, _, hg, hzg, hnd⟩ := polynomial_map_auxiliary_small_height_degree
-      MonomialOrder.lex model hmhom hm0 hd f rfl hir H hH hc τ z hz hmodel hR himagebox hC
+  · obtain ⟨M, hM, g, hg⟩ := polynomial_map_auxiliary_small_height_degree
+      MonomialOrder.lex model hmhom hm0 hd ⟨rfl, hir, hH, hc⟩ τ z hz ⟨hR, hmodel, himagebox⟩ hC
       (hlo.trans hsmall) hcount
-    have ht := scaled_positioned_points_card_le f hprim hirq hp hp0 a g hg hnd z hinj hz hzg
+    have ht := scaled_positioned_points_card_le f hprim hirq hp hp0 a z hinj hz g hg
     have htR : (t : ℝ) ≤ d * (M : ℝ) := by exact_mod_cast ht
     have hL : 0 < |((MonomialOrder.lex.leadingCoeff model : ℤ) : ℝ)| := by
       exact abs_pos.mpr (Int.cast_ne_zero.mpr (MonomialOrder.lex.leadingCoeff_ne_zero_iff.mpr hm0))
@@ -90,10 +90,10 @@ theorem scaled_plane_finite_count
       unfold scaledPlaneAuxiliaryDegreeBound
       linarith
     exact (htR.trans (mul_le_mul_of_nonneg_left hMb hdR.le)).trans (le_max_left _ _)
-  · obtain ⟨M, hM, g, _, hg, hzg, hnd⟩ := polynomial_map_auxiliary_large_height_degree
-      MonomialOrder.lex model hmhom hm0 hd f rfl hir H hH hc τ z hz hmodel hR himagebox hC
+  · obtain ⟨M, hM, g, hg⟩ := polynomial_map_auxiliary_large_height_degree
+      MonomialOrder.lex model hmhom hm0 hd ⟨rfl, hir, hH, hc⟩ τ z hz ⟨hR, hmodel, himagebox⟩ hC
       14 (by norm_num) (le_of_lt (lt_of_not_ge hsmall)) hhi hcount
-    have ht := scaled_positioned_points_card_le f hprim hirq hp hp0 a g hg hnd z hinj hz hzg
+    have ht := scaled_positioned_points_card_le f hprim hirq hp hp0 a z hinj hz g hg
     have htR : (t : ℝ) ≤ d * (M : ℝ) := by exact_mod_cast ht
     apply (htR.trans (mul_le_mul_of_nonneg_left hM hdR.le)).trans
     calc

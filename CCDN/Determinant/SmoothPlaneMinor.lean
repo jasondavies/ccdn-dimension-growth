@@ -10,7 +10,7 @@ public import CCDN.Noether.BivariateTotalDegree
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
-import CCDN.ForMathlib.MatrixRank
+public import CCDN.ForMathlib.MatrixRank
 import CCDN.Noether.ClosedFormRank
 import CCDN.Projection.ShearNormalization
 
@@ -34,10 +34,8 @@ theorem exists_closedForm_minor_of_smooth_plane_point
     (hm : (bivariatePolynomialEquiv K f).Monic)
     (hdeg : (bivariatePolynomialEquiv K f).natDegree = d)
     (htotal : f.totalDegree ≤ d) (hchar : CharZeroOrGT K (2 * d ^ 2)) :
-    ∃ (a : Fin (2 * d ^ 2 - 1) → ℕ × ℕ)
-      (c : Fin (2 * d ^ 2 - 1) → ClosedFormColumns d),
-      Function.Injective a ∧ Function.Injective c ∧
-      ((closedFormCoefficientMatrix d (bivariatePolynomialEquiv K f)).submatrix a c).det ≠ 0 := by
+    (closedFormCoefficientMatrix d (bivariatePolynomialEquiv K f)).HasNonzeroMinor
+      (2 * d ^ 2 - 1) := by
   let L := AlgebraicClosure K
   let φ : K →+* L := algebraMap K L
   let g := bivariateMap φ (bivariatePolynomialEquiv K f)
@@ -53,9 +51,9 @@ theorem exists_closedForm_minor_of_smooth_plane_point
     simpa only [bivariateTotalDegree, AlgEquiv.symm_apply_apply] using htotal
   have hr := closedForm_coefficient_rank_lower d g hgi hgm hgd d hgt
     ((hchar.map φ).mono (by rw [sq, mul_assoc]))
-  obtain ⟨a, c, ha, hc, hdet⟩ := Matrix.exists_det_submatrix_ne_zero_of_le_rank
-    (closedFormCoefficientMatrix d g) (2 * d ^ 2 - 1) (by omega)
-  refine ⟨a, c, ha, hc, ?_⟩
+  obtain ⟨a, c, hdet⟩ := Matrix.hasNonzeroMinor_of_le_rank
+    (closedFormCoefficientMatrix d g) (r := 2 * d ^ 2 - 1) (by omega)
+  refine ⟨a, c, ?_⟩
   intro he
   apply hdet
   rw [← closedForm_minor_map, he, map_zero]

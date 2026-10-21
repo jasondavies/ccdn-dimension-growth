@@ -22,6 +22,9 @@ the column index type is finite.
   nonzero `r × r` minor with distinct rows and columns.
 * `Matrix.le_rank_of_det_submatrix_ne_zero`: conversely, a nonzero `k × k` minor shows
   `k ≤ A.rank`.
+* `Matrix.HasNonzeroMinor`: the predicate that some `r × r` minor is nonzero; its rows and
+  columns are automatically distinct (`Matrix.injective_rows_of_det_submatrix_ne_zero`,
+  `Matrix.injective_cols_of_det_submatrix_ne_zero`).
 -/
 
 @[expose] public section
@@ -126,5 +129,42 @@ theorem le_rank_of_det_submatrix_ne_zero {R ι ν : Type*} [CommRing R] [IsDomai
     {k : ℕ} (A : Matrix ι ν R) (r : Fin k → ι) (c : Fin k → ν)
     (h : (A.submatrix r c).det ≠ 0) : k ≤ A.rank := by
   simpa only [rank_of_det_ne_zero h, Fintype.card_fin] using A.rank_submatrix_le r c
+
+/-- The rows selected by a nonzero minor are distinct: a repeated row forces the determinant
+to vanish. -/
+theorem injective_rows_of_det_submatrix_ne_zero {R ι ν : Type*} [CommRing R] {k : ℕ}
+    {A : Matrix ι ν R} {r : Fin k → ι} {c : Fin k → ν} (h : (A.submatrix r c).det ≠ 0) :
+    Function.Injective r := by
+  intro i j hij
+  by_contra hne
+  exact h (det_zero_of_row_eq hne (by ext l; simp [hij]))
+
+/-- The columns selected by a nonzero minor are distinct: a repeated column forces the
+determinant to vanish. -/
+theorem injective_cols_of_det_submatrix_ne_zero {R ι ν : Type*} [CommRing R] {k : ℕ}
+    {A : Matrix ι ν R} {r : Fin k → ι} {c : Fin k → ν} (h : (A.submatrix r c).det ≠ 0) :
+    Function.Injective c := by
+  intro i j hij
+  by_contra hne
+  exact h (det_zero_of_column_eq hne (by intro l; simp [hij]))
+
+/-- `A` has a nonzero `r × r` minor: some choice of `r` rows and `r` columns of `A` whose
+square submatrix has nonzero determinant. The chosen rows and columns are automatically
+distinct (`Matrix.injective_rows_of_det_submatrix_ne_zero`,
+`Matrix.injective_cols_of_det_submatrix_ne_zero`). -/
+def HasNonzeroMinor {R ι ν : Type*} [CommRing R] (A : Matrix ι ν R) (r : ℕ) : Prop :=
+  ∃ (a : Fin r → ι) (c : Fin r → ν), (A.submatrix a c).det ≠ 0
+
+/-- Every rank lower bound over a field is witnessed by a nonzero minor. -/
+theorem hasNonzeroMinor_of_le_rank {F ι ν : Type*} [Field F] [Fintype ν] (A : Matrix ι ν F)
+    {r : ℕ} (hr : r ≤ A.rank) : A.HasNonzeroMinor r :=
+  let ⟨a, c, _, _, h⟩ := exists_det_submatrix_ne_zero_of_le_rank A r hr
+  ⟨a, c, h⟩
+
+/-- A nonzero `r × r` minor of a matrix over a domain shows `r ≤ A.rank`. -/
+theorem HasNonzeroMinor.le_rank {R ι ν : Type*} [CommRing R] [IsDomain R] [Fintype ν]
+    {A : Matrix ι ν R} {r : ℕ} (h : A.HasNonzeroMinor r) : r ≤ A.rank :=
+  let ⟨a, c, hdet⟩ := h
+  le_rank_of_det_submatrix_ne_zero A a c hdet
 
 end Matrix

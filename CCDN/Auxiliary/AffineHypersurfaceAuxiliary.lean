@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.AffineAuxiliaryCases
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 import CCDN.Algebra.AffineLeadingTranslation
 import CCDN.Auxiliary.AffineAuxiliaryTranslationBound
 import CCDN.Auxiliary.AffineBadPrimeTranslation
@@ -78,12 +79,11 @@ The constant depends only on the dimension. -/
 theorem affine_hypersurface_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f) (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineHypersurfaceAuxiliaryConstant n *
         affineAuxiliaryDegreeExpression n f.totalDegree B
           (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
-          (hypersurfaceBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+          (hypersurfaceBadPrimeFactor f) := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := hypersurfaceBadPrimeFactor f
@@ -98,15 +98,14 @@ theorem affine_hypersurface_auxiliary {n : ℕ}
   have htd : t.totalDegree = d := affineTranslation_totalDegree a f
   have htdpos : 0 < t.totalDegree := htd ▸ hd
   have hB' : 1 ≤ B + d := by have := Nat.cast_nonneg (α := ℝ) d; linarith
-  obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ :=
+  obtain ⟨g, hg, hgdeg⟩ :=
     affine_auxiliary_minimum_nonzero_constant t htprim htir htdpos hc hB'
   have habox (j) : |(a j : ℝ)| ≤ d := by
     have h0 : (0 : ℝ) ≤ a j := by exact_mod_cast (ha j).1
     rw [abs_of_nonneg h0]
     exact_mod_cast (ha j).2
-  obtain ⟨G, hG0, hGnd, hGdeg, hGz⟩ :=
-    affine_auxiliary_translation_transport f g a hg0 hgnd habox hgz
-  refine ⟨G, hG0, hGnd, ?_, hGz⟩
+  obtain ⟨G, hG, hGdeg⟩ := affine_auxiliary_translation_transport f g a hg habox
+  refine ⟨G, hG, ?_⟩
   have htle : (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n d A (B + d) L b := by
     have htop : homogeneousComponent t.totalDegree t = homogeneousComponent d f :=
       affineTranslation_leading_homogeneousComponent a f

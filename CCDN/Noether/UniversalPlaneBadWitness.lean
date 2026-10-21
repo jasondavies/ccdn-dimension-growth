@@ -128,11 +128,10 @@ theorem exists_universalPlane_badWitness
     (hpos : 0 < f.totalDegree) (hchar : CharZeroOrGT K (2 * f.totalDegree ^ 2)) :
     ∃ (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
       (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree),
-      Function.Injective rows ∧ Function.Injective cols ∧
       universalPlaneBadWitness f rows cols ≠ 0 ∧
       (universalPlaneBadWitness f rows cols).totalDegree ≤ 2 * f.totalDegree ^ 3 := by
-  obtain ⟨rows, cols, hr, hc, hdet, _⟩ := exists_universalPlane_minor_degree f hf hpos hchar
-  exact ⟨rows, cols, hr, hc,
+  obtain ⟨rows, cols, hdet, _⟩ := exists_universalPlane_minor_degree f hf hpos hchar
+  exact ⟨rows, cols,
     mul_ne_zero (universalPlaneLeading_ne_zero f hf hpos
       (hchar.mono (by nlinarith [Nat.le_mul_self f.totalDegree]))) hdet,
     universalPlaneBadWitness_degree f rows cols⟩
@@ -146,7 +145,6 @@ theorem exists_integer_universalPlane_badWitness
     (hpos : 0 < f.totalDegree) :
     ∃ (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
       (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree),
-      Function.Injective rows ∧ Function.Injective cols ∧
       universalPlaneBadWitness f rows cols ≠ 0 ∧
       (universalPlaneBadWitness f rows cols).totalDegree ≤ 2 * f.totalDegree ^ 3 := by
   let φ : ℤ →+* L := Int.castRingHom L
@@ -155,7 +153,7 @@ theorem exists_integer_universalPlane_badWitness
   have hex := exists_universalPlane_minor (MvPolynomial.map φ f) hf (ht ▸ hpos)
     (.of_charZero _)
   rw [ht] at hex
-  obtain ⟨rows, cols, hr, hc, hdet⟩ := hex
+  obtain ⟨rows, cols, hdet⟩ := hex
   have hm : ((closedFormCoefficientMatrix f.totalDegree
       (universalPlanePolynomial f)).submatrix rows cols).det ≠ 0 := by
     intro he
@@ -170,7 +168,7 @@ theorem exists_integer_universalPlane_badWitness
     rw [he] at hn
     intro hz
     exact hn (by rw [hz, map_zero])
-  exact ⟨rows, cols, hr, hc, mul_ne_zero hl hm, universalPlaneBadWitness_degree f rows cols⟩
+  exact ⟨rows, cols, mul_ne_zero hl hm, universalPlaneBadWitness_degree f rows cols⟩
 
 end
 end CCDN

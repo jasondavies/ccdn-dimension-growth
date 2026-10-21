@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Auxiliary.ScaledHomogenization
 import CCDN.Algebra.ScaledHypersurfaceModel
@@ -28,11 +29,10 @@ theorem prime_scaled_affine_auxiliary {n : ℕ}
     (hir : Irreducible f) (hd : 0 < f.totalDegree)
     {p : ℕ} (hp : p.Prime) (hp0 : ¬ (p : ℤ) ∣ f.coeff 0)
     {B : ℝ} (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
         (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree (p : ℤ) f))
-        (integerCoefficientHeight (scaledHomogenize f.totalDegree (p : ℤ) f) : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+        (integerCoefficientHeight (scaledHomogenize f.totalDegree (p : ℤ) f) : ℝ) := by
   let F := scaledHomogenize f.totalDegree (p : ℤ) f
   have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous _ _ le_rfl
   have hFir : Irreducible F := scaledHomogenize_integer_irreducible f hprim hir hd hp hp0
@@ -41,7 +41,8 @@ theorem prime_scaled_affine_auxiliary {n : ℕ}
   have hgndQ := scaled_auxiliary_rational_not_dvd f hir.ne_zero hprim hp hp0 G hGhom hGnd
   have hgnd : ¬ f ∣ g := fun h => hgndQ (map_dvd (map (Int.castRingHom ℚ)) h)
   have hg0 : g ≠ 0 := fun h => hgnd (by rw [h]; exact dvd_zero _)
-  refine ⟨g, hg0, hgnd, ?_, ?_⟩
+  refine ⟨g, ⟨hg0, hgnd, ?_⟩, ?_⟩
+  swap
   · have hgM : (g.totalDegree : ℝ) ≤ M := by exact_mod_cast homogeneousSlice_degree_le (p : ℤ) hGhom
     exact hgM.trans hM
   · intro x hx hxf

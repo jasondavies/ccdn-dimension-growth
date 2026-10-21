@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.ForMathlib.MatrixRank
 public import CCDN.Noether.EulerPairBasis
 public import CCDN.Noether.UniversalPlaneFamily
 import CCDN.Determinant.GenericPlaneEulerMinorCharZero
@@ -43,11 +44,9 @@ theorem exists_universalPlane_euler_minor_charZero
     {K σ : Type*} [Field K] [CharZero K] [IsAlgClosed K] [Fintype σ]
     (k : ℕ) (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
     (hd : f.totalDegree = k + 2) :
-    ∃ (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-      (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k),
-      Function.Injective rows ∧ Function.Injective cols ∧
-      ((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).submatrix rows cols).det ≠ 0 := by
-  obtain ⟨a, b, hb, _, rows, cols, hr, hc, hdet⟩ :=
+    (eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).HasNonzeroMinor
+      ((k + 2) ^ 2 - 1) := by
+  obtain ⟨a, b, hb, _, rows, cols, hdet⟩ :=
     exists_positioned_genericPlane_euler_minor_charZero k f hf hd
   let R := MvPolynomial σ K
   let F := FractionRing R
@@ -57,7 +56,7 @@ theorem exists_universalPlane_euler_minor_charZero
     (map_ne_zero_iff _ (IsFractionRing.injective R F)).mpr hdet
   rw [eulerClosedForm_minor_map, normalized_genericPlane_universal_specialization,
     eulerClosedForm_minor_smul, ← eulerClosedForm_minor_map] at hne
-  refine ⟨rows, cols, hr, hc, ?_⟩
+  refine ⟨rows, cols, ?_⟩
   intro he
   exact hne (by rw [he, map_zero, mul_zero])
 

@@ -36,26 +36,24 @@ theorem affine_chart_absolute_auxiliary_degree
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n d t : ℕ}
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom K) f))
-    (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0)
+    {B : ℝ} {z : Fin t → IntPoint (n + 3)} (hzB : IsPrimitiveBoxZeroFamily f B z)
     (bad : Finset ℕ)
     (hgood : ∀ (p : ℕ) [Fact p.Prime], p ∉ bad → stepanovThreshold (d : ℝ) < p →
-      AffineChartGoodPrime f z p)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) :
+      AffineChartGoodPrime f z p) :
     ∃ M : ℕ,
       (M : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n d B (primeSetFactor bad)
         (integerCoefficientHeight f) ∧
-      ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-        (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
+      ∃ g, IsPointAuxiliary f g M z := by
   have hf0 := ne_zero_of_irreducible_map hir
-  exact absolute_auxiliary_degree_of_comparison f hf hd hir z hprim hz bad
+  have hprim := hzB.primitive
+  have hz := hzB.eval_eq_zero
+  exact absolute_auxiliary_degree_of_comparison f hf hd hir hzB bad
     (fun a => affine_chart_auxiliaryRankComparison MonomialOrder.lex _
       (homogeneousTranslation_homogeneous a hf)
       ((homogeneousTranslation ℤ a).injective.ne (by simpa using hf0)) hd _
       (fun i => (homogeneousPointTranslation_gcd (-a) (z i)).trans (hprim i))
       (fun i => (eval_homogeneousTranslation_neg a f (z i)).trans (hz i)) bad
       fun p _ hp hcut => affineChartGoodPrime_homogeneousTranslation a p (hgood p hp hcut))
-    hB hbox
 
 end
 end CCDN

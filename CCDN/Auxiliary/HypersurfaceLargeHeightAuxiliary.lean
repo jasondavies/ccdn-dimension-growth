@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.HypersurfaceLargeHeightDegree
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
+public import CCDN.Height.CountingHypotheses
+public import CCDN.Height.HypersurfaceLargeHeightDegree
 import CCDN.Auxiliary.PlaneAuxiliarySelection
 /-! Auxiliary polynomials in the large-height range. The degree is
 O_{n,T}(d^(4-1/(n+1))); the leading-coefficient positioning cost is explicit. -/
@@ -28,29 +30,20 @@ theorem hypersurface_exists_auxiliary_large_height
     (hf : f.IsHomogeneous d) (hd : 0 < d) (hM : 8 * d * (n + 2) ≤ M)
     (hir : Irreducible (map (Int.castRingHom K) f))
     (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
-    (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} {z : Fin t → IntPoint (n + 3)} (hzB : IsPrimitiveBoxZeroFamily f B z)
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 2 * d * (n + 2 : ℝ) * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
       T * d * degreeRoot n d)
     (hthreshold : hypersurfaceLargeThreshold n d T < M) :
-    ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-      (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
+    ∃ g, IsPointAuxiliary f g M z := by
   classical
   have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hdM : d ≤ M := by nlinarith
   by_contra hnone
-  have hrel : ∀ g : MvPolynomial (Fin (n + 3)) ℤ, g.IsHomogeneous M →
-      (∀ i, eval (z i) g = 0) → f ∣ g := by
-    intro g hg hv
-    by_cases hg0 : g = 0
-    · simp [hg0]
-    · by_contra hnd
-      exact hnone ⟨g, hg0, hg, hv, hnd⟩
   obtain ⟨s, _, hr, hc⟩ := hypersurface_no_auxiliary_normalized_comparison order f hf hd hdM hir
-    H hH hcoeff z hprim hz hB hbox hrel
+    H hH hcoeff hzB (dvd_of_not_exists_isPointAuxiliary hnone)
+  have hB := hzB.one_le_radius
   have hL : 1 ≤ |((order.leadingCoeff f : ℤ) : ℝ)| := by
     exact_mod_cast Int.one_le_abs (order.leadingCoeff_ne_zero_iff.mpr hf0)
   have hnR : (n : ℝ) + 1 + 1 = n + 2 := by ring
@@ -91,8 +84,9 @@ theorem hypersurface_auxiliary_large_height_degree
     (show (0 : ℝ) ≤ 0 from le_rfl) hR
   have hdPow : (d : ℝ) ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) := le_rpow_four_sub_inv hd
   have hPow1 := hd1.trans hdPow
-  refine ⟨M, ?_, hypersurface_exists_auxiliary_large_height order f hf hd hMlarge hir H hH hcoeff
-    z hprim hz hB hbox T hT hheight hposition hthreshold⟩
+  obtain ⟨g, hg⟩ := hypersurface_exists_auxiliary_large_height order f hf hd hMlarge hir H hH
+    hcoeff ⟨⟨hB, hz, hbox⟩, hprim⟩ T hT hheight hposition hthreshold
+  refine ⟨M, ?_, g, isPointAuxiliary_iff.mp hg⟩
   unfold hypersurfaceLargeThreshold at hbound
   push_cast at hbound
   have hh := mul_le_mul_of_nonneg_left hdPow (show 0 ≤ 8 * (n + 2 : ℝ) by positivity)

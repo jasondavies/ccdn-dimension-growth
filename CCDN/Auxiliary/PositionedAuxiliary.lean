@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
 public import CCDN.Auxiliary.HypersurfaceSmallHeightAuxiliary
+public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.HypersurfaceLargeHeightDegree
 import CCDN.Auxiliary.HypersurfaceLargeHeightAuxiliary
 /-! Combine the two height ranges under the paper's explicit leading-coefficient
@@ -126,18 +128,16 @@ theorem positioned_auxiliary_degree_of_comparison
     (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom K) f))
     (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
-    (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0)
+    {B : ℝ} {z : Fin t → IntPoint (n + 3)} (hzB : IsPrimitiveBoxZeroFamily f B z)
     (bad : Finset ℕ) (hcomp : AuxiliaryRankComparison order f d z bad)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
     (T : ℝ) (hT : 0 ≤ T)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
       T * d * degreeRoot n d) :
     ∃ M : ℕ,
       (M : ℝ) ≤ hypersurfacePositionedAuxiliaryConstant n T *
         auxDegreeBound n d B (primeSetFactor bad) H ∧
-      ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-        (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
+      ∃ g, IsPointAuxiliary f g M z := by
+  obtain ⟨⟨hB, hz, hbox⟩, hprim⟩ := hzB
   have hf0 := ne_zero_of_irreducible_map hir
   have hL : 0 < |((order.leadingCoeff f : ℤ) : ℝ)| :=
     abs_pos.mpr (Int.cast_ne_zero.mpr (order.leadingCoeff_ne_zero_iff.mpr hf0))
@@ -157,8 +157,9 @@ theorem positioned_auxiliary_degree_of_comparison
       ring
     refine ⟨M, le_trans ?_ (small_height_bound_le_positioned hd hB hb (by linarith)), hg⟩
     linarith
-  · obtain ⟨M, hbound, hg⟩ := hypersurface_auxiliary_large_height_degree order f hf hd hir H hH
+  · obtain ⟨M, hbound, g, hg⟩ := hypersurface_auxiliary_large_height_degree order f hf hd hir H hH
       hcoeff z hprim hz hB hbox T hT (le_of_not_ge hsmall) hposition
-    exact ⟨M, hbound.trans (large_height_bound_le_positioned hd hB hb (by linarith)), hg⟩
+    exact ⟨M, hbound.trans (large_height_bound_le_positioned hd hB hb (by linarith)), g,
+      isPointAuxiliary_iff.mpr hg⟩
 end
 end CCDN

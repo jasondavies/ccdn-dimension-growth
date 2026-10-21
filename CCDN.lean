@@ -117,6 +117,7 @@ public import CCDN.Auxiliary.AffineCongruenceAuxiliary
 public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
 public import CCDN.Auxiliary.AuxiliaryDegreeBound
 public import CCDN.Auxiliary.AuxiliaryLargeHeightRatios
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.AuxiliaryPolynomial
 public import CCDN.Auxiliary.AuxiliaryRatioEstimates
 public import CCDN.Auxiliary.BadPrimeCharge
@@ -514,6 +515,7 @@ public import CCDN.Height.AffineLinearCountTransfer
 public import CCDN.Height.AffineTranslationCount
 public import CCDN.Height.BoundedPrimitiveElement
 public import CCDN.Height.Box
+public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.FiniteFieldSectionCount
 public import CCDN.Height.HomogeneousEvaluationHeight
 public import CCDN.Height.HypersurfaceHeightComparison

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousTranslation
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.ScaledHomogenization
 import CCDN.Auxiliary.ScaledAuxiliaryCount
 /-! Polynomial coordinates for a translated scaled model, with exact point
@@ -80,15 +81,15 @@ theorem scaled_positioned_points_card_le {M t : ℕ}
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom ℚ) f))
     {p : ℕ} (hp : p.Prime) (hp0 : ¬ (p : ℤ) ∣ f.coeff 0)
-    (a : Fin 2 → ℤ) (g : MvPolynomial (Fin 3) ℤ) (hg : g.IsHomogeneous M)
-    (hnd : ¬ homogeneousTranslation ℤ a (scaledHomogenize f.totalDegree (p : ℤ) f) ∣ g)
-    (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z)
-    (hz : ∀ i, eval (z i) f = 0)
-    (hzg : ∀ i, eval (fun j => eval (z i) (scaledModelCoordinates (p : ℤ) a j)) g = 0) :
+    (a : Fin 2 → ℤ) (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z)
+    (hz : ∀ i, eval (z i) f = 0) (g : MvPolynomial (Fin 3) ℤ)
+    (hg : IsPointAuxiliary (homogeneousTranslation ℤ a (scaledHomogenize f.totalDegree (p : ℤ) f))
+      g M (fun i j => eval (z i) (scaledModelCoordinates (p : ℤ) a j))) :
     t ≤ f.totalDegree * M := by
-  obtain ⟨g', hg', he, hnd'⟩ := scaledModelCoordinates_auxiliary_transport (p : ℤ) a f g hg hnd
+  obtain ⟨g', hg', he, hnd'⟩ := scaledModelCoordinates_auxiliary_transport (p : ℤ) a f g
+    hg.isHomogeneous hg.not_dvd
   exact scaled_plane_points_card_le_auxiliary_degree f hprim hir hp hp0 g' hg' hnd' z hinj hz
-    (fun i => (he (z i)).trans (hzg i))
+    (fun i => (he (z i)).trans (hg.eval_eq_zero i))
 
 end
 end CCDN

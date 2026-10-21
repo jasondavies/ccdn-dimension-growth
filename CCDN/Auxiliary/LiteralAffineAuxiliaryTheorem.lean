@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
 import CCDN.Algebra.AffineLeadingTranslation
 import CCDN.Auxiliary.AffineAuxiliaryTranslationBound
@@ -37,12 +38,11 @@ theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
     (hir : Irreducible f)
     (habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) (hd : 0 < f.totalDegree) (hc : f.coeff 0 ≠ 0)
     {B : ℝ} (hB : 1 ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree
         (affineAuxiliaryComparisonConstant n) B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
-        (literalAffineBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+        (literalAffineBadPrimeFactor f) := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := literalAffineBadPrimeFactor f
@@ -51,9 +51,9 @@ theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
   have hb' : b ≤ literalAffineBadPrimeFactor f := le_rfl
   have hA : 1 ≤ affineAuxiliaryComparisonConstant n := affineAuxiliaryComparisonConstant_one_le n
   by_cases hsmall : B ≤ affineAuxiliaryBoxScale * ((d : ℝ) + 1) ^ affineAuxiliaryBoxExponent n
-  · obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := literal_unscaled_affine_auxiliary_minimum f hprim hir habs hd
+  · obtain ⟨g, hg, hgdeg⟩ := literal_unscaled_affine_auxiliary_minimum f hprim hir habs hd
       affineAuxiliaryBoxScale_one_le hB hsmall
-    refine ⟨g, hg0, hgnd, hgdeg.trans ?_, hgz⟩
+    refine ⟨g, hg, hgdeg.trans ?_⟩
     exact (affineMinimumAuxiliaryBound_mono_A n d (le_max_right _ _) hB hL hb).trans
       (affineMinimumAuxiliaryBound_mono_b n d (zero_le_one.trans hA) hB hL hb')
   · have hBA : scalingPrimeRatio ≤ B := by
@@ -67,9 +67,9 @@ theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
       exact (hS.trans (le_mul_of_one_le_right hS0 hpow)).trans (le_of_not_ge hsmall)
     by_cases hheight : Real.log |(f.coeff 0 : ℝ)| < B / scalingPrimeRatio
     · obtain ⟨p, hp, hlo, hhi, hnd⟩ := exists_scaling_prime hBA hc hheight
-      obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := literal_prime_scaled_affine_auxiliary_minimum
+      obtain ⟨g, hg, hgdeg⟩ := literal_prime_scaled_affine_auxiliary_minimum
         f hprim hir habs hd hp hnd scalingPrimeRatio_one_le hB hhi hlo.le
-      refine ⟨g, hg0, hgnd, hgdeg.trans ?_, hgz⟩
+      refine ⟨g, hg, hgdeg.trans ?_⟩
       exact (affineMinimumAuxiliaryBound_mono_A n d (le_max_left _ _) hB hL hb).trans
         (affineMinimumAuxiliaryBound_mono_b n d (zero_le_one.trans hA) hB hL hb')
     · rcases affine_coefficient_height_dichotomy f hir.ne_zero hprim hB with hh | hg
@@ -79,8 +79,8 @@ theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
         have hcut := affine_coefficient_height_cutoff (n + 2) d scalingPrimeRatio_one_le hB
           ((le_of_not_gt hheight).trans (hcoef.trans hh))
         exact (hsmall hcut).elim
-      · obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := hg
-        refine ⟨g, hg0, hgnd, ?_, hgz⟩
+      · obtain ⟨g, hg, hgdeg⟩ := hg
+        refine ⟨g, hg, ?_⟩
         have hgR : (g.totalDegree : ℝ) ≤ d := by exact_mod_cast hgdeg
         exact hgR.trans (degree_le_affineMinimumAuxiliaryBound n hd (zero_le_one.trans hA) hB hL
           (literalAffineBadPrimeFactor_nonneg f))
@@ -90,12 +90,11 @@ theorem literal_affine_hypersurface_auxiliary_absolute {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f)
     (habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)) (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :
-    ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
+    ∃ g, IsBoxAuxiliary f g B ∧
       (g.totalDegree : ℝ) ≤ affineHypersurfaceAuxiliaryConstant n *
         affineAuxiliaryDegreeExpression n f.totalDegree B
           (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
-          (literalAffineBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+          (literalAffineBadPrimeFactor f) := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := literalAffineBadPrimeFactor f
@@ -112,15 +111,14 @@ theorem literal_affine_hypersurface_auxiliary_absolute {n : ℕ}
   have hB' : 1 ≤ B + d := by have := Nat.cast_nonneg (α := ℝ) d; linarith
   have htabs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) t) := by
     simpa only [t, affineTranslation_map, affineTranslation_irreducible_iff] using habs
-  obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ :=
+  obtain ⟨g, hg, hgdeg⟩ :=
     literal_affine_auxiliary_minimum_nonzero_constant t htprim htir htabs htdpos hc hB'
   have habox (j) : |(a j : ℝ)| ≤ d := by
     have h0 : (0 : ℝ) ≤ a j := by exact_mod_cast (ha j).1
     rw [abs_of_nonneg h0]
     exact_mod_cast (ha j).2
-  obtain ⟨G, hG0, hGnd, hGdeg, hGz⟩ :=
-    affine_auxiliary_translation_transport f g a hg0 hgnd habox hgz
-  refine ⟨G, hG0, hGnd, ?_, hGz⟩
+  obtain ⟨G, hG, hGdeg⟩ := affine_auxiliary_translation_transport f g a hg habox
+  refine ⟨G, hG, ?_⟩
   have htle : (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n d A (B + d) L b := by
     have htop : homogeneousComponent t.totalDegree t = homogeneousComponent d f :=
       affineTranslation_leading_homogeneousComponent a f
@@ -146,9 +144,10 @@ theorem literal_affine_hypersurface_auxiliary {n : ℕ}
           (literalAffineBadPrimeFactor f) ∧
       ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
   by_cases habs : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)
-  · exact literal_affine_hypersurface_auxiliary_absolute f hprim hir habs hd hB
+  · exact exists_isBoxAuxiliary_and_iff.mp
+      (literal_affine_hypersurface_auxiliary_absolute f hprim hir habs hd hB)
   · simpa only [literalAffineBadPrimeFactor_eq_zero f habs, hypersurfaceBadPrimeFactor_eq_zero f habs] using
-      affine_hypersurface_auxiliary f hprim hir hd hB
+      exists_isBoxAuxiliary_and_iff.mp (affine_hypersurface_auxiliary f hprim hir hd hB)
 
 end
 end CCDN

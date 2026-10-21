@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.ScalingPrime
 public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.PrimitiveIntegerPolynomial
 public import CCDN.Plane.Plane
 import CCDN.Auxiliary.UnscaledModelCount
@@ -65,10 +66,10 @@ theorem plane_finite_count_nonzero_constant
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f))
     (hd : 0 < f.totalDegree) (hf0 : f.coeff 0 ≠ 0)
-    (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0)
-    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
-    (hcount : PlaneResidueCountBound C f.totalDegree f) :
+    (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) {B C : ℝ} (hzB : IsBoxZeroFamily f B z)
+    (hC : 0 ≤ C) (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ affineNonzeroConstantBound C * curveBound f.totalDegree B := by
+  obtain ⟨hB, hz, hbox⟩ := hzB
   let d := f.totalDegree
   let K₁ := 38 + 8 * Real.exp (heightDeterminantError C + 20) +
     2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 * scalingPrimeRatio
@@ -93,7 +94,7 @@ theorem plane_finite_count_nonzero_constant
   have hsum : affineNonzeroConstantBound C = K₁ + K₂ := rfl
   rw [hsum]
   by_cases hsmallB : B ≤ affineSmallBoxScale * (d : ℝ) ^ 2
-  · have hh := unscaled_plane_finite_count f hprim hir hd z hinj hz hB hbox hC hcount
+  · have hh := unscaled_plane_finite_count f hprim hir hd z hinj ⟨hB, hz, hbox⟩ hC hcount
     have hs := small_box_unscaled_degree_bound hd affineSmallBoxScale_one_le hB hsmallB (C := C)
     apply hh.trans
     apply max_le
@@ -115,8 +116,8 @@ theorem plane_finite_count_nonzero_constant
         ring
       exact ht.trans (mul_le_mul_of_nonneg_right (by linarith) hG)
     · have hheight := (large_box_height_threshold hd hA hlargeB).trans (le_of_not_gt hsmallH)
-      have hh := unscaled_plane_finite_count_large_coefficient f hprim hir hd z hinj hz hB hbox hC
-        0 hf0 hheight hcount
+      have hh := unscaled_plane_finite_count_large_coefficient f hprim hir hd z hinj
+        ⟨hB, hz, hbox⟩ hC 0 hf0 hheight hcount
       exact hh.trans ((mul_le_mul_of_nonneg_left hpow hK₃).trans
         (mul_le_mul_of_nonneg_right (by linarith) hG))
 

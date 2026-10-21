@@ -62,7 +62,7 @@ theorem finite_field_bad_plane_parameters_mul_card
     Nat.card (BadPlaneParameters f) * Fintype.card K ≤
       (2 * f.totalDegree ^ 3) * Fintype.card K ^ Fintype.card (PlaneParameters (Option σ)) := by
   classical
-  obtain ⟨rows, cols, _, _, hw, hdeg⟩ := exists_universalPlane_badWitness f hf hpos
+  obtain ⟨rows, cols, hw, hdeg⟩ := exists_universalPlane_badWitness f hf hpos
     (.of_charP hchar)
   let W := universalPlaneBadWitness f rows cols
   have hdp : f.totalDegree < p := by nlinarith
