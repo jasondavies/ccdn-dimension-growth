@@ -1,6 +1,7 @@
 module
 
 public import CCDN.RowSpan
+public import CCDN.FiniteRowMinor
 
 /-! Independent rows can be selected from the finite evaluation matrix.
 A nonzero annihilator gives the strict rank deficiency required by Bombieri--Vaaler. -/
@@ -9,24 +10,15 @@ A nonzero annihilator gives the strict rank deficiency required by Bombieri--Vaa
 namespace CCDN
 open Matrix
 
-theorem exists_independent_spanning_rows {t N : ℕ} (A : Matrix (Fin t) (Fin N) ℚ) :
-    ∃ (s : ℕ) (a : Fin s → Fin t), Function.Injective a ∧
-      LinearIndependent ℚ (A.submatrix a id).row ∧
-      Submodule.span ℚ (Set.range (A.submatrix a id).row) =
-        Submodule.span ℚ (Set.range A.row) ∧ s ≤ N := by
-  classical
-  obtain ⟨κ, a, ha, hs, hi⟩ := exists_linearIndependent' ℚ A.row
-  let : Finite κ := Finite.of_injective a ha
-  let : Fintype κ := Fintype.ofFinite κ
-  let e := (Fintype.equivFin κ).symm
-  have hli : LinearIndependent ℚ (A.submatrix (a ∘ e) id).row := by
-    exact hi.comp e e.injective
-  have hspan : Set.range (A.submatrix (a ∘ e) id).row = Set.range (A.row ∘ a) := by
-    change Set.range ((A.row ∘ a) ∘ e) = _
-    exact e.surjective.range_comp _
-  refine ⟨Fintype.card κ, a ∘ e, ha.comp e.injective, hli, ?_, ?_⟩
-  · rw [hspan, hs]
-  · simpa using hli.fintype_card_le_finrank
+/-- A spanning family of independent rows has at most as many rows as there are columns. -/
+theorem exists_independent_spanning_rows {F ι : Type*} [Field F] {N : ℕ}
+    (A : Matrix ι (Fin N) F) :
+    ∃ (s : ℕ) (a : Fin s → ι), Function.Injective a ∧
+      LinearIndependent F (A.submatrix a id).row ∧
+      Submodule.span F (Set.range (A.submatrix a id).row) =
+        Submodule.span F (Set.range A.row) ∧ s ≤ N := by
+  obtain ⟨s, a, ha, hli, hs⟩ := exists_finite_independent_spanning_rows A
+  exact ⟨s, a, ha, hli, hs, by simpa using hli.fintype_card_le_finrank⟩
 
 /-- A nonzero relation on all columns forces every independent row family
 to contain strictly fewer rows than columns. -/

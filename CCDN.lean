@@ -609,7 +609,6 @@ public import CCDN.AffineProjectionDegree
 public import CCDN.BoundedAffineBirationalProjection
 public import CCDN.BoundedCenterProjection
 public import CCDN.BoundedClosureElimination
-public import CCDN.BoundedClosureNormalization
 public import CCDN.CenterProjectionFormula
 public import CCDN.CenterProjectionHeight
 public import CCDN.ChowIncidenceEquation

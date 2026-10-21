@@ -64,29 +64,6 @@ theorem affine_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
     fin_cases j <;> rfl
   exact hc.trans (Nat.add_le_add_right (Finset.card_le_card hP) _)
 
-/-- The affine curve clause of Proposition 4.3.1, retaining explicit
-birational projection coordinates and the stronger error d(d-1). -/
-theorem exists_geometric_affine_curve_count_reduction
-    {L : Type*} [Field L] [Algebra ℚ L] {n : ℕ}
-    (I : Ideal (CoordinatePolynomial n)) [I.IsPrime]
-    [(I.map (map (algebraMap ℚ L))).IsPrime]
-    (d : ℕ) (hd : 0 < d) (hdegree : HasAffineCurveDegree I d) :
-    ∃ (k₀ k₁ : ℕ) (f : MvPolynomial (Fin 2) ℚ),
-      k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧ Irreducible f ∧
-      Irreducible (map (algebraMap ℚ L) f) ∧ f.totalDegree = d ∧
-      let a := ![momentCoordinate ℚ n k₀, momentCoordinate ℚ n k₁]
-      (∀ g, aeval a g ∈ I ↔ f ∣ g) ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (CoordinatePolynomial n ⧸ I)
-          (FractionRing (CoordinatePolynomial n ⧸ I))
-          ((Ideal.Quotient.mk I) (a i)))) = ⊤ ∧
-      ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
-        count (zeroLocus f) (projectionBoxFactor n d * B) + d * (d - 1) := by
-  obtain ⟨k₀, k₁, f, hk₀, hk₁, hf, hfL, hfd, hker, hfield, _, _, hcount⟩ :=
-    exists_geometrically_integral_curve_projection (L := L) I d hd hdegree
-  exact ⟨k₀, k₁, f, hk₀, hk₁, hf, hfL, hfd, hker, hfield,
-    affine_curve_count_le_of_moment_projection I f hk₀ hk₁ hker hcount⟩
-
 theorem projective_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime] (hX : X 0 ∉ I)
     (hd : 0 < d) (hdegree : HasProjectiveCurveDegree I d)

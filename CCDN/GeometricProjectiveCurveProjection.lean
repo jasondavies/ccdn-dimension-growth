@@ -130,11 +130,11 @@ theorem exists_geometric_affine_curve_projection
           ((Ideal.Quotient.mk I) (a i)))) = ⊤ ∧
       ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
         count (zeroLocus f) (curveProjectionHeightConstant n * (d : ℝ) ^ (2 * n) * B) + d ^ 2 := by
-  obtain ⟨k₀, k₁, f, hk₀, hk₁, hf, hfL, hfd, hker, hfield, hcount⟩ :=
-    exists_geometric_affine_curve_count_reduction (L := L) I d hd hdegree
+  obtain ⟨k₀, k₁, f, hk₀, hk₁, hf, hfL, hfd, hker, hfield, _, _, hcount⟩ :=
+    exists_geometrically_integral_curve_projection (L := L) I d hd hdegree
   refine ⟨k₀, k₁, f, hk₀, hk₁, hf, hfL, hfd, hker, hfield, ?_⟩
   intro B hB
-  apply (hcount B hB).trans
+  apply (affine_curve_count_le_of_moment_projection I f hk₀ hk₁ hker hcount B hB).trans
   apply Nat.add_le_add
   · apply count_mono (Set.Subset.refl _)
     exact mul_le_mul_of_nonneg_right (projectionBoxFactor_le_degree_power n hd) (by linarith)
