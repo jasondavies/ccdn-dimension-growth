@@ -76,11 +76,10 @@ theorem exists_positioned_genericPlane_euler_minor_charZero
       (eulerClosedFormCoefficientMatrix k
         (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).HasNonzeroMinor
           ((k + 2) ^ 2 - 1) := by
-  obtain ⟨a, b, hb, hdir, hg, hm, hdeg, _, hz, hs⟩ :=
+  obtain ⟨a, b, hb, hdir, hg⟩ :=
     exists_monic_smooth_hypersurface_coordinates f hf (by omega) (.of_charZero _)
-  rw [hd] at hdeg
-  exact ⟨a, b, hb, hdir, exists_genericPlane_euler_minor_charZero k
-    (normalizedHypersurfaceCoordinates a b hb f) hg hm hdeg hz hs⟩
+  exact ⟨a, b, hb, hdir, exists_genericPlane_euler_minor_charZero k _ hg.irreducible hg.monic
+    (hd ▸ hg.natDegree_eq) hg.eval_zero hg.pderiv_ne_zero⟩
 
 end
 end CCDN
