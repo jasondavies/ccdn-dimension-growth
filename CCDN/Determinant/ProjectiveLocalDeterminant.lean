@@ -8,7 +8,7 @@ module
 public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Determinant.SingularPlaneChart
 import CCDN.Determinant.BlockDeterminant
-import CCDN.Determinant.SmoothLocalDeterminant
+import CCDN.ForMathlib.Matrix
 import CCDN.Height.ProjectiveZeroLocus
 /-! Local divisibility for homogeneous evaluation matrices at projective
 points. Normalize a unit coordinate modulo the required prime power,
@@ -100,7 +100,7 @@ theorem projective_plane_chart_det_divisibility {p μ s d M : ℕ} [Fact p.Prime
     singular_plane_chart_det_divisibility_mod (affineChart 2 f)
       (fun j => affineChart 2 (F j)) x a hf hμ hx hxf
   have hAD : q ∣ A.det - D.det := by
-    apply dvd_det_sub_of_dvd_entries
+    apply Matrix.dvd_det_sub_det_of_dvd_sub
     intro i j
     exact projective_chart_eval_congr (z i) (hu i) (F j) (hF j)
   have hD : q ∣ D.det := by

@@ -8,7 +8,7 @@ module
 public import Mathlib.NumberTheory.Height.NumberField
 public import Mathlib.NumberTheory.Height.Projectivization
 public import CCDN.Height.Box
-import CCDN.ForMathlib.MatrixRank
+import CCDN.ForMathlib.Matrix
 import CCDN.Height.ProjectiveIntegerHeight
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 /-! Integral maximal minors give the intrinsic projective height of a

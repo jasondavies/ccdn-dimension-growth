@@ -8,7 +8,7 @@ module
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Center.IncidenceDeterminantCertificate
-import CCDN.Center.IrrelevantPowerCertificate
+import CCDN.ForMathlib.Nullstellensatz
 import CCDN.Height.ProjectiveZeroLocus
 /-! Closedness of the projective hyperplane incidence image, proved by
 finite homogeneous coefficient matrices. Empty fibers produce a determinant
@@ -71,7 +71,7 @@ theorem exists_polynomial_separator_of_not_projective_incidence
           (Ideal.subset_span ⟨i, rfl⟩)
       simpa only [aeval_eq_eval, incidenceLinearForm_eval] using hx _ hmem
   obtain ⟨M, hM, hpower⟩ :=
-    exists_positive_irrelevant_power_le_of_zero_locus_subset_origin A hzero
+    MvPolynomial.exists_pow_idealOfVars_le_of_zeroLocus_subset A hzero
   obtain ⟨t, rfl⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hM)
   obtain ⟨D, hDU, hD⟩ := exists_incidence_determinant_certificate J hJ U (t := t) (by
     intro e

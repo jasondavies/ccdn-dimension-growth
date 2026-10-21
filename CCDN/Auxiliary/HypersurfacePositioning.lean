@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Auxiliary.HypersurfaceAffineCoordinates
-public import CCDN.ForMathlib.MatrixRank
+public import CCDN.ForMathlib.Matrix
 public import CCDN.Noether.GenericPlaneIrreducibility
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Auxiliary.HypersurfaceFullOuterDegree

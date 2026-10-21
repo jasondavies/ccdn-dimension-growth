@@ -8,7 +8,7 @@ module
 public import Mathlib.FieldTheory.RatFunc.Basic
 public import Mathlib.RingTheory.Polynomial.Resultant.Basic
 public import Mathlib.RingTheory.SimpleRing.Principal
-import CCDN.Algebra.PolynomialResultantDegree
+import CCDN.ForMathlib.Polynomial
 /-! The eliminant for a ratio g(beta)/f'(beta).
 For f,g in F[t][z], coefficients are lifted into F[u][t], and z is
 eliminated from f and u*f'-g. The resulting polynomial has outer t-degree
@@ -81,7 +81,7 @@ theorem residueEliminant_natDegree_le {F : Type*} [CommRing F]
     intro i
     simp only [coeff_map, residueParameterLift, coe_mapRingHom]
     exact natDegree_map_le.trans (hf i)
-  apply polynomial_resultant_natDegree_le
+  apply Polynomial.natDegree_resultant_le
   · exact hfl
   · intro i
     simp only [residueEliminationEquation, coeff_sub, coeff_C_mul]
@@ -107,7 +107,7 @@ theorem residueEliminant_ne_zero {F : Type*} [Field F]
   have hn : ((-g).map φ).natDegree ≤ f.natDegree - 1 := by
     rw [natDegree_map_eq_of_injective hinj, natDegree_neg]
     omega
-  have hres := resultant_ne_zero_of_irreducible_of_natDegree_lt
+  have hres := Polynomial.resultant_ne_zero_of_irreducible_of_natDegree_lt
     (f.map φ) ((-g).map φ) hf hg0 hdegrees (f.natDegree - 1) hn
   intro h
   have hz := congrArg φ (congrArg residueParameterZero h)

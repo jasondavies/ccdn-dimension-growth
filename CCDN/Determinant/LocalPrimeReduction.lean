@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.NoetherianLocalLayers
+public import CCDN.ForMathlib.IdealPowerLayer
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
@@ -41,7 +41,7 @@ def localPrimeMaximalIdeal : Ideal (LocalPrimeReduction R p) :=
 
 /-- Dimensions of the layers of the maximal ideal of `R/(p)`. -/
 def localPrimeLayerDimension [Fact p.Prime] (k : ℕ) : ℕ :=
-  Module.finrank (ZMod p) (idealPowerLayer (ZMod p) (localPrimeMaximalIdeal R p) k)
+  Module.finrank (ZMod p) (Ideal.powerLayer (ZMod p) (localPrimeMaximalIdeal R p) k)
 
 variable {R p} [Fact p.Prime]
 
@@ -82,7 +82,7 @@ theorem exists_localPrimeReduction_generators [IsNoetherianRing R]
         u - ∑ k : Fin N, ∑ j, c k j • g k.val j ∈ localPrimeMaximalIdeal R p ^ N := by
   let : Finite (LocalPrimeReduction R p ⧸ localPrimeMaximalIdeal R p) :=
     localPrimeReduction_finite_residue ρ
-  exact exists_noetherian_truncation_generators (K := ZMod p)
+  exact Ideal.exists_truncation_generators (K := ZMod p)
     (localPrimeMaximalIdeal R p)
 
 end

@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.ClosedFormMinorCharge
-import CCDN.ForMathlib.MatrixRank
+import CCDN.ForMathlib.Matrix
 import CCDN.Noether.ClosedFormScaling
 
 /-! Bad reduction for integer bivariate equations with a nonzero constant

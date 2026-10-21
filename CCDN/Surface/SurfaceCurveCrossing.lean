@@ -8,7 +8,7 @@ module
 public import CCDN.Hilbert.FilteredPrimeDecomposition
 public import CCDN.Surface.SurfaceCurve
 import CCDN.Surface.CompleteIntersectionDegreeBudget
-import CCDN.Hilbert.CompleteIntersectionHeight
+import CCDN.ForMathlib.IdealHeight
 import CCDN.Plane.Bezout
 import CCDN.Surface.SurfaceNonlinearCount
 /-! Degree and proper-section budgets for any finite family of distinct
@@ -36,7 +36,7 @@ theorem height_two_prime_isMinimalPrime_section
       exact hgP
   obtain ⟨Q, hQ, hQP⟩ := Ideal.exists_minimalPrimes_le hle
   have : Q.IsPrime := hQ.isPrime
-  have hQheight : Q.height = 2 := minimalPrime_pair_height_two hf.prime hfg hQ
+  have hQheight : Q.height = 2 := Ideal.height_eq_two_of_mem_minimalPrimes_span_pair hf.prime hfg hQ
   have hQP' : Q = P := by
     by_contra hne
     have hh := Ideal.height_add_one_le_of_lt_of_isPrime (lt_of_le_of_ne hQP hne)

@@ -27,7 +27,7 @@ variable {K : Type*} [Field K]
 
 def hypersurfacePointLayerDimension {n : ℕ}
     (f : MvPolynomial (Fin n) K) (a : Fin n → K) [Fact (eval a f = 0)] (k : ℕ) : ℕ :=
-  Module.finrank K (idealPowerLayer K (A := HypersurfacePointStalk f a)
+  Module.finrank K (Ideal.powerLayer K (A := HypersurfacePointStalk f a)
     (IsLocalRing.maximalIdeal (HypersurfacePointStalk f a)) k)
 
 lemma hypersurfaceLayerBound_positive (n k : ℕ) {μ : ℕ} (hμ : 0 < μ) :

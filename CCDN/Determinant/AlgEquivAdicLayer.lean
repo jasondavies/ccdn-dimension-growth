@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.NoetherianLocalLayers
+public import CCDN.ForMathlib.IdealPowerLayer
 /-! Algebra equivalences preserve ideal-adic layers. -/
 
 @[expose] public section
@@ -16,7 +16,7 @@ variable {K A B : Type*} [Field K] [CommRing A] [CommRing B]
     [Algebra K A] [Algebra K B]
 
 def idealPowerLayerEquivOfEq {I J : Ideal A} (h : I = J) (k : ℕ) :
-    idealPowerLayer K I k ≃ₗ[K] idealPowerLayer K J k := by
+    Ideal.powerLayer K I k ≃ₗ[K] Ideal.powerLayer K J k := by
   subst J
   exact LinearEquiv.refl _ _
 
@@ -25,8 +25,8 @@ def algEquivAdicQuotient (e : A ≃ₐ[K] B) (I : Ideal A) (N : ℕ) :
   Ideal.quotientEquivAlg _ _ e (Ideal.map_pow e.toRingHom I N).symm
 
 lemma algEquivAdicQuotient_layer (e : A ≃ₐ[K] B) (I : Ideal A) (k : ℕ) :
-    (idealPowerLayer K I k).map (algEquivAdicQuotient e I (k + 1)).toLinearMap =
-      idealPowerLayer K (I.map e.toRingHom) k := by
+    (Ideal.powerLayer K I k).map (algEquivAdicQuotient e I (k + 1)).toLinearMap =
+      Ideal.powerLayer K (I.map e.toRingHom) k := by
   ext z
   constructor
   · intro hz
@@ -45,7 +45,7 @@ lemma algEquivAdicQuotient_layer (e : A ≃ₐ[K] B) (I : Ideal A) (k : ℕ) :
     exact Submodule.mem_map.mpr ⟨x, hx, rfl⟩
 
 def algEquivAdicLayerEquiv (e : A ≃ₐ[K] B) (I : Ideal A) (k : ℕ) :
-    idealPowerLayer K I k ≃ₗ[K] idealPowerLayer K (I.map e.toRingHom) k :=
+    Ideal.powerLayer K I k ≃ₗ[K] Ideal.powerLayer K (I.map e.toRingHom) k :=
   (Submodule.equivMapOfInjective (algEquivAdicQuotient e I (k + 1)).toLinearMap
     (algEquivAdicQuotient e I (k + 1)).injective _).trans
       (LinearEquiv.ofEq _ _ (algEquivAdicQuotient_layer e I k))

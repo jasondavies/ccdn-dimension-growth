@@ -8,16 +8,22 @@ module
 public import Mathlib.RingTheory.Nullstellensatz
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 
-/-! A polynomial ideal whose only possible geometric zero is the origin
-contains a positive power of the irrelevant ideal. This is the concrete
-Nullstellensatz certificate for an empty projective fiber. -/
+/-!
+# Ideals vanishing only at the origin
+
+## Main results
+
+* `MvPolynomial.exists_pow_idealOfVars_le_of_zeroLocus_subset`: over an algebraically closed field,
+  a polynomial ideal whose only zero is the origin contains a positive power of the irrelevant
+  ideal `idealOfVars σ K`. This is the Nullstellensatz certificate for an empty projective fiber.
+-/
 
 @[expose] public section
-namespace CCDN
-noncomputable section
-open MvPolynomial
 
-theorem exists_positive_irrelevant_power_le_of_zero_locus_subset_origin
+namespace MvPolynomial
+
+/-- An ideal whose only zero is the origin contains a positive power of the irrelevant ideal. -/
+theorem exists_pow_idealOfVars_le_of_zeroLocus_subset
     {K σ : Type*} [Field K] [IsAlgClosed K] [Finite σ]
     (J : Ideal (MvPolynomial σ K))
     (hzero : ∀ x ∈ MvPolynomial.zeroLocus K J, x = 0) :
@@ -32,5 +38,4 @@ theorem exists_positive_irrelevant_power_le_of_zero_locus_subset_origin
   obtain ⟨M, hM⟩ := Ideal.exists_pow_le_of_le_radical_of_fg hrad (idealOfVars_fg σ K)
   exact ⟨M + 1, Nat.succ_pos M, (Ideal.pow_le_pow_right (Nat.le_succ M)).trans hM⟩
 
-end
-end CCDN
+end MvPolynomial

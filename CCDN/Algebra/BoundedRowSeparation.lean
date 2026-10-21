@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.LinearAlgebra.Matrix.Adjugate
-import CCDN.ForMathlib.MatrixRank
+import CCDN.ForMathlib.Matrix
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 /-! Bounded integral linear forms dual to independent integer rows.
 A nonzero minor and its cofactors give the separation required in CCDN

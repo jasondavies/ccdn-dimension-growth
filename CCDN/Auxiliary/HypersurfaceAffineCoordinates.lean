@@ -11,7 +11,7 @@ public import Mathlib.Tactic.LinearCombination
 public import Mathlib.Tactic.ReduceModChar
 public import CCDN.Algebra.OriginShift
 import CCDN.Determinant.PlaneMultiplicity
-import CCDN.Plane.AffinePlaneRestriction
+import CCDN.ForMathlib.MvPolynomialDerivative
 
 /-! Explicit invertible affine coordinates along a direction with nonzero
 first component. The same map carries its base point to the origin and
@@ -118,7 +118,7 @@ lemma hypersurfaceAffineCoordinates_partial_zero {K σ : Type*} [Field K] [Finty
       ∑ i, eval a (pderiv i f) * b i := by
   change eval (0 : Option σ → K) (pderiv none
     ((hypersurfaceAffineCoordinates a b hb).toAlgHom f)) = _
-  rw [pderiv_algHom_chain, map_sum]
+  rw [MvPolynomial.pderiv_algHom, map_sum]
   apply Finset.sum_congr rfl
   intro i _
   rw [map_mul]

@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.InfinityParameterReduction
-import CCDN.Hilbert.ScalarSpanDimension
+import CCDN.ForMathlib.LinearMap
 /-! Evaluating homogeneous polynomials at geometric infinity points has
 L-linear rank at most the corresponding infinity Hilbert piece. The
 source curve and its Hilbert function are defined over the original field K. -/
@@ -47,7 +47,7 @@ theorem infinity_evaluation_span_finrank_le {K L σ ι : Type*} [Field K] [Field
       infinityCoordinateMap I p
     change _ = Ideal.Quotient.mk (projectiveInfinityIdeal I) (quotientRadialMap I p)
     rw [quotientRadialMap_homogeneous I p (m + 1) p.property]
-  exact (finrank_scalar_span_range_le_of_ker_le f g hker).trans (Submodule.finrank_mono hrange)
+  exact (LinearMap.finrank_span_range_le_of_ker_le f g hker).trans (Submodule.finrank_mono hrange)
 
 /-- In stable degrees the same evaluation span has dimension at most d. -/
 theorem infinity_evaluation_span_finrank_le_degree {K L σ ι : Type*} [Field K] [Field L]

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Module.ZLattice.Covolume
 import CCDN.ClassGroup.LatticeMinimaFlag
-import CCDN.ClassGroup.LatticeSeparatedVolume
+import CCDN.ForMathlib.ZLattice
 import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
 
 /-! A uniform product-of-minima bound from Blichfeldt's principle.
@@ -57,7 +57,7 @@ theorem lattice_flag_minima_product_le
     apply abs_lt.mpr
     change -(r i) < _ ∧ _ < r i
     constructor <;> linarith
-  have hbound := lattice_separated_measure_le L volume
+  have hbound := ZLattice.measureReal_le_covolume L volume
     (ZSpan.fundamentalDomain_measurableSet u) hsep
   have hunit : volume.real (ZSpan.fundamentalDomain c.toBasis) = 1 := by
     rw [measureReal_congr (ZSpan.fundamentalDomain_ae_parallelepiped c.toBasis volume)]

@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.MvPolynomial.Equiv
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Localization.FractionRing
-import CCDN.Center.PolynomialQuotientCoefficients
+import Mathlib.RingTheory.Polynomial.Basic
 import Mathlib.RingTheory.Localization.Ideal
 import Mathlib.RingTheory.MvPolynomial.Localization
 
@@ -36,7 +36,7 @@ lemma quotientPolynomialSwap_surjective {K σ τ : Type*} [Field K]
 lemma quotientPolynomialSwap_kernel {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) :
     RingHom.ker (quotientPolynomialSwap (τ := τ) I) = I.map (map C) := by
-  rw [quotientPolynomialSwap, ← RingHom.comap_ker, polynomial_quotient_map_kernel]
+  rw [quotientPolynomialSwap, ← RingHom.comap_ker, MvPolynomial.ker_map, Ideal.mk_ker]
   change (I.map C).comap (commAlgEquiv K σ τ).toRingEquiv = _
   rw [← Ideal.map_symm (commAlgEquiv K σ τ).toRingEquiv]
   change (I.map C).map (commAlgEquiv K σ τ).symm.toRingHom = _

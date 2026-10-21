@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ForMathlib.MatrixRank
+public import CCDN.ForMathlib.Matrix
 public import CCDN.Noether.EulerPairBasis
 public import CCDN.Noether.UniversalPlaneFamily
 import CCDN.Determinant.GenericPlaneEulerMinorCharZero

@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.IdealZeroLocus
-public import CCDN.Hilbert.CompleteIntersectionHeight
+public import CCDN.ForMathlib.IdealHeight
 public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Hilbert.FilteredHilbertLinearity
 import Mathlib.FieldTheory.Minpoly.Basic

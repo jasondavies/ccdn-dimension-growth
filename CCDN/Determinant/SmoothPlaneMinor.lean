@@ -10,7 +10,7 @@ public import CCDN.Noether.BivariateTotalDegree
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
-public import CCDN.ForMathlib.MatrixRank
+public import CCDN.ForMathlib.Matrix
 import CCDN.Noether.ClosedFormRank
 import CCDN.Noether.ShearNormalization
 

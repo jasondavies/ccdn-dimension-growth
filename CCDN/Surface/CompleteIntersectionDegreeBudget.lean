@@ -67,7 +67,7 @@ theorem exists_completeIntersection_curve_components
     obtain ⟨hPT, z, hz⟩ := Finset.mem_filter.mp hP
     have hminimal := hTP P hPT
     have : P.IsPrime := hminimal.isPrime
-    have hheight : P.height = 2 := minimalPrime_pair_height_two hf.prime hfg hminimal
+    have hheight : P.height = 2 := Ideal.height_eq_two_of_mem_minimalPrimes_span_pair hf.prime hfg hminimal
     have hdeg := hcurve P hPT
     exact ⟨⟨hminimal.isPrime, hheight, hminimal.le (polynomialSectionIdeal_first_mem f g), hdeg⟩,
       hminimal.le (polynomialSectionIdeal_second_mem f g),

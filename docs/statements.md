@@ -16,7 +16,7 @@ A `matched` entry may be qualified: *coordinate model*: in the coordinate-ideal 
 
 | Paper | Status | In addenda | Lean declarations |
 | --- | --- | --- | --- |
-| Lemma 2.1 | matched (coordinate model) |  | [`HypersurfacePointStalk`](../CCDN/Determinant/HypersurfacePointStalk.lean#L87), [`hypersurfacePointStalk_hilbert_eq`](../CCDN/Determinant/HypersurfacePointStalk.lean#L123), [`exists_hypersurfacePointStalk_pointwise_remainder`](../CCDN/Paper/HypersurfacePointwiseRemainder.lean#L117) |
+| Lemma 2.1 | matched (coordinate model) |  | [`HypersurfacePointStalk`](../CCDN/Determinant/HypersurfacePointStalk.lean#L87), [`hypersurfacePointStalk_hilbert_eq`](../CCDN/Determinant/HypersurfacePointStalk.lean#L129), [`exists_hypersurfacePointStalk_pointwise_remainder`](../CCDN/Paper/HypersurfacePointwiseRemainder.lean#L117) |
 | Lemma 2.2 | refuted | no | [`weighted_sequence_initial_sum_lower_bound`](../CCDN/Determinant/WeightedSequenceEstimate.lean#L194), [`weighted_sequence_dimension_one`](../CCDN/Determinant/WeightedSequenceEstimate.lean#L210), [`no_uniform_dimension_one_profile_error`](../CCDN/Counterexample/WeightedDimensionOneExample.lean#L135) (counterexample) |
 | Lemma 2.3 | matched (coordinate model) |  | [`exists_hypersurfacePointStalk_hilbert_weights`](../CCDN/Determinant/LocalHilbertWeights.lean#L83), [`hypersurfacePointStalk_enumerated_weights_sum_lower_bound`](../CCDN/Determinant/LocalHilbertWeights.lean#L67) |
 | Lemma 2.4 | stronger |  | [`localPrimeLayerDimension`](../CCDN/Determinant/LocalPrimeReduction.lean#L43), [`primeInteger_local_enumerated_weight_det`](../CCDN/Paper/PrimeIntegerLocalDeterminant.lean#L72), [`primeInteger_local_det_profile_dichotomy`](../CCDN/Paper/PrimeIntegerLocalDeterminant.lean#L127) |

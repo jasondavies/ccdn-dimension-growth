@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ScalarQuotientPolynomialLocalization
-public import CCDN.Center.LocalizationFractionEmbedding
+public import CCDN.ForMathlib.FractionRing
 import Mathlib.Tactic.ContinuousFunctionalCalculus
 /-! A fraction field of the parameter polynomial extension is also
 the fraction field of the scalar-extended source coordinate quotient. -/
@@ -43,7 +43,7 @@ def scalarQuotientFractionMap :
         (quotientPolynomialSwap I).toMonoidHom)
       (MvPolynomial σ L ⧸ I.map (map (algebraMap K L))) :=
     scalar_quotient_polynomial_localization I
-  localizationFractionEmbedding
+  IsFractionRing.liftOfLocalization
     (S := MvPolynomial σ L ⧸ I.map (map (algebraMap K L))) (F := F)
     (((nonZeroDivisors (MvPolynomial τ K)).map (C (σ := σ))).map
       (quotientPolynomialSwap I).toMonoidHom)
@@ -60,7 +60,7 @@ lemma scalarQuotientFractionMap_comp :
         (quotientPolynomialSwap I).toMonoidHom)
       (MvPolynomial σ L ⧸ I.map (map (algebraMap K L))) :=
     scalar_quotient_polynomial_localization I
-  exact localizationFractionEmbedding_comp
+  exact IsFractionRing.liftOfLocalization_comp
     (S := MvPolynomial σ L ⧸ I.map (map (algebraMap K L))) (F := F)
     (((nonZeroDivisors (MvPolynomial τ K)).map (C (σ := σ))).map
       (quotientPolynomialSwap I).toMonoidHom)
@@ -77,7 +77,7 @@ theorem scalarQuotientFractionMap_isFractionRing :
         (quotientPolynomialSwap I).toMonoidHom)
       (MvPolynomial σ L ⧸ I.map (map (algebraMap K L))) :=
     scalar_quotient_polynomial_localization I
-  exact localizationFractionEmbedding_isFractionRing
+  exact IsFractionRing.isFractionRing_liftOfLocalization
     (S := MvPolynomial σ L ⧸ I.map (map (algebraMap K L))) (F := F)
     (((nonZeroDivisors (MvPolynomial τ K)).map (C (σ := σ))).map
       (quotientPolynomialSwap I).toMonoidHom)

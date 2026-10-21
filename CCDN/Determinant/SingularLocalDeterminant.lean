@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 import CCDN.Determinant.SingularApproximation
 import CCDN.Determinant.SingularTangent
-import CCDN.Determinant.SmoothLocalDeterminant
+import CCDN.ForMathlib.Matrix
 /-! Singular plane-curve local determinant divisibility, obtained from
 finite-precision homogeneous generators of the local maximal-ideal filtration. -/
 
@@ -104,7 +104,7 @@ theorem singular_plane_pow_dvd_det_mod {p μ s : ℕ} [Fact p.Prime]
       split <;> simp_all
     rw [hp]
     exact sum_fin_zero_pad (hr k.val) (fun j => c l k j * eval (x i) (g k.val j))
-  have hd := dvd_det_sub_of_dvd_entries (Matrix.of fun i j => eval (x i) (F j))
+  have hd := Matrix.dvd_det_sub_det_of_dvd_sub (Matrix.of fun i j => eval (x i) (F j))
     (U * V) ((p : ℤ) ^ N) (fun i j => by
       rw [Matrix.of_apply, hprod]
       exact hc j (x i) (hfx i) (hx i))

@@ -11,7 +11,7 @@ public import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.BlockDeterminant
 import CCDN.Determinant.HypersurfaceResidue
 import CCDN.Determinant.ProjectiveLocalDeterminant
-import CCDN.Determinant.SmoothLocalDeterminant
+import CCDN.ForMathlib.Matrix
 import CCDN.Height.ProjectiveZeroLocus
 /-! Projective hypersurface determinants in all positive dimensions.
 Unit normalization modulo prime powers transfers the local affine
@@ -82,7 +82,7 @@ theorem projective_hypersurface_chart_det_divisibility {p n μ s d M : ℕ} [Fac
     hypersurface_residue_pow_dvd_det_mod (affineChart (n + 2) f) a hf hμ x hx hxf
       (fun j => affineChart (n + 2) (F j))
   have hAD : q ∣ A.det - D.det := by
-    apply dvd_det_sub_of_dvd_entries
+    apply Matrix.dvd_det_sub_det_of_dvd_sub
     intro i j
     exact projective_hypersurface_chart_eval_congr (z i) (hu i) (F j) (hF j)
   have hD : q ∣ D.det := by

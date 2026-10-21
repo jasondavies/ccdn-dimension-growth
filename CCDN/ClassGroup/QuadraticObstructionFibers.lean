@@ -7,7 +7,7 @@ module
 
 public import CCDN.ClassGroup.QuadraticInvariantIdeal
 public import CCDN.ClassGroup.QuadraticUnitNormQuotient
-import CCDN.ClassGroup.QuadraticHilbert90
+import CCDN.ForMathlib.FieldTheory
 import CCDN.ClassGroup.QuadraticNormConjugation
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Flat.TorsionFree
@@ -109,7 +109,7 @@ theorem exists_invariant_ideal_of_scalar_norm_unit
     intro h
     apply hσ
     exact AlgEquiv.ext (RingEquiv.congr_fun h)
-  obtain ⟨b, hb⟩ := quadratic_invariant_representative σ.toRingEquiv
+  obtain ⟨b, hb⟩ := RingEquiv.exists_invariant_of_involutive σ.toRingEquiv
     (quadratic_automorphism_involutive F K hd σ) hσne
     (fractionalIdealUnitAction (K := K) (RingOfIntegers.mapAlgEquiv σ).toRingEquiv)
     (toPrincipalIdeal (𝓞 K) K) hcompat I (a / e)

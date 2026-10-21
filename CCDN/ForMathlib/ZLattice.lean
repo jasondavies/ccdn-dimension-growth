@@ -6,9 +6,19 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.Module.ZLattice.Basic
+public import Mathlib.Algebra.Module.ZLattice.Covolume
+public import Mathlib.Data.Fin.Tuple.Basic
+public import Mathlib.Order.Interval.Set.Defs
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Order.Interval.Finset.Fin
+import Mathlib.MeasureTheory.Group.GeometryOfNumbers
+import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Algebra.BigOperators.Intervals
+import Mathlib.Data.Nat.Choose.Basic
+import Mathlib.Order.Interval.Set.Fin
 
 /-!
-# Shortest lattice vectors outside a subspace
+# Shortest lattice vectors, greedy flags and Blichfeldt's bound
 
 ## Main results
 
@@ -16,9 +26,48 @@ public import Mathlib.Algebra.Module.ZLattice.Basic
   normed space does not contain the full-rank lattice `L`, some vector of `L` outside `U` has
   minimal norm among the vectors of `L` outside `U`. Iterating this gives the greedy
   successive-minima flag of `L`.
+* `ZLattice.measureReal_le_covolume`: Blichfeldt's principle; a measurable set whose distinct
+  points never differ by a lattice vector has volume at most the covolume.
+
+The greedy flag is built one vector at a time with `Fin.snoc`; the following lemmas describe the
+initial segments of such a tuple, and count the pairs of its indices:
+
+* `Fin.snoc_image_Iio_castSucc`: `Fin.snoc v x '' Set.Iio i.castSucc = v '' Set.Iio i`.
+* `Fin.snoc_image_Iio_last`: `Fin.snoc v x '' Set.Iio (Fin.last k) = Set.range v`.
+* `Fin.sum_card_Ioi`: there are `n.choose 2` pairs `i < j` in `Fin n`.
 -/
 
 @[expose] public section
+
+namespace Fin
+
+variable {α : Type*} {k : ℕ}
+
+/-- Below `i.castSucc`, `Fin.snoc v x` takes the same values as `v` below `i`. -/
+theorem snoc_image_Iio_castSucc (v : Fin k → α) (x : α) (i : Fin k) :
+    snoc v x '' Set.Iio i.castSucc = v '' Set.Iio i := by
+  rw [← image_castSucc_Iio, Set.image_image]
+  simp only [snoc_castSucc]
+
+/-- Below `Fin.last k`, `Fin.snoc v x` takes exactly the values of `v`. -/
+theorem snoc_image_Iio_last (v : Fin k → α) (x : α) :
+    snoc v x '' Set.Iio (last k) = Set.range v := by
+  have h : Set.Iio (last k) = Set.range castSucc := by
+    ext j
+    simp [range_castSucc, lt_def]
+  rw [h, ← Set.range_comp, snoc_comp_castSucc]
+
+/-- Counting the pairs `i < j` in `Fin n` by their smaller element gives `n.choose 2`. -/
+theorem sum_card_Ioi (n : ℕ) : ∑ i : Fin n, (Finset.Ioi i).card = n.choose 2 := by
+  have he (i : Fin n) : (Finset.Ioi i).card = i.rev.val := by
+    rw [card_Ioi, val_rev]
+    omega
+  simp_rw [he]
+  rw [show ∑ i : Fin n, i.rev.val = ∑ i : Fin n, i.val from
+    Equiv.sum_comp revPerm (fun i : Fin n => i.val)]
+  rw [sum_univ_eq_sum_range (fun i : ℕ => i), Finset.sum_range_id, Nat.choose_two_right]
+
+end Fin
 
 namespace ZLattice
 
@@ -53,5 +102,39 @@ theorem exists_shortest_vector_notMem
   by_cases hh : ‖x‖ ≤ ‖x₀‖
   · exact hmin x ⟨hx, hxU, hh⟩
   · exact hv.2.2.trans (le_of_not_ge hh)
+
+open MeasureTheory in
+/-- Blichfeldt's principle: a measurable set whose distinct points never differ by a lattice vector
+has volume at most the covolume of the lattice. -/
+theorem measureReal_le_covolume [MeasurableSpace E] [BorelSpace E]
+    (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
+    (μ : Measure E) [μ.IsAddHaarMeasure]
+    {S : Set E} (hS : MeasurableSet S)
+    (hsep : ∀ x ∈ S, ∀ y ∈ S, x - y ∈ L → x = y) :
+    μ.real S ≤ ZLattice.covolume L μ := by
+  classical
+  let b := Module.Free.chooseBasis ℤ L
+  let F := ZSpan.fundamentalDomain (b.ofZLatticeBasis ℝ L)
+  have hF : IsAddFundamentalDomain L F μ := ZLattice.isAddFundamentalDomain b μ
+  have hle : μ S ≤ μ F := by
+    by_contra! hlt
+    let : MeasurableVAdd L E := inferInstanceAs (MeasurableVAdd L.toAddSubgroup E)
+    let : VAddInvariantMeasure L E μ :=
+      inferInstanceAs (VAddInvariantMeasure L.toAddSubgroup E μ)
+    obtain ⟨a, b, hab, hdis⟩ :=
+      exists_pair_mem_lattice_not_disjoint_vadd hF hS.nullMeasurableSet hlt
+    obtain ⟨z, ⟨x, hx, hax⟩, y, hy, hby⟩ := Set.not_disjoint_iff.mp hdis
+    change (a : E) + x = z at hax
+    change (b : E) + y = z at hby
+    have hdiff : x - y = (b : E) - a := by
+      apply (sub_eq_sub_iff_add_eq_add).mpr
+      exact (add_comm _ _).trans (hax.trans hby.symm)
+    have hxy := hsep x hx y hy (hdiff ▸ L.sub_mem b.property a.property)
+    apply hab
+    apply Subtype.ext
+    exact add_right_cancel (hax.trans (hby.symm.trans (congrArg ((b : E) + ·) hxy.symm)))
+  rw [ZLattice.covolume_eq_measure_fundamentalDomain L μ hF]
+  exact ENNReal.toReal_mono
+    (ZSpan.fundamentalDomain_isBounded (b.ofZLatticeBasis ℝ L)).measure_lt_top.ne hle
 
 end ZLattice

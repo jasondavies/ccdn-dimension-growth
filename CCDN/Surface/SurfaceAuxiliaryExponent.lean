@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Statements
-import CCDN.Analysis.Analytic
+import CCDN.ForMathlib.Log
 
 /-! The numerical component of the corrected surface estimate. The auxiliary
  degree contributes a further factor d to the intersection degree, giving d^18
@@ -96,7 +96,7 @@ lemma surface_small_component_weight {d : ℕ} (hd : 16 ≤ d)
   have hB0 : 0 < B := by linarith
   have hlog : B ^ (1 / 2 : ℝ) * (Real.log B + 1) ≤
       5 * B ^ (3 / 4 : ℝ) := by
-    have hh := sqrt_log_le_rpow (ε := (1 / 4 : ℝ)) (D := 1)
+    have hh := Real.rpow_half_mul_log_add_le (ε := (1 / 4 : ℝ)) (D := 1)
       hB (by norm_num) (by norm_num)
     norm_num at hh ⊢
     exact hh

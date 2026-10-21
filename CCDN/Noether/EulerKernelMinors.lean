@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.EulerPairBasis
-import CCDN.ForMathlib.MatrixRank
+import CCDN.ForMathlib.Matrix
 /-! A nonzero Euler kernel vector forces every maximal universal
 coefficient minor to vanish after specialization. -/
 

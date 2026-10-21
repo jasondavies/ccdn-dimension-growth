@@ -17,7 +17,7 @@ public import CCDN.Plane.IntegralAffineLine
 import CCDN.Algebra.BinaryHomogeneousIrreducibility
 import CCDN.Determinant.PlaneSingularities
 import CCDN.ForMathlib.MvPolynomialDerivative
-import CCDN.Plane.AffinePlaneRestriction
+import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Surface.SurfaceLineDirections
 import CCDN.Surface.TopFormIrreducibility
 import Mathlib.Algebra.Order.Star.Rat
@@ -123,7 +123,7 @@ lemma homogeneousTranslation_directionalDerivative {K : Type*} [Field K] {n : â„
       congr 1
       field_simp
   change C (v 0) * pderiv 0 (e f) = e (directionalDerivative v f)
-  have hchain := pderiv_algHom_chain e.toAlgHom f 0
+  have hchain := MvPolynomial.pderiv_algHom e.toAlgHom f 0
   change pderiv 0 (e f) = âˆ‘ i, e (pderiv i f) * pderiv 0 (e (X i)) at hchain
   rw [hchain, Finset.mul_sum]
   simp only [directionalDerivative, map_sum, map_mul]

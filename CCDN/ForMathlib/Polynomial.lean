@@ -6,10 +6,11 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.Polynomial.Derivative
+public import Mathlib.RingTheory.Polynomial.Resultant.Basic
 import Mathlib.Algebra.Polynomial.Taylor
 
 /-!
-# Finite differences and derivatives of univariate polynomials
+# Finite differences, derivatives and resultants of univariate polynomials
 
 ## Main results
 
@@ -19,6 +20,13 @@ import Mathlib.Algebra.Polynomial.Taylor
   leading coefficient `P.leadingCoeff * (m + 1) * s`.
 * `Polynomial.derivative_ne_zero_of_natCast_natDegree_ne_zero`: a polynomial whose degree is
   nonzero in the coefficient ring has nonzero derivative.
+* `Polynomial.exists_divided_difference`: the divided difference `(f(y) - f(z)) / (y - z)` exists
+  and is congruent to `f'(z)` modulo `y - z`.
+* `Matrix.natDegree_det_le`, `Polynomial.natDegree_resultant_le`: degree bounds for determinants
+  and Sylvester resultants of polynomials in a coefficient parameter, independent of the
+  eliminated variable.
+* `Polynomial.resultant_ne_zero_of_irreducible_of_natDegree_lt`: padding the second Sylvester
+  degree preserves nonvanishing when the first polynomial is irreducible.
 -/
 
 @[expose] public section
@@ -95,5 +103,84 @@ theorem derivative_ne_zero_of_natCast_natDegree_ne_zero {R : Type*} [Semiring R]
     rw [← Nat.cast_add_one, Nat.sub_add_cancel hpos]
   rw [he] at hc
   exact (mul_ne_zero (leadingCoeff_ne_zero.mpr hf) hn) hc
+
+/-- Divided differences agree with the derivative modulo the argument difference. -/
+theorem exists_divided_difference {R : Type*} [CommRing R]
+    (f : R[X]) (y z : R) :
+    ∃ q : R, f.eval y - f.eval z = (y - z) * q ∧
+      y - z ∣ q - f.derivative.eval z := by
+  have hd : X - C z ∣ f - C (f.eval z) := by
+    rw [dvd_iff_isRoot]
+    simp [IsRoot]
+  obtain ⟨g, hg⟩ := hd
+  have he := congrArg (Polynomial.eval y) hg
+  simp only [eval_sub, eval_C, eval_mul, eval_X] at he
+  have hder := congrArg (fun p : R[X] => p.derivative.eval z) hg
+  simp only [derivative_sub, derivative_C, sub_zero, derivative_mul,
+    derivative_X, derivative_sub, eval_add, eval_mul, eval_sub,
+    eval_X, eval_C, sub_self, zero_mul, one_mul, add_zero] at hder
+  refine ⟨g.eval y, he, ?_⟩
+  rw [hder]
+  exact Polynomial.sub_dvd_eval_sub y z g
+
+end Polynomial
+
+namespace Matrix
+
+open Polynomial
+
+/-- The degree of a determinant of polynomials is at most the size times an entrywise degree
+bound. -/
+theorem natDegree_det_le {R ι : Type*} [CommRing R]
+    [Fintype ι] [DecidableEq ι] (M : Matrix ι ι R[X]) (D : ℕ)
+    (hM : ∀ i j, (M i j).natDegree ≤ D) :
+    M.det.natDegree ≤ Fintype.card ι * D := by
+  rw [Matrix.det_apply]
+  apply natDegree_sum_le_of_forall_le
+  intro σ _
+  apply (natDegree_smul_le _ _).trans
+  apply (natDegree_prod_le _ _).trans
+  calc
+    _ ≤ ∑ _i : ι, D := Finset.sum_le_sum fun i _ => hM (σ i) i
+    _ = _ := by simp
+
+end Matrix
+
+namespace Polynomial
+
+/-- The degree in the coefficient parameter of a Sylvester resultant is at most the Sylvester
+size times a coefficientwise degree bound. -/
+theorem natDegree_resultant_le {R : Type*} [CommRing R]
+    (f g : R[X][X]) (m n D : ℕ)
+    (hf : ∀ i, (f.coeff i).natDegree ≤ D)
+    (hg : ∀ i, (g.coeff i).natDegree ≤ D) :
+    (f.resultant g m n).natDegree ≤ (m + n) * D := by
+  have hM : ∀ i j, (f.sylvester g m n i j).natDegree ≤ D := by
+    intro i j
+    induction j using Fin.addCases with
+    | left j =>
+      simp only [sylvester, Matrix.of_apply, Fin.addCases_left]
+      split_ifs
+      · exact hg _
+      · simp
+    | right j =>
+      simp only [sylvester, Matrix.of_apply, Fin.addCases_right]
+      split_ifs
+      · exact hf _
+      · simp
+  simpa only [Fintype.card_fin, resultant] using Matrix.natDegree_det_le (f.sylvester g m n) D hM
+
+/-- Padding the second Sylvester degree preserves nonvanishing when the
+first polynomial is irreducible and the second is nonzero of smaller degree. -/
+theorem resultant_ne_zero_of_irreducible_of_natDegree_lt
+    {K : Type*} [Field K] (f g : K[X]) (hf : Irreducible f) (hg : g ≠ 0)
+    (hdeg : g.natDegree < f.natDegree) (n : ℕ) (hn : g.natDegree ≤ n) :
+    f.resultant g f.natDegree n ≠ 0 := by
+  have hcop : IsCoprime f g := hf.coprime_iff_not_dvd.mpr fun h =>
+    (not_le_of_gt hdeg) (natDegree_le_of_dvd h hg)
+  have he : n = g.natDegree + (n - g.natDegree) := by omega
+  rw [he, resultant_add_right_deg _ _ _ _ _ le_rfl, coeff_natDegree]
+  exact mul_ne_zero (pow_ne_zero _ (leadingCoeff_ne_zero.mpr hf.ne_zero))
+    (resultant_ne_zero f g hcop)
 
 end Polynomial

@@ -9,7 +9,7 @@ public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.RingTheory.PowerSeries.Basic
 import CCDN.Algebra.SectionImageRank
 import CCDN.Noether.FormalPlaneBranch
-import CCDN.Noether.PowerSeriesOrderIndependence
+import CCDN.ForMathlib.PowerSeries
 import CCDN.Hilbert.PlaneHilbert
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.RingTheory.PrincipalIdealDomain
@@ -52,7 +52,7 @@ theorem formal_plane_map_eq_zero_iff_dvd {K : Type*} [Field K]
         rw [hφ]
         simp only [h, map_pow, hparam]
       rw [he]
-      exact powerSeries_linearIndependent_of_orders _ Fin.val Fin.val_injective
+      exact PowerSeries.linearIndependent_of_order_injective _ Fin.val Fin.val_injective
         (fun i => PowerSeries.order_X_pow i.val)
     have hh := section_image_rank_le p f.totalDegree
       ⟨f.totalDegree, (f.totalDegree : ℤ) - f.totalDegree.choose 2,

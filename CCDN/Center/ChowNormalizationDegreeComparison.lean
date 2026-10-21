@@ -9,7 +9,7 @@ public import CCDN.Center.ChowNestedIncidence
 public import CCDN.Center.PolynomialCoefficientNormalizationRank
 public import CCDN.Center.ChowLastRowSplit
 public import CCDN.Center.GenericLinearPowerBasis
-public import CCDN.Center.PolynomialFractionCoefficientExtension
+public import CCDN.ForMathlib.FractionRing
 import CCDN.Center.GenericLinearParameterField
 import CCDN.Center.IntermediateFieldParameterTower
 import CCDN.Center.PolynomialCoordinateEmbeddings
@@ -36,7 +36,7 @@ local instance degreeComparisonNestedRing {K σ τ υ : Type*} [Field K]
 map. -/
 lemma polynomialFractionCoefficientMap_X {A K F σ : Type*} [CommRing A] [Field K] [Field F]
     [Algebra A K] [Algebra A F] [Algebra K F] [Algebra (MvPolynomial σ A) F] (i : σ) :
-    polynomialFractionCoefficientMap (A := A) (K := K) (F := F) (σ := σ) (X i) =
+    MvPolynomial.fractionRingCoeffMap (A := A) (K := K) (F := F) (σ := σ) (X i) =
       algebraMap (MvPolynomial σ A) F (X i) :=
   eval₂Hom_X' _ _ i
 
@@ -49,7 +49,7 @@ theorem chow_polynomialFractionCoefficientMap_linearForm
     [IsScalarTower (ChowFirstRowCoordinateRing m I) A F]
     [Algebra (ChowNestedCoordinateRing m I) F]
     [IsScalarTower (ChowFirstRowCoordinateRing m I) (ChowNestedCoordinateRing m I) F] :
-    polynomialFractionCoefficientMap (A := ChowFirstRowCoordinateRing m I) (K := A) (F := F)
+    MvPolynomial.fractionRingCoeffMap (A := ChowFirstRowCoordinateRing m I) (K := A) (F := F)
       (σ := Fin n) (linearForm (fun j =>
         -algebraMap (ChowFirstRowCoordinateRing m I) A (C (Ideal.Quotient.mk I (X j))))) =
       algebraMap (ChowNestedCoordinateRing m I) F
@@ -61,10 +61,10 @@ theorem chow_polynomialFractionCoefficientMap_linearForm
   apply Finset.sum_congr rfl
   intro j _
   rw [map_mul, polynomialFractionCoefficientMap_X, map_mul]
-  have hC : polynomialFractionCoefficientMap (A := T) (K := A) (F := F) (σ := Fin n)
+  have hC : MvPolynomial.fractionRingCoeffMap (A := T) (K := A) (F := F) (σ := Fin n)
       (C (-algebraMap T A (C (Ideal.Quotient.mk I (X j))))) =
       -algebraMap T F (C (Ideal.Quotient.mk I (X j))) := by
-    rw [polynomialFractionCoefficientMap, eval₂Hom_C, map_neg]
+    rw [MvPolynomial.fractionRingCoeffMap, eval₂Hom_C, map_neg]
     exact congrArg Neg.neg (IsScalarTower.algebraMap_apply T A F _).symm
   rw [hC]
   have hC' : algebraMap N F (C (C (Ideal.Quotient.mk I (X j)))) =
@@ -105,14 +105,14 @@ theorem chow_univariate_degree_eq_normalization_rank
   let : IsScalarTower E A F := inferInstance
   let : IsScalarTower K E F := IsScalarTower.to₁₂₄ K E A F
   let : Algebra (MvPolynomial (Fin n) A) F :=
-    (polynomialFractionCoefficientMap (A := T) (K := A) (F := F) (σ := Fin n)).toAlgebra
-  let : IsFractionRing (MvPolynomial (Fin n) A) F := polynomial_fraction_coefficient_extension
+    (MvPolynomial.fractionRingCoeffMap (A := T) (K := A) (F := F) (σ := Fin n)).toAlgebra
+  let : IsFractionRing (MvPolynomial (Fin n) A) F := MvPolynomial.isFractionRing_fractionRingCoeffMap
   let : IsScalarTower A (MvPolynomial (Fin n) A) F := IsScalarTower.of_algebraMap_eq' (by
     apply RingHom.ext
     intro a
-    change algebraMap A F a = polynomialFractionCoefficientMap (A := T) (K := A) (F := F)
+    change algebraMap A F a = MvPolynomial.fractionRingCoeffMap (A := T) (K := A) (F := F)
       (C a)
-    simp [polynomialFractionCoefficientMap])
+    simp [MvPolynomial.fractionRingCoeffMap])
   let : IsScalarTower E (MvPolynomial (Fin n) A) F := IsScalarTower.to₁₃₄ E A _ F
   let : Algebra (ChowIncidenceCoordinateRing m I) F := (chowNestedIncidenceMap I).toAlgebra
   let : IsScalarTower K (ChowIncidenceCoordinateRing m I) F :=

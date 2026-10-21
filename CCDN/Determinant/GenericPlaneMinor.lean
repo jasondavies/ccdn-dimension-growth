@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Determinant.GenericPlaneSmoothness
-public import CCDN.ForMathlib.MatrixRank
+public import CCDN.ForMathlib.Matrix
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.SmoothPlaneMinor

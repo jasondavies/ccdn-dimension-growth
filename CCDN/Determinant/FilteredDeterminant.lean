@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.MvPolynomial
 import CCDN.Determinant.LocalDeterminant
 import CCDN.Determinant.ModularOriginGenerators
 import CCDN.Determinant.SingularApproximation
-import CCDN.Determinant.SmoothLocalDeterminant
+import CCDN.ForMathlib.Matrix
 /-! Local determinant divisibility in arbitrary dimension. The exponent is
 computed from the cumulative dimensions of the origin-adic layers. -/
 
@@ -135,7 +135,7 @@ theorem origin_filtration_pow_dvd_det_mod {p n s e : ℕ} [Fact p.Prime]
     rw [hU i ⟨k, l⟩]
     dsimp only [U, V]
     ring
-  have hd := dvd_det_sub_of_dvd_entries (Matrix.of fun i j => eval (x i) (F j))
+  have hd := Matrix.dvd_det_sub_det_of_dvd_sub (Matrix.of fun i j => eval (x i) (F j))
     (U * V) ((p : ℤ) ^ N) (fun i j => by
       rw [Matrix.of_apply, hprod]
       exact hc j (x i) (hfx i) (hx i))

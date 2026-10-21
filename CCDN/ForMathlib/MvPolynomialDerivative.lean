@@ -6,16 +6,21 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Algebra.CharP.Defs
 import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Mathlib.Tactic.Finiteness.Attr
 
 /-!
-# Vanishing partial derivatives
+# Partial derivatives: the chain rule and vanishing derivatives
 
+Partial derivatives commute with homomorphisms of polynomial algebras by the chain rule.
 If `∂f/∂xᵢ = 0`, then each exponent of `xᵢ` occurring in `f` is zero in the coefficient ring.
 Below the characteristic this means that `xᵢ` does not occur in `f`.
 
 ## Main results
 
+* `MvPolynomial.pderiv_algHom`: the chain rule for a homomorphism of polynomial algebras.
+* `CharP.natCast_ne_zero_of_lt`: a positive natural number below the characteristic is nonzero.
 * `MvPolynomial.coeff_mul_natCast_eq_zero_of_pderiv_eq_zero`: the coefficient of `m` is
   annihilated by the exponent `m i`.
 * `MvPolynomial.notMem_vars_of_pderiv_eq_zero`: a variable with vanishing partial derivative does
@@ -26,7 +31,42 @@ Below the characteristic this means that `xᵢ` does not occur in `f`.
 
 @[expose] public section
 
+namespace CharP
+
+/-- A positive natural number below the characteristic is nonzero. -/
+theorem natCast_ne_zero_of_lt (R : Type*) [AddMonoidWithOne R] {p : ℕ} [CharP R p] {n : ℕ}
+    (hn : n ≠ 0) (hnp : n < p) : (n : R) ≠ 0 := fun h =>
+  Nat.not_dvd_of_pos_of_lt (Nat.pos_of_ne_zero hn) hnp ((cast_eq_zero_iff R p n).mp h)
+
+end CharP
+
 namespace MvPolynomial
+
+/-- The polynomial chain rule for a homomorphism of polynomial algebras. -/
+theorem pderiv_algHom {K σ τ : Type*} [CommRing K] [Fintype σ]
+    (φ : MvPolynomial σ K →ₐ[K] MvPolynomial τ K) (f : MvPolynomial σ K) (k : τ) :
+    pderiv k (φ f) = ∑ i, φ (pderiv i f) * pderiv k (φ (X i)) := by
+  classical
+  have hC (a : K) : φ (C a) = C a := φ.commutes a
+  induction f using MvPolynomial.induction_on with
+  | C a => simp [hC]
+  | add f g hf hg => simp only [map_add, hf, hg, add_mul, Finset.sum_add_distrib]
+  | mul_X f j hf =>
+    rw [map_mul, pderiv_mul, hf]
+    calc
+      _ = ∑ i, (φ (pderiv i f) * φ (X j) * pderiv k (φ (X i)) +
+          if j = i then φ f * pderiv k (φ (X i)) else 0) := by
+        simp only [Finset.sum_add_distrib, Finset.sum_ite_eq, Finset.mem_univ, ite_true]
+        congr 1
+        rw [Finset.sum_mul]
+        apply Finset.sum_congr rfl
+        intro i _
+        ring
+      _ = _ := by
+        apply Finset.sum_congr rfl
+        intro i _
+        by_cases hi : j = i <;>
+          simp [pderiv_X, hi, add_mul, mul_comm, add_comm]
 
 variable {R σ : Type*}
 

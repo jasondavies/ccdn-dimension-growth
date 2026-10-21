@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import CCDN.Algebra.HomogeneousRankDichotomy
-import CCDN.Analysis.ElementaryLogBounds
+import CCDN.ForMathlib.Log
 import CCDN.Auxiliary.PlaneAuxiliaryDegree
 import CCDN.ForMathlib.Log
 /-! The complementary large-coefficient-height auxiliary-degree estimate. -/
@@ -145,7 +145,7 @@ theorem plane_auxiliary_large_height_log_bound {s d M : ℕ} {B L H T K : ℝ}
   have hbox := plane_box_term_le hd hMlarge hr hB hheight
   have hcoef := plane_coefficient_term_ge (T := T) hd hMlarge hr hL hposition
   have hlogs := plane_rank_log_ge hd hMlarge hr
-  have hlogA := log_one_add_sub_quarter_le
+  have hlogA := Real.log_one_add_sub_div_four_le
     (show 0 ≤ Real.log H / (d : ℝ) ^ 2 by have := Real.log_nonneg hH; positivity)
   linarith
 

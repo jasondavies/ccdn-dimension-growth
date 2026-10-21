@@ -15,7 +15,7 @@ import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.ClosedFormScaling
 import CCDN.Noether.UniversalPlaneDegree
 import CCDN.Noether.UniversalPlaneWitness
-import CCDN.ForMathlib.MatrixRank
+import CCDN.ForMathlib.Matrix
 import CCDN.ForMathlib.MvPolynomial
 /-! A nonzero polynomial of degree at most 2*d^3 detects all plane sections
 that lose the full degree or fail geometric irreducibility. -/

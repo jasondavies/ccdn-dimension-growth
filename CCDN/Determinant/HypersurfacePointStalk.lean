@@ -99,7 +99,7 @@ local instance : (hypersurfacePointIdeal f a).IsMaximal :=
 /-- The local ring's layer at a is identified with the explicitly
 computed origin layer of f(X+a). -/
 def hypersurfacePointStalkLayerEquiv (k : ℕ) :
-    idealPowerLayer K (A := HypersurfacePointStalk f a)
+    Ideal.powerLayer K (A := HypersurfacePointStalk f a)
       (maximalIdeal (HypersurfacePointStalk f a)) k ≃ₗ[K]
       originLayer (affineTranslation K a f) k := by
   let e := hypersurfaceTranslationEquiv f a
@@ -111,12 +111,18 @@ def hypersurfacePointStalkLayerEquiv (k : ℕ) :
   exact l'.trans (hypersurfaceCoordinateLayerEquiv (affineTranslation K a f) k)
 
 theorem hypersurfacePointStalkLayer_finrank (k : ℕ) :
-    Module.finrank K (idealPowerLayer K (A := HypersurfacePointStalk f a)
+    Module.finrank K (Ideal.powerLayer K (A := HypersurfacePointStalk f a)
       (maximalIdeal (HypersurfacePointStalk f a)) k) =
       Module.finrank K (originLayer (affineTranslation K a f) k) :=
   (hypersurfacePointStalkLayerEquiv f a k).finrank_eq
 
 end Stalk
+
+/-- `Ideal.powerLayer`, under the name used in the audited statement
+`hypersurfacePointStalk_hilbert_eq`. -/
+abbrev idealPowerLayer (K : Type*) [Field K] {A : Type*} [CommRing A] [Algebra K A]
+    (I : Ideal A) (k : ℕ) : Submodule K (A ⧸ I ^ (k + 1)) :=
+  Ideal.powerLayer K I k
 
 /-- Exact binomial local Hilbert function at every K-rational point, in
 every characteristic, with multiplicity given by its first form. -/

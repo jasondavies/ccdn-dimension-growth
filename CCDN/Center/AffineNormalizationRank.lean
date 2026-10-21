@@ -10,10 +10,10 @@ public import CCDN.Projection.ProjectiveClosureProjection
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Projection.ProjectiveClosureSpecialization
-import CCDN.Center.AffineFractionPolynomialField
+import CCDN.ForMathlib.FractionRing
 import CCDN.Center.ClosurePolynomialFractionField
 import CCDN.Center.HomogeneousNormalizationRank
-import CCDN.Center.PolynomialFractionCoefficientExtension
+import CCDN.ForMathlib.FractionRing
 import CCDN.Center.RadialParameterFieldRank
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
 import CCDN.Hilbert.HilbertFullDimension
@@ -104,20 +104,20 @@ theorem affine_normalization_functionField_finrank [CharZero K]
     (affine_projection_integral_of_closure_integral I a hint) d hdimdeg
   let P := MvPolynomial Unit A
   let E := FractionRing P
-  let β : F →ₐ[K] E := fractionPolynomialCoefficientEmbedding
+  let β : F →ₐ[K] E := MvPolynomial.coeffFractionRingEmbedding
     (K := K) (A := A) (F := F) (E := E) (σ := Unit)
   let : Algebra F E := β.toRingHom.toAlgebra
   let : IsScalarTower K F E := IsScalarTower.of_algHom β
-  let : IsScalarTower A F E := fraction_polynomial_coefficient_tower
+  let : IsScalarTower A F E := MvPolynomial.isScalarTower_coeffFractionRingEmbedding
     (K := K) (A := A) (F := F) (E := E) (σ := Unit)
-  let ρ := polynomialFractionCoefficientMap (A := A) (K := F) (F := E) (σ := Unit)
+  let ρ := MvPolynomial.fractionRingCoeffMap (A := A) (K := F) (F := E) (σ := Unit)
   let : Algebra (MvPolynomial Unit F) E := ρ.toAlgebra
   let : IsScalarTower F (MvPolynomial Unit F) E := IsScalarTower.of_algebraMap_eq' (by
     ext x
     change algebraMap F E x = ρ (C x)
-    simp only [ρ,polynomialFractionCoefficientMap,eval₂Hom_C])
+    simp only [ρ,MvPolynomial.fractionRingCoeffMap,eval₂Hom_C])
   let : IsFractionRing (MvPolynomial Unit F) E :=
-    polynomial_fraction_coefficient_extension (A := A) (K := F) (F := E) (σ := Unit)
+    MvPolynomial.isFractionRing_fractionRingCoeffMap (A := A) (K := F) (F := E) (σ := Unit)
   let θ : B →ₐ[K] E := closurePolynomialFieldMap (F := E) I
   let : Algebra B E := θ.toRingHom.toAlgebra
   let : IsScalarTower K B E := IsScalarTower.of_algHom θ
@@ -130,7 +130,7 @@ theorem affine_normalization_functionField_finrank [CharZero K]
   let t := algebraMap (MvPolynomial Unit F) E (X ())
   have ht : t = algebraMap P E (X ()) := by
     change ρ (X ()) = _
-    simp only [ρ,polynomialFractionCoefficientMap,eval₂Hom_X']
+    simp only [ρ,MvPolynomial.fractionRingCoeffMap,eval₂Hom_X']
     rfl
   have hcoords : (fun i => algebraMap B E
       ((Ideal.Quotient.mk J) (closureProjectionCoordinates a i))) =

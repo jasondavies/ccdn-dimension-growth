@@ -8,7 +8,7 @@ module
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
-import CCDN.Projection.FiniteBirationalConductor
+import CCDN.ForMathlib.FractionRing
 import CCDN.Projection.HomogeneousBirationalDegree
 import CCDN.Projection.IntegralProjectionHilbert
 import CCDN.Projection.ProjectionFractionField
@@ -61,7 +61,7 @@ theorem homogeneous_finite_birational_projection_leadingCoeff_eq
   let : Algebra.FiniteType R A :=
     Algebra.FiniteType.of_restrictScalars_finiteType K R A
   let : Module.Finite R A := Algebra.IsIntegral.finite
-  obtain ⟨c, hc, hconductor⟩ := exists_nonzero_finite_birational_conductor R A F
+  obtain ⟨c, hc, hconductor⟩ := IsFractionRing.exists_ne_zero_mul_mem_range_of_finite R A F
   obtain ⟨p, hp⟩ := Ideal.Quotient.mk_surjective c
   let q := aeval a p
   have hq : (Ideal.Quotient.mk I) q = φ c := by

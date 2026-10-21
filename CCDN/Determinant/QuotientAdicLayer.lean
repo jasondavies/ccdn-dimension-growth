@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.NoetherianLocalLayers
+public import CCDN.ForMathlib.IdealPowerLayer
 
 /-! Adic layers in a quotient ring are identified with the corresponding
 images in the single quotient by the sum of the equation ideal and the
@@ -23,7 +23,7 @@ def quotientAdicQuotientEquiv (J I : Ideal A) (N : ℕ) :
     (DoubleQuot.quotQuotEquivQuotSupₐ K J (I ^ N))
 
 lemma quotientAdicQuotientEquiv_layer (J I : Ideal A) (k : ℕ) :
-    (idealPowerLayer K (I.map (Ideal.Quotient.mk J)) k).map
+    (Ideal.powerLayer K (I.map (Ideal.Quotient.mk J)) k).map
       (quotientAdicQuotientEquiv (K := K) J I (k + 1)).toLinearMap =
       ((I ^ k).restrictScalars K).map
         (Ideal.Quotient.mkₐ K (J ⊔ I ^ (k + 1))).toLinearMap := by
@@ -48,7 +48,7 @@ lemma quotientAdicQuotientEquiv_layer (J I : Ideal A) (k : ℕ) :
     exact Ideal.mem_map_of_mem _ hx
 
 def quotientAdicLayerEquiv (J I : Ideal A) (k : ℕ) :
-    idealPowerLayer K (I.map (Ideal.Quotient.mk J)) k ≃ₗ[K]
+    Ideal.powerLayer K (I.map (Ideal.Quotient.mk J)) k ≃ₗ[K]
       ((I ^ k).restrictScalars K).map
         (Ideal.Quotient.mkₐ K (J ⊔ I ^ (k + 1))).toLinearMap :=
   (Submodule.equivMapOfInjective

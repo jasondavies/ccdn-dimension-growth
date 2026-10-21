@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Polynomial.Derivative
 public import Mathlib.RingTheory.PowerSeries.Basic
-import CCDN.Determinant.SmoothLocalDeterminant
+import CCDN.ForMathlib.Polynomial
 import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 import Mathlib.Data.Nat.Factorial.DoubleFactorial
 import Mathlib.RingTheory.SimpleRing.Principal
@@ -40,7 +40,7 @@ lemma formalNewton_step {K : Type*} [Field K]
     convert dvd_neg.mpr hh using 1
     dsimp [g']
     ring
-  obtain ⟨q, he, hq⟩ := polynomial_divided_difference f g' g
+  obtain ⟨q, he, hq⟩ := Polynomial.exists_divided_difference f g' g
   have hqder : (PowerSeries.X : PowerSeries K) ∣ q - f.derivative.eval g := hXdiff.trans hq
   have hbase : (PowerSeries.X : PowerSeries K) ∣ 1 - PowerSeries.C u * f.derivative.eval g := by
     apply PowerSeries.X_dvd_iff.mpr
@@ -129,7 +129,7 @@ theorem formal_simple_root_unique {K : Type*} [Field K]
     (hder : (f.derivative.map PowerSeries.constantCoeff).eval b ≠ 0)
     {g h : PowerSeries K} (hg : PowerSeries.constantCoeff g = b)
     (hh : PowerSeries.constantCoeff h = b) (hfg : f.eval g = 0) (hfh : f.eval h = 0) : g = h := by
-  obtain ⟨q, he, hq⟩ := polynomial_divided_difference f g h
+  obtain ⟨q, he, hq⟩ := Polynomial.exists_divided_difference f g h
   have hX : (PowerSeries.X : PowerSeries K) ∣ g - h := PowerSeries.X_dvd_iff.mpr (by simp [hg, hh])
   have hc := PowerSeries.X_dvd_iff.mp (hX.trans hq)
   simp only [map_sub, ← Polynomial.eval_map_apply, hh, sub_eq_zero] at hc

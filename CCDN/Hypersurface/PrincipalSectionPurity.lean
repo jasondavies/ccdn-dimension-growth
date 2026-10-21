@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.SimpleRing.Principal
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Projection.IntegralProjectionHilbert
 import CCDN.Projection.LinearNormalizationInfinite
-import CCDN.Algebra.NormalizationHeightOne
+import CCDN.ForMathlib.IdealHeight
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 /-! Principal sections of affine prime varieties are pure dimensional.
 A linear normalization is constructed from the Hilbert dimension.
@@ -57,8 +57,8 @@ theorem principal_section_minimalPrime_hilbert_dimension
     exact hf (Ideal.Quotient.eq_zero_iff_mem.mp hqf)
   have hQheight : Q.height ≤ 1 := Ideal.map_height_le_one_of_mem_minimalPrimes hP
   let J := Q.under R
-  have hJheight : J.height = 1 := integral_prime_under_height_one R A Q hQ0 hQheight
-  let : J.IsPrincipal := integral_prime_under_isPrincipal R A Q hQ0 hQheight
+  have hJheight : J.height = 1 := Ideal.height_under_eq_one_of_height_le_one R A Q hQ0 hQheight
+  let : J.IsPrincipal := Ideal.isPrincipal_under_of_height_le_one R A Q hQ0 hQheight
   let F : R := Submodule.IsPrincipal.generator J
   have hFspan : Ideal.span {F} = J := Ideal.span_singleton_generator J
   have hF0 : F ≠ 0 := by

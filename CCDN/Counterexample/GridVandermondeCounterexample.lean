@@ -7,7 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.Vandermonde
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import CCDN.ForMathlib.Fin
+import CCDN.ForMathlib.ZLattice
 
 /-! Primitive points and homogeneous columns of differing degrees on one
 fixed projective line. Their evaluation matrix is a Kronecker product

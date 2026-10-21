@@ -8,17 +8,24 @@ module
 public import Mathlib.RingTheory.PowerSeries.Order
 public import Mathlib.LinearAlgebra.LinearIndependent.Defs
 
-/-! Power-series independence from distinct initial orders, including the
-mixed products underlying the Frobenius nonvanishing step in point counting. -/
+/-!
+# Linear independence of power series with distinct orders
+
+## Main results
+
+* `PowerSeries.linearIndependent_of_coeff_eq_zero_of_lt`: a family of power series whose first
+  nonzero coefficients sit at distinct positions is linearly independent.
+* `PowerSeries.linearIndependent_of_order_injective`: power series with distinct finite orders
+  are linearly independent.
+-/
 
 @[expose] public section
-namespace CCDN
-noncomputable section
-open PowerSeries
+
+namespace PowerSeries
 
 /-- A family with distinct initial nonzero coefficient positions is linearly
 independent. The proof selects the smallest position with nonzero weight. -/
-theorem powerSeries_linearIndependent_of_initial_coefficients
+theorem linearIndependent_of_coeff_eq_zero_of_lt
     {K ι : Type*} [Field K] [Fintype ι] [DecidableEq ι]
     (f : ι → PowerSeries K) (n : ι → ℕ) (hn : Function.Injective n)
     (hzero : ∀ i j, j < n i → PowerSeries.coeff j (f i) = 0)
@@ -47,15 +54,14 @@ theorem powerSeries_linearIndependent_of_initial_coefficients
   exact (mul_ne_zero haj (hne j)) he
 
 /-- Distinct finite power-series orders give linear independence. -/
-theorem powerSeries_linearIndependent_of_orders
+theorem linearIndependent_of_order_injective
     {K ι : Type*} [Field K] [Fintype ι] [DecidableEq ι]
     (f : ι → PowerSeries K) (n : ι → ℕ) (hn : Function.Injective n)
     (horder : ∀ i, (f i).order = n i) : LinearIndependent K f := by
-  apply powerSeries_linearIndependent_of_initial_coefficients f n hn
+  apply linearIndependent_of_coeff_eq_zero_of_lt f n hn
   · intro i j hj
     exact PowerSeries.coeff_of_lt_order j (by rw [horder]; exact_mod_cast hj)
   · intro i
     exact (PowerSeries.order_eq_nat.mp (horder i)).1
 
-end
-end CCDN
+end PowerSeries

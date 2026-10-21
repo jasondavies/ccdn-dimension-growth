@@ -11,7 +11,7 @@ public import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.HypersurfaceResidue
 import CCDN.Determinant.ProjectiveHypersurfaceLocal
 import CCDN.Determinant.ProjectiveLocalDeterminant
-import CCDN.Determinant.SmoothLocalDeterminant
+import CCDN.ForMathlib.Matrix
 /-! Local determinant divisibility for homogeneous columns of arbitrary
 degrees, with the normalization required by affine-chart evaluation.
 
@@ -70,7 +70,7 @@ theorem mixed_degree_projective_chart_det_divisibility {p n μ s d : ℕ} [Fact 
     hypersurface_residue_pow_dvd_det_mod (affineChart (n + 2) f) a hf hμ x hx hxf
       (fun j => affineChart (n + 2) (F j))
   have hAD : q ∣ A.det - D.det := by
-    apply dvd_det_sub_of_dvd_entries
+    apply Matrix.dvd_det_sub_det_of_dvd_sub
     intro i j
     exact projective_hypersurface_chart_eval_congr (z i) (hu i) (F j) (hF j)
   simpa only [sub_sub_cancel] using dvd_sub hA hAD

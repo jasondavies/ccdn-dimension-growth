@@ -47,7 +47,7 @@ def hypersurfaceOriginIdeal (f : MvPolynomial σ K) :
 /-- The affine coordinate ring's origin-adic layer is the polynomial
 truncation layer used to compute its Hilbert function. -/
 def hypersurfaceCoordinateLayerEquiv (f : MvPolynomial σ K) (k : ℕ) :
-    idealPowerLayer K (hypersurfaceOriginIdeal f) k ≃ₗ[K] originLayer f k :=
+    Ideal.powerLayer K (hypersurfaceOriginIdeal f) k ≃ₗ[K] originLayer f k :=
   quotientAdicLayerEquiv (Ideal.span {f}) (idealOfVars σ K) k
 
 end

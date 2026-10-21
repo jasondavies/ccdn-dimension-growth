@@ -6,11 +6,15 @@ Authors: Jason Davies
 module
 
 public import Mathlib.FieldTheory.Separable
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Algebra.Group.Units.Hom
+public import Mathlib.Algebra.Ring.Equiv
 import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Mathlib.FieldTheory.PrimitiveElement
+import Mathlib.Tactic.LinearCombination
 
 /-!
-# Counting monic divisors and intermediate fields
+# Counting monic divisors and intermediate fields; Hilbert 90 for an involution
 
 Monic divisors of a nonzero polynomial are determined by their multisets of roots in an
 algebraic closure, so there are at most `2 ^ natDegree` of them. Through a primitive element,
@@ -23,9 +27,16 @@ minimal polynomial.
   most `2 ^ f.natDegree` monic divisors.
 * `IntermediateField.card_le_two_pow_finrank`: a finite separable extension `E / F` has at most
   `2 ^ finrank F E` intermediate fields.
+* `RingEquiv.hilbert90_of_involutive`: Hilbert 90 for a nontrivial involution `σ` of a field,
+  with an explicit construction that also works in characteristic two: if `a σ(a) = 1`, then
+  `a σ(b) = b` for some `b ≠ 0`. `RingEquiv.hilbert90_units_of_involutive` is the unit-group form.
+* `RingEquiv.exists_invariant_of_involutive`: for a compatible homomorphism `P` from the units,
+  an element `I` with `τ I = P a * I` and `a σ(a) = 1` has a `τ`-invariant multiple `P b * I`.
 -/
 
 @[expose] public section
+
+section
 
 open Module Polynomial IntermediateField
 
@@ -96,3 +107,54 @@ theorem card_le_two_pow_finrank
       (Polynomial.map_ne_zero (minpoly.ne_zero_of_finite F α)))
 
 end IntermediateField
+
+end
+
+namespace RingEquiv
+
+variable {K : Type*} [Field K]
+
+/-- A norm-one scalar for a nontrivial involution is a multiplicative
+coboundary. The explicit construction also works in characteristic two. -/
+theorem hilbert90_of_involutive (σ : K ≃+* K) (hσ : Function.Involutive σ)
+    (hσne : σ ≠ RingEquiv.refl K) {a : K} (ha : a * σ a = 1) :
+    ∃ b : K, b ≠ 0 ∧ a * σ b = b := by
+  by_cases h : 1 + a = 0
+  · have ha' : a = -1 := by linear_combination h
+    obtain ⟨z, hz⟩ : ∃ z : K, σ z ≠ z := by
+      by_contra hn
+      push Not at hn
+      exact hσne (RingEquiv.ext hn)
+    refine ⟨z - σ z, sub_ne_zero.mpr hz.symm, ?_⟩
+    rw [ha', map_sub]
+    change -1 * (σ z - σ (σ z)) = z - σ z
+    rw [hσ]
+    ring
+  · refine ⟨1 + a, h, ?_⟩
+    rw [map_add, map_one, mul_add, mul_one, ha, add_comm]
+
+/-- Hilbert 90 for a nontrivial involution, in the unit group: a unit `a` with
+`a σ(a) = 1` has the form `b / σ(b)` for some unit `b`. -/
+theorem hilbert90_units_of_involutive (σ : K ≃+* K) (hσ : Function.Involutive σ)
+    (hσne : σ ≠ RingEquiv.refl K) (a : Kˣ)
+    (ha : (a : K) * σ (a : K) = 1) :
+    ∃ b : Kˣ, a * Units.map σ.toMonoidHom b = b := by
+  obtain ⟨b, hb, hab⟩ := hilbert90_of_involutive σ hσ hσne ha
+  exact ⟨Units.mk0 b hb, Units.ext hab⟩
+
+/-- If the scalar comparison of an element with its conjugate has norm
+one, multiplication by a principal element produces an invariant
+representative. Here the principal map is a homomorphism. -/
+theorem exists_invariant_of_involutive
+    {A : Type*} [CommGroup A]
+    (σ : K ≃+* K) (hσ : Function.Involutive σ)
+    (hσne : σ ≠ RingEquiv.refl K) (τ : A →* A) (P : Kˣ →* A)
+    (hcompat : ∀ b : Kˣ, τ (P b) = P (Units.map σ.toMonoidHom b))
+    (I : A) (a : Kˣ) (hI : τ I = P a * I)
+    (ha : (a : K) * σ (a : K) = 1) :
+    ∃ b : Kˣ, τ (P b * I) = P b * I := by
+  obtain ⟨b, hb⟩ := hilbert90_units_of_involutive σ hσ hσne a ha
+  refine ⟨b, ?_⟩
+  rw [map_mul, hcompat, hI, ← mul_assoc, mul_comm (P _), ← map_mul, hb]
+
+end RingEquiv

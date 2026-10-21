@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.AffinePointZariski
-import CCDN.ForMathlib.MatrixRank
+import CCDN.ForMathlib.Matrix
 /-! Zariski density of good full-row-rank matrices inside a
 prescribed-zero-column subspace. In particular this covers centers lying
 at infinity, without inferring density there from density in the ambient

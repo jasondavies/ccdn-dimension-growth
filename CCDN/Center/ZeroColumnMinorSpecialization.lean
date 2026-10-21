@@ -8,9 +8,9 @@ module
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Algebra.IntegerPolynomialAvoidance
-import CCDN.Center.MinorCoordinateDegree
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Center.MinorSpecialization
-import CCDN.ForMathlib.MatrixRank
+import CCDN.ForMathlib.Matrix
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 /-! Sharp bounded specialization of maximal-minor conditions while keeping
 prescribed matrix columns equal to zero. The distinguished zero column is
@@ -87,7 +87,7 @@ lemma zeroColumnUniversalMinor_degreeOf {r n : ℕ} (Z : Finset (Fin n))
 lemma zero_column_minor_substitution_degreeOf_le {r n : ℕ} (Z : Finset (Fin n))
     (F : MvPolynomial (Fin r ↪ Fin n) ℚ) (p : Fin r × Fin n) :
     (aeval (zeroColumnUniversalMinor Z) F).degreeOf p ≤ F.totalDegree := by
-  simpa only [one_mul] using aeval_degreeOf_le (zeroColumnUniversalMinor Z) p 1
+  simpa only [one_mul] using MvPolynomial.degreeOf_aeval_le (zeroColumnUniversalMinor Z) p 1
     (fun c => zeroColumnUniversalMinor_degreeOf Z c p) F
 
 /-- Constant case of the zero-column specialization: a nonzero maximal minor of `A` avoids the

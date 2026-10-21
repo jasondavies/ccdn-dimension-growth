@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.NoetherianLocalLayers
+public import CCDN.ForMathlib.IdealPowerLayer
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-! Localization at a maximal ideal preserves every adic layer.
@@ -26,9 +26,9 @@ def localizationAdicQuotientEquiv (N : ℕ) :
   (IsLocalization.AtPrime.equivQuotMaximalIdealPow I S N).restrictScalars K
 
 lemma localizationAdicQuotientEquiv_layer (k : ℕ) :
-    (idealPowerLayer K I k).map
+    (Ideal.powerLayer K I k).map
       (localizationAdicQuotientEquiv (K := K) (S := S) I (k + 1)).toLinearMap =
-        idealPowerLayer K (maximalIdeal S) k := by
+        Ideal.powerLayer K (maximalIdeal S) k := by
   let e := localizationAdicQuotientEquiv (K := K) (S := S) I (k + 1)
   ext z
   constructor
@@ -61,7 +61,7 @@ lemma localizationAdicQuotientEquiv_layer (k : ℕ) :
 /-- Localization preserves the `I^k/I^(k+1)` layer, represented
 by its image in the next quotient. -/
 def localizationAdicLayerEquiv (k : ℕ) :
-    idealPowerLayer K I k ≃ₗ[K] idealPowerLayer K (maximalIdeal S) k :=
+    Ideal.powerLayer K I k ≃ₗ[K] Ideal.powerLayer K (maximalIdeal S) k :=
   (Submodule.equivMapOfInjective
     (localizationAdicQuotientEquiv (K := K) (S := S) I (k + 1)).toLinearMap
     (localizationAdicQuotientEquiv (K := K) (S := S) I (k + 1)).injective _).trans
