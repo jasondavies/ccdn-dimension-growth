@@ -35,6 +35,7 @@ public import CCDN.Algebra.HomogeneousScalarExtension
 public import CCDN.Algebra.HomogeneousSlice
 public import CCDN.Algebra.HomogeneousTranslation
 public import CCDN.Algebra.IdealScalarDescent
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.IntegerLinearForms
 public import CCDN.Algebra.IntegerPolynomialAvoidance
 public import CCDN.Algebra.IntegerRationalIrreducibility

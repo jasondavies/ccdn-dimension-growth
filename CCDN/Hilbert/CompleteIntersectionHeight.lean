@@ -42,9 +42,5 @@ theorem minimalPrime_pair_height_two {R : Type*} [CommRing R] [IsDomain R]
   norm_num at hlo
   exact le_antisymm hhi hlo
 
-/-- The zero locus of an ideal, with coordinates in its coefficient field. -/
-def coordinateZeroLocus {K σ : Type*} [CommRing K] (I : Ideal (MvPolynomial σ K)) : Set (σ → K) :=
-  {x | ∀ p ∈ I, MvPolynomial.eval x p = 0}
-
 end
 end CCDN

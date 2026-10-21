@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.CompleteIntersectionHeight
 public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Hilbert.FilteredHilbertLinearity
@@ -113,14 +114,14 @@ lemma algebraic_eq_scalar_of_point {K A : Type*} [Field K] [CommRing A]
 
 /-- Evaluation at a rational point descends to its prime coordinate ring. -/
 def coordinatePoint {K σ : Type*} [Field K]
-    (p : Ideal (MvPolynomial σ K)) (z : σ → K) (hz : z ∈ coordinateZeroLocus p) :
+    (p : Ideal (MvPolynomial σ K)) (z : σ → K) (hz : z ∈ idealZeroLocus p) :
     (MvPolynomial σ K ⧸ p) →ₐ[K] K :=
   Ideal.Quotient.liftₐ p (MvPolynomial.aeval z) (by
     intro f hf
     simpa only [MvPolynomial.aeval_eq_eval] using hz f hf)
 
 @[simp] lemma coordinatePoint_mk {K σ : Type*} [Field K]
-    (p : Ideal (MvPolynomial σ K)) (z : σ → K) (hz : z ∈ coordinateZeroLocus p)
+    (p : Ideal (MvPolynomial σ K)) (z : σ → K) (hz : z ∈ idealZeroLocus p)
     (f : MvPolynomial σ K) :
     coordinatePoint p z hz ((Ideal.Quotient.mk p) f) = MvPolynomial.eval z f := by
   simp [coordinatePoint, Ideal.Quotient.liftₐ_apply]
@@ -129,7 +130,7 @@ def coordinatePoint {K σ : Type*} [Field K]
 transcendental coordinate over its base field. -/
 theorem height_two_transcendental_coordinate_of_point {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
-    (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) :
+    (z : Fin 3 → K) (hz : z ∈ idealZeroLocus p) :
     ∃ j : Fin 3, Transcendental K ((Ideal.Quotient.mk p) (X j)) := by
   classical
   by_contra h
@@ -161,7 +162,7 @@ theorem height_two_transcendental_coordinate_of_point {K : Type*} [Field K]
  any eventual linear Hilbert formula, independently of its cutoff. -/
 theorem height_two_eventual_slope_pos_of_point {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
-    (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) {d : ℕ}
+    (z : Fin 3 → K) (hz : z ∈ idealZeroLocus p) {d : ℕ}
     (hlinear : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
       (Module.finrank K (filteredCoordinateSpace p n) : ℤ) = (d : ℤ) * n + c) :
     0 < d := by

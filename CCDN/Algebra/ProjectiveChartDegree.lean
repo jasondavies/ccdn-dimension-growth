@@ -124,8 +124,7 @@ theorem projective_chart_degree {F : Type*} [Field F] [Algebra ℚ F] {n d : ℕ
   refine ⟨N, c, ?_⟩
   intro M hM
   have he := projective_chart_filtered_finrank I q hq h0 M
-  change Module.finrank ℚ (coordinateSpace _ M) = _ at he
-  change (Module.finrank ℚ (coordinateSpace _ M) : ℤ) = _
+  change (Module.finrank ℚ (filteredCoordinateSpace _ M) : ℤ) = _
   rw [he]
   exact hN M hM
 
