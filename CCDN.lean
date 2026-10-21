@@ -32,6 +32,7 @@ public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.IntegerLinearForms
 public import CCDN.Algebra.IntegerPolynomialAvoidance
 public import CCDN.Algebra.IntegerRationalIrreducibility
+public import CCDN.Algebra.IntegralMinpolyDegree
 public import CCDN.Algebra.LinearForm
 public import CCDN.Algebra.ModularPolynomialLift
 public import CCDN.Algebra.MonomialEvaluationMatrix
@@ -403,7 +404,6 @@ public import CCDN.Height.ComplexGridInterpolation
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.FiniteFieldSectionCount
 public import CCDN.Height.IntegerCoefficientHeight
-public import CCDN.Height.IntegralAlgebraPointCount
 public import CCDN.Height.MultivariateGridHeight
 public import CCDN.Height.PolynomialBoxHeight
 public import CCDN.Height.PrimitiveIntegerPolynomial

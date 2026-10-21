@@ -9,7 +9,7 @@ public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import CCDN.Algebra.BoundedLinearSeparation
-import CCDN.Height.IntegralAlgebraPointCount
+import CCDN.Algebra.IntegralMinpolyDegree
 import CCDN.Projection.IntegralProjectionFiberCount
 import Mathlib.FieldTheory.PurelyInseparable.Basic
 import Mathlib.RingTheory.Polynomial.RationalRoot
