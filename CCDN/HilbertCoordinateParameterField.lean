@@ -1,7 +1,7 @@
 module
 
 public import CCDN.HilbertCoordinateIndependence
-public import CCDN.HilbertFunctionFieldRank
+public import CCDN.BoundedDegreeFunctionFieldRank
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 

@@ -360,8 +360,6 @@ public import CCDN.HilbertLinearCoordinates
 public import CCDN.HilbertProjectionKernel
 public import CCDN.HilbertProjectionDegree
 public import CCDN.HilbertLowDegreeEquation
-public import CCDN.HilbertBlockComparison
-public import CCDN.HilbertFunctionFieldRank
 public import CCDN.HilbertCoordinateParameterField
 public import CCDN.HilbertBoundedElimination
 public import CCDN.HilbertTranscendenceBasis

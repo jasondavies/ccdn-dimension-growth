@@ -21,17 +21,19 @@ def affineMinimumAuxiliaryBound (n d : ℕ) (A B L b : ℝ) : ℝ :=
       (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
         (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)))
 
-theorem scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
+/-- The scaled auxiliary degree bound for any bad-prime factor `c` with
+`c ≤ Real.exp 1 * b` and `0 ≤ b`. -/
+theorem scaled_hypersurface_auxiliary_bound_of_badPrime_le {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hf : f ≠ 0) (hd : 0 < f.totalDegree)
     {p : ℕ} (hp : p.Prime) {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B)
-    (hBp : B / A ≤ p) :
-    hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
-        (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree (p : ℤ) f))
+    (hBp : B / A ≤ p) {c b : ℝ} (hFbad : 0 ≤ c) (hb : 0 ≤ b)
+    (hbad : c ≤ Real.exp 1 * b) :
+    hypersurfaceAuxiliaryDegreeBound n f.totalDegree B c
         (integerCoefficientHeight (scaledHomogenize f.totalDegree (p : ℤ) f) : ℝ) ≤
       hypersurfaceAbsoluteAuxiliaryConstant n *
         (Real.exp 1 * A * (f.totalDegree : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) *
             ((f.totalDegree : ℝ) ^ 2 *
-              hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) *
+              b) *
             B ^ (1 / (f.totalDegree : ℝ) ^ (1 / (n + 1 : ℝ))) /
               (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ) ^
                 (1 / ((n + 1 : ℝ) * f.totalDegree *
@@ -40,7 +42,6 @@ theorem scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
             (f.totalDegree : ℝ) ^ (4 - 1 / (n + 1 : ℝ))) := by
   let d := f.totalDegree
   let F := scaledHomogenize d (p : ℤ) f
-  let b := hypersurfaceBadPrimeFactor (scaledHomogenize d 1 f)
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let H := (integerCoefficientHeight F : ℝ)
   let Y := (p : ℝ) ^ d * L
@@ -61,10 +62,6 @@ theorem scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
     simpa only [Nat.cast_add, Nat.cast_one] using
       scaled_height_rpow (r := n + 1) (by omega) hd hp0 hL0
   have hdenom : Y ^ q ≤ H ^ q := Real.rpow_le_rpow hY0.le hYH hq
-  have hbad : hypersurfaceBadPrimeFactor F ≤ Real.exp 1 * b :=
-    hypersurfaceBadPrimeFactor_scaledHomogenize_le f hf hp
-  have hb : 0 ≤ b := hypersurfaceBadPrimeFactor_nonneg _
-  have hFbad : 0 ≤ hypersurfaceBadPrimeFactor F := hypersurfaceBadPrimeFactor_nonneg _
   have hnR : (n : ℝ) + 1 + 1 = n + 2 := by ring
   have hpower : B ^ α / (p : ℝ) ^ β ≤ A * B ^ (1 / (d : ℝ) ^ (1 / (n + 1 : ℝ))) := by
     simpa only [Nat.cast_add, Nat.cast_one, hnR] using
@@ -75,11 +72,11 @@ theorem scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
     congr 1
     norm_num
     ring
-  have hmain : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * hypersurfaceBadPrimeFactor F * B ^ α / H ^ q ≤
+  have hmain : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * c * B ^ α / H ^ q ≤
       Real.exp 1 * A * (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * ((d : ℝ) ^ 2 * b) *
         B ^ (1 / (d : ℝ) ^ (1 / (n + 1 : ℝ))) / L ^ q := by
     calc
-      _ ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * hypersurfaceBadPrimeFactor F * B ^ α / Y ^ q :=
+      _ ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * c * B ^ α / Y ^ q :=
         div_le_div_of_nonneg_left (by positivity) (by positivity) hdenom
       _ ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * (Real.exp 1 * b) * B ^ α / Y ^ q := by
         apply div_le_div_of_nonneg_right _ (by positivity)
@@ -94,6 +91,27 @@ theorem scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
   unfold hypersurfaceAuxiliaryDegreeBound
   exact mul_le_mul_of_nonneg_left (add_le_add (add_le_add hmain le_rfl) le_rfl)
     (hypersurfaceAbsoluteAuxiliaryConstant_pos n).le
+
+theorem scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
+    (f : MvPolynomial (Fin (n + 2)) ℤ) (hf : f ≠ 0) (hd : 0 < f.totalDegree)
+    {p : ℕ} (hp : p.Prime) {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B)
+    (hBp : B / A ≤ p) :
+    hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
+        (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree (p : ℤ) f))
+        (integerCoefficientHeight (scaledHomogenize f.totalDegree (p : ℤ) f) : ℝ) ≤
+      hypersurfaceAbsoluteAuxiliaryConstant n *
+        (Real.exp 1 * A * (f.totalDegree : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) *
+            ((f.totalDegree : ℝ) ^ 2 *
+              hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) *
+            B ^ (1 / (f.totalDegree : ℝ) ^ (1 / (n + 1 : ℝ))) /
+              (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ) ^
+                (1 / ((n + 1 : ℝ) * f.totalDegree *
+                  (f.totalDegree : ℝ) ^ (1 / (n + 1 : ℝ)))) +
+          (f.totalDegree : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
+            (f.totalDegree : ℝ) ^ (4 - 1 / (n + 1 : ℝ))) := by
+  have hbad := hypersurfaceBadPrimeFactor_scaledHomogenize_le f hf hp
+  exact scaled_hypersurface_auxiliary_bound_of_badPrime_le f hf hd hp hA hB hBp
+    (hypersurfaceBadPrimeFactor_nonneg _) (hypersurfaceBadPrimeFactor_nonneg _) hbad
 
 /-- The same projective auxiliary satisfies both coefficient estimates;
 the better bound is therefore available without changing its zero set. -/

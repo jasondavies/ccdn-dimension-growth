@@ -1,7 +1,7 @@
 module
 
 public import CCDN.IntegralProjectionFiberCount
-public import CCDN.HilbertFunctionFieldRank
+public import CCDN.BoundedDegreeFunctionFieldRank
 public import CCDN.HilbertLinearCoordinates
 public import CCDN.ProjectionFractionField
 

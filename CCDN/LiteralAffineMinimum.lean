@@ -28,62 +28,9 @@ theorem literal_scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
                   (f.totalDegree : ℝ) ^ (1 / (n + 1 : ℝ)))) +
           (f.totalDegree : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
             (f.totalDegree : ℝ) ^ (4 - 1 / (n + 1 : ℝ))) := by
-  let d := f.totalDegree
-  let F := scaledHomogenize d (p : ℤ) f
-  let b := literalAffineBadPrimeFactor f
-  let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
-  let H := (integerCoefficientHeight F : ℝ)
-  let Y := (p : ℝ) ^ d * L
-  let α := (n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))
-  let β := 1 / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))
-  let q := 1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)))
-  have hd0 : (0 : ℝ) < d := by dsimp only [d]; exact_mod_cast hd
-  have hpZ : (1 : ℤ) ≤ p := by exact_mod_cast hp.one_lt.le
-  have hp0 : (0 : ℝ) < p := by exact_mod_cast hp.pos
-  have hL : 1 ≤ L := leading_height_one_le f hf
-  have hL0 : 0 < L := by linarith
-  have hY0 : 0 < Y := mul_pos (pow_pos hp0 _) hL0
-  have hYH : Y ≤ H := by
-    simpa only [Int.cast_natCast] using scaledHomogenize_leading_height_lower f hpZ
-  have hH0 : 0 < H := hY0.trans_le hYH
-  have hq : 0 ≤ q := by dsimp only [q]; positivity
-  have hYpow : Y ^ q = (p : ℝ) ^ β * L ^ q := by
-    simpa only [Nat.cast_add, Nat.cast_one] using
-      scaled_height_rpow (r := n + 1) (by omega) hd hp0 hL0
-  have hdenom : Y ^ q ≤ H ^ q := Real.rpow_le_rpow hY0.le hYH hq
-  have hbad : Real.exp 1 * b ≤ Real.exp 1 * b := le_rfl
-  have hb : 0 ≤ b := literalAffineBadPrimeFactor_nonneg _
-  have hFbad : 0 ≤ Real.exp 1 * b := mul_nonneg (Real.exp_pos _).le hb
-  have hnR : (n : ℝ) + 1 + 1 = n + 2 := by ring
-  have hpower : B ^ α / (p : ℝ) ^ β ≤ A * B ^ (1 / (d : ℝ) ^ (1 / (n + 1 : ℝ))) := by
-    simpa only [Nat.cast_add, Nat.cast_one, hnR] using
-      affine_scaling_box_power (r := n + 1) (by omega) hd hB hA hp0 hBp
-  have hpowers : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) =
-      (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 := by
-    rw [← Real.rpow_natCast d 2, ← Real.rpow_add hd0]
-    congr 1
-    norm_num
-    ring
-  have hmain : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * (Real.exp 1 * b) * B ^ α / H ^ q ≤
-      Real.exp 1 * A * (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * ((d : ℝ) ^ 2 * b) *
-        B ^ (1 / (d : ℝ) ^ (1 / (n + 1 : ℝ))) / L ^ q := by
-    calc
-      _ ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * (Real.exp 1 * b) * B ^ α / Y ^ q :=
-        div_le_div_of_nonneg_left (by positivity) (by positivity) hdenom
-      _ ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * (Real.exp 1 * b) * B ^ α / Y ^ q := by
-        apply div_le_div_of_nonneg_right _ (by positivity)
-        exact mul_le_mul_of_nonneg_right
-          (mul_le_mul_of_nonneg_left hbad (by positivity)) (by positivity)
-      _ = (Real.exp 1 * (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * b / L ^ q) *
-          (B ^ α / (p : ℝ) ^ β) := by rw [hYpow]; ring
-      _ ≤ (Real.exp 1 * (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * b / L ^ q) *
-          (A * B ^ (1 / (d : ℝ) ^ (1 / (n + 1 : ℝ)))) :=
-        mul_le_mul_of_nonneg_left hpower (by positivity)
-      _ = _ := by rw [hpowers]; ring
-  unfold hypersurfaceAuxiliaryDegreeBound
-  exact mul_le_mul_of_nonneg_left (add_le_add (add_le_add hmain le_rfl) le_rfl)
-    (hypersurfaceAbsoluteAuxiliaryConstant_pos n).le
-
+  have hb := literalAffineBadPrimeFactor_nonneg f
+  exact scaled_hypersurface_auxiliary_bound_of_badPrime_le f hf hd hp hA hB hBp
+    (mul_nonneg (Real.exp_pos _).le hb) hb le_rfl
 
 theorem literal_prime_scaled_affine_auxiliary_minimum {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
