@@ -8,6 +8,7 @@ module
 public import CCDN.Height.LeadingPositionHeight
 public import CCDN.Auxiliary.ScaledHomogenization
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousLeadingCoefficient
 import CCDN.Projection.ScaledHeightElimination
 /-! Positioning a scaled homogeneous model while retaining a coefficient bound
@@ -34,8 +35,8 @@ the translated chart coefficients, with the same absolute position loss. -/
 theorem exists_translated_model_position {d : ℕ} (hd : 0 < d)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) :
     ∃ (a : Fin 2 → ℤ) (H : ℝ), (∀ j, 0 ≤ a j ∧ a j ≤ d) ∧ 1 ≤ H ∧
-      (∀ m, |(f.coeff m : ℝ)| ≤ H) ∧
-      (∀ m, |((affineChart 2 (homogeneousTranslation ℤ a f)).coeff m : ℝ)| ≤ H) ∧
+      CoefficientHeightLE f H ∧
+      CoefficientHeightLE (affineChart 2 (homogeneousTranslation ℤ a f)) H ∧
       Real.log |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)| ≤ Real.log H ∧
       Real.log H ≤ Real.log |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)| +
         14 * (d : ℝ) ^ 2 := by
@@ -64,7 +65,7 @@ theorem exists_scaled_model_position (f : MvPolynomial (Fin 2) ℤ)
     (hf0 : f ≠ 0) (hd : 0 < f.totalDegree) {h : ℤ} (hh : 1 ≤ h) :
     ∃ (a : Fin 2 → ℤ) (H : ℝ), (∀ j, 0 ≤ a j ∧ a j ≤ f.totalDegree) ∧
       1 ≤ H ∧ (h : ℝ) ^ f.totalDegree ≤ H ∧
-      (∀ m, |(f.coeff m : ℝ)| ≤ H) ∧
+      CoefficientHeightLE f H ∧
       Real.log |((MonomialOrder.lex.leadingCoeff
         (homogeneousTranslation ℤ a (scaledHomogenize f.totalDegree h f)) : ℤ) : ℝ)| ≤ Real.log H ∧
       Real.log H ≤ Real.log |((MonomialOrder.lex.leadingCoeff

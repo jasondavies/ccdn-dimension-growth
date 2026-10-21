@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Basic.Real.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.Box
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy
 /-! Coefficient height controls homogeneous evaluations, uniformly on the
@@ -19,8 +21,8 @@ open MvPolynomial
 
 theorem homogeneous_integer_evaluation_bound {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d)
-    {H R : ℝ} (hH : 0 ≤ H) (hR : 1 ≤ R) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
-    (x : Fin (n + 1) → ℤ) (hx : ∀ j, |(x j : ℝ)| ≤ R) :
+    {H R : ℝ} (hH : 0 ≤ H) (hR : 1 ≤ R) (hcoeff : CoefficientHeightLE f H)
+    (x : Fin (n + 1) → ℤ) (hx : InBox x R) :
     |(eval x f : ℝ)| ≤ ((n + d).choose d : ℝ) * H * R ^ d := by
   classical
   conv_lhs => rw [homogeneous_eq_sum_coeff f hf]

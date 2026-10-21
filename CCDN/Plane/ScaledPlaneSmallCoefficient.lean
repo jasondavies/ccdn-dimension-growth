@@ -8,6 +8,7 @@ module
 public import CCDN.Auxiliary.ScalingPrime
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.PrimitiveIntegerPolynomial
+public import CCDN.Height.Box
 import CCDN.Height.ScaledBoxExponent
 /-! The affine exponent 1/d with the scaling prime constructed from Mertens.
 This branch assumes a nonzero constant coefficient of small logarithmic height;
@@ -26,7 +27,7 @@ theorem plane_finite_count_small_constant_coefficient
     (hz : ∀ i, MvPolynomial.eval (z i) f = 0)
     {B C : ℝ} (hB : scalingPrimeRatio ≤ B)
     (hheight : Real.log |(f.coeff 0 : ℝ)| < B / scalingPrimeRatio)
-    (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
+    (hbox : ∀ i, InBox (z i) B) (hC : 0 ≤ C)
     (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤
       (38 + 8 * Real.exp (heightDeterminantError C + 20) +

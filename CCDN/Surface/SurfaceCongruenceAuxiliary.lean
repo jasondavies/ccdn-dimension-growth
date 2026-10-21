@@ -8,6 +8,7 @@ module
 public import CCDN.Auxiliary.AffineCongruenceAuxiliary
 public import CCDN.Hilbert.PrincipalStandardMonomials
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceRankProfile
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Surface.SurfaceMonomialWeight
@@ -29,7 +30,7 @@ def affineCongruencePoints {n : ℕ} (f : MvPolynomial (Fin n) ℤ)
 lemma mem_affineCongruencePoints {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     {B : ℝ} {P : Finset ℕ} {a : ℕ → IntPoint n} {x : IntPoint n} :
     x ∈ affineCongruencePoints f B P a ↔
-      (∀ j, |(x j : ℝ)| ≤ B) ∧ eval x f = 0 ∧
+      InBox x B ∧ eval x f = 0 ∧
         ∀ p ∈ P, ∀ j, (p : ℤ) ∣ x j - a p j := by
   classical
   simp only [affineCongruencePoints, mem_filter, mem_integerBox]
@@ -67,7 +68,7 @@ theorem exists_surface_congruence_auxiliary_of_gap
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     {M : ℕ} (hM : f.totalDegree ≤ M)
     {B : ℝ} (hB : 1 ≤ B)
     (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) (a : ℕ → IntPoint 3)

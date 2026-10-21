@@ -139,7 +139,7 @@ theorem absolute_auxiliary_degree_of_comparison
     (hz : ∀ i, eval (z i) f = 0) (bad : Finset ℕ)
     (hcomp : ∀ a : Fin (n + 2) → ℤ, AuxiliaryRankComparison MonomialOrder.lex
       (homogeneousTranslation ℤ a f) d (fun i => homogeneousPointTranslation (-a) (z i)) bad)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) :
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) :
     ∃ M : ℕ,
       (M : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n d B (primeSetFactor bad)
         (integerCoefficientHeight f) ∧
@@ -188,7 +188,7 @@ theorem hypersurface_absolute_auxiliary_degree
     (hir : Irreducible (map (Int.castRingHom K) f))
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) :
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) :
     ∃ (bad : Finset ℕ) (M : ℕ),
       (∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) ∧
       (M : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n d B (primeSetFactor bad)

@@ -32,7 +32,7 @@ theorem prime_scaled_affine_auxiliary {n : ℕ}
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
         (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree (p : ℤ) f))
         (integerCoefficientHeight (scaledHomogenize f.totalDegree (p : ℤ) f) : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   let F := scaledHomogenize f.totalDegree (p : ℤ) f
   have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous _ _ le_rfl
   have hFir : Irreducible F := scaledHomogenize_integer_irreducible f hprim hir hd hp hp0

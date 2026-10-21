@@ -41,8 +41,8 @@ theorem count_eq_sum_integerSlicePoints {n : ℕ} (X : Set (RatPoint n))
   exact Finset.card_eq_sum_card_image (integerLinearLevel a) (integralPoints X B)
 
 theorem integerLinearLevel_abs_le {n : ℕ} (a x : IntPoint n) {H B : ℝ}
-    (hH : 0 ≤ H) (ha : ∀ i, |(a i : ℝ)| ≤ H)
-    (hx : ∀ i, |(x i : ℝ)| ≤ B) :
+    (hH : 0 ≤ H) (ha : InBox a H)
+    (hx : InBox x B) :
     |(integerLinearLevel a x : ℝ)| ≤ (n : ℝ) * H * B := by
   simp only [integerLinearLevel, Int.cast_sum, Int.cast_mul]
   calc
@@ -57,7 +57,7 @@ theorem integerLinearLevel_abs_le {n : ℕ} (a x : IntPoint n) {H B : ℝ}
 
 theorem integerSliceLevels_card_le {n : ℕ} (X : Set (RatPoint n))
     (a : IntPoint n) {H B : ℝ} (hH : 0 ≤ H) (hB : 0 ≤ B)
-    (ha : ∀ i, |(a i : ℝ)| ≤ H) :
+    (ha : InBox a H) :
     ((integerSliceLevels X B a).card : ℝ) ≤ 2 * (n : ℝ) * H * B + 1 := by
   classical
   let R : ℝ := (n : ℝ) * H * B
@@ -128,7 +128,7 @@ theorem count_le_of_integer_hyperplane_slices {n : ℕ}
     (X : Set (RatPoint (n + 1))) (a : IntPoint (n + 1))
     (j : Fin (n + 1)) (hj : a j ≠ 0) (Y : ℤ → Set (RatPoint n))
     {H B K : ℝ} (hH : 0 ≤ H) (hB : 0 ≤ B) (hK : 0 ≤ K)
-    (ha : ∀ i, |(a i : ℝ)| ≤ H)
+    (ha : InBox a H)
     (hmap : ∀ k x, x ∈ integerSlicePoints X B a k →
       rationalPoint (deleteIntegerCoordinate j x) ∈ Y k)
     (hcount : ∀ k, (count (Y k) B : ℝ) ≤ K) :

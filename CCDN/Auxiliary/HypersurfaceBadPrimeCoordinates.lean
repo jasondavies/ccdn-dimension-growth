@@ -8,6 +8,7 @@ module
 public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Plane.IntegerPlaneLogHeight
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceBadPrimeHeight
 /-! Coordinate invariance of geometric bad reduction and coefficient height,
 with the exact bad-prime charge in standard Fin-indexed coordinates. -/
@@ -33,8 +34,8 @@ lemma hypersurfaceBadReduction_renameEquiv {σ τ : Type*} (e : σ ≃ τ)
   exact not_congr (MulEquiv.irreducible_iff (f := renameEquiv (AlgebraicClosure (ZMod p)) e))
 
 lemma polynomial_coefficient_bound_renameEquiv {σ τ : Type*} (e : σ ≃ τ)
-    (f : MvPolynomial σ ℤ) (H : ℝ) (hf : ∀ m, |(f.coeff m : ℝ)| ≤ H) :
-    ∀ m, |((rename e f).coeff m : ℝ)| ≤ H := by
+    (f : MvPolynomial σ ℤ) (H : ℝ) (hf : CoefficientHeightLE f H) :
+    CoefficientHeightLE (rename e f) H := by
   intro m
   have he : rename e.symm (rename e f) = f := by simp [rename_rename]
   have hc := coeff_rename_mapDomain e.symm e.symm.injective (rename e f) m
@@ -48,7 +49,7 @@ theorem exists_fin_hypersurface_bad_prime_charge
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : Irreducible (map (Int.castRingHom L) f))
     (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H) :
+    (hcoeff : CoefficientHeightLE f H) :
     ∃ bad : Finset ℕ,
       (∀ p, p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧ HypersurfaceBadReduction f p) ∧
       (∑ p ∈ bad, Real.log p / p) ≤
@@ -61,7 +62,7 @@ theorem exists_fin_hypersurface_bad_prime_charge
     rw [show g = rename e f from rfl, map_rename]
     exact (MulEquiv.irreducible_iff (f := renameEquiv L e)).mpr hf
   have hd : g.totalDegree = f.totalDegree := totalDegree_renameEquiv e f
-  have hgc : ∀ m, |(g.coeff m : ℝ)| ≤ H := polynomial_coefficient_bound_renameEquiv e f H hcoeff
+  have hgc : CoefficientHeightLE g H := polynomial_coefficient_bound_renameEquiv e f H hcoeff
   let bad := (finite_hypersurface_bad_primes g hg (hd ▸ hpos)).toFinset
   have hmem (p : ℕ) : p ∈ bad ↔ stepanovThreshold f.totalDegree < p ∧
       HypersurfaceBadReduction f p := by

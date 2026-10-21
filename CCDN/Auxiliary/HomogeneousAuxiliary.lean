@@ -7,6 +7,7 @@ module
 
 public import ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.HomogeneousMonomials
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRank
 import CCDN.Algebra.RowSpan
@@ -29,11 +30,11 @@ theorem exists_small_homogeneous_vanishing_polynomial {n d M t : ℕ}
       LinearIndependent ℚ
         ((evaluationMatrix (homogeneousMonomials n M) (points ∘ a)).map ((↑) : ℤ → ℚ)).row ∧
       ∃ g : MvPolynomial (Fin (n + 1)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-        (∀ i, eval (points i) g = 0) ∧ ∀ e, |(g.coeff e : ℝ)| ≤
-          (Real.sqrt (((evaluationMatrix (homogeneousMonomials n M) (points ∘ a) *
+        (∀ i, eval (points i) g = 0) ∧ CoefficientHeightLE g
+          ((Real.sqrt (((evaluationMatrix (homogeneousMonomials n M) (points ∘ a) *
             (evaluationMatrix (homogeneousMonomials n M) (points ∘ a))ᵀ).det : ℤ) : ℝ) /
             (Int.Matrix.minorGcd (evaluationMatrix (homogeneousMonomials n M) (points ∘ a)) : ℝ)) ^
-              ((((n + M).choose M : ℝ) - s)⁻¹) := by
+              ((((n + M).choose M : ℝ) - s)⁻¹)) := by
   classical
   obtain ⟨s, a, ha, hli, hspan, hs⟩ := homogeneous_independent_evaluation_rows f hf hf0 hdM points hzero
   have hdeficit := integer_homogeneous_rows_hilbert_bound f hf hf0 hdM (points ∘ a)

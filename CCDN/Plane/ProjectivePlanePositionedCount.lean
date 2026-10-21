@@ -45,7 +45,7 @@ theorem projective_plane_finite_count_positioned
     (hinj : Function.Injective (fun i => Projectivization.mk ℚ (rationalPoint (z i))
       (rationalPoint_ne_zero (hz0 i))))
     (hzprim : ∀ i, Finset.univ.gcd (z i) = 1) (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) :
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) :
     (t : ℝ) ≤ max
       ((d : ℝ) * scaledPlaneAuxiliaryDegreeBound d projectivePlaneDeterminantConstant (((d : ℝ) +
           1) * B) 1)
@@ -81,7 +81,7 @@ theorem projective_plane_finite_count_positioned
   let R := ((d : ℝ) + 1) * B
   have hR : 1 ≤ R := one_le_mul_of_one_le_of_one_le
     (by have := Nat.cast_nonneg (α := ℝ) d; linarith) hB
-  have hwbox : ∀ i j, |(w i j : ℝ)| ≤ R :=
+  have hwbox : ∀ i, InBox (w i) R :=
     fun i j => homogeneousPointTranslation_box hB a ha (z i) (hbox i) j
   have hmp := hprim.translate_homogeneous a
   by_cases hsmall : Real.log H ≤ 4 * d * Real.log R

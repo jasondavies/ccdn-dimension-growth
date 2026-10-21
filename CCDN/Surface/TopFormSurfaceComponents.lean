@@ -33,7 +33,7 @@ theorem top_form_surface_curve_components
       (g.totalDegree : ℝ) ≤ topFormAuxiliaryConstant 1 *
         (f.totalDegree : ℝ) ^ (7 / 2 : ℝ) *
           B ^ (1 / (f.totalDegree : ℝ) ^ (1 / 2 : ℝ)) ∧
-      (∀ x : IntPoint 3, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0) ∧
+      (∀ x : IntPoint 3, InBox x B → eval x f = 0 → eval x g = 0) ∧
       ∃ S : Finset (Ideal (CoordinatePolynomial 3)),
         ∃ d : Ideal (CoordinatePolynomial 3) → ℕ,
           (∀ P ∈ S, P.IsPrime ∧ P.height = 2 ∧
@@ -46,7 +46,7 @@ theorem top_form_surface_curve_components
               B ^ (1 / (f.totalDegree : ℝ) ^ (1 / 2 : ℝ)) ∧
           (∀ P ∈ S, (polynomialSectionIdeal (map (Int.castRingHom ℚ) f)
             (map (Int.castRingHom ℚ) g)).IsMinimalPrime P) ∧
-          ∀ x : IntPoint 3, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 →
+          ∀ x : IntPoint 3, InBox x B → eval x f = 0 →
             ∃ P ∈ S, rationalPoint x ∈ idealZeroLocus P := by
   classical
   have habs := absolute_irreducible_of_top_homogeneousComponent_irreducible f hir

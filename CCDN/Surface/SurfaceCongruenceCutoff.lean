@@ -7,6 +7,7 @@ module
 
 public import CCDN.Surface.SurfaceCongruenceAuxiliary
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceRankArchimedean
 import Mathlib.Algebra.Order.Star.Real
 /-! Numerical degree selection for the smooth-congruence auxiliary on a
@@ -229,7 +230,7 @@ theorem exists_surface_congruence_auxiliary
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {K H B : ℝ} (hK : 0 ≤ K) (hH : 1 ≤ H) (hB : 1 ≤ B)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (hheight : Real.log H ≤ K * (Real.log B + 1))
     (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) (a : ℕ → IntPoint 3)
     (ha : ∀ p ∈ P, MvPolynomial.eval₂ (Int.castRingHom (ZMod p))

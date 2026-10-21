@@ -166,7 +166,7 @@ theorem unscaled_affine_auxiliary_minimum {n k : ℕ}
         (Real.exp (Real.log S + (k : ℝ) * (n + 2 : ℝ))) B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
         (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ := unscaled_affine_auxiliary f hprim hir hd hB
   exact ⟨g, hg0, hgnd, hgdeg.trans
     (unscaled_hypersurface_auxiliary_minimum_bound f hir.ne_zero hd hS hB hbound), hgz⟩

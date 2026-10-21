@@ -34,7 +34,7 @@ lemma projectionBoxFactor_one_le (n d : ℕ) : 1 ≤ projectionBoxFactor n d := 
 
 lemma momentCoordinate_height_of_le {n k : ℕ} {M B : ℝ}
     (hM : 1 ≤ M) (hk : (k : ℝ) ≤ M)
-    (z : IntPoint n) (hz : ∀ j, |(z j : ℝ)| ≤ B) :
+    (z : IntPoint n) (hz : InBox z B) :
     |(eval z (momentCoordinate ℤ n k) : ℝ)| ≤ n * M ^ n * B := by
   rw [momentCoordinate_eval, Int.cast_sum]
   simp only [Int.cast_mul, Int.cast_pow, Int.cast_natCast]

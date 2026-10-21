@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.HypersurfaceRankArchimedean
 public import CCDN.Determinant.HypersurfaceHeightDeterminant
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Height.HypersurfaceHeightComparison
 /-! The normalized higher-dimensional determinant inequality, retaining the
 exact root-rank and kernel-rank coefficients needed for uniform degree selection. -/
@@ -77,10 +78,10 @@ theorem hypersurface_no_auxiliary_normalized_comparison
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf : f.IsHomogeneous d) (hd : 0 < d) (hdM : d ≤ M)
     (hir : Irreducible (map (Int.castRingHom K) f))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H)
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (hrel : ∀ g : MvPolynomial (Fin (n + 3)) ℤ, g.IsHomogeneous M →
       (∀ i, eval (z i) g = 0) → f ∣ g) :
     ∃ s : ℕ, 0 < s ∧ s + (n + 2 + (M - d)).choose (M - d) = (n + 2 + M).choose M ∧

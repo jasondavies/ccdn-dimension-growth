@@ -7,6 +7,7 @@ module
 
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.PrimitiveIntegerPolynomial
+public import CCDN.Height.Box
 import CCDN.Algebra.ScaledModelCoordinates
 import CCDN.Algebra.ScaledModelPosition
 import CCDN.Auxiliary.PlaneAuxiliaryCount
@@ -38,7 +39,7 @@ theorem scaled_plane_finite_count
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z)
     (hz : ∀ i, eval (z i) f = 0)
     {B C : ℝ} (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B)
-    (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
+    (hbox : ∀ i, InBox (z i) B) (hC : 0 ≤ C)
     (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ max
       ((f.totalDegree : ℝ) * scaledPlaneAuxiliaryDegreeBound f.totalDegree C

@@ -7,6 +7,7 @@ module
 
 public import CCDN.Hypersurface.SingularHypersurfaceCount
 public import CCDN.Surface.SurfaceResidueCover
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Curve.AffineCurveHilbertPolynomial
 import CCDN.Surface.SurfaceNonlinearCount
 import Mathlib.Algebra.Order.Star.Real
@@ -42,7 +43,7 @@ theorem surface_smooth_outside_geometric_cover
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
     {A B H L X : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B) (hH : 1 ≤ H) (hL : 1 ≤ L)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (hderivative : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
       Real.log H + f.totalDegree * Real.log B ≤ L)
     (hX : 1 < X) (hBX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)

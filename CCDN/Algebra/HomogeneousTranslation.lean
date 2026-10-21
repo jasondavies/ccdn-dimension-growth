@@ -8,6 +8,7 @@ module
 public import CCDN.Height.PrimitiveIntegerPolynomial
 public import Mathlib.Basic.Real.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import CCDN.Height.Box
 /-! Integral translations of the affine chart, lifted to homogeneous linear
 coordinate changes, preserve primitive equations and homogeneous degree. -/
 
@@ -89,7 +90,7 @@ lemma homogeneousTranslation_eval_chart {R : Type*} [CommRing R] {n : ℕ}
 
 lemma homogeneousTranslation_integer_point_box {n : ℕ} {B : ℝ} {d : ℕ}
     (hB : 1 ≤ B) (a z : Fin n → ℤ) (ha : ∀ j, 0 ≤ a j ∧ a j ≤ d)
-    (hz : ∀ j, |(z j : ℝ)| ≤ B) (j : Fin n) :
+    (hz : InBox z B) (j : Fin n) :
     |((z j - a j : ℤ) : ℝ)| ≤ ((d : ℝ) + 1) * B := by
   rw [Int.cast_sub]
   have ha0 : (0 : ℝ) ≤ a j := by exact_mod_cast (ha j).1

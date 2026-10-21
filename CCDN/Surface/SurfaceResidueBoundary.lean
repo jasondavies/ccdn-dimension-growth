@@ -9,6 +9,7 @@ public import CCDN.Surface.SurfaceCongruenceFamily
 public import CCDN.Curve.Curve
 public import CCDN.Surface.CongruencePrimeWindow
 public import Mathlib.RingTheory.Ideal.Height
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Determinant.ResidueSubsetBoundary
 import CCDN.Surface.SmoothPrimeWindow
@@ -87,7 +88,7 @@ theorem surface_residue_boundary_of_large_curve
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
     {A B H L X : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B) (hH : 1 ≤ H) (hL : 1 ≤ L)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (hheight : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
       Real.log H + f.totalDegree * Real.log B ≤ L)
     (hX : 1 < X) (hBX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)
@@ -97,7 +98,7 @@ theorem surface_residue_boundary_of_large_curve
     (hinitI : map (Int.castRingHom ℚ) F.initial ∈ I)
     {d : ℕ} (hdegree : HasAffineCurveDegree I d)
     (hlarge : 2 * f.totalDegree * A * surfaceResidueLogBudget B L < d)
-    (x : IntPoint 3) (hx : ∀ j, |(x j : ℝ)| ≤ B) (hxf : eval x f = 0)
+    (x : IntPoint 3) (hx : InBox x B) (hxf : eval x f = 0)
     (hsmooth : ∃ j, eval x (pderiv j f) ≠ 0) :
     ∃ R : Finset ℕ, ∃ hR : ∀ p ∈ R, p.Prime,
       ∃ p ∈ R, ∃ r : SmoothAffineResidueFamily f R,

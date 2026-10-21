@@ -31,7 +31,7 @@ for which the normalized comparison holds. -/
 theorem exists_auxiliary_small_height_of_comparison {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf0 : f ≠ 0) (hd : 0 < d) (hM : 2 * d ≤ M) (z : Fin t → IntPoint (n + 3))
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (bad : Finset ℕ) (hcomp : AuxiliaryRankComparison order f d z bad)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 2 * d * (n + 2 : ℝ) * Real.log B)
     (hscale : (d : ℝ) * Real.log B ≤ degreeRoot n d * M)
@@ -73,7 +73,7 @@ every radius exponent. -/
 theorem auxiliary_small_height_degree_of_comparison {n d t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf0 : f ≠ 0) (hd : 0 < d) (z : Fin t → IntPoint (n + 3))
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (bad : Finset ℕ) (hcomp : AuxiliaryRankComparison order f d z bad)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 2 * d * (n + 2 : ℝ) * Real.log B) :
     ∃ M : ℕ,
@@ -110,7 +110,7 @@ theorem hypersurface_auxiliary_small_height_degree
     (hir : Irreducible (map (Int.castRingHom K) f))
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 2 * d * (n + 2 : ℝ) * Real.log B) :
     ∃ (bad : Finset ℕ) (M : ℕ),
       (∀ p, p ∈ bad ↔ stepanovThreshold d < p ∧ HypersurfaceBadReduction f p) ∧

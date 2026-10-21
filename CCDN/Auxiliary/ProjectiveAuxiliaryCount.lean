@@ -8,6 +8,7 @@ module
 public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.ProjectiveBox
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Auxiliary.ProjectiveAuxiliary
@@ -60,12 +61,12 @@ theorem projective_points_small_height_bound
     (hprim : PrimitiveIntegerPolynomial f)
     (hdeg : (affineChart 2 f).totalDegree = d)
     (hir : Irreducible (map (Int.castRingHom K) (affineChart 2 f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |((affineChart 2 f).coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE (affineChart 2 f) H)
     (z : Fin t → IntPoint 3) (hz0 : ∀ i, z i ≠ 0)
     (hinj : Function.Injective (fun i => Projectivization.mk ℚ (rationalPoint (z i))
       (rationalPoint_ne_zero (hz0 i))))
     (hzprim : ∀ i, Finset.univ.gcd (z i) = 1) (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 4 * d * Real.log B) :
     (t : ℝ) ≤ d * (d + Real.log B +
       2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) * (d : ℝ) ^ 3 *
@@ -85,12 +86,12 @@ theorem projective_points_large_height_bound
     (hprim : PrimitiveIntegerPolynomial f)
     (hdeg : (affineChart 2 f).totalDegree = d)
     (hir : Irreducible (map (Int.castRingHom K) (affineChart 2 f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |((affineChart 2 f).coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE (affineChart 2 f) H)
     (z : Fin t → IntPoint 3) (hz0 : ∀ i, z i ≠ 0)
     (hinj : Function.Injective (fun i => Projectivization.mk ℚ (rationalPoint (z i))
       (rationalPoint_ne_zero (hz0 i))))
     (hzprim : ∀ i, Finset.univ.gcd (z i) = 1) (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (T : ℝ) (hT : 0 ≤ T) (hheight : 4 * d * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * (d : ℝ) ^ 2) :
     (t : ℝ) ≤

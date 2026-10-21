@@ -9,6 +9,7 @@ public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.AuxiliaryDegreeBound
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.BadPrimeCharge
 import CCDN.Plane.IntegerPlaneWitness
 import CCDN.Plane.IntegerPlaneWitnessHeight
@@ -26,7 +27,7 @@ theorem exists_hypersurface_bad_prime_height_witness
     (f : MvPolynomial (Option σ) ℤ)
     (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))
     (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H) :
+    (hcoeff : CoefficientHeightLE f H) :
     ∃ D : ℤ, 0 < D ∧
       Real.log D ≤ (27 * (f.totalDegree : ℝ) ^ 4) *
         (hypersurfaceHeightConstant (Fintype.card (Option σ)) *
@@ -57,7 +58,7 @@ theorem hypersurface_bad_prime_charge
     (f : MvPolynomial (Option σ) ℤ)
     (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))
     (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (P : Finset ℕ) (hP : ∀ p ∈ P, HypersurfaceBadReduction f p)
     (hcut : ∀ p ∈ P, stepanovThreshold f.totalDegree < p) :
     (∑ p ∈ P, Real.log p / p) ≤
@@ -85,7 +86,7 @@ theorem hypersurface_bad_prime_factor
     (f : MvPolynomial (Option σ) ℤ)
     (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))
     (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (P : Finset ℕ) (hP : ∀ p ∈ P, HypersurfaceBadReduction f p)
     (hcut : ∀ p ∈ P, stepanovThreshold f.totalDegree < p) :
     primeSetFactor P ≤
@@ -111,7 +112,7 @@ theorem hypersurface_bad_prime_factor_max
     (f : MvPolynomial (Option σ) ℤ)
     (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))
     (hpos : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (P : Finset ℕ) (hP : ∀ p ∈ P, HypersurfaceBadReduction f p)
     (hcut : ∀ p ∈ P, stepanovThreshold f.totalDegree < p) :
     primeSetFactor P ≤

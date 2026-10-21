@@ -87,7 +87,7 @@ theorem homogeneous_no_auxiliary_coefficient_height_uniform (n : ℕ) :
       f.IsHomogeneous d → f ≠ 0 →
       ∀ (z : Fin t → IntPoint (n + 2)), (∀ i, eval (z i) f = 0) →
       (∀ i, Finset.univ.gcd (z i) = 1) → ∀ {B : ℝ}, 1 ≤ B →
-      (∀ i j, |(z i j : ℝ)| ≤ B) →
+      (∀ i, InBox (z i) B) →
       (∀ g : MvPolynomial (Fin (n + 2)) ℤ, g.IsHomogeneous d →
         (∀ i, eval (z i) g = 0) → f ∣ g) →
       Real.log (integerCoefficientHeight f : ℝ) ≤

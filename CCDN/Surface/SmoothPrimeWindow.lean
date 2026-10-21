@@ -8,6 +8,7 @@ module
 public import CCDN.Surface.CongruencePrimeWindow
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Determinant.PlaneSingularities
 import CCDN.Height.PolynomialBoxHeight
@@ -22,7 +23,7 @@ open MvPolynomial Finset
 
 theorem integer_pderiv_coefficient_bound {σ : Type*} [Fintype σ]
     (f : MvPolynomial σ ℤ) (j : σ) {H : ℝ} (hH : 0 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H) (e : σ →₀ ℕ) :
+    (hcoeff : CoefficientHeightLE f H) (e : σ →₀ ℕ) :
     |((pderiv j f).coeff e : ℝ)| ≤ ((f.totalDegree : ℝ) + 1) * H := by
   classical
   rw [coeff_pderiv]
@@ -53,8 +54,8 @@ theorem integer_pderiv_totalDegree_le {σ : Type*}
 theorem integer_pderiv_evaluation_bound {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (j : Fin n) {H B : ℝ}
     (hH : 0 ≤ H) (hB : 1 ≤ B)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
-    (x : IntPoint n) (hx : ∀ i, |(x i : ℝ)| ≤ B) :
+    (hcoeff : CoefficientHeightLE f H)
+    (x : IntPoint n) (hx : InBox x B) :
     |(eval x (pderiv j f) : ℝ)| ≤
       ((f.totalDegree : ℝ) + 1) ^ (n + 1) * H * B ^ f.totalDegree := by
   have hb := polynomial_eval₂_box_bound (pderiv j f)
@@ -79,8 +80,8 @@ theorem integer_pderiv_evaluation_bound {n : ℕ}
 theorem integer_pderiv_log_bound {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (j : Fin n) {H B : ℝ}
     (hH : 1 ≤ H) (hB : 1 ≤ B)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
-    (x : IntPoint n) (hx : ∀ i, |(x i : ℝ)| ≤ B)
+    (hcoeff : CoefficientHeightLE f H)
+    (x : IntPoint n) (hx : InBox x B)
     (hne : eval x (pderiv j f) ≠ 0) :
     Real.log |(eval x (pderiv j f) : ℝ)| ≤
       (n + 1 : ℝ) * Real.log ((f.totalDegree : ℝ) + 1) +
@@ -101,10 +102,10 @@ at which this nonsingular point has smooth reduction. -/
 theorem exists_smooth_prime_window_subset {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) {H B L : ℝ}
     (hH : 1 ≤ H) (hB : 1 ≤ B) (hL : 1 ≤ L)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (hheight : (n + 1 : ℝ) * Real.log ((f.totalDegree : ℝ) + 1) +
       Real.log H + f.totalDegree * Real.log B ≤ L)
-    (x : IntPoint n) (hx : ∀ i, |(x i : ℝ)| ≤ B)
+    (x : IntPoint n) (hx : InBox x B)
     (hsmooth : ∃ j, eval x (pderiv j f) ≠ 0) :
     ∃ P : Finset ℕ, P ⊆ congruencePrimeWindow L ∧
       Real.exp L ≤ ∏ p ∈ P, (p : ℝ) ∧

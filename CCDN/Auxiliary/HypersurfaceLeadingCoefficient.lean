@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.HomogeneousTranslation
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousChart
 import CCDN.Algebra.HomogeneousLeadingCoefficient
 import CCDN.Height.MultivariateGridHeight
@@ -23,8 +24,8 @@ theorem exists_hypersurface_leading_coefficient_translation {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) :
     ∃ a : Fin n → ℤ, (∀ j, 0 ≤ a j ∧ a j ≤ d) ∧
       MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) ≠ 0 ∧
-      ∀ m, |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) *
-        |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)| := by
+      CoefficientHeightLE f (((d : ℝ) + 1) ^ (n * (d + 1)) *
+        |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)|) := by
   have hc0 : affineChart n f ≠ 0 := by
     intro hz
     exact hf0 (affineChart_injective_on_homogeneous hf (isHomogeneous_zero _ _ d)

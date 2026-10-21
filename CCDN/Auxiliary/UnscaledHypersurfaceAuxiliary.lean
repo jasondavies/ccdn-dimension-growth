@@ -83,7 +83,7 @@ lemma unscaled_auxiliary_vanishes {n M : ℕ}
     (hGzero : ∀ P : ProjectivePoint n, P.mulHeight ≤ B →
       P ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) (scaledHomogenize f.totalDegree 1 f)) →
       P ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) G)) :
-    ∀ x : IntPoint n, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 →
+    ∀ x : IntPoint n, InBox x B → eval x f = 0 →
       eval x (homogeneousSlice n 1 G) = 0 := by
   intro x hx hxf
   let v : IntPoint (n + 1) := Fin.cons 1 x
@@ -120,7 +120,7 @@ theorem unscaled_affine_auxiliary {n : ℕ}
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
         (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f))
         (integerCoefficientHeight f : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   let F := scaledHomogenize f.totalDegree 1 f
   have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous _ _ le_rfl
   have hFir : Irreducible F := scaledHomogenize_one_integer_irreducible f hprim hir hd
@@ -145,7 +145,7 @@ theorem affine_coefficient_height_dichotomy {n : ℕ}
         Real.log ((n + f.totalDegree).choose f.totalDegree) +
       ((n + f.totalDegree).choose f.totalDegree : ℝ) * f.totalDegree * Real.log B ∨
     ∃ g : MvPolynomial (Fin n) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧ g.totalDegree ≤ f.totalDegree ∧
-      ∀ x : IntPoint n, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint n, InBox x B → eval x f = 0 → eval x g = 0 := by
   rcases projective_coefficient_height_dichotomy (scaledHomogenize f.totalDegree 1 f)
       (scaledHomogenize_homogeneous 1 f le_rfl) (scaledHomogenize_ne_zero _ one_ne_zero hf0) hB with
     hheight | ⟨G, _, hGhom, hGnd, hGzero⟩

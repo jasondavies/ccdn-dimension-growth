@@ -36,7 +36,7 @@ satisfies the normalized comparison retaining `log b = ∑ p ∈ bad, log p / p`
 def AuxiliaryRankComparison {n t : ℕ} (order : MonomialOrder (Fin (n + 3)))
     (f : MvPolynomial (Fin (n + 3)) ℤ) (d : ℕ) (z : Fin t → IntPoint (n + 3))
     (bad : Finset ℕ) : Prop :=
-  ∀ ⦃B : ℝ⦄, 1 ≤ B → (∀ i j, |(z i j : ℝ)| ≤ B) → ∀ ⦃M : ℕ⦄, d ≤ M →
+  ∀ ⦃B : ℝ⦄, 1 ≤ B → (∀ i, InBox (z i) B) → ∀ ⦃M : ℕ⦄, d ≤ M →
     (∀ g : MvPolynomial (Fin (n + 3)) ℤ, g.IsHomogeneous M → (∀ i, eval (z i) g = 0) → f ∣ g) →
     ∃ s : ℕ, 0 < s ∧ s + (n + 2 + (M - d)).choose (M - d) = (n + 2 + M).choose M ∧
       factorialRoot n * (s : ℝ) ^ (1 / (n + 1 : ℝ)) / ((n + 2 : ℝ) * M) *

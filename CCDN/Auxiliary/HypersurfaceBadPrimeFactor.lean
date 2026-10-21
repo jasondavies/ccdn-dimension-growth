@@ -11,6 +11,7 @@ public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.ForMathlib.MvPolynomial
 /-! Bad-prime factors of integer polynomials, and the geometric bad-prime factor used by the
 determinant method. A bad-prime factor `badPrimeFactor P` is zero for nonabsolute equations
@@ -121,7 +122,7 @@ lemma hypersurfaceBadPrimeFactor_eq_exp {n d : ℕ} (f : MvPolynomial (Fin (n + 
 for nonabsolute equations, where the factor is zero by definition. -/
 theorem hypersurfaceBadPrimeFactor_le_height {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H) :
+    (hcoeff : CoefficientHeightLE f H) :
     hypersurfaceBadPrimeFactor f ≤
       (Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (n + 1)) *
         (1 + Real.log H / (f.totalDegree : ℝ) ^ 2) := by
@@ -149,7 +150,7 @@ theorem hypersurfaceBadPrimeFactor_le_height {n : ℕ}
 /-- The max-form of CCDN Corollary 3.2.3 for the defined factor itself. -/
 theorem hypersurfaceBadPrimeFactor_le_max {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H) :
+    (hcoeff : CoefficientHeightLE f H) :
     hypersurfaceBadPrimeFactor f ≤
       (2 * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (n + 1)) *
         max (Real.log H / (f.totalDegree : ℝ) ^ 2) 1 := by

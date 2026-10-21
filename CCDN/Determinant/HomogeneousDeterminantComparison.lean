@@ -8,6 +8,7 @@ module
 public import ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.HomogeneousMonomials
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+public import CCDN.Height.Box
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Algebra.RowSpan
@@ -124,7 +125,7 @@ theorem homogeneous_no_auxiliary_log_comparison {n d M t : ℕ}
 /-- Archimedean logarithmic bound for an integral evaluation matrix. -/
 lemma evaluation_log_gram_le {n N s M : ℕ} (hN : 0 < N)
     (mon : Fin N → (Fin n →₀ ℕ)) (points : Fin s → Fin n → ℤ)
-    {B : ℝ} (hB : 1 ≤ B) (hp : ∀ i j, |(points i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hp : ∀ i, InBox (points i) B)
     (hdeg : ∀ j, (mon j).degree ≤ M)
     (hG : 0 < (((evaluationMatrix mon points * (evaluationMatrix mon points)ᵀ).det : ℤ) : ℝ)) :
     Real.log (((evaluationMatrix mon points * (evaluationMatrix mon points)ᵀ).det : ℤ) : ℝ) / 2 ≤
@@ -155,7 +156,7 @@ theorem homogeneous_no_auxiliary_box_comparison {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 1)))
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → (Fin (n + 1) → ℤ)) (hzero : ∀ i, eval (points i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hp : ∀ i j, |(points i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hp : ∀ i, InBox (points i) B)
     (hrel : ∀ g : MvPolynomial (Fin (n + 1)) ℤ, g.IsHomogeneous M →
       (∀ i, eval (points i) g = 0) → f ∣ g) :
     ∃ (s : ℕ) (a : Fin s → Fin t), Function.Injective a ∧ s < (n + M).choose M ∧

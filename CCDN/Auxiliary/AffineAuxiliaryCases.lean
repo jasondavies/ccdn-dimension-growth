@@ -95,7 +95,7 @@ theorem affine_auxiliary_minimum_nonzero_constant {n : ℕ}
         (affineAuxiliaryComparisonConstant n) B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
         (hypersurfaceBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := hypersurfaceBadPrimeFactor (scaledHomogenize d 1 f)

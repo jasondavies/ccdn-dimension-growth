@@ -8,6 +8,7 @@ module
 public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Plane.IntegerPlaneLogHeight
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.BadPrimeCharge
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Auxiliary.HypersurfaceBadPrimeHeight
@@ -23,7 +24,7 @@ theorem exists_fin_hypersurface_bad_prime_height_witness
     {L : Type*} [Field L] [CharZero L] [IsAlgClosed L] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : Irreducible (map (Int.castRingHom L) f)) (hd : 0 < f.totalDegree)
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H) :
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H) :
     ∃ D : ℤ, 0 < D ∧
       Real.log D ≤ (27 * (f.totalDegree : ℝ) ^ 4) *
         (hypersurfaceHeightConstant (n + 1) *
@@ -49,7 +50,7 @@ theorem hypersurface_and_congruence_prime_charge
     {L : Type*} [Field L] [CharZero L] [IsAlgClosed L] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : Irreducible (map (Int.castRingHom L) f)) (hd : 0 < f.totalDegree)
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H)
     (bad P : Finset ℕ)
     (hbad : ∀ p ∈ bad, stepanovThreshold f.totalDegree < p ∧ HypersurfaceBadReduction f p)
     (hP : ∀ p ∈ P, p.Prime) :

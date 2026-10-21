@@ -27,7 +27,7 @@ theorem surface_geometric_cover_of_small_auxiliary
     (hfg : ¬ map (Int.castRingHom ℚ) f ∣ map (Int.castRingHom ℚ) g)
     (hgdegree : g.totalDegree ≤ f.totalDegree)
     {B : ℝ} (hB : 0 ≤ B)
-    (hzero : ∀ x : IntPoint 3, (∀ j, |(x j : ℝ)| ≤ B) →
+    (hzero : ∀ x : IntPoint 3, InBox x B →
       eval x f = 0 → eval x g = 0) :
     ∃ (T : Finset (Ideal (CoordinatePolynomial 3)))
       (δ : Ideal (CoordinatePolynomial 3) → ℕ),

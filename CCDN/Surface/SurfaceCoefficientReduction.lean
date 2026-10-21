@@ -41,7 +41,7 @@ theorem integer_surface_count_le_of_auxiliary
     (hf : Irreducible (map (Int.castRingHom ℚ) f))
     (hfg : ¬ map (Int.castRingHom ℚ) f ∣ map (Int.castRingHom ℚ) g)
     {B : ℝ} (hB : 0 ≤ B)
-    (hzero : ∀ x : IntPoint 3, (∀ j, |(x j : ℝ)| ≤ B) →
+    (hzero : ∀ x : IntPoint 3, InBox x B →
       eval x f = 0 → eval x g = 0) :
     (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
       (f.totalDegree : ℝ) * g.totalDegree * (2 * B + 1) := by

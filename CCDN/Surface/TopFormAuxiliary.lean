@@ -37,7 +37,7 @@ theorem primitive_top_form_auxiliary {n : ℕ}
       (g.totalDegree : ℝ) ≤ topFormAuxiliaryConstant n *
         (f.totalDegree : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) *
           B ^ (1 / (f.totalDegree : ℝ) ^ (1 / (n + 1 : ℝ))) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   have hfIr := hprim.irreducible_of_absolute_top hir
   have habs := absolute_irreducible_of_top_homogeneousComponent_irreducible f hir
   have hd := absolute_integer_polynomial_totalDegree_pos f habs
@@ -77,7 +77,7 @@ theorem top_form_auxiliary_rational {n : ℕ}
       (g.totalDegree : ℝ) ≤ topFormAuxiliaryConstant n *
         (f.totalDegree : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) *
           B ^ (1 / (f.totalDegree : ℝ) ^ (1 / (n + 1 : ℝ))) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   have hf0 : f ≠ 0 := by intro hz; exact hir.ne_zero (by simp [hz])
   obtain ⟨c, u, hc, huprim, he⟩ := exists_primitive_integer_factor f hf0
   obtain ⟨huDegree, huTop⟩ := absolute_top_irreducible_of_integer_scalar_factor hc he hir

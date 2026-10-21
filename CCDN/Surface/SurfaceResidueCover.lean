@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceResidueEdgeCount
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Surface.SurfaceNonlinearCount
 /-! The finite residue-edge cover and its complete counting bound. -/
 
@@ -128,7 +129,7 @@ theorem large_curve_point_mem_surfaceResidueResidualLocus
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
     {A B H L X : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B) (hH : 1 ≤ H) (hL : 1 ≤ L)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (hheight : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
       Real.log H + f.totalDegree * Real.log B ≤ L)
     (hX : 1 < X) (hBX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)
@@ -140,7 +141,7 @@ theorem large_curve_point_mem_surfaceResidueResidualLocus
     (hinitI : map (Int.castRingHom ℚ) F.initial ∈ I)
     {d : ℕ} (hdegree : HasAffineCurveDegree I d)
     (hlarge : 2 * f.totalDegree * A * surfaceResidueLogBudget B L < d)
-    (x : IntPoint 3) (hx : ∀ j, |(x j : ℝ)| ≤ B) (hxf : eval x f = 0)
+    (x : IntPoint 3) (hx : InBox x B) (hxf : eval x f = 0)
     (hxI : rationalPoint x ∈ idealZeroLocus I)
     (hsmooth : ∃ j, eval x (pderiv j f) ≠ 0) :
     rationalPoint x ∈ surfaceResidueResidualLocus F S L X hL := by

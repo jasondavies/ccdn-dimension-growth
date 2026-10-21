@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.HomogeneousTranslation
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousChart
 import CCDN.Plane.PlaneGridHeight
 /-! Positioning a coefficient-height witness as the lexicographic leading
@@ -82,8 +83,8 @@ theorem exists_bounded_leading_coefficient_translation {d : ℕ}
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) :
     ∃ a : Fin 2 → ℤ, (∀ j, 0 ≤ a j ∧ a j ≤ d) ∧
       MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) ≠ 0 ∧
-      ∀ m, |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (2 * (d + 1)) *
-        |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)| := by
+      CoefficientHeightLE f (((d : ℝ) + 1) ^ (2 * (d + 1)) *
+        |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)|) := by
   have hc0 : affineChart 2 f ≠ 0 := by
     intro hz
     exact hf0 (affineChart_injective_on_homogeneous hf (isHomogeneous_zero _ _ d)

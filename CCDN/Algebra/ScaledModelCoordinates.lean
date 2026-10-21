@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.HomogeneousTranslation
 public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Height.Box
 import CCDN.Auxiliary.ScaledAuxiliaryCount
 /-! Polynomial coordinates for a translated scaled model, with exact point
 transport and transport of an auxiliary nonmultiple back to the original slice. -/
@@ -38,7 +39,7 @@ lemma scaledModelCoordinates_model_eval {n : ℕ} (h : ℤ) (a z : Fin n → ℤ
 lemma scaledModelCoordinates_box {n : ℕ} {B : ℝ} {d : ℕ} {h : ℤ}
     (hB : 1 ≤ B) (hh : 0 ≤ h) (hhB : (h : ℝ) ≤ B)
     (a z : Fin n → ℤ) (ha : ∀ j, 0 ≤ a j ∧ a j ≤ d)
-    (hz : ∀ j, |(z j : ℝ)| ≤ B) (j : Fin (n + 1)) :
+    (hz : InBox z B) (j : Fin (n + 1)) :
     |(eval z (scaledModelCoordinates h a j) : ℝ)| ≤ ((d : ℝ) + 1) * B := by
   have hhR : (0 : ℝ) ≤ h := by exact_mod_cast hh
   have hdR : (0 : ℝ) ≤ d := by positivity

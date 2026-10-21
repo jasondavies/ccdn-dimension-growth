@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.ScaledPlaneCount
+public import CCDN.Height.Box
 import CCDN.ForMathlib.Log
 /-! The scaling-prime interval yields the affine box exponent 1/d. These
 numerical bounds are independent of the coefficient height. -/
@@ -111,7 +112,7 @@ theorem scaled_plane_finite_count_one_over_degree
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z)
     (hz : ∀ i, MvPolynomial.eval (z i) f = 0)
     {A B C : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B) (hpB : (p : ℝ) ≤ B) (hBp : B ≤ A * p)
-    (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
+    (hbox : ∀ i, InBox (z i) B) (hC : 0 ≤ C)
     (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤
       (38 + 8 * Real.exp (heightDeterminantError C + 20) +

@@ -8,6 +8,7 @@ module
 public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
 public import CCDN.Auxiliary.HypersurfaceSmallHeightAuxiliary
 public import CCDN.Height.HypersurfaceLargeHeightDegree
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceLargeHeightAuxiliary
 /-! Combine the two height ranges under the paper's explicit leading-coefficient
 position condition. The main term retains the bad-prime factor of any finite prime
@@ -125,11 +126,11 @@ theorem positioned_auxiliary_degree_of_comparison
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom K) f))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H)
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)
     (bad : Finset ℕ) (hcomp : AuxiliaryRankComparison order f d z bad)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (T : ℝ) (hT : 0 ≤ T)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
       T * d * degreeRoot n d) :

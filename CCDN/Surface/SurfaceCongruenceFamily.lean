@@ -8,6 +8,7 @@ module
 public import CCDN.Surface.SurfaceCongruenceCutoff
 public import CCDN.Determinant.SmoothAffineResidueClasses
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 /-! A coherent choice of proper auxiliaries for every finite
 smooth residue family. The structure stores conclusions of the determinant
 theorem; its existence is proved from the equation. -/
@@ -40,7 +41,7 @@ theorem exists_surface_congruence_family
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {K H B : ℝ} (hK : 0 ≤ K) (hH : 1 ≤ H) (hB : 1 ≤ B)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (hheight : Real.log H ≤ K * (Real.log B + 1)) :
     Nonempty (SurfaceCongruenceFamily f B (surfaceCongruenceDegreeConstant f.totalDegree K)) := by
   classical
@@ -72,14 +73,14 @@ lemma SurfaceCongruenceFamily.initial_eq {f : MvPolynomial (Fin 3) ℤ} {B A : �
 
 lemma SurfaceCongruenceFamily.initial_vanishes {f : MvPolynomial (Fin 3) ℤ} {B A : ℝ}
     (F : SurfaceCongruenceFamily f B A) (x : IntPoint 3)
-    (hx : ∀ j, |(x j : ℝ)| ≤ B) (hxf : eval x f = 0) :
+    (hx : InBox x B) (hxf : eval x f = 0) :
     eval x F.initial = 0 :=
   F.vanishes ∅ (by simp) (emptySmoothAffineResidueFamily f) x
     (mem_affineCongruencePoints.mpr ⟨hx, hxf, by simp⟩)
 
 lemma SurfaceCongruenceFamily.point_vanishes {f : MvPolynomial (Fin 3) ℤ} {B A : ℝ}
     (F : SurfaceCongruenceFamily f B A) (x : IntPoint 3)
-    (hx : ∀ j, |(x j : ℝ)| ≤ B) (hxf : eval x f = 0)
+    (hx : InBox x B) (hxf : eval x f = 0)
     (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime)
     (hs : ∀ p ∈ P, ∃ j, eval (fun i => (x i : ZMod p))
       (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0) :

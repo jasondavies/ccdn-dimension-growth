@@ -182,7 +182,7 @@ theorem prime_scaled_affine_auxiliary_minimum {n : ℕ}
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree A B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
         (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   obtain ⟨g, hg0, hgnd, hgdegree, hgzero⟩ := prime_scaled_affine_auxiliary f hprim hir hd hp hp0 hB hpB
   exact ⟨g, hg0, hgnd, hgdegree.trans
     (scaled_hypersurface_auxiliary_minimum_bound f hir.ne_zero hd hp hA hB hpB hBp), hgzero⟩
@@ -196,7 +196,7 @@ theorem affine_auxiliary_minimum_of_small_constant_coefficient {n : ℕ}
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree scalingPrimeRatio B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
         (hypersurfaceBadPrimeFactor (scaledHomogenize f.totalDegree 1 f)) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   obtain ⟨p, hp, hlo, hhi, hnd⟩ := exists_scaling_prime hB hc hheight
   exact prime_scaled_affine_auxiliary_minimum f hprim hir hd hp hnd
     scalingPrimeRatio_one_le (scalingPrimeRatio_one_le.trans hB) hhi hlo.le

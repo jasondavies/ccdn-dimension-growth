@@ -7,7 +7,8 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Basic.Real.Basic
-/-! The maximum absolute coefficient height of an integer polynomial. -/
+/-! The maximum absolute coefficient height of an integer polynomial, and the hypothesis
+`CoefficientHeightLE f H` that it is at most a real bound `H`. -/
 
 @[expose] public section
 namespace CCDN
@@ -16,6 +17,11 @@ open MvPolynomial
 
 def integerCoefficientHeight {σ : Type*} (f : MvPolynomial σ ℤ) : ℕ :=
   f.support.sup (fun m => (f.coeff m).natAbs)
+
+/-- Every coefficient of `f` has absolute value at most the real bound `H`, that is, the
+coefficient height of `f` is at most `H` (`coefficientHeightLE_iff`). -/
+abbrev CoefficientHeightLE {σ : Type*} (f : MvPolynomial σ ℤ) (H : ℝ) : Prop :=
+  ∀ m, |(f.coeff m : ℝ)| ≤ H
 
 lemma coefficient_abs_le_integerCoefficientHeight {σ : Type*}
     (f : MvPolynomial σ ℤ) (m : σ →₀ ℕ) :
@@ -27,7 +33,7 @@ lemma coefficient_abs_le_integerCoefficientHeight {σ : Type*}
   simpa only [Nat.cast_natAbs, Int.cast_abs] using (show ((f.coeff m).natAbs : ℝ) ≤ integerCoefficientHeight f by exact_mod_cast hh)
 
 lemma integerCoefficientHeight_le {σ : Type*} (f : MvPolynomial σ ℤ)
-    {H : ℝ} (hH : 0 ≤ H) (hc : ∀ m, |(f.coeff m : ℝ)| ≤ H) :
+    {H : ℝ} (hH : 0 ≤ H) (hc : CoefficientHeightLE f H) :
     (integerCoefficientHeight f : ℝ) ≤ H := by
   classical
   by_cases hf : f.support.Nonempty
@@ -37,6 +43,12 @@ lemma integerCoefficientHeight_le {σ : Type*} (f : MvPolynomial σ ℤ)
     simpa only [Nat.cast_natAbs, Int.cast_abs] using hc m
   · have he : f.support = ∅ := Finset.not_nonempty_iff_eq_empty.mp hf
     simpa [integerCoefficientHeight, he] using hH
+
+/-- A real bound on all coefficients is the same as a bound on the coefficient height. -/
+lemma coefficientHeightLE_iff {σ : Type*} {f : MvPolynomial σ ℤ} {H : ℝ} :
+    CoefficientHeightLE f H ↔ (integerCoefficientHeight f : ℝ) ≤ H :=
+  ⟨fun hc => integerCoefficientHeight_le f ((abs_nonneg _).trans (hc 0)) hc,
+    fun hH m => (coefficient_abs_le_integerCoefficientHeight f m).trans hH⟩
 
 lemma integerCoefficientHeight_pos {σ : Type*} (f : MvPolynomial σ ℤ) (hf : f ≠ 0) :
     0 < integerCoefficientHeight f := by

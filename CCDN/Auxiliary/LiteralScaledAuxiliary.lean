@@ -63,7 +63,7 @@ theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
         (literalScalingPrimeCharge h * literalAffineBadPrimeFactor f)
         (integerCoefficientHeight (scaledHomogenize f.totalDegree (h : ℤ) f) : ℝ) ∧
       ∃ G : MvPolynomial (Fin (n + 3)) ℤ, G ≠ 0 ∧ G.IsHomogeneous M ∧
-        (∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 →
+        (∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 →
           eval (Fin.cons (h : ℤ) x) G = 0) ∧
         ¬ scaledHomogenize f.totalDegree (h : ℤ) f ∣ G := by
   classical
@@ -144,7 +144,7 @@ theorem literal_prime_scaled_affine_auxiliary {n : ℕ}
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
         (Real.exp 1 * literalAffineBadPrimeFactor f)
         (integerCoefficientHeight (scaledHomogenize f.totalDegree (p : ℤ) f) : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   obtain ⟨M, hM, G, _, hGhom, hGzero, hGnd⟩ := literal_scaled_homogeneous_auxiliary
     f hir hd p hp.pos (prime_scaled_zero_primitive f hp hp0) hB hpB
@@ -169,7 +169,7 @@ theorem literal_unscaled_affine_auxiliary {n : ℕ}
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬f ∣ g ∧
       (g.totalDegree : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n f.totalDegree B
         (literalAffineBadPrimeFactor f) (integerCoefficientHeight f : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   obtain ⟨M, hM, G, _, hGhom, hGzero, hGnd⟩ := literal_scaled_homogeneous_auxiliary
     f hir hd 1 (by omega) (fun x _ => primitive_affine_integer_coordinates x) hB (by simpa using hB)

@@ -44,7 +44,7 @@ of f. N is the exact dimension of the space of homogeneous degree-d forms. -/
 theorem homogeneous_no_auxiliary_coefficient_height {n d t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (z : Fin t → IntPoint (n + 1)) (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (hrel : ∀ g : MvPolynomial (Fin (n + 1)) ℤ, g.IsHomogeneous d →
       (∀ i, eval (z i) g = 0) → f ∣ g) :
     Real.log (integerCoefficientHeight f : ℝ) ≤

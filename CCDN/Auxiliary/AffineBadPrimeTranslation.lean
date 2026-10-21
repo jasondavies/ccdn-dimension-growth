@@ -53,11 +53,11 @@ theorem hypersurfaceBadPrimeFactor_affineTranslation {n : ℕ}
 theorem affine_auxiliary_translation_transport {n : ℕ}
     (f g : MvPolynomial (Fin n) ℤ) (a : Fin n → ℤ)
     (hg : g ≠ 0) (hnd : ¬ affineTranslation ℤ a f ∣ g)
-    {B D : ℝ} (ha : ∀ j, |(a j : ℝ)| ≤ D)
-    (hzero : ∀ x : IntPoint n, (∀ j, |(x j : ℝ)| ≤ B + D) →
+    {B D : ℝ} (ha : InBox a D)
+    (hzero : ∀ x : IntPoint n, InBox x (B + D) →
       eval x (affineTranslation ℤ a f) = 0 → eval x g = 0) :
     ∃ G : MvPolynomial (Fin n) ℤ, G ≠ 0 ∧ ¬ f ∣ G ∧ G.totalDegree = g.totalDegree ∧
-      ∀ x : IntPoint n, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x G = 0 := by
+      ∀ x : IntPoint n, InBox x B → eval x f = 0 → eval x G = 0 := by
   let G := (affineTranslation ℤ a).symm g
   have hG0 : G ≠ 0 := (affineTranslation ℤ a).symm.injective.ne (by simpa using hg)
   have hGnd : ¬ f ∣ G := by

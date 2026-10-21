@@ -83,7 +83,7 @@ theorem affine_hypersurface_auxiliary {n : ℕ}
         affineAuxiliaryDegreeExpression n f.totalDegree B
           (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
           (hypersurfaceBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := hypersurfaceBadPrimeFactor f

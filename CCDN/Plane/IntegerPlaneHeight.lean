@@ -8,6 +8,8 @@ module
 public import CCDN.Noether.ClosedFormHeight
 public import CCDN.Plane.FiniteFieldBadPlanes
 public import Mathlib.Tactic.Continuity
+public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.Box
 import CCDN.Height.PolynomialBoxHeight
 import CCDN.Noether.UniversalPlaneEvaluation
 import CCDN.Noether.UniversalPlaneWitness
@@ -43,8 +45,8 @@ def integerPlaneHeight (m d : ℕ) (H A : ℝ) : ℝ :=
 in terms of the original coefficient height, degree and ambient dimension. -/
 theorem integer_plane_section_coefficient_bound {σ : Type*} [Fintype σ]
     (f : MvPolynomial σ ℤ) (H A : ℝ) (hH : 0 ≤ H) (hA : 1 ≤ A)
-    (hf : ∀ e, |(f.coeff e : ℝ)| ≤ H)
-    (v : PlaneParameters σ → ℤ) (hv : ∀ i, |(v i : ℝ)| ≤ A) :
+    (hf : CoefficientHeightLE f H)
+    (v : PlaneParameters σ → ℤ) (hv : InBox v A) :
     BivariateCoefficientBound (universalPlaneSection f v)
       (integerPlaneHeight (Fintype.card σ) f.totalDegree H A) := by
   let φ := Int.castRingHom ℝ

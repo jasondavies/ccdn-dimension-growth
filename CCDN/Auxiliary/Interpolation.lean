@@ -9,6 +9,7 @@ public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Basic.Real.Basic
 public import Mathlib.Data.Finsupp.Weight
 public import Mathlib.Data.Matrix.Mul
+public import CCDN.Height.Box
 import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import Mathlib.Tactic.Positivity
@@ -70,7 +71,7 @@ theorem eval_polynomialOfCoefficients {n N s : ℕ} (mon : Fin N → (Fin n →�
 
 /-- Monomial evaluation has the expected height bound, uniformly in the exponents and point. -/
 theorem abs_monomial_value_le {n M : ℕ} (e : Fin n →₀ ℕ) (x : Fin n → ℤ)
-    {B : ℝ} (hB : 1 ≤ B) (hx : ∀ i, |(x i : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hx : InBox x B)
     (he : e.degree ≤ M) :
     |((e.prod (fun i k => x i ^ k) : ℤ) : ℝ)| ≤ B ^ M := by
   have hsum : ∑ i, e i ≤ M := by rwa [Finsupp.degree_eq_sum] at he

@@ -8,6 +8,7 @@ module
 public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.Box
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.PlaneAuxiliaryDegree
 import CCDN.Auxiliary.PlaneAuxiliaryLargeHeight
 import CCDN.Auxiliary.PlaneAuxiliarySelection
@@ -25,10 +26,10 @@ theorem projective_exists_auxiliary_small_height
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 2 ≤ d) (hdM : d ≤ M)
     (hdchart : (affineChart 2 f).totalDegree = d)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) (affineChart 2 f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |((affineChart 2 f).coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE (affineChart 2 f) H)
     (z : Fin t → IntPoint 3) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, MvPolynomial.eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (hML : Real.log B ≤ M)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 4 * d * Real.log B)
     (hthreshold : 2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) *
@@ -63,10 +64,10 @@ theorem projective_exists_auxiliary_large_height
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 2 ≤ d) (hMlarge : 32 * d ≤ M)
     (hdchart : (affineChart 2 f).totalDegree = d)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) (affineChart 2 f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |((affineChart 2 f).coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE (affineChart 2 f) H)
     (z : Fin t → IntPoint 3) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, MvPolynomial.eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 4 * d * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * (d : ℝ) ^ 2)
@@ -100,10 +101,10 @@ theorem projective_auxiliary_small_height_degree
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 2 ≤ d)
     (hdchart : (affineChart 2 f).totalDegree = d)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) (affineChart 2 f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |((affineChart 2 f).coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE (affineChart 2 f) H)
     (z : Fin t → IntPoint 3) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, MvPolynomial.eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 4 * d * Real.log B) :
     ∃ M : ℕ, (M : ℝ) ≤ d + Real.log B +
       2 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 23) * (d : ℝ) ^ 3 *
@@ -130,10 +131,10 @@ theorem projective_auxiliary_large_height_degree
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 2 ≤ d)
     (hdchart : (affineChart 2 f).totalDegree = d)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) (affineChart 2 f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |((affineChart 2 f).coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE (affineChart 2 f) H)
     (z : Fin t → IntPoint 3) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, MvPolynomial.eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 4 * d * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| + T * (d : ℝ) ^ 2) :

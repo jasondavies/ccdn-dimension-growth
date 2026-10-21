@@ -72,7 +72,7 @@ the counting interface, including empty point sets. -/
 lemma integer_zero_count_le_of_family_bound {n : ℕ} (f : MvPolynomial (Fin n) ℤ)
     (B R : ℝ)
     (hbound : ∀ (t : ℕ) (z : Fin t → Fin n → ℤ), Function.Injective z →
-      (∀ i, eval (z i) f = 0) → (∀ i j, |(z i j : ℝ)| ≤ B) → (t : ℝ) ≤ R) :
+      (∀ i, eval (z i) f = 0) → (∀ i, InBox (z i) B) → (t : ℝ) ≤ R) :
     (count (zeroLocus (MvPolynomial.map (Int.castRingHom ℚ) f)) B : ℝ) ≤ R := by
   classical
   let S := integralPoints (zeroLocus (MvPolynomial.map (Int.castRingHom ℚ) f)) B
@@ -87,7 +87,7 @@ lemma integer_zero_count_le_of_family_bound {n : ℕ} (f : MvPolynomial (Fin n) 
     change (Int.castRingHom ℚ) (eval (z i) f) = 0
     rw [map_eval]
     exact h
-  have hbox : ∀ i j, |(z i j : ℝ)| ≤ B := fun i => (mem_integralPoints.mp (e i).property).1
+  have hbox : ∀ i, InBox (z i) B := fun i => (mem_integralPoints.mp (e i).property).1
   have h := hbound _ z hinj hzero hbox
   simpa only [Fintype.card_coe, S, count] using h
 

@@ -9,6 +9,7 @@ public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Algebra.HomogeneousTranslation
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousLeadingCoefficient
 import CCDN.Height.HomogeneousEvaluationHeight
 import CCDN.Plane.PlaneGridHeight
@@ -54,7 +55,7 @@ theorem homogeneousTranslation_chart_coefficient_bound {d : ℕ}
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d)
     (a : Fin 2 → ℤ) (ha : ∀ j, 0 ≤ a j ∧ a j ≤ d)
     {L : ℝ} (hL : 0 ≤ L)
-    (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (2 * (d + 1)) * L)
+    (hcoeff : CoefficientHeightLE f (((d : ℝ) + 1) ^ (2 * (d + 1)) * L))
     (m : Fin 2 →₀ ℕ) :
     |((affineChart 2 (homogeneousTranslation ℤ a f)).coeff m : ℝ)| ≤
       leadingPositionHeightFactor d * L := by
@@ -104,7 +105,7 @@ hypothesis with absolute constant 14, and a coefficient height at least one. -/
 theorem exists_translated_coefficient_position {d : ℕ} (hd : 0 < d)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) :
     ∃ (a : Fin 2 → ℤ) (H : ℝ), (∀ j, 0 ≤ a j ∧ a j ≤ d) ∧ 1 ≤ H ∧
-      (∀ m, |((affineChart 2 (homogeneousTranslation ℤ a f)).coeff m : ℝ)| ≤ H) ∧
+      CoefficientHeightLE (affineChart 2 (homogeneousTranslation ℤ a f)) H ∧
       Real.log |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)| ≤ Real.log H ∧
       Real.log H ≤ Real.log |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)| +
         14 * (d : ℝ) ^ 2 := by

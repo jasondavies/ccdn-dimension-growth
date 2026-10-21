@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 /-! Corollary 3.2.3 for the literal affine bad-prime factor of Definition
 3.2.1, including degree drops which preserve irreducibility.
 Here "literal" means the paper's Definition 3.2.1 applied verbatim to the affine
@@ -20,7 +21,7 @@ noncomputable section
 integer polynomial and any coefficient bound H at least one. -/
 theorem literalAffineBadPrimeFactor_le_max {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H) :
+    (hcoeff : CoefficientHeightLE f H) :
     literalAffineBadPrimeFactor f ≤
       (2 * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (n + 1)) *
         max (Real.log H / (f.totalDegree : ℝ) ^ 2) 1 :=

@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.Interpolation
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import CCDN.Height.Box
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 
 /-!
@@ -56,7 +57,7 @@ theorem abs_gram_det_le {s N : ℕ} (A : Matrix (Fin s) (Fin N) ℝ) {H : ℝ}
 
 theorem evaluation_gram_det_le {n N s M : ℕ}
     (mon : Fin N → (Fin n →₀ ℕ)) (points : Fin s → (Fin n → ℤ))
-    {B : ℝ} (hB : 1 ≤ B) (hpoints : ∀ i k, |(points i k : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hpoints : ∀ i, InBox (points i) B)
     (hdeg : ∀ j, (mon j).degree ≤ M) :
     let A := (evaluationMatrix mon points).map ((↑) : ℤ → ℝ)
     |(A * Aᵀ).det| ≤ (s.factorial : ℝ) * ((N : ℝ) * (B ^ M) ^ 2) ^ s := by

@@ -95,7 +95,7 @@ lemma homogeneousPointTranslation_projective_injective {n t : ℕ}
 
 lemma homogeneousPointTranslation_box {n d : ℕ} {B : ℝ} (hB : 1 ≤ B)
     (a : Fin n → ℤ) (ha : ∀ j, 0 ≤ a j ∧ a j ≤ d)
-    (z : IntPoint (n + 1)) (hz : ∀ j, |(z j : ℝ)| ≤ B) (j : Fin (n + 1)) :
+    (z : IntPoint (n + 1)) (hz : InBox z B) (j : Fin (n + 1)) :
     |((homogeneousPointTranslation (-a) z j : ℤ) : ℝ)| ≤ ((d : ℝ) + 1) * B := by
   have hd0 : (0 : ℝ) ≤ d := by positivity
   refine Fin.cases ?_ (fun k => ?_) j

@@ -52,7 +52,7 @@ theorem plane_finite_count_of_residue_bound
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f)) (hd : 0 < f.totalDegree)
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0)
-    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
+    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) (hC : 0 ≤ C)
     (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ (2 * Real.exp 1 * affineNonzeroConstantBound C) * curveBound f.totalDegree B := by
   have hf0 : f ≠ 0 := fun h => hir.ne_zero (by simp [h])

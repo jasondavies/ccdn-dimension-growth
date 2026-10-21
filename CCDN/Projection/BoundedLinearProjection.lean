@@ -125,7 +125,7 @@ theorem exists_bounded_integer_scaled_projection {s r : ℕ}
 theorem integer_linear_map_box_bound {m n : ℕ}
     (P : Matrix (Fin m) (Fin n) ℤ) {H B : ℝ} (hH : 0 ≤ H)
     (hP : ∀ i j, |(P i j : ℝ)| ≤ H)
-    (z : IntPoint n) (hz : ∀ j, |(z j : ℝ)| ≤ B) :
+    (z : IntPoint n) (hz : InBox z B) :
     ∀ i, |((P *ᵥ z) i : ℝ)| ≤ (n : ℝ) * H * B := by
   intro i
   simp only [Matrix.mulVec, dotProduct, Int.cast_sum, Int.cast_mul]
@@ -144,7 +144,7 @@ since primitive reduction cannot enlarge an integral representative. -/
 theorem projective_integer_linear_map_height {m n : ℕ}
     (P : Matrix (Fin (m + 1)) (Fin n) ℤ) {H B : ℝ} (hH : 0 ≤ H)
     (hP : ∀ i j, |(P i j : ℝ)| ≤ H)
-    (z : IntPoint n) (hz : ∀ j, |(z j : ℝ)| ≤ B) (himage : P *ᵥ z ≠ 0) :
+    (z : IntPoint n) (hz : InBox z B) (himage : P *ᵥ z ≠ 0) :
     (Projectivization.mk ℚ (rationalPoint (P *ᵥ z))
       (rationalPoint_ne_zero himage)).mulHeight ≤ (n : ℝ) * H * B :=
   projective_integer_height_le _ himage (integer_linear_map_box_bound P hH hP z hz)

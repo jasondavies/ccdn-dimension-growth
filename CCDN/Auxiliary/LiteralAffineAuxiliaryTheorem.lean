@@ -43,7 +43,7 @@ theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
         (affineAuxiliaryComparisonConstant n) B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
         (literalAffineBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := literalAffineBadPrimeFactor f
@@ -96,7 +96,7 @@ theorem literal_affine_hypersurface_auxiliary_absolute {n : ℕ}
         affineAuxiliaryDegreeExpression n f.totalDegree B
           (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
           (literalAffineBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := literalAffineBadPrimeFactor f
@@ -146,7 +146,7 @@ theorem literal_affine_hypersurface_auxiliary {n : ℕ}
         affineAuxiliaryDegreeExpression n f.totalDegree B
           (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
           (literalAffineBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   by_cases habs : AbsolutelyIrreducible f
   · exact literal_affine_hypersurface_auxiliary_absolute f hprim hir habs hd hB
   · simpa only [literalAffineBadPrimeFactor_eq_zero f habs, hypersurfaceBadPrimeFactor_eq_zero f habs] using

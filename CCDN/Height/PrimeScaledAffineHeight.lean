@@ -115,7 +115,7 @@ theorem prime_scaled_affine_auxiliary_height {n : ℕ}
     ∃ g : MvPolynomial (Fin (n + 2)) ℤ, g ≠ 0 ∧ ¬ f ∣ g ∧
       (g.totalDegree : ℝ) ≤ affineLogarithmicAuxiliaryBound n f.totalDegree A B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   obtain ⟨g, hg0, hgnd, hgdegree, hgzero⟩ := prime_scaled_affine_auxiliary f hprim hir hd hp hp0 hB hpB
   refine ⟨g, hg0, hgnd, hgdegree.trans ?_, hgzero⟩
   exact scaled_hypersurface_auxiliary_bound f hir.ne_zero hd

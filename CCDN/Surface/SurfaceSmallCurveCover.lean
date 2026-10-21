@@ -8,6 +8,7 @@ module
 public import CCDN.Surface.SurfaceResidueCover
 public import CCDN.Hypersurface.SingularHypersurfaceCount
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Hilbert.CompleteIntersectionDegreeBudget
 /-! A small-curve and residual cover for a surface of controlled
@@ -56,7 +57,7 @@ cover of degree at most `2 d A Λ(B, L)`, or lies in the residual locus. -/
 theorem surface_point_mem_small_curve_cover (f : MvPolynomial (Fin 3) ℤ)
     (hirQ : Irreducible (map (Int.castRingHom ℚ) f))
     {A B H L X : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B) (hH : 1 ≤ H) (hL : 1 ≤ L)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (hderivative : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
       Real.log H + f.totalDegree * Real.log B ≤ L)
     (hX : 1 < X) (hBX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)
@@ -67,7 +68,7 @@ theorem surface_point_mem_small_curve_cover (f : MvPolynomial (Fin 3) ℤ)
       0 < δ I ∧ HasAffineCurveDegree I (δ I))
     (hcover : zeroLocus (map (Int.castRingHom ℚ) f) ∩
       zeroLocus (map (Int.castRingHom ℚ) F.initial) = ⋃ I ∈ S, idealZeroLocus I)
-    (x : IntPoint 3) (hx : ∀ j, |(x j : ℝ)| ≤ B) (hxf : eval x f = 0) :
+    (x : IntPoint 3) (hx : InBox x B) (hxf : eval x f = 0) :
     rationalPoint x ∈ singularHypersurfaceLocus (map (Int.castRingHom ℚ) f) ∪
       (⋃ I ∈ S.filter (fun I => (δ I : ℝ) ≤
         2 * f.totalDegree * A * surfaceResidueLogBudget B L), idealZeroLocus I) ∪
@@ -104,7 +105,7 @@ theorem exists_surface_small_curve_residual_cover
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) {K H B L X : ℝ}
     (hK : 0 ≤ K) (hH : 1 ≤ H) (hB : 1 ≤ B) (hL : 1 ≤ L)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (hheight : Real.log H ≤ K * (Real.log B + 1))
     (hderivative : 4 * Real.log ((f.totalDegree : ℝ) + 1) +
       Real.log H + f.totalDegree * Real.log B ≤ L)

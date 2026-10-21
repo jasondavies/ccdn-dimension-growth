@@ -9,6 +9,7 @@ public import CCDN.Auxiliary.HypersurfaceBadReduction
 public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.ConstantLeadingBadReduction
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.GeneralBadReduction
 import CCDN.Projection.ShearNormalization
 import Mathlib.Algebra.MvPolynomial.Nilpotent
@@ -81,7 +82,7 @@ theorem exists_plane_bad_prime_set
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (f : MvPolynomial (Fin 2) ℤ) (hd : 0 < f.totalDegree)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H) :
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H) :
     ∃ B : Finset ℕ,
       (∀ p, p ∈ B ↔
         stepanovThreshold (f.totalDegree : ℝ) < (p : ℝ) ∧ HypersurfaceBadReduction f p) ∧

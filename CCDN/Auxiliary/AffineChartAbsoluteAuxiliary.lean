@@ -41,7 +41,7 @@ theorem affine_chart_absolute_auxiliary_degree
     (bad : Finset ℕ)
     (hgood : ∀ (p : ℕ) [Fact p.Prime], p ∉ bad → stepanovThreshold (d : ℝ) < p →
       AffineChartGoodPrime f z p)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) :
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) :
     ∃ M : ℕ,
       (M : ℝ) ≤ hypersurfaceAuxiliaryDegreeBound n d B (primeSetFactor bad)
         (integerCoefficientHeight f) ∧

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.NumberTheory.Height.NumberField
 public import Mathlib.NumberTheory.Height.Projectivization
+public import CCDN.Height.Box
 import CCDN.ForMathlib.MatrixRank
 import CCDN.Height.ProjectiveIntegerHeight
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
@@ -20,7 +21,7 @@ noncomputable section
 open Matrix
 
 theorem integer_tuple_height_le {ι : Type*} [Fintype ι]
-    (z : ι → ℤ) (hz : z ≠ 0) {B : ℝ} (hB : ∀ i, |(z i : ℝ)| ≤ B) :
+    (z : ι → ℤ) (hz : z ≠ 0) {B : ℝ} (hB : InBox z B) :
     Height.mulHeight (fun i => (z i : ℚ)) ≤ B := by
   classical
   obtain ⟨i,hi⟩ := Function.ne_iff.mp hz

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.PlaneAuxiliaryDegree
 import CCDN.Auxiliary.PlaneAuxiliaryLargeHeight
 import CCDN.Auxiliary.PlaneAuxiliarySelection
@@ -23,7 +24,7 @@ theorem polynomial_map_exists_auxiliary_small_height
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d) (hdM : d ≤ M)
     (q : MvPolynomial (Fin 2) ℤ) (hqdegree : q.totalDegree = d)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) q))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(q.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE q H)
     (τ : Fin 3 → MvPolynomial (Fin 2) ℤ)
     (z : Fin t → Fin 2 → ℤ) (hz : ∀ i, MvPolynomial.eval (z i) q = 0)
     (himage : ∀ i, MvPolynomial.eval (fun j => MvPolynomial.eval (z i) (τ j)) f = 0)
@@ -64,7 +65,7 @@ theorem polynomial_map_exists_auxiliary_large_height
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d) (hMlarge : 32 * d ≤ M)
     (q : MvPolynomial (Fin 2) ℤ) (hqdegree : q.totalDegree = d)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) q))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(q.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE q H)
     (τ : Fin 3 → MvPolynomial (Fin 2) ℤ)
     (z : Fin t → Fin 2 → ℤ) (hz : ∀ i, MvPolynomial.eval (z i) q = 0)
     (himage : ∀ i, MvPolynomial.eval (fun j => MvPolynomial.eval (z i) (τ j)) f = 0)
@@ -102,7 +103,7 @@ theorem polynomial_map_auxiliary_small_height_degree
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d)
     (q : MvPolynomial (Fin 2) ℤ) (hqdegree : q.totalDegree = d)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) q))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(q.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE q H)
     (τ : Fin 3 → MvPolynomial (Fin 2) ℤ)
     (z : Fin t → Fin 2 → ℤ) (hz : ∀ i, MvPolynomial.eval (z i) q = 0)
     (himage : ∀ i, MvPolynomial.eval (fun j => MvPolynomial.eval (z i) (τ j)) f = 0)
@@ -135,7 +136,7 @@ theorem polynomial_map_auxiliary_large_height_degree
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d)
     (q : MvPolynomial (Fin 2) ℤ) (hqdegree : q.totalDegree = d)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) q))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(q.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE q H)
     (τ : Fin 3 → MvPolynomial (Fin 2) ℤ)
     (z : Fin t → Fin 2 → ℤ) (hz : ∀ i, MvPolynomial.eval (z i) q = 0)
     (himage : ∀ i, MvPolynomial.eval (fun j => MvPolynomial.eval (z i) (τ j)) f = 0)

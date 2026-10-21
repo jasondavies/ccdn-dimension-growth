@@ -31,7 +31,7 @@ theorem primitiveProjectiveRep_chart {n : ℕ} (x : ProjectivePoint n) (hx : x.r
   rw [← hcoord j.succ, ← hcoord 0, mul_div_mul_left _ _ c.ne_zero]
 
 theorem projective_integer_height_le {n : ℕ} (z : IntPoint (n + 1)) (hz : z ≠ 0)
-    {B : ℝ} (hbox : ∀ j, |(z j : ℝ)| ≤ B) :
+    {B : ℝ} (hbox : InBox z B) :
     (Projectivization.mk ℚ (rationalPoint z) (rationalPoint_ne_zero hz)).mulHeight ≤ B := by
   classical
   obtain ⟨v, hv, hprim⟩ := Finset.extract_gcd z
@@ -51,7 +51,7 @@ theorem projective_integer_height_le {n : ℕ} (z : IntPoint (n + 1)) (hz : z �
     exact he j
   have hg1 : (1 : ℝ) ≤ |((Finset.univ.gcd z : ℤ) : ℝ)| := by
     exact_mod_cast Int.one_le_abs hg0
-  have hvbox : ∀ j, |(v j : ℝ)| ≤ B := by
+  have hvbox : InBox v B := by
     intro j
     have hh := hbox j
     rw [he j, Int.cast_mul, abs_mul] at hh

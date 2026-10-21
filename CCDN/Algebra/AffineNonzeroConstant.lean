@@ -66,7 +66,7 @@ theorem plane_finite_count_nonzero_constant
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f))
     (hd : 0 < f.totalDegree) (hf0 : f.coeff 0 ≠ 0)
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0)
-    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
+    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) (hC : 0 ≤ C)
     (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ affineNonzeroConstantBound C * curveBound f.totalDegree B := by
   let d := f.totalDegree

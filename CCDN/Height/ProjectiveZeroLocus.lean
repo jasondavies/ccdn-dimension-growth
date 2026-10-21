@@ -95,7 +95,7 @@ theorem projective_zero_count_le_of_family_bound {n d : ℕ}
         (rationalPoint_ne_zero (hz i))) →
       (∀ i, Finset.univ.gcd (z i) = 1) →
       (∀ i, eval (z i) f = 0) →
-      (∀ i j, |(z i j : ℝ)| ≤ B) → (t : ℝ) ≤ R) :
+      (∀ i, InBox (z i) B) → (t : ℝ) ≤ R) :
     (projectiveCount (projectiveZeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤ R := by
   classical
   let S := projectivePoints (projectiveZeroLocus (map (Int.castRingHom ℚ) f)) B

@@ -9,6 +9,7 @@ public import CCDN.Auxiliary.Interpolation
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 public import Mathlib.Data.Finsupp.Weight
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import CCDN.Height.Box
 import Mathlib.Algebra.Order.AbsoluteValue.Int
 /-! Archimedean determinant bounds retaining each monomial's own degree.
 Their exponent is the sum of column degrees, not rank times the cutoff. -/
@@ -42,7 +43,7 @@ theorem abs_det_le_factorial_mul_column_bounds {s : ℕ}
 
 theorem weighted_evaluation_det_bound {n s : ℕ}
     (mon : Fin s → (Fin n →₀ ℕ)) (z : Fin s → (Fin n → ℤ))
-    {B : ℝ} (hB : 1 ≤ B) (hz : ∀ i j, |(z i j : ℝ)| ≤ B) :
+    {B : ℝ} (hB : 1 ≤ B) (hz : ∀ i, InBox (z i) B) :
     |((evaluationMatrix mon z).det : ℝ)| ≤
       (s.factorial : ℝ) * B ^ (∑ j, Finsupp.degree (mon j)) := by
   have hh := abs_det_le_factorial_mul_column_bounds
@@ -59,7 +60,7 @@ theorem weighted_evaluation_det_bound {n s : ℕ}
 upper bound. -/
 theorem weighted_evaluation_det_log_bound {n s : ℕ}
     (mon : Fin s → (Fin n →₀ ℕ)) (z : Fin s → (Fin n → ℤ))
-    {B : ℝ} (hB : 1 ≤ B) (hz : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hz : ∀ i, InBox (z i) B)
     (hne : (evaluationMatrix mon z).det ≠ 0) :
     Real.log |((evaluationMatrix mon z).det : ℝ)| ≤
       Real.log (s.factorial : ℝ) +

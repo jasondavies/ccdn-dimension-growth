@@ -8,6 +8,7 @@ module
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.CongruenceBadPrimeCharge
 import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
 import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
@@ -31,7 +32,7 @@ theorem affine_congruence_determinant_log_lower_height {n s N M : ℕ} (hs : 0 <
     (f : MvPolynomial (Fin (n + 2)) ℤ)
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (G : Fin N → MvPolynomial (Fin (n + 2)) ℤ) (hG : ∀ j, (G j).totalDegree ≤ M)
     (x : Fin s → IntPoint (n + 2)) (hx : ∀ i, eval (x i) f = 0)
     (hrows : LinearIndependent ℚ

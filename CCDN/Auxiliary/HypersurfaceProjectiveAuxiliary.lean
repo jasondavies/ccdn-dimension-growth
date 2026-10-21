@@ -21,7 +21,7 @@ point. -/
 lemma exists_bounded_projective_zero_family {n d : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : f.IsHomogeneous d) (B : ℝ) :
     ∃ (t : ℕ) (z : Fin t → IntPoint (n + 1)), (∀ i, Finset.univ.gcd (z i) = 1) ∧
-      (∀ i, eval (z i) f = 0) ∧ (∀ i j, |(z i j : ℝ)| ≤ B) ∧
+      (∀ i, eval (z i) f = 0) ∧ (∀ i, InBox (z i) B) ∧
       ∀ {M : ℕ} (g : MvPolynomial (Fin (n + 1)) ℤ), g.IsHomogeneous M →
         (∀ i, eval (z i) g = 0) → ∀ x : ProjectivePoint n, x.mulHeight ≤ B →
           x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →

@@ -7,6 +7,7 @@ module
 
 public import CCDN.Plane.ScaledPlaneCount
 public import CCDN.Algebra.ScaledModelCoordinates
+public import CCDN.Height.Box
 import CCDN.Algebra.HomogeneousSlice
 import CCDN.Algebra.ScaledModelPosition
 import CCDN.Auxiliary.PlaneAuxiliaryCount
@@ -55,7 +56,7 @@ theorem unscaled_plane_finite_count
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f)) (hd : 0 < f.totalDegree)
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0)
-    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
+    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) (hC : 0 ≤ C)
     (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤ max
       ((f.totalDegree : ℝ) * scaledPlaneAuxiliaryDegreeBound f.totalDegree C
@@ -124,7 +125,7 @@ theorem unscaled_plane_finite_count_large_coefficient
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f)) (hd : 0 < f.totalDegree)
     (z : Fin t → Fin 2 → ℤ) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0)
-    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B) (hC : 0 ≤ C)
+    {B C : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B) (hC : 0 ≤ C)
     (m : Fin 2 →₀ ℕ) (hm : f.coeff m ≠ 0)
     (hheight : 4 * (f.totalDegree : ℝ) * Real.log (((f.totalDegree : ℝ) + 1) * B) ≤
       Real.log |(f.coeff m : ℝ)|)

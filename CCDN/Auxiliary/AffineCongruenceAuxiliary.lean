@@ -9,6 +9,7 @@ public import CCDN.Height.AffineCongruenceHeight
 import all ArithmeticHeights.BombieriVaaler
 public import CCDN.ForMathlib.StandardMonomials
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.StandardMonomialAuxiliary
 import CCDN.Determinant.WeightedMonomialDeterminant
 
@@ -46,11 +47,11 @@ theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 2)) ℤ)
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (mon : Fin s → (Fin (n + 2) →₀ ℕ))
     (hdegree : ∀ j, Finsupp.degree (mon j) ≤ M)
     (x : Fin s → IntPoint (n + 2)) (hx : ∀ i, eval (x i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(x i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (x i) B)
     (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) (a : ℕ → IntPoint (n + 2))
     (ha : ∀ p ∈ P, eval₂ (Int.castRingHom (ZMod p)) (fun j => (a p j : ZMod p)) f = 0)
     (hsmooth : ∀ p ∈ P, ∃ j, eval (fun i => (a p i : ZMod p))
@@ -91,13 +92,13 @@ theorem exists_affine_congruence_auxiliary_of_gap {n N t M : ℕ} (hN : 0 < N)
     (f : MvPolynomial (Fin (n + 2)) ℤ)
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
-    (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hcoeff : CoefficientHeightLE f H)
     (mon : Fin N → (Fin (n + 2) →₀ ℕ)) (hmon : Function.Injective mon)
     (hstd : ∀ j, mon j ∈ Ideal.standardExponents
       (Ideal.span {map (Int.castRingHom ℚ) f}) MonomialOrder.degLex)
     (hdegree : ∀ j, Finsupp.degree (mon j) ≤ M)
     (x : Fin t → IntPoint (n + 2)) (hx : ∀ i, eval (x i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(x i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (x i) B)
     (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) (a : ℕ → IntPoint (n + 2))
     (ha : ∀ p ∈ P, eval₂ (Int.castRingHom (ZMod p)) (fun j => (a p j : ZMod p)) f = 0)
     (hsmooth : ∀ p ∈ P, ∃ j, eval (fun i => (a p i : ZMod p))

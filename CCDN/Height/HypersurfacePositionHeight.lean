@@ -8,6 +8,8 @@ module
 public import CCDN.Algebra.HomogeneousTranslation
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.Box
 import CCDN.Auxiliary.HypersurfaceLeadingCoefficient
 import CCDN.Height.MultivariateGridHeight
 import CCDN.Height.PolynomialBoxHeight
@@ -37,7 +39,7 @@ theorem hypersurfaceTranslation_coefficient_bound {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (a : Fin n → ℤ) (ha : ∀ j, 0 ≤ a j ∧ a j ≤ d)
     {L : ℝ} (hL : 0 ≤ L)
-    (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) * L)
+    (hcoeff : CoefficientHeightLE f (((d : ℝ) + 1) ^ (n * (d + 1)) * L))
     (m : Fin (n + 1) →₀ ℕ) :
     |((homogeneousTranslation ℤ a f).coeff m : ℝ)| ≤ hypersurfacePositionHeightFactor n d * L := by
   let K := ((d : ℝ) + 1) ^ (n * (d + 1))
@@ -46,7 +48,7 @@ theorem hypersurfaceTranslation_coefficient_bound {n d : ℕ}
       |(eval (fun i => (z i : ℤ)) (homogeneousTranslation ℤ a f) : ℝ)| ≤ V := by
     let w : Fin (n + 1) → ℤ := Fin.cons (z 0 : ℤ)
       (fun j => (z j.succ : ℤ) + a j * (z 0 : ℤ))
-    have hbox : ∀ j, |(w j : ℝ)| ≤ ((d : ℝ) + 1) ^ 2 := by
+    have hbox : InBox w (((d : ℝ) + 1) ^ 2) := by
       intro j
       have hd0 : (0 : ℝ) ≤ d := Nat.cast_nonneg d
       refine Fin.cases ?_ (fun k => ?_) j
@@ -115,8 +117,8 @@ and the chosen height bounds both the original and translated coefficients. -/
 theorem exists_hypersurface_coefficient_position {n r d : ℕ} (hr : 0 < r) (hd : 0 < d)
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) :
     ∃ (a : Fin n → ℤ) (H : ℝ), (∀ j, 0 ≤ a j ∧ a j ≤ d) ∧ 1 ≤ H ∧
-      (∀ m, |(f.coeff m : ℝ)| ≤ H) ∧
-      (∀ m, |((homogeneousTranslation ℤ a f).coeff m : ℝ)| ≤ H) ∧
+      CoefficientHeightLE f H ∧
+      CoefficientHeightLE (homogeneousTranslation ℤ a f) H ∧
       Real.log H ≤ Real.log |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)| +
         ((5 * (n : ℝ) + 5) * ((r : ℝ) + 1)) * d * (d : ℝ) ^ (1 / (r : ℝ)) := by
   obtain ⟨a, ha, hne, hc⟩ := exists_hypersurface_leading_coefficient_translation f hf hf0

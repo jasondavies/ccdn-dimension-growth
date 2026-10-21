@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.Interpolation
+public import CCDN.Height.Box
 
 /-!
 # Coefficient bounds for interpolation polynomials
@@ -25,7 +26,7 @@ open Matrix
 
 theorem abs_coefficient_polynomialOfCoefficients_le {n N : ℕ}
     (mon : Fin N → (Fin n →₀ ℕ)) (hmon : Function.Injective mon)
-    (v : Fin N → ℤ) {R : ℝ} (hR : 0 ≤ R) (hv : ∀ j, |(v j : ℝ)| ≤ R)
+    (v : Fin N → ℤ) {R : ℝ} (hR : 0 ≤ R) (hv : InBox v R)
     (e : Fin n →₀ ℕ) :
     |((polynomialOfCoefficients mon v).coeff e : ℝ)| ≤ R := by
   classical

@@ -216,7 +216,7 @@ theorem exists_primitive_integer_direction {n : ℕ} (w : IntPoint n) (hw : w �
 height at most twice the box radius, representing their full rational line. -/
 theorem exists_primitive_direction_of_two_integer_points {n : ℕ}
     (a b : IntPoint n) (hab : a ≠ b) {B : ℝ}
-    (ha : ∀ j, |(a j : ℝ)| ≤ B) (hb : ∀ j, |(b j : ℝ)| ≤ B) :
+    (ha : InBox a B) (hb : InBox b B) :
     ∃ v : IntPoint n, v ≠ 0 ∧ Finset.univ.gcd v = 1 ∧
       (integerDirectionHeight v : ℝ) ≤ 2 * B ∧
       rationalAffineLine (rationalPoint a) (rationalPoint b - rationalPoint a) =
@@ -262,7 +262,7 @@ theorem rationalAffineLine_integer_rep_and_count {n : ℕ}
     (a v : RatPoint n) {B : ℝ} (hB : 0 ≤ B)
     (hcount : 1 < count (rationalAffineLine a v) B) :
     ∃ (z w : IntPoint n), w ≠ 0 ∧ Finset.univ.gcd w = 1 ∧
-      (∀ j, |(z j : ℝ)| ≤ B) ∧ (integerDirectionHeight w : ℝ) ≤ 2 * B ∧
+      InBox z B ∧ (integerDirectionHeight w : ℝ) ≤ 2 * B ∧
       rationalAffineLine a v = rationalAffineLine (rationalPoint z) (rationalPoint w) ∧
       (count (rationalAffineLine a v) B : ℝ) ≤ 1 + 2 * B / integerDirectionHeight w := by
   obtain ⟨x, hx, y, hy, hxy⟩ := Finset.one_lt_card.mp hcount

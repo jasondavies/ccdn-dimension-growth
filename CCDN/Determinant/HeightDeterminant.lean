@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.SingularDeterminantCutoff
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import all ArithmeticHeights.BombieriVaaler
 import CCDN.Auxiliary.PlaneBadPrimes
 
@@ -30,7 +31,7 @@ theorem singular_determinant_log_lower_height
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     {s N : ℕ} (hs : 0 < s) (f : MvPolynomial (Fin 2) ℤ) (hd : 0 < f.totalDegree)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) f))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H)
     (g : Fin N → MvPolynomial (Fin 2) ℤ) (z : Fin s → Fin 2 → ℤ)
     (hz : ∀ i, eval (z i) f = 0)
     (hrows : LinearIndependent ℚ

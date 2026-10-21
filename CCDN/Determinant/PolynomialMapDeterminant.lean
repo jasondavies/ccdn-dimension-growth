@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.HomogeneousMonomials
 public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Determinant.HomogeneousDeterminantComparison
 /-! The determinant comparison for polynomial homogeneous-coordinate maps of
@@ -43,7 +44,7 @@ theorem polynomial_map_no_auxiliary_height_comparison
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d) (hdM : d ≤ M)
     (q : MvPolynomial (Fin 2) ℤ) (hqdegree : q.totalDegree = d)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom F) q))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(q.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE q H)
     (τ : Fin 3 → MvPolynomial (Fin 2) ℤ)
     (z : Fin t → Fin 2 → ℤ) (hz : ∀ i, eval (z i) q = 0)
     (himage : ∀ i, eval (fun j => eval (z i) (τ j)) f = 0)

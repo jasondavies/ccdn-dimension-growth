@@ -31,7 +31,7 @@ theorem top_form_surface_nonlinear_count :
         ∃ δ : Ideal (CoordinatePolynomial 3) → ℕ,
           (∀ P ∈ S, P.IsPrime ∧ P.height = 2 ∧
             map (Int.castRingHom ℚ) f ∈ P ∧ 0 < δ P ∧ HasAffineCurveDegree P (δ P)) ∧
-          (∀ x : IntPoint 3, (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 →
+          (∀ x : IntPoint 3, InBox x B → eval x f = 0 →
             ∃ P ∈ S, rationalPoint x ∈ idealZeroLocus P) ∧
           ((∑ P ∈ S, δ P : ℕ) : ℝ) ≤ topFormAuxiliaryConstant 1 *
             (f.totalDegree : ℝ) ^ (9 / 2 : ℝ) *

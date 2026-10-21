@@ -9,6 +9,7 @@ public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Auxiliary.PlaneBadPrimes
 public import CCDN.Height.Box
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Determinant.ProjectivePrimeDeterminant
 /-! Coefficient-controlled bad primes for homogeneous projective evaluation
@@ -52,7 +53,7 @@ theorem projective_determinant_log_lower_height
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hdeg : (affineChart 2 f).totalDegree = d)
     (hir : Irreducible (map (Int.castRingHom K) (affineChart 2 f)))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |((affineChart 2 f).coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE (affineChart 2 f) H)
     (F : Fin N → MvPolynomial (Fin 3) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → IntPoint 3) (hprim : ∀ i, univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)

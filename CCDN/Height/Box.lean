@@ -14,6 +14,8 @@ public import Mathlib.Data.Fintype.Pi
 
 Coordinates are integers; membership in the locus is tested after casting to rational numbers.
 The definition works for real radii, including the boundary `B = 1` in CCDN Theorem 3.
+`InBox x B` states that every coordinate of `x` has absolute value at most `B`; for points of
+`ℤⁿ` it is membership in the finite box `integerBox n B` (`mem_integerBox`).
 -/
 
 @[expose] public section
@@ -25,11 +27,15 @@ abbrev RatPoint (n : ℕ) := Fin n → ℚ
 
 def rationalPoint {n : ℕ} (x : IntPoint n) : RatPoint n := fun i => x i
 
+/-- Every coordinate of the integer vector `x` has absolute value at most `B`. -/
+abbrev InBox {ι : Type*} (x : ι → ℤ) (B : ℝ) : Prop :=
+  ∀ i, |(x i : ℝ)| ≤ B
+
 noncomputable def integerBox (n : ℕ) (B : ℝ) : Finset (IntPoint n) :=
   Fintype.piFinset fun _ => Finset.Icc (-⌊B⌋) ⌊B⌋
 
 theorem mem_integerBox {n : ℕ} {B : ℝ} {x : IntPoint n} :
-    x ∈ integerBox n B ↔ ∀ i, |(x i : ℝ)| ≤ B := by
+    x ∈ integerBox n B ↔ InBox x B := by
   simp only [integerBox, Fintype.mem_piFinset, Finset.mem_Icc]
   apply forall_congr'
   intro i
@@ -55,7 +61,7 @@ noncomputable def count {n : ℕ} (X : Set (RatPoint n)) (B : ℝ) : ℕ :=
   (integralPoints X B).card
 
 theorem mem_integralPoints {n : ℕ} {X : Set (RatPoint n)} {B : ℝ} {x : IntPoint n} :
-    x ∈ integralPoints X B ↔ (∀ i, |(x i : ℝ)| ≤ B) ∧ rationalPoint x ∈ X := by
+    x ∈ integralPoints X B ↔ InBox x B ∧ rationalPoint x ∈ X := by
   classical
   simp [integralPoints, mem_integerBox]
 

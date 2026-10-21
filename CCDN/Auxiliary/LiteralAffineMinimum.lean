@@ -55,7 +55,7 @@ theorem literal_prime_scaled_affine_auxiliary_minimum {n : ℕ}
       (g.totalDegree : ℝ) ≤ affineMinimumAuxiliaryBound n f.totalDegree A B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
         (literalAffineBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := literalAffineBadPrimeFactor f
@@ -162,7 +162,7 @@ theorem literal_unscaled_affine_auxiliary_minimum {n k : ℕ}
         (Real.exp (Real.log S + (k : ℝ) * (n + 2 : ℝ))) B
         (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ)
         (literalAffineBadPrimeFactor f) ∧
-      ∀ x : IntPoint (n + 2), (∀ j, |(x j : ℝ)| ≤ B) → eval x f = 0 → eval x g = 0 := by
+      ∀ x : IntPoint (n + 2), InBox x B → eval x f = 0 → eval x g = 0 := by
   let d := f.totalDegree
   let L := (integerCoefficientHeight (homogeneousComponent d f) : ℝ)
   let b := literalAffineBadPrimeFactor f

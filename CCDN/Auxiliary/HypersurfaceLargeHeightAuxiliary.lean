@@ -7,6 +7,7 @@ module
 
 public import CCDN.Height.HypersurfaceLargeHeightDegree
 public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.PlaneAuxiliarySelection
 /-! Auxiliary polynomials in the large-height range. The degree is
 O_{n,T}(d^(4-1/(n+1))); the leading-coefficient positioning cost is explicit. -/
@@ -27,10 +28,10 @@ theorem hypersurface_exists_auxiliary_large_height
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf : f.IsHomogeneous d) (hd : 0 < d) (hM : 8 * d * (n + 2) ≤ M)
     (hir : Irreducible (map (Int.castRingHom K) f))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H)
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 2 * d * (n + 2 : ℝ) * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
@@ -71,10 +72,10 @@ theorem hypersurface_auxiliary_large_height_degree
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom K) f))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H)
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)
-    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
+    {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 2 * d * (n + 2 : ℝ) * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +

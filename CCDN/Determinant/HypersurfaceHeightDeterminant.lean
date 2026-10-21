@@ -7,6 +7,7 @@ module
 
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Plane.IntegerPlaneLogHeight
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 /-! The global determinant bound in higher dimension, with its reduction
 hypotheses verified by the bad-prime set and its coefficient-height control. -/
@@ -48,7 +49,7 @@ theorem hypersurface_determinant_log_lower_height
     {n s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom K) f))
-    (H : ℝ) (hH : 1 ≤ H) (hcoeff : ∀ m, |(f.coeff m : ℝ)| ≤ H)
+    (H : ℝ) (hH : 1 ≤ H) (hcoeff : CoefficientHeightLE f H)
     (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0)

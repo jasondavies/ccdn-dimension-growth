@@ -34,7 +34,7 @@ theorem count_le_of_good_integer_hyperplane_slices {n d e r : ℕ}
     (X : Set (RatPoint (n + 1))) (a : IntPoint (n + 1))
     (j : Fin (n + 1)) (hj : a j ≠ 0) (Y : ℤ → Set (RatPoint n))
     (hd : 1 ≤ d) {B C : ℝ} (hB : 1 ≤ B) (hC : 0 ≤ C)
-    (ha : ∀ i, |(a i : ℝ)| ≤ (d : ℝ) ^ 3)
+    (ha : InBox a ((d : ℝ) ^ 3))
     (hmap : ∀ k x, x ∈ integerSlicePoints X B a k →
       rationalPoint (deleteIntegerCoordinate j x) ∈ Y k)
     (hcount : ∀ k, (count (Y k) B : ℝ) ≤ C * (d : ℝ) ^ e * B ^ r) :

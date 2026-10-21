@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Basic.Real.Basic
+public import CCDN.Auxiliary.IntegerCoefficientHeight
 import Mathlib.Tactic.NormNum.Prime
 import Mathlib.Tactic.NormNum.Ordinal
 import Mathlib.Tactic.NormNum.NatLog
@@ -46,7 +47,7 @@ lemma polynomial_support_card_le {R σ : Type*} [CommSemiring R] [Fintype σ]
 /-- An evaluation estimate with no coefficient-dependent constants. -/
 theorem polynomial_eval₂_box_bound {σ : Type*} [Fintype σ]
     (f : MvPolynomial σ ℤ) (H A : ℝ) (hH : 0 ≤ H) (hA : 1 ≤ A)
-    (hf : ∀ e, |(f.coeff e : ℝ)| ≤ H)
+    (hf : CoefficientHeightLE f H)
     (v : σ → ℝ) (hv : ∀ i, |v i| ≤ A) :
     |eval₂ (Int.castRingHom ℝ) v f| ≤
       ((f.totalDegree : ℝ) + 1) ^ Fintype.card σ * H * A ^ f.totalDegree := by
