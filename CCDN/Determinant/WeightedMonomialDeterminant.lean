@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.Interpolation
+public import CCDN.Algebra.Interpolation
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 public import Mathlib.Data.Finsupp.Weight
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic

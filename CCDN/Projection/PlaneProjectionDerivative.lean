@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Algebraic.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import CCDN.Determinant.PlaneSingularities
 import CCDN.ForMathlib.MvPolynomialDerivative
-import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Hilbert.LinearProjectionFiltration
 import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 /-! In characteristic zero, a plane relation with a transcendental first
 coordinate has a nonzero derivative in the second coordinate. That derivative

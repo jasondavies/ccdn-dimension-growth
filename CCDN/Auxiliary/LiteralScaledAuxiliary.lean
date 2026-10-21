@@ -8,7 +8,7 @@ module
 public import CCDN.Auxiliary.AbsoluteAuxiliary
 public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
-public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.AffineChartAbsoluteAuxiliary

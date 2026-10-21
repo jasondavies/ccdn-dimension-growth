@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.GenericPlaneStretch
-public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.Height.Box
 public import Mathlib.Algebra.GCDMonoid.Finset
 import CCDN.Algebra.ScaledHypersurfaceModel

@@ -9,7 +9,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.ProjectiveClosureProjection
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import CCDN.Algebra.ProjectiveClosureSpecialization
+import CCDN.Projection.ProjectiveClosureSpecialization
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import CCDN.Projection.HomogeneousFiniteProjectionDegree

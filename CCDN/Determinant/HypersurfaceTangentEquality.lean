@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HypersurfaceHilbert
+public import CCDN.Determinant.HypersurfaceHilbert
 import CCDN.Determinant.InitialFormMultiplication
 import CCDN.ForMathlib.MvPolynomial
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas

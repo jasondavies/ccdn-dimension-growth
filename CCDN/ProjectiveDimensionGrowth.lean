@@ -13,7 +13,7 @@ import CCDN.Hilbert.EmptyProjectiveHilbertDimension
 import CCDN.Hilbert.PrimeIdealDimensionDrop
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Hilbert.ProperHilbertDimension
-import CCDN.Hilbert.ZeroDimensionalProjectiveCount
+import CCDN.Projection.ZeroDimensionalProjectiveCount
 import CCDN.Hypersurface.ProjectiveVarietyDimensionGrowth
 import CCDN.Projection.HomogeneousProjectionEquation
 import CCDN.ForMathlib.MvPolynomial

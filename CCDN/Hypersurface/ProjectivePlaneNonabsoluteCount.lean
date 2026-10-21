@@ -8,7 +8,7 @@ module
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.HomogeneousChartIrreducible
-import CCDN.Auxiliary.ProjectiveAffineChart
+import CCDN.Algebra.ProjectiveAffineChart
 import CCDN.Hypersurface.NonabsolutePlaneCount
 import CCDN.Plane.ProjectivePlaneBezout
 import CCDN.ForMathlib.MvPolynomial

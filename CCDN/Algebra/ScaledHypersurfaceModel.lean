@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.ScaledHomogenization
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.HomogeneousSlice
 import CCDN.Algebra.IntegerRationalIrreducibility
-import CCDN.Auxiliary.ScaledHomogenizationPrimitive
+import CCDN.Algebra.ScaledHomogenizationPrimitive
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import CCDN.ForMathlib.MvPolynomial
 /-! Irreducibility and coefficient maps of scaled homogeneous models in

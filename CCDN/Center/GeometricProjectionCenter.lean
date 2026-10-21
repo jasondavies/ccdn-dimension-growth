@@ -10,7 +10,7 @@ public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
 import CCDN.Center.HomogeneousProjectionNoBasePoint
 import CCDN.Center.IndependentBirationalProjection
 import CCDN.Center.IndependentProjectionRows
-import CCDN.Projection.ProjectionScalarExtension
+import CCDN.Algebra.ProjectionScalarExtension
 /-! Rational projection centers of the required dimension, disjoint
 from the variety over extension fields and inducing finite birational maps.
 The integer map has the proved normalization height bound; the sharper

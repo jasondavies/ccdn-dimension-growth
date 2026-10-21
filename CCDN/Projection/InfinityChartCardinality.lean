@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.InfinityEvaluationSpan
-import CCDN.Algebra.HomogeneousScalarExtension
+import CCDN.Projection.HomogeneousScalarExtension
 import CCDN.Auxiliary.HomogeneousChartInterpolation
 
 /-! The certified affine Hilbert degree bounds the number of geometric

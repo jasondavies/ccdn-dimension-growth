@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.PowerSeries.Basic
 import CCDN.Algebra.PointSeparation
 import CCDN.Algebra.SectionImageRank
 import CCDN.Noether.FormalBranchOrder
-import CCDN.Plane.PlaneHilbert
+import CCDN.Hilbert.PlaneHilbert
 import Mathlib.RingTheory.PowerSeries.Inverse
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.RingTheory.PrincipalIdealDomain

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ProjectiveAffineChart
+public import CCDN.Algebra.ProjectiveAffineChart
 /-! Integral representatives need not be primitive to provide an upper
 bound on projective height. Removing their gcd can only decrease the
 maximum absolute coordinate. -/

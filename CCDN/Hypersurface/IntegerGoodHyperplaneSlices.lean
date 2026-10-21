@@ -7,7 +7,7 @@ module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
 import CCDN.Hypersurface.AffineHyperplaneSlice
-import CCDN.Projection.PrimitiveNormalization
+import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Surface.TopFormIrreducibility
 import Mathlib.Algebra.Order.Star.Rat
 import Mathlib.Algebra.BigOperators.Field

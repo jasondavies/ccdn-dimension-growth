@@ -8,7 +8,7 @@ module
 public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Plane.IntegerPlaneLogHeight
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceBadPrimeHeight
 /-! Coordinate invariance of geometric bad reduction and coefficient height,
 with the exact bad-prime charge in standard Fin-indexed coordinates. -/

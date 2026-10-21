@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.IdealZeroLocus
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import CCDN.Algebra.BoundedLinearSeparation
 import CCDN.Height.IntegralAlgebraPointCount

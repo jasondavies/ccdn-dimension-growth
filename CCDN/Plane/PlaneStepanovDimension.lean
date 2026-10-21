@@ -7,7 +7,7 @@ module
 
 public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Hilbert.FilteredIntersection
-import CCDN.Plane.PlaneHilbert
+import CCDN.Hilbert.PlaneHilbert
 import CCDN.Plane.StepanovParameters
 import Mathlib.Data.Nat.Choose.Bounds
 /-! The exact plane Hilbert function verifies the Stepanov dimension inequality

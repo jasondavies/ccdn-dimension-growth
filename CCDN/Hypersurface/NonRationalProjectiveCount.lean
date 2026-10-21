@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Algebra.ConjugatePrimeGridBound
+public import CCDN.Hypersurface.ConjugatePrimeGridBound
 public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box

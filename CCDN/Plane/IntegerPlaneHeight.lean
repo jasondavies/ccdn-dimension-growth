@@ -8,7 +8,7 @@ module
 public import CCDN.Noether.ClosedFormHeight
 public import CCDN.Plane.FiniteFieldBadPlanes
 public import Mathlib.Tactic.Continuity
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.Box
 import CCDN.Height.PolynomialBoxHeight
 import CCDN.Noether.UniversalPlaneEvaluation

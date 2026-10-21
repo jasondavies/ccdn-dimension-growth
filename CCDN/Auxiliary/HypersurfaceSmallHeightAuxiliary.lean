@@ -7,7 +7,7 @@ module
 
 public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.HypersurfaceBadPrimeComparison
-public import CCDN.Height.HypersurfaceSmallHeightDegree
+public import CCDN.Auxiliary.HypersurfaceSmallHeightDegree
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Auxiliary.PlaneAuxiliarySelection
 /-! Higher-dimensional auxiliary polynomials in the small-height range, with exact

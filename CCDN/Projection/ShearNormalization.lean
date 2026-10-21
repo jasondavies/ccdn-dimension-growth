@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.LeadingDirection
+public import CCDN.Projection.LeadingDirection
 public import CCDN.Auxiliary.ConstantLeadingBadReduction
 public import CCDN.Plane.PlaneShear
 /-! Bounded integral shears give full outer degree. -/

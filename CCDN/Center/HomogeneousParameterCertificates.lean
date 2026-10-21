@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Algebra.CoordinatePowerGeneration
 import CCDN.Center.HomogeneousProjectionNoBasePoint
 import CCDN.ForMathlib.MvPolynomial

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import CCDN.Algebra.PolynomialPredicates
 public import Mathlib.RingTheory.Nullstellensatz
 import CCDN.Algebra.CoordinatePowerGeneration

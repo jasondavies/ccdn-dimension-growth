@@ -5,12 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.FieldTheory.Minpoly.Basic
 public import Mathlib.RingTheory.Algebraic.Defs
 import CCDN.Hilbert.FunctionFieldRank
-import CCDN.Plane.PlaneHilbert
+import CCDN.Hilbert.PlaneHilbert
 import CCDN.Projection.PlaneProjectionDegree
 import Mathlib.Algebra.MvPolynomial.Monad
 import Mathlib.FieldTheory.PrimitiveElement

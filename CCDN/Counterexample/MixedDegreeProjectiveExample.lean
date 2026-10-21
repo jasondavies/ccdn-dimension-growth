@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ProjectiveReduction
+public import CCDN.Determinant.ProjectiveReduction
 
 /-! Why primitive projective evaluation requires a common column degree.
 

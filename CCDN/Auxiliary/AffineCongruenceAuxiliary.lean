@@ -7,8 +7,8 @@ module
 
 public import CCDN.ForMathlib.StandardMonomials
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Auxiliary.IntegerCoefficientHeight
-public import CCDN.Height.AffineCongruenceHeight
+public import CCDN.Height.IntegerCoefficientHeight
+public import CCDN.Auxiliary.AffineCongruenceHeight
 public import CCDN.Height.CountingHypotheses
 import CCDN.Auxiliary.StandardMonomialAuxiliary
 import CCDN.Determinant.WeightedMonomialDeterminant

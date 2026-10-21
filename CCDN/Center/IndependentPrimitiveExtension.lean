@@ -10,7 +10,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.MvPolynomial
 import CCDN.Center.IndependentProjectionRows
-import CCDN.Height.LinearParameterPrimitive
+import CCDN.Projection.LinearParameterPrimitive
 import CCDN.Hilbert.HilbertLinearCoordinates
 import CCDN.Projection.BoundedInfinityAvoidance
 import Mathlib.RingTheory.AlgebraicIndependent.Basic

@@ -11,7 +11,7 @@ public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Algebra.PolynomialSection
-import CCDN.Plane.PlaneHilbert
+import CCDN.Hilbert.PlaneHilbert
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 
 /-! Sharp bounds for distinct points in proper polynomial sections. In the plane,

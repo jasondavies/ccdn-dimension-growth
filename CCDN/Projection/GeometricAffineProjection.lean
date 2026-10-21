@@ -11,12 +11,12 @@ public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import CCDN.Height.AffineLinearCountTransfer
+import CCDN.Projection.AffineLinearCountTransfer
 import CCDN.Projection.AffineProjectionDegree
 import CCDN.Projection.BoundedAffineBirationalProjection
 import CCDN.Projection.BoundedDegreeNormalizationFiber
 import CCDN.Projection.ClosureProjectionBirational
-import CCDN.Projection.ProjectionScalarExtension
+import CCDN.Algebra.ProjectionScalarExtension
 /-! The positive-dimensional affine projection in CCDN Proposition 4.3.1.
 The image equation has the source degree and remains irreducible
 after scalar extension. An integral normalization gives the exact factor d

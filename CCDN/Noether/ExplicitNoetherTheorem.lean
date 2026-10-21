@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.UniversalHomogeneousForm
+public import CCDN.Noether.UniversalHomogeneousForm
 public import CCDN.ForMathlib.IntegerPolynomialL1
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Noether.UniversalNoetherForms

@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectivePermutation
-public import CCDN.Projection.LinearProjectionFiltration
-import CCDN.Projection.ProjectionScalarExtension
+public import CCDN.Hilbert.LinearProjectionFiltration
+import CCDN.Algebra.ProjectionScalarExtension
 /-! Homogeneous ideals and coordinate permutations commute with scalar
 extension, so choosing a nonempty chart preserves geometric primeness. -/
 

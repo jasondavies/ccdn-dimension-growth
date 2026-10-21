@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
-import CCDN.Height.LinearParameterPrimitive
+import CCDN.Projection.LinearParameterPrimitive
 import CCDN.Projection.LeadingCoordinateExtension
 /-! A bounded finite birational affine projection constructed from a
 normalization that remains finite at infinity. The degree-preservation step

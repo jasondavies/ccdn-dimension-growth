@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.IntegerCoefficientHeight
-public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Height.IntegerCoefficientHeight
+public import CCDN.Algebra.ScaledHomogenization
 import CCDN.ForMathlib.MvPolynomial
 /-! The exact leading homogeneous coefficient height supplies the full
 scaling gain in every dimension. -/

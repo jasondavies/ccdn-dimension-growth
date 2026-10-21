@@ -8,9 +8,9 @@ module
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Auxiliary.HypersurfaceBadPrimeComparison
 public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
-public import CCDN.Auxiliary.IntegerCoefficientHeight
-public import CCDN.Height.HypersurfaceLargeHeightDegree
-public import CCDN.Height.HypersurfaceSmallHeightDegree
+public import CCDN.Height.IntegerCoefficientHeight
+public import CCDN.Auxiliary.HypersurfaceLargeHeightDegree
+public import CCDN.Auxiliary.HypersurfaceSmallHeightDegree
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.HypersurfaceLargeHeightAuxiliary

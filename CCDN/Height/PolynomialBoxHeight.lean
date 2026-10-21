@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Basic.Real.Basic
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import Mathlib.Tactic.NormNum.Prime
 import Mathlib.Tactic.NormNum.Ordinal
 import Mathlib.Tactic.NormNum.NatLog

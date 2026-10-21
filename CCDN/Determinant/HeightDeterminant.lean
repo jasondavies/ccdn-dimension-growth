@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.SingularDeterminantCutoff
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import all ArithmeticHeights.BombieriVaaler
 import CCDN.Auxiliary.PlaneBadPrimes
 

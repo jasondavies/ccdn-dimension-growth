@@ -9,7 +9,7 @@ public import CCDN.Projection.BoundedIntegerNormalization
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Center.ProjectionImageFractionField
 public import CCDN.Curve.CurvePrimitivePair
-import CCDN.Height.LinearParameterPrimitive
+import CCDN.Projection.LinearParameterPrimitive
 import CCDN.Projection.LeadingCoordinateExtension
 /-! A bounded integer linear finite birational projection of a
 homogeneous prime quotient to a hypersurface of exactly the same degree. -/

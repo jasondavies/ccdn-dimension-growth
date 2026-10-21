@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ProjectiveHypersurfaceReduction
+public import CCDN.Determinant.ProjectiveHypersurfaceReduction
 public import CCDN.Determinant.BlockDeterminant
 public import CCDN.Determinant.HypersurfaceAggregation
 public import Mathlib.LinearAlgebra.Projectivization.Cardinality

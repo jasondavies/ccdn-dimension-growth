@@ -8,7 +8,7 @@ module
 public import CCDN.Auxiliary.AffineCongruenceAuxiliary
 public import CCDN.Hilbert.PrincipalStandardMonomials
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceRankProfile
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Surface.SurfaceMonomialWeight

@@ -14,7 +14,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import CCDN.Algebra.ReconstructionFunctionField
 import CCDN.Projection.BoundedDegreePreservingProjection
 import CCDN.Projection.DegreePreservingProjectionCount
-import CCDN.Projection.ProjectionScalarExtension
+import CCDN.Algebra.ProjectionScalarExtension
 /-! The constructed bounded plane projection of a geometrically integral
 curve is geometrically integral, birational and degree-preserving. Its
 point-count error is at most d(d-1). -/

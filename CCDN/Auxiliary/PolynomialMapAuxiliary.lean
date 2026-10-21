@@ -7,7 +7,7 @@ module
 
 public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Determinant.HeightDeterminant
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.CountingHypotheses
 import CCDN.Auxiliary.PlaneAuxiliaryDegree
 import CCDN.Auxiliary.PlaneAuxiliaryLargeHeight

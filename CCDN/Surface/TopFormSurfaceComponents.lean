@@ -9,7 +9,7 @@ public import CCDN.Surface.TopFormAuxiliary
 public import CCDN.Hilbert.FilteredPrimeDecomposition
 public import CCDN.Curve.SurfaceCurve
 import CCDN.Auxiliary.PlaneAuxiliaryCount
-import CCDN.Hilbert.CompleteIntersectionDegreeBudget
+import CCDN.Surface.CompleteIntersectionDegreeBudget
 import CCDN.Surface.TopFormBadPrimes
 import CCDN.ForMathlib.MvPolynomial
 /-! The uniform surface auxiliary gives a finite curve cover of

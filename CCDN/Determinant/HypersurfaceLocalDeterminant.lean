@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.FilteredDeterminant
-import CCDN.Hilbert.HypersurfaceHilbert
+import CCDN.Determinant.HypersurfaceHilbert
 /-! A coefficient-independent local determinant exponent for hypersurfaces.
 The exponent is an explicit finite sum depending only on dimension,
 multiplicity and the number of rows, and admits sharp binomial cutoff bounds. -/

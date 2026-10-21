@@ -8,7 +8,7 @@ module
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Algebra.Polynomial.Degree.Defs
 public import Mathlib.Algebra.Polynomial.Eval.Defs
-import CCDN.Height.AffineTranslationCount
+import CCDN.Auxiliary.AffineTranslationCount
 import CCDN.LowerBound.GridEisensteinDegree
 import CCDN.Plane.PlaneGridHeight
 import CCDN.Projection.ShearNormalization

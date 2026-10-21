@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.IdealZeroLocus
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Hilbert.HilbertLinearCoordinates
 import Mathlib.RingTheory.Nullstellensatz

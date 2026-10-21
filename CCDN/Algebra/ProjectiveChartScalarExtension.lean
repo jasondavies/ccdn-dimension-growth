@@ -11,7 +11,7 @@ import CCDN.Algebra.HomogeneousLinearDescent
 import CCDN.Algebra.IdealScalarDescent
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Hilbert.HilbertScalarExtension
-import CCDN.Projection.ProjectionScalarExtension
+import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.ForMathlib.MvPolynomial
 /-! Projective affine charts commute with extension of coefficients.
 In particular the standard chart of a geometrically integral projective

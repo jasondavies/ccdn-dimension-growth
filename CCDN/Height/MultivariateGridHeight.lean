@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Equiv
 public import Mathlib.Analysis.Complex.Norm
-import CCDN.Auxiliary.ComplexGridInterpolation
+import CCDN.Height.ComplexGridInterpolation
 import Mathlib.Tactic.IntervalCases
 import Mathlib.Tactic.Positivity
 import CCDN.ForMathlib.MvPolynomial

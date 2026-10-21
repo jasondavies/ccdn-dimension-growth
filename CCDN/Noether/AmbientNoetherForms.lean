@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.UniversalHomogeneousForm
+public import CCDN.Noether.UniversalHomogeneousForm
 public import CCDN.Algebra.CoefficientwiseHomogeneous
 public import CCDN.Noether.EulerUniversalForms
 import CCDN.Noether.EulerPairSpecialization

@@ -10,7 +10,7 @@ public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.ProjectiveBox
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Auxiliary.ProjectiveAuxiliary

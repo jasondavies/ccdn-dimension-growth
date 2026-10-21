@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
-public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.ScaledHypersurfaceModel

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
 import CCDN.Algebra.BinomialSectionBound
-import CCDN.LowerBound.GridPointInterpolation
+import CCDN.Algebra.GridPointInterpolation
 import Mathlib.Tactic.Positivity.Finset
 import Mathlib.Algebra.Order.Star.Int
 import Mathlib.Algebra.Order.Ring.Star

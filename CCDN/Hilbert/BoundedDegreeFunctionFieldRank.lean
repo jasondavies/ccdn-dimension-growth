@@ -7,11 +7,11 @@ module
 
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Curve.CurveFunctionField
+import CCDN.Hilbert.CurveFunctionField
 import CCDN.Hilbert.FunctionFieldRank
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.ScaledHilbertBlockComparison
-import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Hilbert.LinearProjectionFiltration
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.LinearAlgebra.Dimension.Finite
 import Mathlib.LinearAlgebra.FreeModule.PID

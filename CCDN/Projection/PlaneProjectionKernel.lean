@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.Algebraic.Defs
 import CCDN.Algebra.SectionImageRank
 import CCDN.Hilbert.FunctionFieldRank
-import CCDN.Plane.PlaneHilbert
+import CCDN.Hilbert.PlaneHilbert
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 import Mathlib.RingTheory.Polynomial.UniqueFactorization

@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.PlaneSectionBounds
-import CCDN.Algebra.FullDegreeSectionIrreducibility
+import CCDN.Plane.FullDegreeSectionIrreducibility
 import CCDN.Determinant.PlaneMultiplicity
 import Mathlib.Algebra.MvPolynomial.Funext
 

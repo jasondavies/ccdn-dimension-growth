@@ -6,8 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
-import CCDN.Hypersurface.NonabsolutePlaneCount
-import CCDN.Projection.PrimitiveNormalization
+import CCDN.Algebra.PrimitiveNormalization
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import CCDN.ForMathlib.MvPolynomial

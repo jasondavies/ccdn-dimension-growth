@@ -7,10 +7,10 @@ module
 
 public import CCDN.Auxiliary.AffineAuxiliaryCases
 public import CCDN.Auxiliary.AuxiliaryNonmultiple
-import CCDN.Algebra.AffineLeadingTranslation
+import CCDN.Auxiliary.AffineLeadingTranslation
 import CCDN.Auxiliary.AffineAuxiliaryTranslationBound
 import CCDN.Auxiliary.AffineBadPrimeTranslation
-import CCDN.Height.AffineTranslationCount
+import CCDN.Auxiliary.AffineTranslationCount
 import CCDN.Height.ScaledHypersurfaceHeight
 /-! The affine auxiliary theorem in every positive dimension and degree,
 with the degree-loss-inclusive geometric bad-prime factor. This distinction

@@ -6,10 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.HomogeneousHilbert
 public import Mathlib.LinearAlgebra.Projectivization.Basic
 import CCDN.Height.ProjectivePointSeparation
 import CCDN.Hilbert.FilteredIntersection
+import CCDN.Height.ProjectiveZeroLocus
 import Mathlib.NumberTheory.Height.NumberField
 import Mathlib.NumberTheory.Height.Projectivization
 /-! Proper homogeneous sections of projective curves. The degree is the
@@ -140,6 +142,21 @@ theorem projective_section_card_le_degree {n d m : ℕ} {ι : Type*}
   push_cast at hlowZ
   have hcard : (Fintype.card ι : ℤ) ≤ (d : ℤ) * m := by linarith
   exact_mod_cast hcard
+
+/-- A point of the zero locus of a homogeneous ideal stays in it after scaling. -/
+lemma homogeneous_ideal_eval_smul
+    {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K))
+    (hI : IsHomogeneousIdeal I)
+    (v : σ → K) (hv : v ∈ idealZeroLocus I)
+    (a : K) (f : MvPolynomial σ K) (hf : f ∈ I) :
+    eval (a • v) f = 0 := by
+  classical
+  conv_lhs => rw [← sum_homogeneousComponent f]
+  rw [map_sum]
+  apply Finset.sum_eq_zero
+  intro N _
+  rw [homogeneous_eval_smul (homogeneousComponent_isHomogeneous _ _),
+    hv _ (hI f hf N), mul_zero]
 
 end
 end CCDN

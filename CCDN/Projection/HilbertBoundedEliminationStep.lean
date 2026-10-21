@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.BoundedLinearElimination
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 /-! A complete bounded elimination step: the contraction stays prime,
 retains dimension, and has no larger Hilbert multiplicity. -/
 

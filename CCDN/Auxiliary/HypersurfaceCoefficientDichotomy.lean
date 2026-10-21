@@ -6,11 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.AuxiliaryNonmultiple
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.ProjectiveZeroLocus
 import CCDN.Auxiliary.HomogeneousAuxiliary
 import CCDN.Determinant.HomogeneousDeterminantComparison
-import CCDN.Projection.PrimitiveNormalization
+import CCDN.Algebra.PrimitiveNormalization
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! Bounded rational zeros either admit a degree-d auxiliary nonmultiple,
 or control the defining equation's coefficient height by an explicit

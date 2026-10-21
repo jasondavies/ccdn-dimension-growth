@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.UniversalHyperplaneRestriction
-public import CCDN.Algebra.UniversalHomogeneousForm
+public import CCDN.Hypersurface.UniversalHyperplaneRestriction
+public import CCDN.Noether.UniversalHomogeneousForm
 public import CCDN.Algebra.PolynomialPredicates
-import CCDN.Algebra.CoefficientwiseSubstitution
+import CCDN.Hypersurface.CoefficientwiseSubstitution
 import CCDN.Hypersurface.GoodHyperplaneReindex
 import CCDN.Noether.UniversalNoetherForms
 /-! Effective hyperplane avoidance from the universal Noether forms.

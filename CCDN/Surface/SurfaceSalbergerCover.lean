@@ -8,7 +8,7 @@ module
 public import CCDN.Surface.SurfaceGeometricCurveCover
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.PlaneAuxiliaryCount
-import CCDN.Projection.PrimitiveNormalization
+import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Surface.SurfaceGeometricCoefficientReduction
 import CCDN.Surface.SurfaceSalbergerHeightCover
 import Mathlib.Algebra.Order.Star.Real

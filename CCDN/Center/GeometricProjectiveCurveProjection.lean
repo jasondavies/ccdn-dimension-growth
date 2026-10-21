@@ -16,7 +16,7 @@ import CCDN.Center.HomogeneousCurveHilbert
 import CCDN.Center.ProjectiveIncidencePermutation
 import CCDN.Hilbert.HilbertCoordinateIndependence
 import CCDN.Projection.AffineProjectionCount
-import CCDN.Projection.ProjectionScalarExtension
+import CCDN.Algebra.ProjectionScalarExtension
 /-! The geometric projective-curve projection statement, uniformly for all
 heights, obtained by choosing a proper coordinate chart. The coordinate
 permutation has no height cost and is chosen before the radius. -/

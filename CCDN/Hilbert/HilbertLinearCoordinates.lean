@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Hilbert.HilbertPolynomialComparison

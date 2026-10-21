@@ -11,7 +11,7 @@ public import CCDN.Height.ProjectiveBox
 public import CCDN.Plane.ScaledPlaneCount
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.ProjectiveTranslation
-import CCDN.Algebra.ScaledModelPosition
+import CCDN.Plane.ScaledModelPosition
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Auxiliary.ProjectiveAuxiliaryCount
 /-! Coefficient-uniform projective plane counts after a bounded integral

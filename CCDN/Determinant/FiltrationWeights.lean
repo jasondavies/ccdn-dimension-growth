@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Data.Set.Card
-import CCDN.Analysis.WeightedSequenceEstimate
+import CCDN.Determinant.WeightedSequenceEstimate
 import CCDN.Determinant.FilteredDeterminant
 
 /-! Exact initial weight sums for arbitrary finite or infinite layer profiles.

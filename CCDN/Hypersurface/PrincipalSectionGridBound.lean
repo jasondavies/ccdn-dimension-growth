@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Algebra.PureVarietyGridBound
+import CCDN.Hypersurface.PureVarietyGridBound
 import CCDN.Hilbert.HilbertPolynomialComparison
 import CCDN.Hilbert.ProperSectionHilbert
 import CCDN.Hypersurface.PrincipalSectionPurity

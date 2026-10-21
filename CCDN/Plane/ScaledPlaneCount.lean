@@ -9,8 +9,8 @@ public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.PrimitiveIntegerPolynomial
 public import CCDN.Height.Box
-import CCDN.Algebra.ScaledModelCoordinates
-import CCDN.Algebra.ScaledModelPosition
+import CCDN.Plane.ScaledModelCoordinates
+import CCDN.Plane.ScaledModelPosition
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Auxiliary.PolynomialMapAuxiliary
 /-! A prime-scaled plane point bound with the arbitrary coefficient

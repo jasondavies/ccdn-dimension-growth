@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.Interpolation
+public import CCDN.Algebra.Interpolation
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import CCDN.Height.Box
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue

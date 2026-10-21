@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveChartDegree
-public import CCDN.Auxiliary.ProjectiveAffineChart
+public import CCDN.Algebra.ProjectiveAffineChart
 /-! The prime affine-chart ideal and the transport of projective
 points and Hilbert degree to that ideal. -/
 

@@ -9,12 +9,12 @@ public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.Box
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.CountingHypotheses
 import CCDN.Auxiliary.PlaneAuxiliaryDegree
 import CCDN.Auxiliary.PlaneAuxiliaryLargeHeight
 import CCDN.Auxiliary.PlaneAuxiliarySelection
-import CCDN.Height.ProjectiveHeightComparison
+import CCDN.Determinant.ProjectiveHeightComparison
 /-! Homogeneous auxiliary polynomials for bounded primitive projective points,
 with explicit degrees in both coefficient-height ranges. -/
 

@@ -7,7 +7,7 @@ module
 
 public import CCDN.Hilbert.FilteredPrimeDecomposition
 public import CCDN.Curve.SurfaceCurve
-import CCDN.Hilbert.CompleteIntersectionDegreeBudget
+import CCDN.Surface.CompleteIntersectionDegreeBudget
 import CCDN.Hilbert.CompleteIntersectionHeight
 import CCDN.Plane.Bezout
 import CCDN.Surface.SurfaceNonlinearCount

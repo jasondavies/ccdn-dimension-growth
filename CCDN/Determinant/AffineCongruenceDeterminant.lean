@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.CountingHypotheses

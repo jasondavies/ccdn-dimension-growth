@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Basic.Real.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.Box
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy

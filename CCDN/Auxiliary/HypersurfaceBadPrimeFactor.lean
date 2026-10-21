@@ -11,7 +11,7 @@ public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.ForMathlib.MvPolynomial
 /-! Bad-prime factors of integer polynomials, and the geometric bad-prime factor used by the
 determinant method. A bad-prime factor `badPrimeFactor P` is zero for nonabsolute equations

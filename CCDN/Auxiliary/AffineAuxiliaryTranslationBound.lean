@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PrimeScaledAffineMinimum
-import CCDN.Height.HypersurfacePositionHeight
+public import CCDN.Auxiliary.PrimeScaledAffineMinimum
+import CCDN.Auxiliary.HypersurfacePositionHeight
 import CCDN.ForMathlib.Log
 /-! Translating the affine box by a vector bounded by the degree costs only
  a dimension constant in the coefficient-sensitive minimum bound. -/

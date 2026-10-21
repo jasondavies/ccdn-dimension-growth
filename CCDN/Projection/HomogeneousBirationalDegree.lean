@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Algebra.CoordinatePowerGeneration
 import CCDN.Hilbert.HilbertPolynomialComparison
 import CCDN.Projection.HomogeneousFilteredProjection

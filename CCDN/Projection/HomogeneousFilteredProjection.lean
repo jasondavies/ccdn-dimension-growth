@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import CCDN.Algebra.PolynomialPredicates
 import Mathlib.Algebra.MvPolynomial.Monad
 /-! A linear homogeneous projection of a homogeneous quotient is strict

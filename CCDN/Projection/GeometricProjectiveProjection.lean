@@ -8,7 +8,7 @@ module
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
-import CCDN.Projection.ProjectionScalarExtension
+import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Projection.ProjectiveVarietyProjection
 /-! Geometric integrality in the finite birational projective
 projection. This supplies the general-dimensional geometric interface of

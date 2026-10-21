@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.ScaledHomogenization
 import CCDN.ForMathlib.MvPolynomial
 /-! Restriction to a nonzero constant homogenizing coordinate. Proper affine
 sections follow from homogeneous nonmultiples also on x₀=h, not just x₀=1. -/

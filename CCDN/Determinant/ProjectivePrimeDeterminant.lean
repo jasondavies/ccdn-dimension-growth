@@ -10,7 +10,7 @@ public import CCDN.Determinant.SingularDeterminantCutoff
 public import CCDN.Height.CountingHypotheses
 import CCDN.Determinant.PrimeAggregation
 import CCDN.Determinant.ProjectiveMultiplicity
-import CCDN.Height.ProjectiveFiniteFieldCount
+import CCDN.Determinant.ProjectiveFiniteFieldCount
 /-! Sharp prime-power and global prime-sum bounds for projective plane
 evaluation matrices. The excluded-prime set is explicit. -/
 

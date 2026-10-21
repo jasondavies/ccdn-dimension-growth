@@ -11,7 +11,7 @@ public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Height.Box
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
-import CCDN.Height.AffineTranslationCount
+import CCDN.Auxiliary.AffineTranslationCount
 /-! Integral translations preserve the affine bad-prime factor, including
 degree-dropping reductions and the nonabsolute zero convention. -/
 

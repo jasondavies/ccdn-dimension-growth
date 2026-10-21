@@ -7,7 +7,6 @@ module
 
 public import CCDN.Hilbert.FilteredPrimeDecomposition
 public import CCDN.Hilbert.FilteredIntersection
-import CCDN.Plane.PlaneStepanovBound
 /-! Separating prime components makes their filtered dimensions
 additive up to a fixed degree shift. -/
 

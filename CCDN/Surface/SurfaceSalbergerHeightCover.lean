@@ -7,10 +7,10 @@ module
 
 public import CCDN.Surface.SurfaceGeometricCurveCover
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Auxiliary.IntegerCoefficientHeight
-import CCDN.Analysis.SalbergerCoverNumerics
+public import CCDN.Height.IntegerCoefficientHeight
+import CCDN.Surface.SalbergerCoverNumerics
 import CCDN.Auxiliary.PlaneAuxiliaryCount
-import CCDN.Hilbert.CompleteIntersectionDegreeBudget
+import CCDN.Surface.CompleteIntersectionDegreeBudget
 import CCDN.Surface.SurfaceMediumCurveCount
 import CCDN.Surface.SurfaceResidueSalbergerCount
 import CCDN.Surface.SurfaceSmallCurveCover

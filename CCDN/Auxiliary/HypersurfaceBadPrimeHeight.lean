@@ -9,7 +9,7 @@ public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.AuxiliaryDegreeBound
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Auxiliary.BadPrimeCharge
 import CCDN.Plane.IntegerPlaneWitness
 import CCDN.Plane.IntegerPlaneWitnessHeight

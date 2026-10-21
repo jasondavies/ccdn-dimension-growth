@@ -1170,12 +1170,12 @@
     },
     {
       "id": "e004",
-      "file": "CCDN/Analysis/WeightedSequenceEstimate.lean",
+      "file": "CCDN/Determinant/WeightedSequenceEstimate.lean",
       "declaration": "CCDN.weighted_sequence_initial_sum_lower_bound"
     },
     {
       "id": "e005",
-      "file": "CCDN/Analysis/WeightedSequenceEstimate.lean",
+      "file": "CCDN/Determinant/WeightedSequenceEstimate.lean",
       "declaration": "CCDN.weighted_sequence_dimension_one"
     },
     {
@@ -1455,7 +1455,7 @@
     },
     {
       "id": "e061",
-      "file": "CCDN/Algebra/DistinguishedCoefficientOrder.lean",
+      "file": "CCDN/Auxiliary/DistinguishedCoefficientOrder.lean",
       "declaration": "CCDN.distinguishedCoefficientOrder_leadingCoeff"
     },
     {
@@ -1500,7 +1500,7 @@
     },
     {
       "id": "e070",
-      "file": "CCDN/Auxiliary/ComplexGridInterpolation.lean",
+      "file": "CCDN/Height/ComplexGridInterpolation.lean",
       "declaration": "CCDN.exists_complex_integer_grid_height_witness"
     },
     {
@@ -1515,7 +1515,7 @@
     },
     {
       "id": "e073",
-      "file": "CCDN/Height/HypersurfacePositionHeight.lean",
+      "file": "CCDN/Auxiliary/HypersurfacePositionHeight.lean",
       "declaration": "CCDN.exists_hypersurface_coefficient_position"
     },
     {
@@ -1625,27 +1625,27 @@
     },
     {
       "id": "e095",
-      "file": "CCDN/Algebra/PureVarietyGridBound.lean",
+      "file": "CCDN/Hypersurface/PureVarietyGridBound.lean",
       "declaration": "CCDN.pure_ideal_grid_card_le"
     },
     {
       "id": "e096",
-      "file": "CCDN/Algebra/PureVarietyGridBound.lean",
+      "file": "CCDN/Hypersurface/PureVarietyGridBound.lean",
       "declaration": "CCDN.pure_variety_count_le_degree_mul_box_side"
     },
     {
       "id": "e097",
-      "file": "CCDN/Algebra/SmallOutsidePoint.lean",
+      "file": "CCDN/Hypersurface/SmallOutsidePoint.lean",
       "declaration": "CCDN.exists_small_integer_point_outside_prime_ideal"
     },
     {
       "id": "e098",
-      "file": "CCDN/Algebra/SmallOutsidePoint.lean",
+      "file": "CCDN/Hypersurface/SmallOutsidePoint.lean",
       "declaration": "CCDN.exists_small_projective_integer_representative_outside"
     },
     {
       "id": "e099",
-      "file": "CCDN/Algebra/SmallOutsidePoint.lean",
+      "file": "CCDN/Hypersurface/SmallOutsidePoint.lean",
       "declaration": "CCDN.exists_small_rational_projective_point_outside_prime_ideal"
     },
     {
@@ -1660,7 +1660,7 @@
     },
     {
       "id": "e102",
-      "file": "CCDN/Hilbert/ZeroDimensionalPrimeDescent.lean",
+      "file": "CCDN/Hypersurface/ZeroDimensionalPrimeDescent.lean",
       "declaration": "CCDN.non_rational_zero_dimensional_locus_empty"
     },
     {
@@ -1675,7 +1675,7 @@
     },
     {
       "id": "e105",
-      "file": "CCDN/Hilbert/ZeroDimensionalPrimeDescent.lean",
+      "file": "CCDN/Hypersurface/ZeroDimensionalPrimeDescent.lean",
       "declaration": "CCDN.nonabsolute_zero_dimensional_locus_empty"
     },
     {
@@ -1710,7 +1710,7 @@
     },
     {
       "id": "e112",
-      "file": "CCDN/Height/HypersurfaceHeightTransfer.lean",
+      "file": "CCDN/Auxiliary/HypersurfaceHeightTransfer.lean",
       "declaration": "CCDN.hypersurface_badPrime_height_transfer"
     },
     {
@@ -1760,7 +1760,7 @@
     },
     {
       "id": "e122",
-      "file": "CCDN/Hilbert/DegreeOneComponentLines.lean",
+      "file": "CCDN/Surface/DegreeOneComponentLines.lean",
       "declaration": "CCDN.degree_one_components_line_cover"
     },
     {
@@ -2045,17 +2045,17 @@
     },
     {
       "id": "e179",
-      "file": "CCDN/Auxiliary/ComplexGridInterpolation.lean",
+      "file": "CCDN/Height/ComplexGridInterpolation.lean",
       "declaration": "CCDN.complex_polynomial_coefficient_bound_of_integer_grid"
     },
     {
       "id": "e180",
-      "file": "CCDN/Algebra/LowDegreePointSeparation.lean",
+      "file": "CCDN/Hypersurface/LowDegreePointSeparation.lean",
       "declaration": "CCDN.exists_low_degree_ideal_separator"
     },
     {
       "id": "e181",
-      "file": "CCDN/Algebra/ConjugatePrimeGridBound.lean",
+      "file": "CCDN/Hypersurface/ConjugatePrimeGridBound.lean",
       "declaration": "CCDN.conjugate_prime_grid_card_le"
     },
     {

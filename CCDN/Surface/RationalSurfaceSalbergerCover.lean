@@ -7,7 +7,7 @@ module
 
 public import CCDN.Surface.SurfaceGeometricCurveCover
 public import CCDN.Algebra.PolynomialPredicates
-import CCDN.Projection.PrimitiveNormalization
+import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Surface.SurfaceSalbergerCover
 /-! Clearing rational coefficients preserves the exact geometric Salberger
 cover and all of its uniform constants. -/

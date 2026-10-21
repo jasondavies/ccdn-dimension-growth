@@ -8,7 +8,7 @@ module
 public import CCDN.Auxiliary.AbsoluteAuxiliary
 public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
-public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.ScaledHomogenization
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
 import CCDN.Auxiliary.ScaledAuxiliaryCount

@@ -7,7 +7,7 @@ module
 
 public import ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.HomogeneousMonomials
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRank
 import CCDN.Algebra.RowSpan

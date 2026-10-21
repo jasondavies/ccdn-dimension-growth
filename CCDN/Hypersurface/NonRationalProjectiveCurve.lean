@@ -7,8 +7,8 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hypersurface.NonRationalProjectiveCount
-import CCDN.Algebra.LowDegreePointSeparation
-import CCDN.Algebra.ProjectiveCoefficientExtension
+import CCDN.Hypersurface.LowDegreePointSeparation
+import CCDN.Hypersurface.ProjectiveCoefficientExtension
 import CCDN.Center.HomogeneousCurveHilbert
 import CCDN.Hilbert.HilbertCoefficientEquiv
 import CCDN.Hilbert.HomogeneousPrimeComponents

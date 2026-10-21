@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Algebra.ProjectiveChartDegree
 import CCDN.Center.IntegralProjectionSpecialization
 /-! An integral homogeneous linear projection has no nonzero geometric

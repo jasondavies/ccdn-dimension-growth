@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveZeroLocus
-import CCDN.Plane.PlaneHilbert
+import CCDN.Hilbert.PlaneHilbert
 /-! The homogeneous degree of a plane equation agrees with its
 projective Hilbert degree, giving sharp projective plane intersection bounds. -/
 

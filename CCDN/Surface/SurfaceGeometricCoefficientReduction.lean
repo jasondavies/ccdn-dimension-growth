@@ -9,7 +9,7 @@ public import CCDN.Surface.SurfaceGeometricCurveCover
 public import CCDN.Surface.SurfaceCoefficientReduction
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
-import CCDN.Hilbert.CompleteIntersectionDegreeBudget
+import CCDN.Surface.CompleteIntersectionDegreeBudget
 import Mathlib.Algebra.Order.Star.Real
 /-! The large-coefficient alternative for the exact surface covering
 statement: bounded-degree geometric curves and a height-independent residual. -/

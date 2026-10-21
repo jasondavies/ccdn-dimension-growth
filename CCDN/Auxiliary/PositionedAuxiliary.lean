@@ -9,8 +9,8 @@ public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
 public import CCDN.Auxiliary.HypersurfaceSmallHeightAuxiliary
 public import CCDN.Height.CountingHypotheses
-public import CCDN.Height.HypersurfaceLargeHeightDegree
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Auxiliary.HypersurfaceLargeHeightDegree
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceLargeHeightAuxiliary
 /-! Combine the two height ranges under the paper's explicit leading-coefficient
 position condition. The main term retains the bad-prime factor of any finite prime

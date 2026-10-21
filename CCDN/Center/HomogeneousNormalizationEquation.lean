@@ -7,9 +7,9 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Center.HomogeneousIntegralRelation
-import CCDN.Height.LinearParameterPrimitive
+import CCDN.Projection.LinearParameterPrimitive
 import CCDN.Projection.LeadingCoordinateExtension
 /-! Primitive augmentation of a finite homogeneous normalization
 produces an irreducible equation whose degree in the new variable is exactly

@@ -12,7 +12,7 @@ import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Noether.UniversalPlaneIntegerSpecialization
-import CCDN.Projection.PrimitiveNormalization
+import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Projection.ShearNormalization
 import CCDN.ForMathlib.MvPolynomial
 

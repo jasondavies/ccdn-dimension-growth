@@ -7,9 +7,9 @@ module
 
 public import CCDN.Algebra.HomogeneousTranslation
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousChart
-import CCDN.Algebra.HomogeneousLeadingCoefficient
+import CCDN.Plane.HomogeneousLeadingCoefficient
 import CCDN.Height.MultivariateGridHeight
 /-! Bounded integer shears placing a large coefficient first, in all dimensions. -/
 

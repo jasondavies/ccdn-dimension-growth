@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveChartIdeal
+public import CCDN.Algebra.ProjectiveAffineChart
 public import CCDN.Projection.DegreePreservingProjectionBox
 import CCDN.Determinant.PolynomialMapDeterminant
 import CCDN.Height.ProjectiveIntegerHeight
@@ -17,23 +18,6 @@ map on the standard chart, with the same polynomial height factor. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial
-
-def affineProjectivePoint {K : Type*} [Field K] {n : ℕ} (a : Fin n → K) :
-    Projectivization K (Fin (n + 1) → K) :=
-  Projectivization.mk K (Fin.cons 1 a) (affineCoordinateVector_ne_zero a)
-
-theorem affineProjectivePoint_injective {K : Type*} [Field K] (n : ℕ) :
-    Function.Injective (@affineProjectivePoint K _ n) := by
-  intro a b he
-  obtain ⟨c, hc⟩ := (Projectivization.mk_eq_mk_iff K _ _ _ _).mp he
-  have hc1 : (c : K) = 1 := by
-    have h := congrFun hc 0
-    change (c : K) * 1 = 1 at h
-    simpa using h
-  funext j
-  have h := congrFun hc j.succ
-  change (c : K) * b j = a j at h
-  simpa [hc1] using h.symm
 
 lemma affineProjectivePoint_eq_integer {n : ℕ} (z : IntPoint (n + 1)) (hz0 : z 0 ≠ 0) :
     affineProjectivePoint (fun j => (z j.succ : ℚ) / (z 0 : ℚ)) =

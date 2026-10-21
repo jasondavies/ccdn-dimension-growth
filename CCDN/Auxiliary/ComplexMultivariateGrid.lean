@@ -9,7 +9,7 @@ public import CCDN.Algebra.HomogeneousTranslation
 public import Mathlib.Analysis.Complex.Norm
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
 import CCDN.Algebra.HomogeneousChart
-import CCDN.Algebra.HomogeneousLeadingCoefficient
+import CCDN.Plane.HomogeneousLeadingCoefficient
 import CCDN.Height.MultivariateGridHeight
 
 /-! Sharp complex integer-grid bounds for homogeneous polynomials. The affine

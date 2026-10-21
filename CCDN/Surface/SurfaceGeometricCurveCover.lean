@@ -7,7 +7,7 @@ module
 
 public import CCDN.Hypersurface.SingularHypersurfaceCount
 public import CCDN.Surface.SurfaceResidueCover
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Curve.AffineCurveHilbertPolynomial
 import CCDN.Surface.SurfaceNonlinearCount
 import Mathlib.Algebra.Order.Star.Real

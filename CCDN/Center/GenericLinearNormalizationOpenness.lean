@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 import CCDN.Center.BalancedParameterFiniteness
 import CCDN.Center.GenericHomogeneousGeneration

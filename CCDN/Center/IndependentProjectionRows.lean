@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.IntegerLinearForms
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.LinearAlgebra.Matrix.ToLin
 public import Mathlib.RingTheory.MvPolynomial

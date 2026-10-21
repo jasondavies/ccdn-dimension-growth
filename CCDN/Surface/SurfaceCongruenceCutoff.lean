@@ -7,7 +7,7 @@ module
 
 public import CCDN.Surface.SurfaceCongruenceAuxiliary
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Auxiliary.HypersurfaceRankArchimedean
 import Mathlib.Algebra.Order.Star.Real
 /-! Numerical degree selection for the smooth-congruence auxiliary on a

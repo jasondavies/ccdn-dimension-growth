@@ -8,8 +8,8 @@ module
 public import CCDN.Center.ProjectionImageFractionField
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Algebra.SmallOutsidePoint
-import CCDN.Hilbert.ZeroDimensionalPrimeDescent
+import CCDN.Hypersurface.SmallOutsidePoint
+import CCDN.Hypersurface.ZeroDimensionalPrimeDescent
 /-! A homogeneous prime ideal of Hilbert dimension zero is the origin.
 Its function field therefore has no extension beyond the coefficient field. -/
 

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.Box
 public import Mathlib.Algebra.GCDMonoid.Finset
 public import Mathlib.Algebra.MvPolynomial.PDeriv

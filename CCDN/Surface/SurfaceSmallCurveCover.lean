@@ -8,9 +8,9 @@ module
 public import CCDN.Surface.SurfaceResidueCover
 public import CCDN.Hypersurface.SingularHypersurfaceCount
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Auxiliary.PlaneAuxiliaryCount
-import CCDN.Hilbert.CompleteIntersectionDegreeBudget
+import CCDN.Surface.CompleteIntersectionDegreeBudget
 /-! A small-curve and residual cover for a surface of controlled
 coefficient height. Both the auxiliaries and the initial prime components
 are constructed. -/

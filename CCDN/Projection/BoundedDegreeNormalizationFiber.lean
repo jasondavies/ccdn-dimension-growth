@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
 import CCDN.Hilbert.HilbertLinearCoordinates

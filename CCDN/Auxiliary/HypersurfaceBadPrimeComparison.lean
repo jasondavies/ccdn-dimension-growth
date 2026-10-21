@@ -10,7 +10,7 @@ public import CCDN.Determinant.HypersurfaceDeterminantRank
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Auxiliary.HypersurfaceNormalizedComparison
 import CCDN.Determinant.HomogeneousDeterminantComparison
-import CCDN.Height.HypersurfaceHeightComparison
+import CCDN.Auxiliary.HypersurfaceHeightComparison
 /-! Preserve the bad-prime factor through the normalized no-auxiliary
 comparison, as required by the coefficient-sensitive CCDN Theorem 3.1.1.
 

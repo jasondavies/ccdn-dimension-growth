@@ -9,7 +9,7 @@ public import CCDN.Auxiliary.ScalingPrime
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.PrimitiveIntegerPolynomial
 public import CCDN.Height.Box
-import CCDN.Height.ScaledBoxExponent
+import CCDN.Plane.ScaledBoxExponent
 /-! The affine exponent 1/d with the scaling prime constructed from Mertens.
 This branch assumes a nonzero constant coefficient of small logarithmic height;
 the sharp finite-field count is an explicit geometric hypothesis. -/

@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.ProjectiveAuxiliaryHeightRanges
-public import CCDN.Algebra.DistinguishedCoefficientOrder
+public import CCDN.Auxiliary.DistinguishedCoefficientOrder
 public import CCDN.Algebra.PolynomialPredicates
 /-! Source-shaped versions of CCDN Lemmas 3.3.2 and 3.3.3. Positioning is
 assumed for a pure-power coefficient, including the last variable.

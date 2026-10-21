@@ -14,7 +14,7 @@ import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
 import CCDN.Auxiliary.HypersurfaceCoefficientDichotomy
-import CCDN.Auxiliary.UnscaledModelCount
+import CCDN.Plane.UnscaledModelCount
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Height.ProjectiveIntegerHeight
 /-! The ordinary homogenization provides an affine auxiliary without a

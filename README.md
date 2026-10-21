@@ -144,6 +144,9 @@ bash scripts/check.sh
 
 - `check-lean-sources.py`: every Lean source has the `module` header, is UTF-8 and has at most
   10,000 lines.
+- `check-layers.py`: the foundation directories and `CCDN/Statements.lean` import no topic
+  directory, no library module imports an endpoint, and the side results are imported only
+  from their own directory ([layout](#documentation)).
 - `check-provenance.py`: the vendored sources match their recorded hashes, reverse-applying
   `vendor/bombieri-vaaler/lean-4.35.patch` restores the upstream files, and every module is
   reachable from the root import.

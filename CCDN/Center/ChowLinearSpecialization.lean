@@ -8,13 +8,13 @@ module
 public import CCDN.Algebra.LinearForm
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Center.ProjectiveChowIncidence
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Center.BalancedParameterFiniteness
 import CCDN.Center.HomogeneousProjectionNoBasePoint
 import CCDN.Projection.IntegralProjectionClosedImage
 import CCDN.Center.ProjectiveIncidenceClosed
 import CCDN.Projection.HomogeneousProjectionEquation
-import CCDN.Projection.ProjectionScalarExtension
+import CCDN.Algebra.ProjectionScalarExtension
 /-! Linear pullback of hyperplane tuples and image incidence under a
 projection with center disjoint from the source. Integrality and lifting of
 geometric image points are consequences of that geometric condition. -/

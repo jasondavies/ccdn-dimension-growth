@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.Interpolation
+public import CCDN.Algebra.Interpolation
 /-!
 # Vanishing transfers from independent rows to their span
 

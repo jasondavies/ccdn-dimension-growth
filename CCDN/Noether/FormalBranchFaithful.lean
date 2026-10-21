@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.PowerSeries.Basic
 import CCDN.Algebra.SectionImageRank
 import CCDN.Noether.FormalPlaneBranch
 import CCDN.Noether.PowerSeriesOrderIndependence
-import CCDN.Plane.PlaneHilbert
+import CCDN.Hilbert.PlaneHilbert
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.SimpleRing.Principal

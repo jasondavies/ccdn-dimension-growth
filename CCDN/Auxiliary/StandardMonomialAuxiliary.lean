@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 import all ArithmeticHeights.BombieriVaaler
-public import CCDN.Auxiliary.Interpolation
+public import CCDN.Algebra.Interpolation
 public import CCDN.ForMathlib.StandardMonomials
 public import CCDN.Height.Box
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic

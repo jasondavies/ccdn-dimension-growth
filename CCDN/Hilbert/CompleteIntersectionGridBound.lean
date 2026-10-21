@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
 import CCDN.Algebra.BinomialSectionBound
-import CCDN.LowerBound.GridPointInterpolation
+import CCDN.Algebra.GridPointInterpolation
 import Mathlib.Data.Nat.Choose.Bounds
 
 /-! A coordinate-grid bound for a proper complete intersection. The

@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.PlaneLinearDeformation
-public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.Algebra.NoZeroSMulDivisors.Basic
 public import Mathlib.LinearAlgebra.Dimension.Free
 public import Mathlib.LinearAlgebra.FreeModule.PID

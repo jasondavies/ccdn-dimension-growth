@@ -10,7 +10,7 @@ public import CCDN.Hilbert.FilteredIntersection
 public import CCDN.Algebra.MonomialRays
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.StandardMonomials
-import CCDN.Plane.PlaneHilbert
+import CCDN.Hilbert.PlaneHilbert
 /-! Finite standard-monomial prefixes for a principal equation, their exact
 Hilbert ranks, and the sum of their total degrees. -/
 
