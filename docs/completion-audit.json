@@ -43,7 +43,7 @@
     "reachable_modules": 875,
     "vendor_source_hashes": 26,
     "build_jobs": 9984,
-    "project_declarations_audited": 4641,
+    "project_declarations_audited": 4640,
     "vendor_declarations_audited": 582,
     "allowed_axioms": [
       "propext",

@@ -15,19 +15,10 @@ public import Mathlib.Algebra.GroupWithZero.Units.Lemmas
 
 ## Main results
 
-* `natCast_ne_zero_of_algebra`: a natural number that is nonzero in a field is nonzero in every
-  nontrivial algebra over it. This is the `≠` form of the instance
-  `NeZero.nat_of_injective (algebraMap F R).injective`.
 * `CharP.natCast_ne_zero_of_lt`: a positive natural number below the characteristic is nonzero.
 -/
 
 @[expose] public section
-
-/-- A natural number that is nonzero in a field is nonzero in every nontrivial algebra. -/
-theorem natCast_ne_zero_of_algebra {F R : Type*} [Field F] [Semiring R] [Nontrivial R]
-    [Algebra F R] {n : ℕ} (h : (n : F) ≠ 0) : (n : R) ≠ 0 := by
-  rw [← map_natCast (algebraMap F R)]
-  exact (map_ne_zero _).mpr h
 
 namespace CharP
 

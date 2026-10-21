@@ -59,15 +59,18 @@ theorem closedForm_rank_drop_of_coprime_factors
   have hgg : IsCoprime (g.map φ) (g.map φ).derivative :=
     (separable_iff_derivative_ne_zero hgR).mpr
       (derivative_ne_zero_of_natCast_natDegree_ne_zero (by
-        rw [hgnat]; exact natCast_ne_zero_of_algebra (hchar _ hgpos (by omega))))
+        rw [hgnat]
+        simpa using (map_ne_zero (algebraMap F (RatFunc F))).mpr (hchar _ hgpos (by omega))))
   have hh' := derivative_ne_zero_of_natCast_natDegree_ne_zero (f := h.map φ) (by
-    rw [hhnat]; exact natCast_ne_zero_of_algebra (hchar _ hhpos (by omega)))
+    rw [hhnat]
+    simpa using (map_ne_zero (algebraMap F (RatFunc F))).mpr (hchar _ hhpos (by omega)))
   have hgd : 0 < bivariateTotalDegree g := hgpos.trans_le (bivariate_natDegree_le_totalDegree g)
   obtain ⟨hpgrid, hqgrid⟩ := bivariate_factor_form_in_grid d g h hg.ne_zero hh hgd htotal
   apply closedForm_rank_drop_of_extra_form d hd (g * h)
     (h * g.derivative) (h * (bivariateCoefficientDerivative F) g) htotal
     (derivative_ne_zero_of_natCast_natDegree_ne_zero (by
-      rw [hdeg]; exact natCast_ne_zero_of_algebra (hchar d hd le_rfl))) hpgrid hqgrid
+      rw [hdeg]
+      simpa using (map_ne_zero (algebraMap F (F[X]))).mpr (hchar d hd le_rfl))) hpgrid hqgrid
   · have he := bivariate_factor_closed_form g h
     change _ - _ - _ + _ = (0 : F[X][X])
     linear_combination he
@@ -99,13 +102,15 @@ theorem closedForm_rank_drop_of_repeated_factor
   have hgg : IsCoprime (g.map φ) (g.map φ).derivative :=
     (separable_iff_derivative_ne_zero hgR).mpr
       (derivative_ne_zero_of_natCast_natDegree_ne_zero (by
-        rw [hgnat]; exact natCast_ne_zero_of_algebra (hchar _ hgpos (by omega))))
+        rw [hgnat]
+        simpa using (map_ne_zero (algebraMap F (RatFunc F))).mpr (hchar _ hgpos (by omega))))
   have hgd : 0 < bivariateTotalDegree g := hgpos.trans_le (bivariate_natDegree_le_totalDegree g)
   obtain ⟨hpgrid, hqgrid⟩ := bivariate_power_factor_form_in_grid d k g h hg.ne_zero hh hgd htotal
   apply closedForm_rank_drop_of_extra_form d hd (g ^ (k + 2) * h)
     (g ^ k * h * g.derivative) (g ^ k * h * (bivariateCoefficientDerivative F) g) htotal
     (derivative_ne_zero_of_natCast_natDegree_ne_zero (by
-      rw [hdeg]; exact natCast_ne_zero_of_algebra (hchar d hd le_rfl))) hpgrid hqgrid
+      rw [hdeg]
+      simpa using (map_ne_zero (algebraMap F (F[X]))).mpr (hchar d hd le_rfl))) hpgrid hqgrid
   · have he := bivariate_power_factor_closed_form g h k
     change _ - _ - _ + _ = (0 : F[X][X])
     linear_combination he

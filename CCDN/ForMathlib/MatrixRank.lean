@@ -7,17 +7,12 @@ module
 
 public import Mathlib.LinearAlgebra.Matrix.Rank
 public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
-import all ArithmeticHeights.CauchyBinet
 
 /-!
 # Nonzero minors of matrices with arbitrarily many rows
 
 The row index type may be infinite, as for coefficient matrices indexed by all monomials; only
 the column index type is finite.
-
-The proof of `Matrix.exists_det_submatrix_ne_zero_of_linearIndependent_row` uses the
-Cauchy–Binet formula `Matrix.det_mul_eq_sum_det_submatrix`, which is not yet in Mathlib and is
-taken from the vendored `ArithmeticHeights.CauchyBinet`.
 
 ## Main results
 
@@ -96,22 +91,20 @@ theorem exists_rank_linearIndependent_rows
   subst s
   exact ⟨a, ha, hi⟩
 
-/-- Full row rank supplies a nonzero square minor. -/
+/-- Full row rank supplies a nonzero square minor: some set of columns of the transpose is
+linearly independent. -/
 theorem exists_det_submatrix_ne_zero_of_linearIndependent_row
     {F ν : Type*} [Field F] [Fintype ν] {s : ℕ}
     (A : Matrix (Fin s) ν F) (hi : LinearIndependent F A.row) :
     ∃ c : Fin s → ν, Function.Injective c ∧ (A.submatrix id c).det ≠ 0 := by
-  classical
-  let : LinearOrder ν := LinearOrder.lift' (Fintype.equivFin ν) (Fintype.equivFin ν).injective
-  obtain ⟨B, hB⟩ := Matrix.mulVec_surjective_iff_exists_right_inverse.mp hi.mulVec_surjective
-  by_contra! hn
-  have hz : (A * B).det = 0 := by
-    rw [Matrix.det_mul_eq_sum_det_submatrix]
-    apply Finset.sum_eq_zero
-    intro t _
-    rw [hn _ ((t : Finset ν).orderEmbOfFin (Set.powersetCard.card_eq t)).injective, zero_mul]
-  rw [hB, Matrix.det_one] at hz
-  exact one_ne_zero hz
+  have hr : Aᵀ.rank = s := by rw [rank_transpose, hi.rank_matrix, Fintype.card_fin]
+  obtain ⟨c, hc, hli⟩ := exists_rank_linearIndependent_rows Aᵀ
+  let e := finCongr hr
+  refine ⟨c ∘ e.symm, hc.comp e.symm.injective, ?_⟩
+  have hcol : LinearIndependent F (A.submatrix id (c ∘ e.symm)).col :=
+    hli.comp e.symm e.symm.injective
+  rw [← isUnit_iff_ne_zero, ← isUnit_iff_isUnit_det]
+  exact linearIndependent_col_iff_isUnit.mp hcol
 
 /-- Every rank lower bound is witnessed by a nonzero minor with distinct rows
 and distinct columns, without any finiteness requirement on the rows. -/

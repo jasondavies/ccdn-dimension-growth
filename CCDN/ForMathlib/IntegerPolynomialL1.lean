@@ -203,10 +203,9 @@ theorem l1Norm_coeff_le_l1Norm_sumAlgEquiv_symm {σ τ : Type*}
 lemma sumAlgEquiv_symm_map_C {σ τ : Type*} (p : MvPolynomial σ ℤ) :
     (sumAlgEquiv ℤ σ τ).symm (map (C : ℤ →+* MvPolynomial τ ℤ) p) =
       rename Sum.inl p := by
-  induction p using MvPolynomial.induction_on with
-  | C c => simp
-  | add f g hf hg => simp [hf, hg]
-  | mul_X f i hf => simp [hf]
+  rw [AlgEquiv.symm_apply_eq]
+  exact (DFunLike.congr_fun
+    (sumAlgEquiv_comp_rename_inl (R := ℤ) (S₁ := σ) (S₂ := τ)) p).symm
 
 /-- One original coefficient variable multiplying an integer parameter
 polynomial has no coefficient-norm cost beyond that parameter polynomial. -/
