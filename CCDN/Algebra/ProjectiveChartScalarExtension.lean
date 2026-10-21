@@ -10,7 +10,6 @@ public import CCDN.Algebra.PolynomialLinearDescent
 import CCDN.Algebra.HomogeneousLinearDescent
 import CCDN.Algebra.IdealScalarDescent
 import CCDN.Algebra.ScaledHypersurfaceModel
-import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 import CCDN.Hilbert.HilbertScalarExtension
 import CCDN.Projection.ProjectionScalarExtension
 /-! Projective affine charts commute with extension of coefficients.
@@ -38,22 +37,22 @@ lemma coefficientLinearPolynomial_affineChart
   rw [he] at h
   exact h
 
-lemma coefficientLinearPolynomial_boundedHomogenize
+lemma coefficientLinearPolynomial_scaledHomogenize_one
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n D : ℕ}
     (φ : L →ₗ[K] K) (f : MvPolynomial (Fin n) L) (hf : f.totalDegree ≤ D) :
-    coefficientLinearPolynomial φ (boundedHomogenize D f) =
-      boundedHomogenize D (coefficientLinearPolynomial φ f) := by
+    coefficientLinearPolynomial φ (scaledHomogenize D 1 f) =
+      scaledHomogenize D 1 (coefficientLinearPolynomial φ f) := by
   apply affineChart_injective_on_homogeneous
-    (coefficientLinearPolynomial_homogeneous φ _ (boundedHomogenize_homogeneous f hf))
-    (boundedHomogenize_homogeneous _ ((coefficientLinearPolynomial_degree φ f).trans hf))
+    (coefficientLinearPolynomial_homogeneous φ _ (scaledHomogenize_homogeneous 1 f hf))
+    (scaledHomogenize_homogeneous 1 _ ((coefficientLinearPolynomial_degree φ f).trans hf))
   rw [← coefficientLinearPolynomial_affineChart,
-    affineChart_boundedHomogenize, affineChart_boundedHomogenize]
+    affineChart_scaledHomogenize_one, affineChart_scaledHomogenize_one]
 
-lemma projectiveChartIdeal_mem_iff_boundedHomogenize
+lemma projectiveChartIdeal_mem_iff_scaledHomogenize
     {K : Type*} [Field K] {n D : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     (hX : X 0 ∉ I) (f : MvPolynomial (Fin n) K) (hf : f.totalDegree ≤ D) :
-    f ∈ projectiveChartIdeal I ↔ boundedHomogenize D f ∈ I := by
+    f ∈ projectiveChartIdeal I ↔ scaledHomogenize D 1 f ∈ I := by
   apply coordinate_kernel_mem_iff_homogenize I _ (IsFractionRing.injective _ _) _ f hf
   intro h
   apply hX
@@ -73,24 +72,24 @@ theorem projectiveChartIdeal_scalar_extension
   apply le_antisymm
   · rw [Ideal.map_le_iff_le_comap]
     intro f hf
-    rw [Ideal.mem_comap, projectiveChartIdeal_mem_iff_boundedHomogenize
+    rw [Ideal.mem_comap, projectiveChartIdeal_mem_iff_scaledHomogenize
       _ hXL _ (show (map (algebraMap K L) f).totalDegree ≤ f.totalDegree from
         Finset.sup_mono (support_map_subset _ _))]
-    have hm : map (algebraMap K L) (boundedHomogenize f.totalDegree f) =
-        boundedHomogenize f.totalDegree (map (algebraMap K L) f) := by
-      rw [← scaledHomogenize_one, scaledHomogenize_map, map_one, scaledHomogenize_one]
+    have hm : map (algebraMap K L) (scaledHomogenize f.totalDegree 1 f) =
+        scaledHomogenize f.totalDegree 1 (map (algebraMap K L) f) := by
+      rw [scaledHomogenize_map, map_one]
     rw [← hm]
     exact Ideal.mem_map_of_mem _
-      ((projectiveChartIdeal_mem_iff_boundedHomogenize I hX f le_rfl).mp hf)
+      ((projectiveChartIdeal_mem_iff_scaledHomogenize I hX f le_rfl).mp hf)
   · intro g hg
     by_contra hnot
     obtain ⟨φ, hφ⟩ := exists_coefficientLinearPolynomial_not_mem (projectiveChartIdeal I) g hnot
     apply hφ
-    rw [projectiveChartIdeal_mem_iff_boundedHomogenize I hX _
-      (coefficientLinearPolynomial_degree φ g), ← coefficientLinearPolynomial_boundedHomogenize
-      φ g le_rfl]
+    rw [projectiveChartIdeal_mem_iff_scaledHomogenize I hX _
+      (coefficientLinearPolynomial_degree φ g),
+      ← coefficientLinearPolynomial_scaledHomogenize_one φ g le_rfl]
     exact coefficientLinearPolynomial_mem_scalar_extension I _
-      ((projectiveChartIdeal_mem_iff_boundedHomogenize _ hXL g le_rfl).mp hg) φ
+      ((projectiveChartIdeal_mem_iff_scaledHomogenize _ hXL g le_rfl).mp hg) φ
 
 theorem projectiveChartIdeal_geometrically_prime
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}

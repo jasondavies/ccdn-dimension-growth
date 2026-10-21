@@ -71,8 +71,8 @@ private theorem projective_hypersurface_factor_lower_bound_three {n : ℕ} (hn :
   obtain ⟨hhom, hFdeg, hFir⟩ :=
     projective_closure_absolute_irreducible (map (Int.castRingHom ℚ) f) hQdeg hir
   have hhom' :
-      (boundedHomogenize d (map (Int.castRingHom ℚ) f)).IsHomogeneous
-        (boundedHomogenize d (map (Int.castRingHom ℚ) f)).totalDegree := by
+      (scaledHomogenize d 1 (map (Int.castRingHom ℚ) f)).IsHomogeneous
+        (scaledHomogenize d 1 (map (Int.castRingHom ℚ) f)).totalDegree := by
     rwa [hFdeg]
   have hu := hbound _ hhom' hFir (by omega) B (by exact_mod_cast hB)
   rw [hFdeg] at hu

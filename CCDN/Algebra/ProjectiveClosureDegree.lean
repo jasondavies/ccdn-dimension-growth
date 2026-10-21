@@ -29,10 +29,10 @@ lemma projectiveClosureIdeal_chart {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
     projectiveChartIdeal (projectiveClosureIdeal I) = I := by
   ext f
-  rw [projectiveChartIdeal_mem_iff_boundedHomogenize _
+  rw [projectiveChartIdeal_mem_iff_scaledHomogenize _
     (projectiveClosureIdeal_not_X_zero I) f le_rfl,
-    homogeneous_mem_projectiveClosureIdeal_iff _ _ (boundedHomogenize_homogeneous f le_rfl),
-    affineChart_boundedHomogenize]
+    homogeneous_mem_projectiveClosureIdeal_iff _ _ (scaledHomogenize_homogeneous 1 f le_rfl),
+    affineChart_scaledHomogenize_one]
 
 /-- Exact equality of all homogeneous and filtered Hilbert functions. -/
 theorem projectiveClosureIdeal_hilbertFunction {K : Type*} [Field K] {n : ℕ}
@@ -68,10 +68,10 @@ theorem projectiveClosureIdeal_injective {K : Type*} [Field K] {n : ℕ} :
   intro I J h
   ext f
   have hI := homogeneous_mem_projectiveClosureIdeal_iff I
-    (boundedHomogenize f.totalDegree f) (boundedHomogenize_homogeneous f le_rfl)
+    (scaledHomogenize f.totalDegree 1 f) (scaledHomogenize_homogeneous 1 f le_rfl)
   have hJ := homogeneous_mem_projectiveClosureIdeal_iff J
-    (boundedHomogenize f.totalDegree f) (boundedHomogenize_homogeneous f le_rfl)
-  rw [affineChart_boundedHomogenize] at hI hJ
+    (scaledHomogenize f.totalDegree 1 f) (scaledHomogenize_homogeneous 1 f le_rfl)
+  rw [affineChart_scaledHomogenize_one] at hI hJ
   rw [← hI, ← hJ, h]
 
 lemma projectiveClosureIdeal_chart_point {K : Type*} [Field K] {n : ℕ}
@@ -81,12 +81,12 @@ lemma projectiveClosureIdeal_chart_point {K : Type*} [Field K] {n : ℕ}
   classical
   constructor
   · intro h f hf
-    have hmem : boundedHomogenize f.totalDegree f ∈ projectiveClosureIdeal I := by
+    have hmem : scaledHomogenize f.totalDegree 1 f ∈ projectiveClosureIdeal I := by
       rw [homogeneous_mem_projectiveClosureIdeal_iff _ _
-        (boundedHomogenize_homogeneous f le_rfl), affineChart_boundedHomogenize]
+        (scaledHomogenize_homogeneous 1 f le_rfl), affineChart_scaledHomogenize_one]
       exact hf
     have hz := h (Fin.cons 1 a) (affineCoordinateVector_ne_zero a) rfl _ hmem
-    rwa [← affineChart_eval, affineChart_boundedHomogenize] at hz
+    rwa [← affineChart_eval, affineChart_scaledHomogenize_one] at hz
   · intro ha v hv he f hf
     have hvanish : ∀ g ∈ projectiveClosureIdeal I, eval (Fin.cons 1 a) g = 0 := by
       intro g hg

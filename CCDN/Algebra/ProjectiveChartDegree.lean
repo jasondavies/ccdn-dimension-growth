@@ -67,10 +67,10 @@ lemma projectiveChartCoordinateMap_homogenize {K F : Type*} [Field K] [Field F] 
     (f : MvPolynomial (Fin n) K) (hf : f.totalDegree ≤ M) :
     projectiveChartCoordinateMap I q f =
       (q ((Ideal.Quotient.mk I) (X 0)))⁻¹ ^ M *
-        q ((Ideal.Quotient.mk I) (boundedHomogenize M f)) := by
-  have h := projectiveChartCoordinateMap_chart I q h0 (boundedHomogenize M f)
-    (boundedHomogenize_homogeneous f hf)
-  rwa [affineChart_boundedHomogenize] at h
+        q ((Ideal.Quotient.mk I) (scaledHomogenize M 1 f)) := by
+  have h := projectiveChartCoordinateMap_chart I q h0 (scaledHomogenize M 1 f)
+    (scaledHomogenize_homogeneous 1 f hf)
+  rwa [affineChart_scaledHomogenize_one] at h
 
 /-- Exact equality in every degree, rather than just equality of eventual
 slopes. The proof uses division by the homogenizing coordinate in the field. -/
@@ -104,9 +104,9 @@ theorem projective_chart_filtered_finrank {K F : Type*} [Field K] [Field F] [Alg
     · intro hx
       obtain ⟨u, hu, rfl⟩ := Submodule.mem_map.mp hx
       obtain ⟨f, hf, rfl⟩ := Submodule.mem_map.mp hu
-      refine Submodule.mem_map.mpr ⟨(Ideal.Quotient.mk I) (boundedHomogenize M f), ?_, ?_⟩
-      · exact Submodule.mem_map.mpr ⟨boundedHomogenize M f,
-          boundedHomogenize_homogeneous f ((mem_restrictTotalDegree _ _ _).mp hf), rfl⟩
+      refine Submodule.mem_map.mpr ⟨(Ideal.Quotient.mk I) (scaledHomogenize M 1 f), ?_, ?_⟩
+      · exact Submodule.mem_map.mpr ⟨scaledHomogenize M 1 f,
+          scaledHomogenize_homogeneous 1 f ((mem_restrictTotalDegree _ _ _).mp hf), rfl⟩
       · exact (projectiveChartCoordinateMap_homogenize I q h0 f
           ((mem_restrictTotalDegree _ _ _).mp hf)).symm
   have hV := (Submodule.equivMapOfInjective φ hφ V).finrank_eq

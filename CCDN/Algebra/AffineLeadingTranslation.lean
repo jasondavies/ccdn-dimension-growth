@@ -22,12 +22,6 @@ lemma homogeneousSlice_one_eq_chart {R : Type*} [CommRing R] {n : ℕ}
     homogeneousSlice n 1 f = affineChart n f := by
   simp only [homogeneousSlice, affineChart, map_one]
 
-lemma affineChart_scaledHomogenize_one {R : Type*} [CommRing R] {n d : ℕ}
-    (f : MvPolynomial (Fin n) R) (hd : f.totalDegree ≤ d) :
-    affineChart n (scaledHomogenize d 1 f) = f := by
-  rw [← homogeneousSlice_one_eq_chart, homogeneousSlice_scaledHomogenize 1 f hd]
-  simp
-
 lemma scaledHomogenize_one_affineTranslation {R : Type*} [CommRing R] [Nontrivial R]
     {n d : ℕ} (a : Fin n → R) (f : MvPolynomial (Fin n) R) (hd : f.totalDegree ≤ d) :
     scaledHomogenize d 1 (affineTranslation R a f) =
@@ -37,8 +31,8 @@ lemma scaledHomogenize_one_affineTranslation {R : Type*} [CommRing R] [Nontrivia
   apply affineChart_injective_on_homogeneous
     (scaledHomogenize_homogeneous _ _ ht)
     (homogeneousTranslation_homogeneous _ (scaledHomogenize_homogeneous _ _ hd))
-  rw [affineChart_scaledHomogenize_one _ ht, affineChart_homogeneousTranslation,
-    affineChart_scaledHomogenize_one _ hd]
+  rw [affineChart_scaledHomogenize_one, affineChart_homogeneousTranslation,
+    affineChart_scaledHomogenize_one]
 
 lemma homogeneousSlice_zero_translation {R : Type*} [CommRing R] {n : ℕ}
     (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) R) :

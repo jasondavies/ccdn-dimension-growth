@@ -52,7 +52,7 @@ lemma unscaledHomogenize_absolute_irreducible_iff {n : ℕ}
   · intro hir
     have hhom := scaledHomogenize_homogeneous (1 : AlgebraicClosure ℚ) (map φ f) hd.le
     have hchart : affineChart n (scaledHomogenize f.totalDegree 1 (map φ f)) = map φ f := by
-      rw [scaledHomogenize_one, affineChart_boundedHomogenize]
+      rw [affineChart_scaledHomogenize_one]
     rw [← hchart]
     apply affineChart_irreducible_of_not_variable_dvd _ hhom hir
     apply affineChart_not_variable_dvd_of_full_degree _ hir.ne_zero

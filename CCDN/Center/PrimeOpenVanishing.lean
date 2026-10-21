@@ -41,18 +41,18 @@ theorem projectiveClosure_cone_chart_zero
     (hx : ∀ p ∈ projectiveClosureIdeal I, eval x p = 0) (hx0 : x 0 ≠ 0) :
     ∀ f ∈ I, eval (fun i => x i.succ / x 0) f = 0 := by
   intro f hf
-  let F := boundedHomogenize f.totalDegree f
-  have hFhom : F.IsHomogeneous f.totalDegree := boundedHomogenize_homogeneous f le_rfl
+  let F := scaledHomogenize f.totalDegree 1 f
+  have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous 1 f le_rfl
   have hFmem : F ∈ projectiveClosureIdeal I := by
     rw [homogeneous_mem_projectiveClosureIdeal_iff I _ hFhom,
-      affineChart_boundedHomogenize]
+      affineChart_scaledHomogenize_one]
     exact hf
   have hvec : Fin.cons 1 (fun i => x i.succ / x 0) = (x 0)⁻¹ • x := by
     funext j
     refine Fin.cases ?_ (fun i => ?_) j
     · simp [hx0]
     · simp [div_eq_mul_inv, mul_comm]
-  rw [← affineChart_boundedHomogenize f.totalDegree f, affineChart_eval,
+  rw [← affineChart_scaledHomogenize_one f.totalDegree f, affineChart_eval,
     hvec, homogeneous_eval_smul hFhom, hx F hFmem, mul_zero]
 
 end

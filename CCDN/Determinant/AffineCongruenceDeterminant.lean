@@ -7,7 +7,6 @@ module
 
 public import CCDN.Auxiliary.ScaledHomogenization
 public import CCDN.Determinant.HypersurfaceDeterminantRank
-import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
 import CCDN.Determinant.SmoothCongruenceDeterminant
 /-! Congruence-refined determinant estimates for affine zeros and
@@ -52,19 +51,18 @@ theorem exists_affine_congruence_determinant_log_lower {n s N M : ℕ} (hs : 0 <
   have hF : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous 1 f le_rfl
   have hFir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) F) :=
     (unscaledHomogenize_absolute_irreducible_iff f hf0).mpr hir
-  let H := fun j => boundedHomogenize M (G j)
-  have hH : ∀ j, (H j).IsHomogeneous M := fun j => boundedHomogenize_homogeneous _ (hG j)
+  let H := fun j => scaledHomogenize M 1 (G j)
+  have hH : ∀ j, (H j).IsHomogeneous M := fun j => scaledHomogenize_homogeneous 1 _ (hG j)
   let z : Fin s → IntPoint (n + 3) := fun i => Fin.cons 1 (x i)
   have hz : ∀ i, eval (z i) F = 0 := by
     intro i
-    rw [show F = boundedHomogenize f.totalDegree f from scaledHomogenize_one _ _,
-      ← affineChart_eval, affineChart_boundedHomogenize]
+    rw [← affineChart_eval, affineChart_scaledHomogenize_one]
     exact hx i
   have he : (Matrix.of fun i j => eval (z i) (H j)) =
       Matrix.of fun i j => eval (x i) (G j) := by
     ext i j
-    change eval (Fin.cons 1 (x i)) (boundedHomogenize M (G j)) = _
-    rw [← affineChart_eval, affineChart_boundedHomogenize]
+    change eval (Fin.cons 1 (x i)) (scaledHomogenize M 1 (G j)) = _
+    rw [← affineChart_eval, affineChart_scaledHomogenize_one]
     rfl
   have hrows' : LinearIndependent ℚ
       ((Matrix.of fun i j => eval (z i) (H j)).map ((↑) : ℤ → ℚ)).row := by
@@ -72,7 +70,7 @@ theorem exists_affine_congruence_determinant_log_lower {n s N M : ℕ} (hs : 0 <
     exact hrows
   have hchart : projectiveHypersurfaceChart (0 : Fin (n + 3)) F = f := by
     simp only [projectiveHypersurfaceChart, Equiv.swap_self, Equiv.coe_refl, rename_id_apply, F,
-      scaledHomogenize_one, affineChart_boundedHomogenize]
+      affineChart_scaledHomogenize_one]
   obtain ⟨bad, hbad, hbound⟩ := exists_smooth_congruence_determinant_log_lower hs F hF hd hFir
     H hH z (fun i => primitive_affine_integer_coordinates (x i)) hz hrows' P hP
     (fun _ => 0) a (by simpa only [hchart] using ha)

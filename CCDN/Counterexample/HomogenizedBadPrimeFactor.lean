@@ -24,7 +24,7 @@ open MvPolynomial
 def badPrimeAffineExample (c : ℤ) : MvPolynomial (Fin 2) ℤ := C c * X 0 ^ 2 + X 1
 
 /-- The homogenization `c x₁² + x₀ x₂` of `badPrimeAffineExample c`, with `x₀` the
-coordinate at infinity as in `boundedHomogenize`. -/
+coordinate at infinity as in `scaledHomogenize`. -/
 def badPrimeHomogenizedExample (c : ℤ) : MvPolynomial (Fin 3) ℤ := C c * X 1 ^ 2 + X 0 * X 2
 
 lemma irreducible_of_irreducible_algEquiv {R A B : Type*} [CommSemiring R] [Semiring A]
@@ -90,12 +90,12 @@ lemma isHomogeneous_badPrimeHomogenizedExample (c : ℤ) :
     ((isHomogeneous_X _ 0).mul (isHomogeneous_X _ 2))
 
 /-- `badPrimeHomogenizedExample c` is the homogenization of `badPrimeAffineExample c`. -/
-theorem boundedHomogenize_badPrimeAffineExample {c : ℤ} (hc : c ≠ 0) :
-    boundedHomogenize 2 (badPrimeAffineExample c) = badPrimeHomogenizedExample c := by
+theorem scaledHomogenize_badPrimeAffineExample {c : ℤ} (hc : c ≠ 0) :
+    scaledHomogenize 2 1 (badPrimeAffineExample c) = badPrimeHomogenizedExample c := by
   apply affineChart_injective_on_homogeneous
-    (boundedHomogenize_homogeneous _ (totalDegree_badPrimeAffineExample hc).le)
+    (scaledHomogenize_homogeneous 1 _ (totalDegree_badPrimeAffineExample hc).le)
     (isHomogeneous_badPrimeHomogenizedExample c)
-  rw [affineChart_boundedHomogenize]
+  rw [affineChart_scaledHomogenize_one]
   have h1 : affineChart 2 (X 1 : MvPolynomial (Fin 3) ℤ) = X 0 := eval₂_X _ _ _
   have h2 : affineChart 2 (X 2 : MvPolynomial (Fin 3) ℤ) = X 1 := eval₂_X _ _ _
   have h0 : affineChart 2 (X 0 : MvPolynomial (Fin 3) ℤ) = 1 := eval₂_X _ _ _
@@ -103,11 +103,11 @@ theorem boundedHomogenize_badPrimeAffineExample {c : ℤ} (hc : c ≠ 0) :
 
 lemma totalDegree_badPrimeHomogenizedExample {c : ℤ} (hc : c ≠ 0) :
     (badPrimeHomogenizedExample c).totalDegree = 2 := by
-  rw [← boundedHomogenize_badPrimeAffineExample hc]
-  apply (boundedHomogenize_homogeneous _ (totalDegree_badPrimeAffineExample hc).le).totalDegree
+  rw [← scaledHomogenize_badPrimeAffineExample hc]
+  apply (scaledHomogenize_homogeneous 1 _ (totalDegree_badPrimeAffineExample hc).le).totalDegree
   intro h
   have := congrArg (affineChart 2) h
-  rw [affineChart_boundedHomogenize, map_zero] at this
+  rw [affineChart_scaledHomogenize_one, map_zero] at this
   have hd := totalDegree_badPrimeAffineExample hc
   rw [this, totalDegree_zero] at hd
   exact absurd hd (by norm_num)

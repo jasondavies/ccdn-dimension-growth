@@ -8,6 +8,7 @@ module
 public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Projection.DegreePreservingProjectionBox
 import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Projection.BoundedDegreePreservingProjection
 import CCDN.Projection.ProjectivePlaneProjection
 /-! A projective curve with a proper standard chart reduces to a plane
@@ -18,19 +19,6 @@ and at most d further points lie on the omitted hyperplane. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial
-
-lemma boundedHomogenize_irreducible {K : Type*} [Field K] {n : ℕ}
-    (f : MvPolynomial (Fin n) K) (hf : Irreducible f) :
-    Irreducible (boundedHomogenize f.totalDegree f) := by
-  have hhom := boundedHomogenize_homogeneous f le_rfl
-  have h0 : boundedHomogenize f.totalDegree f ≠ 0 := by
-    intro h
-    have hh := affineChart_boundedHomogenize f.totalDegree f
-    rw [h, map_zero] at hh
-    exact hf.ne_zero hh.symm
-  apply irreducible_of_affineChart_irreducible
-  · rw [affineChart_boundedHomogenize, hhom.totalDegree h0]
-  · rwa [affineChart_boundedHomogenize]
 
 theorem projective_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime] (hX : X 0 ∉ I)
@@ -44,7 +32,7 @@ theorem projective_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
         eval z (![momentCoordinate ℚ n k₀, momentCoordinate ℚ n k₁] i))).card + d * (d - 1))
     (B : ℝ) (hB : 1 ≤ B) :
     projectiveCount (projectiveIdealZeroLocus I) B ≤
-      projectiveCount (projectiveZeroLocus (boundedHomogenize d f))
+      projectiveCount (projectiveZeroLocus (scaledHomogenize d 1 f))
         (projectionBoxFactor n d * B) + d ^ 2 := by
   classical
   let S := projectivePoints (projectiveIdealZeroLocus I) B
@@ -70,7 +58,7 @@ theorem projective_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
     fin_cases i <;> rfl
   rw [hπ, hRT] at hc
   have himage : (R.image π).card ≤
-      projectiveCount (projectiveZeroLocus (boundedHomogenize d f))
+      projectiveCount (projectiveZeroLocus (scaledHomogenize d 1 f))
         (projectionBoxFactor n d * B) := by
     rw [← Finset.card_image_of_injective (R.image π) (affineProjectivePoint_injective 2)]
     apply Finset.card_le_card
@@ -115,9 +103,9 @@ theorem exists_projective_plane_count_reduction {n d : ℕ}
         ![eval z (momentCoordinate ℚ n k₀), eval z (momentCoordinate ℚ n k₁)] := by
     funext z i
     fin_cases i <;> rfl
-  refine ⟨boundedHomogenize d f, boundedHomogenize_homogeneous f hfd.le, ?_,
+  refine ⟨scaledHomogenize d 1 f, scaledHomogenize_homogeneous 1 f hfd.le, ?_,
     projective_curve_count_le_of_moment_projection I hX hd hdegree f hfd hk₀ hk₁ hfI ?_⟩
-  · simpa only [hfd] using boundedHomogenize_irreducible f hfir
+  · simpa only [hfd] using scaledHomogenize_irreducible f hfir one_ne_zero
   · intro S hS
     rw [hπ]
     exact hcount S hS

@@ -93,13 +93,14 @@ theorem projectivePlaneChartProjection_zero {n d k₀ k₁ : ℕ}
     (f : MvPolynomial (Fin 2) ℚ) (hfd : f.totalDegree = d)
     (hfI : aeval ![momentCoordinate ℚ n k₀, momentCoordinate ℚ n k₁] f ∈ projectiveChartIdeal I)
     (x : ProjectivePoint n) (hx : x ∈ projectiveIdealZeroLocus I) (hx0 : x.rep 0 ≠ 0) :
-    projectivePlaneChartProjection k₀ k₁ x ∈ projectiveZeroLocus (boundedHomogenize d f) := by
+    projectivePlaneChartProjection k₀ k₁ x ∈
+      projectiveZeroLocus (scaledHomogenize d 1 f) := by
   have hh := projectiveChartIdeal_point I hX x hx hx0 _ hfI
   rw [eval_polynomial_coordinate_map] at hh
   change affineProjectivePoint _ ∈ _
   unfold affineProjectivePoint
-  rw [mem_projectiveZeroLocus_mk (boundedHomogenize_homogeneous f hfd.le),
-    ← affineChart_eval, affineChart_boundedHomogenize]
+  rw [mem_projectiveZeroLocus_mk (scaledHomogenize_homogeneous 1 f hfd.le),
+    ← affineChart_eval, affineChart_scaledHomogenize_one]
   convert hh using 1
   congr 2
   funext j

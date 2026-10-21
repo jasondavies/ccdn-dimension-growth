@@ -67,13 +67,13 @@ lemma closureEliminationDirection_comp {n : ℕ} (b : Option (Fin n) → ℤ) :
 lemma closureEliminationDirection_eval {n : ℕ} (b : Option (Fin n) → ℤ)
     (f : MvPolynomial (Fin (n + 1)) ℚ) :
     eval (fun i => (closureEliminationDirection b i : ℚ))
-        (rename (closurePivotEquiv n) (boundedHomogenize f.totalDegree f)) =
+        (rename (closurePivotEquiv n) (scaledHomogenize f.totalDegree 1 f)) =
       eval (Fin.cons (b none : ℚ) (fun i => (b (some i) : ℚ)))
         (homogeneousComponent f.totalDegree f) := by
   rw [eval_rename]
   change eval (fun i => (closureEliminationDirection b (closurePivotEquiv n i) : ℚ))
-    (boundedHomogenize f.totalDegree f) = _
-  rw [closureEliminationDirection_comp, boundedHomogenize_eval_at_infinity f le_rfl]
+    (scaledHomogenize f.totalDegree 1 f) = _
+  rw [closureEliminationDirection_comp, scaledHomogenize_one_eval_at_infinity f le_rfl]
 
 /-- A full-degree direction for an affine ideal equation gives an
 integral map of projective closures whose first coordinate remains X₀. -/
@@ -89,19 +89,19 @@ theorem fixedCoordinateElimination_isIntegral {n : ℕ}
   let H := projectiveClosureIdeal I
   let e := renameEquiv ℚ (closurePivotEquiv n)
   let J := H.map e
-  let F := e (boundedHomogenize f.totalDegree f)
+  let F := e (scaledHomogenize f.totalDegree 1 f)
   let c := closureEliminationDirection b
   have hc : (c none : ℚ) ≠ 0 := hb
   have hFhom : F.IsHomogeneous f.totalDegree :=
-    (boundedHomogenize_homogeneous f le_rfl).rename_isHomogeneous
+    (scaledHomogenize_homogeneous 1 f le_rfl).rename_isHomogeneous
   have hF0 : F ≠ 0 := by
     intro h
-    have hh : boundedHomogenize f.totalDegree f = 0 := e.injective (by
-      change e (boundedHomogenize f.totalDegree f) = e 0
+    have hh : scaledHomogenize f.totalDegree 1 f = 0 := e.injective (by
+      change e (scaledHomogenize f.totalDegree 1 f) = e 0
       rw [map_zero]
       exact h)
     apply hf
-    simpa only [affineChart_boundedHomogenize, map_zero] using
+    simpa only [affineChart_scaledHomogenize_one, map_zero] using
       congrArg (affineChart (n + 1)) hh
   have hFdeg := hFhom.totalDegree hF0
   have hFdir : eval (fun i => (c i : ℚ))
@@ -111,7 +111,7 @@ theorem fixedCoordinateElimination_isIntegral {n : ℕ}
   have hFmem : F ∈ J := by
     apply Ideal.mem_map_of_mem
     rw [homogeneous_mem_projectiveClosureIdeal_iff I _
-      (boundedHomogenize_homogeneous f le_rfl), affineChart_boundedHomogenize]
+      (scaledHomogenize_homogeneous 1 f le_rfl), affineChart_scaledHomogenize_one]
     exact hfi
   have hraw : (coordinateEliminationMap J
       (hypersurfaceAffineCoordinates 0 (fun i => (c i : ℚ)) hc)).IsIntegral := by

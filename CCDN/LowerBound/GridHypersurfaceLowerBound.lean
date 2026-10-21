@@ -95,7 +95,7 @@ theorem exists_topform_hypersurface_lower_bounds (d n : ℕ) (hd : 4 ≤ d) (hn 
         (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ∧
       ((d : ℝ) / 8) * (B : ℝ) ^ (n - 1) ≤
         (projectiveCount (projectiveZeroLocus
-          (boundedHomogenize d (map (Int.castRingHom ℚ) f))) B : ℝ) := by
+          (scaledHomogenize d 1 (map (Int.castRingHom ℚ) f))) B : ℝ) := by
   classical
   let B := d / 4
   have hB : 1 ≤ B := by dsimp [B]; omega
