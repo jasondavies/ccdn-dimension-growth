@@ -4,7 +4,9 @@ public import CCDN.UniversalPlaneWitness
 public import Mathlib.Algebra.MvPolynomial.SchwartzZippel
 
 /-! The polynomial zero bound on the full affine parameter space, with its
-field-size saving retained in multiplicative form. -/
+field-size saving retained in multiplicative form. This wraps Mathlib's Schwartz–Zippel
+lemma `MvPolynomial.schwartz_zippel_totalDegree`, applied to the whole finite field and
+restated as a cardinality bound over an arbitrary finite coordinate type. -/
 
 @[expose] public section
 namespace CCDN
