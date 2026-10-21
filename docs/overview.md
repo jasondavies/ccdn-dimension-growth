@@ -9,7 +9,7 @@ main result has an endpoint module at the top of `CCDN/` that assembles its proo
 module imports an endpoint. The proofs live in topic directories (`Plane/`, `Curve/`,
 `Surface/`, `Hypersurface/`, ...), which build on the foundation directories `ForMathlib/`,
 `Algebra/`, `Analysis/`, `Height/` and `Hilbert/`; foundation modules import no topic module.
-`Counterexample/` and `Paper/` hold side results that nothing else imports.
+`CCDNPaper/Counterexample/` and `CCDNPaper/Statements/` hold side results that nothing else imports.
 `scripts/check-layers.py` checks these rules.
 
 ## Theorem 3: affine curves (`AffineCurveBound.lean`)
@@ -57,7 +57,7 @@ irreducible. The Lean statement writes `N = n + 3`, so the bound reads `C d^(18+
    normal bounded by `d³` (`Hypersurface/GoodHyperplane.lean`). Its parallel slices keep an
    absolutely irreducible top form (`Hypersurface/IntegerGoodHyperplaneSlices.lean`), so each
    step costs a factor `d³ B`. (The audited statement of Lemma 4.3.7, which also covers
-   degree one, is proved separately in `Paper/` and is not on this path.)
+   degree one, is proved separately in `CCDNPaper/Statements/` and is not on this path.)
 
 ## Theorem 1: projective varieties (`ProjectiveDimensionGrowth.lean`)
 
@@ -75,14 +75,14 @@ splits by codimension:
   primitive linear parameter, not from the Chow forms and good centres of Section 5. Its height
   and fibre losses are polynomial in `d` (`Projection/ProjectiveProjectionGrowth.lean`,
   `Hypersurface/ProjectiveVarietyDimensionGrowth.lean`). Section 5 itself (good centres,
-  Chow forms, Plücker equations) is formalised in `Center/`, and Lemmas 5.1–5.4 are stated
-  from it in `Paper/`, but no main result imports them.
+  Chow forms, Plücker equations) is formalised in `CCDNPaper/Center/`, and Lemmas 5.1–5.4 are stated
+  from it in `CCDNPaper/Statements/`, but no main result imports them.
 
 ## Proposition 5: lower bound (`ProjectiveCurveLowerBound.lean`)
 
 `projective_integral_curve_lower_bound` constructs, for every `d ≥ 1`, an absolutely
 irreducible plane curve through a full grid of rational points, using Eisenstein equations
-(`LowerBound/`). The other Section 6 obstructions are stated in `Paper/`, from the
+(`LowerBound/`). The other Section 6 obstructions are stated in `CCDNPaper/Statements/`, from the
 constructions in `LowerBound/`.
 
 ## Theorem 6: class groups (`ClassGroupBound.lean`)
@@ -100,7 +100,7 @@ constructions in `LowerBound/`.
 
 ## Counterexamples and the paper's intermediate statements
 
-`Counterexample/` holds the formal refutations of printed intermediate statements described in
-the README's "Discrepancies with the paper" section. `Paper/` states the paper's other
+`CCDNPaper/Counterexample/` holds the formal refutations of printed intermediate statements described in
+the README's "Discrepancies with the paper" section. `CCDNPaper/Statements/` states the paper's other
 intermediate results as printed (or as corrected), where the main results use a different form
 or do not need them; [statements.md](statements.md) links each to its paper label.

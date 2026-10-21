@@ -25,8 +25,9 @@ This is in contrast with `hypersurfaceBadPrimeFactor` (`HypersurfaceBadReduction
 counts primes at which the degree drops, and is the factor used for homogeneous equations; the
 literal factor is at most it (`literalAffineBadPrimeFactor_le_inclusive`). The printed proof of
 Proposition 4.2.1 passes to the homogenization `F₁` of `f` and uses `b(F₁) = b(f)`, which fails
-(`Counterexample/HomogenizedBadPrimeFactor.lean`). The `LiteralAffine*` modules therefore prove
-Proposition 4.2.1 and Corollary 4.2.4 with the literal factor, working in the affine chart.
+(`CCDNPaper/Counterexample/HomogenizedBadPrimeFactor.lean`). The `LiteralAffine*` modules
+therefore prove Proposition 4.2.1 and Corollary 4.2.4 with the literal factor, working in the
+affine chart.
 
 The module also proves primitivity and good affine reductions for prime-scaled models, with no
 degree-preservation requirement modulo the good primes, since the literal factor does not count

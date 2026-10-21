@@ -3,11 +3,11 @@
 
 * Every relative Markdown link in README.md and docs/ (including docs/history/) must resolve.
 * A link of the form [`name`](path/To/File.lean) must point to a file that declares `name`.
-* In docs/overview.md, whose paths are relative to CCDN/, each section names its endpoint module
-  in its heading, for example "(`AffineCurveBound.lean`)". Every module the section cites must
-  lie in the import closure of that endpoint (of CCDN.lean for a section without one), every
-  directory it cites must exist, and every declaration name it cites must be declared in that
-  closure.
+* In docs/overview.md, whose paths are relative to CCDN/ (or to the repository root when they
+  start with `CCDNPaper/`), each section names its endpoint module in its heading, for example
+  "(`AffineCurveBound.lean`)". Every module the section cites must lie in the import closure of
+  that endpoint (of CCDN.lean and CCDNPaper.lean for a section without one), every directory it
+  cites must exist, and every declaration name it cites must be declared in that closure.
 
 All problems are reported before exiting.
 """
@@ -16,7 +16,8 @@ import re
 import sys
 from pathlib import Path
 
-from common import LIBRARY, ROOT, declarations, import_closure, project_modules, relative
+from common import LIBRARIES, LIBRARY, PAPER, ROOT, declarations, import_closure, \
+    project_modules, relative
 
 DOCUMENTS = [ROOT / "README.md", *sorted((ROOT / "docs").rglob("*.md"))]
 GENERATED = {ROOT / "docs" / "modules.md", ROOT / "docs" / "statements.md"}
@@ -66,6 +67,17 @@ def check_links(document: Path, decls: Declarations, problems: list[str]) -> Non
                             f"{code.group(1)}")
 
 
+def overview_path(token: str) -> Path:
+    """The file or directory a docs/overview.md path names: relative to CCDN/, or to the
+    repository root when it starts with `CCDNPaper/`."""
+    return ROOT / token if token.startswith(f"{PAPER}/") else LIBRARY / token
+
+
+def overview_module(token: str) -> str:
+    """The module named by a docs/overview.md path `Dir/Module.lean`."""
+    return ".".join(overview_path(token).relative_to(ROOT).with_suffix("").parts)
+
+
 def check_overview(decls: Declarations, problems: list[str]) -> int:
     modules = project_modules()
     paths_of = {name: path for name, path in modules.items()}
@@ -74,26 +86,26 @@ def check_overview(decls: Declarations, problems: list[str]) -> int:
     for section in sections:
         heading, _, body = section.partition("\n")
         endpoints = [token for token in CODE.findall(heading) if token.endswith(".lean")]
-        root = ("CCDN." + endpoints[0].removesuffix(".lean").replace("/", ".")
-                if endpoints else "CCDN")
-        if root not in modules:
+        roots = [overview_module(endpoints[0])] if endpoints else list(LIBRARIES)
+        root = " and ".join(roots)
+        if not all(name in modules for name in roots):
             problems.append(f"docs/overview.md, section '{heading}': endpoint {root} not found")
             continue
-        closure = import_closure([root], modules)
+        closure = import_closure(roots, modules)
         files = [paths_of[name] for name in closure]
         for token in CODE.findall(body):
             if token.endswith(".lean"):
                 cited += 1
-                name = "CCDN." + token.removesuffix(".lean").replace("/", ".")
+                name = overview_module(token)
                 if name not in modules:
                     problems.append(f"docs/overview.md, section '{heading}': {token} does not "
                                     "exist")
                 elif name not in closure:
                     problems.append(f"docs/overview.md, section '{heading}': {token} is not "
                                     f"imported by {root}")
-            elif re.fullmatch(r"[A-Z][A-Za-z]*/", token):
-                if not (LIBRARY / token).is_dir():
-                    problems.append(f"docs/overview.md: directory CCDN/{token} does not exist")
+            elif re.fullmatch(rf"(?:{PAPER}/)?[A-Z][A-Za-z]*/", token):
+                if not overview_path(token).is_dir():
+                    problems.append(f"docs/overview.md: directory {token} does not exist")
             elif looks_like_declaration(token):
                 cited += 1
                 if not decls.declares(files, token):

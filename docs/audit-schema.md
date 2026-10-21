@@ -71,7 +71,7 @@ refuted only in an edge case, such as Lemma 2.2 for `n = 1` or Lemma 5.2 for `m 
 | Key | Content |
 | --- | --- |
 | `id` | `e001`, `e002`, … |
-| `file` | The declaring file, relative to the repository root: below `CCDN/`, `vendor/`, or `.lake/packages/mathlib/` for Mathlib. |
+| `file` | The declaring file, relative to the repository root: below `CCDN/`, `CCDNPaper/`, `vendor/`, or `.lake/packages/mathlib/` for Mathlib. |
 | `declaration` | The fully qualified Lean name. |
 
 `audit-evidence.py` parses the file (it skips comments and tracks `namespace` and `section`)

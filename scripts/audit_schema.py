@@ -34,7 +34,7 @@ LABEL = re.compile(
     r"|Equation \(\d+-\d+\)"
     r"|Section \d+(?:\.\d+)*, .+"
 )
-EVIDENCE_ROOTS = ("CCDN/", "vendor/", ".lake/packages/mathlib/")
+EVIDENCE_ROOTS = ("CCDN/", "CCDNPaper/", "vendor/", ".lake/packages/mathlib/")
 
 TOP_LEVEL = {
     "schema_version", "title", "schema", "created_utc", "baseline_commit", "source_documents",

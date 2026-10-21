@@ -1,26 +1,33 @@
 #!/usr/bin/env python3
-"""Check the layering of the library directories.
+"""Check the layering of the two libraries and of their directories.
 
-* Foundation tier: a module in one of the FOUNDATION directories of `CCDN/` imports only
-  Mathlib, the vendored libraries and other foundation modules, never a topic directory.
+* Libraries: no module of the main library `CCDN` (below `CCDN/`, or the root CCDN.lean)
+  imports a module of the paper library `CCDNPaper`; `CCDNPaper` may import `CCDN`.
+* Foundation tier: a module in one of the FOUNDATION directories imports only Mathlib, the
+  vendored libraries and other foundation modules, never a topic directory.
 * `CCDN/Statements.lean`, which states the main results, imports only foundation modules.
 * Endpoints: the other modules at the top of `CCDN/` prove the main results and are imported
   by no library module (only by the root CCDN.lean, Solution.lean and Axioms.lean).
-* Side results: a module in a SIDE_RESULT directory (counterexamples and restatements of the
-  paper's literal statements) is imported by no module outside that directory.
+* Side results: a module in a SIDE_RESULT directory of `CCDNPaper/` (counterexamples and the
+  paper's statements as printed) is imported by no module outside that directory.
 
 All violations are reported before exiting.
 """
 import argparse
 import sys
 
-from common import FOUNDATION, ROOT, SIDE_RESULT, imports, library_module_paths, module_name
+from common import FOUNDATION, MAIN, PAPER, ROOT, SIDE_RESULT, imports, library_module_paths, \
+    module_name
 
-STATEMENTS = "CCDN.Statements"
+STATEMENTS = f"{MAIN}.Statements"
+
+
+def library(name: str) -> str:
+    return name.split(".")[0]
 
 
 def directory(name: str) -> str:
-    """The top-level directory of `CCDN.Dir.Module` (empty for a module at the top of CCDN/)."""
+    """The top-level directory of `Lib.Dir.Module` (empty for a module at the top of `Lib/`)."""
     parts = name.split(".")
     return parts[1] if len(parts) > 2 else ""
 
@@ -28,14 +35,20 @@ def directory(name: str) -> str:
 def main() -> int:
     argparse.ArgumentParser(description=__doc__.splitlines()[0]).parse_args()
     modules = {module_name(path): path for path in library_module_paths()}
-    endpoints = {name for name in modules if directory(name) == "" and name != STATEMENTS}
+    sources = dict(modules, **{name: ROOT / f"{name}.lean" for name in (MAIN, PAPER)})
+    endpoints = {name for name in modules
+                 if library(name) == MAIN and directory(name) == "" and name != STATEMENTS}
     problems: list[str] = []
-    for name, path in sorted(modules.items()):
+    for name, path in sorted(sources.items()):
         source = path.relative_to(ROOT).as_posix()
         home = directory(name)
         for target in imports(path):
-            if target not in modules:
-                continue  # Mathlib or a vendored library
+            if library(target) == PAPER and library(name) == MAIN:
+                problems.append(f"{source}: the main library imports {target} from the paper "
+                                f"library {PAPER}; {MAIN} must not depend on {PAPER} (move the "
+                                f"needed result into {MAIN}/, or this module into {PAPER}/)")
+            if target not in modules or name in (MAIN, PAPER):
+                continue  # Mathlib, a vendored library, or an import of a root module
             there = directory(target)
             if (home in FOUNDATION or name == STATEMENTS) and there not in FOUNDATION:
                 what = "foundation module" if home in FOUNDATION else "the statements module"
@@ -45,17 +58,19 @@ def main() -> int:
             if target in endpoints:
                 problems.append(f"{source}: imports the endpoint {target}; move the needed result "
                                 "into a topic directory and let the endpoint import it")
-            if there in SIDE_RESULT and there != home:
-                problems.append(f"{source}: imports the side result {target} (CCDN/{there}/ is "
-                                "imported only from within that directory)")
+            if (library(target) == PAPER and there in SIDE_RESULT
+                    and (library(name), home) != (PAPER, there)):
+                problems.append(f"{source}: imports the side result {target} ({PAPER}/{there}/ "
+                                "is imported only from within that directory)")
     if problems:
         print("Layering check failed:")
         print("\n".join(f"  {problem}" for problem in problems))
         return 1
     foundation = sum(directory(name) in FOUNDATION for name in modules)
-    print(f"Layering: the {foundation} foundation modules ({', '.join(FOUNDATION)}) and "
-          f"{STATEMENTS} import no topic module; the {len(endpoints)} endpoints and the side "
-          f"results ({', '.join(SIDE_RESULT)}) are imported by no other library module.")
+    print(f"Layering: {MAIN} imports nothing from {PAPER}; the {foundation} foundation modules "
+          f"({', '.join(FOUNDATION)}) and {STATEMENTS} import no topic module; the "
+          f"{len(endpoints)} endpoints and the side results ({', '.join(SIDE_RESULT)}) are "
+          "imported by no other library module.")
     return 0
 
 

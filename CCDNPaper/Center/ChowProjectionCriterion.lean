@@ -1,0 +1,127 @@
+/-
+Copyright (c) 2026 Jason Davies. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Jason Davies
+-/
+module
+
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDNPaper.Center.ChowLinearSpecialization
+import CCDN.Projection.IntegralProjectionHilbert
+import CCDNPaper.Center.ChowPolynomialPower
+import CCDNPaper.Center.ChowProjectionPower
+import CCDNPaper.Center.ChowRowSymmetry
+import CCDNPaper.Center.ProjectiveChowWithoutChart
+import Mathlib.Algebra.MvPolynomial.Nilpotent
+
+/-!
+Projection restrictions without chosen charts. A disjoint center preserves
+every block degree of the source equation, and the image ideal of the projection
+has a projective Chow equation constructed without charts.
+
+Weighted homogeneity under polynomial evaluation over the same field.
+-/
+
+@[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+private theorem weighted_homogeneous_aeval
+    {K σ τ : Type*} [Field K] (w : σ → ℕ) (v : τ → ℕ)
+    (a : σ → MvPolynomial τ K)
+    (ha : ∀ i, (a i).IsWeightedHomogeneous v (w i))
+    (f : MvPolynomial σ K) (d : ℕ) (hf : f.IsWeightedHomogeneous w d) :
+    (aeval a f).IsWeightedHomogeneous v d := by
+  classical
+  rw [f.as_sum, map_sum]
+  apply IsWeightedHomogeneous.sum
+  intro e he
+  rw [aeval_monomial, algebraMap_eq]
+  have hh := IsWeightedHomogeneous.prod e.support (fun i => (a i) ^ e i)
+    (fun i => e i • w i) (fun i _ => (ha i).pow (e i))
+  have hw := hf (mem_support_iff.mp he)
+  change ∑ i ∈ e.support, e i • w i = d at hw
+  simpa only [Finsupp.prod, hw] using hh.C_mul (f.coeff e)
+
+end
+end CCDN
+
+namespace CCDN
+noncomputable section
+open MvPolynomial Matrix
+
+/-- The linear substitution `chowLinearSubstitution A` induced by a projection preserves weighted
+homogeneity of degree `d` in the coefficients of the `i`-th hyperplane. -/
+theorem chowLinearSubstitution_row_homogeneous
+    {K : Type*} [Field K] {n s r : ℕ}
+    (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin r)
+    (F : MvPolynomial (Fin r × Fin (n + 1)) K) (d : ℕ)
+    (hF : F.IsWeightedHomogeneous (chowRowWeight i) d) :
+    (chowLinearSubstitution A F).IsWeightedHomogeneous (chowRowWeight i) d := by
+  have ha (q : Fin r × Fin (n + 1)) :
+      (∑ k, C (A k q.2) * X (q.1,k) : MvPolynomial (Fin r × Fin (s + 1)) K).IsWeightedHomogeneous
+        (chowRowWeight i) (chowRowWeight i q) := by
+    apply IsWeightedHomogeneous.sum
+    intro k _
+    exact (isWeightedHomogeneous_X K (chowRowWeight i) (q.1,k)).C_mul (A k q.2)
+  exact weighted_homogeneous_aeval (chowRowWeight i) (chowRowWeight i) _ ha F d hF
+
+/-- If `F` is nonzero and homogeneous in each block of hyperplane coefficients, then a nonzero
+linear substitution `chowLinearSubstitution A F` has the same total degree as `F`. -/
+theorem chowLinearSubstitution_totalDegree_of_ne_zero
+    {K : Type*} [Field K] {n s r : ℕ}
+    (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
+    (F : MvPolynomial (Fin r × Fin (n + 1)) K) (hF : F ≠ 0)
+    (δ : Fin r → ℕ) (hδ : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i))
+    (hR : chowLinearSubstitution A F ≠ 0) :
+    (chowLinearSubstitution A F).totalDegree = F.totalDegree := by
+  have hRhom := chow_rows_homogeneous_total_degree (chowLinearSubstitution A F) δ
+    (fun i => chowLinearSubstitution_row_homogeneous A i F (δ i) (hδ i))
+  exact (hRhom.totalDegree hR).trans
+    ((chow_rows_homogeneous_total_degree F δ hδ).totalDegree hF).symm
+
+/-- For a center disjoint from the projective variety of `J`, the image ideal of the
+projection has the same dimension, so it has a projective Chow equation without charts. -/
+private theorem exists_chow_projection_image_equation
+    {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
+    (hJ : IsHomogeneousIdeal J)
+    (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
+    (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
+    (hcenter : ∀ p ∈ projectiveIdealZeroLocus J, A *ᵥ p.rep ≠ 0) :
+    ∃ (G : MvPolynomial (Fin (m + 1) × Fin (s + 2)) K) (ε : Fin (m + 1) → ℕ),
+      IsProjectiveChowEquation (chowProjectionImageIdeal J A) G ε := by
+  have : (chowProjectionImageIdeal J A).IsPrime :=
+    RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
+  have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
+  exact exists_projective_chow_equation_without_chart _
+    (chowProjectionImageIdeal_homogeneous J hJ A)
+    ((integral_projection_hilbert_dimension_eq J _ hint).trans hdim)
+
+/-- Let `J` be a homogeneous prime ideal over an algebraically closed field with projective variety
+of dimension `m`, and let `F` vanish exactly on the incidence locus of `m + 1` hyperplanes with
+that variety. Then the linear substitution of `F` along the projection `A` is nonzero if and only
+if the center of `A` is disjoint from the projective variety of `J`. -/
+theorem chowLinearSubstitution_ne_zero_iff_center_disjoint
+    {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
+    (hJ : IsHomogeneousIdeal J)
+    (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
+    (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
+    (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
+    (hF : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J) :
+    chowLinearSubstitution A F ≠ 0 ↔
+      ∀ p ∈ projectiveIdealZeroLocus J, A *ᵥ p.rep ≠ 0 := by
+  constructor
+  · exact center_disjoint_of_chowLinearSubstitution_ne_zero J A F hF
+  · intro hcenter
+    obtain ⟨G,_,hG⟩ := exists_chow_projection_image_equation J hJ hdim A hcenter
+    obtain ⟨c,k,hc,_,he⟩ := polynomial_eq_scalar_pow_of_same_zeros G
+      (chowLinearSubstitution A F) hG.irreducible
+      (chowLinearSubstitution_same_zeros_as_image J hJ A hcenter F G hF hG.eval_eq_zero_iff)
+    rw [he]
+    exact mul_ne_zero (C_ne_zero.mpr hc) (pow_ne_zero k hG.irreducible.ne_zero)
+
+end
+end CCDN

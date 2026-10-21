@@ -6,13 +6,15 @@ Authors: Jason Davies
 module
 
 import CCDN
+import CCDNPaper
 import Solution
 import Lean.Util.CollectAxioms
 
-/-! Audit every exported declaration in this project's mathematical modules, the vendored
-Bombieri–Vaaler and Mertens dependencies and the `Solution` module that proves the compared
-statements. Imported declarations carry Lean's transitive axiom metadata. This is an axiom audit,
-not an independent kernel implementation or a proof of the target. -/
+/-! Audit every exported declaration in this project's two libraries (the main library `CCDN`
+and the paper library `CCDNPaper`), the vendored Bombieri–Vaaler and Mertens dependencies and
+the `Solution` module that proves the compared statements. Imported declarations carry Lean's
+transitive axiom metadata. This is an axiom audit, not an independent kernel implementation or a
+proof of the target. -/
 
 open Lean Elab Command
 
@@ -21,27 +23,31 @@ run_cmd do
   let env ← getEnv
   let modules := env.allImportedModuleNames
   let allowed : Array Name := #[``propext, ``Classical.choice, ``Quot.sound]
-  let mut own : Nat := 0
+  let mut main : Nat := 0
+  let mut paper : Nat := 0
   let mut vendor : Nat := 0
   let mut submission : Nat := 0
   for (name, _) in env.constants.toList do
     let some idx := env.getModuleIdxFor? name | continue
     let some mod := modules[idx.toNat]? | throwError "Missing module for {name}"
-    let isOwn := (`CCDN).isPrefixOf mod
+    let isMain := (`CCDN).isPrefixOf mod
+    let isPaper := (`CCDNPaper).isPrefixOf mod
     let isVendor := (`ArithmeticHeights).isPrefixOf mod || (`Mertens).isPrefixOf mod
     let isSubmission := mod == `Solution
-    if !isOwn && !isVendor && !isSubmission then continue
+    if !isMain && !isPaper && !isVendor && !isSubmission then continue
     let axioms ← collectAxioms name
     let bad := axioms.filter fun a => !allowed.contains a
     unless bad.isEmpty do
       throwError "Disallowed axioms in {name}: {bad}"
-    if isOwn then own := own + 1
+    if isMain then main := main + 1
+    else if isPaper then paper := paper + 1
     else if isVendor then vendor := vendor + 1
     else submission := submission + 1
-  unless own > 0 ∧ vendor > 0 ∧ submission > 0 do
-    throwError "Audit coverage failure: project={own}, vendor={vendor}, submission={submission}"
-  logInfo m!"Axiom audit passed: {own} project, {vendor} vendor and {submission} submission \
-    declarations; only {allowed}."
+  unless main > 0 ∧ paper > 0 ∧ vendor > 0 ∧ submission > 0 do
+    throwError "Audit coverage failure: main={main}, paper={paper}, vendor={vendor}, \
+      submission={submission}"
+  logInfo m!"Axiom audit passed: {main} main-library, {paper} paper-library, {vendor} vendor \
+    and {submission} submission declarations; only {allowed}."
 
 /-! The compared statements (see `comparator.json`). -/
 

@@ -12,14 +12,23 @@ if sys.version_info < (3, 12):
 import tomllib  # noqa: E402  (after the version check, which gives a clearer message)
 
 ROOT = Path(__file__).resolve().parents[1]
-LIBRARY = ROOT / "CCDN"
 AUDIT = ROOT / "docs" / "completion-audit.json"
 
-# The directory tiers of `CCDN/` (scripts/check-layers.py enforces them). Foundation modules
-# import only Mathlib, the vendored libraries and each other; topic directories hold the proof
-# routes; side-result directories are imported by no other directory.
+# This project's two libraries, each with a root module `<name>.lean` and its modules below
+# `<name>/`. The main library `CCDN` holds exactly what the six main theorems need; the paper
+# library `CCDNPaper` holds the rest of the paper (Section 5, the paper's statements as printed,
+# the counterexamples) and may import `CCDN`, never the other way round.
+MAIN = "CCDN"
+PAPER = "CCDNPaper"
+LIBRARIES = (MAIN, PAPER)
+LIBRARY = ROOT / MAIN
+PAPER_LIBRARY = ROOT / PAPER
+
+# The directory tiers (scripts/check-layers.py enforces them). Foundation modules import only
+# Mathlib, the vendored libraries and each other; topic directories hold the proof routes;
+# side-result directories of `CCDNPaper/` are imported by no other directory.
 FOUNDATION = ("ForMathlib", "Algebra", "Analysis", "Height", "Hilbert")
-SIDE_RESULT = ("Counterexample", "Paper")
+SIDE_RESULT = ("Counterexample", "Statements")
 
 # `[public] [meta] import [all] Module`, as accepted by the Lean 4 module system.
 IMPORT = re.compile(r"^(?:public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([^\s-]+)", re.M)
@@ -38,9 +47,18 @@ def module_name(path: Path, src_dir: Path = ROOT) -> str:
     return ".".join(path.relative_to(src_dir).with_suffix("").parts)
 
 
-def library_module_paths() -> list[Path]:
-    """Every module of the `CCDN` library below `CCDN/`, sorted (the root `CCDN.lean` excluded)."""
-    return sorted(LIBRARY.rglob("*.lean"))
+def library_module_paths(library: str | None = None) -> list[Path]:
+    """Every module below `CCDN/` and `CCDNPaper/` (or below `<library>/` only), sorted.
+
+    The root modules `CCDN.lean` and `CCDNPaper.lean` are excluded.
+    """
+    names = LIBRARIES if library is None else (library,)
+    return sorted(path for name in names for path in (ROOT / name).rglob("*.lean"))
+
+
+def root_files() -> list[Path]:
+    """The root modules `CCDN.lean` and `CCDNPaper.lean`."""
+    return [ROOT / f"{name}.lean" for name in LIBRARIES]
 
 
 def lakefile() -> dict:

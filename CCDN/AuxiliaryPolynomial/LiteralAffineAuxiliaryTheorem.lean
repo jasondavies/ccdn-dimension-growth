@@ -24,7 +24,7 @@ Here "literal" means the paper's Definition 3.2.1 applied verbatim to the affine
 polynomial (`literalAffineBadPrimeFactor`, see `LiteralAffineBadPrimes`), as opposed to
 `hypersurfaceBadPrimeFactor`, which also counts primes at which the degree drops. The printed
 route through the homogenization does not give this factor
-(`Counterexample/HomogenizedBadPrimeFactor.lean`). -/
+(`CCDNPaper/Counterexample/HomogenizedBadPrimeFactor.lean`). -/
 
 @[expose] public section
 namespace CCDN

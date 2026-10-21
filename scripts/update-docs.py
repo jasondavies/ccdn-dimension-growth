@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Generate docs/modules.md and docs/statements.md from the sources and the completion audit.
 
-docs/modules.md lists every library module by directory, with the first sentence of its module
-docstring. docs/statements.md tabulates the audited statements of the paper and the external
+docs/modules.md lists every module of the two libraries by directory, with the first sentence of
+its module docstring. docs/statements.md tabulates the audited statements of the paper and the external
 inputs recorded in docs/completion-audit.json, linking each Lean declaration to the line that
 declares it. `--check` fails when either file is out of date; line anchors that have merely
 drifted are reported but do not fail the check, so editing a Lean file never breaks CI by itself.
@@ -13,36 +13,37 @@ import sys
 from pathlib import Path
 
 import audit_schema
-from common import FOUNDATION, LIBRARY, ROOT, SIDE_RESULT, declarations, library_module_paths, \
-    module_name
+from common import FOUNDATION, MAIN, PAPER, ROOT, SIDE_RESULT, declarations, \
+    library_module_paths, module_name
 
 MODULES = ROOT / "docs" / "modules.md"
 STATEMENTS = ROOT / "docs" / "statements.md"
 ANCHOR = re.compile(r"#L\d+\)")
 
+# Every directory holding modules, relative to the repository root, with its description.
 DIRECTORIES = {
-    "": "Main results, with their statements and one endpoint module per result",
-    "Algebra": "Polynomial and commutative-algebra lemmas",
-    "Analysis": "Real and prime-number estimates",
-    "AuxiliaryPolynomial": "Auxiliary polynomials, positioning and bad primes (Sections 3.1, 3.3, "
-                           "3.4, 4.2)",
-    "Center": "Chow forms, good centres and Plücker equations (Section 5); entry point "
-              "`BirationalComplementProjection`",
-    "ClassGroup": "Two-torsion in class groups (Theorem 6)",
-    "Counterexample": "Counterexamples to printed intermediate statements",
-    "Curve": "Curve counts (Theorems 2 and 3, and the curve case of Theorem 1)",
-    "Determinant": "Local and global determinant estimates (Sections 2 and 3.2)",
-    "ForMathlib": "General results suitable for Mathlib",
-    "Height": "Heights, boxes and point counts",
-    "Hilbert": "Hilbert functions, dimension and degree",
-    "Hypersurface": "Hyperplane slicing and hypersurface counts (Sections 4.1, 4.3)",
-    "LowerBound": "Lower-bound constructions (Proposition 5, Section 6)",
-    "Noether": "Noether irreducibility forms (Theorem 3.2.2)",
-    "Paper": "The paper's intermediate statements and side results as stated there, not used by "
-             "the main results",
-    "Plane": "Plane curves, including the scaled plane model",
-    "Projection": "Projections and normalisations (Propositions 4.3.1, 4.3.2)",
-    "Surface": "Surfaces (Propositions 4.3.3, 4.3.4, Theorem 4.3.5)",
+    "CCDN": "Main results, with their statements and one endpoint module per result",
+    "CCDN/Algebra": "Polynomial and commutative-algebra lemmas",
+    "CCDN/Analysis": "Real and prime-number estimates",
+    "CCDN/AuxiliaryPolynomial": "Auxiliary polynomials, positioning and bad primes (Sections 3.1, "
+                                "3.3, 3.4, 4.2)",
+    "CCDN/ClassGroup": "Two-torsion in class groups (Theorem 6)",
+    "CCDN/Curve": "Curve counts (Theorems 2 and 3, and the curve case of Theorem 1)",
+    "CCDN/Determinant": "Local and global determinant estimates (Sections 2 and 3.2)",
+    "CCDN/ForMathlib": "General results suitable for Mathlib",
+    "CCDN/Height": "Heights, boxes and point counts",
+    "CCDN/Hilbert": "Hilbert functions, dimension and degree",
+    "CCDN/Hypersurface": "Hyperplane slicing and hypersurface counts (Sections 4.1, 4.3)",
+    "CCDN/LowerBound": "Lower-bound constructions (Proposition 5, Section 6)",
+    "CCDN/Noether": "Noether irreducibility forms (Theorem 3.2.2)",
+    "CCDN/Plane": "Plane curves, including the scaled plane model",
+    "CCDN/Projection": "Projections and normalisations (Propositions 4.3.1, 4.3.2)",
+    "CCDN/Surface": "Surfaces (Propositions 4.3.3, 4.3.4, Theorem 4.3.5)",
+    "CCDNPaper/Center": "Chow forms, good centres and Plücker equations (Section 5); entry point "
+                        "`BirationalComplementProjection`",
+    "CCDNPaper/Counterexample": "Counterexamples to printed intermediate statements",
+    "CCDNPaper/Statements": "The paper's intermediate statements and side results as stated "
+                            "there, not used by the main results",
 }
 
 
@@ -59,37 +60,44 @@ def first_sentence(path: Path) -> str:
 def render_modules() -> str:
     groups: dict[str, list[Path]] = {}
     for path in library_module_paths():
-        directory = "/".join(path.relative_to(LIBRARY).parts[:-1])
-        groups.setdefault(directory, []).append(path)
+        groups.setdefault(path.parent.relative_to(ROOT).as_posix(), []).append(path)
     unknown = sorted(set(groups) - set(DIRECTORIES))
     if unknown:
         raise SystemExit(f"Describe these directories in scripts/update-docs.py: {unknown}")
+
     def tier(name: str) -> tuple[int, int]:
-        top = name.split("/")[0]
-        if name == "":
+        library, _, rest = name.partition("/")
+        top = rest.split("/")[0]
+        if library == PAPER:
+            return (5, 0) if top in SIDE_RESULT else (4, 0)
+        if rest == "":
             return (0, 0)
-        if top in FOUNDATION:
-            return (1, FOUNDATION.index(top))
-        return (3, 0) if top in SIDE_RESULT else (2, 0)
+        return (1, FOUNDATION.index(top)) if top in FOUNDATION else (2, 0)
 
     def listing(tier_dirs) -> str:
         return ", ".join(f"`{name}/`" for name in tier_dirs)
 
     lines = ["# Modules", "",
-             "Generated by `scripts/update-docs.py` from the module docstrings. The directories "
+             "Generated by `scripts/update-docs.py` from the module docstrings. The modules form "
+             f"two libraries: the main library `{MAIN}` (below `{MAIN}/`), which the main results, "
+             f"`Solution.lean` and the comparator use, and the paper library `{PAPER}` (below "
+             f"`{PAPER}/`), which imports `{MAIN}` and holds the parts of the paper that the main "
+             f"results do not use. `{MAIN}` never imports `{PAPER}`. Within them the directories "
              "form tiers, which `scripts/check-layers.py` enforces:", "",
-             "* `CCDN/`: `Statements.lean` states the main results and imports only the "
+             f"* `{MAIN}/`: `Statements.lean` states the main results and imports only the "
              "foundation; each other module is the endpoint of one result and is imported by no "
              "library module.",
              f"* Foundation ({listing(FOUNDATION)}): general results, which import only Mathlib, "
              "the vendored libraries and each other.",
-             "* Topics (the other directories): the proof routes, each in the directory of its "
-             "topic.",
-             f"* Side results ({listing(SIDE_RESULT)}): counterexamples, and the paper's "
-             "intermediate statements as stated there; imported by no other directory.", ""]
+             f"* Topics (the other directories of `{MAIN}/`): the proof routes, each in the "
+             "directory of its topic.",
+             f"* `{PAPER}/Center/`: Section 5 of the paper, formalised as printed (with the "
+             "corrections of the discrepancy table) but used by no main result.",
+             f"* Side results ({listing(f'{PAPER}/{name}' for name in SIDE_RESULT)}): "
+             "counterexamples, and the paper's intermediate statements as stated there; imported "
+             "by no other directory.", ""]
     for directory in sorted(groups, key=lambda name: (tier(name), name)):
-        title = f"`CCDN/{directory}/`" if directory else "`CCDN/`"
-        lines += [f"## {title}: {DIRECTORIES[directory]}", "", "| Module | Content |",
+        lines += [f"## `{directory}/`: {DIRECTORIES[directory]}", "", "| Module | Content |",
                   "| --- | --- |"]
         for path in groups[directory]:
             link = path.relative_to(ROOT / "docs", walk_up=True)

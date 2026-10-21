@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
-"""Normalize the import block of every module of the CCDN library.
+"""Normalize the import block of every module of the CCDN and CCDNPaper libraries.
 
-The header of each module below `CCDN/` and of the root `CCDN.lean` must read: the `module`
-line, one blank line, the `public import` lines sorted by module name, the plain `import`
-(and `import all`) lines sorted by module name, then one blank line and the module docstring
-`/-! ... -/`. Nothing else may stand between `module` and the docstring. The sort order is
-Python's string order on module names, the order in which scripts/update-root.py writes
-CCDN.lean, so the generated root module already satisfies this layout.
+The header of each module below `CCDN/` and `CCDNPaper/`, and of the roots `CCDN.lean` and
+`CCDNPaper.lean`, must read: the `module` line, one blank line, the `public import` lines sorted
+by module name, the plain `import` (and `import all`) lines sorted by module name, then one
+blank line and the module docstring `/-! ... -/`. Nothing else may stand between `module` and the docstring. The sort order is
+Python's string order on module names, the order in which scripts/update-root.py writes the
+roots, so the generated root modules already satisfy this layout.
 
 `--check` reports the modules whose header differs instead of rewriting them.
 """
@@ -14,7 +14,7 @@ import argparse
 import re
 import sys
 
-from common import ROOT, library_module_paths, relative
+from common import library_module_paths, relative, root_files
 
 MODULE = re.compile(r"^module\b")
 IMPORT_LINE = re.compile(r"^(public\s+)?(?:meta\s+)?import\s+(?:all\s+)?([^\s-]+)\s*$")
@@ -52,7 +52,7 @@ def main() -> int:
     parser.add_argument("--check", action="store_true",
                         help="fail if an import block is not normalized")
     check = parser.parse_args().check
-    paths = [ROOT / "CCDN.lean"] + library_module_paths()
+    paths = root_files() + library_module_paths()
     failed = False
     changed = 0
     for path in paths:

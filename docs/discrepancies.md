@@ -23,7 +23,7 @@ has a summary table.
   `O_c(s)`. In the proof, the replacement `g(k) = µ + cµ(k⁰ − (k−1)⁰) = µ` is not pointwise
   larger when `n = 1`. The hypersurface application is unaffected because there `g(k) ≤ µ`, and
   the lemma holds for `n ≥ 2` with an error independent of `µ`.
-  [[`no_uniform_dimension_one_profile_error`](../CCDN/Counterexample/WeightedDimensionOne.lean)]
+  [[`no_uniform_dimension_one_profile_error`](../CCDNPaper/Counterexample/WeightedDimensionOne.lean)]
 * **Corollary 2.5 needs the `Fⱼ` to have a common degree** (`refuted`). Take `n = 1`, the line
   `f = x₂` in `ℙ²` (so `µ = 1`), a prime `p > s`, the primitive points `ξᵢ = (i, p, 0)` for
   `1 ≤ i ≤ s`, which all reduce to `[1:0:0]`, and `Fⱼ = x₀^(j−1)`. Then `det(Fⱼ(ξᵢ))` is a
@@ -31,7 +31,7 @@ has a summary table.
   corollary asks for `e ≥ s²/2 − O(s)`. In the proof, `Fⱼ(ξᵢ)` differs from the value of the
   local function `Fⱼ/x₀^(deg Fⱼ)` by the factor `ξᵢ₀^(deg Fⱼ)`. That factor comes out of the
   determinant only when all the degrees are equal.
-  [[`no_uniform_mixed_degree_local_error`](../CCDN/Counterexample/MixedDegreeProjective.lean)]
+  [[`no_uniform_mixed_degree_local_error`](../CCDNPaper/Counterexample/MixedDegreeProjective.lean)]
   The formalisation proves Proposition 2.6 and Corollary 2.9 only with a common degree
   (`corrected`). The paper deduces Proposition 3.2.6 from Corollary 2.9, so the next example
   shows that they need it too.
@@ -42,19 +42,19 @@ has a summary table.
   `0 < log|Δ| ≤ (3/4) N⁴ log N`. The proposition would require
   `log|Δ| ≥ (s²/2)(log s − O(1)) = N⁴ log N − O(N⁴)`. The formalisation proves it when the
   columns of each matrix share a degree, which may differ between matrices.
-  [[`no_uniform_global_mixed_degree_det_lower_bound`](../CCDN/Counterexample/GlobalMixedDegreeDeterminant.lean)]
+  [[`no_uniform_global_mixed_degree_det_lower_bound`](../CCDNPaper/Counterexample/GlobalMixedDegreeDeterminant.lean)]
 * **In the proof of Proposition 4.2.1, `b(F₁) = b(f)` fails** (`proof_repaired`). Definition
   3.2.1 does not count a prime at which the affine `f` drops degree. For `f = 439x₁² + x₂`
   (`d = 2`, and `27d⁴ = 432 < 439`), every reduction of `f` is absolutely irreducible because
   it is linear in `x₂`, so `b(f) = 1`. Its homogenisation `F₁ = 439x₁² + x₀x₂` reduces to
   `x₀x₂` modulo 439, so `b(F₁) = 439^(1/439) > 1`. Replacing 439 by a product of many primes
   above 432 makes `b(F₁)/b(f)` unbounded.
-  [[`literalAffineBadPrimeFactor_homogenization_ne`](../CCDN/Counterexample/HomogenizedBadPrimeFactor.lean),
-  [`literalAffineBadPrimeFactor_homogenization_unbounded`](../CCDN/Counterexample/HomogenizedBadPrimeFactor.lean)]
+  [[`literalAffineBadPrimeFactor_homogenization_ne`](../CCDNPaper/Counterexample/HomogenizedBadPrimeFactor.lean),
+  [`literalAffineBadPrimeFactor_homogenization_unbounded`](../CCDNPaper/Counterexample/HomogenizedBadPrimeFactor.lean)]
   The statements of Proposition 4.2.1 and Corollary 4.2.4, which depends on it, are true as
   printed: the formalisation proves them by working directly in the affine chart
   ([`literal_affine_hypersurface_auxiliary`](../CCDN/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean),
-  [`literal_affine_plane_coefficient_count_uniform`](../CCDN/Paper/LiteralAffinePlaneCount.lean)).
+  [`literal_affine_plane_coefficient_count_uniform`](../CCDNPaper/Statements/LiteralAffinePlaneCount.lean)).
   In Lean, "literal" names the paper's `b(f)` of the affine polynomial, as opposed to the
   factor of its homogenisation. Defining `b(f)` through the homogenisation would also repair
   the printed argument.
@@ -63,13 +63,13 @@ has a summary table.
   `d = 1`, and the bound `< (m+1)²d² = 1` allows only constants. For `X = [1:0:0] ⊂ ℙ²`, the
   complement of `G_X` is a nonempty proper subset of `G(0, 2) = ℙ²`, which constant equations
   cannot cut out. Linear equations do, so the bound is `≤ 1` there.
-  [[`zero_dimensional_plucker_degree_bound_obstruction`](../CCDN/Counterexample/ZeroDimensionalCenter.lean)]
+  [[`zero_dimensional_plucker_degree_bound_obstruction`](../CCDNPaper/Counterexample/ZeroDimensionalCenter.lean)]
   For `m ≥ 1`, the coefficients of `R_{X,Λ}` have Plücker degree `D = (m+1)d`, and the
   Noether forms of Theorem 3.2.2 have degree `D² − 1` in those coefficients. Composing them
   gives degree `D(D² − 1)`, not `< D²`. The lemma's bound is still true: the formalisation
   proves it with a derivative resultant along a generic line in one hyperplane block, which
   has degree `D(2d − 1) < D²`
-  ([`exists_dense_open_projective_center_plucker_equations`](../CCDN/Center/PluckerComplementEquations.lean)).
+  ([`exists_dense_open_projective_center_plucker_equations`](../CCDNPaper/Center/PluckerComplementEquations.lean)).
   In the formalisation, no main result depends on Section 5 (see [overview.md](overview.md)).
 * **The constant in Lemma 5.4 is false** (`refuted`). For `s = 5`, `r = 6` and `B = 10`, the
   independent system with rows
@@ -87,7 +87,7 @@ has a summary table.
   Cofactors give the valid bound `(s−1)! B^(s−1)`
   ([`exists_bounded_row_separator`](../CCDN/Algebra/BoundedRowSeparation.lean)). The projection
   estimate (5-5) keeps its exponent `2(n−m−1)²`.
-  [[`not_printed_row_separator_bound`](../CCDN/Counterexample/RowSeparatorConstant.lean)]
+  [[`not_printed_row_separator_bound`](../CCDNPaper/Counterexample/RowSeparatorConstant.lean)]
 
 ## Covered by the addenda
 

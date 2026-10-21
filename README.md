@@ -59,19 +59,19 @@ each one, with the counterexamples.
 
 | Statement | Issue | In addenda | Lean | Status |
 | --- | --- | --- | --- | --- |
-| Lemma 2.2 | false for `n = 1` | no | [`no_uniform_dimension_one_profile_error`](CCDN/Counterexample/WeightedDimensionOne.lean) | refuted |
-| Corollary 2.5 | needs a common degree of the `Fⱼ` | no | [`no_uniform_mixed_degree_local_error`](CCDN/Counterexample/MixedDegreeProjective.lean) | refuted |
+| Lemma 2.2 | false for `n = 1` | no | [`no_uniform_dimension_one_profile_error`](CCDNPaper/Counterexample/WeightedDimensionOne.lean) | refuted |
+| Corollary 2.5 | needs a common degree of the `Fⱼ` | no | [`no_uniform_mixed_degree_local_error`](CCDNPaper/Counterexample/MixedDegreeProjective.lean) | refuted |
 | Proposition 2.6 | `n + 2` variables; needs a common degree | yes (variables only) | [`projective_hypersurface_minorGcd_bound`](CCDN/Determinant/ProjectiveHypersurfaceResidueDeterminant.lean) | corrected |
 | Corollary 2.9 | needs a common degree | no | [`projective_hypersurface_minorGcd_dvd`](CCDN/Determinant/HypersurfaceLocalDivisor.lean) | corrected |
-| Proposition 3.2.6 | false without a common degree in each matrix | no | [`no_uniform_global_mixed_degree_det_lower_bound`](CCDN/Counterexample/GlobalMixedDegreeDeterminant.lean) | refuted |
-| Proposition 4.2.1 | true, but the proof's `b(F₁) = b(f)` fails | no | [`literalAffineBadPrimeFactor_homogenization_ne`](CCDN/Counterexample/HomogenizedBadPrimeFactor.lean), [`literal_affine_hypersurface_auxiliary`](CCDN/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean) | proof_repaired |
-| Corollary 4.2.4 | true, but proved through the faulty step of 4.2.1 | no | [`literal_affine_plane_coefficient_count_uniform`](CCDN/Paper/LiteralAffinePlaneCount.lean) | proof_repaired |
+| Proposition 3.2.6 | false without a common degree in each matrix | no | [`no_uniform_global_mixed_degree_det_lower_bound`](CCDNPaper/Counterexample/GlobalMixedDegreeDeterminant.lean) | refuted |
+| Proposition 4.2.1 | true, but the proof's `b(F₁) = b(f)` fails | no | [`literalAffineBadPrimeFactor_homogenization_ne`](CCDNPaper/Counterexample/HomogenizedBadPrimeFactor.lean), [`literal_affine_hypersurface_auxiliary`](CCDN/AuxiliaryPolynomial/LiteralAffineAuxiliaryTheorem.lean) | proof_repaired |
+| Corollary 4.2.4 | true, but proved through the faulty step of 4.2.1 | no | [`literal_affine_plane_coefficient_count_uniform`](CCDNPaper/Statements/LiteralAffinePlaneCount.lean) | proof_repaired |
 | Proposition 4.3.3 | the top form must be absolutely irreducible | yes | [`surface_line_contribution`](CCDN/Surface/LineContribution.lean) | corrected |
 | Proposition 4.3.4 | `d¹⁸` in place of `d¹⁴` | yes | [`affine_surface_dimension_growth`](CCDN/Surface/AffineSurfaceDimensionGrowth.lean) | corrected |
-| Lemma 4.3.7 | degree `(n+1)d(d² − 1)` | yes | [`exists_integral_hyperplane_avoidance`](CCDN/Paper/IntegralHyperplaneAvoidance.lean) | corrected |
+| Lemma 4.3.7 | degree `(n+1)d(d² − 1)` | yes | [`exists_integral_hyperplane_avoidance`](CCDNPaper/Statements/IntegralHyperplaneAvoidance.lean) | corrected |
 | Remark 4.3.8 | exponents must be recomputed (see above) | yes | [`affine_hypersurface_dimension_growth`](CCDN/AffineHypersurfaceDimensionGrowth.lean), [`projective_dimension_growth`](CCDN/ProjectiveDimensionGrowth.lean) | corrected |
-| Lemma 5.2 | strict bound false for `m = 0`; printed argument insufficient for `m ≥ 1` | no | [`zero_dimensional_plucker_degree_bound_obstruction`](CCDN/Counterexample/ZeroDimensionalCenter.lean), [`exists_dense_open_projective_center_plucker_equations`](CCDN/Center/PluckerComplementEquations.lean) | refuted |
-| Lemma 5.4 | the constant is false; `(s−1)! B^(s−1)` holds | no | [`not_printed_row_separator_bound`](CCDN/Counterexample/RowSeparatorConstant.lean), [`exists_bounded_row_separator`](CCDN/Algebra/BoundedRowSeparation.lean) | refuted |
+| Lemma 5.2 | strict bound false for `m = 0`; printed argument insufficient for `m ≥ 1` | no | [`zero_dimensional_plucker_degree_bound_obstruction`](CCDNPaper/Counterexample/ZeroDimensionalCenter.lean), [`exists_dense_open_projective_center_plucker_equations`](CCDNPaper/Center/PluckerComplementEquations.lean) | refuted |
+| Lemma 5.4 | the constant is false; `(s−1)! B^(s−1)` holds | no | [`not_printed_row_separator_bound`](CCDNPaper/Counterexample/RowSeparatorConstant.lean), [`exists_bounded_row_separator`](CCDN/Algebra/BoundedRowSeparation.lean) | refuted |
 
 `scripts/check-consistency.py` checks this table against `docs/completion-audit.json`.
 
@@ -209,7 +209,7 @@ dependencies keep their own licences (see [`NOTICE`](NOTICE)).
     `Hilbert/` hold general results and import nothing else from the library
     (`CCDN/ForMathlib/` is written under Mathlib namespaces, for upstreaming);
   - the topic directories hold the proof routes, each in the directory of its topic;
-  - `Counterexample/` and `Paper/` hold side results (refutations, and the paper's
+  - `CCDNPaper/Counterexample/` and `CCDNPaper/Statements/` hold side results (refutations, and the paper's
     intermediate statements as stated there) that nothing else imports.
 - [`docs/history/`](docs/history/): development notes, the verification log and the original
   statement audits, kept for the record and not maintained.
