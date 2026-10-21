@@ -121,7 +121,7 @@ theorem exists_hypersurface_bad_prime_finset
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom L) f)) :
     ∃ bad : Finset ℕ, ∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p := by
-  have hdeg : f.totalDegree = d := hf.totalDegree (fun h => hir.ne_zero (by rw [h, map_zero]))
+  have hdeg : f.totalDegree = d := hf.totalDegree (ne_zero_of_irreducible_map hir)
   refine ⟨(finite_fin_hypersurface_bad_primes f hir (hdeg ▸ hd)).toFinset, fun p => ?_⟩
   simp only [Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdeg]
 

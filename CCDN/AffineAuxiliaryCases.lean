@@ -39,11 +39,7 @@ lemma degree_le_affineMinimumAuxiliaryBound (n : ℕ) {d : ℕ} (hd : 0 < d)
     (d : ℝ) ≤ affineMinimumAuxiliaryBound n d A B L b := by
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hn1 : (1 : ℝ) ≤ n + 1 := by have := Nat.cast_nonneg (α := ℝ) n; linarith
-  have hexp : (1 : ℝ) ≤ 4 - 1 / (n + 1 : ℝ) := by
-    have hh := (div_le_one (by positivity : (0 : ℝ) < n + 1)).mpr hn1
-    linarith
-  have hdD : (d : ℝ) ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) := by
-    simpa only [Real.rpow_one] using Real.rpow_le_rpow_of_exponent_le hd1 hexp
+  have hdD : (d : ℝ) ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) := le_rpow_four_sub_inv hd
   have hT : 0 ≤ Real.log L + d * Real.log B + (d : ℝ) ^ 2 :=
     add_nonneg (add_nonneg (Real.log_nonneg hL)
       (mul_nonneg (Nat.cast_nonneg d) (Real.log_nonneg hB))) (sq_nonneg _)

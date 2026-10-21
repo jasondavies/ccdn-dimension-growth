@@ -29,12 +29,12 @@ theorem hypersurface_exists_auxiliary_large_height
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 2 * d * (n + 2 : ℝ) * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
-      T * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)))
+      T * d * degreeRoot n d)
     (hthreshold : hypersurfaceLargeThreshold n d T < M) :
     ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
       (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
   classical
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hdM : d ≤ M := by nlinarith
   by_contra hnone
   have hrel : ∀ g : MvPolynomial (Fin (n + 3)) ℤ, g.IsHomogeneous M →
@@ -73,7 +73,7 @@ theorem hypersurface_auxiliary_large_height_degree
     (T : ℝ) (hT : 0 ≤ T)
     (hheight : 2 * d * (n + 2 : ℝ) * Real.log B ≤ Real.log H)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
-      T * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))) :
+      T * d * degreeRoot n d) :
     ∃ M : ℕ, (M : ℝ) ≤
       (8 * (n + 2 : ℝ) + Real.exp (hypersurfaceLargeHeightError (n + 1) (hypersurfaceNormalizedError n) T) + 2) *
         (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) ∧
@@ -84,12 +84,7 @@ theorem hypersurface_auxiliary_large_height_degree
   have hR : 0 ≤ hypersurfaceLargeThreshold n d T := by unfold hypersurfaceLargeThreshold; positivity
   obtain ⟨M, hMlarge, _, hthreshold, hbound⟩ := auxiliary_integer_degree_selection (8 * d * (n + 2))
     (show (0 : ℝ) ≤ 0 from le_rfl) hR
-  have hexp : (1 : ℝ) ≤ 4 - 1 / (n + 1 : ℝ) := by
-    have hn : (1 : ℝ) ≤ n + 1 := by have := Nat.cast_nonneg (α := ℝ) n; linarith
-    have hh := (div_le_one (by positivity : (0 : ℝ) < n + 1)).mpr hn
-    linarith
-  have hdPow : (d : ℝ) ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) := by
-    simpa only [Real.rpow_one] using Real.rpow_le_rpow_of_exponent_le hd1 hexp
+  have hdPow : (d : ℝ) ≤ (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) := le_rpow_four_sub_inv hd
   have hPow1 := hd1.trans hdPow
   refine ⟨M, ?_, hypersurface_exists_auxiliary_large_height order f hf hd hMlarge hir H hH hcoeff
     z hprim hz hB hbox T hT hheight hposition hthreshold⟩

@@ -30,7 +30,7 @@ lemma hypersurfaceDeterminantMain_nonneg (n s : ℕ) : 0 ≤ hypersurfaceDetermi
 /-- The local exponent of `projective_hypersurface_minorGcd_sharp` in terms of
 `hypersurfaceDeterminantMain`. -/
 lemma hypersurfaceDeterminantMain_div (n s : ℕ) (m : ℝ) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / m * (n + 1 : ℝ) / (n + 2 : ℝ) *
+    factorialRoot n / m * (n + 1 : ℝ) / (n + 2 : ℝ) *
       (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) = hypersurfaceDeterminantMain n s / m := by
   unfold hypersurfaceDeterminantMain
   ring
@@ -76,7 +76,7 @@ theorem projective_hypersurface_minorGcd_sharp {n s N p d M : ℕ} [Fact p.Prime
     (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
     (hz : ∀ i, MvPolynomial.eval (z i) f = 0) :
     ∃ e : ℕ,
-      ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) /
+      factorialRoot n /
         (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) *
         (n + 1 : ℝ) / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) -
         (n + 2 : ℝ) * s ≤ e ∧

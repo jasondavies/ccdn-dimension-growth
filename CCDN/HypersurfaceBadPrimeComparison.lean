@@ -47,9 +47,7 @@ theorem auxiliaryRankComparison_of_determinant_lower {n d t : ℕ}
     (hdet : ∀ ⦃s N M : ℕ⦄ (a : Fin s → Fin t) (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ),
       0 < s → (∀ j, (F j).IsHomogeneous M) →
       LinearIndependent ℚ ((Matrix.of fun i j => eval (z (a i)) (F j)).map ((↑) : ℤ → ℚ)).row →
-      factorialRoot n / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-          (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + (∑ p ∈ bad, Real.log p / p)) -
-            hypersurfaceDeterminantError n) ≤
+      hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤
         Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z (a i)) (F j)))) :
     AuxiliaryRankComparison order f d z bad := by
   intro B hB hbox M hdM hrel
@@ -72,7 +70,8 @@ theorem auxiliaryRankComparison_of_determinant_lower {n d t : ℕ}
   have hh := hypersurface_rank_comparison_normalized (r := n + 1) (by omega) hd hdM hr
     B |((order.leadingCoeff f : ℤ) : ℝ)| (Real.exp (∑ p ∈ bad, Real.log p / p))
     (hypersurfaceDeterminantError n)
-    (by simpa only [hnN, Nat.cast_add, Nat.cast_one, hnR, Real.log_exp] using hc)
+    (by simpa only [hypersurfaceRankLowerBound, hnN, Nat.cast_add, Nat.cast_one, hnR,
+      Real.log_exp] using hc)
   simpa only [hypersurfaceBadPrimeNormalizedError, hnN, Nat.cast_add, Nat.cast_one, hnR,
     Real.log_exp] using hh
 

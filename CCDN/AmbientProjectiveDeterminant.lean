@@ -31,7 +31,7 @@ theorem ambient_projective_determinant_log_lower {n s N M : ℕ} (hs : 0 < s)
     (z : Fin s → IntPoint (n + 2)) (hprim : ∀ i, univ.gcd (z i) = 1)
     (hrows : LinearIndependent ℚ
       ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
+    factorialRoot n / (n + 2 : ℝ) *
       (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
         (Real.log s - hypersurfaceHeightDeterminantError n) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by

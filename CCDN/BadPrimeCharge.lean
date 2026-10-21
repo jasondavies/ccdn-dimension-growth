@@ -1,6 +1,7 @@
 module
 
 public import CCDN.PrimeCutoff
+public import CCDN.AuxiliaryDegreeBound
 
 /-! Analytic control of bad-prime charges from an integer witness.
 The construction and coefficient bound for a Noether witness remain separate. -/
@@ -103,7 +104,7 @@ theorem bad_prime_factor_of_height (P : Finset ℕ) {D : ℤ} (hD : 0 < D)
     (hP : ∀ p ∈ P, p.Prime) (hdiv : ∀ p ∈ P, (p : ℤ) ∣ D)
     {L H : ℝ} (hL : 1 ≤ L) (hH : 1 ≤ H) (hlo : ∀ p ∈ P, L < (p : ℝ))
     (hheight : Real.log D ≤ L * H) :
-    Real.exp (∑ p ∈ P, Real.log p / p) ≤ Real.exp (2 * mertensError + 1) * H := by
+    primeSetFactor P ≤ Real.exp (2 * mertensError + 1) * H := by
   have h := Real.exp_le_exp.mpr (bad_prime_charge_of_height P hD hP hdiv hL hH hlo hheight)
   calc
     _ ≤ Real.exp (Real.log H + 2 * mertensError + 1) := h

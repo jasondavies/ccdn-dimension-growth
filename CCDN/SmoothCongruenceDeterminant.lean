@@ -35,20 +35,12 @@ theorem exists_smooth_congruence_determinant_log_lower
       z i (Equiv.swap 0 (k p) j.succ) - a p j * z i (k p)) :
     ∃ bad : Finset ℕ,
       (∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
-      ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-        (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-          (Real.log s - (n + 1 : ℝ) *
-            (4 * Real.log d + (∑ p ∈ bad ∪ P, Real.log p / p)) -
-              hypersurfaceDeterminantError n) +
+      hypersurfaceRankLowerBound n s d (∑ p ∈ bad ∪ P, Real.log p / p) +
         (hypersurfaceDeterminantMain n s - (n + 2 : ℝ) * s) *
           (∑ p ∈ P, Real.log p) ≤
         Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   classical
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
-  have hdeg : f.totalDegree = d := hf.totalDegree hf0
-  let bad := (finite_fin_hypersurface_bad_primes f hir (hdeg ▸ hd)).toFinset
-  have hmem (p : ℕ) : p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p := by
-    simp only [bad, Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdeg]
+  obtain ⟨bad, hmem⟩ := exists_hypersurface_bad_prime_finset f hf hd hir
   have hcong (p : ℕ) (hp : p ∈ P) :
       (p : ℤ) ^ hypersurfaceMultiplicityExponent (n + 1) 1 s ∣
         Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j)) := by

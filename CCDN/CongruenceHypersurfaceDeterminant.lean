@@ -27,13 +27,8 @@ theorem hypersurface_determinant_log_lower_at_rank_congruence {n s N d M : ℕ} 
     (hred : ∀ (p : ℕ) [Fact p.Prime],
       p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad →
       27 * (d : ℝ) ^ 4 < p →
-      map (Int.castRingHom (ZMod p)) f ≠ 0 ∧
-      Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
-        (map (Int.castRingHom (ZMod p)) f))) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-      (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-        (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + (∑ p ∈ bad, Real.log p / p)) -
-          hypersurfaceDeterminantError n) +
+      HasGoodReduction f p) :
+    hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) +
       (∑ p ∈ P, (v p : ℝ) * Real.log p) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   refine hypersurface_log_lower_at_rank_of_local_divisors_congruence hs hd bad P hPbad hP v

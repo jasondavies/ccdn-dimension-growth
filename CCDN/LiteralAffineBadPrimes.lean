@@ -48,7 +48,7 @@ lemma literalAffineBadPrimeFactor_eq_exp {n d : ℕ} (f : MvPolynomial (Fin (n +
     (hf : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f))
     (hd : f.totalDegree = d) (bad : Finset ℕ)
     (hbad : ∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ LiteralAffineBadReduction f p) :
-    literalAffineBadPrimeFactor f = Real.exp (∑ p ∈ bad, Real.log p / p) := by
+    literalAffineBadPrimeFactor f = primeSetFactor bad := by
   classical
   unfold literalAffineBadPrimeFactor
   rw [dite_eq_left hf]

@@ -25,22 +25,11 @@ theorem exists_hypersurface_determinant_log_lower
       ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row) :
     ∃ bad : Finset ℕ,
       (∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
-      ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-        (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-          (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + (∑ p ∈ bad, Real.log p / p)) -
-            hypersurfaceDeterminantError n) ≤
+      hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤
         Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
-  classical
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
-  have hdeg : f.totalDegree = d := hf.totalDegree hf0
-  let bad := (finite_fin_hypersurface_bad_primes f hir (hdeg ▸ hd)).toFinset
-  have hmem (p : ℕ) : p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p := by
-    simp only [bad, Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdeg]
-  refine ⟨bad, hmem, hypersurface_determinant_log_lower_at_rank hs f hf hd F hF z hprim hz hrows bad ?_⟩
-  intro p hpprime hp hcut
-  apply hypersurface_good_reduction f p
-  intro hb
-  exact (mem_sdiff.mp hp).2 ((hmem p).mpr ⟨by exact_mod_cast hcut, hb⟩)
+  obtain ⟨bad, hmem⟩ := exists_hypersurface_bad_prime_finset f hf hd hir
+  exact ⟨bad, hmem, hypersurface_determinant_log_lower_at_rank hs f hf hd F hF z hprim hz hrows
+    bad fun p _ hp hcut => hasGoodReduction_of_not_mem hmem p (mem_sdiff.mp hp).2 hcut⟩
 
 /-- The height-dependent error contains only dimension constants. -/
 def hypersurfaceHeightDeterminantError (n : ℕ) : ℝ :=
@@ -60,26 +49,23 @@ theorem hypersurface_determinant_log_lower_height
     (hz : ∀ i, eval (z i) f = 0)
     (hrows : LinearIndependent ℚ
       ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
+    factorialRoot n / (n + 2 : ℝ) *
       (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
         (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + Real.log (1 + Real.log H / (d : ℝ) ^ 2)) -
           hypersurfaceHeightDeterminantError n) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   classical
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hdeg : f.totalDegree = d := hf.totalDegree hf0
   obtain ⟨bad, hmem, hcharge⟩ := exists_fin_hypersurface_bad_prime_charge f hir (hdeg ▸ hd) H hH hcoeff
   rw [hdeg] at hmem hcharge
   have hred (p : ℕ) [Fact p.Prime]
       (hp : p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad)
       (hcut : 27 * (d : ℝ) ^ 4 < p) :
-      map (Int.castRingHom (ZMod p)) f ≠ 0 ∧
-      Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
-        (map (Int.castRingHom (ZMod p)) f)) := by
-    apply hypersurface_good_reduction f p
-    intro hb
-    exact (mem_sdiff.mp hp).2 ((hmem p).mpr ⟨by exact_mod_cast hcut, hb⟩)
+      HasGoodReduction f p :=
+    hasGoodReduction_of_not_mem hmem p (mem_sdiff.mp hp).2 hcut
   have hlower := hypersurface_determinant_log_lower_at_rank hs f hf hd F hF z hprim hz hrows bad hred
+  unfold hypersurfaceRankLowerBound at hlower
   have hc : 0 < hypersurfaceHeightConstant (n + 3) :=
     lt_of_lt_of_le zero_lt_one (hypersurfaceHeightConstant_one_le _)
   have hh : 0 < 1 + Real.log H / (d : ℝ) ^ 2 := by

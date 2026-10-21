@@ -86,39 +86,24 @@ theorem hypersurface_determinant_family_log_lower
     (hF : ∀ l j, (F l j).IsHomogeneous (M l))
     (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, univ.gcd (z i) = 1)
     (hz : ∀ i, eval (z i) f = 0) (hD : homogeneousDeterminantFamilyGcd F z ≠ 0) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-      (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-        (Real.log s - (n + 1 : ℝ) *
-          (4 * Real.log d + Real.log (hypersurfaceBadPrimeFactor f)) - hypersurfaceDeterminantError n) ≤
+    hypersurfaceRankLowerBound n s d (Real.log (hypersurfaceBadPrimeFactor f)) ≤
       Real.log (|homogeneousDeterminantFamilyGcd F z| : ℝ) := by
   classical
   have hnonneg := homogeneousDeterminantFamilyGcd_nonneg F z
   rw [abs_of_nonneg (show (0 : ℝ) ≤ homogeneousDeterminantFamilyGcd F z by exact_mod_cast hnonneg)]
   by_cases hs : 0 < s
-  · have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
-    have hdeg : f.totalDegree = d := hf.totalDegree hf0
-    let bad := (finite_fin_hypersurface_bad_primes f hir (hdeg ▸ hd)).toFinset
-    have hmem (p : ℕ) : p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p := by
-      simp only [bad, Set.Finite.mem_toFinset, Set.mem_ofPred_eq, hdeg]
-    have hred (p : ℕ) [Fact p.Prime]
-        (hp : p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad)
-        (hcut : 27 * (d : ℝ) ^ 4 < p) :
-        map (Int.castRingHom (ZMod p)) f ≠ 0 ∧
-        Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
-          (map (Int.castRingHom (ZMod p)) f)) := by
-      apply hypersurface_good_reduction f p
-      intro hb
-      exact (mem_sdiff.mp hp).2 ((hmem p).mpr ⟨by exact_mod_cast hcut, hb⟩)
+  · have hdeg : f.totalDegree = d := hf.totalDegree (ne_zero_of_irreducible_map hir)
+    obtain ⟨bad, hmem⟩ := exists_hypersurface_bad_prime_finset f hf hd hir
     rw [hypersurfaceBadPrimeFactor_eq_exp f hir hdeg bad hmem, Real.log_exp]
     refine hypersurface_log_lower_at_rank_of_local_divisors hs hd bad
       (lt_of_le_of_ne hnonneg (Ne.symm hD)) fun p hp hcut => ?_
     have : Fact p.Prime := ⟨(mem_filter.mp (mem_sdiff.mp hp).1).2⟩
-    obtain ⟨hf0, hir⟩ := hred p hp hcut
+    obtain ⟨hf0, hir⟩ := hasGoodReduction_of_not_mem hmem p (mem_sdiff.mp hp).2 hcut
     exact projective_hypersurface_familyGcd_sharp f hf hd hf0 hir hcut M F hF z hprim hz
   · have hs0 : s = 0 := by omega
     have hone : (1 : ℝ) ≤ homogeneousDeterminantFamilyGcd F z := by
       exact_mod_cast (show (1 : ℤ) ≤ homogeneousDeterminantFamilyGcd F z by omega)
-    simp only [hs0, Nat.cast_zero,
+    simp only [hypersurfaceRankLowerBound, hs0, Nat.cast_zero,
       Real.zero_rpow (by positivity : (1 : ℝ) + 1 / (n + 1 : ℝ) ≠ 0), mul_zero, zero_mul]
     exact Real.log_nonneg hone
 
@@ -133,10 +118,7 @@ theorem projective_hypersurface_determinant_family_log_lower
     (x : Fin s → ProjectivePoint (n + 2))
     (hx : ∀ i, x i ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f))
     (hD : homogeneousDeterminantFamilyGcd F (fun i => primitiveProjectiveRep (x i)) ≠ 0) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-      (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-        (Real.log s - (n + 1 : ℝ) *
-          (4 * Real.log d + Real.log (hypersurfaceBadPrimeFactor f)) - hypersurfaceDeterminantError n) ≤
+    hypersurfaceRankLowerBound n s d (Real.log (hypersurfaceBadPrimeFactor f)) ≤
       Real.log (|homogeneousDeterminantFamilyGcd F (fun i => primitiveProjectiveRep (x i))| : ℝ) := by
   apply hypersurface_determinant_family_log_lower f hf hd hir M F hF
     (fun i => primitiveProjectiveRep (x i)) (fun i => primitiveProjectiveRep_gcd (x i)) _ hD

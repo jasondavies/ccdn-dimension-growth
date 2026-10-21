@@ -77,7 +77,7 @@ theorem hypersurface_bad_prime_factor
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (P : Finset ℕ) (hP : ∀ p ∈ P, HypersurfaceBadReduction f p)
     (hcut : ∀ p ∈ P, 27 * f.totalDegree ^ 4 < p) :
-    Real.exp (∑ p ∈ P, Real.log p / p) ≤
+    primeSetFactor P ≤
       (Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (Fintype.card (Option σ))) *
         (1 + Real.log H / (f.totalDegree : ℝ) ^ 2) := by
   have h := Real.exp_le_exp.mpr (hypersurface_bad_prime_charge f hf hpos H hH hcoeff P hP hcut)
@@ -103,7 +103,7 @@ theorem hypersurface_bad_prime_factor_max
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (P : Finset ℕ) (hP : ∀ p ∈ P, HypersurfaceBadReduction f p)
     (hcut : ∀ p ∈ P, 27 * f.totalDegree ^ 4 < p) :
-    Real.exp (∑ p ∈ P, Real.log p / p) ≤
+    primeSetFactor P ≤
       (2 * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (Fintype.card (Option σ))) *
         max (Real.log H / (f.totalDegree : ℝ) ^ 2) 1 := by
   have h := hypersurface_bad_prime_factor f hf hpos H hH hcoeff P hP hcut

@@ -3,6 +3,7 @@ module
 public import CCDN.HigherDimensionalPrimeSum
 public import CCDN.SharpHypersurfaceDeterminant
 import all ArithmeticHeights.BombieriVaaler
+public import CCDN.HypersurfaceBadPrimes
 
 /-! Choosing the prime endpoint at the dimension root of the row count
 produces the exact rank power and leading constant in CCDN Proposition 3.2.6.
@@ -19,6 +20,13 @@ def hypersurfaceDeterminantError (n : ℕ) : ℝ :=
   (n + 1 : ℝ) * (Real.log 27 + 2 * mertensError + 2 * hypersurfaceCountConstant n * primeBlockMass) +
     (n + 2 : ℝ) ^ 2 / ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) * (Real.log 4 + 4)
 
+/-- The rank form of the lower bound in CCDN Proposition 3.2.6 for `s` points on a
+hypersurface of degree `d` with bad-prime charge `c`:
+`((n+1)!)^(1/(n+1)) / (n+2) * s^(1+1/(n+1)) * (log s - (n+1) (4 log d + c) - E_n)`. -/
+def hypersurfaceRankLowerBound (n s d : ℕ) (c : ℝ) : ℝ :=
+  factorialRoot n / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
+    (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + c) - hypersurfaceDeterminantError n)
+
 lemma hypersurface_rank_prime_endpoint (n s : ℕ) (hs : 0 < s) :
     1 ≤ (s : ℝ) ^ (1 / (n + 1 : ℝ)) := by
   apply Real.one_le_rpow
@@ -30,9 +38,7 @@ lemma hypersurface_determinant_rank_identity (n s d : ℕ) (hs : 0 < s) (charge 
         (Real.log ((s : ℝ) ^ (1 / (n + 1 : ℝ))) - 4 * Real.log d - Real.log 27 -
           2 * mertensError - charge - 2 * hypersurfaceCountConstant n * primeBlockMass) -
         ((n + 2 : ℝ) * s) * ((Real.log 4 + 4) * (s : ℝ) ^ (1 / (n + 1 : ℝ))) =
-      ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-        (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-          (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + charge) - hypersurfaceDeterminantError n) := by
+      hypersurfaceRankLowerBound n s d charge := by
   have hs0 : (0 : ℝ) < s := by exact_mod_cast hs
   have hn : (n + 1 : ℝ) ≠ 0 := by positivity
   have hn2 : (n + 2 : ℝ) ≠ 0 := by positivity
@@ -41,7 +47,7 @@ lemma hypersurface_determinant_rank_identity (n s d : ℕ) (hs : 0 < s) (charge 
       (s : ℝ) * (s : ℝ) ^ (1 / (n + 1 : ℝ)) := by
     rw [Real.rpow_add hs0, Real.rpow_one]
   rw [Real.log_rpow hs0]
-  unfold hypersurfaceDeterminantMain hypersurfaceDeterminantError
+  unfold hypersurfaceRankLowerBound hypersurfaceDeterminantMain hypersurfaceDeterminantError
   rw [hp]
   field_simp
   ring
@@ -58,10 +64,7 @@ theorem hypersurface_log_lower_at_rank_of_local_divisors_congruence {n s d : ℕ
         (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) - (n + 2 : ℝ) * s ≤ e ∧
         (p : ℤ) ^ e ∣ D)
     (hcong : ∀ p ∈ P, (p : ℤ) ^ v p ∣ D) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-      (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-        (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + (∑ p ∈ bad, Real.log p / p)) -
-          hypersurfaceDeterminantError n) +
+    hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) +
       (∑ p ∈ P, (v p : ℝ) * Real.log p) ≤ Real.log D := by
   have h := determinant_log_lower_of_local_divisors_degree_four
     (hypersurface_rank_prime_endpoint n s hs) hd (hypersurfaceCountConstant_nonneg n)
@@ -76,10 +79,7 @@ theorem hypersurface_log_lower_at_rank_of_local_divisors {n s d : ℕ}
       27 * (d : ℝ) ^ 4 < p → ∃ e : ℕ, hypersurfaceDeterminantMain n s /
         (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) - (n + 2 : ℝ) * s ≤ e ∧
         (p : ℤ) ^ e ∣ D) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-      (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-        (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + (∑ p ∈ bad, Real.log p / p)) -
-          hypersurfaceDeterminantError n) ≤ Real.log D := by
+    hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤ Real.log D := by
   have h := hypersurface_log_lower_at_rank_of_local_divisors_congruence hs hd bad ∅
     (empty_subset bad) (by simp) 0 hD hlocal (by simp)
   rwa [sum_empty, add_zero] at h
@@ -97,13 +97,8 @@ theorem hypersurface_determinant_log_lower_at_rank {n s N d M : ℕ} (hs : 0 < s
     (hred : ∀ (p : ℕ) [Fact p.Prime],
       p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad →
       27 * (d : ℝ) ^ 4 < p →
-      map (Int.castRingHom (ZMod p)) f ≠ 0 ∧
-      Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
-        (map (Int.castRingHom (ZMod p)) f))) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-      (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-        (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + (∑ p ∈ bad, Real.log p / p)) -
-          hypersurfaceDeterminantError n) ≤
+      HasGoodReduction f p) :
+    hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   refine hypersurface_log_lower_at_rank_of_local_divisors hs hd bad
     (lt_of_lt_of_le one_pos (Int.Matrix.one_le_minorGcd hrows)) fun p hp hcut => ?_

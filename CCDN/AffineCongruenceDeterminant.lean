@@ -35,17 +35,13 @@ theorem exists_affine_congruence_determinant_log_lower {n s N M : ℕ} (hs : 0 <
     ∃ bad : Finset ℕ,
       (∀ p, p ∈ bad ↔ 27 * f.totalDegree ^ 4 < p ∧
         HypersurfaceBadReduction (scaledHomogenize f.totalDegree 1 f) p) ∧
-      ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-        (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-          (Real.log s - (n + 1 : ℝ) *
-            (4 * Real.log f.totalDegree + (∑ p ∈ bad ∪ P, Real.log p / p)) -
-              hypersurfaceDeterminantError n) +
+      hypersurfaceRankLowerBound n s f.totalDegree (∑ p ∈ bad ∪ P, Real.log p / p) +
         (hypersurfaceDeterminantMain n s - (n + 2 : ℝ) * s) *
           (∑ p ∈ P, Real.log p) ≤
         Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (x i) (G j))) := by
   classical
   let F := scaledHomogenize f.totalDegree 1 f
-  have hf0 : f ≠ 0 := by intro h; exact hir.ne_zero (by rw [h, map_zero])
+  have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hF : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous 1 f le_rfl
   have hFir : Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) F) :=
     (unscaledHomogenize_absolute_irreducible_iff f hf0).mpr hir

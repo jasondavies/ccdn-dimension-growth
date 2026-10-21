@@ -28,9 +28,9 @@ theorem exists_auxiliary_small_height_of_comparison {n d M t : ℕ}
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
     (bad : Finset ℕ) (hcomp : AuxiliaryRankComparison order f d z bad)
     (hheight : Real.log |((order.leadingCoeff f : ℤ) : ℝ)| ≤ 2 * d * (n + 2 : ℝ) * Real.log B)
-    (hscale : (d : ℝ) * Real.log B ≤ (d : ℝ) ^ (1 / (n + 1 : ℝ)) * M)
+    (hscale : (d : ℝ) * Real.log B ≤ degreeRoot n d * M)
     (hthreshold : hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
-      (Real.exp (∑ p ∈ bad, Real.log p / p)) < M) :
+      (primeSetFactor bad) < M) :
     ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
       (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
   classical
@@ -73,7 +73,7 @@ theorem auxiliary_small_height_degree_of_comparison {n d t : ℕ}
     ∃ M : ℕ,
       (M : ℝ) ≤ 2 * d + (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
         hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
-          (Real.exp (∑ p ∈ bad, Real.log p / p)) + 2 ∧
+          (primeSetFactor bad) + 2 ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd
@@ -110,7 +110,7 @@ theorem hypersurface_auxiliary_small_height_degree
       (∀ p, p ∈ bad ↔ 27 * d ^ 4 < p ∧ HypersurfaceBadReduction f p) ∧
       (M : ℝ) ≤ 2 * d + (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
         hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
-          (Real.exp (∑ p ∈ bad, Real.log p / p)) + 2 ∧
+          (primeSetFactor bad) + 2 ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
   have hf0 := ne_zero_of_irreducible_map hir

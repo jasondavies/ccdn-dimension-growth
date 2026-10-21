@@ -26,13 +26,8 @@ theorem affine_chart_determinant_log_lower_at_rank {n s N d M : ℕ} (hs : 0 < s
     (hred : ∀ (p : ℕ) [Fact p.Prime],
       p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad →
       27 * (d : ℝ) ^ 4 < p →
-      Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))
-        (map (Int.castRingHom (ZMod p)) (affineChart (n + 2) f))) ∧
-      ∀ i, IsCoprime (p : ℤ) (z i 0)) :
-    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
-      (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
-        (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + (∑ p ∈ bad, Real.log p / p)) -
-          hypersurfaceDeterminantError n) ≤
+      AffineChartGoodPrime f z p) :
+    hypersurfaceRankLowerBound n s d (∑ p ∈ bad, Real.log p / p) ≤
       Real.log (Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j))) := by
   refine hypersurface_log_lower_at_rank_of_local_divisors hs hd bad
     (lt_of_lt_of_le one_pos (Int.Matrix.one_le_minorGcd hrows)) fun p hp hcut => ?_

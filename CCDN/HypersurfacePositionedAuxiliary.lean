@@ -20,7 +20,7 @@ lemma inverse_rpow_le_of_log_position {H L q D : ℝ} (hH : 0 < H) (hL : 0 < L)
 
 lemma hypersurfaceSmallThreshold_position {n d : ℕ} {B H L A T : ℝ}
     (hd : 0 < d) (hB : 0 ≤ B) (hH : 0 < H) (hL : 0 < L) (hA : 0 ≤ A)
-    (hposition : Real.log H ≤ Real.log L + T * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))) :
+    (hposition : Real.log H ≤ Real.log L + T * d * degreeRoot n d) :
     hypersurfaceSmallThreshold n d B L A ≤
       Real.exp (T / (n + 1 : ℝ)) * hypersurfaceSmallThreshold n d B H A := by
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
@@ -59,7 +59,7 @@ theorem positioned_auxiliary_degree_of_comparison
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i j, |(z i j : ℝ)| ≤ B)
     (T : ℝ) (hT : 0 ≤ T)
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
-      T * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))) :
+      T * d * degreeRoot n d) :
     ∃ M : ℕ,
       (M : ℝ) ≤ hypersurfacePositionedAuxiliaryConstant n T *
         auxDegreeBound n d B (primeSetFactor bad) H ∧

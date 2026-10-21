@@ -25,13 +25,17 @@ abbrev boxExponent (n d : ℕ) : ℝ := (n + 2 : ℝ) / ((n + 1 : ℝ) * degreeR
 /-- The bad-prime factor `exp (∑ p ∈ bad, log p / p)` of a finite set of primes. -/
 abbrev primeSetFactor (bad : Finset ℕ) : ℝ := Real.exp (∑ p ∈ bad, Real.log p / p)
 
-/-- The bracket of the coefficient-sensitive auxiliary degree bound,
-`d^(4 - 1/(n+1)) b B^boxExponent / H^heightExponent + d^(1 - 1/(n+1)) log B + d^(4 - 1/(n+1))`,
-for points of height at most `B` on an equation with coefficient height `H` and
-bad-prime factor `b`. -/
+/-- The main term `d^(4 - 1/(n+1)) b B^boxExponent / H^heightExponent` of the
+coefficient-sensitive auxiliary degree bound, for points of height at most `B` on an
+equation with coefficient height `H` and bad-prime factor `b`. -/
+def auxMainTerm (n d : ℕ) (B b H : ℝ) : ℝ :=
+  (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * b * B ^ boxExponent n d / H ^ heightExponent n d
+
+/-- The bracket `auxMainTerm + d^(1 - 1/(n+1)) log B + d^(4 - 1/(n+1))` of the
+coefficient-sensitive auxiliary degree bound. -/
 def auxDegreeBound (n d : ℕ) (B b H : ℝ) : ℝ :=
-  (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * b * B ^ boxExponent n d / H ^ heightExponent n d +
-    (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B + (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ))
+  auxMainTerm n d B b H + (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
+    (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ))
 
 lemma one_le_four_sub_inv (n : ℕ) : (1 : ℝ) ≤ 4 - 1 / (n + 1 : ℝ) := by
   have h := (div_le_one (by positivity : (0 : ℝ) < n + 1)).mpr
@@ -46,7 +50,7 @@ lemma le_rpow_four_sub_inv {n d : ℕ} (hd : 0 < d) :
 
 lemma auxDegreeBound_nonneg {n d : ℕ} {B b H : ℝ} (hB : 1 ≤ B) (hb : 0 ≤ b) (hH : 0 ≤ H) :
     0 ≤ auxDegreeBound n d B b H := by
-  unfold auxDegreeBound
+  unfold auxDegreeBound auxMainTerm
   have := Real.log_nonneg hB
   have : (0 : ℝ) ≤ B := by linarith
   positivity
