@@ -47,10 +47,6 @@ theorem projectivePermutedIdeal_geometrically_prime
 def curveProjectionHeightConstant (n : ℕ) : ℝ :=
   ((n : ℝ) + 1) * (2 * ((n : ℝ) + 1)) ^ (2 * n)
 
-lemma curveProjectionHeightConstant_pos (n : ℕ) : 0 < curveProjectionHeightConstant n := by
-  unfold curveProjectionHeightConstant
-  positivity
-
 lemma projectionBoxFactor_le_degree_power (n : ℕ) {d : ℕ} (hd : 0 < d) :
     projectionBoxFactor n d ≤ curveProjectionHeightConstant n * (d : ℝ) ^ (2 * n) := by
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd

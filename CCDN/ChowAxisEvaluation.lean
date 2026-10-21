@@ -76,16 +76,5 @@ theorem chow_generator_last_coordinate_degree
     (chow_incidence_generator_eval_eq_zero_iff (m + 1) I F hgen U).not.mpr hnot
   exact chow_row_degreeOf_eq_of_eval_ne_zero F (Fin.last m) 0 d hd U hU hne
 
-theorem chow_generator_univariate_degree
-    {K : Type*} [Field K] [IsAlgClosed K] {m n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (hm : (filteredHilbertPolynomial I).natDegree = m)
-    (F : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K)
-    (hgen : chowIncidenceIdeal (m + 1) I = Ideal.span {F})
-    (d : ℕ) (hd : F.IsWeightedHomogeneous (chowRowWeight (Fin.last m)) d) :
-    (chowAsUnivariate K m n F).natDegree = d := by
-  rw [chowAsUnivariate_natDegree]
-  exact chow_generator_last_coordinate_degree I hm F hgen d hd
-
 end
 end CCDN

@@ -39,13 +39,5 @@ theorem exists_chow_incidence_generator_of_dimension {K : Type*} [Field K] {m n 
     (τ := (Fin (m + 1) × Fin (n + 1)) ⊕ Fin m)
     ψ hψ hn (chowIndependentVariables m (n + 1)) hc hi
 
-theorem exists_chow_incidence_generator {K : Type*} [Field K] {n : ℕ}
-    (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime] :
-    ∃ F : MvPolynomial
-      (Fin ((filteredHilbertPolynomial I).natDegree + 1) × Fin (n + 2)) K,
-      Irreducible F ∧
-      chowIncidenceIdeal ((filteredHilbertPolynomial I).natDegree + 1) I = Ideal.span {F} :=
-  exists_chow_incidence_generator_of_dimension I rfl
-
 end
 end CCDN

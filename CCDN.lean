@@ -612,7 +612,6 @@ public import CCDN.BoundedClosureElimination
 public import CCDN.BoundedClosureNormalization
 public import CCDN.CenterProjectionFormula
 public import CCDN.CenterProjectionHeight
-public import CCDN.ChowIncidenceEquation
 public import CCDN.ChowIncidenceGrading
 public import CCDN.ChowIncidenceIdeal
 public import CCDN.ChowIncidenceLocus
@@ -632,13 +631,10 @@ public import CCDN.AffineVarietyProjection
 public import CCDN.BalancedParameterFiniteness
 public import CCDN.ChowIncidenceBaseChange
 public import CCDN.ChowIncidenceForm
-public import CCDN.ChowIncidenceHeight
 public import CCDN.ChowIncidencePrincipal
 public import CCDN.ChowPivotParametrization
 public import CCDN.ClosureProjectionBirational
 public import CCDN.CodimensionOneKernel
-public import CCDN.GenericHyperplaneAvoidance
-public import CCDN.GenericHyperplaneNormalization
 public import CCDN.GenericLinearIndependence
 public import CCDN.GenericPolynomialIndependence
 public import CCDN.GeometricAffineProjection
@@ -662,7 +658,6 @@ public import CCDN.PolynomialDeformation
 public import CCDN.PolynomialParameterTranslation
 public import CCDN.PrimeOpenVanishing
 public import CCDN.PrincipalWeightedHomogeneous
-public import CCDN.ProjectionCoordinateIndependence
 public import CCDN.ProjectiveChowEquation
 public import CCDN.ProjectiveChowIncidence
 public import CCDN.ProjectiveClosureRecovery
@@ -683,7 +678,6 @@ public import CCDN.ClosureNormalizationInfinite
 public import CCDN.FixedCoordinateEliminationInfinite
 public import CCDN.FixedCoordinateGenericNormalization
 public import CCDN.GenericHomogeneousGeneration
-public import CCDN.GenericHyperplaneNormalizationDescent
 public import CCDN.GenericLinearNormalizationOpenness
 public import CCDN.GenericLinearParameterField
 public import CCDN.GenericLinearPowerBasis
@@ -703,7 +697,6 @@ public import CCDN.ProjectionImageFractionField
 public import CCDN.ProjectiveChowWithoutChart
 public import CCDN.ProjectiveIncidencePermutation
 public import CCDN.UniversalCenterChowRestriction
-public import CCDN.UniversalHyperplaneNormalization
 public import CCDN.WeightedHomogeneousEvaluation
 public import CCDN.WeightedHomogeneousTransform
 public import CCDN.AffineFractionPolynomialField
@@ -753,7 +746,6 @@ public import CCDN.CenterResultantForms
 public import CCDN.CenterSubspaceQuotient
 public import CCDN.ChowRowResultantCriterion
 public import CCDN.ClosedFieldChowBirationalCriterion
-public import CCDN.FiniteSingletonFiber
 public import CCDN.FixedCoordinatePluckerTopology
 public import CCDN.GenericBlockLine
 public import CCDN.GenericBlockLineHomogeneity
@@ -765,7 +757,6 @@ public import CCDN.SharpBirationalCenterNonvanishing
 public import CCDN.SharpBoundedBirationalCenter
 public import CCDN.SharpCenterBounds
 public import CCDN.SharpCenterResultantDetector
-public import CCDN.SharpGoodCenterProjection
 public import CCDN.BirationalCenterExtensionWitness
 public import CCDN.BirationalCenterPluckerHeight
 public import CCDN.DistinguishedCoefficientOrder

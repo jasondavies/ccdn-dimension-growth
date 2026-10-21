@@ -38,17 +38,5 @@ theorem chowIncidenceIdeal_ne_bot {K : Type*} [Field K] {n r : ℕ}
   rw [Nat.card_eq_fintype_card] at hU
   nlinarith
 
-/-- A nonzero polynomial vanishes on every incident tuple of
-m+1 hyperplanes. -/
-theorem exists_nonzero_chow_incidence_equation {K : Type*} [Field K] [IsAlgClosed K]
-    {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
-    ∃ R : MvPolynomial (Fin ((filteredHilbertPolynomial I).natDegree + 1) × Fin (n + 1)) K,
-      R ≠ 0 ∧ R ∈ chowIncidenceIdeal ((filteredHilbertPolynomial I).natDegree + 1) I ∧
-      ∀ (a : Fin n → K), (∀ f ∈ I, eval a f = 0) →
-        ∀ u, eval (chowIncidentCoefficients a u) R = 0 := by
-  have hne := chowIncidenceIdeal_ne_bot I (Nat.lt_succ_self _)
-  obtain ⟨R,hR,hR0⟩ := (Submodule.ne_bot_iff _).mp hne
-  exact ⟨R,hR0,hR,(mem_chowIncidenceIdeal_iff I R).mp hR⟩
-
 end
 end CCDN

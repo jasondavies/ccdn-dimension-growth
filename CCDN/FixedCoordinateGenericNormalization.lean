@@ -3,7 +3,8 @@ module
 public import CCDN.GenericLinearNormalizationOpenness
 public import CCDN.ClosureNormalizationInfinite
 public import CCDN.ProjectiveClosureSpecialization
-public import CCDN.GenericHyperplaneNormalizationDescent
+public import CCDN.GeometricIdealPrimality
+public import CCDN.ProjectiveClosureHilbertPolynomial
 
 /-! Generic affine linear normalization with the homogenizing coordinate
 fixed. The finite specialization and its nonzero determinant are both
@@ -84,61 +85,6 @@ theorem generic_fixed_coordinate_projection_integral
     (genericFixedCoordinateFamily K m n) (genericFixedCoordinateFamily_homogeneous K m n)
     c (by rwa [hspecial]) u hu
   rwa [projectiveClosureIdeal_scalar_extension, hgeneric] at h
-
-theorem generic_affine_parameter_projection_integral
-    {K L : Type*} [Field K] [Infinite K] [Field L] [Algebra K L]
-    {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (hm : (filteredHilbertPolynomial I).natDegree = m)
-    (u : Fin m × Fin n → L) (hu : AlgebraicIndependent K u) :
-    (projectionCoordinateMap (I.map (map (algebraMap K L)))
-      (genericAffineParameterForms u)).IsIntegral :=
-  affine_projection_integral_of_closure_integral _ _
-    (generic_fixed_coordinate_projection_integral I hm u hu)
-
-theorem generic_affine_parameter_projection_injective
-    {K L : Type*} [Field K] [Infinite K] [Field L] [Algebra K L]
-    {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hm : (filteredHilbertPolynomial I).natDegree = m)
-    (u : Fin m × Fin n → L) (hu : AlgebraicIndependent K u) :
-    Function.Injective (projectionCoordinateMap (I.map (map (algebraMap K L)))
-      (genericAffineParameterForms u)) := by
-  let IL := I.map (map (algebraMap K L))
-  let : IL.IsPrime := prime_ideal_scalar_extension_of_algebraicClosure (L := L) I
-  let ψ := projectionCoordinateMap IL (genericAffineParameterForms u)
-  have hint : ψ.IsIntegral := generic_affine_parameter_projection_integral I hm u hu
-  have hdim := integral_projection_hilbert_dimension_eq IL ψ hint
-  have hk : RingHom.ker ψ = ⊥ := ideal_eq_bot_of_full_hilbert_dimension _
-    (RingHom.ker_ne_top _) (by
-      simpa only [IL, filteredHilbertPolynomial_scalar_extension, hm, Fintype.card_fin] using hdim)
-  exact (RingHom.injective_iff_ker_eq_bot ψ).mpr hk
-
-theorem generic_fixed_coordinate_projection_injective
-    {K L : Type*} [Field K] [Infinite K] [Field L] [Algebra K L]
-    {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hm : (filteredHilbertPolynomial I).natDegree = m)
-    (u : Fin m × Fin n → L) (hu : AlgebraicIndependent K u) :
-    Function.Injective
-      (projectionCoordinateMap (projectiveClosureIdeal (I.map (map (algebraMap K L))))
-        (closureProjectionCoordinates (genericAffineParameterForms u))) := by
-  let IL := I.map (map (algebraMap K L))
-  let : IL.IsPrime := prime_ideal_scalar_extension_of_algebraicClosure (L := L) I
-  let J := projectiveClosureIdeal IL
-  let ψ := projectionCoordinateMap J (closureProjectionCoordinates (genericAffineParameterForms u))
-  have hIL : (filteredHilbertPolynomial IL).natDegree = m := by
-    rw [filteredHilbertPolynomial_scalar_extension]
-    exact hm
-  obtain ⟨d,_,_,hd⟩ := filteredHilbertPolynomial_positive_multiplicity IL
-    (Ideal.IsPrime.ne_top ‹IL.IsPrime›)
-  have hJ : (filteredHilbertPolynomial J).natDegree = m + 1 :=
-    (projectiveClosureIdeal_hilbertPolynomial_parameters IL m d hIL
-      (by simpa only [hIL] using hd)).1
-  have hint : ψ.IsIntegral := generic_fixed_coordinate_projection_integral I hm u hu
-  have hdim := integral_projection_hilbert_dimension_eq J ψ hint
-  have hk : RingHom.ker ψ = ⊥ := ideal_eq_bot_of_full_hilbert_dimension _
-    (RingHom.ker_ne_top _) (by simpa only [Fintype.card_fin, hJ] using hdim)
-  exact (RingHom.injective_iff_ker_eq_bot ψ).mpr hk
 
 end
 end CCDN

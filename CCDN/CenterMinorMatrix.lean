@@ -84,22 +84,5 @@ lemma centerMinorProjectionMatrix_disjoint {K : Type*} [Field K] {r n s : ℕ}
   rw [← centerMinorProjectionMatrix_ker A hA e]
   exact hz
 
-/-- The center's literal Plücker projection obeys the image-incidence
-criterion; source and image are connected by the constructed minors. -/
-theorem center_minor_projection_incidence_iff
-    {K : Type*} [Field K] [IsAlgClosed K] {r n s q : ℕ}
-    (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : IsHomogeneousIdeal J)
-    (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
-    (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
-    (hcenter : ∀ p ∈ projectiveIdealZeroLocus J,
-      p.rep ∉ Submodule.span K (Set.range A.row))
-    (U : Fin q × Fin (s + 1) → K) :
-    chowPullbackCoefficients (centerMinorProjectionMatrix A e) U ∈
-        projectiveChowIncidenceLocus q J ↔
-      U ∈ projectiveChowIncidenceLocus q
-        (chowProjectionImageIdeal J (centerMinorProjectionMatrix A e)) :=
-  chow_projection_incidence_iff J hJ _ (centerMinorProjectionMatrix_disjoint J A hA e hcenter) U
-
 end
 end CCDN

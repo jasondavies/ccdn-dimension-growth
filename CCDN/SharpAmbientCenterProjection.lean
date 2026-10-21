@@ -1,6 +1,7 @@
 module
 
-public import CCDN.SharpGoodCenterProjection
+public import CCDN.SharpBoundedBirationalCenter
+public import CCDN.BirationalComplementProjection
 public import CCDN.PolynomialPredicates
 
 /-! The full ambient height quantifier of CCDN Lemma 5.1. The constructed

@@ -33,20 +33,6 @@ theorem projective_chow_row_degree_eq_multiplicity
     prime_ideal_scalar_extension_of_isAlgClosed I
   exact chow_generator_row_degree_eq_multiplicity I hmI d hdI G hG hgen δ hδG
 
-theorem projective_chow_totalDegree_eq_multiplicity
-    {K : Type*} [Field K] [IsAlgClosed K] [CharZero K] {m n : ℕ}
-    (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
-    (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (hF : Irreducible F)
-    (δ : Fin (m + 1) → ℕ)
-    (hδ : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i))
-    (hzero : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J) :
-    F.totalDegree = (m + 1) * d := by
-  have he := projective_chow_row_degree_eq_multiplicity J hJ d hdim hdegree F hF δ hδ hzero
-  exact chow_uniform_row_degree_totalDegree F hF.ne_zero d (fun i => he i ▸ hδ i)
-
 theorem exists_projective_chow_exact_degree
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K] {m n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]

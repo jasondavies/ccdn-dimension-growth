@@ -78,47 +78,5 @@ theorem exists_center_projection_coordinate_forms {s n : ℕ}
       change x - Q x = 0 at he
       exact (sub_eq_zero.mp he).symm
 
-/-- If the center lies in a coordinate hyperplane, projection preserves
-that coordinate, as needed for the hyperplane at infinity. -/
-theorem normalizedIntegerProjection_coordinate_eq {s n : ℕ}
-    (A : Matrix (Fin (s + 1)) (Fin (n + 1)) ℤ)
-    (D : ℤ) (hD : D ≠ 0) (P : Matrix (Fin (n + 1)) (Fin (n + 1)) ℤ)
-    (hP : P * P = D • P)
-    (hk : (normalizedIntegerProjection D P).ker =
-      Submodule.span ℚ (Set.range (fun i => fun j => (A i j : ℚ))))
-    (j : Fin (n + 1)) (hj : ∀ i, A i j = 0) (x : Fin (n + 1) → ℚ) :
-    normalizedIntegerProjection D P x j = x j := by
-  have hspan : Submodule.span ℚ (Set.range (fun i => fun k => (A i k : ℚ))) ≤
-      (LinearMap.proj j : (Fin (n + 1) → ℚ) →ₗ[ℚ] ℚ).ker := by
-    apply Submodule.span_le.mpr
-    rintro _ ⟨i, rfl⟩
-    change (A i j : ℚ) = 0
-    simp only [hj, Int.cast_zero]
-  have hres := normalizedIntegerProjection_sub_mem_ker D hD P hP x
-  rw [hk] at hres
-  have hz := LinearMap.mem_ker.mp (hspan hres)
-  change x j - normalizedIntegerProjection D P x j = 0 at hz
-  exact (sub_eq_zero.mp hz).symm
-
-/-- A single nonzero denominator D works for every affine input: for
-integer inputs with distinguished coordinate one, the explicit integral
-output has that coordinate equal to D. -/
-theorem integer_center_projection_fixed_coordinate {s n : ℕ}
-    (A : Matrix (Fin (s + 1)) (Fin (n + 1)) ℤ)
-    (D : ℤ) (hD : D ≠ 0) (P : Matrix (Fin (n + 1)) (Fin (n + 1)) ℤ)
-    (hP : P * P = D • P)
-    (hk : (normalizedIntegerProjection D P).ker =
-      Submodule.span ℚ (Set.range (fun i => fun j => (A i j : ℚ))))
-    (j : Fin (n + 1)) (hj : ∀ i, A i j = 0)
-    (z : IntPoint (n + 1)) : (P *ᵥ z) j = D * z j := by
-  have he := normalizedIntegerProjection_coordinate_eq A D hD P hP hk j hj (rationalPoint z)
-  rw [normalizedIntegerProjection_apply, ← rationalPoint_integer_mulVec] at he
-  change (D : ℚ)⁻¹ * ((P *ᵥ z) j : ℚ) = (z j : ℚ) at he
-  have hDq : (D : ℚ) ≠ 0 := by exact_mod_cast hD
-  have he' : ((P *ᵥ z) j : ℚ) = (D : ℚ) * (z j : ℚ) := by
-    field_simp at he
-    exact he
-  exact_mod_cast he'
-
 end
 end CCDN

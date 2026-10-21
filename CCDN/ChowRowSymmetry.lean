@@ -103,18 +103,5 @@ theorem chow_generator_row_degrees_equal
   rw [hei] at hi
   exact IsWeightedHomogeneous.inj_right hn hi hj
 
-theorem exists_chow_incidence_uniform_row_degree
-    {K : Type*} [Field K] {n m : ℕ}
-    (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
-    (hm : (filteredHilbertPolynomial I).natDegree = m) :
-    ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (d : ℕ),
-      Irreducible F ∧ chowIncidenceIdeal (m + 1) I = Ideal.span {F} ∧
-      ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) d := by
-  obtain ⟨F,δ,hF,hgen,hδ⟩ := exists_multihomogeneous_chow_incidence_generator I hm
-  refine ⟨F,δ 0,hF,hgen,?_⟩
-  intro i
-  rw [← chow_generator_row_degrees_equal I F hF.ne_zero hgen δ hδ i 0]
-  exact hδ i
-
 end
 end CCDN

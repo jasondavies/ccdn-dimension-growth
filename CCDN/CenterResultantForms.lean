@@ -29,17 +29,6 @@ lemma weightedTotalDegree_of_nonzero_homogeneous
   rw [weightedTotalDegree_coe w f hf0] at he
   exact WithBot.coe_injective he
 
-lemma genericBlockLine_chowRow_natDegree
-    {K : Type*} [Field K] {n s q : ℕ}
-    (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin q)
-    (F : MvPolynomial (Fin q × Fin (n + 1)) K) (d : ℕ)
-    (hF : F.IsWeightedHomogeneous (chowRowWeight i) d)
-    (hR : chowLinearSubstitution A F ≠ 0) :
-    (genericBlockLine (chowRowBlock i) (chowLinearSubstitution A F)).natDegree = d := by
-  rw [genericBlockLine_natDegree,genericBlockWeight_chowRowBlock]
-  exact weightedTotalDegree_of_nonzero_homogeneous _ _ d
-    (chowLinearSubstitution_row_homogeneous A i F d hF) hR
-
 def centerRowResultantFamily
     {K : Type*} [Field K] {r n s q : ℕ}
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin n)) (i : Fin q)
@@ -65,27 +54,6 @@ theorem centerRowResultantFamily_totalDegree_le
     ∀ g ∈ centerRowResultantFamily e i F d, g.totalDegree ≤ D * (2 * d - 1) := by
   intro g hg
   exact (centerRowResultantFamily_homogeneous e i F d hd hF g hg).totalDegree_le
-
-/-- Specialization is exact even when the restricted source equation is
-zero. -/
-theorem centerRowResultantFamily_nonvanishing_iff
-    {K : Type*} [Field K] {r n s q : ℕ}
-    (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) (i : Fin q)
-    (F : MvPolynomial (Fin q × Fin (n + 1)) K) (d : ℕ)
-    (A : Matrix (Fin r) (Fin (n + 1)) K) :
-    (∃ g ∈ centerRowResultantFamily e i F d,
-      eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det) g ≠ 0) ↔
-    derivativeResultant (genericBlockLine (chowRowBlock i)
-      (chowLinearSubstitution (centerMinorProjectionMatrix A e) F)) d ≠ 0 := by
-  have he := derivativeResultantCoefficientFamily_nonvanishing_iff
-    (genericBlockLine (chowRowBlock i) (universalCenterChowMap e F)) d (RingHom.id K)
-    (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det)
-  change (∃ g ∈ centerRowResultantFamily e i F d,
-    eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det) g ≠ 0) ↔
-    derivativeResultant
-      ((genericBlockLine (chowRowBlock i) (universalCenterChowMap e F)).map
-        (MvPolynomial.map (eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det)))) d ≠ 0 at he
-  rwa [genericBlockLine_map,universalCenterChowMap_specialize] at he
 
 end
 end CCDN

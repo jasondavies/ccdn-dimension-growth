@@ -38,20 +38,6 @@ lemma universalHyperplaneRestriction_specialize {K σ : Type*}
       cases i <;> simp [universalHyperplaneRestriction, scaledHyperplaneRestriction]
   exact RingHom.congr_fun he f
 
-lemma universalHyperplaneRestriction_homogeneous {σ : Type*} [Fintype σ]
-    {d : ℕ} {f : MvPolynomial (Option σ) ℤ} (hf : f.IsHomogeneous d) :
-    (universalHyperplaneRestriction f).IsHomogeneous d := by
-  have hg (i : Option σ) :
-      (Option.elim i (-(∑ j, C (X (some j)) * X j))
-        (fun j => C (X none) * X j) :
-          MvPolynomial σ (MvPolynomial (Option σ) ℤ)).IsHomogeneous 1 := by
-    cases i with
-    | none =>
-      exact (IsHomogeneous.sum _ _ _ (fun j _ =>
-        (isHomogeneous_X _ j).C_mul (X (some j)))).neg
-    | some j => exact (isHomogeneous_X _ j).C_mul (X none)
-  simpa only [universalHyperplaneRestriction, one_mul] using hf.aeval _ hg
-
 lemma universalHyperplaneRestriction_coefficientwiseHomogeneous
     {σ : Type*} [Fintype σ] {d : ℕ} {f : MvPolynomial (Option σ) ℤ}
     (hf : f.IsHomogeneous d) :

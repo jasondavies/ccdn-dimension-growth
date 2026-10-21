@@ -43,14 +43,6 @@ lemma zeroColumnPoint_fixed {K : Type*} [Field K] {r n : ℕ}
   rcases q with ⟨i,j⟩
   by_cases hj : j ∈ Z <;> simp [zeroColumnPoint,hj,hx i j]
 
-theorem zero_column_polynomial_locus_isOpen_subspace
-    {K : Type*} [Field K] {r n : ℕ}
-    (Z : Finset (Fin n)) (p : MvPolynomial (Fin r × Fin n) K) :
-    IsOpen {x : {x : Fin r × Fin n → K //
-      (∀ i j, j ∈ Z → x (i,j) = 0) ∧
-      LinearIndependent K (fun i : Fin r => fun j : Fin n => x (i,j))} | eval x.val p ≠ 0} :=
-  (affine_polynomial_nonzero_set_open p).preimage continuous_subtype_val
-
 /-- Every point of the zero-column subspace is in the closure of the good
 full-rank locus. Nonvanishing is required on this subspace itself. -/
 theorem zero_column_polynomial_locus_closure
@@ -106,33 +98,6 @@ theorem zero_column_polynomial_locus_dense_subspace
   have hcl := zero_column_polynomial_locus_closure Z A hA hAz p hp x hx.1
   apply closure_mono (fun y hy => ?_) hcl
   exact ⟨⟨y,hy.1,hy.2.1⟩,hy.2.2,rfl⟩
-
-/-- Nonvanishing at a full-rank matrix in the prescribed subspace
-supplies the polynomial nonzero premise used by the density theorem. -/
-theorem zero_column_minor_locus_dense
-    {r n : ℕ} (Z : Finset (Fin n))
-    (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
-    (A : Matrix (Fin r) (Fin n) ℚ) (hA : LinearIndependent ℚ A.row)
-    (hAz : ∀ i j, j ∈ Z → A i j = 0)
-    (hF : eval (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) F ≠ 0) :
-    Dense {x : {x : Fin r × Fin n → ℚ //
-      (∀ i j, j ∈ Z → x (i,j) = 0) ∧
-      LinearIndependent ℚ (fun i : Fin r => fun j : Fin n => x (i,j))} |
-      eval (fun c : Fin r ↪ Fin n =>
-        ((Matrix.of fun i j => x.val (i,j)).submatrix id c).det) F ≠ 0} := by
-  let p := aeval universalMaximalMinor F
-  have hp : zeroColumnSubstitution Z p ≠ 0 := by
-    intro hz
-    have he := congrArg (eval (fun q => A q.1 q.2)) hz
-    rw [eval_zeroColumnSubstitution,zeroColumnPoint_fixed Z _ hAz,map_zero] at he
-    have hh := eval_minor_substitution F A
-    exact hF (hh.symm.trans he)
-  have hd := zero_column_polynomial_locus_dense_subspace Z A hA hAz p hp
-  convert hd using 1
-  ext x
-  have he := eval_minor_substitution F (Matrix.of fun i j => x.val (i,j))
-  change eval x.val p = _ at he
-  simp only [Set.mem_ofPred_eq,he]
 
 end
 end CCDN

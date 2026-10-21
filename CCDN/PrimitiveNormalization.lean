@@ -21,12 +21,6 @@ lemma integer_scalar_factor_degree {σ : Type*} {f g : MvPolynomial σ ℤ} {c :
   have hg := integer_scalar_factor_ne_zero hf he
   rw [he, totalDegree_mul_of_isDomain (C_eq_zero.not.mpr hc) hg, totalDegree_C, zero_add]
 
-lemma integer_scalar_factor_homogeneous {σ : Type*} {f g : MvPolynomial σ ℤ} {c : ℤ} {d : ℕ}
-    (hc : c ≠ 0) (he : f = C c * g) (hf : f.IsHomogeneous d) : g.IsHomogeneous d := by
-  have h := homogeneous_multiplier (isHomogeneous_C σ c) (C_eq_zero.not.mpr hc)
-    (he ▸ hf) (Nat.zero_le d)
-  simpa only [Nat.sub_zero] using h
-
 lemma integer_scalar_factor_coefficient_bound {σ : Type*}
     {f g : MvPolynomial σ ℤ} {c : ℤ} (hc : c ≠ 0) (he : f = C c * g) (m : σ →₀ ℕ) :
     |(g.coeff m : ℝ)| ≤ |(f.coeff m : ℝ)| := by
@@ -78,13 +72,6 @@ lemma rational_scalar_model_zero_iff {σ : Type*} {f : MvPolynomial σ ℚ}
     eval x (MvPolynomial.map (Int.castRingHom ℚ) g) = 0 ↔ eval x f = 0 := by
   rw [he, eval_mul, eval_C]
   exact mul_eq_zero_iff_left ha
-
-lemma rational_scalar_model_irreducible {σ : Type*} {f : MvPolynomial σ ℚ}
-    {g : MvPolynomial σ ℤ} {a : ℚ} (ha : a ≠ 0)
-    (he : MvPolynomial.map (Int.castRingHom ℚ) g = C a * f) (hf : Irreducible f) :
-    Irreducible (MvPolynomial.map (Int.castRingHom ℚ) g) := by
-  rw [he]
-  exact (irreducible_isUnit_mul ((isUnit_iff_ne_zero.mpr ha).map C)).mpr hf
 
 end
 end CCDN

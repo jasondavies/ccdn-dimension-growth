@@ -87,21 +87,5 @@ theorem chow_generator_row_degree_eq_multiplicity
   exact (chow_generator_row_degrees_equal I G hG.ne_zero hgen δ hδ i (Fin.last m)).trans
     (hl.symm.trans hu)
 
-theorem chow_generator_totalDegree_eq_multiplicity
-    {K : Type*} [Field K] [CharZero K] {m n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hm : (filteredHilbertPolynomial I).natDegree = m)
-    (d : ℕ) (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
-    (G : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K)
-    (hG : Irreducible G) (hgen : chowIncidenceIdeal (m + 1) I = Ideal.span {G})
-    (δ : Fin (m + 1) → ℕ)
-    (hδ : ∀ i, G.IsWeightedHomogeneous (chowRowWeight i) (δ i)) :
-    G.totalDegree = (m + 1) * d := by
-  have he := chow_generator_row_degree_eq_multiplicity I hm d hdegree G hG hgen δ hδ
-  apply chow_uniform_row_degree_totalDegree G hG.ne_zero d
-  intro i
-  simpa only [he i] using hδ i
-
 end
 end CCDN
