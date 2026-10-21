@@ -38,7 +38,7 @@ lemma eval_affineLinePolynomial {K σ : Type*} [Field K]
       ring
   exact RingHom.congr_fun he f
 
-theorem affineLinePolynomial_eq_zero_of_contained {n : ℕ}
+private theorem affineLinePolynomial_eq_zero_of_contained {n : ℕ}
     (a v : RatPoint n) (f : CoordinatePolynomial n)
     (hline : rationalAffineLine a v ⊆ zeroLocus f) :
     affineLinePolynomial a v f = 0 := by
@@ -47,7 +47,7 @@ theorem affineLinePolynomial_eq_zero_of_contained {n : ℕ}
   rw [eval_affineLinePolynomial]
   exact hline ⟨t, rfl⟩
 
-theorem rationalAffineLine_direction_top_zero {n : ℕ}
+private theorem rationalAffineLine_direction_top_zero {n : ℕ}
     (a v : RatPoint n) (f : MvPolynomial (Fin n) ℤ)
     (hline : rationalAffineLine a v ⊆ zeroLocus (map (Int.castRingHom ℚ) f)) :
     eval v (map (Int.castRingHom ℚ) (homogeneousComponent f.totalDegree f)) = 0 := by
@@ -58,7 +58,7 @@ theorem rationalAffineLine_direction_top_zero {n : ℕ}
   rw [hpoly, Polynomial.coeff_zero, ← map_homogeneousComponent] at hc
   exact hc.symm
 
-lemma rationalAffineLine_eq_projective_rep {n : ℕ}
+private lemma rationalAffineLine_eq_projective_rep {n : ℕ}
     (a v : RatPoint (n + 1)) (hv : v ≠ 0) (p : ProjectivePoint n)
     (hp : Projectivization.mk ℚ v hv = p) :
     rationalAffineLine a v = rationalAffineLine a p.rep := by

@@ -33,7 +33,7 @@ structure IsGeometricSurfaceCurve (f : CoordinatePolynomial 3)
 def smoothSurfaceLocus (f : CoordinatePolynomial 3) : Set (RatPoint 3) :=
   zeroLocus f \ singularHypersurfaceLocus f
 
-lemma integer_smooth_surface_derivative
+private lemma integer_smooth_surface_derivative
     (f : MvPolynomial (Fin 3) ℤ) (x : IntPoint 3)
     (hx : rationalPoint x ∈ smoothSurfaceLocus (map (Int.castRingHom ℚ) f)) :
     ∃ j, eval x (pderiv j f) ≠ 0 := by

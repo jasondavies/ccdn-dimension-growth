@@ -22,7 +22,7 @@ open MvPolynomial
 
 /-- If the top form has good geometric reduction, the original affine
  equation keeps its degree and has good geometric reduction as well. -/
-theorem hypersurfaceBadReduction_imp_top_homogeneousComponent {σ : Type*}
+private theorem hypersurfaceBadReduction_imp_top_homogeneousComponent {σ : Type*}
     (f : MvPolynomial σ ℤ) (p : ℕ) :
     HypersurfaceBadReduction f p →
       HypersurfaceBadReduction (homogeneousComponent f.totalDegree f) p := by

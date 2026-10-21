@@ -27,7 +27,7 @@ lemma log_add_one_sq_le_eight_mul {t : ℝ} (ht : 1 ≤ t) :
   nlinarith [Real.sqrt_nonneg (t + 1)]
 
 /-- The prime-window size constant `(log 4 + 4) ρ` is positive. -/
-lemma log_four_add_four_mul_scalingPrimeRatio_pos :
+private lemma log_four_add_four_mul_scalingPrimeRatio_pos :
     0 < (Real.log 4 + 4) * scalingPrimeRatio := by
   have hp := scalingPrimeRatio_one_le
   have hl := Real.log_nonneg (by norm_num : (1 : ℝ) ≤ 4)
@@ -81,7 +81,7 @@ lemma congruencePrimeWindow_weight_le_rpow {K R B : ℝ} (hK : 1 ≤ K) (hR : 1 
 /-- Bounded range `0 ≤ log B ≤ 1` of the prime-window rate: with `m` and `A` as in
 `congruencePrimeWindow_weight_le_rpow`, the edge weight `(2R)^m (log B + 1)^k` is at most
 `exp(2AK log(2R) / log 2) 2^k`. -/
-lemma congruencePrimeWindow_weight_le_exp {K R B : ℝ} (hK : 1 ≤ K) (hR : 1 ≤ R) (k : ℕ)
+private lemma congruencePrimeWindow_weight_le_exp {K R B : ℝ} (hK : 1 ≤ K) (hR : 1 ≤ R) (k : ℕ)
     (ht : 0 ≤ Real.log B) (hsmall : Real.log B ≤ 1) :
     (2 * R) ^ (congruencePrimeWindow (K * (Real.log B + 1))).card * (Real.log B + 1) ^ k ≤
       Real.exp (2 * ((Real.log 4 + 4) * scalingPrimeRatio) * K / Real.log 2 *
@@ -112,7 +112,7 @@ lemma congruencePrimeWindow_weight_le_exp {K R B : ℝ} (hK : 1 ≤ K) (hR : 1 �
 
 /-- The exact logarithmic denominator of CCDN Theorem 4.3.5, including
 uniform control of the bounded range starting at B=1. -/
-theorem congruencePrimeWindow_edge_polylog_salberger {K R : ℝ}
+private theorem congruencePrimeWindow_edge_polylog_salberger {K R : ℝ}
     (hK : 1 ≤ K) (hR : 1 ≤ R) (k : ℕ) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧ ∀ B : ℝ, 1 ≤ B →
       (congruencePrimeWindow (K * (Real.log B + 1))).card *

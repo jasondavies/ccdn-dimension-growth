@@ -48,7 +48,7 @@ lemma exp_sum_log_primes (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime) :
   intro p hp
   exact Real.exp_log (by exact_mod_cast (hP p hp).pos)
 
-lemma SurfaceCongruenceFamily.terminal_degree_le
+private lemma SurfaceCongruenceFamily.terminal_degree_le
     {f : MvPolynomial (Fin 3) ℤ} {B A L X : ℝ}
     (F : SurfaceCongruenceFamily f B A) (hB : 1 ≤ B) (hA : 0 ≤ A) (hL : 1 ≤ L)
     (P : Finset ℕ) (hPW : P ⊆ congruencePrimeWindow L)
@@ -85,7 +85,7 @@ lemma SurfaceCongruenceFamily.terminal_degree_le
       · positivity
     _ = _ := by ring
 
-lemma surface_prime_curve_degree_le
+private lemma surface_prime_curve_degree_le
     (f g : CoordinatePolynomial 3) (hf : Irreducible f) (hfg : ¬ f ∣ g)
     (I : Ideal (CoordinatePolynomial 3)) {d : ℕ} (hI : IsSurfaceCurve f I d) (hgI : g ∈ I) :
     d ≤ f.totalDegree * g.totalDegree := by

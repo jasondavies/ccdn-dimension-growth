@@ -92,7 +92,7 @@ private theorem sum_inv_height_geometric_bound {α : Type*}
 
 /-- A finite weighted-count lemma with geometric counting thresholds. Its
 application below obtains the threshold counts from the proved curve theorem. -/
-theorem sum_inv_height_le_of_geometric_count {α : Type*}
+private theorem sum_inv_height_le_of_geometric_count {α : Type*}
     (s : Finset α) (h : α → ℝ) (M : ℝ) (hM : 0 ≤ M)
     (hheight : ∀ x ∈ s, 1 ≤ h x)
     (hcount : ∀ k : ℕ,
@@ -120,7 +120,7 @@ private lemma eight_pow_two_thirds (k : ℕ) :
 
 /-- A uniform reciprocal-height sum for distinct rational projective
 zeros. The constant precedes the equation, its degree and the finite set. -/
-theorem projective_plane_reciprocal_height_sum :
+private theorem projective_plane_reciprocal_height_sum :
     ∃ C : ℝ, 0 < C ∧
       ∀ (d : ℕ), 3 ≤ d →
       ∀ f : MvPolynomial (Fin 3) ℚ, f.IsHomogeneous d → Irreducible f →

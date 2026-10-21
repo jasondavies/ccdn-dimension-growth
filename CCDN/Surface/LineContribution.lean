@@ -25,7 +25,7 @@ open MvPolynomial
 
 /-- Weighted finite sums with a uniform bound on the cardinality of each
 fiber. No injectivity of the indexing map is required. -/
-theorem sum_comp_le_fiber_card_mul {α β : Type*} [DecidableEq β]
+private theorem sum_comp_le_fiber_card_mul {α β : Type*} [DecidableEq β]
     (s : Finset α) (p : α → β) (w : β → ℝ) (M : ℝ)
     (hw : ∀ q ∈ s.image p, 0 ≤ w q)
     (hfiber : ∀ q ∈ s.image p, ((s.filter (fun x => p x = q)).card : ℝ) ≤ M) :
@@ -46,7 +46,7 @@ theorem sum_comp_le_fiber_card_mul {α β : Type*} [DecidableEq β]
 
 /-- The aggregation step, stated separately so that the geometric
 parallel-line theorem can supply its only remaining input. -/
-theorem surface_line_contribution_of_parallel_bound :
+private theorem surface_line_contribution_of_parallel_bound :
     ∃ C : ℝ, 0 < C ∧
       ∀ f : MvPolynomial (Fin 3) ℤ,
       HasAbsIrreducibleTopForm f →

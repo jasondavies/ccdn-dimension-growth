@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma affineChart_pderiv_succ {K : Type*} [Field K] {n : ℕ}
+private lemma affineChart_pderiv_succ {K : Type*} [Field K] {n : ℕ}
     (F : MvPolynomial (Fin (n + 1)) K) (i : Fin n) :
     affineChart n (pderiv i.succ F) = pderiv i (affineChart n F) := by
   classical

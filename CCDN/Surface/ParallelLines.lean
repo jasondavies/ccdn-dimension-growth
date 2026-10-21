@@ -25,13 +25,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma planeDirectionMatrix_mulVec (b c v w : Fin 3 → ℚ) (i : Fin 3) :
+private lemma planeDirectionMatrix_mulVec (b c v w : Fin 3 → ℚ) (i : Fin 3) :
     (planeDirectionMatrix b c v).mulVec w i = b i * w 0 + c i * w 1 + v i * w 2 := by
   simp [Matrix.mulVec, dotProduct, Fin.sum_univ_succ, planeDirectionMatrix]
   ring
 
 /-- Every line in the prescribed direction meets a transverse plane. -/
-theorem exists_parallel_line_plane_intersection (a b c v x : Fin 3 → ℚ)
+private theorem exists_parallel_line_plane_intersection (a b c v x : Fin 3 → ℚ)
     (hdet : (planeDirectionMatrix b c v).det ≠ 0) :
     ∃ (z : Fin 2 → ℚ) (t : ℚ),
       (fun i => a i + b i * z 0 + c i * z 1) = x + t • v := by
@@ -49,7 +49,7 @@ theorem exists_parallel_line_plane_intersection (a b c v x : Fin 3 → ℚ)
 
 /-- Distinct parallel lines have distinct intersections with any
 transverse plane. The index family is arbitrary but its line sets are injective. -/
-theorem surface_parallel_line_family_card_le_of_second_equation
+private theorem surface_parallel_line_family_card_le_of_second_equation
     {ι : Type*} [Fintype ι] [DecidableEq ι]
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : AbsolutelyIrreducible f)
@@ -90,7 +90,7 @@ theorem surface_parallel_line_family_card_le_of_second_equation
 
 /-- A finite set of line sets has no duplicate lines; its cardinality
 is therefore controlled by the same proper plane intersection. -/
-theorem surface_parallel_lines_card_le_of_second_equation
+private theorem surface_parallel_lines_card_le_of_second_equation
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree)

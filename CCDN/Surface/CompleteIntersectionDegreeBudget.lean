@@ -31,7 +31,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem filteredCoordinateSpace_eventually_linear_of_eventual_bound
+private theorem filteredCoordinateSpace_eventually_linear_of_eventual_bound
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (C T : ℕ)
     (hbound : ∀ N ≥ T, Module.finrank K (filteredCoordinateSpace I N) ≤ C * (N + 2)) :
@@ -64,7 +64,7 @@ theorem filteredCoordinateSpace_eventually_linear_of_eventual_bound
 /-- A proper intersection of two equations in affine three-space has an
 eventually linear Hilbert function with slope at most the product of degrees.
 This holds for every ideal containing the equations, not just prime ideals. -/
-theorem proper_intersection_eventual_linear_degree {K : Type*} [Field K]
+private theorem proper_intersection_eventual_linear_degree {K : Type*} [Field K]
     {f g : MvPolynomial (Fin 3) K} (hf : Prime f) (hfg : ¬ f ∣ g)
     (I : Ideal (MvPolynomial (Fin 3) K)) (hIf : f ∈ I) (hIg : g ∈ I) :
     ∃ d ≤ f.totalDegree * g.totalDegree, HasFilteredCurveDegree I d := by

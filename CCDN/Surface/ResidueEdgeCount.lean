@@ -30,7 +30,7 @@ def surfaceResidueCrossing {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
   let h := map (Int.castRingHom ℚ) (F.auxiliary R hR r)
   ⋃ I ∈ S.filter (fun I => g ∈ I ∧ h ∉ I), idealZeroLocus I ∩ zeroLocus h
 
-theorem surface_residue_crossing_count_le
+private theorem surface_residue_crossing_count_le
     {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
     (F : SurfaceCongruenceFamily f B A)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
@@ -58,7 +58,7 @@ theorem surface_residue_crossing_count_le
   change count (surfaceResidueCrossing F S R hR p r) B ≤ _ at hh
   simpa only [g, h, rational_map_totalDegree] using hh
 
-lemma SurfaceCongruenceFamily.scaled_degree_le
+private lemma SurfaceCongruenceFamily.scaled_degree_le
     {f : MvPolynomial (Fin 3) ℤ} {A B L X : ℝ}
     (F : SurfaceCongruenceFamily f B A) (hA : 0 ≤ A) (hB : 1 ≤ B) (hL : 1 ≤ L)
     (hX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)
@@ -92,7 +92,7 @@ lemma SurfaceCongruenceFamily.scaled_degree_le
   · positivity
   · positivity
 
-theorem surface_residue_crossing_scaled_count
+private theorem surface_residue_crossing_scaled_count
     {f : MvPolynomial (Fin 3) ℤ} {A B L X : ℝ}
     (F : SurfaceCongruenceFamily f B A) (hA : 0 ≤ A) (hB : 1 ≤ B) (hL : 1 ≤ L)
     (hX0 : 0 ≤ X) (hX : B ^ (1 / Real.sqrt (f.totalDegree : ℝ)) ≤ X)

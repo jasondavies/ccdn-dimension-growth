@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem primitive_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
+private theorem primitive_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (f : MvPolynomial (Fin 3) ℤ), PrimitiveIntegerPolynomial f →
       AbsolutelyIrreducible f →

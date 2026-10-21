@@ -29,7 +29,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem rational_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
+private theorem rational_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (f : CoordinatePolynomial 3),
       AbsolutelyIrreducibleRat f →
@@ -76,7 +76,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma projectiveClosure_union_chart {n : ℕ}
+private lemma projectiveClosure_union_chart {n : ℕ}
     (S : Finset (Ideal (CoordinatePolynomial n))) :
     affineProjectivePoint ⁻¹' (⋃ J ∈ S.image projectiveClosureIdeal,
       projectiveIdealZeroLocus J) = ⋃ I ∈ S, idealZeroLocus I := by

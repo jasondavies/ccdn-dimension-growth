@@ -44,7 +44,7 @@ theorem hypersurface_badPrime_fractional_height_bound {m r d : ℕ}
       mul_le_mul_of_nonneg_left hratio (by positivity)
     _ = _ := by dsimp only [K]; field_simp
 
-lemma affine_auxiliary_lower_terms_bound (n : ℕ) {d : ℕ} (hd : 0 < d)
+private lemma affine_auxiliary_lower_terms_bound (n : ℕ) {d : ℕ} (hd : 0 < d)
     {B : ℝ} (hB : 1 ≤ B) :
     (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B + (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) ≤
       2 * (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * B ^ (1 / (d : ℝ) ^ (1 / (n + 1 : ℝ))) := by

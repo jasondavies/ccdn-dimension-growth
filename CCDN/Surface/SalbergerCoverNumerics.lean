@@ -20,7 +20,7 @@ of the surface covering theorem.
 namespace CCDN
 noncomputable section
 
-theorem logarithm_add_one_pow_salberger (k : ℕ) {B : ℝ} (hB : 1 ≤ B) :
+private theorem logarithm_add_one_pow_salberger (k : ℕ) {B : ℝ} (hB : 1 ≤ B) :
     (Real.log B + 1) ^ k ≤ (2 ^ k + 1 : ℝ) *
       B ^ ((8 * k + 1 : ℝ) / Real.log (1 + Real.log B)) := by
   have hB0 : 0 < B := zero_lt_one.trans_le hB

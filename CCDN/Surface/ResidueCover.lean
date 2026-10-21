@@ -33,7 +33,7 @@ def surfaceResidueResidualLocus {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
     Set (RatPoint 3) :=
   ⋃ R ∈ (congruencePrimeWindow L).powerset, surfaceResidueSubsetLocus F S L X hL R
 
-theorem mem_surfaceResidueResidualLocus
+private theorem mem_surfaceResidueResidualLocus
     {f : MvPolynomial (Fin 3) ℤ} {A B L X : ℝ}
     (F : SurfaceCongruenceFamily f B A)
     (S : Finset (Ideal (CoordinatePolynomial 3))) (hL : 1 ≤ L)

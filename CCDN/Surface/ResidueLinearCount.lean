@@ -57,7 +57,7 @@ theorem surfaceResidueLogBudget_window (d : ℕ) (K B : ℝ) :
 
 /-- The chosen window meets both the derivative-height condition and the
 terminal-modulus threshold, even at B = 1. -/
-theorem surfaceResidueWindow_parameters {d : ℕ} (hd : 1 ≤ d)
+private theorem surfaceResidueWindow_parameters {d : ℕ} (hd : 1 ≤ d)
     {K B H : ℝ} (hK : 0 ≤ K) (hB : 1 ≤ B)
     (hheight : Real.log H ≤ K * (Real.log B + 1)) :
     4 * Real.log ((d : ℝ) + 1) + Real.log H + d * Real.log B ≤

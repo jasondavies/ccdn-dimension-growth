@@ -16,7 +16,7 @@ required B^(2/sqrt d) scale with a fixed logarithmic factor. -/
 namespace CCDN
 noncomputable section
 
-theorem curveBound_medium_degree {δ d : ℕ} (hd : 1 ≤ d) (hδ : d ≤ δ)
+private theorem curveBound_medium_degree {δ d : ℕ} (hd : 1 ≤ d) (hδ : d ≤ δ)
     {B D : ℝ} (hB : 1 ≤ B) (_hD : 0 ≤ D)
     (hδD : (δ : ℝ) ≤ D * (Real.log B + 1)) :
     curveBound δ B ≤ (δ : ℝ) * D ^ 2 * (D + 1) *

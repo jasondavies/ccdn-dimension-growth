@@ -52,7 +52,7 @@ theorem exists_surface_initial_curve_components (f : MvPolynomial (Fin 3) ℤ)
 
 /-- An integral point of the surface `f = 0` is singular, or lies on a component of the initial
 cover of degree at most `2 d A Λ(B, L)`, or lies in the residual locus. -/
-theorem surface_point_mem_small_curve_cover (f : MvPolynomial (Fin 3) ℤ)
+private theorem surface_point_mem_small_curve_cover (f : MvPolynomial (Fin 3) ℤ)
     (hirQ : Irreducible (map (Int.castRingHom ℚ) f))
     {A B H L X : ℝ} (hA : 0 ≤ A) (hW : IsSurfaceResidueWindow f B H L X)
     (F : SurfaceCongruenceFamily f B A)

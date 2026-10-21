@@ -21,7 +21,7 @@ open MvPolynomial Finset
 
 /-- A degree-at-most-d proper auxiliary yields at most d² geometric curves
 of degree at most d², with at most d⁴ remaining integer points. -/
-theorem surface_geometric_cover_of_small_auxiliary
+private theorem surface_geometric_cover_of_small_auxiliary
     (f g : MvPolynomial (Fin 3) ℤ)
     (hf : Irreducible (map (Int.castRingHom ℚ) f))
     (hfg : ¬ map (Int.castRingHom ℚ) f ∣ map (Int.castRingHom ℚ) g)

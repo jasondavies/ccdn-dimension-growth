@@ -30,7 +30,7 @@ lemma topFormAuxiliaryConstant_pos (n : ℕ) : 0 < topFormAuxiliaryConstant n :=
   unfold topFormAuxiliaryConstant
   positivity
 
-theorem primitive_top_form_auxiliary {n : ℕ}
+private theorem primitive_top_form_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : HasAbsIrreducibleTopForm f)
     {B : ℝ} (hB : 1 ≤ B) :

@@ -17,7 +17,7 @@ gap give a linear bound in every surface degree at least five. -/
 namespace CCDN
 noncomputable section
 
-theorem curveBound_logarithmic_degree {δ : ℕ} (hδ : 2 ≤ δ)
+private theorem curveBound_logarithmic_degree {δ : ℕ} (hδ : 2 ≤ δ)
     {B D : ℝ} (hB : 1 ≤ B) (_hD : 0 ≤ D)
     (hδD : (δ : ℝ) ≤ D * (Real.log B + 1)) :
     curveBound δ B ≤ (δ : ℝ) * D ^ 2 * (D + 1) *
@@ -43,7 +43,7 @@ theorem curveBound_logarithmic_degree {δ : ℕ} (hδ : 2 ≤ δ)
       · positivity
     _ = _ := by ring
 
-theorem sum_curveBound_logarithmic_degrees {ι : Type*}
+private theorem sum_curveBound_logarithmic_degrees {ι : Type*}
     (S : Finset ι) (δ : ι → ℕ) (k : ℕ) {d : ℕ} (hd : 5 ≤ d)
     {A D B : ℝ} (hA : 0 ≤ A) (hD : 0 ≤ D) (hB : 1 ≤ B)
     (hδ : ∀ i ∈ S, 2 ≤ δ i)

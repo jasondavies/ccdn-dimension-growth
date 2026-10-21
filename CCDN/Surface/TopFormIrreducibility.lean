@@ -28,7 +28,7 @@ lemma map_homogeneousComponent {R S σ : Type*} [CommRing R] [CommRing S]
   simp only [coeff_map, coeff_homogeneousComponent]
   split_ifs <;> simp
 
-lemma isUnit_of_isUnit_top_homogeneousComponent {K σ : Type*} [Field K]
+private lemma isUnit_of_isUnit_top_homogeneousComponent {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (hu : IsUnit (homogeneousComponent f.totalDegree f)) :
     IsUnit f := by
   have hd : f.totalDegree = 0 := by
@@ -41,7 +41,7 @@ lemma isUnit_of_isUnit_top_homogeneousComponent {K σ : Type*} [Field K]
 
 /-- The product of highest components detects every proper factorization of
  the full equation, over any field. -/
-theorem irreducible_of_top_homogeneousComponent_irreducible {K σ : Type*} [Field K]
+private theorem irreducible_of_top_homogeneousComponent_irreducible {K σ : Type*} [Field K]
     (f : MvPolynomial σ K)
     (hir : Irreducible (homogeneousComponent f.totalDegree f)) : Irreducible f := by
   have hf : f ≠ 0 := by intro hz; exact hir.ne_zero (by rw [hz, map_zero])

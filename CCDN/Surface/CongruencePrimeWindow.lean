@@ -37,7 +37,7 @@ lemma mem_congruencePrimeWindow {L : ℝ} (hL : 1 ≤ L) {p : ℕ} :
     exact mem_sdiff.mpr ⟨(prime_mem_upto_iff hAL hp).mpr hhi,
       fun hh => (not_le_of_gt hlo) ((prime_mem_upto_iff (by linarith) hp).mp hh)⟩
 
-lemma congruencePrimeWindow_weight_lower {L : ℝ} (hL : 1 ≤ L) :
+private lemma congruencePrimeWindow_weight_lower {L : ℝ} (hL : 1 ≤ L) :
     2 ≤ ∑ p ∈ congruencePrimeWindow L, Real.log p / p := by
   have hA := scalingPrimeRatio_one_le
   have hL0 : 0 < L := by linarith
@@ -50,7 +50,7 @@ lemma congruencePrimeWindow_weight_lower {L : ℝ} (hL : 1 ≤ L) :
   dsimp only [congruencePrimeWindow]
   linarith
 
-theorem congruencePrimeWindow_log_mass {L : ℝ} (hL : 1 ≤ L) :
+private theorem congruencePrimeWindow_log_mass {L : ℝ} (hL : 1 ≤ L) :
     2 * L ≤ ∑ p ∈ congruencePrimeWindow L, Real.log p := by
   have hL0 : 0 ≤ L := by linarith
   have hm := mul_le_mul_of_nonneg_left (congruencePrimeWindow_weight_lower hL) hL0
@@ -92,7 +92,7 @@ theorem congruencePrimeWindow_card_log_bound {L : ℝ} (hL : 1 ≤ L) :
 /-- Removing the prime divisors of D loses at most log|D| of logarithmic
 mass. Thus every bounded nonsingular point retains a large smooth modulus
 once D is chosen as a nonzero derivative value. -/
-theorem congruencePrimeWindow_avoiding_log_mass {L : ℝ} (hL : 1 ≤ L)
+private theorem congruencePrimeWindow_avoiding_log_mass {L : ℝ} (hL : 1 ≤ L)
     {D : ℤ} (hD : D ≠ 0) :
     2 * L - Real.log |(D : ℝ)| ≤
       ∑ p ∈ (congruencePrimeWindow L).filter (fun p : ℕ => ¬ (p : ℤ) ∣ D), Real.log p := by

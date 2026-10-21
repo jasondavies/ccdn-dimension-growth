@@ -20,7 +20,7 @@ contains the section's equation. -/
 namespace CCDN
 noncomputable section
 
-theorem height_two_prime_isMinimalPrime_section
+private theorem height_two_prime_isMinimalPrime_section
     (f g : CoordinatePolynomial 3) (hf : Irreducible f) (hfg : ¬ f ∣ g)
     (P : Ideal (CoordinatePolynomial 3)) (hP : P.IsPrime) (hheight : P.height = 2)
     (hfP : f ∈ P) (hgP : g ∈ P) :

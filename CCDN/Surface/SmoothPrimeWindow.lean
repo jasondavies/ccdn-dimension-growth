@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
-theorem integer_pderiv_coefficient_bound {σ : Type*} [Fintype σ]
+private theorem integer_pderiv_coefficient_bound {σ : Type*} [Fintype σ]
     (f : MvPolynomial σ ℤ) (j : σ) {H : ℝ} (hH : 0 ≤ H)
     (hcoeff : CoefficientHeightLE f H) (e : σ →₀ ℕ) :
     |((pderiv j f).coeff e : ℝ)| ≤ ((f.totalDegree : ℝ) + 1) * H := by
@@ -44,14 +44,14 @@ theorem integer_pderiv_coefficient_bound {σ : Type*} [Fintype σ]
         mul_le_mul_of_nonneg_left heR hH
       _ = _ := by ring
 
-theorem integer_pderiv_totalDegree_le {σ : Type*}
+private theorem integer_pderiv_totalDegree_le {σ : Type*}
     (f : MvPolynomial σ ℤ) (j : σ) :
     (pderiv j f).totalDegree ≤ f.totalDegree := by
   rw [← rational_map_totalDegree (pderiv j f), ← pderiv_map]
   exact (pderiv_totalDegree_le (map (Int.castRingHom ℚ) f) j).trans
     (by rw [rational_map_totalDegree]; omega)
 
-theorem integer_pderiv_evaluation_bound {n : ℕ}
+private theorem integer_pderiv_evaluation_bound {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (j : Fin n) {H B : ℝ}
     (hH : 0 ≤ H) (hB : 1 ≤ B)
     (hcoeff : CoefficientHeightLE f H)
@@ -77,7 +77,7 @@ theorem integer_pderiv_evaluation_bound {n : ℕ}
       gcongr
     _ = _ := by rw [pow_succ]; ring
 
-theorem integer_pderiv_log_bound {n : ℕ}
+private theorem integer_pderiv_log_bound {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (j : Fin n) {H B : ℝ}
     (hH : 1 ≤ H) (hB : 1 ≤ B)
     (hcoeff : CoefficientHeightLE f H)

@@ -26,7 +26,7 @@ open MvPolynomial Finset
 
 /-- Since `B^(1/√d) ≥ 1`, the curve-component degree budget `d A (B^(1/√d) + 1)(1 + log B)` is
 at most `2 d A B^(1/√d) (log B + 1)`. -/
-lemma curve_component_budget_le_double {d : ℕ} {A B s : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B)
+private lemma curve_component_budget_le_double {d : ℕ} {A B s : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B)
     (hs : s ≤ (d : ℝ) * A * (B ^ (1 / Real.sqrt (d : ℝ)) + 1) * (1 + Real.log B)) :
     s ≤ 2 * d * A * B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1) := by
   have hroot : 1 ≤ B ^ (1 / Real.sqrt (d : ℝ)) := Real.one_le_rpow hB (by positivity)
@@ -40,7 +40,7 @@ lemma curve_component_budget_le_double {d : ℕ} {A B s : ℝ} (hA : 0 ≤ A) (h
 
 /-- A subfamily of curve components of positive degrees whose total degree is at most
 `A₀ B^(1/√d) (log B + 1)` has at most `2 A₀ (B^(1/√d) log B + 1)` members. -/
-lemma curve_component_card_le {ι : Type*} {S T : Finset ι} {δ : ι → ℕ} (hT : T ⊆ S)
+private lemma curve_component_card_le {ι : Type*} {S T : Finset ι} {δ : ι → ℕ} (hT : T ⊆ S)
     (hpos : ∀ I ∈ S, 0 < δ I) {d : ℕ} (hd : 1 ≤ d) {A₀ B : ℝ} (hA₀ : 0 ≤ A₀) (hB : 1 ≤ B)
     (hbudget : (∑ I ∈ S, (δ I : ℝ)) ≤
       A₀ * B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1)) :
@@ -61,7 +61,7 @@ lemma curve_component_card_le {ι : Type*} {S T : Finset ι} {δ : ι → ℕ} (
 
 /-- A point count bounded by `d²` times a degree sum of size at most
 `A₀ B^(1/√d) (log B + 1)` is at most `d² A₀ B^(2/√d) (log B + 1)^4`. -/
-lemma count_le_of_curve_degree_budget {d : ℕ} {A₀ B N s : ℝ} (hA₀ : 0 ≤ A₀) (hB : 1 ≤ B)
+private lemma count_le_of_curve_degree_budget {d : ℕ} {A₀ B N s : ℝ} (hA₀ : 0 ≤ A₀) (hB : 1 ≤ B)
     (hN : N ≤ ((d ^ 2 : ℕ) : ℝ) * s)
     (hs : s ≤ A₀ * B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1)) :
     N ≤ ((d : ℝ) ^ 2 * A₀) * B ^ (2 / Real.sqrt (d : ℝ)) * (Real.log B + 1) ^ 4 := by

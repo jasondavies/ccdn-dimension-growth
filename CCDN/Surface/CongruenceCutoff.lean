@@ -25,7 +25,7 @@ def surfaceCongruenceGapConstant (d : ℕ) (K : ℝ) : ℝ :=
   8 * Real.log d + 2 * surfaceCongruenceChargeConstant d K +
     hypersurfaceDeterminantError 1 + 6 * d + 22
 
-theorem surface_congruence_charge_le {d : ℕ} (hd : 0 < d)
+private theorem surface_congruence_charge_le {d : ℕ} (hd : 0 < d)
     {K B H Q : ℝ} (hK : 0 ≤ K) (hB : 1 ≤ B) (hH : 1 ≤ H) (hQ : 0 ≤ Q)
     (hheight : Real.log H ≤ K * (Real.log B + 1)) :
     congruenceHeightCharge 4 d H Q ≤
@@ -57,7 +57,7 @@ theorem surface_congruence_charge_le {d : ℕ} (hd : 0 < d)
   simp only [mul_assoc] at hh ⊢
   nlinarith
 
-theorem surface_congruence_lower_eq (d s : ℕ) (H Q : ℝ) :
+private theorem surface_congruence_lower_eq (d s : ℕ) (H Q : ℝ) :
     affineCongruenceDeterminantLower 1 d s H Q =
       (Real.sqrt 2 / 3 * (s : ℝ) * Real.sqrt s) *
         (Real.log s + 2 * Q - 8 * Real.log d -
@@ -73,7 +73,7 @@ theorem surface_congruence_lower_eq (d s : ℕ) (H Q : ℝ) :
   rw [hp, ← Real.sqrt_eq_rpow]
   ring
 
-theorem surface_congruence_gap_of_log_rank {d s : ℕ}
+private theorem surface_congruence_gap_of_log_rank {d s : ℕ}
     (hd : 0 < d) (hs : 0 < s) {K B H Q : ℝ}
     (hK : 0 ≤ K) (hB : 1 ≤ B) (hH : 1 ≤ H) (hQ : 0 ≤ Q)
     (hheight : Real.log H ≤ K * (Real.log B + 1))
@@ -146,7 +146,7 @@ theorem surfaceCongruenceDegreeConstant_pos (d : ℕ) (K : ℝ) :
 
 /-- One integer degree, with a constant fixed before the height and congruences,
 works for every standard-monomial rank satisfying the elementary power bound. -/
-theorem surface_congruence_degree_selection {d : ℕ} (hd : 0 < d)
+private theorem surface_congruence_degree_selection {d : ℕ} (hd : 0 < d)
     {K B H Q : ℝ} (hK : 0 ≤ K) (hB : 1 ≤ B) (hH : 1 ≤ H) (hQ : 0 ≤ Q)
     (hheight : Real.log H ≤ K * (Real.log B + 1)) :
     ∃ M : ℕ, d ≤ M ∧
