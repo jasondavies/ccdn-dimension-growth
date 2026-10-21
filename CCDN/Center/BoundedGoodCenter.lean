@@ -125,11 +125,11 @@ theorem exists_bounded_integer_fixed_coordinate_center
       (∀ i, M i 0 = 0) ∧ LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row ∧
       IsBirationalMatrixCenter (projectiveClosureIdeal I) (M.map (Int.castRingHom ℚ)) := by
   have := projectiveClosureIdeal_geometrically_prime (L := AlgebraicClosure ℚ) I
-  obtain ⟨hcdim, hcdeg⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdimdeg
+  have hc := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdimdeg
   obtain ⟨A,hA,hA0,hdis,_,hfield⟩ :=
     exists_fixed_coordinate_birational_minor_center (L := AlgebraicClosure ℚ) I hmn d hdimdeg
   obtain ⟨M,hM,hminor,hM0,hli,hgood⟩ := exists_bounded_integer_center_of_witness
-    (projectiveClosureIdeal I) (projectiveClosureIdeal_homogeneous I) d ⟨hcdim, hcdeg⟩ {0} A hA
+    (projectiveClosureIdeal I) (projectiveClosureIdeal_homogeneous I) d hc {0} A hA
     (fun i j hj => by simpa only [Finset.mem_singleton.mp hj] using hA0 i) ⟨hdis,hfield⟩
   exact ⟨M,hM,hminor,fun i => hM0 i 0 (Finset.mem_singleton_self 0),hli,hgood⟩
 
