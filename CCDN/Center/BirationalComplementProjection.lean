@@ -20,7 +20,11 @@ import CCDN.Algebra.ProjectionScalarExtension
 import Mathlib.Algebra.Order.Star.Rat
 /-! Complementary projections retain the geometric and degree
 properties of the minor projection with the same center. This interface
-is independent of the bound used to construct the center rows. -/
+is independent of the bound used to construct the center rows.
+
+This module is the entry point of `Center/`: it collects the good centre, its bounded rows and
+the height of the resulting projection, which the statement of CCDN Lemma 5.1
+(`CCDN.Paper.AmbientCenterProjection`) uses. -/
 
 @[expose] public section
 namespace CCDN

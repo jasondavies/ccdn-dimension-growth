@@ -7,7 +7,7 @@ module
 
 public import CCDN.Center.ChowIncidenceGrading
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import CCDN.Center.WeightedHomogeneousTransform
+import CCDN.Algebra.WeightedHomogeneousTransform
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! Permuting hyperplanes preserves the incidence ideal. Consequently
 the separate row degrees of its nonzero principal generator are all equal. -/

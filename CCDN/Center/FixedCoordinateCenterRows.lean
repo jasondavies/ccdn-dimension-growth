@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowLinearSpecialization
-public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Projection.ProjectionImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.MvPolynomial
 import CCDN.Center.ClosureNormalizationInfinite

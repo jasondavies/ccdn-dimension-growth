@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Projection.ProjectionImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.MvPolynomial

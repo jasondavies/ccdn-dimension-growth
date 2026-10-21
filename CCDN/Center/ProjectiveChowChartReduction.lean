@@ -13,7 +13,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.GeometricProjectiveCurveProjection
 import CCDN.Center.ProjectiveClosureRecovery
 import CCDN.Center.ProjectiveIncidencePermutation
-import CCDN.Center.WeightedHomogeneousTransform
+import CCDN.Algebra.WeightedHomogeneousTransform
 /-! Any projective Chow equation can be moved to a nonempty affine chart
 without changing its block degrees or total degree. The chart has the
 dimension and multiplicity of the projective source. -/

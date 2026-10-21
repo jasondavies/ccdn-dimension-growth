@@ -9,7 +9,7 @@ public import CCDN.Center.ZeroColumnCenterDensity
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Center.CenterMinorProjection
-public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Projection.ProjectionImageFractionField
 import CCDN.Center.ChowProjectionBaseChange
 import CCDN.Center.GeometricProjectionHilbert
 /-! The geometrically disjoint birational-center condition on center matrices. -/

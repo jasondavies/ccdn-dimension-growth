@@ -15,7 +15,7 @@ import CCDN.Center.HomogeneousPermutationBaseChange
 import CCDN.Center.ProjectiveChowEquation
 import CCDN.Center.ProjectiveClosureRecovery
 import CCDN.Center.ProjectiveIncidencePermutation
-import CCDN.Center.WeightedHomogeneousTransform
+import CCDN.Algebra.WeightedHomogeneousTransform
 import CCDN.Hilbert.HomogeneousPrimeComponents
 /-! A geometrically integral homogeneous prime ideal has an incidence equation
 defined over its original coefficient field, without a prescribed chart. -/

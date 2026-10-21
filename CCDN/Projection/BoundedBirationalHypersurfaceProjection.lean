@@ -7,7 +7,7 @@ module
 
 public import CCDN.Projection.BoundedIntegerNormalization
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Projection.ProjectionImageFractionField
 public import CCDN.Curve.CurvePrimitivePair
 import CCDN.Projection.LinearParameterPrimitive
 import CCDN.Projection.LeadingCoordinateExtension

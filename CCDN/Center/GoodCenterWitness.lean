@@ -9,7 +9,7 @@ public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Center.CenterMinorProjection
-public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Projection.ProjectionImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.CenterMinorMatrix
 import CCDN.Center.FixedCoordinateCenterRows

@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.IdealZeroLocus
-public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Projection.ProjectionImageFractionField
 public import CCDN.Curve.CurvePrimitivePair
 public import CCDN.Hilbert.FilteredIntersection
 public import Mathlib.Algebra.MvPolynomial.PDeriv

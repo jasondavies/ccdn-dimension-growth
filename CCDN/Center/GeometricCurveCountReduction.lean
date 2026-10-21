@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveChartIdeal
-public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Projection.ProjectionImageFractionField
 public import CCDN.Projection.DegreePreservingProjectionBox
 import CCDN.Algebra.ProjectiveChartScalarExtension
 import CCDN.Algebra.ScaledHypersurfaceModel

@@ -1870,7 +1870,7 @@
     },
     {
       "id": "e144",
-      "file": "CCDN/Projection/BirationalComplementProjection.lean",
+      "file": "CCDN/Center/BirationalComplementProjection.lean",
       "declaration": "CCDN.BirationalComplementProjection"
     },
     {

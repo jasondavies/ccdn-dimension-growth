@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Projection.ProjectionImageFractionField
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Hypersurface.SmallOutsidePoint

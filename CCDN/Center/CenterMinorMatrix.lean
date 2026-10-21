@@ -7,7 +7,7 @@ module
 
 public import CCDN.Center.CenterMinorProjection
 public import CCDN.Center.ChowLinearSpecialization
-public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Projection.ProjectionImageFractionField
 public import Mathlib.Tactic.Continuity
 import CCDN.Center.MatrixProjectionFields
 /-! Enumerating the maximal-minor coordinates turns the source's

@@ -12,7 +12,7 @@ import CCDN.Center.ChowPolynomialPower
 import CCDN.Center.ChowProjectionPower
 import CCDN.Center.ChowRowSymmetry
 import CCDN.Center.ProjectiveChowWithoutChart
-import CCDN.Center.WeightedHomogeneousEvaluation
+import CCDN.Algebra.WeightedHomogeneousEvaluation
 import CCDN.Projection.IntegralProjectionHilbert
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 /-! Projection restrictions without chosen charts. A disjoint center preserves

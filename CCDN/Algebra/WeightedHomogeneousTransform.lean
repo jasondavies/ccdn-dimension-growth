@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
-import CCDN.Center.WeightedPolynomialSubstitution
+import CCDN.Algebra.WeightedPolynomialSubstitution
 /-! Weight-preserving substitutions preserve weighted homogeneity. -/
 
 @[expose] public section

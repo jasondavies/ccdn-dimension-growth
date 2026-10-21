@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
-import CCDN.Center.WeightedPolynomialTop
+import CCDN.Algebra.WeightedPolynomialTop
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 
 /-! A coprime Newton edge forces irreducibility over every field.
