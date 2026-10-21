@@ -5,9 +5,9 @@
 """
 import argparse
 import sys
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+from common import ROOT, library_module_paths, module_name
+
 TARGET = ROOT / "CCDN.lean"
 HEADER = """/-
 Copyright (c) 2026 Jason Davies. All rights reserved.
@@ -37,10 +37,7 @@ from this library.
 
 
 def render() -> str:
-    modules = sorted(
-        ".".join(path.relative_to(ROOT).with_suffix("").parts)
-        for path in (ROOT / "CCDN").rglob("*.lean")
-    )
+    modules = sorted(module_name(path) for path in library_module_paths())
     imports = "".join(f"public import {module}\n" for module in modules)
     return HEADER + "module\n\n" + imports + "\n" + DOC
 

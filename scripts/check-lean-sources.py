@@ -1,11 +1,17 @@
 #!/usr/bin/env python3
-"""Check source requirements before builds; full Palomar verification is still required.
+"""Check the Lean source requirements that Palomar enforces, before building.
 
-Scanner functions follow PalomarSubmission/scripts/source_requirements.py.
+Every `.lean` file must be a regular UTF-8 file (not a symbolic link), start with the `module`
+header keyword (lakefile.lean excepted) and have at most 10,000 lines. The scanner functions
+follow PalomarSubmission/scripts/source_requirements.py; passing this check does not replace
+Palomar's own verification.
 """
+import argparse
 import os
 import re
 from pathlib import Path
+
+from common import ROOT
 
 COMMENT_MARKER = re.compile(r"/-|-/")
 # Lean 4 Init/Meta/Defs.lean identifier characters; Python Unicode classes
@@ -25,7 +31,6 @@ def has_module_header(text: str) -> bool:
 
     Documentation comments are commands, not header whitespace. Do not strip a
     BOM or arbitrary Unicode whitespace: Lean's header parser does not either.
-    This cheap check precedes installation; execute confirms with --deps-json.
     """
     index = 0
     while index < len(text):
@@ -60,16 +65,17 @@ def physical_lines(text: str) -> int:
 
 
 def lean_source_files(root: Path) -> list[Path]:
-    """Lean source paths, including contained projects and symlinks to reject.
+    """Lean source paths below `root`, including symbolic links (which are rejected).
 
-    Lake configuration shares the line cap, but is exempt from module headers.
-    Never traverse symlinks or Git internals.
+    Never traverse symlinked directories, Git internals, Lake build directories or nested Git
+    checkouts (such as worktrees kept inside the repository).
     """
     files = []
     for directory, subdirectories, names in os.walk(root, followlinks=False):
         subdirectories[:] = sorted(
             name for name in subdirectories
             if name not in {".git", ".lake"} and not (Path(directory) / name).is_symlink()
+            and not (Path(directory) / name / ".git").exists()
         )
         for name in sorted(names):
             path = Path(directory) / name
@@ -79,9 +85,11 @@ def lean_source_files(root: Path) -> list[Path]:
 
 
 def main() -> int:
-    root = Path(__file__).resolve().parents[1]
+    argparse.ArgumentParser(description=__doc__.splitlines()[0]).parse_args()
+    root = ROOT
     failed = False
-    for path in lean_source_files(root):
+    files = lean_source_files(root)
+    for path in files:
         relative = path.relative_to(root)
         if path.is_symlink():
             print(f"{relative}: must be a regular Lean file, not a symbolic link")
@@ -99,6 +107,9 @@ def main() -> int:
         if physical_lines(text) > 10_000:
             print(f"{relative}: exceeds 10,000 lines; split into smaller modules")
             failed = True
+    if not failed:
+        print(f"Lean sources: {len(files)} files have module headers, are UTF-8 and are under "
+              "10,000 lines.")
     return int(failed)
 
 
