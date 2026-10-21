@@ -86,14 +86,15 @@ corrected form, which the main results use.
 * **In the proof of Proposition 4.2.1, `b(F₁) = b(f)` fails.** Definition 3.2.1 does not
   count a prime at which the affine `f` drops degree. For `f = 439x₁² + x₂` (`d = 2`, and
   `27d⁴ = 432 < 439`), every reduction of `f` is absolutely irreducible because it is linear
-  in `x₂`, so `b(f) = 1`. Its homogenization `F₁ = 439x₁² + x₂x₃` reduces to `x₂x₃` modulo
+  in `x₂`, so `b(f) = 1`. Its homogenization `F₁ = 439x₁² + x₀x₂` reduces to `x₀x₂` modulo
   439, so `b(F₁) = 439^(1/439) > 1`. Replacing 439 by a product of many primes above 432 makes
   `b(F₁)/b(f)` unbounded.
+  [`literalAffineBadPrimeFactor_homogenization_ne`,
+  `literalAffineBadPrimeFactor_homogenization_unbounded`]
   The proposition, and Corollary 4.2.4, are nevertheless true as printed: the formalisation
   proves them by working directly in the affine chart
   (`literal_affine_hypersurface_auxiliary`, `literal_affine_plane_coefficient_count_uniform`).
   Defining `b(f)` through the homogenization would also repair the printed argument.
-  (This example was checked by hand; it is not stated in Lean.)
 * **In Lemma 5.2, the strict degree bound fails in dimension `m = 0`, and the printed
   argument does not give it when `m ≥ 1`.** For `m = 0`, geometric irreducibility forces
   `d = 1`, and the bound `< (m+1)²d² = 1` allows only constants. For `X = [1:0:0] ⊂ ℙ²`, the

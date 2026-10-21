@@ -386,6 +386,7 @@ public import CCDN.ClassGroupBound
 public import CCDN.Counterexample.DegreeDependenceObstruction
 public import CCDN.Counterexample.GlobalMixedDegreeDeterminant
 public import CCDN.Counterexample.GridVandermondeCounterexample
+public import CCDN.Counterexample.HomogenizedBadPrimeFactor
 public import CCDN.Counterexample.MixedDegreeProjectiveExample
 public import CCDN.Counterexample.OriginProjectivePoint
 public import CCDN.Counterexample.RowSeparatorCounterexample

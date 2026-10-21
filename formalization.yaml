@@ -156,7 +156,7 @@ fidelity:
     Corollaries 2.5 and 2.9 and Propositions 2.6 and 3.2.6 need a common homogeneous degree
     within each evaluation matrix; the literal varying-degree 3.2.6 is formally
     refuted. In 4.2.1 the printed equality of affine and homogeneous bad-prime
-    factors fails (counterexample 439x²+y), and the literal conclusion is proved
+    factors fails (formal counterexample 439x²+y), and the literal conclusion is proved
     by another route. In Lemma 5.2 the strict bound for m=0, d=1 is refuted and
     replaced by ≤ 1; the positive-dimensional bound uses a derivative-resultant
     detector rather than the printed Noether-composition calculation. In 5.4,

@@ -34,16 +34,16 @@
     "method": "Statement-scope review retained through the maintainability refactor (namespace rename, topic directories, declaration renames and deduplication). scripts/audit-evidence.py verifies every evidence location and hash; the full build, axiom audit and sandboxed Comparator with all three kernels pass.",
     "evidence_file_hashes": "matched_canonical_checkout",
     "evidence_declarations": "located_in_canonical_source",
-    "recorded_hash_comparisons": 207,
-    "declaration_reference_checks": 219,
-    "unique_evidence_declarations": 198,
-    "unique_evidence_files": 137,
+    "recorded_hash_comparisons": 209,
+    "declaration_reference_checks": 221,
+    "unique_evidence_declarations": 200,
+    "unique_evidence_files": 138,
     "errors": [],
     "command": "bash scripts/check.sh",
     "reachable_modules": 875,
     "vendor_source_hashes": 26,
     "build_jobs": 9984,
-    "project_declarations_audited": 4620,
+    "project_declarations_audited": 4641,
     "vendor_declarations_audited": 582,
     "allowed_axioms": [
       "propext",
@@ -110,7 +110,7 @@
     },
     {
       "requirement_id": "4.2.1",
-      "text": "Printed intermediate equality of literal affine and homogeneous bad-prime factors fails; chart determinant proof supplies the literal conclusion independently. Existing docs/affine-factor-audit.txt records example 439*x^2+y."
+      "text": "Printed intermediate equality of literal affine and homogeneous bad-prime factors fails; chart determinant proof supplies the literal conclusion independently. CCDN/Counterexample/HomogenizedBadPrimeFactor.lean refutes the equality formally: for 439*x^2+y the literal factor is 1 while that of its homogenization is 439^(1/439), and products of primes above 432 make the ratio unbounded."
     },
     {
       "requirement_id": "4.2.4",
@@ -742,12 +742,14 @@
       "requirement": "Actual proper integer auxiliary with complete printed degree expression, literal affine b(f), original leading homogeneous coefficient height, all primitive irreducible f and B>=1.",
       "statement_status": "corrected_statement_matched",
       "scope": "n+2-variable indexing covers every source n>0. Expression has exact minimum, B^(1/d^(1/(n+1))), coefficient denominator exponent 1/((n+1)*d*d^(1/(n+1))), plus the two printed terms. g is nonzero, integer, not divisible by f, and vanishes at every bounded integer zero. Constant is dimension-only.",
-      "correction": "Printed intermediate equality of literal affine and homogeneous bad-prime factors fails; chart determinant proof supplies the literal conclusion independently. Existing docs/affine-factor-audit.txt records example 439*x^2+y.",
+      "correction": "Printed intermediate equality of literal affine and homogeneous bad-prime factors fails; chart determinant proof supplies the literal conclusion independently. CCDN/Counterexample/HomogenizedBadPrimeFactor.lean refutes the equality formally: for 439*x^2+y the literal factor is 1 while that of its homogenization is 439^(1/439), and products of primes above 432 make the ratio unbounded.",
       "evidence_refs": [
         "e108",
         "e109",
         "e110",
-        "e030"
+        "e030",
+        "e199",
+        "e200"
       ]
     },
     {
@@ -2844,6 +2846,22 @@
       "line": 21,
       "kind": "theorem",
       "sha256": "a5cfa563050266f3374418345c50e905ba3c40f001c548cdc5fc3709379becf0"
+    },
+    {
+      "id": "e199",
+      "file": "CCDN/Counterexample/HomogenizedBadPrimeFactor.lean",
+      "declaration": "CCDN.literalAffineBadPrimeFactor_homogenization_ne",
+      "line": 171,
+      "kind": "theorem",
+      "sha256": "e94d3c083aa7465702ec5fe8855639b17e32936bd9c3d52e98c159fea58964b1"
+    },
+    {
+      "id": "e200",
+      "file": "CCDN/Counterexample/HomogenizedBadPrimeFactor.lean",
+      "declaration": "CCDN.literalAffineBadPrimeFactor_homogenization_unbounded",
+      "line": 187,
+      "kind": "theorem",
+      "sha256": "e94d3c083aa7465702ec5fe8855639b17e32936bd9c3d52e98c159fea58964b1"
     }
   ]
 }
