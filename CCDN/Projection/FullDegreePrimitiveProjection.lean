@@ -9,7 +9,7 @@ public import CCDN.Curve.CurvePrimitivePair
 public import CCDN.Hilbert.FilteredIntersection
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import Mathlib.RingTheory.SimpleRing.Principal
-import CCDN.Curve.CurveParameterFullDegree
+import CCDN.Projection.CurveParameterFullDegree
 import CCDN.Height.BoundedPrimitiveElement
 import CCDN.Projection.PlaneProjectionKernel
 import CCDN.Projection.ProjectionFieldDegree

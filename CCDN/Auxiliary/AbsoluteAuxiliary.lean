@@ -11,7 +11,7 @@ public import CCDN.Algebra.ProjectiveTranslation
 import CCDN.Auxiliary.HypersurfaceAuxiliaryScaling
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Auxiliary.HypersurfacePositionHeight
-import CCDN.Plane.HypersurfaceShearInvariance
+import CCDN.Auxiliary.HypersurfaceShearInvariance
 /-! The coefficient-sensitive auxiliary theorem for arbitrary absolutely
 irreducible homogeneous equations in arbitrary coordinates.
 

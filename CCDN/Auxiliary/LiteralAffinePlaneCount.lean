@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.AffinePlaneCoefficientCount
+public import CCDN.Auxiliary.AffinePlaneCoefficientCount
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees

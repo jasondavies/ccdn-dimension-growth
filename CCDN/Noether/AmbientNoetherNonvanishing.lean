@@ -7,7 +7,7 @@ module
 
 public import CCDN.Noether.AmbientNoetherForms
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-import CCDN.Determinant.UniversalPlaneEulerMinorCharZero
+import CCDN.Noether.UniversalPlaneEulerMinorCharZero
 import CCDN.Noether.AmbientNoetherVanishing
 /-! Characteristic-zero nonvanishing of the ambient integer
 coefficient forms, descended from the algebraic closure. -/

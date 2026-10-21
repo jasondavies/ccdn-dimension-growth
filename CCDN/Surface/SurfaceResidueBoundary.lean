@@ -6,11 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceCongruenceFamily
-public import CCDN.Curve.SurfaceCurve
+public import CCDN.Surface.SurfaceCurve
 public import CCDN.Surface.CongruencePrimeWindow
 public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Auxiliary.PlaneAuxiliaryCount
-import CCDN.Determinant.ResidueSubsetBoundary
+import CCDN.Surface.ResidueSubsetBoundary
 import CCDN.Surface.SmoothPrimeWindow
 import CCDN.Surface.SurfaceCurveCrossing
 /-! A nonsingular point on a large-degree initial curve must cross a

@@ -13,7 +13,7 @@ import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Algebra.RowSpan
 import CCDN.Auxiliary.AuxiliaryPolynomial
-import CCDN.Auxiliary.Nondivisibility
+import CCDN.Determinant.Nondivisibility
 import CCDN.Determinant.Determinant
 /-! The exact-rank Bombieri--Vaaler comparison when no integral auxiliary
 polynomial exists. This is the finite-matrix step of CCDN §3.3. -/

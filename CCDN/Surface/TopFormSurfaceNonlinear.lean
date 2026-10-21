@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.SurfaceCurve
+public import CCDN.Surface.SurfaceCurve
 public import CCDN.Surface.TopFormAuxiliary
 import CCDN.Surface.SurfaceNonlinearCount
 import CCDN.Surface.TopFormSurfaceComponents

@@ -12,7 +12,7 @@ public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.RingTheory.Ideal.Height
 import CCDN.Algebra.PolynomialLinearDescent
-import CCDN.Curve.CurveBoxDegreeBound
+import CCDN.Hypersurface.CurveBoxDegreeBound
 import CCDN.Hypersurface.NonabsolutePlaneCount
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import CCDN.ForMathlib.MvPolynomial

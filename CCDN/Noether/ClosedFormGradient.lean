@@ -8,8 +8,8 @@ module
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateClosedForms
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
-import CCDN.Determinant.DifferentialResidue
-import CCDN.Determinant.SimpleRootResidue
+import CCDN.Noether.DifferentialResidue
+import CCDN.Noether.SimpleRootResidue
 import CCDN.ForMathlib.Polynomial
 import CCDN.Noether.SeparableRootDifferential
 import Mathlib.RingTheory.Polynomial.IsIntegral

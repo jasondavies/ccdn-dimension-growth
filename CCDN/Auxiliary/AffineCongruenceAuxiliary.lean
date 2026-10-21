@@ -11,7 +11,7 @@ public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Auxiliary.AffineCongruenceHeight
 public import CCDN.Height.CountingHypotheses
 import CCDN.Auxiliary.StandardMonomialAuxiliary
-import CCDN.Determinant.WeightedMonomialDeterminant
+import CCDN.Auxiliary.WeightedMonomialDeterminant
 import all ArithmeticHeights.BombieriVaaler
 
 /-! Auxiliary polynomials from the competing congruence determinant

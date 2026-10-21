@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredPrimeDecomposition
-public import CCDN.Curve.SurfaceCurve
+public import CCDN.Surface.SurfaceCurve
 import CCDN.Hilbert.FilteredComponentDegreeBudget
 import CCDN.Hilbert.FilteredLinearGrowth
 import CCDN.Hilbert.PrimeComponentTranscendence

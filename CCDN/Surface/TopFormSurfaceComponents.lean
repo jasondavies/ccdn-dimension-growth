@@ -7,7 +7,7 @@ module
 
 public import CCDN.Surface.TopFormAuxiliary
 public import CCDN.Hilbert.FilteredPrimeDecomposition
-public import CCDN.Curve.SurfaceCurve
+public import CCDN.Surface.SurfaceCurve
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Surface.CompleteIntersectionDegreeBudget
 import CCDN.Surface.TopFormBadPrimes

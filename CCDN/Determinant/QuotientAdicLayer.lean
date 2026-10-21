@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.NoetherianLocalLayers
+public import CCDN.Algebra.NoetherianLocalLayers
 
 /-! Adic layers in a quotient ring are identified with the corresponding
 images in the single quotient by the sum of the equation ideal and the

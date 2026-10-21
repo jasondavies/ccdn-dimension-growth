@@ -8,7 +8,7 @@ module
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Curve.CurvePrimitivePair
 public import CCDN.Projection.InfinityParameterReduction
-import CCDN.Curve.CurveRationalParameter
+import CCDN.Projection.CurveRationalParameter
 import CCDN.Hilbert.RecurrenceParameterTranscendence
 import CCDN.Projection.BoundedInfinityAvoidance
 import CCDN.Projection.BoundedInfinityParameter

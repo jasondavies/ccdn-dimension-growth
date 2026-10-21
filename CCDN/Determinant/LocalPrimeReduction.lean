@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.NoetherianLocalLayers
+public import CCDN.Algebra.NoetherianLocalLayers
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs

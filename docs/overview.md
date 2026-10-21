@@ -26,7 +26,7 @@ curve in a chart where it is not contained in the hyperplane at infinity. The pr
 count (`Plane/`) and a bounded projection from `ℙⁿ` to `ℙ²`
 (`Projection/ProjectiveProjectionCount.lean`) then give the bound. Points at infinity are
 included, and curves that are irreducible over `ℚ` but split over `ℚ̄` have at most `d² + d`
-rational points (`Hypersurface/ProjectivePlaneNonabsoluteCount.lean`).
+rational points (`Plane/ProjectivePlaneNonabsoluteCount.lean`).
 
 ## Theorem 4: affine hypersurfaces (`AffineHypersurfaceDimensionGrowth.lean`)
 

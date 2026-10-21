@@ -11,8 +11,8 @@ public import CCDN.Auxiliary.AuxiliaryDegreeBound
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Auxiliary.BadPrimeCharge
-import CCDN.Plane.IntegerPlaneWitness
-import CCDN.Plane.IntegerPlaneWitnessHeight
+import CCDN.Auxiliary.IntegerPlaneWitness
+import CCDN.Auxiliary.IntegerPlaneWitnessHeight
 /-! The geometric bad-prime charge in arbitrary dimension is controlled by
 coefficient height, via an explicit integer witness with bounded height. -/
 

@@ -7,7 +7,7 @@ module
 
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
 import CCDN.ForMathlib.SchwartzZippel
-import CCDN.Hypersurface.ProjectivePlaneNonabsoluteCount
+import CCDN.Plane.ProjectivePlaneNonabsoluteCount
 import CCDN.Algebra.PrimitiveNormalization
 
 /-! The elementary linear case completes the uniform plane-equation

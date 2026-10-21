@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.ProjectiveChartSmoothness
+public import CCDN.Surface.ProjectiveChartSmoothness
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Projection.ProjectivePlaneProjection
 import CCDN.Surface.ProjectiveSurfaceSalbergerCover

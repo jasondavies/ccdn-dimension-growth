@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredPrimeDecomposition
-public import CCDN.Curve.SurfaceCurve
+public import CCDN.Surface.SurfaceCurve
 import CCDN.Surface.CompleteIntersectionDegreeBudget
 import CCDN.Hilbert.CompleteIntersectionHeight
 import CCDN.Plane.Bezout

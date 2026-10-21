@@ -9,7 +9,7 @@ public import CCDN.Determinant.HypersurfaceLocalDivisor
 import CCDN.Determinant.BlockDeterminant
 import CCDN.Determinant.HypersurfaceAggregation
 import CCDN.Determinant.InitialFormMultiplication
-import CCDN.Hypersurface.HypersurfaceCountNormalization
+import CCDN.Determinant.HypersurfaceCountNormalization
 import CCDN.Hypersurface.ProjectiveHypersurfaceCount
 import Mathlib.Tactic.Monotonicity.Lemmas
 /-! Sharp determinant divisibility on an open part of a reduced hypersurface.
