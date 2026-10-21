@@ -31,7 +31,7 @@
   ],
   "validation": {
     "status": "passed",
-    "method": "Existing statement-scope review retained under the namespace-only transformation. All 909 library source files were checked against the previous files after replacing the old name. Evidence hashes and declaration locations were verified, then the full canonical build and axiom audit passed. The nine submission statements separately passed the sandboxed Comparator with all three kernels.",
+    "method": "Statement-scope review retained through the maintainability refactor (namespace rename, topic directories, declaration renames and deduplication). scripts/audit-evidence.py verifies every evidence location and hash; the full build, axiom audit and sandboxed Comparator with all three kernels pass.",
     "evidence_file_hashes": "matched_canonical_checkout",
     "evidence_declarations": "located_in_canonical_source",
     "recorded_hash_comparisons": 207,
@@ -40,22 +40,21 @@
     "unique_evidence_files": 137,
     "errors": [],
     "command": "bash scripts/check.sh",
-    "reachable_modules": 934,
-    "vendor_source_hashes": 25,
+    "reachable_modules": 875,
+    "vendor_source_hashes": 26,
     "build_jobs": 9984,
-    "project_declarations_audited": 5093,
-    "vendor_declarations_audited": 555,
+    "project_declarations_audited": 4620,
+    "vendor_declarations_audited": 582,
     "allowed_axioms": [
       "propext",
       "Classical.choice",
       "Quot.sound"
     ],
-    "date": "2026-10-20",
+    "date": "2026-10-21",
     "source_inventory_sha256": "44a2869d4ccf7dab2249ff41a58a3327b0e91467befedf70e5465b5702c70809",
     "namespace_rename": {
       "library_namespace": "CCDN",
       "submission_namespace": "CCDN.Submission",
-      "build_jobs": 9987,
       "source_files_renamed": 909,
       "comparator_theorems": 9,
       "comparator_kernels": [
@@ -63,8 +62,8 @@
         "NanoDa",
         "con-ron"
       ],
-      "challenge_sha256": "7beec4817b5eb0d4278ead9a056c60425a4219447c292831e236d6b43562afd6",
-      "solution_sha256": "fab0984e9d2f3c33c243f08ae5adcaa6a7a5a457db2b4a41043013905b7f5c4a",
+      "challenge_sha256": "b5a76f3d4bb061e44478fb727660b5bff6bd7d98bddc0a96064100cfc4d1611d",
+      "solution_sha256": "d5b55e0d1cd8a95b24659d4b6a624d81eb3d6f2543dc5631f4a30e90e427857b",
       "comparator_config_sha256": "e56ab07f02a242f08c3d3895d52778510f45ae25ed5b49bf467dbf8cb0cf5afe"
     }
   },
