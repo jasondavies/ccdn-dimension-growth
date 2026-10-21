@@ -45,7 +45,7 @@ lemma bivariateMap_coefficientDerivative {R S : Type*} [CommRing R] [CommRing S]
   intro i
   simp [bivariateMap, Polynomial.derivative_map]
 
-lemma bivariateMap_gridPolynomial {R S : Type*} [CommRing R] [CommRing S]
+private lemma bivariateMap_gridPolynomial {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (d : ℕ) (v : BivariateGrid d → R) :
     bivariateMap φ (bivariateGridPolynomial R d v) =
       bivariateGridPolynomial S d (fun i => φ (v i)) := by
@@ -127,7 +127,7 @@ theorem bivariateGridPolynomial_reconstruct {R : Type*} [CommRing R]
   · rw [bivariateGridPolynomial_coeff_zero d _ i j (Or.inl (by omega)), hf i j (Or.inl (by omega))]
 
 /-- Every pair supported on the grid comes from a coefficient vector. -/
-theorem exists_closedFormPair_of_grid {R : Type*} [CommRing R]
+private theorem exists_closedFormPair_of_grid {R : Type*} [CommRing R]
     (d : ℕ) (u : R[X][X] × R[X][X]) (hp : InBivariateGrid d u.1)
     (hq : InBivariateGrid d u.2) :
     ∃ v, closedFormPair R d v = u := by

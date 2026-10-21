@@ -21,12 +21,12 @@ series root. Newton iteration and coefficient stabilization prove existence. -/
 namespace CCDN
 noncomputable section
 
-def formalNewtonSequence {K : Type*} [Field K]
+private def formalNewtonSequence {K : Type*} [Field K]
     (f : Polynomial (PowerSeries K)) (b u : K) : ℕ → PowerSeries K
   | 0 => PowerSeries.C b
   | n + 1 => formalNewtonSequence f b u n - PowerSeries.C u * f.eval (formalNewtonSequence f b u n)
 
-lemma formalNewton_step {K : Type*} [Field K]
+private lemma formalNewton_step {K : Type*} [Field K]
     (f : Polynomial (PowerSeries K)) (b u : K)
     (hu : u * (f.derivative.map PowerSeries.constantCoeff).eval b = 1)
     (g : PowerSeries K) (hg : PowerSeries.constantCoeff g = b)
@@ -56,7 +56,7 @@ lemma formalNewton_step {K : Type*} [Field K]
   rw [heq, pow_succ]
   exact mul_dvd_mul hfg hbracket
 
-lemma formalNewton_precision {K : Type*} [Field K]
+private lemma formalNewton_precision {K : Type*} [Field K]
     (f : Polynomial (PowerSeries K)) (b u : K)
     (hroot : (f.map PowerSeries.constantCoeff).eval b = 0)
     (hu : u * (f.derivative.map PowerSeries.constantCoeff).eval b = 1) (n : ℕ) :
@@ -74,7 +74,7 @@ lemma formalNewton_precision {K : Type*} [Field K]
       simp only [formalNewtonSequence, map_sub, map_mul, PowerSeries.constantCoeff_C,
         ← Polynomial.eval_map_apply, ih.1, hroot, mul_zero, sub_zero]
 
-lemma formalNewton_stabilizes {K : Type*} [Field K]
+private lemma formalNewton_stabilizes {K : Type*} [Field K]
     (f : Polynomial (PowerSeries K)) (b u : K)
     (hroot : (f.map PowerSeries.constantCoeff).eval b = 0)
     (hu : u * (f.derivative.map PowerSeries.constantCoeff).eval b = 1)

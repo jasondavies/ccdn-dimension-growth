@@ -25,21 +25,21 @@ def eulerBivariatePair (R : Type*) [CommRing R] (k : ℕ) :
   ((bivariatePolynomialEquiv R).toLinearMap.prodMap
     (bivariatePolynomialEquiv R).toLinearMap).comp (eulerPairCoordinates R k)
 
-lemma eulerBivariatePair_fst_degree {R : Type*} [CommRing R] (k : ℕ)
+private lemma eulerBivariatePair_fst_degree {R : Type*} [CommRing R] (k : ℕ)
     (u : EulerPairSpace R k) : bivariateTotalDegree (eulerBivariatePair R k u).1 ≤ k + 1 := by
   change ((bivariatePolynomialEquiv R).symm
     (bivariatePolynomialEquiv R (eulerPairCoordinates R k u).1)).totalDegree ≤ _
   rw [AlgEquiv.symm_apply_apply]
   exact eulerPairCoordinates_fst_degree k u
 
-lemma eulerBivariatePair_snd_degree {R : Type*} [CommRing R] (k : ℕ)
+private lemma eulerBivariatePair_snd_degree {R : Type*} [CommRing R] (k : ℕ)
     (u : EulerPairSpace R k) : bivariateTotalDegree (eulerBivariatePair R k u).2 ≤ k + 1 := by
   change ((bivariatePolynomialEquiv R).symm
     (bivariatePolynomialEquiv R (eulerPairCoordinates R k u).2)).totalDegree ≤ _
   rw [AlgEquiv.symm_apply_apply]
   exact eulerPairCoordinates_snd_degree k u
 
-lemma eulerBivariatePair_contraction_degree {R : Type*} [CommRing R] (k : ℕ)
+private lemma eulerBivariatePair_contraction_degree {R : Type*} [CommRing R] (k : ℕ)
     (u : EulerPairSpace R k) :
     bivariateTotalDegree (bivariateEulerContraction R (eulerBivariatePair R k u)) ≤ k + 1 := by
   simp only [bivariateEulerContraction, eulerBivariatePair, LinearMap.comp_apply,
@@ -50,7 +50,7 @@ lemma eulerBivariatePair_contraction_degree {R : Type*} [CommRing R] (k : ℕ)
   rw [AlgEquiv.symm_apply_apply]
   exact eulerPairCoordinates_contraction_degree k u
 
-lemma eulerBivariatePair_injective {F : Type*} [Field F] (k : ℕ) :
+private lemma eulerBivariatePair_injective {F : Type*} [Field F] (k : ℕ) :
     Function.Injective (eulerBivariatePair F k) := by
   intro u v huv
   apply eulerPairCoordinates_injective k
@@ -67,7 +67,7 @@ def eulerClosedFormOperator {R : Type*} [CommRing R] (k : ℕ) (f : R[X][X]) :
 
 /-- The Euler constraint removes the only characteristic-zero closed-form
 kernel, so the restricted operator is injective. -/
-theorem eulerClosedFormOperator_injective {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
+private theorem eulerClosedFormOperator_injective {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (k : ℕ) (f : F[X][X]) (hf : Irreducible f) (hm : f.Monic)
     (hdeg : f.natDegree = k + 2) : Function.Injective (eulerClosedFormOperator k f) := by
   have hzero : ∀ u, eulerClosedFormOperator k f u = 0 → u = 0 := by

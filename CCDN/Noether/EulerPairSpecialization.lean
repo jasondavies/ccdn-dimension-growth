@@ -32,7 +32,7 @@ lemma eulerPairCoordinates_basis_radial {R : Type*} [CommRing R] (k : ℕ) (i : 
         -(X 0 * monomial ((degreeEqEquivSym (Fin 2) k).symm i).val 1)) := by
   simp [eulerPairCoordinates, eulerPairBasis, Basis.prod_apply, eulerTopBasis_apply]
 
-lemma eulerPairCoordinates_basis_map {R S : Type*} [CommRing R] [CommRing S]
+private lemma eulerPairCoordinates_basis_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (k : ℕ) (i : EulerColumns k) :
     (map φ (eulerPairCoordinates R k (eulerPairBasis R k i)).1,
       map φ (eulerPairCoordinates R k (eulerPairBasis R k i)).2) =
@@ -45,7 +45,7 @@ lemma eulerPairCoordinates_basis_map {R S : Type*} [CommRing R] [CommRing S]
   · rw [eulerPairCoordinates_basis_radial, eulerPairCoordinates_basis_radial]
     simp
 
-lemma eulerBivariatePair_basis_map {R S : Type*} [CommRing R] [CommRing S]
+private lemma eulerBivariatePair_basis_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (k : ℕ) (i : EulerColumns k) :
     (bivariateMap φ (eulerBivariatePair R k (eulerPairBasis R k i)).1,
       bivariateMap φ (eulerBivariatePair R k (eulerPairBasis R k i)).2) =

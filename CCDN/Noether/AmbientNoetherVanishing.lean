@@ -22,7 +22,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma universalPlanePolynomial_mul {R σ : Type*} [CommRing R]
+private lemma universalPlanePolynomial_mul {R σ : Type*} [CommRing R]
     (g h : MvPolynomial σ R) :
     universalPlanePolynomial (g * h) = universalPlanePolynomial g * universalPlanePolynomial h := by
   simp only [universalPlanePolynomial, map_mul]
@@ -45,7 +45,7 @@ theorem ambientEuler_minor_eq_zero_of_product {R σ : Type*} [CommRing R]
 
 /-- Reducibility forces the entire parameter determinant to vanish,
 including the zero homogeneous equation. -/
-theorem ambientEuler_minor_eq_zero_of_not_irreducible {K σ : Type*} [Field K]
+private theorem ambientEuler_minor_eq_zero_of_not_irreducible {K σ : Type*} [Field K]
     (k : ℕ) (f : MvPolynomial σ K) (hf : f.IsHomogeneous (k + 2))
     (hred : ¬Irreducible f)
     (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)

@@ -38,17 +38,17 @@ lemma eulerPolynomialFromCoefficients_degree {R : Type*} [CommRing R]
   rw [AlgEquiv.symm_apply_apply]
   exact (MvPolynomial.mem_restrictTotalDegree _ _ _).mp u.property
 
-lemma eulerPolynomialFromCoefficients_data {R : Type*} [CommRing R]
+private lemma eulerPolynomialFromCoefficients_data {R : Type*} [CommRing R]
     (d : ℕ) (f : R[X][X]) (hf : bivariateTotalDegree f ≤ d) :
     eulerPolynomialFromCoefficients d (eulerCoefficientData d f) = f :=
   eulerCoefficientData_reconstruct d f hf
 
-lemma bivariateMap_smul {R S : Type*} [CommRing R] [CommRing S]
+private lemma bivariateMap_smul {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (a : R) (f : R[X][X]) :
     bivariateMap φ (a • f) = φ a • bivariateMap φ f := by
   simp [bivariate_smul_eq_constant_mul, bivariateMap]
 
-lemma eulerPolynomialFromCoefficients_map {R S : Type*} [CommRing R] [CommRing S]
+private lemma eulerPolynomialFromCoefficients_map {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (d : ℕ) (c : EulerLowIndex d → R) :
     bivariateMap φ (eulerPolynomialFromCoefficients d c) =
       eulerPolynomialFromCoefficients d (φ ∘ c) := by
@@ -100,7 +100,7 @@ lemma eulerFactorPair_map {R S : Type*} [CommRing R] [CommRing S]
   simp only [eulerFactorPair, map_sub, bivariateMap_smul, map_natCast, map_mul,
     bivariateMap_derivative, bivariateMap_coefficientDerivative]
 
-lemma bivariateTotalDegree_outer_X_pow {R : Type*} [CommRing R] [Nontrivial R] (a : ℕ) :
+private lemma bivariateTotalDegree_outer_X_pow {R : Type*} [CommRing R] [Nontrivial R] (a : ℕ) :
     bivariateTotalDegree (X ^ a : R[X][X]) = a := by
   have he := bivariatePolynomialEquiv_X_zero (R := R)
   rw [← he, ← map_pow]
@@ -108,7 +108,7 @@ lemma bivariateTotalDegree_outer_X_pow {R : Type*} [CommRing R] [Nontrivial R] (
     (bivariatePolynomialEquiv R (MvPolynomial.X 0 ^ a))).totalDegree = _
   rw [AlgEquiv.symm_apply_apply, MvPolynomial.totalDegree_X_pow]
 
-lemma eulerFactorPair_outer_power_one_ne_zero (a b : ℕ) (ha : 0 < a) (hb : 0 < b) :
+private lemma eulerFactorPair_outer_power_one_ne_zero (a b : ℕ) (ha : 0 < a) (hb : 0 < b) :
     eulerFactorPair a b (X ^ a : ℚ[X][X]) 1 ≠ 0 := by
   intro hh
   have hfst := congrArg Prod.fst hh

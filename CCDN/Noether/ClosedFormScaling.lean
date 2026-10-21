@@ -28,14 +28,14 @@ namespace CCDN
 noncomputable section
 open Polynomial Matrix Submodule
 
-lemma bivariateGridPolynomial_natDegree_lt {R : Type*} [CommRing R] {d : ℕ}
+private lemma bivariateGridPolynomial_natDegree_lt {R : Type*} [CommRing R] {d : ℕ}
     (hd : 0 < d) (v : BivariateGrid d → R) :
     (bivariateGridPolynomial R d v).natDegree < d := by
   by_cases h : bivariateGridPolynomial R d v = 0
   · simpa only [h, natDegree_zero] using hd
   · exact (natDegree_lt_iff_degree_lt h).mpr (bivariateGridPolynomial_degree_lt v)
 
-lemma bivariateGridPolynomial_coefficient_natDegree_le {R : Type*} [CommRing R] {d : ℕ}
+private lemma bivariateGridPolynomial_coefficient_natDegree_le {R : Type*} [CommRing R] {d : ℕ}
     (v : BivariateGrid d → R) (i : ℕ) :
     ((bivariateGridPolynomial R d v).coeff i).natDegree ≤ d := by
   apply natDegree_le_of_degree_le
@@ -46,7 +46,7 @@ lemma bivariateGridPolynomial_coefficient_natDegree_le {R : Type*} [CommRing R] 
 
 /-- For a normalized irreducible equation the entire coefficient kernel
 maps into the one-dimensional span of the gradient. -/
-theorem closedForm_kernel_image_le_gradient
+private theorem closedForm_kernel_image_le_gradient
     {F : Type*} [Field F] [IsAlgClosed F]
     (d : ℕ) (f : F[X][X]) (hf : Irreducible f) (hm : f.Monic) (hdeg : f.degree = d)
     (D : ℕ) (htotal : bivariateTotalDegree f ≤ D) (hchar : CharZeroOrGT F (2 * d * D)) :
@@ -88,7 +88,7 @@ theorem closedForm_kernel_image_le_gradient
 
 /-- No more than one independent coefficient vector solves the closed-form
 matrix for an irreducible normalized equation. -/
-theorem closedForm_kernel_finrank_le_one
+private theorem closedForm_kernel_finrank_le_one
     {F : Type*} [Field F] [IsAlgClosed F]
     (d : ℕ) (f : F[X][X]) (hf : Irreducible f) (hm : f.Monic) (hdeg : f.degree = d)
     (D : ℕ) (htotal : bivariateTotalDegree f ≤ D) (hchar : CharZeroOrGT F (2 * d * D)) :
@@ -145,7 +145,7 @@ lemma closedFormCoefficientMatrix_smul {R : Type*} [CommRing R]
   rw [closedFormOperator_smul_equation, (bivariateCoefficients R).map_smul]
   rfl
 
-lemma closedForm_rank_smul {F : Type*} [Field F] (a : F) (ha : a ≠ 0)
+private lemma closedForm_rank_smul {F : Type*} [Field F] (a : F) (ha : a ≠ 0)
     (d : ℕ) (f : F[X][X]) :
     (closedFormCoefficientMatrix d (a • f)).rank = (closedFormCoefficientMatrix d f).rank := by
   rw [closedFormCoefficientMatrix_smul]

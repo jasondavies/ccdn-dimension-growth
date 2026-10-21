@@ -43,7 +43,7 @@ lemma powerSeries_quotient_powers_independent {K : Type*} [Field K]
 
 /-- If a proper degree-m section vanishes to order N on a formal plane
 branch, then N<=d*m. The parameter map and its equation are maps. -/
-theorem formal_plane_vanishing_order_bound {K : Type*} [Field K]
+private theorem formal_plane_vanishing_order_bound {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] PowerSeries K) (hψ : ψ f = 0)
     (j : Fin 2) (a : K) (hparam : ψ (X j - C a) = PowerSeries.X)
@@ -79,7 +79,7 @@ theorem formal_plane_vanishing_order_bound {K : Type*} [Field K]
   simpa only [Fintype.card_fin] using hh
 
 /-- Jets longer than d*D detect every degree-at-most-D function on the curve. -/
-theorem formal_plane_jet_detects_divisibility {K : Type*} [Field K]
+private theorem formal_plane_jet_detects_divisibility {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] PowerSeries K) (hψ : ψ f = 0)
     (j : Fin 2) (a : K) (hparam : ψ (X j - C a) = PowerSeries.X)
@@ -93,7 +93,7 @@ theorem formal_plane_jet_detects_divisibility {K : Type*} [Field K]
 
 /-- Low-degree independent classes give independent local jets, with the
 explicit length d*D+1 supplied by the preceding local intersection bound. -/
-theorem formal_plane_independent_jets {K ι : Type*} [Field K] [Fintype ι] [DecidableEq ι]
+private theorem formal_plane_independent_jets {K ι : Type*} [Field K] [Fintype ι] [DecidableEq ι]
     (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] PowerSeries K) (hψ : ψ f = 0)
     (j : Fin 2) (a : K) (hparam : ψ (X j - C a) = PowerSeries.X)

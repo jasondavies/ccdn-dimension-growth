@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open Matrix
 
-theorem powerSeries_linearIndependent_map
+private theorem powerSeries_linearIndependent_map
     {K L ι : Type*} [Field K] [Field L] [Algebra K L] [Fintype ι]
     (v : ι → PowerSeries K) (hv : LinearIndependent K v) :
     LinearIndependent L (fun i => PowerSeries.map (algebraMap K L) (v i)) := by

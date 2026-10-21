@@ -25,7 +25,7 @@ lemma homogeneousCoefficientExponent_degree (σ : Type*) [Fintype σ] [Decidable
     (d : ℕ) (i : Sym σ d) : (homogeneousCoefficientExponent σ d i).degree = d :=
   ((degreeEqEquivSym σ d).symm i).property
 
-lemma homogeneousCoefficientExponent_injective (σ : Type*) [Fintype σ] [DecidableEq σ]
+private lemma homogeneousCoefficientExponent_injective (σ : Type*) [Fintype σ] [DecidableEq σ]
     (d : ℕ) : Function.Injective (homogeneousCoefficientExponent σ d) :=
   Subtype.val_injective.comp (degreeEqEquivSym σ d).symm.injective
 

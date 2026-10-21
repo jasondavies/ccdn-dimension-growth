@@ -28,7 +28,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma universalPlaneMap_map {K L σ : Type*} [CommRing K] [CommRing L]
+private lemma universalPlaneMap_map {K L σ : Type*} [CommRing K] [CommRing L]
     (φ : K →+* L) (f : MvPolynomial σ K) :
     universalPlaneMap L σ (MvPolynomial.map φ f) =
       MvPolynomial.map (MvPolynomial.map φ) (universalPlaneMap K σ f) := by
@@ -85,7 +85,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma universalPlanePolynomial_specialize_axis {K σ : Type*} [CommRing K]
+private lemma universalPlanePolynomial_specialize_axis {K σ : Type*} [CommRing K]
     (a b c : σ → K) (f : MvPolynomial σ K) :
     Polynomial.map (Polynomial.evalRingHom 0)
       (bivariateMap (planeParameterEval (RingHom.id K) a b c) (universalPlanePolynomial f)) =
@@ -108,7 +108,7 @@ def universalPlaneLeading {K σ : Type*} [CommRing K] (f : MvPolynomial σ K) :
     MvPolynomial (PlaneParameters σ) K :=
   ((universalPlanePolynomial f).coeff f.totalDegree).coeff 0
 
-lemma universalPlaneLeading_specialize {K σ : Type*} [CommRing K]
+private lemma universalPlaneLeading_specialize {K σ : Type*} [CommRing K]
     (a b c : σ → K) (f : MvPolynomial σ K) :
     planeParameterEval (RingHom.id K) a b c (universalPlaneLeading f) =
       eval b (homogeneousComponent f.totalDegree f) := by
@@ -120,7 +120,7 @@ lemma universalPlaneLeading_specialize {K σ : Type*} [CommRing K]
   rw [← Polynomial.coeff_zero_eq_eval_zero, bivariateMap_coeff] at h
   exact h
 
-lemma universalPlaneLeading_map {K L σ : Type*} [Field K] [Field L]
+private lemma universalPlaneLeading_map {K L σ : Type*} [Field K] [Field L]
     (φ : K →+* L) (f : MvPolynomial σ K) :
     universalPlaneLeading (MvPolynomial.map φ f) = MvPolynomial.map φ (universalPlaneLeading f) := by
   have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree :=

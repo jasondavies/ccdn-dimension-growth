@@ -27,14 +27,14 @@ noncomputable section
 open scoped TensorProduct
 
 /-- Extend a power-series-valued algebra map by scalars. -/
-def formalBranchBaseChange {K L A : Type*} [Field K] [Field L] [Algebra K L]
+private def formalBranchBaseChange {K L A : Type*} [Field K] [Field L] [Algebra K L]
     [CommRing A] [Algebra K A] (ψ : A →ₐ[K] PowerSeries K) :
     L ⊗[K] A →ₐ[L] PowerSeries L :=
   AlgHom.liftEquiv K L A (PowerSeries L)
     ((PowerSeries.mapAlgHom (Algebra.ofId K L)).comp ψ)
 
 /-- Scalar extension of a faithful formal branch is faithful. -/
-theorem formalBranchBaseChange_injective
+private theorem formalBranchBaseChange_injective
     {K L A : Type*} [Field K] [Field L] [Algebra K L]
     [CommRing A] [Algebra K A] (ψ : A →ₐ[K] PowerSeries K)
     (hψ : Function.Injective ψ) :
@@ -48,7 +48,7 @@ theorem formalBranchBaseChange_injective
 
 /-- Any algebra admitting a faithful power-series branch stays a domain under
 an arbitrary extension of its coefficient field. -/
-theorem isDomain_tensor_of_faithful_formal_branch
+private theorem isDomain_tensor_of_faithful_formal_branch
     {K L A : Type*} [Field K] [Field L] [Algebra K L]
     [CommRing A] [Algebra K A] (ψ : A →ₐ[K] PowerSeries K)
     (hψ : Function.Injective ψ) : IsDomain (L ⊗[K] A) :=

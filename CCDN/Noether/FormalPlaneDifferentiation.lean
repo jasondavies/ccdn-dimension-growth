@@ -26,7 +26,7 @@ lemma planeTangent_apply {K : Type*} [CommRing K]
     (f h : MvPolynomial (Fin 2) K) (j : Fin 2) :
     planeTangent f j h = pderiv j.rev f * pderiv j h - pderiv j f * pderiv j.rev h := rfl
 
-lemma powerSeries_plane_chain {K : Type*} [Field K]
+private lemma powerSeries_plane_chain {K : Type*} [Field K]
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] PowerSeries K)
     (h : MvPolynomial (Fin 2) K) (j : Fin 2) :
     PowerSeries.derivative (ψ h) =
@@ -42,7 +42,7 @@ lemma powerSeries_plane_chain {K : Type*} [Field K]
 
 /-- Tangent differentiation becomes a unit times formal differentiation at a
 smooth point whose chosen coordinate is the parameter. -/
-theorem formal_plane_tangent {K : Type*} [Field K]
+private theorem formal_plane_tangent {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K)
     (ψ : MvPolynomial (Fin 2) K →ₐ[K] PowerSeries K) (hψ : ψ f = 0)
     (j : Fin 2) (a : K) (hparam : ψ (X j - C a) = PowerSeries.X)
@@ -59,7 +59,7 @@ theorem formal_plane_tangent {K : Type*} [Field K]
 
 /-- A unit multiple of d/dX detects multiplicity from its successive constant
 terms, as long as the positive integers below the requested order are invertible. -/
-lemma powerSeries_weighted_derivatives_vanishing {K : Type*} [Field K]
+private lemma powerSeries_weighted_derivatives_vanishing {K : Type*} [Field K]
     (u : PowerSeries K) (hu : IsUnit u) (N : ℕ)
     (hchar : ∀ n, 0 < n → n < N → (n : K) ≠ 0)
     (g : PowerSeries K)

@@ -52,7 +52,7 @@ def ambientNoetherForm (σ : Type*) [Fintype σ] [DecidableEq σ]
     (m : PlaneParameters σ →₀ ℕ) : MvPolynomial (Sym σ (k + 2)) ℤ :=
   (ambientNoetherParameterMinor σ k rows cols).coeff m
 
-lemma ambientEulerEntryLinear_coefficientwiseHomogeneous
+private lemma ambientEulerEntryLinear_coefficientwiseHomogeneous
     (σ : Type*) [Fintype σ] [DecidableEq σ] (k : ℕ)
     (row : ℕ × ℕ) (col : EulerColumns k) :
     CoefficientwiseHomogeneous
@@ -77,7 +77,7 @@ theorem ambientNoetherForm_homogeneous (σ : Type*) [Fintype σ] [DecidableEq σ
   exact CoefficientwiseHomogeneous.det _ (fun i j =>
     ambientEulerEntryLinear_coefficientwiseHomogeneous σ k (rows i) (cols j)) m
 
-lemma ambientNoetherParameterMinor_specialize {R σ : Type*} [CommRing R]
+private lemma ambientNoetherParameterMinor_specialize {R σ : Type*} [CommRing R]
     [Fintype σ] [DecidableEq σ]
     (k : ℕ) (f : MvPolynomial σ R) (hf : f.IsHomogeneous (k + 2))
     (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)

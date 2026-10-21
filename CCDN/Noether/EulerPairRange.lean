@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma totalDegree_sub_top_component_le {R σ : Type*} [CommRing R]
+private lemma totalDegree_sub_top_component_le {R σ : Type*} [CommRing R]
     (k : ℕ) (p : MvPolynomial σ R) (hp : p.totalDegree ≤ k + 1) :
     (p - homogeneousComponent (k + 1) p).totalDegree ≤ k := by
   classical
@@ -36,7 +36,7 @@ lemma totalDegree_sub_top_component_le {R σ : Type*} [CommRing R]
 
 /-- Every bounded pair with lower-degree Euler contraction has the unique
 shape `(A+yQ,B-xQ)` used by the coefficient matrix. -/
-theorem exists_eulerPairCoordinates {F : Type*} [Field F]
+private theorem exists_eulerPairCoordinates {F : Type*} [Field F]
     (k : ℕ) (p q : MvPolynomial (Fin 2) F)
     (hp : p.totalDegree ≤ k + 1) (hq : q.totalDegree ≤ k + 1)
     (he : (X 0 * p + X 1 * q).totalDegree ≤ k + 1) :

@@ -32,7 +32,7 @@ def BivariateParameterDegreeBound {K τ : Type*} [CommRing K]
     (f : (MvPolynomial τ K)[X][X]) (D : ℕ) : Prop :=
   ∀ i j, ((f.coeff i).coeff j).totalDegree ≤ D
 
-lemma bivariateParameterDegreeBound_sub {K τ : Type*} [CommRing K]
+private lemma bivariateParameterDegreeBound_sub {K τ : Type*} [CommRing K]
     {f g : (MvPolynomial τ K)[X][X]} {D : ℕ}
     (hf : BivariateParameterDegreeBound f D) (hg : BivariateParameterDegreeBound g D) :
     BivariateParameterDegreeBound (f - g) D := by
@@ -40,7 +40,7 @@ lemma bivariateParameterDegreeBound_sub {K τ : Type*} [CommRing K]
   simp only [coeff_sub]
   exact (MvPolynomial.totalDegree_sub _ _).trans (max_le (hf i j) (hg i j))
 
-lemma bivariateParameterDegreeBound_monomial_mul {K τ : Type*} [CommRing K]
+private lemma bivariateParameterDegreeBound_monomial_mul {K τ : Type*} [CommRing K]
     {f : (MvPolynomial τ K)[X][X]} {D : ℕ}
     (hf : BivariateParameterDegreeBound f D) (a : K) (m n : ℕ) :
     BivariateParameterDegreeBound
@@ -54,7 +54,7 @@ lemma bivariateParameterDegreeBound_monomial_mul {K τ : Type*} [CommRing K]
     · simp
   · simp
 
-lemma bivariateParameterDegreeBound_innerDerivative {K τ : Type*} [CommRing K]
+private lemma bivariateParameterDegreeBound_innerDerivative {K τ : Type*} [CommRing K]
     {f : (MvPolynomial τ K)[X][X]} {D : ℕ}
     (hf : BivariateParameterDegreeBound f D) :
     BivariateParameterDegreeBound ((bivariateCoefficientDerivative _) f) D := by
@@ -64,7 +64,7 @@ lemma bivariateParameterDegreeBound_innerDerivative {K τ : Type*} [CommRing K]
   rw [he]
   exact (MvPolynomial.totalDegree_mul _ _).trans (by simpa only [MvPolynomial.totalDegree_C, Nat.add_zero] using hf i (j+1))
 
-lemma bivariateParameterDegreeBound_outerDerivative {K τ : Type*} [CommRing K]
+private lemma bivariateParameterDegreeBound_outerDerivative {K τ : Type*} [CommRing K]
     {f : (MvPolynomial τ K)[X][X]} {D : ℕ}
     (hf : BivariateParameterDegreeBound f D) :
     BivariateParameterDegreeBound f.derivative D := by
@@ -75,7 +75,7 @@ lemma bivariateParameterDegreeBound_outerDerivative {K τ : Type*} [CommRing K]
   exact (MvPolynomial.totalDegree_mul _ _).trans (by simpa only [MvPolynomial.totalDegree_C, Nat.add_zero] using hf (i+1) j)
 
 /-- Every matrix entry depends linearly on the input polynomial coefficients. -/
-theorem closedFormCoefficientMatrix_parameterDegree {K τ : Type*} [CommRing K]
+private theorem closedFormCoefficientMatrix_parameterDegree {K τ : Type*} [CommRing K]
     (d : ℕ) (f : (MvPolynomial τ K)[X][X]) (D : ℕ)
     (hf : BivariateParameterDegreeBound f D) :
     ∀ i j, (closedFormCoefficientMatrix d f i j).totalDegree ≤ D := by

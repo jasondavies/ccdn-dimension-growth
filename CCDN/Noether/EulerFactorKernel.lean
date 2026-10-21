@@ -17,13 +17,13 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
-lemma bivariateTotalDegree_sub_le {R : Type*} [CommRing R] (f g : R[X][X]) :
+private lemma bivariateTotalDegree_sub_le {R : Type*} [CommRing R] (f g : R[X][X]) :
     bivariateTotalDegree (f - g) ≤ max (bivariateTotalDegree f) (bivariateTotalDegree g) := by
   unfold bivariateTotalDegree
   rw [map_sub]
   exact MvPolynomial.totalDegree_sub _ _
 
-lemma bivariateEuler_gradient_coeff {R : Type*} [CommRing R]
+private lemma bivariateEuler_gradient_coeff {R : Type*} [CommRing R]
     (f : R[X][X]) (i j : ℕ) :
     (((bivariateEulerContraction R
       (f.derivative, (bivariateCoefficientDerivative R) f)).coeff i).coeff j) =
@@ -50,7 +50,7 @@ lemma bivariateEuler_gradient_coeff {R : Type*} [CommRing R]
       push_cast
       ring
 
-lemma bivariateEuler_defect_degree {R : Type*} [CommRing R]
+private lemma bivariateEuler_defect_degree {R : Type*} [CommRing R]
     (d : ℕ) (hd : 0 < d) (f : R[X][X]) (hf : bivariateTotalDegree f ≤ d) :
     bivariateTotalDegree
       (bivariateEulerContraction R (f.derivative, (bivariateCoefficientDerivative R) f) -
@@ -75,7 +75,7 @@ def eulerFactorPair {R : Type*} [CommRing R] (a b : ℕ)
    (b : R) • (h * (bivariateCoefficientDerivative R) g) -
      (a : R) • (g * (bivariateCoefficientDerivative R) h))
 
-lemma eulerFactorPair_contraction {R : Type*} [CommRing R] (a b : ℕ)
+private lemma eulerFactorPair_contraction {R : Type*} [CommRing R] (a b : ℕ)
     (g h : R[X][X]) :
     bivariateEulerContraction R (eulerFactorPair a b g h) =
       (b : R) • (h * (bivariateEulerContraction R
@@ -86,7 +86,7 @@ lemma eulerFactorPair_contraction {R : Type*} [CommRing R] (a b : ℕ)
     bivariate_smul_eq_constant_mul]
   ring
 
-lemma eulerFactorPair_closed {F : Type*} [Field F] (a b : ℕ)
+private lemma eulerFactorPair_closed {F : Type*} [Field F] (a b : ℕ)
     (g h : F[X][X]) :
     closedFormOperator (g * h) (eulerFactorPair a b g h) = 0 := by
   have hg := bivariate_factor_closed_form g h

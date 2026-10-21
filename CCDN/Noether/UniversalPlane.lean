@@ -91,7 +91,7 @@ lemma commAlgEquiv_coeff_coeff {K σ τ : Type*} [CommRing K]
         Finsupp.single_apply, eq_comm]
       split_ifs <;> simp_all [AddMonoidAlgebra.coeff_single]
 
-lemma coefficient_totalDegree_le_commAlgEquiv {K σ τ : Type*} [CommRing K]
+private lemma coefficient_totalDegree_le_commAlgEquiv {K σ τ : Type*} [CommRing K]
     (f : MvPolynomial σ (MvPolynomial τ K)) (m : σ →₀ ℕ) :
     (f.coeff m).totalDegree ≤ (commAlgEquiv K σ τ f).totalDegree := by
   classical
@@ -104,7 +104,7 @@ lemma coefficient_totalDegree_le_commAlgEquiv {K σ τ : Type*} [CommRing K]
   rw [← commAlgEquiv_coeff_coeff, he]
   rfl
 
-lemma universalPlaneMap_comm {K σ : Type*} [CommRing K] (f : MvPolynomial σ K) :
+private lemma universalPlaneMap_comm {K σ : Type*} [CommRing K] (f : MvPolynomial σ K) :
     commAlgEquiv K (Fin 2) (PlaneParameters σ) (universalPlaneMap K σ f) =
       eval₂Hom (C.comp (C : K →+* MvPolynomial (Fin 2) K))
         (fun i => X (i,0) + X (i,1) * C (X 0) + X (i,2) * C (X 1)) f := by
@@ -119,7 +119,7 @@ lemma universalPlaneMap_comm {K σ : Type*} [CommRing K] (f : MvPolynomial σ K)
       simp [universalPlaneMap]
   exact RingHom.congr_fun he f
 
-lemma universalPlaneMap_parameterDegree_le {K σ : Type*} [CommRing K]
+private lemma universalPlaneMap_parameterDegree_le {K σ : Type*} [CommRing K]
     (f : MvPolynomial σ K) :
     (commAlgEquiv K (Fin 2) (PlaneParameters σ) (universalPlaneMap K σ f)).totalDegree ≤
       f.totalDegree := by

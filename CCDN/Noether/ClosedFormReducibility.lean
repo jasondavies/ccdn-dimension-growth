@@ -29,7 +29,7 @@ noncomputable section
 open Polynomial
 
 /-- A bounded extra solution outside the scalar gradient span forces rank drop. -/
-theorem closedForm_rank_drop_of_extra_form {F : Type*} [Field F]
+private theorem closedForm_rank_drop_of_extra_form {F : Type*} [Field F]
     (d : ℕ) (hd : 0 < d) (f p q : F[X][X])
     (hf : bivariateTotalDegree f ≤ d) (hf' : f.derivative ≠ 0)
     (hp : InBivariateGrid d p) (hq : InBivariateGrid d q)
@@ -51,7 +51,7 @@ theorem closedForm_rank_drop_of_extra_form {F : Type*} [Field F]
 
 /-- A nontrivial coprime product gives two independent bounded closed forms,
 and hence the required matrix rank drop. -/
-theorem closedForm_rank_drop_of_coprime_factors
+private theorem closedForm_rank_drop_of_coprime_factors
     {F : Type*} [Field F] (d : ℕ) (hd : 0 < d)
     (hchar : CharZeroOrGT F d)
     (g h : F[X][X]) (hg : Irreducible g) (hgm : g.Monic)
@@ -93,7 +93,7 @@ theorem closedForm_rank_drop_of_coprime_factors
 
 /-- Repeated irreducible factors of every multiplicity at least two likewise
 force rank drop; the whole equation need not be squarefree. -/
-theorem closedForm_rank_drop_of_repeated_factor
+private theorem closedForm_rank_drop_of_repeated_factor
     {F : Type*} [Field F] (d k : ℕ) (hd : 0 < d)
     (hchar : CharZeroOrGT F d)
     (g h : F[X][X]) (hg : Irreducible g) (hgm : g.Monic) (hh : h ≠ 0)
@@ -140,7 +140,7 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
-lemma exists_monic_bivariate_irreducible_factor {F : Type*} [Field F]
+private lemma exists_monic_bivariate_irreducible_factor {F : Type*} [Field F]
     (f : F[X][X]) (hf : f.Monic) (hu : ¬IsUnit f) :
     ∃ g : F[X][X], Irreducible g ∧ g.Monic ∧ g ∣ f := by
   obtain ⟨r, hr, hrf⟩ := WfDvdMonoid.exists_irreducible_factor hu hf.ne_zero
@@ -159,7 +159,7 @@ lemma exists_monic_bivariate_irreducible_factor {F : Type*} [Field F]
 
 /-- Extract one monic irreducible factor with its full multiplicity; the
 remaining factor is monic and coprime after passage to the fraction field. -/
-lemma exists_monic_bivariate_primary_factor {F : Type*} [Field F]
+private lemma exists_monic_bivariate_primary_factor {F : Type*} [Field F]
     (f : F[X][X]) (hf : f.Monic) (hu : ¬IsUnit f) :
     ∃ (g h : F[X][X]) (m : ℕ), Irreducible g ∧ g.Monic ∧ h.Monic ∧
       0 < m ∧ f = g ^ m * h ∧

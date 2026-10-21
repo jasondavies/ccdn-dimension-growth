@@ -24,7 +24,7 @@ l1 norm at most d^(3d²−3).
 namespace CCDN
 noncomputable section
 
-lemma factorial_mul_degree_pow_le (d r : ℕ) (hr : r ≤ d ^ 2) :
+private lemma factorial_mul_degree_pow_le (d r : ℕ) (hr : r ≤ d ^ 2) :
     r.factorial * d ^ r ≤ d ^ (3 * r) := by
   calc
     r.factorial * d ^ r ≤ r ^ r * d ^ r :=
@@ -43,7 +43,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma ambientEulerEntry_flatten_l1_le (σ : Type*) [Fintype σ] [DecidableEq σ]
+private lemma ambientEulerEntry_flatten_l1_le (σ : Type*) [Fintype σ] [DecidableEq σ]
     (k : ℕ) (row : ℕ × ℕ) (col : EulerColumns k) :
     l1Norm ((sumAlgEquiv ℤ (PlaneParameters σ) (Sym σ (k + 2))).symm
       (ambientEulerEntryLinear _ σ k row col (universalHomogeneousForm σ (k + 2)))) ≤
@@ -60,7 +60,7 @@ lemma ambientEulerEntry_flatten_l1_le (σ : Type*) [Fintype σ] [DecidableEq σ]
         (ambientEulerEntry_monomial_l1_le k _ (homogeneousCoefficientExponent_degree _ _ _) row col)
     _ = _ := by simp
 
-theorem ambientNoetherParameterMinor_flatten_l1_le
+private theorem ambientNoetherParameterMinor_flatten_l1_le
     (σ : Type*) [Fintype σ] [DecidableEq σ]
     (k : ℕ) (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :

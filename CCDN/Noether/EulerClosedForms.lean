@@ -25,7 +25,7 @@ def bivariateEulerContraction (R : Type*) [CommRing R] :
   map_add' u v := by simp only [Prod.fst_add, Prod.snd_add, mul_add]; ring
   map_smul' a u := by simp only [Prod.smul_fst, Prod.smul_snd, mul_smul_comm, smul_add, RingHom.id_apply]
 
-lemma bivariateEulerContraction_gradient_leading {R : Type*} [CommRing R]
+private lemma bivariateEulerContraction_gradient_leading {R : Type*} [CommRing R]
     (f : R[X][X]) (hm : f.Monic) (hd : 0 < f.natDegree) :
     (bivariateEulerContraction R (f.derivative, (bivariateCoefficientDerivative R) f)).coeff
       f.natDegree = (f.natDegree : R[X]) := by

@@ -15,7 +15,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Module
 
-lemma euler_restrict_basis_val {R : Type*} [CommRing R]
+private lemma euler_restrict_basis_val {R : Type*} [CommRing R]
     (S : Set (Fin 2 →₀ ℕ)) (i : S) :
     (basisRestrictSupport R S i).val = monomial i.val 1 := by
   classical
@@ -40,7 +40,7 @@ lemma eulerTopBasis_apply {R : Type*} [CommRing R] (k : ℕ) (i : EulerTopIndex 
   simp only [eulerTopBasis, Basis.map_apply, Basis.reindex_apply]
   exact euler_restrict_basis_val _ _
 
-theorem eulerClosedFormCoefficientMatrix_rank
+private theorem eulerClosedFormCoefficientMatrix_rank
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
     (k : ℕ) (f : Polynomial (Polynomial F)) (hf : Irreducible f)
     (a : F) (ha : a ≠ 0) (hl : f.leadingCoeff = Polynomial.C a)

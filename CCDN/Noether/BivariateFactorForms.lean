@@ -32,7 +32,7 @@ theorem bivariate_factor_closed_form {F : Type*} [Field F] (g h : F[X][X]) :
   ring
 
 /-- A repeated factor gives the closed form dg/g², after clearing f=g²h. -/
-theorem bivariate_square_factor_closed_form {F : Type*} [Field F] (g h : F[X][X]) :
+private theorem bivariate_square_factor_closed_form {F : Type*} [Field F] (g h : F[X][X]) :
     (bivariateCoefficientDerivative F) (h * g.derivative) * (g ^ 2 * h) -
       (h * g.derivative) * (bivariateCoefficientDerivative F) (g ^ 2 * h) =
     (h * (bivariateCoefficientDerivative F) g).derivative * (g ^ 2 * h) -

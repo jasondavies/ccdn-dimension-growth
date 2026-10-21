@@ -57,7 +57,7 @@ lemma eulerPairCoordinates_snd_degree {R : Type*} [CommRing R] (k : ℕ)
       have hx := (isHomogeneous_X R (0 : Fin 2)).totalDegree_le
       omega)
 
-lemma eulerPairCoordinates_contraction {R : Type*} [CommRing R] (k : ℕ)
+private lemma eulerPairCoordinates_contraction {R : Type*} [CommRing R] (k : ℕ)
     (u : EulerPairSpace R k) :
     X 0 * (eulerPairCoordinates R k u).1 + X 1 * (eulerPairCoordinates R k u).2 =
       X 0 * u.1.val + X 1 * u.2.1.val := by
@@ -77,7 +77,7 @@ lemma eulerPairCoordinates_contraction_degree {R : Type*} [CommRing R] (k : ℕ)
     have hx := (isHomogeneous_X R (1 : Fin 2)).totalDegree_le
     exact (totalDegree_mul _ _).trans (by omega)
 
-lemma eulerPairCoordinates_eq_zero {F : Type*} [Field F] (k : ℕ)
+private lemma eulerPairCoordinates_eq_zero {F : Type*} [Field F] (k : ℕ)
     (u : EulerPairSpace F k) (hu : eulerPairCoordinates F k u = 0) : u = 0 := by
   have hp := congrArg Prod.fst hu
   have hq := congrArg Prod.snd hu

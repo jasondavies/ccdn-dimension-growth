@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Module
 
-lemma eulerLowBasis_repr_apply {R : Type*} [CommRing R] (d : ℕ)
+private lemma eulerLowBasis_repr_apply {R : Type*} [CommRing R] (d : ℕ)
     (f : restrictTotalDegree (Fin 2) R d) (i : EulerLowIndex d) :
     (eulerLowBasis R d).repr f i =
       f.val.coeff ((Finsupp.degreeLeEquivSym (Fin 2) d).symm i).val := by
@@ -67,11 +67,11 @@ def eulerCoefficientEntryLinear {R : Type*} [CommRing R] (k : ℕ)
   (LinearMap.proj row).comp ((bivariateCoefficients R).comp
     (closedFormEquationLinear (eulerBivariatePair R k (eulerPairBasis R k col))))
 
-lemma eulerCoefficientEntryLinear_apply {R : Type*} [CommRing R] (k : ℕ)
+private lemma eulerCoefficientEntryLinear_apply {R : Type*} [CommRing R] (k : ℕ)
     (row : ℕ × ℕ) (col : EulerColumns k) (f : Polynomial (Polynomial R)) :
     eulerCoefficientEntryLinear k row col f = eulerClosedFormCoefficientMatrix k f row col := rfl
 
-lemma eulerCoefficientMatrix_expand {R : Type*} [CommRing R] (k : ℕ)
+private lemma eulerCoefficientMatrix_expand {R : Type*} [CommRing R] (k : ℕ)
     (f : Polynomial (Polynomial R)) (hf : bivariateTotalDegree f ≤ k + 2)
     (row : ℕ × ℕ) (col : EulerColumns k) :
     ∑ i, eulerCoefficientData (k + 2) f i *

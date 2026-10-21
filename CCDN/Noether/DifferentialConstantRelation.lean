@@ -33,7 +33,7 @@ open Polynomial Differential
 open scoped Differential
 
 /-- A polynomial with zero derivative is constant when its degree is below the characteristic. -/
-lemma polynomial_eq_C_of_derivative_eq_zero_of_degree_lt_char
+private lemma polynomial_eq_C_of_derivative_eq_zero_of_degree_lt_char
     {K : Type*} [Field K] (f : K[X]) (hchar : CharZeroOrGT K f.natDegree)
     (hder : f.derivative = 0) :
     f = C (f.coeff 0) := by
@@ -57,7 +57,7 @@ noncomputable section
 open Polynomial Differential
 open scoped Differential
 
-theorem polynomial_eq_zero_of_differential_constant_coefficients
+private theorem polynomial_eq_zero_of_differential_constant_coefficients
     {L : Type*} [Field L] [Differential L]
     (t : L) (ht : t′ = 1) (f : L[X]) (hchar : CharZeroOrGT L f.natDegree)
     (hcoeff : Differential.mapCoeffs f = 0) (hroot : f.eval t = 0) :
@@ -84,7 +84,7 @@ theorem polynomial_eq_zero_of_differential_constant_coefficients
       rw [he, eval_C] at hroot
       rw [he, hroot, C_0]
 
-lemma differential_aeval_eq_zero_of_constants
+private lemma differential_aeval_eq_zero_of_constants
     {F L : Type*} [Field F] [Field L] [Algebra F L] [Differential L]
     (hbase : ∀ a : F, (algebraMap F L a)′ = 0)
     (x : L) (hx : x′ = 0) (f : F[X]) :

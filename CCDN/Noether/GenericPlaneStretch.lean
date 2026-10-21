@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma optionEquivLeft_map_coefficients {R S σ : Type*} [CommRing R] [CommRing S]
+private lemma optionEquivLeft_map_coefficients {R S σ : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : MvPolynomial (Option σ) R) :
     optionEquivLeft S σ (MvPolynomial.map φ f) =
       Polynomial.map (MvPolynomial.map φ) (optionEquivLeft R σ f) := by
@@ -68,7 +68,7 @@ def genericPlaneStretch {K σ : Type*} [Field K]
     Polynomial (MvPolynomial σ (MvPolynomial Unit K)) :=
   Polynomial.map (genericStretchCoefficients K σ).toRingHom (optionEquivLeft K σ f)
 
-lemma genericPlaneStretch_monic {K σ : Type*} [Field K]
+private lemma genericPlaneStretch_monic {K σ : Type*} [Field K]
     (f : MvPolynomial (Option σ) K) (hf : (optionEquivLeft K σ f).Monic) :
     (genericPlaneStretch f).Monic := hf.map _
 

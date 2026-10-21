@@ -57,7 +57,7 @@ def universalPlaneBadWitness {K σ : Type*} [CommRing K] (f : MvPolynomial σ K)
   universalPlaneLeading f *
     ((closedFormCoefficientMatrix f.totalDegree (universalPlanePolynomial f)).submatrix rows cols).det
 
-lemma universalPlaneBadWitness_degree {K σ : Type*} [CommRing K] (f : MvPolynomial σ K)
+private lemma universalPlaneBadWitness_degree {K σ : Type*} [CommRing K] (f : MvPolynomial σ K)
     (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree) :
     (universalPlaneBadWitness f rows cols).totalDegree ≤ 2 * f.totalDegree ^ 3 := by

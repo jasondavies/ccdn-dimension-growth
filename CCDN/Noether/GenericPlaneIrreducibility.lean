@@ -19,7 +19,7 @@ noncomputable section
 open MvPolynomial
 
 /-- Exchange the fresh y parameter with the transverse slope variables. -/
-def genericPlaneCoefficientEquiv (K σ : Type*) [Field K] :
+private def genericPlaneCoefficientEquiv (K σ : Type*) [Field K] :
     MvPolynomial σ (MvPolynomial Unit K) ≃ₐ[K] Polynomial (MvPolynomial σ K) :=
   (commAlgEquiv K σ Unit).trans ((uniqueAlgEquiv (MvPolynomial σ K) Unit).restrictScalars K)
 
@@ -33,7 +33,7 @@ def genericPlanePolynomial {K σ : Type*} [Field K]
     (f : MvPolynomial (Option σ) K) : Polynomial (Polynomial (MvPolynomial σ K)) :=
   Polynomial.map (genericPlaneCoefficients K σ).toRingHom (optionEquivLeft K σ f)
 
-lemma genericPlaneCoefficientEquiv_stretch {K σ : Type*} [Field K]
+private lemma genericPlaneCoefficientEquiv_stretch {K σ : Type*} [Field K]
     (f : MvPolynomial (Option σ) K) :
     Polynomial.map (genericPlaneCoefficientEquiv K σ).toRingHom (genericPlaneStretch f) =
       genericPlanePolynomial f := by
@@ -56,7 +56,7 @@ lemma genericPlanePolynomial_natDegree {K σ : Type*} [Field K]
   hf.natDegree_map _
 
 /-- The joint polynomial in x, y and all slope variables is irreducible. -/
-theorem genericPlanePolynomial_irreducible {K σ : Type*} [Field K]
+private theorem genericPlanePolynomial_irreducible {K σ : Type*} [Field K]
     (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
     (hd : 0 < f.totalDegree) (hm : (optionEquivLeft K σ f).Monic) :
     Irreducible (genericPlanePolynomial f) := by

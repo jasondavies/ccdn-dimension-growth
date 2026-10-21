@@ -15,13 +15,13 @@ noncomputable section
 open Polynomial Differential
 open scoped Differential
 
-lemma polynomial_degree_C_mul_le {K : Type*} [Field K] (a : K) (p : K[X]) :
+private lemma polynomial_degree_C_mul_le {K : Type*} [Field K] (a : K) (p : K[X]) :
     (C a * p).degree ≤ p.degree := by
   simpa only [smul_eq_C_mul] using degree_smul_le a p
 
 /-- Coefficientwise differentiation strictly lowers the degree of a monic
 polynomial, since its leading coefficient differentiates to zero. -/
-lemma differential_mapCoeffs_degree_lt {K : Type*} [Field K] [Differential K]
+private lemma differential_mapCoeffs_degree_lt {K : Type*} [Field K] [Differential K]
     {p : K[X]} (hp : p.Monic) : (Differential.mapCoeffs p).degree < p.degree := by
   rw [degree_eq_natDegree hp.ne_zero, degree_lt_iff_coeff_zero]
   intro n hn
@@ -70,7 +70,7 @@ lemma differential_mapCoeffs_map {K L : Type*} [Field K] [Field L]
   ext n
   simp only [Differential.coeff_mapCoeffs, coeff_map, deriv_algebraMap]
 
-lemma eq_zero_of_aeval_root_of_degree_lt {K L : Type*} [Field K] [Field L]
+private lemma eq_zero_of_aeval_root_of_degree_lt {K L : Type*} [Field K] [Field L]
     [Algebra K L] {f p : K[X]} (hf : Irreducible f) (hm : f.Monic)
     {c : L} (hc : aeval c f = 0) (hp : aeval c p = 0) (hdeg : p.degree < f.degree) : p = 0 := by
   have hdiv := minpoly.dvd K c hp

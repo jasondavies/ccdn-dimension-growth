@@ -40,7 +40,7 @@ lemma bivariateCoefficientBound_monomial_mul
     · simpa using mul_nonneg (abs_nonneg (a : ℝ)) hH
   · simpa using mul_nonneg (abs_nonneg (a : ℝ)) hH
 
-lemma bivariateCoefficientBound_sub {f g : ℤ[X][X]} {H K : ℝ}
+private lemma bivariateCoefficientBound_sub {f g : ℤ[X][X]} {H K : ℝ}
     (hf : BivariateCoefficientBound f H) (hg : BivariateCoefficientBound g K) :
     BivariateCoefficientBound (f - g) (H + K) := by
   intro i j
@@ -51,7 +51,7 @@ lemma bivariateCoefficientBound_mono {f : ℤ[X][X]} {H K : ℝ}
     (hf : BivariateCoefficientBound f H) (h : H ≤ K) :
     BivariateCoefficientBound f K := fun i j => (hf i j).trans h
 
-lemma bivariateGridPolynomial_single {R : Type*} [CommRing R] (d : ℕ)
+private lemma bivariateGridPolynomial_single {R : Type*} [CommRing R] (d : ℕ)
     (i : BivariateGrid d) (a : R) :
     bivariateGridPolynomial R d (Pi.single i a) =
       monomial i.1.val (monomial i.2.val a) := by
@@ -89,7 +89,7 @@ lemma closedFormPair_single_inr {R : Type*} [CommRing R] (d : ℕ)
     simp [Pi.single_apply]
 
 /-- Inner differentiation costs at most the inner degree. -/
-lemma bivariateCoefficientBound_innerDerivative
+private lemma bivariateCoefficientBound_innerDerivative
     {f : ℤ[X][X]} {H : ℝ} (d : ℕ) (hH : 0 ≤ H)
     (hf : BivariateCoefficientBound f H)
     (hd : ∀ i, (f.coeff i).natDegree ≤ d) :
@@ -108,7 +108,7 @@ lemma bivariateCoefficientBound_innerDerivative
     simpa using mul_nonneg (Nat.cast_nonneg d) hH
 
 /-- Outer differentiation costs at most the outer degree. -/
-lemma bivariateCoefficientBound_outerDerivative
+private lemma bivariateCoefficientBound_outerDerivative
     {f : ℤ[X][X]} {H : ℝ} (d : ℕ) (hH : 0 ≤ H)
     (hf : BivariateCoefficientBound f H) (hd : f.natDegree ≤ d) :
     BivariateCoefficientBound f.derivative (d * H) := by
@@ -127,7 +127,7 @@ lemma bivariateCoefficientBound_outerDerivative
     simpa using mul_nonneg (Nat.cast_nonneg d) hH
 
 /-- Every matrix entry is at most 2*d*H in absolute value. -/
-theorem closedFormCoefficientMatrix_entry_bound
+private theorem closedFormCoefficientMatrix_entry_bound
     (d : ℕ) (f : ℤ[X][X]) (H : ℝ) (hH : 0 ≤ H)
     (hf : BivariateCoefficientBound f H) (houter : f.natDegree ≤ d)
     (hinner : ∀ i, (f.coeff i).natDegree ≤ d) :

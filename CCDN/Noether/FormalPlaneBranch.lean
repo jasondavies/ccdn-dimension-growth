@@ -29,7 +29,7 @@ def formalPlanePolynomial {K : Type*} [CommRing K] (j : Fin 2) (a : K) :
       if k = j then Polynomial.X else Polynomial.C (PowerSeries.X + PowerSeries.C a) := by
   simp [formalPlanePolynomial]
 
-lemma formalPlanePolynomial_derivative {K : Type*} [CommRing K]
+private lemma formalPlanePolynomial_derivative {K : Type*} [CommRing K]
     (j : Fin 2) (a : K) (f : MvPolynomial (Fin 2) K) :
     (formalPlanePolynomial j a f).derivative = formalPlanePolynomial j a (MvPolynomial.pderiv j f) := by
   induction f using MvPolynomial.induction_on with
@@ -43,7 +43,7 @@ lemma formalPlanePolynomial_derivative {K : Type*} [CommRing K]
     · simp [map_mul, Polynomial.derivative_mul, formalPlanePolynomial_X, hf, h]
       ring
 
-lemma formalPlanePolynomial_eval {K : Type*} [CommRing K]
+private lemma formalPlanePolynomial_eval {K : Type*} [CommRing K]
     (j : Fin 2) (a : K) (f : MvPolynomial (Fin 2) K) (g : PowerSeries K) :
     (formalPlanePolynomial j a f).eval g =
       MvPolynomial.eval₂ PowerSeries.C (fun k => if k = j then g else PowerSeries.X + PowerSeries.C a) f := by
@@ -53,7 +53,7 @@ lemma formalPlanePolynomial_eval {K : Type*} [CommRing K]
   | mul_X f k hf =>
     by_cases h : k = j <;> simp [map_mul, formalPlanePolynomial_X, hf, h]
 
-lemma formalPlanePolynomial_constant_eval {K : Type*} [CommRing K]
+private lemma formalPlanePolynomial_constant_eval {K : Type*} [CommRing K]
     (j : Fin 2) (a b : K) (f : MvPolynomial (Fin 2) K) :
     ((formalPlanePolynomial j a f).map PowerSeries.constantCoeff).eval b =
       MvPolynomial.eval (fun k => if k = j then b else a) f := by

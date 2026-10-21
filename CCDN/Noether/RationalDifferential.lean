@@ -36,7 +36,7 @@ lemma rationalDerivativeFraction_mul {p q a : K[X]} (hq : q ≠ 0) (ha : a ≠ 0
 def rationalDerivative (x : RatFunc K) : RatFunc K :=
   x.liftOn' rationalDerivativeFraction (fun _hq _ha => rationalDerivativeFraction_mul _hq _ha)
 
-lemma rationalDerivative_div (p q : K[X]) :
+private lemma rationalDerivative_div (p q : K[X]) :
     rationalDerivative (algebraMap K[X] (RatFunc K) p / algebraMap K[X] (RatFunc K) q) =
       rationalDerivativeFraction p q := by
   rw [rationalDerivative, RatFunc.liftOn'_div]

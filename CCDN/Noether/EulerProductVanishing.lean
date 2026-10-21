@@ -24,7 +24,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Module
 
-theorem eulerClosedForm_minor_eq_zero_of_kernel
+private theorem eulerClosedForm_minor_eq_zero_of_kernel
     {F : Type*} [Field F] (k : ℕ) (f : Polynomial (Polynomial F))
     (u : EulerPairSpace F k) (hu : u ≠ 0)
     (hker : eulerClosedFormOperator k f u = 0)
@@ -63,12 +63,12 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
-lemma bivariateMap_injective {R S : Type*} [CommRing R] [CommRing S]
+private lemma bivariateMap_injective {R S : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (hφ : Function.Injective φ) :
     Function.Injective (bivariateMap φ) :=
   Polynomial.map_injective _ (Polynomial.map_injective φ hφ)
 
-theorem genericEulerProduct_minor_eq_zero
+private theorem genericEulerProduct_minor_eq_zero
     (k a b : ℕ) (ha : 0 < a) (hb : 0 < b) (hab : a + b = k + 2)
     (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :

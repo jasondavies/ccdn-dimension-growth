@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open PowerSeries
 
-lemma powerSeries_frobenius_constant_congruence {K : Type*} [Field K]
+private lemma powerSeries_frobenius_constant_congruence {K : Type*} [Field K]
     (p r : ℕ) [Fact p.Prime] [CharP K p] (g : PowerSeries K) :
     PowerSeries.X ^ (p ^ r) ∣ g ^ (p ^ r) - PowerSeries.C (g.constantCoeff ^ (p ^ r)) := by
   let : CharP (PowerSeries K) p := charP_of_injective_algebraMap (algebraMap K (PowerSeries K)).injective p
@@ -30,7 +30,7 @@ lemma powerSeries_frobenius_constant_congruence {K : Type*} [Field K]
 
 /-- A relation with Frobenius-powered series coefficients forces all their
 constant terms to vanish if the low coefficient jets of f are independent. -/
-lemma powerSeries_frobenius_relation_constants {K ι : Type*} [Field K]
+private lemma powerSeries_frobenius_relation_constants {K ι : Type*} [Field K]
     [Fintype ι] [DecidableEq ι] (p r : ℕ) [Fact p.Prime] [CharP K p]
     (f g : ι → PowerSeries K)
     (hjet : ∀ a : ι → K, (∀ n < p ^ r, PowerSeries.coeff n (∑ i, a i • f i) = 0) → ∀ i, a i = 0)
@@ -52,7 +52,7 @@ lemma powerSeries_frobenius_relation_constants {K ι : Type*} [Field K]
 
 /-- A finite family of series has a common lowest power of X; after dividing
 it out, at least one remaining series has nonzero constant coefficient. -/
-lemma powerSeries_common_order_factor {K ι : Type*} [Field K] [Fintype ι] [DecidableEq ι]
+private lemma powerSeries_common_order_factor {K ι : Type*} [Field K] [Fintype ι] [DecidableEq ι]
     (g : ι → PowerSeries K) (hg : ∃ i, g i ≠ 0) :
     ∃ (m : ℕ) (h : ι → PowerSeries K), (∀ i, g i = PowerSeries.X ^ m * h i) ∧
       ∃ i, (h i).constantCoeff ≠ 0 := by

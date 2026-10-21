@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma universalPlane_coordinate_flatten_l1_le {σ : Type*} (i : σ) :
+private lemma universalPlane_coordinate_flatten_l1_le {σ : Type*} (i : σ) :
     l1Norm ((sumAlgEquiv ℤ (Fin 2) (PlaneParameters σ)).symm
       (C (X (i,0)) + C (X (i,1)) * X 0 + C (X (i,2)) * X 1)) ≤ 3 := by
   simp only [map_add, map_mul, sumAlgEquiv_symm_C_X, sumAlgEquiv_symm_X]
@@ -34,7 +34,7 @@ lemma universalPlane_coordinate_flatten_l1_le {σ : Type*} (i : σ) :
     (X (Sum.inr (i,2)) : MvPolynomial (Fin 2 ⊕ PlaneParameters σ) ℤ) (X (Sum.inl 1))
   simpa only [hx] using Nat.add_le_add hab hc
 
-theorem universalPlane_monomial_flatten_l1_le {σ : Type*} (m : σ →₀ ℕ) :
+private theorem universalPlane_monomial_flatten_l1_le {σ : Type*} (m : σ →₀ ℕ) :
     l1Norm ((sumAlgEquiv ℤ (Fin 2) (PlaneParameters σ)).symm
       (universalPlaneMap ℤ σ (monomial m 1))) ≤ 3 ^ m.degree := by
   classical
@@ -57,12 +57,12 @@ theorem universalPlane_monomial_flatten_l1_le {σ : Type*} (m : σ →₀ ℕ) :
       rw [Finset.prod_pow_eq_pow_sum]
       rfl
 
-theorem universalPlane_monomial_coefficient_l1_le {σ : Type*}
+private theorem universalPlane_monomial_coefficient_l1_le {σ : Type*}
     (m : σ →₀ ℕ) (n : Fin 2 →₀ ℕ) :
     l1Norm ((universalPlaneMap ℤ σ (monomial m 1)).coeff n) ≤ 3 ^ m.degree :=
   (l1Norm_coeff_le_l1Norm_sumAlgEquiv_symm _ _).trans (universalPlane_monomial_flatten_l1_le m)
 
-theorem eulerClosedForm_entry_l1_le {σ : Type*} (k H : ℕ)
+private theorem eulerClosedForm_entry_l1_le {σ : Type*} (k H : ℕ)
     (f : Polynomial (Polynomial (MvPolynomial σ ℤ)))
     (hf : bivariateTotalDegree f ≤ k + 2)
     (hcoeff : ∀ i, l1Norm (eulerCoefficientData (k + 2) f i) ≤ H)
