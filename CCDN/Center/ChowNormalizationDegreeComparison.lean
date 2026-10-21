@@ -7,10 +7,12 @@ module
 
 public import CCDN.Center.ChowNestedIncidence
 public import CCDN.Center.PolynomialCoefficientNormalizationRank
+public import CCDN.Center.ChowLastRowSplit
+public import CCDN.Center.GenericLinearPowerBasis
+public import CCDN.Center.PolynomialFractionCoefficientExtension
 import CCDN.Center.GenericLinearParameterField
 import CCDN.Center.IntermediateFieldParameterTower
 import CCDN.Center.PolynomialCoordinateEmbeddings
-import CCDN.Center.PolynomialFractionCoefficientExtension
 /-! Identify the incidence minimal polynomial with the generic
 primitive element of the affine normalization extension. -/
 
@@ -30,6 +32,49 @@ local instance degreeComparisonNestedRing {K σ τ υ : Type*} [Field K]
   let : CommRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) := inferInstance
   infer_instance
 
+/-- The coefficient extension map sends each variable to its image under the ambient algebra
+map. -/
+lemma polynomialFractionCoefficientMap_X {A K F σ : Type*} [CommRing A] [Field K] [Field F]
+    [Algebra A K] [Algebra A F] [Algebra K F] [Algebra (MvPolynomial σ A) F] (i : σ) :
+    polynomialFractionCoefficientMap (A := A) (K := K) (F := F) (σ := σ) (X i) =
+      algebraMap (MvPolynomial σ A) F (X i) :=
+  eval₂Hom_X' _ _ i
+
+/-- The generic linear form in the negated coordinates of the first-row coordinate ring is sent
+by the coefficient extension map to the split last incidence form. -/
+theorem chow_polynomialFractionCoefficientMap_genericLinearForm
+    {K A F : Type*} [Field K] [Field A] [Field F] [Algebra A F] {m n : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K))
+    [Algebra (ChowFirstRowCoordinateRing m I) A] [Algebra (ChowFirstRowCoordinateRing m I) F]
+    [IsScalarTower (ChowFirstRowCoordinateRing m I) A F]
+    [Algebra (ChowNestedCoordinateRing m I) F]
+    [IsScalarTower (ChowFirstRowCoordinateRing m I) (ChowNestedCoordinateRing m I) F] :
+    polynomialFractionCoefficientMap (A := ChowFirstRowCoordinateRing m I) (K := A) (F := F)
+      (σ := Fin n) (genericLinearForm (fun j =>
+        -algebraMap (ChowFirstRowCoordinateRing m I) A (C (Ideal.Quotient.mk I (X j))))) =
+      algebraMap (ChowNestedCoordinateRing m I) F
+        (chowLastRowSplit m I (chowIncidenceMap (m + 1) I (X (Fin.last m, 0)))) := by
+  let T := ChowFirstRowCoordinateRing m I
+  let N := ChowNestedCoordinateRing m I
+  rw [chowLastRowSplit_incidence_last, genericLinearForm, map_sum, map_neg, map_sum,
+    ← Finset.sum_neg_distrib]
+  apply Finset.sum_congr rfl
+  intro j _
+  rw [map_mul, polynomialFractionCoefficientMap_X, map_mul]
+  have hC : polynomialFractionCoefficientMap (A := T) (K := A) (F := F) (σ := Fin n)
+      (C (-algebraMap T A (C (Ideal.Quotient.mk I (X j))))) =
+      -algebraMap T F (C (Ideal.Quotient.mk I (X j))) := by
+    rw [polynomialFractionCoefficientMap, eval₂Hom_C, map_neg]
+    exact congrArg Neg.neg (IsScalarTower.algebraMap_apply T A F _).symm
+  rw [hC]
+  have hC' : algebraMap N F (C (C (Ideal.Quotient.mk I (X j)))) =
+      algebraMap T F (C (Ideal.Quotient.mk I (X j))) :=
+    (IsScalarTower.algebraMap_apply T N F _).symm
+  rw [hC']
+  ring
+
+/-- The degree in the final constant coefficient of an irreducible incidence equation equals the
+rank of the affine normalization extension. -/
 theorem chow_univariate_degree_eq_normalization_rank
     {K A F : Type*} [Field K] [CharZero K] [Field A] [Field F]
     [Algebra K A] [Algebra K F] [Algebra A F] [IsScalarTower K A F]
@@ -87,9 +132,8 @@ theorem chow_univariate_degree_eq_normalization_rank
   have hη (p : T) : φ (algebraMap T A p) = algebraMap T F p :=
     (IsScalarTower.algebraMap_apply T A F p).symm
   have hX (j : Fin n) : algebraMap (MvPolynomial (Fin n) A) F (X j) =
-      algebraMap N F (X j) := by
-    change polynomialFractionCoefficientMap (A := T) (K := A) (F := F) (X j) = _
-    exact eval₂Hom_X' (algebraMap A F) (fun i : Fin n => algebraMap N F (X i)) j
+      algebraMap N F (X j) :=
+    polynomialFractionCoefficientMap_X (A := T) (K := A) (F := F) j
   have hR : R.restrictScalars K = chowParameterField (E := F) m I := by
     change (IntermediateField.adjoin E
       (Set.range (fun j : Fin n => algebraMap (MvPolynomial (Fin n) A) F (X j)))).restrictScalars K = _
@@ -100,26 +144,8 @@ theorem chow_univariate_degree_eq_normalization_rank
     simp only [S,Set.image_union,← Set.range_comp,Function.comp_def,hη,hX]
     rfl
   have hlast : algebraMap (MvPolynomial (Fin n) A) F (genericLinearForm x) =
-      chowLastIncidenceValue (E := F) m I := by
-    change algebraMap (MvPolynomial (Fin n) A) F (genericLinearForm x) =
-      algebraMap N F (chowLastRowSplit m I (chowIncidenceMap (m + 1) I (X (Fin.last m,0))))
-    rw [chowLastRowSplit_incidence_last,genericLinearForm,map_sum,map_neg,map_sum,
-      ← Finset.sum_neg_distrib]
-    apply Finset.sum_congr rfl
-    intro j _
-    rw [map_mul,hX,map_mul]
-    have hC : algebraMap (MvPolynomial (Fin n) A) F (C (x j)) =
-        -algebraMap T F (C (Ideal.Quotient.mk I (X j))) := by
-      change polynomialFractionCoefficientMap (A := T) (K := A) (F := F)
-        (C (-algebraMap T A (C (Ideal.Quotient.mk I (X j))))) = _
-      rw [polynomialFractionCoefficientMap,eval₂Hom_C,map_neg]
-      exact congrArg Neg.neg (IsScalarTower.algebraMap_apply T A F _).symm
-    rw [hC]
-    have hC' : algebraMap N F (C (C (Ideal.Quotient.mk I (X j)))) =
-        algebraMap T F (C (Ideal.Quotient.mk I (X j))) :=
-      (IsScalarTower.algebraMap_apply T N F _).symm
-    rw [hC']
-    ring
+      chowLastIncidenceValue (E := F) m I :=
+    chow_polynomialFractionCoefficientMap_genericLinearForm (A := A) (F := F) (m := m) I
   have hmin' : (minpoly (R.restrictScalars K)
       (chowLastIncidenceValue (E := F) m I)).natDegree = Module.finrank E A := by
     change (minpoly R _).natDegree = _

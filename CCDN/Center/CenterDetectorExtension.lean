@@ -6,6 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.BirationalCenterLocus
+public import CCDN.Center.CenterMinorMatrix
+public import CCDN.Center.ChowLinearSpecialization
+public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.CenterResultantDetector
 import CCDN.Center.ChowProjectionBaseChange
@@ -32,6 +35,53 @@ lemma eval₂_center_minor_map_tower
     funext (matrixPluckerCoordinates_map ψ A)]
   exact (eval₂_comp_left ψ φ (matrixPluckerCoordinates A) g).symm
 
+/-- Projective dimension and degree are preserved by extending the coefficient field. -/
+theorem hasProjectiveDimensionDegree_scalar_extension
+    {K L : Type*} [Field K] [Field L] [Algebra K L] {n m d : ℕ}
+    {J : Ideal (MvPolynomial (Fin n) K)} (h : HasProjectiveDimensionDegree J m d) :
+    HasProjectiveDimensionDegree (J.map (map (algebraMap K L))) m d := by
+  obtain ⟨hdim, hdegree⟩ := h
+  constructor
+  · rw [filteredHilbertPolynomial_scalar_extension]
+    exact hdim
+  · rw [filteredHilbertPolynomial_scalar_extension]
+    exact hdegree
+
+/-- A family of minor conditions detects the same `L`-matrices before and after extending the
+coefficients along a field tower `K → L → E`. -/
+lemma exists_eval₂_center_minor_map_ne_zero_iff
+    {K L E : Type*} [Field K] [Field L] [Field E] [Algebra K L] [Algebra L E] [Algebra K E]
+    [IsScalarTower K L E] {r n : ℕ} (Φ : Finset (MvPolynomial (Fin r ↪ Fin n) K))
+    (A : Matrix (Fin r) (Fin n) L) :
+    (∃ g ∈ Φ, eval₂ (algebraMap K E)
+      (matrixPluckerCoordinates (A.map (algebraMap L E))) g ≠ 0) ↔
+      ∃ g ∈ Φ, eval₂ (algebraMap K L) (matrixPluckerCoordinates A) g ≠ 0 := by
+  rw [IsScalarTower.algebraMap_eq K L E]
+  simp only [eval₂_center_minor_map_tower,
+    map_ne_zero_iff (algebraMap L E) (algebraMap L E).injective]
+
+/-- Over an algebraically closed field, the Chow restriction along the minor projection matrix
+of independent rows is nonzero exactly when the span of the rows misses the variety. -/
+lemma chowLinearSubstitution_centerMinor_ne_zero_iff
+    {E : Type*} [Field E] [IsAlgClosed E] {n m r s : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 2)) E)) [J.IsPrime] (hJ : IsHomogeneousIdeal J)
+    (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
+    (A : Matrix (Fin r) (Fin (n + 2)) E) (hA : LinearIndependent E A.row)
+    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 2)))
+    (G : MvPolynomial (Fin (m + 1) × Fin (n + 2)) E)
+    (hzero : ∀ U, eval U G = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J) :
+    chowLinearSubstitution (centerMinorProjectionMatrix A e) G ≠ 0 ↔
+      ∀ p ∈ projectiveIdealZeroLocus J, p.rep ∉ Submodule.span E (Set.range A.row) := by
+  refine (chowLinearSubstitution_ne_zero_iff_center_disjoint J hJ hdim _ G hzero).trans
+    ⟨?_, centerMinorProjectionMatrix_disjoint _ A hA e⟩
+  intro h p hp hspan
+  apply h p hp
+  change p.rep ∈ (centerMinorProjectionMatrix A e).mulVecLin.ker
+  rwa [centerMinorProjectionMatrix_ker A hA e]
+
+/-- Sharp equations over the source field detect birational centers over every coefficient
+extension `L`: a matrix of independent rows is a birational center for the extended prime
+exactly when one of the detector forms does not vanish on its minors. -/
 theorem exists_extended_birational_center_detector
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L]
     {n m r : ℕ}
@@ -48,7 +98,6 @@ theorem exists_extended_birational_center_detector
         (∃ g ∈ Φ, eval₂ (algebraMap K L)
           (matrixPluckerCoordinates A) g ≠ 0) ↔
         IsBirationalMatrixCenter (J.map (map (algebraMap K L))) A := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
   let E := AlgebraicClosure L
   let φ := algebraMap K L
@@ -62,14 +111,10 @@ theorem exists_extended_birational_center_detector
     rw [ideal_scalar_extension_tower]
     exact hJE
   have hJL := homogeneous_ideal_scalar_extension (L := L) J hJ
-  have hJLdim : (filteredHilbertPolynomial JL).natDegree = m + 1 := by
-    rw [filteredHilbertPolynomial_scalar_extension]
-    exact hdim
-  have hJLdegree : (filteredHilbertPolynomial JL).leadingCoeff = (d : ℚ) / (m + 1).factorial := by
-    rw [filteredHilbertPolynomial_scalar_extension]
-    exact hdegree
+  have hJLdimdeg : HasProjectiveDimensionDegree JL m d :=
+    hasProjectiveDimensionDegree_scalar_extension hdimdeg
   obtain ⟨F,s,e,Φ,_,hFE,hδ,hzero,hhom,hdeg,hdet⟩ :=
-    exists_center_resultant_forms (L := E) J hJ d ⟨hdim, hdegree⟩ hr
+    exists_center_resultant_forms (L := E) J hJ d hdimdeg hr
   have hmap : map ψ (map φ F) = map θ F := by
     rw [MvPolynomial.map_map]
     congr 1
@@ -88,37 +133,24 @@ theorem exists_extended_birational_center_detector
   refine ⟨Φ,hhom,hdeg,?_⟩
   intro A hA
   let AE := A.map ψ
-  let M := centerMinorProjectionMatrix AE e
-  let R := chowLinearSubstitution M (map θ F)
+  let R := chowLinearSubstitution (centerMinorProjectionMatrix AE e) (map θ F)
   have hAE : LinearIndependent E AE.row := linearIndependent_matrix_rows_map ψ A hA
-  have hdetA : (∃ g ∈ Φ, eval₂ φ
-      (matrixPluckerCoordinates A) g ≠ 0) ↔ Irreducible R := by
-    have hh := hdet AE
-    have ht : θ = ψ.comp φ := IsScalarTower.algebraMap_eq K L E
-    change (∃ g ∈ Φ, eval₂ θ _ g ≠ 0) ↔ _ at hh
-    rw [ht] at hh
-    simpa only [AE,eval₂_center_minor_map_tower,map_ne_zero_iff ψ ψ.injective] using hh
-  have hJEE := homogeneous_ideal_scalar_extension (L := E) JL hJL
-  have hJEEdim : (filteredHilbertPolynomial (JL.map (map ψ))).natDegree = m + 1 := by
-    rw [filteredHilbertPolynomial_scalar_extension]
-    exact hJLdim
+  have hdetA : (∃ g ∈ Φ, eval₂ φ (matrixPluckerCoordinates A) g ≠ 0) ↔ Irreducible R :=
+    (exists_eval₂_center_minor_map_ne_zero_iff Φ A).symm.trans (hdet AE)
   have hcenteriff : R ≠ 0 ↔ ∀ p ∈ projectiveIdealZeroLocus (JL.map (map ψ)),
       p.rep ∉ Submodule.span E (Set.range AE.row) := by
-    have hh := chowLinearSubstitution_ne_zero_iff_center_disjoint
-      (JL.map (map ψ)) hJEE hJEEdim M (map ψ (map φ F)) hzeroL
-    rw [hmap] at hh
-    refine hh.trans ⟨?_,centerMinorProjectionMatrix_disjoint _ AE hAE e⟩
-    intro h p hp hspan
-    apply h p hp
-    change p.rep ∈ M.mulVecLin.ker
-    rwa [centerMinorProjectionMatrix_ker AE hAE e]
+    have hh := chowLinearSubstitution_centerMinor_ne_zero_iff (JL.map (map ψ))
+      (homogeneous_ideal_scalar_extension (L := E) JL hJL)
+      (hasProjectiveDimensionDegree_scalar_extension hJLdimdeg).natDegree_eq AE hAE e
+      (map ψ (map φ F)) hzeroL
+    rwa [hmap] at hh
   have hbir (hc : ∀ p ∈ projectiveIdealZeroLocus (JL.map (map ψ)),
       p.rep ∉ Submodule.span E (Set.range AE.row)) :
       Irreducible R ↔ projectionImageField
         (F := FractionRing (MvPolynomial (Fin (n + 2)) L ⧸ JL)) JL
         (centerMinorProjectionForm A) = ⊤ := by
     rw [← projectionImageField_centerMinorProjectionMatrix _ A e]
-    have hh := geometric_chow_restriction_irreducible_iff_birational JL hJL d ⟨hJLdim, hJLdegree⟩
+    have hh := geometric_chow_restriction_irreducible_iff_birational JL hJL d hJLdimdeg
       (map φ F) (hmap.symm ▸ hFE) hδL hzeroL (centerMinorProjectionMatrix A e)
     rw [centerMinorProjectionMatrix_map,hmap] at hh
     exact hh (centerMinorProjectionMatrix_disjoint _ AE hAE e hc)

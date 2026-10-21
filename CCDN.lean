@@ -90,6 +90,7 @@ public import CCDN.Algebra.UniversalHyperplaneRestriction
 public import CCDN.Algebra.UnscaledAffineMinimum
 public import CCDN.Analysis.Analytic
 public import CCDN.Analysis.DegreeDependenceNumerics
+public import CCDN.Analysis.ElementaryLogBounds
 public import CCDN.Analysis.PaperLogarithmEstimate
 public import CCDN.Analysis.PaperPrimeEstimates
 public import CCDN.Analysis.PrimeCutoff
