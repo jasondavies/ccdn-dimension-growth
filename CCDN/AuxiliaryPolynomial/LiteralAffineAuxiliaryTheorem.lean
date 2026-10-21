@@ -34,7 +34,7 @@ open MvPolynomial
 
 /-- Every primitive irreducible equation with nonzero constant coefficient
 has the affine auxiliary, uniformly over all box radii. -/
-theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
+private theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f)
     (habs : AbsolutelyIrreducible f) (hd : 0 < f.totalDegree) (hc : f.coeff 0 ≠ 0)
@@ -87,7 +87,7 @@ theorem literal_affine_auxiliary_minimum_nonzero_constant {n : ℕ}
           (literalAffineBadPrimeFactor_nonneg f))
 
 
-theorem literal_affine_hypersurface_auxiliary_absolute {n : ℕ}
+private theorem literal_affine_hypersurface_auxiliary_absolute {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f)
     (habs : AbsolutelyIrreducible f) (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :

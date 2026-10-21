@@ -24,7 +24,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma affineChart_not_variable_dvd_of_full_degree {K : Type*} [Field K] {n : ℕ}
+private lemma affineChart_not_variable_dvd_of_full_degree {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f ≠ 0)
     (hd : (affineChart n f).totalDegree = f.totalDegree) : ¬ X 0 ∣ f := by
   rintro ⟨g, he⟩
@@ -61,7 +61,7 @@ lemma unscaledHomogenize_absolute_irreducible_iff {n : ℕ}
     rw [← hd]
     exact scaledHomogenize_irreducible _ hir one_ne_zero
 
-lemma hypersurfaceBadReduction_unscaledHomogenize_imp {n : ℕ}
+private lemma hypersurfaceBadReduction_unscaledHomogenize_imp {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) (p : ℕ) :
     HypersurfaceBadReduction (scaledHomogenize f.totalDegree 1 f) p →
       HypersurfaceBadReduction f p := by

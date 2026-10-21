@@ -23,7 +23,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem projective_integer_points_card_le_auxiliary_degree {d M t : ℕ}
+private theorem projective_integer_points_card_le_auxiliary_degree {d M t : ℕ}
     (f g : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d)
     (hprim : PrimitiveIntegerPolynomial f) (hir : Irreducible (map (Int.castRingHom ℚ) f))
     (z : Fin t → IntPoint 3) (hz0 : ∀ i, z i ≠ 0)
@@ -44,7 +44,7 @@ theorem projective_integer_points_card_le_auxiliary_degree {d M t : ℕ}
     _ _ (hf.map _) hir (hg.isHomogeneous.map _) hndQ _ hinj (hzero f hf hzf)
     (hzero g hg.isHomogeneous hg.eval_eq_zero)
 
-theorem projective_chart_rational_irreducible
+private theorem projective_chart_rational_irreducible
     {K : Type*} [Field K] [CharZero K] {d : ℕ}
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (hdeg : (affineChart 2 f).totalDegree = d)

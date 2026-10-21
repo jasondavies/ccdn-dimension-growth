@@ -28,7 +28,7 @@ namespace CCDN
 noncomputable section
 open Finset
 
-lemma sum_shifted_choose_add (r k d : ℕ) :
+private lemma sum_shifted_choose_add (r k d : ℕ) :
     (∑ i ∈ range d, (r + 1 + k + i).choose r) + (r + 1 + k).choose (r + 1) =
       (r + 1 + k + d).choose (r + 1) := by
   induction d with
@@ -40,7 +40,7 @@ lemma sum_shifted_choose_add (r k d : ℕ) :
     omega
 
 /-- The exact rank is a sum of d adjacent binomial layers. -/
-theorem hypersurface_rank_eq_sum {r d M s : ℕ} (hdM : d ≤ M)
+private theorem hypersurface_rank_eq_sum {r d M s : ℕ} (hdM : d ≤ M)
     (hr : s + (r + 1 + (M - d)).choose (M - d) = (r + 1 + M).choose M) :
     s = ∑ i ∈ range d, (r + 1 + (M - d) + i).choose r := by
   have hh := sum_shifted_choose_add r (M - d) d

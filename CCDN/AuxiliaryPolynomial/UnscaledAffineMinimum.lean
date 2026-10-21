@@ -29,7 +29,7 @@ lemma leading_height_le_coefficient_height {n : ℕ}
 
 /-- Both coefficient-sensitive branches hold for the unscaled model itself.
 This estimate preserves their minimum before applying the box estimate. -/
-theorem unscaled_hypersurface_minimum_height_bound {n : ℕ}
+private theorem unscaled_hypersurface_minimum_height_bound {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hf : f ≠ 0) (hd : 0 < f.totalDegree)
     {B : ℝ} (hB : 1 ≤ B) :
     (f.totalDegree : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) *
@@ -116,7 +116,7 @@ theorem unscaled_hypersurface_minimum_height_bound {n : ℕ}
 
 /-- The full auxiliary degree bound retains both branches of the minimum
 on every box bounded polynomially in the degree. -/
-theorem unscaled_hypersurface_auxiliary_minimum_bound {n k : ℕ}
+private theorem unscaled_hypersurface_auxiliary_minimum_bound {n k : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hf : f ≠ 0) (hd : 0 < f.totalDegree)
     {S B : ℝ} (hS : 1 ≤ S) (hB : 1 ≤ B)
     (hbound : B ≤ S * ((f.totalDegree : ℝ) + 1) ^ k) :

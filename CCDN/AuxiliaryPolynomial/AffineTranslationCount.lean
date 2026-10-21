@@ -44,7 +44,7 @@ lemma PrimitiveIntegerPolynomial.translate_affine {n : ℕ} (a : Fin n → ℤ)
   exact hf c ((C_dvd_iff_dvd_coeff c f).mp he)
 
 /-- Translation of the residue zero set, over ZMod p for every p. -/
-def affineTranslationResidueEquiv (a : Fin 2 → ℤ) (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) :
+private def affineTranslationResidueEquiv (a : Fin 2 → ℤ) (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) :
     PlaneResidue (affineTranslation ℤ a f) p ≃ PlaneResidue f p where
   toFun x := ⟨x.val + fun j => (a j : ZMod p), by
     have h := x.property

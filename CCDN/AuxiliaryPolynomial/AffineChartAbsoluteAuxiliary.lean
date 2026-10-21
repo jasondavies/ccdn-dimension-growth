@@ -33,7 +33,7 @@ open MvPolynomial Finset
 
 /-- The higher-dimensional rank-cutoff form of Proposition 3.2.6 for
 maximal minors and common-degree homogeneous evaluation columns. -/
-theorem affine_chart_determinant_log_lower_at_rank {n s N d M : ℕ} (hs : 0 < s)
+private theorem affine_chart_determinant_log_lower_at_rank {n s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     {F : Fin N → MvPolynomial (Fin (n + 3)) ℤ} {z : Fin s → IntPoint (n + 3)}
     (hev : IsIndependentEvaluation f M F z)
@@ -60,7 +60,7 @@ open MvPolynomial
 
 /-- The comparison retaining the charge of a finite prime set `bad` outside which
 every prime above `27 d ^ 4` is an affine-chart good prime. -/
-theorem affine_chart_auxiliaryRankComparison {n d t : ℕ}
+private theorem affine_chart_auxiliaryRankComparison {n d t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d)
     (z : Fin t → IntPoint (n + 3)) (hprim : ∀ i, Finset.univ.gcd (z i) = 1)
@@ -83,7 +83,7 @@ open MvPolynomial
 
 /-- Affine-chart good primes are preserved by homogeneous translations, which fix the
 homogenizing coordinate. -/
-lemma affineChartGoodPrime_homogeneousTranslation {n t : ℕ} (a : Fin (n + 2) → ℤ)
+private lemma affineChartGoodPrime_homogeneousTranslation {n t : ℕ} (a : Fin (n + 2) → ℤ)
     {f : MvPolynomial (Fin (n + 3)) ℤ} {z : Fin t → IntPoint (n + 3)} (p : ℕ) [Fact p.Prime]
     (h : AffineChartGoodPrime f z p) :
     AffineChartGoodPrime (homogeneousTranslation ℤ a f)

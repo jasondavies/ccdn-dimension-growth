@@ -18,22 +18,22 @@ noncomputable section
 open MvPolynomial
 
 /-- The linear form evaluating a differential on a direction. -/
-def tangentDirectionPolynomial {K σ : Type*} [Field K] [Fintype σ]
+private def tangentDirectionPolynomial {K σ : Type*} [Field K] [Fintype σ]
     (f : MvPolynomial σ K) (z : σ → K) : MvPolynomial σ K :=
   ∑ i, C (eval z (pderiv i f)) * X i
 
-lemma tangentDirectionPolynomial_coeff {K σ : Type*} [Field K] [Fintype σ]
+private lemma tangentDirectionPolynomial_coeff {K σ : Type*} [Field K] [Fintype σ]
     (f : MvPolynomial σ K) (z : σ → K) (j : σ) :
     (tangentDirectionPolynomial f z).coeff (Finsupp.single j 1) = eval z (pderiv j f) := by
   classical
   simp [tangentDirectionPolynomial, coeff_C_mul, coeff_X, Finsupp.single_eq_single_iff]
 
-lemma tangentDirectionPolynomial_eval {K σ : Type*} [Field K] [Fintype σ]
+private lemma tangentDirectionPolynomial_eval {K σ : Type*} [Field K] [Fintype σ]
     (f : MvPolynomial σ K) (z b : σ → K) :
     eval b (tangentDirectionPolynomial f z) = ∑ i, eval z (pderiv i f) * b i := by
   simp [tangentDirectionPolynomial]
 
-lemma tangentDirectionPolynomial_isHomogeneous {K σ : Type*} [Field K] [Fintype σ]
+private lemma tangentDirectionPolynomial_isHomogeneous {K σ : Type*} [Field K] [Fintype σ]
     (f : MvPolynomial σ K) (z : σ → K) :
     (tangentDirectionPolynomial f z).IsHomogeneous 1 := by
   exact IsHomogeneous.sum _ _ _ (fun i _ => isHomogeneous_C_mul_X _ i)

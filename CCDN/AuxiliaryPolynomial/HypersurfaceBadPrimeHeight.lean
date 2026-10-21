@@ -35,7 +35,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma universalPlaneBadWitness_eval {σ : Type*}
+private lemma universalPlaneBadWitness_eval {σ : Type*}
     (f : MvPolynomial σ ℤ)
     (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree)
@@ -49,7 +49,7 @@ lemma universalPlaneBadWitness_eval {σ : Type*}
 
 /-- The evaluated witness is a leading coefficient times an integer
 minor; both are controlled by the height of the same plane section. -/
-theorem universalPlaneBadWitness_eval_log_bound {σ : Type*} [Fintype σ]
+private theorem universalPlaneBadWitness_eval_log_bound {σ : Type*} [Fintype σ]
     (f : MvPolynomial σ ℤ) (hd : 1 ≤ f.totalDegree)
     (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree)
@@ -84,7 +84,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma bad_prime_dvd_universalPlaneBadWitness_eval {σ : Type*} [Fintype σ]
+private lemma bad_prime_dvd_universalPlaneBadWitness_eval {σ : Type*} [Fintype σ]
     (f : MvPolynomial σ ℤ) (hpos : 0 < f.totalDegree)
     (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree)
@@ -103,7 +103,7 @@ lemma bad_prime_dvd_universalPlaneBadWitness_eval {σ : Type*} [Fintype σ]
 /-- The universal plane bad-prime witness of an absolutely irreducible integer polynomial
 takes a nonzero value at some integer parameter in the box `[0, 2d³]`, and every prime above
 `d` with bad geometric reduction divides that value. -/
-theorem exists_bounded_integer_plane_witness
+private theorem exists_bounded_integer_plane_witness
     {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]
     (f : MvPolynomial (Option σ) ℤ)
     (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))
@@ -187,7 +187,7 @@ theorem hypersurface_bad_prime_charge
 
 /-- The exponential bad-prime factor has the coefficient-height dependence
 required in CCDN Corollary 3.2.3. -/
-theorem hypersurface_bad_prime_factor
+private theorem hypersurface_bad_prime_factor
     {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]
     (f : MvPolynomial (Option σ) ℤ)
     (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))

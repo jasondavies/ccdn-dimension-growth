@@ -21,13 +21,13 @@ namespace CCDN
 noncomputable section
 open Polynomial Real
 
-lemma normalized_shear_height_one_le (d : ℕ) (H : ℝ) (hH : 1 ≤ H) :
+private lemma normalized_shear_height_one_le (d : ℕ) (H : ℝ) (hH : 1 ≤ H) :
     1 ≤ ((d : ℝ) + 1) ^ (d + 2) * H := by
   have hp : 1 ≤ ((d : ℝ) + 1) ^ (d + 2) := one_le_pow₀ (by have h : (0 : ℝ) ≤ d := Nat.cast_nonneg d; linarith)
   nlinarith
 
 /-- The normalization cost contributes an absolute constant at the d² scale. -/
-lemma normalized_shear_scaled_log_height (d : ℕ) (hd : 1 ≤ d)
+private lemma normalized_shear_scaled_log_height (d : ℕ) (hd : 1 ≤ d)
     (H : ℝ) (hH : 1 ≤ H) :
     1 + 2 * Real.log (((d : ℝ) + 1) ^ (d + 2) * H) / (d : ℝ) ^ 2 ≤
       7 * (1 + Real.log H / (d : ℝ) ^ 2) := by

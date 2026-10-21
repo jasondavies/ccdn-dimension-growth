@@ -15,7 +15,7 @@ import CCDN.ForMathlib.Log
 namespace CCDN
 noncomputable section
 
-lemma affine_box_translation_power {r d : ℕ} (hr : 0 < r) (hd : 0 < d)
+private lemma affine_box_translation_power {r d : ℕ} (hr : 0 < r) (hd : 0 < d)
     {B : ℝ} (hB : 1 ≤ B) :
     (B + d) ^ (1 / (d : ℝ) ^ (1 / (r : ℝ))) ≤
       Real.exp ((r : ℝ) + 1) * B ^ (1 / (d : ℝ) ^ (1 / (r : ℝ))) := by
@@ -33,14 +33,14 @@ lemma affine_box_translation_power {r d : ℕ} (hr : 0 < r) (hd : 0 < d)
         B ^ (1 / (d : ℝ) ^ (1 / (r : ℝ))) := Real.mul_rpow (by positivity) (by linarith)
     _ ≤ _ := mul_le_mul_of_nonneg_right hfactor (by positivity)
 
-lemma affine_box_translation_log {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 ≤ B) :
+private lemma affine_box_translation_log {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 ≤ B) :
     Real.log (B + d) ≤ Real.log B + Real.log ((d : ℝ) + 1) := by
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
   have hlog := Real.log_le_log (by positivity : 0 < B + d)
     (show B + d ≤ B * ((d : ℝ) + 1) by nlinarith)
   rwa [Real.log_mul (by linarith) (by positivity)] at hlog
 
-lemma affine_box_translation_min {d : ℕ} (hd : 0 < d)
+private lemma affine_box_translation_min {d : ℕ} (hd : 0 < d)
     {B L b : ℝ} (hB : 1 ≤ B) (hL : 1 ≤ L) (hb : 0 ≤ b) :
     min (Real.log L + d * Real.log (B + d) + (d : ℝ) ^ 2) ((d : ℝ) ^ 2 * b) ≤
       2 * min (Real.log L + d * Real.log B + (d : ℝ) ^ 2) ((d : ℝ) ^ 2 * b) := by
@@ -59,7 +59,7 @@ lemma affine_box_translation_min {d : ℕ} (hd : 0 < d)
   · rw [min_eq_right h]
     exact (min_le_right _ _).trans (by nlinarith [sq_nonneg (d : ℝ)])
 
-lemma affine_box_translation_lower {r d : ℕ} (_hr : 0 < r) (hd : 0 < d)
+private lemma affine_box_translation_lower {r d : ℕ} (_hr : 0 < r) (hd : 0 < d)
     {B : ℝ} (hB : 1 ≤ B) :
     (d : ℝ) ^ (1 - 1 / (r : ℝ)) * Real.log (B + d) +
         (d : ℝ) ^ (4 - 1 / (r : ℝ)) ≤
@@ -83,7 +83,7 @@ lemma affine_box_translation_lower {r d : ℕ} (_hr : 0 < r) (hd : 0 < d)
 
 /-- The full coefficient-sensitive affine expression is stable under the
  bounded translation used to make the constant coefficient nonzero. -/
-theorem affine_auxiliary_expression_translation_bound {r d : ℕ}
+private theorem affine_auxiliary_expression_translation_bound {r d : ℕ}
     (hr : 0 < r) (hd : 0 < d) {K B L b : ℝ}
     (hK : 0 ≤ K) (hB : 1 ≤ B) (hL : 1 ≤ L) (hb : 0 ≤ b) :
     K * (d : ℝ) ^ (2 - 1 / (r : ℝ)) *

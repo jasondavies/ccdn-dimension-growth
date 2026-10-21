@@ -23,7 +23,7 @@ open MvPolynomial
 
 /-- Over an arbitrary field extension, descent of a proper factorization
 produces a degree-d nonmultiple vanishing at all base-field zeros. -/
-theorem nonabsolute_homogeneous_auxiliary {k K : Type*}
+private theorem nonabsolute_homogeneous_auxiliary {k K : Type*}
     [Field k] [Field K] [Algebra k K] {n d : ℕ}
     (f : MvPolynomial (Fin n) k) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible f) (hred : ¬ Irreducible (map (algebraMap k K) f)) :

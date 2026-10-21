@@ -39,7 +39,7 @@ lemma prime_divisor_charge_le (P : Finset ℕ) {D : ℤ} (hD : 0 < D)
 
 /-- Mertens bounds an arbitrary prime interval, with its logarithmic width
 and two absolute error terms. -/
-lemma prime_interval_weight_le {L T : ℝ} (hL : 1 ≤ L) (hLT : L ≤ T)
+private lemma prime_interval_weight_le {L T : ℝ} (hL : 1 ≤ L) (hLT : L ≤ T)
     (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime)
     (hlo : ∀ p ∈ P, L < (p : ℝ)) (hhi : ∀ p ∈ P, (p : ℝ) ≤ T) :
     (∑ p ∈ P, Real.log p / p) ≤ Real.log T - Real.log L + 2 * mertensError := by
@@ -66,7 +66,7 @@ lemma prime_interval_weight_le {L T : ℝ} (hL : 1 ≤ L) (hLT : L ≤ T)
 
 /-- Split the bad primes at T. The low part costs log(T/L), while the high
 part is bounded using the integer witness. -/
-theorem bad_prime_charge_split (P : Finset ℕ) {D : ℤ} (hD : 0 < D)
+private theorem bad_prime_charge_split (P : Finset ℕ) {D : ℤ} (hD : 0 < D)
     (hP : ∀ p ∈ P, p.Prime) (hdiv : ∀ p ∈ P, (p : ℤ) ∣ D)
     {L T : ℝ} (hL : 1 ≤ L) (hLT : L ≤ T) (hlo : ∀ p ∈ P, L < (p : ℝ)) :
     (∑ p ∈ P, Real.log p / p) ≤

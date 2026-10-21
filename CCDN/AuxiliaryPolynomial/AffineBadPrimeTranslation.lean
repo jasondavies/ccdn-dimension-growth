@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma hypersurfaceBadReduction_affineTranslation {n : ℕ}
+private lemma hypersurfaceBadReduction_affineTranslation {n : ℕ}
     (a : Fin n → ℤ) (f : MvPolynomial (Fin n) ℤ) (p : ℕ) :
     HypersurfaceBadReduction (affineTranslation ℤ a f) p ↔ HypersurfaceBadReduction f p := by
   unfold HypersurfaceBadReduction

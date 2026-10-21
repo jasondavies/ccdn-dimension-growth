@@ -47,7 +47,7 @@ lemma bivariateTotalDegree_equiv {R : Type*} [CommRing R]
 
 /-- Bad reduction of the bivariate model of a plane equation is bad reduction of the
 equation itself. -/
-lemma bivariateBadReduction_iff_hypersurfaceBadReduction (f : MvPolynomial (Fin 2) ℤ)
+private lemma bivariateBadReduction_iff_hypersurfaceBadReduction (f : MvPolynomial (Fin 2) ℤ)
     (p : ℕ) :
     BivariateBadReduction (bivariatePolynomialEquiv ℤ f) f.totalDegree p ↔
       HypersurfaceBadReduction f p := by

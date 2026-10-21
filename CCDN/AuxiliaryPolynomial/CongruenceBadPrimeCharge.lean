@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
-theorem exists_fin_hypersurface_bad_prime_height_witness
+private theorem exists_fin_hypersurface_bad_prime_height_witness
     {L : Type*} [Field L] [CharZero L] [IsAlgClosed L] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : Irreducible (map (Int.castRingHom L) f)) (hd : 0 < f.totalDegree)

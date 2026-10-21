@@ -15,7 +15,7 @@ the affine auxiliary-polynomial theorem. -/
 @[expose] public section
 namespace CCDN
 
-lemma box_le_of_logarithmic_height_bound {A B N D : ℝ}
+private lemma box_le_of_logarithmic_height_bound {A B N D : ℝ}
     (hA : 1 ≤ A) (hB : 1 ≤ B) (hN : 1 ≤ N) (hD : 0 ≤ D)
     (hheight : B / A ≤ N * Real.log N + N * D * Real.log B) :
     B ≤ 4 * A ^ 2 * N ^ 4 * (D + 1) ^ 2 := by
@@ -76,7 +76,7 @@ theorem affine_coefficient_height_cutoff (n d : ℕ) {A B : ℝ}
 
 /-- The extra projective box exponent is uniformly bounded on every
 polynomial range in the degree. -/
-theorem polynomial_box_root_power_bound {r d k : ℕ} (hr : 0 < r) (hd : 0 < d)
+private theorem polynomial_box_root_power_bound {r d k : ℕ} (hr : 0 < r) (hd : 0 < d)
     {S B : ℝ} (hS : 1 ≤ S) (hB : 1 ≤ B)
     (hbound : B ≤ S * ((d : ℝ) + 1) ^ k) :
     B ^ (1 / ((r : ℝ) * (d : ℝ) ^ (1 / (r : ℝ)))) ≤

@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma optionEquivLeft_top_coefficient_constant {K σ : Type*} [Field K]
+private lemma optionEquivLeft_top_coefficient_constant {K σ : Type*} [Field K]
     (f : MvPolynomial (Option σ) K) (d : ℕ) (hd : f.totalDegree ≤ d) :
     (optionEquivLeft K σ f).coeff d = C (eval (0 : σ → K) ((optionEquivLeft K σ f).coeff d)) := by
   by_cases h : d ≤ f.totalDegree
@@ -28,7 +28,7 @@ lemma optionEquivLeft_top_coefficient_constant {K σ : Type*} [Field K]
       exact (degreeOf_le_totalDegree f none).trans_lt (by omega)
     rw [Polynomial.coeff_eq_zero_of_natDegree_lt hn, map_zero, map_zero]
 
-lemma hypersurfaceAffineCoordinates_axis {K σ : Type*} [Field K]
+private lemma hypersurfaceAffineCoordinates_axis {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K) :
     Polynomial.map (eval (0 : σ → K))
       (optionEquivLeft K σ (hypersurfaceAffineCoordinates a b hb f)) = affineLinePolynomial a b f := by

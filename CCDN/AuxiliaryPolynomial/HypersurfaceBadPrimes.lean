@@ -33,7 +33,7 @@ abbrev HasGoodReduction {σ : Type*} (f : MvPolynomial σ ℤ) (p : ℕ) [Fact p
 
 /-- A positive integer and the exact finite bad-prime set above the
 degree. -/
-theorem exists_hypersurface_bad_prime_set
+private theorem exists_hypersurface_bad_prime_set
     {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]
     (f : MvPolynomial (Option σ) ℤ)
     (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))

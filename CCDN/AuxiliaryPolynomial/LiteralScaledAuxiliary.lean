@@ -29,13 +29,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def literalScalingPrimeCharge (h : ℕ) : ℝ :=
+private def literalScalingPrimeCharge (h : ℕ) : ℝ :=
   primeSetFactor h.primeFactors
 
-lemma literalScalingPrimeCharge_one : literalScalingPrimeCharge 1 = 1 := by
+private lemma literalScalingPrimeCharge_one : literalScalingPrimeCharge 1 = 1 := by
   simp [literalScalingPrimeCharge, primeSetFactor]
 
-lemma literalScalingPrimeCharge_prime_le {p : ℕ} (hp : p.Prime) :
+private lemma literalScalingPrimeCharge_prime_le {p : ℕ} (hp : p.Prime) :
     literalScalingPrimeCharge p ≤ Real.exp 1 := by
   unfold literalScalingPrimeCharge primeSetFactor
   rw [hp.primeFactors, Finset.sum_singleton]
@@ -43,7 +43,7 @@ lemma literalScalingPrimeCharge_prime_le {p : ℕ} (hp : p.Prime) :
   apply (div_le_one (by exact_mod_cast hp.pos : (0 : ℝ) < p)).mpr
   exact (Real.log_le_sub_one_of_pos (by exact_mod_cast hp.pos)).trans (by linarith)
 
-lemma hypersurfaceAuxiliaryDegreeBound_mono_b (n d : ℕ) {B b b' H : ℝ}
+private lemma hypersurfaceAuxiliaryDegreeBound_mono_b (n d : ℕ) {B b b' H : ℝ}
     (hb : b ≤ b') (hB : 0 ≤ B) (hH : 0 ≤ H) :
     hypersurfaceAuxiliaryDegreeBound n d B b H ≤ hypersurfaceAuxiliaryDegreeBound n d B b' H := by
   have hC := (hypersurfaceAbsoluteAuxiliaryConstant_pos n).le
@@ -52,7 +52,7 @@ lemma hypersurfaceAuxiliaryDegreeBound_mono_b (n d : ℕ) {B b b' H : ℝ}
 
 /-- A homogeneous auxiliary for all original affine integer points, with a
 finite prime charge coming only from the scale and literal bad reductions. -/
-theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
+private theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ)
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (h : ℕ) (hh : 0 < h)

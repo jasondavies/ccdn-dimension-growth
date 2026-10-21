@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma inverse_rpow_le_of_log_position {H L q D : ℝ} (hH : 0 < H) (hL : 0 < L)
+private lemma inverse_rpow_le_of_log_position {H L q D : ℝ} (hH : 0 < H) (hL : 0 < L)
     (hq : 0 ≤ q) (hposition : Real.log H ≤ Real.log L + D) :
     1 / L ^ q ≤ Real.exp (q * D) / H ^ q := by
   apply (Real.log_le_log_iff (by positivity) (by positivity)).mp
@@ -55,7 +55,7 @@ def hypersurfacePositionedAuxiliaryConstant (n : ℕ) (T : ℝ) : ℝ :=
       Real.exp (hypersurfaceSmallHeightError (n + 1) (hypersurfaceBadPrimeNormalizedError n))
 
 /-- The small-height degree bound fits under the positioned bound. -/
-lemma small_height_bound_le_positioned {n d : ℕ} (hd : 0 < d) {B b H T : ℝ} (hB : 1 ≤ B)
+private lemma small_height_bound_le_positioned {n d : ℕ} (hd : 0 < d) {B b H T : ℝ} (hB : 1 ≤ B)
     (hb : 0 ≤ b) (hH : 0 ≤ H) :
     2 * d + (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
         Real.exp (T / (n + 1 : ℝ)) * Real.exp (hypersurfaceSmallHeightError (n + 1)
@@ -93,7 +93,7 @@ lemma small_height_bound_le_positioned {n d : ℕ} (hd : 0 < d) {B b H T : ℝ} 
   nlinarith
 
 /-- The large-height degree bound fits under the positioned bound. -/
-lemma large_height_bound_le_positioned {n d : ℕ} (hd : 0 < d) {B b H T : ℝ} (hB : 1 ≤ B)
+private lemma large_height_bound_le_positioned {n d : ℕ} (hd : 0 < d) {B b H T : ℝ} (hB : 1 ≤ B)
     (hb : 0 ≤ b) (hH : 0 ≤ H) :
     (8 * (n + 2 : ℝ) + Real.exp (hypersurfaceLargeHeightError (n + 1)
         (hypersurfaceNormalizedError n) T) + 2) * (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) ≤

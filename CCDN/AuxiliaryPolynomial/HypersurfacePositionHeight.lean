@@ -28,7 +28,7 @@ open MvPolynomial
 
 /-- The large leading-coefficient witness in arbitrary projective dimension.
 Every original coefficient is controlled by one bounded grid evaluation. -/
-theorem exists_hypersurface_leading_coefficient_translation {n d : ℕ}
+private theorem exists_hypersurface_leading_coefficient_translation {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) :
     ∃ a : Fin n → ℤ, (∀ j, 0 ≤ a j ∧ a j ≤ d) ∧
       MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) ≠ 0 ∧
@@ -61,22 +61,22 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def hypersurfacePositionHeightFactor (n d : ℕ) : ℝ :=
+private def hypersurfacePositionHeightFactor (n d : ℕ) : ℝ :=
   ((d : ℝ) + 1) ^ ((n + 1) * (d + 1) + (n + 1) + n * (d + 1) + 2 * d)
 
-lemma hypersurfacePositionHeightFactor_one_le (n d : ℕ) :
+private lemma hypersurfacePositionHeightFactor_one_le (n d : ℕ) :
     1 ≤ hypersurfacePositionHeightFactor n d := by
   apply one_le_pow₀
   have := Nat.cast_nonneg (α := ℝ) d
   linarith
 
-lemma hypersurfacePositionHeightFactor_ge_grid (n d : ℕ) :
+private lemma hypersurfacePositionHeightFactor_ge_grid (n d : ℕ) :
     ((d : ℝ) + 1) ^ (n * (d + 1)) ≤ hypersurfacePositionHeightFactor n d := by
   apply pow_le_pow_right₀ (by have := Nat.cast_nonneg (α := ℝ) d; linarith)
   omega
 
 /-- Full homogeneous coefficient control after a bounded shear. -/
-theorem hypersurfaceTranslation_coefficient_bound {n d : ℕ}
+private theorem hypersurfaceTranslation_coefficient_bound {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (a : Fin n → ℤ) (ha : ∀ j, 0 ≤ a j ∧ a j ≤ d)
     {L : ℝ} (hL : 0 ≤ L)
@@ -139,7 +139,7 @@ lemma log_nat_add_one_le_root {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
   nlinarith
 
 /-- The loss is O_{n,r}(d^(1+1/r)), as required by the auxiliary theorem. -/
-lemma hypersurfacePositionHeightFactor_log_le {r d : ℕ} (n : ℕ) (hr : 0 < r) (hd : 0 < d) :
+private lemma hypersurfacePositionHeightFactor_log_le {r d : ℕ} (n : ℕ) (hr : 0 < r) (hd : 0 < d) :
     Real.log (hypersurfacePositionHeightFactor n d) ≤
       (5 * (n : ℝ) + 5) * ((r : ℝ) + 1) * d * (d : ℝ) ^ (1 / (r : ℝ)) := by
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd

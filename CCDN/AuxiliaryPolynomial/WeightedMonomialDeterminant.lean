@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open Finset Matrix
 
-theorem abs_det_le_factorial_mul_column_bounds {s : ℕ}
+private theorem abs_det_le_factorial_mul_column_bounds {s : ℕ}
     (A : Matrix (Fin s) (Fin s) ℝ) (b : Fin s → ℝ)
     (hA : ∀ i j, |A i j| ≤ b j) :
     |A.det| ≤ (s.factorial : ℝ) * ∏ j, b j := by
@@ -41,7 +41,7 @@ theorem abs_det_le_factorial_mul_column_bounds {s : ℕ}
       exact prod_le_prod₀ (fun j _ => abs_nonneg _) (fun j _ => hA (σ j) j)
     _ = _ := by simp [Fintype.card_perm]
 
-theorem weighted_evaluation_det_bound {n s : ℕ}
+private theorem weighted_evaluation_det_bound {n s : ℕ}
     (mon : Fin s → (Fin n →₀ ℕ)) (z : Fin s → (Fin n → ℤ))
     {B : ℝ} (hB : 1 ≤ B) (hz : ∀ i, InBox (z i) B) :
     |((evaluationMatrix mon z).det : ℝ)| ≤

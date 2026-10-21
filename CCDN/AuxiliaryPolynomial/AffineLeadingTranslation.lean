@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma scaledHomogenize_one_affineTranslation {R : Type*} [CommRing R] [Nontrivial R]
+private lemma scaledHomogenize_one_affineTranslation {R : Type*} [CommRing R] [Nontrivial R]
     {n d : ℕ} (a : Fin n → R) (f : MvPolynomial (Fin n) R) (hd : f.totalDegree ≤ d) :
     scaledHomogenize d 1 (affineTranslation R a f) =
       homogeneousTranslation R a (scaledHomogenize d 1 f) := by
@@ -29,7 +29,7 @@ lemma scaledHomogenize_one_affineTranslation {R : Type*} [CommRing R] [Nontrivia
   rw [affineChart_scaledHomogenize_one, affineChart_homogeneousTranslation,
     affineChart_scaledHomogenize_one]
 
-lemma homogeneousSlice_zero_translation {R : Type*} [CommRing R] {n : ℕ}
+private lemma homogeneousSlice_zero_translation {R : Type*} [CommRing R] {n : ℕ}
     (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) R) :
     homogeneousSlice n 0 (homogeneousTranslation R a f) = homogeneousSlice n 0 f := by
   have he : (homogeneousSlice n (0 : R)).comp (homogeneousTranslation R a).toRingHom =
@@ -42,7 +42,7 @@ lemma homogeneousSlice_zero_translation {R : Type*} [CommRing R] {n : ℕ}
         simp [homogeneousSlice, homogeneousTranslation, homogeneousTranslationHom]
   exact RingHom.congr_fun he f
 
-lemma homogeneousSlice_zero_scaledHomogenize_one {R : Type*} [CommRing R]
+private lemma homogeneousSlice_zero_scaledHomogenize_one {R : Type*} [CommRing R]
     {n d : ℕ} (f : MvPolynomial (Fin n) R) (hd : f.totalDegree ≤ d) :
     homogeneousSlice n 0 (scaledHomogenize d 1 f) = homogeneousComponent d f := by
   classical

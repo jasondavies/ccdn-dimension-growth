@@ -55,7 +55,7 @@ end CCDN
 namespace CCDN
 noncomputable section
 
-theorem polynomial_map_exists_auxiliary_small_height
+private theorem polynomial_map_exists_auxiliary_small_height
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d) (hdM : d ≤ M)
@@ -88,7 +88,7 @@ theorem polynomial_map_exists_auxiliary_small_height
   exact (not_lt_of_ge hbound) hthreshold
 
 
-theorem polynomial_map_exists_auxiliary_large_height
+private theorem polynomial_map_exists_auxiliary_large_height
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 0 < d) (hMlarge : 32 * d ≤ M)

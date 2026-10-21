@@ -46,7 +46,7 @@ def LiteralAffineBadReduction {σ : Type*} (f : MvPolynomial σ ℤ) (p : ℕ) :
   ∃ hp : p.Prime, let _ : Fact p.Prime := ⟨hp⟩
     ¬ Irreducible (map (Int.castRingHom (AlgebraicClosure (ZMod p))) f)
 
-lemma LiteralAffineBadReduction.hypersurfaceBadReduction {σ : Type*}
+private lemma LiteralAffineBadReduction.hypersurfaceBadReduction {σ : Type*}
     {f : MvPolynomial σ ℤ} {p : ℕ} (h : LiteralAffineBadReduction f p) :
     HypersurfaceBadReduction f p := ⟨h.1, Or.inr h.2⟩
 
@@ -85,7 +85,7 @@ lemma literalAffineBadPrimeFactor_le_inclusive {n : ℕ}
     literalAffineBadPrimeFactor f ≤ hypersurfaceBadPrimeFactor f :=
   badPrimeFactor_mono f fun _ h => h.hypersurfaceBadReduction
 
-lemma literalAffineBadReduction_affineTranslation {n : ℕ}
+private lemma literalAffineBadReduction_affineTranslation {n : ℕ}
     (a : Fin n → ℤ) (f : MvPolynomial (Fin n) ℤ) (p : ℕ) :
     LiteralAffineBadReduction (affineTranslation ℤ a f) p ↔ LiteralAffineBadReduction f p := by
   unfold LiteralAffineBadReduction
@@ -120,7 +120,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma variableScaleEquiv_monomial {K σ : Type*} [Field K]
+private lemma variableScaleEquiv_monomial {K σ : Type*} [Field K]
     (a : K) (ha : a ≠ 0) (m : σ →₀ ℕ) (c : K) :
     variableScaleEquiv K σ a ha (monomial m c) = monomial m (a ^ m.degree * c) := by
   classical
@@ -135,7 +135,7 @@ lemma variableScaleEquiv_monomial {K σ : Type*} [Field K]
     ← mul_assoc, ← map_mul, mul_comm c]
   exact monomial_eq.symm
 
-lemma affineChart_scaledHomogenize_eq_variableScale {K : Type*} [Field K] {n : ℕ}
+private lemma affineChart_scaledHomogenize_eq_variableScale {K : Type*} [Field K] {n : ℕ}
     (d : ℕ) (h : K) (hh : h ≠ 0) (f : MvPolynomial (Fin n) K) :
     affineChart n (scaledHomogenize d h f) = variableScaleEquiv K (Fin n) h hh f := by
   classical

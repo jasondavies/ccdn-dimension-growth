@@ -31,7 +31,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem projective_no_auxiliary_height_comparison
+private theorem projective_no_auxiliary_height_comparison
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {d M t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 2 ≤ d) (hdM : d ≤ M)
@@ -74,7 +74,7 @@ end CCDN
 namespace CCDN
 noncomputable section
 
-theorem projective_exists_auxiliary_small_height
+private theorem projective_exists_auxiliary_small_height
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 2 ≤ d) (hdM : d ≤ M)
@@ -102,7 +102,7 @@ theorem projective_exists_auxiliary_small_height
     (by linarith) (by linarith) hA hlog
   exact (not_lt_of_ge hbound) hthreshold
 
-theorem projective_exists_auxiliary_large_height
+private theorem projective_exists_auxiliary_large_height
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d M t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hd : 2 ≤ d) (hMlarge : 32 * d ≤ M)

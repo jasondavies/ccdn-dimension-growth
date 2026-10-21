@@ -18,7 +18,7 @@ at most 1/M. Exact binomial identities avoid a formal asymptotic expansion. -/
 namespace CCDN
 noncomputable section
 
-lemma shifted_choose_successor_identity (r k : ℕ) :
+private lemma shifted_choose_successor_identity (r k : ℕ) :
     (r + k + 1) * (r + k).choose r = (r + 1 + k).choose (r + 1) * (r + 1) := by
   rw [show r + 1 + k = r + k + 1 by omega]
   exact Nat.add_one_mul_choose_eq (r + k) r

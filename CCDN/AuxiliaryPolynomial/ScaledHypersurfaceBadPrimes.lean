@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma firstCoordinateScaleHom_scaledHomogenize {R : Type*} [CommRing R] {n d : ℕ}
+private lemma firstCoordinateScaleHom_scaledHomogenize {R : Type*} [CommRing R] {n d : ℕ}
     (h : R) (f : MvPolynomial (Fin n) R) (hd : f.totalDegree ≤ d) :
     firstCoordinateScaleHom R h (scaledHomogenize d h f) =
       C (h ^ d) * scaledHomogenize d 1 f := by
@@ -31,7 +31,7 @@ lemma firstCoordinateScaleHom_scaledHomogenize {R : Type*} [CommRing R] {n d : �
     map_mul, affineChart_scaledHomogenize_one]
   simp [affineChart]
 
-lemma scaledHomogenize_irreducible_iff {K : Type*} [Field K] {n d : ℕ}
+private lemma scaledHomogenize_irreducible_iff {K : Type*} [Field K] {n d : ℕ}
     (h : K) (hh : h ≠ 0) (f : MvPolynomial (Fin n) K) (hd : f.totalDegree ≤ d) :
     Irreducible (scaledHomogenize d h f) ↔ Irreducible (scaledHomogenize d 1 f) := by
   have hu : IsUnit (C (h ^ d) : MvPolynomial (Fin (n + 1)) K) :=
@@ -43,7 +43,7 @@ lemma scaledHomogenize_irreducible_iff {K : Type*} [Field K] {n d : ℕ}
   rw [firstCoordinateScaleHom_scaledHomogenize h f hd, irreducible_isUnit_mul hu] at he
   exact he.symm
 
-lemma scaledHomogenize_map_irreducible_iff {K : Type*} [Field K] {n d : ℕ}
+private lemma scaledHomogenize_map_irreducible_iff {K : Type*} [Field K] {n d : ℕ}
     (φ : ℤ →+* K) (h : ℤ) (hh : φ h ≠ 0)
     (f : MvPolynomial (Fin n) ℤ) (hd : f.totalDegree ≤ d) :
     Irreducible (map φ (scaledHomogenize d h f)) ↔
@@ -52,7 +52,7 @@ lemma scaledHomogenize_map_irreducible_iff {K : Type*} [Field K] {n d : ℕ}
   apply scaledHomogenize_irreducible_iff _ hh
   exact (totalDegree_map_le _ _).trans hd
 
-lemma hypersurfaceBadReduction_scaledHomogenize {n d : ℕ}
+private lemma hypersurfaceBadReduction_scaledHomogenize {n d : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) (hd : f.totalDegree ≤ d)
     {p q : ℕ} (hp : p.Prime) (hqp : q ≠ p) :
     HypersurfaceBadReduction (scaledHomogenize d (p : ℤ) f) q ↔
@@ -73,7 +73,7 @@ lemma hypersurfaceBadReduction_scaledHomogenize {n d : ℕ}
 
 /-- Enlarging the bad-prime set at one prime costs at most `exp 1`. The
 nonabsolute case is included, using the paper's zero convention. -/
-theorem hypersurfaceBadPrimeFactor_le_of_badReduction_imp {n : ℕ}
+private theorem hypersurfaceBadPrimeFactor_le_of_badReduction_imp {n : ℕ}
     (f g : MvPolynomial (Fin (n + 1)) ℤ) {p : ℕ} (hp : 0 < p)
     (hd : f.totalDegree = g.totalDegree)
     (habs : AbsolutelyIrreducible f → AbsolutelyIrreducible g)

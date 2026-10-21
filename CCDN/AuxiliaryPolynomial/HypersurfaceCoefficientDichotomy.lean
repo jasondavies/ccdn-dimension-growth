@@ -34,7 +34,7 @@ open MvPolynomial Matrix
 
 /-- A homogeneous equation yields a small homogeneous polynomial
 vanishing at every given integral point. -/
-theorem exists_small_homogeneous_vanishing_polynomial {n d M t : ℕ}
+private theorem exists_small_homogeneous_vanishing_polynomial {n d M t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → (Fin (n + 1) → ℤ)) (hzero : ∀ i, eval (points i) f = 0) :
     ∃ (s : ℕ) (a : Fin s → Fin t), Function.Injective a ∧ s < (n + M).choose M ∧
@@ -100,7 +100,7 @@ lemma homogeneous_same_degree_coefficient_le_of_dvd {n d : ℕ}
 
 /-- Explicit coefficient control when every degree-d relation is a multiple
 of f. N is the exact dimension of the space of homogeneous degree-d forms. -/
-theorem homogeneous_no_auxiliary_coefficient_height {n d t : ℕ}
+private theorem homogeneous_no_auxiliary_coefficient_height {n d t : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (z : Fin t → IntPoint (n + 1)) (hz : ∀ i, eval (z i) f = 0)
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)

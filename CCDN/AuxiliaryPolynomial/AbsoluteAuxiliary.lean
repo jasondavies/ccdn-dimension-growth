@@ -47,7 +47,7 @@ lemma auxiliary_box_rpow_factor {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
   convert hh using 1
   field_simp
 
-lemma auxiliary_box_log_cost {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
+private lemma auxiliary_box_log_cost {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
     (d : ℝ) ^ (1 - 1 / (r : ℝ)) * Real.log ((d : ℝ) + 1) ≤ ((r : ℝ) + 1) * d := by
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
   have hh := mul_le_mul_of_nonneg_left (log_nat_add_one_le_root hr hd)
@@ -106,7 +106,7 @@ section Translation
 
 variable {n : ℕ}
 
-lemma irreducible_map_homogeneousTranslation {K : Type*} [Field K] (a : Fin (n + 2) → ℤ)
+private lemma irreducible_map_homogeneousTranslation {K : Type*} [Field K] (a : Fin (n + 2) → ℤ)
     {f : MvPolynomial (Fin (n + 3)) ℤ} (hir : Irreducible (map (Int.castRingHom K) f)) :
     Irreducible (map (Int.castRingHom K) (homogeneousTranslation ℤ a f)) := by
   rw [homogeneousTranslation_map]
@@ -124,7 +124,7 @@ lemma eval_homogeneousTranslation_neg (a : Fin (n + 2) → ℤ)
 
 /-- A form `g` not divisible by the translate of `f` translates back to a
 nonmultiple of `f`. -/
-lemma not_dvd_homogeneousTranslation_neg (a : Fin (n + 2) → ℤ)
+private lemma not_dvd_homogeneousTranslation_neg (a : Fin (n + 2) → ℤ)
     {f g : MvPolynomial (Fin (n + 3)) ℤ} (hgnd : ¬homogeneousTranslation ℤ a f ∣ g) :
     ¬f ∣ homogeneousTranslation ℤ (-a) g := by
   intro hdvd
@@ -139,7 +139,7 @@ end Translation
 
 /-- Enlarging the box from `B` to `(d + 1) B` and lowering the coefficient height from
 `H` to `h ≤ H` cost a factor depending only on the dimension. -/
-lemma auxDegreeBound_translate_le {n d : ℕ} (hd : 0 < d) {B b H h : ℝ} (hB : 1 ≤ B)
+private lemma auxDegreeBound_translate_le {n d : ℕ} (hd : 0 < d) {B b H h : ℝ} (hB : 1 ≤ B)
     (hb : 0 ≤ b) (hh0 : 0 < h) (hhH : h ≤ H) :
     auxDegreeBound n d (((d : ℝ) + 1) * B) b H ≤
       (Real.exp ((n + 2 : ℝ) ^ 2 / (n + 1 : ℝ)) + (n + 3 : ℝ)) * auxDegreeBound n d B b h := by

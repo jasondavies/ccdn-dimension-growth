@@ -37,7 +37,7 @@ lemma log_le_dimension_root {r : ℕ} (hr : 0 < r) {s : ℝ} (hs : 0 < s) :
   rwa [he] at hm
 
 /-- The coefficient count is polynomial in rank, with explicit dimension. -/
-lemma hypersurface_rank_log_dimension_bound {r d M s : ℕ}
+private lemma hypersurface_rank_log_dimension_bound {r d M s : ℕ}
     (hrpos : 0 < r) (hd : 0 < d) (hdM : d ≤ M)
     (hr : s + (r + 1 + (M - d)).choose (M - d) = (r + 1 + M).choose M) :
     Real.log ((r + 1 + M).choose M : ℝ) ≤ (r + 1 : ℝ) * (Real.log 2 + Real.log s) := by

@@ -42,7 +42,7 @@ def auxDegreeBound (n d : ℕ) (B b H : ℝ) : ℝ :=
   auxMainTerm n d B b H + (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
     (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ))
 
-lemma one_le_four_sub_inv (n : ℕ) : (1 : ℝ) ≤ 4 - 1 / (n + 1 : ℝ) := by
+private lemma one_le_four_sub_inv (n : ℕ) : (1 : ℝ) ≤ 4 - 1 / (n + 1 : ℝ) := by
   have h := (div_le_one (by positivity : (0 : ℝ) < n + 1)).mpr
     (show 1 ≤ (n + 1 : ℝ) by have := Nat.cast_nonneg (α := ℝ) n; linarith)
   linarith

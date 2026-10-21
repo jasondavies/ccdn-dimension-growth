@@ -19,7 +19,7 @@ Uniform comparison of logarithmic coefficient-height ratios.
 @[expose] public section
 namespace CCDN
 
-lemma weighted_exp_ratio_le {u v a r : ℝ} (hu : 0 ≤ u) (huv : u ≤ v)
+private lemma weighted_exp_ratio_le {u v a r : ℝ} (hu : 0 ≤ u) (huv : u ≤ v)
     (ha : 0 < a) (hr : 1 ≤ r) (hra : 1 ≤ r * a) :
     (v + a) / Real.exp v ≤ r * ((u + a) / Real.exp u) := by
   have ht : 0 ≤ v - u := sub_nonneg.mpr huv
@@ -38,7 +38,7 @@ lemma weighted_exp_ratio_le {u v a r : ℝ} (hu : 0 ≤ u) (huv : u ≤ v)
   exact hh'
 
 /-- Replace an upper height by any lower height with a dimension-only loss. -/
-theorem logarithmic_height_ratio_le {H Y q c r : ℝ}
+private theorem logarithmic_height_ratio_le {H Y q c r : ℝ}
     (hY : 1 ≤ Y) (hYH : Y ≤ H) (hq : 0 < q) (hc : 0 < c)
     (hr : 1 ≤ r) (hrqc : 1 ≤ r * (q * c)) :
     (Real.log H + c) / H ^ q ≤ r * ((Real.log Y + c) / Y ^ q) := by
@@ -58,7 +58,7 @@ end CCDN
 namespace CCDN
 noncomputable section
 
-lemma dimension_root_le_degree {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
+private lemma dimension_root_le_degree {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
     (d : ℝ) ^ (1 / (r : ℝ)) ≤ d := by
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hr1 : (1 : ℝ) ≤ r := by exact_mod_cast hr

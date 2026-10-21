@@ -53,7 +53,7 @@ lemma integerCoefficientHeight_scaledHomogenize_one {n : ℕ} (d : ℕ)
         (homogenizedExponent d m)
   exact_mod_cast le_antisymm hupper hlower
 
-lemma scaledHomogenize_one_integer_irreducible {n : ℕ}
+private lemma scaledHomogenize_one_integer_irreducible {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f) (hd : 0 < f.totalDegree) :
     Irreducible (scaledHomogenize f.totalDegree 1 f) := by
@@ -78,7 +78,7 @@ lemma unscaled_auxiliary_not_dvd {n M : ℕ}
   rw [hslice] at hndQ
   exact fun h => hndQ (map_dvd (map (Int.castRingHom ℚ)) h)
 
-lemma unscaled_auxiliary_vanishes {n M : ℕ}
+private lemma unscaled_auxiliary_vanishes {n M : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (G : MvPolynomial (Fin (n + 1)) ℤ)
     (hGhom : G.IsHomogeneous M) {B : ℝ} (hB : 1 ≤ B)
     (hGzero : ∀ P : ProjectivePoint n, P.mulHeight ≤ B →

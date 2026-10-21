@@ -29,7 +29,7 @@ def hypersurfaceSmallThreshold (n d : ℕ) (B L A : ℝ) : ℝ :=
 /-- A degree above the proved threshold yields an integer homogeneous
 nonmultiple vanishing at all given bounded points, for any finite prime set `bad`
 for which the normalized comparison holds. -/
-theorem exists_auxiliary_small_height_of_comparison {n d M t : ℕ}
+private theorem exists_auxiliary_small_height_of_comparison {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 3))) (f : MvPolynomial (Fin (n + 3)) ℤ)
     (hf0 : f ≠ 0) (hd : 0 < d) (hM : 2 * d ≤ M) (z : Fin t → IntPoint (n + 3))
     {B : ℝ} (hB : 1 ≤ B) (hbox : ∀ i, InBox (z i) B)

@@ -38,7 +38,7 @@ lemma normalizedHypersurfaceCoordinates_monic {K σ : Type*} [Field K]
   rw [Polynomial.leadingCoeff, hypersurfaceAffineCoordinates_full_outer_degree a b hb f hdir,
     hypersurfaceAffineCoordinates_top_coefficient, ← map_mul, inv_mul_cancel₀ hdir, map_one]
 
-lemma normalizedHypersurfaceCoordinates_natDegree {K σ : Type*} [Field K]
+private lemma normalizedHypersurfaceCoordinates_natDegree {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K)
     (hdir : eval b (homogeneousComponent f.totalDegree f) ≠ 0) :
     (optionEquivLeft K σ (normalizedHypersurfaceCoordinates a b hb f)).natDegree = f.totalDegree := by
@@ -47,27 +47,27 @@ lemma normalizedHypersurfaceCoordinates_natDegree {K σ : Type*} [Field K]
     Polynomial.natDegree_C_mul_of_isUnit ((isUnit_iff_ne_zero.mpr (inv_ne_zero hdir)).map C)]
   exact hypersurfaceAffineCoordinates_full_outer_degree a b hb f hdir
 
-lemma normalizedHypersurfaceCoordinates_totalDegree_le {K σ : Type*} [Field K]
+private lemma normalizedHypersurfaceCoordinates_totalDegree_le {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K) :
     (normalizedHypersurfaceCoordinates a b hb f).totalDegree ≤ f.totalDegree := by
   exact (totalDegree_mul _ _).trans (by
     rw [totalDegree_C, zero_add]
     exact hypersurfaceAffineCoordinates_totalDegree_le a b hb f)
 
-lemma normalizedHypersurfaceCoordinates_irreducible {K σ : Type*} [Field K]
+private lemma normalizedHypersurfaceCoordinates_irreducible {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K)
     (hf : Irreducible f) (hdir : eval b (homogeneousComponent f.totalDegree f) ≠ 0) :
     Irreducible (normalizedHypersurfaceCoordinates a b hb f) := by
   apply (irreducible_isUnit_mul ((isUnit_iff_ne_zero.mpr (inv_ne_zero hdir)).map C)).mpr
   exact (MulEquiv.irreducible_iff (f := hypersurfaceAffineCoordinates a b hb)).mpr hf
 
-lemma normalizedHypersurfaceCoordinates_eval_zero {K σ : Type*} [Field K]
+private lemma normalizedHypersurfaceCoordinates_eval_zero {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K)
     (hz : eval a f = 0) :
     eval (0 : Option σ → K) (normalizedHypersurfaceCoordinates a b hb f) = 0 := by
   rw [normalizedHypersurfaceCoordinates, map_mul, hypersurfaceAffineCoordinates_eval_zero, hz, mul_zero]
 
-lemma normalizedHypersurfaceCoordinates_partial_ne_zero {K σ : Type*} [Field K] [Fintype σ]
+private lemma normalizedHypersurfaceCoordinates_partial_ne_zero {K σ : Type*} [Field K] [Fintype σ]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K)
     (hdir : eval b (homogeneousComponent f.totalDegree f) ≠ 0)
     (ht : (∑ i, eval a (pderiv i f) * b i) ≠ 0) :

@@ -25,7 +25,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem literal_scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
+private theorem literal_scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hf : f ≠ 0) (hd : 0 < f.totalDegree)
     {p : ℕ} (hp : p.Prime) {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B)
     (hBp : B / A ≤ p) :
@@ -98,7 +98,7 @@ theorem literal_prime_scaled_affine_auxiliary_minimum {n : ℕ}
           (mul_le_mul_of_nonneg_right (le_max_right _ _) hA0) (by positivity)) (by positivity))
         (by positivity)
 
-lemma unscaled_auxiliary_bad_factor_bound {n k : ℕ}
+private lemma unscaled_auxiliary_bad_factor_bound {n k : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hf : f ≠ 0) (hd : 0 < f.totalDegree)
     {b S B : ℝ} (hb : 0 ≤ b) (hS : 1 ≤ S) (hB : 1 ≤ B)
     (hbound : B ≤ S * ((f.totalDegree : ℝ) + 1) ^ k)

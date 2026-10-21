@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma homogeneous_eq_chartHomogenize_mul_X {K : Type*} [Field K] {n d : ℕ}
+private lemma homogeneous_eq_chartHomogenize_mul_X {K : Type*} [Field K] {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous d) :
     f = scaledHomogenize (affineChart n f).totalDegree 1 (affineChart n f) *
       X 0 ^ (d - (affineChart n f).totalDegree) := by

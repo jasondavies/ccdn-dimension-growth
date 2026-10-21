@@ -35,7 +35,7 @@ lemma prime_interval_weight_lower {L T : ℝ} (hL : 1 ≤ L) (hLT : L ≤ T) :
   change _ ≤ ∑ p ∈ V \ U, Real.log p / p
   linarith
 
-theorem exists_prime_interval_not_dvd {L T : ℝ} (hL : 1 ≤ L) (hLT : L ≤ T)
+private theorem exists_prime_interval_not_dvd {L T : ℝ} (hL : 1 ≤ L) (hLT : L ≤ T)
     {D : ℤ} (hD : 0 < D)
     (hheight : Real.log D / L < Real.log T - Real.log L - 2 * mertensError) :
     ∃ p : ℕ, p.Prime ∧ L < p ∧ (p : ℝ) ≤ T ∧ ¬ (p : ℤ) ∣ D := by

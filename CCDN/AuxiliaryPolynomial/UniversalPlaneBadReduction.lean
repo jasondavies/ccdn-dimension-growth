@@ -23,7 +23,7 @@ open MvPolynomial
 
 /-- Bad ambient reduction forces the ENTIRE parameter polynomial to vanish.
 The target field is infinite, so it suffices to inspect sections. -/
-theorem universalPlaneBadWitness_map_eq_zero_of_bad
+private theorem universalPlaneBadWitness_map_eq_zero_of_bad
     {R L σ : Type*} [CommRing R] [Field L] [Infinite L] {p : ℕ} [CharP L p]
     (φ : R →+* L) (f : MvPolynomial σ R) (hpos : 0 < f.totalDegree)
     (hchar : f.totalDegree < p)

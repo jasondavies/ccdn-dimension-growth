@@ -22,7 +22,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
-theorem square_minorGcd_eq_abs_det {s : ℕ} (A : Matrix (Fin s) (Fin s) ℤ) :
+private theorem square_minorGcd_eq_abs_det {s : ℕ} (A : Matrix (Fin s) (Fin s) ℤ) :
     Int.Matrix.minorGcd A = |A.det| := by
   classical
   let : Nonempty (Set.powersetCard (Fin s) s) :=
@@ -44,7 +44,7 @@ def affineCongruenceDeterminantLower (n d s : ℕ) (H Q : ℝ) : ℝ :=
 /-- A strict numerical gap forces every maximal determinant to vanish.
 The arithmetic divisibility and archimedean bounds come from the
 equation, its smooth residue classes, and the integer points. -/
-theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
+private theorem affine_congruence_evaluation_det_eq_zero {n s M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 2)) ℤ)
     (hir : AbsolutelyIrreducible f)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
