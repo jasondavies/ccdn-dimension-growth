@@ -52,8 +52,8 @@ theorem smoothAffineResidue_card_le {n p : ℕ} [Fact p.Prime]
       apply Subtype.ext
       exact congrArg (fun z : {a : Fin (n + 1) → ZMod p // eval a g = 0} => z.val) h
     have hcard := Fintype.card_le_of_injective φ hφ
-    have hsz := finite_field_polynomial_zeros_mul_card_fin g hg
-    rw [Nat.card_eq_fintype_card, ZMod.card] at hsz
+    have hsz := finite_field_polynomial_zeros_mul_card g hg
+    rw [Nat.card_eq_fintype_card, ZMod.card, Fintype.card_fin] at hsz
     have hdeg : g.totalDegree ≤ f.totalDegree := by
       change (map (Int.castRingHom (ZMod p)) f).totalDegree ≤ _
       rw [map_eq_eval₂Hom_C_comp]

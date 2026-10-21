@@ -7,10 +7,10 @@ module
 
 public import CCDN.Noether.BivariateTotalDegree
 public import Mathlib.Basic.Real.Basic
-import CCDN.Auxiliary.IntegerGridInterpolation
-import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.Height.MultivariateGridHeight
 import CCDN.Projection.ShearNormalization
-/-! A coefficient-height witness on the bounded integer plane grid. -/
+/-! A coefficient-height witness on the bounded integer plane grid: the case n = 2 of
+`CCDN.Height.MultivariateGridHeight`. -/
 
 @[expose] public section
 namespace CCDN
@@ -22,7 +22,8 @@ lemma bivariatePolynomialEquiv_eval {R : Type*} [CommRing R]
     (Polynomial.map (Polynomial.evalRingHom y) (bivariatePolynomialEquiv R f)).eval x =
       MvPolynomial.eval ![x, y] f := by
   have he : (Polynomial.evalRingHom x).comp
-      ((Polynomial.mapRingHom (Polynomial.evalRingHom y)).comp (bivariatePolynomialEquiv R).toRingHom) =
+      ((Polynomial.mapRingHom (Polynomial.evalRingHom y)).comp
+        (bivariatePolynomialEquiv R).toRingHom) =
       MvPolynomial.eval ![x, y] := by
     apply MvPolynomial.ringHom_ext
     · intro c
@@ -31,51 +32,25 @@ lemma bivariatePolynomialEquiv_eval {R : Type*} [CommRing R]
       fin_cases i <;> simp [bivariatePolynomialEquiv_X_zero, bivariatePolynomialEquiv_X_one]
   exact RingHom.congr_fun he f
 
+/-- Natural-number points of `Fin 2 → ℕ`, written as vectors of length two. -/
+private lemma natCast_fin_two_eq {R : Type*} [CommRing R] (a : Fin 2 → ℕ) :
+    (fun i => (a i : R)) = ![(a 0 : R), (a 1 : R)] := by
+  funext i
+  fin_cases i <;> rfl
+
+/-- The plane case of `multivariate_coefficient_bound_of_integer_grid`, for nested
+polynomials. -/
 theorem bivariate_coefficient_bound_of_integer_grid (f : ℝ[X][X]) {d : ℕ}
     (hd : bivariateTotalDegree f ≤ d) {H : ℝ} (hH : 0 ≤ H)
     (heval : ∀ x y : ℕ, x ≤ d → y ≤ d →
       |(Polynomial.map (Polynomial.evalRingHom (y : ℝ)) f).eval (x : ℝ)| ≤ H) (i j : ℕ) :
     |(f.coeff i).coeff j| ≤ ((d : ℝ) + 1) ^ (2 * (d + 1)) * H := by
-  have hcoeff (y : ℕ) (hy : y ≤ d) :
-      |(f.coeff i).eval (y : ℝ)| ≤ ((d : ℝ) + 1) ^ (d + 1) * H := by
-    have hh := polynomial_coefficient_bound_of_integer_grid
-      (Polynomial.map (Polynomial.evalRingHom (y : ℝ)) f)
-      ((Polynomial.natDegree_map_le).trans ((bivariate_natDegree_le_totalDegree f).trans hd))
-      hH (fun x hx => heval x y hx hy) i
-    simpa only [coeff_map, coe_evalRingHom] using hh
-  have hh := polynomial_coefficient_bound_of_integer_grid (f.coeff i)
-    ((bivariate_coefficient_natDegree_le_totalDegree f i).trans hd)
-    (show 0 ≤ ((d : ℝ) + 1) ^ (d + 1) * H by positivity) hcoeff j
-  convert hh using 1
-  rw [show 2 * (d + 1) = (d + 1) * 2 by omega, pow_mul, pow_two]
-  ring
-
-theorem plane_coefficient_bound_of_integer_grid (f : MvPolynomial (Fin 2) ℝ) {d : ℕ}
-    (hd : f.totalDegree ≤ d) {H : ℝ} (hH : 0 ≤ H)
-    (heval : ∀ x y : ℕ, x ≤ d → y ≤ d → |MvPolynomial.eval ![(x : ℝ), (y : ℝ)] f| ≤ H)
-    (m : Fin 2 →₀ ℕ) : |f.coeff m| ≤ ((d : ℝ) + 1) ^ (2 * (d + 1)) * H := by
-  have hh := bivariate_coefficient_bound_of_integer_grid (bivariatePolynomialEquiv ℝ f)
-    (by simpa only [bivariateTotalDegree_equiv] using hd) hH
-    (fun x y hx hy => by rw [bivariatePolynomialEquiv_eval]; exact heval x y hx hy) (m 0) (m 1)
-  rwa [bivariatePolynomialEquiv_coeff, ← bivariate_exponent_eq m] at hh
-
-/-- One grid point simultaneously controls every coefficient. -/
-theorem exists_plane_grid_height_witness (f : MvPolynomial (Fin 2) ℝ) {d : ℕ}
-    (hd : f.totalDegree ≤ d) :
-    ∃ x y : ℕ, x ≤ d ∧ y ≤ d ∧ ∀ m,
-      |f.coeff m| ≤ ((d : ℝ) + 1) ^ (2 * (d + 1)) *
-        |MvPolynomial.eval ![(x : ℝ), (y : ℝ)] f| := by
-  classical
-  let S := Finset.range (d + 1) ×ˢ Finset.range (d + 1)
-  have hS : S.Nonempty := ⟨(0, 0), by simp [S]⟩
-  obtain ⟨p, hp, hmax⟩ := S.exists_max_image
-    (fun p : ℕ × ℕ => |MvPolynomial.eval ![(p.1 : ℝ), (p.2 : ℝ)] f|) hS
-  have hp' : p.1 ≤ d ∧ p.2 ≤ d := by
-    simpa only [S, Finset.mem_product, Finset.mem_range, Nat.lt_succ_iff] using hp
-  refine ⟨p.1, p.2, hp'.1, hp'.2, ?_⟩
-  apply plane_coefficient_bound_of_integer_grid f hd (abs_nonneg _)
-  intro x y hx hy
-  exact hmax (x, y) (by simp only [S, Finset.mem_product, Finset.mem_range]; omega)
+  have h := multivariate_coefficient_bound_of_integer_grid
+    ((bivariatePolynomialEquiv ℝ).symm f) hd hH (fun a ha => by
+      have hh := heval (a 0) (a 1) (ha 0) (ha 1)
+      rwa [← (bivariatePolynomialEquiv ℝ).apply_symm_apply f, bivariatePolynomialEquiv_eval,
+        ← natCast_fin_two_eq] at hh) (Finsupp.cons i (Finsupp.single 0 j))
+  rwa [← bivariatePolynomialEquiv_coeff, AlgEquiv.apply_symm_apply] at h
 
 /-- The integer version also supplies a nonzero value for every nonzero
 plane equation. -/
@@ -84,58 +59,18 @@ theorem exists_integer_plane_grid_height_witness (f : MvPolynomial (Fin 2) ℤ)
     ∃ x y : ℕ, x ≤ d ∧ y ≤ d ∧ MvPolynomial.eval ![(x : ℤ), (y : ℤ)] f ≠ 0 ∧ ∀ m,
       |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (2 * (d + 1)) *
         |(MvPolynomial.eval ![(x : ℤ), (y : ℤ)] f : ℝ)| := by
-  let fR := MvPolynomial.map (Int.castRingHom ℝ) f
-  have hdeg : fR.totalDegree ≤ d := by
-    dsimp only [fR]
-    unfold MvPolynomial.totalDegree
-    rw [MvPolynomial.support_map_of_injective _ Int.cast_injective]
-    exact hd
-  obtain ⟨x, y, hx, hy, h⟩ := exists_plane_grid_height_witness fR hdeg
-  have he : MvPolynomial.eval ![(x : ℝ), (y : ℝ)] fR =
-      (MvPolynomial.eval ![(x : ℤ), (y : ℤ)] f : ℝ) := by
-    have hh := MvPolynomial.map_eval (Int.castRingHom ℝ) ![(x : ℤ), (y : ℤ)] f
-    change (Int.castRingHom ℝ) (MvPolynomial.eval ![(x : ℤ), (y : ℤ)] f) =
-      MvPolynomial.eval (fun i => ((![(x : ℤ), (y : ℤ)] i : ℤ) : ℝ)) fR at hh
-    have hv : (fun i => ((![(x : ℤ), (y : ℤ)] i : ℤ) : ℝ)) = ![(x : ℝ), (y : ℝ)] := by
-      funext i
-      fin_cases i <;> simp
-    simpa only [hv, Int.coe_castRingHom] using hh.symm
-  have hc (m) : |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (2 * (d + 1)) *
-      |(MvPolynomial.eval ![(x : ℤ), (y : ℤ)] f : ℝ)| := by
-    simpa only [fR, MvPolynomial.coeff_map, Int.coe_castRingHom, ← he] using h m
-  refine ⟨x, y, hx, hy, ?_, hc⟩
-  intro hz
-  apply hf
-  apply MvPolynomial.ext
-  intro m
-  have hh := hc m
-  rw [hz, Int.cast_zero, abs_zero, mul_zero] at hh
-  have heq := abs_nonpos_iff.mp hh
-  exact Int.cast_injective (α := ℝ) (by simpa using heq)
+  obtain ⟨a, ha, hne, hc⟩ := exists_integer_multivariate_grid_height_witness f hf hd
+  lift a to Fin 2 → ℕ using fun i => (ha i).1
+  rw [natCast_fin_two_eq] at hne hc
+  exact ⟨a 0, a 1, Int.ofNat_le.mp (ha 0).2, Int.ofNat_le.mp (ha 1).2, hne, hc⟩
 
-lemma integer_plane_eval_real_map (f : MvPolynomial (Fin 2) ℤ) (x y : ℕ) :
-    MvPolynomial.eval ![(x : ℝ), (y : ℝ)] (MvPolynomial.map (Int.castRingHom ℝ) f) =
-      (MvPolynomial.eval ![(x : ℤ), (y : ℤ)] f : ℝ) := by
-  have hh := MvPolynomial.map_eval (Int.castRingHom ℝ) ![(x : ℤ), (y : ℤ)] f
-  change (Int.castRingHom ℝ) (MvPolynomial.eval ![(x : ℤ), (y : ℤ)] f) =
-    MvPolynomial.eval (fun i => ((![(x : ℤ), (y : ℤ)] i : ℤ) : ℝ))
-      (MvPolynomial.map (Int.castRingHom ℝ) f) at hh
-  have hv : (fun i => ((![(x : ℤ), (y : ℤ)] i : ℤ) : ℝ)) = ![(x : ℝ), (y : ℝ)] := by
-    funext i
-    fin_cases i <;> simp
-  simpa only [hv, Int.coe_castRingHom] using hh.symm
-
+/-- The plane case of `integer_multivariate_coefficient_bound_of_grid`. -/
 theorem integer_plane_coefficient_bound_of_grid (f : MvPolynomial (Fin 2) ℤ) {d : ℕ}
     (hd : f.totalDegree ≤ d) {H : ℝ} (hH : 0 ≤ H)
     (heval : ∀ x y : ℕ, x ≤ d → y ≤ d → |(MvPolynomial.eval ![(x : ℤ), (y : ℤ)] f : ℝ)| ≤ H)
-    (m : Fin 2 →₀ ℕ) : |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (2 * (d + 1)) * H := by
-  have hdR : (MvPolynomial.map (Int.castRingHom ℝ) f).totalDegree ≤ d := by
-    unfold MvPolynomial.totalDegree
-    rw [MvPolynomial.support_map_of_injective _ Int.cast_injective]
-    exact hd
-  have h := plane_coefficient_bound_of_integer_grid (MvPolynomial.map (Int.castRingHom ℝ) f)
-    hdR hH (fun x y hx hy => by rw [integer_plane_eval_real_map]; exact heval x y hx hy) m
-  simpa only [MvPolynomial.coeff_map, Int.coe_castRingHom] using h
+    (m : Fin 2 →₀ ℕ) : |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (2 * (d + 1)) * H :=
+  integer_multivariate_coefficient_bound_of_grid f hd hH (fun a ha => by
+    rw [natCast_fin_two_eq]; exact heval (a 0) (a 1) (ha 0) (ha 1)) m
 
 end
 end CCDN

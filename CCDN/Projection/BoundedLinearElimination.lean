@@ -9,8 +9,8 @@ public import CCDN.Auxiliary.HypersurfaceAffineCoordinates
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.Algebra.IntegerPolynomialAvoidance
 import CCDN.Auxiliary.HypersurfaceGoodDirection
-import CCDN.Determinant.BoundedMinorSpecialization
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-! A single bounded linear elimination step. A chosen nonzero ideal equation
@@ -37,7 +37,7 @@ theorem exists_bounded_full_degree_direction {σ : Type*} [Fintype σ]
     rw [totalDegree_X]
     have hh := (homogeneousComponent_isHomogeneous f.totalDegree f).totalDegree_le
     omega
-  obtain ⟨b, hb, hval⟩ := exists_integer_grid_rational_eval_ne_zero P hp _ hd
+  obtain ⟨b, hb, hval⟩ := exists_integer_grid_eval_ne_zero_of_totalDegree P hp _ hd
   change eval (fun i => (b i : ℚ))
     (X none * homogeneousComponent f.totalDegree f) ≠ 0 at hval
   rw [eval_mul, eval_X] at hval

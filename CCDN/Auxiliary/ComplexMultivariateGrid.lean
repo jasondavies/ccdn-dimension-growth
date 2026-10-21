@@ -10,73 +10,16 @@ public import Mathlib.Analysis.Complex.Norm
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
 import CCDN.Algebra.HomogeneousChart
 import CCDN.Algebra.HomogeneousLeadingCoefficient
-import CCDN.Auxiliary.ComplexGridInterpolation
+import CCDN.Height.MultivariateGridHeight
 
-/-! Sharp complex integer-grid bounds in any number of variables. Iteration
-of the univariate bound proves the exact coefficient-positioning constant
-in CCDN Lemma 3.4.2. The distinguished homogeneous coordinate is indexed first. -/
+/-! Sharp complex integer-grid bounds for homogeneous polynomials. The affine
+grid bound of `CCDN.Height.MultivariateGridHeight` proves the exact coefficient-positioning
+constant in CCDN Lemma 3.4.2. The distinguished homogeneous coordinate is indexed first. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 open MvPolynomial
-
-theorem complex_multivariate_coefficient_bound_of_integer_grid {n : ℕ}
-    (f : MvPolynomial (Fin n) ℂ) {d : ℕ} (hd : f.totalDegree ≤ d)
-    {H : ℝ} (hH : 0 ≤ H)
-    (heval : ∀ a : Fin n → ℕ, (∀ i, a i ≤ d) → ‖eval (fun i => (a i : ℂ)) f‖ ≤ H)
-    (m : Fin n →₀ ℕ) :
-    ‖f.coeff m‖ ≤ (3 : ℝ) ^ (n * d) * H := by
-  induction n generalizing H with
-  | zero =>
-    have hm : m = 0 := Subsingleton.elim _ _
-    have hh := heval (fun i => Fin.elim0 i) (fun i => Fin.elim0 i)
-    rw [eq_C_of_isEmpty f] at hh
-    simpa [hm] using hh
-  | succ n ih =>
-    let g := (finSuccEquiv ℂ n f).coeff (m 0)
-    have hg : g.totalDegree ≤ d := by
-      by_cases hzero : g = 0
-      · simp [hzero]
-      · have hh := totalDegree_coeff_finSuccEquiv_add_le f (m 0) hzero
-        dsimp only [g]
-        omega
-    have hvalues (a : Fin n → ℕ) (ha : ∀ i, a i ≤ d) :
-        ‖eval (fun i => (a i : ℂ)) g‖ ≤ (3 : ℝ) ^ d * H := by
-      have hh := complex_polynomial_coefficient_bound_of_integer_grid
-        (Polynomial.map (eval (fun i => (a i : ℂ))) (finSuccEquiv ℂ n f))
-        (Polynomial.natDegree_map_le.trans ((natDegree_finSuccEquiv f).le.trans
-          ((degreeOf_le_totalDegree f 0).trans hd))) hH
-        (fun x hx => ?_) (m 0)
-      · simpa only [g, Polynomial.coeff_map] using hh
-      · rw [← eval_eq_eval_mv_eval']
-        have hcons : (Fin.cons (x : ℂ) (fun i => (a i : ℂ))) =
-            (fun i => (((Fin.cons x a : Fin (n + 1) → ℕ) i) : ℂ)) := by
-          funext i
-          refine Fin.cases ?_ (fun j => ?_) i <;> rfl
-        rw [hcons]
-        exact heval (Fin.cons x a) (fun i => Fin.cases hx ha i)
-    have hh := ih g hg (show 0 ≤ (3 : ℝ) ^ d * H by positivity) hvalues m.tail
-    rw [finSuccEquiv_coeff_coeff, Finsupp.cons_tail] at hh
-    convert hh using 1
-    rw [show (n + 1) * d = n * d + d by ring, pow_add]
-    ring
-
-/-- The same grid point works for all coefficients of a complex polynomial. -/
-theorem exists_complex_multivariate_grid_height_witness {n : ℕ}
-    (f : MvPolynomial (Fin n) ℂ) {d : ℕ} (hd : f.totalDegree ≤ d) :
-    ∃ a : Fin n → ℕ, (∀ i, a i ≤ d) ∧ ∀ m,
-      ‖f.coeff m‖ ≤ (3 : ℝ) ^ (n * d) * ‖eval (fun i => (a i : ℂ)) f‖ := by
-  classical
-  let S := Fintype.piFinset (fun _ : Fin n => Finset.range (d + 1))
-  have hS : S.Nonempty := ⟨fun _ => 0, by simp [S]⟩
-  obtain ⟨a, ha, hmax⟩ := S.exists_max_image
-    (fun a => ‖eval (fun i => (a i : ℂ)) f‖) hS
-  have hb : ∀ i, a i ≤ d := by
-    simpa only [S, Fintype.mem_piFinset, Finset.mem_range, Nat.lt_succ_iff] using ha
-  refine ⟨a, hb, complex_multivariate_coefficient_bound_of_integer_grid f hd (norm_nonneg _) ?_⟩
-  intro b hb
-  exact hmax b (by simpa only [S, Fintype.mem_piFinset, Finset.mem_range, Nat.lt_succ_iff] using hb)
 
 /-- CCDN Lemma 3.4.2, with the fixed homogeneous coordinate placed first.
 The bound is simultaneous for all coefficients and has the exact factor 3^(nd). -/

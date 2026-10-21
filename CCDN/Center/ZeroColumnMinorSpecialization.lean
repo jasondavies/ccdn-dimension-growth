@@ -7,7 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import CCDN.Center.CoordinateGridAvoidance
+import CCDN.Algebra.IntegerPolynomialAvoidance
 import CCDN.Center.MinorCoordinateDegree
 import CCDN.Center.MinorSpecialization
 import CCDN.ForMathlib.MatrixRank

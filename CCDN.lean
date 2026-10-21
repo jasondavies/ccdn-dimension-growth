@@ -148,7 +148,6 @@ public import CCDN.Auxiliary.HypersurfaceRankRoots
 public import CCDN.Auxiliary.HypersurfaceSmallHeightAuxiliary
 public import CCDN.Auxiliary.HypersurfaceSourcePositionedAuxiliary
 public import CCDN.Auxiliary.IntegerCoefficientHeight
-public import CCDN.Auxiliary.IntegerGridInterpolation
 public import CCDN.Auxiliary.Interpolation
 public import CCDN.Auxiliary.LiteralAffineAuxiliaryTheorem
 public import CCDN.Auxiliary.LiteralAffineBadPrimeHeight
@@ -235,7 +234,6 @@ public import CCDN.Center.ClosureNormalizationInfinite
 public import CCDN.Center.ClosurePolynomialFractionField
 public import CCDN.Center.ClosurePolynomialMap
 public import CCDN.Center.CodimensionOneKernel
-public import CCDN.Center.CoordinateGridAvoidance
 public import CCDN.Center.FixedCoordinateCenterRows
 public import CCDN.Center.FixedCoordinateEliminationInfinite
 public import CCDN.Center.FixedCoordinateGenericNormalization
@@ -407,7 +405,6 @@ public import CCDN.Determinant.AffineCongruenceDeterminant
 public import CCDN.Determinant.AlgEquivAdicLayer
 public import CCDN.Determinant.AmbientProjectiveDeterminant
 public import CCDN.Determinant.BlockDeterminant
-public import CCDN.Determinant.BoundedMinorSpecialization
 public import CCDN.Determinant.ClosedFormIntegerMinor
 public import CCDN.Determinant.ClosedFormMinorCharge
 public import CCDN.Determinant.CongruenceHypersurfaceDeterminant
@@ -502,6 +499,7 @@ public import CCDN.ForMathlib.MatrixRank
 public import CCDN.ForMathlib.MvPolynomial
 public import CCDN.ForMathlib.NatCast
 public import CCDN.ForMathlib.Polynomial
+public import CCDN.ForMathlib.SchwartzZippel
 public import CCDN.ForMathlib.StandardMonomials
 public import CCDN.ForMathlib.ZLattice
 public import CCDN.Height.AffineBoxRanges

@@ -5,17 +5,109 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Basic.Real.Basic
-import CCDN.Auxiliary.IntegerGridInterpolation
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.Analysis.Complex.Norm
+import CCDN.Auxiliary.ComplexGridInterpolation
+import Mathlib.Tactic.IntervalCases
+import Mathlib.Tactic.Positivity
 
 /-! Coefficient control on the integer grid in every finite dimension.
-The explicit interpolation factor has logarithm O_n(d log(d+1)). -/
+Iterating the sharp univariate bound gives the factor 3^(nd) over ℂ (CCDN Lemma 3.4.2);
+the real and integer statements, with the weaker factor (d+1)^(n(d+1)), are corollaries
+obtained by embedding the coefficients in ℂ. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 open MvPolynomial
+
+/-- Iterated one-variable interpolation controls every coefficient of a complex polynomial
+from its values on the full grid {0,...,d}^n, with the exact factor 3^(nd). -/
+theorem complex_multivariate_coefficient_bound_of_integer_grid {n : ℕ}
+    (f : MvPolynomial (Fin n) ℂ) {d : ℕ} (hd : f.totalDegree ≤ d)
+    {H : ℝ} (hH : 0 ≤ H)
+    (heval : ∀ a : Fin n → ℕ, (∀ i, a i ≤ d) → ‖eval (fun i => (a i : ℂ)) f‖ ≤ H)
+    (m : Fin n →₀ ℕ) :
+    ‖f.coeff m‖ ≤ (3 : ℝ) ^ (n * d) * H := by
+  induction n generalizing H with
+  | zero =>
+    have hm : m = 0 := Subsingleton.elim _ _
+    have hh := heval (fun i => Fin.elim0 i) (fun i => Fin.elim0 i)
+    rw [eq_C_of_isEmpty f] at hh
+    simpa [hm] using hh
+  | succ n ih =>
+    let g := (finSuccEquiv ℂ n f).coeff (m 0)
+    have hg : g.totalDegree ≤ d := by
+      by_cases hzero : g = 0
+      · simp [hzero]
+      · have hh := totalDegree_coeff_finSuccEquiv_add_le f (m 0) hzero
+        dsimp only [g]
+        omega
+    have hvalues (a : Fin n → ℕ) (ha : ∀ i, a i ≤ d) :
+        ‖eval (fun i => (a i : ℂ)) g‖ ≤ (3 : ℝ) ^ d * H := by
+      have hh := complex_polynomial_coefficient_bound_of_integer_grid
+        (Polynomial.map (eval (fun i => (a i : ℂ))) (finSuccEquiv ℂ n f))
+        (Polynomial.natDegree_map_le.trans ((natDegree_finSuccEquiv f).le.trans
+          ((degreeOf_le_totalDegree f 0).trans hd))) hH
+        (fun x hx => ?_) (m 0)
+      · simpa only [g, Polynomial.coeff_map] using hh
+      · rw [← eval_eq_eval_mv_eval']
+        have hcons : (Fin.cons (x : ℂ) (fun i => (a i : ℂ))) =
+            (fun i => (((Fin.cons x a : Fin (n + 1) → ℕ) i) : ℂ)) := by
+          funext i
+          refine Fin.cases ?_ (fun j => ?_) i <;> rfl
+        rw [hcons]
+        exact heval (Fin.cons x a) (fun i => Fin.cases hx ha i)
+    have hh := ih g hg (show 0 ≤ (3 : ℝ) ^ d * H by positivity) hvalues m.tail
+    rw [finSuccEquiv_coeff_coeff, Finsupp.cons_tail] at hh
+    convert hh using 1
+    rw [show (n + 1) * d = n * d + d by ring, pow_add]
+    ring
+
+/-- The same grid point works for all coefficients of a complex polynomial. -/
+theorem exists_complex_multivariate_grid_height_witness {n : ℕ}
+    (f : MvPolynomial (Fin n) ℂ) {d : ℕ} (hd : f.totalDegree ≤ d) :
+    ∃ a : Fin n → ℕ, (∀ i, a i ≤ d) ∧ ∀ m,
+      ‖f.coeff m‖ ≤ (3 : ℝ) ^ (n * d) * ‖eval (fun i => (a i : ℂ)) f‖ := by
+  classical
+  let S := Fintype.piFinset (fun _ : Fin n => Finset.range (d + 1))
+  have hS : S.Nonempty := ⟨fun _ => 0, by simp [S]⟩
+  obtain ⟨a, ha, hmax⟩ := S.exists_max_image
+    (fun a => ‖eval (fun i => (a i : ℂ)) f‖) hS
+  have hb : ∀ i, a i ≤ d := by
+    simpa only [S, Fintype.mem_piFinset, Finset.mem_range, Nat.lt_succ_iff] using ha
+  refine ⟨a, hb, complex_multivariate_coefficient_bound_of_integer_grid f hd (norm_nonneg _) ?_⟩
+  intro b hb
+  exact hmax b (by simpa only [S, Fintype.mem_piFinset, Finset.mem_range, Nat.lt_succ_iff] using hb)
+
+/-- Mapping the coefficients does not increase the total degree. -/
+private lemma totalDegree_map_le {R S σ : Type*} [CommRing R] [CommRing S] {φ : R →+* S}
+    {f : MvPolynomial σ R} : (map φ f).totalDegree ≤ f.totalDegree := by
+  classical exact Finset.sup_mono (support_map_subset φ f)
+
+/-- The sharp factor 3^(nd) is at most the factor (d+1)^(n(d+1)) of the real statements. -/
+private lemma three_pow_mul_le (n d : ℕ) :
+    (3 : ℝ) ^ (n * d) ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) := by
+  rw [pow_mul', pow_mul']
+  gcongr
+  rcases Nat.lt_or_ge d 2 with hd | hd
+  · interval_cases d <;> norm_num
+  · have h3 : (3 : ℝ) ≤ d + 1 := by exact_mod_cast (show 3 ≤ d + 1 by omega)
+    calc (3 : ℝ) ^ d ≤ ((d : ℝ) + 1) ^ d := by gcongr
+      _ ≤ ((d : ℝ) + 1) ^ (d + 1) := pow_le_pow_right₀ (by linarith) d.le_succ
+
+/-- Transfer of the complex grid bound along a ring homomorphism into ℂ. -/
+private lemma coefficient_bound_of_integer_grid_of_ringHom {R : Type*} [CommRing R]
+    (φ : R →+* ℂ) {n : ℕ} (f : MvPolynomial (Fin n) R) {d : ℕ} (hd : f.totalDegree ≤ d)
+    {H : ℝ} (hH : 0 ≤ H)
+    (heval : ∀ a : Fin n → ℕ, (∀ i, a i ≤ d) → ‖φ (eval (fun i => (a i : R)) f)‖ ≤ H)
+    (m : Fin n →₀ ℕ) :
+    ‖φ (f.coeff m)‖ ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) * H := by
+  have h := complex_multivariate_coefficient_bound_of_integer_grid (map φ f)
+    (totalDegree_map_le.trans hd) hH
+    (fun a ha => by simpa [map_eval, Function.comp_def] using heval a ha) m
+  rw [coeff_map] at h
+  exact h.trans (mul_le_mul_of_nonneg_right (three_pow_mul_le n d) hH)
 
 /-- Iterated one-variable interpolation controls every coefficient from the
 values on the full grid, with a constant depending only on degree and dimension. -/
@@ -25,58 +117,8 @@ theorem multivariate_coefficient_bound_of_integer_grid {n : ℕ}
     (heval : ∀ a : Fin n → ℕ, (∀ i, a i ≤ d) → |eval (fun i => (a i : ℝ)) f| ≤ H)
     (m : Fin n →₀ ℕ) :
     |f.coeff m| ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) * H := by
-  induction n generalizing H with
-  | zero =>
-    have hm : m = 0 := Subsingleton.elim _ _
-    have hh := heval (fun i => Fin.elim0 i) (fun i => Fin.elim0 i)
-    rw [eq_C_of_isEmpty f] at hh
-    simpa [hm] using hh
-  | succ n ih =>
-    let g := (finSuccEquiv ℝ n f).coeff (m 0)
-    have hg : g.totalDegree ≤ d := by
-      by_cases hzero : g = 0
-      · simp [hzero]
-      · have hh := totalDegree_coeff_finSuccEquiv_add_le f (m 0) hzero
-        dsimp only [g]
-        omega
-    have hvalues (a : Fin n → ℕ) (ha : ∀ i, a i ≤ d) :
-        |eval (fun i => (a i : ℝ)) g| ≤ ((d : ℝ) + 1) ^ (d + 1) * H := by
-      have hh := polynomial_coefficient_bound_of_integer_grid
-        (Polynomial.map (eval (fun i => (a i : ℝ))) (finSuccEquiv ℝ n f))
-        (Polynomial.natDegree_map_le.trans ((natDegree_finSuccEquiv f).le.trans
-          ((degreeOf_le_totalDegree f 0).trans hd))) hH
-        (fun x hx => ?_) (m 0)
-      · simpa only [g, Polynomial.coeff_map] using hh
-      · rw [← eval_eq_eval_mv_eval']
-        have hcons : (Fin.cons (x : ℝ) (fun i => (a i : ℝ))) =
-            (fun i => (((Fin.cons x a : Fin (n + 1) → ℕ) i) : ℝ)) := by
-          funext i
-          refine Fin.cases ?_ (fun j => ?_) i <;> rfl
-        rw [hcons]
-        exact heval (Fin.cons x a) (fun i => Fin.cases hx ha i)
-    have hh := ih g hg (show 0 ≤ ((d : ℝ) + 1) ^ (d + 1) * H by positivity)
-      hvalues m.tail
-    rw [finSuccEquiv_coeff_coeff, Finsupp.cons_tail] at hh
-    convert hh using 1
-    rw [show (n + 1) * (d + 1) = n * (d + 1) + (d + 1) by ring, pow_add]
-    ring
-
-/-- A single bounded grid value controls all coefficients simultaneously. -/
-theorem exists_multivariate_grid_height_witness {n : ℕ}
-    (f : MvPolynomial (Fin n) ℝ) {d : ℕ} (hd : f.totalDegree ≤ d) :
-    ∃ a : Fin n → ℕ, (∀ i, a i ≤ d) ∧ ∀ m,
-      |f.coeff m| ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) *
-        |eval (fun i => (a i : ℝ)) f| := by
-  classical
-  let S := Fintype.piFinset (fun _ : Fin n => Finset.range (d + 1))
-  have hS : S.Nonempty := ⟨fun _ => 0, by simp [S]⟩
-  obtain ⟨a, ha, hmax⟩ := S.exists_max_image
-    (fun a => |eval (fun i => (a i : ℝ)) f|) hS
-  have hb : ∀ i, a i ≤ d := by
-    simpa only [S, Fintype.mem_piFinset, Finset.mem_range, Nat.lt_succ_iff] using ha
-  refine ⟨a, hb, multivariate_coefficient_bound_of_integer_grid f hd (abs_nonneg _) ?_⟩
-  intro b hb
-  exact hmax b (by simpa only [S, Fintype.mem_piFinset, Finset.mem_range, Nat.lt_succ_iff] using hb)
+  simpa [Complex.norm_real] using coefficient_bound_of_integer_grid_of_ringHom
+    Complex.ofRealHom f hd hH (fun a ha => by simpa [Complex.norm_real] using heval a ha) m
 
 /-- The interpolation estimate for an integer polynomial. -/
 theorem integer_multivariate_coefficient_bound_of_grid {n : ℕ}
@@ -85,19 +127,9 @@ theorem integer_multivariate_coefficient_bound_of_grid {n : ℕ}
     (heval : ∀ a : Fin n → ℕ, (∀ i, a i ≤ d) →
       |(eval (fun i => (a i : ℤ)) f : ℝ)| ≤ H) (m : Fin n →₀ ℕ) :
     |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) * H := by
-  have hdR : (map (Int.castRingHom ℝ) f).totalDegree ≤ d := by
-    unfold MvPolynomial.totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
-    exact hd
-  have he (a : Fin n → ℕ) : eval (fun i => (a i : ℝ)) (map (Int.castRingHom ℝ) f) =
-      (eval (fun i => (a i : ℤ)) f : ℝ) := by
-    have hh := map_eval (Int.castRingHom ℝ) (fun i => (a i : ℤ)) f
-    change (Int.castRingHom ℝ) (eval (fun i => (a i : ℤ)) f) =
-      eval (fun i => (((a i : ℤ)) : ℝ)) (map (Int.castRingHom ℝ) f) at hh
-    simpa only [Int.coe_castRingHom, Int.cast_natCast] using hh.symm
-  have hh := multivariate_coefficient_bound_of_integer_grid (map (Int.castRingHom ℝ) f)
-    hdR hH (fun a ha => by rw [he]; exact heval a ha) m
-  simpa only [coeff_map, Int.coe_castRingHom] using hh
+  simpa [Complex.norm_intCast] using coefficient_bound_of_integer_grid_of_ringHom
+    (Int.castRingHom ℂ) f hd hH
+    (fun a ha => by simpa [Complex.norm_intCast] using heval a ha) m
 
 /-- Integer equations have the same coefficient control, with a nonzero
 chosen grid value whenever the equation is nonzero. -/
@@ -105,29 +137,21 @@ theorem exists_integer_multivariate_grid_height_witness {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) {d : ℕ} (hd : f.totalDegree ≤ d) :
     ∃ a : Fin n → ℤ, (∀ i, 0 ≤ a i ∧ a i ≤ d) ∧ eval a f ≠ 0 ∧ ∀ m,
       |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) * |(eval a f : ℝ)| := by
-  let fR := map (Int.castRingHom ℝ) f
-  have hdR : fR.totalDegree ≤ d := by
-    dsimp only [fR]
-    unfold MvPolynomial.totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
-    exact hd
-  obtain ⟨a, ha, hc⟩ := exists_multivariate_grid_height_witness fR hdR
-  have he : eval (fun i => (a i : ℝ)) fR = (eval (fun i => (a i : ℤ)) f : ℝ) := by
-    have hh := map_eval (Int.castRingHom ℝ) (fun i => (a i : ℤ)) f
-    change (Int.castRingHom ℝ) (eval (fun i => (a i : ℤ)) f) =
-      eval (fun i => (((a i : ℤ)) : ℝ)) fR at hh
-    simpa only [Int.coe_castRingHom, Int.cast_natCast] using hh.symm
+  obtain ⟨a, ha, hc⟩ := exists_complex_multivariate_grid_height_witness
+    (map (Int.castRingHom ℂ) f) (totalDegree_map_le.trans hd)
+  have he : eval (fun i => (a i : ℂ)) (map (Int.castRingHom ℂ) f) =
+      ((eval (fun i => (a i : ℤ)) f : ℤ) : ℂ) := by
+    simpa [Function.comp_def] using (map_eval (Int.castRingHom ℂ) (fun i => (a i : ℤ)) f).symm
   have hb (m) : |(f.coeff m : ℝ)| ≤ ((d : ℝ) + 1) ^ (n * (d + 1)) *
       |(eval (fun i => (a i : ℤ)) f : ℝ)| := by
-    simpa only [fR, coeff_map, Int.coe_castRingHom, he] using hc m
-  refine ⟨fun i => (a i : ℤ), fun i => ⟨by positivity, by change (a i : ℤ) ≤ d; exact_mod_cast ha i⟩, ?_, hb⟩
+    have h := (hc m).trans (mul_le_mul_of_nonneg_right (three_pow_mul_le n d) (norm_nonneg _))
+    rwa [coeff_map, he, eq_intCast, Complex.norm_intCast, Complex.norm_intCast] at h
+  refine ⟨fun i => (a i : ℤ), fun i => ⟨Int.natCast_nonneg _, Int.ofNat_le.mpr (ha i)⟩, ?_, hb⟩
   intro hz
-  apply hf
-  apply MvPolynomial.ext
-  intro m
+  refine hf (MvPolynomial.ext _ _ fun m => ?_)
   have hh := hb m
   rw [hz, Int.cast_zero, abs_zero, mul_zero] at hh
-  exact Int.cast_injective (α := ℝ) (by simpa using abs_nonpos_iff.mp hh)
+  exact_mod_cast abs_nonpos_iff.mp hh
 
 end
 end CCDN

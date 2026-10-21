@@ -6,64 +6,51 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
-import Mathlib.Algebra.MvPolynomial.SchwartzZippel
-import Mathlib.Algebra.Order.Star.Rat
-import Mathlib.Tactic.NormNum.RealSqrt
-import Mathlib.Tactic.NormNum.Parity
-import Mathlib.Tactic.NormNum.NatSqrt
-import Mathlib.Tactic.NormNum.NatFib
-import Mathlib.Tactic.NormNum.LegendreSymbol
-import Mathlib.Tactic.NormNum.IsCoprime
-import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Rational
-import Mathlib.Tactic.Inclusion.Extension.Core.Core
-import Mathlib.Tactic.ENatToNat
-import Mathlib.NumberTheory.Chebyshev
-import ArithmeticHeights.Absolute
-import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
-import Mathlib.Algebra.Order.Ring.Star
-/-! A nonzero integer polynomial of total degree at most A has a nonzero
-value at an integer point with every coordinate between 0 and A. -/
+import Mathlib.Combinatorics.Nullstellensatz
+
+/-! A nonzero polynomial over a characteristic-zero domain has a nonzero value at an integer
+point with every coordinate between 0 and its degree. This is the combinatorial
+Nullstellensatz `MvPolynomial.eq_zero_of_eval_zero_at_prod_finset` on the grid {0,...,D}. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma exists_integer_grid_eval_ne_zero_fin {n : ℕ}
-    (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) (A : ℕ) (hd : f.totalDegree ≤ A) :
-    ∃ v : Fin n → ℤ, (∀ i, 0 ≤ v i ∧ v i ≤ A) ∧ eval v f ≠ 0 := by
+/-- A nonzero polynomial with coordinate degrees at most `D` has a nonzero value on the
+integer grid {0,...,D}, in any finite number of variables. Unlike the total-degree version,
+the side length does not grow with the number of variables. -/
+theorem exists_integer_grid_eval_ne_zero_of_degreeOf
+    {R σ : Type*} [CommRing R] [IsDomain R] [CharZero R] [Finite σ]
+    (f : MvPolynomial σ R) (hf : f ≠ 0) (D : ℕ) (hdeg : ∀ i, f.degreeOf i ≤ D) :
+    ∃ v : σ → ℤ, (∀ i, 0 ≤ v i ∧ v i ≤ D) ∧ eval (fun i => (v i : R)) f ≠ 0 := by
   classical
-  by_contra hn
-  push Not at hn
-  let S := Finset.Icc (0 : ℤ) (A : ℤ)
-  have hS : S.card = A + 1 := by simp [S, Int.card_Icc]
-  have he : (Fintype.piFinset fun _ : Fin n => S).filter (fun v => eval v f = 0) =
-      Fintype.piFinset (fun _ : Fin n => S) := by
-    apply Finset.filter_eq_self.mpr
-    intro v hv
-    apply hn v
-    intro i
-    exact Finset.mem_Icc.mp ((Fintype.mem_piFinset.mp hv) i)
-  have h := schwartz_zippel_totalDegree hf S
-  rw [he] at h
-  have hR : (1 : ℚ) ≤ (f.totalDegree : ℚ) / (A + 1) := by
-    simpa [hS] using (NNRat.cast_le (K := ℚ)).mpr h
-  have ha : (0 : ℚ) < A + 1 := by positivity
-  have hh := (le_div_iff₀ ha).mp hR
-  have hdR : (f.totalDegree : ℚ) ≤ A := by exact_mod_cast hd
-  linarith
+  by_contra! hn
+  let S : Finset R := (Finset.range (D + 1)).image Nat.cast
+  have hS : S.card = D + 1 := by
+    rw [Finset.card_image_of_injective _ Nat.cast_injective, Finset.card_range]
+  refine hf (eq_zero_of_eval_zero_at_prod_finset f (fun _ => S)
+    (fun i => hS ▸ Nat.lt_succ_of_le (hdeg i)) fun x hx => ?_)
+  choose a ha he using fun i => Finset.mem_image.mp (hx i)
+  have hv := hn (fun i => (a i : ℤ)) fun i =>
+    ⟨Int.natCast_nonneg _, by exact_mod_cast Finset.mem_range_succ_iff.mp (ha i)⟩
+  simpa only [Int.cast_natCast, he] using hv
 
-/-- The bound is independent of the number and names of the coordinates. -/
-theorem exists_integer_grid_eval_ne_zero {σ : Type*} [Fintype σ]
+/-- A nonzero polynomial of total degree at most `A` over a characteristic-zero domain has a
+nonzero value on the integer grid {0,...,A}. -/
+theorem exists_integer_grid_eval_ne_zero_of_totalDegree
+    {R σ : Type*} [CommRing R] [IsDomain R] [CharZero R] [Finite σ]
+    (f : MvPolynomial σ R) (hf : f ≠ 0) (A : ℕ) (hd : f.totalDegree ≤ A) :
+    ∃ v : σ → ℤ, (∀ i, 0 ≤ v i ∧ v i ≤ A) ∧ eval (fun i => (v i : R)) f ≠ 0 :=
+  exists_integer_grid_eval_ne_zero_of_degreeOf f hf A fun i =>
+    (degreeOf_le_totalDegree f i).trans hd
+
+/-- The integer case of `exists_integer_grid_eval_ne_zero_of_totalDegree`. The bound is
+independent of the number and names of the coordinates. -/
+theorem exists_integer_grid_eval_ne_zero {σ : Type*} [Finite σ]
     (f : MvPolynomial σ ℤ) (hf : f ≠ 0) (A : ℕ) (hd : f.totalDegree ≤ A) :
     ∃ v : σ → ℤ, (∀ i, 0 ≤ v i ∧ v i ≤ A) ∧ eval v f ≠ 0 := by
-  let e := Fintype.equivFin σ
-  let g := rename e f
-  have hg : g ≠ 0 := (map_ne_zero_iff _ (rename_injective e e.injective)).mpr hf
-  obtain ⟨v, hv, he⟩ := exists_integer_grid_eval_ne_zero_fin g hg A
-    ((totalDegree_rename_le e f).trans hd)
-  refine ⟨v ∘ e, fun i => hv (e i), ?_⟩
-  simpa only [g, eval_rename] using he
+  simpa only [Int.cast_id] using exists_integer_grid_eval_ne_zero_of_totalDegree f hf A hd
 
 end
 end CCDN

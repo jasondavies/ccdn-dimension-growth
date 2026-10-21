@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
+import CCDN.ForMathlib.SchwartzZippel
 import CCDN.Hypersurface.ProjectivePlaneNonabsoluteCount
 import CCDN.Projection.PrimitiveNormalization
-import Mathlib.Algebra.MvPolynomial.SchwartzZippel
 
 /-! The elementary linear case completes the uniform plane-equation
 bound in every positive degree. -/
@@ -27,16 +27,14 @@ lemma integer_ternary_zero_box_card_le (f : MvPolynomial (Fin 3) ℤ) (hf : f �
   have hfloor : 0 ≤ ⌊B⌋ := Int.floor_nonneg.mpr (by linarith)
   have hSne : S.Nonempty := ⟨0, Finset.mem_Icc.mpr ⟨by omega, hfloor⟩⟩
   have hSpos : (0 : ℝ) < S.card := by exact_mod_cast Finset.card_pos.mpr hSne
-  have h := schwartz_zippel_totalDegree hf S
-  have hR : (((integerBox 3 B).filter (fun x => eval x f = 0)).card : ℝ) /
-      (S.card : ℝ) ^ 3 ≤ f.totalDegree / (S.card : ℝ) := by
-    simpa only [NNRat.cast_div, NNRat.cast_pow, NNRat.cast_natCast, integerBox, S] using
-      (NNRat.cast_le (K := ℝ)).mpr h
+  have h : ((integerBox 3 B).filter (fun x => eval x f = 0)).card * S.card ≤
+      f.totalDegree * S.card ^ 3 := by
+    simpa only [integerBox, S, Fintype.card_fin] using schwartz_zippel_totalDegree_card hf S
   have hcard : (((integerBox 3 B).filter (fun x => eval x f = 0)).card : ℝ) ≤
       f.totalDegree * (S.card : ℝ) ^ 2 := by
-    have hh := (div_le_iff₀ (pow_pos hSpos 3)).mp hR
-    convert hh using 1
-    field_simp
+    refine le_of_mul_le_mul_right ?_ hSpos
+    rw [mul_assoc, ← pow_succ]
+    exact_mod_cast h
   have hScard : (S.card : ℝ) ≤ 3 * B := by
     dsimp only [S]
     rw [Int.card_Icc]
