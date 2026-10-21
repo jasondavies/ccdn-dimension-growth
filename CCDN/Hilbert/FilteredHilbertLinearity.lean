@@ -94,8 +94,7 @@ theorem lowerSet_shell_card_eventually_constant {σ : Type*} [Fintype σ] [Decid
       by_contra h
       push Not at h
       have hs : Finsupp.degree a.val ≤ Fintype.card σ * B := by
-        change a.val.sum (fun _ e => e) ≤ _
-        rw [Finsupp.sum_fintype _ _ (fun _ => rfl)]
+        rw [Finsupp.degree_eq_sum]
         exact (Finset.sum_le_sum (fun k _ => (h k).le)).trans_eq (by simp [Nat.mul_comm])
       rw [a.property.2] at hs
       omega

@@ -26,11 +26,12 @@ lemma homogeneous_eval_smul {K σ : Type*} [CommSemiring K]
   simp only [map_sum, eval_monomial, Finset.mul_sum]
   apply Finset.sum_congr rfl
   intro m hm
-  have hd : m.sum (fun _ e => e) = d := by
-    simpa [Finsupp.weight_apply] using hf (mem_support_iff.mp hm)
+  have hd : m.degree = d := by
+    rw [Finsupp.degree_eq_weight_one]
+    exact hf (mem_support_iff.mp hm)
   simp only [Pi.smul_apply, smul_eq_mul, mul_pow, Finsupp.prod, Finset.prod_mul_distrib,
     Finset.prod_pow_eq_pow_sum]
-  change f.coeff m * (a ^ m.sum (fun _ e => e) * _) = _
+  change f.coeff m * (a ^ m.degree * _) = _
   rw [hd]
   ring
 

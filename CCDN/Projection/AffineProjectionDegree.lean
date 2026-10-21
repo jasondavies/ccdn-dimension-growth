@@ -58,8 +58,7 @@ theorem affine_projection_equation_degree_eq_of_closure
     (closureProjectionCoordinates a) (closureProjectionCoordinates_homogeneous a ha)
     hint hfield
   rw [← projectiveClosureIdeal_projection_kernel I a ha, hsource, htarget] at heq
-  have hh := (div_left_inj' (by positivity : ((m + 1 + 1).factorial : ℚ) ≠ 0)).mp heq
-  exact_mod_cast hh
+  exact_mod_cast (div_left_inj' (by positivity : ((m + 1 + 1).factorial : ℚ) ≠ 0)).mp heq
 
 end
 end CCDN

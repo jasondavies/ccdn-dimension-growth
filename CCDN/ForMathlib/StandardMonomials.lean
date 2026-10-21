@@ -96,6 +96,6 @@ theorem exists_standard_representative_degLex [LinearOrder σ] [WellFoundedGT σ
 /-- Standard exponents of total degree at most `N`. -/
 def boundedStandardExponents (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) (N : ℕ) :
     Set (σ →₀ ℕ) :=
-  {a | a ∈ standardExponents I m ∧ a.sum (fun _ e => e) ≤ N}
+  {a | a ∈ standardExponents I m ∧ a.degree ≤ N}
 
 end Ideal

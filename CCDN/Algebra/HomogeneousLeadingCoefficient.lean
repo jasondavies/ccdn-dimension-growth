@@ -59,7 +59,7 @@ lemma lex_leadingCoeff_eq_pure_first {R : Type*} [CommRing R] {n d : ℕ}
 lemma homogeneous_pure_first_coefficient {R : Type*} [CommRing R] {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) R) (hf : f.IsHomogeneous d) :
     f.coeff (Finsupp.single 0 d) = eval (Fin.cons 1 (0 : Fin n → R)) f := by
-  have hd : (Finsupp.single (0 : Fin (n + 1)) d).sum (fun _ e => e) = d := by simp
+  have hd : (Finsupp.single (0 : Fin (n + 1)) d).degree = d := by simp
   obtain ⟨j, hj⟩ := homogeneousMonomials_surjective n d (Finsupp.single 0 d) hd
   have hc := affineChart_homogeneous_coefficient f hf j
   rw [hj] at hc
@@ -104,7 +104,7 @@ theorem exists_bounded_leading_coefficient_translation {d : ℕ}
     · change 0 ≤ (y : ℤ) ∧ (y : ℤ) ≤ d
       exact ⟨by positivity, by exact_mod_cast hy⟩
   · intro m
-    by_cases hm : m.sum (fun _ e => e) = d
+    by_cases hm : m.degree = d
     · obtain ⟨j, rfl⟩ := homogeneousMonomials_surjective 2 d m hm
       rw [← affineChart_homogeneous_coefficient f hf j, hlc, he]
       exact hcoeff _

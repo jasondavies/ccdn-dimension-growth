@@ -21,7 +21,7 @@ lemma homogeneous_eq_sum_coeff {K : Type*} [CommSemiring K] {n M : ℕ}
     f = ∑ j, monomial (homogeneousMonomials n M j) (f.coeff (homogeneousMonomials n M j)) := by
   classical
   ext p
-  by_cases hp : p.sum (fun _ e => e) = M
+  by_cases hp : p.degree = M
   · obtain ⟨j, rfl⟩ := homogeneousMonomials_surjective n M p hp
     simp [coeff_monomial, (homogeneousMonomials_injective n M).eq_iff]
   · have hc := hf.coeff_eq_zero hp
