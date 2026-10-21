@@ -15,8 +15,8 @@ import CCDN.Noether.ClosedFormRank
 import CCDN.Projection.ShearNormalization
 
 /-! A smooth rational point supplies a nonzero closed-form coefficient minor
-for an irreducible plane equation in characteristic zero or large characteristic. The base field need
-not be algebraically closed. -/
+for an irreducible plane equation in characteristic zero or large characteristic.
+The base field need not be algebraically closed. -/
 
 @[expose] public section
 namespace CCDN

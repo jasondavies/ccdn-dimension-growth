@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.CharZeroOrGT
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Derivation.MapCoeffs
 import CCDN.Determinant.DifferentialResidue
-public import CCDN.Algebra.CharZeroOrGT
 import CCDN.Noether.BoundedDifferentialConstants
 /-! A low-degree algebraic relation detects differential constants.
 If t'=1, no nonzero polynomial in t of degree below the characteristic

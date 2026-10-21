@@ -7,6 +7,7 @@ module
 
 public import CCDN.Auxiliary.HypersurfacePositioning
 public import CCDN.Noether.EulerPairBasis
+import CCDN.Determinant.GenericPlaneMinor
 import CCDN.Determinant.GenericPlaneSmoothness
 import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
 import CCDN.Noether.EulerPairBasisValues
@@ -61,28 +62,10 @@ theorem exists_genericPlane_euler_minor_charZero
       (c : Fin ((k + 2) ^ 2 - 1) → EulerColumns k),
       Function.Injective a ∧ Function.Injective c ∧
       ((eulerClosedFormCoefficientMatrix k (genericPlanePolynomial f)).submatrix a c).det ≠ 0 := by
-  let R := MvPolynomial σ K
-  let F := FractionRing R
-  let φ : R →+* F := algebraMap R F
-  let g := genericPlaneMap K F σ f
-  have hx : 0 < (optionEquivLeft K σ f).natDegree := by omega
-  have hpos : 0 < f.totalDegree := by
-    rw [natDegree_optionEquivLeft] at hx
-    exact hx.trans_le (degreeOf_le_totalDegree f none)
-  have hgi : Irreducible g := genericPlaneMap_irreducible f hf hpos hm hx
-  have hgz : eval (0 : Fin 2 → F) g = 0 := by
-    rw [genericPlaneMap_eval_zero, hz, map_zero]
-  have hgs : eval (0 : Fin 2 → F) (pderiv 0 g) ≠ 0 := by
-    rw [genericPlaneMap_pderiv, genericPlaneMap_eval_zero]
-    exact (map_ne_zero (algebraMap K F)).mpr hs
-  have hgm : (bivariatePolynomialEquiv F g).Monic := by
-    rw [genericPlaneMap_bivariate]
-    exact bivariateMap_monic φ (genericPlanePolynomial_monic f hm)
-  have hgd : (bivariatePolynomialEquiv F g).natDegree = k + 2 := by
-    rw [genericPlaneMap_bivariate, bivariateMap_natDegree_of_monic φ
-      (genericPlanePolynomial_monic f hm), genericPlanePolynomial_natDegree f hm, hdeg]
+  obtain ⟨hgi, hgz, hgs, hgm, hgd⟩ := genericPlaneMap_smooth_monic (k + 2) (by omega) f hf hm
+    hdeg hz hs
   obtain ⟨a, c, ha, hc, hdet⟩ := exists_euler_minor_of_smooth_plane_point_charZero
-    k g hgi (0 : Fin 2 → F) 0 hgz hgs hgm hgd
+    k _ hgi 0 0 hgz hgs hgm hgd
   refine ⟨a, c, ha, hc, ?_⟩
   intro he
   apply hdet

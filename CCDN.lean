@@ -456,7 +456,6 @@ public import CCDN.Determinant.PlaneSingularities
 public import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
 public import CCDN.Determinant.PlaneTangentMultiplicity
 public import CCDN.Determinant.PolynomialMapDeterminant
-public import CCDN.Determinant.PositiveCharacteristicResidue
 public import CCDN.Determinant.PrimeAggregation
 public import CCDN.Determinant.PrimeIntegerLocalDeterminant
 public import CCDN.Determinant.ProjectiveChartSmoothness
@@ -475,6 +474,7 @@ public import CCDN.Determinant.ResidueAggregation
 public import CCDN.Determinant.ResidueEliminant
 public import CCDN.Determinant.ResidueEliminantEvaluation
 public import CCDN.Determinant.ResidueSubsetBoundary
+public import CCDN.Determinant.SimpleRootResidue
 public import CCDN.Determinant.SingularApproximation
 public import CCDN.Determinant.SingularDeterminant
 public import CCDN.Determinant.SingularDeterminantCutoff

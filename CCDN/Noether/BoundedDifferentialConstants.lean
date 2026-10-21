@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.CharZeroOrGT
 public import Mathlib.RingTheory.Derivation.DifferentialRing
 public import Mathlib.Algebra.Polynomial.Derivative
-public import CCDN.Algebra.CharZeroOrGT
 import Mathlib.Data.Nat.Totient
 import Mathlib.Tactic.ContinuousFunctionalCalculus
 /-! Bounded-degree differential constants, in characteristic zero or above

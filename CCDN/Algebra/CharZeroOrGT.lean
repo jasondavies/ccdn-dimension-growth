@@ -48,10 +48,12 @@ theorem of_charZero [AddMonoidWithOne R] [CharZero R] (n : ℕ) : CharZeroOrGT R
 theorem of_charP [AddMonoidWithOne R] {p n : ℕ} [CharP R p] (h : n < p) : CharZeroOrGT R n :=
   fun _ hm hmn ↦ CharP.natCast_ne_zero_of_lt R hm.ne' (hmn.trans_lt h)
 
+/-- The hypothesis weakens to any smaller bound. -/
 theorem mono [AddMonoidWithOne R] {m n : ℕ} (h : CharZeroOrGT R n) (hmn : m ≤ n) :
     CharZeroOrGT R m :=
   fun k hk hkm ↦ h k hk (hkm.trans hmn)
 
+/-- A positive natural number up to the bound is nonzero. -/
 theorem natCast_ne_zero [AddMonoidWithOne R] {m n : ℕ} (h : CharZeroOrGT R n) (hm : m ≠ 0)
     (hmn : m ≤ n) : (m : R) ≠ 0 :=
   h m (Nat.pos_of_ne_zero hm) hmn

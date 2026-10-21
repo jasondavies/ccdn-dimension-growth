@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.CharZeroOrGT
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.RatFunc.Basic
 public import Mathlib.RingTheory.Derivation.DifferentialRing
 public import Mathlib.RingTheory.SimpleRing.Principal
-public import CCDN.Algebra.CharZeroOrGT
 import CCDN.Determinant.ResidueEliminantEvaluation
 import CCDN.Noether.DifferentialConstantRelation
 /-! Constant residues in characteristic zero or large characteristic. The nonzero

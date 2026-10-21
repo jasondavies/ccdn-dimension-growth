@@ -7,14 +7,14 @@ module
 
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.Algebra.CharZeroOrGT
 import CCDN.Determinant.PlaneSingularities
+import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Height.FiniteFieldSectionCount
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.RingTheory.PrincipalIdealDomain
 import Mathlib.RingTheory.SimpleRing.Principal
-import CCDN.Algebra.CharZeroOrGT
-import CCDN.ForMathlib.MvPolynomialDerivative
 /-! The singular points of an irreducible hypersurface satisfy a
 coefficient-uniform codimension-two finite-field bound. -/
 

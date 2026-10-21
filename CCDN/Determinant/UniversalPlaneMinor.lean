@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.CharZeroOrGT
-public import CCDN.Noether.UniversalPlaneFamily
 public import CCDN.Auxiliary.HypersurfacePositioning
 public import CCDN.Determinant.GenericPlaneSmoothness
+public import CCDN.Noether.UniversalPlaneFamily
 public import Mathlib.Tactic.Continuity
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Noether.ClosedFormScaling

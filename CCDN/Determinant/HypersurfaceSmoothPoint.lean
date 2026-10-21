@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import CCDN.Algebra.CharZeroOrGT
+public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Determinant.PlaneSingularities
 import CCDN.ForMathlib.MvPolynomialDerivative

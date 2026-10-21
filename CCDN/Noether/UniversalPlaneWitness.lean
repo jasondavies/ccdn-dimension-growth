@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalPlaneFamily
 public import CCDN.Algebra.CharZeroOrGT
+public import CCDN.Noether.UniversalPlaneFamily
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.UniversalPlaneMinor
