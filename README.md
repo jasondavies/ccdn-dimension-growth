@@ -114,11 +114,11 @@ the proofs through Lean's kernel and the toolchain's independent kernels (NanoDa
 - `./scripts/verify-comparator.sh` runs `lake comparator` locally, configured as Palomar runs
   it. It needs Linux, `bwrap`, and real directories (not symbolic links) under `.lake/packages`.
   It replays every declaration the compared proofs depend on, Mathlib's included, through three
-  kernels, so it takes far longer than `lake build`. Its time and memory use have not been
-  measured; the runs recorded in [docs/history/verification.txt](docs/history/verification.txt)
-  used a 16-core workstation with 249 GiB of RAM. The last recorded run (20 October 2026)
-  predates the change of the Theorem 1 exponent to `2n² + 5n − 5`, so it must be rerun before a
-  submission.
+  kernels. On a 16-core workstation with 249 GiB of RAM and the build already cached, the
+  replay itself took about four minutes; a cold run first builds the whole library. The last
+  run (21 October 2026, on the current statements, including the Theorem 1 exponent
+  `2n² + 5n − 5`) was accepted by all three kernels. Earlier runs are recorded in
+  [docs/history/verification.txt](docs/history/verification.txt).
 - The `Palomar preflight` workflow (`.github/workflows/palomar-preflight.yml`) runs Palomar's
   reusable verifier, pinned to a fixed commit, on the pushed commit. It is advisory, not a
   submission, and runs only when started by hand (`workflow_dispatch`, from the Actions tab or

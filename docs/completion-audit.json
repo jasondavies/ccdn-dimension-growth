@@ -26,7 +26,7 @@
     "date": "2026-10-21",
     "command": "bash scripts/check.sh",
     "result": "passed",
-    "note": "Statement scope was reviewed against the paper and addenda when the audit was consolidated and kept through later refactors. scripts/check.sh checks the evidence declarations, the generated documentation, provenance, the build and the axiom audit; CI runs it on every push. The sandboxed comparator (scripts/verify-comparator.sh) is not part of check.sh; see README."
+    "note": "Statement scope was reviewed against the paper and addenda when the audit was consolidated and kept through later refactors. scripts/check.sh checks the evidence declarations, the generated documentation, provenance, the build and the axiom audit; CI runs it on every push. The sandboxed comparator (scripts/verify-comparator.sh), which is not part of check.sh, was also run on 2026-10-21 against the current Challenge.lean and Solution.lean and was accepted by the Lean, NanoDa and con-ron kernels."
   },
   "path_convention": "Evidence file paths are relative to the repository root. vendor/bombieri-vaaler is the pinned local dependency; .lake/packages/mathlib denotes the Lake-resolved pinned mathlib checkout. No machine-specific absolute paths are used.",
   "dependency_revisions": {
