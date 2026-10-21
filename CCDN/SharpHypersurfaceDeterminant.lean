@@ -18,6 +18,23 @@ lemma hypersurfaceCountConstant_nonneg (n : ℕ) : 0 ≤ hypersurfaceCountConsta
   unfold hypersurfaceCountConstant
   positivity
 
+/-- The main local coefficient for projective hypersurfaces of dimension n+1. -/
+def hypersurfaceDeterminantMain (n s : ℕ) : ℝ :=
+  ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) * (n + 1 : ℝ) / (n + 2 : ℝ) *
+    (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ))
+
+lemma hypersurfaceDeterminantMain_nonneg (n s : ℕ) : 0 ≤ hypersurfaceDeterminantMain n s := by
+  unfold hypersurfaceDeterminantMain
+  positivity
+
+/-- The local exponent of `projective_hypersurface_minorGcd_sharp` in terms of
+`hypersurfaceDeterminantMain`. -/
+lemma hypersurfaceDeterminantMain_div (n s : ℕ) (m : ℝ) :
+    ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / m * (n + 1 : ℝ) / (n + 2 : ℝ) *
+      (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) = hypersurfaceDeterminantMain n s / m := by
+  unfold hypersurfaceDeterminantMain
+  ring
+
 /-- CCDN Lemma 2.8: normalized multiplicity-root error O_n(d^2/sqrt(p)). -/
 theorem projective_hypersurface_normalized_count_error {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)

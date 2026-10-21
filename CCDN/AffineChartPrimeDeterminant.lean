@@ -53,10 +53,8 @@ theorem affine_chart_hypersurface_minorGcd_sharp
     (hz : ∀ i, eval (z i) f = 0)
     (hunit : ∀ i, IsCoprime (p : ℤ) (z i 0)) :
     ∃ a : ℕ,
-      ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) /
-        (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) *
-        (n + 1 : ℝ) / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) -
-        (n + 2 : ℝ) * s ≤ a ∧
+      hypersurfaceDeterminantMain n s /
+        (p + hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p) - (n + 2 : ℝ) * s ≤ a ∧
       (p : ℤ) ^ a ∣ Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j)) := by
   let fbar := map (Int.castRingHom (ZMod p)) f
   let a := affineChart (n + 2) fbar
@@ -98,6 +96,7 @@ theorem affine_chart_hypersurface_minorGcd_sharp
       map (Int.castRingHom (ZMod p)) g * map (Int.castRingHom (ZMod p)) h := by
     rw [hgreduce]
     simpa only [h, map_pow, map_X] using homogeneous_eq_chartHomogenize_mul_X fbar (hf.map _)
+  simp only [← hypersurfaceDeterminantMain_div]
   apply projective_hypersurface_minorGcd_sharp_open f g h hf hghom hhhom he hed hg0
     (by rwa [hgreduce]) hfactor hsize F hF z hprim hz
   intro i

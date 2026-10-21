@@ -151,7 +151,6 @@ public import CCDN.IntegerPlaneLogHeight
 public import CCDN.HypersurfaceBadPrimeHeight
 
 public import CCDN.HigherDimensionalPrimeSum
-public import CCDN.HypersurfacePrimeDeterminant
 public import CCDN.HypersurfaceDeterminantRank
 public import CCDN.HypersurfaceBadPrimeCoordinates
 public import CCDN.HypersurfaceHeightDeterminant
@@ -295,7 +294,6 @@ public import CCDN.SurfaceMonomialWeight
 public import CCDN.WeightedMonomialDeterminant
 public import CCDN.SmoothHypersurfaceCongruence
 public import CCDN.SmoothProjectiveCongruence
-public import CCDN.CongruencePrimeSum
 public import CCDN.CongruenceHypersurfaceDeterminant
 public import CCDN.SmoothCongruenceDeterminant
 public import CCDN.AffineCongruenceDeterminant
