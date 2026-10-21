@@ -1,6 +1,7 @@
 module
 
 public import CCDN.ProjectivePlaneNonabsoluteCount
+public import Mathlib.Algebra.MvPolynomial.SchwartzZippel
 
 /-! The elementary linear case completes the uniform plane-equation
 bound in every positive degree. -/

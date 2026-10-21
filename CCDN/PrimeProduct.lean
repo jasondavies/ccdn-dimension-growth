@@ -1,6 +1,6 @@
 module
 
-public import Mathlib
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 
 /-!
 # Combining local divisibility at distinct primes

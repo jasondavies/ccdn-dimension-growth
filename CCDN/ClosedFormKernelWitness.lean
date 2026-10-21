@@ -2,6 +2,7 @@ module
 
 public import CCDN.BivariateCoefficientMatrix
 public import CCDN.BivariateFactorForms
+public import Mathlib.LinearAlgebra.Matrix.Rank
 
 /-! Reconstruct bounded polynomial closed forms inside the matrix
 kernel. Two independent forms force the rank drop used by the integer minor. -/

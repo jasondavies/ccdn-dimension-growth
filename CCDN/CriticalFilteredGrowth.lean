@@ -7,6 +7,7 @@ module
 
 public import CCDN.PrimeComponentTranscendence
 public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 
 /-!
 # Critical growth of a finite-dimensional coordinate space

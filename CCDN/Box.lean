@@ -1,6 +1,8 @@
 module
 
-public import Mathlib
+public import Mathlib.Algebra.Order.Archimedean.Real.Basic
+public import Mathlib.Data.Fintype.BigOperators
+public import Mathlib.Data.Int.Interval
 
 /-!
 # Integral points in real-radius boxes

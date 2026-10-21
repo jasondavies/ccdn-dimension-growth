@@ -1,6 +1,7 @@
 module
 
 public import CCDN.Interpolation
+public import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 
 /-!
 # Elementary determinant bounds

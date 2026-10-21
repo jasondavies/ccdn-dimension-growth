@@ -2,6 +2,7 @@ module
 
 public import CCDN.FullDegreeSectionIrreducibility
 public import CCDN.AffinePlaneRestriction
+public import Mathlib.Algebra.MvPolynomial.Funext
 
 /-! A hyperplane written as x₀ = ∑ aᵢxᵢ. A full-degree
 irreducible plane contained in that hyperplane certifies irreducibility

@@ -1,6 +1,8 @@
 module
 
 public import CCDN.RationalClosedForms
+public import Mathlib.RingTheory.Polynomial.IsIntegral
+public import Mathlib.Algebra.Polynomial.Bivariate
 
 /-! The characteristic-zero closed-form criterion on bivariate
 polynomials. Gauss's lemma and rational differentiation discharge the

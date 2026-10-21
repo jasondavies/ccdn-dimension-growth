@@ -2,6 +2,8 @@ module
 
 public import CCDN.OriginTruncationGenerators
 public import CCDN.ModularPolynomialLift
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.RingTheory.MvPolynomial
 
 /-! Lift singular local generators from the reduction modulo p. The
 remaining error is an explicit multiple of p, with a separate high-order term. -/

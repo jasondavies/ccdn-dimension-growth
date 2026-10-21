@@ -1,6 +1,7 @@
 module
 
-public import Mathlib
+public import Mathlib.Algebra.CharP.Defs
+public import Mathlib.Algebra.Order.Star.Real
 
 /-! Sharp leading constant for sums of surface standard-monomial degrees.
 The numerical argument retains 2/3 of the cutoff in the weighted rank. -/

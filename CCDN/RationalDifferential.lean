@@ -1,7 +1,8 @@
 module
 
 public import CCDN.AlgebraicDifferentialConstants
-public import Mathlib
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+public import Mathlib.RingTheory.SimpleRing.Principal
 
 /-! The formal derivative on a rational function field and its constant field. -/
 

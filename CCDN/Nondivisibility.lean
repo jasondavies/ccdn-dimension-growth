@@ -1,6 +1,9 @@
 module
 
 public import CCDN.AuxiliaryPolynomial
+public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.Order.Star.Int
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
 
 /-!
 # Small coefficients exclude polynomial multiples

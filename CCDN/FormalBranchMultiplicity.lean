@@ -2,6 +2,7 @@ module
 
 public import CCDN.FormalBranchOrder
 public import Mathlib.Algebra.Algebra.Pi
+public import Mathlib.RingTheory.PowerSeries.Inverse
 
 /-! A proper plane section has total multiplicity at least N at no more
 than d*m/N distinct smooth points. The proof uses local expansions

@@ -3,6 +3,7 @@ module
 public import CCDN.SmoothLocalDeterminant
 public import CCDN.ResidueAggregation
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Data.ZMod.Units
 
 /-! The local smooth determinant bound in the bivariate coordinate-ring notation,
 with either coordinate chosen as the nonsingular direction. -/

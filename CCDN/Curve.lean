@@ -1,6 +1,9 @@
 module
 
 public import CCDN.Plane
+public import Mathlib.Algebra.Order.Star.Int
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 
 /-!
 # Affine curves and the full counting target

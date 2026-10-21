@@ -2,6 +2,8 @@ module
 
 public import CCDN.SmoothLocalDeterminant
 public import CCDN.PowerSeriesOrderIndependence
+public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
+public import Mathlib.RingTheory.SimpleRing.Principal
 
 /-! A simple root over the constant field lifts to a formal power
 series root. Newton iteration and coefficient stabilization prove existence. -/
