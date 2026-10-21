@@ -29,7 +29,7 @@ DIRECTORIES = {
               "`BirationalComplementProjection`",
     "ClassGroup": "Two-torsion in class groups (Theorem 6)",
     "Counterexample": "Counterexamples to printed intermediate statements",
-    "Curve": "Curves (Theorems 2 and 3)",
+    "Curve": "Curve counts (Theorems 2 and 3, and the curve case of Theorem 1)",
     "Determinant": "Local and global determinant estimates (Sections 2 and 3.2)",
     "ForMathlib": "General results suitable for Mathlib",
     "Height": "Heights, boxes and point counts",
