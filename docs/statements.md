@@ -85,7 +85,7 @@ None of these is assumed. Statuses: `proved_internally`: proved in this library,
 
 | Input | Status | Lean declarations |
 | --- | --- | --- |
-| Cafure–Matera 2006 Corollary 5.6 / Lang–Weil unweighted bound | proved_internally | [`plane_finite_field_card_bound`](../CCDN/Plane/PlaneCount.lean#L27), [`plane_stepanov_bound`](../CCDN/Plane/PlaneStepanovBound.lean#L65), [`affine_hypersurface_finite_field_bound`](../CCDN/Hypersurface/HypersurfaceCount.lean#L87) |
+| Cafure–Matera 2006 Corollary 5.6 / Lang–Weil unweighted bound | proved_internally | [`plane_finite_field_card_bound`](../CCDN/Plane/PlaneCount.lean#L27), [`plane_stepanov_bound`](../CCDN/Plane/PlaneStepanovBound.lean#L67), [`affine_hypersurface_finite_field_bound`](../CCDN/Hypersurface/HypersurfaceCount.lean#L87) |
 | Standard Lang–Weil estimate for codimension-two singular set in proof 2.7 | proved_internally | [`finite_field_common_zeros_card_le`](../CCDN/Height/FiniteFieldSectionCount.lean#L49) |
 | Ruppert 1986 Satz 4, Theorem 3.2.2 | proved_internally | [`ambientEuler_minor_eq_zero_of_product`](../CCDN/Noether/AmbientNoetherVanishing.lean#L34), [`exists_ambientNoetherForm_nonzero`](../CCDN/Noether/AmbientNoetherNonvanishing.lean#L22), [`ambientNoetherForm_coefficientL1_le`](../CCDN/Noether/AmbientNoetherHeight.lean#L70) |
 | Use of Noether witness in Corollary 3.2.3 | proved_internally | [`exists_hypersurface_bad_prime_height_witness`](../CCDN/Auxiliary/HypersurfaceBadPrimeHeight.lean#L24), [`hypersurface_bad_prime_factor_max`](../CCDN/Auxiliary/HypersurfaceBadPrimeHeight.lean#L108) |
