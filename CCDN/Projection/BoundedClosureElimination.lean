@@ -12,10 +12,7 @@ open MvPolynomial
 
 theorem exists_fin_integer_closure_elimination_step {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime] (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hcodim : m < n)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff =
-      (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree I m d) (hcodim : m < n) :
     ∃ (c : Fin n → Fin (n + 1) → ℤ) (e : ℕ),
       (∀ i j, |c i j| ≤ d + 1) ∧ 0 < e ∧ e ≤ d ∧
       let a := fun i => integerLinearForm (c i)
@@ -26,8 +23,9 @@ theorem exists_fin_integer_closure_elimination_step {n m : ℕ}
         (e : ℚ) / (m + 1).factorial ∧
       (projectionCoordinateMap (projectiveClosureIdeal I)
         (closureProjectionCoordinates a)).IsIntegral := by
-  obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d hdim
-    (by simpa only [Fintype.card_fin] using Nat.add_lt_add_right hcodim 1) hdegree
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
+  obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d ⟨hdim, hdegree⟩
+    (by simpa only [Fintype.card_fin] using Nat.add_lt_add_right hcodim 1)
   let F := renameEquiv ℚ (finSuccEquiv n) f
   have hF : F ≠ 0 := by
     intro h

@@ -22,8 +22,7 @@ produces a homogeneous irreducible equation of exactly the original degree. -/
 theorem exists_bounded_birational_hypersurface_projection
     (m k : ℕ) (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ b : Fin (m + 2) → Fin (m + 1 + k) → ℤ,
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight (m + 1 + k) d) ∧
       (projectionCoordinateMap I
@@ -40,13 +39,15 @@ theorem exists_bounded_birational_hypersurface_projection
         RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
           Ideal.span {f} := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let n := m + 1 + k
   let A := MvPolynomial (Fin n) ℚ ⧸ I
   let F := FractionRing A
-  obtain ⟨a, ha, hinta, hinja⟩ := exists_bounded_integer_normalization m k I d hdim hdegree
+  obtain ⟨a, ha, hinta, hinja⟩ :=
+    exists_bounded_integer_normalization m k I d ⟨hdim, hdegree⟩
   let l : Fin (m + 1) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (a i)
   obtain ⟨t, ht, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I l (fun i => integerLinearForm_degree (a i)) hinja d hdim hdegree
+    I l (fun i => integerLinearForm_degree (a i)) hinja d ⟨hdim, hdegree⟩
   let b : Fin (m + 2) → Fin n → ℤ :=
     Fin.cases (fun j => (t : ℤ) ^ j.val) a
   let l' : Fin (m + 2) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
@@ -81,7 +82,7 @@ theorem exists_bounded_birational_hypersurface_projection
     rw [aeval_X]
     rfl
   obtain ⟨f, hf, hfpos, _, hker⟩ := exists_hypersurface_projection_equation_degree_le
-    I l' (fun i => integerLinearForm_degree (b i)) d hdim hdegree
+    I l' (fun i => integerLinearForm_degree (b i)) d ⟨hdim, hdegree⟩
     (fun i => X i.succ) (fun _ => by simp) hAI
   have hlhom (i) : (l' i).IsHomogeneous 1 := integerLinearForm_isHomogeneous (b i)
   have hlead := homogeneous_finite_birational_projection_leadingCoeff_eq
@@ -114,8 +115,7 @@ theorem exists_bounded_birational_hypersurface_projection_of_le
     (m n : ℕ) (hmn : m + 1 ≤ n)
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ b : Fin (m + 2) → Fin n → ℤ,
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight n d) ∧
       (projectionCoordinateMap I
@@ -132,7 +132,7 @@ theorem exists_bounded_birational_hypersurface_projection_of_le
         RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
           Ideal.span {f} := by
   obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hmn
-  exact exists_bounded_birational_hypersurface_projection m k I hI d hdim hdegree
+  exact exists_bounded_birational_hypersurface_projection m k I hI d hdimdeg
 
 section
 

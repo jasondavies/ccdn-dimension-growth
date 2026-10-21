@@ -62,27 +62,25 @@ theorem extension_projective_ideal_count_le_affine_cone_count
 theorem non_rational_projective_count_le_box
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (hundef : ¬ ∃ J : Ideal (CoordinatePolynomial (n + 1)),
       J.map (map (algebraMap ℚ K)) = I)
     {B : ℝ} (hB : 0 ≤ B) :
     (projectiveCount (rationalProjectiveIdealZeroLocusOver I) B : ℝ) ≤
       (d : ℝ) ^ 2 * (2 * B + 1) ^ m :=
   (Nat.cast_le.mpr (extension_projective_ideal_count_le_affine_cone_count I B)).trans
-    (non_rational_prime_count_le_box I d hdim hdegree hundef hB)
+    (non_rational_prime_count_le_box I d hdimdeg hundef hB)
 
 theorem nonabsolute_projective_variety_count_le_box
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n m : ℕ} (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (hred : ¬ (I.map (map (algebraMap ℚ K))).IsPrime)
     {B : ℝ} (hB : 0 ≤ B) :
     (projectiveCount (projectiveIdealZeroLocus I) B : ℝ) ≤
       (d : ℝ) ^ 2 * (2 * B + 1) ^ m :=
   (Nat.cast_le.mpr (projective_ideal_count_le_affine_cone_count I B)).trans
-    (nonabsolute_variety_count_le_box I d hdim hdegree hred hB)
+    (nonabsolute_variety_count_le_box I d hdimdeg hred hB)
 
 end
 end CCDN

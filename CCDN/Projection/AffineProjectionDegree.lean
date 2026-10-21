@@ -25,12 +25,11 @@ theorem affine_projection_equation_degree_eq_of_closure
         (FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ projectiveClosureIdeal I))
         ((Ideal.Quotient.mk (projectiveClosureIdeal I))
           (closureProjectionCoordinates a i)))) = ⊤)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff =
-      (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (f : MvPolynomial (Fin (m + 2)) ℚ) (hf : f ≠ 0) (hfpos : 0 < f.totalDegree)
     (hker : RingHom.ker (projectionCoordinateMap I a) = Ideal.span {f}) :
     f.totalDegree = d := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let J := RingHom.ker (projectionCoordinateMap I a)
   have : J.IsPrime := RingHom.ker_isPrime _
   have hJdim : (filteredHilbertPolynomial J).natDegree = m + 1 :=

@@ -25,8 +25,7 @@ lemma eval_coefficientEquiv_of_fixed
 theorem conjugate_prime_grid_card_le
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (e : K ≃+* K) (hne : I.map (mapEquiv (Fin n) e) ≠ I)
     (S : Finset K) (s : Finset (Fin n → K))
     (hzero : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0)
@@ -34,6 +33,7 @@ theorem conjugate_prime_grid_card_le
     (hgrid : ∀ x ∈ s, ∀ i, x i ∈ S) :
     s.card ≤ d ^ 2 * S.card ^ m := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let J := I.map (mapEquiv (Fin n) e)
   have : J.IsPrime := Ideal.map_isPrime_of_equiv _
   have hpoly : filteredHilbertPolynomial J = filteredHilbertPolynomial I :=
@@ -46,7 +46,7 @@ theorem conjugate_prime_grid_card_le
     obtain ⟨g, hg, rfl⟩ := (Ideal.mem_map_iff_of_surjective
       (mapEquiv (Fin n) e) (mapEquiv (Fin n) e).surjective).mp hfJ
     rw [eval_coefficientEquiv_of_fixed e x (hfixed x hx), hzero x hx g hg, map_zero]
-  have hh := principal_section_grid_card_le I d hdim hdegree f hfI S s
+  have hh := principal_section_grid_card_le I d ⟨hdim, hdegree⟩ f hfI S s
     hzero hsectionzero hgrid
   exact hh.trans (Nat.mul_le_mul_right _ (by simpa only [pow_two] using Nat.mul_le_mul_left d hfd))
 
@@ -58,8 +58,7 @@ def rationalIdealZeroLocusOver {K : Type*} [Field K] [Algebra ℚ K] {n : ℕ}
 theorem conjugate_prime_count_le_box
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (e : K ≃ₐ[ℚ] K) (hne : I.map (mapEquiv (Fin n) e.toRingEquiv) ≠ I)
     {B : ℝ} (hB : 0 ≤ B) :
     (count (rationalIdealZeroLocusOver I) B : ℝ) ≤
@@ -90,7 +89,7 @@ theorem conjugate_prime_count_le_box
     obtain ⟨hlo, hhi⟩ := abs_le.mp ((mem_integralPoints.mp ha).1 i)
     have hn : -(a i) ≤ ⌊B⌋ := Int.le_floor.mpr (by push_cast; linarith)
     exact Finset.mem_Icc.mpr ⟨by omega, Int.le_floor.mpr hhi⟩
-  have hh := conjugate_prime_grid_card_le I d hdim hdegree e.toRingEquiv hne S
+  have hh := conjugate_prime_grid_card_le I d hdimdeg e.toRingEquiv hne S
     (T.image point) hz hf hg
   rw [Finset.card_image_of_injective _ hi] at hh
   have hcard : (count (rationalIdealZeroLocusOver I) B : ℝ) ≤

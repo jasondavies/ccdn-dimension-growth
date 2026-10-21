@@ -14,8 +14,7 @@ theorem chow_restriction_irreducible_iff_birational_over_closed_field
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
     (hF : Irreducible F) (hδ : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) d)
     (hzero : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J)
@@ -24,6 +23,7 @@ theorem chow_restriction_irreducible_iff_birational_over_closed_field
     Irreducible (chowLinearSubstitution A F) ↔
       projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 2)) K ⧸ J))
         J (chowProjectionForms A) = ⊤ := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let P := chowProjectionImageIdeal J A
   let R := chowLinearSubstitution A F
   have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
@@ -35,7 +35,7 @@ theorem chow_restriction_irreducible_iff_birational_over_closed_field
   have hedegree : (filteredHilbertPolynomial P).leadingCoeff = (e : ℚ) / (m + 1).factorial := by
     simpa only [hPdim] using he
   obtain ⟨G,hG,_,hGdegree,hGzero⟩ := exists_projective_chow_exact_degree P
-    (chowProjectionImageIdeal_homogeneous J hJ A) e hPdim hedegree
+    (chowProjectionImageIdeal_homogeneous J hJ A) e ⟨hPdim, hedegree⟩
   have hRne : R ≠ 0 :=
     (chowLinearSubstitution_ne_zero_iff_center_disjoint J hJ hdim A F hzero).mpr hcenter
   have hRdegree : R.totalDegree = (m + 1) * d :=

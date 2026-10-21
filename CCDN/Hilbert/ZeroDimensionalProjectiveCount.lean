@@ -15,13 +15,12 @@ open MvPolynomial Matrix
 
 theorem exists_integer_linear_normalization_of_le (m n : ℕ) (hmn : m + 1 ≤ n)
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime] (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ a : Fin (m + 1) → Fin n → ℤ,
       (projectionCoordinateMap I (fun i => integerLinearForm (a i))).IsIntegral ∧
       Function.Injective (projectionCoordinateMap I (fun i => integerLinearForm (a i))) := by
   obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hmn
-  obtain ⟨a, _, hint, hi⟩ := exists_bounded_integer_normalization m k I d hdim hdegree
+  obtain ⟨a, _, hint, hi⟩ := exists_bounded_integer_normalization m k I d hdimdeg
   exact ⟨a, hint, hi⟩
 
 theorem zero_dimensional_projective_count_le
@@ -31,7 +30,7 @@ theorem zero_dimensional_projective_count_le
     projectiveCount (projectiveIdealZeroLocus I) B ≤ d ^ (n + 1) := by
   classical
   obtain ⟨a, hint, hi⟩ := exists_integer_linear_normalization_of_le 0 (n + 1)
-    (by omega) I d hdim (by simpa using hdegree)
+    (by omega) I d ⟨hdim, by simpa using hdegree⟩
   let L := (Matrix.map a (Int.castRingHom ℚ)).mulVecLin
   have hLapply (x : Fin (n + 1) → ℚ) (i : Fin 1) :
       L x i = eval x (integerLinearForm (a i)) := by
@@ -42,7 +41,7 @@ theorem zero_dimensional_projective_count_le
       (hs : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0) (hz : ∀ x ∈ s, L x = z) :
       s.card ≤ d ^ (n + 1) := by
     apply linear_normalization_fiber_card_le I (fun i => integerLinearForm (a i))
-      (fun i => integerLinearForm_degree (a i)) hi hint d hdim (by simpa using hdegree) z s hs
+      (fun i => integerLinearForm_degree (a i)) hi hint d ⟨hdim, by simpa using hdegree⟩ z s hs
     intro x hx i
     rw [← hLapply, hz x hx]
   let s := projectivePoints (projectiveIdealZeroLocus I) B

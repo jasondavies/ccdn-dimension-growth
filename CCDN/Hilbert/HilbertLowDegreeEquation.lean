@@ -14,12 +14,10 @@ open MvPolynomial Classical
 theorem exists_mem_ideal_degree_le_multiplicity
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ] {n : ℕ}
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime] (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = n + 1)
-    (hcodim : n + 1 < Fintype.card σ)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff =
-      (d : ℚ) / (n + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree I n d) (hcodim : n + 1 < Fintype.card σ) :
     ∃ f : MvPolynomial σ K, f ≠ 0 ∧ f ∈ I ∧ f.totalDegree ≤ d := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨U, hU, hAI⟩ := exists_hilbert_dimension_independent_coordinates I
     (Ideal.IsPrime.ne_top ‹I.IsPrime›)
   rw [Nat.card_eq_fintype_card, hdim] at hU
@@ -59,7 +57,7 @@ theorem exists_mem_ideal_degree_le_multiplicity
       Fin.lastCases_castSucc, Function.comp_def, Ideal.Quotient.mkₐ_eq_mk] using
       hAI.comp e e.injective
   obtain ⟨f, hf, _, hfd, hker⟩ := exists_hypersurface_projection_equation_degree_le
-    I a ha d hdim hdegree b hb hi
+    I a ha d ⟨hdim, hdegree⟩ b hb hi
   have he : aeval a = rename j := (rename_eq_aeval j).symm
   refine ⟨aeval a f, ?_, ?_, ?_⟩
   · rw [he]

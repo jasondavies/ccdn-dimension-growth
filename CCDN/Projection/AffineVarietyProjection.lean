@@ -44,7 +44,7 @@ theorem exists_geometrically_integral_affine_projection
         simpa only [zero_mul] using
           (lt_div_iff₀ (by positivity : (0 : ℚ) < (m + 1).factorial)).mp hpos
       have hd : 1 ≤ d := by exact_mod_cast hdQ
-      exact exists_geometric_affine_projection_positive_dimension m n I d hd hdim hdegree
+      exact exists_geometric_affine_projection_positive_dimension m n I d hd ⟨hdim, hdegree⟩
 
 /-- The dimension-only constants are chosen before the ideal, the degree,
 and the radius. The stronger preceding theorem also records the finite

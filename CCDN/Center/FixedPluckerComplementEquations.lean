@@ -41,7 +41,7 @@ theorem exists_dense_open_fixed_center_plucker_equations
   obtain ⟨Φ,hhom,hdeg,hstrict,hboundary,he⟩ :=
     exists_birational_center_plucker_equations (L := L) (r := n + 1 - m - 1)
       (projectiveClosureIdeal I)
-      (projectiveClosureIdeal_homogeneous I) d hcdim hcdegree (by omega)
+      (projectiveClosureIdeal_homogeneous I) d ⟨hcdim, hcdegree⟩ (by omega)
   have heq : fixedCoordinateBirationalSubspaceLocus (r := n + 1 - m - 1) IL =
       Subtype.val ⁻¹' (centerPluckerFamilyZeroLocus (algebraMap K L) Φ)ᶜ := by
     change Subtype.val ⁻¹' birationalCenterSubspaceLocus (projectiveClosureIdeal IL) = _

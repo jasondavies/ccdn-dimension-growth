@@ -57,8 +57,7 @@ theorem projective_chow_chart_reduction
     {K : Type*} [Field K] [IsAlgClosed K] {m n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (hF : Irreducible F)
     (δ : Fin (m + 1) → ℕ)
     (hδ : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i))
@@ -71,6 +70,7 @@ theorem projective_chow_chart_reduction
       (∀ i, G.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
       G.totalDegree = F.totalDegree := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨j,hj⟩ := exists_coordinate_not_mem_of_positive_hilbert_dimension J (by omega)
   let e := Equiv.swap 0 j
   let J' := projectivePermutedIdeal J e
@@ -85,7 +85,8 @@ theorem projective_chow_chart_reduction
     (congrArg Polynomial.natDegree hp).trans hdim
   have hd' : (filteredHilbertPolynomial J').leadingCoeff = (d : ℚ) / (m + 1).factorial :=
     (congrArg Polynomial.leadingCoeff hp).trans hdegree
-  obtain ⟨hmI,hdI⟩ := projectiveChartIdeal_hilbertPolynomial_parameters J' hJ' hX m d hm' hd'
+  obtain ⟨hmI,hdI⟩ :=
+    projectiveChartIdeal_hilbertPolynomial_parameters J' hJ' hX m d ⟨hm', hd'⟩
   let ρ := chowColumnPermutation (r := m + 1) e
   let G := rename ρ.symm F
   have hG : Irreducible G :=

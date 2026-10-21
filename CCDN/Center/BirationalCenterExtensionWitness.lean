@@ -96,15 +96,14 @@ theorem exists_birational_center_matrix_over_extension
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
     [(J.map (map (algebraMap ℚ L))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d) :
     ∃ A : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) L,
       LinearIndependent L A.row ∧ IsBirationalMatrixCenter (J.map (map (algebraMap ℚ L))) A := by
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap ℚ L).injective
   have hJE : (J.map (map (algebraMap ℚ (AlgebraicClosure L)))).IsPrime :=
     prime_ideal_scalar_extension_of_algebraicClosure J
   obtain ⟨A,hA,hdis,hint,hfield⟩ :=
-    exists_birational_minor_center (L := AlgebraicClosure L) m (n + 1) hmn J hJ d hdim hdegree
+    exists_birational_minor_center (L := AlgebraicClosure L) m (n + 1) hmn J hJ d hdimdeg
   refine ⟨_,linearIndependent_matrix_rows_map _ A hA,
     isBirationalMatrixCenter_map_of_finite_birational J hJ (by omega) A hA ?_ hint hfield⟩
   rw [ideal_scalar_extension_tower,matrix_map_algebraMap_tower]

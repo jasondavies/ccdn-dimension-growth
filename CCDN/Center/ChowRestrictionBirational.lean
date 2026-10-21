@@ -19,8 +19,7 @@ theorem geometric_chow_restriction_irreducible_iff_birational
     (I : Ideal (MvPolynomial (Fin (n + 2)) K)) [I.IsPrime]
     [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     (hI : IsHomogeneousIdeal I)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
     (hF : Irreducible (map (algebraMap K (AlgebraicClosure K)) F))
     (hδ : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) d)
@@ -35,6 +34,7 @@ theorem geometric_chow_restriction_irreducible_iff_birational
       projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 2)) K ⧸ I))
         I (chowProjectionForms A) = ⊤ := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let L := AlgebraicClosure K
   let φ := algebraMap K L
   let J := I.map (map φ)
@@ -56,7 +56,7 @@ theorem geometric_chow_restriction_irreducible_iff_birational
   have hedegree : (filteredHilbertPolynomial P).leadingCoeff = (e : ℚ) / (m + 1).factorial := by
     simpa only [hPdim] using he
   obtain ⟨G, hG, _, hGdegree, hGzero⟩ := exists_projective_chow_exact_degree P
-    (chowProjectionImageIdeal_homogeneous J hJ AL) e hPdim hedegree
+    (chowProjectionImageIdeal_homogeneous J hJ AL) e ⟨hPdim, hedegree⟩
   have hδL (i) : FL.IsWeightedHomogeneous (chowRowWeight i) d := by
     intro a ha
     apply hδ i

@@ -27,8 +27,7 @@ theorem exists_nonzero_center_detector
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
     (hr : r + 2 ≤ n + 2)
     (A : Matrix (Fin r) (Fin (n + 2)) K) (hA : LinearIndependent K A.row)
     (hgood : IsBirationalMatrixCenter J A) :
@@ -38,7 +37,7 @@ theorem exists_nonzero_center_detector
       eval (matrixPluckerCoordinates A) G ≠ 0 ∧
       ∀ B : Matrix (Fin r) (Fin (n + 2)) K, LinearIndependent K B.row →
         eval (matrixPluckerCoordinates B) G ≠ 0 → IsBirationalMatrixCenter J B := by
-  obtain ⟨Φ, hhom, hdeg, hΦ⟩ := exists_birational_center_detector J hJ d hdim hdegree hr
+  obtain ⟨Φ, hhom, hdeg, hΦ⟩ := exists_birational_center_detector J hJ d hdimdeg hr
   obtain ⟨G, hG, heval⟩ := (hΦ A hA).mpr hgood
   exact ⟨G, hhom G hG, hdeg G hG, heval, fun B hB hGB => (hΦ B hB).mp ⟨G, hG, hGB⟩⟩
 
@@ -55,8 +54,7 @@ theorem exists_bounded_integer_center_of_witness
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
     (S : Finset (Fin (n + 2))) (A : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℚ)
     (hA : LinearIndependent ℚ A.row) (hAS : ∀ i j, j ∈ S → A i j = 0)
     (hgood : IsBirationalMatrixCenter J A) :
@@ -67,8 +65,9 @@ theorem exists_bounded_integer_center_of_witness
       (∀ i j, j ∈ S → M i j = 0) ∧
       LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row ∧
       IsBirationalMatrixCenter J (M.map (Int.castRingHom ℚ)) := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨G,hhom,hdeg,hvalue,hgoodG⟩ :=
-    exists_nonzero_center_detector J hJ d hdim hdegree (by omega) A hA hgood
+    exists_nonzero_center_detector J hJ d ⟨hdim, hdegree⟩ (by omega) A hA hgood
   have hG : G ≠ 0 := by intro hz; simp [hz] at hvalue
   have hhom' : G.IsHomogeneous G.totalDegree := (hhom.totalDegree hG) ▸ hhom
   obtain ⟨M,hM,hM0,hli,hv,hminor⟩ :=
@@ -76,7 +75,7 @@ theorem exists_bounded_integer_center_of_witness
   have hbound : max 1 G.totalDegree ≤ ((m + 1) ^ 2 * d ^ 2) :=
     (max_le_max_left 1 hdeg).trans (center_detector_degree_le_square
       (hilbert_multiplicity_pos_of_prime J hdegree)
-      (geometric_projective_multiplicity_boundary J hJ hdim hdegree))
+      (geometric_projective_multiplicity_boundary J hJ ⟨hdim, hdegree⟩))
   have hb : ((max 1 G.totalDegree : ℕ) : ℤ) ≤ ((m + 1) ^ 2 * d ^ 2) := by exact_mod_cast hbound
   refine ⟨M,fun i j => ⟨(hM i j).1,(hM i j).2.trans hb⟩,fun c => ?_,hM0,hli,hgoodG _ hli hv⟩
   apply (hminor c).trans
@@ -90,8 +89,7 @@ theorem exists_bounded_integer_birational_center
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d) :
     ∃ M : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℤ,
       (∀ i j, 0 ≤ M i j ∧ M i j ≤ ((m + 1) ^ 2 * d ^ 2)) ∧
       (∀ c : Fin (n + 1 - m - 1) ↪ Fin (n + 2),
@@ -99,9 +97,9 @@ theorem exists_bounded_integer_birational_center
       LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row ∧
       IsBirationalMatrixCenter J (M.map (Int.castRingHom ℚ)) := by
   obtain ⟨A,hA,hdis,_,hfield⟩ :=
-    exists_birational_minor_center (L := AlgebraicClosure ℚ) m (n + 1) hmn J hJ d hdim hdegree
+    exists_birational_minor_center (L := AlgebraicClosure ℚ) m (n + 1) hmn J hJ d hdimdeg
   obtain ⟨M,hM,hminor,_,hli,hgood⟩ := exists_bounded_integer_center_of_witness J hJ d
-    hdim hdegree ∅ A hA (fun _ _ h => absurd h (Finset.notMem_empty _)) ⟨hdis,hfield⟩
+    hdimdeg ∅ A hA (fun _ _ h => absurd h (Finset.notMem_empty _)) ⟨hdis,hfield⟩
   exact ⟨M,hM,hminor,hli,hgood⟩
 
 /-- The same construction inside X0=0, for the projective closure of an
@@ -124,7 +122,7 @@ theorem exists_bounded_integer_fixed_coordinate_center
   obtain ⟨A,hA,hA0,hdis,_,hfield⟩ :=
     exists_fixed_coordinate_birational_minor_center (L := AlgebraicClosure ℚ) I hmn d hdim hdegree
   obtain ⟨M,hM,hminor,hM0,hli,hgood⟩ := exists_bounded_integer_center_of_witness
-    (projectiveClosureIdeal I) (projectiveClosureIdeal_homogeneous I) d hcdim hcdeg {0} A hA
+    (projectiveClosureIdeal I) (projectiveClosureIdeal_homogeneous I) d ⟨hcdim, hcdeg⟩ {0} A hA
     (fun i j hj => by simpa only [Finset.mem_singleton.mp hj] using hA0 i) ⟨hdis,hfield⟩
   exact ⟨M,hM,hminor,fun i => hM0 i 0 (Finset.mem_singleton_self 0),hli,hgood⟩
 

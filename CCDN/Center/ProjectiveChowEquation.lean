@@ -81,12 +81,11 @@ theorem exists_homogeneous_prime_projective_chow_equation
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     (hJ : IsHomogeneousIdeal J)
     (hX : X 0 ∉ J)
-    (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree J m d) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ),
       Irreducible F ∧ (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
       ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J := by
-  obtain ⟨hm, _⟩ := projectiveChartIdeal_hilbertPolynomial_parameters J hJ hX m d hdim hdegree
+  obtain ⟨hm, _⟩ := projectiveChartIdeal_hilbertPolynomial_parameters J hJ hX m d hdimdeg
   obtain ⟨F, δ, hF, _, hδ, hzero⟩ :=
     exists_projective_chow_incidence_equation (projectiveChartIdeal J) hm
   refine ⟨F, δ, hF, hδ, ?_⟩

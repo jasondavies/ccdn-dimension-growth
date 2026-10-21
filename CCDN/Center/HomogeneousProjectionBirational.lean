@@ -36,7 +36,7 @@ theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
   have hdegree : (filteredHilbertPolynomial I).leadingCoeff =
       (d : ℚ) / (m + 1).factorial := by simpa only [hm] using hlc
   obtain ⟨hfinite, hrank⟩ := homogeneous_projection_functionField_rank_bound (F := F)
-    I hI a ha hint d d hm hdegree (heq.trans hdegree)
+    I hI a ha hint d d ⟨hm, hdegree⟩ (heq.trans hdegree)
   let L := projectionImageField (F := F) I a
   let : Module.Finite L F := hfinite
   have hpos : 0 < Module.finrank L F := Module.finrank_pos

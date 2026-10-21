@@ -35,8 +35,8 @@ theorem prime_ideal_grid_card_le
   by_cases hS : S.Nonempty
   · obtain ⟨l, hl, hint, hinj, hvan⟩ := exists_grid_polynomial_normalization n m I hdim S hS
     have hh := bounded_degree_normalization_fiber_card_le I S.card
-      (Finset.card_pos.mpr hS) l hl hinj hint d hdim
-      (by simpa only [hdim] using hdegree) (0 : Fin (m + 1) → K) s hzero
+      (Finset.card_pos.mpr hS) l hl hinj hint d ⟨hdim, by simpa only [hdim] using hdegree⟩
+      (0 : Fin (m + 1) → K) s hzero
       (fun x hx i => hvan x (hgrid x hx) i)
     simpa only [hdim] using hh
   · have hS0 : S = ∅ := Finset.not_nonempty_iff_eq_empty.mp hS

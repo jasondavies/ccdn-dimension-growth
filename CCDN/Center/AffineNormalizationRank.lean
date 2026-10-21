@@ -125,7 +125,7 @@ theorem affine_normalization_functionField_finrank
   have hinjB := closure_normalization_parameters_injective I a hint d hdim hdegree
   have hcone := homogeneous_normalization_functionField_finrank (F := E) J
     (projectiveClosureIdeal_homogeneous I) (closureProjectionCoordinates a)
-    (closureProjectionCoordinates_homogeneous a ha) hinjB hint d hdimJ hdegreeJ
+    (closureProjectionCoordinates_homogeneous a ha) hinjB hint d ⟨hdimJ, hdegreeJ⟩
   let t := algebraMap (MvPolynomial Unit F) E (X ())
   have ht : t = algebraMap P E (X ()) := by
     change ρ (X ()) = _

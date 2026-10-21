@@ -16,9 +16,7 @@ theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (n + 1)) ℚ), I.IsPrime →
       IsHomogeneousIdeal I →
-      ∀ d : ℕ, 5 ≤ d →
-      (filteredHilbertPolynomial I).natDegree = 2 →
-      (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / 2 →
+      ∀ d : ℕ, 5 ≤ d → HasProjectiveDimensionDegree I 1 d →
       ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveIdealZeroLocus I) B : ℝ) ≤
         C * (d : ℝ) ^ (3 * (n + 1) + 4) * B := by
@@ -29,13 +27,11 @@ theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
       (by exact_mod_cast birationalProjectionHeightConstant_pos (n + 1))
   refine ⟨projectivePlaneAbsoluteConstant * T,
     mul_pos projectivePlaneAbsoluteConstant_pos hT, ?_⟩
-  intro I hprime hI d hd hdim hdegree B hB
+  intro I hprime hI d hd hdimdeg B hB
   have : I.IsPrime := hprime
-  have hdeg : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (1 + 1).factorial := by
-    simpa using hdegree
   obtain ⟨b, hb, hnorm, hinj, _, _, f, hf, hfhom, hfdeg, hker⟩ :=
     exists_bounded_birational_hypersurface_projection_of_le 1 (n + 1)
-      (by omega) I hI d hdim hdeg
+      (by omega) I hI d hdimdeg
   have hrel : aeval (fun i => integerLinearForm (b i)) f ∈ I := by
     apply Ideal.Quotient.eq_zero_iff_mem.mp
     change f ∈ RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i)))
@@ -47,7 +43,7 @@ theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
       s.card ≤ d ^ (n + 1) := by
     exact linear_normalization_fiber_card_le I
       (fun i : Fin 2 => integerLinearForm (b i.succ))
-      (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdim hdeg
+      (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdimdeg
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
   let H : ℝ := birationalProjectionHeightConstant (n + 1) * (d : ℝ) ^ (2 * (n + 1))
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast (show 1 ≤ d by omega)

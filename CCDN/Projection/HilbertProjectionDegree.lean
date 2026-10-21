@@ -38,14 +38,14 @@ theorem exists_hypersurface_projection_equation_degree_le
     {K τ : Type*} [Field K] [Fintype τ] [LinearOrder τ] {n : ℕ}
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
     (a : Fin (n + 2) → MvPolynomial τ K) (ha : ∀ i, (a i).totalDegree ≤ 1)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = n + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (n + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I n d)
     (b : Fin (n + 1) → MvPolynomial (Fin (n + 2)) K)
     (hb : ∀ i, (b i).totalDegree ≤ 1)
     (hi : AlgebraicIndependent K (fun i => projectionCoordinateMap I a (b i))) :
     ∃ f : MvPolynomial (Fin (n + 2)) K, Irreducible f ∧
       0 < f.totalDegree ∧ f.totalDegree ≤ d ∧
       RingHom.ker (projectionCoordinateMap I a) = Ideal.span {f} := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨f, hf, hker⟩ := exists_hypersurface_projection_equation I a ha
     (by rw [hdim]; omega) b hb hi
   have hfdeg : 0 < f.totalDegree := by

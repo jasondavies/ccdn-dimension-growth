@@ -29,8 +29,7 @@ theorem exists_extended_birational_center_detector
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
     (hr : r + 2 ≤ n + 2) :
     ∃ Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K),
       (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
@@ -39,6 +38,7 @@ theorem exists_extended_birational_center_detector
         (∃ g ∈ Φ, eval₂ (algebraMap K L)
           (matrixPluckerCoordinates A) g ≠ 0) ↔
         IsBirationalMatrixCenter (J.map (map (algebraMap K L))) A := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
   let E := AlgebraicClosure L
   let φ := algebraMap K L
@@ -59,7 +59,7 @@ theorem exists_extended_birational_center_detector
     rw [filteredHilbertPolynomial_scalar_extension]
     exact hdegree
   obtain ⟨F,s,e,Φ,_,hFE,hδ,hzero,hhom,hdeg,hdet⟩ :=
-    exists_center_resultant_forms (L := E) J hJ d hdim hdegree hr
+    exists_center_resultant_forms (L := E) J hJ d ⟨hdim, hdegree⟩ hr
   have hmap : map ψ (map φ F) = map θ F := by
     rw [MvPolynomial.map_map]
     congr 1
@@ -108,7 +108,7 @@ theorem exists_extended_birational_center_detector
         (F := FractionRing (MvPolynomial (Fin (n + 2)) L ⧸ JL)) JL
         (centerMinorProjectionForm A) = ⊤ := by
     rw [← projectionImageField_centerMinorProjectionMatrix _ A e]
-    have hh := geometric_chow_restriction_irreducible_iff_birational JL hJL d hJLdim hJLdegree
+    have hh := geometric_chow_restriction_irreducible_iff_birational JL hJL d ⟨hJLdim, hJLdegree⟩
       (map φ F) (hmap.symm ▸ hFE) hδL hzeroL (centerMinorProjectionMatrix A e)
     rw [centerMinorProjectionMatrix_map,hmap] at hh
     exact hh (centerMinorProjectionMatrix_disjoint _ AE hAE e hc)
@@ -132,8 +132,7 @@ theorem exists_birational_center_detector
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
     (hr : r + 2 ≤ n + 2) :
     ∃ Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K),
       (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
@@ -144,7 +143,7 @@ theorem exists_birational_center_detector
     rw [ideal_map_algebraMap_self]
     infer_instance
   obtain ⟨Φ,hhom,hdeg,hdet⟩ :=
-    exists_extended_birational_center_detector (L := K) J hJ d hdim hdegree hr
+    exists_extended_birational_center_detector (L := K) J hJ d hdimdeg hr
   refine ⟨Φ,hhom,hdeg,fun A hA => ?_⟩
   rw [← isBirationalMatrixCenter_congr (ideal_map_algebraMap_self J)]
   refine Iff.trans ?_ (hdet A hA)

@@ -28,8 +28,7 @@ theorem exists_homogeneous_normalization_primitive_equation
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (hi : Function.Injective (projectionCoordinateMap I a))
     (hint : (projectionCoordinateMap I a).IsIntegral)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ z : MvPolynomial (Fin n) K, ∃ f : MvPolynomial (Fin (m + 2)) K,
       IntermediateField.adjoin K
         (Set.range (fun i : Fin (m + 2) => algebraMap (MvPolynomial (Fin n) K ⧸ I) F
@@ -38,8 +37,9 @@ theorem exists_homogeneous_normalization_primitive_equation
       RingHom.ker (projectionCoordinateMap I (Fin.cases z a)) = Ideal.span {f} ∧
       (finSuccEquiv K (m + 1) f).natDegree = d := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨k, _, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I a (fun i => (ha i).totalDegree_le) hi d hdim hdegree
+    I a (fun i => (ha i).totalDegree_le) hi d ⟨hdim, hdegree⟩
   let z := momentCoordinate K n k
   let l : Fin (m + 2) → MvPolynomial (Fin n) K := Fin.cases z a
   have hl (i) : (l i).IsHomogeneous 1 := by
@@ -70,7 +70,7 @@ theorem exists_homogeneous_normalization_primitive_equation
     rw [aeval_X]
     rfl
   obtain ⟨f, hf, hfpos, _, hker⟩ := exists_hypersurface_projection_equation_degree_le
-    I l (fun i => (hl i).totalDegree_le) d hdim hdegree
+    I l (fun i => (hl i).totalDegree_le) d ⟨hdim, hdegree⟩
     (fun i => X i.succ) (fun _ => by simp) hAI
   have hfield' : IntermediateField.adjoin K
       (Set.range (fun i : Fin (m + 2) => algebraMap (MvPolynomial (Fin n) K ⧸ I) F

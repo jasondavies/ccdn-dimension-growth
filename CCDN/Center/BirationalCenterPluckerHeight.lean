@@ -38,13 +38,12 @@ theorem exists_birational_center_plucker_height
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d) :
     ∃ W ∈ birationalCenterSubspaceLocus (r := n + 1 - m - 1) J,
       (centerSubspacePlucker W).mulHeight ≤
         (centerMinorBound (n + 1 - m - 1) m d : ℕ) := by
   obtain ⟨M,hM,_,hli,hgood⟩ :=
-    exists_bounded_integer_birational_center hmn J hJ d hdim hdegree
+    exists_bounded_integer_birational_center hmn J hJ d hdimdeg
   let x : IndependentCenterMatrix ℚ (n + 1 - m - 1) (n + 2) :=
     ⟨fun q => (M q.1 q.2 : ℚ), hli⟩
   refine ⟨centerMatrixSpan x, ⟨x,hgood,rfl⟩, ?_⟩

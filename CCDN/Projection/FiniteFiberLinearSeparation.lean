@@ -18,15 +18,14 @@ theorem linear_normalization_fiber_finite
     (hl : ∀ i, (l i).totalDegree ≤ 1)
     (hi : Function.Injective (projectionCoordinateMap I l))
     (hint : (projectionCoordinateMap I l).IsIntegral)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (z : Fin (m + 1) → K) :
     {x : Fin n → K | (∀ f ∈ I, eval x f = 0) ∧ ∀ i, eval x (l i) = z i}.Finite := by
   classical
   by_contra h
   obtain ⟨s, hs, hcard⟩ := Set.Infinite.exists_subset_card_eq h (d + 1)
   have hh := bounded_degree_normalization_fiber_card_le I 1 (by omega) l hl hi hint
-    d hdim hdegree z s (fun x hx => (hs hx).1) (fun x hx => (hs hx).2)
+    d hdimdeg z s (fun x hx => (hs hx).1) (fun x hx => (hs hx).2)
   simp only [one_pow, mul_one, hcard] at hh
   omega
 

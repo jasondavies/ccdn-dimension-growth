@@ -39,7 +39,7 @@ theorem nonabsolute_affine_curve_count_le_degree_sq
     (count (idealZeroLocus I) B : ℝ) ≤ (d : ℝ) ^ 2 := by
   obtain ⟨hdim, hlc⟩ := affineCurve_filteredHilbertPolynomial_degree I d hd hdegree
   simpa only [pow_zero, mul_one] using nonabsolute_variety_count_le_box
-    (K := K) (m := 0) I d hdim (by simpa using hlc) hred hB
+    (K := K) (m := 0) I d ⟨hdim, by simpa using hlc⟩ hred hB
 
 end
 end CCDN

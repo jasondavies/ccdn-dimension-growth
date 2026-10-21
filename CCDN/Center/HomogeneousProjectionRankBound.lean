@@ -24,13 +24,13 @@ theorem homogeneous_projection_functionField_rank_bound
     (hI : IsHomogeneousIdeal I)
     (a : Fin s → MvPolynomial (Fin n) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
-    (d e : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d e : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (himage : (filteredHilbertPolynomial (RingHom.ker (projectionCoordinateMap I a))).leadingCoeff =
       (e : ℚ) / (m + 1).factorial) :
     Module.Finite (projectionImageField (F := F) I a) F ∧
       e * Module.finrank (projectionImageField (F := F) I a) F ≤ d := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let A := MvPolynomial (Fin n) K ⧸ I
   let ψ := projectionCoordinateMap I a
   let J := RingHom.ker ψ
@@ -73,7 +73,8 @@ theorem homogeneous_projection_functionField_rank_bound
   let : Module.Finite E F := hfinite
   let : Module.Finite L F := Module.Finite.of_restrictScalars_finite E L F
   have hEL : Module.finrank E L = e :=
-    homogeneous_normalization_functionField_finrank (F := L) J hJhom b hb hbinj hbint e hJdim himage
+    homogeneous_normalization_functionField_finrank (F := L) J hJhom b hb hbinj hbint e
+      ⟨hJdim, himage⟩
   let : Module.Free E L := Module.Free.of_divisionRing E L
   let : Module.Free L F := Module.Free.of_divisionRing L F
   refine ⟨inferInstance, ?_⟩

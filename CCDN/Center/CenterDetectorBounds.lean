@@ -49,7 +49,8 @@ theorem geometric_projective_dimension_zero_multiplicity_one
   have hd' : (filteredHilbertPolynomial J').leadingCoeff = (d : ℚ) / (0 + 1).factorial := by
     simpa only [Nat.zero_add, Nat.factorial_one, Nat.cast_one, div_one] using
       (congrArg Polynomial.leadingCoeff hp).trans hdegree
-  obtain ⟨hmI,hdI⟩ := projectiveChartIdeal_hilbertPolynomial_parameters J' hJ' hX 0 d hdim' hd'
+  obtain ⟨hmI,hdI⟩ :=
+    projectiveChartIdeal_hilbertPolynomial_parameters J' hJ' hX 0 d ⟨hdim', hd'⟩
   let : ((projectiveChartIdeal J').map (map (algebraMap K (AlgebraicClosure K)))).IsPrime :=
     projectiveChartIdeal_geometrically_prime J' hX
   obtain ⟨_,_,hpoly⟩ := zero_dimensional_geometrically_integral_point
@@ -97,9 +98,9 @@ lemma geometric_projective_multiplicity_boundary
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree J m d) :
     1 ≤ m ∨ d = 1 := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   by_cases hm : m = 0
   · right
     subst m

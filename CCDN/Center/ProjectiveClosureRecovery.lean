@@ -49,11 +49,11 @@ theorem projectiveChartIdeal_hilbertPolynomial_parameters
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
     (hX : X 0 ∉ I) (m d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree I m d) :
     (filteredHilbertPolynomial (projectiveChartIdeal I)).natDegree = m ∧
       (filteredHilbertPolynomial (projectiveChartIdeal I)).leadingCoeff =
         (d : ℚ) / m.factorial := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let Q := filteredHilbertPolynomial (projectiveChartIdeal I)
   have he := projectiveClosureIdeal_hilbertPolynomial_difference (projectiveChartIdeal I)
   rw [projectiveClosureIdeal_chartIdeal_eq I hI hX] at he

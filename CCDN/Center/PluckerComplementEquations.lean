@@ -127,8 +127,7 @@ theorem exists_birational_center_plucker_equations
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
     (hr : r + 2 ≤ n + 2) :
     ∃ Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K),
       (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
@@ -137,16 +136,17 @@ theorem exists_birational_center_plucker_equations
       (m = 0 → d = 1 ∧ ∀ g ∈ Φ, g.totalDegree ≤ 1) ∧
       birationalCenterSubspaceLocus (J.map (map (algebraMap K L))) =
         (centerPluckerFamilyZeroLocus (algebraMap K L) Φ)ᶜ := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨Φ,hhom,hdeg,hdet⟩ :=
-    exists_extended_birational_center_detector (L := L) J hJ d hdim hdegree hr
+    exists_extended_birational_center_detector (L := L) J hJ d ⟨hdim, hdegree⟩ hr
   refine ⟨Φ,hhom,hdeg,?_,?_,birationalCenterSubspaceLocus_eq_complement_of_extension_detector
     (algebraMap K L) (J.map (map (algebraMap K L))) Φ hhom hdet⟩
   · intro hm g hg
     exact (hdeg g hg).trans_lt (center_detector_degree_lt_square hm
       (hilbert_multiplicity_pos_of_prime J hdegree))
   · intro hm
-    have hd : d = 1 := (geometric_projective_multiplicity_boundary J hJ hdim hdegree).resolve_left
-      (by omega)
+    have hd : d = 1 :=
+      (geometric_projective_multiplicity_boundary J hJ ⟨hdim, hdegree⟩).resolve_left (by omega)
     refine ⟨hd,fun g hg => ?_⟩
     simpa only [hm,hd,Nat.zero_add,mul_one,Nat.reduceSub] using hdeg g hg
 
@@ -158,8 +158,7 @@ theorem exists_dense_open_projective_center_plucker_equations
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d) :
     letI : (J.map (map (algebraMap ℚ L))).IsPrime :=
       prime_ideal_scalar_extension_of_algebraicClosure J
     ∃ Φ : Finset (MvPolynomial (Fin (n + 1 - m - 1) ↪ Fin (n + 2)) ℚ),
@@ -177,9 +176,9 @@ theorem exists_dense_open_projective_center_plucker_equations
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap ℚ L).injective
   obtain ⟨Φ,hhom,hdeg,hstrict,hboundary,he⟩ :=
     exists_birational_center_plucker_equations (L := L) (r := n + 1 - m - 1)
-      J hJ d hdim hdegree (by omega)
+      J hJ d hdimdeg (by omega)
   obtain ⟨A,hA,hgood⟩ := exists_birational_center_matrix_over_extension
-    (L := L) hmn J hJ d hdim hdegree
+    (L := L) hmn J hJ d hdimdeg
   let x : IndependentCenterMatrix L (n + 1 - m - 1) (n + 2) := ⟨fun q => A q.1 q.2,hA⟩
   have hx : centerMatrixSpan x ∈ (centerPluckerFamilyZeroLocus (algebraMap ℚ L) Φ)ᶜ := by
     rw [← he]
@@ -197,14 +196,13 @@ theorem birationalCenterSubspaceLocus_plucker_dense_open
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d) :
     Dense (birationalCenterSubspaceLocus (r := n + 1 - m - 1) J) ∧
       IsOpen (birationalCenterSubspaceLocus (r := n + 1 - m - 1) J) := by
   have : (J.map (map (algebraMap ℚ ℚ))).IsPrime :=
     prime_ideal_scalar_extension_of_algebraicClosure J
   obtain ⟨_,_,_,_,_,_,hdense,hopen⟩ :=
-    exists_dense_open_projective_center_plucker_equations (L := ℚ) hmn J hJ d hdim hdegree
+    exists_dense_open_projective_center_plucker_equations (L := ℚ) hmn J hJ d hdimdeg
   rw [birationalCenterSubspaceLocus_congr (ideal_map_algebraMap_self J)] at hdense hopen
   exact ⟨hdense,hopen⟩
 

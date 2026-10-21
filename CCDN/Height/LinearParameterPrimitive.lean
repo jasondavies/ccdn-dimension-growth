@@ -21,13 +21,13 @@ theorem exists_bounded_linear_parameter_primitive
     (l : Fin (m + 1) → MvPolynomial (Fin n) K)
     (hl : ∀ i, (l i).totalDegree ≤ 1)
     (hi : Function.Injective (projectionCoordinateMap I l))
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ k : ℕ, k ≤ n * d ^ 2 ∧
       IntermediateField.adjoin K
         (Set.range (fun i : Fin (m + 2) =>
           algebraMap (MvPolynomial (Fin n) K ⧸ I) F
             ((Ideal.Quotient.mk I) (Fin.cases (momentCoordinate K n k) l i)))) = ⊤ := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let A := MvPolynomial (Fin n) K ⧸ I
   let φ := IsScalarTower.toAlgHom K A F
   let u : Fin (m + 1) → F := fun i => φ ((Ideal.Quotient.mk I) (l i))

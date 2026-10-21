@@ -71,6 +71,14 @@ def filteredHilbertPolynomial {K σ : Type*} [Field K] [Fintype σ] [LinearOrder
     (I : Ideal (MvPolynomial σ K)) : Polynomial ℚ :=
   (filteredCoordinateSpace_eventually_polynomial I).choose
 
+/-- The cone over `I` has filtered Hilbert polynomial of degree `m + 1` and leading coefficient
+`d / (m + 1)!`. For a homogeneous ideal `I` this says that the projective variety cut out by `I`
+has dimension `m` and degree `d`. -/
+structure HasProjectiveDimensionDegree {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
+    (I : Ideal (MvPolynomial σ K)) (m d : ℕ) : Prop where
+  natDegree_eq : (filteredHilbertPolynomial I).natDegree = m + 1
+  leadingCoeff_eq : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial
+
 theorem filteredHilbertPolynomial_spec {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) :
     ∃ N : ℕ, ∀ n ≥ N, (filteredHilbertPolynomial I).eval (n : ℚ) =

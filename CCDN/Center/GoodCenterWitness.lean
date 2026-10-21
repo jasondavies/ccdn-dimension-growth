@@ -19,8 +19,7 @@ theorem exists_birational_minor_center
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
     [(I.map (map (algebraMap ℚ L))).IsPrime]
     (hI : IsHomogeneousIdeal I)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ A : Matrix (Fin (n - m - 1)) (Fin (n + 1)) ℚ,
       LinearIndependent ℚ A.row ∧
       (∀ p ∈ projectiveIdealZeroLocus (I.map (map (algebraMap ℚ L))),
@@ -29,7 +28,7 @@ theorem exists_birational_minor_center
       projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ I))
         I (centerMinorProjectionForm A) = ⊤ := by
   obtain ⟨b, A, hA, hker, hdisjoint, hint, hfield⟩ :=
-    exists_geometric_center_row_witness (L := L) m n hmn I hI d hdim hdegree
+    exists_geometric_center_row_witness (L := L) m n hmn I hI d hdimdeg
   have hr : n - m - 1 + 2 ≤ n + 1 := by omega
   let B : Matrix (Fin (m + 2)) (Fin (n + 1)) ℚ := fun i j => (b i j : ℚ)
   have hforms : chowProjectionForms B = fun i => integerLinearForm (b i) := rfl

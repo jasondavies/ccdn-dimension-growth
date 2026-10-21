@@ -39,8 +39,8 @@ theorem exists_geometric_projective_chow_without_chart
     (congrArg Polynomial.natDegree hp).trans hdim
   obtain ⟨d,_,_,hdegree⟩ := filteredHilbertPolynomial_positive_multiplicity J'
     (Ideal.IsPrime.ne_top ‹J'.IsPrime›)
-  obtain ⟨hm,_⟩ := projectiveChartIdeal_hilbertPolynomial_parameters J' hJ' hX m d hdim'
-    (by simpa only [hdim'] using hdegree)
+  obtain ⟨hm,_⟩ := projectiveChartIdeal_hilbertPolynomial_parameters J' hJ' hX m d
+    ⟨hdim', by simpa only [hdim'] using hdegree⟩
   let : ((projectiveChartIdeal J').map (map (algebraMap K L))).IsPrime :=
     projectiveChartIdeal_geometrically_prime J' hX
   obtain ⟨F,δ,hF,_,hδ,hFL,hzero⟩ := exists_geometric_projective_chow_incidence_equation

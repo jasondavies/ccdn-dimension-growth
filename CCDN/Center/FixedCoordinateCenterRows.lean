@@ -47,7 +47,7 @@ theorem exists_independent_fixed_coordinate_closure_projection
   obtain ⟨v, hv, hli, hint, hfield⟩ := exists_independent_linear_primitive_extension
     (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ J)) J
     (closureProjectionCoordinates b) (closureProjectionCoordinates_homogeneous b hb)
-    hcone hinj (by omega) d hJdim hJdegree
+    hcone hinj (by omega) d ⟨hJdim, hJdegree⟩
   refine ⟨Fin.cons v (closureProjectionCoordinates b), ?_, hli, ?_, hint, hfield⟩
   · intro i
     exact Fin.cases hv (closureProjectionCoordinates_homogeneous b hb) i

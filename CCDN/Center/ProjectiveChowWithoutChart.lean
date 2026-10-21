@@ -38,7 +38,7 @@ theorem exists_projective_chow_equation_without_chart
   have hdim' : (filteredHilbertPolynomial J').natDegree = m + 1 :=
     (congrArg Polynomial.natDegree hp).trans hdim
   obtain ⟨F,δ,hF,hδ,hzero⟩ := exists_homogeneous_prime_projective_chow_equation
-    J' hJ' hX hdim' (by simpa only [hdim'] using hdegree)
+    J' hJ' hX ⟨hdim', by simpa only [hdim'] using hdegree⟩
   let ρ := chowColumnPermutation (r := m + 1) e
   refine ⟨rename ρ F, δ, ?_, ?_, ?_⟩
   · exact (MulEquiv.irreducible_iff (renameEquiv K ρ)).mpr hF

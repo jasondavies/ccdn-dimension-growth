@@ -20,8 +20,7 @@ theorem exists_independent_bounded_birational_hypersurface_projection
     (m n : ℕ) (hmn : m + 2 ≤ n)
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ b : Fin (m + 2) → Fin n → ℤ,
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight n d) ∧
       LinearIndependent ℚ (fun i => fun j => (b i j : ℚ)) ∧
@@ -39,8 +38,9 @@ theorem exists_independent_bounded_birational_hypersurface_projection
         RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
           Ideal.span {f} := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨b, hb, hinta, hinja, hint, hfield, f, hf, hfhom, hfdeg, hker⟩ :=
-    exists_bounded_birational_hypersurface_projection_of_le m n (by omega) I hI d hdim hdegree
+    exists_bounded_birational_hypersurface_projection_of_le m n (by omega) I hI d ⟨hdim, hdegree⟩
   by_cases hli : LinearIndependent ℚ (fun i => fun j => (b i j : ℚ))
   · exact ⟨b, hb, hli, hinta, hinja, hint, hfield, f, hf, hfhom, hfdeg, hker⟩
   have htail : LinearIndependent ℚ
@@ -129,7 +129,7 @@ theorem exists_independent_bounded_birational_hypersurface_projection
     rw [aeval_X]
     rfl
   obtain ⟨g, hg, hgpos, _, hkg⟩ := exists_hypersurface_projection_equation_degree_le
-    I l (fun i => integerLinearForm_degree (c i)) d hdim hdegree
+    I l (fun i => integerLinearForm_degree (c i)) d ⟨hdim, hdegree⟩
     (fun i => X i.succ) (fun _ => by simp) hAI
   have hlhom (i) : (l i).IsHomogeneous 1 := integerLinearForm_isHomogeneous (c i)
   have hlead := homogeneous_finite_birational_projection_leadingCoeff_eq

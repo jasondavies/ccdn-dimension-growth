@@ -24,13 +24,13 @@ theorem bounded_degree_normalization_fiber_card_le_of_fractionField
     (hl : ∀ i, (l i).totalDegree ≤ q)
     (hi : Function.Injective (projectionCoordinateMap I l))
     (hint : (projectionCoordinateMap I l).IsIntegral)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (z : Fin (m + 1) → K) (s : Finset (Fin n → K))
     (hzero : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0)
     (hproj : ∀ x ∈ s, ∀ i, eval x (l i) = z i) :
     s.card ≤ d * q ^ (m + 1) := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let A := MvPolynomial (Fin n) K ⧸ I
   let η : A →ₐ[K] E := IsScalarTower.toAlgHom K A E
   let v : Fin (m + 1) → E := fun i => η ((Ideal.Quotient.mk I) (l i))
@@ -86,14 +86,13 @@ theorem bounded_degree_normalization_fiber_card_le
     (hl : ∀ i, (l i).totalDegree ≤ q)
     (hi : Function.Injective (projectionCoordinateMap I l))
     (hint : (projectionCoordinateMap I l).IsIntegral)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (z : Fin (m + 1) → K) (s : Finset (Fin n → K))
     (hzero : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0)
     (hproj : ∀ x ∈ s, ∀ i, eval x (l i) = z i) :
     s.card ≤ d * q ^ (m + 1) :=
   bounded_degree_normalization_fiber_card_le_of_fractionField
-    (E := FractionRing (MvPolynomial (Fin n) K ⧸ I)) I q hq l hl hi hint d hdim hdegree z s hzero hproj
+    (E := FractionRing (MvPolynomial (Fin n) K ⧸ I)) I q hq l hl hi hint d hdimdeg z s hzero hproj
 
 end
 end CCDN

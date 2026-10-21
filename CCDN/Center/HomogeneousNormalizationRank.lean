@@ -43,8 +43,7 @@ theorem homogeneous_normalization_functionField_finrank
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (hi : Function.Injective (projectionCoordinateMap I a))
     (hint : (projectionCoordinateMap I a).IsIntegral)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     Module.finrank (IntermediateField.adjoin K
       (Set.range (fun i => algebraMap (MvPolynomial (Fin n) K ⧸ I) F
         ((Ideal.Quotient.mk I) (a i))))) F = d := by
@@ -82,7 +81,7 @@ theorem homogeneous_normalization_functionField_finrank
       change (aeval u) (X i) = u i
       rw [aeval_X])
   obtain ⟨z, f, hfield, hf, _, _, hd, hker, hdeg⟩ :=
-    exists_homogeneous_normalization_primitive_equation (F := F) I hI a ha hi hint d hdim hdegree
+    exists_homogeneous_normalization_primitive_equation (F := F) I hI a ha hi hint d hdimdeg
   let w := η ((Ideal.Quotient.mk I) z)
   let p : Polynomial P := finSuccEquiv K (m + 1) f
   have hp : Irreducible p := (MulEquiv.irreducible_iff (finSuccEquiv K (m + 1))).mpr hf

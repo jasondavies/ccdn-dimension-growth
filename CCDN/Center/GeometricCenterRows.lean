@@ -50,8 +50,7 @@ theorem exists_geometric_center_row_witness
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
     [(I.map (map (algebraMap ℚ L))).IsPrime]
     (hI : IsHomogeneousIdeal I)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ (b : Fin (m + 2) → Fin (n + 1) → ℤ)
       (A : Matrix (Fin (n - m - 1)) (Fin (n + 1)) ℚ),
       LinearIndependent ℚ A.row ∧
@@ -65,7 +64,7 @@ theorem exists_geometric_center_row_witness
           (FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ I))
           ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ := by
   obtain ⟨b, S, _, hS, hdimS, _, hdisjoint, hint, hfield, _⟩ :=
-    exists_geometric_birational_projection_center (L := L) m n hmn I hI d hdim hdegree
+    exists_geometric_birational_projection_center (L := L) m n hmn I hI d hdimdeg
   obtain ⟨A, hA, hspan⟩ := exists_submodule_basis_matrix S hdimS
   have hker : Submodule.span ℚ (Set.range A.row) =
       (Matrix.mulVecLin (fun i j => (b i j : ℚ))).ker := hspan.trans hS

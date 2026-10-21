@@ -41,8 +41,7 @@ theorem exists_independent_linear_primitive_extension
     (hint : (projectionCoordinateMap I a).IsIntegral)
     (hinj : Function.Injective (projectionCoordinateMap I a))
     (hmn : m + 2 ≤ n) (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ v : MvPolynomial (Fin n) K,
       v.IsHomogeneous 1 ∧ LinearIndependent K (Fin.cons v a) ∧
       (projectionCoordinateMap I (Fin.cons v a)).IsIntegral ∧
@@ -58,7 +57,7 @@ theorem exists_independent_linear_primitive_extension
   have hali : LinearIndependent K a :=
     hai.linearIndependent.of_comp (Ideal.Quotient.mkₐ K I).toLinearMap
   obtain ⟨k, _, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I a (fun i => (ha i).totalDegree_le) hinj d hdim hdegree
+    I a (fun i => (ha i).totalDegree_le) hinj d hdimdeg
   let p := momentCoordinate K n k
   have hfieldp : projectionImageField (F := F) I (Fin.cons p a) = ⊤ := hfield
   suffices ∃ v : MvPolynomial (Fin n) K,

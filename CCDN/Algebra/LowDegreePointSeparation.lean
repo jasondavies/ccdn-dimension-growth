@@ -17,11 +17,11 @@ open MvPolynomial
 theorem exists_low_degree_point_separator_of_pos_dimension
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (z : Fin n → K) (hz : ¬ ∀ f ∈ I, eval z f = 0) :
     ∃ g : MvPolynomial (Fin n) K, g ∈ I ∧ g.totalDegree ≤ d ∧ eval z g ≠ 0 := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   have hmn : m + 1 ≤ n := by
     obtain ⟨_, _, hd, _⟩ := filteredHilbertPolynomial_positive_multiplicity I
       (Ideal.IsPrime.ne_top ‹I.IsPrime›)
@@ -30,7 +30,7 @@ theorem exists_low_degree_point_separator_of_pos_dimension
   let V := {x : Fin n → K | (∀ f ∈ I, eval x f = 0) ∧
     ∀ i, eval x (l i) = eval z (l i)}
   have hV : V.Finite := linear_normalization_fiber_finite I l
-    (fun i => (hl i).totalDegree_le) hinj hint d hdim hdegree (fun i => eval z (l i))
+    (fun i => (hl i).totalDegree_le) hinj hint d ⟨hdim, hdegree⟩ (fun i => eval z (l i))
   have hzV : z ∉ hV.toFinset := by
     intro h
     exact hz (hV.mem_toFinset.mp h).1
@@ -50,7 +50,7 @@ theorem exists_low_degree_point_separator_of_pos_dimension
     rw [← comp_aeval, he]
     exact hinj
   obtain ⟨F, _, _, hFd, hker⟩ :=
-    exists_hypersurface_projection_equation_degree_le I a ha d hdim hdegree b hb hi
+    exists_hypersurface_projection_equation_degree_le I a ha d ⟨hdim, hdegree⟩ b hb hi
   have hintA : (projectionCoordinateMap I a).IsIntegral := by
     intro x
     apply RingHom.IsIntegralElem.of_comp (f := (aeval (R := K) b).toRingHom)
@@ -151,8 +151,8 @@ theorem exists_low_degree_point_separator
   · exact exists_low_degree_point_separator_of_dimension_zero I d hdim
       (by simpa only [hdim, Nat.factorial_zero, Nat.cast_one, div_one] using hdegree) z hz
   · obtain ⟨m, hm⟩ := Nat.exists_eq_succ_of_ne_zero hdim
-    exact exists_low_degree_point_separator_of_pos_dimension I d hm
-      (by simpa only [hm] using hdegree) z hz
+    exact exists_low_degree_point_separator_of_pos_dimension I d
+      ⟨hm, by simpa only [hm] using hdegree⟩ z hz
 
 /-- In particular, noncontainment of prime varieties is witnessed in degree
 at most the multiplicity of the ideal providing the equation. -/

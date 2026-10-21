@@ -23,8 +23,7 @@ theorem exists_geometrically_integral_projective_projection
     [(I.map (map (algebraMap ℚ L))).IsPrime]
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hd : 1 ≤ d)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ b : Fin (m + 2) → Fin (n + 1) → ℤ,
       (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
       IntermediateField.adjoin ℚ
@@ -41,7 +40,7 @@ theorem exists_geometrically_integral_projective_projection
             (((n + 1 : ℕ) * birationalProjectionHeightConstant (n + 1) : ℕ) *
               (d : ℝ) ^ (2 * (n + 1)) * B) := by
   obtain ⟨b, hint, hfield, f, hf, hfhom, hfdeg, hker, hcount⟩ :=
-    exists_projective_variety_projection m n hmn I hI d hd hdim hdegree
+    exists_projective_variety_projection m n hmn I hI d hd hdimdeg
   exact ⟨b, hint, hfield, f, hf,
     projection_equation_irreducible_map I _ f hf.ne_zero hker,
     hfhom, hfdeg, hker, hcount⟩

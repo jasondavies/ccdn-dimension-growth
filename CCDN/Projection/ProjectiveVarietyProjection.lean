@@ -21,8 +21,7 @@ theorem exists_projective_variety_projection
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hd : 1 ≤ d)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ b : Fin (m + 2) → Fin (n + 1) → ℤ,
       (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
       IntermediateField.adjoin ℚ
@@ -39,7 +38,7 @@ theorem exists_projective_variety_projection
               (d : ℝ) ^ (2 * (n + 1)) * B) := by
   obtain ⟨b, hb, hnorm, hinj, hint, hfield, f, hf, hfhom, hfdeg, hker⟩ :=
     exists_bounded_birational_hypersurface_projection_of_le m (n + 1)
-      (by omega) I hI d hdim hdegree
+      (by omega) I hI d hdimdeg
   refine ⟨b, hint, hfield, f, hf, hfhom, hfdeg, hker, ?_⟩
   have hrel : aeval (fun i => integerLinearForm (b i)) f ∈ I := by
     apply Ideal.Quotient.eq_zero_iff_mem.mp
@@ -52,7 +51,7 @@ theorem exists_projective_variety_projection
       s.card ≤ d := by
     have hh := bounded_degree_normalization_fiber_card_le I 1 (by omega)
       (fun i : Fin (m + 1) => integerLinearForm (b i.succ))
-      (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdim hdegree
+      (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdimdeg
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
     simpa only [one_pow, Nat.mul_one] using hh
   let H : ℝ := birationalProjectionHeightConstant (n + 1) * (d : ℝ) ^ (2 * (n + 1))

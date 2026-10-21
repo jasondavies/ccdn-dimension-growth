@@ -12,8 +12,7 @@ open MvPolynomial
 
 theorem exists_bounded_affine_birational_projection
     (m k : ℕ) (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ b : Fin (m + 2) → Fin (m + 1 + k) → ℤ,
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight (m + 1 + k) d) ∧
       (projectionCoordinateMap I
@@ -35,10 +34,11 @@ theorem exists_bounded_affine_birational_projection
   let n := m + 1 + k
   let A := MvPolynomial (Fin n) ℚ ⧸ I
   let F := FractionRing A
-  obtain ⟨a, ha, hinta, hinja, hcone⟩ := exists_bounded_integer_closure_normalization m k I d hdim hdegree
+  obtain ⟨a, ha, hinta, hinja, hcone⟩ :=
+    exists_bounded_integer_closure_normalization m k I d hdimdeg
   let l : Fin (m + 1) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (a i)
   obtain ⟨t, ht, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I l (fun i => integerLinearForm_degree (a i)) hinja d hdim hdegree
+    I l (fun i => integerLinearForm_degree (a i)) hinja d hdimdeg
   let b : Fin (m + 2) → Fin n → ℤ :=
     Fin.cases (fun j => (t : ℤ) ^ j.val) a
   let l' : Fin (m + 2) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
@@ -73,7 +73,7 @@ theorem exists_bounded_affine_birational_projection
     rw [aeval_X]
     rfl
   obtain ⟨f, hf, hfpos, hfd, hker⟩ := exists_hypersurface_projection_equation_degree_le
-    I l' (fun i => integerLinearForm_degree (b i)) d hdim hdegree
+    I l' (fun i => integerLinearForm_degree (b i)) d hdimdeg
     (fun i => X i.succ) (fun _ => by simp) hAI
   have hcone' : (projectionCoordinateMap (projectiveClosureIdeal I)
       (closureProjectionCoordinates l')).IsIntegral := by

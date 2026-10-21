@@ -51,14 +51,14 @@ theorem principal_section_hilbert_dimension
 theorem principal_section_degree_budget
     {K : Type*} [Field K] [Infinite K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (f : MvPolynomial (Fin n) K) (hf : f ∉ I) (hfdeg : 0 < f.totalDegree)
     (hsection : I ⊔ Ideal.span {f} ≠ ⊤) :
     ∃ e : ℕ, 0 < e ∧ e ≤ d * f.totalDegree ∧
       (filteredHilbertPolynomial (I ⊔ Ideal.span {f})).natDegree = m ∧
       (filteredHilbertPolynomial (I ⊔ Ideal.span {f})).leadingCoeff =
         (e : ℚ) / m.factorial := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   have hdimJ := principal_section_hilbert_dimension I hdim f hf hfdeg hsection
   obtain ⟨e, he, _, hlc⟩ := filteredHilbertPolynomial_positive_multiplicity
     (I ⊔ Ideal.span {f}) hsection
@@ -79,8 +79,7 @@ minimal-prime decomposition constructed inside the proof. -/
 theorem principal_section_grid_card_le
     {K : Type*} [Field K] [CharZero K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (f : MvPolynomial (Fin n) K) (hf : f ∉ I)
     (S : Finset K) (s : Finset (Fin n → K))
     (hzero : ∀ x ∈ s, ∀ g ∈ I, eval x g = 0)
@@ -88,6 +87,7 @@ theorem principal_section_grid_card_le
     (hgrid : ∀ x ∈ s, ∀ i, x i ∈ S) :
     s.card ≤ d * f.totalDegree * S.card ^ m := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let J := I ⊔ Ideal.span {f}
   have hzJ (x) (hx : x ∈ s) : ∀ g ∈ J, eval x g = 0 := by
     change J ≤ RingHom.ker (eval x)
@@ -115,7 +115,8 @@ theorem principal_section_grid_card_le
     apply hJ
     dsimp [J]
     rw [Ideal.span_singleton_eq_top.mpr hu, sup_top_eq]
-  obtain ⟨e, _, hed, hedim, helc⟩ := principal_section_degree_budget I d hdim hdegree f hf hfdeg hJ
+  obtain ⟨e, _, hed, hedim, helc⟩ :=
+    principal_section_degree_budget I d ⟨hdim, hdegree⟩ f hf hfdeg hJ
   have hh := pure_ideal_grid_card_le n J m e hedim helc
     (principal_section_minimalPrimeComponents_pure I hdim f hf) S s hzJ hgrid
   exact hh.trans (Nat.mul_le_mul_right _ hed)

@@ -19,8 +19,7 @@ theorem exists_center_resultant_forms
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
     (hr : r + 2 ≤ n + 2) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
       (s : ℕ) (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 2)))
@@ -37,6 +36,7 @@ theorem exists_center_resultant_forms
           Irreducible (chowLinearSubstitution (centerMinorProjectionMatrix A e)
             (map (algebraMap K L) F)) := by
   classical
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
   let φ := algebraMap K L
   let JL := J.map (map φ)
@@ -45,7 +45,7 @@ theorem exists_center_resultant_forms
     rw [filteredHilbertPolynomial_scalar_extension]
     exact hdim
   obtain ⟨F,hF,hFL,hδ,hFdegree,hzero⟩ :=
-    exists_geometric_projective_chow_exact_degree (L := L) J hJ d hdim hdegree
+    exists_geometric_projective_chow_exact_degree (L := L) J hJ d ⟨hdim, hdegree⟩
   obtain ⟨s,⟨e⟩⟩ := exists_center_minor_coordinate_enumeration hr
   have hd : 0 < d := by
     have hp := irreducible_mvPolynomial_totalDegree_pos hF
@@ -80,8 +80,7 @@ theorem exists_geometric_center_detector
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree J m d)
     (hr : r + 2 ≤ n + 2) :
     ∃ Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K),
       (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
@@ -94,6 +93,7 @@ theorem exists_geometric_center_detector
         projectionImageField
           (F := FractionRing (MvPolynomial (Fin (n + 2)) L ⧸ J.map (map (algebraMap K L))))
           (J.map (map (algebraMap K L))) (centerMinorProjectionForm A) = ⊤ := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
   let φ := algebraMap K L
   let JL := J.map (map φ)
@@ -105,7 +105,7 @@ theorem exists_geometric_center_detector
     rw [filteredHilbertPolynomial_scalar_extension]
     exact hdegree
   obtain ⟨F,s,e,Φ,_,hFL,hδ,hzero,hhom,hdeg,hdet⟩ :=
-    exists_center_resultant_forms (L := L) J hJ d hdim hdegree hr
+    exists_center_resultant_forms (L := L) J hJ d ⟨hdim, hdegree⟩ hr
   have hδL (i) : (map φ F).IsWeightedHomogeneous (chowRowWeight i) d := by
     intro a ha
     apply hδ i
@@ -130,7 +130,7 @@ theorem exists_geometric_center_detector
       Irreducible R ↔ projectionImageField
         (F := FractionRing (MvPolynomial (Fin (n + 2)) L ⧸ JL)) JL
         (chowProjectionForms M) = ⊤ :=
-    chow_restriction_irreducible_iff_birational_over_closed_field JL hJL d hJLdim hJLdegree
+    chow_restriction_irreducible_iff_birational_over_closed_field JL hJL d ⟨hJLdim, hJLdegree⟩
       (map φ F) hFL hδL hzero M (centerMinorProjectionMatrix_disjoint JL A hA e hc)
   constructor
   · intro hg

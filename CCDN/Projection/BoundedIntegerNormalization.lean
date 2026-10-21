@@ -35,15 +35,14 @@ resulting polynomial map is injective and integral, and so is the induced map of
 closures fixing the homogenizing coordinate. -/
 theorem exists_bounded_integer_closure_normalization (m k : ℕ)
     (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime] (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff =
-      (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ a : Fin (m + 1) → Fin (m + 1 + k) → ℤ,
       (∀ i j, |a i j| ≤ integerNormalizationHeight (m + 1 + k) d) ∧
       (projectionCoordinateMap I (fun i => integerLinearForm (a i))).IsIntegral ∧
       Function.Injective (projectionCoordinateMap I (fun i => integerLinearForm (a i))) ∧
       (projectionCoordinateMap (projectiveClosureIdeal I)
         (closureProjectionCoordinates (fun i => integerLinearForm (a i)))).IsIntegral := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   induction k generalizing d with
   | zero =>
     let a : Fin (m + 1) → Fin (m + 1) → ℤ := fun i j => if j = i then 1 else 0
@@ -79,7 +78,8 @@ theorem exists_bounded_integer_closure_normalization (m k : ℕ)
       exact RingHom.isIntegral_of_surjective _ (Ideal.Quotient.mkₐ_surjective _ _)
   | succ k ih =>
     obtain ⟨c, e, hc, he, hed, hintc, hprime, hdimJ, hdegreeJ, hconec⟩ :=
-      exists_fin_integer_closure_elimination_step (n := m + 1 + k) (m := m) I d hdim (by omega) hdegree
+      exists_fin_integer_closure_elimination_step (n := m + 1 + k) (m := m) I d ⟨hdim, hdegree⟩
+        (by omega)
     let ψ := projectionCoordinateMap I (fun i => integerLinearForm (c i))
     let J := RingHom.ker ψ
     have : J.IsPrime := hprime
@@ -124,14 +124,12 @@ theorem exists_bounded_integer_closure_normalization (m k : ℕ)
 Hilbert dimension. The resulting polynomial map is both injective and integral. -/
 theorem exists_bounded_integer_normalization (m k : ℕ)
     (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime] (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff =
-      (d : ℚ) / (m + 1).factorial) :
+    (hdimdeg : HasProjectiveDimensionDegree I m d) :
     ∃ a : Fin (m + 1) → Fin (m + 1 + k) → ℤ,
       (∀ i j, |a i j| ≤ integerNormalizationHeight (m + 1 + k) d) ∧
       (projectionCoordinateMap I (fun i => integerLinearForm (a i))).IsIntegral ∧
       Function.Injective (projectionCoordinateMap I (fun i => integerLinearForm (a i))) := by
-  obtain ⟨a, ha, hint, hinj, -⟩ := exists_bounded_integer_closure_normalization m k I d hdim hdegree
+  obtain ⟨a, ha, hint, hinj, -⟩ := exists_bounded_integer_closure_normalization m k I d hdimdeg
   exact ⟨a, ha, hint, hinj⟩
 
 end

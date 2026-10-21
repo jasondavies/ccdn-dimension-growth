@@ -18,19 +18,17 @@ theorem projective_variety_dimension_growth (m k : ℕ) :
     ∃ C : ℝ, 0 < C ∧
       ∀ I : Ideal (MvPolynomial (Fin (m + k + 2)) ℚ), I.IsPrime →
       IsHomogeneousIdeal I →
-      ∀ d : ℕ, 5 ≤ d →
-      (filteredHilbertPolynomial I).natDegree = m + 2 →
-      (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 2).factorial →
+      ∀ d : ℕ, 5 ≤ d → HasProjectiveDimensionDegree I (m + 1) d →
       ∀ B : ℝ, 1 ≤ B →
       (projectiveCount (projectiveIdealZeroLocus I) B : ℝ) ≤
         C * (d : ℝ) ^ projectionDegreeExponent m k * B ^ (m + 1) := by
   obtain ⟨C, hC, hcount⟩ := projective_projection_dimension_growth m k
   refine ⟨C, hC, ?_⟩
-  intro I hprime hI d hd hdim hdegree B hB
+  intro I hprime hI d hd hdimdeg B hB
   have : I.IsPrime := hprime
   obtain ⟨b, hb, hnorm, hinj, _, _, f, hf, hfhom, hfdeg, hker⟩ :=
     exists_bounded_birational_hypersurface_projection_of_le (m + 1) (m + k + 2)
-      (by omega) I hI d hdim hdegree
+      (by omega) I hI d hdimdeg
   have hrel : aeval (fun i => integerLinearForm (b i)) f ∈ I := by
     apply Ideal.Quotient.eq_zero_iff_mem.mp
     change f ∈ RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i)))
@@ -40,7 +38,7 @@ theorem projective_variety_dimension_growth (m k : ℕ) :
   intro z s hzero hproj
   exact linear_normalization_fiber_card_le I
     (fun i : Fin (m + 2) => integerLinearForm (b i.succ))
-    (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdim hdegree
+    (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdimdeg
     (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
 
 end

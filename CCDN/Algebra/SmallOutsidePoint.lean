@@ -116,8 +116,8 @@ theorem exists_small_integer_point_outside_prime_ideal
     omega
   · obtain ⟨m, hm⟩ := Nat.exists_eq_add_of_le (show 1 ≤ (filteredHilbertPolynomial I).natDegree by omega)
     have hm' : (filteredHilbertPolynomial I).natDegree = m + 1 := by omega
-    obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d hm'
-      (by omega) (by simpa only [hm'] using hdegree)
+    obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d
+      ⟨hm', by simpa only [hm'] using hdegree⟩ (by omega)
     obtain ⟨a, ha, he⟩ := exists_integer_grid_field_eval_ne_zero f hf d hfd
     exact ⟨a, ha, f, hfi, he⟩
 
