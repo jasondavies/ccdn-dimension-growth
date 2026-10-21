@@ -51,27 +51,5 @@ theorem count_curve_section_le {n d : ℕ} (I : Ideal (CoordinatePolynomial n))
   have h := polynomial_section_card_le_degree I d hd g hg g.totalDegree le_rfl z hz hzp hzg
   simpa only [Fintype.card_coe, S, count] using h
 
-theorem idealZeroLocus_span_singleton {n : ℕ} (f : CoordinatePolynomial n) :
-    idealZeroLocus (Ideal.span {f}) = zeroLocus f := by
-  ext x
-  constructor
-  · intro hx
-    exact hx f (Ideal.subset_span (by simp))
-  · intro hx h hh
-    obtain ⟨q, rfl⟩ := Ideal.mem_span_singleton.mp hh
-    change MvPolynomial.eval x (f * q) = 0
-    rw [MvPolynomial.eval_mul, show MvPolynomial.eval x f = 0 from hx, zero_mul]
-
-/-- The final sharp intersection step for an auxiliary polynomial. Its degree
-and nondivisibility come from the determinant method. -/
-theorem count_plane_common_zeros_le (f g : CoordinatePolynomial 2)
-    (hf : Irreducible f) (hfg : ¬ f ∣ g) (B : ℝ) :
-    count (zeroLocus f ∩ zeroLocus g) B ≤ f.totalDegree * g.totalDegree := by
-  let : (Ideal.span {f}).IsPrime := Ideal.isPrime_span_singleton_of_prime hf.prime
-  have h := count_curve_section_le (Ideal.span {f})
-    (principal_plane_hasAffineCurveDegree f hf.ne_zero) g
-    (by simpa only [Ideal.mem_span_singleton] using hfg) B
-  rwa [idealZeroLocus_span_singleton] at h
-
 end
 end CCDN

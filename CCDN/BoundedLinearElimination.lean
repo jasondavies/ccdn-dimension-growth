@@ -35,29 +35,6 @@ theorem exists_bounded_full_degree_direction {σ : Type*} [Fintype σ]
   exact ⟨b, hb, by exact_mod_cast (mul_ne_zero_iff.mp hval).1,
     (mul_ne_zero_iff.mp hval).2⟩
 
-/-- Bounded integer directions give a full-degree monic equation. -/
-theorem exists_bounded_monic_linear_coordinates {σ : Type*} [Fintype σ]
-    (f : MvPolynomial (Option σ) ℚ) (hf : f ≠ 0) :
-    ∃ (b : Option σ → ℤ) (hb : (b none : ℚ) ≠ 0),
-      (∀ i, 0 ≤ b i ∧ b i ≤ f.totalDegree + 1) ∧
-      eval (fun i => (b i : ℚ)) (homogeneousComponent f.totalDegree f) ≠ 0 ∧
-      (optionEquivLeft ℚ σ
-        (normalizedHypersurfaceCoordinates 0 (fun i => (b i : ℚ)) hb f)).Monic ∧
-      (optionEquivLeft ℚ σ
-        (normalizedHypersurfaceCoordinates 0 (fun i => (b i : ℚ)) hb f)).natDegree =
-        f.totalDegree ∧
-      (normalizedHypersurfaceCoordinates 0 (fun i => (b i : ℚ)) hb f).totalDegree =
-        f.totalDegree := by
-  obtain ⟨b, hbound, hb, hdir⟩ := exists_bounded_full_degree_direction f hf
-  have hbQ : (b none : ℚ) ≠ 0 := by exact_mod_cast hb
-  refine ⟨b, hbQ, hbound, hdir,
-    normalizedHypersurfaceCoordinates_monic 0 _ hbQ f hdir,
-    normalizedHypersurfaceCoordinates_natDegree 0 _ hbQ f hdir, ?_⟩
-  apply le_antisymm (normalizedHypersurfaceCoordinates_totalDegree_le 0 _ hbQ f)
-  rw [← normalizedHypersurfaceCoordinates_natDegree 0 _ hbQ f hdir,
-    natDegree_optionEquivLeft]
-  exact degreeOf_le_totalDegree _ _
-
 /-- The retained variables, transported back through the coordinate
 automorphism, as elements of the original quotient. -/
 def coordinateEliminationMap {K σ : Type*} [Field K]
@@ -125,21 +102,6 @@ theorem coordinateEliminationMap_isIntegral {K σ : Type*} [Field K]
     simp [E, optionEquivLeft_symm_C_X]
   change (ψ.toAlgHom.comp (φ.restrictScalars K)).IsIntegral at hint
   rwa [heq] at hint
-
-/-- A bounded linear elimination for any ideal with a chosen nonzero
-equation. Its remaining coordinates are linear forms in the original variables. -/
-theorem exists_bounded_integral_linear_elimination {σ : Type*} [Fintype σ]
-    (I : Ideal (MvPolynomial (Option σ) ℚ))
-    (f : MvPolynomial (Option σ) ℚ) (hf : f ≠ 0) (hfi : f ∈ I) :
-    ∃ (b : Option σ → ℤ) (hb : (b none : ℚ) ≠ 0),
-      (∀ i, 0 ≤ b i ∧ b i ≤ f.totalDegree + 1) ∧
-      (coordinateEliminationMap I
-        (hypersurfaceAffineCoordinates 0 (fun i => (b i : ℚ)) hb)).IsIntegral := by
-  obtain ⟨b, hb, hbound, _, hm, _, _⟩ := exists_bounded_monic_linear_coordinates f hf
-  refine ⟨b, hb, hbound, ?_⟩
-  apply coordinateEliminationMap_isIntegral I _
-    (normalizedHypersurfaceCoordinates 0 (fun i => (b i : ℚ)) hb f) _ hm
-  exact Ideal.mul_mem_left _ _ (Ideal.mem_map_of_mem _ hfi)
 
 end
 end CCDN

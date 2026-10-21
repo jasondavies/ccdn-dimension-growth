@@ -22,24 +22,6 @@ def universalCenterChowMap {K : Type*} [Field K] {r n s q : ℕ}
       MvPolynomial (Fin q × Fin (s + 1)) (MvPolynomial (Fin r ↪ Fin n) K) :=
   eval₂Hom (C.comp C) (fun p => ∑ i, C (centerPluckerCoefficient (e i) p.2) * X (p.1,i))
 
-lemma universalCenterChowMap_specialize
-    {K : Type*} [Field K] {r n s q : ℕ}
-    (A : Matrix (Fin r) (Fin (n + 1)) K)
-    (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
-    (F : MvPolynomial (Fin q × Fin (n + 1)) K) :
-    map (eval (matrixPluckerCoordinates A))
-        (universalCenterChowMap e F) =
-      chowLinearSubstitution (centerMinorProjectionMatrix A e) F := by
-  have he : (map (eval (matrixPluckerCoordinates A))).comp
-      (universalCenterChowMap (K := K) (q := q) e) =
-      (chowLinearSubstitution (r := q) (centerMinorProjectionMatrix A e)).toRingHom := by
-    apply MvPolynomial.ringHom_ext
-    · intro a
-      simp [universalCenterChowMap, chowLinearSubstitution]
-    · intro p
-      simp [universalCenterChowMap, chowLinearSubstitution, centerMinorProjectionMatrix]
-  exact RingHom.congr_fun he F
-
 lemma universalCenterChowMap_comm {K : Type*} [Field K] {r n s q : ℕ}
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin n))
     (F : MvPolynomial (Fin q × Fin n) K) :

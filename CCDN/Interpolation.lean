@@ -61,14 +61,6 @@ theorem eval_polynomialOfCoefficients {n N s : ℕ} (mon : Fin N → (Fin n →�
   simp [polynomialOfCoefficients, evaluationMatrix, Matrix.mulVec, dotProduct,
     MvPolynomial.eval_monomial, mul_comm]
 
-theorem vanishes_of_evaluationMatrix_mulVec_eq_zero {n N s : ℕ}
-    (mon : Fin N → (Fin n →₀ ℕ)) (points : Fin s → (Fin n → ℤ))
-    (v : Fin N → ℤ) (hv : evaluationMatrix mon points *ᵥ v = 0) :
-    ∀ i, MvPolynomial.eval (points i) (polynomialOfCoefficients mon v) = 0 := by
-  intro i
-  rw [eval_polynomialOfCoefficients, hv]
-  rfl
-
 /-- Monomial evaluation has the expected height bound, uniformly in the exponents and point. -/
 theorem abs_monomial_value_le {n M : ℕ} (e : Fin n →₀ ℕ) (x : Fin n → ℤ)
     {B : ℝ} (hB : 1 ≤ B) (hx : ∀ i, |(x i : ℝ)| ≤ B)

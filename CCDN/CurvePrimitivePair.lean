@@ -34,32 +34,5 @@ lemma momentCoordinate_fraction {K F : Type*} [Field K] [Field F] [Algebra K F]
   intro j _
   exact mul_comm _ _
 
-/-- Positive-degree curves have a coordinate and a bounded integer
-linear form generating the function field as a field over K. The field over
-the first coordinate has finite degree at most d. -/
-theorem exists_bounded_curve_primitive_pair {K F : Type*} [Field K] [CharZero K] [Field F]
-    [Algebra K F] {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
-    (d : ℕ) (hd : 0 < d)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c) :
-    ∃ (j : Fin n) (φ : RatFunc K →ₐ[K] F) (k : ℕ),
-      φ RatFunc.X = algebraMap (MvPolynomial (Fin n) K ⧸ I) F ((Ideal.Quotient.mk I) (X j)) ∧
-      k ≤ n * d ^ 2 ∧
-      let : Algebra (RatFunc K) F := φ.toRingHom.toAlgebra
-      Module.Finite (RatFunc K) F ∧ Module.finrank (RatFunc K) F ≤ d ∧
-      IntermediateField.adjoin (RatFunc K)
-        {algebraMap (MvPolynomial (Fin n) K ⧸ I) F
-          ((Ideal.Quotient.mk I) (momentCoordinate K n k))} = ⊤ := by
-  obtain ⟨j, φ, hφ, hf⟩ := exists_curve_rational_parameter (F := F) I d hd hdegree
-  let : Algebra (RatFunc K) F := φ.toRingHom.toAlgebra
-  let : IsScalarTower K (RatFunc K) F := IsScalarTower.of_algHom φ
-  let : Module.Finite (RatFunc K) F := hf.1
-  obtain ⟨k, hk, hprim⟩ := exists_bounded_curve_primitive_element (R := RatFunc K) (F := F) I
-  refine ⟨j, φ, k, hφ, hk.trans (Nat.mul_le_mul_left n (Nat.pow_le_pow_left hf.2 2)), hf.1, hf.2, ?_⟩
-  rwa [momentCoordinate_fraction]
-
 end
 end CCDN

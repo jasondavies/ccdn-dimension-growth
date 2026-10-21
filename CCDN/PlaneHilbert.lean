@@ -84,12 +84,5 @@ theorem principal_plane_hilbert_function {K : Type*} [Field K]
       nlinarith
   nlinarith
 
-/-- The degree used by the full counting target agrees with polynomial degree. -/
-theorem principal_plane_hasAffineCurveDegree (f : CoordinatePolynomial 2) (hf : f ≠ 0) :
-    HasAffineCurveDegree (Ideal.span {f}) f.totalDegree := by
-  refine ⟨f.totalDegree, (f.totalDegree : ℤ) - f.totalDegree.choose 2, ?_⟩
-  intro N hN
-  exact principal_plane_hilbert_function f hf hN
-
 end
 end CCDN

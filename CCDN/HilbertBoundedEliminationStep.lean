@@ -1,6 +1,7 @@
 module
 
-public import CCDN.HilbertBoundedElimination
+public import CCDN.HilbertLowDegreeEquation
+public import CCDN.BoundedLinearElimination
 public import CCDN.IntegralProjectionHilbert
 
 /-! A complete bounded elimination step: the contraction stays prime,

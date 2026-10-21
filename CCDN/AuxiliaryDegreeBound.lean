@@ -48,12 +48,5 @@ lemma le_rpow_four_sub_inv {n d : ℕ} (hd : 0 < d) :
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
   simpa only [Real.rpow_one] using Real.rpow_le_rpow_of_exponent_le hd1 (one_le_four_sub_inv n)
 
-lemma auxDegreeBound_nonneg {n d : ℕ} {B b H : ℝ} (hB : 1 ≤ B) (hb : 0 ≤ b) (hH : 0 ≤ H) :
-    0 ≤ auxDegreeBound n d B b H := by
-  unfold auxDegreeBound auxMainTerm
-  have := Real.log_nonneg hB
-  have : (0 : ℝ) ≤ B := by linarith
-  positivity
-
 end
 end CCDN

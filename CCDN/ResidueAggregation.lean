@@ -48,29 +48,4 @@ theorem aggregate_exponent_lower {ι : Type*} (S : Finset ι)
         (((∑ i ∈ S, e i : ℕ) : ℝ) + (∑ i ∈ S, n i : ℕ)) := h
     _ ≤ _ := by nlinarith
 
-/-- Local multiplicity bounds and prime-power divisibility give the global log
-lower bound. -/
-theorem log_lower_of_local_exponents (P : Finset ℕ) (e : ℕ → ℕ)
-    (N : ℕ → ℝ) (s : ℕ) {D : ℤ} (hD : 0 < D)
-    (hP : ∀ p ∈ P, Nat.Prime p) (hN : ∀ p ∈ P, 0 < N p)
-    (he : ∀ p ∈ P, (s : ℝ) ^ 2 / (2 * N p) - s ≤ e p)
-    (hdiv : ∀ p ∈ P, (p : ℤ) ^ e p ∣ D) :
-    (s : ℝ) ^ 2 / 2 * (∑ p ∈ P, Real.log p / N p) -
-      s * (∑ p ∈ P, Real.log p) ≤ Real.log D := by
-  have hsum : ∑ p ∈ P, (((s : ℝ) ^ 2 / (2 * N p) - s) * Real.log p) ≤
-      ∑ p ∈ P, (e p : ℝ) * Real.log p := by
-    apply sum_le_sum
-    intro p hp
-    exact mul_le_mul_of_nonneg_right (he p hp)
-      (Real.log_nonneg (by exact_mod_cast (hP p hp).one_lt.le))
-  have heq : (∑ p ∈ P, (((s : ℝ) ^ 2 / (2 * N p) - s) * Real.log p)) =
-      (s : ℝ) ^ 2 / 2 * (∑ p ∈ P, Real.log p / N p) -
-        s * (∑ p ∈ P, Real.log p) := by
-    simp only [mul_sum, ← sum_sub_distrib]
-    apply sum_congr rfl
-    intro p hp
-    field_simp [(hN p hp).ne']
-  rw [heq] at hsum
-  exact hsum.trans (sum_log_prime_powers_le_log P e hD hP hdiv)
-
 end CCDN

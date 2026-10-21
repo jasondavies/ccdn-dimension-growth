@@ -105,12 +105,5 @@ theorem universalEulerMatrix_specialize {R : Type*} [CommRing R]
   change _ * _ = _ * _
   exact mul_comm _ _
 
-/-- The universal forms are the maximal coefficient minors. -/
-def universalEulerMinor (k : ℕ)
-    (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-    (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
-    MvPolynomial (EulerLowIndex (k + 2)) ℤ :=
-  ((universalEulerMatrix k).submatrix rows cols).det
-
 end
 end CCDN

@@ -45,11 +45,6 @@ def centerMinorProjectionForm {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (c : Fin (r + 1) ↪ Fin n) : MvPolynomial (Fin n) K :=
   ∑ j : Fin (r + 1), C ((-1 : K) ^ (j : ℕ) * (A.submatrix id (j.succAboveEmb.trans c)).det) * X (c j)
 
-lemma centerMinorProjectionForm_homogeneous {K : Type*} [Field K] {r n : ℕ}
-    (A : Matrix (Fin r) (Fin n) K) (c : Fin (r + 1) ↪ Fin n) :
-    (centerMinorProjectionForm A c).IsHomogeneous 1 :=
-  IsHomogeneous.sum _ _ _ (fun j _ => isHomogeneous_C_mul_X _ (c j))
-
 lemma centerMinorProjectionForm_eval {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (c : Fin (r + 1) ↪ Fin n) (x : Fin n → K) :
     eval x (centerMinorProjectionForm A c) = centerMinorProjection A x c := by

@@ -198,38 +198,5 @@ theorem weighted_prime_sum_lower_cutoff {x L C : ℝ} (hx : 1 ≤ x) (hL : 1 ≤
   change _ ≤ ∑ p ∈ S, Real.log p / N p
   nlinarith
 
-/-- The global determinant estimate with an explicit good-prime cutoff. -/
-theorem determinant_log_lower_cutoff {x L C : ℝ} (hx : 1 ≤ x) (hL : 1 ≤ L)
-    (hC : 0 ≤ C) (B : Finset ℕ) (N : ℕ → ℝ) (s : ℕ) (e : ℕ → ℕ)
-    {D : ℤ} (hD : 0 < D)
-    (hN : ∀ p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B, L < (p : ℝ) → 0 < N p)
-    (hupper : ∀ p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B, L < (p : ℝ) →
-      N p ≤ p + C * Real.sqrt p)
-    (he : ∀ p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B, L < (p : ℝ) →
-      (s : ℝ) ^ 2 / (2 * N p) - s ≤ e p)
-    (hdiv : ∀ p ∈ ((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B, L < (p : ℝ) →
-      (p : ℤ) ^ e p ∣ D) :
-    (s : ℝ) ^ 2 / 2 * (Real.log x - Real.log L - 2 * mertensError -
-      (∑ p ∈ B, Real.log p / p) - C * (2 * primeBlockMass / Real.sqrt L)) -
-      s * ((Real.log 4 + 4) * x) ≤ Real.log D := by
-  let S := (((Ioc 0 ⌊x⌋₊).filter Nat.Prime) \ B).filter (fun p : ℕ => L < (p : ℝ))
-  have hp (p : ℕ) (hp : p ∈ S) : p.Prime :=
-    (mem_filter.mp (mem_sdiff.mp (mem_filter.mp hp).1).1).2
-  have hbase := log_lower_of_local_exponents S e N s hD hp
-    (fun p hp => hN p (mem_filter.mp hp).1 (mem_filter.mp hp).2)
-    (fun p hp => he p (mem_filter.mp hp).1 (mem_filter.mp hp).2)
-    (fun p hp => hdiv p (mem_filter.mp hp).1 (mem_filter.mp hp).2)
-  have hm := weighted_prime_sum_lower_cutoff hx hL hC B N hN hupper
-  have htheta : (∑ p ∈ S, Real.log p) ≤ (Real.log 4 + 4) * x := by
-    calc _ ≤ Chebyshev.theta x := by
-           apply sum_le_sum_of_subset_of_nonneg ((filter_subset _ _).trans sdiff_subset)
-           intro p _ _
-           exact Real.log_natCast_nonneg p
-         _ ≤ Chebyshev.psi x := Chebyshev.theta_le_psi x
-         _ ≤ _ := Chebyshev.psi_le_const_mul_self (by linarith)
-  have hm' := mul_le_mul_of_nonneg_left hm (show 0 ≤ (s : ℝ) ^ 2 / 2 by positivity)
-  have ht' := mul_le_mul_of_nonneg_left htheta (show (0 : ℝ) ≤ s by positivity)
-  linarith
-
 end
 end CCDN

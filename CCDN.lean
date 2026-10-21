@@ -175,7 +175,6 @@ public import CCDN.Curve
 public import CCDN.CurveBoxDegreeBound
 public import CCDN.CurveDerivativeReconstruction
 public import CCDN.CurveFunctionField
-public import CCDN.CurveParameter
 public import CCDN.CurveParameterFullDegree
 public import CCDN.CurvePrimitivePair
 public import CCDN.CurveProjectionDeformation
@@ -302,7 +301,6 @@ public import CCDN.GridTopFormConstruction
 public import CCDN.GridVandermondeCounterexample
 public import CCDN.HeightDeterminant
 public import CCDN.HigherDimensionalPrimeSum
-public import CCDN.HilbertBoundedElimination
 public import CCDN.HilbertBoundedEliminationStep
 public import CCDN.HilbertCoefficientEquiv
 public import CCDN.HilbertCoordinateIndependence
@@ -343,7 +341,6 @@ public import CCDN.HomogeneousProjectionBirational
 public import CCDN.HomogeneousProjectionEquation
 public import CCDN.HomogeneousProjectionNoBasePoint
 public import CCDN.HomogeneousProjectionRankBound
-public import CCDN.HomogeneousProjectiveCone
 public import CCDN.HomogeneousRank
 public import CCDN.HomogeneousRankDichotomy
 public import CCDN.HomogeneousScalarExtension
@@ -406,7 +403,6 @@ public import CCDN.HypersurfaceSmallHeightDegree
 public import CCDN.HypersurfaceSmoothPoint
 public import CCDN.HypersurfaceSourcePositionedAuxiliary
 public import CCDN.HypersurfaceTangentEquality
-public import CCDN.HypersurfaceTrivialCount
 public import CCDN.IdealScalarDescent
 public import CCDN.IncidenceDeterminantCertificate
 public import CCDN.IndependentBirationalProjection

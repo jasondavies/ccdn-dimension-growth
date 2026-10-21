@@ -1,6 +1,8 @@
 module
 
+public import CCDN.FunctionFieldRank
 public import CCDN.LinearProjectionFiltration
+public import CCDN.SectionImageRank
 public import Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
 
 /-! A plane projection of a curve has a nonzero kernel. If one coordinate is

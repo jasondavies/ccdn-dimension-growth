@@ -36,31 +36,5 @@ theorem exists_integer_grid_rational_eval_ne_zero {σ : Type*} [Fintype σ]
     exact (map_eval (Int.castRingHom ℚ) v g).trans hgzero
   exact hvg (Int.cast_eq_zero.mp hh)
 
-/-- The universal determinant in a chosen set of columns. -/
-def universalMaximalMinor {r n : ℕ} (c : Fin r ↪ Fin n) :
-    MvPolynomial (Fin r × Fin n) ℚ :=
-  (Matrix.of fun i j : Fin r => X (i, c j)).det
-
-lemma universalMaximalMinor_eval {r n : ℕ} (c : Fin r ↪ Fin n)
-    (A : Matrix (Fin r) (Fin n) ℚ) :
-    eval (fun p => A p.1 p.2) (universalMaximalMinor c) =
-      (A.submatrix id c).det := by
-  rw [universalMaximalMinor, RingHom.map_det]
-  congr 1
-  ext i j
-  simp
-
-lemma eval_minor_substitution {r n : ℕ}
-    (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
-    (A : Matrix (Fin r) (Fin n) ℚ) :
-    eval (fun p => A p.1 p.2) (aeval universalMaximalMinor F) =
-      eval (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) F := by
-  have hh : (aeval (fun p => A p.1 p.2)).comp (aeval universalMaximalMinor) =
-      aeval (fun c : Fin r ↪ Fin n => (A.submatrix id c).det) := by
-    ext c
-    simp only [AlgHom.comp_apply, aeval_X]
-    exact universalMaximalMinor_eval c A
-  exact congrArg (fun φ => φ F) hh
-
 end
 end CCDN

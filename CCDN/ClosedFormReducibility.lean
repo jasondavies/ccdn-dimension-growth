@@ -80,14 +80,5 @@ theorem closedForm_rank_drop_of_not_irreducible_of_natCast
     exact closedForm_rank_drop_of_repeated_factor d (m - 2) hd hchar g h hg hgm
       hhm.ne_zero hcop hdeg htotal
 
-/-- The reducibility criterion below the characteristic. -/
-theorem closedForm_rank_drop_of_not_irreducible
-    {F : Type*} [Field F] (p d : ℕ) [CharP F p] (hd : 0 < d) (hdp : d < p)
-    (f : F[X][X]) (hf : f.Monic) (hred : ¬Irreducible f)
-    (hdeg : f.natDegree = d) (htotal : bivariateTotalDegree f ≤ d) :
-    (closedFormCoefficientMatrix d f).rank + 2 ≤ 2 * d ^ 2 :=
-  closedForm_rank_drop_of_not_irreducible_of_natCast d hd (natCast_ne_zero_of_lt_char p hdp)
-    f hf hred hdeg htotal
-
 end
 end CCDN
