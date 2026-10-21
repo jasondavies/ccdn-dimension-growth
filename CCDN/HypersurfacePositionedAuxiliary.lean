@@ -3,7 +3,8 @@ module
 public import CCDN.HypersurfaceLargeHeightAuxiliary
 
 /-! Combine the two height ranges under the paper's explicit leading-coefficient
-position condition. The main term retains the original bad-prime factor. -/
+position condition. The main term retains the bad-prime factor of any finite prime
+set whose normalized comparison holds. -/
 
 @[expose] public section
 namespace CCDN
