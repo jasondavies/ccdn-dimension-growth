@@ -58,7 +58,7 @@ theorem exists_bounded_affine_birational_projection
     change (ψcone.comp (rename ι)).IsIntegral
     rwa [heqcone]
   exact ⟨b, f, moment_cons_abs_le_integerBirationalProjectionHeight ht a ha, ⟨hinta, hinja⟩,
-    ⟨projectionCoordinateMap_isIntegral_of_tail I l' hinta, hfield', hf, hker⟩, hcone', hfpos,
+    ⟨⟨hfield', hf, hker⟩, projectionCoordinateMap_isIntegral_of_tail I l' hinta⟩, hcone', hfpos,
     hfd⟩
 
 end

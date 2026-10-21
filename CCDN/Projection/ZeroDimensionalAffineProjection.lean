@@ -125,9 +125,9 @@ theorem exists_geometric_affine_projection_zero_dimension
   have ha : (fun i => integerLinearForm (b i)) = 0 := by
     funext i
     simp [b, linearForm]
-  refine ⟨b, X 0, fun i j => ?_, ⟨RingHom.isIntegral_of_surjective _
-      (projectionCoordinateMap_surjective_of_eq_ker_eval x I hIker _),
-    adjoin_eq_top_of_eq_ker_eval x I hIker _, irreducible_X_fin_one ℚ, ?_⟩, ?_, totalDegree_X _,
+  refine ⟨b, X 0, fun i j => ?_, ⟨⟨adjoin_eq_top_of_eq_ker_eval x I hIker _,
+    irreducible_X_fin_one ℚ, ?_⟩, RingHom.isIntegral_of_surjective _
+      (projectionCoordinateMap_surjective_of_eq_ker_eval x I hIker _)⟩, ?_, totalDegree_X _,
     fun B hB => ?_⟩
   · simp only [b, abs_zero]
     exact Nat.cast_nonneg _

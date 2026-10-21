@@ -122,9 +122,9 @@ theorem exists_geometric_projective_curve_projection
       (mem_projectivePermutedIdeal I e (X 0)).mp hx
   have hJ : HasProjectiveCurveDegree J d := projectiveCurveDegree_permuted I e
     (projectiveCurveDegree_of_filteredHilbertPolynomial I hI d hdim hdegree)
-  obtain ⟨k₀, k₁, f, hk₀, hk₁, hf, hfd, hker, hfield, hhom, hF, hFL, hcount⟩ :=
+  obtain ⟨k₀, k₁, f, hk₀, hk₁, hfd, hP, hhom, hF, hFL, hcount⟩ :=
     exists_geometric_projective_curve_count_reduction_of_chart (L := L) J hX hd hJ
-  refine ⟨e, k₀, k₁, f, hX, hk₀, hk₁, hf, hfd, hker, hfield,
+  refine ⟨e, k₀, k₁, f, hX, hk₀, hk₁, hP.irreducible, hfd, hP.aeval_mem_iff, hP.birational,
     hhom, hhom.totalDegree hF.ne_zero, hF, hFL, ?_⟩
   intro B hB
   apply (projectiveCount_le_permuted I e B).trans
@@ -151,11 +151,12 @@ theorem exists_geometric_affine_curve_projection
           ((Ideal.Quotient.mk I) (a i)))) = ⊤ ∧
       ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
         count (zeroLocus f) (curveProjectionHeightConstant n * (d : ℝ) ^ (2 * n) * B) + d ^ 2 := by
-  obtain ⟨k₀, k₁, f, hk₀, hk₁, hf, hfL, hfd, hker, hfield, _, _, hcount⟩ :=
+  obtain ⟨k₀, k₁, f, hk₀, hk₁, hP, hfL, hfd, _, _, hcount⟩ :=
     exists_geometrically_integral_curve_projection (L := L) I d hd hdegree
-  refine ⟨k₀, k₁, f, hk₀, hk₁, hf, hfL, hfd, hker, hfield, ?_⟩
+  refine ⟨k₀, k₁, f, hk₀, hk₁, hP.irreducible, hfL, hfd, hP.aeval_mem_iff, hP.birational, ?_⟩
   intro B hB
-  apply (affine_curve_count_le_of_moment_projection I f hk₀ hk₁ hker hcount B hB).trans
+  apply (affine_curve_count_le_of_moment_projection I f hk₀ hk₁ hP.aeval_mem_iff hcount B
+    hB).trans
   apply Nat.add_le_add
   · apply count_mono (Set.Subset.refl _)
     exact mul_le_mul_of_nonneg_right (projectionBoxFactor_le_degree_power n hd) (by linarith)

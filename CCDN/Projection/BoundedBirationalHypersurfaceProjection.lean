@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.BoundedIntegerNormalization
-public import CCDN.Center.ProjectionImageFractionField
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ProjectionImageFractionField
 public import CCDN.Curve.CurvePrimitivePair
 import CCDN.Height.LinearParameterPrimitive
 import CCDN.Projection.LeadingCoordinateExtension
@@ -85,7 +85,7 @@ theorem exists_bounded_birational_hypersurface_projection
     (F := F) I hI l (fun i => linearForm_isHomogeneous _) hinta hinja hfield' d
     hdimdeg
   exact ⟨b, f, moment_cons_abs_le_integerBirationalProjectionHeight ht a ha, ⟨hinta, hinja⟩,
-    ⟨projectionCoordinateMap_isIntegral_of_tail I l hinta, hfield', hf, hker⟩, hfhom, hfdeg⟩
+    ⟨⟨hfield', hf, hker⟩, projectionCoordinateMap_isIntegral_of_tail I l hinta⟩, hfhom, hfdeg⟩
 
 /-- A homogeneous prime ideal in `n ≥ m + 1` variables, of projective dimension `m` and
 degree `d`, has a bounded integral linear projection to `m + 2` coordinates: the integer

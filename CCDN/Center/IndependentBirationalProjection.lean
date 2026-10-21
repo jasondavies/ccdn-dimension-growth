@@ -127,7 +127,7 @@ theorem exists_independent_bounded_birational_hypersurface_projection
   exact ⟨c, g, unit_row_cons_abs_le
       (by exact_mod_cast integerBirationalProjectionHeight_one_le n d) _ (fun s => hb s.succ) j,
     unit_row_cons_linearIndependent _ j htail hj, hN,
-    ⟨projectionCoordinateMap_isIntegral_of_tail I _ hN.integral, hfieldc, hg, hkg⟩, hghom,
+    ⟨⟨hfieldc, hg, hkg⟩, projectionCoordinateMap_isIntegral_of_tail I _ hN.integral⟩, hghom,
     hgdeg⟩
 
 end
