@@ -21,7 +21,7 @@ content removal, and the point count are all proved here. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Finset Classical
+open MvPolynomial Finset
 
 def newtonEdgeCoefficientProduct (f : MvPolynomial (Fin 2) ℤ) (d e : ℕ) : ℤ :=
   f.coeff (Finsupp.single 0 d) * f.coeff (Finsupp.single 1 e)

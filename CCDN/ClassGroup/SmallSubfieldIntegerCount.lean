@@ -16,7 +16,6 @@ at the balanced discriminant radius. -/
 namespace CCDN
 noncomputable section
 open NumberField
-open scoped Classical
 
 lemma small_dimension_packing_bound {m n : ℕ} (hm : 4 * m ≤ n)
     {B : ℝ} (hB : 1 ≤ B) :
@@ -65,6 +64,7 @@ theorem boundedSmallSubfieldIntegers_count {B : ℝ} (hB : 1 ≤ B) :
     ((boundedSmallSubfieldIntegers K B).ncard : ℝ) ≤
       smallSubfieldIntegerCountConstant (Module.finrank ℚ K) *
         B ^ ((Module.finrank ℚ K : ℝ) / 4) := by
+  classical
   let T := {L : IntermediateField ℚ K //
     4 * Module.finrank ℚ L ≤ Module.finrank ℚ K}
   let : Finite (IntermediateField ℚ K) :=

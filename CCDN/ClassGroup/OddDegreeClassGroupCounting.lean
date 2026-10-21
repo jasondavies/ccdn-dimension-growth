@@ -17,7 +17,6 @@ belongs to a proper subfield. -/
 namespace CCDN
 noncomputable section
 open NumberField NumberField.InfinitePlace
-open scoped Classical
 
 lemma normCurveBoxHeight_root_le {n : ℕ} (hn : 2 ≤ n) {B : ℝ} (hB : 1 ≤ B) :
     (max (2 * B) (Real.sqrt (B ^ n))) ^ (1 / (n : ℝ)) ≤ 2 * Real.sqrt B := by
@@ -92,6 +91,7 @@ theorem boundedSquareNormIntegers_odd_count
           Real.sqrt B := Finset.sum_le_sum (fun q _ ↦ hpair q)
     _ = _ := by simp; ring
 
+open Classical in
 /-- The algebraic and curve-counting reduction combined with the
 finite lattice packing, given a short integral basis `b`. -/
 theorem boundedSquareNormIntegers_odd_count_of_relative_short_basis

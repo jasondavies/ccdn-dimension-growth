@@ -16,8 +16,9 @@ edge, including the sum over all smooth residue tuples. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Finset Classical
+open MvPolynomial Finset
 
+open Classical in
 def surfaceResidueCrossing {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
     (F : SurfaceCongruenceFamily f B A)
     (S : Finset (Ideal (CoordinatePolynomial 3)))

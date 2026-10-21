@@ -16,7 +16,6 @@ of the subfield is obtained by restricting an ambient place. -/
 namespace CCDN
 noncomputable section
 open NumberField NumberField.InfinitePlace
-open scoped Classical
 
 variable (K : Type*) [Field K] [NumberField K]
 

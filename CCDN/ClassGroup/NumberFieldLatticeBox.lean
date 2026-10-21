@@ -16,7 +16,6 @@ to generate the ring of integers over `ℤ`. -/
 namespace CCDN
 noncomputable section
 open NumberField NumberField.InfinitePlace MeasureTheory
-open scoped Classical
 
 theorem unitBall_volume_le_two_pow_finrank
     {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
@@ -47,6 +46,7 @@ theorem unitBall_volume_le_two_pow_finrank
 
 variable (K : Type*) [Field K] [NumberField K]
 
+open Classical in
 /-- The bounded algebraic integers are embedded injectively into the
 Euclidean lattice and counted by finite-volume packing. -/
 theorem boundedArchimedeanIntegers_count_of_short_basis
@@ -105,6 +105,7 @@ lemma numberFieldLatticeBoxConstant_nonneg (n : ℕ) {C : ℝ} (hC : 0 ≤ C) :
   unfold numberFieldLatticeBoxConstant
   positivity
 
+open Classical in
 theorem boundedArchimedeanIntegers_count_of_relative_short_basis
     {ι : Type*} [Fintype ι]
     (b : Module.Basis ι ℝ (mixedEmbedding.euclidean.mixedSpace K))
@@ -138,6 +139,7 @@ theorem boundedArchimedeanIntegers_count_of_relative_short_basis
   rw [hrad, mul_pow] at ht
   exact ht.trans_eq (by unfold numberFieldLatticeBoxConstant; ring)
 
+open Classical in
 /-- Dividing by short integer translates gives the expected
 one-dimensional saving for translation classes. -/
 theorem boundedSquareNormTranslationClasses_count_of_relative_short_basis

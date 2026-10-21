@@ -15,7 +15,7 @@ The independent coordinate subtuple and the equation are both constructed. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Classical
+open MvPolynomial
 
 theorem exists_mem_ideal_degree_le_multiplicity
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ] {n : ℕ}

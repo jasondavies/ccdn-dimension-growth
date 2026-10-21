@@ -97,10 +97,11 @@ end CCDN
 namespace CCDN
 noncomputable section
 open Module NumberField
-open scoped NumberField Classical
+open scoped NumberField
 
 variable (K : Type*) [Field K] [NumberField K]
 
+open Classical in
 theorem euclidean_prescribed_basis_last_minimum_pow
     {n : ℕ} (b : Basis (Fin (n + 2)) ℝ (mixedEmbedding.euclidean.mixedSpace K))
     (hb : IsPrescribedGreedyLatticeFamily (mixedEmbedding.euclidean.integerLattice K)
@@ -134,6 +135,7 @@ theorem euclidean_prescribed_basis_last_minimum_pow
     (euclideanNumberFieldEmbedding_norm_mul_le K) hunit hmin
   simpa only [Fintype.card_fin, hmap] using hh
 
+open Classical in
 theorem exists_numberField_short_basis_of_degree
     (n : ℕ) (hn : Module.finrank ℚ K = n + 2) :
     ∃ b : Basis (Fin (n + 2)) ℝ (mixedEmbedding.euclidean.mixedSpace K),
@@ -189,6 +191,7 @@ theorem exists_numberField_short_basis_of_degree
   · apply (hb.norm_le hi (hb.mem _)
       (b.linearIndependent.notMem_span_image (not_lt_of_ge (Fin.le_last i)))).trans hlast
 
+open Classical in
 /-- A real basis of integral lattice vectors with an explicit
 constant depending only on the field degree. -/
 theorem exists_numberField_short_basis

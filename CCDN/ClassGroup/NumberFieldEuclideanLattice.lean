@@ -19,7 +19,7 @@ on the degree. -/
 namespace CCDN
 noncomputable section
 open NumberField NumberField.InfinitePlace MeasureTheory
-open scoped NNReal Classical
+open scoped NNReal
 
 variable (K : Type*) [Field K] [NumberField K]
 
@@ -71,6 +71,7 @@ lemma mem_euclidean_integerLattice_iff
   · rintro ⟨z, rfl⟩
     exact euclideanNumberFieldEmbedding_mem_integerLattice K z
 
+open Classical in
 lemma infinitePlace_le_euclidean_norm (w : InfinitePlace K) (x : K) :
     w x ≤ ‖euclideanNumberFieldEmbedding K x‖ := by
   rw [← mixedEmbedding.normAtPlace_apply w x,
@@ -83,6 +84,7 @@ lemma infinitePlace_le_euclidean_norm (w : InfinitePlace K) (x : K) :
     exact (PiLp.norm_apply_le (euclideanNumberFieldEmbedding K x).snd ⟨w, hw⟩).trans
       (WithLp.norm_snd_le _ (euclideanNumberFieldEmbedding K x))
 
+open Classical in
 lemma euclideanNumberFieldEmbedding_norm_sq (x : K) :
     ‖euclideanNumberFieldEmbedding K x‖ ^ 2 =
       (∑ w : {w : InfinitePlace K // IsReal w}, (w.val x) ^ 2) +
@@ -99,6 +101,7 @@ lemma euclideanNumberFieldEmbedding_norm_sq (x : K) :
     change ‖(mixedEmbedding K x).2 w‖ ^ 2 = _
     rw [mixedEmbedding.mixedEmbedding_apply_isComplex, norm_embedding_eq]
 
+open Classical in
 lemma one_le_euclidean_norm_integer {x : 𝓞 K} (hx : x ≠ 0) :
     1 ≤ ‖euclideanNumberFieldEmbedding K (x : K)‖ := by
   by_contra! h
@@ -107,6 +110,7 @@ lemma one_le_euclidean_norm_integer {x : 𝓞 K} (hx : x ≠ 0) :
     (fun _ _ ↦ (infinitePlace_le_euclidean_norm K _ (x : K)).trans_lt h)
   exact (hw.trans (infinitePlace_le_euclidean_norm K w (x : K))).not_gt h
 
+open Classical in
 lemma one_le_euclidean_integerLattice_norm
     {x : mixedEmbedding.euclidean.mixedSpace K}
     (hx : x ∈ mixedEmbedding.euclidean.integerLattice K) (hne : x ≠ 0) :
@@ -117,6 +121,7 @@ lemma one_le_euclidean_integerLattice_norm
   apply hne
   simp [hz]
 
+open Classical in
 lemma euclideanNumberFieldEmbedding_norm_le {B : ℝ} (hB : 0 ≤ B)
     (x : K) (hx : ∀ w : InfinitePlace K, w x ≤ B) :
     ‖euclideanNumberFieldEmbedding K x‖ ≤ Real.sqrt (Module.finrank ℚ K) * B := by
@@ -137,11 +142,13 @@ lemma euclideanNumberFieldEmbedding_norm_le {B : ℝ} (hB : 0 ≤ B)
   nlinarith [congrArg (fun r : ℝ ↦ r * B ^ 2) hrank,
     mul_nonneg (Nat.cast_nonneg (nrComplexPlaces K) (α := ℝ)) (sq_nonneg B)]
 
+open Classical in
 lemma euclideanNumberFieldEmbedding_one_norm_le :
     ‖euclideanNumberFieldEmbedding K 1‖ ≤ Real.sqrt (Module.finrank ℚ K) := by
   simpa using euclideanNumberFieldEmbedding_norm_le K (B := 1) zero_le_one 1
     (fun w ↦ by simp)
 
+open Classical in
 lemma euclideanNumberFieldEmbedding_norm_mul_le (x y : K) :
     ‖euclideanNumberFieldEmbedding K (x * y)‖ ≤
       ‖euclideanNumberFieldEmbedding K x‖ * ‖euclideanNumberFieldEmbedding K y‖ := by
@@ -161,6 +168,7 @@ lemma euclideanNumberFieldEmbedding_norm_mul_le (x y : K) :
     euclideanNumberFieldEmbedding_norm_sq K x]
   nlinarith only [hreal, hcomplex]
 
+open Classical in
 lemma euclidean_integerLattice_covolume :
     ZLattice.covolume (mixedEmbedding.euclidean.integerLattice K) =
       (2 : ℝ)⁻¹ ^ nrComplexPlaces K * Real.sqrt |(discr K : ℝ)| := by

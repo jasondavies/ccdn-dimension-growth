@@ -15,7 +15,6 @@ does not require a lower bound on the radius in terms of the discriminant. -/
 namespace CCDN
 noncomputable section
 open NumberField MeasureTheory MeasureTheory.Measure
-open scoped Classical
 
 theorem separated_finite_ball_count
     {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
@@ -79,6 +78,7 @@ theorem boundedArchimedeanIntegers_separated_count
     (K : Type*) [Field K] [NumberField K] {B : ℝ} (hB : 0 ≤ B) :
     ((boundedArchimedeanIntegers K B).ncard : ℝ) ≤
       (2 * Real.sqrt (Module.finrank ℚ K) * B + 1) ^ Module.finrank ℚ K := by
+  classical
   let e : 𝓞 K → mixedEmbedding.euclidean.mixedSpace K :=
     fun x ↦ euclideanNumberFieldEmbedding K (x : K)
   have he : Function.Injective e := by

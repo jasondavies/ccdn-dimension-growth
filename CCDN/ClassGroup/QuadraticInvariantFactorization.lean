@@ -17,7 +17,7 @@ ramified primes; repeated ramified factors can be absorbed in pairs. -/
 namespace CCDN
 noncomputable section
 open NumberField Ideal
-open scoped Classical Pointwise
+open scoped Pointwise
 
 variable (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K]
   [Algebra F K] [FiniteDimensional F K]

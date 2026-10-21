@@ -19,7 +19,6 @@ signed norm curves of the imported files. -/
 namespace CCDN
 noncomputable section
 open NumberField NumberField.InfinitePlace
-open scoped Classical
 
 /-- A coefficient depending only on the field degree. -/
 def oddDegreeClassGroupConstant (n : ℕ) : ℝ :=
@@ -36,6 +35,7 @@ theorem odd_degree_classGroup_two_torsion_bound
       oddDegreeClassGroupConstant (Module.finrank ℚ K) *
         |(discr K : ℝ)| ^
           (1 / 2 - 1 / (2 * (Module.finrank ℚ K : ℝ))) := by
+  classical
   have hD1 := one_le_abs_discr K
   have hD : 0 < |(discr K : ℝ)| := zero_lt_one.trans_le hD1
   let B := 9 * |(discr K : ℝ)| ^ (1 / (Module.finrank ℚ K : ℝ))

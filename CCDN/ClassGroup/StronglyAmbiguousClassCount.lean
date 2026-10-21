@@ -28,7 +28,7 @@ function total; multiplicativity below explicitly requires nonzero ideals.
 @[expose] public section
 namespace CCDN
 noncomputable section
-open scoped nonZeroDivisors Classical
+open scoped nonZeroDivisors
 
 variable {R : Type*} [CommRing R] [IsDedekindDomain R]
 
@@ -80,7 +80,7 @@ end CCDN
 namespace CCDN
 noncomputable section
 open NumberField
-open scoped Classical Pointwise nonZeroDivisors
+open scoped Pointwise nonZeroDivisors
 
 variable (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K]
   [Algebra F K] [FiniteDimensional F K]

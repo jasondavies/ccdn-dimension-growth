@@ -14,7 +14,7 @@ which both endpoint coefficients remain nonzero. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Finset Classical
+open MvPolynomial Finset
 
 structure HasCoprimeNewtonEdge {R : Type*} [CommSemiring R]
     (f : MvPolynomial (Fin 2) R) (d e : ℕ) : Prop where

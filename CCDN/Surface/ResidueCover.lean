@@ -13,7 +13,7 @@ import CCDN.Surface.NonlinearCount
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Finset Classical
+open MvPolynomial Finset
 
 def surfaceResidueSubsetLocus {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
     (F : SurfaceCongruenceFamily f B A)
@@ -138,6 +138,7 @@ theorem large_curve_point_mem_surfaceResidueResidualLocus
     (hxI : rationalPoint x ∈ idealZeroLocus I)
     (hsmooth : ∃ j, eval x (pderiv j f) ≠ 0) :
     rationalPoint x ∈ surfaceResidueResidualLocus F S L X hW.one_le_window := by
+  classical
   obtain ⟨R, hR, p, hp, r, hedge⟩ :=
     surface_residue_boundary_of_large_curve f hir hA hW F I hI hinitI hlarge x hx hxf hsmooth
   apply mem_surfaceResidueResidualLocus F S hW.one_le_window R hedge.subset_window hR p hp

@@ -15,7 +15,7 @@ small-subfield set when there is no index-two intermediate field. -/
 namespace CCDN
 noncomputable section
 open NumberField NumberField.InfinitePlace IntermediateField
-open scoped Classical IntermediateField
+open scoped IntermediateField
 
 variable (K : Type*) [Field K] [NumberField K]
 
@@ -97,6 +97,7 @@ theorem exists_norm_curve_exception_split
             count (signedNormCurveLocus K (β q) (-1))
               (max (2 * B) (Real.sqrt (B ^ Module.finrank ℚ K)))
           else 0 := by
+  classical
   obtain ⟨β, hi, hb, hcover⟩ := exists_norm_translate_cover K B
   refine ⟨β, hi, hb, ?_⟩
   let Q := boundedSquareNormTranslationClasses K B

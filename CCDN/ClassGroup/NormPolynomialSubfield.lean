@@ -28,7 +28,7 @@ the multiplicity that distinguishes ordinary and exceptional norm curves. -/
 namespace CCDN
 noncomputable section
 open Polynomial NumberField IntermediateField Module
-open scoped IntermediateField Classical
+open scoped IntermediateField
 
 lemma powerBasis_norm_sub_gen {F E : Type*} [Field F] [Field E] [Algebra F E]
     (b : PowerBasis F E) (a : F) :

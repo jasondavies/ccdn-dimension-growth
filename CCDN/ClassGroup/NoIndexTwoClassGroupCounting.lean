@@ -64,7 +64,7 @@ end CCDN
 namespace CCDN
 noncomputable section
 open NumberField NumberField.InfinitePlace
-open scoped Classical IntermediateField
+open scoped IntermediateField
 
 lemma normCurveBoxHeight_log_le {n : ℕ} (hn : 2 ≤ n) {B : ℝ} (hB : 1 ≤ B) :
     Real.log (max (2 * B) (Real.sqrt (B ^ n))) + n ≤

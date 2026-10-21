@@ -25,7 +25,6 @@ and every coefficient depends only on the degree.
 namespace CCDN
 noncomputable section
 open NumberField
-open scoped Classical
 
 variable (K : Type*) [Field K] [NumberField K]
 
@@ -46,7 +45,6 @@ end CCDN
 namespace CCDN
 noncomputable section
 open NumberField
-open scoped Classical
 
 def noIndexTwoClassGroupConstant (n : ℕ) : ℝ :=
   (noIndexTwoCurveContributionConstant n *

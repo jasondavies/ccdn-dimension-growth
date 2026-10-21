@@ -18,7 +18,7 @@ constructed congruence remainder. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Finset Classical
+open MvPolynomial Finset
 
 abbrev GeometricCurveIdeal (I : Ideal (CoordinatePolynomial 3)) : Prop :=
   (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime
@@ -46,6 +46,7 @@ lemma integer_smooth_surface_derivative
   rw [pderiv_map]
   exact hh
 
+open Classical in
 theorem surface_smooth_outside_geometric_cover
     (f : MvPolynomial (Fin 3) ℤ)
     (hir : Irreducible (map (Int.castRingHom ℚ) f))
@@ -104,6 +105,7 @@ theorem surface_smooth_outside_geometric_cover
   exact (card_le_card hpoint).trans ((count_union_le (bad ∪ medium) residual B).trans
     (Nat.add_le_add_right (count_union_le bad medium B) _))
 
+open Classical in
 /-- Nongeometric bounded-degree curves contribute only their squared degrees. -/
 theorem nongeometric_curve_union_count_le
     (S : Finset (Ideal (CoordinatePolynomial 3)))

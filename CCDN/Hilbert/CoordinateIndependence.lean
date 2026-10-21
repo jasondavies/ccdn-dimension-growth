@@ -16,7 +16,7 @@ independent original coordinates of cardinality equal to Hilbert dimension. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Classical
+open MvPolynomial
 
 lemma algebraicIndependent_coordinates_of_standard
     {K σ ι : Type*} [Field K]
@@ -24,6 +24,7 @@ lemma algebraicIndependent_coordinates_of_standard
     (j : ι → σ) (hj : Function.Injective j)
     (hstd : ∀ a : ι →₀ ℕ, a.mapDomain j ∈ Ideal.standardExponents I m) :
     AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (X (j i))) := by
+  classical
   apply algebraicIndependent_iff.mpr
   intro p hp
   have he : aeval (fun i => (Ideal.Quotient.mk I) (X (j i))) =

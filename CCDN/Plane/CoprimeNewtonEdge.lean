@@ -16,7 +16,7 @@ below the weight of the edge. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Finset Classical
+open MvPolynomial Finset
 
 def coprimeEdgeWeight (d e : ℕ) : Fin 2 → ℕ := fun i => if i = 0 then e else d
 

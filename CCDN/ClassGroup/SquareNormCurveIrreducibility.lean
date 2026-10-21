@@ -18,7 +18,7 @@ the even-index subfield exceptions. -/
 namespace CCDN
 noncomputable section
 open Polynomial NumberField IntermediateField Module
-open scoped IntermediateField Classical
+open scoped IntermediateField
 
 lemma rootMultiplicity_pow_exact {F : Type*} [Field F] (p : F[X]) (hp : p ≠ 0)
     (a : F) (n : ℕ) :

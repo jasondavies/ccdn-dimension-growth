@@ -24,7 +24,7 @@ its congruence auxiliaries and curve cover. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Finset Classical
+open MvPolynomial Finset
 
 /-- The constant is chosen before the primitive equation and the box
 radius. Absolute irreducibility is required only of the leading form. -/

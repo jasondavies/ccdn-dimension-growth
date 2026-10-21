@@ -17,7 +17,7 @@ dimension. These results construct the polynomial from standard exponents. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Classical
+open MvPolynomial
 
 def standardExponentVectors {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) : Set (σ → ℕ) :=

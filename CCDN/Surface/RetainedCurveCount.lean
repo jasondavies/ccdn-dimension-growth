@@ -22,7 +22,7 @@ budget and the logarithmic cap on the retained degrees. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
-open MvPolynomial Finset Classical
+open MvPolynomial Finset
 
 theorem surface_curve_number_weight {d : ℕ} (hd : 5 ≤ d) {B : ℝ} (hB : 1 ≤ B) :
     B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1) ≤
