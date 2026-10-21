@@ -195,9 +195,17 @@ dependencies keep their own licences (see [`NOTICE`](NOTICE)).
 - [`docs/statements.md`](docs/statements.md): the paper's numbered statements and the external
   results it cites, with their Lean declarations (generated from `docs/completion-audit.json`;
   [schema](docs/audit-schema.md)).
-- [`docs/modules.md`](docs/modules.md): every module, by directory (generated). The library
-  keeps the six main-result modules at the top of `CCDN/` and groups the rest by topic;
-  `CCDN/ForMathlib/` holds general results, under Mathlib namespaces, suitable for upstreaming.
+- [`docs/modules.md`](docs/modules.md): every module, by directory (generated). The
+  directories are layered, and `scripts/check-layers.py` enforces the layers:
+  - [`CCDN/Statements.lean`](CCDN/Statements.lean) states Theorems 1–4, and each of the six
+    main results has an endpoint module at the top of `CCDN/` (statement plus a short
+    assembly), which no library module imports;
+  - the foundation directories `ForMathlib/`, `Algebra/`, `Analysis/`, `Height/` and
+    `Hilbert/` hold general results and import nothing else from the library
+    (`CCDN/ForMathlib/` is written under Mathlib namespaces, for upstreaming);
+  - the topic directories hold the proof routes, each in the directory of its topic;
+  - `Counterexample/` and `Paper/` hold side results (refutations, and the paper's
+    intermediate statements as stated there) that nothing else imports.
 - [`docs/history/`](docs/history/): development notes, the verification log and the original
   statement audits, kept for the record and not maintained.
 
