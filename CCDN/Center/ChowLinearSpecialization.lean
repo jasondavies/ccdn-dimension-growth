@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.LinearForm
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Projection.LinearProjectionFiltration
@@ -24,20 +25,20 @@ noncomputable section
 open MvPolynomial Matrix
 
 /-- Coordinate forms of a linear projection matrix. -/
-def chowProjectionForms {K : Type*} [Field K] {n s : ℕ}
+abbrev chowProjectionForms {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1)) :
-    MvPolynomial (Fin (n + 1)) K := ∑ j, C (A i j) * X j
+    MvPolynomial (Fin (n + 1)) K := linearForm (A i)
 
 lemma chowProjectionForms_homogeneous {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1)) :
     (chowProjectionForms A i).IsHomogeneous 1 :=
-  IsHomogeneous.sum _ _ _ (fun j _ => isHomogeneous_C_mul_X _ j)
+  linearForm_isHomogeneous (A i)
 
 lemma chowProjectionForms_eval {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1))
     (x : Fin (n + 1) → K) :
     eval x (chowProjectionForms A i) = (A *ᵥ x) i := by
-  simp [chowProjectionForms, Matrix.mulVec, dotProduct]
+  simp [Matrix.mulVec, dotProduct]
 
 /-- Pullback of target hyperplane coefficients along the matrix. -/
 def chowPullbackCoefficients {K : Type*} [Field K] {n s r : ℕ}

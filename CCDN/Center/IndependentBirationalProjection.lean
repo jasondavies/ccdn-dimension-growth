@@ -89,12 +89,9 @@ theorem exists_independent_bounded_birational_hypersurface_projection
   let F := FractionRing A
   let L : (Fin n → ℚ) →ₗ[ℚ] F :=
     (IsScalarTower.toAlgHom ℚ A F).toLinearMap.comp
-      ((Ideal.Quotient.mkₐ ℚ I).toLinearMap.comp (rationalRowLinearForm n))
+      ((Ideal.Quotient.mkₐ ℚ I).toLinearMap.comp (linearFormLinearMap ℚ (Fin n)))
   have hL (v : Fin n → ℤ) : L (fun k => (v k : ℚ)) =
-      algebraMap A F ((Ideal.Quotient.mk I) (integerLinearForm v)) := by
-    change algebraMap A F ((Ideal.Quotient.mk I)
-      (rationalRowLinearForm n (fun k => (v k : ℚ)))) = _
-    rw [rationalRowLinearForm_integer]
+      algebraMap A F ((Ideal.Quotient.mk I) (integerLinearForm v)) := rfl
   have hfieldtail : IntermediateField.adjoin ℚ
       (Set.range (fun i : Fin (m + 1) => algebraMap A F
         ((Ideal.Quotient.mk I) (integerLinearForm (b i.succ))))) = ⊤ := by
@@ -139,9 +136,9 @@ theorem exists_independent_bounded_birational_hypersurface_projection
     rw [aeval_X]
     rfl
   obtain ⟨g, hg, hgpos, _, hkg⟩ := exists_hypersurface_projection_equation_degree_le
-    I l (fun i => integerLinearForm_degree (c i)) d ⟨hdim, hdegree⟩
+    I l (fun i => linearForm_totalDegree_le _) d ⟨hdim, hdegree⟩
     (fun i => X i.succ) (fun _ => by simp) hAI
-  have hlhom (i) : (l i).IsHomogeneous 1 := integerLinearForm_isHomogeneous (c i)
+  have hlhom (i) : (l i).IsHomogeneous 1 := linearForm_isHomogeneous _
   have hlead := homogeneous_finite_birational_projection_leadingCoeff_eq
     (F := F) I hI l hlhom hintc hfieldc
   rw [hkg, principal_filteredHilbertPolynomial_leadingCoeff g hg.ne_zero hgpos,

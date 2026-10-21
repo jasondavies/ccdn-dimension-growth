@@ -53,7 +53,7 @@ theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
       s.card ≤ d ^ (n + 1) := by
     exact linear_normalization_fiber_card_le I
       (fun i : Fin 2 => integerLinearForm (b i.succ))
-      (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdimdeg
+      (fun i => linearForm_totalDegree_le _) hinj hnorm d hdimdeg
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
   let H : ℝ := birationalProjectionHeightConstant (n + 1) * (d : ℝ) ^ (2 * (n + 1))
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast (show 1 ≤ d by omega)

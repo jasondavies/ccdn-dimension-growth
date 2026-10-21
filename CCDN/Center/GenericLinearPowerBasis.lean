@@ -7,6 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 public import Mathlib.RingTheory.PowerBasis
+public import CCDN.Algebra.LinearForm
 public import CCDN.Center.PolynomialCoefficientBasis
 
 /-! A generic linear form is primitive whenever one linear specialization
@@ -19,32 +20,22 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
-/-- The linear combination with independent polynomial coefficients. -/
-def genericLinearForm {A σ : Type*} [CommRing A] [Fintype σ]
-    (x : σ → A) : MvPolynomial σ A := ∑i, C (x i) * X i
-
-lemma genericLinearForm_eval {K A σ : Type*} [Field K] [CommRing A]
-    [Algebra K A] [Fintype σ] (x : σ → A) (c : σ → K) :
-    eval (fun i => algebraMap K A (c i)) (genericLinearForm x) =
-      ∑i, x i * algebraMap K A (c i) := by
-  simp [genericLinearForm]
-
 theorem generic_linear_powers_polynomial_independent
     {K A σ : Type*} [Field K] [CommRing A] [Algebra K A] [Fintype σ]
     (b : PowerBasis K A) (x : σ → A) (c : σ → K)
     (hc : ∑i, x i * algebraMap K A (c i) = b.gen) :
     LinearIndependent (MvPolynomial σ K)
-      (fun i : Fin b.dim => genericLinearForm x ^ (i : ℕ)) := by
+      (fun i : Fin b.dim => linearForm x ^ (i : ℕ)) := by
   classical
   apply Fintype.linearIndependent_iff.mpr
   intro q hq i
   have he : ∀i : Fin b.dim,
-      eval (fun j => algebraMap K A (c j)) (genericLinearForm x ^ (i : ℕ)) =
+      eval (fun j => algebraMap K A (c j)) (linearForm x ^ (i : ℕ)) =
         b.basis i := by
     intro i
-    rw [map_pow,genericLinearForm_eval,hc,b.basis_eq_pow]
+    rw [map_pow,eval_linearForm,hc,b.basis_eq_pow]
   have hz := polynomial_family_independent_of_basis_specialization b.basis
-    (fun i : Fin b.dim => genericLinearForm x ^ (i : ℕ)) c he q (by
+    (fun i : Fin b.dim => linearForm x ^ (i : ℕ)) c he q (by
       simpa only [Algebra.smul_def,MvPolynomial.algebraMap_def] using hq)
   exact congrFun hz i
 
@@ -60,7 +51,7 @@ def genericLinearPowerBasis
     [IsScalarTower (MvPolynomial σ K) (MvPolynomial σ A) F]
     (b : PowerBasis K A) (x : σ → A) (c : σ → K)
     (hc : ∑i, x i * algebraMap K A (c i) = b.gen) : PowerBasis R F := by
-  let u := algebraMap (MvPolynomial σ A) F (genericLinearForm x)
+  let u := algebraMap (MvPolynomial σ A) F (linearForm x)
   have hrank : Module.finrank R F = b.dim := by
     simpa only [Fintype.card_fin] using
       polynomial_fraction_extension_finrank (R := R) (F := F) (σ := σ) b.basis
@@ -72,7 +63,7 @@ def genericLinearPowerBasis
       (LinearMap.ker_eq_bot.mpr (IsFractionRing.injective (MvPolynomial σ A) F))
     change LinearIndependent (MvPolynomial σ K)
       (fun i : Fin b.dim => algebraMap (MvPolynomial σ A) F
-        (genericLinearForm x ^ (i : ℕ))) at hm
+        (linearForm x ^ (i : ℕ))) at hm
     simpa only [map_pow,u] using hm
   have hi : LinearIndependent R (fun i : Fin b.dim => u ^ (i : ℕ)) :=
     (LinearIndependent.iff_fractionRing (MvPolynomial σ K) R).mp hiP

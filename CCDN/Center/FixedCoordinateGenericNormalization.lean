@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.LinearForm
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.ProjectiveClosureProjection
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
@@ -20,14 +21,15 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def genericAffineParameterForms {R : Type*} [CommRing R] {m n : ℕ}
+/-- The family of linear forms whose coefficient rows are `u (i, ·)`. -/
+abbrev genericAffineParameterForms {R : Type*} [CommRing R] {m n : ℕ}
     (u : Fin m × Fin n → R) : Fin m → MvPolynomial (Fin n) R :=
-  fun i => ∑ j, C (u (i,j)) * X j
+  fun i => linearForm fun j => u (i,j)
 
 lemma genericAffineParameterForms_homogeneous {R : Type*} [CommRing R] {m n : ℕ}
     (u : Fin m × Fin n → R) (i : Fin m) :
     (genericAffineParameterForms u i).IsHomogeneous 1 :=
-  IsHomogeneous.sum _ _ _ (fun j _ => isHomogeneous_C_mul_X _ j)
+  linearForm_isHomogeneous _
 
 lemma homogeneous_linear_forms_coefficient_representation
     {K : Type*} [Field K] {m n : ℕ} (a : Fin m → MvPolynomial (Fin n) K)
@@ -41,7 +43,7 @@ lemma homogeneous_linear_forms_coefficient_representation
   choose c hc using hex
   refine ⟨fun q => c q.1 q.2, ?_⟩
   funext i
-  simpa only [genericAffineParameterForms, smul_eq_C_mul] using hc i
+  simpa only [linearForm, smul_eq_C_mul] using hc i
 
 def genericFixedCoordinateFamily (K : Type*) [Field K] (m n : ℕ) :
     Fin (m + 1) → MvPolynomial (Fin (n + 1)) (MvPolynomial (Fin m × Fin n) K) :=
@@ -61,7 +63,7 @@ lemma genericFixedCoordinateFamily_map
   funext i
   refine Fin.cases ?_ (fun j => ?_) i
   · simp [genericFixedCoordinateFamily, closureProjectionCoordinates]
-  · simp [genericFixedCoordinateFamily, closureProjectionCoordinates, genericAffineParameterForms]
+  · simp [genericFixedCoordinateFamily, closureProjectionCoordinates, linearForm]
 
 /-- Independent coefficients give a finite normalization of the
 projective closure while its homogenizing coordinate remains fixed. -/

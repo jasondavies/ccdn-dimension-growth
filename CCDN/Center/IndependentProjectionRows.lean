@@ -23,20 +23,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Module
 
-/-- Rational coefficient vectors interpreted as homogeneous linear forms. -/
-def rationalRowLinearForm (n : ℕ) :
-    (Fin n → ℚ) →ₗ[ℚ] MvPolynomial (Fin n) ℚ :=
-  (Pi.basisFun ℚ (Fin n)).constr ℚ X
-
-lemma rationalRowLinearForm_apply {n : ℕ} (v : Fin n → ℚ) :
-    rationalRowLinearForm n v = ∑ j, v j • X j := by
-  simp [rationalRowLinearForm]
-
-lemma rationalRowLinearForm_integer {n : ℕ} (a : Fin n → ℤ) :
-    rationalRowLinearForm n (fun j => (a j : ℚ)) = integerLinearForm a := by
-  rw [rationalRowLinearForm_apply]
-  simp only [integerLinearForm, Algebra.smul_def, algebraMap_eq]
-
 /-- Injectivity of the normalization algebra map implies linear
 independence of its integer coefficient rows. -/
 theorem integer_rows_linearIndependent_of_projection_injective {m n : ℕ}
@@ -51,10 +37,7 @@ theorem integer_rows_linearIndependent_of_projection_injective {m n : ℕ}
     exact hinj
   have hl : LinearIndependent ℚ (fun i => integerLinearForm (a i)) :=
     hi.linearIndependent.of_comp (Ideal.Quotient.mkₐ ℚ I).toLinearMap
-  apply LinearIndependent.of_comp (rationalRowLinearForm n)
-  convert hl using 1
-  funext i
-  exact rationalRowLinearForm_integer (a i)
+  exact LinearIndependent.of_comp (linearFormLinearMap ℚ (Fin n)) hl
 
 /-- When fewer than n rows are independent, some standard unit vector
 lies outside their span. No arbitrarily large integer vector is required. -/

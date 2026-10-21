@@ -39,6 +39,7 @@ public import CCDN.Algebra.IntegerLinearForms
 public import CCDN.Algebra.IntegerPolynomialAvoidance
 public import CCDN.Algebra.IntegerRationalIrreducibility
 public import CCDN.Algebra.LeadingDirection
+public import CCDN.Algebra.LinearForm
 public import CCDN.Algebra.LowDegreePointSeparation
 public import CCDN.Algebra.ModularPolynomialLift
 public import CCDN.Algebra.MonomialOrthants

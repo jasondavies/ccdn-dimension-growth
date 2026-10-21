@@ -95,7 +95,7 @@ theorem exists_fixed_coordinate_center_row_witness
   let T : (Fin (n + 1) → K) →ₗ[K] MvPolynomial (Fin (n + 1)) K :=
     (Pi.basisFun K (Fin (n + 1))).constr K X
   have hT (i) : T (B.row i) = a i := by
-    simpa [T, chowProjectionForms, smul_eq_C_mul] using congrFun hBa i
+    simpa [T, linearForm, smul_eq_C_mul] using congrFun hBa i
   have hBli : LinearIndependent K B.row := by
     apply LinearIndependent.of_comp T
     simpa only [Function.comp_def, hT] using hali
@@ -125,7 +125,7 @@ theorem exists_fixed_coordinate_center_row_witness
     have hz : (B.map (algebraMap K L)) *ᵥ p.rep = 0 := hkerL hmem
     funext i
     have hh := congrFun hz i
-    simpa only [chowProjectionForms, map_sum, map_mul, aeval_C, aeval_X,
+    simpa only [linearForm, map_sum, map_mul, aeval_C, aeval_X,
       Matrix.mulVec, dotProduct, Matrix.map_apply, Pi.zero_apply] using hh
 
 end

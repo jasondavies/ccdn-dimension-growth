@@ -33,9 +33,9 @@ theorem generic_linear_primitive
       (fun φ : A →ₐ[K] AlgebraicClosure K => fun j => φ (x j))) :
     Module.finrank R F = Module.finrank K A ∧
     (minpoly R (algebraMap (MvPolynomial (Fin n) A) F
-      (genericLinearForm x))).natDegree = Module.finrank K A ∧
+      (linearForm x))).natDegree = Module.finrank K A ∧
     IntermediateField.adjoin R
-      {algebraMap (MvPolynomial (Fin n) A) F (genericLinearForm x)} = ⊤ := by
+      {algebraMap (MvPolynomial (Fin n) A) F (linearForm x)} = ⊤ := by
   classical
   obtain ⟨k,_,hk⟩ := exists_bounded_primitive_element x hsep
   let z := ∑j : Fin n, x j * (k : A) ^ j.val
@@ -44,7 +44,7 @@ theorem generic_linear_primitive
     simp only [map_pow,map_natCast,PowerBasis.ofAdjoinSimpleEqTop_gen,b,z]
   let B := genericLinearPowerBasis (R := R) (F := F) b x
     (fun i => (k : K) ^ i.val) hc
-  have hgen : B.gen = algebraMap (MvPolynomial (Fin n) A) F (genericLinearForm x) := rfl
+  have hgen : B.gen = algebraMap (MvPolynomial (Fin n) A) F (linearForm x) := rfl
   have hdim : B.dim = Module.finrank K A := by
     change b.dim = _
     exact b.finrank.symm

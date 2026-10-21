@@ -46,14 +46,14 @@ theorem exists_bounded_affine_birational_projection
     exists_bounded_integer_closure_normalization m k I d hdimdeg
   let l : Fin (m + 1) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (a i)
   obtain ⟨t, ht, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I l (fun i => integerLinearForm_degree (a i)) hinja d hdimdeg
+    I l (fun i => linearForm_totalDegree_le _) hinja d hdimdeg
   let b : Fin (m + 2) → Fin n → ℤ :=
     Fin.cases (fun j => (t : ℤ) ^ j.val) a
   let l' : Fin (m + 2) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
   have hl' : l' = Fin.cases (momentCoordinate ℚ n t) l := by
     funext i
     refine Fin.cases ?_ (fun _ => rfl) i
-    simp only [l', b, Fin.cases_zero, integerLinearForm, momentCoordinate, Int.cast_pow,
+    simp only [l', b, Fin.cases_zero, integerLinearForm, linearForm, momentCoordinate, Int.cast_pow,
       Int.cast_natCast]
   have hfield' : IntermediateField.adjoin ℚ
       (Set.range (fun i => algebraMap A F ((Ideal.Quotient.mk I) (l' i)))) = ⊤ := by
@@ -81,7 +81,7 @@ theorem exists_bounded_affine_birational_projection
     rw [aeval_X]
     rfl
   obtain ⟨f, hf, hfpos, hfd, hker⟩ := exists_hypersurface_projection_equation_degree_le
-    I l' (fun i => integerLinearForm_degree (b i)) d hdimdeg
+    I l' (fun i => linearForm_totalDegree_le _) d hdimdeg
     (fun i => X i.succ) (fun _ => by simp) hAI
   have hcone' : (projectionCoordinateMap (projectiveClosureIdeal I)
       (closureProjectionCoordinates l')).IsIntegral := by

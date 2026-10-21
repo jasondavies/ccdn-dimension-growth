@@ -42,7 +42,7 @@ theorem projective_variety_dimension_growth (m k : ℕ) :
   intro z s hzero hproj
   exact linear_normalization_fiber_card_le I
     (fun i : Fin (m + 2) => integerLinearForm (b i.succ))
-    (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdimdeg
+    (fun i => linearForm_totalDegree_le _) hinj hnorm d hdimdeg
     (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
 
 end

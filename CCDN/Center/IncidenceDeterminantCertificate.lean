@@ -30,7 +30,7 @@ lemma incidenceCoefficientPolynomial_eval {K : Type*} [Field K] {n r : ℕ}
     (U : Fin r × Fin (n + 1) → K) :
     eval U (incidenceCoefficientPolynomial q p e) =
       (q + ∑ i, incidenceLinearForm U i * p i).coeff e := by
-  simp [incidenceCoefficientPolynomial, incidenceLinearForm, Finset.sum_mul, mul_assoc]
+  simp [incidenceCoefficientPolynomial, linearForm, Finset.sum_mul, mul_assoc]
 
 lemma homogeneous_coefficient_evaluation {K : Type*} [Field K] {n M : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous M)

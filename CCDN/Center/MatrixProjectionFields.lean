@@ -52,7 +52,7 @@ lemma chowProjectionForms_combination_of_kernel_le
   obtain ⟨c,hc⟩ := matrix_row_combination_of_kernel_le A B hker i
   refine ⟨c,?_⟩
   symm
-  simp only [chowProjectionForms]
+  simp only [linearForm]
   simp_rw [Finset.mul_sum,← mul_assoc,← map_mul]
   rw [Finset.sum_comm]
   simp_rw [← Finset.sum_mul,← map_sum,hc]

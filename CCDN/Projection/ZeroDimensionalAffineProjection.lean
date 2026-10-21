@@ -51,7 +51,7 @@ theorem exists_geometric_affine_projection_zero_dimension
   let a : Fin 1 → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
   have ha : a = 0 := by
     funext i
-    simp [a, b, integerLinearForm]
+    simp [a, b, linearForm]
   have hsurj : Function.Surjective (projectionCoordinateMap I a) := by
     intro z
     obtain ⟨p, rfl⟩ := Ideal.Quotient.mk_surjective z

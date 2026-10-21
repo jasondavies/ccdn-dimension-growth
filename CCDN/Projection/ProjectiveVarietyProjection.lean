@@ -57,7 +57,7 @@ theorem exists_projective_variety_projection
       s.card ≤ d := by
     have hh := bounded_degree_normalization_fiber_card_le I 1 (by omega)
       (fun i : Fin (m + 1) => integerLinearForm (b i.succ))
-      (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdimdeg
+      (fun i => linearForm_totalDegree_le _) hinj hnorm d hdimdeg
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
     simpa only [one_pow, Nat.mul_one] using hh
   let H : ℝ := birationalProjectionHeightConstant (n + 1) * (d : ℝ) ^ (2 * (n + 1))

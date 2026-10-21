@@ -54,14 +54,14 @@ theorem exists_bounded_birational_hypersurface_projection
     exists_bounded_integer_normalization m k I d ⟨hdim, hdegree⟩
   let l : Fin (m + 1) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (a i)
   obtain ⟨t, ht, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I l (fun i => integerLinearForm_degree (a i)) hinja d ⟨hdim, hdegree⟩
+    I l (fun i => linearForm_totalDegree_le _) hinja d ⟨hdim, hdegree⟩
   let b : Fin (m + 2) → Fin n → ℤ :=
     Fin.cases (fun j => (t : ℤ) ^ j.val) a
   let l' : Fin (m + 2) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
   have hl' : l' = Fin.cases (momentCoordinate ℚ n t) l := by
     funext i
     refine Fin.cases ?_ (fun _ => rfl) i
-    simp only [l', b, Fin.cases_zero, integerLinearForm, momentCoordinate, Int.cast_pow,
+    simp only [l', b, Fin.cases_zero, integerLinearForm, linearForm, momentCoordinate, Int.cast_pow,
       Int.cast_natCast]
   have hfield' : IntermediateField.adjoin ℚ
       (Set.range (fun i => algebraMap A F ((Ideal.Quotient.mk I) (l' i)))) = ⊤ := by
@@ -89,9 +89,9 @@ theorem exists_bounded_birational_hypersurface_projection
     rw [aeval_X]
     rfl
   obtain ⟨f, hf, hfpos, _, hker⟩ := exists_hypersurface_projection_equation_degree_le
-    I l' (fun i => integerLinearForm_degree (b i)) d ⟨hdim, hdegree⟩
+    I l' (fun i => linearForm_totalDegree_le _) d ⟨hdim, hdegree⟩
     (fun i => X i.succ) (fun _ => by simp) hAI
-  have hlhom (i) : (l' i).IsHomogeneous 1 := integerLinearForm_isHomogeneous (b i)
+  have hlhom (i) : (l' i).IsHomogeneous 1 := linearForm_isHomogeneous _
   have hlead := homogeneous_finite_birational_projection_leadingCoeff_eq
     (F := F) I hI l' hlhom hint hfield'
   rw [hker, principal_filteredHilbertPolynomial_leadingCoeff f hf.ne_zero hfpos,

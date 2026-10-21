@@ -99,11 +99,11 @@ theorem chow_univariate_degree_eq_normalization_rank
     rw [chow_nested_parameter_field]
     simp only [S,Set.image_union,← Set.range_comp,Function.comp_def,hη,hX]
     rfl
-  have hlast : algebraMap (MvPolynomial (Fin n) A) F (genericLinearForm x) =
+  have hlast : algebraMap (MvPolynomial (Fin n) A) F (linearForm x) =
       chowLastIncidenceValue (E := F) m I := by
-    change algebraMap (MvPolynomial (Fin n) A) F (genericLinearForm x) =
+    change algebraMap (MvPolynomial (Fin n) A) F (linearForm x) =
       algebraMap N F (chowLastRowSplit m I (chowIncidenceMap (m + 1) I (X (Fin.last m,0))))
-    rw [chowLastRowSplit_incidence_last,genericLinearForm,map_sum,map_neg,map_sum,
+    rw [chowLastRowSplit_incidence_last,linearForm,map_sum,map_neg,map_sum,
       ← Finset.sum_neg_distrib]
     apply Finset.sum_congr rfl
     intro j _

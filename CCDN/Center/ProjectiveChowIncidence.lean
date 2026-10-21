@@ -9,6 +9,7 @@ public import CCDN.Center.ChowPivotParametrization
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Center.ChowIncidenceLocus
+import CCDN.Algebra.LinearForm
 import CCDN.Algebra.ProjectiveClosureDegree
 import CCDN.Center.PrimeOpenVanishing
 /-! The affine incidence elimination ideal is the vanishing ideal of the
@@ -35,11 +36,9 @@ theorem chowIncidenceLocus_subset_projectiveClosureIncidence
   let p := affineProjectivePoint a
   refine ⟨p, (projectiveClosureIdeal_chart_point I a).mpr ha, ?_⟩
   intro i
-  let f : MvPolynomial (Fin (n + 1)) K := ∑ j, C (U (i,j)) * X j
-  have hf : f.IsHomogeneous 1 :=
-    IsHomogeneous.sum _ _ _ (fun j _ => isHomogeneous_C_mul_X _ j)
-  have heval (x : Fin (n + 1) → K) : eval x f = ∑ j, U (i,j) * x j := by
-    simp [f]
+  let f : MvPolynomial (Fin (n + 1)) K := linearForm fun j => U (i,j)
+  have hf : f.IsHomogeneous 1 := linearForm_isHomogeneous _
+  have heval (x : Fin (n + 1) → K) : eval x f = ∑ j, U (i,j) * x j := eval_linearForm _ x
   have hz : eval (Fin.cons 1 a) f = 0 := (heval _).trans (hrel i)
   have hpz := (homogeneous_eval_zero_iff_projective_eq hf p.rep_nonzero
     (affineCoordinateVector_ne_zero a) p.mk_rep).mpr hz
