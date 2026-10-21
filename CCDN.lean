@@ -713,7 +713,6 @@ public import CCDN.Plane.PlaneFrobeniusSystem
 public import CCDN.Plane.PlaneGridHeight
 public import CCDN.Plane.PlaneIncidence
 public import CCDN.Plane.PlaneLinearDeformation
-public import CCDN.Plane.PlaneRelationSpace
 public import CCDN.Plane.PlaneSectionBounds
 public import CCDN.Plane.PlaneSectionSum
 public import CCDN.Plane.PlaneStepanovBound
@@ -791,6 +790,7 @@ public import CCDN.Projection.LinearParameterPrimitive
 public import CCDN.Projection.PlaneProjectionDegree
 public import CCDN.Projection.PlaneProjectionDerivative
 public import CCDN.Projection.PlaneProjectionKernel
+public import CCDN.Projection.PlaneRelationSpace
 public import CCDN.Projection.ProjectionExceptionalCount
 public import CCDN.Projection.ProjectionFieldDegree
 public import CCDN.Projection.ProjectionFractionField

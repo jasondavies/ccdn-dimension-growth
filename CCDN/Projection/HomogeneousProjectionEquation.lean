@@ -8,7 +8,7 @@ module
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Auxiliary.HypersurfaceGoodDirection
-import CCDN.Plane.PlaneRelationSpace
+import CCDN.Projection.PlaneRelationSpace
 import CCDN.Projection.HomogeneousFilteredProjection
 import CCDN.ForMathlib.MvPolynomial
 /-! The principal equation of the image of a homogeneous linear
