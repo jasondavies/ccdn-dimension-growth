@@ -7,6 +7,7 @@ module
 
 public import CCDN.Projection.BoundedIntegerNormalization
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ProjectionImageFractionField
 public import CCDN.Curve.CurvePrimitivePair
 import CCDN.Height.LinearParameterPrimitive
 import CCDN.Projection.LeadingCoordinateExtension
@@ -62,21 +63,11 @@ theorem exists_bounded_birational_hypersurface_projection
     (m k : ℕ) (I : Ideal (MvPolynomial (Fin (m + 1 + k)) ℚ)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
-    ∃ b : Fin (m + 2) → Fin (m + 1 + k) → ℤ,
+    ∃ (b : Fin (m + 2) → Fin (m + 1 + k) → ℤ) (f : MvPolynomial (Fin (m + 2)) ℚ),
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight (m + 1 + k) d) ∧
-      (projectionCoordinateMap I
-        (fun i : Fin (m + 1) => integerLinearForm (b i.succ))).IsIntegral ∧
-      Function.Injective (projectionCoordinateMap I
-        (fun i : Fin (m + 1) => integerLinearForm (b i.succ))) ∧
-      (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (MvPolynomial (Fin (m + 1 + k)) ℚ ⧸ I)
-          (FractionRing (MvPolynomial (Fin (m + 1 + k)) ℚ ⧸ I))
-          ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ ∧
-      ∃ f : MvPolynomial (Fin (m + 2)) ℚ,
-        Irreducible f ∧ f.IsHomogeneous d ∧ f.totalDegree = d ∧
-        RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
-          Ideal.span {f} := by
+      IsNoetherNormalization I (fun i : Fin (m + 1) => integerLinearForm (b i.succ)) ∧
+      IsBirationalProjection I (fun i => integerLinearForm (b i)) f ∧
+      f.IsHomogeneous d ∧ f.totalDegree = d := by
   classical
   let n := m + 1 + k
   let F := FractionRing (MvPolynomial (Fin n) ℚ ⧸ I)
@@ -93,8 +84,8 @@ theorem exists_bounded_birational_hypersurface_projection
   obtain ⟨f, hf, hfhom, hfdeg, _, hker⟩ := exists_homogeneous_extended_projection_equation
     (F := F) I hI l (fun i => linearForm_isHomogeneous _) hinta hinja hfield' d
     hdimdeg
-  exact ⟨b, moment_cons_abs_le_integerBirationalProjectionHeight ht a ha, hinta, hinja,
-    projectionCoordinateMap_isIntegral_of_tail I l hinta, hfield', f, hf, hfhom, hfdeg, hker⟩
+  exact ⟨b, f, moment_cons_abs_le_integerBirationalProjectionHeight ht a ha, ⟨hinta, hinja⟩,
+    ⟨⟨hfield', hf, hker⟩, projectionCoordinateMap_isIntegral_of_tail I l hinta⟩, hfhom, hfdeg⟩
 
 /-- A homogeneous prime ideal in `n ≥ m + 1` variables, of projective dimension `m` and
 degree `d`, has a bounded integral linear projection to `m + 2` coordinates: the integer
@@ -106,21 +97,11 @@ theorem exists_bounded_birational_hypersurface_projection_of_le
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d) :
-    ∃ b : Fin (m + 2) → Fin n → ℤ,
+    ∃ (b : Fin (m + 2) → Fin n → ℤ) (f : MvPolynomial (Fin (m + 2)) ℚ),
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight n d) ∧
-      (projectionCoordinateMap I
-        (fun i : Fin (m + 1) => integerLinearForm (b i.succ))).IsIntegral ∧
-      Function.Injective (projectionCoordinateMap I
-        (fun i : Fin (m + 1) => integerLinearForm (b i.succ))) ∧
-      (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (MvPolynomial (Fin n) ℚ ⧸ I)
-          (FractionRing (MvPolynomial (Fin n) ℚ ⧸ I))
-          ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ ∧
-      ∃ f : MvPolynomial (Fin (m + 2)) ℚ,
-        Irreducible f ∧ f.IsHomogeneous d ∧ f.totalDegree = d ∧
-        RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
-          Ideal.span {f} := by
+      IsNoetherNormalization I (fun i : Fin (m + 1) => integerLinearForm (b i.succ)) ∧
+      IsBirationalProjection I (fun i => integerLinearForm (b i)) f ∧
+      f.IsHomogeneous d ∧ f.totalDegree = d := by
   obtain ⟨k, rfl⟩ := Nat.exists_eq_add_of_le hmn
   exact exists_bounded_birational_hypersurface_projection m k I hI d hdimdeg
 

@@ -18,6 +18,36 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The affine projection theorem in every dimension: a bounded integer linear projection is
+finite and birational onto an irreducible hypersurface of the source degree, which stays
+irreducible over `L`, with the exact factor `d` in the point-count comparison. -/
+theorem exists_geometric_affine_projection
+    {L : Type*} [Field L] [Algebra ℚ L] [IsAlgClosed L] [IsGalois ℚ L]
+    (m n : ℕ) (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime]
+    [(I.map (map (algebraMap ℚ L))).IsPrime]
+    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
+    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    ∃ (b : Fin (m + 1) → Fin n → ℤ) (f : MvPolynomial (Fin (m + 1)) ℚ),
+      (∀ i j, |b i j| ≤ integerBirationalProjectionHeight n d) ∧
+      IsBirationalProjection I (fun i => integerLinearForm (b i)) f ∧
+      Irreducible (map (algebraMap ℚ L) f) ∧ f.totalDegree = d ∧
+      ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
+        d * count (zeroLocus f)
+          ((affineProjectionHeightConstant n : ℝ) * (d : ℝ) ^ (2 * n) * B) := by
+  cases m with
+  | zero =>
+      exact exists_geometric_affine_projection_zero_dimension n I d hdim
+        (by simpa only [Nat.factorial_zero, Nat.cast_one, div_one] using hdegree)
+  | succ m =>
+      have hpos := filteredHilbertPolynomial_leadingCoeff_pos I
+        (Ideal.IsPrime.ne_top ‹I.IsPrime›)
+      rw [hdegree] at hpos
+      have hdQ : (0 : ℚ) < d := by
+        simpa only [zero_mul] using
+          (lt_div_iff₀ (by positivity : (0 : ℚ) < (m + 1).factorial)).mp hpos
+      have hd : 1 ≤ d := by exact_mod_cast hdQ
+      exact exists_geometric_affine_projection_positive_dimension m n I d hd ⟨hdim, hdegree⟩
+
 /-- The full affine projection theorem, retaining the finite
 birational integer coordinate map and the exact image equation. -/
 theorem exists_geometrically_integral_affine_projection
@@ -40,19 +70,9 @@ theorem exists_geometrically_integral_affine_projection
         ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
           d * count (zeroLocus f)
             ((affineProjectionHeightConstant n : ℝ) * (d : ℝ) ^ (2 * n) * B) := by
-  cases m with
-  | zero =>
-      exact exists_geometric_affine_projection_zero_dimension n I d hdim
-        (by simpa only [Nat.factorial_zero, Nat.cast_one, div_one] using hdegree)
-  | succ m =>
-      have hpos := filteredHilbertPolynomial_leadingCoeff_pos I
-        (Ideal.IsPrime.ne_top ‹I.IsPrime›)
-      rw [hdegree] at hpos
-      have hdQ : (0 : ℚ) < d := by
-        simpa only [zero_mul] using
-          (lt_div_iff₀ (by positivity : (0 : ℚ) < (m + 1).factorial)).mp hpos
-      have hd : 1 ≤ d := by exact_mod_cast hdQ
-      exact exists_geometric_affine_projection_positive_dimension m n I d hd ⟨hdim, hdegree⟩
+  obtain ⟨b, f, hb, hP, hfL, hfd, hcount⟩ :=
+    exists_geometric_affine_projection (L := L) m n I d hdim hdegree
+  exact ⟨b, hb, hP.integral, hP.birational, f, hP.irreducible, hfL, hfd, hP.ker_eq, hcount⟩
 
 /-- The dimension-only constants are chosen before the ideal, the degree,
 and the radius. The stronger preceding theorem also records the finite
@@ -76,10 +96,9 @@ theorem affine_variety_projection_constants (n : ℕ) :
   intro m I hI hgeom d hdim hdegree
   have : I.IsPrime := hI
   have : (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime := hgeom
-  obtain ⟨b, _, hint, _, f, hf, hfgeom, hfdegree, hker, hcount⟩ :=
-    exists_geometrically_integral_affine_projection (L := AlgebraicClosure ℚ)
-      m n I d hdim hdegree
-  exact ⟨b, f, hint, hf, hfgeom, hfdegree, hker, hcount⟩
+  obtain ⟨b, f, _, hP, hfgeom, hfdegree, hcount⟩ :=
+    exists_geometric_affine_projection (L := AlgebraicClosure ℚ) m n I d hdim hdegree
+  exact ⟨b, f, hP.integral, hP.irreducible, hfgeom, hfdegree, hP.ker_eq, hcount⟩
 
 end
 end CCDN

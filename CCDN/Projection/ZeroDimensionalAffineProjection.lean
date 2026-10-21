@@ -108,20 +108,13 @@ theorem exists_geometric_affine_projection_zero_dimension
     [(I.map (map (algebraMap ℚ L))).IsPrime]
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = 0)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = d) :
-    ∃ b : Fin 1 → Fin n → ℤ,
+    ∃ (b : Fin 1 → Fin n → ℤ) (f : MvPolynomial (Fin 1) ℚ),
       (∀ i j, |b i j| ≤ integerBirationalProjectionHeight n d) ∧
-      (projectionCoordinateMap I (fun i => integerLinearForm (b i))).IsIntegral ∧
-      IntermediateField.adjoin ℚ
-        (Set.range (fun i => algebraMap (MvPolynomial (Fin n) ℚ ⧸ I)
-          (FractionRing (MvPolynomial (Fin n) ℚ ⧸ I))
-          ((Ideal.Quotient.mk I) (integerLinearForm (b i))))) = ⊤ ∧
-      ∃ f : MvPolynomial (Fin 1) ℚ,
-        Irreducible f ∧ Irreducible (map (algebraMap ℚ L) f) ∧ f.totalDegree = d ∧
-        RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
-          Ideal.span {f} ∧
-        ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
-          d * count (zeroLocus f)
-            ((affineProjectionHeightConstant n : ℝ) * (d : ℝ) ^ (2 * n) * B) := by
+      IsBirationalProjection I (fun i => integerLinearForm (b i)) f ∧
+      Irreducible (map (algebraMap ℚ L) f) ∧ f.totalDegree = d ∧
+      ∀ B : ℝ, 1 ≤ B → count (idealZeroLocus I) B ≤
+        d * count (zeroLocus f)
+          ((affineProjectionHeightConstant n : ℝ) * (d : ℝ) ^ (2 * n) * B) := by
   classical
   obtain ⟨x, hIker, hP⟩ := zero_dimensional_geometrically_integral_point (L := L) I hdim
   have hd : d = 1 := by
@@ -132,16 +125,16 @@ theorem exists_geometric_affine_projection_zero_dimension
   have ha : (fun i => integerLinearForm (b i)) = 0 := by
     funext i
     simp [b, linearForm]
-  refine ⟨b, fun i j => ?_, RingHom.isIntegral_of_surjective _
-      (projectionCoordinateMap_surjective_of_eq_ker_eval x I hIker _),
-    adjoin_eq_top_of_eq_ker_eval x I hIker _, X 0, irreducible_X_fin_one ℚ, ?_, totalDegree_X _,
-    ?_, fun B hB => ?_⟩
+  refine ⟨b, X 0, fun i j => ?_, ⟨⟨adjoin_eq_top_of_eq_ker_eval x I hIker _,
+    irreducible_X_fin_one ℚ, ?_⟩, RingHom.isIntegral_of_surjective _
+      (projectionCoordinateMap_surjective_of_eq_ker_eval x I hIker _)⟩, ?_, totalDegree_X _,
+    fun B hB => ?_⟩
   · simp only [b, abs_zero]
     exact Nat.cast_nonneg _
-  · rw [map_X]
-    exact irreducible_X_fin_one L
   · rw [ha]
     exact ker_projectionCoordinateMap_zero_of_eq_ker_eval x I hIker
+  · rw [map_X]
+    exact irreducible_X_fin_one L
   · have hrel : aeval (R := ℚ) (fun i => integerLinearForm (b i)) (X 0) ∈ I := by simp [ha]
     have hh := affine_integer_linear_count_transfer I b (X 0) hrel 1
       (fun _ s hzero _ => card_le_one_of_eq_ker_eval x I hIker s hzero)

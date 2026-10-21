@@ -59,9 +59,7 @@ theorem exists_chow_projection_image_equation
     (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
     (hcenter : ∀ p ∈ projectiveIdealZeroLocus J, A *ᵥ p.rep ≠ 0) :
     ∃ (G : MvPolynomial (Fin (m + 1) × Fin (s + 2)) K) (ε : Fin (m + 1) → ℕ),
-      Irreducible G ∧ (∀ i, G.IsWeightedHomogeneous (chowRowWeight i) (ε i)) ∧
-      ∀ U, eval U G = 0 ↔
-        U ∈ projectiveChowIncidenceLocus (m + 1) (chowProjectionImageIdeal J A) := by
+      IsProjectiveChowEquation (chowProjectionImageIdeal J A) G ε := by
   have : (chowProjectionImageIdeal J A).IsPrime :=
     RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
   have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
@@ -82,12 +80,12 @@ theorem chowLinearSubstitution_ne_zero_iff_center_disjoint
   constructor
   · exact center_disjoint_of_chowLinearSubstitution_ne_zero J A F hF
   · intro hcenter
-    obtain ⟨G,_,hG,_,hGzero⟩ := exists_chow_projection_image_equation J hJ hdim A hcenter
+    obtain ⟨G,_,hG⟩ := exists_chow_projection_image_equation J hJ hdim A hcenter
     obtain ⟨c,k,hc,_,he⟩ := polynomial_eq_scalar_pow_of_same_zeros G
-      (chowLinearSubstitution A F) hG
-      (chowLinearSubstitution_same_zeros_as_image J hJ A hcenter F G hF hGzero)
+      (chowLinearSubstitution A F) hG.irreducible
+      (chowLinearSubstitution_same_zeros_as_image J hJ A hcenter F G hF hG.eval_eq_zero_iff)
     rw [he]
-    exact mul_ne_zero (C_ne_zero.mpr hc) (pow_ne_zero k hG.ne_zero)
+    exact mul_ne_zero (C_ne_zero.mpr hc) (pow_ne_zero k hG.irreducible.ne_zero)
 
 /-- Both equations and their scalar-power relation are constructed from the
 source and matrix. No source or image chart is part of the hypotheses. -/
@@ -101,27 +99,25 @@ theorem exists_chow_projection_power
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
       (G : MvPolynomial (Fin (m + 1) × Fin (s + 2)) K)
       (δ ε : Fin (m + 1) → ℕ) (c : K) (k : ℕ),
-      Irreducible F ∧ Irreducible G ∧ c ≠ 0 ∧ 0 < k ∧
-      (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
-      (∀ i, G.IsWeightedHomogeneous (chowRowWeight i) (ε i)) ∧
-      (∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J) ∧
-      (∀ U, eval U G = 0 ↔
-        U ∈ projectiveChowIncidenceLocus (m + 1) (chowProjectionImageIdeal J A)) ∧
+      IsProjectiveChowEquation J F δ ∧
+      IsProjectiveChowEquation (chowProjectionImageIdeal J A) G ε ∧ c ≠ 0 ∧ 0 < k ∧
       chowLinearSubstitution A F = C c * G ^ k ∧
       (chowLinearSubstitution A F).totalDegree = F.totalDegree ∧
       (Irreducible (chowLinearSubstitution A F) ↔ F.totalDegree = G.totalDegree) := by
-  obtain ⟨F,δ,hF,hδ,hFzero⟩ := exists_projective_chow_equation_without_chart J hJ hdim
-  obtain ⟨G,ε,hG,hε,hGzero⟩ := exists_chow_projection_image_equation J hJ hdim A hcenter
-  have hzero := chowLinearSubstitution_same_zeros_as_image J hJ A hcenter F G hFzero hGzero
+  obtain ⟨F,δ,hF⟩ := exists_projective_chow_equation_without_chart J hJ hdim
+  obtain ⟨G,ε,hG⟩ := exists_chow_projection_image_equation J hJ hdim A hcenter
+  have hzero := chowLinearSubstitution_same_zeros_as_image J hJ A hcenter F G
+    hF.eval_eq_zero_iff hG.eval_eq_zero_iff
   obtain ⟨c,k,hc,hk,hpow⟩ := polynomial_eq_scalar_pow_of_same_zeros G
-    (chowLinearSubstitution A F) hG hzero
+    (chowLinearSubstitution A F) hG.irreducible hzero
   have hR : chowLinearSubstitution A F ≠ 0 := by
     rw [hpow]
-    exact mul_ne_zero (C_ne_zero.mpr hc) (pow_ne_zero k hG.ne_zero)
-  have hdegree := chowLinearSubstitution_totalDegree_of_ne_zero A F hF.ne_zero δ hδ hR
-  refine ⟨F,G,δ,ε,c,k,hF,hG,hc,hk,hδ,hε,hFzero,hGzero,hpow,hdegree,?_⟩
+    exact mul_ne_zero (C_ne_zero.mpr hc) (pow_ne_zero k hG.irreducible.ne_zero)
+  have hdegree := chowLinearSubstitution_totalDegree_of_ne_zero A F hF.irreducible.ne_zero δ
+    hF.row_homogeneous hR
+  refine ⟨F,G,δ,ε,c,k,hF,hG,hc,hk,hpow,hdegree,?_⟩
   rw [← hdegree]
-  exact irreducible_iff_degree_eq_of_same_zeros G _ hG hzero
+  exact irreducible_iff_degree_eq_of_same_zeros G _ hG.irreducible hzero
 
 end
 end CCDN

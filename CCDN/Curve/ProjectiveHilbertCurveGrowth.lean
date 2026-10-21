@@ -39,21 +39,18 @@ theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
     mul_pos projectivePlaneAbsoluteConstant_pos hT, ?_⟩
   intro I hprime hI d hd hdimdeg B hB
   have : I.IsPrime := hprime
-  obtain ⟨b, hb, hnorm, hinj, _, _, f, hf, hfhom, hfdeg, hker⟩ :=
+  obtain ⟨b, f, hb, hN, hP, hfhom, hfdeg⟩ :=
     exists_bounded_birational_hypersurface_projection_of_le 1 (n + 1)
       (by omega) I hI d hdimdeg
-  have hrel : aeval (fun i => integerLinearForm (b i)) f ∈ I := by
-    apply Ideal.Quotient.eq_zero_iff_mem.mp
-    change f ∈ RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i)))
-    rw [hker]
-    exact Ideal.subset_span (Set.mem_singleton f)
+  have hf := hP.irreducible
+  have hrel := hP.aeval_mem
   have hfiber (z : Fin 3 → ℚ) (s : Finset (Fin (n + 1) → ℚ))
       (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
       (hproj : ∀ x ∈ s, ∀ i, eval x (integerLinearForm (b i)) = z i) :
       s.card ≤ d ^ (n + 1) := by
     exact (linear_normalization_fiber_card_le I
       (fun i : Fin 2 => integerLinearForm (b i.succ))
-      (fun i => linearForm_totalDegree_le _) hinj hnorm d hdimdeg
+      (fun i => linearForm_totalDegree_le _) hN.injective hN.integral d hdimdeg
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)).trans
       (Nat.le_self_pow (Nat.succ_ne_zero n) d)
   let H : ℝ := birationalProjectionHeightConstant (n + 1) * (d : ℝ) ^ (2 * (n + 1))

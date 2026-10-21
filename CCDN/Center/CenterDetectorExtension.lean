@@ -101,23 +101,16 @@ theorem exists_extended_birational_center_detector
   have hJL := homogeneous_ideal_scalar_extension (L := L) J hJ
   have hJLdimdeg : HasProjectiveDimensionDegree JL m d :=
     hasProjectiveDimensionDegree_scalar_extension hdimdeg
-  obtain ⟨F,s,e,Φ,_,hFE,hδ,hzero,hhom,hdeg,hdet⟩ :=
+  obtain ⟨F,s,e,Φ,_,hFE,hhom,hdeg,hdet⟩ :=
     exists_center_resultant_forms (L := E) J hJ d hdimdeg hr
   have hmap : map ψ (map φ F) = map θ F := by
     rw [MvPolynomial.map_map]
     congr 1
-  have hδL (i) : (map φ F).IsWeightedHomogeneous (chowRowWeight i) d := by
-    intro a ha
-    apply hδ i
-    intro hz
-    apply ha
-    rw [coeff_map,hz,map_zero]
-  have hzeroL : ∀ U, eval U (map ψ (map φ F)) = 0 ↔
-      U ∈ projectiveChowIncidenceLocus (m + 1) (JL.map (map ψ)) := by
+  have hFL : IsProjectiveChowEquation (JL.map (map ψ)) (map ψ (map φ F)) (fun _ => d) := by
     rw [hmap]
     dsimp only [JL,φ,ψ]
     rw [ideal_scalar_extension_tower]
-    exact hzero
+    exact hFE
   refine ⟨Φ,hhom,hdeg,?_⟩
   intro A hA
   let AE := A.map ψ
@@ -130,7 +123,7 @@ theorem exists_extended_birational_center_detector
     have hh := chowLinearSubstitution_centerMinor_ne_zero_iff (JL.map (map ψ))
       (homogeneous_ideal_scalar_extension (L := E) JL hJL)
       (hasProjectiveDimensionDegree_scalar_extension hJLdimdeg).natDegree_eq AE hAE e
-      (map ψ (map φ F)) hzeroL
+      (map ψ (map φ F)) hFL.eval_eq_zero_iff
     rwa [hmap] at hh
   have hbir (hc : ∀ p ∈ projectiveIdealZeroLocus (JL.map (map ψ)),
       p.rep ∉ Submodule.span E (Set.range AE.row)) :
@@ -139,7 +132,7 @@ theorem exists_extended_birational_center_detector
         (centerMinorProjectionForm A) = ⊤ := by
     rw [← projectionImageField_centerMinorProjectionMatrix _ A e]
     have hh := geometric_chow_restriction_irreducible_iff_birational JL hJL d hJLdimdeg
-      (map φ F) (hmap.symm ▸ hFE) hδL hzeroL (centerMinorProjectionMatrix A e)
+      (map φ F) hFL (centerMinorProjectionMatrix A e)
     rw [centerMinorProjectionMatrix_map,hmap] at hh
     exact hh (centerMinorProjectionMatrix_disjoint _ AE hAE e hc)
   constructor

@@ -35,10 +35,9 @@ theorem exists_center_resultant_forms
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
       (s : ℕ) (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 2)))
       (Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 2)) K)),
-      Irreducible F ∧ Irreducible (map (algebraMap K L) F) ∧
-      (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) d) ∧
-      (∀ U, eval U (map (algebraMap K L) F) = 0 ↔
-        U ∈ projectiveChowIncidenceLocus (m + 1) (J.map (map (algebraMap K L)))) ∧
+      Irreducible F ∧
+      IsProjectiveChowEquation (J.map (map (algebraMap K L))) (map (algebraMap K L) F)
+        (fun _ => d) ∧
       (∀ g ∈ Φ, g.IsHomogeneous (((m + 1) * d) * (2 * d - 1))) ∧
       (∀ g ∈ Φ, g.totalDegree ≤ ((m + 1) * d) * (2 * d - 1)) ∧
       ∀ A : Matrix (Fin r) (Fin (n + 2)) L,
@@ -67,19 +66,15 @@ theorem exists_center_resultant_forms
       chow_rows_homogeneous_total_degree F (fun _ => d) hδ
   let i : Fin (m + 1) := Fin.last m
   let Φ := centerRowResultantFamily e i F d
-  refine ⟨F,s,e,Φ,hF,hFL,hδ,hzero,
+  have hδL (j) : (map φ F).IsWeightedHomogeneous (chowRowWeight j) d :=
+    (isWeightedHomogeneous_map_iff φ.injective _ _ _).mpr (hδ j)
+  refine ⟨F,s,e,Φ,hF,⟨hFL,hδL,hzero⟩,
     centerRowResultantFamily_homogeneous e i F d hd hFhom,
     centerRowResultantFamily_totalDegree_le e i F d hd hFhom,?_⟩
   intro A
-  have hrow : (map φ F).IsWeightedHomogeneous (chowRowWeight i) d := by
-    intro a ha
-    apply hδ i
-    intro hz
-    apply ha
-    rw [coeff_map,hz,map_zero]
   exact (centerRowResultantFamily_nonvanishing_iff_extension φ e i F d A).trans
     (chowRowResultant_ne_zero_iff_irreducible JL hJL hJLdim
-      (centerMinorProjectionMatrix A e) (map φ F) hzero i d hd hrow)
+      (centerMinorProjectionMatrix A e) (map φ F) hzero i d hd (hδL i))
 
 /-- A finite family over K detects every disjoint birational center
 over the algebraically closed extension L. -/
@@ -108,14 +103,8 @@ theorem exists_geometric_center_detector
   have hJL := homogeneous_ideal_scalar_extension (L := L) J hJ
   have hJLdimdeg : HasProjectiveDimensionDegree JL m d :=
     hasProjectiveDimensionDegree_scalar_extension hdimdeg
-  obtain ⟨F,s,e,Φ,_,hFL,hδ,hzero,hhom,hdeg,hdet⟩ :=
+  obtain ⟨F,s,e,Φ,_,hFL,hhom,hdeg,hdet⟩ :=
     exists_center_resultant_forms (L := L) J hJ d hdimdeg hr
-  have hδL (i) : (map φ F).IsWeightedHomogeneous (chowRowWeight i) d := by
-    intro a ha
-    apply hδ i
-    intro hz
-    apply ha
-    rw [coeff_map,hz,map_zero]
   refine ⟨Φ,hhom,hdeg,?_⟩
   intro A hA
   rw [← projectionImageField_centerMinorProjectionMatrix _ A e]
@@ -124,7 +113,7 @@ theorem exists_geometric_center_detector
   have hcenteriff : R ≠ 0 ↔ ∀ p ∈ projectiveIdealZeroLocus JL,
       p.rep ∉ Submodule.span L (Set.range A.row) := by
     have hh := chowLinearSubstitution_ne_zero_iff_center_disjoint JL hJL hJLdimdeg.natDegree_eq M
-      (map φ F) hzero
+      (map φ F) hFL.eval_eq_zero_iff
     refine hh.trans ⟨?_,centerMinorProjectionMatrix_disjoint JL A hA e⟩
     intro h p hp hspan
     apply h p hp
@@ -136,7 +125,7 @@ theorem exists_geometric_center_detector
         (F := FractionRing (MvPolynomial (Fin (n + 2)) L ⧸ JL)) JL
         (chowProjectionForms M) = ⊤ :=
     chow_restriction_irreducible_iff_birational_over_closed_field JL hJL d hJLdimdeg
-      (map φ F) hFL hδL hzero M (centerMinorProjectionMatrix_disjoint JL A hA e hc)
+      (map φ F) hFL M (centerMinorProjectionMatrix_disjoint JL A hA e hc)
   constructor
   · intro hg
     have hir := (hdet A).mp hg

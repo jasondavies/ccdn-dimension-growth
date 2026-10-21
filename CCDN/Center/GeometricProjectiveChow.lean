@@ -32,10 +32,8 @@ theorem exists_geometric_projective_chow_without_chart
     (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ),
-      Irreducible F ∧ Irreducible (map (algebraMap K L) F) ∧
-      (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
-      ∀ U, eval U (map (algebraMap K L) F) = 0 ↔
-        U ∈ projectiveChowIncidenceLocus (m + 1) (J.map (map (algebraMap K L))) := by
+      Irreducible F ∧
+      IsProjectiveChowEquation (J.map (map (algebraMap K L))) (map (algebraMap K L) F) δ := by
   classical
   obtain ⟨e, hJ', hX, hp⟩ := exists_projectivePermutedIdeal_chart J hJ (by omega)
   let J' := projectivePermutedIdeal J e
@@ -50,19 +48,22 @@ theorem exists_geometric_projective_chow_without_chart
     ⟨hdim', by simpa only [hdim'] using hdegree⟩
   let : ((projectiveChartIdeal J').map (map (algebraMap K L))).IsPrime :=
     projectiveChartIdeal_geometrically_prime J' hX
-  obtain ⟨F,δ,hF,_,hδ,hFL,hzero⟩ := exists_geometric_projective_chow_incidence_equation
+  obtain ⟨F,δ,_,hF,hFL⟩ := exists_geometric_projective_chow_incidence_equation
     (L := L) (projectiveChartIdeal J') hm
   let ρ := chowColumnPermutation (r := m + 1) e
   refine ⟨rename ρ F,δ,?_,?_,?_,?_⟩
   · exact (MulEquiv.irreducible_iff (renameEquiv K ρ)).mpr hF
   · rw [map_rename]
-    exact (MulEquiv.irreducible_iff (renameEquiv L ρ)).mpr hFL
+    exact (MulEquiv.irreducible_iff (renameEquiv L ρ)).mpr hFL.irreducible
   · intro i
-    apply weighted_homogeneous_rename (chowRowWeight i) (chowRowWeight i) ρ _ F (δ i) (hδ i)
+    rw [map_rename]
+    apply weighted_homogeneous_rename (chowRowWeight i) (chowRowWeight i) ρ _ _ (δ i)
+      (hFL.row_homogeneous i)
     intro q
     rfl
   · intro U
-    rw [map_rename, eval_rename, hzero, projectiveClosureIdeal_chartIdeal_eq J' hJ' hX]
+    rw [map_rename, eval_rename, hFL.eval_eq_zero_iff,
+      projectiveClosureIdeal_chartIdeal_eq J' hJ' hX]
     change U ∘ chowColumnPermutation e ∈ projectiveChowIncidenceLocus (m + 1)
       ((projectivePermutedIdeal J e).map (map (algebraMap K L))) ↔ _
     rw [projectivePermutedIdeal_scalar_extension]
