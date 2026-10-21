@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 open Polynomial Matrix Real
 
-lemma log_factorial_le_square (r : ℕ) : Real.log (r.factorial : ℝ) ≤ (r : ℝ) ^ 2 := by
+private lemma log_factorial_le_square (r : ℕ) : Real.log (r.factorial : ℝ) ≤ (r : ℝ) ^ 2 := by
   by_cases hr : r = 0
   · simp [hr]
   have hr0 : (0 : ℝ) < r := by exact_mod_cast Nat.pos_of_ne_zero hr

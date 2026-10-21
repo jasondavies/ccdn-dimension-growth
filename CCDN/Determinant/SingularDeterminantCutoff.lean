@@ -33,7 +33,7 @@ lemma singular_correction_absorb {d p : ℕ} (hd : 0 < d) {L : ℝ}
 /-- The singular correction and sharp point-count term have a bounded total
 prime-tail contribution above a fourth-power cutoff. Only logarithmic degree
 loss remains when L is a constant multiple of d^4. -/
-theorem singular_determinant_log_lower_cutoff {s N : ℕ} (hs : 0 < s)
+private theorem singular_determinant_log_lower_cutoff {s N : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin 2) ℤ) (hd : 0 < f.totalDegree)
     (g : Fin N → MvPolynomial (Fin 2) ℤ) (z : Fin s → Fin 2 → ℤ)
     (hz : ∀ i, eval (z i) f = 0)
@@ -76,7 +76,7 @@ theorem singular_determinant_log_lower_cutoff {s N : ℕ} (hs : 0 < s)
 
 /-- The paper's cutoff 27*d^4 leaves precisely a 4*log(d) degree loss,
 plus absolute constants and the explicit bad-prime charge. -/
-theorem singular_determinant_log_lower_degree_four {s N : ℕ} (hs : 0 < s)
+private theorem singular_determinant_log_lower_degree_four {s N : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin 2) ℤ) (hd : 0 < f.totalDegree)
     (g : Fin N → MvPolynomial (Fin 2) ℤ) (z : Fin s → Fin 2 → ℤ)
     (hz : ∀ i, eval (z i) f = 0)

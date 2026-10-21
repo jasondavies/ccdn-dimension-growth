@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma cast_plane_eval {p : ℕ} (f : MvPolynomial (Fin 2) ℤ) (z : Fin 2 → ℤ) :
+private lemma cast_plane_eval {p : ℕ} (f : MvPolynomial (Fin 2) ℤ) (z : Fin 2 → ℤ) :
     (MvPolynomial.eval z f : ZMod p) =
       MvPolynomial.eval₂ (Int.castRingHom (ZMod p)) (fun j => (z j : ZMod p)) f := by
   simpa only [MvPolynomial.eval₂_id, RingHom.comp_id, Function.comp_def, Int.coe_castRingHom] using
@@ -80,7 +80,7 @@ def planeTotalMultiplicity (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fact p.Prim
     (hf : map (Int.castRingHom (ZMod p)) f ≠ 0) : ℕ :=
   ∑ a : PlaneResidue f p, planeResidueMultiplicity f p hf a
 
-lemma planeTotalMultiplicity_bounds (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fact p.Prime]
+private lemma planeTotalMultiplicity_bounds (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fact p.Prime]
     (hf : map (Int.castRingHom (ZMod p)) f ≠ 0) :
     Fintype.card (PlaneResidue f p) ≤ planeTotalMultiplicity f p hf ∧
       planeTotalMultiplicity f p hf ≤ Fintype.card (PlaneResidue f p) * f.totalDegree := by

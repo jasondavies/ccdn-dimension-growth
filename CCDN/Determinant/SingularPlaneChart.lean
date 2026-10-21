@@ -42,7 +42,7 @@ theorem singular_plane_chart_det_divisibility_mod {p μ s : ℕ} [Fact p.Prime]
   simpa only [he] using h
 
 /-- Exact integral zeros satisfy the finite-precision version at every precision. -/
-theorem singular_plane_chart_det_divisibility {p μ s : ℕ} [Fact p.Prime]
+private theorem singular_plane_chart_det_divisibility {p μ s : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ) (F : Fin s → MvPolynomial (Fin 2) ℤ)
     (x : Fin s → Fin 2 → ℤ) (a : Fin 2 → ℤ)
     (hf : map (Int.castRingHom (ZMod p)) (originShift a f) ∈

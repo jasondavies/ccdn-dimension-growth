@@ -22,7 +22,7 @@ namespace CCDN
 noncomputable section
 open Finset Real
 
-lemma sum_log_disjoint_prime_powers_le_log (P Q : Finset ℕ)
+private lemma sum_log_disjoint_prime_powers_le_log (P Q : Finset ℕ)
     (hPQ : Disjoint P Q) (e v : ℕ → ℕ) {D : ℤ} (hD : 0 < D)
     (hP : ∀ p ∈ P, p.Prime) (hQ : ∀ p ∈ Q, p.Prime)
     (hdivP : ∀ p ∈ P, (p : ℤ) ^ e p ∣ D)

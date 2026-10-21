@@ -21,7 +21,7 @@ open MvPolynomial
 
 variable {K σ : Type*} [Field K]
 
-lemma homogeneous_mem_originTruncation_iff
+private lemma homogeneous_mem_originTruncation_iff
     {f g : MvPolynomial σ K} {μ k : ℕ}
     (hf : f ∈ idealOfVars σ K ^ μ) (hμ : homogeneousComponent μ f ≠ 0)
     (hk : μ ≤ k) (hg : g.IsHomogeneous k) :
@@ -46,7 +46,7 @@ lemma homogeneous_mem_originTruncation_iff
     exact initial_form_multiple_mem_truncation hf hk hu
 
 /-- Exact rank-nullity for the homogeneous truncation map. -/
-theorem originLayer_hilbert_eq [Finite σ]
+private theorem originLayer_hilbert_eq [Finite σ]
     (f : MvPolynomial σ K) {μ k : ℕ}
     (hf : f ∈ idealOfVars σ K ^ μ) (hμ : homogeneousComponent μ f ≠ 0)
     (hk : μ ≤ k) :
@@ -74,7 +74,7 @@ theorem originLayer_hilbert_eq [Finite σ]
   rwa [originLayer_eq_homogeneousCoordinateSpace]
 
 /-- Below the equation's first nonzero degree the layer has no relations. -/
-theorem originLayer_hilbert_eq_of_lt [Finite σ]
+private theorem originLayer_hilbert_eq_of_lt [Finite σ]
     (f : MvPolynomial σ K) {μ k : ℕ}
     (hf : f ∈ idealOfVars σ K ^ μ) (hk : k < μ) :
     Module.finrank K (originLayer f k) =

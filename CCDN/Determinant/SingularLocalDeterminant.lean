@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma sum_fin_zero_pad {A : Type*} [AddCommMonoid A] {r μ : ℕ}
+private lemma sum_fin_zero_pad {A : Type*} [AddCommMonoid A] {r μ : ℕ}
     (h : r ≤ μ) (f : Fin r → A) :
     (∑ i : Fin μ, if hi : i.val < r then f ⟨i.val, hi⟩ else 0) = ∑ j, f j := by
   classical

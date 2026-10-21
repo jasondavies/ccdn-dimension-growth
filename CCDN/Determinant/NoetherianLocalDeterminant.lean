@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open IsLocalRing
 
-lemma ring_dvd_det_sub_of_dvd_entries {S : Type*} [CommRing S] {s : ℕ}
+private lemma ring_dvd_det_sub_of_dvd_entries {S : Type*} [CommRing S] {s : ℕ}
     (A B : Matrix (Fin s) (Fin s) S) (m : S)
     (h : ∀ i j, m ∣ A i j - B i j) : m ∣ A.det - B.det := by
   let I : Ideal S := Ideal.span {m}
@@ -44,7 +44,7 @@ variable {R S : Type*} [CommRing R] [IsLocalRing R] [CommRing S]
 
 /-- Every homomorphism to a ring with residue quotient `F_p` sends the
 maximal ideal of the local source into the target's prime ideal. -/
-lemma local_map_maximalIdeal_dvd (τ : S →+* ZMod p)
+private lemma local_map_maximalIdeal_dvd (τ : S →+* ZMod p)
     (hτ : RingHom.ker τ = Ideal.span {(p : S)}) (ψ : R →+* S)
     {x : R} (hx : x ∈ maximalIdeal R) : (p : S) ∣ ψ x := by
   have hk := local_zmod_kernel (τ.comp ψ)
@@ -53,7 +53,7 @@ lemma local_map_maximalIdeal_dvd (τ : S →+* ZMod p)
   rw [hτ] at hm
   exact Ideal.mem_span_singleton.mp hm
 
-lemma local_map_maximalIdeal_pow_dvd (τ : S →+* ZMod p)
+private lemma local_map_maximalIdeal_pow_dvd (τ : S →+* ZMod p)
     (hτ : RingHom.ker τ = Ideal.span {(p : S)}) (ψ : R →+* S)
     {N : ℕ} {x : R} (hx : x ∈ maximalIdeal R ^ N) :
     (p : S) ^ N ∣ ψ x := by

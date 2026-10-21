@@ -22,7 +22,7 @@ noncomputable section
 open Finset
 
 /-- The elementary cutoff inequality for any finite list of weights. -/
-lemma weights_sum_cutoff {s : ℕ} (w : Fin s → ℕ) (K : ℕ) :
+private lemma weights_sum_cutoff {s : ℕ} (w : Fin s → ℕ) (K : ℕ) :
     s * K ≤ (∑ i, w i) +
       ∑ k : Fin K, (univ.filter fun i => w i ≤ k.val).card := by
   classical
@@ -38,7 +38,7 @@ lemma weights_sum_cutoff {s : ℕ} (w : Fin s → ℕ) (K : ℕ) :
   rw [Nat.mul_comm K s] at hsum
   omega
 
-lemma weight_count_le_cumulative {s : ℕ} (w : Fin s → ℕ) (g : ℕ → ℕ)
+private lemma weight_count_le_cumulative {s : ℕ} (w : Fin s → ℕ) (g : ℕ → ℕ)
     (hw : ∀ k, (univ.filter fun i => w i = k).card ≤ g k) (k : ℕ) :
     (univ.filter fun i => w i ≤ k).card ≤ ∑ j ∈ range (k + 1), g j := by
   classical
@@ -50,7 +50,7 @@ lemma weight_count_le_cumulative {s : ℕ} (w : Fin s → ℕ) (g : ℕ → ℕ)
 
 /-- A shifted hockey-stick sum. Dropping its nonnegative initial segment
 is convenient for arbitrary multiplicity profiles. -/
-lemma sum_shifted_choose_le (m t K : ℕ) :
+private lemma sum_shifted_choose_le (m t K : ℕ) :
     (∑ j ∈ range K, (m + j + t).choose m) ≤ (m + K + t).choose (m + 1) := by
   induction K with
   | zero => simp
@@ -62,7 +62,7 @@ lemma sum_shifted_choose_le (m t K : ℕ) :
 
 /-- The polynomial bound in Lemma 2.2 is dominated by a shifted binomial
 profile, retaining its exact leading coefficient. -/
-lemma weighted_profile_le_shifted_choose (n c μ : ℕ) (g : ℕ → ℕ)
+private lemma weighted_profile_le_shifted_choose (n c μ : ℕ) (g : ℕ → ℕ)
     (hμ : 0 < μ) (hg0 : g 0 = 1)
     (hg : ∀ k, 0 < k →
       (g k : ℝ) ≤ (μ : ℝ) * (k : ℝ) ^ (n + 1) / (n + 1).factorial +
@@ -118,7 +118,7 @@ theorem weights_sum_lower_bound_of_cumulative {s : ℕ} (w : Fin s → ℕ)
 /-- CCDN Lemma 2.2 for every dimension `n+2`, with the explicit constant
 `n + 3 + c*(n+1)!`. The profile and the selected weights are arbitrary.
 The selected list need not be monotone. -/
-theorem weighted_sequence_sum_lower_bound (n c μ s : ℕ) (g : ℕ → ℕ)
+private theorem weighted_sequence_sum_lower_bound (n c μ s : ℕ) (g : ℕ → ℕ)
     (hμ : 0 < μ) (hg0 : g 0 = 1)
     (hg : ∀ k, 0 < k →
       (g k : ℝ) ≤ (μ : ℝ) * (k : ℝ) ^ (n + 1) / (n + 1).factorial +
@@ -168,7 +168,7 @@ theorem weighted_sequence_sum_lower_bound (n c μ s : ℕ) (g : ℕ → ℕ)
 
 /-- The first `s` terms of an infinite sequence cannot use more occurrences
 of a weight than the whole sequence. -/
-lemma initial_weight_count_le {s : ℕ} (w : ℕ → ℕ) (g : ℕ → ℕ)
+private lemma initial_weight_count_le {s : ℕ} (w : ℕ → ℕ) (g : ℕ → ℕ)
     (hg : ∀ k, 0 < g k) (hcount : ∀ k, {i | w i = k}.ncard = g k) (k : ℕ) :
     (univ.filter fun i : Fin s => w i.val = k).card ≤ g k := by
   classical

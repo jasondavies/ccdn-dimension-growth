@@ -49,12 +49,12 @@ lemma local_zmod_kernel (ρ : R →+* ZMod p) :
     RingHom.ker ρ = maximalIdeal R :=
   IsLocalRing.ker_eq_maximalIdeal ρ (ZMod.ringHom_surjective ρ)
 
-def localZModResidueEquiv (ρ : R →+* ZMod p) :
+private def localZModResidueEquiv (ρ : R →+* ZMod p) :
     (R ⧸ maximalIdeal R) ≃+* ZMod p :=
   (Ideal.quotEquivOfEq (local_zmod_kernel ρ).symm).trans
     (ρ.quotientKerEquivOfSurjective (ZMod.ringHom_surjective ρ))
 
-lemma prime_span_le_maximalIdeal (ρ : R →+* ZMod p) :
+private lemma prime_span_le_maximalIdeal (ρ : R →+* ZMod p) :
     Ideal.span {(p : R)} ≤ maximalIdeal R := by
   rw [← local_zmod_kernel ρ]
   apply Ideal.span_le.mpr
@@ -63,12 +63,12 @@ lemma prime_span_le_maximalIdeal (ρ : R →+* ZMod p) :
   simp
 
 /-- The residue quotient of `R/(p)` is the finite field `F_p`. -/
-def localPrimeReductionResidueEquiv (ρ : R →+* ZMod p) :
+private def localPrimeReductionResidueEquiv (ρ : R →+* ZMod p) :
     (LocalPrimeReduction R p ⧸ localPrimeMaximalIdeal R p) ≃+* ZMod p :=
   (DoubleQuot.quotQuotEquivQuotOfLE (prime_span_le_maximalIdeal ρ)).trans
     (localZModResidueEquiv ρ)
 
-lemma localPrimeReduction_finite_residue (ρ : R →+* ZMod p) :
+private lemma localPrimeReduction_finite_residue (ρ : R →+* ZMod p) :
     Finite (LocalPrimeReduction R p ⧸ localPrimeMaximalIdeal R p) :=
   Finite.of_injective (localPrimeReductionResidueEquiv ρ)
     (localPrimeReductionResidueEquiv ρ).injective

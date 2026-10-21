@@ -22,7 +22,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma initial_form_mul_constant_nonzero {K σ : Type*} [Field K]
+private lemma initial_form_mul_constant_nonzero {K σ : Type*} [Field K]
     {g h : MvPolynomial σ K} {μ : ℕ}
     (hg : g ∈ idealOfVars σ K ^ μ) (hμ : homogeneousComponent μ g ≠ 0)
     (hh : h.constantCoeff ≠ 0) :
@@ -36,7 +36,7 @@ lemma initial_form_mul_constant_nonzero {K σ : Type*} [Field K]
   rw [homogeneousComponent_zero]
   exact fun he => hh (by simpa only [constantCoeff_eq, C_eq_zero] using he)
 
-lemma primitiveProjectiveReduction_eval_zero_mod {n p d : ℕ} [Fact p.Prime]
+private lemma primitiveProjectiveReduction_eval_zero_mod {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d)
     (z : IntPoint (n + 1)) (hz : Finset.univ.gcd z = 1)
     (hzero : eval (fun i => (z i : ZMod p)) (map (Int.castRingHom (ZMod p)) f) = 0) :
@@ -49,7 +49,7 @@ lemma primitiveProjectiveReduction_eval_zero_mod {n p d : ℕ} [Fact p.Prime]
   change eval ((u : ZMod p) • (fun i => (z i : ZMod p))) _ = 0
   rw [homogeneous_eval_smul (hf.map _), hzero, mul_zero]
 
-lemma primitiveProjectiveReduction_eval_ne_zero_mod {n p d : ℕ} [Fact p.Prime]
+private lemma primitiveProjectiveReduction_eval_ne_zero_mod {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d)
     (z : IntPoint (n + 1)) (hz : Finset.univ.gcd z = 1)
     (hzero : eval (fun i => (z i : ZMod p)) (map (Int.castRingHom (ZMod p)) f) ≠ 0) :
@@ -63,7 +63,7 @@ lemma primitiveProjectiveReduction_eval_ne_zero_mod {n p d : ℕ} [Fact p.Prime]
   rw [homogeneous_eval_smul (hf.map _)]
   exact mul_ne_zero (pow_ne_zero _ u.ne_zero) hzero
 
-lemma hypersurfaceResidueChartLift_nonzero {n p d : ℕ} [Fact p.Prime]
+private lemma hypersurfaceResidueChartLift_nonzero {n p d : ℕ} [Fact p.Prime]
     (h : MvPolynomial (Fin (n + 3)) ℤ) (hh : h.IsHomogeneous d)
     (r : ProjectiveResidueSpace (n + 2) p)
     (hr : eval r.rep (map (Int.castRingHom (ZMod p)) h) ≠ 0) :
@@ -87,7 +87,7 @@ lemma hypersurfaceResidueChartLift_nonzero {n p d : ℕ} [Fact p.Prime]
     homogeneous_eval_smul (hh.map _)]
   exact mul_ne_zero (pow_ne_zero _ (inv_ne_zero (hypersurfaceResiduePivot_ne_zero r))) hr
 
-lemma originShift_projectiveChart_reduction_mul {n p : ℕ}
+private lemma originShift_projectiveChart_reduction_mul {n p : ℕ}
     (f g h : MvPolynomial (Fin (n + 3)) ℤ)
     (he : map (Int.castRingHom (ZMod p)) f =
       map (Int.castRingHom (ZMod p)) g * map (Int.castRingHom (ZMod p)) h)
@@ -100,7 +100,7 @@ lemma originShift_projectiveChart_reduction_mul {n p : ℕ}
 
 /-- Local data are needed only for residue classes containing a supplied point.
 Empty blocks contribute exponent zero. -/
-theorem projective_hypersurface_residue_minorGcd_nonempty {p n c s N d M : ℕ}
+private theorem projective_hypersurface_residue_minorGcd_nonempty {p n c s N d M : ℕ}
     [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hfhom : f.IsHomogeneous d)
     (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
@@ -140,7 +140,7 @@ theorem projective_hypersurface_residue_minorGcd_nonempty {p n c s N d M : ℕ}
 /-- A reduced factor which never vanishes at the supplied points may be
 removed from the residue-space count. The local equation is the
 original integer equation, so its exact integer zeros are retained. -/
-theorem projective_hypersurface_reduced_factor_minorGcd
+private theorem projective_hypersurface_reduced_factor_minorGcd
     {n s N p d e t M : ℕ} [Fact p.Prime] (hs : 0 < s)
     (f g h : MvPolynomial (Fin (n + 3)) ℤ)
     (hf : f.IsHomogeneous d) (hg : g.IsHomogeneous e) (hh : h.IsHomogeneous t)

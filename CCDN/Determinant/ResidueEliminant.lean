@@ -48,7 +48,7 @@ def residueEliminant {F : Type*} [CommRing F] (f g : F[X][X]) : F[X][X] :=
   rw [show residueParameterZero (C X : F[X][X]) = 0 by simp [residueParameterZero],
     C_0, zero_mul, zero_sub, residueParameterZero_map_lift]
 
-lemma residueEliminant_zero {F : Type*} [CommRing F] (f g : F[X][X]) :
+private lemma residueEliminant_zero {F : Type*} [CommRing F] (f g : F[X][X]) :
     residueParameterZero (residueEliminant f g) =
       f.resultant (-g) f.natDegree (f.natDegree - 1) := by
   rw [residueEliminant, ← resultant_map_map]
@@ -63,7 +63,7 @@ lemma residueEliminationEquation_natDegree_le {F : Type*} [CommRing F]
       ((natDegree_derivative_le _).trans (Nat.sub_le_sub_right natDegree_map_le 1))
   · exact natDegree_map_le.trans (by omega)
 
-lemma coefficient_derivative_natDegree_le {R : Type*} [CommRing R]
+private lemma coefficient_derivative_natDegree_le {R : Type*} [CommRing R]
     (f : R[X][X]) (D : ℕ) (hf : ∀ i, (f.coeff i).natDegree ≤ D) (i : ℕ) :
     (f.derivative.coeff i).natDegree ≤ D := by
   have he : f.derivative.coeff i = (i + 1) • f.coeff (i + 1) := by

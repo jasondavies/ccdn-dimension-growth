@@ -131,7 +131,7 @@ def projectiveHypersurfaceChart {n : ℕ} (k : Fin (n + 3)) (f : MvPolynomial (F
     MvPolynomial (Fin (n + 2)) ℤ :=
   affineChart (n + 2) (rename (Equiv.swap 0 k) f)
 
-lemma eval_swap_hypersurface_coordinates {n : ℕ} (k : Fin (n + 3)) (z : Fin (n + 3) → ℤ)
+private lemma eval_swap_hypersurface_coordinates {n : ℕ} (k : Fin (n + 3)) (z : Fin (n + 3) → ℤ)
     (f : MvPolynomial (Fin (n + 3)) ℤ) :
     eval (z ∘ Equiv.swap 0 k) (rename (Equiv.swap 0 k) f) = eval z f := by
   rw [eval_rename]

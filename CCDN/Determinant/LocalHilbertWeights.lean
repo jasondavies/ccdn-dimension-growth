@@ -30,7 +30,7 @@ def hypersurfacePointLayerDimension {n : ℕ}
   Module.finrank K (Ideal.powerLayer K (A := HypersurfacePointStalk f a)
     (IsLocalRing.maximalIdeal (HypersurfacePointStalk f a)) k)
 
-lemma hypersurfaceLayerBound_positive (n k : ℕ) {μ : ℕ} (hμ : 0 < μ) :
+private lemma hypersurfaceLayerBound_positive (n k : ℕ) {μ : ℕ} (hμ : 0 < μ) :
     0 < hypersurfaceLayerBound (n + 1) μ k := by
   obtain ⟨μ, rfl⟩ := Nat.exists_eq_succ_of_ne_zero hμ.ne'
   cases k with
@@ -42,7 +42,7 @@ lemma hypersurfaceLayerBound_positive (n k : ℕ) {μ : ℕ} (hμ : 0 < μ) :
 /-- CCDN 2.3 for the first s weights of the local ring. This uses the
 true hypersurface cumulative profile, so it includes dimension one without
 the false arbitrary-profile extension of the printed Lemma 2.2. -/
-theorem hypersurfacePointStalk_initial_weights_sum_lower_bound {n μ s : ℕ}
+private theorem hypersurfacePointStalk_initial_weights_sum_lower_bound {n μ s : ℕ}
     (f : MvPolynomial (Fin (n + 2)) K) (a : Fin (n + 2) → K)
     [Fact (eval a f = 0)] (hpos : 0 < μ)
     (hf : affineTranslation K a f ∈ idealOfVars (Fin (n + 2)) K ^ μ)

@@ -32,7 +32,7 @@ def IsInitialWeightSegment (r : ℕ → ℕ) {s : ℕ} (w : Fin s → ℕ) : Pro
   ∀ k, (univ.filter fun i => w i ≤ k).card = min s (weightProfileCumulative r k)
 
 /-- The exact layer-cake identity, at any cutoff above every selected weight. -/
-lemma sum_weight_tail_counts_eq {s : ℕ} (w : Fin s → ℕ) (K : ℕ)
+private lemma sum_weight_tail_counts_eq {s : ℕ} (w : Fin s → ℕ) (K : ℕ)
     (hK : ∀ i, w i ≤ K) :
     (∑ k : Fin K, (univ.filter fun i => k.val < w i).card) = ∑ i, w i := by
   classical
@@ -98,7 +98,7 @@ theorem exists_initial_weight_segment (r : ℕ → ℕ) (s : ℕ)
 
 /-- For a nondecreasing enumeration with the prescribed finite fibers, a
 weight lies below k exactly when its index lies below the cumulative count. -/
-theorem monotone_weight_le_iff_index_lt_cumulative
+private theorem monotone_weight_le_iff_index_lt_cumulative
     (a r : ℕ → ℕ) (ha : Monotone a)
     (hfinite : ∀ k, {i | a i = k}.Finite)
     (hcount : ∀ k, {i | a i = k}.ncard = r k) (i k : ℕ) :

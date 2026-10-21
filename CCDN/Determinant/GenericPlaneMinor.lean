@@ -80,7 +80,7 @@ open Polynomial Matrix
 
 /-- A nonzero minor over the original coefficient field, obtained by proving
 geometric irreducibility from the smooth point. -/
-theorem exists_closedForm_minor_of_smooth_plane_point
+private theorem exists_closedForm_minor_of_smooth_plane_point
     {K : Type*} [Field K]
     (d : ℕ) (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
     (z : Fin 2 → K) (j : Fin 2)
@@ -120,7 +120,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma genericPlaneMap_totalDegree_le {K F σ : Type*} [Field K] [Field F]
+private lemma genericPlaneMap_totalDegree_le {K F σ : Type*} [Field K] [Field F]
     [Algebra K F] [Algebra (MvPolynomial σ K) F]
     (f : MvPolynomial (Option σ) K) :
     (genericPlaneMap K F σ f).totalDegree ≤ f.totalDegree := by

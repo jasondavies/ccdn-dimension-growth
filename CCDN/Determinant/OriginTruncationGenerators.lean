@@ -28,7 +28,7 @@ open MvPolynomial Module
 
 /-- A basis of the graded layer lifts to homogeneous polynomials and
 reduces every element of the ideal power modulo the equation and the next power. -/
-theorem exists_originLayer_generators {K : Type*} [Field K] {n : ℕ}
+private theorem exists_originLayer_generators {K : Type*} [Field K] {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (k : ℕ) :
     ∃ (r : ℕ) (g : Fin r → MvPolynomial (Fin (n + 1)) K),
       r = Module.finrank K (originLayer f k) ∧
@@ -60,7 +60,7 @@ theorem exists_originLayer_generators {K : Type*} [Field K] {n : ℕ}
 
 /-- The singular multiplicity gives homogeneous local generators at
 all weights, with at most μ generators at each weight. -/
-theorem exists_plane_origin_generators {K : Type*} [Field K] {μ : ℕ}
+private theorem exists_plane_origin_generators {K : Type*} [Field K] {μ : ℕ}
     (f : MvPolynomial (Fin 2) K) (hf : f ∈ idealOfVars (Fin 2) K ^ μ)
     (hμ : homogeneousComponent μ f ≠ 0) :
     ∃ (r : ℕ → ℕ) (g : (k : ℕ) → Fin (r k) → MvPolynomial (Fin 2) K),
@@ -83,7 +83,7 @@ open MvPolynomial
 
 /-- Successive layer reductions assemble into a finite-precision
 polynomial representation, modulo the defining equation and the Nth origin power. -/
-lemma origin_layers_generate_truncation {K σ : Type*} [Field K]
+private lemma origin_layers_generate_truncation {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (r : ℕ → ℕ)
     (g : (k : ℕ) → Fin (r k) → MvPolynomial σ K)
     (hspan : ∀ k u, u ∈ idealOfVars σ K ^ k → ∃ c : Fin (r k) → K,

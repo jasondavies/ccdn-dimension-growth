@@ -41,7 +41,7 @@ theorem pow_dvd_det_of_weighted_factorization {R : Type*} [CommRing R] {s N : �
   rw [Finset.prod_pow_eq_pow_sum] at hminor
   exact dvd_mul_of_dvd_right ((pow_dvd_pow p (he t)).trans hminor) _
 
-theorem orderEmbedding_value_ge {s N : ℕ} (t : Fin s ↪o Fin N) (i : Fin s) :
+private theorem orderEmbedding_value_ge {s N : ℕ} (t : Fin s ↪o Fin N) (i : Fin s) :
     i.val ≤ (t i).val := by
   have hpoint : ∀ j : ℕ, ∀ hj : j < s, j ≤ (t ⟨j, hj⟩).val := by
     intro j

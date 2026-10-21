@@ -27,7 +27,7 @@ def genericTransverseDirection (K F σ : Type*) [Field K] [Field F]
     [Algebra (MvPolynomial σ K) F] : Option σ → F :=
   fun i => Option.elim i 0 (fun j => algebraMap (MvPolynomial σ K) F (X j))
 
-lemma genericPlaneMap_affineCoordinates {K F σ : Type*} [Field K] [Field F]
+private lemma genericPlaneMap_affineCoordinates {K F σ : Type*} [Field K] [Field F]
     [Algebra K F] [Algebra (MvPolynomial σ K) F]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K) :
     genericPlaneMap K F σ (hypersurfaceAffineCoordinates a b hb f) =

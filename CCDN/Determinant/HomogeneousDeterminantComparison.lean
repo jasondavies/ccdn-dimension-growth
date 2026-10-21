@@ -31,7 +31,7 @@ The determinant bound needed to make the auxiliary polynomial small enough remai
 
 namespace CCDN
 
-theorem abs_leadingCoeff_le_of_dvd {n : ℕ} (order : MonomialOrder (Fin n))
+private theorem abs_leadingCoeff_le_of_dvd {n : ℕ} (order : MonomialOrder (Fin n))
     {f g : MvPolynomial (Fin n) ℤ} (hg : g ≠ 0) (hfg : f ∣ g) :
     |order.leadingCoeff f| ≤ |order.leadingCoeff g| := by
   obtain ⟨q, rfl⟩ := hfg
@@ -121,7 +121,7 @@ lemma log_gcd_le_of_coefficient_bound {L G D k : ℝ}
 
 /-- The logarithmic determinant comparison with exact Hilbert rank, derived
 from the absence of an auxiliary polynomial. -/
-theorem homogeneous_no_auxiliary_log_comparison {n d M t : ℕ}
+private theorem homogeneous_no_auxiliary_log_comparison {n d M t : ℕ}
     (order : MonomialOrder (Fin (n + 1)))
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hdM : d ≤ M)
     (points : Fin t → (Fin (n + 1) → ℤ)) (hzero : ∀ i, eval (points i) f = 0)

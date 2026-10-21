@@ -22,7 +22,7 @@ namespace CCDN
 noncomputable section
 open Polynomial Matrix MvPolynomial
 
-theorem exists_euler_minor_of_smooth_plane_point_charZero
+private theorem exists_euler_minor_of_smooth_plane_point_charZero
     {K : Type*} [Field K] [CharZero K]
     (k : ℕ) (f : MvPolynomial (Fin 2) K) (hf : Irreducible f)
     (z : Fin 2 → K) (j : Fin 2)
@@ -49,7 +49,7 @@ theorem exists_euler_minor_of_smooth_plane_point_charZero
   apply hdet
   rw [← eulerClosedForm_minor_map, he, map_zero]
 
-theorem exists_genericPlane_euler_minor_charZero
+private theorem exists_genericPlane_euler_minor_charZero
     {K σ : Type*} [Field K] [CharZero K]
     (k : ℕ) (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
     (hm : (optionEquivLeft K σ f).Monic)

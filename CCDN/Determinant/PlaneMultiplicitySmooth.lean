@@ -15,7 +15,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma origin_power_pderiv_zero {K σ : Type*} [Field K]
+private lemma origin_power_pderiv_zero {K σ : Type*} [Field K]
     {f : MvPolynomial σ K} {μ : ℕ} (hμ : 2 ≤ μ)
     (hf : f ∈ idealOfVars σ K ^ μ) (j : σ) :
     eval (0 : σ → K) (pderiv j f) = 0 := by
@@ -44,7 +44,7 @@ theorem origin_order_eq_one_of_smooth {K σ : Type*} [Field K]
   obtain ⟨j, hj⟩ := hs
   exact hj (singular_of_origin_order_ge_two f a (by omega) hf j)
 
-lemma planeResidueMultiplicity_singular {p : ℕ} [Fact p.Prime]
+private lemma planeResidueMultiplicity_singular {p : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ) (hf : map (Int.castRingHom (ZMod p)) f ≠ 0)
     (a : PlaneResidue f p) (ha : 2 ≤ planeResidueMultiplicity f p hf a) :
     ∀ j, eval a.val (pderiv j (map (Int.castRingHom (ZMod p)) f)) = 0 := by

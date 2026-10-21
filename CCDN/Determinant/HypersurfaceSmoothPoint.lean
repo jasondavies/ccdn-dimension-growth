@@ -42,7 +42,7 @@ theorem exists_hypersurface_point_eval_ne_zero
 
 /-- A nonzero partial derivative of an irreducible polynomial is nonzero at
 some point on its hypersurface. -/
-theorem exists_hypersurface_point_partial_ne_zero
+private theorem exists_hypersurface_point_partial_ne_zero
     {K σ : Type*} [Field K] [IsAlgClosed K] [Finite σ]
     (f : MvPolynomial σ K) (hf : Irreducible f)
     (hpos : 0 < f.totalDegree) (j : σ) (hj : pderiv j f ≠ 0) :

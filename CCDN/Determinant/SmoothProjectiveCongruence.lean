@@ -26,7 +26,7 @@ open MvPolynomial
 
 /-- At a nonsingular reduced point the translated equation has
 multiplicity one. -/
-theorem smooth_hypersurface_origin_order {p : ℕ} [Fact p.Prime] {σ : Type*}
+private theorem smooth_hypersurface_origin_order {p : ℕ} [Fact p.Prime] {σ : Type*}
     (f : MvPolynomial σ ℤ) (a : σ → ℤ)
     (ha : eval₂ (Int.castRingHom (ZMod p)) (fun j => (a j : ZMod p)) f = 0)
     (hs : ∃ j, eval (fun i => (a i : ZMod p))

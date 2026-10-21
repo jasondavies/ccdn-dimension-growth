@@ -21,7 +21,7 @@ is the hypersurface dimension. -/
 def hypersurfaceMultiplicityExponent (n μ s : ℕ) : ℕ :=
   Finset.univ.sum fun k : Fin s => s - μ * (n + k.val).choose n
 
-lemma hypersurfaceMultiplicityExponent_le_origin {K : Type*} [Field K] {n μ s : ℕ}
+private lemma hypersurfaceMultiplicityExponent_le_origin {K : Type*} [Field K] {n μ s : ℕ}
     (f : MvPolynomial (Fin (n + 2)) K)
     (hf : f ∈ idealOfVars (Fin (n + 2)) K ^ μ)
     (hμ : homogeneousComponent μ f ≠ 0) :
@@ -34,7 +34,7 @@ lemma hypersurfaceMultiplicityExponent_le_origin {K : Type*} [Field K] {n μ s :
   rw [show n + k.val + 1 = n + 1 + k.val by omega] at h
   exact Nat.sub_le_sub_left h s
 
-lemma hypersurface_cumulative_capacity_ge (n k : ℕ) {μ : ℕ} (hμ : 0 < μ) :
+private lemma hypersurface_cumulative_capacity_ge (n k : ℕ) {μ : ℕ} (hμ : 0 < μ) :
     k + 1 ≤ μ * (n + 1 + k).choose (n + 1) := by
   have h := Nat.choose_le_choose k (show 1 + k ≤ n + 1 + k by omega)
   rw [Nat.choose_symm_add (a := n + 1)]
@@ -52,7 +52,7 @@ lemma sum_cumulative_binomial (n K : ℕ) :
 
 /-- Cutoffs beyond s add no positive deficits. Hence the finite
 exponent controls every numerical cutoff. -/
-lemma sum_hypersurface_deficits_le (n s K : ℕ) {μ : ℕ} (hμ : 0 < μ) :
+private lemma sum_hypersurface_deficits_le (n s K : ℕ) {μ : ℕ} (hμ : 0 < μ) :
     (∑ k ∈ Finset.range K, (s - μ * (n + 1 + k).choose (n + 1))) ≤
       hypersurfaceMultiplicityExponent (n + 1) μ s := by
   unfold hypersurfaceMultiplicityExponent

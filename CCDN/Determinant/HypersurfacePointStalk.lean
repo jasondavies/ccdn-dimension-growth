@@ -28,16 +28,16 @@ noncomputable section
 variable {K A B : Type*} [Field K] [CommRing A] [CommRing B]
     [Algebra K A] [Algebra K B]
 
-def idealPowerLayerEquivOfEq {I J : Ideal A} (h : I = J) (k : ℕ) :
+private def idealPowerLayerEquivOfEq {I J : Ideal A} (h : I = J) (k : ℕ) :
     Ideal.powerLayer K I k ≃ₗ[K] Ideal.powerLayer K J k := by
   subst J
   exact LinearEquiv.refl _ _
 
-def algEquivAdicQuotient (e : A ≃ₐ[K] B) (I : Ideal A) (N : ℕ) :
+private def algEquivAdicQuotient (e : A ≃ₐ[K] B) (I : Ideal A) (N : ℕ) :
     (A ⧸ I ^ N) ≃ₐ[K] B ⧸ (I.map e.toRingHom) ^ N :=
   Ideal.quotientEquivAlg _ _ e (Ideal.map_pow e.toRingHom I N).symm
 
-lemma algEquivAdicQuotient_layer (e : A ≃ₐ[K] B) (I : Ideal A) (k : ℕ) :
+private lemma algEquivAdicQuotient_layer (e : A ≃ₐ[K] B) (I : Ideal A) (k : ℕ) :
     (Ideal.powerLayer K I k).map (algEquivAdicQuotient e I (k + 1)).toLinearMap =
       Ideal.powerLayer K (I.map e.toRingHom) k := by
   ext z
@@ -57,7 +57,7 @@ lemma algEquivAdicQuotient_layer (e : A ≃ₐ[K] B) (I : Ideal A) (k : ℕ) :
     refine Submodule.mem_map.mpr ⟨Ideal.Quotient.mk _ x, ?_, rfl⟩
     exact Submodule.mem_map.mpr ⟨x, hx, rfl⟩
 
-def algEquivAdicLayerEquiv (e : A ≃ₐ[K] B) (I : Ideal A) (k : ℕ) :
+private def algEquivAdicLayerEquiv (e : A ≃ₐ[K] B) (I : Ideal A) (k : ℕ) :
     Ideal.powerLayer K I k ≃ₗ[K] Ideal.powerLayer K (I.map e.toRingHom) k :=
   (Submodule.equivMapOfInjective (algEquivAdicQuotient e I (k + 1)).toLinearMap
     (algEquivAdicQuotient e I (k + 1)).injective _).trans
@@ -72,7 +72,7 @@ open MvPolynomial IsLocalRing
 
 variable {K : Type*} [Field K] {n : ℕ}
 
-lemma affineTranslation_map_pointIdeal (a : Fin n → K) :
+private lemma affineTranslation_map_pointIdeal (a : Fin n → K) :
     (RingHom.ker (eval a)).map (affineTranslation K a).toRingHom =
       idealOfVars (Fin n) K := by
   rw [idealOfVars_eq_ker_constantCoeff]
@@ -117,7 +117,7 @@ lemma hypersurfacePointIdeal_isMaximal (f : MvPolynomial (Fin n) K)
   rintro _ rfl
   exact hf
 
-lemma hypersurfaceTranslationEquiv_map_pointIdeal (f : MvPolynomial (Fin n) K)
+private lemma hypersurfaceTranslationEquiv_map_pointIdeal (f : MvPolynomial (Fin n) K)
     (a : Fin n → K) :
     (hypersurfacePointIdeal f a).map (hypersurfaceTranslationEquiv f a).toRingHom =
       hypersurfaceOriginIdeal (affineTranslation K a f) := by
@@ -146,7 +146,7 @@ local instance : (hypersurfacePointIdeal f a).IsMaximal :=
 
 /-- The local ring's layer at a is identified with the explicitly
 computed origin layer of f(X+a). -/
-def hypersurfacePointStalkLayerEquiv (k : ℕ) :
+private def hypersurfacePointStalkLayerEquiv (k : ℕ) :
     Ideal.powerLayer K (A := HypersurfacePointStalk f a)
       (maximalIdeal (HypersurfacePointStalk f a)) k ≃ₗ[K]
       originLayer (affineTranslation K a f) k := by

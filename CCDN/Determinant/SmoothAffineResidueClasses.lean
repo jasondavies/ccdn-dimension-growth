@@ -30,7 +30,7 @@ instance {n : ℕ} (f : MvPolynomial (Fin n) ℤ) (p : ℕ) [NeZero p] :
   unfold SmoothAffineResidue
   infer_instance
 
-theorem smoothAffineResidue_card_le {n p : ℕ} [Fact p.Prime]
+private theorem smoothAffineResidue_card_le {n p : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 1)) ℤ) :
     Fintype.card (SmoothAffineResidue f p) ≤ f.totalDegree * p ^ n := by
   classical
@@ -91,7 +91,7 @@ def smoothResidueIntegerLift {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     {P : Finset ℕ} (r : SmoothAffineResidueFamily f P) : ℕ → IntPoint n :=
   fun p j => if hp : p ∈ P then ((r ⟨p, hp⟩).val j).val else 0
 
-lemma smoothResidueIntegerLift_cast {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
+private lemma smoothResidueIntegerLift_cast {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     {P : Finset ℕ} (r : SmoothAffineResidueFamily f P) (p : P) [NeZero p.val] (j : Fin n) :
     (smoothResidueIntegerLift r p.val j : ZMod p.val) = (r p).val j := by
   simp only [smoothResidueIntegerLift, dite_eq_left p.property, Int.cast_natCast,

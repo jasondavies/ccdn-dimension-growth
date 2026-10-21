@@ -48,7 +48,7 @@ abbrev projectivePlaneTotalMultiplicity {p d : ℕ} [Fact p.Prime]
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) : ℕ :=
   projectiveHypersurfaceTotalMultiplicity f hf hf0
 
-theorem projectivePlaneTotalMultiplicity_bounds {p d : ℕ} [Fact p.Prime]
+private theorem projectivePlaneTotalMultiplicity_bounds {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) :
     Fintype.card (ProjectivePlaneResidue f p) ≤ projectivePlaneTotalMultiplicity f hf hf0 ∧

@@ -63,7 +63,7 @@ lemma low_weight_card_le {s N : ℕ} (r : ℕ → ℕ)
   have hc := Fintype.card_le_of_injective φ hφ
   simpa only [Fintype.card_subtype, Fintype.card_sigma, Fintype.card_fin] using hc
 
-lemma filtrationExponent_le_weights {s N : ℕ} (r : ℕ → ℕ)
+private lemma filtrationExponent_le_weights {s N : ℕ} (r : ℕ → ℕ)
     (t : Fin s ↪ ((j : Fin N) × Fin (r j.val))) :
     filtrationExponent r s ≤ ∑ i, (t i).1.val := by
   classical

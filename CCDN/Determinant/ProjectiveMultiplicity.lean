@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma projectiveResidueChart_normalized {p : ℕ} [Fact p.Prime]
+private lemma projectiveResidueChart_normalized {p : ℕ} [Fact p.Prime]
     (r : ProjectiveResidueSpace 2 p) :
     (Fin.cons 1 (fun j => (projectiveResidueChartLift r j : ZMod p))) ∘
       Equiv.swap 0 (projectiveResiduePivot r) =
@@ -33,7 +33,7 @@ lemma projectiveResidueChart_normalized {p : ℕ} [Fact p.Prime]
   funext j
   simp
 
-theorem projectiveResidueChart_injective_of_pivot_eq {p : ℕ} [Fact p.Prime]
+private theorem projectiveResidueChart_injective_of_pivot_eq {p : ℕ} [Fact p.Prime]
     {r t : ProjectiveResidueSpace 2 p}
     (hk : projectiveResiduePivot r = projectiveResiduePivot t)
     (ha : (fun j => (projectiveResidueChartLift r j : ZMod p)) =
@@ -53,7 +53,7 @@ theorem projectiveResidueChart_injective_of_pivot_eq {p : ℕ} [Fact p.Prime]
       exact ⟨_, hs⟩
     _ = t := t.mk_rep
 
-theorem projectivePlaneChart_irreducible_degree {p d : ℕ} [Fact p.Prime]
+private theorem projectivePlaneChart_irreducible_degree {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f)) (k : Fin 3) :
     Irreducible (map (Int.castRingHom (ZMod p)) (projectivePlaneChart k f)) ∧
@@ -70,7 +70,7 @@ theorem projectivePlaneChart_irreducible_degree {p d : ℕ} [Fact p.Prime]
   exact ⟨affineChart_irreducible_of_not_variable_dvd q hq hqi hX,
     affineChart_degree_of_not_variable_dvd q hq hX⟩
 
-lemma projectivePlaneResidueMultiplicity_singular {p d : ℕ} [Fact p.Prime]
+private lemma projectivePlaneResidueMultiplicity_singular {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (r : ProjectivePlaneResidue f p)
     (hμ : 2 ≤ projectivePlaneResidueMultiplicity f hf hf0 r) :
@@ -85,7 +85,7 @@ lemma projectivePlaneResidueMultiplicity_singular {p d : ℕ} [Fact p.Prime]
 
 /-- Count singular classes in their three possible charts. The pivots and
 multiplicities here are those of the reduced projective curve. -/
-theorem projective_singular_residue_card_le {p d : ℕ} [Fact p.Prime]
+private theorem projective_singular_residue_card_le {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f)) (hchar : d < p) :
     (Finset.univ.filter fun r : ProjectivePlaneResidue f p =>

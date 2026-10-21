@@ -22,7 +22,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
-theorem homogeneous_irreducible_reduction_of_not_hypersurfaceBadReduction
+private theorem homogeneous_irreducible_reduction_of_not_hypersurfaceBadReduction
     {d p : ℕ} [Fact p.Prime] (f : MvPolynomial (Fin 3) ℤ)
     (hf : f.IsHomogeneous d) (hdeg : (affineChart 2 f).totalDegree = d)
     (hgood : ¬HypersurfaceBadReduction (affineChart 2 f) p) :

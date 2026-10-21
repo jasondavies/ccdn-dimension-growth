@@ -23,7 +23,7 @@ namespace CCDN
 open Finset
 
 /-- Aggregate classwise quadratic estimates without losing the leading constant. -/
-theorem aggregate_local_exponents {ι : Type*} (S : Finset ι)
+private theorem aggregate_local_exponents {ι : Type*} (S : Finset ι)
     (n μ e : ι → ℕ) (he : ∀ i ∈ S, n i ^ 2 ≤ 2 * μ i * (e i + n i)) :
     (∑ i ∈ S, n i) ^ 2 ≤ 2 * (∑ i ∈ S, μ i) * ((∑ i ∈ S, e i) + ∑ i ∈ S, n i) := by
   have h := Finset.sum_sq_le_sum_mul_sum_of_sq_le_mul S

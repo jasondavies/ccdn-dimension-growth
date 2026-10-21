@@ -94,7 +94,7 @@ theorem projectivePlaneTotalMultiplicity_le {p d : ℕ} [Fact p.Prime]
   nlinarith
 
 /-- A uniform local exponent at primes `p > stepanovThreshold d` of irreducible reduction. -/
-theorem projective_plane_minorGcd_dvd {s N p d M : ℕ} [Fact p.Prime] (hs : 0 < s)
+private theorem projective_plane_minorGcd_dvd {s N p d M : ℕ} [Fact p.Prime] (hs : 0 < s)
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f))
     (hsize : stepanovThreshold (d : ℝ) < p)

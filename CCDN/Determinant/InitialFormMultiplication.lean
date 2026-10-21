@@ -30,7 +30,7 @@ lemma homogeneousComponent_eq_zero_of_mem_origin_power
   · exact hf e (by omega)
   · rfl
 
-lemma first_form_product_congruence
+private lemma first_form_product_congruence
     {f g : MvPolynomial σ K} {μ ν : ℕ}
     (hf : f ∈ idealOfVars σ K ^ μ) (hg : g ∈ idealOfVars σ K ^ ν) :
     f * g - homogeneousComponent μ f * homogeneousComponent ν g ∈

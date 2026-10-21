@@ -21,7 +21,7 @@ variable {R : Type*} [CommRing R] [IsLocalRing R] {p : ℕ} [Fact p.Prime]
 
 /-- Lift the quotient-layer generators to the corresponding ideal
 powers in the original local ring. -/
-theorem exists_local_prime_generators [IsNoetherianRing R] (ρ : R →+* ZMod p) :
+private theorem exists_local_prime_generators [IsNoetherianRing R] (ρ : R →+* ZMod p) :
     ∃ G : (k : ℕ) → Fin (localPrimeLayerDimension R p k) → R,
       (∀ k j, G k j ∈ maximalIdeal R ^ k) ∧
       ∀ N u, ∃ (c : (k : Fin N) → Fin (localPrimeLayerDimension R p k.val) → ℤ)
@@ -68,7 +68,7 @@ theorem exists_local_prime_generators [IsNoetherianRing R] (ρ : R →+* ZMod p)
 omit [IsLocalRing R] [Fact p.Prime] in
 /-- Iterate a prime-divisible remainder inside the ring itself. This is
 independent of the subsequent family of evaluation homomorphisms. -/
-lemma local_prime_generators_approximate (I : Ideal R) (r : ℕ → ℕ)
+private lemma local_prime_generators_approximate (I : Ideal R) (r : ℕ → ℕ)
     (G : (k : ℕ) → Fin (r k) → R) (N : ℕ)
     (hrep : ∀ u, ∃ (c : (k : Fin N) → Fin (r k.val) → ℤ) (v w : R),
       v ∈ I ^ N ∧ u - ∑ k : Fin N, ∑ j, c k j • G k.val j = v + (p : R) * w) :

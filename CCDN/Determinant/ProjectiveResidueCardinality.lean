@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem projectivePlaneResidue_infinity_card_le {p d : ℕ} [Fact p.Prime]
+private theorem projectivePlaneResidue_infinity_card_le {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f))
     (hproper : ¬ map (Int.castRingHom (ZMod p)) f ∣ X 0) :
@@ -32,7 +32,7 @@ theorem projectivePlaneResidue_infinity_card_le {p d : ℕ} [Fact p.Prime]
     (fun r => by change eval r.val.val.rep (X 0) = 0; simpa using r.property)
   simpa only [mul_one] using h
 
-theorem projectivePlaneResidue_affine_card_le {p d : ℕ} [Fact p.Prime]
+private theorem projectivePlaneResidue_affine_card_le {p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) :
     Fintype.card {r : ProjectivePlaneResidue f p // r.val.rep 0 ≠ 0} ≤
       Fintype.card (PlaneResidue (affineChart 2 f) p) := by

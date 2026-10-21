@@ -21,7 +21,7 @@ in n+1 variables, including the degrees below μ. -/
 def hypersurfaceLayerBound (n μ k : ℕ) : ℕ :=
   (n + k).choose n - if μ ≤ k then (n + (k - μ)).choose n else 0
 
-lemma originLayer_finrank_le_hypersurfaceLayerBound {K : Type*} [Field K] {n μ k : ℕ}
+private lemma originLayer_finrank_le_hypersurfaceLayerBound {K : Type*} [Field K] {n μ k : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K)
     (hf : f ∈ idealOfVars (Fin (n + 1)) K ^ μ)
     (hμ : homogeneousComponent μ f ≠ 0) :
@@ -34,7 +34,7 @@ lemma originLayer_finrank_le_hypersurfaceLayerBound {K : Type*} [Field K] {n μ 
   · rw [Nat.sub_zero, Nat.choose_symm_add]
     exact originLayer_finrank_le f k
 
-lemma hypersurfaceLayerBound_zero (n k : ℕ) : hypersurfaceLayerBound n 0 k = 0 := by
+private lemma hypersurfaceLayerBound_zero (n k : ℕ) : hypersurfaceLayerBound n 0 k = 0 := by
   simp [hypersurfaceLayerBound]
 
 lemma hypersurfaceLayerBound_succ_zero (n μ : ℕ) :
@@ -74,7 +74,7 @@ theorem hypersurfaceLayerBound_le_mul_choose (n μ k : ℕ) :
 
 /-- Cumulative layer dimension through degree k is at most
 μ * binomial(n+k,n), where n is the hypersurface dimension. -/
-theorem sum_hypersurfaceLayerBound_le (n μ k : ℕ) :
+private theorem sum_hypersurfaceLayerBound_le (n μ k : ℕ) :
     (∑ j : Fin (k + 1), hypersurfaceLayerBound (n + 1) μ j.val) ≤
       μ * (n + k + 1).choose (n + 1) := by
   calc

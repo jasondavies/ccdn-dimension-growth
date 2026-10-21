@@ -27,7 +27,7 @@ lemma eval_polynomial_coordinate_map {R : Type*} [CommRing R] {n m : ℕ}
   rw [← eval_assoc]
   rfl
 
-lemma polynomial_coordinate_evaluation_matrix {M s : ℕ}
+private lemma polynomial_coordinate_evaluation_matrix {M s : ℕ}
     (τ : Fin 3 → MvPolynomial (Fin 2) ℤ) (z : Fin s → Fin 2 → ℤ) :
     (Matrix.of fun i k => eval (z i) (aeval τ (monomial (homogeneousMonomials 2 M k) (1 : ℤ)))) =
       evaluationMatrix (homogeneousMonomials 2 M) (fun i j => eval (z i) (τ j)) := by

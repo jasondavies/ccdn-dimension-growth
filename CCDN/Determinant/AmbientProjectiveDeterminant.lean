@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
-lemma primitive_zero_cons {n : ℕ} (x : Fin n → ℤ) (hx : univ.gcd x = 1) :
+private lemma primitive_zero_cons {n : ℕ} (x : Fin n → ℤ) (hx : univ.gcd x = 1) :
     univ.gcd (Fin.cons 0 x) = 1 := by
   have h : univ.gcd (Fin.cons 0 x) ∣ univ.gcd x := by
     apply Finset.dvd_gcd

@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 
 /-- Optimize the binomial cutoff at the nonnegative mth root. -/
-theorem local_exponent_root_bound (m s e : ℕ) (hm : 0 < m)
+private theorem local_exponent_root_bound (m s e : ℕ) (hm : 0 < m)
     {μ : ℕ} (R : ℝ) (hR0 : 0 ≤ R)
     (hR : (μ : ℝ) * R ^ m = (m.factorial : ℝ) * s)
     (hcutoff : ∀ K : ℕ, s * K ≤ e + μ * (m + K).choose (m + 1)) :
@@ -78,7 +78,7 @@ theorem local_exponent_root_bound (m s e : ℕ) (hm : 0 < m)
 
 /-- The sharp multiplicity-dependent leading term, with a dimension-only
 linear error. This is the numerical bound needed in CCDN Section 2. -/
-theorem local_exponent_lower_bound (m s e : ℕ) (hm : 0 < m)
+private theorem local_exponent_lower_bound (m s e : ℕ) (hm : 0 < m)
     {μ : ℕ} (hμ : 0 < μ)
     (hcutoff : ∀ K : ℕ, s * K ≤ e + μ * (m + K).choose (m + 1)) :
     (s : ℝ) * (((m.factorial : ℝ) * s / μ) ^ (1 / (m : ℝ))) * m / (m + 1) ≤

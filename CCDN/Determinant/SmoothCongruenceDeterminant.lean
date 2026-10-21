@@ -26,7 +26,7 @@ open MvPolynomial Finset
 
 /-- The higher-dimensional rank-cutoff form of Proposition 3.2.6 for
 maximal minors and common-degree homogeneous evaluation columns. -/
-theorem hypersurface_determinant_log_lower_at_rank_congruence {n s N d M : ℕ} (hs : 0 < s)
+private theorem hypersurface_determinant_log_lower_at_rank_congruence {n s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     {F : Fin N → MvPolynomial (Fin (n + 3)) ℤ} {z : Fin s → IntPoint (n + 3)}
     (hev : IsIndependentEvaluation f M F z)

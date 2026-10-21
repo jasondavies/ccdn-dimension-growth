@@ -34,7 +34,7 @@ def residueParameterEval {F L : Type*} [Field F] [Field L] [Algebra F L]
   ext i
   simp
 
-lemma residueEliminationEquation_map_eval {F L : Type*} [Field F] [Field L] [Algebra F L]
+private lemma residueEliminationEquation_map_eval {F L : Type*} [Field F] [Field L] [Algebra F L]
     (t u : L) (f g : F[X][X]) :
     (residueEliminationEquation f g).map (residueParameterEval t u) =
       C u * (f.map (aeval t).toRingHom).derivative - g.map (aeval t).toRingHom := by

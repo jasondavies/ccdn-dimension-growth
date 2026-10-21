@@ -23,7 +23,7 @@ open MvPolynomial
 
 /-- Lift a whole homogeneous generating family without changing its size at
 any weight. The error separates the equation, the origin power and a multiple of p. -/
-theorem lift_origin_truncation_generators {σ : Type*} {p : ℕ} [Fact p.Prime]
+private theorem lift_origin_truncation_generators {σ : Type*} {p : ℕ} [Fact p.Prime]
     (f : MvPolynomial σ ℤ) (r : ℕ → ℕ)
     (g : (k : ℕ) → Fin (r k) → MvPolynomial σ (ZMod p))
     (hg : ∀ k j, (g k j).IsHomogeneous k)

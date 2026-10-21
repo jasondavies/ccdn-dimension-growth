@@ -32,13 +32,13 @@ def hypersurfaceRankLowerBound (n s d : ℕ) (c : ℝ) : ℝ :=
   factorialRoot n / (n + 2 : ℝ) * (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *
     (Real.log s - (n + 1 : ℝ) * (4 * Real.log d + c) - hypersurfaceDeterminantError n)
 
-lemma hypersurface_rank_prime_endpoint (n s : ℕ) (hs : 0 < s) :
+private lemma hypersurface_rank_prime_endpoint (n s : ℕ) (hs : 0 < s) :
     1 ≤ (s : ℝ) ^ (1 / (n + 1 : ℝ)) := by
   apply Real.one_le_rpow
   · exact_mod_cast hs
   · positivity
 
-lemma hypersurface_determinant_rank_identity (n s d : ℕ) (hs : 0 < s) (charge : ℝ) :
+private lemma hypersurface_determinant_rank_identity (n s d : ℕ) (hs : 0 < s) (charge : ℝ) :
     hypersurfaceDeterminantMain n s *
         (Real.log ((s : ℝ) ^ (1 / (n + 1 : ℝ))) - 4 * Real.log d - Real.log 27 -
           2 * mertensError - charge - 2 * hypersurfaceCountConstant n * primeBlockMass) -
