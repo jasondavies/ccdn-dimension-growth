@@ -1,6 +1,6 @@
 module
 
-public import CCDN.ClosedFormReducibilityCharZero
+public import CCDN.ClosedFormScaling
 public import CCDN.UniversalPlaneWitnessCharZero
 public import CCDN.UniversalPlaneEvaluation
 public import CCDN.IntegerPolynomialAvoidance

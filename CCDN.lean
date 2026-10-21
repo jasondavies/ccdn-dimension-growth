@@ -233,7 +233,6 @@ public import CCDN.CompleteIntersectionDegreeBudget
 public import CCDN.IntegralAffineLine
 public import CCDN.CriticalFilteredGrowth
 public import CCDN.DegreeOneAffineLine
-public import CCDN.ClosedFormReducibilityCharZero
 public import CCDN.UniversalPlaneGoodSpecializationCharZero
 public import CCDN.TopFormSurfaceComponents
 public import CCDN.SurfaceAuxiliaryExponent

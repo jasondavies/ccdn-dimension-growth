@@ -78,10 +78,10 @@ theorem closedForm_rank_lower_of_constant_leading
   rw [closedForm_rank_smul _ (inv_ne_zero ha)] at hr
   exact hr
 
-/-- The characteristic-p reducibility criterion likewise only needs a nonzero
-constant outer leading coefficient. -/
-theorem closedForm_rank_drop_of_constant_leading
-    {F : Type*} [Field F] (p d : ℕ) [CharP F p] (hd : 0 < d) (hdp : d < p)
+/-- The reducibility criterion only needs a nonzero constant outer leading coefficient. -/
+theorem closedForm_rank_drop_of_constant_leading_of_natCast
+    {F : Type*} [Field F] (d : ℕ) (hd : 0 < d)
+    (hchar : ∀ n : ℕ, 0 < n → n ≤ d → (n : F) ≠ 0)
     (a : F) (ha : a ≠ 0) (f : F[X][X])
     (hl : f.leadingCoeff = C a) (hred : ¬Irreducible f)
     (hdeg : f.natDegree = d) (htotal : bivariateTotalDegree f ≤ d) :
@@ -89,11 +89,33 @@ theorem closedForm_rank_drop_of_constant_leading
   have hm := bivariate_monic_normalize a ha f hl
   have hi : ¬Irreducible (a⁻¹ • f) := fun h =>
     hred ((bivariate_irreducible_smul_iff a⁻¹ (inv_ne_zero ha) f).mp h)
-  have hr := closedForm_rank_drop_of_not_irreducible p d hd hdp (a⁻¹ • f) hm hi
+  have hr := closedForm_rank_drop_of_not_irreducible_of_natCast d hd hchar (a⁻¹ • f) hm hi
     ((natDegree_smul f (inv_ne_zero ha)).trans hdeg)
     ((bivariateTotalDegree_smul_le _ _).trans htotal)
   rw [closedForm_rank_smul _ (inv_ne_zero ha)] at hr
   exact hr
+
+/-- The characteristic-p reducibility criterion likewise only needs a nonzero
+constant outer leading coefficient. -/
+theorem closedForm_rank_drop_of_constant_leading
+    {F : Type*} [Field F] (p d : ℕ) [CharP F p] (hd : 0 < d) (hdp : d < p)
+    (a : F) (ha : a ≠ 0) (f : F[X][X])
+    (hl : f.leadingCoeff = C a) (hred : ¬Irreducible f)
+    (hdeg : f.natDegree = d) (htotal : bivariateTotalDegree f ≤ d) :
+    (closedFormCoefficientMatrix d f).rank + 2 ≤ 2 * d ^ 2 :=
+  closedForm_rank_drop_of_constant_leading_of_natCast d hd (natCast_ne_zero_of_lt_char p hdp)
+    a ha f hl hred hdeg htotal
+
+/-- The characteristic-zero reducibility criterion likewise only needs a nonzero
+constant outer leading coefficient. -/
+theorem closedForm_rank_drop_of_constant_leading_charZero
+    {F : Type*} [Field F] [CharZero F] (d : ℕ) (hd : 0 < d)
+    (a : F) (ha : a ≠ 0) (f : F[X][X])
+    (hl : f.leadingCoeff = C a) (hred : ¬Irreducible f)
+    (hdeg : f.natDegree = d) (htotal : bivariateTotalDegree f ≤ d) :
+    (closedFormCoefficientMatrix d f).rank + 2 ≤ 2 * d ^ 2 :=
+  closedForm_rank_drop_of_constant_leading_of_natCast d hd
+    (fun _ hn _ => Nat.cast_ne_zero.mpr hn.ne') a ha f hl hred hdeg htotal
 
 end
 end CCDN

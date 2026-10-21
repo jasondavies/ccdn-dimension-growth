@@ -4,7 +4,8 @@ public import CCDN.ClosedFormFactorRank
 public import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
 
 /-! The full reducibility-to-rank-drop implication for normalized monic
-bivariate equations of degree below the characteristic. -/
+bivariate equations whose degrees up to `d` are nonzero in the base field, in particular
+below the characteristic. -/
 
 @[expose] public section
 namespace CCDN
@@ -52,10 +53,11 @@ lemma exists_monic_bivariate_primary_factor {F : Type*} [Field F]
   exact hnd ((hgm.isPrimitive.dvd_iff_fraction_map_dvd_fraction_map (RatFunc F)).mpr hdiv)
 
 /-- A reducible normalized equation of total degree at most d, with outer
-degree d below the characteristic, has coefficient-matrix kernel dimension
-at least two. Both squarefree and repeated-factor cases are covered. -/
-theorem closedForm_rank_drop_of_not_irreducible
-    {F : Type*} [Field F] (p d : ℕ) [CharP F p] (hd : 0 < d) (hdp : d < p)
+degree d and every degree up to d nonzero in the base field, has coefficient-matrix kernel
+dimension at least two. Both squarefree and repeated-factor cases are covered. -/
+theorem closedForm_rank_drop_of_not_irreducible_of_natCast
+    {F : Type*} [Field F] (d : ℕ) (hd : 0 < d)
+    (hchar : ∀ n : ℕ, 0 < n → n ≤ d → (n : F) ≠ 0)
     (f : F[X][X]) (hf : f.Monic) (hred : ¬Irreducible f)
     (hdeg : f.natDegree = d) (htotal : bivariateTotalDegree f ≤ d) :
     (closedFormCoefficientMatrix d f).rank + 2 ≤ 2 * d ^ 2 := by
@@ -70,13 +72,22 @@ theorem closedForm_rank_drop_of_not_irreducible
       rw [he']
       exact (associated_mul_unit_left g h hhU).irreducible_iff.mpr hg
     rw [he'] at hdeg htotal ⊢
-    exact closedForm_rank_drop_of_coprime_factors p d hd hdp g h hg hgm hhm.ne_zero
+    exact closedForm_rank_drop_of_coprime_factors d hd hchar g h hg hgm hhm.ne_zero
       (hhm.natDegree_pos_of_not_isUnit hhu) hcop hdeg htotal
   · have hm2 : m = (m - 2) + 2 := by omega
     rw [hm2] at he
     rw [he] at hdeg htotal ⊢
-    exact closedForm_rank_drop_of_repeated_factor p d (m - 2) hd hdp g h hg hgm
+    exact closedForm_rank_drop_of_repeated_factor d (m - 2) hd hchar g h hg hgm
       hhm.ne_zero hcop hdeg htotal
+
+/-- The reducibility criterion below the characteristic. -/
+theorem closedForm_rank_drop_of_not_irreducible
+    {F : Type*} [Field F] (p d : ℕ) [CharP F p] (hd : 0 < d) (hdp : d < p)
+    (f : F[X][X]) (hf : f.Monic) (hred : ¬Irreducible f)
+    (hdeg : f.natDegree = d) (htotal : bivariateTotalDegree f ≤ d) :
+    (closedFormCoefficientMatrix d f).rank + 2 ≤ 2 * d ^ 2 :=
+  closedForm_rank_drop_of_not_irreducible_of_natCast d hd (natCast_ne_zero_of_lt_char p hdp)
+    f hf hred hdeg htotal
 
 end
 end CCDN
