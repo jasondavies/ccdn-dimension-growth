@@ -28,8 +28,7 @@ into a coordinate ring with eventually linear Hilbert growth. -/
 theorem plane_projection_not_injective {K τ : Type*} [Field K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) (a : Fin 2 → MvPolynomial τ K)
     (ha : ∀ i, (a i).totalDegree ≤ 1) (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c) :
+    (hdegree : HasFilteredCurveDegree I d) :
     ¬ Function.Injective (projectionCoordinateMap I a) := by
   intro hinj
   have hlow (M : ℕ) : (M + 2).choose 2 ≤ Module.finrank K (filteredCoordinateSpace I M) := by
@@ -97,8 +96,7 @@ principal prime kernel with an irreducible generator. -/
 theorem exists_plane_projection_equation {K τ : Type*} [Field K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
     (a : Fin 2 → MvPolynomial τ K) (ha : ∀ i, (a i).totalDegree ≤ 1)
-    (d : ℕ) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c)
+    (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (j : Fin 2) (hj : Transcendental K ((Ideal.Quotient.mk I) (a j))) :
     ∃ f : MvPolynomial (Fin 2) K, Irreducible f ∧
       RingHom.ker (projectionCoordinateMap I a) = Ideal.span {f} := by

@@ -20,15 +20,16 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+variable {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n : ℕ}
+  (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
+  [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
+  [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
+  [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+
 /-- Equality of source and image multiplicities forces birationality.
 The proof constructs the image field, a finite linear normalization, and its
 rank. -/
-theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
-    {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n s : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq {s : ℕ}
     (hI : IsHomogeneousIdeal I)
     (a : Fin s → MvPolynomial (Fin n) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
@@ -38,12 +39,9 @@ theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
   by_cases hzero : (filteredHilbertPolynomial I).natDegree = 0
   · exact homogeneous_zero_dimension_projectionImageField_eq_top I hI hzero a
   obtain ⟨m, hm⟩ := Nat.exists_eq_succ_of_ne_zero hzero
-  obtain ⟨d, hd, _, hlc⟩ := filteredHilbertPolynomial_positive_multiplicity I
-    (Ideal.IsPrime.ne_top ‹I.IsPrime›)
-  have hdegree : (filteredHilbertPolynomial I).leadingCoeff =
-      (d : ℚ) / (m + 1).factorial := by simpa only [hm] using hlc
+  obtain ⟨d, hd, hdimdeg⟩ := exists_hasAffineDimensionDegree I (Ideal.IsPrime.ne_top ‹I.IsPrime›) hm
   obtain ⟨hfinite, hrank⟩ := homogeneous_projection_functionField_rank_bound (F := F)
-    I hI a ha hint d d ⟨hm, hdegree⟩ (heq.trans hdegree)
+    I hI a ha hint d d hdimdeg (heq.trans hdimdeg.leadingCoeff_eq)
   let L := projectionImageField (F := F) I a
   let : Module.Finite L F := hfinite
   have hpos : 0 < Module.finrank L F := Module.finrank_pos
@@ -53,12 +51,7 @@ theorem homogeneous_finite_projection_birational_of_leadingCoeff_eq
 
 /-- Degree preservation and function-field birationality are equivalent for
 a finite homogeneous linear projection in characteristic zero. -/
-theorem homogeneous_finite_projection_leadingCoeff_eq_iff_birational
-    {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n s : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
-    [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
+theorem homogeneous_finite_projection_leadingCoeff_eq_iff_birational {s : ℕ}
     (hI : IsHomogeneousIdeal I)
     (a : Fin s → MvPolynomial (Fin n) K) (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral) :

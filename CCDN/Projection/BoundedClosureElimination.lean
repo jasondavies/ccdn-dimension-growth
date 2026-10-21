@@ -29,13 +29,10 @@ theorem exists_fin_integer_closure_elimination_step {n m : ℕ}
       let a := fun i => integerLinearForm (c i)
       let ψ := projectionCoordinateMap I a
       ψ.IsIntegral ∧ (RingHom.ker ψ).IsPrime ∧
-      (filteredHilbertPolynomial (RingHom.ker ψ)).natDegree = m + 1 ∧
-      (filteredHilbertPolynomial (RingHom.ker ψ)).leadingCoeff =
-        (e : ℚ) / (m + 1).factorial ∧
+      HasProjectiveDimensionDegree (RingHom.ker ψ) m e ∧
       (projectionCoordinateMap (projectiveClosureIdeal I)
         (closureProjectionCoordinates a)).IsIntegral := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
-  obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d ⟨hdim, hdegree⟩
+  obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d hdimdeg
     (by simpa only [Fintype.card_fin] using Nat.add_lt_add_right hcodim 1)
   let F := renameEquiv ℚ (finSuccEquiv n) f
   have hF : F ≠ 0 := by
@@ -66,11 +63,9 @@ theorem exists_fin_integer_closure_elimination_step {n m : ℕ}
     exact (hbound i).2.trans (by exact_mod_cast Nat.add_le_add_right hfd 1)
   have hint := affine_projection_integral_of_closure_integral I
     (fun i => integerLinearForm (c i)) hcone
-  obtain ⟨hdim', e, he, hed, hdegree'⟩ := integral_linear_projection_multiplicity I
-    (fun i => integerLinearForm (c i)) (fun i => linearForm_totalDegree_le _) hint d
-      (by simpa only [hdim] using hdegree)
-  exact ⟨c, e, hc, he, hed, hint, RingHom.ker_isPrime _, hdim'.trans hdim,
-    by simpa only [hdim] using hdegree', hcone⟩
+  obtain ⟨e, he, hed, hker⟩ := integral_linear_projection_dimension_degree I
+    (fun i => integerLinearForm (c i)) (fun i => linearForm_totalDegree_le _) hint hdimdeg
+  exact ⟨c, e, hc, he, hed, hint, RingHom.ker_isPrime _, hker, hcone⟩
 
 end
 end CCDN

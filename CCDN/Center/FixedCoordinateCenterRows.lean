@@ -39,27 +39,26 @@ theorem exists_independent_fixed_coordinate_closure_projection
     {K : Type*} [Field K] [CharZero K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hmn : m + 1 ≤ n) (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    (hdimdeg : HasAffineDimensionDegree I m d) :
     ∃ a : Fin (m + 2) → MvPolynomial (Fin (n + 1)) K,
       (∀ i, (a i).IsHomogeneous 1) ∧ LinearIndependent K a ∧ a 1 = X 0 ∧
       (projectionCoordinateMap (projectiveClosureIdeal I) a).IsIntegral ∧
       projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I))
         (projectiveClosureIdeal I) a = ⊤ := by
   obtain ⟨b, hb, _, _, hcone⟩ :=
-    exists_closure_normalization_infinite_of_le m n (by omega) I hdim
+    exists_closure_normalization_infinite_of_le m n (by omega) I hdimdeg.natDegree_eq
   let J := projectiveClosureIdeal I
-  obtain ⟨hJdim, hJdegree⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdim hdegree
+  have hJ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdimdeg
   have hker : RingHom.ker (projectionCoordinateMap J (closureProjectionCoordinates b)) = ⊥ :=
     ideal_eq_bot_of_full_hilbert_dimension _ (RingHom.ker_ne_top _) (by
       simpa only [Fintype.card_fin] using
-        (integral_projection_hilbert_dimension_eq J _ hcone).trans hJdim)
+        (integral_projection_hilbert_dimension_eq J _ hcone).trans hJ.natDegree_eq)
   have hinj : Function.Injective (projectionCoordinateMap J (closureProjectionCoordinates b)) :=
     (RingHom.injective_iff_ker_eq_bot _).mpr hker
   obtain ⟨v, hv, hli, hint, hfield⟩ := exists_independent_linear_primitive_extension
     (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ J)) J
     (closureProjectionCoordinates b) (closureProjectionCoordinates_homogeneous b hb)
-    hcone hinj (by omega) d ⟨hJdim, hJdegree⟩
+    hcone hinj (by omega) d hJ
   refine ⟨Fin.cons v (closureProjectionCoordinates b), ?_, hli, ?_, hint, hfield⟩
   · intro i
     exact Fin.cases hv (closureProjectionCoordinates_homogeneous b hb) i
@@ -73,8 +72,7 @@ theorem exists_fixed_coordinate_center_row_witness
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] [Infinite L]
     {m n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hmn : m + 1 ≤ n) (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    (hdimdeg : HasAffineDimensionDegree I m d) :
     ∃ (B : Matrix (Fin (m + 2)) (Fin (n + 1)) K)
       (A : Matrix (Fin (n - m - 1)) (Fin (n + 1)) K),
       LinearIndependent K B.row ∧ LinearIndependent K A.row ∧
@@ -88,7 +86,7 @@ theorem exists_fixed_coordinate_center_row_witness
         (projectiveClosureIdeal I) (chowProjectionForms B) = ⊤ := by
   classical
   obtain ⟨a, ha, hali, ha0, hint, hfield⟩ :=
-    exists_independent_fixed_coordinate_closure_projection I hmn d hdim hdegree
+    exists_independent_fixed_coordinate_closure_projection I hmn d hdimdeg
   obtain ⟨c, hc⟩ := homogeneous_linear_forms_coefficient_representation a ha
   let B : Matrix (Fin (m + 2)) (Fin (n + 1)) K := fun i j => c (i,j)
   have hBa : chowProjectionForms B = a := hc

@@ -29,8 +29,7 @@ theorem generic_affine_normalization_functionField_finrank
     [IsScalarTower L (MvPolynomial (Fin n) L ⧸ I.map (map (algebraMap K L))) F]
     [IsFractionRing (MvPolynomial (Fin n) L ⧸ I.map (map (algebraMap K L))) F]
     (u : Fin m × Fin n → L) (hu : AlgebraicIndependent K u)
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    (d : ℕ) (hdimdeg : HasAffineDimensionDegree I m d) :
     Module.finrank (IntermediateField.adjoin L
       (Set.range (fun i => @algebraMap
         (MvPolynomial (Fin n) L ⧸ I.map (map (algebraMap K L))) F _ _ hAF
@@ -41,9 +40,8 @@ theorem generic_affine_normalization_functionField_finrank
   have : IL.IsPrime := prime_ideal_scalar_extension_of_algebraicClosure (L := L) I
   exact affine_normalization_functionField_finrank (F := F) IL
     (genericAffineParameterForms u) (genericAffineParameterForms_homogeneous u)
-    (generic_fixed_coordinate_projection_integral I hdim u hu) d
-    (by simpa only [IL,filteredHilbertPolynomial_scalar_extension] using hdim)
-    (by simpa only [IL,filteredHilbertPolynomial_scalar_extension] using hdegree)
+    (generic_fixed_coordinate_projection_integral I hdimdeg.natDegree_eq u hu) d
+    (hasAffineDimensionDegree_scalar_extension hdimdeg)
 
 end
 end CCDN

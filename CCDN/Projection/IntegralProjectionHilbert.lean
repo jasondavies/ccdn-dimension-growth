@@ -57,5 +57,21 @@ theorem integral_linear_projection_multiplicity
   exact_mod_cast (div_le_div_iff_of_pos_right
     (by positivity : (0 : ℚ) < (filteredHilbertPolynomial I).natDegree.factorial)).mp hle
 
+/-- An integral linear projection of a prime of dimension `m` and degree `d` has dimension `m`
+and a positive degree at most `d`. -/
+theorem integral_linear_projection_dimension_degree
+    {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
+    [LinearOrder σ] [LinearOrder τ]
+    (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
+    (a : σ → MvPolynomial τ K) (ha : ∀ i, (a i).totalDegree ≤ 1)
+    (hint : (projectionCoordinateMap I a).IsIntegral) {m d : ℕ}
+    (hdimdeg : HasAffineDimensionDegree I m d) :
+    ∃ e : ℕ, 0 < e ∧ e ≤ d ∧
+      HasAffineDimensionDegree (RingHom.ker (projectionCoordinateMap I a)) m e := by
+  obtain ⟨hdim, e, he, hed, hlc⟩ := integral_linear_projection_multiplicity I a ha hint d
+    (by rw [hdimdeg.natDegree_eq]; exact hdimdeg.leadingCoeff_eq)
+  rw [hdimdeg.natDegree_eq] at hdim hlc
+  exact ⟨e, he, hed, hdim, hlc⟩
+
 end
 end CCDN

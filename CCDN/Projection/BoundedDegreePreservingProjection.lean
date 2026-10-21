@@ -39,8 +39,7 @@ theorem exists_degree_preserving_projection_of_infinity_avoidance {K L F : Type*
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
     [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
     [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
-    (d : ℕ) (hd : 0 < d) (hdegree : ∃ M : ℕ, ∃ c : ℤ, ∀ m ≥ M,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c)
+    (d : ℕ) (hd : 0 < d) (hdegree : HasFilteredCurveDegree I d)
     (l : MvPolynomial (Fin n) K) (hl : l.IsHomogeneous 1)
     (hzero : ∀ z ∈ MvPolynomial.zeroLocus L (leadingInfinityIdeal I ⊔ Ideal.span {l}), z = 0) :
     ∃ (k : ℕ) (f : MvPolynomial (Fin 2) K), k ≤ n * d ^ 2 ∧
@@ -69,8 +68,7 @@ open MvPolynomial
 characteristic zero. The curve need not be geometrically integral. -/
 theorem exists_bounded_degree_preserving_projection {K : Type*} [Field K] [CharZero K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (d : ℕ) (hd : 0 < d) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c) :
+    (d : ℕ) (hd : 0 < d) (hdegree : HasFilteredCurveDegree I d) :
     ∃ (k₀ k₁ : ℕ) (f : MvPolynomial (Fin 2) K),
       k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧ Irreducible f ∧ f.totalDegree = d ∧
       Transcendental K ((Ideal.Quotient.mk I) (momentCoordinate K n k₀)) ∧
@@ -91,8 +89,7 @@ and which identifies at most `d(d-1)` points of any finite subset of the curve. 
 theorem exists_bounded_projection_card_le {K : Type*} [Field K] [CharZero K]
     [DecidableEq (Fin 2 → K)] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (d : ℕ) (hd : 0 < d) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c) :
+    (d : ℕ) (hd : 0 < d) (hdegree : HasFilteredCurveDegree I d) :
     ∃ (k₀ k₁ : ℕ) (f : MvPolynomial (Fin 2) K),
       k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧ Irreducible f ∧ f.totalDegree = d ∧
       (∀ g, aeval (![momentCoordinate K n k₀, momentCoordinate K n k₁]) g ∈ I ↔ f ∣ g) ∧

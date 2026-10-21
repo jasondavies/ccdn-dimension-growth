@@ -47,18 +47,18 @@ theorem exists_dense_open_fixed_center_plucker_equations
   let IL := I.map (map (algebraMap K L))
   have hclgeo := projectiveClosureIdeal_geometrically_prime (L := AlgebraicClosure K) I
   have hclL := projectiveClosureIdeal_geometrically_prime (L := L) I
-  obtain ⟨hcdim,hcdegree⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdim hdegree
+  have hdimdeg : HasAffineDimensionDegree I m d := ⟨hdim, hdegree⟩
   obtain ⟨Φ,hhom,hdeg,hstrict,hboundary,he⟩ :=
     exists_birational_center_plucker_equations (L := L) (r := n + 1 - m - 1)
-      (projectiveClosureIdeal I)
-      (projectiveClosureIdeal_homogeneous I) d ⟨hcdim, hcdegree⟩ (by omega)
+      (projectiveClosureIdeal I) (projectiveClosureIdeal_homogeneous I) d
+      (projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdimdeg) (by omega)
   have heq : fixedCoordinateBirationalSubspaceLocus (r := n + 1 - m - 1) IL =
       Subtype.val ⁻¹' (centerPluckerFamilyZeroLocus (algebraMap K L) Φ)ᶜ := by
     change Subtype.val ⁻¹' birationalCenterSubspaceLocus (projectiveClosureIdeal IL) = _
     rw [birationalCenterSubspaceLocus_congr
       (projectiveClosureIdeal_scalar_extension (L := L) I).symm, he]
   obtain ⟨A,hA,hA0,hgood⟩ :=
-    exists_fixed_coordinate_birational_center_matrix_over_extension (L := L) I hmn d hdim hdegree
+    exists_fixed_coordinate_birational_center_matrix_over_extension (L := L) I hmn d hdimdeg
   let x : FixedCoordinateCenterMatrix L (n + 1 - m - 1) (n + 1) :=
     ⟨fun q => A q.1 q.2,
       fun i j hj => by simpa only [Finset.mem_singleton.mp hj] using hA0 i, hA⟩

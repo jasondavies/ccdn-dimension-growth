@@ -29,8 +29,7 @@ theorem exists_geometrically_integral_curve_projection
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     [(I.map (map (algebraMap K L))).IsPrime]
     (d : ℕ) (hd : 0 < d)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ M ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I M) : ℤ) = (d : ℤ) * M + c) :
+    (hdegree : HasFilteredCurveDegree I d) :
     ∃ (k₀ k₁ : ℕ) (f : MvPolynomial (Fin 2) K),
       k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧ Irreducible f ∧
       Irreducible (map (algebraMap K L) f) ∧ f.totalDegree = d ∧

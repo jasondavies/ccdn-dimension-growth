@@ -38,20 +38,15 @@ theorem affine_projection_equation_degree_eq_of_closure
     (f : MvPolynomial (Fin (m + 2)) ℚ) (hf : f ≠ 0) (hfpos : 0 < f.totalDegree)
     (hker : RingHom.ker (projectionCoordinateMap I a) = Ideal.span {f}) :
     f.totalDegree = d := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let J := RingHom.ker (projectionCoordinateMap I a)
   have : J.IsPrime := RingHom.ker_isPrime _
-  have hJdim : (filteredHilbertPolynomial J).natDegree = m + 1 :=
-    (integral_projection_hilbert_dimension_eq I _
-      (affine_projection_integral_of_closure_integral I a hint)).trans hdim
-  have hJdegree : (filteredHilbertPolynomial J).leadingCoeff =
-      (f.totalDegree : ℚ) / (m + 1).factorial := by
+  have hJ : HasProjectiveDimensionDegree J m f.totalDegree := by
     rw [show J = Ideal.span {f} from hker]
-    exact principal_filteredHilbertPolynomial_leadingCoeff f hf hfpos
+    exact principal_filteredHilbertPolynomial_degree_leadingCoeff f hf hfpos
   have hsource := (projectiveClosureIdeal_hilbertPolynomial_parameters
-    I (m + 1) d hdim hdegree).2
+    I (m + 1) d hdimdeg).leadingCoeff_eq
   have htarget := (projectiveClosureIdeal_hilbertPolynomial_parameters
-    J (m + 1) f.totalDegree hJdim hJdegree).2
+    J (m + 1) f.totalDegree hJ).leadingCoeff_eq
   have heq := homogeneous_finite_birational_projection_leadingCoeff_eq
     (F := FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ projectiveClosureIdeal I))
     (projectiveClosureIdeal I) (projectiveClosureIdeal_homogeneous I)

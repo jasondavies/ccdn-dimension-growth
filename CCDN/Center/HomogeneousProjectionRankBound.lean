@@ -42,7 +42,6 @@ theorem homogeneous_projection_functionField_rank_bound
     Module.Finite (projectionImageField (F := F) I a) F ∧
       e * Module.finrank (projectionImageField (F := F) I a) F ≤ d := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let A := MvPolynomial (Fin n) K ⧸ I
   let ψ := projectionCoordinateMap I a
   let J := RingHom.ker ψ
@@ -54,7 +53,7 @@ theorem homogeneous_projection_functionField_rank_bound
   let : IsScalarTower K B L := IsScalarTower.of_algHom β
   let : IsFractionRing B L := projectionImageFieldMap_isFractionRing (F := F) I a
   have hJdim : (filteredHilbertPolynomial J).natDegree = m + 1 :=
-    (integral_projection_hilbert_dimension_eq I ψ hint).trans hdim
+    (integral_projection_hilbert_dimension_eq I ψ hint).trans hdimdeg.natDegree_eq
   obtain ⟨_, _, hdimle, _⟩ := filteredHilbertPolynomial_positive_multiplicity J
     (Ideal.IsPrime.ne_top ‹J.IsPrime›)
   have hms : m + 1 ≤ s := by simpa only [hJdim, Fintype.card_fin] using hdimle
@@ -78,8 +77,7 @@ theorem homogeneous_projection_functionField_rank_bound
     exact (DFunLike.congr_fun (projectionImageFieldMap_comp_val (F := F) I a)
       ((Ideal.Quotient.mk J) (b i))).symm
   obtain ⟨hfinite, hrank⟩ := hilbert_functionField_finite_rank_le (R := E) (F := F) I d
-    (by simpa only [Fintype.card_fin] using hdim)
-    (by simpa only [Fintype.card_fin] using hdegree) l hl u hu heval
+    (by simpa only [Fintype.card_fin] using hdimdeg) l hl u hu heval
   let : Module.Finite E F := hfinite
   let : Module.Finite L F := Module.Finite.of_restrictScalars_finite E L F
   have hEL : Module.finrank E L = e :=

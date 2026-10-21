@@ -86,15 +86,14 @@ theorem minimalPrimeComponents_leadingCoeff_sum_le
 theorem minimalPrimeComponents_multiplicity_sum_le
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) (m d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
+    (hdimdeg : HasAffineDimensionDegree I m d)
     (hpure : ∀ P : minimalPrimeComponents I,
       (filteredHilbertPolynomial P.val).natDegree = m)
     (δ : minimalPrimeComponents I → ℕ)
     (hδ : ∀ P, (filteredHilbertPolynomial P.val).leadingCoeff = (δ P : ℚ) / m.factorial) :
     ∑ P, δ P ≤ d := by
-  have hh := minimalPrimeComponents_leadingCoeff_sum_le I hI m hdim hpure
-  simp only [hδ, hdegree, ← Finset.sum_div] at hh
+  have hh := minimalPrimeComponents_leadingCoeff_sum_le I hI m hdimdeg.natDegree_eq hpure
+  simp only [hδ, hdimdeg.leadingCoeff_eq, ← Finset.sum_div] at hh
   have hfac : (0 : ℚ) < m.factorial := by positivity
   exact_mod_cast (div_le_div_iff_of_pos_right hfac).mp hh
 
@@ -102,8 +101,7 @@ theorem minimalPrimeComponents_multiplicity_sum_le
 theorem exists_minimalPrimeComponents_multiplicity_budget
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) (m d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
+    (hdimdeg : HasAffineDimensionDegree I m d)
     (hpure : ∀ P : minimalPrimeComponents I,
       (filteredHilbertPolynomial P.val).natDegree = m) :
     ∃ δ : minimalPrimeComponents I → ℕ,
@@ -118,7 +116,7 @@ theorem exists_minimalPrimeComponents_multiplicity_budget
     exact ⟨e, he, by simpa only [hpure P] using hlc⟩
   choose δ hδpos hδ using hex
   exact ⟨δ, fun P => ⟨hδpos P, hδ P⟩,
-    minimalPrimeComponents_multiplicity_sum_le I hI m d hdim hdegree hpure δ hδ⟩
+    minimalPrimeComponents_multiplicity_sum_le I hI m d hdimdeg hpure δ hδ⟩
 
 end
 end CCDN

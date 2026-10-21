@@ -48,7 +48,6 @@ theorem geometric_chow_restriction_irreducible_iff_birational
       projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 2)) K ⧸ I))
         I (chowProjectionForms A) = ⊤ := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let L := AlgebraicClosure K
   let φ := algebraMap K L
   let J := I.map (map φ)
@@ -57,20 +56,17 @@ theorem geometric_chow_restriction_irreducible_iff_birational
   let P := chowProjectionImageIdeal J AL
   let R := chowLinearSubstitution AL FL
   have hJ := homogeneous_ideal_scalar_extension (L := L) I hI
-  have hJdim : (filteredHilbertPolynomial J).natDegree = m + 1 := by
-    rw [filteredHilbertPolynomial_scalar_extension]
-    exact hdim
+  have hJdim : (filteredHilbertPolynomial J).natDegree = m + 1 :=
+    (hasProjectiveDimensionDegree_scalar_extension hdimdeg).natDegree_eq
   have hint := projection_integral_of_geometric_center_disjoint I hI A hcenter
   have hintL := chow_projection_integral_of_center_disjoint J hJ AL hcenter
   have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms AL)).toRingHom
   have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
     (integral_projection_hilbert_dimension_eq J _ hintL).trans hJdim
-  obtain ⟨e, _, _, he⟩ := filteredHilbertPolynomial_positive_multiplicity P
-    (Ideal.IsPrime.ne_top ‹P.IsPrime›)
-  have hedegree : (filteredHilbertPolynomial P).leadingCoeff = (e : ℚ) / (m + 1).factorial := by
-    simpa only [hPdim] using he
+  obtain ⟨e, _, hPdimdeg⟩ :=
+    exists_hasAffineDimensionDegree P (Ideal.IsPrime.ne_top ‹P.IsPrime›) hPdim
   obtain ⟨G, hG, _, hGdegree, hGzero⟩ := exists_projective_chow_exact_degree P
-    (chowProjectionImageIdeal_homogeneous J hJ AL) e ⟨hPdim, hedegree⟩
+    (chowProjectionImageIdeal_homogeneous J hJ AL) e hPdimdeg
   have hδL (i) : FL.IsWeightedHomogeneous (chowRowWeight i) d := by
     intro a ha
     apply hδ i
@@ -93,7 +89,8 @@ theorem geometric_chow_restriction_irreducible_iff_birational
   rw [← chowProjectionImageIdeal_hilbertPolynomial_scalar_extension (L := L) I A] at hfield
   have hcoeff : (filteredHilbertPolynomial P).leadingCoeff =
       (filteredHilbertPolynomial I).leadingCoeff ↔ e = d := by
-    rw [hedegree, hdegree, div_left_inj' (by positivity : ((m + 1).factorial : ℚ) ≠ 0)]
+    rw [hPdimdeg.leadingCoeff_eq, hdimdeg.leadingCoeff_eq,
+      div_left_inj' (by positivity : ((m + 1).factorial : ℚ) ≠ 0)]
     exact Nat.cast_inj
   exact hir.trans ((eq_comm.trans hcoeff.symm).trans hfield)
 

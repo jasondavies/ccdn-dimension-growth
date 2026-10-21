@@ -85,10 +85,10 @@ theorem originProjectiveIdeal_hilbert_parameters {K : Type*} [Field K] (n : ℕ)
     (filteredHilbertPolynomial (originProjectiveIdeal K n)).natDegree = 1 ∧
       (filteredHilbertPolynomial (originProjectiveIdeal K n)).leadingCoeff = 1 := by
   have : (idealOfVars (Fin n) K).IsPrime := idealOfVars_isMaximal.isPrime
-  simpa [originProjectiveIdeal] using
-    projectiveClosureIdeal_hilbertPolynomial_parameters (idealOfVars (Fin n) K) 0 1
-    (by rw [idealOfVars_filteredHilbertPolynomial]; simp)
-    (by rw [idealOfVars_filteredHilbertPolynomial]; simp)
+  have h := projectiveClosureIdeal_hilbertPolynomial_parameters (idealOfVars (Fin n) K) 0 1
+    ⟨by rw [idealOfVars_filteredHilbertPolynomial]; simp,
+      by rw [idealOfVars_filteredHilbertPolynomial]; simp⟩
+  simpa [originProjectiveIdeal] using And.intro h.natDegree_eq h.leadingCoeff_eq
 
 theorem originProjectiveIdeal_chart_point {K : Type*} [Field K] {n : ℕ}
     (a : Fin n → K) :

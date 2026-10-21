@@ -30,16 +30,16 @@ theorem exists_low_degree_point_separator_of_pos_dimension
     (z : Fin n → K) (hz : ¬ ∀ f ∈ I, eval z f = 0) :
     ∃ g : MvPolynomial (Fin n) K, g ∈ I ∧ g.totalDegree ≤ d ∧ eval z g ≠ 0 := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   have hmn : m + 1 ≤ n := by
     obtain ⟨_, _, hd, _⟩ := filteredHilbertPolynomial_positive_multiplicity I
       (Ideal.IsPrime.ne_top ‹I.IsPrime›)
-    simpa only [hdim, Fintype.card_fin] using hd
-  obtain ⟨l, hl, hint, hinj⟩ := exists_linear_integral_normalization_infinite_of_le m n hmn I hdim
+    simpa only [hdimdeg.natDegree_eq, Fintype.card_fin] using hd
+  obtain ⟨l, hl, hint, hinj⟩ :=
+    exists_linear_integral_normalization_infinite_of_le m n hmn I hdimdeg.natDegree_eq
   let V := {x : Fin n → K | x ∈ idealZeroLocus I ∧
     ∀ i, eval x (l i) = eval z (l i)}
   have hV : V.Finite := linear_normalization_fiber_finite I l
-    (fun i => (hl i).totalDegree_le) hinj hint d ⟨hdim, hdegree⟩ (fun i => eval z (l i))
+    (fun i => (hl i).totalDegree_le) hinj hint d hdimdeg (fun i => eval z (l i))
   have hzV : z ∉ hV.toFinset := by
     intro h
     exact hz (hV.mem_toFinset.mp h).1
@@ -59,7 +59,7 @@ theorem exists_low_degree_point_separator_of_pos_dimension
     rw [← comp_aeval, he]
     exact hinj
   obtain ⟨F, _, _, hFd, hker⟩ :=
-    exists_hypersurface_projection_equation_degree_le I a ha d ⟨hdim, hdegree⟩ b hb hi
+    exists_hypersurface_projection_equation_degree_le I a ha d hdimdeg b hb hi
   have hintA : (projectionCoordinateMap I a).IsIntegral := by
     intro x
     apply RingHom.IsIntegralElem.of_comp (f := (aeval (R := K) b).toRingHom)

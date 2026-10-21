@@ -52,7 +52,6 @@ theorem exists_bounded_integer_closure_normalization (m k : ℕ)
       Function.Injective (projectionCoordinateMap I (fun i => integerLinearForm (a i))) ∧
       (projectionCoordinateMap (projectiveClosureIdeal I)
         (closureProjectionCoordinates (fun i => integerLinearForm (a i)))).IsIntegral := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   induction k generalizing d with
   | zero =>
     let a : Fin (m + 1) → Fin (m + 1) → ℤ := fun i j => if j = i then 1 else 0
@@ -60,8 +59,8 @@ theorem exists_bounded_integer_closure_normalization (m k : ℕ)
         Ideal.Quotient.mkₐ ℚ I := by
       ext i
       simp [projectionCoordinateMap, a, integerLinearForm_identity]
-    have hI0 : I = ⊥ := ideal_eq_bot_of_full_hilbert_dimension I
-      (Ideal.IsPrime.ne_top ‹I.IsPrime›) (by simpa only [Fintype.card_fin] using hdim)
+    have hI0 : I = ⊥ := ideal_eq_bot_of_full_hilbert_dimension I (Ideal.IsPrime.ne_top ‹I.IsPrime›)
+      (by simpa only [Fintype.card_fin] using hdimdeg.natDegree_eq)
     refine ⟨a, ?_, ?_, ?_, ?_⟩
     · intro i j
       have hH : (1 : ℤ) ≤ integerNormalizationHeight (m + 1) d := by
@@ -87,13 +86,13 @@ theorem exists_bounded_integer_closure_normalization (m k : ℕ)
       rw [heqcone]
       exact RingHom.isIntegral_of_surjective _ (Ideal.Quotient.mkₐ_surjective _ _)
   | succ k ih =>
-    obtain ⟨c, e, hc, he, hed, hintc, hprime, hdimJ, hdegreeJ, hconec⟩ :=
-      exists_fin_integer_closure_elimination_step (n := m + 1 + k) (m := m) I d ⟨hdim, hdegree⟩
+    obtain ⟨c, e, hc, he, hed, hintc, hprime, hdimdegJ, hconec⟩ :=
+      exists_fin_integer_closure_elimination_step (n := m + 1 + k) (m := m) I d hdimdeg
         (by omega)
     let ψ := projectionCoordinateMap I (fun i => integerLinearForm (c i))
     let J := RingHom.ker ψ
     have : J.IsPrime := hprime
-    obtain ⟨a, ha, hinta, hinja, hconea⟩ := ih J e hdimJ hdegreeJ
+    obtain ⟨a, ha, hinta, hinja, hconea⟩ := ih J e hdimdegJ
     let a' : Fin (m + 1) → Fin (m + 1 + (k + 1)) → ℤ :=
       fun i j => ∑ t, a i t * c t j
     let ψa := projectionCoordinateMap J (fun i => integerLinearForm (a i))

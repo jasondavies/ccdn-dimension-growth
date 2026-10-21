@@ -19,10 +19,10 @@ noncomputable section
 theorem hilbert_scaled_block_count_le_multiplicity
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) (m d r D q : ℕ) (hq : 0 < q)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
+    (hdimdeg : HasAffineDimensionDegree I m d)
     (hlow : ∀ N, r * (m + N).choose m ≤
       Module.finrank K (filteredCoordinateSpace I (D + q * N))) : r ≤ d * q ^ m := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   by_cases hr : r = 0
   · omega
   let P := Polynomial.C (r : ℚ) * Polynomial.preHilbertPoly ℚ m 0

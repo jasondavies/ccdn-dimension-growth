@@ -106,11 +106,10 @@ theorem exists_ambient_birational_projection
           (Projectivization.mk ℚ (normalizedIntegerProjection D P x.rep) hx).mulHeight ≤
             (centerProjectionHeightConstant (n + 1) : ℝ) *
               (d : ℝ) ^ (2 * (n + 1 - m - 1) ^ 2) * x.mulHeight := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   obtain ⟨M,hM,_,hli,hgood⟩ :=
-    exists_bounded_integer_birational_center hmn J hJ d ⟨hdim, hdegree⟩
+    exists_bounded_integer_birational_center hmn J hJ d hdimdeg
   obtain ⟨D,P,hdata,hdim',hheight⟩ := exists_ambient_projection_of_center (by omega)
-    (hilbert_multiplicity_pos_of_prime J hdegree) J hJ M hM hli hgood
+    (hilbert_multiplicity_pos_of_prime J hdimdeg.leadingCoeff_eq) J hJ M hM hli hgood
   exact ⟨M,D,P,hM,hli,hgood.1,hdata,hdim',hheight⟩
 
 /-- The fixed-coordinate form retains the ambient height bound, including
@@ -140,7 +139,7 @@ theorem exists_ambient_fixed_coordinate_projection
               (d : ℝ) ^ (2 * (n + 1 - m - 1) ^ 2) * x.mulHeight := by
   have := projectiveClosureIdeal_geometrically_prime (L := AlgebraicClosure ℚ) I
   obtain ⟨M,hM,_,hM0,hli,hgood⟩ :=
-    exists_bounded_integer_fixed_coordinate_center I hmn d hdim hdegree
+    exists_bounded_integer_fixed_coordinate_center I hmn d ⟨hdim, hdegree⟩
   obtain ⟨D,P,hdata,hdim',hheight⟩ := exists_ambient_projection_of_center hmn
     (hilbert_multiplicity_pos_of_prime I hdegree) _ (projectiveClosureIdeal_homogeneous I)
     M hM hli hgood

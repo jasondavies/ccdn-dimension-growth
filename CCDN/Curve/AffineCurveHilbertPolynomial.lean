@@ -30,13 +30,11 @@ lemma affineCurve_filteredHilbertPolynomial {n : ℕ}
 
 lemma affineCurve_filteredHilbertPolynomial_degree {n : ℕ}
     (I : Ideal (CoordinatePolynomial n)) (d : ℕ) (hd : 0 < d)
-    (hdegree : HasAffineCurveDegree I d) :
-    (filteredHilbertPolynomial I).natDegree = 1 ∧
-      (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) := by
+    (hdegree : HasAffineCurveDegree I d) : HasAffineDimensionDegree I 1 d := by
   obtain ⟨c, hc⟩ := affineCurve_filteredHilbertPolynomial I d hdegree
   have hd0 : (d : ℚ) ≠ 0 := by positivity
-  rw [hc]
-  exact ⟨Polynomial.natDegree_linear hd0, Polynomial.leadingCoeff_linear hd0⟩
+  exact ⟨by rw [hc, Polynomial.natDegree_linear hd0],
+    by rw [hc, Polynomial.leadingCoeff_linear hd0, Nat.factorial_one, Nat.cast_one, div_one]⟩
 
 theorem nonabsolute_affine_curve_count_le_degree_sq
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
@@ -45,9 +43,8 @@ theorem nonabsolute_affine_curve_count_le_degree_sq
     (hred : ¬ (I.map (MvPolynomial.map (algebraMap ℚ K))).IsPrime)
     {B : ℝ} (hB : 0 ≤ B) :
     (count (idealZeroLocus I) B : ℝ) ≤ (d : ℝ) ^ 2 := by
-  obtain ⟨hdim, hlc⟩ := affineCurve_filteredHilbertPolynomial_degree I d hd hdegree
-  simpa only [pow_zero, mul_one] using nonabsolute_variety_count_le_box
-    (K := K) (m := 0) I d ⟨hdim, by simpa using hlc⟩ hred hB
+  simpa only [pow_zero, mul_one] using nonabsolute_variety_count_le_box (K := K) (m := 0) I d
+    (affineCurve_filteredHilbertPolynomial_degree I d hd hdegree) hred hB
 
 end
 end CCDN

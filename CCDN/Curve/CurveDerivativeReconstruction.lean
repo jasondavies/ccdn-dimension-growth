@@ -26,8 +26,7 @@ theorem exists_derivative_reconstruction {K τ : Type*}
     [Field K] [CharZero K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
     (a : Fin 2 → MvPolynomial τ K) (ha : ∀ i, (a i).totalDegree ≤ 1)
-    (d : ℕ) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c)
+    (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (hu : Transcendental K ((Ideal.Quotient.mk I) (a 0)))
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0) (hfd : f.totalDegree = d)
     (hker : ∀ g, aeval a g ∈ I ↔ f ∣ g)

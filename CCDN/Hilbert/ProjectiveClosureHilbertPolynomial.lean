@@ -49,11 +49,9 @@ its Hilbert functions. -/
 theorem projectiveClosureIdeal_hilbertPolynomial_parameters
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (m d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
-    (filteredHilbertPolynomial (projectiveClosureIdeal I)).natDegree = m + 1 ∧
-      (filteredHilbertPolynomial (projectiveClosureIdeal I)).leadingCoeff =
-        (d : ℚ) / (m + 1).factorial := by
+    (m d : ℕ) (hdimdeg : HasAffineDimensionDegree I m d) :
+    HasProjectiveDimensionDegree (projectiveClosureIdeal I) m d := by
+  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let P := filteredHilbertPolynomial (projectiveClosureIdeal I)
   let Q := filteredHilbertPolynomial I
   have he : P.comp (Polynomial.X + Polynomial.C 1) - P =

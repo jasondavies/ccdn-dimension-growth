@@ -49,8 +49,7 @@ theorem polynomial_parameter_rank_le {K R F σ ι : Type*} [Field K] [Field R] [
     [Algebra K R] [Algebra R F] [Algebra K F] [IsScalarTower K R F]
     [Fintype σ] [Fintype ι] [DecidableEq ι]
     (I : Ideal (MvPolynomial σ K)) (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c)
+    (hdegree : HasFilteredCurveDegree I d)
     (φ : (MvPolynomial σ K ⧸ I) →ₐ[K] F)
     (l : MvPolynomial σ K) (hl : l.totalDegree ≤ 1)
     (u : R) (hu : Transcendental K u)

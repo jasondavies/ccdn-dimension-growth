@@ -27,8 +27,7 @@ lemma momentCoordinate_aeval {K L : Type*} [Field K] [Field L] [Algebra K L]
 integer moment parameter. The overlap between normalized charts is harmless. -/
 theorem exists_bounded_infinity_parameter {K L : Type*} [Field K] [Field L]
     [Algebra K L] [CharZero L] {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c) :
+    (hdegree : HasFilteredCurveDegree I d) :
     ∃ k : ℕ, k ≤ n ^ 2 * d ∧
       ∀ z ∈ MvPolynomial.zeroLocus L
         (leadingInfinityIdeal I ⊔ Ideal.span {momentCoordinate K n k}), z = 0 := by

@@ -42,20 +42,20 @@ theorem conjugate_prime_grid_card_le
     (hgrid : ∀ x ∈ s, ∀ i, x i ∈ S) :
     s.card ≤ d ^ 2 * S.card ^ m := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let J := I.map (mapEquiv (Fin n) e)
   have : J.IsPrime := Ideal.map_isPrime_of_equiv _
   have hpoly : filteredHilbertPolynomial J = filteredHilbertPolynomial I :=
     filteredHilbertPolynomial_coefficientEquiv I e
-  have hJdim : (filteredHilbertPolynomial J).natDegree = m + 1 := by rw [hpoly, hdim]
-  have hnot : ¬ J ≤ I := prime_ideal_not_le_of_same_positive_dimension J I hJdim hdim hne
+  have hJ : HasProjectiveDimensionDegree J m d := hdimdeg.of_filteredHilbertPolynomial_eq hpoly
+  have hnot : ¬ J ≤ I := prime_ideal_not_le_of_same_positive_dimension J I hJ.natDegree_eq
+    hdimdeg.natDegree_eq hne
   obtain ⟨f, hfJ, hfd, hfI⟩ := exists_low_degree_ideal_separator J I d
-    (by rw [hpoly, hdim]; exact hdegree) hnot
+    (by rw [hJ.natDegree_eq]; exact hJ.leadingCoeff_eq) hnot
   have hsectionzero (x) (hx : x ∈ s) : eval x f = 0 := by
     obtain ⟨g, hg, rfl⟩ := (Ideal.mem_map_iff_of_surjective
       (mapEquiv (Fin n) e) (mapEquiv (Fin n) e).surjective).mp hfJ
     rw [eval_coefficientEquiv_of_fixed e x (hfixed x hx), hzero x hx g hg, map_zero]
-  have hh := principal_section_grid_card_le I d ⟨hdim, hdegree⟩ f hfI S s
+  have hh := principal_section_grid_card_le I d hdimdeg f hfI S s
     hzero hsectionzero hgrid
   exact hh.trans (Nat.mul_le_mul_right _ (by simpa only [pow_two] using Nat.mul_le_mul_left d hfd))
 

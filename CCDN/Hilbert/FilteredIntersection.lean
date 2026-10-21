@@ -123,6 +123,14 @@ instance filteredCoordinateSpace_finite {K σ : Type*} [Field K] [Finite σ]
   unfold filteredCoordinateSpace
   infer_instance
 
+/-- Curve degree via the filtered Hilbert function: the dimension of the bounded-degree part
+of the coordinate ring is eventually `d * M + c`. Over `ℚ` with `σ = Fin n` this is
+`CCDN.HasAffineCurveDegree`. -/
+def HasFilteredCurveDegree {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K)) (d : ℕ) :
+    Prop :=
+  ∃ N : ℕ, ∃ c : ℤ, ∀ M ≥ N,
+    (Module.finrank K (filteredCoordinateSpace I M) : ℤ) = (d : ℤ) * M + c
+
 /-- The filtered Koszul rank bound, before evaluating the monomial-space dimensions.
 It applies to every ideal containing the two equations. -/
 theorem filteredCoordinateSpace_finrank_bound {K σ : Type*} [Field K] [Finite σ]

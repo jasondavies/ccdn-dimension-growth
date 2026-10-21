@@ -49,8 +49,7 @@ source's affine Hilbert degree. -/
 theorem plane_projection_equation_degree_le {K τ : Type*} [Field K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) (a : Fin 2 → MvPolynomial τ K)
     (ha : ∀ i, (a i).totalDegree ≤ 1) (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c)
+    (hdegree : HasFilteredCurveDegree I d)
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0)
     (hker : RingHom.ker (projectionCoordinateMap I a) = Ideal.span {f}) :
     f.totalDegree ≤ d := by
@@ -68,8 +67,7 @@ irreducible equation of positive degree at most d and no extra kernel relations.
 theorem exists_plane_projection_equation_degree_le {K τ : Type*} [Field K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
     (a : Fin 2 → MvPolynomial τ K) (ha : ∀ i, (a i).totalDegree ≤ 1)
-    (d : ℕ) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c)
+    (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (j : Fin 2) (hj : Transcendental K ((Ideal.Quotient.mk I) (a j))) :
     ∃ f : MvPolynomial (Fin 2) K, Irreducible f ∧ 0 < f.totalDegree ∧ f.totalDegree ≤ d ∧
       ∀ g, aeval a g ∈ I ↔ f ∣ g := by

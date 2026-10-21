@@ -19,29 +19,24 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
-def closurePolynomialFieldMap {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K))
-    [Algebra (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
-    [IsScalarTower K (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F] :
+variable {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ}
+  (I : Ideal (MvPolynomial (Fin n) K))
+  [Algebra (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
+  [IsScalarTower K (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
+
+def closurePolynomialFieldMap :
     (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I) →ₐ[K] F :=
   (IsScalarTower.toAlgHom K (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F).comp
     (closurePolynomialQuotientMap I)
 
-lemma closurePolynomialFieldMap_mk {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K))
-    [Algebra (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
-    [IsScalarTower K (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
-    (f : MvPolynomial (Fin (n + 1)) K) :
+lemma closurePolynomialFieldMap_mk (f : MvPolynomial (Fin (n + 1)) K) :
     closurePolynomialFieldMap (F := F) I (Ideal.Quotient.mk (projectiveClosureIdeal I) f) =
       algebraMap (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F
         (projectiveClosurePolynomialMap I f) := rfl
 
-theorem closure_polynomial_coordinates_generate
-    {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
-    [IsScalarTower K (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
-    [IsFractionRing (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F] :
+variable [I.IsPrime] [IsFractionRing (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
+
+theorem closure_polynomial_coordinates_generate :
     IntermediateField.adjoin K (Set.range (fun i : Fin (n + 1) =>
       closurePolynomialFieldMap (F := F) I
         (Ideal.Quotient.mk (projectiveClosureIdeal I) (X i)))) = ⊤ := by
@@ -99,12 +94,7 @@ theorem closure_polynomial_coordinates_generate
 
 /-- The cone embedding realizes any fraction field of A[t] as a
 fraction field of the closure's homogeneous coordinate ring. -/
-theorem closure_polynomial_field_isFractionRing
-    {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [Algebra (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
-    [IsScalarTower K (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
-    [IsFractionRing (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F] :
+theorem closure_polynomial_field_isFractionRing :
     let : Algebra (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I) F :=
       (closurePolynomialFieldMap (F := F) I).toRingHom.toAlgebra
     IsFractionRing (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I) F := by

@@ -37,21 +37,18 @@ theorem chow_restriction_irreducible_iff_birational_over_closed_field
     Irreducible (chowLinearSubstitution A F) ↔
       projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 2)) K ⧸ J))
         J (chowProjectionForms A) = ⊤ := by
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let P := chowProjectionImageIdeal J A
   let R := chowLinearSubstitution A F
   have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
   have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
   have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
-    (integral_projection_hilbert_dimension_eq J _ hint).trans hdim
-  obtain ⟨e,_,_,he⟩ := filteredHilbertPolynomial_positive_multiplicity P
-    (Ideal.IsPrime.ne_top ‹P.IsPrime›)
-  have hedegree : (filteredHilbertPolynomial P).leadingCoeff = (e : ℚ) / (m + 1).factorial := by
-    simpa only [hPdim] using he
+    (integral_projection_hilbert_dimension_eq J _ hint).trans hdimdeg.natDegree_eq
+  obtain ⟨e,_,hPdimdeg⟩ :=
+    exists_hasAffineDimensionDegree P (Ideal.IsPrime.ne_top ‹P.IsPrime›) hPdim
   obtain ⟨G,hG,_,hGdegree,hGzero⟩ := exists_projective_chow_exact_degree P
-    (chowProjectionImageIdeal_homogeneous J hJ A) e ⟨hPdim, hedegree⟩
-  have hRne : R ≠ 0 :=
-    (chowLinearSubstitution_ne_zero_iff_center_disjoint J hJ hdim A F hzero).mpr hcenter
+    (chowProjectionImageIdeal_homogeneous J hJ A) e hPdimdeg
+  have hRne : R ≠ 0 := (chowLinearSubstitution_ne_zero_iff_center_disjoint J hJ
+    hdimdeg.natDegree_eq A F hzero).mpr hcenter
   have hRdegree : R.totalDegree = (m + 1) * d :=
     (chowLinearSubstitution_totalDegree_of_ne_zero A F hF.ne_zero (fun _ => d) hδ hRne).trans
       (chow_uniform_row_degree_totalDegree F hF.ne_zero d hδ)
@@ -65,7 +62,8 @@ theorem chow_restriction_irreducible_iff_birational_over_closed_field
     (filteredHilbertPolynomial J).leadingCoeff ↔ _ at hfield
   have hcoeff : (filteredHilbertPolynomial P).leadingCoeff =
       (filteredHilbertPolynomial J).leadingCoeff ↔ e = d := by
-    rw [hedegree,hdegree,div_left_inj' (by positivity : ((m + 1).factorial : ℚ) ≠ 0)]
+    rw [hPdimdeg.leadingCoeff_eq,hdimdeg.leadingCoeff_eq,
+      div_left_inj' (by positivity : ((m + 1).factorial : ℚ) ≠ 0)]
     exact Nat.cast_inj
   exact hir.trans ((eq_comm.trans hcoeff.symm).trans hfield)
 

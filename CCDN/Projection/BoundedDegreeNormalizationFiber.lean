@@ -40,7 +40,6 @@ theorem bounded_degree_normalization_fiber_card_le_of_fractionField
     (hproj : ∀ x ∈ s, ∀ i, eval x (l i) = z i) :
     s.card ≤ d * q ^ (m + 1) := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let A := MvPolynomial (Fin n) K ⧸ I
   let η : A →ₐ[K] E := IsScalarTower.toAlgHom K A E
   let v : Fin (m + 1) → E := fun i => η ((Ideal.Quotient.mk I) (l i))
@@ -53,8 +52,7 @@ theorem bounded_degree_normalization_fiber_card_le_of_fractionField
   have hiR : AlgebraicIndependent K u :=
     AlgebraicIndependent.of_comp (x := u) R.val hiE
   obtain ⟨hfinite, hrank⟩ := bounded_degree_hilbert_functionField_finite_rank_le (R := R) (F := E) I d q hq
-    (by simpa only [Fintype.card_fin] using hdim)
-    (by simpa only [Fintype.card_fin] using hdegree) l hl u hiR (fun _ => rfl)
+    (by simpa only [Fintype.card_fin] using hdimdeg) l hl u hiR (fun _ => rfl)
   let : Module.Finite R E := hfinite
   let P := MvPolynomial (Fin (m + 1)) K
   let ψ : P →ₐ[K] A := projectionCoordinateMap I l

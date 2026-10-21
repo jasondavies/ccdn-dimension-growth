@@ -66,8 +66,7 @@ of the curve's affine Hilbert degree and the section degree many distinct points
 theorem polynomial_section_card_le_degree {K σ ι : Type*} [Field K] [Fintype σ]
     [Fintype ι] [DecidableEq ι]
     (p : Ideal (MvPolynomial σ K)) [p.IsPrime] (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace p n) : ℤ) = (d : ℤ) * n + c)
+    (hdegree : HasFilteredCurveDegree p d)
     (l : MvPolynomial σ K) (hl : l ∉ p) (m : ℕ) (hld : l.totalDegree ≤ m)
     (z : ι → σ → K) (hz : Function.Injective z)
     (hzp : ∀ i, z i ∈ idealZeroLocus p) (hzl : ∀ i, MvPolynomial.eval (z i) l = 0) :

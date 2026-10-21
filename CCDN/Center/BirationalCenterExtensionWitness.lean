@@ -129,14 +129,13 @@ theorem exists_fixed_coordinate_birational_center_matrix_over_extension
     [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     [((projectiveClosureIdeal I).map (map (algebraMap K L))).IsPrime]
     (hmn : m + 1 ≤ n + 1) (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
+    (hdimdeg : HasAffineDimensionDegree I m d) :
     ∃ A : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) L,
       LinearIndependent L A.row ∧ (∀ i, A i 0 = 0) ∧
       IsBirationalMatrixCenter ((projectiveClosureIdeal I).map (map (algebraMap K L))) A := by
   let : CharZero L := charZero_of_injective_algebraMap (algebraMap K L).injective
   obtain ⟨A,hA,hA0,hdis,hint,hfield⟩ :=
-    exists_fixed_coordinate_birational_minor_center (L := AlgebraicClosure L) I hmn d hdim hdegree
+    exists_fixed_coordinate_birational_minor_center (L := AlgebraicClosure L) I hmn d hdimdeg
   refine ⟨_,linearIndependent_matrix_rows_map _ A hA,fun i => ?_,
     isBirationalMatrixCenter_map_of_finite_birational _ (projectiveClosureIdeal_homogeneous I)
       (by omega) A hA ?_ hint hfield⟩

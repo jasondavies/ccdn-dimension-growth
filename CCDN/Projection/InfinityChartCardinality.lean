@@ -41,8 +41,7 @@ most the original affine Hilbert degree, over any extension field. -/
 theorem infinity_chart_card_le_degree {K L σ ι : Type*} [Field K] [Field L]
     [Algebra K L] [Fintype σ] [Fintype ι]
     (I : Ideal (MvPolynomial σ K)) (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c)
+    (hdegree : HasFilteredCurveDegree I d)
     (z : ι → σ → L) (hz : ∀ i, z i ∈ MvPolynomial.zeroLocus L (leadingInfinityIdeal I))
     (hinj : Function.Injective z) (j : σ) (hj : ∀ i, z i j = 1) :
     Fintype.card ι ≤ d := by
@@ -57,8 +56,7 @@ theorem infinity_chart_card_le_degree {K L σ ι : Type*} [Field K] [Field L]
 points, not merely a bound for already finite subsets. -/
 theorem exists_finite_infinity_chart {K L σ : Type*} [Field K] [Field L]
     [Algebra K L] [Fintype σ] (I : Ideal (MvPolynomial σ K)) (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c)
+    (hdegree : HasFilteredCurveDegree I d)
     (j : σ) :
     ∃ S : Finset (σ → L), S.card ≤ d ∧ ∀ z,
       z ∈ S ↔ z ∈ MvPolynomial.zeroLocus L (leadingInfinityIdeal I) ∧ z j = 1 := by

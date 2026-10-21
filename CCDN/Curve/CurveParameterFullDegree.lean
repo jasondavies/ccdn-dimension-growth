@@ -25,8 +25,7 @@ theorem curve_parameter_full_degree_of_recurrence {K F σ : Type*}
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
     [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
     [IsFractionRing (MvPolynomial σ K ⧸ I) F]
-    (d : ℕ) (hdegree : ∃ M : ℕ, ∃ c : ℤ, ∀ n ≥ M,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c)
+    (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (l : MvPolynomial σ K) (hl : l.totalDegree ≤ 1)
     (he : algebraMap (MvPolynomial σ K ⧸ I) F ((Ideal.Quotient.mk I) l) =
       algebraMap (RatFunc K) F RatFunc.X)

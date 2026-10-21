@@ -31,8 +31,7 @@ theorem exists_full_degree_primitive_projection {K F : Type*}
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
     [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
     [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
-    (d : ℕ) (hdegree : ∃ M : ℕ, ∃ c : ℤ, ∀ m ≥ M,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c)
+    (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (l : MvPolynomial (Fin n) K) (hl : l.totalDegree ≤ 1)
     (he : algebraMap (MvPolynomial (Fin n) K ⧸ I) F ((Ideal.Quotient.mk I) l) =
       algebraMap (RatFunc K) F RatFunc.X)
