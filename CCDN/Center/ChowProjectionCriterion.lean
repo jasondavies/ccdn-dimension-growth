@@ -49,6 +49,26 @@ theorem chowLinearSubstitution_totalDegree_of_ne_zero
     (fun i => chowLinearSubstitution_row_homogeneous A i F (δ i) (hδ i))
   exact (hRhom.totalDegree hR).trans ((chow_rows_homogeneous_total_degree F δ hδ).totalDegree hF).symm
 
+/-- For a center disjoint from the projective variety of `J`, the image ideal of the
+projection has the same dimension, so it has a projective Chow equation without charts. -/
+theorem exists_chow_projection_image_equation
+    {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
+    (hJ : IsHomogeneousIdeal J)
+    (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
+    (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
+    (hcenter : ∀ p ∈ projectiveIdealZeroLocus J, A *ᵥ p.rep ≠ 0) :
+    ∃ (G : MvPolynomial (Fin (m + 1) × Fin (s + 2)) K) (ε : Fin (m + 1) → ℕ),
+      Irreducible G ∧ (∀ i, G.IsWeightedHomogeneous (chowRowWeight i) (ε i)) ∧
+      ∀ U, eval U G = 0 ↔
+        U ∈ projectiveChowIncidenceLocus (m + 1) (chowProjectionImageIdeal J A) := by
+  have : (chowProjectionImageIdeal J A).IsPrime :=
+    RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
+  have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
+  exact exists_projective_chow_equation_without_chart _
+    (chowProjectionImageIdeal_homogeneous J hJ A)
+    ((integral_projection_hilbert_dimension_eq J _ hint).trans hdim)
+
 theorem chowLinearSubstitution_ne_zero_iff_center_disjoint
     {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
@@ -62,13 +82,7 @@ theorem chowLinearSubstitution_ne_zero_iff_center_disjoint
   constructor
   · exact center_disjoint_of_chowLinearSubstitution_ne_zero J A F hF
   · intro hcenter
-    let P := chowProjectionImageIdeal J A
-    have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
-    have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
-    have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
-      (integral_projection_hilbert_dimension_eq J _ hint).trans hdim
-    obtain ⟨G,_,hG,_,hGzero⟩ := exists_projective_chow_equation_without_chart P
-      (chowProjectionImageIdeal_homogeneous J hJ A) hPdim
+    obtain ⟨G,_,hG,_,hGzero⟩ := exists_chow_projection_image_equation J hJ hdim A hcenter
     obtain ⟨c,k,hc,_,he⟩ := polynomial_eq_scalar_pow_of_same_zeros G
       (chowLinearSubstitution A F) hG
       (chowLinearSubstitution_same_zeros_as_image J hJ A hcenter F G hF hGzero)
@@ -96,14 +110,8 @@ theorem exists_chow_projection_power
       chowLinearSubstitution A F = C c * G ^ k ∧
       (chowLinearSubstitution A F).totalDegree = F.totalDegree ∧
       (Irreducible (chowLinearSubstitution A F) ↔ F.totalDegree = G.totalDegree) := by
-  let P := chowProjectionImageIdeal J A
-  have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
-  have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
-  have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
-    (integral_projection_hilbert_dimension_eq J _ hint).trans hdim
   obtain ⟨F,δ,hF,hδ,hFzero⟩ := exists_projective_chow_equation_without_chart J hJ hdim
-  obtain ⟨G,ε,hG,hε,hGzero⟩ := exists_projective_chow_equation_without_chart P
-    (chowProjectionImageIdeal_homogeneous J hJ A) hPdim
+  obtain ⟨G,ε,hG,hε,hGzero⟩ := exists_chow_projection_image_equation J hJ hdim A hcenter
   have hzero := chowLinearSubstitution_same_zeros_as_image J hJ A hcenter F G hFzero hGzero
   obtain ⟨c,k,hc,hk,hpow⟩ := polynomial_eq_scalar_pow_of_same_zeros G
     (chowLinearSubstitution A F) hG hzero

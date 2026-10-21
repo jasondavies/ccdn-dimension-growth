@@ -7,8 +7,7 @@ module
 
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
 import CCDN.Height.LinearParameterPrimitive
-import CCDN.Hilbert.HilbertLinearCoordinates
-import CCDN.Projection.HilbertProjectionDegree
+import CCDN.Projection.LeadingCoordinateExtension
 /-! A bounded finite birational affine projection constructed from a
 normalization that remains finite at infinity. The degree-preservation step
 is supplied separately by comparison of the projective closures. -/
@@ -40,49 +39,21 @@ theorem exists_bounded_affine_birational_projection
           Ideal.span {f} := by
   classical
   let n := m + 1 + k
-  let A := MvPolynomial (Fin n) ℚ ⧸ I
-  let F := FractionRing A
+  let F := FractionRing (MvPolynomial (Fin n) ℚ ⧸ I)
   obtain ⟨a, ha, hinta, hinja, hcone⟩ :=
     exists_bounded_integer_closure_normalization m k I d hdimdeg
   let l : Fin (m + 1) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (a i)
   obtain ⟨t, ht, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
     I l (fun i => integerLinearForm_degree (a i)) hinja d hdimdeg
-  let b : Fin (m + 2) → Fin n → ℤ :=
-    Fin.cases (fun j => (t : ℤ) ^ j.val) a
+  let b : Fin (m + 2) → Fin n → ℤ := Fin.cases (fun j => (t : ℤ) ^ j.val) a
   let l' : Fin (m + 2) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
-  have hl' : l' = Fin.cases (momentCoordinate ℚ n t) l := by
-    funext i
-    refine Fin.cases ?_ (fun _ => rfl) i
-    simp only [l', b, Fin.cases_zero, integerLinearForm, momentCoordinate, Int.cast_pow,
-      Int.cast_natCast]
-  have hfield' : IntermediateField.adjoin ℚ
-      (Set.range (fun i => algebraMap A F ((Ideal.Quotient.mk I) (l' i)))) = ⊤ := by
-    rwa [hl']
-  let ψ := projectionCoordinateMap I l'
-  have heq : ψ.comp (rename Fin.succ) = projectionCoordinateMap I l := by
-    ext i
-    simp only [AlgHom.comp_apply, rename_X, projectionCoordinateMap, aeval_X,
-      Ideal.Quotient.mkₐ_eq_mk]
-    change (Ideal.Quotient.mk I) (aeval l' (X i.succ)) = (Ideal.Quotient.mk I) (l i)
-    rw [aeval_X]
-    rfl
-  have hint : ψ.IsIntegral := by
-    apply RingHom.IsIntegral.tower_top (rename Fin.succ).toRingHom ψ.toRingHom
-    change (ψ.comp (rename Fin.succ)).IsIntegral
-    rwa [heq]
-  have hAI : AlgebraicIndependent ℚ (fun i : Fin (m + 1) => ψ (X i.succ)) := by
-    have hi : AlgebraicIndependent ℚ (fun i => (Ideal.Quotient.mk I) (l i)) := by
-      change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (l i)))
-      rw [← projectionCoordinateMap_eq_aeval]
-      exact hinja
-    convert hi using 1
-    funext i
-    change (Ideal.Quotient.mk I) (aeval l' (X i.succ)) = (Ideal.Quotient.mk I) (l i)
-    rw [aeval_X]
-    rfl
-  obtain ⟨f, hf, hfpos, hfd, hker⟩ := exists_hypersurface_projection_equation_degree_le
-    I l' (fun i => integerLinearForm_degree (b i)) d hdimdeg
-    (fun i => X i.succ) (fun _ => by simp) hAI
+  have hfield' : IntermediateField.adjoin ℚ (Set.range (fun i =>
+      algebraMap _ F ((Ideal.Quotient.mk I) (l' i)))) = ⊤ := by
+    have hl : l' = Fin.cases (momentCoordinate ℚ n t) (fun i => integerLinearForm (a i)) :=
+      integerLinearForm_moment_cons t a
+    rwa [hl]
+  obtain ⟨f, hf, hfpos, hfd, hker⟩ := exists_extended_projection_equation_degree_le
+    I l' (fun i => integerLinearForm_degree (b i)) hinja d hdimdeg
   have hcone' : (projectionCoordinateMap (projectiveClosureIdeal I)
       (closureProjectionCoordinates l')).IsIntegral := by
     let ι : Fin (m + 2) → Fin (m + 3) := Fin.cases 0 (fun i => i.succ.succ)
@@ -96,19 +67,9 @@ theorem exists_bounded_affine_birational_projection
     apply RingHom.IsIntegral.tower_top (rename ι).toRingHom ψcone.toRingHom
     change (ψcone.comp (rename ι)).IsIntegral
     rwa [heqcone]
-  refine ⟨b, ?_, hinta, hinja, hint, hfield', hcone', f, hf, hfpos, hfd, hker⟩
-  intro i j
-  refine Fin.cases ?_ (fun s => ?_) i
-  · change |(t : ℤ) ^ j.val| ≤ _
-    rw [abs_pow, abs_of_nonneg (Nat.cast_nonneg t)]
-    have hp : t ^ j.val ≤ (n * d ^ 2 + 1) ^ n := by
-      calc
-        _ ≤ (n * d ^ 2 + 1) ^ j.val :=
-          Nat.pow_le_pow_left (ht.trans (Nat.le_succ _)) _
-        _ ≤ _ := Nat.pow_le_pow_right (by omega) (Nat.le_of_lt j.isLt)
-    exact_mod_cast hp.trans (le_max_right (integerNormalizationHeight n d) _)
-  · exact (ha s j).trans (by
-      exact_mod_cast le_max_left (integerNormalizationHeight n d) ((n * d ^ 2 + 1) ^ n))
+  exact ⟨b, moment_cons_abs_le_integerBirationalProjectionHeight ht a ha, hinta, hinja,
+    projectionCoordinateMap_isIntegral_of_tail I l' hinta, hfield', hcone', f, hf, hfpos, hfd,
+    hker⟩
 
 end
 end CCDN

@@ -7,12 +7,9 @@ module
 
 public import CCDN.Projection.BoundedIntegerNormalization
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Curve.CurvePrimitivePair
 import CCDN.Height.LinearParameterPrimitive
-import CCDN.Hilbert.HilbertLinearCoordinates
-import CCDN.Hilbert.PrincipalHilbertPolynomial
-import CCDN.Projection.HilbertProjectionDegree
-import CCDN.Projection.HomogeneousFiniteProjectionDegree
-import CCDN.Projection.HomogeneousProjectionEquation
+import CCDN.Projection.LeadingCoordinateExtension
 /-! A bounded integer linear finite birational projection of a
 homogeneous prime quotient to a hypersurface of exactly the same degree. -/
 
@@ -23,6 +20,40 @@ open MvPolynomial
 
 def integerBirationalProjectionHeight (n d : ℕ) : ℕ :=
   max (integerNormalizationHeight n d) ((n * d ^ 2 + 1) ^ n)
+
+/-- The birational projection height is at least one. -/
+lemma integerBirationalProjectionHeight_one_le (n d : ℕ) :
+    1 ≤ integerBirationalProjectionHeight n d :=
+  (integerNormalizationHeight_pos n d).trans_le (le_max_left _ _)
+
+/-- Prepending the integer moment row `(t ^ j)_j` to integer rows realizes the moment
+coordinate as the leading linear form. -/
+theorem integerLinearForm_moment_cons {m n : ℕ} (t : ℕ) (a : Fin (m + 1) → Fin n → ℤ) :
+    (fun i => integerLinearForm
+      ((Fin.cases (fun j => (t : ℤ) ^ j.val) a : Fin (m + 2) → Fin n → ℤ) i)) =
+      Fin.cases (momentCoordinate ℚ n t) (fun i => integerLinearForm (a i)) := by
+  funext i
+  refine Fin.cases ?_ (fun _ => rfl) i
+  simp only [Fin.cases_zero, integerLinearForm, momentCoordinate, Int.cast_pow, Int.cast_natCast]
+
+/-- Prepending the moment row with parameter `t ≤ n d²` to rows bounded by the normalization
+height keeps every entry within the birational projection height. -/
+theorem moment_cons_abs_le_integerBirationalProjectionHeight {m n d t : ℕ}
+    (ht : t ≤ n * d ^ 2) (a : Fin (m + 1) → Fin n → ℤ)
+    (ha : ∀ i j, |a i j| ≤ integerNormalizationHeight n d) (i : Fin (m + 2)) (j : Fin n) :
+    |(Fin.cases (fun j => (t : ℤ) ^ j.val) a : Fin (m + 2) → Fin n → ℤ) i j| ≤
+      integerBirationalProjectionHeight n d := by
+  refine Fin.cases ?_ (fun s => ?_) i
+  · change |(t : ℤ) ^ j.val| ≤ _
+    rw [abs_pow, abs_of_nonneg (Nat.cast_nonneg t)]
+    have hp : t ^ j.val ≤ (n * d ^ 2 + 1) ^ n := by
+      calc
+        _ ≤ (n * d ^ 2 + 1) ^ j.val :=
+          Nat.pow_le_pow_left (ht.trans (Nat.le_succ _)) _
+        _ ≤ _ := Nat.pow_le_pow_right (by omega) (Nat.le_of_lt j.isLt)
+    exact_mod_cast hp.trans (le_max_right (integerNormalizationHeight n d) _)
+  · exact (ha s j).trans (by
+      exact_mod_cast le_max_left (integerNormalizationHeight n d) ((n * d ^ 2 + 1) ^ n))
 
 /-- A bounded primitive augmentation of the constructed normalization
 produces a homogeneous irreducible equation of exactly the original degree. -/
@@ -46,75 +77,23 @@ theorem exists_bounded_birational_hypersurface_projection
         RingHom.ker (projectionCoordinateMap I (fun i => integerLinearForm (b i))) =
           Ideal.span {f} := by
   classical
-  obtain ⟨hdim, hdegree⟩ := hdimdeg
   let n := m + 1 + k
-  let A := MvPolynomial (Fin n) ℚ ⧸ I
-  let F := FractionRing A
-  obtain ⟨a, ha, hinta, hinja⟩ :=
-    exists_bounded_integer_normalization m k I d ⟨hdim, hdegree⟩
-  let l : Fin (m + 1) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (a i)
+  let F := FractionRing (MvPolynomial (Fin n) ℚ ⧸ I)
+  obtain ⟨a, ha, hinta, hinja⟩ := exists_bounded_integer_normalization m k I d hdimdeg
   obtain ⟨t, ht, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I l (fun i => integerLinearForm_degree (a i)) hinja d ⟨hdim, hdegree⟩
-  let b : Fin (m + 2) → Fin n → ℤ :=
-    Fin.cases (fun j => (t : ℤ) ^ j.val) a
-  let l' : Fin (m + 2) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
-  have hl' : l' = Fin.cases (momentCoordinate ℚ n t) l := by
-    funext i
-    refine Fin.cases ?_ (fun _ => rfl) i
-    simp only [l', b, Fin.cases_zero, integerLinearForm, momentCoordinate, Int.cast_pow,
-      Int.cast_natCast]
-  have hfield' : IntermediateField.adjoin ℚ
-      (Set.range (fun i => algebraMap A F ((Ideal.Quotient.mk I) (l' i)))) = ⊤ := by
-    rwa [hl']
-  let ψ := projectionCoordinateMap I l'
-  have heq : ψ.comp (rename Fin.succ) = projectionCoordinateMap I l := by
-    ext i
-    simp only [AlgHom.comp_apply, rename_X, projectionCoordinateMap, aeval_X,
-      Ideal.Quotient.mkₐ_eq_mk]
-    change (Ideal.Quotient.mk I) (aeval l' (X i.succ)) = (Ideal.Quotient.mk I) (l i)
-    rw [aeval_X]
-    rfl
-  have hint : ψ.IsIntegral := by
-    apply RingHom.IsIntegral.tower_top (rename Fin.succ).toRingHom ψ.toRingHom
-    change (ψ.comp (rename Fin.succ)).IsIntegral
-    rwa [heq]
-  have hAI : AlgebraicIndependent ℚ (fun i : Fin (m + 1) => ψ (X i.succ)) := by
-    have hi : AlgebraicIndependent ℚ (fun i => (Ideal.Quotient.mk I) (l i)) := by
-      change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (l i)))
-      rw [← projectionCoordinateMap_eq_aeval]
-      exact hinja
-    convert hi using 1
-    funext i
-    change (Ideal.Quotient.mk I) (aeval l' (X i.succ)) = (Ideal.Quotient.mk I) (l i)
-    rw [aeval_X]
-    rfl
-  obtain ⟨f, hf, hfpos, _, hker⟩ := exists_hypersurface_projection_equation_degree_le
-    I l' (fun i => integerLinearForm_degree (b i)) d ⟨hdim, hdegree⟩
-    (fun i => X i.succ) (fun _ => by simp) hAI
-  have hlhom (i) : (l' i).IsHomogeneous 1 := integerLinearForm_isHomogeneous (b i)
-  have hlead := homogeneous_finite_birational_projection_leadingCoeff_eq
-    (F := F) I hI l' hlhom hint hfield'
-  rw [hker, principal_filteredHilbertPolynomial_leadingCoeff f hf.ne_zero hfpos,
-    hdegree] at hlead
-  have hfdeg : f.totalDegree = d := by
-    have hh := (div_left_inj' (by positivity : ((m + 1).factorial : ℚ) ≠ 0)).mp hlead
-    exact_mod_cast hh
-  have hfhom : f.IsHomogeneous d := by
-    rw [← hfdeg]
-    exact homogeneous_projection_equation I hI l' hlhom f hf.ne_zero hker
-  refine ⟨b, ?_, hinta, hinja, hint, hfield', f, hf, hfhom, hfdeg, hker⟩
-  intro i j
-  refine Fin.cases ?_ (fun s => ?_) i
-  · change |(t : ℤ) ^ j.val| ≤ _
-    rw [abs_pow, abs_of_nonneg (Nat.cast_nonneg t)]
-    have hp : t ^ j.val ≤ (n * d ^ 2 + 1) ^ n := by
-      calc
-        _ ≤ (n * d ^ 2 + 1) ^ j.val :=
-          Nat.pow_le_pow_left (ht.trans (Nat.le_succ _)) _
-        _ ≤ _ := Nat.pow_le_pow_right (by omega) (Nat.le_of_lt j.isLt)
-    exact_mod_cast hp.trans (le_max_right (integerNormalizationHeight n d) _)
-  · exact (ha s j).trans (by
-      exact_mod_cast le_max_left (integerNormalizationHeight n d) ((n * d ^ 2 + 1) ^ n))
+    I _ (fun i => integerLinearForm_degree (a i)) hinja d hdimdeg
+  let b : Fin (m + 2) → Fin n → ℤ := Fin.cases (fun j => (t : ℤ) ^ j.val) a
+  let l : Fin (m + 2) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
+  have hfield' : IntermediateField.adjoin ℚ (Set.range (fun i =>
+      algebraMap _ F ((Ideal.Quotient.mk I) (l i)))) = ⊤ := by
+    have hl : l = Fin.cases (momentCoordinate ℚ n t) (fun i => integerLinearForm (a i)) :=
+      integerLinearForm_moment_cons t a
+    rwa [hl]
+  obtain ⟨f, hf, hfhom, hfdeg, _, hker⟩ := exists_homogeneous_extended_projection_equation
+    (F := F) I hI l (fun i => integerLinearForm_isHomogeneous (b i)) hinta hinja hfield' d
+    hdimdeg
+  exact ⟨b, moment_cons_abs_le_integerBirationalProjectionHeight ht a ha, hinta, hinja,
+    projectionCoordinateMap_isIntegral_of_tail I l hinta, hfield', f, hf, hfhom, hfdeg, hker⟩
 
 /-- The same construction without fixing an additive presentation of the
 ambient number of variables. -/

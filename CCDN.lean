@@ -784,6 +784,7 @@ public import CCDN.Projection.IntegralFiberRank
 public import CCDN.Projection.IntegralProjectionClosedImage
 public import CCDN.Projection.IntegralProjectionFiberCount
 public import CCDN.Projection.IntegralProjectionHilbert
+public import CCDN.Projection.LeadingCoordinateExtension
 public import CCDN.Projection.LinearNormalizationFiberCount
 public import CCDN.Projection.LinearNormalizationInfinite
 public import CCDN.Projection.LinearProjectionFiltration
