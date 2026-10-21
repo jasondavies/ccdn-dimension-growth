@@ -7,6 +7,7 @@ module
 
 import all ArithmeticHeights.BombieriVaaler
 public import ArithmeticHeights.BombieriVaaler
+public import CCDN.Algebra.OriginShift
 public import CCDN.Determinant.LocalDeterminant
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 import CCDN.Determinant.BlockDeterminant
@@ -20,57 +21,42 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def planeTranslate (a : Fin 2 → ℤ) :
-    MvPolynomial (Fin 2) ℤ →+* MvPolynomial (Fin 2) ℤ :=
-  eval₂Hom C (fun j => X j + C (a j))
-
-lemma eval_planeTranslate (a x : Fin 2 → ℤ) (f : MvPolynomial (Fin 2) ℤ) :
-    eval x (planeTranslate a f) = eval (fun j => x j + a j) f := by
-  induction f using MvPolynomial.induction_on with
-  | C c => simp [planeTranslate]
-  | add f g hf hg => simp only [map_add, hf, hg]
-  | mul_X f j hf =>
-    rw [map_mul, map_mul, hf, map_mul]
-    simp only [planeTranslate, eval₂Hom_X', eval_add, eval_X, eval_C]
-
 /-- Singular local divisibility at an arbitrary integral representative of a
 residue point; multiplicity is measured on the translated reduction. -/
 theorem singular_plane_chart_det_divisibility_mod {p μ s : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ) (F : Fin s → MvPolynomial (Fin 2) ℤ)
     (x : Fin s → Fin 2 → ℤ) (a : Fin 2 → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) (planeTranslate a f) ∈
+    (hf : map (Int.castRingHom (ZMod p)) (originShift a f) ∈
       idealOfVars (Fin 2) (ZMod p) ^ μ)
-    (hμ : homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (planeTranslate a f)) ≠ 0)
+    (hμ : homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (originShift a f)) ≠ 0)
     (hx : ∀ i j, (p : ℤ) ∣ x i j - a j)
     (hfx : ∀ i, (p : ℤ) ^ multiplicityExponent s μ ∣ eval (x i) f) :
     (p : ℤ) ^ multiplicityExponent s μ ∣
       (Matrix.of fun i j => eval (x i) (F j)).det := by
   have he (i : Fin s) (u : MvPolynomial (Fin 2) ℤ) :
-      eval (fun j => x i j - a j) (planeTranslate a u) = eval (x i) u := by
-    rw [eval_planeTranslate]
-    simp only [sub_add_cancel]
-  have h := singular_plane_pow_dvd_det_mod (planeTranslate a f) hf hμ
+      eval (fun j => x i j - a j) (originShift a u) = eval (x i) u := by
+    exact eval_sub_originShift a (x i) u
+  have h := singular_plane_pow_dvd_det_mod (originShift a f) hf hμ
     (fun i j => x i j - a j) hx (fun i => by rw [he]; exact hfx i)
-    (fun j => planeTranslate a (F j))
+    (fun j => originShift a (F j))
   simpa only [he] using h
 
 /-- Exact integral zeros satisfy the finite-precision version at every precision. -/
 theorem singular_plane_chart_det_divisibility {p μ s : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ) (F : Fin s → MvPolynomial (Fin 2) ℤ)
     (x : Fin s → Fin 2 → ℤ) (a : Fin 2 → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) (planeTranslate a f) ∈
+    (hf : map (Int.castRingHom (ZMod p)) (originShift a f) ∈
       idealOfVars (Fin 2) (ZMod p) ^ μ)
-    (hμ : homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (planeTranslate a f)) ≠ 0)
+    (hμ : homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (originShift a f)) ≠ 0)
     (hx : ∀ i j, (p : ℤ) ∣ x i j - a j) (hfx : ∀ i, eval (x i) f = 0) :
     (p : ℤ) ^ multiplicityExponent s μ ∣
       (Matrix.of fun i j => eval (x i) (F j)).det := by
   have he (i : Fin s) (u : MvPolynomial (Fin 2) ℤ) :
-      eval (fun j => x i j - a j) (planeTranslate a u) = eval (x i) u := by
-    rw [eval_planeTranslate]
-    simp only [sub_add_cancel]
-  have h := singular_plane_pow_dvd_det (planeTranslate a f) hf hμ
+      eval (fun j => x i j - a j) (originShift a u) = eval (x i) u := by
+    exact eval_sub_originShift a (x i) u
+  have h := singular_plane_pow_dvd_det (originShift a f) hf hμ
     (fun i j => x i j - a j) hx (fun i => by rw [he]; exact hfx i)
-    (fun j => planeTranslate a (F j))
+    (fun j => originShift a (F j))
   simpa only [he] using h
 
 /-- Summed multiplicity exponents for arbitrary residue blocks, including
@@ -79,10 +65,10 @@ theorem singular_plane_residue_minorGcd {p c s N : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin 2) ℤ) (F : Fin N → MvPolynomial (Fin 2) ℤ)
     (x : Fin s → Fin 2 → ℤ) (label : Fin s → Fin c)
     (a : Fin c → Fin 2 → ℤ) (μ : Fin c → ℕ)
-    (hf : ∀ i, map (Int.castRingHom (ZMod p)) (planeTranslate (a i) f) ∈
+    (hf : ∀ i, map (Int.castRingHom (ZMod p)) (originShift (a i) f) ∈
       idealOfVars (Fin 2) (ZMod p) ^ μ i)
     (hμ : ∀ i, homogeneousComponent (μ i)
-      (map (Int.castRingHom (ZMod p)) (planeTranslate (a i) f)) ≠ 0)
+      (map (Int.castRingHom (ZMod p)) (originShift (a i) f)) ≠ 0)
     (hx : ∀ i j, (p : ℤ) ∣ x i j - a (label i) j) (hfx : ∀ i, eval (x i) f = 0) :
     (p : ℤ) ^ (∑ i : Fin c, multiplicityExponent
       (Fintype.card {k : Fin s // label k = i}) (μ i)) ∣

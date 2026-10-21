@@ -16,23 +16,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma eval_originShift {R σ : Type*} [CommRing R] (a x : σ → R)
-    (f : MvPolynomial σ R) :
-    eval x (originShift a f) = eval (fun j => x j + a j) f := by
-  induction f using MvPolynomial.induction_on with
-  | C c => simp [originShift]
-  | add f g hf hg => simp only [map_add, hf, hg]
-  | mul_X f j hf =>
-    simp only [map_mul]
-    rw [hf]
-    simp [originShift]
-
-lemma eval_sub_originShift {R σ : Type*} [CommRing R] (a x : σ → R)
-    (f : MvPolynomial σ R) :
-    eval (fun j => x j - a j) (originShift a f) = eval x f := by
-  rw [eval_originShift]
-  simp only [sub_add_cancel]
-
 /-- Translation carries the finite-precision determinant theorem to any
 residue class. Its divisor and its precision use the same explicit exponent. -/
 theorem hypersurface_residue_pow_dvd_det_mod {p n μ s : ℕ} [Fact p.Prime]

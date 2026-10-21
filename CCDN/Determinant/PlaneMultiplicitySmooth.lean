@@ -15,20 +15,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma pderiv_originShift {R σ : Type*} [CommRing R] (a : σ → R)
-    (f : MvPolynomial σ R) (j : σ) :
-    pderiv j (originShift a f) = originShift a (pderiv j f) := by
-  classical
-  induction f using MvPolynomial.induction_on with
-  | C c => simp [originShift]
-  | add f g hf hg => simp only [map_add, hf, hg]
-  | mul_X f k hf =>
-    simp only [map_mul, pderiv_mul, map_add, hf]
-    by_cases h : k = j
-    · subst k
-      simp [originShift]
-    · simp [originShift, pderiv_X_of_ne h]
-
 lemma origin_power_pderiv_zero {K σ : Type*} [Field K]
     {f : MvPolynomial σ K} {μ : ℕ} (hμ : 2 ≤ μ)
     (hf : f ∈ idealOfVars σ K ^ μ) (j : σ) :

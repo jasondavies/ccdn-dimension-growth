@@ -61,10 +61,10 @@ theorem projective_plane_chart_det_divisibility {p μ s d M : ℕ} [Fact p.Prime
     (f : MvPolynomial (Fin 3) ℤ) (hfhom : f.IsHomogeneous d)
     (F : Fin s → MvPolynomial (Fin 3) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → Fin 3 → ℤ) (a : Fin 2 → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) (planeTranslate a (planeAffineChart f)) ∈
+    (hf : map (Int.castRingHom (ZMod p)) (originShift a (planeAffineChart f)) ∈
       idealOfVars (Fin 2) (ZMod p) ^ μ)
     (hμ : homogeneousComponent μ
-      (map (Int.castRingHom (ZMod p)) (planeTranslate a (planeAffineChart f))) ≠ 0)
+      (map (Int.castRingHom (ZMod p)) (originShift a (planeAffineChart f))) ≠ 0)
     (hunit : ∀ i, IsCoprime (p : ℤ) (z i 0))
     (hres : ∀ i j, (p : ℤ) ∣ z i j.succ - a j * z i 0)
     (hz : ∀ i, eval (z i) f = 0) :
@@ -132,10 +132,10 @@ theorem projective_plane_local_det_divisibility {p μ s d M : ℕ} [Fact p.Prime
     (f : MvPolynomial (Fin 3) ℤ) (hfhom : f.IsHomogeneous d)
     (F : Fin s → MvPolynomial (Fin 3) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → Fin 3 → ℤ) (k : Fin 3) (a : Fin 2 → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) (planeTranslate a (projectivePlaneChart k f)) ∈
+    (hf : map (Int.castRingHom (ZMod p)) (originShift a (projectivePlaneChart k f)) ∈
       idealOfVars (Fin 2) (ZMod p) ^ μ)
     (hμ : homogeneousComponent μ
-      (map (Int.castRingHom (ZMod p)) (planeTranslate a (projectivePlaneChart k f))) ≠ 0)
+      (map (Int.castRingHom (ZMod p)) (originShift a (projectivePlaneChart k f))) ≠ 0)
     (hunit : ∀ i, IsCoprime (p : ℤ) (z i k))
     (hres : ∀ i j, (p : ℤ) ∣ z i (Equiv.swap 0 k j.succ) - a j * z i k)
     (hz : ∀ i, eval (z i) f = 0) :
@@ -158,10 +158,10 @@ theorem projective_plane_residue_minorGcd {p c s N d M : ℕ} [Fact p.Prime]
     (z : Fin s → Fin 3 → ℤ) (label : Fin s → Fin c)
     (k : Fin c → Fin 3) (a : Fin c → Fin 2 → ℤ) (μ : Fin c → ℕ)
     (hf : ∀ i, map (Int.castRingHom (ZMod p))
-      (planeTranslate (a i) (projectivePlaneChart (k i) f)) ∈
+      (originShift (a i) (projectivePlaneChart (k i) f)) ∈
         idealOfVars (Fin 2) (ZMod p) ^ μ i)
     (hμ : ∀ i, homogeneousComponent (μ i) (map (Int.castRingHom (ZMod p))
-      (planeTranslate (a i) (projectivePlaneChart (k i) f))) ≠ 0)
+      (originShift (a i) (projectivePlaneChart (k i) f))) ≠ 0)
     (hunit : ∀ i, IsCoprime (p : ℤ) (z i (k (label i))))
     (hres : ∀ i j, (p : ℤ) ∣ z i (Equiv.swap 0 (k (label i)) j.succ) -
       a (label i) j * z i (k (label i)))

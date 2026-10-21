@@ -43,6 +43,7 @@ public import CCDN.Algebra.LowDegreePointSeparation
 public import CCDN.Algebra.ModularPolynomialLift
 public import CCDN.Algebra.MonomialOrthants
 public import CCDN.Algebra.MonomialRays
+public import CCDN.Algebra.OriginShift
 public import CCDN.Algebra.ParameterPowerSpan
 public import CCDN.Algebra.ParameterRecurrenceGrowth
 public import CCDN.Algebra.PointSeparation

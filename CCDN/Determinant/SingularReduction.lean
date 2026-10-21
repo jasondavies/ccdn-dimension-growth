@@ -49,18 +49,18 @@ lemma planeResidueLift_zero {f : MvPolynomial (Fin 2) ℤ} {p : ℕ} [NeZero p]
 /-- Multiplicity is selected from the translated reduced equation. -/
 def planeResidueMultiplicity (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fact p.Prime]
     (hf : map (Int.castRingHom (ZMod p)) f ≠ 0) (a : PlaneResidue f p) : ℕ :=
-  Classical.choose (exists_reduction_multiplicity f (planeResidueLift a) hf
+  Classical.choose (exists_hypersurface_reduction_multiplicity f (planeResidueLift a) hf
     (planeResidueLift_zero a))
 
 theorem planeResidueMultiplicity_spec (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) [Fact p.Prime]
     (hf : map (Int.castRingHom (ZMod p)) f ≠ 0) (a : PlaneResidue f p) :
     0 < planeResidueMultiplicity f p hf a ∧
       planeResidueMultiplicity f p hf a ≤ f.totalDegree ∧
-      map (Int.castRingHom (ZMod p)) (planeTranslate (planeResidueLift a) f) ∈
+      map (Int.castRingHom (ZMod p)) (originShift (planeResidueLift a) f) ∈
         idealOfVars (Fin 2) (ZMod p) ^ planeResidueMultiplicity f p hf a ∧
       homogeneousComponent (planeResidueMultiplicity f p hf a)
-        (map (Int.castRingHom (ZMod p)) (planeTranslate (planeResidueLift a) f)) ≠ 0 :=
-  Classical.choose_spec (exists_reduction_multiplicity f (planeResidueLift a) hf
+        (map (Int.castRingHom (ZMod p)) (originShift (planeResidueLift a) f)) ≠ 0 :=
+  Classical.choose_spec (exists_hypersurface_reduction_multiplicity f (planeResidueLift a) hf
     (planeResidueLift_zero a))
 
 /-- The finite-field total multiplicity appearing in the denominator
