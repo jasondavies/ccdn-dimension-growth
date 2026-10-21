@@ -103,7 +103,8 @@ private theorem homogeneous_evaluation_rank_eq {K : Type*} [Field K]
     finrank_homogeneousSubmodule_fin] at hdim
   have h := (homogeneousEvaluationMatrix K n M points).mulVecLin.finrank_range_add_finrank_ker
   rw [homogeneous_evaluation_kernel_eq_multiples f hf hf0 hdM points hzero hrel, hdim] at h
-  simpa only [Matrix.rank, Module.finrank_pi, Module.finrank_self, mul_one, Fintype.card_fin] using h
+  simpa only [Matrix.rank, Module.finrank_pi, Module.finrank_self, mul_one,
+    Fintype.card_fin] using h
 
 /-- Clearing denominators preserves a prescribed homogeneous degree. -/
 private theorem homogeneous_integer_multiple {n M : ℕ}
@@ -148,7 +149,8 @@ private theorem rational_relations_of_integer_relations {n M t : ℕ}
   refine ⟨C ((b : ℚ)⁻¹) * map (Int.castRingHom ℚ) v, ?_⟩
   have hbq : (b : ℚ) ≠ 0 := by exact_mod_cast hb
   calc
-    g = C ((b : ℚ)⁻¹) * (C (b : ℚ) * g) := by rw [← mul_assoc, ← C_mul, inv_mul_cancel₀ hbq, C_1, one_mul]
+    g = C ((b : ℚ)⁻¹) * (C (b : ℚ) * g) := by
+      rw [← mul_assoc, ← C_mul, inv_mul_cancel₀ hbq, C_1, one_mul]
     _ = _ := by rw [hm]; ring
 
 /-- The no-auxiliary hypothesis over the integers forces the exact rational

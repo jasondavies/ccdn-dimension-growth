@@ -43,7 +43,8 @@ private theorem finite_field_common_zeros_card_le_choose {K ι : Type*} [Field K
     (by simp only [Fintype.card_fin, Finset.card_univ]; dsimp [N]; omega)
   have hIf : f ∈ I := (show Ideal.span {f} ≤ I from le_sup_left) (Ideal.subset_span (by simp))
   have hIg : g ∈ I := (show Ideal.span {g} ≤ I from le_sup_right) (Ideal.subset_span (by simp))
-  exact hlower.trans (filteredCoordinateSpace_codim_two_bound hf hfg I hIf hIg (by dsimp [N]; omega))
+  exact hlower.trans
+    (filteredCoordinateSpace_codim_two_bound hf hfg I hIf hIg (by dsimp [N]; omega))
 
 /-- Below the field-size degree threshold, a dimension-only constant times
 (degree f)(degree g) q^(ambient dimension-2) bounds the common zeros. -/

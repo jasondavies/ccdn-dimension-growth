@@ -147,7 +147,8 @@ theorem literal_affine_hypersurface_auxiliary {n : ℕ}
   by_cases habs : AbsolutelyIrreducible f
   · exact exists_isBoxAuxiliary_and_iff.mp
       (literal_affine_hypersurface_auxiliary_absolute f hprim hir habs hd hB)
-  · simpa only [literalAffineBadPrimeFactor_eq_zero f habs, hypersurfaceBadPrimeFactor_eq_zero f habs] using
+  · simpa only [literalAffineBadPrimeFactor_eq_zero f habs,
+      hypersurfaceBadPrimeFactor_eq_zero f habs] using
       exists_isBoxAuxiliary_and_iff.mp (affine_hypersurface_auxiliary f hprim hir hd hB)
 
 end

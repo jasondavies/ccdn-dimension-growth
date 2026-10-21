@@ -35,7 +35,8 @@ theorem ambientEuler_minor_eq_zero_of_product {R σ : Type*} [CommRing R]
     (g h : MvPolynomial σ R) (hg : g.totalDegree ≤ a) (hh : h.totalDegree ≤ b)
     (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
-    ((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial (g * h))).submatrix rows cols).det = 0 := by
+    ((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial (g * h))).submatrix
+      rows cols).det = 0 := by
   rw [universalPlanePolynomial_mul]
   exact eulerClosedForm_minor_eq_zero_of_product k a b ha hb hab _ _
     ((universalPlanePolynomial_totalDegree_le g).trans hg)
@@ -48,7 +49,8 @@ private theorem ambientEuler_minor_eq_zero_of_not_irreducible {K σ : Type*} [Fi
     (hred : ¬Irreducible f)
     (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
-    ((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).submatrix rows cols).det = 0 := by
+    ((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).submatrix
+      rows cols).det = 0 := by
   by_cases hf0 : f = 0
   · subst f
     simpa only [zero_mul] using ambientEuler_minor_eq_zero_of_product
@@ -76,8 +78,10 @@ lemma ambientEuler_minor_map {R S σ : Type*} [CommRing R] [CommRing S]
     (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
     MvPolynomial.map φ
-      (((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).submatrix rows cols).det) =
-      ((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial (MvPolynomial.map φ f))).submatrix rows cols).det := by
+      (((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).submatrix
+        rows cols).det) =
+      ((eulerClosedFormCoefficientMatrix k
+        (universalPlanePolynomial (MvPolynomial.map φ f))).submatrix rows cols).det := by
   rw [eulerClosedForm_minor_map, ← universalPlanePolynomial_map]
 
 /-- The first implication in the universal Noether theorem, for the

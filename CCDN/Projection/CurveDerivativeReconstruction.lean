@@ -95,7 +95,8 @@ theorem exists_derivative_reconstruction {K τ : Type*}
   change ψ f₀ = 0 at h₀
   change ψ f₁ + ψ (pderiv 1 f₀) * (Ideal.Quotient.mk I) l = 0 at h₁
   have hz₀ : aeval a f₀ ∈ I := Ideal.Quotient.eq_zero_iff_mem.mp ((hψ f₀).trans h₀)
-  obtain ⟨c, hc⟩ := plane_projection_relation_space I a f hf hker f₀ (by simpa only [hfd] using hd₀) hz₀
+  obtain ⟨c, hc⟩ :=
+    plane_projection_relation_space I a f hf hker f₀ (by simpa only [hfd] using hd₀) hz₀
   have hcn : c ≠ 0 := by intro hz; apply hn₀; rw [hc, hz, zero_smul]
   rw [hc, Derivation.map_smul, map_smul, smul_mul_assoc] at h₁
   have hs := congrArg (fun x : MvPolynomial τ K ⧸ I => c⁻¹ • x) h₁

@@ -56,7 +56,8 @@ lemma projectiveHypersurfaceChart_mod_ne_zero {n p d : ℕ} [Fact p.Prime]
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (k : Fin (n + 3)) :
     map (Int.castRingHom (ZMod p)) (projectiveHypersurfaceChart k f) ≠ 0 := by
   intro h
-  have hc : affineChart (n + 2) (rename (Equiv.swap 0 k) (map (Int.castRingHom (ZMod p)) f)) = 0 := by
+  have hc :
+      affineChart (n + 2) (rename (Equiv.swap 0 k) (map (Int.castRingHom (ZMod p)) f)) = 0 := by
     rw [← map_rename, affineChart_map]
     exact h
   have he : rename (Equiv.swap 0 k) (map (Int.castRingHom (ZMod p)) f) = 0 :=
@@ -66,7 +67,8 @@ lemma projectiveHypersurfaceChart_mod_ne_zero {n p d : ℕ} [Fact p.Prime]
   exact (rename_injective (Equiv.swap 0 k) (Equiv.swap 0 k).injective)
     (he.trans (map_zero _).symm)
 
-def ProjectiveHypersurfaceResidue {n : ℕ} (f : MvPolynomial (Fin (n + 3)) ℤ) (p : ℕ) [Fact p.Prime] :=
+def ProjectiveHypersurfaceResidue {n : ℕ} (f : MvPolynomial (Fin (n + 3)) ℤ) (p : ℕ)
+    [Fact p.Prime] :=
   {r : ProjectiveResidueSpace (n + 2) p | eval r.rep (map (Int.castRingHom (ZMod p)) f) = 0}
 
 instance {n : ℕ} (f : MvPolynomial (Fin (n + 3)) ℤ) (p : ℕ) [Fact p.Prime] :
@@ -76,7 +78,8 @@ def projectiveHypersurfaceResidueMultiplicity {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (r : ProjectiveHypersurfaceResidue f p) : ℕ :=
   Classical.choose (exists_hypersurface_reduction_multiplicity
-    (projectiveHypersurfaceChart (hypersurfaceResiduePivot r.val) f) (hypersurfaceResidueChartLift r.val)
+    (projectiveHypersurfaceChart (hypersurfaceResiduePivot r.val) f)
+    (hypersurfaceResidueChartLift r.val)
     (projectiveHypersurfaceChart_mod_ne_zero f hf hf0 _)
     (hypersurfaceResidueChartLift_zero f hf r.val r.property))
 
@@ -92,7 +95,8 @@ theorem projectiveHypersurfaceResidueMultiplicity_spec {n p d : ℕ} [Fact p.Pri
       (map (Int.castRingHom (ZMod p)) (originShift (hypersurfaceResidueChartLift r.val)
         (projectiveHypersurfaceChart (hypersurfaceResiduePivot r.val) f))) ≠ 0 := by
   have h := Classical.choose_spec (exists_hypersurface_reduction_multiplicity
-    (projectiveHypersurfaceChart (hypersurfaceResiduePivot r.val) f) (hypersurfaceResidueChartLift r.val)
+    (projectiveHypersurfaceChart (hypersurfaceResiduePivot r.val) f)
+    (hypersurfaceResidueChartLift r.val)
     (projectiveHypersurfaceChart_mod_ne_zero f hf hf0 _)
     (hypersurfaceResidueChartLift_zero f hf r.val r.property))
   refine ⟨h.1, h.2.1.trans ?_, h.2.2⟩
@@ -106,13 +110,18 @@ def projectiveHypersurfaceTotalMultiplicity {n p d : ℕ} [Fact p.Prime]
 theorem projectiveHypersurfaceTotalMultiplicity_bounds {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) :
-    Fintype.card (ProjectiveHypersurfaceResidue f p) ≤ projectiveHypersurfaceTotalMultiplicity f hf hf0 ∧
-    projectiveHypersurfaceTotalMultiplicity f hf hf0 ≤ Fintype.card (ProjectiveHypersurfaceResidue f p) * d := by
+    Fintype.card (ProjectiveHypersurfaceResidue f p) ≤
+      projectiveHypersurfaceTotalMultiplicity f hf hf0 ∧
+    projectiveHypersurfaceTotalMultiplicity f hf hf0 ≤
+      Fintype.card (ProjectiveHypersurfaceResidue f p) * d := by
   constructor
   · calc _ = ∑ _r : ProjectiveHypersurfaceResidue f p, 1 := by simp
-         _ ≤ _ := Finset.sum_le_sum fun r _ => (projectiveHypersurfaceResidueMultiplicity_spec f hf hf0 r).1
+         _ ≤ _ :=
+           Finset.sum_le_sum fun r _ =>
+             (projectiveHypersurfaceResidueMultiplicity_spec f hf hf0 r).1
   · calc _ ≤ ∑ _r : ProjectiveHypersurfaceResidue f p, d :=
-           Finset.sum_le_sum fun r _ => (projectiveHypersurfaceResidueMultiplicity_spec f hf hf0 r).2.1
+           Finset.sum_le_sum fun r _ =>
+             (projectiveHypersurfaceResidueMultiplicity_spec f hf hf0 r).2.1
          _ = _ := by simp
 
 /-- Primitive zeros construct all local data. The resulting divisor has the

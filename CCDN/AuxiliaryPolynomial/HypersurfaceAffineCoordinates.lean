@@ -97,7 +97,9 @@ lemma hypersurfaceAffineCoordinates_totalDegree_le {K σ : Type*} [Field K]
 lemma hypersurfaceAffineCoordinates_eval_zero {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K) :
     eval (0 : Option σ → K) (hypersurfaceAffineCoordinates a b hb f) = eval a f := by
-  have he : (eval (0 : Option σ → K)).comp (hypersurfaceAffineCoordinates a b hb).toRingHom = eval a := by
+  have he :
+      (eval (0 : Option σ → K)).comp (hypersurfaceAffineCoordinates a b hb).toRingHom =
+        eval a := by
     apply MvPolynomial.ringHom_ext
     · intro r
       change eval (0 : Option σ → K) (hypersurfaceAffineCoordinates a b hb (C r)) = eval a (C r)

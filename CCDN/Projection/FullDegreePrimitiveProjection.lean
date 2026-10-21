@@ -104,7 +104,8 @@ theorem exists_full_degree_primitive_projection {K F : Type*}
   obtain ⟨f, hf, hker⟩ := exists_plane_projection_equation I a ha d hdegree 0 hu
   have hp : IntermediateField.adjoin (RatFunc K) {φ ((Ideal.Quotient.mk I) (a 1))} = ⊤ := by
     change IntermediateField.adjoin (RatFunc K)
-      {algebraMap (MvPolynomial (Fin n) K ⧸ I) F ((Ideal.Quotient.mk I) (momentCoordinate K n k))} = ⊤
+      {algebraMap (MvPolynomial (Fin n) K ⧸ I) F
+        ((Ideal.Quotient.mk I) (momentCoordinate K n k))} = ⊤
     rwa [momentCoordinate_fraction]
   have hfd := plane_projection_degree_eq_of_full_parameter I a ha d hdegree φ f hf.ne_zero hker
     0 1 RatFunc.X RatFunc.transcendental_X he hp hfull

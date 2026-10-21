@@ -96,7 +96,8 @@ theorem exists_bounded_degree_preserving_projection {K : Type*} [Field K] [CharZ
       k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧ Irreducible f ∧ f.totalDegree = d ∧
       Transcendental K ((Ideal.Quotient.mk I) (momentCoordinate K n k₀)) ∧
       ∀ g, aeval (![momentCoordinate K n k₀, momentCoordinate K n k₁]) g ∈ I ↔ f ∣ g := by
-  obtain ⟨k₀, hk₀, havoid⟩ := exists_bounded_infinity_parameter (L := AlgebraicClosure K) I d hdegree
+  obtain ⟨k₀, hk₀, havoid⟩ :=
+    exists_bounded_infinity_parameter (L := AlgebraicClosure K) I d hdegree
   obtain ⟨N, hrec⟩ := filtration_recurrence_of_infinity_avoidance I
     (momentCoordinate K n k₀) (momentCoordinate_homogeneous K n k₀) havoid
   have htrans := recurrence_parameter_transcendental I d hd hdegree _ N hrec

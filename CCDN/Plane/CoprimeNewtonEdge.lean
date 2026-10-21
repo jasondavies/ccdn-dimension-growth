@@ -109,8 +109,10 @@ theorem coprime_newton_edge_irreducible {K : Type*} [Field K]
     have hsum : g.weightedTotalDegree w + h.weightedTotalDegree w = d * e := by
       rw [← weightedTotalDegree_mul_of_ne_zero w hg hh, ← hprod]
       exact hdegree
-    obtain ⟨m, a, hgm⟩ := weighted_top_monomial_of_below_coprime_edge hd he hcop g hg (by change g.weightedTotalDegree w < d * e; omega)
-    obtain ⟨n, b, hhn⟩ := weighted_top_monomial_of_below_coprime_edge hd he hcop h hh (by change h.weightedTotalDegree w < d * e; omega)
+    obtain ⟨m, a, hgm⟩ := weighted_top_monomial_of_below_coprime_edge hd he hcop g hg
+      (by change g.weightedTotalDegree w < d * e; omega)
+    obtain ⟨n, b, hhn⟩ := weighted_top_monomial_of_below_coprime_edge hd he hcop h hh
+      (by change h.weightedTotalDegree w < d * e; omega)
     have hmono : weightedHomogeneousComponent w (f.weightedTotalDegree w) f =
         monomial (m + n) (a * b) := by
       rw [hprod, weighted_top_component_mul, hgm, hhn, monomial_mul_monomial]

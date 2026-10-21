@@ -133,7 +133,8 @@ private theorem closedFormCoefficientMatrix_entry_bound
     (hinner : ∀ i, (f.coeff i).natDegree ≤ d) :
     ∀ i j, |((closedFormCoefficientMatrix d f i j : ℤ) : ℝ)| ≤ 2 * d * H := by
   intro i j
-  change |((((closedFormOperator f (closedFormPair ℤ d (Pi.single j 1))).coeff i.1).coeff i.2 : ℤ) : ℝ)| ≤ _
+  change |((((closedFormOperator f (closedFormPair ℤ d (Pi.single j 1))).coeff i.1).coeff
+    i.2 : ℤ) : ℝ)| ≤ _
   have hDH := mul_nonneg (Nat.cast_nonneg d) hH
   have hdi := bivariateCoefficientBound_innerDerivative d hH hf hinner
   have hdo := bivariateCoefficientBound_outerDerivative d hH hf houter
@@ -143,16 +144,19 @@ private theorem closedFormCoefficientMatrix_entry_bound
     change |((((((bivariateCoefficientDerivative ℤ) (monomial j.1.val (monomial j.2.val 1))) * f -
       monomial j.1.val (monomial j.2.val 1) * (bivariateCoefficientDerivative ℤ) f -
       (0 : ℤ[X][X]).derivative * f + 0 * f.derivative).coeff i.1).coeff i.2 : ℤ) : ℝ)| ≤ _
-    simp only [map_zero, zero_mul, sub_zero, add_zero, bivariateCoefficientDerivative_monomial, one_mul]
+    simp only [map_zero, zero_mul, sub_zero, add_zero, bivariateCoefficientDerivative_monomial,
+      one_mul]
     have ha := bivariateCoefficientBound_monomial_mul hH hf (j.2.val : ℤ) j.1.val (j.2.val - 1)
     have hb := bivariateCoefficientBound_monomial_mul hDH hdi 1 j.1.val j.2.val
     have hh := (bivariateCoefficientBound_sub ha hb) i.1 i.2
-    simp only [Int.cast_natCast, abs_of_nonneg (show (0 : ℝ) ≤ j.2.val from Nat.cast_nonneg _), Int.cast_one, abs_one, one_mul] at hh
+    simp only [Int.cast_natCast, abs_of_nonneg (show (0 : ℝ) ≤ j.2.val from Nat.cast_nonneg _),
+      Int.cast_one, abs_one, one_mul] at hh
     have hj : (j.2.val : ℝ) ≤ d := by exact_mod_cast j.2.isLt.le
     nlinarith
   | inr j =>
     rw [closedFormPair_single_inr]
-    change |(((((bivariateCoefficientDerivative ℤ) 0 * f - 0 * (bivariateCoefficientDerivative ℤ) f -
+    change |(((((bivariateCoefficientDerivative ℤ) 0 * f -
+      0 * (bivariateCoefficientDerivative ℤ) f -
       (monomial j.1.val (monomial j.2.val 1)).derivative * f +
       monomial j.1.val (monomial j.2.val 1) * f.derivative).coeff i.1).coeff i.2 : ℤ) : ℝ)| ≤ _
     simp only [map_zero, zero_mul, sub_self, zero_sub, bivariate_derivative_monomial, one_mul]
@@ -160,7 +164,8 @@ private theorem closedFormCoefficientMatrix_entry_bound
     have ha := bivariateCoefficientBound_monomial_mul hDH hdo 1 j.1.val j.2.val
     have hb := bivariateCoefficientBound_monomial_mul hH hf (j.1.val : ℤ) (j.1.val - 1) j.2.val
     have hh := (bivariateCoefficientBound_sub ha hb) i.1 i.2
-    simp only [Int.cast_natCast, abs_of_nonneg (show (0 : ℝ) ≤ j.1.val from Nat.cast_nonneg _), Int.cast_one, abs_one, one_mul] at hh
+    simp only [Int.cast_natCast, abs_of_nonneg (show (0 : ℝ) ≤ j.1.val from Nat.cast_nonneg _),
+      Int.cast_one, abs_one, one_mul] at hh
     have hj : (j.1.val : ℝ) ≤ d := by exact_mod_cast j.1.isLt.le
     nlinarith
 

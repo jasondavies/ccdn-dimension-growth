@@ -100,7 +100,8 @@ theorem gridEisensteinPolynomial_totalDegree {K : Type*} [Field K]
     bivariateTotalDegree (gridEisensteinPolynomial V k) = V.natDegree + k := by
   apply le_antisymm (gridEisensteinPolynomial_totalDegree_le V k hm hd hk hs)
   have hh := bivariateTotalDegree_coeff_le (gridEisensteinPolynomial V k) 0
-    (V.natDegree + k) (by rw [gridEisensteinPolynomial_highCoeff V k hm h0 hd hk]; exact one_ne_zero)
+    (V.natDegree + k)
+    (by rw [gridEisensteinPolynomial_highCoeff V k hm h0 hd hk]; exact one_ne_zero)
   simpa using hh
 
 private lemma gridEisensteinCorrection_map {K L : Type*} [Field K] [Field L]

@@ -38,7 +38,8 @@ theorem chow_restriction_irreducible_iff_birational_over_closed_field
         J (chowProjectionForms A) = ⊤ := by
   let P := chowProjectionImageIdeal J A
   let R := chowLinearSubstitution A F
-  have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
+  have : P.IsPrime :=
+    RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
   have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
   have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
     (integral_projection_hilbert_dimension_eq J _ hint).trans hdimdeg.natDegree_eq

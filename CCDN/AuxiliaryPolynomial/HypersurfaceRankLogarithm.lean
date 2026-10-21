@@ -45,18 +45,22 @@ theorem hypersurface_rank_log_error {r d M s : ℕ} (hrpos : 0 < r) (hd : 0 < d)
     apply pow_le_pow_left₀ (by positivity) _ r
     have hh := mul_le_mul_of_nonneg_left hM1 (Nat.cast_nonneg r)
     nlinarith
-  have hlow := Real.log_le_log (by positivity : (0 : ℝ) < (d : ℝ) * ((M : ℝ) / 2) ^ r / r.factorial) hl'
+  have hlow :=
+    Real.log_le_log (by positivity : (0 : ℝ) < (d : ℝ) * ((M : ℝ) / 2) ^ r / r.factorial) hl'
   rw [Real.log_div (by positivity) hfac.ne', Real.log_mul hd0.ne' (by positivity),
     Real.log_pow, Real.log_div hM0.ne' (by norm_num)] at hlow
   have hhigh := Real.log_le_log hs0 hu'
   rw [Real.log_div (by positivity) hfac.ne', Real.log_mul hd0.ne' (by positivity),
     Real.log_pow, Real.log_mul (by positivity) hM0.ne'] at hhigh
-  have hlogfac : 0 ≤ Real.log (r.factorial : ℝ) := Real.log_nonneg (by exact_mod_cast Nat.factorial_pos r)
+  have hlogfac : 0 ≤ Real.log (r.factorial : ℝ) :=
+    Real.log_nonneg (by exact_mod_cast Nat.factorial_pos r)
   have hlog2 : 0 ≤ Real.log 2 := Real.log_nonneg (by norm_num)
-  have hlogr : 0 ≤ Real.log (r + 1 : ℝ) := Real.log_nonneg (by have := Nat.cast_nonneg (α := ℝ) r; linarith)
+  have hlogr : 0 ≤ Real.log (r + 1 : ℝ) :=
+    Real.log_nonneg (by have := Nat.cast_nonneg (α := ℝ) r; linarith)
   unfold hypersurfaceRankLogError
   apply abs_le.mpr
-  constructor <;> nlinarith [mul_nonneg (Nat.cast_nonneg r) hlog2, mul_nonneg (Nat.cast_nonneg r) hlogr]
+  constructor <;>
+    nlinarith [mul_nonneg (Nat.cast_nonneg r) hlog2, mul_nonneg (Nat.cast_nonneg r) hlogr]
 
 end
 end CCDN

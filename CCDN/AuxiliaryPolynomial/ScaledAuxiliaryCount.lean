@@ -27,10 +27,12 @@ theorem scaled_auxiliary_rational_not_dvd {n M : ℕ}
       MvPolynomial.map (Int.castRingHom ℚ) (homogeneousSlice n (p : ℤ) g) := by
   have hpZ : (p : ℤ) ≠ 0 := by exact_mod_cast hp.ne_zero
   have hpQ : (p : ℚ) ≠ 0 := by exact_mod_cast hp.ne_zero
-  have hdegree : (homogeneousSlice n (p : ℤ) (scaledHomogenize f.totalDegree (p : ℤ) f)).totalDegree =
-      f.totalDegree := by
+  have hdegree :
+      (homogeneousSlice n (p : ℤ) (scaledHomogenize f.totalDegree (p : ℤ) f)).totalDegree =
+        f.totalDegree := by
     rw [homogeneousSlice_scaledHomogenize _ _ le_rfl,
-      totalDegree_mul_of_isDomain (C_eq_zero.not.mpr (pow_ne_zero _ hpZ)) hf0, totalDegree_C, zero_add]
+      totalDegree_mul_of_isDomain (C_eq_zero.not.mpr (pow_ne_zero _ hpZ)) hf0, totalDegree_C,
+      zero_add]
   have h := rational_homogeneousSlice_not_dvd hpZ (scaledHomogenize_homogeneous _ _ le_rfl)
     (scaledHomogenize_ne_zero _ hpZ hf0) hg (hprim.scaledHomogenize _ hp hp0) hdegree hnd
   intro hdiv

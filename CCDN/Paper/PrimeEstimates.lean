@@ -47,7 +47,8 @@ theorem prime_sqrt_tail_summable_and_bound {L : ℝ} (hL : 0 < L) :
     (∑' p : ℕ, if p.Prime ∧ L < (p : ℝ) then Real.log p / p / Real.sqrt p else 0) ≤
       2 * primeBlockMass / Real.sqrt L := by
   classical
-  have hnonneg : 0 ≤ (fun p : ℕ => if p.Prime ∧ L < (p : ℝ) then Real.log p / p / Real.sqrt p else 0) := by
+  have hnonneg :
+      0 ≤ (fun p : ℕ => if p.Prime ∧ L < (p : ℝ) then Real.log p / p / Real.sqrt p else 0) := by
     intro p
     change 0 ≤ if p.Prime ∧ L < (p : ℝ) then Real.log p / p / Real.sqrt p else 0
     split_ifs <;> positivity

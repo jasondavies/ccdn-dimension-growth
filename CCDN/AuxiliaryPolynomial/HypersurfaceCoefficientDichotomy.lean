@@ -46,7 +46,8 @@ private theorem exists_small_homogeneous_vanishing_polynomial {n d M t : ℕ}
             (Int.Matrix.minorGcd (evaluationMatrix (homogeneousMonomials n M) (points ∘ a)) : ℝ)) ^
               ((((n + M).choose M : ℝ) - s)⁻¹)) := by
   classical
-  obtain ⟨s, a, ha, hli, hspan, hs⟩ := homogeneous_independent_evaluation_rows f hf hf0 hdM points hzero
+  obtain ⟨s, a, ha, hli, hspan, hs⟩ :=
+    homogeneous_independent_evaluation_rows f hf hf0 hdM points hzero
   have hdeficit := integer_homogeneous_rows_hilbert_bound f hf hf0 hdM (points ∘ a)
     (fun i => hzero (a i)) hli
   let mon := homogeneousMonomials n M

@@ -143,7 +143,8 @@ bash scripts/check.sh
 (`.github/workflows/ci.yml`) runs it on every push and pull request.
 
 - `check-lean-sources.py`: every Lean source has the `module` header, is UTF-8 and has at most
-  10,000 lines.
+  10,000 lines, and outside `vendor/` no line exceeds 100 characters (lines with a URL are
+  exempt).
 - `normalize-imports.py --check`: every library module lists its `public import` lines, then
   its plain imports, each sorted, between the `module` line and the module docstring; run the
   script without `--check` to normalize the import blocks.

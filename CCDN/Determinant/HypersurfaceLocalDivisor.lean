@@ -60,7 +60,8 @@ theorem projective_hypersurface_normalized_count_error {n p d : ℕ} [Fact p.Pri
   have hp : (0 : ℝ) < p := by exact_mod_cast (Fact.out : p.Prime).pos
   have hs : 0 < Real.sqrt (p : ℝ) := Real.sqrt_pos.mpr hp
   let H := hypersurfaceCountConstant n * (d : ℝ) ^ 2 * Real.sqrt p
-  have hH : 0 ≤ H := mul_nonneg (mul_nonneg (hypersurfaceCountConstant_nonneg n) (sq_nonneg _)) hs.le
+  have hH : 0 ≤ H :=
+    mul_nonneg (mul_nonneg (hypersurfaceCountConstant_nonneg n) (sq_nonneg _)) hs.le
   have hc : (projectiveHypersurfaceTotalMultiplicity f hf hf0 : ℝ) ≤
       (p : ℝ) ^ (n + 1) + H * (p : ℝ) ^ n := by
     simpa only [H, hypersurfaceCountConstant, mul_assoc, mul_left_comm, mul_comm] using
@@ -96,7 +97,8 @@ theorem projective_hypersurface_minorGcd_dvd {n s N p d M : ℕ} [Fact p.Prime]
       (p : ℤ) ^ e ∣ Int.Matrix.minorGcd
         (Matrix.of fun i j => MvPolynomial.eval (z i) (F j)) := by
   apply projective_hypersurface_minorGcd_of_count_bound f hf hf0 F hF z hprim hz
-  · exact mul_nonneg (mul_nonneg (hypersurfaceCountConstant_nonneg n) (sq_nonneg _)) (Real.sqrt_nonneg _)
+  · exact mul_nonneg (mul_nonneg (hypersurfaceCountConstant_nonneg n) (sq_nonneg _))
+      (Real.sqrt_nonneg _)
   · simpa only [hypersurfaceCountConstant, mul_assoc, mul_left_comm, mul_comm] using
       projective_hypersurface_totalMultiplicity_bound f hf hd hf0 hir hsize
 

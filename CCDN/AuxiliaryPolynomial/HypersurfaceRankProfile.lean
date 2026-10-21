@@ -73,7 +73,8 @@ theorem hypersurface_rank_power_bounds {r d M s : ℕ} (hdM : d ≤ M)
   · have h := mul_le_mul_of_nonneg_left hl (Nat.cast_nonneg d)
     rw [← mul_div_assoc] at h
     exact h.trans hloR
-  · exact hhiR.trans (by simpa only [mul_div_assoc] using mul_le_mul_of_nonneg_left hu (Nat.cast_nonneg d))
+  · exact hhiR.trans
+      (by simpa only [mul_div_assoc] using mul_le_mul_of_nonneg_left hu (Nat.cast_nonneg d))
 
 end
 end CCDN

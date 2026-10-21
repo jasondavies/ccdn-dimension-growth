@@ -57,9 +57,9 @@ private theorem powerSeries_linearIndependent_map
   have hz : B.mulVecLin w = 0 := by
     ext n
     have h := congrArg (PowerSeries.coeff n) hw
-    simpa only [B, A, Matrix.mulVecLin_apply, Matrix.mulVec, dotProduct, Matrix.map, Matrix.of_apply, Pi.zero_apply,
-      map_sum, PowerSeries.coeff_smul, PowerSeries.coeff_map, map_zero, smul_eq_mul,
-      mul_comm] using h
+    simpa only [B, A, Matrix.mulVecLin_apply, Matrix.mulVec, dotProduct, Matrix.map,
+      Matrix.of_apply, Pi.zero_apply, map_sum, PowerSeries.coeff_smul, PowerSeries.coeff_map,
+      map_zero, smul_eq_mul, mul_comm] using h
   have hmem : w ∈ B.mulVecLin.ker := hz
   rw [hker, Submodule.mem_bot] at hmem
   exact congrFun hmem i

@@ -42,7 +42,8 @@ private lemma polynomial_eval₂_natDegree_le_weight
     rw [Finsupp.weight_apply]
     apply Finset.sum_le_sum
     intro i _
-    exact Polynomial.natDegree_pow_le.trans (by simpa [smul_eq_mul] using Nat.mul_le_mul_left (e i) (hv i))
+    exact Polynomial.natDegree_pow_le.trans
+      (by simpa [smul_eq_mul] using Nat.mul_le_mul_left (e i) (hv i))
   conv_lhs => rw [f.as_sum, map_sum]
   apply Polynomial.natDegree_sum_le_of_forall_le
   intro e he

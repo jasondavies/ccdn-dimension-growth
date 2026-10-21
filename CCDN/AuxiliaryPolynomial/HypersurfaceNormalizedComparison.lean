@@ -39,7 +39,8 @@ theorem hypersurface_rank_comparison_normalized {r d M s : ℕ}
   have hfac : (r.factorial : ℝ) ^ (1 / (r : ℝ)) ≠ 0 := by positivity
   have harch := hypersurface_rank_archimedean_error hrpos hd hdM hr
   have hkernel : ((r + 1 + M).choose M : ℝ) - s = (r + 1 + (M - d)).choose (M - d) := by
-    have hh : (s : ℝ) + ((r + 1 + (M - d)).choose (M - d) : ℝ) = (r + 1 + M).choose M := by exact_mod_cast hr
+    have hh : (s : ℝ) + ((r + 1 + (M - d)).choose (M - d) : ℝ) = (r + 1 + M).choose M := by
+      exact_mod_cast hr
     linarith
   rw [hkernel] at hcomparison
   let T := Real.log s - (r : ℝ) * (4 * Real.log d + Real.log A) - E

@@ -27,14 +27,18 @@ theorem hilbert_scaled_block_count_le_multiplicity
   by_cases hr : r = 0
   · omega
   let P := Polynomial.C (r : ℚ) * Polynomial.preHilbertPoly ℚ m 0
-  let Q := (filteredHilbertPolynomial I).comp (Polynomial.C (q : ℚ) * Polynomial.X + Polynomial.C (D : ℚ))
+  let Q := (filteredHilbertPolynomial I).comp
+    (Polynomial.C (q : ℚ) * Polynomial.X + Polynomial.C (D : ℚ))
   have hPdeg : P.natDegree = m := by
     dsimp only [P]
     rw [Polynomial.natDegree_C_mul (by exact_mod_cast hr),
       Polynomial.natDegree_preHilbertPoly]
-  have hlinearDegree : (Polynomial.C (q : ℚ) * Polynomial.X + Polynomial.C (D : ℚ)).natDegree = 1 := by
-    rw [Polynomial.natDegree_add_C, Polynomial.natDegree_C_mul (by positivity), Polynomial.natDegree_X]
-  have hlinearLC : (Polynomial.C (q : ℚ) * Polynomial.X + Polynomial.C (D : ℚ)).leadingCoeff = (q : ℚ) := by
+  have hlinearDegree :
+      (Polynomial.C (q : ℚ) * Polynomial.X + Polynomial.C (D : ℚ)).natDegree = 1 := by
+    rw [Polynomial.natDegree_add_C, Polynomial.natDegree_C_mul (by positivity),
+      Polynomial.natDegree_X]
+  have hlinearLC :
+      (Polynomial.C (q : ℚ) * Polynomial.X + Polynomial.C (D : ℚ)).leadingCoeff = (q : ℚ) := by
     rw [Polynomial.leadingCoeff, hlinearDegree]
     simp
   have hQdeg : Q.natDegree = m := by

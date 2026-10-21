@@ -61,7 +61,8 @@ theorem homogeneous_no_auxiliary_comparison {n d M t : ℕ}
           (Int.Matrix.minorGcd (evaluationMatrix (homogeneousMonomials n M) (points ∘ a)) : ℝ)) ^
             ((((n + M).choose M : ℝ) - s)⁻¹) := by
   classical
-  obtain ⟨s, a, ha, hli, hspan, hs⟩ := homogeneous_independent_evaluation_rows f hf hf0 hdM points hzero
+  obtain ⟨s, a, ha, hli, hspan, hs⟩ :=
+    homogeneous_independent_evaluation_rows f hf hf0 hdM points hzero
   let mon := homogeneousMonomials n M
   let A := evaluationMatrix mon (points ∘ a)
   obtain ⟨v, hv, hAv, hsmall⟩ :=

@@ -52,8 +52,9 @@ private theorem bounded_degree_normalization_fiber_card_le_of_fractionField
   have hiE : AlgebraicIndependent K v := hiA.map' (IsFractionRing.injective A E)
   have hiR : AlgebraicIndependent K u :=
     AlgebraicIndependent.of_comp (x := u) R.val hiE
-  obtain ⟨hfinite, hrank⟩ := bounded_degree_hilbert_functionField_finite_rank_le (R := R) (F := E) I d q hq
-    (by simpa only [Fintype.card_fin] using hdimdeg) l hl u hiR (fun _ => rfl)
+  obtain ⟨hfinite, hrank⟩ :=
+    bounded_degree_hilbert_functionField_finite_rank_le (R := R) (F := E) I d q hq
+      (by simpa only [Fintype.card_fin] using hdimdeg) l hl u hiR (fun _ => rfl)
   let : Module.Finite R E := hfinite
   let P := MvPolynomial (Fin (m + 1)) K
   let ψ : P →ₐ[K] A := projectionCoordinateMap I l

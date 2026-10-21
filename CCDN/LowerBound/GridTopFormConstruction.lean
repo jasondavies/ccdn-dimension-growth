@@ -49,7 +49,8 @@ private lemma variableGridPolynomial_totalDegree_le {R σ : Type*} [CommRing R]
     ∑ a ∈ s, (X i - C a : MvPolynomial σ R).totalDegree ≤ ∑ _a ∈ s, 1 := by
       apply Finset.sum_le_sum
       intro a _
-      exact (totalDegree_sub _ _).trans (by simp only [totalDegree_C, max_zero]; exact (isHomogeneous_X R i).totalDegree_le)
+      exact (totalDegree_sub _ _).trans
+        (by simp only [totalDegree_C, max_zero]; exact (isHomogeneous_X R i).totalDegree_le)
     _ = _ := by simp
 
 private lemma variableGridPolynomial_top {R σ : Type*} [CommRing R]
@@ -60,7 +61,8 @@ private lemma variableGridPolynomial_top {R σ : Type*} [CommRing R]
   | empty => simp [variableGridPolynomial, homogeneousComponent_zero]
   | @insert a s ha ih =>
     have hfactor : (X i - C a : MvPolynomial σ R).totalDegree ≤ 1 :=
-      (totalDegree_sub _ _).trans (by simp only [totalDegree_C, max_zero]; exact (isHomogeneous_X R i).totalDegree_le)
+      (totalDegree_sub _ _).trans
+        (by simp only [totalDegree_C, max_zero]; exact (isHomogeneous_X R i).totalDegree_le)
     have htop : homogeneousComponent 1 (X i - C a : MvPolynomial σ R) = X i := by
       rw [map_sub, homogeneousComponent_eq_self (isHomogeneous_X R i),
         homogeneousComponent_eq_zero _ _ (by simp), sub_zero]
@@ -81,7 +83,8 @@ private lemma paddedGridPolynomial_totalDegree_le {R σ : Type*} [CommRing R]
     (paddedGridPolynomial s i d).totalDegree ≤ d := by
   apply (totalDegree_mul _ _).trans
   have hp : (X i ^ (d - s.card) : MvPolynomial σ R).totalDegree ≤ d - s.card := by
-    exact (totalDegree_pow _ _).trans (by simpa using Nat.mul_le_mul_left (d - s.card) (isHomogeneous_X R i).totalDegree_le)
+    exact (totalDegree_pow _ _).trans
+      (by simpa using Nat.mul_le_mul_left (d - s.card) (isHomogeneous_X R i).totalDegree_le)
   have hg := variableGridPolynomial_totalDegree_le s i
   omega
 

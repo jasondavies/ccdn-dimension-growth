@@ -41,7 +41,8 @@ theorem plane_finite_count_small_constant_coefficient
     (hcount : PlaneResidueCountBound C f.totalDegree f) :
     (t : ℝ) ≤
       (38 + 8 * Real.exp (heightDeterminantError C + 20) +
-        2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 * scalingPrimeRatio) *
+        2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 *
+          scalingPrimeRatio) *
       (f.totalDegree : ℝ) ^ 3 * B ^ (1 / (f.totalDegree : ℝ)) *
         (Real.log B + f.totalDegree) := by
   obtain ⟨p, hp, hlo, hhi, hnd⟩ := exists_scaling_prime hB hf0 hheight
@@ -111,7 +112,8 @@ theorem plane_finite_count_nonzero_constant
   let K₁ := 38 + 8 * Real.exp (heightDeterminantError C + 20) +
     2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 * scalingPrimeRatio
   let K₂ := Real.log affineSmallBoxScale + 6 +
-    2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp (2 * Real.log affineSmallBoxScale + 6)
+    2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 *
+      Real.exp (2 * Real.log affineSmallBoxScale + 6)
   let K₃ := 34 + 8 * Real.exp (heightDeterminantError C + 20)
   have hA := scalingPrimeRatio_one_le
   have hA0 : 0 < scalingPrimeRatio := by linarith
@@ -123,7 +125,8 @@ theorem plane_finite_count_nonzero_constant
     positivity
   have hK₃ : 0 ≤ K₃ := by dsimp [K₃]; positivity
   have h31 : K₃ ≤ K₁ := by
-    have hh : 0 ≤ 2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 * scalingPrimeRatio := by positivity
+    have hh : 0 ≤ 2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * Real.exp 2 *
+        scalingPrimeRatio := by positivity
     dsimp [K₃, K₁]
     linarith
   have hpow := degree_four_le_curveBound hd hB

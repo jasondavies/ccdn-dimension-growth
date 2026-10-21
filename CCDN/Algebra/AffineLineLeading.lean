@@ -67,7 +67,8 @@ private lemma affineLinePolynomial_monomial_top {R σ : Type*} [CommRing R]
     have hh := Polynomial.coeff_pow_of_natDegree_le (m := m i) (hq i)
     simpa only [mul_one, q, Polynomial.coeff_add, Polynomial.coeff_C_succ,
       Polynomial.coeff_C_mul_X, zero_add, ite_true] using hh
-  · rw [ite_eq_right he, Polynomial.coeff_eq_zero_of_natDegree_lt (hprod.trans_lt (by omega)), mul_zero]
+  · rw [ite_eq_right he,
+      Polynomial.coeff_eq_zero_of_natDegree_lt (hprod.trans_lt (by omega)), mul_zero]
 
 /-- At any degree at least the total degree, the affine-line coefficient equals
 the corresponding homogeneous component evaluated on its direction. -/

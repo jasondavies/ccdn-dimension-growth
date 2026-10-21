@@ -37,7 +37,8 @@ private theorem integer_pderiv_coefficient_bound {σ : Type*} [Fintype σ]
       simpa only [Finsupp.add_apply, Finsupp.single_eq_same] using h
     push_cast
     rw [abs_mul, abs_of_nonneg (by positivity : (0 : ℝ) ≤ (e j : ℝ) + 1)]
-    have heR : (e j : ℝ) + 1 ≤ (f.totalDegree : ℝ) + 1 := by exact_mod_cast (by omega : e j + 1 ≤ f.totalDegree + 1)
+    have heR : (e j : ℝ) + 1 ≤ (f.totalDegree : ℝ) + 1 := by
+      exact_mod_cast (by omega : e j + 1 ≤ f.totalDegree + 1)
     calc
       _ ≤ H * ((e j : ℝ) + 1) :=
         mul_le_mul_of_nonneg_right (hcoeff _) (by positivity)

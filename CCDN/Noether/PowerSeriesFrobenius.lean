@@ -21,7 +21,8 @@ open PowerSeries
 private lemma powerSeries_frobenius_constant_congruence {K : Type*} [Field K]
     (p r : ℕ) [Fact p.Prime] [CharP K p] (g : PowerSeries K) :
     PowerSeries.X ^ (p ^ r) ∣ g ^ (p ^ r) - PowerSeries.C (g.constantCoeff ^ (p ^ r)) := by
-  let : CharP (PowerSeries K) p := charP_of_injective_algebraMap (algebraMap K (PowerSeries K)).injective p
+  let : CharP (PowerSeries K) p :=
+    charP_of_injective_algebraMap (algebraMap K (PowerSeries K)).injective p
   have hh : (PowerSeries.X : PowerSeries K) ∣ g - PowerSeries.C g.constantCoeff :=
     PowerSeries.X_dvd_iff.mpr (by simp)
   have ht := pow_dvd_pow_of_dvd hh (p ^ r)
@@ -91,7 +92,8 @@ theorem powerSeries_frobenius_relation_trivial {K ι : Type*} [Field K]
     intro i _
     rw [hh i, mul_pow, ← pow_mul]
     ring
-  have hX : (PowerSeries.X : PowerSeries K) ^ (m * (p ^ r)) ≠ 0 := pow_ne_zero _ PowerSeries.X_ne_zero
+  have hX : (PowerSeries.X : PowerSeries K) ^ (m * (p ^ r)) ≠ 0 :=
+    pow_ne_zero _ PowerSeries.X_ne_zero
   rw [hfactor] at hrel
   have hz := (mul_eq_zero.mp hrel).resolve_left hX
   exact hj (powerSeries_frobenius_relation_constants p r f h hjet hz j)

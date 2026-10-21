@@ -44,7 +44,8 @@ structure BirationalComplementProjection {r n : ℕ}
     (normalizedIntegerProjection D P).range
   projection_along : ∀ x, x - normalizedIntegerProjection D P x ∈
     Submodule.span ℚ (Set.range (M.map (Int.castRingHom ℚ)).row)
-  integral : (projectionCoordinateMap J (chowProjectionForms (P.map (Int.castRingHom ℚ)))).IsIntegral
+  integral :
+    (projectionCoordinateMap J (chowProjectionForms (P.map (Int.castRingHom ℚ)))).IsIntegral
   birational : projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ J))
     J (chowProjectionForms (P.map (Int.castRingHom ℚ))) = ⊤
   image_homogeneous : ∀ f ∈ chowProjectionImageIdeal J (P.map (Int.castRingHom ℚ)), ∀ N,

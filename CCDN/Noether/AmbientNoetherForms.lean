@@ -85,7 +85,8 @@ private lemma ambientNoetherParameterMinor_specialize {R σ : Type*} [CommRing R
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
     MvPolynomial.map (homogeneousCoefficientSpecialization (k + 2) f)
       (ambientNoetherParameterMinor σ k rows cols) =
-      ((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).submatrix rows cols).det := by
+      ((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).submatrix
+        rows cols).det := by
   rw [ambientNoetherParameterMinor, eulerClosedForm_minor_map,
     ← universalPlanePolynomial_map, universalHomogeneousForm_specialize _ f hf]
 
@@ -98,7 +99,8 @@ theorem ambientNoetherForm_specialize {R σ : Type*} [CommRing R]
     (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k)
     (m : PlaneParameters σ →₀ ℕ) :
     homogeneousCoefficientSpecialization (k + 2) f (ambientNoetherForm σ k rows cols m) =
-      (((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).submatrix rows cols).det).coeff m := by
+      (((eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).submatrix
+        rows cols).det).coeff m := by
   rw [← ambientNoetherParameterMinor_specialize k f hf rows cols, coeff_map]
   rfl
 

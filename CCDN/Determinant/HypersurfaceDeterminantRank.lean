@@ -22,7 +22,8 @@ open MvPolynomial Finset
 
 /-- An explicit error depending only on hypersurface dimension. -/
 def hypersurfaceDeterminantError (n : ℕ) : ℝ :=
-  (n + 1 : ℝ) * (Real.log 27 + 2 * mertensError + 2 * hypersurfaceCountConstant n * primeBlockMass) +
+  (n + 1 : ℝ) *
+      (Real.log 27 + 2 * mertensError + 2 * hypersurfaceCountConstant n * primeBlockMass) +
     (n + 2 : ℝ) ^ 2 / ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) * (Real.log 4 + 4)
 
 /-- The rank form of the lower bound in CCDN Proposition 3.2.6 for `s` points on a

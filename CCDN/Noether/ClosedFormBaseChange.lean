@@ -123,7 +123,8 @@ theorem bivariateGridPolynomial_reconstruct {R : Type*} [CommRing R]
   by_cases hi : i < d
   · by_cases hj : j < d
     · exact bivariateGridPolynomial_coeff _ ⟨i, hi⟩ ⟨j, hj⟩
-    · rw [bivariateGridPolynomial_coeff_zero d _ i j (Or.inr (by omega)), hf i j (Or.inr (by omega))]
+    · rw [bivariateGridPolynomial_coeff_zero d _ i j (Or.inr (by omega)),
+        hf i j (Or.inr (by omega))]
   · rw [bivariateGridPolynomial_coeff_zero d _ i j (Or.inl (by omega)), hf i j (Or.inl (by omega))]
 
 /-- Every pair supported on the grid comes from a coefficient vector. -/

@@ -66,7 +66,8 @@ theorem polynomial_parameter_rank_le {K R F σ ι : Type*} [Field K] [Field R] [
         apply Submodule.mem_map.mpr
         refine ⟨_, ?_, rfl⟩
         rw [MvPolynomial.mem_restrictTotalDegree]
-        have hh : (h t.1).totalDegree ≤ D := Finset.le_sup (f := fun i => (h i).totalDegree) (Finset.mem_univ t.1)
+        have hh : (h t.1).totalDegree ≤ D :=
+          Finset.le_sup (f := fun i => (h i).totalDegree) (Finset.mem_univ t.1)
         have hp := MvPolynomial.totalDegree_pow l t.2.val
         have hh' := MvPolynomial.totalDegree_mul (h t.1) (l ^ t.2.val)
         have hm := Nat.mul_le_mul_left t.2.val hl

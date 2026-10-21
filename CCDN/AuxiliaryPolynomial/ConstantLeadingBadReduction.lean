@@ -45,7 +45,8 @@ private lemma bivariateMap_constant_leading {R S : Type*} [CommRing R] [CommRing
     simpa [hl] using ha
   constructor
   · exact natDegree_map_of_leadingCoeff_ne_zero (Polynomial.mapRingHom φ) hn
-  · exact (leadingCoeff_map_of_leadingCoeff_ne_zero (Polynomial.mapRingHom φ) hn).trans (by simp [hl])
+  · exact (leadingCoeff_map_of_leadingCoeff_ne_zero (Polynomial.mapRingHom φ) hn).trans
+      (by simp [hl])
 
 /-- Bad reduction includes both lost total degree and geometric reducibility. -/
 def BivariateBadReduction (f : ℤ[X][X]) (d p : ℕ) : Prop :=
@@ -140,7 +141,8 @@ theorem exists_full_outer_bad_prime_witness
     have hminor := closedForm_minor_log_height d (2 * d ^ 2 - 1) hd (by omega) f H hH hcoeff
       hdeg.le (fun i => (bivariate_coefficient_natDegree_le_totalDegree f i).trans htotal) r c hD
     change Real.log |(D : ℝ)| ≤ _ at hminor
-    rw [Int.cast_abs, Int.cast_mul, abs_mul, Real.log_mul (abs_ne_zero.mpr ha0) (abs_ne_zero.mpr hD0)]
+    rw [Int.cast_abs, Int.cast_mul, abs_mul,
+      Real.log_mul (abs_ne_zero.mpr ha0) (abs_ne_zero.mpr hD0)]
     have he : (27 * (d : ℝ) ^ 4) * (1 + 2 * Real.log H / (d : ℝ) ^ 2) =
         (27 * (d : ℝ) ^ 4) * (1 + Real.log H / (d : ℝ) ^ 2) +
           27 * (d : ℝ) ^ 2 * Real.log H := by field_simp; ring
@@ -149,7 +151,8 @@ theorem exists_full_outer_bad_prime_witness
     have hfac : 0 ≤ 27 * (d : ℝ) ^ 2 - 1 := by nlinarith
     nlinarith [mul_nonneg hfac hlog]
   · intro p hp hbad
-    exact (dvd_abs _ _).mpr (constant_leading_bad_prime_dvd d (by omega) f a hl hdeg htotal r c p hp hbad)
+    exact (dvd_abs _ _).mpr
+      (constant_leading_bad_prime_dvd d (by omega) f a hl hdeg htotal r c p hp hbad)
 
 end
 end CCDN

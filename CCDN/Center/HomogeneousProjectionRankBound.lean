@@ -58,7 +58,8 @@ theorem homogeneous_projection_functionField_rank_bound
   obtain ⟨_, _, hdimle, _⟩ := filteredHilbertPolynomial_positive_multiplicity J
     (Ideal.IsPrime.ne_top ‹J.IsPrime›)
   have hms : m + 1 ≤ s := by simpa only [hJdim, Fintype.card_fin] using hdimle
-  obtain ⟨b, hb, hbint, hbinj⟩ := exists_linear_integral_normalization_infinite_of_le m s hms J hJdim
+  obtain ⟨b, hb, hbint, hbinj⟩ :=
+    exists_linear_integral_normalization_infinite_of_le m s hms J hJdim
   have hJhom := projection_kernel_homogeneousComponent_mem I hI a ha
   let v : Fin (m + 1) → L := fun i => β ((Ideal.Quotient.mk J) (b i))
   let E := IntermediateField.adjoin K (Set.range v)

@@ -55,7 +55,8 @@ theorem prime_scaled_affine_auxiliary {n : ℕ}
     let P := Projectivization.mk ℚ (rationalPoint v) (rationalPoint_ne_zero hv0)
     have hvbox (j : Fin (n + 3)) : |(v j : ℝ)| ≤ B := by
       refine Fin.cases ?_ (fun k => hx k) j
-      simpa only [v, Fin.cons_zero, Int.cast_natCast, abs_of_nonneg (Nat.cast_nonneg (α := ℝ) p)] using hpB
+      simpa only [v, Fin.cons_zero, Int.cast_natCast,
+        abs_of_nonneg (Nat.cast_nonneg (α := ℝ) p)] using hpB
     have hPB : P.mulHeight ≤ B := projective_integer_height_le v hv0 hvbox
     have hvF : eval v F = 0 := by
       rw [scaledHomogenize_eval _ _ le_rfl, hxf, mul_zero]

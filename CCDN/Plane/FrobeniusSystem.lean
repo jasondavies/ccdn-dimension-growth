@@ -73,7 +73,10 @@ theorem exists_planeFrobenius_coefficients {K ι κ : Type*} [Field K]
   let F : (ι × κ → K) →ₗ[K] (∀ r, V r) :=
     { toFun := fun c r => ∑ t, c t • v r t
       map_add' := by intros; funext r; simp only [Pi.add_apply, add_smul, Finset.sum_add_distrib]
-      map_smul' := by intros; funext r; simp only [Pi.smul_apply, smul_eq_mul, mul_smul, Finset.smul_sum, RingHom.id_apply] }
+      map_smul' := by
+        intros
+        funext r
+        simp only [Pi.smul_apply, smul_eq_mul, mul_smul, Finset.smul_sum, RingHom.id_apply] }
   have hdim' : Module.finrank K (∀ r, V r) < Module.finrank K (ι × κ → K) := by
     rw [Module.finrank_pi, Fintype.card_prod, Module.finrank_pi_fintype]
     exact hdim

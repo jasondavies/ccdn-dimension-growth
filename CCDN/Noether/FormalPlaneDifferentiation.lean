@@ -63,7 +63,8 @@ private lemma powerSeries_weighted_derivatives_vanishing {K : Type*} [Field K]
     (u : PowerSeries K) (hu : IsUnit u) (N : ℕ)
     (hchar : ∀ n, 0 < n → n < N → (n : K) ≠ 0)
     (g : PowerSeries K)
-    (hzero : ∀ r < N, PowerSeries.constantCoeff ((fun h => u * PowerSeries.derivative h)^[r] g) = 0) :
+    (hzero : ∀ r < N,
+      PowerSeries.constantCoeff ((fun h => u * PowerSeries.derivative h)^[r] g) = 0) :
     PowerSeries.X ^ N ∣ g := by
   induction N generalizing g with
   | zero => simp
@@ -77,7 +78,9 @@ private lemma powerSeries_weighted_derivatives_vanishing {K : Type*} [Field K]
     apply PowerSeries.X_pow_dvd_iff.mpr
     intro n hn
     cases n with
-    | zero => simpa only [Function.iterate_zero, id_eq, PowerSeries.coeff_zero_eq_constantCoeff] using hzero 0 (by omega)
+    | zero =>
+      simpa only [Function.iterate_zero, id_eq, PowerSeries.coeff_zero_eq_constantCoeff] using
+        hzero 0 (by omega)
     | succ n =>
       have he := PowerSeries.X_pow_dvd_iff.mp hd n (by omega)
       rw [PowerSeries.coeff_derivative] at he

@@ -146,7 +146,8 @@ theorem homogeneous_normalization_functionField_finrank
   let w := η ((Ideal.Quotient.mk I) z)
   let p : Polynomial P := finSuccEquiv K (m + 1) f
   have hp : Irreducible p := (MulEquiv.irreducible_iff (finSuccEquiv K (m + 1))).mpr hf
-  have hpprim : p.IsPrimitive := hp.isPrimitive (by change (finSuccEquiv K (m + 1) f).natDegree ≠ 0; omega)
+  have hpprim : p.IsPrimitive :=
+    hp.isPrimitive (by change (finSuccEquiv K (m + 1) f).natDegree ≠ 0; omega)
   let q : Polynomial R := p.map (algebraMap P R)
   have hq : Irreducible q := hpprim.irreducible_iff_irreducible_map_fraction_map.mp hp
   have hqdeg : q.natDegree = d := by

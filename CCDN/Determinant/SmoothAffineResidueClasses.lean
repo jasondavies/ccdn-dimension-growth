@@ -100,7 +100,8 @@ private lemma smoothResidueIntegerLift_cast {n : ℕ} {f : MvPolynomial (Fin n) 
 
 theorem smoothResidueIntegerLift_zero {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     {P : Finset ℕ} (r : SmoothAffineResidueFamily f P) (p : ℕ) [NeZero p] (hp : p ∈ P) :
-    eval₂ (Int.castRingHom (ZMod p)) (fun j => (smoothResidueIntegerLift r p j : ZMod p)) f = 0 := by
+    eval₂ (Int.castRingHom (ZMod p)) (fun j => (smoothResidueIntegerLift r p j : ZMod p)) f =
+      0 := by
   simpa only [smoothResidueIntegerLift_cast r ⟨p, hp⟩] using (r ⟨p, hp⟩).property.1
 
 theorem smoothResidueIntegerLift_smooth {n : ℕ} {f : MvPolynomial (Fin n) ℤ}

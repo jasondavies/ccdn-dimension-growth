@@ -61,8 +61,8 @@ private lemma coefficientLinearMap_eval {K A σ : Type*}
       split_ifs <;> simp
     rw [he,eval_monomial,eval_monomial]
     simp only [Finsupp.prod]
-    simpa only [Algebra.smul_def,Algebra.algebraMap_self,RingHom.id_apply,map_prod,map_pow,mul_comm] using
-      (l.map_smul (∏ i ∈ d.support, a i ^ d i) c).symm
+    simpa only [Algebra.smul_def,Algebra.algebraMap_self,RingHom.id_apply,map_prod,map_pow,
+      mul_comm] using (l.map_smul (∏ i ∈ d.support, a i ^ d i) c).symm
 
 /-- A polynomial family which specializes to a basis is independent over
 the entire polynomial parameter ring, not only over its constant field. -/

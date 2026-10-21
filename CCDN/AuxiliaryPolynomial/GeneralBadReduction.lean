@@ -24,7 +24,8 @@ open Polynomial Real
 
 private lemma normalized_shear_height_one_le (d : ℕ) (H : ℝ) (hH : 1 ≤ H) :
     1 ≤ ((d : ℝ) + 1) ^ (d + 2) * H := by
-  have hp : 1 ≤ ((d : ℝ) + 1) ^ (d + 2) := one_le_pow₀ (by have h : (0 : ℝ) ≤ d := Nat.cast_nonneg d; linarith)
+  have hp : 1 ≤ ((d : ℝ) + 1) ^ (d + 2) :=
+    one_le_pow₀ (by have h : (0 : ℝ) ≤ d := Nat.cast_nonneg d; linarith)
   nlinarith
 
 /-- The normalization cost contributes an absolute constant at the d² scale. -/
@@ -71,7 +72,8 @@ theorem exists_plane_bad_prime_witness
     dsimp only [g]
     rw [bivariateShear_map, bivariateShear_irreducible_iff]
     exact hir
-  obtain ⟨D, hD, hheight, hdiv⟩ := exists_full_outer_bad_prime_witness d hd g hn ht.le hgir H' hH' hgcoeff
+  obtain ⟨D, hD, hheight, hdiv⟩ :=
+    exists_full_outer_bad_prime_witness d hd g hn ht.le hgir H' hH' hgcoeff
   refine ⟨D, hD, ?_, ?_⟩
   · have hs := normalized_shear_scaled_log_height d hd H hH
     change 1 + 2 * Real.log H' / (d : ℝ) ^ 2 ≤ _ at hs
@@ -103,7 +105,8 @@ theorem plane_geometric_bad_prime_charge
     (fun p hp => (hbad p hp).choose)
     (fun p hp => hdiv p (by exact_mod_cast hcut.trans_lt (hlo p hp)) (hbad p hp))
     (by linarith) (by linarith) hlo (by nlinarith [hheight])
-  rw [Real.log_mul (by norm_num : (7 : ℝ) ≠ 0) (by linarith : 1 + Real.log H / (d : ℝ) ^ 2 ≠ 0)] at h
+  rw [Real.log_mul (by norm_num : (7 : ℝ) ≠ 0)
+    (by linarith : 1 + Real.log H / (d : ℝ) ^ 2 ≠ 0)] at h
   linarith
 
 end

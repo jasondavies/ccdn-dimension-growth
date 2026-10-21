@@ -87,7 +87,8 @@ theorem exists_plane_bad_prime_set
       (∀ p, p ∈ B ↔
         stepanovThreshold (f.totalDegree : ℝ) < (p : ℝ) ∧ HypersurfaceBadReduction f p) ∧
       (∑ p ∈ B, Real.log p / p) ≤
-        Real.log (1 + Real.log H / (f.totalDegree : ℝ) ^ 2) + Real.log 7 + 2 * mertensError + 1 := by
+        Real.log (1 + Real.log H / (f.totalDegree : ℝ) ^ 2) +
+          Real.log 7 + 2 * mertensError + 1 := by
   classical
   let q := bivariatePolynomialEquiv ℤ f
   have hqdeg : bivariateTotalDegree q = f.totalDegree := bivariateTotalDegree_equiv f
@@ -98,7 +99,8 @@ theorem exists_plane_bad_prime_set
     intro i j
     rw [bivariatePolynomialEquiv_coeff]
     exact hcoeff _
-  obtain ⟨D, hD, _, hdiv⟩ := exists_plane_bad_prime_witness f.totalDegree hd q hqdeg hqir H hH hqcoeff
+  obtain ⟨D, hD, _, hdiv⟩ :=
+    exists_plane_bad_prime_witness f.totalDegree hd q hqdeg hqir H hH hqcoeff
   let B := D.natAbs.primeFactors.filter
     (fun p : ℕ => stepanovThreshold (f.totalDegree : ℝ) < (p : ℝ) ∧ HypersurfaceBadReduction f p)
   have hd1 : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast hd

@@ -59,7 +59,8 @@ theorem hypersurface_determinant_log_lower_height
   classical
   have hf0 : f ≠ 0 := ne_zero_of_irreducible_map hir
   have hdeg : f.totalDegree = d := hf.totalDegree hf0
-  obtain ⟨bad, hmem, hcharge⟩ := exists_fin_hypersurface_bad_prime_charge f hir (hdeg ▸ hd) H hH hcoeff
+  obtain ⟨bad, hmem, hcharge⟩ :=
+    exists_fin_hypersurface_bad_prime_charge f hir (hdeg ▸ hd) H hH hcoeff
   rw [hdeg] at hmem hcharge
   have hred (p : ℕ) [Fact p.Prime]
       (hp : p ∈ ((Ioc 0 ⌊(s : ℝ) ^ (1 / (n + 1 : ℝ))⌋₊).filter Nat.Prime) \ bad)

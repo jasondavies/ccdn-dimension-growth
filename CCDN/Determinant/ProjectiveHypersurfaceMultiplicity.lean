@@ -62,7 +62,8 @@ private lemma hypersurfaceResidueChart_normalized {n p : ℕ} [Fact p.Prime]
       Equiv.swap 0 (hypersurfaceResiduePivot r) =
         (r.rep (hypersurfaceResiduePivot r))⁻¹ • r.rep := by
   have h : Fin.cons 1 (fun j => (hypersurfaceResidueChartLift r j : ZMod p)) =
-      (r.rep (hypersurfaceResiduePivot r))⁻¹ • (r.rep ∘ Equiv.swap 0 (hypersurfaceResiduePivot r)) := by
+      (r.rep (hypersurfaceResiduePivot r))⁻¹ •
+        (r.rep ∘ Equiv.swap 0 (hypersurfaceResiduePivot r)) := by
     funext j
     refine Fin.cases ?_ (fun k => ?_) j
     · simp [hypersurfaceResiduePivot_ne_zero]
@@ -101,7 +102,8 @@ private theorem projectiveHypersurfaceChart_irreducible_degree {n p d : ℕ} [Fa
   have hqi : Irreducible q :=
     (MulEquiv.irreducible_iff (f := renameEquiv (ZMod p) (Equiv.swap 0 k))).mpr hir
   have hX := variable_not_dvd_irreducible_homogeneous q hq hqi hd 0
-  have he : map (Int.castRingHom (ZMod p)) (projectiveHypersurfaceChart k f) = affineChart (n + 2) q := by
+  have he :
+      map (Int.castRingHom (ZMod p)) (projectiveHypersurfaceChart k f) = affineChart (n + 2) q := by
     change map _ (affineChart (n + 2) (rename (Equiv.swap 0 k) f)) = _
     rw [← affineChart_map, map_rename]
   rw [he]
@@ -127,7 +129,8 @@ private theorem projective_hypersurface_singular_residue_card_le {n p d : ℕ} [
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)
     (hir : Irreducible (map (Int.castRingHom (ZMod p)) f)) (hchar : d < p) :
     (Finset.univ.filter fun r : ProjectiveHypersurfaceResidue f p =>
-      2 ≤ projectiveHypersurfaceResidueMultiplicity f hf hir.ne_zero r).card ≤ (n + 3) * ((n + 4) ^ n * d * (d - 1) * p ^ n) := by
+      2 ≤ projectiveHypersurfaceResidueMultiplicity f hf hir.ne_zero r).card ≤
+      (n + 3) * ((n + 4) ^ n * d * (d - 1) * p ^ n) := by
   classical
   let S := Finset.univ.filter fun r : ProjectiveHypersurfaceResidue f p =>
     2 ≤ projectiveHypersurfaceResidueMultiplicity f hf hir.ne_zero r
@@ -137,7 +140,8 @@ private theorem projective_hypersurface_singular_residue_card_le {n p d : ℕ} [
   have hT (k : Fin (n + 3)) : (T k).card ≤ (n + 4) ^ n * d * (d - 1) * p ^ n := by
     let q := map (Int.castRingHom (ZMod p)) (projectiveHypersurfaceChart k f)
     have hq := projectiveHypersurfaceChart_irreducible_degree f hf hd hir k
-    let z : T k → Fin (n + 2) → ZMod p := fun r j => (hypersurfaceResidueChartLift r.val.val j : ZMod p)
+    let z : T k → Fin (n + 2) → ZMod p :=
+      fun r j => (hypersurfaceResidueChartLift r.val.val j : ZMod p)
     have hz : Function.Injective z := by
       intro r t he
       apply Subtype.ext

@@ -89,7 +89,8 @@ private lemma formalPlaneBranchMap_constant {K : Type*} [Field K]
       by_cases hk : k = j
       · subst k
         simp [hg]
-      · simp only [ite_eq_right hk, map_add, PowerSeries.constantCoeff_X, PowerSeries.constantCoeff_C, zero_add]
+      · simp only [ite_eq_right hk, map_add, PowerSeries.constantCoeff_X,
+          PowerSeries.constantCoeff_C, zero_add]
         have hh := congrFun (plane_coordinate_cases z j) k
         simpa only [ite_eq_right hk, MvPolynomial.eval_X] using hh
   exact RingHom.congr_fun he f
@@ -106,7 +107,8 @@ theorem exists_faithful_formal_plane_branch {K : Type*} [Field K]
   obtain ⟨g, hg, _⟩ := exists_unique_formal_plane_branch f z j hz hj
   let ψ := formalPlaneBranchMap z j g
   have hψ : ψ f = 0 := by
-    simpa only [ψ, formalPlaneBranchMap, MvPolynomial.aeval_def, PowerSeries.algebraMap_eq] using hg.2
+    simpa only [ψ, formalPlaneBranchMap, MvPolynomial.aeval_def, PowerSeries.algebraMap_eq] using
+      hg.2
   refine ⟨ψ, formalPlaneBranchMap_constant z j g hg.1, formalPlaneBranchMap_parameter z j g, ?_⟩
   intro h
   exact formal_plane_map_eq_zero_iff_dvd f hf ψ hψ j.rev (z j.rev)

@@ -35,7 +35,8 @@ theorem exists_center_projection_coordinate_forms {s n : ℕ}
   let S := Submodule.span ℚ (Set.range (fun i => fun j => (A i j : ℚ)))
   let Q := normalizedIntegerProjection D P
   have hid : IsIdempotentElem Q := normalizedIntegerProjection_idempotent D hD P hP
-  have hres (x : Fin (n + 1) → ℚ) : ((LinearMap.id : Module.End ℚ (Fin (n + 1) → ℚ)) - Q) x ∈ S := by
+  have hres (x : Fin (n + 1) → ℚ) :
+      ((LinearMap.id : Module.End ℚ (Fin (n + 1) → ℚ)) - Q) x ∈ S := by
     change x - Q x ∈ Submodule.span ℚ (Set.range (fun i => fun j => (A i j : ℚ)))
     rw [← hk]
     exact normalizedIntegerProjection_sub_mem_ker D hD P hP x

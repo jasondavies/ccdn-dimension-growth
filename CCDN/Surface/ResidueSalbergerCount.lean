@@ -80,7 +80,8 @@ theorem surface_residue_salberger_count (d : ℕ) (hd : 1 ≤ d)
       _ = _ := by dsimp only [E]; ring
   have hh := mul_le_mul_of_nonneg_left (hbound (2 / Real.sqrt (d : ℝ)) B hB) hE
   have hfinal : (count (surfaceResidueResidualLocus F S (surfaceResidueWindow d K B)
-        (2 * B ^ (1 / Real.sqrt (d : ℝ))) hL) B : ℝ) ≤ E * (C₀ * B ^ (2 / Real.sqrt (d : ℝ) + c₀ / Real.log (1 + Real.log B))) :=
+        (2 * B ^ (1 / Real.sqrt (d : ℝ))) hL) B : ℝ) ≤
+      E * (C₀ * B ^ (2 / Real.sqrt (d : ℝ) + c₀ / Real.log (1 + Real.log B))) :=
     hestimate.trans hh
   nlinarith [Real.rpow_pos_of_pos hB0 (2 / Real.sqrt (d : ℝ) + c₀ / Real.log (1 + Real.log B))]
 

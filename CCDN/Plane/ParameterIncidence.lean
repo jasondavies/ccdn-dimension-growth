@@ -80,8 +80,8 @@ private def planeIncidenceSigmaEquiv {K σ : Type*} [CommRing K] (f : MvPolynomi
   right_inv _ := rfl
 
 /-- The section counts sum to the exact incidence count. -/
-theorem sum_planeSectionPoints_card {K σ : Type*} [CommRing K] [Fintype K] [Fintype σ] [DecidableEq σ]
-    (f : MvPolynomial σ K) :
+theorem sum_planeSectionPoints_card {K σ : Type*} [CommRing K] [Fintype K] [Fintype σ]
+    [DecidableEq σ] (f : MvPolynomial σ K) :
     ∑ v : PlaneParameters σ → K, Nat.card (PlaneSectionPoints f v) =
       Nat.card {z : σ → K // eval z f = 0} * Fintype.card K ^ (2 * Fintype.card σ + 2) := by
   classical

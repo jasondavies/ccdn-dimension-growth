@@ -102,7 +102,8 @@ theorem residueEliminant_ne_zero {F : Type*} [Field F]
   have hinj : Function.Injective φ := RatFunc.algebraMap_injective F
   have hg0 : (-g).map φ ≠ 0 := by
     intro h
-    exact (neg_ne_zero.mpr hg) ((Polynomial.map_injective φ hinj) (h.trans (Polynomial.map_zero φ).symm))
+    exact (neg_ne_zero.mpr hg)
+      ((Polynomial.map_injective φ hinj) (h.trans (Polynomial.map_zero φ).symm))
   have hdegrees : ((-g).map φ).natDegree < (f.map φ).natDegree := by
     simpa only [natDegree_map_eq_of_injective hinj, natDegree_neg] using hdeg
   have hn : ((-g).map φ).natDegree ≤ f.natDegree - 1 := by

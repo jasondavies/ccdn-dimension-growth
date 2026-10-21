@@ -53,7 +53,8 @@ private lemma bivariateParameterDegreeBound_innerDerivative {K τ : Type*} [Comm
   rw [coeff_bivariateCoefficientDerivative, coeff_derivative]
   have he : (j : MvPolynomial τ K) + 1 = MvPolynomial.C ((j : K) + 1) := by simp
   rw [he]
-  exact (MvPolynomial.totalDegree_mul _ _).trans (by simpa only [MvPolynomial.totalDegree_C, Nat.add_zero] using hf i (j+1))
+  exact (MvPolynomial.totalDegree_mul _ _).trans
+    (by simpa only [MvPolynomial.totalDegree_C, Nat.add_zero] using hf i (j+1))
 
 private lemma bivariateParameterDegreeBound_outerDerivative {K τ : Type*} [CommRing K]
     {f : (MvPolynomial τ K)[X][X]} {D : ℕ}
@@ -63,7 +64,8 @@ private lemma bivariateParameterDegreeBound_outerDerivative {K τ : Type*} [Comm
   rw [coeff_derivative]
   rw [show (i : (MvPolynomial τ K)[X]) + 1 =
     C (MvPolynomial.C ((i : K) + 1)) by simp, coeff_mul_C]
-  exact (MvPolynomial.totalDegree_mul _ _).trans (by simpa only [MvPolynomial.totalDegree_C, Nat.add_zero] using hf (i+1) j)
+  exact (MvPolynomial.totalDegree_mul _ _).trans
+    (by simpa only [MvPolynomial.totalDegree_C, Nat.add_zero] using hf (i+1) j)
 
 /-- Every matrix entry depends linearly on the input polynomial coefficients. -/
 private theorem closedFormCoefficientMatrix_parameterDegree {K τ : Type*} [CommRing K]
@@ -71,7 +73,8 @@ private theorem closedFormCoefficientMatrix_parameterDegree {K τ : Type*} [Comm
     (hf : BivariateParameterDegreeBound f D) :
     ∀ i j, (closedFormCoefficientMatrix d f i j).totalDegree ≤ D := by
   intro i j
-  change (((closedFormOperator f (closedFormPair _ d (Pi.single j 1))).coeff i.1).coeff i.2).totalDegree ≤ _
+  change (((closedFormOperator f (closedFormPair _ d (Pi.single j 1))).coeff i.1).coeff
+    i.2).totalDegree ≤ _
   have hdi := bivariateParameterDegreeBound_innerDerivative hf
   have hdo := bivariateParameterDegreeBound_outerDerivative hf
   cases j with
@@ -79,8 +82,10 @@ private theorem closedFormCoefficientMatrix_parameterDegree {K τ : Type*} [Comm
     rw [closedFormPair_single_inl]
     change (((((bivariateCoefficientDerivative _) (monomial j.1.val (monomial j.2.val 1))) * f -
       monomial j.1.val (monomial j.2.val 1) * (bivariateCoefficientDerivative _) f -
-      (0 : (MvPolynomial τ K)[X][X]).derivative * f + 0 * f.derivative).coeff i.1).coeff i.2).totalDegree ≤ _
-    simp only [map_zero, zero_mul, sub_zero, add_zero, bivariateCoefficientDerivative_monomial, one_mul]
+      (0 : (MvPolynomial τ K)[X][X]).derivative * f + 0 * f.derivative).coeff i.1).coeff
+        i.2).totalDegree ≤ _
+    simp only [map_zero, zero_mul, sub_zero, add_zero, bivariateCoefficientDerivative_monomial,
+      one_mul]
     have ha := bivariateParameterDegreeBound_monomial_mul hf (j.2.val : K) j.1.val (j.2.val-1)
     have hb := bivariateParameterDegreeBound_monomial_mul hdi (1 : K) j.1.val j.2.val
     simpa only [map_natCast, map_one] using (bivariateParameterDegreeBound_sub ha hb) i.1 i.2

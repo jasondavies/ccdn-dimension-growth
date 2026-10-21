@@ -54,7 +54,8 @@ private theorem projectiveHilbertFunction_permuted {K : Type*} [Field K] {n : �
           Submodule.mem_map.mpr ⟨rename e.symm f, hf.rename_isHomogeneous, rfl⟩, ?_⟩
       change (Ideal.Quotient.mk I) (rename e (rename e.symm f)) = (Ideal.Quotient.mk I) f
       exact congrArg (Ideal.Quotient.mk I) ((renameEquiv K e).apply_symm_apply f)
-  have h := (Submodule.equivMapOfInjective φ.toLinearMap (Ideal.kerLiftAlg_injective ψ) V).finrank_eq
+  have h :=
+    (Submodule.equivMapOfInjective φ.toLinearMap (Ideal.kerLiftAlg_injective ψ) V).finrank_eq
   rw [he] at h
   exact h
 

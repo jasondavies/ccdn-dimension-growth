@@ -141,12 +141,14 @@ theorem exists_eulerFactorKernel {F : Type*} [Field F]
     apply max_le
     · apply (bivariateTotalDegree_smul_le _ _).trans
       have h₁ := bivariateTotalDegree_mul_le h
-        (bivariateEulerContraction F (g.derivative, (bivariateCoefficientDerivative F) g) - (a : F) • g)
+        (bivariateEulerContraction F (g.derivative, (bivariateCoefficientDerivative F) g) -
+          (a : F) • g)
       have h₂ := bivariateEuler_defect_degree a ha g hg
       omega
     · apply (bivariateTotalDegree_smul_le _ _).trans
       have h₁ := bivariateTotalDegree_mul_le g
-        (bivariateEulerContraction F (h.derivative, (bivariateCoefficientDerivative F) h) - (b : F) • h)
+        (bivariateEulerContraction F (h.derivative, (bivariateCoefficientDerivative F) h) -
+          (b : F) • h)
       have h₂ := bivariateEuler_defect_degree b hb h hh
       omega
   obtain ⟨u, hu⟩ := exists_eulerBivariatePair k _ _ hp hq he

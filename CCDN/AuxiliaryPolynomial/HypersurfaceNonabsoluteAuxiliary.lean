@@ -29,7 +29,8 @@ private theorem nonabsolute_homogeneous_auxiliary {k K : Type*}
     ∃ q : MvPolynomial (Fin n) k, q ≠ 0 ∧ q.IsHomogeneous d ∧ ¬ f ∣ q ∧
       ∀ x : Fin n → k, eval x f = 0 → eval x q = 0 := by
   have hmap0 : map (algebraMap k K) f ≠ 0 := by
-    exact fun he => hir.ne_zero ((map_injective (algebraMap k K) (algebraMap k K).injective) (by simpa using he))
+    exact fun he => hir.ne_zero ((map_injective (algebraMap k K) (algebraMap k K).injective)
+      (by simpa using he))
   have hmapu : ¬ IsUnit (map (algebraMap k K) f) := by
     intro hu
     have he := (MvPolynomial.isUnit_iff_totalDegree_of_isReduced.mp hu).2

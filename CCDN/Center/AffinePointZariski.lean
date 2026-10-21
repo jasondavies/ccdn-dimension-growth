@@ -21,7 +21,8 @@ def affineEvaluationPrime {K σ : Type*} [Field K] (x : σ → K) :
     PrimeSpectrum (MvPolynomial σ K) :=
   ⟨RingHom.ker (eval x),RingHom.ker_isPrime (eval x)⟩
 
-@[instance_reducible] def affinePointZariskiTopology (K σ : Type*) [Field K] : TopologicalSpace (σ → K) :=
+@[instance_reducible] def affinePointZariskiTopology (K σ : Type*) [Field K] :
+    TopologicalSpace (σ → K) :=
   TopologicalSpace.induced affineEvaluationPrime inferInstance
 
 attribute [local instance] affinePointZariskiTopology

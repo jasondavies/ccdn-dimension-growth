@@ -47,7 +47,8 @@ def centerMinorProjection {K : Type*} [Field K] {r n : ℕ}
 /-- Laplace expansion gives the linear coordinate of the center map. -/
 def centerMinorProjectionForm {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (c : Fin (r + 1) ↪ Fin n) : MvPolynomial (Fin n) K :=
-  ∑ j : Fin (r + 1), C ((-1 : K) ^ (j : ℕ) * (A.submatrix id (j.succAboveEmb.trans c)).det) * X (c j)
+  ∑ j : Fin (r + 1),
+    C ((-1 : K) ^ (j : ℕ) * (A.submatrix id (j.succAboveEmb.trans c)).det) * X (c j)
 
 lemma centerMinorProjectionForm_eval {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (c : Fin (r + 1) ↪ Fin n) (x : Fin n → K) :
@@ -60,7 +61,8 @@ lemma centerMinorProjectionForm_eval {K : Type*} [Field K] {r n : ℕ}
   have he : Matrix.submatrix (Matrix.submatrix (Fin.cons x (fun i j => A i j)) id c)
       Fin.succ j.succAbove = A.submatrix id (j.succAboveEmb.trans c) := by
     ext a b
-    change (Fin.cons x (fun i j => A i j) : Fin (r + 1) → Fin n → K) a.succ (c (j.succAbove b)) = A a (c (j.succAbove b))
+    change (Fin.cons x (fun i j => A i j) : Fin (r + 1) → Fin n → K) a.succ (c (j.succAbove b)) =
+      A a (c (j.succAbove b))
     rw [Fin.cons_succ]
   rw [he]
   change (-1 : K) ^ (j : ℕ) * _ * x (c j) = (-1 : K) ^ (j : ℕ) * x (c j) * _

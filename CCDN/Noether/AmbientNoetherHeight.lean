@@ -72,7 +72,8 @@ private theorem ambientNoetherParameterMinor_flatten_l1_le
   let φ := (sumAlgEquiv ℤ (PlaneParameters σ) (Sym σ (k + 2))).symm.toRingHom
   change l1Norm (φ
     (((eulerClosedFormCoefficientMatrix k
-      (universalPlanePolynomial (universalHomogeneousForm σ (k + 2))))).submatrix rows cols).det) ≤ _
+      (universalPlanePolynomial (universalHomogeneousForm σ (k + 2))))).submatrix
+        rows cols).det) ≤ _
   rw [RingHom.map_det]
   have hdet := l1Norm_det_le _ (N * ((k + 2) * 3 ^ (k + 2)))
     (fun i j => ambientEulerEntry_flatten_l1_le σ k (rows i) (cols j))

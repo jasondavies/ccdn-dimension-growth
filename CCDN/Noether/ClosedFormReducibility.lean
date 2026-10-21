@@ -85,8 +85,9 @@ private theorem closedForm_rank_drop_of_coprime_factors
   · intro a he
     apply factor_numerator_not_scalar_gradient (g.map φ) (h.map φ)
       (natDegree_pos_iff_degree_pos.mp (hgnat ▸ hgpos)) hcop hgg hh' (algebraMap F (RatFunc F) a)
-    simpa only [Polynomial.map_mul, Polynomial.map_C, derivative_map, derivative_mul, Polynomial.map_add,
-      RatFunc.algebraMap_C, RatFunc.algebraMap_eq_C, φ] using congrArg (Polynomial.map φ) he
+    simpa only [Polynomial.map_mul, Polynomial.map_C, derivative_map, derivative_mul,
+      Polynomial.map_add, RatFunc.algebraMap_C, RatFunc.algebraMap_eq_C, φ] using
+      congrArg (Polynomial.map φ) he
 
 /-- Repeated irreducible factors of every multiplicity at least two likewise
 force rank drop; the whole equation need not be squarefree. -/

@@ -61,7 +61,8 @@ def homogeneousSlice {R : Type*} [CommRing R] (n : ℕ) (h : R) :
 lemma homogeneousSlice_eq_chart_scale {R : Type*} [CommRing R] {n : ℕ}
     (h : R) (f : MvPolynomial (Fin (n + 1)) R) :
     homogeneousSlice n h f = affineChart n (firstCoordinateScaleHom R h f) := by
-  have he : homogeneousSlice n h = (affineChart n).comp (firstCoordinateScaleHom R h).toRingHom := by
+  have he : homogeneousSlice n h =
+      (affineChart n).comp (firstCoordinateScaleHom R h).toRingHom := by
     apply MvPolynomial.ringHom_ext
     · intro c
       simp [homogeneousSlice, affineChart, firstCoordinateScaleHom]
@@ -83,7 +84,8 @@ lemma homogeneousSlice_degree_le {R : Type*} [CommRing R] {n d : ℕ}
     (h : R) {f : MvPolynomial (Fin (n + 1)) R} (hf : f.IsHomogeneous d) :
     (homogeneousSlice n h f).totalDegree ≤ d := by
   rw [homogeneousSlice_eq_chart_scale]
-  exact (affineChart_totalDegree_le _).trans (firstCoordinateScaleHom_homogeneous h hf).totalDegree_le
+  exact (affineChart_totalDegree_le _).trans
+    (firstCoordinateScaleHom_homogeneous h hf).totalDegree_le
 
 lemma homogeneousSlice_monomial {R : Type*} [CommRing R] {n : ℕ}
     (h : R) (m : Fin (n + 1) →₀ ℕ) (c : R) :
@@ -129,7 +131,8 @@ private theorem homogeneous_dvd_of_slice_dvd {K : Type*} [Field K] {n d M : ℕ}
 
 private lemma homogeneousSlice_map {R S : Type*} [CommRing R] [CommRing S] {n : ℕ}
     (φ : R →+* S) (h : R) (f : MvPolynomial (Fin (n + 1)) R) :
-    MvPolynomial.map φ (homogeneousSlice n h f) = homogeneousSlice n (φ h) (MvPolynomial.map φ f) := by
+    MvPolynomial.map φ (homogeneousSlice n h f) =
+      homogeneousSlice n (φ h) (MvPolynomial.map φ f) := by
   have he : (MvPolynomial.map φ).comp (homogeneousSlice n h) =
       (homogeneousSlice n (φ h)).comp (MvPolynomial.map φ) := by
     apply MvPolynomial.ringHom_ext
@@ -155,7 +158,8 @@ theorem rational_homogeneousSlice_not_dvd {n d M : ℕ}
   have hhQ : (h : ℚ) ≠ 0 := by exact_mod_cast hh
   apply homogeneous_dvd_of_slice_dvd hhQ (hf.map _) ?_ (hg.map _) ?_ hdiv
   · exact fun he => hf0 ((map_injective (Int.castRingHom ℚ) Int.cast_injective) (by simpa using he))
-  · change (homogeneousSlice n ((Int.castRingHom ℚ) h) (MvPolynomial.map (Int.castRingHom ℚ) f)).totalDegree = d
+  · change (homogeneousSlice n ((Int.castRingHom ℚ) h)
+      (MvPolynomial.map (Int.castRingHom ℚ) f)).totalDegree = d
     rw [← homogeneousSlice_map]
     have he : (MvPolynomial.map (Int.castRingHom ℚ) (homogeneousSlice n h f)).totalDegree =
         (homogeneousSlice n h f).totalDegree := totalDegree_map_of_injective Int.cast_injective _

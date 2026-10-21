@@ -75,7 +75,8 @@ theorem auxiliary_small_height_bracket_bound {r d M X a k u b l : ℝ}
     convert hh using 1
     ring
   have hb' : b / a ≤ ((r + 1) / X * (1 + 2 * d / M)) * b := by
-    simpa only [one_div, div_eq_mul_inv, mul_comm, mul_one] using mul_le_mul_of_nonneg_right hrecip hb
+    simpa only [one_div, div_eq_mul_inv, mul_comm, mul_one] using
+      mul_le_mul_of_nonneg_right hrecip hb
   have hl' := mul_le_mul_of_nonneg_right hquot hl
   have herr1 : 2 * (r + 1) * d * b / (X * M) ≤ 2 * (r + 1) := by
     apply (div_le_iff₀ (mul_pos hX hM0)).mpr

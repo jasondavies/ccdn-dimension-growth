@@ -61,7 +61,8 @@ private lemma rationalAffineLine_eq_of_distinct_points {n : ℕ} {a v x y : RatP
 lemma integerDirectionHeight_pos {n : ℕ} {v : IntPoint n} (hv : v ≠ 0) :
     0 < integerDirectionHeight v := by
   obtain ⟨j, hj⟩ := Function.ne_iff.mp hv
-  exact (Int.natAbs_pos.mpr hj).trans_le (Finset.le_sup (f := fun j => (v j).natAbs) (Finset.mem_univ j))
+  exact (Int.natAbs_pos.mpr hj).trans_le
+    (Finset.le_sup (f := fun j => (v j).natAbs) (Finset.mem_univ j))
 
 private lemma exists_coordinate_integerDirectionHeight {n : ℕ} {v : IntPoint n} (hv : v ≠ 0) :
     ∃ j, |(v j : ℝ)| = integerDirectionHeight v := by
@@ -166,7 +167,8 @@ private theorem integral_rationalAffineLine_count {n : ℕ} (a v : IntPoint n)
         have hh := T.min'_le (T.max' hT) (T.max'_mem hT)
         exact sub_nonneg.mpr (by exact_mod_cast hh))] at habs
       linarith
-    have hheight : (0 : ℝ) < integerDirectionHeight v := by exact_mod_cast integerDirectionHeight_pos hv
+    have hheight : (0 : ℝ) < integerDirectionHeight v := by
+      exact_mod_cast integerDirectionHeight_pos hv
     have hdif := (le_div_iff₀ hheight).mpr hspan
     have hcnt := int_finset_card_le_span T hT
     rw [hcard] at hcnt

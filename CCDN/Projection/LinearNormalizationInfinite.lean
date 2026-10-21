@@ -65,7 +65,8 @@ private lemma exists_fin_integral_linear_elimination_infinite
     ∃ a : Fin n → MvPolynomial (Fin (n + 1)) K,
       (∀ i, (a i).IsHomogeneous 1) ∧
       (projectionCoordinateMap I a).IsIntegral ∧
-      (filteredHilbertPolynomial (RingHom.ker (projectionCoordinateMap I a))).natDegree = m + 1 := by
+      (filteredHilbertPolynomial (RingHom.ker (projectionCoordinateMap I a))).natDegree =
+        m + 1 := by
   classical
   let e := renameEquiv K (finSuccEquiv n)
   let : LinearOrder (Option (Fin n)) :=
@@ -78,7 +79,8 @@ private lemma exists_fin_integral_linear_elimination_infinite
     intro hz
     rw [hz, filteredHilbertPolynomial_bot] at hpoly
     have hh := congrArg Polynomial.natDegree hpoly
-    simp only [hdim, Polynomial.natDegree_preHilbertPoly, Fintype.card_option, Fintype.card_fin] at hh
+    simp only [hdim, Polynomial.natDegree_preHilbertPoly, Fintype.card_option,
+      Fintype.card_fin] at hh
     omega
   obtain ⟨f, hfI, hf⟩ := Submodule.exists_mem_ne_zero_of_ne_bot hJ0
   obtain ⟨b, hb, hint⟩ := exists_integral_linear_elimination_infinite J f hf hfI

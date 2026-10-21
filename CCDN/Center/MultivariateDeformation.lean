@@ -46,7 +46,8 @@ private theorem polynomial_deformation_injective
       calc
         P.coeff P.natTrailingDegree =
             (Polynomial.X ^ P.natTrailingDegree * Q).coeff (0 + P.natTrailingDegree) := by
-          simpa only [Nat.zero_add] using congrArg (fun f : Polynomial R => f.coeff P.natTrailingDegree) hQ
+          simpa only [Nat.zero_add] using
+            congrArg (fun f : Polynomial R => f.coeff P.natTrailingDegree) hQ
         _ = Q.coeff 0 := Polynomial.coeff_X_pow_mul _ _ _
     rwa [he] at hh
   have hmapQ : Φ Q = 0 := by

@@ -5,6 +5,9 @@ Every `.lean` file must be a regular UTF-8 file (not a symbolic link), start wit
 header keyword (lakefile.lean excepted) and have at most 10,000 lines. The scanner functions
 follow PalomarSubmission/scripts/source_requirements.py; passing this check does not replace
 Palomar's own verification.
+
+Outside `vendor/` (whose files keep their recorded hashes), every line also has at most 100
+characters, as in Mathlib; a line containing a URL is exempt.
 """
 import argparse
 import os
@@ -14,6 +17,8 @@ from pathlib import Path
 from common import ROOT
 
 COMMENT_MARKER = re.compile(r"/-|-/")
+MAX_LINE_LENGTH = 100
+URL = re.compile(r"\b[a-z][a-z0-9+.-]*://")
 # Lean 4 Init/Meta/Defs.lean identifier characters; Python Unicode classes
 # are broader. A qualified identifier also continues across a dot.
 ID_LETTER_LIKE = (
@@ -107,9 +112,16 @@ def main() -> int:
         if physical_lines(text) > 10_000:
             print(f"{relative}: exceeds 10,000 lines; split into smaller modules")
             failed = True
+        if relative.parts[0] != "vendor":
+            for number, line in enumerate(text.split("\n"), 1):
+                line = line.removesuffix("\r")
+                if len(line) > MAX_LINE_LENGTH and not URL.search(line):
+                    print(f"{relative}:{number}: line has {len(line)} characters, more than "
+                          f"{MAX_LINE_LENGTH}")
+                    failed = True
     if not failed:
         print(f"Lean sources: {len(files)} files have module headers, are UTF-8 and are under "
-              "10,000 lines.")
+              f"10,000 lines; outside vendor/ no line exceeds {MAX_LINE_LENGTH} characters.")
     return int(failed)
 
 

@@ -38,8 +38,10 @@ theorem coprime_newton_edge_bad_prime_factor
     (f : MvPolynomial (Fin 2) ℤ) {d e : ℕ} (h : HasCoprimeNewtonEdge f d e) :
     hypersurfaceBadPrimeFactor f ≤ Real.exp (2 * mertensError + 1) *
       (Real.log |(newtonEdgeCoefficientProduct f d e : ℝ)| + 1) := by
-  have hir := (h.map_of_injective (Int.castRingHom (AlgebraicClosure ℚ)) Int.cast_injective).irreducible
-  have hd : 0 < f.totalDegree := by rw [h.totalDegree]; have := h.lower_pos; have := h.degree_gt; omega
+  have hir :=
+    (h.map_of_injective (Int.castRingHom (AlgebraicClosure ℚ)) Int.cast_injective).irreducible
+  have hd : 0 < f.totalDegree := by
+    rw [h.totalDegree]; have := h.lower_pos; have := h.degree_gt; omega
   let P := (finite_fin_hypersurface_bad_primes f hir hd).toFinset
   have hP (p : ℕ) : p ∈ P ↔ stepanovThreshold f.totalDegree < p ∧ HypersurfaceBadReduction f p := by
     simp only [P, Set.Finite.mem_toFinset, Set.mem_ofPred_eq]
@@ -73,7 +75,8 @@ theorem primitive_coprime_newton_edge_count
       coprimeNewtonEdgeCountConstant * (d : ℝ) ^ 4 *
         (Real.log |(newtonEdgeCoefficientProduct f d e : ℝ)| + 1) * B ^ (1 / (d : ℝ)) := by
   have hir := (h.map_of_injective (Int.castRingHom ℚ) Int.cast_injective).irreducible
-  have hd : 0 < f.totalDegree := by rw [h.totalDegree]; have := h.lower_pos; have := h.degree_gt; omega
+  have hd : 0 < f.totalDegree := by
+    rw [h.totalDegree]; have := h.lower_pos; have := h.degree_gt; omega
   have hb := affine_plane_count_bad_prime f hprim hir hd hB
   rw [h.totalDegree] at hb
   have hfactor := coprime_newton_edge_bad_prime_factor f h

@@ -73,7 +73,8 @@ lemma one : CoefficientwiseHomogeneous (1 : MvPolynomial σ (MvPolynomial τ R))
   simpa only [map_one] using C_of_isHomogeneous (σ := σ) (isHomogeneous_one τ R)
 
 lemma map_C (f : MvPolynomial σ R) :
-    CoefficientwiseHomogeneous (MvPolynomial.map (MvPolynomial.C : R →+* MvPolynomial τ R) f) 0 := by
+    CoefficientwiseHomogeneous
+      (MvPolynomial.map (MvPolynomial.C : R →+* MvPolynomial τ R) f) 0 := by
   intro m
   rw [coeff_map]
   exact isHomogeneous_C _ _

@@ -73,7 +73,8 @@ theorem hypersurface_auxiliary_large_height_degree
     (hposition : Real.log H ≤ Real.log |((order.leadingCoeff f : ℤ) : ℝ)| +
       T * d * degreeRoot n d) :
     ∃ M : ℕ, (M : ℝ) ≤
-      (8 * (n + 2 : ℝ) + Real.exp (hypersurfaceLargeHeightError (n + 1) (hypersurfaceNormalizedError n) T) + 2) *
+      (8 * (n + 2 : ℝ) +
+          Real.exp (hypersurfaceLargeHeightError (n + 1) (hypersurfaceNormalizedError n) T) + 2) *
         (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) ∧
       ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
         (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by

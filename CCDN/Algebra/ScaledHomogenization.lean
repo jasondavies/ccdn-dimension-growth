@@ -62,7 +62,8 @@ theorem exists_scaledHomogenize_top_coefficient {n : ℕ} (f : MvPolynomial (Fin
     (hf : f ≠ 0) {h : ℤ} (hh : 1 ≤ h) :
     ∃ m : Fin n →₀ ℕ, m.sum (fun _ e => e) = f.totalDegree ∧
       (h : ℝ) ^ f.totalDegree ≤
-        |((scaledHomogenize f.totalDegree h f).coeff (homogenizedExponent f.totalDegree m) : ℝ)| := by
+        |((scaledHomogenize f.totalDegree h f).coeff
+          (homogenizedExponent f.totalDegree m) : ℝ)| := by
   obtain ⟨m, hm, hdeg⟩ := f.support.exists_mem_eq_sup (support_nonempty.mpr hf)
     (fun m => m.sum (fun _ e => e))
   have hm0 : f.coeff m ≠ 0 := mem_support_iff.mp hm

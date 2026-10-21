@@ -34,7 +34,8 @@ private theorem projectiveCurveEstimate_scale (n : ℕ) {d : ℕ} (hd : 0 < d)
     projectiveCurveEstimate d (projectionBoxFactor n d * B) ≤
       Real.exp (2 * projectionLogConstant n) * projectiveCurveEstimate d B := by
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
-  have hA : 0 < projectionBoxFactor n d := lt_of_lt_of_le (by norm_num) (projectionBoxFactor_one_le n d)
+  have hA : 0 < projectionBoxFactor n d :=
+    lt_of_lt_of_le (by norm_num) (projectionBoxFactor_one_le n d)
   have hpow : (projectionBoxFactor n d) ^ (2 / (d : ℝ)) ≤
       Real.exp (2 * projectionLogConstant n) := by
     rw [Real.rpow_def_of_pos hA, Real.exp_le_exp, ← mul_div_assoc]

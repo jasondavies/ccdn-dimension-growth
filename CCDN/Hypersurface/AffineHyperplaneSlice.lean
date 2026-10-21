@@ -91,7 +91,8 @@ theorem affineGraphHyperplaneSlice_degree {K : Type*} [Field K] {n : ℕ}
     (htop : graphHyperplaneRestriction a (homogeneousComponent f.totalDegree f) ≠ 0) :
     (affineGraphHyperplaneSlice a c f).totalDegree = f.totalDegree := by
   apply le_antisymm
-  · exact (graphHyperplaneRestriction_totalDegree_le _ _).trans_eq (optionCoordinateShift_degree c f)
+  · exact (graphHyperplaneRestriction_totalDegree_le _ _).trans_eq
+      (optionCoordinateShift_degree c f)
   · by_contra h
     have hz := homogeneousComponent_eq_zero f.totalDegree
       (affineGraphHyperplaneSlice a c f) (by omega)

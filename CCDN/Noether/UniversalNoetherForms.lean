@@ -64,7 +64,8 @@ private theorem exists_universalPlane_euler_minor_charZero
   let F := FractionRing R
   let φ : R →+* F := algebraMap R F
   have hne : φ (((eulerClosedFormCoefficientMatrix k
-      (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).submatrix rows cols).det) ≠ 0 :=
+      (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).submatrix
+        rows cols).det) ≠ 0 :=
     (map_ne_zero_iff _ (IsFractionRing.injective R F)).mpr hdet
   rw [eulerClosedForm_minor_map, normalized_genericPlane_universal_specialization,
     eulerClosedForm_minor_smul, ← eulerClosedForm_minor_map] at hne

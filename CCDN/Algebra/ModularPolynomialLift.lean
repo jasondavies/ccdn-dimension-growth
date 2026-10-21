@@ -31,7 +31,8 @@ private lemma coeff_modularPolynomialLift {σ : Type*} {p : ℕ}
     rw [hc, ZMod.val_zero, Nat.cast_zero]
 
 lemma map_modularPolynomialLift {σ : Type*} {p : ℕ} [NeZero p]
-    (f : MvPolynomial σ (ZMod p)) : map (Int.castRingHom (ZMod p)) (modularPolynomialLift f) = f := by
+    (f : MvPolynomial σ (ZMod p)) :
+    map (Int.castRingHom (ZMod p)) (modularPolynomialLift f) = f := by
   ext e
   simp only [coeff_map, coeff_modularPolynomialLift, Int.coe_castRingHom,
     Int.cast_natCast, ZMod.natCast_zmod_val]

@@ -151,7 +151,8 @@ private lemma closedForm_rank_smul {F : Type*} [Field F] (a : F) (ha : a ≠ 0)
 
 lemma bivariate_smul_eq_constant_mul {R : Type*} [CommRing R] (a : R) (f : R[X][X]) :
     a • f = C (C a) * f := by
-  simp only [Algebra.smul_def, Polynomial.algebraMap_apply, Algebra.algebraMap_self, RingHom.id_apply]
+  simp only [Algebra.smul_def, Polynomial.algebraMap_apply, Algebra.algebraMap_self,
+    RingHom.id_apply]
 
 lemma bivariate_irreducible_smul_iff {F : Type*} [Field F]
     (a : F) (ha : a ≠ 0) (f : F[X][X]) : Irreducible (a • f) ↔ Irreducible f := by

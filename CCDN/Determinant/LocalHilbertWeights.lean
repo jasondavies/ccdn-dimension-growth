@@ -109,7 +109,8 @@ theorem exists_hypersurfacePointStalk_hilbert_weights {n : ℕ}
   obtain ⟨w, hw, hfinite, hcount, _⟩ :=
     exists_positive_profile_enumeration (hypersurfacePointLayerDimension f a) hpositive
   exact ⟨μ, hpos, hdeg, hprofile, w, hw, hfinite, hcount,
-    fun _ => hypersurfacePointStalk_enumerated_weights_sum_lower_bound f a hpos hf hμ w hw hfinite hcount⟩
+    fun _ => hypersurfacePointStalk_enumerated_weights_sum_lower_bound f a hpos hf hμ w hw
+      hfinite hcount⟩
 
 end
 end CCDN

@@ -83,7 +83,8 @@ theorem projective_hypersurface_totalMultiplicity_bound {n p d : ℕ} [Fact p.Pr
     have hmR : (projectiveHypersurfaceTotalMultiplicity f hf hf0 : ℝ) ≤
         Fintype.card (ProjectiveHypersurfaceResidue f p) := by exact_mod_cast hm
     apply (hmR.trans hc).trans
-    have he : (0 : ℝ) ≤ (((n + 3) * (n + 4) ^ n : ℕ) : ℝ) * (p : ℝ) ^ n * Real.sqrt p := by positivity
+    have he : (0 : ℝ) ≤ (((n + 3) * (n + 4) ^ n : ℕ) : ℝ) * (p : ℝ) ^ n * Real.sqrt p := by
+      positivity
     nlinarith
 
 end

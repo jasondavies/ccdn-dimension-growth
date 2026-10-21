@@ -91,7 +91,8 @@ def independentCenterPlucker {K : Type*} [Field K] {r n : ℕ}
 
 theorem independentCenterPlucker_eq_iff
     {K : Type*} [Field K] {r n : ℕ} (x y : IndependentCenterMatrix K r n) :
-    independentCenterPlucker x = independentCenterPlucker y ↔ centerMatrixSpan x = centerMatrixSpan y := by
+    independentCenterPlucker x = independentCenterPlucker y ↔
+      centerMatrixSpan x = centerMatrixSpan y := by
   rw [independentCenterPlucker, independentCenterPlucker, Projectivization.mk_eq_mk_iff,
     centerMatrixSpan_eq_iff]
   constructor

@@ -31,7 +31,8 @@ def formalPlanePolynomial {K : Type*} [CommRing K] (j : Fin 2) (a : K) :
 
 private lemma formalPlanePolynomial_derivative {K : Type*} [CommRing K]
     (j : Fin 2) (a : K) (f : MvPolynomial (Fin 2) K) :
-    (formalPlanePolynomial j a f).derivative = formalPlanePolynomial j a (MvPolynomial.pderiv j f) := by
+    (formalPlanePolynomial j a f).derivative =
+      formalPlanePolynomial j a (MvPolynomial.pderiv j f) := by
   induction f using MvPolynomial.induction_on with
   | C c => simp [formalPlanePolynomial]
   | add f g hf hg => simp [map_add, hf, hg]
@@ -46,7 +47,8 @@ private lemma formalPlanePolynomial_derivative {K : Type*} [CommRing K]
 private lemma formalPlanePolynomial_eval {K : Type*} [CommRing K]
     (j : Fin 2) (a : K) (f : MvPolynomial (Fin 2) K) (g : PowerSeries K) :
     (formalPlanePolynomial j a f).eval g =
-      MvPolynomial.eval₂ PowerSeries.C (fun k => if k = j then g else PowerSeries.X + PowerSeries.C a) f := by
+      MvPolynomial.eval₂ PowerSeries.C
+        (fun k => if k = j then g else PowerSeries.X + PowerSeries.C a) f := by
   induction f using MvPolynomial.induction_on with
   | C c => simp [formalPlanePolynomial]
   | add f h hf hh => simp [map_add, hf, hh]
@@ -82,7 +84,8 @@ theorem exists_unique_formal_plane_branch {K : Type*} [Field K]
     exact hz
   have hder : (F.derivative.map PowerSeries.constantCoeff).eval (z j) ≠ 0 := by
     dsimp only [F]
-    rw [formalPlanePolynomial_derivative, formalPlanePolynomial_constant_eval, plane_coordinate_cases]
+    rw [formalPlanePolynomial_derivative, formalPlanePolynomial_constant_eval,
+      plane_coordinate_cases]
     exact hj
   obtain ⟨g, hg, hfg⟩ := exists_formal_simple_root F (z j) hroot hder
   refine ⟨g, ⟨hg, ?_⟩, ?_⟩

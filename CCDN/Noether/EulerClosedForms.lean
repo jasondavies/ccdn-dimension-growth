@@ -23,7 +23,8 @@ def bivariateEulerContraction (R : Type*) [CommRing R] :
     (R[X][X] × R[X][X]) →ₗ[R] R[X][X] where
   toFun u := X * u.1 + C X * u.2
   map_add' u v := by simp only [Prod.fst_add, Prod.snd_add, mul_add]; ring
-  map_smul' a u := by simp only [Prod.smul_fst, Prod.smul_snd, mul_smul_comm, smul_add, RingHom.id_apply]
+  map_smul' a u := by
+    simp only [Prod.smul_fst, Prod.smul_snd, mul_smul_comm, smul_add, RingHom.id_apply]
 
 private lemma bivariateEulerContraction_gradient_leading {R : Type*} [CommRing R]
     (f : R[X][X]) (hm : f.Monic) (hd : 0 < f.natDegree) :

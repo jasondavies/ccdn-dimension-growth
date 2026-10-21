@@ -36,7 +36,8 @@ private theorem plane_projection_not_injective {K τ : Type*} [Field K] [Fintype
     let ψ := projectionCoordinateMap I a
     let T : V →ₗ[K] filteredCoordinateSpace I M :=
       (ψ.toLinearMap.comp V.subtype).codRestrict _ (fun v =>
-        projectionCoordinateMap_filtered I a ha v.val ((mem_restrictTotalDegree _ _ _).mp v.property))
+        projectionCoordinateMap_filtered I a ha v.val
+          ((mem_restrictTotalDegree _ _ _).mp v.property))
     have hi : Function.Injective T := by
       intro x y h
       apply Subtype.ext
@@ -53,8 +54,10 @@ private theorem plane_projection_not_injective {K τ : Type*} [Field K] [Fintype
     exact_mod_cast hlow M
   have hchoose : (2 : ℤ) * ((M + 2).choose 2 : ℕ) = ((M : ℤ) + 2) * (M + 1) := by
     exact_mod_cast two_mul_choose_add_two M
-  have hm4d : (4 : ℤ) * d ≤ M := by simp only [M, Nat.cast_mul, Nat.cast_add, Nat.cast_one, Nat.cast_ofNat]; omega
-  have hm4c : (4 : ℤ) * c.natAbs + 4 ≤ M := by simp only [M, Nat.cast_mul, Nat.cast_add, Nat.cast_one, Nat.cast_ofNat]; omega
+  have hm4d : (4 : ℤ) * d ≤ M := by
+    simp only [M, Nat.cast_mul, Nat.cast_add, Nat.cast_one, Nat.cast_ofNat]; omega
+  have hm4c : (4 : ℤ) * c.natAbs + 4 ≤ M := by
+    simp only [M, Nat.cast_mul, Nat.cast_add, Nat.cast_one, Nat.cast_ofNat]; omega
   have hprod := mul_le_mul_of_nonneg_right hm4d (Nat.cast_nonneg M : (0 : ℤ) ≤ M)
   have hc : c ≤ (c.natAbs : ℤ) := Int.le_natAbs
   nlinarith

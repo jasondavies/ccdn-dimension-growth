@@ -75,7 +75,8 @@ private theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
     rw [scaledHomogenize_eval _ _ le_rfl, (Finset.mem_filter.mp (E i).property).2, mul_zero]
   have hbox (i j) : |(z i j : ℝ)| ≤ B := by
     refine Fin.cases ?_ (fun k => ?_) j
-    · simpa only [z, Fin.cons_zero, Int.cast_natCast, abs_of_nonneg (Nat.cast_nonneg (α := ℝ) h)] using hhB
+    · simpa only [z, Fin.cons_zero, Int.cast_natCast,
+        abs_of_nonneg (Nat.cast_nonneg (α := ℝ) h)] using hhB
     · exact mem_integerBox.mp (Finset.mem_filter.mp (E i).property).1 k
   have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous _ _ le_rfl
   have hFabs : AbsolutelyIrreducible F := by

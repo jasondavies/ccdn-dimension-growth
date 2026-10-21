@@ -163,7 +163,8 @@ private theorem surface_congruence_degree_selection {d : ℕ} (hd : 0 < d)
   have hT : 1 ≤ T := by dsimp only [T]; linarith [Real.log_nonneg hB]
   have hT0 : 0 < T := zero_lt_one.trans_le hT
   have hρ : 0 < ρ := by dsimp only [ρ]; positivity
-  have hE : 1 ≤ E := by dsimp only [E]; linarith [Real.exp_pos (surfaceCongruenceGapConstant d K / 2)]
+  have hE : 1 ≤ E := by
+    dsimp only [E]; linarith [Real.exp_pos (surfaceCongruenceGapConstant d K / 2)]
   have hE0 : 0 < E := zero_lt_one.trans_le hE
   have hS0 : 0 < S := by dsimp only [S]; positivity
   have hST : T ≤ S := by

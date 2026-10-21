@@ -113,8 +113,8 @@ private lemma homogeneousTranslation_directionalDerivative {K : Type*} [Field K]
     refine Fin.cases ?_ (fun j => ?_) i
     · simp [e, homogeneousTranslation, homogeneousTranslationHom]
     · simp only [e, homogeneousTranslation, homogeneousTranslationHom, AlgEquiv.ofAlgHom_apply,
-        aeval_X, Fin.cons_succ, map_add, pderiv_mul, pderiv_X_of_ne (Fin.succ_ne_zero j), pderiv_C, zero_mul,
-        pderiv_X_self, mul_one, zero_add]
+        aeval_X, Fin.cons_succ, map_add, pderiv_mul, pderiv_X_of_ne (Fin.succ_ne_zero j), pderiv_C,
+        zero_mul, pderiv_X_self, mul_one, zero_add]
       rw [← C_mul]
       congr 1
       field_simp
@@ -220,7 +220,8 @@ private lemma directionalDerivative_add {R σ : Type*} [CommRing R] [Fintype σ]
 
 private lemma directionalDerivative_mul {R σ : Type*} [CommRing R] [Fintype σ]
     (v : σ → R) (f g : MvPolynomial σ R) :
-    directionalDerivative v (f * g) = directionalDerivative v f * g + f * directionalDerivative v g := by
+    directionalDerivative v (f * g) =
+      directionalDerivative v f * g + f * directionalDerivative v g := by
   classical
   simp only [directionalDerivative, pderiv_mul, mul_add, Finset.sum_add_distrib,
     Finset.sum_mul, Finset.mul_sum]

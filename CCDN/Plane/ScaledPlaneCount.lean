@@ -68,7 +68,8 @@ theorem scaled_plane_finite_count
     rw [scaledModelCoordinates_model_eval, hz i, mul_zero]
   have himagebox : ∀ i j, |(eval (z i) (τ j) : ℝ)| ≤ R := by
     intro i j
-    exact scaledModelCoordinates_box hB (by positivity) (by exact_mod_cast hpB) a (z i) ha (hbox i) j
+    exact scaledModelCoordinates_box hB (by positivity) (by exact_mod_cast hpB) a (z i) ha
+      (hbox i) j
   have hirq := rational_irreducible_of_charZero_map f hir
   by_cases hsmall : Real.log H ≤ 4 * d * Real.log R
   · obtain ⟨M, hM, g, hg⟩ := polynomial_map_auxiliary_small_height_degree

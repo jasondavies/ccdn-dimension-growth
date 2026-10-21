@@ -81,7 +81,8 @@ private lemma formalNewton_stabilizes {K : Type*} [Field K]
   | base => simp
   | succ m hnm ih =>
       have hprec := (formalNewton_precision f b u hroot hu m).2
-      have hd := (pow_dvd_pow (PowerSeries.X : PowerSeries K) (Nat.add_le_add_right hnm 1)).trans hprec
+      have hd := (pow_dvd_pow (PowerSeries.X : PowerSeries K) (Nat.add_le_add_right hnm 1)).trans
+        hprec
       have hh := dvd_mul_of_dvd_right hd (PowerSeries.C u)
       convert dvd_sub ih hh using 1
       simp only [formalNewtonSequence]

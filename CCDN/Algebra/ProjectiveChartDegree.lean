@@ -99,7 +99,8 @@ theorem projective_chart_filtered_finrank {K F : Type*} [Field K] [Field F] [Alg
       obtain ⟨f, hf, rfl⟩ := Submodule.mem_map.mp hu
       refine Submodule.mem_map.mpr ⟨(Ideal.Quotient.mk (RingHom.ker ψ)) (affineChart n f), ?_, ?_⟩
       · exact Submodule.mem_map.mpr ⟨affineChart n f,
-          (mem_restrictTotalDegree _ _ _).mpr ((affineChart_totalDegree_le f).trans hf.totalDegree_le),
+          (mem_restrictTotalDegree _ _ _).mpr
+            ((affineChart_totalDegree_le f).trans hf.totalDegree_le),
           rfl⟩
       · exact projectiveChartCoordinateMap_chart I q h0 f hf
     · intro hx
@@ -111,7 +112,8 @@ theorem projective_chart_filtered_finrank {K F : Type*} [Field K] [Field F] [Alg
       · exact (projectiveChartCoordinateMap_homogenize I q h0 f
           ((mem_restrictTotalDegree _ _ _).mp hf)).symm
   have hV := (Submodule.equivMapOfInjective φ hφ V).finrank_eq
-  have hW := (Submodule.equivMapOfInjective η.toLinearMap (Ideal.kerLiftAlg_injective ψ) W).finrank_eq
+  have hW :=
+    (Submodule.equivMapOfInjective η.toLinearMap (Ideal.kerLiftAlg_injective ψ) W).finrank_eq
   rw [himage] at hV
   exact hW.trans hV.symm
 

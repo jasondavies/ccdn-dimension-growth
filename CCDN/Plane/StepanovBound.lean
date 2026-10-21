@@ -62,7 +62,8 @@ theorem plane_stepanov_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
   let P (i : ι) := eval (z i) (pderiv k f) = 0
   have hgood := plane_stepanov_smooth_bound p f hf
     (fun i : {i // ¬ P i} => z i.val) (hz.comp Subtype.val_injective)
-    (fun i => hzero i.val) k.rev (by simpa only [Fin.rev_rev] using fun i : {i // ¬ P i} => i.property)
+    (fun i => hzero i.val) k.rev
+    (by simpa only [Fin.rev_rev] using fun i : {i // ¬ P i} => i.property)
     hD hN hdim
   have hnd : ¬ f ∣ pderiv k f := by
     rintro ⟨u, hu⟩

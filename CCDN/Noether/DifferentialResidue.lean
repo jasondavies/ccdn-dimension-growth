@@ -52,7 +52,9 @@ theorem closed_form_residue_deriv_eq_zero
   have he := congrArg (aeval c) hclosed
   simp only [map_sub, map_mul, hroot, mul_zero, zero_sub] at he
   have hq : aeval c q + aeval c p * c′ = 0 := by
-    apply (mul_eq_zero.mp (show aeval c f.derivative * (aeval c q + aeval c p * c′) = 0 from ?_)).resolve_left hsimple
+    apply (mul_eq_zero.mp
+      (show aeval c f.derivative * (aeval c q + aeval c p * c′) = 0 from ?_)).resolve_left
+      hsimple
     linear_combination (aeval c p) * hrootD + he
   have hd := congrArg Polynomial.derivative hclosed
   simp only [derivative_sub, derivative_mul, derivative_differential_mapCoeffs] at hd
@@ -108,7 +110,8 @@ theorem closed_form_eq_constant_gradient_of_residue_mem_base
   have hpEq := sub_eq_zero.mp hpzero
   have he := congrArg (aeval c) hclosed
   simp only [map_sub, map_mul, hc, mul_zero, zero_sub] at he
-  have hqEval : aeval c q = algebraMap K L (algebraMap F K a) * aeval c (Differential.mapCoeffs f) := by
+  have hqEval :
+      aeval c q = algebraMap K L (algebraMap F K a) * aeval c (Differential.mapCoeffs f) := by
     apply mul_right_cancel₀ hsimple
     rw [hpEval] at he
     linear_combination he

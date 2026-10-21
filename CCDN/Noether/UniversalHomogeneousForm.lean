@@ -74,7 +74,8 @@ over every commutative coefficient ring. -/
 theorem universalHomogeneousForm_specialize {R σ : Type*} [CommRing R]
     [Fintype σ] [DecidableEq σ] (d : ℕ)
     (f : MvPolynomial σ R) (hf : f.IsHomogeneous d) :
-    MvPolynomial.map (homogeneousCoefficientSpecialization d f) (universalHomogeneousForm σ d) = f := by
+    MvPolynomial.map (homogeneousCoefficientSpecialization d f) (universalHomogeneousForm σ d) =
+      f := by
   rw [universalHomogeneousForm, map_sum]
   have hX (i : Sym σ d) : homogeneousCoefficientSpecialization d f (X i) =
       homogeneousCoefficientData d f i := eval₂_X _ _ _
@@ -90,8 +91,8 @@ lemma universalHomogeneousForm_linear_expansion (σ : Type*) [Fintype σ] [Decid
 
 def universalPlanePolynomialLinear (R σ : Type*) [CommRing R] :
     MvPolynomial σ R →ₗ[R] Polynomial (Polynomial (MvPolynomial (PlaneParameters σ) R)) :=
-  ((bivariatePolynomialEquiv (MvPolynomial (PlaneParameters σ) R)).toLinearMap.restrictScalars R).comp
-    (universalPlaneMap R σ).toLinearMap
+  ((bivariatePolynomialEquiv (MvPolynomial (PlaneParameters σ) R)).toLinearMap.restrictScalars
+    R).comp (universalPlaneMap R σ).toLinearMap
 
 end
 end CCDN

@@ -79,13 +79,15 @@ private theorem eulerClosedFormOperator_injective {F : Type*} [Field F] [CharZer
       rw [degree_eq_natDegree hf.ne_zero, hdeg]
       apply degree_le_natDegree.trans_lt
       have hh : p.natDegree < k + 2 := lt_of_le_of_lt
-        ((bivariate_natDegree_le_totalDegree p).trans (eulerBivariatePair_fst_degree k u)) (by omega)
+        ((bivariate_natDegree_le_totalDegree p).trans (eulerBivariatePair_fst_degree k u))
+        (by omega)
       exact_mod_cast hh
     have hq : q.degree < f.degree := by
       rw [degree_eq_natDegree hf.ne_zero, hdeg]
       apply degree_le_natDegree.trans_lt
       have hh : q.natDegree < k + 2 := lt_of_le_of_lt
-        ((bivariate_natDegree_le_totalDegree q).trans (eulerBivariatePair_snd_degree k u)) (by omega)
+        ((bivariate_natDegree_le_totalDegree q).trans (eulerBivariatePair_snd_degree k u))
+        (by omega)
       exact_mod_cast hh
     have he : (bivariateEulerContraction F (p,q)).coeff f.natDegree = 0 := by
       apply coeff_eq_zero_of_natDegree_lt

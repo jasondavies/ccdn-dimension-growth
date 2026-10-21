@@ -47,7 +47,8 @@ theorem projectiveClosureIdeal_hilbertFunction {K : Type*} [Field K] {n : ℕ}
     apply projectiveClosureIdeal_not_X_zero I
     apply Ideal.Quotient.eq_zero_iff_mem.mp
     exact (IsFractionRing.injective (MvPolynomial (Fin (n + 1)) K ⧸ J)
-      (FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ J))) (by change q ((Ideal.Quotient.mk J) (X 0)) = q 0; simpa only [map_zero] using h)
+      (FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ J)))
+      (by change q ((Ideal.Quotient.mk J) (X 0)) = q 0; simpa only [map_zero] using h)
   have hh := projective_chart_filtered_finrank J q (IsFractionRing.injective _ _) h0 M
   change Module.finrank K (filteredCoordinateSpace (projectiveChartIdeal J) M) = _ at hh
   rw [projectiveClosureIdeal_chart I] at hh

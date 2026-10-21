@@ -62,7 +62,8 @@ theorem projective_plane_finite_count_positioned
   have hmir : Irreducible (map (Int.castRingHom K) model) := by
     dsimp only [model]
     rw [homogeneousTranslation_map]
-    exact (MulEquiv.irreducible_iff (f := homogeneousTranslation K ((Int.castRingHom K) ∘ a))).mpr hir
+    exact (MulEquiv.irreducible_iff
+      (f := homogeneousTranslation K ((Int.castRingHom K) ∘ a))).mpr hir
   obtain ⟨hmdeg, hmchart⟩ := homogeneous_absolute_chart_data model hmhom hd hmir
   let w := fun i => homogeneousPointTranslation (-a) (z i)
   have hw0 : ∀ i, w i ≠ 0 := fun i => homogeneousPointTranslation_ne_zero (-a) (hz0 i)

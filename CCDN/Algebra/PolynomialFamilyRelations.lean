@@ -89,7 +89,8 @@ private lemma exists_finite_detecting_functionals {K V : Type*} [Field K]
   have ht : T x = 0 := by
     apply b.repr.injective
     ext i
-    simpa only [map_zero, Finsupp.zero_apply, LinearMap.comp_apply, Module.Basis.coord_apply] using hzero i
+    simpa only [map_zero, Finsupp.zero_apply, LinearMap.comp_apply,
+      Module.Basis.coord_apply] using hzero i
   have hz : (⟨x, hx⟩ : S) = 0 := hTx.symm.trans ht
   exact congrArg Subtype.val hz
 

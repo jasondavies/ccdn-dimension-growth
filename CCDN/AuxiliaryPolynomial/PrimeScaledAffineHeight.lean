@@ -124,7 +124,8 @@ theorem scaled_hypersurface_auxiliary_bound {n : ℕ}
     have hh := mul_le_mul_of_nonneg_left (Real.log_le_log hp0 hpB) hd0.le
     linarith
   have hYpow : Y ^ q = (p : ℝ) ^ β * L ^ q := by
-    simpa only [Nat.cast_add, Nat.cast_one] using scaled_height_rpow (r := n + 1) (by omega) hd hp0 hL0
+    simpa only [Nat.cast_add, Nat.cast_one] using
+      scaled_height_rpow (r := n + 1) (by omega) hd hp0 hL0
   have htransfer : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * hypersurfaceBadPrimeFactor F / H ^ q ≤
       K * (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (Real.log Y + (d : ℝ) ^ 2) / ((p : ℝ) ^ β * L ^ q) := by
     have hh := hypersurface_badPrime_height_transfer F hF0 hFdegree hd hY hYH
@@ -146,7 +147,8 @@ theorem scaled_hypersurface_auxiliary_bound {n : ℕ}
       _ ≤ K * (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (T / L ^ q) *
           (A * B ^ (1 / (d : ℝ) ^ (1 / (n + 1 : ℝ)))) := by
         apply mul_le_mul
-        · exact mul_le_mul_of_nonneg_left (div_le_div_of_nonneg_right hnum (by positivity)) (by positivity)
+        · exact mul_le_mul_of_nonneg_left (div_le_div_of_nonneg_right hnum (by positivity))
+            (by positivity)
         · exact hpower
         · positivity
         · positivity

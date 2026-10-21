@@ -40,7 +40,8 @@ lemma homogeneous_evaluation_mulVec {K : Type*} [Field K] {n M t : ℕ}
         (∑ j, monomial (homogeneousMonomials n M j) (f.coeff (homogeneousMonomials n M j))) :=
         congrArg (eval (points i)) (homogeneous_eq_sum_coeff f hf)
     _ = _ := by
-      simp [homogeneousEvaluationMatrix, homogeneousCoefficientMap, mulVec, dotProduct, eval_monomial, mul_comm]
+      simp [homogeneousEvaluationMatrix, homogeneousCoefficientMap, mulVec, dotProduct,
+        eval_monomial, mul_comm]
 
 /-- Every finite set of zeros obeys the projective Hilbert rank bound. -/
 private theorem homogeneous_evaluation_rank_bound {K : Type*} [Field K] {n d M t : ℕ}

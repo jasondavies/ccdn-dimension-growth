@@ -84,7 +84,8 @@ private theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
     (Nat.card {z : Option (Fin (n + 2)) → ZMod p // eval z f = 0} : ℝ) ≤
       (p : ℝ) ^ (n + 2) + hypersurfaceResidueConstant * (f.totalDegree : ℝ) ^ 2 *
         (p : ℝ) ^ (n + 1) * Real.sqrt p := by
-  have hir := mvPolynomial_irreducible_of_field_map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f hf
+  have hir :=
+    mvPolynomial_irreducible_of_field_map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f hf
   have hd : 0 < f.totalDegree :=
     totalDegree_pos_of_ne_zero_of_not_isUnit hir.ne_zero hir.not_isUnit
   have hdR : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast hd
@@ -113,7 +114,8 @@ private theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
         (2 * (f.totalDegree : ℝ) ^ 3 * (p : ℝ) ^ (3 * n + 8)) * (f.totalDegree * p) +
         ((f.totalDegree : ℝ) ^ 3 * (p : ℝ) ^ (3 * n + 6)) * (p : ℝ) ^ 2 := by
       exact hi.trans (add_le_add
-        (add_le_add le_rfl (mul_le_mul_of_nonneg_right hb (show 0 ≤ (f.totalDegree : ℝ) * p by positivity)))
+        (add_le_add le_rfl
+          (mul_le_mul_of_nonneg_right hb (show 0 ≤ (f.totalDegree : ℝ) * p by positivity)))
         (mul_le_mul_of_nonneg_right hz (show 0 ≤ (p : ℝ) ^ 2 by positivity)))
     _ = _ := by
       rw [show 3 * n + 9 = (3 * n + 8) + 1 by omega, pow_succ,
@@ -129,7 +131,8 @@ private lemma polynomial_zero_card_renameEquiv {K σ τ : Type*} [CommRing K]
   exact {
     toFun := fun z => ⟨z.val ∘ e, by simpa only [eval_rename] using z.property⟩
     invFun := fun z => ⟨z.val ∘ e.symm, by
-      simpa only [eval_rename, Function.comp_assoc, Equiv.symm_comp_self, Function.comp_id] using z.property⟩
+      simpa only [eval_rename, Function.comp_assoc, Equiv.symm_comp_self, Function.comp_id] using
+        z.property⟩
     left_inv := fun z => by apply Subtype.ext; funext i; simp
     right_inv := fun z => by apply Subtype.ext; funext i; simp }
 

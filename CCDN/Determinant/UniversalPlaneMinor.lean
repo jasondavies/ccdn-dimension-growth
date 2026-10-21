@@ -84,7 +84,8 @@ theorem exists_universalPlane_minor
   let F := FractionRing R
   let φ : R →+* F := algebraMap R F
   have hne : φ (((closedFormCoefficientMatrix f.totalDegree
-      (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).submatrix rows cols).det) ≠ 0 :=
+      (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).submatrix
+        rows cols).det) ≠ 0 :=
     (map_ne_zero_iff _ (IsFractionRing.injective R F)).mpr hdet
   rw [closedForm_minor_map, normalized_genericPlane_universal_specialization,
     closedForm_minor_smul, ← closedForm_minor_map] at hne

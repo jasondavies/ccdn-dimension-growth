@@ -23,7 +23,8 @@ def quotientRadialMap {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K)) :
     intro n
     rw [Polynomial.coeff_map, radialMap_coeff]
     exact ⟨homogeneousComponent n f,
-      (mem_restrictTotalDegree _ _ _).mpr (homogeneousComponent_isHomogeneous n f).totalDegree_le, rfl⟩⟩
+      (mem_restrictTotalDegree _ _ _).mpr
+        (homogeneousComponent_isHomogeneous n f).totalDegree_le, rfl⟩⟩
   map_zero' := by apply Subtype.ext; simp
   map_one' := by apply Subtype.ext; simp
   map_add' f g := by apply Subtype.ext; simp
@@ -36,14 +37,16 @@ def quotientRadialMap {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K)) :
 lemma quotientRadialMap_coeff {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (f : MvPolynomial σ K) (n : ℕ) :
     ((quotientRadialMap I f : projectiveCoordinateAlgebra I) :
-      Polynomial (MvPolynomial σ K ⧸ I)).coeff n = (Ideal.Quotient.mk I) (homogeneousComponent n f) := by
+      Polynomial (MvPolynomial σ K ⧸ I)).coeff n =
+      (Ideal.Quotient.mk I) (homogeneousComponent n f) := by
   change (Polynomial.map (Ideal.Quotient.mk I) (radialMap f)).coeff n = _
   rw [Polynomial.coeff_map, radialMap_coeff]
 
 lemma quotientRadialMap_homogeneous {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (f : MvPolynomial σ K) (n : ℕ) (hf : f.IsHomogeneous n) :
     quotientRadialMap I f = projectiveMonomialMap I n
-      ⟨(Ideal.Quotient.mk I) f, ⟨f, (mem_restrictTotalDegree _ _ _).mpr hf.totalDegree_le, rfl⟩⟩ := by
+      ⟨(Ideal.Quotient.mk I) f,
+        ⟨f, (mem_restrictTotalDegree _ _ _).mpr hf.totalDegree_le, rfl⟩⟩ := by
   apply Subtype.ext
   ext m
   rw [quotientRadialMap_coeff, projectiveMonomialMap_val, Polynomial.coeff_monomial,

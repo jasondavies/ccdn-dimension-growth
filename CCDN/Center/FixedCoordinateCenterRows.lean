@@ -44,7 +44,8 @@ private theorem exists_independent_fixed_coordinate_closure_projection
     ∃ a : Fin (m + 2) → MvPolynomial (Fin (n + 1)) K,
       (∀ i, (a i).IsHomogeneous 1) ∧ LinearIndependent K a ∧ a 1 = X 0 ∧
       (projectionCoordinateMap (projectiveClosureIdeal I) a).IsIntegral ∧
-      projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I))
+      projectionImageField
+        (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I))
         (projectiveClosureIdeal I) a = ⊤ := by
   obtain ⟨b, hb, _, _, hcone⟩ :=
     exists_closure_normalization_infinite_of_le m n (by omega) I hdimdeg.natDegree_eq
@@ -104,7 +105,8 @@ theorem exists_fixed_coordinate_center_row_witness
       Module.finrank_fin_fun, Module.finrank_fin_fun] at hh
     omega
   obtain ⟨A, hAli, hker⟩ := exists_submodule_basis_matrix B.mulVecLin.ker hdimker
-  have hintB : (projectionCoordinateMap (projectiveClosureIdeal I) (chowProjectionForms B)).IsIntegral :=
+  have hintB :
+      (projectionCoordinateMap (projectiveClosureIdeal I) (chowProjectionForms B)).IsIntegral :=
     hBa.symm ▸ hint
   refine ⟨B, A, hBli, hAli, ?_, hker, ?_, hintB, hBa.symm ▸ hfield⟩
   · intro i

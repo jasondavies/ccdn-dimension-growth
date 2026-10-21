@@ -12,7 +12,8 @@ import Mathlib.LinearAlgebra.Dimension.Finite
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 
 /-! A sharp affine curve intersection bound from the Hilbert function.
-Bounds intersections with arbitrary section polynomials. No projective intersection theorem or point-counting axiom is used. -/
+Bounds intersections with arbitrary section polynomials. No projective intersection theorem or
+point-counting axiom is used. -/
 
 @[expose] public section
 namespace CCDN

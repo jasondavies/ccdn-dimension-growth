@@ -67,7 +67,8 @@ private lemma eulerPairCoordinates_contraction {R : Type*} [CommRing R] (k : ℕ
 
 lemma eulerPairCoordinates_contraction_degree {R : Type*} [CommRing R] (k : ℕ)
     (u : EulerPairSpace R k) :
-    (X 0 * (eulerPairCoordinates R k u).1 + X 1 * (eulerPairCoordinates R k u).2).totalDegree ≤ k + 1 := by
+    (X 0 * (eulerPairCoordinates R k u).1 + X 1 * (eulerPairCoordinates R k u).2).totalDegree ≤
+      k + 1 := by
   rw [eulerPairCoordinates_contraction]
   apply (totalDegree_add _ _).trans
   apply max_le

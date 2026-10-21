@@ -30,7 +30,8 @@ lemma universalPlaneMap_planeDegree_le {K σ : Type*} [CommRing K]
   intro i
   have hx (j : Fin 2) :
       (X j : MvPolynomial (Fin 2) (MvPolynomial (PlaneParameters σ) K)).totalDegree ≤ 1 := by
-    simpa [X] using totalDegree_monomial_le (Finsupp.single j 1) (1 : MvPolynomial (PlaneParameters σ) K)
+    simpa [X] using
+      totalDegree_monomial_le (Finsupp.single j 1) (1 : MvPolynomial (PlaneParameters σ) K)
   apply (totalDegree_add _ _).trans
   apply max_le
   · apply (totalDegree_add _ _).trans
@@ -53,7 +54,8 @@ def universalPlaneBadWitness {K σ : Type*} [CommRing K] (f : MvPolynomial σ K)
     (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree) :
     MvPolynomial (PlaneParameters σ) K :=
   universalPlaneLeading f *
-    ((closedFormCoefficientMatrix f.totalDegree (universalPlanePolynomial f)).submatrix rows cols).det
+    ((closedFormCoefficientMatrix f.totalDegree (universalPlanePolynomial f)).submatrix
+      rows cols).det
 
 private lemma universalPlaneBadWitness_degree {K σ : Type*} [CommRing K] (f : MvPolynomial σ K)
     (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
@@ -69,7 +71,8 @@ private lemma universalPlaneBadWitness_degree {K σ : Type*} [CommRing K] (f : M
     _ ≤ 2 * f.totalDegree ^ 3 := by
       by_cases h : f.totalDegree = 0
       · simp [h]
-      · have h1 : 1 ≤ 2 * f.totalDegree ^ 2 := by have : 0 < f.totalDegree := Nat.pos_of_ne_zero h; nlinarith
+      · have h1 : 1 ≤ 2 * f.totalDegree ^ 2 := by
+          have : 0 < f.totalDegree := Nat.pos_of_ne_zero h; nlinarith
         have he := Nat.sub_add_cancel h1
         nlinarith
 
@@ -88,7 +91,8 @@ theorem universalPlaneBadWitness_good_specialization
       Irreducible (bivariateMap φ (universalPlanePolynomial f)) := by
   let g := bivariateMap φ (universalPlanePolynomial f)
   have hh := mul_ne_zero_iff.mp (show φ (universalPlaneLeading f) *
-      φ (((closedFormCoefficientMatrix f.totalDegree (universalPlanePolynomial f)).submatrix rows cols).det) ≠ 0
+      φ (((closedFormCoefficientMatrix f.totalDegree (universalPlanePolynomial f)).submatrix
+        rows cols).det) ≠ 0
       by simpa only [universalPlaneBadWitness, map_mul] using hw)
   have ht : bivariateTotalDegree g ≤ f.totalDegree :=
     universalPlanePolynomial_specialization_totalDegree f φ

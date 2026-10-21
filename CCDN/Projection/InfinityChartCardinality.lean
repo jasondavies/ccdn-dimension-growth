@@ -39,7 +39,8 @@ private theorem infinity_evaluation_span_finrank_le {K L σ ι : Type*} [Field K
     [Algebra K L] [Fintype σ] (I : Ideal (MvPolynomial σ K))
     (z : ι → σ → L) (hz : ∀ i, z i ∈ MvPolynomial.zeroLocus L (leadingInfinityIdeal I))
     (m : ℕ) :
-    Module.finrank L (Submodule.span L (Set.range (homogeneousPointEvaluation (K := K) z (m + 1)))) ≤
+    Module.finrank L
+        (Submodule.span L (Set.range (homogeneousPointEvaluation (K := K) z (m + 1)))) ≤
       Module.finrank K (infinityGradedSpace I m) := by
   let V := homogeneousSubmodule σ K (m + 1)
   let : Module.Finite K V := Module.Finite.of_fg (homogeneousSubmodule_fg σ K (m + 1))
@@ -68,7 +69,8 @@ private theorem infinity_evaluation_span_finrank_le_degree {K L σ ι : Type*} [
     {d N : ℕ} {b : ℤ} (hdegree : ∀ m ≥ N,
       (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + b)
     (m : ℕ) (hm : N ≤ m) :
-    Module.finrank L (Submodule.span L (Set.range (homogeneousPointEvaluation (K := K) z (m + 1)))) ≤ d := by
+    Module.finrank L
+        (Submodule.span L (Set.range (homogeneousPointEvaluation (K := K) z (m + 1)))) ≤ d := by
   exact (infinity_evaluation_span_finrank_le I z hz m).trans_eq
     (infinityGradedSpace_eventually_degree I hdegree m hm)
 

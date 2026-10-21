@@ -79,7 +79,8 @@ theorem exists_small_integer_point_outside_prime_ideal
       (by simpa only [hdim, Nat.factorial_zero, Nat.cast_one, div_one] using hdegree) z hz hzero
     simp only [Fintype.card_fin] at hh
     omega
-  · obtain ⟨m, hm⟩ := Nat.exists_eq_add_of_le (show 1 ≤ (filteredHilbertPolynomial I).natDegree by omega)
+  · obtain ⟨m, hm⟩ :=
+      Nat.exists_eq_add_of_le (show 1 ≤ (filteredHilbertPolynomial I).natDegree by omega)
     have hm' : (filteredHilbertPolynomial I).natDegree = m + 1 := by omega
     obtain ⟨f, hf, hfi, hfd⟩ := exists_mem_ideal_degree_le_multiplicity I d
       ⟨hm', by simpa only [hm'] using hdegree⟩ (by omega)

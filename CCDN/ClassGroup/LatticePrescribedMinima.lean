@@ -86,7 +86,8 @@ private theorem exists_prescribed_greedy_lattice_family
   induction k with
   | zero =>
     let : Subsingleton (Fin (0 + 1)) := Fin.subsingleton_iff_le_one.mpr (by omega)
-    refine ⟨fun _ => w, (linearIndependent_subsingleton_index_iff _).mpr (fun _ => hw0), rfl, fun _ => hw, ?_⟩
+    refine ⟨fun _ => w, (linearIndependent_subsingleton_index_iff _).mpr (fun _ => hw0), rfl,
+      fun _ => hw, ?_⟩
     intro i hi
     exact False.elim (hi (Subsingleton.elim _ _))
   | succ k ih =>

@@ -51,7 +51,8 @@ private lemma hypersurface_rank_log_dimension_bound {r d M s : ℕ}
   have hMsR : (M : ℝ) ≤ s := by exact_mod_cast hMs
   have hbound : ((r + 1 + M).choose M : ℝ) ≤ (2 * (s : ℝ)) ^ (r + 1) :=
     hdimR.trans (pow_le_pow_left₀ (by positivity) (by linarith) _)
-  have hpos : (0 : ℝ) < (r + 1 + M).choose M := by exact_mod_cast Nat.choose_pos (by omega : M ≤ r + 1 + M)
+  have hpos : (0 : ℝ) < (r + 1 + M).choose M := by
+    exact_mod_cast Nat.choose_pos (by omega : M ≤ r + 1 + M)
   have hh := Real.log_le_log hpos hbound
   rw [Real.log_pow, Real.log_mul (by norm_num) (by linarith : (s : ℝ) ≠ 0)] at hh
   simpa only [Nat.cast_add, Nat.cast_one] using hh

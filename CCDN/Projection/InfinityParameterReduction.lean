@@ -27,7 +27,8 @@ def leadingInfinityIdeal {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K)
 
 lemma leadingInfinityIdeal_component_mem {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (f : MvPolynomial σ K) (hf : f ∈ leadingInfinityIdeal I)
-    (n : ℕ) : (Ideal.Quotient.mk I) (homogeneousComponent (n + 1) f) ∈ filteredCoordinateSpace I n := by
+    (n : ℕ) :
+    (Ideal.Quotient.mk I) (homogeneousComponent (n + 1) f) ∈ filteredCoordinateSpace I n := by
   have hm : quotientRadialMap I f ∈ projectiveInfinityIdeal I := by
     apply Ideal.Quotient.eq_zero_iff_mem.mp
     exact hf

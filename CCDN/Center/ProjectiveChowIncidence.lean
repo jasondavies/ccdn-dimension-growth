@@ -33,7 +33,8 @@ open MvPolynomial
 
 private lemma chowIncidentCoefficients_relation {K : Type*} [Field K] {n r : ℕ}
     (a : Fin n → K) (u : Fin r × Fin n → K) (i : Fin r) :
-    ∑ j : Fin (n + 1), chowIncidentCoefficients a u (i,j) * (Fin.cons 1 a : Fin (n + 1) → K) j = 0 := by
+    ∑ j : Fin (n + 1), chowIncidentCoefficients a u (i,j) * (Fin.cons 1 a : Fin (n + 1) → K) j =
+      0 := by
   rw [Fin.sum_univ_succ]
   simp only [chowIncidentCoefficients, Fin.cases_zero, Fin.cases_succ,
     Fin.cons_zero, Fin.cons_succ, mul_one, neg_add_cancel]

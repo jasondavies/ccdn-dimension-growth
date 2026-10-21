@@ -74,7 +74,8 @@ theorem chowLinearSubstitution_totalDegree_of_ne_zero
     (chowLinearSubstitution A F).totalDegree = F.totalDegree := by
   have hRhom := chow_rows_homogeneous_total_degree (chowLinearSubstitution A F) δ
     (fun i => chowLinearSubstitution_row_homogeneous A i F (δ i) (hδ i))
-  exact (hRhom.totalDegree hR).trans ((chow_rows_homogeneous_total_degree F δ hδ).totalDegree hF).symm
+  exact (hRhom.totalDegree hR).trans
+    ((chow_rows_homogeneous_total_degree F δ hδ).totalDegree hF).symm
 
 /-- For a center disjoint from the projective variety of `J`, the image ideal of the
 projection has the same dimension, so it has a projective Chow equation without charts. -/

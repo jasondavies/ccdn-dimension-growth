@@ -38,14 +38,16 @@ theorem projective_plane_coefficient_count {d : ℕ}
   dsimp only [hypersurfaceAuxiliaryDegreeBound, auxDegreeBound, auxMainTerm, boxExponent,
     heightExponent, degreeRoot] at hdegree
   let S := projectivePoints (projectiveZeroLocus (map (Int.castRingHom ℚ) f)) B
-  have hQ := rational_map_irreducible_of_integer f hir (by rw [hf.totalDegree hir.ne_zero]; exact hd)
+  have hQ := rational_map_irreducible_of_integer f hir
+    (by rw [hf.totalDegree hir.ne_zero]; exact hd)
   have hnd : ¬ map (Int.castRingHom ℚ) f ∣ map (Int.castRingHom ℚ) g := by
     rwa [hprim.rational_map_dvd_iff]
   have hc := projective_plane_common_zeros_card_le (map (Int.castRingHom ℚ) f)
     (map (Int.castRingHom ℚ) g) (hf.map _) hQ (hgh.map _) hnd
     (fun x : S => x.val) Subtype.val_injective
     (fun x => (mem_projectivePoints.mp x.property).2)
-    (fun x => hzero x.val (mem_projectivePoints.mp x.property).1 (mem_projectivePoints.mp x.property).2)
+    (fun x => hzero x.val (mem_projectivePoints.mp x.property).1
+      (mem_projectivePoints.mp x.property).2)
   have hcR : (projectiveCount (projectiveZeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
       (d : ℝ) * M := by
     have hh : projectiveCount (projectiveZeroLocus (map (Int.castRingHom ℚ) f)) B ≤ d * M := by

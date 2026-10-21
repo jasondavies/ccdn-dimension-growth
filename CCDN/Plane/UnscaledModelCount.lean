@@ -73,7 +73,8 @@ theorem unscaled_plane_finite_count
   have hmhom : model.IsHomogeneous d :=
     homogeneousTranslation_homogeneous a (scaledHomogenize_homogeneous _ _ le_rfl)
   have hm0 : model ≠ 0 := by
-    have he := (homogeneousTranslation ℤ a).injective.ne (scaledHomogenize_ne_zero d one_ne_zero hf0)
+    have he :=
+      (homogeneousTranslation ℤ a).injective.ne (scaledHomogenize_ne_zero d one_ne_zero hf0)
     simpa only [map_zero] using he
   let τ := scaledModelCoordinates 1 a
   have hmodel : ∀ i, eval (fun j => eval (z i) (τ j)) model = 0 := by
@@ -100,7 +101,8 @@ theorem unscaled_plane_finite_count
     have hterm : 2 * Real.exp (heightDeterminantError C + 23) * (d : ℝ) ^ 3 *
         (1 + Real.log H / (d : ℝ) ^ 2) * R ^ (2 / (d : ℝ)) /
           |((MonomialOrder.lex.leadingCoeff model : ℤ) : ℝ)| ^ (1 / (d : ℝ) ^ 2) ≤
-        2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * (d : ℝ) ^ 3 * R ^ (2 / (d : ℝ)) := by
+        2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 * (d : ℝ) ^ 3 *
+          R ^ (2 / (d : ℝ)) := by
       convert ht using 1 <;> ring
     have hMb : (M : ℝ) ≤ scaledPlaneAuxiliaryDegreeBound d C R 1 := by
       unfold scaledPlaneAuxiliaryDegreeBound
@@ -143,7 +145,8 @@ theorem unscaled_plane_finite_count_large_coefficient
   have hmhom : model.IsHomogeneous d :=
     homogeneousTranslation_homogeneous a (scaledHomogenize_homogeneous _ _ le_rfl)
   have hm0 : model ≠ 0 := by
-    have he := (homogeneousTranslation ℤ a).injective.ne (scaledHomogenize_ne_zero d one_ne_zero hf0)
+    have he :=
+      (homogeneousTranslation ℤ a).injective.ne (scaledHomogenize_ne_zero d one_ne_zero hf0)
     simpa only [map_zero] using he
   let τ := scaledModelCoordinates 1 a
   have hmodel : ∀ i, eval (fun j => eval (z i) (τ j)) model = 0 := by

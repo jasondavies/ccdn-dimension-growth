@@ -37,7 +37,8 @@ private lemma universalPlaneBadWitness_eval {σ : Type*}
     (v : PlaneParameters σ → ℤ) :
     eval v (universalPlaneBadWitness f rows cols) =
       ((universalPlaneSection f v).coeff f.totalDegree).coeff 0 *
-        ((closedFormCoefficientMatrix f.totalDegree (universalPlaneSection f v)).submatrix rows cols).det := by
+        ((closedFormCoefficientMatrix f.totalDegree (universalPlaneSection f v)).submatrix
+          rows cols).det := by
   rw [universalPlaneBadWitness, map_mul, closedForm_minor_map]
   congr 1
   exact (bivariateMap_coeff (eval v) (universalPlanePolynomial f) f.totalDegree 0).symm
@@ -135,7 +136,8 @@ theorem exists_hypersurface_bad_prime_height_witness
           (1 + Real.log H / (f.totalDegree : ℝ) ^ 2)) ∧
       ∀ p : ℕ, f.totalDegree < p → HypersurfaceBadReduction f p → (p : ℤ) ∣ D := by
   obtain ⟨rows, cols, v, hv, hw, hdiv⟩ := exists_bounded_integer_plane_witness f hf hpos
-  let S := integerPlaneHeight (Fintype.card (Option σ)) f.totalDegree H (2 * (f.totalDegree : ℝ) ^ 3)
+  let S := integerPlaneHeight (Fintype.card (Option σ)) f.totalDegree H
+    (2 * (f.totalDegree : ℝ) ^ 3)
   have hd : 1 ≤ f.totalDegree := hpos
   have hdR : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast hd
   have hA : 1 ≤ 2 * (f.totalDegree : ℝ) ^ 3 := by nlinarith [one_le_pow₀ hdR (n := 3)]
@@ -165,7 +167,8 @@ theorem hypersurface_bad_prime_charge
     (∑ p ∈ P, Real.log p / p) ≤
       Real.log (hypersurfaceHeightConstant (Fintype.card (Option σ)) *
         (1 + Real.log H / (f.totalDegree : ℝ) ^ 2)) + 2 * mertensError + 1 := by
-  obtain ⟨D, hD, hheight, hdiv⟩ := exists_hypersurface_bad_prime_height_witness f hf hpos H hH hcoeff
+  obtain ⟨D, hD, hheight, hdiv⟩ :=
+    exists_hypersurface_bad_prime_height_witness f hf hpos H hH hcoeff
   have hd1 : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast hpos
   apply bad_prime_charge_of_height P hD (fun p hp => (hP p hp).choose) _ _ _ _ hheight
   · intro p hp
@@ -220,7 +223,8 @@ theorem hypersurface_bad_prime_factor_max
       (2 * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (Fintype.card (Option σ))) *
         max (Real.log H / (f.totalDegree : ℝ) ^ 2) 1 := by
   have h := hypersurface_bad_prime_factor f hf hpos H hH hcoeff P hP hcut
-  have hc : 0 ≤ Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (Fintype.card (Option σ)) :=
+  have hc : 0 ≤ Real.exp (2 * mertensError + 1) *
+      hypersurfaceHeightConstant (Fintype.card (Option σ)) :=
     mul_nonneg (Real.exp_pos _).le (le_trans zero_le_one (hypersurfaceHeightConstant_one_le _))
   have hm : 1 + Real.log H / (f.totalDegree : ℝ) ^ 2 ≤
       2 * max (Real.log H / (f.totalDegree : ℝ) ^ 2) 1 := by

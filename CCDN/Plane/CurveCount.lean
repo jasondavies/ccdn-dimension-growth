@@ -33,7 +33,8 @@ open MvPolynomial
 
 private lemma planeResidue_card_eq_zero_card (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) :
     Nat.card (PlaneResidue f p) =
-      Nat.card {x : Fin 2 → ZMod p // eval x (MvPolynomial.map (Int.castRingHom (ZMod p)) f) = 0} := by
+      Nat.card {x : Fin 2 → ZMod p //
+        eval x (MvPolynomial.map (Int.castRingHom (ZMod p)) f) = 0} := by
   apply Nat.card_congr
   apply Equiv.subtypeEquivRight
   intro x

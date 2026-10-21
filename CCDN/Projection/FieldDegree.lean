@@ -48,7 +48,8 @@ private theorem minpoly_degree_le_plane_relation {K R F : Type*}
     simpa only [hφ, map_pow] using (linearIndependent_pow (K := R) (ψ (X k)))
   have h := polynomial_parameter_rank_le (K := K) (R := R) (F := F)
     (ι := Fin (minpoly R (ψ (X k))).natDegree) I f.totalDegree hdegree φ (X j)
-    (by simp) u hu (by rw [hφ]; exact he) (fun i : Fin (minpoly R (ψ (X k))).natDegree => (X k) ^ i.val) hi
+    (by simp) u hu (by rw [hφ]; exact he)
+    (fun i : Fin (minpoly R (ψ (X k))).natDegree => (X k) ^ i.val) hi
   simpa only [Fintype.card_fin] using h
 
 /-- The degree of a plane equation is at least the degree of a function-field

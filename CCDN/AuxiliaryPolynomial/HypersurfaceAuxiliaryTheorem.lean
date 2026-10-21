@@ -21,12 +21,14 @@ open MvPolynomial
 
 lemma hypersurfaceAbsoluteAuxiliaryConstant_one_le (n : ℕ) :
     1 ≤ hypersurfaceAbsoluteAuxiliaryConstant n := by
-  have hC : 4 ≤ hypersurfacePositionedAuxiliaryConstant n (hypersurfaceAuxiliaryPositionConstant n) := by
+  have hC :
+      4 ≤ hypersurfacePositionedAuxiliaryConstant n (hypersurfaceAuxiliaryPositionConstant n) := by
     unfold hypersurfacePositionedAuxiliaryConstant
     have hE := Real.exp_pos (hypersurfaceLargeHeightError (n + 1) (hypersurfaceNormalizedError n)
       (hypersurfaceAuxiliaryPositionConstant n))
     have hS : 0 ≤ Real.exp (hypersurfaceAuxiliaryPositionConstant n / (n + 1 : ℝ)) *
-        Real.exp (hypersurfaceSmallHeightError (n + 1) (hypersurfaceBadPrimeNormalizedError n)) := by positivity
+        Real.exp (hypersurfaceSmallHeightError (n + 1)
+          (hypersurfaceBadPrimeNormalizedError n)) := by positivity
     have hn : (0 : ℝ) ≤ n := Nat.cast_nonneg n
     linarith
   unfold hypersurfaceAbsoluteAuxiliaryConstant
@@ -53,7 +55,8 @@ theorem hypersurface_projective_auxiliary
   · obtain ⟨bad, M, hbad, hdegree, hg⟩ := hypersurface_absolute_projective_auxiliary f hf hd habs hB
     refine ⟨M, hdegree.trans_eq ?_, hg⟩
     rw [hypersurfaceBadPrimeFactor_eq_exp f habs (hf.totalDegree hir.ne_zero) bad hbad]
-  · have hQ := rational_map_irreducible_of_integer f hir (by rw [hf.totalDegree hir.ne_zero]; exact hd)
+  · have hQ := rational_map_irreducible_of_integer f hir
+      (by rw [hf.totalDegree hir.ne_zero]; exact hd)
     have hred : ¬ AbsolutelyIrreducibleRat (map (Int.castRingHom ℚ) f) :=
       (absolutelyIrreducibleRat_map_iff f).not.mpr habs
     obtain ⟨g, hg0, hgh, hgnd, hzeros⟩ := nonabsolute_projective_auxiliary f hf hd hQ hred

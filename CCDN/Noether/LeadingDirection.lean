@@ -47,7 +47,8 @@ private lemma exists_bivariate_top_coefficient {R : Type*} [CommRing R]
     conv_rhs => rw [bivariate_exponent_eq m]
     exact (bivariate_exponent_sum _ _).symm
   · have hc := bivariatePolynomialEquiv_coeff g (m 0) (m 1)
-    change ((bivariatePolynomialEquiv R ((bivariatePolynomialEquiv R).symm f)).coeff (m 0)).coeff (m 1) = _ at hc
+    change ((bivariatePolynomialEquiv R ((bivariatePolynomialEquiv R).symm f)).coeff (m 0)).coeff
+      (m 1) = _ at hc
     rw [AlgEquiv.apply_symm_apply, ← bivariate_exponent_eq m] at hc
     exact hc.symm ▸ MvPolynomial.mem_support_iff.mp hm
 

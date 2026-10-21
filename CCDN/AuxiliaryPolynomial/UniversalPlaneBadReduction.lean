@@ -56,12 +56,14 @@ theorem bad_prime_dvd_universalPlaneBadWitness_coeff
     (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
     (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree)
     (p : ℕ) [Fact p.Prime] (hp : f.totalDegree < p)
-    (hbad : (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree ≠ f.totalDegree ∨
+    (hbad : (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree ≠
+        f.totalDegree ∨
       ¬Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f))
     (e : PlaneParameters σ →₀ ℕ) :
     (p : ℤ) ∣ (universalPlaneBadWitness f rows cols).coeff e := by
   let L := AlgebraicClosure (ZMod p)
-  have hz := universalPlaneBadWitness_map_eq_zero_of_bad (Int.castRingHom L) f hpos hp rows cols hbad
+  have hz :=
+    universalPlaneBadWitness_map_eq_zero_of_bad (Int.castRingHom L) f hpos hp rows cols hbad
   have hc := congrArg (fun W : MvPolynomial (PlaneParameters σ) L => W.coeff e) hz
   rw [coeff_map] at hc
   exact (CharP.intCast_eq_zero_iff L p _).mp hc
@@ -79,7 +81,8 @@ theorem exists_integer_hypersurface_bad_prime_witness
       (e : PlaneParameters (Option σ) →₀ ℕ),
       (universalPlaneBadWitness f rows cols).coeff e ≠ 0 ∧
       ∀ (p : ℕ) [Fact p.Prime], f.totalDegree < p →
-        ((MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree ≠ f.totalDegree ∨
+        ((MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree ≠
+            f.totalDegree ∨
           ¬Irreducible (MvPolynomial.map (Int.castRingHom (AlgebraicClosure (ZMod p))) f)) →
         (p : ℤ) ∣ (universalPlaneBadWitness f rows cols).coeff e := by
   obtain ⟨rows, cols, hw, _⟩ := exists_integer_universalPlane_badWitness f hf hpos

@@ -93,7 +93,8 @@ private theorem hypersurfaceTranslation_coefficient_bound {n d : ℕ}
       have hd0 : (0 : ℝ) ≤ d := Nat.cast_nonneg d
       refine Fin.cases ?_ (fun k => ?_) j
       · have hz0 : (z 0 : ℝ) ≤ d := by exact_mod_cast hz 0
-        simp only [w, Fin.cons_zero, Int.cast_natCast, abs_of_nonneg (Nat.cast_nonneg (α := ℝ) (z 0))]
+        simp only [w, Fin.cons_zero, Int.cast_natCast,
+          abs_of_nonneg (Nat.cast_nonneg (α := ℝ) (z 0))]
         nlinarith
       · have hz1 : (z k.succ : ℝ) ≤ d := by exact_mod_cast hz k.succ
         have hz0 : (z 0 : ℝ) ≤ d := by exact_mod_cast hz 0
@@ -112,7 +113,8 @@ private theorem hypersurfaceTranslation_coefficient_bound {n d : ℕ}
       (eval₂_comp (Int.castRingHom ℝ) w f).symm
     simpa only [he, Fintype.card_fin, V] using hh
   have hh := integer_multivariate_coefficient_bound_of_grid (homogeneousTranslation ℤ a f)
-    (homogeneousTranslation_homogeneous a hf).totalDegree_le (show 0 ≤ V by dsimp [V, K]; positivity)
+    (homogeneousTranslation_homogeneous a hf).totalDegree_le
+    (show 0 ≤ V by dsimp [V, K]; positivity)
     heval m
   convert hh using 1
   dsimp only [hypersurfacePositionHeightFactor, V, K]
@@ -159,8 +161,9 @@ theorem exists_hypersurface_coefficient_position {n r d : ℕ} (hr : 0 < r) (hd 
     ∃ (a : Fin n → ℤ) (H : ℝ), (∀ j, 0 ≤ a j ∧ a j ≤ d) ∧ 1 ≤ H ∧
       CoefficientHeightLE f H ∧
       CoefficientHeightLE (homogeneousTranslation ℤ a f) H ∧
-      Real.log H ≤ Real.log |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)| +
-        ((5 * (n : ℝ) + 5) * ((r : ℝ) + 1)) * d * (d : ℝ) ^ (1 / (r : ℝ)) := by
+      Real.log H ≤
+        Real.log |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)| +
+          ((5 * (n : ℝ) + 5) * ((r : ℝ) + 1)) * d * (d : ℝ) ^ (1 / (r : ℝ)) := by
   obtain ⟨a, ha, hne, hc⟩ := exists_hypersurface_leading_coefficient_translation f hf hf0
   let L := |((MonomialOrder.lex.leadingCoeff (homogeneousTranslation ℤ a f) : ℤ) : ℝ)|
   have hL : 1 ≤ L := by dsimp only [L]; exact_mod_cast Int.one_le_abs hne
@@ -170,7 +173,8 @@ theorem exists_hypersurface_coefficient_position {n r d : ℕ} (hr : 0 < r) (hd 
     one_le_mul_of_one_le_of_one_le hP hL, ?_,
     hypersurfaceTranslation_coefficient_bound f hf hf0 a ha hL0.le hc, ?_⟩
   · intro m
-    exact (hc m).trans (mul_le_mul_of_nonneg_right (hypersurfacePositionHeightFactor_ge_grid n d) hL0.le)
+    exact (hc m).trans
+      (mul_le_mul_of_nonneg_right (hypersurfacePositionHeightFactor_ge_grid n d) hL0.le)
   · rw [Real.log_mul (by linarith) hL0.ne']
     have hh := hypersurfacePositionHeightFactor_log_le n hr hd
     dsimp only [L]

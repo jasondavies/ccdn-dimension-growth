@@ -86,7 +86,8 @@ theorem conjugate_prime_count_le_box
     intro x hx
     obtain ⟨a, ha, rfl⟩ := Finset.mem_image.mp hx
     have hh := (mem_integralPoints.mp ha).2
-    simpa only [rationalIdealZeroLocusOver, Set.mem_ofPred_eq, rationalPoint, map_intCast, point] using hh
+    simpa only [rationalIdealZeroLocusOver, Set.mem_ofPred_eq, rationalPoint, map_intCast,
+      point] using hh
   have hf : ∀ x ∈ T.image point, ∀ i, e.toRingEquiv (x i) = x i := by
     intro x hx i
     obtain ⟨a, _, rfl⟩ := Finset.mem_image.mp hx

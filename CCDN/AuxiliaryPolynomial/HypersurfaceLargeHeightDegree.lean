@@ -62,11 +62,13 @@ theorem hypersurface_large_height_log_degree_bound {r d M s : ℕ}
   have hcost := log_one_add_le_linear_add_log
     (div_nonneg hHlog (sq_nonneg (d : ℝ))) (show 1 ≤ 8 * (r : ℝ) by linarith)
   have hcost' := mul_le_mul_of_nonneg_left hcost hr0.le
-  have he : (r : ℝ) * (Real.log H / (d : ℝ) ^ 2 / (8 * (r : ℝ))) = Real.log H / (8 * (d : ℝ) ^ 2) := by field_simp
+  have he : (r : ℝ) * (Real.log H / (d : ℝ) ^ 2 / (8 * (r : ℝ))) =
+      Real.log H / (8 * (d : ℝ) ^ 2) := by field_simp
   have hcancel : (r : ℝ) * Real.log (1 + Real.log H / (d : ℝ) ^ 2) -
       Real.log H / (8 * d * (d : ℝ) ^ (1 / (r : ℝ))) ≤ r * Real.log (8 * (r : ℝ)) := by
     have hden : 8 * (d : ℝ) * (d : ℝ) ^ (1 / (r : ℝ)) ≤ 8 * (d : ℝ) ^ 2 := by nlinarith
-    have hdiv := div_le_div_of_nonneg_left hHlog (show 0 < 8 * d * (d : ℝ) ^ (1 / (r : ℝ)) by positivity) hden
+    have hdiv := div_le_div_of_nonneg_left hHlog
+      (show 0 < 8 * d * (d : ℝ) ^ (1 / (r : ℝ)) by positivity) hden
     rw [mul_add, he] at hcost'
     linarith
   have hraw : (r : ℝ) * Real.log M ≤ (4 * (r : ℝ) - 1) * Real.log d +

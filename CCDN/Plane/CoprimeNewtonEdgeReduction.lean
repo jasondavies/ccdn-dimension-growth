@@ -29,7 +29,8 @@ structure HasCoprimeNewtonEdge {R : Type*} [CommSemiring R]
 lemma HasCoprimeNewtonEdge.ne_zero {R : Type*} [CommSemiring R]
     {f : MvPolynomial (Fin 2) R} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e) : f ≠ 0 := by
   intro hz
-  simpa only [hz, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply, ne_eq, not_true_eq_false] using h.x_coeff
+  simpa only [hz, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply, ne_eq, not_true_eq_false] using
+    h.x_coeff
 
 private lemma HasCoprimeNewtonEdge.weightedTotalDegree {R : Type*} [CommSemiring R]
     {f : MvPolynomial (Fin 2) R} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e) :
@@ -121,9 +122,11 @@ theorem coprime_newton_edge_bad_reduction_dvd
     intro hz
     exact hy ((ZMod.intCast_zmod_eq_zero_iff_dvd _ p).mp hz)
   have hxK : (f.coeff (Finsupp.single 0 d) : AlgebraicClosure (ZMod p)) ≠ 0 := by
-    simpa only [map_intCast] using (map_ne_zero (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))).mpr hxmod
+    simpa only [map_intCast] using
+      (map_ne_zero (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))).mpr hxmod
   have hyK : (f.coeff (Finsupp.single 1 e) : AlgebraicClosure (ZMod p)) ≠ 0 := by
-    simpa only [map_intCast] using (map_ne_zero (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))).mpr hymod
+    simpa only [map_intCast] using
+      (map_ne_zero (algebraMap (ZMod p) (AlgebraicClosure (ZMod p)))).mpr hymod
   have hmap := h.map (Int.castRingHom (AlgebraicClosure (ZMod p))) hxK hyK
   exact hbad.2.elim (fun hh => hh (hmap.totalDegree.trans h.totalDegree.symm))
     (fun hh => hh hmap.irreducible)

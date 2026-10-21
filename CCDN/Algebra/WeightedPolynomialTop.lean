@@ -60,7 +60,8 @@ lemma weighted_top_component_ne_zero {R σ : Type*} [CommSemiring R]
   obtain ⟨m, hm, he⟩ := exists_mem_eq_sup f.support (support_nonempty.mpr hf) (Finsupp.weight w)
   intro hz
   have hh := congrArg (fun p : MvPolynomial σ R => p.coeff m) hz
-  simp only [coeff_weightedHomogeneousComponent, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply] at hh
+  simp only [coeff_weightedHomogeneousComponent, AddMonoidAlgebra.coeff_zero,
+    Finsupp.zero_apply] at hh
   have he' : Finsupp.weight w m = f.weightedTotalDegree w := he.symm
   rw [ite_eq_left he'] at hh
   exact (mem_support_iff.mp hm) hh

@@ -53,7 +53,8 @@ theorem affine_curve_count : AffineCurveBound := by
     _ ≤ (count (zeroLocus f) (projectionBoxFactor n d * B) : ℝ) + (d * (d - 1) : ℕ) := hredR
     _ ≤ C * curveBound d (projectionBoxFactor n d * B) + curveBound d B := add_le_add hp herr
     _ ≤ C * (K * curveBound d B) + curveBound d B := by
-      exact add_le_add (mul_le_mul_of_nonneg_left (projection_curveBound_scale n hd hB) hC.le) le_rfl
+      exact add_le_add (mul_le_mul_of_nonneg_left (projection_curveBound_scale n hd hB) hC.le)
+        le_rfl
     _ = _ := by ring
 
 

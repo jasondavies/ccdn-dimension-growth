@@ -83,13 +83,14 @@ lemma closedFormPair_injective {R : Type*} [CommRing R] (d : ℕ) :
 /-- The cleared differential equation as a linear operator on (P,Q). -/
 def closedFormOperator {R : Type*} [CommRing R] (f : R[X][X]) :
     (R[X][X] × R[X][X]) →ₗ[R] R[X][X] where
-  toFun u := (bivariateCoefficientDerivative R) u.1 * f - u.1 * (bivariateCoefficientDerivative R) f -
-    u.2.derivative * f + u.2 * f.derivative
+  toFun u := (bivariateCoefficientDerivative R) u.1 * f -
+    u.1 * (bivariateCoefficientDerivative R) f - u.2.derivative * f + u.2 * f.derivative
   map_add' u v := by
     simp only [Prod.fst_add, Prod.snd_add, map_add, add_mul]
     ring
   map_smul' a u := by
-    change (bivariateCoefficientDerivative R) (a • u.1) * f - (a • u.1) * (bivariateCoefficientDerivative R) f -
+    change (bivariateCoefficientDerivative R) (a • u.1) * f -
+      (a • u.1) * (bivariateCoefficientDerivative R) f -
       (a • u.2).derivative * f + (a • u.2) * f.derivative = a • _
     rw [(bivariateCoefficientDerivative R).map_smul]
     simp only [derivative_smul, smul_mul_assoc, smul_sub, smul_add]
@@ -110,7 +111,8 @@ lemma bivariateCoefficients_injective {R : Type*} [CommRing R] :
 In particular it is an integer matrix when R=Z. -/
 def closedFormCoefficientMatrix {R : Type*} [CommRing R] (d : ℕ) (f : R[X][X]) :
     Matrix (ℕ × ℕ) (ClosedFormColumns d) R :=
-  LinearMap.toMatrix' ((bivariateCoefficients R).comp ((closedFormOperator f).comp (closedFormPair R d)))
+  LinearMap.toMatrix'
+    ((bivariateCoefficients R).comp ((closedFormOperator f).comp (closedFormPair R d)))
 
 private lemma closedFormCoefficientMatrix_mulVec {R : Type*} [CommRing R] (d : ℕ) (f : R[X][X])
     (v : ClosedFormColumns d → R) :

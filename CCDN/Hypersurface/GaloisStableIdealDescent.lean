@@ -98,7 +98,8 @@ theorem galois_stable_polynomial_ideal_descends
     intro a _
     exact Submodule.smul_mem _ _ (hrstd a)
   have heq : f = q := sub_eq_zero.mp
-    (Ideal.eq_zero_of_mem_restrictSupport_standardExponents I MonomialOrder.degLex hrmem (I.sub_mem hf hqI))
+    (Ideal.eq_zero_of_mem_restrictSupport_standardExponents I MonomialOrder.degLex hrmem
+      (I.sub_mem hf hqI))
   rw [heq]
   exact hq
 

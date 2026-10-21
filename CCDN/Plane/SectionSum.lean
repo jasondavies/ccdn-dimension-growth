@@ -55,7 +55,8 @@ theorem plane_sections_incidence_bound {σ : Type*} [Fintype σ]
       by_cases hb : B v
       · rw [ite_eq_left hb]
         have hh : (Nat.card (PlaneSectionPoints f v) : ℝ) ≤ (f.totalDegree : ℝ) * p := by
-          exact_mod_cast (by simpa only [ZMod.card] using planeSectionPoints_card_le_degree_mul_card f v hz)
+          exact_mod_cast (by simpa only [ZMod.card] using
+            planeSectionPoints_card_le_degree_mul_card f v hz)
         linarith
       · rw [ite_eq_right hb, add_zero]
         apply planeSectionPoints_card_le_add_mul_sqrt p f v _ hsize
@@ -75,7 +76,8 @@ theorem plane_sections_incidence_bound {σ : Type*} [Fintype σ]
       (Nat.card (ZeroPlaneParameters f) : ℝ) * (p : ℝ) ^ 2 := by
     rw [← Finset.sum_filter Z (fun _ : V => (p : ℝ) ^ 2)]
     simp [V, Z, ZeroPlaneParameters, Nat.card_eq_fintype_card, Fintype.card_subtype]
-  simp only [Finset.sum_add_distrib, hB, hZ, Finset.sum_const, Finset.card_univ, nsmul_eq_mul] at hsum
+  simp only [Finset.sum_add_distrib, hB, hZ, Finset.sum_const, Finset.card_univ,
+    nsmul_eq_mul] at hsum
   rw [hi]
   convert hsum using 1
   simp [A, V, PlaneParameters, Nat.mul_comm]

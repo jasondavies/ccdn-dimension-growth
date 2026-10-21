@@ -63,7 +63,8 @@ private lemma genericBlockLine_eq_shear {R σ : Type*} [CommRing R]
       (genericBlockShear R b (rename (fun i => some (Sum.inl i)) f)) := by
   have he : genericBlockLine (R := R) b =
       (optionEquivLeft R (σ ⊕ σ)).toRingHom.comp
-        ((genericBlockShear R b).toRingHom.comp (rename (fun i => some (Sum.inl i))).toRingHom) := by
+        ((genericBlockShear R b).toRingHom.comp
+          (rename (fun i => some (Sum.inl i))).toRingHom) := by
     apply MvPolynomial.ringHom_ext
     · intro c
       simp [genericBlockLine, genericBlockShear, genericBlockShearHom]

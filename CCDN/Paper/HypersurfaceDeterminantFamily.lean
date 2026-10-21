@@ -125,7 +125,8 @@ theorem projective_hypersurface_determinant_family_log_lower
     (hx : ∀ i, x i ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f))
     (hD : homogeneousDeterminantFamilyGcd F (fun i => primitiveProjectiveRep (x i)) ≠ 0) :
     hypersurfaceRankLowerBound n s d (Real.log (hypersurfaceBadPrimeFactor f)) ≤
-      Real.log (|homogeneousDeterminantFamilyGcd F (fun i => primitiveProjectiveRep (x i))| : ℝ) := by
+      Real.log
+        (|homogeneousDeterminantFamilyGcd F (fun i => primitiveProjectiveRep (x i))| : ℝ) := by
   apply hypersurface_determinant_family_log_lower f hf hd hir M F hF
     (fun i => primitiveProjectiveRep (x i)) (fun i => primitiveProjectiveRep_gcd (x i)) _ hD
   intro i

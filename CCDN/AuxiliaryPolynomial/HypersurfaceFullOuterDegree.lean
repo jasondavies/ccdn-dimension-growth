@@ -32,7 +32,8 @@ private lemma optionEquivLeft_top_coefficient_constant {K σ : Type*} [Field K]
 private lemma hypersurfaceAffineCoordinates_axis {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K) :
     Polynomial.map (eval (0 : σ → K))
-      (optionEquivLeft K σ (hypersurfaceAffineCoordinates a b hb f)) = affineLinePolynomial a b f := by
+      (optionEquivLeft K σ (hypersurfaceAffineCoordinates a b hb f)) =
+      affineLinePolynomial a b f := by
   let φ := (Polynomial.mapRingHom (eval (0 : σ → K))).comp
     ((optionEquivLeft K σ).toRingHom.comp (hypersurfaceAffineCoordinates a b hb).toRingHom)
   have he : φ = affineLinePolynomial a b := by
@@ -70,12 +71,14 @@ theorem hypersurfaceAffineCoordinates_full_outer_degree {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K)
     (hdir : eval b (homogeneousComponent f.totalDegree f) ≠ 0) :
     (optionEquivLeft K σ (hypersurfaceAffineCoordinates a b hb f)).natDegree = f.totalDegree := by
-  have hc : (optionEquivLeft K σ (hypersurfaceAffineCoordinates a b hb f)).coeff f.totalDegree ≠ 0 := by
+  have hc :
+      (optionEquivLeft K σ (hypersurfaceAffineCoordinates a b hb f)).coeff f.totalDegree ≠ 0 := by
     rw [hypersurfaceAffineCoordinates_top_coefficient]
     exact (map_ne_zero_iff _ (C_injective σ K)).mpr hdir
   apply le_antisymm
   · rw [natDegree_optionEquivLeft]
-    exact (degreeOf_le_totalDegree _ none).trans (hypersurfaceAffineCoordinates_totalDegree_le a b hb f)
+    exact (degreeOf_le_totalDegree _ none).trans
+      (hypersurfaceAffineCoordinates_totalDegree_le a b hb f)
   · exact Polynomial.le_natDegree_of_ne_zero hc
 
 end

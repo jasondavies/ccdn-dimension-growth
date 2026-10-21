@@ -81,7 +81,8 @@ theorem nonabsolute_plane_points_card_le {k K ι : Type*}
     (z : ι → Fin 2 → k) (hinj : Function.Injective z) (hz : ∀ i, eval (z i) f = 0) :
     Fintype.card ι ≤ f.totalDegree ^ 2 := by
   have hmap0 : MvPolynomial.map (algebraMap k K) f ≠ 0 := by
-    exact fun he => hf.ne_zero ((map_injective (algebraMap k K) (algebraMap k K).injective) (by simpa using he))
+    exact fun he => hf.ne_zero
+      ((map_injective (algebraMap k K) (algebraMap k K).injective) (by simpa using he))
   have hmapu : ¬ IsUnit (MvPolynomial.map (algebraMap k K) f) := by
     intro hu
     have he := (MvPolynomial.isUnit_iff_totalDegree_of_isReduced.mp hu).2

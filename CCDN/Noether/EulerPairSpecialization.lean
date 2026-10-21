@@ -65,7 +65,8 @@ theorem eulerClosedFormCoefficientMatrix_map {R S : Type*} [CommRing R] [CommRin
     (eulerClosedFormCoefficientMatrix k f).map φ =
       eulerClosedFormCoefficientMatrix k (bivariateMap φ f) := by
   ext i j
-  change φ (((closedFormOperator f (eulerBivariatePair R k (eulerPairBasis R k j))).coeff i.1).coeff i.2) = _
+  change φ (((closedFormOperator f
+    (eulerBivariatePair R k (eulerPairBasis R k j))).coeff i.1).coeff i.2) = _
   rw [← bivariateMap_coeff, bivariateMap_closedFormOperator, eulerBivariatePair_basis_map]
   rfl
 

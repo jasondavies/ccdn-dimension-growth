@@ -105,7 +105,8 @@ theorem chow_univariate_degree_eq_normalization_rank
   let : IsScalarTower K E F := IsScalarTower.to₁₂₄ K E A F
   let : Algebra (MvPolynomial (Fin n) A) F :=
     (MvPolynomial.fractionRingCoeffMap (A := T) (K := A) (F := F) (σ := Fin n)).toAlgebra
-  let : IsFractionRing (MvPolynomial (Fin n) A) F := MvPolynomial.isFractionRing_fractionRingCoeffMap
+  let : IsFractionRing (MvPolynomial (Fin n) A) F :=
+    MvPolynomial.isFractionRing_fractionRingCoeffMap
   let : IsScalarTower A (MvPolynomial (Fin n) A) F := IsScalarTower.of_algebraMap_eq' (by
     apply RingHom.ext
     intro a
@@ -116,7 +117,8 @@ theorem chow_univariate_degree_eq_normalization_rank
   let : Algebra (ChowIncidenceCoordinateRing m I) F := (chowNestedIncidenceMap I).toAlgebra
   let : IsScalarTower K (ChowIncidenceCoordinateRing m I) F :=
     IsScalarTower.of_algebraMap_eq (fun c => (chowNestedIncidenceMap_ground I c).symm)
-  let : IsFractionRing (ChowIncidenceCoordinateRing m I) F := chowNestedIncidenceMap_isFractionRing I
+  let : IsFractionRing (ChowIncidenceCoordinateRing m I) F :=
+    chowNestedIncidenceMap_isFractionRing I
   let x : Fin n → A := fun j => -algebraMap T A (C (Ideal.Quotient.mk I (X j)))
   have hparam (q : Fin m × Fin n) : ∃ e : E, algebraMap E A e = algebraMap T A (X q) :=
     ⟨⟨_,IntermediateField.subset_adjoin K _ (Or.inl ⟨q,rfl⟩)⟩,rfl⟩
@@ -135,9 +137,11 @@ theorem chow_univariate_degree_eq_normalization_rank
     polynomialFractionCoefficientMap_X (A := T) (K := A) (F := F) j
   have hR : R.restrictScalars K = chowParameterField (E := F) m I := by
     change (IntermediateField.adjoin E
-      (Set.range (fun j : Fin n => algebraMap (MvPolynomial (Fin n) A) F (X j)))).restrictScalars K = _
+      (Set.range (fun j : Fin n =>
+        algebraMap (MvPolynomial (Fin n) A) F (X j)))).restrictScalars K = _
     change (IntermediateField.adjoin (IntermediateField.adjoin K S)
-      (Set.range (fun j : Fin n => algebraMap (MvPolynomial (Fin n) A) F (X j)))).restrictScalars K = _
+      (Set.range (fun j : Fin n =>
+        algebraMap (MvPolynomial (Fin n) A) F (X j)))).restrictScalars K = _
     rw [intermediateField_adjoin_mapped_generators φ S (fun _ => rfl)]
     rw [chow_nested_parameter_field]
     simp only [S,Set.image_union,← Set.range_comp,Function.comp_def,hη,hX]

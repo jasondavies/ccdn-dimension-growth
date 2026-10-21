@@ -109,7 +109,9 @@ theorem universalEulerMatrix_specialize {R : Type*} [CommRing R]
   have he := congrFun (congrFun (eulerClosedFormCoefficientMatrix_map (Int.castRingHom R) k
     (eulerCoefficientMonomial ℤ (k + 2) i)) row) col
   rw [eulerCoefficientMonomial_map] at he
-  change ((eulerClosedFormCoefficientMatrix k (eulerCoefficientMonomial ℤ (k + 2) i) row col : ℤ) : R) = _ at he
+  change
+    ((eulerClosedFormCoefficientMatrix k (eulerCoefficientMonomial ℤ (k + 2) i) row col : ℤ) : R) =
+      _ at he
   rw [he]
   change _ * _ = _ * _
   exact mul_comm _ _

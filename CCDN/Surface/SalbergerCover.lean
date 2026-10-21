@@ -53,12 +53,15 @@ private theorem primitive_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
     obtain ⟨S,δ,hS,hcard,hcount⟩ := hcover f habs hfd (integerCoefficientHeight f : ℝ) B
       hH hB (coefficient_abs_le_integerCoefficientHeight f) (by simpa only [hfd] using hheight)
     refine ⟨S,δ,hS,?_,?_⟩
-    · exact hcard.trans (mul_le_mul_of_nonneg_right (by nlinarith [sq_nonneg (d : ℝ), sq_nonneg ((d : ℝ)^2)]) (by linarith))
-    · exact hcount.trans (mul_le_mul_of_nonneg_right (by nlinarith [sq_nonneg (d : ℝ), sq_nonneg ((d : ℝ)^2)]) (by linarith))
+    · exact hcard.trans (mul_le_mul_of_nonneg_right
+        (by nlinarith [sq_nonneg (d : ℝ), sq_nonneg ((d : ℝ)^2)]) (by linarith))
+    · exact hcount.trans (mul_le_mul_of_nonneg_right
+        (by nlinarith [sq_nonneg (d : ℝ), sq_nonneg ((d : ℝ)^2)]) (by linarith))
   · obtain ⟨S,δ,hS,hcard,hcount⟩ := hlarge
     refine ⟨S,δ,by simpa only [hfd] using hS,?_,?_⟩
     · have hh : (S.card : ℝ) ≤ (d : ℝ) ^ 2 := by exact_mod_cast (hfd ▸ hcard)
-      have hc' : (d : ℝ) ^ 2 ≤ C + (d : ℝ) ^ 2 + (d : ℝ) ^ 4 + 1 := by nlinarith [sq_nonneg (d : ℝ), sq_nonneg ((d : ℝ)^2)]
+      have hc' : (d : ℝ) ^ 2 ≤ C + (d : ℝ) ^ 2 + (d : ℝ) ^ 4 + 1 := by
+        nlinarith [sq_nonneg (d : ℝ), sq_nonneg ((d : ℝ)^2)]
       exact hh.trans (hc'.trans (le_mul_of_one_le_right (by positivity) hbase))
     · have hmono : count (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
           (⋃ I ∈ S, idealZeroLocus I)) B ≤
@@ -68,7 +71,8 @@ private theorem primitive_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
       have hh : (count (smoothSurfaceLocus (map (Int.castRingHom ℚ) f) \
           (⋃ I ∈ S, idealZeroLocus I)) B : ℝ) ≤ (d : ℝ) ^ 4 := by
         exact (Nat.cast_le.mpr hmono).trans (by simpa only [hfd] using hcount)
-      have hc' : (d : ℝ) ^ 4 ≤ C + (d : ℝ) ^ 2 + (d : ℝ) ^ 4 + 1 := by nlinarith [sq_nonneg (d : ℝ), sq_nonneg ((d : ℝ)^2)]
+      have hc' : (d : ℝ) ^ 4 ≤ C + (d : ℝ) ^ 2 + (d : ℝ) ^ 4 + 1 := by
+        nlinarith [sq_nonneg (d : ℝ), sq_nonneg ((d : ℝ)^2)]
       exact hh.trans (hc'.trans (le_mul_of_one_le_right (by positivity) hp))
 
 lemma smoothSurfaceLocus_C_mul (a : ℚ) (ha : a ≠ 0) (f : CoordinatePolynomial 3) :

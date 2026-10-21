@@ -113,11 +113,14 @@ private theorem bivariateShear_coefficient_bound (a : ℤ) (d : ℕ) (f : ℤ[X]
         (bivariateShear ℤ a (monomial k.1.val (monomial k.2.val ((f.coeff k.1.val).coeff k.2.val))))
         (H * (1 + |(a : ℝ)|) ^ d) := by
     intro k
-    apply bivariateCoefficientBound_mono (bivariateCoefficientBound_shear_monomial a _ k.1.val k.2.val)
-    exact mul_le_mul (hf _ _) (pow_le_pow_right₀ (by linarith [abs_nonneg (a : ℝ)]) (by omega)) (by positivity) hH
+    apply bivariateCoefficientBound_mono
+      (bivariateCoefficientBound_shear_monomial a _ k.1.val k.2.val)
+    exact mul_le_mul (hf _ _) (pow_le_pow_right₀ (by linarith [abs_nonneg (a : ℝ)]) (by omega))
+      (by positivity) hH
   have hh := bivariateCoefficientBound_sum _ _ hb
   convert hh using 1
-  simp only [BivariateGrid, Fintype.card_prod, Fintype.card_fin, Nat.cast_mul, Nat.cast_add, Nat.cast_one]
+  simp only [BivariateGrid, Fintype.card_prod, Fintype.card_fin, Nat.cast_mul, Nat.cast_add,
+    Nat.cast_one]
   ring
 
 /-- For the selected parameter 0<=a<=d, the sheared height is at most
@@ -131,7 +134,8 @@ theorem bivariateShear_bounded_coefficient_bound (a d : ℕ) (ha : a ≤ d)
   have haR : (a : ℝ) ≤ d := by exact_mod_cast ha
   calc
     _ ≤ ((d : ℝ) + 1) ^ 2 * H * ((d : ℝ) + 1) ^ d :=
-      mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (show (0 : ℝ) ≤ 1 + a by positivity) (show (1 : ℝ) + a ≤ d + 1 by linarith) d) (by positivity)
+      mul_le_mul_of_nonneg_left (pow_le_pow_left₀ (show (0 : ℝ) ≤ 1 + a by positivity)
+        (show (1 : ℝ) + a ≤ d + 1 by linarith) d) (by positivity)
     _ = _ := by rw [pow_add]; ring
 
 end

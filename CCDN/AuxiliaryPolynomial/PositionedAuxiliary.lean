@@ -40,10 +40,12 @@ lemma hypersurfaceSmallThreshold_position {n d : ℕ} {B H L A T : ℝ}
       (T * d * (d : ℝ) ^ (1 / (n + 1 : ℝ))) = T / (n + 1 : ℝ) := by field_simp
   rw [he] at hh
   have hm := mul_le_mul_of_nonneg_left hh
-    (show 0 ≤ Real.exp (hypersurfaceSmallHeightError (n + 1) (hypersurfaceBadPrimeNormalizedError n)) *
+    (show 0 ≤
+      Real.exp (hypersurfaceSmallHeightError (n + 1) (hypersurfaceBadPrimeNormalizedError n)) *
       (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * A *
         B ^ ((n + 2 : ℝ) / ((n + 1 : ℝ) * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) by positivity)
-  simpa only [hypersurfaceSmallThreshold, div_eq_mul_inv, one_mul, mul_assoc, mul_left_comm, mul_comm] using hm
+  simpa only [hypersurfaceSmallThreshold, div_eq_mul_inv, one_mul, mul_assoc, mul_left_comm,
+    mul_comm] using hm
 
 /-- Explicit constant for the positioned absolutely irreducible case. -/
 def hypersurfacePositionedAuxiliaryConstant (n : ℕ) (T : ℝ) : ℝ :=

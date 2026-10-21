@@ -26,7 +26,8 @@ theorem scaledHomogenize_leading_height_lower {n : ℕ}
   have hhR : (1 : ℝ) ≤ h := by exact_mod_cast hh
   have hpow : (0 : ℝ) < (h : ℝ) ^ f.totalDegree := by positivity
   have hc : (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ) ≤
-      (integerCoefficientHeight (scaledHomogenize f.totalDegree h f) : ℝ) / (h : ℝ) ^ f.totalDegree := by
+      (integerCoefficientHeight (scaledHomogenize f.totalDegree h f) : ℝ) /
+        (h : ℝ) ^ f.totalDegree := by
     apply integerCoefficientHeight_le _ (by positivity)
     intro m
     rw [coeff_homogeneousComponent]

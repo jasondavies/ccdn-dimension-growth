@@ -43,7 +43,8 @@ private def directionAxisHom (R : Type*) [CommRing R] (a : R) :
 private lemma directionAxisHom_eq_shear_axis {R : Type*} [CommRing R] (a : R)
     (f : MvPolynomial (Fin 2) R) :
     directionAxisHom R a f =
-      Polynomial.map (Polynomial.evalRingHom 0) (bivariatePolynomialEquiv R (planeShear R a f)) := by
+      Polynomial.map (Polynomial.evalRingHom 0)
+        (bivariatePolynomialEquiv R (planeShear R a f)) := by
   suffices hh : directionAxisHom R a =
       (Polynomial.mapRingHom (Polynomial.evalRingHom 0)).comp
         ((bivariatePolynomialEquiv R).toRingHom.comp (planeShear R a).toRingHom) from
@@ -107,7 +108,8 @@ private lemma leadingDirectionPolynomial_monomial {R : Type*} [CommRing R]
 
 private lemma leadingDirectionPolynomial_add {R : Type*} [CommRing R]
     (f g : R[X][X]) (d : ℕ) :
-    leadingDirectionPolynomial (f + g) d = leadingDirectionPolynomial f d + leadingDirectionPolynomial g d := by
+    leadingDirectionPolynomial (f + g) d =
+      leadingDirectionPolynomial f d + leadingDirectionPolynomial g d := by
   simp [leadingDirectionPolynomial, Finset.sum_add_distrib]
 
 /-- The direction polynomial computes the leading axis coefficient. -/
@@ -139,7 +141,8 @@ private lemma bivariateShear_axis_coeff {R : Type*} [CommRing R]
   have h := congrArg (fun q : R[X] => q.coeff d)
     (directionAxisHom_eq_shear_axis a ((bivariatePolynomialEquiv R).symm f))
   rw [directionAxisHom_coeff, AlgEquiv.apply_symm_apply, coeff_map] at h
-  change (leadingDirectionPolynomial f d).eval a = Polynomial.eval 0 ((bivariateShear R a f).coeff d) at h
+  change (leadingDirectionPolynomial f d).eval a =
+    Polynomial.eval 0 ((bivariateShear R a f).coeff d) at h
   rw [← Polynomial.coeff_zero_eq_eval_zero] at h
   exact h.symm
 

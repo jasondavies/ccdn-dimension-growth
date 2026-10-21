@@ -57,7 +57,8 @@ theorem geometric_chow_restriction_irreducible_iff_birational
     (hasProjectiveDimensionDegree_scalar_extension hdimdeg).natDegree_eq
   have hint := projection_integral_of_geometric_center_disjoint I hI A hcenter
   have hintL := chow_projection_integral_of_center_disjoint J hJ AL hcenter
-  have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms AL)).toRingHom
+  have : P.IsPrime :=
+    RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms AL)).toRingHom
   have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
     (integral_projection_hilbert_dimension_eq J _ hintL).trans hJdim
   obtain ⟨e, _, hPdimdeg⟩ :=

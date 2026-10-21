@@ -56,11 +56,13 @@ theorem stepanov_hilbert_dimension_inequality {K : Type*} [Field K]
       _ ≤ ∑ _r : Fin N, f.totalDegree * (D + A + N * f.totalDegree + 1) := by
         apply Finset.sum_le_sum
         intro r _
-        apply (principal_plane_hilbert_bounds f hf (by omega : f.totalDegree ≤ D + A + r.val * f.totalDegree)).2.trans
+        apply (principal_plane_hilbert_bounds f hf
+          (by omega : f.totalDegree ≤ D + A + r.val * f.totalDegree)).2.trans
         apply Nat.mul_le_mul_left
         have hh := Nat.mul_le_mul_right f.totalDegree (Nat.le_of_lt r.isLt)
         omega
-      _ = _ := by simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul]; ring
+      _ = _ := by
+        simp only [Finset.sum_const, Finset.card_univ, Fintype.card_fin, smul_eq_mul]; ring
   have hn := stepanov_numeric_dimension f.totalDegree p (f.totalDegree * A)
     (f.totalDegree * D) N hd hp hx hy hN hNpos
   have hprod := Nat.mul_le_mul (principal_plane_hilbert_bounds f hf hA).1

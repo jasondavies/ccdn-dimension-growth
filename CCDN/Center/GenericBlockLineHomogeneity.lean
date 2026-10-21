@@ -26,9 +26,11 @@ namespace PolynomialCoefficientwiseHomogeneous
 variable {R σ τ : Type*} [CommRing R]
 
 private theorem zero (D : ℕ) :
-    PolynomialCoefficientwiseHomogeneous (0 : Polynomial (MvPolynomial σ (MvPolynomial τ R))) D := by
+    PolynomialCoefficientwiseHomogeneous (0 : Polynomial (MvPolynomial σ (MvPolynomial τ R)))
+      D := by
   intro i
-  simpa only [Polynomial.coeff_zero] using CoefficientwiseHomogeneous.zero (R := R) (σ := σ) (τ := τ) D
+  simpa only [Polynomial.coeff_zero] using
+    CoefficientwiseHomogeneous.zero (R := R) (σ := σ) (τ := τ) D
 
 private theorem add {f g : Polynomial (MvPolynomial σ (MvPolynomial τ R))} {D : ℕ}
     (hf : PolynomialCoefficientwiseHomogeneous f D)
@@ -48,11 +50,14 @@ private theorem C_of_isHomogeneous {f : MvPolynomial σ (MvPolynomial τ R)} {D 
   · exact CoefficientwiseHomogeneous.zero D
 
 private theorem one :
-    PolynomialCoefficientwiseHomogeneous (1 : Polynomial (MvPolynomial σ (MvPolynomial τ R))) 0 := by
-  simpa only [map_one] using C_of_isHomogeneous (CoefficientwiseHomogeneous.one (R := R) (σ := σ) (τ := τ))
+    PolynomialCoefficientwiseHomogeneous (1 : Polynomial (MvPolynomial σ (MvPolynomial τ R)))
+      0 := by
+  simpa only [map_one] using
+    C_of_isHomogeneous (CoefficientwiseHomogeneous.one (R := R) (σ := σ) (τ := τ))
 
 theorem X :
-    PolynomialCoefficientwiseHomogeneous (Polynomial.X : Polynomial (MvPolynomial σ (MvPolynomial τ R))) 0 := by
+    PolynomialCoefficientwiseHomogeneous
+      (Polynomial.X : Polynomial (MvPolynomial σ (MvPolynomial τ R))) 0 := by
   intro i
   rw [Polynomial.coeff_X]
   split_ifs
@@ -104,14 +109,17 @@ private theorem genericBlockLine_coefficientwise_homogeneous
   classical
   have hx (i : σ ⊕ σ) :
       CoefficientwiseHomogeneous (X i : MvPolynomial (σ ⊕ σ) (MvPolynomial τ R)) 0 := by
-    simpa only [map_X] using CoefficientwiseHomogeneous.map_C (τ := τ) (X i : MvPolynomial (σ ⊕ σ) R)
+    simpa only [map_X] using
+      CoefficientwiseHomogeneous.map_C (τ := τ) (X i : MvPolynomial (σ ⊕ σ) R)
   have hv (i : σ) : PolynomialCoefficientwiseHomogeneous
       (Polynomial.C (X (Sum.inl i)) +
         if b i then Polynomial.C (X (Sum.inr i)) * Polynomial.X else 0 :
           Polynomial (MvPolynomial (σ ⊕ σ) (MvPolynomial τ R))) 0 := by
-    apply PolynomialCoefficientwiseHomogeneous.add (PolynomialCoefficientwiseHomogeneous.C_of_isHomogeneous (hx _))
+    apply PolynomialCoefficientwiseHomogeneous.add
+      (PolynomialCoefficientwiseHomogeneous.C_of_isHomogeneous (hx _))
     split_ifs
-    · exact (PolynomialCoefficientwiseHomogeneous.C_of_isHomogeneous (hx _)).mul PolynomialCoefficientwiseHomogeneous.X
+    · exact (PolynomialCoefficientwiseHomogeneous.C_of_isHomogeneous (hx _)).mul
+        PolynomialCoefficientwiseHomogeneous.X
     · exact PolynomialCoefficientwiseHomogeneous.zero 0
   conv => arg 1; rw [f.as_sum, map_sum]
   apply PolynomialCoefficientwiseHomogeneous.sum

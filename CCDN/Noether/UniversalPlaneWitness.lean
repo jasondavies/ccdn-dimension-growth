@@ -121,7 +121,8 @@ private lemma universalPlaneLeading_specialize {K σ : Type*} [CommRing K]
 
 private lemma universalPlaneLeading_map {K L σ : Type*} [Field K] [Field L]
     (φ : K →+* L) (f : MvPolynomial σ K) :
-    universalPlaneLeading (MvPolynomial.map φ f) = MvPolynomial.map φ (universalPlaneLeading f) := by
+    universalPlaneLeading (MvPolynomial.map φ f) =
+      MvPolynomial.map φ (universalPlaneLeading f) := by
   have ht : (MvPolynomial.map φ f).totalDegree = f.totalDegree :=
       totalDegree_map_of_injective φ.injective _
   simp only [universalPlaneLeading, ht, universalPlanePolynomial_map, bivariateMap_coeff]

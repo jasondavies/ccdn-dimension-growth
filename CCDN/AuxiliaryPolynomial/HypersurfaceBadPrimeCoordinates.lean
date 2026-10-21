@@ -28,7 +28,8 @@ lemma hypersurfaceBadReduction_renameEquiv {σ τ : Type*} (e : σ ≃ τ)
   dsimp only
   have hd : (rename e f).totalDegree = f.totalDegree := totalDegree_renameEquiv e f
   have hd' : (rename e (map (Int.castRingHom (AlgebraicClosure (ZMod p))) f)).totalDegree =
-      (map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree := totalDegree_renameEquiv e _
+      (map (Int.castRingHom (AlgebraicClosure (ZMod p))) f).totalDegree :=
+    totalDegree_renameEquiv e _
   rw [map_rename, hd, hd']
   apply or_congr Iff.rfl
   exact not_congr (MulEquiv.irreducible_iff (f := renameEquiv (AlgebraicClosure (ZMod p)) e))

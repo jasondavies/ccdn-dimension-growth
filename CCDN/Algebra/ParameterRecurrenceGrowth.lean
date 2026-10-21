@@ -102,7 +102,8 @@ private theorem parameter_recurrence_growth_bound {K A F : Type*} [Field K]
   have hbase {x : A} (hx : x ∈ V N) : T x ∈ parameterPowerSpan K u v D := by
     have he : T x = ∑ i, b.repr ⟨x, hx⟩ i • (q * φ (b i).val) := by
       have hh := congrArg (fun z : V N => T z.val) (b.sum_repr ⟨x, hx⟩)
-      simpa only [Submodule.coe_sum, Submodule.coe_smul, map_sum, map_smul, hT, Finset.mul_sum, mul_smul_comm] using hh.symm
+      simpa only [Submodule.coe_sum, Submodule.coe_smul, map_sum, map_smul, hT, Finset.mul_sum,
+        mul_smul_comm] using hh.symm
     rw [he]
     apply (parameterPowerSpan K u v D).sum_mem
     intro i _

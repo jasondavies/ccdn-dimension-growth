@@ -68,8 +68,8 @@ theorem exists_standard_auxiliary_of_zero_determinants {n N t M : ℕ}
     exact (mem_support_iff.mp hm) hc
   refine ⟨g, hg0, ?_, totalDegree_polynomialOfCoefficients_le mon v hdegree, ?_⟩
   · intro hdvd
-    exact hgQ (Ideal.eq_zero_of_mem_restrictSupport_standardExponents (Ideal.span {f}) MonomialOrder.degLex hgstd
-      (Ideal.mem_span_singleton.mpr hdvd))
+    exact hgQ (Ideal.eq_zero_of_mem_restrictSupport_standardExponents (Ideal.span {f})
+      MonomialOrder.degLex hgstd (Ideal.mem_span_singleton.mpr hdvd))
   · intro i
     apply vanishes_of_evaluation_row_mem_span mon (x ∘ a) v hAv
     change (A.map ((↑) : ℤ → ℚ)).row i ∈ _

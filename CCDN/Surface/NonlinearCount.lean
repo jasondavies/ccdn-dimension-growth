@@ -52,7 +52,8 @@ theorem nonlinear_curve_union_bound :
     _ = K * ∑ P ∈ s, curveBound (δ P) B := (Finset.mul_sum _ _ _).symm
     _ ≤ K * (Real.exp 1 * (480 * C + 2 * C ^ 4) * (d : ℝ) ^ 18 * B) :=
       mul_le_mul_of_nonneg_left
-        (sum_curveBound_le_surface_degree_budget s δ hd hC hB (fun P hP => (hcurve P hP).2.1) hdegree) hK.le
+        (sum_curveBound_le_surface_degree_budget s δ hd hC hB (fun P hP => (hcurve P hP).2.1)
+          hdegree) hK.le
     _ = _ := by ring
 
 end

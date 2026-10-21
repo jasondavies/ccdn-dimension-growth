@@ -68,7 +68,8 @@ theorem exists_polynomialCoefficientLinear_not_mem
       rw [polynomialCoefficientLinear_coeff, hzero, map_zero]
     have hh := hrstd hbr
     simpa only [J', standardExponents_scalar_extension] using hh
-  have hrzero := Ideal.eq_zero_of_mem_restrictSupport_standardExponents J MonomialOrder.degLex hrstdK hrmem
+  have hrzero :=
+    Ideal.eq_zero_of_mem_restrictSupport_standardExponents J MonomialOrder.degLex hrstdK hrmem
   have hc := polynomialCoefficientLinear_coeff φ r a
   have hz : φ (r.coeff a) = 0 := by simpa [hrzero] using hc.symm
   exact hφ hz

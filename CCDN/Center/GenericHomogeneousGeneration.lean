@@ -50,7 +50,8 @@ theorem homogeneous_generation_of_basis_specialization
   let N := (aeval u).toRingHom.mapMatrix M
   have hN : N.det ≠ 0 := by
     rw [← RingHom.map_det]
-    exact fun hz => hM ((injective_iff_map_eq_zero (aeval u : MvPolynomial σ K →ₐ[K] L)).mp hu M.det hz)
+    exact fun hz => hM
+      ((injective_iff_map_eq_zero (aeval u : MvPolynomial σ K →ₐ[K] L)).mp hu M.det hz)
   let A := MvPolynomial (Fin (n + 1)) L ⧸ J
   let q := Ideal.Quotient.mk J
   let T := (algebraMap L A).mapMatrix N

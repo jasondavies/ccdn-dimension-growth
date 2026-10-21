@@ -174,7 +174,8 @@ theorem filteredCoordinateSpace_eventually_linear {K σ : Type*} [Field K] [Fint
   classical
   let B := 2 * C + 14
   obtain ⟨N, hN⟩ := lowerSet_shell_card_eventually_constant
-    (Ideal.standardExponents I MonomialOrder.degLex) (Ideal.isLowerSet_standardExponents I MonomialOrder.degLex)
+    (Ideal.standardExponents I MonomialOrder.degLex)
+    (Ideal.isLowerSet_standardExponents I MonomialOrder.degLex)
     B (by dsimp [B]; omega)
     (fun a ha i j hi hj => standard_at_most_one_large I C hbound ha hi hj)
   let d := Nat.card (fullExponentRays (Ideal.standardExponents I MonomialOrder.degLex) B)

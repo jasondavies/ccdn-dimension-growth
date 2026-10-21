@@ -63,7 +63,8 @@ theorem irreducible_map_of_smooth_plane_point
     rw [← hmap]
     infer_instance
   have hne : MvPolynomial.map (algebraMap K L) f ≠ 0 := by
-    exact (map_ne_zero_iff _ (MvPolynomial.map_injective _ (algebraMap K L).injective)).mpr hf.ne_zero
+    exact (map_ne_zero_iff _ (MvPolynomial.map_injective _ (algebraMap K L).injective)).mpr
+      hf.ne_zero
   exact ((Ideal.span_singleton_prime hne).mp hp).irreducible
 
 end

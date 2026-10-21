@@ -104,7 +104,8 @@ theorem chow_incidence_minpoly_natDegree
     rfl
   let : Algebra P R := ρ.toRingHom.toAlgebra
   let : Algebra P E := ψ.toRingHom.toAlgebra
-  let : IsScalarTower P R E := IsScalarTower.of_algebraMap_eq' (congrArg AlgHom.toRingHom hcomp).symm
+  let : IsScalarTower P R E :=
+    IsScalarTower.of_algebraMap_eq' (congrArg AlgHom.toRingHom hcomp).symm
   have hgen : IntermediateField.adjoin K (Set.range u) = ⊤ := by
     apply IntermediateField.lift_injective R
     rw [IntermediateField.lift_adjoin,IntermediateField.lift_top,← Set.range_comp]

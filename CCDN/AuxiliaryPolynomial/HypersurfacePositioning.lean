@@ -42,7 +42,8 @@ lemma normalizedHypersurfaceCoordinates_monic {K σ : Type*} [Field K]
 private lemma normalizedHypersurfaceCoordinates_natDegree {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K)
     (hdir : eval b (homogeneousComponent f.totalDegree f) ≠ 0) :
-    (optionEquivLeft K σ (normalizedHypersurfaceCoordinates a b hb f)).natDegree = f.totalDegree := by
+    (optionEquivLeft K σ (normalizedHypersurfaceCoordinates a b hb f)).natDegree =
+      f.totalDegree := by
   unfold normalizedHypersurfaceCoordinates
   rw [map_mul, optionEquivLeft_C,
     Polynomial.natDegree_C_mul_of_isUnit ((isUnit_iff_ne_zero.mpr (inv_ne_zero hdir)).map C)]
@@ -66,7 +67,8 @@ private lemma normalizedHypersurfaceCoordinates_eval_zero {K σ : Type*} [Field 
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K)
     (hz : eval a f = 0) :
     eval (0 : Option σ → K) (normalizedHypersurfaceCoordinates a b hb f) = 0 := by
-  rw [normalizedHypersurfaceCoordinates, map_mul, hypersurfaceAffineCoordinates_eval_zero, hz, mul_zero]
+  rw [normalizedHypersurfaceCoordinates, map_mul, hypersurfaceAffineCoordinates_eval_zero, hz,
+    mul_zero]
 
 private lemma normalizedHypersurfaceCoordinates_partial_ne_zero {K σ : Type*} [Field K] [Fintype σ]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K)
@@ -99,7 +101,8 @@ theorem exists_monic_smooth_hypersurface_coordinates
       eval b (homogeneousComponent f.totalDegree f) ≠ 0 ∧
       IsMonicSmoothAtOrigin (normalizedHypersurfaceCoordinates a b hb f) f.totalDegree := by
   obtain ⟨a, j, ha, hj⟩ := exists_smooth_hypersurface_point_of_degree_lt_char f hf hpos hchar
-  obtain ⟨b, hb, hdir, ht⟩ := exists_good_hypersurface_direction_with_coordinate f hf.ne_zero a j hj none
+  obtain ⟨b, hb, hdir, ht⟩ :=
+    exists_good_hypersurface_direction_with_coordinate f hf.ne_zero a j hj none
   exact ⟨a, b, hb, hdir, normalizedHypersurfaceCoordinates_irreducible a b hb f hf hdir,
     normalizedHypersurfaceCoordinates_monic a b hb f hdir,
     normalizedHypersurfaceCoordinates_natDegree a b hb f hdir,

@@ -31,7 +31,8 @@ lemma coefficient_abs_le_integerCoefficientHeight {σ : Type*}
     by_cases hm : m ∈ f.support
     · exact Finset.le_sup (f := fun m => (f.coeff m).natAbs) hm
     · simp [notMem_support_iff.mp hm]
-  simpa only [Nat.cast_natAbs, Int.cast_abs] using (show ((f.coeff m).natAbs : ℝ) ≤ integerCoefficientHeight f by exact_mod_cast hh)
+  simpa only [Nat.cast_natAbs, Int.cast_abs] using
+    (show ((f.coeff m).natAbs : ℝ) ≤ integerCoefficientHeight f by exact_mod_cast hh)
 
 lemma integerCoefficientHeight_le {σ : Type*} (f : MvPolynomial σ ℤ)
     {H : ℝ} (hH : 0 ≤ H) (hc : CoefficientHeightLE f H) :

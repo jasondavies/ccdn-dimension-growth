@@ -69,7 +69,8 @@ lemma polynomial_parameter_mul_mem {K F ι : Type*} [Field K] [Field F] [Algebra
   apply (parameterPowerSpan K u v N).sum_mem
   intro j hj
   rw [Polynomial.aeval_monomial]
-  have hjN : j ≤ N := (Polynomial.le_natDegree_of_ne_zero (Polynomial.mem_support_iff.mp hj)).trans hp
+  have hjN : j ≤ N :=
+    (Polynomial.le_natDegree_of_ne_zero (Polynomial.mem_support_iff.mp hj)).trans hp
   have hm : u ^ j * v i ∈ parameterPowerSpan K u v N :=
     Submodule.subset_span ⟨(i, ⟨j, by omega⟩), rfl⟩
   simpa only [Algebra.smul_def, mul_assoc] using
