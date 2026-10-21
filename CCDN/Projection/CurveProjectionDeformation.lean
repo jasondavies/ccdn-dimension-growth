@@ -52,8 +52,7 @@ theorem exists_curve_projection_relation_family {K τ : Type*}
     [Field K] [CharZero K] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime]
     (a : Fin 2 → MvPolynomial τ K) (ha : ∀ i, (a i).totalDegree ≤ 1)
-    (d : ℕ) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c)
+    (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (hu : Transcendental K ((Ideal.Quotient.mk I) (a 0)))
     (l : MvPolynomial τ K) (hl : l.totalDegree ≤ 1) :
     let V := restrictTotalDegree (Fin 2) K d

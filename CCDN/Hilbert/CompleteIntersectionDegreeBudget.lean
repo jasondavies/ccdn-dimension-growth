@@ -29,12 +29,10 @@ theorem polynomialSection_minimalPrime_degrees_exist
   classical
   have hex (P : minimalPrimeComponents (polynomialSectionIdeal f g)) :
       ∃ d : ℕ, HasAffineCurveDegree P.val d := by
-    obtain ⟨d, _, N, c, h⟩ := proper_intersection_eventual_linear_degree hf.prime hfg P.val
+    obtain ⟨d, _, h⟩ := proper_intersection_eventual_linear_degree hf.prime hfg P.val
       (le_minimalPrimeComponents P.property (polynomialSectionIdeal_first_mem f g))
       (le_minimalPrimeComponents P.property (polynomialSectionIdeal_second_mem f g))
-    refine ⟨d, N, c, ?_⟩
-    intro M hM
-    exact h M hM
+    exact ⟨d, h⟩
   choose d hd using hex
   exact ⟨d, hd, polynomialSection_minimalPrime_curveDegree_sum_le f g hf hfg d hd⟩
 
@@ -72,16 +70,10 @@ theorem exists_completeIntersection_curve_components
     have : P.IsPrime := hminimal.isPrime
     have hheight : P.height = 2 := minimalPrime_pair_height_two hf.prime hfg hminimal
     have hdeg := hcurve P hPT
-    have hlin : ∃ N : ℕ, ∃ c : ℤ, ∀ M ≥ N,
-        (Module.finrank ℚ (filteredCoordinateSpace P M) : ℤ) = (d P : ℤ) * M + c := by
-      obtain ⟨N, c, h⟩ := hdeg
-      refine ⟨N, c, ?_⟩
-      intro M hM
-      exact h M hM
     exact ⟨hminimal.isPrime, hheight,
       hminimal.le (polynomialSectionIdeal_first_mem f g),
       hminimal.le (polynomialSectionIdeal_second_mem f g),
-      height_two_eventual_slope_pos_of_point P hheight z hz hlin, hdeg⟩
+      height_two_eventual_slope_pos_of_point P hheight z hz hdeg, hdeg⟩
   · ext x
     constructor
     · intro hx

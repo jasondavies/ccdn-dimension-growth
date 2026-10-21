@@ -23,8 +23,7 @@ theorem minimalPrimeComponents_slope_sum_le {K σ : Type*} [Field K] [Finite σ]
     (I : Ideal (MvPolynomial σ K)) (C N₀ : ℕ)
     (hupper : ∀ N ≥ N₀, Module.finrank K (filteredCoordinateSpace I N) ≤ C * (N + 1))
     (d : minimalPrimeComponents I → ℕ)
-    (hdegree : ∀ P, ∃ N : ℕ, ∃ c : ℤ, ∀ M ≥ N,
-      (Module.finrank K (filteredCoordinateSpace P.val M) : ℤ) = (d P : ℤ) * M + c) :
+    (hdegree : ∀ P, HasFilteredCurveDegree P.val (d P)) :
     ∑ P, d P ≤ C := by
   classical
   obtain ⟨D, hD⟩ := minimalPrimeComponents_filtered_rank_lower I
@@ -70,8 +69,7 @@ Only their eventual Hilbert formulas are inputs to this intermediate lemma. -/
 theorem polynomialSection_minimalPrime_slope_sum_le {K : Type*} [Field K]
     (f g : MvPolynomial (Fin 3) K) (hf : Prime f) (hfg : ¬ f ∣ g)
     (d : minimalPrimeComponents (polynomialSectionIdeal f g) → ℕ)
-    (hdegree : ∀ P, ∃ N : ℕ, ∃ c : ℤ, ∀ M ≥ N,
-      (Module.finrank K (filteredCoordinateSpace P.val M) : ℤ) = (d P : ℤ) * M + c) :
+    (hdegree : ∀ P, HasFilteredCurveDegree P.val (d P)) :
     ∑ P, d P ≤ f.totalDegree * g.totalDegree := by
   apply minimalPrimeComponents_slope_sum_le (polynomialSectionIdeal f g)
     (f.totalDegree * g.totalDegree) (f.totalDegree + g.totalDegree) _ d hdegree
@@ -86,14 +84,8 @@ theorem polynomialSection_minimalPrime_curveDegree_sum_le
     (f g : CoordinatePolynomial 3) (hf : Irreducible f) (hfg : ¬ f ∣ g)
     (d : minimalPrimeComponents (polynomialSectionIdeal f g) → ℕ)
     (hdegree : ∀ P, HasAffineCurveDegree P.val (d P)) :
-    ∑ P, d P ≤ f.totalDegree * g.totalDegree := by
-  apply polynomialSection_minimalPrime_slope_sum_le f g hf.prime hfg d
-  intro P
-  obtain ⟨N, c, h⟩ := hdegree P
-  refine ⟨N, c, ?_⟩
-  intro M hM
-  change (affineHilbertFunction P.val M : ℤ) = (d P : ℤ) * M + c
-  exact h M hM
+    ∑ P, d P ≤ f.totalDegree * g.totalDegree :=
+  polynomialSection_minimalPrime_slope_sum_le f g hf.prime hfg d hdegree
 
 end
 end CCDN

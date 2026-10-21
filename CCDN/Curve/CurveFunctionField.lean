@@ -41,8 +41,7 @@ theorem fraction_parameter_rank_le {K R F σ ι : Type*} [Field K] [Field R] [Fi
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
     [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
     [IsFractionRing (MvPolynomial σ K ⧸ I) F]
-    (d : ℕ) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c)
+    (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (l : MvPolynomial σ K) (hl : l.totalDegree ≤ 1)
     (u : R) (hu : Transcendental K u)
     (he : algebraMap (MvPolynomial σ K ⧸ I) F ((Ideal.Quotient.mk I) l) = algebraMap R F u)
@@ -71,8 +70,7 @@ theorem curve_functionField_finite_rank_le {K R F σ : Type*} [Field K] [Field R
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
     [Algebra (MvPolynomial σ K ⧸ I) F] [IsScalarTower K (MvPolynomial σ K ⧸ I) F]
     [IsFractionRing (MvPolynomial σ K ⧸ I) F]
-    (d : ℕ) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c)
+    (d : ℕ) (hdegree : HasFilteredCurveDegree I d)
     (l : MvPolynomial σ K) (hl : l.totalDegree ≤ 1)
     (u : R) (hu : Transcendental K u)
     (he : algebraMap (MvPolynomial σ K ⧸ I) F ((Ideal.Quotient.mk I) l) = algebraMap R F u) :

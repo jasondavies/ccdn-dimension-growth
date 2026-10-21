@@ -55,8 +55,7 @@ lemma algebraic_parameter_recurrence_bounded {K A : Type*} [Field K]
 curve cannot satisfy a polynomial over the ground field. -/
 theorem recurrence_parameter_transcendental {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (d : ℕ) (hd : 0 < d)
-    (hdegree : ∃ M : ℕ, ∃ c : ℤ, ∀ m ≥ M,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c)
+    (hdegree : HasFilteredCurveDegree I d)
     (l : MvPolynomial σ K) (N : ℕ)
     (hrec : ∀ m ≥ N, filteredCoordinateSpace I (m + 1) =
       filteredCoordinateSpace I m ⊔ (filteredCoordinateSpace I m).map

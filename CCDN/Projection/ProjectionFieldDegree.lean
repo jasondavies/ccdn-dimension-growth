@@ -40,8 +40,7 @@ theorem minpoly_degree_le_plane_relation {K R F : Type*}
     rw [map_mul, hzero, zero_mul]
   let φ : (MvPolynomial (Fin 2) K ⧸ I) →ₐ[K] F := Ideal.Quotient.liftₐ I ψ hI
   have hφ (g : MvPolynomial (Fin 2) K) : φ ((Ideal.Quotient.mk I) g) = ψ g := rfl
-  have hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (f.totalDegree : ℤ) * n + c :=
+  have hdegree : HasFilteredCurveDegree I f.totalDegree :=
     ⟨f.totalDegree, (f.totalDegree : ℤ) - f.totalDegree.choose 2,
       fun n hn => principal_plane_hilbert_function f hf hn⟩
   have hi : LinearIndependent R (fun i : Fin (minpoly R (ψ (X k))).natDegree =>
@@ -73,8 +72,7 @@ theorem plane_projection_degree_eq_of_full_parameter {K R F τ : Type*}
     [IsScalarTower K R F] [Module.Finite R F] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) (a : Fin 2 → MvPolynomial τ K)
     (ha : ∀ i, (a i).totalDegree ≤ 1) (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c)
+    (hdegree : HasFilteredCurveDegree I d)
     (φ : (MvPolynomial τ K ⧸ I) →ₐ[K] F)
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0)
     (hker : RingHom.ker (projectionCoordinateMap I a) = Ideal.span {f})

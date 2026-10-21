@@ -24,8 +24,7 @@ distinct points of the source curve. -/
 theorem reconstruction_exceptional_card_le {K σ τ ι : Type*} [Field K]
     [Fintype σ] [Fintype τ] [Fintype ι] [DecidableEq ι]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime] (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c)
+    (hdegree : HasFilteredCurveDegree I d)
     (a : σ → MvPolynomial τ K) (ha : ∀ j, (a j).totalDegree ≤ 1)
     (Q : MvPolynomial σ K) (hQ : aeval a Q ∉ I)
     (z : ι → τ → K) (hz : Function.Injective z)
@@ -40,8 +39,7 @@ theorem reconstruction_exceptional_card_le {K σ τ ι : Type*} [Field K]
 theorem projection_card_le_image_add {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     [DecidableEq (σ → K)]
     (I : Ideal (MvPolynomial τ K)) [I.IsPrime] (d : ℕ)
-    (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ m ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I m) : ℤ) = (d : ℤ) * m + c)
+    (hdegree : HasFilteredCurveDegree I d)
     (a : σ → MvPolynomial τ K) (ha : ∀ j, (a j).totalDegree ≤ 1)
     (Q : MvPolynomial σ K) (P : τ → MvPolynomial σ K)
     (hQ : aeval a Q ∉ I) (hP : ∀ i, aeval a Q * X i - aeval a (P i) ∈ I)

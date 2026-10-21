@@ -24,8 +24,7 @@ theorem filteredCoordinateSpace_eventually_linear_of_eventual_bound
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) (C T : ℕ)
     (hbound : ∀ N ≥ T, Module.finrank K (filteredCoordinateSpace I N) ≤ C * (N + 2)) :
-    ∃ d ≤ C, ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c := by
+    ∃ d ≤ C, HasFilteredCurveDegree I d := by
   have hglobal (N : ℕ) (_hN : 14 ≤ N) :
       Module.finrank K (filteredCoordinateSpace I N) ≤ (C * (T + 2)) * (N + 2) := by
     by_cases hTN : T ≤ N
@@ -57,8 +56,7 @@ This holds for every ideal containing the equations, not just prime ideals. -/
 theorem proper_intersection_eventual_linear_degree {K : Type*} [Field K]
     {f g : MvPolynomial (Fin 3) K} (hf : Prime f) (hfg : ¬ f ∣ g)
     (I : Ideal (MvPolynomial (Fin 3) K)) (hIf : f ∈ I) (hIg : g ∈ I) :
-    ∃ d ≤ f.totalDegree * g.totalDegree, ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c := by
+    ∃ d ≤ f.totalDegree * g.totalDegree, HasFilteredCurveDegree I d := by
   apply filteredCoordinateSpace_eventually_linear_of_eventual_bound I
     (f.totalDegree * g.totalDegree) (f.totalDegree + g.totalDegree)
   intro N hN

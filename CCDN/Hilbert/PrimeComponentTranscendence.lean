@@ -163,8 +163,7 @@ theorem height_two_transcendental_coordinate_of_point {K : Type*} [Field K]
 theorem height_two_eventual_slope_pos_of_point {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
     (z : Fin 3 → K) (hz : z ∈ idealZeroLocus p) {d : ℕ}
-    (hlinear : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace p n) : ℤ) = (d : ℤ) * n + c) :
+    (hlinear : HasFilteredCurveDegree p d) :
     0 < d := by
   obtain ⟨N, c, hlinear⟩ := hlinear
   obtain ⟨j, hj⟩ := height_two_transcendental_coordinate_of_point p hp z hz

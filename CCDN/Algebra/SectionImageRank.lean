@@ -87,8 +87,7 @@ This applies to truncated local expansions as well as to point values. -/
 theorem section_image_rank_le {K B σ ι : Type*} [Field K]
     [CommRing B] [Algebra K B] [Fintype σ] [Fintype ι] [DecidableEq ι]
     (p : Ideal (MvPolynomial σ K)) [p.IsPrime]
-    (d : ℕ) (hdegree : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace p n) : ℤ) = (d : ℤ) * n + c)
+    (d : ℕ) (hdegree : HasFilteredCurveDegree p d)
     (φ : (MvPolynomial σ K ⧸ p) →ₐ[K] B) (h : ι → MvPolynomial σ K)
     (hlin : LinearIndependent K (fun i => φ ((Ideal.Quotient.mk p) (h i))))
     (l : MvPolynomial σ K) (hl : l ∉ p) (m : ℕ) (hld : l.totalDegree ≤ m)

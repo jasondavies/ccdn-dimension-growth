@@ -101,8 +101,7 @@ theorem affine_coordinates_line_polynomial_identity {K : Type*} [Field K]
 formulas over that same field. In particular this holds directly over `ℚ`. -/
 theorem degree_one_coordinates_affine_of_point {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
-    (hdegree : ∃ N : ℕ, ∃ b : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace p n) : ℤ) = n + b)
+    (hdegree : HasFilteredCurveDegree p 1)
     (z : Fin 3 → K) (hz : z ∈ idealZeroLocus p) :
     ∃ (j : Fin 3) (c d : Fin 3 → K), c j ≠ 0 ∧
       Transcendental K ((Ideal.Quotient.mk p) (X j)) ∧ ∀ k,
@@ -114,6 +113,7 @@ theorem degree_one_coordinates_affine_of_point {K : Type*} [Field K]
       Module.finrank K (filteredCoordinateSpace p N) + 1 := by
     have h0 := hN N le_rfl
     have h1 := hN (N + 1) (by omega)
+    push_cast at h0 h1
     omega
   have hUone : (1 : MvPolynomial (Fin 3) K ⧸ p) ∈ filteredCoordinateSpace p N := by
     apply Submodule.mem_map.mpr
@@ -188,13 +188,8 @@ theorem degree_one_zeroLocus_eq_rationalAffineLine
     ∃ v : RatPoint 3, v ≠ 0 ∧ idealZeroLocus p = rationalAffineLine z v ∧
       ∀ f ∈ p, MvPolynomial.aeval
         (fun k => Polynomial.C (z k) + Polynomial.C (v k) * Polynomial.X) f = 0 := by
-  have hd : ∃ N : ℕ, ∃ b : ℤ, ∀ n ≥ N,
-      (Module.finrank ℚ (filteredCoordinateSpace p n) : ℤ) = n + b := by
-    obtain ⟨N, b, hN⟩ := hdegree
-    refine ⟨N, b, fun n hn => ?_⟩
-    change (affineHilbertFunction p n : ℤ) = n + b
-    simpa only [Nat.cast_one, one_mul] using hN n hn
-  obtain ⟨j, c, d, hcj, hj, hcd⟩ := degree_one_coordinates_affine_of_point p hp hd z hz
+  obtain ⟨j, c, d, hcj, hj, hcd⟩ :=
+    degree_one_coordinates_affine_of_point p hp hdegree z hz
   refine ⟨c, fun h => hcj (congrFun h j), ?_,
     affine_coordinates_line_polynomial_identity p j c d hj hcd z hz⟩
   exact zeroLocus_eq_line_of_affine_coordinates p j c d hj hcd z hz

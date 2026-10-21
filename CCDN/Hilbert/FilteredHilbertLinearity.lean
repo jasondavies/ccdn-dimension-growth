@@ -169,8 +169,7 @@ affine Hilbert function, with natural slope at most that upper-bound slope. -/
 theorem filteredCoordinateSpace_eventually_linear {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (C : ℕ)
     (hbound : ∀ N ≥ 14, Module.finrank K (filteredCoordinateSpace I N) ≤ C * (N + 2)) :
-    ∃ d ≤ C, ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace I n) : ℤ) = (d : ℤ) * n + c := by
+    ∃ d ≤ C, HasFilteredCurveDegree I d := by
   classical
   let B := 2 * C + 14
   obtain ⟨N, hN⟩ := lowerSet_shell_card_eventually_constant
