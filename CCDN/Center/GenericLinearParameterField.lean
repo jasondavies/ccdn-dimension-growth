@@ -111,9 +111,9 @@ theorem generic_linear_parameter_field_degree
     let R := polynomialParameterField (K := K) (A := A) (F := F) (σ := Fin n)
     Module.finrank R F = Module.finrank K A ∧
     (minpoly R (algebraMap (MvPolynomial (Fin n) A) F
-      (genericLinearForm x))).natDegree = Module.finrank K A ∧
+      (linearForm x))).natDegree = Module.finrank K A ∧
     IntermediateField.adjoin R
-      {algebraMap (MvPolynomial (Fin n) A) F (genericLinearForm x)} = ⊤ := by
+      {algebraMap (MvPolynomial (Fin n) A) F (linearForm x)} = ⊤ := by
   refine polynomialParameterField_rec (K := K) (A := A) (F := F) (σ := Fin n) ?_
   intro _ _ _ _ _
   exact generic_linear_primitive

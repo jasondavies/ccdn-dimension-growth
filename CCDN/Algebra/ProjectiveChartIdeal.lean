@@ -32,10 +32,10 @@ theorem coordinate_kernel_mem_iff_homogenize {K F : Type*} [Field K] [Field F]
     (q : (MvPolynomial (Fin (n + 1)) K ⧸ I) →ₐ[K] F) (hq : Function.Injective q)
     (h0 : q ((Ideal.Quotient.mk I) (X 0)) ≠ 0)
     (f : MvPolynomial (Fin n) K) (hf : f.totalDegree ≤ M) :
-    f ∈ RingHom.ker (projectiveChartCoordinateMap I q) ↔ boundedHomogenize M f ∈ I := by
-  have h := affineChart_mem_coordinate_kernel_iff I q hq h0 (boundedHomogenize M f)
-    (boundedHomogenize_homogeneous f hf)
-  rwa [affineChart_boundedHomogenize] at h
+    f ∈ RingHom.ker (projectiveChartCoordinateMap I q) ↔ scaledHomogenize M 1 f ∈ I := by
+  have h := affineChart_mem_coordinate_kernel_iff I q hq h0 (scaledHomogenize M 1 f)
+    (scaledHomogenize_homogeneous 1 f hf)
+  rwa [affineChart_scaledHomogenize_one] at h
 
 theorem projective_point_chart_vanishes {K F : Type*} [Field K] [Field F]
     [Algebra K F] {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K))
@@ -47,9 +47,9 @@ theorem projective_point_chart_vanishes {K F : Type*} [Field K] [Field F]
       eval (projectiveAffineCoordinates x) f = 0 := by
   intro f hf
   have hh := (coordinate_kernel_mem_iff_homogenize I q hq h0 f le_rfl).mp hf
-  have hz := projectiveAffineCoordinates_zero (boundedHomogenize f.totalDegree f)
-    (boundedHomogenize_homogeneous f le_rfl) x hx0 (projectiveIdealZeroLocus_rep hx _ hh)
-  rwa [affineChart_boundedHomogenize] at hz
+  have hz := projectiveAffineCoordinates_zero (scaledHomogenize f.totalDegree 1 f)
+    (scaledHomogenize_homogeneous 1 f le_rfl) x hx0 (projectiveIdealZeroLocus_rep hx _ hh)
+  rwa [affineChart_scaledHomogenize_one] at hz
 
 def projectiveChartIdeal {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime] :

@@ -30,7 +30,7 @@ theorem projective_projection_dimension_growth (m k : ℕ) :
       Irreducible f → f.IsHomogeneous d → f.totalDegree = d →
       aeval (fun i => integerLinearForm (b i)) f ∈ I →
       (∀ z : Fin (m + 3) → ℚ, ∀ s : Finset (Fin (m + k + 2) → ℚ),
-        (∀ x ∈ s, ∀ g ∈ I, eval x g = 0) →
+        (∀ x ∈ s, x ∈ idealZeroLocus I) →
         (∀ x ∈ s, ∀ i, eval x (integerLinearForm (b i)) = z i) →
         s.card ≤ d ^ (m + k + 2)) →
       ∀ B : ℝ, 1 ≤ B →

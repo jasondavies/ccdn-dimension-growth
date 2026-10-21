@@ -66,7 +66,7 @@ theorem projectiveCoefficientExtension_injective
 lemma homogeneous_ideal_eval_smul
     {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K))
     (hI : IsHomogeneousIdeal I)
-    (v : σ → K) (hv : ∀ f ∈ I, eval v f = 0)
+    (v : σ → K) (hv : v ∈ idealZeroLocus I)
     (a : K) (f : MvPolynomial σ K) (hf : f ∈ I) :
     eval (a • v) f = 0 := by
   classical

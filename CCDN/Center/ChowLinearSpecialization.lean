@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.LinearForm
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Projection.LinearProjectionFiltration
@@ -24,20 +25,20 @@ noncomputable section
 open MvPolynomial Matrix
 
 /-- Coordinate forms of a linear projection matrix. -/
-def chowProjectionForms {K : Type*} [Field K] {n s : ℕ}
+abbrev chowProjectionForms {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1)) :
-    MvPolynomial (Fin (n + 1)) K := ∑ j, C (A i j) * X j
+    MvPolynomial (Fin (n + 1)) K := linearForm (A i)
 
 lemma chowProjectionForms_homogeneous {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1)) :
     (chowProjectionForms A i).IsHomogeneous 1 :=
-  IsHomogeneous.sum _ _ _ (fun j _ => isHomogeneous_C_mul_X _ j)
+  linearForm_isHomogeneous (A i)
 
 lemma chowProjectionForms_eval {K : Type*} [Field K] {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin (s + 1))
     (x : Fin (n + 1) → K) :
     eval x (chowProjectionForms A i) = (A *ᵥ x) i := by
-  simp [chowProjectionForms, Matrix.mulVec, dotProduct]
+  simp [Matrix.mulVec, dotProduct]
 
 /-- Pullback of target hyperplane coefficients along the matrix. -/
 def chowPullbackCoefficients {K : Type*} [Field K] {n s r : ℕ}
@@ -99,7 +100,7 @@ theorem chow_projection_integral_of_center_disjoint
     (chowProjectionForms_homogeneous A)
   intro x hx
   by_contra hx0
-  have hxJ : ∀ f ∈ J, eval x f = 0 := fun f hf => hx f (Ideal.mem_sup_left hf)
+  have hxJ : x ∈ idealZeroLocus J := fun f hf => hx f (Ideal.mem_sup_left hf)
   have hxA : A *ᵥ x = 0 := by
     funext i
     rw [← chowProjectionForms_eval]
@@ -124,7 +125,7 @@ theorem chow_projection_cone_image_iff
     (hint : (projectionCoordinateMap J (chowProjectionForms A)).IsIntegral)
     (y : Fin (s + 1) → K) (hy : y ≠ 0) :
     (∀ f ∈ chowProjectionImageIdeal J A, eval y f = 0) ↔
-      ∃ x : Fin (n + 1) → K, x ≠ 0 ∧ (∀ f ∈ J, eval x f = 0) ∧ A *ᵥ x = y := by
+      ∃ x : Fin (n + 1) → K, x ≠ 0 ∧ x ∈ idealZeroLocus J ∧ A *ᵥ x = y := by
   constructor
   · intro hz
     obtain ⟨x, hxJ, he⟩ := exists_point_of_integral_projection_kernel_zero J

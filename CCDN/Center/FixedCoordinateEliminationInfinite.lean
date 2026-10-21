@@ -41,18 +41,18 @@ theorem fixed_coordinate_elimination_integral
   let H := projectiveClosureIdeal I
   let e := renameEquiv K (closurePivotEquiv n)
   let J := H.map e
-  let F := e (boundedHomogenize f.totalDegree f)
+  let F := e (scaledHomogenize f.totalDegree 1 f)
   let c : Option (Fin (n + 1)) → K :=
     Option.elim' (b 0) (Fin.cons 0 (fun i => b i.succ))
   have hc : c none ≠ 0 := hb
   have hFhom : F.IsHomogeneous f.totalDegree :=
-    (boundedHomogenize_homogeneous f le_rfl).rename_isHomogeneous
+    (scaledHomogenize_homogeneous 1 f le_rfl).rename_isHomogeneous
   have hF0 : F ≠ 0 := by
     intro hz
-    have hh : boundedHomogenize f.totalDegree f = 0 :=
+    have hh : scaledHomogenize f.totalDegree 1 f = 0 :=
       e.injective (hz.trans (map_zero e).symm)
     apply hf
-    simpa only [affineChart_boundedHomogenize, map_zero] using
+    simpa only [affineChart_scaledHomogenize_one, map_zero] using
       congrArg (affineChart (n + 1)) hh
   have hcompc : c ∘ closurePivotEquiv n = Fin.cons 0 b := by
     funext i
@@ -65,13 +65,13 @@ theorem fixed_coordinate_elimination_integral
       · simp [c]
   have hFdir : eval c (homogeneousComponent F.totalDegree F) ≠ 0 := by
     rw [hFhom.totalDegree hF0, homogeneousComponent_eq_self hFhom]
-    change eval c (rename (closurePivotEquiv n) (boundedHomogenize f.totalDegree f)) ≠ 0
-    rw [eval_rename, hcompc, boundedHomogenize_eval_at_infinity f le_rfl]
+    change eval c (rename (closurePivotEquiv n) (scaledHomogenize f.totalDegree 1 f)) ≠ 0
+    rw [eval_rename, hcompc, scaledHomogenize_one_eval_at_infinity f le_rfl]
     exact hdir
   have hFmem : F ∈ J := by
     apply Ideal.mem_map_of_mem
     rw [homogeneous_mem_projectiveClosureIdeal_iff I _
-      (boundedHomogenize_homogeneous f le_rfl), affineChart_boundedHomogenize]
+      (scaledHomogenize_homogeneous 1 f le_rfl), affineChart_scaledHomogenize_one]
     exact hfi
   let χ := coordinateEliminationMap J (hypersurfaceAffineCoordinates 0 c hc)
   have hraw : χ.IsIntegral := by

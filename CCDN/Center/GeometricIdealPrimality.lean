@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.PolynomialLinearDescent
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Algebra.IdealScalarDescent
@@ -20,20 +21,6 @@ functionals reduce nonmembership to base-field equations. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial
-
-lemma coefficientLinearPolynomial_eval_base_point
-    {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
-    (φ : L →ₗ[K] K) (f : MvPolynomial (Fin n) L) (x : Fin n → K) :
-    φ (eval (fun j => algebraMap K L (x j)) f) = eval x (coefficientLinearPolynomial φ f) := by
-  induction f using MvPolynomial.induction_on with
-  | C c => simp [coefficientLinearPolynomial_C]
-  | add f g hf hg => simp only [map_add, hf, hg, coefficientLinearPolynomial_add]
-  | mul_X f j hf =>
-    have hX : (X j : MvPolynomial (Fin n) L) = map (algebraMap K L) (X j) := by simp
-    rw [hX, coefficientLinearPolynomial_mul_map, map_X]
-    simp only [map_mul, eval_X, ← hf]
-    simpa only [Algebra.smul_def, mul_comm, Algebra.algebraMap_self, RingHom.id_apply] using φ.map_smul (x j)
-      (eval (fun j => algebraMap K L (x j)) f)
 
 /-- Geometric primeness over an algebraically closed base is automatic for
 a prime ideal. -/
@@ -53,13 +40,13 @@ theorem prime_ideal_scalar_extension_of_isAlgClosed
     by_contra h
     have hf : f ∉ J := fun hh => h (Or.inl hh)
     have hg : g ∉ J := fun hh => h (Or.inr hh)
-    obtain ⟨φ, hφ⟩ := exists_coefficientLinearPolynomial_not_mem I f hf
-    obtain ⟨ψ, hψ⟩ := exists_coefficientLinearPolynomial_not_mem I g hg
-    have hn : coefficientLinearPolynomial φ f * coefficientLinearPolynomial ψ g ∉ I := by
+    obtain ⟨φ, hφ⟩ := exists_polynomialCoefficientLinear_not_mem I f hf
+    obtain ⟨ψ, hψ⟩ := exists_polynomialCoefficientLinear_not_mem I g hg
+    have hn : polynomialCoefficientLinear φ f * polynomialCoefficientLinear ψ g ∉ I := by
       intro hm
       exact (Ideal.IsPrime.mem_or_mem ‹I.IsPrime› hm).elim hφ hψ
-    have hex : ∃ x : Fin n → K, (∀ p ∈ I, eval x p = 0) ∧
-        eval x (coefficientLinearPolynomial φ f * coefficientLinearPolynomial ψ g) ≠ 0 := by
+    have hex : ∃ x : Fin n → K, x ∈ idealZeroLocus I ∧
+        eval x (polynomialCoefficientLinear φ f * polynomialCoefficientLinear ψ g) ≠ 0 := by
       by_contra! hx
       apply hn
       rw [← MvPolynomial.IsPrime.vanishingIdeal_zeroLocus (K := K) I]
@@ -67,7 +54,7 @@ theorem prime_ideal_scalar_extension_of_isAlgClosed
       rw [aeval_eq_eval]
       exact hx x (fun p hp => by simpa only [aeval_eq_eval] using hxI p hp)
     obtain ⟨x, hx, hne⟩ := hex
-    have hzero : ∀ p ∈ J, eval (fun j => algebraMap K L (x j)) p = 0 := by
+    have hzero : (fun j => algebraMap K L (x j)) ∈ idealZeroLocus J := by
       intro p hp
       change p ∈ RingHom.ker (eval (fun j => algebraMap K L (x j)))
       apply Ideal.span_le.mpr ?_ hp
@@ -80,8 +67,8 @@ theorem prime_ideal_scalar_extension_of_isAlgClosed
     apply hne
     rw [map_mul]
     rcases hz with hz | hz
-    · rw [← coefficientLinearPolynomial_eval_base_point φ f x, hz, map_zero, zero_mul]
-    · rw [← coefficientLinearPolynomial_eval_base_point ψ g x, hz, map_zero, mul_zero]
+    · rw [polynomialCoefficientLinear_eval φ f x, Function.comp_def, hz, map_zero, zero_mul]
+    · rw [polynomialCoefficientLinear_eval ψ g x, Function.comp_def, hz, map_zero, mul_zero]
 
 /-- Primality descends along an injective coefficient-field extension. -/
 theorem prime_ideal_of_prime_scalar_extension

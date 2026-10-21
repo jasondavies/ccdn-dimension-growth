@@ -9,7 +9,6 @@ public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Projection.DegreePreservingProjectionBox
 import CCDN.Algebra.ProjectiveChartScalarExtension
 import CCDN.Algebra.ScaledHypersurfaceModel
-import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 import CCDN.Center.GeometricCurveProjection
 import CCDN.Projection.ProjectiveProjectionCount
 import CCDN.ForMathlib.MvPolynomial
@@ -39,11 +38,11 @@ theorem exists_geometric_projective_curve_count_reduction_of_chart
         (Set.range (fun i => algebraMap (CoordinatePolynomial n ⧸ J)
           (FractionRing (CoordinatePolynomial n ⧸ J))
           ((Ideal.Quotient.mk J) (a i)))) = ⊤ ∧
-      (boundedHomogenize d f).IsHomogeneous d ∧
-      Irreducible (boundedHomogenize d f) ∧
-      Irreducible (map (algebraMap ℚ L) (boundedHomogenize d f)) ∧
+      (scaledHomogenize d 1 f).IsHomogeneous d ∧
+      Irreducible (scaledHomogenize d 1 f) ∧
+      Irreducible (map (algebraMap ℚ L) (scaledHomogenize d 1 f)) ∧
       ∀ B : ℝ, 1 ≤ B → projectiveCount (projectiveIdealZeroLocus I) B ≤
-        projectiveCount (projectiveZeroLocus (boundedHomogenize d f))
+        projectiveCount (projectiveZeroLocus (scaledHomogenize d 1 f))
           (projectionBoxFactor n d * B) + d ^ 2 := by
   let J := projectiveChartIdeal I
   let : (J.map (map (algebraMap ℚ L))).IsPrime :=
@@ -52,12 +51,12 @@ theorem exists_geometric_projective_curve_count_reduction_of_chart
     exists_geometrically_integral_curve_projection (L := L) J d hd
       (projectiveChartIdeal_degree I hX hdegree)
   refine ⟨k₀, k₁, f, hk₀, hk₁, hf, hfd, hker, hfield,
-    boundedHomogenize_homogeneous f hfd.le, ?_, ?_, ?_⟩
-  · simpa only [hfd] using boundedHomogenize_irreducible f hf
-  · rw [← scaledHomogenize_one, scaledHomogenize_map, map_one, scaledHomogenize_one]
+    scaledHomogenize_homogeneous 1 f hfd.le, ?_, ?_, ?_⟩
+  · simpa only [hfd] using scaledHomogenize_irreducible f hf one_ne_zero
+  · rw [scaledHomogenize_map, map_one]
     have hdeg : (map (algebraMap ℚ L) f).totalDegree = d :=
-        (totalDegree_map_of_injective (algebraMap ℚ L).injective _).trans hfd
-    simpa only [hdeg] using boundedHomogenize_irreducible _ hfL
+      (totalDegree_map_of_injective (algebraMap ℚ L).injective _).trans hfd
+    simpa only [hdeg] using scaledHomogenize_irreducible _ hfL one_ne_zero
   · exact projective_curve_count_le_of_moment_projection I hX hd hdegree f hfd hk₀ hk₁
       ((hker f).mpr dvd_rfl) hcount
 

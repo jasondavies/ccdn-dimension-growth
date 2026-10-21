@@ -34,7 +34,8 @@ theorem integerLinearForm_moment_cons {m n : ℕ} (t : ℕ) (a : Fin (m + 1) →
       Fin.cases (momentCoordinate ℚ n t) (fun i => integerLinearForm (a i)) := by
   funext i
   refine Fin.cases ?_ (fun _ => rfl) i
-  simp only [Fin.cases_zero, integerLinearForm, momentCoordinate, Int.cast_pow, Int.cast_natCast]
+  simp only [Fin.cases_zero, integerLinearForm, linearForm, momentCoordinate, Int.cast_pow,
+    Int.cast_natCast]
 
 /-- Prepending the moment row with parameter `t ≤ n d²` to rows bounded by the normalization
 height keeps every entry within the birational projection height. -/
@@ -81,7 +82,7 @@ theorem exists_bounded_birational_hypersurface_projection
   let F := FractionRing (MvPolynomial (Fin n) ℚ ⧸ I)
   obtain ⟨a, ha, hinta, hinja⟩ := exists_bounded_integer_normalization m k I d hdimdeg
   obtain ⟨t, ht, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I _ (fun i => integerLinearForm_degree (a i)) hinja d hdimdeg
+    I _ (fun i => linearForm_totalDegree_le _) hinja d hdimdeg
   let b : Fin (m + 2) → Fin n → ℤ := Fin.cases (fun j => (t : ℤ) ^ j.val) a
   let l : Fin (m + 2) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
   have hfield' : IntermediateField.adjoin ℚ (Set.range (fun i =>
@@ -90,7 +91,7 @@ theorem exists_bounded_birational_hypersurface_projection
       integerLinearForm_moment_cons t a
     rwa [hl]
   obtain ⟨f, hf, hfhom, hfdeg, _, hker⟩ := exists_homogeneous_extended_projection_equation
-    (F := F) I hI l (fun i => integerLinearForm_isHomogeneous (b i)) hinta hinja hfield' d
+    (F := F) I hI l (fun i => linearForm_isHomogeneous _) hinta hinja hfield' d
     hdimdeg
   exact ⟨b, moment_cons_abs_le_integerBirationalProjectionHeight ht a ha, hinta, hinja,
     projectionCoordinateMap_isIntegral_of_tail I l hinta, hfield', f, hf, hfhom, hfdeg, hker⟩

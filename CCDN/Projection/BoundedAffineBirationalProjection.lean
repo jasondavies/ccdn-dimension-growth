@@ -44,7 +44,7 @@ theorem exists_bounded_affine_birational_projection
     exists_bounded_integer_closure_normalization m k I d hdimdeg
   let l : Fin (m + 1) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (a i)
   obtain ⟨t, ht, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)
-    I l (fun i => integerLinearForm_degree (a i)) hinja d hdimdeg
+    I l (fun i => linearForm_totalDegree_le _) hinja d hdimdeg
   let b : Fin (m + 2) → Fin n → ℤ := Fin.cases (fun j => (t : ℤ) ^ j.val) a
   let l' : Fin (m + 2) → MvPolynomial (Fin n) ℚ := fun i => integerLinearForm (b i)
   have hfield' : IntermediateField.adjoin ℚ (Set.range (fun i =>
@@ -53,7 +53,7 @@ theorem exists_bounded_affine_birational_projection
       integerLinearForm_moment_cons t a
     rwa [hl]
   obtain ⟨f, hf, hfpos, hfd, hker⟩ := exists_extended_projection_equation_degree_le
-    I l' (fun i => integerLinearForm_degree (b i)) hinja d hdimdeg
+    I l' (fun i => linearForm_totalDegree_le _) hinja d hdimdeg
   have hcone' : (projectionCoordinateMap (projectiveClosureIdeal I)
       (closureProjectionCoordinates l')).IsIntegral := by
     let ι : Fin (m + 2) → Fin (m + 3) := Fin.cases 0 (fun i => i.succ.succ)

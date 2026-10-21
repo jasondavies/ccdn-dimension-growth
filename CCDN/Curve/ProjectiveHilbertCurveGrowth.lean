@@ -48,12 +48,12 @@ theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
     rw [hker]
     exact Ideal.subset_span (Set.mem_singleton f)
   have hfiber (z : Fin 3 → ℚ) (s : Finset (Fin (n + 1) → ℚ))
-      (hzero : ∀ x ∈ s, ∀ g ∈ I, eval x g = 0)
+      (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
       (hproj : ∀ x ∈ s, ∀ i, eval x (integerLinearForm (b i)) = z i) :
       s.card ≤ d ^ (n + 1) := by
     exact (linear_normalization_fiber_card_le I
       (fun i : Fin 2 => integerLinearForm (b i.succ))
-      (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d hdimdeg
+      (fun i => linearForm_totalDegree_le _) hinj hnorm d hdimdeg
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)).trans
       (Nat.le_self_pow (Nat.succ_ne_zero n) d)
   let H : ℝ := birationalProjectionHeightConstant (n + 1) * (d : ℝ) ^ (2 * (n + 1))

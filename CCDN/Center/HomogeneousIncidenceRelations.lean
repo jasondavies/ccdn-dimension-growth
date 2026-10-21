@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.LinearForm
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.ForMathlib.MvPolynomial
 /-! Homogeneous certificates for membership in an ideal together with finitely
@@ -16,19 +17,20 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def incidenceLinearForm {K : Type*} [CommSemiring K] {n r : ℕ}
+/-- The `i`-th linear form whose coefficients are the row `U (i, ·)`. -/
+abbrev incidenceLinearForm {K : Type*} [CommSemiring K] {n r : ℕ}
     (U : Fin r × Fin (n + 1) → K) (i : Fin r) : MvPolynomial (Fin (n + 1)) K :=
-  ∑ j, C (U (i,j)) * X j
+  linearForm fun j => U (i,j)
 
 lemma incidenceLinearForm_homogeneous {K : Type*} [CommSemiring K] {n r : ℕ}
     (U : Fin r × Fin (n + 1) → K) (i : Fin r) :
     (incidenceLinearForm U i).IsHomogeneous 1 :=
-  IsHomogeneous.sum _ _ _ (fun j _ => isHomogeneous_C_mul_X _ j)
+  linearForm_isHomogeneous _
 
 lemma incidenceLinearForm_eval {K : Type*} [CommSemiring K] {n r : ℕ}
     (U : Fin r × Fin (n + 1) → K) (i : Fin r) (x : Fin (n + 1) → K) :
-    eval x (incidenceLinearForm U i) = ∑ j, U (i,j) * x j := by
-  simp [incidenceLinearForm]
+    eval x (incidenceLinearForm U i) = ∑ j, U (i,j) * x j :=
+  eval_linearForm _ x
 
 /-- A homogeneous member of a homogeneous ideal plus linear equations admits
 an expression whose multipliers have exactly the preceding degree. -/

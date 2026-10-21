@@ -58,12 +58,12 @@ theorem exists_hypersurface_lower_bounds_all_degrees (n : ℕ) (hn : 2 ≤ n) :
     ∃ c : ℝ, 0 < c ∧ ∀ d : ℕ, 1 ≤ d →
       ∃ (f : MvPolynomial (Fin n) ℚ) (B : ℕ), 1 ≤ B ∧
         f.totalDegree = d ∧ Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) f) ∧
-        (boundedHomogenize d f).IsHomogeneous d ∧
-        (boundedHomogenize d f).totalDegree = d ∧
-        Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (boundedHomogenize d f)) ∧
+        (scaledHomogenize d 1 f).IsHomogeneous d ∧
+        (scaledHomogenize d 1 f).totalDegree = d ∧
+        Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (scaledHomogenize d 1 f)) ∧
         c * (d : ℝ) ^ 2 * (B : ℝ) ^ (n - 2) ≤ (count (zeroLocus f) B : ℝ) ∧
         c * (d : ℝ) * (B : ℝ) ^ (n - 1) ≤
-          (projectiveCount (projectiveZeroLocus (boundedHomogenize d f)) B : ℝ) := by
+          (projectiveCount (projectiveZeroLocus (scaledHomogenize d 1 f)) B : ℝ) := by
   classical
   have hnR : (0 : ℝ) < n := by exact_mod_cast (show 0 < n by omega)
   refine ⟨1 / (16 * (n : ℝ) ^ 2), by positivity, ?_⟩
@@ -99,7 +99,7 @@ theorem exists_hypersurface_lower_bounds_all_degrees (n : ℕ) (hn : 2 ≤ n) :
     have hh := ha.trans hcR
     simpa only [div_eq_mul_inv, one_mul, mul_comm, mul_left_comm, mul_assoc] using hh
   · have hcR : ((2 * R + 1 : ℕ) : ℝ) ^ n ≤
-        (projectiveCount (projectiveZeroLocus (boundedHomogenize d f)) B : ℝ) := by
+        (projectiveCount (projectiveZeroLocus (scaledHomogenize d 1 f)) B : ℝ) := by
       exact_mod_cast hcp
     have hh := hp.trans hcR
     simpa only [div_eq_mul_inv, one_mul, mul_comm, mul_left_comm, mul_assoc] using hh

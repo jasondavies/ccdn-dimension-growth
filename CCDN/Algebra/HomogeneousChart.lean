@@ -104,22 +104,41 @@ lemma homogenizedExponent_degree {n M : ℕ} (m : Fin n →₀ ℕ)
   change M - m.sum (fun _ e => e) + m.sum (fun _ e => e) = M
   omega
 
-def boundedHomogenize {K : Type*} [CommRing K] {n : ℕ} (M : ℕ) (f : MvPolynomial (Fin n) K) :
-    MvPolynomial (Fin (n + 1)) K :=
-  ∑ m ∈ f.support, monomial (homogenizedExponent M m) (f.coeff m)
+lemma homogenizedExponent_injective {n : ℕ} (d : ℕ) :
+    Function.Injective (homogenizedExponent (n := n) d) := by
+  intro m k h
+  simpa only [chartExponent_homogenizedExponent] using congrArg chartExponent h
 
-lemma affineChart_boundedHomogenize {K : Type*} [CommRing K] {n : ℕ}
-    (M : ℕ) (f : MvPolynomial (Fin n) K) : affineChart n (boundedHomogenize M f) = f := by
+/-- Scaled homogenization in degree `d`: the monomial `x^m` becomes
+`h ^ |m| * x₀ ^ (d - |m|) * x^m`. With `h = 1` this is the usual homogenization,
+which is a section of `affineChart` (see `affineChart_scaledHomogenize_one`). -/
+def scaledHomogenize {R : Type*} [CommRing R] {n : ℕ} (d : ℕ) (h : R)
+    (f : MvPolynomial (Fin n) R) : MvPolynomial (Fin (n + 1)) R :=
+  ∑ m ∈ f.support, monomial (homogenizedExponent d m) (h ^ m.sum (fun _ e => e) * f.coeff m)
+
+lemma scaledHomogenize_coefficient {R : Type*} [CommRing R] {n : ℕ}
+    (d : ℕ) (h : R) (f : MvPolynomial (Fin n) R) (m : Fin n →₀ ℕ) :
+    (scaledHomogenize d h f).coeff (homogenizedExponent d m) =
+      h ^ m.sum (fun _ e => e) * f.coeff m := by
   classical
-  simp only [boundedHomogenize, map_sum, affineChart_monomial, chartExponent_homogenizedExponent]
-  exact f.as_sum.symm
+  by_cases hm : m ∈ f.support
+  · simp [scaledHomogenize, coeff_monomial, (homogenizedExponent_injective d).eq_iff, hm]
+  · have hz := notMem_support_iff.mp hm
+    simp [scaledHomogenize, coeff_monomial, (homogenizedExponent_injective d).eq_iff, hm, hz]
 
-lemma boundedHomogenize_homogeneous {K : Type*} [CommRing K] {n M : ℕ}
-    (f : MvPolynomial (Fin n) K) (hf : f.totalDegree ≤ M) :
-    (boundedHomogenize M f).IsHomogeneous M := by
+lemma scaledHomogenize_homogeneous {R : Type*} [CommRing R] {n d : ℕ}
+    (h : R) (f : MvPolynomial (Fin n) R) (hf : f.totalDegree ≤ d) :
+    (scaledHomogenize d h f).IsHomogeneous d := by
   apply IsHomogeneous.sum
   intro m hm
   exact isHomogeneous_monomial _ (homogenizedExponent_degree m ((le_totalDegree hm).trans hf))
+
+lemma affineChart_scaledHomogenize_one {R : Type*} [CommRing R] {n : ℕ}
+    (d : ℕ) (f : MvPolynomial (Fin n) R) : affineChart n (scaledHomogenize d 1 f) = f := by
+  classical
+  simp only [scaledHomogenize, map_sum, affineChart_monomial, chartExponent_homogenizedExponent,
+    one_pow, one_mul]
+  exact f.as_sum.symm
 
 lemma affineChart_map {K L : Type*} [CommRing K] [CommRing L] {n : ℕ}
     (φ : K →+* L) (f : MvPolynomial (Fin (n + 1)) K) :
@@ -142,6 +161,17 @@ lemma affineChart_eval {K : Type*} [CommRing K] {n : ℕ}
     funext i
     refine Fin.cases ?_ (fun j => ?_) i <;> simp
   rw [he]
+
+lemma eval₂_affineChart {K R : Type*} [CommRing K] [CommRing R] {n : ℕ} (φ : K →+* R)
+    (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) K) :
+    eval₂ φ a (affineChart n f) = eval₂ φ (Fin.cons 1 a) f := by
+  induction f using MvPolynomial.induction_on with
+  | C c => simp only [affineChart, eval₂Hom_C, eval₂_C]
+  | add f g hf hg => simp only [map_add, eval₂_add, hf, hg]
+  | mul_X f j hf =>
+    rw [map_mul, eval₂_mul, eval₂_mul, hf]
+    congr 1
+    refine Fin.cases ?_ (fun k => ?_) j <;> simp [affineChart]
 
 /-- Divisibility of affine charts lifts to homogeneous divisibility when the
 first equation retains its degree on the chart. -/
@@ -166,11 +196,11 @@ theorem homogeneous_dvd_of_affineChart_dvd {K : Type*} [CommRing K] [IsDomain K]
     rw [hq, totalDegree_mul_of_isDomain hcf hq0, hdchart] at hh
     exact hh
   have hdM : d ≤ M := by omega
-  refine ⟨boundedHomogenize (M - d) q, ?_⟩
+  refine ⟨scaledHomogenize (M - d) 1 q, ?_⟩
   apply affineChart_injective_on_homogeneous hg
   · simpa only [Nat.add_sub_of_le hdM] using
-      hf.mul (boundedHomogenize_homogeneous q (show q.totalDegree ≤ M - d by omega))
-  · rw [map_mul, affineChart_boundedHomogenize]
+      hf.mul (scaledHomogenize_homogeneous 1 q (show q.totalDegree ≤ M - d by omega))
+  · rw [map_mul, affineChart_scaledHomogenize_one]
     exact hq
 
 /-- Primitive integral homogeneous nonmultiples give proper rational affine

@@ -23,7 +23,7 @@ theorem finite_point_bound_of_hilbert_dimension_zero
     {σ : Type*} [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ ℚ)) (hdim : (filteredHilbertPolynomial I).natDegree = 0) :
     ∃ M : ℕ, ∀ s : Finset (σ → ℚ),
-      (∀ x ∈ s, ∀ f ∈ I, eval x f = 0) → s.card ≤ M := by
+      (∀ x ∈ s, x ∈ idealZeroLocus I) → s.card ≤ M := by
   classical
   obtain ⟨N₀, hN₀⟩ := filteredHilbertPolynomial_spec I
   have hP := Polynomial.eq_C_of_natDegree_eq_zero hdim

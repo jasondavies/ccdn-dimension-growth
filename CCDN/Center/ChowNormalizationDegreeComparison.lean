@@ -40,9 +40,9 @@ lemma polynomialFractionCoefficientMap_X {A K F σ : Type*} [CommRing A] [Field 
       algebraMap (MvPolynomial σ A) F (X i) :=
   eval₂Hom_X' _ _ i
 
-/-- The generic linear form in the negated coordinates of the first-row coordinate ring is sent
+/-- The linear form in the negated coordinates of the first-row coordinate ring is sent
 by the coefficient extension map to the split last incidence form. -/
-theorem chow_polynomialFractionCoefficientMap_genericLinearForm
+theorem chow_polynomialFractionCoefficientMap_linearForm
     {K A F : Type*} [Field K] [Field A] [Field F] [Algebra A F] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
     [Algebra (ChowFirstRowCoordinateRing m I) A] [Algebra (ChowFirstRowCoordinateRing m I) F]
@@ -50,13 +50,13 @@ theorem chow_polynomialFractionCoefficientMap_genericLinearForm
     [Algebra (ChowNestedCoordinateRing m I) F]
     [IsScalarTower (ChowFirstRowCoordinateRing m I) (ChowNestedCoordinateRing m I) F] :
     polynomialFractionCoefficientMap (A := ChowFirstRowCoordinateRing m I) (K := A) (F := F)
-      (σ := Fin n) (genericLinearForm (fun j =>
+      (σ := Fin n) (linearForm (fun j =>
         -algebraMap (ChowFirstRowCoordinateRing m I) A (C (Ideal.Quotient.mk I (X j))))) =
       algebraMap (ChowNestedCoordinateRing m I) F
         (chowLastRowSplit m I (chowIncidenceMap (m + 1) I (X (Fin.last m, 0)))) := by
   let T := ChowFirstRowCoordinateRing m I
   let N := ChowNestedCoordinateRing m I
-  rw [chowLastRowSplit_incidence_last, genericLinearForm, map_sum, map_neg, map_sum,
+  rw [chowLastRowSplit_incidence_last, linearForm, map_sum, map_neg, map_sum,
     ← Finset.sum_neg_distrib]
   apply Finset.sum_congr rfl
   intro j _
@@ -143,9 +143,9 @@ theorem chow_univariate_degree_eq_normalization_rank
     rw [chow_nested_parameter_field]
     simp only [S,Set.image_union,← Set.range_comp,Function.comp_def,hη,hX]
     rfl
-  have hlast : algebraMap (MvPolynomial (Fin n) A) F (genericLinearForm x) =
+  have hlast : algebraMap (MvPolynomial (Fin n) A) F (linearForm x) =
       chowLastIncidenceValue (E := F) m I :=
-    chow_polynomialFractionCoefficientMap_genericLinearForm (A := A) (F := F) (m := m) I
+    chow_polynomialFractionCoefficientMap_linearForm (A := A) (F := F) (m := m) I
   have hmin' : (minpoly (R.restrictScalars K)
       (chowLastIncidenceValue (E := F) m I)).natDegree = Module.finrank E A := by
     change (minpoly R _).natDegree = _

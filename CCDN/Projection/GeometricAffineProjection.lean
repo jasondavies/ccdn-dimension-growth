@@ -61,9 +61,9 @@ theorem exists_geometric_affine_projection_positive_dimension
   obtain ⟨b, hb, hnorm, hinj, hint, hfield, hcone, f, hf, hfpos, _, hker⟩ :=
     exists_bounded_affine_birational_projection m k I d ⟨hdim, hdegree⟩
   have hfieldcone := closure_projection_generates_functionField I
-    (fun i => integerLinearForm (b i)) (fun i => integerLinearForm_isHomogeneous (b i)) hfield
+    (fun i => integerLinearForm (b i)) (fun i => linearForm_isHomogeneous _) hfield
   have hfdeg := affine_projection_equation_degree_eq_of_closure I
-    (fun i => integerLinearForm (b i)) (fun i => integerLinearForm_isHomogeneous (b i))
+    (fun i => integerLinearForm (b i)) (fun i => linearForm_isHomogeneous _)
     hcone hfieldcone d ⟨hdim, hdegree⟩ f hf.ne_zero hfpos hker
   refine ⟨b, hb, hint, hfield, f, hf,
     projection_equation_irreducible_map I _ f hf.ne_zero hker, hfdeg, hker, ?_⟩
@@ -72,12 +72,12 @@ theorem exists_geometric_affine_projection_positive_dimension
     rw [hker]
     exact Ideal.subset_span (Set.mem_singleton f)
   have hfiber (z : Fin (m + 2) → ℚ) (s : Finset (Fin n → ℚ))
-      (hzero : ∀ x ∈ s, ∀ g ∈ I, eval x g = 0)
+      (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
       (hproj : ∀ x ∈ s, ∀ i, eval x (integerLinearForm (b i)) = z i) :
       s.card ≤ d := by
     have hh := bounded_degree_normalization_fiber_card_le I 1 (by omega)
       (fun i : Fin (m + 1) => integerLinearForm (b i.succ))
-      (fun i => integerLinearForm_degree (b i.succ)) hinj hnorm d ⟨hdim, hdegree⟩
+      (fun i => linearForm_totalDegree_le _) hinj hnorm d ⟨hdim, hdegree⟩
       (fun i => z i.succ) s hzero (fun x hx i => hproj x hx i.succ)
     simpa only [one_pow, Nat.mul_one] using hh
   let H : ℝ := birationalProjectionHeightConstant n * (d : ℝ) ^ (2 * n)

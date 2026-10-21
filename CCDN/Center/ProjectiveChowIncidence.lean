@@ -9,6 +9,7 @@ public import CCDN.Center.ChowPivotParametrization
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Center.ChowIncidenceLocus
+import CCDN.Algebra.LinearForm
 import CCDN.Algebra.ProjectiveClosureDegree
 import CCDN.Center.PrimeOpenVanishing
 /-! The affine incidence elimination ideal is the vanishing ideal of the
@@ -35,11 +36,9 @@ theorem chowIncidenceLocus_subset_projectiveClosureIncidence
   let p := affineProjectivePoint a
   refine ⟨p, (projectiveClosureIdeal_chart_point I a).mpr ha, ?_⟩
   intro i
-  let f : MvPolynomial (Fin (n + 1)) K := ∑ j, C (U (i,j)) * X j
-  have hf : f.IsHomogeneous 1 :=
-    IsHomogeneous.sum _ _ _ (fun j _ => isHomogeneous_C_mul_X _ j)
-  have heval (x : Fin (n + 1) → K) : eval x f = ∑ j, U (i,j) * x j := by
-    simp [f]
+  let f : MvPolynomial (Fin (n + 1)) K := linearForm fun j => U (i,j)
+  have hf : f.IsHomogeneous 1 := linearForm_isHomogeneous _
+  have heval (x : Fin (n + 1) → K) : eval x f = ∑ j, U (i,j) * x j := eval_linearForm _ x
   have hz : eval (Fin.cons 1 a) f = 0 := (heval _).trans (hrel i)
   have hpz := (homogeneous_eval_zero_iff_projective_eq hf p.rep_nonzero
     (affineCoordinateVector_ne_zero a) p.mk_rep).mpr hz
@@ -71,7 +70,7 @@ theorem chowPivot_substitution_mem_projectiveClosure
   rw [eval_X] at hx0
   rw [eval_chowPivot_substitution]
   let a : Fin n → K := fun k => x k.succ / x 0
-  have ha : ∀ f ∈ I, eval a f = 0 := projectiveClosure_cone_chart_zero I x hx hx0
+  have ha : a ∈ idealZeroLocus I := projectiveClosure_cone_chart_zero I x hx hx0
   have hinc (i : Fin r) :
       ∑ k, chowPivotCoefficients j x v (i,k) * (Fin.cons 1 a : Fin (n + 1) → K) k = 0 := by
     have hrel := chowPivotCoefficients_relation j x v i

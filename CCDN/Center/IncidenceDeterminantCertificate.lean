@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Center.HomogeneousIncidenceRelations
 public import CCDN.Algebra.HomogeneousMonomials
 import CCDN.Algebra.HomogeneousEvaluation
@@ -30,7 +31,7 @@ lemma incidenceCoefficientPolynomial_eval {K : Type*} [Field K] {n r : ℕ}
     (U : Fin r × Fin (n + 1) → K) :
     eval U (incidenceCoefficientPolynomial q p e) =
       (q + ∑ i, incidenceLinearForm U i * p i).coeff e := by
-  simp [incidenceCoefficientPolynomial, incidenceLinearForm, Finset.sum_mul, mul_assoc]
+  simp [incidenceCoefficientPolynomial, linearForm, Finset.sum_mul, mul_assoc]
 
 lemma homogeneous_coefficient_evaluation {K : Type*} [Field K] {n M : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous M)
@@ -67,7 +68,7 @@ theorem exists_incidence_determinant_certificate {K : Type*} [Field K] {n r t : 
         J ⊔ Ideal.span (Set.range (incidenceLinearForm U))) :
     ∃ D : MvPolynomial (Fin r × Fin (n + 1)) K,
       eval U D = 1 ∧ ∀ V : Fin r × Fin (n + 1) → K,
-        (∃ x : Fin (n + 1) → K, x ≠ 0 ∧ (∀ f ∈ J, eval x f = 0) ∧
+        (∃ x : Fin (n + 1) → K, x ≠ 0 ∧ x ∈ idealZeroLocus J ∧
           ∀ i, ∑ j, V (i,j) * x j = 0) → eval V D = 0 := by
   classical
   have hrel (e : Fin ((n + (t + 1)).choose (t + 1))) :=

@@ -18,11 +18,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma scaledHomogenize_one {R : Type*} [CommRing R] {n : ℕ}
-    (d : ℕ) (f : MvPolynomial (Fin n) R) :
-    scaledHomogenize d 1 f = boundedHomogenize d f := by
-  simp only [scaledHomogenize, boundedHomogenize, one_pow, one_mul]
-
 lemma firstCoordinateScaleHom_scaledHomogenize {R : Type*} [CommRing R] {n d : ℕ}
     (h : R) (f : MvPolynomial (Fin n) R) (hd : f.totalDegree ≤ d) :
     firstCoordinateScaleHom R h (scaledHomogenize d h f) =
@@ -31,7 +26,7 @@ lemma firstCoordinateScaleHom_scaledHomogenize {R : Type*} [CommRing R] {n d : �
     (firstCoordinateScaleHom_homogeneous h (scaledHomogenize_homogeneous h f hd))
     ((scaledHomogenize_homogeneous 1 f hd).C_mul (h ^ d))
   rw [← homogeneousSlice_eq_chart_scale, homogeneousSlice_scaledHomogenize h f hd,
-    map_mul, scaledHomogenize_one, affineChart_boundedHomogenize]
+    map_mul, affineChart_scaledHomogenize_one]
   simp [affineChart]
 
 lemma scaledHomogenize_irreducible_iff {K : Type*} [Field K] {n d : ℕ}

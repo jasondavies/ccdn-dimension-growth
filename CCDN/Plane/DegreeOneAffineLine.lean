@@ -45,7 +45,7 @@ theorem affine_coordinates_line_polynomial_identity {K : Type*} [Field K]
     (hj : Transcendental K ((Ideal.Quotient.mk p) (X j)))
     (hcd : ∀ k, (Ideal.Quotient.mk p) (X k) =
       c k • (Ideal.Quotient.mk p) (X j) + algebraMap K (MvPolynomial (Fin 3) K ⧸ p) (d k))
-    (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) :
+    (z : Fin 3 → K) (hz : z ∈ idealZeroLocus p) :
     ∀ f ∈ p,
       MvPolynomial.aeval
         (fun k => Polynomial.C (z k) + Polynomial.C (c k) * Polynomial.X) f = 0 := by
@@ -103,7 +103,7 @@ theorem degree_one_coordinates_affine_of_point {K : Type*} [Field K]
     (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
     (hdegree : ∃ N : ℕ, ∃ b : ℤ, ∀ n ≥ N,
       (Module.finrank K (filteredCoordinateSpace p n) : ℤ) = n + b)
-    (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) :
+    (z : Fin 3 → K) (hz : z ∈ idealZeroLocus p) :
     ∃ (j : Fin 3) (c d : Fin 3 → K), c j ≠ 0 ∧
       Transcendental K ((Ideal.Quotient.mk p) (X j)) ∧ ∀ k,
       (Ideal.Quotient.mk p) (X k) =
@@ -146,9 +146,9 @@ theorem zeroLocus_eq_line_of_affine_coordinates {K : Type*} [Field K]
     (hj : Transcendental K ((Ideal.Quotient.mk p) (X j)))
     (hcd : ∀ k, (Ideal.Quotient.mk p) (X k) =
       c k • (Ideal.Quotient.mk p) (X j) + algebraMap K (MvPolynomial (Fin 3) K ⧸ p) (d k))
-    (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) :
-    coordinateZeroLocus p = {x | ∃ t : K, x = z + t • c} := by
-  have hpoint (x : Fin 3 → K) (hx : x ∈ coordinateZeroLocus p) (k : Fin 3) :
+    (z : Fin 3 → K) (hz : z ∈ idealZeroLocus p) :
+    idealZeroLocus p = {x | ∃ t : K, x = z + t • c} := by
+  have hpoint (x : Fin 3 → K) (hx : x ∈ idealZeroLocus p) (k : Fin 3) :
       x k = c k * x j + d k := by
     have he := congrArg (coordinatePoint p x hx) (hcd k)
     simpa only [coordinatePoint_mk, eval_X, map_add, map_smul,

@@ -22,7 +22,7 @@ lemma integerLinearForm_finEliminationMatrix {n : ℕ}
     (b : Option (Fin n) → ℤ) (i : Fin n) :
     integerLinearForm (finEliminationMatrix b i) =
       C (b none : ℚ) * X i.succ - C (b (some i) : ℚ) * X 0 := by
-  rw [integerLinearForm, Fin.sum_univ_succ]
+  rw [integerLinearForm, linearForm, Fin.sum_univ_succ]
   simp [finEliminationMatrix, apply_ite, ite_mul, sub_eq_add_neg, add_comm]
 
 lemma finEliminationMatrix_height {n d : ℕ} (b : Option (Fin n) → ℤ)

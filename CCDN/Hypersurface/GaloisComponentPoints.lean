@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import Mathlib.FieldTheory.Galois.Basic
 public import Mathlib.Tactic.Continuity
 import CCDN.Hilbert.AlgebraicHilbertDimension
@@ -25,8 +26,8 @@ theorem finite_galois_base_point_on_prime_over
     (I : Ideal (MvPolynomial σ k)) [I.IsPrime]
     (P : Ideal (MvPolynomial σ K)) [P.IsPrime]
     (hP : P.comap (map (algebraMap k K)) = I)
-    (x : σ → k) (hx : ∀ f ∈ I, eval x f = 0) :
-    ∀ f ∈ P, eval (algebraMap k K ∘ x) f = 0 := by
+    (x : σ → k) (hx : x ∈ idealZeroLocus I) :
+    algebraMap k K ∘ x ∈ idealZeroLocus P := by
   let J := I.map (map (algebraMap k K))
   let M := RingHom.ker (eval (algebraMap k K ∘ x))
   have : M.IsPrime := RingHom.ker_isPrime _
@@ -55,8 +56,8 @@ theorem galois_base_point_on_prime_over
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) k)) [I.IsPrime]
     (P : Ideal (MvPolynomial (Fin n) K)) [P.IsPrime]
     (hP : P.comap (map (algebraMap k K)) = I)
-    (x : Fin n → k) (hx : ∀ f ∈ I, eval x f = 0) :
-    ∀ f ∈ P, eval (algebraMap k K ∘ x) f = 0 := by
+    (x : Fin n → k) (hx : x ∈ idealZeroLocus I) :
+    algebraMap k K ∘ x ∈ idealZeroLocus P := by
   obtain ⟨L, hL⟩ := exists_finite_galois_ideal_definition k K P
   let Q := P.comap (map (algebraMap L K))
   have : Q.IsPrime := Ideal.comap_isPrime _ P
@@ -88,8 +89,8 @@ theorem galois_base_point_on_every_component
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) k)) [I.IsPrime]
     (P : Ideal (MvPolynomial (Fin n) K))
     (hP : P ∈ (I.map (map (algebraMap k K))).minimalPrimes)
-    (x : Fin n → k) (hx : ∀ f ∈ I, eval x f = 0) :
-    ∀ f ∈ P, eval (algebraMap k K ∘ x) f = 0 := by
+    (x : Fin n → k) (hx : x ∈ idealZeroLocus I) :
+    algebraMap k K ∘ x ∈ idealZeroLocus P := by
   have : P.IsPrime := hP.isPrime
   exact galois_base_point_on_prime_over k K I P
     (algebraic_polynomial_minimalPrime_under k K (Fin n) I P hP) x hx

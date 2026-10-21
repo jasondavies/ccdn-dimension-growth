@@ -126,7 +126,7 @@ theorem exists_bounded_integer_closure_normalization (m k : ℕ)
       exact (Ideal.kerLiftAlg_injective ψ).comp hinja
     · have hcone := closure_projection_integral_comp I
         (fun i => integerLinearForm (c i))
-        (fun i => integerLinearForm_isHomogeneous (c i))
+        (fun i => linearForm_isHomogeneous _)
         (fun i => integerLinearForm (a i)) hconec hconea
       simpa only [integerLinearForm_comp] using hcone
 

@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Center.ChowIncidenceIdeal
 public import Mathlib.RingTheory.Nullstellensatz
 /-! The constructed elimination ideal is the vanishing ideal of
@@ -38,7 +39,7 @@ lemma chowIncidentCoefficients_reconstruct {K : Type*} [Field K] {n r : ℕ}
 affine variety represented in the projective chart x₀=1. -/
 def chowIncidenceLocus {K : Type*} [Field K] {n : ℕ} (r : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) : Set (Fin r × Fin (n + 1) → K) :=
-  {U | ∃ a : Fin n → K, (∀ f ∈ I, eval a f = 0) ∧
+  {U | ∃ a : Fin n → K, a ∈ idealZeroLocus I ∧
     ∀ i, ∑ j, U (i,j) * (Fin.cons 1 a : Fin (n + 1) → K) j = 0}
 
 theorem chowIncidenceIdeal_eq_vanishingIdeal {K : Type*} [Field K] [IsAlgClosed K]

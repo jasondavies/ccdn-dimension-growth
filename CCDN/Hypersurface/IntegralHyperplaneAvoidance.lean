@@ -22,7 +22,7 @@ lemma hyperplaneSectionIdeal_isPrime_of_absolute_graph {K σ : Type*}
     (hir : Irreducible (map (algebraMap K (AlgebraicClosure K))
       (graphHyperplaneRestriction (fun i => -A (some i) / A none) f))) :
     (Ideal.span {map (algebraMap K (AlgebraicClosure K)) f,
-      hyperplaneNormalPolynomial (algebraMap K (AlgebraicClosure K) ∘ A)}).IsPrime := by
+      linearForm (algebraMap K (AlgebraicClosure K) ∘ A)}).IsPrime := by
   let φ := algebraMap K (AlgebraicClosure K)
   have hA' : (φ ∘ A) none ≠ 0 := (map_ne_zero_iff φ φ.injective).mpr hA
   rw [hyperplaneSectionIdeal_graph (φ ∘ A) hA']
@@ -51,7 +51,7 @@ theorem exists_integral_hyperplane_avoidance {n : ℕ}
       G ≠ 0 ∧ G.IsHomogeneous e ∧ e ≤ (4 + n) * d * (d ^ 2 - 1) ∧
       ∀ (K : Type u) [Field K] (A : Option (Option (Fin (2 + n))) → K),
         ¬ (Ideal.span {map (Int.castRingHom (AlgebraicClosure K)) f,
-          hyperplaneNormalPolynomial (algebraMap K (AlgebraicClosure K) ∘ A)}).IsPrime →
+          linearForm (algebraMap K (AlgebraicClosure K) ∘ A)}).IsPrime →
         eval₂ (Int.castRingHom K) A G = 0 := by
   by_cases hd1 : d = 1
   · subst d

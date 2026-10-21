@@ -29,7 +29,7 @@ theorem affine_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
     (f : MvPolynomial (Fin 2) ℚ)
     (hk₀ : k₀ ≤ n ^ 2 * d) (hk₁ : k₁ ≤ n * d ^ 2)
     (hker : ∀ g, aeval ![momentCoordinate ℚ n k₀, momentCoordinate ℚ n k₁] g ∈ I ↔ f ∣ g)
-    (hcount : ∀ S : Finset (Fin n → ℚ), (∀ z ∈ S, ∀ g ∈ I, eval z g = 0) →
+    (hcount : ∀ S : Finset (Fin n → ℚ), (∀ z ∈ S, z ∈ idealZeroLocus I) →
       S.card ≤ (S.image (fun z i =>
         eval z (![momentCoordinate ℚ n k₀, momentCoordinate ℚ n k₁] i))).card + d * (d - 1))
     (B : ℝ) (hB : 1 ≤ B) :
@@ -41,7 +41,7 @@ theorem affine_curve_count_le_of_moment_projection {n d k₀ k₁ : ℕ}
   let π : RatPoint n → RatPoint 2 := fun z =>
     ![eval z (momentCoordinate ℚ n k₀), eval z (momentCoordinate ℚ n k₁)]
   let P := S.image (degreeProjection n k₀ k₁)
-  have hR : ∀ z ∈ R, ∀ g ∈ I, eval z g = 0 := by
+  have hR : ∀ z ∈ R, z ∈ idealZeroLocus I := by
     intro w hw
     obtain ⟨z, hz, rfl⟩ := Finset.mem_image.mp hw
     exact (mem_integralPoints.mp hz).2

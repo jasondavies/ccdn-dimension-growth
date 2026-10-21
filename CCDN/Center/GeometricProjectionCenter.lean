@@ -37,7 +37,7 @@ theorem homogeneous_integer_projection_center_disjoint
     (fun i j => (b i j : L)) *ᵥ x.rep ≠ 0 := by
   have hh := homogeneous_integral_projection_geometric_no_base_point I hI
     (fun i => integerLinearForm (b i))
-    (fun i => integerLinearForm_isHomogeneous (b i)) hint x hx
+    (fun i => linearForm_isHomogeneous _) hint x hx
   change (fun i => ∑ j, (b i j : L) * x.rep j) ≠ 0
   simpa only [integerLinearForm_aeval_extension] using hh
 

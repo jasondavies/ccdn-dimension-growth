@@ -33,16 +33,16 @@ theorem projective_plane_finite_field_card_bound {p d : ℕ} [Fact p.Prime]
   have hdeg := affineChart_degree_of_not_variable_dvd q (hf.map _) hX
   have hproper := irreducible_homogeneous_not_dvd_variable q (hf.map _) hir hd 0
   have hcard := projectivePlaneResidue_card_le_affine_add_degree f hf hir hproper
-  have hz (a : PlaneResidue (planeAffineChart f) p) :
+  have hz (a : PlaneResidue (affineChart 2 f) p) :
       eval a.val (affineChart 2 q) = 0 := by
     rw [affineChart_map, eval_map]
     exact a.property
   have ha := plane_finite_field_card_bound p (affineChart 2 q) hchart
-    (by rwa [hdeg]) (fun a : PlaneResidue (planeAffineChart f) p => a.val)
+    (by rwa [hdeg]) (fun a : PlaneResidue (affineChart 2 f) p => a.val)
     Subtype.val_injective hz
   rw [hdeg, planeResidueConstant_eq] at ha
   have hcardR : (Fintype.card (ProjectivePlaneResidue f p) : ℝ) ≤
-      Fintype.card (PlaneResidue (planeAffineChart f) p) + d := by exact_mod_cast hcard
+      Fintype.card (PlaneResidue (affineChart 2 f) p) + d := by exact_mod_cast hcard
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast (show 1 ≤ d by omega)
   have hsqrt : 1 ≤ Real.sqrt (p : ℝ) := Real.one_le_sqrt.mpr
     (by exact_mod_cast (Fact.out : p.Prime).one_le)

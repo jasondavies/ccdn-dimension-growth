@@ -34,11 +34,11 @@ theorem projectivePlaneResidueMultiplicity_spec {p d : ℕ} [Fact p.Prime]
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (r : ProjectivePlaneResidue f p) :
     0 < projectivePlaneResidueMultiplicity f hf hf0 r ∧
     projectivePlaneResidueMultiplicity f hf hf0 r ≤ d ∧
-    map (Int.castRingHom (ZMod p)) (planeTranslate (projectiveResidueChartLift r.val)
+    map (Int.castRingHom (ZMod p)) (originShift (projectiveResidueChartLift r.val)
       (projectivePlaneChart (projectiveResiduePivot r.val) f)) ∈
         idealOfVars (Fin 2) (ZMod p) ^ projectivePlaneResidueMultiplicity f hf hf0 r ∧
     homogeneousComponent (projectivePlaneResidueMultiplicity f hf hf0 r)
-      (map (Int.castRingHom (ZMod p)) (planeTranslate (projectiveResidueChartLift r.val)
+      (map (Int.castRingHom (ZMod p)) (originShift (projectiveResidueChartLift r.val)
         (projectivePlaneChart (projectiveResiduePivot r.val) f))) ≠ 0 :=
   projectiveHypersurfaceResidueMultiplicity_spec f hf hf0 r
 

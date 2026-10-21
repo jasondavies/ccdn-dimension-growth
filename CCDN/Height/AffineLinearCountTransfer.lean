@@ -26,7 +26,7 @@ lemma rationalPoint_integerAffineLinearImage {m n : ℕ}
     rationalPoint (integerAffineLinearImage P x) =
       fun i => eval (rationalPoint x) (integerLinearForm (P i)) := by
   funext i
-  simp [rationalPoint, integerAffineLinearImage, integerLinearForm_eval]
+  simp [rationalPoint, integerAffineLinearImage, eval_linearForm]
 
 theorem affine_integer_linear_count_transfer
     {m n : ℕ} (I : Ideal (MvPolynomial (Fin n) ℚ))
@@ -34,7 +34,7 @@ theorem affine_integer_linear_count_transfer
     (hrelation : aeval (fun i => integerLinearForm (P i)) f ∈ I)
     (M : ℕ)
     (hfinite : ∀ z : Fin m → ℚ, ∀ s : Finset (Fin n → ℚ),
-      (∀ x ∈ s, ∀ g ∈ I, eval x g = 0) →
+      (∀ x ∈ s, x ∈ idealZeroLocus I) →
       (∀ x ∈ s, ∀ i, eval x (integerLinearForm (P i)) = z i) → s.card ≤ M)
     (H B : ℝ) (hH : 0 ≤ H) (hP : ∀ i j, |(P i j : ℝ)| ≤ H) :
     count (idealZeroLocus I) B ≤ M * count (zeroLocus f) ((n : ℝ) * H * B) := by

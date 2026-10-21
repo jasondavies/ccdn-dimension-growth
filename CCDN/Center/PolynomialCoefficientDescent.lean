@@ -5,8 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.MvPolynomial.Eval
-public import Mathlib.RingTheory.Ideal.Maps
+public import CCDN.Algebra.PolynomialLinearDescent
 import Mathlib.Tactic.Polynomial.Basic
 import Mathlib.Tactic.NormNum.Prime
 import Mathlib.Tactic.NormNum.Ordinal
@@ -29,79 +28,6 @@ including nested-polynomial substitutions. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial Module
-
-/-- Apply a linear coefficient map without changing any monomial. -/
-def polynomialCoefficientLinear {R A B σ : Type*} [CommSemiring R]
-    [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
-    (φ : A →ₗ[R] B) : MvPolynomial σ A →ₗ[R] MvPolynomial σ B :=
-  (AddMonoidAlgebra.coeffLinearEquiv R).symm.toLinearMap ∘ₗ
-    Finsupp.mapRange.linearMap φ ∘ₗ (AddMonoidAlgebra.coeffLinearEquiv R).toLinearMap
-
-@[simp] lemma polynomialCoefficientLinear_coeff {R A B σ : Type*}
-    [CommSemiring R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
-    (φ : A →ₗ[R] B) (f : MvPolynomial σ A) (e : σ →₀ ℕ) :
-    (polynomialCoefficientLinear φ f).coeff e = φ (f.coeff e) := rfl
-
-@[simp] lemma polynomialCoefficientLinear_C {R A B σ : Type*}
-    [CommSemiring R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
-    (φ : A →ₗ[R] B) (a : A) :
-    polynomialCoefficientLinear (σ := σ) φ (C a) = C (φ a) := by
-  classical
-  ext e
-  simp only [polynomialCoefficientLinear_coeff, coeff_C]
-  split_ifs <;> simp
-
-lemma polynomialCoefficientLinear_mul_compatible {R A B σ : Type*}
-    [CommSemiring R] [CommRing A] [CommRing B] [Algebra R A] [Algebra R B]
-    (φ : A →ₗ[R] B) (θ : B →+* A)
-    (hφ : ∀ a b, φ (a * θ b) = φ a * b)
-    (f : MvPolynomial σ A) (g : MvPolynomial σ B) :
-    polynomialCoefficientLinear φ (f * map θ g) =
-      polynomialCoefficientLinear φ f * g := by
-  classical
-  ext e
-  rw [polynomialCoefficientLinear_coeff, coeff_mul, coeff_mul, map_sum]
-  apply Finset.sum_congr rfl
-  intro p _
-  rw [coeff_map, polynomialCoefficientLinear_coeff, hφ]
-
-lemma polynomialCoefficientLinear_mul_map {K L σ : Type*}
-    [Field K] [Field L] [Algebra K L]
-    (φ : L →ₗ[K] K) (f : MvPolynomial σ L) (g : MvPolynomial σ K) :
-    polynomialCoefficientLinear φ (f * map (algebraMap K L) g) =
-      polynomialCoefficientLinear φ f * g := by
-  apply polynomialCoefficientLinear_mul_compatible
-  intro a b
-  simpa only [Algebra.smul_def, smul_eq_mul, mul_comm, Algebra.algebraMap_self,
-    RingHom.id_apply] using φ.map_smul b a
-
-/-- Coefficient functionals send elements of an extended ideal into the
-original ideal, for any variable type. -/
-theorem polynomialCoefficientLinear_mem_scalar_extension {K L σ : Type*}
-    [Field K] [Field L] [Algebra K L]
-    (I : Ideal (MvPolynomial σ K)) (g : MvPolynomial σ L)
-    (hg : g ∈ I.map (map (algebraMap K L))) (φ : L →ₗ[K] K) :
-    polynomialCoefficientLinear φ g ∈ I := by
-  have hh : ∀ (ψ : L →ₗ[K] K) (r : MvPolynomial σ L),
-      polynomialCoefficientLinear ψ (r * g) ∈ I := by
-    induction hg using Submodule.span_induction with
-    | mem x hx =>
-      obtain ⟨f, hf, rfl⟩ := hx
-      intro ψ r
-      rw [polynomialCoefficientLinear_mul_map]
-      exact I.mul_mem_left _ hf
-    | zero =>
-      intro ψ r
-      rw [mul_zero, map_zero]
-      exact I.zero_mem
-    | add x y _ _ hx hy =>
-      intro ψ r
-      rw [mul_add, map_add]
-      exact I.add_mem (hx ψ r) (hy ψ r)
-    | smul a x _ hx =>
-      intro ψ r
-      simpa only [smul_eq_mul, mul_assoc] using hx ψ (r * a)
-  simpa only [one_mul] using hh φ 1
 
 /-- Every polynomial over the extension is a finite sum of base-field
 polynomials obtained by its basis-coordinate functionals. -/

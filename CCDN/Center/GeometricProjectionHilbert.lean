@@ -26,7 +26,7 @@ lemma chowProjectionForms_map
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) :
     (fun i => map φ (chowProjectionForms A i)) = chowProjectionForms (A.map φ) := by
   funext i
-  simp [chowProjectionForms]
+  simp [linearForm]
 
 theorem chowProjectionImageIdeal_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n s : ℕ}
@@ -60,7 +60,7 @@ theorem projection_integral_of_geometric_center_disjoint
   intro x hx
   by_contra hx0
   let J := I.map (map (algebraMap K L))
-  have hxJ : ∀ f ∈ J, eval x f = 0 := by
+  have hxJ : x ∈ idealZeroLocus J := by
     have hh : J ≤ RingHom.ker (eval x) := by
       apply Ideal.map_le_iff_le_comap.mpr
       intro f hf
@@ -72,7 +72,7 @@ theorem projection_integral_of_geometric_center_disjoint
     funext i
     have hh := hx (chowProjectionForms A i)
       (Ideal.mem_sup_right (Ideal.subset_span ⟨i, rfl⟩))
-    simpa only [chowProjectionForms, map_sum, map_mul, aeval_C, aeval_X,
+    simpa only [linearForm, map_sum, map_mul, aeval_C, aeval_X,
       Matrix.mulVec, dotProduct, Matrix.map_apply, Pi.zero_apply] using hh
   have hinc : (fun q : Fin (s + 1) × Fin (n + 1) =>
       (A.map (algebraMap K L)) q.1 q.2) ∈ projectiveChowIncidenceLocus (s + 1) J := by

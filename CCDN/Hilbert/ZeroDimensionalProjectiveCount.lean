@@ -46,13 +46,13 @@ theorem zero_dimensional_projective_count_le
   have hLapply (x : Fin (n + 1) → ℚ) (i : Fin 1) :
       L x i = eval x (integerLinearForm (a i)) := by
     simp only [L, Matrix.mulVecLin_apply, Matrix.mulVec, dotProduct,
-      Int.coe_castRingHom, integerLinearForm_eval]
+      Int.coe_castRingHom, eval_linearForm]
     rfl
   have hfinite (z : Fin 1 → ℚ) (s : Finset (Fin (n + 1) → ℚ))
-      (hs : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0) (hz : ∀ x ∈ s, L x = z) :
+      (hs : ∀ x ∈ s, x ∈ idealZeroLocus I) (hz : ∀ x ∈ s, L x = z) :
       s.card ≤ d ^ (n + 1) := by
     refine (linear_normalization_fiber_card_le I (fun i => integerLinearForm (a i))
-      (fun i => integerLinearForm_degree (a i)) hi hint d ⟨hdim, by simpa using hdegree⟩ z s hs
+      (fun i => linearForm_totalDegree_le _) hi hint d ⟨hdim, by simpa using hdegree⟩ z s hs
       ?_).trans (Nat.le_self_pow (Nat.succ_ne_zero n) d)
     intro x hx i
     rw [← hLapply, hz x hx]

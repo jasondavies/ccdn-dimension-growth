@@ -9,7 +9,6 @@ public import CCDN.Determinant.HypersurfaceLocalDivisor
 import CCDN.Algebra.ModularPolynomialLift
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.PlaneBadPrimes
-import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 import CCDN.Determinant.ProjectiveOpenResidueDeterminant
 import CCDN.ForMathlib.MvPolynomial
 /-! The sharp prime determinant estimate from the literal affine reduction.
@@ -23,7 +22,7 @@ open MvPolynomial
 
 lemma homogeneous_eq_chartHomogenize_mul_X {K : Type*} [Field K] {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous d) :
-    f = boundedHomogenize (affineChart n f).totalDegree (affineChart n f) *
+    f = scaledHomogenize (affineChart n f).totalDegree 1 (affineChart n f) *
       X 0 ^ (d - (affineChart n f).totalDegree) := by
   have hdeg : (affineChart n f).totalDegree ≤ d :=
     (affineChart_totalDegree_le f).trans hf.totalDegree_le
@@ -33,19 +32,10 @@ lemma homogeneous_eq_chartHomogenize_mul_X {K : Type*} [Field K] {n d : ℕ}
       simpa only [one_mul] using (isHomogeneous_X K (0 : Fin (n + 1))).pow
         (d - (affineChart n f).totalDegree)
     simpa only [Nat.add_sub_of_le hdeg] using
-      (boundedHomogenize_homogeneous (affineChart n f) le_rfl).mul hpow
-  · simp only [map_mul, affineChart_boundedHomogenize, map_pow,
+      (scaledHomogenize_homogeneous 1 (affineChart n f) le_rfl).mul hpow
+  · simp only [map_mul, affineChart_scaledHomogenize_one, map_pow,
       show affineChart n (X 0 : MvPolynomial (Fin (n + 1)) K) = 1 by simp [affineChart],
       one_pow, mul_one]
-
-lemma boundedHomogenize_map_of_degree_bound {K L : Type*} [CommRing K] [CommRing L]
-    {n d : ℕ} (φ : K →+* L) (f : MvPolynomial (Fin n) K) (hd : f.totalDegree ≤ d) :
-    map φ (boundedHomogenize d f) = boundedHomogenize d (map φ f) := by
-  apply affineChart_injective_on_homogeneous
-    ((boundedHomogenize_homogeneous f hd).map φ)
-    (boundedHomogenize_homogeneous (map φ f) ((show (map φ f).totalDegree ≤ f.totalDegree from
-      Finset.sup_mono (support_map_subset _ _)).trans hd))
-  rw [affineChart_map, affineChart_boundedHomogenize, affineChart_boundedHomogenize]
 
 /-- An affine-chart good prime for `f` and the points `z`: the reduction of the affine
 chart `x₀ = 1` of `f` is absolutely irreducible and every point lies in that chart
@@ -76,7 +66,7 @@ theorem affine_chart_minorGcd_dvd
   let fbar := map (Int.castRingHom (ZMod p)) f
   let a := affineChart (n + 2) fbar
   let e := a.totalDegree
-  let gbar := boundedHomogenize e a
+  let gbar := scaledHomogenize e 1 a
   let g := modularPolynomialLift gbar
   let h : MvPolynomial (Fin (n + 3)) ℤ := X 0 ^ (d - e)
   have hi : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) a) := by
@@ -85,15 +75,14 @@ theorem affine_chart_minorGcd_dvd
   have he : 0 < e := totalDegree_pos_of_ne_zero_of_not_isUnit ha.ne_zero ha.not_isUnit
   have hed : e ≤ d :=
     (affineChart_totalDegree_le fbar).trans (hf.map _).totalDegree_le
-  have hgbar : gbar.IsHomogeneous e := boundedHomogenize_homogeneous a le_rfl
+  have hgbar : gbar.IsHomogeneous e := scaledHomogenize_homogeneous 1 a le_rfl
   have hgreduce : map (Int.castRingHom (ZMod p)) g = gbar := map_modularPolynomialLift gbar
   have hghom : g.IsHomogeneous e := modularPolynomialLift_homogeneous gbar hgbar
   have hgabs : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) gbar) := by
     have hdeg : (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) a).totalDegree = e :=
       totalDegree_map_of_injective (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))).injective a
-    rw [show gbar = boundedHomogenize e a from rfl,
-      boundedHomogenize_map_of_degree_bound _ a le_rfl]
-    simpa only [scaledHomogenize_one, hdeg] using scaledHomogenize_irreducible _ hi one_ne_zero
+    rw [show gbar = scaledHomogenize e 1 a from rfl, scaledHomogenize_map, map_one]
+    simpa only [hdeg] using scaledHomogenize_irreducible _ hi one_ne_zero
   have hg0 : map (Int.castRingHom (ZMod p)) g ≠ 0 := by
     rw [hgreduce]
     intro hzero

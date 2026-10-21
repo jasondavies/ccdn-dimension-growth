@@ -67,7 +67,7 @@ theorem exists_fin_integer_closure_elimination_step {n m : ℕ}
   have hint := affine_projection_integral_of_closure_integral I
     (fun i => integerLinearForm (c i)) hcone
   obtain ⟨hdim', e, he, hed, hdegree'⟩ := integral_linear_projection_multiplicity I
-    (fun i => integerLinearForm (c i)) (fun i => integerLinearForm_degree (c i)) hint d
+    (fun i => integerLinearForm (c i)) (fun i => linearForm_totalDegree_le _) hint d
       (by simpa only [hdim] using hdegree)
   exact ⟨c, e, hc, he, hed, hint, RingHom.ker_isPrime _, hdim'.trans hdim,
     by simpa only [hdim] using hdegree', hcone⟩

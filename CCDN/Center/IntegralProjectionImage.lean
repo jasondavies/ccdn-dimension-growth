@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Projection.IntegralProjectionClosedImage
@@ -27,7 +28,7 @@ theorem exists_point_of_integral_projection_kernel_zero
     (hint : (projectionCoordinateMap I a).IsIntegral)
     (z : Fin m → K)
     (hz : ∀ f ∈ RingHom.ker (projectionCoordinateMap I a), eval z f = 0) :
-    ∃ x : Fin n → K, (∀ f ∈ I, eval x f = 0) ∧
+    ∃ x : Fin n → K, x ∈ idealZeroLocus I ∧
       ∀ i, eval x (a i) = z i :=
   integral_projection_exists_point I a hint z hz
 

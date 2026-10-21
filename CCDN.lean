@@ -36,14 +36,17 @@ public import CCDN.Algebra.HomogeneousScalarExtension
 public import CCDN.Algebra.HomogeneousSlice
 public import CCDN.Algebra.HomogeneousTranslation
 public import CCDN.Algebra.IdealScalarDescent
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.IntegerLinearForms
 public import CCDN.Algebra.IntegerPolynomialAvoidance
 public import CCDN.Algebra.IntegerRationalIrreducibility
 public import CCDN.Algebra.LeadingDirection
+public import CCDN.Algebra.LinearForm
 public import CCDN.Algebra.LowDegreePointSeparation
 public import CCDN.Algebra.ModularPolynomialLift
 public import CCDN.Algebra.MonomialOrthants
 public import CCDN.Algebra.MonomialRays
+public import CCDN.Algebra.OriginShift
 public import CCDN.Algebra.ParameterPowerSpan
 public import CCDN.Algebra.ParameterRecurrenceGrowth
 public import CCDN.Algebra.PointSeparation
@@ -75,6 +78,7 @@ public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Algebra.ProjectiveTranslation
 public import CCDN.Algebra.PureVarietyGridBound
 public import CCDN.Algebra.RadialHomogeneousMap
+public import CCDN.Algebra.RadialMap
 public import CCDN.Algebra.RationalParameterPowerSpan
 public import CCDN.Algebra.ReconstructionFunctionField
 public import CCDN.Algebra.RowSelection
@@ -447,7 +451,6 @@ public import CCDN.Determinant.NoetherianLocalDeterminant
 public import CCDN.Determinant.OriginLayerGenerators
 public import CCDN.Determinant.OriginTruncationGenerators
 public import CCDN.Determinant.OrthantMultiplicity
-public import CCDN.Determinant.PlaneChartDeterminant
 public import CCDN.Determinant.PlaneMultiplicity
 public import CCDN.Determinant.PlaneMultiplicitySmooth
 public import CCDN.Determinant.PlaneSingularities

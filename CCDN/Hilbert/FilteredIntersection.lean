@@ -112,8 +112,8 @@ lemma finrank_map_add_kernel_subspace_le {K M W : Type*} [Field K]
   have hle := Submodule.finrank_mono (le_inf hUV hUker)
   omega
 
-/-- Bounded-degree polynomials in the quotient coordinate ring. This agrees with
-`CCDN.coordinateSpace` when the coefficient field is `ℚ`. -/
+/-- Bounded-degree polynomials in the quotient coordinate ring. Its dimension over `ℚ`
+is `CCDN.affineHilbertFunction`. -/
 def filteredCoordinateSpace {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (N : ℕ) : Submodule K (MvPolynomial σ K ⧸ I) :=
   (restrictTotalDegree σ K N).map (Ideal.Quotient.mkₐ K I).toLinearMap

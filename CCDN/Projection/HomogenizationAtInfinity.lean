@@ -15,12 +15,12 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem boundedHomogenize_eval_at_infinity {K : Type*} [Field K] {n D : ℕ}
+theorem scaledHomogenize_one_eval_at_infinity {K : Type*} [Field K] {n D : ℕ}
     (f : MvPolynomial (Fin n) K) (hf : f.totalDegree ≤ D) (b : Fin n → K) :
-    eval (Fin.cons 0 b) (boundedHomogenize D f) =
+    eval (Fin.cons 0 b) (scaledHomogenize D 1 f) =
       eval b (homogeneousComponent D f) := by
   classical
-  rw [boundedHomogenize, map_sum, homogeneousComponent_apply, map_sum,
+  rw [scaledHomogenize, map_sum, homogeneousComponent_apply, map_sum,
     Finset.sum_filter]
   apply Finset.sum_congr rfl
   intro e he

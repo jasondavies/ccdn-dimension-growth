@@ -83,11 +83,11 @@ theorem zero_dimensional_geometrically_integral_point
     rw [he, MvPolynomial.vanishingIdeal_empty] at hvan
     exact Ideal.IsPrime.ne_top (inferInstance : J.IsPrime) hvan.symm
   obtain ⟨y, hy⟩ := hnonempty
-  have hy' : ∀ f ∈ J, eval y f = 0 := by
+  have hy' : y ∈ idealZeroLocus J := by
     intro f hf
     simpa only [aeval_def, Algebra.algebraMap_self, eval₂_id] using hy f hf
   have hJker := zero_dimensional_prime_eq_eval_kernel J hJdim y hy'
-  have hunique (z : Fin n → L) (hz : ∀ f ∈ J, eval z f = 0) : z = y := by
+  have hunique (z : Fin n → L) (hz : z ∈ idealZeroLocus J) : z = y := by
     funext i
     have hmem : X i - C (y i) ∈ J := by
       rw [hJker]
@@ -98,7 +98,7 @@ theorem zero_dimensional_geometrically_integral_point
   have hfixed (i : Fin n) : y i ∈ Set.range (algebraMap K L) := by
     apply (InfiniteGalois.mem_range_algebraMap_iff_fixed _).mpr
     intro γ
-    have hγ : ∀ f ∈ J, eval (γ ∘ y) f = 0 := by
+    have hγ : (γ ∘ y) ∈ idealZeroLocus J := by
       have hle : J ≤ RingHom.ker (eval (γ ∘ y)) := by
         apply Ideal.map_le_iff_le_comap.mpr
         intro f hf
@@ -107,7 +107,7 @@ theorem zero_dimensional_geometrically_integral_point
       exact hle
     exact congrFun (hunique (γ ∘ y) hγ) i
   choose x hx using hfixed
-  have hxzero : ∀ f ∈ I, eval x f = 0 := by
+  have hxzero : x ∈ idealZeroLocus I := by
     intro f hf
     apply (algebraMap K L).injective
     have hh := hy' _ (Ideal.mem_map_of_mem (map (algebraMap K L)) hf)

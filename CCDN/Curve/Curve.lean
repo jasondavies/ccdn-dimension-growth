@@ -5,6 +5,8 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Hilbert.FilteredIntersection
 public import CCDN.Plane.Plane
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
@@ -33,15 +35,10 @@ namespace CCDN
 
 abbrev CoordinatePolynomial (n : ℕ) := MvPolynomial (Fin n) ℚ
 
-def idealZeroLocus {n : ℕ} (I : Ideal (CoordinatePolynomial n)) : Set (RatPoint n) :=
-  {x | ∀ f ∈ I, MvPolynomial.eval x f = 0}
-
-noncomputable def coordinateSpace {n : ℕ} (I : Ideal (CoordinatePolynomial n)) (M : ℕ) :
-    Submodule ℚ (CoordinatePolynomial n ⧸ I) :=
-  (MvPolynomial.restrictTotalDegree (Fin n) ℚ M).map (Ideal.Quotient.mkₐ ℚ I).toLinearMap
-
+/-- The affine Hilbert function: the dimension of the polynomials of total degree at
+most `M` in the coordinate ring. -/
 noncomputable def affineHilbertFunction {n : ℕ} (I : Ideal (CoordinatePolynomial n))
-    (M : ℕ) : ℕ := Module.finrank ℚ (coordinateSpace I M)
+    (M : ℕ) : ℕ := Module.finrank ℚ (filteredCoordinateSpace I M)
 
 /-- Degree via the eventual affine Hilbert polynomial. This condition is mathematical
 data about the coordinate ring, and contains no point-counting estimate. -/

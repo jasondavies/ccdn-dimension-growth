@@ -102,12 +102,12 @@ theorem exists_geometric_projective_curve_projection
         (Set.range (fun i => algebraMap (CoordinatePolynomial n ⧸ J)
           (FractionRing (CoordinatePolynomial n ⧸ J))
           ((Ideal.Quotient.mk J) (a i)))) = ⊤ ∧
-      (boundedHomogenize d f).IsHomogeneous d ∧
-      (boundedHomogenize d f).totalDegree = d ∧
-      Irreducible (boundedHomogenize d f) ∧
-      Irreducible (map (algebraMap ℚ L) (boundedHomogenize d f)) ∧
+      (scaledHomogenize d 1 f).IsHomogeneous d ∧
+      (scaledHomogenize d 1 f).totalDegree = d ∧
+      Irreducible (scaledHomogenize d 1 f) ∧
+      Irreducible (map (algebraMap ℚ L) (scaledHomogenize d 1 f)) ∧
       ∀ B : ℝ, 1 ≤ B → projectiveCount (projectiveIdealZeroLocus I) B ≤
-        projectiveCount (projectiveZeroLocus (boundedHomogenize d f))
+        projectiveCount (projectiveZeroLocus (scaledHomogenize d 1 f))
           (curveProjectionHeightConstant n * (d : ℝ) ^ (2 * n) * B) + d ^ 2 := by
   classical
   obtain ⟨j, hj⟩ := exists_coordinate_not_mem_of_positive_hilbert_dimension I (by omega)

@@ -86,7 +86,7 @@ theorem irreducible_X_fin_one (K : Type*) [Field K] :
 /-- A set of common zeros of the ideal of a rational point has at most one element. -/
 theorem card_le_one_of_eq_ker_eval {K : Type*} [Field K] {n : ℕ}
     (x : Fin n → K) (I : Ideal (MvPolynomial (Fin n) K)) (hI : I = RingHom.ker (eval x))
-    (s : Finset (Fin n → K)) (hzero : ∀ y ∈ s, ∀ g ∈ I, eval y g = 0) : s.card ≤ 1 := by
+    (s : Finset (Fin n → K)) (hzero : ∀ y ∈ s, y ∈ idealZeroLocus I) : s.card ≤ 1 := by
   apply Finset.card_le_one.mpr
   intro y hy w hw
   funext i
@@ -131,7 +131,7 @@ theorem exists_geometric_affine_projection_zero_dimension
   let b : Fin 1 → Fin n → ℤ := fun _ _ => 0
   have ha : (fun i => integerLinearForm (b i)) = 0 := by
     funext i
-    simp [b, integerLinearForm]
+    simp [b, linearForm]
   refine ⟨b, fun i j => ?_, RingHom.isIntegral_of_surjective _
       (projectionCoordinateMap_surjective_of_eq_ker_eval x I hIker _),
     adjoin_eq_top_of_eq_ker_eval x I hIker _, X 0, irreducible_X_fin_one ℚ, ?_, totalDegree_X _,

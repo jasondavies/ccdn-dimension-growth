@@ -87,15 +87,15 @@ theorem affineChart_degree_of_not_variable_dvd {K : Type*} [Field K] {n d : ℕ}
   by_contra hne
   have hd : 0 < d := by omega
   have hsmall : (affineChart n f).totalDegree ≤ d - 1 := by omega
-  let g := boundedHomogenize (d - 1) (affineChart n f)
-  have hg : g.IsHomogeneous (d - 1) := boundedHomogenize_homogeneous _ hsmall
+  let g := scaledHomogenize (d - 1) 1 (affineChart n f)
+  have hg : g.IsHomogeneous (d - 1) := scaledHomogenize_homogeneous 1 _ hsmall
   have hxg : (X 0 * g).IsHomogeneous d := by
     convert (isHomogeneous_X K (0 : Fin (n + 1))).mul hg using 1
     omega
   have he : f = X 0 * g := by
     apply affineChart_injective_on_homogeneous hf hxg
     rw [map_mul, show affineChart n (X 0) = 1 by simp [affineChart],
-      one_mul, affineChart_boundedHomogenize]
+      one_mul, affineChart_scaledHomogenize_one]
   exact hX ⟨g, he⟩
 
 theorem affineChart_irreducible_of_not_variable_dvd {K : Type*} [Field K] {n d : ℕ}
@@ -121,19 +121,19 @@ theorem affineChart_irreducible_of_not_variable_dvd {K : Type*} [Field K] {n d :
     have hb0 : b ≠ 0 := by intro hb; simp [hb] at hab; exact hc0 hab
     have hsum : a.totalDegree + b.totalDegree = d := by
       rw [← totalDegree_mul_of_isDomain ha0 hb0, ← hab, hdeg]
-    have hh : (boundedHomogenize a.totalDegree a *
-        boundedHomogenize b.totalDegree b).IsHomogeneous d := by
-      simpa only [hsum] using (boundedHomogenize_homogeneous a le_rfl).mul
-        (boundedHomogenize_homogeneous b le_rfl)
-    have he : f = boundedHomogenize a.totalDegree a * boundedHomogenize b.totalDegree b := by
+    have hh : (scaledHomogenize a.totalDegree 1 a *
+        scaledHomogenize b.totalDegree 1 b).IsHomogeneous d := by
+      simpa only [hsum] using (scaledHomogenize_homogeneous 1 a le_rfl).mul
+        (scaledHomogenize_homogeneous 1 b le_rfl)
+    have he : f = scaledHomogenize a.totalDegree 1 a * scaledHomogenize b.totalDegree 1 b := by
       apply affineChart_injective_on_homogeneous hf hh
-      rw [map_mul, affineChart_boundedHomogenize, affineChart_boundedHomogenize]
+      rw [map_mul, affineChart_scaledHomogenize_one, affineChart_scaledHomogenize_one]
       exact hab
     obtain ha | hb := hir.isUnit_or_isUnit he
     · left
-      simpa only [affineChart_boundedHomogenize] using ha.map (affineChart n)
+      simpa only [affineChart_scaledHomogenize_one] using ha.map (affineChart n)
     · right
-      simpa only [affineChart_boundedHomogenize] using hb.map (affineChart n)
+      simpa only [affineChart_scaledHomogenize_one] using hb.map (affineChart n)
 
 end
 end CCDN

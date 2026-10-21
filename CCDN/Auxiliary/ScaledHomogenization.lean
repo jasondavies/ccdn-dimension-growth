@@ -14,32 +14,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma homogenizedExponent_injective {n : ℕ} (d : ℕ) :
-    Function.Injective (homogenizedExponent (n := n) d) := by
-  intro m k h
-  simpa only [chartExponent_homogenizedExponent] using congrArg chartExponent h
-
-def scaledHomogenize {R : Type*} [CommRing R] {n : ℕ} (d : ℕ) (h : R)
-    (f : MvPolynomial (Fin n) R) : MvPolynomial (Fin (n + 1)) R :=
-  ∑ m ∈ f.support, monomial (homogenizedExponent d m) (h ^ m.sum (fun _ e => e) * f.coeff m)
-
-lemma scaledHomogenize_coefficient {R : Type*} [CommRing R] {n : ℕ}
-    (d : ℕ) (h : R) (f : MvPolynomial (Fin n) R) (m : Fin n →₀ ℕ) :
-    (scaledHomogenize d h f).coeff (homogenizedExponent d m) =
-      h ^ m.sum (fun _ e => e) * f.coeff m := by
-  classical
-  by_cases hm : m ∈ f.support
-  · simp [scaledHomogenize, coeff_monomial, (homogenizedExponent_injective d).eq_iff, hm]
-  · have hz := notMem_support_iff.mp hm
-    simp [scaledHomogenize, coeff_monomial, (homogenizedExponent_injective d).eq_iff, hm, hz]
-
-lemma scaledHomogenize_homogeneous {R : Type*} [CommRing R] {n d : ℕ}
-    (h : R) (f : MvPolynomial (Fin n) R) (hf : f.totalDegree ≤ d) :
-    (scaledHomogenize d h f).IsHomogeneous d := by
-  apply IsHomogeneous.sum
-  intro m hm
-  exact isHomogeneous_monomial _ (homogenizedExponent_degree m ((le_totalDegree hm).trans hf))
-
 lemma homogenizedExponent_value {R : Type*} [CommRing R] {n : ℕ}
     (d : ℕ) (h : R) (x : Fin n → R) (m : Fin n →₀ ℕ) :
     (homogenizedExponent d m).prod (fun j e => ((Fin.cons h x : Fin (n + 1) → R) j) ^ e) =

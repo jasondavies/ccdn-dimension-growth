@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Algebra.PolynomialSection
 import CCDN.Curve.CurveRationalInverse
@@ -28,7 +29,7 @@ theorem reconstruction_exceptional_card_le {K σ τ ι : Type*} [Field K]
     (a : σ → MvPolynomial τ K) (ha : ∀ j, (a j).totalDegree ≤ 1)
     (Q : MvPolynomial σ K) (hQ : aeval a Q ∉ I)
     (z : ι → τ → K) (hz : Function.Injective z)
-    (hzi : ∀ i, ∀ f ∈ I, eval (z i) f = 0)
+    (hzi : ∀ i, z i ∈ idealZeroLocus I)
     (hzQ : ∀ i, eval (z i) (aeval a Q) = 0) :
     Fintype.card ι ≤ d * Q.totalDegree := by
   apply polynomial_section_card_le_degree I d hdegree (aeval a Q) hQ Q.totalDegree
@@ -44,7 +45,7 @@ theorem projection_card_le_image_add {K σ τ : Type*} [Field K] [Fintype σ] [F
     (a : σ → MvPolynomial τ K) (ha : ∀ j, (a j).totalDegree ≤ 1)
     (Q : MvPolynomial σ K) (P : τ → MvPolynomial σ K)
     (hQ : aeval a Q ∉ I) (hP : ∀ i, aeval a Q * X i - aeval a (P i) ∈ I)
-    (S : Finset (τ → K)) (hS : ∀ z ∈ S, ∀ f ∈ I, eval z f = 0) :
+    (S : Finset (τ → K)) (hS : ∀ z ∈ S, z ∈ idealZeroLocus I) :
     let π : (τ → K) → (σ → K) := fun z j => eval z (a j)
     S.card ≤ (S.image π).card + d * Q.totalDegree := by
   classical

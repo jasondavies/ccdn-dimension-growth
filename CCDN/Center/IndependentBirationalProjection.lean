@@ -69,12 +69,9 @@ theorem adjoin_integerLinearForm_eq_top_of_first_mem_span {m n : ℕ}
   let F := FractionRing A
   let L : (Fin n → ℚ) →ₗ[ℚ] F :=
     (IsScalarTower.toAlgHom ℚ A F).toLinearMap.comp
-      ((Ideal.Quotient.mkₐ ℚ I).toLinearMap.comp (rationalRowLinearForm n))
+      ((Ideal.Quotient.mkₐ ℚ I).toLinearMap.comp (linearFormLinearMap ℚ (Fin n)))
   have hL (v : Fin n → ℤ) : L (fun k => (v k : ℚ)) =
-      algebraMap A F ((Ideal.Quotient.mk I) (integerLinearForm v)) := by
-    change algebraMap A F ((Ideal.Quotient.mk I)
-      (rationalRowLinearForm n (fun k => (v k : ℚ)))) = _
-    rw [rationalRowLinearForm_integer]
+      algebraMap A F ((Ideal.Quotient.mk I) (integerLinearForm v)) := rfl
   have hfieldtail : IntermediateField.adjoin ℚ
       (Set.range (fun i : Fin (m + 1) => algebraMap A F
         ((Ideal.Quotient.mk I) (integerLinearForm (b i.succ))))) = ⊤ := by
@@ -135,7 +132,7 @@ theorem exists_independent_bounded_birational_hypersurface_projection
     hfield
   obtain ⟨g, hg, hghom, hgdeg, _, hkg⟩ := exists_homogeneous_extended_projection_equation
     (F := FractionRing (MvPolynomial (Fin n) ℚ ⧸ I)) I hI
-    (fun i => integerLinearForm (c i)) (fun i => integerLinearForm_isHomogeneous (c i))
+    (fun i => integerLinearForm (c i)) (fun i => linearForm_isHomogeneous _)
     hinta hinja hfieldc d hdimdeg
   exact ⟨c, unit_row_cons_abs_le (by exact_mod_cast integerBirationalProjectionHeight_one_le n d)
       _ (fun s => hb s.succ) j, unit_row_cons_linearIndependent _ j htail hj, hinta, hinja,

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PlaneChartDeterminant
+public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Determinant.SingularPlaneChart
 import CCDN.Determinant.BlockDeterminant
 import CCDN.Determinant.SmoothLocalDeterminant
@@ -45,9 +45,9 @@ evaluation of a degree-M form, up to the corresponding unit row factor. -/
 lemma projective_chart_eval_congr {M : ℕ} {q u : ℤ}
     (z : Fin 3 → ℤ) (hu : q ∣ u * z 0 - 1)
     (F : MvPolynomial (Fin 3) ℤ) (hF : F.IsHomogeneous M) :
-    q ∣ eval (fun j : Fin 2 => u * z j.succ) (planeAffineChart F) -
+    q ∣ eval (fun j : Fin 2 => u * z j.succ) (affineChart 2 F) -
       u ^ M * eval z F := by
-  rw [planeAffineChart_eval, ← homogeneous_eval_smul hF]
+  rw [affineChart_eval, ← homogeneous_eval_smul hF]
   apply dvd_eval_sub_of_dvd_coordinates
   intro j
   refine Fin.cases ?_ (fun k => ?_) j
@@ -61,10 +61,10 @@ theorem projective_plane_chart_det_divisibility {p μ s d M : ℕ} [Fact p.Prime
     (f : MvPolynomial (Fin 3) ℤ) (hfhom : f.IsHomogeneous d)
     (F : Fin s → MvPolynomial (Fin 3) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → Fin 3 → ℤ) (a : Fin 2 → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) (planeTranslate a (planeAffineChart f)) ∈
+    (hf : map (Int.castRingHom (ZMod p)) (originShift a (affineChart 2 f)) ∈
       idealOfVars (Fin 2) (ZMod p) ^ μ)
     (hμ : homogeneousComponent μ
-      (map (Int.castRingHom (ZMod p)) (planeTranslate a (planeAffineChart f))) ≠ 0)
+      (map (Int.castRingHom (ZMod p)) (originShift a (affineChart 2 f))) ≠ 0)
     (hunit : ∀ i, IsCoprime (p : ℤ) (z i 0))
     (hres : ∀ i j, (p : ℤ) ∣ z i j.succ - a j * z i 0)
     (hz : ∀ i, eval (z i) f = 0) :
@@ -91,14 +91,14 @@ theorem projective_plane_chart_det_divisibility {p μ s d M : ℕ} [Fact p.Prime
     rw [he]
     exact dvd_add (dvd_mul_of_dvd_right (hres i j) _)
       (dvd_mul_of_dvd_right (hpq.trans (hu i)) _)
-  have hxf (i : Fin s) : q ∣ eval (x i) (planeAffineChart f) := by
+  have hxf (i : Fin s) : q ∣ eval (x i) (affineChart 2 f) := by
     have h := projective_chart_eval_congr (z i) (hu i) f hfhom
     simpa only [hz, mul_zero, sub_zero] using h
-  let A := Matrix.of fun i j : Fin s => eval (x i) (planeAffineChart (F j))
+  let A := Matrix.of fun i j : Fin s => eval (x i) (affineChart 2 (F j))
   let D := Matrix.of fun i j : Fin s => u i ^ M * eval (z i) (F j)
   have hA : q ∣ A.det :=
-    singular_plane_chart_det_divisibility_mod (planeAffineChart f)
-      (fun j => planeAffineChart (F j)) x a hf hμ hx hxf
+    singular_plane_chart_det_divisibility_mod (affineChart 2 f)
+      (fun j => affineChart 2 (F j)) x a hf hμ hx hxf
   have hAD : q ∣ A.det - D.det := by
     apply dvd_det_sub_of_dvd_entries
     intro i j
@@ -116,7 +116,7 @@ theorem projective_plane_chart_det_divisibility {p μ s d M : ℕ} [Fact p.Prime
 /-- Move coordinate `k` to the first position before taking the affine chart. -/
 def projectivePlaneChart (k : Fin 3) (f : MvPolynomial (Fin 3) ℤ) :
     MvPolynomial (Fin 2) ℤ :=
-  planeAffineChart (rename (Equiv.swap 0 k) f)
+  affineChart 2 (rename (Equiv.swap 0 k) f)
 
 lemma eval_swap_plane_coordinates (k : Fin 3) (z : Fin 3 → ℤ)
     (f : MvPolynomial (Fin 3) ℤ) :
@@ -132,10 +132,10 @@ theorem projective_plane_local_det_divisibility {p μ s d M : ℕ} [Fact p.Prime
     (f : MvPolynomial (Fin 3) ℤ) (hfhom : f.IsHomogeneous d)
     (F : Fin s → MvPolynomial (Fin 3) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
     (z : Fin s → Fin 3 → ℤ) (k : Fin 3) (a : Fin 2 → ℤ)
-    (hf : map (Int.castRingHom (ZMod p)) (planeTranslate a (projectivePlaneChart k f)) ∈
+    (hf : map (Int.castRingHom (ZMod p)) (originShift a (projectivePlaneChart k f)) ∈
       idealOfVars (Fin 2) (ZMod p) ^ μ)
     (hμ : homogeneousComponent μ
-      (map (Int.castRingHom (ZMod p)) (planeTranslate a (projectivePlaneChart k f))) ≠ 0)
+      (map (Int.castRingHom (ZMod p)) (originShift a (projectivePlaneChart k f))) ≠ 0)
     (hunit : ∀ i, IsCoprime (p : ℤ) (z i k))
     (hres : ∀ i j, (p : ℤ) ∣ z i (Equiv.swap 0 k j.succ) - a j * z i k)
     (hz : ∀ i, eval (z i) f = 0) :
@@ -158,10 +158,10 @@ theorem projective_plane_residue_minorGcd {p c s N d M : ℕ} [Fact p.Prime]
     (z : Fin s → Fin 3 → ℤ) (label : Fin s → Fin c)
     (k : Fin c → Fin 3) (a : Fin c → Fin 2 → ℤ) (μ : Fin c → ℕ)
     (hf : ∀ i, map (Int.castRingHom (ZMod p))
-      (planeTranslate (a i) (projectivePlaneChart (k i) f)) ∈
+      (originShift (a i) (projectivePlaneChart (k i) f)) ∈
         idealOfVars (Fin 2) (ZMod p) ^ μ i)
     (hμ : ∀ i, homogeneousComponent (μ i) (map (Int.castRingHom (ZMod p))
-      (planeTranslate (a i) (projectivePlaneChart (k i) f))) ≠ 0)
+      (originShift (a i) (projectivePlaneChart (k i) f))) ≠ 0)
     (hunit : ∀ i, IsCoprime (p : ℤ) (z i (k (label i))))
     (hres : ∀ i j, (p : ℤ) ∣ z i (Equiv.swap 0 (k (label i)) j.succ) -
       a (label i) j * z i (k (label i)))
