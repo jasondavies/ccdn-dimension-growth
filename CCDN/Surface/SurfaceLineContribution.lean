@@ -86,7 +86,8 @@ theorem surface_line_contribution_of_parallel_bound :
       (fun L hL => (Finset.mem_filter.mp (Finset.mem_filter.mp hL).1).1) (by
         intro L hL
         obtain ⟨hLt, he⟩ := Finset.mem_filter.mp hL
-        simpa only [he] using (hp L hLt).2.2.2.1)
+        obtain ⟨-, -, -, hLdir, -⟩ := hp L hLt
+        simpa only [he] using hLdir)
     have hdle : f.totalDegree * (f.totalDegree - 1) ≤ f.totalDegree ^ 2 := by
       nlinarith [Nat.sub_le f.totalDegree 1]
     exact_mod_cast hc.trans hdle
@@ -107,7 +108,7 @@ theorem surface_line_contribution_of_parallel_bound :
   have hgood : ∑ L ∈ t, (count L B : ℝ) ≤ (4 * K) * (f.totalDegree : ℝ) ^ 6 * B := by
     calc
       _ ≤ ∑ L ∈ t, 4 * B / (p L).mulHeight :=
-        Finset.sum_le_sum (fun L hL => (hp L hL).2.2.2.2)
+        Finset.sum_le_sum (fun L hL => by obtain ⟨-, -, -, -, hLcount⟩ := hp L hL; exact hLcount)
       _ = 4 * B * ∑ L ∈ t, 1 / (p L).mulHeight := by
         rw [Finset.mul_sum]
         apply Finset.sum_congr rfl
