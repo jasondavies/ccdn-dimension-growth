@@ -1,14 +1,16 @@
+> Historical record, not maintained; see [README.md](README.md).
+
 # Development notes
 
 Detailed account of the library's proof routes and of the source corrections, moved
 from the README. Module and declaration names are in the `CCDN` namespace. For the
 compared statements see `Challenge.lean`; for the statement-to-declaration audit see
-[completion-audit.json](completion-audit.json).
+[completion-audit.json](../completion-audit.json).
 
 ## Proof overview
 
 **The full-paper formalisation is complete with documented source corrections.**
-The [completion audit](completion-audit.json) maps the statements and
+The [completion audit](../completion-audit.json) maps the statements and
 external inputs to their Lean declarations. The [full-paper ledger](full-paper-plan.txt)
 records the scope and the corrections to false literal source statements.
 Section 5 includes the actual good-center locus, its sharp complement equations,

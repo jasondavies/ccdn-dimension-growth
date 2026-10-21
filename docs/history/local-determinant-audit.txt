@@ -1,3 +1,5 @@
+Historical record, not maintained; see docs/history/README.md.
+
 Local determinant / weighted-sequence exact-statement audit
 20 October 2026
 

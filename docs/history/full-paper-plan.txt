@@ -1,3 +1,5 @@
+Historical record, not maintained; see docs/history/README.md.
+
 Full-paper formalisation obligations
 ===================================
 

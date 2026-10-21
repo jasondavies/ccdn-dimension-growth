@@ -1,3 +1,5 @@
+Historical record, not maintained; see docs/history/README.md.
+
 Row-separator exact-statement audit (CCDN Lemma 5.4)
 20 October 2026
 
