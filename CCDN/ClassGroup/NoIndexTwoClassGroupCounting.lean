@@ -33,7 +33,7 @@ open scoped NumberField IntermediateField
 def oddIndexNormCurveCountConstant : ℝ :=
   2 * Real.exp 1 * affineNonzeroConstantBound planeResidueConstant
 
-lemma oddIndexNormCurveCountConstant_pos : 0 < oddIndexNormCurveCountConstant :=
+private lemma oddIndexNormCurveCountConstant_pos : 0 < oddIndexNormCurveCountConstant :=
   mul_pos (by positivity) (affineNonzeroConstantBound_pos planeResidueConstant)
 
 theorem signed_norm_curve_count_of_odd_subfield_index
@@ -66,7 +66,7 @@ noncomputable section
 open NumberField NumberField.InfinitePlace
 open scoped IntermediateField
 
-lemma normCurveBoxHeight_log_le {n : ℕ} (hn : 2 ≤ n) {B : ℝ} (hB : 1 ≤ B) :
+private lemma normCurveBoxHeight_log_le {n : ℕ} (hn : 2 ≤ n) {B : ℝ} (hB : 1 ≤ B) :
     Real.log (max (2 * B) (Real.sqrt (B ^ n))) + n ≤
       2 * (n : ℝ) * (Real.log B + 1) := by
   have hB0 : 0 < B := zero_lt_one.trans_le hB

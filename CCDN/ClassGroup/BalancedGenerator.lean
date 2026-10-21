@@ -50,7 +50,7 @@ lemma one_le_log_abs_discr (hn : 2 ≤ Module.finrank ℚ K) :
 
 end Discriminant
 
-lemma prod_weighted_sqrt_radii {ι : Type*} [Fintype ι]
+private lemma prod_weighted_sqrt_radii {ι : Type*} [Fintype ι]
     (u : ι → ℝ≥0) (m : ι → ℕ) (T : ℝ≥0) :
     (∏ i, (T / NNReal.sqrt (u i)) ^ m i) =
       T ^ (∑ i, m i) / NNReal.sqrt (∏ i, u i ^ m i) := by
@@ -63,7 +63,7 @@ lemma prod_weighted_sqrt_radii {ι : Type*} [Fintype ι]
 
 variable (K : Type*) [Field K] [NumberField K]
 
-lemma principal_square_infinite_product (I : Ideal (𝓞 K)) {α : 𝓞 K}
+private lemma principal_square_infinite_product (I : Ideal (𝓞 K)) {α : 𝓞 K}
     (hIα : I ^ 2 = Ideal.span {α}) :
     (∏ w : InfinitePlace K, w (α : K) ^ mult w) = (Ideal.absNorm I : ℝ) ^ 2 := by
   rw [prod_eq_abs_norm, ← Algebra.coe_norm_int]
@@ -71,7 +71,7 @@ lemma principal_square_infinite_product (I : Ideal (𝓞 K)) {α : 𝓞 K}
   rw [← Int.natCast_natAbs, generator_absolute_norm_of_ideal_square K I hIα,
     Nat.cast_pow]
 
-lemma inverse_ideal_minkowskiBound_toReal (I : (Ideal (𝓞 K))⁰) :
+private lemma inverse_ideal_minkowskiBound_toReal (I : (Ideal (𝓞 K))⁰) :
     (mixedEmbedding.minkowskiBound K (FractionalIdeal.mk0 K I)⁻¹).toReal =
       (Ideal.absNorm (I : Ideal (𝓞 K)) : ℝ)⁻¹ *
         (2⁻¹ : ℝ) ^ nrComplexPlaces K * Real.sqrt |(discr K : ℝ)| *
@@ -89,7 +89,7 @@ lemma inverse_ideal_minkowskiBound_toReal (I : (Ideal (𝓞 K))⁰) :
     Real.coe_sqrt, coe_nnnorm, Int.norm_eq_abs]
   ring
 
-lemma square_generator_radius_product (I : Ideal (𝓞 K)) {α : 𝓞 K}
+private lemma square_generator_radius_product (I : Ideal (𝓞 K)) {α : 𝓞 K}
     (hIα : I ^ 2 = Ideal.span {α}) (T : ℝ≥0) :
     (∏ w : InfinitePlace K,
       (T / NNReal.sqrt (Real.toNNReal (w (α : K)))) ^ mult w) =
@@ -171,7 +171,7 @@ theorem exists_balanced_square_generator_of_radius
       rw [div_pow, Real.sq_sqrt hαw.le]
       field_simp
 
-lemma balanced_discriminant_radius_powers {D : ℝ} (hD : 0 < D)
+private lemma balanced_discriminant_radius_powers {D : ℝ} (hD : 0 < D)
     {n : ℕ} (hn : 0 < n) :
     (3 * D ^ (1 / (2 * (n : ℝ)))) ^ n = 3 ^ n * Real.sqrt D ∧
     (3 * D ^ (1 / (2 * (n : ℝ)))) ^ 2 = 9 * D ^ (1 / (n : ℝ)) := by
@@ -190,7 +190,7 @@ lemma balanced_discriminant_radius_powers {D : ℝ} (hD : 0 < D)
 
 /-- Every two-torsion class admits an integral square generator bounded
 at every infinite place by nine times the discriminant root. -/
-theorem exists_balanced_two_torsion_square_generator
+private theorem exists_balanced_two_torsion_square_generator
     (c : classGroupTwoTorsion K) :
     ∃ J : (Ideal (𝓞 K))⁰, ∃ β : 𝓞 K,
       ClassGroup.mk0 J = c ∧ β ≠ 0 ∧

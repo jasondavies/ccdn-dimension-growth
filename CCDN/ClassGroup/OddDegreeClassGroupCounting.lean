@@ -46,7 +46,7 @@ variable (K : Type*) [Field K] [NumberField K]
 
 /-- Summing over the constructed curves costs two signs and a factor
 `2 √B` from their square-height parameter. -/
-theorem boundedSquareNormIntegers_odd_count
+private theorem boundedSquareNormIntegers_odd_count
     (hn : 2 ≤ Module.finrank ℚ K) (hodd : Odd (Module.finrank ℚ K))
     {B : ℝ} (hB : 1 ≤ B) :
     ((boundedSquareNormIntegers K B).ncard : ℝ) ≤

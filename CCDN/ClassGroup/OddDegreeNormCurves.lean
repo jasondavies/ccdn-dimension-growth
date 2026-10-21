@@ -18,7 +18,7 @@ noncomputable section
 open scoped NumberField
 open Polynomial NumberField
 
-lemma odd_degree_polynomial_not_square_ratFunc {F : Type*} [Field F]
+private lemma odd_degree_polynomial_not_square_ratFunc {F : Type*} [Field F]
     (p : F[X]) (hp : Odd p.natDegree) (b : RatFunc F) :
     b ^ 2 ≠ algebraMap F[X] (RatFunc F) p := by
   intro he

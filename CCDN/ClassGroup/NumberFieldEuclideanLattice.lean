@@ -72,7 +72,7 @@ lemma mem_euclidean_integerLattice_iff
     exact euclideanNumberFieldEmbedding_mem_integerLattice K z
 
 open Classical in
-lemma infinitePlace_le_euclidean_norm (w : InfinitePlace K) (x : K) :
+private lemma infinitePlace_le_euclidean_norm (w : InfinitePlace K) (x : K) :
     w x ≤ ‖euclideanNumberFieldEmbedding K x‖ := by
   rw [← mixedEmbedding.normAtPlace_apply w x,
     ← toMixed_euclideanNumberFieldEmbedding]
@@ -85,7 +85,7 @@ lemma infinitePlace_le_euclidean_norm (w : InfinitePlace K) (x : K) :
       (WithLp.norm_snd_le _ (euclideanNumberFieldEmbedding K x))
 
 open Classical in
-lemma euclideanNumberFieldEmbedding_norm_sq (x : K) :
+private lemma euclideanNumberFieldEmbedding_norm_sq (x : K) :
     ‖euclideanNumberFieldEmbedding K x‖ ^ 2 =
       (∑ w : {w : InfinitePlace K // IsReal w}, (w.val x) ^ 2) +
       (∑ w : {w : InfinitePlace K // IsComplex w}, (w.val x) ^ 2) := by

@@ -62,7 +62,7 @@ theorem fieldBasisMiddle_apply (b : Module.Basis ι F K) (p q : ι)
 section Finite
 variable [Fintype ι] [DecidableEq ι]
 
-theorem fieldBasisMiddle_card (p q : ι) (hpq : p ≠ q) :
+private theorem fieldBasisMiddle_card (p q : ι) (hpq : p ≠ q) :
     Fintype.card {i : ι // i ≠ p ∧ i ≠ q} + 2 = Fintype.card ι := by
   have hs (i : ι) :
       i ∈ (Finset.univ.erase p).erase q ↔ i ≠ p ∧ i ≠ q := by
@@ -74,7 +74,7 @@ theorem fieldBasisMiddle_card (p q : ι) (hpq : p ≠ q) :
   simpa only [Finset.card_univ] using (show
     ((Finset.univ.erase p).erase q).card + 2 = Finset.univ.card by omega)
 
-theorem fieldBasisMiddle_prod {R : Type*} [CommMonoid R]
+private theorem fieldBasisMiddle_prod {R : Type*} [CommMonoid R]
     (w : ι → R) (p q : ι) (hpq : p ≠ q) :
     ∏ i, w i = w p * w q * ∏ i : {i : ι // i ≠ p ∧ i ≠ q}, w i := by
   have hs (i : ι) :

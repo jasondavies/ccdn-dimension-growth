@@ -30,7 +30,7 @@ noncomputable section
 open Polynomial NumberField IntermediateField Module
 open scoped IntermediateField
 
-lemma powerBasis_norm_sub_gen {F E : Type*} [Field F] [Field E] [Algebra F E]
+private lemma powerBasis_norm_sub_gen {F E : Type*} [Field F] [Field E] [Algebra F E]
     (b : PowerBasis F E) (a : F) :
     Algebra.norm F (algebraMap F E a - b.gen) = (minpoly F b.gen).eval a := by
   rw [Algebra.norm_eq_matrix_det b.basis, map_sub,
@@ -38,7 +38,7 @@ lemma powerBasis_norm_sub_gen {F E : Type*} [Field F] [Field E] [Algebra F E]
   rw [← charpoly_leftMulMatrix b, Matrix.eval_charpoly]
   rfl
 
-lemma norm_sub_eq_minpoly_eval_pow {F E : Type*} [Field F] [Field E]
+private lemma norm_sub_eq_minpoly_eval_pow {F E : Type*} [Field F] [Field E]
     [Algebra F E] [FiniteDimensional F E] (β : E) (a : F) :
     Algebra.norm F (algebraMap F E a - β) =
       (minpoly F β).eval a ^ Module.finrank F⟮β⟯ E := by
@@ -54,7 +54,7 @@ lemma norm_sub_eq_minpoly_eval_pow {F E : Type*} [Field F] [Field E]
   have hg : b.gen = γ := IntermediateField.adjoin.powerBasis_gen hβ
   rw [← hg, powerBasis_norm_sub_gen, hg, IntermediateField.minpoly_gen]
 
-theorem integerNormPolynomial_map_eq_minpoly_pow
+private theorem integerNormPolynomial_map_eq_minpoly_pow
     (K : Type*) [Field K] [NumberField K] (β : 𝓞 K) :
     (integerNormPolynomial K β).map (Int.castRingHom ℚ) =
       minpoly ℚ (β : K) ^ Module.finrank ℚ⟮(β : K)⟯ K := by

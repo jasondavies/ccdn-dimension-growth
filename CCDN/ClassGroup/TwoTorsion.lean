@@ -21,7 +21,7 @@ open scoped NumberField nonZeroDivisors Real
 section Dedekind
 variable {R : Type*} [CommRing R] [IsDedekindDomain R]
 
-lemma integralIdeal_pow_injective {m : ℕ} (hm : m ≠ 0) :
+private lemma integralIdeal_pow_injective {m : ℕ} (hm : m ≠ 0) :
     Function.Injective (fun I : Ideal R => I ^ m) := by
   intro I J h
   change I ^ m = J ^ m at h
@@ -33,7 +33,7 @@ lemma integralIdeal_pow_injective {m : ℕ} (hm : m ≠ 0) :
     apply (UniqueFactorizationMonoid.pow_dvd_pow_iff_dvd hm).mp
     rw [h]
 
-lemma exists_generator_of_class_square_eq_one (I : (Ideal R)⁰)
+private lemma exists_generator_of_class_square_eq_one (I : (Ideal R)⁰)
     (hI : (ClassGroup.mk0 I) ^ 2 = 1) :
     ∃ β : R, β ≠ 0 ∧ (I : Ideal R) ^ 2 = Ideal.span {β} := by
   have hinv : ClassGroup.mk0 I = (ClassGroup.mk0 I)⁻¹ := by

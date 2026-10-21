@@ -62,7 +62,7 @@ lemma noIndexTwoClassGroupConstant_pos (n : ℕ) :
   unfold noIndexTwoClassGroupConstant
   positivity
 
-lemma balanced_radius_log_le {D : ℝ} (hD : 0 < D) (hlog : 1 ≤ Real.log D)
+private lemma balanced_radius_log_le {D : ℝ} (hD : 0 < D) (hlog : 1 ≤ Real.log D)
     {n : ℕ} (hn : 0 < n) :
     Real.log (9 * D ^ (1 / (n : ℝ))) + 1 ≤
       (Real.log 9 + 2) * Real.log D := by

@@ -27,12 +27,12 @@ def rationalPrimeIdealFiber (p : ℕ) : Finset (Ideal (𝓞 K)) :=
   (Algebra.QuasiFinite.finite_primesOver
     (S := 𝓞 K) (Ideal.span {(p : ℤ)})).toFinset
 
-theorem mem_rationalPrimeIdealFiber (p : ℕ) (Q : Ideal (𝓞 K)) :
+private theorem mem_rationalPrimeIdealFiber (p : ℕ) (Q : Ideal (𝓞 K)) :
     Q ∈ rationalPrimeIdealFiber K p ↔
       Q.IsPrime ∧ Q.LiesOver (Ideal.span {(p : ℤ)}) := by
   exact Set.Finite.mem_toFinset _
 
-theorem rationalPrimeIdealFiber_card_le (p : ℕ) (hp : p.Prime) :
+private theorem rationalPrimeIdealFiber_card_le (p : ℕ) (hp : p.Prime) :
     (rationalPrimeIdealFiber K p).card ≤ Module.finrank ℚ K := by
   have hpz : Prime (p : ℤ) := Nat.prime_iff_prime_int.mp hp
   let P : Ideal ℤ := Ideal.span {(p : ℤ)}

@@ -13,7 +13,7 @@ count and the `n−1` dimensional translation-class count. -/
 @[expose] public section
 namespace CCDN
 
-lemma classGroup_balanced_radius_power_identity {D : ℝ} (hD : 0 < D)
+private lemma classGroup_balanced_radius_power_identity {D : ℝ} (hD : 0 < D)
     {n : ℕ} (hn : 0 < n) :
     (9 * D ^ (1 / (n : ℝ))) ^ (n - 1) *
         Real.sqrt (9 * D ^ (1 / (n : ℝ))) =

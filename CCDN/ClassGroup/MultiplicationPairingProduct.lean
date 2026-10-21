@@ -33,7 +33,7 @@ variable {F K : Type*} [Field F] [Field K] [Algebra F K]
 def hyperplaneComplement (ℓ μ : K →ₗ[F] F) : Submodule F K :=
   LinearMap.ker ℓ ⊓ LinearMap.ker μ
 
-def hyperplaneMultiplicationPairing (ℓ μ : K →ₗ[F] F) :
+private def hyperplaneMultiplicationPairing (ℓ μ : K →ₗ[F] F) :
     LinearMap.BilinForm F (hyperplaneComplement ℓ μ) where
   toFun a :=
     { toFun := fun b ↦ ℓ ((a : K) * (b : K))
@@ -42,7 +42,7 @@ def hyperplaneMultiplicationPairing (ℓ μ : K →ₗ[F] F) :
   map_add' := by intros; ext b; simp [add_mul]
   map_smul' := by intros; ext b; simp
 
-lemma hyperplaneMultiplicationPairing_nondegenerate
+private lemma hyperplaneMultiplicationPairing_nondegenerate
     (ℓ μ : K →ₗ[F] F) (hℓ : ℓ ≠ 0) (hℓ1 : ℓ 1 = 0) (hμ1 : μ 1 = 1) :
     (hyperplaneMultiplicationPairing ℓ μ).Nondegenerate := by
   have hl (a : hyperplaneComplement ℓ μ)
@@ -61,7 +61,7 @@ lemma hyperplaneMultiplicationPairing_nondegenerate
     simpa only [hyperplaneMultiplicationPairing, LinearMap.coe_mk, AddHom.coe_mk,
       mul_comm] using hb a
 
-lemma exists_permutation_nonzero_entries {ι R : Type*} [Fintype ι] [DecidableEq ι]
+private lemma exists_permutation_nonzero_entries {ι R : Type*} [Fintype ι] [DecidableEq ι]
     [CommRing R] (A : Matrix ι ι R) (hA : A.det ≠ 0) :
     ∃ σ : Equiv.Perm ι, ∀ i, A (σ i) i ≠ 0 := by
   by_contra h
@@ -73,7 +73,7 @@ lemma exists_permutation_nonzero_entries {ι R : Type*} [Fintype ι] [DecidableE
   obtain ⟨i, hi⟩ := h σ
   rw [Finset.prod_eq_zero (f := fun j ↦ A (σ j) j) (Finset.mem_univ i) hi, smul_zero]
 
-lemma determinant_weight_product_bound {ι R : Type*} [Fintype ι] [DecidableEq ι]
+private lemma determinant_weight_product_bound {ι R : Type*} [Fintype ι] [DecidableEq ι]
     [CommRing R] (A : Matrix ι ι R) (hA : A.det ≠ 0)
     (w : ι → ℝ) {M : ℝ} (hM : 0 ≤ M)
     (hw : ∀ i j, A i j ≠ 0 → M ≤ w i * w j) :

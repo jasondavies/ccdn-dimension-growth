@@ -66,7 +66,7 @@ open NumberField NumberField.InfinitePlace
 
 variable (K : Type*) [Field K] [NumberField K]
 
-lemma bounded_infinite_places_norm_le (α : 𝓞 K) {B : ℝ}
+private lemma bounded_infinite_places_norm_le (α : 𝓞 K) {B : ℝ}
     (hα : ∀ w : InfinitePlace K, w (α : K) ≤ B) :
     ((Algebra.norm ℤ α).natAbs : ℝ) ≤ B ^ Module.finrank ℚ K := by
   classical
@@ -82,7 +82,7 @@ lemma bounded_infinite_places_norm_le (α : 𝓞 K) {B : ℝ}
   · intro w _
     exact pow_le_pow_left₀ (apply_nonneg _ _) (hα w) _
 
-lemma integer_translate_coordinate_le (α β : 𝓞 K) {B : ℝ}
+private lemma integer_translate_coordinate_le (α β : 𝓞 K) {B : ℝ}
     (hα : ∀ w : InfinitePlace K, w (α : K) ≤ B)
     (hβ : ∀ w : InfinitePlace K, w (β : K) ≤ B)
     {x : ℤ} (hx : α = algebraMap ℤ (𝓞 K) x - β) :

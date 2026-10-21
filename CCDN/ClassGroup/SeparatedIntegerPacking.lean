@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 open NumberField MeasureTheory MeasureTheory.Measure
 
-theorem separated_finite_ball_count
+private theorem separated_finite_ball_count
     {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
     [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E]
     (μ : Measure E) [μ.IsAddHaarMeasure] (s : Finset E) {R : ℝ}

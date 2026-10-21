@@ -24,7 +24,7 @@ open scoped NumberField
 
 variable (K : Type*) [Field K] [NumberField K]
 
-theorem signedNormCurvePolynomial_primitive (β : 𝓞 K) (ε : ℤ) :
+private theorem signedNormCurvePolynomial_primitive (β : 𝓞 K) (ε : ℤ) :
     PrimitiveIntegerPolynomial (signedNormCurvePolynomial K β ε) := by
   have hcoef : (signedNormCurvePolynomial K β ε).coeff
       (Finsupp.cons 2 (Finsupp.single 0 0)) = 1 := by
@@ -37,7 +37,7 @@ theorem signedNormCurvePolynomial_primitive (β : 𝓞 K) (ε : ℤ) :
   have hh := hc (Finsupp.cons 2 (Finsupp.single 0 0))
   rwa [hcoef] at hh
 
-theorem signedNormCurvePolynomial_no_bad_reduction
+private theorem signedNormCurvePolynomial_no_bad_reduction
     (β : 𝓞 K) {ε : ℤ} (hε : IsUnit ε)
     (hn : 2 ≤ Module.finrank ℚ K) (hodd : Odd (Module.finrank ℚ K)) (p : ℕ) :
     ¬ HypersurfaceBadReduction (signedNormCurvePolynomial K β ε) p := by
@@ -52,7 +52,7 @@ theorem signedNormCurvePolynomial_no_bad_reduction
     (AlgebraicClosure (ZMod p)) β hεp hodd
   exact hbad.elim (fun h => h (hd.trans hdZ.symm)) (fun h => h hir)
 
-theorem signedNormCurvePolynomial_bad_prime_factor
+private theorem signedNormCurvePolynomial_bad_prime_factor
     (β : 𝓞 K) {ε : ℤ} (hε : IsUnit ε)
     (hn : 2 ≤ Module.finrank ℚ K) (hodd : Odd (Module.finrank ℚ K)) :
     hypersurfaceBadPrimeFactor (signedNormCurvePolynomial K β ε) = 1 := by

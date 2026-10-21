@@ -30,7 +30,7 @@ lemma quadratic_integer_ideal_action (σ : K ≃ₐ[F] K) (I : Ideal (𝓞 K)) :
     σ • I = I.map (RingOfIntegers.mapAlgEquiv σ).toRingHom := by
   rfl
 
-theorem quadratic_prime_orbit_eq_pair
+private theorem quadratic_prime_orbit_eq_pair
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     (Q : Ideal (𝓞 K)) [Q.IsPrime] :
     (Q.under (𝓞 F)).primesOver (𝓞 K) = {Q, σ • Q} := by
@@ -54,7 +54,7 @@ theorem quadratic_prime_orbit_eq_pair
       subst P
       exact ⟨inferInstance, inferInstance⟩
 
-theorem quadratic_prime_ramification_identity
+private theorem quadratic_prime_ramification_identity
     (hd : Module.finrank F K = 2) (Q : Ideal (𝓞 K)) [Q.IsPrime] :
     ((Q.under (𝓞 F)).primesOver (𝓞 K)).ncard *
       (Q.ramificationIdx (𝓞 F) * Q.inertiaDeg (𝓞 F)) = 2 := by

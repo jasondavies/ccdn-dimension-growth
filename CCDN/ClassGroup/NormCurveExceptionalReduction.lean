@@ -19,7 +19,7 @@ open scoped IntermediateField
 
 variable (K : Type*) [Field K] [NumberField K]
 
-theorem exists_norm_translate_cover (B : ℝ) :
+private theorem exists_norm_translate_cover (B : ℝ) :
     ∃ β : (boundedSquareNormTranslationClasses K B) → 𝓞 K,
       Function.Injective β ∧
       (∀ q, ∀ w : InfinitePlace K, w (β q : K) ≤ B) ∧
@@ -59,7 +59,7 @@ theorem exists_norm_translate_cover (B : ℝ) :
   rw [hx']
   abel
 
-lemma even_index_translate_mem_smallSubfield
+private lemma even_index_translate_mem_smallSubfield
     (hnoTwo : ∀ L : IntermediateField ℚ K, Module.finrank L K ≠ 2)
     (β : 𝓞 K) (hindex : ¬ Odd (Module.finrank ℚ⟮(β : K)⟯ K))
     {B : ℝ} {α : 𝓞 K} (hα : α ∈ squareNormTranslateFiber K β B) :

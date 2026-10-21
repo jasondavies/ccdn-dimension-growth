@@ -17,7 +17,7 @@ namespace CCDN
 noncomputable section
 open Finset
 
-theorem primeFactors_sum_log_le {D : ℕ} (hD : 1 ≤ D) :
+private theorem primeFactors_sum_log_le {D : ℕ} (hD : 1 ≤ D) :
     ∑ p ∈ D.primeFactors, Real.log (p : ℝ) ≤ Real.log (D : ℝ) := by
   have hprod : (∏ p ∈ D.primeFactors, (p : ℝ)) ≤ D := by
     rw [← Nat.cast_prod]
@@ -29,7 +29,7 @@ theorem primeFactors_sum_log_le {D : ℕ} (hD : 1 ≤ D) :
 
 /-- The constant is chosen before the integer whose prime divisors are
 counted. This form also permits a real exponential base. -/
-theorem primeFactors_pow_subpower {R ε : ℝ} (hR : 1 ≤ R) (hε : 0 < ε) :
+private theorem primeFactors_pow_subpower {R ε : ℝ} (hR : 1 ≤ R) (hε : 0 < ε) :
     ∃ C : ℝ, 0 < C ∧ ∀ D : ℕ, 1 ≤ D →
       R ^ D.primeFactors.card ≤ C * (D : ℝ) ^ ε := by
   have hR0 : 0 < R := zero_lt_one.trans_le hR

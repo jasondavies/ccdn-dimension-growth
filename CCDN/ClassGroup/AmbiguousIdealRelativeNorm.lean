@@ -25,7 +25,7 @@ variable (R S : Type*) [CommRing R] [IsDedekindDomain R]
   [CommRing S] [IsDedekindDomain S] [Algebra R S]
   [Module.Finite R S] [Module.IsTorsionFree R S]
 
-theorem ambiguous_ideal_scalar_relative_unit
+private theorem ambiguous_ideal_scalar_relative_unit
     (σ : S ≃ₐ[R] S) (I : (Ideal S)⁰)
     (hI : ClassGroup.mulEquiv σ.toRingEquiv (ClassGroup.mk0 I) = ClassGroup.mk0 I) :
     ∃ x y : S, ∃ u : Rˣ, x ≠ 0 ∧ y ≠ 0 ∧

@@ -47,7 +47,7 @@ def boundedIntegerToSubfield (L : IntermediateField ℚ K) (B : ℝ) :
     (((boundedIntegerToSubfield K L B β).val : L) : K) = (β.val : K) := by
   rfl
 
-lemma boundedIntegerToSubfield_injective (L : IntermediateField ℚ K) (B : ℝ) :
+private lemma boundedIntegerToSubfield_injective (L : IntermediateField ℚ K) (B : ℝ) :
     Function.Injective (boundedIntegerToSubfield K L B) := by
   intro x y h
   apply Subtype.ext
@@ -55,7 +55,7 @@ lemma boundedIntegerToSubfield_injective (L : IntermediateField ℚ K) (B : ℝ)
   simpa only [boundedIntegerToSubfield_coe] using
     congrArg (fun z : boundedArchimedeanIntegers L B ↦ ((z.val : L) : K)) h
 
-theorem boundedIntegersInSubfield_ncard_le (L : IntermediateField ℚ K) (B : ℝ) :
+private theorem boundedIntegersInSubfield_ncard_le (L : IntermediateField ℚ K) (B : ℝ) :
     (boundedIntegersInSubfield K L B).ncard ≤
       (boundedArchimedeanIntegers L B).ncard := by
   let := (boundedIntegersInSubfield_finite K L B).fintype

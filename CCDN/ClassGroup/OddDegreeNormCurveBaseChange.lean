@@ -20,7 +20,7 @@ open Polynomial NumberField
 
 variable (K E : Type*) [Field K] [NumberField K] [Field E]
 
-lemma signedNormCurvePolynomial_bivariate_map (β : 𝓞 K) (ε : ℤ) :
+private lemma signedNormCurvePolynomial_bivariate_map (β : 𝓞 K) (ε : ℤ) :
     bivariatePolynomialEquiv E
       (MvPolynomial.map (Int.castRingHom E) (signedNormCurvePolynomial K β ε)) =
       X ^ 2 - C (C (ε : E) *

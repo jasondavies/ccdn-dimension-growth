@@ -18,10 +18,10 @@ noncomputable section
 open NumberField
 open scoped NumberField
 
-def integerParityIndex (e : ℤ) : Fin 2 :=
+private def integerParityIndex (e : ℤ) : Fin 2 :=
   ⟨(e % 2).toNat, by omega⟩
 
-theorem zpow_eq_parity_pow {G : Type*} [Group G] (x : G)
+private theorem zpow_eq_parity_pow {G : Type*} [Group G] (x : G)
     (hx : x ^ 2 = 1) (e : ℤ) :
     x ^ e = x ^ (integerParityIndex e).val := by
   rw [zpow_eq_zpow_emod' e hx, ← zpow_natCast]

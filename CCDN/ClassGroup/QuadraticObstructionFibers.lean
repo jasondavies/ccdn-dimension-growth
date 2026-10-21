@@ -36,7 +36,7 @@ variable (F K : Type*) [Field F] [Field K] [Algebra F K]
 def relativeUnitNorm : (𝓞 K)ˣ →* (𝓞 F)ˣ :=
   Units.map (RingOfIntegers.norm F)
 
-theorem relativeUnitNorm_extended (u : (𝓞 F)ˣ) :
+private theorem relativeUnitNorm_extended (u : (𝓞 F)ˣ) :
     relativeUnitNorm F K (Units.map (algebraMap (𝓞 F) (𝓞 K)).toMonoidHom u) =
       u ^ Module.finrank F K := by
   apply Units.ext
@@ -45,7 +45,7 @@ theorem relativeUnitNorm_extended (u : (𝓞 F)ˣ) :
 abbrev quadraticUnitNormQuotient :=
   (𝓞 F)ˣ ⧸ (relativeUnitNorm F K).range
 
-theorem quadraticUnitNormQuotient_square (hd : Module.finrank F K = 2)
+private theorem quadraticUnitNormQuotient_square (hd : Module.finrank F K = 2)
     (x : quadraticUnitNormQuotient F K) : x ^ 2 = 1 := by
   induction x using QuotientGroup.induction_on with
   | H u =>
@@ -63,7 +63,7 @@ theorem quadraticUnitNormQuotient_finite (hd : Module.finrank F K = 2) :
     (QuotientGroup.mk'_surjective _) (quadraticUnitNormQuotient_square F K hd)).1
 
 /-- Uniform bound on the unit-norm obstruction. -/
-theorem quadraticUnitNormQuotient_card_le (hd : Module.finrank F K = 2) :
+private theorem quadraticUnitNormQuotient_card_le (hd : Module.finrank F K = 2) :
     Nat.card (quadraticUnitNormQuotient F K) ≤
       2 ^ (NumberField.Units.rank F + 1) :=
   (numberFieldUnit_exponent_two_quotient F
@@ -88,7 +88,7 @@ variable {R K : Type*} [CommRing R] [IsDomain R] [Field K]
   [Algebra R K] [IsFractionRing R K]
 
 omit [IsDomain R] in
-theorem principalIdeal_of_ring_unit (u : Rˣ) :
+private theorem principalIdeal_of_ring_unit (u : Rˣ) :
     toPrincipalIdeal R K (Units.map (algebraMap R K).toMonoidHom u) = 1 := by
   apply Units.ext
   simp only [coe_toPrincipalIdeal, Units.coe_map, Units.val_one]
@@ -102,7 +102,7 @@ variable (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K]
   [Algebra F K]
 
 omit [NumberField F] in
-theorem fractionField_ringOfIntegers_automorphism (σ : K ≃ₐ[F] K) :
+private theorem fractionField_ringOfIntegers_automorphism (σ : K ≃ₐ[F] K) :
     (IsFractionRing.ringEquivOfRingEquiv
       (RingOfIntegers.mapAlgEquiv σ).toRingEquiv : K ≃+* K) = σ.toRingEquiv := by
   apply RingEquiv.ext
@@ -136,7 +136,7 @@ theorem mem_stronglyAmbiguousClassGroup (σ : K ≃ₐ[F] K) (c : ClassGroup (�
 
 /-- A scalar comparison whose norm is the norm of an integer unit has
 trivial obstruction and admits an invariant representative. -/
-theorem exists_invariant_ideal_of_scalar_norm_unit
+private theorem exists_invariant_ideal_of_scalar_norm_unit
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     (I : (FractionalIdeal (𝓞 K)⁰ K)ˣ) (a : Kˣ) (u : (𝓞 K)ˣ)
     (hI : fractionalIdealUnitAction (K := K)

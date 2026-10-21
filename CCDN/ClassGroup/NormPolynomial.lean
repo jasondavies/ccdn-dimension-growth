@@ -46,7 +46,7 @@ def signedNormCurvePolynomial (β : 𝓞 K) (ε : ℤ) : MvPolynomial (Fin 2) �
   (bivariatePolynomialEquiv ℤ).symm
     (X ^ 2 - C (C ε * integerNormPolynomial K β))
 
-lemma signedNormCurvePolynomial_eval (β : 𝓞 K) (ε x y : ℤ) :
+private lemma signedNormCurvePolynomial_eval (β : 𝓞 K) (ε x y : ℤ) :
     MvPolynomial.eval ![y, x] (signedNormCurvePolynomial K β ε) =
       y ^ 2 - ε * Algebra.norm ℤ (algebraMap ℤ (𝓞 K) x - β) := by
   rw [← bivariatePolynomialEquiv_eval _ y x]

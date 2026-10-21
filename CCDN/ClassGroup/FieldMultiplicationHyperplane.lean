@@ -20,7 +20,7 @@ noncomputable section
 
 variable {F K : Type*} [Field F] [Field K] [Algebra F K]
 
-theorem scalar_of_preserves_hyperplane (ℓ : K →ₗ[F] F) (hℓ : ℓ ≠ 0)
+private theorem scalar_of_preserves_hyperplane (ℓ : K →ₗ[F] F) (hℓ : ℓ ≠ 0)
     (a : K) (ha : ∀ b : K, ℓ b = 0 → ℓ (a * b) = 0) :
     ∃ c : F, a = algebraMap F K c := by
   obtain ⟨z, hz⟩ : ∃ z : K, ℓ z ≠ 0 := by
@@ -45,7 +45,7 @@ theorem scalar_of_preserves_hyperplane (ℓ : K →ₗ[F] F) (hℓ : ℓ ≠ 0)
   rw [mul_inv_cancel_left₀ (sub_ne_zero.mpr h), hu] at hh
   exact one_ne_zero hh
 
-theorem exists_kernel_multiplication_witness
+private theorem exists_kernel_multiplication_witness
     (ℓ : K →ₗ[F] F) (hℓ : ℓ ≠ 0)
     (a : K) (ha : a ∉ Set.range (algebraMap F K)) :
     ∃ b : K, ℓ b = 0 ∧ ℓ (a * b) ≠ 0 := by

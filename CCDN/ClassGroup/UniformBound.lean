@@ -29,11 +29,11 @@ open NumberField
 
 variable (K : Type*) [Field K] [NumberField K]
 
-lemma one_le_log_discr_natAbs_add_one : 1 ≤ Real.log ((discr K).natAbs : ℝ) + 1 := by
+private lemma one_le_log_discr_natAbs_add_one : 1 ≤ Real.log ((discr K).natAbs : ℝ) + 1 := by
   rw [numberField_discriminant_natAbs_cast]
   linarith [Real.log_nonneg (one_le_abs_discr K)]
 
-theorem index_two_subfield_degree
+private theorem index_two_subfield_degree
     (hn : 3 ≤ Module.finrank ℚ K) (L : IntermediateField ℚ K)
     (hL : Module.finrank L K = 2) :
     Module.finrank ℚ L = Module.finrank ℚ K / 2 ∧
@@ -43,7 +43,7 @@ theorem index_two_subfield_degree
   rw [hL] at ht
   omega
 
-theorem no_index_two_classGroup_log_one_bound
+private theorem no_index_two_classGroup_log_one_bound
     (hn : 2 ≤ Module.finrank ℚ K)
     (hnoTwo : ∀ L : IntermediateField ℚ K, Module.finrank L K ≠ 2) :
     (classGroupTwoTorsionCard K : ℝ) ≤

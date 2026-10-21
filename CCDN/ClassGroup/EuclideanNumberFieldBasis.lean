@@ -40,7 +40,7 @@ theorem exists_field_basis_of_euclidean_lattice_basis
     congrFun (coe_basisOfLinearIndependentOfCardEqFinrank' _ hi hcard) i
   exact ⟨v, q, hq, fun i => (congrArg (euclideanNumberFieldEmbedding K) (hq i)).trans (hv i)⟩
 
-theorem euclidean_field_basis_repr
+private theorem euclidean_field_basis_repr
     {ι : Type*} [Fintype ι]
     (b : Basis ι ℝ (mixedEmbedding.euclidean.mixedSpace K)) (q : Basis ι ℚ K)
     (hmap : ∀ i, euclideanNumberFieldEmbedding K (q i) = b i) (x : K) (i : ι) :

@@ -32,7 +32,7 @@ discriminant-root scale for its largest minimum.
 namespace CCDN
 noncomputable section
 
-theorem largest_minimum_le_discriminant_root
+private theorem largest_minimum_le_discriminant_root
     {n : ℕ} (hn : 0 < n) {M P D : ℝ} (hP : 0 ≤ P) (hD : 0 ≤ D)
     (hminimum : M ^ n ≤ P ^ 2)
     (hproduct : P ≤ Real.sqrt n * (n : ℝ) ^ n * Real.sqrt D) :
@@ -53,7 +53,7 @@ theorem largest_minimum_le_discriminant_root
   rw [mul_pow, ← pow_mul, hroot]
   exact hminimum.trans (hsq'.trans (mul_le_mul_of_nonneg_right hdegrees hD))
 
-theorem sqrt_degree_le_discriminant_root
+private theorem sqrt_degree_le_discriminant_root
     {n : ℕ} (hn : 0 < n) {D : ℝ} (hD : 1 ≤ D) :
     Real.sqrt n ≤ (n : ℝ) ^ 3 * D ^ (1 / (n : ℝ)) := by
   have hn1 : (1 : ℝ) ≤ n := by exact_mod_cast hn
@@ -102,7 +102,7 @@ open scoped NumberField
 variable (K : Type*) [Field K] [NumberField K]
 
 open Classical in
-theorem euclidean_prescribed_basis_last_minimum_pow
+private theorem euclidean_prescribed_basis_last_minimum_pow
     {n : ℕ} (b : Basis (Fin (n + 2)) ℝ (mixedEmbedding.euclidean.mixedSpace K))
     (hb : IsPrescribedGreedyLatticeFamily (mixedEmbedding.euclidean.integerLattice K)
       (euclideanNumberFieldEmbedding K 1) b) :
@@ -136,7 +136,7 @@ theorem euclidean_prescribed_basis_last_minimum_pow
   simpa only [Fintype.card_fin, hmap] using hh
 
 open Classical in
-theorem exists_numberField_short_basis_of_degree
+private theorem exists_numberField_short_basis_of_degree
     (n : ℕ) (hn : Module.finrank ℚ K = n + 2) :
     ∃ b : Basis (Fin (n + 2)) ℝ (mixedEmbedding.euclidean.mixedSpace K),
       (∀ i, b i ∈ mixedEmbedding.euclidean.integerLattice K) ∧

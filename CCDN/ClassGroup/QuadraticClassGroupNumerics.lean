@@ -17,7 +17,7 @@ margin between the base-field and extension-field estimates. -/
 namespace CCDN
 noncomputable section
 
-theorem primeFactors_polylog_subpower (a k : ℕ) {ε : ℝ} (hε : 0 < ε) :
+private theorem primeFactors_polylog_subpower (a k : ℕ) {ε : ℝ} (hε : 0 < ε) :
     ∃ C : ℝ, 0 < C ∧ ∀ D : ℕ, 1 ≤ D →
       (2 : ℝ) ^ (a * D.primeFactors.card) * (Real.log (D : ℝ) + 1) ^ k ≤
         C * (D : ℝ) ^ ε := by

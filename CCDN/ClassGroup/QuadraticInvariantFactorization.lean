@@ -25,7 +25,7 @@ variable (F K : Type*) [Field F] [Field K] [NumberField F] [NumberField K]
 def IsQuadraticRamifiedPrime (Q : Ideal (𝓞 K)) : Prop :=
   Q.IsPrime ∧ Q ≠ ⊥ ∧ Q.ramificationIdx (𝓞 F) = 2
 
-theorem quadratic_ramified_prime_fixed
+private theorem quadratic_ramified_prime_fixed
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     {Q : Ideal (𝓞 K)} (hQ : IsQuadraticRamifiedPrime F K Q) :
     σ • Q = Q := by
@@ -35,7 +35,7 @@ theorem quadratic_ramified_prime_fixed
   have he := hQ.2.2
   omega
 
-theorem quadratic_ramified_prime_square
+private theorem quadratic_ramified_prime_square
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     {Q : Ideal (𝓞 K)} (hQ : IsQuadraticRamifiedPrime F K Q) :
     Q ^ 2 = (Q.under (𝓞 F)).map (algebraMap (𝓞 F) (𝓞 K)) := by
@@ -46,7 +46,7 @@ theorem quadratic_ramified_prime_square
   exact hh.symm
 
 omit [NumberField F] [FiniteDimensional F K] in
-lemma invariant_ideal_remainder
+private lemma invariant_ideal_remainder
     (σ : K ≃ₐ[F] K) {I A R : Ideal (𝓞 K)}
     (hI : σ • I = I) (hA : σ • A = A) (hA0 : A ≠ 0)
     (he : I = A * R) : σ • R = R := by
@@ -55,7 +55,7 @@ lemma invariant_ideal_remainder
     A * (σ • R) = σ • (A * R) := by rw [smul_mul', hA]
     _ = A * R := by rw [← he, hI, he]
 
-theorem invariant_integral_ideal_ramified_multiset
+private theorem invariant_integral_ideal_ramified_multiset
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     (I : Ideal (𝓞 K)) (hI : I ≠ 0) (hinv : σ • I = I) :
     ∃ (J : Ideal (𝓞 F)) (s : Multiset (Ideal (𝓞 K))),
@@ -134,7 +134,7 @@ theorem invariant_integral_ideal_ramified_multiset
         hIeq, hJs]
       ac_rfl
 
-theorem quadratic_ramified_multiset_parity
+private theorem quadratic_ramified_multiset_parity
     (hd : Module.finrank F K = 2) (σ : K ≃ₐ[F] K) (hσ : σ ≠ 1)
     (s : Multiset (Ideal (𝓞 K)))
     (hs : ∀ Q ∈ s, IsQuadraticRamifiedPrime F K Q) :

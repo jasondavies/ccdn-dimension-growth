@@ -20,7 +20,7 @@ noncomputable section
 open Polynomial NumberField IntermediateField Module
 open scoped IntermediateField
 
-lemma rootMultiplicity_pow_exact {F : Type*} [Field F] (p : F[X]) (hp : p ≠ 0)
+private lemma rootMultiplicity_pow_exact {F : Type*} [Field F] (p : F[X]) (hp : p ≠ 0)
     (a : F) (n : ℕ) :
     rootMultiplicity a (p ^ n) = n * rootMultiplicity a p := by
   induction n with
@@ -29,7 +29,7 @@ lemma rootMultiplicity_pow_exact {F : Type*} [Field F] (p : F[X]) (hp : p ≠ 0)
     rw [pow_succ, rootMultiplicity_mul (mul_ne_zero (pow_ne_zero n hp) hp), ih]
     ring
 
-lemma odd_rootMultiplicity_not_square_ratFunc {F : Type*} [Field F]
+private lemma odd_rootMultiplicity_not_square_ratFunc {F : Type*} [Field F]
     (p : F[X]) (hp : p ≠ 0) (a : F) (ha : Odd (rootMultiplicity a p))
     (b : RatFunc F) :
     b ^ 2 ≠ algebraMap F[X] (RatFunc F) p := by
@@ -56,7 +56,7 @@ lemma odd_rootMultiplicity_not_square_ratFunc {F : Type*} [Field F]
   obtain ⟨k, hk⟩ := ha
   omega
 
-lemma double_cover_irreducible_of_odd_root_multiplicity {F : Type*} [Field F]
+private lemma double_cover_irreducible_of_odd_root_multiplicity {F : Type*} [Field F]
     (p : F[X]) (hp : p ≠ 0) (a : F) (ha : Odd (rootMultiplicity a p)) :
     Irreducible (X ^ 2 - C p : F[X][X]) := by
   apply (Polynomial.Monic.irreducible_iff_irreducible_map_fraction_map
@@ -65,7 +65,7 @@ lemma double_cover_irreducible_of_odd_root_multiplicity {F : Type*} [Field F]
   exact X_pow_sub_C_irreducible_of_prime Nat.prime_two
     (odd_rootMultiplicity_not_square_ratFunc p hp a ha)
 
-lemma separable_odd_power_double_cover_irreducible
+private lemma separable_odd_power_double_cover_irreducible
     {F : Type*} [Field F] [IsAlgClosed F]
     (p : F[X]) (hp : p.Separable) (hd : 0 < p.natDegree)
     {c : F} (hc : c ≠ 0) {e : ℕ} (he : Odd e) :
