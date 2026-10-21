@@ -77,7 +77,7 @@ theorem zero_column_polynomial_locus_closure
     x ∈ closure {y : Fin r × Fin n → K |
       (∀ i j, j ∈ Z → y (i,j) = 0) ∧
       LinearIndependent K (fun i : Fin r => fun j : Fin n => y (i,j)) ∧ eval y p ≠ 0} := by
-  obtain ⟨c,hc,hd⟩ := exists_nonzero_minor_of_independent_rows A hA
+  obtain ⟨c,hc,hd⟩ := Matrix.exists_det_submatrix_ne_zero_of_linearIndependent_row A hA
   let minor := matrixMinorPolynomial K ⟨c,hc⟩
   have hm : zeroColumnSubstitution Z minor ≠ 0 := by
     intro hz

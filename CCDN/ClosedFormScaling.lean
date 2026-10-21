@@ -103,7 +103,8 @@ theorem closedForm_rank_drop_of_constant_leading
     (hl : f.leadingCoeff = C a) (hred : ¬Irreducible f)
     (hdeg : f.natDegree = d) (htotal : bivariateTotalDegree f ≤ d) :
     (closedFormCoefficientMatrix d f).rank + 2 ≤ 2 * d ^ 2 :=
-  closedForm_rank_drop_of_constant_leading_of_natCast d hd (natCast_ne_zero_of_lt_char p hdp)
+  closedForm_rank_drop_of_constant_leading_of_natCast d hd
+    (fun _ hn hnd => CharP.natCast_ne_zero_of_lt F hn.ne' (hnd.trans_lt hdp))
     a ha f hl hred hdeg htotal
 
 /-- The characteristic-zero reducibility criterion likewise only needs a nonzero

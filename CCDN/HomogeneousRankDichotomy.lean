@@ -93,7 +93,7 @@ theorem homogeneous_evaluation_rank_eq {K : Type*} [Field K]
     exact Subtype.ext (Subtype.mk.inj h)
   have hdim := LinearMap.finrank_range_of_inj hinj
   rw [LinearMap.range_domRestrict, homogeneousMultiples_finrank f hf0,
-    finrank_homogeneousSubmodule] at hdim
+    finrank_homogeneousSubmodule_fin] at hdim
   have h := (homogeneousEvaluationMatrix K n M points).mulVecLin.finrank_range_add_finrank_ker
   rw [homogeneous_evaluation_kernel_eq_multiples f hf hf0 hdM points hzero hrel, hdim] at h
   simpa only [Matrix.rank, Module.finrank_pi, Module.finrank_self, mul_one, Fintype.card_fin] using h

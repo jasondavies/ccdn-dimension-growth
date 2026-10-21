@@ -1508,7 +1508,7 @@
       "declaration": "CCDN.exists_explicit_noether_forms",
       "line": 18,
       "kind": "theorem",
-      "sha256": "d4275cd3c6456c1a2bdfce6355c5fcbec473654b25080084f7090fc6fef1e9df"
+      "sha256": "3a07003cb0616698ea74d35ea1423ceec46cdedf661d52ed332ff51069ef5703"
     },
     {
       "id": "e032",
@@ -1516,7 +1516,7 @@
       "declaration": "CCDN.universalNoetherForms",
       "line": 44,
       "kind": "def",
-      "sha256": "f1c3f05e4e23d6c5bc978becd91649ac905f48c4f7d7eebd702b03ee151299ad"
+      "sha256": "db9f3d6ce1f243bbea30584113839d415e7df4af30e313f9c42b7b6a4dae6144"
     },
     {
       "id": "e033",
@@ -1524,7 +1524,7 @@
       "declaration": "CCDN.universalNoetherForms_vanish",
       "line": 81,
       "kind": "theorem",
-      "sha256": "f1c3f05e4e23d6c5bc978becd91649ac905f48c4f7d7eebd702b03ee151299ad"
+      "sha256": "db9f3d6ce1f243bbea30584113839d415e7df4af30e313f9c42b7b6a4dae6144"
     },
     {
       "id": "e034",
@@ -1532,7 +1532,7 @@
       "declaration": "CCDN.universalNoetherForms_nonvanishing",
       "line": 93,
       "kind": "theorem",
-      "sha256": "f1c3f05e4e23d6c5bc978becd91649ac905f48c4f7d7eebd702b03ee151299ad"
+      "sha256": "db9f3d6ce1f243bbea30584113839d415e7df4af30e313f9c42b7b6a4dae6144"
     },
     {
       "id": "e035",
@@ -2548,7 +2548,7 @@
       "declaration": "CCDN.exists_bounded_row_separator",
       "line": 86,
       "kind": "theorem",
-      "sha256": "c43a2d2dc6bf961e666b3753636fb2a918e3a78f10626b7ab7d8e0a9faa5cee1"
+      "sha256": "eaa5a48facfaf11570aa9457b3ae5f2f73ac93dc23bec6c8910c6514f1ec0a3f"
     },
     {
       "id": "e162",
@@ -2628,7 +2628,7 @@
       "declaration": "CCDN.ambientNoetherForm_coefficientL1_le",
       "line": 63,
       "kind": "theorem",
-      "sha256": "2ad8abaf31a8f53ab5d1a6ade2e24e82f3b9ef0d02466f383c0bf49a36e008d1"
+      "sha256": "6e38a5bdf950493f51d24f1de73ac9b2765abb858d64f18a2c2a2172f98f8148"
     },
     {
       "id": "e172",
@@ -2812,7 +2812,7 @@
       "declaration": "CCDN.stronglyAmbiguousTwoTorsion_card_le_discriminant_primes",
       "line": 70,
       "kind": "theorem",
-      "sha256": "0bc106e07fdad54e8bbc7ed003d0704b1b27897d24764b71e93a0a7f47dc6627"
+      "sha256": "462839b19496c079c0b5f44057e1aafeb2eb1d7a9bd3946484803f5cf7bf4d64"
     },
     {
       "id": "e195",

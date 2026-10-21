@@ -22,10 +22,10 @@ open MvPolynomial
 /-- Bounded exponent sets are finite. -/
 instance finite_boundedStandardExponents {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) (N : ℕ) :
-    Finite (boundedStandardExponents I m N) := by
+    Finite (Ideal.boundedStandardExponents I m N) := by
   classical
   let e := boundedExponentEquivSym σ N
-  let f : boundedStandardExponents I m N → Sym (Option σ) N :=
+  let f : Ideal.boundedStandardExponents I m N → Sym (Option σ) N :=
     fun a => e ⟨a.val, a.property.2⟩
   apply Finite.of_injective f
   intro a b h
@@ -37,15 +37,15 @@ instance finite_boundedStandardExponents {K σ : Type*} [Field K] [Fintype σ]
 independent quotient classes in degree at most `2B`. -/
 theorem standard_square_le_filtered {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (B : ℕ)
-    {a : σ →₀ ℕ} (ha : a ∈ standardExponents I MonomialOrder.degLex)
+    {a : σ →₀ ℕ} (ha : a ∈ Ideal.standardExponents I MonomialOrder.degLex)
     {i j : σ} (hij : i ≠ j) (hi : B ≤ a i) (hj : B ≤ a j) :
     (B + 1) ^ 2 ≤ Module.finrank K (filteredCoordinateSpace I (2 * B)) := by
   classical
   let f : Fin (B + 1) × Fin (B + 1) →
-      boundedStandardExponents I MonomialOrder.degLex (2 * B) := fun t =>
+      Ideal.boundedStandardExponents I MonomialOrder.degLex (2 * B) := fun t =>
     ⟨Finsupp.single i t.1.val + Finsupp.single j t.2.val, by
       constructor
-      · apply standardExponents_lower I MonomialOrder.degLex _ ha
+      · apply Ideal.isLowerSet_standardExponents I MonomialOrder.degLex _ ha
         intro k
         by_cases hki : k = i
         · subst k
@@ -74,7 +74,7 @@ threshold. This excludes every two-dimensional monomial quadrant. -/
 theorem standard_at_most_one_large {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (C : ℕ)
     (hbound : ∀ N ≥ 14, Module.finrank K (filteredCoordinateSpace I N) ≤ C * (N + 2))
-    {a : σ →₀ ℕ} (ha : a ∈ standardExponents I MonomialOrder.degLex)
+    {a : σ →₀ ℕ} (ha : a ∈ Ideal.standardExponents I MonomialOrder.degLex)
     {i j : σ} (hi : 2 * C + 14 ≤ a i) (hj : 2 * C + 14 ≤ a j) : i = j := by
   by_contra hij
   have hs := standard_square_le_filtered I (2 * C + 14) ha hij hi hj

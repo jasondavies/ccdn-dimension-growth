@@ -1,6 +1,8 @@
 module
 
 public import CCDN.BivariateTotalDegree
+public import CCDN.ForMathlib.NatCast
+public import CCDN.ForMathlib.Polynomial
 
 /-! Rank drop from coprime factor decompositions when the degrees up to `d` are nonzero in
 the base field, as happens below the characteristic and in characteristic zero. Coprimality is imposed in the univariate
@@ -10,30 +12,6 @@ fraction-field ring, where factorization can supply it. -/
 namespace CCDN
 noncomputable section
 open Polynomial
-
-/-- A polynomial of positive degree `n` with `(n : R) ≠ 0` has nonzero derivative. -/
-lemma derivative_ne_zero_of_natDegree_cast_ne_zero {R : Type*} [CommRing R] [IsDomain R]
-    (f : R[X]) (hpos : 0 < f.natDegree) (hn : (f.natDegree : R) ≠ 0) :
-    f.derivative ≠ 0 := by
-  have hf : f ≠ 0 := by intro h; simp [h] at hpos
-  intro hz
-  have hc := congrArg (fun g : R[X] => g.coeff (f.natDegree - 1)) hz
-  rw [coeff_derivative, show f.natDegree - 1 + 1 = f.natDegree by omega, coeff_zero] at hc
-  have he : ((f.natDegree - 1 : ℕ) : R) + 1 = (f.natDegree : R) := by
-    rw [← Nat.cast_add_one, Nat.sub_add_cancel hpos]
-  rw [he] at hc
-  exact (mul_ne_zero (Polynomial.leadingCoeff_ne_zero.mpr hf) hn) hc
-
-/-- A natural number that is nonzero in a field is nonzero in every nontrivial algebra. -/
-lemma natCast_ne_zero_of_algebra {F R : Type*} [Field F] [CommRing R] [Nontrivial R]
-    [Algebra F R] {n : ℕ} (h : (n : F) ≠ 0) : (n : R) ≠ 0 := by
-  rw [← map_natCast (algebraMap F R)]
-  exact (_root_.map_ne_zero _).mpr h
-
-/-- Positive natural numbers below the characteristic are nonzero. -/
-lemma natCast_ne_zero_of_lt_char {F : Type*} [Field F] (p : ℕ) [CharP F p] {d : ℕ}
-    (hdp : d < p) : ∀ n : ℕ, 0 < n → n ≤ d → (n : F) ≠ 0 := fun n hn hnd h =>
-  Nat.not_dvd_of_pos_of_lt hn (by omega) ((CharP.cast_eq_zero_iff F p n).mp h)
 
 /-- A bounded extra solution outside the scalar gradient span forces rank drop. -/
 theorem closedForm_rank_drop_of_extra_form {F : Type*} [Field F]
@@ -76,15 +54,15 @@ theorem closedForm_rank_drop_of_coprime_factors
   have hgR : Irreducible (g.map φ) := hgm.irreducible_iff_irreducible_map_fraction_map.mp hg
   have hgg : IsCoprime (g.map φ) (g.map φ).derivative :=
     (separable_iff_derivative_ne_zero hgR).mpr
-      (derivative_ne_zero_of_natDegree_cast_ne_zero _ (hgnat ▸ hgpos) (by
+      (derivative_ne_zero_of_natCast_natDegree_ne_zero (by
         rw [hgnat]; exact natCast_ne_zero_of_algebra (hchar _ hgpos (by omega))))
-  have hh' := derivative_ne_zero_of_natDegree_cast_ne_zero (h.map φ) (hhnat ▸ hhpos) (by
+  have hh' := derivative_ne_zero_of_natCast_natDegree_ne_zero (f := h.map φ) (by
     rw [hhnat]; exact natCast_ne_zero_of_algebra (hchar _ hhpos (by omega)))
   have hgd : 0 < bivariateTotalDegree g := hgpos.trans_le (bivariate_natDegree_le_totalDegree g)
   obtain ⟨hpgrid, hqgrid⟩ := bivariate_factor_form_in_grid d g h hg.ne_zero hh hgd htotal
   apply closedForm_rank_drop_of_extra_form d hd (g * h)
     (h * g.derivative) (h * (bivariateCoefficientDerivative F) g) htotal
-    (derivative_ne_zero_of_natDegree_cast_ne_zero _ (hdeg ▸ hd) (by
+    (derivative_ne_zero_of_natCast_natDegree_ne_zero (by
       rw [hdeg]; exact natCast_ne_zero_of_algebra (hchar d hd le_rfl))) hpgrid hqgrid
   · have he := bivariate_factor_closed_form g h
     change _ - _ - _ + _ = (0 : F[X][X])
@@ -116,13 +94,13 @@ theorem closedForm_rank_drop_of_repeated_factor
   have hgR : Irreducible (g.map φ) := hgm.irreducible_iff_irreducible_map_fraction_map.mp hg
   have hgg : IsCoprime (g.map φ) (g.map φ).derivative :=
     (separable_iff_derivative_ne_zero hgR).mpr
-      (derivative_ne_zero_of_natDegree_cast_ne_zero _ (hgnat ▸ hgpos) (by
+      (derivative_ne_zero_of_natCast_natDegree_ne_zero (by
         rw [hgnat]; exact natCast_ne_zero_of_algebra (hchar _ hgpos (by omega))))
   have hgd : 0 < bivariateTotalDegree g := hgpos.trans_le (bivariate_natDegree_le_totalDegree g)
   obtain ⟨hpgrid, hqgrid⟩ := bivariate_power_factor_form_in_grid d k g h hg.ne_zero hh hgd htotal
   apply closedForm_rank_drop_of_extra_form d hd (g ^ (k + 2) * h)
     (g ^ k * h * g.derivative) (g ^ k * h * (bivariateCoefficientDerivative F) g) htotal
-    (derivative_ne_zero_of_natDegree_cast_ne_zero _ (hdeg ▸ hd) (by
+    (derivative_ne_zero_of_natCast_natDegree_ne_zero (by
       rw [hdeg]; exact natCast_ne_zero_of_algebra (hchar d hd le_rfl))) hpgrid hqgrid
   · have he := bivariate_power_factor_closed_form g h k
     change _ - _ - _ + _ = (0 : F[X][X])

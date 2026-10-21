@@ -101,8 +101,8 @@ theorem originLayer_hilbert_bound {K : Type*} [Field K] {n μ k : ℕ}
     obtain ⟨u, hu, rfl⟩ := Submodule.mem_map.mp hx
     exact Ideal.Quotient.eq_zero_iff_mem.mpr (initial_form_multiple_mem_truncation hf hk hu)
   have h := finrank_map_add_kernel_subspace_le φ V U hUV hker
-  rw [homogeneousMultiples_finrank _ hμ, finrank_homogeneousSubmodule,
-    finrank_homogeneousSubmodule] at h
+  rw [homogeneousMultiples_finrank _ hμ, finrank_homogeneousSubmodule_fin,
+    finrank_homogeneousSubmodule_fin] at h
   rwa [originLayer_eq_homogeneousCoordinateSpace]
 
 instance originLayer_finite {K σ : Type*} [Field K] [Finite σ]
@@ -119,7 +119,7 @@ lemma originLayer_finrank_le {K : Type*} [Field K] {n : ℕ}
   rw [originLayer_eq_homogeneousCoordinateSpace]
   let _ : Module.Finite K (homogeneousSubmodule (Fin (n + 1)) K k) :=
     Module.Finite.of_fg (homogeneousSubmodule_fg _ _ _)
-  exact (Submodule.finrank_map_le _ _).trans_eq (finrank_homogeneousSubmodule n k)
+  exact (Submodule.finrank_map_le _ _).trans_eq (finrank_homogeneousSubmodule_fin n k)
 
 /-- In the plane-curve case each origin-adic layer has dimension at most
 its multiplicity. This is the bound needed for the quadratic local exponent. -/

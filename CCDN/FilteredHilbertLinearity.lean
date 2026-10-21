@@ -127,12 +127,12 @@ theorem standard_card_succ {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (N : ℕ) :
     Module.finrank K (filteredCoordinateSpace I (N + 1)) =
       Module.finrank K (filteredCoordinateSpace I N) +
-      Nat.card {a : σ →₀ ℕ // a ∈ standardExponents I MonomialOrder.degLex ∧
+      Nat.card {a : σ →₀ ℕ // a ∈ Ideal.standardExponents I MonomialOrder.degLex ∧
         Finsupp.degree a = N + 1} := by
   classical
-  let S := standardExponents I MonomialOrder.degLex
-  let A := boundedStandardExponents I MonomialOrder.degLex (N + 1)
-  let B := boundedStandardExponents I MonomialOrder.degLex N
+  let S := Ideal.standardExponents I MonomialOrder.degLex
+  let A := Ideal.boundedStandardExponents I MonomialOrder.degLex (N + 1)
+  let B := Ideal.boundedStandardExponents I MonomialOrder.degLex N
   let E := {a : σ →₀ ℕ // a ∈ S ∧ Finsupp.degree a = N + 1}
   let φ : A → B ⊕ E := fun a =>
     if h : Finsupp.degree a.val ≤ N then Sum.inl ⟨a.val, a.property.1, h⟩
@@ -172,10 +172,10 @@ theorem filteredCoordinateSpace_eventually_linear {K σ : Type*} [Field K] [Fint
   classical
   let B := 2 * C + 14
   obtain ⟨N, hN⟩ := lowerSet_shell_card_eventually_constant
-    (standardExponents I MonomialOrder.degLex) (standardExponents_lower I MonomialOrder.degLex)
+    (Ideal.standardExponents I MonomialOrder.degLex) (Ideal.isLowerSet_standardExponents I MonomialOrder.degLex)
     B (by dsimp [B]; omega)
     (fun a ha i j hi hj => standard_at_most_one_large I C hbound ha hi hj)
-  let d := Nat.card (fullExponentRays (standardExponents I MonomialOrder.degLex) B)
+  let d := Nat.card (fullExponentRays (Ideal.standardExponents I MonomialOrder.degLex) B)
   have hstep (n : ℕ) (hn : N ≤ n) :
       Module.finrank K (filteredCoordinateSpace I (n + 1)) =
         Module.finrank K (filteredCoordinateSpace I n) + d := by

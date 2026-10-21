@@ -14,12 +14,12 @@ open MvPolynomial Finset
 
 def standardMonomialPrefix {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) (N : ℕ) :
-    Finset (σ →₀ ℕ) := (Set.toFinite (boundedStandardExponents I m N)).toFinset
+    Finset (σ →₀ ℕ) := (Set.toFinite (Ideal.boundedStandardExponents I m N)).toFinset
 
 @[simp] lemma mem_standardMonomialPrefix {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) (N : ℕ) (a : σ →₀ ℕ) :
     a ∈ standardMonomialPrefix I m N ↔
-      a ∈ standardExponents I m ∧ Finsupp.degree a ≤ N := by
+      a ∈ Ideal.standardExponents I m ∧ Finsupp.degree a ≤ N := by
   simp only [standardMonomialPrefix, Set.Finite.mem_toFinset]
   rfl
 

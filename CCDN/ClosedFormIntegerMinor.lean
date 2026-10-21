@@ -2,7 +2,7 @@ module
 
 public import CCDN.ClosedFormRank
 public import CCDN.ClosedFormBaseChange
-public import CCDN.FiniteRowMinor
+public import CCDN.ForMathlib.MatrixRank
 
 /-! A nonzero integer minor of the closed-form coefficient matrix.
 Rank drop after reduction forces divisibility of this same integer. The

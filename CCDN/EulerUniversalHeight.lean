@@ -1,7 +1,7 @@
 module
 
 public import CCDN.EulerSparseMatrix
-public import CCDN.IntegerPolynomialL1
+public import CCDN.ForMathlib.IntegerPolynomialL1
 
 /-! The sharp printed coefficient-sum bound for the plane Noether minors:
 each entry has l1 norm at most d, hence the order d²−1 determinant has

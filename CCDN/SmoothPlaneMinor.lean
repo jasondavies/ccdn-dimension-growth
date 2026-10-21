@@ -45,7 +45,7 @@ theorem exists_closedForm_minor_of_smooth_plane_point
     apply (bivariateTotalDegree_map_le φ _).trans
     simpa only [bivariateTotalDegree, AlgEquiv.symm_apply_apply] using htotal
   have hr := closedForm_coefficient_rank_lower_of_char (ell := p) d hd g hgi hgm hgd hgt hchar
-  obtain ⟨a, c, ha, hc, hdet⟩ := exists_nonzero_minor_of_rank_le
+  obtain ⟨a, c, ha, hc, hdet⟩ := Matrix.exists_det_submatrix_ne_zero_of_le_rank
     (closedFormCoefficientMatrix d g) (2 * d ^ 2 - 1) (by omega)
   refine ⟨a, c, ha, hc, ?_⟩
   intro he

@@ -25,7 +25,7 @@ lemma linearIndependent_matrix_rows_map
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (hA : LinearIndependent K A.row) :
     LinearIndependent L (A.map φ).row := by
-  obtain ⟨c, hc, hd⟩ := exists_nonzero_minor_of_independent_rows A hA
+  obtain ⟨c, hc, hd⟩ := Matrix.exists_det_submatrix_ne_zero_of_linearIndependent_row A hA
   apply LinearIndependent.of_comp (LinearMap.funLeft L L c)
   apply Matrix.linearIndependent_rows_of_det_ne_zero
   change (φ.mapMatrix (A.submatrix id c)).det ≠ 0

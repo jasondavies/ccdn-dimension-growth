@@ -1,19 +1,38 @@
+/-
+Copyright (c) 2026 Jason Davies. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Jason Davies
+-/
 module
 
 public import Mathlib.FieldTheory.PrimitiveElement
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import Mathlib.Data.Multiset.Powerset
 
-/-! A degree-only bound for the intermediate fields of a finite
-separable extension. Monic divisors are encoded by root submultisets in
-an algebraic closure, so their number is at most two to the degree. -/
+/-!
+# Counting monic divisors and intermediate fields
+
+Monic divisors of a nonzero polynomial are determined by their multisets of roots in an
+algebraic closure, so there are at most `2 ^ natDegree` of them. Through a primitive element,
+the intermediate fields of a finite separable extension inject into the monic divisors of a
+minimal polynomial.
+
+## Main results
+
+* `Polynomial.card_monic_dvd_le_two_pow_natDegree`: a nonzero polynomial `f` over a field has at
+  most `2 ^ f.natDegree` monic divisors.
+* `IntermediateField.card_le_two_pow_finrank`: a finite separable extension `E / F` has at most
+  `2 ^ finrank F E` intermediate fields.
+-/
 
 @[expose] public section
-namespace CCDN
-noncomputable section
+
 open Module Polynomial IntermediateField
 
-theorem monic_divisors_card_le_two_pow_natDegree
+namespace Polynomial
+
+/-- A nonzero polynomial over a field has at most `2 ^ natDegree` monic divisors. -/
+theorem card_monic_dvd_le_two_pow_natDegree
     {K : Type*} [Field K] (f : K[X]) (hf : f ≠ 0) :
     Nat.card {g : K[X] // g.Monic ∧ g ∣ f} ≤ 2 ^ f.natDegree := by
   classical
@@ -42,9 +61,13 @@ theorem monic_divisors_card_le_two_pow_natDegree
     _ ≤ 2 ^ f.natDegree :=
       Nat.pow_le_pow_right (by omega) (Polynomial.card_roots_map_le_natDegree _)
 
+end Polynomial
+
+namespace IntermediateField
+
 /-- The number of intermediate fields depends only on the extension
 degree, without a chosen normal closure or Galois-group estimate. -/
-theorem intermediateField_card_le_two_pow_finrank
+theorem card_le_two_pow_finrank
     (F E : Type*) [Field F] [Field E] [Algebra F E]
     [FiniteDimensional F E] [Algebra.IsSeparable F E] :
     Nat.card (IntermediateField F E) ≤ 2 ^ Module.finrank F E := by
@@ -69,8 +92,7 @@ theorem intermediateField_card_le_two_pow_finrank
     rw [Polynomial.natDegree_map]
     exact (Field.primitive_element_iff_minpoly_natDegree_eq F α).mp hα
   exact (Nat.card_le_card_of_injective g hg).trans
-    (hdeg ▸ monic_divisors_card_le_two_pow_natDegree f
+    (hdeg ▸ Polynomial.card_monic_dvd_le_two_pow_natDegree f
       (Polynomial.map_ne_zero (minpoly.ne_zero_of_finite F α)))
 
-end
-end CCDN
+end IntermediateField

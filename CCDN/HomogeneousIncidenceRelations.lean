@@ -51,7 +51,7 @@ theorem homogeneous_incidence_relation {K : Type*} [Field K] {n r t : ℕ}
   apply Finset.sum_congr rfl
   intro i _
   rw [mul_comm (p i), show t + 1 = 1 + t by omega,
-    homogeneousComponent_mul_left (incidenceLinearForm_homogeneous U i)]
+    homogeneousComponent_mul_of_isHomogeneous_left (incidenceLinearForm_homogeneous U i)]
 
 end
 end CCDN

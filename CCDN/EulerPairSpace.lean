@@ -100,7 +100,7 @@ theorem finrank_eulerPairSpace {F : Type*} [Field F] (k : ℕ) :
     Module.Finite.of_fg (homogeneousSubmodule_fg _ _ _)
   unfold EulerPairSpace
   rw [Module.finrank_prod, Module.finrank_prod,
-    finrank_restrictTotalDegree, finrank_homogeneousSubmodule (n := 1)]
+    finrank_restrictTotalDegree, finrank_homogeneousSubmodule_fin (n := 1)]
   simp only [Fintype.card_fin]
   have hchoose : 2 * (k + 2).choose k = (k + 2) * (k + 1) := by
     have hh := Nat.choose_mul_succ_eq (k + 1) k

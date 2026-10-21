@@ -1,6 +1,7 @@
 module
 
-public import CCDN.LatticeSuccessiveMinima
+public import CCDN.ForMathlib.ZLattice
+public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
 
 /-! An orthonormal flag adapted to greedy lattice vectors. A small
 coordinate box in this flag contains no nonzero lattice vector. -/

@@ -111,7 +111,7 @@ theorem exists_sharp_integer_minor_specialization_zero_columns {r n : ℕ}
       (fun i j => (abs_of_nonneg (hb i (c j)).1) ▸ (hb i (c j)).2)
     simpa only [AbsoluteValue.abs_apply, Fintype.card_fin, nsmul_eq_mul] using hh
   by_cases hdeg : F.totalDegree = 0
-  · obtain ⟨c, hc, hdet⟩ := exists_nonzero_minor_of_independent_rows A hli
+  · obtain ⟨c, hc, hdet⟩ := Matrix.exists_det_submatrix_ne_zero_of_linearIndependent_row A hli
     have hcZ (i : Fin r) : c i ∉ Z := by
       intro hz
       apply hdet

@@ -1,6 +1,8 @@
 module
 
-public import CCDN.LatticeSuccessiveMinima
+public import CCDN.ForMathlib.Fin
+public import CCDN.ForMathlib.ZLattice
+public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
 
 /-! A lattice basis with a prescribed nonzero first vector. Every later
 vector is shortest outside the previous span. A given global
@@ -37,10 +39,10 @@ theorem IsPrescribedGreedyLatticeFamily.snoc
   · intro i
     refine Fin.lastCases ?_ (fun j => ?_) i
     · intro _
-      simpa only [Fin.snoc_last, snoc_image_Iio_last] using hmin
+      simpa only [Fin.snoc_last, Fin.snoc_image_Iio_last] using hmin
     · intro hj
       have hj0 : j ≠ 0 := by intro hz; apply hj; simp [hz]
-      simpa only [Fin.snoc_castSucc, snoc_image_Iio_castSucc] using hv.2.2.2 j hj0
+      simpa only [Fin.snoc_castSucc, Fin.snoc_image_Iio_castSucc] using hv.2.2.2 j hj0
 
 /-- Prescribed-first greedy independent lattice vectors of every possible
 length. -/
@@ -62,7 +64,7 @@ theorem exists_prescribed_greedy_lattice_family
       have hdim := finrank_span_eq_card hv.1
       rw [he, finrank_top, Fintype.card_fin] at hdim
       omega
-    obtain ⟨x, hx, hxU, hmin⟩ := exists_shortest_lattice_vector_outside L _ hU
+    obtain ⟨x, hx, hxU, hmin⟩ := ZLattice.exists_shortest_vector_notMem L _ hU
     exact ⟨Fin.snoc v x, hv.snoc hx hxU hmin⟩
 
 theorem exists_prescribed_greedy_lattice_basis

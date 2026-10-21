@@ -1,6 +1,6 @@
 module
 
-public import CCDN.FiniteRowMinor
+public import CCDN.ForMathlib.MatrixRank
 public import CCDN.ChowLinearSpecialization
 public import Mathlib.Data.Fin.Embedding
 public import CCDN.PolynomialPredicates
@@ -27,7 +27,7 @@ theorem matrixPluckerCoordinates_ne_zero
     {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (hA : LinearIndependent K A.row) :
     matrixPluckerCoordinates A ≠ 0 := by
-  obtain ⟨c, hc, hd⟩ := exists_nonzero_minor_of_independent_rows A hA
+  obtain ⟨c, hc, hd⟩ := Matrix.exists_det_submatrix_ne_zero_of_linearIndependent_row A hA
   intro hz
   exact hd (congrFun hz ⟨c, hc⟩)
 
@@ -73,7 +73,8 @@ theorem centerMinorProjection_eq_zero_iff {K : Type*} [Field K] {r n : ℕ}
     by_contra hx
     have hi : LinearIndependent K (Fin.cons x (fun i j => A i j) : Fin (r + 1) → (Fin n → K)) :=
       linearIndependent_finCons.mpr ⟨hA, hx⟩
-    obtain ⟨c, hc, hdet⟩ := exists_nonzero_minor_of_independent_rows (Fin.cons x (fun i j => A i j)) hi
+    obtain ⟨c, hc, hdet⟩ := Matrix.exists_det_submatrix_ne_zero_of_linearIndependent_row
+      (Fin.cons x (fun i j => A i j)) hi
     exact hdet (congrFun hz ⟨c, hc⟩)
   · intro hx
     funext c

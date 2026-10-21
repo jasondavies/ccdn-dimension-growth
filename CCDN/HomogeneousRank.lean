@@ -71,7 +71,7 @@ theorem homogeneous_evaluation_rank_bound {K : Type*} [Field K] {n d M t : ℕ}
   have hbound := finrank_map_add_kernel_subspace_le A.mulVecLin ⊤ (U.map φ) le_top hker
   rw [Submodule.map_top, hdim] at hbound
   change A.rank + Module.finrank K U ≤ Module.finrank K ↥(⊤ : Submodule K _) at hbound
-  simpa only [U, homogeneousMultiples_finrank f hf0, finrank_homogeneousSubmodule,
+  simpa only [U, homogeneousMultiples_finrank f hf0, finrank_homogeneousSubmodule_fin,
     finrank_top, Module.finrank_pi, Module.finrank_self, mul_one, Fintype.card_fin] using hbound
 
 /-- For independent evaluation rows the row count satisfies the same sharp deficit. -/

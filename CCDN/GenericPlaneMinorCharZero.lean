@@ -33,7 +33,7 @@ theorem exists_closedForm_minor_of_smooth_plane_point_charZero
   have hgd : g.degree = d := by
     rw [degree_eq_natDegree hgm.ne_zero, bivariateMap_natDegree_of_monic φ hm, hdeg]
   have hr := closedForm_coefficient_rank_lower d g hgi hgm hgd
-  obtain ⟨a, c, ha, hc, hdet⟩ := exists_nonzero_minor_of_rank_le
+  obtain ⟨a, c, ha, hc, hdet⟩ := Matrix.exists_det_submatrix_ne_zero_of_le_rank
     (closedFormCoefficientMatrix d g) (2 * d ^ 2 - 1) (by omega)
   refine ⟨a, c, ha, hc, ?_⟩
   intro he

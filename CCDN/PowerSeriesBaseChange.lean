@@ -1,6 +1,6 @@
 module
 
-public import CCDN.FiniteRowMinor
+public import CCDN.ForMathlib.MatrixRank
 public import Mathlib.RingTheory.PowerSeries.Basic
 
 /-! Finite linear independence of formal power series survives arbitrary
@@ -30,7 +30,8 @@ theorem powerSeries_linearIndependent_map
   have hrank : A.rank = Fintype.card ι := by
     rw [Matrix.rank_eq_finrank_span_cols]
     exact (linearIndependent_iff_card_eq_finrank_span.mp hcols).symm
-  obtain ⟨a, c, _, _, hdet⟩ := exists_nonzero_minor_of_rank_le A (Fintype.card ι) hrank.ge
+  obtain ⟨a, c, _, _, hdet⟩ :=
+    Matrix.exists_det_submatrix_ne_zero_of_le_rank A (Fintype.card ι) hrank.ge
   let B : Matrix ℕ ι L := A.map (algebraMap K L)
   have hdetB : (B.submatrix a c).det ≠ 0 := by
     have hm : (B.submatrix a c).det = algebraMap K L ((A.submatrix a c).det) := by

@@ -48,7 +48,7 @@ theorem exists_coefficientLinearPolynomial_not_mem
     ∃ φ : L →ₗ[K] K, coefficientLinearPolynomial φ g ∉ J := by
   classical
   let J' := J.map (map (algebraMap K L))
-  obtain ⟨r, hrstd, _, hrJ⟩ := exists_standard_representative J' g
+  obtain ⟨r, hrstd, _, hrJ⟩ := Ideal.exists_standard_representative_degLex J' g
   have hr0 : r ≠ 0 := by intro h; exact hg (by simpa only [h, sub_zero] using hrJ)
   obtain ⟨a, ha⟩ := exists_coeff_ne_zero hr0
   obtain ⟨φ, hφ⟩ := Module.Projective.exists_dual_ne_zero K ha
@@ -60,7 +60,7 @@ theorem exists_coefficientLinearPolynomial_not_mem
     have hh := J.sub_mem hgJ hdJ
     simpa only [sub_sub_cancel] using hh
   have hrstdK : coefficientLinearPolynomial φ r ∈
-      restrictSupport K (standardExponents J MonomialOrder.degLex) := by
+      restrictSupport K (Ideal.standardExponents J MonomialOrder.degLex) := by
     intro b hb
     have hbr : b ∈ r.support := by
       change b ∈ (coefficientLinearPolynomial φ r).support at hb
@@ -70,7 +70,7 @@ theorem exists_coefficientLinearPolynomial_not_mem
       rw [coefficientLinearPolynomial_coeff, hzero, map_zero]
     have hh := hrstd hbr
     simpa only [J', standardExponents_scalar_extension] using hh
-  have hrzero := standard_polynomial_eq_zero J MonomialOrder.degLex hrstdK hrmem
+  have hrzero := Ideal.eq_zero_of_mem_restrictSupport_standardExponents J MonomialOrder.degLex hrstdK hrmem
   have hc := coefficientLinearPolynomial_coeff φ r a
   have hz : φ (r.coeff a) = 0 := by simpa [hrzero] using hc.symm
   exact hφ hz

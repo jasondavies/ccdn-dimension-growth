@@ -2,7 +2,7 @@ module
 
 public import CCDN.ProjectiveClosureDegree
 public import CCDN.HomogeneousFilteredRank
-public import CCDN.PolynomialFiniteDifference
+public import CCDN.ForMathlib.Polynomial
 
 /-! The projective closure raises filtered Hilbert dimension by one
 and preserves factorial-normalized multiplicity in every dimension. -/
@@ -65,7 +65,8 @@ theorem projectiveClosureIdeal_hilbertPolynomial_parameters
     rw [hP, Polynomial.C_comp, sub_self] at he
     exact hQne he.symm
   obtain ⟨r, hr⟩ := Nat.exists_eq_succ_of_ne_zero (Nat.ne_of_gt hPpos)
-  have hf := polynomial_finite_difference_degree_leadingCoeff P r hr 1 one_ne_zero
+  have hf := And.intro (Polynomial.natDegree_comp_X_add_C_sub_self P hr 1 one_ne_zero)
+    (Polynomial.leadingCoeff_comp_X_add_C_sub_self P hr 1 one_ne_zero)
   rw [he] at hf
   have hrm : r = m := by
     have hdeg : (Q.comp (Polynomial.X + Polynomial.C 1)).natDegree = m := by

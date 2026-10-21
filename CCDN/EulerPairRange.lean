@@ -40,8 +40,8 @@ theorem exists_eulerPairCoordinates {F : Type*} [Field F]
   have htop : X 0 * P + X 1 * Q = 0 := by
     have hh := homogeneousComponent_eq_zero (k + 2) (X 0 * p + X 1 * q) (by omega)
     rw [map_add, show k + 2 = 1 + (k + 1) by omega,
-      homogeneousComponent_mul_left (isHomogeneous_X F (0 : Fin 2)),
-      homogeneousComponent_mul_left (isHomogeneous_X F (1 : Fin 2))] at hh
+      homogeneousComponent_mul_of_isHomogeneous_left (isHomogeneous_X F (0 : Fin 2)),
+      homogeneousComponent_mul_of_isHomogeneous_left (isHomogeneous_X F (1 : Fin 2))] at hh
     exact hh
   have hdiv : X (1 : Fin 2) ∣ P := by
     have hh : X (1 : Fin 2) ∣ X 0 * P := by

@@ -1,7 +1,7 @@
 module
 
 public import CCDN.RowSpan
-public import CCDN.FiniteRowMinor
+public import CCDN.ForMathlib.MatrixRank
 
 /-! Independent rows can be selected from the finite evaluation matrix.
 A nonzero annihilator gives the strict rank deficiency required by Bombieri--Vaaler. -/
@@ -17,7 +17,7 @@ theorem exists_independent_spanning_rows {F ι : Type*} [Field F] {N : ℕ}
       LinearIndependent F (A.submatrix a id).row ∧
       Submodule.span F (Set.range (A.submatrix a id).row) =
         Submodule.span F (Set.range A.row) ∧ s ≤ N := by
-  obtain ⟨s, a, ha, hli, hs⟩ := exists_finite_independent_spanning_rows A
+  obtain ⟨s, a, ha, hli, hs⟩ := Matrix.exists_fin_linearIndependent_row_span_eq A
   exact ⟨s, a, ha, hli, hs, by simpa using hli.fintype_card_le_finrank⟩
 
 /-- A nonzero relation on all columns forces every independent row family

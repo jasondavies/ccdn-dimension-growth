@@ -35,7 +35,7 @@ lemma integer_maximal_minors_ne_zero {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) ℤ)
     (hA : LinearIndependent ℚ (A.map (Int.castRingHom ℚ)).row) :
     (fun c : Fin r ↪ Fin n => ((A.submatrix id c).det : ℚ)) ≠ 0 := by
-  obtain ⟨c,hc,hd⟩ := exists_nonzero_minor_of_independent_rows
+  obtain ⟨c,hc,hd⟩ := Matrix.exists_det_submatrix_ne_zero_of_linearIndependent_row
     (A.map (Int.castRingHom ℚ)) hA
   intro hz
   have hh := congrFun hz ⟨c,hc⟩

@@ -59,7 +59,8 @@ lemma top_homogeneousComponent_mul {K σ : Type*} [CommRing K]
         omega
       · intro hn
         exact (hn (Finset.mem_range.mpr (Nat.lt_succ_self _))).elim
-    _ = _ := homogeneousComponent_mul_left (homogeneousComponent_isHomogeneous _ _) h _
+    _ = _ := homogeneousComponent_mul_of_isHomogeneous_left
+      (homogeneousComponent_isHomogeneous _ _) h _
 
 /-- A factorization of a homogeneous equation can be replaced by homogeneous
 factors of the same respective total degrees. -/

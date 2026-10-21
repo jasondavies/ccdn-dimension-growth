@@ -58,8 +58,10 @@ theorem projectiveChartIdeal_hilbertPolynomial_parameters
   let Q := filteredHilbertPolynomial (projectiveChartIdeal I)
   have he := projectiveClosureIdeal_hilbertPolynomial_difference (projectiveChartIdeal I)
   rw [projectiveClosureIdeal_chartIdeal_eq I hI hX] at he
-  have hf := polynomial_finite_difference_degree_leadingCoeff
-    (filteredHilbertPolynomial I) m hdim 1 one_ne_zero
+  have hf := And.intro
+    (Polynomial.natDegree_comp_X_add_C_sub_self (filteredHilbertPolynomial I) hdim 1 one_ne_zero)
+    (Polynomial.leadingCoeff_comp_X_add_C_sub_self (filteredHilbertPolynomial I) hdim 1
+      one_ne_zero)
   rw [he] at hf
   have hQlc : (Q.comp (Polynomial.X + Polynomial.C 1)).leadingCoeff = Q.leadingCoeff := by
     rw [Polynomial.leadingCoeff_comp (by simp), Polynomial.leadingCoeff_X_add_C,

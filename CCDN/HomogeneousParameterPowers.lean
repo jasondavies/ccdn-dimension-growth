@@ -37,7 +37,7 @@ theorem homogeneous_parameter_power_reduction
     have heq (i : τ) : homogeneousComponent (k + 1) (a i * s i) =
         a i * homogeneousComponent k (s i) := by
       rw [show k + 1 = 1 + k by omega]
-      exact homogeneousComponent_mul_left (ha i) (s i) k
+      exact homogeneousComponent_mul_of_isHomogeneous_left (ha i) (s i) k
     simp only [heq] at hcomp
     have hq := Ideal.Quotient.eq_zero_iff_mem.mpr hcomp
     rw [map_sub,sub_eq_zero,map_sum] at hq

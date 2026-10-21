@@ -91,7 +91,7 @@ lemma coefficientLinearPolynomial_monomialOrder_degree
 theorem standardExponents_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (m : MonomialOrder (Fin n)) :
-    standardExponents (I.map (map (algebraMap K L))) m = standardExponents I m := by
+    Ideal.standardExponents (I.map (map (algebraMap K L))) m = Ideal.standardExponents I m := by
   classical
   have hmapinj : Function.Injective (map (algebraMap K L) :
       MvPolynomial (Fin n) K → MvPolynomial (Fin n) L) :=
@@ -125,7 +125,7 @@ theorem filteredCoordinateSpace_finrank_scalar_extension
       Module.finrank K (filteredCoordinateSpace I N) := by
   rw [filteredCoordinateSpace_finrank_eq_standard_card,
     filteredCoordinateSpace_finrank_eq_standard_card]
-  simp only [boundedStandardExponents, standardExponents_scalar_extension]
+  simp only [Ideal.boundedStandardExponents, standardExponents_scalar_extension]
 
 theorem filteredHilbertPolynomial_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}

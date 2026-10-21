@@ -13,7 +13,7 @@ open MvPolynomial
 
 lemma finite_homogeneous_coefficientL1_bounded (σ : Type*) [Fintype σ] [DecidableEq σ]
     (r H : ℕ) :
-    {f : MvPolynomial σ ℤ | f.IsHomogeneous r ∧ coefficientL1 f ≤ H}.Finite := by
+    {f : MvPolynomial σ ℤ | f.IsHomogeneous r ∧ l1Norm f ≤ H}.Finite := by
   classical
   let C := ↥(Finset.Icc (-(H : ℤ)) (H : ℤ))
   let F : (Sym σ r → C) → MvPolynomial σ ℤ :=
@@ -21,7 +21,7 @@ lemma finite_homogeneous_coefficientL1_bounded (σ : Type*) [Fintype σ] [Decida
   apply (Set.finite_range F).subset
   intro f hf
   let c : Sym σ r → C := fun i => ⟨f.coeff (homogeneousCoefficientExponent σ r i), by
-    have hh := (natAbs_coeff_le_coefficientL1 f (homogeneousCoefficientExponent σ r i)).trans hf.2
+    have hh := (natAbs_coeff_le_l1Norm f (homogeneousCoefficientExponent σ r i)).trans hf.2
     have ha : |f.coeff (homogeneousCoefficientExponent σ r i)| ≤ (H : ℤ) := by
       rw [← Int.natCast_natAbs]
       exact_mod_cast hh
@@ -69,7 +69,7 @@ lemma card_homogeneousCoefficientIndices (n d : ℕ) :
 theorem universalNoetherForms_coefficientL1_le (n k : ℕ)
     (g : MvPolynomial (Sym (Option (Fin n)) (k + 2)) ℤ)
     (hg : g ∈ universalNoetherForms (Option (Fin n)) k) :
-    coefficientL1 g ≤
+    l1Norm g ≤
       (k + 2) ^ (3 * (k + 2) ^ 2 - 3) *
         ((n + (k + 2)).choose n * 3 ^ (k + 2)) ^ ((k + 2) ^ 2 - 1) := by
   obtain ⟨rows,cols,m,rfl⟩ := (mem_universalNoetherForms k g).mp hg

@@ -2,7 +2,7 @@ module
 
 public import CCDN.FilteredIntersection
 public import CCDN.HilbertPolynomialComparison
-public import CCDN.PolynomialFiniteDifference
+public import CCDN.ForMathlib.Polynomial
 
 /-! Hilbert inequalities for a proper polynomial section of a prime
 affine variety. Multiplication by the section is injective in the original
@@ -121,8 +121,11 @@ theorem proper_section_hilbert_dimension_leadingCoeff
   have hPpos : 0 < P.leadingCoeff := by
     rw [hPlc]
     exact filteredHilbertPolynomial_leadingCoeff_pos _ hsection
-  obtain ⟨hQdeg, hQlc⟩ := polynomial_finite_difference_degree_leadingCoeff
-    (filteredHilbertPolynomial I) m hdim (f.totalDegree : ℚ) (by exact_mod_cast hfdeg.ne')
+  have hs : (f.totalDegree : ℚ) ≠ 0 := by exact_mod_cast hfdeg.ne'
+  have hQdeg :=
+    Polynomial.natDegree_comp_X_add_C_sub_self (filteredHilbertPolynomial I) hdim _ hs
+  have hQlc :=
+    Polynomial.leadingCoeff_comp_X_add_C_sub_self (filteredHilbertPolynomial I) hdim _ hs
   have hQpos : 0 < Q.leadingCoeff := by
     rw [show Q.leadingCoeff = _ from hQlc]
     exact mul_pos (mul_pos

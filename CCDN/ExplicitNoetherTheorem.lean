@@ -18,7 +18,7 @@ the same finite family of integer polynomials. -/
 theorem exists_explicit_noether_forms (n d : ℕ) (hd : 2 ≤ d) :
     ∃ Φ : Finset (MvPolynomial (Sym (Option (Fin n)) d) ℤ),
       (∀ g ∈ Φ, g.IsHomogeneous (d ^ 2 - 1) ∧
-        coefficientL1 g ≤ d ^ (3 * d ^ 2 - 3) *
+        l1Norm g ≤ d ^ (3 * d ^ 2 - 3) *
           ((n + d).choose n * 3 ^ d) ^ (d ^ 2 - 1)) ∧
       (∀ (K : Type u) [Field K] (f : MvPolynomial (Option (Fin n)) K),
         f.IsHomogeneous d →

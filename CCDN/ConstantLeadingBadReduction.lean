@@ -54,7 +54,7 @@ lemma exists_constant_leading_integer_minor
   have haF : (a : F) ≠ 0 := Int.cast_ne_zero.mpr ha
   obtain ⟨hdegF, hlF⟩ := bivariateMap_constant_leading (Int.castRingHom F) f a haF hl
   have hr := closedForm_rank_lower_of_constant_leading d (a : F) haF _ hlF hir (hdegF.trans hdeg)
-  obtain ⟨r, c, hr, hc, hdet⟩ := exists_nonzero_minor_of_rank_le
+  obtain ⟨r, c, hr, hc, hdet⟩ := Matrix.exists_det_submatrix_ne_zero_of_le_rank
     (closedFormCoefficientMatrix d (bivariateMap (Int.castRingHom F) f))
     (2 * d ^ 2 - 1) (by omega)
   refine ⟨r, c, hr, hc, ?_⟩

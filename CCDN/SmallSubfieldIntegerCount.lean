@@ -1,7 +1,7 @@
 module
 
 public import CCDN.SubfieldBoundedIntegers
-public import CCDN.IntermediateFieldCount
+public import CCDN.ForMathlib.FieldTheory
 
 /-! Parameters lying in intermediate fields of degree at most one
 quarter of the ambient degree have a uniform fourth-root contribution
@@ -79,7 +79,7 @@ theorem boundedSmallSubfieldIntegers_count {B : ℝ} (hB : 1 ≤ B) :
     calc
       _ ≤ Fintype.card (IntermediateField ℚ K) := Fintype.card_subtype_le _
       _ = Nat.card (IntermediateField ℚ K) := Nat.card_eq_fintype_card.symm
-      _ ≤ _ := intermediateField_card_le_two_pow_finrank ℚ K
+      _ ≤ _ := IntermediateField.card_le_two_pow_finrank ℚ K
   have hterm (L : T) :
       ((tf L).card : ℝ) ≤
         (2 * Real.sqrt (Module.finrank ℚ K : ℝ) + 1) ^ Module.finrank ℚ K *

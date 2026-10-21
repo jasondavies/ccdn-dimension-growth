@@ -14,18 +14,18 @@ open MvPolynomial Classical
 
 def standardExponentVectors {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) : Set (σ → ℕ) :=
-  {a | Finsupp.equivFunOnFinite.symm a ∈ standardExponents I m}
+  {a | Finsupp.equivFunOnFinite.symm a ∈ Ideal.standardExponents I m}
 
 lemma standardExponentVectors_lower {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) :
     IsLowerSet (standardExponentVectors I m) := by
   intro a b hab hb
-  exact standardExponents_lower I m (fun i => hab i) hb
+  exact Ideal.isLowerSet_standardExponents I m (fun i => hab i) hb
 
 lemma standardExponentVectors_nonempty {K σ : Type*} [Field K] [Fintype σ]
     [LinearOrder σ] (I : Ideal (MvPolynomial σ K)) (hI : I ≠ ⊤) :
     (standardExponentVectors I MonomialOrder.degLex).Nonempty := by
-  obtain ⟨r, hr, _, hmem⟩ := exists_standard_representative I 1
+  obtain ⟨r, hr, _, hmem⟩ := Ideal.exists_standard_representative_degLex I 1
   have hr0 : r ≠ 0 := by
     intro hz
     rw [hz, sub_zero] at hmem
@@ -33,7 +33,7 @@ lemma standardExponentVectors_nonempty {K σ : Type*} [Field K] [Fintype σ]
   obtain ⟨a, ha⟩ := support_nonempty.mpr hr0
   refine ⟨Finsupp.equivFunOnFinite a, ?_⟩
   change Finsupp.equivFunOnFinite.symm (Finsupp.equivFunOnFinite a) ∈
-    standardExponents I MonomialOrder.degLex
+    Ideal.standardExponents I MonomialOrder.degLex
   rw [Equiv.symm_apply_apply]
   exact hr ha
 
@@ -45,7 +45,7 @@ lemma filteredCoordinateSpace_finrank_eq_vector_card {K σ : Type*} [Field K]
   rw [filteredCoordinateSpace_finrank_eq_standard_card]
   apply Nat.card_congr
   exact Finsupp.equivFunOnFinite.subtypeEquiv (fun a => by
-    simp [boundedStandardExponents, standardExponentVectors, Finsupp.sum_fintype])
+    simp [Ideal.boundedStandardExponents, standardExponentVectors, Finsupp.sum_fintype])
 
 /-- Eventual polynomiality of the filtered coordinate-space dimension. -/
 theorem filteredCoordinateSpace_eventually_polynomial {K σ : Type*} [Field K]

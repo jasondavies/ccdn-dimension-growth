@@ -1,9 +1,9 @@
 module
 
+public import CCDN.ForMathlib.Matrix
 public import CCDN.LocalDeterminant
 import all ArithmeticHeights.BombieriVaaler
 public import Mathlib.LinearAlgebra.FreeModule.PID
-public import Mathlib.LinearAlgebra.Matrix.Block
 
 /-! Combining maximal-minor divisibility across row blocks. -/
 
@@ -77,18 +77,6 @@ theorem dvd_det_square_column_factor {k N : ℕ} (A : Matrix (Fin k) (Fin N) ℤ
   intro s _
   exact dvd_mul_of_dvd_left (hd _) _
 
-lemma det_dependent_blockDiagonal {c : ℕ} (n : Fin c → ℕ)
-    (B : ∀ i, Matrix (Fin (n i)) (Fin (n i)) ℤ) :
-    (Matrix.blockDiagonal' B).det = ∏ i, (B i).det := by
-  rw [(Matrix.blockTriangular_blockDiagonal' B).det_fintype]
-  apply Finset.prod_congr rfl
-  intro i _
-  let e := (Equiv.sigmaSubtype (β := fun j => Fin (n j)) i).symm
-  have he : ((Matrix.blockDiagonal' B).toSquareBlock Sigma.fst i).submatrix e e = B i := by
-    ext j k
-    exact Matrix.blockDiagonal'_apply_eq B i j k
-  rw [← he, Matrix.det_submatrix_equiv_self]
-
 /-- The product of common divisors of the maximal minors of disjoint row blocks
 is a divisor of the full determinant. Empty and rank-deficient blocks are allowed. -/
 theorem block_minor_divisors_dvd_det {c : ℕ} (n : Fin c → ℕ)
@@ -119,7 +107,7 @@ theorem block_minor_divisors_dvd_det {c : ℕ} (n : Fin c → ℕ)
       intro t _
       rw [Matrix.blockDiagonal'_apply_ne B j t hki.symm, zero_mul]
     · simp
-  rw [← hfac, Matrix.det_mul, det_dependent_blockDiagonal]
+  rw [← hfac, Matrix.det_mul, Matrix.det_blockDiagonal']
   exact dvd_mul_of_dvd_left (Finset.prod_dvd_prod_of_dvd _ _ (fun i _ => hdiv i)) _
 
 /-- Enumerate rows grouped by their residue-class label. -/

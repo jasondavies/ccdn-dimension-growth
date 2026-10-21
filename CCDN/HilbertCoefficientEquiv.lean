@@ -22,7 +22,7 @@ lemma monomialOrder_degree_mapEquiv
 theorem standardExponents_coefficientEquiv
     {K L σ : Type*} [Field K] [Field L] (I : Ideal (MvPolynomial σ K))
     (e : K ≃+* L) (m : MonomialOrder σ) :
-    standardExponents (I.map (mapEquiv σ e)) m = standardExponents I m := by
+    Ideal.standardExponents (I.map (mapEquiv σ e)) m = Ideal.standardExponents I m := by
   classical
   ext a
   constructor
@@ -43,7 +43,7 @@ theorem filteredCoordinateSpace_finrank_coefficientEquiv
       Module.finrank L (filteredCoordinateSpace (I.map (mapEquiv σ e)) N) := by
   rw [filteredCoordinateSpace_finrank_eq_standard_card,
     filteredCoordinateSpace_finrank_eq_standard_card]
-  simp only [boundedStandardExponents, standardExponents_coefficientEquiv]
+  simp only [Ideal.boundedStandardExponents, standardExponents_coefficientEquiv]
 
 theorem filteredHilbertPolynomial_coefficientEquiv
     {K L σ : Type*} [Field K] [Field L] [Fintype σ] [LinearOrder σ]

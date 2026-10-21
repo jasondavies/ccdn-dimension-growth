@@ -17,11 +17,11 @@ theorem standard_representative_fixed_by_coefficientEquiv
     (I : Ideal (MvPolynomial (Fin n) K)) (e : K ≃+* K)
     (hI : I.map (mapEquiv (Fin n) e) = I)
     (f r : MvPolynomial (Fin n) K) (hf : mapEquiv (Fin n) e f = f)
-    (hr : r ∈ restrictSupport K (standardExponents I MonomialOrder.degLex))
+    (hr : r ∈ restrictSupport K (Ideal.standardExponents I MonomialOrder.degLex))
     (hfr : f - r ∈ I) :
     mapEquiv (Fin n) e r = r := by
   have hmr : mapEquiv (Fin n) e r ∈
-      restrictSupport K (standardExponents I MonomialOrder.degLex) := by
+      restrictSupport K (Ideal.standardExponents I MonomialOrder.degLex) := by
     intro a ha
     apply hr
     change a ∈ r.support
@@ -33,7 +33,7 @@ theorem standard_representative_fixed_by_coefficientEquiv
     have hh := Ideal.mem_map_of_mem (mapEquiv (Fin n) e) hfr
     rwa [hI, map_sub, hf] at hh
   apply sub_eq_zero.mp
-  apply standard_polynomial_eq_zero I MonomialOrder.degLex
+  apply Ideal.eq_zero_of_mem_restrictSupport_standardExponents I MonomialOrder.degLex
   · exact Submodule.sub_mem _ hmr hr
   · have hh := I.sub_mem hfr hfm
     simpa only [sub_sub_sub_cancel_left] using hh
@@ -50,7 +50,7 @@ theorem galois_stable_polynomial_ideal_descends
   refine le_antisymm Ideal.map_comap_le ?_
   intro f hf
   choose r hrstd hrdeg hrI using fun a : Fin n →₀ ℕ =>
-    exists_standard_representative I (monomial a 1)
+    Ideal.exists_standard_representative_degLex I (monomial a 1)
   have hfix (a : Fin n →₀ ℕ) (γ : Gal(K/k)) :
       map γ.toRingHom (monomial a 1 - r a) = monomial a 1 - r a := by
     have hγ : I.map (mapEquiv (Fin n) γ.toRingEquiv) = I := hstable γ
@@ -86,13 +86,13 @@ theorem galois_stable_polynomial_ideal_descends
       smul_eq_C_mul]
     rw [support_sum_monomial_coeff]
     abel
-  have hrmem : f - q ∈ restrictSupport K (standardExponents I MonomialOrder.degLex) := by
+  have hrmem : f - q ∈ restrictSupport K (Ideal.standardExponents I MonomialOrder.degLex) := by
     rw [hrepr]
     apply Submodule.sum_mem
     intro a _
     exact Submodule.smul_mem _ _ (hrstd a)
   have heq : f = q := sub_eq_zero.mp
-    (standard_polynomial_eq_zero I MonomialOrder.degLex hrmem (I.sub_mem hf hqI))
+    (Ideal.eq_zero_of_mem_restrictSupport_standardExponents I MonomialOrder.degLex hrmem (I.sub_mem hf hqI))
   rw [heq]
   exact hq
 

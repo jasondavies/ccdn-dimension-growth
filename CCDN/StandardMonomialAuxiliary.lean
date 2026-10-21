@@ -15,7 +15,7 @@ open MvPolynomial Matrix
 theorem exists_standard_auxiliary_of_zero_determinants {n N t M : ℕ}
     (f : MvPolynomial (Fin n) ℚ) (mon : Fin N → (Fin n →₀ ℕ))
     (hmon : Function.Injective mon)
-    (hstd : ∀ j, mon j ∈ standardExponents (Ideal.span {f}) MonomialOrder.degLex)
+    (hstd : ∀ j, mon j ∈ Ideal.standardExponents (Ideal.span {f}) MonomialOrder.degLex)
     (hdegree : ∀ j, (mon j).sum (fun _ e => e) ≤ M)
     (x : Fin t → IntPoint n)
     (hdet : ∀ a : Fin N → Fin t, (evaluationMatrix mon (x ∘ a)).det = 0) :
@@ -49,7 +49,7 @@ theorem exists_standard_auxiliary_of_zero_determinants {n N t M : ℕ}
     intro h
     exact hg0 ((map_injective (Int.castRingHom ℚ) Int.cast_injective) (by simpa using h))
   have hgstd : map (Int.castRingHom ℚ) g ∈
-      restrictSupport ℚ (standardExponents (Ideal.span {f}) MonomialOrder.degLex) := by
+      restrictSupport ℚ (Ideal.standardExponents (Ideal.span {f}) MonomialOrder.degLex) := by
     intro m hm
     by_contra hbad
     have hne (j : Fin N) : mon j ≠ m := by
@@ -61,7 +61,7 @@ theorem exists_standard_auxiliary_of_zero_determinants {n N t M : ℕ}
     exact (mem_support_iff.mp hm) hc
   refine ⟨g, hg0, ?_, totalDegree_polynomialOfCoefficients_le mon v hdegree, ?_⟩
   · intro hdvd
-    exact hgQ (standard_polynomial_eq_zero (Ideal.span {f}) MonomialOrder.degLex hgstd
+    exact hgQ (Ideal.eq_zero_of_mem_restrictSupport_standardExponents (Ideal.span {f}) MonomialOrder.degLex hgstd
       (Ideal.mem_span_singleton.mpr hdvd))
   · intro i
     apply vanishes_of_evaluation_row_mem_span mon (x ∘ a) v hAv

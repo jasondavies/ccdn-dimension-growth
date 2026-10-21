@@ -1,20 +1,40 @@
+/-
+Copyright (c) 2026 Jason Davies. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Jason Davies
+-/
 module
 
 public import Mathlib.LinearAlgebra.Matrix.Rank
 public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 import all ArithmeticHeights.CauchyBinet
 
-/-! Finite nonzero minors of matrices with finitely many columns and arbitrarily
-many rows. This permits coefficient matrices indexed by all monomials. -/
+/-!
+# Nonzero minors of matrices with arbitrarily many rows
+
+The row index type may be infinite, as for coefficient matrices indexed by all monomials; only
+the column index type is finite.
+
+The proof of `Matrix.exists_det_submatrix_ne_zero_of_linearIndependent_row` uses the
+Cauchy–Binet formula `Matrix.det_mul_eq_sum_det_submatrix`, which is not yet in Mathlib and is
+taken from the vendored `ArithmeticHeights.CauchyBinet`.
+
+## Main results
+
+* `Matrix.exists_fin_linearIndependent_row_span_eq`: finitely many linearly independent rows
+  span the row space.
+* `Matrix.exists_rank_linearIndependent_rows`: there are `A.rank` linearly independent rows.
+* `Matrix.exists_det_submatrix_ne_zero_of_le_rank`: every `r ≤ A.rank` is witnessed by a
+  nonzero `r × r` minor with distinct rows and columns.
+-/
 
 @[expose] public section
-namespace CCDN
-noncomputable section
-open Matrix
+
+namespace Matrix
 
 /-- A finite independent family spans the rows even when their original index
 set is infinite. -/
-theorem exists_finite_independent_spanning_rows
+theorem exists_fin_linearIndependent_row_span_eq
     {F ι ν : Type*} [Field F] [Fintype ν] (A : Matrix ι ν F) :
     ∃ (s : ℕ) (a : Fin s → ι), Function.Injective a ∧
       LinearIndependent F (A.submatrix a id).row ∧
@@ -33,7 +53,7 @@ theorem exists_finite_independent_spanning_rows
   rw [hr, hs]
 
 /-- Restriction to spanning rows preserves the exact kernel. -/
-theorem ker_submatrix_spanning_rows
+theorem ker_mulVecLin_submatrix_eq_of_span_row_eq
     {F ι κ ν : Type*} [Field F] [Fintype ν] (A : Matrix ι ν F) (a : κ → ι)
     (hs : Submodule.span F (Set.range (A.submatrix a id).row) =
       Submodule.span F (Set.range A.row)) :
@@ -61,12 +81,12 @@ theorem ker_submatrix_spanning_rows
     exact congrFun hv (a i)
 
 /-- There are exactly rank-many independent rows. -/
-theorem exists_independent_rows_of_rank
+theorem exists_rank_linearIndependent_rows
     {F ι ν : Type*} [Field F] [Fintype ν] (A : Matrix ι ν F) :
     ∃ a : Fin A.rank → ι, Function.Injective a ∧
       LinearIndependent F (A.submatrix a id).row := by
-  obtain ⟨s, a, ha, hi, hs⟩ := exists_finite_independent_spanning_rows A
-  have hk := ker_submatrix_spanning_rows A a hs
+  obtain ⟨s, a, ha, hi, hs⟩ := exists_fin_linearIndependent_row_span_eq A
+  have hk := ker_mulVecLin_submatrix_eq_of_span_row_eq A a hs
   have h₁ := (A.submatrix a id).mulVecLin.finrank_range_add_finrank_ker
   have h₂ := A.mulVecLin.finrank_range_add_finrank_ker
   change (A.submatrix a id).rank + _ = _ at h₁
@@ -77,7 +97,7 @@ theorem exists_independent_rows_of_rank
   exact ⟨a, ha, hi⟩
 
 /-- Full row rank supplies a nonzero square minor. -/
-theorem exists_nonzero_minor_of_independent_rows
+theorem exists_det_submatrix_ne_zero_of_linearIndependent_row
     {F ν : Type*} [Field F] [Fintype ν] {s : ℕ}
     (A : Matrix (Fin s) ν F) (hi : LinearIndependent F A.row) :
     ∃ c : Fin s → ν, Function.Injective c ∧ (A.submatrix id c).det ≠ 0 := by
@@ -95,17 +115,16 @@ theorem exists_nonzero_minor_of_independent_rows
 
 /-- Every rank lower bound is witnessed by a nonzero minor with distinct rows
 and distinct columns, without any finiteness requirement on the rows. -/
-theorem exists_nonzero_minor_of_rank_le
+theorem exists_det_submatrix_ne_zero_of_le_rank
     {F ι ν : Type*} [Field F] [Fintype ν] (A : Matrix ι ν F)
     (r : ℕ) (hr : r ≤ A.rank) :
     ∃ (a : Fin r → ι) (c : Fin r → ν), Function.Injective a ∧
       Function.Injective c ∧ (A.submatrix a c).det ≠ 0 := by
-  obtain ⟨a, ha, hi⟩ := exists_independent_rows_of_rank A
+  obtain ⟨a, ha, hi⟩ := exists_rank_linearIndependent_rows A
   let b : Fin r → Fin A.rank := Fin.castLE hr
   have hb : Function.Injective b := Fin.castLE_injective hr
   have hli : LinearIndependent F (A.submatrix (a ∘ b) id).row := hi.comp b hb
-  obtain ⟨c, hc, hd⟩ := exists_nonzero_minor_of_independent_rows _ hli
+  obtain ⟨c, hc, hd⟩ := exists_det_submatrix_ne_zero_of_linearIndependent_row _ hli
   exact ⟨a ∘ b, c, ha.comp hb, hc, hd⟩
 
-end
-end CCDN
+end Matrix

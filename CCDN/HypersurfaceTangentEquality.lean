@@ -104,11 +104,11 @@ theorem originLayer_finrank_eq_hypersurfaceLayerBound {n μ k : ℕ}
     Module.finrank K (originLayer f k) = hypersurfaceLayerBound n μ k := by
   by_cases hk : μ ≤ k
   · have hh := originLayer_hilbert_eq f hf hμ hk
-    rw [finrank_homogeneousSubmodule, finrank_homogeneousSubmodule] at hh
+    rw [finrank_homogeneousSubmodule_fin, finrank_homogeneousSubmodule_fin] at hh
     unfold hypersurfaceLayerBound
     rw [ite_eq_left hk, Nat.choose_symm_add, Nat.choose_symm_add]
     omega
-  · rw [originLayer_hilbert_eq_of_lt f hf (by omega), finrank_homogeneousSubmodule]
+  · rw [originLayer_hilbert_eq_of_lt f hf (by omega), finrank_homogeneousSubmodule_fin]
     simp only [hypersurfaceLayerBound, ite_eq_right hk, Nat.sub_zero]
     exact Nat.choose_symm_add.symm
 

@@ -1,7 +1,7 @@
 module
 
 public import CCDN.EulerPairBasis
-public import CCDN.FiniteRowMinor
+public import CCDN.ForMathlib.MatrixRank
 
 /-! Explicit monomial values of the Euler basis and nonzero minors of the
 correct Noether order d^2-1. -/
@@ -61,7 +61,7 @@ theorem exists_eulerClosedForm_nonzero_minor
       (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k),
       Function.Injective rows ∧ Function.Injective cols ∧
       ((eulerClosedFormCoefficientMatrix k f).submatrix rows cols).det ≠ 0 := by
-  exact exists_nonzero_minor_of_rank_le _ _
+  exact Matrix.exists_det_submatrix_ne_zero_of_le_rank _ _
     (eulerClosedFormCoefficientMatrix_rank k f hf a ha hl hdeg).ge
 
 end

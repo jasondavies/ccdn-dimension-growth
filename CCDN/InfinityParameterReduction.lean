@@ -57,7 +57,7 @@ theorem power_reduction_of_infinity_certificate {K σ : Type*} [Field K]
       simpa only [add_sub_cancel_right] using hg
     have hm := leadingInfinityIdeal_component_mem I _ hrel n
     rw [map_sub, homogeneousComponent_eq_self (isHomogeneous_X_pow j (n + 1)),
-      show n + 1 = 1 + n by omega, homogeneousComponent_mul_left hl] at hm
+      show n + 1 = 1 + n by omega, homogeneousComponent_mul_of_isHomogeneous_left hl] at hm
     obtain ⟨r, hr, heq⟩ := Submodule.mem_map.mp hm
     refine ⟨r, homogeneousComponent n s, (mem_restrictTotalDegree _ _ _).mp hr,
       (homogeneousComponent_isHomogeneous n s).totalDegree_le, ?_⟩

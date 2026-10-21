@@ -2,6 +2,7 @@ module
 
 public import CCDN.MonomialDimension
 public import CCDN.Interpolation
+public import CCDN.ForMathlib.MvPolynomial
 
 /-! Complete homogeneous monomial lists, their exact cardinalities, and the
 corresponding polynomial-space dimensions. -/
@@ -48,21 +49,6 @@ lemma homogeneousMonomials_surjective (n M : ℕ) (p : Fin (n + 1) →₀ ℕ)
     (hp : p.degree = M) : ∃ j, homogeneousMonomials n M j = p := by
   obtain ⟨j, hj⟩ := (homogeneousExponentEquiv n M).surjective ⟨p, hp⟩
   exact ⟨j, congrArg Subtype.val hj⟩
-
-theorem finrank_homogeneousSubmodule {K : Type*} [Field K] (n M : ℕ) :
-    Module.finrank K (homogeneousSubmodule (Fin (n + 1)) K M) = (n + M).choose M := by
-  classical
-  let e := exactExponentEquivSym (Fin (n + 1)) M
-  let _ := Fintype.ofEquiv (Sym (Fin (n + 1)) M) e.symm
-  let _ : Fintype ↥({p : Fin (n + 1) →₀ ℕ | p.degree = M} : Set _) :=
-    Fintype.ofEquiv (Sym (Fin (n + 1)) M) e.symm
-  have he : homogeneousSubmodule (Fin (n + 1)) K M =
-      restrictSupport K {p | p.degree = M} := by
-    rw [homogeneousSubmodule_eq_finsupp_supported]
-    rfl
-  rw [he, Module.finrank_eq_card_basis (basisRestrictSupport K _)]
-  change Fintype.card {p : Fin (n + 1) →₀ ℕ // p.degree = M} = _
-  rw [← Nat.card_eq_fintype_card, card_exact_exponents]
 
 theorem polynomialOfCoefficients_homogeneous (n M : ℕ)
     (v : Fin ((n + M).choose M) → ℤ) :

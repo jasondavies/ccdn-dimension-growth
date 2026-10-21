@@ -3,7 +3,7 @@ module
 public import CCDN.QuadraticInvariantFactorization
 public import CCDN.InvariantIdealIntegralRepresentative
 public import CCDN.QuadraticAmbiguousClassBound
-public import CCDN.FiniteGroupTorsionCover
+public import CCDN.ForMathlib.FiniteGroupPowerTorsion
 public import CCDN.IntegralIdealClass
 public import CCDN.DiscriminantPrimeIdealCover
 
@@ -58,7 +58,7 @@ theorem stronglyAmbiguousTwoTorsion_card_le_ramified_cover
     (hS : ∀ Q, IsQuadraticRamifiedPrime F K Q → Q ∈ S) :
     Nat.card (stronglyAmbiguousTwoTorsion F K σ) ≤
       classGroupTwoTorsionCard F * 2 ^ S.card := by
-  have hh := power_torsion_card_le_of_coset_cover
+  have hh := MonoidHom.card_powMonoidHom_ker_le_of_coset_cover
     (ClassGroup.extendedHom (𝓞 F) (𝓞 K)) (stronglyAmbiguousClassGroup F K σ)
     (fun t : S.powerset ↦ ∏ Q ∈ t.val, integralIdealClass Q)
     (stronglyAmbiguousClassGroup_ramified_cover F K hd σ hσ S hS) 2

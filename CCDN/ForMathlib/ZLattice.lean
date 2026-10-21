@@ -1,23 +1,35 @@
+/-
+Copyright (c) 2026 Jason Davies. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Jason Davies
+-/
 module
 
 public import Mathlib.Algebra.Module.ZLattice.Basic
-public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
 public import Mathlib.Data.Set.Finite.Lemmas
 
-/-! Greedy shortest independent lattice vectors. The minima are attained
-in the lattice, and each vector minimizes the norm outside the span
-of its predecessors. This supplies the flag used in a product-of-minima
-estimate. -/
+/-!
+# Shortest lattice vectors outside a subspace
+
+## Main results
+
+* `ZLattice.exists_shortest_vector_notMem`: if a real subspace `U` of a finite-dimensional
+  normed space does not contain the full-rank lattice `L`, some vector of `L` outside `U` has
+  minimal norm among the vectors of `L` outside `U`. Iterating this gives the greedy
+  successive-minima flag of `L`.
+-/
 
 @[expose] public section
-namespace CCDN
-noncomputable section
+
+namespace ZLattice
+
 open Module Submodule
 
-variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E]
-  [FiniteDimensional ℝ E]
+variable {E : Type*} [NormedAddCommGroup E] [NormedSpace ℝ E] [FiniteDimensional ℝ E]
 
-theorem exists_shortest_lattice_vector_outside
+/-- If a real subspace `U` does not contain the full-rank lattice `L`, some lattice vector outside
+`U` has minimal norm among all lattice vectors outside `U`. -/
+theorem exists_shortest_vector_notMem
     (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
     (U : Submodule ℝ E) (hU : U ≠ ⊤) :
     ∃ v : E, v ∈ L ∧ v ∉ U ∧
@@ -43,30 +55,4 @@ theorem exists_shortest_lattice_vector_outside
   · exact hmin x ⟨hx, hxU, hh⟩
   · exact hv.2.2.trans (le_of_not_ge hh)
 
-theorem snoc_image_Iio_castSucc {α : Type*} {k : ℕ} (v : Fin k → α) (x : α) (i : Fin k) :
-    Fin.snoc v x '' Set.Iio i.castSucc = v '' Set.Iio i := by
-  ext y
-  constructor
-  · rintro ⟨j, hj, rfl⟩
-    have hjk : j.val < k := lt_trans hj i.isLt
-    let j' : Fin k := ⟨j.val, hjk⟩
-    have he : j = j'.castSucc := rfl
-    refine ⟨j', hj, ?_⟩
-    rw [he, Fin.snoc_castSucc]
-  · rintro ⟨j, hj, rfl⟩
-    exact ⟨j.castSucc, hj, Fin.snoc_castSucc _ _ _⟩
-
-theorem snoc_image_Iio_last {α : Type*} {k : ℕ} (v : Fin k → α) (x : α) :
-    Fin.snoc v x '' Set.Iio (Fin.last k) = Set.range v := by
-  ext y
-  constructor
-  · rintro ⟨j, hj, rfl⟩
-    let j' : Fin k := ⟨j.val, hj⟩
-    have he : j = j'.castSucc := rfl
-    refine ⟨j', ?_⟩
-    rw [he, Fin.snoc_castSucc]
-  · rintro ⟨j, rfl⟩
-    exact ⟨j.castSucc, j.isLt, Fin.snoc_castSucc _ _ _⟩
-
-end
-end CCDN
+end ZLattice

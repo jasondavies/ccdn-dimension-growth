@@ -94,7 +94,7 @@ theorem exists_surface_congruence_auxiliary_of_gap
         ((M : ℝ) - f.totalDegree + 1) ^ 2 / 2) hb
     exact_mod_cast hpos
   have hmon : Function.Injective mon := Subtype.val_injective.comp e.injective
-  have hstd (j) : mon j ∈ standardExponents (Ideal.span {fQ}) MonomialOrder.degLex :=
+  have hstd (j) : mon j ∈ Ideal.standardExponents (Ideal.span {fQ}) MonomialOrder.degLex :=
     (mem_standardMonomialPrefix _ _ _ _).mp (e j).property |>.1
   have hdeg (j) : Finsupp.degree (mon j) ≤ M :=
     (mem_standardMonomialPrefix _ _ _ _).mp (e j).property |>.2

@@ -1,6 +1,6 @@
 module
 
-public import CCDN.FiniteRowMinor
+public import CCDN.ForMathlib.MatrixRank
 public import CCDN.ThreeRowHyperplane
 
 /-! Bounded integral linear forms dual to independent integer rows.
@@ -35,7 +35,7 @@ theorem exists_bounded_integer_dual_rows {s r : ℕ}
       (∀ i j, |b i j| ≤ (s.factorial : ℤ) * (T : ℤ) ^ s) := by
   classical
   let AQ : Matrix (Fin (s + 1)) (Fin r) ℚ := Matrix.of (fun i j => (A i j : ℚ))
-  obtain ⟨c, hc, hminor⟩ := exists_nonzero_minor_of_independent_rows AQ hli
+  obtain ⟨c, hc, hminor⟩ := Matrix.exists_det_submatrix_ne_zero_of_linearIndependent_row AQ hli
   let M := A.submatrix id c
   have hmap : (Int.castRingHom ℚ).mapMatrix M = AQ.submatrix id c := by
     ext i j

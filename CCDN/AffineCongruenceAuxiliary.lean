@@ -86,7 +86,7 @@ theorem exists_affine_congruence_auxiliary_of_gap {n N t M : ℕ} (hN : 0 < N)
     (hd : 0 < f.totalDegree) (H : ℝ) (hH : 1 ≤ H)
     (hcoeff : ∀ e, |(f.coeff e : ℝ)| ≤ H)
     (mon : Fin N → (Fin (n + 2) →₀ ℕ)) (hmon : Function.Injective mon)
-    (hstd : ∀ j, mon j ∈ standardExponents
+    (hstd : ∀ j, mon j ∈ Ideal.standardExponents
       (Ideal.span {map (Int.castRingHom ℚ) f}) MonomialOrder.degLex)
     (hdegree : ∀ j, Finsupp.degree (mon j) ≤ M)
     (x : Fin t → IntPoint (n + 2)) (hx : ∀ i, eval (x i) f = 0)

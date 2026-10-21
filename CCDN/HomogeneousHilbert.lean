@@ -11,23 +11,12 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Multiplication by a homogeneous polynomial of degree `d` shifts homogeneous components
-by `d`. -/
-lemma homogeneousComponent_mul_left {K σ : Type*} [CommRing K]
-    {f : MvPolynomial σ K} {d : ℕ} (hf : f.IsHomogeneous d)
-    (u : MvPolynomial σ K) (k : ℕ) :
-    homogeneousComponent (d + k) (f * u) = f * homogeneousComponent k u := by
-  let := MvPolynomial.gradedAlgebra (σ := σ) (R := K)
-  have ht := DirectSum.coe_decompose_mul_add_of_left_mem
-    (homogeneousSubmodule σ K) (j := k) hf (b := u)
-  simpa only [← DirectSum.Decomposition.decompose'_eq,
-    MvPolynomial.decomposition.decompose'_apply] using ht
-
 lemma homogeneous_multiplier {K σ : Type*} [CommRing K] [IsDomain K]
     {f u : MvPolynomial σ K} {d M : ℕ} (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (hfu : (f * u).IsHomogeneous M) (hM : d ≤ M) : u.IsHomogeneous (M - d) := by
   have he : f * u = f * homogeneousComponent (M - d) u := by
-    rw [← homogeneousComponent_mul_left hf, Nat.add_sub_of_le hM, homogeneousComponent_eq_self hfu]
+    rw [← homogeneousComponent_mul_of_isHomogeneous_left hf, Nat.add_sub_of_le hM,
+      homogeneousComponent_eq_self hfu]
   rw [mul_left_cancel₀ hf0 he]
   exact homogeneousComponent_isHomogeneous _ _
 
@@ -79,7 +68,7 @@ theorem principal_homogeneous_hilbert_count {K : Type*} [Field K]
     (hf : f.IsHomogeneous d) (hf0 : f ≠ 0) (hM : d ≤ M) :
     Module.finrank K (homogeneousCoordinateSpace (Ideal.span {f}) M) +
       (n + (M - d)).choose (M - d) = (n + M).choose M := by
-  simpa only [finrank_homogeneousSubmodule] using principal_homogeneous_finrank f hf hf0 hM
+  simpa only [finrank_homogeneousSubmodule_fin] using principal_homogeneous_finrank f hf hf0 hM
 
 end
 end CCDN

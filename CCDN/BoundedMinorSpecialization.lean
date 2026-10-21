@@ -1,7 +1,7 @@
 module
 
 public import CCDN.ClosedFormParameterDegree
-public import CCDN.FiniteRowMinor
+public import CCDN.ForMathlib.MatrixRank
 public import CCDN.IntegerPolynomialAvoidance
 public import CCDN.LinearProjectionFiltration
 public import CCDN.PrimitiveNormalization

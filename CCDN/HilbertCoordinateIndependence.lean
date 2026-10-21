@@ -15,7 +15,7 @@ lemma algebraicIndependent_coordinates_of_standard
     {K σ ι : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ)
     (j : ι → σ) (hj : Function.Injective j)
-    (hstd : ∀ a : ι →₀ ℕ, a.mapDomain j ∈ standardExponents I m) :
+    (hstd : ∀ a : ι →₀ ℕ, a.mapDomain j ∈ Ideal.standardExponents I m) :
     AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (X (j i))) := by
   apply algebraicIndependent_iff.mpr
   intro p hp
@@ -25,13 +25,13 @@ lemma algebraicIndependent_coordinates_of_standard
     simp
   rw [he] at hp
   have hmem : rename j p ∈ I := Ideal.Quotient.eq_zero_iff_mem.mp hp
-  have hs : rename j p ∈ restrictSupport K (standardExponents I m) := by
+  have hs : rename j p ∈ restrictSupport K (Ideal.standardExponents I m) := by
     intro a ha
     change a ∈ (rename j p).support at ha
     rw [support_rename_of_injective hj] at ha
     obtain ⟨b, _, rfl⟩ := Finset.mem_image.mp ha
     exact hstd b
-  have hz := standard_polynomial_eq_zero I m hs hmem
+  have hz := Ideal.eq_zero_of_mem_restrictSupport_standardExponents I m hs hmem
   exact (rename_injective j hj) (by simpa only [map_zero] using hz)
 
 lemma orthant_free_monomials_standard {K σ : Type*} [Field K] [Fintype σ]
@@ -41,12 +41,12 @@ lemma orthant_free_monomials_standard {K σ : Type*} [Field K] [Fintype σ]
     (b : σ → Fin (B + 1))
     (hb : (fun i => (b i).val) ∈ standardExponentVectors I m)
     (t : orthantFree b →₀ ℕ) :
-    t.mapDomain Subtype.val ∈ standardExponents I m := by
+    t.mapDomain Subtype.val ∈ Ideal.standardExponents I m := by
   have he : orthantExpand b t ∈ standardExponentVectors I m := by
     apply (hstable _).mpr
     rw [clamp_orthantExpand]
     exact hb
-  apply standardExponents_lower I m (a := Finsupp.equivFunOnFinite.symm
+  apply Ideal.isLowerSet_standardExponents I m (a := Finsupp.equivFunOnFinite.symm
     (orthantExpand b t)) _ he
   intro i
   change (t.mapDomain Subtype.val) i ≤ orthantExpand b t i
