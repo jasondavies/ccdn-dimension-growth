@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Curve.CurvePrimitivePair
 public import CCDN.Hilbert.FilteredIntersection
 public import Mathlib.Algebra.MvPolynomial.PDeriv
@@ -43,7 +44,7 @@ theorem exists_geometrically_integral_curve_projection
       (∃ P : Fin n → MvPolynomial (Fin 2) K, ∀ i,
         (P i).totalDegree ≤ d ∧
         aeval a (pderiv 1 f) * X i - aeval a (P i) ∈ I) ∧
-      ∀ S : Finset (Fin n → K), (∀ z ∈ S, ∀ g ∈ I, eval z g = 0) →
+      ∀ S : Finset (Fin n → K), (∀ z ∈ S, z ∈ idealZeroLocus I) →
         S.card ≤ (S.image (fun z i => eval z (a i))).card + d * (d - 1) := by
   classical
   obtain ⟨k₀, k₁, f, hk₀, hk₁, hf, hfd, hu, hker⟩ :=

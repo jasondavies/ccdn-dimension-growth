@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import CCDN.Algebra.BoundedLinearSeparation
@@ -98,7 +99,7 @@ theorem integral_projection_fiber_card_le_finrank
     [IsScalarTower (MvPolynomial τ K) F E] [FiniteDimensional F E]
     (hint : (projectionCoordinateMap I l).IsIntegral)
     (z : τ → K) (s : Finset (σ → K))
-    (hzero : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0)
+    (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
     (hproj : ∀ x ∈ s, ∀ i, eval x (l i) = z i) :
     s.card ≤ Module.finrank F E := by
   classical

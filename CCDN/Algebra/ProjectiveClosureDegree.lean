@@ -77,7 +77,7 @@ theorem projectiveClosureIdeal_injective {K : Type*} [Field K] {n : ℕ} :
 lemma projectiveClosureIdeal_chart_point {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (a : Fin n → K) :
     affineProjectivePoint a ∈ projectiveIdealZeroLocus (projectiveClosureIdeal I) ↔
-      ∀ f ∈ I, eval a f = 0 := by
+      a ∈ idealZeroLocus I := by
   classical
   constructor
   · intro h f hf

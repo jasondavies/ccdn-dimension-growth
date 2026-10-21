@@ -36,7 +36,7 @@ theorem exists_low_degree_point_separator_of_pos_dimension
       (Ideal.IsPrime.ne_top ‹I.IsPrime›)
     simpa only [hdim, Fintype.card_fin] using hd
   obtain ⟨l, hl, hint, hinj⟩ := exists_linear_integral_normalization_infinite_of_le m n hmn I hdim
-  let V := {x : Fin n → K | (∀ f ∈ I, eval x f = 0) ∧
+  let V := {x : Fin n → K | x ∈ idealZeroLocus I ∧
     ∀ i, eval x (l i) = eval z (l i)}
   have hV : V.Finite := linear_normalization_fiber_finite I l
     (fun i => (hl i).totalDegree_le) hinj hint d ⟨hdim, hdegree⟩ (fun i => eval z (l i))
@@ -103,7 +103,7 @@ theorem exists_low_degree_point_separator_of_dimension_zero
     (z : Fin n → K) (hz : ¬ ∀ f ∈ I, eval z f = 0) :
     ∃ g : MvPolynomial (Fin n) K, g ∈ I ∧ g.totalDegree ≤ d ∧ eval z g ≠ 0 := by
   classical
-  let V := {x : Fin n → K | ∀ f ∈ I, eval x f = 0}
+  let V := {x : Fin n → K | x ∈ idealZeroLocus I}
   have hbound (s : Finset (Fin n → K)) (hs : (s : Set (Fin n → K)) ⊆ V) :
       s.card ≤ d := by
     have h := zero_dimensional_affine_points_card_le I d hdim hdegree
@@ -174,7 +174,7 @@ theorem exists_low_degree_ideal_separator
     ∃ g : MvPolynomial (Fin n) K, g ∈ I ∧ g.totalDegree ≤ d ∧ g ∉ J := by
   classical
   obtain ⟨p, hpI, hpJ⟩ := IsConcreteLE.not_le_iff_exists.mp hIJ
-  have hpoint : ∃ z : Fin n → K, (∀ f ∈ J, eval z f = 0) ∧ eval z p ≠ 0 := by
+  have hpoint : ∃ z : Fin n → K, z ∈ idealZeroLocus J ∧ eval z p ≠ 0 := by
     by_contra! h
     apply hpJ
     rw [← MvPolynomial.IsPrime.vanishingIdeal_zeroLocus (K := K) J]

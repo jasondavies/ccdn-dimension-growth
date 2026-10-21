@@ -100,7 +100,7 @@ theorem chow_projection_integral_of_center_disjoint
     (chowProjectionForms_homogeneous A)
   intro x hx
   by_contra hx0
-  have hxJ : ∀ f ∈ J, eval x f = 0 := fun f hf => hx f (Ideal.mem_sup_left hf)
+  have hxJ : x ∈ idealZeroLocus J := fun f hf => hx f (Ideal.mem_sup_left hf)
   have hxA : A *ᵥ x = 0 := by
     funext i
     rw [← chowProjectionForms_eval]
@@ -125,7 +125,7 @@ theorem chow_projection_cone_image_iff
     (hint : (projectionCoordinateMap J (chowProjectionForms A)).IsIntegral)
     (y : Fin (s + 1) → K) (hy : y ≠ 0) :
     (∀ f ∈ chowProjectionImageIdeal J A, eval y f = 0) ↔
-      ∃ x : Fin (n + 1) → K, x ≠ 0 ∧ (∀ f ∈ J, eval x f = 0) ∧ A *ᵥ x = y := by
+      ∃ x : Fin (n + 1) → K, x ≠ 0 ∧ x ∈ idealZeroLocus J ∧ A *ᵥ x = y := by
   constructor
   · intro hz
     obtain ⟨x, hxJ, he⟩ := exists_point_of_integral_projection_kernel_zero J

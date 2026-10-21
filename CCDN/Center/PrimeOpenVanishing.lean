@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Height.ProjectiveZeroLocus
@@ -22,7 +23,7 @@ theorem mem_prime_ideal_of_vanishing_on_principal_open
     {K σ : Type*} [Field K] [IsAlgClosed K] [Finite σ]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
     (g f : MvPolynomial σ K) (hg : g ∉ I)
-    (hvan : ∀ x : σ → K, (∀ p ∈ I, eval x p = 0) →
+    (hvan : ∀ x : σ → K, x ∈ idealZeroLocus I →
       eval x g ≠ 0 → eval x f = 0) : f ∈ I := by
   have hmul : g * f ∈ I := by
     rw [← MvPolynomial.IsPrime.vanishingIdeal_zeroLocus (K := K) I]
@@ -39,7 +40,7 @@ theorem projectiveClosure_cone_chart_zero
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (x : Fin (n + 1) → K)
     (hx : ∀ p ∈ projectiveClosureIdeal I, eval x p = 0) (hx0 : x 0 ≠ 0) :
-    ∀ f ∈ I, eval (fun i => x i.succ / x 0) f = 0 := by
+    (fun i => x i.succ / x 0) ∈ idealZeroLocus I := by
   intro f hf
   let F := scaledHomogenize f.totalDegree 1 f
   have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous 1 f le_rfl

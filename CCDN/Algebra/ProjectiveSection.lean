@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.HomogeneousHilbert
 public import Mathlib.LinearAlgebra.Projectivization.Basic
 import CCDN.Height.ProjectivePointSeparation
@@ -42,12 +43,12 @@ annihilates the ideal. For homogeneous ideals this is the usual projective zero 
 def projectiveIdealZeroLocus {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K)) :
     Set (Projectivization K (Fin (n + 1) → K)) :=
   {x | ∀ (v : Fin (n + 1) → K) (hv : v ≠ 0),
-    Projectivization.mk K v hv = x → ∀ f ∈ I, eval v f = 0}
+    Projectivization.mk K v hv = x → v ∈ idealZeroLocus I}
 
 lemma projectiveIdealZeroLocus_rep {n : ℕ}
     {I : Ideal (MvPolynomial (Fin (n + 1)) K)} {x : Projectivization K (Fin (n + 1) → K)}
     (hx : x ∈ projectiveIdealZeroLocus I) :
-    ∀ f ∈ I, eval x.rep f = 0 :=
+    x.rep ∈ idealZeroLocus I :=
   hx x.rep x.rep_nonzero x.mk_rep
 
 lemma homogeneousCoordinateSpace_mul_mem {n M m : ℕ}

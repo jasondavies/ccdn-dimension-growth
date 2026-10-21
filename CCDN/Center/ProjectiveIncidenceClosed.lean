@@ -24,7 +24,7 @@ lemma projectiveChowIncidenceLocus_iff_cone {K : Type*} [Field K] {n r : ℕ}
     (hJ : IsHomogeneousIdeal J)
     (U : Fin r × Fin (n + 1) → K) :
     U ∈ projectiveChowIncidenceLocus r J ↔
-      ∃ x : Fin (n + 1) → K, x ≠ 0 ∧ (∀ f ∈ J, eval x f = 0) ∧
+      ∃ x : Fin (n + 1) → K, x ≠ 0 ∧ x ∈ idealZeroLocus J ∧
         ∀ i, ∑ j, U (i,j) * x j = 0 := by
   classical
   constructor

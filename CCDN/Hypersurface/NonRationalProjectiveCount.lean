@@ -26,7 +26,7 @@ def rationalProjectiveIdealZeroLocusOver
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) : Set (ProjectivePoint n) :=
   {x | ∀ (v : Fin (n + 1) → ℚ) (hv : v ≠ 0),
     Projectivization.mk ℚ v hv = x →
-      ∀ f ∈ I, eval (algebraMap ℚ K ∘ v) f = 0}
+      (algebraMap ℚ K ∘ v) ∈ idealZeroLocus I}
 
 theorem projective_ideal_count_le_affine_cone_count
     {n : ℕ} (I : Ideal (CoordinatePolynomial (n + 1))) (B : ℝ) :

@@ -60,7 +60,7 @@ theorem projection_integral_of_geometric_center_disjoint
   intro x hx
   by_contra hx0
   let J := I.map (map (algebraMap K L))
-  have hxJ : ∀ f ∈ J, eval x f = 0 := by
+  have hxJ : x ∈ idealZeroLocus J := by
     have hh : J ≤ RingHom.ker (eval x) := by
       apply Ideal.map_le_iff_le_comap.mpr
       intro f hf

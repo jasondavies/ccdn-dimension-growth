@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.PolynomialLinearDescent
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Algebra.IdealScalarDescent
@@ -44,7 +45,7 @@ theorem prime_ideal_scalar_extension_of_isAlgClosed
     have hn : polynomialCoefficientLinear φ f * polynomialCoefficientLinear ψ g ∉ I := by
       intro hm
       exact (Ideal.IsPrime.mem_or_mem ‹I.IsPrime› hm).elim hφ hψ
-    have hex : ∃ x : Fin n → K, (∀ p ∈ I, eval x p = 0) ∧
+    have hex : ∃ x : Fin n → K, x ∈ idealZeroLocus I ∧
         eval x (polynomialCoefficientLinear φ f * polynomialCoefficientLinear ψ g) ≠ 0 := by
       by_contra! hx
       apply hn
@@ -53,7 +54,7 @@ theorem prime_ideal_scalar_extension_of_isAlgClosed
       rw [aeval_eq_eval]
       exact hx x (fun p hp => by simpa only [aeval_eq_eval] using hxI p hp)
     obtain ⟨x, hx, hne⟩ := hex
-    have hzero : ∀ p ∈ J, eval (fun j => algebraMap K L (x j)) p = 0 := by
+    have hzero : (fun j => algebraMap K L (x j)) ∈ idealZeroLocus J := by
       intro p hp
       change p ∈ RingHom.ker (eval (fun j => algebraMap K L (x j)))
       apply Ideal.span_le.mpr ?_ hp

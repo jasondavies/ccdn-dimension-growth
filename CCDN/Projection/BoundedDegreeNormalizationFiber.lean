@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
@@ -35,7 +36,7 @@ theorem bounded_degree_normalization_fiber_card_le_of_fractionField
     (hint : (projectionCoordinateMap I l).IsIntegral)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (z : Fin (m + 1) → K) (s : Finset (Fin n → K))
-    (hzero : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0)
+    (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
     (hproj : ∀ x ∈ s, ∀ i, eval x (l i) = z i) :
     s.card ≤ d * q ^ (m + 1) := by
   classical
@@ -97,7 +98,7 @@ theorem bounded_degree_normalization_fiber_card_le
     (hint : (projectionCoordinateMap I l).IsIntegral)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (z : Fin (m + 1) → K) (s : Finset (Fin n → K))
-    (hzero : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0)
+    (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
     (hproj : ∀ x ∈ s, ∀ i, eval x (l i) = z i) :
     s.card ≤ d * q ^ (m + 1) :=
   bounded_degree_normalization_fiber_card_le_of_fractionField

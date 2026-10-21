@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.FilteredIntersection
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.RingTheory.Algebraic.Defs
@@ -53,7 +54,7 @@ theorem degree_preserving_projection_card_le {K τ : Type*}
     (hu : Transcendental K ((Ideal.Quotient.mk I) (a 0)))
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0) (hfd : f.totalDegree = d)
     (hker : ∀ g, aeval a g ∈ I ↔ f ∣ g)
-    (S : Finset (τ → K)) (hS : ∀ z ∈ S, ∀ g ∈ I, eval z g = 0) :
+    (S : Finset (τ → K)) (hS : ∀ z ∈ S, z ∈ idealZeroLocus I) :
     S.card ≤ (S.image (fun z j => eval z (a j))).card + d * (d - 1) := by
   obtain ⟨hQ, hQd, P, hP⟩ := degree_preserving_projection_reconstruction I a ha d hdegree hu
     f hf hfd hker

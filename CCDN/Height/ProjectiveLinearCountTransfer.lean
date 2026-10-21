@@ -37,7 +37,7 @@ theorem projective_integer_linear_count_transfer
     (hrelation : aeval (fun i => integerLinearForm (P i)) f ∈ I)
     (M : ℕ)
     (hfinite : ∀ z : Fin (m + 1) → ℚ, ∀ s : Finset (Fin (n + 1) → ℚ),
-      (∀ x ∈ s, ∀ g ∈ I, eval x g = 0) →
+      (∀ x ∈ s, x ∈ idealZeroLocus I) →
       (∀ x ∈ s, ∀ i, eval x (integerLinearForm (P i)) = z i) → s.card ≤ M)
     (H B : ℝ) (hH : 0 ≤ H)
     (hP : ∀ i j, |(P i j : ℝ)| ≤ H) :
@@ -53,7 +53,7 @@ theorem projective_integer_linear_count_transfer
     simp only [L, Matrix.mulVecLin_apply, Matrix.mulVec, dotProduct, Matrix.map_apply,
       Int.coe_castRingHom, eval_linearForm]
   have hfiniteL (z : Fin (m + 1) → ℚ) (u : Finset (Fin (n + 1) → ℚ))
-      (hu : ∀ x ∈ u, ∀ g ∈ I, eval x g = 0) (huz : ∀ x ∈ u, L x = z) :
+      (hu : ∀ x ∈ u, x ∈ idealZeroLocus I) (huz : ∀ x ∈ u, L x = z) :
       u.card ≤ M := by
     apply hfinite z u hu
     intro x hx i

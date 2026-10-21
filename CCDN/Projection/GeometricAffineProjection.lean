@@ -72,7 +72,7 @@ theorem exists_geometric_affine_projection_positive_dimension
     rw [hker]
     exact Ideal.subset_span (Set.mem_singleton f)
   have hfiber (z : Fin (m + 2) → ℚ) (s : Finset (Fin n → ℚ))
-      (hzero : ∀ x ∈ s, ∀ g ∈ I, eval x g = 0)
+      (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
       (hproj : ∀ x ∈ s, ∀ i, eval x (integerLinearForm (b i)) = z i) :
       s.card ≤ d := by
     have hh := bounded_degree_normalization_fiber_card_le I 1 (by omega)

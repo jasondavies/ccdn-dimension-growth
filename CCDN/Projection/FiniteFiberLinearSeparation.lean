@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
@@ -27,7 +28,7 @@ theorem linear_normalization_fiber_finite
     (hint : (projectionCoordinateMap I l).IsIntegral)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (z : Fin (m + 1) → K) :
-    {x : Fin n → K | (∀ f ∈ I, eval x f = 0) ∧ ∀ i, eval x (l i) = z i}.Finite := by
+    {x : Fin n → K | x ∈ idealZeroLocus I ∧ ∀ i, eval x (l i) = z i}.Finite := by
   classical
   by_contra h
   obtain ⟨s, hs, hcard⟩ := Set.Infinite.exists_subset_card_eq h (d + 1)

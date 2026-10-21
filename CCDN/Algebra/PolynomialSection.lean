@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Algebra.PointSeparation
 import Mathlib.LinearAlgebra.Dimension.Finite
@@ -23,7 +24,7 @@ theorem polynomial_points_filtered_lower {K σ ι : Type*} [Field K] [Fintype σ
     (p : Ideal (MvPolynomial σ K)) [p.IsPrime]
     (l : MvPolynomial σ K) (hl : l ∉ p) (m : ℕ) (hld : l.totalDegree ≤ m)
     (z : ι → σ → K) (hz : Function.Injective z)
-    (hzp : ∀ i, z i ∈ {x | ∀ f ∈ p, MvPolynomial.eval x f = 0}) (hzl : ∀ i, MvPolynomial.eval (z i) l = 0) :
+    (hzp : ∀ i, z i ∈ idealZeroLocus p) (hzl : ∀ i, MvPolynomial.eval (z i) l = 0) :
     ∃ D : ℕ, ∀ N : ℕ,
       Fintype.card ι * (N + 1) ≤ Module.finrank K (filteredCoordinateSpace p (D + m * N)) := by
   classical
@@ -69,7 +70,7 @@ theorem polynomial_section_card_le_degree {K σ ι : Type*} [Field K] [Fintype �
       (Module.finrank K (filteredCoordinateSpace p n) : ℤ) = (d : ℤ) * n + c)
     (l : MvPolynomial σ K) (hl : l ∉ p) (m : ℕ) (hld : l.totalDegree ≤ m)
     (z : ι → σ → K) (hz : Function.Injective z)
-    (hzp : ∀ i, z i ∈ {x | ∀ f ∈ p, MvPolynomial.eval x f = 0}) (hzl : ∀ i, MvPolynomial.eval (z i) l = 0) :
+    (hzp : ∀ i, z i ∈ idealZeroLocus p) (hzl : ∀ i, MvPolynomial.eval (z i) l = 0) :
     Fintype.card ι ≤ d * m := by
   by_cases hm : m = 0
   · have hd0 : l.totalDegree = 0 := by omega

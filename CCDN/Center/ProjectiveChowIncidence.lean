@@ -70,7 +70,7 @@ theorem chowPivot_substitution_mem_projectiveClosure
   rw [eval_X] at hx0
   rw [eval_chowPivot_substitution]
   let a : Fin n → K := fun k => x k.succ / x 0
-  have ha : ∀ f ∈ I, eval a f = 0 := projectiveClosure_cone_chart_zero I x hx hx0
+  have ha : a ∈ idealZeroLocus I := projectiveClosure_cone_chart_zero I x hx hx0
   have hinc (i : Fin r) :
       ∑ k, chowPivotCoefficients j x v (i,k) * (Fin.cons 1 a : Fin (n + 1) → K) k = 0 := by
     have hrel := chowPivotCoefficients_relation j x v i

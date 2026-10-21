@@ -64,7 +64,7 @@ theorem zero_dimensional_prime_eq_eval_kernel
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hdim : (filteredHilbertPolynomial I).natDegree = 0)
-    (x : Fin n → K) (hx : ∀ f ∈ I, eval x f = 0) :
+    (x : Fin n → K) (hx : x ∈ idealZeroLocus I) :
     I = RingHom.ker (eval x) :=
   prime_ideal_eq_of_le_of_hilbert_dimension_zero I _ hdim
     (RingHom.ker_ne_top _) hx
@@ -73,7 +73,7 @@ theorem zero_dimensional_prime_with_base_point_descends
     (k K : Type*) [Field k] [Field K] [Algebra k K] [IsGalois k K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hdim : (filteredHilbertPolynomial I).natDegree = 0)
-    (x : Fin n → k) (hx : ∀ f ∈ I, eval (algebraMap k K ∘ x) f = 0) :
+    (x : Fin n → k) (hx : algebraMap k K ∘ x ∈ idealZeroLocus I) :
     (I.comap (map (algebraMap k K))).map (map (algebraMap k K)) = I := by
   apply galois_stable_polynomial_ideal_descends k K I
   intro γ
@@ -87,7 +87,7 @@ theorem zero_dimensional_prime_with_base_point_descends
     change (filteredHilbertPolynomial
       (I.map (mapEquiv (Fin n) γ.toRingEquiv))).natDegree = 0
     rwa [filteredHilbertPolynomial_coefficientEquiv]
-  have hxJ : ∀ f ∈ J, eval (algebraMap k K ∘ x) f = 0 := by
+  have hxJ : algebraMap k K ∘ x ∈ idealZeroLocus J := by
     intro f hf
     obtain ⟨g, hg, rfl⟩ := (Ideal.mem_map_iff_of_surjective
       (map γ.toRingHom) (map_surjective _ γ.surjective)).mp hf

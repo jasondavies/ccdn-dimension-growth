@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
@@ -52,7 +53,7 @@ theorem projection_injective_off_reconstruction {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial τ K)) (a : σ → MvPolynomial τ K)
     (Q : MvPolynomial σ K) (P : τ → MvPolynomial σ K)
     (hP : ∀ i, aeval a Q * X i - aeval a (P i) ∈ I)
-    (z w : τ → K) (hz : ∀ g ∈ I, eval z g = 0) (hw : ∀ g ∈ I, eval w g = 0)
+    (z w : τ → K) (hz : z ∈ idealZeroLocus I) (hw : w ∈ idealZeroLocus I)
     (hQ : eval z (aeval a Q) ≠ 0)
     (he : (fun j => eval z (a j)) = (fun j => eval w (a j))) : z = w := by
   have hev (p : MvPolynomial σ K) : eval z (aeval a p) = eval w (aeval a p) := by

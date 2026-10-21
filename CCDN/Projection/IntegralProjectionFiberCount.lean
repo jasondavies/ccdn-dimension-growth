@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
@@ -28,7 +29,7 @@ theorem exists_projection_fiber_specialization {K σ τ : Type*} [Field K]
     [Algebra (MvPolynomial τ K) (MvPolynomial σ K ⧸ I)]
     (hmap : algebraMap (MvPolynomial τ K) (MvPolynomial σ K ⧸ I) =
       (projectionCoordinateMap I l).toRingHom)
-    (z : τ → K) (x : σ → K) (hzero : ∀ f ∈ I, eval x f = 0)
+    (z : τ → K) (x : σ → K) (hzero : x ∈ idealZeroLocus I)
     (hproj : ∀ i, eval x (l i) = z i) :
     letI : Algebra (MvPolynomial τ K) K := (aeval z).toRingHom.toAlgebra
     ∃ ψ : (MvPolynomial σ K ⧸ I) →ₐ[MvPolynomial τ K] K,
@@ -71,7 +72,7 @@ theorem integral_projection_fiber_card_le
     [IsScalarTower (MvPolynomial τ K) F E] [FiniteDimensional F E]
     (hint : (projectionCoordinateMap I l).IsIntegral)
     (z : τ → K) (s : Finset (σ → K))
-    (hzero : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0)
+    (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
     (hproj : ∀ x ∈ s, ∀ i, eval x (l i) = z i) :
     s.card ≤ (Module.finrank F E) ^ Fintype.card σ := by
   classical

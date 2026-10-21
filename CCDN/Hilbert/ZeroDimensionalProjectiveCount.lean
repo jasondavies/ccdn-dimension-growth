@@ -49,7 +49,7 @@ theorem zero_dimensional_projective_count_le
       Int.coe_castRingHom, eval_linearForm]
     rfl
   have hfinite (z : Fin 1 → ℚ) (s : Finset (Fin (n + 1) → ℚ))
-      (hs : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0) (hz : ∀ x ∈ s, L x = z) :
+      (hs : ∀ x ∈ s, x ∈ idealZeroLocus I) (hz : ∀ x ∈ s, L x = z) :
       s.card ≤ d ^ (n + 1) := by
     apply linear_normalization_fiber_card_le I (fun i => integerLinearForm (a i))
       (fun i => linearForm_totalDegree_le _) hi hint d ⟨hdim, by simpa using hdegree⟩ z s hs

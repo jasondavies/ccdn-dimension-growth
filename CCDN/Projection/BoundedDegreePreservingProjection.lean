@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Curve.CurvePrimitivePair
 public import CCDN.Projection.InfinityParameterReduction
 import CCDN.Curve.CurveRationalParameter
@@ -94,7 +95,7 @@ theorem exists_bounded_projection_card_le {K : Type*} [Field K] [CharZero K]
     ∃ (k₀ k₁ : ℕ) (f : MvPolynomial (Fin 2) K),
       k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧ Irreducible f ∧ f.totalDegree = d ∧
       (∀ g, aeval (![momentCoordinate K n k₀, momentCoordinate K n k₁]) g ∈ I ↔ f ∣ g) ∧
-      ∀ S : Finset (Fin n → K), (∀ z ∈ S, ∀ g ∈ I, eval z g = 0) →
+      ∀ S : Finset (Fin n → K), (∀ z ∈ S, z ∈ idealZeroLocus I) →
         S.card ≤ (S.image (fun z =>
           ![eval z (momentCoordinate K n k₀), eval z (momentCoordinate K n k₁)])).card +
             d * (d - 1) := by

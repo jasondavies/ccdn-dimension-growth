@@ -21,7 +21,7 @@ theorem projective_linear_image_ne_zero_of_finite_zero_fiber
     {n r : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
     (L : (Fin (n + 1) → ℚ) →ₗ[ℚ] (Fin r → ℚ)) (M : ℕ)
     (hfinite : ∀ s : Finset (Fin (n + 1) → ℚ),
-      (∀ z ∈ s, ∀ f ∈ I, eval z f = 0) →
+      (∀ z ∈ s, z ∈ idealZeroLocus I) →
       (∀ z ∈ s, L z = 0) → s.card ≤ M)
     (x : ProjectivePoint n) (hx : x ∈ projectiveIdealZeroLocus I) :
     L x.rep ≠ 0 := by
@@ -59,7 +59,7 @@ theorem projective_linear_fiber_card_le
     (he : ∀ (x) (hx : x ∈ s), Projectivization.mk ℚ (L x.rep) (hL x hx) = y)
     (M : ℕ)
     (hfinite : ∀ t : Finset (Fin (n + 1) → ℚ),
-      (∀ z ∈ t, ∀ f ∈ I, eval z f = 0) →
+      (∀ z ∈ t, z ∈ idealZeroLocus I) →
       (∀ z ∈ t, L z = y.rep) → t.card ≤ M) :
     s.card ≤ M := by
   classical

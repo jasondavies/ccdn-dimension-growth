@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Hilbert.HilbertLinearCoordinates
@@ -25,7 +26,7 @@ theorem integral_projection_exists_point
     (hint : (projectionCoordinateMap I l).IsIntegral)
     (z : τ → K)
     (hz : ∀ p ∈ RingHom.ker (projectionCoordinateMap I l), eval z p = 0) :
-    ∃ x : σ → K, (∀ f ∈ I, eval x f = 0) ∧ ∀ i, eval x (l i) = z i := by
+    ∃ x : σ → K, x ∈ idealZeroLocus I ∧ ∀ i, eval x (l i) = z i := by
   classical
   let R := MvPolynomial τ K
   let A := MvPolynomial σ K ⧸ I
