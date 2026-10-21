@@ -13,7 +13,7 @@ public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.CountingHypotheses
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryDegree
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryLargeHeight
-import CCDN.AuxiliaryPolynomial.PlaneAuxiliarySelection
+import CCDN.AuxiliaryPolynomial.PolynomialMapAuxiliary
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Determinant.HomogeneousDeterminantComparison
 import CCDN.Determinant.ProjectiveHeightDeterminant

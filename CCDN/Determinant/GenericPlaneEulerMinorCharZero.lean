@@ -9,7 +9,7 @@ public import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 public import CCDN.Noether.EulerPairBasis
 import CCDN.Determinant.GenericPlaneMinor
 import CCDN.Determinant.GenericPlaneSmoothness
-import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
+import CCDN.Determinant.GenericPlaneMinor
 import CCDN.Noether.EulerPairBasisValues
 import CCDN.Noether.EulerPairSpecialization
 import CCDN.Noether.ShearNormalization

@@ -9,7 +9,7 @@ public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeComparison
 public import CCDN.AuxiliaryPolynomial.HypersurfaceSmallHeightDegree
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
-import CCDN.AuxiliaryPolynomial.PlaneAuxiliarySelection
+import CCDN.AuxiliaryPolynomial.PolynomialMapAuxiliary
 /-! Higher-dimensional auxiliary polynomials in the small-height range, with exact
 exponents, for any finite prime set whose normalized comparison holds. The
 hypersurface instance retains the original geometric bad-prime factor. -/

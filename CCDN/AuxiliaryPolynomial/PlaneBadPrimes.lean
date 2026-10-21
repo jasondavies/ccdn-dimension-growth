@@ -7,7 +7,7 @@ module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadReduction
 public import CCDN.Plane.FiniteFieldConstants
-public import CCDN.Analysis.PrimeSums
+public import CCDN.Analysis.PrimeCutoff
 public import CCDN.AuxiliaryPolynomial.ConstantLeadingBadReduction
 public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.AuxiliaryPolynomial.GeneralBadReduction

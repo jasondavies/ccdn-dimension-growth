@@ -8,7 +8,6 @@ module
 public import CCDN.AffineCurveBound
 public import CCDN.AffineHypersurfaceDimensionGrowth
 public import CCDN.Algebra.AffineLineLeading
-public import CCDN.Algebra.AffineScalingExponent
 public import CCDN.Algebra.AffineTranslation
 public import CCDN.Algebra.BinaryHomogeneousIrreducibility
 public import CCDN.Algebra.BinomialSectionBound
@@ -67,7 +66,6 @@ public import CCDN.Algebra.RadialHomogeneousMap
 public import CCDN.Algebra.RadialMap
 public import CCDN.Algebra.ReconstructionFunctionField
 public import CCDN.Algebra.RowSelection
-public import CCDN.Algebra.RowSpan
 public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.Algebra.ScaledHomogenizationPrimitive
 public import CCDN.Algebra.ScaledHypersurfaceModel
@@ -78,7 +76,6 @@ public import CCDN.Algebra.WeightedPolynomialTop
 public import CCDN.Analysis.DegreeDependenceNumerics
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.Analysis.PrimeProduct
-public import CCDN.Analysis.PrimeSums
 public import CCDN.Analysis.SmallDegreeSurfaceNumerics
 public import CCDN.Analysis.SurfaceMonomialWeightNumerics
 public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
@@ -135,7 +132,6 @@ public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 public import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryDegree
 public import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryLargeHeight
-public import CCDN.AuxiliaryPolynomial.PlaneAuxiliarySelection
 public import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 public import CCDN.AuxiliaryPolynomial.PlaneFrobeniusAuxiliary
 public import CCDN.AuxiliaryPolynomial.PolynomialMapAuxiliary
@@ -178,7 +174,6 @@ public import CCDN.Center.ChowNestedIncidence
 public import CCDN.Center.ChowNormalizationDegreeComparison
 public import CCDN.Center.ChowPivotParametrization
 public import CCDN.Center.ChowPolynomialPower
-public import CCDN.Center.ChowProjectionBaseChange
 public import CCDN.Center.ChowProjectionCriterion
 public import CCDN.Center.ChowProjectionPower
 public import CCDN.Center.ChowRestrictionBirational
@@ -332,7 +327,6 @@ public import CCDN.Determinant.GenericPlaneSmoothness
 public import CCDN.Determinant.GramDeterminant
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Determinant.HomogeneousDeterminantComparison
-public import CCDN.Determinant.HypersurfaceAggregation
 public import CCDN.Determinant.HypersurfaceCountNormalization
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Determinant.HypersurfaceHeightDeterminant
@@ -342,7 +336,6 @@ public import CCDN.Determinant.HypersurfaceLocalDivisor
 public import CCDN.Determinant.HypersurfaceMultiplicityEstimate
 public import CCDN.Determinant.HypersurfaceOriginStalk
 public import CCDN.Determinant.HypersurfacePointStalk
-public import CCDN.Determinant.HypersurfaceResidue
 public import CCDN.Determinant.HypersurfaceSmoothPoint
 public import CCDN.Determinant.HypersurfaceTangentEquality
 public import CCDN.Determinant.InfiniteWeightEnumeration
@@ -358,7 +351,6 @@ public import CCDN.Determinant.OriginTruncationGenerators
 public import CCDN.Determinant.PlaneMultiplicity
 public import CCDN.Determinant.PlaneMultiplicitySmooth
 public import CCDN.Determinant.PlaneSingularities
-public import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
 public import CCDN.Determinant.PolynomialMapDeterminant
 public import CCDN.Determinant.PrimeAggregation
 public import CCDN.Determinant.ProjectiveHeightDeterminant
@@ -640,7 +632,6 @@ public import CCDN.Projection.BoundedInfinityParameter
 public import CCDN.Projection.BoundedIntegerNormalization
 public import CCDN.Projection.BoundedLinearElimination
 public import CCDN.Projection.BoundedLinearProjection
-public import CCDN.Projection.BoundedProjectionCoordinates
 public import CCDN.Projection.ClosureIntegralComposition
 public import CCDN.Projection.ClosureProjectionBirational
 public import CCDN.Projection.CurveDerivativeReconstruction
@@ -661,7 +652,6 @@ public import CCDN.Projection.HomogeneousBirationalDegree
 public import CCDN.Projection.HomogeneousFilteredProjection
 public import CCDN.Projection.HomogeneousFiniteProjectionDegree
 public import CCDN.Projection.HomogeneousProjectionEquation
-public import CCDN.Projection.HomogenizationAtInfinity
 public import CCDN.Projection.ImageFractionField
 public import CCDN.Projection.InfinityChartCardinality
 public import CCDN.Projection.InfinityParameterReduction

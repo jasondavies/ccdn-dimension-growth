@@ -11,7 +11,7 @@ public import CCDN.Center.ChowLinearSpecialization
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.ResultantDetector
-import CCDN.Center.ChowProjectionBaseChange
+import CCDN.Center.BirationalCenterLocus
 import CCDN.Center.ChowProjectionCriterion
 import CCDN.Center.ChowRestrictionBirational
 import CCDN.Center.GeometricIdealPrimality

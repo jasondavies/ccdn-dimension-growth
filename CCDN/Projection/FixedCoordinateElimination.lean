@@ -8,8 +8,9 @@ module
 public import CCDN.Projection.ProjectiveClosureProjection
 public import CCDN.Projection.IntegerHilbertElimination
 public import CCDN.Algebra.IntegerLinearForms
+public import CCDN.Algebra.HomogeneousChart
 import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
-import CCDN.Projection.HomogenizationAtInfinity
+import CCDN.Algebra.ScaledHomogenization
 
 /-!
 Full-degree affine elimination also gives an integral projection of the
@@ -17,9 +18,38 @@ projective closure, fixing its homogenizing coordinate.
 
 One bounded integer-matrix elimination step on the standard Fin-indexed
 polynomial rings, ready for iteration.
+
+The restriction of a bounded homogenization to the hyperplane at infinity
+is exactly its highest indicated homogeneous component.
 -/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+theorem scaledHomogenize_one_eval_at_infinity {K : Type*} [Field K] {n D : ℕ}
+    (f : MvPolynomial (Fin n) K) (hf : f.totalDegree ≤ D) (b : Fin n → K) :
+    eval (Fin.cons 0 b) (scaledHomogenize D 1 f) =
+      eval b (homogeneousComponent D f) := by
+  classical
+  rw [scaledHomogenize, map_sum, homogeneousComponent_apply, map_sum,
+    Finset.sum_filter]
+  apply Finset.sum_congr rfl
+  intro e he
+  rw [eval_monomial, homogenizedExponent_value]
+  have hle : e.sum (fun _ k => k) ≤ D := (le_totalDegree he).trans hf
+  by_cases h : e.degree = D
+  · have heq : e.sum (fun _ k => k) = D := h
+    simp [h, heq, eval_monomial]
+  · have hpos : 0 < D - e.sum (fun _ k => k) := by
+      change e.sum (fun _ k => k) ≠ D at h
+      omega
+    simp [h, zero_pow (Nat.ne_of_gt hpos)]
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial

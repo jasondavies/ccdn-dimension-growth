@@ -8,7 +8,7 @@ module
 public import CCDN.Center.BirationalCenterLocus
 public import CCDN.Center.ChowLinearSpecialization
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Center.ChowProjectionBaseChange
+import CCDN.Center.BirationalCenterLocus
 import CCDN.Center.GeometricIdealPrimality
 import CCDN.Center.GeometricProjectionHilbert
 import CCDN.Center.GoodCenterWitness

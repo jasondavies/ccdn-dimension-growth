@@ -15,7 +15,7 @@ import CCDN.Algebra.PrimitiveNormalization
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRank
-import CCDN.Algebra.RowSpan
+import CCDN.Algebra.RowSelection
 import CCDN.AuxiliaryPolynomial.CoefficientBound
 
 /-!

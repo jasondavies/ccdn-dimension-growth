@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
 public import CCDN.Height.Box
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy
-import CCDN.Algebra.RowSpan
+import CCDN.Algebra.RowSelection
 import CCDN.AuxiliaryPolynomial.CoefficientBound
 import CCDN.Determinant.GramDeterminant
 import Mathlib.Data.Nat.Factorial.DoubleFactorial

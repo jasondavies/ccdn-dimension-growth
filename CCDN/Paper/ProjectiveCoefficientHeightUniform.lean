@@ -12,7 +12,7 @@ public import CCDN.Height.ProjectiveZeroLocus
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy
-import CCDN.Algebra.RowSpan
+import CCDN.Algebra.RowSelection
 import CCDN.AuxiliaryPolynomial.CoefficientBound
 import CCDN.AuxiliaryPolynomial.HypersurfaceCoefficientDichotomy
 import CCDN.Determinant.AmbientProjectiveDeterminant

@@ -9,15 +9,46 @@ public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Determinant.HypersurfaceLocalDeterminant
 public import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.BlockDeterminant
-import CCDN.Determinant.HypersurfaceResidue
 import CCDN.Determinant.ProjectiveLocalDeterminant
 import CCDN.ForMathlib.Matrix
 import CCDN.Height.ProjectiveZeroLocus
-/-! Projective hypersurface determinants in all positive dimensions.
+
+/-!
+Projective hypersurface determinants in all positive dimensions.
 Unit normalization modulo prime powers transfers the local affine
-bound to homogeneous evaluation matrices of a common degree. -/
+bound to homogeneous evaluation matrices of a common degree.
+
+Singular local determinant bounds at a residue point in arbitrary
+dimension. Multiplicity is obtained from the first nonzero translated homogeneous
+component.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+/-- Translation carries the finite-precision determinant theorem to any
+residue class. Its divisor and its precision use the same explicit exponent. -/
+theorem hypersurface_residue_pow_dvd_det_mod {p n μ s : ℕ} [Fact p.Prime]
+    (f : MvPolynomial (Fin (n + 2)) ℤ) (a : Fin (n + 2) → ℤ)
+    (hf : map (Int.castRingHom (ZMod p)) (originShift a f) ∈
+      idealOfVars (Fin (n + 2)) (ZMod p) ^ μ)
+    (hμ : homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (originShift a f)) ≠ 0)
+    (x : Fin s → Fin (n + 2) → ℤ) (hx : ∀ i j, (p : ℤ) ∣ x i j - a j)
+    (hfx : ∀ i, (p : ℤ) ^ hypersurfaceMultiplicityExponent (n + 1) μ s ∣ eval (x i) f)
+    (F : Fin s → MvPolynomial (Fin (n + 2)) ℤ) :
+    (p : ℤ) ^ hypersurfaceMultiplicityExponent (n + 1) μ s ∣
+      (Matrix.of fun i j => eval (x i) (F j)).det := by
+  have h := hypersurface_pow_dvd_det_mod (originShift a f) hf hμ
+    (fun i j => x i j - a j) hx
+    (fun i => by simpa only [eval_sub_originShift] using hfx i)
+    (fun j => originShift a (F j))
+  simpa only [eval_sub_originShift] using h
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial

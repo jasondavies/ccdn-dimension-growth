@@ -7,7 +7,7 @@ module
 
 public import CCDN.Determinant.HypersurfaceLocalDivisor
 import CCDN.Determinant.BlockDeterminant
-import CCDN.Determinant.HypersurfaceAggregation
+import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
 import CCDN.Determinant.InitialFormMultiplication
 import CCDN.Determinant.HypersurfaceCountNormalization
 import CCDN.Hypersurface.ProjectiveHypersurfaceCount

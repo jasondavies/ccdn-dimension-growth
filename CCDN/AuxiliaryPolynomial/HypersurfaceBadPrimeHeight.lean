@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.IntegerPlaneLogHeight
-public import CCDN.Analysis.PrimeSums
+public import CCDN.Analysis.PrimeCutoff
 public import CCDN.AuxiliaryPolynomial.DegreeBound
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimes
 public import CCDN.Height.IntegerCoefficientHeight

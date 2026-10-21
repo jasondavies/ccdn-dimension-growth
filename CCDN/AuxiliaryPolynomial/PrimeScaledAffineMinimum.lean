@@ -8,7 +8,7 @@ module
 public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.ScalingPrime
 public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineHeight
-import CCDN.Algebra.AffineScalingExponent
+import CCDN.AuxiliaryPolynomial.PrimeScaledAffineHeight
 import CCDN.AuxiliaryPolynomial.PrimeScaledAffineAuxiliary
 import CCDN.AuxiliaryPolynomial.ScaledHypersurfaceBadPrimes
 import CCDN.AuxiliaryPolynomial.HypersurfaceHeightTransfer

@@ -12,7 +12,7 @@ public import CCDN.Height.Box
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.Tactic.Continuity
 import CCDN.Algebra.RowSelection
-import CCDN.Algebra.RowSpan
+import CCDN.Algebra.RowSelection
 
 /-! Vanishing maximal determinants on a standard-monomial family produce
 an integer auxiliary outside the original principal ideal. -/

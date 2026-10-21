@@ -11,7 +11,7 @@ import CCDN.Projection.ProjectiveClosureSpecialization
 import CCDN.AuxiliaryPolynomial.HypersurfaceGoodDirection
 import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 import CCDN.Projection.FixedCoordinateElimination
-import CCDN.Projection.HomogenizationAtInfinity
+import CCDN.Projection.FixedCoordinateElimination
 import Mathlib.Algebra.MvPolynomial.Funext
 import CCDN.ForMathlib.MvPolynomial
 /-! Over any infinite field a full-degree affine elimination also gives

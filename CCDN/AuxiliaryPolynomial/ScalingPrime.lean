@@ -5,8 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Analysis.PrimeSums
-import CCDN.Analysis.PrimeCutoff
+public import CCDN.Analysis.PrimeCutoff
 import CCDN.AuxiliaryPolynomial.BadPrimeCharge
 /-! A scaling prime from the first Mertens estimate. If every prime in a fixed
 multiplicative interval divides a nonzero integer, that integer has large

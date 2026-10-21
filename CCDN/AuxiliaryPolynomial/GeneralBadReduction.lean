@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.FiniteFieldConstants
-public import CCDN.Analysis.PrimeSums
+public import CCDN.Analysis.PrimeCutoff
 public import CCDN.AuxiliaryPolynomial.ConstantLeadingBadReduction
 import CCDN.AuxiliaryPolynomial.BadPrimeCharge
 import CCDN.Plane.ShearHeight
