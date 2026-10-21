@@ -95,6 +95,24 @@ lemma surface_prime_curve_degree_le
       exact ⟨hI, hgI⟩)
   simpa only [sum_singleton] using hh
 
+/-- A one-prime deletion edge `R.erase p ⊂ R` of the congruence family `F`, at the smooth
+residues `r`, crossing the curve `I` near the point `x`: the primes of `R` lie in the window of
+log-size `L`, the modulus of `R` is less than `c L X` and that of `R.erase p` is less than `X`
+(where `c` is `scalingPrimeRatio`), the parent auxiliary lies in `I`, the child auxiliary does
+not, and the child vanishes at `x`. -/
+structure IsSurfaceResidueEdge {f : MvPolynomial (Fin 3) ℤ} {A B : ℝ}
+    (F : SurfaceCongruenceFamily f B A) (I : Ideal (CoordinatePolynomial 3)) (L X : ℝ)
+    (x : IntPoint 3) (R : Finset ℕ) (hR : ∀ p ∈ R, p.Prime) (p : ℕ)
+    (r : SmoothAffineResidueFamily f R) : Prop where
+  subset_window : R ⊆ congruencePrimeWindow L
+  prod_lt : (∏ q ∈ R, (q : ℝ)) < scalingPrimeRatio * L * X
+  erase_prod_lt : (∏ q ∈ R.erase p, (q : ℝ)) < X
+  parent_mem : map (Int.castRingHom ℚ)
+    (F.auxiliary (R.erase p) (fun q hq => hR q (mem_of_mem_erase hq))
+      (r.restrict (erase_subset p R))) ∈ I
+  child_not_mem : map (Int.castRingHom ℚ) (F.auxiliary R hR r) ∉ I
+  child_vanishes : eval x (F.auxiliary R hR r) = 0
+
 /-- A point on an initial prime curve above the terminal degree cutoff
 lies in a proper section across a bounded-modulus residue edge. -/
 theorem surface_residue_boundary_of_large_curve
@@ -109,15 +127,7 @@ theorem surface_residue_boundary_of_large_curve
     (x : IntPoint 3) (hx : ∀ j, |(x j : ℝ)| ≤ B) (hxf : eval x f = 0)
     (hsmooth : ∃ j, eval x (pderiv j f) ≠ 0) :
     ∃ R : Finset ℕ, ∃ hR : ∀ p ∈ R, p.Prime,
-      ∃ p ∈ R, ∃ r : SmoothAffineResidueFamily f R,
-        R ⊆ congruencePrimeWindow L ∧
-        (∏ q ∈ R, (q : ℝ)) < scalingPrimeRatio * L * X ∧
-        (∏ q ∈ R.erase p, (q : ℝ)) < X ∧
-        map (Int.castRingHom ℚ)
-          (F.auxiliary (R.erase p) (fun q hq => hR q (mem_of_mem_erase hq))
-            (r.restrict (erase_subset p R))) ∈ I ∧
-        map (Int.castRingHom ℚ) (F.auxiliary R hR r) ∉ I ∧
-        eval x (F.auxiliary R hR r) = 0 := by
+      ∃ p ∈ R, ∃ r : SmoothAffineResidueFamily f R, IsSurfaceResidueEdge F I L X x R hR p r := by
   classical
   have hL := hW.one_le_window
   obtain ⟨P, hPW, hPprod, hPsmooth⟩ := exists_smooth_prime_window_subset f hW.one_le_height

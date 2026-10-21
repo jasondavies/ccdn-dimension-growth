@@ -137,12 +137,14 @@ theorem large_curve_point_mem_surfaceResidueResidualLocus
     (hxI : rationalPoint x ∈ idealZeroLocus I)
     (hsmooth : ∃ j, eval x (pderiv j f) ≠ 0) :
     rationalPoint x ∈ surfaceResidueResidualLocus F S L X hW.one_le_window := by
-  obtain ⟨R, hR, p, hp, r, hRW, hprod, _, hparent, hchild, hzero⟩ :=
+  obtain ⟨R, hR, p, hp, r, hedge⟩ :=
     surface_residue_boundary_of_large_curve f hir hA hW F I hI hinitI hlarge x hx hxf hsmooth
-  apply mem_surfaceResidueResidualLocus F S hW.one_le_window R hRW hR p hp hprod.le r
+  apply mem_surfaceResidueResidualLocus F S hW.one_le_window R hedge.subset_window hR p hp
+    hedge.prod_lt.le r
   apply Set.mem_iUnion.mpr
-  refine ⟨I, Set.mem_iUnion.mpr ⟨mem_filter.mpr ⟨hIS, hparent, hchild⟩, hxI, ?_⟩⟩
-  have hh := congrArg (Int.castRingHom ℚ) hzero
+  refine ⟨I, Set.mem_iUnion.mpr
+    ⟨mem_filter.mpr ⟨hIS, hedge.parent_mem, hedge.child_not_mem⟩, hxI, ?_⟩⟩
+  have hh := congrArg (Int.castRingHom ℚ) hedge.child_vanishes
   rw [map_eval, map_zero] at hh
   exact hh
 
