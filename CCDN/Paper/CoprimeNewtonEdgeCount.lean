@@ -20,13 +20,18 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- The product `c_d · c_e` of the coefficients of `x^d` and `y^e` in a plane equation `f`, the
+coefficients of the two endpoints of the Newton edge in CCDN Corollary 4.2.5. -/
 def newtonEdgeCoefficientProduct (f : MvPolynomial (Fin 2) ℤ) (d e : ℕ) : ℤ :=
   f.coeff (Finsupp.single 0 d) * f.coeff (Finsupp.single 1 e)
 
+/-- For a coprime Newton edge, the product of the two endpoint coefficients is nonzero. -/
 lemma HasCoprimeNewtonEdge.coefficient_product_ne_zero
     {f : MvPolynomial (Fin 2) ℤ} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e) :
     newtonEdgeCoefficientProduct f d e ≠ 0 := mul_ne_zero h.x_coeff h.y_coeff
 
+/-- For a coprime Newton edge of an integer polynomial, the product of the two endpoint coefficients
+has absolute value at least `1`. -/
 lemma HasCoprimeNewtonEdge.coefficient_product_abs_one_le
     {f : MvPolynomial (Fin 2) ℤ} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e) :
     1 ≤ |(newtonEdgeCoefficientProduct f d e : ℝ)| := by
@@ -60,14 +65,20 @@ theorem coprime_newton_edge_bad_prime_factor
     (show Real.log (D : ℝ) ≤ 1 * (Real.log (D : ℝ) + 1) by linarith)
   simpa only [D, Int.cast_abs] using hh
 
+/-- The absolute constant `C` in the logarithm-free coprime Newton-edge count of CCDN Corollary
+4.2.5. -/
 def coprimeNewtonEdgeCountConstant : ℝ :=
   affineHypersurfaceAuxiliaryConstant 0 * (Real.exp (2 * mertensError + 1) + 2)
 
+/-- The constant `coprimeNewtonEdgeCountConstant` is positive. -/
 lemma coprimeNewtonEdgeCountConstant_pos : 0 < coprimeNewtonEdgeCountConstant := by
   unfold coprimeNewtonEdgeCountConstant
   have := affineHypersurfaceAuxiliaryConstant_pos 0
   positivity
 
+/-- CCDN Corollary 4.2.5 for primitive equations: a primitive integer plane equation `f` with a
+coprime Newton edge `(d, e)` has at most `C · d⁴ · (log |c_d c_e| + 1) · B ^ (1 / d)` integer points
+of height at most `B ≥ 1`. -/
 theorem primitive_coprime_newton_edge_count
     (f : MvPolynomial (Fin 2) ℤ) {d e : ℕ} (h : HasCoprimeNewtonEdge f d e)
     (hprim : PrimitiveIntegerPolynomial f) {B : ℝ} (hB : 1 ≤ B) :

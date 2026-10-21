@@ -25,6 +25,8 @@ open MvPolynomial
 
 variable {K : Type*} [Field K]
 
+/-- The `K`-dimension of the degree-`k` layer of the maximal ideal of the local ring of the
+hypersurface `f = 0` at the rational point `a`. -/
 def hypersurfacePointLayerDimension {n : ℕ}
     (f : MvPolynomial (Fin n) K) (a : Fin n → K) [Fact (eval a f = 0)] (k : ℕ) : ℕ :=
   Module.finrank K (Ideal.powerLayer K (A := HypersurfacePointStalk f a)

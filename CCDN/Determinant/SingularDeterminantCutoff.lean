@@ -18,6 +18,7 @@ namespace CCDN
 noncomputable section
 open Finset Real MvPolynomial
 
+/-- For `d⁴ ≤ L < p`, the singular-point correction `d² (d - 1)` is at most `d² √p`. -/
 lemma singular_correction_absorb {d p : ℕ} (hd : 0 < d) {L : ℝ}
     (hdL : (d : ℝ) ^ 4 ≤ L) (hpL : L < (p : ℝ)) :
     ((d ^ 2 * (d - 1) : ℕ) : ℝ) ≤ (d : ℝ) ^ 2 * Real.sqrt p := by

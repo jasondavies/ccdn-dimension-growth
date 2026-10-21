@@ -27,11 +27,13 @@ def homogeneousDeterminantFamilyGcd {ι : Type*} [Fintype ι] {n s : ℕ}
     (F : ι → Fin s → MvPolynomial (Fin n) ℤ) (z : Fin s → IntPoint n) : ℤ :=
   univ.gcd fun l => (Matrix.of fun i j => eval (z j) (F l i)).det
 
+/-- The gcd of the family of evaluation determinants of CCDN Proposition 3.2.6 is nonnegative. -/
 lemma homogeneousDeterminantFamilyGcd_nonneg {ι : Type*} [Fintype ι] {n s : ℕ}
     (F : ι → Fin s → MvPolynomial (Fin n) ℤ) (z : Fin s → IntPoint n) :
     0 ≤ homogeneousDeterminantFamilyGcd F z :=
   Finset.Int.finsetGcd_nonneg
 
+/-- For a square integer matrix, the gcd of the maximal minors divides the determinant. -/
 lemma square_minorGcd_dvd_det {s : ℕ} (A : Matrix (Fin s) (Fin s) ℤ) :
     Int.Matrix.minorGcd A ∣ A.det := by
   classical

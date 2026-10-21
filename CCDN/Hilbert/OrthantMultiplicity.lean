@@ -15,6 +15,9 @@ integer, counted by cells of the standard-exponent partition. -/
 namespace CCDN
 noncomputable section
 
+/-- A nonempty sum of shifted binomial polynomials of dimensions `dim i` has degree the maximal
+dimension `m` and leading coefficient `d / m!`, where `d > 0` is the number of summands of maximal
+dimension. -/
 lemma sum_preHilbertPoly_leading {ι : Type*} (s : Finset ι) (hs : s.Nonempty)
     (dim shift : ι → ℕ) :
     let m := s.sup dim
@@ -57,11 +60,14 @@ lemma sum_preHilbertPoly_leading {ι : Type*} (s : Finset ι) (hs : s.Nonempty)
   rw [Polynomial.leadingCoeff, he, hc, div_eq_mul_inv]
 
 open Classical in
+/-- The cells `b ∈ {0, …, B}^σ` of the clamped orthant partition that lie in `S`. -/
 def lowerSetOrthantPatterns {σ : Type*} [Fintype σ]
     (S : Set (σ → ℕ)) (B : ℕ) : Finset (σ → Fin (B + 1)) :=
   Finset.univ.filter (fun b => (fun i => (b i).val) ∈ S)
 
 open Classical in
+/-- The orthant polynomial of `S` is the sum, over the cells of `S`, of the shifted binomial
+polynomials of the corresponding orthants. -/
 lemma lowerSetOrthantPolynomial_eq_sum {σ : Type*} [Fintype σ]
     (S : Set (σ → ℕ)) (B : ℕ) :
     lowerSetOrthantPolynomial S B =

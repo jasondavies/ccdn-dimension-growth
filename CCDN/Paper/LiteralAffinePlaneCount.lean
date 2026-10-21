@@ -38,6 +38,8 @@ def affinePlaneCoefficientCountExpression (d : ℕ) (B L b : ℝ) : ℝ :=
         ((d : ℝ) ^ 4 * b) / L ^ (1 / (d : ℝ) ^ 2) +
     d * Real.log B + (d : ℝ) ^ 4
 
+/-- In the plane case, `d` times the auxiliary degree expression of the affine auxiliary theorem is
+the coefficient-sensitive count expression of CCDN Corollary 4.2.4. -/
 theorem degree_mul_affineAuxiliaryDegreeExpression (d : ℕ) (B L b : ℝ) :
     (d : ℝ) * affineAuxiliaryDegreeExpression 0 d B L b =
       affinePlaneCoefficientCountExpression d B L b := by

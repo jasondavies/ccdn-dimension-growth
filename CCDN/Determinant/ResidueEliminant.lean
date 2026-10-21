@@ -20,29 +20,40 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
+/-- The embedding `F[t] → F[u][t]` of polynomials in `t` as polynomials with constant coefficients
+in the new parameter `u`. -/
 def residueParameterLift {F : Type*} [CommRing F] : F[X] →+* F[X][X] :=
   mapRingHom (C : F →+* F[X])
 
+/-- The specialization `F[u][t] → F[t]` at `u = 0`. -/
 def residueParameterZero {F : Type*} [CommRing F] : F[X][X] →+* F[X] :=
   mapRingHom (evalRingHom (0 : F))
 
+/-- Specializing `u = 0` after lifting a polynomial in `t` to `F[u][t]` recovers it. -/
 @[simp] lemma residueParameterZero_lift {F : Type*} [CommRing F] (a : F[X]) :
     residueParameterZero (residueParameterLift a) = a := by
   ext i
   simp [residueParameterZero, residueParameterLift]
 
+/-- Applying `residueParameterLift` and then `residueParameterZero` to the coefficients of a
+polynomial over `F[t]` recovers it. -/
 @[simp] lemma residueParameterZero_map_lift {F : Type*} [CommRing F] (f : F[X][X]) :
     (f.map residueParameterLift).map residueParameterZero = f := by
   ext i
   simp
 
+/-- The polynomial `u · ∂f/∂z - g` in `z`, with coefficients in `F[u][t]`, whose common roots with
+`f` are the values `u = g(β) / f'(β)`. -/
 def residueEliminationEquation {F : Type*} [CommRing F] (f g : F[X][X]) : F[X][X][X] :=
   C (C X) * (f.map residueParameterLift).derivative - g.map residueParameterLift
 
+/-- The resultant in `z` of `f` and `u · ∂f/∂z - g`, a polynomial in `t` with coefficients in `F[u]`
+that vanishes at every ratio `u = g(β) / f'(β)` at a simple root `β` of `f`. -/
 def residueEliminant {F : Type*} [CommRing F] (f g : F[X][X]) : F[X][X] :=
   (f.map residueParameterLift).resultant (residueEliminationEquation f g)
     f.natDegree (f.natDegree - 1)
 
+/-- At `u = 0`, `residueEliminationEquation f g` specializes to `-g`. -/
 @[simp] lemma residueEliminationEquation_zero {F : Type*} [CommRing F] (f g : F[X][X]) :
     (residueEliminationEquation f g).map residueParameterZero = -g := by
   simp only [residueEliminationEquation, Polynomial.map_sub, Polynomial.map_mul, Polynomial.map_C]
@@ -55,6 +66,8 @@ private lemma residueEliminant_zero {F : Type*} [CommRing F] (f g : F[X][X]) :
   rw [residueEliminant, ← resultant_map_map]
   rw [residueParameterZero_map_lift, residueEliminationEquation_zero]
 
+/-- If `g` has smaller `z`-degree than `f`, then `residueEliminationEquation f g` has `z`-degree at
+most `deg_z f - 1`. -/
 lemma residueEliminationEquation_natDegree_le {F : Type*} [CommRing F]
     (f g : F[X][X]) (hg : g.natDegree < f.natDegree) :
     (residueEliminationEquation f g).natDegree ≤ f.natDegree - 1 := by
@@ -73,6 +86,8 @@ private lemma coefficient_derivative_natDegree_le {R : Type*} [CommRing R]
   rw [he]
   exact (natDegree_smul_le _ _).trans (hf _)
 
+/-- If all coefficients of `f` and `g` have `t`-degree at most `D`, then the residue eliminant has
+`t`-degree at most `(2 deg_z f - 1) · D`. -/
 theorem residueEliminant_natDegree_le {F : Type*} [CommRing F]
     (f g : F[X][X]) (D : ℕ)
     (hf : ∀ i, (f.coeff i).natDegree ≤ D)

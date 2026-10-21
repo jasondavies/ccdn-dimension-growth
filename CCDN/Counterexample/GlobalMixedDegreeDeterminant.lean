@@ -20,12 +20,17 @@ noncomputable section
 open MvPolynomial Finset
 open scoped BigOperators
 
+/-- The elementary bound `log N! ≤ N log N`, used in the counterexample to the mixed-degree reading
+of CCDN Proposition 3.2.6. -/
 lemma log_factorial_le_mul_log {N : ℕ} (_hN : 0 < N) :
     Real.log (N.factorial : ℝ) ≤ (N : ℝ) * Real.log N := by
   have h : (N.factorial : ℝ) ≤ (N : ℝ) ^ N := by exact_mod_cast Nat.factorial_le_pow N
   have hh := Real.log_le_log (by positivity : (0 : ℝ) < N.factorial) h
   simpa only [Real.log_pow] using hh
 
+/-- For `N ≥ 2`, the logarithm of the absolute value of the determinant of `globalMixedDegreeMatrix
+N` is at most `(3 / 4) N⁴ log N`. This upper bound is what makes the matrix a counterexample to the
+mixed-degree reading of CCDN Proposition 3.2.6. -/
 lemma globalMixedDegreeMatrix_log_det_le {N : ℕ} (hN : 2 ≤ N) :
     Real.log (|(globalMixedDegreeMatrix N).det| : ℝ) ≤
       (3 / 4 : ℝ) * (N : ℝ) ^ 4 * Real.log N := by

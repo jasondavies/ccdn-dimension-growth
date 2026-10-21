@@ -18,6 +18,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- CCDN Theorem 4.3.5 (Salberger's surface theorem): for each degree `d` there are positive
+constants `C` and `c` such that, for every absolutely irreducible form `F` of degree `d` in four
+variables not divisible by `X₀` and every `B ≥ 1`, there are at most
+`C (B ^ (1 / √d) log B + 1)` geometrically integral projective curves on `F = 0`, of degree at
+most `d²` and not contained in `X₀ = 0`, off which at most
+`C B ^ (2 / √d + c / log (1 + log B))` nonsingular points of the affine chart of height at most
+`B` remain. -/
 theorem salberger_surface_cover (d : ℕ) (hd : 1 ≤ d) :
     ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
       ∀ (F : CoordinatePolynomial 4), F.IsHomogeneous d →

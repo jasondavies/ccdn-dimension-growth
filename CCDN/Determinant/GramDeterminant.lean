@@ -54,6 +54,9 @@ private theorem abs_gram_det_le {s N : ℕ} (A : Matrix (Fin s) (Fin N) ℝ) {H 
   have h := Matrix.det_le (abv := AbsoluteValue.abs) hentry
   simpa [nsmul_eq_mul] using h
 
+/-- Archimedean Gram determinant bound: if `A` is the real evaluation matrix of `N` monomials of
+degree at most `M` at `s` integer points in the box of radius `B ≥ 1`, then `|det (A Aᵀ)| ≤ s! · (N
+· B ^ (2 M)) ^ s`. -/
 theorem evaluation_gram_det_le {n N s M : ℕ}
     (mon : Fin N → (Fin n →₀ ℕ)) (points : Fin s → (Fin n → ℤ))
     {B : ℝ} (hB : 1 ≤ B) (hpoints : ∀ i, InBox (points i) B)

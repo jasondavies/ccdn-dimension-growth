@@ -28,10 +28,13 @@ def filteredMultiples {K σ : Type*} [Field K] (f : MvPolynomial σ K) (N : ℕ)
     Submodule K (MvPolynomial σ K) :=
   (restrictTotalDegree σ K (N - f.totalDegree)).map (LinearMap.mulLeft K f)
 
+/-- `x` is a filtered multiple of `f` at level `N` if and only if `x = f * u` with `u` of total
+degree at most `N - deg f`. -/
 lemma mem_filteredMultiples {K σ : Type*} [Field K] (f x : MvPolynomial σ K) (N : ℕ) :
     x ∈ filteredMultiples f N ↔ ∃ u, u.totalDegree ≤ N - f.totalDegree ∧ f * u = x := by
   simp [filteredMultiples, Submodule.mem_map, mem_restrictTotalDegree, LinearMap.mulLeft_apply]
 
+/-- If `deg f ≤ N`, the filtered multiples of `f` at level `N` have total degree at most `N`. -/
 lemma filteredMultiples_le_degree {K σ : Type*} [Field K] (f : MvPolynomial σ K)
     {N : ℕ} (hN : f.totalDegree ≤ N) : filteredMultiples f N ≤ restrictTotalDegree σ K N := by
   intro x hx
@@ -44,6 +47,8 @@ instance filteredMultiples_finite {K σ : Type*} [Field K] [Finite σ]
   unfold filteredMultiples
   infer_instance
 
+/-- For `f ≠ 0`, the space of filtered multiples of `f` at level `N` has the dimension of the space
+of polynomials of total degree at most `N - deg f`. -/
 lemma filteredMultiples_finrank {K σ : Type*} [Field K] (f : MvPolynomial σ K)
     (hf : f ≠ 0) (N : ℕ) :
     Module.finrank K (filteredMultiples f N) =
@@ -112,8 +117,9 @@ lemma finrank_map_add_kernel_subspace_le {K M W : Type*} [Field K]
   have hle := Submodule.finrank_mono (le_inf hUV hUker)
   omega
 
-/-- Bounded-degree polynomials in the quotient coordinate ring. Its dimension over `ℚ`
-is `CCDN.affineHilbertFunction`. -/
+/-- Bounded-degree polynomials in the quotient coordinate ring: the image in `K[X] ⧸ I` of the
+polynomials of total degree at most `N`. For `K = ℚ` its dimension is
+`CCDN.affineHilbertFunction I N`. -/
 def filteredCoordinateSpace {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (N : ℕ) : Submodule K (MvPolynomial σ K ⧸ I) :=
   (restrictTotalDegree σ K N).map (Ideal.Quotient.mkₐ K I).toLinearMap

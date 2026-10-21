@@ -24,6 +24,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- First, coefficient-sensitive inequality of CCDN Corollary 3.1.2: an irreducible primitive
+integer form `f` of degree `d > 0` in three variables has at most `C (d⁴ b(f) B ^ (2 / d) / H(f) ^
+(1 / d²) + d log B + d⁴)` rational points of height at most `B`, where `b(f)` is the bad-prime
+factor and `H(f)` the coefficient height. -/
 theorem projective_plane_coefficient_count {d : ℕ}
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hprim : PrimitiveIntegerPolynomial f) (hir : Irreducible f)
@@ -104,6 +108,8 @@ theorem hypersurface_badPrime_div_height_bound {n d : ℕ}
   rw [hpow]
   exact hbad.trans (mul_le_mul_of_nonneg_left hmax hK)
 
+/-- The absolute constant in the uniform bound `C d⁴ B ^ (2 / d)` of the second inequality of CCDN
+Corollary 3.1.2. -/
 def projectivePlaneCoefficientUniformConstant : ℝ :=
   hypersurfaceAbsoluteAuxiliaryConstant 0 *
     (2 * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant 3 + 2)

@@ -32,6 +32,7 @@ def projectiveMonomialMap {K σ : Type*} [Field K]
   map_add' a b := by apply Subtype.ext; simp
   map_smul' c a := by apply Subtype.ext; simp
 
+/-- `projectiveMonomialMap I n a` is the monomial `a · Tⁿ` in the homogeneous coordinate algebra. -/
 @[simp] lemma projectiveMonomialMap_val {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) (n : ℕ) (a : filteredCoordinateSpace I n) :
     (projectiveMonomialMap I n a : Polynomial (MvPolynomial σ K ⧸ I)) =

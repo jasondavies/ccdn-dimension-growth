@@ -19,9 +19,11 @@ namespace CCDN
 noncomputable section
 open Finset
 
+/-- The cumulative sum `r 0 + r 1 + ⋯ + r k` of a layer profile `r`. -/
 def weightProfileCumulative (r : ℕ → ℕ) (k : ℕ) : ℕ :=
   ∑ j ∈ range (k + 1), r j
 
+/-- The cumulative sums of a layer profile are monotone in `k`. -/
 lemma weightProfileCumulative_mono (r : ℕ → ℕ) : Monotone (weightProfileCumulative r) := by
   intro i j hij
   exact sum_le_sum_of_subset (range_mono (by omega))

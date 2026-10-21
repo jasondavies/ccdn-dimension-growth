@@ -51,6 +51,8 @@ def gridEisensteinPolynomial {K : Type*} [Field K] (V : K[X]) (k : ℕ) : K[X][X
   V.map C + C (V * C (V.coeff 0)⁻¹) * (X ^ V.natDegree - V.map C) +
     C (gridEisensteinCorrection V k)
 
+/-- The `i`-th coefficient of `gridEisensteinPolynomial V k` in the outer variable, written out from
+its three summands. -/
 lemma gridEisensteinPolynomial_coeff {K : Type*} [Field K]
     (V : K[X]) (k i : ℕ) :
     (gridEisensteinPolynomial V k).coeff i =
@@ -127,6 +129,8 @@ theorem gridEisensteinPolynomial_irreducible {K : Type*} [Field K]
   · rw [gridEisensteinPolynomial_simple V k h0 hd hk]
     exact h0
 
+/-- `gridEisensteinPolynomial V k` vanishes at every point `(x, y)` whose coordinates are both roots
+of `V`. -/
 lemma gridEisensteinPolynomial_eval_zero {K : Type*} [Field K]
     (V : K[X]) (k : ℕ) (x y : K) (hx : V.eval x = 0) (hy : V.eval y = 0) :
     ((gridEisensteinPolynomial V k).map (evalRingHom y)).eval x = 0 := by

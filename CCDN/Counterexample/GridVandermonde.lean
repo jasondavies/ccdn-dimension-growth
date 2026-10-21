@@ -19,6 +19,8 @@ noncomputable section
 open MvPolynomial Finset
 open scoped BigOperators Kronecker
 
+/-- If the integers `v 0 < v 1 < ⋯` have all pairwise differences `v j - v i` (for `i < j`) in `(0,
+R]`, then their Vandermonde determinant lies in `(0, R ^ (N choose 2)]`. -/
 lemma integer_vandermonde_pos_le {N : ℕ} (v : Fin N → ℤ) (R : ℤ)
     (hv : ∀ i j, i < j → 0 < v j - v i ∧ v j - v i ≤ R) :
     0 < (Matrix.vandermonde v).det ∧ (Matrix.vandermonde v).det ≤ R ^ N.choose 2 := by
@@ -37,15 +39,24 @@ lemma integer_vandermonde_pos_le {N : ℕ} (v : Fin N → ℤ) (R : ℤ)
           _ = _ := by simp
     _ = R ^ N.choose 2 := by rw [prod_pow_eq_pow_sum, Fin.sum_card_Ioi]
 
+/-- The primitive integer point `(i₁ · N! + 1, i₂ + 1, 0)` on the line `X₂ = 0`, indexed by `i =
+(i₁, i₂)`; these `N²` points are the rows of the counterexample to the mixed-degree reading of CCDN
+Proposition 3.2.6. -/
 def globalMixedDegreePoint (N : ℕ) (i : Fin N × Fin N) : Fin 3 → ℤ :=
   ![(i.1.val : ℤ) * N.factorial + 1, (i.2.val : ℤ) + 1, 0]
 
+/-- The monomial `X₀ ^ j₁ * X₁ ^ j₂`, homogeneous of degree `j₁ + j₂`; these monomials of differing
+degrees are the columns of the counterexample to the mixed-degree reading of CCDN Proposition 3.2.6.
+-/
 def globalMixedDegreeForm {N : ℕ} (j : Fin N × Fin N) : MvPolynomial (Fin 3) ℤ :=
   X 0 ^ j.1.val * X 1 ^ j.2.val
 
+/-- The `N² × N²` evaluation matrix of the monomials `globalMixedDegreeForm j` at the points
+`globalMixedDegreePoint N i`, used to refute the mixed-degree reading of CCDN Proposition 3.2.6. -/
 def globalMixedDegreeMatrix (N : ℕ) : Matrix (Fin N × Fin N) (Fin N × Fin N) ℤ :=
   Matrix.of fun i j => eval (globalMixedDegreePoint N i) (globalMixedDegreeForm j)
 
+/-- Each point `globalMixedDegreePoint N i` is primitive: the gcd of its coordinates is `1`. -/
 lemma globalMixedDegreePoint_primitive (N : ℕ) (i : Fin N × Fin N) :
     univ.gcd (globalMixedDegreePoint N i) = 1 := by
   have hda := gcd_dvd (f := globalMixedDegreePoint N i) (mem_univ (0 : Fin 3))
@@ -59,14 +70,18 @@ lemma globalMixedDegreePoint_primitive (N : ℕ) (i : Fin N × Fin N) :
   rw [← Finset.normalize_gcd, normalize_eq_one]
   exact isUnit_of_dvd_one hd
 
+/-- Each point `globalMixedDegreePoint N i` lies on the line `X₂ = 0`. -/
 lemma globalMixedDegreePoint_zero (N : ℕ) (i : Fin N × Fin N) :
     eval (globalMixedDegreePoint N i) (X (2 : Fin 3)) = 0 := by
   simp [globalMixedDegreePoint]
 
+/-- The monomial `globalMixedDegreeForm j` is homogeneous of degree `j₁ + j₂`. -/
 lemma globalMixedDegreeForm_homogeneous {N : ℕ} (j : Fin N × Fin N) :
     (globalMixedDegreeForm j).IsHomogeneous (j.1.val + j.2.val) :=
   (isHomogeneous_X_pow _ _).mul (isHomogeneous_X_pow _ _)
 
+/-- `globalMixedDegreeMatrix N` is the Kronecker product of the Vandermonde matrices of the numbers
+`i · N! + 1` and `j + 1`, `0 ≤ i, j < N`. -/
 lemma globalMixedDegreeMatrix_eq_kronecker (N : ℕ) :
     globalMixedDegreeMatrix N =
       Matrix.vandermonde (fun i : Fin N => (i.val : ℤ) * N.factorial + 1) ⊗ₖ
@@ -75,6 +90,8 @@ lemma globalMixedDegreeMatrix_eq_kronecker (N : ℕ) :
   simp [globalMixedDegreeMatrix, globalMixedDegreePoint, globalMixedDegreeForm,
     Matrix.vandermonde]
 
+/-- The determinant of `globalMixedDegreeMatrix N` is the product of the `N`-th powers of the two
+Vandermonde determinants of its Kronecker factorisation. -/
 lemma globalMixedDegreeMatrix_det (N : ℕ) :
     (globalMixedDegreeMatrix N).det =
       (Matrix.vandermonde (fun i : Fin N => (i.val : ℤ) * N.factorial + 1)).det ^ N *
@@ -82,6 +99,8 @@ lemma globalMixedDegreeMatrix_det (N : ℕ) :
   rw [globalMixedDegreeMatrix_eq_kronecker, Matrix.det_kronecker]
   simp
 
+/-- The determinant of `globalMixedDegreeMatrix N` is positive and at most `(N · N!) ^ (N choose 2 ·
+N) · N ^ (N choose 2 · N)`. -/
 lemma globalMixedDegreeMatrix_det_pos_le (N : ℕ) :
     0 < (globalMixedDegreeMatrix N).det ∧
       (globalMixedDegreeMatrix N).det ≤

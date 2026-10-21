@@ -18,6 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A partial derivative lowers the total degree by at least one. -/
 theorem pderiv_totalDegree_le {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (i : σ) : (pderiv i f).totalDegree ≤ f.totalDegree - 1 := by
   classical

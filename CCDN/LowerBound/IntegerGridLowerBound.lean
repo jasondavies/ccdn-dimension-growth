@@ -19,6 +19,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For `d > 0` and `n ≥ 2`, there is a polynomial over `K` in `n` variables of total degree `d`
+that stays irreducible over `L` along `φ : K →+* L` and vanishes at both `0` and `(1, …, 1)`. -/
 lemma exists_irreducible_zero_one_equation
     {K L : Type*} [Field K] [Field L] (φ : K →+* L)
     (d n : ℕ) (hd : 0 < d) (hn : 2 ≤ n) :
@@ -59,6 +61,9 @@ lemma exists_irreducible_zero_one_equation
   · simp [f, ne_of_gt hd]
   · simp [f]
 
+/-- For `d > 0` and `n ≥ 2`, there is a polynomial over `K` in `n` variables of total degree `d`
+that stays irreducible over `L` along `φ : K →+* L` and vanishes at the origin; this supplies the
+degree-`d` examples in every positive degree of CCDN Section 6. -/
 lemma exists_irreducible_origin_equation
     {K L : Type*} [Field K] [Field L] (φ : K →+* L)
     (d n : ℕ) (hd : 0 < d) (hn : 2 ≤ n) :

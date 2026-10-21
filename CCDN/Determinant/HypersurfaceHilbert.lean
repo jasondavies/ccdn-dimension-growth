@@ -37,10 +37,15 @@ private lemma originLayer_finrank_le_hypersurfaceLayerBound {K : Type*} [Field K
 private lemma hypersurfaceLayerBound_zero (n k : ℕ) : hypersurfaceLayerBound n 0 k = 0 := by
   simp [hypersurfaceLayerBound]
 
+/-- For positive degree `μ`, the Hilbert function `hypersurfaceLayerBound n μ` takes the value `1`
+in degree zero. -/
 lemma hypersurfaceLayerBound_succ_zero (n μ : ℕ) :
     hypersurfaceLayerBound n (μ + 1) 0 = 1 := by
   simp [hypersurfaceLayerBound]
 
+/-- Recursion for the Hilbert function of a hypersurface: `hypersurfaceLayerBound (n + 1) (μ + 1)`
+in degree `k + 1` equals `(n + (k + 1)).choose n` plus `hypersurfaceLayerBound (n + 1) μ` in degree
+`k`. -/
 lemma hypersurfaceLayerBound_succ_succ (n μ k : ℕ) :
     hypersurfaceLayerBound (n + 1) (μ + 1) (k + 1) =
       (n + (k + 1)).choose n + hypersurfaceLayerBound (n + 1) μ k := by

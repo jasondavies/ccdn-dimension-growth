@@ -51,6 +51,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Every affine chart of a homogeneous integer polynomial whose reduction modulo `p` is nonzero
+also has nonzero reduction modulo `p`. -/
 lemma projectiveHypersurfaceChart_mod_ne_zero {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (k : Fin (n + 3)) :
@@ -67,6 +69,8 @@ lemma projectiveHypersurfaceChart_mod_ne_zero {n p d : ℕ} [Fact p.Prime]
   exact (rename_injective (Equiv.swap 0 k) (Equiv.swap 0 k).injective)
     (he.trans (map_zero _).symm)
 
+/-- The `𝔽_p`-points of the reduction modulo `p` of the projective hypersurface `f = 0` in `ℙⁿ⁺²`.
+-/
 def ProjectiveHypersurfaceResidue {n : ℕ} (f : MvPolynomial (Fin (n + 3)) ℤ) (p : ℕ)
     [Fact p.Prime] :=
   {r : ProjectiveResidueSpace (n + 2) p | eval r.rep (map (Int.castRingHom (ZMod p)) f) = 0}
@@ -74,6 +78,8 @@ def ProjectiveHypersurfaceResidue {n : ℕ} (f : MvPolynomial (Fin (n + 3)) ℤ)
 instance {n : ℕ} (f : MvPolynomial (Fin (n + 3)) ℤ) (p : ℕ) [Fact p.Prime] :
     Fintype (ProjectiveHypersurfaceResidue f p) := Fintype.ofFinite _
 
+/-- The multiplicity of the reduced hypersurface `f mod p` at the residue point `r`, computed in the
+affine chart determined by the pivot of `r`. -/
 def projectiveHypersurfaceResidueMultiplicity {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (r : ProjectiveHypersurfaceResidue f p) : ℕ :=
@@ -83,6 +89,10 @@ def projectiveHypersurfaceResidueMultiplicity {n p d : ℕ} [Fact p.Prime]
     (projectiveHypersurfaceChart_mod_ne_zero f hf hf0 _)
     (hypersurfaceResidueChartLift_zero f hf r.val r.property))
 
+/-- The multiplicity of `f mod p` at a residue point `r` is between `1` and the degree `d`; in the
+chart of `r`, translated so that `r` is the origin, the reduced equation lies in that power of the
+ideal of the origin and has a nonzero homogeneous component of that degree. This is the local
+multiplicity used in CCDN Corollary 2.5. -/
 theorem projectiveHypersurfaceResidueMultiplicity_spec {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) (r : ProjectiveHypersurfaceResidue f p) :
@@ -102,11 +112,16 @@ theorem projectiveHypersurfaceResidueMultiplicity_spec {n p d : ℕ} [Fact p.Pri
   refine ⟨h.1, h.2.1.trans ?_, h.2.2⟩
   exact (affineChart_totalDegree_le _).trans hf.rename_isHomogeneous.totalDegree_le
 
+/-- The total residue multiplicity of the projective hypersurface `f = 0` modulo `p`: the sum of the
+multiplicities of `f mod p` at all of its `𝔽_p`-points. This is the quantity of CCDN Proposition
+2.6. -/
 def projectiveHypersurfaceTotalMultiplicity {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) : ℕ :=
   ∑ r : ProjectiveHypersurfaceResidue f p, projectiveHypersurfaceResidueMultiplicity f hf hf0 r
 
+/-- The total residue multiplicity of `f mod p` lies between the number of its `𝔽_p`-points and `d`
+times that number. -/
 theorem projectiveHypersurfaceTotalMultiplicity_bounds {n p d : ℕ} [Fact p.Prime]
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d)
     (hf0 : map (Int.castRingHom (ZMod p)) f ≠ 0) :

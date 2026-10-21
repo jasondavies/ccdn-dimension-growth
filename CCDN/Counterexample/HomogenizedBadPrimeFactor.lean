@@ -30,6 +30,7 @@ def badPrimeAffineExample (c : ℤ) : MvPolynomial (Fin 2) ℤ := C c * X 0 ^ 2 
 coordinate at infinity as in `scaledHomogenize`. -/
 def badPrimeHomogenizedExample (c : ℤ) : MvPolynomial (Fin 3) ℤ := C c * X 1 ^ 2 + X 0 * X 2
 
+/-- An element is irreducible if its image under an algebra isomorphism is irreducible. -/
 lemma irreducible_of_irreducible_algEquiv {R A B : Type*} [CommSemiring R] [Semiring A]
     [Semiring B] [Algebra R A] [Algebra R B] (e : A ≃ₐ[R] B) {x : A}
     (h : Irreducible (e x)) : Irreducible x :=
@@ -71,14 +72,17 @@ lemma irreducible_C_mul_X_sq_add_X_mul_X {K : Type*} [Field K] {a : K} (ha : a �
   refine ((X_prime.irreducible).isRelPrime_iff_not_dvd.mpr fun h => ha ?_).symm
   simpa using map_dvd (eval ![1, 0]) h
 
+/-- The image of `badPrimeAffineExample c` in any commutative ring `K` is `c x₁² + x₂`. -/
 lemma map_badPrimeAffineExample {K : Type*} [CommRing K] (c : ℤ) :
     map (Int.castRingHom K) (badPrimeAffineExample c) = C (c : K) * X 0 ^ 2 + X 1 := by
   simp [badPrimeAffineExample]
 
+/-- The image of `badPrimeHomogenizedExample c` in any commutative ring `K` is `c x₁² + x₀ x₂`. -/
 lemma map_badPrimeHomogenizedExample {K : Type*} [CommRing K] (c : ℤ) :
     map (Int.castRingHom K) (badPrimeHomogenizedExample c) = C (c : K) * X 1 ^ 2 + X 0 * X 2 := by
   simp [badPrimeHomogenizedExample]
 
+/-- For `c ≠ 0`, the affine equation `badPrimeAffineExample c` has total degree `2`. -/
 lemma totalDegree_badPrimeAffineExample {c : ℤ} (hc : c ≠ 0) :
     (badPrimeAffineExample c).totalDegree = 2 := by
   have h2 : (C c * X 0 ^ 2 : MvPolynomial (Fin 2) ℤ).totalDegree = 2 := by
@@ -87,6 +91,7 @@ lemma totalDegree_badPrimeAffineExample {c : ℤ} (hc : c ≠ 0) :
   unfold badPrimeAffineExample
   rw [totalDegree_add_eq_left_of_totalDegree_lt (by rw [h2, totalDegree_X]; norm_num), h2]
 
+/-- The homogenization `badPrimeHomogenizedExample c` is homogeneous of degree `2`. -/
 lemma isHomogeneous_badPrimeHomogenizedExample (c : ℤ) :
     (badPrimeHomogenizedExample c).IsHomogeneous 2 :=
   ((isHomogeneous_C _ c).mul (isHomogeneous_X_pow 1 2)).add
@@ -104,6 +109,7 @@ theorem scaledHomogenize_badPrimeAffineExample {c : ℤ} (hc : c ≠ 0) :
   have h0 : affineChart 2 (X 0 : MvPolynomial (Fin 3) ℤ) = 1 := eval₂_X _ _ _
   simp [badPrimeAffineExample, badPrimeHomogenizedExample, h0, h1, h2]
 
+/-- For `c ≠ 0`, the homogenization `badPrimeHomogenizedExample c` has total degree `2`. -/
 lemma totalDegree_badPrimeHomogenizedExample {c : ℤ} (hc : c ≠ 0) :
     (badPrimeHomogenizedExample c).totalDegree = 2 := by
   rw [← scaledHomogenize_badPrimeAffineExample hc]

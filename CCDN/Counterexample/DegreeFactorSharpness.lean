@@ -21,6 +21,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Filter Asymptotics
 
+/-- Affine half of the dimension-growth exponent obstructions of CCDN Section 6, for the degree
+factor `g` in Theorem 4: if `C * g d * B ^ (n - 2)` bounds the number of integer points of height at
+most `B` on every affine hypersurface in `𝔸ⁿ`, `n ≥ 3`, of degree `d ≥ 5` with absolutely
+irreducible top-degree form, then `d ^ 2 / 64 ≤ C * g d` for every `d ≥ 5`. -/
 theorem affine_hypersurface_factor_lower_bound {n : ℕ} (hn : 3 ≤ n)
     {g : ℕ → ℝ} {C : ℝ}
     (hbound : ∀ f : MvPolynomial (Fin n) ℤ,
@@ -39,6 +43,10 @@ theorem affine_hypersurface_factor_lower_bound {n : ℕ} (hn : 3 ≤ n)
     positivity
   exact (mul_le_mul_iff_left₀ hpos).mp (hlo.trans hu)
 
+/-- Affine dimension-growth exponent obstruction of CCDN Section 6, for Theorem 4: a degree factor
+`g` for which `C * g d * B ^ (n - 2)` bounds the integer points of height at most `B` on all affine
+hypersurfaces in `𝔸ⁿ`, `n ≥ 3`, of degree `d ≥ 5` with absolutely irreducible top-degree form cannot
+be `o(d ^ 2)`. -/
 theorem affine_hypersurface_factor_not_isLittleO {n : ℕ} (hn : 3 ≤ n)
     {g : ℕ → ℝ} {C : ℝ} (hC : 0 < C)
     (hbound : ∀ f : MvPolynomial (Fin n) ℤ,
@@ -81,6 +89,10 @@ private theorem projective_hypersurface_factor_lower_bound_three {n : ℕ} (hn :
     positivity
   exact (mul_le_mul_iff_left₀ hpos).mp (hlo.trans hu)
 
+/-- Projective half of the dimension-growth exponent obstructions of CCDN Section 6, for the degree
+factor `g` in Theorem 1: if `C * g d * B ^ (n - 1)` bounds the number of rational points of height
+at most `B` on every absolutely irreducible hypersurface in `ℙⁿ`, `n ≥ 2`, of degree `d ≥ 5`, then
+`d / 8 ≤ C * g d` for every `d ≥ 5`. -/
 theorem projective_hypersurface_factor_lower_bound {n : ℕ} (hn : 2 ≤ n)
     {g : ℕ → ℝ} {C : ℝ}
     (hbound : ∀ F : MvPolynomial (Fin (n + 1)) ℚ,
@@ -117,6 +129,9 @@ theorem projective_hypersurface_factor_lower_bound {n : ℕ} (hn : 2 ≤ n)
   have hpos : (0 : ℝ) < B := by exact_mod_cast (show 0 < B by omega)
   exact (mul_le_mul_iff_left₀ hpos).mp (hlo.trans hu)
 
+/-- Projective dimension-growth exponent obstruction of CCDN Section 6, for Theorem 1: a degree
+factor `g` for which `C * g d * B ^ (n - 1)` bounds the rational points of height at most `B` on all
+absolutely irreducible hypersurfaces in `ℙⁿ`, `n ≥ 2`, of degree `d ≥ 5` cannot be `o(d)`. -/
 theorem projective_hypersurface_factor_not_isLittleO {n : ℕ} (hn : 2 ≤ n)
     {g : ℕ → ℝ} {C : ℝ} (hC : 0 < C)
     (hbound : ∀ F : MvPolynomial (Fin (n + 1)) ℚ,

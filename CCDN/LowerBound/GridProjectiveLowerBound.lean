@@ -65,6 +65,8 @@ theorem integer_grid_le_projective_count {n d : ℕ}
     funext j
     exact Int.cast_injective (congrFun hh j)
 
+/-- The homogenization of an absolutely irreducible rational polynomial of total degree `d` is a
+form of degree `d` that is again absolutely irreducible. -/
 lemma projective_closure_absolute_irreducible {n d : ℕ}
     (f : MvPolynomial (Fin n) ℚ) (hd : f.totalDegree = d)
     (hf : AbsolutelyIrreducibleRat f) :

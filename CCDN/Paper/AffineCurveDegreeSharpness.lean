@@ -21,6 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Filter Asymptotics
 
+/-- For `x ≥ 1`, `(log x)² ≤ x`. -/
 lemma log_sq_le_self_of_one_le {x : ℝ} (hx : 1 ≤ x) :
     (Real.log x) ^ 2 ≤ x := by
   have hxpos : 0 < x := by linarith
@@ -87,6 +88,9 @@ lemma grid_radius_rpow_mul_log_le_log_degree {d : ℕ} (hd : 3 ≤ d)
   dsimp [x] at hinc
   nlinarith [hinc.trans (hsmall.trans hgap)]
 
+/-- Affine logarithmic obstruction of CCDN Section 6: for every `d ≥ 3` there is an absolutely
+irreducible rational plane curve of degree `d` with at least `d² / (4 log d) · B ^ (1 / d) · log B`
+integer points of height at most `B = ⌊(d + 1) / 4⌋`. -/
 theorem exists_affine_curve_log_lower_bound (d : ℕ) (hd : 3 ≤ d) :
     ∃ f : MvPolynomial (Fin 2) ℚ, ∃ B : ℕ,
       B = (d + 1) / 4 ∧ 1 ≤ B ∧ f.totalDegree = d ∧
@@ -124,6 +128,9 @@ theorem exists_affine_curve_log_lower_bound (d : ℕ) (hd : 3 ≤ d) :
     _ ≤ (((d - 1) / 2 + 1 : ℕ) : ℝ) ^ 2 := hsquare
     _ ≤ _ := by exact_mod_cast hgrid
 
+/-- Affine logarithmic obstruction of CCDN Section 6: if `C * g d * B ^ (1 / d) * log B` bounds the
+integer points of height at most `B ≥ 2` on every absolutely irreducible affine plane curve of
+degree `d ≥ 2`, then `d² / (4 log d) ≤ C * g d` for every `d ≥ 7`. -/
 theorem affine_curve_log_factor_lower_bound {g : ℕ → ℝ} {C : ℝ}
     (hbound : ∀ f : MvPolynomial (Fin 2) ℚ,
       AbsolutelyIrreducibleRat f →

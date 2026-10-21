@@ -80,6 +80,8 @@ private theorem filteredCoordinateSpace_disjoint_next_homogeneous
     (Ideal.Quotient.mk I) f = (Ideal.Quotient.mk I) g := he.symm
     _ = 0 := Ideal.Quotient.eq_zero_iff_mem.mpr (by simpa only [neg_neg] using I.neg_mem ht)
 
+/-- For a homogeneous ideal `I`, the affine Hilbert function at `N + 1` is its value at `N` plus the
+projective Hilbert function at `N + 1`. -/
 theorem filteredCoordinateSpace_finrank_succ
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))

@@ -90,22 +90,28 @@ private lemma affineTranslation_map_pointIdeal (a : Fin n → K) :
     rw [← affineTranslation_constantCoeff, AlgEquiv.apply_symm_apply]
     exact hg
 
+/-- The `K`-algebra isomorphism between the coordinate rings of `f = 0` and of its translate
+`affineTranslation K a f`, induced by the translation moving `a` to the origin. -/
 def hypersurfaceTranslationEquiv (f : MvPolynomial (Fin n) K) (a : Fin n → K) :
     HypersurfaceCoordinateRing f ≃ₐ[K]
       HypersurfaceCoordinateRing (affineTranslation K a f) :=
   Ideal.quotientEquivAlg _ _ (affineTranslation K a)
     (by rw [Ideal.map_span, Set.image_singleton]; rfl)
 
+/-- `hypersurfaceTranslationEquiv f a` sends the class of `g` to the class of its translate
+`affineTranslation K a g`. -/
 @[simp]
 lemma hypersurfaceTranslationEquiv_apply_mk (f : MvPolynomial (Fin n) K)
     (a : Fin n → K) (g : MvPolynomial (Fin n) K) :
     hypersurfaceTranslationEquiv f a (Ideal.Quotient.mk _ g) =
       Ideal.Quotient.mk _ (affineTranslation K a g) := rfl
 
+/-- The ideal of the point `a` in the coordinate ring of the hypersurface `f = 0`. -/
 def hypersurfacePointIdeal (f : MvPolynomial (Fin n) K) (a : Fin n → K) :
     Ideal (HypersurfaceCoordinateRing f) :=
   (RingHom.ker (eval a)).map (Ideal.Quotient.mk (Ideal.span {f}))
 
+/-- If `a` lies on the hypersurface `f = 0`, its ideal in the coordinate ring is maximal. -/
 lemma hypersurfacePointIdeal_isMaximal (f : MvPolynomial (Fin n) K)
     (a : Fin n → K) (hf : eval a f = 0) : (hypersurfacePointIdeal f a).IsMaximal := by
   let : (RingHom.ker (eval a)).IsMaximal :=
@@ -131,6 +137,8 @@ private lemma hypersurfaceTranslationEquiv_map_pointIdeal (f : MvPolynomial (Fin
     affineTranslation_map_pointIdeal]
   rfl
 
+/-- The local ring of the affine hypersurface `f = 0` at a rational point `a` on it: the
+localization of its coordinate ring at the maximal ideal of `a`. -/
 abbrev HypersurfacePointStalk (f : MvPolynomial (Fin n) K) (a : Fin n → K)
     [Fact (eval a f = 0)] :=
   letI := (hypersurfacePointIdeal_isMaximal f a (Fact.out : eval a f = 0)).isPrime
@@ -157,6 +165,9 @@ private def hypersurfacePointStalkLayerEquiv (k : ℕ) :
   let l' := l.trans (idealPowerLayerEquivOfEq (K := K) hi k)
   exact l'.trans (hypersurfaceCoordinateLayerEquiv (affineTranslation K a f) k)
 
+/-- The degree-`k` layer of the maximal ideal of the local ring of `f = 0` at `a` has the same
+`K`-dimension as the degree-`k` origin layer of the translated equation `affineTranslation K a f`.
+-/
 theorem hypersurfacePointStalkLayer_finrank (k : ℕ) :
     Module.finrank K (Ideal.powerLayer K (A := HypersurfacePointStalk f a)
       (maximalIdeal (HypersurfacePointStalk f a)) k) =

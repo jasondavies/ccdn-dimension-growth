@@ -18,6 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Applying a linear map to the coefficients commutes with taking homogeneous components. -/
 lemma polynomialCoefficientLinear_homogeneousComponent
     {k K : Type*} [Field k] [Field K] [Algebra k K] {n : ℕ}
     (φ : K →ₗ[k] k) (N : ℕ) (f : MvPolynomial (Fin n) K) :
@@ -41,6 +42,7 @@ theorem homogeneous_ideal_scalar_extension
   rw [polynomialCoefficientLinear_homogeneousComponent]
   exact hI _ (polynomialCoefficientLinear_mem_scalar_extension I f hf φ) N
 
+/-- Every minimal prime over a homogeneous ideal is homogeneous. -/
 theorem minimal_prime_ideal_homogeneous
     {K σ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K))

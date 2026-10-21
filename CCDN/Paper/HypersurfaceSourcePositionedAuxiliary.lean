@@ -34,6 +34,8 @@ def distinguishedCoefficientOrder {n : ℕ} (i : Fin (n + 1)) :
     intro j
     exact hab ((Equiv.swap i 0).symm j)
 
+/-- In the monomial order `distinguishedCoefficientOrder i`, every exponent of total degree at most
+`d` is below the pure power `X_i ^ d`. -/
 lemma distinguishedCoefficientOrder_le_pure {n d : ℕ} (i : Fin (n + 1))
     (m : Fin (n + 1) →₀ ℕ) (hm : m.sum (fun _ e => e) ≤ d) :
     m ≼[distinguishedCoefficientOrder i] Finsupp.single i d := by
@@ -73,6 +75,8 @@ open MvPolynomial
 def hypersurfaceSourcePositionParameter (n : ℕ) (C : ℝ) : ℝ :=
   (n + 1 : ℝ) * Real.log (max 1 C)
 
+/-- The position parameter `hypersurfaceSourcePositionParameter n C` of CCDN Lemma 3.3.2 is
+nonnegative. -/
 lemma hypersurfaceSourcePositionParameter_nonneg (n : ℕ) (C : ℝ) :
     0 ≤ hypersurfaceSourcePositionParameter n C := by
   exact mul_nonneg (by positivity) (Real.log_nonneg (le_max_left 1 C))

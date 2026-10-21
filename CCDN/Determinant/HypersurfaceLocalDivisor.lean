@@ -27,6 +27,7 @@ of the singular points contribute `(n + 3) (n + 4)ⁿ`
 def hypersurfaceCountConstant (n : ℕ) : ℝ :=
   projectiveHypersurfaceResidueConstant + ((n + 3) * (n + 4) ^ n : ℕ)
 
+/-- The constant `hypersurfaceCountConstant n` is nonnegative. -/
 lemma hypersurfaceCountConstant_nonneg (n : ℕ) : 0 ≤ hypersurfaceCountConstant n := by
   unfold hypersurfaceCountConstant
   exact add_nonneg projectiveHypersurfaceResidueConstant_pos.le (Nat.cast_nonneg _)
@@ -36,6 +37,7 @@ def hypersurfaceDeterminantMain (n s : ℕ) : ℝ :=
   ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) * (n + 1 : ℝ) / (n + 2 : ℝ) *
     (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ))
 
+/-- The main coefficient `hypersurfaceDeterminantMain n s` is nonnegative. -/
 lemma hypersurfaceDeterminantMain_nonneg (n s : ℕ) : 0 ≤ hypersurfaceDeterminantMain n s := by
   unfold hypersurfaceDeterminantMain
   positivity

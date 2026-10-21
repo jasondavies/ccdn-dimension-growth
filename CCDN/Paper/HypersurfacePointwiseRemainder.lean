@@ -22,14 +22,18 @@ open Polynomial Finset
 def binomialNumeratorPolynomial (n : ℕ) : ℕ[X] :=
   (ascPochhammer ℕ n).comp (X + C 1)
 
+/-- The polynomial `binomialNumeratorPolynomial n` has degree `n`. -/
 lemma binomialNumeratorPolynomial_degree (n : ℕ) :
     (binomialNumeratorPolynomial n).natDegree = n := by
   simp [binomialNumeratorPolynomial, natDegree_comp, ascPochhammer_natDegree]
 
+/-- The polynomial `binomialNumeratorPolynomial n` is monic. -/
 lemma binomialNumeratorPolynomial_monic (n : ℕ) :
     (binomialNumeratorPolynomial n).Monic :=
   (monic_ascPochhammer ℕ n).comp (monic_X_add_C 1) (by simp)
 
+/-- At a natural number `k`, `binomialNumeratorPolynomial n` takes the value `n! · (n + k).choose
+n`. -/
 lemma binomialNumeratorPolynomial_eval (n k : ℕ) :
     (binomialNumeratorPolynomial n).eval k = n.factorial * (n + k).choose n := by
   rw [binomialNumeratorPolynomial, eval_comp]
@@ -41,10 +45,14 @@ def hypersurfacePointwiseError (n : ℕ) : ℝ :=
   (polynomialDifferenceConstant (binomialNumeratorPolynomial (n + 2)) n : ℝ) /
     (n + 2).factorial
 
+/-- The pointwise error constant `hypersurfacePointwiseError n` of CCDN Lemma 2.1 is nonnegative. -/
 lemma hypersurfacePointwiseError_nonneg (n : ℕ) : 0 ≤ hypersurfacePointwiseError n := by
   unfold hypersurfacePointwiseError
   positivity
 
+/-- Pointwise layer bound behind CCDN Lemma 2.1: for `k > 0`, `(n + 2)!` times the Hilbert function
+of a degree-`μ` hypersurface in `n + 3` variables at `k` is at most `(n + 2) μ k ^ (n + 1) + E k ^
+n`, with `E` depending only on `n`. -/
 lemma hypersurfaceLayerBound_factorial_pointwise (n μ k : ℕ) (hk : 0 < k) :
     (n + 2).factorial * hypersurfaceLayerBound (n + 2) μ k ≤
       (n + 2) * μ * k ^ (n + 1) +

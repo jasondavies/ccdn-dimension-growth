@@ -20,6 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- The nonsingular `𝔽_p`-points of the reduction modulo `p` of the affine hypersurface `f = 0`. -/
 def SmoothAffineResidue {n : ℕ} (f : MvPolynomial (Fin n) ℤ) (p : ℕ) :=
   {a : Fin n → ZMod p //
     eval₂ (Int.castRingHom (ZMod p)) a f = 0 ∧
@@ -64,9 +65,12 @@ private theorem smoothAffineResidue_card_le {n p : ℕ} [Fact p.Prime]
     rw [pow_succ, ← Nat.mul_assoc] at hbound
     exact le_of_mul_le_mul_right hbound (Fact.out : p.Prime).pos
 
+/-- A choice, for each prime `p` in `P`, of a nonsingular `𝔽_p`-point of `f mod p`. -/
 def SmoothAffineResidueFamily {n : ℕ} (f : MvPolynomial (Fin n) ℤ) (P : Finset ℕ) :=
   (p : P) → SmoothAffineResidue f p.val
 
+/-- The number of families of nonsingular residue points of `f` modulo the primes in `P` is at most
+`deg(f) ^ #P · (∏_{p ∈ P} p) ^ n`. -/
 theorem smoothAffineResidueFamily_card_le {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (P : Finset ℕ)
     (hP : ∀ p ∈ P, p.Prime) :
@@ -88,6 +92,8 @@ theorem smoothAffineResidueFamily_card_le {n : ℕ}
       rw [Finset.prod_pow]
     _ = _ := by rw [Finset.prod_coe_sort P (fun p : ℕ => p)]
 
+/-- The integer lift, with coordinates in `[0, p)`, of the residue point modulo `p` chosen by the
+family `r` (and `0` for `p ∉ P`). -/
 def smoothResidueIntegerLift {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     {P : Finset ℕ} (r : SmoothAffineResidueFamily f P) : ℕ → IntPoint n :=
   fun p j => if hp : p ∈ P then ((r ⟨p, hp⟩).val j).val else 0
@@ -98,18 +104,23 @@ private lemma smoothResidueIntegerLift_cast {n : ℕ} {f : MvPolynomial (Fin n) 
   simp only [smoothResidueIntegerLift, dite_eq_left p.property, Int.cast_natCast,
     ZMod.natCast_zmod_val]
 
+/-- The reduction of `f` modulo `p ∈ P` vanishes at the lift of the residue point chosen by `r`. -/
 theorem smoothResidueIntegerLift_zero {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     {P : Finset ℕ} (r : SmoothAffineResidueFamily f P) (p : ℕ) [NeZero p] (hp : p ∈ P) :
     eval₂ (Int.castRingHom (ZMod p)) (fun j => (smoothResidueIntegerLift r p j : ZMod p)) f =
       0 := by
   simpa only [smoothResidueIntegerLift_cast r ⟨p, hp⟩] using (r ⟨p, hp⟩).property.1
 
+/-- The lift of the residue point chosen by `r` modulo `p ∈ P` is a nonsingular point of `f mod p`.
+-/
 theorem smoothResidueIntegerLift_smooth {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     {P : Finset ℕ} (r : SmoothAffineResidueFamily f P) (p : ℕ) [NeZero p] (hp : p ∈ P) :
     ∃ j, eval (fun i => (smoothResidueIntegerLift r p i : ZMod p))
       (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0 := by
   simpa only [smoothResidueIntegerLift_cast r ⟨p, hp⟩] using (r ⟨p, hp⟩).property.2
 
+/-- The family of residue points obtained by reducing an integer zero `x` of `f` modulo each prime
+in `P` at which it is nonsingular. -/
 def smoothResidueFamilyOfPoint {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     (x : IntPoint n) (hxf : eval x f = 0) (P : Finset ℕ)
     (hs : ∀ p ∈ P, ∃ j, eval (fun i => (x i : ZMod p))
@@ -122,6 +133,8 @@ def smoothResidueFamilyOfPoint {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
       exact h
     · exact hs p.val p.property⟩
 
+/-- An integer zero `x` of `f` is congruent modulo each `p ∈ P` to the integer lift of its own
+residue family. -/
 theorem smoothResidueFamilyOfPoint_congruence {n : ℕ} {f : MvPolynomial (Fin n) ℤ}
     (x : IntPoint n) (hxf : eval x f = 0) (P : Finset ℕ)
     (hs : ∀ p ∈ P, ∃ j, eval (fun i => (x i : ZMod p))

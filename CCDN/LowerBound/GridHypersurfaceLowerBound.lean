@@ -45,6 +45,8 @@ private lemma exists_integer_topform_grid_equation (s : Finset ℤ) (d n : ℕ)
     rw [eval_rename]
     exact gridTopFormEquation_eval_zero s d (z ∘ i) (hz (i 1)) (hz (i 2))
 
+/-- An integer polynomial of total degree `d` whose top-degree form is absolutely irreducible has,
+over `ℚ`, total degree `d` and is absolutely irreducible. -/
 lemma integer_absolute_top_rational_model {n d : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hd : f.totalDegree = d)
     (htop : HasAbsIrreducibleTopForm f) :

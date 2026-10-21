@@ -48,6 +48,8 @@ private theorem prime_ideal_strict_hilbert_dimension_drop
     (filteredCoordinateSpace_finrank_antitone_ideal _ _ hsection)).trans
       (proper_section_hilbert_dimension_leadingCoeff I m hdim f hfI hfdeg hsectionproper).1
 
+/-- Distinct prime ideals of the same positive Hilbert dimension are not contained in one another.
+-/
 theorem prime_ideal_not_le_of_same_positive_dimension
     {K : Type*} [Field K] {n m : ℕ}
     (I J : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] [J.IsPrime]

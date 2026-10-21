@@ -26,6 +26,9 @@ def genericPlaneMap (K F σ : Type*) [Field K] [Field F]
   aeval (fun i => Option.elim i (X 0)
     (fun j => C (algebraMap (MvPolynomial σ K) F (X j)) * X 1))
 
+/-- The generic plane substitution `genericPlaneMap K F σ f` corresponds, as a bivariate polynomial
+over `F`, to the generic plane equation `genericPlanePolynomial f` with its coefficients mapped into
+`F`. -/
 lemma genericPlaneMap_bivariate {K F σ : Type*} [Field K] [Field F]
     [Algebra K F] [Algebra (MvPolynomial σ K) F]
     [IsScalarTower K (MvPolynomial σ K) F]
@@ -46,6 +49,7 @@ lemma genericPlaneMap_bivariate {K F σ : Type*} [Field K] [Field F]
         bivariatePolynomialEquiv_C] at hf ⊢
     all_goals simp only [hf, true_or]
 
+/-- The generic plane section of `f` takes at the origin the value `f(0)`. -/
 lemma genericPlaneMap_eval_zero {K F σ : Type*} [Field K] [Field F]
     [Algebra K F] [Algebra (MvPolynomial σ K) F]
     (f : MvPolynomial (Option σ) K) :
@@ -60,6 +64,8 @@ lemma genericPlaneMap_eval_zero {K F σ : Type*} [Field K] [Field F]
       cases i <;> simp [genericPlaneMap]
   exact RingHom.congr_fun he f
 
+/-- The derivative of the generic plane section of `f` in its first variable is the generic plane
+section of the derivative of `f` in the distinguished variable `none`. -/
 lemma genericPlaneMap_pderiv {K F σ : Type*} [Field K] [Field F]
     [Algebra K F] [Algebra (MvPolynomial σ K) F]
     (f : MvPolynomial (Option σ) K) :

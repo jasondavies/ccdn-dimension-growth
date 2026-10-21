@@ -18,6 +18,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For `f ≠ 0` and `deg f ≤ N`, the affine Hilbert function of `(f)` at `N` plus the dimension of
+the polynomials of degree at most `N - deg f` equals the dimension of the polynomials of degree at
+most `N`. -/
 theorem principal_filtered_finrank {K σ : Type*} [Field K] [Finite σ]
     (f : MvPolynomial σ K) (hf : f ≠ 0) {N : ℕ} (hN : f.totalDegree ≤ N) :
     Module.finrank K (filteredCoordinateSpace (Ideal.span {f}) N) +
@@ -46,18 +49,23 @@ theorem principal_filtered_finrank {K σ : Type*} [Field K] [Finite σ]
   rw [hk, filteredMultiples_finrank f hf] at h
   exact h
 
+/-- The polynomials in two variables of total degree at most `N` form a space of dimension `(N +
+2).choose 2`. -/
 theorem finrank_restrictTotalDegree_two {K : Type*} [Field K] (N : ℕ) :
     Module.finrank K (restrictTotalDegree (Fin 2) K N) = (N + 2).choose 2 := by
   rw [finrank_restrictTotalDegree]
   simp only [Fintype.card_fin]
   rw [Nat.add_comm 2 N, Nat.choose_symm_add]
 
+/-- `2 · (n + 2).choose 2 = (n + 2)(n + 1)`. -/
 lemma two_mul_choose_add_two (n : ℕ) :
     2 * (n + 2).choose 2 = (n + 2) * (n + 1) := by
   have h := Nat.descFactorial_eq_factorial_mul_choose (n + 2) 2
   norm_num [Nat.descFactorial_succ] at h
   nlinarith
 
+/-- The affine Hilbert function of a nonzero plane equation `f` of degree `d` is `d N + d -
+d(d-1)/2` for every `N ≥ d`. -/
 theorem principal_plane_hilbert_function {K : Type*} [Field K]
     (f : MvPolynomial (Fin 2) K) (hf : f ≠ 0) {N : ℕ} (hN : f.totalDegree ≤ N) :
     (Module.finrank K (filteredCoordinateSpace (Ideal.span {f}) N) : ℤ) =

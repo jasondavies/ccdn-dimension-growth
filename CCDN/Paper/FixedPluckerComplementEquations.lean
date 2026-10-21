@@ -21,6 +21,11 @@ open MvPolynomial Matrix
 attribute [local instance] affinePointZariskiTopology projectivePointZariskiTopology
   centerSubspacePluckerZariskiTopology
 
+/-- CCDN Lemma 5.2 for centers in `X₀ = 0`: for a geometrically prime ideal `I` over a field of
+characteristic zero whose filtered Hilbert polynomial has degree `m` and leading coefficient `d /
+m!`, there are homogeneous Plücker equations of degree `(m + 1) d (2 d - 1)`, of degree `< ((m + 1)
+d)²` when `m ≥ 1` and at most `1` when `m = 0`, whose common zero locus is the complement of the
+good-center locus over every extension `L`; that locus is dense and open. -/
 theorem exists_dense_open_fixed_center_plucker_equations
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]

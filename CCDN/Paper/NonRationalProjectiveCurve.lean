@@ -27,6 +27,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If `f ∉ I`, some homogeneous component of `f` of degree at most `deg f` is not in `I`. -/
 lemma exists_homogeneous_component_not_mem
     {K σ : Type*} [Field K] (I : Ideal (MvPolynomial σ K))
     (f : MvPolynomial σ K) (hf : f ∉ I) :
@@ -39,6 +40,9 @@ lemma exists_homogeneous_component_not_mem
   intro N hN
   exact h N (by simpa only [Finset.mem_range, Nat.lt_succ_iff] using hN)
 
+/-- CCDN Remark 4.1.5 for projective curves not defined over `ℚ`: a geometrically integral
+projective curve of degree `d` over a Galois algebraically closed extension `K` of `ℚ`, whose ideal
+does not come from `ℚ`, has at most `d²` rational points of any height. -/
 theorem non_rational_projective_curve_count_le_degree_sq
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n : ℕ} (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
@@ -102,6 +106,9 @@ theorem non_rational_projective_curve_count_le_degree_sq
     simpa only [Fintype.card_coe, S, projectiveCount] using hh
   exact hcount.trans (by simpa only [pow_two] using Nat.mul_le_mul_left d hNd)
 
+/-- CCDN Remark 4.1.5 for curves that are not geometrically integral: a rational projective curve of
+degree `d` whose ideal does not stay prime over `K` has at most `d²` rational points of any height.
+-/
 theorem nonabsolute_projective_curve_count_le_degree_sq
     {K : Type*} [Field K] [Algebra ℚ K] [IsAlgClosed K] [IsGalois ℚ K]
     {n : ℕ} (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]

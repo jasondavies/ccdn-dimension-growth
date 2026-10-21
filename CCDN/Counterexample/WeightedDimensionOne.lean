@@ -22,9 +22,12 @@ namespace CCDN
 noncomputable section
 open Finset
 
+/-- The multiplicity profile `k ↦ μ + ⌊μ / k⌋` (with value `1` at `k = 0`), whose harmonic excess
+over `μ` refutes the reading of the dimension-one case of CCDN Lemma 2.2 with error term `1 / k`. -/
 def harmonicExcessProfile (μ : ℕ) (k : ℕ) : ℕ :=
   if k = 0 then 1 else μ + μ / k
 
+/-- For `μ > 0`, every value of `harmonicExcessProfile μ` is positive. -/
 lemma harmonicExcessProfile_pos {μ : ℕ} (hμ : 0 < μ) (k : ℕ) :
     0 < harmonicExcessProfile μ k := by
   unfold harmonicExcessProfile
@@ -32,11 +35,14 @@ lemma harmonicExcessProfile_pos {μ : ℕ} (hμ : 0 < μ) (k : ℕ) :
   · norm_num
   · exact hμ.trans_le (Nat.le_add_right _ _)
 
+/-- For `k > 0`, `harmonicExcessProfile μ k ≤ μ + μ / k` as real numbers. -/
 lemma harmonicExcessProfile_bound (μ k : ℕ) (hk : 0 < k) :
     (harmonicExcessProfile μ k : ℝ) ≤ (μ : ℝ) + μ / k := by
   simp only [harmonicExcessProfile, Nat.ne_of_gt hk, ite_false, Nat.cast_add]
   exact add_le_add_right Nat.cast_div_le _
 
+/-- For `μ = K!` and `j < K`, the floor in `harmonicExcessProfile μ (j + 1)` is exact: the value is
+`K! + K! / (j + 1)`. -/
 lemma harmonicExcessProfile_factorial_succ (K j : ℕ) (hj : j < K) :
     (harmonicExcessProfile K.factorial (j + 1) : ℝ) =
       (K.factorial : ℝ) + K.factorial / (j + 1) := by
@@ -46,6 +52,8 @@ lemma harmonicExcessProfile_factorial_succ (K j : ℕ) (hj : j < K) :
   push_cast
   rfl
 
+/-- The cumulative sum of `harmonicExcessProfile K!` over `0, …, K` equals `1 + K! · (K + H_K)`,
+where `H_K` is the `K`-th harmonic number. -/
 lemma harmonicExcessProfile_cumulative (K : ℕ) :
     (weightProfileCumulative (harmonicExcessProfile K.factorial) K : ℝ) =
       1 + (K.factorial : ℝ) * (K + (harmonic K : ℝ)) := by
@@ -68,6 +76,8 @@ lemma harmonicExcessProfile_cumulative (K : ℕ) :
   rw [hg0, Nat.cast_one, hsum]
   ring
 
+/-- The weighted sum `∑_{j ≤ K} j · harmonicExcessProfile K! j` equals `K! · K (K + 1) / 2 + K! ·
+K`. -/
 lemma harmonicExcessProfile_weight_sum (K : ℕ) :
     (∑ j ∈ range (K + 1), (j : ℝ) * harmonicExcessProfile K.factorial j) =
       (K.factorial : ℝ) * K * (K + 1) / 2 + K.factorial * K := by
@@ -93,6 +103,7 @@ lemma harmonicExcessProfile_weight_sum (K : ℕ) :
       simp only [sum_const, card_range, nsmul_eq_mul]
       ring
 
+/-- The `K`-th harmonic number is at most `K`. -/
 lemma harmonic_real_le_nat (K : ℕ) : (harmonic K : ℝ) ≤ K := by
   simp only [harmonic, Rat.cast_sum, Rat.cast_inv, Rat.cast_natCast]
   calc

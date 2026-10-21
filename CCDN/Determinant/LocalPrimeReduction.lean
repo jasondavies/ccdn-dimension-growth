@@ -24,6 +24,7 @@ open IsLocalRing
 
 variable (R : Type*) [CommRing R] (p : ℕ)
 
+/-- The reduction `R ⧸ (p)` of a ring `R` modulo the integer `p`. -/
 abbrev LocalPrimeReduction := R ⧸ Ideal.span {(p : R)}
 
 /-- The canonical prime-field algebra on `R/(p)`, including the zero ring. -/
@@ -36,6 +37,7 @@ instance localPrimeReduction_zmodAlgebra : Algebra (ZMod p) (LocalPrimeReduction
 
 variable [IsLocalRing R]
 
+/-- The image of the maximal ideal of the local ring `R` in its reduction `R ⧸ (p)`. -/
 def localPrimeMaximalIdeal : Ideal (LocalPrimeReduction R p) :=
   (maximalIdeal R).map (Ideal.Quotient.mk (Ideal.span {(p : R)}))
 
@@ -45,6 +47,8 @@ def localPrimeLayerDimension [Fact p.Prime] (k : ℕ) : ℕ :=
 
 variable {R p} [Fact p.Prime]
 
+/-- The kernel of any ring homomorphism from a local ring `R` to `ZMod p` is the maximal ideal of
+`R`. -/
 lemma local_zmod_kernel (ρ : R →+* ZMod p) :
     RingHom.ker ρ = maximalIdeal R :=
   IsLocalRing.ker_eq_maximalIdeal ρ (ZMod.ringHom_surjective ρ)

@@ -21,10 +21,14 @@ variable {K R S : Type*} [Field K] [CommRing R] [Algebra K R]
     [CommRing S] [Algebra K S] [Algebra R S] [IsScalarTower K R S]
     (I : Ideal R) [I.IsMaximal] [IsLocalization.AtPrime S I] [IsLocalRing S]
 
+/-- For a maximal ideal `I` of `R` and the localization `S` of `R` at `I`, the canonical `K`-algebra
+isomorphism `R ⧸ I ^ N ≃ S ⧸ 𝔪_S ^ N`. -/
 def localizationAdicQuotientEquiv (N : ℕ) :
     (R ⧸ I ^ N) ≃ₐ[K] S ⧸ maximalIdeal S ^ N :=
   (IsLocalization.AtPrime.equivQuotMaximalIdealPow I S N).restrictScalars K
 
+/-- Under `localizationAdicQuotientEquiv`, the degree-`k` layer of `I` corresponds to the degree-`k`
+layer of the maximal ideal of the localization. -/
 lemma localizationAdicQuotientEquiv_layer (k : ℕ) :
     (Ideal.powerLayer K I k).map
       (localizationAdicQuotientEquiv (K := K) (S := S) I (k + 1)).toLinearMap =

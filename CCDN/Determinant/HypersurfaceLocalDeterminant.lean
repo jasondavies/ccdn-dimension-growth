@@ -42,6 +42,7 @@ private lemma hypersurface_cumulative_capacity_ge (n k : ℕ) {μ : ℕ} (hμ : 
   rw [Nat.add_comm 1 k, Nat.choose_succ_self_right] at h
   exact h.trans (Nat.le_mul_of_pos_left _ hμ)
 
+/-- Hockey-stick identity: `∑_{k < K} (n + k).choose n = (n + K).choose (n + 1)`. -/
 lemma sum_cumulative_binomial (n K : ℕ) :
     (∑ k ∈ Finset.range K, (n + k).choose n) = (n + K).choose (n + 1) := by
   induction K with

@@ -21,6 +21,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- If `x ≡ y` coordinatewise modulo `q`, then `f(x) ≡ f(y)` modulo `q` for every integer polynomial
+`f`. -/
 lemma dvd_eval_sub_of_dvd_coordinates {σ : Type*} (q : ℤ)
     (x y : σ → ℤ) (hxy : ∀ j, q ∣ x j - y j) (f : MvPolynomial σ ℤ) :
     q ∣ eval x f - eval y f := by
@@ -35,6 +37,7 @@ lemma dvd_eval_sub_of_dvd_coordinates {σ : Type*} (q : ℤ)
     rw [he]
     exact dvd_add (dvd_mul_of_dvd_left hf _) (dvd_mul_of_dvd_right (hxy j) _)
 
+/-- An integer `a` coprime to `q` has an inverse `u` modulo `q`, itself coprime to `q`. -/
 lemma exists_integer_inverse_of_isCoprime {q a : ℤ} (h : IsCoprime q a) :
     ∃ u : ℤ, q ∣ u * a - 1 ∧ IsCoprime q u := by
   obtain ⟨v, u, he⟩ := h
