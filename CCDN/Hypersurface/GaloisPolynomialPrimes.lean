@@ -90,7 +90,7 @@ theorem galois_polynomial_minimalPrime_under
     (P : Ideal (MvPolynomial σ K))
     (hP : P ∈ (I.map (map (algebraMap k K))).minimalPrimes) :
     P.comap (map (algebraMap k K)) = I := by
-  let : P.IsPrime := hP.isPrime
+  have : P.IsPrime := hP.isPrime
   let : Algebra.IsIntegral (MvPolynomial σ k) (MvPolynomial σ K) :=
     Algebra.IsInvariant.isIntegral (MvPolynomial σ k) (MvPolynomial σ K) Gal(K/k)
   have hIP : I ≤ P.under (MvPolynomial σ k) := Ideal.map_le_iff_le_comap.mp hP.le

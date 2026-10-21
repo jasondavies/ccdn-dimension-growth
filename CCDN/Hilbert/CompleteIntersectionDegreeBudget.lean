@@ -62,7 +62,7 @@ theorem exists_completeIntersection_curve_components
   · intro P hP
     obtain ⟨hPT, z, hz⟩ := Finset.mem_filter.mp hP
     have hminimal := hTP P hPT
-    let : P.IsPrime := hminimal.isPrime
+    have : P.IsPrime := hminimal.isPrime
     have hheight : P.height = 2 := minimalPrime_pair_height_two hf.prime hfg hminimal
     have hdeg := hcurve P hPT
     have hlin : ∃ N : ℕ, ∃ c : ℤ, ∀ M ≥ N,

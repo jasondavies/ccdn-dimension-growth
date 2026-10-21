@@ -66,8 +66,8 @@ theorem affine_variety_projection_constants (n : ℕ) :
   refine ⟨affineProjectionHeightConstant n,
     by exact_mod_cast affineProjectionHeightConstant_pos n, 2 * n, ?_⟩
   intro m I hI hgeom d hdim hdegree
-  let : I.IsPrime := hI
-  let : (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime := hgeom
+  have : I.IsPrime := hI
+  have : (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime := hgeom
   obtain ⟨b, _, hint, _, f, hf, hfgeom, hfdegree, hker, hcount⟩ :=
     exists_geometrically_integral_affine_projection (L := AlgebraicClosure ℚ)
       m n I d hdim hdegree

@@ -40,7 +40,7 @@ theorem non_rational_projective_curve_count_le_degree_sq
   obtain ⟨γ, hγ⟩ := exists_galois_moving_polynomial_ideal ℚ K I
     (fun h => hundef ⟨I.comap (map (algebraMap ℚ K)), h⟩)
   let J := I.map (mapEquiv (Fin (n + 1)) γ.toRingEquiv)
-  let : J.IsPrime := Ideal.map_isPrime_of_equiv _
+  have : J.IsPrime := Ideal.map_isPrime_of_equiv _
   have hJmap : J = I.map (map γ.toRingHom) := by
     dsimp only [J]
     rw [← Ideal.map_coe]
@@ -99,7 +99,7 @@ theorem nonabsolute_projective_curve_count_le_degree_sq
     projectiveCount (projectiveIdealZeroLocus I) B ≤ d ^ 2 := by
   obtain ⟨P, hP⟩ := Ideal.nonempty_minimalPrimes
     (scalar_extension_ideal_ne_top (K := K) I (Ideal.IsPrime.ne_top ‹I.IsPrime›))
-  let : P.IsPrime := hP.isPrime
+  have : P.IsPrime := hP.isPrime
   obtain ⟨e, _, hed, hedim, hedegree⟩ :=
     algebraic_component_degree_le ℚ K I d hdim (by simpa using hdegree) P hP
   have hPhom := minimal_prime_ideal_homogeneous _

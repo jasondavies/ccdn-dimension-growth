@@ -21,7 +21,7 @@ theorem exists_minimalPrimeComponent_vanishing
     ∃ P : minimalPrimeComponents I, ∀ f ∈ P.val, eval x f = 0 := by
   classical
   let J := RingHom.ker (eval x)
-  let : J.IsPrime := RingHom.ker_isPrime (eval x)
+  have : J.IsPrime := RingHom.ker_isPrime (eval x)
   have hIJ : I ≤ J := fun f hf => hx f hf
   obtain ⟨P, hP, hPJ⟩ := Ideal.exists_minimalPrimes_le hIJ
   exact ⟨⟨P, mem_minimalPrimeComponents.mpr hP⟩, fun f hf => hPJ hf⟩
@@ -51,7 +51,7 @@ theorem pure_ideal_grid_card_le
     exists_minimalPrimeComponents_multiplicity_budget I hI m d hdim hdegree hpure
   let t (P : minimalPrimeComponents I) := s.filter (fun x => ∀ f ∈ P.val, eval x f = 0)
   have ht (P : minimalPrimeComponents I) : (t P).card ≤ δ P * S.card ^ m := by
-    let : P.val.IsPrime := minimalPrimeComponents_isPrime P.property
+    have : P.val.IsPrime := minimalPrimeComponents_isPrime P.property
     have hh := prime_ideal_grid_card_le n P.val (δ P)
       (by simpa only [hpure P] using (hδ P).2) S (t P)
       (fun x hx => (Finset.mem_filter.mp hx).2)

@@ -18,7 +18,7 @@ theorem integral_projection_hilbert_dimension_eq
     (hint : ψ.IsIntegral) :
     (filteredHilbertPolynomial (RingHom.ker ψ)).natDegree =
       (filteredHilbertPolynomial I).natDegree := by
-  let : (RingHom.ker ψ).IsPrime := RingHom.ker_isPrime ψ.toRingHom
+  have : (RingHom.ker ψ).IsPrime := RingHom.ker_isPrime ψ.toRingHom
   exact integral_embedding_hilbert_dimension_eq (RingHom.ker ψ) I
     (Ideal.kerLiftAlg ψ) (Ideal.kerLiftAlg_injective ψ) hint.kerLift
 

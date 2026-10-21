@@ -21,7 +21,7 @@ theorem affineCurveBound : AffineCurveBound := by
     positivity
   refine ⟨C * K + 1, by positivity, ?_⟩
   intro I hI d hd hdegree B hB
-  let : I.IsPrime := hI
+  have : I.IsPrime := hI
   obtain ⟨f, hf, hfd, hred⟩ := exists_plane_count_reduction I d hd hdegree
   have hbox : 1 ≤ projectionBoxFactor n d * B :=
     one_le_mul_of_one_le_of_one_le (projectionBoxFactor_one_le n d) hB

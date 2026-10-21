@@ -59,7 +59,7 @@ lemma exists_fin_integral_linear_elimination_infinite
   let : LinearOrder (Option (Fin n)) :=
     LinearOrder.lift' (finSuccEquiv n).symm (finSuccEquiv n).symm.injective
   let J := I.map e
-  let : J.IsPrime := Ideal.map_isPrime_of_equiv e
+  have : J.IsPrime := Ideal.map_isPrime_of_equiv e
   have hpoly : filteredHilbertPolynomial I = filteredHilbertPolynomial J :=
     filteredHilbertPolynomial_renameEquiv I (finSuccEquiv n)
   have hJ0 : J ≠ ⊥ := by
@@ -121,7 +121,7 @@ theorem exists_linear_integral_normalization_infinite
       exists_fin_integral_linear_elimination_infinite (n := m + 1 + k) I hdim (by omega)
     let ψ := projectionCoordinateMap I c
     let J := RingHom.ker ψ
-    let : J.IsPrime := RingHom.ker_isPrime ψ.toRingHom
+    have : J.IsPrime := RingHom.ker_isPrime ψ.toRingHom
     obtain ⟨a, ha, hinta, hinja⟩ := ih J hdimJ
     let a' : Fin (m + 1) → MvPolynomial (Fin (m + 1 + (k + 1))) K :=
       fun i => aeval c (a i)

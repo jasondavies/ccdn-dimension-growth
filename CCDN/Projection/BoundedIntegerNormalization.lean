@@ -82,7 +82,7 @@ theorem exists_bounded_integer_closure_normalization (m k : ℕ)
       exists_fin_integer_closure_elimination_step (n := m + 1 + k) (m := m) I d hdim (by omega) hdegree
     let ψ := projectionCoordinateMap I (fun i => integerLinearForm (c i))
     let J := RingHom.ker ψ
-    let : J.IsPrime := hprime
+    have : J.IsPrime := hprime
     obtain ⟨a, ha, hinta, hinja, hconea⟩ := ih J e hdimJ hdegreeJ
     let a' : Fin (m + 1) → Fin (m + 1 + (k + 1)) → ℤ :=
       fun i j => ∑ t, a i t * c t j

@@ -23,7 +23,7 @@ theorem minimalPrime_pair_height_two {R : Type*} [CommRing R] [IsDomain R]
     {p : Ideal R} (hp : p ∈ (Ideal.span ({f, g} : Set R)).minimalPrimes) :
     p.height = 2 := by
   classical
-  let : p.IsPrime := hp.isPrime
+  have : p.IsPrime := hp.isPrime
   let : (Ideal.span ({f} : Set R)).IsPrime := (Ideal.span_singleton_prime hf.ne_zero).mpr hf
   have hpf : Ideal.span ({f} : Set R) ≤ p :=
     (Ideal.span_mono (by simp : ({f} : Set R) ⊆ {f, g})).trans hp.le

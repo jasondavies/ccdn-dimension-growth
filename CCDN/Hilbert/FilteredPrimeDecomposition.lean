@@ -46,7 +46,7 @@ theorem idealZeroLocus_eq_union_minimalPrimeComponents {n : ℕ}
   constructor
   · intro hx
     let J := RingHom.ker (eval x)
-    let : J.IsPrime := RingHom.ker_isPrime (eval x)
+    have : J.IsPrime := RingHom.ker_isPrime (eval x)
     have hIJ : I ≤ J := by
       intro f hf
       exact hx f hf
@@ -74,7 +74,7 @@ theorem exists_prime_component_separators {R ι : Type*} [CommRing R]
       by_contra! h
       exact j.property (hanti j.val i h)
     choose w hwmem hwnot using hw
-    let : (P i).IsPrime := hprime i
+    have : (P i).IsPrime := hprime i
     refine ⟨∏ j, w j, ?_, ?_⟩
     · rw [Ideal.IsPrime.prod_mem_iff]
       rintro ⟨j, _, hj⟩

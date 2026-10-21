@@ -35,7 +35,7 @@ theorem conjugate_prime_grid_card_le
     s.card ≤ d ^ 2 * S.card ^ m := by
   classical
   let J := I.map (mapEquiv (Fin n) e)
-  let : J.IsPrime := Ideal.map_isPrime_of_equiv _
+  have : J.IsPrime := Ideal.map_isPrime_of_equiv _
   have hpoly : filteredHilbertPolynomial J = filteredHilbertPolynomial I :=
     filteredHilbertPolynomial_coefficientEquiv I e
   have hJdim : (filteredHilbertPolynomial J).natDegree = m + 1 := by rw [hpoly, hdim]

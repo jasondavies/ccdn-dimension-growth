@@ -66,7 +66,7 @@ theorem zero_dimensional_prime_with_base_point_descends
   have hJprime : J.IsPrime := by
     change (I.map (mapEquiv (Fin n) γ.toRingEquiv)).IsPrime
     infer_instance
-  let : J.IsPrime := hJprime
+  have : J.IsPrime := hJprime
   have hJdim : (filteredHilbertPolynomial J).natDegree = 0 := by
     change (filteredHilbertPolynomial
       (I.map (mapEquiv (Fin n) γ.toRingEquiv))).natDegree = 0
@@ -98,7 +98,7 @@ theorem nonabsolute_zero_dimensional_locus_empty
     idealZeroLocus I = ∅ := by
   obtain ⟨P, hP⟩ := Ideal.nonempty_minimalPrimes
     (scalar_extension_ideal_ne_top (K := K) I (Ideal.IsPrime.ne_top ‹I.IsPrime›))
-  let : P.IsPrime := hP.isPrime
+  have : P.IsPrime := hP.isPrime
   have hPdim := (algebraic_polynomial_minimalPrime_dimension ℚ K (Fin n) I P hP).trans hdim
   have hPempty := non_rational_zero_dimensional_locus_empty P hPdim
     (galois_component_not_defined_over_base ℚ K I hred P hP)

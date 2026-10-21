@@ -39,7 +39,7 @@ theorem formal_plane_vanishing_order_bound {K : Type*} [Field K]
     (g : MvPolynomial (Fin 2) K) (hnd : ¬ f ∣ g) {N : ℕ}
     (hvan : PowerSeries.X ^ N ∣ ψ g) : N ≤ f.totalDegree * g.totalDegree := by
   let p : Ideal (MvPolynomial (Fin 2) K) := Ideal.span {f}
-  let : p.IsPrime := Ideal.isPrime_span_singleton_of_prime hf.prime
+  have : p.IsPrime := Ideal.isPrime_span_singleton_of_prime hf.prime
   let J : Ideal (PowerSeries K) := Ideal.span {ψ g}
   let q := (Ideal.Quotient.mkₐ K J).comp ψ
   let φ : (MvPolynomial (Fin 2) K ⧸ p) →ₐ[K] (PowerSeries K ⧸ J) :=

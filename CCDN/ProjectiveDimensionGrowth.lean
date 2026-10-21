@@ -136,7 +136,7 @@ theorem projectiveGrowth_of_le {n E : ℕ} (hpoint : 1 ≤ n → n + 1 ≤ E)
   have hhK : Ch (n - 2) ≤ K := by dsimp only [K]; linarith [le_max_right T 0]
   refine ⟨K, by linarith, ?_⟩
   intro I hprime hI d hd hdegree B hB
-  let : I.IsPrime := hprime
+  have : I.IsPrime := hprime
   -- Each dimension gives a bound with a constant at most `K` and an exponent at most `E`.
   suffices h : ∃ C : ℝ, C ≤ K ∧ ∃ e ≤ E,
       (projectiveCount (projectiveIdealZeroLocus I) B : ℝ) ≤

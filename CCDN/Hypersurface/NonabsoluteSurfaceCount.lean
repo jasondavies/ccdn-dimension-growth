@@ -85,7 +85,7 @@ theorem finite_curve_union_count_le_box_side
   | empty => simp [count, integralPoints]
   | @insert P S hPS ih =>
     have hP := hcurve P (Finset.mem_insert_self _ _)
-    let : P.IsPrime := hP.1
+    have : P.IsPrime := hP.1
     have hS := ih (fun Q hQ => hcurve Q (Finset.mem_insert_of_mem hQ))
     rw [Finset.set_biUnion_insert, Finset.sum_insert hPS, add_mul]
     have hcount : (count (idealZeroLocus P ∪ ⋃ Q ∈ S, idealZeroLocus Q) B : ℝ) ≤

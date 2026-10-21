@@ -119,7 +119,7 @@ theorem projectiveCurveBound : ProjectiveCurveBound := by
   intro n _
   refine ⟨projectiveCurveConstant n, projectiveCurveConstant_pos n, ?_⟩
   intro I hI d hd hdegree B hB
-  let : I.IsPrime := hI
+  have : I.IsPrime := hI
   exact projective_curve_count I hd hdegree hB
 
 end

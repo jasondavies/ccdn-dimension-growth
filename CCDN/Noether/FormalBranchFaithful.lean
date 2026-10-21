@@ -25,7 +25,7 @@ theorem formal_plane_map_eq_zero_iff_dvd {K : Type*} [Field K]
   · intro hg
     by_contra hnd
     let p : Ideal (MvPolynomial (Fin 2) K) := Ideal.span {f}
-    let : p.IsPrime := Ideal.isPrime_span_singleton_of_prime hf.prime
+    have : p.IsPrime := Ideal.isPrime_span_singleton_of_prime hf.prime
     let φ : (MvPolynomial (Fin 2) K ⧸ p) →ₐ[K] PowerSeries K :=
       Ideal.Quotient.liftₐ p ψ (by
         intro l hl

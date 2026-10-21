@@ -53,7 +53,7 @@ theorem chowLinearSubstitution_ne_zero_iff_center_disjoint
   · exact center_disjoint_of_chowLinearSubstitution_ne_zero J A F hF
   · intro hcenter
     let P := chowProjectionImageIdeal J A
-    let : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
+    have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
     have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
     have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
       (integral_projection_hilbert_dimension_eq J _ hint).trans hdim
@@ -87,7 +87,7 @@ theorem exists_chow_projection_power
       (chowLinearSubstitution A F).totalDegree = F.totalDegree ∧
       (Irreducible (chowLinearSubstitution A F) ↔ F.totalDegree = G.totalDegree) := by
   let P := chowProjectionImageIdeal J A
-  let : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
+  have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
   have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
   have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
     (integral_projection_hilbert_dimension_eq J _ hint).trans hdim

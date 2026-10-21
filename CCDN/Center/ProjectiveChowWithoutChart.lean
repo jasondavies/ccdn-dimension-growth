@@ -26,7 +26,7 @@ theorem exists_projective_chow_equation_without_chart
   obtain ⟨j,hj⟩ := exists_coordinate_not_mem_of_positive_hilbert_dimension J (by omega)
   let e := Equiv.swap 0 j
   let J' := projectivePermutedIdeal J e
-  let : J'.IsPrime := projectivePermutedIdeal_isPrime J e
+  have : J'.IsPrime := projectivePermutedIdeal_isPrime J e
   have hJ' := projectivePermutedIdeal_homogeneous J hJ e
   have hp := projectivePermutedIdeal_filteredHilbertPolynomial J e
   have hX : X 0 ∉ J' := by

@@ -34,7 +34,7 @@ theorem homogeneous_finite_birational_projection_leadingCoeff_eq
   let A := MvPolynomial τ K ⧸ I
   let ψ := projectionCoordinateMap I a
   let J := RingHom.ker ψ
-  let : J.IsPrime := RingHom.ker_isPrime ψ.toRingHom
+  have : J.IsPrime := RingHom.ker_isPrime ψ.toRingHom
   let R := MvPolynomial σ K ⧸ J
   let φ : R →ₐ[K] A := Ideal.kerLiftAlg ψ
   let η : A →ₐ[K] F := IsScalarTower.toAlgHom K A F

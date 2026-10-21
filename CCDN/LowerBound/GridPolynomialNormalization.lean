@@ -92,7 +92,7 @@ theorem exists_grid_polynomial_normalization
   let g : Fin n → MvPolynomial (Fin n) K := gridCoordinatePolynomial S
   let ψ := projectionCoordinateMap I g
   let J := RingHom.ker ψ
-  let : J.IsPrime := RingHom.ker_isPrime ψ.toRingHom
+  have : J.IsPrime := RingHom.ker_isPrime ψ.toRingHom
   have hint : ψ.IsIntegral := gridCoordinateMap_isIntegral I S hS
   have hdimJ : (filteredHilbertPolynomial J).natDegree = m + 1 :=
     (integral_projection_hilbert_dimension_eq I ψ hint).trans hdim

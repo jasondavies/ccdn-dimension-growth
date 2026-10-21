@@ -73,7 +73,7 @@ theorem projective_plane_common_zeros_card_le {d m : ℕ} {ι : Type*}
     (hzg : ∀ i, z i ∈ projectiveZeroLocus g) :
     Fintype.card ι ≤ d * m := by
   let I : Ideal (MvPolynomial (Fin 3) K) := Ideal.span {f}
-  let : I.IsPrime := Ideal.isPrime_span_singleton_of_prime hir.prime
+  have : I.IsPrime := Ideal.isPrime_span_singleton_of_prime hir.prime
   apply projective_section_card_le_degree I
     (principal_plane_hasProjectiveCurveDegree f hf hir.ne_zero) g hg
     (by simpa only [I, Ideal.mem_span_singleton] using hfg) z hz

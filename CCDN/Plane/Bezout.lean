@@ -21,7 +21,7 @@ theorem plane_common_zeros_card_le {K ι : Type*} [Field K] [Fintype ι] [Decida
     (hzg : ∀ i, MvPolynomial.eval (z i) g = 0) :
     Fintype.card ι ≤ f.totalDegree * g.totalDegree := by
   let I : Ideal (MvPolynomial (Fin 2) K) := Ideal.span {f}
-  let : I.IsPrime := Ideal.isPrime_span_singleton_of_prime hf.prime
+  have : I.IsPrime := Ideal.isPrime_span_singleton_of_prime hf.prime
   apply polynomial_section_card_le_degree I f.totalDegree
     ⟨f.totalDegree, (f.totalDegree : ℤ) - f.totalDegree.choose 2,
       fun N hN => principal_plane_hilbert_function f hf.ne_zero hN⟩

@@ -22,14 +22,14 @@ theorem finite_galois_base_point_on_prime_over
     ∀ f ∈ P, eval (algebraMap k K ∘ x) f = 0 := by
   let J := I.map (map (algebraMap k K))
   let M := RingHom.ker (eval (algebraMap k K ∘ x))
-  let : M.IsPrime := RingHom.ker_isPrime _
+  have : M.IsPrime := RingHom.ker_isPrime _
   have hJM : J ≤ M := by
     apply Ideal.map_le_iff_le_comap.mpr
     intro f hf
     change eval (algebraMap k K ∘ x) (map (algebraMap k K) f) = 0
     rw [eval_map, ← eval₂_comp, hx f hf, map_zero]
   obtain ⟨Q, hQ, hQM⟩ := Ideal.exists_minimalPrimes_le hJM
-  let : Q.IsPrime := hQ.isPrime
+  have : Q.IsPrime := hQ.isPrime
   obtain ⟨γ, hγ⟩ := finite_galois_polynomial_primes_conjugate k K σ P Q
     (hP.trans (galois_polynomial_minimalPrime_under k K σ I Q hQ).symm)
   intro f hf
@@ -52,7 +52,7 @@ theorem galois_base_point_on_prime_over
     ∀ f ∈ P, eval (algebraMap k K ∘ x) f = 0 := by
   obtain ⟨L, hL⟩ := exists_finite_galois_ideal_definition k K P
   let Q := P.comap (map (algebraMap L K))
-  let : Q.IsPrime := Ideal.comap_isPrime _ P
+  have : Q.IsPrime := Ideal.comap_isPrime _ P
   have hcomp : (map (σ := Fin n) (algebraMap L K)).comp (map (algebraMap k L)) =
       map (algebraMap k K) := by
     ext i
@@ -83,7 +83,7 @@ theorem galois_base_point_on_every_component
     (hP : P ∈ (I.map (map (algebraMap k K))).minimalPrimes)
     (x : Fin n → k) (hx : ∀ f ∈ I, eval x f = 0) :
     ∀ f ∈ P, eval (algebraMap k K ∘ x) f = 0 := by
-  let : P.IsPrime := hP.isPrime
+  have : P.IsPrime := hP.isPrime
   exact galois_base_point_on_prime_over k K I P
     (algebraic_polynomial_minimalPrime_under k K (Fin n) I P hP) x hx
 

@@ -14,8 +14,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-set_option maxHeartbeats 1200000 in
-set_option synthInstance.maxHeartbeats 200000 in
 theorem principal_section_minimalPrime_hilbert_dimension
     {K : Type*} [Field K] [Infinite K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
@@ -25,7 +23,7 @@ theorem principal_section_minimalPrime_hilbert_dimension
     (hP : P ∈ (I ⊔ Ideal.span {f}).minimalPrimes) :
     (filteredHilbertPolynomial P).natDegree = m := by
   classical
-  let : P.IsPrime := hP.isPrime
+  have : P.IsPrime := hP.isPrime
   have hIP : I ≤ P := le_sup_left.trans hP.le
   have hfP : f ∈ P := hP.le ((show Ideal.span {f} ≤ I ⊔ Ideal.span {f}
     from le_sup_right) (Ideal.subset_span (Set.mem_singleton f)))
@@ -41,7 +39,7 @@ theorem principal_section_minimalPrime_hilbert_dimension
   let : Algebra.IsIntegral R A := ⟨hint⟩
   let : FaithfulSMul R A := (faithfulSMul_iff_algebraMap_injective R A).mpr hinj
   let Q : Ideal A := P.map (Ideal.Quotient.mk I)
-  let : Q.IsPrime := Ideal.map_isPrime_of_surjective Ideal.Quotient.mk_surjective
+  have : Q.IsPrime := Ideal.map_isPrime_of_surjective Ideal.Quotient.mk_surjective
     (by simpa only [Ideal.mk_ker] using hIP)
   have hQ0 : Q ≠ ⊥ := by
     intro h

@@ -52,7 +52,7 @@ theorem exists_closure_normalization_infinite
     obtain ⟨c,hc,hintc,hconec⟩ := exists_closure_integral_elimination_infinite I f hf hfi
     let ψ := projectionCoordinateMap I c
     let J := RingHom.ker ψ
-    let : J.IsPrime := RingHom.ker_isPrime ψ.toRingHom
+    have : J.IsPrime := RingHom.ker_isPrime ψ.toRingHom
     have hdimJ : (filteredHilbertPolynomial J).natDegree = m :=
       (integral_projection_hilbert_dimension_eq I ψ hintc).trans hdim
     obtain ⟨a,ha,hinta,hinja,hconea⟩ := ih J hdimJ

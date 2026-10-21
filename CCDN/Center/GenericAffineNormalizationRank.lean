@@ -29,7 +29,7 @@ theorem generic_affine_normalization_functionField_finrank
           (genericAffineParameterForms u i))))) F = d := by
   let : CharZero L := Algebra.charZero_of_charZero K L
   let IL := I.map (map (algebraMap K L))
-  let : IL.IsPrime := prime_ideal_scalar_extension_of_algebraicClosure (L := L) I
+  have : IL.IsPrime := prime_ideal_scalar_extension_of_algebraicClosure (L := L) I
   exact affine_normalization_functionField_finrank (F := F) IL
     (genericAffineParameterForms u) (genericAffineParameterForms_homogeneous u)
     (generic_fixed_coordinate_projection_integral I hdim u hu) d

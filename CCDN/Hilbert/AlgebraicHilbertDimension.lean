@@ -80,7 +80,7 @@ theorem algebraic_polynomial_minimalPrime_under
     (P : Ideal (MvPolynomial σ K))
     (hP : P ∈ (I.map (map (algebraMap k K))).minimalPrimes) :
     P.comap (map (algebraMap k K)) = I := by
-  let : P.IsPrime := hP.isPrime
+  have : P.IsPrime := hP.isPrime
   let : Algebra.IsIntegral (MvPolynomial σ k) (MvPolynomial σ K) :=
     ⟨algebraic_polynomial_extension_integral k K σ⟩
   have hIP : I ≤ P.under (MvPolynomial σ k) := Ideal.map_le_iff_le_comap.mp hP.le
@@ -101,7 +101,7 @@ theorem algebraic_polynomial_minimalPrime_dimension
     (P : Ideal (MvPolynomial σ K))
     (hP : P ∈ (I.map (map (algebraMap k K))).minimalPrimes) :
     (filteredHilbertPolynomial P).natDegree = (filteredHilbertPolynomial I).natDegree := by
-  let : P.IsPrime := hP.isPrime
+  have : P.IsPrime := hP.isPrime
   exact algebraic_polynomial_prime_hilbert_dimension k K σ I P
     (algebraic_polynomial_minimalPrime_under k K σ I P hP)
 

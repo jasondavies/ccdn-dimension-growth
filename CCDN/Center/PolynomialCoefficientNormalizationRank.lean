@@ -132,7 +132,7 @@ theorem chow_incidence_parameter_field_finrank
   let L := universalCoefficientField K (Fin m × Fin n)
   let : Field L := inferInstance
   let IL := I.map (map (algebraMap K L))
-  let : IL.IsPrime := prime_ideal_scalar_extension_of_algebraicClosure (L := L) I
+  have : IL.IsPrime := prime_ideal_scalar_extension_of_algebraicClosure (L := L) I
   let Q := MvPolynomial (Fin n) L ⧸ IL
   let : CommRing Q := inferInstance
   let T := MvPolynomial (Fin m × Fin n) (MvPolynomial (Fin n) K ⧸ I)

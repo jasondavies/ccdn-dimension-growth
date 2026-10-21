@@ -35,7 +35,7 @@ theorem geometric_projective_dimension_zero_multiplicity_one
   obtain ⟨j,hj⟩ := exists_coordinate_not_mem_of_positive_hilbert_dimension J (by omega)
   let e := Equiv.swap 0 j
   let J' := projectivePermutedIdeal J e
-  let : J'.IsPrime := projectivePermutedIdeal_isPrime J e
+  have : J'.IsPrime := projectivePermutedIdeal_isPrime J e
   let : (J'.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime :=
     projectivePermutedIdeal_geometrically_prime J e
   have hJ' := projectivePermutedIdeal_homogeneous J hJ e

@@ -76,7 +76,7 @@ theorem formal_plane_multiplicity_bound {K ι : Type*} [Field K]
       powerSeries_quotient_powers_independent (PowerSeries.X ^ N) N dvd_rfl
     exact Fintype.linearIndependent_iff.mp hli (fun b => a (t.1, b)) hezero t.2
   let p : Ideal (MvPolynomial (Fin 2) K) := Ideal.span {f}
-  let : p.IsPrime := Ideal.isPrime_span_singleton_of_prime hf.prime
+  have : p.IsPrime := Ideal.isPrime_span_singleton_of_prime hf.prime
   let φ : (MvPolynomial (Fin 2) K ⧸ p) →ₐ[K] (ι → Q) :=
     Ideal.Quotient.liftₐ p q (by
       intro l hl

@@ -34,7 +34,7 @@ theorem algebraic_component_degree_le
     ∃ e : ℕ, 0 < e ∧ e ≤ d ∧
       (filteredHilbertPolynomial P).natDegree = m ∧
       (filteredHilbertPolynomial P).leadingCoeff = (e : ℚ) / m.factorial := by
-  let : P.IsPrime := hP.isPrime
+  have : P.IsPrime := hP.isPrime
   have hPdim := (algebraic_polynomial_minimalPrime_dimension k K (Fin n) I P hP).trans hdim
   obtain ⟨e, he, _, helc⟩ := filteredHilbertPolynomial_positive_multiplicity P hP.isPrime.ne_top
   rw [hPdim] at helc

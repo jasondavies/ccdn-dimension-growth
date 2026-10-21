@@ -48,7 +48,6 @@ theorem exists_projection_fiber_specialization {K σ τ : Type*} [Field K]
   change φ (Ideal.Quotient.mk I (X i)) = x i
   simpa only [eval_X] using hφ (X i)
 
-set_option synthInstance.maxHeartbeats 200000 in
 theorem integral_projection_fiber_card_le
     {K σ τ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]

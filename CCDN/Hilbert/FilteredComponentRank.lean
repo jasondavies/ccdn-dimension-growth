@@ -33,7 +33,7 @@ theorem prime_separator_lifts_independent {K σ ι : Type*} [Field K]
   rw [Fintype.linearIndependent_iff]
   intro c hc t
   let i := t.1
-  let : (P i).IsPrime := hprime i
+  have : (P i).IsPrime := hprime i
   have hane : (Ideal.Quotient.mkₐ K (P i)) (a i) ≠ 0 :=
     fun h => ha i (Ideal.Quotient.eq_zero_iff_mem.mp h)
   have hz (j : ι) (hji : j ≠ i) :

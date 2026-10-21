@@ -32,7 +32,7 @@ theorem affine_projection_equation_degree_eq_of_closure
     (hker : RingHom.ker (projectionCoordinateMap I a) = Ideal.span {f}) :
     f.totalDegree = d := by
   let J := RingHom.ker (projectionCoordinateMap I a)
-  let : J.IsPrime := RingHom.ker_isPrime _
+  have : J.IsPrime := RingHom.ker_isPrime _
   have hJdim : (filteredHilbertPolynomial J).natDegree = m + 1 :=
     (integral_projection_hilbert_dimension_eq I _
       (affine_projection_integral_of_closure_integral I a hint)).trans hdim

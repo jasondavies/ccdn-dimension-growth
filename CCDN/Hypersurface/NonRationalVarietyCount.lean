@@ -50,7 +50,7 @@ theorem nonabsolute_variety_count_le_box
       (d : ℝ) ^ 2 * (2 * B + 1) ^ m := by
   obtain ⟨P, hP⟩ := Ideal.nonempty_minimalPrimes
     (scalar_extension_ideal_ne_top (K := K) I (Ideal.IsPrime.ne_top ‹I.IsPrime›))
-  let : P.IsPrime := hP.isPrime
+  have : P.IsPrime := hP.isPrime
   obtain ⟨e, _, hed, hedim, hedegree⟩ :=
     algebraic_component_degree_le ℚ K I d hdim hdegree P hP
   have hsubset : idealZeroLocus I ⊆ rationalIdealZeroLocusOver P := by

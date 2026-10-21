@@ -74,8 +74,8 @@ theorem projective_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
   · intro J hJ
     obtain ⟨I,hI,rfl⟩ := Finset.mem_image.mp hJ
     obtain ⟨hp,_,hf,hgeo,hpos,hdeg,hδ⟩ := hT I hI
-    let : I.IsPrime := hp
-    let : (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime := hgeo
+    have : I.IsPrime := hp
+    have : (I.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime := hgeo
     have hδeq : δ' (e I) = δ I := congrArg δ (hleft I)
     rw [hδeq]
     exact ⟨inferInstance,projectiveClosureIdeal_homogeneous I,

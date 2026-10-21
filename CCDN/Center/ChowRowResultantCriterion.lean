@@ -31,7 +31,7 @@ theorem chowRowResultant_ne_zero_iff_irreducible
     simp
   have hcenter := (chowLinearSubstitution_ne_zero_iff_center_disjoint J hJ hdim A F hzero).mp hR
   let P := chowProjectionImageIdeal J A
-  let : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
+  have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
   have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
   have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
     (integral_projection_hilbert_dimension_eq J _ hint).trans hdim

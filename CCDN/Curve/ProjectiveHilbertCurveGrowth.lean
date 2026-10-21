@@ -30,7 +30,7 @@ theorem projective_hilbert_curve_dimension_growth (n : ℕ) (hn : 1 ≤ n) :
   refine ⟨projectivePlaneAbsoluteConstant * T,
     mul_pos projectivePlaneAbsoluteConstant_pos hT, ?_⟩
   intro I hprime hI d hd hdim hdegree B hB
-  let : I.IsPrime := hprime
+  have : I.IsPrime := hprime
   have hdeg : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (1 + 1).factorial := by
     simpa using hdegree
   obtain ⟨b, hb, hnorm, hinj, _, _, f, hf, hfhom, hfdeg, hker⟩ :=

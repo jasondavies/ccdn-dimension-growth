@@ -27,7 +27,7 @@ theorem projective_chow_row_degree_eq_multiplicity
     ∀ i, δ i = d := by
   obtain ⟨I,G,hI,hmI,hdI,hG,hgen,hδG,_⟩ :=
     projective_chow_chart_reduction J hJ d hdim hdegree F hF δ hδ hzero
-  let : I.IsPrime := hI
+  have : I.IsPrime := hI
   let : (I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime :=
     prime_ideal_scalar_extension_of_isAlgClosed I
   exact chow_generator_row_degree_eq_multiplicity I hmI d hdI G hG hgen δ hδG

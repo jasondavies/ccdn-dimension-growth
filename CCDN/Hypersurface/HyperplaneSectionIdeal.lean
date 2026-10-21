@@ -145,7 +145,7 @@ theorem homogeneous_linear_hyperplane_section_isPrime {K σ : Type*}
       homogeneous_linear_hyperplane_section_isPrime_of_pivot (A ∘ e)
         (by simpa [e] using hi) (rename e.symm f) hf.rename_isHomogeneous
     let I := Ideal.span {f, hyperplaneNormalPolynomial A}
-    let : (I.map E).IsPrime := by change (Ideal.map E _).IsPrime; rw [hmap]; exact hp
+    have : (I.map E).IsPrime := by change (Ideal.map E _).IsPrime; rw [hmap]; exact hp
     have hh := Ideal.comap_isPrime E (I.map E)
     rwa [Ideal.comap_map_of_bijective E E.bijective] at hh
 

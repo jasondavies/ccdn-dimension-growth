@@ -111,7 +111,7 @@ theorem nongeometric_curve_union_count_le
       intro I hI
       obtain ⟨hIS,hδ,hnon⟩ := mem_filter.mp hI
       obtain ⟨hprime,hpos,hdeg⟩ := hS I hIS
-      let : I.IsPrime := hprime
+      have : I.IsPrime := hprime
       have hh := nonabsolute_affine_curve_count_le_degree_sq (K := AlgebraicClosure ℚ)
         I (δ I) hpos hdeg hnon hB
       have hδR : (δ I : ℝ) ≤ D := by exact_mod_cast hδ

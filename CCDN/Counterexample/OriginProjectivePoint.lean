@@ -61,7 +61,7 @@ def originProjectiveIdeal (K : Type*) [Field K] (n : ℕ) :
 
 instance originProjectiveIdeal_isPrime {K : Type*} [Field K] {n : ℕ} :
     (originProjectiveIdeal K n).IsPrime := by
-  let : (idealOfVars (Fin n) K).IsPrime := idealOfVars_isMaximal.isPrime
+  have : (idealOfVars (Fin n) K).IsPrime := idealOfVars_isMaximal.isPrime
   exact projectiveClosureIdeal_isPrime _
 
 theorem originProjectiveIdeal_geometrically_prime {K L : Type*}
@@ -74,7 +74,7 @@ theorem originProjectiveIdeal_geometrically_prime {K L : Type*}
 theorem originProjectiveIdeal_hilbert_parameters {K : Type*} [Field K] (n : ℕ) :
     (filteredHilbertPolynomial (originProjectiveIdeal K n)).natDegree = 1 ∧
       (filteredHilbertPolynomial (originProjectiveIdeal K n)).leadingCoeff = 1 := by
-  let : (idealOfVars (Fin n) K).IsPrime := idealOfVars_isMaximal.isPrime
+  have : (idealOfVars (Fin n) K).IsPrime := idealOfVars_isMaximal.isPrime
   simpa [originProjectiveIdeal] using
     projectiveClosureIdeal_hilbertPolynomial_parameters (idealOfVars (Fin n) K) 0 1
     (by rw [idealOfVars_filteredHilbertPolynomial]; simp)

@@ -27,7 +27,7 @@ theorem projective_variety_dimension_growth (m k : ℕ) :
   obtain ⟨C, hC, hcount⟩ := projective_projection_dimension_growth m k
   refine ⟨C, hC, ?_⟩
   intro I hprime hI d hd hdim hdegree B hB
-  let : I.IsPrime := hprime
+  have : I.IsPrime := hprime
   obtain ⟨b, hb, hnorm, hinj, _, _, f, hf, hfhom, hfdeg, hker⟩ :=
     exists_bounded_birational_hypersurface_projection_of_le (m + 1) (m + k + 2)
       (by omega) I hI d hdim hdegree

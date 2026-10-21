@@ -13,8 +13,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-set_option maxHeartbeats 1200000 in
-set_option synthInstance.maxHeartbeats 200000 in
 theorem linear_normalization_fiber_card_le_of_fractionField
     {K E : Type*} [Field K] [Field E] [Algebra K E]
     {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

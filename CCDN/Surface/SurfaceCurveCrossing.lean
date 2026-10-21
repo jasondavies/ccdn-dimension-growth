@@ -18,7 +18,7 @@ theorem height_two_prime_isMinimalPrime_section
     (P : Ideal (CoordinatePolynomial 3)) (hP : P.IsPrime) (hheight : P.height = 2)
     (hfP : f ∈ P) (hgP : g ∈ P) :
     (polynomialSectionIdeal f g).IsMinimalPrime P := by
-  let : P.IsPrime := hP
+  have : P.IsPrime := hP
   have hle : polynomialSectionIdeal f g ≤ P := by
     apply Ideal.span_le.mpr
     intro x hx
@@ -28,7 +28,7 @@ theorem height_two_prime_isMinimalPrime_section
       subst x
       exact hgP
   obtain ⟨Q, hQ, hQP⟩ := Ideal.exists_minimalPrimes_le hle
-  let : Q.IsPrime := hQ.isPrime
+  have : Q.IsPrime := hQ.isPrime
   have hQheight : Q.height = 2 := minimalPrime_pair_height_two hf.prime hfg hQ
   have hQP' : Q = P := by
     by_contra hne
@@ -86,7 +86,7 @@ theorem surface_curve_crossing_count_le
   have hcurve (P) (hPT : P ∈ T) :
       count (idealZeroLocus P ∩ zeroLocus h) B ≤ δ P * h.totalDegree := by
     obtain ⟨hPS, hhP⟩ := Finset.mem_filter.mp hPT
-    let : P.IsPrime := (hS P hPS).1
+    have : P.IsPrime := (hS P hPS).1
     exact count_curve_section_le P (hS P hPS).2.2.2.2 h hhP B
   have hbudget := surface_prime_curve_degree_sum_le f g hf hfg T δ
     (fun P hP => hS P (Finset.mem_filter.mp hP).1)

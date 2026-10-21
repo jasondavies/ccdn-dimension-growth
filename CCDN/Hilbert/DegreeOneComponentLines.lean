@@ -40,7 +40,7 @@ theorem degree_one_components_line_cover
     obtain ⟨P, hPT, rfl⟩ := Finset.mem_image.mp hL
     obtain ⟨hPS, z, hz⟩ := Finset.mem_filter.mp hPT
     obtain ⟨hp, hheight, hdegree⟩ := hcurve P hPS
-    let : P.IsPrime := hp
+    have : P.IsPrime := hp
     obtain ⟨v, hv, he, _⟩ :=
       degree_one_zeroLocus_eq_rationalAffineLine P hheight hdegree z hz
     exact ⟨⟨P, hPS, rfl⟩, z, v, hv, he⟩
