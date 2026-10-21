@@ -7,7 +7,7 @@ module
 
 public import CCDN.ClassGroup.ClassGroupNormPolynomial
 import CCDN.ClassGroup.OddDegreeNormCurves
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 /-! Odd-degree norm curves keep their degree and irreducibility in every
 residue characteristic, including characteristic two. The signs ±1 remain
 nonzero in every field. -/

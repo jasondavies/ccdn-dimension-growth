@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.FiniteFieldBadPlanes
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 /-! Evaluation of a universal section, including the three points
 obtained from the base point by adding each direction. -/
 

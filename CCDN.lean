@@ -379,8 +379,6 @@ public import CCDN.Counterexample.WeightedDimensionOneExample
 public import CCDN.Counterexample.ZeroDimensionalCenterObstruction
 public import CCDN.Curve.AffineCurveCount
 public import CCDN.Curve.AffineCurveHilbertPolynomial
-public import CCDN.Curve.CurveDerivativeReconstruction
-public import CCDN.Curve.CurvePrimitivePair
 public import CCDN.Curve.ProjectiveCurveCount
 public import CCDN.Curve.ProjectiveHilbertCurveGrowth
 public import CCDN.Determinant.AffineCongruenceDeterminant
@@ -641,11 +639,14 @@ public import CCDN.Noether.FormalPlaneBranch
 public import CCDN.Noether.FormalPlaneDifferentiation
 public import CCDN.Noether.GenericPlaneIrreducibility
 public import CCDN.Noether.GenericPlaneStretch
+public import CCDN.Noether.LeadingDirection
+public import CCDN.Noether.PlaneShear
 public import CCDN.Noether.PowerSeriesBaseChange
 public import CCDN.Noether.PowerSeriesFrobenius
 public import CCDN.Noether.PowerSeriesOrderIndependence
 public import CCDN.Noether.RationalDifferential
 public import CCDN.Noether.SeparableRootDifferential
+public import CCDN.Noether.ShearNormalization
 public import CCDN.Noether.SimpleRootResidue
 public import CCDN.Noether.UniversalHomogeneousForm
 public import CCDN.Noether.UniversalNoetherForms
@@ -710,11 +711,11 @@ public import CCDN.Plane.PlaneCurveAssembly
 public import CCDN.Plane.PlaneDeformationRelation
 public import CCDN.Plane.PlaneFrobeniusSystem
 public import CCDN.Plane.PlaneGridHeight
+public import CCDN.Plane.PlaneIncidence
 public import CCDN.Plane.PlaneLinearDeformation
 public import CCDN.Plane.PlaneRelationSpace
 public import CCDN.Plane.PlaneSectionBounds
 public import CCDN.Plane.PlaneSectionSum
-public import CCDN.Plane.PlaneShear
 public import CCDN.Plane.PlaneStepanovBound
 public import CCDN.Plane.PlaneStepanovDimension
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
@@ -750,7 +751,9 @@ public import CCDN.Projection.BoundedLinearProjection
 public import CCDN.Projection.BoundedProjectionCoordinates
 public import CCDN.Projection.ClosureIntegralComposition
 public import CCDN.Projection.ClosureProjectionBirational
+public import CCDN.Projection.CurveDerivativeReconstruction
 public import CCDN.Projection.CurveParameterFullDegree
+public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Projection.CurveProjectionDeformation
 public import CCDN.Projection.CurveRationalInverse
 public import CCDN.Projection.CurveRationalParameter
@@ -783,10 +786,8 @@ public import CCDN.Projection.IntegralProjectionClosedImage
 public import CCDN.Projection.IntegralProjectionFiberCount
 public import CCDN.Projection.IntegralProjectionHilbert
 public import CCDN.Projection.LeadingCoordinateExtension
-public import CCDN.Projection.LeadingDirection
 public import CCDN.Projection.LinearNormalizationInfinite
 public import CCDN.Projection.LinearParameterPrimitive
-public import CCDN.Projection.PlaneIncidence
 public import CCDN.Projection.PlaneProjectionDegree
 public import CCDN.Projection.PlaneProjectionDerivative
 public import CCDN.Projection.PlaneProjectionKernel
@@ -802,7 +803,6 @@ public import CCDN.Projection.ProjectivePlaneProjection
 public import CCDN.Projection.ProjectiveProjectionCount
 public import CCDN.Projection.ProjectiveProjectionGrowth
 public import CCDN.Projection.ProjectiveVarietyProjection
-public import CCDN.Projection.ShearNormalization
 public import CCDN.Projection.ZeroDimensionalAffineProjection
 public import CCDN.Projection.ZeroDimensionalProjectiveCount
 public import CCDN.ProjectiveCurveBound

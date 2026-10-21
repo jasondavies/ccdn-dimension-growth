@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.InfinityParameterReduction
-public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Projection.CurvePrimitivePair
 import CCDN.Algebra.BoundedLinearSeparation
 import CCDN.Algebra.CoordinatePowerGeneration
 import Mathlib.Algebra.Polynomial.OfFn

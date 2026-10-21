@@ -9,7 +9,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import CCDN.Height.Box
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.LowerBound.GridMultivariate
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 import Mathlib.Algebra.Order.Star.Rat
 import Mathlib.Algebra.MvPolynomial.CommRing
 

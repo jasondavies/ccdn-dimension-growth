@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs

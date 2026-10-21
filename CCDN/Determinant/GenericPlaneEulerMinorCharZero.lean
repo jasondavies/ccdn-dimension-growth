@@ -12,7 +12,7 @@ import CCDN.Determinant.GenericPlaneSmoothness
 import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
 import CCDN.Noether.EulerPairBasisValues
 import CCDN.Noether.EulerPairSpecialization
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 /-! Nonzero Euler minors in smooth generic-plane families. The order is
 exactly d²−1, and the smooth-point argument constructs the geometric
 irreducibility needed by the characteristic-zero closed-form theorem. -/

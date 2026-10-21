@@ -11,7 +11,7 @@ public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.ConstantLeadingBadReduction
 public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Auxiliary.GeneralBadReduction
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import CCDN.ForMathlib.MvPolynomial
 

@@ -6,13 +6,13 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.FiniteFieldConstants
-public import CCDN.Projection.PlaneIncidence
+public import CCDN.Plane.PlaneIncidence
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Analysis.Real.Sqrt
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Plane.FiniteFieldZeroPlanes
 import CCDN.Plane.PlaneCount
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 /-! Section-point bounds in the good, nonzero and unrestricted cases.
 The good-section bound uses the proved Stepanov theorem over the prime field. -/
 

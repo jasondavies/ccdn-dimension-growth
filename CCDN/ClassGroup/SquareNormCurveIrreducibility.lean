@@ -8,7 +8,7 @@ module
 public import CCDN.ClassGroup.ClassGroupNormPolynomial
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.ClassGroup.NormPolynomialSubfield
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 import Mathlib.RingTheory.Polynomial.IsIntegral
 /-! A double-cover polynomial with an odd root multiplicity is
 irreducible. Applied to the norm-polynomial factorization, this detects

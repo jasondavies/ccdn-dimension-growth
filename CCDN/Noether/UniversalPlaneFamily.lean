@@ -7,7 +7,7 @@ module
 
 public import CCDN.Noether.BivariateTotalDegree
 import CCDN.Noether.ClosedFormScaling
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 /-! The universal affine two-plane, with independent coordinates for its base
 point and both directions. Its specializations are affine-plane
 restrictions; its polynomial coefficients are the objects to be counted. -/

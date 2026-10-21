@@ -12,7 +12,7 @@ import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.UniversalPlaneMinor
 import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.UniversalPlaneDegree
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 import CCDN.ForMathlib.MvPolynomial
 /-! A nonzero universal minor of cubic parameter degree, over the original
 coefficient field. The nonvanishing proof descends from an algebraic closure. -/

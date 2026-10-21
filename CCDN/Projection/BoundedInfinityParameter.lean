@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Projection.InfinityParameterReduction
 import CCDN.Projection.BoundedInfinityAvoidance
 import CCDN.Projection.InfinityChartCardinality

@@ -11,7 +11,7 @@ public import CCDN.Noether.UniversalPlaneFamily
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Auxiliary.HypersurfacePositioning
 import CCDN.Noether.UniversalPlaneWitness
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 import CCDN.ForMathlib.MvPolynomial
 /-! The leading coefficient of a universal plane section detects loss of the
 full outer degree. It is evaluated by the highest homogeneous form in the

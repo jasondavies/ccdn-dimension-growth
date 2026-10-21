@@ -9,7 +9,7 @@ public import CCDN.Noether.EulerFactorKernel
 public import CCDN.Noether.EulerUniversalForms
 public import Mathlib.Tactic.Continuity
 import CCDN.Noether.EulerPairBasisValues
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 
 /-! Generic factors with independent integral coefficient parameters.
 Specializing the logarithmic pair at `(x^a,1)` proves that the generic

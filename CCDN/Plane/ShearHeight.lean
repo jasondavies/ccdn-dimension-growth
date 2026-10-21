@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ShearNormalization
+public import CCDN.Noether.ShearNormalization
 /-! Explicit coefficient-height bounds for the bounded integral shear. -/
 
 @[expose] public section

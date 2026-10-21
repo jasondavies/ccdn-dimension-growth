@@ -12,7 +12,7 @@ import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
 public import CCDN.ForMathlib.MatrixRank
 import CCDN.Noether.ClosedFormRank
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 
 /-! A smooth rational point supplies a nonzero closed-form coefficient minor
 for an irreducible plane equation in characteristic zero or large characteristic.

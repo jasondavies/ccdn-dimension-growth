@@ -9,7 +9,7 @@ public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.FilteredIntersection
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.RingTheory.Algebraic.Defs
-import CCDN.Curve.CurveDerivativeReconstruction
+import CCDN.Projection.CurveDerivativeReconstruction
 import CCDN.Determinant.PlaneSingularities
 import CCDN.Projection.PlaneProjectionDerivative
 import CCDN.Projection.ProjectionExceptionalCount

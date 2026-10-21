@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Projection.CurvePrimitivePair
 /-! Evaluation of the moment coordinates used by the bounded primitive pair. -/
 
 @[expose] public section

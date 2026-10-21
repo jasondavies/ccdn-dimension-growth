@@ -13,7 +13,7 @@ import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Noether.UniversalPlaneIntegerSpecialization
 import CCDN.Algebra.PrimitiveNormalization
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 import CCDN.ForMathlib.MvPolynomial
 
 /-! Irreducible plane sections transverse to a prescribed direction.

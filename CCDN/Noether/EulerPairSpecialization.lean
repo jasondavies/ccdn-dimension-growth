@@ -7,7 +7,7 @@ module
 
 public import CCDN.Noether.EulerPairBasis
 import CCDN.Noether.EulerPairBasisValues
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 /-! Euler columns and their coefficient minors commute with every coefficient
 ring homomorphism, including specialization and reduction in any characteristic. -/
 

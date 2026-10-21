@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Height.Box
 public import Mathlib.Data.Fin.VecNotation
 import CCDN.Projection.BoundedProjectionCoordinates

@@ -8,7 +8,7 @@ module
 public import CCDN.Noether.EulerClosedFormRank
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.HomogeneousHilbert
-import CCDN.Projection.ShearNormalization
+import CCDN.Noether.ShearNormalization
 
 /-! The explicit Euler parameters exhaust all polynomial pairs satisfying
 the degree and Euler-contraction constraints. -/

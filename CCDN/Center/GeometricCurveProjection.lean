@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Projection.ProjectionImageFractionField
-public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Hilbert.FilteredIntersection
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs

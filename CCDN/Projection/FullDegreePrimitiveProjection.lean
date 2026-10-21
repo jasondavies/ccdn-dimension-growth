@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Hilbert.FilteredIntersection
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import Mathlib.RingTheory.SimpleRing.Principal
