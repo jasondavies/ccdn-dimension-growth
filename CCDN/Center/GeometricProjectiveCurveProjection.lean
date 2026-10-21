@@ -48,7 +48,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_geometrically_integral_curve_projection
+private theorem exists_geometrically_integral_curve_projection
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n : ℕ}
     [DecidableEq (Fin 2 → K)]
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
@@ -93,7 +93,7 @@ open MvPolynomial
 /-- The projective curve clause of Proposition 4.3.2 on a proper standard
 chart. The affine plane equation generates exactly the chart function field;
 its projective closure stays irreducible after extending coefficients. -/
-theorem exists_geometric_projective_curve_count_reduction_of_chart
+private theorem exists_geometric_projective_curve_count_reduction_of_chart
     {L : Type*} [Field L] [Algebra ℚ L] {n d : ℕ}
     (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]
     [(I.map (map (algebraMap ℚ L))).IsPrime]
@@ -130,7 +130,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_coordinate_not_mem_of_positive_hilbert_dimension
+private theorem exists_coordinate_not_mem_of_positive_hilbert_dimension
     {K σ : Type*} [Field K] [Fintype σ] [LinearOrder σ]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
     (hdim : 0 < (filteredHilbertPolynomial I).natDegree) :
@@ -176,7 +176,7 @@ theorem projectivePermutedIdeal_geometrically_prime
 def curveProjectionHeightConstant (n : ℕ) : ℝ :=
   ((n : ℝ) + 1) * (2 * ((n : ℝ) + 1)) ^ (2 * n)
 
-lemma projectionBoxFactor_le_degree_power (n : ℕ) {d : ℕ} (hd : 0 < d) :
+private lemma projectionBoxFactor_le_degree_power (n : ℕ) {d : ℕ} (hd : 0 < d) :
     projectionBoxFactor n d ≤ curveProjectionHeightConstant n * (d : ℝ) ^ (2 * n) := by
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd
   unfold projectionBoxFactor curveProjectionHeightConstant

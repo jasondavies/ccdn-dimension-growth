@@ -33,7 +33,7 @@ open MvPolynomial
 
 /-- The equation is constructed from the given normalization; its homogeneous
 and univariate degrees are both the Hilbert multiplicity. -/
-theorem exists_homogeneous_normalization_primitive_equation
+private theorem exists_homogeneous_normalization_primitive_equation
     {K F : Type*} [Field K] [CharZero K] [Field F] [Algebra K F] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]
@@ -74,7 +74,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma parameter_primitive_adjoin_top_of_tuple
+private lemma parameter_primitive_adjoin_top_of_tuple
     {K F : Type*} [Field K] [Field F] [Algebra K F] {m : ℕ}
     (u : Fin m → F) (v : F)
     (h : IntermediateField.adjoin K (Set.range (Fin.cases v u : Fin (m + 1) → F)) = ⊤) :

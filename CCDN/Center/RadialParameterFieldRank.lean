@@ -25,7 +25,7 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
-theorem polynomial_parameter_field_finrank
+private theorem polynomial_parameter_field_finrank
     {K A F σ : Type*} [Field K] [Field A] [Algebra K A]
     [Module.Finite K A] [Field F] [Algebra K F]
     [Algebra (MvPolynomial σ A) F]
@@ -48,7 +48,7 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
-theorem radial_parameter_field_eq
+private theorem radial_parameter_field_eq
     {K F E : Type*} [Field K] [Field F] [Field E]
     [Algebra K F] [Algebra F E] [Algebra K E] [IsScalarTower K F E]
     {m : ℕ} (v : Fin m → F) (t : E) (ht : t ≠ 0) :

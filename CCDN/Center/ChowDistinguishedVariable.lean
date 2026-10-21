@@ -59,7 +59,7 @@ def chowCoefficientMap {K : Type*} [Field K] {n : ℕ} (m : ℕ)
       MvPolynomial (Fin (m + 1) × Fin n) (MvPolynomial (Fin n) K ⧸ I) :=
   (chowIncidenceMap (m + 1) I).comp (rename (chowIndependentVariables m n))
 
-lemma chowCoefficientMap_injective {K : Type*} [Field K] {m n : ℕ}
+private lemma chowCoefficientMap_injective {K : Type*} [Field K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hm : (filteredHilbertPolynomial I).natDegree = m) :
     Function.Injective (chowCoefficientMap m I) := by

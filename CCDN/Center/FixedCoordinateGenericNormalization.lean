@@ -45,17 +45,17 @@ lemma homogeneous_linear_forms_coefficient_representation
   funext i
   simpa only [linearForm, smul_eq_C_mul] using hc i
 
-def genericFixedCoordinateFamily (K : Type*) [Field K] (m n : ℕ) :
+private def genericFixedCoordinateFamily (K : Type*) [Field K] (m n : ℕ) :
     Fin (m + 1) → MvPolynomial (Fin (n + 1)) (MvPolynomial (Fin m × Fin n) K) :=
   Fin.cons (X 0) (fun i => ∑ j, C (X (i,j)) * X j.succ)
 
-lemma genericFixedCoordinateFamily_homogeneous
+private lemma genericFixedCoordinateFamily_homogeneous
     (K : Type*) [Field K] (m n : ℕ) (i : Fin (m + 1)) :
     (genericFixedCoordinateFamily K m n i).IsHomogeneous 1 := by
   refine Fin.cases (isHomogeneous_X _ _) (fun j => ?_) i
   exact IsHomogeneous.sum _ _ _ (fun k _ => isHomogeneous_C_mul_X _ _)
 
-lemma genericFixedCoordinateFamily_map
+private lemma genericFixedCoordinateFamily_map
     {K L : Type*} [Field K] [Field L] {m n : ℕ}
     (φ : MvPolynomial (Fin m × Fin n) K →+* L) :
     (fun i => map φ (genericFixedCoordinateFamily K m n i)) =

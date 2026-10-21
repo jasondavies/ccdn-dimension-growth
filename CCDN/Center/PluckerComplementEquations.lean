@@ -42,7 +42,7 @@ lemma centerPluckerFamilyZeroLocus_complement_isOpen
   exact isOpen_iUnion (fun g => isOpen_iUnion (fun hg =>
     centerPluckerPrincipalOpen_isOpen (map φ g) ((hΦ g hg).map φ)))
 
-lemma homogeneous_eval₂_centerMatrixSpan
+private lemma homogeneous_eval₂_centerMatrixSpan
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n D : ℕ}
     (g : MvPolynomial (Fin r ↪ Fin n) K) (hg : g.IsHomogeneous D)
     (x : IndependentCenterMatrix L r n) :
@@ -51,7 +51,7 @@ lemma homogeneous_eval₂_centerMatrixSpan
   rw [centerSubspacePlucker_matrixSpan,eval₂_eq_eval_map,eval₂_eq_eval_map]
   exact homogeneous_eval_independentCenterPlucker (map φ g) (hg.map φ) x
 
-lemma centerMatrixSpan_mem_familyComplement_iff
+private lemma centerMatrixSpan_mem_familyComplement_iff
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n D : ℕ}
     (Φ : Finset (MvPolynomial (Fin r ↪ Fin n) K)) (hΦ : ∀ g ∈ Φ, g.IsHomogeneous D)
     (x : IndependentCenterMatrix L r n) :
@@ -96,7 +96,7 @@ theorem zeroColumnCenterSubspace_familyComplement_dense
   exact (centerMatrixSpan_mem_familyComplement_iff φ Φ hΦ _).mpr ⟨g,hg,hy⟩
 
 /-- The ambient case `S = ∅`. -/
-theorem centerSubspace_familyComplement_dense
+private theorem centerSubspace_familyComplement_dense
     {K L : Type*} [Field K] [Field L] [Infinite L] (φ : K →+* L) {r n D : ℕ}
     (Φ : Finset (MvPolynomial (Fin r ↪ Fin n) K)) (hΦ : ∀ g ∈ Φ, g.IsHomogeneous D)
     (x : IndependentCenterMatrix L r n)
@@ -111,7 +111,7 @@ theorem centerSubspace_familyComplement_dense
   rintro _ ⟨W,hW,rfl⟩
   exact hW
 
-lemma birationalCenterSubspaceLocus_eq_complement_of_extension_detector
+private lemma birationalCenterSubspaceLocus_eq_complement_of_extension_detector
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {n r D : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) L)) [J.IsPrime]
     (Φ : Finset (MvPolynomial (Fin r ↪ Fin (n + 1)) K))

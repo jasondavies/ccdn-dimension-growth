@@ -60,7 +60,7 @@ structure BirationalComplementProjection {r n : ℕ}
     (chowProjectionImageIdeal J (P.map (Int.castRingHom ℚ)))).leadingCoeff =
     (filteredHilbertPolynomial J).leadingCoeff
 
-lemma integral_matrix_projection_no_base_point {n s : ℕ}
+private lemma integral_matrix_projection_no_base_point {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
     (hJ : IsHomogeneousIdeal J)
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) ℚ)

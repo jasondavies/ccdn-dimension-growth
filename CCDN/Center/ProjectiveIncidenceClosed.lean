@@ -48,7 +48,7 @@ lemma projectiveChowIncidenceLocus_iff_cone {K : Type*} [Field K] {n r : ℕ}
 
 /-- Every tuple outside the projective incidence image has a polynomial
 separator which is normalized to one there. -/
-theorem exists_polynomial_separator_of_not_projective_incidence
+private theorem exists_polynomial_separator_of_not_projective_incidence
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : IsHomogeneousIdeal J)
@@ -84,7 +84,7 @@ theorem exists_polynomial_separator_of_not_projective_incidence
 
 /-- The incidence image is closed: every point annihilating its vanishing ideal
 is represented by a nonzero intersection vector. -/
-theorem projectiveChowIncidenceLocus_zeroLocus_vanishingIdeal
+private theorem projectiveChowIncidenceLocus_zeroLocus_vanishingIdeal
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : IsHomogeneousIdeal J) :

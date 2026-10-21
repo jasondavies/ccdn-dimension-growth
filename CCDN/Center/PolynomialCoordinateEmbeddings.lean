@@ -28,7 +28,7 @@ variable {K R F L σ τ : Type*} [Field K] [Field R] [Field F] [Field L]
   [IsScalarTower K (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
   [IsFractionRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
 
-theorem polynomial_coordinate_embeddings_injective
+private theorem polynomial_coordinate_embeddings_injective
     (hparam : ∀ j : τ, ∃ r : R, algebraMap R F r =
       algebraMap (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F (X j)) :
     Function.Injective (fun φ : F →ₐ[R] L => fun j : σ =>

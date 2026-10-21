@@ -16,7 +16,7 @@ parameters after a coefficient-field extension. -/
 namespace CCDN
 noncomputable section
 
-lemma intermediateField_adjoin_tower_range
+private lemma intermediateField_adjoin_tower_range
     {K A F : Type*} [Field K] [Field A] [Field F]
     [Algebra K A] [Algebra K F] [Algebra A F] [IsScalarTower K A F]
     (T : Set F) :
@@ -34,7 +34,7 @@ lemma intermediateField_adjoin_tower_range
       exact (IntermediateField.adjoin A T).algebraMap_mem a
     · exact IntermediateField.subset_adjoin A T hx
 
-lemma intermediateField_adjoin_mapped_tower
+private lemma intermediateField_adjoin_mapped_tower
     {K A F : Type*} [Field K] [Field A] [Field F]
     [Algebra K A] [Algebra K F]
     (φ : A →ₐ[K] F) (E : IntermediateField K A)

@@ -31,7 +31,7 @@ lemma matrixMinorPolynomial_eval {K : Type*} [Field K] {r n : ℕ}
   ext i j
   exact eval_X _
 
-lemma matrix_rows_independent_of_minor
+private lemma matrix_rows_independent_of_minor
     {K : Type*} [Field K] {r n : ℕ} (c : Fin r ↪ Fin n)
     (x : Fin r × Fin n → K) (hx : eval x (matrixMinorPolynomial K c) ≠ 0) :
     LinearIndependent K (fun i : Fin r => fun j : Fin n => x (i,j)) := by
@@ -72,7 +72,7 @@ lemma zeroColumnPoint_fixed {K : Type*} [Field K] {r n : ℕ}
 
 /-- Every point of the zero-column subspace is in the closure of the good
 full-rank locus. Nonvanishing is required on this subspace itself. -/
-theorem zero_column_polynomial_locus_closure
+private theorem zero_column_polynomial_locus_closure
     {K : Type*} [Field K] [Infinite K] {r n : ℕ}
     (Z : Finset (Fin n)) (A : Matrix (Fin r) (Fin n) K)
     (hA : LinearIndependent K A.row) (hAz : ∀ i j, j ∈ Z → A i j = 0)

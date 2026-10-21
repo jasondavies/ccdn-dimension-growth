@@ -26,7 +26,7 @@ def normalizedIntegerProjection {n : ℕ}
     (Fin n → ℚ) →ₗ[ℚ] (Fin n → ℚ) :=
   (D : ℚ)⁻¹ • (P.map (Int.castRingHom ℚ)).mulVecLin
 
-lemma normalizedIntegerProjection_apply {n : ℕ}
+private lemma normalizedIntegerProjection_apply {n : ℕ}
     (D : ℤ) (P : Matrix (Fin n) (Fin n) ℤ) (x : Fin n → ℚ) :
     normalizedIntegerProjection D P x = (D : ℚ)⁻¹ • ((P.map (Int.castRingHom ℚ)) *ᵥ x) := rfl
 

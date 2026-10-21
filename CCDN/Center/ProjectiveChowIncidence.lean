@@ -34,14 +34,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma chowIncidentCoefficients_relation {K : Type*} [Field K] {n r : ℕ}
+private lemma chowIncidentCoefficients_relation {K : Type*} [Field K] {n r : ℕ}
     (a : Fin n → K) (u : Fin r × Fin n → K) (i : Fin r) :
     ∑ j : Fin (n + 1), chowIncidentCoefficients a u (i,j) * (Fin.cons 1 a : Fin (n + 1) → K) j = 0 := by
   rw [Fin.sum_univ_succ]
   simp only [chowIncidentCoefficients, Fin.cases_zero, Fin.cases_succ,
     Fin.cons_zero, Fin.cons_succ, mul_one, neg_add_cancel]
 
-lemma chowIncidentCoefficients_reconstruct {K : Type*} [Field K] {n r : ℕ}
+private lemma chowIncidentCoefficients_reconstruct {K : Type*} [Field K] {n r : ℕ}
     (a : Fin n → K) (U : Fin r × Fin (n + 1) → K)
     (hU : ∀ i, ∑ j, U (i,j) * (Fin.cons 1 a : Fin (n + 1) → K) j = 0) :
     chowIncidentCoefficients a (fun q => U (q.1,q.2.succ)) = U := by
@@ -55,12 +55,12 @@ lemma chowIncidentCoefficients_reconstruct {K : Type*} [Field K] {n r : ℕ}
 
 /-- Hyperplane tuples whose intersection contains a point of the
 affine variety represented in the projective chart x₀=1. -/
-def chowIncidenceLocus {K : Type*} [Field K] {n : ℕ} (r : ℕ)
+private def chowIncidenceLocus {K : Type*} [Field K] {n : ℕ} (r : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) : Set (Fin r × Fin (n + 1) → K) :=
   {U | ∃ a : Fin n → K, a ∈ idealZeroLocus I ∧
     ∀ i, ∑ j, U (i,j) * (Fin.cons 1 a : Fin (n + 1) → K) j = 0}
 
-theorem chowIncidenceIdeal_eq_vanishingIdeal {K : Type*} [Field K] [IsAlgClosed K]
+private theorem chowIncidenceIdeal_eq_vanishingIdeal {K : Type*} [Field K] [IsAlgClosed K]
     {n : ℕ} (r : ℕ) (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
     chowIncidenceIdeal r I = vanishingIdeal K (chowIncidenceLocus r I) := by
   ext R
@@ -82,7 +82,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem mem_prime_ideal_of_vanishing_on_principal_open
+private theorem mem_prime_ideal_of_vanishing_on_principal_open
     {K σ : Type*} [Field K] [IsAlgClosed K] [Finite σ]
     (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
     (g f : MvPolynomial σ K) (hg : g ∉ I)
@@ -99,7 +99,7 @@ theorem mem_prime_ideal_of_vanishing_on_principal_open
 
 /-- The standard chart of the closure cone recovers the affine
 zero locus, before passing to projective equivalence classes. -/
-theorem projectiveClosure_cone_chart_zero
+private theorem projectiveClosure_cone_chart_zero
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (x : Fin (n + 1) → K)
     (hx : ∀ p ∈ projectiveClosureIdeal I, eval x p = 0) (hx0 : x 0 ≠ 0) :
@@ -149,7 +149,7 @@ structure IsProjectiveChowEquation {K : Type*} [Field K] {n r : ℕ}
   row_homogeneous : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)
   eval_eq_zero_iff : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus r J
 
-theorem chowIncidenceLocus_subset_projectiveClosureIncidence
+private theorem chowIncidenceLocus_subset_projectiveClosureIncidence
     {K : Type*} [Field K] {n r : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) :
     chowIncidenceLocus r I ⊆ projectiveChowIncidenceLocus r (projectiveClosureIdeal I) := by
   intro U hU
@@ -165,7 +165,7 @@ theorem chowIncidenceLocus_subset_projectiveClosureIncidence
     (affineCoordinateVector_ne_zero a) p.mk_rep).mpr hz
   rwa [heval] at hpz
 
-lemma eval_chowPivot_substitution {K : Type*} [Field K] {n r : ℕ}
+private lemma eval_chowPivot_substitution {K : Type*} [Field K] {n r : ℕ}
     (j : Fin (n + 1)) (v : Fin r × Fin (n + 1) → K)
     (R : MvPolynomial (Fin r × Fin (n + 1)) K) (x : Fin (n + 1) → K) :
     eval x (aeval (chowPivotPolynomials j v) R) =
@@ -179,7 +179,7 @@ lemma eval_chowPivot_substitution {K : Type*} [Field K] {n r : ℕ}
 
 /-- Clearing a pivot coordinate gives an equation in the closure
 ideal. Density is proved using its nonzero standard coordinate and primeness. -/
-theorem chowPivot_substitution_mem_projectiveClosure
+private theorem chowPivot_substitution_mem_projectiveClosure
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (R : MvPolynomial (Fin r × Fin (n + 1)) K) (hR : R ∈ chowIncidenceIdeal r I)

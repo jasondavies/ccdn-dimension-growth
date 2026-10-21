@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open Matrix
 
-theorem integer_tuple_height_le {ι : Type*} [Fintype ι]
+private theorem integer_tuple_height_le {ι : Type*} [Fintype ι]
     (z : ι → ℤ) (hz : z ≠ 0) {B : ℝ} (hB : InBox z B) :
     Height.mulHeight (fun i => (z i : ℚ)) ≤ B := by
   classical

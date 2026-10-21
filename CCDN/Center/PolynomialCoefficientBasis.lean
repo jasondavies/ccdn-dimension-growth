@@ -22,7 +22,7 @@ open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
 /-- Coefficientwise extension is linear over the full parameter ring. -/
-def coefficientPolynomialLinearMap {K A σ : Type*}
+private def coefficientPolynomialLinearMap {K A σ : Type*}
     [Field K] [CommRing A] [Algebra K A] (l : A →ₗ[K] K) :
     MvPolynomial σ A →ₗ[MvPolynomial σ K] MvPolynomial σ K where
   toFun := coefficientLinearMap l
@@ -31,13 +31,13 @@ def coefficientPolynomialLinearMap {K A σ : Type*}
     simpa only [Algebra.smul_def,MvPolynomial.algebraMap_def,
       Algebra.algebraMap_self,RingHom.id_apply] using coefficientLinearMap_map_mul l p q
 
-lemma coefficient_polynomial_mul_C {A σ : Type*} [CommRing A]
+private lemma coefficient_polynomial_mul_C {A σ : Type*} [CommRing A]
     (q : MvPolynomial σ A) (a : A) (d : σ →₀ ℕ) :
     (q * C a).coeff d = q.coeff d * a := by
   rw [mul_comm,coeff_C_mul,mul_comm]
 
 /-- The coefficient-coordinate isomorphism for a finite coefficient basis. -/
-def polynomialCoefficientEquiv {K A σ ι : Type*}
+private def polynomialCoefficientEquiv {K A σ ι : Type*}
     [Field K] [CommRing A] [Algebra K A] [Fintype ι]
     (b : Module.Basis ι K A) :
     MvPolynomial σ A ≃ₗ[MvPolynomial σ K] (ι → MvPolynomial σ K) where
@@ -64,13 +64,13 @@ def polynomialCoefficientEquiv {K A σ ι : Type*}
 
 /-- A finite basis of the coefficient algebra gives a basis over
 the polynomial parameter ring. -/
-def polynomialCoefficientBasis {K A σ ι : Type*}
+private def polynomialCoefficientBasis {K A σ ι : Type*}
     [Field K] [CommRing A] [Algebra K A] [Fintype ι]
     (b : Module.Basis ι K A) :
     Module.Basis ι (MvPolynomial σ K) (MvPolynomial σ A) :=
   Module.Basis.ofEquivFun (polynomialCoefficientEquiv b)
 
-lemma polynomial_coefficient_finrank {K A σ ι : Type*}
+private lemma polynomial_coefficient_finrank {K A σ ι : Type*}
     [Field K] [CommRing A] [Algebra K A] [Fintype ι]
     (b : Module.Basis ι K A) :
     Module.finrank (MvPolynomial σ K) (MvPolynomial σ A) = Fintype.card ι :=

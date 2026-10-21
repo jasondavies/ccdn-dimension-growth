@@ -44,7 +44,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem genericBlockLine_derivativeResultant_irreducible_iff
+private theorem genericBlockLine_derivativeResultant_irreducible_iff
     {K σ : Type*} [Field K] [CharZero K] [IsAlgClosed K] [Finite σ]
     (b : σ → Bool) (G R : MvPolynomial σ K) (hG : Irreducible G)
     (hzero : ∀ z : σ → K, eval z R = 0 ↔ eval z G = 0)
@@ -93,7 +93,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-theorem chowRowResultant_ne_zero_iff_irreducible
+private theorem chowRowResultant_ne_zero_iff_irreducible
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     (hJ : IsHomogeneousIdeal J)

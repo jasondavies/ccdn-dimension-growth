@@ -26,7 +26,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_monic_integral_projection_fiber_equation
+private theorem exists_monic_integral_projection_fiber_equation
     {K L σ τ : Type*} [Field K] [Field L] [Algebra K L]
     (I : Ideal (MvPolynomial σ K)) (a : τ → MvPolynomial σ K)
     (hint : (projectionCoordinateMap I a).IsIntegral)
@@ -64,7 +64,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma homogeneous_ideal_aeval_smul
+private lemma homogeneous_ideal_aeval_smul
     {K L σ : Type*} [Field K] [Field L] [Algebra K L]
     (I : Ideal (MvPolynomial σ K))
     (hI : IsHomogeneousIdeal I)

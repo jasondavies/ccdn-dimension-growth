@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem generic_linear_independence
+private theorem generic_linear_independence
     {K A : Type*} [Field K] [CommRing A] [IsDomain A] [Algebra K A]
     {m n : ℕ} (x : Fin n → A) (c : Fin m → Fin n)
     (hc : AlgebraicIndependent K (fun i => x (c i))) :

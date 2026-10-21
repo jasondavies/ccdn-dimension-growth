@@ -29,7 +29,7 @@ given good center. Every independent center at which it is nonzero is good. -/
 
 open MvPolynomial Matrix
 
-theorem exists_nonzero_center_detector
+private theorem exists_nonzero_center_detector
     {K : Type*} [Field K] [CharZero K] {n m r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
@@ -56,7 +56,7 @@ def centerMinorBound (r m d : ℕ) : ℕ := r.factorial * ((m + 1) ^ 2 * d ^ 2) 
 
 /-- A good center with zero columns `S` yields a good center with bounded
 nonnegative integer entries and the same zero columns. -/
-theorem exists_bounded_integer_center_of_witness
+private theorem exists_bounded_integer_center_of_witness
     {n m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
     [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]

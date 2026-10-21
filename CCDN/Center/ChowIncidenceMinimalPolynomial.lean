@@ -26,7 +26,7 @@ fraction field.
 namespace CCDN
 noncomputable section
 
-theorem irreducible_relation_minpoly_degree
+private theorem irreducible_relation_minpoly_degree
     {K R F σ : Type*} [Field K] [Field R] [Field F]
     [Algebra (MvPolynomial σ K) R] [IsFractionRing (MvPolynomial σ K) R]
     [Algebra R F] [Algebra (MvPolynomial σ K) F]

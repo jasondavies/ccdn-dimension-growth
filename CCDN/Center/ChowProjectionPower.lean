@@ -19,7 +19,7 @@ open MvPolynomial Matrix
 
 /-- A center point on the source lies on every pulled-back hyperplane, so the
 restricted Chow polynomial is identically zero. -/
-theorem chowLinearSubstitution_eq_zero_of_center_meets
+private theorem chowLinearSubstitution_eq_zero_of_center_meets
     {K : Type*} [Field K] [Infinite K] {n s r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)

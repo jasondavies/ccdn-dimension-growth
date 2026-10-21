@@ -35,7 +35,7 @@ in degree one and in affine dimension zero. -/
 
 open MvPolynomial
 
-theorem exists_independent_fixed_coordinate_closure_projection
+private theorem exists_independent_fixed_coordinate_closure_projection
     {K : Type*} [Field K] [CharZero K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hmn : m + 1 ≤ n) (d : ℕ)

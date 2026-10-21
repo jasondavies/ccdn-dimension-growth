@@ -50,7 +50,7 @@ theorem projectivePermutedIdeal_filteredHilbertPolynomial
   rw [heq]
   exact (filteredHilbertPolynomial_renameEquiv J e.symm).symm
 
-lemma coordinate_comp_equiv_ne_zero
+private lemma coordinate_comp_equiv_ne_zero
     {K σ : Type*} [Zero K] (e : Equiv.Perm σ) (x : σ → K) (hx : x ≠ 0) :
     x ∘ e ≠ 0 := by
   intro h

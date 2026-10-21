@@ -46,7 +46,7 @@ lemma coefficientLinearMap_map_mul {K A σ : Type*}
   simpa only [Algebra.smul_def, Algebra.algebraMap_self,RingHom.id_apply] using
     l.map_smul (p.coeff c.1) (q.coeff c.2)
 
-lemma coefficientLinearMap_eval {K A σ : Type*}
+private lemma coefficientLinearMap_eval {K A σ : Type*}
     [Field K] [CommRing A] [Algebra K A] (l : A →ₗ[K] K)
     (p : MvPolynomial σ A) (a : σ → K) :
     eval a (coefficientLinearMap l p) =

@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def genericBlockShearHom (R : Type*) [CommRing R] {σ : Type*}
+private def genericBlockShearHom (R : Type*) [CommRing R] {σ : Type*}
     (b : σ → Bool) (a : R) :
     MvPolynomial (Option (σ ⊕ σ)) R →ₐ[R] MvPolynomial (Option (σ ⊕ σ)) R :=
   aeval (fun q => match q with
@@ -28,7 +28,7 @@ def genericBlockShearHom (R : Type*) [CommRing R] {σ : Type*}
         if b i then C a * X (some (Sum.inr i)) * X none else 0
     | some (Sum.inr i) => X (some (Sum.inr i)))
 
-lemma genericBlockShearHom_comp {R σ : Type*} [CommRing R]
+private lemma genericBlockShearHom_comp {R σ : Type*} [CommRing R]
     (b : σ → Bool) (a c : R) :
     (genericBlockShearHom R b a).comp (genericBlockShearHom R b c) =
       genericBlockShearHom R b (a + c) := by
@@ -42,7 +42,7 @@ lemma genericBlockShearHom_comp {R σ : Type*} [CommRing R]
     · simp [genericBlockShearHom, hi]
   · simp [genericBlockShearHom]
 
-lemma genericBlockShearHom_zero (R : Type*) [CommRing R] {σ : Type*}
+private lemma genericBlockShearHom_zero (R : Type*) [CommRing R] {σ : Type*}
     (b : σ → Bool) : genericBlockShearHom R b 0 = AlgHom.id R _ := by
   apply MvPolynomial.algHom_ext
   intro q
@@ -51,14 +51,14 @@ lemma genericBlockShearHom_zero (R : Type*) [CommRing R] {σ : Type*}
   · simp [genericBlockShearHom]
   · simp [genericBlockShearHom]
 
-def genericBlockShear (R : Type*) [CommRing R] {σ : Type*}
+private def genericBlockShear (R : Type*) [CommRing R] {σ : Type*}
     (b : σ → Bool) :
     MvPolynomial (Option (σ ⊕ σ)) R ≃ₐ[R] MvPolynomial (Option (σ ⊕ σ)) R :=
   AlgEquiv.ofAlgHom (genericBlockShearHom R b 1) (genericBlockShearHom R b (-1))
     (by rw [genericBlockShearHom_comp, add_neg_cancel, genericBlockShearHom_zero])
     (by rw [genericBlockShearHom_comp, neg_add_cancel, genericBlockShearHom_zero])
 
-lemma genericBlockLine_eq_shear {R σ : Type*} [CommRing R]
+private lemma genericBlockLine_eq_shear {R σ : Type*} [CommRing R]
     (b : σ → Bool) (f : MvPolynomial σ R) :
     genericBlockLine b f = optionEquivLeft R (σ ⊕ σ)
       (genericBlockShear R b (rename (fun i => some (Sum.inl i)) f)) := by
@@ -73,7 +73,7 @@ lemma genericBlockLine_eq_shear {R σ : Type*} [CommRing R]
         simp [genericBlockLine, genericBlockShear, genericBlockShearHom, hi]
   exact RingHom.congr_fun he f
 
-theorem genericBlockLine_irreducible {K σ : Type*} [Field K]
+private theorem genericBlockLine_irreducible {K σ : Type*} [Field K]
     (b : σ → Bool) (f : MvPolynomial σ K) (hf : Irreducible f) :
     Irreducible (genericBlockLine b f) := by
   rw [genericBlockLine_eq_shear]
@@ -82,7 +82,7 @@ theorem genericBlockLine_irreducible {K σ : Type*} [Field K]
   exact irreducible_rename_of_injective (fun i => some (Sum.inl i))
     (Option.some_injective _ |>.comp Sum.inl_injective) f hf
 
-theorem genericBlockLine_fraction_irreducible
+private theorem genericBlockLine_fraction_irreducible
     {K F σ : Type*} [Field K] [Field F]
     [Algebra (MvPolynomial (σ ⊕ σ) K) F] [IsFractionRing (MvPolynomial (σ ⊕ σ) K) F]
     (b : σ → Bool) (f : MvPolynomial σ K) (hf : Irreducible f)

@@ -30,7 +30,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_multihomogeneous_chow_incidence_generator
+private theorem exists_multihomogeneous_chow_incidence_generator
     {K : Type*} [Field K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     (hm : (filteredHilbertPolynomial I).natDegree = m) :
@@ -71,7 +71,7 @@ theorem chow_incidence_generator_eval_eq_zero_iff
   rw [← chowIncidenceIdeal_zeroLocus_eq_projective_incidence, hgen, zeroLocus_span]
   simp only [Set.mem_ofPred_eq, Set.mem_singleton_iff, forall_eq, aeval_eq_eval]
 
-theorem chow_incidence_generator_eval_map_eq_zero_iff
+private theorem chow_incidence_generator_eval_map_eq_zero_iff
     {K L : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L] {n : ℕ}
     (r : ℕ) (I : Ideal (MvPolynomial (Fin n) K))
     [(I.map (map (algebraMap K L))).IsPrime]
@@ -89,7 +89,7 @@ theorem chow_incidence_generator_eval_map_eq_zero_iff
 
 /-- The Chow equation is constructed from the affine ideal; its zeros
 are exactly hyperplane tuples meeting the full projective compactification. -/
-theorem exists_projective_chow_incidence_equation
+private theorem exists_projective_chow_incidence_equation
     {K : Type*} [Field K] [IsAlgClosed K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     (hm : (filteredHilbertPolynomial I).natDegree = m) :

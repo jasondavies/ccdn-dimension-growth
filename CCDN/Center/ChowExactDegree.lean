@@ -30,7 +30,7 @@ closed extension. -/
 
 open MvPolynomial
 
-theorem chow_generator_last_coordinate_degree_of_geometric_prime
+private theorem chow_generator_last_coordinate_degree_of_geometric_prime
     {K L : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
     [(I.map (map (algebraMap K L))).IsPrime]
@@ -55,7 +55,7 @@ theorem chow_generator_last_coordinate_degree_of_geometric_prime
     (map (algebraMap K L) F) hgenJ d hdJ
   simpa only [degreeOf, degrees_map_of_injective F (algebraMap K L).injective] using hh
 
-theorem chow_generator_univariate_degree_of_geometric_prime
+private theorem chow_generator_univariate_degree_of_geometric_prime
     {K L : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
     [(I.map (map (algebraMap K L))).IsPrime]
@@ -82,7 +82,7 @@ local instance exactDegreeNestedRing {K σ τ υ : Type*} [Field K]
   let : CommRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) := inferInstance
   infer_instance
 
-theorem chow_univariate_degree_eq_multiplicity
+private theorem chow_univariate_degree_eq_multiplicity
     {K : Type*} [Field K] [CharZero K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]

@@ -118,7 +118,7 @@ theorem chow_projection_integral_of_center_disjoint
 
 /-- Every nonzero point of the image cone has a nonzero source
 point, and conversely. -/
-theorem chow_projection_cone_image_iff
+private theorem chow_projection_cone_image_iff
     {K : Type*} [Field K] [IsAlgClosed K] {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)

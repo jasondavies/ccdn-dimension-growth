@@ -15,7 +15,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-lemma matrix_span_rows_map_le
+private lemma matrix_span_rows_map_le
     {K L : Type*} [Field K] [Field L] {r s n : ℕ}
     (φ : K →+* L) (A : Matrix (Fin r) (Fin n) K) (B : Matrix (Fin s) (Fin n) K)
     (hspan : Submodule.span K (Set.range A.row) ≤ Submodule.span K (Set.range B.row)) :
@@ -36,7 +36,7 @@ lemma matrix_span_rows_map_le
   intro j _
   exact Submodule.smul_mem _ _ (Submodule.subset_span ⟨j,rfl⟩)
 
-lemma matrix_span_rows_map_eq
+private lemma matrix_span_rows_map_eq
     {K L : Type*} [Field K] [Field L] {r s n : ℕ}
     (φ : K →+* L) (A : Matrix (Fin r) (Fin n) K) (B : Matrix (Fin s) (Fin n) K)
     (hspan : Submodule.span K (Set.range A.row) = Submodule.span K (Set.range B.row)) :
@@ -45,7 +45,7 @@ lemma matrix_span_rows_map_eq
   le_antisymm (matrix_span_rows_map_le φ A B hspan.le)
     (matrix_span_rows_map_le φ B A hspan.ge)
 
-lemma isBirationalMatrixCenter_iff_span
+private lemma isBirationalMatrixCenter_iff_span
     {K : Type*} [Field K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
     (A B : Matrix (Fin r) (Fin (n + 1)) K)

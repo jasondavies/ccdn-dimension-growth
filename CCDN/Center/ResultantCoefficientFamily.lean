@@ -20,7 +20,7 @@ open MvPolynomial
 
 namespace CoefficientwiseHomogeneous
 
-theorem det_of_degree {R σ τ : Type*} [CommRing R] {r D : ℕ}
+private theorem det_of_degree {R σ τ : Type*} [CommRing R] {r D : ℕ}
     (M : Matrix (Fin r) (Fin r) (MvPolynomial σ (MvPolynomial τ R)))
     (hM : ∀ i j, CoefficientwiseHomogeneous (M i j) D) :
     CoefficientwiseHomogeneous M.det (D * r) := by
@@ -37,7 +37,7 @@ theorem det_of_degree {R σ τ : Type*} [CommRing R] {r D : ℕ}
         MvPolynomial σ (MvPolynomial τ R)) 0 := C_of_isHomogeneous (isHomogeneous_C τ _)
   simpa only [zero_add, map_intCast] using hc.mul hp'
 
-theorem natCast_mul {R σ τ : Type*} [CommRing R]
+private theorem natCast_mul {R σ τ : Type*} [CommRing R]
     {f : MvPolynomial σ (MvPolynomial τ R)} {D : ℕ}
     (hf : CoefficientwiseHomogeneous f D) (n : ℕ) :
     CoefficientwiseHomogeneous ((n : MvPolynomial σ (MvPolynomial τ R)) * f) D := by
@@ -48,7 +48,7 @@ theorem natCast_mul {R σ τ : Type*} [CommRing R]
 
 end CoefficientwiseHomogeneous
 
-theorem resultant_coefficientwise_homogeneous
+private theorem resultant_coefficientwise_homogeneous
     {R σ τ : Type*} [CommRing R]
     (f g : Polynomial (MvPolynomial σ (MvPolynomial τ R))) (m n D : ℕ)
     (hf : ∀ i, CoefficientwiseHomogeneous (f.coeff i) D)
@@ -68,7 +68,7 @@ theorem resultant_coefficientwise_homogeneous
 def derivativeResultant {R : Type*} [CommRing R] (f : Polynomial R) (d : ℕ) : R :=
   Polynomial.resultant f f.derivative d (d - 1)
 
-theorem derivativeResultant_coefficientwise_homogeneous
+private theorem derivativeResultant_coefficientwise_homogeneous
     {R σ τ : Type*} [CommRing R]
     (f : Polynomial (MvPolynomial σ (MvPolynomial τ R))) (d D : ℕ) (hd : 0 < d)
     (hf : ∀ i, CoefficientwiseHomogeneous (f.coeff i) D) :

@@ -38,7 +38,7 @@ variable {K F : Type*} [Field K] [Field F] [Algebra K F] {n m : ℕ}
   [IsScalarTower K (MvPolynomial (Fin n) K ⧸ I) F]
   [IsFractionRing (MvPolynomial (Fin n) K ⧸ I) F]
 
-theorem affine_normalization_parameters_finite
+private theorem affine_normalization_parameters_finite
     (a : Fin m → MvPolynomial (Fin n) K)
     (ha : ∀ i, (a i).IsHomogeneous 1)
     (hint : (projectionCoordinateMap I a).IsIntegral)
@@ -67,7 +67,7 @@ theorem affine_normalization_parameters_finite
     u hiu (fun _ => rfl)
   exact hfinite
 
-theorem closure_normalization_parameters_injective
+private theorem closure_normalization_parameters_injective
     (a : Fin m → MvPolynomial (Fin n) K)
     (hint : (projectionCoordinateMap (projectiveClosureIdeal I)
       (closureProjectionCoordinates a)).IsIntegral)

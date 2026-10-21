@@ -28,14 +28,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma chow_row_weight_eq_sum {r s : ℕ} (i : Fin r)
+private lemma chow_row_weight_eq_sum {r s : ℕ} (i : Fin r)
     (e : (Fin r × Fin s) →₀ ℕ) :
     Finsupp.weight (chowRowWeight i) e = ∑ j, e (i,j) := by
   classical
   rw [Finsupp.weight_eq_sum, Fintype.sum_prod_type]
   simp [chowRowWeight]
 
-theorem chow_row_degreeOf_le
+private theorem chow_row_degreeOf_le
     {K : Type*} [Field K] {r s : ℕ}
     (F : MvPolynomial (Fin r × Fin s) K) (i : Fin r) (j : Fin s) (d : ℕ)
     (hF : F.IsWeightedHomogeneous (chowRowWeight i) d) :
@@ -46,7 +46,7 @@ theorem chow_row_degreeOf_le
     (s := (i,j)) (by simp [chowRowWeight]) e
   exact hh.trans_eq (hF (mem_support_iff.mp he))
 
-theorem chow_row_degreeOf_eq_of_eval_ne_zero
+private theorem chow_row_degreeOf_eq_of_eval_ne_zero
     {K : Type*} [Field K] {r s : ℕ}
     (F : MvPolynomial (Fin r × Fin s) K) (i : Fin r) (j : Fin s) (d : ℕ)
     (hF : F.IsWeightedHomogeneous (chowRowWeight i) d)
@@ -80,7 +80,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_hyperplane_axis_outside_closure_incidence
+private theorem exists_hyperplane_axis_outside_closure_incidence
     {K : Type*} [Field K] [Infinite K] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hm : (filteredHilbertPolynomial I).natDegree = m) :

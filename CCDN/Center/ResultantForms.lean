@@ -69,7 +69,7 @@ family. Centers may have coordinates in the extension field. -/
 
 open MvPolynomial Matrix
 
-lemma universalCenterChowMap_specialize_extension
+private lemma universalCenterChowMap_specialize_extension
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n s q : ℕ}
     (A : Matrix (Fin r) (Fin (n + 1)) L)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))

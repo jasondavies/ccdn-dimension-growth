@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open Matrix
 
-lemma projectivization_normalizedIntegerProjection {n : ℕ}
+private lemma projectivization_normalizedIntegerProjection {n : ℕ}
     (D : ℤ) (hD : D ≠ 0) (P : Matrix (Fin (n + 1)) (Fin (n + 1)) ℤ)
     (x : Fin (n + 1) → ℚ) (hx : normalizedIntegerProjection D P x ≠ 0) :
     ∃ hxP : (P.map (Int.castRingHom ℚ)) *ᵥ x ≠ 0,

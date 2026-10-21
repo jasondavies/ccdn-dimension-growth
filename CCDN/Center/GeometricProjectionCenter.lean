@@ -21,12 +21,12 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-lemma integerLinearForm_aeval_extension {L : Type*} [Field L] [Algebra ℚ L]
+private lemma integerLinearForm_aeval_extension {L : Type*} [Field L] [Algebra ℚ L]
     {n : ℕ} (b : Fin n → ℤ) (x : Fin n → L) :
     aeval x (integerLinearForm b) = ∑ j, (b j : L) * x j := by
   simp [integerLinearForm]
 
-theorem homogeneous_integer_projection_center_disjoint
+private theorem homogeneous_integer_projection_center_disjoint
     {L : Type*} [Field L] [Algebra ℚ L] [Infinite L] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ))
     (hI : IsHomogeneousIdeal I)

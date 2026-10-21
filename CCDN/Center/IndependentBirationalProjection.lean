@@ -21,7 +21,7 @@ open MvPolynomial
 /-- Replacing the first row of an integer matrix by the `j`-th standard unit row gives
 linearly independent rows when the remaining rows are independent and the unit row lies
 outside their span. -/
-theorem unit_row_cons_linearIndependent {m n : ℕ} (b : Fin (m + 1) → Fin n → ℤ) (j : Fin n)
+private theorem unit_row_cons_linearIndependent {m n : ℕ} (b : Fin (m + 1) → Fin n → ℤ) (j : Fin n)
     (htail : LinearIndependent ℚ (fun i => fun k => (b i k : ℚ)))
     (hj : (fun k => if k = j then (1 : ℚ) else 0) ∉
       Submodule.span ℚ (Set.range (fun i => fun k => (b i k : ℚ)))) :
@@ -40,7 +40,7 @@ theorem unit_row_cons_linearIndependent {m n : ℕ} (b : Fin (m + 1) → Fin n �
 
 /-- Replacing the first row of an integer matrix by a standard unit row keeps every entry
 within any bound `H ≥ 1` satisfied by the remaining rows. -/
-theorem unit_row_cons_abs_le {m n : ℕ} {H : ℤ} (hH : 1 ≤ H) (b : Fin (m + 1) → Fin n → ℤ)
+private theorem unit_row_cons_abs_le {m n : ℕ} {H : ℤ} (hH : 1 ≤ H) (b : Fin (m + 1) → Fin n → ℤ)
     (hb : ∀ i k, |b i k| ≤ H) (j : Fin n) (i : Fin (m + 2)) (k : Fin n) :
     |(Fin.cases (fun k => if k = j then 1 else 0) b : Fin (m + 2) → Fin n → ℤ) i k| ≤ H := by
   refine Fin.cases ?_ (fun s => hb s k) i
@@ -52,7 +52,7 @@ theorem unit_row_cons_abs_le {m n : ℕ} {H : ℤ} (hH : 1 ≤ H) (b : Fin (m + 
 /-- If the first row of `b` lies in the span of the remaining rows, then any `c` with the same
 remaining rows generates the same function field: when the linear forms of `b` generate the
 function field of `I`, so do those of `c`. -/
-theorem adjoin_integerLinearForm_eq_top_of_first_mem_span {m n : ℕ}
+private theorem adjoin_integerLinearForm_eq_top_of_first_mem_span {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) ℚ)) [I.IsPrime] (b c : Fin (m + 2) → Fin n → ℤ)
     (hbc : ∀ i : Fin (m + 1), c i.succ = b i.succ)
     (hdep : (fun j => (b 0 j : ℚ)) ∈ Submodule.span ℚ

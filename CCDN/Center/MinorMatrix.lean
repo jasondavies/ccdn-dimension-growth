@@ -51,19 +51,19 @@ def centerMinorProjectionMatrix {K : Type*} [Field K] {r n s : ℕ}
     Matrix (Fin (s + 1)) (Fin n) K :=
   fun i j => eval (matrixPluckerCoordinates A) (centerPluckerCoefficient (e i) j)
 
-lemma centerMinorProjectionMatrix_form {K : Type*} [Field K] {r n s : ℕ}
+private lemma centerMinorProjectionMatrix_form {K : Type*} [Field K] {r n s : ℕ}
     (A : Matrix (Fin r) (Fin (n + 1)) K)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) (i : Fin (s + 1)) :
     chowProjectionForms (centerMinorProjectionMatrix A e) i = centerMinorProjectionForm A (e i) :=
   (centerMinorProjectionForm_eq_plucker_coefficients A (e i)).symm
 
-lemma chowProjectionForms_centerMinorProjectionMatrix {K : Type*} [Field K] {r n s : ℕ}
+private lemma chowProjectionForms_centerMinorProjectionMatrix {K : Type*} [Field K] {r n s : ℕ}
     (A : Matrix (Fin r) (Fin (n + 1)) K)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
     chowProjectionForms (centerMinorProjectionMatrix A e) = centerMinorProjectionForm A ∘ e :=
   funext (centerMinorProjectionMatrix_form A e)
 
-lemma centerMinorProjectionMatrix_mulVec {K : Type*} [Field K] {r n s : ℕ}
+private lemma centerMinorProjectionMatrix_mulVec {K : Type*} [Field K] {r n s : ℕ}
     (A : Matrix (Fin r) (Fin (n + 1)) K)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) (x : Fin (n + 1) → K) :
     centerMinorProjectionMatrix A e *ᵥ x = fun i => centerMinorProjection A x (e i) := by

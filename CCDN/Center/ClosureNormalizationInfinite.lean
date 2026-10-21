@@ -22,7 +22,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_closure_normalization_infinite
+private theorem exists_closure_normalization_infinite
     {K : Type*} [Field K] [Infinite K] (m k : ℕ)
     (I : Ideal (MvPolynomial (Fin (m + k)) K)) [I.IsPrime]
     (hdim : (filteredHilbertPolynomial I).natDegree = m) :

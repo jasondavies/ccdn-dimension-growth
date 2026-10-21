@@ -26,7 +26,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem multivariate_deformation_injective_at
+private theorem multivariate_deformation_injective_at
     {K R S σ : Type*} [CommRing K] [CommRing R] [CommRing S] [IsDomain S]
     [Algebra K R] [Algebra K S]
     (φ : R →ₐ[K] MvPolynomial σ S) (a : σ → K)

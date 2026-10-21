@@ -52,12 +52,12 @@ instance chowIncidenceIdeal_isPrime {K : Type*} [Field K] {n : ℕ} (r : ℕ)
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
     (chowIncidenceIdeal r I).IsPrime := RingHom.ker_isPrime _
 
-def chowPointEvaluation {K : Type*} [Field K] {n : ℕ}
+private def chowPointEvaluation {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (a : Fin n → K)
     (ha : ∀ f ∈ I, eval a f = 0) : (MvPolynomial (Fin n) K ⧸ I) →+* K :=
   Ideal.Quotient.lift I (eval a) ha
 
-lemma chowIncidenceMap_evaluate {K : Type*} [Field K] {n r : ℕ}
+private lemma chowIncidenceMap_evaluate {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (a : Fin n → K)
     (ha : ∀ f ∈ I, eval a f = 0) (u : Fin r × Fin n → K)
     (R : MvPolynomial (Fin r × Fin (n + 1)) K) :
@@ -126,7 +126,7 @@ open MvPolynomial
 def chowRowWeight {r s : ℕ} (i : Fin r) (q : Fin r × Fin s) : ℕ :=
   if q.1 = i then 1 else 0
 
-lemma chowIncidence_variable_weight {K : Type*} [Field K] {n r : ℕ}
+private lemma chowIncidence_variable_weight {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (i : Fin r)
     (q : Fin r × Fin (n + 1)) :
     (chowIncidenceMap r I (X q)).IsWeightedHomogeneous
@@ -144,7 +144,7 @@ lemma chowIncidence_variable_weight {K : Type*} [Field K] {n r : ℕ}
       (chowRowWeight i) (k,l)).C_mul (Ideal.Quotient.mk I (X l))
   · exact isWeightedHomogeneous_X (MvPolynomial (Fin n) K ⧸ I) (chowRowWeight i) (k,l)
 
-lemma chowIncidenceMap_weightedComponent {K : Type*} [Field K] {n r : ℕ}
+private lemma chowIncidenceMap_weightedComponent {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (i : Fin r)
     (R : MvPolynomial (Fin r × Fin (n + 1)) K) (M : ℕ) :
     chowIncidenceMap r I (weightedHomogeneousComponent (chowRowWeight i) M R) =

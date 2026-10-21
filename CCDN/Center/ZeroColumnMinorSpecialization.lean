@@ -31,7 +31,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-theorem homogeneous_minor_nonvanishing_implies_independent
+private theorem homogeneous_minor_nonvanishing_implies_independent
     {r n : ℕ} (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
     (hhom : F.IsHomogeneous F.totalDegree) (hdeg : 0 < F.totalDegree)
     (A : Matrix (Fin r) (Fin n) ℚ)
@@ -59,11 +59,11 @@ noncomputable section
 open MvPolynomial Matrix
 
 /-- Universal maximal minor on matrices with the specified columns zero. -/
-def zeroColumnUniversalMinor {r n : ℕ} (Z : Finset (Fin n))
+private def zeroColumnUniversalMinor {r n : ℕ} (Z : Finset (Fin n))
     (c : Fin r ↪ Fin n) : MvPolynomial (Fin r × Fin n) ℚ :=
   (Matrix.of fun i j : Fin r => if c j ∈ Z then 0 else X (i, c j)).det
 
-lemma zeroColumnUniversalMinor_eval {r n : ℕ} (Z : Finset (Fin n))
+private lemma zeroColumnUniversalMinor_eval {r n : ℕ} (Z : Finset (Fin n))
     (c : Fin r ↪ Fin n) (A : Matrix (Fin r) (Fin n) ℚ) :
     eval (fun p => A p.1 p.2) (zeroColumnUniversalMinor Z c) =
       ((Matrix.of fun i j => if j ∈ Z then 0 else A i j).submatrix id c).det := by
@@ -75,7 +75,7 @@ lemma zeroColumnUniversalMinor_eval {r n : ℕ} (Z : Finset (Fin n))
     if c j ∈ Z then 0 else A i (c j)
   by_cases hz : c j ∈ Z <;> simp [hz]
 
-lemma eval_zero_column_minor_substitution {r n : ℕ} (Z : Finset (Fin n))
+private lemma eval_zero_column_minor_substitution {r n : ℕ} (Z : Finset (Fin n))
     (F : MvPolynomial (Fin r ↪ Fin n) ℚ) (A : Matrix (Fin r) (Fin n) ℚ) :
     eval (fun p => A p.1 p.2) (aeval (zeroColumnUniversalMinor Z) F) =
       eval (fun c : Fin r ↪ Fin n =>
@@ -88,7 +88,7 @@ lemma eval_zero_column_minor_substitution {r n : ℕ} (Z : Finset (Fin n))
     exact zeroColumnUniversalMinor_eval Z c A
   exact congrArg (fun φ => φ F) hh
 
-lemma zeroColumnUniversalMinor_degreeOf {r n : ℕ} (Z : Finset (Fin n))
+private lemma zeroColumnUniversalMinor_degreeOf {r n : ℕ} (Z : Finset (Fin n))
     (c : Fin r ↪ Fin n) (p : Fin r × Fin n) :
     (zeroColumnUniversalMinor Z c).degreeOf p ≤ 1 := by
   classical
@@ -120,7 +120,7 @@ lemma zeroColumnUniversalMinor_degreeOf {r n : ℕ} (Z : Finset (Fin n))
           exact le_rfl
     _ = 1 := by simp only [← σ.eq_symm_apply]; simp
 
-lemma zero_column_minor_substitution_degreeOf_le {r n : ℕ} (Z : Finset (Fin n))
+private lemma zero_column_minor_substitution_degreeOf_le {r n : ℕ} (Z : Finset (Fin n))
     (F : MvPolynomial (Fin r ↪ Fin n) ℚ) (p : Fin r × Fin n) :
     (aeval (zeroColumnUniversalMinor Z) F).degreeOf p ≤ F.totalDegree := by
   simpa only [one_mul] using MvPolynomial.degreeOf_aeval_le (zeroColumnUniversalMinor Z) p 1
@@ -128,7 +128,7 @@ lemma zero_column_minor_substitution_degreeOf_le {r n : ℕ} (Z : Finset (Fin n)
 
 /-- Constant case of the zero-column specialization: a nonzero maximal minor of `A` avoids the
 zero columns, and the corresponding `0/1` selection matrix specializes it. -/
-theorem exists_integer_minor_specialization_zero_columns_of_totalDegree_eq_zero {r n : ℕ}
+private theorem exists_integer_minor_specialization_zero_columns_of_totalDegree_eq_zero {r n : ℕ}
     (Z : Finset (Fin n)) (F : MvPolynomial (Fin r ↪ Fin n) ℚ) (hdeg : F.totalDegree = 0)
     (A : Matrix (Fin r) (Fin n) ℚ) (hli : LinearIndependent ℚ A.row)
     (hzero : ∀ i j, j ∈ Z → A i j = 0)
@@ -172,7 +172,7 @@ theorem exists_integer_minor_specialization_zero_columns_of_totalDegree_eq_zero 
 /-- Positive-degree case of the zero-column specialization: the minor substitution of `F`,
 restricted to matrices with the prescribed zero columns, is nonzero, so it has a nonvanishing
 integer point of the degree grid. -/
-theorem exists_integer_minor_specialization_zero_columns_of_totalDegree_ne_zero {r n : ℕ}
+private theorem exists_integer_minor_specialization_zero_columns_of_totalDegree_ne_zero {r n : ℕ}
     (Z : Finset (Fin n)) (F : MvPolynomial (Fin r ↪ Fin n) ℚ)
     (hhom : F.IsHomogeneous F.totalDegree) (hdeg : F.totalDegree ≠ 0)
     (A : Matrix (Fin r) (Fin n) ℚ) (hzero : ∀ i j, j ∈ Z → A i j = 0)
@@ -226,7 +226,7 @@ theorem exists_integer_minor_specialization_zero_columns_of_totalDegree_ne_zero 
 
 /-- Leibniz determinant bound: the maximal minors of an integer matrix with entries in
 `[0, N]` are at most `r! N^r` in absolute value. -/
-theorem abs_det_submatrix_le_of_entry_bound {r n : ℕ} (M : Matrix (Fin r) (Fin n) ℤ) (N : ℕ)
+private theorem abs_det_submatrix_le_of_entry_bound {r n : ℕ} (M : Matrix (Fin r) (Fin n) ℤ) (N : ℕ)
     (hb : ∀ i j, 0 ≤ M i j ∧ M i j ≤ N) (c : Fin r ↪ Fin n) :
     |(M.submatrix id c).det| ≤ (r.factorial : ℤ) * (N : ℤ) ^ r := by
   have hh := Matrix.det_le (abv := AbsoluteValue.abs) (A := M.submatrix id c)

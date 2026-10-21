@@ -26,7 +26,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem projective_chow_row_degree_eq_multiplicity
+private theorem projective_chow_row_degree_eq_multiplicity
     {K : Type*} [Field K] [IsAlgClosed K] [CharZero K] {m n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     (hJ : IsHomogeneousIdeal J)

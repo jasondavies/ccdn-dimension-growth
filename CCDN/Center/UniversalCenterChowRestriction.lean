@@ -26,7 +26,7 @@ def universalCenterChowMap {K : Type*} [Field K] {r n s q : ℕ}
       MvPolynomial (Fin q × Fin (s + 1)) (MvPolynomial (Fin r ↪ Fin n) K) :=
   eval₂Hom (C.comp C) (fun p => ∑ i, C (centerPluckerCoefficient (e i) p.2) * X (p.1,i))
 
-lemma universalCenterChowMap_comm {K : Type*} [Field K] {r n s q : ℕ}
+private lemma universalCenterChowMap_comm {K : Type*} [Field K] {r n s q : ℕ}
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin n))
     (F : MvPolynomial (Fin q × Fin n) K) :
     commAlgEquiv K (Fin q × Fin (s + 1)) (Fin r ↪ Fin n) (universalCenterChowMap e F) =
@@ -43,7 +43,7 @@ lemma universalCenterChowMap_comm {K : Type*} [Field K] {r n s q : ℕ}
       simp [universalCenterChowMap]
   exact RingHom.congr_fun he F
 
-lemma universalCenterChowMap_comm_homogeneous
+private lemma universalCenterChowMap_comm_homogeneous
     {K : Type*} [Field K] {r n s q D : ℕ}
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin n))
     (F : MvPolynomial (Fin q × Fin n) K) (hF : F.IsHomogeneous D) :
@@ -61,7 +61,7 @@ lemma universalCenterChowMap_comm_homogeneous
   rw [coe_eval₂Hom]
   simpa only [one_mul] using hF.eval₂ (C.comp C) _ (fun a => isHomogeneous_C _ (C a)) hforms
 
-lemma coefficient_isHomogeneous_of_commAlgEquiv
+private lemma coefficient_isHomogeneous_of_commAlgEquiv
     {K σ τ : Type*} [CommRing K] {D : ℕ}
     (f : MvPolynomial σ (MvPolynomial τ K))
     (hf : (commAlgEquiv K σ τ f).IsHomogeneous D) (a : σ →₀ ℕ) :

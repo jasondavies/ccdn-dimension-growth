@@ -25,7 +25,7 @@ def projectiveClosurePolynomialMap {K : Type*} [Field K] {n : ℕ}
   ((uniqueAlgEquiv (MvPolynomial (Fin n) K ⧸ I) Unit).symm.restrictScalars K).toAlgHom.comp
     (projectiveClosureMap I)
 
-lemma projectiveClosureMap_homogeneous {K : Type*} [Field K] {n d : ℕ}
+private lemma projectiveClosureMap_homogeneous {K : Type*} [Field K] {n d : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (f : MvPolynomial (Fin (n + 1)) K)
     (hf : f.IsHomogeneous d) :
     projectiveClosureMap I f =
@@ -35,7 +35,7 @@ lemma projectiveClosureMap_homogeneous {K : Type*} [Field K] {n d : ℕ}
     Polynomial.coeff_C_mul, Polynomial.coeff_X_pow]
   split_ifs <;> simp_all
 
-lemma projectiveClosurePolynomialMap_homogeneous {K : Type*} [Field K] {n d : ℕ}
+private lemma projectiveClosurePolynomialMap_homogeneous {K : Type*} [Field K] {n d : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (f : MvPolynomial (Fin (n + 1)) K)
     (hf : f.IsHomogeneous d) :
     projectiveClosurePolynomialMap I f =

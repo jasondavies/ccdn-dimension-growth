@@ -27,7 +27,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem homogeneous_zero_dimension_projectionImageField_eq_top
+private theorem homogeneous_zero_dimension_projectionImageField_eq_top
     {K F : Type*} [Field K] [Field F] [Algebra K F] {n : ℕ} {σ : Type*}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     [Algebra (MvPolynomial (Fin n) K ⧸ I) F]

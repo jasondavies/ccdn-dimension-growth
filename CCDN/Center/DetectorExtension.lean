@@ -25,7 +25,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-lemma eval₂_center_minor_map_tower
+private lemma eval₂_center_minor_map_tower
     {K L E : Type*} [Field K] [Field L] [Field E]
     (φ : K →+* L) (ψ : L →+* E) {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) L) (g : MvPolynomial (Fin r ↪ Fin n) K) :
@@ -37,7 +37,7 @@ lemma eval₂_center_minor_map_tower
 
 /-- A family of minor conditions detects the same `L`-matrices before and after extending the
 coefficients along a field tower `K → L → E`. -/
-lemma exists_eval₂_center_minor_map_ne_zero_iff
+private lemma exists_eval₂_center_minor_map_ne_zero_iff
     {K L E : Type*} [Field K] [Field L] [Field E] [Algebra K L] [Algebra L E] [Algebra K E]
     [IsScalarTower K L E] {r n : ℕ} (Φ : Finset (MvPolynomial (Fin r ↪ Fin n) K))
     (A : Matrix (Fin r) (Fin n) L) :
@@ -50,7 +50,7 @@ lemma exists_eval₂_center_minor_map_ne_zero_iff
 
 /-- Over an algebraically closed field, the Chow restriction along the minor projection matrix
 of independent rows is nonzero exactly when the span of the rows misses the variety. -/
-lemma chowLinearSubstitution_centerMinor_ne_zero_iff
+private lemma chowLinearSubstitution_centerMinor_ne_zero_iff
     {E : Type*} [Field E] [IsAlgClosed E] {n m r s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) E)) [J.IsPrime] (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)

@@ -29,7 +29,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem weighted_homogeneous_aeval
+private theorem weighted_homogeneous_aeval
     {K σ τ : Type*} [Field K] (w : σ → ℕ) (v : τ → ℕ)
     (a : σ → MvPolynomial τ K)
     (ha : ∀ i, (a i).IsWeightedHomogeneous v (w i))
@@ -80,7 +80,7 @@ theorem chowLinearSubstitution_totalDegree_of_ne_zero
 
 /-- For a center disjoint from the projective variety of `J`, the image ideal of the
 projection has the same dimension, so it has a projective Chow equation without charts. -/
-theorem exists_chow_projection_image_equation
+private theorem exists_chow_projection_image_equation
     {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
     (hJ : IsHomogeneousIdeal J)

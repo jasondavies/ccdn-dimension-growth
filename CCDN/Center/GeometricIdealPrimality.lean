@@ -71,7 +71,7 @@ theorem prime_ideal_scalar_extension_of_isAlgClosed
     · rw [polynomialCoefficientLinear_eval ψ g x, Function.comp_def, hz, map_zero, mul_zero]
 
 /-- Primality descends along an injective coefficient-field extension. -/
-theorem prime_ideal_of_prime_scalar_extension
+private theorem prime_ideal_of_prime_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
     [(I.map (map (algebraMap K L))).IsPrime] : I.IsPrime := by

@@ -18,7 +18,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma homogeneous_finSucc_natDegree_of_unit_leadingCoeff
+private lemma homogeneous_finSucc_natDegree_of_unit_leadingCoeff
     {K : Type*} [Field K] {m d : ℕ}
     (f : MvPolynomial (Fin (m + 1)) K) (hf : f.IsHomogeneous d)
     (hu : IsUnit (finSuccEquiv K m f).leadingCoeff) :
@@ -32,7 +32,7 @@ lemma homogeneous_finSucc_natDegree_of_unit_leadingCoeff
   simpa only [Finsupp.weight_apply, Pi.one_apply, smul_eq_mul, mul_one, Finsupp.sum_cons,
     Finsupp.sum_zero_index, add_zero] using hh
 
-lemma projectionCoordinateMap_finSuccEquiv
+private lemma projectionCoordinateMap_finSuccEquiv
     {K σ : Type*} [Field K] {m : ℕ}
     (I : Ideal (MvPolynomial σ K)) (a : Fin m → MvPolynomial σ K)
     (z : MvPolynomial σ K) (f : MvPolynomial (Fin (m + 1)) K) :
@@ -71,7 +71,7 @@ lemma projection_relation_eval₂_eq_zero
 
 /-- The monic relation obtained from the integral parameter map
 forces every generator of the augmented kernel to have unit leading coefficient. -/
-theorem integral_projection_relation_unit_leadingCoeff
+private theorem integral_projection_relation_unit_leadingCoeff
     {K σ : Type*} [Field K] {m : ℕ}
     (I : Ideal (MvPolynomial σ K)) (a : Fin m → MvPolynomial σ K)
     (hint : (projectionCoordinateMap I a).IsIntegral)

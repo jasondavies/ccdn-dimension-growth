@@ -36,7 +36,7 @@ lemma closurePolynomialFieldMap_mk (f : MvPolynomial (Fin (n + 1)) K) :
 
 variable [I.IsPrime] [IsFractionRing (MvPolynomial Unit (MvPolynomial (Fin n) K ⧸ I)) F]
 
-theorem closure_polynomial_coordinates_generate :
+private theorem closure_polynomial_coordinates_generate :
     IntermediateField.adjoin K (Set.range (fun i : Fin (n + 1) =>
       closurePolynomialFieldMap (F := F) I
         (Ideal.Quotient.mk (projectiveClosureIdeal I) (X i)))) = ⊤ := by

@@ -33,7 +33,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma projectivePermutedIdeal_eq_projection_kernel
+private lemma projectivePermutedIdeal_eq_projection_kernel
     {K : Type*} [Field K] {n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (e : Equiv.Perm (Fin (n + 1))) :
@@ -43,7 +43,7 @@ lemma projectivePermutedIdeal_eq_projection_kernel
   rw [mem_projectivePermutedIdeal, mem_projectionCoordinateMap_ker, rename_eq_aeval]
   rfl
 
-theorem projectivePermutedIdeal_scalar_extension
+private theorem projectivePermutedIdeal_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (e : Equiv.Perm (Fin (n + 1))) :

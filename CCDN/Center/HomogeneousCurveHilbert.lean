@@ -20,7 +20,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma quadratic_polynomial_successive_difference
+private lemma quadratic_polynomial_successive_difference
     (P : Polynomial ℚ) (d : ℕ) (hd : P.natDegree = 2)
     (hlc : P.leadingCoeff = (d : ℚ) / 2) (x y : ℚ) :
     (P.eval (x + 1) - P.eval x) - (P.eval (y + 1) - P.eval y) =

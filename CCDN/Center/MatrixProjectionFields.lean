@@ -19,7 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-lemma matrix_row_combination_of_kernel_le
+private lemma matrix_row_combination_of_kernel_le
     {K α β γ : Type*} [Field K] [Fintype α] [Fintype β] [Fintype γ]
     (A : Matrix α γ K) (B : Matrix β γ K)
     (hker : B.mulVecLin.ker ≤ A.mulVecLin.ker) (i : α) :
@@ -42,7 +42,7 @@ lemma matrix_row_combination_of_kernel_le
     LinearMap.proj_apply,Matrix.mulVecLin_apply,Matrix.mulVec_single_one,
     Matrix.col_apply,smul_eq_mul,a,b] using hh
 
-lemma chowProjectionForms_combination_of_kernel_le
+private lemma chowProjectionForms_combination_of_kernel_le
     {K : Type*} [Field K] {n s t : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K)
     (B : Matrix (Fin (t + 1)) (Fin (n + 1)) K)
@@ -57,7 +57,7 @@ lemma chowProjectionForms_combination_of_kernel_le
   rw [Finset.sum_comm]
   simp_rw [← Finset.sum_mul,← map_sum,hc]
 
-theorem projectionImageField_le_of_matrix_kernel_le
+private theorem projectionImageField_le_of_matrix_kernel_le
     {K F : Type*} [Field K] [Field F] [Algebra K F] {n s t : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     [Algebra (MvPolynomial (Fin (n + 1)) K ⧸ I) F]

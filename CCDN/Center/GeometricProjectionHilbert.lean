@@ -21,14 +21,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-lemma chowProjectionForms_map
+private lemma chowProjectionForms_map
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {n s : ℕ}
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) :
     (fun i => map φ (chowProjectionForms A i)) = chowProjectionForms (A.map φ) := by
   funext i
   simp [linearForm]
 
-theorem chowProjectionImageIdeal_scalar_extension
+private theorem chowProjectionImageIdeal_scalar_extension
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n s : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) :

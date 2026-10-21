@@ -25,7 +25,7 @@ def genericBlockLine {R σ : Type*} [CommRing R] (b : σ → Bool) :
     Polynomial.C (X (Sum.inl i)) +
       if b i then Polynomial.C (X (Sum.inr i)) * Polynomial.X else 0)
 
-lemma polynomial_eval₂_natDegree_le_weight
+private lemma polynomial_eval₂_natDegree_le_weight
     {R S σ : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (v : σ → Polynomial S) (w : σ → ℕ)
     (hv : ∀ i, (v i).natDegree ≤ w i) (f : MvPolynomial σ R) :
@@ -47,7 +47,7 @@ lemma polynomial_eval₂_natDegree_le_weight
   intro e he
   exact (hm e _).trans (le_weightedTotalDegree w he)
 
-lemma genericBlockLine_natDegree_le {R σ : Type*} [CommRing R]
+private lemma genericBlockLine_natDegree_le {R σ : Type*} [CommRing R]
     (b : σ → Bool) (f : MvPolynomial σ R) :
     (genericBlockLine b f).natDegree ≤ f.weightedTotalDegree (genericBlockWeight b) := by
   apply polynomial_eval₂_natDegree_le_weight
@@ -57,11 +57,11 @@ lemma genericBlockLine_natDegree_le {R σ : Type*} [CommRing R]
     exact polynomial_affine_natDegree_le _ _
   · simp [hi, genericBlockWeight]
 
-def genericBlockLineOrigin {R σ : Type*} [CommRing R] (b : σ → Bool) :
+private def genericBlockLineOrigin {R σ : Type*} [CommRing R] (b : σ → Bool) :
     MvPolynomial (σ ⊕ σ) R →+* MvPolynomial σ R :=
   eval₂Hom C (Sum.elim (fun i => if b i then 0 else X i) X)
 
-lemma genericBlockLine_origin {R σ : Type*} [CommRing R]
+private lemma genericBlockLine_origin {R σ : Type*} [CommRing R]
     (b : σ → Bool) (f : MvPolynomial σ R) :
     (genericBlockLine b f).map (genericBlockLineOrigin b) =
       weightedDegreePolynomial (genericBlockWeight b) f := by

@@ -28,12 +28,12 @@ def quotientPolynomialSwap {K σ τ : Type*} [Field K]
     MvPolynomial σ (MvPolynomial τ K) →+* MvPolynomial τ (MvPolynomial σ K ⧸ I) :=
   (map (Ideal.Quotient.mk I)).comp (commAlgEquiv K σ τ).toRingHom
 
-lemma quotientPolynomialSwap_surjective {K σ τ : Type*} [Field K]
+private lemma quotientPolynomialSwap_surjective {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) :
     Function.Surjective (quotientPolynomialSwap (τ := τ) I) :=
   (map_surjective _ Ideal.Quotient.mk_surjective).comp (commAlgEquiv K σ τ).surjective
 
-lemma quotientPolynomialSwap_kernel {K σ τ : Type*} [Field K]
+private lemma quotientPolynomialSwap_kernel {K σ τ : Type*} [Field K]
     (I : Ideal (MvPolynomial σ K)) :
     RingHom.ker (quotientPolynomialSwap (τ := τ) I) = I.map (map C) := by
   rw [quotientPolynomialSwap, ← RingHom.comap_ker, MvPolynomial.ker_map, Ideal.mk_ker]
@@ -63,7 +63,7 @@ def scalarQuotientPolynomialMap {K L σ τ : Type*} [Field K] [Field L]
   eval₂Hom (scalarCoordinateQuotientMap I) (fun j =>
     Ideal.Quotient.mk _ (C (algebraMap (MvPolynomial τ K) L (X j))))
 
-lemma scalarQuotientPolynomialMap_comp {K L σ τ : Type*} [Field K] [Field L]
+private lemma scalarQuotientPolynomialMap_comp {K L σ τ : Type*} [Field K] [Field L]
     [Algebra K L] [Algebra (MvPolynomial τ K) L]
     [IsScalarTower K (MvPolynomial τ K) L]
     (I : Ideal (MvPolynomial σ K)) :

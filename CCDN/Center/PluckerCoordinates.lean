@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 open Matrix MvPolynomial
 
-theorem exists_row_matrix_of_span_le
+private theorem exists_row_matrix_of_span_le
     {K : Type*} [Field K] {r s n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (B : Matrix (Fin s) (Fin n) K)
     (hspan : Submodule.span K (Set.range A.row) ≤ Submodule.span K (Set.range B.row)) :
@@ -32,7 +32,7 @@ theorem exists_row_matrix_of_span_le
   simpa only [Finset.sum_apply, Pi.smul_apply, smul_eq_mul, Matrix.row_apply,
     ] using hh.symm
 
-theorem matrixPluckerCoordinates_mul
+private theorem matrixPluckerCoordinates_mul
     {K : Type*} [Field K] {r n : ℕ}
     (C : Matrix (Fin r) (Fin r) K) (A : Matrix (Fin r) (Fin n) K) :
     matrixPluckerCoordinates (C * A) = C.det • matrixPluckerCoordinates A := by
@@ -41,7 +41,7 @@ theorem matrixPluckerCoordinates_mul
   rw [Matrix.submatrix_mul C A id id c Function.bijective_id]
   simp only [Matrix.submatrix_id_id, Matrix.det_mul]
 
-theorem matrixPluckerCoordinates_smul_of_span_eq
+private theorem matrixPluckerCoordinates_smul_of_span_eq
     {K : Type*} [Field K] {r n : ℕ}
     (A B : Matrix (Fin r) (Fin n) K) (hA : LinearIndependent K A.row)
     (hspan : Submodule.span K (Set.range A.row) = Submodule.span K (Set.range B.row)) :
@@ -54,7 +54,7 @@ theorem matrixPluckerCoordinates_smul_of_span_eq
   apply matrixPluckerCoordinates_ne_zero A hA
   rw [he, hc, zero_smul]
 
-theorem centerMinorProjection_smul_of_plucker
+private theorem centerMinorProjection_smul_of_plucker
     {K : Type*} [Field K] {r n : ℕ}
     (A B : Matrix (Fin r) (Fin n) K) (c : K)
     (he : matrixPluckerCoordinates A = c • matrixPluckerCoordinates B)
@@ -71,7 +71,7 @@ theorem centerMinorProjection_smul_of_plucker
     homogeneous_eval_smul (centerPluckerCoefficient_homogeneous j _), pow_one,
     Finset.mul_sum, mul_assoc]
 
-theorem matrix_span_eq_of_plucker_smul
+private theorem matrix_span_eq_of_plucker_smul
     {K : Type*} [Field K] {r n : ℕ}
     (A B : Matrix (Fin r) (Fin n) K)
     (hA : LinearIndependent K A.row) (hB : LinearIndependent K B.row)
@@ -104,7 +104,7 @@ def centerSubspaceMatrix {K : Type*} [Field K] {r n : ℕ}
     (W : CenterSubspace K r n) : IndependentCenterMatrix K r n :=
   Classical.choose (centerMatrixSpan_surjective W)
 
-theorem centerSubspaceMatrix_span {K : Type*} [Field K] {r n : ℕ}
+private theorem centerSubspaceMatrix_span {K : Type*} [Field K] {r n : ℕ}
     (W : CenterSubspace K r n) : centerMatrixSpan (centerSubspaceMatrix W) = W :=
   Classical.choose_spec (centerMatrixSpan_surjective W)
 

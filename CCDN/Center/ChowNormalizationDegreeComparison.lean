@@ -34,7 +34,7 @@ local instance degreeComparisonNestedRing {K σ τ υ : Type*} [Field K]
 
 /-- The coefficient extension map sends each variable to its image under the ambient algebra
 map. -/
-lemma polynomialFractionCoefficientMap_X {A K F σ : Type*} [CommRing A] [Field K] [Field F]
+private lemma polynomialFractionCoefficientMap_X {A K F σ : Type*} [CommRing A] [Field K] [Field F]
     [Algebra A K] [Algebra A F] [Algebra K F] [Algebra (MvPolynomial σ A) F] (i : σ) :
     MvPolynomial.fractionRingCoeffMap (A := A) (K := K) (F := F) (σ := σ) (X i) =
       algebraMap (MvPolynomial σ A) F (X i) :=
@@ -42,7 +42,7 @@ lemma polynomialFractionCoefficientMap_X {A K F σ : Type*} [CommRing A] [Field 
 
 /-- The linear form in the negated coordinates of the first-row coordinate ring is sent
 by the coefficient extension map to the split last incidence form. -/
-theorem chow_polynomialFractionCoefficientMap_linearForm
+private theorem chow_polynomialFractionCoefficientMap_linearForm
     {K A F : Type*} [Field K] [Field A] [Field F] [Algebra A F] {m n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
     [Algebra (ChowFirstRowCoordinateRing m I) A] [Algebra (ChowFirstRowCoordinateRing m I) F]

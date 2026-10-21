@@ -24,12 +24,12 @@ namespace PolynomialCoefficientwiseHomogeneous
 
 variable {R σ τ : Type*} [CommRing R]
 
-theorem zero (D : ℕ) :
+private theorem zero (D : ℕ) :
     PolynomialCoefficientwiseHomogeneous (0 : Polynomial (MvPolynomial σ (MvPolynomial τ R))) D := by
   intro i
   simpa only [Polynomial.coeff_zero] using CoefficientwiseHomogeneous.zero (R := R) (σ := σ) (τ := τ) D
 
-theorem add {f g : Polynomial (MvPolynomial σ (MvPolynomial τ R))} {D : ℕ}
+private theorem add {f g : Polynomial (MvPolynomial σ (MvPolynomial τ R))} {D : ℕ}
     (hf : PolynomialCoefficientwiseHomogeneous f D)
     (hg : PolynomialCoefficientwiseHomogeneous g D) :
     PolynomialCoefficientwiseHomogeneous (f + g) D := by
@@ -37,7 +37,7 @@ theorem add {f g : Polynomial (MvPolynomial σ (MvPolynomial τ R))} {D : ℕ}
   rw [Polynomial.coeff_add]
   exact (hf i).add (hg i)
 
-theorem C_of_isHomogeneous {f : MvPolynomial σ (MvPolynomial τ R)} {D : ℕ}
+private theorem C_of_isHomogeneous {f : MvPolynomial σ (MvPolynomial τ R)} {D : ℕ}
     (hf : CoefficientwiseHomogeneous f D) :
     PolynomialCoefficientwiseHomogeneous (Polynomial.C f) D := by
   intro i
@@ -46,7 +46,7 @@ theorem C_of_isHomogeneous {f : MvPolynomial σ (MvPolynomial τ R)} {D : ℕ}
   · exact hf
   · exact CoefficientwiseHomogeneous.zero D
 
-theorem one :
+private theorem one :
     PolynomialCoefficientwiseHomogeneous (1 : Polynomial (MvPolynomial σ (MvPolynomial τ R))) 0 := by
   simpa only [map_one] using C_of_isHomogeneous (CoefficientwiseHomogeneous.one (R := R) (σ := σ) (τ := τ))
 
@@ -58,7 +58,7 @@ theorem X :
   · exact CoefficientwiseHomogeneous.one
   · exact CoefficientwiseHomogeneous.zero 0
 
-theorem sum {ι : Type*} (s : Finset ι)
+private theorem sum {ι : Type*} (s : Finset ι)
     (f : ι → Polynomial (MvPolynomial σ (MvPolynomial τ R))) (D : ℕ)
     (hf : ∀ i ∈ s, PolynomialCoefficientwiseHomogeneous (f i) D) :
     PolynomialCoefficientwiseHomogeneous (∑ i ∈ s, f i) D := by
@@ -66,7 +66,7 @@ theorem sum {ι : Type*} (s : Finset ι)
   rw [Polynomial.finsetSum_coeff]
   exact CoefficientwiseHomogeneous.sum _ _ _ (fun i hi => hf i hi j)
 
-theorem mul {f g : Polynomial (MvPolynomial σ (MvPolynomial τ R))} {D E : ℕ}
+private theorem mul {f g : Polynomial (MvPolynomial σ (MvPolynomial τ R))} {D E : ℕ}
     (hf : PolynomialCoefficientwiseHomogeneous f D)
     (hg : PolynomialCoefficientwiseHomogeneous g E) :
     PolynomialCoefficientwiseHomogeneous (f * g) (D + E) := by
@@ -74,7 +74,7 @@ theorem mul {f g : Polynomial (MvPolynomial σ (MvPolynomial τ R))} {D E : ℕ}
   rw [Polynomial.coeff_mul]
   exact CoefficientwiseHomogeneous.sum _ _ _ (fun ab _ => (hf ab.1).mul (hg ab.2))
 
-theorem prod {ι : Type*} (s : Finset ι)
+private theorem prod {ι : Type*} (s : Finset ι)
     (f : ι → Polynomial (MvPolynomial σ (MvPolynomial τ R)))
     (hf : ∀ i ∈ s, PolynomialCoefficientwiseHomogeneous (f i) 0) :
     PolynomialCoefficientwiseHomogeneous (∏ i ∈ s, f i) 0 := by
@@ -86,7 +86,7 @@ theorem prod {ι : Type*} (s : Finset ι)
     exact (hf i (Finset.mem_insert_self _ _)).mul
       (ih (fun j hj => hf j (Finset.mem_insert_of_mem hj)))
 
-theorem pow {f : Polynomial (MvPolynomial σ (MvPolynomial τ R))}
+private theorem pow {f : Polynomial (MvPolynomial σ (MvPolynomial τ R))}
     (hf : PolynomialCoefficientwiseHomogeneous f 0) (n : ℕ) :
     PolynomialCoefficientwiseHomogeneous (f ^ n) 0 := by
   induction n with
@@ -95,7 +95,7 @@ theorem pow {f : Polynomial (MvPolynomial σ (MvPolynomial τ R))}
 
 end PolynomialCoefficientwiseHomogeneous
 
-theorem genericBlockLine_coefficientwise_homogeneous
+private theorem genericBlockLine_coefficientwise_homogeneous
     {R σ τ : Type*} [CommRing R] (b : σ → Bool)
     (f : MvPolynomial σ (MvPolynomial τ R)) (D : ℕ)
     (hf : CoefficientwiseHomogeneous f D) :

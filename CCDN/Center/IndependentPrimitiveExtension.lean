@@ -23,7 +23,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma exists_variable_outside_independent_span
+private lemma exists_variable_outside_independent_span
     {K : Type*} [Field K] {m n : ℕ}
     (a : Fin m → MvPolynomial (Fin n) K) (ha : LinearIndependent K a)
     (hmn : m < n) :

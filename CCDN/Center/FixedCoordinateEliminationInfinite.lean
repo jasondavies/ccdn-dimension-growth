@@ -22,16 +22,16 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def affineDirectionElimination {K : Type*} [Field K] {n : ℕ}
+private def affineDirectionElimination {K : Type*} [Field K] {n : ℕ}
     (b : Fin (n + 1) → K) (i : Fin n) : MvPolynomial (Fin (n + 1)) K :=
   X i.succ - C (b i.succ / b 0) * X 0
 
-lemma affineDirectionElimination_homogeneous {K : Type*} [Field K] {n : ℕ}
+private lemma affineDirectionElimination_homogeneous {K : Type*} [Field K] {n : ℕ}
     (b : Fin (n + 1) → K) (i : Fin n) :
     (affineDirectionElimination b i).IsHomogeneous 1 :=
   (isHomogeneous_X K i.succ).sub (isHomogeneous_C_mul_X _ 0)
 
-theorem fixed_coordinate_elimination_integral
+private theorem fixed_coordinate_elimination_integral
     {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K))
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f ≠ 0) (hfi : f ∈ I)

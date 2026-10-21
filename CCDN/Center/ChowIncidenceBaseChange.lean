@@ -35,13 +35,13 @@ noncomputable section
 open MvPolynomial
 
 /-- The incidence substitution before quotienting by the source ideal. -/
-def chowIncidencePolynomialMap {K : Type*} [Field K] {n : ℕ} (r : ℕ) :
+private def chowIncidencePolynomialMap {K : Type*} [Field K] {n : ℕ} (r : ℕ) :
     MvPolynomial (Fin r × Fin (n + 1)) K →ₐ[K]
       MvPolynomial (Fin r × Fin n) (MvPolynomial (Fin n) K) :=
   aeval (fun q => Fin.cases
     (-(∑ j, X (q.1,j) * C (X j))) (fun j => X (q.1,j)) q.2)
 
-lemma chowIncidencePolynomialMap_quotient {K : Type*} [Field K] {n : ℕ}
+private lemma chowIncidencePolynomialMap_quotient {K : Type*} [Field K] {n : ℕ}
     (r : ℕ) (I : Ideal (MvPolynomial (Fin n) K))
     (f : MvPolynomial (Fin r × Fin (n + 1)) K) :
     map (Ideal.Quotient.mk I) (chowIncidencePolynomialMap r f) = chowIncidenceMap r I f := by
@@ -56,7 +56,7 @@ lemma chowIncidencePolynomialMap_quotient {K : Type*} [Field K] {n : ℕ}
         simp [chowIncidencePolynomialMap, chowIncidenceMap]
   exact RingHom.congr_fun he f
 
-lemma mem_chowIncidenceIdeal_iff_coeff {K : Type*} [Field K] {n r : ℕ}
+private lemma mem_chowIncidenceIdeal_iff_coeff {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K))
     (f : MvPolynomial (Fin r × Fin (n + 1)) K) :
     f ∈ chowIncidenceIdeal r I ↔
@@ -66,7 +66,7 @@ lemma mem_chowIncidenceIdeal_iff_coeff {K : Type*} [Field K] {n r : ℕ}
   simp only [coeff_map, AddMonoidAlgebra.coeff_zero, Finsupp.zero_apply,
     Ideal.Quotient.eq_zero_iff_mem]
 
-lemma chowIncidencePolynomialMap_map {K L : Type*}
+private lemma chowIncidencePolynomialMap_map {K L : Type*}
     [Field K] [Field L] [Algebra K L] {n : ℕ} (r : ℕ)
     (f : MvPolynomial (Fin r × Fin (n + 1)) K) :
     map (map (algebraMap K L)) (chowIncidencePolynomialMap r f) =
@@ -83,7 +83,7 @@ lemma chowIncidencePolynomialMap_map {K L : Type*}
   exact RingHom.congr_fun he f
 
 /-- Linear descent commutes with the nested incidence substitution. -/
-lemma chowIncidencePolynomialMap_coefficientLinear {K L : Type*}
+private lemma chowIncidencePolynomialMap_coefficientLinear {K L : Type*}
     [Field K] [Field L] [Algebra K L] {n : ℕ}
     (r : ℕ) (φ : L →ₗ[K] K)
     (f : MvPolynomial (Fin r × Fin (n + 1)) L) :
@@ -132,7 +132,7 @@ theorem chowIncidenceIdeal_scalar_extension {K L : Type*}
 /-- Geometric primeness of the source implies geometric primeness of its
 incidence ideal. The scalar extension is identified before using
 primality of the target polynomial ring. -/
-theorem chowIncidenceIdeal_geometrically_prime {K L : Type*}
+private theorem chowIncidenceIdeal_geometrically_prime {K L : Type*}
     [Field K] [Field L] [Algebra K L] {n : ℕ}
     (r : ℕ) (I : Ideal (MvPolynomial (Fin n) K))
     [(I.map (map (algebraMap K L))).IsPrime] :
@@ -162,7 +162,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem exists_irreducible_kernel_equation_of_independent_coordinates
+private theorem exists_irreducible_kernel_equation_of_independent_coordinates
     {K A σ τ : Type*} [Field K] [CommRing A] [IsDomain A] [Algebra K A]
     [Fintype σ] [Fintype τ]
     (ψ : MvPolynomial σ K →ₐ[K] A)
@@ -207,7 +207,7 @@ open MvPolynomial
 
 /-- The incidence elimination ideal is nonzero as soon as the number of
 hyperplanes exceeds the dimension of the affine coordinate domain. -/
-theorem chowIncidenceIdeal_ne_bot {K : Type*} [Field K] {n r : ℕ}
+private theorem chowIncidenceIdeal_ne_bot {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (hr : (filteredHilbertPolynomial I).natDegree < r) :
     chowIncidenceIdeal r I ≠ ⊥ := by

@@ -44,7 +44,7 @@ lemma incidenceLinearForm_eval {K : Type*} [CommSemiring K] {n r : ℕ}
 
 /-- A homogeneous member of a homogeneous ideal plus linear equations admits
 an expression whose multipliers have exactly the preceding degree. -/
-theorem homogeneous_incidence_relation {K : Type*} [Field K] {n r t : ℕ}
+private theorem homogeneous_incidence_relation {K : Type*} [Field K] {n r t : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
     (hJ : IsHomogeneousIdeal J)
     (U : Fin r × Fin (n + 1) → K)
@@ -77,13 +77,13 @@ noncomputable section
 open MvPolynomial
 
 /-- The coefficient of one fixed monomial in a universal linear combination. -/
-def incidenceCoefficientPolynomial {K : Type*} [Field K] {n r : ℕ}
+private def incidenceCoefficientPolynomial {K : Type*} [Field K] {n r : ℕ}
     (q : MvPolynomial (Fin (n + 1)) K)
     (p : Fin r → MvPolynomial (Fin (n + 1)) K) (e : Fin (n + 1) →₀ ℕ) :
     MvPolynomial (Fin r × Fin (n + 1)) K :=
   C (q.coeff e) + ∑ i, ∑ j, X (i,j) * C ((X j * p i).coeff e)
 
-lemma incidenceCoefficientPolynomial_eval {K : Type*} [Field K] {n r : ℕ}
+private lemma incidenceCoefficientPolynomial_eval {K : Type*} [Field K] {n r : ℕ}
     (q : MvPolynomial (Fin (n + 1)) K)
     (p : Fin r → MvPolynomial (Fin (n + 1)) K) (e : Fin (n + 1) →₀ ℕ)
     (U : Fin r × Fin (n + 1) → K) :
@@ -91,7 +91,7 @@ lemma incidenceCoefficientPolynomial_eval {K : Type*} [Field K] {n r : ℕ}
       (q + ∑ i, incidenceLinearForm U i * p i).coeff e := by
   simp [incidenceCoefficientPolynomial, linearForm, Finset.sum_mul, mul_assoc]
 
-lemma homogeneous_coefficient_evaluation {K : Type*} [Field K] {n M : ℕ}
+private lemma homogeneous_coefficient_evaluation {K : Type*} [Field K] {n M : ℕ}
     (f : MvPolynomial (Fin (n + 1)) K) (hf : f.IsHomogeneous M)
     (x : Fin (n + 1) → K) :
     ∑ j, f.coeff (homogeneousMonomials n M j) *
@@ -101,7 +101,7 @@ lemma homogeneous_coefficient_evaluation {K : Type*} [Field K] {n M : ℕ}
 
 /-- Homogeneous monomials of any fixed degree do not vanish simultaneously at
 a nonzero vector. -/
-lemma homogeneous_monomial_values_ne_zero {K : Type*} [Field K] {n M : ℕ}
+private lemma homogeneous_monomial_values_ne_zero {K : Type*} [Field K] {n M : ℕ}
     (x : Fin (n + 1) → K) (hx : x ≠ 0) :
     (fun j => eval x (monomial (homogeneousMonomials n M j) (1 : K))) ≠ 0 := by
   classical

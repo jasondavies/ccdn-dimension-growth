@@ -45,7 +45,7 @@ theorem affine_point_mem_closure_iff
   change (∀ p ∈ PrimeSpectrum.vanishingIdeal (affineEvaluationPrime '' S), eval x p = 0) ↔ _
   simp only [hmem]
 
-theorem affine_point_dense_of_vanishing
+private theorem affine_point_dense_of_vanishing
     {K σ : Type*} [Field K] (S : Set (σ → K))
     (hS : ∀ p : MvPolynomial σ K, (∀ y ∈ S, eval y p = 0) → p = 0) :
     Dense S := by
@@ -68,7 +68,7 @@ theorem affine_principal_open_dense
     · rw [hq x hx,mul_zero]
   exact (mul_eq_zero.mp hpq).resolve_left hp
 
-theorem affine_polynomial_zero_set_closed
+private theorem affine_polynomial_zero_set_closed
     {K σ : Type*} [Field K] (p : MvPolynomial σ K) :
     IsClosed {x : σ → K | eval x p = 0} := by
   rw [← closure_subset_iff_isClosed]

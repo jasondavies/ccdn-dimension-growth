@@ -16,7 +16,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem principal_weighted_homogeneous_of_components
+private theorem principal_weighted_homogeneous_of_components
     {K σ : Type*} [Field K] (w : σ → ℕ) (f : MvPolynomial σ K) (hf : f ≠ 0)
     (hc : ∀ M, f ∣ weightedHomogeneousComponent w M f) :
     ∃ M, f.IsWeightedHomogeneous w M := by

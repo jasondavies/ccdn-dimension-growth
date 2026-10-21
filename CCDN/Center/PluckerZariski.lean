@@ -29,13 +29,13 @@ def projectivePointZariskiTopology (K σ : Type*) [Field K] :
 
 attribute [local instance] projectivePointZariskiTopology
 
-theorem projectiveHomogeneousPrincipalOpen_isOpen
+private theorem projectiveHomogeneousPrincipalOpen_isOpen
     {K σ : Type*} [Field K] {d : ℕ}
     (f : MvPolynomial σ K) (hf : f.IsHomogeneous d) :
     IsOpen (projectiveHomogeneousPrincipalOpen f) :=
   TopologicalSpace.isOpen_generateFrom_of_mem ⟨d, f, hf, rfl⟩
 
-theorem independentCenterPlucker_preimage_principalOpen
+private theorem independentCenterPlucker_preimage_principalOpen
     {K : Type*} [Field K] {r n d : ℕ}
     (f : MvPolynomial (Fin r ↪ Fin n) K) (hf : f.IsHomogeneous d) :
     independentCenterPlucker ⁻¹' projectiveHomogeneousPrincipalOpen f =
@@ -46,7 +46,7 @@ theorem independentCenterPlucker_preimage_principalOpen
   rw [eval_centerMinorPolynomial]
   exact not_congr (homogeneous_eval_independentCenterPlucker f hf x)
 
-theorem independentCenterPlucker_continuous
+private theorem independentCenterPlucker_continuous
     {K : Type*} [Field K] {r n : ℕ} :
     Continuous (independentCenterPlucker (K := K) (r := r) (n := n)) := by
   apply continuous_generateFrom_iff.mpr

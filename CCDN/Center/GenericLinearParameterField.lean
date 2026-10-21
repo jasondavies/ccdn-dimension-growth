@@ -26,7 +26,7 @@ noncomputable section
 open MvPolynomial
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
-theorem generic_linear_primitive
+private theorem generic_linear_primitive
     {K A R F : Type*} [Field K] [CharZero K] [Field A] [Algebra K A]
     [Module.Finite K A] [Field R] [Field F] {n : ℕ}
     [Algebra (MvPolynomial (Fin n) K) R]

@@ -33,7 +33,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-theorem generic_affine_normalization_functionField_finrank
+private theorem generic_affine_normalization_functionField_finrank
     {K L F : Type*} [Field K] [CharZero K] [Field L] [Algebra K L]
     [Field F] [Algebra L F] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
@@ -64,13 +64,13 @@ noncomputable section
 open MvPolynomial
 
 /-- The rational function field in the variables `σ`. -/
-abbrev universalCoefficientField (K σ : Type*) [Field K] := FractionRing (MvPolynomial σ K)
+private abbrev universalCoefficientField (K σ : Type*) [Field K] := FractionRing (MvPolynomial σ K)
 
 /-- The variables, as an algebraically independent tuple in their rational function field. -/
-def universalCoefficient (K σ : Type*) [Field K] (i : σ) : universalCoefficientField K σ :=
+private def universalCoefficient (K σ : Type*) [Field K] (i : σ) : universalCoefficientField K σ :=
   algebraMap (MvPolynomial σ K) (universalCoefficientField K σ) (X i)
 
-theorem universalCoefficient_algebraicIndependent (K σ : Type*) [Field K] :
+private theorem universalCoefficient_algebraicIndependent (K σ : Type*) [Field K] :
     AlgebraicIndependent K (universalCoefficient K σ) :=
   (algebraicIndependent_X σ K).map'
     (f := IsScalarTower.toAlgHom K (MvPolynomial σ K) (universalCoefficientField K σ))
@@ -78,7 +78,7 @@ theorem universalCoefficient_algebraicIndependent (K σ : Type*) [Field K] :
 
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
-theorem polynomial_fraction_variables_generate
+private theorem polynomial_fraction_variables_generate
     {K L σ : Type*} [Field K] [Field L] [Algebra K L]
     [Algebra (MvPolynomial σ K) L] [IsScalarTower K (MvPolynomial σ K) L]
     [IsFractionRing (MvPolynomial σ K) L] :
@@ -101,7 +101,7 @@ theorem polynomial_fraction_variables_generate
   obtain ⟨p,q,_,rfl⟩ := IsFractionRing.div_surjective (MvPolynomial σ K) x
   exact S.div_mem (hpoly p) (hpoly q)
 
-lemma adjoin_union_range_neg
+private lemma adjoin_union_range_neg
     {K F ι : Type*} [Field K] [Field F] [Algebra K F]
     (S : Set F) (v : ι → F) :
     IntermediateField.adjoin K (S ∪ Set.range (fun i => -v i)) =
@@ -130,7 +130,7 @@ variable {K L F σ τ : Type*} [Field K] [Field L] [Field F]
   [IsScalarTower K (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
   [IsFractionRing (MvPolynomial τ (MvPolynomial σ K ⧸ I)) F]
 
-lemma scalarQuotientFractionMap_ground_field (c : K) :
+private lemma scalarQuotientFractionMap_ground_field (c : K) :
     scalarQuotientFractionMap (F := F) (τ := τ) (L := L) I
       (Ideal.Quotient.mk _ (C (algebraMap K L c))) = algebraMap K F c := by
   let T := MvPolynomial τ (MvPolynomial σ K ⧸ I)
@@ -144,7 +144,7 @@ lemma scalarQuotientFractionMap_ground_field (c : K) :
   rw [RingHom.comp_apply,he,← IsScalarTower.algebraMap_apply K T F] at h
   exact h
 
-def scalarQuotientFractionCoefficientMap : L →ₐ[K] F where
+private def scalarQuotientFractionCoefficientMap : L →ₐ[K] F where
   toRingHom := (scalarQuotientFractionMap (F := F) (τ := τ) (L := L) I).comp
     (algebraMap L (MvPolynomial σ L ⧸ I.map (map (algebraMap K L))))
   commutes' c := scalarQuotientFractionMap_ground_field I c

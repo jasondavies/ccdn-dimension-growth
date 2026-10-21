@@ -30,7 +30,7 @@ computations apply to any constructed projective Chow equation. -/
 
 open MvPolynomial
 
-theorem chowIncidenceIdeal_eq_span_of_projective_equation
+private theorem chowIncidenceIdeal_eq_span_of_projective_equation
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
     (F : MvPolynomial (Fin r × Fin (n + 1)) K) (hF : Irreducible F)
@@ -46,7 +46,7 @@ theorem chowIncidenceIdeal_eq_span_of_projective_equation
     vanishingIdeal_zeroLocus_eq_radical]
   exact ((Ideal.span_singleton_prime hF.ne_zero).mpr hF.prime).radical
 
-theorem chowIncidenceIdeal_chart_eq_span_of_projective_equation
+private theorem chowIncidenceIdeal_chart_eq_span_of_projective_equation
     {K : Type*} [Field K] [IsAlgClosed K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
     (hJ : IsHomogeneousIdeal J)

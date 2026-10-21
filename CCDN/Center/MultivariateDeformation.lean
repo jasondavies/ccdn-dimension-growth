@@ -25,7 +25,7 @@ The proof uses the first nonzero coefficient.
 namespace CCDN
 noncomputable section
 
-theorem polynomial_deformation_injective
+private theorem polynomial_deformation_injective
     {R S : Type*} [CommRing R] [CommRing S] [IsDomain S]
     (φ : R →+* Polynomial S)
     (hφ : Function.Injective (Polynomial.constantCoeff.comp φ)) :

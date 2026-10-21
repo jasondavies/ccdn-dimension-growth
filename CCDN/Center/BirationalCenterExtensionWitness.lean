@@ -23,7 +23,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
-lemma homogeneous_matrix_projection_birational_scalar_extension
+private lemma homogeneous_matrix_projection_birational_scalar_extension
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]
@@ -50,7 +50,7 @@ lemma homogeneous_matrix_projection_birational_scalar_extension
     filteredHilbertPolynomial_scalar_extension]
   exact he
 
-lemma matrix_map_algebraMap_tower
+private lemma matrix_map_algebraMap_tower
     {K L E : Type*} [CommSemiring K] [CommSemiring L] [CommSemiring E]
     [Algebra K L] [Algebra L E] [Algebra K E] [IsScalarTower K L E]
     {α β : Type*} (A : Matrix α β K) :
@@ -60,7 +60,7 @@ lemma matrix_map_algebraMap_tower
 
 /-- A finite birational center over K remains a geometrically disjoint
 birational center after extending the coefficients to any field L. -/
-theorem isBirationalMatrixCenter_map_of_finite_birational
+private theorem isBirationalMatrixCenter_map_of_finite_birational
     {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
     [(J.map (map (algebraMap K L))).IsPrime]

@@ -17,10 +17,10 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def chowRowPermutation {r s : ℕ} (e : Equiv.Perm (Fin r)) :
+private def chowRowPermutation {r s : ℕ} (e : Equiv.Perm (Fin r)) :
     Fin r × Fin s ≃ Fin r × Fin s := Equiv.prodCongr e (Equiv.refl _)
 
-lemma chowIncidenceMap_rename_rows
+private lemma chowIncidenceMap_rename_rows
     {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (e : Equiv.Perm (Fin r))
     (f : MvPolynomial (Fin r × Fin (n + 1)) K) :
@@ -38,7 +38,7 @@ lemma chowIncidenceMap_rename_rows
         simp [chowIncidenceMap, chowRowPermutation]
   exact RingHom.congr_fun hh f
 
-theorem chowIncidenceIdeal_rename_rows_iff
+private theorem chowIncidenceIdeal_rename_rows_iff
     {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (e : Equiv.Perm (Fin r))
     (f : MvPolynomial (Fin r × Fin (n + 1)) K) :
@@ -49,7 +49,7 @@ theorem chowIncidenceIdeal_rename_rows_iff
   rw [chowIncidenceMap_rename_rows,
     rename_eq_zero_iff_of_injective (chowIncidenceMap r I f) (chowRowPermutation e).injective]
 
-theorem chow_generator_rename_rows_scalar
+private theorem chow_generator_rename_rows_scalar
     {K : Type*} [Field K] {n r : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) (e : Equiv.Perm (Fin r))
     (F : MvPolynomial (Fin r × Fin (n + 1)) K) (hF : F ≠ 0)
@@ -79,7 +79,7 @@ theorem chow_generator_rename_rows_scalar
       _ = F * C (g.coeff 0) := congrArg (fun q => F * q) hgC
       _ = C (g.coeff 0) * F := mul_comm _ _
 
-lemma chow_row_homogeneous_rename
+private lemma chow_row_homogeneous_rename
     {K : Type*} [Field K] {r s : ℕ}
     (e : Equiv.Perm (Fin r)) (i : Fin r)
     (F : MvPolynomial (Fin r × Fin s) K) (d : ℕ)
@@ -115,7 +115,7 @@ section
 
 open MvPolynomial
 
-lemma sum_chow_row_weight {r s : ℕ} (e : (Fin r × Fin s) →₀ ℕ) :
+private lemma sum_chow_row_weight {r s : ℕ} (e : (Fin r × Fin s) →₀ ℕ) :
     ∑ i, Finsupp.weight (chowRowWeight i) e = e.degree := by
   classical
   simp only [Finsupp.weight_apply, Finsupp.sum, Finsupp.degree_apply, smul_eq_mul]

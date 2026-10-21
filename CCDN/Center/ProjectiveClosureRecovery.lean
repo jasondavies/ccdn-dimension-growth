@@ -21,7 +21,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma homogeneous_mem_projectiveChartIdeal_iff
+private lemma homogeneous_mem_projectiveChartIdeal_iff
     {K : Type*} [Field K] {n M : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     (hX : X 0 ∉ I) (f : MvPolynomial (Fin (n + 1)) K)

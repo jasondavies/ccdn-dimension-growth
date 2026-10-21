@@ -31,7 +31,7 @@ open MvPolynomial Module
 
 /-- Every polynomial over the extension is a finite sum of base-field
 polynomials obtained by its basis-coordinate functionals. -/
-theorem polynomial_coefficient_basis_expansion {K L σ ι : Type*}
+private theorem polynomial_coefficient_basis_expansion {K L σ ι : Type*}
     [Field K] [Field L] [Algebra K L]
     (b : Basis ι K L) (g : MvPolynomial σ L) :
     ∃ s : Finset ι,
