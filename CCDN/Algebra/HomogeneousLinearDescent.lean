@@ -6,8 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialLinearDescent
-public import CCDN.Hilbert.HomogeneousHilbert
-public import CCDN.Auxiliary.HypersurfaceGoodDirection
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.ForMathlib.MvPolynomial
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.LinearAlgebra.Dual.Lemmas
 /-! Homogeneous coefficient descent and homogeneous top factors. -/
 
 @[expose] public section

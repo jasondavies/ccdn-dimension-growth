@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.IntegerPlaneWitnessHeight
+public import CCDN.Plane.IntegerPlaneHeight
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 /-! The bounded-parameter section loses only O_m(d²) in logarithmic height.
 The resulting nonzero integer witness fits the fourth-power prime cutoff. -/
 

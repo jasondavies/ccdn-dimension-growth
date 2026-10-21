@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.GeneralBadReduction
-public import Mathlib.Algebra.MvPolynomial.Nilpotent
-public import Mathlib.Data.Nat.PrimeFin
+public import CCDN.Analysis.PrimeSums
+public import CCDN.Auxiliary.ConstantLeadingBadReduction
+import CCDN.Auxiliary.GeneralBadReduction
+import CCDN.Projection.ShearNormalization
+import Mathlib.Algebra.MvPolynomial.Nilpotent
 
 /-! Finite bad-prime sets for plane equations, with coefficient-height
 charge bounds and irreducible good reductions. -/

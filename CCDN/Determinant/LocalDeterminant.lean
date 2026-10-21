@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.Determinant
-public import ArithmeticHeights.BombieriVaaler
 import all ArithmeticHeights.BombieriVaaler
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import CCDN.Determinant.Determinant
 
 /-!
 # Determinant divisibility from filtered factorizations

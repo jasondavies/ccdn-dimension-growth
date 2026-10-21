@@ -5,7 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.LowerBound.GridHypersurfaceLowerBound
+public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Height.ProjectiveZeroLocus
+public import CCDN.Plane.Plane
+import CCDN.LowerBound.GridAffineLowerBound
+import CCDN.LowerBound.GridProjectiveLowerBound
+import CCDN.LowerBound.IntegerGridLowerBound
 /-! The final existence statement of CCDN Section 6, including every positive
  degree and every affine ambient dimension at least two. The same equation
  and integer radius give both affine and projective lower bounds. -/

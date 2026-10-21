@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.Curve
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # Filtered multiples in a two-equation ideal

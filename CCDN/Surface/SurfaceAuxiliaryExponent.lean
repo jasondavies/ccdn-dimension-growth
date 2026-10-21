@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Analysis.Analytic
-public import Mathlib.Analysis.Complex.Exponential
+public import CCDN.Plane.Plane
+import CCDN.Analysis.Analytic
 
 /-! The numerical component of the corrected surface estimate. The auxiliary
  degree contributes a further factor d to the intersection degree, giving d^18

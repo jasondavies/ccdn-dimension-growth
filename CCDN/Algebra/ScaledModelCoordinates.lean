@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ScaledAuxiliaryCount
 public import CCDN.Algebra.HomogeneousTranslation
+public import CCDN.Auxiliary.ScaledHomogenization
+import CCDN.Auxiliary.ScaledAuxiliaryCount
 /-! Polynomial coordinates for a translated scaled model, with exact point
 transport and transport of an auxiliary nonmultiple back to the original slice. -/
 

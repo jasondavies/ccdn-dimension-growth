@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceBadPrimeHeight
+public import CCDN.Analysis.PrimeSums
+public import CCDN.Auxiliary.HypersurfaceBadPrimes
+public import CCDN.Plane.IntegerPlaneLogHeight
+import CCDN.Auxiliary.HypersurfaceBadPrimeHeight
 /-! Coordinate invariance of geometric bad reduction and coefficient height,
 with the exact bad-prime charge in standard Fin-indexed coordinates. -/
 

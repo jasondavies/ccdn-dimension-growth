@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ProjectiveCurveLowerBound
-public import CCDN.Analysis.DegreeDependenceNumerics
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Analysis.DegreeDependenceNumerics
+import CCDN.ProjectiveCurveLowerBound
 /-! The degree factor in a coefficient-uniform projective curve bound cannot
 be o(d²). The proof applies the upper bound to the curves constructed
 for CCDN Proposition 5. -/

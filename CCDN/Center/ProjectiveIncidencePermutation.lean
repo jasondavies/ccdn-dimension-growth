@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ProjectiveIncidenceClosed
 public import CCDN.Algebra.ProjectivePermutation
-public import CCDN.Hilbert.FilteredHilbertEquiv
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ProjectiveChowIncidence
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.ProjectiveIncidenceClosed
+import CCDN.Hilbert.FilteredHilbertEquiv
 /-! Coordinate permutations transport the homogeneous ideal and
 projective hyperplane incidence, without choosing projective representatives. -/
 

@@ -5,7 +5,18 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialFamilyRelations
+public import CCDN.Plane.PlaneLinearDeformation
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.Algebra.NoZeroSMulDivisors.Basic
+public import Mathlib.LinearAlgebra.Dimension.Free
+public import Mathlib.LinearAlgebra.FreeModule.PID
+public import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+public import Mathlib.RingTheory.Algebraic.Defs
+public import Mathlib.RingTheory.LocalRing.Basic
+public import Mathlib.RingTheory.SimpleRing.Principal
+import CCDN.Algebra.PolynomialFamilyRelations
+import CCDN.Projection.PlaneProjectionDegree
+import Mathlib.Algebra.MvPolynomial.Monad
 /-! Construct a polynomial family of plane relations for linear
 projections of a prime affine curve. The relation has degree at most the
 curve's Hilbert degree and remains nonzero at parameter zero. -/

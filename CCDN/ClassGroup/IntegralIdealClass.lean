@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.ClassGroup.ExtendedHom
-public import Mathlib.Tactic
+import Mathlib.Tactic.Measurability.Init
 
 /-! Ideal-class notation for finite products of nonzero integral ideals.
 The value at the zero ideal is set to one only to make the indexing

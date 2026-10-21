@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalPlaneWitness
-public import CCDN.Auxiliary.ConstantLeadingBadReduction
+public import CCDN.Algebra.AffineLineLeading
+public import CCDN.Noether.UniversalPlaneFamily
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Auxiliary.HypersurfacePositioning
+import CCDN.Noether.UniversalPlaneWitness
+import CCDN.Projection.ShearNormalization
 /-! The leading coefficient of a universal plane section detects loss of the
 full outer degree. It is evaluated by the highest homogeneous form in the
 first direction. -/

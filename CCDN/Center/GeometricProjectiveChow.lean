@@ -5,9 +5,18 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ProjectiveChowWithoutChart
-public import CCDN.Center.HomogeneousPermutationBaseChange
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ProjectiveChowIncidence
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Algebra.ProjectiveChartScalarExtension
+import CCDN.Center.GeometricProjectiveCurveProjection
+import CCDN.Center.HomogeneousPermutationBaseChange
+import CCDN.Center.ProjectiveChowEquation
+import CCDN.Center.ProjectiveClosureRecovery
+import CCDN.Center.ProjectiveIncidencePermutation
+import CCDN.Center.WeightedHomogeneousTransform
+import CCDN.Hilbert.HomogeneousPrimeComponents
 /-! A geometrically integral homogeneous prime ideal has an incidence equation
 defined over its original coefficient field, without a prescribed chart. -/
 

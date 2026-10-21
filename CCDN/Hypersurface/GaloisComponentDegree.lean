@@ -5,10 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.AlgebraicHilbertDimension
-public import CCDN.Hypersurface.GaloisStableIdealDescent
-public import CCDN.Algebra.IdealScalarDescent
-public import CCDN.Hypersurface.PrincipalSectionGridBound
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.FieldTheory.Galois.Basic
+import CCDN.Algebra.IdealScalarDescent
+import CCDN.Hilbert.AlgebraicHilbertDimension
+import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.HilbertScalarExtension
+import CCDN.Hypersurface.PrincipalSectionGridBound
 /-! Components after algebraic coefficient extension retain the
 source dimension and have degree at most its degree. If an extended prime
 ideal is not prime, every minimal component is moved by a Galois automorphism. -/

@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.EuclideanNumberFieldBasis
-public import CCDN.ClassGroup.FieldBasisMultiplicationProduct
-public import CCDN.ClassGroup.LatticePrescribedProduct
-public import CCDN.ClassGroup.LatticeDiscriminantNumerics
+public import CCDN.ClassGroup.LatticePrescribedMinima
+public import CCDN.ClassGroup.NumberFieldEuclideanLattice
+import CCDN.ClassGroup.EuclideanNumberFieldBasis
+import CCDN.ClassGroup.FieldBasisMultiplicationProduct
+import CCDN.ClassGroup.LatticeDiscriminantNumerics
+import CCDN.ClassGroup.LatticePrescribedProduct
 /-! Short independent algebraic integers at the uniform discriminant-root
 scale, from greedy lattice vectors, the multiplication pairing, and the
 covolume estimate. -/

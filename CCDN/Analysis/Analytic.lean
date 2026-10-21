@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.Plane
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-!
 # Uniform estimates and bounded-degree consequences
 

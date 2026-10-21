@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.RationalDifferential
 public import Mathlib.RingTheory.Polynomial.Resultant.Basic
 
 /-! Degree bounds for polynomial determinants and Sylvester resultants.

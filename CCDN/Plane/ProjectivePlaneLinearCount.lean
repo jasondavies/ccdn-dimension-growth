@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.ProjectivePlaneNonabsoluteCount
-public import Mathlib.Algebra.MvPolynomial.SchwartzZippel
+public import CCDN.Plane.ProjectivePlaneAbsoluteCount
+import CCDN.Hypersurface.ProjectivePlaneNonabsoluteCount
+import CCDN.Projection.PrimitiveNormalization
+import Mathlib.Algebra.MvPolynomial.SchwartzZippel
 
 /-! The elementary linear case completes the uniform plane-equation
 bound in every positive degree. -/

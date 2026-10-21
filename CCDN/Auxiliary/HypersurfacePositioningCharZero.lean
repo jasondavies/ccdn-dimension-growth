@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.HypersurfacePositioning
+import CCDN.Auxiliary.HypersurfaceGoodDirection
+import CCDN.Determinant.HypersurfaceSmoothPoint
 /-! Smooth points and full-degree monic positioning in characteristic zero,
 for the construction of integral bad-prime witnesses. -/
 

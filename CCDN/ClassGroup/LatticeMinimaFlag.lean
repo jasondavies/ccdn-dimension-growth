@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ForMathlib.ZLattice
-public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
+public import Mathlib.Analysis.InnerProductSpace.PiL2
+import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
+import Mathlib.MeasureTheory.Integral.Bochner.Basic
 
 /-! An orthonormal flag adapted to greedy lattice vectors. A small
 coordinate box in this flag contains no nonzero lattice vector. -/

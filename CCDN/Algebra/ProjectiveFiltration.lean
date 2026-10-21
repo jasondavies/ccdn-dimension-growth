@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.CoordinatePowerGeneration
-public import Mathlib.Algebra.Polynomial.AlgebraMap
+public import CCDN.Hilbert.FilteredIntersection
+import CCDN.Algebra.CoordinatePowerGeneration
 
 /-!
 # The filtered homogeneous coordinate algebra

@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.PolynomialDifferenceBounds
 public import CCDN.Determinant.LocalHilbertWeights
+public import Mathlib.RingTheory.Polynomial.Pochhammer
 /-! The multiplicity-independent pointwise remainder of CCDN Lemma 2.1.
 The leading coefficient is exact, and the error constant depends only on
 the hypersurface dimension. Dimension one has no remainder at all. -/

@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.ProjectivePlaneCoefficientCount
+public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Plane.ProjectivePlaneCoefficientCount
 /-! The second inequality of CCDN Corollary 3.1.2 bounds the
 coefficient-sensitive expression, so it composes with its first inequality. -/
 

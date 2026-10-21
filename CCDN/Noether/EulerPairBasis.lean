@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.EulerClosedFormRank
+public import CCDN.Algebra.HomogeneousMonomials
+public import CCDN.Hilbert.MonomialDimension
 /-! Canonical monomial coordinates for the d^2-1 Euler parameters and the
 coefficient matrix of their closed-form operator. -/
 

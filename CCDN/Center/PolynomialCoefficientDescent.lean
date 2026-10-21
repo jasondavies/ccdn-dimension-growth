@@ -5,8 +5,21 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionScalarExtension
-public import Mathlib.LinearAlgebra.Finsupp.Defs
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.Ideal.Maps
+import Mathlib.Tactic.Polynomial.Basic
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.Ordinal
+import Mathlib.Tactic.NormNum.NatLog
+import Mathlib.Tactic.NormNum.ModEq
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.NormNum.Irrational
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
+import Mathlib.Tactic.Echelon.Zsqrtd
+import Mathlib.Algebra.Order.Floor.Semifield
+import Mathlib.Data.Nat.Factorial.DoubleFactorial
+import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.RingTheory.Ideal.BigOperators
 
 /-! Coefficient-linear descent for arbitrary polynomial variable types.
 A finite expansion in a coefficient-field basis proves exact ideal descent,

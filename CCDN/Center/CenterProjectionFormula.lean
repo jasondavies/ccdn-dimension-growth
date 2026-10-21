@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.CenterProjectionHeight
+public import CCDN.Center.BoundedCenterProjection
 /-! Coordinate forms for the projection in CCDN (5-4), and the fixed
 coordinate at infinity used to clear denominators in the affine case. -/
 

@@ -7,7 +7,6 @@ module
 
 public import CCDN.Determinant.HypersurfaceLocalDeterminant
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.Algebra.Order.Floor.Ring
 
 /-! Sharp leading term for the hypersurface local determinant exponent.
 The linear error depends on dimension alone, not on singular multiplicity. -/

@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousLeadingCoefficient
-public import CCDN.Height.MultivariateGridHeight
+public import CCDN.Algebra.HomogeneousTranslation
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+import CCDN.Algebra.HomogeneousChart
+import CCDN.Algebra.HomogeneousLeadingCoefficient
+import CCDN.Height.MultivariateGridHeight
 /-! Bounded integer shears placing a large coefficient first, in all dimensions. -/
 
 @[expose] public section

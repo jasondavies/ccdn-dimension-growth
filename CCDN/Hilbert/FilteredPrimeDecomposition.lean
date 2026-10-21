@@ -5,10 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.BinomialSectionBound
-public import CCDN.Plane.PlaneStepanovBound
-public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
-public import Mathlib.RingTheory.Polynomial.Basic
+public import CCDN.Curve.Curve
+public import Mathlib.NumberTheory.NumberField.Basic
+public import Mathlib.RingTheory.HopkinsLevitzki
 
 /-! Finite minimal-prime components and their filtered dimension budget.
 The component family and zero-set cover are constructed here; eventual

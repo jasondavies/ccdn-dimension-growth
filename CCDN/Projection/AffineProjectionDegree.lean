@@ -5,11 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
-public import CCDN.Algebra.ProjectiveClosureSpecialization
-public import CCDN.Projection.HomogeneousFiniteProjectionDegree
-public import CCDN.Hilbert.PrincipalHilbertPolynomial
-public import CCDN.Projection.IntegralProjectionHilbert
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.ProjectiveClosureProjection
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Algebra.ProjectiveClosureSpecialization
+import CCDN.Hilbert.PrincipalHilbertPolynomial
+import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
+import CCDN.Projection.HomogeneousFiniteProjectionDegree
+import CCDN.Projection.IntegralProjectionHilbert
 /-! Degree preservation for an affine linear projection whose
 projective-closure map is finite and birational. -/
 

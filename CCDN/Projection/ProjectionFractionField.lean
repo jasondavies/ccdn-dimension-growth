@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.PrimitivePairReconstruction
-public import CCDN.Height.BoundedPrimitiveElement
-public import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.RingTheory.Localization.FractionRing
+import CCDN.Height.PrimitivePairReconstruction
 
 /-! Field generation by a parameter tuple and one primitive coordinate,
 and the resulting fraction-field structure on the image ring. -/

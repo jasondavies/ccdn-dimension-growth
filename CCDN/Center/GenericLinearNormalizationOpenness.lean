@@ -5,10 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.GenericHomogeneousGeneration
-public import CCDN.Center.HomogeneousParameterCertificates
-public import CCDN.Hilbert.HomogeneousPrimeComponents
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+import CCDN.Center.BalancedParameterFiniteness
+import CCDN.Center.GenericHomogeneousGeneration
+import CCDN.Center.HomogeneousParameterCertificates
+import CCDN.Center.HomogeneousParameterPowers
+import CCDN.Hilbert.HomogeneousPrimeComponents
 /-! Finiteness of homogeneous linear parameters at one coefficient
 specialization implies finiteness at algebraically independent coefficients.
 The proof constructs a full homogeneous coefficient determinant internally. -/

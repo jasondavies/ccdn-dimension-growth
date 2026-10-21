@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.IntegerPlaneHeight
-public import CCDN.Plane.IntegerPlaneWitness
-public import CCDN.Determinant.ClosedFormMinorCharge
+public import CCDN.Noether.ClosedFormHeight
+public import CCDN.Plane.FiniteFieldBadPlanes
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Determinant.ClosedFormMinorCharge
 /-! Explicit height estimates for the evaluated universal bad-prime witness. -/
 
 @[expose] public section

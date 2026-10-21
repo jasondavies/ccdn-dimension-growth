@@ -6,8 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.QuadraticObstructionFibers
-public import CCDN.ClassGroup.FractionalIdealConjugation
-public import Mathlib.GroupTheory.Index
+public import CCDN.ClassGroup.ClassGroupQuadraticInvolution
+import CCDN.ClassGroup.AmbiguousIdealRelativeNorm
+import CCDN.ClassGroup.FractionalIdealConjugation
+import CCDN.ClassGroup.QuadraticNormConjugation
 
 /-! A cardinal bound for fixed two-torsion classes in terms of
 strongly ambiguous classes and the unit-norm quotient. This is

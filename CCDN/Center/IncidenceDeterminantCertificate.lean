@@ -6,9 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.HomogeneousIncidenceRelations
-public import CCDN.Algebra.HomogeneousEvaluation
-public import Mathlib.LinearAlgebra.Matrix.ToLinearEquiv
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.HomogeneousMonomials
+import CCDN.Algebra.HomogeneousEvaluation
 /-! A polynomial determinant separates an empty homogeneous linear incidence
 fiber from every tuple with a nonzero common zero. Its construction uses
 homogeneous ideal membership certificates and a complete monomial basis. -/

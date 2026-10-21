@@ -5,10 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.ClosedFormScaling
-public import CCDN.Noether.ClosedFormReducibility
-public import CCDN.Determinant.ClosedFormMinorCharge
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import CCDN.Noether.BivariateTotalDegree
+public import CCDN.Noether.ClosedFormHeight
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Determinant.ClosedFormMinorCharge
+import CCDN.ForMathlib.MatrixRank
+import CCDN.Noether.ClosedFormScaling
 
 /-! Bad reduction for integer bivariate equations with a nonzero constant
 outer leading coefficient. A leading-coefficient factor in the witness also

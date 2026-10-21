@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.LowerBound.GridCurveConstruction
-public import CCDN.LowerBound.GridLowerBoundNumerics
 public import CCDN.Plane.Plane
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.LowerBound.GridCurveConstruction
+import CCDN.LowerBound.GridLowerBoundNumerics
+import Mathlib.Algebra.Order.Star.Rat
 
 /-! Affine counts supplied by finite Cartesian grids. -/
 

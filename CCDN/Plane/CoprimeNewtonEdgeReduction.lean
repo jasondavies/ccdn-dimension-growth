@@ -6,8 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.CoprimeNewtonEdge
-public import CCDN.Projection.PrimitiveNormalization
-public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Auxiliary.HypersurfaceBadPrimes
 /-! Support and coefficient conditions for a coprime Newton edge.
 They imply full degree and geometric irreducibility over every field in
 which both endpoint coefficients remain nonzero. -/

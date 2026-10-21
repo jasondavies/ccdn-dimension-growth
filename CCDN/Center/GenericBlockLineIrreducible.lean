@@ -6,9 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.GenericBlockLine
-public import CCDN.LowerBound.GridMultivariate
-public import Mathlib.RingTheory.Polynomial.GaussLemma
 public import Mathlib.FieldTheory.Separable
+import CCDN.LowerBound.GridMultivariate
+import Mathlib.Algebra.CharP.Algebra
+import Mathlib.RingTheory.Polynomial.GaussLemma
 
 /-! A generic affine line in a nonconstant block of an irreducible
 polynomial remains irreducible over the field of its remaining parameters. -/

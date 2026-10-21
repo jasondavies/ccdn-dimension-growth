@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AffineChartAuxiliaryComparison
 public import CCDN.Auxiliary.AbsoluteAuxiliary
-public import CCDN.Algebra.AffineTranslation
+public import CCDN.Auxiliary.AffineChartPrimeDeterminant
+import CCDN.Algebra.AffineTranslation
+import CCDN.Auxiliary.AffineChartAuxiliaryComparison
 /-! Coefficient-sensitive auxiliary equations with affine-chart good primes.
 The positioning transformation fixes the homogenizing coordinate, so the
 literal affine good-prime condition survives the coordinate change. -/

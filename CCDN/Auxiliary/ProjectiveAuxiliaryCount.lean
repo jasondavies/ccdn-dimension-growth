@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ProjectiveAuxiliary
-public import CCDN.Plane.ProjectivePlaneBezout
-public import CCDN.Auxiliary.PlaneAuxiliaryCount
+public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Height.ProjectiveBox
+import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Auxiliary.ProjectiveAuxiliary
+import CCDN.Plane.ProjectivePlaneBezout
 /-! Projective point counts obtained from integral homogeneous
 auxiliary polynomials and projective Bézout. -/
 

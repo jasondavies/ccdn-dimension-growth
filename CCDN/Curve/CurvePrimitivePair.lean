@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.BoundedPrimitiveElement
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 /-! Bounded linear coordinates generating an affine curve's function
 field. Degree preservation and control of exceptional fibers are separate
 projection obligations; this module proves the quantified birational input. -/

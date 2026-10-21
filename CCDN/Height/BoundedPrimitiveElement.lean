@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.BoundedLinearSeparation
-public import Mathlib.FieldTheory.PrimitiveElement
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Algebra.BoundedLinearSeparation
+import Mathlib.FieldTheory.PrimitiveElement
 
 /-! Quantitative primitive elements and separation by affine coordinates. -/
 

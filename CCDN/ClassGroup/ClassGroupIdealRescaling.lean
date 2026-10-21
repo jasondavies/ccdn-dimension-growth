@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupTwoTorsion
-public import Mathlib.RingTheory.FractionalIdeal.Inverse
+public import Mathlib.RingTheory.ClassGroup.Basic
+import Mathlib.RingTheory.Flat.TorsionFree
 
 /-! Rescaling an integral ideal by an element of its inverse ideal preserves
 its class and carries the chosen generator of its square to the exact

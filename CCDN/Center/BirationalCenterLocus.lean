@@ -5,10 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.GoodCenterWitness
-public import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 public import CCDN.Center.ZeroColumnCenterDensity
-public import CCDN.Center.GeometricProjectionHilbert
+public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Center.CenterMinorProjection
+public import CCDN.Center.ProjectionImageFractionField
+import CCDN.Center.ChowProjectionBaseChange
+import CCDN.Center.GeometricProjectionHilbert
 /-! The geometrically disjoint birational-center condition on center matrices. -/
 
 @[expose] public section

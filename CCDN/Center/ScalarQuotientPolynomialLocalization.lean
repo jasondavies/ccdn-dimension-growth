@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.PolynomialQuotientCoefficients
-public import Mathlib.RingTheory.MvPolynomial.Localization
-public import Mathlib.RingTheory.Localization.Ideal
+public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.FractionRing
+import CCDN.Center.PolynomialQuotientCoefficients
+import Mathlib.RingTheory.Localization.Ideal
+import Mathlib.RingTheory.MvPolynomial.Localization
 
 /-! The scalar-extended coordinate quotient is the localization of the
 polynomial extension of the original coordinate quotient. All maps are

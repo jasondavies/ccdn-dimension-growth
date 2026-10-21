@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertCoordinateIndependence
-public import CCDN.Projection.HilbertProjectionDegree
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Hilbert.HilbertCoordinateIndependence
+import CCDN.Projection.HilbertProjectionDegree
 /-! A proper positive-codimension prime ideal of positive Hilbert dimension
 contains a nonzero equation of degree at most its Hilbert multiplicity.
 The independent coordinate subtuple and the equation are both constructed. -/

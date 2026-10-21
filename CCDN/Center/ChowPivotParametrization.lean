@@ -5,7 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowIncidenceLocus
+public import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.Combinatorics.Matroid.Init
+import Mathlib.Tactic.Positivity.Finset
+import Mathlib.Data.Sym.Sym2.Init
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.Ring
 /-! A denominator-free parametrization of hyperplane tuples through a
 cone point, using an arbitrary nonzero pivot coordinate. -/
 

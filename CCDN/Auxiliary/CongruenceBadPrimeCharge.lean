@@ -5,7 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+public import CCDN.Analysis.PrimeSums
+public import CCDN.Auxiliary.HypersurfaceBadPrimes
+public import CCDN.Plane.IntegerPlaneLogHeight
+import CCDN.Auxiliary.BadPrimeCharge
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.Auxiliary.HypersurfaceBadPrimeHeight
 /-! A single logarithmic-height witness bounds the combined charge of
 geometric bad primes and prescribed congruence primes. -/
 

@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.GoodHyperplaneBounds
 public import CCDN.Hypersurface.IntegerHyperplaneSlices
 public import CCDN.Plane.Plane
 public import CCDN.Algebra.PolynomialPredicates

@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FilteredComponentRank
+public import CCDN.Hilbert.FilteredIntersection
+public import CCDN.Hilbert.FilteredPrimeDecomposition
+import CCDN.Algebra.BinomialSectionBound
+import CCDN.Hilbert.FilteredComponentRank
 /-! Additivity of the leading filtered dimension bounds the total degree of
 the minimal-prime components of a two-equation section. -/
 

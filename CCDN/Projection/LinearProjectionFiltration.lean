@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedProjectionCoordinates
-public import CCDN.Plane.PlaneHilbert
+public import CCDN.Hilbert.FilteredIntersection
+import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 /-! Linear coordinate substitutions preserve the total-degree filtration.
 Their image coordinate rings inject into the original filtered ring. -/
 

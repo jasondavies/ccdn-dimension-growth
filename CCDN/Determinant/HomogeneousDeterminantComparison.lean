@@ -5,8 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousRankDichotomy
-public import CCDN.Determinant.Determinant
+public import ArithmeticHeights.BombieriVaaler
+public import CCDN.Algebra.HomogeneousMonomials
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+import CCDN.Algebra.HomogeneousEvaluation
+import CCDN.Algebra.HomogeneousRankDichotomy
+import CCDN.Algebra.RowSpan
+import CCDN.Auxiliary.AuxiliaryPolynomial
+import CCDN.Auxiliary.Nondivisibility
+import CCDN.Determinant.Determinant
 /-! The exact-rank Bombieri--Vaaler comparison when no integral auxiliary
 polynomial exists. This is the finite-matrix step of CCDN §3.3. -/
 

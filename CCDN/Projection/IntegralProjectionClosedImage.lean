@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertLinearCoordinates
-public import Mathlib.RingTheory.Ideal.GoingUp
-public import Mathlib.RingTheory.Nullstellensatz
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import CCDN.Hilbert.HilbertLinearCoordinates
+import Mathlib.RingTheory.Nullstellensatz
 
 /-! An integral polynomial projection has exactly its kernel's zero locus
 as its image over an algebraically closed field. Lying over constructs a

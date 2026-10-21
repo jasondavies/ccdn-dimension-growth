@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.Interpolation
-public import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 
 /-!
 # Elementary determinant bounds

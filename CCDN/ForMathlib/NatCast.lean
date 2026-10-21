@@ -5,10 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.Algebra.Defs
 public import Mathlib.Algebra.CharP.Defs
-public import Mathlib.Algebra.Field.Defs
-public import Mathlib.Algebra.GroupWithZero.Units.Lemmas
+import Mathlib.Tactic.Finiteness.Attr
 
 /-!
 # Nonvanishing of natural number casts

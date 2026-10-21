@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.AffineTranslationCount
-public import CCDN.Height.ScaledHypersurfaceHeight
-public import CCDN.Height.MultivariateGridHeight
+public import CCDN.Algebra.AffineTranslation
+public import CCDN.Algebra.HomogeneousSlice
+import CCDN.Height.AffineTranslationCount
+import CCDN.Height.MultivariateGridHeight
 /-! Translation preserves the leading homogeneous equation exactly. Bounded
 integer translations make the constant coefficient nonzero in every dimension. -/
 

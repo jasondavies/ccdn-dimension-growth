@@ -5,9 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.Curve
-public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
+public import Mathlib.RingTheory.Ideal.Height
+import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 
 /-! Finite prime decomposition and codimension two for an intersection
  of two equations. -/

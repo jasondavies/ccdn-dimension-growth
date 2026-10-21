@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveChartIdeal
+public import CCDN.Algebra.ProjectiveClosureIdeal
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.ForMathlib.Polynomial
+import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
+import Mathlib.Algebra.Order.Star.Rat
 /-! A nonempty standard chart recovers its homogeneous prime ideal
 by projective closure. Its affine Hilbert dimension and multiplicity follow
 from the cone Hilbert polynomial, in every dimension. -/

@@ -5,7 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.PolynomialFractionCoefficientExtension
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+import Mathlib.Data.Rat.Cast.Order
+import Mathlib.Tactic.ContinuousFunctionalCalculus
+import Mathlib.Tactic.NormNum.Abs
+import Mathlib.Tactic.NormNum.DivMod
+import Mathlib.Tactic.NormNum.OfScientific
 /-! A chosen fraction field of a coefficient domain embeds canonically
 in the fraction field of its polynomial ring. The embedding is compatible
 with both the coefficient domain and its ground field. -/

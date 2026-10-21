@@ -7,9 +7,13 @@ module
 
 public import CCDN.Surface.SurfaceTransversePlane
 public import CCDN.Plane.IntegralAffineLine
-public import CCDN.Plane.Bezout
-public import CCDN.Surface.SurfaceDirectionalDerivative
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Plane.Plane
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Plane.Bezout
+import CCDN.Surface.SurfaceDirectionalDerivative
+import CCDN.Surface.TopFormBadPrimes
+import Mathlib.Algebra.Order.Star.Rat
 /-! A transverse plane injects distinct parallel lines on a surface into
 the common zeros of two proper plane equations. The second equation will
 be the directional derivative. -/

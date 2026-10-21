@@ -5,12 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.GeometricProjectiveCurveProjection
-public import CCDN.Center.ProjectiveChowEquation
-public import CCDN.Center.ProjectiveIncidencePermutation
-public import CCDN.Counterexample.OriginProjectivePoint
-public import CCDN.Center.WeightedHomogeneousTransform
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ProjectiveChowIncidence
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.GeometricProjectiveCurveProjection
+import CCDN.Center.ProjectiveChowEquation
+import CCDN.Center.ProjectiveIncidencePermutation
+import CCDN.Center.WeightedHomogeneousTransform
 /-! A positive-dimensional affine cone has a nonempty coordinate chart.
 The projective incidence equation is constructed without a prescribed chart. -/
 

@@ -5,7 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.EulerPairSpecialization
+public import CCDN.Noether.ClosedFormScaling
+public import CCDN.Noether.EulerPairBasis
+import CCDN.Noether.EulerPairBasisValues
+import CCDN.Noether.EulerPairSpecialization
+import CCDN.Projection.ShearNormalization
 /-! Universal homogeneous coefficient minors of the Euler-restricted operator.
 The constructed forms have degree exactly d^2-1 in the homogeneous sense,
 specialize to coefficient minors, and detect normalized irreducibility

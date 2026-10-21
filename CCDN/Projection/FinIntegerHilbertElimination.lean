@@ -5,9 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.IntegerHilbertElimination
 public import CCDN.Algebra.IntegerLinearForms
-public import CCDN.Hilbert.FilteredHilbertEquiv
 /-! One bounded integer-matrix elimination step on the standard Fin-indexed
 polynomial rings, ready for iteration. -/
 

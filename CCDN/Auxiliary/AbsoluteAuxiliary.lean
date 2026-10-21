@@ -6,9 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.PositionedAuxiliary
-public import CCDN.Auxiliary.HypersurfaceAuxiliaryScaling
-public import CCDN.Plane.HypersurfaceShearInvariance
 public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Algebra.ProjectiveTranslation
+import CCDN.Auxiliary.HypersurfaceAuxiliaryScaling
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.Height.HypersurfacePositionHeight
+import CCDN.Plane.HypersurfaceShearInvariance
 /-! The coefficient-sensitive auxiliary theorem for arbitrary absolutely
 irreducible homogeneous equations in arbitrary coordinates.
 

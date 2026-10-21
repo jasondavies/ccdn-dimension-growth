@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.NoetherianLocalLayers
-public import Mathlib.LinearAlgebra.Isomorphisms
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-! Localization at a maximal ideal preserves every adic layer.

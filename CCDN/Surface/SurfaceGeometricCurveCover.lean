@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.SurfaceSmallCurveCover
-public import CCDN.Curve.AffineCurveHilbertPolynomial
+public import CCDN.Hypersurface.SingularHypersurfaceCount
+public import CCDN.Surface.SurfaceResidueCover
+import CCDN.Curve.AffineCurveHilbertPolynomial
+import CCDN.Surface.SurfaceNonlinearCount
+import Mathlib.Algebra.Order.Star.Real
 /-! Splitting a surface section into bounded-degree geometric
 curves, nongeometric exceptions, intermediate-degree curves and the
 constructed congruence remainder. -/

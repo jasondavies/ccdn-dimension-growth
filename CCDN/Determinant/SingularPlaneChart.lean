@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.SingularLocalDeterminant
-public import CCDN.Determinant.SmoothLocalDeterminant
-public import CCDN.Determinant.ResidueAggregation
-public import Mathlib.Algebra.MvPolynomial.PDeriv
 import all ArithmeticHeights.BombieriVaaler
+public import ArithmeticHeights.BombieriVaaler
+public import CCDN.Determinant.LocalDeterminant
+public import Mathlib.RingTheory.MvPolynomial.Ideal
+import CCDN.Determinant.BlockDeterminant
+import CCDN.Determinant.SingularLocalDeterminant
 
 /-! Translation and residue-block assembly for the singular local
 plane-curve determinant theorem. -/

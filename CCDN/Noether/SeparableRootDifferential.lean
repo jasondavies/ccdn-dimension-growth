@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.RationalDifferential
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Derivation.MapCoeffs
+import Mathlib.Data.Nat.Totient
 /-! Extend a differential structure to an explicitly separable monic root
 extension in any characteristic. The construction is the implicit-derivative
 quotient construction from Mathlib's characteristic-zero instance, with the

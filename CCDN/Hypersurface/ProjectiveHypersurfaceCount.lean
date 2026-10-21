@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.HypersurfaceCount
-public import CCDN.Algebra.FiniteFieldProjectiveCone
-public import CCDN.Determinant.ProjectiveHypersurfaceMultiplicity
+public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Algebra.FiniteFieldProjectiveCone
+import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.Determinant.ProjectiveHypersurfaceMultiplicity
+import CCDN.Hypersurface.HypersurfaceCount
 /-! The sharp projective finite-field count and its singular
 multiplicity correction. This discharges the count in CCDN Lemma 2.7. -/
 

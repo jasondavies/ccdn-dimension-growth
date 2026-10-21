@@ -5,8 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.FormalBranchFaithful
-public import CCDN.Noether.PowerSeriesFrobenius
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+public import Mathlib.RingTheory.PowerSeries.Basic
+import CCDN.Algebra.SectionImageRank
+import CCDN.Noether.PowerSeriesFrobenius
+import CCDN.Plane.PlaneHilbert
+import ArithmeticHeights.Absolute
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 /-! A local Bézout bound on formal vanishing orders. It gives injective jets
 on low-degree functions and verifies the jet condition in Frobenius
 noncancellation for irreducible plane curves. -/

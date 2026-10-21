@@ -5,10 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ForMathlib.Matrix
-public import CCDN.Determinant.LocalDeterminant
 import all ArithmeticHeights.BombieriVaaler
-public import Mathlib.LinearAlgebra.FreeModule.PID
+public import ArithmeticHeights.BombieriVaaler
+import CCDN.ForMathlib.Matrix
 
 /-! Combining maximal-minor divisibility across row blocks. -/
 

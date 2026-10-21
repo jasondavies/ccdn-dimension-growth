@@ -5,9 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertTranscendenceBasis
-public import Mathlib.RingTheory.IntegralClosure.GoingDown
-public import Mathlib.RingTheory.MvPolynomial.Basic
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.RingTheory.Algebraic.Defs
+public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Hilbert.HilbertTranscendenceBasis
+import Mathlib.RingTheory.AlgebraicIndependent.AlgebraicClosure
+import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+import Mathlib.RingTheory.IntegralClosure.GoingDown
+import Mathlib.RingTheory.Polynomial.RationalRoot
 
 /-! Affine Hilbert dimension across algebraic coefficient extensions.
 Integral embeddings transfer a constructed transcendence basis; algebraic

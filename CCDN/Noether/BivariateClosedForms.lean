@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.RationalClosedForms
-public import Mathlib.RingTheory.Polynomial.IsIntegral
 public import Mathlib.Algebra.Polynomial.Bivariate
+public import CCDN.Noether.RationalDifferential
+public import Mathlib.RingTheory.Derivation.MapCoeffs
+import CCDN.Noether.RationalClosedForms
+import Mathlib.FieldTheory.RatFunc.AsPolynomial
+import Mathlib.RingTheory.Polynomial.IsIntegral
 
 /-! The characteristic-zero closed-form criterion on bivariate
 polynomials. Gauss's lemma and rational differentiation discharge the

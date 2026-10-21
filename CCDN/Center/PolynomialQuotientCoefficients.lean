@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.Ideal.Quotient.Operations
-public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.RingTheory.Ideal.Maps
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
 
 /-! Polynomial extension commutes with the coefficient quotient.
 The comparison is obtained from its coefficientwise kernel. -/

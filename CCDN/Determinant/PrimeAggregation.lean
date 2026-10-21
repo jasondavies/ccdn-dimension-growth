@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Analysis.PrimeCutoff
+import CCDN.Analysis.PrimeProduct
 /-! Simultaneous prime divisibility with arbitrary main and error coefficients.
 
 `general_determinant_log_lower_cutoff_congruence` multiplies the local prime-power divisors

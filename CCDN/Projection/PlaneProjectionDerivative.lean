@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialKernelOrigin
-public import CCDN.Determinant.PlaneSingularities
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.RingTheory.Algebraic.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import CCDN.Determinant.PlaneSingularities
+import CCDN.Projection.LinearProjectionFiltration
+import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
 /-! In characteristic zero, a plane relation with a transcendental first
 coordinate has a nonzero derivative in the second coordinate. That derivative
 is a proper section of degree at most d-1 of the source curve. -/

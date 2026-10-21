@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.LatticeFinitePacking
-public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
+public import Mathlib.Algebra.Module.ZLattice.Covolume
+public import Mathlib.NumberTheory.NumberField.CanonicalEmbedding.Basic
+public import Mathlib.NumberTheory.NumberField.Discriminant.Defs
+import Mathlib.NumberTheory.NumberField.Discriminant.Basic
 
 /-! The ring-of-integers lattice in the Euclidean mixed embedding.
 The real and imaginary coordinates are unweighted; the covolume is

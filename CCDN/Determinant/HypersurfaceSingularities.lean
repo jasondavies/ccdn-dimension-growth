@@ -5,8 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.FiniteFieldSectionCount
-public import CCDN.Determinant.PlaneMultiplicitySmooth
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.Determinant.PlaneSingularities
+import CCDN.Height.FiniteFieldSectionCount
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import Mathlib.RingTheory.PrincipalIdealDomain
+import Mathlib.RingTheory.SimpleRing.Principal
 /-! The singular points of an irreducible hypersurface satisfy a
 coefficient-uniform codimension-two finite-field bound. -/
 

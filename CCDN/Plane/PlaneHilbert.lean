@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.MonomialDimension
+public import CCDN.Hilbert.FilteredIntersection
+import CCDN.Hilbert.MonomialDimension
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 /-! The exact affine Hilbert function of a principal plane equation. This
 identifies polynomial total degree with the degree in the curve-counting target. -/
 

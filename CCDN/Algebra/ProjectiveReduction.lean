@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.ProjectiveLocalDeterminant
-public import Mathlib.LinearAlgebra.Projectivization.Cardinality
+public import CCDN.Height.Box
+import CCDN.Height.ProjectiveZeroLocus
 
 /-! Projective reduction of primitive integer points, and the affine
 coordinate charts determined by their finite-field residue points. -/

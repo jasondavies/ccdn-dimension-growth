@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.ProjectiveLinearCountTransfer
-public import CCDN.Projection.AffineProjectionCount
+public import CCDN.Algebra.IntegerLinearForms
+public import CCDN.Curve.Curve
+import CCDN.Determinant.PolynomialMapDeterminant
+import CCDN.Height.ProjectiveLinearCountTransfer
+import CCDN.Projection.AffineProjectionCount
 /-! Integral-point counts under an integer linear projection.
 In the application, the finite-fiber hypothesis follows from normalization. -/
 

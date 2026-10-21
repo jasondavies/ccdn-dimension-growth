@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.ProjectiveZeroLocus
+public import Mathlib.LinearAlgebra.Projectivization.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Mathlib.NumberTheory.Height.NumberField
+import Mathlib.NumberTheory.Height.Projectivization
 /-! Homogeneous interpolation on distinct projective points. The separating
 polynomials have one common degree, so their classes belong to a single
 graded coordinate space. -/

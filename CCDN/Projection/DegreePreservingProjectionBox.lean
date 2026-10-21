@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedDegreePreservingProjection
+public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Height.Box
+public import Mathlib.Data.Fin.VecNotation
+import CCDN.Projection.BoundedProjectionCoordinates
 /-! Integral evaluation and coefficient-uniform height control for the two
 moment coordinates in the degree-preserving projection. -/
 

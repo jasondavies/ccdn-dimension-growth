@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.RationalDifferential
+public import Mathlib.RingTheory.Derivation.DifferentialRing
+public import Mathlib.Algebra.Polynomial.Derivative
+import Mathlib.Data.Nat.Totient
+import Mathlib.Tactic.ContinuousFunctionalCalculus
 /-! Bounded-degree differential constants in positive characteristic.
 Unlike characteristic zero, the degree restrictions are essential. These
 lemmas isolate the constant-descent step in Gao's differential criterion;

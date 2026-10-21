@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalPlaneL1
+public import CCDN.ForMathlib.IntegerPolynomialL1
+public import CCDN.Noether.AmbientNoetherForms
+import CCDN.Noether.EulerUniversalHeight
+import CCDN.Noether.UniversalPlaneL1
 /-! The printed coefficient-sum bound for the ambient Noether forms.
 Coefficient extraction from plane parameters costs no additional factor. -/
 

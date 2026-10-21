@@ -5,7 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AuxiliaryRatioEstimates
+public import CCDN.Auxiliary.HypersurfaceRankLogarithm
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Auxiliary.AuxiliaryRatioEstimates
+import CCDN.Auxiliary.HypersurfaceKernelRatio
+import CCDN.Auxiliary.HypersurfaceRankRoots
 /-! The small-height numerical auxiliary-degree bound, with exact box and
 coefficient exponents and a constant depending only on dimension. -/
 

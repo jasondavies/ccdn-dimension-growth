@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
-public import CCDN.Algebra.ScaledHypersurfaceModel
+public import CCDN.Algebra.HomogeneousSlice
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 /-! Prime scaling changes the geometric bad-prime factor by at most an
 absolute constant. Outside the scaling prime, the homogeneous models are
 related by an invertible change of coordinates and a nonzero scalar. -/

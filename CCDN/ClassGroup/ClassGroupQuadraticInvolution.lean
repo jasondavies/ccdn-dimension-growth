@@ -7,7 +7,6 @@ module
 
 public import CCDN.ClassGroup.ClassGroupTwoTorsion
 public import Mathlib.RingTheory.ClassGroup.ExtendedHom
-public import Mathlib.GroupTheory.Index
 
 /-! The group-theoretic part of quadratic class-group descent. An
 involution on an elementary abelian two-group has at least the square

@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.HomogenizationAtInfinity
 public import CCDN.Projection.ProjectiveClosureProjection
 public import CCDN.Projection.FinIntegerHilbertElimination
+public import CCDN.Projection.IntegerHilbertElimination
+import CCDN.Auxiliary.HypersurfacePositioning
+import CCDN.Projection.HomogenizationAtInfinity
 /-! Full-degree affine elimination also gives an integral projection of the
 projective closure, fixing its homogenizing coordinate. -/
 

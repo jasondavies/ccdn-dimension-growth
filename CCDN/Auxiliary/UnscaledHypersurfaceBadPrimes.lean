@@ -5,7 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
+public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Auxiliary.ScaledHomogenization
+import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! Comparison with the affine bad-prime factor. For degree at least two the
 homogeneous and affine bad-reduction predicates agree. In degree one, the
 homogeneous bad-prime set can be smaller because affine degree loss can

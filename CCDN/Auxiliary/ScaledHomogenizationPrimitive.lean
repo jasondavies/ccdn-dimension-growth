@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.ScaledHomogenization
+import Mathlib.Data.Nat.Prime.Int
 /-! A prime scaling preserves primitive integer equations when it does not
 divide the constant coefficient. This is the arithmetic input for affine scaling. -/
 

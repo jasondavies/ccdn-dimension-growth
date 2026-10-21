@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousLeadingCoefficient
-public import CCDN.Height.HomogeneousEvaluationHeight
+public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Algebra.HomogeneousTranslation
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+import CCDN.Algebra.HomogeneousLeadingCoefficient
+import CCDN.Height.HomogeneousEvaluationHeight
+import CCDN.Plane.PlaneGridHeight
 /-! The bounded leading-coefficient translation has a controlled height cost.
 Its logarithmic coefficient-position loss is at most 14d². -/
 

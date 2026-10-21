@@ -6,9 +6,18 @@ Authors: Jason Davies
 module
 
 public import CCDN.Counterexample.GridVandermondeCounterexample
-public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
-public import Mathlib.Data.Nat.Choose.Cast
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import Mathlib.Tactic.NormNum.RealSqrt
+import Mathlib.Tactic.NormNum.Parity
+import Mathlib.Tactic.NormNum.NatSqrt
+import Mathlib.Tactic.NormNum.NatFib
+import Mathlib.Tactic.NormNum.LegendreSymbol
+import Mathlib.Tactic.NormNum.IsCoprime
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Rational
+import Mathlib.Tactic.Inclusion.Extension.Core.Core
+import Mathlib.NumberTheory.Chebyshev
+import ArithmeticHeights.Absolute
+import Mathlib.Algebra.Order.Ring.Star
 
 /-! The differing-degree global determinant lower bound cannot hold with
 a dimension-only error. A grid of primitive points on a single fixed line

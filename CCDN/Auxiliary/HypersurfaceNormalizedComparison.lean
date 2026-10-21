@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceRankLogarithm
-public import CCDN.Auxiliary.HypersurfaceKernelRatio
+public import CCDN.Auxiliary.HypersurfaceRankArchimedean
+public import CCDN.Determinant.HypersurfaceHeightDeterminant
+import CCDN.Height.HypersurfaceHeightComparison
 /-! The normalized higher-dimensional determinant inequality, retaining the
 exact root-rank and kernel-rank coefficients needed for uniform degree selection. -/
 

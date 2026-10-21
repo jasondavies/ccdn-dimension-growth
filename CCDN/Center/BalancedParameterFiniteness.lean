@@ -5,12 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.HomogeneousParameterPowers
-public import CCDN.Algebra.CoordinatePowerGeneration
 public import CCDN.Projection.LinearProjectionFiltration
-public import Mathlib.RingTheory.Finiteness.Basic
-public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
 public import CCDN.Algebra.PolynomialPredicates
+public import Mathlib.RingTheory.Nullstellensatz
+import CCDN.Algebra.CoordinatePowerGeneration
+import CCDN.Center.HomogeneousParameterPowers
+import Mathlib.LinearAlgebra.FreeModule.PID
 /-! Balanced coordinate-power reductions give a finite module
 over the polynomial algebra of the parameters, hence an integral projection. -/
 

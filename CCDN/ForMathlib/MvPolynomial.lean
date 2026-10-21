@@ -6,10 +6,9 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-public import Mathlib.RingTheory.MvPolynomial.Basic
-public import Mathlib.Data.Sym.Card
-public import Mathlib.Data.Finsupp.Multiset
-public import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+import Mathlib.Data.Sym.Card
+import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 
 /-!
 # Homogeneous components and dimensions of homogeneous submodules

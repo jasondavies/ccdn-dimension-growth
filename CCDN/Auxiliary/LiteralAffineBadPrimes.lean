@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AffineBadPrimeTranslation
+public import CCDN.Algebra.AffineTranslation
+public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 /-! The literal affine bad-prime factor in CCDN Definition 3.2.1.
 Only failure of geometric irreducibility is counted. A reduction which loses
 degree but remains geometrically irreducible is good. -/

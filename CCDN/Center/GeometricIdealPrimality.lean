@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionScalarExtension
-public import Mathlib.FieldTheory.AlgebraicClosure
+public import CCDN.Algebra.PolynomialLinearDescent
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Algebra.IdealScalarDescent
+import CCDN.Hilbert.HilbertScalarExtension
+import CCDN.Projection.ProjectionScalarExtension
+import Mathlib.RingTheory.Nullstellensatz
 
 /-! Primality of polynomial ideals over an algebraically closed field
 survives arbitrary coefficient-field extensions. Coefficient-linear

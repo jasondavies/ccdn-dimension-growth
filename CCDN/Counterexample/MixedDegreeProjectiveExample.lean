@@ -6,8 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveReduction
-public import Mathlib.LinearAlgebra.Vandermonde
-public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-! Why primitive projective evaluation requires a common column degree.
 

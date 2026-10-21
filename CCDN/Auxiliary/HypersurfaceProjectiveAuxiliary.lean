@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Height.ProjectiveZeroLocus
 /-! A single auxiliary polynomial for all rational points of bounded projective
 height, with no finite-family hypothesis. -/
 

@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.ScalarSpanDimension
 public import CCDN.Projection.InfinityParameterReduction
+import CCDN.Hilbert.ScalarSpanDimension
 /-! Evaluating homogeneous polynomials at geometric infinity points has
 L-linear rank at most the corresponding infinity Hilbert piece. The
 source curve and its Hilbert function are defined over the original field K. -/

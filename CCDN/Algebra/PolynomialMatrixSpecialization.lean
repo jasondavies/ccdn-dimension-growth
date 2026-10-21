@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionExceptionalCount
+public import Mathlib.FieldTheory.RatFunc.Basic
+public import Mathlib.RingTheory.SimpleRing.Principal
+import CCDN.Algebra.BoundedLinearSeparation
 /-! An injective polynomial matrix over K(t) remains injective at some integer
 specialization. Clearing a left inverse's denominators gives the assertion
 without selecting minors or assuming a generic-rank principle. -/

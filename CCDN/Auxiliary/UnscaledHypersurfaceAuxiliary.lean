@@ -5,9 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.PrimeScaledAffineAuxiliary
-public import CCDN.Auxiliary.UnscaledModelCount
-public import CCDN.Auxiliary.HypersurfaceCoefficientDichotomy
+public import CCDN.Algebra.HomogeneousSlice
+public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Algebra.IntegerRationalIrreducibility
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
+import CCDN.Auxiliary.HypersurfaceCoefficientDichotomy
+import CCDN.Auxiliary.UnscaledModelCount
+import CCDN.Height.ProjectiveIntegerHeight
 /-! The ordinary homogenization provides an affine auxiliary without a
 scaling-prime hypothesis and transfers the coefficient-height dichotomy. -/
 

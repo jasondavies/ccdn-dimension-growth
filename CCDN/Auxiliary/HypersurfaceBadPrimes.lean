@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.UniversalPlaneBadReduction
-public import Mathlib.Data.Nat.PrimeFin
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Auxiliary.UniversalPlaneBadReduction
 
 /-! The finite set of bad primes of an integer hypersurface. -/
 

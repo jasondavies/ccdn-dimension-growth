@@ -7,7 +7,8 @@ module
 
 public import CCDN.Center.BoundedGoodCenter
 public import CCDN.Projection.BirationalComplementProjection
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.CenterProjectionHeight
+import CCDN.Center.CenterDetectorBounds
 /-! The full ambient height quantifier of CCDN Lemma 5.1. The constructed
 finite birational complementary projection has the required height bound
 at every rational point outside its center, not just on the source. -/

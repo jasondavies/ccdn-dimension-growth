@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.InfiniteWeightEnumeration
-public import Mathlib.NumberTheory.Harmonic.Bounds
-public import Mathlib.Data.Nat.Cast.Order.Field
+public import CCDN.Determinant.FiltrationWeights
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.NumberTheory.Harmonic.Defs
+import CCDN.Determinant.InfiniteWeightEnumeration
+import Mathlib.NumberTheory.Harmonic.Bounds
 
 /-! The arbitrary-profile dimension-one boundary of CCDN Lemma 2.2 is
 false if its displayed k^(n-2) term is interpreted as 1/k.

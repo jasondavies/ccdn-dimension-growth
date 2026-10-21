@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.AffineNormalizationRank
 public import CCDN.Center.FixedCoordinateGenericNormalization
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Center.AffineNormalizationRank
+import CCDN.Center.GeometricIdealPrimality
+import CCDN.Hilbert.HilbertScalarExtension
+import Mathlib.Algebra.CharZero.Infinite
 /-! Exact affine normalization degree for algebraically independent linear
 coefficients. All fraction fields are fraction fields of the displayed affine
 coordinate ring. -/

@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceTangentEquality
-public import CCDN.Determinant.LocalizationAdicLayer
 public import CCDN.Determinant.QuotientAdicLayer
+public import CCDN.Determinant.SingularTangent
+import Mathlib.Algebra.MvPolynomial.Basic
+import Mathlib.RingTheory.LocalRing.Defs
+import Mathlib.RingTheory.MvPolynomial.Ideal
 /-! The coordinate ring of a hypersurface and its origin ideal. The
 origin-adic layers of the coordinate ring are the polynomial
 truncation layers. -/

@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.MvPolynomial.Localization
-public import Mathlib.RingTheory.Localization.LocalizationLocalization
 public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.RingTheory.Localization.LocalizationLocalization
+import Mathlib.RingTheory.MvPolynomial.Localization
 
 /-! Enlarging the coefficient domain to its fraction field does not change
 the fraction field of a polynomial ring. The compatible polynomial map

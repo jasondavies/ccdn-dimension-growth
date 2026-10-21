@@ -5,8 +5,18 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.BoundedMinorSpecialization
-public import CCDN.Center.CoordinateGridAvoidance
+public import Mathlib.Algebra.MvPolynomial.Degrees
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.Ordinal
+import Mathlib.Tactic.NormNum.NatLog
+import Mathlib.Tactic.NormNum.ModEq
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.NormNum.Irrational
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
+import Mathlib.Tactic.Echelon.Zsqrtd
+import Mathlib.NumberTheory.Chebyshev
+import ArithmeticHeights.Absolute
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 /-! Each entry of a matrix occurs to degree at most one in every maximal
 minor. Substituting maximal minors therefore preserves a polynomial's degree
 bound in every individual matrix coordinate, independently of the row count. -/

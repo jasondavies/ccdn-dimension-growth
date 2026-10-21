@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.PrimeScaledAffineAuxiliary
-public import CCDN.Algebra.AffineScalingExponent
-public import CCDN.Auxiliary.ScalingPrime
+public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Auxiliary.ScaledHomogenization
+import CCDN.Algebra.AffineScalingExponent
+import CCDN.Auxiliary.PrimeScaledAffineAuxiliary
+import CCDN.Height.HypersurfaceHeightTransfer
+import CCDN.Height.ScaledHypersurfaceHeight
 /-! The coefficient-sensitive affine degree saving for a prime comparable
 to the box radius. The leading homogeneous height belongs to the original equation. -/
 

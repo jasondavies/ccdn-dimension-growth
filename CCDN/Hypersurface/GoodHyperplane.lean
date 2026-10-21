@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.EffectiveHyperplaneAvoidance
-public import CCDN.Algebra.IntegerPolynomialAvoidance
+public import CCDN.Hypersurface.GraphHyperplaneRestriction
+import CCDN.Algebra.IntegerPolynomialAvoidance
+import CCDN.Hypersurface.EffectiveHyperplaneAvoidance
+import CCDN.Hypersurface.GoodHyperplaneReindex
 /-! A good integer hyperplane normal of height at most d³, obtained from
 the universal Noether detector and integer-grid avoidance. -/
 

@@ -5,9 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AffineChartAbsoluteAuxiliary
-public import CCDN.Auxiliary.LiteralAffineScaling
-public import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
+public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Auxiliary.LiteralAffineBadPrimes
+public import CCDN.Auxiliary.ScaledHomogenization
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Auxiliary.AffineChartAbsoluteAuxiliary
+import CCDN.Auxiliary.LiteralAffineScaling
+import CCDN.Auxiliary.ScaledAuxiliaryCount
+import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
+import CCDN.Determinant.AffineCongruenceDeterminant
 /-! Auxiliary polynomials for prime-scaled and ordinary homogeneous
 models with the literal affine bad-prime factor. The finite excluded-prime
 set, geometric good reductions, primitive point family and affine pullback

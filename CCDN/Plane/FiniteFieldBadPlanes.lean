@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.UniversalPlaneBadWitness
-public import CCDN.Plane.FiniteFieldPolynomialZeros
+import CCDN.Plane.FiniteFieldPolynomialZeros
 /-! Counting all affine-plane parameter choices whose section drops degree
 or is not geometrically irreducible. This includes zero restrictions, but
 incidence averaging uses a sharper separate bound on those. -/

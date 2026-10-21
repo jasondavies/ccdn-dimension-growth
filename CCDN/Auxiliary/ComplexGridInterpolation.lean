@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.IntegerGridInterpolation
-public import Mathlib.Analysis.Complex.Polynomial.Basic
-public import Mathlib.Data.Nat.Choose.Sum
-public import Mathlib.Data.Nat.Factorial.BigOperators
+public import Mathlib.Algebra.Polynomial.Degree.Defs
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.Analysis.Complex.Norm
+import Mathlib.LinearAlgebra.Lagrange
+import ArithmeticHeights.Absolute
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 
 /-! Sharp coefficient control from the integer grid. The absolute coefficient
 sum of each Lagrange basis polynomial is at most a binomial coefficient;

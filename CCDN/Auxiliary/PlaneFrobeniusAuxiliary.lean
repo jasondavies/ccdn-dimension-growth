@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PlaneTangentMultiplicity
-public import Mathlib.FieldTheory.Finite.Basic
+public import CCDN.Noether.FormalPlaneDifferentiation
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import CCDN.Determinant.PlaneTangentMultiplicity
+import CCDN.Noether.FormalBranchFaithful
+import CCDN.Noether.FormalBranchOrder
+import Mathlib.FieldTheory.Finite.Basic
 
 /-! Frobenius auxiliary polynomials: noncancellation, tangent-derivative
 constraints, and their resulting count of smooth rational points. -/

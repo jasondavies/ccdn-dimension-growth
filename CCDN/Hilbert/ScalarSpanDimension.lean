@@ -5,7 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.InfinitySection
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Finiteness.Defs
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 /-! Extending the scalars of the span of a linear image cannot increase its
 dimension beyond the dimension of its source. -/
 

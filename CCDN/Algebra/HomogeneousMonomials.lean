@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.MonomialDimension
 public import CCDN.Auxiliary.Interpolation
-public import CCDN.ForMathlib.MvPolynomial
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Mathlib.Data.Sym.Card
 /-! Complete homogeneous monomial lists, their exact cardinalities, and the
 corresponding polynomial-space dimensions. -/
 

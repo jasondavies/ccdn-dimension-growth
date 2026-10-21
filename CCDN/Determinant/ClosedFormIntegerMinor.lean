@@ -5,9 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.ClosedFormRank
 public import CCDN.Noether.ClosedFormBaseChange
-public import CCDN.ForMathlib.MatrixRank
+public import Mathlib.LinearAlgebra.Matrix.Rank
 /-! A nonzero integer minor of the closed-form coefficient matrix.
 Rank drop after reduction forces divisibility of this same integer. The
 geometric rank-drop criterion and the height bound are separate obligations. -/

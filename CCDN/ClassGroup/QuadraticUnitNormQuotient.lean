@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.NumberFieldUnitSquareClasses
-public import Mathlib.NumberTheory.NumberField.Norm
+public import Mathlib.NumberTheory.NumberField.Units.DirichletTheorem
+import CCDN.ClassGroup.NumberFieldUnitSquareClasses
 
 /-! The unit-norm quotient in a quadratic extension is finite,
 with a uniform bound depending only on the base-field degree. Squares

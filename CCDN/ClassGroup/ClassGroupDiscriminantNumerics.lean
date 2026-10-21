@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.Analysis.Real.Sqrt
 
 /-! The exact discriminant exponent obtained from a square-root norm-curve
 count and the `n−1` dimensional translation-class count. -/

@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.UnscaledModelCount
-public import CCDN.Height.AffineBoxRanges
-public import CCDN.Plane.ScaledPlaneSmallCoefficient
+public import CCDN.Auxiliary.ScalingPrime
+public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Height.PrimitiveIntegerPolynomial
+public import CCDN.Plane.Plane
+import CCDN.Auxiliary.UnscaledModelCount
+import CCDN.Height.AffineBoxRanges
+import CCDN.Plane.ScaledPlaneSmallCoefficient
 /-! Combining the scaling-prime, large-coefficient and small-box branches.
 The plane theorem assumes the sharp finite-field count and a nonzero
 constant term; a later translation removes the second hypothesis. -/

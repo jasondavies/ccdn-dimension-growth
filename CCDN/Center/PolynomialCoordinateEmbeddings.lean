@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.BoundedPrimitiveElement
-public import Mathlib.RingTheory.MvPolynomial.Localization
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Localization.FractionRing
+import Mathlib.Algebra.MvPolynomial.Eval
 
 /-! Original affine coordinates separate embeddings of the function field
 of a parameter-polynomial coordinate ring when the coefficient field

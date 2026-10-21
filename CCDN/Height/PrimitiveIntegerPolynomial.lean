@@ -5,9 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousRankDichotomy
-public import Mathlib.Algebra.GCDMonoid.Finset
-public import Mathlib.Algebra.MvPolynomial.Nilpotent
+public import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.Algebra.MvPolynomial.Nilpotent
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.Data.Nat.Factorial.DoubleFactorial
+import Mathlib.RingTheory.Localization.Integer
+import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import Mathlib.Algebra.EuclideanDomain.Int
+import Mathlib.RingTheory.PrincipalIdealDomain
 
 /-! Primitive integer multivariate equations, denominator clearing, and
 reflection of divisibility from rational coefficients for primitive equations. -/

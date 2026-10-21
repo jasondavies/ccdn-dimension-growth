@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.ModularOriginGenerators
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.RingTheory.MvPolynomial.Ideal
+import CCDN.Determinant.ModularOriginGenerators
+import Mathlib.Tactic.LinearCombination
 /-! Uniform finite p-adic approximation by weighted local generators
 at a possibly singular plane-curve residue point. -/
 

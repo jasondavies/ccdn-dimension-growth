@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.HilbertBoundedEliminationStep
-public import CCDN.Noether.GenericPlaneStretch
+import CCDN.Noether.GenericPlaneStretch
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+import Mathlib.Tactic.FieldSimp
 /-! Bounded integral linear elimination with integer coefficients.
 Scaling the retained coordinates by the nonzero pivot preserves integrality. -/
 

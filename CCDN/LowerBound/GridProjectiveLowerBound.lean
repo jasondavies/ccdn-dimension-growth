@@ -5,9 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.LowerBound.IntegerGridLowerBound
-public import CCDN.Projection.ProjectiveProjectionCount
-public import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
+public import CCDN.Projection.ProjectivePlaneProjection
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
+import CCDN.Height.ProjectiveIntegerHeight
+import CCDN.LowerBound.GridCurveConstruction
+import CCDN.LowerBound.IntegerGridLowerBound
+import CCDN.Projection.ProjectiveProjectionCount
+import Mathlib.Algebra.Order.Star.Rat
 /-! The integer grid gives distinct bounded-height rational points on the
 irreducible projective closure. This is the geometric input to CCDN
 Proposition 5, including the stated degree and the exact grid size. -/

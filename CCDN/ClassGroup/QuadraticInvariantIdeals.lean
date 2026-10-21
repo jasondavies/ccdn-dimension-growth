@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.QuadraticNormConjugation
-public import Mathlib.NumberTheory.NumberField.Discriminant.Different
-public import Mathlib.NumberTheory.RamificationInertia.Galois
-public import Mathlib.RingTheory.DedekindDomain.Factorization
+public import Mathlib.NumberTheory.NumberField.Basic
+public import Mathlib.RingTheory.RamificationInertia.Inertia
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+import CCDN.ClassGroup.QuadraticNormConjugation
+import Mathlib.NumberTheory.RamificationInertia.Galois
+import Mathlib.RingTheory.DedekindDomain.Factorization
 
 /-! Prime ideal orbits in a quadratic number-field extension.
 These are the arithmetic inputs for factoring invariant ideals into

@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.LowerBound.GridMultivariate
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import CCDN.Height.Box
+import CCDN.LowerBound.GridMultivariate
+import CCDN.Projection.ShearNormalization
+import Mathlib.Algebra.Order.Star.Rat
+import Mathlib.Algebra.MvPolynomial.CommRing
 
 /-! Section 6, Lemma 6.1: an absolutely irreducible rational equation
 of prescribed degree vanishes on the entire stated integer box. -/

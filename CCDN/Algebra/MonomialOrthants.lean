@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.MonomialDimension
-public import Mathlib.Data.Finsupp.PWO
-public import Mathlib.Order.WellFoundedSet
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Algebra.Group.End
+public import Mathlib.Order.UpperLower.Basic
+import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-! A lower set of exponent vectors is a finite disjoint union of translated
 coordinate orthants. Dickson's lemma supplies a threshold above which each

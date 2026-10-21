@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceResidueCover
-public import CCDN.Surface.PrimeWindowSubpower
+import CCDN.Surface.PrimeWindowSubpower
+import Mathlib.Algebra.Order.Star.Real
 /-! A degree-dependent logarithmic prime window discharges all height
 conditions of the surface residue cover. Its complete residual point count
 is O(B), uniformly in coefficients, auxiliaries and initial curve families. -/

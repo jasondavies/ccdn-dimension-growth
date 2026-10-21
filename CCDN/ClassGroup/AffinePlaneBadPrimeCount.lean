@@ -6,7 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
-public import CCDN.Auxiliary.HypersurfaceRankArchimedean
+public import CCDN.Plane.Plane
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Height.ScaledHypersurfaceHeight
+import CCDN.Plane.Bezout
 /-! A logarithm-free plane-curve estimate in terms of the
 geometric bad-prime factor. Uniformly bounded bad-prime factors therefore
 give a coefficient-independent logarithm-free counting theorem. -/

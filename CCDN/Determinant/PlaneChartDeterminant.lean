@@ -5,8 +5,17 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HomogeneousDeterminantComparison
-public import CCDN.Determinant.SingularDeterminantCutoff
+public import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.Ordinal
+import Mathlib.Tactic.NormNum.NatLog
+import Mathlib.Tactic.NormNum.ModEq
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.NormNum.Irrational
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
+import Mathlib.Tactic.Echelon.Zsqrtd
+import Mathlib.Algebra.Order.Floor.Semifield
+import Mathlib.Data.Nat.Factorial.DoubleFactorial
 /-! The affine chart `z = 1` of a homogeneous plane equation. -/
 
 @[expose] public section

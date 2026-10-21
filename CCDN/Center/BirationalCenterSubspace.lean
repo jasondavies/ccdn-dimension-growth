@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.CenterSubspaceQuotient
-public import CCDN.Algebra.PolynomialPredicates
+import CCDN.Center.CenterMinorMatrix
 /-! The birational-center condition depends only on the row span, so it
 defines a locus of center subspaces. -/
 

@@ -5,9 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedIntegerNormalization
-public import CCDN.Projection.LinearNormalizationFiberCount
-public import CCDN.Height.ProjectiveLinearCountTransfer
+public import CCDN.Algebra.IntegerLinearForms
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Height.ProjectiveBox
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Height.ProjectiveLinearCountTransfer
+import CCDN.Projection.BoundedIntegerNormalization
+import CCDN.Projection.LinearNormalizationFiberCount
+import CCDN.Projection.ProjectiveFiniteFibers
 /-! The zero-dimensional case of projective dimension growth. A
 one-parameter normalization sends every projective point to the unique
 point of projective zero-space; its affine fiber bound controls

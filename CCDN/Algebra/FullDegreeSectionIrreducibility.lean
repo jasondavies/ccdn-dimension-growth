@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneSectionBounds
+public import CCDN.Plane.FiniteFieldBadPlanes
+import CCDN.Plane.PlaneSectionBounds
+import Mathlib.Algebra.MvPolynomial.Nilpotent
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! An irreducible section retaining the full total degree forces the
 original equation to be irreducible. Degree additivity prevents either
 nonconstant ambient factor from disappearing under restriction. -/

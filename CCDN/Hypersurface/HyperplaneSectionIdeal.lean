@@ -5,9 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.UniversalHyperplaneRestriction
-public import Mathlib.RingTheory.Polynomial.Ideal
-public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+public import CCDN.Hypersurface.GraphHyperplaneRestriction
+import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 
 /-! The homogeneous intersection ideal of a hypersurface and a
 hyperplane, and its graph-coordinate presentation. -/

@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.LatticeMinimaFlag
-public import CCDN.ClassGroup.LatticeSeparatedVolume
-public import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
+public import Mathlib.Algebra.Module.ZLattice.Covolume
+import CCDN.ClassGroup.LatticeMinimaFlag
+import CCDN.ClassGroup.LatticeSeparatedVolume
+import Mathlib.MeasureTheory.Measure.Haar.InnerProductSpace
 
 /-! A uniform product-of-minima bound from Blichfeldt's principle.
 The constant n^n is sufficient for the number-field lattice application. -/

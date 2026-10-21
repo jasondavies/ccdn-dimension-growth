@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.Localization.LocalizationLocalization
 public import Mathlib.RingTheory.Localization.FractionRing
+import Mathlib.RingTheory.Localization.LocalizationLocalization
 
 /-! A nonzero localization of a domain embeds compatibly in any
 fraction field of that domain and has the same fraction field. -/

@@ -6,7 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HypersurfaceLocalDivisor
-public import CCDN.Determinant.InitialFormMultiplication
+import CCDN.Determinant.BlockDeterminant
+import CCDN.Determinant.HypersurfaceAggregation
+import CCDN.Determinant.InitialFormMultiplication
+import CCDN.Hypersurface.HypersurfaceCountNormalization
+import CCDN.Hypersurface.ProjectiveHypersurfaceCount
+import Mathlib.Tactic.Monotonicity.Lemmas
 /-! Sharp determinant divisibility on an open part of a reduced hypersurface.
 A factor supported outside all supplied residue points does not contribute
 residue classes. In particular, components at infinity created by a degree

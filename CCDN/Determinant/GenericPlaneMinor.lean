@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.GenericPlaneSmoothness
-public import CCDN.Determinant.SmoothPlaneMinor
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Determinant.PlaneMultiplicity
+import CCDN.Determinant.SmoothPlaneMinor
 /-! A nonzero polynomial determinant in the generic slope parameters. For a
 positioned irreducible equation with a smooth origin, the minor is constructed
 over the parameter polynomial ring, by descent from its fraction field. -/

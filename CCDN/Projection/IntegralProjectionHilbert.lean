@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertTranscendenceBasis
-public import CCDN.Hilbert.HilbertLinearCoordinates
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.HilbertTranscendenceBasis
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 /-! Integral linear projections preserve Hilbert dimension and
 do not increase its multiplicity. -/
 

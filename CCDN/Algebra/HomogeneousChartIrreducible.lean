@@ -6,6 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousChart
+import CCDN.Determinant.SingularDeterminant
+import Mathlib.Algebra.MvPolynomial.Nilpotent
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! Dehomogenization preserves degree and irreducibility when the
 homogenizing coordinate does not divide the homogeneous equation. -/
 

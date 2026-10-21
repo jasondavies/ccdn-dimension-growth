@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Curve.Curve
+public import CCDN.Height.ProjectiveBox
 /-! Coordinate permutations preserve projective heights, homogeneous
 Hilbert functions, and prime coordinate ideals. -/
 

@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.MinorCoordinateDegree
-public import CCDN.Height.ProjectiveZeroLocus
-public import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.Height.ProjectiveZeroLocus
 
 /-! The sharp numerical specialization in CCDN Lemma 5.3. A
 nonvanishing homogeneous condition on Plücker coordinates has a full-rank

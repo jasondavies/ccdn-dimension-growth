@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.PolynomialDeformation
-public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.Algebra.Polynomial.Coeff
+import CCDN.Center.PolynomialDeformation
 
 /-! Simultaneous polynomial deformation in arbitrarily many parameters.
 Injectivity is detected by specialization of all parameters to zero. -/

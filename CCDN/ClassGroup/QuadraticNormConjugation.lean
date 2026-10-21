@@ -5,9 +5,21 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.FieldTheory.Galois.Basic
-public import Mathlib.RingTheory.Norm.Transitivity
-public import Mathlib.Tactic
+public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Norm.Defs
+import Mathlib.Tactic.Measurability.Init
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.Ordinal
+import Mathlib.Tactic.NormNum.NatLog
+import Mathlib.Tactic.NormNum.ModEq
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.NormNum.Irrational
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
+import Mathlib.Tactic.Echelon.Zsqrtd
+import Mathlib.Tactic.Basify
+import Mathlib.FieldTheory.Fixed
+import Mathlib.FieldTheory.Galois.Basic
+import Mathlib.RingTheory.Norm.Transitivity
 
 /-! Explicit quadratic conjugation formulas. These identify the
 two-element Galois group, the field norm, and its fixed field; they

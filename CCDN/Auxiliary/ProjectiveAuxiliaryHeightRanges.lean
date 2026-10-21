@@ -5,8 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceProjectiveAuxiliary
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Auxiliary.HypersurfaceBadPrimeComparison
+public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
+public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.HypersurfaceLargeHeightDegree
+public import CCDN.Height.HypersurfaceSmallHeightDegree
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Auxiliary.HypersurfaceLargeHeightAuxiliary
+import CCDN.Auxiliary.HypersurfaceProjectiveAuxiliary
 /-! The two positioned auxiliary estimates for the entire bounded projective
 zero set. The small-height logarithmic term has coefficient exactly one. -/
 

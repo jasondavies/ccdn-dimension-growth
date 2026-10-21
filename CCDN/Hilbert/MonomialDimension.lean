@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FilteredIntersection
-public import Mathlib.Data.Sym.Card
-public import Mathlib.Data.Finsupp.Multiset
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.MvPolynomial.Basic
+import Mathlib.Data.Sym.Card
+import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 
 /-!
 # Dimension of bounded-degree polynomial spaces

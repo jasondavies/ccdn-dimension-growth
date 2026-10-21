@@ -5,7 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceRankProfile
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Data.Nat.Choose.Basic
+import CCDN.Auxiliary.HypersurfaceRankProfile
+import Mathlib.Tactic.Positivity
+import Mathlib.Tactic.Linarith
+import Mathlib.Tactic.FieldSimp
 /-! The homogeneous kernel-to-rank ratio differs from its leading term by
 at most 1/M. Exact binomial identities avoid a formal asymptotic expansion. -/
 

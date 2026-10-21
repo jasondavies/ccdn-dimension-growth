@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceCongruenceAuxiliary
-public import CCDN.Auxiliary.HypersurfaceRankArchimedean
+import CCDN.Auxiliary.HypersurfaceRankArchimedean
+import Mathlib.Algebra.Order.Star.Real
 /-! Numerical degree selection for the smooth-congruence auxiliary on a
 surface. All constants are independent of coefficients and box radius. -/
 

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.InfinityEvaluationSpan
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 /-! Finite interpolation in a projective affine chart can be performed by
 homogeneous polynomials of any sufficiently large common degree. -/
 

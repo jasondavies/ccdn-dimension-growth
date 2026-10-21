@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.TopFormSurfaceNonlinear
-public import CCDN.Surface.SurfaceDegreeOneCount
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Plane.Plane
+import CCDN.Surface.SurfaceDegreeOneCount
+import CCDN.Surface.TopFormSurfaceNonlinear
 /-! The corrected large-degree surface bound. The auxiliary section's
 nonlinear curves and its degree-one components together account
 for every bounded integer zero of the original surface. -/

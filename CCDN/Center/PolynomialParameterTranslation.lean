@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.MultivariateDeformation
+public import Mathlib.Algebra.MvPolynomial.Eval
+import CCDN.Center.MultivariateDeformation
+import Mathlib.Algebra.MvPolynomial.CommRing
 /-! Specialization at an arbitrary parameter point detects injectivity of
 a simultaneous polynomial deformation. -/
 

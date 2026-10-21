@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.BoundedCenterProjection
+public import CCDN.Height.ProjectiveBox
+import CCDN.Projection.BoundedLinearProjection
 /-! The intrinsic projective height of the projection from a bounded
 integer center. The common-denominator cofactor construction gives a stronger
 bound than the exponent in CCDN (5-5), without the incorrect row-separation

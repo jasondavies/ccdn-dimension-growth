@@ -6,8 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.CenterResultantForms
-public import CCDN.Center.BlockResultantIrreducibility
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.BlockResultantIrreducibility
+import CCDN.Center.ChowProjectionCriterion
+import CCDN.Center.ChowProjectionPower
+import CCDN.Center.ProjectiveChowWithoutChart
+import CCDN.Projection.IntegralProjectionHilbert
 /-! The selected-row derivative resultant detects irreducibility of a
 Chow restriction. A nonzero restriction is a power of the constructed image
 Chow equation, so separability is exactly the absence of a repeated power. -/

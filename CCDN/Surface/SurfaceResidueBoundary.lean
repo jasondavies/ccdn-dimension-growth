@@ -6,9 +6,13 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceCongruenceFamily
-public import CCDN.Surface.SmoothPrimeWindow
-public import CCDN.Determinant.ResidueSubsetBoundary
-public import CCDN.Surface.SurfaceCurveCrossing
+public import CCDN.Curve.Curve
+public import CCDN.Surface.CongruencePrimeWindow
+public import Mathlib.RingTheory.Ideal.Height
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Determinant.ResidueSubsetBoundary
+import CCDN.Surface.SmoothPrimeWindow
+import CCDN.Surface.SurfaceCurveCrossing
 /-! A nonsingular point on a large-degree initial curve must cross a
 proper auxiliary section along a one-prime deletion edge. This constructs
 the residual cover from smooth reductions and auxiliaries. -/

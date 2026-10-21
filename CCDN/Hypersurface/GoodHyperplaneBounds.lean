@@ -6,9 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
-public import CCDN.Plane.HyperplanePlaneAvoidance
-public import CCDN.Algebra.ThreeRowHyperplane
-public import CCDN.Plane.IntegerPlaneHeight
+import CCDN.Algebra.ThreeRowHyperplane
+import CCDN.Plane.HyperplanePlaneAvoidance
+import CCDN.Plane.IntegerPlaneHeight
+import Mathlib.Algebra.BigOperators.Field
 /-! Constructing a good rational hyperplane with a bounded integer normal.
 The degree-nine bound is a polynomial replacement for the precise avoidance
 polynomial in corrected CCDN Lemma 4.3.7. -/

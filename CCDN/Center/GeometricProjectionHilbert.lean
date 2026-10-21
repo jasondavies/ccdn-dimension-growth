@@ -5,11 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowProjectionBaseChange
-public import CCDN.Projection.ProjectionScalarExtension
-public import CCDN.Hilbert.HilbertScalarExtension
-public import CCDN.Center.HomogeneousPermutationBaseChange
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ChowLinearSpecialization
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.BalancedParameterFiniteness
+import CCDN.Center.ProjectiveIncidenceClosed
+import CCDN.Hilbert.HilbertScalarExtension
+import CCDN.Hilbert.HomogeneousPrimeComponents
+import CCDN.Projection.ProjectionScalarExtension
 /-! The matrix image commutes with coefficient extension and has
 the same Hilbert polynomial after extension. Geometric center avoidance
 also proves integrality over the original coefficient field. -/

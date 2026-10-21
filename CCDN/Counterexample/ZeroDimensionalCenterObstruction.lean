@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Counterexample.OriginProjectivePoint
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Curve.Curve
+public import CCDN.Height.ProjectiveBox
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Counterexample.OriginProjectivePoint
 /-! The strict degree bound in the literal CCDN Lemma 5.2 fails at
 dimension zero and degree one. A point in P² is a geometrically integral
 degree-one variety; its point centers cannot include that point. Any

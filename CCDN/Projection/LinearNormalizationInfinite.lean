@@ -5,10 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedLinearElimination
-public import CCDN.Projection.IntegralProjectionHilbert
-public import CCDN.Hilbert.ProperHilbertDimension
-public import CCDN.Hilbert.FilteredHilbertEquiv
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Auxiliary.HypersurfaceGoodDirection
+import CCDN.Auxiliary.HypersurfacePositioning
+import CCDN.Hilbert.FilteredHilbertEquiv
+import CCDN.Hilbert.HilbertFullDimension
+import CCDN.Hilbert.ProperHilbertDimension
+import CCDN.Projection.BoundedLinearElimination
+import CCDN.Projection.IntegralProjectionHilbert
 /-! Homogeneous-linear Noether normalization over an infinite field.
 The parameter forms, integrality and algebraic independence are constructed
 from the prime ideal and its filtered Hilbert dimension. -/

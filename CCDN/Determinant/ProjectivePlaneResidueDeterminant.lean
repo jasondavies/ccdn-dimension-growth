@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ProjectiveReduction
-public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
+import CCDN.Determinant.BlockDeterminant
+import CCDN.Determinant.ResidueAggregation
 /-! The residue partition and local multiplicities of a homogeneous
 plane curve supply a global single-prime determinant divisor. The residue
 points and their multiplicities are the case `n = 0` of the hypersurface

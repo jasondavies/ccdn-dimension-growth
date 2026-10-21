@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HeightDeterminant
-public import CCDN.Determinant.PlaneChartDeterminant
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Algebra.HomogeneousRankDichotomy
 /-! Quantitative degree control from the plane determinant comparison. -/
 
 @[expose] public section

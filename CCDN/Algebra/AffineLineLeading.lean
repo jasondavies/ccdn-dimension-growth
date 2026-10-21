@@ -5,9 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceGoodDirection
-public import Mathlib.Algebra.Polynomial.Degree.Lemmas
-public import Mathlib.Algebra.Polynomial.BigOperators
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-! The coefficient of highest possible degree on an affine line depends only
 on the top homogeneous component and the direction, not the base point. -/

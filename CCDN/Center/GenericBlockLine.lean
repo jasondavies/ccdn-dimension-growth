@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.WeightedPolynomialTop
-public import CCDN.Algebra.AffineLineLeading
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+import CCDN.Algebra.AffineLineLeading
 /-! Restrict a selected block of variables to a generic affine line.
 The line parameter has exactly the weighted degree of the selected block. -/
 

@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.PlaneBadPrimes
 public import CCDN.Determinant.SingularDeterminantCutoff
 import all ArithmeticHeights.BombieriVaaler
+import CCDN.Auxiliary.PlaneBadPrimes
 
 /-! The determinant lower bound, with the bad-prime input given by the
 coefficient-controlled witness. The sharp finite-field point estimate is an

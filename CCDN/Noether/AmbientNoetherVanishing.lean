@@ -6,8 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.AmbientNoetherForms
-public import CCDN.Noether.UniversalPlaneBadWitness
-public import Mathlib.Algebra.MvPolynomial.Nilpotent
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Noether.EulerPairSpecialization
+import CCDN.Noether.EulerProductVanishing
+import CCDN.Noether.UniversalPlaneBadWitness
+import CCDN.Noether.UniversalPlaneWitness
+import Mathlib.Algebra.MvPolynomial.Nilpotent
 
 /-! The constructed ambient coefficient forms vanish on every geometrically
 reducible homogeneous equation, in every characteristic. -/

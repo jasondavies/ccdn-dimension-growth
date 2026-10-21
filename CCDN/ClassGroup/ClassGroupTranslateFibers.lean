@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.OddDegreeNormCurves
 public import CCDN.Plane.Plane
+public import CCDN.ClassGroup.ClassGroupBoundedGenerators
+public import CCDN.ClassGroup.ClassGroupNormPolynomial
 /-! Concrete integer-translation fibers of the bounded square-norm set
 inject into integral points on the two signed norm curves. -/
 

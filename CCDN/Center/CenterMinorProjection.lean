@@ -5,10 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ForMathlib.MatrixRank
-public import CCDN.Center.ChowLinearSpecialization
-public import Mathlib.Data.Fin.Embedding
-public import CCDN.Algebra.PolynomialPredicates
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.ForMathlib.MatrixRank
 /-! The literal center projection from Section 5: its coordinates are the
 maximal minors obtained by adjoining the point as the first row of a center
 matrix. Its kernel is exactly the span of the independent center rows, and

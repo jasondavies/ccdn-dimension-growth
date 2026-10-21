@@ -5,7 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AuxiliaryLargeHeightRatios
+public import CCDN.Auxiliary.HypersurfaceRankLogarithm
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Auxiliary.AuxiliaryLargeHeightRatios
+import CCDN.Auxiliary.HypersurfaceKernelRatio
+import CCDN.Auxiliary.HypersurfaceRankRoots
 /-! The large-height auxiliary-degree calculation eliminates both the radius
 and coefficient height, leaving O_r(d^(4-1/r)). -/
 

@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AuxiliaryPolynomial
-public import Mathlib.Algebra.Order.Ring.Star
-public import Mathlib.Algebra.Order.Star.Int
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+import Mathlib.Data.Nat.Factorial.DoubleFactorial
+import Mathlib.Algebra.Order.Star.Int
+import Mathlib.Algebra.Order.Ring.Abs
 
 /-!
 # Small coefficients exclude polynomial multiples

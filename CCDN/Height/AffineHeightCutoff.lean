@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.HypersurfacePositionHeight
-public import Mathlib.Data.Nat.Choose.Bounds
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Height.HypersurfacePositionHeight
 
 /-! A polynomial box cutoff from the homogeneous coefficient-height bound.
 The constants are explicit; only their dependence on dimension is needed in

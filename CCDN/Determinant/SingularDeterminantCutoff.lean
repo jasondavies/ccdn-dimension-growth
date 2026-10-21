@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PrimeAggregation
 import all ArithmeticHeights.BombieriVaaler
+public import CCDN.Analysis.PrimeCutoff
+public import CCDN.Determinant.SingularReduction
+import CCDN.Determinant.PrimeAggregation
+import CCDN.Determinant.SingularDeterminant
 
 /-! Fourth-power cutoff removes the polynomial-in-degree error from the
 singular determinant prime sum, retaining an explicit logarithmic cutoff cost. -/

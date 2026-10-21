@@ -5,8 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.SingularApproximation
-public import CCDN.Determinant.SmoothLocalDeterminant
+public import CCDN.Determinant.SingularTangent
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.RingTheory.MvPolynomial
+import CCDN.Determinant.LocalDeterminant
+import CCDN.Determinant.ModularOriginGenerators
+import CCDN.Determinant.SingularApproximation
+import CCDN.Determinant.SmoothLocalDeterminant
 /-! Local determinant divisibility in arbitrary dimension. The exponent is
 computed from the cumulative dimensions of the origin-adic layers. -/
 

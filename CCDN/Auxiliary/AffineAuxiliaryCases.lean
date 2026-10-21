@@ -6,8 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PrimeScaledAffineMinimum
-public import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
-public import CCDN.Algebra.UnscaledAffineMinimum
+import CCDN.Algebra.UnscaledAffineMinimum
+import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
+import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
+import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
+import CCDN.Height.AffineHeightCutoff
+import CCDN.Height.ScaledHypersurfaceHeight
 /-! All box and coefficient cases for the affine auxiliary theorem when
 the constant coefficient is nonzero. -/
 

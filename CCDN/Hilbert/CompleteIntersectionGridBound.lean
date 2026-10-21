@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.LowerBound.GridPointInterpolation
-public import CCDN.Algebra.BinomialSectionBound
-public import Mathlib.Data.Nat.Choose.Bounds
+public import Mathlib.Algebra.MvPolynomial.Degrees
+import CCDN.Algebra.BinomialSectionBound
+import CCDN.LowerBound.GridPointInterpolation
+import Mathlib.Data.Nat.Choose.Bounds
 
 /-! A coordinate-grid bound for a proper complete intersection. The
 constant depends only on the ambient dimension; the degree dependence

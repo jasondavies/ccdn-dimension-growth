@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HomogeneousAuxiliary
-public import Mathlib.RingTheory.Localization.Integer
+public import CCDN.Algebra.HomogeneousRank
+public import CCDN.Hilbert.HomogeneousHilbert
+import CCDN.Algebra.HomogeneousEvaluation
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Exact evaluation rank when all homogeneous vanishing relations are multiples
 of the defining equation, and the resulting auxiliary-polynomial dichotomy. -/

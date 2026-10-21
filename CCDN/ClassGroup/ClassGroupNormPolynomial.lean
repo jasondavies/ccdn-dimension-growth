@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupBoundedGenerators
-public import CCDN.Plane.PlaneGridHeight
 public import Mathlib.LinearAlgebra.Charpoly.Basic
+public import CCDN.Noether.BivariateTotalDegree
+public import Mathlib.NumberTheory.NumberField.Basic
+import CCDN.Plane.PlaneGridHeight
 
 /-! Integral norm polynomials and the two signed plane equations
 needed to count square-norm generators. The norm polynomial retains the full

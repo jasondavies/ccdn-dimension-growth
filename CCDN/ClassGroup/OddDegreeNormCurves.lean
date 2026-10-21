@@ -6,9 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.ClassGroupNormPolynomial
-public import Mathlib.FieldTheory.KummerPolynomial
-public import Mathlib.FieldTheory.RatFunc.Degree
-public import Mathlib.RingTheory.Polynomial.GaussLemma
+import Mathlib.FieldTheory.RatFunc.Degree
+import Mathlib.RingTheory.Polynomial.IsIntegral
 
 /-! The full odd-degree norm polynomial gives an absolutely irreducible
 double-cover equation. No squarefree-part substitution is made. -/

@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.NormPolynomialSubfield
-public import CCDN.ClassGroup.OddDegreeNormCurves
+public import CCDN.ClassGroup.ClassGroupNormPolynomial
+import CCDN.ClassGroup.NormPolynomialSubfield
+import CCDN.Projection.ShearNormalization
+import Mathlib.RingTheory.Polynomial.IsIntegral
 /-! A double-cover polynomial with an odd root multiplicity is
 irreducible. Applied to the norm-polynomial factorization, this detects
 the even-index subfield exceptions. -/

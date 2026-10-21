@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.GoodHyperplane
-public import CCDN.Hypersurface.IntegerGoodHyperplaneSlices
 public import CCDN.Algebra.PolynomialPredicates
+import CCDN.Hypersurface.GoodHyperplane
+import CCDN.Hypersurface.IntegerGoodHyperplaneSlices
 /-! Integer equations for every parallel level of a good hyperplane whose
 normal has cubic degree height. -/
 

@@ -5,12 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.CenterDetectorBounds
-public import CCDN.Center.ZeroColumnMinorSpecialization
-public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Center.CenterDetectorExtension
-public import CCDN.Center.GoodCenterWitness
-public import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
+public import CCDN.Algebra.ProjectiveClosureIdeal
+public import CCDN.Center.BirationalCenterLocus
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.CenterDetectorBounds
+import CCDN.Center.CenterDetectorExtension
+import CCDN.Center.GoodCenterWitness
+import CCDN.Center.ZeroColumnMinorSpecialization
+import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 /-! Integer good centers with the quadratic row bound from the
 row-resultant detector. Dimension zero is included using its proved degree
 one. Prescribed zero columns of a witness center are preserved, which gives

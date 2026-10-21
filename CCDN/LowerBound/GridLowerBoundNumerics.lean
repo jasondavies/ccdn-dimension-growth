@@ -6,7 +6,15 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.Tactic
+import Mathlib.Tactic.Measurability.Init
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.Ordinal
+import Mathlib.Tactic.NormNum.NatLog
+import Mathlib.Tactic.NormNum.ModEq
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.NormNum.Irrational
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
+import Mathlib.Tactic.Echelon.Zsqrtd
 
 /-! The numerical comparison for CCDN Proposition 5. A square grid with
 floor((d-1)/2)+1 points per side at radius floor((d+1)/4) already gives

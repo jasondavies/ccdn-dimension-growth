@@ -6,6 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.PrimitiveIntegerPolynomial
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! Primitive models preserve the equation's degree and homogeneous grading,
 and integer content removal does not increase coefficient height. -/
 

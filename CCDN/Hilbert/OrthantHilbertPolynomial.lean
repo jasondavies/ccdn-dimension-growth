@@ -7,6 +7,8 @@ module
 
 public import CCDN.Algebra.MonomialOrthants
 public import Mathlib.RingTheory.Polynomial.HilbertPoly
+public import CCDN.Hilbert.MonomialDimension
+import Mathlib.Data.Sym.Card
 
 /-! Counting the finite orthant partition gives an eventual polynomial
 for every lower set of exponent vectors, in arbitrary finite dimension. -/

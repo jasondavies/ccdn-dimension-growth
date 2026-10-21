@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.BlockDeterminant
 import all ArithmeticHeights.BombieriVaaler
 public import Mathlib.Algebra.Polynomial.Derivative
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 
 /-! Divided differences of polynomials, and determinant congruence from
 entrywise congruence. -/

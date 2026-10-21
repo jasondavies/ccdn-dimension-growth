@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.QuotientAdicLayer
+public import CCDN.Noether.NoetherianLocalLayers
 /-! Algebra equivalences preserve ideal-adic layers. -/
 
 @[expose] public section

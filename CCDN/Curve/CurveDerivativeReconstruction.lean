@@ -5,7 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneDeformationRelation
+public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.RingTheory.Algebraic.Defs
+import CCDN.Plane.PlaneDeformationRelation
+import CCDN.Plane.PlaneRelationSpace
+import CCDN.Projection.CurveProjectionDeformation
 /-! A degree-preserving linear plane projection admits reconstruction using
 the partial derivative of its image equation. This bounds the common
 denominator's degree by d-1 without normalization or a genus formula. -/

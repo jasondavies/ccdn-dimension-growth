@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneStepanovBound
-public import Mathlib.Data.Nat.Sqrt
-public import Mathlib.Data.Nat.Choose.Bounds
+public import Aesop.BuiltinRules
+public import Mathlib.Algebra.Group.Nat.Defs
+public import Mathlib.Tactic.ToDual
+import ArithmeticHeights.Absolute
+import Mathlib.Algebra.Order.Star.Int
 
 /-! Integer parameters for the Stepanov construction above the 27*d^4 cutoff. -/
 

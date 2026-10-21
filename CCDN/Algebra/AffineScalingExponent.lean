@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.HypersurfaceHeightTransfer
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-! The prime-scaled height gain gives the affine exponent 1/d^(1/r). -/
 
 @[expose] public section

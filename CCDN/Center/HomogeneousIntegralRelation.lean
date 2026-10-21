@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.HomogeneousProjectionEquation
-public import Mathlib.Algebra.Polynomial.Roots
-public import Mathlib.RingTheory.Polynomial.GaussLemma
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import Mathlib.Algebra.MvPolynomial.Monad
 
 /-! A homogeneous principal relation of an integral linear projection has
 full degree in the extra coordinate. Integrality supplies a monic multiple;

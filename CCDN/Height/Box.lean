@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.Order.Archimedean.Real.Basic
-public import Mathlib.Data.Fintype.BigOperators
 public import Mathlib.Data.Int.Interval
+public import Mathlib.Data.Fintype.Pi
 
 /-!
 # Integral points in real-radius boxes

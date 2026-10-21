@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.DegreePreservingProjectionBox
-public import CCDN.Determinant.PolynomialMapDeterminant
+public import CCDN.Curve.Curve
+import CCDN.Determinant.PolynomialMapDeterminant
+import CCDN.Projection.BoundedDegreePreservingProjection
 /-! Reduce the integral-point count of an arbitrary prime affine curve
 to the proved plane count, using the constructed degree-preserving projection. -/
 

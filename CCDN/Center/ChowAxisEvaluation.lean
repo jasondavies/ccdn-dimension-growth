@@ -5,11 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ClosureNormalizationInfinite
-public import CCDN.Center.FixedCoordinateGenericNormalization
-public import CCDN.Center.ProjectiveChowEquation
-public import CCDN.Center.ChowRowCoordinateDegree
-public import CCDN.Center.ChowDistinguishedVariable
+public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ProjectiveChowIncidence
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.ChowRowCoordinateDegree
+import CCDN.Center.ClosureNormalizationInfinite
+import CCDN.Center.FixedCoordinateGenericNormalization
+import CCDN.Center.HomogeneousProjectionNoBasePoint
+import CCDN.Center.ProjectiveChowEquation
+import CCDN.Center.ProjectiveIncidenceClosed
 /-! A finite normalization retaining X0 supplies a hyperplane tuple outside
 projective incidence whose last hyperplane is X0=0. Consequently the degree
 in its constant coefficient equals the entire last block degree. -/

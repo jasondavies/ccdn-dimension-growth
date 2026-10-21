@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowIncidenceIdeal
-public import CCDN.Center.WeightedPolynomialSubstitution
+public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
+import CCDN.Center.WeightedPolynomialSubstitution
 /-! The incidence elimination ideal is homogeneous separately in
 each block of hyperplane coefficients. -/
 

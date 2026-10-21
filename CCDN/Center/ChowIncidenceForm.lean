@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowIncidencePrincipal
-public import CCDN.Center.PrincipalWeightedHomogeneous
-public import CCDN.Center.ChowIncidenceBaseChange
+public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.ChowIncidenceBaseChange
+import CCDN.Center.ChowIncidencePrincipal
+import CCDN.Center.PrincipalWeightedHomogeneous
 /-! Constructed incidence equations with separate homogeneity and
 geometric irreducibility. -/
 

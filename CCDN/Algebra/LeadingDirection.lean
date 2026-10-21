@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneShear
+public import CCDN.Noether.BivariateTotalDegree
 /-! A bounded integer direction where the highest homogeneous part does not
 vanish. The direction polynomial packages the top-degree coefficients. -/
 

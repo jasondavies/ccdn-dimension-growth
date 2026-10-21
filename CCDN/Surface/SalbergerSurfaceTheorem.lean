@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.ProjectiveSurfaceSalbergerCover
 public import CCDN.Determinant.ProjectiveChartSmoothness
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Projection.ProjectivePlaneProjection
+import CCDN.Surface.ProjectiveSurfaceSalbergerCover
 /-! CCDN Theorem 4.3.5 with projective curve ideals, their projective
 Hilbert degrees, and the homogeneous Jacobian definition of nonsingular
 points in the standard affine chart. -/

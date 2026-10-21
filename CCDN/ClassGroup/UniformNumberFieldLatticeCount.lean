@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.NumberFieldLatticeBox
-public import CCDN.ClassGroup.NumberFieldShortBasis
+import CCDN.ClassGroup.NumberFieldShortBasis
 /-! Uniform finite-radius counts for the ring of integers and its
 integer-translation classes. The required short basis is constructed,
 and every coefficient depends only on the degree. -/

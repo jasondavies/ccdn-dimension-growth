@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.MonomialDimension
-public import Mathlib.FieldTheory.Finite.Basic
+public import CCDN.Hilbert.FilteredIntersection
+import Mathlib.FieldTheory.Finite.Basic
 
 /-! Finite-field interpolation with degree bounded by the ambient dimension
 times q-1, independently of the number of selected points. -/

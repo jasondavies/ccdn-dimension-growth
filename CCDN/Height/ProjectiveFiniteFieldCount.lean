@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.ProjectiveResidueCardinality
-public import CCDN.Algebra.HomogeneousChartIrreducible
-public import CCDN.Plane.PlaneCount
+public import CCDN.Determinant.ProjectivePlaneResidueDeterminant
+import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Determinant.ProjectiveResidueCardinality
+import CCDN.Plane.PlaneCount
 /-! A sharp finite-field count for an irreducible homogeneous plane
 curve. Chart irreducibility, its full degree and the infinity correction
 are proved; the affine input is the formalized Stepanov estimate. -/

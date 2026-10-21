@@ -5,10 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.IntegralProjectionClosedImage
-public import CCDN.Projection.FiniteFiberLinearSeparation
-public import CCDN.Projection.HilbertProjectionDegree
-public import CCDN.Algebra.SmallOutsidePoint
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import CCDN.Algebra.SmallOutsidePoint
+import CCDN.Projection.FiniteFiberLinearSeparation
+import CCDN.Projection.HilbertProjectionDegree
+import CCDN.Projection.IntegralProjectionClosedImage
+import CCDN.Projection.LinearNormalizationInfinite
+import Mathlib.RingTheory.Nullstellensatz
 /-! Set-theoretic degree-bounded equations for an affine prime variety.
 An arbitrary outside point is separated by an ideal member of degree
 at most the Hilbert multiplicity. The proof constructs an integral linear

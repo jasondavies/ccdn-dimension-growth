@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.HomogeneousNormalizationRank
+public import Mathlib.FieldTheory.Minpoly.Basic
+public import Mathlib.RingTheory.Localization.FractionRing
+import Mathlib.RingTheory.Polynomial.GaussLemma
 /-! An irreducible polynomial relation over a polynomial coefficient ring
 becomes the minimal polynomial, up to a nonzero scalar, over its
 fraction field. -/

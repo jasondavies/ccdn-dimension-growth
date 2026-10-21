@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.MonomialDimension
-public import Mathlib.Data.Nat.Choose.Sum
+public import CCDN.Hilbert.FilteredIntersection
+import CCDN.Hilbert.MonomialDimension
 
 /-! Two finite differences of a binomial Hilbert function. This gives a
 coefficient-uniform codimension-two bound for filtered coordinate spaces. -/

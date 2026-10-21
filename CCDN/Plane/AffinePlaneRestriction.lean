@@ -5,9 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceGoodDirection
-public import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
-public import CCDN.Projection.ShearNormalization
+public import Mathlib.Algebra.MvPolynomial.PDeriv
 /-! The chain rule for partial derivatives along a homomorphism of
 polynomial algebras. -/
 

@@ -5,12 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ProjectiveChowEquation
-public import CCDN.Center.IntegralProjectionImage
-public import CCDN.Center.HomogeneousProjectionNoBasePoint
-public import CCDN.Projection.HomogeneousProjectionEquation
-public import CCDN.Center.BalancedParameterFiniteness
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ProjectiveChowIncidence
+public import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Center.BalancedParameterFiniteness
+import CCDN.Center.HomogeneousProjectionNoBasePoint
+import CCDN.Center.IntegralProjectionImage
+import CCDN.Center.ProjectiveIncidenceClosed
+import CCDN.Projection.HomogeneousProjectionEquation
+import CCDN.Projection.ProjectionScalarExtension
 /-! Linear pullback of hyperplane tuples and image incidence under a
 projection with center disjoint from the source. Integrality and lifting of
 geometric image points are consequences of that geometric condition. -/

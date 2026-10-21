@@ -6,9 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.Plane
-public import Mathlib.Algebra.Order.Star.Int
-public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-!
 # Affine curves and the full counting target

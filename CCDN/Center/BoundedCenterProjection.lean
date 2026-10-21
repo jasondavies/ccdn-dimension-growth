@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedLinearProjection
-public import Mathlib.LinearAlgebra.Projection
+public import Mathlib.GroupTheory.GroupAction.Ring
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+import CCDN.Projection.BoundedLinearProjection
 
 /-! A rational projection from bounded independent center rows.
 The integral scalar-idempotent matrix constructed by cofactors is

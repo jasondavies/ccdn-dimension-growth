@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertCoordinateParameterField
-public import Mathlib.RingTheory.AlgebraicIndependent.AlgebraicClosure
-public import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Hilbert.HilbertCoordinateParameterField
+import Mathlib.RingTheory.AlgebraicIndependent.AlgebraicClosure
+import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 
 /-! The constructed Hilbert dimension equals transcendence-basis cardinality.
 Consequently integral embeddings preserve Hilbert dimension. -/

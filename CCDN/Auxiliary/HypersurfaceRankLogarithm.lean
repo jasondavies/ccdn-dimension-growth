@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceRankArchimedean
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import CCDN.Auxiliary.HypersurfaceRankArchimedean
+import CCDN.Auxiliary.HypersurfaceRankProfile
 /-! The logarithm of the exact hypersurface rank has the uniform leading
 term log(d)+r*log(M), with an explicit error depending only on dimension. -/
 

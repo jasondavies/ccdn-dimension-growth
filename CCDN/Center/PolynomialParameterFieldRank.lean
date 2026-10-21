@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.GenericLinearParameterField
+import CCDN.Center.PolynomialCoefficientBasis
+import Mathlib.LinearAlgebra.FreeModule.PID
 /-! The degree of a finite coefficient-field extension is unchanged by
 adjoining rational parameters, measured over the parameter
 intermediate field inside an arbitrary polynomial fraction field. -/

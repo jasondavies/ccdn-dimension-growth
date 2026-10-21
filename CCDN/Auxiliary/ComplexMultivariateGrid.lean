@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ComplexGridInterpolation
-public import CCDN.Algebra.HomogeneousLeadingCoefficient
-public import Mathlib.Algebra.MvPolynomial.Equiv
+public import CCDN.Algebra.HomogeneousTranslation
+public import Mathlib.Analysis.Complex.Norm
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+import CCDN.Algebra.HomogeneousChart
+import CCDN.Algebra.HomogeneousLeadingCoefficient
+import CCDN.Auxiliary.ComplexGridInterpolation
 
 /-! Sharp complex integer-grid bounds in any number of variables. Iteration
 of the univariate bound proves the exact coefficient-positioning constant

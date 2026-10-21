@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ScaledHeightElimination
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-! Uniform comparison of logarithmic coefficient-height ratios. -/
 
 @[expose] public section

@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ProjectiveClosureDegree
-public import Mathlib.RingTheory.Nullstellensatz
+public import CCDN.Algebra.ProjectiveClosureIdeal
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import CCDN.Height.ProjectiveZeroLocus
+import Mathlib.RingTheory.Nullstellensatz
 
 /-! Polynomial vanishing on a nonempty principal open subset of an
 integral affine variety extends to the entire variety. -/

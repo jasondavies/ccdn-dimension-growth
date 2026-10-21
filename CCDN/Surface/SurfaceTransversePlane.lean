@@ -5,9 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalPlaneGoodSpecializationCharZero
-public import CCDN.Surface.TopFormAuxiliary
-public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
+public import CCDN.Plane.FiniteFieldBadPlanes
+public import Mathlib.Tactic.Continuity
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.Determinant.PlaneMultiplicity
+import CCDN.Noether.UniversalPlaneGoodSpecializationCharZero
+import CCDN.Projection.PrimitiveNormalization
+import CCDN.Projection.ShearNormalization
 
 /-! Irreducible plane sections transverse to a prescribed direction.
 The avoidance condition also ensures that a second equation restricts

@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.RationalDifferential
+public import Mathlib.RingTheory.Derivation.MapCoeffs
+import CCDN.Noether.AlgebraicDifferentialConstants
 /-! Residues of closed rational one-forms at simple polynomial roots.
 The polynomial proof avoids needing a partial-fraction decomposition. -/
 

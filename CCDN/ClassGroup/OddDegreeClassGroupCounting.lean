@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.NumberFieldLatticeBox
-public import CCDN.ClassGroup.OddDegreeNormCurveCount
+public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+import CCDN.ClassGroup.OddDegreeNormCurveCount
 /-! The odd-degree class-group counting step uses the finite
 translation classes and their two signed norm curves. The curve equation
 retains its full odd degree, including when the translating generator

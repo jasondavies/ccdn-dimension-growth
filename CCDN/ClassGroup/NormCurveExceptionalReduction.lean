@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.SmallSubfieldIntegerCount
-public import CCDN.ClassGroup.SquareNormCurveIrreducibility
+import Mathlib.Tactic.Monotonicity.Lemmas
 /-! The square-norm integers are covered by their integer-translation
 fibers. Fibers with even generated-subfield index are absorbed into the
 small-subfield set when there is no index-two intermediate field. -/

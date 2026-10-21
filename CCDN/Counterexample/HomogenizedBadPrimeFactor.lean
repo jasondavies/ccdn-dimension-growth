@@ -6,9 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
-public import CCDN.Algebra.HomogeneousChart
-public import CCDN.Analysis.PrimeSums
-public import Mathlib.Data.Nat.Squarefree
+import Mathlib.Algebra.MvPolynomial.Division
 
 /-! Homogenization changes the bad-prime factor of CCDN Definition 3.2.1.
 The proof of Proposition 4.2.1 replaces an affine equation `f` by its homogenization `F₁`

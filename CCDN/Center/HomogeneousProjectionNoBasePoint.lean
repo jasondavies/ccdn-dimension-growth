@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.IntegralProjectionSpecialization
-public import CCDN.Algebra.ProjectiveChartDegree
-public import CCDN.Algebra.ProjectiveCoefficientExtension
-public import Mathlib.Algebra.Polynomial.Roots
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Algebra.ProjectiveChartDegree
+import CCDN.Center.IntegralProjectionSpecialization
 /-! An integral homogeneous linear projection has no nonzero geometric
 point in its kernel. This gives disjointness from its projective
 center over any infinite extension field. -/

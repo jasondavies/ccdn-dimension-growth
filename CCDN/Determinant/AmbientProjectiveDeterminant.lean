@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HypersurfaceHeightDeterminant
-public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 
 /-! A universal determinant divisor for primitive projective evaluations.
 Embedding the points in a coordinate hyperplane makes the established

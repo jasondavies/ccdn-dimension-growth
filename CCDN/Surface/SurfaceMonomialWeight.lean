@@ -6,7 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.PrincipalStandardMonomials
-public import CCDN.Analysis.SurfaceMonomialWeightNumerics
+public import Mathlib.Analysis.Real.Sqrt
+import CCDN.Analysis.SurfaceMonomialWeightNumerics
+import CCDN.Auxiliary.HypersurfaceRankProfile
+import CCDN.Hilbert.MonomialDimension
+import CCDN.Plane.PlaneHilbert
+import Mathlib.Algebra.Order.Star.Real
 /-! The sharp weighted degree of a full standard-monomial prefix for an
 affine surface. The coefficient 2/3 of the square-root rank is retained,
 with an explicit linear error depending only on the equation degree. -/

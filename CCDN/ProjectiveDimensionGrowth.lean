@@ -5,14 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.ProjectiveVarietyDimensionGrowth
-public import CCDN.Curve.ProjectiveHilbertCurveGrowth
-public import CCDN.Hilbert.ProperHilbertDimension
-public import CCDN.Hilbert.PrimeIdealDimensionDrop
-public import CCDN.Projection.HomogeneousProjectionEquation
-public import CCDN.Hilbert.ZeroDimensionalProjectiveCount
-public import CCDN.Hilbert.EmptyProjectiveHilbertDimension
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Hypersurface.ProjectiveHypersurfaceDimensionGrowth
+public import CCDN.Projection.ProjectiveProjectionGrowth
+import CCDN.Curve.ProjectiveHilbertCurveGrowth
+import CCDN.Hilbert.EmptyProjectiveHilbertDimension
+import CCDN.Hilbert.PrimeIdealDimensionDrop
+import CCDN.Hilbert.PrincipalHilbertPolynomial
+import CCDN.Hilbert.ProperHilbertDimension
+import CCDN.Hilbert.ZeroDimensionalProjectiveCount
+import CCDN.Hypersurface.ProjectiveVarietyDimensionGrowth
+import CCDN.Projection.HomogeneousProjectionEquation
 /-! CCDN Theorem 1 in the homogeneous-coordinate-ideal formulation: uniform projective
 dimension growth for every rational prime projective variety of degree at least five.
 The Hilbert polynomial determines the degree and dimension. Zero-dimensional and empty

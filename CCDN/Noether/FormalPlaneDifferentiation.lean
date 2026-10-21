@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.FormalBranchMultiplicity
 public import Mathlib.RingTheory.PowerSeries.Derivative
+public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+import Mathlib.RingTheory.PowerSeries.Inverse
 
 /-! Tangent differentiation on formal plane branches. Vanishing of successive
 tangent derivatives implies local multiplicity below the characteristic. -/

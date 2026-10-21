@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HypersurfaceDeterminantRank
-public import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+public import CCDN.Plane.IntegerPlaneLogHeight
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 /-! The global determinant bound in higher dimension, with its reduction
 hypotheses verified by the bad-prime set and its coefficient-height control. -/
 

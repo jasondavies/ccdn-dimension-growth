@@ -5,11 +5,18 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowExactDegree
-public import CCDN.Center.ProjectiveChowChartReduction
-public import CCDN.Center.GeometricProjectiveChow
-public import CCDN.Center.GeometricIdealPrimality
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ProjectiveChowIncidence
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.ChowExactDegree
+import CCDN.Center.ChowRowSymmetry
+import CCDN.Center.GeometricIdealPrimality
+import CCDN.Center.GeometricProjectiveChow
+import CCDN.Center.ProjectiveChowChartReduction
+import CCDN.Center.ProjectiveChowWithoutChart
+import CCDN.Hilbert.HilbertScalarExtension
+import CCDN.Hilbert.HomogeneousPrimeComponents
 /-! The constructed projective Chow equation has degree exactly d in every
 hyperplane block, where d is the Hilbert multiplicity. This includes
 forms over the original field for geometrically integral sources. -/

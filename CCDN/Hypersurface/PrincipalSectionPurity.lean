@@ -5,10 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.NormalizationHeightOne
-public import CCDN.Projection.LinearNormalizationInfinite
-public import CCDN.Hilbert.PrincipalHilbertPolynomial
 public import CCDN.Hilbert.FilteredPrimeDecomposition
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.RingTheory.SimpleRing.Principal
+import CCDN.Hilbert.PrincipalHilbertPolynomial
+import CCDN.Projection.IntegralProjectionHilbert
+import CCDN.Projection.LinearNormalizationInfinite
+import CCDN.Projection.NormalizationHeightOne
+import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
 /-! Principal sections of affine prime varieties are pure dimensional.
 A linear normalization is constructed from the Hilbert dimension.
 Going down contracts each section component to a height-one prime in the

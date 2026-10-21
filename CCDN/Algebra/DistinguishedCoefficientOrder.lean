@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousLeadingCoefficient
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+import CCDN.Algebra.HomogeneousLeadingCoefficient
 /-! A monomial order that puts a chosen pure coordinate power first. This
 lets the positioned estimates use the paper's distinguished coefficient. -/
 

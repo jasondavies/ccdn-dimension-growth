@@ -7,6 +7,11 @@ module
 
 public import CCDN.Hilbert.HomogeneousHilbert
 public import Mathlib.RingTheory.MvPolynomial.Ideal
+import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hilbert.FilteredIntersection
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 
 /-! Origin-adic layers of a nonhomogeneous hypersurface. The first
 nonzero homogeneous part supplies the singular multiplicity bound directly. -/

@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.FullDegreeSectionIrreducibility
-public import CCDN.Plane.AffinePlaneRestriction
-public import Mathlib.Algebra.MvPolynomial.Funext
+public import CCDN.Plane.PlaneSectionBounds
+import CCDN.Algebra.FullDegreeSectionIrreducibility
+import CCDN.Determinant.PlaneMultiplicity
+import Mathlib.Algebra.MvPolynomial.Funext
 
 /-! A hyperplane written as x₀ = ∑ aᵢxᵢ. A full-degree
 irreducible plane contained in that hyperplane certifies irreducibility

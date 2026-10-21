@@ -6,7 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveHypersurfaceReduction
+public import CCDN.Determinant.BlockDeterminant
 public import CCDN.Determinant.HypersurfaceAggregation
+public import Mathlib.LinearAlgebra.Projectivization.Cardinality
+import Mathlib.Tactic.Monotonicity.Lemmas
 /-! Projective hypersurface residue classes give the sharp single-prime
 determinant bound in every positive dimension. The residue partition, chart
 units and positive local multiplicities are all constructed from the equation. -/

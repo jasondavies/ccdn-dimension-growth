@@ -6,9 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.Box
-public import Mathlib.Algebra.BigOperators.Fin
-public import Mathlib.Algebra.Order.BigOperators.Group.Finset
-public import Mathlib.Algebra.Order.Ring.Star
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Tactic.ContinuousFunctionalCalculus
 
 /-! Counting bounded integral points by the integer values of a
 linear form. Deleting a coordinate with nonzero coefficient is injective

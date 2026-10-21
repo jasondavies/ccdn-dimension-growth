@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.Module.ZLattice.Covolume
-public import Mathlib.MeasureTheory.Group.GeometryOfNumbers
+import Mathlib.MeasureTheory.Group.GeometryOfNumbers
 
 /-! Blichfeldt's principle bounds the volume of a measurable set whose
 distinct points never differ by a lattice vector. -/

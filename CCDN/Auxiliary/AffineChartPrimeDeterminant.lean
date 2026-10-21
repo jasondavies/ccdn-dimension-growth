@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.ProjectiveOpenResidueDeterminant
-public import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
-public import CCDN.Algebra.ModularPolynomialLift
+public import CCDN.Determinant.HypersurfaceLocalDivisor
+import CCDN.Algebra.ModularPolynomialLift
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
+import CCDN.Determinant.ProjectiveOpenResidueDeterminant
 /-! The sharp prime determinant estimate from the literal affine reduction.
 Loss of degree in that reduction is allowed: the extra powers of the
 homogenizing coordinate are invertible at all supplied points. -/

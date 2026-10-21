@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.IntegralClosure.GoingDown
-public import Mathlib.RingTheory.Ideal.KrullsHeightTheorem
-public import Mathlib.RingTheory.Ideal.UFD
+public import Mathlib.RingTheory.Ideal.Height
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Mathlib.RingTheory.Ideal.UFD
+import Mathlib.RingTheory.IntegralClosure.GoingDown
 
 /-! A nonzero height-one prime in an integral extension of a normal unique
 factorization domain contracts to a principal height-one prime. -/

@@ -5,8 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.LiteralAffineMinimum
 public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+public import CCDN.Auxiliary.LiteralAffineBadPrimes
+import CCDN.Algebra.AffineLeadingTranslation
+import CCDN.Auxiliary.AffineAuxiliaryTranslationBound
+import CCDN.Auxiliary.AffineBadPrimeTranslation
+import CCDN.Auxiliary.LiteralAffineMinimum
+import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
+import CCDN.Height.AffineHeightCutoff
+import CCDN.Height.AffineTranslationCount
+import CCDN.Height.ScaledHypersurfaceHeight
 /-! CCDN Proposition 4.2.1 with the literal affine bad-prime factor.
 All box radii, zero constant coefficients and nonabsolute irreducible
 equations are included. The chart determinant proof handles good reductions

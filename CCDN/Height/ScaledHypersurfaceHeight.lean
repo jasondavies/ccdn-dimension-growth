@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ScaledHypersurfaceModel
 public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Auxiliary.ScaledHomogenization
 /-! The exact leading homogeneous coefficient height supplies the full
 scaling gain in every dimension. -/
 

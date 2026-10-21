@@ -7,7 +7,10 @@ module
 
 public import CCDN.Noether.NoetherianLocalLayers
 public import Mathlib.Algebra.Algebra.ZMod
-public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
+import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
+import Mathlib.RingTheory.Ideal.Quotient.Noetherian
 
 /-! The mod-`p` local layers used in the general local determinant
 lemma. A ring homomorphism from a local ring to `ZMod p` is automatically

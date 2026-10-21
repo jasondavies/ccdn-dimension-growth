@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.ProjectivePrimeDeterminant
 public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Auxiliary.PlaneBadPrimes
+public import CCDN.Height.Box
+import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Determinant.ProjectivePrimeDeterminant
 /-! Coefficient-controlled bad primes for homogeneous projective evaluation
 matrices. Good reduction of a full-degree affine chart implies good reduction
 of the entire projective equation. -/

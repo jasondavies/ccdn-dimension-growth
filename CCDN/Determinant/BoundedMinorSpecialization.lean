@@ -5,11 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.ClosedFormParameterDegree
-public import CCDN.ForMathlib.MatrixRank
-public import CCDN.Algebra.IntegerPolynomialAvoidance
-public import CCDN.Projection.LinearProjectionFiltration
-public import CCDN.Projection.PrimitiveNormalization
+public import Mathlib.Algebra.MvPolynomial.Degrees
+import CCDN.Algebra.IntegerPolynomialAvoidance
+import CCDN.Projection.PrimitiveNormalization
 /-! The numerical specialization step for a nonempty polynomial condition on
 maximal minors. The geometric construction of a good-center condition is
 separate: this module starts with a polynomial and a full-rank rational

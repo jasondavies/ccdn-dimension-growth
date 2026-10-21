@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PrimeIdealGridBound
-public import CCDN.Hilbert.PureComponentDegreeBudget
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Hilbert.FilteredPrimeDecomposition
+import CCDN.Algebra.PrimeIdealGridBound
+import CCDN.Hilbert.PureComponentDegreeBudget
 /-! The exact pure-dimensional grid bound of CCDN Lemma 4.1.1.
 The minimal-prime components cover every point. Their constructed
 Hilbert multiplicities satisfy the additive degree budget, and the sharp

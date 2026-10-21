@@ -5,13 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.HomogeneousBirationalDegree
-public import CCDN.Projection.ProjectionFractionField
-public import CCDN.Projection.FiniteBirationalConductor
-public import CCDN.Projection.IntegralProjectionHilbert
-public import Mathlib.RingTheory.FiniteType
-public import Mathlib.RingTheory.Finiteness.Prod
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Projection.FiniteBirationalConductor
+import CCDN.Projection.HomogeneousBirationalDegree
+import CCDN.Projection.IntegralProjectionHilbert
+import CCDN.Projection.ProjectionFractionField
 /-! A homogeneous finite birational linear projection preserves the
 Hilbert multiplicity. Both the conductor and the dimension equality
 are consequences of the algebraic hypotheses. -/

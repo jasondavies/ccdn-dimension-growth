@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceMultiplicityEstimate
+public import CCDN.Determinant.HypersurfaceLocalDeterminant
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Determinant.HypersurfaceMultiplicityEstimate
 /-! Sharp aggregation of local hypersurface exponents. Summing the exact
 integer cutoff inequalities before optimizing preserves the leading constant
 and gives a linear error independent of all residue multiplicities. -/

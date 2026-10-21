@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.ProjectiveHeightComparison
-public import CCDN.Auxiliary.PlaneAuxiliarySelection
+public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Height.Box
+import CCDN.Auxiliary.PlaneAuxiliaryDegree
+import CCDN.Auxiliary.PlaneAuxiliaryLargeHeight
+import CCDN.Auxiliary.PlaneAuxiliarySelection
+import CCDN.Height.ProjectiveHeightComparison
 /-! Homogeneous auxiliary polynomials for bounded primitive projective points,
 with explicit degrees in both coefficient-height ranges. -/
 

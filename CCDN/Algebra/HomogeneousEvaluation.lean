@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousMonomials
-public import CCDN.Algebra.RowSelection
+public import Mathlib.Tactic.Continuity
+import CCDN.Algebra.RowSelection
 /-! Homogeneous equations give nonzero relations on the complete
 homogeneous evaluation matrix and hence strictly deficient row rank. -/
 

@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.LinearAlgebra.Matrix.Adjugate
-public import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
+public import Mathlib.Algebra.Order.AbsoluteValue.Basic
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
+import Mathlib.LinearAlgebra.Matrix.Adjugate
 
 /-! A bounded integral equation obtained from three independent rows.
 Cramer's rule uses row-replacement determinants, so the same elementary

@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.CurveRationalParameter
-public import Mathlib.Algebra.Polynomial.OfFn
+public import Mathlib.Algebra.Polynomial.Degree.Defs
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+import Mathlib.Algebra.Polynomial.OfFn
+import Mathlib.Algebra.Polynomial.Roots
 
 /-! A finite family of distinct coordinate vectors is separated by a bounded
 integer linear form on the moment curve (1,t,...,t^(n-1)). The proof avoids

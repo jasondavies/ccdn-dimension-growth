@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ForMathlib.MatrixRank
 public import Mathlib.RingTheory.PowerSeries.Basic
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+import CCDN.ForMathlib.MatrixRank
 
 /-! Finite linear independence of formal power series survives arbitrary
 field extension. A finite nonzero coefficient minor witnesses independence. -/

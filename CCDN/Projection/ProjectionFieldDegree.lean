@@ -5,8 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.PlaneProjectionDegree
-public import Mathlib.FieldTheory.PrimitiveElement
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.FieldTheory.Minpoly.Basic
+public import Mathlib.RingTheory.Algebraic.Defs
+import CCDN.Hilbert.FunctionFieldRank
+import CCDN.Plane.PlaneHilbert
+import CCDN.Projection.PlaneProjectionDegree
+import Mathlib.Algebra.MvPolynomial.Monad
+import Mathlib.FieldTheory.PrimitiveElement
 
 /-! A primitive plane coordinate gives a lower bound for the image equation's
  degree. Combined with the filtered upper bound, a parameter of full field

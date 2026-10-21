@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Analysis.SpecialFunctions.Pow.Asymptotics
 
 /-! A superlinear determinant divisor absorbs the interpolation factorial
 uniformly in the rank. -/

@@ -5,11 +5,19 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FilteredPrimeDecomposition
-public import Mathlib.RingTheory.Invariant.Basic
-public import Mathlib.FieldTheory.Galois.Infinite
-public import Mathlib.RingTheory.IntegralClosure.GoingDown
-public import Mathlib.RingTheory.MvPolynomial.Basic
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.RingTheory.Invariant.Defs
+public import Mathlib.Tactic.Continuity
+import Mathlib.FieldTheory.Galois.Infinite
+import Mathlib.RingTheory.IntegralClosure.GoingDown
+import Mathlib.Data.Nat.Choose.Multinomial
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+import Mathlib.RingTheory.Ideal.GoingDown
+import Mathlib.RingTheory.Invariant.Basic
+import Mathlib.RingTheory.Polynomial.RationalRoot
+import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import Mathlib.RingTheory.PrincipalIdealDomain
+import Mathlib.RingTheory.SimpleRing.Principal
 
 /-! Coefficient Galois actions and conjugacy of polynomial primes.
 The invariant-ring assertion is proved coefficient by coefficient. Going

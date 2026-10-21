@@ -6,8 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.NumberTheory.NumberField.Units.DirichletTheorem
-public import Mathlib.GroupTheory.QuotientGroup.Basic
-public import Mathlib.Tactic
 
 /-! Uniform control of the unit contribution to quadratic descent.
 Dirichlet's theorem and cyclicity of roots of unity give at most one

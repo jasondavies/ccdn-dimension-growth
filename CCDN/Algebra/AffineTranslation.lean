@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousTranslation
+public import CCDN.Algebra.HomogeneousChart
+public import Mathlib.Tactic.Continuity
 /-! The affine translations underlying the homogeneous coordinate changes
 preserve degree and irreducibility, over every coefficient field. -/
 

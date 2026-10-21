@@ -5,11 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowProjectionPower
-public import CCDN.Center.ProjectiveChowWithoutChart
-public import CCDN.Center.ChowRowSymmetry
-public import CCDN.Center.WeightedHomogeneousEvaluation
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ChowLinearSpecialization
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.ChowPolynomialPower
+import CCDN.Center.ChowProjectionPower
+import CCDN.Center.ChowRowSymmetry
+import CCDN.Center.ProjectiveChowWithoutChart
+import CCDN.Center.WeightedHomogeneousEvaluation
+import CCDN.Projection.IntegralProjectionHilbert
+import Mathlib.Algebra.MvPolynomial.Nilpotent
 /-! Projection restrictions without chosen charts. A disjoint center preserves
 every block degree of the source equation; its restriction is a scalar power
 of the constructed image equation. -/

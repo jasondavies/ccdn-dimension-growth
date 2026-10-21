@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ParameterPowerSpan
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+public import Mathlib.RingTheory.SimpleRing.Principal
 /-! Any finite family in a finite extension of K(t) fits in a bounded power
 block after multiplication by one nonzero rational-function denominator. -/
 

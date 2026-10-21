@@ -6,8 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousSlice
-public import CCDN.Auxiliary.ScaledHomogenizationPrimitive
-public import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Auxiliary.ScaledHomogenizationPrimitive
+import CCDN.Plane.Bezout
 /-! Proper affine sections and Bézout counts from prime-scaled homogeneous
 models. The coordinate slice is x₀=p, and the original points stay integral. -/
 

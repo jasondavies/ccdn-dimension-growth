@@ -5,10 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.IntegralProjectionFiberCount
-public import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
-public import CCDN.Hilbert.HilbertLinearCoordinates
-public import CCDN.Projection.ProjectionFractionField
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
+import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Projection.IntegralProjectionFiberCount
+import CCDN.Projection.ProjectionFractionField
+import Mathlib.RingTheory.AlgebraicIndependent.Basic
 /-! A uniform finite-fiber bound for a linear normalization.
 The fraction fields and their degree bound are constructed from the
 coordinate ring and its Hilbert multiplicity. -/

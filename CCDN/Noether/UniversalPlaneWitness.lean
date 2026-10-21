@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.UniversalPlaneMinor
-public import CCDN.Noether.ClosedFormParameterDegree
+public import CCDN.Noether.UniversalPlaneFamily
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Determinant.UniversalPlaneMinor
+import CCDN.Noether.ClosedFormParameterDegree
+import CCDN.Noether.UniversalPlaneDegree
+import CCDN.Projection.ShearNormalization
 /-! A nonzero universal minor of cubic parameter degree, over the original
 coefficient field. The nonvanishing proof descends from an algebraic closure. -/
 

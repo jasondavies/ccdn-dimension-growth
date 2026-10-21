@@ -5,10 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ProjectiveIncidenceClosed
-public import CCDN.Center.ChowIncidenceForm
-public import CCDN.Center.ProjectiveClosureRecovery
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ProjectiveChowIncidence
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.ChowIncidenceBaseChange
+import CCDN.Center.ChowIncidenceForm
+import CCDN.Center.ProjectiveClosureRecovery
+import CCDN.Center.ProjectiveIncidenceClosed
 /-! The constructed irreducible multihomogeneous incidence equation has the
 projective intersection criterion. The criterion also holds over an
 algebraically closed coefficient extension and for a homogeneous prime ideal

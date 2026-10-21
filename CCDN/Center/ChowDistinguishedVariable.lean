@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.GenericLinearIndependence
-public import CCDN.Center.IrreducibleRelationDegree
 /-! View the Chow equation as a polynomial in one hyperplane's
 constant coefficient. Every other coefficient remains a separate variable;
 their incidence images are algebraically independent. -/

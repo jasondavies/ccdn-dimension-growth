@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.ProjectiveLinearCountTransfer
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
-public import CCDN.Hypersurface.ProjectiveHypersurfaceDimensionGrowth
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Height.ProjectiveBox
+import CCDN.Height.ProjectiveLinearCountTransfer
+import CCDN.Hypersurface.ProjectiveHypersurfaceDimensionGrowth
 /-! The quantitative counting step for the constructed projection. The
 height and finite-fiber losses remain polynomial in the original degree. -/
 

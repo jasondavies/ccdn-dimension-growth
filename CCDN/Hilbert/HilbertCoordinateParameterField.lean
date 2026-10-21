@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertCoordinateIndependence
-public import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
-public import Mathlib.RingTheory.AlgebraicIndependent.Basic
-public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
+import CCDN.Hilbert.HilbertCoordinateIndependence
+import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
 /-! Construct a finite linear parameter field from coordinate
 functions, in arbitrary Hilbert dimension. -/

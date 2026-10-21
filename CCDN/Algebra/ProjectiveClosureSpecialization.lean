@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.ProjectiveClosureProjection
-public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-! Integral projections of the projective closure that fix X₀ specialize
 to integral affine projections on the chart X₀ = 1. -/

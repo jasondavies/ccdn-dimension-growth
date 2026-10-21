@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.SeparatedIntegerPacking
-public import Mathlib.NumberTheory.NumberField.InfinitePlace.Ramification
+public import CCDN.ClassGroup.IntegerTranslationClassPacking
+import CCDN.ClassGroup.SeparatedIntegerPacking
 
 /-! Bounded algebraic integers lying in an intermediate field
 inject into the bounded integers of that field. Every archimedean place

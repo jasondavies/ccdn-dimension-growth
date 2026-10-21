@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.FormalBranchBaseChange
-public import Mathlib.RingTheory.TensorProduct.MvPolynomial
-public import Mathlib.RingTheory.TensorProduct.Quotient
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.Noether.FormalBranchBaseChange
+import Mathlib.RingTheory.TensorProduct.Quotient
+import Mathlib.Algebra.Ring.Hom.InjSurj
+import Mathlib.RingTheory.TensorProduct.MvPolynomial
 
 /-! A smooth rational point on an irreducible plane curve implies geometric
 irreducibility. The proof uses the faithful formal branch, extends its

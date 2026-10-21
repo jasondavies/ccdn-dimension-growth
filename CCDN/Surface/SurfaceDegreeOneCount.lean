@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.DegreeOneComponentLines
-public import CCDN.Surface.SurfaceLineContribution
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Curve.Curve
+public import Mathlib.RingTheory.Ideal.Height
+import CCDN.Hilbert.DegreeOneComponentLines
+import CCDN.Surface.SurfaceLineContribution
 /-! The proved line contribution applies to degree-one prime
 components, with the original number of components as the additive cost. -/
 

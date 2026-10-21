@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.Interpolation
-public import ArithmeticHeights.BombieriVaaler
 
 /-!
 # Bombieri–Vaaler applied to polynomial interpolation

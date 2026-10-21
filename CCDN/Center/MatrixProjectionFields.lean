@@ -7,7 +7,8 @@ module
 
 public import CCDN.Center.ProjectionImageFractionField
 public import CCDN.Center.ChowLinearSpecialization
-public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.Tactic.Continuity
+import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-! Kernel containment of matrices gives containment of their
 projected-coordinate fields. Equal centers therefore give the same image

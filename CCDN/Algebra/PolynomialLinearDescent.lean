@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.Bezout
-public import Mathlib.LinearAlgebra.Dual.Lemmas
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Tactic.Continuity
+import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-! Linear coefficient descent of a polynomial over a field extension.
 A nonzero polynomial vanishing at base-field points has a nonzero base-field

@@ -5,10 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.RationalSurfaceSalbergerCover
-public import CCDN.Algebra.ProjectiveClosureDegree
-public import CCDN.Algebra.HomogeneousChartIrreducible
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveClosureIdeal
+public import CCDN.Projection.ProjectivePlaneProjection
+public import CCDN.Surface.SurfaceGeometricCurveCover
+import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Algebra.IdealScalarDescent
+import CCDN.Algebra.ProjectiveClosureDegree
+import CCDN.Surface.RationalSurfaceSalbergerCover
 /-! Salberger's surface cover on the standard projective affine chart.
 Every returned curve is a homogeneous geometrically prime ideal;
 its degree is the projective Hilbert degree, proved by closure. -/

@@ -6,9 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.AffineCongruenceHeight
-public import CCDN.Auxiliary.StandardMonomialAuxiliary
-public import CCDN.Determinant.WeightedMonomialDeterminant
 import all ArithmeticHeights.BombieriVaaler
+public import CCDN.ForMathlib.StandardMonomials
+import CCDN.Auxiliary.StandardMonomialAuxiliary
+import CCDN.Determinant.WeightedMonomialDeterminant
 
 /-! Auxiliary polynomials from the competing congruence determinant
 lower bound and weighted archimedean upper bound. -/

@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FilteredComponentDegreeBudget
-public import CCDN.Hilbert.FilteredLinearGrowth
-public import CCDN.Hilbert.PrimeComponentTranscendence
+public import CCDN.Hilbert.FilteredPrimeDecomposition
+public import Mathlib.RingTheory.Ideal.Height
+import CCDN.Hilbert.FilteredComponentDegreeBudget
+import CCDN.Hilbert.FilteredLinearGrowth
+import CCDN.Hilbert.PrimeComponentTranscendence
 /-! A finite decomposition of a proper affine surface section into
 rational prime curves, with a proved additive degree budget. Components with
 no rational points are discarded before requiring positive curve degrees. -/

@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.ProjectiveZeroLocus
-public import Mathlib.LinearAlgebra.Projectivization.Cardinality
+import Mathlib.LinearAlgebra.Projectivization.Cardinality
 
 /-! The exact relation between a homogeneous affine cone and its projective
 zero locus. The origin is counted once and each projective zero contributes

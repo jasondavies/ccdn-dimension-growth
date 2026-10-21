@@ -5,8 +5,20 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.FieldMultiplicationHyperplane
-public import Mathlib.LinearAlgebra.Matrix.BilinearForm
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.LinearAlgebra.BilinearForm.Properties
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import CCDN.ClassGroup.FieldMultiplicationHyperplane
+import Mathlib.Tactic.Measurability.Init
+import Mathlib.Tactic.NormNum.RealSqrt
+import Mathlib.Tactic.NormNum.Parity
+import Mathlib.Tactic.NormNum.NatSqrt
+import Mathlib.Tactic.NormNum.NatFib
+import Mathlib.Tactic.NormNum.LegendreSymbol
+import Mathlib.Tactic.NormNum.IsCoprime
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Rational
+import Mathlib.Tactic.Inclusion.Extension.Core.Core
+import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
 
 /-! Determinant nondegeneracy turns multiplication bounds on a hyperplane
 complement into the product inequality used to control the largest

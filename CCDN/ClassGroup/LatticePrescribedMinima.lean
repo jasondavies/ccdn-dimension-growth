@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ForMathlib.Fin
-public import CCDN.ForMathlib.ZLattice
-public import Mathlib.Analysis.InnerProductSpace.GramSchmidtOrtho
+public import Mathlib.Algebra.Module.ZLattice.Basic
+import CCDN.ForMathlib.Fin
+import CCDN.ForMathlib.ZLattice
 
 /-! A lattice basis with a prescribed nonzero first vector. Every later
 vector is shortest outside the previous span. A given global

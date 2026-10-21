@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import Mathlib.RingTheory.GradedAlgebra.Homogeneous.Ideal
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-!

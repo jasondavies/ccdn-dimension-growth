@@ -6,7 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
-public import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Auxiliary.ProjectiveAffineChart
+import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Plane.ProjectivePlaneBezout
 /-! Curves that are irreducible over the base field but split over an
 extension have at most d^2+d projective base-field points. -/
 

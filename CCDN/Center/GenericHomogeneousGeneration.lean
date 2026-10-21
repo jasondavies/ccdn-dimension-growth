@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousEvaluation
-public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
-public import Mathlib.RingTheory.AlgebraicIndependent.Basic
+public import CCDN.Algebra.HomogeneousMonomials
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+import CCDN.Algebra.HomogeneousEvaluation
+import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 
 /-! A complete homogeneous monomial basis at one coefficient specialization
 certifies generation of that whole homogeneous piece at algebraically

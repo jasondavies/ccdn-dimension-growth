@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.OriginLayerGenerators
+public import CCDN.Determinant.SingularTangent
+import CCDN.Determinant.OriginLayerGenerators
+import Mathlib.Tactic.Positivity.Finset
+import Mathlib.Tactic.LinearCombination
 /-! Finite-precision generation of hypersurface local quotients.
 Generator counts equal the layer dimensions; for plane curves each
 weight needs at most μ generators. -/

@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.SingularReduction
-public import CCDN.Determinant.PlaneSingularities
+public import CCDN.Determinant.PlaneMultiplicity
+import CCDN.Determinant.PlaneSingularities
 /-! Multiplicity greater than one forces a singular point. -/
 
 @[expose] public section

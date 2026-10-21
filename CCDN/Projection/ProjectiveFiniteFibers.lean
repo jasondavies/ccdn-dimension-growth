@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Height.ProjectiveBox
+import Mathlib.Algebra.Order.Star.Rat
 /-! Finite affine fibers of a linear map exclude a projective base point.
 Projective fibers inject into affine fibers after choosing a fixed
 nonzero representative in the target. -/

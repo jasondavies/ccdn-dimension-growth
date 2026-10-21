@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.ProjectiveIntegerHeight
-public import CCDN.Center.MinorSpecialization
+public import Mathlib.NumberTheory.Height.NumberField
+public import Mathlib.NumberTheory.Height.Projectivization
+import CCDN.ForMathlib.MatrixRank
+import CCDN.Height.ProjectiveIntegerHeight
+import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 /-! Integral maximal minors give the intrinsic projective height of a
 center. The minor vector need not be primitive, and the height does not
 depend on the coordinate ordering. -/

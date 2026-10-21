@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceLeadingCoefficient
-public import CCDN.Height.PolynomialBoxHeight
+public import CCDN.Algebra.HomogeneousTranslation
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+import CCDN.Auxiliary.HypersurfaceLeadingCoefficient
+import CCDN.Height.MultivariateGridHeight
+import CCDN.Height.PolynomialBoxHeight
 /-! The bounded shear has a dimension-uniform logarithmic positioning cost. -/
 
 @[expose] public section

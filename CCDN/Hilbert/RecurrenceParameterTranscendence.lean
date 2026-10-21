@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.CoordinatePowerGeneration
-public import Mathlib.RingTheory.Finiteness.Subalgebra
+public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.RingTheory.Algebraic.Defs
+import Mathlib.RingTheory.Algebraic.Integral
 
 /-! Positive Hilbert growth forces any parameter generating the eventual
 filtration recurrence to be transcendental. -/

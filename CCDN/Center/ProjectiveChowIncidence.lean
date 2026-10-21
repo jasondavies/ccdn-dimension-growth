@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.PrimeOpenVanishing
 public import CCDN.Center.ChowPivotParametrization
+public import CCDN.Algebra.ProjectiveClosureIdeal
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Center.ChowIncidenceLocus
+import CCDN.Algebra.ProjectiveClosureDegree
+import CCDN.Center.PrimeOpenVanishing
 /-! The affine incidence elimination ideal is the vanishing ideal of the
 full projective hyperplane incidence locus, including points at
 infinity. This asserts equality of vanishing ideals, not closedness of the

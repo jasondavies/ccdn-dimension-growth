@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.ClassGroupTwoTorsion
-public import Mathlib.LinearAlgebra.Dimension.Free
 
 /-! The degree-one base case for descent on the number-field degree.
 The ring of integers is identified with the integers, so its

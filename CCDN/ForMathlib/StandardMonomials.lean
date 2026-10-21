@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.MvPolynomial.Groebner
-public import Mathlib.RingTheory.MvPolynomial.MonomialOrder.DegLex
+public import Mathlib.Data.Finsupp.MonomialOrder.DegLex
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+import Mathlib.RingTheory.MvPolynomial.Groebner
+import Mathlib.RingTheory.MvPolynomial.MonomialOrder.DegLex
 
 /-!
 # Standard monomials of an ideal

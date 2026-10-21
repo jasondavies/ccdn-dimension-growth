@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousRank
-public import CCDN.Auxiliary.Nondivisibility
+public import ArithmeticHeights.BombieriVaaler
+public import CCDN.Algebra.HomogeneousMonomials
+import CCDN.Algebra.HomogeneousEvaluation
+import CCDN.Algebra.HomogeneousRank
+import CCDN.Algebra.RowSpan
+import CCDN.Auxiliary.AuxiliaryPolynomial
 /-! Bombieri--Vaaler for complete homogeneous evaluation matrices. The defining
 equation supplies rank deficiency, and selected rows span the whole point set. -/
 

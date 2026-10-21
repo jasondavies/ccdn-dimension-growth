@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.InfinityParameterReduction
-public import Mathlib.RingTheory.Ideal.Operations
 public import CCDN.Algebra.PolynomialPredicates
+public import Mathlib.RingTheory.Nullstellensatz
+import CCDN.ForMathlib.MvPolynomial
 /-! Hyperplanes with no common nonzero cone point yield balanced
 coordinate-power reductions over their original coefficient field. -/
 

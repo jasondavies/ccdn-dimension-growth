@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.WeightedPolynomialTop
-public import Mathlib.Data.Nat.ModEq
+public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
+import CCDN.Center.WeightedPolynomialTop
+import Mathlib.Algebra.MvPolynomial.Nilpotent
 
 /-! A coprime Newton edge forces irreducibility over every field.
 The proof uses the absence of two distinct monomials of equal weight

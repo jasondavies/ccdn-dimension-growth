@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.MonomialDimension
 public import CCDN.ForMathlib.StandardMonomials
+public import CCDN.Hilbert.FilteredIntersection
+import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 /-!
 # Standard monomials in a filtered coordinate ring
 

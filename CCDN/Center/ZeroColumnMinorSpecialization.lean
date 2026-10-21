@@ -5,7 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.MinorSpecialization
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.Center.CoordinateGridAvoidance
+import CCDN.Center.MinorCoordinateDegree
+import CCDN.Center.MinorSpecialization
+import CCDN.ForMathlib.MatrixRank
+import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 /-! Sharp bounded specialization of maximal-minor conditions while keeping
 prescribed matrix columns equal to zero. The distinguished zero column is
 the center-at-infinity case in Section 5.3. The nonvanishing rational

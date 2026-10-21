@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
-public import CCDN.Algebra.ProjectiveTranslation
+public import CCDN.Algebra.HomogeneousTranslation
+public import CCDN.Auxiliary.HypersurfaceBadPrimes
+import CCDN.Algebra.ProjectiveTranslation
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 /-! The geometric bad-prime predicate is invariant under integral shears. -/
 
 @[expose] public section

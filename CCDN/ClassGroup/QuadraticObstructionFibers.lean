@@ -7,9 +7,10 @@ module
 
 public import CCDN.ClassGroup.QuadraticInvariantIdeal
 public import CCDN.ClassGroup.QuadraticUnitNormQuotient
-public import CCDN.ClassGroup.QuadraticNormConjugation
-public import CCDN.ClassGroup.AmbiguousIdealRelativeNorm
-public import CCDN.ClassGroup.ClassGroupQuadraticInvolution
+import CCDN.ClassGroup.QuadraticHilbert90
+import CCDN.ClassGroup.QuadraticNormConjugation
+import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+import Mathlib.RingTheory.Flat.TorsionFree
 /-! The unit-norm obstruction for ambiguous ideal classes.
 Equal obstructions yield classes differing by a class represented by an
 invariant fractional ideal. The representatives can be chosen once, so

@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.ProjectivePlaneLinearCount
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Plane.ProjectivePlaneLinearCount
 /-! The reciprocal heights of distinct rational projective points on a
 plane curve of degree at least three have a uniform, coefficient-independent
 sum. Geometric height bands turn the proved projective point count into

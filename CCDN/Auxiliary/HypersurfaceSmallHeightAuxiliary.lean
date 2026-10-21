@@ -7,7 +7,8 @@ module
 
 public import CCDN.Height.HypersurfaceSmallHeightDegree
 public import CCDN.Auxiliary.HypersurfaceBadPrimeComparison
-public import CCDN.Auxiliary.PlaneAuxiliarySelection
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.Auxiliary.PlaneAuxiliarySelection
 /-! Higher-dimensional auxiliary polynomials in the small-height range, with exact
 exponents, for any finite prime set whose normalized comparison holds. The
 hypersurface instance retains the original geometric bad-prime factor. -/

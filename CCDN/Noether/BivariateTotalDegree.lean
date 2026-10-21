@@ -7,8 +7,7 @@ module
 
 public import CCDN.Noether.ClosedFormKernelWitness
 public import CCDN.Noether.ClosedFormBaseChange
-public import Mathlib.Algebra.MvPolynomial.Equiv
-public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 
 /-! Total degree of nested bivariate polynomials, transported from the
 multivariate polynomial ring. This controls the support of factor forms. -/

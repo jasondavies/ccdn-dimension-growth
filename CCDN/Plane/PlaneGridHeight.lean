@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.IntegerGridInterpolation
-public import CCDN.Projection.ShearNormalization
-public import CCDN.Auxiliary.PlaneBadPrimes
+public import CCDN.Noether.BivariateTotalDegree
+public import Mathlib.Basic.Real.Basic
+import CCDN.Auxiliary.IntegerGridInterpolation
+import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.Projection.ShearNormalization
 /-! A coefficient-height witness on the bounded integer plane grid. -/
 
 @[expose] public section

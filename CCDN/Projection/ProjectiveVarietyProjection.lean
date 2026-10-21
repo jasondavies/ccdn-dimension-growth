@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedDegreeNormalizationFiber
-public import CCDN.Height.ProjectiveLinearCountTransfer
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Height.ProjectiveLinearCountTransfer
+import CCDN.Projection.BoundedDegreeNormalizationFiber
 /-! The exact degree factor in the projective projection count.
 A finite birational integer projection preserves the Hilbert degree,
 and every fiber is bounded by d through its integral linear normalization. -/

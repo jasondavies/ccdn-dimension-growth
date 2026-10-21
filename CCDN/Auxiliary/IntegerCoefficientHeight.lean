@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.PolynomialBoxHeight
+public import Mathlib.Algebra.MvPolynomial.Basic
+public import Mathlib.Basic.Real.Basic
 /-! The maximum absolute coefficient height of an integer polynomial. -/
 
 @[expose] public section

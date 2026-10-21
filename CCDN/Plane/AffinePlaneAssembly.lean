@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.AffineNonzeroConstant
-public import CCDN.Height.AffineTranslationCount
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Height.AffineTranslationCount
 /-! All affine scaling, coefficient-height and zero-constant-term reductions
 for primitive absolutely irreducible plane equations. The resulting bound
 assumes the sharp finite-field estimate. -/

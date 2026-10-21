@@ -5,7 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialCoefficientLinearMap
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Finiteness.Defs
+import CCDN.Algebra.PolynomialCoefficientLinearMap
+import CCDN.Algebra.PolynomialKernelOrigin
+import Mathlib.LinearAlgebra.FreeModule.PID
 /-! Relations among a finite family of algebra-valued polynomials can be
 encoded by a finite scalar polynomial matrix. Persistent dependence therefore
 gives a polynomial relation nonzero at the origin, even when the target

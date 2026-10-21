@@ -5,7 +5,22 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.FiniteFieldPolynomialZeros
+public import Mathlib.Algebra.MvPolynomial.Degrees
+import Mathlib.Algebra.MvPolynomial.SchwartzZippel
+import Mathlib.Algebra.Order.Star.Rat
+import Mathlib.Tactic.NormNum.RealSqrt
+import Mathlib.Tactic.NormNum.Parity
+import Mathlib.Tactic.NormNum.NatSqrt
+import Mathlib.Tactic.NormNum.NatFib
+import Mathlib.Tactic.NormNum.LegendreSymbol
+import Mathlib.Tactic.NormNum.IsCoprime
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Rational
+import Mathlib.Tactic.Inclusion.Extension.Core.Core
+import Mathlib.Tactic.ENatToNat
+import Mathlib.NumberTheory.Chebyshev
+import ArithmeticHeights.Absolute
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
+import Mathlib.Algebra.Order.Ring.Star
 /-! A nonzero integer polynomial of total degree at most A has a nonzero
 value at an integer point with every coordinate between 0 and A. -/
 

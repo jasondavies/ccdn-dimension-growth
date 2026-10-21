@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceSmoothPoint
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+public import Mathlib.Algebra.MvPolynomial.PDeriv
 
 /-! Simultaneous avoidance of the top homogeneous form, a tangent hyperplane,
 and a chosen coordinate hyperplane, by a direction over the base field. -/

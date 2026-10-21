@@ -5,8 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.AmbientNoetherHeight
-public import CCDN.Noether.AmbientNoetherNonvanishing
+public import CCDN.ForMathlib.IntegerPolynomialL1
+public import CCDN.Noether.AmbientNoetherForms
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Noether.AmbientNoetherHeight
+import CCDN.Noether.AmbientNoetherNonvanishing
+import CCDN.Noether.AmbientNoetherVanishing
+import Mathlib.Data.Sym.Card
+import Mathlib.Data.Int.Interval
 /-! A finite family of universal integer Noether forms, with the exact
 degree and coefficient bound of CCDN Theorem 3.2.2. -/
 

@@ -5,10 +5,19 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.ScaledHilbertBlockComparison
-public import CCDN.Curve.CurveFunctionField
-public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Curve.CurveFunctionField
+import CCDN.Hilbert.FunctionFieldRank
+import CCDN.Hilbert.MonomialDimension
+import CCDN.Hilbert.ScaledHilbertBlockComparison
+import CCDN.Projection.LinearProjectionFiltration
+import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.LinearAlgebra.Dimension.Finite
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+import Mathlib.RingTheory.Localization.Integer
+import Mathlib.RingTheory.SimpleModule.Basic
 
 /-! Function-field rank bounds for polynomial parameters of bounded
 degree, obtained from the geometric Hilbert multiplicity. Linear parameters are the case of

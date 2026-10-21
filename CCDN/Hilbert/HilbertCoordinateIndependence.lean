@@ -7,6 +7,8 @@ module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+public import CCDN.Algebra.MonomialOrthants
+import CCDN.Determinant.OrthantMultiplicity
 
 /-! Maximal standard-monomial orthants construct algebraically
 independent original coordinates of cardinality equal to Hilbert dimension. -/

@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.BivariateCoefficientMatrix
-public import CCDN.Noether.BivariateFactorForms
 public import Mathlib.LinearAlgebra.Matrix.Rank
+import CCDN.Noether.BivariateFactorForms
 
 /-! Reconstruct bounded polynomial closed forms inside the matrix
 kernel. Two independent forms force the rank drop used by the integer minor. -/

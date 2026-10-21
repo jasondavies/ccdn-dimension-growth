@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialPrimeLocalization
-public import Mathlib.Algebra.Polynomial.Eval.Irreducible
-public import Mathlib.RingTheory.Localization.FractionRing
+public import Mathlib.Algebra.MvPolynomial.Equiv
+import CCDN.Algebra.PolynomialPrimeLocalization
+import Mathlib.Algebra.MvPolynomial.Division
+import Mathlib.Algebra.Polynomial.Eval.Irreducible
+import Mathlib.Algebra.Polynomial.Monic
 
 /-! Ordinary irreducibility of the generic stretching substitution
 f(x,z) -> f(x,y*z). The fresh variable y is first made invertible; scaling

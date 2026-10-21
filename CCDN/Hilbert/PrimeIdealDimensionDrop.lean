@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.PrincipalSectionGridBound
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.ProperSectionHilbert
+import CCDN.Hypersurface.PrincipalSectionGridBound
 /-! A strict containment of affine prime ideals strictly lowers the
 Hilbert dimension. The proof uses a polynomial in their difference. -/
 

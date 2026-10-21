@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.IndependentProjectionRows
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
+import CCDN.Center.IndependentProjectionRows
+import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Hilbert.PrincipalHilbertPolynomial
+import CCDN.Projection.HilbertProjectionDegree
+import CCDN.Projection.HomogeneousFiniteProjectionDegree
+import CCDN.Projection.HomogeneousProjectionEquation
 /-! The bounded homogeneous birational projection can always be chosen
 with independent ambient rows, including degree one. If its primitive row
 is redundant, the normalization rows already generate the function field;

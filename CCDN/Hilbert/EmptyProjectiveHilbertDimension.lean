@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectiveFiniteFibers
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import CCDN.LowerBound.GridPointInterpolation
+public import CCDN.Algebra.ProjectiveSection
+import CCDN.LowerBound.GridPointInterpolation
+import CCDN.Projection.ProjectiveFiniteFibers
 /-! A coordinate ring with constant filtered Hilbert polynomial has
 finitely many rational affine zeros. Its projective zero locus is empty,
 since every nonzero representative would produce arbitrarily many affine

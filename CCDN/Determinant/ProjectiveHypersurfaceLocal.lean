@@ -6,8 +6,13 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousChart
-public import CCDN.Determinant.ProjectiveLocalDeterminant
-public import CCDN.Determinant.HypersurfaceResidue
+public import CCDN.Determinant.HypersurfaceLocalDeterminant
+public import CCDN.Determinant.PlaneMultiplicity
+import CCDN.Determinant.BlockDeterminant
+import CCDN.Determinant.HypersurfaceResidue
+import CCDN.Determinant.ProjectiveLocalDeterminant
+import CCDN.Determinant.SmoothLocalDeterminant
+import CCDN.Height.ProjectiveZeroLocus
 /-! Projective hypersurface determinants in all positive dimensions.
 Unit normalization modulo prime powers transfers the local affine
 bound to homogeneous evaluation matrices of a common degree. -/

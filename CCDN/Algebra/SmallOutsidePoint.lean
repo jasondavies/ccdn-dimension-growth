@@ -5,12 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertLowDegreeEquation
-public import CCDN.LowerBound.GridPointInterpolation
-public import CCDN.Algebra.IntegerPolynomialAvoidance
-public import CCDN.Height.ProjectiveIntegerHeight
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Height.ProjectiveBox
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Height.ProjectiveIntegerHeight
+import CCDN.Hilbert.HilbertLowDegreeEquation
+import CCDN.LowerBound.GridPointInterpolation
+import Mathlib.Algebra.MvPolynomial.SchwartzZippel
+import Mathlib.Algebra.Order.Star.Rat
 /-! CCDN Corollary 4.1.2: integer points outside a proper irreducible
 affine variety, with coordinates bounded by its Hilbert degree, and the
 corresponding rational projective points of bounded height. -/

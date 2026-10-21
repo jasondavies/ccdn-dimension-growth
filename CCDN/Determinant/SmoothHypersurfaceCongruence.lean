@@ -5,11 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceResidue
-public import CCDN.Determinant.PlaneMultiplicitySmooth
-public import CCDN.Analysis.PrimeProduct
-public import CCDN.Determinant.BlockDeterminant
 import all ArithmeticHeights.BombieriVaaler
+public import CCDN.Determinant.PlaneMultiplicity
+import CCDN.Determinant.PlaneMultiplicitySmooth
 
 /-! At a nonsingular reduced point the translated hypersurface
 equation has multiplicity one. -/

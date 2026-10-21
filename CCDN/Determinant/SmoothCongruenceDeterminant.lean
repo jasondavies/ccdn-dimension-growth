@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.CongruenceHypersurfaceDeterminant
-public import CCDN.Determinant.SmoothProjectiveCongruence
-public import CCDN.Determinant.HypersurfaceHeightDeterminant
+public import CCDN.Determinant.HypersurfaceDeterminantRank
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.Determinant.CongruenceHypersurfaceDeterminant
+import CCDN.Determinant.HypersurfaceMultiplicityEstimate
+import CCDN.Determinant.SmoothProjectiveCongruence
 /-! The global determinant bound with simultaneous smooth congruence
 conditions. Bad reductions and local exponents are derived from the equation. -/
 

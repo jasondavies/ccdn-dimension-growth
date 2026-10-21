@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PlaneSingularities
-public import Mathlib.RingTheory.MvPolynomial.Localization
-public import Mathlib.RingTheory.Localization.Ideal
-public import Mathlib.RingTheory.Polynomial.Basic
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.RingTheory.Localization.FractionRing
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.RingTheory.Localization.Ideal
+import Mathlib.RingTheory.MvPolynomial.Localization
+import Mathlib.RingTheory.Polynomial.UniqueFactorization
 
 /-! Nonconstant prime polynomials remain prime when coefficients are localized.
 This also proves preservation of irreducibility under purely transcendental

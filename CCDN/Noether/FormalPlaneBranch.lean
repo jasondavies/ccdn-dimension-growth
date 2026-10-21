@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.FormalImplicitRoot
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.RingTheory.PowerSeries.Basic
+import CCDN.Noether.FormalImplicitRoot
 
 /-! Formal branches of plane equations at nonsingular points, in either
 coordinate chart. The other coordinate is the parameter X plus its base value. -/

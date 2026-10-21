@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.ProjectivePointSeparation
 public import CCDN.Hilbert.HomogeneousHilbert
-public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.LinearAlgebra.Projectivization.Basic
+import CCDN.Height.ProjectivePointSeparation
+import CCDN.Hilbert.FilteredIntersection
+import Mathlib.NumberTheory.Height.NumberField
+import Mathlib.NumberTheory.Height.Projectivization
 /-! Proper homogeneous sections of projective curves. The degree is the
 slope of the graded Hilbert function. Homogeneous interpolation and
 injective multiplication in the coordinate domain prove the section bound. -/

@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.IntegerMinorProjectiveHeight
 public import CCDN.Center.BoundedGoodCenter
 public import CCDN.Center.ZeroColumnCenterSubspace
-public import CCDN.Algebra.PolynomialPredicates
+public import Mathlib.NumberTheory.Height.NumberField
+public import Mathlib.NumberTheory.Height.Projectivization
+import CCDN.Center.IntegerMinorProjectiveHeight
 /-! Bounded rational good centers in the intrinsic Plücker height. The
 center, its good-locus membership and its height bound are constructed
 simultaneously from the source variety, including centers in X0=0. -/

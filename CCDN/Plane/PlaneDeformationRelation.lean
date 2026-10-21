@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.CurveProjectionDeformation
+public import CCDN.Plane.PlaneLinearDeformation
+import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 /-! The constant and first-order equations of a polynomial family of plane
 relations, expressed as equations in the target algebra. -/
 

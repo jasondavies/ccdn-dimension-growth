@@ -6,11 +6,13 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.QuadraticInvariantFactorization
-public import CCDN.ClassGroup.InvariantIdealIntegralRepresentative
 public import CCDN.ClassGroup.QuadraticAmbiguousClassBound
-public import CCDN.ForMathlib.FiniteGroupPowerTorsion
 public import CCDN.ClassGroup.IntegralIdealClass
-public import CCDN.ClassGroup.DiscriminantPrimeIdealCover
+import CCDN.ClassGroup.DiscriminantPrimeIdealCover
+import CCDN.ClassGroup.InvariantIdealIntegralRepresentative
+import CCDN.ClassGroup.QuadraticInvariantIdeals
+import CCDN.ClassGroup.QuadraticNormConjugation
+import CCDN.ForMathlib.FiniteGroupPowerTorsion
 /-! The two-torsion in the strongly ambiguous class group is
 bounded by base-field two-torsion and the finite set of ramified primes.
 The cover comes from the proved invariant-ideal factorization. -/

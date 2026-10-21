@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneSectionSum
+public import Mathlib.Analysis.Real.Sqrt
 /-! Numerical absorption of bad and zero plane sections above the cutoff
 p>27*d^4. The leading term remains exactly p^(m-1). -/
 

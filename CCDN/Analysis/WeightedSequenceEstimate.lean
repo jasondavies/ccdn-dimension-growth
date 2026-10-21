@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceMultiplicityEstimate
-public import Mathlib.Data.Set.Card
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Determinant.HypersurfaceMultiplicityEstimate
 
 /-! The weighted-sequence estimate of CCDN Lemma 2.2 in dimensions at least
 two. The multiplicity profile is arbitrary; it need not be a hypersurface

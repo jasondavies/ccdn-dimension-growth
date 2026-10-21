@@ -5,11 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
-public import CCDN.Algebra.PositiveCharacteristicRank
-public import CCDN.Determinant.ClosedFormIntegerMinor
-public import CCDN.Projection.ShearNormalization
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import CCDN.Noether.BivariateTotalDegree
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.Algebra.PositiveCharacteristicRank
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
+import CCDN.ForMathlib.MatrixRank
+import CCDN.Projection.ShearNormalization
 
 /-! A smooth rational point supplies a nonzero closed-form coefficient minor
 for an irreducible plane equation in large characteristic. The base field need

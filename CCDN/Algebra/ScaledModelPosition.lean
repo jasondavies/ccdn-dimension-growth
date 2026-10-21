@@ -7,7 +7,9 @@ module
 
 public import CCDN.Height.LeadingPositionHeight
 public import CCDN.Auxiliary.ScaledHomogenization
-public import CCDN.Projection.ScaledHeightElimination
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Algebra.HomogeneousLeadingCoefficient
+import CCDN.Projection.ScaledHeightElimination
 /-! Positioning a scaled homogeneous model while retaining a coefficient bound
 for the original affine equation and the full scaling gain in its height. -/
 

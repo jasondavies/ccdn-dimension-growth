@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowIncidenceIdeal
-public import CCDN.Hilbert.HilbertTranscendenceBasis
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Hilbert.HilbertTranscendenceBasis
+import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 /-! More hyperplanes than the affine Hilbert dimension satisfy a
 nonzero incidence equation. The equation is constructed from the
 elimination kernel, by a transcendence-degree count. -/

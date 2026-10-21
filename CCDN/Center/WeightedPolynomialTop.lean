@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.TopFormIrreducibility
 public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
-public import Mathlib.Algebra.Polynomial.Degree.Operations
+public import Mathlib.Algebra.Polynomial.Degree.Defs
+import Mathlib.Algebra.Polynomial.Degree.Lemmas
 
 /-! Weighted highest components through an auxiliary polynomial variable.
 The Rees substitution keeps the original monomials as coefficients, so

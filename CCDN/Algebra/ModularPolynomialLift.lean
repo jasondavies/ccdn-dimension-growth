@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.SingularTangent
+public import Mathlib.Data.ZMod.Basic
+public import Mathlib.RingTheory.MvPolynomial.Ideal
 /-! Coefficientwise integer lifts preserve homogeneous weights and origin-ideal
 powers. Reduction modulo p has exactly the coefficientwise divisibility kernel. -/
 

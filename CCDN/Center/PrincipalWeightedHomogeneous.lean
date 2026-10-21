@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowIncidenceGrading
-public import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 
 /-! A generator of a separately homogeneous principal ideal is itself
 separately homogeneous. The proof constructs its degree from a nonzero term. -/

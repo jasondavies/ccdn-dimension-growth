@@ -5,9 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.FormalBranchOrder
-public import Mathlib.Algebra.Algebra.Pi
-public import Mathlib.RingTheory.PowerSeries.Inverse
+public import Mathlib.RingTheory.PowerSeries.Basic
+import CCDN.Algebra.PointSeparation
+import CCDN.Algebra.SectionImageRank
+import CCDN.Noether.FormalBranchOrder
+import CCDN.Plane.PlaneHilbert
+import Mathlib.RingTheory.PowerSeries.Inverse
+import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import Mathlib.RingTheory.PrincipalIdealDomain
+import Mathlib.RingTheory.SimpleRing.Principal
 
 /-! A proper plane section has total multiplicity at least N at no more
 than d*m/N distinct smooth points. The proof uses local expansions

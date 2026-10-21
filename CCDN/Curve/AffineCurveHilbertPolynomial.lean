@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.NonRationalVarietyCount
+public import CCDN.Curve.Curve
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.FieldTheory.Galois.Basic
+import CCDN.Hypersurface.NonRationalVarietyCount
 /-! Exact agreement of the affine curve degree interface with the
 filtered Hilbert polynomial, and the nongeometric curve count. -/
 

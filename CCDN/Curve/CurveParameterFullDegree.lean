@@ -5,7 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ParameterRecurrenceGrowth
+public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+public import Mathlib.RingTheory.SimpleRing.Principal
+import CCDN.Algebra.ParameterRecurrenceGrowth
+import CCDN.Curve.CurveFunctionField
 /-! Eventual generation of the affine degree filtration by a linear parameter
 forces the function-field extension to have the full Hilbert degree. -/
 

@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.PrimeComponentTranscendence
-public import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Algebraic.Defs
+public import Mathlib.RingTheory.Finiteness.Defs
+import CCDN.Hilbert.PrimeComponentTranscendence
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # Critical growth of a finite-dimensional coordinate space

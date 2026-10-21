@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.IntegralProjectionFiberCount
-public import CCDN.Algebra.BoundedLinearSeparation
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import CCDN.Algebra.BoundedLinearSeparation
+import CCDN.Height.IntegralAlgebraPointCount
+import CCDN.Projection.IntegralProjectionFiberCount
+import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Mathlib.RingTheory.Polynomial.RationalRoot
 /-! Sharp specialization-fiber bounds over a normal base. A single integral
 linear combination separates a finite set of characteristic-zero points.
 Its specialized monic minimal polynomial bounds the entire fiber by the

@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.IncidenceDeterminantCertificate
-public import CCDN.Center.IrrelevantPowerCertificate
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Algebra.PolynomialPredicates
+import CCDN.Center.IncidenceDeterminantCertificate
+import CCDN.Center.IrrelevantPowerCertificate
+import CCDN.Height.ProjectiveZeroLocus
 /-! Closedness of the projective hyperplane incidence image, proved by
 finite homogeneous coefficient matrices. Empty fibers produce a determinant
 which is nonzero there and vanishes at every tuple with a projective intersection. -/

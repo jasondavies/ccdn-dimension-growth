@@ -5,10 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.ZeroDimensionalGeometricPoint
-public import CCDN.Center.GeometricProjectiveChow
 public import CCDN.Center.CenterProjectionHeight
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Algebra.ProjectiveChartScalarExtension
+import CCDN.Center.GeometricProjectiveCurveProjection
+import CCDN.Center.ProjectiveClosureRecovery
+import CCDN.Center.ProjectiveIncidencePermutation
+import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.ZeroDimensionalGeometricPoint
 /-! Numerical bounds for the row-resultant good-center detector. Its degree
 D(2d-1) is strictly smaller than D^2 in positive projective dimension, and
 a geometrically integral source of dimension zero has degree one. -/

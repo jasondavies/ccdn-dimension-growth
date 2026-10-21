@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionFieldDegree
-public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 
 /-! A primitive coordinate pair generates the function field over the constant
 field. Every finite family of functions then has polynomial reconstruction

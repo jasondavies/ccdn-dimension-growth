@@ -5,8 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.BoundedRowSeparation
-public import Mathlib.Analysis.SpecialFunctions.Sqrt
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.LinearAlgebra.Matrix.Notation
+import Mathlib.Algebra.Order.Algebra
+import Mathlib.Algebra.Order.Field.Power
+import Mathlib.Analysis.Normed.Group.Basic
+import Mathlib.Data.EReal.Inv
+import Mathlib.Data.Nat.Totient
+import Mathlib.Tactic.LinearCombination
 
 /-! A counterexample to the numerical constant printed in CCDN Lemma 5.4.
 The system has five independent equations in six variables, all coefficients

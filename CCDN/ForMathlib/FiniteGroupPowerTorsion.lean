@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.GroupTheory.Index
+public import Mathlib.Algebra.Group.Subgroup.Ker
+public import Mathlib.SetTheory.Cardinal.Finite
+import Mathlib.GroupTheory.Index
 
 /-!
 # Cardinality bounds for `n`-torsion in finite commutative groups

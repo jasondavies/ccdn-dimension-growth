@@ -5,8 +5,20 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.HypersurfaceHeightComparison
-public import Mathlib.Data.Nat.Choose.Bounds
+public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.Data.Nat.Choose.Basic
+import Mathlib.Tactic.ReduceModChar
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.Ordinal
+import Mathlib.Tactic.NormNum.NatLog
+import Mathlib.Tactic.NormNum.ModEq
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.NormNum.Irrational
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
+import Mathlib.Tactic.Echelon.Zsqrtd
+import Mathlib.Algebra.Order.Floor.Semifield
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 
 /-! Uniform bounds for the exact homogeneous hypersurface Hilbert rank.
 The factorial leading coefficient is retained in both directions. -/

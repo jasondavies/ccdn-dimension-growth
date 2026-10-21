@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.SectionImageRank
-public import Mathlib.RingTheory.Algebraic.Basic
-public import Mathlib.Algebra.Polynomial.Basis
+public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.RingTheory.Algebraic.Defs
+import Mathlib.Algebra.Polynomial.Basis
+import Mathlib.LinearAlgebra.Dimension.Finite
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+import Mathlib.RingTheory.Algebraic.Basic
 
 /-! Hilbert degree controls function-field rank over a transcendental linear
 coordinate. Independent functions over the parameter field produce independent

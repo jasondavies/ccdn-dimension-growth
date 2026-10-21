@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.ClosedFormFactorRank
-public import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
+public import CCDN.Noether.BivariateTotalDegree
+import CCDN.Noether.ClosedFormFactorRank
+import Mathlib.RingTheory.DedekindDomain.Basic
+import Mathlib.RingTheory.Polynomial.GaussLemma
+import Mathlib.RingTheory.Polynomial.IsIntegral
+import Mathlib.RingTheory.Valuation.ValuationRing
 
 /-! The full reducibility-to-rank-drop implication for normalized monic
 bivariate equations whose degrees up to `d` are nonzero in the base field, in particular

@@ -5,12 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.LinearParameterPrimitive
-public import CCDN.Projection.HomogeneousFiniteProjectionDegree
-public import CCDN.Projection.HomogeneousProjectionEquation
-public import CCDN.Projection.HilbertProjectionDegree
-public import CCDN.Center.HomogeneousIntegralRelation
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Center.HomogeneousIntegralRelation
+import CCDN.Height.LinearParameterPrimitive
+import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Hilbert.PrincipalHilbertPolynomial
+import CCDN.Projection.HilbertProjectionDegree
+import CCDN.Projection.HomogeneousFiniteProjectionDegree
+import CCDN.Projection.HomogeneousProjectionEquation
 /-! Primitive augmentation of a finite homogeneous normalization
 produces an irreducible equation whose degree in the new variable is exactly
 the Hilbert multiplicity. -/

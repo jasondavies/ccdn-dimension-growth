@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.SurfaceNonlinearCount
-public import CCDN.Analysis.SmallDegreeSurfaceNumerics
+public import CCDN.Curve.Curve
+import CCDN.AffineCurveBound
+import CCDN.Analysis.SmallDegreeSurfaceNumerics
+import CCDN.Surface.SurfaceNonlinearCount
 /-! Nonlinear initial curves whose degrees are at most logarithmic in the
 box radius. The full affine curve theorem and the strict surface exponent
 gap give a linear bound in every surface degree at least five. -/

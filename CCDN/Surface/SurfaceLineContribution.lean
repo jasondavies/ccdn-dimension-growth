@@ -5,11 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.SurfaceLineDirections
-public import CCDN.Surface.SurfaceDirectionSum
-public import CCDN.Surface.SurfaceNonlinearCount
-public import CCDN.Surface.SurfaceParallelLines
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Plane.IntegralAffineLine
+public import CCDN.Plane.Plane
+import CCDN.Surface.SurfaceDirectionSum
+import CCDN.Surface.SurfaceLineDirections
+import CCDN.Surface.SurfaceNonlinearCount
+import CCDN.Surface.SurfaceParallelLines
 /-! Finite families of rational affine lines on a surface. Grouping
 lines by their projective direction combines the primitive spacing bound
 with the uniform reciprocal-height sum. -/

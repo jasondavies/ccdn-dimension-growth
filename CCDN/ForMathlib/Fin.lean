@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Data.Fin.Tuple.Basic
-public import Mathlib.Order.Interval.Set.Fin
+public import Mathlib.Order.Interval.Set.Defs
+import Mathlib.Order.Interval.Set.Fin
 
 /-!
 # Images of initial segments under `Fin.snoc`

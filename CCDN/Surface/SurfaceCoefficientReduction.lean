@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.NonabsoluteSurfaceCount
-public import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
+public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Curve.Curve
+public import CCDN.Height.PrimitiveIntegerPolynomial
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
+import CCDN.Hilbert.CompleteIntersectionDegreeBudget
+import CCDN.Hypersurface.NonabsoluteSurfaceCount
 /-! Coefficients of a primitive surface equation can be restricted to
 polynomial height in the box radius. The complementary case already has
 a linear point bound from a degree-at-most-d auxiliary. -/

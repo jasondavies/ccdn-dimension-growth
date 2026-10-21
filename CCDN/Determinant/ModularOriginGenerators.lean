@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.OriginTruncationGenerators
-public import CCDN.Algebra.ModularPolynomialLift
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.RingTheory.MvPolynomial
+public import CCDN.Determinant.SingularTangent
+import CCDN.Algebra.ModularPolynomialLift
+import CCDN.Determinant.OriginTruncationGenerators
+import Mathlib.Tactic.LinearCombination
 
 /-! Lift singular local generators from the reduction modulo p. The
 remaining error is an explicit multiple of p, with a separate high-order term. -/

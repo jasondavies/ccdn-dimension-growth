@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.Polynomial.Taylor
-public import Mathlib.Algebra.Polynomial.Degree.SmallDegree
+public import Mathlib.Algebra.Polynomial.Derivative
+import Mathlib.Algebra.Polynomial.Taylor
 
 /-!
 # Finite differences and derivatives of univariate polynomials

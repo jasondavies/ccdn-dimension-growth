@@ -5,7 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfacePositioningCharZero
+public import CCDN.Auxiliary.HypersurfacePositioning
+public import CCDN.Noether.BivariateTotalDegree
+import CCDN.Auxiliary.HypersurfacePositioningCharZero
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Determinant.GenericPlaneSmoothness
+import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
+import CCDN.ForMathlib.MatrixRank
+import CCDN.Noether.ClosedFormRank
+import CCDN.Projection.ShearNormalization
 /-! A nonzero slope minor in characteristic zero, with ordinary and geometric
 irreducibility constructed from the smooth generic-plane family. -/
 

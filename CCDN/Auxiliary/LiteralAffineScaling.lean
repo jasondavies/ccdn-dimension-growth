@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.LiteralAffineBadPrimes
-public import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 public import CCDN.Noether.GenericPlaneStretch
-public import CCDN.Determinant.AffineCongruenceDeterminant
+public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Height.Box
+public import Mathlib.Algebra.GCDMonoid.Finset
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Determinant.ProjectiveLocalDeterminant
 /-! Primitivity and good affine reductions for prime-scaled models, with
 no degree-preservation requirement modulo the good primes. -/
 

@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
-public import Mathlib.Algebra.MvPolynomial.CommRing
 
 /-! Substitution respecting individual variable weights commutes with
 weighted homogeneous components. -/

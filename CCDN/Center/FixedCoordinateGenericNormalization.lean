@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.GenericLinearNormalizationOpenness
-public import CCDN.Center.ClosureNormalizationInfinite
-public import CCDN.Algebra.ProjectiveClosureSpecialization
-public import CCDN.Center.GeometricIdealPrimality
-public import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.ProjectiveClosureProjection
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Center.ClosureNormalizationInfinite
+import CCDN.Center.GenericLinearNormalizationOpenness
 /-! Generic affine linear normalization with the homogenizing coordinate
 fixed. The finite specialization and its nonzero determinant are both
 constructed from the source ideal. -/

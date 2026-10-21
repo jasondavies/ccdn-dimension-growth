@@ -7,8 +7,6 @@ module
 
 public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.Degrees
-public import Mathlib.Algebra.Order.Ring.Star
-public import Mathlib.Algebra.Order.Star.Rat
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 
 /-!

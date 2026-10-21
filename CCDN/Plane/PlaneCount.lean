@@ -5,8 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.StepanovRealBound
-public import CCDN.Determinant.GeometricResidueReduction
+public import CCDN.Plane.RationalPlaneAssembly
+import CCDN.Determinant.GeometricResidueReduction
+import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Plane.PlaneCurveAssembly
+import CCDN.Plane.PlaneStepanovBound
+import CCDN.Plane.PlaneStepanovDimension
+import CCDN.Plane.StepanovParameters
+import CCDN.Plane.StepanovRealBound
 /-! Sharp finite-field counting and the complete rational-plane
 integral-point bound. The finite-field proof uses the constructed Stepanov
 auxiliary and retains an explicit absolute error constant. -/

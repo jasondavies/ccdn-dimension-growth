@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.AffineCongruenceDeterminant
-public import CCDN.Auxiliary.CongruenceBadPrimeCharge
-public import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
+public import CCDN.Determinant.HypersurfaceDeterminantRank
+public import CCDN.Plane.IntegerPlaneLogHeight
+import CCDN.Auxiliary.CongruenceBadPrimeCharge
+import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
+import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
+import CCDN.Determinant.AffineCongruenceDeterminant
 /-! The affine congruence determinant bound with all bad-prime charges
 controlled by the equation's coefficient height and congruence modulus. -/
 

@@ -6,7 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.PrimeScaledAffineHeight
-public import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
+public import CCDN.Auxiliary.ScalingPrime
+import CCDN.Algebra.AffineScalingExponent
+import CCDN.Auxiliary.PrimeScaledAffineAuxiliary
+import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
+import CCDN.Height.ScaledHypersurfaceHeight
 /-! Both bounds for the bad-prime factor apply to the same homogeneous
 auxiliary. Their minimum therefore survives the affine exponent saving. -/
 

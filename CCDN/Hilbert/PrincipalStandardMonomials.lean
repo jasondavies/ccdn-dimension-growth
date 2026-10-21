@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.ForMathlib.StandardMonomials
+public import CCDN.Hilbert.FilteredIntersection
 public import CCDN.Algebra.MonomialRays
-public import CCDN.Plane.PlaneHilbert
-public import CCDN.Auxiliary.HypersurfaceRankProfile
+import CCDN.Hilbert.MonomialDimension
+import CCDN.Hilbert.StandardMonomials
+import CCDN.Plane.PlaneHilbert
 /-! Finite standard-monomial prefixes for a principal equation, their exact
 Hilbert ranks, and the sum of their total degrees. -/
 

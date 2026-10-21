@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.SurfaceSalbergerCover
+public import CCDN.Surface.SurfaceGeometricCurveCover
+import CCDN.Projection.PrimitiveNormalization
+import CCDN.Surface.SurfaceSalbergerCover
 /-! Clearing rational coefficients preserves the exact geometric Salberger
 cover and all of its uniform constants. -/
 

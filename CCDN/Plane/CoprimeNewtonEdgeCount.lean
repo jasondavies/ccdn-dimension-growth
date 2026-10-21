@@ -6,7 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.CoprimeNewtonEdgeReduction
-public import CCDN.ClassGroup.AffinePlaneBadPrimeCount
+public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+public import CCDN.Plane.Plane
+import CCDN.Auxiliary.BadPrimeCharge
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.ClassGroup.AffinePlaneBadPrimeCount
+import CCDN.Projection.PrimitiveNormalization
 /-! CCDN Corollary 4.2.5: the coprime Newton edge gives a logarithm-free
 affine curve count. Geometric irreducibility, the exceptional primes,
 content removal, and the point count are all proved here. -/

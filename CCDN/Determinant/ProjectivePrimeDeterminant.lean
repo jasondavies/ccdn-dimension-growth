@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PrimeAggregation
-public import CCDN.Determinant.ProjectiveMultiplicity
+public import CCDN.Determinant.ProjectivePlaneResidueDeterminant
+public import CCDN.Determinant.SingularDeterminantCutoff
+import CCDN.Determinant.PrimeAggregation
+import CCDN.Determinant.ProjectiveMultiplicity
+import CCDN.Height.ProjectiveFiniteFieldCount
 /-! Sharp prime-power and global prime-sum bounds for projective plane
 evaluation matrices. The excluded-prime set is explicit. -/
 

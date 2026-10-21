@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.GaloisPolynomialPrimes
-public import CCDN.Hypersurface.FiniteGaloisIdealDefinition
-public import CCDN.Hilbert.AlgebraicHilbertDimension
+public import Mathlib.FieldTheory.Galois.Basic
+public import Mathlib.Tactic.Continuity
+import CCDN.Hilbert.AlgebraicHilbertDimension
+import CCDN.Hypersurface.FiniteGaloisIdealDefinition
+import CCDN.Hypersurface.GaloisPolynomialPrimes
 /-! Base-field points lie on every geometric component. Finite
 Galois conjugacy first covers every prime over the original prime ideal;
 finite fields of definition then remove the finite-extension restriction. -/

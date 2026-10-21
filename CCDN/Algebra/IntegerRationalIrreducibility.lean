@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.PrimitiveNormalization
-public import CCDN.Hypersurface.NonabsolutePlaneCount
+public import Mathlib.Algebra.MvPolynomial.Degrees
+import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Projection.PrimitiveNormalization
+import Mathlib.Algebra.MvPolynomial.Nilpotent
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! Positive-degree irreducible integer equations remain irreducible over Q.
 Primitive denominator-cleared divisors give an elementary Gauss argument. -/
 

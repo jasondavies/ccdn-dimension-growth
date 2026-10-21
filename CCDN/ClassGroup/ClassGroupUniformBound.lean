@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupDegreeReduction
-public import CCDN.ClassGroup.QuadraticClassGroupNumerics
+public import CCDN.ClassGroup.ClassGroupTwoTorsion
+import CCDN.ClassGroup.ClassGroupBalancedGenerator
+import CCDN.ClassGroup.ClassGroupDegreeReduction
+import CCDN.ClassGroup.DiscriminantPrimeIdealCover
+import CCDN.ClassGroup.QuadraticClassGroupDescent
+import CCDN.ClassGroup.QuadraticClassGroupNumerics
 /-! Uniform class-group bounds by strong induction on the field
 degree. A quadratic subfield has smaller degree, and discriminant descent
 leaves enough exponent saving to absorb the proved ramification factor.

@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.LinearAlgebra.Matrix.Block
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.LinearAlgebra.Matrix.Block
 
 /-!
 # Determinants of dependent block-diagonal matrices

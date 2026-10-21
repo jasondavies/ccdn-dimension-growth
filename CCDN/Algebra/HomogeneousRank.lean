@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HomogeneousHilbert
-public import CCDN.Algebra.HomogeneousEvaluation
+public import CCDN.Algebra.HomogeneousMonomials
+public import Mathlib.LinearAlgebra.Matrix.Rank
+public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+import CCDN.Algebra.HomogeneousEvaluation
+import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hilbert.FilteredIntersection
+import CCDN.Hilbert.HomogeneousHilbert
 /-! The homogeneous Hilbert count bounds evaluation-matrix ranks.
 The deficit includes every degree-allowed multiple of the defining equation. -/
 

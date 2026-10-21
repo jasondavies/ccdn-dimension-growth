@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousTranslation
-public import CCDN.Plane.PlaneGridHeight
+public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
+import CCDN.Algebra.HomogeneousChart
+import CCDN.Plane.PlaneGridHeight
 /-! Positioning a coefficient-height witness as the lexicographic leading
 coefficient by a bounded integral translation of the affine chart. -/
 

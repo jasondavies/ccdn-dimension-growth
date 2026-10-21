@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.DifferentialResidue
+public import CCDN.Noether.RationalDifferential
+public import Mathlib.RingTheory.Derivation.MapCoeffs
+import CCDN.Determinant.DifferentialResidue
+import Mathlib.FieldTheory.Differential.Basic
 /-! Degree-bounded closed rational forms for irreducible monic polynomials
 over a rational function field with algebraically closed constant field. -/
 

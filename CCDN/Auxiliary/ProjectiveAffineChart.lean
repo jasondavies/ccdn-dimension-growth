@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.ProjectivePlaneBezout
 public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Height.ProjectiveZeroLocus
 /-! Affine coordinates on the standard open subset of projective space,
 with injectivity and compatibility with homogeneous equations. -/
 

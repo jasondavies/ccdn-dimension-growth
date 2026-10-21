@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.CoefficientwiseHomogeneous
-public import CCDN.Noether.UniversalPlaneWitness
+public import CCDN.Algebra.HomogeneousMonomials
+public import CCDN.Noether.UniversalPlaneFamily
+public import Mathlib.CategoryTheory.Category.Basic
+public import Mathlib.RingTheory.MvPolynomial
 /-! A homogeneous form with independent integer coefficient variables,
 and its exact specialization to every homogeneous equation. -/
 

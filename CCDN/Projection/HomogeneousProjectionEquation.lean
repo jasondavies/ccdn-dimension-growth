@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.HomogeneousFilteredProjection
-public import CCDN.Plane.PlaneRelationSpace
-public import CCDN.Auxiliary.HypersurfaceGoodDirection
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Auxiliary.HypersurfaceGoodDirection
+import CCDN.Plane.PlaneRelationSpace
+import CCDN.Projection.HomogeneousFilteredProjection
 /-! The principal equation of the image of a homogeneous linear
 projection is homogeneous. -/
 

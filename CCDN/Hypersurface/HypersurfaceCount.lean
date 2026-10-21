@@ -5,7 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.HypersurfaceCountError
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Analysis.Real.Sqrt
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.Hypersurface.HypersurfaceCountError
+import CCDN.Plane.PlaneSectionSum
 /-! A sharp coefficient-uniform count for geometrically irreducible affine
 hypersurfaces over prime fields, proved by plane-section averaging. -/
 

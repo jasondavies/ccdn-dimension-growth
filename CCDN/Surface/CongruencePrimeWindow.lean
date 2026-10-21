@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.ScalingPrime
+import CCDN.Analysis.PrimeCutoff
+import CCDN.Auxiliary.BadPrimeCharge
 /-! A fixed multiplicative prime window has enough product to avoid every
 integer of prescribed logarithmic height, and only O(L/log L) primes.
 These are the arithmetic inputs to the residue-class cover. -/

@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.LowerBound.GridAffineLowerBound
-public import CCDN.LowerBound.IntegerGridLowerBound
-public import CCDN.Analysis.DegreeDependenceNumerics
+public import CCDN.Plane.Plane
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Analysis.DegreeDependenceNumerics
+import CCDN.LowerBound.GridAffineLowerBound
+import CCDN.LowerBound.GridLowerBoundNumerics
+import CCDN.LowerBound.IntegerGridLowerBound
 /-! The affine-curve sharpness statement in CCDN Section 6, with
 absolutely irreducible equations through the specified integer grids. -/
 

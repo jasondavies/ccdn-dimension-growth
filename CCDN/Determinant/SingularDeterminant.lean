@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PlaneMultiplicitySmooth
-public import CCDN.Analysis.PrimeSums
 import all ArithmeticHeights.BombieriVaaler
+public import CCDN.Determinant.SingularReduction
+import CCDN.Determinant.PlaneMultiplicitySmooth
 
 /-! The local exponent at a possibly singular plane reduction, bounded by
 the residue-point count plus the singular correction. -/

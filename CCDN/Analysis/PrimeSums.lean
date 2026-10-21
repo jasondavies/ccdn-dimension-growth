@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mertens
-public import CCDN.Determinant.ResidueAggregation
 /-! The Mertens lower bound for the prime sum after excluding a finite
 bad-prime set. -/
 

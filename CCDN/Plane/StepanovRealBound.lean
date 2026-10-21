@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneStepanovDimension
+public import Mathlib.Analysis.Real.Sqrt
 /-! The explicit real-valued error term for the integer Stepanov parameters. -/
 
 @[expose] public section

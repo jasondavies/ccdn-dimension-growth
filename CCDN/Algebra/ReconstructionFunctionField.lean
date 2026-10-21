@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.CurveRationalInverse
-public import CCDN.Projection.ProjectionFractionField
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Defs
+public import Mathlib.RingTheory.Localization.FractionRing
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 /-! Polynomial reconstruction identities prove generation of the
 source function field. This is the converse to the rational-inverse
 construction, and makes birationality explicit in counting projections. -/

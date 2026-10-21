@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.RadialHomogeneousMap
-public import CCDN.Hilbert.HomogeneousHilbert
 public import Mathlib.RingTheory.Nullstellensatz
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Vanishing only at the origin on the infinity section supplies balanced
 coordinate-power reductions. The Nullstellensatz is used on the kernel

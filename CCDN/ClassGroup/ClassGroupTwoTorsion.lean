@@ -6,9 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.NumberTheory.NumberField.ClassNumber
-public import Mathlib.NumberTheory.NumberField.Norm
-public import Mathlib.RingTheory.UniqueFactorizationDomain.Multiplicity
-public import Mathlib.Tactic
 
 /-! The algebraic starting point of the class-group application.
 Classes killed by two have nonzero integral representatives whose

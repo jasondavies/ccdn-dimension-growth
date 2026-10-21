@@ -5,10 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.GeometricCenterRows
-public import CCDN.Center.FixedCoordinateCenterRows
-public import CCDN.Center.MatrixProjectionFields
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveClosureIdeal
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Center.CenterMinorProjection
+public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.CenterMinorMatrix
+import CCDN.Center.FixedCoordinateCenterRows
+import CCDN.Center.GeometricCenterRows
 /-! Constructed good centers for the literal maximal-minor projection.
 Equal kernels transfer both integrality and the generated function
 field. The affine construction retains a zero first column. -/

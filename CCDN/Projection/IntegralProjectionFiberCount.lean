@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.IntegralAlgebraPointCount
 public import CCDN.Projection.LinearProjectionFiltration
-public import Mathlib.RingTheory.Polynomial.UniqueFactorization
+public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Height.IntegralAlgebraPointCount
+import Mathlib.FieldTheory.PurelyInseparable.Basic
+import Mathlib.RingTheory.Polynomial.RationalRoot
 
 /-! Rational-point fibers of an integral polynomial projection.
 Evaluation on the quotient constructs the specialization homomorphisms,

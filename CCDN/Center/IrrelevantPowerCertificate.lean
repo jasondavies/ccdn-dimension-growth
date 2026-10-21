@@ -7,7 +7,6 @@ module
 
 public import Mathlib.RingTheory.Nullstellensatz
 public import Mathlib.RingTheory.MvPolynomial.Ideal
-public import Mathlib.RingTheory.Finiteness.Ideal
 
 /-! A polynomial ideal whose only possible geometric zero is the origin
 contains a positive power of the irrelevant ideal. This is the concrete

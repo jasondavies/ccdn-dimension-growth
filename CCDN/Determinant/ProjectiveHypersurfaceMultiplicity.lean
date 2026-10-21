@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceSingularities
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
-public import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Determinant.HypersurfaceSingularities
+import CCDN.Determinant.PlaneMultiplicitySmooth
 /-! The singular multiplicity correction for projective hypersurfaces.
 Chart coordinates inject each selected residue class into an affine
 singular locus, whose codimension-two point bound is proved by interpolation. -/

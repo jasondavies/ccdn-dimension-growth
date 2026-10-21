@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HomogeneousHilbert
 public import CCDN.Algebra.PolynomialPredicates
+import CCDN.ForMathlib.MvPolynomial
 /-! Homogeneous certificates for membership in an ideal together with finitely
 many linear equations. These retain the degree needed for a finite coefficient
 matrix certificate of empty projective incidence. -/

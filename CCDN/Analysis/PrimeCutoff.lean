@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.SingularDeterminant
+public import CCDN.Analysis.PrimeSums
 /-! Uniform prime-weighted reciprocal tails and degree cutoffs. -/
 
 @[expose] public section

@@ -6,11 +6,13 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.BoundedIntegerNormalization
-public import CCDN.Height.LinearParameterPrimitive
-public import CCDN.Projection.HomogeneousFiniteProjectionDegree
-public import CCDN.Projection.HomogeneousProjectionEquation
-public import CCDN.Projection.HilbertProjectionDegree
 public import CCDN.Algebra.PolynomialPredicates
+import CCDN.Height.LinearParameterPrimitive
+import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Hilbert.PrincipalHilbertPolynomial
+import CCDN.Projection.HilbertProjectionDegree
+import CCDN.Projection.HomogeneousFiniteProjectionDegree
+import CCDN.Projection.HomogeneousProjectionEquation
 /-! A bounded integer linear finite birational projection of a
 homogeneous prime quotient to a hypersurface of exactly the same degree. -/
 

@@ -5,7 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PolynomialMapDeterminant
+public import CCDN.Determinant.HeightDeterminant
+import CCDN.Auxiliary.PlaneAuxiliaryDegree
+import CCDN.Auxiliary.PlaneAuxiliaryLargeHeight
+import CCDN.Auxiliary.PlaneAuxiliarySelection
+import CCDN.Determinant.PolynomialMapDeterminant
 /-! Auxiliary nonmultiples and explicit degree choices for polynomial images
 of the original integer plane curve. Sharp finite-field counts remain explicit. -/
 

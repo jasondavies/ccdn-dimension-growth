@@ -5,9 +5,19 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.BoundedCenterProjectionAllRows
 public import CCDN.Center.BirationalCenterLocus
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.BoundedCenterProjection
+public import CCDN.Center.ChowLinearSpecialization
+public import CCDN.Height.ProjectiveBox
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.BoundedCenterProjectionAllRows
+import CCDN.Center.CenterMinorMatrix
+import CCDN.Center.CenterProjectionHeight
+import CCDN.Center.HomogeneousProjectionNoBasePoint
+import CCDN.Projection.HomogeneousFiniteProjectionDegree
+import CCDN.Projection.IntegralProjectionHilbert
+import CCDN.Projection.ProjectionScalarExtension
+import Mathlib.Algebra.Order.Star.Rat
 /-! Complementary projections retain the geometric and degree
 properties of the minor projection with the same center. This interface
 is independent of the bound used to construct the center rows. -/

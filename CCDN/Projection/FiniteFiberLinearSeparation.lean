@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedDegreeNormalizationFiber
-public import CCDN.Algebra.BoundedLinearSeparation
-public import CCDN.Projection.LinearNormalizationInfinite
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Algebra.BoundedLinearSeparation
+import CCDN.Projection.BoundedDegreeNormalizationFiber
 /-! Fibers of a linear normalization are finite. An additional
 homogeneous linear form separates an outside point from the whole fiber. -/
 

@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.PrimitiveSurfaceFixedDegree
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Plane.Plane
+import CCDN.Height.PrimitiveSurfaceFixedDegree
+import CCDN.Surface.TopFormBadPrimes
 /-! Removing integer content from the fixed-degree surface estimate.
 The resulting constant is uniform in all integer coefficients. -/
 

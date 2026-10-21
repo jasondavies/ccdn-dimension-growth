@@ -5,12 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedInfinityParameter
-public import CCDN.Projection.DegreePreservingProjectionCount
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import CCDN.Projection.BoundedInfinityAvoidance
-public import CCDN.Hilbert.RecurrenceParameterTranscendence
-public import CCDN.Projection.FullDegreePrimitiveProjection
+public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Projection.InfinityParameterReduction
+import CCDN.Curve.CurveRationalParameter
+import CCDN.Hilbert.RecurrenceParameterTranscendence
+import CCDN.Projection.BoundedInfinityAvoidance
+import CCDN.Projection.BoundedInfinityParameter
+import CCDN.Projection.DegreePreservingProjectionCount
+import CCDN.Projection.FullDegreePrimitiveProjection
 /-! Every positive-degree prime affine curve in characteristic zero admits
 an explicitly bounded integral linear plane projection preserving its degree.
 The first coordinate is constructed by infinity avoidance and the second by

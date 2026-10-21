@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.FilteredDeterminant
-public import Mathlib.RingTheory.LocalRing.Quotient
-public import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.Noetherian.Defs
+import Mathlib.RingTheory.Ideal.Quotient.Index
+import ArithmeticHeights.Absolute
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 
 /-! Weighted generators from ideal-adic layers of a Noetherian ring.
 

@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.LogarithmicSalbergerRate
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Surface.LogarithmicSalbergerRate
 /-! Numerical normalization of the curve count and the exceptional-set
 bound in the literal surface covering theorem. -/
 

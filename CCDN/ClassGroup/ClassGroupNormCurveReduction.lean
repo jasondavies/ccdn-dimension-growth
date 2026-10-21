@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.ClassGroupTranslateFibers
-public import Mathlib.GroupTheory.QuotientGroup.Defs
 
 /-! The bounded square-norm set is partitioned by integer translations.
 This constructs a finite norm-curve family. The uniform estimate for the

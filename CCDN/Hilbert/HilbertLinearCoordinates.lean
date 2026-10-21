@@ -5,9 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertPolynomialComparison
 public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.MonomialDimension
+import Mathlib.Algebra.MvPolynomial.Monad
+import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+import Mathlib.RingTheory.Polynomial.HilbertPoly
+import Mathlib.Tactic.Positivity
 
 /-! Algebraically independent linear coordinates have cardinality at most
 the degree of the filtered Hilbert polynomial. -/

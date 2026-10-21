@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.LinearAlgebra.Matrix.Rank
-public import Mathlib.LinearAlgebra.Matrix.NonsingularInverse
 
 /-!
 # Nonzero minors of matrices with arbitrarily many rows

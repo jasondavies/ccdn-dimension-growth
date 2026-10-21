@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.CompleteIntersectionDegreeBudget
-public import CCDN.Surface.SurfaceNonlinearCount
-public import CCDN.Plane.Bezout
+public import CCDN.Hilbert.FilteredPrimeDecomposition
+public import Mathlib.RingTheory.Ideal.Height
+import CCDN.Hilbert.CompleteIntersectionDegreeBudget
+import CCDN.Hilbert.CompleteIntersectionHeight
+import CCDN.Plane.Bezout
+import CCDN.Surface.SurfaceNonlinearCount
 /-! Degree and proper-section budgets for any finite family of distinct
 prime curves on a surface section. A curve constructed by another
 auxiliary is counted as a component of the section whenever its ideal

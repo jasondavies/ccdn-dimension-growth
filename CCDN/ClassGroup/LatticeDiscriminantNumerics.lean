@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import Mathlib.Analysis.SpecialFunctions.Sqrt
+import Mathlib.Algebra.Order.Algebra
 
 /-! Numerical conversion of a lattice norm-product bound into the uniform
 discriminant-root scale for its largest minimum. -/

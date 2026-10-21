@@ -5,7 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneFrobeniusSystem
+public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.Auxiliary.PlaneFrobeniusAuxiliary
+import CCDN.Determinant.PlaneSingularities
+import CCDN.Plane.Bezout
+import CCDN.Plane.PlaneFrobeniusSystem
+import Mathlib.LinearAlgebra.Dimension.Free
+import Mathlib.LinearAlgebra.Basis.VectorSpace
 /-! The Stepanov point bound with an explicit finite-dimensional inequality.
 The polynomial bases, auxiliary coefficients, formal branches and multiplicity
 argument are explicit, given a numerical choice of degrees. -/

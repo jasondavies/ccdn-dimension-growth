@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.Bezout
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.Plane.Bezout
 
 /-! The singular-point correction in the finite-field curve estimate. The
 remaining estimate for all nonsingular rational points is not asserted here. -/

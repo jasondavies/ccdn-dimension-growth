@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.PrimeWindowSalbergerRate
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Surface.PrimeWindowSalbergerRate
 /-! Fixed logarithmic powers fit the precise exceptional-set exponent
 of the surface covering theorem. -/
 

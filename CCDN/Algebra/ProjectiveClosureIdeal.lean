@@ -6,9 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.RadialHomogeneousMap
-public import CCDN.Algebra.ProjectiveChartIdeal
-public import CCDN.Algebra.ProjectiveChartScalarExtension
-public import CCDN.Hilbert.HomogeneousPrimeComponents
+public import CCDN.Algebra.HomogeneousChart
+import CCDN.Algebra.IdealScalarDescent
+import CCDN.Algebra.ProjectiveChartScalarExtension
+import CCDN.Hilbert.HilbertScalarExtension
+import CCDN.Hilbert.HomogeneousPrimeComponents
 /-! The projective closure ideal of an affine coordinate ideal. The
 homogenizing parameter is a polynomial variable over the affine quotient,
 so primeness and homogeneous components are proved directly. -/

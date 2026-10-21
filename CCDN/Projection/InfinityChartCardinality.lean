@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousScalarExtension
-public import CCDN.Auxiliary.HomogeneousChartInterpolation
-public import Mathlib.Data.Set.Card
+public import CCDN.Projection.InfinityEvaluationSpan
+import CCDN.Algebra.HomogeneousScalarExtension
+import CCDN.Auxiliary.HomogeneousChartInterpolation
 
 /-! The certified affine Hilbert degree bounds the number of geometric
 infinity points in each normalized projective chart. -/

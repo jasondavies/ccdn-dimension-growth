@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
-public import Mathlib.FieldTheory.Minpoly.Finite
-public import Mathlib.Algebra.Polynomial.Roots
-public import Mathlib.Data.Fintype.Pi
+public import Mathlib.FieldTheory.Minpoly.Basic
+public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Mathlib.FieldTheory.Minpoly.Finite
+import Mathlib.FieldTheory.Minpoly.IsIntegrallyClosed
 
 /-! Uniform counts for coordinate tuples obtained from integral
 algebra homomorphisms. A normal base ring bounds every integral generator's

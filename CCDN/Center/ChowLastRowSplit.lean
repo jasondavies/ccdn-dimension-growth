@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowIncidenceMinimalPolynomial
-public import CCDN.Center.PolynomialFractionCoefficientExtension
 /-! Split off the final hyperplane's free coefficients from the
 Chow incidence coordinate ring. This is a polynomial-ring isomorphism,
 not a specialization. -/

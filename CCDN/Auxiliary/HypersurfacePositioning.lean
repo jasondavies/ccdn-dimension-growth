@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceFullOuterDegree
-public import CCDN.Determinant.GenericPlaneMinor
+public import CCDN.Auxiliary.HypersurfaceAffineCoordinates
+public import CCDN.Noether.GenericPlaneIrreducibility
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.Auxiliary.HypersurfaceFullOuterDegree
+import CCDN.Auxiliary.HypersurfaceGoodDirection
+import CCDN.Determinant.GenericPlaneMinor
+import CCDN.Determinant.HypersurfaceSmoothPoint
 /-! Full-degree monic positioning of an irreducible hypersurface at a
 smooth point, using an invertible affine change and a nonzero scalar. -/
 

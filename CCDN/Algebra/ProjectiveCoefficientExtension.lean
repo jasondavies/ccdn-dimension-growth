@@ -7,6 +7,7 @@ module
 
 public import CCDN.Hypersurface.NonRationalProjectiveCount
 public import CCDN.Algebra.PolynomialPredicates
+import CCDN.Height.ProjectiveZeroLocus
 /-! Rational projective points embed injectively after a coefficient-field
 extension. Homogeneous ideal equations remain zero on every representative. -/
 

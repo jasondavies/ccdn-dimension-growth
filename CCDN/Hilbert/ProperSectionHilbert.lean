@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FilteredIntersection
-public import CCDN.Hilbert.HilbertPolynomialComparison
-public import CCDN.ForMathlib.Polynomial
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.ForMathlib.Polynomial
+import CCDN.Hilbert.HilbertPolynomialComparison
+import Mathlib.Algebra.Order.Star.Rat
+import Mathlib.Algebra.Polynomial.Taylor
 /-! Hilbert inequalities for a proper polynomial section of a prime
 affine variety. Multiplication by the section is injective in the original
 coordinate domain and is killed in the section quotient. -/

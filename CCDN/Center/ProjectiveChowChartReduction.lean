@@ -5,10 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ProjectiveChowWithoutChart
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Center.ProjectiveChowEquation
-public import CCDN.Center.ProjectiveClosureRecovery
+public import CCDN.Algebra.ProjectiveChartIdeal
+public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ProjectiveChowIncidence
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.GeometricProjectiveCurveProjection
+import CCDN.Center.ProjectiveClosureRecovery
+import CCDN.Center.ProjectiveIncidencePermutation
+import CCDN.Center.WeightedHomogeneousTransform
 /-! Any projective Chow equation can be moved to a nonempty affine chart
 without changing its block degrees or total degree. The chart has the
 dimension and multiplicity of the projective source. -/

@@ -6,8 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.CompleteIntersectionHeight
-public import CCDN.Hilbert.FilteredHilbertLinearity
-public import Mathlib.FieldTheory.Minpoly.Field
+public import CCDN.Hilbert.FilteredIntersection
+import CCDN.Hilbert.FilteredHilbertLinearity
+import Mathlib.FieldTheory.Minpoly.Basic
 
 /-! A point on a prime component forces a transcendental coordinate and
  positive eventual Hilbert slope in codimension two. -/

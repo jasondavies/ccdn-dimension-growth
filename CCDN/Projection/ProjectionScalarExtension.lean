@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.IdealScalarDescent
 public import CCDN.Projection.LinearProjectionFiltration
+public import CCDN.Algebra.PolynomialLinearDescent
+import CCDN.Algebra.IdealScalarDescent
+import CCDN.Hilbert.HilbertScalarExtension
 /-! Scalar extension commutes with a polynomial image ideal.
 Consequently a polynomial projection of a geometrically integral source
 has a geometrically integral image. -/

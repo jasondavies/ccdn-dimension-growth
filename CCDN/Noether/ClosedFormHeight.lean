@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.ClosedFormIntegerMinor
-public import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
+public import CCDN.Noether.BivariateCoefficientMatrix
+public import Mathlib.Basic.Real.Basic
+import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 
 /-! Coefficient and determinant bounds for the integer closed-form matrix. -/
 

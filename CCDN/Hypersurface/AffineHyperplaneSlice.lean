@@ -6,9 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
-public import CCDN.Algebra.AffineLeadingTranslation
-public import CCDN.Projection.PrimitiveNormalization
-public import CCDN.Surface.TopFormIrreducibility
+public import CCDN.Algebra.AffineTranslation
+import CCDN.Algebra.AffineLeadingTranslation
 /-! Parallel affine slices preserve the good leading hyperplane section.
 Rational restriction equations can then be replaced by integer
 polynomials without changing their zero sets or total degrees. -/

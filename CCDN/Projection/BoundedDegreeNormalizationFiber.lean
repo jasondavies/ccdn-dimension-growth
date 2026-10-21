@@ -5,10 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.IntegralFiberRank
-public import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
-public import CCDN.Hilbert.HilbertLinearCoordinates
-public import CCDN.Projection.ProjectionFractionField
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
+import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Projection.IntegralFiberRank
+import CCDN.Projection.ProjectionFractionField
+import Mathlib.RingTheory.AlgebraicIndependent.Basic
 /-! Sharp fibers of integral polynomial parameters of degree at most q.
 The Hilbert multiplicity bounds the field degree by d*q^dimension;
 a separating integral element gives the same bound for every finite fiber. -/

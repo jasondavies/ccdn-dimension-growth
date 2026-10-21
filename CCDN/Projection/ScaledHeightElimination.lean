@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Analysis.Analytic
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-! A monotone scaled logarithmic-height ratio. A lower bound for the scaled
 model height yields the saving needed to change the box exponent 2/d to 1/d. -/
 

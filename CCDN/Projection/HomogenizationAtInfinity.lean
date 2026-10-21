@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Algebra.HomogeneousChart
+import CCDN.Auxiliary.ScaledHomogenization
 /-! The restriction of a bounded homogenization to the hyperplane at infinity
 is exactly its highest indicated homogeneous component. -/
 

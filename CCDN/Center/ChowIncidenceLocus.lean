@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowIncidenceIdeal
+public import Mathlib.RingTheory.Nullstellensatz
 /-! The constructed elimination ideal is the vanishing ideal of
 hyperplane tuples having a common point on the chosen affine chart. -/
 

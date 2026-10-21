@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.BoundedMinorSpecialization
-public import CCDN.Auxiliary.HypersurfacePositioning
-public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import CCDN.Auxiliary.HypersurfaceAffineCoordinates
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.Auxiliary.HypersurfaceGoodDirection
+import CCDN.Determinant.BoundedMinorSpecialization
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-! A single bounded linear elimination step. A chosen nonzero ideal equation
 of degree d becomes monic after a linear coordinate change with integer

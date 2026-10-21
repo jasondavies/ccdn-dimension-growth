@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.WeightedHeightRatio
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Auxiliary.IntegerCoefficientHeight
+import CCDN.Height.WeightedHeightRatio
 /-! CCDN Lemma 4.2.3: replace the full coefficient height by any lower height
 in the bad-prime contribution, uniformly in the degree. -/
 

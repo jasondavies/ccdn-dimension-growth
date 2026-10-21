@@ -6,7 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.MonomialRays
-public import CCDN.Hilbert.FunctionFieldRank
+public import Mathlib.RingTheory.Algebraic.Defs
+import CCDN.Hilbert.FunctionFieldRank
+import CCDN.Hilbert.StandardMonomials
+import Mathlib.LinearAlgebra.Dimension.Finite
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 /-!
 # Eventual linearity from a linear Hilbert bound
 

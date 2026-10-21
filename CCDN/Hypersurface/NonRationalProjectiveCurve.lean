@@ -5,11 +5,19 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.HomogeneousCurveHilbert
-public import CCDN.Hilbert.HomogeneousPrimeComponents
-public import CCDN.Algebra.ProjectiveCoefficientExtension
-public import CCDN.Surface.TopFormIrreducibility
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Hypersurface.NonRationalProjectiveCount
+import CCDN.Algebra.LowDegreePointSeparation
+import CCDN.Algebra.ProjectiveCoefficientExtension
+import CCDN.Center.HomogeneousCurveHilbert
+import CCDN.Hilbert.HilbertCoefficientEquiv
+import CCDN.Hilbert.HomogeneousPrimeComponents
+import CCDN.Hilbert.PrimeIdealDimensionDrop
+import CCDN.Hypersurface.GaloisComponentDegree
+import CCDN.Hypersurface.GaloisComponentPoints
+import CCDN.Hypersurface.GaloisPolynomialPrimes
+import CCDN.Hypersurface.GaloisStableIdealDescent
+import CCDN.Surface.TopFormIrreducibility
 /-! Height-independent quadratic-degree bounds for the projective curve
 cases of CCDN 4.1.5. Homogeneous separators and all scalar-extension point
 maps are constructed internally. -/

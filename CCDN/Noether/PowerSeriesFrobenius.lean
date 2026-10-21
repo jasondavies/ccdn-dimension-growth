@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.PowerSeriesOrderIndependence
-public import Mathlib.Algebra.CharP.Lemmas
-public import Mathlib.Algebra.CharP.Algebra
-public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
+public import Mathlib.RingTheory.PowerSeries.Basic
+import Mathlib.Algebra.CharP.Algebra
+import Mathlib.Algebra.CharP.Lemmas
+import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 
 /-! Frobenius noncancellation from injectivity of finite coefficient jets.
 These are statements about power series in prime-power characteristic. -/

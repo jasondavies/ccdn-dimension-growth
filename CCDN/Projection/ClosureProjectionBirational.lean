@@ -6,8 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.ProjectiveClosureProjection
-public import CCDN.Algebra.ProjectiveClosureDegree
-public import CCDN.Algebra.ReconstructionFunctionField
+public import CCDN.Algebra.ProjectiveChartDegree
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import CCDN.Algebra.ProjectiveClosureDegree
+import CCDN.Curve.CurveRationalInverse
 /-! A linear affine projection generating the function field also
 generates the function field of the cone over its projective closure when
 the homogenizing coordinate is retained. Rational reconstruction on the

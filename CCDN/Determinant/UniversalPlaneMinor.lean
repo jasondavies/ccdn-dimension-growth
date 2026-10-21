@@ -6,6 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.UniversalPlaneFamily
+public import CCDN.Auxiliary.HypersurfacePositioning
+public import CCDN.Determinant.GenericPlaneSmoothness
+public import Mathlib.Tactic.Continuity
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Noether.ClosedFormScaling
+import CCDN.Projection.ShearNormalization
 /-! The constructed positioned family is a specialization of the universal
 family of all affine planes. Its nonzero minor therefore proves that a
 universal parameter polynomial is nonzero. -/

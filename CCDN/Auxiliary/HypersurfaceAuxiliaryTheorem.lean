@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceProjectiveAuxiliary
-public import CCDN.Hypersurface.HypersurfaceNonabsoluteAuxiliary
-public import CCDN.Algebra.IntegerRationalIrreducibility
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Algebra.IntegerRationalIrreducibility
+import CCDN.Auxiliary.HypersurfaceProjectiveAuxiliary
+import CCDN.Hypersurface.HypersurfaceNonabsoluteAuxiliary
 /-! CCDN Theorem 3.1.1 for irreducible integer homogeneous equations.
 The constant is fixed before the equation, degree and radius are chosen. -/
 

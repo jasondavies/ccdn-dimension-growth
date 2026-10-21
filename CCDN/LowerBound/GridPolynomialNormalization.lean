@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.LinearNormalizationInfinite
-public import Mathlib.Algebra.Polynomial.BigOperators
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Projection.IntegralProjectionHilbert
+import CCDN.Projection.LinearNormalizationInfinite
+import Mathlib.RingTheory.IntegralClosure.IsIntegral.Basic
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-! Integral polynomial parameters vanishing on a finite grid.
 Their degrees are bounded by the grid side length, independently of the

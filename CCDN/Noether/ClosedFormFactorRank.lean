@@ -6,8 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.BivariateTotalDegree
-public import CCDN.ForMathlib.NatCast
-public import CCDN.ForMathlib.Polynomial
+import CCDN.ForMathlib.Polynomial
+import CCDN.Noether.BivariateFactorForms
+import Mathlib.FieldTheory.RatFunc.AsPolynomial
+import Mathlib.RingTheory.Polynomial.IsIntegral
 /-! Rank drop from coprime factor decompositions when the degrees up to `d` are nonzero in
 the base field, as happens below the characteristic and in characteristic zero. Coprimality is imposed in the univariate
 fraction-field ring, where factorization can supply it. -/

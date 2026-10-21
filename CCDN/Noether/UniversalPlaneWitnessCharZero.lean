@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.GenericPlaneMinorCharZero
 public import CCDN.Noether.UniversalPlaneBadWitness
+import CCDN.Auxiliary.HypersurfacePositioningCharZero
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Determinant.GenericPlaneMinorCharZero
+import CCDN.Determinant.UniversalPlaneMinor
+import CCDN.Noether.UniversalPlaneWitness
 /-! Characteristic-zero nonvanishing of the universal witness and its descent
 to an integer polynomial for a geometrically irreducible equation. -/
 

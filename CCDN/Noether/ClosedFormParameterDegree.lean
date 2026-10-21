@@ -5,8 +5,19 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalPlaneDegree
-public import CCDN.Noether.ClosedFormHeight
+public import CCDN.Noether.BivariateCoefficientMatrix
+import CCDN.Noether.ClosedFormHeight
+import Mathlib.Tactic.NormNum.RealSqrt
+import Mathlib.Tactic.NormNum.Parity
+import Mathlib.Tactic.NormNum.NatSqrt
+import Mathlib.Tactic.NormNum.NatFib
+import Mathlib.Tactic.NormNum.LegendreSymbol
+import Mathlib.Tactic.NormNum.IsCoprime
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Rational
+import Mathlib.Tactic.Inclusion.Extension.Core.Core
+import Mathlib.NumberTheory.Chebyshev
+import ArithmeticHeights.Absolute
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 /-! Parameter degrees of the closed-form matrix and its minors. Differentiation
 in the two plane coordinates does not increase the parameter degree. -/
 

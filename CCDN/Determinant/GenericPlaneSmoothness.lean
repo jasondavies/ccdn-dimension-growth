@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.GenericPlaneIrreducibility
-public import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
+public import CCDN.Noether.BivariateTotalDegree
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.Projection.ShearNormalization
 /-! The generic plane f(x,y*z), with slopes in their rational function
 field, has a smooth origin whenever the original equation does. Together with
 ordinary irreducibility this proves geometric irreducibility of the generic

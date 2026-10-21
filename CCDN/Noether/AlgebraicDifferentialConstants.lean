@@ -5,9 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.FieldTheory.Differential.Basic
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Mathlib.Algebra.Polynomial.Lifts
+public import Mathlib.RingTheory.Derivation.MapCoeffs
 
 /-! Constants in algebraic extensions of differential fields. This is a
 prerequisite for the differential irreducibility criterion, not that criterion. -/

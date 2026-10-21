@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.EulerFactorKernel
+public import CCDN.Noether.EulerPairBasis
 /-! A nonzero Euler kernel vector forces every maximal universal
 coefficient minor to vanish after specialization. -/
 

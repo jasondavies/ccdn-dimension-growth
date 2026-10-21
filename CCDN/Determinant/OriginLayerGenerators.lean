@@ -6,6 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.SingularTangent
+import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.LinearAlgebra.Dimension.Free
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 /-! Homogeneous generators lifted from the origin-adic layers of a
 plane equation, with the number at every weight bounded by its multiplicity. -/
 

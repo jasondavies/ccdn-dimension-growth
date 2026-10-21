@@ -5,10 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.FormalPlaneBranch
-public import CCDN.Algebra.SectionImageRank
-public import CCDN.Plane.PlaneHilbert
-public import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.RingTheory.PowerSeries.Basic
+import CCDN.Algebra.SectionImageRank
+import CCDN.Noether.FormalPlaneBranch
+import CCDN.Noether.PowerSeriesOrderIndependence
+import CCDN.Plane.PlaneHilbert
+import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import Mathlib.RingTheory.PrincipalIdealDomain
+import Mathlib.RingTheory.SimpleRing.Principal
 
 /-! A formal plane parameterization with a free coordinate has exactly the
 curve equation as its kernel. The proof uses the section-image rank bound

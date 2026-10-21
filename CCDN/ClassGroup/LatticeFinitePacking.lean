@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.Module.ZLattice.Covolume
-public import Mathlib.MeasureTheory.Group.GeometryOfNumbers
 
 /-! A finite set of lattice points gives disjoint translates of a
 fundamental domain. A bounded basis therefore gives an explicit

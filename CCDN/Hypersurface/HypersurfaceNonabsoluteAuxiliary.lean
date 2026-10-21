@@ -5,10 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousLinearDescent
-public import CCDN.Hypersurface.NonabsolutePlaneCount
-public import CCDN.Projection.PrimitiveNormalization
 public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Algebra.HomogeneousLinearDescent
+import CCDN.Auxiliary.HypersurfaceGoodDirection
+import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Projection.PrimitiveNormalization
+import Mathlib.Algebra.MvPolynomial.Nilpotent
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! A degree-d auxiliary equation for nonabsolute irreducible hypersurfaces.
 Linear descent of the two homogeneous factors suffices over any extension. -/
 

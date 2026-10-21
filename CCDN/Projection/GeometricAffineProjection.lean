@@ -5,12 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedAffineBirationalProjection
-public import CCDN.Projection.ClosureProjectionBirational
-public import CCDN.Projection.AffineProjectionDegree
-public import CCDN.Height.AffineLinearCountTransfer
-public import CCDN.Projection.BoundedDegreeNormalizationFiber
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
+public import CCDN.Curve.Curve
+import CCDN.Height.AffineLinearCountTransfer
+import CCDN.Projection.AffineProjectionDegree
+import CCDN.Projection.BoundedAffineBirationalProjection
+import CCDN.Projection.BoundedDegreeNormalizationFiber
+import CCDN.Projection.ClosureProjectionBirational
+import CCDN.Projection.ProjectionScalarExtension
 /-! The positive-dimensional affine projection in CCDN Proposition 4.3.1.
 The image equation has the source degree and remains irreducible
 after scalar extension. An integral normalization gives the exact factor d

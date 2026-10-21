@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.EulerGenericFactors
+import CCDN.Determinant.EulerKernelMinors
+import CCDN.Noether.EulerPairSpecialization
 /-! Characteristic-independent vanishing on products. A generic integral
 identity is proved in the fraction field and then specialized; this includes
 inseparable and repeated factors in every characteristic. -/

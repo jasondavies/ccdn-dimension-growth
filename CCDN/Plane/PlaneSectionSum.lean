@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneSectionBounds
+public import CCDN.Plane.FiniteFieldZeroPlanes
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.Analysis.Real.Sqrt
+import CCDN.Plane.PlaneSectionBounds
 /-! Sum the sharp good-section bound and the separately controlled bad and
 zero contributions over the full plane parameter space. -/
 

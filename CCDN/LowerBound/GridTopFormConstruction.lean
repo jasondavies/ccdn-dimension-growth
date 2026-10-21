@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.TopFormIrreducibility
-public import CCDN.LowerBound.GridMultivariate
-public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
-public import Mathlib.RingTheory.Coprime.Lemmas
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.Algebra.HomogeneousLinearDescent
+import Mathlib.Algebra.MvPolynomial.Nilpotent
+import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 
 /-! Explicit grid equations whose highest homogeneous part is absolutely
 irreducible. The top form y*z^(d-1)-x^d is primitive and linear in y. -/

@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
-public import CCDN.Plane.ProjectivePlaneBezout
+public import CCDN.Auxiliary.AbsoluteAuxiliary
+public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Algebra.IntegerRationalIrreducibility
+import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
+import CCDN.Plane.ProjectivePlaneBezout
 /-! The coefficient-sensitive first inequality in CCDN Corollary 3.1.2,
 from the full auxiliary theorem and projective Bezout. -/
 

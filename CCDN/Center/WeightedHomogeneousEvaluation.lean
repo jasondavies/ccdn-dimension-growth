@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.WeightedPolynomialSubstitution
+public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
 /-! Weighted homogeneity under polynomial evaluation over the same field. -/
 
 @[expose] public section

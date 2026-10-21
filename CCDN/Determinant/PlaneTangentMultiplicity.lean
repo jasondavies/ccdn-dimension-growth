@@ -6,6 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.FormalPlaneDifferentiation
+import CCDN.Determinant.FormalBranchMultiplicity
+import CCDN.Noether.FormalBranchFaithful
 /-! A polynomial criterion for the multiplicity form of plane Bézout.
 All formal branches are constructed from the nonsingularity assumptions. -/
 

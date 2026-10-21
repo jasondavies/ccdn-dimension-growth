@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.IntegralProjectionClosedImage
-public import Mathlib.Algebra.MvPolynomial.Funext
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Mathlib.Algebra.MvPolynomial.CommRing
+import Mathlib.Algebra.MvPolynomial.Funext
+import Mathlib.RingTheory.Nullstellensatz
 
 /-! Hyperplane incidence on an affine chart. The eliminated ideal is
 constructed by substitution in the coordinate domain, and its geometric

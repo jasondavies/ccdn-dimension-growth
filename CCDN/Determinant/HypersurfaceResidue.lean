@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceMultiplicityEstimate
 public import CCDN.Determinant.PlaneMultiplicity
+public import CCDN.Determinant.HypersurfaceLocalDeterminant
 /-! Singular local determinant bounds at a residue point in arbitrary
 dimension. Multiplicity is obtained from the first nonzero translated homogeneous
 component. -/

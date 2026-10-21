@@ -6,6 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceResidueBoundary
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Surface.SurfaceCurveCrossing
+import CCDN.Surface.SurfaceNonlinearCount
+import Mathlib.Algebra.Order.Star.Real
 /-! Counting the proper sections attached to one residue-subset
 edge, including the sum over all smooth residue tuples. -/
 

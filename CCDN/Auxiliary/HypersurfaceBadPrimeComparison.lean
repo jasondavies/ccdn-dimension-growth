@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
-public import CCDN.Determinant.HypersurfaceHeightDeterminant
-public import CCDN.Auxiliary.AuxiliaryDegreeBound
+public import CCDN.Auxiliary.HypersurfaceRankArchimedean
+public import CCDN.Determinant.HypersurfaceDeterminantRank
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.Auxiliary.HypersurfaceNormalizedComparison
+import CCDN.Determinant.HomogeneousDeterminantComparison
+import CCDN.Height.HypersurfaceHeightComparison
 /-! Preserve the bad-prime factor through the normalized no-auxiliary
 comparison, as required by the coefficient-sensitive CCDN Theorem 3.1.1.
 

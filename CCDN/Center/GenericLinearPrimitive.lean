@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.GenericLinearPowerBasis
-public import CCDN.Height.BoundedPrimitiveElement
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Height.BoundedPrimitiveElement
 /-! Generic primitive linear combinations of a separating coordinate tuple.
 The primitive specialization is constructed by the bounded primitive-element
 theorem. -/

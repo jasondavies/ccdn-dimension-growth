@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionScalarExtension
-public import Mathlib.RingTheory.Ideal.GoingUp
-public import Mathlib.RingTheory.Nullstellensatz
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import Mathlib.RingTheory.Nullstellensatz
 
 /-! The image of an integral polynomial projection over an
 algebraically closed field is exactly the zero locus of its kernel.

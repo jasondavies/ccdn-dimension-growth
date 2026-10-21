@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.AffineHypersurfaceDimensionGrowth
-public import CCDN.Algebra.ProjectiveConeBound
-public import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Algebra.ProjectiveConeBound
+import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
 /-! Projective hypersurface dimension growth in every degree at least five, from the
 affine bound on the cone. The equation need only be irreducible over `ℚ`: an equation which
 splits over `ℚ̄` has few points by the nonabsolute count. -/

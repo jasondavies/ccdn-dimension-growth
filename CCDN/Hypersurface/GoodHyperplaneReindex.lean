@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.GoodHyperplaneBounds
+public import CCDN.Hypersurface.GraphHyperplaneRestriction
+import CCDN.Hypersurface.GoodHyperplaneBounds
 /-! Transport of the constructed good hyperplane to coordinates suited to
 the universal Noether family. -/
 

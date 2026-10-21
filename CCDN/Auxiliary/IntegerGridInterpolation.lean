@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.PrimitiveNormalization
 public import Mathlib.LinearAlgebra.Lagrange
+public import Mathlib.Basic.Real.Basic
 
 /-! Explicit coefficient control from values at the integer grid 0,...,d.
 This is the quantitative input for positioning a large leading coefficient. -/

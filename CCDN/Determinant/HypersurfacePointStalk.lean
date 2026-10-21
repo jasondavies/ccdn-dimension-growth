@@ -7,8 +7,11 @@ module
 
 public import CCDN.Determinant.HypersurfaceOriginStalk
 public import CCDN.Determinant.AlgEquivAdicLayer
-public import CCDN.Height.AffineTranslationCount
-public import Mathlib.RingTheory.LocalRing.ResidueField.Basic
+public import CCDN.Algebra.AffineTranslation
+public import CCDN.Determinant.LocalizationAdicLayer
+public import CCDN.Hilbert.HypersurfaceHilbert
+import CCDN.Determinant.HypersurfaceTangentEquality
+import CCDN.Height.AffineTranslationCount
 
 /-! Exact local Hilbert functions at arbitrary rational points of an affine
 hypersurface, using the localization of its coordinate ring. The

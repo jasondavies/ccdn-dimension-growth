@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousChartIrreducible
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.Algebra.HomogeneousChartIrreducible
 
 /-! Over an algebraically closed field, an irreducible homogeneous binary
 form has degree one. The affine chart reduces this to a univariate polynomial. -/

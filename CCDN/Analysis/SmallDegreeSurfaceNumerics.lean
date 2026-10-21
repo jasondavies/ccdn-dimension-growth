@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.SurfaceAuxiliaryExponent
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-! Explicit exponent margins for the small-degree surface argument.
 The estimates hold uniformly for every degree at least five and absorb any
 fixed power of the logarithm; geometric covering hypotheses are separate. -/

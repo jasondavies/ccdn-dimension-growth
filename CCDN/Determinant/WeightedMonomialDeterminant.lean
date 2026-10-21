@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.Determinant
-public import CCDN.Surface.SurfaceMonomialWeight
+public import CCDN.Auxiliary.Interpolation
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.Data.Finsupp.Weight
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.Algebra.Order.AbsoluteValue.Int
 /-! Archimedean determinant bounds retaining each monomial's own degree.
 Their exponent is the sum of column degrees, not rank times the cutoff. -/
 

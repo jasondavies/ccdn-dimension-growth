@@ -5,9 +5,18 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.AmbientProjectiveDeterminant
-public import CCDN.Analysis.ProjectiveCoefficientNumerics
-public import CCDN.Auxiliary.HypersurfaceCoefficientDichotomy
+public import ArithmeticHeights.BombieriVaaler
+public import CCDN.Algebra.HomogeneousMonomials
+public import CCDN.Auxiliary.IntegerCoefficientHeight
+public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Algebra.HomogeneousEvaluation
+import CCDN.Algebra.HomogeneousRankDichotomy
+import CCDN.Algebra.RowSpan
+import CCDN.Analysis.ProjectiveCoefficientNumerics
+import CCDN.Auxiliary.AuxiliaryPolynomial
+import CCDN.Auxiliary.HypersurfaceCoefficientDichotomy
+import CCDN.Determinant.AmbientProjectiveDeterminant
+import CCDN.Determinant.HomogeneousDeterminantComparison
 /-! The coefficient-height dichotomy with a multiplier depending only on
 the ambient dimension, uniformly in the equation's degree. -/
 

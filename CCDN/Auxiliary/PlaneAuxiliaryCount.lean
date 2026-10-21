@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousChart
-public import CCDN.Auxiliary.PlaneAuxiliarySelection
-public import CCDN.Plane.Bezout
+public import CCDN.Determinant.PlaneChartDeterminant
+public import CCDN.Height.PrimitiveIntegerPolynomial
+public import CCDN.Plane.Plane
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.Algebra.HomogeneousChart
+import CCDN.Auxiliary.PlaneBadPrimes
+import CCDN.Plane.Bezout
 /-! Distinct-point bounds obtained from the auxiliary polynomials and
 Bézout. The sharp finite-field estimate remains an explicit hypothesis. -/
 

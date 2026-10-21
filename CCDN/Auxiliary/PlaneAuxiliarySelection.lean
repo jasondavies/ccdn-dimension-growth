@@ -5,7 +5,17 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.PlaneAuxiliaryLargeHeight
+public import Mathlib.Basic.Real.Basic
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.Ordinal
+import Mathlib.Tactic.NormNum.NatLog
+import Mathlib.Tactic.NormNum.ModEq
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.NormNum.Irrational
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
+import Mathlib.Tactic.Echelon.Zsqrtd
+import Mathlib.Algebra.Order.Floor.Semifield
+import Mathlib.Data.Nat.Factorial.DoubleFactorial
 /-! Explicit integer degree choices for both coefficient-height ranges. -/
 
 @[expose] public section

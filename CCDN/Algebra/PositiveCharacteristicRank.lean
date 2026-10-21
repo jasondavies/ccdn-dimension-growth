@@ -5,9 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.PositiveCharacteristicClosedForms
 public import CCDN.Noether.BivariateTotalDegree
-public import CCDN.Noether.ClosedFormRank
+import CCDN.Noether.PositiveCharacteristicClosedForms
 /-! The closed-form coefficient matrix has corank at most one for a monic
 irreducible equation of total and outer degree d in characteristic >2d^2.
 This supplies the large-characteristic rank input to effective Bertini. -/

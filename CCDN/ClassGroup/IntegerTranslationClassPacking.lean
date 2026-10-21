@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.ClassGroupNormCurveReduction
-public import Mathlib.Algebra.Group.Subgroup.ZPowers.Lemmas
 
 /-! Integer translates pack each bounded square-norm translation class
 into the full archimedean lattice box. This isolates the remaining geometric

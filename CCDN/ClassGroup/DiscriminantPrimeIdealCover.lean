@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.NumberTheory.NumberField.Discriminant.Different
-public import Mathlib.RingTheory.RamificationInertia.Basic
-public import Mathlib.Data.Nat.PrimeFin
-public import Mathlib.Tactic
+public import Mathlib.RingTheory.QuasiFinite.Basic
+public import Mathlib.NumberTheory.NumberField.Discriminant.Defs
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+import Mathlib.NumberTheory.NumberField.Discriminant.Different
 
 /-! A finite, coefficient-free cover of the finite prime ideals that
 can ramify in a subextension of a number field. The cover is constructed

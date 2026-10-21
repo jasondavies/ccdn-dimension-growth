@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.HypersurfacePositionHeight
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Height.HypersurfacePositionHeight
 /-! The box enlargement by d+1 costs only a dimension constant in the
 auxiliary degree, with no added power of d in its leading term. -/
 

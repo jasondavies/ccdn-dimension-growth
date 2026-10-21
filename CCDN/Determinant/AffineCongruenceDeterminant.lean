@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.SmoothCongruenceDeterminant
-public import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
+public import CCDN.Auxiliary.ScaledHomogenization
+public import CCDN.Determinant.HypersurfaceDeterminantRank
+import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
+import CCDN.Auxiliary.UnscaledHypersurfaceBadPrimes
+import CCDN.Determinant.SmoothCongruenceDeterminant
 /-! Congruence-refined determinant estimates for affine zeros and
 arbitrary bounded-degree polynomial evaluation columns. -/
 

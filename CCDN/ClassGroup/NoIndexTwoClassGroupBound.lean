@@ -6,9 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.NoIndexTwoClassGroupCounting
-public import CCDN.ClassGroup.UniformNumberFieldLatticeCount
-public import CCDN.ClassGroup.ClassGroupDiscriminantNumerics
-public import Mathlib.Analysis.Complex.ExponentialBounds
+public import CCDN.ClassGroup.NumberFieldLatticeBox
+import CCDN.ClassGroup.ClassGroupBalancedGenerator
+import CCDN.ClassGroup.ClassGroupDiscriminantNumerics
+import CCDN.ClassGroup.UniformNumberFieldLatticeCount
 
 /-! The logarithmic branch of CCDN Theorem 6 for number fields with no
 index-two intermediate field. All ideal-class representatives, curves,

@@ -6,9 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceGeometricCurveCover
-public import CCDN.Surface.SurfaceMediumCurveCount
-public import CCDN.Surface.SurfaceResidueSalbergerCount
-public import CCDN.Analysis.SalbergerCoverNumerics
+import CCDN.Analysis.SalbergerCoverNumerics
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Hilbert.CompleteIntersectionDegreeBudget
+import CCDN.Surface.SurfaceMediumCurveCount
+import CCDN.Surface.SurfaceResidueSalbergerCount
+import Mathlib.Algebra.Order.Star.Real
 /-! The literal bounded-degree geometric curve cover for surfaces of
 polynomial coefficient height. All constants precede the equation and
 radius; the remaining height alternative is handled separately. -/

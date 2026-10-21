@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PlaneSingularities
-public import Mathlib.RingTheory.Nullstellensatz
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import CCDN.Determinant.PlaneSingularities
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.RingTheory.Nullstellensatz
 
 /-! Smooth points on irreducible hypersurfaces over an algebraically
 closed field. The characteristic bound supplies a nonzero partial derivative;

@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.GenericBlockLineIrreducible
 public import CCDN.Center.ResultantCoefficientFamily
-public import CCDN.Center.ChowPolynomialPower
+public import CCDN.Center.GenericBlockLine
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import CCDN.Center.ChowPolynomialPower
+import CCDN.Center.GenericBlockLineIrreducible
 /-! When a polynomial has the same hypersurface as an irreducible equation,
 a generic block-line derivative resultant detects its irreducibility.
 The positive block degree is the degree of the line polynomial. -/

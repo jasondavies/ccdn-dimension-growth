@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.EulerSparseMatrix
-public import CCDN.ForMathlib.IntegerPolynomialL1
+public import Mathlib.Algebra.Group.Nat.Defs
+public import Mathlib.Data.Nat.Factorial.Basic
 /-! The sharp printed coefficient-sum bound for the plane Noether minors:
 each entry has l1 norm at most d, hence the order d²−1 determinant has
 l1 norm at most d^(3d²−3). -/

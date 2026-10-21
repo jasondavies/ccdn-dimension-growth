@@ -6,8 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.Spectrum.Prime.Topology
-public import Mathlib.Algebra.MvPolynomial.Funext
-public import Mathlib.Topology.Constructions
+import Mathlib.Algebra.MvPolynomial.Funext
 
 /-! The Zariski topology on field-valued affine points, induced by their
 evaluation prime ideals. Polynomial vanishing characterizes closure;

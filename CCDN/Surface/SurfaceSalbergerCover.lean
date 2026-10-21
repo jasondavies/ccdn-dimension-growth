@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.SurfaceSalbergerHeightCover
-public import CCDN.Surface.SurfaceGeometricCoefficientReduction
-public import CCDN.Projection.PrimitiveNormalization
+public import CCDN.Surface.SurfaceGeometricCurveCover
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Projection.PrimitiveNormalization
+import CCDN.Surface.SurfaceGeometricCoefficientReduction
+import CCDN.Surface.SurfaceSalbergerHeightCover
+import Mathlib.Algebra.Order.Star.Real
 /-! A coefficient-uniform Salberger cover for every geometrically integral
 affine surface. This has the literal curve-number and exceptional-point
 exponents of CCDN Theorem 4.3.5, and uniformly bounded geometric curve degree. -/

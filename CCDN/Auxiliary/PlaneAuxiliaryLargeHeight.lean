@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.PlaneAuxiliaryDegree
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import CCDN.Algebra.HomogeneousRankDichotomy
+import CCDN.Auxiliary.PlaneAuxiliaryDegree
 /-! The complementary large-coefficient-height auxiliary-degree estimate. -/
 
 @[expose] public section

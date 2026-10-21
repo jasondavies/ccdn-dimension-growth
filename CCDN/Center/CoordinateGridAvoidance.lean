@@ -5,9 +5,17 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.IntegerPolynomialAvoidance
-public import Mathlib.Algebra.MvPolynomial.Equiv
-public import Mathlib.Algebra.Polynomial.Roots
+public import Mathlib.Algebra.MvPolynomial.Degrees
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.Ordinal
+import Mathlib.Tactic.NormNum.NatLog
+import Mathlib.Tactic.NormNum.ModEq
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.NormNum.Irrational
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
+import Mathlib.Tactic.Echelon.Zsqrtd
+import Mathlib.Algebra.Order.Floor.Semifield
+import Mathlib.Data.Nat.Factorial.DoubleFactorial
 
 /-! Grid avoidance using the degree in each coordinate separately. Unlike
 the total-degree version, its side length does not grow with the number of

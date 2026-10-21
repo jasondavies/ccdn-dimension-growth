@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.SmallDegreeSurfaceCurveCount
-public import CCDN.Surface.SurfaceDegreeOneCount
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Curve.Curve
+public import Mathlib.RingTheory.Ideal.Height
+import CCDN.Analysis.SmallDegreeSurfaceNumerics
+import CCDN.Curve.SmallDegreeSurfaceCurveCount
+import CCDN.Surface.SurfaceDegreeOneCount
 /-! The retained part of the small-degree surface cover. Lines and
 nonlinear prime curves are counted together, using their common degree
 budget and the logarithmic cap on the retained degrees. -/

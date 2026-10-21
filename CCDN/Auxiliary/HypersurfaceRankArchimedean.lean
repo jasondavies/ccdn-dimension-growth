@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceRankRoots
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Auxiliary.HypersurfaceRankProfile
 /-! The factorial and coefficient-count logarithms in the determinant
 comparison cost only a dimension constant times s^(1+1/r). -/
 

@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.BinomialSectionBound
-public import CCDN.Auxiliary.FiniteFieldInterpolation
-public import Mathlib.Data.Nat.Choose.Bounds
+public import Mathlib.Algebra.MvPolynomial.Degrees
+import CCDN.Algebra.BinomialSectionBound
+import CCDN.Auxiliary.FiniteFieldInterpolation
+import Mathlib.Tactic.Positivity.Finset
+import Mathlib.Algebra.Order.Star.Int
+import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Data.Nat.Choose.Bounds
 
 /-! Finite-field point bounds for a proper section of an irreducible
 hypersurface. The proof uses polynomial interpolation and the filtered

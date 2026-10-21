@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.LinearProjectionFiltration
-public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import CCDN.Algebra.PolynomialPredicates
+import Mathlib.Algebra.MvPolynomial.Monad
 /-! A linear homogeneous projection of a homogeneous quotient is strict
 for the total-degree filtration: any image element of bounded degree has a
 preimage of the same bounded degree. -/

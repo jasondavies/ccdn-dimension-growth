@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.GoodHyperplaneBounds
-public import CCDN.Hypersurface.AffineHyperplaneSlice
+public import CCDN.Hypersurface.GraphHyperplaneRestriction
+import CCDN.Hypersurface.AffineHyperplaneSlice
+import CCDN.Projection.PrimitiveNormalization
+import CCDN.Surface.TopFormIrreducibility
+import Mathlib.Algebra.Order.Star.Rat
+import Mathlib.Algebra.BigOperators.Field
 /-! Integer equations for every parallel level of a constructed good
 hyperplane. Degrees and geometric irreducibility of the leading forms are
 preserved, and deleting the solved coordinate does not enlarge the box. -/

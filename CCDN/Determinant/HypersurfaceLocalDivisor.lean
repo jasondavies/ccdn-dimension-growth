@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.ProjectiveHypersurfaceCount
-public import CCDN.Hypersurface.HypersurfaceCountNormalization
+public import CCDN.Auxiliary.AuxiliaryDegreeBound
+public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
+import CCDN.Hypersurface.HypersurfaceCountNormalization
+import CCDN.Hypersurface.ProjectiveHypersurfaceCount
 /-! CCDN Lemma 2.8 and Corollary 2.9, including the finite-field count.
 All constants depend only on dimension. -/
 

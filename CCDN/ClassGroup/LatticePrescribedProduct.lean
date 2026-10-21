@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.LatticePrescribedMinima
-public import CCDN.ClassGroup.LatticeMinimaProduct
+public import Mathlib.Algebra.Module.ZLattice.Covolume
+import CCDN.ClassGroup.LatticeMinimaFlag
+import CCDN.ClassGroup.LatticeMinimaProduct
 /-! The product-of-lengths bound for a prescribed first lattice vector.
 Each later vector is shortest outside the preceding span, and the covolume
 bound for positive monotone flag thresholds applies. -/

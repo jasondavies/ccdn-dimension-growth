@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionScalarExtension
-public import CCDN.Projection.ProjectiveVarietyProjection
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Height.ProjectiveZeroLocus
+public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
+import CCDN.Projection.ProjectionScalarExtension
+import CCDN.Projection.ProjectiveVarietyProjection
 /-! Geometric integrality in the finite birational projective
 projection. This supplies the general-dimensional geometric interface of
 Proposition 4.3.2, with a dimension-only polynomial height cost. -/

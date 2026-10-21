@@ -5,9 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.CenterDetectorExtension
-public import CCDN.Center.GoodCenterWitness
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.BirationalCenterLocus
+public import CCDN.Center.ChowLinearSpecialization
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.ChowProjectionBaseChange
+import CCDN.Center.GeometricIdealPrimality
+import CCDN.Center.GeometricProjectionHilbert
+import CCDN.Center.GoodCenterWitness
+import CCDN.Center.HomogeneousProjectionBirational
+import CCDN.Hilbert.HilbertScalarExtension
+import CCDN.Hilbert.HomogeneousPrimeComponents
 /-! Constructed rational centers remain geometrically disjoint
 birational centers after arbitrary extension of the coefficient field. -/
 

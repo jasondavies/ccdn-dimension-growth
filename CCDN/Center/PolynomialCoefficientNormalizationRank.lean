@@ -5,10 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.GenericAffineNormalizationRank
 public import CCDN.Center.ScalarQuotientFractionField
-public import CCDN.Center.IntermediateFieldParameterTower
 public import CCDN.Center.ChowIncidenceIdeal
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+import CCDN.Center.GenericAffineNormalizationRank
+import CCDN.Center.GeometricIdealPrimality
+import CCDN.Center.IntermediateFieldParameterTower
+import Mathlib.RingTheory.AlgebraicIndependent.Basic
 /-! Exact normalization degree inside the fraction field of the
 polynomial coefficient extension of the original coordinate ring. The
 parameter field uses the universal incidence values of the first rows. -/

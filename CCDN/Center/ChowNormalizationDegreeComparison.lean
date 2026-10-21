@@ -7,8 +7,10 @@ module
 
 public import CCDN.Center.ChowNestedIncidence
 public import CCDN.Center.PolynomialCoefficientNormalizationRank
-public import CCDN.Center.GenericLinearParameterField
-public import CCDN.Center.PolynomialCoordinateEmbeddings
+import CCDN.Center.GenericLinearParameterField
+import CCDN.Center.IntermediateFieldParameterTower
+import CCDN.Center.PolynomialCoordinateEmbeddings
+import CCDN.Center.PolynomialFractionCoefficientExtension
 /-! Identify the incidence minimal polynomial with the generic
 primitive element of the affine normalization extension. -/
 

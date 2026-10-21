@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.TopFormSurfaceFixedDegree
-public import CCDN.Surface.AffineSurfaceCountLargeDegree
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Plane.Plane
+import CCDN.Surface.AffineSurfaceCountLargeDegree
+import CCDN.Surface.TopFormSurfaceFixedDegree
 /-! The affine surface bound in every degree at least five. The finitely many
 degrees below the large-degree threshold are absorbed in one constant. -/
 

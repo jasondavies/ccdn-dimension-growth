@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PrimeAggregation
 public import CCDN.Determinant.HypersurfaceLocalDivisor
 import all ArithmeticHeights.BombieriVaaler
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
+public import CCDN.Analysis.PrimeCutoff
+import CCDN.Determinant.PrimeAggregation
 /-! Choosing the prime endpoint at the dimension root of the row count
 produces the exact rank power and leading constant in CCDN Proposition 3.2.6.
 The aggregation step takes the local prime-power divisors as a hypothesis, so it

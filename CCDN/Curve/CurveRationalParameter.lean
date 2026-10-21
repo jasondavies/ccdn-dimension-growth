@@ -5,8 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.CurveFunctionField
-public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 
 /-! Construct the rational-function field embedding from a transcendental

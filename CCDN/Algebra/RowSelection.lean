@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.RowSpan
-public import CCDN.ForMathlib.MatrixRank
+public import Mathlib.Data.Matrix.Mul
+public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+import CCDN.Algebra.RowSpan
+import CCDN.ForMathlib.MatrixRank
 /-! Independent rows can be selected from the finite evaluation matrix.
 A nonzero annihilator gives the strict rank deficiency required by Bombieri--Vaaler. -/
 

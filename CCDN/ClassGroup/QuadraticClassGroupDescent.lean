@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.StronglyAmbiguousClassCount
-public import CCDN.ClassGroup.ClassGroupDegreeOne
+public import CCDN.ClassGroup.ClassGroupTwoTorsion
+import CCDN.ClassGroup.ClassGroupDegreeOne
+import CCDN.ClassGroup.StronglyAmbiguousClassCount
 /-! An internally proved quadratic class-group descent estimate.
 The unit obstruction, invariant-ideal decomposition, and finite
 discriminant-prime cover are all constructed in the preceding modules.

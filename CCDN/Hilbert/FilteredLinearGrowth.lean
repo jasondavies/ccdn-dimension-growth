@@ -5,10 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FilteredHilbertLinearity
-public import CCDN.Algebra.CoordinatePowerGeneration
-public import CCDN.Projection.PlaneProjectionDegree
-public import CCDN.Algebra.BinomialSectionBound
+public import CCDN.Hilbert.FilteredIntersection
+import CCDN.Algebra.BinomialSectionBound
+import CCDN.Algebra.CoordinatePowerGeneration
+import CCDN.Hilbert.FilteredHilbertLinearity
+import CCDN.Projection.PlaneProjectionDegree
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 /-! An eventual linear upper bound gives an eventual linear Hilbert
 formula, with its slope bounded by the original coefficient. -/
 

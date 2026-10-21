@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.ProjectiveClosureProjection
-public import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-! Closure-preserving integral affine projections compose. -/
 

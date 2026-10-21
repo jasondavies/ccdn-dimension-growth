@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.HomogeneousProjectionRankBound
-public import CCDN.Center.HomogeneousZeroDimensionField
-public import CCDN.Projection.HomogeneousFiniteProjectionDegree
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.HomogeneousProjectionRankBound
+import CCDN.Center.HomogeneousZeroDimensionField
+import CCDN.Projection.HomogeneousFiniteProjectionDegree
 /-! A finite homogeneous linear projection preserves the Hilbert
 multiplicity if and only if its projected coordinates generate the source
 function field. This includes the zero-dimensional affine cone. -/

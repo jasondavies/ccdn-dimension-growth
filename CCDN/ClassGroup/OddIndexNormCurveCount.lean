@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.SquareNormCurveIrreducibility
-public import CCDN.ClassGroup.OddDegreeNormCurveBaseChange
-public import CCDN.Plane.PlaneCount
+public import CCDN.Algebra.AffineNonzeroConstant
+public import CCDN.ClassGroup.ClassGroupNormPolynomial
+import CCDN.ClassGroup.OddDegreeNormCurveBaseChange
+import CCDN.ClassGroup.SquareNormCurveIrreducibility
+import CCDN.Plane.PlaneCount
 /-! Uniform counts for signed norm curves whose parameter generates a
 subfield of odd index. The ambient field degree may be even. -/
 

@@ -5,10 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.GeometricCurveProjection
-public import CCDN.Algebra.ProjectiveChartScalarExtension
-public import CCDN.Projection.AffineProjectionCount
-public import CCDN.Projection.ProjectiveProjectionCount
+public import CCDN.Algebra.ProjectiveChartIdeal
+public import CCDN.Projection.DegreePreservingProjectionBox
+import CCDN.Algebra.ProjectiveChartScalarExtension
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
+import CCDN.Center.GeometricCurveProjection
+import CCDN.Projection.ProjectiveProjectionCount
 /-! The same explicitly constructed geometrically integral plane curve
 has the source degree, source function field and the additive point-count
 comparison in Propositions 4.3.1 and 4.3.2. -/

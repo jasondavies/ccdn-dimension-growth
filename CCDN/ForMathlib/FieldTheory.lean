@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.FieldTheory.PrimitiveElement
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import Mathlib.Data.Multiset.Powerset
+public import Mathlib.FieldTheory.Separable
+import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import Mathlib.FieldTheory.PrimitiveElement
 
 /-!
 # Counting monic divisors and intermediate fields

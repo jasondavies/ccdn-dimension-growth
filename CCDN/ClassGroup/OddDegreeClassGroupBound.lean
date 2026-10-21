@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.OddDegreeClassGroupCounting
-public import CCDN.ClassGroup.ClassGroupDiscriminantNumerics
-public import CCDN.ClassGroup.NumberFieldShortBasis
+public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
+public import CCDN.ClassGroup.NumberFieldLatticeBox
+import CCDN.ClassGroup.ClassGroupBalancedGenerator
+import CCDN.ClassGroup.ClassGroupDiscriminantNumerics
+import CCDN.ClassGroup.NumberFieldShortBasis
+import CCDN.ClassGroup.OddDegreeClassGroupCounting
 /-! The odd-degree branch of CCDN Theorem 6 for the ideal-class
 group, via the lattice, bounded representatives, translation classes, and
 signed norm curves of the imported files. -/

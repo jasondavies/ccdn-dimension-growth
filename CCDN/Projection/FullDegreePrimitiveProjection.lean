@@ -5,7 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.CoordinatePowerGeneration
+public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+public import Mathlib.RingTheory.SimpleRing.Principal
+import CCDN.Curve.CurveParameterFullDegree
+import CCDN.Height.BoundedPrimitiveElement
+import CCDN.Projection.PlaneProjectionKernel
+import CCDN.Projection.ProjectionFieldDegree
 /-! Once a linear parameter generates the degree filtration, a bounded moment
 coordinate produces a degree-preserving plane equation. This combines
 full function-field degree with the quantitative primitive-element theorem. -/

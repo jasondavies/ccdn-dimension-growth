@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.ClosedFormReducibility
-public import CCDN.Noether.ClosedFormRank
+public import CCDN.Noether.BivariateTotalDegree
+import CCDN.ForMathlib.NatCast
+import CCDN.Noether.ClosedFormRank
+import CCDN.Noether.ClosedFormReducibility
 /-! Scaling the defining equation by a nonzero constant preserves the matrix
 rank. This permits monic normalization over fields without enlarging integer
 coefficients or clearing extra denominators. -/

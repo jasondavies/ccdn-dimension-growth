@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.ZeroDimensionalGeometricPoint
 public import CCDN.Projection.GeometricAffineProjection
-public import CCDN.Counterexample.OriginProjectivePoint
+public import Mathlib.FieldTheory.Galois.Basic
+import CCDN.Algebra.ReconstructionFunctionField
+import CCDN.Determinant.HypersurfaceOriginStalk
+import CCDN.Height.AffineLinearCountTransfer
+import CCDN.Hilbert.ZeroDimensionalGeometricPoint
+import CCDN.Projection.ProjectionScalarExtension
 /-! The zero-dimensional boundary of the affine projection theorem.
 The source is a rational point; the zero integer projection maps it finitely
 and birationally to the origin in the affine line. -/

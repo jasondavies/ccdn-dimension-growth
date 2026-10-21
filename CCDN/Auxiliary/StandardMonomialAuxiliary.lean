@@ -5,9 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.StandardMonomials
-public import CCDN.Algebra.RowSelection
 import all ArithmeticHeights.BombieriVaaler
+public import CCDN.Auxiliary.Interpolation
+public import CCDN.ForMathlib.StandardMonomials
+public import CCDN.Height.Box
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+public import Mathlib.Tactic.Continuity
+import CCDN.Algebra.RowSelection
+import CCDN.Algebra.RowSpan
 
 /-! Vanishing maximal determinants on a standard-monomial family produce
 an integer auxiliary outside the original principal ideal. -/

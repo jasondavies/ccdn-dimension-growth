@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.MvPolynomial.CommRing
 public import Mathlib.Algebra.MvPolynomial.Equiv
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.Algebra.MvPolynomial.CommRing
 
 /-!
 # The coefficient `ℓ¹`-norm of integer multivariate polynomials

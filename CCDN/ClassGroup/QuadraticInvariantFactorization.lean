@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.QuadraticInvariantIdeals
+public import Mathlib.NumberTheory.NumberField.Basic
+public import Mathlib.RingTheory.RamificationInertia.Ramification
+import CCDN.ClassGroup.QuadraticInvariantIdeals
+import CCDN.ClassGroup.QuadraticNormConjugation
 /-! Factorization of invariant integral ideals in a quadratic
 extension. The only prime factors left after extending a base ideal are
 ramified primes; repeated ramified factors can be absorbed in pairs. -/

@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.IntegerHyperplaneSliceModels
-public import CCDN.Hypersurface.HyperplaneSliceCoordinates
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Hypersurface.IntegerHyperplaneSlices
+public import CCDN.Plane.Plane
+import CCDN.Hypersurface.HyperplaneSliceCoordinates
+import CCDN.Hypersurface.IntegerHyperplaneSliceModels
 /-! A dimension induction with a cubic degree cost per hyperplane slice,
 using the constructed universal Noether detector. -/
 

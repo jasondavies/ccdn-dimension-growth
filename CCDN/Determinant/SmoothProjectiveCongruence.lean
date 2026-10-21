@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.SmoothHypersurfaceCongruence
 public import CCDN.Determinant.ProjectiveHypersurfaceLocal
 import all ArithmeticHeights.BombieriVaaler
+public import CCDN.Height.Box
+import CCDN.Determinant.SmoothHypersurfaceCongruence
 
 /-! Smooth projective congruence classes give simultaneous divisors
 for homogeneous evaluation matrices. -/

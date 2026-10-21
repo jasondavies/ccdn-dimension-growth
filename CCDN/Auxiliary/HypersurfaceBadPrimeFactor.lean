@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Analysis.PrimeSums
+public import CCDN.Auxiliary.AuxiliaryDegreeBound
+public import CCDN.Auxiliary.HypersurfaceBadPrimes
+public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
-public import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Hypersurface.NonabsolutePlaneCount
 /-! The geometric bad-prime factor used by the determinant method.
 It is zero for nonabsolute equations and an exact finite exponential product
 otherwise. For nonzero homogeneous equations it agrees with CCDN Definition

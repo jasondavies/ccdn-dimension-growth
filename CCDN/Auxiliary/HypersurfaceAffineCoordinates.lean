@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.AffinePlaneRestriction
-public import Mathlib.Logic.Equiv.Option
+public import Mathlib.CategoryTheory.Types.Basic
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.Tactic.LinearCombination
+public import Mathlib.Tactic.ReduceModChar
+import CCDN.Determinant.PlaneMultiplicity
+import CCDN.Plane.AffinePlaneRestriction
 
 /-! Explicit invertible affine coordinates along a direction with nonzero
 first component. The same map carries its base point to the origin and

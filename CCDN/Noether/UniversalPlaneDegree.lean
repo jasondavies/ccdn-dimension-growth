@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.UniversalPlaneFamily
+import CCDN.Determinant.PlaneMultiplicity
 /-! Degree in the affine-plane parameters of every coefficient of the
 universal restriction. This degree is bounded by the original equation's
 total degree. -/

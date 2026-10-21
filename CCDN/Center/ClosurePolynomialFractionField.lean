@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ClosurePolynomialMap
-public import CCDN.Projection.ProjectionFractionField
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import CCDN.Projection.ProjectionFractionField
 /-! The function field of the cone over an affine variety's projective closure is
 the fraction field of a polynomial ring over the affine coordinate ring.
 Dividing the homogeneous coordinates by the homogenizing variable recovers

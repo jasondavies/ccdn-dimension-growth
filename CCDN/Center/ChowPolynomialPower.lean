@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceSmoothPoint
-public import CCDN.Algebra.HomogeneousChartIrreducible
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import CCDN.Determinant.HypersurfaceSmoothPoint
+import CCDN.Determinant.SingularDeterminant
+import Mathlib.Algebra.MvPolynomial.Nilpotent
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import Mathlib.RingTheory.Nullstellensatz
 /-! The algebraic power step in the Chow-form projection argument. Equal
 geometric zero loci with an irreducible equation force a positive power,
 including the nonzero scalar omitted when Chow forms are normalized. -/

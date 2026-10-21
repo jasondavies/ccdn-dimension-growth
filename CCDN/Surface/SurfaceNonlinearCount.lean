@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.SurfaceAuxiliaryExponent
-public import CCDN.AffineCurveBound
+public import CCDN.Curve.Curve
+import CCDN.AffineCurveBound
+import CCDN.Surface.SurfaceAuxiliaryExponent
 /-! Counting the nonlinear components of a surface section using their
 total Hilbert degree and the affine curve counting theorem. -/
 

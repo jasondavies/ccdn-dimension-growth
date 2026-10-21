@@ -5,8 +5,18 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.FieldTheory.Galois.Basic
-public import Mathlib.Tactic
+public import Mathlib.Algebra.Field.Defs
+public import Mathlib.Algebra.Group.Units.Hom
+public import Mathlib.Algebra.Ring.Equiv
+import Mathlib.Tactic.Measurability.Init
+import Mathlib.Tactic.NormNum.Prime
+import Mathlib.Tactic.NormNum.Ordinal
+import Mathlib.Tactic.NormNum.NatLog
+import Mathlib.Tactic.NormNum.ModEq
+import Mathlib.Tactic.NormNum.IsSquare
+import Mathlib.Tactic.NormNum.Irrational
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Hypotheses
+import Mathlib.Tactic.Echelon.Zsqrtd
 
 /-! The degree-two multiplicative Hilbert 90 argument, stated directly
 for a nontrivial field involution. This form is suited to the scalar

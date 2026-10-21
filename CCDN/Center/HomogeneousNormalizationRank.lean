@@ -5,8 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.HomogeneousNormalizationEquation
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Center.HomogeneousIntegralRelation
+import CCDN.Center.HomogeneousNormalizationEquation
+import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Projection.ProjectionFractionField
+import Mathlib.RingTheory.AlgebraicIndependent.Basic
+import Mathlib.RingTheory.Polynomial.GaussLemma
 /-! The field degree of a homogeneous finite linear normalization
 is exactly the Hilbert multiplicity. The proof constructs the equation, its
 monicity up to a unit, and a primitive element. -/

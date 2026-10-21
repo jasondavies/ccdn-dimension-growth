@@ -6,6 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Auxiliary.AffineCongruenceAuxiliary
+public import CCDN.Hilbert.PrincipalStandardMonomials
+import CCDN.Auxiliary.HypersurfaceRankProfile
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Surface.SurfaceMonomialWeight
 /-! The full standard-monomial prefix produces a proper integer auxiliary
 on the entire bounded surface congruence class, with the sharp weighted
 degree in the sole remaining numerical gap. -/

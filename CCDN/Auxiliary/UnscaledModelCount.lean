@@ -6,6 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.ScaledPlaneCount
+public import CCDN.Algebra.ScaledModelCoordinates
+import CCDN.Algebra.HomogeneousSlice
+import CCDN.Algebra.ScaledModelPosition
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Auxiliary.PolynomialMapAuxiliary
 /-! The unit-scaled model gives a coefficient-uniform 2/d fallback and a
 large-coefficient O(d^4) count, without requiring a scaling prime. -/
 

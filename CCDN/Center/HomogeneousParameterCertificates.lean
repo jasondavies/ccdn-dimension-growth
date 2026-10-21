@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.HomogeneousProjectionNoBasePoint
-public import CCDN.Center.BalancedParameterFiniteness
-public import CCDN.Algebra.HomogeneousEvaluation
-public import Mathlib.FieldTheory.AlgebraicClosure
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Algebra.CoordinatePowerGeneration
+import CCDN.Center.HomogeneousProjectionNoBasePoint
+import CCDN.ForMathlib.MvPolynomial
+import Mathlib.RingTheory.Nullstellensatz
 /-! Homogeneous finite parameters give certificates for every
 monomial in one positive homogeneous degree. Extracting homogeneous
 components makes all parameter multipliers have the preceding degree. -/

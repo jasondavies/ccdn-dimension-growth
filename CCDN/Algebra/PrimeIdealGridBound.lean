@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.LowerBound.GridPolynomialNormalization
-public import CCDN.Projection.BoundedDegreeNormalizationFiber
-public import CCDN.Algebra.SmallOutsidePoint
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Algebra.SmallOutsidePoint
+import CCDN.LowerBound.GridPolynomialNormalization
+import CCDN.Projection.BoundedDegreeNormalizationFiber
 /-! The sharp grid bound for every prime affine variety. The
 vanishing grid polynomials construct finite integral parameters; their
 function-field rank is controlled by the Hilbert multiplicity. -/

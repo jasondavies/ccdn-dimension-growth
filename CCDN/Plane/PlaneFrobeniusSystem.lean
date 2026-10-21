@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.PlaneFrobeniusAuxiliary
-public import CCDN.Determinant.PlaneSingularities
+public import CCDN.Hilbert.FilteredIntersection
+public import CCDN.Noether.FormalPlaneDifferentiation
+import CCDN.Determinant.PlaneSingularities
+import Mathlib.LinearAlgebra.Dimension.Constructions
+import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
+import Mathlib.LinearAlgebra.Basis.VectorSpace
 /-! The finite linear system producing Frobenius auxiliary coefficients.
 A strict dimension inequality gives a nontrivial solution. -/
 

@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.PlaneProjectionKernel
-public import CCDN.Hypersurface.NonabsolutePlaneCount
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.Algebraic.Defs
+import CCDN.Hypersurface.NonabsolutePlaneCount
+import CCDN.Plane.PlaneHilbert
+import CCDN.Projection.PlaneProjectionKernel
 /-! The irreducible image equation has degree at most the original affine
 Hilbert degree. This is an upper bound; the degree need not be preserved. -/
 

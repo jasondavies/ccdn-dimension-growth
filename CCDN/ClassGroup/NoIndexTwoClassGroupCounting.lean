@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.NormCurveExceptionalReduction
 public import CCDN.ClassGroup.OddIndexNormCurveCount
-public import CCDN.ClassGroup.OddDegreeClassGroupCounting
+public import CCDN.ClassGroup.SmallSubfieldIntegerCount
+import CCDN.ClassGroup.NormCurveExceptionalReduction
+import CCDN.ClassGroup.OddDegreeClassGroupCounting
 /-! Counting the bounded square-norm integers in the absence of
 an index-two subfield. Ordinary norm curves and small-subfield exceptions
 are both counted by proved estimates. -/

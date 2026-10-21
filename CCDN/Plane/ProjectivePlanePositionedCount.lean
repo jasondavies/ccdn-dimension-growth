@@ -5,9 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ProjectiveAuxiliaryCount
-public import CCDN.Algebra.ProjectiveTranslation
-public import CCDN.Auxiliary.UnscaledModelCount
+public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Height.ProjectiveBox
+public import CCDN.Plane.ScaledPlaneCount
+import CCDN.Algebra.HomogeneousChartIrreducible
+import CCDN.Algebra.ProjectiveTranslation
+import CCDN.Algebra.ScaledModelPosition
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Auxiliary.ProjectiveAuxiliaryCount
 /-! Coefficient-uniform projective plane counts after a bounded integral
 coordinate change. The finite-field and positioning inputs are proved. -/
 

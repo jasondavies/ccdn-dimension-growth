@@ -5,7 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.PrimitivePairReconstruction
+public import Mathlib.Algebra.MvPolynomial.Eval
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import CCDN.Height.PrimitivePairReconstruction
+import Mathlib.Algebra.MvPolynomial.CommRing
 /-! Birational projection coordinates admit a rational inverse in the original
 coordinate ring. Its denominator cuts out all possible noninjective fibers.
 The degree of that denominator is not yet bounded uniformly. -/

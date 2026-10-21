@@ -5,9 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.FixedCoordinateElimination
-public import CCDN.Algebra.ProjectiveClosureSpecialization
-public import CCDN.Projection.LinearNormalizationInfinite
+public import CCDN.Projection.ProjectiveClosureProjection
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Algebra.ProjectiveClosureSpecialization
+import CCDN.Auxiliary.HypersurfaceGoodDirection
+import CCDN.Auxiliary.HypersurfacePositioning
+import CCDN.Projection.FixedCoordinateElimination
+import CCDN.Projection.HomogenizationAtInfinity
+import Mathlib.Algebra.MvPolynomial.Funext
 /-! Over any infinite field a full-degree affine elimination also gives
 an integral projection of the projective closure, retaining X0 exactly. -/
 

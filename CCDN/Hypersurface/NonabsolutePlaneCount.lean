@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialLinearDescent
-public import Mathlib.Algebra.MvPolynomial.Nilpotent
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Tactic.Continuity
+import CCDN.Algebra.PolynomialLinearDescent
+import CCDN.Plane.Bezout
+import Mathlib.Algebra.MvPolynomial.Nilpotent
 
 /-! Irreducible base-field plane curves that split over an extension have at
 most d² base-field points. The proof uses linear coefficient descent and

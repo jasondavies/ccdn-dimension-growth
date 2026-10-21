@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.InfinityChartCardinality
-public import CCDN.Projection.InfinityScaling
-public import CCDN.Projection.BoundedInfinityAvoidance
+public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Projection.InfinityParameterReduction
+import CCDN.Projection.BoundedInfinityAvoidance
+import CCDN.Projection.InfinityChartCardinality
+import CCDN.Projection.InfinityScaling
 /-! Finite normalized charts give a bounded integral moment parameter
 avoiding every nonzero infinity direction. -/
 

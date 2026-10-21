@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ScaledModelPosition
-public import CCDN.Algebra.ScaledModelCoordinates
-public import CCDN.Auxiliary.PolynomialMapAuxiliary
+public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Height.PrimitiveIntegerPolynomial
+import CCDN.Algebra.ScaledModelCoordinates
+import CCDN.Algebra.ScaledModelPosition
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Auxiliary.PolynomialMapAuxiliary
 /-! A prime-scaled plane point bound with the arbitrary coefficient
 height eliminated. The sharp finite-field count and a suitable scaling prime
 remain explicit hypotheses. -/

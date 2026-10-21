@@ -6,8 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveClosureIdeal
-public import CCDN.Projection.ProjectiveClosureProjection
-public import Mathlib.Algebra.MvPolynomial.Equiv
+import CCDN.Projection.ProjectiveClosureProjection
 
 /-! The homogeneous coordinate ring of an affine variety's projective
 closure embeds into the polynomial ring over its affine coordinate ring.

@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import Mathlib.Analysis.Polynomial.Basic
+import Mathlib.Algebra.Order.Star.Rat
+import Mathlib.Analysis.Polynomial.Basic
 
 /-! Eventual inequalities compare the degree and leading coefficient of
 Hilbert polynomials. -/

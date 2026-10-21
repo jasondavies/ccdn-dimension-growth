@@ -6,7 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.HypersurfaceLargeHeightDegree
-public import CCDN.Auxiliary.HypersurfaceSmallHeightAuxiliary
+public import CCDN.Auxiliary.HypersurfaceNormalizedComparison
+import CCDN.Auxiliary.PlaneAuxiliarySelection
 /-! Auxiliary polynomials in the large-height range. The degree is
 O_{n,T}(d^(4-1/(n+1))); the leading-coefficient positioning cost is explicit. -/
 

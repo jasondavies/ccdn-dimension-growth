@@ -5,13 +5,20 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.FixedCoordinateGenericNormalization
-public import CCDN.Center.GeometricCenterRows
-public import CCDN.Center.IndependentPrimitiveExtension
-public import CCDN.Center.ClosureNormalizationInfinite
-public import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
-public import CCDN.Projection.ProjectiveClosureProjection
-public import CCDN.Hilbert.HilbertFullDimension
+public import CCDN.Center.ChowLinearSpecialization
+public import CCDN.Center.ProjectionImageFractionField
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.RingTheory.MvPolynomial
+import CCDN.Center.ClosureNormalizationInfinite
+import CCDN.Center.FixedCoordinateGenericNormalization
+import CCDN.Center.GeometricCenterRows
+import CCDN.Center.HomogeneousProjectionNoBasePoint
+import CCDN.Center.IndependentPrimitiveExtension
+import CCDN.Hilbert.HilbertFullDimension
+import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
+import CCDN.Projection.IntegralProjectionHilbert
+import Mathlib.LinearAlgebra.Matrix.Rank
+import Mathlib.Algebra.CharZero.Infinite
 /-! Constructed finite birational centers at infinity. Every center row has
 zero homogenizing coordinate; the construction includes affine dimension
 zero. -/

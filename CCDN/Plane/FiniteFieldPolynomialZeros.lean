@@ -5,8 +5,20 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalPlaneWitness
-public import Mathlib.Algebra.MvPolynomial.SchwartzZippel
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.SetTheory.Cardinal.Finite
+import Mathlib.Algebra.MvPolynomial.SchwartzZippel
+import Mathlib.Tactic.NormNum.RealSqrt
+import Mathlib.Tactic.NormNum.Parity
+import Mathlib.Tactic.NormNum.NatSqrt
+import Mathlib.Tactic.NormNum.NatFib
+import Mathlib.Tactic.NormNum.LegendreSymbol
+import Mathlib.Tactic.NormNum.IsCoprime
+import Mathlib.Tactic.Inclusion.Extension.IntervalDyadicReal.Rational
+import Mathlib.Tactic.Inclusion.Extension.Core.Core
+import Mathlib.NumberTheory.Chebyshev
+import ArithmeticHeights.Absolute
+import Mathlib.Analysis.SpecialFunctions.Gamma.Basic
 
 /-! The polynomial zero bound on the full affine parameter space, with its
 field-size saving retained in multiplicative form. This wraps Mathlib's Schwartz–Zippel

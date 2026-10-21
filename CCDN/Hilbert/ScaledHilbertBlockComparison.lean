@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertPolynomialComparison
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Hilbert.HilbertPolynomialComparison
+import Mathlib.RingTheory.Polynomial.HilbertPoly
+import Mathlib.Tactic.Positivity
 /-! Polynomial parameters of degree at most q have function-field degree
 at most the Hilbert multiplicity times q to the dimension. -/
 

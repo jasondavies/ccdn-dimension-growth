@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertCoordinateIndependence
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Hilbert.HilbertCoordinateIndependence
 /-! Full ambient Hilbert dimension forces the ideal to be zero. -/
 
 @[expose] public section

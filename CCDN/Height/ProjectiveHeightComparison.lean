@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.ProjectiveHeightDeterminant
-public import CCDN.Determinant.PlaneChartDeterminant
+public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Determinant.HeightDeterminant
+public import CCDN.Height.Box
+import CCDN.Algebra.HomogeneousRankDichotomy
+import CCDN.Determinant.HomogeneousDeterminantComparison
+import CCDN.Determinant.ProjectiveHeightDeterminant
 /-! The coefficient-sensitive determinant comparison for bounded primitive
 integer representatives of projective plane points. -/
 

@@ -6,8 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.UniversalHyperplaneRestriction
-public import CCDN.Hypersurface.GoodHyperplaneReindex
-public import CCDN.Noether.UniversalNoetherForms
+public import CCDN.Algebra.UniversalHomogeneousForm
+import CCDN.Algebra.CoefficientwiseSubstitution
+import CCDN.Hypersurface.GoodHyperplaneReindex
+import CCDN.Noether.UniversalNoetherForms
 /-! Effective hyperplane avoidance from the universal Noether forms.
 The polynomial is nonzero by a constructed geometrically good section.
 It is homogeneous of degree d(d²−1)+1 and vanishes on every bad graph

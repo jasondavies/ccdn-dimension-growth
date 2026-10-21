@@ -5,7 +5,18 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.NonRationalVarietyCount
+public import CCDN.Algebra.ConjugatePrimeGridBound
+public import CCDN.Curve.Curve
+public import Mathlib.FieldTheory.Galois.Basic
+import CCDN.Hilbert.AlgebraicHilbertDimension
+import CCDN.Hilbert.HilbertCoefficientEquiv
+import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Hilbert.ProperSectionHilbert
+import CCDN.Hypersurface.GaloisComponentDegree
+import CCDN.Hypersurface.GaloisComponentPoints
+import CCDN.Hypersurface.GaloisPolynomialPrimes
+import CCDN.Hypersurface.GaloisStableIdealDescent
+import Mathlib.Algebra.Order.Star.Rat
 /-! Zero-dimensional affine prime ideals with a rational point descend to
 the rational field. This supplies the zero-dimensional boundary cases of
 CCDN 4.1.3 and 4.1.4. -/

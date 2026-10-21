@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.DegreeOneAffineLine
+public import CCDN.Curve.Curve
+public import CCDN.Plane.IntegralAffineLine
+public import Mathlib.RingTheory.Ideal.Height
+import CCDN.Plane.DegreeOneAffineLine
 /-! A finite family of degree-one prime components gives a finite
 set of rational affine lines with the same rational zero-set union. Empty
 rational loci are discarded, and repeated line sets are counted only once. -/

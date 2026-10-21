@@ -6,8 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.ForMathlib.IntegerPolynomialL1
-public import CCDN.Noether.AmbientNoetherVanishing
-public import CCDN.Noether.EulerUniversalHeight
+public import CCDN.Noether.AmbientNoetherForms
+import CCDN.Noether.AmbientNoetherVanishing
+import CCDN.Noether.EulerSparseMatrix
 /-! Explicit coefficient-sum bounds for generic plane restrictions.
 An original monomial of degree d contributes at most 3^d; an Euler matrix
 entry contributes at most d times this quantity. -/

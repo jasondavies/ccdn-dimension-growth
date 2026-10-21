@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.AffineLeadingTranslation
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
+public import CCDN.Algebra.AffineTranslation
+public import CCDN.Height.Box
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
+import CCDN.Height.AffineTranslationCount
 /-! Integral translations preserve the affine bad-prime factor, including
 degree-dropping reductions and the nonabsolute zero convention. -/
 

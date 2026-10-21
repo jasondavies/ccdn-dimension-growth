@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Analysis.WeightedSequenceEstimate
-public import Mathlib.Data.Nat.Find
-public import Mathlib.Data.Fintype.Fin
+public import Mathlib.Data.Set.Card
+import CCDN.Analysis.WeightedSequenceEstimate
+import CCDN.Determinant.FilteredDeterminant
 
 /-! Exact initial weight sums for arbitrary finite or infinite layer profiles.
 Initial segments are characterized by their cumulative multiplicities, and

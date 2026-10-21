@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.IdealScalarDescent
 public import Mathlib.FieldTheory.Galois.GaloisClosure
 
 /-! Every affine ideal over an algebraic Galois extension is defined over

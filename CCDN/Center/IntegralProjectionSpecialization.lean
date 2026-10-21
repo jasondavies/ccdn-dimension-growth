@@ -7,7 +7,6 @@ module
 
 public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-public import Mathlib.Algebra.Polynomial.Eval.Coeff
 
 /-! Integrality supplies a monic equation for each coordinate of
 every geometric fiber. The equation is chosen before the points of that

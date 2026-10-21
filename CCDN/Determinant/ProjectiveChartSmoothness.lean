@@ -6,8 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Surface.SurfaceGeometricCurveCover
-public import CCDN.Algebra.HomogeneousChart
-public import Mathlib.RingTheory.MvPolynomial.EulerIdentity
+import Mathlib.RingTheory.MvPolynomial.EulerIdentity
 
 /-! The affine Jacobian criterion on x₀=1 is exactly the homogeneous
 projective Jacobian criterion, by Euler's identity. -/

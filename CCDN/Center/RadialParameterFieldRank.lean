@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.PolynomialParameterFieldRank
+public import CCDN.Center.GenericLinearParameterField
+import CCDN.Center.PolynomialParameterFieldRank
 /-! Adjoining a nonzero radial variable does not change the degree of
 an affine parameter field. The cone parameters are the radial variable
 and its products with the original parameters. -/

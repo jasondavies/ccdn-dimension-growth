@@ -5,14 +5,17 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.BinaryHomogeneousIrreducibility
-public import CCDN.Plane.AffinePlaneRestriction
 public import CCDN.Algebra.HomogeneousTranslation
-public import CCDN.Determinant.PlaneSingularities
 public import CCDN.Algebra.AffineLineLeading
-public import CCDN.Surface.TopFormIrreducibility
-public import CCDN.Surface.SurfaceLineDirections
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Curve.Curve
+public import CCDN.Plane.IntegralAffineLine
+import CCDN.Algebra.BinaryHomogeneousIrreducibility
+import CCDN.Determinant.PlaneSingularities
+import CCDN.Plane.AffinePlaneRestriction
+import CCDN.Surface.SurfaceLineDirections
+import CCDN.Surface.TopFormIrreducibility
+import Mathlib.Algebra.Order.Star.Rat
 /-! Directional derivatives of surfaces with absolutely irreducible top form. -/
 
 @[expose] public section

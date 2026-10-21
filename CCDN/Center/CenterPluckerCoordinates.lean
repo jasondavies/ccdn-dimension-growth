@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.CenterSubspaceQuotient
-public import CCDN.Center.CenterMinorProjection
+import CCDN.Height.ProjectiveZeroLocus
 /-! The Plücker point of a fixed-dimensional center, with the coordinates
 `matrixPluckerCoordinates`. No assertion about the dimension of the projective
 target is needed. Equality of Plücker points is exactly equality of row spans. -/

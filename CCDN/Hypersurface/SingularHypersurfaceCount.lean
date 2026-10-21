@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
-public import CCDN.Auxiliary.HypersurfacePositioningCharZero
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+import CCDN.Auxiliary.HypersurfacePositioningCharZero
+import CCDN.Determinant.PlaneSingularities
+import CCDN.Determinant.SingularDeterminant
+import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
 /-! The singular locus of an irreducible rational hypersurface has a
 coefficient-uniform codimension-two integer point bound. A nonzero partial
 derivative gives the proper intersection used in the count. -/

@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.PlaneAuxiliarySelection
+public import CCDN.Algebra.HomogeneousMonomials
+public import CCDN.Determinant.HeightDeterminant
+import CCDN.Algebra.HomogeneousRankDichotomy
+import CCDN.Determinant.HomogeneousDeterminantComparison
 /-! The determinant comparison for polynomial homogeneous-coordinate maps of
 integer plane-curve points. The residue geometry comes from the plane
 equation, so coordinates such as (H,x,y) need no rational rows. -/

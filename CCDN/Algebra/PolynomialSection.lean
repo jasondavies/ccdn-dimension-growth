@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PointSeparation
+public import CCDN.Hilbert.FilteredIntersection
+import CCDN.Algebra.PointSeparation
+import Mathlib.LinearAlgebra.Dimension.Finite
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 /-! A sharp affine curve intersection bound from the Hilbert function.
 Bounds intersections with arbitrary section polynomials. No projective intersection theorem or point-counting axiom is used. -/
 

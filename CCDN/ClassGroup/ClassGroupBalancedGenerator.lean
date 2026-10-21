@@ -5,11 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupIdealRescaling
-public import Mathlib.NumberTheory.NumberField.CanonicalEmbedding.ConvexBody
-public import Mathlib.NumberTheory.NumberField.Discriminant.Basic
-public import Mathlib.Analysis.SpecialFunctions.Pow.NNReal
-public import Mathlib.Analysis.Complex.ExponentialBounds
+public import CCDN.ClassGroup.ClassGroupTwoTorsion
+import CCDN.ClassGroup.ClassGroupIdealRescaling
+import Mathlib.Analysis.Complex.ExponentialBounds
 
 /-! Balanced square generators for two-torsion ideal classes.
 The anisotropic Minkowski argument is applied to the inverse ideal; the

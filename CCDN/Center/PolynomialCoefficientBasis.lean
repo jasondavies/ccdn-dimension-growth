@@ -6,7 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.PolynomialLinearSpecialization
-public import Mathlib.LinearAlgebra.Dimension.Localization
+public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.Localization.FractionRing
+import Mathlib.LinearAlgebra.Dimension.Localization
+import Mathlib.Tactic.ContinuousFunctionalCalculus
 
 /-! A coefficient-field basis remains a basis after adjoining arbitrary
 polynomial parameters. This records the scalar extension and its

@@ -5,9 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Counterexample.MixedDegreeProjectiveExample
-public import Mathlib.LinearAlgebra.Matrix.Kronecker
-public import Mathlib.Data.Finset.Prod
+public import Mathlib.LinearAlgebra.Vandermonde
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
 /-! Primitive points and homogeneous columns of differing degrees on one
 fixed projective line. Their evaluation matrix is a Kronecker product

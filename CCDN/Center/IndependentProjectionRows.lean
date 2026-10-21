@@ -5,9 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionScalarExtension
-public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
-public import Mathlib.LinearAlgebra.Matrix.Rank
+public import CCDN.Algebra.IntegerLinearForms
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+public import Mathlib.LinearAlgebra.Matrix.ToLin
+public import Mathlib.RingTheory.MvPolynomial
+import CCDN.Hilbert.HilbertLinearCoordinates
+import Mathlib.LinearAlgebra.Matrix.Rank
+import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
 /-! Row independence of a normalization and an independent standard
 row completing it. A redundant primitive row does not enlarge the field

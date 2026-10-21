@@ -5,12 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.NoetherianLocalDeterminant
-public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.RingTheory.Ideal.Int
-public import Mathlib.Data.ZMod.QuotientRing
-public import Mathlib.RingTheory.Filtration
-public import Mathlib.RingTheory.Localization.Submodule
+public import CCDN.Determinant.FiltrationWeights
+public import CCDN.Determinant.LocalPrimeReduction
+import CCDN.Determinant.NoetherianLocalDeterminant
+import Mathlib.RingTheory.Filtration
 
 /-! The arbitrary Noetherian local determinant lemma with its target
 `ℤ_(p)`. Its residue map and prime-generated maximal ideal are constructed

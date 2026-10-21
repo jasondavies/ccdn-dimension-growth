@@ -5,9 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.TopFormSurfaceComponents
-public import CCDN.Surface.SurfaceNonlinearCount
-public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Curve.Curve
+public import CCDN.Surface.TopFormAuxiliary
+public import Mathlib.RingTheory.Ideal.Height
+import CCDN.Surface.SurfaceNonlinearCount
+import CCDN.Surface.TopFormSurfaceComponents
 /-! For an auxiliary section of a surface of degree at least sixteen,
 all nonlinear components together contribute O(d^18 B) bounded integer points.
 The union of the degree-one components is not covered by this estimate. -/

@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneCurveAssembly
+public import CCDN.Determinant.SingularReduction
 /-! The affine residue points of an integer plane equation are the
 zeros of its reduction. -/
 

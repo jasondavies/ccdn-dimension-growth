@@ -5,9 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectionScalarExtension
-public import CCDN.Projection.BoundedDegreePreservingProjection
-public import CCDN.Algebra.ReconstructionFunctionField
+public import CCDN.Curve.CurvePrimitivePair
+public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
+import CCDN.Algebra.ReconstructionFunctionField
+import CCDN.Projection.BoundedDegreePreservingProjection
+import CCDN.Projection.DegreePreservingProjectionCount
+import CCDN.Projection.ProjectionScalarExtension
 /-! The constructed bounded plane projection of a geometrically integral
 curve is geometrically integral, birational and degree-preserving. Its
 point-count error is at most d(d-1). -/

@@ -5,11 +5,17 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.GeometricCurveCountReduction
-public import CCDN.Center.HomogeneousCurveHilbert
-public import CCDN.Hilbert.HilbertCoordinateIndependence
 public import CCDN.Algebra.ProjectivePermutation
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveChartIdeal
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.DegreePreservingProjectionBox
+import CCDN.Center.GeometricCurveCountReduction
+import CCDN.Center.GeometricCurveProjection
+import CCDN.Center.HomogeneousCurveHilbert
+import CCDN.Hilbert.HilbertCoordinateIndependence
+import CCDN.Projection.AffineProjectionCount
+import CCDN.Projection.ProjectionScalarExtension
 /-! The geometric projective-curve projection statement, uniformly for all
 heights, obtained by choosing a proper coordinate chart. The coordinate
 permutation has no height cost and is chosen before the radius. -/

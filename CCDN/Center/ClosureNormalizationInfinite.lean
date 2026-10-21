@@ -5,8 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.FixedCoordinateEliminationInfinite
-public import CCDN.Projection.ClosureIntegralComposition
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.ProjectiveClosureProjection
+public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
+import CCDN.Center.FixedCoordinateEliminationInfinite
+import CCDN.Hilbert.HilbertFullDimension
+import CCDN.Hilbert.ProperHilbertDimension
+import CCDN.Projection.ClosureIntegralComposition
+import CCDN.Projection.IntegralProjectionHilbert
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 /-! Finite linear normalization retaining the homogenizing coordinate over
 any infinite field, in every dimension including zero. -/
 

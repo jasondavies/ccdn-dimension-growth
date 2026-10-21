@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.PlaneLinearDeformation
+public import Mathlib.Algebra.Algebra.Defs
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+import Mathlib.Algebra.Polynomial.Degree.Support
+import Mathlib.Algebra.Polynomial.Eval.Coeff
 /-! Apply a linear functional to the coefficients of a univariate polynomial.
 This commutes with evaluation over the scalar field and multiplication by
 scalar polynomials, allowing polynomial relations to be encoded by matrices. -/

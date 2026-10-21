@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.NonabsoluteSurfaceCount
-public import CCDN.Hilbert.CompleteIntersectionGridBound
+public import CCDN.Curve.Curve
+import CCDN.Hilbert.CompleteIntersectionGridBound
+import CCDN.Hypersurface.NonabsoluteSurfaceCount
 /-! Dimension growth for non-geometrically-irreducible rational
 hypersurfaces in every ambient dimension. The dependence on the degree
 is quadratic; the explicit constant depends only on dimension. -/

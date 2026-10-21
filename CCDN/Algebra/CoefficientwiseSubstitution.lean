@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.UniversalHomogeneousForm
+public import CCDN.Algebra.CoefficientwiseHomogeneous
 /-! Homogeneous substitution with independent coefficient and polynomial
 variables, and specialization of the resulting coefficient forms. -/
 

@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Analysis.PrimeCutoff
 public import CCDN.Auxiliary.AuxiliaryDegreeBound
+public import CCDN.Analysis.PrimeSums
+import CCDN.Analysis.PrimeCutoff
+import CCDN.Analysis.PrimeProduct
 /-! Analytic control of bad-prime charges from an integer witness.
 The construction and coefficient bound for a Noether witness remain separate. -/
 

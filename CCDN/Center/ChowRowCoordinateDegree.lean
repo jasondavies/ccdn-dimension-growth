@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowRowSymmetry
+public import CCDN.Center.ChowIncidenceGrading
 /-! A nonzero evaluation with only one active coordinate in a hyperplane
 block identifies its separate degree with the degree in that coordinate. -/
 

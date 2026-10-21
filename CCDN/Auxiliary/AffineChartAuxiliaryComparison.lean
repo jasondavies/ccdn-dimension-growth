@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AffineChartGlobalDeterminant
 public import CCDN.Auxiliary.HypersurfaceBadPrimeComparison
+public import CCDN.Auxiliary.AffineChartPrimeDeterminant
+import CCDN.Auxiliary.AffineChartGlobalDeterminant
 /-! The normalized no-auxiliary comparison for a finite prime set outside which
 every large prime is an affine-chart good prime. -/
 

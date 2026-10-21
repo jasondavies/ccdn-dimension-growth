@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HomogeneousDeterminantComparison
 public import CCDN.Auxiliary.IntegerCoefficientHeight
-public import CCDN.Projection.PrimitiveNormalization
 public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Auxiliary.HomogeneousAuxiliary
+import CCDN.Determinant.HomogeneousDeterminantComparison
+import CCDN.Projection.PrimitiveNormalization
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! Bounded rational zeros either admit a degree-d auxiliary nonmultiple,
 or control the defining equation's coefficient height by an explicit
 finite-dimensional interpolation bound. -/

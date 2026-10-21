@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.LocalPrimeGenerators
 public import CCDN.Determinant.FiltrationWeights
+public import CCDN.Determinant.LocalPrimeReduction
+public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import CCDN.Determinant.FilteredDeterminant
+import CCDN.Determinant.LocalPrimeGenerators
 /-! Determinants of homomorphisms from arbitrary Noetherian local
 rings. The residue map of the target identifies its prime ideal; all local
 generators and their finite-precision factorizations are constructed from

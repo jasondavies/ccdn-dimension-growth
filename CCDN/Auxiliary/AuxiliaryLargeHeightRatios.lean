@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.AuxiliaryRatioEstimates
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+import CCDN.Auxiliary.AuxiliaryRatioEstimates
 /-! In the large-height range, the coefficient saving absorbs the radius
 and leaves a negative logarithmic-height term to control the bad-prime factor. -/
 

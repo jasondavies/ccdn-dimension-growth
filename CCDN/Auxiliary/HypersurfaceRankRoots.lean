@@ -5,7 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.HypersurfaceRankProfile
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import CCDN.Auxiliary.HypersurfaceRankProfile
 /-! Exact leading term for the dimension root of the homogeneous Hilbert rank. -/
 
 @[expose] public section

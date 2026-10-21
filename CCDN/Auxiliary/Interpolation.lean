@@ -8,8 +8,9 @@ module
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Basic.Real.Basic
 public import Mathlib.Data.Matrix.Mul
-public import Mathlib.Algebra.Order.BigOperators.Ring.Finset
-public import Mathlib.Tactic.Positivity
+import Mathlib.Algebra.Order.BigOperators.Ring.Finset
+import Mathlib.Analysis.SpecialFunctions.Pow.Real
+import Mathlib.Tactic.Positivity
 
 /-!
 # Evaluation matrices and auxiliary polynomials

@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.PolynomialParameterTranslation
-public import Mathlib.RingTheory.AlgebraicIndependent.Basic
-public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+import CCDN.Center.PolynomialParameterTranslation
+import Mathlib.Algebra.MvPolynomial.Equiv
+import Mathlib.Algebra.MvPolynomial.Monad
 
 /-! Independent values at one parameter specialization imply independence
 of the generic polynomial values together with all parameters. -/

@@ -5,9 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.HilbertLinearCoordinates
-public import CCDN.Algebra.BinomialSectionBound
-public import Mathlib.RingTheory.UniqueFactorizationDomain.Ideal
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+import CCDN.Algebra.BinomialSectionBound
+import CCDN.Hilbert.HilbertLinearCoordinates
+import CCDN.Hilbert.HilbertPolynomialComparison
+import Mathlib.RingTheory.Polynomial.HilbertPoly
+import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import Mathlib.RingTheory.SimpleModule.Basic
 
 /-! Hypersurface projection kernels in arbitrary dimension.
 The proper-intersection estimate excludes a second independent equation. -/

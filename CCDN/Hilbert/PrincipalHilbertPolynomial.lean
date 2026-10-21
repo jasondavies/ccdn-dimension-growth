@@ -6,7 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import CCDN.Plane.PlaneHilbert
+public import Mathlib.RingTheory.Polynomial.HilbertPoly
+import CCDN.Hilbert.MonomialDimension
+import CCDN.Plane.PlaneHilbert
+import Mathlib.Tactic.Positivity
 /-! The filtered Hilbert polynomial of a principal hypersurface.
 Its dimension and multiplicity follow from the exact finite-dimensional
 principal-ideal rank identity, without geometric hypotheses. -/

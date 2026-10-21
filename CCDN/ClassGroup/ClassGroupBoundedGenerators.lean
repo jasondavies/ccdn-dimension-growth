@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.ClassGroupBalancedGenerator
-public import Mathlib.Data.Set.Card
+public import CCDN.ClassGroup.ClassGroupTwoTorsion
+import CCDN.ClassGroup.ClassGroupBalancedGenerator
 
 /-! The first counting reduction for two-torsion ideal classes:
 inject them into the finite set of bounded algebraic integers whose absolute

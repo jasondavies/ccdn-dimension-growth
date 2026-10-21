@@ -5,8 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.PrimitiveNormalization
-public import CCDN.Determinant.PlaneChartDeterminant
+public import CCDN.Algebra.HomogeneousMonomials
+public import CCDN.Height.PrimitiveIntegerPolynomial
+import CCDN.Algebra.HomogeneousEvaluation
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 /-! Restriction to x₀=1 is injective on forms of a fixed homogeneous degree.
 Explicit homogenization supplies its inverse on bounded-degree polynomials. -/
 

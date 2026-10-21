@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.QuadraticHilbert90
 public import Mathlib.RingTheory.ClassGroup.Basic
+import Mathlib.Tactic.Measurability.Init
 
 /-! A fractional ideal with norm-one scalar comparison to its
 conjugate can be replaced in its ideal class by an invariant fractional

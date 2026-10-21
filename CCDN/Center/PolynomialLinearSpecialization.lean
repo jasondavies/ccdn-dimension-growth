@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.LinearAlgebra.Matrix.Nonsingular
-public import Mathlib.LinearAlgebra.Matrix.ToLin
-public import Mathlib.Algebra.MvPolynomial.CommRing
-public import Mathlib.LinearAlgebra.Basis.VectorSpace
+public import Mathlib.Algebra.MvPolynomial.Eval
+import Mathlib.Algebra.EuclideanDomain.Field
+import Mathlib.Algebra.Field.IsField
+import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import Mathlib.LinearAlgebra.Matrix.ToLin
 
 /-! Linear coordinate maps applied coefficientwise to polynomial families.
 A basis at one specialization certifies generic linear independence over

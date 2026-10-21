@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.IntegerGridInterpolation
-public import Mathlib.Algebra.MvPolynomial.Equiv
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Basic.Real.Basic
+import CCDN.Auxiliary.IntegerGridInterpolation
 
 /-! Coefficient control on the integer grid in every finite dimension.
 The explicit interpolation factor has logarithm O_n(d log(d+1)). -/

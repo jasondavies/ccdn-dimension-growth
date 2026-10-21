@@ -6,8 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.EulerClosedFormRank
-public import CCDN.Hilbert.HomogeneousHilbert
-public import Mathlib.Algebra.MvPolynomial.Division
+import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hilbert.HomogeneousHilbert
+import CCDN.Projection.ShearNormalization
 
 /-! The explicit Euler parameters exhaust all polynomial pairs satisfying
 the degree and Euler-contraction constraints. -/

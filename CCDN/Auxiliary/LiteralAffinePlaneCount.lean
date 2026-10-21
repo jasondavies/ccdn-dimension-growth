@@ -5,8 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.LiteralAffineAuxiliaryTheorem
 public import CCDN.Plane.AffinePlaneCoefficientCount
+public import CCDN.Auxiliary.LiteralAffineBadPrimes
+public import CCDN.Plane.Plane
+import CCDN.Algebra.IntegerRationalIrreducibility
+import CCDN.Auxiliary.LiteralAffineAuxiliaryTheorem
+import CCDN.Auxiliary.PlaneAuxiliaryCount
+import CCDN.Plane.Bezout
 /-! CCDN Corollary 4.2.4 with the literal affine bad-prime factor and the
 original coefficient-sensitive minimum. The auxiliary equation
 and Bezout supply the count for every primitive irreducible plane equation. -/

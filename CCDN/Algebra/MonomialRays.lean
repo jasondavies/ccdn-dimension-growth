@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.StandardMonomials
+public import CCDN.ForMathlib.StandardMonomials
+public import CCDN.Hilbert.FilteredIntersection
+import CCDN.Hilbert.MonomialDimension
+import CCDN.Hilbert.StandardMonomials
 /-!
 # Linear-growth monomial sets
 

@@ -5,8 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.SingularApproximation
-public import CCDN.Determinant.SmoothLocalDeterminant
+public import CCDN.Determinant.LocalDeterminant
+public import Mathlib.Algebra.Field.ZMod
+public import Mathlib.RingTheory.MvPolynomial.Ideal
+import CCDN.Determinant.SingularApproximation
+import CCDN.Determinant.SingularTangent
+import CCDN.Determinant.SmoothLocalDeterminant
 /-! Singular plane-curve local determinant divisibility, obtained from
 finite-precision homogeneous generators of the local maximal-ideal filtration. -/
 

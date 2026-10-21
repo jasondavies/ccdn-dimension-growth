@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.Polynomial.AlgebraMap
-public import Mathlib.Algebra.Polynomial.Div
-public import Mathlib.Algebra.Polynomial.Degree.TrailingDegree
-public import Mathlib.Algebra.MvPolynomial.CommRing
+public import Mathlib.Algebra.Polynomial.Coeff
+public import Mathlib.Algebra.Polynomial.Eval.Defs
+import Mathlib.Algebra.Polynomial.Div
+import Mathlib.Algebra.Polynomial.Monomial
 
 /-! A polynomial deformation whose constant specialization is injective
 remains injective, including after adjoining the deformation parameters.

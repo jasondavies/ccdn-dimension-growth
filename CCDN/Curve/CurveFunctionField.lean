@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FunctionFieldRank
-public import Mathlib.RingTheory.Localization.FractionRing
-public import Mathlib.RingTheory.Localization.Integer
+public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.RingTheory.Algebraic.Defs
+import CCDN.Hilbert.FunctionFieldRank
+import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.LinearAlgebra.Dimension.Finite
+import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+import Mathlib.RingTheory.Localization.Integer
 
 /-! A fraction field of an affine curve is finite over the field of a
 transcendental linear parameter, of degree at most its affine Hilbert degree.

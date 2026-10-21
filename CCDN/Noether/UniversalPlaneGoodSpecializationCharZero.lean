@@ -5,10 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.ClosedFormScaling
-public import CCDN.Noether.UniversalPlaneWitnessCharZero
-public import CCDN.Noether.UniversalPlaneEvaluation
-public import CCDN.Algebra.IntegerPolynomialAvoidance
+public import CCDN.Plane.FiniteFieldBadPlanes
+import CCDN.Algebra.IntegerPolynomialAvoidance
+import CCDN.Auxiliary.ConstantLeadingBadReduction
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Noether.ClosedFormScaling
+import CCDN.Noether.UniversalPlaneWitnessCharZero
 /-! A nonzero universal witness certifies a geometrically irreducible
  plane section in characteristic zero. Integer specialization can simultaneously
  avoid any additional nonzero polynomial condition on the plane parameters. -/

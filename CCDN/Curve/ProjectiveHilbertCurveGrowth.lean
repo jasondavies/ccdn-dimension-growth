@@ -5,9 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.ProjectiveVarietyDimensionGrowth
-public import CCDN.Plane.ProjectivePlaneLinearCount
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Height.ProjectiveBox
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Height.ProjectiveLinearCountTransfer
+import CCDN.Plane.ProjectivePlaneLinearCount
+import CCDN.Projection.BoundedBirationalHypersurfaceProjection
+import CCDN.Projection.LinearNormalizationFiberCount
 /-! The plane curve estimate gives a smaller degree exponent for curves
 specified by their filtered Hilbert polynomial. The construction of
 the finite birational projection and its integer matrix is internal. -/

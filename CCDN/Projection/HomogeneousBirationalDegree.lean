@@ -5,10 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.HomogeneousFilteredProjection
-public import CCDN.Hilbert.HilbertPolynomialComparison
-public import CCDN.Algebra.CoordinatePowerGeneration
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.LinearProjectionFiltration
+import CCDN.Algebra.CoordinatePowerGeneration
+import CCDN.Hilbert.HilbertPolynomialComparison
+import CCDN.Projection.HomogeneousFilteredProjection
+import Mathlib.LinearAlgebra.FreeModule.PID
 /-! A homogeneous linear projection with a nonzero conductor preserves
 Hilbert multiplicity. The conductor shifts the filtration by a fixed amount,
 which leaves the leading coefficient of the Hilbert polynomial unchanged. -/

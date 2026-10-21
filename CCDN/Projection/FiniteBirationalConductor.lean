@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.Finiteness.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
-public import Mathlib.RingTheory.Localization.Integer
+public import Mathlib.RingTheory.Finiteness.Defs
+import Mathlib.RingTheory.Localization.Integer
 
 /-! A finite extension of domains with a common fraction field has a
 nonzero conductor. Clearing the denominators of finite module

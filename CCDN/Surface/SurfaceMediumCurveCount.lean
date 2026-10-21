@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.SmallDegreeSurfaceCurveCount
-public import CCDN.Surface.LogarithmicSalbergerRate
+public import CCDN.Curve.Curve
+import CCDN.AffineCurveBound
+import CCDN.Surface.SurfaceNonlinearCount
 /-! Curves between a fixed degree cutoff and the logarithmic terminal
 cutoff can be left in the exceptional set. Their aggregate count has the
 required B^(2/sqrt d) scale with a fixed logarithmic factor. -/

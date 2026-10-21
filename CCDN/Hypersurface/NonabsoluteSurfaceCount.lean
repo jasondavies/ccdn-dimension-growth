@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.NonabsolutePlaneCount
-public import CCDN.Hilbert.CompleteIntersectionDegreeBudget
-public import CCDN.Curve.CurveBoxDegreeBound
+public import CCDN.Curve.Curve
+public import Mathlib.RingTheory.Ideal.Height
+import CCDN.Algebra.PolynomialLinearDescent
+import CCDN.Curve.CurveBoxDegreeBound
+import CCDN.Hypersurface.NonabsolutePlaneCount
+import Mathlib.Algebra.MvPolynomial.Nilpotent
 /-! CCDN Corollary 4.1.4 for irreducible affine hypersurfaces in three
 variables. Splitting of the full equation over any field extension gives
 an auxiliary equation of degree at most d. The prime curve

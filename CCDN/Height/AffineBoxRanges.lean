@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.ScaledBoxExponent
+public import CCDN.Plane.ScaledPlaneCount
 /-! Quantitative large-box and small-box reductions for affine scaling. -/
 
 @[expose] public section

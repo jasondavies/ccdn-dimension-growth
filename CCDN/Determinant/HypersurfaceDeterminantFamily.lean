@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceHeightDeterminant
 public import CCDN.Auxiliary.HypersurfaceBadPrimeFactor
 public import CCDN.Height.ProjectiveZeroLocus
 import all ArithmeticHeights.BombieriVaaler
+public import CCDN.Determinant.HypersurfaceDeterminantRank
+import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 
 /-! The corrected finite-family form of CCDN Proposition 3.2.6.
 Each square evaluation matrix has a common homogeneous degree, but the

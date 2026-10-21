@@ -6,7 +6,6 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.Module.ZLattice.Basic
-public import Mathlib.Data.Set.Finite.Lemmas
 
 /-!
 # Shortest lattice vectors outside a subspace

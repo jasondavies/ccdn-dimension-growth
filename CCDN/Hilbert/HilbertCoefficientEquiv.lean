@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import Mathlib.Algebra.MvPolynomial.Equiv
+import CCDN.Hilbert.StandardMonomials
 
 /-! Coefficient-field isomorphisms preserve the filtered Hilbert
 polynomial. The standard exponent set is unchanged, so this does not need

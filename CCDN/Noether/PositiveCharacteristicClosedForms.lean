@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.PositiveCharacteristicResidue
-public import CCDN.Noether.SeparableRootDifferential
 public import CCDN.Noether.BivariateClosedForms
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+import CCDN.Determinant.DifferentialResidue
+import CCDN.Determinant.PositiveCharacteristicResidue
+import CCDN.Noether.BoundedDifferentialConstants
+import CCDN.Noether.SeparableRootDifferential
+import Mathlib.RingTheory.Polynomial.IsIntegral
 /-! The monic irreducible closed-form criterion in large characteristic.
 Separability, the differential root extension and constant-residue descent
 are all constructed from the polynomial and the displayed degree bounds. -/

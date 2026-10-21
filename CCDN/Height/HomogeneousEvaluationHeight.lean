@@ -5,7 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousRankDichotomy
+public import Mathlib.Basic.Real.Basic
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.Algebra.HomogeneousEvaluation
+import CCDN.Algebra.HomogeneousRankDichotomy
 /-! Coefficient height controls homogeneous evaluations, uniformly on the
 integer point box, with the exact number of monomials. -/
 

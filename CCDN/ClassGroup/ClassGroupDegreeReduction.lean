@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.NoIndexTwoClassGroupBound
-public import CCDN.ClassGroup.QuadraticClassGroupDescent
+import CCDN.ClassGroup.ClassGroupBalancedGenerator
 /-! Degree and discriminant facts used to assemble the class-group bound
 by strong induction on the number-field degree. -/
 

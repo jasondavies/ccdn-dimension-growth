@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.BoundedRowSeparation
-public import CCDN.Height.ProjectiveIntegerHeight
+public import CCDN.Height.ProjectiveBox
+import CCDN.Algebra.BoundedRowSeparation
+import CCDN.Height.ProjectiveIntegerHeight
 /-! An explicit integral linear projection away from a bounded rational
 linear center. Its kernel is exactly the span of the given independent
 rows, and its coefficient bound is uniform in their entries. -/

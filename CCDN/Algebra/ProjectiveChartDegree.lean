@@ -5,8 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Auxiliary.ProjectiveAffineChart
-public import CCDN.Curve.CurveFunctionField
+public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Algebra.ProjectiveSection
+public import CCDN.Curve.Curve
+public import CCDN.Hilbert.FilteredIntersection
+import CCDN.Height.ProjectiveZeroLocus
 /-! The affine chart of a projective coordinate domain, constructed from
 coordinate ratios in a field. Its filtered Hilbert function agrees exactly
 with the homogeneous Hilbert function before dehomogenization. -/

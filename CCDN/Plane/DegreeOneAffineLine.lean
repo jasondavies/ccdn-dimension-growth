@@ -5,9 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.CriticalFilteredGrowth
-public import CCDN.Algebra.CoordinatePowerGeneration
 public import CCDN.Plane.IntegralAffineLine
+public import CCDN.Curve.Curve
+public import CCDN.Hilbert.CompleteIntersectionHeight
+public import CCDN.Hilbert.FilteredIntersection
+import CCDN.Algebra.CoordinatePowerGeneration
+import CCDN.Hilbert.CriticalFilteredGrowth
+import CCDN.Hilbert.PrimeComponentTranscendence
 /-!
 # Degree-one prime curves are affine lines
 

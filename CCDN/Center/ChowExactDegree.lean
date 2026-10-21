@@ -5,10 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowNormalizationDegreeComparison
-public import CCDN.Center.ChowRowSymmetry
-public import CCDN.Center.ChowAxisEvaluation
-public import CCDN.Hilbert.HilbertScalarExtension
+public import CCDN.Center.ChowDistinguishedVariable
+public import CCDN.Center.ChowIncidenceGrading
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Center.ChowAxisEvaluation
+import CCDN.Center.ChowIncidenceBaseChange
+import CCDN.Center.ChowNormalizationDegreeComparison
+import CCDN.Center.ChowRowSymmetry
+import CCDN.Hilbert.HilbertScalarExtension
 /-! The Chow incidence equation has one block degree equal to the
 source Hilbert multiplicity in every row, and total degree (m+1)d.
 The generic normalization and primitive-element fields are constructed

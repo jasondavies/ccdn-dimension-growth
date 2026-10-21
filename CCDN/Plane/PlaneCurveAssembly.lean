@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.NonabsolutePlaneCount
 public import CCDN.Plane.RationalPlaneAssembly
+import CCDN.Hypersurface.NonabsolutePlaneCount
 /-! The complete rational plane reduction to sharp finite-field counting.
 The non-absolutely-irreducible case is bounded by d². -/
 

@@ -6,6 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.IntegerPlaneLogHeight
+public import CCDN.Analysis.PrimeSums
+public import CCDN.Auxiliary.AuxiliaryDegreeBound
+public import CCDN.Auxiliary.HypersurfaceBadPrimes
+import CCDN.Auxiliary.BadPrimeCharge
+import CCDN.Plane.IntegerPlaneWitness
+import CCDN.Plane.IntegerPlaneWitnessHeight
 /-! The geometric bad-prime charge in arbitrary dimension is controlled by
 coefficient height, via an explicit integer witness with bounded height. -/
 

@@ -6,8 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.ProjectiveProjectionGrowth
-public import CCDN.Projection.LinearNormalizationFiberCount
-public import CCDN.Algebra.PolynomialPredicates
+import CCDN.Projection.LinearNormalizationFiberCount
 /-! Dimension growth for homogeneous prime ideals of positive
 projective dimension. -/
 

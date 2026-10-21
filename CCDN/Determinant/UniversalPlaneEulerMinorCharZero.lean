@@ -5,9 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.GenericPlaneEulerMinorCharZero
-public import CCDN.Determinant.UniversalPlaneMinor
-public import CCDN.Noether.EulerUniversalForms
+public import CCDN.Noether.EulerPairBasis
+public import CCDN.Noether.UniversalPlaneFamily
+import CCDN.Determinant.GenericPlaneEulerMinorCharZero
+import CCDN.Determinant.UniversalPlaneMinor
+import CCDN.Noether.EulerPairSpecialization
+import CCDN.Noether.EulerUniversalForms
 /-! Every absolutely irreducible characteristic-zero hypersurface of degree
 d at least two gives a nonzero Euler minor of order d²−1 in the universal
 affine-plane parameter ring. -/

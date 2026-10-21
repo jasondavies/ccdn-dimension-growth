@@ -6,8 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.SingularTangent
-public import Mathlib.Data.Nat.Choose.Sum
-public import Mathlib.Data.Nat.Choose.Bounds
 
 /-! Binomial profiles for hypersurface local layers in all dimensions.
 The cumulative bound retains the leading coefficient μ/n! needed for the
