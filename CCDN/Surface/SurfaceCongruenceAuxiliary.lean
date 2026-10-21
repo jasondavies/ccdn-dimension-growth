@@ -131,8 +131,8 @@ theorem exists_surface_congruence_auxiliary_of_gap
   have hx (i) := mem_affineCongruencePoints.mp (ex i).property
   obtain ⟨g, hg0, hgnd, hgdeg, hgz⟩ :=
     exists_affine_congruence_auxiliary_of_gap hN f hir hd H hH hcoeff mon hmon hstd hdeg
-      x (fun i => (hx i).2.1) hB (fun i j => (hx i).1 j) P hP a ha hsmooth
-      (fun p hp i j => (hx i).2.2 p hp j) hgap'
+      ⟨hB, fun i => (hx i).2.1, fun i j => (hx i).1 j⟩ P a
+      ⟨hP, ha, hsmooth, fun p hp i j => (hx i).2.2 p hp j⟩ hgap'
   refine ⟨g, hg0, hgnd, hgdeg, ?_⟩
   intro y hy
   obtain ⟨i, hi⟩ := ex.surjective ⟨y, hy⟩

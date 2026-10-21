@@ -7,8 +7,10 @@ module
 
 public import CCDN.Height.Box
 public import Mathlib.Algebra.GCDMonoid.Finset
+public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.Algebra.Order.Archimedean.Real.Basic
 public import Mathlib.Data.Matrix.Basic
+public import Mathlib.Data.ZMod.Basic
 public import Mathlib.LinearAlgebra.LinearIndependent.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 
@@ -27,6 +29,9 @@ an equation with bounded coefficients. These bundles name the recurring groups o
 * `CCDN.IsIndependentEvaluation f M F z`: the evaluation matrix `(F j (z i))` of forms of
   degree `M` at primitive integral zeros of `f` has linearly independent rows; this is the input
   of the determinant lower bounds.
+* `CCDN.IsSmoothResidueFamily f P a x`: the points `x i` lie in prescribed nonsingular residue
+  classes `a p` of `f` modulo the primes `p ∈ P`; this is the input of the congruence
+  improvement of the determinant lower bound.
 -/
 
 @[expose] public section
@@ -67,5 +72,16 @@ structure IsIndependentEvaluation {n s N : ℕ} (f : MvPolynomial (Fin n) ℤ) (
   eval_eq_zero : ∀ i, eval (z i) f = 0
   rows_linearIndependent :
     LinearIndependent ℚ ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row
+
+/-- The points `x i` lie in prescribed nonsingular residue classes of `f`: every `p ∈ P` is
+prime, `a p` is a zero of `f` modulo `p` at which some partial derivative of `f` does not vanish
+modulo `p`, and every `x i` is congruent to `a p` modulo `p`. -/
+structure IsSmoothResidueFamily {n : ℕ} {ι : Type*} (f : MvPolynomial (Fin n) ℤ) (P : Finset ℕ)
+    (a : ℕ → IntPoint n) (x : ι → IntPoint n) : Prop where
+  prime : ∀ p ∈ P, p.Prime
+  eval_eq_zero : ∀ p ∈ P, eval₂ (Int.castRingHom (ZMod p)) (fun j => (a p j : ZMod p)) f = 0
+  smooth : ∀ p ∈ P, ∃ j, eval (fun i => (a p i : ZMod p))
+    (pderiv j (map (Int.castRingHom (ZMod p)) f)) ≠ 0
+  dvd_sub : ∀ p ∈ P, ∀ i j, (p : ℤ) ∣ x i j - a p j
 
 end CCDN
