@@ -85,5 +85,13 @@ theorem filteredHilbertPolynomial_scalar_extension
   refine ⟨N, fun M hM => ?_⟩
   rw [hN M hM, filteredCoordinateSpace_finrank_scalar_extension]
 
+/-- Projective dimension and degree are preserved by extending the coefficient field. -/
+theorem hasProjectiveDimensionDegree_scalar_extension
+    {K L : Type*} [Field K] [Field L] [Algebra K L] {n m d : ℕ}
+    {J : Ideal (MvPolynomial (Fin n) K)} (h : HasProjectiveDimensionDegree J m d) :
+    HasProjectiveDimensionDegree (J.map (map (algebraMap K L))) m d :=
+  ⟨(filteredHilbertPolynomial_scalar_extension (L := L) J).symm ▸ h.natDegree_eq,
+    (filteredHilbertPolynomial_scalar_extension (L := L) J).symm ▸ h.leadingCoeff_eq⟩
+
 end
 end CCDN

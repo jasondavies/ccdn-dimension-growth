@@ -35,18 +35,6 @@ lemma eval₂_center_minor_map_tower
     funext (matrixPluckerCoordinates_map ψ A)]
   exact (eval₂_comp_left ψ φ (matrixPluckerCoordinates A) g).symm
 
-/-- Projective dimension and degree are preserved by extending the coefficient field. -/
-theorem hasProjectiveDimensionDegree_scalar_extension
-    {K L : Type*} [Field K] [Field L] [Algebra K L] {n m d : ℕ}
-    {J : Ideal (MvPolynomial (Fin n) K)} (h : HasProjectiveDimensionDegree J m d) :
-    HasProjectiveDimensionDegree (J.map (map (algebraMap K L))) m d := by
-  obtain ⟨hdim, hdegree⟩ := h
-  constructor
-  · rw [filteredHilbertPolynomial_scalar_extension]
-    exact hdim
-  · rw [filteredHilbertPolynomial_scalar_extension]
-    exact hdegree
-
 /-- A family of minor conditions detects the same `L`-matrices before and after extending the
 coefficients along a field tower `K → L → E`. -/
 lemma exists_eval₂_center_minor_map_ne_zero_iff
