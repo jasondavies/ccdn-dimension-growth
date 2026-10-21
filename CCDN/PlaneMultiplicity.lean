@@ -102,30 +102,28 @@ lemma eval_zero_originShift {R σ : Type*} [CommRing R] (a : σ → R)
     rw [hf]
     simp [originShift]
 
-/-- A reduced point of a nonzero equation has a positive multiplicity,
-measured after translation, at most the original integer equation's degree. -/
-theorem exists_reduction_multiplicity {p : ℕ} [Fact p.Prime]
-    (f : MvPolynomial (Fin 2) ℤ) (a : Fin 2 → ℤ)
+/-- A reduced hypersurface point determines a positive, degree-bounded
+multiplicity in every ambient dimension. -/
+theorem exists_hypersurface_reduction_multiplicity {p : ℕ} [Fact p.Prime] {σ : Type*}
+    (f : MvPolynomial σ ℤ) (a : σ → ℤ)
     (hf : map (Int.castRingHom (ZMod p)) f ≠ 0)
     (ha : eval₂ (Int.castRingHom (ZMod p)) (fun j => (a j : ZMod p)) f = 0) :
     ∃ μ : ℕ, 0 < μ ∧ μ ≤ f.totalDegree ∧
-      map (Int.castRingHom (ZMod p)) (planeTranslate a f) ∈
-        idealOfVars (Fin 2) (ZMod p) ^ μ ∧
-      homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (planeTranslate a f)) ≠ 0 := by
+      map (Int.castRingHom (ZMod p)) (originShift a f) ∈ idealOfVars σ (ZMod p) ^ μ ∧
+      homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (originShift a f)) ≠ 0 := by
   let φ := Int.castRingHom (ZMod p)
-  have hshift : map φ (planeTranslate a f) = originShift (fun j => φ (a j)) (map φ f) :=
-    originShift_map φ a f
-  have hn : map φ (planeTranslate a f) ≠ 0 := by
+  have hshift := originShift_map φ a f
+  have hn : map φ (originShift a f) ≠ 0 := by
     rw [hshift]
     exact originShift_ne_zero _ hf
-  have hz : eval (0 : Fin 2 → ZMod p) (map φ (planeTranslate a f)) = 0 := by
+  have hz : eval (0 : σ → ZMod p) (map φ (originShift a f)) = 0 := by
     rw [hshift, eval_zero_originShift, eval_map]
     exact ha
-  have he : map φ (planeTranslate a f) =
+  have he : map φ (originShift a f) =
       eval₂Hom (C.comp φ) (fun j => X j + C (φ (a j))) f := by
     rw [hshift]
     exact eval₂Hom_map_hom φ _ C f
-  have hdeg : (map φ (planeTranslate a f)).totalDegree ≤ f.totalDegree := by
+  have hdeg : (map φ (originShift a f)).totalDegree ≤ f.totalDegree := by
     rw [he]
     apply linear_eval₂_totalDegree_le
     intro j
@@ -133,6 +131,18 @@ theorem exists_reduction_multiplicity {p : ℕ} [Fact p.Prime]
       (max_le (le_of_eq (totalDegree_X _)) (by rw [totalDegree_C]; omega))
   obtain ⟨μ, hpos, hμdeg, hpow, hμ⟩ := exists_origin_multiplicity _ hn hz
   exact ⟨μ, hpos, hμdeg.trans hdeg, hpow, hμ⟩
+
+/-- The plane case of `exists_hypersurface_reduction_multiplicity`, stated with
+`planeTranslate`. -/
+theorem exists_reduction_multiplicity {p : ℕ} [Fact p.Prime]
+    (f : MvPolynomial (Fin 2) ℤ) (a : Fin 2 → ℤ)
+    (hf : map (Int.castRingHom (ZMod p)) f ≠ 0)
+    (ha : eval₂ (Int.castRingHom (ZMod p)) (fun j => (a j : ZMod p)) f = 0) :
+    ∃ μ : ℕ, 0 < μ ∧ μ ≤ f.totalDegree ∧
+      map (Int.castRingHom (ZMod p)) (planeTranslate a f) ∈
+        idealOfVars (Fin 2) (ZMod p) ^ μ ∧
+      homogeneousComponent μ (map (Int.castRingHom (ZMod p)) (planeTranslate a f)) ≠ 0 :=
+  exists_hypersurface_reduction_multiplicity f a hf ha
 
 end
 end CCDN
