@@ -30,14 +30,14 @@ theorem euclidean_prescribed_basis_last_minimum_pow
     ‖b (Fin.last (n + 1))‖ ^ (n + 2) ≤ (∏ i, ‖b i‖) ^ 2 := by
   classical
   obtain ⟨v, q, hq, hmap⟩ :=
-    exists_field_basis_of_euclidean_lattice_basis K b hb.2.2.1
+    exists_field_basis_of_euclidean_lattice_basis K b hb.mem
   have hpq : (0 : Fin (n + 2)) ≠ Fin.last (n + 1) := by
     intro he
     have := congrArg Fin.val he
     simp at this
   have hq0 : q 0 = 1 := by
     apply euclideanNumberFieldEmbedding_injective K
-    rw [hmap, hb.2.1]
+    rw [hmap, hb.first_eq]
   have hunit : 1 ≤ ‖euclideanNumberFieldEmbedding K (q 0)‖ := by
     rw [hq0]
     exact one_le_euclidean_norm_integer K (x := 1) one_ne_zero
@@ -46,7 +46,7 @@ theorem euclidean_prescribed_basis_last_minimum_pow
       ‖euclideanNumberFieldEmbedding K (q (Fin.last (n + 1)))‖ ≤
         ‖euclideanNumberFieldEmbedding K (q i * q j)‖ := by
     rw [hmap]
-    apply hb.2.2.2 (Fin.last (n + 1)) hpq.symm
+    apply hb.norm_le hpq.symm
     · simpa only [hq, RingOfIntegers.coe_eq_algebraMap, map_mul] using
         euclideanNumberFieldEmbedding_mem_integerLattice K (v i * v j)
     · exact euclidean_notMem_basis_span_of_coordinate_ne_zero K b q hmap hij
@@ -101,14 +101,14 @@ theorem exists_numberField_short_basis_of_degree
       largest_minimum_le_discriminant_root (n := n + 2) (by omega)
         (Finset.prod_nonneg (fun i _ => norm_nonneg (b i))) (abs_nonneg _)
         (euclidean_prescribed_basis_last_minimum_pow K b hb) hprod'
-  refine ⟨b, hb.2.2.1, ?_⟩
+  refine ⟨b, hb.mem, ?_⟩
   intro i
   by_cases hi : i = 0
-  · rw [hi, hb.2.1]
+  · rw [hi, hb.first_eq]
     apply hwbound.trans
     simpa only [Nat.cast_add, Nat.cast_ofNat] using
       sqrt_degree_le_discriminant_root (n := n + 2) (by omega) hD
-  · apply (hb.2.2.2 i hi (b (Fin.last (n + 1))) (hb.2.2.1 _)
+  · apply (hb.norm_le hi (hb.mem _)
       (b.linearIndependent.notMem_span_image (not_lt_of_ge (Fin.le_last i)))).trans hlast
 
 /-- A real basis of integral lattice vectors with an explicit
