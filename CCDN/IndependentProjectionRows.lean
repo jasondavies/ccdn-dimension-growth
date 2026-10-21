@@ -1,6 +1,8 @@
 module
 
-public import CCDN.ProjectionCoordinateIndependence
+public import CCDN.ProjectionScalarExtension
+public import CCDN.BoundedBirationalHypersurfaceProjection
+public import Mathlib.LinearAlgebra.Matrix.Rank
 
 /-! Row independence of a normalization and an independent standard
 row completing it. A redundant primitive row does not enlarge the field

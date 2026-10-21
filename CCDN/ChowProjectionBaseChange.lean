@@ -33,8 +33,7 @@ lemma centerMinorProjectionMatrix_map
   ext i j
   simp only [centerMinorProjectionMatrix, Matrix.map_apply, centerPluckerCoefficient,
     map_sum, apply_ite, map_mul, eval_X, map_zero, map_pow, map_neg, map_one,
-    RingHom.map_det]
-  rfl
+    matrixPluckerCoordinates_map]
 
 lemma linearIndependent_matrix_rows_map
     {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n : ℕ}

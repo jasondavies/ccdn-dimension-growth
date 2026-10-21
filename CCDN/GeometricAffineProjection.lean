@@ -5,7 +5,7 @@ public import CCDN.ClosureProjectionBirational
 public import CCDN.AffineProjectionDegree
 public import CCDN.AffineLinearCountTransfer
 public import CCDN.BoundedDegreeNormalizationFiber
-public import CCDN.BirationalProjectionHeight
+public import CCDN.BoundedBirationalHypersurfaceProjection
 
 /-! The positive-dimensional affine projection in CCDN Proposition 4.3.1.
 The image equation has the source degree and remains irreducible

@@ -1,11 +1,15 @@
 module
 
 public import CCDN.CenterMinorProjection
+public import CCDN.MatrixProjectionFields
 public import CCDN.PolynomialPredicates
 
 /-! Enumerating the maximal-minor coordinates turns the source's
 Plücker projection into a matrix with exactly the center as its kernel.
-This connects the literal center projection to the Chow specialization results. -/
+The Chow specialization results are stated for matrices with rows indexed by
+`Fin (s + 2)`, so proofs choose such an enumeration; the statements about
+centers use the forms `centerMinorProjectionForm`, indexed by the column
+injections themselves, and the choice never appears in them. -/
 
 @[expose] public section
 namespace CCDN
@@ -33,19 +37,25 @@ lemma exists_center_minor_coordinate_enumeration {r n : ℕ} (hr : r + 2 ≤ n) 
   have he : s + 2 = Fintype.card (Fin (r + 1) ↪ Fin n) := by omega
   exact (finCongr he).trans (Fintype.equivFin _).symm
 
-/-- Every entry is a degree-one polynomial evaluated at the center
-Plücker coordinates. The enumeration only orders the maximal minors. -/
+/-- The center projection as a matrix, with rows ordered by an enumeration
+of the column injections. Every entry is a degree-one polynomial in the
+Plücker coordinates of the center. -/
 def centerMinorProjectionMatrix {K : Type*} [Field K] {r n s : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin n)) :
     Matrix (Fin (s + 1)) (Fin n) K :=
-  fun i j => eval (fun c : Fin r ↪ Fin n => (A.submatrix id c).det)
-    (centerPluckerCoefficient (e i) j)
+  fun i j => eval (matrixPluckerCoordinates A) (centerPluckerCoefficient (e i) j)
 
 lemma centerMinorProjectionMatrix_form {K : Type*} [Field K] {r n s : ℕ}
     (A : Matrix (Fin r) (Fin (n + 1)) K)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) (i : Fin (s + 1)) :
     chowProjectionForms (centerMinorProjectionMatrix A e) i = centerMinorProjectionForm A (e i) :=
   (centerMinorProjectionForm_eq_plucker_coefficients A (e i)).symm
+
+lemma chowProjectionForms_centerMinorProjectionMatrix {K : Type*} [Field K] {r n s : ℕ}
+    (A : Matrix (Fin r) (Fin (n + 1)) K)
+    (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
+    chowProjectionForms (centerMinorProjectionMatrix A e) = centerMinorProjectionForm A ∘ e :=
+  funext (centerMinorProjectionMatrix_form A e)
 
 lemma centerMinorProjectionMatrix_mulVec {K : Type*} [Field K] {r n s : ℕ}
     (A : Matrix (Fin r) (Fin (n + 1)) K)
@@ -84,22 +94,95 @@ lemma centerMinorProjectionMatrix_disjoint {K : Type*} [Field K] {r n s : ℕ}
   rw [← centerMinorProjectionMatrix_ker A hA e]
   exact hz
 
-/-- The center's literal Plücker projection obeys the image-incidence
-criterion; source and image are connected by the constructed minors. -/
-theorem center_minor_projection_incidence_iff
-    {K : Type*} [Field K] [IsAlgClosed K] {r n s q : ℕ}
+lemma projectionImageField_centerMinorProjectionMatrix
+    {K F : Type*} [Field K] [Field F] [Algebra K F] {r n s : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : IsHomogeneousIdeal J)
+    [Algebra (MvPolynomial (Fin (n + 1)) K ⧸ J) F]
+    [IsScalarTower K (MvPolynomial (Fin (n + 1)) K ⧸ J) F]
+    (A : Matrix (Fin r) (Fin (n + 1)) K)
+    (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
+    projectionImageField (F := F) J (chowProjectionForms (centerMinorProjectionMatrix A e)) =
+      projectionImageField (F := F) J (centerMinorProjectionForm A) := by
+  rw [chowProjectionForms_centerMinorProjectionMatrix, projectionImageField_comp_equiv]
+
+lemma centerMinorProjectionMatrix_isIntegral_iff {K : Type*} [Field K] {r n s : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) (A : Matrix (Fin r) (Fin (n + 1)) K)
+    (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
+    (projectionCoordinateMap J (chowProjectionForms (centerMinorProjectionMatrix A e))).IsIntegral ↔
+      (projectionCoordinateMap J (centerMinorProjectionForm A)).IsIntegral := by
+  rw [chowProjectionForms_centerMinorProjectionMatrix,
+    projectionCoordinateMap_comp_equiv_isIntegral]
+
+/-- The center projection generates the same field as any linear projection
+with the same kernel. -/
+theorem projectionImageField_centerMinorProjectionForm_of_ker
+    {K F : Type*} [Field K] [Field F] [Algebra K F] {r n t : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    [Algebra (MvPolynomial (Fin (n + 1)) K ⧸ J) F]
+    [IsScalarTower K (MvPolynomial (Fin (n + 1)) K ⧸ J) F]
     (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
-    (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
-    (hcenter : ∀ p ∈ projectiveIdealZeroLocus J,
-      p.rep ∉ Submodule.span K (Set.range A.row))
-    (U : Fin q × Fin (s + 1) → K) :
-    chowPullbackCoefficients (centerMinorProjectionMatrix A e) U ∈
-        projectiveChowIncidenceLocus q J ↔
-      U ∈ projectiveChowIncidenceLocus q
-        (chowProjectionImageIdeal J (centerMinorProjectionMatrix A e)) :=
-  chow_projection_incidence_iff J hJ _ (centerMinorProjectionMatrix_disjoint J A hA e hcenter) U
+    (hr : r + 2 ≤ n + 1) (B : Matrix (Fin (t + 1)) (Fin (n + 1)) K)
+    (hker : B.mulVecLin.ker = Submodule.span K (Set.range A.row)) :
+    projectionImageField (F := F) J (centerMinorProjectionForm A) =
+      projectionImageField (F := F) J (chowProjectionForms B) := by
+  obtain ⟨s, ⟨e⟩⟩ := exists_center_minor_coordinate_enumeration hr
+  rw [← projectionImageField_centerMinorProjectionMatrix J A e]
+  exact projectionImageField_eq_of_matrix_kernel_eq J _ _
+    ((centerMinorProjectionMatrix_ker A hA e).trans hker.symm)
+
+/-- The center projection is integral when a linear projection whose kernel
+contains the center is. -/
+theorem centerMinorProjectionForm_isIntegral_of_ker
+    {K : Type*} [Field K] {r n t : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
+    (hr : r + 2 ≤ n + 1) (B : Matrix (Fin (t + 1)) (Fin (n + 1)) K)
+    (hker : Submodule.span K (Set.range A.row) ≤ B.mulVecLin.ker)
+    (hint : (projectionCoordinateMap J (chowProjectionForms B)).IsIntegral) :
+    (projectionCoordinateMap J (centerMinorProjectionForm A)).IsIntegral := by
+  obtain ⟨s, ⟨e⟩⟩ := exists_center_minor_coordinate_enumeration hr
+  rw [← centerMinorProjectionMatrix_isIntegral_iff J A e]
+  exact projection_integral_of_matrix_kernel_le J _ B
+    ((centerMinorProjectionMatrix_ker A hA e).trans_le hker) hint
+
+/-- A linear projection whose kernel is contained in the center is integral
+when the center projection is. -/
+theorem isIntegral_of_centerMinorProjectionForm
+    {K : Type*} [Field K] {r n t : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
+    (hr : r + 2 ≤ n + 1) (B : Matrix (Fin (t + 1)) (Fin (n + 1)) K)
+    (hker : B.mulVecLin.ker ≤ Submodule.span K (Set.range A.row))
+    (hint : (projectionCoordinateMap J (centerMinorProjectionForm A)).IsIntegral) :
+    (projectionCoordinateMap J (chowProjectionForms B)).IsIntegral := by
+  obtain ⟨s, ⟨e⟩⟩ := exists_center_minor_coordinate_enumeration hr
+  rw [← centerMinorProjectionMatrix_isIntegral_iff J A e] at hint
+  exact projection_integral_of_matrix_kernel_le J B _
+    (hker.trans_eq (centerMinorProjectionMatrix_ker A hA e).symm) hint
+
+/-- Centers with the same span generate the same field. -/
+theorem projectionImageField_centerMinorProjectionForm_eq_of_span_eq
+    {K F : Type*} [Field K] [Field F] [Algebra K F] {r n : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    [Algebra (MvPolynomial (Fin (n + 1)) K ⧸ J) F]
+    [IsScalarTower K (MvPolynomial (Fin (n + 1)) K ⧸ J) F]
+    (A B : Matrix (Fin r) (Fin (n + 1)) K)
+    (hA : LinearIndependent K A.row) (hB : LinearIndependent K B.row)
+    (hspan : Submodule.span K (Set.range A.row) = Submodule.span K (Set.range B.row)) :
+    projectionImageField (F := F) J (centerMinorProjectionForm A) =
+      projectionImageField (F := F) J (centerMinorProjectionForm B) := by
+  classical
+  rcases isEmpty_or_nonempty (Fin (r + 1) ↪ Fin (n + 1)) with h | h
+  · congr 1
+    funext c
+    exact h.elim c
+  · obtain ⟨s, hs⟩ := Nat.exists_eq_succ_of_ne_zero
+      (Fintype.card_ne_zero (α := Fin (r + 1) ↪ Fin (n + 1)))
+    let e := (finCongr hs.symm).trans (Fintype.equivFin (Fin (r + 1) ↪ Fin (n + 1))).symm
+    rw [← projectionImageField_centerMinorProjectionMatrix J A e,
+      ← projectionImageField_centerMinorProjectionMatrix J B e]
+    apply projectionImageField_eq_of_matrix_kernel_eq J
+    rw [centerMinorProjectionMatrix_ker A hA e, centerMinorProjectionMatrix_ker B hB e, hspan]
 
 end
 end CCDN

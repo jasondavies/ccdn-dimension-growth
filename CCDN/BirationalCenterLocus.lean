@@ -1,10 +1,11 @@
 module
 
-public import CCDN.BirationalCenterNonvanishing
+public import CCDN.BirationalMinorCenterWitness
+public import CCDN.ProjectiveClosureHilbertPolynomial
 public import CCDN.ZeroColumnCenterDensity
+public import CCDN.GeometricProjectionHilbert
 
-/-! The geometrically disjoint birational-center condition, and its
-independence from the enumeration used for the minor projection. -/
+/-! The geometrically disjoint birational-center condition on center matrices. -/
 
 @[expose] public section
 namespace CCDN
@@ -20,11 +21,9 @@ def centerMinorPolynomial {K : Type*} [Field K] {r n : ℕ}
 lemma eval_centerMinorPolynomial {K : Type*} [Field K] {r n : ℕ}
     (G : MvPolynomial (Fin r ↪ Fin n) K) (x : Fin r × Fin n → K) :
     eval x (centerMinorPolynomial G) =
-      eval (fun c : Fin r ↪ Fin n =>
-        ((Matrix.of fun i j => x (i,j)).submatrix id c).det) G := by
+      eval (matrixPluckerCoordinates (Matrix.of fun i j => x (i,j))) G := by
   have he : (eval x).comp (aeval (matrixMinorPolynomial K)).toRingHom =
-      eval (fun c : Fin r ↪ Fin n =>
-        ((Matrix.of fun i j => x (i,j)).submatrix id c).det) := by
+      eval (matrixPluckerCoordinates (Matrix.of fun i j => x (i,j))) := by
     apply MvPolynomial.ringHom_ext
     · intro a
       simp
@@ -33,30 +32,36 @@ lemma eval_centerMinorPolynomial {K : Type*} [Field K] {r n : ℕ}
       exact matrixMinorPolynomial_eval c x
   exact RingHom.congr_fun he G
 
-/-- The matrix rows span a center disjoint from the geometric variety, and
-its literal minor projection generates the source function field. -/
-def IsBirationalMatrixCenter {K : Type*} [Field K] {n r s : ℕ}
+/-- The matrix rows span a center disjoint from the variety over an algebraic
+closure, and the center projection generates the function field. -/
+def IsBirationalMatrixCenter {K : Type*} [Field K] {n r : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
     (A : Matrix (Fin r) (Fin (n + 1)) K) : Prop :=
   (∀ p ∈ projectiveIdealZeroLocus (J.map (map (algebraMap K (AlgebraicClosure K)))),
     p.rep ∉ Submodule.span (AlgebraicClosure K)
       (Set.range (A.map (algebraMap K (AlgebraicClosure K))).row)) ∧
   projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ J)) J
-    (chowProjectionForms (centerMinorProjectionMatrix A e)) = ⊤
+    (centerMinorProjectionForm A) = ⊤
 
-lemma isBirationalMatrixCenter_iff_enumeration
-    {K : Type*} [Field K] {n r s t : ℕ}
-    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
-    (e' : Fin (t + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
-    (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row) :
-    IsBirationalMatrixCenter J e A ↔ IsBirationalMatrixCenter J e' A := by
-  have hker : (centerMinorProjectionMatrix A e).mulVecLin.ker =
-      (centerMinorProjectionMatrix A e').mulVecLin.ker := by
-    rw [centerMinorProjectionMatrix_ker A hA e,centerMinorProjectionMatrix_ker A hA e']
-  unfold IsBirationalMatrixCenter
-  rw [projectionImageField_eq_of_matrix_kernel_eq J _ _ hker]
+lemma isBirationalMatrixCenter_congr {K : Type*} [Field K] {n r : ℕ}
+    {J J' : Ideal (MvPolynomial (Fin (n + 1)) K)} [J.IsPrime] [J'.IsPrime] (h : J = J')
+    (A : Matrix (Fin r) (Fin (n + 1)) K) :
+    IsBirationalMatrixCenter J A ↔ IsBirationalMatrixCenter J' A := by
+  subst h
+  rfl
+
+/-- A geometrically disjoint center gives an integral center projection. -/
+theorem IsBirationalMatrixCenter.isIntegral {K : Type*} [Field K] {n r : ℕ}
+    {J : Ideal (MvPolynomial (Fin (n + 1)) K)} [J.IsPrime]
+    {A : Matrix (Fin r) (Fin (n + 1)) K} (hgood : IsBirationalMatrixCenter J A)
+    (hJ : IsHomogeneousIdeal J) (hA : LinearIndependent K A.row) (hr : r + 2 ≤ n + 1) :
+    (projectionCoordinateMap J (centerMinorProjectionForm A)).IsIntegral := by
+  obtain ⟨s, ⟨e⟩⟩ := exists_center_minor_coordinate_enumeration hr
+  rw [← centerMinorProjectionMatrix_isIntegral_iff J A e]
+  apply projection_integral_of_geometric_center_disjoint (L := AlgebraicClosure K) J hJ
+  rw [centerMinorProjectionMatrix_map]
+  exact centerMinorProjectionMatrix_disjoint _ _
+    (linearIndependent_matrix_rows_map _ A hA) e hgood.1
 
 /-- Full-row-rank matrices carry the topology induced by the Zariski
 topology on their entries. -/
@@ -66,11 +71,10 @@ abbrev IndependentCenterMatrix (K : Type*) [Field K] (r n : ℕ) :=
 
 /-- The good-center locus: independent center matrices satisfying the
 good-center condition. -/
-def birationalMatrixCenterLocus {K : Type*} [Field K] {n r s : ℕ}
-    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime]
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
+def birationalMatrixCenterLocus {K : Type*} [Field K] {n r : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime] :
     Set (IndependentCenterMatrix K r (n + 1)) :=
-  {x | IsBirationalMatrixCenter J e (Matrix.of fun i j => x.val (i,j))}
+  {x | IsBirationalMatrixCenter J (Matrix.of fun i j => x.val (i,j))}
 
 end
 end CCDN

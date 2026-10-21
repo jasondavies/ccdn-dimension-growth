@@ -63,54 +63,5 @@ theorem chowLinearSubstitution_same_zeros_as_image
   rw [chowLinearSubstitution_eval, hF, hG]
   exact chow_projection_incidence_iff J hJ A hcenter U
 
-/-- Given nonempty source and image charts, both Chow equations are
-constructed. The restricted source equation is a positive scalar
-power of the image equation. -/
-theorem exists_chow_projection_power_with_charts
-    {K : Type*} [Field K] [IsAlgClosed K] {n s m : ℕ}
-    (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    (hJ : IsHomogeneousIdeal J)
-    (hX : X 0 ∉ J)
-    (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
-    (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
-    (hA : chowProjectionForms A 0 ∉ J)
-    (hcenter : ∀ p ∈ projectiveIdealZeroLocus J, A *ᵥ p.rep ≠ 0) :
-    ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
-      (G : MvPolynomial (Fin (m + 1) × Fin (s + 2)) K)
-      (δ ε : Fin (m + 1) → ℕ) (c : K) (k : ℕ),
-      Irreducible F ∧ Irreducible G ∧ c ≠ 0 ∧ 0 < k ∧
-      (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
-      (∀ i, G.IsWeightedHomogeneous (chowRowWeight i) (ε i)) ∧
-      (∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J) ∧
-      (∀ U, eval U G = 0 ↔
-        U ∈ projectiveChowIncidenceLocus (m + 1) (chowProjectionImageIdeal J A)) ∧
-      chowLinearSubstitution A F = C c * G ^ k ∧
-      (Irreducible (chowLinearSubstitution A F) ↔
-        (chowLinearSubstitution A F).totalDegree = G.totalDegree) := by
-  let P := chowProjectionImageIdeal J A
-  have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
-  have hPhom := chowProjectionImageIdeal_homogeneous J hJ A
-  have hPX : X 0 ∉ P := by
-    intro h
-    apply hA
-    have hh := (mem_projectionCoordinateMap_ker J (chowProjectionForms A) (X 0)).mp h
-    simpa only [aeval_X] using hh
-  have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
-  have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
-    (integral_projection_hilbert_dimension_eq J _ hint).trans hdim
-  obtain ⟨d, _, _, hd⟩ := filteredHilbertPolynomial_positive_multiplicity J
-    (Ideal.IsPrime.ne_top ‹J.IsPrime›)
-  obtain ⟨e, _, _, he⟩ := filteredHilbertPolynomial_positive_multiplicity P
-    (Ideal.IsPrime.ne_top ‹P.IsPrime›)
-  obtain ⟨F, δ, hF, hδ, hFzero⟩ := exists_homogeneous_prime_projective_chow_equation
-    J hJ hX hdim (by simpa only [hdim] using hd)
-  obtain ⟨G, ε, hG, hε, hGzero⟩ := exists_homogeneous_prime_projective_chow_equation
-    P hPhom hPX hPdim (by simpa only [hPdim] using he)
-  have hzero := chowLinearSubstitution_same_zeros_as_image J hJ A hcenter F G hFzero hGzero
-  obtain ⟨c, k, hc, hk, hpow⟩ := polynomial_eq_scalar_pow_of_same_zeros G
-    (chowLinearSubstitution A F) hG hzero
-  exact ⟨F, G, δ, ε, c, k, hF, hG, hc, hk, hδ, hε, hFzero, hGzero, hpow,
-    irreducible_iff_degree_eq_of_same_zeros G _ hG hzero⟩
-
 end
 end CCDN

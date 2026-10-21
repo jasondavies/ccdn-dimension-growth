@@ -1,23 +1,91 @@
 module
 
-public import CCDN.SharpBirationalCenterNonvanishing
 public import CCDN.SharpCenterBounds
 public import CCDN.ZeroColumnMinorSpecialization
 public import CCDN.PolynomialPredicates
+public import CCDN.SharpCenterExtensionDetector
+public import CCDN.BirationalMinorCenterWitness
+public import CCDN.ProjectiveClosureHilbertPolynomial
 
 /-! Integer good centers with the quadratic row bound from the
 row-resultant detector. Dimension zero is included using its proved degree
-one. -/
+one. Prescribed zero columns of a witness center are preserved, which gives
+centers in X0=0 for affine sources. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
+
+section
+
+/-! A member of the sharp resultant detector family that is nonzero at a
+given good center. Every independent center at which it is nonzero is good. -/
+
+open MvPolynomial Matrix
+
+theorem exists_nonzero_sharp_center_detector
+    {K : Type*} [Field K] [CharZero K] {n m r : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
+    [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
+    (hJ : IsHomogeneousIdeal J)
+    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
+    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (hr : r + 2 ≤ n + 2)
+    (A : Matrix (Fin r) (Fin (n + 2)) K) (hA : LinearIndependent K A.row)
+    (hgood : IsBirationalMatrixCenter J A) :
+    ∃ G : MvPolynomial (Fin r ↪ Fin (n + 2)) K,
+      G.IsHomogeneous (((m + 1) * d) * (2 * d - 1)) ∧
+      G.totalDegree ≤ ((m + 1) * d) * (2 * d - 1) ∧
+      eval (matrixPluckerCoordinates A) G ≠ 0 ∧
+      ∀ B : Matrix (Fin r) (Fin (n + 2)) K, LinearIndependent K B.row →
+        eval (matrixPluckerCoordinates B) G ≠ 0 → IsBirationalMatrixCenter J B := by
+  obtain ⟨Φ, hhom, hdeg, hΦ⟩ := exists_sharp_birational_center_detector J hJ d hdim hdegree hr
+  obtain ⟨G, hG, heval⟩ := (hΦ A hA).mpr hgood
+  exact ⟨G, hhom G hG, hdeg G hG, heval, fun B hB hGB => (hΦ B hB).mp ⟨G, hG, hGB⟩⟩
+
+end
+
 open MvPolynomial Matrix
 
 def sharpCenterMinorBound (r m d : ℕ) : ℕ := r.factorial * ((m + 1) ^ 2 * d ^ 2) ^ r
 
-/-- The geometric good center has bounded integer independent rows.
-Both integrality and birationality concern its literal minor projection. -/
+/-- A good center with zero columns `S` yields a good center with bounded
+nonnegative integer entries and the same zero columns. -/
+theorem exists_sharp_bounded_integer_center_of_witness
+    {n m : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
+    [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
+    (hJ : IsHomogeneousIdeal J)
+    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
+    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial)
+    (S : Finset (Fin (n + 2))) (A : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℚ)
+    (hA : LinearIndependent ℚ A.row) (hAS : ∀ i j, j ∈ S → A i j = 0)
+    (hgood : IsBirationalMatrixCenter J A) :
+    ∃ M : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℤ,
+      (∀ i j, 0 ≤ M i j ∧ M i j ≤ ((m + 1) ^ 2 * d ^ 2)) ∧
+      (∀ c : Fin (n + 1 - m - 1) ↪ Fin (n + 2),
+        |(M.submatrix id c).det| ≤ sharpCenterMinorBound (n + 1 - m - 1) m d) ∧
+      (∀ i j, j ∈ S → M i j = 0) ∧
+      LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row ∧
+      IsBirationalMatrixCenter J (M.map (Int.castRingHom ℚ)) := by
+  obtain ⟨G,hhom,hdeg,hvalue,hgoodG⟩ :=
+    exists_nonzero_sharp_center_detector J hJ d hdim hdegree (by omega) A hA hgood
+  have hG : G ≠ 0 := by intro hz; simp [hz] at hvalue
+  have hhom' : G.IsHomogeneous G.totalDegree := (hhom.totalDegree hG) ▸ hhom
+  obtain ⟨M,hM,hM0,hli,hv,hminor⟩ :=
+    exists_sharp_integer_minor_specialization_zero_columns S G hhom' A hA hAS hvalue
+  have hbound : max 1 G.totalDegree ≤ ((m + 1) ^ 2 * d ^ 2) :=
+    (max_le_max_left 1 hdeg).trans (sharp_center_detector_degree_le_square
+      (hilbert_multiplicity_pos_of_prime J hdegree)
+      (geometric_projective_multiplicity_boundary J hJ hdim hdegree))
+  have hb : ((max 1 G.totalDegree : ℕ) : ℤ) ≤ ((m + 1) ^ 2 * d ^ 2) := by exact_mod_cast hbound
+  refine ⟨M,fun i j => ⟨(hM i j).1,(hM i j).2.trans hb⟩,fun c => ?_,hM0,hli,hgoodG _ hli hv⟩
+  apply (hminor c).trans
+  simp only [sharpCenterMinorBound, Nat.cast_mul, Nat.cast_pow]
+  gcongr
+  exact_mod_cast hbound
+
+/-- The geometric good center has bounded integer independent rows. -/
 theorem exists_sharp_bounded_integer_birational_center
     {n m : ℕ} (hmn : m + 2 ≤ n + 1)
     (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
@@ -25,44 +93,20 @@ theorem exists_sharp_bounded_integer_birational_center
     (hJ : IsHomogeneousIdeal J)
     (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
-    ∃ (s : ℕ) (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2)))
-      (M : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℤ),
+    ∃ M : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℤ,
       (∀ i j, 0 ≤ M i j ∧ M i j ≤ ((m + 1) ^ 2 * d ^ 2)) ∧
       (∀ c : Fin (n + 1 - m - 1) ↪ Fin (n + 2),
         |(M.submatrix id c).det| ≤ sharpCenterMinorBound (n + 1 - m - 1) m d) ∧
       LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row ∧
-      (∀ p ∈ projectiveIdealZeroLocus (J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))),
-        p.rep ∉ Submodule.span (AlgebraicClosure ℚ)
-          (Set.range ((M.map (Int.castRingHom ℚ)).map (algebraMap ℚ (AlgebraicClosure ℚ))).row)) ∧
-      (projectionCoordinateMap J (chowProjectionForms
-        (centerMinorProjectionMatrix (M.map (Int.castRingHom ℚ)) e))).IsIntegral ∧
-      projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 2)) ℚ ⧸ J)) J
-        (chowProjectionForms (centerMinorProjectionMatrix (M.map (Int.castRingHom ℚ)) e)) = ⊤ := by
-  obtain ⟨s,e,G,A,hhom,hdeg,hA,hvalue,hgood⟩ :=
-    exists_nonzero_sharp_birational_center_detector hmn J hJ d hdim hdegree
-  have hG : G ≠ 0 := by intro hz; simp [hz] at hvalue
-  have hhom' : G.IsHomogeneous G.totalDegree := (hhom.totalDegree hG) ▸ hhom
-  obtain ⟨M,hM,hli,hv,hminor⟩ := exists_sharp_integer_minor_specialization G hhom' A hA hvalue
-  have hbound : max 1 G.totalDegree ≤ ((m + 1) ^ 2 * d ^ 2) :=
-    (max_le_max_left 1 hdeg).trans (sharp_center_detector_degree_le_square
-      (hilbert_multiplicity_pos_of_prime J hdegree)
-      (geometric_projective_multiplicity_boundary J hJ hdim hdegree))
-  have hb : ((max 1 G.totalDegree : ℕ) : ℤ) ≤ ((m + 1) ^ 2 * d ^ 2) := by exact_mod_cast hbound
-  obtain ⟨hc,hf⟩ := hgood _ hli hv
-  have hliL := linearIndependent_matrix_rows_map (algebraMap ℚ (AlgebraicClosure ℚ)) _ hli
-  have hc' := centerMinorProjectionMatrix_disjoint _ _ hliL e hc
-  have hint := projection_integral_of_geometric_center_disjoint (L := AlgebraicClosure ℚ) J hJ
-    (centerMinorProjectionMatrix (M.map (Int.castRingHom ℚ)) e)
-    (by rwa [centerMinorProjectionMatrix_map])
-  refine ⟨s,e,M,fun i j => ⟨(hM i j).1,(hM i j).2.trans hb⟩,?_,hli,hc,hint,hf⟩
-  intro c
-  apply (hminor c).trans
-  simp only [sharpCenterMinorBound, Nat.cast_mul, Nat.cast_pow]
-  gcongr
-  exact_mod_cast hbound
+      IsBirationalMatrixCenter J (M.map (Int.castRingHom ℚ)) := by
+  obtain ⟨A,hA,hdis,_,hfield⟩ :=
+    exists_birational_minor_center (L := AlgebraicClosure ℚ) m (n + 1) hmn J hJ d hdim hdegree
+  obtain ⟨M,hM,hminor,_,hli,hgood⟩ := exists_sharp_bounded_integer_center_of_witness J hJ d
+    hdim hdegree ∅ A hA (fun _ _ h => absurd h (Finset.notMem_empty _)) ⟨hdis,hfield⟩
+  exact ⟨M,hM,hminor,hli,hgood⟩
 
-/-- The same construction inside X0=0. The geometric hypotheses come from the
-affine variety and its projective closure. -/
+/-- The same construction inside X0=0, for the projective closure of an
+affine source. -/
 theorem exists_sharp_bounded_integer_fixed_coordinate_center
     {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin (n + 1)) ℚ)) [I.IsPrime]
@@ -70,49 +114,20 @@ theorem exists_sharp_bounded_integer_fixed_coordinate_center
     (hmn : m + 1 ≤ n + 1) (d : ℕ)
     (hdim : (filteredHilbertPolynomial I).natDegree = m)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
-    ∃ (s : ℕ) (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2)))
-      (M : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℤ),
+    ∃ M : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℤ,
       (∀ i j, 0 ≤ M i j ∧ M i j ≤ ((m + 1) ^ 2 * d ^ 2)) ∧
       (∀ c : Fin (n + 1 - m - 1) ↪ Fin (n + 2),
         |(M.submatrix id c).det| ≤ sharpCenterMinorBound (n + 1 - m - 1) m d) ∧
       (∀ i, M i 0 = 0) ∧ LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row ∧
-      (∀ p ∈ projectiveIdealZeroLocus
-          ((projectiveClosureIdeal I).map (map (algebraMap ℚ (AlgebraicClosure ℚ)))),
-        p.rep ∉ Submodule.span (AlgebraicClosure ℚ)
-          (Set.range ((M.map (Int.castRingHom ℚ)).map (algebraMap ℚ (AlgebraicClosure ℚ))).row)) ∧
-      (projectionCoordinateMap (projectiveClosureIdeal I) (chowProjectionForms
-        (centerMinorProjectionMatrix (M.map (Int.castRingHom ℚ)) e))).IsIntegral ∧
-      projectionImageField
-        (F := FractionRing (MvPolynomial (Fin (n + 2)) ℚ ⧸ projectiveClosureIdeal I))
-        (projectiveClosureIdeal I)
-        (chowProjectionForms (centerMinorProjectionMatrix (M.map (Int.castRingHom ℚ)) e)) = ⊤ := by
-  classical
-  obtain ⟨s,e,G,A,hhom,hdeg,hA,hA0,hvalue,hgood⟩ :=
-    exists_nonzero_sharp_fixed_coordinate_center_detector I hmn d hdim hdegree
-  have hG : G ≠ 0 := by intro hz; simp [hz] at hvalue
-  have hhom' : G.IsHomogeneous G.totalDegree := (hhom.totalDegree hG) ▸ hhom
-  obtain ⟨M,hM,hM0,hli,hv,hminor⟩ :=
-    exists_sharp_integer_minor_specialization_zero_columns {0} G hhom' A hA
-      (by intro i j hj; simpa only [Finset.mem_singleton.mp hj] using hA0 i) hvalue
-  have hbound : max 1 G.totalDegree ≤ ((m + 1) ^ 2 * d ^ 2) :=
-    (max_le_max_left 1 hdeg).trans (sharp_center_detector_degree_le_square
-      (hilbert_multiplicity_pos_of_prime I hdegree)
-      (geometric_affine_multiplicity_boundary I hdim hdegree))
-  have hb : ((max 1 G.totalDegree : ℕ) : ℤ) ≤ ((m + 1) ^ 2 * d ^ 2) := by exact_mod_cast hbound
-  obtain ⟨hc,hf⟩ := hgood _ hli hv
-  have hliL := linearIndependent_matrix_rows_map (algebraMap ℚ (AlgebraicClosure ℚ)) _ hli
-  have hc' := centerMinorProjectionMatrix_disjoint _ _ hliL e hc
-  have hint := projection_integral_of_geometric_center_disjoint (L := AlgebraicClosure ℚ) (projectiveClosureIdeal I)
-    (projectiveClosureIdeal_homogeneous I)
-    (centerMinorProjectionMatrix (M.map (Int.castRingHom ℚ)) e)
-    (by rwa [centerMinorProjectionMatrix_map])
-  refine ⟨s,e,M,fun i j => ⟨(hM i j).1,(hM i j).2.trans hb⟩,?_,
-    fun i => hM0 i 0 (Finset.mem_singleton_self 0),hli,hc,hint,hf⟩
-  intro c
-  apply (hminor c).trans
-  simp only [sharpCenterMinorBound, Nat.cast_mul, Nat.cast_pow]
-  gcongr
-  exact_mod_cast hbound
+      IsBirationalMatrixCenter (projectiveClosureIdeal I) (M.map (Int.castRingHom ℚ)) := by
+  have := projectiveClosureIdeal_geometrically_prime (L := AlgebraicClosure ℚ) I
+  obtain ⟨hcdim, hcdeg⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdim hdegree
+  obtain ⟨A,hA,hA0,hdis,_,hfield⟩ :=
+    exists_fixed_coordinate_birational_minor_center (L := AlgebraicClosure ℚ) I hmn d hdim hdegree
+  obtain ⟨M,hM,hminor,hM0,hli,hgood⟩ := exists_sharp_bounded_integer_center_of_witness
+    (projectiveClosureIdeal I) (projectiveClosureIdeal_homogeneous I) d hcdim hcdeg {0} A hA
+    (fun i j hj => by simpa only [Finset.mem_singleton.mp hj] using hA0 i) ⟨hdis,hfield⟩
+  exact ⟨M,hM,hminor,fun i => hM0 i 0 (Finset.mem_singleton_self 0),hli,hgood⟩
 
 end
 end CCDN

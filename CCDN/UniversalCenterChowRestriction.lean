@@ -27,10 +27,10 @@ lemma universalCenterChowMap_specialize
     (A : Matrix (Fin r) (Fin (n + 1)) K)
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
     (F : MvPolynomial (Fin q × Fin (n + 1)) K) :
-    map (eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det))
+    map (eval (matrixPluckerCoordinates A))
         (universalCenterChowMap e F) =
       chowLinearSubstitution (centerMinorProjectionMatrix A e) F := by
-  have he : (map (eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det))).comp
+  have he : (map (eval (matrixPluckerCoordinates A))).comp
       (universalCenterChowMap (K := K) (q := q) e) =
       (chowLinearSubstitution (r := q) (centerMinorProjectionMatrix A e)).toRingHom := by
     apply MvPolynomial.ringHom_ext
@@ -96,25 +96,6 @@ theorem universalCenterChowMap_coefficient_homogeneous
     (a : (Fin q × Fin (s + 1)) →₀ ℕ) :
     ((universalCenterChowMap e F).coeff a).IsHomogeneous D :=
   coefficient_isHomogeneous_of_commAlgEquiv _ (universalCenterChowMap_comm_homogeneous e F hF) a
-
-/-- The coefficient degree bound also holds without homogeneous input. This
-is the substitution bound D, prior to applying Noether forms. -/
-theorem universalCenterChowMap_coefficient_degree
-    {K : Type*} [Field K] {r n s q : ℕ}
-    (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin n))
-    (F : MvPolynomial (Fin q × Fin n) K)
-    (a : (Fin q × Fin (s + 1)) →₀ ℕ) :
-    ((universalCenterChowMap e F).coeff a).totalDegree ≤ F.totalDegree := by
-  apply (coefficient_totalDegree_le_commAlgEquiv _ _).trans
-  rw [universalCenterChowMap_comm]
-  apply linear_eval₂_totalDegree_le
-  intro p
-  apply totalDegree_finsetSum_le
-  intro i _
-  apply (totalDegree_mul _ _).trans
-  simpa only [totalDegree_C, Nat.add_zero] using
-    ((centerPluckerCoefficient_homogeneous (K := K) (e i) p.2).map
-      (C : K →+* MvPolynomial (Fin q × Fin (s + 1)) K)).totalDegree_le
 
 end
 end CCDN

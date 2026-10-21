@@ -29,17 +29,6 @@ lemma weightedTotalDegree_of_nonzero_homogeneous
   rw [weightedTotalDegree_coe w f hf0] at he
   exact WithBot.coe_injective he
 
-lemma genericBlockLine_chowRow_natDegree
-    {K : Type*} [Field K] {n s q : ℕ}
-    (A : Matrix (Fin (s + 1)) (Fin (n + 1)) K) (i : Fin q)
-    (F : MvPolynomial (Fin q × Fin (n + 1)) K) (d : ℕ)
-    (hF : F.IsWeightedHomogeneous (chowRowWeight i) d)
-    (hR : chowLinearSubstitution A F ≠ 0) :
-    (genericBlockLine (chowRowBlock i) (chowLinearSubstitution A F)).natDegree = d := by
-  rw [genericBlockLine_natDegree,genericBlockWeight_chowRowBlock]
-  exact weightedTotalDegree_of_nonzero_homogeneous _ _ d
-    (chowLinearSubstitution_row_homogeneous A i F d hF) hR
-
 def centerRowResultantFamily
     {K : Type*} [Field K] {r n s q : ℕ}
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin n)) (i : Fin q)
@@ -66,26 +55,49 @@ theorem centerRowResultantFamily_totalDegree_le
   intro g hg
   exact (centerRowResultantFamily_homogeneous e i F d hd hF g hg).totalDegree_le
 
-/-- Specialization is exact even when the restricted source equation is
-zero. -/
-theorem centerRowResultantFamily_nonvanishing_iff
-    {K : Type*} [Field K] {r n s q : ℕ}
+section
+
+/-! Exact coefficient-extension specialization of the selected-row resultant
+family. Centers may have coordinates in the extension field. -/
+
+open MvPolynomial Matrix
+
+lemma universalCenterChowMap_specialize_extension
+    {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n s q : ℕ}
+    (A : Matrix (Fin r) (Fin (n + 1)) L)
+    (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1)))
+    (F : MvPolynomial (Fin q × Fin (n + 1)) K) :
+    map (eval₂Hom φ (matrixPluckerCoordinates A))
+      (universalCenterChowMap e F) =
+      chowLinearSubstitution (centerMinorProjectionMatrix A e) (map φ F) := by
+  have he : (map (eval₂Hom φ (matrixPluckerCoordinates A))).comp
+      (universalCenterChowMap (K := K) (q := q) e) =
+      (chowLinearSubstitution (r := q) (centerMinorProjectionMatrix A e)).toRingHom.comp
+        (map φ) := by
+    apply MvPolynomial.ringHom_ext
+    · intro a
+      simp [universalCenterChowMap,chowLinearSubstitution]
+    · intro p
+      simp [universalCenterChowMap,chowLinearSubstitution,centerMinorProjectionMatrix,
+        centerPluckerCoefficient,apply_ite]
+  exact RingHom.congr_fun he F
+
+theorem centerRowResultantFamily_nonvanishing_iff_extension
+    {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n s q : ℕ}
     (e : Fin (s + 1) ≃ (Fin (r + 1) ↪ Fin (n + 1))) (i : Fin q)
     (F : MvPolynomial (Fin q × Fin (n + 1)) K) (d : ℕ)
-    (A : Matrix (Fin r) (Fin (n + 1)) K) :
+    (A : Matrix (Fin r) (Fin (n + 1)) L) :
     (∃ g ∈ centerRowResultantFamily e i F d,
-      eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det) g ≠ 0) ↔
+      eval₂ φ (matrixPluckerCoordinates A) g ≠ 0) ↔
     derivativeResultant (genericBlockLine (chowRowBlock i)
-      (chowLinearSubstitution (centerMinorProjectionMatrix A e) F)) d ≠ 0 := by
+      (chowLinearSubstitution (centerMinorProjectionMatrix A e) (map φ F))) d ≠ 0 := by
   have he := derivativeResultantCoefficientFamily_nonvanishing_iff
-    (genericBlockLine (chowRowBlock i) (universalCenterChowMap e F)) d (RingHom.id K)
-    (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det)
-  change (∃ g ∈ centerRowResultantFamily e i F d,
-    eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det) g ≠ 0) ↔
-    derivativeResultant
-      ((genericBlockLine (chowRowBlock i) (universalCenterChowMap e F)).map
-        (MvPolynomial.map (eval (fun c : Fin r ↪ Fin (n + 1) => (A.submatrix id c).det)))) d ≠ 0 at he
-  rwa [genericBlockLine_map,universalCenterChowMap_specialize] at he
+    (genericBlockLine (chowRowBlock i) (universalCenterChowMap e F)) d φ
+    (matrixPluckerCoordinates A)
+  simpa only [centerRowResultantFamily,genericBlockLine_map,
+    universalCenterChowMap_specialize_extension] using he
+
+end
 
 end
 end CCDN

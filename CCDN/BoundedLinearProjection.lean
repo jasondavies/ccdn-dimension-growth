@@ -117,35 +117,6 @@ theorem exists_bounded_integer_scaled_projection {s r : ℕ}
     rw [hPmap]
     exact scalar_complement_projection_kernel AQ LQ D hDQ hLA x
 
-theorem exists_bounded_integer_projection {s r : ℕ}
-    (A : Matrix (Fin (s + 1)) (Fin r) ℤ)
-    (hli : LinearIndependent ℚ (fun i => fun j => (A i j : ℚ)))
-    (T : ℕ) (hA : ∀ i j, |A i j| ≤ (T : ℤ)) :
-    ∃ P : Matrix (Fin r) (Fin r) ℤ,
-      (∀ i j, |P i j| ≤
-        2 * ((s + 1).factorial : ℤ) * (T : ℤ) ^ (s + 1)) ∧
-      ∀ x : Fin r → ℚ,
-        (P.map (Int.castRingHom ℚ)) *ᵥ x = 0 ↔
-          x ∈ Submodule.span ℚ (Set.range (fun i => fun j => (A i j : ℚ))) := by
-  obtain ⟨_, _, P, hP, _, hker⟩ := exists_bounded_integer_scaled_projection A hli T hA
-  exact ⟨P, hP, hker⟩
-
-theorem integer_projection_rank {s r : ℕ}
-    (A : Matrix (Fin (s + 1)) (Fin r) ℤ)
-    (hli : LinearIndependent ℚ (fun i => fun j => (A i j : ℚ)))
-    (P : Matrix (Fin r) (Fin r) ℤ)
-    (hker : ∀ x : Fin r → ℚ,
-      (P.map (Int.castRingHom ℚ)) *ᵥ x = 0 ↔
-        x ∈ Submodule.span ℚ (Set.range (fun i => fun j => (A i j : ℚ)))) :
-    (P.map (Int.castRingHom ℚ)).rank + (s + 1) = r := by
-  have hk : (P.map (Int.castRingHom ℚ)).mulVecLin.ker =
-      Submodule.span ℚ (Set.range (fun i => fun j => (A i j : ℚ))) := by
-    ext x
-    exact hker x
-  have hh := (P.map (Int.castRingHom ℚ)).mulVecLin.finrank_range_add_finrank_ker
-  rw [hk, finrank_span_eq_card hli, Fintype.card_fin, Module.finrank_fin_fun] at hh
-  exact hh
-
 theorem integer_linear_map_box_bound {m n : ℕ}
     (P : Matrix (Fin m) (Fin n) ℤ) {H B : ℝ} (hH : 0 ≤ H)
     (hP : ∀ i j, |(P i j : ℝ)| ≤ H)
@@ -213,34 +184,6 @@ theorem projective_linear_map_height {m n : ℕ}
   rw [← hproj]
   exact projective_integer_linear_map_height P hH hP z
     (primitiveProjectiveRep_bound x) hw0
-
-/-- The linear-algebra and height part of projection from a bounded
-rational center: a scalar-idempotent matrix, defined away from
-exactly that center, with a uniform projective height estimate. -/
-theorem exists_bounded_projective_projection {s n : ℕ}
-    (A : Matrix (Fin (s + 1)) (Fin (n + 1)) ℤ)
-    (hli : LinearIndependent ℚ (fun i => fun j => (A i j : ℚ)))
-    (T : ℕ) (hA : ∀ i j, |A i j| ≤ (T : ℤ)) :
-    ∃ D : ℤ, D ≠ 0 ∧ ∃ P : Matrix (Fin (n + 1)) (Fin (n + 1)) ℤ,
-      P * P = D • P ∧
-      (∀ z : Fin (n + 1) → ℚ,
-        (P.map (Int.castRingHom ℚ)) *ᵥ z = 0 ↔
-          z ∈ Submodule.span ℚ (Set.range (fun i => fun j => (A i j : ℚ)))) ∧
-      ∀ x : ProjectivePoint n,
-        x.rep ∉ Submodule.span ℚ (Set.range (fun i => fun j => (A i j : ℚ))) →
-        ∃ hx : (P.map (Int.castRingHom ℚ)) *ᵥ x.rep ≠ 0,
-          (Projectivization.mk ℚ ((P.map (Int.castRingHom ℚ)) *ᵥ x.rep) hx).mulHeight ≤
-            (n + 1 : ℕ) *
-              (2 * ((s + 1).factorial : ℝ) * (T : ℝ) ^ (s + 1)) * x.mulHeight := by
-  obtain ⟨D, hD, P, hP, hPP, hker⟩ := exists_bounded_integer_scaled_projection A hli T hA
-  refine ⟨D, hD, P, hPP, hker, ?_⟩
-  intro x hx
-  have himage : (P.map (Int.castRingHom ℚ)) *ᵥ x.rep ≠ 0 :=
-    fun h => hx ((hker x.rep).mp h)
-  refine ⟨himage, ?_⟩
-  apply projective_linear_map_height P (by positivity) _ x himage
-  intro i j
-  exact_mod_cast hP i j
 
 end
 end CCDN

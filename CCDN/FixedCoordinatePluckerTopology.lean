@@ -1,11 +1,11 @@
 module
 
-public import CCDN.BirationalCenterPluckerTopology
-public import CCDN.FixedCoordinateBirationalCenterDensity
+public import CCDN.CenterPluckerZariski
+public import CCDN.BirationalCenterSubspace
 
-/-! Dense open birational centers in the Grassmannian subspace of
-centers contained in X0=0. Density uses the constructed constrained matrix
-witness, and is not inferred from density in the ambient Grassmannian. -/
+/-! Centers with prescribed zero columns, as matrices and as subspaces with
+the topology induced from the Plücker topology. Centers contained in X0=0
+are the case of the zero column set `{0}`. -/
 
 @[expose] public section
 namespace CCDN
@@ -14,84 +14,73 @@ open MvPolynomial Matrix
 attribute [local instance] affinePointZariskiTopology projectivePointZariskiTopology
   centerSubspacePluckerZariskiTopology
 
-abbrev FixedCoordinateCenterSubspace (K : Type*) [Field K] (r n : ℕ) :=
-  {W : CenterSubspace K r (n + 1) // ∀ v ∈ W.val, v 0 = 0}
+/-- Independent center matrices whose columns in `S` vanish. -/
+abbrev ZeroColumnCenterMatrix (K : Type*) [Field K] (r n : ℕ) (S : Finset (Fin n)) :=
+  {x : Fin r × Fin n → K //
+    (∀ i j, j ∈ S → x (i,j) = 0) ∧ LinearIndependent K (fun i : Fin r => fun j : Fin n => x (i,j))}
 
-def fixedCoordinateMatrixSpan {K : Type*} [Field K] {r n : ℕ}
-    (x : FixedCoordinateCenterMatrix K r n) : FixedCoordinateCenterSubspace K r n :=
+/-- Center subspaces on which the coordinates in `S` vanish. -/
+abbrev ZeroColumnCenterSubspace (K : Type*) [Field K] (r n : ℕ) (S : Finset (Fin n)) :=
+  {W : CenterSubspace K r n // ∀ v ∈ W.val, ∀ j ∈ S, v j = 0}
+
+abbrev FixedCoordinateCenterMatrix (K : Type*) [Field K] (r n : ℕ) :=
+  ZeroColumnCenterMatrix K r (n + 1) {0}
+
+abbrev FixedCoordinateCenterSubspace (K : Type*) [Field K] (r n : ℕ) :=
+  ZeroColumnCenterSubspace K r (n + 1) {0}
+
+def zeroColumnMatrixSpan {K : Type*} [Field K] {r n : ℕ} {S : Finset (Fin n)}
+    (x : ZeroColumnCenterMatrix K r n S) : ZeroColumnCenterSubspace K r n S :=
   ⟨centerMatrixSpan ⟨x.val, x.property.2⟩, by
-    have hle : Submodule.span K (Set.range (fun i : Fin r => fun j : Fin (n + 1) => x.val (i,j))) ≤
-        (LinearMap.proj (0 : Fin (n + 1)) : (Fin (n + 1) → K) →ₗ[K] K).ker := by
+    intro v hv j hj
+    have hle : Submodule.span K (Set.range (fun i : Fin r => fun j : Fin n => x.val (i,j))) ≤
+        (LinearMap.proj j : (Fin n → K) →ₗ[K] K).ker := by
       apply Submodule.span_le.mpr
       rintro _ ⟨i, rfl⟩
-      exact x.property.1 i 0 (Finset.mem_singleton_self _)
-    exact fun v hv => hle hv⟩
+      exact x.property.1 i j hj
+    exact hle hv⟩
 
-theorem fixedCoordinateMatrixSpan_surjective
-    {K : Type*} [Field K] {r n : ℕ} :
-    Function.Surjective (fixedCoordinateMatrixSpan (K := K) (r := r) (n := n)) := by
+theorem zeroColumnMatrixSpan_surjective
+    {K : Type*} [Field K] {r n : ℕ} {S : Finset (Fin n)} :
+    Function.Surjective (zeroColumnMatrixSpan (K := K) (r := r) (S := S)) := by
   intro W
   obtain ⟨x, hx⟩ := centerMatrixSpan_surjective W.val
-  have hz (i : Fin r) : x.val (i, 0) = 0 := by
-    apply W.property (fun j => x.val (i,j))
+  have hz (i : Fin r) (j : Fin n) (hj : j ∈ S) : x.val (i, j) = 0 := by
+    apply W.property (fun j => x.val (i,j)) _ j hj
     rw [← hx]
     exact Submodule.subset_span ⟨i, rfl⟩
-  let y : FixedCoordinateCenterMatrix K r n :=
-    ⟨x.val, fun i j hj => by simpa only [Finset.mem_singleton.mp hj] using hz i,
-      x.property⟩
-  refine ⟨y, ?_⟩
-  apply Subtype.ext
-  exact hx
+  exact ⟨⟨x.val, hz, x.property⟩, Subtype.ext hx⟩
 
-theorem fixedCoordinateMatrixSpan_continuous
-    {K : Type*} [Field K] {r n : ℕ} :
-    Continuous (fixedCoordinateMatrixSpan (K := K) (r := r) (n := n)) := by
-  let forget : FixedCoordinateCenterMatrix K r n → IndependentCenterMatrix K r (n + 1) :=
+theorem zeroColumnMatrixSpan_continuous
+    {K : Type*} [Field K] {r n : ℕ} {S : Finset (Fin n)} :
+    Continuous (zeroColumnMatrixSpan (K := K) (r := r) (S := S)) := by
+  let forget : ZeroColumnCenterMatrix K r n S → IndependentCenterMatrix K r n :=
     fun x => ⟨x.val, x.property.2⟩
   have hf : Continuous forget := continuous_subtype_val.subtype_mk _
   exact (centerMatrixSpan_plucker_continuous.comp hf).subtype_mk _
 
+def fixedCoordinateBirationalCenterLocus
+    {K : Type*} [Field K] {n r : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
+    Set (FixedCoordinateCenterMatrix K r n) :=
+  {x | IsBirationalMatrixCenter (projectiveClosureIdeal I) (Matrix.of fun i j => x.val (i,j))}
+
 def fixedCoordinateBirationalSubspaceLocus
-    {K : Type*} [Field K] {n r s : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
+    {K : Type*} [Field K] {n r : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
     Set (FixedCoordinateCenterSubspace K r n) :=
-  Subtype.val ⁻¹' birationalCenterSubspaceLocus (projectiveClosureIdeal I) e
+  Subtype.val ⁻¹' birationalCenterSubspaceLocus (projectiveClosureIdeal I)
 
 theorem fixedCoordinateBirationalSubspaceLocus_preimage
-    {K : Type*} [Field K] {n r s : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    (e : Fin (s + 2) ≃ (Fin (r + 1) ↪ Fin (n + 1))) :
-    fixedCoordinateMatrixSpan ⁻¹' fixedCoordinateBirationalSubspaceLocus I e =
-      fixedCoordinateBirationalCenterLocus I e := by
+    {K : Type*} [Field K] {n r : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
+    zeroColumnMatrixSpan ⁻¹' fixedCoordinateBirationalSubspaceLocus (r := r) I =
+      fixedCoordinateBirationalCenterLocus (r := r) I := by
   ext x
-  change centerMatrixSpan (⟨x.val, x.property.2⟩ : IndependentCenterMatrix K r (n + 1)) ∈
-    birationalCenterSubspaceLocus (projectiveClosureIdeal I) e ↔ _
   change (⟨x.val, x.property.2⟩ : IndependentCenterMatrix K r (n + 1)) ∈
-    centerMatrixSpan ⁻¹' birationalCenterSubspaceLocus (projectiveClosureIdeal I) e ↔ _
+    centerMatrixSpan ⁻¹' birationalCenterSubspaceLocus (projectiveClosureIdeal I) ↔ _
   rw [birationalCenterSubspaceLocus_preimage]
   rfl
-
-theorem fixedCoordinateBirationalSubspaceLocus_plucker_dense_open
-    {K : Type*} [Field K] [CharZero K] {n m s : ℕ}
-    (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
-    [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hmn : m + 1 ≤ n + 1) (d : ℕ)
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
-    (e : Fin (s + 2) ≃ (Fin (n + 1 - m - 1 + 1) ↪ Fin (n + 2))) :
-    Dense (fixedCoordinateBirationalSubspaceLocus I e) ∧
-      IsOpen (fixedCoordinateBirationalSubspaceLocus I e) := by
-  have := projectiveClosureIdeal_geometrically_prime (L := AlgebraicClosure K) I
-  obtain ⟨hcdim, hcdeg⟩ := projectiveClosureIdeal_hilbertPolynomial_parameters I m d hdim hdegree
-  constructor
-  · have hdense := fixedCoordinateMatrixSpan_surjective.denseRange.dense_image
-      fixedCoordinateMatrixSpan_continuous (fixedCoordinateBirationalCenterLocus_dense I hmn d hdim hdegree e)
-    rw [← fixedCoordinateBirationalSubspaceLocus_preimage I e,
-      Set.image_preimage_eq _ fixedCoordinateMatrixSpan_surjective] at hdense
-    exact hdense
-  · exact (birationalCenterSubspaceLocus_plucker_isOpen (projectiveClosureIdeal I)
-      (projectiveClosureIdeal_homogeneous I) d hcdim hcdeg (by omega) e).preimage continuous_subtype_val
 
 end
 end CCDN

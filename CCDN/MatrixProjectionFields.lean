@@ -119,5 +119,37 @@ theorem projection_integral_of_matrix_kernel_le
   change ((projectionCoordinateMap I (chowProjectionForms A)).comp ξ).IsIntegral
   rwa [he]
 
+/-- Reindexing the coordinates by an equivalence does not change the field
+they generate. -/
+theorem projectionImageField_comp_equiv
+    {K F σ σ' τ : Type*} [Field K] [Field F] [Algebra K F]
+    (I : Ideal (MvPolynomial τ K))
+    [Algebra (MvPolynomial τ K ⧸ I) F] [IsScalarTower K (MvPolynomial τ K ⧸ I) F]
+    (a : σ → MvPolynomial τ K) (e : σ' ≃ σ) :
+    projectionImageField (F := F) I (a ∘ e) = projectionImageField (F := F) I a := by
+  unfold projectionImageField
+  congr 1
+  exact e.surjective.range_comp
+    (fun i => algebraMap (MvPolynomial τ K ⧸ I) F ((Ideal.Quotient.mk I) (a i)))
+
+/-- Reindexing the coordinates by an equivalence does not change integrality. -/
+theorem projectionCoordinateMap_comp_equiv_isIntegral
+    {K σ σ' τ : Type*} [Field K]
+    (I : Ideal (MvPolynomial τ K)) (a : σ → MvPolynomial τ K) (e : σ' ≃ σ) :
+    (projectionCoordinateMap I (a ∘ e)).IsIntegral ↔
+      (projectionCoordinateMap I a).IsIntegral := by
+  have he : projectionCoordinateMap I (a ∘ e) =
+      (projectionCoordinateMap I a).comp (rename e) := by
+    ext i
+    simp [projectionCoordinateMap]
+  rw [he]
+  constructor
+  · intro h
+    exact RingHom.IsIntegral.tower_top (rename e : MvPolynomial σ' K →ₐ[K] _).toRingHom
+      (projectionCoordinateMap I a).toRingHom h
+  · intro h
+    exact RingHom.IsIntegral.trans _ _
+      (RingHom.isIntegral_of_surjective _ (rename_surjective e e.surjective)) h
+
 end
 end CCDN

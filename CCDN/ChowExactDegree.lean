@@ -1,8 +1,9 @@
 module
 
 public import CCDN.ChowNormalizationDegreeComparison
-public import CCDN.ChowAxisBaseChange
-public import CCDN.ChowTotalDegree
+public import CCDN.ChowRowSymmetry
+public import CCDN.ChowAxisEvaluation
+public import CCDN.HilbertScalarExtension
 
 /-! The Chow incidence equation has one block degree equal to the
 source Hilbert multiplicity in every row, and total degree (m+1)d.
@@ -12,6 +13,54 @@ from the source. -/
 @[expose] public section
 namespace CCDN
 noncomputable section
+
+section
+
+/-! The distinguished coordinate computes the Chow block degree over the
+original field whenever the source stays prime over an algebraically
+closed extension. -/
+
+open MvPolynomial
+
+theorem chow_generator_last_coordinate_degree_of_geometric_prime
+    {K L : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L] {m n : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K))
+    [(I.map (map (algebraMap K L))).IsPrime]
+    (hm : (filteredHilbertPolynomial I).natDegree = m)
+    (F : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K)
+    (hgen : chowIncidenceIdeal (m + 1) I = Ideal.span {F})
+    (d : ℕ) (hd : F.IsWeightedHomogeneous (chowRowWeight (Fin.last m)) d) :
+    F.degreeOf (Fin.last m,0) = d := by
+  let J := I.map (map (algebraMap K L))
+  have hmJ : (filteredHilbertPolynomial J).natDegree = m := by
+    rw [filteredHilbertPolynomial_scalar_extension]
+    exact hm
+  have hgenJ : chowIncidenceIdeal (m + 1) J = Ideal.span {map (algebraMap K L) F} := by
+    rw [← chowIncidenceIdeal_scalar_extension, hgen, Ideal.map_span, Set.image_singleton]
+  have hdJ : (map (algebraMap K L) F).IsWeightedHomogeneous (chowRowWeight (Fin.last m)) d := by
+    intro e he
+    apply hd
+    intro hz
+    apply he
+    rw [coeff_map, hz, map_zero]
+  have hh := chow_generator_last_coordinate_degree J hmJ
+    (map (algebraMap K L) F) hgenJ d hdJ
+  simpa only [degreeOf, degrees_map_of_injective F (algebraMap K L).injective] using hh
+
+theorem chow_generator_univariate_degree_of_geometric_prime
+    {K L : Type*} [Field K] [Field L] [Algebra K L] [IsAlgClosed L] {m n : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K))
+    [(I.map (map (algebraMap K L))).IsPrime]
+    (hm : (filteredHilbertPolynomial I).natDegree = m)
+    (F : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K)
+    (hgen : chowIncidenceIdeal (m + 1) I = Ideal.span {F})
+    (d : ℕ) (hd : F.IsWeightedHomogeneous (chowRowWeight (Fin.last m)) d) :
+    (chowAsUnivariate K m n F).natDegree = d := by
+  rw [chowAsUnivariate_natDegree]
+  exact chow_generator_last_coordinate_degree_of_geometric_prime (L := L) I hm F hgen d hd
+
+end
+
 open MvPolynomial
 
 local instance exactDegreeCoefficientRing {K σ τ : Type*} [Field K]
@@ -86,22 +135,6 @@ theorem chow_generator_row_degree_eq_multiplicity
   intro i
   exact (chow_generator_row_degrees_equal I G hG.ne_zero hgen δ hδ i (Fin.last m)).trans
     (hl.symm.trans hu)
-
-theorem chow_generator_totalDegree_eq_multiplicity
-    {K : Type*} [Field K] [CharZero K] {m n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hm : (filteredHilbertPolynomial I).natDegree = m)
-    (d : ℕ) (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial)
-    (G : MvPolynomial (Fin (m + 1) × Fin (n + 1)) K)
-    (hG : Irreducible G) (hgen : chowIncidenceIdeal (m + 1) I = Ideal.span {G})
-    (δ : Fin (m + 1) → ℕ)
-    (hδ : ∀ i, G.IsWeightedHomogeneous (chowRowWeight i) (δ i)) :
-    G.totalDegree = (m + 1) * d := by
-  have he := chow_generator_row_degree_eq_multiplicity I hm d hdegree G hG hgen δ hδ
-  apply chow_uniform_row_degree_totalDegree G hG.ne_zero d
-  intro i
-  simpa only [he i] using hδ i
 
 end
 end CCDN

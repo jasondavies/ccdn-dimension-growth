@@ -1,6 +1,7 @@
 module
 
-public import CCDN.SharpGoodCenterProjection
+public import CCDN.SharpBoundedBirationalCenter
+public import CCDN.BirationalComplementProjection
 public import CCDN.PolynomialPredicates
 
 /-! The full ambient height quantifier of CCDN Lemma 5.1. The constructed
@@ -43,6 +44,39 @@ lemma birational_complement_projection_ambient_height
       centerProjectionHeightConstant n * d ^ (2 * r ^ 2) from by
     simpa only [sharpCenterMinorBound, mul_assoc] using hh)
 
+/-- A bounded good center gives a complementary projection with the ambient
+height bound. -/
+theorem exists_sharp_ambient_projection_of_center
+    {n m d : ℕ} (hmn : m + 1 ≤ n + 1) (hd : 1 ≤ d)
+    (J : Ideal (MvPolynomial (Fin (n + 2)) ℚ)) [J.IsPrime]
+    [(J.map (map (algebraMap ℚ (AlgebraicClosure ℚ)))).IsPrime]
+    (hJ : IsHomogeneousIdeal J)
+    (M : Matrix (Fin (n + 1 - m - 1)) (Fin (n + 2)) ℤ)
+    (hM : ∀ i j, 0 ≤ M i j ∧ M i j ≤ ((m + 1) ^ 2 * d ^ 2))
+    (hli : LinearIndependent ℚ (M.map (Int.castRingHom ℚ)).row)
+    (hgood : IsBirationalMatrixCenter J (M.map (Int.castRingHom ℚ))) :
+    ∃ (D : ℤ) (P : Matrix (Fin (n + 2)) (Fin (n + 2)) ℤ),
+      BirationalComplementProjection J M D P ∧
+      Module.finrank ℚ (normalizedIntegerProjection D P).range = m + 2 ∧
+      ∀ x : ProjectivePoint (n + 1),
+        x.rep ∉ Submodule.span ℚ (Set.range (M.map (Int.castRingHom ℚ)).row) →
+        ∃ hx : normalizedIntegerProjection D P x.rep ≠ 0,
+          (Projectivization.mk ℚ (normalizedIntegerProjection D P x.rep) hx).mulHeight ≤
+            (centerProjectionHeightConstant (n + 1) : ℝ) *
+              (d : ℝ) ^ (2 * (n + 1 - m - 1) ^ 2) * x.mulHeight := by
+  obtain ⟨D,P,hdata,hP,hdim',_⟩ :=
+    exists_bounded_birational_complement_of_minor_projection J hJ (by omega) M hli
+      ((m + 1) ^ 2 * d ^ 2)
+      (fun i j => by rw [abs_of_nonneg (hM i j).1]; exact (hM i j).2) hgood
+  have hdim'' : Module.finrank ℚ (normalizedIntegerProjection D P).range +
+      (n + 1 - m - 1) = n + 2 := hdim'
+  have hdimension : Module.finrank ℚ (normalizedIntegerProjection D P).range = m + 2 := by
+    omega
+  refine ⟨D,P,hdata,hdimension,?_⟩
+  apply birational_complement_projection_ambient_height (n := n + 1) (m := m) (d := d)
+    J M D P hdata (fun i j => ?_) (by omega) (by omega) hd
+  simpa only [sharpCenterMinorBound, Nat.cast_mul, Nat.cast_pow, mul_assoc] using hP i j
+
 /-- Lemma 5.1, with the literal ambient height
 quantifier and an explicit dimension-only constant. Geometric integrality
 and degree preservation of the projection image are included. -/
@@ -68,21 +102,11 @@ theorem exists_sharp_ambient_birational_projection
           (Projectivization.mk ℚ (normalizedIntegerProjection D P x.rep) hx).mulHeight ≤
             (centerProjectionHeightConstant (n + 1) : ℝ) *
               (d : ℝ) ^ (2 * (n + 1 - m - 1) ^ 2) * x.mulHeight := by
-  obtain ⟨s,e,M,hM,_,hli,hc,hint,hf⟩ :=
+  obtain ⟨M,hM,_,hli,hgood⟩ :=
     exists_sharp_bounded_integer_birational_center hmn J hJ d hdim hdegree
-  obtain ⟨D,P,hdata,hP,hdim',_⟩ :=
-    exists_bounded_birational_complement_of_minor_projection J hJ M hli
-      ((m + 1) ^ 2 * d ^ 2)
-      (fun i j => by rw [abs_of_nonneg (hM i j).1]; exact (hM i j).2) e hint hf
-  have hdim'' : Module.finrank ℚ (normalizedIntegerProjection D P).range +
-      (n + 1 - m - 1) = n + 2 := hdim'
-  have hdimension : Module.finrank ℚ (normalizedIntegerProjection D P).range = m + 2 := by
-    omega
-  refine ⟨M,D,P,hM,hli,hc,hdata,hdimension,?_⟩
-  apply birational_complement_projection_ambient_height (n := n + 1) (m := m) (d := d)
-    J M D P hdata
-    (fun i j => ?_) (by omega) (by omega) (hilbert_multiplicity_pos_of_prime J hdegree)
-  simpa only [sharpCenterMinorBound, Nat.cast_mul, Nat.cast_pow, mul_assoc] using hP i j
+  obtain ⟨D,P,hdata,hdim',hheight⟩ := exists_sharp_ambient_projection_of_center (by omega)
+    (hilbert_multiplicity_pos_of_prime J hdegree) J hJ M hM hli hgood
+  exact ⟨M,D,P,hM,hli,hgood.1,hdata,hdim',hheight⟩
 
 /-- The fixed-coordinate form retains the ambient height bound, including
 zero-dimensional sources and the empty-center case. -/
@@ -110,21 +134,12 @@ theorem exists_sharp_ambient_fixed_coordinate_projection
             (centerProjectionHeightConstant (n + 1) : ℝ) *
               (d : ℝ) ^ (2 * (n + 1 - m - 1) ^ 2) * x.mulHeight := by
   have := projectiveClosureIdeal_geometrically_prime (L := AlgebraicClosure ℚ) I
-  obtain ⟨s,e,M,hM,_,hM0,hli,hc,hint,hf⟩ :=
+  obtain ⟨M,hM,_,hM0,hli,hgood⟩ :=
     exists_sharp_bounded_integer_fixed_coordinate_center I hmn d hdim hdegree
-  obtain ⟨D,P,hdata,hP,hdim',_⟩ :=
-    exists_bounded_birational_complement_of_minor_projection (projectiveClosureIdeal I)
-      (projectiveClosureIdeal_homogeneous I) M hli ((m + 1) ^ 2 * d ^ 2)
-      (fun i j => by rw [abs_of_nonneg (hM i j).1]; exact (hM i j).2) e hint hf
-  have hdim'' : Module.finrank ℚ (normalizedIntegerProjection D P).range +
-      (n + 1 - m - 1) = n + 2 := hdim'
-  have hdimension : Module.finrank ℚ (normalizedIntegerProjection D P).range = m + 2 := by
-    omega
-  refine ⟨M,D,P,hM,hM0,hli,hc,hdata,hdimension,?_⟩
-  apply birational_complement_projection_ambient_height (n := n + 1) (m := m) (d := d)
-    (projectiveClosureIdeal I) M D P hdata
-    (fun i j => ?_) (by omega) (by omega) (hilbert_multiplicity_pos_of_prime I hdegree)
-  simpa only [sharpCenterMinorBound, Nat.cast_mul, Nat.cast_pow, mul_assoc] using hP i j
+  obtain ⟨D,P,hdata,hdim',hheight⟩ := exists_sharp_ambient_projection_of_center hmn
+    (hilbert_multiplicity_pos_of_prime I hdegree) _ (projectiveClosureIdeal_homogeneous I)
+    M hM hli hgood
+  exact ⟨M,D,P,hM,hM0,hli,hgood.1,hdata,hdim',hheight⟩
 
 end
 end CCDN

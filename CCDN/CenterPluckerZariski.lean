@@ -85,47 +85,5 @@ theorem centerPluckerPrincipalOpen_isOpen
   (projectiveHomogeneousPrincipalOpen_isOpen f hf).preimage
     centerSubspacePlucker_isEmbedding.continuous
 
-theorem centerMatrixSpan_preimage_pluckerPrincipalOpen
-    {K : Type*} [Field K] {r n d : ℕ}
-    (f : MvPolynomial (Fin r ↪ Fin n) K) (hf : f.IsHomogeneous d) :
-    centerMatrixSpan ⁻¹' centerPluckerPrincipalOpen f =
-      {x : IndependentCenterMatrix K r n | eval x.val (centerMinorPolynomial f) ≠ 0} := by
-  have he : centerSubspacePlucker ∘ (centerMatrixSpan (K := K) (r := r) (n := n)) =
-      independentCenterPlucker := by
-    funext x
-    exact centerSubspacePlucker_matrixSpan x
-  change (centerSubspacePlucker ∘ centerMatrixSpan) ⁻¹' projectiveHomogeneousPrincipalOpen f = _
-  rw [he]
-  exact independentCenterPlucker_preimage_principalOpen f hf
-
-/-- Density descends to the Zariski topology induced by Plücker
-coordinates, as well as to the row-span quotient topology. -/
-theorem center_subspace_image_plucker_dense
-    {K : Type*} [Field K] {r n : ℕ}
-    (S : Set (IndependentCenterMatrix K r n)) (hS : Dense S) :
-    Dense (centerMatrixSpan '' S) :=
-  centerMatrixSpan_surjective.denseRange.dense_image
-    centerMatrixSpan_plucker_continuous hS
-
-theorem centerPluckerPrincipalOpen_dense
-    {K : Type*} [Field K] [Infinite K] {r n d : ℕ}
-    (f : MvPolynomial (Fin r ↪ Fin n) K) (hf : f.IsHomogeneous d)
-    (x : IndependentCenterMatrix K r n)
-    (hx : eval x.val (centerMinorPolynomial f) ≠ 0) :
-    Dense (centerPluckerPrincipalOpen f) := by
-  obtain ⟨c, hc, _⟩ := exists_nonzero_minor_of_independent_rows
-    (Matrix.of fun i j => x.val (i,j)) x.property
-  have hne : centerMinorPolynomial f ≠ 0 := by
-    intro hz
-    exact hx (by rw [hz, map_zero])
-  have hd := full_row_rank_polynomial_locus_dense_subspace ⟨c, hc⟩
-    (centerMinorPolynomial f) hne
-  have he : centerMatrixSpan '' {y : IndependentCenterMatrix K r n |
-      eval y.val (centerMinorPolynomial f) ≠ 0} = centerPluckerPrincipalOpen f := by
-    rw [← centerMatrixSpan_preimage_pluckerPrincipalOpen f hf]
-    exact Set.image_preimage_eq _ centerMatrixSpan_surjective
-  rw [← he]
-  exact center_subspace_image_plucker_dense _ hd
-
 end
 end CCDN

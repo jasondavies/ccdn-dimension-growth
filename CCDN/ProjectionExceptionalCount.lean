@@ -1,6 +1,6 @@
 module
 
-public import CCDN.BoundedBirationalProjection
+public import CCDN.CurveRationalInverse
 
 /-! Polynomial reconstruction controls exceptional points and finite
 point counts. The error is d times the reconstruction denominator's degree;

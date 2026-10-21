@@ -22,25 +22,21 @@ theorem exists_birational_minor_center
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
-    ∃ (A : Matrix (Fin (n - m - 1)) (Fin (n + 1)) ℚ) (s : ℕ)
-      (e : Fin (s + 2) ≃ (Fin (n - m - 1 + 1) ↪ Fin (n + 1))),
+    ∃ A : Matrix (Fin (n - m - 1)) (Fin (n + 1)) ℚ,
       LinearIndependent ℚ A.row ∧
       (∀ p ∈ projectiveIdealZeroLocus (I.map (map (algebraMap ℚ L))),
         p.rep ∉ Submodule.span L (Set.range (A.map (algebraMap ℚ L)).row)) ∧
-      (projectionCoordinateMap I (chowProjectionForms (centerMinorProjectionMatrix A e))).IsIntegral ∧
+      (projectionCoordinateMap I (centerMinorProjectionForm A)).IsIntegral ∧
       projectionImageField (F := FractionRing (MvPolynomial (Fin (n + 1)) ℚ ⧸ I))
-        I (chowProjectionForms (centerMinorProjectionMatrix A e)) = ⊤ := by
+        I (centerMinorProjectionForm A) = ⊤ := by
   obtain ⟨b, A, hA, hker, hdisjoint, hint, hfield⟩ :=
     exists_geometric_center_row_witness (L := L) m n hmn I hI d hdim hdegree
-  obtain ⟨s, ⟨e⟩⟩ := exists_center_minor_coordinate_enumeration
-    (show n - m - 1 + 2 ≤ n + 1 by omega)
+  have hr : n - m - 1 + 2 ≤ n + 1 := by omega
   let B : Matrix (Fin (m + 2)) (Fin (n + 1)) ℚ := fun i j => (b i j : ℚ)
   have hforms : chowProjectionForms B = fun i => integerLinearForm (b i) := rfl
-  have hMker : (centerMinorProjectionMatrix A e).mulVecLin.ker = B.mulVecLin.ker :=
-    (centerMinorProjectionMatrix_ker A hA e).trans hker
-  refine ⟨A, s, e, hA, hdisjoint, ?_, ?_⟩
-  · exact projection_integral_of_matrix_kernel_le I _ B hMker.le (hforms.symm ▸ hint)
-  · rw [projectionImageField_eq_of_matrix_kernel_eq I _ B hMker, hforms]
+  refine ⟨A, hA, hdisjoint, ?_, ?_⟩
+  · exact centerMinorProjectionForm_isIntegral_of_ker I A hA hr B hker.le (hforms.symm ▸ hint)
+  · rw [projectionImageField_centerMinorProjectionForm_of_ker I A hA hr B hker.symm, hforms]
     exact hfield
 
 /-- Every affine prime source has a constructed finite birational center
@@ -52,25 +48,21 @@ theorem exists_fixed_coordinate_birational_minor_center
     (hmn : m + 1 ≤ n) (d : ℕ)
     (hdim : (filteredHilbertPolynomial I).natDegree = m)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
-    ∃ (A : Matrix (Fin (n - m - 1)) (Fin (n + 1)) K) (s : ℕ)
-      (e : Fin (s + 2) ≃ (Fin (n - m - 1 + 1) ↪ Fin (n + 1))),
+    ∃ A : Matrix (Fin (n - m - 1)) (Fin (n + 1)) K,
       LinearIndependent K A.row ∧ (∀ i, A i 0 = 0) ∧
       (∀ p ∈ projectiveIdealZeroLocus ((projectiveClosureIdeal I).map (map (algebraMap K L))),
         p.rep ∉ Submodule.span L (Set.range (A.map (algebraMap K L)).row)) ∧
       (projectionCoordinateMap (projectiveClosureIdeal I)
-        (chowProjectionForms (centerMinorProjectionMatrix A e))).IsIntegral ∧
+        (centerMinorProjectionForm A)).IsIntegral ∧
       projectionImageField
         (F := FractionRing (MvPolynomial (Fin (n + 1)) K ⧸ projectiveClosureIdeal I))
-        (projectiveClosureIdeal I) (chowProjectionForms (centerMinorProjectionMatrix A e)) = ⊤ := by
+        (projectiveClosureIdeal I) (centerMinorProjectionForm A) = ⊤ := by
   obtain ⟨B, A, _, hA, hA0, hker, hdisjoint, hint, hfield⟩ :=
     exists_fixed_coordinate_center_row_witness (L := L) I hmn d hdim hdegree
-  obtain ⟨s, ⟨e⟩⟩ := exists_center_minor_coordinate_enumeration
-    (show n - m - 1 + 2 ≤ n + 1 by omega)
-  have hMker : (centerMinorProjectionMatrix A e).mulVecLin.ker = B.mulVecLin.ker :=
-    (centerMinorProjectionMatrix_ker A hA e).trans hker
-  refine ⟨A, s, e, hA, hA0, hdisjoint,
-    projection_integral_of_matrix_kernel_le _ _ B hMker.le hint, ?_⟩
-  rw [projectionImageField_eq_of_matrix_kernel_eq _ _ B hMker]
+  have hr : n - m - 1 + 2 ≤ n + 1 := by omega
+  refine ⟨A, hA, hA0, hdisjoint,
+    centerMinorProjectionForm_isIntegral_of_ker _ A hA hr B hker.le hint, ?_⟩
+  rw [projectionImageField_centerMinorProjectionForm_of_ker _ A hA hr B hker.symm]
   exact hfield
 
 end

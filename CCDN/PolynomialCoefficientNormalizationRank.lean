@@ -13,6 +13,20 @@ parameter field uses the universal incidence values of the first rows. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial
+
+/-- The rational function field in the variables `σ`. -/
+abbrev universalCoefficientField (K σ : Type*) [Field K] := FractionRing (MvPolynomial σ K)
+
+/-- The variables, as an algebraically independent tuple in their rational function field. -/
+def universalCoefficient (K σ : Type*) [Field K] (i : σ) : universalCoefficientField K σ :=
+  algebraMap (MvPolynomial σ K) (universalCoefficientField K σ) (X i)
+
+theorem universalCoefficient_algebraicIndependent (K σ : Type*) [Field K] :
+    AlgebraicIndependent K (universalCoefficient K σ) :=
+  (algebraicIndependent_X σ K).map'
+    (f := IsScalarTower.toAlgHom K (MvPolynomial σ K) (universalCoefficientField K σ))
+    (IsFractionRing.injective (MvPolynomial σ K) (universalCoefficientField K σ))
+
 attribute [local instance] MvPolynomial.algebraMvPolynomial
 
 theorem polynomial_fraction_variables_generate
@@ -116,7 +130,7 @@ theorem chow_incidence_parameter_field_finrank
     (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
     (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
     Module.finrank (chowNormalizationParameterField (F := F) m I) F = d := by
-  let L := universalAffineCoefficientField K m n
+  let L := universalCoefficientField K (Fin m × Fin n)
   let : Field L := inferInstance
   let IL := I.map (map (algebraMap K L))
   let : IL.IsPrime := prime_ideal_scalar_extension_of_algebraicClosure (L := L) I

@@ -15,6 +15,27 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- The Plücker coordinates of a matrix: its maximal minors. They are indexed
+by all ordered column injections `Fin r ↪ Fin n`, so each unordered set of
+columns occurs several times, with signs; nothing depends on choosing one
+representative per set. -/
+def matrixPluckerCoordinates {K : Type*} [Field K] {r n : ℕ}
+    (A : Matrix (Fin r) (Fin n) K) : (Fin r ↪ Fin n) → K :=
+  fun c => (A.submatrix id c).det
+
+theorem matrixPluckerCoordinates_ne_zero
+    {K : Type*} [Field K] {r n : ℕ}
+    (A : Matrix (Fin r) (Fin n) K) (hA : LinearIndependent K A.row) :
+    matrixPluckerCoordinates A ≠ 0 := by
+  obtain ⟨c, hc, hd⟩ := exists_nonzero_minor_of_independent_rows A hA
+  intro hz
+  exact hd (congrFun hz ⟨c, hc⟩)
+
+lemma matrixPluckerCoordinates_map {K L : Type*} [Field K] [Field L] (φ : K →+* L) {r n : ℕ}
+    (A : Matrix (Fin r) (Fin n) K) (c : Fin r ↪ Fin n) :
+    matrixPluckerCoordinates (A.map φ) c = φ (matrixPluckerCoordinates A c) :=
+  (φ.map_det (A.submatrix id c)).symm
+
 def centerMinorProjection {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (x : Fin n → K) (c : Fin (r + 1) ↪ Fin n) : K :=
   (Matrix.submatrix (Fin.cons x (fun i j => A i j)) id c).det
@@ -89,50 +110,14 @@ theorem centerMinorProjectionForm_eq_plucker_coefficients
     {K : Type*} [Field K] {r n : ℕ}
     (A : Matrix (Fin r) (Fin n) K) (c : Fin (r + 1) ↪ Fin n) :
     centerMinorProjectionForm A c =
-      ∑ k, C (eval (fun e : Fin r ↪ Fin n => (A.submatrix id e).det)
-        (centerPluckerCoefficient c k)) * X k := by
+      ∑ k, C (eval (matrixPluckerCoordinates A) (centerPluckerCoefficient c k)) * X k := by
   classical
-  simp only [centerMinorProjectionForm, centerPluckerCoefficient, map_sum,
-    apply_ite, map_mul, eval_C, eval_X, map_zero, Finset.sum_mul, ite_mul, zero_mul]
+  simp only [centerMinorProjectionForm, centerPluckerCoefficient, matrixPluckerCoordinates,
+    map_sum, apply_ite, map_mul, eval_C, eval_X, map_zero, Finset.sum_mul, ite_mul, zero_mul]
   rw [Finset.sum_comm]
   apply Finset.sum_congr rfl
   intro j _
   simp
-
-/-- The literal maximal-minor projection is finite on a homogeneous source
-whenever the center rows span a projective plane disjoint from that source. -/
-theorem centerMinorProjection_integral_of_disjoint
-    {K : Type*} [Field K] [IsAlgClosed K] {r n : ℕ}
-    (J : Ideal (MvPolynomial (Fin (n + 1)) K))
-    (hJ : IsHomogeneousIdeal J)
-    (A : Matrix (Fin r) (Fin (n + 1)) K) (hA : LinearIndependent K A.row)
-    (hcenter : ∀ p ∈ projectiveIdealZeroLocus J,
-      p.rep ∉ Submodule.span K (Set.range A.row)) :
-    (projectionCoordinateMap J (centerMinorProjectionForm A)).IsIntegral := by
-  classical
-  apply integral_projection_of_homogeneous_origin_fiber (L := K) J hJ _
-    (centerMinorProjectionForm_homogeneous A)
-  intro x hx
-  by_contra hx0
-  have hxJ : ∀ f ∈ J, eval x f = 0 := fun f hf => hx f (Ideal.mem_sup_left hf)
-  have hz : centerMinorProjection A x = 0 := by
-    funext c
-    rw [← centerMinorProjectionForm_eval]
-    exact hx _ (Ideal.mem_sup_right (Ideal.subset_span ⟨c, rfl⟩))
-  have hspan := (centerMinorProjection_eq_zero_iff A hA x).mp hz
-  let p := Projectivization.mk K x hx0
-  have hp : p ∈ projectiveIdealZeroLocus J := by
-    intro v hv he f hf
-    conv_lhs => rw [← sum_homogeneousComponent f]
-    rw [map_sum]
-    apply Finset.sum_eq_zero
-    intro M _
-    exact (homogeneous_eval_zero_iff_projective_eq
-      (homogeneousComponent_isHomogeneous M f) hv hx0 he).mpr (hxJ _ (hJ f hf M))
-  apply hcenter p hp
-  obtain ⟨a, ha⟩ := (Projectivization.mk_eq_mk_iff' K p.rep x p.rep_nonzero hx0).mp p.mk_rep
-  rw [← ha]
-  exact Submodule.smul_mem _ a hspan
 
 end
 end CCDN

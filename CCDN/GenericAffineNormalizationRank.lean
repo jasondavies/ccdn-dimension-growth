@@ -2,11 +2,9 @@ module
 
 public import CCDN.AffineNormalizationRank
 public import CCDN.FixedCoordinateGenericNormalization
-public import CCDN.UniversalHyperplaneNormalization
 
-/-! Exact affine normalization degree for independent linear
-coefficients, and for the named rational-function coefficient field.
-All fraction fields are fraction fields of the displayed affine
+/-! Exact affine normalization degree for algebraically independent linear
+coefficients. All fraction fields are fraction fields of the displayed affine
 coordinate ring. -/
 
 @[expose] public section
@@ -38,35 +36,6 @@ theorem generic_affine_normalization_functionField_finrank
     (generic_fixed_coordinate_projection_integral I hdim u hu) d
     (by simpa only [IL,filteredHilbertPolynomial_scalar_extension] using hdim)
     (by simpa only [IL,filteredHilbertPolynomial_scalar_extension] using hdegree)
-
-abbrev universalAffineCoefficientField (K : Type*) [Field K] (m n : ℕ) :=
-  universalCoefficientField K (Fin m × Fin n)
-
-/-- The independent coefficient tuple is constructed in the rational
-function field itself. -/
-theorem universal_affine_normalization_functionField_finrank
-    {K F : Type*} [Field K] [CharZero K] {n m : ℕ} [Field F]
-    [Algebra (universalAffineCoefficientField K m n) F]
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [(I.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    [hAF : Algebra (MvPolynomial (Fin n) (universalAffineCoefficientField K m n) ⧸
-      I.map (map (algebraMap K (universalAffineCoefficientField K m n)))) F]
-    [IsScalarTower (universalAffineCoefficientField K m n)
-      (MvPolynomial (Fin n) (universalAffineCoefficientField K m n) ⧸
-        I.map (map (algebraMap K (universalAffineCoefficientField K m n)))) F]
-    [IsFractionRing (MvPolynomial (Fin n) (universalAffineCoefficientField K m n) ⧸
-      I.map (map (algebraMap K (universalAffineCoefficientField K m n)))) F]
-    (d : ℕ) (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
-    Module.finrank (IntermediateField.adjoin (universalAffineCoefficientField K m n)
-      (Set.range (fun i => @algebraMap
-        (MvPolynomial (Fin n) (universalAffineCoefficientField K m n) ⧸
-          I.map (map (algebraMap K (universalAffineCoefficientField K m n)))) F _ _ hAF
-        ((Ideal.Quotient.mk (I.map
-          (map (algebraMap K (universalAffineCoefficientField K m n)))))
-          (genericAffineParameterForms (universalCoefficient K (Fin m × Fin n)) i))))) F = d :=
-  generic_affine_normalization_functionField_finrank I _
-    (universalCoefficient_algebraicIndependent K _) d hdim hdegree
 
 end
 end CCDN

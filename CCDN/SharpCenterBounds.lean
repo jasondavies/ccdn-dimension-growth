@@ -1,15 +1,63 @@
 module
 
-public import CCDN.ZeroDimensionalGoodCenter
+public import CCDN.ZeroDimensionalGeometricPoint
+public import CCDN.GeometricProjectiveChow
+public import CCDN.CenterProjectionHeight
 public import CCDN.PolynomialPredicates
 
 /-! Numerical bounds for the row-resultant good-center detector. Its degree
-D(2d-1) is strictly smaller than D^2 in positive projective dimension; the
-geometric dimension-zero boundary has d=1 and admits zero-one rows. -/
+D(2d-1) is strictly smaller than D^2 in positive projective dimension, and
+a geometrically integral source of dimension zero has degree one. -/
 
 @[expose] public section
 namespace CCDN
 noncomputable section
+open MvPolynomial
+
+lemma hilbert_multiplicity_pos_of_prime {K : Type*} [Field K] {n m d : ℕ}
+    (J : Ideal (MvPolynomial (Fin n) K)) [J.IsPrime]
+    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / m.factorial) : 1 ≤ d := by
+  have hp := filteredHilbertPolynomial_leadingCoeff_pos J (Ideal.IsPrime.ne_top ‹J.IsPrime›)
+  rw [hdegree] at hp
+  by_contra hd
+  have hz : d = 0 := by omega
+  simp only [hz, Nat.cast_zero, zero_div] at hp
+  exact lt_irrefl 0 hp
+
+/-- A geometrically integral zero-dimensional projective source has degree one. -/
+theorem geometric_projective_dimension_zero_multiplicity_one
+    {K : Type*} [Field K] [CharZero K] {n : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
+    [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
+    (hJ : IsHomogeneousIdeal J)
+    (d : ℕ) (hdim : (filteredHilbertPolynomial J).natDegree = 1)
+    (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ)) : d = 1 := by
+  classical
+  obtain ⟨j,hj⟩ := exists_coordinate_not_mem_of_positive_hilbert_dimension J (by omega)
+  let e := Equiv.swap 0 j
+  let J' := projectivePermutedIdeal J e
+  let : J'.IsPrime := projectivePermutedIdeal_isPrime J e
+  let : (J'.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime :=
+    projectivePermutedIdeal_geometrically_prime J e
+  have hJ' := projectivePermutedIdeal_homogeneous J hJ e
+  have hX : X 0 ∉ J' := by
+    change X 0 ∉ projectivePermutedIdeal J e
+    rw [mem_projectivePermutedIdeal,rename_X]
+    simpa only [e,Equiv.swap_apply_left] using hj
+  have hp := projectivePermutedIdeal_filteredHilbertPolynomial J e
+  have hdim' : (filteredHilbertPolynomial J').natDegree = 0 + 1 :=
+    (congrArg Polynomial.natDegree hp).trans hdim
+  have hd' : (filteredHilbertPolynomial J').leadingCoeff = (d : ℚ) / (0 + 1).factorial := by
+    simpa only [Nat.zero_add, Nat.factorial_one, Nat.cast_one, div_one] using
+      (congrArg Polynomial.leadingCoeff hp).trans hdegree
+  obtain ⟨hmI,hdI⟩ := projectiveChartIdeal_hilbertPolynomial_parameters J' hJ' hX 0 d hdim' hd'
+  let : ((projectiveChartIdeal J').map (map (algebraMap K (AlgebraicClosure K)))).IsPrime :=
+    projectiveChartIdeal_geometrically_prime J' hX
+  obtain ⟨_,_,hpoly⟩ := zero_dimensional_geometrically_integral_point
+    (L := AlgebraicClosure K) (projectiveChartIdeal J') hmI
+  have hq : (1 : ℚ) = d := by
+    simpa only [hpoly,Polynomial.leadingCoeff_one,Nat.factorial_zero,Nat.cast_one,div_one] using hdI
+  exact_mod_cast hq.symm
 
 lemma sharp_center_detector_degree_lt_square {m d : ℕ} (hm : 1 ≤ m) (hd : 1 ≤ d) :
     ((m + 1) * d) * (2 * d - 1) < ((m + 1) * d) ^ 2 := by
@@ -48,7 +96,7 @@ lemma center_projection_source_exponent_all_rows {m n r d : ℕ}
 lemma geometric_projective_multiplicity_boundary
     {K : Type*} [Field K] [CharZero K] {n m d : ℕ}
     (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
-    [(J.map (MvPolynomial.map (algebraMap K (AlgebraicClosure K)))).IsPrime]
+    [(J.map (map (algebraMap K (AlgebraicClosure K)))).IsPrime]
     (hJ : IsHomogeneousIdeal J)
     (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
     (hdegree : (filteredHilbertPolynomial J).leadingCoeff = (d : ℚ) / (m + 1).factorial) :
@@ -58,22 +106,6 @@ lemma geometric_projective_multiplicity_boundary
     subst m
     exact geometric_projective_dimension_zero_multiplicity_one J hJ d hdim
       (by simpa only [Nat.zero_add,Nat.factorial_one,Nat.cast_one,div_one] using hdegree)
-  · exact Or.inl (by omega)
-
-lemma geometric_affine_multiplicity_boundary
-    {K : Type*} [Field K] [CharZero K] {n m d : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
-    [(I.map (MvPolynomial.map (algebraMap K (AlgebraicClosure K)))).IsPrime]
-    (hdim : (filteredHilbertPolynomial I).natDegree = m)
-    (hdegree : (filteredHilbertPolynomial I).leadingCoeff = (d : ℚ) / m.factorial) :
-    1 ≤ m ∨ d = 1 := by
-  by_cases hm : m = 0
-  · right
-    rw [hm] at hdim hdegree
-    obtain ⟨_,_,hpoly⟩ := zero_dimensional_geometrically_integral_point (L := AlgebraicClosure K) I hdim
-    have hh : (1 : ℚ) = d := by
-      simpa only [hpoly,Polynomial.leadingCoeff_one,Nat.factorial_zero,Nat.cast_one,div_one] using hdegree
-    exact_mod_cast hh.symm
   · exact Or.inl (by omega)
 
 end
