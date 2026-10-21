@@ -110,7 +110,7 @@ theorem literal_scaled_homogeneous_auxiliary {n : ℕ}
     · intro i
       exact (Nat.prime_iff_prime_int.mp hp.out).irreducible.coprime_iff_not_dvd.mpr hphZ
   obtain ⟨M, hM, G, hG0, hGhom, hGzero, hGnd⟩ := affine_chart_absolute_auxiliary_degree
-    F hFhom hd hFabs z hprim hz (bad ∪ h.primeFactors) hgood hB hbox
+    F hFhom hd hFabs ⟨⟨hB, hz, hbox⟩, hprim⟩ (bad ∪ h.primeFactors) hgood
   have hcharge : primeSetFactor (bad ∪ h.primeFactors) ≤
       literalScalingPrimeCharge h * literalAffineBadPrimeFactor f := by
     rw [literalAffineBadPrimeFactor_eq_exp f hir rfl bad hbad, literalScalingPrimeCharge]

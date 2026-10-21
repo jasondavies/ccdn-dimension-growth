@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.HypersurfaceSmallHeightDegree
+public import CCDN.Auxiliary.AuxiliaryNonmultiple
 public import CCDN.Auxiliary.HypersurfaceBadPrimeComparison
+public import CCDN.Height.HypersurfaceSmallHeightDegree
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Auxiliary.PlaneAuxiliarySelection
 /-! Higher-dimensional auxiliary polynomials in the small-height range, with exact
@@ -37,19 +38,11 @@ theorem exists_auxiliary_small_height_of_comparison {n d M t : ℕ}
     (hscale : (d : ℝ) * Real.log B ≤ degreeRoot n d * M)
     (hthreshold : hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
       (primeSetFactor bad) < M) :
-    ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-      (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
+    ∃ g, IsPointAuxiliary f g M z := by
   classical
   have hdM : d ≤ M := by omega
   by_contra hnone
-  have hrel : ∀ g : MvPolynomial (Fin (n + 3)) ℤ, g.IsHomogeneous M →
-      (∀ i, eval (z i) g = 0) → f ∣ g := by
-    intro g hg hv
-    by_cases hg0 : g = 0
-    · simp [hg0]
-    · by_contra hnd
-      exact hnone ⟨g, hg0, hg, hv, hnd⟩
-  obtain ⟨s, _, hr, hc⟩ := hcomp hB hbox hdM hrel
+  obtain ⟨s, _, hr, hc⟩ := hcomp hB hbox hdM (dvd_of_not_exists_isPointAuxiliary hnone)
   have hL : 1 ≤ |((order.leadingCoeff f : ℤ) : ℝ)| := by
     exact_mod_cast Int.one_le_abs (order.leadingCoeff_ne_zero_iff.mpr hf0)
   have hnR : (n : ℝ) + 1 + 1 = n + 2 := by ring
@@ -80,8 +73,7 @@ theorem auxiliary_small_height_degree_of_comparison {n d t : ℕ}
       (M : ℝ) ≤ 2 * d + (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
         hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
           (primeSetFactor bad) + 2 ∧
-      ∃ g : MvPolynomial (Fin (n + 3)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-        (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
+      ∃ g, IsPointAuxiliary f g M z := by
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd
   let R := hypersurfaceSmallThreshold n d B |((order.leadingCoeff f : ℤ) : ℝ)|
     (primeSetFactor bad)
@@ -121,9 +113,9 @@ theorem hypersurface_auxiliary_small_height_degree
         (∀ i, eval (z i) g = 0) ∧ ¬ f ∣ g := by
   have hf0 := ne_zero_of_irreducible_map hir
   obtain ⟨bad, hbad⟩ := exists_hypersurface_bad_prime_finset f hf hd hir
-  obtain ⟨M, hM, hg⟩ := auxiliary_small_height_degree_of_comparison order f hf0 hd z hB hbox bad
-    (hypersurface_auxiliaryRankComparison order f hf hf0 hd z hprim hz bad hbad) hheight
-  exact ⟨bad, M, hbad, hM, hg⟩
+  obtain ⟨M, hM, g, hg⟩ := auxiliary_small_height_degree_of_comparison order f hf0 hd z hB hbox
+    bad (hypersurface_auxiliaryRankComparison order f hf hf0 hd z hprim hz bad hbad) hheight
+  exact ⟨bad, M, hbad, hM, g, isPointAuxiliary_iff.mp hg⟩
 
 end
 end CCDN

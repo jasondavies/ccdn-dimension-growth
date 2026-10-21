@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.HypersurfaceDeterminantRank
+public import CCDN.Height.CountingHypotheses
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Determinant.CongruenceHypersurfaceDeterminant
 import CCDN.Determinant.HypersurfaceMultiplicityEstimate
@@ -25,11 +26,8 @@ theorem exists_smooth_congruence_determinant_log_lower
     {n s N d M : ℕ} (hs : 0 < s)
     (f : MvPolynomial (Fin (n + 3)) ℤ) (hf : f.IsHomogeneous d) (hd : 0 < d)
     (hir : Irreducible (map (Int.castRingHom K) f))
-    (F : Fin N → MvPolynomial (Fin (n + 3)) ℤ) (hF : ∀ j, (F j).IsHomogeneous M)
-    (z : Fin s → IntPoint (n + 3)) (hprim : ∀ i, univ.gcd (z i) = 1)
-    (hz : ∀ i, eval (z i) f = 0)
-    (hrows : LinearIndependent ℚ
-      ((Matrix.of fun i j => eval (z i) (F j)).map ((↑) : ℤ → ℚ)).row)
+    {F : Fin N → MvPolynomial (Fin (n + 3)) ℤ} {z : Fin s → IntPoint (n + 3)}
+    (hev : IsIndependentEvaluation f M F z)
     (P : Finset ℕ) (hP : ∀ p ∈ P, p.Prime)
     (k : ℕ → Fin (n + 3)) (a : ℕ → Fin (n + 2) → ℤ)
     (ha : ∀ p ∈ P, eval₂ (Int.castRingHom (ZMod p)) (fun j => (a p j : ZMod p))
@@ -51,10 +49,10 @@ theorem exists_smooth_congruence_determinant_log_lower
       (p : ℤ) ^ hypersurfaceMultiplicityExponent (n + 1) 1 s ∣
         Int.Matrix.minorGcd (Matrix.of fun i j => eval (z i) (F j)) := by
     let : Fact p.Prime := ⟨hP p hp⟩
-    exact smooth_projective_hypersurface_congruence_minorGcd f hf F hF z
-      (k p) (a p) (ha p hp) (hsmooth p hp) (hunit p hp) (hres p hp) hz
-  have hh := hypersurface_determinant_log_lower_at_rank_congruence hs f hf hd F hF z
-    hprim hz hrows (bad ∪ P) P subset_union_right hP
+    exact smooth_projective_hypersurface_congruence_minorGcd f hf F hev.isHomogeneous z
+      (k p) (a p) (ha p hp) (hsmooth p hp) (hunit p hp) (hres p hp) hev.eval_eq_zero
+  have hh := hypersurface_determinant_log_lower_at_rank_congruence hs f hf hd hev
+    (bad ∪ P) P subset_union_right hP
     (fun _ => hypersurfaceMultiplicityExponent (n + 1) 1 s) hcong ?_
   · have he : hypersurfaceDeterminantMain n s - (n + 2 : ℝ) * s ≤
         (hypersurfaceMultiplicityExponent (n + 1) 1 s : ℝ) := by

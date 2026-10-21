@@ -72,7 +72,7 @@ theorem exists_affine_congruence_determinant_log_lower {n s N M : ℕ} (hs : 0 <
     simp only [projectiveHypersurfaceChart, Equiv.swap_self, Equiv.coe_refl, rename_id_apply, F,
       affineChart_scaledHomogenize_one]
   obtain ⟨bad, hbad, hbound⟩ := exists_smooth_congruence_determinant_log_lower hs F hF hd hFir
-    H hH z (fun i => primitive_affine_integer_coordinates (x i)) hz hrows' P hP
+    ⟨hH, fun i => primitive_affine_integer_coordinates (x i), hz, hrows'⟩ P hP
     (fun _ => 0) a (by simpa only [hchart] using ha)
     (by simpa only [hchart] using hsmooth)
     (by intro p hp i; exact isCoprime_one_right)

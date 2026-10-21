@@ -27,8 +27,8 @@ theorem affine_chart_auxiliaryRankComparison {n d t : ℕ}
       AffineChartGoodPrime f z p) :
     AuxiliaryRankComparison order f d z bad :=
   auxiliaryRankComparison_of_determinant_lower order f hf hf0 hd z hz bad
-    fun _ _ _ a F hs hF hi => affine_chart_determinant_log_lower_at_rank hs f hf hd F hF
-      (z ∘ a) (fun i => hprim (a i)) (fun i => hz (a i)) hi bad fun p _ hp hcut =>
+    fun _ _ _ a _ hs hF hi => affine_chart_determinant_log_lower_at_rank (z := z ∘ a) hs f hf hd
+      ⟨hF, fun i => hprim (a i), fun i => hz (a i), hi⟩ bad fun p _ hp hcut =>
         have h := hgood p (Finset.mem_sdiff.mp hp).2 hcut
         ⟨h.1, fun i => h.2 (a i)⟩
 
