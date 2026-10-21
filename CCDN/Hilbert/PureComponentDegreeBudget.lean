@@ -10,6 +10,7 @@ public import CCDN.Hilbert.FilteredPrimeDecomposition
 import CCDN.Hilbert.FilteredComponentRank
 import CCDN.Hilbert.PolynomialComparison
 import Mathlib.Algebra.BigOperators.Field
+
 /-! The total multiplicity of the minimal-prime components of a
 pure-dimensional affine ideal is at most the original Hilbert multiplicity. -/
 

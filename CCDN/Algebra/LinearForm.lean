@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+
 /-! The homogeneous linear form `∑ i, a i * X i` with a given coefficient vector,
 and its basic API: homogeneity, degree, evaluation, coefficient maps, renaming and
 linearity in the coefficient vector. -/

@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
-public import CCDN.Algebra.ScaledHomogenization
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.AuxiliaryPolynomial.HypersurfaceAuxiliaryTheorem
 import CCDN.AuxiliaryPolynomial.ScaledAuxiliaryCount
 import CCDN.Height.ProjectiveIntegerHeight
+
 /-! The affine auxiliary polynomial obtained from a prime-scaled
 homogeneous model. All point and nondivisibility transports are proved. -/
 

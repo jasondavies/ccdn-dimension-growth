@@ -10,8 +10,9 @@ public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.HomogeneousHilbert
 public import Mathlib.LinearAlgebra.Projectivization.Basic
 import CCDN.Height.ProjectivePointSeparation
-import CCDN.Hilbert.FilteredIntersection
 import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Hilbert.FilteredIntersection
+
 /-! Proper homogeneous sections of projective curves. The degree is the
 slope of the graded Hilbert function. Homogeneous interpolation and
 injective multiplication in the coordinate domain prove the section bound. -/

@@ -7,10 +7,11 @@ module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceRankLogarithm
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import CCDN.AuxiliaryPolynomial.LargeHeightRatios
 import CCDN.AuxiliaryPolynomial.HypersurfaceKernelRatio
 import CCDN.AuxiliaryPolynomial.HypersurfaceRankRoots
+import CCDN.AuxiliaryPolynomial.LargeHeightRatios
 import CCDN.ForMathlib.Log
+
 /-! The large-height auxiliary-degree calculation eliminates both the radius
 and coefficient height, leaving O_r(d^(4-1/r)). -/
 

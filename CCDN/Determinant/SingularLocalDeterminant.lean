@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.MvPolynomial.Ideal
 import CCDN.Determinant.SingularApproximation
 import CCDN.Determinant.SingularTangent
 import CCDN.ForMathlib.Matrix
+
 /-! Singular plane-curve local determinant divisibility, obtained from
 finite-precision homogeneous generators of the local maximal-ideal filtration. -/
 

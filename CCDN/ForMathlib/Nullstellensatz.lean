@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.Nullstellensatz
 public import Mathlib.RingTheory.MvPolynomial.Ideal
+public import Mathlib.RingTheory.Nullstellensatz
 
 /-!
 # Ideals vanishing only at the origin

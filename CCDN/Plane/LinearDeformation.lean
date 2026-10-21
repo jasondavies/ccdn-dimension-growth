@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+
 /-! Constant and first coefficients of a plane equation under a linear
 one-parameter displacement of one coordinate. These are algebraic coefficient
 identities, valid for arbitrary commutative target algebras. -/

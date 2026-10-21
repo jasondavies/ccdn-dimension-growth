@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.LinearForm
 import Mathlib.Analysis.SpecialFunctions.Pow.Real
+
 /-! Integer matrices give linear forms. Composition is matrix
 multiplication, with an explicit coefficient-height bound. -/
 

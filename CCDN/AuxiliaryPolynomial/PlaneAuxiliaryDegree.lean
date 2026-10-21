@@ -8,6 +8,7 @@ module
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.ForMathlib.Log
+
 /-! Quantitative degree control from the plane determinant comparison. -/
 
 @[expose] public section

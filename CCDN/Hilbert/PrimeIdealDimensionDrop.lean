@@ -6,12 +6,13 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.PolynomialComparison
-import CCDN.Hilbert.ProperSectionHilbert
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Hilbert.ProperHilbertDimension
-import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hilbert.ProperSectionHilbert
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
+
 /-! A strict containment of affine prime ideals strictly lowers the
 Hilbert dimension. The proof uses a polynomial in their difference. -/
 

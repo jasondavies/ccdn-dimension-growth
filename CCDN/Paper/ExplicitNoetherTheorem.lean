@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalHomogeneousForm
 public import CCDN.ForMathlib.IntegerPolynomialL1
+public import CCDN.Noether.UniversalHomogeneousForm
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Noether.UniversalNoetherForms
+
 /-! CCDN Theorem 3.2.2 with the printed degree, coefficient norm, and both
 specialization properties, assembled for a finite family chosen before the field. -/
 

@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.QuadraticInvariantFactorization
 public import CCDN.ClassGroup.QuadraticAmbiguousClassBound
+public import CCDN.ClassGroup.QuadraticInvariantFactorization
 import CCDN.ClassGroup.DiscriminantPrimeIdealCover
 import CCDN.ClassGroup.InvariantIdealIntegralRepresentative
 import CCDN.ClassGroup.QuadraticInvariantIdeals

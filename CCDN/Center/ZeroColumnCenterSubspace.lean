@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.PluckerZariski
 public import CCDN.Center.BirationalCenterSubspace
+public import CCDN.Center.PluckerZariski
+
 /-! Centers with prescribed zero columns, as matrices and as subspaces with
 the topology induced from the Plücker topology. Centers contained in X0=0
 are the case of the zero column set `{0}`. -/

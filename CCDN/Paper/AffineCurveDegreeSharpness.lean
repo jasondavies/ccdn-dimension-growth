@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.Box
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Analysis.DegreeDependenceNumerics
 import CCDN.LowerBound.GridAffineLowerBound
 import CCDN.LowerBound.GridLowerBoundNumerics
 import CCDN.LowerBound.IntegerGridLowerBound
+
 /-! The affine-curve sharpness statement in CCDN Section 6, with
 absolutely irreducible equations through the specified integer grids. -/
 

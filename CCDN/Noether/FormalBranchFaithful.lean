@@ -8,9 +8,9 @@ module
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.RingTheory.PowerSeries.Basic
 import CCDN.Algebra.SectionImageRank
-import CCDN.Noether.FormalPlaneBranch
 import CCDN.ForMathlib.PowerSeries
 import CCDN.Hilbert.PlaneHilbert
+import CCDN.Noether.FormalPlaneBranch
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.RingTheory.SimpleRing.Principal
 

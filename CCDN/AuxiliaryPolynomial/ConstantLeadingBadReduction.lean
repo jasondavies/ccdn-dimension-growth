@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import CCDN.Noether.BivariateTotalDegree
 public import CCDN.Noether.ClosedFormHeight
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.ClosedFormMinorCharge
 import CCDN.ForMathlib.Matrix

@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
-public import CCDN.Algebra.ScaledHomogenization
-import CCDN.AuxiliaryPolynomial.PrimeScaledAffineAuxiliary
 import CCDN.AuxiliaryPolynomial.HypersurfaceHeightTransfer
+import CCDN.AuxiliaryPolynomial.PrimeScaledAffineAuxiliary
 import CCDN.Height.ScaledHypersurfaceHeight
 
 /-!

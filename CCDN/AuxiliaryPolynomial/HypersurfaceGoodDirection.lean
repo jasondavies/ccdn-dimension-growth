@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.ForMathlib.MvPolynomial
 
 /-! Simultaneous avoidance of the top homogeneous form, a tangent hyperplane,

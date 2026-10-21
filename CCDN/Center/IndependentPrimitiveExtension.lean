@@ -5,14 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.ImageFractionField
 public import Mathlib.RingTheory.MvPolynomial
 import CCDN.Center.IndependentProjectionRows
-import CCDN.Projection.LinearParameterPrimitive
 import CCDN.Hilbert.LinearCoordinates
 import CCDN.Projection.BoundedInfinityAvoidance
+import CCDN.Projection.LinearParameterPrimitive
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
+
 /-! An independent homogeneous normalization can be augmented by
 one homogeneous linear form to a finite birational tuple, while retaining
 every original normalization coordinate. -/

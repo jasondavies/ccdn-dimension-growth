@@ -7,6 +7,7 @@ module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Hilbert.CoordinateIndependence
+
 /-! Full ambient Hilbert dimension forces the ideal to be zero. -/
 
 @[expose] public section

@@ -8,9 +8,10 @@ module
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+import CCDN.ForMathlib.LinearMap
 import CCDN.ForMathlib.MvPolynomial
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import CCDN.ForMathlib.LinearMap
+
 /-! Exact homogeneous Hilbert functions of a principal equation. Multiplication
 by a homogeneous nonzero equation identifies the entire homogeneous kernel. -/
 

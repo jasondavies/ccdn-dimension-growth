@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.ParameterPowerSpan
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import Mathlib.RingTheory.SimpleRing.Principal
-public import CCDN.Algebra.ParameterPowerSpan
 import CCDN.Hilbert.AffineCurveDegree
 
 /-!

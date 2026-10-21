@@ -12,6 +12,7 @@ import CCDN.Center.ChowIncidenceBaseChange
 import CCDN.Center.ChowNormalizationDegreeComparison
 import CCDN.Center.ChowRowSymmetry
 import CCDN.Hilbert.ScalarExtension
+
 /-! The Chow incidence equation has one block degree equal to the
 source Hilbert multiplicity in every row, and total degree (m+1)d.
 The generic normalization and primitive-element fields are constructed

@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-import ArithmeticHeights.BombieriVaaler
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
+import ArithmeticHeights.BombieriVaaler
 import CCDN.Determinant.GramDeterminant
 
 /-!

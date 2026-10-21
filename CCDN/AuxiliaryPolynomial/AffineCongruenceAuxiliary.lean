@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ForMathlib.StandardExponents
 public import CCDN.AuxiliaryPolynomial.AffineCongruenceHeight
+public import CCDN.ForMathlib.StandardExponents
 import CCDN.AuxiliaryPolynomial.StandardMonomialAuxiliary
 import CCDN.AuxiliaryPolynomial.WeightedMonomialDeterminant
 

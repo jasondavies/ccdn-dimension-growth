@@ -9,6 +9,7 @@ public import CCDN.Determinant.ProjectivePlaneResidueDeterminant
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Determinant.PlaneMultiplicitySmooth
 import CCDN.Determinant.PlaneSingularities
+
 /-! Singular projective residue classes are counted in their selected affine
 charts. The correction is polynomial in the degree and does not change the
 leading finite-field point-count term. -/

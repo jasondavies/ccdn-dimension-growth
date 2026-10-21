@@ -5,17 +5,17 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+import CCDN.Algebra.BoundedLinearSeparation
 import CCDN.Hypersurface.SmallOutsidePoint
+import CCDN.Projection.BoundedDegreeNormalizationFiber
 import CCDN.Projection.HilbertProjectionDegree
 import CCDN.Projection.IntegralProjectionClosedImage
 import CCDN.Projection.LinearNormalizationInfinite
 import Mathlib.RingTheory.Nullstellensatz
-import CCDN.Algebra.BoundedLinearSeparation
-import CCDN.Projection.BoundedDegreeNormalizationFiber
 
 /-!
 Set-theoretic degree-bounded equations for an affine prime variety.

@@ -7,9 +7,9 @@ module
 
 public import CCDN.Center.GenericLinearPowerBasis
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Height.BoundedPrimitiveElement
 import CCDN.Projection.PrimitiveCoordinateField
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import CCDN.Height.BoundedPrimitiveElement
 
 /-!
 The generic primitive element over the intermediate field

@@ -6,11 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Hypersurface.ConjugatePrimeGridBound
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Height.ProjectiveBox
+public import CCDN.Hilbert.AffineCurveDegree
+public import CCDN.Hypersurface.ConjugatePrimeGridBound
 import CCDN.Height.ProjectivePrimitive
 import CCDN.Hypersurface.NonRationalVarietyCount
+
 /-! Projective cone forms of CCDN 4.1.3 and 4.1.4. Primitive integer
 representatives inject into the affine cone with the same radius. -/
 

@@ -7,13 +7,14 @@ module
 
 public import CCDN.Center.BirationalCenterLocus
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Center.ResultantDetector
 import CCDN.Center.BirationalCenterLocus
 import CCDN.Center.ChowProjectionCriterion
 import CCDN.Center.ChowRestrictionBirational
 import CCDN.Center.GeometricIdealPrimality
-import CCDN.Hilbert.ScalarExtension
+import CCDN.Center.ResultantDetector
 import CCDN.Hilbert.HomogeneousPrimeComponents
+import CCDN.Hilbert.ScalarExtension
+
 /-! Sharp equations over the source field detect birational centers
 in every coefficient-field extension, including their geometric disjointness. -/
 

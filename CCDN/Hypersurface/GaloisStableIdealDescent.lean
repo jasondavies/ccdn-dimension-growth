@@ -8,6 +8,7 @@ module
 public import CCDN.ForMathlib.StandardExponents
 public import Mathlib.FieldTheory.Galois.Basic
 import Mathlib.FieldTheory.Galois.Infinite
+
 /-! Galois-stable polynomial ideals descend to the fixed field. Standard
 monomial representatives of individual monomials construct fixed ideal
 generators. -/

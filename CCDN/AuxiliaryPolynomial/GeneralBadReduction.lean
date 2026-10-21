@@ -5,12 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.AuxiliaryPolynomial.ConstantLeadingBadReduction
+public import CCDN.Plane.FiniteFieldConstants
 import CCDN.AuxiliaryPolynomial.BadPrimeCharge
-import CCDN.Plane.ShearHeight
 import CCDN.ForMathlib.Log
+import CCDN.Plane.ShearHeight
+
 /-! The geometric bad-prime charge for arbitrary integer plane equations.
 The proof combines bounded integral normalization, coefficient growth and an
 integer minor witness; reducibility is tested over the residue field's

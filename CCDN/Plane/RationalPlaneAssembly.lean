@@ -6,8 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.AffineNonzeroConstant
-import CCDN.Plane.AffinePlaneAssembly
 import CCDN.Algebra.PrimitiveNormalization
+import CCDN.Plane.AffinePlaneAssembly
+
 /-! Rational equations and the coefficient-uniform affine plane bound.
 The sharp finite-field estimate is stated as a proposition, not an axiom. -/
 

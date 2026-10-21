@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.ScalingPrime
 public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineHeight
-import CCDN.AuxiliaryPolynomial.PrimeScaledAffineHeight
-import CCDN.AuxiliaryPolynomial.PrimeScaledAffineAuxiliary
-import CCDN.AuxiliaryPolynomial.ScaledHypersurfaceBadPrimes
+public import CCDN.AuxiliaryPolynomial.ScalingPrime
 import CCDN.AuxiliaryPolynomial.HypersurfaceHeightTransfer
+import CCDN.AuxiliaryPolynomial.PrimeScaledAffineAuxiliary
+import CCDN.AuxiliaryPolynomial.PrimeScaledAffineHeight
+import CCDN.AuxiliaryPolynomial.ScaledHypersurfaceBadPrimes
 import CCDN.Height.ScaledHypersurfaceHeight
+
 /-! Both bounds for the bad-prime factor apply to the same homogeneous
 auxiliary. Their minimum therefore survives the affine exponent saving. -/
 

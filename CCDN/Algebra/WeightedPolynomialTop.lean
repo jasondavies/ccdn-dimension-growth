@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
 public import Mathlib.Algebra.Polynomial.Degree.Defs
+public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
 import Mathlib.Algebra.Polynomial.Degree.Lemmas
 
 /-! Weighted highest components through an auxiliary polynomial variable.

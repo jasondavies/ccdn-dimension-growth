@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Finiteness.Defs
+public import Mathlib.RingTheory.Localization.FractionRing
 import Mathlib.RingTheory.Localization.LocalizationLocalization
 import Mathlib.RingTheory.MvPolynomial.Localization
 

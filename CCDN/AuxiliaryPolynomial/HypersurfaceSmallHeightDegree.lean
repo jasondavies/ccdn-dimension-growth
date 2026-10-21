@@ -7,10 +7,11 @@ module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceRankLogarithm
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import CCDN.AuxiliaryPolynomial.RatioEstimates
 import CCDN.AuxiliaryPolynomial.HypersurfaceKernelRatio
 import CCDN.AuxiliaryPolynomial.HypersurfaceRankRoots
+import CCDN.AuxiliaryPolynomial.RatioEstimates
 import CCDN.ForMathlib.Log
+
 /-! The small-height numerical auxiliary-degree bound, with exact box and
 coefficient exponents and a constant depending only on dimension. -/
 

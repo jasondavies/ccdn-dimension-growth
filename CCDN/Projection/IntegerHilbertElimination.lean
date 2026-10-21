@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedLinearElimination
 public import CCDN.Hilbert.LinearProjectionFiltration
+public import CCDN.Projection.BoundedLinearElimination
 import CCDN.Noether.GenericPlaneStretch
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 

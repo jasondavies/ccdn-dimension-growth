@@ -9,8 +9,8 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.FieldTheory.Galois.Basic
 import CCDN.Hilbert.ScalarExtension
 import CCDN.Hypersurface.ZeroDimensionalPrimeDescent
-import Mathlib.RingTheory.Nullstellensatz
 import Mathlib.FieldTheory.Galois.Infinite
+import Mathlib.RingTheory.Nullstellensatz
 
 /-! A geometrically integral zero-dimensional affine variety over a
 characteristic-zero field is a single rational point, of degree one. -/

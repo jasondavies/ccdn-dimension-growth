@@ -7,6 +7,7 @@ module
 
 public import CCDN.ClassGroup.MultiplicationPairingProduct
 import Mathlib.Algebra.Order.BigOperators.GroupWithZero.Finset
+
 /-! A field basis containing one supplies the complement used by the
 multiplication pairing. The resulting product inequality is independent
 of the geometric construction of the basis or the length function. -/

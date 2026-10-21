@@ -7,9 +7,10 @@ module
 
 public import CCDN.Determinant.HypersurfaceHilbert
 import CCDN.Determinant.InitialFormMultiplication
+import CCDN.ForMathlib.LinearMap
 import CCDN.ForMathlib.MvPolynomial
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-import CCDN.ForMathlib.LinearMap
+
 /-! The exact Hilbert function of the origin-adic layers of an
 arbitrary hypersurface. Initial-form cancellation identifies the entire
 homogeneous kernel, not merely a subspace of relations. -/

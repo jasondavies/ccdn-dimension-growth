@@ -10,6 +10,7 @@ public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Hilbert.OrthantMultiplicity
 import CCDN.Hilbert.StandardMonomials
 import Mathlib.Order.Interval.Set.Infinite
+
 /-! Existence, uniqueness and positive integral multiplicity of the
 filtered Hilbert polynomial of a polynomial quotient, in arbitrary finite
 dimension. These results construct the polynomial from standard exponents. -/

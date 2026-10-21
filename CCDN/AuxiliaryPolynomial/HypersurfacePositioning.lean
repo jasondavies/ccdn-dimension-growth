@@ -14,6 +14,7 @@ import CCDN.AuxiliaryPolynomial.HypersurfaceFullOuterDegree
 import CCDN.AuxiliaryPolynomial.HypersurfaceGoodDirection
 import CCDN.Determinant.GenericPlaneMinor
 import CCDN.Determinant.HypersurfaceSmoothPoint
+
 /-! Full-degree monic positioning of an irreducible hypersurface at a
 smooth point, using an invertible affine change and a nonzero scalar. -/
 

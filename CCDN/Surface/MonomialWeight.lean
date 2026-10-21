@@ -12,6 +12,7 @@ import CCDN.AuxiliaryPolynomial.HypersurfaceRankProfile
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.PlaneHilbert
 import Mathlib.Algebra.Order.Star.Real
+
 /-! The sharp weighted degree of a full standard-monomial prefix for an
 affine surface. The coefficient 2/3 of the square-root rank is retained,
 with an explicit linear error depending only on the equation degree. -/

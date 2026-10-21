@@ -10,9 +10,10 @@ public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveBox
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
-import CCDN.Projection.BoundedIntegerNormalization
-import CCDN.Projection.BoundedDegreeNormalizationFiber
 import CCDN.Algebra.ProjectiveFiniteFibers
+import CCDN.Projection.BoundedDegreeNormalizationFiber
+import CCDN.Projection.BoundedIntegerNormalization
+
 /-! The zero-dimensional case of projective dimension growth. A
 one-parameter normalization sends every projective point to the unique
 point of projective zero-space; its affine fiber bound controls

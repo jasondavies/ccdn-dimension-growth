@@ -7,6 +7,7 @@ module
 
 public import CCDN.Projection.ProjectiveProjectionGrowth
 import CCDN.Projection.BoundedDegreeNormalizationFiber
+
 /-! Dimension growth for homogeneous prime ideals of positive
 projective dimension. -/
 

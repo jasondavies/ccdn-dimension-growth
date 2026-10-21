@@ -7,6 +7,7 @@ module
 
 public import CCDN.Surface.ResidueEdgeCount
 import CCDN.Surface.NonlinearCount
+
 /-! The finite residue-edge cover and its complete counting bound. -/
 
 @[expose] public section

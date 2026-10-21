@@ -7,10 +7,11 @@ module
 
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Plane.ScaledPlaneCount
-import CCDN.Plane.ProjectivePlanePositionedCount
-import CCDN.Plane.RationalPlaneAssembly
 import CCDN.Algebra.PrimitiveNormalization
 import CCDN.ForMathlib.Log
+import CCDN.Plane.ProjectivePlanePositionedCount
+import CCDN.Plane.RationalPlaneAssembly
+
 /-! An absolute d^4 B^(2/d) bound for primitive absolutely irreducible
 homogeneous plane equations of degree at least two. -/
 

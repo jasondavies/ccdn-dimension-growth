@@ -8,6 +8,7 @@ module
 public import CCDN.Algebra.PolynomialLinearDescent
 import CCDN.Hilbert.ScalarExtension
 import Mathlib.LinearAlgebra.Dual.Lemmas
+
 /-! Coefficient-linear descent detects nonmembership in scalar-extended
 ideals, and descends degree-bounded separating equations. -/
 

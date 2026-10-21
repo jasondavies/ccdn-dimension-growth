@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.AuxiliaryPolynomial.AbsoluteAuxiliary
+public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 import CCDN.Algebra.IntegerRationalIrreducibility
-import CCDN.AuxiliaryPolynomial.HypersurfaceProjectiveAuxiliary
 import CCDN.AuxiliaryPolynomial.HypersurfaceNonabsoluteAuxiliary
+import CCDN.AuxiliaryPolynomial.HypersurfaceProjectiveAuxiliary
+
 /-! CCDN Theorem 3.1.1 for irreducible integer homogeneous equations.
 The constant is fixed before the equation, degree and radius are chosen. -/
 

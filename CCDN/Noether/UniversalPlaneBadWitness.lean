@@ -5,14 +5,15 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Noether.UniversalPlaneWitness
 import CCDN.AuxiliaryPolynomial.ConstantLeadingBadReduction
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.UniversalPlaneMinor
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.ClosedFormScaling
-public import CCDN.Noether.UniversalPlaneWitness
-import CCDN.ForMathlib.MvPolynomial
+
 /-! A nonzero polynomial of degree at most 2*d^3 detects all plane sections
 that lose the full degree or fail geometric irreducibility. -/
 

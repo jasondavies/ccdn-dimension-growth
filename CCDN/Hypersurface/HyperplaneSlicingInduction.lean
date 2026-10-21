@@ -7,8 +7,8 @@ module
 
 public import CCDN.Hypersurface.IntegerHyperplaneSlices
 public import CCDN.Statements
-import CCDN.Hypersurface.HyperplaneSliceCoordinates
 import CCDN.Hypersurface.GoodHyperplane
+import CCDN.Hypersurface.HyperplaneSliceCoordinates
 import CCDN.Hypersurface.IntegerGoodHyperplaneSlices
 
 /-!

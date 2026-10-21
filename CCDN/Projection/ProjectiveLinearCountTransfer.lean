@@ -8,9 +8,10 @@ module
 public import CCDN.Algebra.IntegerLinearForms
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Algebra.ProjectiveFiniteFibers
 import CCDN.Determinant.PolynomialMapDeterminant
 import CCDN.Projection.BoundedLinearProjection
-import CCDN.Algebra.ProjectiveFiniteFibers
+
 /-! Height and cardinality transport through an integer linear
 projection with uniformly bounded affine fibers. -/
 

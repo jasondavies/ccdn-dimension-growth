@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.LowerBound.GridEisenstein
-public import Mathlib.Algebra.Polynomial.Degree.IsMonicOfDegree
 public import CCDN.Noether.BivariateTotalDegree
+public import Mathlib.Algebra.Polynomial.Degree.IsMonicOfDegree
 
 /-! Exact total degree and coefficient extension for the explicit grid equation. -/
 

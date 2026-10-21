@@ -7,9 +7,9 @@ module
 
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Algebra.HomogeneousLinearDescent
+import CCDN.ForMathlib.MvPolynomial
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
-import CCDN.ForMathlib.MvPolynomial
 
 /-! An irreducible highest homogeneous component forces irreducibility of
  the full polynomial. Coefficient reduction preserves this implication and

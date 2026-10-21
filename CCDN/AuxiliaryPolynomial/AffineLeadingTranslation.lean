@@ -9,6 +9,7 @@ public import CCDN.Algebra.AffineTranslation
 public import CCDN.Algebra.HomogeneousSlice
 import CCDN.AuxiliaryPolynomial.AffineTranslationCount
 import CCDN.Height.MultivariateGridHeight
+
 /-! Translation preserves the leading homogeneous equation exactly. Bounded
 integer translations make the constant coefficient nonzero in every dimension. -/
 

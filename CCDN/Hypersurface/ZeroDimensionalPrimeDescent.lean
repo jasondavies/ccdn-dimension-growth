@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.ConjugatePrimeGridBound
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Hilbert.AffineCurveDegree
+public import CCDN.Hypersurface.ConjugatePrimeGridBound
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.FieldTheory.Galois.Basic
 import CCDN.Hilbert.AlgebraicHilbertDimension
@@ -18,6 +18,7 @@ import CCDN.Hypersurface.GaloisComponentDegree
 import CCDN.Hypersurface.GaloisComponentPoints
 import CCDN.Hypersurface.GaloisPolynomialPrimes
 import CCDN.Hypersurface.GaloisStableIdealDescent
+
 /-! Zero-dimensional affine prime ideals with a rational point descend to
 the rational field. This supplies the zero-dimensional boundary cases of
 CCDN 4.1.3 and 4.1.4. -/

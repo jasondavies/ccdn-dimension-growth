@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
 public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
+public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
 import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.AuxiliaryPolynomial.LiteralAffineAuxiliaryTheorem
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount

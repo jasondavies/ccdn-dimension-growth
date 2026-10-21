@@ -8,11 +8,12 @@ module
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Center.MinorProjection
-public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Center.MinorMatrix
+public import CCDN.Projection.ImageFractionField
 import CCDN.Center.FixedCoordinateCenterRows
 import CCDN.Center.GeometricCenterRows
+import CCDN.Center.MinorMatrix
+
 /-! Constructed good centers for the literal maximal-minor projection.
 Equal kernels transfer both integrality and the generated function
 field. The affine construction retains a zero first column. -/

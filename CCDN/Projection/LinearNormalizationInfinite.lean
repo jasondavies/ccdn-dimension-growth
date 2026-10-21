@@ -9,12 +9,13 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.FilteredHilbertEquiv
 import CCDN.Hilbert.FullDimension
 import CCDN.Hilbert.ProperHilbertDimension
 import CCDN.Projection.BoundedLinearElimination
 import CCDN.Projection.IntegralProjectionHilbert
-import CCDN.ForMathlib.MvPolynomial
+
 /-! Homogeneous-linear Noether normalization over an infinite field.
 The parameter forms, integrality and algebraic independence are constructed
 from the prime ideal and its filtered Hilbert dimension. -/

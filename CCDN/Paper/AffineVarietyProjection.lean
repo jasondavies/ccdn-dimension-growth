@@ -9,6 +9,7 @@ public import CCDN.Projection.GeometricAffineProjection
 public import Mathlib.FieldTheory.Galois.Basic
 import CCDN.Hilbert.PolynomialComparison
 import CCDN.Projection.ZeroDimensionalAffineProjection
+
 /-! CCDN Proposition 4.3.1 in every affine dimension. The projection and
 its geometrically integral hypersurface image are constructed, including
 the zero-dimensional case. The explicit box exponent is 2n. -/

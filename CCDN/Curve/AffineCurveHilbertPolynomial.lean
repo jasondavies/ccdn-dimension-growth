@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.FieldTheory.Galois.Basic
 import CCDN.Hypersurface.NonRationalVarietyCount
+
 /-! Exact agreement of the affine curve degree interface with the
 filtered Hilbert polynomial, and the nongeometric curve count. -/
 

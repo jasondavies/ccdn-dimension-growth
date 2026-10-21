@@ -9,10 +9,10 @@ public import CCDN.Algebra.HomogeneousChart
 public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
+import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryDegree
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryLargeHeight
 import CCDN.AuxiliaryPolynomial.PolynomialMapAuxiliary
-import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Determinant.HomogeneousDeterminantComparison
 import CCDN.Determinant.ProjectiveHeightDeterminant
 

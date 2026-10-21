@@ -8,8 +8,9 @@ module
 public import CCDN.Algebra.HomogeneousChart
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
-import CCDN.Plane.Bezout
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Plane.Bezout
+
 /-! Distinct-point bounds obtained from the auxiliary polynomials and
 Bézout. The sharp finite-field estimate remains an explicit hypothesis. -/
 

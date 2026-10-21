@@ -12,9 +12,10 @@ import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.AuxiliaryPolynomial.HypersurfaceAuxiliaryTheorem
 import CCDN.AuxiliaryPolynomial.HypersurfaceCoefficientDichotomy
-import CCDN.Plane.UnscaledModelCount
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Height.ProjectiveIntegerHeight
+import CCDN.Plane.UnscaledModelCount
+
 /-! The ordinary homogenization provides an affine auxiliary without a
 scaling-prime hypothesis and transfers the coefficient-height dichotomy. -/
 

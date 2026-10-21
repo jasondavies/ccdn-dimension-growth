@@ -9,12 +9,13 @@ public import CCDN.Center.BirationalCenterLocus
 public import CCDN.Center.BoundedCenterProjection
 public import CCDN.Height.ProjectiveBox
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Center.BoundedCenterProjectionAllRows
-import CCDN.Center.ProjectionHeight
 import CCDN.Center.HomogeneousProjectionNoBasePoint
+import CCDN.Center.ProjectionHeight
 import CCDN.Projection.HomogeneousFiniteProjectionDegree
 import CCDN.Projection.IntegralProjectionHilbert
-import CCDN.Algebra.ProjectionScalarExtension
+
 /-! Complementary projections retain the geometric and degree
 properties of the minor projection with the same center. This interface
 is independent of the bound used to construct the center rows.

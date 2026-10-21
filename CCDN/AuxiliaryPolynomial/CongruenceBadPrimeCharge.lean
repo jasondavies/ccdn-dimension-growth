@@ -11,6 +11,7 @@ public import CCDN.Plane.IntegerPlaneLogHeight
 import CCDN.AuxiliaryPolynomial.BadPrimeCharge
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeHeight
+
 /-! A single logarithmic-height witness bounds the combined charge of
 geometric bad primes and prescribed congruence primes. -/
 

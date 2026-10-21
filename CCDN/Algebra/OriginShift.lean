@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.PDeriv
+
 /-! Translation of multivariate polynomials by a point: `originShift a` substitutes
 `X j + a j` for every variable, moving the point `a` to the origin. `originShiftEquiv a` is
 the same substitution as an algebra automorphism, with inverse the shift by `-a`. -/

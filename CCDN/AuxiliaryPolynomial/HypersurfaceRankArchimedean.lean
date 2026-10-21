@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.AuxiliaryPolynomial.HypersurfaceRankProfile
+
 /-! The factorial and coefficient-count logarithms in the determinant
 comparison cost only a dimension constant times s^(1+1/r). -/
 

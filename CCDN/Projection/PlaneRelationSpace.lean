@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.RingTheory.Ideal.Defs
 import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+
 /-! At the degree of the irreducible image equation, the plane relation
 space is one-dimensional. This supplies the specialized-kernel condition
 for first-order deformation of a degree-preserving projection. -/

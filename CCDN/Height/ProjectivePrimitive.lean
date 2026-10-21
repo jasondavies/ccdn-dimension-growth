@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.ProjectiveBox
+
 /-! Primitive integral representatives of rational projective points. -/
 
 @[expose] public section

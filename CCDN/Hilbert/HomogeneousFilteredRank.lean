@@ -9,6 +9,7 @@ public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Hilbert.FilteredIntersection
 import Mathlib.NumberTheory.Height.NumberField
 import Mathlib.NumberTheory.Height.Projectivization
+
 /-! For a homogeneous ideal, the filtered Hilbert function is the
 successive sum of its graded pieces. This is proved by splitting off the
 top homogeneous component in the coordinate quotient. -/

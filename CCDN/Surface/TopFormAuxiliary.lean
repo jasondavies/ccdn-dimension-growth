@@ -10,6 +10,7 @@ import CCDN.ForMathlib.MvPolynomial
 import CCDN.Height.ScaledHypersurfaceHeight
 import CCDN.Surface.TopFormAuxiliaryEstimate
 import CCDN.Surface.TopFormBadPrimes
+
 /-! A coefficient-uniform auxiliary for an affine hypersurface with absolutely
 irreducible leading form. This is the dimension-general form of CCDN (4-3-1). -/
 

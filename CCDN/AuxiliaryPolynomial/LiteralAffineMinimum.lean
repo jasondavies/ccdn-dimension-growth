@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineMinimum
 public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
-import CCDN.AuxiliaryPolynomial.UnscaledAffineMinimum
-import CCDN.AuxiliaryPolynomial.LiteralScaledAuxiliary
+public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineMinimum
 import CCDN.AuxiliaryPolynomial.AffineHeightCutoff
 import CCDN.AuxiliaryPolynomial.HypersurfaceHeightTransfer
+import CCDN.AuxiliaryPolynomial.LiteralScaledAuxiliary
+import CCDN.AuxiliaryPolynomial.UnscaledAffineMinimum
 import CCDN.Height.ScaledHypersurfaceHeight
+
 /-! Quantitative degree selection for the literal affine bad-prime branch.
 The logarithmic branch can be selected separately at the existence level.
 Here "literal" means the paper's Definition 3.2.1 applied verbatim to the affine

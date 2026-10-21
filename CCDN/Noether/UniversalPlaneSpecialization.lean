@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.FiniteFieldBadPlanes
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Plane.FiniteFieldBadPlanes
 import CCDN.Algebra.IntegerPolynomialAvoidance
 import CCDN.Noether.ShearNormalization
 

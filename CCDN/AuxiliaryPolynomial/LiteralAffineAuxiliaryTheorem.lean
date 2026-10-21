@@ -7,14 +7,15 @@ module
 
 public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
 public import CCDN.AuxiliaryPolynomial.LiteralAffineBadPrimes
-import CCDN.AuxiliaryPolynomial.AffineLeadingTranslation
 import CCDN.AuxiliaryPolynomial.AffineAuxiliaryTranslationBound
 import CCDN.AuxiliaryPolynomial.AffineBadPrimeTranslation
+import CCDN.AuxiliaryPolynomial.AffineHeightCutoff
+import CCDN.AuxiliaryPolynomial.AffineLeadingTranslation
+import CCDN.AuxiliaryPolynomial.AffineTranslationCount
 import CCDN.AuxiliaryPolynomial.LiteralAffineMinimum
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceAuxiliary
-import CCDN.AuxiliaryPolynomial.AffineHeightCutoff
-import CCDN.AuxiliaryPolynomial.AffineTranslationCount
 import CCDN.Height.ScaledHypersurfaceHeight
+
 /-! CCDN Proposition 4.2.1 with the literal affine bad-prime factor.
 All box radii, zero constant coefficients and nonabsolute irreducible
 equations are included. The chart determinant proof handles good reductions

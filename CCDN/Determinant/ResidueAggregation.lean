@@ -9,6 +9,7 @@ public import CCDN.Determinant.LocalDeterminant
 public import Mathlib.Basic.Real.Basic
 import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 import Mathlib.Tactic.Linarith
+
 /-!
 # Aggregating the local determinant exponents for curves
 

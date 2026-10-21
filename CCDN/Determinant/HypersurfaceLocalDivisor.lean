@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.AuxiliaryPolynomial.DegreeBound
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
+public import CCDN.Plane.FiniteFieldConstants
 import CCDN.Determinant.HypersurfaceCountNormalization
 import CCDN.Hypersurface.ProjectiveHypersurfaceCount
+
 /-! CCDN Lemma 2.8 and Corollary 2.9, including the finite-field count.
 All constants depend only on dimension. -/
 

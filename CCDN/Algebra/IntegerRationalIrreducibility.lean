@@ -7,9 +7,10 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Degrees
 import CCDN.Algebra.PrimitiveNormalization
+import CCDN.ForMathlib.MvPolynomial
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
-import CCDN.ForMathlib.MvPolynomial
+
 /-! Positive-degree irreducible integer equations remain irreducible over Q.
 Primitive denominator-cleared divisors give an elementary Gauss argument. -/
 

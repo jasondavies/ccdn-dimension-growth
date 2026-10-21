@@ -6,8 +6,6 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.NonRationalProjectiveCount
-import CCDN.Hypersurface.LowDegreePointSeparation
-import CCDN.Hypersurface.ProjectiveCoefficientExtension
 import CCDN.Center.HomogeneousCurveHilbert
 import CCDN.Hilbert.CoefficientEquiv
 import CCDN.Hilbert.HomogeneousPrimeComponents
@@ -16,7 +14,10 @@ import CCDN.Hypersurface.GaloisComponentDegree
 import CCDN.Hypersurface.GaloisComponentPoints
 import CCDN.Hypersurface.GaloisPolynomialPrimes
 import CCDN.Hypersurface.GaloisStableIdealDescent
+import CCDN.Hypersurface.LowDegreePointSeparation
+import CCDN.Hypersurface.ProjectiveCoefficientExtension
 import CCDN.Surface.TopFormIrreducibility
+
 /-! Height-independent quadratic-degree bounds for the projective curve
 cases of CCDN 4.1.5. Homogeneous separators and all scalar-extension point
 maps are constructed internally. -/

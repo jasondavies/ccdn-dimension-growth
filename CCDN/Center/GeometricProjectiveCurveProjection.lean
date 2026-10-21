@@ -5,23 +5,23 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ProjectivePermutation
 public import CCDN.Algebra.ProjectiveChartIdeal
+public import CCDN.Algebra.ProjectivePermutation
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.DegreePreservingProjectionBox
 public import CCDN.Projection.ImageFractionField
-import CCDN.Center.HomogeneousCurveHilbert
-import CCDN.Center.ProjectiveIncidencePermutation
-import CCDN.Hilbert.CoordinateIndependence
-import CCDN.Projection.AffineProjectionCount
 import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Algebra.ProjectiveChartScalarExtension
-import CCDN.Algebra.ScaledHypersurfaceModel
-import CCDN.Projection.ProjectiveProjectionCount
-import CCDN.ForMathlib.MvPolynomial
 import CCDN.Algebra.ReconstructionFunctionField
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Center.HomogeneousCurveHilbert
+import CCDN.Center.ProjectiveIncidencePermutation
+import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hilbert.CoordinateIndependence
+import CCDN.Projection.AffineProjectionCount
 import CCDN.Projection.BoundedDegreePreservingProjection
 import CCDN.Projection.DegreePreservingProjectionCount
+import CCDN.Projection.ProjectiveProjectionCount
 
 /-!
 The geometric projective-curve projection statement, uniformly for all

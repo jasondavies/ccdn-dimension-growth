@@ -8,6 +8,7 @@ module
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.ForMathlib.Matrix
+
 /-! The literal center projection from Section 5: its coordinates are the
 maximal minors obtained by adjoining the point as the first row of a center
 matrix. Its kernel is exactly the span of the independent center rows, and

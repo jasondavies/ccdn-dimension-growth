@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.AffineTranslation
+public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.Noether.GenericPlaneStretch
-public import CCDN.Algebra.ScaledHomogenization
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Determinant.ProjectiveLocalDeterminant
 

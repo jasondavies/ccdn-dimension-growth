@@ -7,6 +7,7 @@ module
 
 public import CCDN.Plane.ScaledPlaneCount
 import CCDN.ForMathlib.Log
+
 /-! The scaling-prime interval yields the affine box exponent 1/d. These
 numerical bounds are independent of the coefficient height. -/
 

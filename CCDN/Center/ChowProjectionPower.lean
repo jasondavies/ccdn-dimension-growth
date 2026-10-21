@@ -7,6 +7,7 @@ module
 
 public import CCDN.Center.ChowLinearSpecialization
 import Mathlib.Algebra.MvPolynomial.Funext
+
 /-! The geometric power criterion for the restriction of a Chow
 incidence equation along a linear projection. Meeting the center forces the
 restriction to vanish identically; a disjoint center gives precisely a scalar

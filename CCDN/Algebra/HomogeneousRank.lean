@@ -12,6 +12,7 @@ import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.FilteredIntersection
 import CCDN.Hilbert.HomogeneousHilbert
+
 /-! The homogeneous Hilbert count bounds evaluation-matrix ranks.
 The deficit includes every degree-allowed multiple of the defining equation. -/
 

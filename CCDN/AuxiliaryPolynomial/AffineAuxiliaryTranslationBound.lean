@@ -8,6 +8,7 @@ module
 public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineMinimum
 import CCDN.AuxiliaryPolynomial.HypersurfacePositionHeight
 import CCDN.ForMathlib.Log
+
 /-! Translating the affine box by a vector bounded by the degree costs only
  a dimension constant in the coefficient-sensitive minimum bound. -/
 

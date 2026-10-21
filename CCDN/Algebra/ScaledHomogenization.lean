@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousChart
+
 /-! Integral scaled homogenization. The point (h,x) on the homogeneous model
 corresponds to the original integer affine point x, without dividing coordinates. -/
 

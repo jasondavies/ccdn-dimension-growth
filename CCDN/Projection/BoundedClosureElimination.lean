@@ -9,10 +9,11 @@ public import CCDN.Algebra.IntegerLinearForms
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.ProjectiveClosureProjection
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import CCDN.Projection.ProjectiveClosureSpecialization
-import CCDN.Projection.HilbertLowDegreeEquation
 import CCDN.Projection.FixedCoordinateElimination
+import CCDN.Projection.HilbertLowDegreeEquation
 import CCDN.Projection.IntegralProjectionHilbert
+import CCDN.Projection.ProjectiveClosureSpecialization
+
 /-! A bounded elimination step whose affine projection and projective
 closure projection are both integral. The latter map fixes X₀. -/
 

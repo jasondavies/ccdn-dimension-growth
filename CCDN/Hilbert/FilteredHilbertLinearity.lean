@@ -11,6 +11,7 @@ import CCDN.Hilbert.FunctionFieldRank
 import CCDN.Hilbert.StandardMonomials
 import Mathlib.LinearAlgebra.Dimension.Finite
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+
 /-!
 # Eventual linearity from a linear Hilbert bound
 

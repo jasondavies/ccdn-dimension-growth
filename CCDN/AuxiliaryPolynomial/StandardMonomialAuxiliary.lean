@@ -5,11 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-import ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.MonomialEvaluationMatrix
 public import CCDN.ForMathlib.StandardExponents
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
-import CCDN.Algebra.RowSelection
+import ArithmeticHeights.BombieriVaaler
 import CCDN.Algebra.RowSelection
 
 /-! Vanishing maximal determinants on a standard-monomial family produce

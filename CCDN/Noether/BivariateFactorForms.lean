@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.BivariateClosedForms
+
 /-! Explicit closed forms from polynomial factors, including repeated factors.
 These supply reducibility obstructions for the differential matrix. -/
 

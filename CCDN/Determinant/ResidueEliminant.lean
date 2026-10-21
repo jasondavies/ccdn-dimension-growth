@@ -9,6 +9,7 @@ public import Mathlib.FieldTheory.RatFunc.Basic
 public import Mathlib.RingTheory.Polynomial.Resultant.Basic
 public import Mathlib.RingTheory.SimpleRing.Principal
 import CCDN.ForMathlib.Polynomial
+
 /-! The eliminant for a ratio g(beta)/f'(beta).
 For f,g in F[t][z], coefficients are lifted into F[u][t], and z is
 eliminated from f and u*f'-g. The resulting polynomial has outer t-degree

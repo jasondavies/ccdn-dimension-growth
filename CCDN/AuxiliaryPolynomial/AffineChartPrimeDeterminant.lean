@@ -11,6 +11,7 @@ import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 import CCDN.Determinant.ProjectiveOpenResidueDeterminant
 import CCDN.ForMathlib.MvPolynomial
+
 /-! The sharp prime determinant estimate from the literal affine reduction.
 Loss of degree in that reduction is allowed: the extra powers of the
 homogenizing coordinate are invertible at all supplied points. -/

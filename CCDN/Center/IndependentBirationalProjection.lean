@@ -8,6 +8,7 @@ module
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
 import CCDN.Center.IndependentProjectionRows
 import CCDN.Projection.LeadingCoordinateExtension
+
 /-! The bounded homogeneous birational projection can always be chosen
 with independent ambient rows, including degree one. If its primitive row
 is redundant, the normalization rows already generate the function field;

@@ -8,6 +8,7 @@ module
 public import CCDN.Hypersurface.HyperplaneSlicingInduction
 import CCDN.Hypersurface.IntegerGoodHyperplaneSlices
 import CCDN.Surface.AffineSurfaceDimensionGrowth
+
 /-! Affine hypersurface dimension growth with the corrected degree exponent: the surface bound
 `d^18` of Proposition 4.3.4 starts the hyperplane-slicing induction, which costs `d^3` for each
 further variable, and clearing denominators passes from integer to rational equations. -/

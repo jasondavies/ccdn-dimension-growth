@@ -7,11 +7,12 @@ module
 
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.Algebraic.Defs
-import CCDN.Plane.NonabsolutePlaneCount
-import CCDN.Hilbert.PlaneHilbert
-import CCDN.Projection.PlaneProjectionKernel
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.AffineCurveDegree
+import CCDN.Hilbert.PlaneHilbert
+import CCDN.Plane.NonabsolutePlaneCount
+import CCDN.Projection.PlaneProjectionKernel
+
 /-! The irreducible image equation has degree at most the original affine
 Hilbert degree. This is an upper bound; the degree need not be preserved. -/
 

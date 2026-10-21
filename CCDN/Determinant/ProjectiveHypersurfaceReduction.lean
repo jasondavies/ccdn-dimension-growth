@@ -8,6 +8,7 @@ module
 public import CCDN.Determinant.ProjectiveHypersurfaceLocal
 public import CCDN.Determinant.ProjectiveReduction
 import CCDN.Height.ProjectiveZeroLocus
+
 /-! Projective residue points determine unit charts and integral lifts
 in arbitrary dimension. Their reduced affine equations vanish at those lifts. -/
 

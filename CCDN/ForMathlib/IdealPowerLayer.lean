@@ -8,9 +8,9 @@ module
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.RingTheory.Ideal.Quotient.Index
-import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.LinearAlgebra.Dimension.Free
+import Mathlib.RingTheory.Ideal.Quotient.Index
 
 /-!
 # Layers of the powers of an ideal

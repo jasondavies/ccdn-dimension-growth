@@ -5,14 +5,15 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Plane.IntegerPlaneLogHeight
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.AuxiliaryPolynomial.CongruenceBadPrimeCharge
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceAuxiliary
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceBadPrimes
 import CCDN.Determinant.AffineCongruenceDeterminant
+
 /-! The affine congruence determinant bound with all bad-prime charges
 controlled by the equation's coefficient height and congruence modulus. -/
 

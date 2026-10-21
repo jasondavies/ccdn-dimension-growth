@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.IntegralAffineLine
 public import CCDN.Algebra.AffineLineLeading
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Hilbert.AffineCurveDegree
-public import CCDN.Algebra.IdealZeroLocus
-import CCDN.Surface.TopFormIrreducibility
+public import CCDN.Plane.IntegralAffineLine
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Surface.TopFormIrreducibility
+
 /-! Directions of rational affine lines on a surface. Lines with two
 bounded integer points have a bounded projective direction and a spacing
 bound expressed using its representative-independent projective height. -/

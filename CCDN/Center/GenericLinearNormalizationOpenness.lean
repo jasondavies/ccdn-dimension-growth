@@ -13,6 +13,7 @@ import CCDN.Center.GenericHomogeneousGeneration
 import CCDN.Center.HomogeneousParameterCertificates
 import CCDN.Center.HomogeneousParameterPowers
 import CCDN.Hilbert.HomogeneousPrimeComponents
+
 /-! Finiteness of homogeneous linear parameters at one coefficient
 specialization implies finiteness at algebraically independent coefficients.
 The proof constructs a full homogeneous coefficient determinant internally. -/

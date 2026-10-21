@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.RadialMap
 public import CCDN.Hilbert.InfinitySection
+
 /-! Radial scaling records the homogeneous components as coefficients of a
 single polynomial. -/
 

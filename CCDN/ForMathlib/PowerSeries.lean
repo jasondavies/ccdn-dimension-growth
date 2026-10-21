@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.PowerSeries.Order
 public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.RingTheory.PowerSeries.Order
 
 /-!
 # Linear independence of power series with distinct orders

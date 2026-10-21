@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Height.Box
+public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Noether.ClosedFormHeight
 public import CCDN.Plane.FiniteFieldBadPlanes
-public import CCDN.Height.IntegerCoefficientHeight
-public import CCDN.Height.Box
 import CCDN.Height.PolynomialBoxHeight
 import CCDN.Noether.UniversalPlaneSpecialization
 import CCDN.Plane.GridHeight
+
 /-! Coefficient height of an integer plane section with bounded
 parameters, and the resulting bound on the universal bad-prime witness. -/
 

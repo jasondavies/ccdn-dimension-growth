@@ -7,10 +7,11 @@ module
 
 public import CCDN.Hilbert.FilteredPrimeDecomposition
 public import CCDN.Surface.CurveComponents
-import CCDN.Surface.CompleteIntersectionDegreeBudget
 import CCDN.ForMathlib.KrullHeight
 import CCDN.Plane.Bezout
+import CCDN.Surface.CompleteIntersectionDegreeBudget
 import CCDN.Surface.NonlinearCount
+
 /-! Degree and proper-section budgets for any finite family of distinct
 prime curves on a surface section. A curve constructed by another
 auxiliary is counted as a component of the section whenever its ideal

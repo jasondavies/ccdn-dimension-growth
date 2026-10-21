@@ -7,9 +7,9 @@ module
 
 public import Mathlib.Algebra.Polynomial.Degree.Defs
 public import Mathlib.Algebra.Polynomial.Eval.Defs
+import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 import Mathlib.RingTheory.Polynomial.Eisenstein.Basic
 import Mathlib.RingTheory.SimpleRing.Principal
-import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 import Mathlib.Tactic.FieldSimp
 
 /-! Explicit absolutely irreducible equations through a Cartesian grid.

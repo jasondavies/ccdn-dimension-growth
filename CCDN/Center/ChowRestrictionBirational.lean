@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowLinearSpecialization
-public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.ImageFractionField
 import CCDN.Center.ChowPolynomialPower
 import CCDN.Center.ChowProjectionCriterion
 import CCDN.Center.ChowProjectionPower
@@ -15,9 +15,10 @@ import CCDN.Center.ChowRowSymmetry
 import CCDN.Center.GeometricProjectionHilbert
 import CCDN.Center.HomogeneousProjectionBirational
 import CCDN.Center.ProjectiveChowExactDegree
-import CCDN.Hilbert.ScalarExtension
 import CCDN.Hilbert.HomogeneousPrimeComponents
+import CCDN.Hilbert.ScalarExtension
 import CCDN.Projection.IntegralProjectionHilbert
+
 /-! A disjoint projection center gives an irreducible Chow restriction
 exactly when its coordinate-field extension is birational. Source
 and image degrees are the proved Hilbert multiplicities. -/

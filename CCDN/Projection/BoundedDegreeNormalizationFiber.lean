@@ -14,6 +14,7 @@ import CCDN.Hilbert.LinearCoordinates
 import CCDN.Projection.IntegralFiberRank
 import CCDN.Projection.PrimitiveCoordinateField
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
+
 /-! Sharp fibers of integral polynomial parameters of degree at most q.
 The Hilbert multiplicity bounds the field degree by d*q^dimension;
 a separating integral element gives the same bound for every finite fiber. -/

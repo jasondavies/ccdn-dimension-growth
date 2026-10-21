@@ -10,6 +10,7 @@ import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Surface.CurveCrossing
 import CCDN.Surface.NonlinearCount
 import Mathlib.Algebra.Order.Star.Real
+
 /-! Counting the proper sections attached to one residue-subset
 edge, including the sum over all smooth residue tuples. -/
 

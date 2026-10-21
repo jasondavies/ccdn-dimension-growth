@@ -6,9 +6,10 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Ring
+
 /-! Reciprocal estimates retain the exact leading coefficients when solving
 the normalized determinant inequality, even when its bracket is negative. -/
 

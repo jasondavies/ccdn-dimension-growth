@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.MvPolynomial.Degrees
 public import Mathlib.Data.Fin.VecNotation
 import CCDN.Noether.BivariateTotalDegree
+
 /-! Integral plane shears are polynomial-ring automorphisms in every
 characteristic. They will place the highest-degree part in the outer variable. -/
 

@@ -7,6 +7,7 @@ module
 
 public import CCDN.ClassGroup.IntegerTranslationClassPacking
 import CCDN.ClassGroup.NumberFieldEuclideanLattice
+
 /-! A packing estimate using the separation of distinct algebraic integers.
 It is uniform in the number field, including fields of degree one, and
 does not require a lower bound on the radius in terms of the discriminant. -/

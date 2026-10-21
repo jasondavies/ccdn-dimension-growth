@@ -5,15 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.FiniteFieldBadPlanes
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Plane.FiniteFieldBadPlanes
+import CCDN.Algebra.PrimitiveNormalization
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 import CCDN.Determinant.PlaneMultiplicity
-import CCDN.Noether.UniversalPlaneSpecialization
-import CCDN.Algebra.PrimitiveNormalization
-import CCDN.Noether.ShearNormalization
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Noether.ShearNormalization
+import CCDN.Noether.UniversalPlaneSpecialization
 
 /-! Irreducible plane sections transverse to a prescribed direction.
 The avoidance condition also ensures that a second equation restricts

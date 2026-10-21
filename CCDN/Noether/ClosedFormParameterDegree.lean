@@ -8,6 +8,7 @@ module
 public import CCDN.Noether.BivariateCoefficientMatrix
 import CCDN.Noether.ClosedFormHeight
 import Mathlib.Algebra.MvPolynomial.CommRing
+
 /-! Parameter degrees of the closed-form matrix and its minors. Differentiation
 in the two plane coordinates does not increase the parameter degree. -/
 

@@ -6,10 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredIntersection
-public import Mathlib.RingTheory.Algebraic.Defs
 public import CCDN.Plane.LinearDeformation
-import CCDN.Projection.PlaneRelationSpace
+public import Mathlib.RingTheory.Algebraic.Defs
 import CCDN.Projection.CurveProjectionDeformation
+import CCDN.Projection.PlaneRelationSpace
 
 /-!
 A degree-preserving linear plane projection admits reconstruction using

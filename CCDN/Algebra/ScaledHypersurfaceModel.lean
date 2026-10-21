@@ -10,8 +10,9 @@ import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.HomogeneousSlice
 import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.Algebra.ScaledHomogenizationPrimitive
-import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import CCDN.ForMathlib.MvPolynomial
+import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+
 /-! Irreducibility and coefficient maps of scaled homogeneous models in
 arbitrary dimension, including reduction modulo primes. -/
 

@@ -8,10 +8,11 @@ module
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveBox
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Projection.ProjectiveLinearCountTransfer
 import CCDN.Plane.ProjectivePlaneLinearCount
 import CCDN.Projection.BoundedBirationalHypersurfaceProjection
 import CCDN.Projection.BoundedDegreeNormalizationFiber
+import CCDN.Projection.ProjectiveLinearCountTransfer
+
 /-! The plane curve estimate gives a smaller degree exponent for curves
 specified by their filtered Hilbert polynomial. The construction of
 the finite birational projection and its integer matrix is internal. -/

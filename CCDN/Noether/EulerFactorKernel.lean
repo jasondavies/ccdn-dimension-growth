@@ -9,6 +9,7 @@ public import CCDN.Noether.EulerClosedFormRank
 import CCDN.Noether.BivariateFactorForms
 import CCDN.Noether.ClosedFormScaling
 import CCDN.Noether.EulerPairRange
+
 /-! Degree-correct logarithmic factor forms for the Euler-restricted
 operator. The construction works in every characteristic. -/
 

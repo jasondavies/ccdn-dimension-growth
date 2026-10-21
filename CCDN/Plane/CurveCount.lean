@@ -6,11 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.RationalPlaneAssembly
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Plane.NonabsolutePlaneCount
 import CCDN.Plane.StepanovBound
 import CCDN.Plane.StepanovDimension
 import CCDN.Plane.StepanovParameters
-import CCDN.ForMathlib.MvPolynomial
 
 /-!
 Sharp finite-field counting and the complete rational-plane

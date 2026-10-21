@@ -7,6 +7,7 @@ module
 
 public import CCDN.Statements
 import CCDN.Curve.ProjectiveCurveCount
+
 /-! CCDN Theorem 2 in every ambient dimension. Degree is the slope of
 the homogeneous Hilbert function. The height and count use rational
 projective points. All projection and plane-counting inputs are proved; the count with an

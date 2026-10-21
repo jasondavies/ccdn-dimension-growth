@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.Box
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.LowerBound.GridCurveConstruction
 import CCDN.LowerBound.GridLowerBoundNumerics
 

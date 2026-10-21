@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.MvPolynomial.Degrees
 public import CCDN.Height.IntegerCoefficientHeight
+public import Mathlib.Algebra.MvPolynomial.Degrees
 import Mathlib.Algebra.Order.BigOperators.Ring.Finset
 import Mathlib.Tactic.Linarith
+
 /-! Coefficient-height bounds for evaluating a polynomial on a bounded box.
 The constants depend only on total degree and the number of variables. -/
 

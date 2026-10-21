@@ -8,6 +8,7 @@ module
 public import Mathlib.LinearAlgebra.Matrix.Adjugate
 import CCDN.ForMathlib.Matrix
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
+
 /-! Bounded integral linear forms dual to independent integer rows.
 A nonzero minor and its cofactors give the separation required in CCDN
 Lemma 5.4, with the bound s! T^s for s+1 independent equations. -/

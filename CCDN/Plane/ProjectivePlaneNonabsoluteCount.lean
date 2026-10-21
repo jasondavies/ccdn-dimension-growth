@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.ProjectivePlaneAbsoluteCount
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Plane.ProjectivePlaneAbsoluteCount
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.ProjectiveAffineChart
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Plane.NonabsolutePlaneCount
 import CCDN.Plane.ProjectivePlaneBezout
-import CCDN.ForMathlib.MvPolynomial
+
 /-! Curves that are irreducible over the base field but split over an
 extension have at most d^2+d projective base-field points. -/
 

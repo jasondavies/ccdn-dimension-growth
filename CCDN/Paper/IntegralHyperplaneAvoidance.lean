@@ -7,6 +7,7 @@ module
 
 public import CCDN.Hypersurface.HyperplaneSectionIdeal
 import CCDN.Hypersurface.EffectiveHyperplaneAvoidance
+
 /-! Effective avoidance for the homogeneous hyperplane intersection
 ideal, including degree one and coincident hyperplanes. -/
 

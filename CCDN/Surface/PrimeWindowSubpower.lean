@@ -7,6 +7,7 @@ module
 
 public import CCDN.Surface.CongruencePrimeWindow
 import CCDN.Analysis.SmallDegreeSurfaceNumerics
+
 /-! The number of subsets and edges of a common logarithmic prime window
 costs only an arbitrarily small positive power of the box radius. Constants
 are fixed before the radius, including the bounded range near B = 1. -/

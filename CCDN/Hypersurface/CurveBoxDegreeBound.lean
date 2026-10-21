@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
+public import CCDN.Hilbert.AffineCurveDegree
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.RingTheory.Ideal.Height
 import CCDN.Algebra.PolynomialSection
 import CCDN.Hilbert.PrimeComponentTranscendence
+
 /-! The elementary linear box bound for prime curves in affine
 three-space. A transcendental coordinate has fibers of size at most the
 affine Hilbert degree, and the integer box has only 2 floor(B)+1 values

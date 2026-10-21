@@ -9,6 +9,7 @@ public import CCDN.Noether.BivariateTotalDegree
 public import Mathlib.Basic.Real.Basic
 import CCDN.Height.MultivariateGridHeight
 import CCDN.Noether.ShearNormalization
+
 /-! A coefficient-height witness on the bounded integer plane grid: the case n = 2 of
 `CCDN.Height.MultivariateGridHeight`. -/
 

@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.MinorProjection
 public import CCDN.Center.ChowLinearSpecialization
+public import CCDN.Center.MinorProjection
 public import CCDN.Projection.ImageFractionField
 import CCDN.Center.MatrixProjectionFields
+
 /-! Enumerating the maximal-minor coordinates turns the source's
 Plücker projection into a matrix with exactly the center as its kernel.
 The Chow specialization results are stated for matrices with rows indexed by

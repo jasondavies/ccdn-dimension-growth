@@ -10,6 +10,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 import CCDN.Center.GenericPolynomialIndependence
 import CCDN.Hilbert.CoordinateIndependence
+
 /-! Generic hyperplane evaluations retain the full number of independent
 coordinates of the affine variety, together with their coefficient variables. -/
 

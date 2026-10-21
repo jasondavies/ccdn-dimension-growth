@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Module.ZLattice.Basic
 import CCDN.ForMathlib.ZLattice
-import CCDN.ForMathlib.ZLattice
 
 /-! A lattice basis with a prescribed nonzero first vector. Every later
 vector is shortest outside the previous span. A given global

@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ZeroColumnCenterDensity
 public import CCDN.Center.MinorMatrix
+public import CCDN.Center.ZeroColumnCenterDensity
 import CCDN.Center.GeometricProjectionHilbert
 import CCDN.ForMathlib.Matrix
 

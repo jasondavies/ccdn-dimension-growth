@@ -8,9 +8,10 @@ module
 public import CCDN.Height.ProjectiveZeroLocus
 import CCDN.Algebra.HomogeneousLinearDescent
 import CCDN.Algebra.PrimitiveNormalization
+import CCDN.ForMathlib.MvPolynomial
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
-import CCDN.ForMathlib.MvPolynomial
+
 /-! A degree-d auxiliary equation for nonabsolute irreducible hypersurfaces.
 Linear descent of the two homogeneous factors suffices over any extension. -/
 

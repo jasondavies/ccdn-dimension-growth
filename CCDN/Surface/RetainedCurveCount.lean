@@ -8,8 +8,9 @@ module
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Surface.CurveComponents
 import CCDN.Analysis.SmallDegreeSurfaceNumerics
-import CCDN.Surface.SmallDegreeSurfaceCurveCount
 import CCDN.Surface.DegreeOneCount
+import CCDN.Surface.SmallDegreeSurfaceCurveCount
+
 /-! The retained part of the small-degree surface cover. Lines and
 nonlinear prime curves are counted together, using their common degree
 budget and the logarithmic cap on the retained degrees. -/

@@ -10,8 +10,9 @@ public import Mathlib.Algebra.Polynomial.Degree.Defs
 public import Mathlib.Algebra.Polynomial.Eval.Defs
 import CCDN.AuxiliaryPolynomial.AffineTranslationCount
 import CCDN.LowerBound.GridEisensteinDegree
-import CCDN.Plane.GridHeight
 import CCDN.Noether.ShearNormalization
+import CCDN.Plane.GridHeight
+
 /-! Absolutely irreducible plane equations through arbitrary finite square
 Cartesian grids. Translation moves the Eisenstein place away from the grid. -/
 

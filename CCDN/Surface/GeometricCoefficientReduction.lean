@@ -5,12 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.GeometricCurveCover
 public import CCDN.Surface.CoefficientReduction
+public import CCDN.Surface.GeometricCurveCover
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceAuxiliary
 import CCDN.Surface.CompleteIntersectionDegreeBudget
 import Mathlib.Algebra.Order.Star.Real
+
 /-! The large-coefficient alternative for the exact surface covering
 statement: bounded-degree geometric curves and a height-independent residual. -/
 

@@ -7,6 +7,7 @@ module
 
 public import CCDN.Center.GenericBlockLine
 public import CCDN.Center.ResultantCoefficientFamily
+
 /-! Generic affine-line restriction preserves homogeneity in coefficient
 parameters. The resulting derivative-resultant coefficient family therefore
 has the sharp quadratic degree needed for center avoidance. -/

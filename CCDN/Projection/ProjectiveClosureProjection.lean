@@ -7,8 +7,9 @@ module
 
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Hilbert.LinearProjectionFiltration
-import CCDN.Projection.HomogeneousFilteredProjection
 import CCDN.Algebra.ProjectionScalarExtension
+import CCDN.Projection.HomogeneousFilteredProjection
+
 /-! Homogenizing a linear affine projection while retaining its homogenizing
 coordinate gives the projective closure of its affine image ideal. -/
 

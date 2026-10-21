@@ -10,8 +10,8 @@ public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Analysis.Real.Sqrt
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
-import CCDN.Plane.SectionSum
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Plane.SectionSum
 
 /-!
 A sharp coefficient-uniform count for geometrically irreducible affine

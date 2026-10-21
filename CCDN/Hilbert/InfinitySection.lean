@@ -9,6 +9,7 @@ public import CCDN.Algebra.ProjectiveFiltration
 import CCDN.Algebra.CoordinatePowerGeneration
 import Mathlib.LinearAlgebra.Dimension.Localization
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
 /-!
 # The quotient by the infinity coordinate
 

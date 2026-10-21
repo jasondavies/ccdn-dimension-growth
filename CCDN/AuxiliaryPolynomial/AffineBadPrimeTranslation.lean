@@ -6,9 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.AffineTranslation
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
+public import CCDN.AuxiliaryPolynomial.Nonmultiple
 import CCDN.AuxiliaryPolynomial.AffineTranslationCount
+
 /-! Integral translations preserve the affine bad-prime factor, including
 degree-dropping reductions and the nonabsolute zero convention. -/
 

@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowLinearSpecialization
-public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.ImageFractionField
 public import Mathlib.RingTheory.MvPolynomial
 import CCDN.Center.ClosureNormalizationInfinite
 import CCDN.Center.FixedCoordinateGenericNormalization
@@ -17,8 +17,9 @@ import CCDN.Center.IndependentPrimitiveExtension
 import CCDN.Hilbert.FullDimension
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import CCDN.Projection.IntegralProjectionHilbert
-import Mathlib.LinearAlgebra.Matrix.Rank
 import Mathlib.Algebra.CharZero.Infinite
+import Mathlib.LinearAlgebra.Matrix.Rank
+
 /-! Constructed finite birational centers at infinity. Every center row has
 zero homogenizing coordinate; the construction includes affine dimension
 zero. -/

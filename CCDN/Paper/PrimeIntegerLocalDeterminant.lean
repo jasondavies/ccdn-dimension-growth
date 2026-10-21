@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.Ideal.Int
 public import CCDN.Determinant.FiltrationWeights
 public import CCDN.Determinant.LocalPrimeReduction
+public import Mathlib.RingTheory.Ideal.Int
 import CCDN.Determinant.NoetherianLocalDeterminant
 import Mathlib.RingTheory.Filtration
 

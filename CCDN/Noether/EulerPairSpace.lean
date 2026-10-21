@@ -12,6 +12,7 @@ import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.LinearAlgebra.FreeModule.PID
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 import Mathlib.RingTheory.Finiteness.Prod
+
 /-! An explicit parameter space for Euler-constrained polynomial pairs.
 For degree d=k+2, its dimension is d^2-1: two polynomials of degree at most
 k and one homogeneous polynomial of degree k. -/

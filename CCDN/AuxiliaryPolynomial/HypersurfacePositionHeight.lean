@@ -6,12 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousTranslation
+public import CCDN.Height.IntegerCoefficientHeight
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
-public import CCDN.Height.IntegerCoefficientHeight
+import CCDN.Algebra.HomogeneousChart
 import CCDN.Height.MultivariateGridHeight
 import CCDN.Height.PolynomialBoxHeight
-import CCDN.Algebra.HomogeneousChart
 import CCDN.Plane.HomogeneousLeadingCoefficient
 
 /-!

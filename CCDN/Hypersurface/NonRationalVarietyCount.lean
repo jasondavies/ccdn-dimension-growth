@@ -5,14 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.ConjugatePrimeGridBound
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Hilbert.AffineCurveDegree
+public import CCDN.Hypersurface.ConjugatePrimeGridBound
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.FieldTheory.Galois.Basic
 import CCDN.Hypersurface.GaloisComponentDegree
 import CCDN.Hypersurface.GaloisComponentPoints
 import CCDN.Hypersurface.GaloisStableIdealDescent
+
 /-! The positive-dimensional affine statements of CCDN 4.1.3 and 4.1.4.
 Not being defined over the base field means that no base-field ideal extends
 to the given ideal. The moving automorphism, geometric component and its

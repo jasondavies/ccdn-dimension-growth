@@ -6,10 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Statements
-import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
-import CCDN.Hypersurface.AffineHypersurfaceCount
 import CCDN.Hilbert.PrimeIdealDimensionDrop
 import CCDN.Hilbert.PrincipalHilbertPolynomial
+import CCDN.Hypersurface.AffineHypersurfaceCount
+import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
 import CCDN.Projection.HomogeneousProjectionEquation
 
 /-!

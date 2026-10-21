@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowLinearSpecialization
-public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.ImageFractionField
 import CCDN.Center.ChowPolynomialPower
 import CCDN.Center.ChowProjectionCriterion
 import CCDN.Center.ChowProjectionPower
@@ -15,6 +15,7 @@ import CCDN.Center.ChowRowSymmetry
 import CCDN.Center.HomogeneousProjectionBirational
 import CCDN.Center.ProjectiveChowExactDegree
 import CCDN.Projection.IntegralProjectionHilbert
+
 /-! The Chow restriction and function-field birationality criterion
 over an algebraically closed field, allowing arbitrary geometric centers. -/
 

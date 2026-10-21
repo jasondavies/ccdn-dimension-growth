@@ -10,6 +10,7 @@ public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Center.GeometricProjectionCenter
+
 /-! Rational row matrices for the constructed geometric projection
 center. The rows form a basis of the kernel, and their scalar extension
 remains disjoint from the full projective source. -/

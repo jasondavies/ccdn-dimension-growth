@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.QuadraticInvariantIdeal
+
 /-! Compatibility of conjugation with integral representatives and with
 the scalar comparisons used in the definition of an ideal class. -/
 

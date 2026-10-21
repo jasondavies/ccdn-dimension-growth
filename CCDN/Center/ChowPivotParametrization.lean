@@ -6,9 +6,10 @@ Authors: Jason Davies
 module
 
 public import Mathlib.Algebra.MvPolynomial.Eval
-import Mathlib.Tactic.Positivity.Finset
 import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.Positivity.Finset
 import Mathlib.Tactic.Ring
+
 /-! A denominator-free parametrization of hyperplane tuples through a
 cone point, using an arbitrary nonzero pivot coordinate. -/
 

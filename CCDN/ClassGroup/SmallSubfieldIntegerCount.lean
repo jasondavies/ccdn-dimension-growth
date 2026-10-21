@@ -8,6 +8,7 @@ module
 public import CCDN.ClassGroup.IntegerTranslationClassPacking
 import CCDN.ClassGroup.SubfieldBoundedIntegers
 import CCDN.ForMathlib.FieldTheory
+
 /-! Parameters lying in intermediate fields of degree at most one
 quarter of the ambient degree have a uniform fourth-root contribution
 at the balanced discriminant radius. -/

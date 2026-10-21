@@ -6,11 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.SingularTangent
-import Mathlib.Tactic.Positivity.Finset
-import Mathlib.Tactic.LinearCombination
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.LinearAlgebra.Dimension.Free
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Positivity.Finset
 
 /-!
 Finite-precision generation of hypersurface local quotients.

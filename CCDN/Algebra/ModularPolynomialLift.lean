@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.RingTheory.MvPolynomial.Ideal
+
 /-! Coefficientwise integer lifts preserve homogeneous weights and origin-ideal
 powers. -/
 

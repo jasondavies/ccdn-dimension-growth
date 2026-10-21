@@ -6,10 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.PrimeScaledAffineMinimum
-import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceAuxiliary
 import CCDN.AuxiliaryPolynomial.AffineHeightCutoff
 import CCDN.AuxiliaryPolynomial.HypersurfaceHeightTransfer
+import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceAuxiliary
 import CCDN.Height.ScaledHypersurfaceHeight
+
 /-! The ordinary homogenization attains the affine box exponent on every
 polynomial range in the degree, with both terms of the minimum retained. -/
 

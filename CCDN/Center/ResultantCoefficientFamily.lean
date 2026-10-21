@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.CoefficientwiseHomogeneous
-public import Mathlib.RingTheory.Polynomial.Resultant.Basic
 public import Mathlib.FieldTheory.Separable
+public import Mathlib.RingTheory.Polynomial.Resultant.Basic
 
 /-! Fixed-size derivative resultants give a finite family of coefficient
 conditions, homogeneous of degree D(2d-1) in the original parameters. The

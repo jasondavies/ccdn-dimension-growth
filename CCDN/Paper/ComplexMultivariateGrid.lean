@@ -9,8 +9,8 @@ public import CCDN.Algebra.HomogeneousTranslation
 public import Mathlib.Analysis.Complex.Norm
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
 import CCDN.Algebra.HomogeneousChart
-import CCDN.Plane.HomogeneousLeadingCoefficient
 import CCDN.Height.MultivariateGridHeight
+import CCDN.Plane.HomogeneousLeadingCoefficient
 
 /-! Sharp complex integer-grid bounds for homogeneous polynomials. The affine
 grid bound of `CCDN.Height.MultivariateGridHeight` proves the exact coefficient-positioning

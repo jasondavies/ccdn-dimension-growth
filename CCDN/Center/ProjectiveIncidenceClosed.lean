@@ -9,6 +9,7 @@ public import CCDN.Center.ProjectiveChowIncidence
 import CCDN.Center.IncidenceDeterminantCertificate
 import CCDN.ForMathlib.Nullstellensatz
 import CCDN.Height.ProjectiveZeroLocus
+
 /-! Closedness of the projective hyperplane incidence image, proved by
 finite homogeneous coefficient matrices. Empty fibers produce a determinant
 which is nonzero there and vanishes at every tuple with a projective intersection. -/

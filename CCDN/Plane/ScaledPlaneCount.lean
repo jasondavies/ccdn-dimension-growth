@@ -8,10 +8,11 @@ module
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.PrimitiveIntegerPolynomial
-import CCDN.Plane.ScaledModelCoordinates
-import CCDN.Plane.ScaledModelPosition
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.AuxiliaryPolynomial.PolynomialMapAuxiliary
+import CCDN.Plane.ScaledModelCoordinates
+import CCDN.Plane.ScaledModelPosition
+
 /-! A prime-scaled plane point bound with the arbitrary coefficient
 height eliminated. The sharp finite-field count and a suitable scaling prime
 remain explicit hypotheses. -/

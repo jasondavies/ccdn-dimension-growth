@@ -7,6 +7,7 @@ module
 
 public import CCDN.Determinant.LocalPrimeReduction
 import Mathlib.Tactic.LinearCombination
+
 /-! Lift bases of mod-prime local layers to a Noetherian local ring.
 The resulting generators belong to the correct maximal-ideal powers, and
 their approximation errors are explicit sums of a high-order term and a

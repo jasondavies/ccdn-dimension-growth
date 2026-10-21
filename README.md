@@ -144,6 +144,9 @@ bash scripts/check.sh
 
 - `check-lean-sources.py`: every Lean source has the `module` header, is UTF-8 and has at most
   10,000 lines.
+- `normalize-imports.py --check`: every library module lists its `public import` lines, then
+  its plain imports, each sorted, between the `module` line and the module docstring; run the
+  script without `--check` to normalize the import blocks.
 - `check-layers.py`: the foundation directories and `CCDN/Statements.lean` import no topic
   directory, no library module imports an endpoint, and the side results are imported only
   from their own directory ([layout](#documentation)).
@@ -157,8 +160,9 @@ bash scripts/check.sh
   endpoint.
 - `check-consistency.py`: the compared theorems agree across `comparator.json`,
   `formalization.yaml`, `Challenge.lean`, `Solution.lean` and `Axioms.lean`; the discrepancy
-  table above and the statement counts agree with the audit; and the toolchain and Mathlib
-  revision quoted here match `lean-toolchain`, `lakefile.toml` and `lake-manifest.json`.
+  table above and the statement counts agree with the audit; the toolchain and Mathlib
+  revision quoted here match `lean-toolchain`, `lakefile.toml` and `lake-manifest.json`; and
+  this list names the commands of `scripts/check.sh`, in order.
 - `update-root.py --check` and `update-docs.py --check`: `CCDN.lean`, `docs/modules.md` and
   `docs/statements.md` are generated; run the scripts without `--check` after adding, moving or
   removing modules or editing the audit.

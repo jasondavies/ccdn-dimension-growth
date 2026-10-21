@@ -8,6 +8,7 @@ module
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import CCDN.AuxiliaryPolynomial.HypersurfaceRankArchimedean
 import CCDN.AuxiliaryPolynomial.HypersurfaceRankProfile
+
 /-! The logarithm of the exact hypersurface rank has the uniform leading
 term log(d)+r*log(M), with an explicit error depending only on dimension. -/
 

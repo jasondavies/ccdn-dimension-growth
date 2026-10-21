@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ImageFractionField
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.ImageFractionField
 import CCDN.Center.HomogeneousNormalizationRank
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
 import CCDN.Hilbert.LinearCoordinates
@@ -16,6 +16,7 @@ import CCDN.Projection.IntegralProjectionHilbert
 import CCDN.Projection.LinearNormalizationInfinite
 import Mathlib.Algebra.CharZero.Infinite
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
+
 /-! A finite homogeneous linear projection has function-field degree at most
 the quotient of source and image multiplicities. The proof constructs a
 finite independent linear normalization of its image. -/

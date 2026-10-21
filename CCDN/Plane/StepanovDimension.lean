@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Hilbert.FilteredIntersection
+public import CCDN.Plane.FiniteFieldConstants
 import CCDN.Hilbert.PlaneHilbert
 import CCDN.Plane.StepanovParameters
 import Mathlib.Data.Nat.Choose.Bounds
+
 /-! The exact plane Hilbert function verifies the Stepanov dimension inequality
 for the constructed integer parameters. -/
 

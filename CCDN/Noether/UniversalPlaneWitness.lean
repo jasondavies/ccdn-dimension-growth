@@ -5,15 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.CharZeroOrGT
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import CCDN.Noether.UniversalPlane
 public import CCDN.Algebra.AffineLineLeading
+public import CCDN.Algebra.CharZeroOrGT
+public import CCDN.Noether.UniversalPlane
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.UniversalPlaneMinor
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.ShearNormalization
-import CCDN.ForMathlib.MvPolynomial
 
 /-!
 A nonzero universal minor of cubic parameter degree, over the original coefficient field; the

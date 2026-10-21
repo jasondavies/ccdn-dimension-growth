@@ -8,8 +8,8 @@ module
 public import Mathlib.Algebra.Polynomial.Degree.Defs
 public import Mathlib.Algebra.Polynomial.Eval.Defs
 public import Mathlib.Analysis.Complex.Norm
-import Mathlib.LinearAlgebra.Lagrange
 import Mathlib.Analysis.Complex.Basic
+import Mathlib.LinearAlgebra.Lagrange
 
 /-! Sharp coefficient control from the integer grid. The absolute coefficient
 sum of each Lagrange basis polynomial is at most a binomial coefficient;

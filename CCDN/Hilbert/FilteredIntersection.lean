@@ -8,8 +8,8 @@ module
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
-import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import CCDN.ForMathlib.LinearMap
+import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 
 /-!
 # Filtered multiples in a two-equation ideal

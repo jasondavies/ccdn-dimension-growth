@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ProjectiveClosureProjection
-public import CCDN.Projection.IntegerHilbertElimination
 public import CCDN.Algebra.IntegerLinearForms
-import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
+public import CCDN.Projection.IntegerHilbertElimination
+public import CCDN.Projection.ProjectiveClosureProjection
 import CCDN.Algebra.ScaledHomogenization
+import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 
 /-!
 Full-degree affine elimination also gives an integral projection of the

@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.FiniteFieldBadPlanes
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Plane.FiniteFieldBadPlanes
 import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.UniversalPlaneSpecialization
+
 /-! A bounded geometrically good plane whose three parameter columns have
 an invertible minor in three selected ambient coordinates. This additional
 condition allows an effective containing hyperplane to be constructed. -/

@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Basic
 public import Mathlib.Basic.Real.Basic
+
 /-! The maximum absolute coefficient height of an integer polynomial, and the hypothesis
 `CoefficientHeightLE f H` that it is at most a real bound `H`. -/
 

@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
-public import Mathlib.RingTheory.PowerBasis
 public import CCDN.Algebra.LinearForm
 public import CCDN.Center.PolynomialCoefficientBasis
+public import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+public import Mathlib.RingTheory.PowerBasis
 
 /-! A generic linear form is primitive whenever one linear specialization
 is primitive. Independence follows from a specialization matrix;

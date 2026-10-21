@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
-import Mathlib.Algebra.MvPolynomial.Monad
 import CCDN.Algebra.OriginShift
 import CCDN.Center.MultivariateDeformation
+import Mathlib.Algebra.MvPolynomial.Monad
 
 /-!
 Independent values at one parameter specialization imply independence

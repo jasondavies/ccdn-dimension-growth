@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.PluckerCoordinates
+
 /-! Zariski topology defined by homogeneous projective equations, and its
 induced topology on center subspaces under the injective Plücker map.
 The row-span map from independent matrices is continuous for this topology. -/

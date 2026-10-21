@@ -10,6 +10,7 @@ public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
 import CCDN.Algebra.HomogeneousRankDichotomy
 import CCDN.Determinant.HomogeneousDeterminantComparison
+
 /-! The determinant comparison for polynomial homogeneous-coordinate maps of
 integer plane-curve points. The residue geometry comes from the plane
 equation, so coordinates such as (H,x,y) need no rational rows. -/

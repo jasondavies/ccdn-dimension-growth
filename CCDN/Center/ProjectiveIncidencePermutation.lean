@@ -10,6 +10,7 @@ public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.ProjectiveIncidenceClosed
 import CCDN.Hilbert.FilteredHilbertEquiv
+
 /-! Coordinate permutations transport the homogeneous ideal and
 projective hyperplane incidence, without choosing projective representatives. -/
 

@@ -5,12 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
+public import CCDN.Hilbert.AffineCurveDegree
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Hilbert.CompleteIntersectionGridBound
 import CCDN.Hypersurface.NonabsoluteSurfaceCount
+
 /-! Dimension growth for non-geometrically-irreducible rational
 hypersurfaces in every ambient dimension. The dependence on the degree
 is quadratic; the explicit constant depends only on dimension. -/

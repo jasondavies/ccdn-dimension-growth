@@ -7,10 +7,10 @@ module
 
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateTotalDegree
-import Mathlib.RingTheory.Polynomial.IsIntegral
 import CCDN.ForMathlib.Polynomial
 import CCDN.Noether.BivariateFactorForms
 import Mathlib.FieldTheory.RatFunc.AsPolynomial
+import Mathlib.RingTheory.Polynomial.IsIntegral
 
 /-!
 Reducibility forces a rank drop of the closed-form coefficient matrix for normalized monic

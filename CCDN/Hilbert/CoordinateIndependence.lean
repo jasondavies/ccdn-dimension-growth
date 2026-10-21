@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.MonomialOrthants
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
-public import CCDN.Algebra.MonomialOrthants
 import CCDN.Hilbert.OrthantMultiplicity
 
 /-! Maximal standard-monomial orthants construct algebraically

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+
 /-! Radial scaling `X j ↦ X j * T` of a multivariate polynomial; the coefficient of
 `T ^ n` is the homogeneous component of degree `n`. -/
 

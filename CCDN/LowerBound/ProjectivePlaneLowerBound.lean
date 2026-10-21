@@ -11,6 +11,7 @@ import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
 import CCDN.LowerBound.GridLowerBoundNumerics
 import CCDN.LowerBound.GridProjectiveLowerBound
 import CCDN.Plane.ProjectivePlaneBezout
+
 /-! The lower bound of CCDN Proposition 5 for projective plane equations, with its exact
 constant 1/5: the grid construction for degree at least four, and two rational points for
 smaller degrees. -/

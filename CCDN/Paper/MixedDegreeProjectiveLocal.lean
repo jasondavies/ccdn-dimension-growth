@@ -9,9 +9,9 @@ public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Determinant.HypersurfaceLocalDeterminant
 public import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.ProjectiveHypersurfaceLocal
-import CCDN.Determinant.ProjectiveHypersurfaceLocal
 import CCDN.Determinant.ProjectiveLocalDeterminant
 import CCDN.ForMathlib.Matrix
+
 /-! Local determinant divisibility for homogeneous columns of arbitrary
 degrees, with the normalization required by affine-chart evaluation.
 

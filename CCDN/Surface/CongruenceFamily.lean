@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.CongruenceCutoff
 public import CCDN.Determinant.SmoothAffineResidueClasses
+public import CCDN.Surface.CongruenceCutoff
+
 /-! A coherent choice of proper auxiliaries for every finite
 smooth residue family. The structure stores conclusions of the determinant
 theorem; its existence is proved from the equation. -/

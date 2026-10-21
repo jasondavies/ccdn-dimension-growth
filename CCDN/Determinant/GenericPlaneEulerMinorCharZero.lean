@@ -8,10 +8,10 @@ module
 public import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
 public import CCDN.Noether.EulerPairBasis
 import CCDN.Determinant.GenericPlaneMinor
-import CCDN.Determinant.GenericPlaneMinor
 import CCDN.Noether.EulerPairBasisValues
 import CCDN.Noether.EulerPairSpecialization
 import CCDN.Noether.ShearNormalization
+
 /-! Nonzero Euler minors in smooth generic-plane families. The order is
 exactly d²−1, and the smooth-point argument constructs the geometric
 irreducibility needed by the characteristic-zero closed-form theorem. -/

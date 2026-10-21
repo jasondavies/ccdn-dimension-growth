@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.InfinityParameterReduction
 public import CCDN.Projection.CurvePrimitivePair
+public import CCDN.Projection.InfinityParameterReduction
 import CCDN.Algebra.BoundedLinearSeparation
 import CCDN.Algebra.CoordinatePowerGeneration
 import Mathlib.Algebra.Polynomial.OfFn
+
 /-! An explicit bounded integer moment form avoids any prescribed finite set
 of nonzero directions. No separation of pairs is needed for this step. -/
 

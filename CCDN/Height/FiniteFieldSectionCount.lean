@@ -8,10 +8,10 @@ module
 public import Mathlib.Algebra.MvPolynomial.Degrees
 import CCDN.Algebra.BinomialSectionBound
 import CCDN.Algebra.GridPointInterpolation
-import Mathlib.Tactic.Positivity.Finset
-import Mathlib.Algebra.Order.Star.Int
 import Mathlib.Algebra.Order.Ring.Star
+import Mathlib.Algebra.Order.Star.Int
 import Mathlib.Data.Nat.Choose.Bounds
+import Mathlib.Tactic.Positivity.Finset
 
 /-! Finite-field point bounds for a proper section of an irreducible
 hypersurface. The proof uses polynomial interpolation and the filtered

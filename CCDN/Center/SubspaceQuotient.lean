@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.BirationalCenterLocus
+
 /-! Fixed-dimensional linear subspaces, as the row spans of independent
 center matrices. Their topology is the Zariski topology induced by Plücker
 coordinates (`PluckerZariski`). -/

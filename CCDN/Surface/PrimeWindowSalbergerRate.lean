@@ -8,6 +8,7 @@ module
 public import CCDN.Surface.CongruencePrimeWindow
 import CCDN.AuxiliaryPolynomial.HypersurfaceRankArchimedean
 import CCDN.Surface.PrimeWindowSubpower
+
 /-! The precise subpower scale in Salberger's covering theorem. The number
 of prime-window edges and any fixed logarithmic loss are bounded by
 B^(c/log(1+log B)), with constants fixed before B. -/

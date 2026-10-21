@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.EulerPairSpace
 public import CCDN.Noether.BivariateTotalDegree
 public import CCDN.Noether.EulerClosedForms
+public import CCDN.Noether.EulerPairSpace
 import CCDN.Noether.ClosedFormScaling
 import CCDN.Noether.ShearNormalization
+
 /-! The Euler-constrained closed-form operator has full rank d^2-1 for
 irreducible bivariate equations of full outer degree in characteristic zero. -/
 

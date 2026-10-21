@@ -7,10 +7,10 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Equiv
 public import Mathlib.Analysis.Complex.Norm
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Height.ComplexGridInterpolation
 import Mathlib.Tactic.IntervalCases
 import Mathlib.Tactic.Positivity
-import CCDN.ForMathlib.MvPolynomial
 
 /-! Coefficient control on the integer grid in every finite dimension.
 Iterating the sharp univariate bound gives the factor 3^(nd) over ℂ (CCDN Lemma 3.4.2);

@@ -9,18 +9,18 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.ProjectiveClosureProjection
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import CCDN.Projection.ProjectiveClosureSpecialization
-import CCDN.ForMathlib.FractionRing
 import CCDN.Center.ClosurePolynomialFractionField
 import CCDN.Center.HomogeneousNormalizationRank
-import CCDN.ForMathlib.FractionRing
 import CCDN.Center.RadialParameterFieldRank
+import CCDN.ForMathlib.FractionRing
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
 import CCDN.Hilbert.FullDimension
 import CCDN.Hilbert.LinearCoordinates
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import CCDN.Projection.IntegralProjectionHilbert
+import CCDN.Projection.ProjectiveClosureSpecialization
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
+
 /-! Exact degree of an affine linear normalization whose homogeneous
 extension is finite with the homogenizing coordinate fixed. The proof
 compares the affine and cone function fields by adjoining one

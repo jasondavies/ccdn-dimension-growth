@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.HomogeneousTranslation
 public import CCDN.Height.ProjectiveBox
+
 /-! Bounded integral shears act on all projective representatives, preserve
 primitivity, and preserve distinctness of their projective classes. -/
 

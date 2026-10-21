@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Surface.CongruencePrimeWindow
 public import CCDN.Height.Box
-public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import CCDN.Height.IntegerCoefficientHeight
+public import CCDN.Surface.CongruencePrimeWindow
+public import Mathlib.Algebra.MvPolynomial.PDeriv
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Determinant.PlaneSingularities
 import CCDN.Height.PolynomialBoxHeight
+
 /-! Nonsingular integer points have many smooth reduction primes
 in one common finite window. The excluded primes divide one nonzero partial
 derivative value, whose height is bounded directly from the equation. -/

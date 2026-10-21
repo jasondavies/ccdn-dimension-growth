@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Determinant.PlaneMultiplicity
 public import CCDN.Plane.FiniteFieldConstants
 import CCDN.Determinant.BlockDeterminant
-public import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.ResidueAggregation
+
 /-! All reduced points, their positive multiplicities, and the resulting
 local determinant lower bound. The sharp finite-field total-multiplicity
 estimate is a separate geometric obligation. -/

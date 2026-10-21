@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.BivariateClosedForms
+
 /-! Integer coefficient matrices for the closed-form irreducibility criterion.
 Columns encode pairs of polynomials in a finite rectangular monomial grid.
 Rows are coefficient positions; finite independent rows will be selected when

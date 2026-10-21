@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.NonRationalProjectiveCount
+
 /-! Rational projective points embed injectively after a coefficient-field
 extension. Homogeneous ideal equations remain zero on every representative. -/
 

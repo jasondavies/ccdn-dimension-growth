@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.AuxiliaryPolynomial.HypersurfaceLargeHeightDegree
 public import CCDN.AuxiliaryPolynomial.HypersurfaceNormalizedComparison
 public import CCDN.AuxiliaryPolynomial.HypersurfaceSmallHeightAuxiliary
-public import CCDN.AuxiliaryPolynomial.HypersurfaceLargeHeightDegree
 import CCDN.AuxiliaryPolynomial.HypersurfaceLargeHeightAuxiliary
+
 /-! Combine the two height ranges under the paper's explicit leading-coefficient
 position condition. The main term retains the bad-prime factor of any finite prime
 set whose normalized comparison holds. -/

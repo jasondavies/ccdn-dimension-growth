@@ -5,12 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.AuxiliaryPolynomial.DegreeBound
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimes
-import CCDN.AuxiliaryPolynomial.BadPrimeCharge
+public import CCDN.Plane.IntegerPlaneLogHeight
 import CCDN.Algebra.IntegerPolynomialAvoidance
+import CCDN.AuxiliaryPolynomial.BadPrimeCharge
 import CCDN.AuxiliaryPolynomial.UniversalPlaneBadReduction
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.ClosedFormMinorCharge

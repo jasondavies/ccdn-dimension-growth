@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Height.PrimitiveIntegerPolynomial
 public import CCDN.Height.Box
+public import CCDN.Height.PrimitiveIntegerPolynomial
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Surface.CoefficientReduction
@@ -16,6 +16,7 @@ import CCDN.Surface.RetainedCurveCount
 import CCDN.Surface.SmallCurveCover
 import CCDN.Surface.TopFormBadPrimes
 import Mathlib.Algebra.Order.Star.Real
+
 /-! A coefficient-uniform linear bound for primitive affine surface
 polynomials of each fixed degree at least five. The argument constructs
 its congruence auxiliaries and curve cover. -/

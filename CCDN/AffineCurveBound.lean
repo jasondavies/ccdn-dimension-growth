@@ -7,6 +7,7 @@ module
 
 public import CCDN.Statements
 import CCDN.Curve.AffineCurveCount
+
 /-! The full coefficient-uniform affine curve counting theorem, with constants
 depending only on ambient dimension and with the exact degree dependence in
 CCDN Theorem 3. The proof is `affine_curve_count`, in `CCDN.Curve.AffineCurveCount`. -/

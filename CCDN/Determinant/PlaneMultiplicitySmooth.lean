@@ -7,6 +7,7 @@ module
 
 public import CCDN.Determinant.SingularReduction
 import CCDN.Determinant.PlaneSingularities
+
 /-! Multiplicity greater than one forces a singular point. -/
 
 @[expose] public section

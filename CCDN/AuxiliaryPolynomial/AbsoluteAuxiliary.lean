@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.PositionedAuxiliary
 public import CCDN.Algebra.ProjectiveTranslation
+public import CCDN.AuxiliaryPolynomial.PositionedAuxiliary
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
 import CCDN.AuxiliaryPolynomial.HypersurfacePositionHeight
 

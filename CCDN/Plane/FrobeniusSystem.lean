@@ -9,6 +9,7 @@ public import CCDN.Hilbert.FilteredIntersection
 public import CCDN.Noether.FormalPlaneDifferentiation
 import CCDN.Determinant.PlaneSingularities
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+
 /-! The finite linear system producing Frobenius auxiliary coefficients.
 A strict dimension inequality gives a nontrivial solution. -/
 

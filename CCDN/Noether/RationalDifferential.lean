@@ -5,10 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.SimpleRing.Principal
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.FieldTheory.RatFunc.Basic
 public import Mathlib.RingTheory.Derivation.DifferentialRing
+public import Mathlib.RingTheory.SimpleRing.Principal
 import Mathlib.FieldTheory.RatFunc.AsPolynomial
 
 /-! The formal derivative on a rational function field and its constant field. -/

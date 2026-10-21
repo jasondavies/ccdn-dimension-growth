@@ -11,8 +11,8 @@ public import CCDN.ForMathlib.Matrix
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Noether.ClosedFormScaling
-import CCDN.Noether.ShearNormalization
 import CCDN.Noether.FormalBranchBaseChange
+import CCDN.Noether.ShearNormalization
 
 /-!
 A nonzero polynomial determinant in the generic slope parameters. For a

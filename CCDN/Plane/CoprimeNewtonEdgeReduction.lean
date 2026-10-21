@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.CoprimeNewtonEdge
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimes
+public import CCDN.Plane.CoprimeNewtonEdge
+
 /-! Support and coefficient conditions for a coprime Newton edge.
 They imply full degree and geometric irreducibility over every field in
 which both endpoint coefficients remain nonzero. -/

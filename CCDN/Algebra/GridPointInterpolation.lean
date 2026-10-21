@@ -8,6 +8,7 @@ module
 public import CCDN.Hilbert.FilteredIntersection
 import Mathlib.LinearAlgebra.Dimension.Finite
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+
 /-! Coordinatewise Lagrange interpolation on a finite grid. The degree
 depends on the side length of the grid rather than its number of points. -/
 

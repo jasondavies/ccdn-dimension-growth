@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.ProjectiveBox
+
 /-! Integer points on rational affine lines. Primitive integer
 directions make the line parameter integral, giving a spacing bound. -/
 

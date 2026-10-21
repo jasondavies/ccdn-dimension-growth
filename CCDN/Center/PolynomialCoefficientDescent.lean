@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialLinearDescent
-import Mathlib.Tactic.Polynomial.Basic
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.RingTheory.Ideal.BigOperators
+import Mathlib.Tactic.Polynomial.Basic
 
 /-! Coefficient-linear descent for arbitrary polynomial variable types.
 A finite expansion in a coefficient-field basis proves exact ideal descent,

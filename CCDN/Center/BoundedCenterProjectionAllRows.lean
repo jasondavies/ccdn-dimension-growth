@@ -7,6 +7,7 @@ module
 
 public import CCDN.Center.BoundedCenterProjection
 import Mathlib.LinearAlgebra.Dimension.Constructions
+
 /-! The complementary projection construction also covers the empty
 projective center, represented by a matrix with zero rows. -/
 

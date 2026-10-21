@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
+public import CCDN.Projection.CurvePrimitivePair
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import CCDN.Height.BoundedPrimitiveElement
 import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
@@ -15,6 +15,7 @@ import CCDN.Hilbert.LinearCoordinates
 import CCDN.Projection.PrimitiveCoordinateField
 import Mathlib.Algebra.CharP.IntermediateField
 import Mathlib.RingTheory.AlgebraicIndependent.Basic
+
 /-! Bounded primitive augmentation of any independent linear parameter
 tuple of the Hilbert dimension. -/
 

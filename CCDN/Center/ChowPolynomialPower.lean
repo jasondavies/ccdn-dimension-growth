@@ -8,10 +8,11 @@ module
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Determinant.HypersurfaceSmoothPoint
 import CCDN.Determinant.SingularDeterminant
+import CCDN.ForMathlib.MvPolynomial
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 import Mathlib.RingTheory.Nullstellensatz
-import CCDN.ForMathlib.MvPolynomial
+
 /-! The algebraic power step in the Chow-form projection argument. Equal
 geometric zero loci with an irreducible equation force a positive power,
 including the nonzero scalar omitted when Chow forms are normalized. -/

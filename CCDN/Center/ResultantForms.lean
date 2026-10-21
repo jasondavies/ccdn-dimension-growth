@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.UniversalCenterChowRestriction
-public import CCDN.Center.MinorMatrix
 public import CCDN.Center.GenericBlockLine
+public import CCDN.Center.MinorMatrix
 public import CCDN.Center.ResultantCoefficientFamily
+public import CCDN.Center.UniversalCenterChowRestriction
 import CCDN.Center.GenericBlockLineHomogeneity
+
 /-! A derivative-resultant family for one hyperplane block of the
 universal center restriction. The Pluecker degree is D(2d-1). -/
 

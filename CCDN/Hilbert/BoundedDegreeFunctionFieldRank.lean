@@ -5,13 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.RingTheory.AlgebraicIndependent.Defs
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.CurveFunctionField
 import CCDN.Hilbert.FunctionFieldRank
-import CCDN.ForMathlib.MvPolynomial
-import CCDN.Hilbert.ScaledHilbertBlockComparison
 import CCDN.Hilbert.LinearProjectionFiltration
+import CCDN.Hilbert.ScaledHilbertBlockComparison
 import Mathlib.LinearAlgebra.Basis.VectorSpace
 import Mathlib.LinearAlgebra.Dimension.Finite
 import Mathlib.LinearAlgebra.FreeModule.PID

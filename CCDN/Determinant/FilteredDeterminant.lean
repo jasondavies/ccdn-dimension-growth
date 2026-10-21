@@ -13,6 +13,7 @@ import CCDN.Determinant.LocalDeterminant
 import CCDN.Determinant.ModularOriginGenerators
 import CCDN.Determinant.SingularApproximation
 import CCDN.ForMathlib.Matrix
+
 /-! Local determinant divisibility in arbitrary dimension. The exponent is
 computed from the cumulative dimensions of the origin-adic layers. -/
 

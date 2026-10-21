@@ -8,10 +8,9 @@ module
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.ChowIncidenceBaseChange
+import CCDN.Center.PrincipalWeightedHomogeneous
 import CCDN.Center.ProjectiveClosureRecovery
 import CCDN.Center.ProjectiveIncidenceClosed
-import CCDN.Center.ChowIncidenceBaseChange
-import CCDN.Center.PrincipalWeightedHomogeneous
 
 /-!
 The constructed irreducible multihomogeneous incidence equation has the

@@ -10,9 +10,10 @@ public import CCDN.Plane.ParameterIncidence
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.Analysis.Real.Sqrt
 import CCDN.AuxiliaryPolynomial.PlaneBadPrimes
-import CCDN.Plane.FiniteFieldZeroPlanes
-import CCDN.Plane.CurveCount
 import CCDN.Noether.ShearNormalization
+import CCDN.Plane.CurveCount
+import CCDN.Plane.FiniteFieldZeroPlanes
+
 /-! Section-point bounds in the good, nonzero and unrestricted cases.
 The good-section bound uses the proved Stepanov theorem over the prime field. -/
 

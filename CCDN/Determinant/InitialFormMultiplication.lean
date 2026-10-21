@@ -7,6 +7,7 @@ module
 
 public import Mathlib.RingTheory.MvPolynomial.Ideal
 import CCDN.Determinant.SingularTangent
+
 /-! The first nonzero homogeneous form behaves multiplicatively. Consequently
 multiplication by an equation of order μ cancels μ powers of the origin
 ideal. These are statements about the polynomial ring and ideal. -/

@@ -6,8 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Height.ProjectiveBox
+public import CCDN.Hilbert.AffineCurveDegree
+
 /-! Coordinate permutations preserve projective heights, homogeneous
 Hilbert functions, and prime coordinate ideals. -/
 

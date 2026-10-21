@@ -7,8 +7,9 @@ module
 
 public import CCDN.Algebra.MonomialRays
 import CCDN.ForMathlib.MvPolynomial
-import CCDN.Hilbert.StandardMonomials
 import CCDN.Hilbert.PlaneHilbert
+import CCDN.Hilbert.StandardMonomials
+
 /-! Finite standard-monomial prefixes for a principal equation, their exact
 Hilbert ranks, and the sum of their total degrees. -/
 

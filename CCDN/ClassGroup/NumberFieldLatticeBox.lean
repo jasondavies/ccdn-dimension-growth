@@ -8,6 +8,7 @@ module
 public import CCDN.ClassGroup.IntegerTranslationClassPacking
 import CCDN.ClassGroup.LatticeFinitePacking
 import CCDN.ClassGroup.NumberFieldEuclideanLattice
+
 /-! Finite-radius counting for the algebraic integers. The input
 is a short independent integral basis over the reals; it is not required
 to generate the ring of integers over `ℤ`. -/

@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.Algebra.Polynomial.Bivariate
 public import CCDN.Noether.RationalDifferential
+public import Mathlib.Algebra.Polynomial.Bivariate
 import Mathlib.FieldTheory.RatFunc.AsPolynomial
 import Mathlib.RingTheory.Polynomial.IsIntegral
 

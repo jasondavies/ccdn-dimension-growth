@@ -8,6 +8,7 @@ module
 public import CCDN.Statements
 import CCDN.Curve.AffineCurveCount
 import CCDN.Surface.NonlinearCount
+
 /-! Curves between a fixed degree cutoff and the logarithmic terminal
 cutoff can be left in the exceptional set. Their aggregate count has the
 required B^(2/sqrt d) scale with a fixed logarithmic factor. -/

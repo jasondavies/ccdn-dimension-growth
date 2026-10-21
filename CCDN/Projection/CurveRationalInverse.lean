@@ -10,6 +10,7 @@ public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 import CCDN.Height.PrimitivePairReconstruction
 import Mathlib.Algebra.MvPolynomial.CommRing
+
 /-! Birational projection coordinates admit a rational inverse in the original
 coordinate ring. Its denominator cuts out all possible noninjective fibers.
 This module gives no bound on the degree of that denominator;

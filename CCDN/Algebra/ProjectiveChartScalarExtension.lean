@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Algebra.PolynomialLinearDescent
+public import CCDN.Algebra.ProjectiveChartIdeal
 import CCDN.Algebra.HomogeneousLinearDescent
 import CCDN.Algebra.IdealScalarDescent
-import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Algebra.ProjectionScalarExtension
+import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.ForMathlib.MvPolynomial
+
 /-! Projective affine charts commute with extension of coefficients.
 In particular the standard chart of a geometrically integral projective
 variety is geometrically integral. -/

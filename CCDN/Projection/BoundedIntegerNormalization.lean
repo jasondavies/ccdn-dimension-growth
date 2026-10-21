@@ -13,6 +13,7 @@ import CCDN.Hilbert.FullDimension
 import CCDN.Projection.BoundedClosureElimination
 import CCDN.Projection.ClosureIntegralComposition
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+
 /-! Constructive bounded linear Noether normalization. The coefficients of
 the integer linear forms are bounded by n! (d+1)^n, and the map of projective closures
 fixing the homogenizing coordinate is integral as well. -/

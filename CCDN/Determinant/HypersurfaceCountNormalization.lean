@@ -7,6 +7,7 @@ module
 
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
 import CCDN.Determinant.HypersurfaceMultiplicityEstimate
+
 /-! Numerical normalization of a finite-field hypersurface count, as in
 CCDN Lemma 2.8. The input count bound is an explicit hypothesis. -/
 

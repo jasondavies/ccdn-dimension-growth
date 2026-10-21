@@ -8,11 +8,11 @@ module
 public import CCDN.Noether.FormalPlaneDifferentiation
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
+import CCDN.Determinant.FormalBranchMultiplicity
+import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Noether.FormalBranchFaithful
 import CCDN.Noether.FormalBranchOrder
 import Mathlib.FieldTheory.Finite.Basic
-import CCDN.Determinant.FormalBranchMultiplicity
-import CCDN.ForMathlib.MvPolynomialDerivative
 
 /-!
 Frobenius auxiliary polynomials: noncancellation, tangent-derivative

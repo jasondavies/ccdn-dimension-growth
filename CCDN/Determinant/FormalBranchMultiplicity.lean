@@ -8,10 +8,10 @@ module
 public import Mathlib.RingTheory.PowerSeries.Basic
 import CCDN.Algebra.PointSeparation
 import CCDN.Algebra.SectionImageRank
-import CCDN.Noether.FormalBranchOrder
 import CCDN.Hilbert.PlaneHilbert
-import Mathlib.RingTheory.PowerSeries.Inverse
+import CCDN.Noether.FormalBranchOrder
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
+import Mathlib.RingTheory.PowerSeries.Inverse
 import Mathlib.RingTheory.SimpleRing.Principal
 
 /-! A proper plane section has total multiplicity at least N at no more

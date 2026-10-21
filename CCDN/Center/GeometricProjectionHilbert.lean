@@ -7,11 +7,12 @@ module
 
 public import CCDN.Center.ChowLinearSpecialization
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Center.BalancedParameterFiniteness
 import CCDN.Center.ProjectiveIncidenceClosed
-import CCDN.Hilbert.ScalarExtension
 import CCDN.Hilbert.HomogeneousPrimeComponents
-import CCDN.Algebra.ProjectionScalarExtension
+import CCDN.Hilbert.ScalarExtension
+
 /-! The matrix image commutes with coefficient extension and has
 the same Hilbert polynomial after extension. Geometric center avoidance
 also proves integrality over the original coefficient field. -/

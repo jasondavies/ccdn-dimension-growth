@@ -5,12 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfacePointStalk
 public import CCDN.Determinant.FiltrationWeights
+public import CCDN.Determinant.HypersurfacePointStalk
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import CCDN.Determinant.WeightedSequenceEstimate
-import CCDN.Determinant.InfiniteWeightEnumeration
 import CCDN.AuxiliaryPolynomial.AffineTranslationCount
+import CCDN.Determinant.InfiniteWeightEnumeration
+import CCDN.Determinant.WeightedSequenceEstimate
+
 /-! The exact local weight-sequence estimate for hypersurface stalks.
 The uniform error is dimension plus one. Every positive-dimensional
 hypersurface has a constructed infinite enumeration of its layers;

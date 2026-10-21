@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.HomogeneousMonomials
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.LinearForm
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.HomogeneousEvaluation

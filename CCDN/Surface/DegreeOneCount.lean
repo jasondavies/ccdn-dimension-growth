@@ -5,13 +5,13 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.AffineCurveDegree
-public import CCDN.Algebra.IdealZeroLocus
-public import Mathlib.RingTheory.Ideal.Height
 public import CCDN.Plane.IntegralAffineLine
-import CCDN.Surface.LineContribution
+public import Mathlib.RingTheory.Ideal.Height
 import CCDN.Plane.DegreeOneAffineLine
+import CCDN.Surface.LineContribution
 
 /-!
 The proved line contribution applies to degree-one prime

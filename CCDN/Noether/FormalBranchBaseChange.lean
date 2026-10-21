@@ -5,17 +5,17 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.TensorProduct.Basic
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 public import Mathlib.RingTheory.PowerSeries.Basic
+public import Mathlib.RingTheory.TensorProduct.Basic
 import CCDN.Noether.FormalBranchFaithful
 import CCDN.Noether.PowerSeriesBaseChange
-import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 import Mathlib.Algebra.Ring.Hom.InjSurj
-import Mathlib.LinearAlgebra.TensorProduct.Basis
 import Mathlib.LinearAlgebra.Basis.VectorSpace
+import Mathlib.LinearAlgebra.TensorProduct.Basis
+import Mathlib.RingTheory.PowerSeries.NoZeroDivisors
 
 /-! A faithful formal branch remains faithful after arbitrary field extension.
 The construction is an embedding of the extended coordinate algebra

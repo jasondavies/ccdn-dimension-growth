@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Height.Box
+public import CCDN.Projection.CurvePrimitivePair
 public import Mathlib.Data.Fin.VecNotation
 
 /-!

@@ -10,6 +10,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.Finiteness.Defs
 import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+
 /-! Finite power blocks for a linear parameter. Their dimension grows with
 slope at most the number of field-basis vectors, giving the upper Hilbert
 growth bound needed to recognize a parameter of full degree. -/

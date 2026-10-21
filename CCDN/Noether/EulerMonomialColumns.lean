@@ -7,6 +7,7 @@ module
 
 public import CCDN.Noether.BivariateTotalDegree
 import CCDN.Noether.ShearNormalization
+
 /-! Exact sparse monomial columns of the Euler differential matrix. -/
 
 @[expose] public section

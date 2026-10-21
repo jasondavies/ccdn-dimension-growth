@@ -8,9 +8,9 @@ module
 public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
 public import Mathlib.Basic.Real.Basic
 public import Mathlib.Data.Nat.Choose.Basic
-import Mathlib.Data.Nat.Choose.Bounds
 import Mathlib.Algebra.BigOperators.Intervals
 import Mathlib.Algebra.Order.BigOperators.Group.Finset
+import Mathlib.Data.Nat.Choose.Bounds
 
 /-! Uniform bounds for the exact homogeneous hypersurface Hilbert rank.
 The factorial leading coefficient is retained in both directions. -/

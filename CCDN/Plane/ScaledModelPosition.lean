@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.LeadingPositionHeight
 public import CCDN.Algebra.ScaledHomogenization
+public import CCDN.Plane.LeadingPositionHeight
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Plane.HomogeneousLeadingCoefficient
 

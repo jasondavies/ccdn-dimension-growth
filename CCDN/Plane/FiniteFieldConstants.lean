@@ -8,6 +8,7 @@ module
 public import Mathlib.Basic.Real.Basic
 import Mathlib.Tactic.Linarith
 import Mathlib.Tactic.Ring
+
 /-! The prime cutoff `27 d⁴` and the absolute constants of the finite-field point counts.
 
 Every count below holds for primes `p > stepanovThreshold d = 27 d⁴` and has the shape

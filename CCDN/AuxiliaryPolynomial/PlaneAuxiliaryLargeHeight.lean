@@ -7,9 +7,9 @@ module
 
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import CCDN.Algebra.HomogeneousRankDichotomy
-import CCDN.ForMathlib.Log
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryDegree
 import CCDN.ForMathlib.Log
+
 /-! The complementary large-coefficient-height auxiliary-degree estimate. -/
 
 @[expose] public section

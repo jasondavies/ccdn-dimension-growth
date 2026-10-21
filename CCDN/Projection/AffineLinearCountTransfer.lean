@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.IntegerLinearForms
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Algebra.IntegerLinearForms
 public import CCDN.Height.Box
+public import CCDN.Hilbert.AffineCurveDegree
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Determinant.PolynomialMapDeterminant
 import CCDN.Projection.AffineProjectionCount
+
 /-! Integral-point counts under an integer linear projection.
 In the application, the finite-fiber hypothesis follows from normalization. -/
 

@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.PowerSeries.Basic
 public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+public import Mathlib.RingTheory.PowerSeries.Basic
 import CCDN.ForMathlib.Matrix
 
 /-! Finite linear independence of formal power series survives arbitrary

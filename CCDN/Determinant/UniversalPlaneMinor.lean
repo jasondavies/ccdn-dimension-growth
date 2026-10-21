@@ -11,6 +11,7 @@ public import CCDN.Noether.UniversalPlane
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Noether.ClosedFormScaling
 import CCDN.Noether.ShearNormalization
+
 /-! The constructed positioned family is a specialization of the universal
 family of all affine planes. Its nonzero minor therefore proves that a
 universal parameter polynomial is nonzero. -/

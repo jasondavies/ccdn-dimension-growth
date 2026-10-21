@@ -8,6 +8,7 @@ module
 public import CCDN.Algebra.MonomialEvaluationMatrix
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.Data.Sym.Card
+
 /-! Complete homogeneous monomial lists, their exact cardinalities, and the
 corresponding polynomial-space dimensions. -/
 

@@ -9,6 +9,7 @@ public import CCDN.ForMathlib.StandardExponents
 public import CCDN.Hilbert.FilteredIntersection
 import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.StandardMonomials
+
 /-!
 # Linear-growth monomial sets
 

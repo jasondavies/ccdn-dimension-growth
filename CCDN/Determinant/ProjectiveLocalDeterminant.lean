@@ -10,6 +10,7 @@ public import CCDN.Determinant.SingularPlaneChart
 import CCDN.Determinant.BlockDeterminant
 import CCDN.ForMathlib.Matrix
 import CCDN.Height.ProjectiveZeroLocus
+
 /-! Local divisibility for homogeneous evaluation matrices at projective
 points. Normalize a unit coordinate modulo the required prime power,
 apply the singular affine estimate to the resulting approximate zeros,

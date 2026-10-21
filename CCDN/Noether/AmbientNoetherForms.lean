@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalHomogeneousForm
 public import CCDN.Algebra.CoefficientwiseHomogeneous
 public import CCDN.Noether.EulerUniversalForms
+public import CCDN.Noether.UniversalHomogeneousForm
 import CCDN.Noether.EulerPairSpecialization
 import CCDN.Noether.UniversalPlaneWitness
+
 /-! Universal Noether coefficient forms in an arbitrary ambient variable
 space. They are the plane-parameter coefficients of Euler minors. -/
 

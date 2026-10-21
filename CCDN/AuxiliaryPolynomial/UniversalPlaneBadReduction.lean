@@ -7,9 +7,9 @@ module
 
 public import CCDN.Noether.UniversalPlaneBadWitness
 public import Mathlib.Algebra.Field.ZMod
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Plane.FullDegreeSectionIrreducibility
 import Mathlib.Algebra.MvPolynomial.Funext
-import CCDN.ForMathlib.MvPolynomial
 
 /-! All coefficients of the universal witness vanish at a degree-dropping or
 reducible ambient reduction. A nonzero integer coefficient therefore detects

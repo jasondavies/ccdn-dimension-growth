@@ -11,6 +11,7 @@ import CCDN.Surface.DirectionSum
 import CCDN.Surface.LineDirections
 import CCDN.Surface.NonlinearCount
 import CCDN.Surface.ParallelLines
+
 /-! Finite families of rational affine lines on a surface. Grouping
 lines by their projective direction combines the primitive spacing bound
 with the uniform reciprocal-height sum. -/

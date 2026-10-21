@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+
 /-! The filtered Hilbert polynomial is unchanged by an invertible
 coordinate substitution preserving total degree in both directions. -/
 

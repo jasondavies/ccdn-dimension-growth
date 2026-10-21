@@ -5,16 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ScalarQuotientFractionField
 public import CCDN.Center.ChowIncidenceIdeal
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import CCDN.Center.FixedCoordinateGenericNormalization
+public import CCDN.Center.ScalarQuotientFractionField
+public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import CCDN.Center.AffineNormalizationRank
 import CCDN.Center.GeometricIdealPrimality
 import CCDN.Center.IntermediateFieldParameterTower
-import Mathlib.RingTheory.AlgebraicIndependent.Basic
-import CCDN.Center.AffineNormalizationRank
 import CCDN.Hilbert.ScalarExtension
 import Mathlib.Algebra.CharZero.Infinite
+import Mathlib.RingTheory.AlgebraicIndependent.Basic
 
 /-!
 Exact normalization degree inside the fraction field of the

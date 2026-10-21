@@ -7,6 +7,7 @@ module
 
 public import CCDN.Center.ScalarQuotientPolynomialLocalization
 public import CCDN.ForMathlib.FractionRing
+
 /-! A fraction field of the parameter polynomial extension is also
 the fraction field of the scalar-extended source coordinate quotient. -/
 

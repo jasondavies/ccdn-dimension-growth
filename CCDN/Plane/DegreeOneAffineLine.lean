@@ -5,13 +5,14 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.IntegralAffineLine
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.ForMathlib.KrullHeight
+public import CCDN.Hilbert.AffineCurveDegree
+public import CCDN.Plane.IntegralAffineLine
 import CCDN.Algebra.CoordinatePowerGeneration
 import CCDN.Hilbert.CriticalFilteredGrowth
 import CCDN.Hilbert.PrimeComponentTranscendence
+
 /-!
 # Degree-one prime curves are affine lines
 

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.SingularPlaneChart
+
 /-! Positive singular multiplicity is derived from a nonzero equation
 vanishing at the origin; it is bounded by the equation's total degree. -/
 

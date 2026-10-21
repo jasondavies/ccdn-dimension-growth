@@ -10,8 +10,8 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Algebra.IntegerPolynomialAvoidance
-import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 import CCDN.ForMathlib.MvPolynomial
+import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
 
 /-! A single bounded linear elimination step. A chosen nonzero ideal equation
 of degree d becomes monic after a linear coordinate change with integer

@@ -9,6 +9,7 @@ public import CCDN.Analysis.PrimeCutoff
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimes
 public import CCDN.Plane.IntegerPlaneLogHeight
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeHeight
+
 /-! Coordinate invariance of geometric bad reduction and coefficient height,
 with the exact bad-prime charge in standard Fin-indexed coordinates. -/
 

@@ -5,15 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Hilbert.FilteredIntersection
+public import CCDN.Projection.CurvePrimitivePair
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import Mathlib.RingTheory.SimpleRing.Principal
-import CCDN.Height.BoundedPrimitiveElement
-import CCDN.Projection.PlaneProjectionKernel
-import CCDN.Projection.FieldDegree
 import CCDN.Algebra.ParameterRecurrenceGrowth
+import CCDN.Height.BoundedPrimitiveElement
 import CCDN.Hilbert.CurveFunctionField
+import CCDN.Projection.FieldDegree
+import CCDN.Projection.PlaneProjectionKernel
 
 /-!
 Once a linear parameter generates the degree filtration, a bounded moment

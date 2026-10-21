@@ -11,8 +11,8 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 import CCDN.Center.GenericLinearIndependence
 import CCDN.Hilbert.TranscendenceBasis
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 import CCDN.Projection.HilbertProjectionKernel
+import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
 
 /-!
 Generators and base change of the Chow incidence ideal. A nonzero polynomial-map kernel

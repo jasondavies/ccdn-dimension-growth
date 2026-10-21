@@ -9,8 +9,8 @@ public import CCDN.ForMathlib.IdealPowerLayer
 public import Mathlib.Algebra.Algebra.ZMod
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.RingTheory.LocalRing.MaximalIdeal.Defs
-import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 import Mathlib.RingTheory.Ideal.Quotient.Noetherian
+import Mathlib.RingTheory.LocalRing.MaximalIdeal.Basic
 
 /-! The mod-`p` local layers used in the general local determinant
 lemma. A ring homomorphism from a local ring to `ZMod p` is automatically

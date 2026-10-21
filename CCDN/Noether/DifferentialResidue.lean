@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import Mathlib.RingTheory.Derivation.MapCoeffs
+
 /-! Residues of closed rational one-forms at simple polynomial roots.
 The polynomial proof avoids needing a partial-fraction decomposition. -/
 

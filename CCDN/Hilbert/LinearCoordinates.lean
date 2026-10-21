@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
-public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Hilbert.PolynomialComparison
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hilbert.PolynomialComparison
 import Mathlib.Algebra.MvPolynomial.Monad
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition

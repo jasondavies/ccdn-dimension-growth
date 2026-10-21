@@ -5,18 +5,18 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.HomogeneousTranslation
 public import CCDN.Algebra.AffineLineLeading
+public import CCDN.Algebra.HomogeneousTranslation
+public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.AffineCurveDegree
-public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Plane.IntegralAffineLine
 import CCDN.Algebra.BinaryHomogeneousIrreducibility
 import CCDN.Determinant.PlaneSingularities
 import CCDN.ForMathlib.MvPolynomialDerivative
-import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Surface.LineDirections
 import CCDN.Surface.TopFormIrreducibility
+
 /-! Directional derivatives of surfaces with absolutely irreducible top form. -/
 
 @[expose] public section

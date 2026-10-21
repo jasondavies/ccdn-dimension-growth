@@ -7,6 +7,7 @@ module
 
 public import CCDN.Noether.ClosedFormBaseChange
 import CCDN.ForMathlib.Matrix
+
 /-! A nonzero integer minor of the closed-form coefficient matrix.
 Rank drop after reduction forces divisibility of this same integer. The
 geometric rank-drop criterion and the height bound are separate obligations. -/

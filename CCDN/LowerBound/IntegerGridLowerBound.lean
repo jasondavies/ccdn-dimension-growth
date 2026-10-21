@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.Box
 public import CCDN.Algebra.PolynomialPredicates
+public import CCDN.Height.Box
 import CCDN.LowerBound.GridMultivariate
 import CCDN.Noether.ShearNormalization
 import Mathlib.Algebra.MvPolynomial.CommRing

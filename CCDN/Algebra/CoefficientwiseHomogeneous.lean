@@ -7,8 +7,9 @@ module
 
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-import Mathlib.Tactic.Polynomial.Basic
 import Mathlib.Algebra.MvPolynomial.CommRing
+import Mathlib.Tactic.Polynomial.Basic
+
 /-! Homogeneity in the coefficient variables, while retaining independent
 polynomial parameters. This property survives determinant expansion and
 extraction of any parameter coefficient. -/

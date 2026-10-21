@@ -14,6 +14,7 @@ import CCDN.Hilbert.ProperHilbertDimension
 import CCDN.Projection.ClosureIntegralComposition
 import CCDN.Projection.IntegralProjectionHilbert
 import Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic
+
 /-! Finite linear normalization retaining the homogenizing coordinate over
 any infinite field, in every dimension including zero. -/
 

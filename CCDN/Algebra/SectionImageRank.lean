@@ -8,6 +8,7 @@ module
 public import CCDN.Hilbert.FilteredIntersection
 import Mathlib.LinearAlgebra.Dimension.Finite
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
+
 /-! A proper section bounds independent classes in any algebra-valued image,
 not only distinct point evaluations. This is the multiplicity-ready form of
 the Hilbert-function argument. -/

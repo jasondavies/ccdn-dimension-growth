@@ -5,15 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
+public import CCDN.Hilbert.AffineCurveDegree
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.RingTheory.Ideal.Height
 import CCDN.Algebra.PolynomialLinearDescent
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hypersurface.CurveBoxDegreeBound
 import Mathlib.Algebra.MvPolynomial.Nilpotent
-import CCDN.ForMathlib.MvPolynomial
+
 /-! CCDN Corollary 4.1.4 for irreducible affine hypersurfaces in three
 variables. Splitting of the full equation over any field extension gives
 an auxiliary equation of degree at most d. The prime curve

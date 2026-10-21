@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.ProjectiveHypersurfaceResidueDeterminant
+import CCDN.Algebra.CharZeroOrGT
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Determinant.PlaneMultiplicitySmooth
-import CCDN.Algebra.CharZeroOrGT
 import CCDN.Determinant.PlaneSingularities
 import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Height.FiniteFieldSectionCount

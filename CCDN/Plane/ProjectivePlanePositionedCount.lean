@@ -10,9 +10,10 @@ public import CCDN.Height.ProjectiveBox
 public import CCDN.Plane.ScaledPlaneCount
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.ProjectiveTranslation
-import CCDN.Plane.ScaledModelPosition
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.AuxiliaryPolynomial.ProjectiveAuxiliaryCount
+import CCDN.Plane.ScaledModelPosition
+
 /-! Coefficient-uniform projective plane counts after a bounded integral
 coordinate change. The finite-field and positioning inputs are proved. -/
 

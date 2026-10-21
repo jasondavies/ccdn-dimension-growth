@@ -10,6 +10,7 @@ public import CCDN.Surface.ResidueCover
 import CCDN.Curve.AffineCurveHilbertPolynomial
 import CCDN.Surface.NonlinearCount
 import Mathlib.Algebra.Order.Star.Real
+
 /-! Splitting a surface section into bounded-degree geometric
 curves, nongeometric exceptions, intermediate-degree curves and the
 constructed congruence remainder. -/

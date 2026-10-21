@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ImageFractionField
 public import CCDN.Center.ChowLinearSpecialization
+public import CCDN.Projection.ImageFractionField
 import Mathlib.LinearAlgebra.Dual.Lemmas
 
 /-! Kernel containment of matrices gives containment of their

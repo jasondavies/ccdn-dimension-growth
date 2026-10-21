@@ -5,12 +5,13 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.Determinant.HypersurfaceDeterminantRank
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.CountingHypotheses
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceBadPrimes
 import CCDN.Determinant.SmoothCongruenceDeterminant
+
 /-! Congruence-refined determinant estimates for affine zeros and
 arbitrary bounded-degree polynomial evaluation columns. -/
 

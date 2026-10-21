@@ -5,16 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
-public import CCDN.Height.IntegerCoefficientHeight
 public import ArithmeticHeights.BombieriVaaler
 public import CCDN.Algebra.HomogeneousMonomials
-import CCDN.Determinant.HomogeneousDeterminantComparison
-import CCDN.Algebra.PrimitiveNormalization
+public import CCDN.AuxiliaryPolynomial.Nonmultiple
+public import CCDN.Height.IntegerCoefficientHeight
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRank
+import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Algebra.RowSelection
 import CCDN.AuxiliaryPolynomial.CoefficientBound
+import CCDN.Determinant.HomogeneousDeterminantComparison
 
 /-!
 Bounded rational zeros either admit a degree-d auxiliary nonmultiple,

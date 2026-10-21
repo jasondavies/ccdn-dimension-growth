@@ -12,6 +12,7 @@ import CCDN.Center.DetectorExtension
 import CCDN.Center.GoodCenterWitness
 import CCDN.Center.ZeroColumnMinorSpecialization
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
+
 /-! Integer good centers with the quadratic row bound from the
 row-resultant detector. Dimension zero is included using its proved degree
 one. Prescribed zero columns of a witness center are preserved, which gives

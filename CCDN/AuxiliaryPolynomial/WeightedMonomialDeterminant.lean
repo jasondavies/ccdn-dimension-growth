@@ -9,6 +9,7 @@ public import CCDN.Algebra.MonomialEvaluationMatrix
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 import Mathlib.Algebra.Order.AbsoluteValue.Int
+
 /-! Archimedean determinant bounds retaining each monomial's own degree.
 Their exponent is the sum of column degrees, not rank times the cutoff. -/
 

@@ -6,11 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-import CCDN.Hypersurface.PureVarietyGridBound
 import CCDN.Hilbert.PolynomialComparison
 import CCDN.Hilbert.ProperSectionHilbert
 import CCDN.Hypersurface.PrincipalSectionPurity
+import CCDN.Hypersurface.PureVarietyGridBound
 import Mathlib.Algebra.CharZero.Infinite
+
 /-! The exact degree and grid bound for a proper principal section.
 Both purity and the intersection multiplicity budget are derived from the
 original prime ideal and section equation. -/

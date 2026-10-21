@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.Box
+public import CCDN.Height.IntegerCoefficientHeight
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous

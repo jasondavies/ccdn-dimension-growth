@@ -8,10 +8,10 @@ module
 public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Algebra.IntegerPolynomialAvoidance
-import CCDN.ForMathlib.MvPolynomial
 import CCDN.ForMathlib.Matrix
-import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Height.ProjectiveZeroLocus
+import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 
 /-!
 Sharp bounded specialization of maximal-minor conditions while keeping

@@ -8,8 +8,9 @@ module
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Algebra.PolynomialSection
-import CCDN.Projection.CurveRationalInverse
 import CCDN.Hilbert.LinearProjectionFiltration
+import CCDN.Projection.CurveRationalInverse
+
 /-! Polynomial reconstruction controls exceptional points and finite
 point counts. The error is d times the reconstruction denominator's degree;
 a uniform O(d^2) bound requires a low-degree denominator. -/

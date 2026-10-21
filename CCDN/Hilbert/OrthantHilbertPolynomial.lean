@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.MonomialOrthants
-public import Mathlib.RingTheory.Polynomial.HilbertPoly
 public import CCDN.ForMathlib.MvPolynomial
+public import Mathlib.RingTheory.Polynomial.HilbertPoly
 import Mathlib.Data.Sym.Card
 
 /-! Counting the finite orthant partition gives an eventual polynomial

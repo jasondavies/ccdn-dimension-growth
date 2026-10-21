@@ -7,10 +7,11 @@ module
 
 public import CCDN.Projection.ProjectivePlaneProjection
 import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Height.ProjectiveIntegerHeight
 import CCDN.LowerBound.GridCurveConstruction
 import CCDN.LowerBound.IntegerGridLowerBound
-import CCDN.ForMathlib.MvPolynomial
+
 /-! The integer grid gives distinct bounded-height rational points on the
 irreducible projective closure. This is the geometric input to CCDN
 Proposition 5, including the stated degree and the exact grid size. -/

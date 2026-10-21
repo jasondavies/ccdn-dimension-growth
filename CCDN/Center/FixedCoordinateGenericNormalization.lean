@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
 import CCDN.Center.ClosureNormalizationInfinite
 import CCDN.Center.GenericLinearNormalizationOpenness
+
 /-! Generic affine linear normalization with the homogenizing coordinate
 fixed. The finite specialization and its nonzero determinant are both
 constructed from the source ideal. -/

@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Determinant.SingularTangent
 public import Mathlib.Algebra.Field.ZMod
 public import Mathlib.RingTheory.MvPolynomial
-public import CCDN.Determinant.SingularTangent
 import CCDN.Algebra.ModularPolynomialLift
 import CCDN.Determinant.OriginTruncationGenerators
 import Mathlib.FieldTheory.Finite.Polynomial

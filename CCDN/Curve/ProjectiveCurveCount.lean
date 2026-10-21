@@ -5,11 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.ScaleAbsorption
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
+public import CCDN.Projection.ScaleAbsorption
 import CCDN.Algebra.ProjectivePermutation
 import CCDN.Plane.ProjectivePlaneLinearCount
 import CCDN.Projection.ProjectiveProjectionCount
+
 /-! The projective curve count of Theorem 2 with an explicit constant. In a chart where the
 curve is not contained in the hyperplane at infinity, a bounded projection to the plane and the
 projective plane count give the bound (`projective_curve_count_of_proper_chart`); a coordinate

@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.ClassGroup.NumberFieldEuclideanLattice
+
 /-! A real basis of integral lattice vectors gives a rational
 number-field basis. Its real coordinates on embedded field elements are
 the corresponding rational coordinates, so missing-span conditions

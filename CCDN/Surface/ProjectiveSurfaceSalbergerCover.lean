@@ -10,8 +10,8 @@ public import CCDN.Projection.ProjectivePlaneProjection
 public import CCDN.Surface.GeometricCurveCover
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.IdealScalarDescent
-import CCDN.Algebra.ProjectiveClosureDegree
 import CCDN.Algebra.PrimitiveNormalization
+import CCDN.Algebra.ProjectiveClosureDegree
 import CCDN.Surface.SalbergerCover
 
 /-!

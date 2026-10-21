@@ -5,11 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowPivotParametrization
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveSection
-public import Mathlib.RingTheory.Nullstellensatz
 public import CCDN.Center.ChowIncidenceIdeal
+public import CCDN.Center.ChowPivotParametrization
+public import Mathlib.RingTheory.Nullstellensatz
 import CCDN.Algebra.LinearForm
 import CCDN.Algebra.ProjectiveClosureDegree
 

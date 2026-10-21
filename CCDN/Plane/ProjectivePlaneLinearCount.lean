@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
+import CCDN.Algebra.PrimitiveNormalization
 import CCDN.ForMathlib.SchwartzZippel
 import CCDN.Plane.ProjectivePlaneNonabsoluteCount
-import CCDN.Algebra.PrimitiveNormalization
 
 /-! The elementary linear case completes the uniform plane-equation
 bound in every positive degree. -/

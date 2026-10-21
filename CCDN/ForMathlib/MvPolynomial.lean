@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.LinearAlgebra.Dimension.Finrank
+public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.Data.Sym.Card
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 

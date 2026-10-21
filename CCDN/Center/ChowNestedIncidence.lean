@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowLastRowSplit
+
 /-! The Chow incidence field in its nested final-row presentation.
 The parameter field is computed from its displayed generators exactly. -/
 

@@ -7,8 +7,8 @@ module
 
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateTotalDegree
-import CCDN.Noether.ClosedFormReducibility
 import CCDN.Noether.ClosedFormGradient
+import CCDN.Noether.ClosedFormReducibility
 
 /-!
 Scaling the defining equation by a nonzero constant preserves the matrix

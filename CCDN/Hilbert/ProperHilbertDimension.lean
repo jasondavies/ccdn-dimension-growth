@@ -7,8 +7,9 @@ module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.Polynomial.HilbertPoly
-import CCDN.Hilbert.FullDimension
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hilbert.FullDimension
+
 /-! A prime projective variety of degree greater than one cannot have
 full ambient Hilbert dimension. This uses the Hilbert polynomial
 of the polynomial ring, rather than an additional geometric hypothesis. -/

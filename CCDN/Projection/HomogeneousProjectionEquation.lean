@@ -7,9 +7,10 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hilbert.LinearProjectionFiltration
-import CCDN.Projection.PlaneRelationSpace
-import CCDN.Projection.HomogeneousFilteredProjection
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Projection.HomogeneousFilteredProjection
+import CCDN.Projection.PlaneRelationSpace
+
 /-! The principal equation of the image of a homogeneous linear
 projection is homogeneous. -/
 

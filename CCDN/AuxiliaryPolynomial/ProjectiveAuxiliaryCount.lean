@@ -13,6 +13,7 @@ import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.AuxiliaryPolynomial.ProjectiveAuxiliary
 import CCDN.Plane.ProjectivePlaneBezout
+
 /-! Projective point counts obtained from integral homogeneous
 auxiliary polynomials and projective Bézout. -/
 

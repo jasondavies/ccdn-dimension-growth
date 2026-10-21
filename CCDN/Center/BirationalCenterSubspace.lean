@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.SubspaceQuotient
+
 /-! The birational-center condition depends only on the row span, so it
 defines a locus of center subspaces. -/
 

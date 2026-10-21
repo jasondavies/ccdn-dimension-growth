@@ -5,18 +5,18 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.ProjectivePermutation
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
-public import CCDN.Algebra.ProjectivePermutation
 public import CCDN.Hilbert.LinearProjectionFiltration
+import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Algebra.ProjectiveChartScalarExtension
+import CCDN.Algebra.WeightedHomogeneousTransform
 import CCDN.Center.GeometricProjectiveCurveProjection
 import CCDN.Center.ProjectiveChowEquation
 import CCDN.Center.ProjectiveClosureRecovery
 import CCDN.Center.ProjectiveIncidencePermutation
-import CCDN.Algebra.WeightedHomogeneousTransform
 import CCDN.Hilbert.HomogeneousPrimeComponents
-import CCDN.Algebra.ProjectionScalarExtension
 
 /-!
 A geometrically integral homogeneous prime ideal has an incidence equation

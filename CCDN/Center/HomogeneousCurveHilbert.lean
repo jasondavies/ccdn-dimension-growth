@@ -10,6 +10,7 @@ public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Hilbert.HomogeneousFilteredRank
 import Mathlib.NumberTheory.Height.NumberField
 import Mathlib.NumberTheory.Height.Projectivization
+
 /-! A quadratic Hilbert polynomial of a homogeneous affine cone gives the
 linear projective Hilbert function, with exactly the same degree. -/
 

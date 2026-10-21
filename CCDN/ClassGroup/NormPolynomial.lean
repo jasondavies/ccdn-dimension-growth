@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.LinearAlgebra.Charpoly.Basic
 public import CCDN.Noether.BivariateTotalDegree
+public import Mathlib.LinearAlgebra.Charpoly.Basic
 public import Mathlib.NumberTheory.NumberField.Basic
 import CCDN.Plane.GridHeight
 

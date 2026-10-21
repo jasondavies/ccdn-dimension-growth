@@ -5,16 +5,17 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.IntegerCoefficientHeight
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Height.Box
-public import Mathlib.Analysis.SpecialFunctions.Pow.Real
+public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.PrimitiveIntegerPolynomial
+public import CCDN.Hilbert.AffineCurveDegree
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceAuxiliary
-import CCDN.Surface.CompleteIntersectionDegreeBudget
 import CCDN.Hypersurface.NonabsoluteSurfaceCount
+import CCDN.Surface.CompleteIntersectionDegreeBudget
+
 /-! Coefficients of a primitive surface equation can be restricted to
 polynomial height in the box radius. The complementary case already has
 a linear point bound from a degree-at-most-d auxiliary. -/

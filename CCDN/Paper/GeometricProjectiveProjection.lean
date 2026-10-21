@@ -9,8 +9,8 @@ public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
 import CCDN.Algebra.ProjectionScalarExtension
-import CCDN.Projection.ProjectiveLinearCountTransfer
 import CCDN.Projection.BoundedDegreeNormalizationFiber
+import CCDN.Projection.ProjectiveLinearCountTransfer
 
 /-!
 Geometric integrality in the finite birational projective

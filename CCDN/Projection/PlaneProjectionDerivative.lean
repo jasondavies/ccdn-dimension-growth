@@ -12,6 +12,7 @@ import CCDN.Determinant.PlaneSingularities
 import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Hilbert.LinearProjectionFiltration
 import Mathlib.RingTheory.AlgebraicIndependent.Transcendental
+
 /-! In characteristic zero, a plane relation with a transcendental first
 coordinate has a nonzero derivative in the second coordinate. That derivative
 is a proper section of degree at most d-1 of the source curve. -/

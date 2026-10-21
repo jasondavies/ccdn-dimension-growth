@@ -5,15 +5,15 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.HypersurfaceBadReduction
-public import CCDN.Plane.FiniteFieldConstants
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.AuxiliaryPolynomial.ConstantLeadingBadReduction
+public import CCDN.AuxiliaryPolynomial.HypersurfaceBadReduction
 public import CCDN.Height.IntegerCoefficientHeight
+public import CCDN.Plane.FiniteFieldConstants
 import CCDN.AuxiliaryPolynomial.GeneralBadReduction
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Noether.ShearNormalization
 import Mathlib.Algebra.MvPolynomial.Nilpotent
-import CCDN.ForMathlib.MvPolynomial
 
 /-! Finite bad-prime sets for plane equations, with coefficient-height
 charge bounds and irreducible good reductions. -/

@@ -8,6 +8,7 @@ module
 public import Mathlib.FieldTheory.RatFunc.Basic
 public import Mathlib.RingTheory.SimpleRing.Principal
 import CCDN.Algebra.PolynomialMatrixSpecialization
+
 /-! A polynomial matrix with dependent columns at every integer value has a
 polynomial kernel vector that remains nonzero at zero. A common power of X is
 removed from a kernel vector after its rational denominators are cleared. -/

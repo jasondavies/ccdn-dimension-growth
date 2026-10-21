@@ -9,9 +9,10 @@ public import CCDN.Height.Box
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 import CCDN.Determinant.PlaneSingularities
 import CCDN.Determinant.SingularDeterminant
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.ForMathlib.MvPolynomialDerivative
 import CCDN.Hypersurface.NonabsoluteHypersurfaceCount
-import CCDN.ForMathlib.MvPolynomial
+
 /-! The singular locus of an irreducible rational hypersurface has a
 coefficient-uniform codimension-two integer point bound. A nonzero partial
 derivative gives the proper intersection used in the count. -/

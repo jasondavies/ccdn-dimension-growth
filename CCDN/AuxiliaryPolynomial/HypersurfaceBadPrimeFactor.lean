@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.AuxiliaryPolynomial.DegreeBound
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
-public import CCDN.Algebra.PolynomialPredicates
 import CCDN.ForMathlib.MvPolynomial
+
 /-! Bad-prime factors of integer polynomials, and the geometric bad-prime factor used by the
 determinant method. A bad-prime factor `badPrimeFactor P` is zero for nonabsolute equations
 and the exact finite exponential product over the primes above `stepanovThreshold` satisfying

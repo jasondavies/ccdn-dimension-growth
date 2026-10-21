@@ -7,6 +7,7 @@ module
 
 public import CCDN.Determinant.HypersurfaceHeightDeterminant
 import CCDN.Determinant.HomogeneousDeterminantComparison
+
 /-! Exact-rank Bombieri--Vaaler comparison for higher-dimensional hypersurfaces.
 Absence of an auxiliary polynomial forces the explicit numerical inequality. -/
 

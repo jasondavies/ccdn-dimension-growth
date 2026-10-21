@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveChartIdeal
+public import CCDN.Algebra.ProjectiveClosureIdeal
 import CCDN.Algebra.ProjectiveChartScalarExtension
+
 /-! Projective closure preserves the Hilbert degree and its standard
 chart recovers exactly the original affine zero locus. -/
 

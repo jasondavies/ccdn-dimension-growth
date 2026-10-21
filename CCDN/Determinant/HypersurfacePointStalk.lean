@@ -5,12 +5,12 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Determinant.HypersurfaceOriginStalk
 public import CCDN.Algebra.AffineTranslation
-public import CCDN.Determinant.LocalizationAdicLayer
 public import CCDN.Determinant.HypersurfaceHilbert
-import CCDN.Determinant.HypersurfaceTangentEquality
+public import CCDN.Determinant.HypersurfaceOriginStalk
+public import CCDN.Determinant.LocalizationAdicLayer
 import CCDN.AuxiliaryPolynomial.AffineTranslationCount
+import CCDN.Determinant.HypersurfaceTangentEquality
 
 /-!
 Exact local Hilbert functions at arbitrary rational points of an affine

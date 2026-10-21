@@ -7,10 +7,11 @@ module
 
 public import Mathlib.Algebra.BigOperators.Group.Finset.Defs
 public import Mathlib.Basic.Real.Basic
-import Mathlib.Tactic.Linarith
-import Mathlib.Data.Finset.Powerset
-import Mathlib.Data.Finset.Max
 import Mathlib.Algebra.BigOperators.Group.Finset.Basic
+import Mathlib.Data.Finset.Max
+import Mathlib.Data.Finset.Powerset
+import Mathlib.Tactic.Linarith
+
 /-! Finite subset selection for the residue cover. A minimal modulus
 crosses its target by at most one prime factor. A change of containment
 then occurs across a single deletion edge. -/

@@ -10,6 +10,7 @@ public import CCDN.Hilbert.PrincipalStandardMonomials
 import CCDN.AuxiliaryPolynomial.HypersurfaceRankProfile
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.Surface.MonomialWeight
+
 /-! The full standard-monomial prefix produces a proper integer auxiliary
 on the entire bounded surface congruence class, with the sharp weighted
 degree in the sole remaining numerical gap. -/

@@ -6,11 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.AuxiliaryPolynomial.AffineAuxiliaryCases
-import CCDN.AuxiliaryPolynomial.AffineLeadingTranslation
 import CCDN.AuxiliaryPolynomial.AffineAuxiliaryTranslationBound
 import CCDN.AuxiliaryPolynomial.AffineBadPrimeTranslation
+import CCDN.AuxiliaryPolynomial.AffineLeadingTranslation
 import CCDN.AuxiliaryPolynomial.AffineTranslationCount
 import CCDN.Height.ScaledHypersurfaceHeight
+
 /-! The affine auxiliary theorem in every positive dimension and degree,
 with the degree-loss-inclusive geometric bad-prime factor. This distinction
 from the literal affine wording of CCDN Definition 3.2.1 is intentional. -/

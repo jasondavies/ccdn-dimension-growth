@@ -9,6 +9,7 @@ public import CCDN.Determinant.ProjectivePlaneResidueDeterminant
 public import CCDN.Determinant.SingularReduction
 import CCDN.Algebra.ProjectiveAffineChart
 import CCDN.Plane.ProjectivePlaneBezout
+
 /-! Projective finite-field points consist of the standard affine chart and
 at most d points at infinity. The infinity bound is proved by projective
 Bezout and introduces no extra leading multiple of p. -/

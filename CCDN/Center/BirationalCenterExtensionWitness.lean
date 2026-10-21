@@ -12,8 +12,9 @@ import CCDN.Center.GeometricIdealPrimality
 import CCDN.Center.GeometricProjectionHilbert
 import CCDN.Center.GoodCenterWitness
 import CCDN.Center.HomogeneousProjectionBirational
-import CCDN.Hilbert.ScalarExtension
 import CCDN.Hilbert.HomogeneousPrimeComponents
+import CCDN.Hilbert.ScalarExtension
+
 /-! Constructed rational centers remain geometrically disjoint
 birational centers after arbitrary extension of the coefficient field. -/
 

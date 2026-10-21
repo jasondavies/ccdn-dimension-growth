@@ -5,9 +5,10 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Height.Box
 public import CCDN.Height.PrimitiveIntegerPolynomial
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-public import CCDN.Height.Box
+
 /-! Integral translations of the affine chart, lifted to homogeneous linear
 coordinate changes, preserve primitive equations and homogeneous degree. -/
 

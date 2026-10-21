@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Height.Box
 public import CCDN.ClassGroup.NormPolynomial
 public import CCDN.ClassGroup.TwoTorsion
+public import CCDN.Height.Box
 import CCDN.ClassGroup.BalancedGenerator
 
 /-!

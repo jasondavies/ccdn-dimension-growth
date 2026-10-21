@@ -5,21 +5,21 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Center.ResultantForms
+public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Center.ChowPolynomialPower
 import CCDN.Center.ChowProjectionCriterion
+import CCDN.Center.ChowProjectionPower
 import CCDN.Center.ChowRowSymmetry
 import CCDN.Center.ClosedFieldChowBirationalCriterion
-import CCDN.Center.ProjectiveChowExactDegree
-import CCDN.Determinant.SingularDeterminant
-import CCDN.Hilbert.ScalarExtension
-import CCDN.Hilbert.HomogeneousPrimeComponents
-import CCDN.ForMathlib.MvPolynomial
-import CCDN.Center.ChowProjectionPower
-import CCDN.Center.ProjectiveChowWithoutChart
-import CCDN.Projection.IntegralProjectionHilbert
-import CCDN.Center.ChowPolynomialPower
 import CCDN.Center.GenericBlockLineIrreducible
+import CCDN.Center.ProjectiveChowExactDegree
+import CCDN.Center.ProjectiveChowWithoutChart
+import CCDN.Determinant.SingularDeterminant
+import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hilbert.HomogeneousPrimeComponents
+import CCDN.Hilbert.ScalarExtension
+import CCDN.Projection.IntegralProjectionHilbert
 
 /-!
 Sharp-degree resultant detectors defined over the source field and

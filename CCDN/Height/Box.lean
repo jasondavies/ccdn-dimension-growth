@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
+public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.Algebra.Order.Archimedean.Real.Basic
 public import Mathlib.Data.Int.Interval
-public import Mathlib.Algebra.MvPolynomial.Eval
 
 /-!
 # Integral points in real-radius boxes

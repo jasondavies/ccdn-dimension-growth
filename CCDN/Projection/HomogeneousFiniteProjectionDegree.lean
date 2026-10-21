@@ -12,6 +12,7 @@ import CCDN.ForMathlib.FractionRing
 import CCDN.Projection.HomogeneousBirationalDegree
 import CCDN.Projection.IntegralProjectionHilbert
 import CCDN.Projection.PrimitiveCoordinateField
+
 /-! A homogeneous finite birational linear projection preserves the
 Hilbert multiplicity. Both the conductor and the dimension equality
 are consequences of the algebraic hypotheses. -/

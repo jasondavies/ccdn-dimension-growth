@@ -7,9 +7,10 @@ module
 
 public import CCDN.AuxiliaryPolynomial.AffineHypersurfaceAuxiliary
 public import CCDN.ClassGroup.NormPolynomial
-import CCDN.Plane.AffinePlaneBadPrimeCount
 import CCDN.ClassGroup.OddDegreeNormCurveBaseChange
 import CCDN.ClassGroup.OddDegreeNormCurves
+import CCDN.Plane.AffinePlaneBadPrimeCount
+
 /-! Signed norm curves in odd field degree have no bad reduction primes.
 Their integral point count has no logarithmic loss, as required
 by the odd-degree branch of CCDN Theorem 6. -/

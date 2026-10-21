@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Determinant.ProjectiveHypersurfaceLocal
-import CCDN.Determinant.PlaneMultiplicitySmooth
 import CCDN.Determinant.BlockDeterminant
+import CCDN.Determinant.PlaneMultiplicitySmooth
 
 /-!
 Smooth projective congruence classes give simultaneous divisors

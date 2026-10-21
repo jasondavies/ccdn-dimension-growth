@@ -11,6 +11,7 @@ import CCDN.ClassGroup.BalancedGenerator
 import CCDN.ClassGroup.DiscriminantNumerics
 import CCDN.ClassGroup.NumberFieldShortBasis
 import CCDN.ClassGroup.OddDegreeClassGroupCounting
+
 /-! The odd-degree branch of CCDN Theorem 6 for the ideal-class
 group, via the lattice, bounded representatives, translation classes, and
 signed norm curves of the imported files. -/

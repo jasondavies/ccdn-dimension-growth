@@ -6,11 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowNestedIncidence
-public import CCDN.Center.PolynomialCoefficientNormalizationRank
 public import CCDN.Center.GenericLinearPowerBasis
+public import CCDN.Center.PolynomialCoefficientNormalizationRank
 import CCDN.Center.GenericLinearParameterField
 import CCDN.Center.IntermediateFieldParameterTower
 import CCDN.Center.PolynomialCoordinateEmbeddings
+
 /-! Identify the incidence minimal polynomial with the generic
 primitive element of the affine normalization extension. -/
 

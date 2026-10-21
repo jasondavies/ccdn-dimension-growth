@@ -7,11 +7,12 @@ module
 
 public import CCDN.Projection.GeometricAffineProjection
 public import Mathlib.FieldTheory.Galois.Basic
+import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Algebra.ReconstructionFunctionField
 import CCDN.Determinant.HypersurfaceOriginStalk
-import CCDN.Projection.AffineLinearCountTransfer
 import CCDN.Hypersurface.ZeroDimensionalGeometricPoint
-import CCDN.Algebra.ProjectionScalarExtension
+import CCDN.Projection.AffineLinearCountTransfer
+
 /-! The zero-dimensional boundary of the affine projection theorem.
 The source is a rational point; the zero integer projection maps it finitely
 and birationally to the origin in the affine line. -/

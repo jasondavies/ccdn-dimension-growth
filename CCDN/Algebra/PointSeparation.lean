@@ -7,9 +7,10 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.LinearAlgebra.LinearIndependent.Defs
-import Mathlib.Algebra.MvPolynomial.CommRing
 import Mathlib.Algebra.BigOperators.Fin
+import Mathlib.Algebra.MvPolynomial.CommRing
 import Mathlib.Tactic.Ring
+
 /-!
 # Point separation for polynomial sections
 

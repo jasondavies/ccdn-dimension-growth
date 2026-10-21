@@ -8,9 +8,10 @@ module
 public import CCDN.AuxiliaryPolynomial.HypersurfaceRankArchimedean
 public import CCDN.Determinant.HypersurfaceDeterminantRank
 import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeCoordinates
+import CCDN.AuxiliaryPolynomial.HypersurfaceHeightComparison
 import CCDN.AuxiliaryPolynomial.HypersurfaceNormalizedComparison
 import CCDN.Determinant.HomogeneousDeterminantComparison
-import CCDN.AuxiliaryPolynomial.HypersurfaceHeightComparison
+
 /-! Preserve the bad-prime factor through the normalized no-auxiliary
 comparison, as required by the coefficient-sensitive CCDN Theorem 3.1.1.
 

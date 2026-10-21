@@ -5,9 +5,9 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Algebra.OriginShift
 public import Mathlib.CategoryTheory.Types.Basic
 public import Mathlib.Tactic.LinearCombination
-public import CCDN.Algebra.OriginShift
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.ForMathlib.MvPolynomialDerivative
 

@@ -8,6 +8,7 @@ module
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Analysis.SmallDegreeSurfaceNumerics
 import CCDN.ClassGroup.PrimeFactorSubpower
+
 /-! Uniform numerical absorption for quadratic class-group descent.
 The prime-factor and logarithmic losses fit in the positive exponent
 margin between the base-field and extension-field estimates. -/

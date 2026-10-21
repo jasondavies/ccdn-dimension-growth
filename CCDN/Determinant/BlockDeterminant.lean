@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-import all ArithmeticHeights.BombieriVaaler
 public import ArithmeticHeights.BombieriVaaler
+import all ArithmeticHeights.BombieriVaaler
 import CCDN.ForMathlib.Matrix
 
 /-! Combining maximal-minor divisibility across row blocks. -/

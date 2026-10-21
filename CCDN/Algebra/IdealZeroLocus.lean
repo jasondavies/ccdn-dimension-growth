@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.Eval
 public import Mathlib.RingTheory.Ideal.Defs
+
 /-! The zero locus of an ideal of multivariate polynomials, with coordinates in the
 coefficient ring. Over a field `K` this is Mathlib's `MvPolynomial.zeroLocus K I`,
 stated with `eval` rather than `aeval`; that definition is reserved for points with

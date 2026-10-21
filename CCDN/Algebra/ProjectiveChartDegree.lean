@@ -10,6 +10,7 @@ public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Hilbert.AffineCurveDegree
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Height.ProjectiveZeroLocus
+
 /-! The affine chart of a projective coordinate domain, constructed from
 coordinate ratios in a field. Its filtered Hilbert function agrees exactly
 with the homogeneous Hilbert function before dehomogenization. -/

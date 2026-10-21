@@ -8,6 +8,7 @@ module
 public import CCDN.Statements
 import CCDN.Curve.AffineCurveCount
 import CCDN.Surface.AuxiliaryExponent
+
 /-! Counting the nonlinear components of a surface section using their
 total Hilbert degree and the affine curve counting theorem. -/
 

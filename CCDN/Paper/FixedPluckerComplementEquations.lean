@@ -10,6 +10,7 @@ import CCDN.Center.BirationalCenterExtensionWitness
 import CCDN.Center.DetectorExtension
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
 import Mathlib.Algebra.CharZero.Infinite
+
 /-! Sharp equations for the complement of the good-center locus at
 infinity of an affine source, including geometric coefficient extensions. -/
 

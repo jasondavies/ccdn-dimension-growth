@@ -9,6 +9,7 @@ public import CCDN.Statements
 import CCDN.Plane.CurveCount
 import CCDN.Projection.AffineProjectionCount
 import CCDN.Projection.ScaleAbsorption
+
 /-! The coefficient-uniform affine curve count of CCDN Theorem 3. A bounded integral projection
 reduces a curve in `𝔸ⁿ` to an irreducible plane equation of the same degree, whose points the
 plane bound `PlaneCurveBound` counts; exceptional fibres contribute at most `d(d − 1)` points and

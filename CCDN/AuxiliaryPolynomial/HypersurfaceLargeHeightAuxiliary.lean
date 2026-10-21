@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.AuxiliaryPolynomial.Nonmultiple
-public import CCDN.AuxiliaryPolynomial.HypersurfaceNormalizedComparison
 public import CCDN.AuxiliaryPolynomial.HypersurfaceLargeHeightDegree
+public import CCDN.AuxiliaryPolynomial.HypersurfaceNormalizedComparison
+public import CCDN.AuxiliaryPolynomial.Nonmultiple
 import CCDN.AuxiliaryPolynomial.PolynomialMapAuxiliary
+
 /-! Auxiliary polynomials in the large-height range. The degree is
 O_{n,T}(d^(4-1/(n+1))); the leading-coefficient positioning cost is explicit. -/
 

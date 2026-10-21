@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.InfinityParameterReduction
+
 /-! The infinity ideal is homogeneous, so its geometric zero locus is closed
 under scalar multiplication. This allows normalization into finite charts. -/
 

@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalHomogeneousForm
 public import CCDN.Algebra.CoefficientwiseHomogeneous
+public import CCDN.Noether.UniversalHomogeneousForm
+
 /-! Homogeneous substitution with independent coefficient and polynomial
 variables, and specialization of the resulting coefficient forms. -/
 

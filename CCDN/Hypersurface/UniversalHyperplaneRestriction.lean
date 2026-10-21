@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Hypersurface.GraphHyperplaneRestriction
 public import CCDN.Algebra.CoefficientwiseHomogeneous
-import CCDN.Hypersurface.CoefficientwiseSubstitution
+public import CCDN.Hypersurface.GraphHyperplaneRestriction
 import CCDN.Height.ProjectiveZeroLocus
+import CCDN.Hypersurface.CoefficientwiseSubstitution
+
 /-! A homogeneous universal hyperplane restriction without denominators.
 The normal A cuts out A₀x₀+ΣAᵢxᵢ=0; the chart A₀≠0 is represented by
 x₀=−ΣAᵢxᵢ and xᵢ=A₀xᵢ before evaluating a degree-d equation. -/

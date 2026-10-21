@@ -7,6 +7,7 @@ module
 
 public import CCDN.Noether.ClosedFormHeight
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
+
 /-! The integer minor has the logarithmic height needed by the
 fourth-power prime cutoff. The charge applies to primes with proved matrix
 rank drop; identifying these with the geometric bad primes is a separate step. -/

@@ -7,6 +7,7 @@ module
 
 public import CCDN.Plane.ScaledPlaneCount
 import CCDN.ForMathlib.Log
+
 /-! Quantitative large-box and small-box reductions for affine scaling. -/
 
 @[expose] public section

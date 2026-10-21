@@ -10,6 +10,7 @@ public import CCDN.Height.ProjectiveZeroLocus
 import CCDN.Analysis.DegreeDependenceNumerics
 import CCDN.LowerBound.GridHypersurfaceLowerBound
 import CCDN.LowerBound.GridProjectiveLowerBound
+
 /-! Obstructions to improving the degree factors in dimension growth.
 The lower bounds here come from explicitly constructed hypersurfaces with
 absolutely irreducible top forms, so the affine examples meet the hypothesis

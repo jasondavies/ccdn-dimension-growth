@@ -8,10 +8,11 @@ module
 public import CCDN.Algebra.ProjectiveSection
 public import CCDN.Height.ProjectiveBox
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+import CCDN.Algebra.GridPointInterpolation
 import CCDN.Algebra.IntegerPolynomialAvoidance
 import CCDN.Height.ProjectiveIntegerHeight
 import CCDN.Projection.HilbertLowDegreeEquation
-import CCDN.Algebra.GridPointInterpolation
+
 /-! CCDN Corollary 4.1.2: integer points outside a proper irreducible
 affine variety, with coordinates bounded by its Hilbert degree, and the
 corresponding rational projective points of bounded height. -/

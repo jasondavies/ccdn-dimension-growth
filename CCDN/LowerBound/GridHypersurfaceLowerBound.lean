@@ -5,15 +5,16 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Height.ProjectiveZeroLocus
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.LowerBound.GridAffineLowerBound
 import CCDN.LowerBound.GridMultivariate
 import CCDN.LowerBound.GridProjectiveLowerBound
 import CCDN.LowerBound.GridTopFormConstruction
 import CCDN.Surface.TopFormIrreducibility
-import CCDN.ForMathlib.MvPolynomial
+
 /-! Integer hypersurfaces with absolutely irreducible top forms and
 large affine and projective point counts. These constructions apply to the
 hypotheses of CCDN Theorem 4 as well as to projective dimension growth. -/

@@ -5,12 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedIntegerNormalization
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Projection.ImageFractionField
+public import CCDN.Projection.BoundedIntegerNormalization
 public import CCDN.Projection.CurvePrimitivePair
-import CCDN.Projection.LinearParameterPrimitive
+public import CCDN.Projection.ImageFractionField
 import CCDN.Projection.LeadingCoordinateExtension
+import CCDN.Projection.LinearParameterPrimitive
+
 /-! A bounded integer linear finite birational projection of a
 homogeneous prime quotient to a hypersurface of exactly the same degree. -/
 

@@ -8,6 +8,7 @@ module
 public import CCDN.Noether.BivariateCoefficientMatrix
 import CCDN.Noether.ClosedFormGradient
 import CCDN.Noether.ClosedFormScaling
+
 /-! The Euler constraint removes the gradient kernel from the bivariate
 closed-form criterion. This supplies the injective operator needed for
 Noether minors of degree d^2-1. -/

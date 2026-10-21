@@ -5,19 +5,19 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
-public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Hilbert.AffineCurveDegree
+public import CCDN.Projection.BoundedBirationalHypersurfaceProjection
 public import Mathlib.Analysis.SpecialFunctions.Pow.Real
-import CCDN.Projection.AffineLinearCountTransfer
-import CCDN.Projection.BoundedDegreeNormalizationFiber
-import CCDN.Projection.ClosureProjectionBirational
 import CCDN.Algebra.ProjectionScalarExtension
 import CCDN.Hilbert.PrincipalHilbertPolynomial
 import CCDN.Hilbert.ProjectiveClosureHilbertPolynomial
+import CCDN.Projection.AffineLinearCountTransfer
+import CCDN.Projection.BoundedDegreeNormalizationFiber
+import CCDN.Projection.ClosureProjectionBirational
 import CCDN.Projection.HomogeneousFiniteProjectionDegree
-import CCDN.Projection.LinearParameterPrimitive
 import CCDN.Projection.LeadingCoordinateExtension
+import CCDN.Projection.LinearParameterPrimitive
 
 /-!
 The positive-dimensional affine projection in CCDN Proposition 4.3.1.

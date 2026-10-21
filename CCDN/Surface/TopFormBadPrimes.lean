@@ -7,10 +7,11 @@ module
 
 public import CCDN.AuxiliaryPolynomial.HypersurfaceBadPrimeFactor
 public import CCDN.Height.PrimitiveIntegerPolynomial
+import CCDN.Algebra.PrimitiveNormalization
 import CCDN.AuxiliaryPolynomial.PlaneAuxiliaryCount
 import CCDN.AuxiliaryPolynomial.UnscaledHypersurfaceBadPrimes
-import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Surface.TopFormIrreducibility
+
 /-! Bad reduction of an affine equation is contained in bad reduction of
  its top homogeneous form. This includes degree loss in the defined predicate. -/
 

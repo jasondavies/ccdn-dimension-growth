@@ -7,12 +7,12 @@ module
 
 public import CCDN.Projection.ProjectiveClosureProjection
 public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import CCDN.Projection.ProjectiveClosureSpecialization
 import CCDN.AuxiliaryPolynomial.HypersurfacePositioning
-import CCDN.Projection.FixedCoordinateElimination
-import CCDN.Projection.FixedCoordinateElimination
-import Mathlib.Algebra.MvPolynomial.Funext
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Projection.FixedCoordinateElimination
+import CCDN.Projection.ProjectiveClosureSpecialization
+import Mathlib.Algebra.MvPolynomial.Funext
+
 /-! Over any infinite field a full-degree affine elimination also gives
 an integral projection of the projective closure, retaining X0 exactly. -/
 

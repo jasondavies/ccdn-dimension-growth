@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.GenericPlaneStretch
 public import CCDN.Noether.ClosedFormBaseChange
+public import CCDN.Noether.GenericPlaneStretch
 import CCDN.Algebra.PolynomialPrimeLocalization
 import CCDN.Noether.ShearNormalization
+
 /-! Ordinary irreducibility of f(x,y*z_1,...,y*z_n) over the rational function
 field in the slopes z_i. The original equation is irreducible and monic in x;
 all parameter extensions and changes of polynomial presentation are proved. -/

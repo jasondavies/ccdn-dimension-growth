@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Localization.FractionRing
 import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
+
 /-! Polynomial reconstruction identities prove generation of the
 source function field. This is the converse to the rational-inverse
 construction, and makes birationality explicit in counting projections. -/

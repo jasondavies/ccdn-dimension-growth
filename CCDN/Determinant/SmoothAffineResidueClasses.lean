@@ -10,6 +10,7 @@ public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.Data.ZMod.Basic
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Plane.FiniteFieldPolynomialZeros
+
 /-! Smooth affine residue classes and their simultaneous cardinality
 bound. The elementary d*p^(ambient-1) bound suffices when the number of
 chosen primes is absorbed by a small power of the box size. -/

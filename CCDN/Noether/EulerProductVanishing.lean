@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Noether.EulerGenericFactors
-import CCDN.Noether.EulerPairSpecialization
 import CCDN.ForMathlib.Matrix
+import CCDN.Noether.EulerPairSpecialization
 
 /-!
 Characteristic-independent vanishing on products. A generic integral

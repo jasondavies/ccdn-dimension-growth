@@ -6,10 +6,10 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Plane.HyperplanePlaneAvoidance
 import CCDN.Plane.IntegerPlaneHeight
 import Mathlib.Algebra.BigOperators.Field
-import CCDN.ForMathlib.MvPolynomial
 import Mathlib.LinearAlgebra.Matrix.AbsoluteValue
 
 /-!

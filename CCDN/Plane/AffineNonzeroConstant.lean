@@ -10,9 +10,9 @@ public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.PrimitiveIntegerPolynomial
 public import CCDN.Statements
-import CCDN.Plane.UnscaledModelCount
 import CCDN.Plane.AffineBoxRanges
 import CCDN.Plane.ScaledBoxExponent
+import CCDN.Plane.UnscaledModelCount
 
 /-!
 Combining the scaling-prime, large-coefficient and small-box branches.

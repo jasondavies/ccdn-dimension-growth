@@ -6,12 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Projection.ImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Projection.ImageFractionField
 import CCDN.Center.HomogeneousProjectionRankBound
-import CCDN.Projection.HomogeneousFiniteProjectionDegree
 import CCDN.Hypersurface.SmallOutsidePoint
 import CCDN.Hypersurface.ZeroDimensionalPrimeDescent
+import CCDN.Projection.HomogeneousFiniteProjectionDegree
 
 /-!
 A finite homogeneous linear projection preserves the Hilbert

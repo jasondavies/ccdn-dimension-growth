@@ -9,6 +9,7 @@ public import CCDN.Noether.EulerUniversalForms
 import CCDN.Noether.EulerMonomialColumns
 import CCDN.Noether.EulerPairSpecialization
 import CCDN.Noether.ShearNormalization
+
 /-! Each row and Euler column uses at most one coefficient of the defining
 equation, with integer multiplier bounded by its degree. -/
 

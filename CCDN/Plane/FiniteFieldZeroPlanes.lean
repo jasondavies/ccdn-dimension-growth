@@ -8,6 +8,7 @@ module
 public import CCDN.Plane.FiniteFieldBadPlanes
 import CCDN.Noether.UniversalPlaneSpecialization
 import CCDN.Plane.FiniteFieldPolynomialZeros
+
 /-! Identically zero sections are bounded separately using their three
 defining points. This gives three powers of the field size in the
 denominator, even with degenerate parameterizations included. -/

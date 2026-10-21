@@ -8,6 +8,7 @@ module
 public import CCDN.Algebra.AffineTranslation
 public import CCDN.Determinant.SingularReduction
 import CCDN.Plane.GridHeight
+
 /-! Bounded translations remove a zero constant coefficient and preserve the
 finite-field residue count, primitivity and integer point families. -/
 

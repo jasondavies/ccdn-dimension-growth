@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hilbert.FilteredIntersection
+
 /-! Balanced coordinate-power reductions imply eventual generation by a
 linear parameter in arbitrary ambient dimension. -/
 

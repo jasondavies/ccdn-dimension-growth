@@ -7,14 +7,14 @@ module
 
 public import CCDN.Algebra.HomogeneousChart
 public import CCDN.Algebra.HomogeneousTranslation
+public import CCDN.Height.IntegerCoefficientHeight
 public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 public import Mathlib.RingTheory.MvPolynomial.MonomialOrder
-public import CCDN.Height.IntegerCoefficientHeight
-import CCDN.Plane.HomogeneousLeadingCoefficient
-import CCDN.Plane.GridHeight
-import CCDN.ForMathlib.Log
 import CCDN.Algebra.HomogeneousEvaluation
 import CCDN.Algebra.HomogeneousRankDichotomy
+import CCDN.ForMathlib.Log
+import CCDN.Plane.GridHeight
+import CCDN.Plane.HomogeneousLeadingCoefficient
 
 /-!
 The bounded leading-coefficient translation has a controlled height cost.

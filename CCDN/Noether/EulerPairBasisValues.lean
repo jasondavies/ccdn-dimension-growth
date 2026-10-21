@@ -5,8 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.EulerPairBasis
 public import CCDN.ForMathlib.Matrix
+public import CCDN.Noether.EulerPairBasis
+
 /-! Explicit monomial values of the Euler basis and nonzero minors of the
 correct Noether order d^2-1. -/
 

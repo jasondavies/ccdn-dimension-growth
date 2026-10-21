@@ -10,6 +10,8 @@
 * The discrepancy table of README.md, against the statuses and `in_addenda` flags of
   docs/completion-audit.json, and the numbers of audited statements and external inputs quoted
   in README.md and formalization.yaml.
+* The commands of scripts/check.sh, against the list of checks in README.md (same commands, same
+  order).
 
 All problems are reported before exiting.
 """
@@ -112,18 +114,40 @@ def discrepancies(problems: list[str]) -> int:
     return len(expected)
 
 
+def checks(problems: list[str]) -> int:
+    commands = []
+    for line in (ROOT / "scripts" / "check.sh").read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if match := re.fullmatch(r"python3 scripts/(\S+)(.*)", line):
+            commands.append((match.group(1) + match.group(2)).strip())
+        elif line.startswith("lake "):
+            commands.append(line)
+    readme = (ROOT / "README.md").read_text(encoding="utf-8")
+    section = readme.split("## Build and checks", 1)[-1].split("\n## ", 1)[0]
+    listed = []
+    for line in section.splitlines():
+        if line.startswith("- `"):
+            listed += re.findall(r"`([^`]+)`", line[2:].split(":", 1)[0])
+    if listed != commands:
+        problems.append("README.md lists the checks " + ", ".join(listed) +
+                        "; scripts/check.sh runs " + ", ".join(commands))
+    return len(commands)
+
+
 def main() -> int:
     argparse.ArgumentParser(description=__doc__.splitlines()[0]).parse_args()
     problems: list[str] = []
     theorems = compared_theorems(problems)
     versions(problems)
     rows = discrepancies(problems)
+    commands = checks(problems)
     if problems:
         print("Consistency check failed:")
         print("\n".join(f"  {problem}" for problem in problems))
         return 1
-    print(f"Consistency: {theorems} compared theorems, the toolchain and Mathlib pins, and "
-          f"{rows} discrepancies agree across the repository.")
+    print(f"Consistency: {theorems} compared theorems, the toolchain and Mathlib pins, "
+          f"{rows} discrepancies and the {commands} commands of scripts/check.sh agree across "
+          "the repository.")
     return 0
 
 

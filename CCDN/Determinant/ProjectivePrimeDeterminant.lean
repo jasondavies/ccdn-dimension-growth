@@ -8,9 +8,9 @@ module
 public import CCDN.Determinant.ProjectivePlaneResidueDeterminant
 public import CCDN.Determinant.SingularDeterminantCutoff
 public import CCDN.Height.CountingHypotheses
+import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Determinant.PrimeAggregation
 import CCDN.Determinant.ProjectiveMultiplicity
-import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Determinant.ProjectiveResidueCardinality
 import CCDN.Plane.CurveCount
 

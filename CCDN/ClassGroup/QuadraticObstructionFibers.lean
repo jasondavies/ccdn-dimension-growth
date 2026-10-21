@@ -7,11 +7,11 @@ module
 
 public import CCDN.ClassGroup.QuadraticInvariantIdeal
 public import Mathlib.NumberTheory.NumberField.Units.DirichletTheorem
-import CCDN.ForMathlib.FieldTheory
+import CCDN.ClassGroup.NumberFieldUnitSquareClasses
 import CCDN.ClassGroup.QuadraticNormConjugation
+import CCDN.ForMathlib.FieldTheory
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Flat.TorsionFree
-import CCDN.ClassGroup.NumberFieldUnitSquareClasses
 
 /-!
 The unit-norm obstruction for ambiguous ideal classes.

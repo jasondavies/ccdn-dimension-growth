@@ -10,6 +10,7 @@ public import CCDN.Projection.DegreePreservingProjectionBox
 import CCDN.Determinant.PolynomialMapDeterminant
 import CCDN.Height.ProjectiveIntegerHeight
 import CCDN.Projection.DegreePreservingProjectionBox
+
 /-! The bounded integral affine projection lifts to a projective plane
 map on the standard chart, with the same polynomial height factor. -/
 

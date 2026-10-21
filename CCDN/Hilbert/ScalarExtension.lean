@@ -9,6 +9,7 @@ public import CCDN.Algebra.PolynomialLinearDescent
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Hilbert.StandardMonomials
 import Mathlib.LinearAlgebra.Dual.Lemmas
+
 /-! Scalar extension preserves the filtered Hilbert polynomial.
 Coefficient-linear functionals descend elements of the extended ideal.
 A functional nonzero on a leading coefficient preserves its leading exponent. -/

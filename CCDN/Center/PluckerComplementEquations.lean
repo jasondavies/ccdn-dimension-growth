@@ -5,12 +5,13 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ZeroColumnCenterSubspace
 public import CCDN.Center.GeometricIdealPrimality
+public import CCDN.Center.ZeroColumnCenterSubspace
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.BirationalCenterExtensionWitness
 import CCDN.Center.DetectorBounds
 import CCDN.Center.DetectorExtension
+
 /-! Sharp homogeneous equations for the complement of the good-center
 locus in Pluecker coordinates, including coefficient-field extension. -/
 

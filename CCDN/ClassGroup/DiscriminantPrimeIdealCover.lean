@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import Mathlib.RingTheory.QuasiFinite.Basic
 public import Mathlib.NumberTheory.NumberField.Discriminant.Defs
+public import Mathlib.RingTheory.QuasiFinite.Basic
 public import Mathlib.RingTheory.RamificationInertia.Ramification
 import Mathlib.NumberTheory.NumberField.Discriminant.Different
 

@@ -6,11 +6,12 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.GraphHyperplaneRestriction
-import CCDN.Hypersurface.AffineHyperplaneSlice
 import CCDN.Algebra.PrimitiveNormalization
+import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hypersurface.AffineHyperplaneSlice
 import CCDN.Surface.TopFormIrreducibility
 import Mathlib.Algebra.BigOperators.Field
-import CCDN.ForMathlib.MvPolynomial
+
 /-! Integer equations for every parallel level of a constructed good
 hyperplane. Degrees and geometric irreducibility of the leading forms are
 preserved, and deleting the solved coordinate does not enlarge the box. -/

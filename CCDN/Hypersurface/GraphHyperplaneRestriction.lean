@@ -6,8 +6,8 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.SectionBounds
-import CCDN.Plane.FullDegreeSectionIrreducibility
 import CCDN.Determinant.PlaneMultiplicity
+import CCDN.Plane.FullDegreeSectionIrreducibility
 import Mathlib.Algebra.MvPolynomial.Funext
 
 /-! A hyperplane written as x₀ = ∑ aᵢxᵢ. A full-degree

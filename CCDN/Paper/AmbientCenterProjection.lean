@@ -5,10 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.BoundedGoodCenter
 public import CCDN.Center.BirationalComplementProjection
+public import CCDN.Center.BoundedGoodCenter
 public import CCDN.Center.ProjectionHeight
 import CCDN.Center.DetectorBounds
+
 /-! The full ambient height quantifier of CCDN Lemma 5.1. The constructed
 finite birational complementary projection has the required height bound
 at every rational point outside its center, not just on the source. -/
