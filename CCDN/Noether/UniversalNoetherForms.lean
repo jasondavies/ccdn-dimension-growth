@@ -8,15 +8,106 @@ module
 public import CCDN.ForMathlib.IntegerPolynomialL1
 public import CCDN.Noether.AmbientNoetherForms
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+public import CCDN.ForMathlib.Matrix
+public import CCDN.Noether.EulerPairBasis
+public import CCDN.Noether.UniversalPlaneFamily
 import CCDN.Noether.AmbientNoetherHeight
-import CCDN.Noether.AmbientNoetherNonvanishing
 import CCDN.Noether.AmbientNoetherVanishing
 import Mathlib.Data.Sym.Card
 import Mathlib.Data.Int.Interval
-/-! A finite family of universal integer Noether forms, with the exact
-degree and coefficient bound of CCDN Theorem 3.2.2. -/
+import CCDN.Determinant.GenericPlaneEulerMinorCharZero
+import CCDN.Determinant.UniversalPlaneMinor
+import CCDN.Noether.EulerPairSpecialization
+import CCDN.Noether.EulerUniversalForms
+
+/-!
+A finite family of universal integer Noether forms, with the exact
+degree and coefficient bound of CCDN Theorem 3.2.2.
+
+Characteristic-zero nonvanishing of the ambient integer
+coefficient forms, descended from the algebraic closure.
+
+Every absolutely irreducible characteristic-zero hypersurface of degree
+d at least two gives a nonzero Euler minor of order d²−1 in the universal
+affine-plane parameter ring.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+lemma eulerClosedFormCoefficientMatrix_smul {R : Type*} [CommRing R]
+    (u : R) (k : ℕ) (f : Polynomial (Polynomial R)) :
+    eulerClosedFormCoefficientMatrix k (u • f) = u • eulerClosedFormCoefficientMatrix k f := by
+  ext row col
+  change eulerCoefficientEntryLinear k row col (u • f) =
+    u • eulerCoefficientEntryLinear k row col f
+  exact map_smul _ _ _
+
+lemma eulerClosedForm_minor_smul {R : Type*} [CommRing R]
+    (u : R) (k r : ℕ) (f : Polynomial (Polynomial R))
+    (a : Fin r → ℕ × ℕ) (c : Fin r → EulerColumns k) :
+    ((eulerClosedFormCoefficientMatrix k (u • f)).submatrix a c).det =
+      u ^ r * ((eulerClosedFormCoefficientMatrix k f).submatrix a c).det := by
+  rw [eulerClosedFormCoefficientMatrix_smul]
+  change (u • (eulerClosedFormCoefficientMatrix k f).submatrix a c).det = _
+  rw [Matrix.det_smul, Fintype.card_fin]
+
+/-- The universal affine-plane family has a nonzero determinant of
+the precise Noether order. -/
+theorem exists_universalPlane_euler_minor_charZero
+    {K σ : Type*} [Field K] [CharZero K] [IsAlgClosed K] [Fintype σ]
+    (k : ℕ) (f : MvPolynomial (Option σ) K) (hf : Irreducible f)
+    (hd : f.totalDegree = k + 2) :
+    (eulerClosedFormCoefficientMatrix k (universalPlanePolynomial f)).HasNonzeroMinor
+      ((k + 2) ^ 2 - 1) := by
+  obtain ⟨a, b, hb, _, rows, cols, hdet⟩ :=
+    exists_positioned_genericPlane_euler_minor_charZero k f hf hd
+  let R := MvPolynomial σ K
+  let F := FractionRing R
+  let φ : R →+* F := algebraMap R F
+  have hne : φ (((eulerClosedFormCoefficientMatrix k
+      (genericPlanePolynomial (normalizedHypersurfaceCoordinates a b hb f))).submatrix rows cols).det) ≠ 0 :=
+    (map_ne_zero_iff _ (IsFractionRing.injective R F)).mpr hdet
+  rw [eulerClosedForm_minor_map, normalized_genericPlane_universal_specialization,
+    eulerClosedForm_minor_smul, ← eulerClosedForm_minor_map] at hne
+  refine ⟨rows, cols, ?_⟩
+  intro he
+  exact hne (by rw [he, map_zero, mul_zero])
+
+end
+end CCDN
+
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+/-- Some constructed universal form detects every absolutely irreducible
+homogeneous equation in characteristic zero. -/
+theorem exists_ambientNoetherForm_nonzero {K σ : Type*}
+    [Field K] [CharZero K] [Fintype σ] [DecidableEq σ]
+    (k : ℕ) (f : MvPolynomial (Option σ) K) (hf : f.IsHomogeneous (k + 2))
+    (hir : Irreducible (MvPolynomial.map (algebraMap K (AlgebraicClosure K)) f)) :
+    ∃ (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
+      (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k)
+      (m : PlaneParameters (Option σ) →₀ ℕ),
+      homogeneousCoefficientSpecialization (k + 2) f
+        (ambientNoetherForm (Option σ) k rows cols m) ≠ 0 := by
+  let φ := algebraMap K (AlgebraicClosure K)
+  have hd : (MvPolynomial.map φ f).totalDegree = k + 2 := (hf.map φ).totalDegree hir.ne_zero
+  obtain ⟨rows, cols, hdet⟩ := exists_universalPlane_euler_minor_charZero
+    k (MvPolynomial.map φ f) hir hd
+  obtain ⟨m, hm⟩ := exists_coeff_ne_zero hdet
+  refine ⟨rows, cols, m, ?_⟩
+  intro hz
+  apply hm
+  rw [← ambientEuler_minor_map φ k f rows cols, coeff_map,
+    ← ambientNoetherForm_specialize k f hf rows cols m, hz, map_zero]
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial

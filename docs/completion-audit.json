@@ -1520,12 +1520,12 @@
     },
     {
       "id": "e074",
-      "file": "CCDN/Auxiliary/HypersurfaceShearInvariance.lean",
+      "file": "CCDN/Auxiliary/AbsoluteAuxiliary.lean",
       "declaration": "CCDN.hypersurfaceBadReduction_homogeneousTranslation"
     },
     {
       "id": "e075",
-      "file": "CCDN/Auxiliary/HypersurfaceAuxiliaryScaling.lean",
+      "file": "CCDN/Auxiliary/AbsoluteAuxiliary.lean",
       "declaration": "CCDN.auxiliary_box_rpow_factor"
     },
     {
@@ -1760,7 +1760,7 @@
     },
     {
       "id": "e122",
-      "file": "CCDN/Surface/DegreeOneComponentLines.lean",
+      "file": "CCDN/Surface/SurfaceDegreeOneCount.lean",
       "declaration": "CCDN.degree_one_components_line_cover"
     },
     {
@@ -2000,7 +2000,7 @@
     },
     {
       "id": "e170",
-      "file": "CCDN/Noether/AmbientNoetherNonvanishing.lean",
+      "file": "CCDN/Noether/UniversalNoetherForms.lean",
       "declaration": "CCDN.exists_ambientNoetherForm_nonzero"
     },
     {
@@ -2065,7 +2065,7 @@
     },
     {
       "id": "e183",
-      "file": "CCDN/ClassGroup/ClassGroupBoundedGenerators.lean",
+      "file": "CCDN/ClassGroup/ClassGroupTranslateFibers.lean",
       "declaration": "CCDN.classGroupTwoTorsionCard_le_boundedSquareNormIntegers"
     },
     {
@@ -2075,7 +2075,7 @@
     },
     {
       "id": "e185",
-      "file": "CCDN/ClassGroup/UniformNumberFieldLatticeCount.lean",
+      "file": "CCDN/ClassGroup/NoIndexTwoClassGroupBound.lean",
       "declaration": "CCDN.boundedSquareNormTranslationClasses_uniform_count"
     },
     {
@@ -2085,7 +2085,7 @@
     },
     {
       "id": "e187",
-      "file": "CCDN/ClassGroup/OddIndexNormCurveCount.lean",
+      "file": "CCDN/ClassGroup/NoIndexTwoClassGroupCounting.lean",
       "declaration": "CCDN.signed_norm_curve_count_of_odd_subfield_index"
     },
     {
@@ -2110,7 +2110,7 @@
     },
     {
       "id": "e192",
-      "file": "CCDN/ClassGroup/LatticePrescribedProduct.lean",
+      "file": "CCDN/ClassGroup/NumberFieldShortBasis.lean",
       "declaration": "CCDN.prescribed_greedy_lattice_basis_product_le"
     },
     {
@@ -2140,7 +2140,7 @@
     },
     {
       "id": "e198",
-      "file": "CCDN/ClassGroup/ClassGroupDegreeOne.lean",
+      "file": "CCDN/ClassGroup/QuadraticClassGroupDescent.lean",
       "declaration": "CCDN.classGroupTwoTorsionCard_eq_one_of_degree_one"
     },
     {

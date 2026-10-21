@@ -7,12 +7,38 @@ module
 
 public import CCDN.ForMathlib.IntegerPolynomialL1
 public import CCDN.Noether.AmbientNoetherForms
-import CCDN.Noether.EulerUniversalHeight
+public import Mathlib.Algebra.Group.Nat.Defs
+public import Mathlib.Data.Nat.Factorial.Basic
 import CCDN.Noether.UniversalPlaneL1
-/-! The printed coefficient-sum bound for the ambient Noether forms.
-Coefficient extraction from plane parameters costs no additional factor. -/
+
+/-!
+The printed coefficient-sum bound for the ambient Noether forms.
+Coefficient extraction from plane parameters costs no additional factor.
+
+The sharp printed coefficient-sum bound for the plane Noether minors:
+each entry has l1 norm at most d, hence the order d²−1 determinant has
+l1 norm at most d^(3d²−3).
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+
+lemma factorial_mul_degree_pow_le (d r : ℕ) (hr : r ≤ d ^ 2) :
+    r.factorial * d ^ r ≤ d ^ (3 * r) := by
+  calc
+    r.factorial * d ^ r ≤ r ^ r * d ^ r :=
+      Nat.mul_le_mul_right _ (Nat.factorial_le_pow r)
+    _ ≤ (d ^ 2) ^ r * d ^ r :=
+      Nat.mul_le_mul_right _ (Nat.pow_le_pow_left hr r)
+    _ = d ^ (3 * r) := by
+      rw [← pow_mul, ← pow_add]
+      congr 1
+      omega
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial

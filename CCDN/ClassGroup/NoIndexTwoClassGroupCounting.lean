@@ -5,15 +5,62 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.ClassGroup.OddIndexNormCurveCount
 public import CCDN.ClassGroup.SmallSubfieldIntegerCount
+public import CCDN.Statements
+public import CCDN.Plane.AffineNonzeroConstant
+public import CCDN.ClassGroup.ClassGroupNormPolynomial
+public import CCDN.Algebra.PolynomialPredicates
 import CCDN.ClassGroup.NormCurveExceptionalReduction
 import CCDN.ClassGroup.OddDegreeClassGroupCounting
-/-! Counting the bounded square-norm integers in the absence of
+import CCDN.ClassGroup.OddDegreeNormCurveBaseChange
+import CCDN.ClassGroup.SquareNormCurveIrreducibility
+import CCDN.Plane.PlaneCount
+
+/-!
+Counting the bounded square-norm integers in the absence of
 an index-two subfield. Ordinary norm curves and small-subfield exceptions
-are both counted by proved estimates. -/
+are both counted by proved estimates.
+
+Uniform counts for signed norm curves whose parameter generates a
+subfield of odd index. The ambient field degree may be even.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open scoped NumberField IntermediateField
+
+def oddIndexNormCurveCountConstant : ℝ :=
+  2 * Real.exp 1 * affineNonzeroConstantBound planeResidueConstant
+
+lemma oddIndexNormCurveCountConstant_pos : 0 < oddIndexNormCurveCountConstant :=
+  mul_pos (by positivity) (affineNonzeroConstantBound_pos planeResidueConstant)
+
+theorem signed_norm_curve_count_of_odd_subfield_index
+    (K : Type*) [Field K] [NumberField K]
+    (β : 𝓞 K) {ε : ℤ} (hε : ε ≠ 0)
+    (hn : 2 ≤ Module.finrank ℚ K)
+    (hindex : Odd (Module.finrank ℚ⟮(β : K)⟯ K))
+    {B : ℝ} (hB : 1 ≤ B) :
+    (count (zeroLocus (MvPolynomial.map (Int.castRingHom ℚ)
+      (signedNormCurvePolynomial K β ε))) B : ℝ) ≤
+      oddIndexNormCurveCountConstant * (Module.finrank ℚ K : ℝ) ^ 3 *
+        B ^ (1 / (Module.finrank ℚ K : ℝ)) *
+          (Real.log B + Module.finrank ℚ K) := by
+  have hεQ : (ε : ℚ) ≠ 0 := by exact_mod_cast hε
+  have hd := signedNormCurvePolynomial_map_totalDegree K ℚ β hεQ hn
+  have hir : AbsolutelyIrreducibleRat
+      (MvPolynomial.map (Int.castRingHom ℚ) (signedNormCurvePolynomial K β ε)) :=
+    (absolutelyIrreducibleRat_map_iff _).mpr
+      (signedNormCurvePolynomial_absolute_irreducible_of_odd_subfield_index K β hε hindex)
+  have h := count_rational_plane_of_residue_bound _ hir (by omega) hB
+    planeResidueConstant_pos.le planeResidueBound
+  rw [hd] at h
+  simpa only [curveBound, oddIndexNormCurveCountConstant, mul_assoc] using h
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open NumberField NumberField.InfinitePlace

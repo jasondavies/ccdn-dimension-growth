@@ -7,15 +7,93 @@ module
 
 public import CCDN.ClassGroup.LatticePrescribedMinima
 public import CCDN.ClassGroup.NumberFieldEuclideanLattice
+public import Mathlib.Algebra.Module.ZLattice.Covolume
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.ClassGroup.EuclideanNumberFieldBasis
 import CCDN.ClassGroup.FieldBasisMultiplicationProduct
-import CCDN.ClassGroup.LatticeDiscriminantNumerics
-import CCDN.ClassGroup.LatticePrescribedProduct
-/-! Short independent algebraic integers at the uniform discriminant-root
+import CCDN.ClassGroup.LatticeMinimaFlag
+import CCDN.ClassGroup.LatticeMinimaProduct
+import Mathlib.Algebra.Order.Algebra
+
+/-!
+Short independent algebraic integers at the uniform discriminant-root
 scale, from greedy lattice vectors, the multiplication pairing, and the
-covolume estimate. -/
+covolume estimate.
+
+The product-of-lengths bound for a prescribed first lattice vector.
+Each later vector is shortest outside the preceding span, and the covolume
+bound for positive monotone flag thresholds applies.
+
+Numerical conversion of a lattice norm-product bound into the uniform
+discriminant-root scale for its largest minimum.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+
+theorem largest_minimum_le_discriminant_root
+    {n : ℕ} (hn : 0 < n) {M P D : ℝ} (hP : 0 ≤ P) (hD : 0 ≤ D)
+    (hminimum : M ^ n ≤ P ^ 2)
+    (hproduct : P ≤ Real.sqrt n * (n : ℝ) ^ n * Real.sqrt D) :
+    M ≤ (n : ℝ) ^ 3 * D ^ (1 / (n : ℝ)) := by
+  have hnR : (0 : ℝ) < n := by exact_mod_cast hn
+  have hn1 : (1 : ℝ) ≤ n := by exact_mod_cast hn
+  have hsq := (sq_le_sq₀ hP (by positivity)).mpr hproduct
+  have hsq' : P ^ 2 ≤ (n : ℝ) ^ (2 * n + 1) * D := by
+    convert hsq using 1
+    rw [mul_pow, mul_pow, Real.sq_sqrt hnR.le, Real.sq_sqrt hD,
+      pow_succ, pow_mul]
+    ring
+  have hdegrees : (n : ℝ) ^ (2 * n + 1) ≤ (n : ℝ) ^ (3 * n) :=
+    pow_le_pow_right₀ hn1 (by omega)
+  have hroot : (D ^ (1 / (n : ℝ))) ^ n = D := by
+    rw [← Real.rpow_mul_natCast hD, one_div_mul_cancel hnR.ne', Real.rpow_one]
+  apply le_of_pow_le_pow_left₀ hn.ne' (by positivity)
+  rw [mul_pow, ← pow_mul, hroot]
+  exact hminimum.trans (hsq'.trans (mul_le_mul_of_nonneg_right hdegrees hD))
+
+theorem sqrt_degree_le_discriminant_root
+    {n : ℕ} (hn : 0 < n) {D : ℝ} (hD : 1 ≤ D) :
+    Real.sqrt n ≤ (n : ℝ) ^ 3 * D ^ (1 / (n : ℝ)) := by
+  have hn1 : (1 : ℝ) ≤ n := by exact_mod_cast hn
+  have hsqrt : Real.sqrt n ≤ (n : ℝ) := by
+    apply (sq_le_sq₀ (Real.sqrt_nonneg _) (Nat.cast_nonneg n)).mp
+    rw [Real.sq_sqrt (Nat.cast_nonneg n)]
+    nlinarith
+  have hcube : (n : ℝ) ≤ (n : ℝ) ^ 3 := by
+    simpa using pow_le_pow_right₀ hn1 (by omega : 1 ≤ 3)
+  have hroot : 1 ≤ D ^ (1 / (n : ℝ)) := Real.one_le_rpow hD (by positivity)
+  exact (hsqrt.trans hcube).trans
+    (by simpa using mul_le_mul_of_nonneg_left hroot (by positivity : 0 ≤ (n : ℝ) ^ 3))
+
+end
+end CCDN
+
+namespace CCDN
+noncomputable section
+open Module MeasureTheory
+
+variable {E : Type*} [NormedAddCommGroup E] [InnerProductSpace ℝ E]
+  [FiniteDimensional ℝ E] [MeasurableSpace E] [BorelSpace E]
+
+theorem prescribed_greedy_lattice_basis_product_le
+    (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
+    {n : ℕ} {w : E} (b : Basis (Fin (n + 1)) ℝ E)
+    (hb : IsPrescribedGreedyLatticeFamily L w b)
+    {δ : ℝ} (hδ : 0 < δ) (hlower : ∀ x, x ∈ L → x ≠ 0 → δ ≤ ‖x‖) :
+    (∏ i, ‖b i‖) ≤ (‖w‖ / δ) * (n + 1 : ℝ) ^ (n + 1) * ZLattice.covolume L := by
+  obtain ⟨c, hflag⟩ := exists_orthonormal_basis_with_same_flag b
+  have hprod := lattice_flag_minima_product_le (by omega : 0 < n + 1) L c
+    (prescribedLatticeMinima b δ) (hb.minima_pos hδ) (hb.minima_mono hlower)
+    (fun i x hx hxU => hb.minima_outside hlower i x hx (by rwa [← hflag i]))
+  rw [prescribedLatticeMinima_prod b hb.first_eq hδ.ne']
+  have hh := mul_le_mul_of_nonneg_left hprod (div_nonneg (norm_nonneg w) hδ.le)
+  simpa only [Nat.cast_add, Nat.cast_one, mul_assoc] using hh
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open Module NumberField

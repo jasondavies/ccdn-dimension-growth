@@ -10,13 +10,119 @@ public import CCDN.Analysis.PrimeSums
 public import CCDN.Auxiliary.AuxiliaryDegreeBound
 public import CCDN.Auxiliary.HypersurfaceBadPrimes
 public import CCDN.Height.IntegerCoefficientHeight
+public import CCDN.Noether.UniversalPlaneBadWitness
+public import CCDN.Noether.ClosedFormHeight
+public import CCDN.Plane.FiniteFieldBadPlanes
+public import Mathlib.Analysis.SpecialFunctions.Log.Basic
 import CCDN.Auxiliary.BadPrimeCharge
-import CCDN.Auxiliary.IntegerPlaneWitness
-import CCDN.Auxiliary.IntegerPlaneWitnessHeight
-/-! The geometric bad-prime charge in arbitrary dimension is controlled by
-coefficient height, via an explicit integer witness with bounded height. -/
+import CCDN.Algebra.IntegerPolynomialAvoidance
+import CCDN.Auxiliary.UniversalPlaneBadReduction
+import CCDN.Determinant.ClosedFormIntegerMinor
+import CCDN.Determinant.ClosedFormMinorCharge
+
+/-!
+The geometric bad-prime charge in arbitrary dimension is controlled by
+coefficient height, via an explicit integer witness with bounded height.
+
+A nonzero bad-prime witness obtained by evaluating the universal
+plane polynomial on a bounded integer grid.
+
+Explicit height estimates for the evaluated universal bad-prime witness.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+lemma universalPlaneBadWitness_eval {σ : Type*}
+    (f : MvPolynomial σ ℤ)
+    (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
+    (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree)
+    (v : PlaneParameters σ → ℤ) :
+    eval v (universalPlaneBadWitness f rows cols) =
+      ((universalPlaneSection f v).coeff f.totalDegree).coeff 0 *
+        ((closedFormCoefficientMatrix f.totalDegree (universalPlaneSection f v)).submatrix rows cols).det := by
+  rw [universalPlaneBadWitness, map_mul, closedForm_minor_map]
+  congr 1
+  exact (bivariateMap_coeff (eval v) (universalPlanePolynomial f) f.totalDegree 0).symm
+
+/-- The evaluated witness is a leading coefficient times an integer
+minor; both are controlled by the height of the same plane section. -/
+theorem universalPlaneBadWitness_eval_log_bound {σ : Type*} [Fintype σ]
+    (f : MvPolynomial σ ℤ) (hd : 1 ≤ f.totalDegree)
+    (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
+    (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree)
+    (v : PlaneParameters σ → ℤ) (S : ℝ) (hS : 1 ≤ S)
+    (hf : BivariateCoefficientBound (universalPlaneSection f v) S)
+    (hw : eval v (universalPlaneBadWitness f rows cols) ≠ 0) :
+    Real.log |(eval v (universalPlaneBadWitness f rows cols) : ℝ)| ≤
+      Real.log S + (27 * (f.totalDegree : ℝ) ^ 4) *
+        (1 + Real.log S / (f.totalDegree : ℝ) ^ 2) := by
+  let g := universalPlaneSection f v
+  let c := (g.coeff f.totalDegree).coeff 0
+  let D := ((closedFormCoefficientMatrix f.totalDegree g).submatrix rows cols).det
+  have he : eval v (universalPlaneBadWitness f rows cols) = c * D :=
+    universalPlaneBadWitness_eval f rows cols v
+  have hc : c ≠ 0 := fun h => hw (by rw [he, h, zero_mul])
+  have hD : D ≠ 0 := fun h => hw (by rw [he, h, mul_zero])
+  have ht : bivariateTotalDegree g ≤ f.totalDegree :=
+    universalPlanePolynomial_specialization_totalDegree f (eval v)
+  have hb := closedForm_minor_log_height f.totalDegree (2 * f.totalDegree ^ 2 - 1)
+    hd (Nat.sub_le _ _) g S hS hf
+    ((bivariate_natDegree_le_totalDegree g).trans ht)
+    (fun i => (bivariate_coefficient_natDegree_le_totalDegree g i).trans ht) rows cols hD
+  have hl := Real.log_le_log (abs_pos.mpr (Int.cast_ne_zero.mpr hc)) (hf f.totalDegree 0)
+  rw [he, Int.cast_mul, abs_mul, Real.log_mul
+    (abs_ne_zero.mpr (Int.cast_ne_zero.mpr hc)) (abs_ne_zero.mpr (Int.cast_ne_zero.mpr hD))]
+  exact add_le_add hl hb
+
+end
+end CCDN
+
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+lemma bad_prime_dvd_universalPlaneBadWitness_eval {σ : Type*} [Fintype σ]
+    (f : MvPolynomial σ ℤ) (hpos : 0 < f.totalDegree)
+    (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
+    (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree)
+    (v : PlaneParameters σ → ℤ) (p : ℕ)
+    (hp : f.totalDegree < p) (hbad : HypersurfaceBadReduction f p) :
+    (p : ℤ) ∣ eval v (universalPlaneBadWitness f rows cols) := by
+  classical
+  obtain ⟨hpprime, hbad⟩ := hbad
+  let : Fact p.Prime := ⟨hpprime⟩
+  rw [eval_eq']
+  apply Finset.dvd_sum
+  intro e _
+  exact dvd_mul_of_dvd_left
+    (bad_prime_dvd_universalPlaneBadWitness_coeff f hpos rows cols p hp hbad e) _
+
+/-- The universal plane bad-prime witness of an absolutely irreducible integer polynomial
+takes a nonzero value at some integer parameter in the box `[0, 2d³]`, and every prime above
+`d` with bad geometric reduction divides that value. -/
+theorem exists_bounded_integer_plane_witness
+    {L σ : Type*} [Field L] [CharZero L] [IsAlgClosed L] [Fintype σ]
+    (f : MvPolynomial (Option σ) ℤ)
+    (hf : Irreducible (MvPolynomial.map (Int.castRingHom L) f))
+    (hpos : 0 < f.totalDegree) :
+    ∃ (rows : Fin (2 * f.totalDegree ^ 2 - 1) → ℕ × ℕ)
+      (cols : Fin (2 * f.totalDegree ^ 2 - 1) → ClosedFormColumns f.totalDegree)
+      (v : PlaneParameters (Option σ) → ℤ),
+      (∀ i, 0 ≤ v i ∧ v i ≤ (2 * f.totalDegree ^ 3 : ℕ)) ∧
+      eval v (universalPlaneBadWitness f rows cols) ≠ 0 ∧
+      ∀ p : ℕ, f.totalDegree < p → HypersurfaceBadReduction f p →
+        (p : ℤ) ∣ eval v (universalPlaneBadWitness f rows cols) := by
+  obtain ⟨rows, cols, hw, hd⟩ := exists_integer_universalPlane_badWitness f hf hpos
+  obtain ⟨v, hv, he⟩ := exists_integer_grid_eval_ne_zero _ hw _ hd
+  exact ⟨rows, cols, v, hv, he,
+    fun p hp hbad => bad_prime_dvd_universalPlaneBadWitness_eval f hpos rows cols v p hp hbad⟩
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial

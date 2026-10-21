@@ -8,17 +8,121 @@ module
 public import CCDN.Algebra.CharZeroOrGT
 public import CCDN.Noether.BivariateClosedForms
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.FieldTheory.RatFunc.Basic
+public import Mathlib.RingTheory.Derivation.DifferentialRing
+public import Mathlib.RingTheory.SimpleRing.Principal
+public import Mathlib.RingTheory.AdjoinRoot
+public import Mathlib.RingTheory.Derivation.MapCoeffs
 import CCDN.Noether.DifferentialResidue
-import CCDN.Noether.SimpleRootResidue
 import CCDN.ForMathlib.Polynomial
-import CCDN.Noether.SeparableRootDifferential
 import Mathlib.RingTheory.Polynomial.IsIntegral
-/-! The monic irreducible closed-form criterion, in characteristic zero or in
+import CCDN.Determinant.ResidueEliminantEvaluation
+import CCDN.Noether.DifferentialConstantRelation
+import Mathlib.Data.Nat.Totient
+
+/-!
+The monic irreducible closed-form criterion, in characteristic zero or in
 characteristic larger than the displayed degree bounds. Separability, the
 differential root extension and constant-residue descent are all constructed
-from the polynomial and the degree bounds. -/
+from the polynomial and the degree bounds.
+
+Constant residues in characteristic zero or large characteristic. The nonzero
+annihilating relation and its degree bound are constructed by a Sylvester
+resultant.
+
+Extend a differential structure to an explicitly separable monic root
+extension in any characteristic. The construction is the implicit-derivative
+quotient construction from Mathlib's characteristic-zero instance, with the
+nonvanishing derivative supplied by separability.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open Polynomial Differential
+open scoped Differential
+
+@[reducible]
+def separableAdjoinRootDifferential {K : Type*} [Field K] [Differential K]
+    (f : K[X]) [Fact (Irreducible f)] [Fact f.Monic] (hsep : f.Separable) :
+    Differential (AdjoinRoot f) where
+  deriv := Derivation.liftOfSurjective (f := (AdjoinRoot.mk f).toIntAlgHom) AdjoinRoot.mk_surjective
+    (d := implicitDeriv <| AdjoinRoot.modByMonicHom Fact.out <|
+      - (aeval (AdjoinRoot.root f) (Differential.mapCoeffs f)) /
+        (aeval (AdjoinRoot.root f) f.derivative)) (by
+      rintro x hx
+      simp_all only [RingHom.toIntAlgHom_apply, AdjoinRoot.mk_eq_zero]
+      obtain ⟨q, rfl⟩ := hx
+      simp only [Derivation.leibniz, smul_eq_mul]
+      apply dvd_add (dvd_mul_right ..)
+      apply dvd_mul_of_dvd_right
+      rw [← AdjoinRoot.mk_eq_zero]
+      unfold implicitDeriv
+      simp only [AdjoinRoot.aeval_eq, Derivation.coe_add, Derivation.coe_smul, Pi.add_apply,
+        Pi.smul_apply, Derivation.restrictScalars_apply, derivative'_apply, smul_eq_mul, map_add,
+        map_mul, AdjoinRoot.mk_leftInverse Fact.out _]
+      rw [div_mul_cancel₀, add_neg_cancel]
+      have hc : aeval (AdjoinRoot.root f) f = 0 := by
+        rw [AdjoinRoot.aeval_eq, AdjoinRoot.mk_self]
+      simpa only [AdjoinRoot.aeval_eq] using hsep.aeval_derivative_ne_zero hc)
+
+-- Needed by `rw [Derivation.liftOfSurjective_apply]` below. With the default setting
+-- (Lean v4.35.0) the rewrite fails: the pattern `(Derivation.liftOfSurjective ?hf ?hd) (?m ?x)`
+-- is not found in `(Derivation.liftOfSurjective ⋯ ⋯) ((AdjoinRoot.mk f).toIntAlgHom (C a))`,
+-- since matching `?m ?x` against the `toIntAlgHom` coercion needs unfolding past the
+-- transparency that the unifier otherwise respects.
+set_option backward.isDefEq.respectTransparency false in
+theorem separableAdjoinRootDifferential_algebra {K : Type*} [Field K] [Differential K]
+    (f : K[X]) [Fact (Irreducible f)] [Fact f.Monic] (hsep : f.Separable) :
+    let := separableAdjoinRootDifferential f hsep
+    DifferentialAlgebra K (AdjoinRoot f) := by
+  dsimp only
+  let := separableAdjoinRootDifferential f hsep
+  refine { deriv_algebraMap := ?_ }
+  intro a
+  change (Derivation.liftOfSurjective _ _) ((AdjoinRoot.mk f).toIntAlgHom (C a)) = _
+  rw [Derivation.liftOfSurjective_apply, implicitDeriv_C]
+  rfl
+
+end
+end CCDN
+
+namespace CCDN
+noncomputable section
+open Polynomial Differential
+open scoped Differential
+
+/-- The bounded-residue constant lemma used in the differential
+irreducibility criterion. This is the needed irreducible case of Gao's
+Lemma 2.4, proved directly by differentiating the constructed eliminant. -/
+theorem simple_root_ratio_mem_base_of_differential_constant
+    {F L : Type*} [Field F] [IsAlgClosed F] [Field L] [Algebra F L]
+    [Differential L]
+    (hbase : ∀ a : F, (algebraMap F L a)′ = 0)
+    (t β : L) (ht : t′ = 1) (f g : F[X][X])
+    (hf : Irreducible (f.map (algebraMap F[X] (RatFunc F))))
+    (hdeg : g.natDegree < f.natDegree) (D : ℕ)
+    (hfD : ∀ i, (f.coeff i).natDegree ≤ D)
+    (hgD : ∀ i, (g.coeff i).natDegree ≤ D)
+    (hchar : CharZeroOrGT L ((f.natDegree + (f.natDegree - 1)) * D))
+    (hroot : (f.map (aeval t).toRingHom).eval β = 0)
+    (hsimple : (f.map (aeval t).toRingHom).derivative.eval β ≠ 0)
+    (hder : ((g.map (aeval t).toRingHom).eval β /
+      (f.map (aeval t).toRingHom).derivative.eval β)′ = 0) :
+    (g.map (aeval t).toRingHom).eval β /
+      (f.map (aeval t).toRingHom).derivative.eval β ∈ (algebraMap F L).range := by
+  by_cases hg : g = 0
+  · simp only [hg, Polynomial.map_zero, eval_zero, zero_div]
+    exact ⟨0, map_zero _⟩
+  · exact differential_constant_mem_base_of_relation hbase t _ ht hder
+      (residueEliminant f g) (residueEliminant_ne_zero f g hf hg hdeg)
+      (hchar.mono (residueEliminant_natDegree_le f g D hfD hgD))
+      (residueEliminant_eval_ratio_eq_zero t β f g hdeg hroot hsimple)
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open Polynomial Differential

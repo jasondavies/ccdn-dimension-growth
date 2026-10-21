@@ -8,18 +8,41 @@ module
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Projection.CurvePrimitivePair
 public import CCDN.Projection.InfinityParameterReduction
-import CCDN.Projection.CurveRationalParameter
+public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 import CCDN.Hilbert.RecurrenceParameterTranscendence
 import CCDN.Projection.BoundedInfinityAvoidance
 import CCDN.Projection.BoundedInfinityParameter
 import CCDN.Projection.DegreePreservingProjectionCount
 import CCDN.Projection.FullDegreePrimitiveProjection
-/-! Every positive-degree prime affine curve in characteristic zero admits
+
+/-!
+Every positive-degree prime affine curve in characteristic zero admits
 an explicitly bounded integral linear plane projection preserving its degree.
 The first coordinate is constructed by infinity avoidance and the second by
-the quantitative primitive-element theorem. -/
+the quantitative primitive-element theorem.
+
+Construct the rational-function field embedding from a transcendental
+coordinate, and prove the degree bound for the resulting field extension.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+
+/-- Send the rational-function variable to a transcendental element. -/
+def transcendentalRatFuncMap {K F : Type*} [Field K] [Field F] [Algebra K F]
+    (u : F) (hu : Transcendental K u) : RatFunc K →ₐ[K] F :=
+  RatFunc.liftAlgHom (Polynomial.aeval u)
+    (nonZeroDivisors_le_comap_nonZeroDivisors_of_injective _ (transcendental_iff_injective.mp hu))
+
+lemma transcendentalRatFuncMap_X {K F : Type*} [Field K] [Field F] [Algebra K F]
+    (u : F) (hu : Transcendental K u) : transcendentalRatFuncMap u hu RatFunc.X = u := by
+  change RatFunc.liftRingHom (Polynomial.aeval u).toRingHom _ RatFunc.X = u
+  exact (RatFunc.liftRingHom_X (Polynomial.aeval u).toRingHom _).trans (Polynomial.aeval_X u)
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 

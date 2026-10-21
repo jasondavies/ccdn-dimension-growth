@@ -8,8 +8,11 @@ module
 public import CCDN.Center.CenterMinorMatrix
 public import CCDN.Center.ChowIncidenceGrading
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Center.CenterResultantForms
+public import CCDN.Center.ResultantCoefficientFamily
+public import CCDN.Center.GenericBlockLine
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import CCDN.Center.ChowProjectionCriterion
-import CCDN.Center.ChowRowResultantCriterion
 import CCDN.Center.ChowRowSymmetry
 import CCDN.Center.ClosedFieldChowBirationalCriterion
 import CCDN.Center.ProjectiveChowExactDegree
@@ -17,10 +20,115 @@ import CCDN.Determinant.SingularDeterminant
 import CCDN.Hilbert.HilbertScalarExtension
 import CCDN.Hilbert.HomogeneousPrimeComponents
 import CCDN.ForMathlib.MvPolynomial
-/-! Sharp-degree resultant detectors defined over the source field and
-valid on all centers over an algebraically closed extension. -/
+import CCDN.Center.ChowProjectionPower
+import CCDN.Center.ProjectiveChowWithoutChart
+import CCDN.Projection.IntegralProjectionHilbert
+import CCDN.Center.ChowPolynomialPower
+import CCDN.Center.GenericBlockLineIrreducible
+
+/-!
+Sharp-degree resultant detectors defined over the source field and
+valid on all centers over an algebraically closed extension.
+
+The selected-row derivative resultant detects irreducibility of a
+Chow restriction. A nonzero restriction is a power of the constructed image
+Chow equation, so separability is exactly the absence of a repeated power.
+
+When a polynomial has the same hypersurface as an irreducible equation,
+a generic block-line derivative resultant detects its irreducibility.
+The positive block degree is the degree of the line polynomial.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+theorem genericBlockLine_derivativeResultant_irreducible_iff
+    {K σ : Type*} [Field K] [CharZero K] [IsAlgClosed K] [Finite σ]
+    (b : σ → Bool) (G R : MvPolynomial σ K) (hG : Irreducible G)
+    (hzero : ∀ z : σ → K, eval z R = 0 ↔ eval z G = 0)
+    (d : ℕ) (hd : 0 < d)
+    (hdegree : R.weightedTotalDegree (genericBlockWeight b) = d) :
+    derivativeResultant (genericBlockLine b R) d ≠ 0 ↔ Irreducible R := by
+  let A := MvPolynomial (σ ⊕ σ) K
+  let F := FractionRing A
+  let θ : A →+* F := algebraMap A F
+  let ρ : MvPolynomial σ K →+* Polynomial F :=
+    (Polynomial.mapRingHom θ).comp (genericBlockLine b)
+  have hρdegree : (ρ R).natDegree = d := by
+    change ((genericBlockLine b R).map θ).natDegree = d
+    rw [Polynomial.natDegree_map_eq_of_injective (IsFractionRing.injective A F),
+      genericBlockLine_natDegree, hdegree]
+  have hresult : derivativeResultant (genericBlockLine b R) d ≠ 0 ↔ (ρ R).Separable := by
+    have hh := derivativeResultant_ne_zero_iff_separable (ρ R) d hd hρdegree
+    change derivativeResultant ((genericBlockLine b R).map θ) d ≠ 0 ↔ _ at hh
+    rw [derivativeResultant_map] at hh
+    exact (map_ne_zero_iff θ (IsFractionRing.injective A F)).symm.trans hh
+  rw [hresult]
+  constructor
+  · intro hsep
+    obtain ⟨a,r,ha,hr,he⟩ := polynomial_eq_scalar_pow_of_same_zeros G R hG hzero
+    have hunit : IsUnit (C a : MvPolynomial σ K) := (isUnit_iff_ne_zero.mpr ha).map C
+    have hnot : ¬ IsUnit (ρ G) := by
+      intro hunitG
+      have hunitR : IsUnit (ρ R) := by
+        rw [he,map_mul,map_pow]
+        exact (hunit.map ρ).mul (hunitG.pow r)
+      have hz := Polynomial.natDegree_eq_zero_of_isUnit hunitR
+      omega
+    have hpow : ((ρ G) ^ r).Separable := by
+      rw [he,map_mul,map_pow] at hsep
+      exact hsep.of_mul_right
+    have hr1 := (Polynomial.Separable.of_pow hnot (Nat.ne_zero_of_lt hr) hpow).2
+    rw [he,hr1,pow_one]
+    exact (irreducible_isUnit_mul hunit).mpr hG
+  · intro hR
+    exact genericBlockLine_fraction_separable (F := F) b R hR (by omega)
+
+end
+end CCDN
+
+namespace CCDN
+noncomputable section
+open MvPolynomial Matrix
+
+theorem chowRowResultant_ne_zero_iff_irreducible
+    {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {n s m : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 2)) K)) [J.IsPrime]
+    (hJ : IsHomogeneousIdeal J)
+    (hdim : (filteredHilbertPolynomial J).natDegree = m + 1)
+    (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
+    (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
+    (hzero : ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J)
+    (i : Fin (m + 1)) (d : ℕ) (hd : 0 < d)
+    (hrow : F.IsWeightedHomogeneous (chowRowWeight i) d) :
+    derivativeResultant (genericBlockLine (chowRowBlock i) (chowLinearSubstitution A F)) d ≠ 0 ↔
+      Irreducible (chowLinearSubstitution A F) := by
+  let R := chowLinearSubstitution A F
+  by_cases hR : R = 0
+  · change derivativeResultant (genericBlockLine (chowRowBlock i) R) d ≠ 0 ↔ Irreducible R
+    rw [hR,map_zero,derivativeResultant_zero d hd]
+    simp
+  have hcenter := (chowLinearSubstitution_ne_zero_iff_center_disjoint J hJ hdim A F hzero).mp hR
+  let P := chowProjectionImageIdeal J A
+  have : P.IsPrime := RingHom.ker_isPrime (projectionCoordinateMap J (chowProjectionForms A)).toRingHom
+  have hint := chow_projection_integral_of_center_disjoint J hJ A hcenter
+  have hPdim : (filteredHilbertPolynomial P).natDegree = m + 1 :=
+    (integral_projection_hilbert_dimension_eq J _ hint).trans hdim
+  obtain ⟨G,_,hG,_,hGzero⟩ := exists_projective_chow_equation_without_chart P
+    (chowProjectionImageIdeal_homogeneous J hJ A) hPdim
+  have hsame := chowLinearSubstitution_same_zeros_as_image J hJ A hcenter F G hzero hGzero
+  have hdeg : R.weightedTotalDegree (genericBlockWeight (chowRowBlock i)) = d := by
+    rw [genericBlockWeight_chowRowBlock]
+    exact weightedTotalDegree_of_nonzero_homogeneous _ _ d
+      (chowLinearSubstitution_row_homogeneous A i F d hrow) hR
+  exact genericBlockLine_derivativeResultant_irreducible_iff
+    (chowRowBlock i) G R hG hsame d hd hdeg
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial Matrix

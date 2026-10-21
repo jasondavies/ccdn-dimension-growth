@@ -10,18 +10,122 @@ public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Projection.DegreePreservingProjectionBox
-import CCDN.Center.GeometricCurveCountReduction
-import CCDN.Center.GeometricCurveProjection
+public import CCDN.Projection.ProjectionImageFractionField
+public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Projection.CurvePrimitivePair
+public import CCDN.Hilbert.FilteredIntersection
+public import Mathlib.Algebra.MvPolynomial.PDeriv
+public import Mathlib.FieldTheory.IntermediateField.Adjoin.Defs
 import CCDN.Center.HomogeneousCurveHilbert
 import CCDN.Center.ProjectiveIncidencePermutation
 import CCDN.Hilbert.HilbertCoordinateIndependence
 import CCDN.Projection.AffineProjectionCount
 import CCDN.Algebra.ProjectionScalarExtension
-/-! The geometric projective-curve projection statement, uniformly for all
+import CCDN.Algebra.ProjectiveChartScalarExtension
+import CCDN.Algebra.ScaledHypersurfaceModel
+import CCDN.Projection.ProjectiveProjectionCount
+import CCDN.ForMathlib.MvPolynomial
+import CCDN.Algebra.ReconstructionFunctionField
+import CCDN.Projection.BoundedDegreePreservingProjection
+import CCDN.Projection.DegreePreservingProjectionCount
+
+/-!
+The geometric projective-curve projection statement, uniformly for all
 heights, obtained by choosing a proper coordinate chart. The coordinate
-permutation has no height cost and is chosen before the radius. -/
+permutation has no height cost and is chosen before the radius.
+
+An explicitly constructed geometrically integral plane curve has the
+source degree and source function field of a projective curve, and satisfies
+the additive point-count comparison of Propositions 4.3.1 and 4.3.2.
+
+The constructed bounded plane projection of a geometrically integral
+curve is geometrically integral, birational and degree-preserving. Its
+point-count error is at most d(d-1).
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+theorem exists_geometrically_integral_curve_projection
+    {K L : Type*} [Field K] [CharZero K] [Field L] [Algebra K L] {n : ℕ}
+    [DecidableEq (Fin 2 → K)]
+    (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
+    [(I.map (map (algebraMap K L))).IsPrime]
+    (d : ℕ) (hd : 0 < d)
+    (hdegree : HasFilteredCurveDegree I d) :
+    ∃ (k₀ k₁ : ℕ) (f : MvPolynomial (Fin 2) K),
+      k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧
+      let a := ![momentCoordinate K n k₀, momentCoordinate K n k₁]
+      IsBirationalImage I a f ∧ Irreducible (map (algebraMap K L) f) ∧ f.totalDegree = d ∧
+      aeval a (pderiv 1 f) ∉ I ∧
+      (∃ P : Fin n → MvPolynomial (Fin 2) K, ∀ i,
+        (P i).totalDegree ≤ d ∧
+        aeval a (pderiv 1 f) * X i - aeval a (P i) ∈ I) ∧
+      ∀ S : Finset (Fin n → K), (∀ z ∈ S, z ∈ idealZeroLocus I) →
+        S.card ≤ (S.image (fun z i => eval z (a i))).card + d * (d - 1) := by
+  classical
+  obtain ⟨k₀, k₁, f, hk₀, hk₁, hf, hfd, hu, hker⟩ :=
+    exists_bounded_degree_preserving_projection I d hd hdegree
+  let a := ![momentCoordinate K n k₀, momentCoordinate K n k₁]
+  have ha (i : Fin 2) : (a i).totalDegree ≤ 1 := by
+    fin_cases i <;> exact momentCoordinate_degree _ _ _
+  have hker' : RingHom.ker (projectionCoordinateMap I a) = Ideal.span {f} := by
+    ext g
+    rw [mem_projectionCoordinateMap_ker, Ideal.mem_span_singleton]
+    exact hker g
+  have hgeom := projection_equation_irreducible_map (L := L) I a f hf.ne_zero hker'
+  obtain ⟨hQ, _, P, hP⟩ := degree_preserving_projection_reconstruction
+    I a ha d hdegree hu f hf.ne_zero hfd hker
+  refine ⟨k₀, k₁, f, hk₀, hk₁,
+    ⟨reconstruction_generates_functionField I a (pderiv 1 f) P hQ (fun i => (hP i).2), hf, hker'⟩,
+    hgeom, hfd, hQ, ⟨P, hP⟩, ?_⟩
+  exact degree_preserving_projection_card_le I a ha d hdegree hu f hf.ne_zero hfd hker
+
+end
+end CCDN
+
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+/-- The projective curve clause of Proposition 4.3.2 on a proper standard
+chart. The affine plane equation generates exactly the chart function field;
+its projective closure stays irreducible after extending coefficients. -/
+theorem exists_geometric_projective_curve_count_reduction_of_chart
+    {L : Type*} [Field L] [Algebra ℚ L] {n d : ℕ}
+    (I : Ideal (CoordinatePolynomial (n + 1))) [I.IsPrime]
+    [(I.map (map (algebraMap ℚ L))).IsPrime]
+    (hX : X 0 ∉ I) (hd : 0 < d) (hdegree : HasProjectiveCurveDegree I d) :
+    ∃ (k₀ k₁ : ℕ) (f : MvPolynomial (Fin 2) ℚ),
+      k₀ ≤ n ^ 2 * d ∧ k₁ ≤ n * d ^ 2 ∧ f.totalDegree = d ∧
+      IsBirationalImage (projectiveChartIdeal I)
+        ![momentCoordinate ℚ n k₀, momentCoordinate ℚ n k₁] f ∧
+      (scaledHomogenize d 1 f).IsHomogeneous d ∧
+      Irreducible (scaledHomogenize d 1 f) ∧
+      Irreducible (map (algebraMap ℚ L) (scaledHomogenize d 1 f)) ∧
+      ∀ B : ℝ, 1 ≤ B → projectiveCount (projectiveIdealZeroLocus I) B ≤
+        projectiveCount (projectiveZeroLocus (scaledHomogenize d 1 f))
+          (projectionBoxFactor n d * B) + d ^ 2 := by
+  let J := projectiveChartIdeal I
+  let : (J.map (map (algebraMap ℚ L))).IsPrime :=
+    projectiveChartIdeal_geometrically_prime I hX
+  obtain ⟨k₀, k₁, f, hk₀, hk₁, hP, hfL, hfd, _, _, hcount⟩ :=
+    exists_geometrically_integral_curve_projection (L := L) J d hd
+      (projectiveChartIdeal_degree I hX hdegree)
+  refine ⟨k₀, k₁, f, hk₀, hk₁, hfd, hP, scaledHomogenize_homogeneous 1 f hfd.le, ?_, ?_, ?_⟩
+  · simpa only [hfd] using scaledHomogenize_irreducible f hP.irreducible one_ne_zero
+  · rw [scaledHomogenize_map, map_one]
+    have hdeg : (map (algebraMap ℚ L) f).totalDegree = d :=
+      (totalDegree_map_of_injective (algebraMap ℚ L).injective _).trans hfd
+    simpa only [hdeg] using scaledHomogenize_irreducible _ hfL one_ne_zero
+  · exact projective_curve_count_le_of_moment_projection I hX hd hdegree f hfd hk₀ hk₁
+      hP.aeval_mem hcount
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial

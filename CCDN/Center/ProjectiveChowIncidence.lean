@@ -8,17 +8,121 @@ module
 public import CCDN.Center.ChowPivotParametrization
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Center.ChowIncidenceLocus
 public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Algebra.IdealZeroLocus
+public import Mathlib.FieldTheory.IsAlgClosed.Basic
+public import Mathlib.RingTheory.Nullstellensatz
+public import CCDN.Center.ChowIncidenceIdeal
 import CCDN.Algebra.LinearForm
 import CCDN.Algebra.ProjectiveClosureDegree
-import CCDN.Center.PrimeOpenVanishing
-/-! The affine incidence elimination ideal is the vanishing ideal of the
+import CCDN.Height.ProjectiveZeroLocus
+
+/-!
+The affine incidence elimination ideal is the vanishing ideal of the
 full projective hyperplane incidence locus, including points at
 infinity. This asserts equality of vanishing ideals, not closedness of the
-incidence image. -/
+incidence image.
+
+Polynomial vanishing on a nonempty principal open subset of an
+integral affine variety extends to the entire variety.
+
+The constructed elimination ideal is the vanishing ideal of
+hyperplane tuples having a common point on the chosen affine chart.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+lemma chowIncidentCoefficients_relation {K : Type*} [Field K] {n r : ℕ}
+    (a : Fin n → K) (u : Fin r × Fin n → K) (i : Fin r) :
+    ∑ j : Fin (n + 1), chowIncidentCoefficients a u (i,j) * (Fin.cons 1 a : Fin (n + 1) → K) j = 0 := by
+  rw [Fin.sum_univ_succ]
+  simp only [chowIncidentCoefficients, Fin.cases_zero, Fin.cases_succ,
+    Fin.cons_zero, Fin.cons_succ, mul_one, neg_add_cancel]
+
+lemma chowIncidentCoefficients_reconstruct {K : Type*} [Field K] {n r : ℕ}
+    (a : Fin n → K) (U : Fin r × Fin (n + 1) → K)
+    (hU : ∀ i, ∑ j, U (i,j) * (Fin.cons 1 a : Fin (n + 1) → K) j = 0) :
+    chowIncidentCoefficients a (fun q => U (q.1,q.2.succ)) = U := by
+  funext q
+  rcases q with ⟨i,j⟩
+  refine Fin.cases ?_ (fun _ => rfl) j
+  have hh := hU i
+  rw [Fin.sum_univ_succ] at hh
+  simp only [Fin.cons_zero, Fin.cons_succ, mul_one] at hh
+  exact (eq_neg_of_add_eq_zero_left hh).symm
+
+/-- Hyperplane tuples whose intersection contains a point of the
+affine variety represented in the projective chart x₀=1. -/
+def chowIncidenceLocus {K : Type*} [Field K] {n : ℕ} (r : ℕ)
+    (I : Ideal (MvPolynomial (Fin n) K)) : Set (Fin r × Fin (n + 1) → K) :=
+  {U | ∃ a : Fin n → K, a ∈ idealZeroLocus I ∧
+    ∀ i, ∑ j, U (i,j) * (Fin.cons 1 a : Fin (n + 1) → K) j = 0}
+
+theorem chowIncidenceIdeal_eq_vanishingIdeal {K : Type*} [Field K] [IsAlgClosed K]
+    {n : ℕ} (r : ℕ) (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime] :
+    chowIncidenceIdeal r I = vanishingIdeal K (chowIncidenceLocus r I) := by
+  ext R
+  rw [mem_chowIncidenceIdeal_iff]
+  constructor
+  · intro h U hU
+    obtain ⟨a,ha,he⟩ := hU
+    rw [aeval_eq_eval,← chowIncidentCoefficients_reconstruct a U he]
+    exact h a ha _
+  · intro h a ha u
+    have hh := h (chowIncidentCoefficients a u)
+      ⟨a,ha,chowIncidentCoefficients_relation a u⟩
+    simpa only [aeval_eq_eval] using hh
+
+end
+end CCDN
+
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+theorem mem_prime_ideal_of_vanishing_on_principal_open
+    {K σ : Type*} [Field K] [IsAlgClosed K] [Finite σ]
+    (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
+    (g f : MvPolynomial σ K) (hg : g ∉ I)
+    (hvan : ∀ x : σ → K, x ∈ idealZeroLocus I →
+      eval x g ≠ 0 → eval x f = 0) : f ∈ I := by
+  have hmul : g * f ∈ I := by
+    rw [← MvPolynomial.IsPrime.vanishingIdeal_zeroLocus (K := K) I]
+    intro x hx
+    rw [aeval_eq_eval, eval_mul]
+    by_cases hzero : eval x g = 0
+    · rw [hzero, zero_mul]
+    · rw [hvan x (fun p hp => by simpa only [aeval_eq_eval] using hx p hp) hzero, mul_zero]
+  exact (Ideal.IsPrime.mem_or_mem ‹I.IsPrime› hmul).resolve_left hg
+
+/-- The standard chart of the closure cone recovers the affine
+zero locus, before passing to projective equivalence classes. -/
+theorem projectiveClosure_cone_chart_zero
+    {K : Type*} [Field K] {n : ℕ}
+    (I : Ideal (MvPolynomial (Fin n) K)) (x : Fin (n + 1) → K)
+    (hx : ∀ p ∈ projectiveClosureIdeal I, eval x p = 0) (hx0 : x 0 ≠ 0) :
+    (fun i => x i.succ / x 0) ∈ idealZeroLocus I := by
+  intro f hf
+  let F := scaledHomogenize f.totalDegree 1 f
+  have hFhom : F.IsHomogeneous f.totalDegree := scaledHomogenize_homogeneous 1 f le_rfl
+  have hFmem : F ∈ projectiveClosureIdeal I := by
+    rw [homogeneous_mem_projectiveClosureIdeal_iff I _ hFhom,
+      affineChart_scaledHomogenize_one]
+    exact hf
+  have hvec : Fin.cons 1 (fun i => x i.succ / x 0) = (x 0)⁻¹ • x := by
+    funext j
+    refine Fin.cases ?_ (fun i => ?_) j
+    · simp [hx0]
+    · simp [div_eq_mul_inv, mul_comm]
+  rw [← affineChart_scaledHomogenize_one f.totalDegree f, affineChart_eval,
+    hvec, homogeneous_eval_smul hFhom, hx F hFmem, mul_zero]
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial

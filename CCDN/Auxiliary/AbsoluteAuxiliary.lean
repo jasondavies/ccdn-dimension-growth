@@ -8,20 +8,80 @@ module
 public import CCDN.Auxiliary.PositionedAuxiliary
 public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Algebra.ProjectiveTranslation
-import CCDN.Auxiliary.HypersurfaceAuxiliaryScaling
+public import CCDN.Algebra.HomogeneousTranslation
+public import CCDN.Auxiliary.HypersurfaceBadPrimes
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Auxiliary.HypersurfaceBadPrimeCoordinates
 import CCDN.Auxiliary.HypersurfacePositionHeight
-import CCDN.Auxiliary.HypersurfaceShearInvariance
-/-! The coefficient-sensitive auxiliary theorem for arbitrary absolutely
+
+/-!
+The coefficient-sensitive auxiliary theorem for arbitrary absolutely
 irreducible homogeneous equations in arbitrary coordinates.
 
 The equation is moved into position by a homogeneous translation fixing the
 homogenizing coordinate; zeros, primitivity, absolute irreducibility and
 nondivisibility are transported along it, and the box grows from `B` to
 `(d + 1) B`. `absolute_auxiliary_degree_of_comparison` does this for any finite
-prime set whose normalized comparison holds for every translate. -/
+prime set whose normalized comparison holds for every translate.
+
+The geometric bad-prime predicate is invariant under integral shears.
+
+The box enlargement by d+1 costs only a dimension constant in the
+auxiliary degree, with no added power of d in its leading term.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+
+lemma auxiliary_box_rpow_factor {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
+    ((d : ℝ) + 1) ^ (((r : ℝ) + 1) / ((r : ℝ) * (d : ℝ) ^ (1 / (r : ℝ)))) ≤
+      Real.exp (((r : ℝ) + 1) ^ 2 / r) := by
+  have hr0 : (0 : ℝ) < r := by exact_mod_cast hr
+  have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
+  have hroot : (0 : ℝ) < (d : ℝ) ^ (1 / (r : ℝ)) := by positivity
+  rw [Real.rpow_def_of_pos (by positivity)]
+  apply Real.exp_le_exp.mpr
+  have hh := mul_le_mul_of_nonneg_right (log_nat_add_one_le_root hr hd)
+    (show 0 ≤ ((r : ℝ) + 1) / ((r : ℝ) * (d : ℝ) ^ (1 / (r : ℝ))) by positivity)
+  convert hh using 1
+  field_simp
+
+lemma auxiliary_box_log_cost {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
+    (d : ℝ) ^ (1 - 1 / (r : ℝ)) * Real.log ((d : ℝ) + 1) ≤ ((r : ℝ) + 1) * d := by
+  have hd0 : (0 : ℝ) < d := by exact_mod_cast hd
+  have hh := mul_le_mul_of_nonneg_left (log_nat_add_one_le_root hr hd)
+    (Real.rpow_nonneg hd0.le (1 - 1 / (r : ℝ)))
+  have he : (d : ℝ) ^ (1 - 1 / (r : ℝ)) * (d : ℝ) ^ (1 / (r : ℝ)) = d := by
+    rw [← Real.rpow_add hd0, sub_add_cancel, Real.rpow_one]
+  calc
+    _ ≤ _ := hh
+    _ = ((r : ℝ) + 1) * d := by rw [← mul_left_comm, he]
+
+end
+end CCDN
+
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+lemma hypersurfaceBadReduction_homogeneousTranslation {n d : ℕ}
+    (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
+    (a : Fin n → ℤ) (p : ℕ) :
+    HypersurfaceBadReduction (homogeneousTranslation ℤ a f) p ↔ HypersurfaceBadReduction f p := by
+  by_cases hp : p.Prime
+  · let : Fact p.Prime := ⟨hp⟩
+    have hg0 : homogeneousTranslation ℤ a f ≠ 0 := by
+      exact (homogeneousTranslation ℤ a).injective.ne (by simpa using hf0)
+    rw [homogeneous_hypersurfaceBadReduction_iff _ (homogeneousTranslation_homogeneous a hf) hg0,
+      homogeneous_hypersurfaceBadReduction_iff _ hf hf0, homogeneousTranslation_map]
+    exact not_congr (MulEquiv.irreducible_iff
+      (f := homogeneousTranslation (AlgebraicClosure (ZMod p)) ((Int.castRingHom _) ∘ a)))
+  · constructor <;> intro h <;> exact (hp h.1).elim
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial

@@ -12,12 +12,66 @@ public import CCDN.Surface.SurfaceGeometricCurveCover
 import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Algebra.IdealScalarDescent
 import CCDN.Algebra.ProjectiveClosureDegree
-import CCDN.Surface.RationalSurfaceSalbergerCover
-/-! Salberger's surface cover on the standard projective affine chart.
+import CCDN.Algebra.PrimitiveNormalization
+import CCDN.Surface.SurfaceSalbergerCover
+
+/-!
+Salberger's surface cover on the standard projective affine chart.
 Every returned curve is a homogeneous geometrically prime ideal;
-its degree is the projective Hilbert degree, proved by closure. -/
+its degree is the projective Hilbert degree, proved by closure.
+
+Clearing rational coefficients preserves the exact geometric Salberger
+cover and all of its uniform constants.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+theorem rational_surface_salberger_cover (d : ℕ) (hd : 1 ≤ d) :
+    ∃ C c : ℝ, 0 < C ∧ 0 < c ∧
+      ∀ (f : CoordinatePolynomial 3),
+      AbsolutelyIrreducibleRat f →
+      f.totalDegree = d → ∀ B : ℝ, 1 ≤ B →
+      ∃ (S : Finset (Ideal (CoordinatePolynomial 3)))
+        (δ : Ideal (CoordinatePolynomial 3) → ℕ),
+        (∀ I ∈ S, IsGeometricSurfaceCurve f I (δ I) ∧ δ I ≤ d ^ 2) ∧
+        (S.card : ℝ) ≤ C * (B ^ (1 / Real.sqrt (d : ℝ)) * Real.log B + 1) ∧
+        (count (smoothSurfaceLocus f \ (⋃ I ∈ S, idealZeroLocus I)) B : ℝ) ≤
+          C * B ^ (2 / Real.sqrt (d : ℝ) + c / Real.log (1 + Real.log B)) := by
+  obtain ⟨C,c,hC,hc,hcover⟩ := surface_salberger_cover d hd
+  refine ⟨C,c,hC,hc,?_⟩
+  intro f habs hfd B hB
+  have hf0 : f ≠ 0 := by intro hz; exact habs.ne_zero (by rw [hz,map_zero])
+  obtain ⟨g,a,_,ha,he⟩ := exists_primitive_integer_model f hf0
+  have hgdeg : g.totalDegree = d := (rational_scalar_model_degree ha hf0 he).trans hfd
+  have haK : algebraMap ℚ (AlgebraicClosure ℚ) a ≠ 0 :=
+    by simpa only [map_zero] using (algebraMap ℚ (AlgebraicClosure ℚ)).injective.ne ha
+  have heK : map (Int.castRingHom (AlgebraicClosure ℚ)) g =
+      MvPolynomial.C (algebraMap ℚ (AlgebraicClosure ℚ) a) *
+        map (algebraMap ℚ (AlgebraicClosure ℚ)) f := by
+    have hh := congrArg (map (algebraMap ℚ (AlgebraicClosure ℚ))) he
+    have hφ : (algebraMap ℚ (AlgebraicClosure ℚ)).comp (Int.castRingHom ℚ) =
+        Int.castRingHom (AlgebraicClosure ℚ) := by ext; simp
+    simpa only [map_map,map_mul,map_C,hφ] using hh
+  have hgabs : AbsolutelyIrreducible g := by
+    rw [AbsolutelyIrreducible, heK]
+    exact (irreducible_isUnit_mul ((isUnit_iff_ne_zero.mpr haK).map MvPolynomial.C)).mpr habs
+  obtain ⟨S,δ,hS,hcard,hcount⟩ := hcover g hgabs hgdeg B hB
+  refine ⟨S,δ,?_,hcard,?_⟩
+  · intro I hI
+    obtain ⟨hp,hh,hg,hgeo,hpos,hdeg,hδ⟩ := hS I hI
+    refine ⟨⟨⟨hp,hh,?_,hdeg⟩,hgeo,hpos⟩,hδ⟩
+    rw [he] at hg
+    have hh' := I.mul_mem_left (MvPolynomial.C a⁻¹) hg
+    simpa only [← mul_assoc, ← C_mul, inv_mul_cancel₀ ha, map_one, one_mul] using hh'
+  · rw [he,smoothSurfaceLocus_C_mul a ha] at hcount
+    exact hcount
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial

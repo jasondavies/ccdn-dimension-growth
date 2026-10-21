@@ -9,18 +9,53 @@ public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Center.ChowIncidenceGrading
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import CCDN.Algebra.ProjectivePermutation
+public import CCDN.Hilbert.LinearProjectionFiltration
 import CCDN.Algebra.ProjectiveChartScalarExtension
 import CCDN.Center.GeometricProjectiveCurveProjection
-import CCDN.Center.HomogeneousPermutationBaseChange
 import CCDN.Center.ProjectiveChowEquation
 import CCDN.Center.ProjectiveClosureRecovery
 import CCDN.Center.ProjectiveIncidencePermutation
 import CCDN.Algebra.WeightedHomogeneousTransform
 import CCDN.Hilbert.HomogeneousPrimeComponents
-/-! A geometrically integral homogeneous prime ideal has an incidence equation
-defined over its original coefficient field, without a prescribed chart. -/
+import CCDN.Algebra.ProjectionScalarExtension
+
+/-!
+A geometrically integral homogeneous prime ideal has an incidence equation
+defined over its original coefficient field, without a prescribed chart.
+
+Homogeneous ideals and coordinate permutations commute with scalar
+extension, so choosing a nonempty chart preserves geometric primeness.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+lemma projectivePermutedIdeal_eq_projection_kernel
+    {K : Type*} [Field K] {n : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (e : Equiv.Perm (Fin (n + 1))) :
+    projectivePermutedIdeal J e =
+      RingHom.ker (projectionCoordinateMap J (fun i => X (e i))) := by
+  ext f
+  rw [mem_projectivePermutedIdeal, mem_projectionCoordinateMap_ker, rename_eq_aeval]
+  rfl
+
+theorem projectivePermutedIdeal_scalar_extension
+    {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K))
+    (e : Equiv.Perm (Fin (n + 1))) :
+    (projectivePermutedIdeal J e).map (map (algebraMap K L)) =
+      projectivePermutedIdeal (J.map (map (algebraMap K L))) e := by
+  rw [projectivePermutedIdeal_eq_projection_kernel, projection_kernel_scalar_extension,
+    projectivePermutedIdeal_eq_projection_kernel]
+  simp only [map_X]
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial
