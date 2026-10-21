@@ -25,13 +25,6 @@ def localizationFractionEmbedding {R S F : Type*}
     ((map_ne_zero_iff _ (IsFractionRing.injective R F)).mpr
       (localization_denominator_ne_zero (S := S) M y)))
 
-@[simp] lemma localizationFractionEmbedding_algebraMap {R S F : Type*}
-    [CommRing R] [IsDomain R] [CommRing S] [Nontrivial S]
-    [Field F] [Algebra R S] [Algebra R F]
-    (M : Submonoid R) [IsLocalization M S] [IsFractionRing R F] (x : R) :
-    localizationFractionEmbedding (S := S) (F := F) M (algebraMap R S x) =
-      algebraMap R F x := IsLocalization.lift_eq _ _
-
 lemma localizationFractionEmbedding_comp {R S F : Type*}
     [CommRing R] [IsDomain R] [CommRing S] [Nontrivial S]
     [Field F] [Algebra R S] [Algebra R F]

@@ -122,15 +122,4 @@ theorem polynomial_box_projective_power_bound {r d k : ℕ}
   exact mul_le_mul_of_nonneg_right
     (polynomial_box_root_power_bound hr hd hS hB hbound) (by positivity)
 
-/-- Directly absorb the cutoff furnished by the coefficient-height
-dichotomy into a constant depending only on A and the dimensions. -/
-theorem affine_coefficient_height_root_power_bound (n : ℕ) {r d : ℕ}
-    (hr : 0 < r) (hd : 0 < d) {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B)
-    (hheight : B / A ≤ ((n + d).choose d : ℝ) * Real.log ((n + d).choose d) +
-      ((n + d).choose d : ℝ) * d * Real.log B) :
-    B ^ (1 / ((r : ℝ) * (d : ℝ) ^ (1 / (r : ℝ)))) ≤
-      Real.exp (Real.log (4 * A ^ 2) + ((4 * n + 2 : ℕ) : ℝ) * ((r : ℝ) + 1)) :=
-  polynomial_box_root_power_bound hr hd (by nlinarith [sq_nonneg (A - 1)]) hB
-    (affine_coefficient_height_cutoff n d hA hB hheight)
-
 end CCDN

@@ -66,28 +66,5 @@ theorem surface_nonlinear_polylog_weight {d : ℕ} (hd : 5 ≤ d) (k : ℕ)
       exact mul_le_mul_of_nonneg_left
         (by simpa only [Real.rpow_one] using Real.rpow_le_rpow_of_exponent_le hB he) hC
 
-theorem surface_residual_polylog_weight {d : ℕ} (hd : 5 ≤ d) (k : ℕ)
-    {B : ℝ} (hB : 1 ≤ B) :
-    B ^ (2 / Real.sqrt (d : ℝ)) * (Real.log B + 1) ^ k ≤
-      ((k.factorial : ℝ) / (1 / 10 : ℝ) ^ k * Real.exp (1 / 10)) * B := by
-  have hB0 : 0 < B := by linarith
-  have hlog := logarithm_add_one_pow_le_rpow k (by norm_num : (0 : ℝ) < 1 / 10) hB
-  let C : ℝ := (k.factorial : ℝ) / (1 / 10 : ℝ) ^ k * Real.exp (1 / 10)
-  have hC : 0 ≤ C := by positivity
-  have he : 2 / Real.sqrt (d : ℝ) + 1 / 10 ≤ (1 : ℝ) := by
-    have hh := surface_inverse_sqrt_le_nine_twentieths hd
-    have hid : 2 / Real.sqrt (d : ℝ) = 2 * (1 / Real.sqrt (d : ℝ)) := by ring
-    rw [hid]
-    linarith
-  calc
-    _ ≤ B ^ (2 / Real.sqrt (d : ℝ)) * (C * B ^ (1 / 10 : ℝ)) :=
-      mul_le_mul_of_nonneg_left hlog (by positivity)
-    _ = C * B ^ (2 / Real.sqrt (d : ℝ) + 1 / 10) := by
-      rw [Real.rpow_add hB0 (2 / Real.sqrt (d : ℝ)) (1 / 10)]
-      ring
-    _ ≤ C * B := by
-      exact mul_le_mul_of_nonneg_left
-        (by simpa only [Real.rpow_one] using Real.rpow_le_rpow_of_exponent_le hB he) hC
-
 end
 end CCDN

@@ -71,24 +71,5 @@ theorem eulerClosedForm_minor_map {R S : Type*} [CommRing R] [CommRing S]
   change (((eulerClosedFormCoefficientMatrix k f).map φ).submatrix a c).det = _
   rw [eulerClosedFormCoefficientMatrix_map]
 
-/-- Characteristic-zero irreducibility supplies a nonzero integer
-minor of order d^2-1. -/
-theorem exists_eulerClosedForm_integer_minor
-    {F : Type*} [Field F] [CharZero F] [IsAlgClosed F]
-    (k : ℕ) (f : Polynomial (Polynomial ℤ))
-    (hf : Irreducible (bivariateMap (Int.castRingHom F) f))
-    (a : F) (ha : a ≠ 0)
-    (hl : (bivariateMap (Int.castRingHom F) f).leadingCoeff = Polynomial.C a)
-    (hdeg : (bivariateMap (Int.castRingHom F) f).natDegree = k + 2) :
-    ∃ (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-      (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k),
-      Function.Injective rows ∧ Function.Injective cols ∧
-      ((eulerClosedFormCoefficientMatrix k f).submatrix rows cols).det ≠ 0 := by
-  obtain ⟨rows, cols, hr, hc, hdet⟩ := exists_eulerClosedForm_nonzero_minor k _ hf a ha hl hdeg
-  refine ⟨rows, cols, hr, hc, ?_⟩
-  intro hz
-  apply hdet
-  rw [← eulerClosedForm_minor_map, hz, map_zero]
-
 end
 end CCDN

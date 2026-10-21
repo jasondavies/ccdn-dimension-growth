@@ -62,27 +62,6 @@ theorem factor_numerator_not_scalar_gradient
   have hg0 : g ≠ 0 := by intro h; simp [h] at hg
   exact (mul_ne_zero hg0 hh) hz
 
-/-- With squarefree coprime factors, dg/g² cannot be proportional to d(g²h)/(g²h).
-The extra pole at g is detected entirely by polynomial divisibility. -/
-theorem square_factor_numerator_not_scalar_gradient
-    {R : Type*} [CommRing R] [IsDomain R] (g h : R[X])
-    (hg : 0 < g.degree) (hgh : IsCoprime g h) (hgg : IsCoprime g g.derivative)
-    (a : R) : h * g.derivative ≠ C a * (g ^ 2 * h).derivative := by
-  intro he
-  have hdiv : g ∣ h * g.derivative := by
-    rw [he]
-    apply dvd_mul_of_dvd_right
-    simp only [pow_two, derivative_mul]
-    apply dvd_add
-    · rw [add_mul]
-      exact dvd_add (dvd_mul_of_dvd_left (dvd_mul_left g g.derivative) h)
-        (dvd_mul_of_dvd_left (dvd_mul_right g g.derivative) h)
-    · exact dvd_mul_of_dvd_left (dvd_mul_right g g) h.derivative
-  have hunit := (hgh.mul_right hgg).isUnit_of_dvd hdiv
-  have hz : g.degree = 0 := degree_eq_zero_of_isUnit hunit
-  rw [hz] at hg
-  exact lt_irrefl _ hg
-
 /-- The repeated-factor construction works for every multiplicity at least
 two, with no restriction on the characteristic or the multiplicity. -/
 theorem bivariate_power_factor_closed_form {F : Type*} [Field F]

@@ -21,12 +21,6 @@ def formalBranchBaseChange {K L A : Type*} [Field K] [Field L] [Algebra K L]
   AlgHom.liftEquiv K L A (PowerSeries L)
     ((PowerSeries.mapAlgHom (Algebra.ofId K L)).comp ψ)
 
-@[simp] lemma formalBranchBaseChange_tmul
-    {K L A : Type*} [Field K] [Field L] [Algebra K L]
-    [CommRing A] [Algebra K A] (ψ : A →ₐ[K] PowerSeries K) (a : L) (x : A) :
-    formalBranchBaseChange (L := L) ψ (a ⊗ₜ[K] x) =
-      a • PowerSeries.map (algebraMap K L) (ψ x) := rfl
-
 /-- Scalar extension of a faithful formal branch is faithful. -/
 theorem formalBranchBaseChange_injective
     {K L A : Type*} [Field K] [Field L] [Algebra K L]

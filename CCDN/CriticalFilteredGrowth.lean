@@ -21,19 +21,6 @@ transcendental coordinate over an algebraically closed field.
 namespace CCDN
 noncomputable section
 
-/-- An algebraic element of a domain over an algebraically closed field is scalar. -/
-lemma algebraic_eq_scalar {K A : Type*} [Field K] [IsAlgClosed K] [CommRing A]
-    [IsDomain A] [Algebra K A] {y : A} (hy : IsAlgebraic K y) :
-    ∃ c : K, algebraMap K A c = y := by
-  have hi := hy.isIntegral
-  have hlead : (minpoly K y).leadingCoeff = 1 := minpoly.monic hi
-  have hdegree : (minpoly K y).degree = 1 :=
-    IsAlgClosed.degree_eq_one_of_irreducible K (minpoly.irreducible hi)
-  have he := minpoly.aeval K y
-  rw [Polynomial.eq_X_add_C_of_degree_eq_one hdegree, hlead, Polynomial.C_1, one_mul,
-    Polynomial.aeval_add, Polynomial.aeval_X, Polynomial.aeval_C, add_eq_zero_iff_eq_neg] at he
-  exact ⟨-(minpoly K y).coeff 0, by simpa using he.symm⟩
-
 lemma algebraic_of_stabilizes_submodule {K A : Type*} [Field K] [CommRing A]
     [IsDomain A] [Algebra K A] (U : Submodule K A) [Module.Finite K U]
     (hU : U ≠ ⊥) {x : A} (hx : ∀ u ∈ U, x * u ∈ U) : IsAlgebraic K x :=
@@ -128,22 +115,6 @@ theorem algebraic_difference_of_critical_growth {K A : Type*} [Field K]
     exact one_ne_zero hUone
   exact ⟨c, algebraic_of_stabilizes_submodule U hUne hstable⟩
 
-/-- Over an algebraically closed field, critical one-step growth forces every
-multiplier to be affine in a chosen transcendental multiplier. -/
-theorem affine_of_critical_growth {K A : Type*} [Field K] [IsAlgClosed K]
-    [CommRing A] [IsDomain A] [Algebra K A]
-    (U V : Submodule K A) [Module.Finite K U] [Module.Finite K V]
-    (hUV : U ≤ V) (hUone : (1 : A) ∈ U)
-    (hd : Module.finrank K V = Module.finrank K U + 1)
-    {x y : A} (hx : Transcendental K x)
-    (hxU : ∀ u ∈ U, x * u ∈ V) (hyU : ∀ u ∈ U, y * u ∈ V) :
-    ∃ c d : K, y = c • x + algebraMap K A d := by
-  obtain ⟨c, hc⟩ := algebraic_difference_of_critical_growth U V hUV hUone hd hx hxU hyU
-  obtain ⟨d, hd⟩ := algebraic_eq_scalar hc
-  refine ⟨c, d, ?_⟩
-  rw [hd]
-  abel
-
 /-- Critical growth over an arbitrary field, provided that the coordinate ring
 has a base-field-valued point. -/
 theorem affine_of_critical_growth_of_point {K A : Type*} [Field K]
@@ -158,7 +129,6 @@ theorem affine_of_critical_growth_of_point {K A : Type*} [Field K]
   refine ⟨c, φ (y - c • x), ?_⟩
   rw [algebraic_eq_scalar_of_point φ hc]
   abel
-
 
 end
 end CCDN

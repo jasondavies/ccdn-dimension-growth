@@ -112,12 +112,6 @@ def orthantExpandEquiv {σ : Type*} {B : ℕ} (b : σ → Fin (B + 1)) :
 def exponentPattern {σ : Type*} (B : ℕ) (a : σ → ℕ) : σ → Fin (B + 1) :=
   fun i => ⟨min (a i) B, Nat.lt_succ_of_le (min_le_right _ _)⟩
 
-lemma exponentPattern_expand {σ : Type*} {B : ℕ} (b : σ → Fin (B + 1))
-    (c : orthantFree b → ℕ) : exponentPattern B (orthantExpand b c) = b := by
-  funext i
-  apply Fin.ext
-  exact congrFun (clamp_orthantExpand b c) i
-
 /-- A bounded slice of an orthant is a bounded exponent simplex in its free
 coordinates. -/
 def boundedOrthantEquiv {σ : Type*} [Fintype σ] {B N : ℕ}

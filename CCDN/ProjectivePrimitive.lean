@@ -101,11 +101,5 @@ theorem primitiveProjectiveRep_bound {n : ℕ} (x : ProjectivePoint n)
   rw [primitiveProjectiveRep_height, ← Int.cast_abs]
   exact_mod_cast (le_ciSup (Finite.bddAbove_range (fun j => |primitiveProjectiveRep x j|)) i)
 
-theorem primitiveProjectiveRep_mem_box {n : ℕ} {x : ProjectivePoint n}
-    {B : ℝ} (hx : x.mulHeight ≤ B) :
-    primitiveProjectiveRep x ∈ integerBox (n + 1) B := by
-  rw [mem_integerBox]
-  exact fun i => (primitiveProjectiveRep_bound x i).trans hx
-
 end
 end CCDN

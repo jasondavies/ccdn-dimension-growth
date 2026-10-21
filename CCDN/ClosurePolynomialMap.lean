@@ -81,11 +81,6 @@ def closurePolynomialQuotientMap {K : Type*} [Field K] {n : ℕ}
         rwa [projectiveClosurePolynomialMap_ker]
       exact h)
 
-@[simp] lemma closurePolynomialQuotientMap_mk {K : Type*} [Field K] {n : ℕ}
-    (I : Ideal (MvPolynomial (Fin n) K)) (f : MvPolynomial (Fin (n + 1)) K) :
-    closurePolynomialQuotientMap I (Ideal.Quotient.mk (projectiveClosureIdeal I) f) =
-      projectiveClosurePolynomialMap I f := rfl
-
 theorem closurePolynomialQuotientMap_injective {K : Type*} [Field K] {n : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) :
     Function.Injective (closurePolynomialQuotientMap I) := by

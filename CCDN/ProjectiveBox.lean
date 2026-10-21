@@ -76,17 +76,6 @@ theorem projectiveCount_mono {n : ℕ} {X Y : Set (ProjectivePoint n)} {B C : �
   obtain ⟨hB, hX⟩ := mem_projectivePoints.mp hx
   exact mem_projectivePoints.mpr ⟨hB.trans hBC, hXY hX⟩
 
-theorem projectiveCount_union_le {n : ℕ} (X Y : Set (ProjectivePoint n)) (B : ℝ) :
-    projectiveCount (X ∪ Y) B ≤ projectiveCount X B + projectiveCount Y B := by
-  classical
-  have h : projectivePoints (X ∪ Y) B = projectivePoints X B ∪ projectivePoints Y B := by
-    ext x
-    simp only [mem_projectivePoints, Finset.mem_union, Set.mem_union]
-    tauto
-  unfold projectiveCount
-  rw [h]
-  exact Finset.card_union_le _ _
-
 lemma rationalPoint_ne_zero {n : ℕ} {x : IntPoint n} (hx : x ≠ 0) :
     rationalPoint x ≠ 0 := by
   intro h

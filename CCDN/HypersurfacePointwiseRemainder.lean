@@ -86,21 +86,6 @@ theorem hypersurfaceLayerBound_dimension_one_le (μ k : ℕ) :
     hypersurfaceLayerBound 1 μ k ≤ μ := by
   simpa using hypersurfaceLayerBound_le_mul_choose 0 μ k
 
-/-- The pointwise remainder for the layers of the hypersurface stalk. -/
-theorem hypersurfacePointStalk_pointwise_remainder {K : Type*} [Field K]
-    {n μ k : ℕ} (f : MvPolynomial (Fin (n + 3)) K) (a : Fin (n + 3) → K)
-    [Fact (MvPolynomial.eval a f = 0)]
-    (hf : affineTranslation K a f ∈ MvPolynomial.idealOfVars (Fin (n + 3)) K ^ μ)
-    (hμ : MvPolynomial.homogeneousComponent μ (affineTranslation K a f) ≠ 0)
-    (hk : 0 < k) :
-    (hypersurfacePointLayerDimension f a k : ℝ) ≤
-      (μ : ℝ) * (k : ℝ) ^ (n + 1) / (n + 1).factorial +
-        hypersurfacePointwiseError n * (k : ℝ) ^ n := by
-  have he := hypersurfacePointStalk_hilbert_eq f a hf hμ (k := k)
-  change hypersurfacePointLayerDimension f a k = hypersurfaceLayerBound (n + 2) μ k at he
-  rw [he]
-  exact hypersurfaceLayerBound_pointwise_remainder n μ k hk
-
 /-- Uniform pointwise error in every positive dimension, using the literal
 real exponent m-2. The dimension-one error constant is zero. -/
 theorem exists_hypersurfaceLayerBound_uniform_error (m : ℕ) (hm : 0 < m) :

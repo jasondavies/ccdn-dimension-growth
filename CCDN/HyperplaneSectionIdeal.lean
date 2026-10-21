@@ -75,11 +75,6 @@ lemma homogeneous_linear_span_isPrime {K σ : Type*} [Field K]
 def hyperplaneNormalPolynomial {K σ : Type*} [CommRing K] [Fintype σ]
     (A : σ → K) : MvPolynomial σ K := ∑ i, C (A i) * X i
 
-lemma hyperplaneNormalPolynomial_homogeneous {K σ : Type*}
-    [CommRing K] [Fintype σ] (A : σ → K) :
-    (hyperplaneNormalPolynomial A).IsHomogeneous 1 :=
-  IsHomogeneous.sum _ _ _ (fun _ _ => isHomogeneous_C_mul_X _ _)
-
 lemma hyperplaneNormalPolynomial_graph {K σ : Type*}
     [Field K] [Fintype σ] (A : Option σ → K) (hA : A none ≠ 0) :
     hyperplaneNormalPolynomial A = C (A none) *
@@ -124,7 +119,6 @@ lemma hyperplaneNormalPolynomial_rename {K σ τ : Type*}
   simpa only [Equiv.symm_apply_apply, Function.comp_apply] using
     e.sum_comp (fun j => C (A (e.symm j)) * X j)
 
-
 /-- Every intersection of two homogeneous linear equations has an integral
 coordinate ring, including coincident hyperplanes and zero equations. -/
 theorem homogeneous_linear_hyperplane_section_isPrime {K σ : Type*}
@@ -154,7 +148,6 @@ theorem homogeneous_linear_hyperplane_section_isPrime {K σ : Type*}
     let : (I.map E).IsPrime := by change (Ideal.map E _).IsPrime; rw [hmap]; exact hp
     have hh := Ideal.comap_isPrime E (I.map E)
     rwa [Ideal.comap_map_of_bijective E E.bijective] at hh
-
 
 end
 end CCDN

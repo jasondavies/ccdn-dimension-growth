@@ -129,23 +129,5 @@ theorem prescribedLatticeMinima_prod {n : ℕ} (v : Fin (n + 1) → E)
   simp only [prescribedLatticeMinima, Fin.succ_ne_zero, ↓reduceIte, hw]
   rw [← mul_assoc, div_mul_cancel₀ _ hδ]
 
-/-- A constructed real basis and positive monotone thresholds satisfying the
-full lattice flag condition, with an exact norm-product conversion. -/
-theorem exists_prescribed_lattice_basis_minima
-    (L : Submodule ℤ E) [DiscreteTopology L] [IsZLattice ℝ L]
-    (w : E) (hw : w ∈ L) (hw0 : w ≠ 0)
-    {n : ℕ} (hn : Module.finrank ℝ E = n + 1)
-    (δ : ℝ) (hδ : 0 < δ) (hlower : ∀ x, x ∈ L → x ≠ 0 → δ ≤ ‖x‖) :
-    ∃ (b : Basis (Fin (n + 1)) ℝ E) (a : Fin (n + 1) → ℝ),
-      b 0 = w ∧ (∀ i, b i ∈ L) ∧
-      (∀ i, a i = if i = 0 then δ else ‖b i‖) ∧
-      (∀ i, 0 < a i) ∧ Monotone a ∧
-      (∀ i x, x ∈ L → x ∉ span ℝ (b '' Set.Iio i) → a i ≤ ‖x‖) ∧
-      (∏ i, ‖b i‖) = (‖w‖ / δ) * ∏ i, a i := by
-  obtain ⟨b, hb⟩ := exists_prescribed_greedy_lattice_basis L w hw hw0 hn
-  exact ⟨b, prescribedLatticeMinima b δ, hb.2.1, hb.2.2.1, fun _ => rfl,
-    hb.minima_pos hδ, hb.minima_mono hlower, hb.minima_outside hlower,
-    prescribedLatticeMinima_prod b hb.2.1 hδ.ne'⟩
-
 end
 end CCDN

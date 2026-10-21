@@ -35,11 +35,6 @@ noncomputable def coordinateSpace {n : ℕ} (I : Ideal (CoordinatePolynomial n))
     Submodule ℚ (CoordinatePolynomial n ⧸ I) :=
   (MvPolynomial.restrictTotalDegree (Fin n) ℚ M).map (Ideal.Quotient.mkₐ ℚ I).toLinearMap
 
-instance coordinateSpace_finite {n : ℕ} (I : Ideal (CoordinatePolynomial n)) (M : ℕ) :
-    Module.Finite ℚ (coordinateSpace I M) := by
-  unfold coordinateSpace
-  infer_instance
-
 noncomputable def affineHilbertFunction {n : ℕ} (I : Ideal (CoordinatePolynomial n))
     (M : ℕ) : ℕ := Module.finrank ℚ (coordinateSpace I M)
 

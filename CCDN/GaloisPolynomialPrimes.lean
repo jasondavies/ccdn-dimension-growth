@@ -104,19 +104,6 @@ theorem galois_polynomial_minimalPrime_under
   rw [he]
   simpa only [Ideal.under_def, MvPolynomial.algebraMap_def] using hQover.over.symm
 
-theorem finite_galois_polynomial_components_conjugate
-    [FiniteDimensional k K] [IsGalois k K]
-    (I : Ideal (MvPolynomial σ k)) [I.IsPrime]
-    (P Q : Ideal (MvPolynomial σ K))
-    (hP : P ∈ (I.map (map (algebraMap k K))).minimalPrimes)
-    (hQ : Q ∈ (I.map (map (algebraMap k K))).minimalPrimes) :
-    ∃ γ : Gal(K/k), Q = P.map (map γ.toRingHom) := by
-  let : P.IsPrime := hP.isPrime
-  let : Q.IsPrime := hQ.isPrime
-  apply finite_galois_polynomial_primes_conjugate k K σ P Q
-  rw [galois_polynomial_minimalPrime_under k K σ I P hP,
-    galois_polynomial_minimalPrime_under k K σ I Q hQ]
-
 lemma eval_coefficient_galois_at_base_point (γ : Gal(K/k))
     (x : σ → k) (f : MvPolynomial σ K) :
     eval (algebraMap k K ∘ x) (map γ.toRingHom f) =
@@ -128,34 +115,6 @@ lemma eval_coefficient_galois_at_base_point (γ : Gal(K/k))
   have h := eval₂_comp γ.toRingHom (algebraMap k K ∘ x) f
   rw [he] at h
   exact h.symm
-
-/-- Every base-field zero lies on every minimal component after
-a finite Galois extension. -/
-theorem finite_galois_base_point_on_every_component
-    [FiniteDimensional k K] [IsGalois k K]
-    (I : Ideal (MvPolynomial σ k)) [I.IsPrime]
-    (P : Ideal (MvPolynomial σ K))
-    (hP : P ∈ (I.map (map (algebraMap k K))).minimalPrimes)
-    (x : σ → k) (hx : ∀ f ∈ I, eval x f = 0) :
-    ∀ f ∈ P, eval (algebraMap k K ∘ x) f = 0 := by
-  let J := I.map (map (algebraMap k K))
-  let M := RingHom.ker (eval (algebraMap k K ∘ x))
-  let : M.IsPrime := RingHom.ker_isPrime _
-  have hJM : J ≤ M := by
-    apply Ideal.map_le_iff_le_comap.mpr
-    intro f hf
-    change eval (algebraMap k K ∘ x) (map (algebraMap k K) f) = 0
-    rw [eval_map, ← eval₂_comp, hx f hf, map_zero]
-  obtain ⟨Q, hQ, hQM⟩ := Ideal.exists_minimalPrimes_le hJM
-  obtain ⟨γ, hγ⟩ := finite_galois_polynomial_components_conjugate k K σ I P Q hP hQ
-  intro f hf
-  have hm : map γ.toRingHom f ∈ Q := by
-    rw [hγ]
-    exact Ideal.mem_map_of_mem _ hf
-  have hz := hQM hm
-  change eval (algebraMap k K ∘ x) (map γ.toRingHom f) = 0 at hz
-  rw [eval_coefficient_galois_at_base_point] at hz
-  exact γ.injective (hz.trans (map_zero γ).symm)
 
 end
 end CCDN

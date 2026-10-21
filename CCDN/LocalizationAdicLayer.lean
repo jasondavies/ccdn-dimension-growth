@@ -1,6 +1,7 @@
 module
 
-public import CCDN.IdealAdicLayerQuotient
+public import CCDN.NoetherianLocalLayers
+public import Mathlib.LinearAlgebra.Isomorphisms
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 /-! Localization at a maximal ideal preserves every adic layer.
@@ -19,11 +20,6 @@ variable {K R S : Type*} [Field K] [CommRing R] [Algebra K R]
 def localizationAdicQuotientEquiv (N : ℕ) :
     (R ⧸ I ^ N) ≃ₐ[K] S ⧸ maximalIdeal S ^ N :=
   (IsLocalization.AtPrime.equivQuotMaximalIdealPow I S N).restrictScalars K
-
-@[simp]
-lemma localizationAdicQuotientEquiv_apply_mk (N : ℕ) (x : R) :
-    localizationAdicQuotientEquiv (K := K) (S := S) I N (Ideal.Quotient.mk _ x) =
-      Ideal.Quotient.mk _ (algebraMap R S x) := rfl
 
 lemma localizationAdicQuotientEquiv_layer (k : ℕ) :
     (idealPowerLayer K I k).map
@@ -66,11 +62,6 @@ def localizationAdicLayerEquiv (k : ℕ) :
     (localizationAdicQuotientEquiv (K := K) (S := S) I (k + 1)).toLinearMap
     (localizationAdicQuotientEquiv (K := K) (S := S) I (k + 1)).injective _).trans
       (LinearEquiv.ofEq _ _ (localizationAdicQuotientEquiv_layer I k))
-
-theorem localizationAdicLayer_finrank (k : ℕ) :
-    Module.finrank K (idealPowerLayer K (maximalIdeal S) k) =
-      Module.finrank K (idealPowerLayer K I k) :=
-  (localizationAdicLayerEquiv (K := K) (S := S) I k).finrank_eq.symm
 
 end
 end CCDN

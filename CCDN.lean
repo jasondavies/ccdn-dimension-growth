@@ -474,7 +474,6 @@ public import CCDN.EulerPairSpecialization
 public import CCDN.EulerUniversalForms
 public import CCDN.FiniteFiberLinearSeparation
 public import CCDN.GridPolynomialNormalization
-public import CCDN.IdealAdicLayerQuotient
 public import CCDN.IntegralProjectionClosedImage
 public import CCDN.LinearNormalizationInfinite
 public import CCDN.LocalPrimeGenerators
@@ -522,7 +521,6 @@ public import CCDN.PrimeIdealDimensionDrop
 public import CCDN.PrincipalSectionGridBound
 public import CCDN.PrincipalSectionPurity
 public import CCDN.QuotientAdicLayer
-public import CCDN.SharpPrincipalSectionCount
 public import CCDN.WeightedDimensionOneExample
 public import CCDN.AmbientNoetherForms
 public import CCDN.AmbientNoetherHeight

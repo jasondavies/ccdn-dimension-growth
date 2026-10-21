@@ -93,16 +93,5 @@ lemma affineChart_homogeneousTranslation {R : Type*} [CommRing R] {n : ℕ}
         simp [affineChart, homogeneousTranslation, homogeneousTranslationHom, affineTranslation, affineTranslationHom]
   exact RingHom.congr_fun he f
 
-lemma homogeneousTranslation_chart_degree {R : Type*} [CommRing R] [Nontrivial R] {n : ℕ}
-    (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) R) :
-    (affineChart n (homogeneousTranslation R a f)).totalDegree = (affineChart n f).totalDegree := by
-  rw [affineChart_homogeneousTranslation, affineTranslation_totalDegree]
-
-lemma homogeneousTranslation_chart_irreducible {R S : Type*} [CommRing R] [CommRing S] {n : ℕ}
-    (φ : R →+* S) (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) R) :
-    Irreducible (MvPolynomial.map φ (affineChart n (homogeneousTranslation R a f))) ↔
-      Irreducible (MvPolynomial.map φ (affineChart n f)) := by
-  rw [affineChart_homogeneousTranslation, affineTranslation_map, affineTranslation_irreducible_iff]
-
 end
 end CCDN

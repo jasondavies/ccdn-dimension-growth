@@ -94,18 +94,6 @@ theorem affine_coordinates_line_polynomial_identity {K : Type*} [Field K]
   intro f hf
   rw [← htranslate, AlgHom.comp_apply, hφ f hf, map_zero]
 
-theorem line_through_point_of_affine_coordinates {K : Type*} [Field K]
-    (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime]
-    (j : Fin 3) (c d : Fin 3 → K) (hcj : c j ≠ 0)
-    (hj : Transcendental K ((Ideal.Quotient.mk p) (X j)))
-    (hcd : ∀ k, (Ideal.Quotient.mk p) (X k) =
-      c k • (Ideal.Quotient.mk p) (X j) + algebraMap K (MvPolynomial (Fin 3) K ⧸ p) (d k))
-    (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) :
-    ∃ c : Fin 3 → K, (∃ j, c j ≠ 0) ∧ ∀ f ∈ p,
-      MvPolynomial.aeval
-        (fun k => Polynomial.C (z k) + Polynomial.C (c k) * Polynomial.X) f = 0 :=
-  ⟨c, ⟨j, hcj⟩, affine_coordinates_line_polynomial_identity p j c d hj hcd z hz⟩
-
 /-- A degree-one prime curve containing a base-field point has affine coordinate
 formulas over that same field. In particular this holds directly over `ℚ`. -/
 theorem degree_one_coordinates_affine_of_point {K : Type*} [Field K]
@@ -146,18 +134,6 @@ theorem degree_one_coordinates_affine_of_point {K : Type*} [Field K]
     rw [he]
     exact isAlgebraic_algebraMap (d j)
   exact ⟨j, c, d, hcj, hj, hcd⟩
-
-/-- Degree-one line containment over an arbitrary field with a rational point. -/
-theorem degree_one_line_through_rational_point {K : Type*} [Field K]
-    (p : Ideal (MvPolynomial (Fin 3) K)) [p.IsPrime] (hp : p.height = 2)
-    (hdegree : ∃ N : ℕ, ∃ b : ℤ, ∀ n ≥ N,
-      (Module.finrank K (filteredCoordinateSpace p n) : ℤ) = n + b)
-    (z : Fin 3 → K) (hz : z ∈ coordinateZeroLocus p) :
-    ∃ c : Fin 3 → K, (∃ j, c j ≠ 0) ∧ ∀ f ∈ p,
-      MvPolynomial.aeval
-        (fun k => Polynomial.C (z k) + Polynomial.C (c k) * Polynomial.X) f = 0 := by
-  obtain ⟨j, c, d, hcj, hj, hcd⟩ := degree_one_coordinates_affine_of_point p hp hdegree z hz
-  exact line_through_point_of_affine_coordinates p j c d hcj hj hcd z hz
 
 /-- Affine coordinate identities identify the entire base-field zero set
 with the parameterized line, in both directions. -/

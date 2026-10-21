@@ -169,44 +169,6 @@ theorem integer_homogeneous_evaluation_rank_eq {n d M t : ℕ}
   rw [homogeneousEvaluationMatrix_intCast] at hr
   exact hr
 
-/-- Either there is an integral auxiliary polynomial, or the selected
-independent spanning rows have the exact Hilbert rank. -/
-theorem integer_homogeneous_rank_dichotomy {n d M t : ℕ}
-    (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d)
-    (hf0 : f ≠ 0) (hdM : d ≤ M)
-    (points : Fin t → Fin (n + 1) → ℤ) (hzero : ∀ i, eval (points i) f = 0) :
-    (∃ g : MvPolynomial (Fin (n + 1)) ℤ, g ≠ 0 ∧ g.IsHomogeneous M ∧
-      (∀ i, eval (points i) g = 0) ∧ ¬ f ∣ g) ∨
-    ∃ (s : ℕ) (a : Fin s → Fin t), Function.Injective a ∧
-      LinearIndependent ℚ
-        ((evaluationMatrix (homogeneousMonomials n M) (points ∘ a)).map ((↑) : ℤ → ℚ)).row ∧
-      Submodule.span ℚ (Set.range
-        ((evaluationMatrix (homogeneousMonomials n M) (points ∘ a)).map ((↑) : ℤ → ℚ)).row) =
-      Submodule.span ℚ (Set.range
-        ((evaluationMatrix (homogeneousMonomials n M) points).map ((↑) : ℤ → ℚ)).row) ∧
-      s < (n + M).choose M ∧
-      s + (n + (M - d)).choose (M - d) = (n + M).choose M := by
-  classical
-  by_cases hrel : ∀ g : MvPolynomial (Fin (n + 1)) ℤ, g.IsHomogeneous M →
-      (∀ i, eval (points i) g = 0) → f ∣ g
-  · right
-    obtain ⟨s, a, ha, hi, hspan, hs⟩ :=
-      homogeneous_independent_evaluation_rows f hf hf0 hdM points hzero
-    refine ⟨s, a, ha, hi, hspan, hs, ?_⟩
-    have hr := integer_homogeneous_evaluation_rank_eq f hf hf0 hdM points hzero hrel
-    have he : ((evaluationMatrix (homogeneousMonomials n M) points).map ((↑) : ℤ → ℚ)).rank = s := by
-      rw [Matrix.rank_eq_finrank_span_row, ← hspan, ← Matrix.rank_eq_finrank_span_row,
-        hi.rank_matrix, Fintype.card_fin]
-    rwa [he] at hr
-  · left
-    push Not at hrel
-    obtain ⟨g, hg, hz, hnd⟩ := hrel
-    refine ⟨g, ?_, hg, hz, hnd⟩
-    intro he
-    apply hnd
-    rw [he]
-    exact dvd_zero f
-
 /-- Twice the dimension of ternary forms, without natural-number division. -/
 lemma ternary_homogeneous_dimension (M : ℕ) :
     2 * (2 + M).choose M = (M + 2) * (M + 1) := by

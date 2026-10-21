@@ -1,6 +1,7 @@
 module
 
-public import CCDN.IdealAdicLayerQuotient
+public import CCDN.NoetherianLocalLayers
+public import Mathlib.LinearAlgebra.Isomorphisms
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! Adic layers in a quotient ring are identified with the corresponding
@@ -17,12 +18,6 @@ def quotientAdicQuotientEquiv (J I : Ideal A) (N : ℕ) :
     ((A ⧸ J) ⧸ (I.map (Ideal.Quotient.mk J)) ^ N) ≃ₐ[K] A ⧸ J ⊔ I ^ N :=
   (Ideal.quotientEquivAlgOfEq K (Ideal.map_pow (Ideal.Quotient.mk J) I N).symm).trans
     (DoubleQuot.quotQuotEquivQuotSupₐ K J (I ^ N))
-
-@[simp]
-lemma quotientAdicQuotientEquiv_apply_mk (J I : Ideal A) (N : ℕ) (x : A) :
-    quotientAdicQuotientEquiv (K := K) J I N
-      (Ideal.Quotient.mk _ (Ideal.Quotient.mk J x)) =
-        Ideal.Quotient.mk _ x := rfl
 
 lemma quotientAdicQuotientEquiv_layer (J I : Ideal A) (k : ℕ) :
     (idealPowerLayer K (I.map (Ideal.Quotient.mk J)) k).map

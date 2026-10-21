@@ -58,12 +58,6 @@ lemma integerDirectionHeight_pos {n : ℕ} {v : IntPoint n} (hv : v ≠ 0) :
   obtain ⟨j, hj⟩ := Function.ne_iff.mp hv
   exact (Int.natAbs_pos.mpr hj).trans_le (Finset.le_sup (f := fun j => (v j).natAbs) (Finset.mem_univ j))
 
-lemma coordinate_abs_le_integerDirectionHeight {n : ℕ} (v : IntPoint n) (j : Fin n) :
-    |(v j : ℝ)| ≤ integerDirectionHeight v := by
-  have h := Finset.le_sup (f := fun j => (v j).natAbs) (Finset.mem_univ j)
-  simpa only [Nat.cast_natAbs, Int.cast_abs] using
-    (show ((v j).natAbs : ℝ) ≤ integerDirectionHeight v by exact_mod_cast h)
-
 lemma exists_coordinate_integerDirectionHeight {n : ℕ} {v : IntPoint n} (hv : v ≠ 0) :
     ∃ j, |(v j : ℝ)| = integerDirectionHeight v := by
   obtain ⟨j, _⟩ := Function.ne_iff.mp hv

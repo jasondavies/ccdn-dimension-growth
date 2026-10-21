@@ -38,18 +38,6 @@ theorem fractionalIdeal_conjugate_coeIdeal (σ : R ≃+* R) (I : Ideal R) :
       ⟨s, hs, rfl⟩, ?_⟩
     exact IsFractionRing.ringEquivOfRingEquiv_algebraMap σ s
 
-theorem fractionalIdealUnitAction_mk0 (σ : R ≃+* R) (I : (Ideal R)⁰) :
-    fractionalIdealUnitAction (K := K) σ (FractionalIdeal.mk0 K I) =
-      FractionalIdeal.mk0 K
-        ⟨(I : Ideal R).map σ.toRingHom,
-          mem_nonZeroDivisors_iff_ne_zero.mpr (by
-            intro h
-            have hh := Ideal.map_eq_bot_iff_of_injective (I := (I : Ideal R))
-              (f := σ.toRingHom) σ.injective
-            exact (mem_nonZeroDivisors_iff_ne_zero.mp I.property) (hh.mp h))⟩ := by
-  apply Units.ext
-  exact fractionalIdeal_conjugate_coeIdeal σ I
-
 theorem integral_ideal_scalar_fractional_comparison
     (σ : R ≃+* R) (I : (Ideal R)⁰) (x y : R) (hx : x ≠ 0) (hy : y ≠ 0)
     (hxy : Ideal.span {x} * (I : Ideal R).map σ.toRingHom =

@@ -67,24 +67,5 @@ theorem eulerClosedForm_minor_eq_zero_of_product
     genericEulerFactorRight_specialize a b g h hh] at hz
   exact hz
 
-theorem universalEulerMinor_eq_zero_of_product
-    {R : Type*} [CommRing R] (k a b : ℕ)
-    (ha : 0 < a) (hb : 0 < b) (hab : a + b = k + 2)
-    (g h : R[X][X]) (hg : bivariateTotalDegree g ≤ a)
-    (hh : bivariateTotalDegree h ≤ b)
-    (rows : Fin ((k + 2) ^ 2 - 1) → ℕ × ℕ)
-    (cols : Fin ((k + 2) ^ 2 - 1) → EulerColumns k) :
-    MvPolynomial.eval₂ (Int.castRingHom R) (eulerCoefficientData (k + 2) (g * h))
-      (universalEulerMinor k rows cols) = 0 := by
-  have ht : bivariateTotalDegree (g * h) ≤ k + 2 :=
-    (bivariateTotalDegree_mul_le g h).trans (by omega)
-  change (MvPolynomial.eval₂Hom (Int.castRingHom R) (eulerCoefficientData (k + 2) (g * h)))
-    (((universalEulerMatrix k).submatrix rows cols).det) = 0
-  rw [RingHom.map_det]
-  change (((universalEulerMatrix k).map
-    (MvPolynomial.eval₂Hom (Int.castRingHom R) (eulerCoefficientData (k + 2) (g * h)))).submatrix rows cols).det = 0
-  rw [universalEulerMatrix_specialize k (g * h) ht]
-  exact eulerClosedForm_minor_eq_zero_of_product k a b ha hb hab g h hg hh rows cols
-
 end
 end CCDN

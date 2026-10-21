@@ -52,34 +52,5 @@ theorem powerSeries_linearIndependent_of_orders
   · intro i
     exact (PowerSeries.order_eq_nat.mp (horder i)).1
 
-lemma mixed_order_injective {ι κ : Type*} (n : ι → ℕ) (m : κ → ℕ) {q : ℕ}
-    (hq : 0 < q) (hn : Function.Injective n) (hm : Function.Injective m)
-    (hsmall : ∀ i, n i < q) : Function.Injective (fun t : ι × κ => n t.1 + q * m t.2) := by
-  intro a b he
-  change n a.1 + q * m a.2 = n b.1 + q * m b.2 at he
-  have hfirst : n a.1 = n b.1 := by
-    have hh := congrArg (fun x => x % q) he
-    simpa only [Nat.add_mod, Nat.mul_mod_right, Nat.add_zero, Nat.mod_mod,
-      Nat.mod_eq_of_lt (hsmall a.1), Nat.mod_eq_of_lt (hsmall b.1)] using hh
-  have hsecond : m a.2 = m b.2 := by
-    rw [hfirst] at he
-    exact Nat.eq_of_mul_eq_mul_left hq (Nat.add_left_cancel he)
-  exact Prod.ext (hn hfirst) (hm hsecond)
-
-/-- Low-order series times q-th powers of another ordered family are jointly
-independent when the low orders are smaller than q. This noncancellation
-argument works in every characteristic. -/
-theorem powerSeries_mixed_powers_independent
-    {K ι κ : Type*} [Field K] [Fintype ι] [DecidableEq ι] [Fintype κ] [DecidableEq κ]
-    (f : ι → PowerSeries K) (g : κ → PowerSeries K) (n : ι → ℕ) (m : κ → ℕ) {q : ℕ}
-    (hq : 0 < q) (hn : Function.Injective n) (hm : Function.Injective m)
-    (hsmall : ∀ i, n i < q) (hf : ∀ i, (f i).order = n i) (hg : ∀ j, (g j).order = m j) :
-    LinearIndependent K (fun t : ι × κ => f t.1 * (g t.2) ^ q) := by
-  apply powerSeries_linearIndependent_of_orders _ (fun t => n t.1 + q * m t.2)
-    (mixed_order_injective n m hq hn hm hsmall)
-  intro t
-  rw [PowerSeries.order_mul, PowerSeries.order_pow, hf, hg]
-  simp only [nsmul_eq_mul, Nat.cast_add, Nat.cast_mul]
-
 end
 end CCDN
