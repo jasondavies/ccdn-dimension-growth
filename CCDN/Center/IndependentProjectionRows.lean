@@ -31,10 +31,8 @@ theorem integer_rows_linearIndependent_of_projection_injective {m n : ℕ}
       (fun i => integerLinearForm (a i)))) :
     LinearIndependent ℚ (fun i => fun j => (a i j : ℚ)) := by
   have hi : AlgebraicIndependent ℚ
-      (fun i => (Ideal.Quotient.mk I) (integerLinearForm (a i))) := by
-    change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (integerLinearForm (a i))))
-    rw [← projectionCoordinateMap_eq_aeval]
-    exact hinj
+      (fun i => (Ideal.Quotient.mk I) (integerLinearForm (a i))) :=
+    injective_projectionCoordinateMap_iff.mp hinj
   have hl : LinearIndependent ℚ (fun i => integerLinearForm (a i)) :=
     hi.linearIndependent.of_comp (Ideal.Quotient.mkₐ ℚ I).toLinearMap
   exact LinearIndependent.of_comp (linearFormLinearMap ℚ (Fin n)) hl

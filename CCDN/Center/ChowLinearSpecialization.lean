@@ -11,7 +11,7 @@ public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Projection.LinearProjectionFiltration
 import CCDN.Center.BalancedParameterFiniteness
 import CCDN.Center.HomogeneousProjectionNoBasePoint
-import CCDN.Center.IntegralProjectionImage
+import CCDN.Projection.IntegralProjectionClosedImage
 import CCDN.Center.ProjectiveIncidenceClosed
 import CCDN.Projection.HomogeneousProjectionEquation
 import CCDN.Projection.ProjectionScalarExtension
@@ -128,7 +128,7 @@ theorem chow_projection_cone_image_iff
       ∃ x : Fin (n + 1) → K, x ≠ 0 ∧ x ∈ idealZeroLocus J ∧ A *ᵥ x = y := by
   constructor
   · intro hz
-    obtain ⟨x, hxJ, he⟩ := exists_point_of_integral_projection_kernel_zero J
+    obtain ⟨x, hxJ, he⟩ := integral_projection_exists_point J
       (chowProjectionForms A) hint y hz
     have hxy : A *ᵥ x = y := funext (fun i => (chowProjectionForms_eval A i x).symm.trans (he i))
     refine ⟨x, ?_, hxJ, hxy⟩

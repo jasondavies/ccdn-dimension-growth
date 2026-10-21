@@ -279,7 +279,6 @@ public import CCDN.Center.IndependentBirationalProjection
 public import CCDN.Center.IndependentPrimitiveExtension
 public import CCDN.Center.IndependentProjectionRows
 public import CCDN.Center.IntegerMinorProjectiveHeight
-public import CCDN.Center.IntegralProjectionImage
 public import CCDN.Center.IntegralProjectionSpecialization
 public import CCDN.Center.IntermediateFieldParameterTower
 public import CCDN.Center.IrreducibleRelationDegree
