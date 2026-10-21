@@ -5,7 +5,9 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.Plane
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import CCDN.ClassGroup.ClassGroupBoundedGenerators
 public import CCDN.ClassGroup.ClassGroupNormPolynomial
 /-! Concrete integer-translation fibers of the bounded square-norm set

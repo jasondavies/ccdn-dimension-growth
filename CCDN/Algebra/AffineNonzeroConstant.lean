@@ -9,7 +9,7 @@ public import CCDN.Auxiliary.ScalingPrime
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.PrimitiveIntegerPolynomial
-public import CCDN.Plane.Plane
+public import CCDN.Statements
 import CCDN.Auxiliary.UnscaledModelCount
 import CCDN.Height.AffineBoxRanges
 import CCDN.Plane.ScaledPlaneSmallCoefficient

@@ -6,7 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Curve.Curve
+public import CCDN.Hilbert.AffineCurveDegree
+public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.RingTheory.Ideal.Height
 import CCDN.Hilbert.DegreeOneComponentLines
 import CCDN.Surface.SurfaceLineContribution

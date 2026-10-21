@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.Curve
-import CCDN.AffineCurveBound
+public import CCDN.Statements
+import CCDN.Curve.AffineCurveCount
 import CCDN.Surface.SurfaceAuxiliaryExponent
 /-! Counting the nonlinear components of a surface section using their
 total Hilbert degree and the affine curve counting theorem. -/
@@ -37,7 +37,7 @@ theorem nonlinear_curve_union_bound :
       (∑ P ∈ s, (δ P : ℝ)) ≤ C * (d : ℝ) ^ (9 / 2 : ℝ) * B ^ (1 / Real.sqrt d) →
       (count (⋃ P ∈ s, idealZeroLocus P) B : ℝ) ≤
         K * Real.exp 1 * (480 * C + 2 * C ^ 4) * (d : ℝ) ^ 18 * B := by
-  obtain ⟨K, hK, hcount⟩ := affineCurveBound 3 (by omega)
+  obtain ⟨K, hK, hcount⟩ := affine_curve_count 3 (by omega)
   refine ⟨K, hK, ?_⟩
   intro s δ d hd C B hC hB hcurve hdegree
   calc

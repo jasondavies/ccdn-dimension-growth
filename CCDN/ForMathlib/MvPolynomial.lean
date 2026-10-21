@@ -105,6 +105,11 @@ theorem totalDegree_pos_of_ne_zero_of_not_isUnit [Field K] {f : MvPolynomial σ 
   rw [totalDegree_eq_zero_iff_eq_C.mp hd] at hf ⊢
   exact (isUnit_iff_ne_zero.mpr fun h ↦ hf (by rw [h, map_zero])).map C
 
+/-- Over a field, an irreducible polynomial has positive total degree. -/
+theorem totalDegree_pos_of_irreducible [Field K] {f : MvPolynomial σ K} (hf : Irreducible f) :
+    0 < f.totalDegree :=
+  totalDegree_pos_of_ne_zero_of_not_isUnit hf.ne_zero hf.not_isUnit
+
 /-- The homogeneous component of top degree of a nonzero polynomial is nonzero. -/
 theorem homogeneousComponent_totalDegree_ne_zero {p : MvPolynomial σ R} (hp : p ≠ 0) :
     homogeneousComponent p.totalDegree p ≠ 0 := by

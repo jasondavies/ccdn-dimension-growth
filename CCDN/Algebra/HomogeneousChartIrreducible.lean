@@ -6,9 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.HomogeneousChart
-import CCDN.Determinant.SingularDeterminant
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import CCDN.ForMathlib.MvPolynomial
 /-! Dehomogenization preserves degree and irreducibility when the
 homogenizing coordinate does not divide the homogeneous equation. -/
 
@@ -105,7 +105,7 @@ theorem affineChart_irreducible_of_not_variable_dvd {K : Type*} [Field K] {n d :
   have hdeg := affineChart_degree_of_not_variable_dvd f hf hX
   have hd : 0 < d := by
     rw [← hf.totalDegree hir.ne_zero]
-    exact irreducible_mvPolynomial_totalDegree_pos hir
+    exact MvPolynomial.totalDegree_pos_of_irreducible hir
   have hc0 : affineChart n f ≠ 0 := by
     intro he
     have hh := hdeg

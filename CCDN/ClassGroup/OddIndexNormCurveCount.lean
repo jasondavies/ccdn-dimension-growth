@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Statements
 public import CCDN.Algebra.AffineNonzeroConstant
 public import CCDN.ClassGroup.ClassGroupNormPolynomial
 public import CCDN.Algebra.PolynomialPredicates

@@ -9,7 +9,7 @@ public import CCDN.Hilbert.FilteredIntersection
 import CCDN.Algebra.BinomialSectionBound
 import CCDN.Algebra.CoordinatePowerGeneration
 import CCDN.Hilbert.FilteredHilbertLinearity
-import CCDN.Projection.PlaneProjectionDegree
+import CCDN.Hilbert.AffineCurveDegree
 import Mathlib.LinearAlgebra.Dimension.Constructions
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
 /-! An eventual linear upper bound gives an eventual linear Hilbert

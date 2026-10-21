@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Hypersurface.IntegerHyperplaneSlices
-public import CCDN.Plane.Plane
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import CCDN.Algebra.PolynomialPredicates
 /-! Coordinate transport between the graph-hyperplane construction and
 the finite integral-point count. -/

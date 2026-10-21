@@ -25,24 +25,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- Lift a basis of the filtered coordinate ring to bounded-degree polynomials. -/
-theorem exists_filtered_polynomial_basis {K σ : Type*} [Field K] [Finite σ]
-    (I : Ideal (MvPolynomial σ K)) (D : ℕ) :
-    ∃ h : Fin (Module.finrank K (filteredCoordinateSpace I D)) → MvPolynomial σ K,
-      (∀ i, (h i).totalDegree ≤ D) ∧
-      LinearIndependent K (fun i => (Ideal.Quotient.mkₐ K I) (h i)) := by
-  classical
-  let b := Module.finBasis K (filteredCoordinateSpace I D)
-  have hlift (i : Fin (Module.finrank K (filteredCoordinateSpace I D))) :
-      ∃ h : MvPolynomial σ K, h.totalDegree ≤ D ∧
-        (Ideal.Quotient.mkₐ K I) h = (b i).val := by
-    obtain ⟨h, hh, he⟩ := Submodule.mem_map.mp (b i).property
-    exact ⟨h, (mem_restrictTotalDegree _ _ _).mp hh, he⟩
-  choose h hd he using hlift
-  refine ⟨h, hd, ?_⟩
-  simp only [he]
-  exact b.linearIndependent.map' (filteredCoordinateSpace I D).subtype (Submodule.ker_subtype _)
-
 /-- A strict dimension inequality gives the smooth prime-field point count. -/
 theorem plane_stepanov_smooth_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
     (p : ℕ) [Fact p.Prime] (f : MvPolynomial (Fin 2) (ZMod p)) (hf : Irreducible f)

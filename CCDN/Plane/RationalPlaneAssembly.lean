@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Statements
 public import CCDN.Algebra.AffineNonzeroConstant
 import CCDN.Plane.AffinePlaneAssembly
 import CCDN.Projection.PrimitiveNormalization

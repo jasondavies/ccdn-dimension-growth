@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Statements
 public import CCDN.Plane.RationalPlaneAssembly
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Hypersurface.NonabsolutePlaneCount

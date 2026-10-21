@@ -11,6 +11,7 @@ import CCDN.Hypersurface.NonabsolutePlaneCount
 import CCDN.Plane.PlaneHilbert
 import CCDN.Projection.PlaneProjectionKernel
 import CCDN.ForMathlib.MvPolynomial
+import CCDN.Hilbert.AffineCurveDegree
 /-! The irreducible image equation has degree at most the original affine
 Hilbert degree. This is an upper bound; the degree need not be preserved. -/
 
@@ -18,31 +19,6 @@ Hilbert degree. This is an upper bound; the degree need not be preserved. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial
-
-lemma eventual_linear_slope_le (f g : ℕ → ℕ) (a b : ℕ)
-    (hf : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N, (f n : ℤ) = (a : ℤ) * n + c)
-    (hg : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N, (g n : ℤ) = (b : ℤ) * n + c)
-    (hle : ∀ n, f n ≤ g n) : a ≤ b := by
-  obtain ⟨N₀, c, hc⟩ := hf
-  obtain ⟨N₁, e, he⟩ := hg
-  by_contra hbad
-  have hab : b + 1 ≤ a := by omega
-  let N := N₀ + N₁ + c.natAbs + e.natAbs + 1
-  have hN₀ : N₀ ≤ N := by dsimp [N]; omega
-  have hN₁ : N₁ ≤ N := by dsimp [N]; omega
-  have hh : (a : ℤ) * N + c ≤ (b : ℤ) * N + e := by
-    rw [← hc N hN₀, ← he N hN₁]
-    exact_mod_cast hle N
-  have hmul : ((b : ℤ) + 1) * N ≤ (a : ℤ) * N := by
-    exact_mod_cast Nat.mul_le_mul_right N hab
-  have hce : -(c.natAbs : ℤ) ≤ c := by
-    have hh : -c ≤ ((-c).natAbs : ℤ) := Int.le_natAbs
-    simp only [Int.natAbs_neg] at hh
-    omega
-  have hee : e ≤ (e.natAbs : ℤ) := Int.le_natAbs
-  have hNeq : (N : ℤ) = N₀ + N₁ + c.natAbs + e.natAbs + 1 := by
-    simp only [N, Nat.cast_add, Nat.cast_one]
-  nlinarith
 
 /-- A principal image equation of a linear projection has degree at most the
 source's affine Hilbert degree. -/

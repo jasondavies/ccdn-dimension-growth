@@ -18,10 +18,6 @@ namespace CCDN
 noncomputable section
 open Finset Real MvPolynomial
 
-lemma irreducible_mvPolynomial_totalDegree_pos {K σ : Type*} [Field K]
-    {f : MvPolynomial σ K} (hf : Irreducible f) : 0 < f.totalDegree :=
-  totalDegree_pos_of_ne_zero_of_not_isUnit hf.ne_zero hf.not_isUnit
-
 /-- The local exponent can be bounded using the reduced point count
 and the proved degree-dependent singular correction. -/
 theorem singular_reduction_minorGcd_card_bound {s N p : ℕ} [Fact p.Prime] (hs : 0 < s)
@@ -35,7 +31,7 @@ theorem singular_reduction_minorGcd_card_bound {s N p : ℕ} [Fact p.Prime] (hs 
   dsimp only
   obtain ⟨hM, e, _, he, hdiv⟩ := singular_reduction_minorGcd hs f g z hf.ne_zero hz
   have hbound := planeTotalMultiplicity_le_card_add_correction f hf
-    (irreducible_mvPolynomial_totalDegree_pos hf) hchar
+    (MvPolynomial.totalDegree_pos_of_irreducible hf) hchar
   rw [← Nat.card_eq_fintype_card] at hbound
   refine ⟨hM.trans_le hbound, e, ?_, hdiv⟩
   apply le_trans (sub_le_sub_right ?_ (s : ℝ)) he

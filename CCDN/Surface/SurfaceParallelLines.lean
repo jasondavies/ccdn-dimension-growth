@@ -8,7 +8,9 @@ module
 public import CCDN.Surface.SurfaceTransversePlane
 public import CCDN.Plane.IntegralAffineLine
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Plane.Plane
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Plane.Bezout
 import CCDN.Surface.SurfaceDirectionalDerivative

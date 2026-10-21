@@ -394,8 +394,8 @@ public import CCDN.Counterexample.OriginProjectivePoint
 public import CCDN.Counterexample.RowSeparatorCounterexample
 public import CCDN.Counterexample.WeightedDimensionOneExample
 public import CCDN.Counterexample.ZeroDimensionalCenterObstruction
+public import CCDN.Curve.AffineCurveCount
 public import CCDN.Curve.AffineCurveHilbertPolynomial
-public import CCDN.Curve.Curve
 public import CCDN.Curve.CurveBoxDegreeBound
 public import CCDN.Curve.CurveDerivativeReconstruction
 public import CCDN.Curve.CurveFunctionField
@@ -403,6 +403,7 @@ public import CCDN.Curve.CurveParameterFullDegree
 public import CCDN.Curve.CurvePrimitivePair
 public import CCDN.Curve.CurveRationalInverse
 public import CCDN.Curve.CurveRationalParameter
+public import CCDN.Curve.ProjectiveCurveCount
 public import CCDN.Curve.ProjectiveHilbertCurveGrowth
 public import CCDN.Curve.SmallDegreeSurfaceCurveCount
 public import CCDN.Curve.SurfaceCurve
@@ -543,6 +544,7 @@ public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Height.ScaledBoxExponent
 public import CCDN.Height.ScaledHypersurfaceHeight
 public import CCDN.Height.WeightedHeightRatio
+public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Hilbert.AlgebraicHilbertDimension
 public import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
 public import CCDN.Hilbert.CompleteIntersectionDegreeBudget
@@ -590,6 +592,7 @@ public import CCDN.Hilbert.ZeroDimensionalGeometricPoint
 public import CCDN.Hilbert.ZeroDimensionalPrimeDescent
 public import CCDN.Hilbert.ZeroDimensionalProjectiveCount
 public import CCDN.Hypersurface.AffineHyperplaneSlice
+public import CCDN.Hypersurface.AffineHypersurfaceCount
 public import CCDN.Hypersurface.EffectiveHyperplaneAvoidance
 public import CCDN.Hypersurface.FiniteGaloisIdealDefinition
 public import CCDN.Hypersurface.GaloisComponentDegree
@@ -639,6 +642,7 @@ public import CCDN.LowerBound.GridTopFormConstruction
 public import CCDN.LowerBound.HypersurfaceLowerBoundAllDegrees
 public import CCDN.LowerBound.IntegerGridLowerBound
 public import CCDN.LowerBound.ProjectiveDegreeObstruction
+public import CCDN.LowerBound.ProjectivePlaneLowerBound
 public import CCDN.Noether.AmbientNoetherForms
 public import CCDN.Noether.AmbientNoetherHeight
 public import CCDN.Noether.AmbientNoetherNonvanishing
@@ -715,7 +719,6 @@ public import CCDN.Plane.IntegerPlaneLogHeight
 public import CCDN.Plane.IntegerPlaneWitness
 public import CCDN.Plane.IntegerPlaneWitnessHeight
 public import CCDN.Plane.IntegralAffineLine
-public import CCDN.Plane.Plane
 public import CCDN.Plane.PlaneCount
 public import CCDN.Plane.PlaneCurveAssembly
 public import CCDN.Plane.PlaneDeformationRelation
@@ -812,6 +815,7 @@ public import CCDN.Projection.ZeroDimensionalAffineProjection
 public import CCDN.ProjectiveCurveBound
 public import CCDN.ProjectiveCurveLowerBound
 public import CCDN.ProjectiveDimensionGrowth
+public import CCDN.Statements
 public import CCDN.Surface.AffineSurfaceCountLargeDegree
 public import CCDN.Surface.AffineSurfaceDimensionGrowth
 public import CCDN.Surface.CongruencePrimeWindow

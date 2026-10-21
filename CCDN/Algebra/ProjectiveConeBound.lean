@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Height.ProjectiveZeroLocus
-public import CCDN.Plane.Plane
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 /-! A projective point count is bounded by the integer count on its
 affine cone at the same height. Chosen primitive representatives give a
 height-preserving injection. -/

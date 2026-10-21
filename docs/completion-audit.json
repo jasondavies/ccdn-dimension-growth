@@ -1540,7 +1540,7 @@
     },
     {
       "id": "e078",
-      "file": "CCDN/ProjectiveCurveBound.lean",
+      "file": "CCDN/Statements.lean",
       "declaration": "CCDN.ProjectiveCurveBound"
     },
     {
@@ -1560,7 +1560,7 @@
     },
     {
       "id": "e082",
-      "file": "CCDN/Curve/Curve.lean",
+      "file": "CCDN/Statements.lean",
       "declaration": "CCDN.AffineCurveBound"
     },
     {
@@ -1570,12 +1570,12 @@
     },
     {
       "id": "e084",
-      "file": "CCDN/Curve/Curve.lean",
+      "file": "CCDN/Hilbert/AffineCurveDegree.lean",
       "declaration": "CCDN.HasAffineCurveDegree"
     },
     {
       "id": "e085",
-      "file": "CCDN/Plane/Plane.lean",
+      "file": "CCDN/Statements.lean",
       "declaration": "CCDN.curveBound"
     },
     {

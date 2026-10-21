@@ -16,6 +16,7 @@ import CCDN.Center.ProjectiveChowExactDegree
 import CCDN.Determinant.SingularDeterminant
 import CCDN.Hilbert.HilbertScalarExtension
 import CCDN.Hilbert.HomogeneousPrimeComponents
+import CCDN.ForMathlib.MvPolynomial
 /-! Sharp-degree resultant detectors defined over the source field and
 valid on all centers over an algebraically closed extension. -/
 
@@ -56,7 +57,7 @@ theorem exists_center_resultant_forms
     exists_geometric_projective_chow_exact_degree (L := L) J hJ d hdimdeg
   obtain ⟨s,⟨e⟩⟩ := exists_center_minor_coordinate_enumeration hr
   have hd : 0 < d := by
-    have hp := irreducible_mvPolynomial_totalDegree_pos hF
+    have hp := MvPolynomial.totalDegree_pos_of_irreducible hF
     rw [hFdegree] at hp
     by_contra hh
     have hz : d = 0 := by omega

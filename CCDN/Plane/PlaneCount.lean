@@ -5,6 +5,7 @@ Authors: Jason Davies
 -/
 module
 
+public import CCDN.Statements
 public import CCDN.Plane.RationalPlaneAssembly
 import CCDN.Determinant.GeometricResidueReduction
 import CCDN.Hypersurface.NonabsolutePlaneCount

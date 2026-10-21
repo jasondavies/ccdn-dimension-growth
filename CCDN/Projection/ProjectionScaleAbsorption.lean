@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Projection.DegreePreservingProjectionBox
-public import CCDN.Plane.Plane
+public import CCDN.Statements
 import CCDN.ForMathlib.Log
 /-! Absorb the degree-dependent projection box factor into a constant depending
 only on ambient dimension, retaining the exact exponent 1/d and d³ factor. -/

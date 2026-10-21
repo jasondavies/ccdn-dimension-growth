@@ -6,7 +6,9 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Plane.Plane
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Height.PrimitiveSurfaceFixedDegree
 import CCDN.Surface.TopFormBadPrimes
 /-! Removing integer content from the fixed-degree surface estimate.

@@ -7,7 +7,9 @@ module
 
 public import CCDN.Plane.AffinePlaneCoefficientCount
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
-public import CCDN.Plane.Plane
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Algebra.IntegerRationalIrreducibility
 import CCDN.Auxiliary.LiteralAffineAuxiliaryTheorem
 import CCDN.Auxiliary.PlaneAuxiliaryCount

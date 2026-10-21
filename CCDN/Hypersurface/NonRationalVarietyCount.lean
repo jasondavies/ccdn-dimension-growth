@@ -6,7 +6,11 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.ConjugatePrimeGridBound
-public import CCDN.Curve.Curve
+public import CCDN.Hilbert.AffineCurveDegree
+public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.FieldTheory.Galois.Basic
 import CCDN.Hypersurface.GaloisComponentDegree
 import CCDN.Hypersurface.GaloisComponentPoints

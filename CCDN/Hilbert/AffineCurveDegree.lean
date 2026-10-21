@@ -5,28 +5,17 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.FilteredIntersection
-public import CCDN.Plane.Plane
-public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 
 /-!
-# Affine curves and the full counting target
+# The affine Hilbert degree of a curve
 
 An affine algebraic set is represented by an ideal in `ℚ[x₁,…,xₙ]`. For an integral curve,
 its degree is the slope of the eventually linear affine Hilbert function: the dimension
 of polynomials of total degree at most `M` in its coordinate ring is `d*M + c` for large `M`.
-
-`AffineCurveBound` records the full target, with constants depending only on the ambient
-dimension. It is proved by `affineCurveBound` in the `AffineCurveBound` module.
-`PlaneHilbert` proves the passage from a plane defining
-polynomial to this Hilbert-function degree. `exists_plane_count_reduction` (in
-`AffineProjectionCount`) reduces a prime ideal of any ambient dimension, including two, to an
-irreducible plane equation of the same degree. `BoundedDegreePreservingProjection`
-constructs bounded integral projections preserving degree in every dimension.
-The general integer-height and counting assembly is completed in
-`AffineProjectionCount`, `ProjectionScaleAbsorption` and `AffineCurveBound`.
+The slope of an eventually linear function is unique, and a pointwise inequality between two
+eventually linear functions compares their slopes (`eventual_linear_slope_le`).
 -/
 
 @[expose] public section
@@ -63,12 +52,30 @@ theorem affineCurveDegree_unique {n : ℕ} {I : Ideal (CoordinatePolynomial n)} 
   have hde : (d : ℤ) = e := by nlinarith
   exact_mod_cast hde
 
-/-- CCDN (2020), Theorem 3, using the affine Hilbert function to specify degree.
-The constant is chosen before the ideal, degree, and real box radius. -/
-def AffineCurveBound : Prop :=
-  ∀ n : ℕ, 2 ≤ n → ∃ C : ℝ, 0 < C ∧
-    ∀ I : Ideal (CoordinatePolynomial n), I.IsPrime →
-      ∀ d : ℕ, 0 < d → HasAffineCurveDegree I d →
-        ∀ B : ℝ, 1 ≤ B → (count (idealZeroLocus I) B : ℝ) ≤ C * curveBound d B
+/-- Pointwise domination of eventually linear functions compares their slopes. -/
+lemma eventual_linear_slope_le (f g : ℕ → ℕ) (a b : ℕ)
+    (hf : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N, (f n : ℤ) = (a : ℤ) * n + c)
+    (hg : ∃ N : ℕ, ∃ c : ℤ, ∀ n ≥ N, (g n : ℤ) = (b : ℤ) * n + c)
+    (hle : ∀ n, f n ≤ g n) : a ≤ b := by
+  obtain ⟨N₀, c, hc⟩ := hf
+  obtain ⟨N₁, e, he⟩ := hg
+  by_contra hbad
+  have hab : b + 1 ≤ a := by omega
+  let N := N₀ + N₁ + c.natAbs + e.natAbs + 1
+  have hN₀ : N₀ ≤ N := by dsimp [N]; omega
+  have hN₁ : N₁ ≤ N := by dsimp [N]; omega
+  have hh : (a : ℤ) * N + c ≤ (b : ℤ) * N + e := by
+    rw [← hc N hN₀, ← he N hN₁]
+    exact_mod_cast hle N
+  have hmul : ((b : ℤ) + 1) * N ≤ (a : ℤ) * N := by
+    exact_mod_cast Nat.mul_le_mul_right N hab
+  have hce : -(c.natAbs : ℤ) ≤ c := by
+    have hh : -c ≤ ((-c).natAbs : ℤ) := Int.le_natAbs
+    simp only [Int.natAbs_neg] at hh
+    omega
+  have hee : e ≤ (e.natAbs : ℤ) := Int.le_natAbs
+  have hNeq : (N : ℤ) = N₀ + N₁ + c.natAbs + e.natAbs + 1 := by
+    simp only [N, Nat.cast_add, Nat.cast_one]
+  nlinarith
 
 end CCDN

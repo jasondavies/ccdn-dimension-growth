@@ -8,7 +8,7 @@ module
 public import Mathlib.FieldTheory.RatFunc.AsPolynomial
 public import Mathlib.RingTheory.SimpleRing.Principal
 import CCDN.Algebra.RationalParameterPowerSpan
-import CCDN.Projection.PlaneProjectionDegree
+import CCDN.Hilbert.AffineCurveDegree
 /-! If a filtration is eventually generated one step at a time by a parameter,
 its linear growth has slope at most the function-field degree over K(t).
 Common denominators affect only the fixed additive offset in the bound. -/

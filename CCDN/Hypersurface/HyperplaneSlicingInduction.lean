@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Hypersurface.IntegerHyperplaneSlices
-public import CCDN.Plane.Plane
+public import CCDN.Statements
 import CCDN.Hypersurface.HyperplaneSliceCoordinates
 import CCDN.Hypersurface.IntegerHyperplaneSliceModels
 /-! A dimension induction with a cubic degree cost per hyperplane slice,
@@ -17,16 +17,6 @@ using the constructed universal Noether detector. -/
 namespace CCDN
 noncomputable section
 open MvPolynomial
-
-/-- Affine dimension growth with degree exponent `e` for integer equations in `n + 3`
-variables of degree at least five whose top-degree form is absolutely irreducible. The
-constant depends only on `n` and `e`. -/
-def AffineHypersurfaceGrowth (n e : ℕ) : Prop :=
-  ∃ C : ℝ, 0 < C ∧
-    ∀ f : MvPolynomial (Fin (n + 3)) ℤ, HasAbsIrreducibleTopForm f →
-      5 ≤ f.totalDegree → ∀ B : ℝ, 1 ≤ B →
-        (count (zeroLocus (map (Int.castRingHom ℚ) f)) B : ℝ) ≤
-          C * (f.totalDegree : ℝ) ^ e * B ^ (n + 1)
 
 /-- A normal of height at most `d^3` costs three powers of the degree
 and one power of the box radius in a dimension induction. -/

@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.Curve
-import CCDN.AffineCurveBound
+public import CCDN.Statements
+import CCDN.Curve.AffineCurveCount
 import CCDN.Analysis.SmallDegreeSurfaceNumerics
 import CCDN.Surface.SurfaceNonlinearCount
 /-! Nonlinear initial curves whose degrees are at most logarithmic in the
@@ -92,7 +92,7 @@ theorem logarithmic_degree_curve_union_bound (k : ℕ) :
       (∑ P ∈ S, (δ P : ℝ)) ≤
         A * B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1) ^ k →
       (count (⋃ P ∈ S, idealZeroLocus P) B : ℝ) ≤ C * A * D ^ 2 * (D + 1) * B := by
-  obtain ⟨K, hK, hcount⟩ := affineCurveBound 3 (by omega)
+  obtain ⟨K, hK, hcount⟩ := affine_curve_count 3 (by omega)
   let C₀ := ((k + 3).factorial / (1 / 20 : ℝ) ^ (k + 3) * Real.exp (1 / 20))
   have hC₀ : 0 < C₀ := by dsimp only [C₀]; positivity
   refine ⟨K * C₀, mul_pos hK hC₀, ?_⟩

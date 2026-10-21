@@ -5,7 +5,11 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.Curve
+public import CCDN.Hilbert.AffineCurveDegree
+public import CCDN.Algebra.IdealZeroLocus
+public import CCDN.Height.Box
+public import Mathlib.Algebra.MvPolynomial.Degrees
+public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 public import Mathlib.RingTheory.Ideal.Height
 /-! Named bundles for the curve components of affine surfaces in three-space: an integral
 curve of a given degree on a surface, and a positive-degree component of the intersection of

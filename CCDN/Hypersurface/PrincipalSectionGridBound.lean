@@ -21,28 +21,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma filteredCoordinateSpace_finrank_antitone_ideal
-    {K σ : Type*} [Field K] [Fintype σ]
-    (I J : Ideal (MvPolynomial σ K)) (hIJ : I ≤ J) (N : ℕ) :
-    Module.finrank K (filteredCoordinateSpace J N) ≤
-      Module.finrank K (filteredCoordinateSpace I N) := by
-  let φ : (MvPolynomial σ K ⧸ I) →ₐ[K] (MvPolynomial σ K ⧸ J) :=
-    Ideal.Quotient.liftₐ I (Ideal.Quotient.mkₐ K J)
-      (fun f hf => Ideal.Quotient.eq_zero_iff_mem.mpr (hIJ hf))
-  have hmap : (filteredCoordinateSpace I N).map φ.toLinearMap =
-      filteredCoordinateSpace J N := by
-    ext x
-    constructor
-    · rintro ⟨a, ⟨f, hf, rfl⟩, rfl⟩
-      exact Submodule.mem_map.mpr ⟨f, hf, rfl⟩
-    · rintro ⟨f, hf, rfl⟩
-      exact Submodule.mem_map.mpr ⟨Ideal.Quotient.mk I f,
-        Submodule.mem_map.mpr ⟨f, hf, rfl⟩, rfl⟩
-  have hh := finrank_map_add_kernel_subspace_le φ.toLinearMap
-    (filteredCoordinateSpace I N) ⊥ bot_le bot_le
-  rw [hmap] at hh
-  simpa only [finrank_bot, add_zero] using hh
-
 theorem principal_section_hilbert_dimension
     {K : Type*} [Field K] [Infinite K] {n m : ℕ}
     (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]

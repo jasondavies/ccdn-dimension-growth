@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Plane.Plane
+public import CCDN.Statements
 import CCDN.Analysis.Analytic
 
 /-! The numerical component of the corrected surface estimate. The auxiliary

@@ -5,8 +5,8 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Curve.Curve
-import CCDN.AffineCurveBound
+public import CCDN.Statements
+import CCDN.Curve.AffineCurveCount
 import CCDN.Surface.SurfaceNonlinearCount
 /-! Curves between a fixed degree cutoff and the logarithmic terminal
 cutoff can be left in the exceptional set. Their aggregate count has the
@@ -59,7 +59,7 @@ theorem medium_degree_curve_union_bound :
       (∑ P ∈ S, (δ P : ℝ)) ≤ A * B ^ (1 / Real.sqrt (d : ℝ)) * (Real.log B + 1) →
       (count (⋃ P ∈ S, idealZeroLocus P) B : ℝ) ≤
         C * A * D ^ 2 * (D + 1) * B ^ (2 / Real.sqrt (d : ℝ)) * (Real.log B + 1) ^ 4 := by
-  obtain ⟨C,hC,hcount⟩ := affineCurveBound 3 (by omega)
+  obtain ⟨C,hC,hcount⟩ := affine_curve_count 3 (by omega)
   refine ⟨C,hC,?_⟩
   intro S δ d hd A D B hA hD hB hcurve hcap hbudget
   have hB0 : 0 < B := zero_lt_one.trans_le hB

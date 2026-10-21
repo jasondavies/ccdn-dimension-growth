@@ -8,6 +8,7 @@ module
 public import Mathlib.Algebra.Order.Archimedean.Real.Basic
 public import Mathlib.Data.Int.Interval
 public import Mathlib.Data.Fintype.Pi
+public import Mathlib.Algebra.MvPolynomial.Eval
 
 /-!
 # Integral points in real-radius boxes
@@ -15,7 +16,8 @@ public import Mathlib.Data.Fintype.Pi
 Coordinates are integers; membership in the locus is tested after casting to rational numbers.
 The definition works for real radii, including the boundary `B = 1` in CCDN Theorem 3.
 `InBox x B` states that every coordinate of `x` has absolute value at most `B`; for points of
-`ℤⁿ` it is membership in the finite box `integerBox n B` (`mem_integerBox`).
+`ℤⁿ` it is membership in the finite box `integerBox n B` (`mem_integerBox`). The counted sets
+are typically zero loci `zeroLocus f` of rational polynomials.
 -/
 
 @[expose] public section
@@ -82,5 +84,9 @@ theorem count_union_le {n : ℕ} (X Y : Set (RatPoint n)) (B : ℝ) :
   unfold count
   rw [h]
   exact Finset.card_union_le _ _
+
+/-- The rational zeros of a polynomial with rational coefficients. -/
+def zeroLocus {n : ℕ} (f : MvPolynomial (Fin n) ℚ) : Set (RatPoint n) :=
+  {x | MvPolynomial.eval x f = 0}
 
 end CCDN

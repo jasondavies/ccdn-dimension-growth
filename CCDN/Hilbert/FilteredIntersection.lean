@@ -10,6 +10,8 @@ public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
 import CCDN.ForMathlib.LinearMap
+import Mathlib.LinearAlgebra.Dimension.Free
+import Mathlib.LinearAlgebra.Basis.VectorSpace
 
 /-!
 # Filtered multiples in a two-equation ideal
@@ -156,6 +158,47 @@ theorem filteredCoordinateSpace_finrank_bound {K σ : Type*} [Field K] [Finite �
   have heq := filteredMultiples_sup_finrank hf hfg hN
   change Module.finrank K (filteredCoordinateSpace I N) + _ ≤ _ at hbound
   omega
+
+/-- Lift a basis of the filtered coordinate ring to bounded-degree polynomials. -/
+theorem exists_filtered_polynomial_basis {K σ : Type*} [Field K] [Finite σ]
+    (I : Ideal (MvPolynomial σ K)) (D : ℕ) :
+    ∃ h : Fin (Module.finrank K (filteredCoordinateSpace I D)) → MvPolynomial σ K,
+      (∀ i, (h i).totalDegree ≤ D) ∧
+      LinearIndependent K (fun i => (Ideal.Quotient.mkₐ K I) (h i)) := by
+  classical
+  let b := Module.finBasis K (filteredCoordinateSpace I D)
+  have hlift (i : Fin (Module.finrank K (filteredCoordinateSpace I D))) :
+      ∃ h : MvPolynomial σ K, h.totalDegree ≤ D ∧
+        (Ideal.Quotient.mkₐ K I) h = (b i).val := by
+    obtain ⟨h, hh, he⟩ := Submodule.mem_map.mp (b i).property
+    exact ⟨h, (mem_restrictTotalDegree _ _ _).mp hh, he⟩
+  choose h hd he using hlift
+  refine ⟨h, hd, ?_⟩
+  simp only [he]
+  exact b.linearIndependent.map' (filteredCoordinateSpace I D).subtype (Submodule.ker_subtype _)
+
+/-- Enlarging the ideal can only shrink the filtered pieces of the coordinate ring. -/
+lemma filteredCoordinateSpace_finrank_antitone_ideal
+    {K σ : Type*} [Field K] [Fintype σ]
+    (I J : Ideal (MvPolynomial σ K)) (hIJ : I ≤ J) (N : ℕ) :
+    Module.finrank K (filteredCoordinateSpace J N) ≤
+      Module.finrank K (filteredCoordinateSpace I N) := by
+  let φ : (MvPolynomial σ K ⧸ I) →ₐ[K] (MvPolynomial σ K ⧸ J) :=
+    Ideal.Quotient.liftₐ I (Ideal.Quotient.mkₐ K J)
+      (fun f hf => Ideal.Quotient.eq_zero_iff_mem.mpr (hIJ hf))
+  have hmap : (filteredCoordinateSpace I N).map φ.toLinearMap =
+      filteredCoordinateSpace J N := by
+    ext x
+    constructor
+    · rintro ⟨a, ⟨f, hf, rfl⟩, rfl⟩
+      exact Submodule.mem_map.mpr ⟨f, hf, rfl⟩
+    · rintro ⟨f, hf, rfl⟩
+      exact Submodule.mem_map.mpr ⟨Ideal.Quotient.mk I f,
+        Submodule.mem_map.mpr ⟨f, hf, rfl⟩, rfl⟩
+  have hh := finrank_map_add_kernel_subspace_le φ.toLinearMap
+    (filteredCoordinateSpace I N) ⊥ bot_le bot_le
+  rw [hmap] at hh
+  simpa only [finrank_bot, add_zero] using hh
 
 end
 end CCDN
