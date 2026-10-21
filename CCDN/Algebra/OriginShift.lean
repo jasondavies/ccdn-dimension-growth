@@ -7,7 +7,8 @@ module
 
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 /-! Translation of multivariate polynomials by a point: `originShift a` substitutes
-`X j + a j` for every variable, moving the point `a` to the origin. -/
+`X j + a j` for every variable, moving the point `a` to the origin. `originShiftEquiv a` is
+the same substitution as an algebra automorphism, with inverse the shift by `-a`. -/
 
 @[expose] public section
 namespace CCDN
@@ -32,6 +33,22 @@ lemma originShift_neg {R σ : Type*} [CommRing R] (a : σ → R) (f : MvPolynomi
   | C c => simp
   | add f g hf hg => simp only [map_add, hf, hg]
   | mul_X f j hf => simp [hf]
+
+/-- The substitution `X j ↦ X j + a j` as an algebra automorphism, with inverse the
+substitution `X j ↦ X j - a j`. -/
+def originShiftEquiv {R σ : Type*} [CommRing R] (a : σ → R) :
+    MvPolynomial σ R ≃ₐ[R] MvPolynomial σ R :=
+  AlgEquiv.ofAlgHom (aeval fun j => X j + C (a j)) (aeval fun j => X j + C ((-a) j))
+    (by apply MvPolynomial.algHom_ext; intro j; simp)
+    (by apply MvPolynomial.algHom_ext; intro j; simp)
+
+@[simp] lemma originShiftEquiv_apply {R σ : Type*} [CommRing R] (a : σ → R)
+    (f : MvPolynomial σ R) : originShiftEquiv a f = originShift a f :=
+  rfl
+
+@[simp] lemma originShiftEquiv_symm_apply {R σ : Type*} [CommRing R] (a : σ → R)
+    (f : MvPolynomial σ R) : (originShiftEquiv a).symm f = originShift (-a) f :=
+  rfl
 
 lemma originShift_injective {R σ : Type*} [CommRing R] (a : σ → R) :
     Function.Injective (originShift a) :=

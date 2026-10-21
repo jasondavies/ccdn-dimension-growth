@@ -7,6 +7,7 @@ module
 
 public import CCDN.Algebra.HomogeneousTranslation
 public import CCDN.Algebra.HomogeneousChart
+public import CCDN.Algebra.OriginShift
 public import Mathlib.Tactic.Continuity
 /-! The affine translations underlying the homogeneous coordinate changes
 preserve degree and irreducibility, over every coefficient field. -/
@@ -16,26 +17,11 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-def affineTranslationHom (R : Type*) [CommRing R] {n : ℕ} (a : Fin n → R) :
-    MvPolynomial (Fin n) R →ₐ[R] MvPolynomial (Fin n) R := aeval (fun j => X j + C (a j))
-
-lemma affineTranslationHom_comp {R : Type*} [CommRing R] {n : ℕ} (a b : Fin n → R) :
-    (affineTranslationHom R a).comp (affineTranslationHom R b) = affineTranslationHom R (a + b) := by
-  apply MvPolynomial.algHom_ext
-  intro j
-  simp [affineTranslationHom, add_assoc]
-
-@[simp] lemma affineTranslationHom_zero (R : Type*) [CommRing R] (n : ℕ) :
-    affineTranslationHom R (0 : Fin n → R) = AlgHom.id R _ := by
-  apply MvPolynomial.algHom_ext
-  intro j
-  simp [affineTranslationHom]
-
+/-- The translation `X j ↦ X j + a j` of polynomials in `Fin n` variables, as an algebra
+automorphism over `R`. -/
 def affineTranslation (R : Type*) [CommRing R] {n : ℕ} (a : Fin n → R) :
     MvPolynomial (Fin n) R ≃ₐ[R] MvPolynomial (Fin n) R :=
-  AlgEquiv.ofAlgHom (affineTranslationHom R a) (affineTranslationHom R (-a))
-    (by rw [affineTranslationHom_comp, add_neg_cancel, affineTranslationHom_zero])
-    (by rw [affineTranslationHom_comp, neg_add_cancel, affineTranslationHom_zero])
+  originShiftEquiv a
 
 lemma affineTranslation_irreducible_iff {R : Type*} [CommRing R] {n : ℕ}
     (a : Fin n → R) (f : MvPolynomial (Fin n) R) :
@@ -76,15 +62,9 @@ lemma affineTranslation_totalDegree {R : Type*} [CommRing R] [Nontrivial R] {n :
 
 lemma affineTranslation_map {R S : Type*} [CommRing R] [CommRing S] {n : ℕ}
     (φ : R →+* S) (a : Fin n → R) (f : MvPolynomial (Fin n) R) :
-    MvPolynomial.map φ (affineTranslation R a f) = affineTranslation S (φ ∘ a) (MvPolynomial.map φ f) := by
-  have he : (MvPolynomial.map φ).comp (affineTranslation R a).toRingHom =
-      (affineTranslation S (φ ∘ a)).toRingHom.comp (MvPolynomial.map φ) := by
-    apply MvPolynomial.ringHom_ext
-    · intro c
-      simp [affineTranslation, affineTranslationHom]
-    · intro j
-      simp [affineTranslation, affineTranslationHom]
-  exact RingHom.congr_fun he f
+    MvPolynomial.map φ (affineTranslation R a f) =
+      affineTranslation S (φ ∘ a) (MvPolynomial.map φ f) :=
+  originShift_map φ a f
 
 lemma affineChart_homogeneousTranslation {R : Type*} [CommRing R] {n : ℕ}
     (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) R) :
@@ -93,10 +73,10 @@ lemma affineChart_homogeneousTranslation {R : Type*} [CommRing R] {n : ℕ}
       (affineTranslation R a).toRingHom.comp (affineChart n) := by
     apply MvPolynomial.ringHom_ext
     · intro c
-      simp [affineChart, homogeneousTranslation, homogeneousTranslationHom, affineTranslation, affineTranslationHom]
+      simp [affineChart, homogeneousTranslation, homogeneousTranslationHom, affineTranslation]
     · intro i
       refine Fin.cases ?_ (fun j => ?_) i <;>
-        simp [affineChart, homogeneousTranslation, homogeneousTranslationHom, affineTranslation, affineTranslationHom]
+        simp [affineChart, homogeneousTranslation, homogeneousTranslationHom, affineTranslation]
   exact RingHom.congr_fun he f
 
 end

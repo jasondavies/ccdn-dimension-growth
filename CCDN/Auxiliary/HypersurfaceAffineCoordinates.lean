@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Types.Basic
 public import Mathlib.Algebra.MvPolynomial.PDeriv
 public import Mathlib.Tactic.LinearCombination
 public import Mathlib.Tactic.ReduceModChar
+public import CCDN.Algebra.OriginShift
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Plane.AffinePlaneRestriction
 
@@ -63,26 +64,17 @@ def directionCoordinates {K σ : Type*} [Field K] (b : Option σ → K) (hb : b 
         algebraMap_eq, AlgHom.id_apply]
       ring
 
-/-- Translation over an arbitrary variable type. -/
-def polynomialOriginShiftEquiv {K σ : Type*} [Field K] (a : σ → K) :
-    MvPolynomial σ K ≃ₐ[K] MvPolynomial σ K :=
-  AlgEquiv.ofAlgHom (aeval (fun i => X i + C (a i)))
-    (aeval (fun i => X i - C (a i)))
-    (by apply MvPolynomial.algHom_ext; intro i; simp)
-    (by apply MvPolynomial.algHom_ext; intro i; simp)
-
 /-- Substitute a_i+b_i*x_0+z_i, so the new origin is the old point a. -/
 def hypersurfaceAffineCoordinates {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) :
     MvPolynomial (Option σ) K ≃ₐ[K] MvPolynomial (Option σ) K :=
-  (polynomialOriginShiftEquiv a).trans (directionCoordinates b hb)
+  (originShiftEquiv a).trans (directionCoordinates b hb)
 
 lemma hypersurfaceAffineCoordinates_X {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (i : Option σ) :
     hypersurfaceAffineCoordinates a b hb (X i) =
       C (a i) + C (b i) * X none + Option.elim i 0 (fun j => X (some j)) := by
-  simp [hypersurfaceAffineCoordinates, polynomialOriginShiftEquiv,
-    directionCoordinates, directionCoordinatesHom]
+  simp [hypersurfaceAffineCoordinates, directionCoordinates, directionCoordinatesHom]
   ring
 
 lemma hypersurfaceAffineCoordinates_totalDegree_le {K σ : Type*} [Field K]

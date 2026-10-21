@@ -30,9 +30,9 @@ lemma optionCoordinateShift_rename {K : Type*} [CommRing K] {n : ℕ}
         (rename (finSuccEquiv n).symm).toRingHom := by
     apply MvPolynomial.ringHom_ext
     · intro r
-      simp [optionCoordinateShift, affineTranslation, affineTranslationHom]
+      simp [optionCoordinateShift, affineTranslation]
     · intro i
-      cases i <;> simp [optionCoordinateShift, affineTranslation, affineTranslationHom]
+      cases i <;> simp [optionCoordinateShift, affineTranslation]
   exact RingHom.congr_fun he f
 
 lemma optionCoordinateShift_degree {K : Type*} [CommRing K] [Nontrivial K] {n : ℕ}

@@ -59,7 +59,7 @@ lemma coordinateEliminationMap_direction_X {K σ : Type*} [Field K]
     coordinateEliminationMap I (hypersurfaceAffineCoordinates 0 b hb) (X i) =
       (Ideal.Quotient.mk I) (X (some i) - C (b (some i) / b none) * X none) := by
   simp [coordinateEliminationMap, hypersurfaceAffineCoordinates,
-    polynomialOriginShiftEquiv, directionCoordinates, directionCoordinatesInv,
+    directionCoordinates, directionCoordinatesInv,
     div_eq_mul_inv, map_mul, mul_assoc]
 
 /-- A monic equation in the eliminated coordinate proves integrality over
