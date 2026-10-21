@@ -23,6 +23,9 @@ namespace CCDN
 
 open Matrix
 
+/-- If the monomials `mon` are distinct and the integer coefficient vector `v` lies in the box
+of radius `R ≥ 0`, then every coefficient of `polynomialOfCoefficients mon v` has absolute
+value at most `R`. -/
 theorem abs_coefficient_polynomialOfCoefficients_le {n N : ℕ}
     (mon : Fin N → (Fin n →₀ ℕ)) (hmon : Function.Injective mon)
     (v : Fin N → ℤ) {R : ℝ} (hR : 0 ≤ R) (hv : InBox v R)

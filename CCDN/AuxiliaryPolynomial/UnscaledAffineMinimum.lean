@@ -19,6 +19,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The coefficient height of the leading homogeneous component of an integer polynomial is at most
+the coefficient height of the polynomial itself. -/
 lemma leading_height_le_coefficient_height {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) :
     (integerCoefficientHeight (homogeneousComponent f.totalDegree f) : ℝ) ≤

@@ -127,6 +127,11 @@ private theorem projective_exists_auxiliary_large_height
   have hbound := plane_large_degree_bound_of_log_bound (by omega : 0 < d) (by omega : 0 < M) hlog
   exact (not_lt_of_ge hbound) hthreshold
 
+/-- Small-height auxiliary form for a projective plane curve: if `f` is an integral ternary form of
+degree `d ≥ 2` whose affine chart is a bounded plane curve of height `H`, `z` is a family of
+primitive integral zeros of `f` in the box of radius `B`, and the leading coefficient of `f` has
+logarithm at most `4 d log B`, then there is an auxiliary form of explicitly bounded degree `M`
+through all the points `z i`. -/
 theorem projective_auxiliary_small_height_degree
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
@@ -152,6 +157,12 @@ theorem projective_auxiliary_small_height_degree
   refine ⟨M, hM, ?_⟩
   exact projective_exists_auxiliary_small_height order f hf hf0 hd hdM hchart hzB hML hheight hth
 
+/-- Large-height auxiliary form for a projective plane curve: if `f` is an integral ternary form of
+degree `d ≥ 2` whose affine chart is a bounded plane curve of height `H`, `z` is a family of
+primitive integral zeros of `f` in the box of radius `B`, `4 d log B ≤ log H`, and `H` is at
+most the leading coefficient of `f` times `exp (T d²)`, then there is an auxiliary form through
+all the points `z i` of degree at most
+`(34 + 8 exp (heightDeterminantError projectivePlaneDeterminantConstant + 6 + T)) d³`. -/
 theorem projective_auxiliary_large_height_degree
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)

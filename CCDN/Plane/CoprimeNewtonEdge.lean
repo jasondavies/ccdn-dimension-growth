@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- The weight on the two variables giving `x` weight `e` and `y` weight `d`, so that the monomials
+`x ^ d` and `y ^ e` both have weight `d * e`. -/
 def coprimeEdgeWeight (d e : ℕ) : Fin 2 → ℕ := fun i => if i = 0 then e else d
 
 private lemma coprimeEdgeWeight_pos {d e : ℕ} (hd : 0 < d) (he : 0 < e) (i : Fin 2) :
@@ -25,6 +27,7 @@ private lemma coprimeEdgeWeight_pos {d e : ℕ} (hd : 0 < d) (he : 0 < e) (i : F
   unfold coprimeEdgeWeight
   split_ifs <;> assumption
 
+/-- The `coprimeEdgeWeight d e`-weight of the exponent `m` is `e * m 0 + d * m 1`. -/
 lemma coprimeEdgeWeight_apply (d e : ℕ) (m : Fin 2 →₀ ℕ) :
     Finsupp.weight (coprimeEdgeWeight d e) m = e * m 0 + d * m 1 := by
   simp [Finsupp.weight_apply, Finsupp.sum_fintype, Fin.sum_univ_two,

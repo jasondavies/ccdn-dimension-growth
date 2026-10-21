@@ -22,6 +22,8 @@ The prime-scaled height gain gives the affine exponent 1/d^(1/r).
 @[expose] public section
 namespace CCDN
 
+/-- For a scaling prime `p ≥ B / A` with `A, B ≥ 1`, the box term `B ^ ((r + 1) / (r d^(1/r)))`
+divided by `p ^ (1 / (r d^(1/r)))` is at most `A * B ^ (1 / d^(1/r))`. -/
 lemma affine_scaling_box_power {r d : ℕ} (hr : 0 < r) (hd : 0 < d)
     {B A p : ℝ} (hB : 1 ≤ B) (hA : 1 ≤ A) (hp : 0 < p) (hBp : B / A ≤ p) :
     B ^ (((r : ℝ) + 1) / ((r : ℝ) * (d : ℝ) ^ (1 / (r : ℝ)))) /
@@ -54,6 +56,8 @@ lemma affine_scaling_box_power {r d : ℕ} (hr : 0 < r) (hd : 0 < d)
       mul_le_mul_of_nonneg_left hpow (by positivity)
     _ = _ := mul_comm _ _
 
+/-- Splitting the power of the scaled height: `(p^d L) ^ (1/(r d d^(1/r)))` equals
+`p ^ (1/(r d^(1/r))) * L ^ (1/(r d d^(1/r)))` for positive `p` and `L`. -/
 lemma scaled_height_rpow {r d : ℕ} (hr : 0 < r) (hd : 0 < d)
     {p L : ℝ} (hp : 0 < p) (hL : 0 < L) :
     (p ^ d * L) ^ (1 / ((r : ℝ) * d * (d : ℝ) ^ (1 / (r : ℝ)))) =
@@ -71,9 +75,15 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The dimension constant `(n + 1) exp (2 mertensError + 1) hypersurfaceHeightConstant (n + 3)`
+by which the logarithmic height term of a prime-scaled model is compared with that of the
+original affine equation. -/
 def affineHeightTransferConstant (n : ℕ) : ℝ :=
   (n + 1 : ℝ) * Real.exp (2 * mertensError + 1) * hypersurfaceHeightConstant (n + 3)
 
+/-- The logarithmic-branch affine auxiliary degree bound: the bound of CCDN Theorem 3.1.1 with the
+bad-prime factor replaced by `log L + d log B + d²`, where `L` is the height of the leading form,
+and the box exponent saved to `1 / d^(1/(n+1))` up to the factor `A`. -/
 def affineLogarithmicAuxiliaryBound (n d : ℕ) (A B L : ℝ) : ℝ :=
   hypersurfaceAbsoluteAuxiliaryConstant n *
     (affineHeightTransferConstant n * A * (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) *
@@ -82,6 +92,9 @@ def affineLogarithmicAuxiliaryBound (n d : ℕ) (A B L : ℝ) : ℝ :=
           L ^ (1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)))) +
       (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B + (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)))
 
+/-- For a scaling factor `1 ≤ p ≤ B` with `B / A ≤ p`, the auxiliary degree bound of the `p`-scaled
+homogenization of `f`, with its own bad-prime factor and coefficient height, is at most
+`affineLogarithmicAuxiliaryBound` in terms of the height of the leading form of `f`. -/
 theorem scaled_hypersurface_auxiliary_bound {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hf : f ≠ 0) (hd : 0 < f.totalDegree)
     {p : ℤ} (hp : 1 ≤ p) {A B : ℝ} (hA : 1 ≤ A) (hB : 1 ≤ B)

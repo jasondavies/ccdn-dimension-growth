@@ -41,6 +41,9 @@ private theorem hypersurface_rank_eq_sum {r d M s : ℕ} (hdM : d ≤ M)
     ← Nat.choose_symm_add (a := r + 1) (b := M)] at hr
   omega
 
+/-- The Hilbert function `s` of a degree-`d` hypersurface in `r + 2` homogeneous variables,
+given by `s + C(r + 1 + (M - d), M - d) = C(r + 1 + M, M)`, satisfies
+`d * C(r + (M - d), r) ≤ s ≤ d * C(r + M, r)`. -/
 lemma hypersurface_rank_binomial_bounds {r d M s : ℕ} (hdM : d ≤ M)
     (hr : s + (r + 1 + (M - d)).choose (M - d) = (r + 1 + M).choose M) :
     d * (r + (M - d)).choose r ≤ s ∧ s ≤ d * (r + M).choose r := by

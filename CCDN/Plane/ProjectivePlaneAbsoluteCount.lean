@@ -44,10 +44,13 @@ def projectivePlaneAbsoluteConstant : ℝ :=
       Real.exp 14 * Real.exp 2 +
     (34 + 8 * Real.exp (heightDeterminantError projectivePlaneDeterminantConstant + 20))
 
+/-- The constant `projectivePlaneAbsoluteConstant` is positive. -/
 lemma projectivePlaneAbsoluteConstant_pos : 0 < projectivePlaneAbsoluteConstant := by
   unfold projectivePlaneAbsoluteConstant
   positivity
 
+/-- For `d ≥ 1` and `B ≥ 1`, the bound of `projective_plane_finite_count_positioned` is at most
+`projectivePlaneAbsoluteConstant * d ^ 4 * B ^ (2 / d)`. -/
 lemma projective_positioned_bound_le {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 ≤ B) :
     max ((d : ℝ) *
         scaledPlaneAuxiliaryDegreeBound d projectivePlaneDeterminantConstant (((d : ℝ) + 1) * B) 1)

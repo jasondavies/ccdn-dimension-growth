@@ -16,6 +16,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The Hilbert function `s` of a degree-`d` hypersurface in `n + 3` variables, defined by
+`s + C(n + 2 + (M - d), M - d) = C(n + 2 + M, M)`, is positive in every degree `M ≥ d`. -/
 lemma hypersurface_homogeneous_rank_pos {n d M s : ℕ} (hd : 0 < d) (hdM : d ≤ M)
     (hr : s + (n + 2 + (M - d)).choose (M - d) = (n + 2 + M).choose M) : 0 < s := by
   rw [← Nat.choose_symm_add (a := n + 2) (b := M - d),

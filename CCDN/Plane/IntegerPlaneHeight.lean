@@ -21,6 +21,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Taking plane sections commutes with mapping coefficients along a ring homomorphism `φ`: the
+section of `map φ f` at `φ ∘ v` is the coefficient-wise image of the section of `f` at `v`. -/
 lemma universalPlaneSection_map {R S σ : Type*} [CommRing R] [CommRing S]
     (φ : R →+* S) (f : MvPolynomial σ R) (v : PlaneParameters σ → R) :
     universalPlaneSection (MvPolynomial.map φ f) (φ ∘ v) =

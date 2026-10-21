@@ -149,6 +149,8 @@ theorem plane_auxiliary_large_height_log_bound {s d M : ℕ} {B L H T K : ℝ}
     (show 0 ≤ Real.log H / (d : ℝ) ^ 2 by have := Real.log_nonneg hH; positivity)
   linarith
 
+/-- Exponentiating the large-height logarithmic degree bound for plane curves: if
+`log M ≤ K + 6 + log 2 + log 4 + T + 3 log d`, then `M ≤ 8 exp (K + 6 + T) d³`. -/
 lemma plane_large_degree_bound_of_log_bound {d M : ℕ} {T K : ℝ}
     (hd : 0 < d) (hM : 0 < M)
     (hlog : Real.log M ≤ K + 6 + Real.log 2 + Real.log 4 + T + 3 * Real.log d) :

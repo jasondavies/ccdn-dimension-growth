@@ -78,6 +78,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Matrix
 
+/-- If an integer form `f` of degree `d` divides a nonzero integer form `g` of the same degree,
+then every coefficient of `f` is bounded in absolute value by the corresponding coefficient
+of `g`, since `g` is a nonzero integer multiple of `f`. -/
 lemma homogeneous_same_degree_coefficient_le_of_dvd {n d : ℕ}
     {f g : MvPolynomial (Fin n) ℤ} (hf : f.IsHomogeneous d) (hg : g.IsHomogeneous d)
     (hg0 : g ≠ 0) (hdiv : f ∣ g) (m : Fin n →₀ ℕ) :

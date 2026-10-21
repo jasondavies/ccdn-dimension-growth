@@ -30,6 +30,9 @@ auxiliary degree, with no added power of d in its leading term.
 namespace CCDN
 noncomputable section
 
+/-- For positive `r` and `d`, the box enlargement factor
+$(d + 1)^{(r + 1) / (r d^{1/r})}$ is at most $\exp((r + 1)^2 / r)$, a bound depending only
+on `r`. -/
 lemma auxiliary_box_rpow_factor {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
     ((d : ℝ) + 1) ^ (((r : ℝ) + 1) / ((r : ℝ) * (d : ℝ) ^ (1 / (r : ℝ)))) ≤
       Real.exp (((r : ℝ) + 1) ^ 2 / r) := by
@@ -61,6 +64,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- A prime is bad for the homogeneous translate of a nonzero integral form `f` if and only
+if it is bad for `f`. -/
 lemma hypersurfaceBadReduction_homogeneousTranslation {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) (hf : f.IsHomogeneous d) (hf0 : f ≠ 0)
     (a : Fin n → ℤ) (p : ℕ) :
@@ -82,12 +87,19 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The dimension constant $(5(n + 2) + 5)(n + 2)$ of the positioning step: after a suitable
+homogeneous translation, the logarithm of the coefficient height exceeds that of the
+lexicographic leading coefficient by at most this constant times $d^{1 + 1/(n + 1)}$. -/
 def hypersurfaceAuxiliaryPositionConstant (n : ℕ) : ℝ := (5 * (n + 2 : ℝ) + 5) * (n + 2 : ℝ)
 
+/-- The dimension constant in the absolutely irreducible case of CCDN Theorem 3.1.1 for forms
+in `n + 3` variables: the positioned constant times a factor absorbing the enlargement of the
+box from `B` to `(d + 1) B` and the passage to the original coefficient height. -/
 def hypersurfaceAbsoluteAuxiliaryConstant (n : ℕ) : ℝ :=
   hypersurfacePositionedAuxiliaryConstant n (hypersurfaceAuxiliaryPositionConstant n) *
     (Real.exp ((n + 2 : ℝ) ^ 2 / (n + 1 : ℝ)) + (n + 3 : ℝ))
 
+/-- The constant `hypersurfaceAbsoluteAuxiliaryConstant n` is positive. -/
 lemma hypersurfaceAbsoluteAuxiliaryConstant_pos (n : ℕ) :
     0 < hypersurfaceAbsoluteAuxiliaryConstant n := by
   unfold hypersurfaceAbsoluteAuxiliaryConstant hypersurfacePositionedAuxiliaryConstant
@@ -109,6 +121,8 @@ private lemma irreducible_map_homogeneousTranslation {K : Type*} [Field K] (a : 
   exact (MulEquiv.irreducible_iff
     (f := homogeneousTranslation K ((Int.castRingHom K) ∘ a))).mpr hir
 
+/-- Evaluating the homogeneous translate of `f` by `a` at the point translated by `-a` gives
+the value of `f` at the original point. -/
 lemma eval_homogeneousTranslation_neg (a : Fin (n + 2) → ℤ)
     (f : MvPolynomial (Fin (n + 3)) ℤ) (z : IntPoint (n + 3)) :
     eval (homogeneousPointTranslation (-a) z) (homogeneousTranslation ℤ a f) = eval z f := by

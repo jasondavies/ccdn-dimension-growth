@@ -117,7 +117,9 @@ theorem multivariate_coefficient_bound_of_integer_grid {n : ℕ}
   simpa [Complex.norm_real] using coefficient_bound_of_integer_grid_of_ringHom
     Complex.ofRealHom f hd hH (fun a ha => by simpa [Complex.norm_real] using heval a ha) m
 
-/-- The interpolation estimate for an integer polynomial. -/
+/-- If an integer polynomial of total degree at most `d` has values of absolute value at most
+`H` on the grid `{0, …, d}ⁿ`, then every coefficient has absolute value at most
+`(d + 1) ^ (n * (d + 1)) * H`. -/
 theorem integer_multivariate_coefficient_bound_of_grid {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) {d : ℕ} (hd : f.totalDegree ≤ d)
     {H : ℝ} (hH : 0 ≤ H)
@@ -128,8 +130,9 @@ theorem integer_multivariate_coefficient_bound_of_grid {n : ℕ}
     (Int.castRingHom ℂ) f hd hH
     (fun a ha => by simpa [Complex.norm_intCast] using heval a ha) m
 
-/-- Integer equations have the same coefficient control, with a nonzero
-chosen grid value whenever the equation is nonzero. -/
+/-- A nonzero integer polynomial of total degree at most `d` has a point `a` of the grid
+`{0, …, d}ⁿ` with `f(a) ≠ 0` such that every coefficient has absolute value at most
+`(d + 1) ^ (n * (d + 1)) * |f(a)|`. -/
 theorem exists_integer_multivariate_grid_height_witness {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) {d : ℕ} (hd : f.totalDegree ≤ d) :
     ∃ a : Fin n → ℤ, (∀ i, 0 ≤ a i ∧ a i ≤ d) ∧ eval a f ≠ 0 ∧ ∀ m,

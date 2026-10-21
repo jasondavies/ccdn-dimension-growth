@@ -41,6 +41,7 @@ private lemma PrimitiveIntegerPolynomial.isUnit_of_rational_map {σ : Type*}
   rw [hc]
   exact hunit.map C
 
+/-- A primitive integer polynomial whose image over `ℚ` is irreducible is irreducible over `ℤ`. -/
 lemma PrimitiveIntegerPolynomial.irreducible_of_rational_map {σ : Type*}
     {f : MvPolynomial σ ℤ} (hf : PrimitiveIntegerPolynomial f)
     (hir : Irreducible (MvPolynomial.map (Int.castRingHom ℚ) f)) : Irreducible f := by
@@ -51,7 +52,8 @@ lemma PrimitiveIntegerPolynomial.irreducible_of_rational_map {σ : Type*}
     ((hf.of_dvd ⟨h, he⟩).isUnit_of_rational_map)
     ((hf.of_dvd ⟨g, by rw [he, mul_comm]⟩).isUnit_of_rational_map)
 
-/-- Clear the coefficients of an arbitrary rational multivariate polynomial. -/
+/-- Clearing denominators: every rational multivariate polynomial has a nonzero integer multiple
+`b • f` with integer coefficients. -/
 theorem mvPolynomial_integer_multiple {σ : Type*} (f : MvPolynomial σ ℚ) :
     ∃ (b : ℤ) (g : MvPolynomial σ ℤ), b ≠ 0 ∧
       MvPolynomial.map (Int.castRingHom ℚ) g = C (b : ℚ) * f := by

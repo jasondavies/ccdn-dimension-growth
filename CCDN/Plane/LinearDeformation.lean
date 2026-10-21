@@ -37,6 +37,7 @@ def planeLinearDeformation {K A : Type*} [CommRing K] [CommRing A] [Algebra K A]
     MvPolynomial (Fin 2) K →ₐ[K] Polynomial A :=
   aeval (fun j => Polynomial.C (a j) + if j = k then Polynomial.X * Polynomial.C w else 0)
 
+/-- The constant coefficient of the linear deformation of `f` at `a` is the value `f(a)`. -/
 lemma planeLinearDeformation_coeff_zero {K A : Type*} [CommRing K] [CommRing A]
     [Algebra K A] (a : Fin 2 → A) (k : Fin 2) (w : A)
     (f : MvPolynomial (Fin 2) K) :
@@ -50,6 +51,8 @@ lemma planeLinearDeformation_coeff_zero {K A : Type*} [CommRing K] [CommRing A]
   | add f g hf hg => simp only [map_add, Polynomial.coeff_add, hf, hg]
   | mul_X f j hf => simp only [map_mul, Polynomial.mul_coeff_zero, hf, hX, aeval_X]
 
+/-- The linear coefficient of the deformation of `f` at `a` along coordinate `k` with speed `w` is
+`(∂f/∂x_k)(a) * w`. -/
 lemma planeLinearDeformation_coeff_one {K A : Type*} [CommRing K] [CommRing A]
     [Algebra K A] (a : Fin 2 → A) (k : Fin 2) (w : A)
     (f : MvPolynomial (Fin 2) K) :

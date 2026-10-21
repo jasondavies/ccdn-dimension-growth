@@ -19,10 +19,13 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Mapping an integer polynomial to `ℚ` preserves its total degree. -/
 lemma rational_map_totalDegree {σ : Type*} (f : MvPolynomial σ ℤ) :
     (MvPolynomial.map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree :=
     totalDegree_map_of_injective Int.cast_injective _
 
+/-- If the image of an integer polynomial in a field `F` of characteristic zero is irreducible,
+then its image over `ℚ` is irreducible. -/
 lemma rational_irreducible_of_charZero_map {F σ : Type*} [Field F] [CharZero F]
     (f : MvPolynomial σ ℤ) (hf : Irreducible (MvPolynomial.map (Int.castRingHom F) f)) :
     Irreducible (MvPolynomial.map (Int.castRingHom ℚ) f) := by

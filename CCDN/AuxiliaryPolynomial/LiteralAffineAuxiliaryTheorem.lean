@@ -135,6 +135,12 @@ private theorem literal_affine_hypersurface_auxiliary_absolute {n : ℕ}
   ring
 
 
+/-- CCDN Proposition 4.2.1 with the literal affine bad-prime factor: for a primitive irreducible
+integer polynomial `f` of positive degree `d` in `n + 2` variables and `B ≥ 1`, there is a
+nonzero polynomial `g`, not divisible by `f`, vanishing at all integer zeros of `f` in the box of
+radius `B`, whose degree is at most `affineHypersurfaceAuxiliaryConstant n` times
+`affineAuxiliaryDegreeExpression`, evaluated at the height of the leading form of `f` and
+`literalAffineBadPrimeFactor f`. -/
 theorem literal_affine_hypersurface_auxiliary {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f) (hd : 0 < f.totalDegree) {B : ℝ} (hB : 1 ≤ B) :

@@ -22,13 +22,15 @@ def universalPlaneSection {K σ : Type*} [CommRing K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K) : Polynomial (Polynomial K) :=
   bivariateMap (eval v) (universalPlanePolynomial f)
 
-/-- Degenerate parameterizations are allowed; every section with lost degree
-or geometric reducibility is counted. -/
+/-- The plane parameters (possibly degenerate) at which the plane section of `f` drops total degree
+or is not geometrically irreducible. -/
 def BadPlaneParameters {K σ : Type*} [Field K] (f : MvPolynomial σ K) :=
   {v : PlaneParameters σ → K //
     bivariateTotalDegree (universalPlaneSection f v) ≠ f.totalDegree ∨
       ¬Irreducible (bivariateMap (algebraMap K (AlgebraicClosure K)) (universalPlaneSection f v))}
 
+/-- Mapping the coefficients of a nested bivariate polynomial along a composite ring
+homomorphism `ψ.comp φ` is the same as mapping along `φ` and then along `ψ`. -/
 lemma bivariateMap_comp_apply {R S T : Type*} [CommRing R] [CommRing S] [CommRing T]
     (φ : R →+* S) (ψ : S →+* T) (f : Polynomial (Polynomial R)) :
     bivariateMap (ψ.comp φ) f = bivariateMap ψ (bivariateMap φ f) := by

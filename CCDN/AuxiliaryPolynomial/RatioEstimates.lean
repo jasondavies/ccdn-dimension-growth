@@ -17,6 +17,8 @@ the normalized determinant inequality, even when its bracket is negative. -/
 namespace CCDN
 noncomputable section
 
+/-- If `a ≥ X (M - d) / ((r + 1) M)` with `X > 0`, `d ≥ 1` and `M ≥ 2 d`, then `a` is positive and
+`1 / a ≤ (r + 1) / X * (1 + 2 d / M)`. -/
 lemma auxiliary_reciprocal_bound {r d M X a : ℝ} (hr : 0 ≤ r) (hd : 1 ≤ d)
     (hM : 2 * d ≤ M) (hX : 0 < X)
     (ha : X * (M - d) / ((r + 1) * M) ≤ a) :
@@ -34,6 +36,8 @@ lemma auxiliary_reciprocal_bound {r d M X a : ℝ} (hr : 0 ≤ r) (hd : 1 ≤ d)
     nlinarith [mul_nonneg hd0.le (sub_nonneg.mpr hM)]
   exact hprod.trans (mul_le_mul_of_nonneg_left ha (by positivity))
 
+/-- If `0 < a ≤ X (M + r) / ((r + 1) M)` and `k ≥ 1 / (d (r + 1)) - 1 / M` is nonnegative, then
+`k / a ≥ 1 / (d X) - (2 r + 1) / (X M)`. -/
 lemma auxiliary_kernel_quotient_bound {r d M X a k : ℝ}
     (hr : 0 ≤ r) (hd : 1 ≤ d) (hM : 0 < M) (hX : 0 < X) (ha : 0 < a) (hk : 0 ≤ k)
     (hupper : a ≤ X * (M + r) / ((r + 1) * M))

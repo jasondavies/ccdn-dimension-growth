@@ -121,6 +121,7 @@ private theorem hypersurfaceTranslation_coefficient_bound {n d : ℕ}
   simp only [pow_add, pow_mul]
   ring
 
+/-- For positive integers `r` and `d`, `log (d + 1) ≤ (r + 1) * d ^ (1/r)`. -/
 lemma log_nat_add_one_le_root {r d : ℕ} (hr : 0 < r) (hd : 0 < d) :
     Real.log ((d : ℝ) + 1) ≤ ((r : ℝ) + 1) * (d : ℝ) ^ (1 / (r : ℝ)) := by
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd

@@ -23,18 +23,25 @@ are typically zero loci `zeroLocus f` of rational polynomials.
 
 namespace CCDN
 
+/-- Integer points of affine `n`-space, as vectors `Fin n → ℤ`. -/
 abbrev IntPoint (n : ℕ) := Fin n → ℤ
+/-- Rational points of affine `n`-space, as vectors `Fin n → ℚ`. -/
 abbrev RatPoint (n : ℕ) := Fin n → ℚ
 
+/-- The integer point `x`, regarded as a rational point by casting each coordinate. -/
 def rationalPoint {n : ℕ} (x : IntPoint n) : RatPoint n := fun i => x i
 
 /-- Every coordinate of the integer vector `x` has absolute value at most `B`. -/
 abbrev InBox {ι : Type*} (x : ι → ℤ) (B : ℝ) : Prop :=
   ∀ i, |(x i : ℝ)| ≤ B
 
+/-- The finite box of integer points of `ℤⁿ` all of whose coordinates have absolute value at
+most the real radius `B`. -/
 noncomputable def integerBox (n : ℕ) (B : ℝ) : Finset (IntPoint n) :=
   Fintype.piFinset fun _ => Finset.Icc (-⌊B⌋) ⌊B⌋
 
+/-- An integer point lies in `integerBox n B` exactly when all its coordinates have absolute value
+at most `B`. -/
 theorem mem_integerBox {n : ℕ} {B : ℝ} {x : IntPoint n} :
     x ∈ integerBox n B ↔ InBox x B := by
   simp only [integerBox, Fintype.mem_piFinset, Finset.mem_Icc]
@@ -53,19 +60,25 @@ theorem mem_integerBox {n : ℕ} {B : ℝ} {x : IntPoint n} :
     have hneg : -(x i) ≤ ⌊B⌋ := Int.le_floor.mpr (by simpa using hn)
     exact ⟨by omega, Int.le_floor.mpr hhi⟩
 
+/-- The integer points of absolute value at most `B` whose rational image lies in the set `X`. -/
 noncomputable def integralPoints {n : ℕ} (X : Set (RatPoint n)) (B : ℝ) :
     Finset (IntPoint n) := by
   classical
   exact (integerBox n B).filter fun x => rationalPoint x ∈ X
 
+/-- The number of integer points with all coordinates of absolute value at most `B` whose rational
+image lies in the set `X`. -/
 noncomputable def count {n : ℕ} (X : Set (RatPoint n)) (B : ℝ) : ℕ :=
   (integralPoints X B).card
 
+/-- An integer point belongs to `integralPoints X B` exactly when it lies in the box of radius `B`
+and its rational image lies in `X`. -/
 theorem mem_integralPoints {n : ℕ} {X : Set (RatPoint n)} {B : ℝ} {x : IntPoint n} :
     x ∈ integralPoints X B ↔ InBox x B ∧ rationalPoint x ∈ X := by
   classical
   simp [integralPoints, mem_integerBox]
 
+/-- The integral point count is monotone in both the locus and the box radius. -/
 theorem count_mono {n : ℕ} {X Y : Set (RatPoint n)} {B C : ℝ}
     (hXY : X ⊆ Y) (hBC : B ≤ C) : count X B ≤ count Y C := by
   apply Finset.card_le_card
@@ -73,6 +86,7 @@ theorem count_mono {n : ℕ} {X Y : Set (RatPoint n)} {B C : ℝ}
   obtain ⟨hb, hx⟩ := mem_integralPoints.mp hx
   exact mem_integralPoints.mpr ⟨fun i => (hb i).trans hBC, hXY hx⟩
 
+/-- The integral point count of a union is at most the sum of the counts. -/
 theorem count_union_le {n : ℕ} (X Y : Set (RatPoint n)) (B : ℝ) :
     count (X ∪ Y) B ≤ count X B + count Y B := by
   classical

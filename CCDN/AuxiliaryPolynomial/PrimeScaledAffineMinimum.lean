@@ -21,6 +21,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The affine auxiliary degree bound in which the coefficient-sensitive main term involves the
+minimum of `log L + d log B + d²` and `d² b`, where `L` is the height of the leading form and
+`b` a bad-prime factor, with box exponent `1 / d^(1/(n+1))` up to the factor `A`. -/
 def affineMinimumAuxiliaryBound (n d : ℕ) (A B L b : ℝ) : ℝ :=
   hypersurfaceAbsoluteAuxiliaryConstant n *
     (max (affineHeightTransferConstant n) (Real.exp 1) * A *
@@ -187,6 +190,10 @@ private theorem prime_scaled_affine_auxiliary_minimum {n : ℕ}
   exact ⟨g, hg, hgdegree.trans
     (scaled_hypersurface_auxiliary_minimum_bound f hir.ne_zero hd hp hA hB hpB hBp)⟩
 
+/-- If the constant coefficient `c` of a primitive irreducible integer polynomial `f` is nonzero
+and `log |c| < B / scalingPrimeRatio`, with `B ≥ scalingPrimeRatio`, then `f` has a box
+auxiliary polynomial of degree at most `affineMinimumAuxiliaryBound`, with ratio
+`scalingPrimeRatio` and the bad-prime factor of the homogenization of `f`. -/
 theorem affine_auxiliary_minimum_of_small_constant_coefficient {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f) (hd : 0 < f.totalDegree) (hc : f.coeff 0 ≠ 0)

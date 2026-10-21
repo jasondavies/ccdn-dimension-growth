@@ -13,6 +13,8 @@ public import CCDN.Height.ProjectiveBox
 namespace CCDN
 noncomputable section
 
+/-- Every rational projective point is spanned by a nonzero integer vector whose coordinates have
+gcd `1`. -/
 theorem exists_primitive_projective_rep {n : ℕ} (x : ProjectivePoint n) :
     ∃ (z : IntPoint (n + 1)) (hz : z ≠ 0), Finset.univ.gcd z = 1 ∧
       Projectivization.mk ℚ (rationalPoint z) (rationalPoint_ne_zero hz) = x := by
@@ -64,23 +66,28 @@ theorem exists_primitive_projective_rep {n : ℕ} (x : ProjectivePoint n) :
       exact ⟨_, he.symm⟩
     _ = x := x.mk_rep
 
-/-- A chosen primitive representative; subsequent bounds concern its coordinates. -/
+/-- A chosen primitive integer representative of the projective point `x`: a nonzero integer
+vector with coprime coordinates spanning `x`. -/
 def primitiveProjectiveRep {n : ℕ} (x : ProjectivePoint n) : IntPoint (n + 1) :=
   (exists_primitive_projective_rep x).choose
 
+/-- The primitive integer representative of a projective point is nonzero. -/
 lemma primitiveProjectiveRep_ne_zero {n : ℕ} (x : ProjectivePoint n) :
     primitiveProjectiveRep x ≠ 0 :=
   (exists_primitive_projective_rep x).choose_spec.choose
 
+/-- The coordinates of the primitive integer representative of a projective point have gcd `1`. -/
 lemma primitiveProjectiveRep_gcd {n : ℕ} (x : ProjectivePoint n) :
     Finset.univ.gcd (primitiveProjectiveRep x) = 1 :=
   (exists_primitive_projective_rep x).choose_spec.choose_spec.1
 
+/-- The primitive integer representative of `x` spans `x`. -/
 lemma primitiveProjectiveRep_mk {n : ℕ} (x : ProjectivePoint n) :
     Projectivization.mk ℚ (rationalPoint (primitiveProjectiveRep x))
       (rationalPoint_ne_zero (primitiveProjectiveRep_ne_zero x)) = x :=
   (exists_primitive_projective_rep x).choose_spec.choose_spec.2
 
+/-- Distinct projective points have distinct primitive integer representatives. -/
 theorem primitiveProjectiveRep_injective {n : ℕ} :
     Function.Injective (primitiveProjectiveRep (n := n)) := by
   intro x y h
@@ -100,6 +107,8 @@ private theorem primitiveProjectiveRep_height {n : ℕ} (x : ProjectivePoint n) 
     (primitiveProjectiveRep_gcd x)
   rwa [primitiveProjectiveRep_mk] at h
 
+/-- Every coordinate of the primitive integer representative of `x` has absolute value at most the
+multiplicative height of `x`. -/
 theorem primitiveProjectiveRep_bound {n : ℕ} (x : ProjectivePoint n)
     (i : Fin (n + 1)) :
     |(primitiveProjectiveRep x i : ℝ)| ≤ x.mulHeight := by

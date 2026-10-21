@@ -17,6 +17,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- For `d ≥ 1` and `H ≥ 1`, the interpolation height `integerPlaneHeight m d H (2 * d ^ 3)` is at
+least `1`. -/
 lemma integerPlaneHeight_one_le (m d : ℕ) (hd : 1 ≤ d)
     (H : ℝ) (hH : 1 ≤ H) :
     1 ≤ integerPlaneHeight m d H (2 * (d : ℝ) ^ 3) := by
@@ -60,11 +62,15 @@ private lemma integerPlaneHeight_log_le (m d : ℕ) (hd : 1 ≤ d)
 /-- A dimension-dependent constant at the d⁴ cutoff. -/
 def hypersurfaceHeightConstant (m : ℕ) : ℝ := 28 * (m + 12)
 
+/-- The constant `hypersurfaceHeightConstant m` is at least `1`. -/
 lemma hypersurfaceHeightConstant_one_le (m : ℕ) : 1 ≤ hypersurfaceHeightConstant m := by
   unfold hypersurfaceHeightConstant
   have := Nat.cast_nonneg (α := ℝ) m
   linarith
 
+/-- For `d ≥ 1` and `H ≥ 1`, with `L` the logarithm of the interpolation height
+`integerPlaneHeight m d H (2 * d ^ 3)`, the quantity `L + 27 d⁴ (1 + L / d²)` is at most
+`27 d⁴ · hypersurfaceHeightConstant m · (1 + log H / d²)`. -/
 lemma integerPlaneHeight_scaled_log_le (m d : ℕ) (hd : 1 ≤ d)
     (H : ℝ) (hH : 1 ≤ H) :
     Real.log (integerPlaneHeight m d H (2 * (d : ℝ) ^ 3)) +

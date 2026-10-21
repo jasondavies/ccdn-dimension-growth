@@ -19,6 +19,8 @@ coefficient exponents and a constant depending only on dimension. -/
 namespace CCDN
 noncomputable section
 
+/-- The additive error term, depending only on the dimension `r` and the constant `E`, in the
+small-height logarithmic bound on the auxiliary degree `M`. -/
 def hypersurfaceSmallHeightError (r : ℕ) (E : ℝ) : ℝ :=
   (E + hypersurfaceRankLogError r + 4 * (r + 1 : ℝ) ^ 2) / r
 

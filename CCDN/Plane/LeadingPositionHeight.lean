@@ -62,9 +62,14 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Real
 
+/-- The height-loss factor `(d + 1) ^ (4 (d + 1)) (d + 2) ^ 2 (2 d + 1) ^ d` by which the
+coefficients of the affine chart of a ternary form of degree `d`, after a translation with
+parameters in `[0, d]`, may exceed a coefficient height `L` of the form (measured as
+`(d + 1) ^ (2 (d + 1)) * L`); see `homogeneousTranslation_chart_coefficient_bound`. -/
 def leadingPositionHeightFactor (d : ℕ) : ℝ :=
   ((d : ℝ) + 1) ^ (4 * (d + 1)) * ((d : ℝ) + 2) ^ 2 * (2 * (d : ℝ) + 1) ^ d
 
+/-- The factor `leadingPositionHeightFactor d` is at least `1`. -/
 lemma leadingPositionHeightFactor_one_le (d : ℕ) : 1 ≤ leadingPositionHeightFactor d := by
   unfold leadingPositionHeightFactor
   apply one_le_mul_of_one_le_of_one_le
@@ -73,6 +78,7 @@ lemma leadingPositionHeightFactor_one_le (d : ℕ) : 1 ≤ leadingPositionHeight
     · exact one_le_pow₀ (by have := Nat.cast_nonneg (α := ℝ) d; linarith)
   · exact one_le_pow₀ (by have := Nat.cast_nonneg (α := ℝ) d; linarith)
 
+/-- For `d ≥ 1`, the logarithm of `leadingPositionHeightFactor d` is at most `14 d²`. -/
 lemma leadingPositionHeightFactor_log_le {d : ℕ} (hd : 0 < d) :
     Real.log (leadingPositionHeightFactor d) ≤ 14 * (d : ℝ) ^ 2 := by
   have hdR : (1 : ℝ) ≤ d := by exact_mod_cast hd

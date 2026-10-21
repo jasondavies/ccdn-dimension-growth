@@ -23,6 +23,8 @@ of positive degree, with one absolute constant. `planeResidueBound` discharges i
 def PlaneResidueBound (C : ℝ) : Prop :=
   ∀ f : MvPolynomial (Fin 2) ℤ, 0 < f.totalDegree → PlaneResidueCountBound C f.totalDegree f
 
+/-- If an integer polynomial `g` is a nonzero rational multiple of a rational polynomial `f` that
+is irreducible over a field `F` of characteristic zero, then `g` is irreducible over `F`. -/
 lemma rational_scalar_model_irreducible_charZero {F σ : Type*} [Field F] [CharZero F]
     {f : MvPolynomial σ ℚ} {g : MvPolynomial σ ℤ} {a : ℚ} (ha : a ≠ 0)
     (he : MvPolynomial.map (Int.castRingHom ℚ) g = C a * f)

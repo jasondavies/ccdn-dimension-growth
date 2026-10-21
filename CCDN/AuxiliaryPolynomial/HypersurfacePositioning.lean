@@ -29,6 +29,8 @@ def normalizedHypersurfaceCoordinates {K σ : Type*} [Field K]
     MvPolynomial (Option σ) K :=
   C (eval b (homogeneousComponent f.totalDegree f))⁻¹ * hypersurfaceAffineCoordinates a b hb f
 
+/-- If the leading form of `f` does not vanish at the direction `b`, then the normalized affine
+coordinate change of `f` is monic as a polynomial in the distinguished variable `none`. -/
 lemma normalizedHypersurfaceCoordinates_monic {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K)
     (hdir : eval b (homogeneousComponent f.totalDegree f) ≠ 0) :
@@ -84,11 +86,18 @@ degree `d` in the distinguished variable `none`, of total degree at most `d`, an
 the origin, where its derivative in the distinguished variable does not vanish. -/
 structure IsMonicSmoothAtOrigin {K σ : Type*} [Field K] (g : MvPolynomial (Option σ) K)
     (d : ℕ) : Prop where
+  /-- The equation is irreducible. -/
   irreducible : Irreducible g
+  /-- The equation is monic in the distinguished variable `none`. -/
   monic : (optionEquivLeft K σ g).Monic
+  /-- The equation has degree `d` in the distinguished variable `none`. -/
   natDegree_eq : (optionEquivLeft K σ g).natDegree = d
+  /-- The equation has total degree at most `d`. -/
   totalDegree_le : g.totalDegree ≤ d
+  /-- The equation vanishes at the origin. -/
   eval_zero : eval (0 : Option σ → K) g = 0
+  /-- The partial derivative in the distinguished variable `none` does not vanish at the
+  origin. -/
   pderiv_ne_zero : eval (0 : Option σ → K) (pderiv none g) ≠ 0
 
 /-- Smooth-point existence and direction avoidance discharge all positioning

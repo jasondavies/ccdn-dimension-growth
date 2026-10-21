@@ -21,6 +21,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The affine auxiliary degree bound `affineMinimumAuxiliaryBound` is monotone in the
+comparison constant `A`, for `1 ≤ B`, `1 ≤ L` and `0 ≤ b`. -/
 lemma affineMinimumAuxiliaryBound_mono_A (n d : ℕ) {A A' B L b : ℝ}
     (hA : A ≤ A') (hB : 1 ≤ B) (hL : 1 ≤ L) (hb : 0 ≤ b) :
     affineMinimumAuxiliaryBound n d A B L b ≤ affineMinimumAuxiliaryBound n d A' B L b := by
@@ -34,6 +36,8 @@ lemma affineMinimumAuxiliaryBound_mono_A (n d : ℕ) {A A' B L b : ℝ}
   unfold affineMinimumAuxiliaryBound
   gcongr
 
+/-- The affine auxiliary degree bound `affineMinimumAuxiliaryBound` is monotone in the
+bad-prime factor `b`, for `0 ≤ A`, `1 ≤ B` and `1 ≤ L`. -/
 lemma affineMinimumAuxiliaryBound_mono_b (n d : ℕ) {A B L b b' : ℝ}
     (hA : 0 ≤ A) (hB : 1 ≤ B) (hL : 1 ≤ L) (hb : b ≤ b') :
     affineMinimumAuxiliaryBound n d A B L b ≤ affineMinimumAuxiliaryBound n d A B L b' := by
@@ -43,6 +47,8 @@ lemma affineMinimumAuxiliaryBound_mono_b (n d : ℕ) {A B L b b' : ℝ}
   unfold affineMinimumAuxiliaryBound
   gcongr
 
+/-- The affine auxiliary degree bound is at least the degree `d` whenever `0 < d`, so the
+equation itself always meets it. -/
 lemma degree_le_affineMinimumAuxiliaryBound (n : ℕ) {d : ℕ} (hd : 0 < d)
     {A B L b : ℝ} (hA : 0 ≤ A) (hB : 1 ≤ B) (hL : 1 ≤ L) (hb : 0 ≤ b) :
     (d : ℝ) ≤ affineMinimumAuxiliaryBound n d A B L b := by
@@ -68,19 +74,29 @@ lemma degree_le_affineMinimumAuxiliaryBound (n : ℕ) {d : ℕ} (hd : 0 < d)
   exact (hdD.trans (le_add_of_nonneg_left hE)).trans
     (le_mul_of_one_le_left (by positivity) hC)
 
+/-- The scale $4 R^2$, with `R = scalingPrimeRatio`, of the small-box threshold
+`affineAuxiliaryBoxScale * (d + 1) ^ affineAuxiliaryBoxExponent n` separating the unscaled
+case of the affine auxiliary theorem from the prime-scaled cases. -/
 def affineAuxiliaryBoxScale : ℝ := 4 * scalingPrimeRatio ^ 2
 
+/-- The exponent $4(n + 2) + 2$ of `d + 1` in the small-box threshold of the affine
+auxiliary theorem for equations in `n + 2` variables. -/
 def affineAuxiliaryBoxExponent (n : ℕ) : ℕ := 4 * (n + 2) + 2
 
+/-- The comparison constant used uniformly over all box radii in the affine auxiliary
+theorem: the larger of `scalingPrimeRatio` and the small-box scale times
+$e^{(4(n + 2) + 2)(n + 2)}$. -/
 def affineAuxiliaryComparisonConstant (n : ℕ) : ℝ :=
   max scalingPrimeRatio
     (Real.exp (Real.log affineAuxiliaryBoxScale + (affineAuxiliaryBoxExponent n : ℝ) * (n + 2 : ℝ)))
 
+/-- The small-box scale `affineAuxiliaryBoxScale` is at least `1`. -/
 lemma affineAuxiliaryBoxScale_one_le : 1 ≤ affineAuxiliaryBoxScale := by
   have h := scalingPrimeRatio_one_le
   unfold affineAuxiliaryBoxScale
   nlinarith
 
+/-- The comparison constant `affineAuxiliaryComparisonConstant n` is at least `1`. -/
 lemma affineAuxiliaryComparisonConstant_one_le (n : ℕ) :
     1 ≤ affineAuxiliaryComparisonConstant n :=
   scalingPrimeRatio_one_le.trans (le_max_left _ _)

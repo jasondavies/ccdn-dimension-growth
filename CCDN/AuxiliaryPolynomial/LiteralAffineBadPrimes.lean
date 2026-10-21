@@ -38,6 +38,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The prime `p` is a bad prime for `f` in the literal sense of CCDN Definition 3.2.1: the
+reduction of `f` modulo `p` is not irreducible over an algebraic closure of `𝔽_p`. Primes at
+which `f` merely drops degree are not counted. -/
 def LiteralAffineBadReduction {σ : Type*} (f : MvPolynomial σ ℤ) (p : ℕ) : Prop :=
   ∃ hp : p.Prime, let _ : Fact p.Prime := ⟨hp⟩
     ¬ Irreducible (map (Int.castRingHom (AlgebraicClosure (ZMod p))) f)
@@ -46,6 +49,8 @@ private lemma LiteralAffineBadReduction.hypersurfaceBadReduction {σ : Type*}
     {f : MvPolynomial σ ℤ} {p : ℕ} (h : LiteralAffineBadReduction f p) :
     HypersurfaceBadReduction f p := ⟨h.1, Or.inr h.2⟩
 
+/-- An absolutely irreducible integer polynomial has only finitely many literal bad primes above
+the threshold `stepanovThreshold` of its degree. -/
 lemma finite_literal_affine_bad_primes {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : AbsolutelyIrreducible f) :
@@ -60,15 +65,21 @@ lemma finite_literal_affine_bad_primes {n : ℕ}
 def literalAffineBadPrimeFactor {n : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ) : ℝ :=
   badPrimeFactor LiteralAffineBadReduction finite_literal_affine_bad_primes f
 
+/-- The literal affine bad-prime factor is nonnegative. -/
 lemma literalAffineBadPrimeFactor_nonneg {n : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ) :
     0 ≤ literalAffineBadPrimeFactor f :=
   badPrimeFactor_nonneg f
 
+/-- The literal affine bad-prime factor of a polynomial that is not absolutely irreducible is
+zero, by convention. -/
 lemma literalAffineBadPrimeFactor_eq_zero {n : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : ¬AbsolutelyIrreducible f) :
     literalAffineBadPrimeFactor f = 0 :=
   badPrimeFactor_eq_zero hf
 
+/-- For an absolutely irreducible `f` of degree `d`, the literal affine bad-prime factor equals
+`primeSetFactor bad` for any finite set `bad` consisting exactly of the literal bad primes of `f`
+above `stepanovThreshold d`. -/
 lemma literalAffineBadPrimeFactor_eq_exp {n d : ℕ} (f : MvPolynomial (Fin (n + 1)) ℤ)
     (hf : AbsolutelyIrreducible f)
     (hd : f.totalDegree = d) (bad : Finset ℕ)
@@ -76,6 +87,8 @@ lemma literalAffineBadPrimeFactor_eq_exp {n d : ℕ} (f : MvPolynomial (Fin (n +
     literalAffineBadPrimeFactor f = primeSetFactor bad :=
   badPrimeFactor_eq_primeSetFactor hf hd bad hbad
 
+/-- The literal affine bad-prime factor is at most `hypersurfaceBadPrimeFactor`, which also counts
+primes at which the degree drops. -/
 lemma literalAffineBadPrimeFactor_le_inclusive {n : ℕ}
     (f : MvPolynomial (Fin (n + 1)) ℤ) :
     literalAffineBadPrimeFactor f ≤ hypersurfaceBadPrimeFactor f :=
@@ -91,6 +104,8 @@ private lemma literalAffineBadReduction_affineTranslation {n : ℕ}
   dsimp only
   rw [affineTranslation_map, affineTranslation_irreducible_iff]
 
+/-- The literal affine bad-prime factor is invariant under integer affine translations of the
+variables. -/
 theorem literalAffineBadPrimeFactor_affineTranslation {n : ℕ}
     (a : Fin (n + 1) → ℤ) (f : MvPolynomial (Fin (n + 1)) ℤ) :
     literalAffineBadPrimeFactor (affineTranslation ℤ a f) = literalAffineBadPrimeFactor f := by
@@ -143,6 +158,9 @@ private lemma affineChart_scaledHomogenize_eq_variableScale {K : Type*} [Field K
     variableScaleEquiv_monomial]
   rfl
 
+/-- For a ring map `φ : ℤ →+* K` to a field with `φ h ≠ 0`, the image under `φ` of the affine
+chart of the `h`-scaled homogenization of `f` is irreducible if and only if the image of `f` is,
+since the two differ by the invertible rescaling of the variables by `φ h`. -/
 lemma affineChart_scaledHomogenize_map_irreducible {K : Type*} [Field K] {n d : ℕ}
     (φ : ℤ →+* K) (h : ℤ) (hh : φ h ≠ 0) (f : MvPolynomial (Fin n) ℤ) :
     Irreducible (map φ (affineChart n (scaledHomogenize d h f))) ↔ Irreducible (map φ f) := by
@@ -150,6 +168,8 @@ lemma affineChart_scaledHomogenize_map_irreducible {K : Type*} [Field K] {n d : 
     affineChart_scaledHomogenize_eq_variableScale d (φ h) hh]
   exact MulEquiv.irreducible_iff (f := variableScaleEquiv K (Fin n) (φ h) hh)
 
+/-- If `p` is a prime not dividing the constant coefficient of `f` and `x` is an integer zero of
+`f`, then the integer vector `(p, x)` is primitive, i.e. its entries have gcd one. -/
 lemma prime_scaled_zero_primitive {n : ℕ} (f : MvPolynomial (Fin n) ℤ)
     {p : ℕ} (hp : p.Prime) (hp0 : ¬ (p : ℤ) ∣ f.coeff 0)
     (x : IntPoint n) (hx : eval x f = 0) :

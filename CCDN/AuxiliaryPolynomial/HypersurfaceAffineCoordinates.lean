@@ -25,12 +25,15 @@ def directionCoordinatesHom {K σ : Type*} [Field K] (b : Option σ → K) :
     MvPolynomial (Option σ) K →ₐ[K] MvPolynomial (Option σ) K :=
   aeval (fun i => C (b i) * X none + Option.elim i 0 (fun j => X (some j)))
 
+/-- The inverse of the linear coordinates `directionCoordinatesHom b` when `b none ≠ 0`: the
+substitution sending $x_0$ to $b_0^{-1} x_0$ and every other $x_i$ to $x_i - b_i b_0^{-1} x_0$. -/
 def directionCoordinatesInv {K σ : Type*} [Field K] (b : Option σ → K) :
     MvPolynomial (Option σ) K →ₐ[K] MvPolynomial (Option σ) K :=
   aeval (fun i => Option.elim i (C (b none)⁻¹ * X none)
     (fun j => X (some j) - C (b (some j)) * C (b none)⁻¹ * X none))
 
-/-- The displayed inverse proves that the linear substitution is an automorphism. -/
+/-- The linear coordinates $x_i = b_i x_0 + z_i$ (with no $z_0$) as an algebra automorphism,
+for a direction `b` with nonzero first component. -/
 def directionCoordinates {K σ : Type*} [Field K] (b : Option σ → K) (hb : b none ≠ 0) :
     MvPolynomial (Option σ) K ≃ₐ[K] MvPolynomial (Option σ) K := by
   have hu : (C (b none)⁻¹ : MvPolynomial (Option σ) K) * C (b none) = 1 := by
@@ -68,6 +71,8 @@ def hypersurfaceAffineCoordinates {K σ : Type*} [Field K]
     MvPolynomial (Option σ) K ≃ₐ[K] MvPolynomial (Option σ) K :=
   (originShiftEquiv a).trans (directionCoordinates b hb)
 
+/-- The affine coordinates substitute $a_i + b_i x_0 + z_i$ for the variable $x_i$, with no
+$z_0$ term for the distinguished variable. -/
 lemma hypersurfaceAffineCoordinates_X {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (i : Option σ) :
     hypersurfaceAffineCoordinates a b hb (X i) =
@@ -75,6 +80,8 @@ lemma hypersurfaceAffineCoordinates_X {K σ : Type*} [Field K]
   simp [hypersurfaceAffineCoordinates, directionCoordinates, directionCoordinatesHom]
   ring
 
+/-- The affine change of coordinates `hypersurfaceAffineCoordinates a b hb` does not increase
+the total degree. -/
 lemma hypersurfaceAffineCoordinates_totalDegree_le {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K) :
     (hypersurfaceAffineCoordinates a b hb f).totalDegree ≤ f.totalDegree := by
@@ -94,6 +101,8 @@ lemma hypersurfaceAffineCoordinates_totalDegree_le {K σ : Type*} [Field K]
   all_goals first | simp | exact (totalDegree_add _ _).trans (max_le (by simp)
     ((totalDegree_mul _ _).trans (by simp)))
 
+/-- The affine coordinates carry the base point `a` to the origin: the transformed polynomial
+takes at `0` the value of `f` at `a`. -/
 lemma hypersurfaceAffineCoordinates_eval_zero {K σ : Type*} [Field K]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K) :
     eval (0 : Option σ → K) (hypersurfaceAffineCoordinates a b hb f) = eval a f := by
@@ -112,6 +121,8 @@ lemma hypersurfaceAffineCoordinates_eval_zero {K σ : Type*} [Field K]
       cases i <;> simp
   exact RingHom.congr_fun he f
 
+/-- In the affine coordinates, the first partial derivative at the origin is the derivative of
+`f` at `a` in the direction `b`. -/
 lemma hypersurfaceAffineCoordinates_partial_zero {K σ : Type*} [Field K] [Fintype σ]
     (a b : Option σ → K) (hb : b none ≠ 0) (f : MvPolynomial (Option σ) K) :
     eval (0 : Option σ → K) (pderiv none (hypersurfaceAffineCoordinates a b hb f)) =
