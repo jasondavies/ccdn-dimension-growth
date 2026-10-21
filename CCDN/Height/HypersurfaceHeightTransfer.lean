@@ -37,6 +37,15 @@ theorem hypersurface_logarithmic_height_transfer {r d : ℕ} (hr : 0 < r) (hd : 
   rw [he]
   exact (one_le_div hroot).mpr (dimension_root_le_degree hr hd)
 
+/-- The exponent bookkeeping `d ^ (4 - 1 / (n + 1)) = d ^ (2 - 1 / (n + 1)) * d ^ 2` used by the
+affine minimum and height-transfer estimates. -/
+lemma rpow_four_sub_eq_mul_sq {d : ℝ} (hd : 0 < d) (n : ℕ) :
+    d ^ (4 - 1 / (n + 1 : ℝ)) = d ^ (2 - 1 / (n + 1 : ℝ)) * d ^ 2 := by
+  rw [← Real.rpow_natCast d 2, ← Real.rpow_add hd]
+  congr 1
+  norm_num
+  ring
+
 /-- CCDN Lemma 4.2.3 with an explicit dimension constant. The coefficient
 height is the maximum, and the bad-prime factor is the defined factor. -/
 theorem hypersurface_badPrime_height_transfer {n d : ℕ}
@@ -63,11 +72,8 @@ theorem hypersurface_badPrime_height_transfer {n d : ℕ}
     simpa only [Nat.cast_add, Nat.cast_one] using
       hypersurface_logarithmic_height_transfer (r := n + 1) (by omega) hd hY hYH
   have hpowers : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) =
-      (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 := by
-    rw [← Real.rpow_natCast d 2, ← Real.rpow_add hd0]
-    congr 1
-    norm_num
-    ring
+      (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 :=
+    rpow_four_sub_eq_mul_sq hd0 n
   have hstep : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * hypersurfaceBadPrimeFactor f / H ^ q ≤
       C * (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * ((Real.log H + (d : ℝ) ^ 2) / H ^ q) := by
     calc

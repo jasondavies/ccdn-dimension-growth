@@ -12,6 +12,7 @@ import CCDN.Noether.EulerProductVanishing
 import CCDN.Noether.UniversalPlaneBadWitness
 import CCDN.Noether.UniversalPlaneWitness
 import Mathlib.Algebra.MvPolynomial.Nilpotent
+import CCDN.ForMathlib.MvPolynomial
 
 /-! The constructed ambient coefficient forms vanish on every geometrically
 reducible homogeneous equation, in every characteristic. -/
@@ -42,18 +43,6 @@ theorem ambientEuler_minor_eq_zero_of_product {R σ : Type*} [CommRing R]
     ((universalPlanePolynomial_totalDegree_le g).trans hg)
     ((universalPlanePolynomial_totalDegree_le h).trans hh) rows cols
 
-lemma mv_totalDegree_pos_of_nonzero_nonunit {K σ : Type*} [Field K]
-    (f : MvPolynomial σ K) (hf : f ≠ 0) (hu : ¬IsUnit f) : 0 < f.totalDegree := by
-  by_contra hd
-  have he := totalDegree_eq_zero_iff_eq_C.mp (Nat.eq_zero_of_not_pos hd)
-  have hc : f.coeff 0 ≠ 0 := by
-    intro hz
-    apply hf
-    simpa only [hz, map_zero] using he
-  apply hu
-  rw [he]
-  exact (isUnit_iff_ne_zero.mpr hc).map C
-
 /-- Reducibility forces the entire parameter determinant to vanish,
 including the zero homogeneous equation. -/
 theorem ambientEuler_minor_eq_zero_of_not_irreducible {K σ : Type*} [Field K]
@@ -76,8 +65,8 @@ theorem ambientEuler_minor_eq_zero_of_not_irreducible {K σ : Type*} [Field K]
   have hgh0 : g * h ≠ 0 := he ▸ hf0
   have hg0 := (mul_ne_zero_iff.mp hgh0).1
   have hh0 := (mul_ne_zero_iff.mp hgh0).2
-  have hgpos := mv_totalDegree_pos_of_nonzero_nonunit g hg0 hgu
-  have hhpos := mv_totalDegree_pos_of_nonzero_nonunit h hh0 hhu
+  have hgpos := totalDegree_pos_of_ne_zero_of_not_isUnit hg0 hgu
+  have hhpos := totalDegree_pos_of_ne_zero_of_not_isUnit hh0 hhu
   have hsum : g.totalDegree + h.totalDegree = k + 2 := by
     rw [he, totalDegree_mul_of_isDomain hg0 hh0] at hd
     exact hd

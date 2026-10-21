@@ -60,10 +60,8 @@ theorem exists_independent_linear_primitive_extension
   let A := MvPolynomial (Fin n) K ⧸ I
   let T : MvPolynomial (Fin n) K →ₗ[K] F :=
     (IsScalarTower.toAlgHom K A F).toLinearMap.comp (Ideal.Quotient.mkₐ K I).toLinearMap
-  have hai : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) := by
-    change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (a i)))
-    rw [← projectionCoordinateMap_eq_aeval]
-    exact hinj
+  have hai : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) :=
+    injective_projectionCoordinateMap_iff.mp hinj
   have hali : LinearIndependent K a :=
     hai.linearIndependent.of_comp (Ideal.Quotient.mkₐ K I).toLinearMap
   obtain ⟨k, _, hfield⟩ := exists_bounded_linear_parameter_primitive (F := F)

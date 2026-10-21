@@ -11,6 +11,7 @@ import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 import CCDN.Determinant.ProjectiveOpenResidueDeterminant
+import CCDN.ForMathlib.MvPolynomial
 /-! The sharp prime determinant estimate from the literal affine reduction.
 Loss of degree in that reduction is allowed: the extra powers of the
 homogenizing coordinate are invertible at all supplied points. -/
@@ -81,24 +82,15 @@ theorem affine_chart_minorGcd_dvd
   have hi : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) a) := by
     simpa only [a, fbar, affineChart_map] using hir
   have ha : Irreducible a := mvPolynomial_irreducible_of_field_map _ a hi
-  have he : 0 < e := by
-    by_contra hne
-    have hzdeg : a.totalDegree = 0 := by dsimp [e] at hne; omega
-    have hc := totalDegree_eq_zero_iff_eq_C.mp hzdeg
-    have hzcoeff : a.coeff 0 ≠ 0 := by intro hz; exact ha.ne_zero (by rw [hc, hz, map_zero])
-    apply ha.not_isUnit
-    rw [hc]
-    exact (isUnit_iff_ne_zero.mpr hzcoeff).map C
+  have he : 0 < e := totalDegree_pos_of_ne_zero_of_not_isUnit ha.ne_zero ha.not_isUnit
   have hed : e ≤ d :=
     (affineChart_totalDegree_le fbar).trans (hf.map _).totalDegree_le
   have hgbar : gbar.IsHomogeneous e := boundedHomogenize_homogeneous a le_rfl
   have hgreduce : map (Int.castRingHom (ZMod p)) g = gbar := map_modularPolynomialLift gbar
   have hghom : g.IsHomogeneous e := modularPolynomialLift_homogeneous gbar hgbar
   have hgabs : Irreducible (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) gbar) := by
-    have hdeg : (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) a).totalDegree = e := by
-      change (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) a).totalDegree = a.totalDegree
-      unfold totalDegree
-      rw [support_map_of_injective _ (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))).injective]
+    have hdeg : (map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) a).totalDegree = e :=
+      totalDegree_map_of_injective (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))).injective a
     rw [show gbar = boundedHomogenize e a from rfl,
       boundedHomogenize_map_of_degree_bound _ a le_rfl]
     simpa only [scaledHomogenize_one, hdeg] using scaledHomogenize_irreducible _ hi one_ne_zero

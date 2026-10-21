@@ -10,6 +10,7 @@ public import Mathlib.Analysis.SpecialFunctions.Pow.Real
 import CCDN.Auxiliary.AuxiliaryLargeHeightRatios
 import CCDN.Auxiliary.HypersurfaceKernelRatio
 import CCDN.Auxiliary.HypersurfaceRankRoots
+import CCDN.ForMathlib.Log
 /-! The large-height auxiliary-degree calculation eliminates both the radius
 and coefficient height, leaving O_r(d^(4-1/r)). -/
 
@@ -81,8 +82,7 @@ lemma hypersurface_large_degree_bound_of_log_bound {r d M : ℕ} {C : ℝ}
     (hlog : Real.log M ≤ C + (4 - 1 / (r : ℝ)) * Real.log d) :
     (M : ℝ) ≤ Real.exp C * (d : ℝ) ^ (4 - 1 / (r : ℝ)) := by
   have hdR : (0 : ℝ) < d := by exact_mod_cast hd
-  have hMR : (0 : ℝ) < M := by exact_mod_cast hM
-  apply (Real.log_le_log_iff hMR (by positivity)).mp
+  refine Real.natCast_le_of_log_le_log hM (by positivity) ?_
   rw [Real.log_mul (Real.exp_pos _).ne' (by positivity), Real.log_exp, Real.log_rpow hdR]
   exact hlog
 

@@ -9,7 +9,7 @@ public import CCDN.Hilbert.PrincipalStandardMonomials
 public import Mathlib.Analysis.Real.Sqrt
 import CCDN.Analysis.SurfaceMonomialWeightNumerics
 import CCDN.Auxiliary.HypersurfaceRankProfile
-import CCDN.Hilbert.MonomialDimension
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Plane.PlaneHilbert
 import Mathlib.Algebra.Order.Star.Real
 /-! The sharp weighted degree of a full standard-monomial prefix for an

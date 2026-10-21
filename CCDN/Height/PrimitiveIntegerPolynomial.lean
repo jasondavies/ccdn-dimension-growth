@@ -13,6 +13,7 @@ import Mathlib.RingTheory.Localization.Integer
 import Mathlib.RingTheory.Polynomial.UniqueFactorization
 import Mathlib.Algebra.EuclideanDomain.Int
 import Mathlib.RingTheory.PrincipalIdealDomain
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Primitive integer multivariate equations, denominator clearing, and
 reflection of divisibility from rational coefficients for primitive equations. -/
@@ -35,9 +36,8 @@ lemma PrimitiveIntegerPolynomial.isUnit_of_rational_map {σ : Type*}
     {f : MvPolynomial σ ℤ} (hf : PrimitiveIntegerPolynomial f)
     (hu : IsUnit (MvPolynomial.map (Int.castRingHom ℚ) f)) : IsUnit f := by
   have hd := (isUnit_iff_totalDegree_of_isReduced.mp hu).2
-  have he : (MvPolynomial.map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+  have he : (MvPolynomial.map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree :=
+      totalDegree_map_of_injective Int.cast_injective _
   have hc := totalDegree_eq_zero_iff_eq_C.mp (he ▸ hd)
   have hunit : IsUnit (f.coeff 0) := hf _ ((C_dvd_iff_dvd_coeff _ f).mp (hc ▸ dvd_rfl))
   rw [hc]

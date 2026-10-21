@@ -11,6 +11,7 @@ import CCDN.Algebra.UnscaledAffineMinimum
 import CCDN.Auxiliary.LiteralScaledAuxiliary
 import CCDN.Height.AffineHeightCutoff
 import CCDN.Height.ScaledHypersurfaceHeight
+import CCDN.Height.HypersurfaceHeightTransfer
 /-! Quantitative degree selection for the literal affine bad-prime branch.
 The logarithmic branch can be selected separately at the existence level. -/
 
@@ -122,11 +123,8 @@ lemma unscaled_auxiliary_bad_factor_bound {n k : ℕ}
       polynomial_box_projective_power_bound (r := n + 1) (by omega) hd hS hB hbound
   have hpow : L ^ q ≤ H ^ q := Real.rpow_le_rpow hL0.le hLH (by dsimp [q]; positivity)
   have hpowers : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) =
-      (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 := by
-    rw [← Real.rpow_natCast d 2, ← Real.rpow_add hd0]
-    congr 1
-    norm_num
-    ring
+      (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 :=
+    rpow_four_sub_eq_mul_sq hd0 n
   have hmain : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * b * B ^ α / H ^ q ≤
       K * E * (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * ((d : ℝ) ^ 2 * b) * B ^ β / L ^ q := by
     calc

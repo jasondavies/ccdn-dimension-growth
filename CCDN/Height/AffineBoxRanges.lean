@@ -6,6 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Plane.ScaledPlaneCount
+import CCDN.ForMathlib.Log
 /-! Quantitative large-box and small-box reductions for affine scaling. -/
 
 @[expose] public section
@@ -29,9 +30,7 @@ lemma large_box_height_threshold {d : ℕ} (hd : 0 < d) {A B : ℝ} (hA : 1 ≤ 
     have h := Real.log_le_rpow_div hB0.le (by norm_num : (0 : ℝ) < 1 / 2)
     rw [← Real.sqrt_eq_rpow] at h
     linarith
-  have hlogd : Real.log ((d : ℝ) + 1) ≤ d := by
-    have h := Real.log_le_sub_one_of_pos (show (0 : ℝ) < d + 1 by positivity)
-    linarith
+  have hlogd : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self d.cast_nonneg
   rw [Real.log_mul (by positivity) hB0.ne']
   apply (le_div_iff₀ hA0).mpr
   have hh : 4 * (d : ℝ) * (Real.log ((d : ℝ) + 1) + Real.log B) * A ≤
@@ -53,9 +52,7 @@ lemma small_box_log_bound {d : ℕ} (hd : 0 < d) {S B : ℝ} (hS : 1 ≤ S)
   have hlogd : Real.log (d : ℝ) ≤ d := by
     have h := Real.log_le_sub_one_of_pos hd0
     linarith
-  have hlogplus : Real.log ((d : ℝ) + 1) ≤ d := by
-    have h := Real.log_le_sub_one_of_pos hdplus
-    linarith
+  have hlogplus : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self d.cast_nonneg
   have hlogB := Real.log_le_log hB0 hBS
   rw [Real.log_mul hS0.ne' (by positivity), Real.log_pow] at hlogB
   rw [Real.log_mul hdplus.ne' hB0.ne']

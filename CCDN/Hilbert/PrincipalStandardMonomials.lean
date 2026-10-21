@@ -8,7 +8,7 @@ module
 public import CCDN.ForMathlib.StandardMonomials
 public import CCDN.Hilbert.FilteredIntersection
 public import CCDN.Algebra.MonomialRays
-import CCDN.Hilbert.MonomialDimension
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.StandardMonomials
 import CCDN.Plane.PlaneHilbert
 /-! Finite standard-monomial prefixes for a principal equation, their exact

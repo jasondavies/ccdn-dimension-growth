@@ -32,7 +32,7 @@ counted. This form also permits a real exponential base. -/
 theorem primeFactors_pow_subpower {R ε : ℝ} (hR : 1 ≤ R) (hε : 0 < ε) :
     ∃ C : ℝ, 0 < C ∧ ∀ D : ℕ, 1 ≤ D →
       R ^ D.primeFactors.card ≤ C * (D : ℝ) ^ ε := by
-  have hR0 : 0 < R := lt_of_lt_of_le zero_lt_one hR
+  have hR0 : 0 < R := zero_lt_one.trans_le hR
   have hlogR : 0 ≤ Real.log R := Real.log_nonneg hR
   obtain ⟨M, hM⟩ := exists_nat_gt (Real.exp (Real.log R / ε))
   have hM0 : (0 : ℝ) < M := (Real.exp_pos _).trans hM

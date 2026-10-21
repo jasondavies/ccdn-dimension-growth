@@ -11,6 +11,7 @@ public import Mathlib.RingTheory.Ideal.Height
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Hilbert.CompleteIntersectionDegreeBudget
 import CCDN.Surface.TopFormBadPrimes
+import CCDN.ForMathlib.MvPolynomial
 /-! The uniform surface auxiliary gives a finite curve cover of
 all bounded integer zeros, with total curve degree O(d^(9/2) B^(1/sqrt d)). -/
 
@@ -63,9 +64,8 @@ theorem top_form_surface_curve_components
     exists_completeIntersection_curve_components (map (Int.castRingHom ℚ) f)
       (map (Int.castRingHom ℚ) g) hfQ hgnd
   have hmapdegree (p : MvPolynomial (Fin 3) ℤ) :
-      (map (Int.castRingHom ℚ) p).totalDegree = p.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+      (map (Int.castRingHom ℚ) p).totalDegree = p.totalDegree :=
+      totalDegree_map_of_injective Int.cast_injective _
   have hpower : (f.totalDegree : ℝ) * (f.totalDegree : ℝ) ^ (7 / 2 : ℝ) =
       (f.totalDegree : ℝ) ^ (9 / 2 : ℝ) := by
     calc

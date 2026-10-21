@@ -10,6 +10,7 @@ public import Mathlib.Tactic.Continuity
 import CCDN.Algebra.PolynomialLinearDescent
 import CCDN.Plane.Bezout
 import Mathlib.Algebra.MvPolynomial.Nilpotent
+import CCDN.ForMathlib.MvPolynomial
 
 /-! Irreducible base-field plane curves that split over an extension have at
 most d² base-field points. The proof uses linear coefficient descent and
@@ -46,9 +47,8 @@ lemma plane_points_card_le_of_extension_factorization {k K ι : Type*}
     Fintype.card ι ≤ f.totalDegree ^ 2 := by
   classical
   have hdegree : g.totalDegree + h.totalDegree = f.totalDegree := by
-    have hm : (MvPolynomial.map (algebraMap k K) f).totalDegree = f.totalDegree := by
-      unfold totalDegree
-      rw [support_map_of_injective _ (algebraMap k K).injective]
+    have hm : (MvPolynomial.map (algebraMap k K) f).totalDegree = f.totalDegree :=
+        totalDegree_map_of_injective (algebraMap k K).injective _
     rw [hfac, totalDegree_mul_of_isDomain hg hh] at hm
     exact hm
   let S := Finset.univ.filter (fun i : ι => eval (algebraMap k K ∘ z i) g = 0)
@@ -73,17 +73,10 @@ lemma plane_points_card_le_of_extension_factorization {k K ι : Type*}
     _ ≤ f.totalDegree * g.totalDegree + f.totalDegree * h.totalDegree := Nat.add_le_add hs ht
     _ = f.totalDegree ^ 2 := by rw [← Nat.mul_add, hdegree, pow_two]
 
+/-- Explicit-argument form of `MvPolynomial.totalDegree_pos_of_ne_zero_of_not_isUnit`. -/
 lemma totalDegree_pos_of_nonzero_nonunit {k : Type*} [Field k] {n : ℕ}
-    (f : MvPolynomial (Fin n) k) (hf : f ≠ 0) (hu : ¬ IsUnit f) : 0 < f.totalDegree := by
-  by_contra hd
-  have he := totalDegree_eq_zero_iff_eq_C.mp (Nat.eq_zero_of_not_pos hd)
-  apply hu
-  have hc : f.coeff 0 ≠ 0 := by
-    intro h
-    apply hf
-    simpa only [h, map_zero] using he
-  rw [he]
-  exact (isUnit_iff_ne_zero.mpr hc).map C
+    (f : MvPolynomial (Fin n) k) (hf : f ≠ 0) (hu : ¬ IsUnit f) : 0 < f.totalDegree :=
+  totalDegree_pos_of_ne_zero_of_not_isUnit hf hu
 
 /-- Splitting over any extension, Galois or not, gives the d² bound on
 base-field points. -/
@@ -98,8 +91,7 @@ theorem nonabsolute_plane_points_card_le {k K ι : Type*}
   have hmapu : ¬ IsUnit (MvPolynomial.map (algebraMap k K) f) := by
     intro hu
     have he := (MvPolynomial.isUnit_iff_totalDegree_of_isReduced.mp hu).2
-    unfold totalDegree at he
-    rw [support_map_of_injective _ (algebraMap k K).injective] at he
+    rw [totalDegree_map_of_injective (algebraMap k K).injective] at he
     exact (Nat.ne_of_gt hd) he
   have hfac : ∃ g h : MvPolynomial (Fin 2) K,
       MvPolynomial.map (algebraMap k K) f = g * h ∧ ¬ IsUnit g ∧ ¬ IsUnit h := by
@@ -114,8 +106,8 @@ theorem nonabsolute_plane_points_card_le {k K ι : Type*}
   have hg : g ≠ 0 := fun he => hmap0 (by simp [hfac, he])
   have hh : h ≠ 0 := fun he => hmap0 (by simp [hfac, he])
   exact plane_points_card_le_of_extension_factorization f hf g h hg hh
-    (totalDegree_pos_of_nonzero_nonunit g hg hgu) (totalDegree_pos_of_nonzero_nonunit h hh hhu)
-    hfac z hinj hz
+    (totalDegree_pos_of_ne_zero_of_not_isUnit hg hgu)
+    (totalDegree_pos_of_ne_zero_of_not_isUnit hh hhu) hfac z hinj hz
 
 end
 end CCDN

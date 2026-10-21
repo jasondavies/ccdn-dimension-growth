@@ -22,7 +22,7 @@ theorem curveBound_logarithmic_degree {δ : ℕ} (hδ : 2 ≤ δ)
     (hδD : (δ : ℝ) ≤ D * (Real.log B + 1)) :
     curveBound δ B ≤ (δ : ℝ) * D ^ 2 * (D + 1) *
       B ^ (1 / 2 : ℝ) * (Real.log B + 1) ^ 3 := by
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlog := Real.log_nonneg hB
   have hδR : (2 : ℝ) ≤ δ := by exact_mod_cast hδ
   have hpow : B ^ (1 / (δ : ℝ)) ≤ B ^ (1 / 2 : ℝ) :=
@@ -53,7 +53,7 @@ theorem sum_curveBound_logarithmic_degrees {ι : Type*}
     ∑ i ∈ S, curveBound (δ i) B ≤
       ((k + 3).factorial / (1 / 20 : ℝ) ^ (k + 3) * Real.exp (1 / 20)) *
         A * D ^ 2 * (D + 1) * B := by
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlog := Real.log_nonneg hB
   let C := ((k + 3).factorial / (1 / 20 : ℝ) ^ (k + 3) * Real.exp (1 / 20))
   have hsum : (∑ i ∈ S, curveBound (δ i) B) ≤

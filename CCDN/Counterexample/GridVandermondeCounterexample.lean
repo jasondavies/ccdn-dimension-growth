@@ -7,6 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.Vandermonde
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
+import CCDN.ForMathlib.Fin
 
 /-! Primitive points and homogeneous columns of differing degrees on one
 fixed projective line. Their evaluation matrix is a Kronecker product
@@ -17,17 +18,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 open scoped BigOperators Kronecker
-
-lemma fin_sum_card_Ioi (N : ℕ) :
-    (∑ i : Fin N, (Ioi i).card) = N.choose 2 := by
-  have he (i : Fin N) : (Ioi i).card = i.rev.val := by
-    rw [Fin.card_Ioi, Fin.val_rev]
-    omega
-  simp_rw [he]
-  rw [show (∑ i : Fin N, i.rev.val) = ∑ i : Fin N, i.val from
-    Equiv.sum_comp Fin.revPerm (fun i : Fin N => i.val)]
-  rw [Fin.sum_univ_eq_sum_range (fun i : ℕ => i), Finset.sum_range_id, Nat.choose_two_right]
-
 
 lemma integer_vandermonde_pos_le {N : ℕ} (v : Fin N → ℤ) (R : ℤ)
     (hv : ∀ i j, i < j → 0 < v j - v i ∧ v j - v i ≤ R) :
@@ -45,7 +35,7 @@ lemma integer_vandermonde_pos_le {N : ℕ} (v : Fin N → ℤ) (R : ℤ)
           _ ≤ ∏ _j ∈ Ioi i, R := prod_le_prod₀ (fun j hj => (hpos i j hj).le)
             (fun j hj => (hv i j (mem_Ioi.mp hj)).2)
           _ = _ := by simp
-    _ = R ^ N.choose 2 := by rw [prod_pow_eq_pow_sum, fin_sum_card_Ioi]
+    _ = R ^ N.choose 2 := by rw [prod_pow_eq_pow_sum, Fin.sum_card_Ioi]
 
 def globalMixedDegreePoint (N : ℕ) (i : Fin N × Fin N) : Fin 3 → ℤ :=
   ![(i.1.val : ℤ) * N.factorial + 1, (i.2.val : ℤ) + 1, 0]

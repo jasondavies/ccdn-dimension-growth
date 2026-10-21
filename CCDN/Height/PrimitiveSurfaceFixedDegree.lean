@@ -51,7 +51,7 @@ theorem primitive_surface_fixed_degree_linear_bound (d : ℕ) (hd : 5 ≤ d) :
   have habs := absolute_irreducible_of_top_homogeneousComponent_irreducible f htop
   have hir := rational_irreducible_of_charZero_map f habs
   have hf0 : f ≠ 0 := by intro hz; exact hir.ne_zero (by rw [hz, map_zero])
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlogB := Real.log_nonneg hB
   rcases primitive_surface_coefficient_reduction f hprim hir hB with hheight | hlarge
   · have hH : 1 ≤ (integerCoefficientHeight f : ℝ) := by

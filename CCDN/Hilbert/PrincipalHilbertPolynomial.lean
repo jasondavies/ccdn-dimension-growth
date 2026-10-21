@@ -7,7 +7,7 @@ module
 
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import Mathlib.RingTheory.Polynomial.HilbertPoly
-import CCDN.Hilbert.MonomialDimension
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Plane.PlaneHilbert
 import Mathlib.Tactic.Positivity
 /-! The filtered Hilbert polynomial of a principal hypersurface.

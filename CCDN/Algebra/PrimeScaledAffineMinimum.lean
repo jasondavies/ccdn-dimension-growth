@@ -11,6 +11,7 @@ import CCDN.Algebra.AffineScalingExponent
 import CCDN.Auxiliary.PrimeScaledAffineAuxiliary
 import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 import CCDN.Height.ScaledHypersurfaceHeight
+import CCDN.Height.HypersurfaceHeightTransfer
 /-! Both bounds for the bad-prime factor apply to the same homogeneous
 auxiliary. Their minimum therefore survives the affine exponent saving. -/
 
@@ -75,11 +76,8 @@ theorem scaled_hypersurface_auxiliary_bound_of_badPrime_le {n : ℕ}
     simpa only [Nat.cast_add, Nat.cast_one, hnR] using
       affine_scaling_box_power (r := n + 1) (by omega) hd hB hA hp0 hBp
   have hpowers : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) =
-      (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 := by
-    rw [← Real.rpow_natCast d 2, ← Real.rpow_add hd0]
-    congr 1
-    norm_num
-    ring
+      (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 :=
+    rpow_four_sub_eq_mul_sq hd0 n
   have hmain : (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) * c * B ^ α / H ^ q ≤
       Real.exp 1 * A * (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * ((d : ℝ) ^ 2 * b) *
         B ^ (1 / (d : ℝ) ^ (1 / (n + 1 : ℝ))) / L ^ q := by

@@ -150,7 +150,7 @@ theorem boundedSquareNormTranslationClasses_count_of_relative_short_basis
         Real.sqrt |(discr K : ℝ)| ≤
       (numberFieldLatticeBoxConstant (Module.finrank ℚ K) C *
         (2 : ℝ) ^ Module.finrank ℚ K) * B ^ (Module.finrank ℚ K - 1) := by
-  have hBpos : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hBpos : 0 < B := zero_lt_one.trans_le hB
   have hp := boundedSquareNormTranslationClasses_packing K B B
   have hpR :
       ((boundedSquareNormTranslationClasses K B).card : ℝ) *

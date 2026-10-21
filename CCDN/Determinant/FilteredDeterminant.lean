@@ -26,20 +26,17 @@ this is a lower bound for the sum of the first s weights, with multiplicity. -/
 def filtrationExponent (r : ℕ → ℕ) (s : ℕ) : ℕ :=
   Finset.univ.sum fun k : Fin s => s - (Finset.univ.sum fun j : Fin (k.val + 1) => r j.val)
 
-lemma sum_weight_tail_counts_le {s : ℕ} (w : Fin s → ℕ) :
-    (∑ k : Fin s, (Finset.univ.filter fun i => k.val < w i).card) ≤ ∑ i, w i := by
+/-- Layer-cake inequality with an arbitrary cutoff `K`: counting, for each
+`k < K`, the weights exceeding `k` never exceeds the total weight. -/
+lemma sum_weight_tail_counts_le {s : ℕ} (w : Fin s → ℕ) (K : ℕ) :
+    (∑ k : Fin K, (Finset.univ.filter fun i => k.val < w i).card) ≤ ∑ i, w i := by
   classical
   simp only [Finset.card_eq_sum_ones, Finset.sum_filter]
   rw [Finset.sum_comm]
-  apply Finset.sum_le_sum
-  intro i _
-  have hcard : (Finset.univ.filter fun k : Fin s => k.val < w i).card ≤ w i := by
-    let φ : {k : Fin s // k.val < w i} → Fin (w i) := fun k => ⟨k.val.val, k.property⟩
-    have hφ : Function.Injective φ := by
-      intro a b h
-      apply Subtype.ext
-      exact Fin.ext (congrArg (fun v : Fin (w i) => v.val) h)
-    simpa only [Fintype.card_subtype, Fintype.card_fin] using Fintype.card_le_of_injective φ hφ
+  refine Finset.sum_le_sum fun i _ ↦ ?_
+  have hcard : (Finset.univ.filter fun k : Fin K => k.val < w i).card ≤ w i := by
+    rw [Fin.card_filter_val_lt]
+    exact min_le_right _ _
   simpa only [Finset.card_eq_sum_ones, Finset.sum_filter] using hcard
 
 /-- Distinct generators of weight at most k inject into all generators in
@@ -70,7 +67,7 @@ lemma filtrationExponent_le_weights {s N : ℕ} (r : ℕ → ℕ)
     (t : Fin s ↪ ((j : Fin N) × Fin (r j.val))) :
     filtrationExponent r s ≤ ∑ i, (t i).1.val := by
   classical
-  apply le_trans ?_ (sum_weight_tail_counts_le (fun i => (t i).1.val))
+  apply le_trans ?_ (sum_weight_tail_counts_le (fun i => (t i).1.val) s)
   unfold filtrationExponent
   apply Finset.sum_le_sum
   intro k _

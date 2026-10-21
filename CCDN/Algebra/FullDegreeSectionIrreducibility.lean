@@ -9,6 +9,7 @@ public import CCDN.Plane.FiniteFieldBadPlanes
 import CCDN.Plane.PlaneSectionBounds
 import Mathlib.Algebra.MvPolynomial.Nilpotent
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import CCDN.ForMathlib.MvPolynomial
 /-! An irreducible section retaining the full total degree forces the
 original equation to be irreducible. Degree additivity prevents either
 nonconstant ambient factor from disappearing under restriction. -/
@@ -20,10 +21,8 @@ open MvPolynomial
 
 lemma polynomial_isUnit_of_nonzero_degree_zero {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (hf : f ≠ 0) (hd : f.totalDegree = 0) : IsUnit f := by
-  have he := totalDegree_eq_zero_iff_eq_C.mp hd
-  have hc : f.coeff 0 ≠ 0 := by intro h; apply hf; rw [he, h, map_zero]
-  rw [he]
-  exact (isUnit_iff_ne_zero.mpr hc).map C
+  by_contra hu
+  exact (totalDegree_pos_of_ne_zero_of_not_isUnit hf hu).ne' hd
 
 /-- A degree-nonincreasing polynomial ring homomorphism reflects irreducibility
 at every equation whose full degree is retained. -/

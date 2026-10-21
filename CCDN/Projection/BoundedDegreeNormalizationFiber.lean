@@ -46,10 +46,8 @@ theorem bounded_degree_normalization_fiber_card_le_of_fractionField
   let R := IntermediateField.adjoin K (Set.range v)
   let u : Fin (m + 1) → R := fun i =>
     ⟨v i, IntermediateField.subset_adjoin K _ ⟨i, rfl⟩⟩
-  have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (l i)) := by
-    change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (l i)))
-    rw [← projectionCoordinateMap_eq_aeval]
-    exact hi
+  have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (l i)) :=
+    injective_projectionCoordinateMap_iff.mp hi
   have hiE : AlgebraicIndependent K v := hiA.map' (IsFractionRing.injective A E)
   have hiR : AlgebraicIndependent K u :=
     AlgebraicIndependent.of_comp (x := u) R.val hiE
@@ -102,6 +100,22 @@ theorem bounded_degree_normalization_fiber_card_le
     s.card ≤ d * q ^ (m + 1) :=
   bounded_degree_normalization_fiber_card_le_of_fractionField
     (E := FractionRing (MvPolynomial (Fin n) K ⧸ I)) I q hq l hl hi hint d hdimdeg z s hzero hproj
+
+/-- The linear case `q = 1` of `bounded_degree_normalization_fiber_card_le`:
+a fiber of a linear normalization has at most `d` points. -/
+theorem linear_normalization_fiber_card_le
+    {K : Type*} [Field K] [CharZero K] {n m : ℕ} (I : Ideal (MvPolynomial (Fin n) K)) [I.IsPrime]
+    (l : Fin (m + 1) → MvPolynomial (Fin n) K)
+    (hl : ∀ i, (l i).totalDegree ≤ 1)
+    (hi : Function.Injective (projectionCoordinateMap I l))
+    (hint : (projectionCoordinateMap I l).IsIntegral)
+    (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
+    (z : Fin (m + 1) → K) (s : Finset (Fin n → K))
+    (hzero : ∀ x ∈ s, ∀ f ∈ I, eval x f = 0)
+    (hproj : ∀ x ∈ s, ∀ i, eval x (l i) = z i) :
+    s.card ≤ d := by
+  simpa only [one_pow, mul_one] using bounded_degree_normalization_fiber_card_le I 1 one_pos l hl
+    hi hint d hdimdeg z s hzero hproj
 
 end
 end CCDN

@@ -40,8 +40,8 @@ theorem congruencePrimeWindow_pow_subpower {K R ε : ℝ}
     have hl := Real.log_nonneg (by norm_num : (1 : ℝ) ≤ 4)
     dsimp only [A]
     positivity
-  have hK0 : 0 < K := lt_of_lt_of_le zero_lt_one hK
-  have hR0 : 0 < R := lt_of_lt_of_le zero_lt_one hR
+  have hK0 : 0 < K := zero_lt_one.trans_le hK
+  have hR0 : 0 < R := zero_lt_one.trans_le hR
   have hlogR : 0 ≤ Real.log R := Real.log_nonneg hR
   have hlog2 : 0 < Real.log 2 := Real.log_pos (by norm_num)
   let D := A * K * Real.log R / ε + 1
@@ -49,12 +49,12 @@ theorem congruencePrimeWindow_pow_subpower {K R ε : ℝ}
   have hE : 0 ≤ E := by dsimp only [E]; positivity
   refine ⟨Real.exp (E + ε), Real.exp_pos _, ?_⟩
   intro B hB
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlogB : 0 ≤ Real.log B := Real.log_nonneg hB
   let L := K * (Real.log B + 1)
   let m := (congruencePrimeWindow L).card
   have hL : 1 ≤ L := by dsimp only [L]; nlinarith
-  have hL0 : 0 < L := lt_of_lt_of_le zero_lt_one hL
+  have hL0 : 0 < L := zero_lt_one.trans_le hL
   have hcard : (m : ℝ) * Real.log L ≤ A * L :=
     congruencePrimeWindow_card_log_bound hL
   have hcard2 : (m : ℝ) * Real.log 2 ≤ A * L :=
@@ -126,7 +126,7 @@ theorem congruencePrimeWindow_edge_polylog_linear {K R : ℝ}
   have hC₂ : 0 < C₂ := by dsimp only [C₂]; positivity
   refine ⟨C₁ * C₂, mul_pos hC₁ hC₂, ?_⟩
   intro α B hα hB
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hlogB : 0 ≤ Real.log B := Real.log_nonneg hB
   have h₂ := logarithm_add_one_pow_le_rpow k (by norm_num : (0 : ℝ) < 1 / 40) hB
   change (Real.log B + 1) ^ k ≤ C₂ * B ^ (1 / 40 : ℝ) at h₂

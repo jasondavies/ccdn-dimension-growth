@@ -27,19 +27,17 @@ lemma euler_restrict_basis_val {R : Type*} [CommRing R]
 
 lemma eulerLowBasis_apply {R : Type*} [CommRing R] (k : ℕ) (i : EulerLowIndex k) :
     (eulerLowBasis R k i).val =
-      monomial ((boundedExponentEquivSym (Fin 2) k).symm i).val 1 := by
+      monomial ((Finsupp.degreeLeEquivSym (Fin 2) k).symm i).val 1 := by
   classical
-  unfold eulerLowBasis
-  erw [Basis.reindex_apply]
-  exact euler_restrict_basis_val _ _
+  have h := Basis.reindex_apply (basisRestrictSupport R {p : Fin 2 →₀ ℕ | p.degree ≤ k})
+    (Finsupp.degreeLeEquivSym (Fin 2) k) i
+  exact (congrArg Subtype.val h).trans (euler_restrict_basis_val _ _)
 
 lemma eulerTopBasis_apply {R : Type*} [CommRing R] (k : ℕ) (i : EulerTopIndex k) :
     (eulerTopBasis R k i).val =
       monomial ((degreeEqEquivSym (Fin 2) k).symm i).val 1 := by
   classical
-  unfold eulerTopBasis
-  erw [Basis.map_apply, Basis.reindex_apply]
-  erw [LinearEquiv.coe_ofEq_apply]
+  simp only [eulerTopBasis, Basis.map_apply, Basis.reindex_apply]
   exact euler_restrict_basis_val _ _
 
 theorem eulerClosedFormCoefficientMatrix_rank

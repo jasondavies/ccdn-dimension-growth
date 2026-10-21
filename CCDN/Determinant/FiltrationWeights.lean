@@ -71,7 +71,7 @@ theorem initial_weight_sum_le_embedding {s N : ℕ} (r : ℕ → ℕ) (w : Fin s
     omega
   rw [← sum_weight_tail_counts_eq w K (fun i => le_sup (mem_univ i))]
   exact (sum_le_sum fun k _ => htail k).trans
-    (sum_weight_tail_counts_cutoff_le (fun i => (t i).1.val) K)
+    (sum_weight_tail_counts_le (fun i => (t i).1.val) K)
 
 /-- Whenever the profile contains at least s generators, its first s weights
 exist. They are constructed by the least cumulative cutoff for each index. -/

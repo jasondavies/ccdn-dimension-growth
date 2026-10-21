@@ -14,6 +14,7 @@ import CCDN.LowerBound.GridMultivariate
 import CCDN.LowerBound.GridProjectiveLowerBound
 import CCDN.LowerBound.GridTopFormConstruction
 import CCDN.Surface.TopFormIrreducibility
+import CCDN.ForMathlib.MvPolynomial
 /-! Integer hypersurfaces with absolutely irreducible top forms and
 large affine and projective point counts. These constructions apply to the
 hypotheses of CCDN Theorem 4 as well as to projective dimension growth. -/
@@ -50,9 +51,7 @@ lemma integer_absolute_top_rational_model {n d : ℕ}
     (map (Int.castRingHom ℚ) f).totalDegree = d ∧
       Irreducible (map (algebraMap ℚ (AlgebraicClosure ℚ)) (map (Int.castRingHom ℚ) f)) := by
   refine ⟨?_, ?_⟩
-  · unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
-    exact hd
+  · exact (totalDegree_map_of_injective Int.cast_injective f).trans hd
   · have h := (map_degree_and_irreducible_of_top_irreducible
       (Int.castRingHom (AlgebraicClosure ℚ)) f htop).2
     rw [map_map]

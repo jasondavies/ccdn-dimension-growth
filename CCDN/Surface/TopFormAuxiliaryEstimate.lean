@@ -91,11 +91,8 @@ theorem affineAuxiliaryDegreeExpression_le_of_badPrime_ratio (n : ℕ) {d : ℕ}
   let q := 1 / ((n + 1 : ℝ) * d * (d : ℝ) ^ (1 / (n + 1 : ℝ)))
   let Q := B ^ (1 / (d : ℝ) ^ (1 / (n + 1 : ℝ)))
   have hpowers : (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) * (d : ℝ) ^ 2 =
-      (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) := by
-    rw [← Real.rpow_natCast d 2, ← Real.rpow_add hd0]
-    congr 1
-    norm_num
-    ring
+      (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ)) :=
+    (rpow_four_sub_eq_mul_sq hd0 n).symm
   have hmain :
       (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) *
         min (Real.log L + d * Real.log B + (d : ℝ) ^ 2) ((d : ℝ) ^ 2 * b) * Q / L ^ q ≤

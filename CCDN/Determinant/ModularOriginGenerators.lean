@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.MvPolynomial
 public import CCDN.Determinant.SingularTangent
 import CCDN.Algebra.ModularPolynomialLift
 import CCDN.Determinant.OriginTruncationGenerators
+import Mathlib.FieldTheory.Finite.Polynomial
 import Mathlib.Tactic.LinearCombination
 
 /-! Lift singular local generators from the reduction modulo p. The
@@ -53,7 +54,7 @@ theorem lift_origin_truncation_generators {σ : Type*} {p : ℕ} [Fact p.Prime]
   have hD : map π D = 0 := by
     simp only [D, map_sub, map_mul, hlift, hS]
     linear_combination -he
-  obtain ⟨w, hw⟩ := (map_mod_prime_eq_zero_iff p D).mp hD
+  obtain ⟨w, hw⟩ := (C_dvd_iff_zmod p D).mpr hD
   refine ⟨cZ, modularPolynomialLift h, modularPolynomialLift v, w,
     modularPolynomialLift_mem_origin_power v hv, ?_⟩
   change u - S = _

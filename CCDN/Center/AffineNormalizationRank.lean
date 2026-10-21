@@ -56,10 +56,8 @@ theorem affine_normalization_parameters_finite
       simpa only [Fintype.card_fin,hdim] using hdimA)
   have hinjA : Function.Injective (projectionCoordinateMap I a) :=
     (RingHom.injective_iff_ker_eq_bot _).mpr hkerA
-  have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) := by
-    change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (a i)))
-    rw [← projectionCoordinateMap_eq_aeval]
-    exact hinjA
+  have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) :=
+    injective_projectionCoordinateMap_iff.mp hinjA
   have hiv : AlgebraicIndependent K v :=
     hiA.map' (f := IsScalarTower.toAlgHom K A F) (IsFractionRing.injective A F)
   let u : Fin m → R := fun i => ⟨v i,IntermediateField.subset_adjoin K _ ⟨i,rfl⟩⟩

@@ -17,7 +17,7 @@ noncomputable section
 theorem salberger_curve_number_normalization {α B : ℝ}
     (hα : α ≤ 1) (hB : 1 ≤ B) :
     B ^ α * (Real.log B + 1) ≤ 2 * (B ^ α * Real.log B + 1) := by
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hp : 0 < B ^ α := Real.rpow_pos_of_pos hB0 _
   have hl := Real.one_sub_inv_le_log_of_pos hp
   rw [Real.log_rpow hB0] at hl
@@ -43,7 +43,7 @@ theorem salberger_remainders_combine (E R c₀ : ℝ)
           C * B ^ (α + c / Real.log (1 + Real.log B)) := by
   refine ⟨17 * E + R + 1, c₀ + 33, by positivity, by positivity, ?_⟩
   intro α B hB
-  have hB0 : 0 < B := lt_of_lt_of_le zero_lt_one hB
+  have hB0 : 0 < B := zero_lt_one.trans_le hB
   have hden : 0 ≤ Real.log (1 + Real.log B) := Real.log_nonneg (by linarith [Real.log_nonneg hB])
   have hpoly := logarithm_add_one_pow_salberger 4 hB
   norm_num at hpoly

@@ -12,6 +12,7 @@ public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Algebra.HomogeneousChart
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Plane.Bezout
+import CCDN.ForMathlib.MvPolynomial
 /-! Distinct-point bounds obtained from the auxiliary polynomials and
 Bézout. The sharp finite-field estimate remains an explicit hypothesis. -/
 
@@ -21,9 +22,8 @@ noncomputable section
 open MvPolynomial
 
 lemma rational_map_totalDegree {σ : Type*} (f : MvPolynomial σ ℤ) :
-    (MvPolynomial.map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree := by
-  unfold totalDegree
-  rw [support_map_of_injective _ Int.cast_injective]
+    (MvPolynomial.map (Int.castRingHom ℚ) f).totalDegree = f.totalDegree :=
+    totalDegree_map_of_injective Int.cast_injective _
 
 lemma rational_irreducible_of_charZero_map {F σ : Type*} [Field F] [CharZero F]
     (f : MvPolynomial σ ℤ) (hf : Irreducible (MvPolynomial.map (Int.castRingHom F) f)) :

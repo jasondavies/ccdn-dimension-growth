@@ -11,6 +11,7 @@ public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Curve.Curve
 import CCDN.Surface.TopFormIrreducibility
 import Mathlib.Algebra.Order.Star.Rat
+import CCDN.ForMathlib.MvPolynomial
 /-! Directions of rational affine lines on a surface. Lines with two
 bounded integer points have a bounded projective direction and a spacing
 bound expressed using its representative-independent projective height. -/
@@ -47,9 +48,7 @@ theorem rationalAffineLine_direction_top_zero {n : ℕ}
     (hline : rationalAffineLine a v ⊆ zeroLocus (map (Int.castRingHom ℚ) f)) :
     eval v (map (Int.castRingHom ℚ) (homogeneousComponent f.totalDegree f)) = 0 := by
   have hpoly := affineLinePolynomial_eq_zero_of_contained a v _ hline
-  have hdegree : (map (Int.castRingHom ℚ) f).totalDegree ≤ f.totalDegree := by
-    unfold totalDegree
-    exact Finset.sup_mono (support_map_subset _ _)
+  have hdegree : (map (Int.castRingHom ℚ) f).totalDegree ≤ f.totalDegree := totalDegree_map_le _ _
   have hc := affineLinePolynomial_top_coefficient a v (map (Int.castRingHom ℚ) f)
     f.totalDegree hdegree
   rw [hpoly, Polynomial.coeff_zero, ← map_homogeneousComponent] at hc

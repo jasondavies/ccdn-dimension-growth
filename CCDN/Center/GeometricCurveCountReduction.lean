@@ -12,6 +12,7 @@ import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.ScaledHypersurfaceBadPrimes
 import CCDN.Center.GeometricCurveProjection
 import CCDN.Projection.ProjectiveProjectionCount
+import CCDN.ForMathlib.MvPolynomial
 /-! The same explicitly constructed geometrically integral plane curve
 has the source degree, source function field and the additive point-count
 comparison in Propositions 4.3.1 and 4.3.2. -/
@@ -54,10 +55,8 @@ theorem exists_geometric_projective_curve_count_reduction_of_chart
     boundedHomogenize_homogeneous f hfd.le, ?_, ?_, ?_⟩
   · simpa only [hfd] using boundedHomogenize_irreducible f hf
   · rw [← scaledHomogenize_one, scaledHomogenize_map, map_one, scaledHomogenize_one]
-    have hdeg : (map (algebraMap ℚ L) f).totalDegree = d := by
-      unfold totalDegree
-      rw [support_map_of_injective _ (algebraMap ℚ L).injective]
-      exact hfd
+    have hdeg : (map (algebraMap ℚ L) f).totalDegree = d :=
+        (totalDegree_map_of_injective (algebraMap ℚ L).injective _).trans hfd
     simpa only [hdeg] using boundedHomogenize_irreducible _ hfL
   · exact projective_curve_count_le_of_moment_projection I hX hd hdegree f hfd hk₀ hk₁
       ((hker f).mpr dvd_rfl) hcount

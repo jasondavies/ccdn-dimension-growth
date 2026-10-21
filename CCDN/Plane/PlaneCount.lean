@@ -13,6 +13,7 @@ import CCDN.Plane.PlaneStepanovBound
 import CCDN.Plane.PlaneStepanovDimension
 import CCDN.Plane.StepanovParameters
 import CCDN.Plane.StepanovRealBound
+import CCDN.ForMathlib.MvPolynomial
 /-! Sharp finite-field counting and the complete rational-plane
 integral-point bound. The finite-field proof uses the constructed Stepanov
 auxiliary and retains an explicit absolute error constant. -/
@@ -30,7 +31,7 @@ theorem plane_finite_field_card_bound {ι : Type*} [Fintype ι] [DecidableEq ι]
     (z : ι → Fin 2 → ZMod p) (hz : Function.Injective z)
     (hzero : ∀ i, eval (z i) f = 0) :
     (Fintype.card ι : ℝ) ≤ p + 161 * (f.totalDegree : ℝ) ^ 2 * Real.sqrt p := by
-  have hd := totalDegree_pos_of_nonzero_nonunit f hf.ne_zero hf.not_isUnit
+  have hd := totalDegree_pos_of_ne_zero_of_not_isUnit hf.ne_zero hf.not_isUnit
   have hp : 27 * f.totalDegree ^ 4 < p := by exact_mod_cast hsize
   have hchar : f.totalDegree < p := by
     have h1 := Nat.le_mul_self f.totalDegree
@@ -49,9 +50,7 @@ theorem planeResidueBound : PlaneResidueBound 161 := by
   let : Fact p.Prime := ⟨hp⟩
   classical
   let q := MvPolynomial.map (Int.castRingHom (ZMod p)) f
-  have hqd : q.totalDegree ≤ f.totalDegree := by
-    unfold totalDegree
-    exact Finset.sup_mono (support_map_subset _ _)
+  have hqd : q.totalDegree ≤ f.totalDegree := totalDegree_map_le _ _
   have hs : 27 * (q.totalDegree : ℝ) ^ 4 < (p : ℝ) := by
     apply lt_of_le_of_lt _ hsize
     gcongr

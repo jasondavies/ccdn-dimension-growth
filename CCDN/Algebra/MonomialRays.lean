@@ -7,7 +7,7 @@ module
 
 public import CCDN.ForMathlib.StandardMonomials
 public import CCDN.Hilbert.FilteredIntersection
-import CCDN.Hilbert.MonomialDimension
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.StandardMonomials
 /-!
 # Linear-growth monomial sets
@@ -26,14 +26,14 @@ instance finite_boundedStandardExponents {K σ : Type*} [Field K] [Fintype σ]
     (I : Ideal (MvPolynomial σ K)) (m : MonomialOrder σ) (N : ℕ) :
     Finite (Ideal.boundedStandardExponents I m N) := by
   classical
-  let e := boundedExponentEquivSym σ N
+  let e := Finsupp.degreeLeEquivSym σ N
   let f : Ideal.boundedStandardExponents I m N → Sym (Option σ) N :=
     fun a => e ⟨a.val, a.property.2⟩
   apply Finite.of_injective f
   intro a b h
   have he := e.injective h
   apply Subtype.ext
-  exact congrArg (fun p : {p : σ →₀ ℕ // p.sum (fun _ e => e) ≤ N} => p.val) he
+  exact congrArg (fun p : {p : σ →₀ ℕ // p.degree ≤ N} => p.val) he
 
 /-- A standard monomial with two large exponents supplies an entire square of
 independent quotient classes in degree at most `2B`. -/

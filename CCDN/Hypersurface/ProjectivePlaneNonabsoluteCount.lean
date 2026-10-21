@@ -10,6 +10,7 @@ import CCDN.Algebra.HomogeneousChartIrreducible
 import CCDN.Auxiliary.ProjectiveAffineChart
 import CCDN.Hypersurface.NonabsolutePlaneCount
 import CCDN.Plane.ProjectivePlaneBezout
+import CCDN.ForMathlib.MvPolynomial
 /-! Curves that are irreducible over the base field but split over an
 extension have at most d^2+d projective base-field points. -/
 
@@ -35,9 +36,8 @@ theorem nonabsolute_projective_plane_points_card_le {k K ι : Type*}
     apply irreducible_of_affineChart_irreducible
     · rw [affineChart_map]
       have hmapdegree (q : MvPolynomial (Fin 2) k) :
-          (map (algebraMap k K) q).totalDegree = q.totalDegree := by
-        unfold totalDegree
-        rw [support_map_of_injective _ (algebraMap k K).injective]
+          (map (algebraMap k K) q).totalDegree = q.totalDegree :=
+          totalDegree_map_of_injective (algebraMap k K).injective _
       rw [hmapdegree, hdeg, (hf.map _).totalDegree]
       exact fun h => hir.ne_zero
         ((map_injective (algebraMap k K) (algebraMap k K).injective) (by simpa using h))

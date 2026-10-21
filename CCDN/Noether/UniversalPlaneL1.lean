@@ -99,7 +99,7 @@ theorem ambientEulerEntry_monomial_l1_le {σ : Type*} (k : ℕ)
     simpa only [eulerCoefficientData, universalPlanePolynomial,
       AlgEquiv.symm_apply_apply, hm] using
       universalPlane_monomial_coefficient_l1_le m
-        ((boundedExponentEquivSym (Fin 2) (k + 2)).symm i).val
+        ((Finsupp.degreeLeEquivSym (Fin 2) (k + 2)).symm i).val
 
 end
 end CCDN

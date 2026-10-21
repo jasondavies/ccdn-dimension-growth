@@ -9,6 +9,7 @@ public import CCDN.Height.PrimitiveIntegerPolynomial
 public import Mathlib.Basic.Real.Basic
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
+import CCDN.ForMathlib.MvPolynomial
 /-! Primitive models preserve the equation's degree and homogeneous grading,
 and integer content removal does not increase coefficient height. -/
 
@@ -59,9 +60,8 @@ theorem exists_primitive_integer_model {σ : Type*} (f : MvPolynomial σ ℚ) (h
 lemma rational_scalar_model_degree {σ : Type*} {f : MvPolynomial σ ℚ}
     {g : MvPolynomial σ ℤ} {a : ℚ} (ha : a ≠ 0) (hf : f ≠ 0)
     (he : MvPolynomial.map (Int.castRingHom ℚ) g = C a * f) : g.totalDegree = f.totalDegree := by
-  have hd : (MvPolynomial.map (Int.castRingHom ℚ) g).totalDegree = g.totalDegree := by
-    unfold totalDegree
-    rw [support_map_of_injective _ Int.cast_injective]
+  have hd : (MvPolynomial.map (Int.castRingHom ℚ) g).totalDegree = g.totalDegree :=
+      totalDegree_map_of_injective Int.cast_injective _
   rw [he, totalDegree_mul_of_isDomain (C_eq_zero.not.mpr ha) hf, totalDegree_C, zero_add] at hd
   exact hd.symm
 

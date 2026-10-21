@@ -10,6 +10,7 @@ public import Mathlib.RingTheory.Algebraic.Defs
 import CCDN.Hypersurface.NonabsolutePlaneCount
 import CCDN.Plane.PlaneHilbert
 import CCDN.Projection.PlaneProjectionKernel
+import CCDN.ForMathlib.MvPolynomial
 /-! The irreducible image equation has degree at most the original affine
 Hilbert degree. This is an upper bound; the degree need not be preserved. -/
 
@@ -73,7 +74,7 @@ theorem exists_plane_projection_equation_degree_le {K τ : Type*} [Field K] [Fin
     ∃ f : MvPolynomial (Fin 2) K, Irreducible f ∧ 0 < f.totalDegree ∧ f.totalDegree ≤ d ∧
       ∀ g, aeval a g ∈ I ↔ f ∣ g := by
   obtain ⟨f, hf, hker⟩ := exists_plane_projection_equation I a ha d hdegree j hj
-  refine ⟨f, hf, totalDegree_pos_of_nonzero_nonunit f hf.ne_zero hf.not_isUnit,
+  refine ⟨f, hf, totalDegree_pos_of_ne_zero_of_not_isUnit hf.ne_zero hf.not_isUnit,
     plane_projection_equation_degree_le I a ha d hdegree f hf.ne_zero hker, ?_⟩
   intro g
   have hh : aeval a g ∈ I ↔ g ∈ RingHom.ker (projectionCoordinateMap I a) := by

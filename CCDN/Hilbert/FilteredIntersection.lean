@@ -9,6 +9,7 @@ public import Mathlib.LinearAlgebra.Dimension.Finrank
 public import Mathlib.RingTheory.Ideal.Quotient.Operations
 public import Mathlib.RingTheory.MvPolynomial.IrreducibleQuadratic
 import Mathlib.LinearAlgebra.FiniteDimensional.Lemmas
+import CCDN.ForMathlib.LinearMap
 
 /-!
 # Filtered multiples in a two-equation ideal
@@ -107,11 +108,7 @@ lemma finrank_map_add_kernel_subspace_le {K M W : Type*} [Field K]
     (φ : M →ₗ[K] W) (V U : Submodule K M) [Module.Finite K V]
     (hUV : U ≤ V) (hUker : U ≤ φ.ker) :
     Module.finrank K (V.map φ) + Module.finrank K U ≤ Module.finrank K V := by
-  have h := LinearMap.finrank_range_add_finrank_ker (φ.domRestrict V)
-  rw [LinearMap.range_domRestrict, LinearMap.ker_domRestrict] at h
-  have hk := Submodule.finrank_map_subtype_eq V (φ.ker.comap V.subtype)
-  rw [Submodule.map_comap_subtype] at hk
-  rw [← hk] at h
+  have h := φ.finrank_map_add_finrank_inf_ker V
   have hle := Submodule.finrank_mono (le_inf hUV hUker)
   omega
 

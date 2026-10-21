@@ -11,6 +11,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Hypersurface.HypersurfaceCountError
 import CCDN.Plane.PlaneSectionSum
+import CCDN.ForMathlib.MvPolynomial
 /-! A sharp coefficient-uniform count for geometrically irreducible affine
 hypersurfaces over prime fields, proved by plane-section averaging. -/
 
@@ -28,16 +29,8 @@ theorem affine_hypersurface_finite_field_bound_option {n : ℕ}
     (Nat.card {z : Option (Fin (n + 2)) → ZMod p // eval z f = 0} : ℝ) ≤
       (p : ℝ) ^ (n + 2) + 164 * (f.totalDegree : ℝ) ^ 2 * (p : ℝ) ^ (n + 1) * Real.sqrt p := by
   have hir := mvPolynomial_irreducible_of_field_map (algebraMap (ZMod p) (AlgebraicClosure (ZMod p))) f hf
-  have hd : 0 < f.totalDegree := by
-    by_contra hn
-    have hc := totalDegree_eq_zero_iff_eq_C.mp (show f.totalDegree = 0 by omega)
-    have h0 : f.coeff 0 ≠ 0 := by
-      intro hz
-      apply hir.ne_zero
-      rw [hc, hz, map_zero]
-    apply hir.not_isUnit
-    rw [hc]
-    exact (isUnit_iff_ne_zero.mpr h0).map C
+  have hd : 0 < f.totalDegree :=
+    totalDegree_pos_of_ne_zero_of_not_isUnit hir.ne_zero hir.not_isUnit
   have hdR : (1 : ℝ) ≤ f.totalDegree := by exact_mod_cast hd
   have hpN : 27 * f.totalDegree ^ 4 < p := by exact_mod_cast hsize
   have hchar : 2 * f.totalDegree ^ 2 < p := by

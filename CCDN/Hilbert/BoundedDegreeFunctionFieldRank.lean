@@ -9,7 +9,7 @@ public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Curve.CurveFunctionField
 import CCDN.Hilbert.FunctionFieldRank
-import CCDN.Hilbert.MonomialDimension
+import CCDN.ForMathlib.MvPolynomial
 import CCDN.Hilbert.ScaledHilbertBlockComparison
 import CCDN.Projection.LinearProjectionFiltration
 import Mathlib.LinearAlgebra.Basis.VectorSpace

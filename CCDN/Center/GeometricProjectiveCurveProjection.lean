@@ -13,6 +13,7 @@ public import CCDN.Projection.DegreePreservingProjectionBox
 import CCDN.Center.GeometricCurveCountReduction
 import CCDN.Center.GeometricCurveProjection
 import CCDN.Center.HomogeneousCurveHilbert
+import CCDN.Center.ProjectiveIncidencePermutation
 import CCDN.Hilbert.HilbertCoordinateIndependence
 import CCDN.Projection.AffineProjectionCount
 import CCDN.Projection.ProjectionScalarExtension
@@ -40,6 +41,20 @@ theorem exists_coordinate_not_mem_of_positive_hilbert_dimension
   have he : (X i : MvPolynomial U K) = 0 :=
     hAI.eq_zero_of_aeval_eq_zero (X i) (by simpa using hz)
   exact X_ne_zero i he
+
+/-- A homogeneous prime of positive Hilbert dimension can be moved by a coordinate permutation
+so that `X 0` is not in it, keeping it homogeneous and keeping its Hilbert polynomial. -/
+theorem exists_projectivePermutedIdeal_chart {K : Type*} [Field K] {n : ℕ}
+    (J : Ideal (MvPolynomial (Fin (n + 1)) K)) [J.IsPrime] (hJ : IsHomogeneousIdeal J)
+    (hdim : 0 < (filteredHilbertPolynomial J).natDegree) :
+    ∃ e : Equiv.Perm (Fin (n + 1)), IsHomogeneousIdeal (projectivePermutedIdeal J e) ∧
+      X 0 ∉ projectivePermutedIdeal J e ∧
+      filteredHilbertPolynomial (projectivePermutedIdeal J e) = filteredHilbertPolynomial J := by
+  obtain ⟨j, hj⟩ := exists_coordinate_not_mem_of_positive_hilbert_dimension J hdim
+  refine ⟨Equiv.swap 0 j, projectivePermutedIdeal_homogeneous J hJ _, ?_,
+    projectivePermutedIdeal_filteredHilbertPolynomial J _⟩
+  rw [mem_projectivePermutedIdeal, rename_X]
+  simpa only [Equiv.swap_apply_left] using hj
 
 theorem projectivePermutedIdeal_geometrically_prime
     {K L : Type*} [Field K] [Field L] [Algebra K L] {n : ℕ}

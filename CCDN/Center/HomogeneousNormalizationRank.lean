@@ -66,10 +66,8 @@ theorem homogeneous_normalization_functionField_finrank
   let R := IntermediateField.adjoin K (Set.range v)
   let u : Fin (m + 1) → R := fun i =>
     ⟨v i, IntermediateField.subset_adjoin K _ ⟨i, rfl⟩⟩
-  have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) := by
-    change Function.Injective (aeval (fun i => (Ideal.Quotient.mk I) (a i)))
-    rw [← projectionCoordinateMap_eq_aeval]
-    exact hi
+  have hiA : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) :=
+    injective_projectionCoordinateMap_iff.mp hi
   have hiF : AlgebraicIndependent K v := hiA.map' (IsFractionRing.injective A F)
   have hiR : AlgebraicIndependent K u := AlgebraicIndependent.of_comp R.val hiF
   let P := MvPolynomial (Fin (m + 1)) K

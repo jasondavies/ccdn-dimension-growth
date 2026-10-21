@@ -8,6 +8,7 @@ module
 import all ArithmeticHeights.BombieriVaaler
 public import CCDN.Determinant.SingularReduction
 import CCDN.Determinant.PlaneMultiplicitySmooth
+import CCDN.ForMathlib.MvPolynomial
 
 /-! The local exponent at a possibly singular plane reduction, bounded by
 the residue-point count plus the singular correction. -/
@@ -18,17 +19,8 @@ noncomputable section
 open Finset Real MvPolynomial
 
 lemma irreducible_mvPolynomial_totalDegree_pos {K σ : Type*} [Field K]
-    {f : MvPolynomial σ K} (hf : Irreducible f) : 0 < f.totalDegree := by
-  by_contra hn
-  have hd : f.totalDegree = 0 := by omega
-  have he : f = C (f.coeff 0) := totalDegree_eq_zero_iff_eq_C.mp hd
-  have hc : f.coeff 0 ≠ 0 := by
-    intro hc
-    apply hf.ne_zero
-    rw [he, hc, map_zero]
-  apply hf.not_isUnit
-  rw [he]
-  exact (isUnit_iff_ne_zero.mpr hc).map C
+    {f : MvPolynomial σ K} (hf : Irreducible f) : 0 < f.totalDegree :=
+  totalDegree_pos_of_ne_zero_of_not_isUnit hf.ne_zero hf.not_isUnit
 
 /-- The local exponent can be bounded using the reduced point count
 and the proved degree-dependent singular correction. -/

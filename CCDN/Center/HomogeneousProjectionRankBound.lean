@@ -66,10 +66,8 @@ theorem homogeneous_projection_functionField_rank_bound
   let : Algebra E F := (L.val.comp E.val).toRingHom.toAlgebra
   let : IsScalarTower K E F := IsScalarTower.of_algHom (L.val.comp E.val)
   let : IsScalarTower E L F := IsScalarTower.of_algebraMap_eq (fun _ => rfl)
-  have hvB : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk J) (b i)) := by
-    change Function.Injective (aeval (fun i => (Ideal.Quotient.mk J) (b i)))
-    rw [← projectionCoordinateMap_eq_aeval]
-    exact hbinj
+  have hvB : AlgebraicIndependent K (fun i => (Ideal.Quotient.mk J) (b i)) :=
+    injective_projectionCoordinateMap_iff.mp hbinj
   have hv : AlgebraicIndependent K v := hvB.map' (projectionImageFieldMap_injective I a)
   have hu : AlgebraicIndependent K u := AlgebraicIndependent.of_comp E.val hv
   let l : Fin (m + 1) → MvPolynomial (Fin n) K := fun i => aeval a (b i)

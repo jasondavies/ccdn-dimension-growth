@@ -7,6 +7,7 @@ module
 
 public import CCDN.Projection.DegreePreservingProjectionBox
 public import CCDN.Plane.Plane
+import CCDN.ForMathlib.Log
 /-! Absorb the degree-dependent projection box factor into a constant depending
 only on ambient dimension, retaining the exact exponent 1/d and d³ factor. -/
 
@@ -26,10 +27,8 @@ lemma projectionBoxFactor_log_le (n : ℕ) {d : ℕ} (hd : 0 < d) :
   have hd1 : (1 : ℝ) ≤ d := by exact_mod_cast hd
   have hn0 : (0 : ℝ) < n + 1 := by positivity
   have hd0 : (0 : ℝ) < d + 1 := by positivity
-  have hln : Real.log ((n : ℝ) + 1) ≤ n := by
-    simpa only [add_sub_cancel_right] using Real.log_le_sub_one_of_pos hn0
-  have hld : Real.log ((d : ℝ) + 1) ≤ d := by
-    simpa only [add_sub_cancel_right] using Real.log_le_sub_one_of_pos hd0
+  have hln : Real.log ((n : ℝ) + 1) ≤ n := Real.log_add_one_le_self hn
+  have hld : Real.log ((d : ℝ) + 1) ≤ d := Real.log_add_one_le_self d.cast_nonneg
   unfold projectionBoxFactor
   rw [Real.log_mul hn0.ne' (pow_pos (pow_pos (mul_pos hn0 hd0) _) _).ne',
     Real.log_pow, Real.log_pow, Real.log_mul hn0.ne' hd0.ne']

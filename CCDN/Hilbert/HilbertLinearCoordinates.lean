@@ -9,7 +9,7 @@ public import CCDN.Projection.LinearProjectionFiltration
 public import Mathlib.RingTheory.AlgebraicIndependent.Defs
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Hilbert.HilbertPolynomialComparison
-import CCDN.Hilbert.MonomialDimension
+import CCDN.ForMathlib.MvPolynomial
 import Mathlib.Algebra.MvPolynomial.Monad
 import Mathlib.LinearAlgebra.Dimension.StrongRankCondition
 import Mathlib.LinearAlgebra.FreeModule.StrongRankCondition
@@ -31,6 +31,15 @@ lemma projectionCoordinateMap_eq_aeval {K σ τ : Type*} [Field K]
   ext i
   simp [projectionCoordinateMap]
 
+/-- The projection map is injective exactly when the images of the coordinates in the quotient
+are algebraically independent. -/
+lemma injective_projectionCoordinateMap_iff {K σ τ : Type*} [Field K]
+    {I : Ideal (MvPolynomial τ K)} {a : σ → MvPolynomial τ K} :
+    Function.Injective (projectionCoordinateMap I a) ↔
+      AlgebraicIndependent K (fun i => (Ideal.Quotient.mk I) (a i)) := by
+  rw [projectionCoordinateMap_eq_aeval]
+  rfl
+
 lemma independent_linear_filtered_finrank_lower
     {K σ τ : Type*} [Field K] [Fintype σ] [Fintype τ]
     (I : Ideal (MvPolynomial τ K)) (a : σ → MvPolynomial τ K)
@@ -44,10 +53,7 @@ lemma independent_linear_filtered_finrank_lower
     (ψ.toLinearMap.comp V.subtype).codRestrict _ (fun v =>
       projectionCoordinateMap_filtered I a ha v.val
         ((mem_restrictTotalDegree _ _ _).mp v.property))
-  have hinj : Function.Injective ψ := by
-    rw [show ψ = aeval (fun i => (Ideal.Quotient.mk I) (a i)) from
-      projectionCoordinateMap_eq_aeval I a]
-    exact hi
+  have hinj : Function.Injective ψ := injective_projectionCoordinateMap_iff.mpr hi
   have hiT : Function.Injective T := by
     intro x y h
     apply Subtype.ext
@@ -84,8 +90,8 @@ theorem linear_projection_not_injective_of_hilbert_dimension_lt
     (hd : (filteredHilbertPolynomial I).natDegree < Fintype.card σ) :
     ¬ Function.Injective (projectionCoordinateMap I a) := by
   intro hinj
-  rw [projectionCoordinateMap_eq_aeval] at hinj
-  exact (not_le_of_gt hd) (independent_linear_card_le_hilbert_dimension I a ha hinj)
+  exact (not_le_of_gt hd) (independent_linear_card_le_hilbert_dimension I a ha
+    (injective_projectionCoordinateMap_iff.mp hinj))
 
 end
 end CCDN
