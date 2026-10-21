@@ -37,6 +37,12 @@ private theorem homogeneous_absolute_chart_data
   exact affineChart_irreducible_of_not_variable_dvd _ (hf.map _) hir
     (variable_not_dvd_irreducible_homogeneous _ (hf.map _) hir hd 0)
 
+/-- Coefficient-uniform projective plane count: for a primitive ternary integer form `f` of degree
+`d ≥ 2`, absolutely irreducible over an algebraically closed field of characteristic zero, the
+number of distinct projective points with primitive integer coordinates in the box of size `B` on
+`f = 0` is at most the maximum of the two degree bounds of the scaled plane count with residue
+constant `projectivePlaneDeterminantConstant`. The proof first moves `f` by a bounded integral
+coordinate change. -/
 theorem projective_plane_finite_count_positioned
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {d t : ℕ}
     (f : MvPolynomial (Fin 3) ℤ) (hf : f.IsHomogeneous d) (hd : 2 ≤ d)

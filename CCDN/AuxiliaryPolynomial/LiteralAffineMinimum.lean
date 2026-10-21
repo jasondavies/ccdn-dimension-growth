@@ -45,6 +45,10 @@ private theorem literal_scaled_hypersurface_auxiliary_badPrime_bound {n : ℕ}
   exact scaled_hypersurface_auxiliary_bound_of_badPrime_le f hf hd hp hA hB hBp
     (mul_nonneg (Real.exp_pos _).le hb) hb le_rfl
 
+/-- Let `f` be a primitive, irreducible and absolutely irreducible integer polynomial of positive
+degree, and `p ≤ B` a prime not dividing its constant coefficient with `B / A ≤ p`. Then `f` has
+a box auxiliary polynomial of degree at most `affineMinimumAuxiliaryBound`, with the height of
+the leading form of `f` and the literal affine bad-prime factor of `f`. -/
 theorem literal_prime_scaled_affine_auxiliary_minimum {n : ℕ}
     (f : MvPolynomial (Fin (n + 2)) ℤ) (hprim : PrimitiveIntegerPolynomial f)
     (hir : Irreducible f)

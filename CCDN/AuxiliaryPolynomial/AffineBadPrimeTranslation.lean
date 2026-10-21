@@ -29,6 +29,8 @@ private lemma hypersurfaceBadReduction_affineTranslation {n : ℕ}
   rw [affineTranslation_map, affineTranslation_totalDegree, affineTranslation_totalDegree,
     affineTranslation_irreducible_iff]
 
+/-- The bad-prime factor of an integral polynomial is invariant under integral affine
+translation of the variables. -/
 theorem hypersurfaceBadPrimeFactor_affineTranslation {n : ℕ}
     (a : Fin (n + 1) → ℤ) (f : MvPolynomial (Fin (n + 1)) ℤ) :
     hypersurfaceBadPrimeFactor (affineTranslation ℤ a f) = hypersurfaceBadPrimeFactor f := by

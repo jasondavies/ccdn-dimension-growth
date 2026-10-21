@@ -19,6 +19,7 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The constant `hypersurfaceAbsoluteAuxiliaryConstant n` is at least `1`. -/
 lemma hypersurfaceAbsoluteAuxiliaryConstant_one_le (n : ℕ) :
     1 ≤ hypersurfaceAbsoluteAuxiliaryConstant n := by
   have hC :

@@ -53,13 +53,17 @@ theorem irreducible_of_full_degree_map {K σ τ : Type*} [Field K]
     have hz := (isUnit_iff_totalDegree_of_isReduced.mp hu).2
     exact polynomial_isUnit_of_nonzero_degree_zero b hb0 (by omega)
 
+/-- The ring homomorphism restricting a polynomial in the coordinates `σ` to the affine plane
+`a + s • b + t • c` whose base point and directions are given by the parameters `v`, as a
+polynomial in the plane coordinates `s` and `t`. -/
 def planeSectionPolynomialHom {K σ : Type*} [CommRing K] (v : PlaneParameters σ → K) :
     MvPolynomial σ K →+* MvPolynomial (Fin 2) K :=
   (bivariatePolynomialEquiv K).symm.toRingHom.comp
     ((bivariateMap (eval v)).comp
       ((bivariatePolynomialEquiv _).toRingHom.comp (universalPlaneMap K σ).toRingHom))
 
-/-- Full degree excludes factor loss even for degenerate plane parameters. -/
+/-- If the plane section of `f` at parameters `v` is irreducible and keeps the total degree of `f`,
+then `f` is irreducible; the parameters `v` may be degenerate. -/
 theorem irreducible_of_full_degree_planeSection {K σ : Type*} [Field K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K)
     (hir : Irreducible (universalPlaneSection f v))

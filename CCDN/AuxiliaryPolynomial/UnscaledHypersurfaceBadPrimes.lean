@@ -35,6 +35,8 @@ private lemma affineChart_not_variable_dvd_of_full_degree {K : Type*} [Field K] 
   rw [← hchart, hd, hdeg] at hle
   omega
 
+/-- A nonzero integer polynomial is absolutely irreducible if and only if its ordinary
+homogenization is. -/
 lemma unscaledHomogenize_absolute_irreducible_iff {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) :
     AbsolutelyIrreducible (scaledHomogenize f.totalDegree 1 f) ↔ AbsolutelyIrreducible f := by

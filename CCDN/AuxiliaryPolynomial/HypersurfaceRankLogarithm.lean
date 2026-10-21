@@ -16,6 +16,8 @@ term log(d)+r*log(M), with an explicit error depending only on dimension. -/
 namespace CCDN
 noncomputable section
 
+/-- The dimension constant `r log 2 + log r! + r log (r + 1)` bounding the deviation of the
+logarithm of the hypersurface Hilbert function from `log d + r log M`. -/
 def hypersurfaceRankLogError (r : ℕ) : ℝ :=
   (r : ℝ) * Real.log 2 + Real.log (r.factorial : ℝ) + r * Real.log (r + 1 : ℝ)
 

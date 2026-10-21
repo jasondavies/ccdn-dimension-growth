@@ -16,6 +16,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Evaluating a homogeneous polynomial of degree `d` at `a • v` multiplies its value at `v` by
+`a ^ d`. -/
 lemma homogeneous_eval_smul {K σ : Type*} [CommSemiring K]
     {f : MvPolynomial σ K} {d : ℕ} (hf : f.IsHomogeneous d)
     (a : K) (v : σ → K) :
@@ -35,6 +37,8 @@ lemma homogeneous_eval_smul {K σ : Type*} [CommSemiring K]
   rw [hd]
   ring
 
+/-- Over a field, a homogeneous polynomial vanishes at `a • v`, for `a ≠ 0`, exactly when it
+vanishes at `v`. -/
 lemma homogeneous_eval_zero_iff_smul {K σ : Type*} [Field K]
     {f : MvPolynomial σ K} {d : ℕ} (hf : f.IsHomogeneous d)
     {a : K} (ha : a ≠ 0) (v : σ → K) :
@@ -42,6 +46,8 @@ lemma homogeneous_eval_zero_iff_smul {K σ : Type*} [Field K]
   rw [homogeneous_eval_smul hf, mul_eq_zero]
   simp [pow_ne_zero _ ha]
 
+/-- A homogeneous polynomial vanishes at one nonzero vector exactly when it vanishes at any other
+nonzero vector spanning the same projective point. -/
 lemma homogeneous_eval_zero_iff_projective_eq {K : Type*} [Field K] {n d : ℕ}
     {f : MvPolynomial (Fin (n + 1)) K} (hf : f.IsHomogeneous d)
     {v w : Fin (n + 1) → K} (hv : v ≠ 0) (hw : w ≠ 0)
@@ -51,11 +57,14 @@ lemma homogeneous_eval_zero_iff_projective_eq {K : Type*} [Field K] {n d : ℕ}
   rw [← ha]
   exact homogeneous_eval_zero_iff_smul hf a.ne_zero w
 
-/-- For homogeneous `f`, this is its well-defined projective zero locus. -/
+/-- The projective points whose chosen representative is a zero of `f`; for homogeneous `f`
+this is the projective zero locus of `f`, independent of the representative. -/
 def projectiveZeroLocus {K : Type*} [Field K] {n : ℕ} (f : MvPolynomial (Fin (n + 1)) K) :
     Set (Projectivization K (Fin (n + 1) → K)) :=
   {x | eval x.rep f = 0}
 
+/-- For homogeneous `f`, the projective point spanned by a nonzero vector `v` lies in the
+projective zero locus of `f` exactly when `f` vanishes at `v`. -/
 lemma mem_projectiveZeroLocus_mk {K : Type*} [Field K] {n d : ℕ}
     {f : MvPolynomial (Fin (n + 1)) K} (hf : f.IsHomogeneous d)
     (v : Fin (n + 1) → K) (hv : v ≠ 0) :
@@ -64,6 +73,8 @@ lemma mem_projectiveZeroLocus_mk {K : Type*} [Field K] {n d : ℕ}
     (Projectivization.mk K v hv).rep_nonzero hv
     (Projectivization.mk K v hv).mk_rep
 
+/-- For homogeneous rational `f`, a rational projective point lies in the zero locus of `f` exactly
+when `f` vanishes at its primitive integer representative. -/
 lemma mem_projectiveZeroLocus_primitive {n d : ℕ}
     {f : MvPolynomial (Fin (n + 1)) ℚ} (hf : f.IsHomogeneous d)
     (x : ProjectivePoint n) :
@@ -73,6 +84,9 @@ lemma mem_projectiveZeroLocus_primitive {n d : ℕ}
     (rationalPoint_ne_zero (primitiveProjectiveRep_ne_zero x))
   rwa [primitiveProjectiveRep_mk] at h
 
+/-- For a homogeneous integer polynomial `f`, a rational projective point lies in the projective
+zero locus of `f` (viewed over `ℚ`) exactly when `f` vanishes at the point's primitive integer
+representative. -/
 lemma mem_integer_projectiveZeroLocus {n d : ℕ}
     {f : MvPolynomial (Fin (n + 1)) ℤ} (hf : f.IsHomogeneous d)
     (x : ProjectivePoint n) :

@@ -27,6 +27,8 @@ private lemma inverse_rpow_le_of_log_position {H L q D : ℝ} (hH : 0 < H) (hL :
     Real.log_one, Real.log_exp, Real.log_rpow hL, Real.log_rpow hH]
   nlinarith [mul_le_mul_of_nonneg_left hposition hq]
 
+/-- Replacing the coefficient height `H` by the leading height `L` in the small-height threshold
+costs at most a factor `exp (T / (n + 1))`, provided `log H ≤ log L + T d d^(1/(n+1))`. -/
 lemma hypersurfaceSmallThreshold_position {n d : ℕ} {B H L A T : ℝ}
     (hd : 0 < d) (hB : 0 ≤ B) (hH : 0 < H) (hL : 0 < L) (hA : 0 ≤ A)
     (hposition : Real.log H ≤ Real.log L + T * d * degreeRoot n d) :

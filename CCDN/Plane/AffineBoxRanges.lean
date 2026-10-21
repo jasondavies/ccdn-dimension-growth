@@ -73,6 +73,9 @@ private lemma small_box_power_bound {d : ℕ} (hd : 0 < d) {S B : ℝ} (hS : 1 �
   apply (div_le_iff₀ hd0).mpr
   nlinarith
 
+/-- In the small-box range `1 ≤ B ≤ S * d ^ 2` (with `1 ≤ S`), the unscaled auxiliary degree bound
+`d * scaledPlaneAuxiliaryDegreeBound d C ((d + 1) * B) 1` is at most a constant depending only on
+`S` and `C`, times `d ^ 4`. -/
 lemma small_box_unscaled_degree_bound {d : ℕ} (hd : 0 < d) {S B C : ℝ}
     (hS : 1 ≤ S) (hB : 1 ≤ B) (hBS : B ≤ S * (d : ℝ) ^ 2) :
     (d : ℝ) * scaledPlaneAuxiliaryDegreeBound d C (((d : ℝ) + 1) * B) 1 ≤

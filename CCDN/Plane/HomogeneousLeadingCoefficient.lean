@@ -20,6 +20,8 @@ noncomputable section
 open MvPolynomial
 open scoped MonomialOrder
 
+/-- Every exponent of total degree at most `d` is lexicographically at most the pure power
+`x₀ ^ d` of the first variable. -/
 lemma exponent_le_pure_first {n d : ℕ} (m : Fin (n + 1) →₀ ℕ)
     (hm : m.sum (fun _ e => e) ≤ d) : m ≼[MonomialOrder.lex] Finsupp.single 0 d := by
   have hs := exponent_degree_split m
@@ -44,6 +46,8 @@ lemma exponent_le_pure_first {n d : ℕ} (m : Fin (n + 1) →₀ ℕ)
     · simp only [ofLex_toLex, Finsupp.single_eq_same]
       omega
 
+/-- If `f` has total degree at most `d` and a nonzero coefficient at `x₀ ^ d`, then its
+lexicographic leading coefficient is that coefficient. -/
 lemma lex_leadingCoeff_eq_pure_first {R : Type*} [CommRing R] {n d : ℕ}
     (f : MvPolynomial (Fin (n + 1)) R) (hd : f.totalDegree ≤ d)
     (hc : f.coeff (Finsupp.single 0 d) ≠ 0) :
@@ -72,6 +76,8 @@ private lemma homogeneous_pure_first_coefficient {R : Type*} [CommRing R] {n d :
   rw [← affineChart_eval, eval_zero]
   exact hc.symm
 
+/-- For `f` homogeneous of degree `d`, the coefficient of `x₀ ^ d` in the translate
+`homogeneousTranslation R a f` is the value `f (1, a)`. -/
 lemma homogeneousTranslation_pure_first {R : Type*} [CommRing R] {n d : ℕ}
     (a : Fin n → R) (f : MvPolynomial (Fin (n + 1)) R) (hf : f.IsHomogeneous d) :
     (homogeneousTranslation R a f).coeff (Finsupp.single 0 d) = eval (Fin.cons 1 a) f := by

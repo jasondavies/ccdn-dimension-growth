@@ -28,6 +28,13 @@ the sharp finite-field count is an explicit geometric hypothesis.
 namespace CCDN
 open Real
 
+/-- Affine plane count with exponent `1 / d` when the constant coefficient is nonzero and of small
+logarithmic height: if `f` is a primitive integer polynomial of degree `d ≥ 1`, absolutely
+irreducible over an algebraically closed field of characteristic zero, with
+`log |f(0)| < B / scalingPrimeRatio` and satisfying the finite-field residue count hypothesis,
+then the number of its integer zeros in the box of size `B ≥ scalingPrimeRatio` is at most an
+explicit constant times `d ^ 3 * B ^ (1 / d) * (log B + d)`. The proof reduces modulo a scaling
+prime. -/
 theorem plane_finite_count_small_constant_coefficient
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {t : ℕ}
     (f : MvPolynomial (Fin 2) ℤ) (hprim : PrimitiveIntegerPolynomial f)
@@ -60,6 +67,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Real
 
+/-- The threshold constant `(12 * scalingPrimeRatio) ^ 2` separating small boxes
+`B ≤ affineSmallBoxScale * d ^ 2` from large boxes in the affine plane count. -/
 def affineSmallBoxScale : ℝ := (12 * scalingPrimeRatio) ^ 2
 
 private lemma affineSmallBoxScale_one_le : 1 ≤ affineSmallBoxScale := by
@@ -81,12 +90,14 @@ def affineNonzeroConstantBound (C : ℝ) : ℝ :=
   (Real.log affineSmallBoxScale + 6 + 2 * Real.exp (heightDeterminantError C + 23) * Real.exp 14 *
     Real.exp (2 * Real.log affineSmallBoxScale + 6))
 
+/-- The constant `affineNonzeroConstantBound C` is positive. -/
 lemma affineNonzeroConstantBound_pos (C : ℝ) : 0 < affineNonzeroConstantBound C := by
   have hA : 0 < scalingPrimeRatio := zero_lt_one.trans_le scalingPrimeRatio_one_le
   have hS := Real.log_nonneg affineSmallBoxScale_one_le
   unfold affineNonzeroConstantBound
   positivity
 
+/-- For `d ≥ 1` and `B ≥ 1`, the curve bound `curveBound d B` is at least `d ^ 4`. -/
 lemma degree_four_le_curveBound {d : ℕ} (hd : 0 < d) {B : ℝ} (hB : 1 ≤ B) :
     (d : ℝ) ^ 4 ≤ curveBound d B := by
   have hd0 : (0 : ℝ) < d := by exact_mod_cast hd

@@ -19,6 +19,8 @@ and coefficient height, leaving O_r(d^(4-1/r)). -/
 namespace CCDN
 noncomputable section
 
+/-- The additive error term, depending only on the dimension `r` and the constants `E` and `T`,
+in the large-height bound `log M ≤ hypersurfaceLargeHeightError r E T + (4 - 1/r) log d`. -/
 def hypersurfaceLargeHeightError (r : ℕ) (E T : ℝ) : ℝ :=
   Real.log (8 * (r : ℝ)) + (E + hypersurfaceRankLogError r + T) / r
 
@@ -80,6 +82,8 @@ theorem hypersurface_large_height_log_degree_bound {r d M s : ℕ}
   field_simp
   ring
 
+/-- Exponentiating a logarithmic degree bound: if `log M ≤ C + (4 - 1/r) log d` with `d` and `M`
+positive, then `M ≤ exp C * d ^ (4 - 1/r)`. -/
 lemma hypersurface_large_degree_bound_of_log_bound {r d M : ℕ} {C : ℝ}
     (hd : 0 < d) (hM : 0 < M)
     (hlog : Real.log M ≤ C + (4 - 1 / (r : ℝ)) * Real.log d) :

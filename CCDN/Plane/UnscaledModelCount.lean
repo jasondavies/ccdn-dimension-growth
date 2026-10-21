@@ -20,6 +20,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Real
 
+/-- The homogenization (with scaling factor `1`) of a primitive integer polynomial is
+primitive. -/
 lemma PrimitiveIntegerPolynomial.scaledHomogenize_one {n : ℕ}
     {f : MvPolynomial (Fin n) ℤ} (hf : PrimitiveIntegerPolynomial f) (d : ℕ) :
     PrimitiveIntegerPolynomial (CCDN.scaledHomogenize d 1 f) := by

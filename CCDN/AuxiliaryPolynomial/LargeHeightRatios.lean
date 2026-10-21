@@ -15,6 +15,10 @@ and leaves a negative logarithmic-height term to control the bad-prime factor. -
 namespace CCDN
 noncomputable section
 
+/-- Abstract real-variable form of the large-height step: if `a` is the normalized rank ratio,
+`k` the kernel ratio and the comparison `a * u ≤ b - k * l` holds, with `M ≥ 8 d (r + 1)`,
+the height `h` at least `2 d (r + 1) b` and at most `l + T d X`, then
+`u ≤ T - h / (8 d X)`. -/
 lemma auxiliary_large_height_bracket_bound {r d M X a k u b l h T : ℝ}
     (hr : 0 ≤ r) (hd : 1 ≤ d) (hM : 8 * d * (r + 1) ≤ M) (hX : 0 < X)
     (halow : X * (M - d) / ((r + 1) * M) ≤ a)

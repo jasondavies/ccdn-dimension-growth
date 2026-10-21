@@ -24,6 +24,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The ordinary homogenization (scaling factor one) of an integer polynomial has the same
+coefficient height as the polynomial. -/
 lemma integerCoefficientHeight_scaledHomogenize_one {n : ℕ} (d : ℕ)
     (f : MvPolynomial (Fin n) ℤ) :
     integerCoefficientHeight (scaledHomogenize d 1 f) = integerCoefficientHeight f := by
@@ -64,6 +66,8 @@ private lemma scaledHomogenize_one_integer_irreducible {n : ℕ}
   exact scaledHomogenize_irreducible _ (rational_map_irreducible_of_integer f hir hd)
     (by simp)
 
+/-- If a form `G` is not divisible by the ordinary homogenization of a nonzero primitive integer
+polynomial `f`, then its dehomogenization at `x₀ = 1` is not divisible by `f`. -/
 lemma unscaled_auxiliary_not_dvd {n M : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf0 : f ≠ 0) (hprim : PrimitiveIntegerPolynomial f)
     (G : MvPolynomial (Fin (n + 1)) ℤ) (hGhom : G.IsHomogeneous M)

@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 open Polynomial
 
+/-- Evaluating the nested-polynomial form of a bivariate polynomial `f` at `(x, y)` (inner
+variable at `y`, outer variable at `x`) agrees with evaluating `f` at `![x, y]`. -/
 lemma bivariatePolynomialEquiv_eval {R : Type*} [CommRing R]
     (f : MvPolynomial (Fin 2) R) (x y : R) :
     (Polynomial.map (Polynomial.evalRingHom y) (bivariatePolynomialEquiv R f)).eval x =
@@ -53,8 +55,9 @@ theorem bivariate_coefficient_bound_of_integer_grid (f : ℝ[X][X]) {d : ℕ}
         ← natCast_fin_two_eq] at hh) (Finsupp.cons i (Finsupp.single 0 j))
   rwa [← bivariatePolynomialEquiv_coeff, AlgEquiv.apply_symm_apply] at h
 
-/-- The integer version also supplies a nonzero value for every nonzero
-plane equation. -/
+/-- A nonzero integer plane polynomial of total degree at most `d` has a nonzero value at some
+natural point `(x, y)` with `x, y ≤ d`, and every coefficient is bounded by
+`(d + 1) ^ (2 * (d + 1))` times the absolute value of that value. -/
 theorem exists_integer_plane_grid_height_witness (f : MvPolynomial (Fin 2) ℤ)
     (hf : f ≠ 0) {d : ℕ} (hd : f.totalDegree ≤ d) :
     ∃ x y : ℕ, x ≤ d ∧ y ≤ d ∧ MvPolynomial.eval ![(x : ℤ), (y : ℤ)] f ≠ 0 ∧ ∀ m,

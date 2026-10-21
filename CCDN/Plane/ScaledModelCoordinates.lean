@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The integer polynomial coordinate change `(h, x₁ - a₁ h, …, xₙ - aₙ h)` from affine
+coordinates to the coordinates of the translated scaled projective model. -/
 def scaledModelCoordinates {n : ℕ} (h : ℤ) (a : Fin n → ℤ) :
     Fin (n + 1) → MvPolynomial (Fin n) ℤ :=
   Fin.cons (C h) (fun j => X j - C (a j * h))
@@ -28,6 +30,8 @@ private lemma scaledModelCoordinates_eval {n : ℕ} (h : ℤ) (a z : Fin n → �
   funext i
   refine Fin.cases ?_ (fun j => ?_) i <;> simp [scaledModelCoordinates]
 
+/-- The translated scaled homogenization of `f`, evaluated at the scaled model coordinates of `z`,
+equals `h ^ deg f * f(z)`. -/
 lemma scaledModelCoordinates_model_eval {n : ℕ} (h : ℤ) (a z : Fin n → ℤ)
     (f : MvPolynomial (Fin n) ℤ) :
     eval (fun j => eval z (scaledModelCoordinates h a j))
@@ -37,6 +41,8 @@ lemma scaledModelCoordinates_model_eval {n : ℕ} (h : ℤ) (a z : Fin n → ℤ
   simp only [Fin.cons_zero, Fin.cons_succ, sub_add_cancel]
   exact scaledHomogenize_eval _ _ le_rfl _
 
+/-- For `0 ≤ h ≤ B`, translation parameters `0 ≤ a j ≤ d` and `z` in the box of size `B ≥ 1`, all
+scaled model coordinates of `z` have absolute value at most `(d + 1) * B`. -/
 lemma scaledModelCoordinates_box {n : ℕ} {B : ℝ} {d : ℕ} {h : ℤ}
     (hB : 1 ≤ B) (hh : 0 ≤ h) (hhB : (h : ℝ) ≤ B)
     (a z : Fin n → ℤ) (ha : ∀ j, 0 ≤ a j ∧ a j ≤ d)
@@ -58,6 +64,9 @@ lemma scaledModelCoordinates_box {n : ℕ} {B : ℝ} {d : ℕ} {h : ℤ}
       _ = |(z k : ℝ)| + (a k : ℝ) * h := by rw [abs_of_nonneg (mul_nonneg ha0 hhR)]
       _ ≤ ((d : ℝ) + 1) * B := by nlinarith [hz k]
 
+/-- A homogeneous auxiliary polynomial `g` of degree `M` not divisible by the translated scaled
+homogenization of `f` transports to a homogeneous `g'` of degree `M` not divisible by the scaled
+homogenization of `f`, with `g'(h, z)` equal to `g` at the scaled model coordinates of `z`. -/
 lemma scaledModelCoordinates_auxiliary_transport {n M : ℕ}
     (h : ℤ) (a : Fin n → ℤ) (f : MvPolynomial (Fin n) ℤ)
     (g : MvPolynomial (Fin (n + 1)) ℤ) (hg : g.IsHomogeneous M)

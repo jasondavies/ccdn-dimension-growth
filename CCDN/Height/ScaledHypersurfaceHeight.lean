@@ -17,7 +17,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-/-- The highest homogeneous part gains precisely h^d in coefficient height. -/
+/-- For `h ≥ 1`, the scaled homogenization of `f` in degree `d = f.totalDegree` has coefficient
+height at least `h ^ d` times the coefficient height of the top homogeneous component of `f`. -/
 theorem scaledHomogenize_leading_height_lower {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) {h : ℤ} (hh : 1 ≤ h) :
     (h : ℝ) ^ f.totalDegree *
@@ -43,6 +44,8 @@ theorem scaledHomogenize_leading_height_lower {n : ℕ}
   have he := (le_div_iff₀ hpow).mp hc
   simpa only [mul_comm] using he
 
+/-- The top homogeneous component of a nonzero integer polynomial has coefficient height at
+least `1`. -/
 lemma leading_height_one_le {n : ℕ} (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) :
     (1 : ℝ) ≤ integerCoefficientHeight (homogeneousComponent f.totalDegree f) := by
   exact_mod_cast integerCoefficientHeight_pos _ (homogeneousComponent_totalDegree_ne_zero hf)

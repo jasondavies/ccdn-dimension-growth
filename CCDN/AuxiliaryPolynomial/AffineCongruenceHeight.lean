@@ -22,6 +22,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- The logarithmic bad-prime charge in the affine congruence determinant estimate for a form
+of degree `d` in `m` variables with coefficient height at most `H`, where `Q` is the sum of
+the logarithms of the congruence primes. -/
 def congruenceHeightCharge (m d : ℕ) (H Q : ℝ) : ℝ :=
   Real.log (1 + 27 * (d : ℝ) ^ 4 *
     (hypersurfaceHeightConstant m * (1 + Real.log H / (d : ℝ) ^ 2)) + Q) +

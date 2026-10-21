@@ -15,6 +15,9 @@ comparison cost only a dimension constant times s^(1+1/r). -/
 namespace CCDN
 noncomputable section
 
+/-- The Hilbert function `s` of a degree-`d` hypersurface in `r + 2` homogeneous variables, given by
+`s + C(r + 1 + (M - d), M - d) = C(r + 1 + M, M)`, is at least `M` when `0 < r` and
+`0 < d ≤ M`. -/
 lemma hypersurface_rank_ge_degree_parameter {r d M s : ℕ}
     (hrpos : 0 < r) (hd : 0 < d) (hdM : d ≤ M)
     (hr : s + (r + 1 + (M - d)).choose (M - d) = (r + 1 + M).choose M) : M ≤ s := by
@@ -28,6 +31,7 @@ lemma hypersurface_rank_ge_degree_parameter {r d M s : ℕ}
   have he := Nat.sub_add_cancel hdM
   nlinarith
 
+/-- For `0 < r` and positive real `s`, `log s ≤ r * s ^ (1/r)`. -/
 lemma log_le_dimension_root {r : ℕ} (hr : 0 < r) {s : ℝ} (hs : 0 < s) :
     Real.log s ≤ (r : ℝ) * s ^ (1 / (r : ℝ)) := by
   have hr0 : (0 : ℝ) < r := by exact_mod_cast hr
@@ -57,6 +61,8 @@ private lemma hypersurface_rank_log_dimension_bound {r d M s : ℕ}
   rw [Real.log_pow, Real.log_mul (by norm_num) (by linarith : (s : ℝ) ≠ 0)] at hh
   simpa only [Nat.cast_add, Nat.cast_one] using hh
 
+/-- The dimension constant `((r + 2) r + (r + 1)) / 2` bounding the archimedean logarithmic
+terms of the determinant comparison by a multiple of `s ^ (1 + 1/r)`. -/
 def hypersurfaceArchimedeanError (r : ℕ) : ℝ := ((r + 2 : ℝ) * r + (r + 1 : ℝ)) / 2
 
 /-- The two archimedean logarithmic terms have the exact scale of the main

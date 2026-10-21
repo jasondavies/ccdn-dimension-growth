@@ -16,12 +16,17 @@ namespace CCDN
 noncomputable section
 open Real
 
+/-- The Hilbert function `s` of a plane curve of degree `d` in degree `M`, given by
+`2 s + d² = d (2 M + 3)`, is at least `M` when `0 < d ≤ M`. -/
 lemma plane_rank_ge_degree_parameter {s d M : ℕ} (hd : 0 < d) (hdM : d ≤ M)
     (hr : 2 * s + d ^ 2 = d * (2 * M + 3)) : M ≤ s := by
   have h := Nat.mul_le_mul_left (d - 1) hdM
   have he : d - 1 + 1 = d := Nat.sub_add_cancel hd
   nlinarith
 
+/-- For the Hilbert function `s` of a plane curve of degree `d` in degree `M ≥ d`, the archimedean
+terms `log s! / 2 + (s / 2) log C(M + 2, M)` of the determinant comparison are at most
+`5 s² / 2`. -/
 lemma plane_rank_archimedean_error {s d M : ℕ} (hd : 0 < d) (hdM : d ≤ M)
     (hr : 2 * s + d ^ 2 = d * (2 * M + 3)) :
     Real.log (s.factorial : ℝ) / 2 + (s : ℝ) / 2 * Real.log ((2 + M).choose M) ≤

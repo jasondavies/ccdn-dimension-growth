@@ -30,6 +30,10 @@ private theorem square_minorGcd_eq_abs_det {s : ℕ} (A : Matrix (Fin s) (Fin s)
   rw [Finset.gcd_eq_gcd_image, Finset.image_const univ_nonempty]
   simp only [Finset.gcd_singleton, id_eq, ← Int.abs_eq_normalize]
 
+/-- The lower bound for the logarithm of a nonzero `s × s` determinant of monomials evaluated
+at integral zeros of an absolutely irreducible affine equation of degree `d` in `n + 2`
+variables with coefficient height at most `H`, when the zeros lie in smooth residue classes
+modulo primes whose logarithms sum to `Q`. -/
 def affineCongruenceDeterminantLower (n d s : ℕ) (H Q : ℝ) : ℝ :=
   ((n + 1).factorial : ℝ) ^ (1 / (n + 1 : ℝ)) / (n + 2 : ℝ) *
     (s : ℝ) ^ (1 + 1 / (n + 1 : ℝ)) *

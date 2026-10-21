@@ -35,8 +35,12 @@ open MvPolynomial
 radius `B`: it is nonzero, it is not a multiple of `f`, and it vanishes at every integral zero
 of `f` all of whose coordinates are at most `B` in absolute value. -/
 structure IsBoxAuxiliary {n : ℕ} (f g : MvPolynomial (Fin n) ℤ) (B : ℝ) : Prop where
+  /-- The auxiliary polynomial is nonzero. -/
   ne_zero : g ≠ 0
+  /-- The auxiliary polynomial is not a multiple of `f`. -/
   not_dvd : ¬ f ∣ g
+  /-- The auxiliary polynomial vanishes at every integral zero of `f` in the box of radius
+  `B`. -/
   vanishes : ∀ x : IntPoint n, InBox x B → eval x f = 0 → eval x g = 0
 
 /-- Unbundled form of an auxiliary polynomial on a box satisfying a further condition `P`,
@@ -52,9 +56,13 @@ theorem exists_isBoxAuxiliary_and_iff {n : ℕ} {f : MvPolynomial (Fin n) ℤ} {
 nonzero form of degree `M` that vanishes at every point `z i` but is not a multiple of `f`. -/
 structure IsPointAuxiliary {σ R ι : Type*} [CommRing R] (f g : MvPolynomial σ R) (M : ℕ)
     (z : ι → σ → R) : Prop where
+  /-- The auxiliary form is nonzero. -/
   ne_zero : g ≠ 0
+  /-- The auxiliary form is homogeneous of degree `M`. -/
   isHomogeneous : g.IsHomogeneous M
+  /-- The auxiliary form vanishes at every point `z i`. -/
   eval_eq_zero : ∀ i, eval (z i) g = 0
+  /-- The auxiliary form is not a multiple of `f`. -/
   not_dvd : ¬ f ∣ g
 
 /-- Unbundled form of `CCDN.IsPointAuxiliary`. -/
@@ -79,11 +87,16 @@ a nonzero form of degree `M`, not a multiple of `f`, whose rational projective z
 contains every rational projective zero of `f` of multiplicative height at most `B`. -/
 structure IsProjectiveAuxiliary {n : ℕ} (f g : MvPolynomial (Fin (n + 1)) ℤ) (M : ℕ) (B : ℝ) :
     Prop where
+  /-- The auxiliary form is nonzero. -/
   ne_zero : g ≠ 0
+  /-- The auxiliary form is homogeneous of degree `M`. -/
   isHomogeneous : g.IsHomogeneous M
+  /-- The auxiliary form vanishes at every rational projective zero of `f` of multiplicative
+  height at most `B`. -/
   vanishes : ∀ x : ProjectivePoint n, x.mulHeight ≤ B →
     x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →
     x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) g)
+  /-- The auxiliary form is not a multiple of `f`. -/
   not_dvd : ¬ f ∣ g
 
 end CCDN

@@ -18,6 +18,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Let `p` be a prime not dividing the constant coefficient of the primitive integer polynomial
+`f`. If a form `g` is not divisible by the `p`-scaled homogenization of `f`, then over `ℚ` its
+slice at `x₀ = p` is not divisible by `f`. -/
 theorem scaled_auxiliary_rational_not_dvd {n M : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf0 : f ≠ 0) (hprim : PrimitiveIntegerPolynomial f)
     {p : ℕ} (hp : p.Prime) (hp0 : ¬ (p : ℤ) ∣ f.coeff 0)

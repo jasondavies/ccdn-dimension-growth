@@ -18,6 +18,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Geometric bad reduction at `p` is invariant under a bijective renaming of the
+variables. -/
 lemma hypersurfaceBadReduction_renameEquiv {σ τ : Type*} (e : σ ≃ τ)
     (f : MvPolynomial σ ℤ) (p : ℕ) :
     HypersurfaceBadReduction (rename e f) p ↔ HypersurfaceBadReduction f p := by
@@ -34,6 +36,8 @@ lemma hypersurfaceBadReduction_renameEquiv {σ τ : Type*} (e : σ ≃ τ)
   apply or_congr Iff.rfl
   exact not_congr (MulEquiv.irreducible_iff (f := renameEquiv (AlgebraicClosure (ZMod p)) e))
 
+/-- A bound `H` on the coefficients of `f` also bounds the coefficients of `f` after a
+bijective renaming of the variables. -/
 lemma polynomial_coefficient_bound_renameEquiv {σ τ : Type*} (e : σ ≃ τ)
     (f : MvPolynomial σ ℤ) (H : ℝ) (hf : CoefficientHeightLE f H) :
     CoefficientHeightLE (rename e f) H := by

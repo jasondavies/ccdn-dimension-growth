@@ -16,6 +16,8 @@ import Mathlib.Tactic.Linarith
 namespace CCDN
 noncomputable section
 
+/-- The numerical dimension inequality of the Stepanov method: for `p > 27 d⁴`, `x ^ 2 ≤ p`,
+`p ≤ y + d` and `N = x - 4 d² > 0`, one has `N (x + y + d + d² N) < (x - d²) (y - d²)`. -/
 lemma stepanov_numeric_dimension (d p x y N : ℕ) (hd : 0 < d)
     (hp : stepanovThreshold d < p) (hx : x ^ 2 ≤ p) (hy : p ≤ y + d)
     (hN : N + 4 * d ^ 2 = x) (hNpos : 0 < N) :

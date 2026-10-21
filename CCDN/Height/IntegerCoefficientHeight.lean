@@ -16,6 +16,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The height of an integer polynomial: the maximum absolute value of its coefficients, or `0` for
+the zero polynomial. -/
 def integerCoefficientHeight {σ : Type*} (f : MvPolynomial σ ℤ) : ℕ :=
   f.support.sup (fun m => (f.coeff m).natAbs)
 
@@ -24,6 +26,7 @@ coefficient height of `f` is at most `H` (`coefficientHeightLE_iff`). -/
 abbrev CoefficientHeightLE {σ : Type*} (f : MvPolynomial σ ℤ) (H : ℝ) : Prop :=
   ∀ m, |(f.coeff m : ℝ)| ≤ H
 
+/-- Every coefficient of `f` has absolute value at most the coefficient height of `f`. -/
 lemma coefficient_abs_le_integerCoefficientHeight {σ : Type*}
     (f : MvPolynomial σ ℤ) (m : σ →₀ ℕ) :
     |(f.coeff m : ℝ)| ≤ (integerCoefficientHeight f : ℝ) := by
@@ -34,6 +37,8 @@ lemma coefficient_abs_le_integerCoefficientHeight {σ : Type*}
   simpa only [Nat.cast_natAbs, Int.cast_abs] using
     (show ((f.coeff m).natAbs : ℝ) ≤ integerCoefficientHeight f by exact_mod_cast hh)
 
+/-- If every coefficient of `f` has absolute value at most a nonnegative real `H`, then the
+coefficient height of `f` is at most `H`. -/
 lemma integerCoefficientHeight_le {σ : Type*} (f : MvPolynomial σ ℤ)
     {H : ℝ} (hH : 0 ≤ H) (hc : CoefficientHeightLE f H) :
     (integerCoefficientHeight f : ℝ) ≤ H := by
@@ -52,6 +57,7 @@ lemma coefficientHeightLE_iff {σ : Type*} {f : MvPolynomial σ ℤ} {H : ℝ} :
   ⟨fun hc => integerCoefficientHeight_le f ((abs_nonneg _).trans (hc 0)) hc,
     fun hH m => (coefficient_abs_le_integerCoefficientHeight f m).trans hH⟩
 
+/-- A nonzero integer polynomial has positive coefficient height. -/
 lemma integerCoefficientHeight_pos {σ : Type*} (f : MvPolynomial σ ℤ) (hf : f ≠ 0) :
     0 < integerCoefficientHeight f := by
   obtain ⟨m, hne⟩ := MvPolynomial.exists_coeff_ne_zero hf

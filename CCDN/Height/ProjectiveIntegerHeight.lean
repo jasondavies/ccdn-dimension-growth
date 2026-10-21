@@ -15,6 +15,9 @@ maximum absolute coordinate. -/
 namespace CCDN
 noncomputable section
 
+/-- If the chosen representative of `x` has nonzero first coordinate, then so does its primitive
+integer representative, and the affine chart coordinates of `x` are the ratios of the
+remaining primitive coordinates to the first one. -/
 theorem primitiveProjectiveRep_chart {n : ℕ} (x : ProjectivePoint n) (hx : x.rep 0 ≠ 0) :
     primitiveProjectiveRep x 0 ≠ 0 ∧
       projectiveAffineCoordinates x =
@@ -31,6 +34,8 @@ theorem primitiveProjectiveRep_chart {n : ℕ} (x : ProjectivePoint n) (hx : x.r
   change x.rep j.succ / x.rep 0 = _
   rw [← hcoord j.succ, ← hcoord 0, mul_div_mul_left _ _ c.ne_zero]
 
+/-- A nonzero integer vector with all coordinates of absolute value at most `B` spans a projective
+point of height at most `B`, whether or not its coordinates are coprime. -/
 theorem projective_integer_height_le {n : ℕ} (z : IntPoint (n + 1)) (hz : z ≠ 0)
     {B : ℝ} (hbox : InBox z B) :
     (Projectivization.mk ℚ (rationalPoint z) (rationalPoint_ne_zero hz)).mulHeight ≤ B := by

@@ -21,6 +21,11 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The shape of the affine auxiliary degree bound in degree `d` and box radius `B`, with
+`L` the coefficient height of the leading form and `b` the bad-prime factor: writing
+`r = n + 1`, it is
+$d^{2 - 1/r} \min(\log L + d \log B + d^2, d^2 b) B^{1/d^{1/r}} / L^{1/(r d^{1 + 1/r})}
++ d^{1 - 1/r} \log B + d^{4 - 1/r}$. -/
 def affineAuxiliaryDegreeExpression (n d : ℕ) (B L b : ℝ) : ℝ :=
   (d : ℝ) ^ (2 - 1 / (n + 1 : ℝ)) *
       min (Real.log L + d * Real.log B + (d : ℝ) ^ 2) ((d : ℝ) ^ 2 * b) *
@@ -29,11 +34,14 @@ def affineAuxiliaryDegreeExpression (n d : ℕ) (B L b : ℝ) : ℝ :=
     (d : ℝ) ^ (1 - 1 / (n + 1 : ℝ)) * Real.log B +
       (d : ℝ) ^ (4 - 1 / (n + 1 : ℝ))
 
+/-- The dimension constant in the affine auxiliary theorem for equations in `n + 2`
+variables, multiplying `affineAuxiliaryDegreeExpression`. -/
 def affineHypersurfaceAuxiliaryConstant (n : ℕ) : ℝ :=
   (2 * Real.exp ((n : ℝ) + 2)) * hypersurfaceAbsoluteAuxiliaryConstant n *
     (max (affineHeightTransferConstant n) (Real.exp 1) *
       affineAuxiliaryComparisonConstant n + 1)
 
+/-- The constant `affineHypersurfaceAuxiliaryConstant n` is positive. -/
 lemma affineHypersurfaceAuxiliaryConstant_pos (n : ℕ) :
     0 < affineHypersurfaceAuxiliaryConstant n := by
   have hK : 0 ≤ max (affineHeightTransferConstant n) (Real.exp 1) :=
@@ -43,6 +51,9 @@ lemma affineHypersurfaceAuxiliaryConstant_pos (n : ℕ) :
   unfold affineHypersurfaceAuxiliaryConstant
   positivity
 
+/-- The affine auxiliary degree bound with comparison constant `A ≥ 0` is at most a constant
+depending on `n` and `A` times `affineAuxiliaryDegreeExpression`, for `1 ≤ B`, `1 ≤ L` and
+`0 ≤ b`. -/
 lemma affineMinimumAuxiliaryBound_le_expression (n d : ℕ) {A B L b : ℝ}
     (hA : 0 ≤ A) (hB : 1 ≤ B) (hL : 1 ≤ L) (hb : 0 ≤ b) :
     affineMinimumAuxiliaryBound n d A B L b ≤

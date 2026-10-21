@@ -32,11 +32,13 @@ def hypersurfaceLargeProjectiveConstant (n : ℕ) (T : ℝ) : ℝ :=
   8 * (n + 2 : ℝ) +
     Real.exp (hypersurfaceLargeHeightError (n + 1) (hypersurfaceNormalizedError n) T) + 2
 
+/-- The main-term coefficient of the positioned small-height projective estimate is positive. -/
 lemma hypersurfaceSmallProjectiveConstant_pos (n : ℕ) (T : ℝ) :
     0 < hypersurfaceSmallProjectiveConstant n T := by
   unfold hypersurfaceSmallProjectiveConstant
   positivity
 
+/-- The constant of the large-height projective estimate is positive. -/
 lemma hypersurfaceLargeProjectiveConstant_pos (n : ℕ) (T : ℝ) :
     0 < hypersurfaceLargeProjectiveConstant n T := by
   unfold hypersurfaceLargeProjectiveConstant

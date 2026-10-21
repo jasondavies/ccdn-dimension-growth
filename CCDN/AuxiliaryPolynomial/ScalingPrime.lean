@@ -17,6 +17,8 @@ namespace CCDN
 noncomputable section
 open Finset Real
 
+/-- Lower bound from the first Mertens estimate: for `1 ≤ L ≤ T`, the sum of `log p / p` over the
+primes `p` with `L < p ≤ T` is at least `log T - log L - 2 mertensError`. -/
 lemma prime_interval_weight_lower {L T : ℝ} (hL : 1 ≤ L) (hLT : L ≤ T) :
     Real.log T - Real.log L - 2 * mertensError ≤
       ∑ p ∈ ((Ioc 0 ⌊T⌋₊).filter Nat.Prime) \ ((Ioc 0 ⌊L⌋₊).filter Nat.Prime),
@@ -59,8 +61,12 @@ private theorem exists_prime_interval_not_dvd {L T : ℝ} (hL : 1 ≤ L) (hLT : 
   have hlower := prime_interval_weight_lower hL hLT
   exact (not_lt_of_ge (hlower.trans hupper)) hheight
 
+/-- The absolute constant `A = exp (2 mertensError + 2)` such that a prime in the interval
+`(B / A, B]` can be found avoiding the prime divisors of any nonzero integer `D` with
+`log |D| < B / A`. -/
 def scalingPrimeRatio : ℝ := Real.exp (2 * mertensError + 2)
 
+/-- The scaling-prime ratio is at least one. -/
 lemma scalingPrimeRatio_one_le : 1 ≤ scalingPrimeRatio := by
   unfold scalingPrimeRatio
   apply Real.one_le_exp_iff.mpr

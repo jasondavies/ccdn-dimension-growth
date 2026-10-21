@@ -55,6 +55,11 @@ private theorem projective_chart_rational_irreducible
   · rw [affineChart_map]
     exact rational_irreducible_of_charZero_map _ hir
 
+/-- Small-height count of projective points on a plane curve: if `f` is a primitive integral
+ternary form of degree `d ≥ 2` whose affine chart is a bounded plane curve of height `H`, and
+the leading coefficient of `f` has logarithm at most `4 d log B`, then a family of primitive
+integral zeros of `f` in the box of radius `B`, pairwise distinct as projective points, has at
+most `d` times the small-height auxiliary degree bound members. -/
 theorem projective_points_small_height_bound
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {d t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
@@ -78,6 +83,12 @@ theorem projective_points_small_height_bound
   have hR : (t : ℝ) ≤ d * (M : ℝ) := by exact_mod_cast h
   exact hR.trans (mul_le_mul_of_nonneg_left hM (by positivity))
 
+/-- Large-height count of projective points on a plane curve: if `f` is a primitive integral
+ternary form of degree `d ≥ 2` whose affine chart is a bounded plane curve of height `H`, with
+`4 d log B ≤ log H` and `H` at most the leading coefficient of `f` times `exp (T d²)`, then a
+family of primitive integral zeros of `f` in the box of radius `B`, pairwise distinct as
+projective points, has at most
+`(34 + 8 exp (heightDeterminantError projectivePlaneDeterminantConstant + 6 + T)) d⁴` members. -/
 theorem projective_points_large_height_bound
     {K : Type*} [Field K] [CharZero K] [IsAlgClosed K] {d t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)

@@ -61,6 +61,8 @@ private lemma homogeneousSlice_zero_scaledHomogenize_one {R : Type*} [CommRing R
     rw [homogeneousComponent_eq_zero d _ ((totalDegree_monomial_le m (f.coeff m)).trans_lt hlt)]
     simp [homogenizedExponent, Nat.sub_ne_zero_of_lt hlt]
 
+/-- Affine translation of the variables does not change the leading form: the top-degree
+homogeneous component of `affineTranslation R a f` equals that of `f`. -/
 theorem affineTranslation_leading_homogeneousComponent {R : Type*}
     [CommRing R] [Nontrivial R] {n : ℕ}
     (a : Fin n → R) (f : MvPolynomial (Fin n) R) :
@@ -71,6 +73,8 @@ theorem affineTranslation_leading_homogeneousComponent {R : Type*}
     scaledHomogenize_one_affineTranslation a f le_rfl, homogeneousSlice_zero_translation,
     homogeneousSlice_zero_scaledHomogenize_one f le_rfl]
 
+/-- A nonzero integral polynomial `f` in `n` variables has an integral translate with nonzero
+constant coefficient by a vector whose entries lie in `[0, deg f]`. -/
 theorem exists_bounded_affine_translation_nonzero_constant {n : ℕ}
     (f : MvPolynomial (Fin n) ℤ) (hf : f ≠ 0) :
     ∃ a : Fin n → ℤ, (∀ j, 0 ≤ a j ∧ a j ≤ f.totalDegree) ∧

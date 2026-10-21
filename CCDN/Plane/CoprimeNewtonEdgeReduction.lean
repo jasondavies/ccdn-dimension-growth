@@ -17,15 +17,25 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Finset
 
+/-- A bivariate polynomial `f` has a coprime Newton edge from `x ^ d` to `y ^ e`: `0 < e < d` are
+coprime, the coefficients of `x ^ d` and `y ^ e` are nonzero, and every monomial `x ^ i * y ^ j`
+of `f` lies on or below the segment joining them, i.e. `e * i + d * j ≤ d * e`. -/
 structure HasCoprimeNewtonEdge {R : Type*} [CommSemiring R]
     (f : MvPolynomial (Fin 2) R) (d e : ℕ) : Prop where
+  /-- The `x`-endpoint exponent exceeds the `y`-endpoint exponent. -/
   degree_gt : e < d
+  /-- The `y`-endpoint exponent is positive. -/
   lower_pos : 0 < e
+  /-- The endpoint exponents are coprime. -/
   coprime : d.Coprime e
+  /-- The coefficient of `x ^ d` is nonzero. -/
   x_coeff : f.coeff (Finsupp.single 0 d) ≠ 0
+  /-- The coefficient of `y ^ e` is nonzero. -/
   y_coeff : f.coeff (Finsupp.single 1 e) ≠ 0
+  /-- Every monomial of `f` lies on or below the edge joining `x ^ d` and `y ^ e`. -/
   weight_le : ∀ m ∈ f.support, e * m 0 + d * m 1 ≤ d * e
 
+/-- A polynomial with a coprime Newton edge is nonzero. -/
 lemma HasCoprimeNewtonEdge.ne_zero {R : Type*} [CommSemiring R]
     {f : MvPolynomial (Fin 2) R} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e) : f ≠ 0 := by
   intro hz
@@ -43,6 +53,7 @@ private lemma HasCoprimeNewtonEdge.weightedTotalDegree {R : Type*} [CommSemiring
   · have hh := le_weightedTotalDegree (coprimeEdgeWeight d e) (mem_support_iff.mpr h.x_coeff)
     simpa [coprimeEdgeWeight_apply, mul_comm] using hh
 
+/-- A polynomial with a coprime Newton edge from `x ^ d` to `y ^ e` has total degree `d`. -/
 lemma HasCoprimeNewtonEdge.totalDegree {R : Type*} [CommSemiring R]
     {f : MvPolynomial (Fin 2) R} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e) :
     f.totalDegree = d := by
@@ -57,6 +68,7 @@ lemma HasCoprimeNewtonEdge.totalDegree {R : Type*} [CommSemiring R]
   · have hh := le_totalDegree (mem_support_iff.mpr h.x_coeff)
     simpa using hh
 
+/-- A polynomial over a field with a coprime Newton edge is irreducible. -/
 lemma HasCoprimeNewtonEdge.irreducible {K : Type*} [Field K]
     {f : MvPolynomial (Fin 2) K} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e) : Irreducible f :=
   coprime_newton_edge_irreducible f (by have := h.lower_pos; have := h.degree_gt; omega)
@@ -75,6 +87,8 @@ private lemma HasCoprimeNewtonEdge.map {R K : Type*} [CommSemiring R] [CommSemir
   y_coeff := by simpa only [coeff_map] using hy
   weight_le m hm := h.weight_le m (support_map_subset φ f hm)
 
+/-- A coprime Newton edge is preserved under coefficient maps by an injective ring
+homomorphism. -/
 lemma HasCoprimeNewtonEdge.map_of_injective {R K : Type*} [CommSemiring R] [CommSemiring K]
     {f : MvPolynomial (Fin 2) R} {d e : ℕ} (h : HasCoprimeNewtonEdge f d e)
     (φ : R →+* K) (hφ : Function.Injective φ) :
@@ -82,6 +96,8 @@ lemma HasCoprimeNewtonEdge.map_of_injective {R K : Type*} [CommSemiring R] [Comm
   h.map φ (fun hz => h.x_coeff (hφ (hz.trans φ.map_zero.symm)))
     (fun hz => h.y_coeff (hφ (hz.trans φ.map_zero.symm)))
 
+/-- If `f = c * g` with `c` a nonzero integer and `f` has a coprime Newton edge, then so does `g`,
+with the same endpoints. -/
 lemma HasCoprimeNewtonEdge.integer_scalar_factor
     {f g : MvPolynomial (Fin 2) ℤ} {d e : ℕ} {c : ℤ}
     (h : HasCoprimeNewtonEdge f d e) (hc : c ≠ 0) (heq : f = C c * g) :
@@ -104,9 +120,8 @@ lemma HasCoprimeNewtonEdge.integer_scalar_factor
     rw [mem_support_iff, heq, coeff_C_mul]
     exact mul_ne_zero hc (mem_support_iff.mp hm)
 
-/-- All primes outside the endpoint coefficients preserve both the degree
-and geometric irreducibility; this includes the degree-loss clause in the
-repository's bad-reduction predicate. -/
+/-- Every prime of bad reduction (loss of degree or of geometric irreducibility modulo `p`) for a
+polynomial with a coprime Newton edge divides the product of the two endpoint coefficients. -/
 theorem coprime_newton_edge_bad_reduction_dvd
     (f : MvPolynomial (Fin 2) ℤ) {d e : ℕ} (h : HasCoprimeNewtonEdge f d e)
     (p : ℕ) (hbad : HypersurfaceBadReduction f p) :

@@ -25,6 +25,9 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- The dimension-dependent error term in the normalized no-auxiliary comparison that retains
+the bad-prime charge, for forms in `n + 3` variables: the determinant error plus the
+archimedean error normalized by $(n + 2) / ((n + 1)!)^{1/(n + 1)}$. -/
 def hypersurfaceBadPrimeNormalizedError (n : ℕ) : ℝ :=
   hypersurfaceDeterminantError n +
     (n + 2 : ℝ) * hypersurfaceArchimedeanError (n + 1) /

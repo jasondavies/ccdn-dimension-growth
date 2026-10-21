@@ -14,12 +14,15 @@ directions make the line parameter integral, giving a spacing bound. -/
 namespace CCDN
 noncomputable section
 
+/-- The rational affine line `{a + t • v | t ∈ ℚ}` through `a` with direction `v`. -/
 def rationalAffineLine {n : ℕ} (a v : RatPoint n) : Set (RatPoint n) :=
   {x | ∃ t : ℚ, x = a + t • v}
 
+/-- The height `max_j |v j|` of an integer vector `v`. -/
 def integerDirectionHeight {n : ℕ} (v : IntPoint n) : ℕ :=
   Finset.univ.sup (fun j => (v j).natAbs)
 
+/-- Scaling the direction by a nonzero rational does not change the affine line. -/
 lemma rationalAffineLine_smul_direction {n : ℕ} (a v : RatPoint n) {c : ℚ} (hc : c ≠ 0) :
     rationalAffineLine a (c • v) = rationalAffineLine a v := by
   ext x
@@ -30,6 +33,7 @@ lemma rationalAffineLine_smul_direction {n : ℕ} (a v : RatPoint n) {c : ℚ} (
     refine ⟨t / c, ?_⟩
     simpa only [smul_smul, div_mul_cancel₀ t hc] using ht
 
+/-- Moving the base point along the direction does not change the affine line. -/
 lemma rationalAffineLine_shift_base {n : ℕ} (a v : RatPoint n) (s : ℚ) :
     rationalAffineLine (a + s • v) v = rationalAffineLine a v := by
   ext x
@@ -58,6 +62,7 @@ private lemma rationalAffineLine_eq_of_distinct_points {n : ℕ} {a v x y : RatP
     ring
   rw [he, rationalAffineLine_smul_direction _ _ hts, rationalAffineLine_shift_base]
 
+/-- A nonzero integer vector has positive height. -/
 lemma integerDirectionHeight_pos {n : ℕ} {v : IntPoint n} (hv : v ≠ 0) :
     0 < integerDirectionHeight v := by
   obtain ⟨j, hj⟩ := Function.ne_iff.mp hv
@@ -239,6 +244,8 @@ private theorem exists_primitive_direction_of_two_integer_points {n : ℕ}
       exact Int.cast_sub _ _
     simpa only [hcast] using he (rationalPoint a)
 
+/-- For a nonzero primitive integer vector `v`, the multiplicative height of the projective point
+`[v]` equals `max_j |v j|`. -/
 theorem projective_direction_height {n : ℕ} (v : IntPoint (n + 1))
     (hv : v ≠ 0) (hprim : Finset.univ.gcd v = 1) :
     (Projectivization.mk ℚ (rationalPoint v) (rationalPoint_ne_zero hv)).mulHeight =

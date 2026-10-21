@@ -23,6 +23,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial Real
 
+/-- A multivariate polynomial over a field whose image under a field homomorphism is irreducible
+is itself irreducible. -/
 lemma mvPolynomial_irreducible_of_field_map
     {F K σ : Type*} [Field F] [Field K] (φ : F →+* K)
     (f : MvPolynomial σ F) (hf : Irreducible (MvPolynomial.map φ f)) : Irreducible f := by
@@ -40,6 +42,8 @@ lemma mvPolynomial_irreducible_of_field_map
   have hh := hf.isUnit_or_isUnit (by rw [he, map_mul])
   exact hh.imp (hunit g) (hunit h)
 
+/-- The total degree of the bivariate model `bivariatePolynomialEquiv R f` of a polynomial `f` in
+two variables equals the total degree of `f`. -/
 lemma bivariateTotalDegree_equiv {R : Type*} [CommRing R]
     (f : MvPolynomial (Fin 2) R) :
     bivariateTotalDegree (bivariatePolynomialEquiv R f) = f.totalDegree := by

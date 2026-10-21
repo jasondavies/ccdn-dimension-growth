@@ -22,6 +22,8 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
+/-- Evaluating the nested-polynomial form of a bivariate polynomial `f` at `(t 0, t 1)` agrees
+with evaluating `f` at `t`. -/
 lemma bivariateEval_equiv {K : Type*} [CommRing K]
     (f : MvPolynomial (Fin 2) K) (t : Fin 2 → K) :
     bivariateEval (t 0) (t 1) (bivariatePolynomialEquiv K f) = eval t f := by
@@ -40,6 +42,7 @@ def planeSectionPolynomial {K σ : Type*} [CommRing K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K) : MvPolynomial (Fin 2) K :=
   (bivariatePolynomialEquiv K).symm (universalPlaneSection f v)
 
+/-- A plane section of `f` has total degree at most that of `f`. -/
 lemma planeSectionPolynomial_totalDegree {K σ : Type*} [CommRing K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K) :
     (planeSectionPolynomial f v).totalDegree ≤ f.totalDegree :=
@@ -58,6 +61,7 @@ private lemma planeSectionPoints_card_eq {K σ : Type*} [CommRing K]
           left_inv := fun _ => rfl
           right_inv := fun _ => rfl }
 
+/-- The number of points of a plane section over a finite ring `K` is at most `|K| ^ 2`. -/
 lemma planeSectionPoints_card_le_square {K σ : Type*} [CommRing K] [Fintype K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K) :
     Nat.card (PlaneSectionPoints f v) ≤ Fintype.card K ^ 2 := by
@@ -65,6 +69,7 @@ lemma planeSectionPoints_card_le_square {K σ : Type*} [CommRing K] [Fintype K]
     Subtype.val_injective
   simpa only [Nat.card_eq_fintype_card, Fintype.card_fun, Fintype.card_fin] using h
 
+/-- A nonzero plane section of `f` over a finite field `K` has at most `deg f * |K|` points. -/
 lemma planeSectionPoints_card_le_degree_mul_card {K σ : Type*} [Field K] [Fintype K]
     (f : MvPolynomial σ K) (v : PlaneParameters σ → K)
     (hv : universalPlaneSection f v ≠ 0) :

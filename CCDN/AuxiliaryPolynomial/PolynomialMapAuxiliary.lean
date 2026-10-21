@@ -23,6 +23,8 @@ Explicit integer degree choices for both coefficient-height ranges.
 namespace CCDN
 noncomputable section
 
+/-- For nonnegative reals `l` and `R`, there is an integer `M` with `d ≤ M`, `l ≤ M`, `R < M` and
+`M ≤ d + l + R + 2`. -/
 lemma auxiliary_integer_degree_selection (d : ℕ) {l R : ℝ} (hl : 0 ≤ l) (hR : 0 ≤ R) :
     ∃ M : ℕ, d ≤ M ∧ l ≤ M ∧ R < M ∧ (M : ℝ) ≤ d + l + R + 2 := by
   refine ⟨d + ⌈l⌉₊ + ⌊R⌋₊ + 1, by omega, ?_, ?_, ?_⟩
@@ -106,6 +108,11 @@ private theorem polynomial_map_exists_auxiliary_large_height
   exact (not_lt_of_ge hbound) hthreshold
 
 
+/-- Small-height auxiliary form for polynomial images of a plane curve: if the points `τ (z i)` are
+images of integral points `z i` on a bounded plane curve `q` of degree `d` and are integral zeros
+of the degree-`d` form `f` in a box of radius `B`, the leading coefficient of `f` has logarithm
+at most `4 d log B`, and `q` satisfies the residue count bound with constant `C`, then there is
+an auxiliary form of explicitly bounded degree `M` through all of them. -/
 theorem polynomial_map_auxiliary_small_height_degree
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
@@ -137,6 +144,12 @@ theorem polynomial_map_auxiliary_small_height_degree
     hML hheight hth hcount
 
 
+/-- Large-height auxiliary form for polynomial images of a plane curve: if the points `τ (z i)` are
+images of integral points `z i` on a bounded plane curve `q` of degree `d` and height `H` and are
+integral zeros of the degree-`d` form `f` in a box of radius `B`, with `4 d log B ≤ log H`, `H`
+at most the leading coefficient of `f` times `exp (T d²)`, and `q` satisfying the residue count
+bound with constant `C`, then there is an auxiliary form through all of them of degree at most
+`(34 + 8 exp (heightDeterminantError C + 6 + T)) d³`. -/
 theorem polynomial_map_auxiliary_large_height_degree
     {F : Type*} [Field F] [CharZero F] [IsAlgClosed F] {d t : ℕ}
     (order : MonomialOrder (Fin 3)) (f : MvPolynomial (Fin 3) ℤ)
