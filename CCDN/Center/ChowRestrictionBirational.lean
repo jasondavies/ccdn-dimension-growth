@@ -35,11 +35,8 @@ theorem geometric_chow_restriction_irreducible_iff_birational
     (hI : IsHomogeneousIdeal I)
     (d : ℕ) (hdimdeg : HasProjectiveDimensionDegree I m d)
     (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K)
-    (hF : Irreducible (map (algebraMap K (AlgebraicClosure K)) F))
-    (hδ : ∀ i, F.IsWeightedHomogeneous (chowRowWeight i) d)
-    (hzero : ∀ U, eval U (map (algebraMap K (AlgebraicClosure K)) F) = 0 ↔
-      U ∈ projectiveChowIncidenceLocus (m + 1)
-        (I.map (map (algebraMap K (AlgebraicClosure K)))))
+    (hF : IsProjectiveChowEquation (I.map (map (algebraMap K (AlgebraicClosure K))))
+      (map (algebraMap K (AlgebraicClosure K)) F) (fun _ => d))
     (A : Matrix (Fin (s + 2)) (Fin (n + 2)) K)
     (hcenter : ∀ p ∈ projectiveIdealZeroLocus (I.map (map (algebraMap K (AlgebraicClosure K)))),
       (A.map (algebraMap K (AlgebraicClosure K))) *ᵥ p.rep ≠ 0) :
@@ -69,20 +66,17 @@ theorem geometric_chow_restriction_irreducible_iff_birational
     (Ideal.IsPrime.ne_top ‹P.IsPrime›)
   have hedegree : (filteredHilbertPolynomial P).leadingCoeff = (e : ℚ) / (m + 1).factorial := by
     simpa only [hPdim] using he
-  obtain ⟨G, hG, _, hGdegree, hGzero⟩ := exists_projective_chow_exact_degree P
+  obtain ⟨G, ⟨hG, _, hGzero⟩, hGdegree⟩ := exists_projective_chow_exact_degree P
     (chowProjectionImageIdeal_homogeneous J hJ AL) e ⟨hPdim, hedegree⟩
-  have hδL (i) : FL.IsWeightedHomogeneous (chowRowWeight i) d := by
-    intro a ha
-    apply hδ i
-    intro hz
-    apply ha
-    rw [coeff_map, hz, map_zero]
   have hRne : R ≠ 0 :=
-    (chowLinearSubstitution_ne_zero_iff_center_disjoint J hJ hJdim AL FL hzero).mpr hcenter
+    (chowLinearSubstitution_ne_zero_iff_center_disjoint J hJ hJdim AL FL
+      hF.eval_eq_zero_iff).mpr hcenter
   have hRdegree : R.totalDegree = (m + 1) * d :=
-    (chowLinearSubstitution_totalDegree_of_ne_zero AL FL hF.ne_zero (fun _ => d) hδL hRne).trans
-      (chow_uniform_row_degree_totalDegree FL hF.ne_zero d hδL)
-  have hsame := chowLinearSubstitution_same_zeros_as_image J hJ AL hcenter FL G hzero hGzero
+    (chowLinearSubstitution_totalDegree_of_ne_zero AL FL hF.irreducible.ne_zero (fun _ => d)
+      hF.row_homogeneous hRne).trans
+      (chow_uniform_row_degree_totalDegree FL hF.irreducible.ne_zero d hF.row_homogeneous)
+  have hsame := chowLinearSubstitution_same_zeros_as_image J hJ AL hcenter FL G
+    hF.eval_eq_zero_iff hGzero
   have hir := irreducible_iff_degree_eq_of_same_zeros G R hG hsame
   rw [hRdegree, hGdegree, Nat.mul_left_cancel_iff (by omega : 0 < m + 1)] at hir
   have hfield := homogeneous_finite_projection_leadingCoeff_eq_iff_birational

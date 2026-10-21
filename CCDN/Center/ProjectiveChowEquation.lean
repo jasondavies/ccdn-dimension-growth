@@ -56,12 +56,10 @@ theorem exists_projective_chow_incidence_equation
     (I : Ideal (MvPolynomial (Fin (n + 1)) K)) [I.IsPrime]
     (hm : (filteredHilbertPolynomial I).natDegree = m) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ),
-      Irreducible F ∧ chowIncidenceIdeal (m + 1) I = Ideal.span {F} ∧
-      (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
-      ∀ U, eval U F = 0 ↔
-        U ∈ projectiveChowIncidenceLocus (m + 1) (projectiveClosureIdeal I) := by
+      chowIncidenceIdeal (m + 1) I = Ideal.span {F} ∧
+      IsProjectiveChowEquation (projectiveClosureIdeal I) F δ := by
   obtain ⟨F, δ, hF, hgen, hδ⟩ := exists_multihomogeneous_chow_incidence_generator I hm
-  exact ⟨F, δ, hF, hgen, hδ,
+  exact ⟨F, δ, hgen, hF, hδ,
     chow_incidence_generator_eval_eq_zero_iff (m + 1) I F hgen⟩
 
 /-- A geometrically integral source gives a base-field equation which stays
@@ -72,14 +70,12 @@ theorem exists_geometric_projective_chow_incidence_equation
     [(I.map (map (algebraMap K L))).IsPrime]
     (hm : (filteredHilbertPolynomial I).natDegree = m) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ),
-      Irreducible F ∧ chowIncidenceIdeal (m + 1) I = Ideal.span {F} ∧
-      (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
-      Irreducible (map (algebraMap K L) F) ∧
-      ∀ U, eval U (map (algebraMap K L) F) = 0 ↔
-        U ∈ projectiveChowIncidenceLocus (m + 1)
-          ((projectiveClosureIdeal I).map (map (algebraMap K L))) := by
+      chowIncidenceIdeal (m + 1) I = Ideal.span {F} ∧ Irreducible F ∧
+      IsProjectiveChowEquation ((projectiveClosureIdeal I).map (map (algebraMap K L)))
+        (map (algebraMap K L) F) δ := by
   obtain ⟨F, δ, hF, hgen, hδ, hFL⟩ := exists_geometric_chow_incidence_generator (L := L) I hm
-  exact ⟨F, δ, hF, hgen, hδ, hFL,
+  exact ⟨F, δ, hgen, hF, hFL,
+    fun i => (isWeightedHomogeneous_map_iff (algebraMap K L).injective _ _ _).mpr (hδ i),
     chow_incidence_generator_eval_map_eq_zero_iff (m + 1) I F hgen⟩
 
 /-- The criterion for a homogeneous prime source, with a specified
@@ -92,13 +88,12 @@ theorem exists_homogeneous_prime_projective_chow_equation
     (hX : X 0 ∉ J)
     (hdimdeg : HasProjectiveDimensionDegree J m d) :
     ∃ (F : MvPolynomial (Fin (m + 1) × Fin (n + 2)) K) (δ : Fin (m + 1) → ℕ),
-      Irreducible F ∧ (∀ i, F.IsWeightedHomogeneous (chowRowWeight i) (δ i)) ∧
-      ∀ U, eval U F = 0 ↔ U ∈ projectiveChowIncidenceLocus (m + 1) J := by
+      IsProjectiveChowEquation J F δ := by
   obtain ⟨hm, _⟩ := projectiveChartIdeal_hilbertPolynomial_parameters J hJ hX m d hdimdeg
-  obtain ⟨F, δ, hF, _, hδ, hzero⟩ :=
+  obtain ⟨F, δ, _, hF⟩ :=
     exists_projective_chow_incidence_equation (projectiveChartIdeal J) hm
-  refine ⟨F, δ, hF, hδ, ?_⟩
-  simpa only [projectiveClosureIdeal_chartIdeal_eq J hJ hX] using hzero
+  rw [projectiveClosureIdeal_chartIdeal_eq J hJ hX] at hF
+  exact ⟨F, δ, hF⟩
 
 end
 end CCDN
