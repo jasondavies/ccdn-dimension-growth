@@ -17,11 +17,6 @@ namespace CCDN
 noncomputable section
 open MvPolynomial
 
-lemma homogeneousSlice_one_eq_chart {R : Type*} [CommRing R] {n : ℕ}
-    (f : MvPolynomial (Fin (n + 1)) R) :
-    homogeneousSlice n 1 f = affineChart n f := by
-  simp only [homogeneousSlice, affineChart, map_one]
-
 lemma scaledHomogenize_one_affineTranslation {R : Type*} [CommRing R] [Nontrivial R]
     {n d : ℕ} (a : Fin n → R) (f : MvPolynomial (Fin n) R) (hd : f.totalDegree ≤ d) :
     scaledHomogenize d 1 (affineTranslation R a f) =

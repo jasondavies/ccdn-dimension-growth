@@ -30,16 +30,6 @@ component of each of its elements. -/
 abbrev IsHomogeneousIdeal (I : Ideal (MvPolynomial σ K)) : Prop :=
   ∀ f ∈ I, ∀ N, homogeneousComponent N f ∈ I
 
-attribute [local instance] MvPolynomial.gradedAlgebra in
-/-- `IsHomogeneousIdeal` agrees with Mathlib's homogeneity for the grading by total degree. -/
-theorem isHomogeneousIdeal_iff_isHomogeneous (I : Ideal (MvPolynomial σ K)) :
-    IsHomogeneousIdeal I ↔ I.IsHomogeneous (homogeneousSubmodule σ K) := by
-  constructor
-  · intro h i r hr
-    exact (decomposition.decompose'_apply r i).symm ▸ h r hr i
-  · intro h r hr i
-    exact decomposition.decompose'_apply (R := K) r i ▸ h i hr
-
 /-- An integer polynomial is absolutely irreducible when it is irreducible over `ℚ̄`. -/
 abbrev AbsolutelyIrreducible (f : MvPolynomial σ ℤ) : Prop :=
   Irreducible (map (Int.castRingHom (AlgebraicClosure ℚ)) f)

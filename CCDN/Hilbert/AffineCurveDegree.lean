@@ -35,11 +35,6 @@ def HasAffineCurveDegree {n : ℕ} (I : Ideal (CoordinatePolynomial n)) (d : ℕ
   ∃ N : ℕ, ∃ c : ℤ, ∀ M : ℕ, N ≤ M →
     (affineHilbertFunction I M : ℤ) = (d : ℤ) * M + c
 
-/-- `HasAffineCurveDegree` is the general-field `HasFilteredCurveDegree` over `ℚ`. -/
-theorem hasAffineCurveDegree_iff {n : ℕ} {I : Ideal (CoordinatePolynomial n)} {d : ℕ} :
-    HasAffineCurveDegree I d ↔ HasFilteredCurveDegree I d :=
-  Iff.rfl
-
 theorem affineCurveDegree_unique {n : ℕ} {I : Ideal (CoordinatePolynomial n)} {d e : ℕ}
     (hd : HasAffineCurveDegree I d) (he : HasAffineCurveDegree I e) : d = e := by
   obtain ⟨N, c, hN⟩ := hd

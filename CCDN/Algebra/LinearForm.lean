@@ -42,10 +42,6 @@ lemma linearForm_totalDegree_le (a : σ → R) : (linearForm a).totalDegree ≤ 
     eval₂ φ x (linearForm a) = ∑ i, φ (a i) * x i := by
   simp [linearForm]
 
-lemma map_linearForm [CommSemiring S] (φ : R →+* S) (a : σ → R) :
-    map φ (linearForm a) = linearForm (fun i => φ (a i)) := by
-  simp [linearForm]
-
 lemma rename_linearForm [Fintype τ] (e : σ ≃ τ) (a : σ → R) :
     rename e (linearForm a) = linearForm (a ∘ e.symm) := by
   simp only [linearForm, map_sum, map_mul, rename_C, rename_X]
@@ -60,13 +56,6 @@ lemma linearForm_add (a b : σ → R) : linearForm (a + b) = linearForm a + line
 
 lemma linearForm_smul (c : R) (a : σ → R) : linearForm (c • a) = c • linearForm a := by
   simp [linearForm, Finset.smul_sum, smul_eq_C_mul, mul_assoc]
-
-lemma linearForm_pi_single [DecidableEq σ] (i : σ) :
-    linearForm (Pi.single i 1 : σ → R) = X i := by
-  simp [linearForm, Pi.single_apply]
-
-lemma linearForm_eq_sum_smul (a : σ → R) : linearForm a = ∑ i, a i • X i := by
-  simp [linearForm, smul_eq_C_mul]
 
 variable (R σ) in
 /-- `linearForm` as a linear map from coefficient vectors to polynomials. -/
@@ -84,12 +73,6 @@ end CommSemiring
 section CommRing
 
 variable [CommRing R] [Fintype σ]
-
-lemma linearForm_neg (a : σ → R) : linearForm (-a) = -linearForm a :=
-  map_neg (linearFormLinearMap R σ) a
-
-lemma linearForm_sub (a b : σ → R) : linearForm (a - b) = linearForm a - linearForm b :=
-  map_sub (linearFormLinearMap R σ) a b
 
 end CommRing
 

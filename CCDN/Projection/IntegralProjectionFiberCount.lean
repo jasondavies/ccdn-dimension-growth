@@ -7,15 +7,9 @@ module
 
 public import CCDN.Algebra.IdealZeroLocus
 public import CCDN.Hilbert.LinearProjectionFiltration
-public import Mathlib.LinearAlgebra.FiniteDimensional.Defs
-public import Mathlib.RingTheory.IntegralClosure.IsIntegral.Defs
-import CCDN.Height.IntegralAlgebraPointCount
-import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.Polynomial.RationalRoot
 
 /-! Rational-point fibers of an integral polynomial projection.
-Evaluation on the quotient constructs the specialization homomorphisms,
-and normality of the polynomial base gives a uniform fiber bound. -/
+Evaluation on the quotient constructs the specialization homomorphisms. -/
 
 @[expose] public section
 namespace CCDN
@@ -56,37 +50,6 @@ theorem exists_projection_fiber_specialization {K σ τ : Type*} [Field K]
   intro i
   change φ (Ideal.Quotient.mk I (X i)) = x i
   simpa only [eval_X] using hφ (X i)
-
-theorem integral_projection_fiber_card_le
-    {K σ τ : Type*} [Field K] [Fintype σ]
-    (I : Ideal (MvPolynomial σ K)) [I.IsPrime]
-    (l : τ → MvPolynomial σ K)
-    [Algebra (MvPolynomial τ K) (MvPolynomial σ K ⧸ I)]
-    (hmap : algebraMap (MvPolynomial τ K) (MvPolynomial σ K ⧸ I) =
-      (projectionCoordinateMap I l).toRingHom)
-    (F E : Type*) [Field F] [Field E]
-    [Algebra (MvPolynomial τ K) F] [IsFractionRing (MvPolynomial τ K) F]
-    [Algebra (MvPolynomial τ K) E] [Algebra (MvPolynomial σ K ⧸ I) E]
-    [Algebra F E]
-    [IsScalarTower (MvPolynomial τ K) (MvPolynomial σ K ⧸ I) E]
-    [IsScalarTower (MvPolynomial τ K) F E] [FiniteDimensional F E]
-    (hint : (projectionCoordinateMap I l).IsIntegral)
-    (z : τ → K) (s : Finset (σ → K))
-    (hzero : ∀ x ∈ s, x ∈ idealZeroLocus I)
-    (hproj : ∀ x ∈ s, ∀ i, eval x (l i) = z i) :
-    s.card ≤ (Module.finrank F E) ^ Fintype.card σ := by
-  classical
-  let R := MvPolynomial τ K
-  let A := MvPolynomial σ K ⧸ I
-  let b : σ → A := fun i => Ideal.Quotient.mk I (X i)
-  let : Algebra R K := (aeval z).toRingHom.toAlgebra
-  have hb (i) : IsIntegral R (b i) := by
-    change (algebraMap R A).IsIntegralElem (b i)
-    rw [hmap]
-    exact hint (b i)
-  apply integral_coordinate_tuple_count_le_finrank_pow R A F E b hb s
-  intro x hx
-  exact exists_projection_fiber_specialization I l hmap z x (hzero x hx) (hproj x hx)
 
 end
 end CCDN

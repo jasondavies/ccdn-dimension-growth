@@ -87,12 +87,4 @@ structure IsProjectiveAuxiliary {n : ℕ} (f g : MvPolynomial (Fin (n + 1)) ℤ)
     x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) g)
   not_dvd : ¬ f ∣ g
 
-/-- Unbundled form of `CCDN.IsProjectiveAuxiliary`. -/
-theorem isProjectiveAuxiliary_iff {n : ℕ} {f g : MvPolynomial (Fin (n + 1)) ℤ} {M : ℕ} {B : ℝ} :
-    IsProjectiveAuxiliary f g M B ↔ g ≠ 0 ∧ g.IsHomogeneous M ∧
-      (∀ x : ProjectivePoint n, x.mulHeight ≤ B →
-        x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) f) →
-        x ∈ projectiveZeroLocus (map (Int.castRingHom ℚ) g)) ∧ ¬ f ∣ g :=
-  ⟨fun h => ⟨h.1, h.2, h.3, h.4⟩, fun h => ⟨h.1, h.2.1, h.2.2.1, h.2.2.2⟩⟩
-
 end CCDN

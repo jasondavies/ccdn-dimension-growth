@@ -21,13 +21,5 @@ open MvPolynomial
 def idealZeroLocus {K σ : Type*} [CommRing K] (I : Ideal (MvPolynomial σ K)) : Set (σ → K) :=
   {x | ∀ f ∈ I, eval x f = 0}
 
-lemma mem_idealZeroLocus_iff {K σ : Type*} [CommRing K] {I : Ideal (MvPolynomial σ K)}
-    {x : σ → K} : x ∈ idealZeroLocus I ↔ ∀ f ∈ I, eval x f = 0 :=
-  Iff.rfl
-
-lemma idealZeroLocus_anti_mono {K σ : Type*} [CommRing K] {I J : Ideal (MvPolynomial σ K)}
-    (h : I ≤ J) : idealZeroLocus J ⊆ idealZeroLocus I :=
-  fun _ hx f hf => hx f (h hf)
-
 end
 end CCDN

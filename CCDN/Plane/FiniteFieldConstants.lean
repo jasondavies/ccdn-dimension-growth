@@ -107,9 +107,6 @@ lemma planeResidueConstant_pos : 0 < planeResidueConstant := by
 lemma projectivePlaneDeterminantConstant_pos : 0 < projectivePlaneDeterminantConstant := by
   norm_num [projectivePlaneDeterminantConstant]
 
-lemma hypersurfaceResidueConstant_pos : 0 < hypersurfaceResidueConstant := by
-  norm_num [hypersurfaceResidueConstant]
-
 lemma projectiveHypersurfaceResidueConstant_pos : 0 < projectiveHypersurfaceResidueConstant := by
   norm_num [projectiveHypersurfaceResidueConstant]
 

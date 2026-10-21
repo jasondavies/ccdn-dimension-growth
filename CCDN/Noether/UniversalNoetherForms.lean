@@ -200,18 +200,5 @@ theorem universalNoetherForms_nonvanishing {K σ : Type*} [Field K] [CharZero K]
   obtain ⟨rows,cols,m,hne⟩ := exists_ambientNoetherForm_nonzero k f hf hir
   exact ⟨_, (mem_universalNoetherForms _ _).mpr ⟨rows,cols,m,rfl⟩, hne⟩
 
-/-- The finite universal family detects absolute irreducibility exactly
-in characteristic zero. The reverse implication is valid in all characteristics. -/
-theorem universalNoetherForms_irreducible_iff {K σ : Type*} [Field K] [CharZero K]
-    [Fintype σ] [DecidableEq σ]
-    (k : ℕ) (f : MvPolynomial (Option σ) K) (hf : f.IsHomogeneous (k + 2)) :
-    Irreducible (MvPolynomial.map (algebraMap K (AlgebraicClosure K)) f) ↔
-      ∃ g ∈ universalNoetherForms (Option σ) k,
-        homogeneousCoefficientSpecialization (k + 2) f g ≠ 0 := by
-  refine ⟨universalNoetherForms_nonvanishing k f hf, ?_⟩
-  rintro ⟨g,hg,hne⟩
-  by_contra hred
-  exact hne (universalNoetherForms_vanish k f hf hred g hg)
-
 end
 end CCDN
