@@ -6,15 +6,14 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.CharZeroOrGT
-public import CCDN.Noether.UniversalPlaneLeading
 import CCDN.Auxiliary.ConstantLeadingBadReduction
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.UniversalPlaneMinor
 import CCDN.Noether.ClosedFormParameterDegree
 import CCDN.Noether.ClosedFormScaling
-import CCDN.Noether.UniversalPlaneDegree
-import CCDN.Noether.UniversalPlaneWitness
+import CCDN.Noether.UniversalPlane
+public import CCDN.Noether.UniversalPlaneWitness
 import CCDN.ForMathlib.Matrix
 import CCDN.ForMathlib.MvPolynomial
 /-! A nonzero polynomial of degree at most 2*d^3 detects all plane sections

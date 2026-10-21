@@ -12,7 +12,7 @@ public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Algebra.ScaledHypersurfaceModel
 import CCDN.Auxiliary.AffineChartAbsoluteAuxiliary
-import CCDN.Auxiliary.LiteralAffineScaling
+import CCDN.Auxiliary.LiteralAffineBadPrimes
 import CCDN.Auxiliary.ScaledAuxiliaryCount
 import CCDN.Auxiliary.UnscaledHypersurfaceAuxiliary
 import CCDN.Determinant.AffineCongruenceDeterminant

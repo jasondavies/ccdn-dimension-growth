@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.ChowLinearSpecialization
 public import CCDN.Projection.ProjectionImageFractionField
 public import CCDN.Hilbert.FilteredHilbertPolynomial

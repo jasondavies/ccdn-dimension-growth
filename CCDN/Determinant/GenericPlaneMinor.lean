@@ -13,7 +13,7 @@ public import Mathlib.Algebra.MvPolynomial.PDeriv
 import CCDN.Determinant.ClosedFormIntegerMinor
 import CCDN.Determinant.PlaneMultiplicity
 import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
-import CCDN.Noether.ClosedFormRank
+import CCDN.Noether.ClosedFormScaling
 import CCDN.Noether.ShearNormalization
 
 /-!

@@ -8,7 +8,6 @@ module
 public import CCDN.Center.ChowPivotParametrization
 public import CCDN.Algebra.ProjectiveClosureIdeal
 public import CCDN.Algebra.ProjectiveSection
-public import CCDN.Center.ChowIncidenceGrading
 public import CCDN.Algebra.IdealZeroLocus
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.RingTheory.Nullstellensatz

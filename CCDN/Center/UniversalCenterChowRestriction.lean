@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.CenterMinorProjection
-import CCDN.Noether.UniversalPlaneDegree
+import CCDN.Noether.UniversalPlane
 /-! The Chow restriction for the literal maximal-minor center projection as a
 polynomial family in Plücker coordinates. Its specialization is proved,
 and every coefficient has degree at most the source equation's total degree;

@@ -7,7 +7,7 @@ module
 
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Algebra.ProjectiveChartIdeal
-public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.GeometricProjectiveCurveProjection

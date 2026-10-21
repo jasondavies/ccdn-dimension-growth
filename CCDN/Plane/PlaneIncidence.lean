@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.UniversalPlaneEvaluation
+public import CCDN.Noether.UniversalPlaneSpecialization
 /-! Exact incidence averaging over every affine-plane parameter triple,
 including degenerate triples. No divisibility correction for plane charts
 is needed because points and directions are kept as coordinates. -/

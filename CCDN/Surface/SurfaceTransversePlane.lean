@@ -11,7 +11,7 @@ public import CCDN.Algebra.PolynomialPredicates
 import CCDN.Auxiliary.PlaneAuxiliaryCount
 import CCDN.Auxiliary.PlaneBadPrimes
 import CCDN.Determinant.PlaneMultiplicity
-import CCDN.Noether.UniversalPlaneIntegerSpecialization
+import CCDN.Noether.UniversalPlaneSpecialization
 import CCDN.Algebra.PrimitiveNormalization
 import CCDN.Noether.ShearNormalization
 import CCDN.ForMathlib.MvPolynomial

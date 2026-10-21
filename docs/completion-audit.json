@@ -1275,7 +1275,7 @@
     },
     {
       "id": "e025",
-      "file": "CCDN/Plane/ProjectivePlaneCoefficientCount.lean",
+      "file": "CCDN/Paper/ProjectivePlaneUniformExpression.lean",
       "declaration": "CCDN.projective_plane_coefficient_count"
     },
     {
@@ -1455,7 +1455,7 @@
     },
     {
       "id": "e061",
-      "file": "CCDN/Auxiliary/DistinguishedCoefficientOrder.lean",
+      "file": "CCDN/Paper/HypersurfaceSourcePositionedAuxiliary.lean",
       "declaration": "CCDN.distinguishedCoefficientOrder_leadingCoeff"
     },
     {
@@ -1720,7 +1720,7 @@
     },
     {
       "id": "e114",
-      "file": "CCDN/Auxiliary/AffinePlaneCoefficientCount.lean",
+      "file": "CCDN/Paper/LiteralAffinePlaneCount.lean",
       "declaration": "CCDN.affinePlaneCoefficientCountExpression"
     },
     {

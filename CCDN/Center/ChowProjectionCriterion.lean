@@ -5,21 +5,50 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.ChowLinearSpecialization
 public import CCDN.Hilbert.FilteredHilbertPolynomial
+public import Mathlib.RingTheory.MvPolynomial.WeightedHomogeneous
 import CCDN.Center.ChowPolynomialPower
 import CCDN.Center.ChowProjectionPower
 import CCDN.Center.ChowRowSymmetry
 import CCDN.Center.ProjectiveChowWithoutChart
-import CCDN.Algebra.WeightedHomogeneousEvaluation
 import CCDN.Projection.IntegralProjectionHilbert
 import Mathlib.Algebra.MvPolynomial.Nilpotent
-/-! Projection restrictions without chosen charts. A disjoint center preserves
+
+/-!
+Projection restrictions without chosen charts. A disjoint center preserves
 every block degree of the source equation; its restriction is a scalar power
-of the constructed image equation. -/
+of the constructed image equation.
+
+Weighted homogeneity under polynomial evaluation over the same field.
+-/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+theorem weighted_homogeneous_aeval
+    {K σ τ : Type*} [Field K] (w : σ → ℕ) (v : τ → ℕ)
+    (a : σ → MvPolynomial τ K)
+    (ha : ∀ i, (a i).IsWeightedHomogeneous v (w i))
+    (f : MvPolynomial σ K) (d : ℕ) (hf : f.IsWeightedHomogeneous w d) :
+    (aeval a f).IsWeightedHomogeneous v d := by
+  classical
+  rw [f.as_sum, map_sum]
+  apply IsWeightedHomogeneous.sum
+  intro e he
+  rw [aeval_monomial, algebraMap_eq]
+  have hh := IsWeightedHomogeneous.prod e.support (fun i => (a i) ^ e i)
+    (fun i => e i • w i) (fun i _ => (ha i).pow (e i))
+  have hw := hf (mem_support_iff.mp he)
+  change ∑ i ∈ e.support, e i • w i = d at hw
+  simpa only [Finsupp.prod, hw] using hh.C_mul (f.coeff e)
+
+end
+end CCDN
+
 namespace CCDN
 noncomputable section
 open MvPolynomial Matrix

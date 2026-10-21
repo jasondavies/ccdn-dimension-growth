@@ -5,7 +5,6 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Noether.ClosedFormKernelWitness
 public import CCDN.Noether.ClosedFormBaseChange
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 

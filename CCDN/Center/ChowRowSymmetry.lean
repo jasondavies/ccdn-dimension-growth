@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ChowIncidenceIdeal
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import CCDN.Algebra.WeightedHomogeneousTransform
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors

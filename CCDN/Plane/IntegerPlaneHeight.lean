@@ -11,7 +11,7 @@ public import Mathlib.Tactic.Continuity
 public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.Box
 import CCDN.Height.PolynomialBoxHeight
-import CCDN.Noether.UniversalPlaneEvaluation
+import CCDN.Noether.UniversalPlaneSpecialization
 import CCDN.Noether.UniversalPlaneWitness
 import CCDN.Plane.PlaneGridHeight
 /-! Coefficient height of an integer plane section with bounded

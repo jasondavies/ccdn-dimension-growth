@@ -5,7 +5,7 @@ Authors: Jason Davies
 -/
 module
 
-public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ChowIncidenceIdeal
 import Mathlib.Algebra.MvPolynomial.NoZeroDivisors
 
 /-! A generator of a separately homogeneous principal ideal is itself

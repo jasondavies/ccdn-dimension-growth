@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.CenterMinorMatrix
-public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Center.CenterResultantForms
 public import CCDN.Center.ResultantCoefficientFamily

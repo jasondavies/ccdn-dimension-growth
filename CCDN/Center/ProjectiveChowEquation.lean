@@ -6,13 +6,13 @@ Authors: Jason Davies
 module
 
 public import CCDN.Algebra.PolynomialPredicates
-public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.ProjectiveChowIncidence
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 import CCDN.Center.ChowIncidenceBaseChange
 import CCDN.Center.ProjectiveClosureRecovery
 import CCDN.Center.ProjectiveIncidenceClosed
-import CCDN.Center.ChowIncidencePrincipal
+import CCDN.Center.ChowIncidenceBaseChange
 import CCDN.Center.PrincipalWeightedHomogeneous
 
 /-!

@@ -10,7 +10,7 @@ public import CCDN.Plane.RationalPlaneAssembly
 public import CCDN.Algebra.PolynomialPredicates
 public import CCDN.Plane.FiniteFieldConstants
 public import Mathlib.Analysis.Real.Sqrt
-import CCDN.Determinant.GeometricResidueReduction
+public import CCDN.Determinant.SingularReduction
 import CCDN.Plane.NonabsolutePlaneCount
 import CCDN.Plane.PlaneStepanovBound
 import CCDN.Plane.PlaneStepanovDimension
@@ -26,9 +26,27 @@ The complete rational plane reduction to sharp finite-field counting.
 The non-absolutely-irreducible case is bounded by d².
 
 The explicit real-valued error term for the integer Stepanov parameters.
+
+The affine residue points of an integer plane equation are the
+zeros of its reduction.
 -/
 
 @[expose] public section
+namespace CCDN
+noncomputable section
+open MvPolynomial
+
+lemma planeResidue_card_eq_zero_card (f : MvPolynomial (Fin 2) ℤ) (p : ℕ) :
+    Nat.card (PlaneResidue f p) =
+      Nat.card {x : Fin 2 → ZMod p // eval x (MvPolynomial.map (Int.castRingHom (ZMod p)) f) = 0} := by
+  apply Nat.card_congr
+  apply Equiv.subtypeEquivRight
+  intro x
+  simp only [eval_map]
+
+end
+end CCDN
+
 namespace CCDN
 
 /-- The Stepanov count `t N ≤ d (D + p A) + d (d - 1) N` gives the plane-curve bound

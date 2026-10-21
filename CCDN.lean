@@ -58,7 +58,6 @@ public import CCDN.Algebra.ProjectiveChartIdeal
 public import CCDN.Algebra.ProjectiveChartScalarExtension
 public import CCDN.Algebra.ProjectiveClosureDegree
 public import CCDN.Algebra.ProjectiveClosureIdeal
-public import CCDN.Algebra.ProjectiveConeBound
 public import CCDN.Algebra.ProjectiveFiltration
 public import CCDN.Algebra.ProjectiveFiniteFibers
 public import CCDN.Algebra.ProjectivePermutation
@@ -73,8 +72,6 @@ public import CCDN.Algebra.ScaledHomogenization
 public import CCDN.Algebra.ScaledHomogenizationPrimitive
 public import CCDN.Algebra.ScaledHypersurfaceModel
 public import CCDN.Algebra.SectionImageRank
-public import CCDN.Algebra.ThreeRowHyperplane
-public import CCDN.Algebra.WeightedHomogeneousEvaluation
 public import CCDN.Algebra.WeightedHomogeneousTransform
 public import CCDN.Algebra.WeightedPolynomialSubstitution
 public import CCDN.Algebra.WeightedPolynomialTop
@@ -82,7 +79,6 @@ public import CCDN.Analysis.DegreeDependenceNumerics
 public import CCDN.Analysis.PrimeCutoff
 public import CCDN.Analysis.PrimeProduct
 public import CCDN.Analysis.PrimeSums
-public import CCDN.Analysis.ProjectiveCoefficientNumerics
 public import CCDN.Analysis.SmallDegreeSurfaceNumerics
 public import CCDN.Analysis.SurfaceMonomialWeightNumerics
 public import CCDN.Auxiliary.AbsoluteAuxiliary
@@ -96,7 +92,6 @@ public import CCDN.Auxiliary.AffineCongruenceHeight
 public import CCDN.Auxiliary.AffineHeightCutoff
 public import CCDN.Auxiliary.AffineHypersurfaceAuxiliary
 public import CCDN.Auxiliary.AffineLeadingTranslation
-public import CCDN.Auxiliary.AffinePlaneCoefficientCount
 public import CCDN.Auxiliary.AffineTranslationCount
 public import CCDN.Auxiliary.AuxiliaryDegreeBound
 public import CCDN.Auxiliary.AuxiliaryLargeHeightRatios
@@ -106,7 +101,6 @@ public import CCDN.Auxiliary.AuxiliaryRatioEstimates
 public import CCDN.Auxiliary.BadPrimeCharge
 public import CCDN.Auxiliary.CongruenceBadPrimeCharge
 public import CCDN.Auxiliary.ConstantLeadingBadReduction
-public import CCDN.Auxiliary.DistinguishedCoefficientOrder
 public import CCDN.Auxiliary.GeneralBadReduction
 public import CCDN.Auxiliary.HypersurfaceAffineCoordinates
 public import CCDN.Auxiliary.HypersurfaceAuxiliaryTheorem
@@ -138,7 +132,6 @@ public import CCDN.Auxiliary.HypersurfaceSmallHeightDegree
 public import CCDN.Auxiliary.LiteralAffineAuxiliaryTheorem
 public import CCDN.Auxiliary.LiteralAffineBadPrimes
 public import CCDN.Auxiliary.LiteralAffineMinimum
-public import CCDN.Auxiliary.LiteralAffineScaling
 public import CCDN.Auxiliary.LiteralScaledAuxiliary
 public import CCDN.Auxiliary.PlaneAuxiliaryCount
 public import CCDN.Auxiliary.PlaneAuxiliaryDegree
@@ -187,10 +180,8 @@ public import CCDN.Center.ChowAxisEvaluation
 public import CCDN.Center.ChowDistinguishedVariable
 public import CCDN.Center.ChowExactDegree
 public import CCDN.Center.ChowIncidenceBaseChange
-public import CCDN.Center.ChowIncidenceGrading
 public import CCDN.Center.ChowIncidenceIdeal
 public import CCDN.Center.ChowIncidenceMinimalPolynomial
-public import CCDN.Center.ChowIncidencePrincipal
 public import CCDN.Center.ChowLastRowSplit
 public import CCDN.Center.ChowLinearSpecialization
 public import CCDN.Center.ChowNestedIncidence
@@ -339,7 +330,6 @@ public import CCDN.Determinant.FormalBranchMultiplicity
 public import CCDN.Determinant.GenericPlaneEulerMinorCharZero
 public import CCDN.Determinant.GenericPlaneMinor
 public import CCDN.Determinant.GenericPlaneSmoothness
-public import CCDN.Determinant.GeometricResidueReduction
 public import CCDN.Determinant.HeightDeterminant
 public import CCDN.Determinant.HomogeneousDeterminantComparison
 public import CCDN.Determinant.HypersurfaceAggregation
@@ -369,10 +359,8 @@ public import CCDN.Determinant.PlaneMultiplicity
 public import CCDN.Determinant.PlaneMultiplicitySmooth
 public import CCDN.Determinant.PlaneSingularities
 public import CCDN.Determinant.PlaneSmoothGeometricIrreducibility
-public import CCDN.Determinant.PlaneTangentMultiplicity
 public import CCDN.Determinant.PolynomialMapDeterminant
 public import CCDN.Determinant.PrimeAggregation
-public import CCDN.Determinant.ProjectiveHeightComparison
 public import CCDN.Determinant.ProjectiveHeightDeterminant
 public import CCDN.Determinant.ProjectiveHypersurfaceLocal
 public import CCDN.Determinant.ProjectiveHypersurfaceMultiplicity
@@ -422,7 +410,6 @@ public import CCDN.Height.Box
 public import CCDN.Height.ComplexGridInterpolation
 public import CCDN.Height.CountingHypotheses
 public import CCDN.Height.FiniteFieldSectionCount
-public import CCDN.Height.HomogeneousEvaluationHeight
 public import CCDN.Height.IntegerCoefficientHeight
 public import CCDN.Height.IntegralAlgebraPointCount
 public import CCDN.Height.MultivariateGridHeight
@@ -435,7 +422,6 @@ public import CCDN.Height.ProjectivePointSeparation
 public import CCDN.Height.ProjectivePrimitive
 public import CCDN.Height.ProjectiveZeroLocus
 public import CCDN.Height.ScaledHypersurfaceHeight
-public import CCDN.Height.WeightedHeightRatio
 public import CCDN.Hilbert.AffineCurveDegree
 public import CCDN.Hilbert.AlgebraicHilbertDimension
 public import CCDN.Hilbert.BoundedDegreeFunctionFieldRank
@@ -449,7 +435,6 @@ public import CCDN.Hilbert.FilteredHilbertEquiv
 public import CCDN.Hilbert.FilteredHilbertLinearity
 public import CCDN.Hilbert.FilteredHilbertPolynomial
 public import CCDN.Hilbert.FilteredIntersection
-public import CCDN.Hilbert.FilteredLinearGrowth
 public import CCDN.Hilbert.FilteredPrimeDecomposition
 public import CCDN.Hilbert.FunctionFieldRank
 public import CCDN.Hilbert.HilbertCoefficientEquiv
@@ -535,12 +520,9 @@ public import CCDN.Noether.BivariateCoefficientMatrix
 public import CCDN.Noether.BivariateFactorForms
 public import CCDN.Noether.BivariateTotalDegree
 public import CCDN.Noether.ClosedFormBaseChange
-public import CCDN.Noether.ClosedFormFactorRank
 public import CCDN.Noether.ClosedFormGradient
 public import CCDN.Noether.ClosedFormHeight
-public import CCDN.Noether.ClosedFormKernelWitness
 public import CCDN.Noether.ClosedFormParameterDegree
-public import CCDN.Noether.ClosedFormRank
 public import CCDN.Noether.ClosedFormReducibility
 public import CCDN.Noether.ClosedFormScaling
 public import CCDN.Noether.DifferentialConstantRelation
@@ -574,13 +556,10 @@ public import CCDN.Noether.RationalDifferential
 public import CCDN.Noether.ShearNormalization
 public import CCDN.Noether.UniversalHomogeneousForm
 public import CCDN.Noether.UniversalNoetherForms
+public import CCDN.Noether.UniversalPlane
 public import CCDN.Noether.UniversalPlaneBadWitness
-public import CCDN.Noether.UniversalPlaneDegree
-public import CCDN.Noether.UniversalPlaneEvaluation
-public import CCDN.Noether.UniversalPlaneFamily
-public import CCDN.Noether.UniversalPlaneIntegerSpecialization
 public import CCDN.Noether.UniversalPlaneL1
-public import CCDN.Noether.UniversalPlaneLeading
+public import CCDN.Noether.UniversalPlaneSpecialization
 public import CCDN.Noether.UniversalPlaneWitness
 public import CCDN.Paper.AffineCurveDegreeObstruction
 public import CCDN.Paper.AffineVarietyProjection
@@ -629,7 +608,6 @@ public import CCDN.Plane.IntegralAffineLine
 public import CCDN.Plane.LeadingPositionHeight
 public import CCDN.Plane.NonabsolutePlaneCount
 public import CCDN.Plane.PlaneCount
-public import CCDN.Plane.PlaneDeformationRelation
 public import CCDN.Plane.PlaneFrobeniusSystem
 public import CCDN.Plane.PlaneGridHeight
 public import CCDN.Plane.PlaneIncidence
@@ -640,7 +618,6 @@ public import CCDN.Plane.PlaneStepanovBound
 public import CCDN.Plane.PlaneStepanovDimension
 public import CCDN.Plane.ProjectivePlaneAbsoluteCount
 public import CCDN.Plane.ProjectivePlaneBezout
-public import CCDN.Plane.ProjectivePlaneCoefficientCount
 public import CCDN.Plane.ProjectivePlaneLinearCount
 public import CCDN.Plane.ProjectivePlaneNonabsoluteCount
 public import CCDN.Plane.ProjectivePlanePositionedCount
@@ -672,7 +649,6 @@ public import CCDN.Projection.CurveProjectionDeformation
 public import CCDN.Projection.CurveRationalInverse
 public import CCDN.Projection.DegreePreservingProjectionBox
 public import CCDN.Projection.DegreePreservingProjectionCount
-public import CCDN.Projection.FiniteFiberLinearSeparation
 public import CCDN.Projection.FixedCoordinateElimination
 public import CCDN.Projection.FullDegreePrimitiveProjection
 public import CCDN.Projection.GeometricAffineProjection
@@ -710,7 +686,6 @@ public import CCDN.Projection.ProjectiveLinearCountTransfer
 public import CCDN.Projection.ProjectivePlaneProjection
 public import CCDN.Projection.ProjectiveProjectionCount
 public import CCDN.Projection.ProjectiveProjectionGrowth
-public import CCDN.Projection.ProjectiveVarietyProjection
 public import CCDN.Projection.ZeroDimensionalAffineProjection
 public import CCDN.Projection.ZeroDimensionalProjectiveCount
 public import CCDN.ProjectiveCurveBound

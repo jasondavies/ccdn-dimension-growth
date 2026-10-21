@@ -10,7 +10,7 @@ public import CCDN.Noether.AmbientNoetherForms
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 public import CCDN.ForMathlib.Matrix
 public import CCDN.Noether.EulerPairBasis
-public import CCDN.Noether.UniversalPlaneFamily
+public import CCDN.Noether.UniversalPlane
 import CCDN.Noether.AmbientNoetherHeight
 import CCDN.Noether.AmbientNoetherVanishing
 import Mathlib.Data.Sym.Card

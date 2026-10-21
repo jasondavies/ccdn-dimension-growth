@@ -6,7 +6,7 @@ Authors: Jason Davies
 module
 
 public import CCDN.Center.ChowDistinguishedVariable
-public import CCDN.Center.ChowIncidenceGrading
+public import CCDN.Center.ChowIncidenceIdeal
 public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import CCDN.Center.ChowAxisEvaluation
 import CCDN.Center.ChowIncidenceBaseChange
