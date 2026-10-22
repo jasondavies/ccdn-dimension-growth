@@ -113,6 +113,14 @@ audited statements of the paper to its Lean declarations, and
 [docs/completion-audit.json](docs/completion-audit.json) records the scope notes behind it
 ([schema](docs/audit-schema.md)).
 
+## Palomar registration
+
+This formalisation is registered in the [Palomar registry](https://palomar-registry.org/)
+as [`PALOMAR-2026-10-22-000015`, version 1](https://palomar-registry.org/entry?id=PALOMAR-2026-10-22-000015&version=1),
+for commit [`bb025e7`](https://github.com/jasondavies/ccdn-dimension-growth/commit/bb025e7207f3a35a21b898629f5678b72aa7e44f).
+To cite it, give the identifier and the version. Later commits are not covered
+by the registration until they are registered as a new version.
+
 ## Statement surface and comparator
 
 [`Challenge.lean`](Challenge.lean) is the file to audit. It imports only Mathlib, defines the
